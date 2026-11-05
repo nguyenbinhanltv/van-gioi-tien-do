@@ -4,7 +4,8 @@
 
 **Chỉ placeholder, không phát hành.** Người dùng đã cho phép tạo lô nhỏ bằng AI để kiểm chứng pipeline trong khi phần triển khai khác đang tạm dừng để rà soát thiết kế. Chủ sở hữu con người / người phụ trách art tạm thời: **người dùng (interim art owner)**. Việc ghi tên chủ phụ trách không xác nhận khả năng bảo hộ quyền tác giả của sản phẩm AI.
 
-- Công cụ thực sự dùng: **`image_gen.imagegen`** (công cụ tạo/sửa ảnh tích hợp). **Tên/phiên bản mô hình bên dưới không được công cụ công bố**, không có seed hoặc metadata mô hình trong kết quả. Không suy đoán là một phiên bản GPT Image cụ thể. Đây là thiếu sót truy xuất nguồn gốc còn chờ người dùng chấp nhận hoặc cung cấp cách xác minh trước khi hoàn tất PR.
+- Công cụ thực sự dùng: **`image_gen.imagegen` (Codex built-in)**. Mô hình/phiên bản: **không được công cụ công bố (undisclosed by tool)**; không có seed hoặc metadata mô hình trong kết quả. Không suy đoán là một phiên bản GPT Image cụ thể. Orchestrator đã chấp nhận cách ghi trung thực này cho lô placeholder; **phải xác minh lại nguồn gốc trước bất kỳ bản phát hành nào**.
+- Phiên bản CLI cài tại máy: **`codex-cli 0.166.0`**, xác minh bằng `codex.exe --version` ngày 2026-11-06. Đây là phiên bản CLI, **không phải** tên/phiên bản mô hình tạo ảnh.
 - Ngày tạo: **2026-11-05**. Không tải asset bên thứ ba, không dùng ảnh tham chiếu có bản quyền của người khác, không yêu cầu bắt chước họa sĩ. Lần sửa nhân vật chỉ dùng ảnh do chính công cụ tạo trong lô này.
 - Trạng thái IP/giấy phép cho **tất cả** ảnh bên dưới: **“AI-generated, placeholder, needs hand-polish + license review before release”**. `Loại = ai-generated / placeholder`, `Phát hành? = no`. Chưa xác nhận điều khoản thương mại, nghĩa vụ ghi công hay quyền bảo hộ; đây không phải giấy phép CC0/MIT. Trước phát hành phải kiểm tra điều khoản công cụ và lưu liên kết/bằng chứng theo [18 §9.2](18-art-bible-am-thanh.md), Q3/Q4; chủ art phải chỉnh tay và duyệt.
 - Nguồn @2x: `assets-src/placeholder/first-sample/`; nguồn icon 256. [02](02-asset-matrix-2d.md) và [21 §5](21-kien-truc-client.md) chỉ định loại bundle nhưng không khóa cây thư mục nguồn, nên dùng vị trí dự phòng được người dùng yêu cầu. Xuất client: `apps/client-cocos/assets/bundles/core/_placeholder/first-sample/`. Đây là thư mục dữ liệu mẫu, chưa cấu hình bundle, scene hay runtime Cocos.
@@ -13,6 +14,27 @@
 - Bỏ qua âm thanh theo phạm vi lô. Chưa kiểm chứng KTX2/ASTC/WebP, shader, Spine runtime hoặc gói Core thực tế. Không phụ thuộc PR nháp #66; chưa có budget gate trên `main` tại commit `dd3a8a852ec677ce1d123be27842d0e99f6202ca`.
 
 ## Prompt đã dùng (nguyên văn)
+
+Thời gian dưới đây là thời điểm file kết quả được lưu tại máy (UTC, từ filesystem), không phải timestamp do dịch vụ tạo ảnh công bố. Tất cả thuộc ngày 2026-11-05 UTC / UTC+7; không suy ra seed hoặc thời điểm bắt đầu suy luận.
+
+| Prompt | Thời điểm lưu kết quả (UTC) | File kết quả của công cụ                        |
+| ------ | --------------------------- | ----------------------------------------------- |
+| P1     | 2026-11-05T16:50:55Z        | `exec-392987b2-f103-43b9-84a7-6af7cb8e3f58.png` |
+| P2     | 2026-11-05T16:54:19Z        | `exec-3cca65d8-1cc3-4316-9d80-1f77c78205f7.png` |
+| P3     | 2026-11-05T16:51:56Z        | `exec-8bdd67e0-4756-4ab1-b968-37fb99844c16.png` |
+| P4     | 2026-11-05T16:52:42Z        | `exec-b3946038-4f00-44fc-8334-f5ea79bcd73a.png` |
+| P5     | 2026-11-05T16:52:49Z        | `exec-6dff7a64-ca97-466a-b3c2-e457fe5ce805.png` |
+| P6     | 2026-11-05T16:53:21Z        | `exec-54fb46db-74af-43f4-8828-50c546809923.png` |
+
+Các file kết quả thô là tư liệu làm việc tại máy; repo lưu bản nguồn đã chuẩn hóa @2x và bản xuất. Prompt P1 là đầu vào cho lần sửa P2, không phải một asset riêng trong bundle.
+
+### Câu hỏi dành cho chủ art (chưa quyết định)
+
+- Có cần tái sinh lô bằng công cụ công bố tên/phiên bản mô hình trước giai đoạn tiếp theo? Trước phát hành bắt buộc xác minh lại nguồn gốc, điều khoản và IP (18 §9, Q3/Q4).
+- Chủ art duyệt tỷ lệ ~5,5–6 đầu, ánh sáng NW, đường nối tile, độ đọc thang xám 48 px và lượt chỉnh tay 48 px như thế nào?
+- ADR-020: animation nào phải vẽ đủ 8 hướng vì bất đối xứng? Lô idle tay không không chốt chính sách vũ khí.
+- ADR-021: quy ước trục/local transform cho socket vũ khí? Lô không có rig/socket.
+- Bảng màu Ngũ hành/vùng ở 18 §2.3–2.4 vẫn là đề xuất; màu lô mẫu không khóa bảng màu sản xuất.
 
 ### P1 — nhân vật gốc
 
