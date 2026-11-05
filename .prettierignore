@@ -19,4 +19,6 @@ apps/client-cocos/tsconfig.json
 apps/client-cocos/package.json
 apps/client-cocos/assets/resources/dragonbones/viewer
 tools/dragonbones-testrig/out
-apps/client-cocos/assets/resources/dragonbones/kiem-tu
+
+# Generated DragonBones exports (tools/rig `npm run export:kiemtu`): machine-written, compact JSON
+apps/client-cocos/assets/resources/dragonbones/**/*.json
