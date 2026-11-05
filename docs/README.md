@@ -21,6 +21,23 @@ Thư mục này là bản Markdown của bộ tài liệu thiết kế (chuyển
 | —   | [OPEN-ITEMS.md](OPEN-ITEMS.md)                             | Việc còn mở (§7) và các mảng thiết kế chưa có tài liệu                                    |                                                            |
 | —   | [assets/](assets/)                                         | Sơ đồ trích từ docx (02, 03, 04, 05, 06, 08)                                              |                                                            |
 
+## Thiết kế kỹ thuật (20–29)
+
+Bộ tài liệu thiết kế hệ thống cho MVP (server modular monolith, client Cocos, dữ liệu, giao thức, bảo mật, kinh tế, vận hành, kiểm thử). Mọi mục ghi "Đề xuất – chờ duyệt" **chưa có hiệu lực** cho tới khi vào [DECISIONS.md](DECISIONS.md); không tài liệu nào đổi [00 §3–4](00-ho-so-tong-hop.md). Tài liệu game design (01, 10–19) do nhóm khác viết.
+
+| #   | File                                                   | Nội dung                                                                                      |
+| --- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| 20  | [20-kien-truc-tong-the.md](20-kien-truc-tong-the.md)   | C4, ranh giới module monolith ↔ microservice, mô hình tiến trình/luồng, docker-compose cục bộ |
+| 21  | [21-kien-truc-client.md](21-kien-truc-client.md)       | Phân tầng client, bootstrap, store, bundle/streaming, UI AnchorLayout, y-flip, Spine, perf    |
+| 22  | [22-server-modules.md](22-server-modules.md)           | Từng module: trách nhiệm, cổng, trạng thái, ngân sách tick, AOI, handover, chế độ lỗi         |
+| 23  | [23-mo-hinh-du-lieu.md](23-mo-hinh-du-lieu.md)         | ERD PostgreSQL, Redis key, migration, chiến lược ID, lưu giữ dữ liệu                          |
+| 24  | [24-giao-thuc-mang.md](24-giao-thuc-mang.md)           | Vận chuyển, khung gói, phiên bản, danh mục thông điệp, rate limit, ngân sách băng thông       |
+| 25  | [25-xac-thuc-bao-mat.md](25-xac-thuc-bao-mat.md)       | Mật khẩu argon2id, JWT + refresh, SSO, STRIDE, tín hiệu anti-cheat                            |
+| 26  | [26-kinh-te-ledger.md](26-kinh-te-ledger.md)           | Sổ cái kép, giao dịch idempotent, chợ/đấu giá, faucet/sink, kế hoạch mô phỏng kinh tế         |
+| 27  | [27-van-hanh-quan-sat.md](27-van-hanh-quan-sat.md)     | Log, metric, trace, telemetry, dashboard, báo lỗi, cấu hình và cờ tính năng                   |
+| 28  | [28-chien-luoc-kiem-thu.md](28-chien-luoc-kiem-thu.md) | Đơn vị/thuộc tính/xác định, replay, tích hợp, loadbot, hiệu năng thiết bị, các giai đoạn CI   |
+| 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 và OPEN-ITEMS §6             |
+
 ## Thiết kế bổ sung (12–19, đề xuất – chờ duyệt)
 
 Các mảng mà hồ sơ gốc chưa có ([OPEN-ITEMS.md](OPEN-ITEMS.md) §3). Số liệu đã có hiệu lực chỉ được trích từ 07 / `@vgtd/shared`; con số mới được đánh dấu _Đề xuất – chờ duyệt_. Mỗi file kết thúc bằng danh sách "Câu hỏi cần chốt" kèm mặc định đề xuất.
