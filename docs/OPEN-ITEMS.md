@@ -24,6 +24,8 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 
 ## 3. Mảng chưa có tài liệu thiết kế
 
+> Cập nhật: các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế từng cảnh giới và chiến tranh Linh Mạch đã có **đề xuất** ở [01-gdd.md](01-gdd.md) §3–§4, §9 (chờ duyệt; xem mục "Design A"); nhiệm vụ, chế tạo, PvP, kiếm tiền, onboarding, LiveOps, telemetry có đề xuất ở 12–17 (PR #69). Danh sách dưới giữ nguyên làm lịch sử.
+
 - Nhiệm vụ và cốt truyện
 - Nghề luyện đan / luyện khí / chế phù chi tiết
 - Luật PvP và đấu trường
