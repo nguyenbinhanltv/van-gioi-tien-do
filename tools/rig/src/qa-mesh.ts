@@ -226,9 +226,21 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
       if (!jointed(pieceBone.get(ids[i]!)!, pieceBone.get(ids[j]!)!)) continue; // only pieces on connected joints form a seam
       const pa = restPieces.get(ids[i]!)!;
       const pb = restPieces.get(ids[j]!)!;
-      const seedsA = seedsOn(pa, pb);
-      const seedsB = seedsOn(pb, pa);
-      if (seedsA.length || seedsB.length) seams.push({ a: ids[i]!, b: ids[j]!, seedsA, seedsB });
+      const slotOf = (id: string) => rig.slots.findIndex((s) => s.name === id.split('#')[0]);
+      const [ia, ib] = [slotOf(ids[i]!), slotOf(ids[j]!)];
+      if (ia === ib) {
+        // islands of one mesh: no draw order between them, both edges must hold
+        const seedsA = seedsOn(pa, pb);
+        const seedsB = seedsOn(pb, pa);
+        if (seedsA.length || seedsB.length) seams.push({ a: ids[i]!, b: ids[j]!, seedsA, seedsB });
+      } else {
+        // different slots: the FRONT piece's edge must stay over the BACK piece (the back piece is the underpaint that
+        // has to extend under it); a back-piece edge peeking out from under the front one is hidden, not a hole
+        const aFront = ia > ib;
+        const [front, back, fp, bp] = aFront ? [ids[i]!, ids[j]!, pa, pb] : [ids[j]!, ids[i]!, pb, pa];
+        const seedsA = seedsOn(fp, bp);
+        if (seedsA.length) seams.push({ a: front, b: back, seedsA, seedsB: [] });
+      }
     }
   }
   const worstGap = new Map<string, { gap: number; frame: number }>();
@@ -248,8 +260,18 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
       const mb = poseMeshes.get(sm.b);
       if (!ma || !mb) continue;
       let gap = 0;
-      for (const vi of sm.seedsA) gap = Math.max(gap, pointToMesh(ma.verts[vi]!, mb.verts, mb.tris));
-      for (const vi of sm.seedsB) gap = Math.max(gap, pointToMesh(mb.verts[vi]!, ma.verts, ma.tris));
+      // a seam vertex only opens a hole if NO other garment piece covers it any more (the robe may hide a thigh corner)
+      const uncovered = (self: string, v: Vec2) => {
+        let best = Infinity;
+        for (const [id, other] of poseMeshes) {
+          if (id === self) continue;
+          best = Math.min(best, pointToMesh(v, other.verts, other.tris));
+          if (best === 0) break;
+        }
+        return best;
+      };
+      for (const vi of sm.seedsA) gap = Math.max(gap, uncovered(sm.a, ma.verts[vi]!));
+      for (const vi of sm.seedsB) gap = Math.max(gap, uncovered(sm.b, mb.verts[vi]!));
       const key = `${sm.a}|${sm.b}`;
       if (gap > (worstGap.get(key)?.gap ?? th.gapPx)) worstGap.set(key, { gap, frame: f });
     }
@@ -295,7 +317,7 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
       bone: key,
       frame: w.frame,
       value: w.gap,
-      message: `pieces ${key.replace('|', ' / ')} come apart: a ${w.gap.toFixed(1)} px gap opens (limit ${th.gapPx})`,
+      message: `pieces ${key.replace('|', ' (front) / ')} (back) come apart: a ${w.gap.toFixed(1)} px gap opens (limit ${th.gapPx})`,
     });
   }
   for (const [slot, w] of worstStrain) {
@@ -345,7 +367,10 @@ export function pieceTable(rig: RigDocument): Map<string, PieceInfo> {
 }
 
 export interface UnderpaintNeed {
-  /** The two pieces whose seam opens. */
+  /**
+   * The two pieces whose seam opens: `[front, back]` when they are different slots (the back piece is the one whose
+   * paint must extend under the front one), otherwise the two islands of one mesh.
+   */
   readonly pieces: readonly [PieceInfo, PieceInfo];
   /** Worst gap (px) over the clips: the paint that must extend under/over the joint to keep it covered. */
   readonly extendPx: number;

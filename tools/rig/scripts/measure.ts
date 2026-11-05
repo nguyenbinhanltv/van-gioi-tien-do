@@ -9,6 +9,8 @@
  *   <character>        kiem-tu | the-tu | phap-tu | dan-phu-tu  (default kiem-tu)
  *   --dir S,E          only these directions (default: all drawn directions)
  *   --autoskin         measure as if autoSkin were applied (preview; data files are not touched)
+ *   --band PX --cell PX --touch PX   autoSkin parameters for --autoskin (defaults 10 / 6 / 2)
+ *   --band PX --cell PX --touch PX   autoSkin parameters for --autoskin (defaults 10 / 6 / 2)
  *   --top N            underpaint rows per direction (default 8)
  *   --limit PX         seam limit (default 3)
  *   --json             machine-readable output
@@ -37,6 +39,9 @@ function parse(argv: string[]) {
     character: 'kiem-tu' as CharacterId,
     dirs: null as string[] | null,
     autoskin: false,
+    band: undefined as number | undefined,
+    cell: undefined as number | undefined,
+    touch: undefined as number | undefined,
     top: 8,
     limit: 3,
     json: false,
@@ -46,6 +51,9 @@ function parse(argv: string[]) {
     const a = argv[i]!;
     if (a === '--dir') o.dirs = (argv[++i] ?? '').split(',').filter(Boolean);
     else if (a === '--autoskin') o.autoskin = true;
+    else if (a === '--band') o.band = Number(argv[++i]);
+    else if (a === '--cell') o.cell = Number(argv[++i]);
+    else if (a === '--touch') o.touch = Number(argv[++i]);
     else if (a === '--top') o.top = Number(argv[++i]);
     else if (a === '--limit') o.limit = Number(argv[++i]);
     else if (a === '--json') o.json = true;
@@ -74,7 +82,13 @@ const needs: Record<string, ReturnType<typeof underpaintNeeds>> = {};
 
 for (const [dir, d] of data.byDirection) {
   if (opts.dirs && !opts.dirs.includes(dir)) continue;
-  const rig = opts.autoskin ? autoSkin(d.rig).rig : d.rig;
+  const rig = opts.autoskin
+    ? autoSkin(d.rig, {
+        ...(opts.band !== undefined ? { band: opts.band } : {}),
+        ...(opts.cell !== undefined ? { cell: opts.cell } : {}),
+        ...(opts.touch !== undefined ? { touchPx: opts.touch } : {}),
+      }).rig
+    : d.rig;
   const clips = authorClassSet(opts.character, rig);
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
