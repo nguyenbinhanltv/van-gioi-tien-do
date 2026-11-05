@@ -11,6 +11,7 @@ export default tseslint.config(
       '**/coverage/**',
       'apps/client-cocos/**',
       'tools/procgen/**',
+      'tools/dragonbones-testrig/scripts/**', // plain Node CLI (.mjs), like the procgen scripts
     ],
   },
   js.configs.recommended,
