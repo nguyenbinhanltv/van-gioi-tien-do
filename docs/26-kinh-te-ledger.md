@@ -31,15 +31,15 @@ Số tiền là `bigint` không dấu đơn vị nhỏ nhất, **không số th�
 
 ### 2.2 Loại tài khoản sổ cái
 
-| `kind`                  | Chủ                                   | Ràng buộc              | Dùng cho                                                                                                                                                                   |
-| ----------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PLAYER_WALLET`         | nhân vật                              | `balance ≥ 0`          | Ví                                                                                                                                                                         |
-| `SECT_TREASURY`         | tông môn                              | `balance ≥ 0`          | Quỹ tông môn (nạp Hộ Sơn Đại Trận, Linh Mạch)                                                                                                                              |
-| `ESCROW`                | giao dịch (chợ/đấu giá/đổi trực tiếp) | `balance ≥ 0`          | Giữ tiền trong lúc khớp lệnh                                                                                                                                               |
-| `SYSTEM_FAUCET_<nguồn>` | hệ thống                              | Có thể âm (nguồn sinh) | `DROP_MOB`, `DROP_ELITE`, `DROP_BOSS`, `QUEST_REWARD`, `EVENT_REWARD`, `NPC_SELL`…                                                                                         |
-| `SYSTEM_SINK_<kênh>`    | hệ thống                              | Chỉ tăng (tiền bị hủy) | `BREAKTHROUGH`, `MARKET_TAX`, `LISTING_FEE`, `REPAIR`, `SECT_UPKEEP`, `TELEPORT`, `CONVERT_FEE`, `TRADE_TAX`, `NPC_BUY_FEE`, `AUCTION_BURN`                                |
-| `SYSTEM_FAUCET_IAP`     | hệ thống                              | Có thể âm              | Nạp tiền thật → ví Tiên Ngọc; biên lai xác thực **phía server**, khóa idempotency theo mã biên lai (docs/15; tên `SRC_IAP` ở docs/15/17); **ngoài** tỷ lệ tiêu hao/sinh ra |
-| `SYSTEM_GM`             | vận hành                              | Có thể âm/dương        | Chỉ bút toán `GM_ADJUST` có duyệt (§3.3); **loại khỏi** báo cáo faucet/sink nhưng báo cáo riêng                                                                            |
+| `kind`                  | Chủ                                   | Ràng buộc              | Dùng cho                                                                                                                                                 |
+| ----------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PLAYER_WALLET`         | nhân vật                              | `balance ≥ 0`          | Ví                                                                                                                                                       |
+| `SECT_TREASURY`         | tông môn                              | `balance ≥ 0`          | Quỹ tông môn (nạp Hộ Sơn Đại Trận, Linh Mạch)                                                                                                            |
+| `ESCROW`                | giao dịch (chợ/đấu giá/đổi trực tiếp) | `balance ≥ 0`          | Giữ tiền trong lúc khớp lệnh                                                                                                                             |
+| `SYSTEM_FAUCET_<nguồn>` | hệ thống                              | Có thể âm (nguồn sinh) | `DROP_MOB`, `DROP_ELITE`, `DROP_BOSS`, `QUEST_REWARD`, `EVENT_REWARD`, `NPC_SELL`…                                                                       |
+| `SYSTEM_SINK_<kênh>`    | hệ thống                              | Chỉ tăng (tiền bị hủy) | `BREAKTHROUGH`, `MARKET_TAX`, `LISTING_FEE`, `REPAIR`, `SECT_UPKEEP`, `TELEPORT`, `CONVERT_FEE`, `TRADE_TAX`, `NPC_BUY_FEE`, `AUCTION_BURN`, `CRAFT_FEE` |
+| `SYSTEM_FAUCET_IAP`     | hệ thống                              | Có thể âm              | Nạp tiền thật → ví Tiên Ngọc; biên lai xác thực **phía server**, khóa idempotency theo mã biên lai (docs/15); **ngoài** tỷ lệ tiêu hao/sinh ra           |
+| `SYSTEM_GM`             | vận hành                              | Có thể âm/dương        | Chỉ bút toán `GM_ADJUST` có duyệt (§3.3); **loại khỏi** báo cáo faucet/sink nhưng báo cáo riêng                                                          |
 
 Kênh sink tương ứng bảng "Cơ cấu tiêu hao mục tiêu" của [07 §7](07-cong-thuc-data-schema.md): đột phá và vật liệu đột phá 35%; thuế chợ + phí niêm yết 15%; sửa chữa 15%; nạp Hộ Sơn Đại Trận / duy trì Linh Mạch 15%; truyền tống 8%; đổi phẩm Linh thạch (5%) + khác 12%.
 
@@ -196,14 +196,14 @@ Hai bên mời → đặt vật phẩm/tiền → **khóa** (mỗi bên xác nh�
 
 Với tuần `w`: `faucet_w = Σ delta dương của SYSTEM_FAUCET_*` (quy ra hạ phẩm); `sink_w = Σ delta của SYSTEM_SINK_*` (mọi kênh ở §2.2 đều có dòng trong bảng dưới); `ratio_w = sink_w / faucet_w` (chỉ các đồng Linh thạch; **loại** `TIEN_NGOC` và `TOKEN_*`, docs/15) (mục tiêu **0,9–1,0**, [00 §3](00-ho-so-tong-hop.md)). Bảng theo kênh so với cơ cấu mục tiêu của [07 §7](07-cong-thuc-data-schema.md):
 
-| Kênh sink                                                 | Tỷ trọng mục tiêu | Tài khoản hệ thống                                                      |
-| --------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------- |
-| Đột phá và vật liệu đột phá                               | 35%               | `SYSTEM_SINK_BREAKTHROUGH`                                              |
-| Thuế chợ + phí niêm yết (gồm thuế giao dịch trực tiếp 3%) | 15%               | `SYSTEM_SINK_MARKET_TAX`, `…_LISTING_FEE`, `…_TRADE_TAX`                |
-| Sửa chữa trang bị                                         | 15%               | `SYSTEM_SINK_REPAIR`                                                    |
-| Hộ Sơn Đại Trận / duy trì Linh Mạch                       | 15%               | `SYSTEM_SINK_SECT_UPKEEP`                                               |
-| Truyền tống                                               | 8%                | `SYSTEM_SINK_TELEPORT`                                                  |
-| Đổi phẩm Linh thạch (5%) và khác                          | 12%               | `SYSTEM_SINK_CONVERT_FEE`, `…_NPC_BUY_FEE`, `…_AUCTION_BURN`, `…_OTHER` |
+| Kênh sink                                                 | Tỷ trọng mục tiêu | Tài khoản hệ thống                                                                     |
+| --------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------- |
+| Đột phá và vật liệu đột phá                               | 35%               | `SYSTEM_SINK_BREAKTHROUGH`                                                             |
+| Thuế chợ + phí niêm yết (gồm thuế giao dịch trực tiếp 3%) | 15%               | `SYSTEM_SINK_MARKET_TAX`, `…_LISTING_FEE`, `…_TRADE_TAX`                               |
+| Sửa chữa trang bị                                         | 15%               | `SYSTEM_SINK_REPAIR`                                                                   |
+| Hộ Sơn Đại Trận / duy trì Linh Mạch                       | 15%               | `SYSTEM_SINK_SECT_UPKEEP`                                                              |
+| Truyền tống                                               | 8%                | `SYSTEM_SINK_TELEPORT`                                                                 |
+| Đổi phẩm Linh thạch (5%) và khác                          | 12%               | `SYSTEM_SINK_CONVERT_FEE`, `…_NPC_BUY_FEE`, `…_AUCTION_BURN`, `…_CRAFT_FEE`, `…_OTHER` |
 
 - Phí truyền tống `Fee = 20·1,5^(r−1)·(1 + 0,5·d)`, miễn phí 1 lần/ngày về Sơn Môn; sửa chữa `RepairCost = V·0,004·Δ%` — **tính bằng hàm của `@vgtd/shared`**, Economy chỉ ghi sổ.
 - **Vật phẩm** cũng có faucet/sink (rơi, chế tạo, phá hủy, độ bền về 0 không hủy món đồ – [07 §7](07-cong-thuc-data-schema.md)); theo dõi **tổng cung theo `def_id`** (`item_supply{def_id}`) để phát hiện lạm phát vật phẩm.

@@ -338,12 +338,12 @@ Chính sách bộ nhớ: `maxmemory-policy volatile-lru`; **không** đặt dữ
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                      | Mặc định đề xuất                                                       |
-| --- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Q1  | UUIDv7 cho thực thể hiển thị, bigint cho bút toán (ADR-011)?                                 | **Có**                                                                 |
-| Q2  | node-pg-migrate (SQL) + Kysely (ADR-012)?                                                    | **Có**                                                                 |
-| Q3  | Số dư lưu cột `balance` + bút toán kép, đối chiếu định kỳ (thay vì `wallets` của mẫu 08 §7)? | **Có** – giữ nguyên ý "sổ cái kép cân bằng về 0" của 08                |
-| Q4  | Số nhân vật tối đa/tài khoản; thời gian xóa mềm nhân vật                                     | 4 nhân vật; 30 ngày                                                    |
-| Q5  | Chính sách xóa dữ liệu cá nhân / thời hạn log (pháp lý)                                      | Theo bảng §7; chủ dự án xác nhận với tư vấn pháp lý trước closed beta  |
-| Q6  | Giữ `roll_log` bao lâu và log những roll nào (chỉ roll kinh tế)?                             | 90 ngày; chỉ roll kinh tế                                              |
-| Q7  | Đơn vị nhỏ nhất của Linh thạch: số nguyên theo phẩm riêng (3 loại) hay quy hết về hạ phẩm?   | 3 đồng tiền riêng + bút toán đổi (07 §7 quy ra hạ phẩm chỉ để so sánh) |
+| #   | Câu hỏi                                                                                      | Mặc định đề xuất                                                                                                                                                                          |
+| --- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q1  | UUIDv7 cho thực thể hiển thị, bigint cho bút toán (ADR-011)?                                 | **Có**                                                                                                                                                                                    |
+| Q2  | node-pg-migrate (SQL) + Kysely (ADR-012)?                                                    | **Có**                                                                                                                                                                                    |
+| Q3  | Số dư lưu cột `balance` + bút toán kép, đối chiếu định kỳ (thay vì `wallets` của mẫu 08 §7)? | **Có** – giữ nguyên ý "sổ cái kép cân bằng về 0" của 08                                                                                                                                   |
+| Q4  | Số nhân vật tối đa/tài khoản; thời gian xóa mềm nhân vật                                     | **3 nhân vật / tài khoản** (khớp [01 G10](01-gdd.md) và [10 §7.1](10-mvp-scope.md); bản đầu của tài liệu này ghi 4); chờ xóa 7 ngày theo 01 G10, sau đó dữ liệu được xóa mềm 30 ngày (§7) |
+| Q5  | Chính sách xóa dữ liệu cá nhân / thời hạn log (pháp lý)                                      | Theo bảng §7; chủ dự án xác nhận với tư vấn pháp lý trước closed beta                                                                                                                     |
+| Q6  | Giữ `roll_log` bao lâu và log những roll nào (chỉ roll kinh tế)?                             | 90 ngày; chỉ roll kinh tế                                                                                                                                                                 |
+| Q7  | Đơn vị nhỏ nhất của Linh thạch: số nguyên theo phẩm riêng (3 loại) hay quy hết về hạ phẩm?   | 3 đồng tiền riêng + bút toán đổi (07 §7 quy ra hạ phẩm chỉ để so sánh)                                                                                                                    |

@@ -419,7 +419,7 @@ Nguyên tắc: **không rớt cảnh giới lớn** (00), không mất trang b�
 ## 15. Phân kỳ và các mảng còn lại
 
 - **Phạm vi closed beta** (Cảnh giới 1–3, Sơn Môn + Bí Cảnh Rừng Độc, 4 Đạo Lộ): [10-mvp-scope.md](10-mvp-scope.md).
-- **Chưa thiết kế** (giữ ở [OPEN-ITEMS.md](OPEN-ITEMS.md)): nhiệm vụ & cốt truyện; nghề luyện đan / luyện khí / chế phù chi tiết; luật PvP & đấu trường chi tiết; kiếm tiền (Tiên Ngọc, Battle Pass, cửa hàng); LiveOps; telemetry & dashboard KPI đầy đủ. Bản này chỉ đặt **khung** (mục 8–10) để các mảng đó thiết kế tiếp không mâu thuẫn.
+- **Đã có đề xuất ở tài liệu riêng (chờ duyệt)**: nhiệm vụ & cốt truyện ([12](12-nhiem-vu-cot-truyen.md)); nghề chế tạo ([13](13-che-tao.md)); luật PvP, đấu trường, chiến tranh ([14](14-pvp-chien-tranh.md)); kiếm tiền và LiveOps ([15](15-kiem-tien-liveops.md)); onboarding ([16](16-onboarding.md)); telemetry & KPI ([17](17-telemetry-kpi.md)). **Vẫn chưa thiết kế:** Tiên Giới sau Phi Thăng, "Cải Căn" (G11), nguồn Đạo Tâm cụ thể. Bản này đặt **khung** (mục 8–10) để các tài liệu đó không mâu thuẫn.
 
 ## Câu hỏi cần chốt
 

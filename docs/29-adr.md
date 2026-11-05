@@ -1,6 +1,6 @@
 # Chỉ mục ADR (Architecture Decision Records)
 
-> **Mục đích:** một chỗ liệt kê **mọi quyết định kỹ thuật** đến thời điểm này: những quyết định đã khóa (link tới [DECISIONS.md](DECISIONS.md) và tài liệu gốc) và những **đề xuất mới** từ bộ tài liệu 20–28. **Không** thay thế DECISIONS.md: một đề xuất chỉ có hiệu lực khi chủ dự án duyệt và được thêm thành dòng `D<n>` ở [DECISIONS.md](DECISIONS.md) (hàng mới, `D16` trở đi); quy trình đổi giá trị: skill `vgtd-formula-change`.
+> **Mục đích:** một chỗ liệt kê **mọi quyết định kỹ thuật** đến thời điểm này: những quyết định đã khóa (link tới [DECISIONS.md](DECISIONS.md) và tài liệu gốc) và những **đề xuất mới** từ bộ tài liệu 20–28. **Không** thay thế DECISIONS.md: một đề xuất chỉ có hiệu lực khi chủ dự án duyệt và được thêm thành dòng `D<n>` ở [DECISIONS.md](DECISIONS.md) (hàng mới, `D32` trở đi); quy trình đổi giá trị: skill `vgtd-formula-change`.
 >
 > Thứ tự ưu tiên khi mâu thuẫn (CLAUDE.md): DECISIONS D14+ › [00 §3–4](00-ho-so-tong-hop.md) › `@vgtd/shared` › các tài liệu chi tiết.
 
@@ -17,18 +17,21 @@ Mỗi ADR: **Bối cảnh → Quyết định → Phương án khác → Hệ qu
 
 ## 2. Các quyết định đã khóa (tham chiếu)
 
-| #       | Quyết định (rút gọn)                                                                 | Nguồn                                                     |
-| ------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| D1      | 2D Isometric 2:1, thế giới mở chia chunk                                             | [DECISIONS D1](DECISIONS.md), [02](02-asset-matrix-2d.md) |
-| D2      | Engine: Cocos Creator 3.x (dự phòng Unity 2D, Godot 4)                               | D2                                                        |
-| D3      | Nền tảng: Web H5 + Mobile + PC, cross-play                                           | D3                                                        |
-| D4      | Asset: Sprite Sheet, Spine 2D, Tilemap diamond, Particle 2D, sprite shader           | D4                                                        |
-| D5      | Gói tải đầu Web 25 MB                                                                | D5, [06 §6](06-toi-uu-render.md)                          |
-| D6–D7   | 6 phẩm chất; icon nguồn 256 xuất 48/64/128                                           | D6, D7                                                    |
-| D8–D11  | Ngũ hành, đột phá, Lôi Kiếp (số và công thức)                                        | D8–D11, [07](07-cong-thuc-data-schema.md)                 |
-| D12–D13 | Lôi Kiếp procedural; Vạn Kiếm 1 sprite + instancing                                  | D12, D13, [06](06-toi-uu-render.md)                       |
-| D14     | Rig Spine Player/Boss **5 hướng + lật gương**; animation bất đối xứng có thể vẽ đủ 8 | D14 (2026-11-05)                                          |
-| D15     | Ô nguyên (i, j) = đỉnh N, tâm (i + 0,5; j + 0,5); toán y hướng xuống; Cocos lật y    | D15 (2026-11-05)                                          |
+| #       | Quyết định (rút gọn)                                                                                                                                                                                                                                                                                 | Nguồn                                                     |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| D1      | 2D Isometric 2:1, thế giới mở chia chunk                                                                                                                                                                                                                                                             | [DECISIONS D1](DECISIONS.md), [02](02-asset-matrix-2d.md) |
+| D2      | Engine: Cocos Creator 3.x (dự phòng Unity 2D, Godot 4)                                                                                                                                                                                                                                               | D2                                                        |
+| D3      | Nền tảng: Web H5 + Mobile + PC, cross-play                                                                                                                                                                                                                                                           | D3                                                        |
+| D4      | Asset: Sprite Sheet, Spine 2D, Tilemap diamond, Particle 2D, sprite shader                                                                                                                                                                                                                           | D4                                                        |
+| D5      | Gói tải đầu Web 25 MB                                                                                                                                                                                                                                                                                | D5, [06 §6](06-toi-uu-render.md)                          |
+| D6–D7   | 6 phẩm chất; icon nguồn 256 xuất 48/64/128                                                                                                                                                                                                                                                           | D6, D7                                                    |
+| D8–D11  | Ngũ hành, đột phá, Lôi Kiếp (số và công thức)                                                                                                                                                                                                                                                        | D8–D11, [07](07-cong-thuc-data-schema.md)                 |
+| D12–D13 | Lôi Kiếp procedural; Vạn Kiếm 1 sprite + instancing                                                                                                                                                                                                                                                  | D12, D13, [06](06-toi-uu-render.md)                       |
+| D14     | Rig Spine Player/Boss **5 hướng + lật gương**; animation bất đối xứng có thể vẽ đủ 8                                                                                                                                                                                                                 | D14 (2026-11-05)                                          |
+| D15     | Ô nguyên (i, j) = đỉnh N, tâm (i + 0,5; j + 0,5); toán y hướng xuống; Cocos lật y                                                                                                                                                                                                                    | D15 (2026-11-05)                                          |
+| D16–D24 | Chốt các điểm mơ hồ A1–A13 của `@vgtd/shared`: làm tròn theo công thức (D16), Hộ Mạch Đan (D17), thứ tự giảm sát thương kiếp (D18), đột phá tiểu cảnh không đan/pity (D19), sort theo tầng (D20), pity drop (D21), drop cảnh giới thấp (D22), sửa schema `realm_progression` (D23), id đan chủ (D24) | D16–D24 (2026-11-05)                                      |
+| D25–D27 | Spine runtime 4.2; MVP username/password, Google SSO sau; hosting hoãn, chỉ chạy local                                                                                                                                                                                                               | D25, D26, D27                                             |
+| D28–D31 | CI chỉ GitHub Actions, không CD (D28); `orchestrator.inc` là nhầm lẫn (D29); không tự sửa `.claude/settings.json` (D30); branch protection yêu cầu `verify (18)` + `verify (22)` (D31)                                                                                                               | D28–D31                                                   |
 
 ## 3. Chỉ mục ADR
 
@@ -82,7 +85,7 @@ flowchart LR
 ## 5. Tổng hợp quy trình phê duyệt
 
 1. Chủ dự án (hoặc orchestrator được ủy quyền) đọc mục "Câu hỏi cần chốt" cuối mỗi tài liệu 20–28; trả lời từng ô (chấp nhận mặc định / đổi).
-2. Với mỗi ADR được duyệt: thêm **một dòng** vào [DECISIONS.md](DECISIONS.md) (`D16`, `D17`, …), đổi trạng thái ở đây thành **Đã chốt (D<n>)**.
+2. Với mỗi ADR được duyệt: thêm **một dòng** vào [DECISIONS.md](DECISIONS.md) (`D32`, `D33`, … — D1–D31 đã dùng), đổi trạng thái ở đây thành **Đã chốt (D<n>)**.
 3. ADR nào chạm giá trị trong `@vgtd/shared` (ví dụ ADR-010 PRNG, ADR-024 làm tròn): theo skill `vgtd-formula-change` — DECISIONS trước, rồi `@vgtd/shared` + test, rồi cập nhật docs.
 4. Không bắt đầu cài đặt phần phụ thuộc vào ADR chưa duyệt, trừ spike có đánh dấu rõ.
 
@@ -170,7 +173,7 @@ Không phải yêu cầu của nhiệm vụ này nhưng ảnh hưởng thiết k
 
 ## Phụ lục C. Đối chiếu với docs 10–19 (PR #69, #70)
 
-Đối chiếu ngày viết; các PR đó chưa vào `main` nên tài liệu 10–19 được nêu dạng tên, không link. Kết quả: khi khác nhau, **docs 10–19 là nguồn về nội dung game design**, 20–28 là nguồn về thực thi.
+Đối chiếu ngày viết; lúc đó các PR #69/#70 chưa vào `main` nên tài liệu 10–19 được nêu dạng tên, không link (nay đã vào `main`; cột "Đã xử lý" vẫn đúng). Kết quả: khi khác nhau, **docs 10–19 là nguồn về nội dung game design**, 20–28 là nguồn về thực thi.
 
 | Nguồn        | Điều khoản                                                                                                           | Tác động lên 20–28                                        | Đã xử lý                                                                                                                                 |
 | ------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -190,5 +193,5 @@ Không phải yêu cầu của nhiệm vụ này nhưng ảnh hưởng thiết k
 | Q1  | Chấp nhận **toàn bộ** ADR-005…025 như đề xuất, hay duyệt từng nhóm (server 005–009, dữ liệu 010–012, mạng 013–014, client 015–017, vận hành 018–019, nhân vật 020–023, kinh tế/bảo mật 024–025)? | Duyệt theo nhóm; nhóm chặn cài đặt: 005, 007, 010, 011, 012, 013                               |
 | Q2  | ADR-010 (PRNG xoshiro128\*\*) có thay thế mulberry32 của PR #10 không?                                                                                                                           | **Có** (trước khi PR #10 hợp nhất)                                                             |
 | Q3  | Ai là chủ art để xác nhận ADR-020, ADR-021, điểm A.0 #4, #6b, #8?                                                                                                                                | Chủ dự án chỉ định                                                                             |
-| Q4  | Số `D<n>` tiếp theo khi ghi vào DECISIONS.md: bắt đầu từ D16, theo thứ tự duyệt?                                                                                                                 | **Có**                                                                                         |
+| Q4  | Số `D<n>` tiếp theo khi ghi vào DECISIONS.md: bắt đầu từ **D32** (D1–D31 đã dùng), theo thứ tự duyệt?                                                                                            | **Có**                                                                                         |
 | Q5  | Có sửa trực tiếp 03/06/08 (erratum) hay chỉ giữ trong DECISIONS cho tới khi nhóm tài liệu game design xong?                                                                                      | Giữ trong DECISIONS trước; cập nhật tài liệu gốc bằng một PR docs riêng sau khi docs 10–19 vào |

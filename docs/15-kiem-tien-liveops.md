@@ -153,7 +153,7 @@ Nguy cơ cần theo dõi ([17-telemetry-kpi.md](17-telemetry-kpi.md) §5): ngư�
 
 ## 7. Thanh toán & vận hành (khung, chờ pháp lý)
 
-- **Hàng đợi một chiều:** Gateway nhận biên lai (App Store, Google Play, cổng thanh toán Web) → Auth/Economy xác thực **phía server** → ghi sổ cái kép (`SRC_IAP` → ví Tiên Ngọc) với khóa idempotency = mã giao dịch của nhà cung cấp; không bao giờ tin biên lai từ client.
+- **Hàng đợi một chiều:** Gateway nhận biên lai (App Store, Google Play, cổng thanh toán Web) → Auth/Economy xác thực **phía server** → ghi sổ cái kép (`SYSTEM_FAUCET_IAP` → ví Tiên Ngọc) với khóa idempotency = mã giao dịch của nhà cung cấp; không bao giờ tin biên lai từ client.
 - **Hoàn tiền / chargeback:** ví Tiên Ngọc được phép âm; khi âm thì vô hiệu hóa chi tiêu và khóa các vật phẩm Tiên Ngọc liên quan cho đến khi cân bằng (_Đề xuất_).
 - **Phí nền tảng:** cửa hàng ứng dụng thường thu 15–30% doanh thu (_cần kiểm tra điều kiện và chương trình giảm phí hiện hành_). Người chơi Web có thể thanh toán qua cổng riêng; **không** hướng người dùng iOS / Android vượt chính sách cửa hàng ứng dụng (cần kiểm tra).
 - **Hạn mức chi tiêu cho người dưới 18 tuổi:** mặc định cần có (xem [19](19-ngon-ngu-phap-ly.md) §4); con số cụ thể chờ pháp lý.

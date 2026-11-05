@@ -15,7 +15,7 @@ Hai khái niệm tách bạch:
 
 - **4 Đạo Lộ khởi đầu** _(Đề xuất)_: **Kiếm tu**, **Pháp tu**, **Thể tu**, **Đan/Phù tu**. Lý do 4 (không phải 6 như "6 lớp vũ khí" ở [02 §1](02-asset-matrix-2d.md)): đủ tam giác Tank – DPS – Hỗ trợ + một DPS tầm xa, vừa với ngân sách closed beta; 2 lớp vũ khí còn lại để mở sau. **Thể tu** đã được nhắc ở 07 §3 (công pháp Thể tu giảm sát thương Lôi Kiếp).
 - **Không đổi Đạo Lộ trong một "kiếp" ở beta** _(Đề xuất)_. Hướng mở sau: **Phụ tu** — ở Kim Đan học được 2 kỹ năng của Đạo Lộ khác (không phải ultimate). Xem _Câu hỏi cần chốt_.
-- **Nghề (luyện đan / chế phù / rèn)** mở ở Trúc Cơ (`crafting`, 07 §8) cho mọi Đạo Lộ; Đan/Phù tu chỉ được **bonus**, không độc quyền. Chi tiết nghề: chưa thiết kế ([OPEN-ITEMS](OPEN-ITEMS.md)).
+- **Nghề (luyện đan / chế phù / rèn)** mở ở Trúc Cơ (`crafting`, 07 §8) cho mọi Đạo Lộ; Đan/Phù tu chỉ được **bonus**, không độc quyền. Chi tiết nghề: [13](13-che-tao.md) (đề xuất, chờ duyệt).
 
 ## 2. Bốn Đạo Lộ
 
@@ -180,7 +180,7 @@ c_{\text{eff}} &= c_0 \cdot \big(1 + 0{,}05\,(\text{rank} - 1)\big) \cdot \text{
 - `DEF_eff`, `M_elem`, `Crit` (×1,5), `Suppress`, jitter, **hệ ngoài hệ −30/−15/0%**: giữ nguyên 07 §4–§5; **không có công thức sát thương thứ hai**.
 - **Tính chất lồi của `Raw²/(Raw+DEF)`:** chia một đòn thành nhiều hit nhỏ làm tổng yếu đi, đòn lớn mạnh vượt trội. Nên thiết kế dùng **chỉ số E = hits · f(c)/f(1)** (f(c) = c²/(c + d), d = DEF/ATK ≈ 0,667 trung tính) làm "tương đương đòn thường" (c = 1, E = 1) — đây là số dùng để cân (mục 4).
 - **Hồi máu / khiên** co giãn theo `atk` (hỗ trợ) hoặc `hp_max` (Thể tu tự bảo vệ): ví dụ `heal: atk × 4,0` ≈ 17,6% Khí Huyết tối đa người nhận ở cùng cảnh giới (ATK Đan/Phù tu 0,88 · 60 ≈ 53; HP 1.200). Khiên và hồi máu cũng cộng dồn tối đa 60% từ trang bị như chỉ số khác (07 §1).
-- **PvP:** `effects[].pvp_mult` mặc định 1; dùng để hạ riêng khống chế / burst trong PvP mà không đổi PvE (luật PvP chưa thiết kế — [OPEN-ITEMS](OPEN-ITEMS.md)).
+- **PvP:** `effects[].pvp_mult` mặc định 1; dùng để hạ riêng khống chế / burst trong PvP mà không đổi PvE (luật PvP: [14 §4](14-pvp-chien-tranh.md), đề xuất chờ duyệt).
 - **Khống chế (CC):** choáng / đóng băng / trói chặt giảm dần: lần 2 trong 8 giây còn 50% thời lượng, lần 3 miễn nhiễm 4 giây _(Đề xuất)_; **boss miễn choáng / trói**, chỉ chịu làm chậm 50% hiệu lực.
 
 ### 3.5 Telegraph (cảnh báo) cho quái, tinh anh, boss
@@ -727,5 +727,5 @@ Viết theo **JSON Schema draft 2020-12** (như 07 §8–§9), kiểm bằng Ajv
 | S7  | Có **Phụ tu** (học 2 kỹ năng từ Đạo Lộ khác ở Kim Đan) và **chuyển Đạo Lộ** sau beta không?                                                                                                                      | Phụ tu có, chuyển Đạo Lộ không (chỉ qua Trọng sinh).                           |
 | S8  | Hồi sinh đồng đội (D8) có được dùng trong PvP / chiến tranh?                                                                                                                                                     | Không trong chiến tranh Linh Mạch; có trong PvE.                               |
 | S9  | Crit: tỷ lệ gốc chí mạng là bao nhiêu? (07 chỉ nêu `Crit ×1,5`.)                                                                                                                                                 | 5% gốc; Kiếm Tâm +5%; trang bị cộng thêm trong trần 60% (07 §1).               |
-| S10 | PvP: có áp `pvp_mult` giảm khống chế / burst không? (luật PvP chưa thiết kế).                                                                                                                                    | Có: khống chế × 0,6 thời lượng, burst không đổi; xác nhận sau khi có luật PvP. |
+| S10 | PvP: có áp `pvp_mult` giảm khống chế / burst không? (luật PvP: 14 §4, đề xuất chờ duyệt).                                                                                                                        | Có: khống chế × 0,6 thời lượng, burst không đổi; xác nhận sau khi có luật PvP. |
 | S11 | Đòn thường: "3 đòn" — tự động liên tục khi giữ phím / chạm hay chỉ khi bấm từng lần? (ảnh hưởng thiết kế cảm ứng.)                                                                                               | Tự động lặp khi giữ nút; Mobile: giữ nút đánh.                                 |

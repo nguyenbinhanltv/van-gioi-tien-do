@@ -162,7 +162,7 @@ Số lượng đề xuất (so với 02 §3 — số đầy đủ ở cột "02 
 
 Phẩm chất: dùng **đủ 6 phẩm** vì là thang chuẩn (00 §3), nhưng phân bố rơi theo 07 §6: quái dã ngoại ít phẩm cao; Vàng / Đỏ chỉ từ tinh anh / boss; nên người chơi beta ít gặp Đỏ.
 
-Luyện đan beta: **công thức cố định, tỷ lệ thành công theo phẩm nguyên liệu, không minigame** _(Đề xuất)_ — minigame đan lô ([05](05-ui-ux-icon.md), 02 §5) để sau; chi tiết nghề chưa thiết kế ([OPEN-ITEMS](OPEN-ITEMS.md)). Mục đích: đan đột phá rơi rất hiếm từ quái (0,02 – 0,5% — 07 §6) nên chế tác là nguồn đan chủ lực của người chơi.
+Luyện đan beta: **công thức cố định, tỷ lệ thành công theo phẩm nguyên liệu, không minigame** _(Đề xuất)_ — minigame đan lô ([05](05-ui-ux-icon.md), 02 §5) để sau; chi tiết nghề: [13](13-che-tao.md) (đề xuất, chờ duyệt). Mục đích: đan đột phá rơi rất hiếm từ quái (0,02 – 0,5% — 07 §6) nên chế tác là nguồn đan chủ lực của người chơi.
 
 ## 7. Hệ thống: IN và OUT
 
@@ -193,7 +193,7 @@ Chú thích phase: P1–P5 như mục 12.
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **Động Phủ tối giản**: Bồ đoàn, Linh điền 2 × 2, Tụ linh trận 3 × 3 trên Hậu sơn | Lấy từ [04 §6](04-tilemap.md); là cơ chế giữ chân, nhưng thêm công trình + server lưu 4 giá trị mỗi công trình |
 | **PK cơ bản** (cờ PK) ở Đầm / Cổ thụ / Độc Hỏa Đàm                               | Cần để Nghiệp Lực có nguồn; nếu cắt, Nghiệp Lực chỉ thay đổi qua nhiệm vụ                                      |
-| Lôi đài Quảng trường luyện võ (12 × 12) cho duel                                 | Phụ thuộc luật PvP (chưa thiết kế)                                                                             |
+| Lôi đài Quảng trường luyện võ (12 × 12) cho duel                                 | Phụ thuộc luật PvP ([14 §4](14-pvp-chien-tranh.md), đề xuất chờ duyệt)                                         |
 
 ### 7.3 OUT (không làm trong beta)
 
@@ -201,7 +201,7 @@ Chú thích phase: P1–P5 như mục 12.
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | Chiến tranh Linh Mạch, Hộ Sơn Đại Trận (gameplay), Linh Mạch Tâm      | Quy mô 100 vs 100, băng thông 25 KB/s, cần tông môn người chơi                                                                               | Sau P5         |
 | Cảnh giới ≥ 4: phân thân, Lĩnh Vực, Pháp Tướng, Phi Thăng, Trọng sinh | Ngoài phạm vi 3 cảnh giới                                                                                                                    | Sau beta       |
-| Đấu Giá Hội, Tiên Ngọc, Battle Pass, mọi kiếm tiền                    | Chưa thiết kế; beta **không thu tiền**                                                                                                       | Sau beta       |
+| Đấu Giá Hội, Tiên Ngọc, Battle Pass, mọi kiếm tiền                    | Đề xuất ở [15](15-kiem-tien-liveops.md) (chờ duyệt); beta **không thu tiền**                                                                 | Sau beta       |
 | Google SSO                                                            | Quyết định: SSO làm sau                                                                                                                      | Sau beta       |
 | Linh thú, thú cưỡi, thú đồng hành                                     | Chi phí Spine + hệ tiến hóa                                                                                                                  | Sau beta       |
 | Đạo Lữ, Sư đồ, tông môn người chơi lập                                | Cần hệ xã hội lớn                                                                                                                            | Sau beta       |
@@ -271,17 +271,17 @@ Nguồn đo và dashboard: [17-telemetry-kpi.md](17-telemetry-kpi.md) (ngưỡng
 
 ### 9.2 Phễu đột phá (cumulative so với số nhân vật tạo)
 
-| Mốc phễu                              | Mục tiêu đến D14 _(Đề xuất)_ | Chỉ số kèm theo                                                                       |
-| ------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------- |
-| 1. Tạo nhân vật                       | 100%                         | —                                                                                     |
-| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE ~30 phút theo 16 §3; KPI trung vị ≤ 32 phút ở 17 (bảng KPI, hàng FTUE, dòng 147) |
-| 3. Luyện Khí tầng 5                   | ≥ 60%                        | Thời gian median tới tầng 5 ≤ 1 giờ chơi                                              |
-| 4. Luyện Khí tầng 9 (Viên Mãn)        | ≥ 45%                        | Median ≤ 2,5 – 3 giờ chơi                                                             |
-| 5. **Thử** đột phá Trúc Cơ            | ≥ 40%                        | Tỷ lệ thành công lần đầu 85–95% (có chủ đan Lam trở lên)                              |
-| 6. Trúc Cơ thành công                 | ≥ 35%                        | Trung bình ≤ 1,2 lần thử                                                              |
-| 7. **Thử** đột phá Kim Đan (+ Tâm Ma) | ≥ 18%                        | Tỷ lệ thành công lần đầu 60–80%; Tâm Ma thắng ≥ 80%                                   |
-| 8. Kim Đan thành công                 | ≥ 12%                        | Trung bình ≤ 2,0 lần thử (pity +8% / lần, 07 §2)                                      |
-| 9. **Thử** Kết Anh (Lôi Kiếp 3 đạo)   | ≥ 5%                         | Tỷ lệ sống qua 3 đạo ≥ 90% (không cần giảm trừ — 07 §3); thành công 55–75%            |
+| Mốc phễu                              | Mục tiêu đến D14 _(Đề xuất)_ | Chỉ số kèm theo                                                                               |
+| ------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------- |
+| 1. Tạo nhân vật                       | 100%                         | —                                                                                             |
+| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE ~30 phút theo 16 §3; KPI trung vị ≤ 32 phút ở [17 §4.1](17-telemetry-kpi.md) (hàng FTUE) |
+| 3. Luyện Khí tầng 5                   | ≥ 60%                        | Thời gian median tới tầng 5 ≤ 1 giờ chơi                                                      |
+| 4. Luyện Khí tầng 9 (Viên Mãn)        | ≥ 45%                        | Median ≤ 2,5 – 3 giờ chơi                                                                     |
+| 5. **Thử** đột phá Trúc Cơ            | ≥ 40%                        | Tỷ lệ thành công lần đầu 85–95% (có chủ đan Lam trở lên)                                      |
+| 6. Trúc Cơ thành công                 | ≥ 35%                        | Trung bình ≤ 1,2 lần thử                                                                      |
+| 7. **Thử** đột phá Kim Đan (+ Tâm Ma) | ≥ 18%                        | Tỷ lệ thành công lần đầu 60–80%; Tâm Ma thắng ≥ 80%                                           |
+| 8. Kim Đan thành công                 | ≥ 12%                        | Trung bình ≤ 2,0 lần thử (pity +8% / lần, 07 §2)                                              |
+| 9. **Thử** Kết Anh (Lôi Kiếp 3 đạo)   | ≥ 5%                         | Tỷ lệ sống qua 3 đạo ≥ 90% (không cần giảm trừ — 07 §3); thành công 55–75%                    |
 
 Giải thích: một phễu quá dốc (ví dụ < 20% qua Luyện Khí 9) nghĩa là pacing 07 §5 hoặc nguồn đan quá khắt; quá phẳng (> 80% qua Trúc Cơ) nghĩa là đột phá quá dễ, mất khoảnh khắc P1 ([01 §1](01-gdd.md)).
 
@@ -408,16 +408,16 @@ Cột "02" = **"SL MVP" trong [02-asset-matrix-2d.md](02-asset-matrix-2d.md)** (
 
 ## 11. Rủi ro và giả định
 
-| Rủi ro / giả định                                                                       | Giảm thiểu                                                                |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Prototype Cocos chưa kiểm chứng ngân sách draw call / RAM / Y-sort (OPEN-ITEMS #5)      | P1 chỉ làm slice client + đo; **không mở P2 trước khi P1 đạt ngân sách**  |
-| 100 vs 100 AOI chưa đo (OPEN-ITEMS #6)                                                  | P2 có bài test bot; điều chỉnh cell AOI / tần số trước P4                 |
-| Hệ số kinh tế 07 chưa khóa bằng dữ liệu (OPEN-ITEMS #7)                                 | Đo bóng CPI; mô phỏng trước P5; điều chỉnh ngay từ dữ liệu 2 tuần đầu     |
-| Nội dung mỏng (2 bản đồ, 14 loại quái) → hết việc ở ~26 giờ                             | Kết Anh, PK, boss tuần, kinh tế làm "game cuối" ngắn; chấp nhận cho beta  |
-| Nghiệp Lực / PK ở Rừng Độc nhỏ có thể gây quấy phá người mới                            | Bìa rừng cấm PK; PvP death chỉ −4% độ bền; Nghiệp phạt                    |
-| Mô hình hosting local giới hạn CCU / uptime                                             | Mục tiêu 100 CCU; thông báo giờ mở cửa; backup / migration thử trước beta |
-| Chưa có thiết kế nhiệm vụ, nghề, PvP, onboarding chi tiết ([OPEN-ITEMS](OPEN-ITEMS.md)) | Tối giản có chủ đích (mục 7); thu phản hồi để thiết kế đúng               |
-| Số liệu Linh Mạch lệch 5 / 6 phẩm (01 G6)                                               | Không ảnh hưởng beta (Linh Mạch Tâm OUT); chốt trước khi làm chiến tranh  |
+| Rủi ro / giả định                                                                                                                                                              | Giảm thiểu                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Prototype Cocos chưa kiểm chứng ngân sách draw call / RAM / Y-sort (OPEN-ITEMS #5)                                                                                             | P1 chỉ làm slice client + đo; **không mở P2 trước khi P1 đạt ngân sách**  |
+| 100 vs 100 AOI chưa đo (OPEN-ITEMS #6)                                                                                                                                         | P2 có bài test bot; điều chỉnh cell AOI / tần số trước P4                 |
+| Hệ số kinh tế 07 chưa khóa bằng dữ liệu (OPEN-ITEMS #7)                                                                                                                        | Đo bóng CPI; mô phỏng trước P5; điều chỉnh ngay từ dữ liệu 2 tuần đầu     |
+| Nội dung mỏng (2 bản đồ, 14 loại quái) → hết việc ở ~26 giờ                                                                                                                    | Kết Anh, PK, boss tuần, kinh tế làm "game cuối" ngắn; chấp nhận cho beta  |
+| Nghiệp Lực / PK ở Rừng Độc nhỏ có thể gây quấy phá người mới                                                                                                                   | Bìa rừng cấm PK; PvP death chỉ −4% độ bền; Nghiệp phạt                    |
+| Mô hình hosting local giới hạn CCU / uptime                                                                                                                                    | Mục tiêu 100 CCU; thông báo giờ mở cửa; backup / migration thử trước beta |
+| Nhiệm vụ, nghề, PvP, onboarding mới ở mức đề xuất ([12](12-nhiem-vu-cot-truyen.md), [13](13-che-tao.md), [14](14-pvp-chien-tranh.md), [16](16-onboarding.md)), chưa được duyệt | Tối giản có chủ đích (mục 7); thu phản hồi để thiết kế đúng               |
+| Số liệu Linh Mạch lệch 5 / 6 phẩm (01 G6)                                                                                                                                      | Không ảnh hưởng beta (Linh Mạch Tâm OUT); chốt trước khi làm chiến tranh  |
 
 ## 12. Bản đồ mốc kỹ thuật P1–P5
 
@@ -431,7 +431,7 @@ Cấu trúc repo hiện có: `apps/client-cocos`, `apps/server`, `packages/share
 | **P4** | **Content & social** | Đủ 8 + 4 + 2 quái / boss; Tâm Ma + Lôi Kiếp 3 đạo; tổ đội, chat, bạn bè, giao dịch, Vạn Bảo Lâu; tông môn NPC; nhiệm vụ; luyện đan; FTUE; Nghiệp Lực + Đạo Tâm; (stretch: Động Phủ, PK).                                                 | P3 (một phần song song) | Toàn bộ mục 7.1 chạy end-to-end; playtest nội bộ ≥ 20 người qua FTUE ≥ 85% mà không lỗi chặn.                                       |
 | **P5** | **Beta hardening**   | Test tải 200 CCU bot, mô phỏng kinh tế, cân bằng 4 Đạo Lộ, anti-cheat, i18n Việt, dashboard KPI, runbook vận hành local, backup / khôi phục, quy trình mời tester. OPEN-ITEMS #7.                                                        | P4                      | **Cổng ra mắt beta:** crash-free ≥ 99%; 100 CCU 24 giờ không sự cố; không mất dữ liệu trong thử khôi phục; dashboard KPI hoạt động. |
 
-Phụ thuộc các mảng chưa thiết kế: nhiệm vụ (P4), nghề (P4, mức tối thiểu), PvP (stretch P4), telemetry (P3–P5) — thiết kế chi tiết tương ứng cần xong **trước phase dùng đến**; xem [OPEN-ITEMS](OPEN-ITEMS.md).
+Phụ thuộc các mảng mới có đề xuất, chưa được duyệt: nhiệm vụ ([12](12-nhiem-vu-cot-truyen.md), P4), nghề ([13](13-che-tao.md), P4, mức tối thiểu), PvP ([14](14-pvp-chien-tranh.md), stretch P4), telemetry ([17](17-telemetry-kpi.md), P3–P5) — chúng cần được duyệt **trước phase dùng đến**; xem các mục "Câu hỏi cần chốt" của từng tài liệu.
 
 ## Câu hỏi cần chốt
 
