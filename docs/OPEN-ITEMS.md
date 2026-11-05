@@ -28,6 +28,7 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 
 - **Chưa chỉ định người rig/animate (human animator not assigned).** D33 chọn Hybrid: AI concept + paperdoll tách lớp, con người rig/animate bằng Spine 4.2 Professional; agent không điều khiển Spine editor. Chủ dự án cần chỉ định người đảm nhiệm và quy trình bàn giao trước khi coi animation là hoàn thiện.
 - **Cần xác minh giấy phép Spine Professional và điều khoản Spine Runtimes (Spine Professional license + Spine Runtimes license terms to verify).** D25/D33 khóa phiên bản/quy trình, không xác nhận đã mua license, ai là licensee hoặc quyền phân phối runtime. Liên quan [31 I-06](31-bang-quyet-dinh.md), [18 §9](18-art-bible-am-thanh.md); cần con người kiểm điều khoản trước phát hành.
+- **Rig Kiếm tu v1 chưa được smoke test bằng Spine Editor/Cocos runtime.** Đã có JSON 4.2 sinh bằng mã, cutout/underpaint, atlas và idle thử; gate cấu trúc/UV/PMA và FK preview không thay thế import/render thật. Worker viewer `van-gioi-tien-do-7` phối hợp tích hợp; người animate phải kiểm lại mask/khớp/weights và bản mirror kiếm trước phát hành. Xem [bàn giao rig](art/kiem-tu-rig-handoff.md).
 
 [Cập nhật D34: tạm chấp nhận ảnh từ `image_gen.imagegen` khi mô hình/phiên bản không được công bố; vẫn phải ghi CLI version, ngày/giờ, prompt đầy đủ vào ASSET-LICENSES.md và rà soát giấy phép/xác minh nguồn gốc trước phát hành.]
 
