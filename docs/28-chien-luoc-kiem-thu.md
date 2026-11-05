@@ -36,7 +36,7 @@ flowchart TB
 
 - **Khung:** vitest (đã dùng ở mọi package). Mã tầng 1–2 của client ([21 §2](21-kien-truc-client.md)) chạy trong Node, không cần Cocos.
 - **Hiện có (tham chiếu):** `@vgtd/shared` tái hiện **các ví dụ tính toán trong [07](07-cong-thuc-data-schema.md)** (CLAUDE.md); `@vgtd/client-core` (A\*, AnchorLayout); PR #7 (106 test), #9 (41), #10 (55 + 46) khi hợp nhất.
-- **Thuộc tính (property-based):** dùng `fast-check` (đề xuất – chờ duyệt, ADR-019) cho: codec round-trip; `step()` không xuyên tường ở mọi tốc độ; sổ cái `Σ delta = 0` với dãy giao dịch ngẫu nhiên; AOI so với vét cạn; thứ tự vẽ là **thứ tự toàn phần** (`compareDrawOrder`); `inAoi` đối xứng khi thoát/vào; `lowRealmFactor` trả `null` được xử lý ở mọi nơi gọi.
+- **Thuộc tính (property-based):** dùng `fast-check` (đề xuất – chờ duyệt, ADR-019) cho: codec round-trip; `step()` không xuyên tường ở mọi tốc độ; sổ cái `Σ delta = 0` với dãy giao dịch ngẫu nhiên; AOI so với vét cạn; thứ tự vẽ là **thứ tự toàn phần** (`compareDrawOrder`); `inAoi` đối xứng khi thoát/vào; **round-trip của `IsoAdapter`** (`worldToTile(tileToWorld(i, j, e)) = (i, j)` với (i, j) thực, sai số < 1e-6; `cellCenterToWorld(i, j) = tileToWorld(i + 0,5; j + 0,5)`); `lowRealmFactor` trả `null` được xử lý ở mọi nơi gọi.
 - **Ví dụ vàng của công thức:** mỗi thay đổi công thức theo skill `vgtd-formula-change` phải cập nhật test tái hiện số trong tài liệu; sai lệch ≤ ngưỡng CI 1% đã nêu (OPEN-ITEMS A1–A2).
 - **Quy tắc mã mô phỏng:** mọi mã trong `sim`/`shared` có test grep cấm `Math.random`, `Date.now`, `new Date`, `performance.now` (đã có ở PR #10, mở rộng cho thư mục mới).
 

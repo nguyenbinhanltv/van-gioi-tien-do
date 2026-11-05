@@ -164,13 +164,19 @@ Toán chung (`tileToScreen`, `screenToTile`, `compareDrawOrder`, …) ở y **h�
 
 ```ts
 // apps/client-cocos – IsoAdapter (phác thảo; chỉ file này được lật y)
-import { tileCenterToScreen, screenToTile } from '@vgtd/shared';
+import { tileToScreen, screenToTile, tileCenterToScreen } from '@vgtd/shared';
+// Vị trí liên tục (thực thể, camera): KHÔNG cộng 0,5. (i, j) nguyên = đỉnh N (D15).
 export function tileToWorld(i: number, j: number, elevation = 0): Vec3 {
-  const p = tileCenterToScreen(i, j, elevation); // y xuống
+  const p = tileToScreen(i, j, elevation); // y xuống
   return new Vec3(p.x, -p.y, 0); // lật y TẠI ĐÂY
 }
 export function worldToTile(x: number, y: number, elevation = 0) {
-  return screenToTile(x, -y, elevation); // lật ngược lại
+  return screenToTile(x, -y, elevation); // nghịch đảo đúng của tileToWorld
+}
+// Chỉ cho ô nguyên (i, j) nguyên: đặt sprite ô, vòng chọn ô…
+export function cellCenterToWorld(i: number, j: number, elevation = 0): Vec3 {
+  const p = tileCenterToScreen(i, j, elevation); // = tileToScreen(i + 0.5, j + 0.5)
+  return new Vec3(p.x, -p.y, 0);
 }
 ```
 
@@ -181,9 +187,9 @@ export function worldToTile(x: number, y: number, elevation = 0) {
 | Socket Spine / điểm neo trên đầu | Là tọa độ **y hướng lên trong không gian pivot** (khớp Spine và `Node` local); **không** lật; xem ADR-021 ([29](29-adr.md)) – giải quyết điểm mơ hồ socket của PR #7                            |
 | Camera                           | Vị trí = `tileToWorld` của nhân vật cộng offset làm mượt; khung nhìn đổi sang ô bằng `worldToTile` cho `ChunkStreamer`                                                                          |
 | Hit-test / pick                  | `worldToTile` → `screenToTileCell` → chọn thực thể theo pick box 48 × 100 px                                                                                                                    |
-| Quy ước "ô nguyên = đỉnh N"      | Tâm ô là `(i + 0,5; j + 0,5)`; mọi nơi đặt sprite ô dùng `tileCenterToScreen`                                                                                                                   |
+| Quy ước "ô nguyên = đỉnh N"      | Tâm ô là `(i + 0,5; j + 0,5)`; chỉ sprite/overlay của **ô nguyên** dùng `cellCenterToWorld` (`tileCenterToScreen`); vị trí liên tục của thực thể dùng `tileToWorld` (không dịch nửa ô)          |
 
-Test bắt buộc (tầng 3 chạy trong Cocos headless hoặc mô phỏng): vòng tròn `tileToWorld → worldToTile` sai số < 1e-6; không có `y = -` rải rác ngoài `IsoAdapter` (grep trong CI).
+Test bắt buộc (tầng 3 chạy trong Cocos headless hoặc mô phỏng): `tileToWorld` và `worldToTile` là nghịch đảo của nhau: `worldToTile(tileToWorld(i, j, e)) = (i, j)` với (i, j) thực bất kỳ, sai số < 1e-6 (test thuộc tính, xem [28 §2](28-chien-luoc-kiem-thu.md)); `cellCenterToWorld(i, j)` bằng `tileToWorld(i + 0,5; j + 0,5)`; không có `y = -` rải rác ngoài `IsoAdapter` (grep trong CI).
 
 ## 9. Tích hợp Spine 4.2 paperdoll
 
