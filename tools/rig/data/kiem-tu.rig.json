@@ -1,0 +1,3204 @@
+{
+  "id": "kiem-tu",
+  "rigs": {
+    "S": {
+      "format": "vgtd-rig",
+      "version": 1,
+      "id": "kiem-tu_S",
+      "kind": "player",
+      "direction": "S",
+      "canvas": { "width": 128, "height": 128 },
+      "bones": [
+        { "name": "root", "parent": null, "x": 0, "y": 0, "rotation": 0, "length": 0 },
+        { "name": "hip", "parent": "root", "x": 0, "y": 51, "rotation": 90, "length": 6 },
+        { "name": "spine_mid", "parent": "hip", "x": 6, "y": 0, "rotation": 0, "length": 12 },
+        { "name": "spine_upper", "parent": "spine_mid", "x": 12, "y": 0, "rotation": 0, "length": 8 },
+        { "name": "neck", "parent": "spine_upper", "x": 8, "y": 0, "rotation": 0, "length": 11.5 },
+        { "name": "head", "parent": "neck", "x": 11.5, "y": 0, "rotation": 0, "length": 6 },
+        {
+          "name": "upper_arm_R",
+          "parent": "spine_upper",
+          "x": 4,
+          "y": 9.5,
+          "rotation": -201.03751,
+          "length": 13.92839
+        },
+        { "name": "lower_arm_R", "parent": "upper_arm_R", "x": 13.92839, "y": 0, "rotation": -1.58235, "length": 13 },
+        { "name": "hand_R", "parent": "lower_arm_R", "x": 13, "y": 0, "rotation": 112.61986, "length": 0 },
+        {
+          "name": "upper_arm_L",
+          "parent": "spine_upper",
+          "x": 4,
+          "y": -9.5,
+          "rotation": -158.96249,
+          "length": 13.92839
+        },
+        { "name": "lower_arm_L", "parent": "upper_arm_L", "x": 13.92839, "y": 0, "rotation": 1.58235, "length": 13 },
+        { "name": "hand_L", "parent": "lower_arm_L", "x": 13, "y": 0, "rotation": 67.38014, "length": 0 },
+        { "name": "thigh_R", "parent": "hip", "x": -4.5, "y": 4, "rotation": -181.24536, "length": 23.00543 },
+        { "name": "shin_R", "parent": "thigh_R", "x": 23.00543, "y": 0, "rotation": -0.26207, "length": 19.00658 },
+        { "name": "foot_R", "parent": "shin_R", "x": 19.00658, "y": 0, "rotation": -11.02137, "length": 4.60977 },
+        { "name": "thigh_L", "parent": "hip", "x": -4.5, "y": -4, "rotation": -178.75464, "length": 23.00543 },
+        { "name": "shin_L", "parent": "thigh_L", "x": 23.00543, "y": 0, "rotation": 0.26207, "length": 19.00658 },
+        { "name": "foot_L", "parent": "shin_L", "x": 19.00658, "y": 0, "rotation": 11.02137, "length": 4.60977 },
+        { "name": "hair_back_1", "parent": "head", "x": 3, "y": 1.5, "rotation": -178.66778, "length": 21.50581 },
+        { "name": "hair_back_2", "parent": "hair_back_1", "x": 21.50581, "y": 0, "rotation": -1.33222, "length": 10 },
+        { "name": "hair_front_1", "parent": "head", "x": 7, "y": 0, "rotation": -173.99099, "length": 9.55249 },
+        {
+          "name": "hair_front_2",
+          "parent": "hair_front_1",
+          "x": 9.55249,
+          "y": 0,
+          "rotation": -0.56867,
+          "length": 10.54751
+        },
+        { "name": "ribbon_1", "parent": "head", "x": 9.5, "y": 0, "rotation": -185.19443, "length": 22.09072 },
+        { "name": "ribbon_2", "parent": "ribbon_1", "x": 22.09072, "y": 0, "rotation": -3.96792, "length": 15.70032 },
+        {
+          "name": "sleeve_tip_R",
+          "parent": "lower_arm_R",
+          "x": 7.03846,
+          "y": 1.30769,
+          "rotation": -9.38552,
+          "length": 9.43398
+        },
+        {
+          "name": "sleeve_tip_L",
+          "parent": "lower_arm_L",
+          "x": 7.03846,
+          "y": -1.30769,
+          "rotation": 9.38552,
+          "length": 9.43398
+        },
+        { "name": "sash_L_1", "parent": "hip", "x": 2, "y": 1.5, "rotation": -182.1211, "length": 13.50926 },
+        { "name": "sash_L_2", "parent": "sash_L_1", "x": 13.50926, "y": 0, "rotation": -1.14939, "length": 17.52855 },
+        { "name": "sash_R_1", "parent": "hip", "x": 2, "y": -2, "rotation": -175.10091, "length": 17.56417 },
+        { "name": "sash_R_2", "parent": "sash_R_1", "x": 17.56417, "y": 0, "rotation": -1.43086, "length": 16.53028 },
+        { "name": "robe_front", "parent": "hip", "x": -3, "y": 0, "rotation": -177.47388, "length": 34.03307 },
+        { "name": "robe_back", "parent": "hip", "x": -3, "y": 0, "rotation": -182.52612, "length": 34.03307 },
+        { "name": "scabbard", "parent": "hip", "x": 1, "y": -9, "rotation": -167.27564, "length": 31.7805 },
+        { "name": "weapon", "parent": "hand_R", "x": 0, "y": 0, "rotation": -116.56505, "length": 39.13119 },
+        { "name": "ik_foot_L", "parent": "root", "length": 0, "x": 5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_L", "parent": "root", "length": 0, "x": 19.5, "y": 48, "rotation": 0 },
+        { "name": "ik_foot_R", "parent": "root", "length": 0, "x": -5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_R", "parent": "root", "length": 0, "x": -19.5, "y": 48, "rotation": 0 }
+      ],
+      "ik": [
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        {
+          "name": "ik_hand_L",
+          "bones": ["upper_arm_L", "lower_arm_L"],
+          "target": "ik_hand_L",
+          "bendPositive": true,
+          "mix": 1
+        },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        {
+          "name": "ik_hand_R",
+          "bones": ["upper_arm_R", "lower_arm_R"],
+          "target": "ik_hand_R",
+          "bendPositive": false,
+          "mix": 1
+        }
+      ],
+      "chains": [
+        {
+          "name": "hair_back",
+          "kind": "hair",
+          "bones": ["hair_back_1", "hair_back_2"],
+          "stiffness": 0.4,
+          "damping": 0.3,
+          "gravity": 0.5,
+          "inertia": 0.7
+        },
+        {
+          "name": "hair_ribbon",
+          "kind": "ribbon",
+          "bones": ["ribbon_1", "ribbon_2"],
+          "stiffness": 0.25,
+          "damping": 0.35,
+          "gravity": 0.7,
+          "inertia": 0.8
+        },
+        {
+          "name": "sash_L",
+          "kind": "sash",
+          "bones": ["sash_L_1", "sash_L_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sash_R",
+          "kind": "sash",
+          "bones": ["sash_R_1", "sash_R_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sleeve_L",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_L"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        },
+        {
+          "name": "sleeve_R",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_R"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        }
+      ],
+      "roles": {
+        "root": "root",
+        "hips": "hip",
+        "spine_mid": "spine_mid",
+        "spine_upper": "spine_upper",
+        "head": "head",
+        "upper_arm_L": "upper_arm_L",
+        "lower_arm_L": "lower_arm_L",
+        "hand_L": "hand_L",
+        "thigh_L": "thigh_L",
+        "shin_L": "shin_L",
+        "foot_L": "foot_L",
+        "ik_foot_L": "ik_foot_L",
+        "ik_hand_L": "ik_hand_L",
+        "upper_arm_R": "upper_arm_R",
+        "lower_arm_R": "lower_arm_R",
+        "hand_R": "hand_R",
+        "thigh_R": "thigh_R",
+        "shin_R": "shin_R",
+        "foot_R": "foot_R",
+        "ik_foot_R": "ik_foot_R",
+        "ik_hand_R": "ik_hand_R"
+      },
+      "sockets": [
+        { "name": "origin", "bone": "root", "x": 0, "y": 0 },
+        { "name": "hand_R", "bone": "hand_R", "x": 0, "y": 0 },
+        { "name": "hand_L", "bone": "hand_L", "x": 0, "y": 0 },
+        { "name": "back", "bone": "spine_upper", "x": -5, "y": 0 },
+        { "name": "chest", "bone": "spine_mid", "x": -9, "y": 0 },
+        { "name": "head_fx", "bone": "head", "x": 3.5, "y": 0 },
+        { "name": "head_top", "bone": "root", "x": 0, "y": 104 },
+        { "name": "orbit_center", "bone": "root", "x": 0, "y": 60 },
+        { "name": "fly_feet", "bone": "root", "x": 0, "y": 0 }
+      ],
+      "slots": [
+        { "name": "wing", "bone": "spine_upper", "paperdoll": "wing", "attachment": null },
+        { "name": "cape", "bone": "spine_upper", "paperdoll": "cape", "attachment": null },
+        { "name": "sword_back", "bone": "spine_upper", "paperdoll": "sword_back", "attachment": null },
+        { "name": "hair_back", "bone": "head", "paperdoll": "hair_back", "attachment": "hair_back" },
+        { "name": "body", "bone": "hip", "paperdoll": "body", "attachment": "body" },
+        { "name": "outfit_lower", "bone": "hip", "paperdoll": "outfit_lower", "attachment": "outfit_lower" },
+        { "name": "outfit_upper", "bone": "spine_upper", "paperdoll": "outfit_upper", "attachment": "outfit_upper" },
+        { "name": "head", "bone": "head", "paperdoll": "head", "attachment": "head" },
+        { "name": "hair_front", "bone": "head", "paperdoll": "hair_front", "attachment": "hair_front" },
+        { "name": "headwear", "bone": "head", "paperdoll": "headwear", "attachment": "headwear" },
+        { "name": "arm_L", "bone": "upper_arm_L", "paperdoll": "arm_L", "attachment": "arm_L" },
+        { "name": "arm_R", "bone": "upper_arm_R", "paperdoll": "arm_R", "attachment": "arm_R" },
+        { "name": "weapon_R", "bone": "weapon", "paperdoll": "weapon_R", "attachment": "weapon_R" }
+      ],
+      "skins": [
+        {
+          "name": "default",
+          "attachments": {
+            "hair_back": {
+              "hair_back": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.39258, 0.35938, 0.42969, 0.35938, 0.42969, 0.48438, 0.39258, 0.48438, 0.00586, 0.50781, 0.08594,
+                  0.50781, 0.08594, 0.60352, 0.00586, 0.60352, 0.09766, 0.50781, 0.11133, 0.50781, 0.11133, 0.59961,
+                  0.09766, 0.59961, 0.25977, 0.50781, 0.27344, 0.50781, 0.27344, 0.58984, 0.25977, 0.58984
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  12, 7.5, 12, -2, -20, -2, -20, 7.5, -7.5, 10, -7.5, -10.5, -32, -10.5, -32, 10, 9.5, 4, 9.5, 0.5, -14,
+                  0.5, -14, 4, -7.5, 4, -7.5, 0.5, -28.5, 0.5, -28.5, 4
+                ],
+                "weights": [
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]]
+                ]
+              }
+            },
+            "body": {
+              "body": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.5293, 0.50781, 0.56641, 0.50781, 0.56641, 0.56836, 0.5293, 0.56836, 0.8457, 0.00586, 0.90625,
+                  0.00586, 0.90625, 0.16797, 0.8457, 0.16797, 0.28906, 0.35938, 0.32422, 0.35938, 0.32422, 0.49219,
+                  0.28906, 0.49219, 0.24219, 0.35938, 0.27734, 0.35938, 0.27734, 0.49219, 0.24219, 0.49219, 0.51758,
+                  0.35938, 0.57813, 0.35938, 0.57813, 0.47266, 0.51758, 0.47266, 0.44141, 0.35938, 0.50586, 0.35938,
+                  0.50586, 0.47266, 0.44141, 0.47266, 0.9043, 0.50781, 0.94727, 0.50781, 0.94727, 0.55273, 0.9043,
+                  0.55273, 0.8457, 0.50781, 0.89258, 0.50781, 0.89258, 0.55273, 0.8457, 0.55273
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16, 20, 21, 22, 22, 23, 20, 24, 25, 26, 26, 27, 24, 28, 29, 30, 30, 31, 28
+                ],
+                "vertices": [
+                  36.5, 4.5, 36.5, -5, 21, -5, 21, 4.5, 33.5, 7.5, 33.5, -8, -8, -8, -8, 7.5, -0.5, 8.5, -0.5, -0.5,
+                  -34.5, -0.5, -34.5, 8.5, -0.5, 0, -0.5, -9, -34.5, -9, -34.5, 0, -20.5, 16, -20.5, 0.5, -49.5, 0.5,
+                  -49.5, 16, -20.5, 0, -20.5, -16.5, -49.5, -16.5, -49.5, 0, -39.5, 17.5, -39.5, 6.5, -51, 6.5, -51,
+                  17.5, -39.5, -6, -39.5, -18, -51, -18, -51, -6
+                ],
+                "weights": [
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]]
+                ]
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.77734, 0.00586, 0.83398, 0.00586, 0.83398, 0.17773, 0.77734, 0.17773, 0.30664, 0.00586, 0.48438,
+                  0.00586, 0.48438, 0.17773, 0.30664, 0.17773, 0.33594, 0.35938, 0.38086, 0.35938, 0.38086, 0.48828,
+                  0.33594, 0.48828
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8],
+                "vertices": [
+                  6.5, 12.5, 6.5, -2, -37.5, -2, -37.5, 12.5, 6.5, 25.5, 6.5, -20, -37.5, -20, -37.5, 25.5, 2, -7, 2,
+                  -18.5, -31, -18.5, -31, -7
+                ],
+                "weights": [
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]]
+                ]
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.6875, 0.35938, 0.82617, 0.35938, 0.82617, 0.46289, 0.6875, 0.46289, 0.68164, 0.50781, 0.70313,
+                  0.50781, 0.70313, 0.5625, 0.68164, 0.5625, 0.13281, 0.61523, 0.15039, 0.61523, 0.15039, 0.65234,
+                  0.13281, 0.65234, 0.71484, 0.50781, 0.73633, 0.50781, 0.73633, 0.5625, 0.71484, 0.5625, 0.41797,
+                  0.50781, 0.4375, 0.50781, 0.4375, 0.58008, 0.41797, 0.58008
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16
+                ],
+                "vertices": [
+                  9.5, 22.5, 9.5, -13, -17, -13, -17, 22.5, -14.5, 5.5, -14.5, 0, -28.5, 0, -28.5, 5.5, -28.5, 4.5,
+                  -28.5, 0, -38, 0, -38, 4.5, -14.5, -0.5, -14.5, -6, -28.5, -6, -28.5, -0.5, -28.5, -1, -28.5, -6, -47,
+                  -6, -47, -1
+                ],
+                "weights": [
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]]
+                ]
+              }
+            },
+            "head": {
+              "head": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.12305, 0.50781, 0.17969, 0.50781, 0.17969, 0.59375, 0.12305, 0.59375],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.5, 7, 9.5, -7.5, -12.5, -7.5, -12.5, 7],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.44922, 0.50781, 0.51758, 0.50781, 0.51758, 0.57227, 0.44922, 0.57227, 0.74805, 0.50781, 0.83398,
+                  0.50781, 0.83398, 0.55273, 0.74805, 0.55273
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4],
+                "vertices": [15.5, 9.5, 15.5, -8, -1, -8, -1, 9.5, -1, 11, -1, -11, -12.5, -11, -12.5, 11],
+                "weights": [
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]]
+                ]
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.16211, 0.61523, 0.24609, 0.61523, 0.24609, 0.63281, 0.16211, 0.63281],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [11, 12, 11, -9.5, 6.5, -9.5, 6.5, 12],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "arm_L": {
+              "arm_L": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.83789, 0.35938, 0.88086, 0.35938, 0.88086, 0.45703, 0.83789, 0.45703, 0.28516, 0.50781, 0.3418,
+                  0.50781, 0.3418, 0.58594, 0.28516, 0.58594, 0.00586, 0.61523, 0.06055, 0.61523, 0.06055, 0.6582,
+                  0.00586, 0.6582, 0.63281, 0.50781, 0.66992, 0.50781, 0.66992, 0.5625, 0.63281, 0.5625
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -2.80004, 1.07694, 1.14873, 11.34374, 24.48237, 2.36926, 20.5336, -7.89754, 9.80013, -3.76928,
+                  15.00533, 9.76423, 33.67224, 2.58465, 28.46704, -10.94886, 16.51304, -5.81546, 21.53874, 7.25138,
+                  31.80555, 3.30261, 26.77984, -9.76423, 18.59512, -1.7949, 22.00542, 7.07189, 35.07226, 2.04618,
+                  31.66195, -6.8206
+                ],
+                "weights": [
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]]
+                ]
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.89258, 0.35938, 0.93164, 0.35938, 0.93164, 0.45703, 0.89258, 0.45703, 0.35352, 0.50781, 0.40625,
+                  0.50781, 0.40625, 0.58594, 0.35352, 0.58594, 0.07227, 0.61523, 0.12109, 0.61523, 0.12109, 0.6582,
+                  0.07227, 0.6582, 0.57813, 0.50781, 0.62109, 0.50781, 0.62109, 0.56641, 0.57813, 0.56641
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  0.96924, -10.87707, -2.62055, -1.54361, 20.71309, 7.43087, 24.30288, -1.90259, 14.82584, -9.29756,
+                  9.97962, 3.30261, 28.64653, 10.48219, 33.49275, -2.11798, 21.35926, -6.7847, 16.87202, 4.88212,
+                  27.13882, 8.83089, 31.62606, -2.83593, 22.3644, -8.00523, 18.41563, 2.26157, 32.41581, 7.64625,
+                  36.36458, -2.62055
+                ],
+                "weights": [
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]]
+                ]
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.1582, 0.35938, 0.23047, 0.35938, 0.23047, 0.49219, 0.1582, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.61509, -14.75805, 1.34164, 1.78885, 31.75217, 16.99412, 40.02562, 0.44721],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              },
+              "weapon_R_mirrored": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.1582, 0.35938, 0.23047, 0.35938, 0.23047, 0.49219, 0.1582, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.61509, -14.75805, 1.34164, 1.78885, 31.75217, 16.99412, 40.02562, 0.44721],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              }
+            }
+          }
+        },
+        {
+          "name": "bones-only",
+          "attachments": {
+            "hair_back": {
+              "hair_back": {
+                "type": "region",
+                "path": "slot_hair_back",
+                "x": -10,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 20.5,
+                "height": 44
+              }
+            },
+            "body": {
+              "body": {
+                "type": "region",
+                "path": "slot_body",
+                "x": -7.25,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 35.5,
+                "height": 87.5
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "region",
+                "path": "slot_outfit_lower",
+                "x": -15.5,
+                "y": 2.75,
+                "rotation": -90,
+                "width": 45.5,
+                "height": 44
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "region",
+                "path": "slot_outfit_upper",
+                "x": -18.75,
+                "y": 4.75,
+                "rotation": -90,
+                "width": 35.5,
+                "height": 56.5
+              }
+            },
+            "head": {
+              "head": {
+                "type": "region",
+                "path": "slot_head",
+                "x": -1.5,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 14.5,
+                "height": 22
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "region",
+                "path": "slot_hair_front",
+                "x": 1.5,
+                "y": 0,
+                "rotation": -90,
+                "width": 22,
+                "height": 28
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "region",
+                "path": "slot_headwear",
+                "x": 8.75,
+                "y": 1.25,
+                "rotation": -90,
+                "width": 21.5,
+                "height": 4.5
+              }
+            },
+            "arm_L": {
+              "arm_L": {
+                "type": "region",
+                "path": "slot_arm_L",
+                "x": 16.13611,
+                "y": 1.56156,
+                "rotation": 68.96249,
+                "width": 14.5,
+                "height": 35
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "region",
+                "path": "slot_arm_R",
+                "x": 16.87202,
+                "y": -2.08208,
+                "rotation": 111.03751,
+                "width": 15,
+                "height": 36
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.68363,
+                "y": 1.11803,
+                "rotation": 116.56505,
+                "width": 18.5,
+                "height": 34
+              },
+              "weapon_R_mirrored": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.68363,
+                "y": 1.11803,
+                "rotation": 116.56505,
+                "width": 18.5,
+                "height": 34
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SE": {
+      "format": "vgtd-rig",
+      "version": 1,
+      "id": "kiem-tu_SE",
+      "kind": "player",
+      "direction": "SE",
+      "canvas": { "width": 128, "height": 128 },
+      "bones": [
+        { "name": "root", "parent": null, "x": 0, "y": 0, "rotation": 0, "length": 0 },
+        { "name": "hip", "parent": "root", "x": 0, "y": 51, "rotation": 90, "length": 6 },
+        { "name": "spine_mid", "parent": "hip", "x": 6, "y": 0, "rotation": 0, "length": 12 },
+        { "name": "spine_upper", "parent": "spine_mid", "x": 12, "y": 0, "rotation": 0, "length": 8 },
+        { "name": "neck", "parent": "spine_upper", "x": 8, "y": 0, "rotation": -9.86581, "length": 11.67262 },
+        { "name": "head", "parent": "neck", "x": 11.67262, "y": 0, "rotation": 9.86581, "length": 6 },
+        { "name": "upper_arm_R", "parent": "spine_upper", "x": 4, "y": 7.5, "rotation": -202.9321, "length": 14.11559 },
+        {
+          "name": "lower_arm_R",
+          "parent": "upper_arm_R",
+          "x": 14.11559,
+          "y": 0,
+          "rotation": -1.69146,
+          "length": 13.20038
+        },
+        { "name": "hand_R", "parent": "lower_arm_R", "x": 13.20038, "y": 0, "rotation": 114.62356, "length": 0 },
+        { "name": "upper_arm_L", "parent": "spine_upper", "x": 4, "y": -8, "rotation": -164.93151, "length": 13.46291 },
+        { "name": "lower_arm_L", "parent": "upper_arm_L", "x": 13.46291, "y": 0, "rotation": 1.19172, "length": 12.5 },
+        { "name": "hand_L", "parent": "lower_arm_L", "x": 12.5, "y": 0, "rotation": 73.7398, "length": 0 },
+        { "name": "thigh_R", "parent": "hip", "x": -4.5, "y": 4, "rotation": -181.24536, "length": 23.00543 },
+        { "name": "shin_R", "parent": "thigh_R", "x": 23.00543, "y": 0, "rotation": -0.26207, "length": 19.00658 },
+        { "name": "foot_R", "parent": "shin_R", "x": 19.00658, "y": 0, "rotation": -11.02137, "length": 4.60977 },
+        { "name": "thigh_L", "parent": "hip", "x": -4.5, "y": -4, "rotation": -178.75464, "length": 23.00543 },
+        { "name": "shin_L", "parent": "thigh_L", "x": 23.00543, "y": 0, "rotation": 0.26207, "length": 19.00658 },
+        { "name": "foot_L", "parent": "shin_L", "x": 19.00658, "y": 0, "rotation": 11.02137, "length": 4.60977 },
+        { "name": "hair_back_1", "parent": "head", "x": 3, "y": 1.5, "rotation": -183.99091, "length": 21.55226 },
+        { "name": "hair_back_2", "parent": "hair_back_1", "x": 21.55226, "y": 0, "rotation": 3.99091, "length": 10 },
+        { "name": "hair_front_1", "parent": "head", "x": 7, "y": 0, "rotation": -173.99099, "length": 9.55249 },
+        {
+          "name": "hair_front_2",
+          "parent": "hair_front_1",
+          "x": 9.55249,
+          "y": 0,
+          "rotation": -0.56867,
+          "length": 10.54751
+        },
+        { "name": "ribbon_1", "parent": "head", "x": 9.5, "y": 0, "rotation": -185.19443, "length": 22.09072 },
+        { "name": "ribbon_2", "parent": "ribbon_1", "x": 22.09072, "y": 0, "rotation": -3.96792, "length": 15.70032 },
+        {
+          "name": "sleeve_tip_R",
+          "parent": "lower_arm_R",
+          "x": 6.98844,
+          "y": 1.55299,
+          "rotation": -9.88496,
+          "length": 9.70824
+        },
+        {
+          "name": "sleeve_tip_L",
+          "parent": "lower_arm_L",
+          "x": 7.14,
+          "y": -0.52,
+          "rotation": 7.36917,
+          "length": 8.73212
+        },
+        { "name": "sash_L_1", "parent": "hip", "x": 2, "y": 1.5, "rotation": -182.1211, "length": 13.50926 },
+        { "name": "sash_L_2", "parent": "sash_L_1", "x": 13.50926, "y": 0, "rotation": -1.14939, "length": 17.52855 },
+        { "name": "sash_R_1", "parent": "hip", "x": 2, "y": -2, "rotation": -175.10091, "length": 17.56417 },
+        { "name": "sash_R_2", "parent": "sash_R_1", "x": 17.56417, "y": 0, "rotation": -1.43086, "length": 16.53028 },
+        { "name": "robe_front", "parent": "hip", "x": -3, "y": 0, "rotation": -177.47388, "length": 34.03307 },
+        { "name": "robe_back", "parent": "hip", "x": -3, "y": 0, "rotation": -182.52612, "length": 34.03307 },
+        { "name": "scabbard", "parent": "hip", "x": 1, "y": -9, "rotation": -167.27564, "length": 31.7805 },
+        { "name": "weapon", "parent": "hand_R", "x": 0, "y": 0, "rotation": -117.85965, "length": 39.58851 },
+        { "name": "ik_foot_L", "parent": "root", "length": 0, "x": 5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_L", "parent": "root", "length": 0, "x": 15, "y": 48, "rotation": 0 },
+        { "name": "ik_foot_R", "parent": "root", "length": 0, "x": -5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_R", "parent": "root", "length": 0, "x": -18.5, "y": 48, "rotation": 0 }
+      ],
+      "ik": [
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        {
+          "name": "ik_hand_L",
+          "bones": ["upper_arm_L", "lower_arm_L"],
+          "target": "ik_hand_L",
+          "bendPositive": true,
+          "mix": 1
+        },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        {
+          "name": "ik_hand_R",
+          "bones": ["upper_arm_R", "lower_arm_R"],
+          "target": "ik_hand_R",
+          "bendPositive": false,
+          "mix": 1
+        }
+      ],
+      "chains": [
+        {
+          "name": "hair_back",
+          "kind": "hair",
+          "bones": ["hair_back_1", "hair_back_2"],
+          "stiffness": 0.4,
+          "damping": 0.3,
+          "gravity": 0.5,
+          "inertia": 0.7
+        },
+        {
+          "name": "hair_ribbon",
+          "kind": "ribbon",
+          "bones": ["ribbon_1", "ribbon_2"],
+          "stiffness": 0.25,
+          "damping": 0.35,
+          "gravity": 0.7,
+          "inertia": 0.8
+        },
+        {
+          "name": "sash_L",
+          "kind": "sash",
+          "bones": ["sash_L_1", "sash_L_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sash_R",
+          "kind": "sash",
+          "bones": ["sash_R_1", "sash_R_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sleeve_L",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_L"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        },
+        {
+          "name": "sleeve_R",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_R"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        }
+      ],
+      "roles": {
+        "root": "root",
+        "hips": "hip",
+        "spine_mid": "spine_mid",
+        "spine_upper": "spine_upper",
+        "head": "head",
+        "upper_arm_L": "upper_arm_L",
+        "lower_arm_L": "lower_arm_L",
+        "hand_L": "hand_L",
+        "thigh_L": "thigh_L",
+        "shin_L": "shin_L",
+        "foot_L": "foot_L",
+        "ik_foot_L": "ik_foot_L",
+        "ik_hand_L": "ik_hand_L",
+        "upper_arm_R": "upper_arm_R",
+        "lower_arm_R": "lower_arm_R",
+        "hand_R": "hand_R",
+        "thigh_R": "thigh_R",
+        "shin_R": "shin_R",
+        "foot_R": "foot_R",
+        "ik_foot_R": "ik_foot_R",
+        "ik_hand_R": "ik_hand_R"
+      },
+      "sockets": [
+        { "name": "origin", "bone": "root", "x": 0, "y": 0 },
+        { "name": "hand_R", "bone": "hand_R", "x": 0, "y": 0 },
+        { "name": "hand_L", "bone": "hand_L", "x": 0, "y": 0 },
+        { "name": "back", "bone": "spine_upper", "x": -5, "y": 0 },
+        { "name": "chest", "bone": "spine_mid", "x": -9, "y": 0 },
+        { "name": "head_fx", "bone": "head", "x": 3.5, "y": 2 },
+        { "name": "head_top", "bone": "root", "x": 0, "y": 104 },
+        { "name": "orbit_center", "bone": "root", "x": 0, "y": 60 },
+        { "name": "fly_feet", "bone": "root", "x": 0, "y": 0 }
+      ],
+      "slots": [
+        { "name": "wing", "bone": "spine_upper", "paperdoll": "wing", "attachment": null },
+        { "name": "cape", "bone": "spine_upper", "paperdoll": "cape", "attachment": null },
+        { "name": "sword_back", "bone": "spine_upper", "paperdoll": "sword_back", "attachment": null },
+        { "name": "arm_L", "bone": "upper_arm_L", "paperdoll": "arm_L", "attachment": "arm_L" },
+        { "name": "hair_back", "bone": "head", "paperdoll": "hair_back", "attachment": "hair_back" },
+        { "name": "body", "bone": "hip", "paperdoll": "body", "attachment": "body" },
+        { "name": "outfit_lower", "bone": "hip", "paperdoll": "outfit_lower", "attachment": "outfit_lower" },
+        { "name": "outfit_upper", "bone": "spine_upper", "paperdoll": "outfit_upper", "attachment": "outfit_upper" },
+        { "name": "head", "bone": "head", "paperdoll": "head", "attachment": "head" },
+        { "name": "hair_front", "bone": "head", "paperdoll": "hair_front", "attachment": "hair_front" },
+        { "name": "headwear", "bone": "head", "paperdoll": "headwear", "attachment": "headwear" },
+        { "name": "arm_R", "bone": "upper_arm_R", "paperdoll": "arm_R", "attachment": "arm_R" },
+        { "name": "weapon_R", "bone": "weapon", "paperdoll": "weapon_R", "attachment": "weapon_R" }
+      ],
+      "skins": [
+        {
+          "name": "default",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.83984, 0.35938, 0.89844, 0.35938, 0.89844, 0.46094, 0.83984, 0.46094, 0.91016, 0.35938, 0.9668,
+                  0.35938, 0.9668, 0.45703, 0.91016, 0.45703, 0.43555, 0.50586, 0.48828, 0.50586, 0.48828, 0.57422,
+                  0.43555, 0.57422, 0.76563, 0.50586, 0.81055, 0.50586, 0.81055, 0.55664, 0.76563, 0.55664
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -5.29232, -4.27099, -1.39272, 10.21324, 23.71329, 3.45393, 19.81369, -11.0303, 4.30813, -3.2311,
+                  8.07775, 10.77033, 32.21814, 4.27099, 28.44853, -9.73044, 9.74901, -4.17815, 13.25865, 8.85767,
+                  30.15692, 4.30813, 26.64728, -8.72768, 17.77104, -3.2311, 20.76074, 7.87348, 33.31374, 4.49383,
+                  30.32405, -6.61075
+                ],
+                "weights": [
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]]
+                ]
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.39648, 0.35938, 0.43359, 0.35938, 0.43359, 0.48438, 0.39648, 0.48438, 0.00586, 0.50586, 0.08789,
+                  0.50586, 0.08789, 0.60156, 0.00586, 0.60156, 0.15625, 0.50586, 0.16992, 0.50586, 0.16992, 0.59766,
+                  0.15625, 0.59766, 0.29883, 0.50586, 0.3125, 0.50586, 0.3125, 0.58789, 0.29883, 0.58789
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  12, 7.5, 12, -2, -20, -2, -20, 7.5, -7.5, 12.5, -7.5, -8.5, -32, -8.5, -32, 12.5, 9.5, 4, 9.5, 0.5,
+                  -14, 0.5, -14, 4, -7.5, 4, -7.5, 0.5, -28.5, 0.5, -28.5, 4
+                ],
+                "weights": [
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]]
+                ]
+              }
+            },
+            "body": {
+              "body": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.58789, 0.50586, 0.63086, 0.50586, 0.63086, 0.56641, 0.58789, 0.56641, 0.84961, 0.00586, 0.91016,
+                  0.00586, 0.91016, 0.16797, 0.84961, 0.16797, 0.29492, 0.35938, 0.33008, 0.35938, 0.33008, 0.49219,
+                  0.29492, 0.49219, 0.24805, 0.35938, 0.2832, 0.35938, 0.2832, 0.49219, 0.24805, 0.49219, 0.51563,
+                  0.35938, 0.58203, 0.35938, 0.58203, 0.4707, 0.51563, 0.4707, 0.44531, 0.35938, 0.50391, 0.35938,
+                  0.50391, 0.47461, 0.44531, 0.47461, 0.92188, 0.50586, 0.95898, 0.50586, 0.95898, 0.55078, 0.92188,
+                  0.55078, 0.00586, 0.61328, 0.05859, 0.61328, 0.05859, 0.65625, 0.00586, 0.65625
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16, 20, 21, 22, 22, 23, 20, 24, 25, 26, 26, 27, 24, 28, 29, 30, 30, 31, 28
+                ],
+                "vertices": [
+                  36.5, 6, 36.5, -5, 21, -5, 21, 6, 33.5, 7.5, 33.5, -8, -8, -8, -8, 7.5, -0.5, 8.5, -0.5, -0.5, -34.5,
+                  -0.5, -34.5, 8.5, -0.5, 0, -0.5, -9, -34.5, -9, -34.5, 0, -20.5, 17, -20.5, 0, -49, 0, -49, 17, -20.5,
+                  0, -20.5, -15, -50, -15, -50, 0, -39.5, 16.5, -39.5, 7, -51, 7, -51, 16.5, -39.5, -4, -39.5, -17.5,
+                  -50.5, -17.5, -50.5, -4
+                ],
+                "weights": [
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]]
+                ]
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.78125, 0.00586, 0.83789, 0.00586, 0.83789, 0.17578, 0.78125, 0.17578, 0.39063, 0.00586, 0.57422,
+                  0.00586, 0.57422, 0.17578, 0.39063, 0.17578, 0.3418, 0.35938, 0.38477, 0.35938, 0.38477, 0.48828,
+                  0.3418, 0.48828
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8],
+                "vertices": [
+                  6.5, 12.5, 6.5, -2, -37, -2, -37, 12.5, 6.5, 26, 6.5, -21, -37, -21, -37, 26, 2, -7, 2, -18, -31, -18,
+                  -31, -7
+                ],
+                "weights": [
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]]
+                ]
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.69531, 0.35938, 0.82813, 0.35938, 0.82813, 0.46289, 0.69531, 0.46289, 0.73242, 0.50586, 0.75391,
+                  0.50586, 0.75391, 0.56055, 0.73242, 0.56055, 0.13086, 0.61328, 0.15234, 0.61328, 0.15234, 0.64258,
+                  0.13086, 0.64258, 0.69727, 0.50586, 0.7207, 0.50586, 0.7207, 0.56055, 0.69727, 0.56055, 0.40039,
+                  0.50586, 0.42383, 0.50586, 0.42383, 0.57813, 0.40039, 0.57813
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16
+                ],
+                "vertices": [
+                  9.5, 23.5, 9.5, -10.5, -17, -10.5, -17, 23.5, -14.5, 5.5, -14.5, 0, -28.5, 0, -28.5, 5.5, -28.5, 5.5,
+                  -28.5, 0, -36, 0, -36, 5.5, -14.5, 0, -14.5, -6, -28.5, -6, -28.5, 0, -28.5, 0, -28.5, -6, -47, -6,
+                  -47, 0
+                ],
+                "weights": [
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]]
+                ]
+              }
+            },
+            "head": {
+              "head": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.18164, 0.50586, 0.22852, 0.50586, 0.22852, 0.5918, 0.18164, 0.5918],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.5, 7, 9.5, -5, -12.5, -5, -12.5, 7],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.5, 0.50586, 0.57617, 0.50586, 0.57617, 0.57031, 0.5, 0.57031, 0.82227, 0.50586, 0.91016, 0.50586,
+                  0.91016, 0.55078, 0.82227, 0.55078
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4],
+                "vertices": [15.5, 15, 15.5, -4.5, -1, -4.5, -1, 15, -1, 18.5, -1, -4, -12.5, -4, -12.5, 18.5],
+                "weights": [
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]]
+                ]
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.16406, 0.61328, 0.24414, 0.61328, 0.24414, 0.63086, 0.16406, 0.63086],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [11, 17, 11, -3.5, 6.5, -3.5, 6.5, 17],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.09961, 0.50586, 0.14453, 0.50586, 0.14453, 0.59961, 0.09961, 0.59961, 0.32422, 0.50586, 0.38867,
+                  0.50586, 0.38867, 0.58203, 0.32422, 0.58203, 0.07031, 0.61328, 0.11914, 0.61328, 0.11914, 0.6543,
+                  0.07031, 0.6543, 0.64258, 0.50586, 0.68555, 0.50586, 0.68555, 0.5625, 0.64258, 0.5625
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  2.44411, -10.90992, -2.03675, -0.3188, 20.06646, 9.03256, 24.54732, -1.55856, 15.9044, -10.64426,
+                  9.47534, 4.5517, 27.4342, 12.14968, 33.86326, -3.04628, 22.35117, -7.91678, 17.48067, 3.59531,
+                  27.15082, 7.68653, 32.02132, -3.82556, 23.00647, -8.18244, 18.72043, 1.9482, 32.07446, 7.59798,
+                  36.3605, -2.53266
+                ],
+                "weights": [
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]]
+                ]
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.16602, 0.35938, 0.23633, 0.35938, 0.23633, 0.49219, 0.16602, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [10.41338, -15.42114, 2.00184, 0.49257, 32.06107, 16.38102, 40.4726, 0.46731],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              },
+              "weapon_R_mirrored": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.16602, 0.35938, 0.23633, 0.35938, 0.23633, 0.49219, 0.16602, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [10.41338, -15.42114, 2.00184, 0.49257, 32.06107, 16.38102, 40.4726, 0.46731],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              }
+            }
+          }
+        },
+        {
+          "name": "bones-only",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "region",
+                "path": "slot_arm_L",
+                "x": 14.01071,
+                "y": 0.11142,
+                "rotation": 74.93151,
+                "width": 18.5,
+                "height": 35
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "region",
+                "path": "slot_hair_back",
+                "x": -10,
+                "y": 2,
+                "rotation": -90,
+                "width": 21,
+                "height": 44
+              }
+            },
+            "body": {
+              "body": {
+                "type": "region",
+                "path": "slot_body",
+                "x": -7.25,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 34.5,
+                "height": 87.5
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "region",
+                "path": "slot_outfit_lower",
+                "x": -15.25,
+                "y": 2.5,
+                "rotation": -90,
+                "width": 47,
+                "height": 43.5
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "region",
+                "path": "slot_outfit_upper",
+                "x": -18.75,
+                "y": 6.5,
+                "rotation": -90,
+                "width": 34,
+                "height": 56.5
+              }
+            },
+            "head": {
+              "head": {
+                "type": "region",
+                "path": "slot_head",
+                "x": -1.5,
+                "y": 1,
+                "rotation": -90,
+                "width": 12,
+                "height": 22
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "region",
+                "path": "slot_hair_front",
+                "x": 1.5,
+                "y": 7,
+                "rotation": -90,
+                "width": 23,
+                "height": 28
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "region",
+                "path": "slot_headwear",
+                "x": 8.75,
+                "y": 6.75,
+                "rotation": -90,
+                "width": 20.5,
+                "height": 4.5
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "region",
+                "path": "slot_arm_R",
+                "x": 17.16187,
+                "y": -1.42573,
+                "rotation": 112.9321,
+                "width": 17,
+                "height": 34.5
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 21.23722,
+                "y": 0.47994,
+                "rotation": 117.85965,
+                "width": 18,
+                "height": 34
+              },
+              "weapon_R_mirrored": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 21.23722,
+                "y": 0.47994,
+                "rotation": 117.85965,
+                "width": 18,
+                "height": 34
+              }
+            }
+          }
+        }
+      ]
+    },
+    "E": {
+      "format": "vgtd-rig",
+      "version": 1,
+      "id": "kiem-tu_E",
+      "kind": "player",
+      "direction": "E",
+      "canvas": { "width": 128, "height": 128 },
+      "bones": [
+        { "name": "root", "parent": null, "x": 0, "y": 0, "rotation": 0, "length": 0 },
+        { "name": "hip", "parent": "root", "x": -5, "y": 51, "rotation": 90, "length": 6 },
+        { "name": "spine_mid", "parent": "hip", "x": 6, "y": 0, "rotation": 0, "length": 12 },
+        { "name": "spine_upper", "parent": "spine_mid", "x": 12, "y": 0, "rotation": 0, "length": 8 },
+        { "name": "neck", "parent": "spine_upper", "x": 8, "y": 0, "rotation": -14.62087, "length": 11.88486 },
+        { "name": "head", "parent": "neck", "x": 11.88486, "y": 0, "rotation": 14.62087, "length": 6 },
+        { "name": "upper_arm_R", "parent": "spine_upper", "x": 4, "y": -1, "rotation": -180, "length": 13 },
+        { "name": "lower_arm_R", "parent": "upper_arm_R", "x": 13, "y": 0, "rotation": 17.10273, "length": 13.60147 },
+        { "name": "hand_R", "parent": "lower_arm_R", "x": 13.60147, "y": 0, "rotation": 72.89727, "length": 0 },
+        { "name": "upper_arm_L", "parent": "spine_upper", "x": 4, "y": 3, "rotation": -184.76364, "length": 12.04159 },
+        {
+          "name": "lower_arm_L",
+          "parent": "upper_arm_L",
+          "x": 12.04159,
+          "y": 0,
+          "rotation": 18.79989,
+          "length": 12.36932
+        },
+        { "name": "hand_L", "parent": "lower_arm_L", "x": 12.36932, "y": 0, "rotation": 75.96376, "length": 0 },
+        { "name": "thigh_R", "parent": "hip", "x": -4.5, "y": 4, "rotation": -181.24536, "length": 23.00543 },
+        { "name": "shin_R", "parent": "thigh_R", "x": 23.00543, "y": 0, "rotation": -0.26207, "length": 19.00658 },
+        { "name": "foot_R", "parent": "shin_R", "x": 19.00658, "y": 0, "rotation": 54.63754, "length": 7.5 },
+        { "name": "thigh_L", "parent": "hip", "x": -4.5, "y": -4, "rotation": -178.75464, "length": 23.00543 },
+        { "name": "shin_L", "parent": "thigh_L", "x": 23.00543, "y": 0, "rotation": 0.26207, "length": 19.00658 },
+        { "name": "foot_L", "parent": "shin_L", "x": 19.00658, "y": 0, "rotation": 51.62267, "length": 7.5 },
+        { "name": "hair_back_1", "parent": "head", "x": 3, "y": 1.5, "rotation": -186.63251, "length": 21.64486 },
+        { "name": "hair_back_2", "parent": "hair_back_1", "x": 21.64486, "y": 0, "rotation": 6.63251, "length": 10 },
+        { "name": "hair_front_1", "parent": "head", "x": 7, "y": 0, "rotation": -173.99099, "length": 9.55249 },
+        {
+          "name": "hair_front_2",
+          "parent": "hair_front_1",
+          "x": 9.55249,
+          "y": 0,
+          "rotation": -0.56867,
+          "length": 10.54751
+        },
+        { "name": "ribbon_1", "parent": "head", "x": 9.5, "y": 0, "rotation": -185.19443, "length": 22.09072 },
+        { "name": "ribbon_2", "parent": "ribbon_1", "x": 22.09072, "y": 0, "rotation": -3.96792, "length": 15.70032 },
+        {
+          "name": "sleeve_tip_R",
+          "parent": "lower_arm_R",
+          "x": 6.24932,
+          "y": -3.49227,
+          "rotation": 6.85976,
+          "length": 9.84886
+        },
+        {
+          "name": "sleeve_tip_L",
+          "parent": "lower_arm_L",
+          "x": 7.1548,
+          "y": -0.24254,
+          "rotation": 6.5198,
+          "length": 8.544
+        },
+        { "name": "sash_L_1", "parent": "hip", "x": 2, "y": 1.5, "rotation": -182.1211, "length": 13.50926 },
+        { "name": "sash_L_2", "parent": "sash_L_1", "x": 13.50926, "y": 0, "rotation": -1.14939, "length": 17.52855 },
+        { "name": "sash_R_1", "parent": "hip", "x": 2, "y": -2, "rotation": -175.10091, "length": 17.56417 },
+        { "name": "sash_R_2", "parent": "sash_R_1", "x": 17.56417, "y": 0, "rotation": -1.43086, "length": 16.53028 },
+        { "name": "robe_front", "parent": "hip", "x": -3, "y": 0, "rotation": -177.47388, "length": 34.03307 },
+        { "name": "robe_back", "parent": "hip", "x": -3, "y": 0, "rotation": -182.52612, "length": 34.03307 },
+        { "name": "scabbard", "parent": "hip", "x": 1, "y": -9, "rotation": -167.27564, "length": 31.7805 },
+        { "name": "weapon", "parent": "hand_R", "x": 0, "y": 0, "rotation": -69.44395, "length": 38.44802 },
+        { "name": "ik_foot_L", "parent": "root", "length": 0, "x": 0, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_L", "parent": "root", "length": 0, "x": -6, "y": 49, "rotation": 0 },
+        { "name": "ik_foot_R", "parent": "root", "length": 0, "x": -10, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 0, "y": 47, "rotation": 0 }
+      ],
+      "ik": [
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        {
+          "name": "ik_hand_L",
+          "bones": ["upper_arm_L", "lower_arm_L"],
+          "target": "ik_hand_L",
+          "bendPositive": true,
+          "mix": 1
+        },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        {
+          "name": "ik_hand_R",
+          "bones": ["upper_arm_R", "lower_arm_R"],
+          "target": "ik_hand_R",
+          "bendPositive": true,
+          "mix": 1
+        }
+      ],
+      "chains": [
+        {
+          "name": "hair_back",
+          "kind": "hair",
+          "bones": ["hair_back_1", "hair_back_2"],
+          "stiffness": 0.4,
+          "damping": 0.3,
+          "gravity": 0.5,
+          "inertia": 0.7
+        },
+        {
+          "name": "hair_ribbon",
+          "kind": "ribbon",
+          "bones": ["ribbon_1", "ribbon_2"],
+          "stiffness": 0.25,
+          "damping": 0.35,
+          "gravity": 0.7,
+          "inertia": 0.8
+        },
+        {
+          "name": "sash_L",
+          "kind": "sash",
+          "bones": ["sash_L_1", "sash_L_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sash_R",
+          "kind": "sash",
+          "bones": ["sash_R_1", "sash_R_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sleeve_L",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_L"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        },
+        {
+          "name": "sleeve_R",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_R"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        }
+      ],
+      "roles": {
+        "root": "root",
+        "hips": "hip",
+        "spine_mid": "spine_mid",
+        "spine_upper": "spine_upper",
+        "head": "head",
+        "upper_arm_L": "upper_arm_L",
+        "lower_arm_L": "lower_arm_L",
+        "hand_L": "hand_L",
+        "thigh_L": "thigh_L",
+        "shin_L": "shin_L",
+        "foot_L": "foot_L",
+        "ik_foot_L": "ik_foot_L",
+        "ik_hand_L": "ik_hand_L",
+        "upper_arm_R": "upper_arm_R",
+        "lower_arm_R": "lower_arm_R",
+        "hand_R": "hand_R",
+        "thigh_R": "thigh_R",
+        "shin_R": "shin_R",
+        "foot_R": "foot_R",
+        "ik_foot_R": "ik_foot_R",
+        "ik_hand_R": "ik_hand_R"
+      },
+      "sockets": [
+        { "name": "origin", "bone": "root", "x": 0, "y": 0 },
+        { "name": "hand_R", "bone": "hand_R", "x": 0, "y": 0 },
+        { "name": "hand_L", "bone": "hand_L", "x": 0, "y": 0 },
+        { "name": "back", "bone": "spine_upper", "x": -5, "y": -5 },
+        { "name": "chest", "bone": "spine_mid", "x": -9, "y": -5 },
+        { "name": "head_fx", "bone": "head", "x": 3.5, "y": -2 },
+        { "name": "head_top", "bone": "root", "x": 0, "y": 104 },
+        { "name": "orbit_center", "bone": "root", "x": 0, "y": 60 },
+        { "name": "fly_feet", "bone": "root", "x": 0, "y": 0 }
+      ],
+      "slots": [
+        { "name": "wing", "bone": "spine_upper", "paperdoll": "wing", "attachment": null },
+        { "name": "cape", "bone": "spine_upper", "paperdoll": "cape", "attachment": null },
+        { "name": "sword_back", "bone": "spine_upper", "paperdoll": "sword_back", "attachment": null },
+        { "name": "arm_L", "bone": "upper_arm_L", "paperdoll": "arm_L", "attachment": "arm_L" },
+        { "name": "hair_back", "bone": "head", "paperdoll": "hair_back", "attachment": "hair_back" },
+        { "name": "body", "bone": "hip", "paperdoll": "body", "attachment": "body" },
+        { "name": "outfit_lower", "bone": "hip", "paperdoll": "outfit_lower", "attachment": "outfit_lower" },
+        { "name": "outfit_upper", "bone": "spine_upper", "paperdoll": "outfit_upper", "attachment": "outfit_upper" },
+        { "name": "head", "bone": "head", "paperdoll": "head", "attachment": "head" },
+        { "name": "hair_front", "bone": "head", "paperdoll": "hair_front", "attachment": "hair_front" },
+        { "name": "headwear", "bone": "head", "paperdoll": "headwear", "attachment": "headwear" },
+        { "name": "arm_R", "bone": "upper_arm_R", "paperdoll": "arm_R", "attachment": "arm_R" },
+        { "name": "weapon_R", "bone": "weapon", "paperdoll": "weapon_R", "attachment": "weapon_R" }
+      ],
+      "skins": [
+        {
+          "name": "default",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.62109, 0.35938, 0.66797, 0.35938, 0.66797, 0.46094, 0.62109, 0.46094, 0.55859, 0.35938, 0.60938,
+                  0.35938, 0.60938, 0.46094, 0.55859, 0.46094, 0.08594, 0.50391, 0.13672, 0.50391, 0.13672, 0.57617,
+                  0.08594, 0.57617, 0.43359, 0.50391, 0.46289, 0.50391, 0.46289, 0.55664, 0.43359, 0.55664
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -4.98273, -6.43602, -5.97927, 5.52252, 19.93092, 7.68171, 20.92746, -4.27684, 3.94466, -5.19034,
+                  2.86507, 7.76475, 28.77526, 9.92393, 29.85485, -3.03116, 9.42566, -4.73359, 8.34607, 8.2215, 26.78217,
+                  9.75784, 27.86176, -3.19725, 17.02432, 0.41523, 16.40148, 7.88932, 29.85485, 9.01043, 30.47769,
+                  1.53634
+                ],
+                "weights": [
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]]
+                ]
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.15625, 0.35938, 0.19336, 0.35938, 0.19336, 0.48438, 0.15625, 0.48438, 0.72852, 0.35938, 0.80469,
+                  0.35938, 0.80469, 0.45117, 0.72852, 0.45117, 0.81641, 0.35938, 0.83008, 0.35938, 0.83008, 0.45117,
+                  0.81641, 0.45117, 0.06055, 0.50391, 0.07422, 0.50391, 0.07422, 0.58594, 0.06055, 0.58594
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  12, 7.5, 12, -2, -20, -2, -20, 7.5, -7.5, 13, -7.5, -6.5, -31, -6.5, -31, 13, 9.5, 4, 9.5, 0.5, -14,
+                  0.5, -14, 4, -7.5, 4, -7.5, 0.5, -28.5, 0.5, -28.5, 4
+                ],
+                "weights": [
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]]
+                ]
+              }
+            },
+            "body": {
+              "body": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.32031, 0.50391, 0.37695, 0.50391, 0.37695, 0.56445, 0.32031, 0.56445, 0.64258, 0.00586, 0.70313,
+                  0.00586, 0.70313, 0.16797, 0.64258, 0.16797, 0.10938, 0.35938, 0.14453, 0.35938, 0.14453, 0.48633,
+                  0.10938, 0.48633, 0.00586, 0.35938, 0.04102, 0.35938, 0.04102, 0.49219, 0.00586, 0.49219, 0.40039,
+                  0.35938, 0.43164, 0.35938, 0.43164, 0.46875, 0.40039, 0.46875, 0.20508, 0.35938, 0.2832, 0.35938,
+                  0.2832, 0.47656, 0.20508, 0.47656, 0.7207, 0.50391, 0.72852, 0.50391, 0.72852, 0.54883, 0.7207,
+                  0.54883, 0.62109, 0.50391, 0.67383, 0.50391, 0.67383, 0.54883, 0.62109, 0.54883
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16, 20, 21, 22, 22, 23, 20, 24, 25, 26, 26, 27, 24, 28, 29, 30, 30, 31, 28
+                ],
+                "vertices": [
+                  36.5, 4.5, 36.5, -10, 21, -10, 21, 4.5, 33.5, 7.5, 33.5, -8, -8, -8, -8, 7.5, -2, 8.5, -2, -0.5,
+                  -34.5, -0.5, -34.5, 8.5, -0.5, 0, -0.5, -9, -34.5, -9, -34.5, 0, -20.5, 8, -20.5, 0, -48.5, 0, -48.5,
+                  8, -20.5, 0, -20.5, -20, -50.5, -20, -50.5, 0, -39.5, 2, -39.5, 0, -51, 0, -51, 2, -39.5, 0, -39.5,
+                  -13.5, -51, -13.5, -51, 0
+                ],
+                "weights": [
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]]
+                ]
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.58594, 0.00586, 0.63086, 0.00586, 0.63086, 0.16992, 0.58594, 0.16992, 0.24414, 0.00586, 0.35938,
+                  0.00586, 0.35938, 0.17383, 0.24414, 0.17383, 0.05273, 0.35938, 0.09766, 0.35938, 0.09766, 0.48633,
+                  0.05273, 0.48633
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8],
+                "vertices": [
+                  6, 9.5, 6, -2, -36, -2, -36, 9.5, 6.5, 9.5, 6.5, -20, -36.5, -20, -36.5, 9.5, 2, -7, 2, -18.5, -30.5,
+                  -18.5, -30.5, -7
+                ],
+                "weights": [
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]]
+                ]
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.44336, 0.35938, 0.54688, 0.35938, 0.54688, 0.46289, 0.44336, 0.46289, 0.74023, 0.50391, 0.75391,
+                  0.50391, 0.75391, 0.53906, 0.74023, 0.53906, 0.18359, 0.50391, 0.20508, 0.50391, 0.20508, 0.57617,
+                  0.18359, 0.57617, 0.68555, 0.50391, 0.70898, 0.50391, 0.70898, 0.54883, 0.68555, 0.54883, 0.14844,
+                  0.50391, 0.17188, 0.50391, 0.17188, 0.57617, 0.14844, 0.57617
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16
+                ],
+                "vertices": [
+                  9.5, 10, 9.5, -16.5, -17, -16.5, -17, 10, -19.5, 3.5, -19.5, 0, -28.5, 0, -28.5, 3.5, -28.5, 5.5,
+                  -28.5, 0, -47, 0, -47, 5.5, -17, 0, -17, -6, -28.5, -6, -28.5, 0, -28.5, 0, -28.5, -6, -47, -6, -47, 0
+                ],
+                "weights": [
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]]
+                ]
+              }
+            },
+            "head": {
+              "head": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.8418, 0.35938, 0.89844, 0.35938, 0.89844, 0.44531, 0.8418, 0.44531],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.5, 7, 9.5, -7.5, -12.5, -7.5, -12.5, 7],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.2168, 0.50391, 0.30859, 0.50391, 0.30859, 0.56836, 0.2168, 0.56836, 0.51953, 0.50391, 0.60938,
+                  0.50391, 0.60938, 0.54883, 0.51953, 0.54883
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4],
+                "vertices": [15.5, 11.5, 15.5, -12, -1, -12, -1, 11.5, -1, 12, -1, -11, -12.5, -11, -12.5, 12],
+                "weights": [
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_1", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]],
+                  [["hair_front_2", 1]]
+                ]
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.76563, 0.50391, 0.85938, 0.50391, 0.85938, 0.52148, 0.76563, 0.52148],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [11, 13, 11, -11, 6.5, -11, 6.5, 13],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.67969, 0.35938, 0.7168, 0.35938, 0.7168, 0.45703, 0.67969, 0.45703, 0.00586, 0.50391, 0.04883,
+                  0.50391, 0.04883, 0.58594, 0.00586, 0.58594, 0.47461, 0.50391, 0.50781, 0.50391, 0.50781, 0.55078,
+                  0.47461, 0.55078, 0.38867, 0.50391, 0.42188, 0.50391, 0.42188, 0.56055, 0.38867, 0.56055
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -3, -3, -3, 6.5, 22, 6.5, 22, -3, 10.5, -2.5, 10.5, 8.5, 31.5, 8.5, 31.5, -2.5, 17.5, -1, 17.5, 7.5,
+                  29.5, 7.5, 29.5, -1, 19, -0.5, 19, 8, 33.5, 8, 33.5, -0.5
+                ],
+                "weights": [
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]]
+                ]
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.91406, 0.00586, 0.98047, 0.00586, 0.98047, 0.13867, 0.91406, 0.13867],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [1.17041, -2.57491, 7.13951, 13.34269, 38.9747, 1.40449, 33.0056, -14.5131],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              },
+              "weapon_R_mirrored": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.91406, 0.00586, 0.98047, 0.00586, 0.98047, 0.13867, 0.91406, 0.13867],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [1.17041, -2.57491, 7.13951, 13.34269, 38.9747, 1.40449, 33.0056, -14.5131],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              }
+            }
+          }
+        },
+        {
+          "name": "bones-only",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "region",
+                "path": "slot_arm_L",
+                "x": 12.39454,
+                "y": 1.78548,
+                "rotation": 94.76364,
+                "width": 13.5,
+                "height": 36
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "region",
+                "path": "slot_hair_back",
+                "x": -9.5,
+                "y": 3.25,
+                "rotation": -90,
+                "width": 19.5,
+                "height": 43
+              }
+            },
+            "body": {
+              "body": {
+                "type": "region",
+                "path": "slot_body",
+                "x": -7.25,
+                "y": -5.75,
+                "rotation": -90,
+                "width": 28.5,
+                "height": 87.5
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "region",
+                "path": "slot_outfit_lower",
+                "x": -15,
+                "y": -5.25,
+                "rotation": -90,
+                "width": 29.5,
+                "height": 43
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "region",
+                "path": "slot_outfit_upper",
+                "x": -18.75,
+                "y": -3.25,
+                "rotation": -90,
+                "width": 26.5,
+                "height": 56.5
+              }
+            },
+            "head": {
+              "head": {
+                "type": "region",
+                "path": "slot_head",
+                "x": -1.5,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 14.5,
+                "height": 22
+              }
+            },
+            "hair_front": {
+              "hair_front": {
+                "type": "region",
+                "path": "slot_hair_front",
+                "x": 1.5,
+                "y": 0,
+                "rotation": -90,
+                "width": 24,
+                "height": 28
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "region",
+                "path": "slot_headwear",
+                "x": 8.75,
+                "y": 1,
+                "rotation": -90,
+                "width": 24,
+                "height": 4.5
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "region",
+                "path": "slot_arm_R",
+                "x": 15.25,
+                "y": 2.75,
+                "rotation": 90,
+                "width": 11.5,
+                "height": 36.5
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.07256,
+                "y": -0.58521,
+                "rotation": 69.44395,
+                "width": 17,
+                "height": 34
+              },
+              "weapon_R_mirrored": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.07256,
+                "y": -0.58521,
+                "rotation": 69.44395,
+                "width": 17,
+                "height": 34
+              }
+            }
+          }
+        }
+      ]
+    },
+    "NE": {
+      "format": "vgtd-rig",
+      "version": 1,
+      "id": "kiem-tu_NE",
+      "kind": "player",
+      "direction": "NE",
+      "canvas": { "width": 128, "height": 128 },
+      "bones": [
+        { "name": "root", "parent": null, "x": 0, "y": 0, "rotation": 0, "length": 0 },
+        { "name": "hip", "parent": "root", "x": -2, "y": 51, "rotation": 90, "length": 6 },
+        { "name": "spine_mid", "parent": "hip", "x": 6, "y": 0, "rotation": 0, "length": 12 },
+        { "name": "spine_upper", "parent": "spine_mid", "x": 12, "y": 0, "rotation": 0, "length": 8 },
+        { "name": "neck", "parent": "spine_upper", "x": 8, "y": 0, "rotation": -4.96974, "length": 11.5434 },
+        { "name": "head", "parent": "neck", "x": 11.5434, "y": 0, "rotation": 4.96974, "length": 6 },
+        {
+          "name": "upper_arm_R",
+          "parent": "spine_upper",
+          "x": 4,
+          "y": -9.5,
+          "rotation": -155.22486,
+          "length": 14.31782
+        },
+        {
+          "name": "lower_arm_R",
+          "parent": "upper_arm_R",
+          "x": 14.31782,
+          "y": 0,
+          "rotation": -4.2191,
+          "length": 12.81601
+        },
+        { "name": "hand_R", "parent": "lower_arm_R", "x": 12.81601, "y": 0, "rotation": 69.44395, "length": 0 },
+        { "name": "upper_arm_L", "parent": "spine_upper", "x": 4, "y": 7, "rotation": -197.10273, "length": 13.60147 },
+        {
+          "name": "lower_arm_L",
+          "parent": "upper_arm_L",
+          "x": 13.60147,
+          "y": 0,
+          "rotation": 3.06649,
+          "length": 12.36932
+        },
+        { "name": "hand_L", "parent": "lower_arm_L", "x": 12.36932, "y": 0, "rotation": 104.03624, "length": 0 },
+        { "name": "thigh_R", "parent": "hip", "x": -4.5, "y": 4, "rotation": -181.24536, "length": 23.00543 },
+        { "name": "shin_R", "parent": "thigh_R", "x": 23.00543, "y": 0, "rotation": -0.26207, "length": 19.00658 },
+        { "name": "foot_R", "parent": "shin_R", "x": 19.00658, "y": 0, "rotation": -11.02137, "length": 4.60977 },
+        { "name": "thigh_L", "parent": "hip", "x": -4.5, "y": -4, "rotation": -178.75464, "length": 23.00543 },
+        { "name": "shin_L", "parent": "thigh_L", "x": 23.00543, "y": 0, "rotation": 0.26207, "length": 19.00658 },
+        { "name": "foot_L", "parent": "shin_L", "x": 19.00658, "y": 0, "rotation": 11.02137, "length": 4.60977 },
+        { "name": "hair_back_1", "parent": "head", "x": 3, "y": 1.5, "rotation": -181.33222, "length": 21.50581 },
+        { "name": "hair_back_2", "parent": "hair_back_1", "x": 21.50581, "y": 0, "rotation": 1.33222, "length": 10 },
+        { "name": "hair_front_1", "parent": "head", "x": 7, "y": 0, "rotation": -173.99099, "length": 9.55249 },
+        {
+          "name": "hair_front_2",
+          "parent": "hair_front_1",
+          "x": 9.55249,
+          "y": 0,
+          "rotation": -0.56867,
+          "length": 10.54751
+        },
+        { "name": "ribbon_1", "parent": "head", "x": 9.5, "y": 0, "rotation": -185.19443, "length": 22.09072 },
+        { "name": "ribbon_2", "parent": "ribbon_1", "x": 22.09072, "y": 0, "rotation": -3.96792, "length": 15.70032 },
+        {
+          "name": "sleeve_tip_R",
+          "parent": "lower_arm_R",
+          "x": 6.02762,
+          "y": -3.86236,
+          "rotation": 8.80171,
+          "length": 9.17878
+        },
+        {
+          "name": "sleeve_tip_L",
+          "parent": "lower_arm_L",
+          "x": 6.42719,
+          "y": 3.15296,
+          "rotation": -6.5198,
+          "length": 8.544
+        },
+        { "name": "sash_L_1", "parent": "hip", "x": 2, "y": 1.5, "rotation": -182.1211, "length": 13.50926 },
+        { "name": "sash_L_2", "parent": "sash_L_1", "x": 13.50926, "y": 0, "rotation": -1.14939, "length": 17.52855 },
+        { "name": "sash_R_1", "parent": "hip", "x": 2, "y": -2, "rotation": -175.10091, "length": 17.56417 },
+        { "name": "sash_R_2", "parent": "sash_R_1", "x": 17.56417, "y": 0, "rotation": -1.43086, "length": 16.53028 },
+        { "name": "robe_front", "parent": "hip", "x": -3, "y": 0, "rotation": -177.47388, "length": 34.03307 },
+        { "name": "robe_back", "parent": "hip", "x": -3, "y": 0, "rotation": -182.52612, "length": 34.03307 },
+        { "name": "scabbard", "parent": "hip", "x": 1, "y": 9, "rotation": -192.72436, "length": 31.7805 },
+        { "name": "weapon", "parent": "hand_R", "x": 0, "y": 0, "rotation": -65.55605, "length": 36.24914 },
+        { "name": "ik_foot_L", "parent": "root", "length": 0, "x": 3, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_L", "parent": "root", "length": 0, "x": -16, "y": 48, "rotation": 0 },
+        { "name": "ik_foot_R", "parent": "root", "length": 0, "x": -7, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 18, "y": 48, "rotation": 0 }
+      ],
+      "ik": [
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        {
+          "name": "ik_hand_L",
+          "bones": ["upper_arm_L", "lower_arm_L"],
+          "target": "ik_hand_L",
+          "bendPositive": true,
+          "mix": 1
+        },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        {
+          "name": "ik_hand_R",
+          "bones": ["upper_arm_R", "lower_arm_R"],
+          "target": "ik_hand_R",
+          "bendPositive": false,
+          "mix": 1
+        }
+      ],
+      "chains": [
+        {
+          "name": "hair_back",
+          "kind": "hair",
+          "bones": ["hair_back_1", "hair_back_2"],
+          "stiffness": 0.4,
+          "damping": 0.3,
+          "gravity": 0.5,
+          "inertia": 0.7
+        },
+        {
+          "name": "hair_ribbon",
+          "kind": "ribbon",
+          "bones": ["ribbon_1", "ribbon_2"],
+          "stiffness": 0.25,
+          "damping": 0.35,
+          "gravity": 0.7,
+          "inertia": 0.8
+        },
+        {
+          "name": "sash_L",
+          "kind": "sash",
+          "bones": ["sash_L_1", "sash_L_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sash_R",
+          "kind": "sash",
+          "bones": ["sash_R_1", "sash_R_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sleeve_L",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_L"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        },
+        {
+          "name": "sleeve_R",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_R"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        }
+      ],
+      "roles": {
+        "root": "root",
+        "hips": "hip",
+        "spine_mid": "spine_mid",
+        "spine_upper": "spine_upper",
+        "head": "head",
+        "upper_arm_L": "upper_arm_L",
+        "lower_arm_L": "lower_arm_L",
+        "hand_L": "hand_L",
+        "thigh_L": "thigh_L",
+        "shin_L": "shin_L",
+        "foot_L": "foot_L",
+        "ik_foot_L": "ik_foot_L",
+        "ik_hand_L": "ik_hand_L",
+        "upper_arm_R": "upper_arm_R",
+        "lower_arm_R": "lower_arm_R",
+        "hand_R": "hand_R",
+        "thigh_R": "thigh_R",
+        "shin_R": "shin_R",
+        "foot_R": "foot_R",
+        "ik_foot_R": "ik_foot_R",
+        "ik_hand_R": "ik_hand_R"
+      },
+      "sockets": [
+        { "name": "origin", "bone": "root", "x": 0, "y": 0 },
+        { "name": "hand_R", "bone": "hand_R", "x": 0, "y": 0 },
+        { "name": "hand_L", "bone": "hand_L", "x": 0, "y": 0 },
+        { "name": "back", "bone": "spine_upper", "x": -5, "y": -2 },
+        { "name": "chest", "bone": "spine_mid", "x": -9, "y": -2 },
+        { "name": "head_fx", "bone": "head", "x": 3.5, "y": -1 },
+        { "name": "head_top", "bone": "root", "x": 0, "y": 104 },
+        { "name": "orbit_center", "bone": "root", "x": 0, "y": 60 },
+        { "name": "fly_feet", "bone": "root", "x": 0, "y": 0 }
+      ],
+      "slots": [
+        { "name": "arm_L", "bone": "upper_arm_L", "paperdoll": "arm_L", "attachment": "arm_L" },
+        { "name": "body", "bone": "hip", "paperdoll": "body", "attachment": "body" },
+        { "name": "outfit_lower", "bone": "hip", "paperdoll": "outfit_lower", "attachment": "outfit_lower" },
+        { "name": "outfit_upper", "bone": "spine_upper", "paperdoll": "outfit_upper", "attachment": "outfit_upper" },
+        { "name": "head", "bone": "head", "paperdoll": "head", "attachment": "head" },
+        { "name": "hair_front", "bone": "head", "paperdoll": "hair_front", "attachment": null },
+        { "name": "hair_back", "bone": "head", "paperdoll": "hair_back", "attachment": "hair_back" },
+        { "name": "headwear", "bone": "head", "paperdoll": "headwear", "attachment": "headwear" },
+        { "name": "arm_R", "bone": "upper_arm_R", "paperdoll": "arm_R", "attachment": "arm_R" },
+        { "name": "weapon_R", "bone": "weapon", "paperdoll": "weapon_R", "attachment": "weapon_R" },
+        { "name": "sword_back", "bone": "spine_upper", "paperdoll": "sword_back", "attachment": null },
+        { "name": "cape", "bone": "spine_upper", "paperdoll": "cape", "attachment": null },
+        { "name": "wing", "bone": "spine_upper", "paperdoll": "wing", "attachment": null }
+      ],
+      "skins": [
+        {
+          "name": "default",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.70703, 0.35938, 0.76758, 0.35938, 0.76758, 0.4668, 0.70703, 0.4668, 0.7793, 0.35938, 0.83594,
+                  0.35938, 0.83594, 0.45703, 0.7793, 0.45703, 0.44141, 0.50977, 0.49414, 0.50977, 0.49414, 0.57813,
+                  0.44141, 0.57813, 0.67383, 0.50977, 0.7168, 0.50977, 0.7168, 0.5625, 0.67383, 0.5625
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -2.46297, -10.69737, -7.0213, 4.1172, 19.26262, 12.20456, 23.82095, -2.61001, 8.30793, -9.99892,
+                  4.04368, 3.85988, 27.93816, 11.21202, 32.2024, -2.64677, 13.56471, -8.38145, 9.59455, 4.52157,
+                  26.32068, 9.66807, 30.29084, -3.23494, 20.8801, -6.65369, 17.64515, 3.85988, 30.54817, 7.83004,
+                  33.78311, -2.68353
+                ],
+                "weights": [
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]]
+                ]
+              }
+            },
+            "body": {
+              "body": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.50586, 0.50977, 0.54297, 0.50977, 0.54297, 0.57031, 0.50586, 0.57031, 0.7168, 0.00586, 0.77734,
+                  0.00586, 0.77734, 0.16797, 0.7168, 0.16797, 0.36523, 0.35938, 0.40039, 0.35938, 0.40039, 0.49219,
+                  0.36523, 0.49219, 0.31836, 0.35938, 0.35352, 0.35938, 0.35352, 0.49219, 0.31836, 0.49219, 0.63867,
+                  0.35938, 0.69531, 0.35938, 0.69531, 0.47461, 0.63867, 0.47461, 0.56445, 0.35938, 0.62695, 0.35938,
+                  0.62695, 0.47656, 0.56445, 0.47656, 0.79297, 0.50977, 0.83203, 0.50977, 0.83203, 0.55469, 0.79297,
+                  0.55469, 0.72852, 0.50977, 0.78125, 0.50977, 0.78125, 0.55469, 0.72852, 0.55469
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16, 20, 21, 22, 22, 23, 20, 24, 25, 26, 26, 27, 24, 28, 29, 30, 30, 31, 28
+                ],
+                "vertices": [
+                  36.5, 4.5, 36.5, -5, 21, -5, 21, 4.5, 33.5, 7.5, 33.5, -8, -8, -8, -8, 7.5, -0.5, 8.5, -0.5, -0.5,
+                  -34.5, -0.5, -34.5, 8.5, -0.5, 0, -0.5, -9, -34.5, -9, -34.5, 0, -20.5, 15, -20.5, 0.5, -50, 0.5, -50,
+                  15, -20.5, -1, -20.5, -17, -50.5, -17, -50.5, -1, -39.5, 13.5, -39.5, 3.5, -51, 3.5, -51, 13.5, -39.5,
+                  -5, -39.5, -18.5, -51, -18.5, -51, -5
+                ],
+                "weights": [
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]]
+                ]
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.55273, 0.00586, 0.70508, 0.00586, 0.70508, 0.17383, 0.55273, 0.17383, 0.09961, 0.35938, 0.15039,
+                  0.35938, 0.15039, 0.49805, 0.09961, 0.49805, 0.41211, 0.35938, 0.45508, 0.35938, 0.45508, 0.48828,
+                  0.41211, 0.48828
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8],
+                "vertices": [
+                  6, 20.5, 6, -18.5, -37, -18.5, -37, 20.5, 6.5, 2, 6.5, -11, -29, -11, -29, 2, 2, 17.5, 2, 6.5, -31,
+                  6.5, -31, 17.5
+                ],
+                "weights": [
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]]
+                ]
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.00586, 0.50977, 0.13477, 0.50977, 0.13477, 0.60352, 0.00586, 0.60352, 0.64063, 0.50977, 0.66211,
+                  0.50977, 0.66211, 0.56445, 0.64063, 0.56445, 0.4082, 0.50977, 0.42969, 0.50977, 0.42969, 0.58203,
+                  0.4082, 0.58203, 0.60547, 0.50977, 0.62891, 0.50977, 0.62891, 0.56445, 0.60547, 0.56445, 0.37305,
+                  0.50977, 0.39648, 0.50977, 0.39648, 0.58203, 0.37305, 0.58203
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16
+                ],
+                "vertices": [
+                  7, 20, 7, -13, -17, -13, -17, 20, -14.5, 5.5, -14.5, 0, -28.5, 0, -28.5, 5.5, -28.5, 5.5, -28.5, 0,
+                  -47, 0, -47, 5.5, -14.5, 0, -14.5, -6, -28.5, -6, -28.5, 0, -28.5, 0, -28.5, -6, -47, -6, -47, 0
+                ],
+                "weights": [
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]]
+                ]
+              }
+            },
+            "head": {
+              "head": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.14648, 0.50977, 0.19531, 0.50977, 0.19531, 0.59375, 0.14648, 0.59375],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.5, 6, 9.5, -6.5, -12, -6.5, -12, 6],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.00586, 0.35938, 0.08789, 0.35938, 0.08789, 0.49805, 0.00586, 0.49805, 0.4668, 0.35938, 0.55273,
+                  0.35938, 0.55273, 0.47656, 0.4668, 0.47656, 0.33984, 0.50977, 0.36133, 0.50977, 0.36133, 0.58398,
+                  0.33984, 0.58398, 0.90625, 0.50977, 0.91992, 0.50977, 0.91992, 0.55078, 0.90625, 0.55078
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  15.5, 10, 15.5, -11, -20, -11, -20, 10, -0.5, 11.5, -0.5, -10.5, -30.5, -10.5, -30.5, 11.5, 9.5, 6,
+                  9.5, 0.5, -9.5, 0.5, -9.5, 6, -9.5, 8, -9.5, 4.5, -20, 4.5, -20, 8
+                ],
+                "weights": [
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]]
+                ]
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.00586, 0.61523, 0.08984, 0.61523, 0.08984, 0.63281, 0.00586, 0.63281],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [11, 12.5, 11, -9, 6.5, -9, 6.5, 12.5],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.84766, 0.35938, 0.88867, 0.35938, 0.88867, 0.45703, 0.84766, 0.45703, 0.26758, 0.50977, 0.32813,
+                  0.50977, 0.32813, 0.58789, 0.26758, 0.58789, 0.84375, 0.50977, 0.89453, 0.50977, 0.89453, 0.55273,
+                  0.84375, 0.55273, 0.55469, 0.50977, 0.59375, 0.50977, 0.59375, 0.56836, 0.55469, 0.56836
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -2.72388, 1.25717, 1.67623, 10.79075, 24.37522, 0.31429, 19.97511, -9.21928, 9.32404, -4.85409,
+                  15.81945, 9.21928, 33.97863, 0.83812, 27.48323, -13.23525, 16.30835, -6.42556, 21.7561, 5.37791,
+                  31.74366, 0.76827, 26.2959, -11.0352, 18.43856, -3.00325, 22.62914, 6.07634, 36.24853, -0.20953,
+                  32.05795, -9.28912
+                ],
+                "weights": [
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]]
+                ]
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.24023, 0.35938, 0.30664, 0.35938, 0.30664, 0.49219, 0.24023, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [1.40693, -1.73797, 8.44158, 13.73826, 39.39404, -0.33104, 32.35939, -15.80727],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              },
+              "weapon_R_mirrored": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.24023, 0.35938, 0.30664, 0.35938, 0.30664, 0.49219, 0.24023, 0.49219],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [1.40693, -1.73797, 8.44158, 13.73826, 39.39404, -0.33104, 32.35939, -15.80727],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              }
+            }
+          }
+        },
+        {
+          "name": "bones-only",
+          "attachments": {
+            "arm_L": {
+              "arm_L": {
+                "type": "region",
+                "path": "slot_arm_L",
+                "x": 13.38091,
+                "y": 0.71683,
+                "rotation": 107.10273,
+                "width": 18.5,
+                "height": 37
+              }
+            },
+            "body": {
+              "body": {
+                "type": "region",
+                "path": "slot_body",
+                "x": -7.25,
+                "y": -1.75,
+                "rotation": -90,
+                "width": 33.5,
+                "height": 87.5
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "region",
+                "path": "slot_outfit_lower",
+                "x": -15.25,
+                "y": 1,
+                "rotation": -90,
+                "width": 39,
+                "height": 43.5
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "region",
+                "path": "slot_outfit_upper",
+                "x": -20,
+                "y": 3.5,
+                "rotation": -90,
+                "width": 33,
+                "height": 54
+              }
+            },
+            "head": {
+              "head": {
+                "type": "region",
+                "path": "slot_head",
+                "x": -1.25,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 12.5,
+                "height": 21.5
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "region",
+                "path": "slot_hair_back",
+                "x": -7.5,
+                "y": 0.25,
+                "rotation": -90,
+                "width": 22.5,
+                "height": 46
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "region",
+                "path": "slot_headwear",
+                "x": 8.75,
+                "y": 1.75,
+                "rotation": -90,
+                "width": 21.5,
+                "height": 4.5
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "region",
+                "path": "slot_arm_R",
+                "x": 16.65756,
+                "y": 0.29683,
+                "rotation": 65.22486,
+                "width": 15.5,
+                "height": 36
+              }
+            },
+            "weapon_R": {
+              "weapon_R": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.40049,
+                "y": -1.03451,
+                "rotation": 65.55605,
+                "width": 17,
+                "height": 34
+              },
+              "weapon_R_mirrored": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 20.40049,
+                "y": -1.03451,
+                "rotation": 65.55605,
+                "width": 17,
+                "height": 34
+              }
+            }
+          }
+        }
+      ]
+    },
+    "N": {
+      "format": "vgtd-rig",
+      "version": 1,
+      "id": "kiem-tu_N",
+      "kind": "player",
+      "direction": "N",
+      "canvas": { "width": 128, "height": 128 },
+      "bones": [
+        { "name": "root", "parent": null, "x": 0, "y": 0, "rotation": 0, "length": 0 },
+        { "name": "hip", "parent": "root", "x": 0, "y": 51, "rotation": 90, "length": 6 },
+        { "name": "spine_mid", "parent": "hip", "x": 6, "y": 0, "rotation": 0, "length": 12 },
+        { "name": "spine_upper", "parent": "spine_mid", "x": 12, "y": 0, "rotation": 0, "length": 8 },
+        { "name": "neck", "parent": "spine_upper", "x": 8, "y": 0, "rotation": 0, "length": 11.5 },
+        { "name": "head", "parent": "neck", "x": 11.5, "y": 0, "rotation": 0, "length": 6 },
+        {
+          "name": "upper_arm_R",
+          "parent": "spine_upper",
+          "x": 4,
+          "y": -9.5,
+          "rotation": -158.96249,
+          "length": 13.92839
+        },
+        { "name": "lower_arm_R", "parent": "upper_arm_R", "x": 13.92839, "y": 0, "rotation": 1.58235, "length": 13 },
+        { "name": "hand_R", "parent": "lower_arm_R", "x": 13, "y": 0, "rotation": 67.38014, "length": 0 },
+        {
+          "name": "upper_arm_L",
+          "parent": "spine_upper",
+          "x": 4,
+          "y": 9.5,
+          "rotation": -201.03751,
+          "length": 13.92839
+        },
+        { "name": "lower_arm_L", "parent": "upper_arm_L", "x": 13.92839, "y": 0, "rotation": -1.58235, "length": 13 },
+        { "name": "hand_L", "parent": "lower_arm_L", "x": 13, "y": 0, "rotation": 112.61986, "length": 0 },
+        { "name": "thigh_R", "parent": "hip", "x": -4.5, "y": 4, "rotation": -181.24536, "length": 23.00543 },
+        { "name": "shin_R", "parent": "thigh_R", "x": 23.00543, "y": 0, "rotation": -0.26207, "length": 19.00658 },
+        { "name": "foot_R", "parent": "shin_R", "x": 19.00658, "y": 0, "rotation": -11.02137, "length": 4.60977 },
+        { "name": "thigh_L", "parent": "hip", "x": -4.5, "y": -4, "rotation": -178.75464, "length": 23.00543 },
+        { "name": "shin_L", "parent": "thigh_L", "x": 23.00543, "y": 0, "rotation": 0.26207, "length": 19.00658 },
+        { "name": "foot_L", "parent": "shin_L", "x": 19.00658, "y": 0, "rotation": 11.02137, "length": 4.60977 },
+        { "name": "hair_back_1", "parent": "head", "x": 3, "y": 1.5, "rotation": -178.66778, "length": 21.50581 },
+        { "name": "hair_back_2", "parent": "hair_back_1", "x": 21.50581, "y": 0, "rotation": -1.33222, "length": 10 },
+        { "name": "hair_front_1", "parent": "head", "x": 7, "y": 0, "rotation": -173.99099, "length": 9.55249 },
+        {
+          "name": "hair_front_2",
+          "parent": "hair_front_1",
+          "x": 9.55249,
+          "y": 0,
+          "rotation": -0.56867,
+          "length": 10.54751
+        },
+        { "name": "ribbon_1", "parent": "head", "x": 9.5, "y": 0, "rotation": -185.19443, "length": 22.09072 },
+        { "name": "ribbon_2", "parent": "ribbon_1", "x": 22.09072, "y": 0, "rotation": -3.96792, "length": 15.70032 },
+        {
+          "name": "sleeve_tip_R",
+          "parent": "lower_arm_R",
+          "x": 5.88462,
+          "y": -4.07692,
+          "rotation": 9.38552,
+          "length": 9.43398
+        },
+        {
+          "name": "sleeve_tip_L",
+          "parent": "lower_arm_L",
+          "x": 5.88462,
+          "y": 4.07692,
+          "rotation": -9.38552,
+          "length": 9.43398
+        },
+        { "name": "sash_L_1", "parent": "hip", "x": 2, "y": 1.5, "rotation": -182.1211, "length": 13.50926 },
+        { "name": "sash_L_2", "parent": "sash_L_1", "x": 13.50926, "y": 0, "rotation": -1.14939, "length": 17.52855 },
+        { "name": "sash_R_1", "parent": "hip", "x": 2, "y": -2, "rotation": -175.10091, "length": 17.56417 },
+        { "name": "sash_R_2", "parent": "sash_R_1", "x": 17.56417, "y": 0, "rotation": -1.43086, "length": 16.53028 },
+        { "name": "robe_front", "parent": "hip", "x": -3, "y": 0, "rotation": -177.47388, "length": 34.03307 },
+        { "name": "robe_back", "parent": "hip", "x": -3, "y": 0, "rotation": -182.52612, "length": 34.03307 },
+        { "name": "scabbard", "parent": "hip", "x": 1, "y": 9, "rotation": -192.72436, "length": 31.7805 },
+        { "name": "weapon", "parent": "hand_R", "x": 0, "y": 0, "rotation": -63.10376, "length": 38.68462 },
+        { "name": "ik_foot_L", "parent": "root", "length": 0, "x": 5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_L", "parent": "root", "length": 0, "x": -19.5, "y": 48, "rotation": 0 },
+        { "name": "ik_foot_R", "parent": "root", "length": 0, "x": -5, "y": 4.5, "rotation": 0 },
+        { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 19.5, "y": 48, "rotation": 0 }
+      ],
+      "ik": [
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        {
+          "name": "ik_hand_L",
+          "bones": ["upper_arm_L", "lower_arm_L"],
+          "target": "ik_hand_L",
+          "bendPositive": false,
+          "mix": 1
+        },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        {
+          "name": "ik_hand_R",
+          "bones": ["upper_arm_R", "lower_arm_R"],
+          "target": "ik_hand_R",
+          "bendPositive": true,
+          "mix": 1
+        }
+      ],
+      "chains": [
+        {
+          "name": "hair_back",
+          "kind": "hair",
+          "bones": ["hair_back_1", "hair_back_2"],
+          "stiffness": 0.4,
+          "damping": 0.3,
+          "gravity": 0.5,
+          "inertia": 0.7
+        },
+        {
+          "name": "hair_ribbon",
+          "kind": "ribbon",
+          "bones": ["ribbon_1", "ribbon_2"],
+          "stiffness": 0.25,
+          "damping": 0.35,
+          "gravity": 0.7,
+          "inertia": 0.8
+        },
+        {
+          "name": "sash_L",
+          "kind": "sash",
+          "bones": ["sash_L_1", "sash_L_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sash_R",
+          "kind": "sash",
+          "bones": ["sash_R_1", "sash_R_2"],
+          "stiffness": 0.35,
+          "damping": 0.3,
+          "gravity": 0.6,
+          "inertia": 0.7
+        },
+        {
+          "name": "sleeve_L",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_L"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        },
+        {
+          "name": "sleeve_R",
+          "kind": "sleeve",
+          "bones": ["sleeve_tip_R"],
+          "stiffness": 0.5,
+          "damping": 0.4,
+          "gravity": 0.3,
+          "inertia": 0.5
+        }
+      ],
+      "roles": {
+        "root": "root",
+        "hips": "hip",
+        "spine_mid": "spine_mid",
+        "spine_upper": "spine_upper",
+        "head": "head",
+        "upper_arm_L": "upper_arm_L",
+        "lower_arm_L": "lower_arm_L",
+        "hand_L": "hand_L",
+        "thigh_L": "thigh_L",
+        "shin_L": "shin_L",
+        "foot_L": "foot_L",
+        "ik_foot_L": "ik_foot_L",
+        "ik_hand_L": "ik_hand_L",
+        "upper_arm_R": "upper_arm_R",
+        "lower_arm_R": "lower_arm_R",
+        "hand_R": "hand_R",
+        "thigh_R": "thigh_R",
+        "shin_R": "shin_R",
+        "foot_R": "foot_R",
+        "ik_foot_R": "ik_foot_R",
+        "ik_hand_R": "ik_hand_R"
+      },
+      "sockets": [
+        { "name": "origin", "bone": "root", "x": 0, "y": 0 },
+        { "name": "hand_R", "bone": "hand_R", "x": 0, "y": 0 },
+        { "name": "hand_L", "bone": "hand_L", "x": 0, "y": 0 },
+        { "name": "back", "bone": "spine_upper", "x": -5, "y": 0 },
+        { "name": "chest", "bone": "spine_mid", "x": -9, "y": 0 },
+        { "name": "head_fx", "bone": "head", "x": 3.5, "y": 0 },
+        { "name": "head_top", "bone": "root", "x": 0, "y": 104 },
+        { "name": "orbit_center", "bone": "root", "x": 0, "y": 60 },
+        { "name": "fly_feet", "bone": "root", "x": 0, "y": 0 }
+      ],
+      "slots": [
+        { "name": "weapon_R", "bone": "weapon", "paperdoll": "weapon_R", "attachment": "weapon_R" },
+        { "name": "arm_L", "bone": "upper_arm_L", "paperdoll": "arm_L", "attachment": "arm_L" },
+        { "name": "arm_R", "bone": "upper_arm_R", "paperdoll": "arm_R", "attachment": "arm_R" },
+        { "name": "body", "bone": "hip", "paperdoll": "body", "attachment": "body" },
+        { "name": "outfit_lower", "bone": "hip", "paperdoll": "outfit_lower", "attachment": "outfit_lower" },
+        { "name": "outfit_upper", "bone": "spine_upper", "paperdoll": "outfit_upper", "attachment": "outfit_upper" },
+        { "name": "head", "bone": "head", "paperdoll": "head", "attachment": "head" },
+        { "name": "hair_front", "bone": "head", "paperdoll": "hair_front", "attachment": null },
+        { "name": "hair_back", "bone": "head", "paperdoll": "hair_back", "attachment": "hair_back" },
+        { "name": "headwear", "bone": "head", "paperdoll": "headwear", "attachment": "headwear" },
+        { "name": "sword_back", "bone": "spine_upper", "paperdoll": "sword_back", "attachment": null },
+        { "name": "cape", "bone": "spine_upper", "paperdoll": "cape", "attachment": null },
+        { "name": "wing", "bone": "spine_upper", "paperdoll": "wing", "attachment": null }
+      ],
+      "skins": [
+        {
+          "name": "default",
+          "attachments": {
+            "weapon_R": {
+              "weapon_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.41211, 0.35938, 0.48047, 0.35938, 0.48047, 0.49414, 0.41211, 0.49414],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [2.00984, -0.45884, 9.92642, 15.14814, 40.69446, -0.45884, 32.77788, -16.06582],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              },
+              "weapon_R_mirrored": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.41211, 0.35938, 0.48047, 0.35938, 0.48047, 0.49414, 0.41211, 0.49414],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [2.00984, -0.45884, 9.92642, 15.14814, 40.69446, -0.45884, 32.77788, -16.06582],
+                "weights": [[["weapon", 1]], [["weapon", 1]], [["weapon", 1]], [["weapon", 1]]]
+              }
+            },
+            "arm_L": {
+              "arm_L": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.89648, 0.35938, 0.96094, 0.35938, 0.96094, 0.46484, 0.89648, 0.46484, 0.37891, 0.51953, 0.4375,
+                  0.51953, 0.4375, 0.60742, 0.37891, 0.60742, 0.11523, 0.63672, 0.17188, 0.63672, 0.17188, 0.67969,
+                  0.11523, 0.67969, 0.91992, 0.51953, 0.95703, 0.51953, 0.95703, 0.57227, 0.91992, 0.57227
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -0.89745, -11.59502, -6.8206, 3.80518, 18.37973, 13.49761, 24.30288, -1.90259, 12.20529, -10.84117,
+                  6.8206, 3.15902, 27.82088, 11.23605, 33.20556, -2.76414, 21.53874, -7.25138, 16.33355, 6.28213,
+                  26.60035, 10.2309, 31.80555, -3.30261, 22.00542, -7.07189, 18.59512, 1.7949, 31.19528, 6.64111,
+                  34.60558, -2.22567
+                ],
+                "weights": [
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["upper_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["lower_arm_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["sleeve_tip_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]],
+                  [["hand_L", 1]]
+                ]
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.00586, 0.51953, 0.07031, 0.51953, 0.07031, 0.625, 0.00586, 0.625, 0.30859, 0.51953, 0.36719,
+                  0.51953, 0.36719, 0.60938, 0.30859, 0.60938, 0.64844, 0.51953, 0.70313, 0.51953, 0.70313, 0.58008,
+                  0.64844, 0.58008, 0.79883, 0.51953, 0.83984, 0.51953, 0.83984, 0.57813, 0.79883, 0.57813
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  -6.64111, -3.33851, -0.71796, 12.0617, 24.48237, 2.36926, 18.55922, -13.03094, 7.00009, -2.69234,
+                  12.38478, 11.30784, 33.85173, 3.05132, 28.46704, -10.94886, 12.31298, -4.20006, 17.33869, 8.86678,
+                  31.80555, 3.30261, 26.77984, -9.76423, 18.77461, -1.32822, 22.54389, 8.47191, 36.54407, 3.08722,
+                  32.77479, -6.71291
+                ],
+                "weights": [
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["upper_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["lower_arm_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["sleeve_tip_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]],
+                  [["hand_R", 1]]
+                ]
+              }
+            },
+            "body": {
+              "body": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.71484, 0.51953, 0.75195, 0.51953, 0.75195, 0.58008, 0.71484, 0.58008, 0.85156, 0.00586, 0.91211,
+                  0.00586, 0.91211, 0.16797, 0.85156, 0.16797, 0.53906, 0.35938, 0.57422, 0.35938, 0.57422, 0.49219,
+                  0.53906, 0.49219, 0.49219, 0.35938, 0.52734, 0.35938, 0.52734, 0.49219, 0.49219, 0.49219, 0.74023,
+                  0.35938, 0.80469, 0.35938, 0.80469, 0.47461, 0.74023, 0.47461, 0.81641, 0.35938, 0.88477, 0.35938,
+                  0.88477, 0.47266, 0.81641, 0.47266, 0.06055, 0.63672, 0.10352, 0.63672, 0.10352, 0.68164, 0.06055,
+                  0.68164, 0.00586, 0.63672, 0.04883, 0.63672, 0.04883, 0.68164, 0.00586, 0.68164
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16, 20, 21, 22, 22, 23, 20, 24, 25, 26, 26, 27, 24, 28, 29, 30, 30, 31, 28
+                ],
+                "vertices": [
+                  36.5, 4.5, 36.5, -5, 21, -5, 21, 4.5, 33.5, 7.5, 33.5, -8, -8, -8, -8, 7.5, -0.5, 8.5, -0.5, -0.5,
+                  -34.5, -0.5, -34.5, 8.5, -0.5, 0, -0.5, -9, -34.5, -9, -34.5, 0, -20.5, 16.5, -20.5, 0, -50, 0, -50,
+                  16.5, -20.5, 0, -20.5, -17.5, -49.5, -17.5, -49.5, 0, -39.5, 16.5, -39.5, 5.5, -51, 5.5, -51, 16.5,
+                  -39.5, -7, -39.5, -18, -51, -18, -51, -7
+                ],
+                "weights": [
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["neck", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["spine_mid", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_R", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["thigh_L", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_R", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["shin_L", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_R", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]],
+                  [["foot_L", 1]]
+                ]
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.44141, 0.00586, 0.63477, 0.00586, 0.63477, 0.17578, 0.44141, 0.17578, 0.27539, 0.35938, 0.32031,
+                  0.35938, 0.32031, 0.49805, 0.27539, 0.49805, 0.58594, 0.35938, 0.63086, 0.35938, 0.63086, 0.48828,
+                  0.58594, 0.48828
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8],
+                "vertices": [
+                  6.5, 23, 6.5, -26.5, -37, -26.5, -37, 23, 6.5, 2, 6.5, -9.5, -29, -9.5, -29, 2, 2, 18, 2, 6.5, -31,
+                  6.5, -31, 18
+                ],
+                "weights": [
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_back", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["robe_front", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]],
+                  [["scabbard", 1]]
+                ]
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.08203, 0.51953, 0.26172, 0.51953, 0.26172, 0.61328, 0.08203, 0.61328, 0.88672, 0.51953, 0.9082,
+                  0.51953, 0.9082, 0.57422, 0.88672, 0.57422, 0.57031, 0.51953, 0.5918, 0.51953, 0.5918, 0.5918,
+                  0.57031, 0.5918, 0.85156, 0.51953, 0.875, 0.51953, 0.875, 0.57422, 0.85156, 0.57422, 0.76367, 0.51953,
+                  0.78711, 0.51953, 0.78711, 0.58008, 0.76367, 0.58008
+                ],
+                "triangles": [
+                  0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19,
+                  16
+                ],
+                "vertices": [
+                  7, 23.5, 7, -22.5, -17, -22.5, -17, 23.5, -14.5, 5.5, -14.5, 0, -28.5, 0, -28.5, 5.5, -28.5, 5.5,
+                  -28.5, 0, -47, 0, -47, 5.5, -14.5, 0, -14.5, -6, -28.5, -6, -28.5, 0, -28.5, 0, -28.5, -6, -44, -6,
+                  -44, 0
+                ],
+                "weights": [
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["spine_upper", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_1", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_L_2", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_1", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]],
+                  [["sash_R_2", 1]]
+                ]
+              }
+            },
+            "head": {
+              "head": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.44922, 0.51953, 0.49805, 0.51953, 0.49805, 0.60352, 0.44922, 0.60352],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [9.5, 6, 9.5, -6.5, -12, -6.5, -12, 6],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [
+                  0.19336, 0.35938, 0.26367, 0.35938, 0.26367, 0.49805, 0.19336, 0.49805, 0.64258, 0.35938, 0.72852,
+                  0.35938, 0.72852, 0.47656, 0.64258, 0.47656, 0.27344, 0.51953, 0.29688, 0.51953, 0.29688, 0.61133,
+                  0.27344, 0.61133, 0.60352, 0.51953, 0.63672, 0.51953, 0.63672, 0.58984, 0.60352, 0.58984
+                ],
+                "triangles": [0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12],
+                "vertices": [
+                  15.5, 9.5, 15.5, -8.5, -20, -8.5, -20, 9.5, -0.5, 11.5, -0.5, -10.5, -30.5, -10.5, -30.5, 11.5, 9.5,
+                  4, 9.5, -2, -14, -2, -14, 4, -9.5, 8, -9.5, -0.5, -27.5, -0.5, -27.5, 8
+                ],
+                "weights": [
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_1", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["hair_back_2", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_1", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]],
+                  [["ribbon_2", 1]]
+                ]
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "mesh",
+                "path": "kiemtu_page",
+                "width": 128,
+                "height": 128,
+                "uvs": [0.18359, 0.63672, 0.26758, 0.63672, 0.26758, 0.6543, 0.18359, 0.6543],
+                "triangles": [0, 1, 2, 2, 3, 0],
+                "vertices": [11, 11, 11, -10.5, 6.5, -10.5, 6.5, 11],
+                "weights": [[["head", 1]], [["head", 1]], [["head", 1]], [["head", 1]]]
+              }
+            }
+          }
+        },
+        {
+          "name": "bones-only",
+          "attachments": {
+            "weapon_R": {
+              "weapon_R": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 21.35215,
+                "y": -0.45884,
+                "rotation": 63.10376,
+                "width": 17.5,
+                "height": 34.5
+              },
+              "weapon_R_mirrored": {
+                "type": "region",
+                "path": "slot_weapon_R",
+                "x": 21.35215,
+                "y": -0.45884,
+                "rotation": 63.10376,
+                "width": 17.5,
+                "height": 34.5
+              }
+            },
+            "arm_L": {
+              "arm_L": {
+                "type": "region",
+                "path": "slot_arm_L",
+                "x": 13.89249,
+                "y": 0.78975,
+                "rotation": 111.03751,
+                "width": 20.5,
+                "height": 36.5
+              }
+            },
+            "arm_R": {
+              "arm_R": {
+                "type": "region",
+                "path": "slot_arm_R",
+                "x": 14.95148,
+                "y": -0.12564,
+                "rotation": 68.96249,
+                "width": 21.5,
+                "height": 38
+              }
+            },
+            "body": {
+              "body": {
+                "type": "region",
+                "path": "slot_body",
+                "x": -7.25,
+                "y": -0.75,
+                "rotation": -90,
+                "width": 34.5,
+                "height": 87.5
+              }
+            },
+            "outfit_lower": {
+              "outfit_lower": {
+                "type": "region",
+                "path": "slot_outfit_lower",
+                "x": -15.25,
+                "y": -1.75,
+                "rotation": -90,
+                "width": 49.5,
+                "height": 43.5
+              }
+            },
+            "outfit_upper": {
+              "outfit_upper": {
+                "type": "region",
+                "path": "slot_outfit_upper",
+                "x": -20,
+                "y": 0.5,
+                "rotation": -90,
+                "width": 46,
+                "height": 54
+              }
+            },
+            "head": {
+              "head": {
+                "type": "region",
+                "path": "slot_head",
+                "x": -1.25,
+                "y": -0.25,
+                "rotation": -90,
+                "width": 12.5,
+                "height": 21.5
+              }
+            },
+            "hair_back": {
+              "hair_back": {
+                "type": "region",
+                "path": "slot_hair_back",
+                "x": -7.5,
+                "y": 0.5,
+                "rotation": -90,
+                "width": 22,
+                "height": 46
+              }
+            },
+            "headwear": {
+              "headwear": {
+                "type": "region",
+                "path": "slot_headwear",
+                "x": 8.75,
+                "y": 0.25,
+                "rotation": -90,
+                "width": 21.5,
+                "height": 4.5
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
