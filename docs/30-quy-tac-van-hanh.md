@@ -14,25 +14,25 @@
 
 Vòng lặp 24/7 chỉ dừng khi **tất cả** đúng (nguồn: docs/10 §12 và §9):
 
-| Cổng | Tiêu chí thoát (đo được)                                                                                                                      |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| P1   | Web + 1 máy mobile thật: ≤ 80 draw call, RAM ≤ 500 MB, ≥ 30 FPS với 20 NPC, gói đầu ≤ 25 MB, click-to-move đúng                               |
-| P2   | 100 CCU bot ổn định, tick p99 ≤ 40 ms, ≤ 8 KB/s/người, AOI 100v100 đo được, speedhack/teleport bị guard chặn                                  |
-| P3   | 1 nhân vật level 1 → Kim Đan trên 2 bản đồ; số liệu server khớp 07; telemetry đủ sự kiện lõi                                                  |
-| P4   | Toàn bộ docs/10 §7.1 chạy end-to-end; playtest nội bộ ≥ 20 người, FTUE ≥ 85% không lỗi chặn                                                   |
-| P5   | crash-free ≥ 99%; 100 CCU 24 giờ không sự cố; thử khôi phục không mất dữ liệu; dashboard KPI chạy; pháp lý được luật sư xác minh (docs/19 Q1) |
+| Cổng | Tiêu chí thoát (đo được)                                                                                                                                                                      |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P1   | Web + 1 máy mobile thật: ≤ 80 draw call, RAM ≤ 500 MB, ≥ 30 FPS với 20 NPC, gói đầu ≤ 25 MB, click-to-move đúng                                                                               |
+| P2   | 100 CCU bot ổn định, tick p99 ≤ 40 ms, ≤ 8 KB/s/người, AOI 100v100 đo được, speedhack/teleport bị guard chặn                                                                                  |
+| P3   | 1 nhân vật level 1 → Kim Đan trên 2 bản đồ; số liệu server khớp 07; telemetry đủ sự kiện lõi                                                                                                  |
+| P4   | Toàn bộ docs/10 §7.1 chạy end-to-end; playtest nội bộ ≥ 20 người, FTUE ≥ 85% không lỗi chặn                                                                                                   |
+| P5   | crash-free ≥ 99%; 100 CCU 24 giờ không sự cố; thử khôi phục không mất dữ liệu; dashboard KPI chạy (docs/10 §12). _Đề xuất, chưa duyệt:_ thêm xác minh pháp lý bởi luật sư (docs/31 dòng K-02) |
 
 Mỗi phase **đóng trước khi mở phase sau** (10 §11–§12); P2 chỉ mở sau khi P1 đạt tiêu chí thoát (10 §11–§12), không có ngoại lệ song song (chỉ P4 được ghi "song song một phần").
 
 ## 2. Vai trò
 
-| Vai trò                                 | Được làm                                                                                                                                               | Không được làm                                                                                                        |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| **Chủ dự án (người)**                   | Chốt cột "Quyết định" ở `docs/31`, duyệt ADR, ngân sách, pháp lý, chủ art                                                                              | —                                                                                                                     |
-| **Orchestrator** (`van-gioi-tien-do-1`) | Chọn việc kế tiếp theo §4, spawn/redirect worker, theo dõi, kích hoạt AO review, merge PR đã đủ điều kiện §6 (theo ủy quyền đã ghi trong memory dự án) | Tự chốt quyết định thuộc bảng "Phải hỏi người" ở §5 của tài liệu này, bảng "Phải hỏi người"; bỏ qua branch protection |
-| **Worker**                              | Một task phạm vi hẹp, một PR, sửa CI/review của PR đó, `ao report`                                                                                     | Sửa package khác khi chưa qua orchestrator; tự merge PR của mình; mở việc ngoài task                                  |
-| **Worker Codex (asset)**                | Sinh asset placeholder + ghi `docs/ASSET-LICENSES.md`                                                                                                  | Dùng asset ngoài chưa kiểm giấy phép                                                                                  |
-| **AO native reviewer**                  | Review PR của worker                                                                                                                                   | Thay cho GitHub approval/branch protection                                                                            |
+| Vai trò                                 | Được làm                                                                                                                                               | Không được làm                                                                                 |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| **Chủ dự án (người)**                   | Chốt cột "Quyết định" ở `docs/31`, duyệt ADR, ngân sách, pháp lý, chủ art                                                                              | —                                                                                              |
+| **Orchestrator** (`van-gioi-tien-do-1`) | Chọn việc kế tiếp theo §4, spawn/redirect worker, theo dõi, kích hoạt AO review, merge PR đã đủ điều kiện §6 (theo ủy quyền đã ghi trong memory dự án) | Tự chốt quyết định thuộc bảng "Phải hỏi người" (§5 của tài liệu này); bỏ qua branch protection |
+| **Worker**                              | Một task phạm vi hẹp, một PR, sửa CI/review của PR đó, `ao report`                                                                                     | Sửa package khác khi chưa qua orchestrator; tự merge PR của mình; mở việc ngoài task           |
+| **Worker Codex (asset)**                | Sinh asset placeholder + ghi `docs/ASSET-LICENSES.md`                                                                                                  | Dùng asset ngoài chưa kiểm giấy phép                                                           |
+| **AO native reviewer**                  | Review PR của worker                                                                                                                                   | Thay cho GitHub approval/branch protection                                                     |
 
 Sở hữu package: mỗi package thuộc một worker tại một thời điểm; thay đổi chéo package đi qua `src/index.ts` public và orchestrator (CLAUDE.md).
 
@@ -54,7 +54,7 @@ Nhịp: chu kỳ chính **mỗi 20–30 phút khi có worker đang chạy** (pol
 
 Thứ tự (cao → thấp): (1) sửa CI/review của PR đang mở; (2) việc trên đường găng của phase hiện tại; (3) việc song song không chặn nhau; (4) nợ kỹ thuật/test/docs.
 
-**Quy tắc "cổng quyết định":** trước khi giao việc, kiểm các dòng liên quan ở `docs/31-bang-quyet-dinh.md`:
+**Quy tắc "cổng quyết định":** trước khi giao việc, kiểm các dòng liên quan ở `docs/31-bang-quyet-dinh.md` (theo ID dòng, ví dụ `F-13`):
 
 - Cột "Quyết định" **đã điền** → ghi vào `DECISIONS.md` (D32+) trước, rồi mới làm (skill `vgtd-formula-change`).
 - **Để trống và dòng "Chặn P<n>" của phase hiện tại** → việc đó **không được làm**; chuyển sang việc khác và đưa câu hỏi vào digest.
