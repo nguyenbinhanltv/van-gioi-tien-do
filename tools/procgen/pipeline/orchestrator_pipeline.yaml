@@ -72,6 +72,10 @@ spec:
           run: |
             set -o pipefail
             mkdir -p reports build/raw
+            # Codex đã sửa ngoài phạm vi ở lần trước (xem hook codex_self_heal): dừng hẳn, mã 20 không thử lại.
+            if [ -f reports/codex_violation ]; then
+              echo "✖ codex_self_heal vi phạm phạm vi, runner bị coi là nhiễm:"; cat reports/codex_violation; exit 20
+            fi
             { node src/tilemap/generate_tilemap.js --seed "$SEED" --width "$MAP_W" --height "$MAP_H" --out build/raw/tilemap \
               && node src/items/generate_items.js --seed "$SEED" --swordTier "$SWORD_TIER" --out build/raw/items; } \
               2>&1 | tee reports/generate_raw_assets.log
@@ -84,15 +88,35 @@ spec:
             secrets: [CODEX_API_KEY]          # chỉ step này
             # Quyền tối thiểu: sandbox workspace-write (ghi trong workdir, không mạng); KHÔNG dùng
             # --full-auto / --dangerously-bypass-approvals-and-sandbox. Sandbox không giới hạn được
-            # thư mục con, nên ngay sau Codex có bước kiểm tra: mọi thay đổi ngoài src/ bị hoàn tác.
+            # thư mục con, nên có bước kiểm tra quanh Codex. Phạm vi cho phép: src/, reports/, build/.
+            # Kiểm tra gồm cả file đã theo dõi bị sửa, file MỚI chưa theo dõi và file bị .gitignore
+            # (ví dụ node_modules/ – nơi có thể cài mã chạy ở bước sau): chụp sha256 trước/sau, so sánh.
+            # Vi phạm => xóa file mới, hoàn tác file đã theo dõi, hoàn tác cả src/, ghi
+            # reports/codex_violation và thoát 20. Hook có continue_on_error nên KHÔNG tự dừng run; việc dừng
+            # do run_generators (kiểm tra marker đầu bước, mã 20 không nằm trong retry_on_exit_codes).
+            # Lưu ý: file sẵn có trong node_modules/ bị Codex sửa thì không khôi phục được -> runner được
+            # coi là nhiễm, phải bỏ (marker làm run hỏng). Đây vẫn là heuristic, không thay cho container riêng.
             run: |
+              snap() {
+                { git ls-files -o --exclude-standard; git ls-files -o -i --exclude-standard; } \
+                  | grep -vE '^(src|reports|build)/' | sort -u \
+                  | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
+              }
+              before="$(mktemp)"; after="$(mktemp)"
+              snap > "$before"
               codex exec --sandbox workspace-write --ephemeral --json \
                 -o reports/codex_fix_summary.md \
                 "$(cat pipeline/prompts/codex_fix_generators.md)" > reports/codex_fix_events.jsonl
-              outside="$(git diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
-              if [ -n "$outside" ]; then
-                echo "✖ Codex sửa ngoài src/, hoàn tác: $outside"
-                git checkout HEAD -- $outside
+              snap > "$after"
+              tracked="$(git diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
+              extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"   # file mới / đã đổi nội dung
+              rm -f "$before" "$after"
+              if [ -n "$tracked" ] || [ -n "$extra" ]; then
+                echo "✖ Codex sửa ngoài src/ – hoàn tác và đánh dấu run hỏng"
+                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do git checkout HEAD -- "$f"; done; }
+                [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
+                git checkout HEAD -- src && git clean -fdq -- src
+                { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/codex_violation
                 exit 20
               fi
               git diff --stat -- src/ > reports/codex_fix.diffstat
