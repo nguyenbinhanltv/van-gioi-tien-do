@@ -673,7 +673,7 @@ export function makeRigDocument(direction, parts, atlas, canonical = []) {
         b = world[names[1]],
         c = world[limb + '_' + side];
       ik.push({
-        name: 'ik_' + limb + '_' + side,
+        name: 'ik_' + (limb === 'foot' ? 'leg' : limb) + '_' + side,
         bones: names,
         target: 'ik_' + limb + '_' + side,
         bendPositive: (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x) > 0,

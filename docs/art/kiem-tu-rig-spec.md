@@ -40,6 +40,8 @@ Một `RigDocument` có:
 
 Đã chạy **validator thật của `@vgtd/rig` trên main** qua public entry point với `requireRoles: BONE_ROLES`: cả năm hướng không có lỗi/cảnh báo. Schema chuẩn là `RIG_JSON_SCHEMA` do `@vgtd/rig` export; lô art không sao chép schema.
 
+Test `tools/procgen/test/kiem-tu-export.test.mjs` kiểm RigSet đã commit bằng `validateRigSet` với `KIEMTU_REQUIRED_ROLES`, rồi gọi `exportDragonBones` cho từng hướng với atlas thật và idle Clip. Test kiểm skin weighted, skin fallback, bone/slot/IK và idle loop; chỉ export trong bộ nhớ, không commit output runtime. Hai constraint chân tên `ik_leg_L/R` để toolkit điều khiển mix khi chết; target bone vẫn tên `ik_foot_L/R`. Đây chưa phải kiểm hình ảnh/nạp asset trong viewer Cocos.
+
 ## 4. Bone và IK
 
 **34 bones art + 4 helper IK = 38**, dưới giới hạn player 60. Bone anatomical/chain có length và hướng dọc chuỗi; root, target và hand anchor có thể length 0.

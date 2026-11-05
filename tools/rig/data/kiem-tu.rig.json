@@ -84,7 +84,7 @@
         { "name": "ik_hand_R", "parent": "root", "length": 0, "x": -19.5, "y": 48, "rotation": 0 }
       ],
       "ik": [
-        { "name": "ik_foot_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
         {
           "name": "ik_hand_L",
           "bones": ["upper_arm_L", "lower_arm_L"],
@@ -92,7 +92,7 @@
           "bendPositive": true,
           "mix": 1
         },
-        { "name": "ik_foot_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
         {
           "name": "ik_hand_R",
           "bones": ["upper_arm_R", "lower_arm_R"],
@@ -733,7 +733,7 @@
         { "name": "ik_hand_R", "parent": "root", "length": 0, "x": -18.5, "y": 48, "rotation": 0 }
       ],
       "ik": [
-        { "name": "ik_foot_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
         {
           "name": "ik_hand_L",
           "bones": ["upper_arm_L", "lower_arm_L"],
@@ -741,7 +741,7 @@
           "bendPositive": true,
           "mix": 1
         },
-        { "name": "ik_foot_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
         {
           "name": "ik_hand_R",
           "bones": ["upper_arm_R", "lower_arm_R"],
@@ -1382,7 +1382,7 @@
         { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 0, "y": 47, "rotation": 0 }
       ],
       "ik": [
-        { "name": "ik_foot_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
         {
           "name": "ik_hand_L",
           "bones": ["upper_arm_L", "lower_arm_L"],
@@ -1390,7 +1390,7 @@
           "bendPositive": true,
           "mix": 1
         },
-        { "name": "ik_foot_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
         {
           "name": "ik_hand_R",
           "bones": ["upper_arm_R", "lower_arm_R"],
@@ -2042,7 +2042,7 @@
         { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 18, "y": 48, "rotation": 0 }
       ],
       "ik": [
-        { "name": "ik_foot_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
         {
           "name": "ik_hand_L",
           "bones": ["upper_arm_L", "lower_arm_L"],
@@ -2050,7 +2050,7 @@
           "bendPositive": true,
           "mix": 1
         },
-        { "name": "ik_foot_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
         {
           "name": "ik_hand_R",
           "bones": ["upper_arm_R", "lower_arm_R"],
@@ -2662,7 +2662,7 @@
         { "name": "ik_hand_R", "parent": "root", "length": 0, "x": 19.5, "y": 48, "rotation": 0 }
       ],
       "ik": [
-        { "name": "ik_foot_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
+        { "name": "ik_leg_L", "bones": ["thigh_L", "shin_L"], "target": "ik_foot_L", "bendPositive": true, "mix": 1 },
         {
           "name": "ik_hand_L",
           "bones": ["upper_arm_L", "lower_arm_L"],
@@ -2670,7 +2670,7 @@
           "bendPositive": false,
           "mix": 1
         },
-        { "name": "ik_foot_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
+        { "name": "ik_leg_R", "bones": ["thigh_R", "shin_R"], "target": "ik_foot_R", "bendPositive": false, "mix": 1 },
         {
           "name": "ik_hand_R",
           "bones": ["upper_arm_R", "lower_arm_R"],

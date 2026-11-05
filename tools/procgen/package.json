@@ -26,6 +26,7 @@
     "@vgtd/character": "*"
   },
   "devDependencies": {
+    "@vgtd/rig": "*",
     "vite-node": "2.1.9"
   },
   "optionalDependencies": {
