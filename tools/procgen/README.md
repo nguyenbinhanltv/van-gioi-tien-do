@@ -1,5 +1,44 @@
 # @vgtd/procgen – sinh asset Tu Tiên 2D Isometric bằng code
 
+## First AI placeholder sample batch
+
+The human-authorized exception to “commit seeds, not images” is the first sample
+batch in `assets-src/placeholder/first-sample/` and
+`apps/client-cocos/assets/bundles/core/_placeholder/first-sample/`.
+See `docs/ASSET-LICENSES.md` for per-file provenance, exact prompts, restrictions,
+and the image tool's undisclosed underlying model/version. No audio is included.
+These files are never approved for release by this pipeline.
+
+From the repository root, build the shared public entry point first:
+
+```sh
+npm run build -w @vgtd/shared
+node tools/procgen/scripts/sample_art.mjs validate
+node tools/procgen/scripts/sample_art.mjs pack
+node tools/procgen/scripts/sample_art.mjs contact <contact-sheet.png>
+```
+
+`pack` uses the existing procgen packer and packed validator. Explicit
+`--padding 2 --extrude 1` keeps two clear pixels outside a one-pixel extrusion;
+omitting `--extrude` preserves the packer's legacy behavior. Atlases and QA
+reports remain under ignored `tools/procgen/build/sample-art/`.
+
+To normalize new tool outputs with the same layout (five character views in a
+row; four tiles in a row; individual pill, talisman and sword images):
+
+```sh
+node tools/procgen/scripts/sample_art.mjs import <character-sheet.png> <tile-sheet.png> <pill.png> <talisman.png> <sword.png>
+```
+
+`import` deliberately rewrites the batch; update its license inventory after
+any regeneration. It does not call an AI API. It creates eight procedural
+breathing frames from each AI idle pose, fixed foot pivots, edge-normalized
+diamond tiles and borderless icons with a small-size contrast pass. Sources
+are normalized @2x images (icons 256), not raw large reference sheets. The
+original AI reference sheets are working material; generation itself is not
+deterministic. Artist hand-polish, Spine rigging, full Wang sets and runtime
+integration remain outside this sample.
+
 Nhập từ gói `tutien-procgen` (xem "Hồ sơ tổng hợp", mục 6) + `orchestrator_pipeline.yaml`. Toàn bộ asset do script Node thuần (không bắt buộc thư viện ngoài) và shader GLSL ES 1.0 tạo ra; **cùng seed → cùng asset**, nên chỉ commit seed, không commit ảnh. Thư mục `out/`, `build/`, `reports/`, `preview/` nằm trong `.gitignore`.
 
 Yêu cầu: Node ≥ 18. Chạy từ `tools/procgen/` (hoặc `npm run <script> -w @vgtd/procgen` từ gốc monorepo).
