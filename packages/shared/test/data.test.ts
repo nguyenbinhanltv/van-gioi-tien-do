@@ -4,6 +4,8 @@ import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   BASE_RATE_BY_REALM,
+  elementalMatrixSchema,
+  realmProgressionSchema,
   BREAKTHROUGH,
   QUALITY_TIERS,
   STAT_PARAMS,
@@ -34,6 +36,8 @@ describe('sample data validity', () => {
   it('generated.ts is in sync with src/data and src/schemas (run `npm run gen:data` if this fails)', () => {
     expect(realmProgression).toEqual(read('src/data/realm_progression.json'));
     expect(elementalMatrix).toEqual(read('src/data/elemental_matrix.json'));
+    expect(realmProgressionSchema).toEqual(read('src/schemas/realm_progression.schema.json'));
+    expect(elementalMatrixSchema).toEqual(read('src/schemas/elemental_matrix.schema.json'));
   });
   it('9 realms / 41 stages and tribulation specs agree with the TS constants', () => {
     expect(realmProgression.realms).toHaveLength(9);
