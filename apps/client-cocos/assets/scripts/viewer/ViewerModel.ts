@@ -5,21 +5,25 @@ export type Direction = shared.Direction;
 export type AnimationId = character.AnimationId;
 export type SlotId = character.SlotId;
 export type SkinName = 'default' | 'red';
-/** single = one actor (A); compare = A and B; review = all 8 directions of A's animation side by side. */
-export type ViewMode = 'single' | 'compare' | 'review';
+/** single = one actor (A); compare = A and B; review = all 8 directions of A's animation; crowd = N copies (perf check). */
+export type ViewMode = 'single' | 'compare' | 'review' | 'crowd';
 
 /** Everything the control panel edits. Plain data: the scene reads it every frame. */
 export interface ViewerSettings {
   direction: Direction;
   /** Animation of actor A (and of B unless compare is on). */
-  animation: AnimationId;
+  animation: ClipId;
   /** Animation of actor B in compare mode. */
-  animationB: AnimationId;
+  animationB: ClipId;
   mode: ViewMode;
+  /** Number of actors in crowd mode. */
+  crowd: number;
   /** Onion skin: ghost copies of A two frames before (blue) and after (red). */
   onion: boolean;
   /** DragonBones animation cache mode (realtime supports mix / scrub / slot edits). */
   cache: CacheMode;
+  /** ArmatureDisplay.enableBatch: merge armatures sharing a texture into one draw call. */
+  batch: boolean;
   paused: boolean;
   /** Loop one-shot animations while viewing (events fire each pass). */
   repeatOneShots: boolean;
@@ -45,8 +49,10 @@ export function defaultSettings(): ViewerSettings {
     animation: 'idle',
     animationB: 'walk',
     mode: 'single',
+    crowd: 30,
     onion: false,
     cache: 'realtime',
+    batch: false,
     paused: false,
     repeatOneShots: true,
     timeScale: 1,
@@ -72,7 +78,7 @@ export function viewStateFor(
     kind: 'player',
     direction,
     equipped: s.equipped,
-    animation: which === 'A' || s.mode !== 'compare' ? s.animation : s.animationB,
+    animation: baseAnimation(which === 'A' || s.mode !== 'compare' ? s.animation : s.animationB),
     ...(s.drawnInEight === null ? {} : { drawnInEight: s.drawnInEight }),
     paperdoll: {
       mounted: s.flags.mounted,
@@ -109,3 +115,16 @@ export function drawOrderDelta(view: character.CharacterViewState, rigSlotOrder:
 
 export const ALL_DIRECTIONS: readonly Direction[] = shared.DIRECTIONS;
 export const ANIMATION_IDS: readonly AnimationId[] = character.ANIMATIONS.map((a) => a.id);
+
+/**
+ * Extra clips a rig may ship beyond the 13 table animations: the attack combo (docs/art: attack, attack_2, attack_3).
+ * They are variants of the table animation `attack` (same loop flag, events, view state).
+ */
+export const EXTRA_CLIPS = ['attack_2', 'attack_3'] as const;
+export type ClipId = AnimationId | (typeof EXTRA_CLIPS)[number];
+export const ALL_CLIPS: readonly ClipId[] = [...ANIMATION_IDS, ...EXTRA_CLIPS];
+
+/** Table animation a clip belongs to (view state, loop flag, events come from it). */
+export function baseAnimation(c: ClipId): AnimationId {
+  return (c.startsWith('attack_') ? 'attack' : c) as AnimationId;
+}

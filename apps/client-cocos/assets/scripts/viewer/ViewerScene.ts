@@ -1,4 +1,4 @@
-import { Color, Component, Label, Node, ResolutionPolicy, Sprite, UITransform, _decorator, view } from 'cc';
+import { Color, Component, Label, Node, ResolutionPolicy, Sprite, UITransform, _decorator, resources, view } from 'cc';
 import { character, shared } from '../vendor/vgtd.mjs';
 import { newNode } from '../IsoAdapter';
 import { buildPlaceholderArt, type ArtFrames } from '../PlaceholderArt';
@@ -9,12 +9,14 @@ import { ViewerPanel, type PanelInfo } from './ViewerPanel';
 import {
   ALL_DIRECTIONS,
   ANIMATION_IDS,
+  ALL_CLIPS,
+  EXTRA_CLIPS,
   defaultSettings,
   drawOrderDelta,
   hiddenSpineSlots,
   skinIndex,
   viewStateFor,
-  type AnimationId,
+  type ClipId,
   type Direction,
 } from './ViewerModel';
 
@@ -45,7 +47,7 @@ export interface ViewerHook {
   /** Pause and seek every actor to normalised time 0..1 of its animation. */
   seekNorm(norm: number): void;
   /** Clock info for A (or the review clock), frame count at 30 fps, loaded rig direction. */
-  info(): { time: number; duration: number; frames: number; rig: string | null; mode: string };
+  info(): { time: number; duration: number; frames: number; rig: string | null; mode: string; source: string };
   /** Loop seam of the current animation (realtime rigs). */
   seam(): { loop: boolean; meanStep: number; seamStep: number; ratio: number } | null;
   /** Show / hide the DOM panel and the HUD (clean frames for capture). */
@@ -80,6 +82,9 @@ export class ViewerScene extends Component {
   private lastT = 0;
   private lastWrap = 0;
   private src = { folder: 'dragonbones/viewer', stem: 'rig' };
+  private crowdStagger = 0;
+  /** Directions that have a rig file in the source folder (empty = unknown). */
+  private rigDirs = new Set<Direction>();
   private readonly events: string[] = [];
   private readonly texturesSeen = new Set<string>();
   private readonly slots = new Map<string, Slot>();
@@ -109,9 +114,15 @@ export class ViewerScene extends Component {
     this.world = newNode('World', this.node);
     const hudRoot = newNode('Hud', this.node);
     this.hud = new PerfHud(hudRoot, this.art);
-    this.hud.hint = 'DragonBones viewer (rig: tools/dragonbones-testrig)';
+    // default character: the Kiem tu export when it is in the project, else the generated test rig
+    if (resources.getInfoWithPath('dragonbones/kiem-tu/kiemtu_S_ske'))
+      this.src = { folder: 'dragonbones/kiem-tu', stem: 'kiemtu' };
     this.hud.extra = () => ({ l3Objects: this.activeCount() });
     this.readHash();
+    for (const d of ALL_DIRECTIONS) {
+      if (resources.getInfoWithPath(`${this.src.folder}/${this.src.stem}_${d}_ske`)) this.rigDirs.add(d);
+    }
+    this.hud.hint = `DragonBones viewer: ${this.src.folder}/${this.src.stem}_<DIR>`;
     this.panel = new ViewerPanel(this.settings, {
       onChange: () => (this.dirty = true),
       onRestart: () => this.restart(),
@@ -124,6 +135,8 @@ export class ViewerScene extends Component {
   }
 
   private makeHook(): ViewerHook {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
     return {
       ready: () =>
         this.ready &&
@@ -153,6 +166,7 @@ export class ViewerScene extends Component {
           frames: a ? Math.round(a.duration * KEY_FPS) : 0,
           rig: this.mainActor().skeletonDirection,
           mode: this.settings.mode,
+          source: `${this.src.folder}/${this.src.stem}`,
         };
       },
       seam: () => this.mainActor().seamMetric(),
@@ -161,13 +175,29 @@ export class ViewerScene extends Component {
         this.hud.setVisible(visible);
         this.lastPanelSig = '';
       },
-      animations: ANIMATION_IDS,
+      get animations() {
+        const clips = self.mainActor().clipNames();
+        return [...ANIMATION_IDS, ...EXTRA_CLIPS.filter((c) => clips.includes(c))];
+      },
       directions: ALL_DIRECTIONS,
     };
   }
 
+  /**
+   * View state of an actor. If the animation would be 'drawn in 8' but the rig folder has no rig for that direction
+   * (e.g. only the 5 drawn directions are shipped), fall back to the drawn rig + mirror instead of failing to load.
+   */
+  private vs(which: 'A' | 'B', dir: Direction = this.settings.direction): character.CharacterViewState {
+    const v = viewStateFor(this.settings, which, dir);
+    if (this.rigDirs.size > 0 && !this.rigDirs.has(v.skeletonDirection) && this.settings.drawnInEight === null) {
+      return viewStateFor({ ...this.settings, drawnInEight: false }, which, dir);
+    }
+    return v;
+  }
+
   private mainActor(): CharacterActor {
-    return this.slot(this.settings.mode === 'review' ? 'R:S' : 'A').actor;
+    const m = this.settings.mode;
+    return this.slot(m === 'review' ? 'R:S' : m === 'crowd' ? 'C:0' : 'A').actor;
   }
 
   /** Actor slot by key ('A', 'B', 'R:<dir>', 'G-', 'G+'), created on first use. */
@@ -227,23 +257,27 @@ export class ViewerScene extends Component {
   private readHash(): void {
     const q = new URLSearchParams(location.hash.slice(1).replace(/,/g, '&'));
     const s = this.settings;
-    const anim = q.get('anim') as AnimationId | null;
-    if (anim && ANIMATION_IDS.includes(anim)) s.animation = anim;
-    const animb = q.get('animb') as AnimationId | null;
-    if (animb && ANIMATION_IDS.includes(animb)) s.animationB = animb;
+    const anim = q.get('anim') as ClipId | null;
+    if (anim && ALL_CLIPS.includes(anim)) s.animation = anim;
+    const animb = q.get('animb') as ClipId | null;
+    if (animb && ALL_CLIPS.includes(animb)) s.animationB = animb;
     const dir = q.get('dir') as Direction | null;
     if (dir && ALL_DIRECTIONS.includes(dir)) s.direction = dir;
     const mode = q.get('mode');
-    if (mode === 'compare' || mode === 'review' || mode === 'single') s.mode = mode;
+    if (mode === 'compare' || mode === 'review' || mode === 'single' || mode === 'crowd') s.mode = mode;
+    const n = Number(q.get('n'));
+    if (q.has('n') && Number.isFinite(n)) s.crowd = Math.min(60, Math.max(1, Math.round(n)));
     if (q.get('compare') === '1') s.mode = 'compare'; // legacy flag
     if (q.has('paused')) s.paused = q.get('paused') !== '0';
     if (q.get('skin') === 'red') s.skin = 'red';
     if (q.get('onion') === '1') s.onion = true;
+    if (q.get('batch') === '1') s.batch = true;
     const cache = q.get('cache');
     if (cache === 'shared' || cache === 'private' || cache === 'realtime') s.cache = cache;
     if (q.has('ts')) s.timeScale = Math.min(3, Math.max(0.05, Number(q.get('ts')) || 1));
     const src = q.get('src');
-    if (src && /^[\w-]+(\/[\w-]+)*$/.test(src)) this.src.folder = src;
+    if (q.get('rig') === 'test') this.src = { folder: 'dragonbones/viewer', stem: 'rig' }; // the generated test rig
+    if (src && /^[\w-]+(\/[\w-]+)*$/.test(src)) this.src = { folder: src, stem: 'rig' };
     const stem = q.get('stem');
     if (stem && /^[\w-]+$/.test(stem)) this.src.stem = stem;
     const off = q.get('off');
@@ -293,7 +327,7 @@ export class ViewerScene extends Component {
 
   // ------------------------------------------------------------------ apply / layout
 
-  private opts(hidden: ReadonlySet<string>, paused: boolean): ApplyOptions {
+  private opts(hidden: ReadonlySet<string>, paused: boolean, clip?: string): ApplyOptions {
     const s = this.settings;
     return {
       skinIndex: skinIndex(s.skin),
@@ -302,13 +336,15 @@ export class ViewerScene extends Component {
       paused,
       repeat: s.repeatOneShots,
       cache: s.cache,
+      batch: s.batch,
+      ...(clip ? { clip } : {}),
       hidden: hidden as ReadonlySet<never>,
     };
   }
 
   private applyAll(): void {
     const s = this.settings;
-    const viewA = viewStateFor(s, 'A');
+    const viewA = this.vs('A');
     const hidden = hiddenSpineSlots(viewA);
     const active = new Set<string>();
     const place = (
@@ -318,6 +354,7 @@ export class ViewerScene extends Component {
       v: character.CharacterViewState,
       paused: boolean,
       label?: string,
+      clip: string = s.animation,
     ) => {
       const sl = this.slot(key);
       active.add(key);
@@ -331,12 +368,12 @@ export class ViewerScene extends Component {
         sl.label.node.setPosition(x, y - 30, 0);
       }
       sl.want = v.skeletonDirection;
-      sl.actor.apply(v, this.opts(hiddenSpineSlots(v), paused));
+      sl.actor.apply(v, this.opts(hiddenSpineSlots(v), paused, clip));
     };
     const baseY = FEET_Y / this.zoom();
     if (s.mode === 'review') {
       REVIEW_ORDER.forEach((d, i) => {
-        const v = viewStateFor(s, 'A', d);
+        const v = this.vs('A', d);
         const tag = v.mirrored
           ? ` (mirror of ${v.skeletonDirection})`
           : v.skeletonDirection !== v.direction
@@ -344,10 +381,28 @@ export class ViewerScene extends Component {
             : '';
         place(`R:${d}`, ((i % 4) - 1.5) * 150, i < 4 ? 28 : -112, v, true, `${d}${tag}`);
       });
+    } else if (s.mode === 'crowd') {
+      const cols = 6;
+      for (let i = 0; i < s.crowd; i++) {
+        const key = `C:${i}`;
+        place(key, ((i % cols) - (cols - 1) / 2) * 135, 150 - Math.floor(i / cols) * 95, viewA, s.paused);
+        this.slot(key).floor.active = false;
+      }
+      // stagger the start phases so the copies are not in lockstep
+      this.crowdStagger++;
+      const mine = this.crowdStagger;
+      for (let i = 0; i < s.crowd; i++) {
+        this.scheduleOnce(
+          () => {
+            if (mine === this.crowdStagger && this.settings.mode === 'crowd') this.slot(`C:${i}`).actor.restart();
+          },
+          0.3 + i * 0.037,
+        );
+      }
     } else {
       const gap = s.mode === 'compare' ? 105 : 0;
       place('A', -gap, baseY, viewA, s.paused);
-      if (s.mode === 'compare') place('B', gap, baseY, viewStateFor(s, 'B'), s.paused);
+      if (s.mode === 'compare') place('B', gap, baseY, this.vs('B'), s.paused, undefined, s.animationB);
       if (s.onion) {
         for (const [key, tint] of [
           ['G-', [90, 140, 255, 150]],
@@ -359,7 +414,7 @@ export class ViewerScene extends Component {
           sl.actor.root.setPosition(-gap, baseY, 0);
           sl.floor.active = false;
           sl.want = viewA.skeletonDirection;
-          sl.actor.apply(viewA, this.opts(hidden, true));
+          sl.actor.apply(viewA, this.opts(hidden, true, s.animation));
           sl.actor.setTint(tint[0], tint[1], tint[2], tint[3]);
           // behind A: ghosts only show where the pose differs
           sl.actor.root.setSiblingIndex(this.slot('A').actor.root.getSiblingIndex());
@@ -379,7 +434,13 @@ export class ViewerScene extends Component {
   }
 
   private zoom(): number {
-    return this.settings.mode === 'single' ? 2.6 : this.settings.mode === 'compare' ? 2.1 : 1.4;
+    return this.settings.mode === 'single'
+      ? 2.6
+      : this.settings.mode === 'compare'
+        ? 2.1
+        : this.settings.mode === 'crowd'
+          ? 0.8
+          : 1.4;
   }
 
   /** Centre the actors in the area not covered by the DOM panel. */
@@ -441,7 +502,7 @@ export class ViewerScene extends Component {
     const now = performance.now();
     if (now - this.lastInfo < 100) return;
     this.lastInfo = now;
-    const viewA = viewStateFor(s, 'A');
+    const viewA = this.vs('A');
     const ta = main.time();
     const rigDir = main.skeletonDirection;
     if (ta && this.lastT > ta.time + 0.01) this.lastWrap = now;
@@ -462,6 +523,7 @@ export class ViewerScene extends Component {
       seam: seam ?? null,
       canSeek: main.canSeek,
       rigSource: `${this.src.folder}/${this.src.stem}_<DIR>`,
+      clips: main.clipNames(),
       wrapAt: this.lastWrap,
     };
     this.panel.refresh(now, info);
@@ -473,7 +535,7 @@ export class ViewerScene extends Component {
     const ref = this.mainActor().time();
     if (!ref) return;
     if (!s.paused) this.reviewT += dt * s.timeScale;
-    const loop = s.repeatOneShots || viewStateFor(s, 'A').animation.loop;
+    const loop = s.repeatOneShots || this.vs('A').animation.loop;
     const dur = ref.duration;
     if (loop && this.reviewT >= dur) {
       this.lastWrap = performance.now();

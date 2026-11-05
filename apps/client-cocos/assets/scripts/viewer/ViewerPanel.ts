@@ -1,9 +1,9 @@
 import { character } from '../vendor/vgtd.mjs';
 import {
   ALL_DIRECTIONS,
-  ANIMATION_IDS,
+  ALL_CLIPS,
   SPINE_SLOTS,
-  type AnimationId,
+  type ClipId,
   type Direction,
   type SkinName,
   type SlotId,
@@ -24,6 +24,8 @@ export interface PanelInfo {
   /** Realtime-only features (scrub, mix, slot edits) available. */
   canSeek: boolean;
   rigSource: string;
+  /** Clip names in the loaded armature (empty = unknown): buttons for missing clips are disabled. */
+  clips: string[];
   /** performance.now() of the last loop wrap (flashes the seam badge). */
   wrapAt: number;
 }
@@ -130,7 +132,7 @@ export class ViewerPanel {
   private html(): string {
     const btn = (data: string, label: string, extra = '') =>
       `<button class="b ${extra}" data-${data}>${label}</button>`;
-    const anims = ANIMATION_IDS.map((id) => btn(`anim="${id}"`, id)).join('');
+    const anims = ALL_CLIPS.map((id) => btn(`anim="${id}"`, id)).join('');
     const compass = DIR_GRID.map((d) => (d ? btn(`dir="${d}"`, d) : '<span></span>')).join('');
     const slots = SPINE_SLOTS.map(
       (sl) =>
@@ -138,7 +140,7 @@ export class ViewerPanel {
     ).join('');
     const flag = (k: string, label: string) =>
       `<label class="chk"><input type="checkbox" data-flag="${k}"><span>${label}</span></label>`;
-    const animsB = ANIMATION_IDS.map((id) => `<option value="${id}">${id}</option>`).join('');
+    const animsB = ALL_CLIPS.map((id) => `<option value="${id}">${id}</option>`).join('');
     return `
 <div class="tabs">${TABS.map(([k, l]) => `<button data-tab="${k}">${l}</button>`).join('')}</div>
 <div class="body">
@@ -161,11 +163,12 @@ export class ViewerPanel {
    <label class="row"><span class="k">skin</span><select data-r="skin"><option value="default">default (blue)</option><option value="red">red</option></select></label>
    <div class="info" data-r="hidden"></div></section>
  <section data-sec="compare"><h3>View mode</h3>
-   <div class="row2"><button class="b" data-mode="single">Single</button><button class="b" data-mode="compare">Compare</button><button class="b" data-mode="review">Review</button></div>
-   <div class="info">Compare: A and B side by side. Review: all 8 directions (5 drawn + mirror) of A's animation, synced.</div>
+   <div class="row2"><button class="b" data-mode="single">Single</button><button class="b" data-mode="compare">Compare</button><button class="b" data-mode="review">Review</button><button class="b" data-mode="crowd">Crowd</button></div>
+   <div class="info">Compare: A and B side by side. Review: all 8 directions (5 drawn + mirror) of A's animation, synced. Crowd: 30 copies (CPU update / render ms in the HUD, for cache-mode comparisons).</div>
    <label class="row"><span class="k">B plays</span><select data-r="animb">${animsB}</select></label>
    <label class="chk"><input type="checkbox" data-r="onion"><span>onion skin (blue = -2f, red = +2f)</span></label>
    <div class="row2"><button class="b" data-act="restart">Sync restart</button></div>
+   <label class="chk"><input type="checkbox" data-r="batch"><span>batch armatures (enableBatch)</span></label>
    <label class="row"><span class="k">cache mode</span><select data-r="cache"><option value="realtime">realtime</option><option value="shared">shared cache</option><option value="private">private cache</option></select></label>
    <div class="info" data-r="cmpinfo"></div>
    <div class="info" data-r="seam" style="margin-top:6px"></div></section>
@@ -202,7 +205,7 @@ export class ViewerPanel {
         this.sync();
       } else if (d.anim) {
         // in compare mode with B focused we still edit A; B has its own selector
-        s.animation = d.anim as AnimationId;
+        s.animation = d.anim as ClipId;
         changed();
       } else if (d.dir) {
         s.direction = d.dir as Direction;
@@ -253,11 +256,15 @@ export class ViewerPanel {
       changed();
     });
     this.q<HTMLSelectElement>('[data-r=animb]').addEventListener('change', (e) => {
-      s.animationB = (e.target as HTMLSelectElement).value as AnimationId;
+      s.animationB = (e.target as HTMLSelectElement).value as ClipId;
       changed();
     });
     this.q<HTMLInputElement>('[data-r=onion]').addEventListener('change', (e) => {
       s.onion = (e.target as HTMLInputElement).checked;
+      changed();
+    });
+    this.q<HTMLInputElement>('[data-r=batch]').addEventListener('change', (e) => {
+      s.batch = (e.target as HTMLInputElement).checked;
       changed();
     });
     this.q<HTMLSelectElement>('[data-r=cache]').addEventListener('change', (e) => {
@@ -290,13 +297,12 @@ export class ViewerPanel {
       if ((e.target as HTMLElement).tagName === 'SELECT') return;
       const dirs = ALL_DIRECTIONS;
       const i = dirs.indexOf(s.direction);
-      const a = ANIMATION_IDS.indexOf(s.animation);
+      const a = ALL_CLIPS.indexOf(s.animation);
       if (e.code === 'Space') s.paused = !s.paused;
       else if (e.code === 'ArrowRight') s.direction = dirs[(i + 1) % dirs.length]!;
       else if (e.code === 'ArrowLeft') s.direction = dirs[(i + dirs.length - 1) % dirs.length]!;
-      else if (e.code === 'ArrowDown') s.animation = ANIMATION_IDS[(a + 1) % ANIMATION_IDS.length]!;
-      else if (e.code === 'ArrowUp')
-        s.animation = ANIMATION_IDS[(a + ANIMATION_IDS.length - 1) % ANIMATION_IDS.length]!;
+      else if (e.code === 'ArrowDown') s.animation = ALL_CLIPS[(a + 1) % ALL_CLIPS.length]!;
+      else if (e.code === 'ArrowUp') s.animation = ALL_CLIPS[(a + ALL_CLIPS.length - 1) % ALL_CLIPS.length]!;
       else if (e.code === 'BracketRight') s.timeScale = Math.min(3, Math.round((s.timeScale + 0.1) * 10) / 10);
       else if (e.code === 'BracketLeft') s.timeScale = Math.max(0.05, Math.round((s.timeScale - 0.1) * 10) / 10);
       else return;
@@ -335,6 +341,7 @@ export class ViewerPanel {
       cb.checked = (s.flags as Record<string, boolean>)[cb.dataset.flag!]!;
     this.q<HTMLInputElement>('[data-r=onion]').checked = s.onion;
     this.q<HTMLSelectElement>('[data-r=cache]').value = s.cache;
+    this.q<HTMLInputElement>('[data-r=batch]').checked = s.batch;
     for (const b of this.all('[data-mode]')) b.classList.toggle('on', b.dataset.mode === s.mode);
     this.q<HTMLInputElement>('[data-r=repeat]').checked = s.repeatOneShots;
     this.q<HTMLSelectElement>('[data-r=animb]').value = s.animationB;
@@ -366,6 +373,10 @@ export class ViewerPanel {
     if (now - this.lastRefresh < 100) return;
     this.lastRefresh = now;
     const s = this.s;
+    for (const b of this.all<HTMLButtonElement>('[data-anim]')) {
+      b.disabled = info.clips.length > 0 && !info.clips.includes(b.dataset.anim!);
+      b.style.opacity = b.disabled ? '0.35' : '';
+    }
     const fmt = (f: ActorFrame | null) =>
       f ? `${f.time.toFixed(2)} / ${f.duration.toFixed(2)} s  frame ${f.frame + 1}/${f.frames}` : '-';
     const a = info.viewA.animation;

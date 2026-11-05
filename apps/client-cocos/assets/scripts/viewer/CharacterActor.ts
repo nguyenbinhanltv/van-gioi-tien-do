@@ -30,7 +30,11 @@ export interface ApplyOptions {
   paused: boolean;
   /** Loop one-shots while viewing. */
   repeat: boolean;
+  /** Clip (animation name in the rig) to play; defaults to the view state's animation id. */
+  clip?: string;
   cache: CacheMode;
+  /** Let armatures that share a texture draw in one batch (ArmatureDisplay.enableBatch). */
+  batch: boolean;
   /** Slots whose display must be hidden. */
   hidden: ReadonlySet<SlotId>;
 }
@@ -73,6 +77,8 @@ export interface CharacterActor {
   seek(t: number): void;
   /** Restart the current animation. */
   restart(): void;
+  /** Names of the clips in the loaded armature (empty when unknown). */
+  clipNames(): string[];
   /** Setup slot order of the loaded rig (back -> front). */
   slotOrder(): string[];
   /** RGBA tint (0..255) for ghost / onion-skin copies. */
