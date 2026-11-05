@@ -91,6 +91,8 @@ Công thức giữ đúng dạng yêu cầu, bổ sung ba quy tắc để server
 
 Hệ số phẩm q theo 6 cấp: Trắng 0,6 · Lục 0,8 · Lam 1,0 · Tím 1,2 · Vàng 1,4 · Đỏ 1,6.
 
+> _[Cập nhật D23–D24, 2026-11-05: id đan trong JSON (`main_pill_ids`) theo mẫu `pill_<tên không dấu, snake_case>_dan`, khớp tên đan ở bảng trên (Trúc Cơ Đan → `pill_truc_co_dan`, Kết Anh Đan → `pill_ket_anh_dan`, Cửu Chuyển Kim Đan → `pill_cuu_chuyen_kim_dan`). Các đan chủ ngưỡng khác chưa có tên trong tài liệu nên đặt theo cùng mẫu (cần game designer duyệt tên).]_
+
 ### Ví dụ tính
 
 | Tình huống                                                                                                     | Base_eff | Pill                           | Karma_Penalty | Kết quả            |
@@ -359,6 +361,8 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
 
 ### Schema
 
+> _[Cập nhật D23, 2026-11-05: `realms.minItems` 7 → 9 (đúng 9 cảnh giới); `max_pills` tối đa 5 → 3 (khớp luật m ≤ 3); thêm `tribulation.type = heart_demon_light` cho "Tâm Ma nhẹ" của Trúc Cơ → Kim Đan; `main_pill_ids` có `pattern` `^pill_[a-z0-9_]+_dan$`.]_
+
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -409,7 +413,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
         "max_rate": { "$ref": "#/$defs/ratio" },
         "pity_per_fail": { "$ref": "#/$defs/ratio" },
         "pity_cap": { "$ref": "#/$defs/ratio" },
-        "max_pills": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "max_pills": { "type": "integer", "minimum": 1, "maximum": 3 },
         "wrong_realm_pill_factor": { "$ref": "#/$defs/ratio" },
         "karma_penalty_per_1000": { "$ref": "#/$defs/ratio" },
         "quality_multipliers": {
@@ -438,7 +442,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
         "absorb_growth": { "type": "number", "exclusiveMinimum": 1 }
       }
     },
-    "realms": { "type": "array", "minItems": 7, "items": { "$ref": "#/$defs/realm" } }
+    "realms": { "type": "array", "minItems": 9, "items": { "$ref": "#/$defs/realm" } }
   },
   "$defs": {
     "ratio": { "type": "number", "minimum": 0, "maximum": 1 },
@@ -461,7 +465,16 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "required": ["type"],
       "additionalProperties": false,
       "properties": {
-        "type": { "enum": ["none", "heart_demon", "heart_demon_multi", "lightning", "lightning_heart_demon"] },
+        "type": {
+          "enum": [
+            "none",
+            "heart_demon_light",
+            "heart_demon",
+            "heart_demon_multi",
+            "lightning",
+            "lightning_heart_demon"
+          ]
+        },
         "strikes": { "type": "integer", "minimum": 1 },
         "waves": { "type": "integer", "minimum": 1, "maximum": 9 },
         "strikes_per_wave": { "type": "integer", "minimum": 1 },
@@ -502,7 +515,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
           "properties": {
             "to": { "type": "string", "pattern": "^[a-z_]+$" },
             "base_rate": { "$ref": "#/$defs/ratio" },
-            "main_pill_ids": { "type": "array", "items": { "type": "string" } },
+            "main_pill_ids": { "type": "array", "items": { "type": "string", "pattern": "^pill_[a-z0-9_]+_dan$" } },
             "tribulation": { "$ref": "#/$defs/tribulation" }
           }
         }
@@ -551,7 +564,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "truc_co",
         "base_rate": 0.7,
-        "main_pill_ids": ["pill_truc_co"],
+        "main_pill_ids": ["pill_truc_co_dan"],
         "tribulation": { "type": "none" }
       }
     },
@@ -566,7 +579,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
         "to": "kim_dan",
         "base_rate": 0.55,
         "main_pill_ids": ["pill_ket_kim_dan"],
-        "tribulation": { "type": "heart_demon" }
+        "tribulation": { "type": "heart_demon_light" }
       }
     },
     {
@@ -579,7 +592,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "nguyen_anh",
         "base_rate": 0.45,
-        "main_pill_ids": ["pill_ket_anh"],
+        "main_pill_ids": ["pill_ket_anh_dan"],
         "tribulation": {
           "type": "lightning_heart_demon",
           "strikes": 3,
@@ -603,7 +616,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "hoa_than",
         "base_rate": 0.35,
-        "main_pill_ids": ["pill_hoa_than"],
+        "main_pill_ids": ["pill_hoa_than_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 6,
@@ -627,7 +640,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "luyen_hu",
         "base_rate": 0.3,
-        "main_pill_ids": ["pill_luyen_hu"],
+        "main_pill_ids": ["pill_luyen_hu_dan"],
         "tribulation": { "type": "heart_demon_multi" }
       }
     },
@@ -641,7 +654,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "hop_the",
         "base_rate": 0.25,
-        "main_pill_ids": ["pill_hop_the"],
+        "main_pill_ids": ["pill_hop_the_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 9,
@@ -665,7 +678,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "dai_thua",
         "base_rate": 0.2,
-        "main_pill_ids": ["pill_dai_thua"],
+        "main_pill_ids": ["pill_dai_thua_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 18,
@@ -689,7 +702,7 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
       "breakthrough": {
         "to": "do_kiep",
         "base_rate": 0.15,
-        "main_pill_ids": ["pill_do_kiep"],
+        "main_pill_ids": ["pill_do_kiep_dan"],
         "tribulation": {
           "type": "lightning_heart_demon",
           "strikes": 36,
