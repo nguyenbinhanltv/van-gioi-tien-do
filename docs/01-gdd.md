@@ -14,7 +14,7 @@
 | Engine              | **Cocos Creator 3.x** (dự phòng: Unity 2D, Godot 4)                 | _[Cập nhật §4: thay Unreal Engine 5]_                                                       |
 | Nền tảng            | Web H5/WebGL, iOS, Android, PC; cross-play                          | _[Cập nhật §4: thay PC + Mobile]_                                                           |
 | Hình thức asset     | Sprite Sheet, Spine 2D, Tilemap diamond, Particle 2D, sprite shader | _[Cập nhật §4: thay Mesh, LOD, Nanite, Niagara]_                                            |
-| Gói tải đầu (Web)   | ≤ **25 MB**                                                         | _[Cập nhật §4: thay 30 MB (dự phòng 29 MB)]_                                                |
+| Gói tải đầu (Web)   | ≤ **25 MB**                                                         | _[Cập nhật §4: thay 30 MB (dự phòng 1 MB → 29 MB)]_                                         |
 | Thang phẩm chất     | **6 phẩm: Trắng → Lục → Lam → Tím → Vàng → Đỏ**                     | _[Cập nhật §4: thay thang 5 phẩm]_                                                          |
 | Icon                | Nguồn 256, xuất 48 / 64 / 128                                       | _[Cập nhật §4: thay nguồn 512 → hiển thị 256 (3D) và nguồn 256 → hiển thị 128 (Matrix 2D)]_ |
 
