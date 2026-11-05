@@ -18,11 +18,7 @@
     "typecheck": "node scripts/check_syntax.js",
     "test": "vitest run"
   },
-  "devDependencies": {
-    "vitest": "^2.1.0"
-  },
   "optionalDependencies": {
-    "@resvg/resvg-js": "^2.6.2",
-    "gl": "^8.1.6"
+    "@resvg/resvg-js": "^2.6.2"
   }
 }
