@@ -23,6 +23,7 @@ export type QaCheck =
   | 'duration'
   | 'keys'
   | 'ground'
+  | 'weapon'
   | 'detach'
   | 'mesh-strain'
   | 'islands'
@@ -433,6 +434,29 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
   for (const e of clip.events) {
     if (!(SPINE_EVENT_NAMES as readonly string[]).includes(e.name)) {
       add({ severity: 'error', check: 'events', frame: e.frame, message: `unknown event '${e.name}'` });
+    }
+  }
+
+  // exactly one weapon in the hand per frame, and never the back-sword at the same time (a second sword = ghost sword)
+  const weaponSlots = rig.slots.filter((x) => x.paperdoll === 'weapon_R').map((x) => x.name);
+  const backSlots = rig.slots.filter((x) => x.paperdoll === 'sword_back').map((x) => x.name);
+  if (weaponSlots.length) {
+    for (let f = 0; f <= N; f++) {
+      const visible = (names: string[]) => names.filter((n) => poses[f]!.attachments.get(n));
+      const hand = visible(weaponSlots).length;
+      const back = visible(backSlots).length;
+      if (hand !== 1 || (hand === 1 && back > 0)) {
+        add({
+          severity: 'error',
+          check: 'weapon',
+          frame: f,
+          message:
+            hand !== 1
+              ? `${hand} weapon_R displays visible (exactly one expected)`
+              : 'the back sword is visible while the sword is in hand (two swords)',
+        });
+        break;
+      }
     }
   }
 

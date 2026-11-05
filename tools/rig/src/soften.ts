@@ -6,7 +6,7 @@
  * modified.
  */
 import { evalPose } from './pose.js';
-import { components, dominantBone, pointToMesh, visibleAttachments } from './qa-mesh.js';
+import { components, connectedBones, dominantBone, pointToMesh, visibleAttachments } from './qa-mesh.js';
 import { skinAttachment, type SkinnedMesh } from './skinning.js';
 import type { MeshAttachment, RigAttachment, RigDocument, RigSkin } from './schema.js';
 
@@ -28,8 +28,7 @@ export function softenSeams(rig: RigDocument, opts: SoftenOptions = {}): RigDocu
   const touch = opts.touchPx ?? 2;
   const skinName = opts.skin ?? 'default';
   const rest = evalPose(rig, null, 0, { noIk: true });
-  const parentOf = new Map(rig.bones.map((b) => [b.name, b.parent]));
-  const jointed = (a: string, b: string) => a !== b && (parentOf.get(a) === b || parentOf.get(b) === a);
+  const jointed = connectedBones(rig);
 
   const pieces: Piece[] = [];
   for (const it of visibleAttachments(rig, rest)) {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   ClipBuilder,
+  autoSkin,
   buildReferenceAtlas,
   buildReferenceHumanoid,
   checkSilhouette,
@@ -9,9 +10,11 @@ import {
   evalPose,
   fitToSilhouette,
   meshQa,
+  removePieces,
   runQa,
   skinAttachment,
   softenSeams,
+  underpaintNeeds,
   type MeshAttachment,
   type RigDocument,
 } from '../src/index.js';
@@ -100,7 +103,7 @@ describe('mesh QA', () => {
     ]);
     c.translate('head', [
       [0, 0, 0],
-      [4, 30, 0],
+      [4, 90, 0],
     ]);
     expect(meshQa(stretched, c.build()).some((i) => i.check === 'mesh-strain')).toBe(true);
   });
@@ -190,5 +193,97 @@ describe('seam hitch (velocity vectors)', () => {
     expect(
       runQa(rig, hitch.build()).issues.some((i) => i.check === 'loop-seam' && /velocity jumps/.test(i.message)),
     ).toBe(true);
+  });
+});
+
+describe('weapon QA, piece removal, underpaint report', () => {
+  it('exactly one weapon in hand per frame; a visible back sword is flagged', () => {
+    const rig = buildReferenceHumanoid('E');
+    const ok = new ClipBuilder(rig, { name: 'x', frames: 4, loop: false }).build();
+    expect(runQa(rig, ok).issues.some((i) => i.check === 'weapon')).toBe(false);
+    const both = new ClipBuilder(rig, { name: 'x', frames: 4, loop: false });
+    both.attachment('weapon_R', [
+      [0, 'weapon_R'],
+      [2, null],
+    ]);
+    expect(
+      runQa(rig, both.build()).issues.some((i) => i.check === 'weapon' && /weapon_R displays/.test(i.message)),
+    ).toBe(true);
+    const withBack: RigDocument = {
+      ...rig,
+      slots: [
+        ...rig.slots,
+        { name: 'sword_back2', bone: 'spine_upper', paperdoll: 'sword_back', attachment: 'sword_back' },
+      ],
+    };
+    const sk = withBack.skins[0]!;
+    const patched: RigDocument = {
+      ...withBack,
+      skins: [
+        {
+          ...sk,
+          attachments: { ...sk.attachments, sword_back2: { sword_back: sk.attachments.sword_back!.sword_back! } },
+        },
+      ],
+    };
+    expect(
+      runQa(patched, new ClipBuilder(patched, { name: 'x', frames: 4, loop: false }).build()).issues.some((i) =>
+        /two swords/.test(i.message),
+      ),
+    ).toBe(true);
+  });
+
+  it('removePieces drops one island and keeps the rest intact', () => {
+    const rig = twoPieceRig();
+    const before = rig.skins[0]!.attachments.body!.body as MeshAttachment;
+    const { rig: out, removed } = removePieces(rig, { remove: (_s, bone) => bone === 'spine_upper' });
+    const after = out.skins[0]!.attachments.body!.body as MeshAttachment;
+    expect(removed).toBe(1);
+    expect(before.vertices.length / 2).toBe(8);
+    expect(after.vertices.length / 2).toBe(4);
+    expect(after.triangles).toEqual([0, 1, 2, 0, 2, 3]);
+    expect(after.weights!.every((w) => w[0]![0] === 'spine_mid')).toBe(true);
+  });
+
+  it('underpaintNeeds lists the seam, the pieces and the extension in px', () => {
+    const rig = twoPieceRig();
+    const needs = underpaintNeeds(rig, [bend(rig, 70)]);
+    expect(needs.length).toBe(1);
+    expect(needs[0]!.pieces.map((p) => p.bone).sort()).toEqual(['spine_mid', 'spine_upper']);
+    expect(needs[0]!.extendPx).toBeGreaterThan(3);
+    expect(underpaintNeeds(rig, [bend(rig, 0)])).toEqual([]);
+  });
+});
+
+describe('autoSkin', () => {
+  it('subdivides pieces on a seam, welds the seam vertices and keeps weights valid', () => {
+    const rig = twoPieceRig();
+    const { rig: skinned, report } = autoSkin(rig, { band: 8, cell: 5 });
+    const mesh = skinned.skins[0]!.attachments.body!.body as MeshAttachment;
+    expect(report.subdividedPieces).toBe(2);
+    expect(mesh.vertices.length / 2).toBeGreaterThan(8);
+    expect(report.vertices).toBe(mesh.vertices.length / 2);
+    for (const w of mesh.weights!) {
+      expect(w.length).toBeLessThanOrEqual(3);
+      expect(Math.abs(w.reduce((s, e) => s + e[1], 0) - 1)).toBeLessThan(1e-3);
+    }
+    // far corners are pinned to their own bone, seam vertices are shared by both
+    const pinned = mesh.weights!.filter((w) => w.length === 1);
+    expect(pinned.length).toBeGreaterThan(0);
+    expect(
+      mesh.weights!.some((w) => w.some((e) => e[0] === 'spine_mid') && w.some((e) => e[0] === 'spine_upper')),
+    ).toBe(true);
+    expect(mesh.uvs.length).toBe(mesh.vertices.length);
+    expect(mesh.triangles.every((t) => t < mesh.vertices.length / 2)).toBe(true);
+    expect(mesh.weights!.length).toBe(mesh.vertices.length / 2);
+    // and the bend opens a smaller seam than the rigid skinning did
+    const gap = (r: RigDocument) =>
+      Math.max(
+        0,
+        ...meshQa(r, bend(r, 70))
+          .filter((i) => i.check === 'detach')
+          .map((i) => i.value ?? 0),
+      );
+    expect(gap(skinned)).toBeLessThan(gap(rig));
   });
 });

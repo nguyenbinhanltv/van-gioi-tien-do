@@ -161,7 +161,7 @@ export function authorAttack1(rig: RigDocument): Clip {
   c.rotate('lower_arm_R', [
     [0, 0],
     [4, -35, EASE.whip],
-    [6, 0, EASE.out],
+    [6, 12, EASE.out],
     [N, 0],
   ]);
   c.rotate('hand_R', [
@@ -280,8 +280,8 @@ export function authorAttack3(rig: RigDocument): Clip {
   c.rotate('lower_arm_R', [
     [0, 0],
     [3, 105, EASE.inOut],
-    [6, 0, EASE.snapOut],
-    [8, 0, EASE.inOut],
+    [6, 10, EASE.snapOut],
+    [8, 8, EASE.inOut],
     [N, 0],
   ]);
   c.rotate('hand_R', [
