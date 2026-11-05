@@ -27,13 +27,13 @@
 
 ### 2.2 Khóa chuỗi
 
-| Quy ước                                | Ví dụ                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `domain.sub.name` chữ thường, dấu chấm | `ui.inventory.title`, `item.pill_truc_co.name`, `item.pill_truc_co.desc`, `quest.c1.first_qi.name`    |
-| Khớp trường dữ liệu                    | `name_key` / `desc_key` của nhiệm vụ ([12](12-nhiem-vu-cot-truyen.md) §5.2) mang tiền tố `quest.`     |
-| Biến thể theo chế độ nhập              | `tutorial.use_item.pc` / `tutorial.use_item.touch` (đọc theo `input_mode`, [16](16-onboarding.md) §2) |
-| Số nhiều                               | Dùng cơ chế ICU `plural` dù tiếng Việt không cần, để thêm ngôn ngữ sau không đổi khóa                 |
-| Mô tả cho dịch giả                     | Mỗi khóa mới có `context` ngắn (nơi hiển thị, độ dài tối đa)                                          |
+| Quy ước                                | Ví dụ                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `domain.sub.name` chữ thường, dấu chấm | `ui.inventory.title`, `item.pill_truc_co_dan.name`, `item.pill_truc_co_dan.desc`, `quest.c1.first_qi.name` |
+| Khớp trường dữ liệu                    | `name_key` / `desc_key` của nhiệm vụ ([12](12-nhiem-vu-cot-truyen.md) §5.2) mang tiền tố `quest.`          |
+| Biến thể theo chế độ nhập              | `tutorial.use_item.pc` / `tutorial.use_item.touch` (đọc theo `input_mode`, [16](16-onboarding.md) §2)      |
+| Số nhiều                               | Dùng cơ chế ICU `plural` dù tiếng Việt không cần, để thêm ngôn ngữ sau không đổi khóa                      |
+| Mô tả cho dịch giả                     | Mỗi khóa mới có `context` ngắn (nơi hiển thị, độ dài tối đa)                                               |
 
 Cấu trúc tệp đề xuất: `locales/vi-VN.json` (nguồn), `locales/en.json` (khung, sau MVP). CI (dự kiến): báo lỗi nếu khóa trong mã không có trong `vi-VN.json`, báo cảnh báo nếu khóa thiếu ở ngôn ngữ khác, và kiểm tra tham số `{...}` khớp giữa các ngôn ngữ. Thư viện cụ thể chưa chốt (xem câu hỏi Q2).
 

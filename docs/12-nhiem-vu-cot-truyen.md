@@ -320,7 +320,7 @@ File dữ liệu dự kiến: `quests.json` (một mảng `quests`) nằm cạnh
   "rewards": {
     "cult_minutes": 4,
     "stone_wild_hours": 0.05,
-    "items": [{ "item_id": "pill_tu_khi", "count": 1, "quality": 0 }]
+    "items": [{ "item_id": "pill_tu_khi_dan", "count": 1, "quality": 0 }]
   },
   "repeat": { "kind": "none" },
   "telemetry_tag": "ftue.first_qi"
