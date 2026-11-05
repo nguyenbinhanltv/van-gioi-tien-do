@@ -1,6 +1,6 @@
 # Hệ phái & Hệ thống kỹ năng
 
-> **Trạng thái: thiết kế mới – chờ duyệt.** Toàn bộ tài liệu này là **thiết kế bổ sung** (không có trong 8 tài liệu gốc). Mọi con số là **Đề xuất – chờ duyệt**, trừ những chỗ ghi rõ nguồn [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` / [08](08-server-architecture.md). Không mâu thuẫn [00 §3–§4](00-ho-so-tong-hop.md). Bối cảnh: [01-gdd.md](01-gdd.md) §7; phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md).
+> **Trạng thái: thiết kế mới – chờ duyệt.** Toàn bộ tài liệu này là **thiết kế bổ sung** (không có trong 8 tài liệu gốc). Mọi con số là **Đề xuất – chờ duyệt**, trừ những chỗ ghi rõ nguồn [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` / [08](08-server-architecture.md). Thứ bậc căn cứ: [DECISIONS.md](DECISIONS.md) (D14+) > [00 §3–§4](00-ho-so-tong-hop.md) > 07 / `@vgtd/shared` > tài liệu này; không mâu thuẫn các mục trước. Bối cảnh: [01-gdd.md](01-gdd.md) §7; phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md).
 >
 > **Cách dùng số liệu:** mọi hệ số sát thương dùng công thức tổng ở 07 §4 (`Raw = ATK · c_skill`, `DMG = Raw² / (Raw + DEF_eff) · M_elem · Crit · Suppress · U(0,95; 1,05)`); chỉ số gốc ở 07 §1. Phần JSON Schema (mục 6) là **đề xuất để hiện thực sau** trong `@vgtd/shared` (`src/schemas/skill_definitions.schema.json`, `src/data/skills.json`, `src/formulas/skill.ts`) theo đúng khuôn của `realm_progression.json` / `elemental_matrix.json`.
 

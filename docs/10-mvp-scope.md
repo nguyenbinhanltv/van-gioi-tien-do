@@ -1,6 +1,6 @@
 # Phạm vi MVP – Closed Beta
 
-> **Trạng thái: thiết kế mới – chờ duyệt.** Tài liệu này định nghĩa **cụ thể** bản closed beta đầu tiên. Mọi con số là **Đề xuất – chờ duyệt** trừ khi ghi nguồn [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` / [00 §3](00-ho-so-tong-hop.md). Không mâu thuẫn [00 §3–§4](00-ho-so-tong-hop.md). Các cột "02" trích **đúng con số "SL MVP" của [02-asset-matrix-2d.md](02-asset-matrix-2d.md)** — đó là số lượng **bản thiết kế đầy đủ**, không phải beta; cột "Beta" là phạm vi thu gọn đề xuất ở đây.
+> **Trạng thái: thiết kế mới – chờ duyệt.** Tài liệu này định nghĩa **cụ thể** bản closed beta đầu tiên. Mọi con số là **Đề xuất – chờ duyệt** trừ khi ghi nguồn [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` / [00 §3](00-ho-so-tong-hop.md). Thứ bậc căn cứ: [DECISIONS.md](DECISIONS.md) (D14+) > [00 §3–§4](00-ho-so-tong-hop.md) > 07 / `@vgtd/shared` > tài liệu này; không mâu thuẫn các mục trước. Các cột "02" trích **đúng con số "SL MVP" của [02-asset-matrix-2d.md](02-asset-matrix-2d.md)** — đó là số lượng **bản thiết kế đầy đủ**, không phải beta; cột "Beta" là phạm vi thu gọn đề xuất ở đây.
 >
 > Bối cảnh: [01-gdd.md](01-gdd.md) · hệ phái và kỹ năng: [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md).
 

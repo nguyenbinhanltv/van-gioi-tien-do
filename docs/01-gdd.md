@@ -8,7 +8,7 @@
 > - _[Thiết kế mới – chờ duyệt]_ — phần mới, **chưa có trong tài liệu nguồn**; mọi con số trong các phần này là **Đề xuất – chờ duyệt** trừ khi ghi rõ nguồn (07 / `@vgtd/shared`).
 > - _[Cập nhật §4: …]_ — chỗ khác GDD gốc do áp dụng [00 §4](00-ho-so-tong-hop.md).
 >
-> **Thứ bậc căn cứ:** [00 §3–§4](00-ho-so-tong-hop.md) > [07](07-cong-thuc-data-schema.md) (số liệu gameplay, hiện thực trong `@vgtd/shared`) > GDD này. Nếu GDD mâu thuẫn với 00 §3–§4 thì GDD sai. Phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md). Hệ phái và kỹ năng: [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md). Mảng còn chưa thiết kế: [OPEN-ITEMS.md](OPEN-ITEMS.md).
+> **Thứ bậc căn cứ:** [DECISIONS.md](DECISIONS.md) (D14 trở đi) > [00 §3–§4](00-ho-so-tong-hop.md) > [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` (số liệu gameplay) > GDD này. Nếu GDD mâu thuẫn với các mục đứng trước thì GDD sai. Phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md). Hệ phái và kỹ năng: [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md). Mảng còn chưa thiết kế: [OPEN-ITEMS.md](OPEN-ITEMS.md).
 
 ## 1. Tầm nhìn & trụ cột _[Thiết kế mới – chờ duyệt]_
 
