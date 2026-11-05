@@ -145,8 +145,8 @@ Bảng giá trị chi tiết (số lượng nguyên liệu mỗi công thức, g
 | Kênh                                | Tiêu hao gì                                                         | Đo bằng                         | Ảnh hưởng tới mục tiêu tiêu hao / sinh ra 0,9–1,0 |
 | ----------------------------------- | ------------------------------------------------------------------- | ------------------------------- | ------------------------------------------------- |
 | Nguyên liệu bị hủy                  | Vật phẩm (không phải Linh thạch)                                    | Số nguyên liệu bị hủy / sinh ra | Giữ giá nguyên liệu ổn định; theo dõi CPI rổ hàng |
-| Phí lò                              | **Linh thạch**: 3% × V(r, q) mỗi lần chế, trả NPC, hủy              | Ledger `SINK_CRAFT_FEE`         | Vào nhóm "kênh khác" 12% của 07 §7                |
-| Độ bền lò, đỉnh, bàn                | Mỗi lần chế −1% độ bền; sửa theo `RepairCost = V_item × 0,004 × Δ%` | Ledger `SINK_REPAIR`            | Vào nhóm "Sửa chữa trang bị" 15%                  |
+| Phí lò                              | **Linh thạch**: 3% × V(r, q) mỗi lần chế, trả NPC, hủy              | Ledger `SYSTEM_SINK_CRAFT_FEE`  | Vào nhóm "kênh khác" 12% của 07 §7                |
+| Độ bền lò, đỉnh, bàn                | Mỗi lần chế −1% độ bền; sửa theo `RepairCost = V_item × 0,004 × Δ%` | Ledger `SYSTEM_SINK_REPAIR`     | Vào nhóm "Sửa chữa trang bị" 15%                  |
 | Xúc tác, Hộ Lô Phù                  | Linh thạch hoặc nguyên liệu                                         | Ledger                          | Vào nhóm "kênh khác"                              |
 | Học công thức, nâng điểm thạo luyện | Linh thạch một lần                                                  | Ledger                          | Kênh nhỏ                                          |
 | Thợ rèn người chơi sửa đồ           | Nguyên liệu + **50% phí Linh thạch NPC** (07 §7)                    | Ledger                          | Giữ giá trị nghề, vẫn có sink                     |

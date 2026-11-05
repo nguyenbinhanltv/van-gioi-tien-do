@@ -1,6 +1,6 @@
 # Vận hành và quan sát (Observability)
 
-> **Trạng thái:** thiết kế kỹ thuật. Mục "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào [DECISIONS.md](DECISIONS.md). Mảng "Đo lường (telemetry, dashboard KPI)" chưa có tài liệu game design ([OPEN-ITEMS §3](OPEN-ITEMS.md)); tài liệu **docs/17** (telemetry, KPI, dashboard; PR #69) là nguồn của **danh mục sự kiện, envelope và KPI**; bản này đã đối chiếu với docs/17 và **theo docs/17** khi khác nhau (§4). Tài liệu này chỉ định **hạ tầng** thực thi (đường truyền, lưu, cảnh báo kỹ thuật).
+> **Trạng thái:** thiết kế kỹ thuật. Mục "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào [DECISIONS.md](DECISIONS.md). Mảng "Đo lường (telemetry, dashboard KPI)" đã có đề xuất ở **docs/17** (PR #69, chờ duyệt), là nguồn của **danh mục sự kiện, envelope và KPI**; bản này đã đối chiếu với docs/17 và **theo docs/17** khi khác nhau (§4). Tài liệu này chỉ định **hạ tầng** thực thi (đường truyền, lưu, cảnh báo kỹ thuật).
 >
 > **Phạm vi MVP:** chạy cục bộ (docker-compose profile `obs`, [20 §6](20-kien-truc-tong-the.md)); không có môi trường phát hành, không CD.
 
@@ -154,12 +154,12 @@ Cảnh báo (Alertmanager hoặc Grafana alerting) ở MVP gửi vào **thông b
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                              |
-| --- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Q1  | Bảng ánh xạ tên sổ cái (`ledger`/`SRC_*`/`SINK_*` ở docs/17 và `SRC_IAP` ở docs/15 so với `ledger_entries`/`SYSTEM_*` ở đây) | Giữ tên của 26 làm chuẩn; sửa docs/15, docs/17 khi PR #69 vào |
-| Q2  | Không dùng Sentry cục bộ trong MVP; dùng telemetry + Loki?                                                                   | **Có**                                                        |
-| Q3  | SLO khởi điểm (tick ≤ 50 ms 99,9%, v.v.)?                                                                                    | **Có** làm khởi điểm; chốt sau loadbot                        |
-| Q4  | Phân tích hành vi: opt-out (docs/17 Q4); thiết yếu luôn bật; xác nhận pháp lý (docs/19)                                      | **Opt-out**, đúng docs/17; cần xác nhận pháp lý               |
-| Q5  | Thời hạn lưu log ứng dụng (7 ngày cục bộ; môi trường thật?)                                                                  | 7 ngày dev; 30 ngày khi có môi trường thật                    |
-| Q6  | Stack quan sát: Prometheus + Grafana + Loki + Tempo + OTel Collector (profile `obs`)?                                        | **Có**; chỉ chạy khi cần                                      |
-| Q7  | Hệ cờ tính năng tự viết thay vì dịch vụ ngoài?                                                                               | **Có** cho MVP                                                |
+| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                                                                   |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Q1  | Bảng ánh xạ tên sổ cái (`ledger`/`SRC_*`/`SINK_*` ở docs/17 và `SRC_IAP` ở docs/15 so với `ledger_entries`/`SYSTEM_*` ở đây) | Giữ tên của 26 làm chuẩn; **đã sửa** docs/13, 15, 17 theo tên của 26 (xem rà soát chéo 2026-11-05) |
+| Q2  | Không dùng Sentry cục bộ trong MVP; dùng telemetry + Loki?                                                                   | **Có**                                                                                             |
+| Q3  | SLO khởi điểm (tick ≤ 50 ms 99,9%, v.v.)?                                                                                    | **Có** làm khởi điểm; chốt sau loadbot                                                             |
+| Q4  | Phân tích hành vi: opt-out (docs/17 Q4); thiết yếu luôn bật; xác nhận pháp lý (docs/19)                                      | **Opt-out**, đúng docs/17; cần xác nhận pháp lý                                                    |
+| Q5  | Thời hạn lưu log ứng dụng (7 ngày cục bộ; môi trường thật?)                                                                  | 7 ngày dev; 30 ngày khi có môi trường thật                                                         |
+| Q6  | Stack quan sát: Prometheus + Grafana + Loki + Tempo + OTel Collector (profile `obs`)?                                        | **Có**; chỉ chạy khi cần                                                                           |
+| Q7  | Hệ cờ tính năng tự viết thay vì dịch vụ ngoài?                                                                               | **Có** cho MVP                                                                                     |

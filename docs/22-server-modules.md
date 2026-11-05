@@ -37,7 +37,7 @@ Quy ước chung cho mọi module (xem [20 §4.1](20-kien-truc-tong-the.md)): c�
 
 ## 3. World Node
 
-Tiến trình `worker_threads`, đơn luồng, **một** node cho cả bản đồ trong MVP ([20 §5.3](20-kien-truc-tong-the.md), ADR-005).
+Tiến trình `worker_threads`, đơn luồng, **một** node cho mọi bản đồ beta (Sơn Môn và Rừng Độc là hai `MapInstance`; [10 §8.2](10-mvp-scope.md) nói "một World Node mỗi bản đồ" — lệch cần chốt) ([20 §5.3](20-kien-truc-tong-the.md), ADR-005).
 
 ### 3.1 Trách nhiệm
 

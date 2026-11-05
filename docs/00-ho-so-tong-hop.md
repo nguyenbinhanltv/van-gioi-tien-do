@@ -13,7 +13,7 @@ Oct 31, 2026 · An Nguyen
 - **GDD High Level:** core loop, 9 cảnh giới với Tâm Ma / Lôi Kiếp, Chính – Tà – Ma, chiến tranh tông môn, kinh tế Linh thạch, Ngũ hành. Viết khi dự án còn định hướng 3D.
 - **Asset Breakdown Matrix bản 3D (UE5):** đã bị thay toàn bộ ở mốc 3.
 - **Chuyển hướng kỹ thuật sang 2D Isometric 2:1, đa nền tảng có Web:** Matrix được viết lại cho Sprite / Spine / Tilemap, thêm Y-sorting và streaming; engine chuyển sang Cocos Creator.
-- **Đặc tả Nhân vật & Quái vật:** hybrid Spine (Player, Boss) + pre-render 3D (quái), paperdoll 8 hướng, socket, boss đa ô.
+- **Đặc tả Nhân vật & Quái vật:** hybrid Spine (Player, Boss) + pre-render 3D (quái), paperdoll 8 hướng _[Cập nhật D14: rig 5 hướng + lật gương]_, socket, boss đa ô.
 - **Đặc tả Tilemap:** lưới 64 × 32 @1x, Wang theo góc, vách nhiều tầng, 2 bản đồ mẫu, Động Phủ.
 - **Đặc tả UI/UX & Icon:** bố cục theo chế độ nhập, 9-slice 720p → 4K, icon 48 / 64 / 128, viền **6 phẩm**.
 - **Tối ưu render:** Vạn Kiếm bằng instancing, Lôi Kiếp procedural, 3 shader, batching, chunk streaming, **RAM Web ≤ 500 MB, gói tải đầu ≤ 25 MB**.
@@ -49,17 +49,17 @@ Oct 31, 2026 · An Nguyen
 
 ### Nền tảng và lưới
 
-| Hạng mục          | Giá trị chốt                                                                                                | Tài liệu gốc           |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------- |
-| Thể loại / engine | 2D Isometric · Cocos Creator 3.x (dự phòng: Unity 2D, Godot 4)                                              | Asset Matrix           |
-| Nền tảng          | Web H5/WebGL, iOS, Android, PC; cross-play                                                                  | Asset Matrix           |
-| Khung thiết kế    | 1280 × 720 logic (dọc: 720 × 1280); vẽ bản gốc @2x, @3x chỉ cho khung 9-slice, icon, bitmap font trên PC 4K | UI/UX                  |
-| Phép chiếu        | Dimetric 2:1; x = (i − j)·32, y = (i + j)·16 (px @1x)                                                       | Tilemap                |
-| Ô cơ sở           | 64 × 32 px @1x (bản vẽ 128 × 64 @2x)                                                                        | Tilemap                |
-| Chunk             | 32 × 32 ô = 2048 × 1024 px @1x                                                                              | Asset Matrix, Render   |
-| Tầng cao          | Mỗi tầng 32 px @1x, tối đa 4 tầng; mặt vách sort cùng tầng dưới                                             | Tilemap                |
-| Hướng             | 8 hướng; Player và Boss vẽ đủ 8; quái, NPC, linh thú vẽ 5 + lật gương                                       | Asset Matrix, Nhân vật |
-| Nguồn sáng        | Cố định hướng NW cho mọi asset                                                                              | Asset Matrix           |
+| Hạng mục          | Giá trị chốt                                                                                                                                                                                                      | Tài liệu gốc           |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Thể loại / engine | 2D Isometric · Cocos Creator 3.x (dự phòng: Unity 2D, Godot 4)                                                                                                                                                    | Asset Matrix           |
+| Nền tảng          | Web H5/WebGL, iOS, Android, PC; cross-play                                                                                                                                                                        | Asset Matrix           |
+| Khung thiết kế    | 1280 × 720 logic (dọc: 720 × 1280); vẽ bản gốc @2x, @3x chỉ cho khung 9-slice, icon, bitmap font trên PC 4K                                                                                                       | UI/UX                  |
+| Phép chiếu        | Dimetric 2:1; x = (i − j)·32, y = (i + j)·16 (px @1x)                                                                                                                                                             | Tilemap                |
+| Ô cơ sở           | 64 × 32 px @1x (bản vẽ 128 × 64 @2x)                                                                                                                                                                              | Tilemap                |
+| Chunk             | 32 × 32 ô = 2048 × 1024 px @1x                                                                                                                                                                                    | Asset Matrix, Render   |
+| Tầng cao          | Mỗi tầng 32 px @1x, tối đa 4 tầng; mặt vách sort cùng tầng dưới                                                                                                                                                   | Tilemap                |
+| Hướng             | 8 hướng; Player và Boss vẽ đủ 8; quái, NPC, linh thú vẽ 5 + lật gương _[Cập nhật D14: Rig Spine Player / Boss vẽ **5 hướng + lật gương**; chỉ animation bất đối xứng được vẽ đủ 8, đánh dấu theo từng animation]_ | Asset Matrix, Nhân vật |
+| Nguồn sáng        | Cố định hướng NW cho mọi asset                                                                                                                                                                                    | Asset Matrix           |
 
 ### Nhân vật, layer, atlas
 

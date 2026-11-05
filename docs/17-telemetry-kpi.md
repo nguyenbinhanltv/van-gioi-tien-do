@@ -171,7 +171,7 @@ Các ngưỡng bên dưới là **kỳ vọng làm điểm xuất phát (_Đề 
 
 ## 5. Giám sát kinh tế
 
-Nguồn dữ liệu: **sổ cái PostgreSQL** (bảng `ledger`, 08 §7) và sự kiện `economy.*`, `market.*`, `loot.*`. Mỗi bút toán có tài khoản (`SINK_*` / `SRC_*`) nên tính được dòng tiền theo kênh.
+Nguồn dữ liệu: **sổ cái PostgreSQL** (bảng `ledger_entries`, [23](23-mo-hinh-du-lieu.md) và [26 §2](26-kinh-te-ledger.md); mẫu `ledger` ở 08 §7 chỉ là phác thảo) và sự kiện `economy.*`, `market.*`, `loot.*`. Mỗi bút toán có tài khoản (`SYSTEM_SINK_*` / `SYSTEM_FAUCET_*`, tên chuẩn ở 26 §2.2) nên tính được dòng tiền theo kênh.
 
 ### 5.1 Chỉ số bắt buộc
 

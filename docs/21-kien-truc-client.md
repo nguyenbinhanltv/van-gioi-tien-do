@@ -3,6 +3,8 @@
 > **Trạng thái:** thiết kế kỹ thuật. Mục "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào [DECISIONS.md](DECISIONS.md). Không đổi [00 §3–4](00-ho-so-tong-hop.md), D1–D15. Tổng quan hệ thống: [20](20-kien-truc-tong-the.md); giao thức: [24](24-giao-thuc-mang.md).
 >
 > **Giả định cần kiểm chứng bằng spike:** Cocos Creator 3.8.8 hỗ trợ runtime Spine **4.2** (các bản 3.8.x gần đây có; chưa xác minh trên máy thật cho paperdoll 15 lớp) và build `web-mobile` đạt ≤ 6 MB cho "Engine + code" ([02 – Ngân sách initial load](02-asset-matrix-2d.md)) khi đã gồm Spine WASM. Hai điều này là mục 1–2 của danh sách spike ở §12.
+>
+> **[Cập nhật rà soát chéo 2026-11-05 – số đo từ PR #67 (draft, đang dừng)]:** dự án Cocos 3.8.8 headless dựng được; bản web debug đo **60 FPS, 5 draw call, ~19 MB GFX texture, JS heap 34–40 MB, build 5,8 MB** — nhưng **chưa có Spine paperdoll, chưa có chunk streaming**, và chưa rõ 5,8 MB đã nén brotli hay chưa; vì vậy S1 (≤ 6 MB cho Engine + code **gồm** Spine WASM và transcoder Basis) **chưa đạt được kết luận**: 5,8 MB đã sát trần 6 MB. Spine 4.2 đã được chấp nhận ở D25 nhưng chạy thực tế với paperdoll 15 lớp (S2) vẫn chưa kiểm chứng. Joystick và chuột thật chưa thử; tốc độ di chuyển 4,5 ô/s là giá trị tạm (khớp 08 §4).
 
 ## 1. Mục tiêu và ràng buộc
 
