@@ -19,7 +19,8 @@ docs only) · `engine` (Cocos/Spine/Web feasibility only) · `single <path>` (on
 1. Glob `docs/*.md`; list present vs planned (design 10-19, technical 20-29). If there are no technical docs, the review
    covers `docs/06` and `docs/08` only and says so; if there are no design docs, verdict NOT ASSESSED.
 2. Outline each doc with Grep `^#{1,3} ` and read by range (Vietnamese, often over 40 KB). Read `docs/00` s3-4,
-   `docs/DECISIONS.md`, `docs/OPEN-ITEMS.md` first. Skim `packages/shared/src/index.ts` exports so you know which numbers
+   `docs/DECISIONS.md`, `docs/OPEN-ITEMS.md` first. Read `docs/29-adr.md` (ADR index: locked vs proposed technical decisions) so proposals are not
+   mistaken for locked values. Skim `packages/shared/src/index.ts` exports so you know which numbers
    already have an executable owner.
 3. Open PRs touching docs: `gh pr list --state open --json number,title,files`, then `gh pr diff <n>` (read-only).
 
@@ -77,7 +78,7 @@ Design docs: <list> · Technical docs: <list> · Missing: <list> · Not read: <l
 
 ### Reverse traceability (technical features with no design requirement)
 
-### Required ADRs / decisions (candidate DECISIONS rows, next free D<n>) and docs/OPEN-ITEMS.md additions
+### Required ADRs / decisions (candidate DECISIONS rows, next free D<n>; check `docs/29-adr.md` first so you do not duplicate an existing proposal) and docs/OPEN-ITEMS.md additions
 ```
 
 Verdict rules: as defined once in `.claude/skills/vgtd-design-review/SKILL.md`. Skill-specific NOT ASSESSED triggers: a
