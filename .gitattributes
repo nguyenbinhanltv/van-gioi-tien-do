@@ -28,8 +28,8 @@
 
 # --- Exceptions (MUST stay after the LFS rules; later lines win) ---
 # Existing committed doc diagrams stay plain git blobs (no history rewrite).
-docs/** !filter !diff !merge binary
+docs/** !filter !diff !merge
 # Test fixtures are read via fs in tests: keep them as real files, not LFS pointers.
-**/fixtures/** !filter !diff !merge binary
-**/__fixtures__/** !filter !diff !merge binary
-**/testdata/** !filter !diff !merge binary
+**/fixtures/** !filter !diff !merge
+**/__fixtures__/** !filter !diff !merge
+**/testdata/** !filter !diff !merge
