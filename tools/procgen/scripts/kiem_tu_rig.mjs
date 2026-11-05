@@ -619,6 +619,7 @@ export function paintJointExtensions(parts, source, direction, ranks) {
     // removed source pixels so the complete rest silhouette is conserved.
     for (let y = highBox.y; y < highBox.y + highBox.h; y++) for (let x = highBox.x; x < highBox.x + highBox.w; x++) {
       const dx = x - capCentre[0], dy = y - capCentre[1];
+      if (Math.hypot(dx, dy) > capRadius + 2) continue;
       if ((dx * axis[0] + dy * axis[1]) / axisLength >= capRadius / 2) continue;
       const old = higher.image.getPixel(x, y);
       if (!old[3]) continue;
