@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.tutien.game/schema/elemental_matrix.schema.json",
+  "title": "elemental_matrix",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "elements",
+    "overcomes",
+    "generates",
+    "damage_matrix",
+    "overcome_def_multiplier",
+    "generate_support",
+    "mutations",
+    "mutation_chance",
+    "root_types",
+    "absorption"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/element"
+      },
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "overcomes": {
+      "$ref": "#/$defs/elementMap",
+      "description": "khóa khắc giá trị"
+    },
+    "generates": {
+      "$ref": "#/$defs/elementMap",
+      "description": "khóa sinh ra giá trị"
+    },
+    "damage_matrix": {
+      "type": "object",
+      "description": "hàng = hệ tấn công, cột = hệ phòng thủ",
+      "propertyNames": {
+        "$ref": "#/$defs/element"
+      },
+      "minProperties": 5,
+      "maxProperties": 5,
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "$ref": "#/$defs/element"
+        },
+        "minProperties": 5,
+        "maxProperties": 5,
+        "additionalProperties": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "overcome_def_multiplier": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "generate_support": {
+      "type": "object",
+      "required": [
+        "mp_restore_pct",
+        "cooldown_s",
+        "applies_to_self"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mp_restore_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cooldown_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "applies_to_self": {
+          "type": "boolean"
+        }
+      }
+    },
+    "mutations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "base"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "phong",
+              "loi",
+              "bang"
+            ]
+          },
+          "base": {
+            "$ref": "#/$defs/element"
+          }
+        }
+      },
+      "uniqueItems": true
+    },
+    "mutation_chance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "root_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "element_count",
+          "spawn_weight",
+          "purity",
+          "off_element_damage_penalty"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z_]+$"
+          },
+          "element_count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "spawn_weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "purity": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "off_element_damage_penalty": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "absorption": {
+      "type": "object",
+      "required": [
+        "match_floor",
+        "match_scale",
+        "curve",
+        "density"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "match_floor": {
+          "type": "number",
+          "minimum": 0
+        },
+        "match_scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "curve": {
+          "enum": [
+            "linear",
+            "sqrt"
+          ]
+        },
+        "density": {
+          "type": "object",
+          "required": [
+            "normal",
+            "main_city",
+            "ley_line_base",
+            "ley_line_per_grade"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "normal": {
+              "type": "number",
+              "minimum": 0
+            },
+            "main_city": {
+              "type": "number",
+              "minimum": 0
+            },
+            "ley_line_base": {
+              "type": "number",
+              "minimum": 0
+            },
+            "ley_line_per_grade": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "element": {
+      "enum": [
+        "kim",
+        "moc",
+        "thuy",
+        "hoa",
+        "tho"
+      ]
+    },
+    "elementMap": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/element"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/element"
+      },
+      "minProperties": 5,
+      "maxProperties": 5
+    }
+  }
+}

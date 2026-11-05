@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    "kim",
+    "moc",
+    "thuy",
+    "hoa",
+    "tho"
+  ],
+  "overcomes": {
+    "kim": "moc",
+    "moc": "tho",
+    "tho": "thuy",
+    "thuy": "hoa",
+    "hoa": "kim"
+  },
+  "generates": {
+    "kim": "thuy",
+    "thuy": "moc",
+    "moc": "hoa",
+    "hoa": "tho",
+    "tho": "kim"
+  },
+  "damage_matrix": {
+    "kim": {
+      "kim": 1.0,
+      "moc": 1.25,
+      "thuy": 1.0,
+      "hoa": 0.85,
+      "tho": 1.0
+    },
+    "moc": {
+      "kim": 0.85,
+      "moc": 1.0,
+      "thuy": 1.0,
+      "hoa": 1.0,
+      "tho": 1.25
+    },
+    "thuy": {
+      "kim": 1.0,
+      "moc": 1.0,
+      "thuy": 1.0,
+      "hoa": 1.25,
+      "tho": 0.85
+    },
+    "hoa": {
+      "kim": 1.25,
+      "moc": 1.0,
+      "thuy": 0.85,
+      "hoa": 1.0,
+      "tho": 1.0
+    },
+    "tho": {
+      "kim": 1.0,
+      "moc": 0.85,
+      "thuy": 1.25,
+      "hoa": 1.0,
+      "tho": 1.0
+    }
+  },
+  "overcome_def_multiplier": 0.85,
+  "generate_support": {
+    "mp_restore_pct": 0.1,
+    "cooldown_s": 10,
+    "applies_to_self": false
+  },
+  "mutations": [
+    {
+      "id": "phong",
+      "base": "moc"
+    },
+    {
+      "id": "loi",
+      "base": "kim"
+    },
+    {
+      "id": "bang",
+      "base": "thuy"
+    }
+  ],
+  "mutation_chance": 0.02,
+  "root_types": [
+    {
+      "id": "don",
+      "element_count": 1,
+      "spawn_weight": 0.05,
+      "purity": 1.6,
+      "off_element_damage_penalty": 0.3
+    },
+    {
+      "id": "song",
+      "element_count": 2,
+      "spawn_weight": 0.2,
+      "purity": 1.3,
+      "off_element_damage_penalty": 0.15
+    },
+    {
+      "id": "tap_tam",
+      "element_count": 3,
+      "spawn_weight": 0.35,
+      "purity": 1.0,
+      "off_element_damage_penalty": 0.0
+    },
+    {
+      "id": "tap_tu",
+      "element_count": 4,
+      "spawn_weight": 0.25,
+      "purity": 0.85,
+      "off_element_damage_penalty": 0.0
+    },
+    {
+      "id": "tap_ngu",
+      "element_count": 5,
+      "spawn_weight": 0.15,
+      "purity": 0.7,
+      "off_element_damage_penalty": 0.0
+    }
+  ],
+  "absorption": {
+    "match_floor": 0.1,
+    "match_scale": 5,
+    "curve": "sqrt",
+    "density": {
+      "normal": 1.0,
+      "main_city": 0.6,
+      "ley_line_base": 1.0,
+      "ley_line_per_grade": 0.25
+    }
+  }
+}

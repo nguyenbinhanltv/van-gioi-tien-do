@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.tutien.game/schema/realm_progression.schema.json",
+  "title": "realm_progression",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stat_formula",
+    "breakthrough_rules",
+    "cultivation",
+    "realms"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "stat_formula": {
+      "type": "object",
+      "required": [
+        "alpha",
+        "stats"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alpha": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "stats": {
+          "type": "object",
+          "required": [
+            "hp",
+            "mp",
+            "atk",
+            "def",
+            "agi"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "hp": {
+              "$ref": "#/$defs/statParam"
+            },
+            "mp": {
+              "$ref": "#/$defs/statParam"
+            },
+            "atk": {
+              "$ref": "#/$defs/statParam"
+            },
+            "def": {
+              "$ref": "#/$defs/statParam"
+            },
+            "agi": {
+              "$ref": "#/$defs/statParam"
+            }
+          }
+        }
+      }
+    },
+    "breakthrough_rules": {
+      "type": "object",
+      "required": [
+        "min_rate",
+        "max_rate",
+        "pity_per_fail",
+        "pity_cap",
+        "max_pills",
+        "wrong_realm_pill_factor",
+        "karma_penalty_per_1000",
+        "quality_multipliers",
+        "minor_stage_base",
+        "minor_stage_karma_factor"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "min_rate": {
+          "$ref": "#/$defs/ratio"
+        },
+        "max_rate": {
+          "$ref": "#/$defs/ratio"
+        },
+        "pity_per_fail": {
+          "$ref": "#/$defs/ratio"
+        },
+        "pity_cap": {
+          "$ref": "#/$defs/ratio"
+        },
+        "max_pills": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "wrong_realm_pill_factor": {
+          "$ref": "#/$defs/ratio"
+        },
+        "karma_penalty_per_1000": {
+          "$ref": "#/$defs/ratio"
+        },
+        "quality_multipliers": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "minor_stage_base": {
+          "type": "object",
+          "required": [
+            "luyen_khi",
+            "default"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "luyen_khi": {
+              "$ref": "#/$defs/ratio"
+            },
+            "default": {
+              "$ref": "#/$defs/ratio"
+            }
+          }
+        },
+        "minor_stage_karma_factor": {
+          "$ref": "#/$defs/ratio"
+        }
+      }
+    },
+    "cultivation": {
+      "type": "object",
+      "required": [
+        "req_base",
+        "req_growth",
+        "absorb_base",
+        "absorb_growth"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "req_base": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "req_growth": {
+          "type": "number",
+          "exclusiveMinimum": 1
+        },
+        "absorb_base": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "absorb_growth": {
+          "type": "number",
+          "exclusiveMinimum": 1
+        }
+      }
+    },
+    "realms": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "$ref": "#/$defs/realm"
+      }
+    }
+  },
+  "$defs": {
+    "ratio": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "statParam": {
+      "type": "object",
+      "required": [
+        "base",
+        "model"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "model": {
+          "enum": [
+            "exponential",
+            "linear"
+          ]
+        },
+        "lambda": {
+          "type": "number",
+          "exclusiveMinimum": 1
+        },
+        "slope": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "if": {
+        "properties": {
+          "model": {
+            "const": "exponential"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "lambda"
+        ]
+      },
+      "else": {
+        "required": [
+          "slope"
+        ]
+      }
+    },
+    "tribulation": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "none",
+            "heart_demon",
+            "heart_demon_multi",
+            "lightning",
+            "lightning_heart_demon"
+          ]
+        },
+        "strikes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "waves": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "strikes_per_wave": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kappa": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "wave_growth": {
+          "type": "number",
+          "minimum": 1
+        },
+        "strike_interval_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "wave_interval_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "durability_loss_on_death": {
+          "$ref": "#/$defs/ratio"
+        }
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "lightning",
+              "lightning_heart_demon"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "strikes",
+          "waves",
+          "strikes_per_wave",
+          "kappa",
+          "wave_growth",
+          "strike_interval_s",
+          "wave_interval_s"
+        ]
+      }
+    },
+    "realm": {
+      "type": "object",
+      "required": [
+        "id",
+        "order",
+        "name",
+        "sub_stages",
+        "level_range",
+        "breakthrough"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z_]+$"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sub_stages": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "level_range": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "unlocks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "breakthrough": {
+          "type": "object",
+          "required": [
+            "to",
+            "base_rate",
+            "tribulation"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "to": {
+              "type": "string",
+              "pattern": "^[a-z_]+$"
+            },
+            "base_rate": {
+              "$ref": "#/$defs/ratio"
+            },
+            "main_pill_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "tribulation": {
+              "$ref": "#/$defs/tribulation"
+            }
+          }
+        }
+      }
+    }
+  }
+}
