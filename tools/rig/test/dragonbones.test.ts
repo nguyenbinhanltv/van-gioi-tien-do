@@ -231,3 +231,21 @@ describe('weighted mesh export', () => {
     expect(floats[base + 3 + 2]).toBeCloseTo(-ly, 2);
   });
 });
+
+maybe('events through the real runtime', () => {
+  it('fires every authored event of a non-looping clip by the end of playback, in order', async () => {
+    const rig = buildReferenceHumanoid('E');
+    const clips = authorKiemTuSet(rig, { only: ['attack', 'cast'] });
+    const out = exportDragonBones([{ rig, clips }], atlasFor(rig), { name: 'ev' });
+    const loaded = (await loadRuntime()).load(out.ske, out.tex);
+    const armature = loaded.build('E');
+    for (const clip of clips) {
+      loaded.events.length = 0;
+      armature.animation.fadeIn(clip.name, 0, 1);
+      for (let i = 0; i <= clip.frames + 2; i++) loaded.advance(1 / 30);
+      const fired = loaded.events.filter((e) => e.type === 'frameEvent').map((e) => e.name);
+      expect(fired, clip.name).toEqual(clip.events.map((e) => e.name));
+      armature.animation.reset();
+    }
+  });
+});

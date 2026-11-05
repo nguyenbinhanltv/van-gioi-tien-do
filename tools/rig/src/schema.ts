@@ -155,7 +155,7 @@ export interface RigDocument {
   readonly kind: EntityKind;
   /** The drawn direction this skeleton is for (S, SE, E, NE or N; others only for animations drawn in 8). */
   readonly direction: Direction;
-  /** Canvas @1x; the root bone sits at the pivot (W/2, H−12) (docs/03 §5). */
+  /** Canvas @1x; the root bone sits at the pivot, `pivotOf(width, height)` from @vgtd/character (docs/03 §5). */
   readonly canvas: RigCanvas;
   readonly bones: readonly RigBone[];
   readonly ik?: readonly RigIk[];

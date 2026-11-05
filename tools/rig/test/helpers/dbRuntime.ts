@@ -20,7 +20,18 @@ export function engineRuntimePath(): string | null {
 export interface Runtime {
   readonly db: any;
   /** Parse ske+tex and return a function building an armature by name. */
-  load(ske: unknown, tex: unknown): { dataName: string; armatures: string[]; build(name: string): any; data: any };
+  load(ske: unknown, tex: unknown): LoadedData;
+}
+
+export interface LoadedData {
+  dataName: string;
+  armatures: string[];
+  data: any;
+  /** Build an armature and register it on the factory clock so `advance` drives it and flushes its events. */
+  build(name: string): any;
+  /** Advance the shared clock (seconds); frame events are collected into `events`. */
+  advance(seconds: number): void;
+  readonly events: { type: string; name: string; time: number }[];
 }
 
 let cached: Promise<Runtime> | null = null;
@@ -73,29 +84,37 @@ async function createRuntime(): Promise<Runtime> {
       return db.BaseObject.borrowObject(StubTextureData);
     }
   }
-  const proxy = (): any => ({
+  const proxy = (sink?: any[]): any => ({
     dbInit() {},
     dbClear() {},
     dbUpdate() {},
     dispose() {},
-    hasDBEventListener: () => false,
+    hasDBEventListener: () => true,
     addDBEventListener() {},
     removeDBEventListener() {},
-    dispatchDBEvent() {},
+    dispatchDBEvent(type: string, e: any) {
+      sink?.push({ type, name: e.name, time: e.time });
+    },
     armature: null,
     animation: null,
   });
   class StubFactory extends db.BaseFactory {
     constructor() {
       super();
-      this._dragonBones = new db.DragonBones({ hasDBEventListener: () => false, dispatchDBEvent() {} });
+      this.events = [];
+      this._dragonBones = new db.DragonBones({
+        hasDBEventListener: () => true,
+        dispatchDBEvent: (type: string, e: any) => {
+          this.events.push({ type, name: e.name, time: e.time });
+        },
+      });
     }
     _buildTextureAtlasData(textureAtlasData: any) {
       return textureAtlasData ?? db.BaseObject.borrowObject(StubAtlasData);
     }
     _buildArmature(dataPackage: any) {
       const armature = db.BaseObject.borrowObject(db.Armature);
-      armature.init(dataPackage.armature, proxy(), {}, this._dragonBones);
+      armature.init(dataPackage.armature, proxy(this.events), {}, this._dragonBones);
       return armature;
     }
     _buildSlot(_dp: any, slotData: any, armature: any) {
@@ -117,7 +136,13 @@ async function createRuntime(): Promise<Runtime> {
         dataName: data.name,
         armatures: data.armatureNames as string[],
         data,
-        build: (name: string) => factory.buildArmature(name, data.name),
+        events: factory.events,
+        build: (name: string) => {
+          const armature = factory.buildArmature(name, data.name);
+          factory._dragonBones.clock.add(armature);
+          return armature;
+        },
+        advance: (seconds: number) => factory._dragonBones.advanceTime(seconds),
       };
     },
   };

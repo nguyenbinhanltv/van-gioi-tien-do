@@ -7,6 +7,7 @@
  *
  * Coordinate boundary: rig space is y-up / CCW (ADR-021); DragonBones is y-down / CW, so y and rotation flip here.
  */
+import { pivotOf } from '@vgtd/character';
 import { CLIP_FPS, type Clip, type Curve, type Key } from './clip.js';
 import type { Mat, Vec2 } from './math.js';
 import { evalPose } from './pose.js';
@@ -264,11 +265,12 @@ function exportArmature(entry: ExportEntry, opts: ExportOptions): Json {
     return o;
   });
   const { width, height } = rig.canvas;
+  const pivot = pivotOf(width, height); // (W/2, H − PIVOT_BOTTOM_OFFSET_PX) from @vgtd/character / @vgtd/shared
   return {
     type: 'Armature',
     frameRate: CLIP_FPS,
     name,
-    aabb: { x: -width / 2, y: -(height - 12), width, height },
+    aabb: { x: -pivot.x, y: -pivot.y, width, height },
     bone,
     slot,
     skin,

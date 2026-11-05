@@ -162,11 +162,20 @@ export class ClipBuilder {
       }
       return { bone, ...t };
     });
-    const slots: SlotTrack[] = [...this.slotTracks].map(([slot, t]) => ({ slot, ...t }));
-    const ik: IkTrack[] = [...this.ikTracks].map(([ik, mix]) => ({ ik, mix }));
+    const slots: SlotTrack[] = [...this.slotTracks].map(([slot, t]) => {
+      for (const [kind, keys] of Object.entries(t)) {
+        for (const p of checkKeys(keys as Key<unknown>[], frames)) problems.push(`${name}/slot ${slot}/${kind}: ${p}`);
+      }
+      return { slot, ...t };
+    });
+    const ik: IkTrack[] = [...this.ikTracks].map(([ik, mix]) => {
+      for (const p of checkKeys(mix, frames)) problems.push(`${name}/ik ${ik}/mix: ${p}`);
+      return { ik, mix };
+    });
     for (const e of this.events) {
-      if (!Number.isInteger(e.frame) || e.frame < 0 || e.frame > frames) {
-        problems.push(`${name}: event '${e.name}' at frame ${e.frame} outside 0..${frames}`);
+      if (!Number.isInteger(e.frame) || e.frame < 0 || e.frame >= frames) {
+        // a frame position == duration is never reached by the runtime (it ends/wraps there), so the event would not fire
+        problems.push(`${name}: event '${e.name}' at frame ${e.frame} outside 0..${frames - 1}`);
       }
     }
     if (problems.length) throw new Error(`invalid clip:\n  ${problems.join('\n  ')}`);

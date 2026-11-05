@@ -274,3 +274,35 @@ describe('QA catches real problems', () => {
     expect(Math.hypot(hip.x - ankle.x, hip.y - ankle.y)).toBeLessThanOrEqual(34.001);
   });
 });
+
+describe('robustness guards', () => {
+  it('rejects events at frame == frames (never reached) and bad slot / IK keys at build time', () => {
+    const c = new ClipBuilder(rig, { name: 'e', frames: 10, loop: false });
+    c.event(10, 'hit');
+    expect(() => c.build()).toThrow(/outside 0\.\.9/);
+    const s = new ClipBuilder(rig, { name: 's', frames: 10, loop: false });
+    s.attachment('weapon_R', [
+      [3, 'weapon_R'],
+      [3, null],
+    ]);
+    expect(() => s.build()).toThrow(/slot weapon_R/);
+    const k = new ClipBuilder(rig, { name: 'k', frames: 10, loop: false });
+    k.ikMix('ik_leg_L', [
+      [0, 1],
+      [12, 0],
+    ]);
+    expect(() => k.build()).toThrow(/ik ik_leg_L/);
+  });
+
+  it('QA flags a looping rotation that wraps more than 180° across the seam', () => {
+    const c = new ClipBuilder(rig, { name: 'spin', frames: 12, loop: true });
+    c.rotate('head', [
+      [0, 0],
+      [4, 120],
+      [8, 240],
+      [12, 0],
+    ]);
+    const r = runQa(rig, c.build());
+    expect(r.issues.some((i) => i.check === 'keys' && /seam/.test(i.message))).toBe(true);
+  });
+});

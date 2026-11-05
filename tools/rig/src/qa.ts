@@ -109,6 +109,32 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
       }
     }
   }
+  if (clip.loop) {
+    for (const t of clip.bones) {
+      const ks = (t.rotate ?? []).filter((k) => k.frame < clip.frames);
+      const first = ks[0];
+      const last = ks[ks.length - 1];
+      if (first && last && Math.abs(first.value - last.value) > 180) {
+        add({
+          severity: 'error',
+          check: 'keys',
+          bone: t.bone,
+          frame: clip.frames,
+          message: `looping rotation wraps ${Math.abs(first.value - last.value).toFixed(0)}° across the seam (>180°): the runtime takes the short way round; add intermediate keys (a full spin cannot be one loop key)`,
+        });
+      }
+    }
+  }
+  for (const e of clip.events) {
+    if (e.frame >= clip.frames) {
+      add({
+        severity: 'error',
+        check: 'events',
+        frame: e.frame,
+        message: `event '${e.name}' at frame ${e.frame} is never reached (clip has ${clip.frames} frames: valid 0..${clip.frames - 1})`,
+      });
+    }
+  }
   for (const t of clip.slots) {
     for (const k of t.attachment ?? []) {
       if (k.value !== null && !rig.skins.some((s) => s.attachments[t.slot]?.[k.value!])) {
