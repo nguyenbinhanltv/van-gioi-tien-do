@@ -2,7 +2,16 @@
  * Monster / boss descriptors (docs/03 §6): multi-tile footprints and the V sort line, part-breaking,
  * phase-by-skin, mutation variants, rig limits (§1).
  */
-import { TILE_HEIGHT, TILE_WIDTH, bossSortY, footprintSortY, pivotSortY, tileToScreen, type Vec2 } from '@vgtd/shared';
+import {
+  CANVAS_BY_FOOTPRINT,
+  TILE_HEIGHT,
+  TILE_WIDTH,
+  bossSortY,
+  footprintSortY,
+  pivotSortY,
+  tileToScreen,
+  type Vec2,
+} from '@vgtd/shared';
 
 // ------------------------------------------------------------------ multi-tile boss
 export type BossFootprintClass = '2x2' | '4x4' | '8x8';
@@ -29,7 +38,7 @@ export const BOSS_FOOTPRINTS: readonly BossFootprintSpec[] = [
     footprint: '2x2',
     n: 2,
     diamondPx: diamond(2),
-    canvas: 256,
+    canvas: CANVAS_BY_FOOTPRINT['2x2'],
     scheme: 'five_mirror',
     sort: 'bottom_vertex',
     render: ['spine', 'prerender'],
@@ -39,7 +48,7 @@ export const BOSS_FOOTPRINTS: readonly BossFootprintSpec[] = [
     footprint: '4x4',
     n: 4,
     diamondPx: diamond(4),
-    canvas: 512,
+    canvas: CANVAS_BY_FOOTPRINT['4x4'],
     scheme: 'five_mirror', // spec table says "Spine · 8 hướng"; locked decision 2026-11-05: 5 + mirror, 8 only per asymmetric animation
     sort: 'bottom_vertex_v_line',
     render: ['spine'],

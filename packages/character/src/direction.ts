@@ -11,6 +11,8 @@ import {
   DIRECTION_TILE_VECTORS,
   DRAWN_DIRECTIONS,
   MIRRORED_DIRECTIONS,
+  TILE_HEIGHT,
+  TILE_WIDTH,
   type Direction,
   type Vec2,
 } from '@vgtd/shared';
@@ -148,7 +150,7 @@ export function directionFromTileVector(di: number, dj: number, fallback: Direct
 
 /** Facing from a screen-space vector in px (y down); the 2:1 squash is undone (dy × 2). */
 export function directionFromScreenVector(dx: number, dy: number, fallback: Direction = 'S'): Direction {
-  return directionFromPlane(dx, dy * 2) ?? fallback;
+  return directionFromPlane(dx, dy * (TILE_WIDTH / TILE_HEIGHT)) ?? fallback;
 }
 
 /** Tile-space unit-step of a direction (shared table). */

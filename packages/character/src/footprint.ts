@@ -5,10 +5,9 @@
  * the top-left, y down. Use `pivotToCanvas` to convert.
  */
 import {
+  BUDGETS,
   CANVAS_BY_FOOTPRINT,
-  COLLIDER_RADIUS_TILES,
-  HURTBOX_RADIUS_TILES,
-  PICK_BOX_PX,
+  HIT_VOLUMES_BY_FOOTPRINT,
   PIVOT_BOTTOM_OFFSET_PX,
   type Rect,
   type Vec2,
@@ -49,8 +48,7 @@ export interface CanvasSpec {
   readonly spineOnly: boolean;
 }
 
-const ATLAS_2048 = 2048;
-const cells = (size: number) => Math.floor(ATLAS_2048 / size) ** 2;
+const cells = (size: number) => Math.floor(BUDGETS.ATLAS_MAX_WEB_MOBILE / size) ** 2;
 
 export const CANVAS_TABLE: readonly CanvasSpec[] = [
   {
@@ -328,14 +326,9 @@ export type HitboxSpec =
   | { readonly multiPart: true };
 
 export const HITBOX_BY_FOOTPRINT: Readonly<Record<FootprintSize, HitboxSpec>> = {
-  1: {
-    multiPart: false,
-    colliderRadius: COLLIDER_RADIUS_TILES,
-    hurtboxRadius: HURTBOX_RADIUS_TILES,
-    pickBox: PICK_BOX_PX,
-  },
-  2: { multiPart: false, colliderRadius: 0.8, hurtboxRadius: 0.95, pickBox: { width: 120, height: 180 } },
-  4: { multiPart: false, colliderRadius: 1.7, hurtboxRadius: 1.9, pickBox: { width: 240, height: 340 } },
+  1: { multiPart: false, ...HIT_VOLUMES_BY_FOOTPRINT['1x1'] },
+  2: { multiPart: false, ...HIT_VOLUMES_BY_FOOTPRINT['2x2'] },
+  4: { multiPart: false, ...HIT_VOLUMES_BY_FOOTPRINT['4x4'] },
   8: { multiPart: true },
 };
 

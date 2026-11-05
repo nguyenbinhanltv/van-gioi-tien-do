@@ -182,3 +182,23 @@ describe('malformed collision does not throw', () => {
     expect(validateMonsterSchema(boss({ collision: { multiPart: true } })).valid).toBe(true);
   });
 });
+
+describe('hpBar placement', () => {
+  it('1x1 / elite monsters need an overhead bar', () => {
+    const mob = {
+      schemaVersion: 1,
+      id: 'yeu_lang',
+      name: 'Yêu lang',
+      kind: 'mob',
+      footprint: '1x1',
+      canvas: 128,
+      render: 'prerender3d',
+      directions: { scheme: 'five_mirror' },
+      animations: [{ id: 'idle', loop: true, frames: 12, fps: 12, drawnInEight: false }],
+      collision: { multiPart: false, colliderRadius: 0.35, hurtboxRadius: 0.45, pickBox: { width: 48, height: 100 } },
+      hpBar: 'overhead',
+    };
+    expect(validateMonsterDefinition(mob)).toEqual({ valid: true, errors: [] });
+    expect(validateMonsterDefinition({ ...mob, hpBar: 'hud' }).errors.join()).toMatch(/overhead/);
+  });
+});

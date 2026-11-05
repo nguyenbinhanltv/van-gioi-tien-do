@@ -220,6 +220,7 @@ export function validateMonsterDefinition(data: unknown, options: MonsterValidat
   // HP bar
   const wantHud = usesHudHpBar(d.footprint);
   if (wantHud && d.hpBar !== 'hud') errors.push('multi-tile monsters show their HP bar on the HUD');
+  if (!wantHud && d.hpBar !== 'overhead') errors.push('1x1 / elite monsters show their HP bar overhead');
 
   // part-break
   if (d.partBreak) {

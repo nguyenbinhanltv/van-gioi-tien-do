@@ -131,3 +131,17 @@ describe('configurable open rows (docs/31)', () => {
     expect(validateMonsterDefinition(snake, { nonBossSpineRig: null }).valid).toBe(true);
   });
 });
+
+describe('pieced 8x8 boss', () => {
+  const base = { kind: 'boss' as const, footprint: '8x8' as const, equipped: [], animation: 'idle' as const };
+  it('plays the nearest available direction, never mirrored', () => {
+    const v = getCharacterViewState({ ...base, direction: 'NW', availableDirections: ['S', 'E'] });
+    expect(v).toMatchObject({ skeletonDirection: 'S', mirrored: false, scaleX: 1 });
+  });
+  it('throws a clear RangeError without 1–3 available directions', () => {
+    expect(() => getCharacterViewState({ ...base, direction: 'S' })).toThrow(RangeError);
+    expect(() => getCharacterViewState({ ...base, direction: 'S', availableDirections: ['S', 'E', 'N', 'W'] })).toThrow(
+      /1–3 available directions/,
+    );
+  });
+});

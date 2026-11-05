@@ -51,6 +51,12 @@ export interface CharacterViewInput {
   /** Paperdoll conflict flags (mounted, sword in hand, hood …). `mirrored` is derived, do not pass it. */
   readonly paperdoll?: Omit<PaperdollOptions, 'mirrored'>;
   readonly footprint?: FootprintClass;
+  /**
+   * 8x8 pieced boss only: the 1–3 directions its data file draws (`directions.drawn`). Required for
+   * `kind: 'boss'` + `footprint: '8x8'` (the nearest one is played); ignored otherwise. Note the viewer drives ONE
+   * skeleton: pieced bosses are several skeletons, call it once per part.
+   */
+  readonly availableDirections?: readonly Direction[];
   readonly headTop?: HeadTopContext;
   /** Per-species socket positions (mount_seat) and rig overrides, pivot space, y up. */
   readonly socketsOverride?: Partial<Record<SocketId, Vec2>>;
@@ -135,7 +141,11 @@ const SOCKET_IDS_ALL: readonly SocketId[] = [
 export function getCharacterViewState(input: CharacterViewInput): CharacterViewState {
   const drawnInEight =
     input.drawnInEight ?? (input.kind === 'player' && defaultAsymmetricAnimations('player').includes(input.animation));
-  const dir = resolveDirection(input.kind, input.direction, { footprint: input.footprint, drawnInEight });
+  const dir = resolveDirection(input.kind, input.direction, {
+    footprint: input.footprint,
+    drawnInEight,
+    available: input.availableDirections,
+  });
   const pd = resolvePaperdoll(input.direction, input.equipped, { ...input.paperdoll, mirrored: dir.mirrored });
 
   const sockets = Object.fromEntries(

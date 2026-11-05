@@ -2,7 +2,7 @@
  * JSON Schema (draft 2020-12) for character and monster definition files. Enums are derived from the
  * typed tables so there is a single source of truth. Cross-field rules live in validators.ts.
  */
-import { DIRECTIONS } from '@vgtd/shared';
+import { CANVAS_BY_FOOTPRINT, DIRECTIONS } from '@vgtd/shared';
 import { ANIMATION_IDS } from './animations.js';
 import { MUTATION_SCALE_RANGE, MUTATION_VARIANT_IDS } from './boss.js';
 import { DEFINITION_SCHEMA_VERSION } from './definition.js';
@@ -103,7 +103,7 @@ export const characterDefinitionSchema = {
     name: { type: 'string', minLength: 1 },
     kind: { enum: ['player', 'npc', 'pet'] },
     footprint: { enum: ['1x1', 'elite', '2x2'] },
-    canvas: { enum: [128, 192, 256] },
+    canvas: { enum: [CANVAS_BY_FOOTPRINT['1x1'], CANVAS_BY_FOOTPRINT.elite, CANVAS_BY_FOOTPRINT['2x2']] },
     render: { const: 'spine' },
     rig,
     animations: {
@@ -206,7 +206,7 @@ export const monsterDefinitionSchema = {
     name: { type: 'string', minLength: 1 },
     kind: { enum: ['mob', 'elite', 'boss'] },
     footprint: { enum: [...FOOTPRINT_CLASSES] },
-    canvas: { type: ['integer', 'null'], enum: [128, 192, 256, 512, null] },
+    canvas: { type: ['integer', 'null'], enum: [...Object.values(CANVAS_BY_FOOTPRINT), null] },
     render: { enum: ['spine', 'prerender3d', 'spritesheet', 'spine_pieced'] },
     directions: {
       type: 'object',
