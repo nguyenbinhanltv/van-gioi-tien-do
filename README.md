@@ -9,6 +9,7 @@ npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node ≥ 18, TypeScript stri
 ```
 packages/shared         Kiểu/hằng số/giao thức dùng chung client ↔ server (@vgtd/shared)
 packages/client-core    Input Abstraction Layer + HUD responsive, không phụ thuộc engine (@vgtd/client-core)
+packages/character      Hướng, paperdoll, bảng animation, footprint/socket/hitbox, boss, schema định nghĩa nhân vật (@vgtd/character)
 apps/client-cocos       Dự án Cocos Creator 3.x (placeholder)
 apps/server             Server MVP TypeScript (placeholder)
 tools/procgen           Sinh asset bằng code (tilemap, icon, ...)

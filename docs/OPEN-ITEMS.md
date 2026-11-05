@@ -127,3 +127,13 @@ Nguồn: báo cáo rà soát chéo trong mô tả PR của nhánh `docs-cross-re
 | X10 | Ô nhân vật thứ hai bán bằng Tiên Ngọc (15 Q6) trong khi mặc định mỗi tài khoản đã có 3 nhân vật (01 G10, 10 §7.1)                                                                                                                               | 15 Q6; 01 G10                               |
 | X11 | Đăng ký "bước 0 ngắn gọn, không email" (16 Q1) so với khai báo ngày sinh khi đăng ký (19 Q6) và email tùy chọn (25 Q4)                                                                                                                          | 16 Q1; 19 Q6; 25 Q4                         |
 | X12 | Issue backlog D-25…D-29 đánh số tài liệu lệch thực tế: D-25 "Auth (docs/25)" nhưng docs/25 gồm cả bảo mật; D-27 "Observability", D-28 "Security", D-29 "Test strategy" ứng với docs 27, 25, 28; docs/29 là ADR                                  | Issue #59–#63; 25–29                        |
+
+## 9. Nhân vật (`@vgtd/character`, PR #7): điểm mơ hồ 1–5
+
+Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng còn mở nằm ở [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md) (F-01…F-05); mã giữ mặc định có thể cấu hình.
+
+1. Animation bất đối xứng của Player (D14): mặc định `attack`, `cast`, `channel`; Boss mặc định không có (ADR-020, F-01).
+2. Draw Order vs lật gương: SW/W/NW dùng preset riêng; lật chỉ áp lên hình, `mirrored` chọn biến thể lật.
+3. Trục socket: pivot-space y lên, không lật (ADR-021, F-02); `head_top` "theo cỡ nhân vật" chưa có công thức (dùng `socketsOverride`).
+4. Quỹ đạo ellipse 36 × 18: rộng × cao đầy đủ hay bán trục (F-05).
+5. Định nghĩa "draw call": số engine báo là chuẩn, `checkRepack` chỉ ước lượng tĩnh (ADR-022, F-03).
