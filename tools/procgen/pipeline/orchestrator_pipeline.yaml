@@ -97,8 +97,20 @@ spec:
             # Lưu ý: file sẵn có trong node_modules/ bị Codex sửa thì không khôi phục được -> runner được
             # coi là nhiễm, phải bỏ (marker làm run hỏng). Đây vẫn là heuristic, không thay cho container riêng.
             run: |
+              # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
+              # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
+              g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+              gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+              gsnap() {
+                for d in "$gdir" "$gcommon"; do
+                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/info/* "$d"/hooks/*; do
+                    [ -f "$f" ] && sha256sum -- "$f"
+                  done
+                done | sort
+              }
+              gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
               snap() {
-                { git ls-files -o --exclude-standard; git ls-files -o -i --exclude-standard; } \
+                { g ls-files -o --exclude-standard; g ls-files -o -i --exclude-standard; } \
                   | grep -vE '^(src|reports|build)/' | sort -u \
                   | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
               }
@@ -107,19 +119,25 @@ spec:
               codex exec --sandbox workspace-write --ephemeral --json \
                 -o reports/codex_fix_summary.md \
                 "$(cat pipeline/prompts/codex_fix_generators.md)" > reports/codex_fix_events.jsonl
+              gsnap > "$gafter"
+              if ! cmp -s "$gbefore" "$gafter"; then
+                echo "✖ agent sửa cấu hình/hook của .git – không chạy thêm lệnh git, run bị coi là nhiễm" > reports/codex_violation
+                cat reports/codex_violation; exit 20
+              fi
+              rm -f "$gbefore" "$gafter"
               snap > "$after"
-              tracked="$(git diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
+              tracked="$(g diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
               extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"   # file mới / đã đổi nội dung
               rm -f "$before" "$after"
               if [ -n "$tracked" ] || [ -n "$extra" ]; then
                 echo "✖ Codex sửa ngoài src/ – hoàn tác và đánh dấu run hỏng"
-                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do git checkout HEAD -- "$f"; done; }
+                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout HEAD -- "$f"; done; }
                 [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
-                git checkout HEAD -- src && git clean -fdq -- src
+                g checkout HEAD -- src && g clean -fdq -- src
                 { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/codex_violation
                 exit 20
               fi
-              git diff --stat -- src/ > reports/codex_fix.diffstat
+              g diff --stat -- src/ > reports/codex_fix.diffstat
       artifacts: ["build/raw/**", "reports/generate_raw_assets.log", "reports/codex_fix_*"]
 
     # -------------------------------------------------------------------------
@@ -162,8 +180,20 @@ spec:
             if ! grep -q '"status": *"error"' build/raw/render/render_manifest.json 2>/dev/null; then
               echo "Không có shader lỗi, bỏ qua agent"; exit 0
             fi
+            # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
+            # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
+            g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+            gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+            gsnap() {
+              for d in "$gdir" "$gcommon"; do
+                for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/info/* "$d"/hooks/*; do
+                  [ -f "$f" ] && sha256sum -- "$f"
+                done
+              done | sort
+            }
+            gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
             snap() {
-              { git ls-files -o --exclude-standard; git ls-files -o -i --exclude-standard; } \
+              { g ls-files -o --exclude-standard; g ls-files -o -i --exclude-standard; } \
                 | grep -vE '^(shaders|reports|build)/' | sort -u \
                 | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
             }
@@ -172,15 +202,21 @@ spec:
             export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
             script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --sandbox --mode accept-edits' /dev/null \
               | tee reports/agy_render.jsonl
+            gsnap > "$gafter"
+            if ! cmp -s "$gbefore" "$gafter"; then
+              echo "✖ agent sửa cấu hình/hook của .git – không chạy thêm lệnh git, run bị coi là nhiễm" > reports/agy_violation
+              cat reports/agy_violation; exit 20
+            fi
+            rm -f "$gbefore" "$gafter"
             snap > "$after"
-            tracked="$(git diff --name-only --relative HEAD -- . ':!shaders' ':!reports' ':!build')"
+            tracked="$(g diff --name-only --relative HEAD -- . ':!shaders' ':!reports' ':!build')"
             extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"
             rm -f "$before" "$after"
             if [ -n "$tracked" ] || [ -n "$extra" ]; then
               echo "✖ agy sửa ngoài shaders/ – hoàn tác và đánh dấu run hỏng"
-              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do git checkout HEAD -- "$f"; done; }
+              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout HEAD -- "$f"; done; }
               [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
-              git checkout HEAD -- shaders && git clean -fdq -- shaders
+              g checkout HEAD -- shaders && g clean -fdq -- shaders
               { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/agy_violation
               exit 20
             fi
@@ -221,7 +257,8 @@ spec:
           run: |
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)"               --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Read(//proc/**),Read(//etc/**),Read(~/**),Edit,NotebookEdit,WebFetch,WebSearch" \
+              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)" 
+              --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Read(//proc/**),Read(//etc/**),Read(~/**),Edit,NotebookEdit,WebFetch,WebSearch" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
         - name: verdict
@@ -292,6 +329,7 @@ spec:
               echo "✖ qa_review.md chứa chuỗi giống secret, không đưa vào PR"; exit 20
             fi
             VERDICT="$(node -p "require('../tutien-procgen/reports/qa_verdict.json').verdict")"
+            case "$VERDICT" in pass|warn|fail) ;; *) echo "✖ verdict không hợp lệ (cần pass|warn|fail)"; exit 20 ;; esac
             git commit -m "chore(assets): seed ${SEED} · run ${run.id}" -m "QA: ${VERDICT}"
             git push --force-with-lease origin "$BR"
             gh pr create --base main --head "$BR" --title "Asset tự động · run ${run.id}" \
