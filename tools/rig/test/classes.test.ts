@@ -9,6 +9,7 @@ import {
   CHARACTER_IDS,
   CLASSES,
   KIEMTU_CLIPS,
+  MIN_JOINT_CAP_DEG,
   KIEMTU_REQUIRED_ROLES,
   SLOT_LAYOUT,
   authorClassSet,
@@ -23,6 +24,7 @@ import {
   createImage,
   loadCharacterData,
   loadKiemTuData,
+  measuredJointCaps,
   packTemplateAtlas,
   partsSpec,
   partsSpecMarkdown,
@@ -79,16 +81,39 @@ describe('parts spec', () => {
     expect(requiredOverlapPx(30, 60)).toBeGreaterThan(requiredOverlapPx(15, 60));
   });
 
-  it('lists the right pieces per class and uses the class joint caps', () => {
+  it('lists the right pieces per class; margins come from measured angles, real seam widths and draw order', () => {
     const kiem = partsSpec('kiem-tu');
     const the = partsSpec('the-tu');
     expect(kiem.parts.find((p) => p.slot === 'weapon_R')?.required).toBe(true);
     expect(the.parts.some((p) => p.slot === 'weapon_R')).toBe(false);
     expect(the.weapon).toMatch(/no weapon_R/);
-    const shoulder = (spec: ReturnType<typeof partsSpec>) =>
-      spec.parts.find((p) => p.slot === 'arm_R')!.joints.find((j) => j.joint === 'shoulder')!;
-    expect(shoulder(kiem).capDeg).toBe(CLASSES['kiem-tu'].caps.shoulder);
-    expect(shoulder(kiem).overlapPx).toBeGreaterThan(shoulder(the).overlapPx); // Kiếm tu raises the arm further
+    for (const id of CHARACTER_IDS) {
+      const caps = measuredJointCaps(id);
+      for (const m of partsSpec(id).seams) {
+        expect(m.capDeg).toBe(caps[m.joint]);
+        expect(m.capDeg).toBeGreaterThanOrEqual(MIN_JOINT_CAP_DEG);
+        expect(m.marginPx).toBe(requiredOverlapPx(m.seamWidthPx / 2, m.capDeg));
+        // the hidden paint can never need to be wider than the seam itself
+        expect(m.marginPx).toBeLessThanOrEqual(m.seamWidthPx);
+      }
+    }
+    const knee = kiem.seams.find((m) => m.joint === 'knee')!;
+    expect(knee.marginPx).toBeGreaterThanOrEqual(12); // Kiếm tu residual after round 3: thigh/shin 12-18 px
+    expect(knee.marginPx).toBeLessThanOrEqual(17);
+    // measured from the animation set: seated (meditate) folds the knee far, the neck barely moves
+    expect(measuredJointCaps('kiem-tu').knee).toBeGreaterThan(measuredJointCaps('kiem-tu').neck);
+  });
+
+  it('the back piece extends under the front piece, by draw order of the direction', () => {
+    const shoulder = partsSpec('kiem-tu').seams.filter((m) => m.joint === 'shoulder' && m.label.includes('vest'));
+    const armR = shoulder.find((m) => m.pieces[0] === 'arm_R')!;
+    const armL = shoulder.find((m) => m.pieces[0] === 'arm_L')!;
+    // E: arm_R is drawn in front of the vest (vest paint extends under it); arm_L is behind (arm paint extends under the vest)
+    expect(armR.extend.E).toBe('outfit_upper');
+    expect(armL.extend.E).toBe('arm_L');
+    // islands of one slot have no order: both extend
+    const knee = partsSpec('kiem-tu').seams.find((m) => m.joint === 'knee')!;
+    expect(Object.values(knee.extend)).toEqual(['both', 'both', 'both', 'both', 'both']);
   });
 
   // regenerate with: RIG_GEN_PARTS_SPEC=1 npm run gen:parts-spec -w @vgtd/rig

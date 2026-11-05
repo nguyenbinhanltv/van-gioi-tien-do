@@ -17,7 +17,7 @@ Luật `weapon` của QA (`runQa({ weapon })`): `'one'` đúng một `weapon_R` 
 
 ## 2. Đặc tả mảnh cho art (`src/parts.ts`, `docs/art/parts-spec.md`)
 
-Từ góc khớp lớn nhất mà bộ animation của lớp yêu cầu, `partsSpec` tính số px **vẽ bù** mỗi mảnh phải kéo dài dưới mảnh kề ở mỗi khớp: `overlap = ceil(2·r·sin(θ/2))` (r = nửa bề rộng mảnh kề, θ = góc khớp), khớp số đo Kiếm tu (đùi/robe 31 px đo được, công thức 33; vest/tay áo 20 đo được, công thức 21). `docs/art/parts-spec.md` là bản sinh tự động cho cả 4 lớp (slot, bắt buộc/tùy chọn, rộng danh nghĩa, vẽ bù từng khớp), CI kiểm khớp bản sinh mới; cập nhật bằng `RIG_GEN_PARTS_SPEC=1 npm run gen:parts-spec -w @vgtd/rig`.
+Với mỗi mối nối ở khớp, `partsSpec` nói **mảnh nào phải kéo dài vẽ bù dưới mảnh nào và bao nhiêu px**: `margin = ceil(w · sin(θ/2))` với w = **bề rộng thật của mối nối** tại khớp (`SEAM_WIDTH_PX`, chi/thân 10-26 px, lấy từ các mảnh Kiếm tu thật) và θ = **góc khớp lớn nhất mà bộ animation của lớp đòi hỏi**, đo trên rig (`measuredJointCaps`, làm tròn lên 5°, sàn 20°), không còn lấy bề rộng mảnh danh nghĩa. Mảnh nằm **sau** theo thứ tự vẽ của từng hướng (`drawOrderFor`) kéo dài xuống dưới mảnh nằm trước; các đảo của cùng một slot (chi trong `body`, `arm_*`) không có thứ tự nên cả hai cùng kéo dài. `docs/art/parts-spec.md` là bản sinh cho cả 4 lớp, CI kiểm khớp bản sinh mới; cập nhật bằng `RIG_GEN_PARTS_SPEC=1 npm run gen:parts-spec -w @vgtd/rig`. Đối chiếu: phần dư sau vòng 3 của Kiếm tu (gối 12-18 px, khuỷu 12-15 px, cổ chân 9 px) nằm trong dải margin của bảng.
 
 ## 3. Sinh rig mẫu từ thư mục mảnh (`src/template.ts`)
 

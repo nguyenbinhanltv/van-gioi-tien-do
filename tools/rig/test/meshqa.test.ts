@@ -255,6 +255,33 @@ describe('weapon QA, piece removal, underpaint report', () => {
   });
 });
 
+describe('seam metric: a hole needs an uncovered vertex', () => {
+  it('does not flag a seam when another piece still covers the opened gap', () => {
+    const rig = twoPieceRig();
+    const hasGap = (r: RigDocument) =>
+      meshQa(r, bend(r, 70)).some((i) => i.check === 'detach' && /come apart/.test(i.message));
+    expect(hasGap(rig)).toBe(true);
+    // a big robe piece on the hips covers the whole area around the joint: the opened seam is hidden behind it
+    const cover: MeshAttachment = {
+      type: 'mesh',
+      path: 'outfit_lower',
+      width: 120,
+      height: 120,
+      uvs: [0, 1, 1, 1, 1, 0, 0, 0],
+      vertices: [-60, -60, 60, -60, 60, 60, -60, 60],
+      triangles: [0, 1, 2, 0, 2, 3],
+      weights: [[['hips', 1]], [['hips', 1]], [['hips', 1]], [['hips', 1]]],
+    };
+    const base = rig.skins[0]!;
+    const covered: RigDocument = {
+      ...rig,
+      skins: [{ ...base, attachments: { ...base.attachments, outfit_lower: { outfit_lower: cover } } }],
+      slots: rig.slots.map((sl) => (sl.name === 'outfit_lower' ? { ...sl, attachment: 'outfit_lower' } : sl)),
+    };
+    expect(hasGap(covered)).toBe(false);
+  });
+});
+
 describe('autoSkin', () => {
   it('subdivides pieces on a seam, welds the seam vertices and keeps weights valid', () => {
     const rig = twoPieceRig();
