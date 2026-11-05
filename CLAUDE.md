@@ -94,6 +94,10 @@ green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd
 | `vgtd-sim-determinism` | Writing or reviewing server / shared simulation code or the network protocol |
 | `vgtd-asset-pipeline`  | Generating, packing, compressing or importing assets                         |
 
+## Autonomous operation (24/7)
+
+Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 3 parallel workers; the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
+
 ## Design review
 
 Review skills (read-only, output a Markdown findings report with `file:line` and severity; adapted from
