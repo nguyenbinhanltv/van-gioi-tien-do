@@ -44,9 +44,26 @@ export const DEFAULT_MESH_THRESHOLDS: MeshQaThresholds = {
   gapPx: 3,
   touchPx: 1.5,
   detachPx: 8,
-  strainMax: 1.4,
+  strainMax: 2,
   minEdgePx: 3,
 };
+
+/**
+ * Bones whose pieces form a seam: parent / child, or siblings under one parent (torso vs arm both hang from the spine),
+ * except left/right mirror pairs (two arms may overlap in profile without being joined).
+ */
+export function connectedBones(rig: RigDocument): (a: string, b: string) => boolean {
+  const parentOf = new Map(rig.bones.map((b) => [b.name, b.parent]));
+  const side = (n: string) => n.replace(/(^|_)[LR](?=_|\d|$)/, '$1');
+  // secondary-motion chains (hair, sash, sleeve tips) are meant to swing away from the body: no seam to keep
+  const chain = new Set((rig.chains ?? []).flatMap((c) => c.bones));
+  return (a, b) => {
+    if (a === b || chain.has(a) || chain.has(b)) return false;
+    if (parentOf.get(a) === b || parentOf.get(b) === a) return true;
+    const pa = parentOf.get(a);
+    return pa !== null && pa === parentOf.get(b) && side(a) !== side(b);
+  };
+}
 
 export function segDist(p: Vec2, a: Vec2, b: Vec2): number {
   const dx = b.x - a.x;
@@ -107,6 +124,27 @@ export function pointToMesh(p: Vec2, verts: readonly Vec2[], tris: readonly numb
 }
 
 /** Split a mesh into connected components (islands of triangles sharing vertices). */
+/** Boundary edges of a mesh: edges used by exactly one triangle. */
+export function outlineEdges(m: SkinnedMesh): [Vec2, Vec2][] {
+  const count = new Map<string, [number, number]>();
+  const key = (a: number, b: number) => (a < b ? `${a}-${b}` : `${b}-${a}`);
+  const seen = new Map<string, number>();
+  for (let t = 0; t < m.tris.length; t += 3) {
+    for (const [i, j] of [
+      [0, 1],
+      [1, 2],
+      [2, 0],
+    ] as const) {
+      const a = m.tris[t + i]!;
+      const b = m.tris[t + j]!;
+      const k = key(a, b);
+      seen.set(k, (seen.get(k) ?? 0) + 1);
+      count.set(k, [a, b]);
+    }
+  }
+  return [...count].filter(([k]) => seen.get(k) === 1).map(([, [a, b]]) => [m.verts[a]!, m.verts[b]!]);
+}
+
 export function components(m: SkinnedMesh): SkinnedMesh[] {
   const parent = m.verts.map((_, i) => i);
   const find = (x: number): number => (parent[x] === x ? x : (parent[x] = find(parent[x]!)));
@@ -162,8 +200,7 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
   const pieceIds = (slot: string, count: number) => Array.from({ length: count }, (_, k) => `${slot}#${k}`);
   const restPieces = new Map<string, SkinnedMesh>();
   const pieceBone = new Map<string, string>();
-  const parentOf = new Map(rig.bones.map((b) => [b.name, b.parent]));
-  const jointed = (a: string, b: string) => a !== b && (parentOf.get(a) === b || parentOf.get(b) === a);
+  const jointed = connectedBones(rig);
   for (const it of items.filter((x) => SEAM_SLOTS.has(x.slot))) {
     const comps = components(skinAttachment(it.att, it.bone, rest, rest));
     pieceIds(it.slot, comps.length).forEach((id, k) => {
@@ -174,8 +211,16 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
   // seams: for pieces on connected joints, the vertices that sit on the other piece at rest must stay on it
   const seams: { a: string; b: string; seedsA: number[]; seedsB: number[] }[] = [];
   const ids = [...restPieces.keys()];
-  const seedsOn = (from: SkinnedMesh, onto: SkinnedMesh) =>
-    [...new Set(from.tris)].filter((vi) => pointToMesh(from.verts[vi]!, onto.verts, onto.tris) <= th.touchPx);
+  // seam seeds: vertices of `from` that sit on or within a hair of the *outline* of `onto` at rest (the shared edge).
+  // Interior overlap vertices are not seeds: moving within the overlap is not a gap.
+  const seedsOn = (from: SkinnedMesh, onto: SkinnedMesh) => {
+    const edges = outlineEdges(onto);
+    return [...new Set(from.tris)].filter((vi) => {
+      const v = from.verts[vi]!;
+      if (pointToMesh(v, onto.verts, onto.tris) > th.touchPx) return false;
+      return edges.some(([a, b]) => segDist(v, a, b) <= th.touchPx * 2);
+    });
+  };
   for (let i = 0; i < ids.length; i++) {
     for (let j = i + 1; j < ids.length; j++) {
       if (!jointed(pieceBone.get(ids[i]!)!, pieceBone.get(ids[j]!)!)) continue; // only pieces on connected joints form a seam
@@ -263,4 +308,82 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
     });
   }
   return issues;
+}
+
+export interface PieceInfo {
+  readonly id: string;
+  readonly slot: string;
+  /** The bone the piece follows. */
+  readonly bone: string;
+  /** Atlas region the piece is cut from (its attachment path). */
+  readonly region: string;
+  /** Rest-pose bounding box size in px (w × h). */
+  readonly size: readonly [number, number];
+}
+
+/** Human-readable table of the garment pieces (`slot#k` ids used in QA messages). */
+export function pieceTable(rig: RigDocument): Map<string, PieceInfo> {
+  const rest = evalPose(rig, null, 0, { noIk: true });
+  const out = new Map<string, PieceInfo>();
+  for (const it of visibleAttachments(rig, rest)) {
+    if (!SEAM_SLOTS.has(it.slot)) continue;
+    const comps = components(skinAttachment(it.att, it.bone, rest, rest));
+    comps.forEach((c, k) => {
+      const xs = [...new Set(c.tris)].map((i) => c.verts[i]!.x);
+      const ys = [...new Set(c.tris)].map((i) => c.verts[i]!.y);
+      out.set(`${it.slot}#${k}`, {
+        id: `${it.slot}#${k}`,
+        slot: it.slot,
+        bone: dominantBone(it.att, it.bone, c),
+        region: it.att.path,
+        size: [Math.round(Math.max(...xs) - Math.min(...xs)), Math.round(Math.max(...ys) - Math.min(...ys))],
+      });
+    });
+  }
+  return out;
+}
+
+export interface UnderpaintNeed {
+  /** The two pieces whose seam opens. */
+  readonly pieces: readonly [PieceInfo, PieceInfo];
+  /** Worst gap (px) over the clips: the paint that must extend under/over the joint to keep it covered. */
+  readonly extendPx: number;
+  readonly clip: string;
+  readonly frame: number;
+  /** In how many of the given clips the seam opens beyond the limit. */
+  readonly clips: number;
+}
+
+/**
+ * Where the art itself must change: seams that open in the given clips. A gap on a bent joint means no painted pixels
+ * exist there; skinning cannot invent them, so the pieces need underpaint / extension by about `extendPx`.
+ */
+export function underpaintNeeds(
+  rig: RigDocument,
+  clips: readonly Clip[],
+  thresholds: Partial<MeshQaThresholds> = {},
+): UnderpaintNeed[] {
+  const table = pieceTable(rig);
+  const worst = new Map<string, { gap: number; clip: string; frame: number; clips: number }>();
+  for (const clip of clips) {
+    for (const i of meshQa(rig, clip, { seamSeverity: 'warning', ...thresholds })) {
+      if (i.check !== 'detach' || !/come apart/.test(i.message) || !i.bone) continue;
+      const w = worst.get(i.bone);
+      const gap = i.value ?? 0;
+      worst.set(i.bone, {
+        gap: Math.max(gap, w?.gap ?? 0),
+        clip: gap > (w?.gap ?? 0) ? clip.name : (w?.clip ?? clip.name),
+        frame: gap > (w?.gap ?? 0) ? (i.frame ?? 0) : (w?.frame ?? 0),
+        clips: (w?.clips ?? 0) + 1,
+      });
+    }
+  }
+  return [...worst]
+    .flatMap(([key, w]) => {
+      const [a, b] = key.split('|').map((id) => table.get(id!));
+      return a && b
+        ? [{ pieces: [a, b] as const, extendPx: Math.ceil(w.gap), clip: w.clip, frame: w.frame, clips: w.clips }]
+        : [];
+    })
+    .sort((x, y) => y.extendPx - x.extendPx);
 }

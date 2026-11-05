@@ -2,7 +2,14 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { KIEMTU_CLIPS, authorKiemTuSet, buildCharacterPackage, loadKiemTuData, type AtlasData } from '../src/index.js';
+import {
+  KIEMTU_CLIPS,
+  authorKiemTuSet,
+  buildCharacterPackage,
+  loadKiemTuData,
+  pieceTable,
+  type AtlasData,
+} from '../src/index.js';
 import { engineRuntimePath, loadRuntime } from './helpers/dbRuntime.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -16,6 +23,13 @@ describe('real Kiếm tu data (tools/rig/data)', () => {
   it('is a valid RigSet for all 5 drawn directions', () => {
     expect([...data.byDirection.keys()]).toEqual(['S', 'SE', 'E', 'NE', 'N']);
     expect(data.issues.filter((i) => i.severity === 'error')).toEqual([]);
+  });
+
+  it('has no scabbard piece (its painted sword would double the drawn one; see rig-pipeline.md section 11)', () => {
+    for (const [dir, d] of data.byDirection) {
+      const bones = [...pieceTable(d.rig).values()].map((p) => p.bone);
+      expect(bones, dir).not.toContain('scabbard');
+    }
   });
 
   it('every clip of the set passes QA on every direction and exports to DragonBones', () => {

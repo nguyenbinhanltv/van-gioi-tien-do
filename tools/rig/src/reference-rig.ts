@@ -81,7 +81,8 @@ export function buildReferenceHumanoid(direction: Direction = 'E', id = 'referen
     bone: SLOT_LAYOUT[s]!.bone,
     paperdoll: s,
     blend: s === 'wing' ? 'additive' : 'normal',
-    attachment: s,
+    // the sword is drawn (in hand): the back sword stays hidden, like the real rig
+    attachment: s === 'sword_back' ? null : s,
   }));
   const attachments: Record<string, Record<string, RegionAttachment>> = {};
   for (const s of order) {

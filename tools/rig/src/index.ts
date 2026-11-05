@@ -25,3 +25,5 @@ export * from './qa-mesh.js';
 export * from './render/silhouette.js';
 export * from './fit.js';
 export * from './soften.js';
+export * from './autoskin.js';
+export * from './pieces.js';
