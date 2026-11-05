@@ -71,8 +71,29 @@ Các tài liệu [01-gdd.md](01-gdd.md), [10-mvp-scope.md](10-mvp-scope.md), [11
 - Hệ phái / kỹ năng: mục "Câu hỏi cần chốt" của 11 (S1–S11).
 - Cần duyệt thêm: ρ của Hậu sơn Sơn Môn khi đả tọa (0,6 theo 07 §5 hay giá trị riêng) — 01 §11.
 
+## Design C (20–29)
+
+Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất – chờ duyệt". Bảng "Câu hỏi cần chốt" của từng tài liệu: [20](20-kien-truc-tong-the.md#câu-hỏi-cần-chốt), [21](21-kien-truc-client.md#câu-hỏi-cần-chốt), [22](22-server-modules.md#câu-hỏi-cần-chốt), [23](23-mo-hinh-du-lieu.md#câu-hỏi-cần-chốt), [24](24-giao-thuc-mang.md#câu-hỏi-cần-chốt), [25](25-xac-thuc-bao-mat.md#câu-hỏi-cần-chốt), [26](26-kinh-te-ledger.md#câu-hỏi-cần-chốt), [27](27-van-hanh-quan-sat.md#câu-hỏi-cần-chốt), [28](28-chien-luoc-kiem-thu.md#câu-hỏi-cần-chốt), [29](29-adr.md#câu-hỏi-cần-chốt).
+
+| #   | Việc                                                                                                                                                                                 | Nguồn                                                               | Trạng thái                |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------- |
+| T1  | PRNG có seed dùng chung trong `@vgtd/shared` (đề xuất xoshiro128\*\*, luồng đặt tên, seed bí mật cho roll kinh tế); đổi băm vàng của PR #10. Giải quyết mục §6 ở trên khi được duyệt | [29 ADR-010](29-adr.md)                                             | Chờ duyệt                 |
+| T2  | Quy tắc làm tròn số nguyên cho hàm kinh tế của `@vgtd/shared` (`sellerProceeds` trả số thực; sổ cái cần số nguyên, đề xuất thuế làm tròn lên)                                        | [26 §2.1, §5.3](26-kinh-te-ledger.md), ADR-024                      | Mở                        |
+| T3  | Luật Đấu Giá Hội: tỷ lệ hủy tiền, chống sniping, ai được đưa hàng (chưa có số)                                                                                                       | [26 §5.4](26-kinh-te-ledger.md)                                     | Mở                        |
+| T4  | Bản ghi snapshot thêm 1 bit "tuyệt đối" (37–44 bit so với 36–43 trong 08 §8) – cần xác nhận hoặc sửa 08                                                                              | [24 §6](24-giao-thuc-mang.md), PR #10                               | Chờ xác nhận              |
+| T5  | Ngân sách 8/13/25 KB/s có tính tiêu đề WS + TCP/TLS không                                                                                                                            | [24 §9, Q4](24-giao-thuc-mang.md)                                   | Mở                        |
+| T6  | Điểm mơ hồ PR #9 (stream tier, 4–6 chunk, tie-break `compareDrawOrder`, pivot mặt vách, schema `elevation`/`objects`) và PR #10 (`qinggong`, input bị bỏ, cờ bậc thang…)             | [29 Phụ lục B](29-adr.md)                                           | Chờ xác nhận              |
+| T7  | Điểm mơ hồ PR #7 còn leo thang: trục ellipse quỹ đạo, số khung sự kiện, hitbox elite và giới hạn rig quái Spine không phải boss, dữ liệu mẫu Boss                                    | [29 Phụ lục A](29-adr.md)                                           | Chờ chủ art / game design |
+| T8  | Chưa kiểm chứng: Cocos 3.8.8 + Spine 4.2, ngân sách engine ≤ 6 MB, đóng gói dữ liệu chunk (spike S1–S5)                                                                              | [21 §12](21-kien-truc-client.md)                                    | Mở                        |
+| T9  | Mọi ngân sách ms, trần CCU, rate limit, kích thước thông điệp họ Lạnh là giả thiết thiết kế, chưa đo (cần loadbot 100v100)                                                           | [22 §3.4](22-server-modules.md), [28 §6](28-chien-luoc-kiem-thu.md) | Mở                        |
+| T10 | Đối chiếu telemetry/KPI với docs/17 và các tài liệu game design 10–19 khi chúng vào repo                                                                                             | [27](27-van-hanh-quan-sat.md)                                       | Mở                        |
+| T11 | Chính sách quyền riêng tư / xóa dữ liệu, kiểm thử xâm nhập độc lập trước closed beta                                                                                                 | [23 §7](23-mo-hinh-du-lieu.md), [25](25-xac-thuc-bao-mat.md)        | Mở                        |
+| T12 | Đối chiếu 20–28 với docs 10–19 sau khi PR #69/#70 vào `main`: sửa link, thống nhất tên sổ cái (`ledger`/`SRC_*` ↔ `ledger_entries`/`SYSTEM_*`), kiểm tra lại số CCU/tick             | [29 Phụ lục C](29-adr.md)                                           | Mở                        |
+
 ## 7. Đề xuất từ thiết kế B (PR #69, chờ game designer duyệt)
 
 - FTUE bước 9 ([16-onboarding.md](16-onboarding.md) §4.2): theo D19 lần đột phá tiểu cảnh đầu tiên là 90% cố định, không đan, không pity. Đề xuất (chưa áp dụng): cân nhắc nâng tỷ lệ riêng cho nhân vật chưa từng đột phá, hoặc giữ nguyên 90%.
 - Nút Né trên Mobile: `docs/05` chưa mô tả vị trí ([16-onboarding.md](16-onboarding.md) Q4).
 - Đã đối chiếu với 12–19 (PR #69): phần phe / Nghiệp / rơi đồ và chiến tranh Linh Mạch của 01 chuyển sang tham chiếu 14; FTUE của 10 chuyển sang 16, KPI sang 17, nhiệm vụ sang 12, chế tạo sang 13. Còn lệch cần chốt: số Trận Nhãn 3 (14) so với 5 (04 §5) (G15); lợi thế phe (G14); chế phù trong beta (M13).
+
+- Đã đối chiếu với 20–29 (PR #68): số CCU 100 / tick p99 ≤ 40 ms của 10 và `CastStart` / AOE trên lưới ô của 11 đã được 20–24, 28, 29 dùng làm đầu vào; không phát sinh lệch mới (T12 vẫn mở cho phần sổ cái / link của 20–28).

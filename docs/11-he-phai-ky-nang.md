@@ -97,7 +97,7 @@ Mô phỏng xoay vòng tham chiếu (mục 4): Kiếm tu tiêu ≈ 1,9%/s, Thể
 
 ### 3.1 Vòng đời một lần thi triển
 
-Mọi thi triển do **server quyết định** (08): client chỉ gửi yêu cầu; hồi chiêu, Chân Nguyên, kết quả sát thương đều ở server.
+Tên thông điệp dưới đây là khái niệm; định dạng thật nằm ở [24-giao-thuc-mang.md](24-giao-thuc-mang.md) §5 (`CastReq` ≈ `skill_cast` / `skill_cast_ground`, `CastStart` ≈ `cast_start`, `HitEvents` ≈ `skill_result`, `CastReject` ≈ `skill_result` với `CastReason`). Mọi thi triển do **server quyết định** (08): client chỉ gửi yêu cầu; hồi chiêu, Chân Nguyên, kết quả sát thương đều ở server.
 
 ```mermaid
 sequenceDiagram
