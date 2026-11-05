@@ -38,6 +38,21 @@ Bộ tài liệu thiết kế hệ thống cho MVP (server modular monolith, cli
 | 28  | [28-chien-luoc-kiem-thu.md](28-chien-luoc-kiem-thu.md) | Đơn vị/thuộc tính/xác định, replay, tích hợp, loadbot, hiệu năng thiết bị, các giai đoạn CI   |
 | 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 và OPEN-ITEMS §6             |
 
+## Thiết kế bổ sung (12–19, đề xuất – chờ duyệt)
+
+Các mảng mà hồ sơ gốc chưa có ([OPEN-ITEMS.md](OPEN-ITEMS.md) §3). Số liệu đã có hiệu lực chỉ được trích từ 07 / `@vgtd/shared`; con số mới được đánh dấu _Đề xuất – chờ duyệt_. Mỗi file kết thúc bằng danh sách "Câu hỏi cần chốt" kèm mặc định đề xuất.
+
+| #   | File                                                   | Nội dung                                                                                        |
+| --- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| 12  | [12-nhiem-vu-cot-truyen.md](12-nhiem-vu-cot-truyen.md) | Loại nhiệm vụ, cốt truyện MVP, ngân sách phần thưởng, mô hình dữ liệu và JSON Schema            |
+| 13  | [13-che-tao.md](13-che-tao.md)                         | Luyện đan / luyện khí / chế phù: nguyên liệu, thành công, phân phối phẩm, sink kinh tế          |
+| 14  | [14-pvp-chien-tranh.md](14-pvp-chien-tranh.md)         | Luật PvP theo vùng, Nghiệp Lực, đấu trường, chiến tranh Linh Mạch, chống quấy phá               |
+| 15  | [15-kiem-tien-liveops.md](15-kiem-tien-liveops.md)     | Tiên Ngọc, Battle Pass, cửa hàng, danh sách "không bao giờ bán", lịch LiveOps, chống lạm phát   |
+| 16  | [16-onboarding.md](16-onboarding.md)                   | 30 phút đầu trên PC và Mobile, gate tính năng, móc giữ chân                                     |
+| 17  | [17-telemetry-kpi.md](17-telemetry-kpi.md)             | Phân loại sự kiện, KPI, dashboard, giám sát kinh tế, tín hiệu gian lận, quyền riêng tư          |
+| 18  | [18-art-bible-am-thanh.md](18-art-bible-am-thanh.md)   | Art bible (phong cách, màu, VFX Ngũ hành), âm thanh, quy tắc asset AI / placeholder / giấy phép |
+| 19  | [19-ngon-ngu-phap-ly.md](19-ngon-ngu-phap-ly.md)       | Chiến lược i18n và phông chữ; checklist pháp lý Việt Nam (**phải được luật sư xác minh**)       |
+
 ## Quy ước
 
 - Ngôn ngữ: tiếng Việt, giữ nguyên tiêu đề, bảng và công thức. Công thức LaTeX nằm trong khối `latex`; mã nằm trong khối code có ngôn ngữ (ts, glsl, sql, json, css).

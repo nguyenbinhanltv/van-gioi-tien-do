@@ -80,3 +80,8 @@ Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất �
 | T10 | Đối chiếu telemetry/KPI với docs/17 và các tài liệu game design 10–19 khi chúng vào repo                                                                                             | [27](27-van-hanh-quan-sat.md)                                       | Mở                        |
 | T11 | Chính sách quyền riêng tư / xóa dữ liệu, kiểm thử xâm nhập độc lập trước closed beta                                                                                                 | [23 §7](23-mo-hinh-du-lieu.md), [25](25-xac-thuc-bao-mat.md)        | Mở                        |
 | T12 | Đối chiếu 20–28 với docs 10–19 sau khi PR #69/#70 vào `main`: sửa link, thống nhất tên sổ cái (`ledger`/`SRC_*` ↔ `ledger_entries`/`SYSTEM_*`), kiểm tra lại số CCU/tick             | [29 Phụ lục C](29-adr.md)                                           | Mở                        |
+
+## 7. Đề xuất từ thiết kế B (PR #69, chờ game designer duyệt)
+
+- FTUE bước 9 ([16-onboarding.md](16-onboarding.md) §4.2): theo D19 lần đột phá tiểu cảnh đầu tiên là 90% cố định, không đan, không pity. Đề xuất (chưa áp dụng): cân nhắc nâng tỷ lệ riêng cho nhân vật chưa từng đột phá, hoặc giữ nguyên 90%.
+- Nút Né trên Mobile: `docs/05` chưa mô tả vị trí ([16-onboarding.md](16-onboarding.md) Q4).
