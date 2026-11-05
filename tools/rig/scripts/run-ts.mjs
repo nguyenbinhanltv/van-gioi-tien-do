@@ -1,4 +1,3 @@
-/* global process, console */
 // Run a TypeScript script of this package with plain `node`: bundle it (and the workspace TS packages it imports)
 // with esbuild into a temp file and import that. Usage: node scripts/run-ts.mjs scripts/<name>.ts [args...]
 import { build } from 'esbuild';
