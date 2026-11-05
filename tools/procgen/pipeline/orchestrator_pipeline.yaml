@@ -100,10 +100,11 @@ spec:
               # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
               # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
               g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+              base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
               gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
               gsnap() {
                 for d in "$gdir" "$gcommon"; do
-                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/info/* "$d"/hooks/*; do
+                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
                     [ -f "$f" ] && sha256sum -- "$f"
                   done
                 done | sort
@@ -126,14 +127,14 @@ spec:
               fi
               rm -f "$gbefore" "$gafter"
               snap > "$after"
-              tracked="$(g diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
+              tracked="$(g diff --name-only --relative "$base" -- . ':!src' ':!reports' ':!build')"
               extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"   # file mới / đã đổi nội dung
               rm -f "$before" "$after"
               if [ -n "$tracked" ] || [ -n "$extra" ]; then
                 echo "✖ Codex sửa ngoài src/ – hoàn tác và đánh dấu run hỏng"
-                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout HEAD -- "$f"; done; }
+                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout "$base" -- "$f"; done; }
                 [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
-                g checkout HEAD -- src && g clean -fdq -- src
+                g checkout "$base" -- src && g clean -fdq -- src
                 { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/codex_violation
                 exit 20
               fi
@@ -183,10 +184,11 @@ spec:
             # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
             # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
             g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+            base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
             gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
             gsnap() {
               for d in "$gdir" "$gcommon"; do
-                for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/info/* "$d"/hooks/*; do
+                for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
                   [ -f "$f" ] && sha256sum -- "$f"
                 done
               done | sort
@@ -209,14 +211,14 @@ spec:
             fi
             rm -f "$gbefore" "$gafter"
             snap > "$after"
-            tracked="$(g diff --name-only --relative HEAD -- . ':!shaders' ':!reports' ':!build')"
+            tracked="$(g diff --name-only --relative "$base" -- . ':!shaders' ':!reports' ':!build')"
             extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"
             rm -f "$before" "$after"
             if [ -n "$tracked" ] || [ -n "$extra" ]; then
               echo "✖ agy sửa ngoài shaders/ – hoàn tác và đánh dấu run hỏng"
-              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout HEAD -- "$f"; done; }
+              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout "$base" -- "$f"; done; }
               [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
-              g checkout HEAD -- shaders && g clean -fdq -- shaders
+              g checkout "$base" -- shaders && g clean -fdq -- shaders
               { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/agy_violation
               exit 20
             fi
@@ -255,9 +257,10 @@ spec:
           #    (deny luôn thắng allow). Quy tắc Read(...) áp cho Grep/Glob theo kiểu best-effort, và KHÔNG
           #    chặn tiến trình con của Bash. Muốn cứng thì chạy trong container chỉ mount build/raw + reports/.
           run: |
+            set -euo pipefail
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)" 
+              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)" \
               --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Read(//proc/**),Read(//etc/**),Read(~/**),Edit,NotebookEdit,WebFetch,WebSearch" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
