@@ -19,7 +19,7 @@ and `git lfs track`.
 ### Rules
 
 - **Exceptions:** `docs/**` (existing diagrams) and test fixtures (`**/fixtures/**`, `**/__fixtures__/**`,
-  `**/testdata/**`) are *not* LFS, so tests can read them with `fs`. Put test binaries there.
+  `**/testdata/**`) are _not_ LFS, so tests can read them with `fs`. Put test binaries there.
 - **No history rewrite:** never run `git lfs migrate`. Binaries committed before LFS was enabled stay as
   normal blobs; only new files go to LFS.
 - **Text stays text:** `.atlas`, `.json`, Cocos `.meta` files are not LFS.
