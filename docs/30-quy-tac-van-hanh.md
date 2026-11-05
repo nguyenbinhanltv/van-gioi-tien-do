@@ -1,12 +1,12 @@
 # Quy tắc vận hành 24/7 đến khi hoàn thiện MVP
 
 **Trạng thái:** chủ dự án đã xác nhận 2026-11-05 (mục 12). Không thay thế `CLAUDE.md` và `docs/DECISIONS.md`; khi mâu thuẫn, hai tài liệu đó thắng.
-**Nguồn ràng buộc:** `CLAUDE.md` (hard rules, Git rules, Verify), `docs/DECISIONS.md` D1–D31, `docs/10-mvp-scope.md` §12, `docs/OPEN-ITEMS.md` §8, báo cáo thiết kế `Bao-cao-thiet-ke-Van-Gioi-Tien-Do` §5 (bảng quyết định) và §7 (kế hoạch resume; báo cáo nằm ngoài repo).
+**Nguồn ràng buộc:** `CLAUDE.md` (hard rules, Git rules, Verify), `docs/DECISIONS.md` D1–D31, `docs/10-mvp-scope.md` §12, `docs/OPEN-ITEMS.md` §8, [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md) (bảng quyết định, cột "Quyết định", mức "Chặn P<n>") và báo cáo thiết kế ngoài repo `Bao-cao-thiet-ke-Van-Gioi-Tien-Do` §7 (kế hoạch resume).
 
 ## 0. Nguyên tắc nền
 
 1. **Tự động hóa việc làm, không tự động hóa quyền quyết định.** 24/7 nghĩa là luôn có việc không bị chặn để làm tiếp; không có nghĩa là agent tự chốt các câu hỏi thiết kế/pháp lý/tiền bạc.
-2. **Thiết kế đứng trước cài đặt** (quyết định của chủ dự án, epic #64): không viết code cho phần còn có dòng "Chặn" chưa được chốt ở báo cáo §5.
+2. **Thiết kế đứng trước cài đặt** (quyết định của chủ dự án, epic #64): không viết code cho phần còn có dòng "Chặn" chưa được chốt ở `docs/31-bang-quyet-dinh.md`.
 3. **Nguồn sự thật:** DECISIONS (D14+) > docs/00 §3–§4 > `@vgtd/shared` > docs khác. Không bịa số gameplay; thiếu thì ghi vào `docs/OPEN-ITEMS.md`.
 4. **Mọi thứ phải kiểm chứng được:** không báo "xong" nếu chưa chạy bộ kiểm tra; báo cả thất bại và phần bỏ qua.
 
@@ -22,17 +22,17 @@ Vòng lặp 24/7 chỉ dừng khi **tất cả** đúng (nguồn: docs/10 §12 v
 | P4   | Toàn bộ docs/10 §7.1 chạy end-to-end; playtest nội bộ ≥ 20 người, FTUE ≥ 85% không lỗi chặn                                                   |
 | P5   | crash-free ≥ 99%; 100 CCU 24 giờ không sự cố; thử khôi phục không mất dữ liệu; dashboard KPI chạy; pháp lý được luật sư xác minh (docs/19 Q1) |
 
-Mỗi phase **đóng trước khi mở phase sau** (10 §11–§12); P2 song song với phần client chỉ khi PR #10 đã qua cổng ADR-010.
+Mỗi phase **đóng trước khi mở phase sau** (10 §11–§12); P2 chỉ mở sau khi P1 đạt tiêu chí thoát (10 §11–§12), không có ngoại lệ song song (chỉ P4 được ghi "song song một phần").
 
 ## 2. Vai trò
 
-| Vai trò                                 | Được làm                                                                                                                                               | Không được làm                                                                       |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| **Chủ dự án (người)**                   | Chốt cột "Quyết định" §5, duyệt ADR, ngân sách, pháp lý, chủ art                                                                                       | —                                                                                    |
-| **Orchestrator** (`van-gioi-tien-do-1`) | Chọn việc kế tiếp theo §4, spawn/redirect worker, theo dõi, kích hoạt AO review, merge PR đã đủ điều kiện §6 (theo ủy quyền đã ghi trong memory dự án) | Tự chốt quyết định thuộc §5 bảng "Phải hỏi người"; bỏ qua branch protection          |
-| **Worker**                              | Một task phạm vi hẹp, một PR, sửa CI/review của PR đó, `ao report`                                                                                     | Sửa package khác khi chưa qua orchestrator; tự merge PR của mình; mở việc ngoài task |
-| **Worker Codex (asset)**                | Sinh asset placeholder + ghi `docs/ASSET-LICENSES.md`                                                                                                  | Dùng asset ngoài chưa kiểm giấy phép                                                 |
-| **AO native reviewer**                  | Review PR của worker                                                                                                                                   | Thay cho GitHub approval/branch protection                                           |
+| Vai trò                                 | Được làm                                                                                                                                               | Không được làm                                                                                                        |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Chủ dự án (người)**                   | Chốt cột "Quyết định" ở `docs/31`, duyệt ADR, ngân sách, pháp lý, chủ art                                                                              | —                                                                                                                     |
+| **Orchestrator** (`van-gioi-tien-do-1`) | Chọn việc kế tiếp theo §4, spawn/redirect worker, theo dõi, kích hoạt AO review, merge PR đã đủ điều kiện §6 (theo ủy quyền đã ghi trong memory dự án) | Tự chốt quyết định thuộc bảng "Phải hỏi người" ở §5 của tài liệu này, bảng "Phải hỏi người"; bỏ qua branch protection |
+| **Worker**                              | Một task phạm vi hẹp, một PR, sửa CI/review của PR đó, `ao report`                                                                                     | Sửa package khác khi chưa qua orchestrator; tự merge PR của mình; mở việc ngoài task                                  |
+| **Worker Codex (asset)**                | Sinh asset placeholder + ghi `docs/ASSET-LICENSES.md`                                                                                                  | Dùng asset ngoài chưa kiểm giấy phép                                                                                  |
+| **AO native reviewer**                  | Review PR của worker                                                                                                                                   | Thay cho GitHub approval/branch protection                                                                            |
 
 Sở hữu package: mỗi package thuộc một worker tại một thời điểm; thay đổi chéo package đi qua `src/index.ts` public và orchestrator (CLAUDE.md).
 
@@ -54,13 +54,13 @@ Nhịp: chu kỳ chính **mỗi 20–30 phút khi có worker đang chạy** (pol
 
 Thứ tự (cao → thấp): (1) sửa CI/review của PR đang mở; (2) việc trên đường găng của phase hiện tại; (3) việc song song không chặn nhau; (4) nợ kỹ thuật/test/docs.
 
-**Quy tắc "cổng quyết định":** trước khi giao việc, kiểm các dòng liên quan ở báo cáo §5:
+**Quy tắc "cổng quyết định":** trước khi giao việc, kiểm các dòng liên quan ở `docs/31-bang-quyet-dinh.md`:
 
 - Cột "Quyết định" **đã điền** → ghi vào `DECISIONS.md` (D32+) trước, rồi mới làm (skill `vgtd-formula-change`).
 - **Để trống và dòng "Chặn P<n>" của phase hiện tại** → việc đó **không được làm**; chuyển sang việc khác và đưa câu hỏi vào digest.
 - Để trống nhưng có "Đề xuất mặc định" và **không** thuộc nhóm "Phải hỏi người" (§5 dưới) → được làm theo mặc định **sau 48 giờ** không phản hồi digest, và phải gắn nhãn `[default-pending-approval]` trong PR + ghi vào OPEN-ITEMS để dễ đảo lại.
 
-Kế hoạch tham chiếu: báo cáo §7.2 (PR #7 → #66 → #9 → #67; #10 sau ADR-010) và issue #11–#42; thứ tự phase P1 → P5.
+Kế hoạch tham chiếu: báo cáo ngoài repo §7.2 (PR #7 → #66 → #9 → #67 thuộc P1; #10 thuộc P2, chỉ sau khi P1 đạt tiêu chí thoát và ADR-010 được duyệt) và issue #11–#42; thứ tự phase P1 → P5.
 
 ## 5. Ai quyết cái gì
 
@@ -89,25 +89,25 @@ Kế hoạch tham chiếu: báo cáo §7.2 (PR #7 → #66 → #9 → #67; #10 sa
 
 ## 7. Giao tiếp với người (không làm phiền, không bỏ sót)
 
-- **Digest** mỗi ngày (hoặc khi có ≥ 5 câu hỏi/blocker): một bản tin duy nhất gồm (1) đã merge, (2) đang chạy, (3) bị chặn kèm ID dòng §5 cần trả lời + đề xuất mặc định, (4) rủi ro mới, (5) số đo mới (draw call, FPS, tick…).
+- **Digest** mỗi ngày (hoặc khi có ≥ 5 câu hỏi/blocker): một bản tin duy nhất gồm (1) đã merge, (2) đang chạy, (3) bị chặn kèm ID dòng `docs/31` cần trả lời + đề xuất mặc định, (4) rủi ro mới, (5) số đo mới (draw call, FPS, tick…).
 - Câu hỏi khẩn (blocker cho nhiều worker, sự cố bảo mật, mất dữ liệu): báo ngay, không chờ digest.
 - Worker dùng `ao report` (`--checkpoint` mốc, `--needs-input`, `--stuck`, `--done`); orchestrator không báo "xong" thay worker.
 - Không gửi dữ liệu nhạy cảm ra dịch vụ ngoài; PR/commit/comment viết bằng tiếng Anh, docs thiết kế bằng tiếng Việt.
 
 ## 8. Brief chuẩn cho worker mới
 
-Mỗi spawn phải có: mục tiêu một câu; issue/phase; file docs bắt buộc đọc; **danh sách quyết định đã chốt** (D-id) và **dòng §5 còn mở không được tự quyết**; package được phép sửa; tiêu chí xong (kiểm tra đo được); quy tắc Git/CI §6; yêu cầu `ao report` ở mốc; giới hạn thử lại §9. Task asset thêm quy tắc giấy phép §6.8.
+Mỗi spawn phải có: mục tiêu một câu; issue/phase; file docs bắt buộc đọc; **danh sách quyết định đã chốt** (D-id) và **dòng `docs/31` còn mở không được tự quyết**; package được phép sửa; tiêu chí xong (kiểm tra đo được); quy tắc Git/CI §6; yêu cầu `ao report` ở mốc; giới hạn thử lại §9. Task asset thêm quy tắc giấy phép §6.8.
 
 ## 9. Giới hạn chi phí và an toàn vận hành
 
-| Hạng mục                        | Mặc định đề xuất (chủ dự án chỉnh)                                                                         |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Worker chạy song song           | ≤ 3 (tối đa 1 worker mỗi package; 1 worker Codex asset)                                                    |
-| Thử lại một lỗi CI              | ≤ 3 lần; sau đó `--stuck` kèm log, orchestrator đổi hướng hoặc hỏi người                                   |
-| Một task chạy                   | ≤ 1 ngày làm việc không có checkpoint → orchestrator kiểm tra, chia nhỏ hoặc dừng                          |
-| Ngân sách token/ngày            | **Chủ dự án đặt** (chưa có số); khi đạt 80% → chỉ làm việc đường găng, 100% → dừng nhận việc mới và báo    |
-| Dung lượng repo/LFS             | Mỗi PR asset ghi ước lượng LFS; cảnh báo khi vượt 50% quota (quota chưa được ước lượng – báo cáo §6.1 T12) |
-| Chạy dài (loadbot, soak 24 giờ) | Chỉ trên máy local của dự án, ghi rõ tài nguyên; không tự mở dịch vụ ra Internet                           |
+| Hạng mục                        | Mặc định đề xuất (chủ dự án chỉnh)                                                                                    |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Worker chạy song song           | ≤ 3 (tối đa 1 worker mỗi package; 1 worker Codex asset)                                                               |
+| Thử lại một lỗi CI              | ≤ 3 lần; sau đó `--stuck` kèm log, orchestrator đổi hướng hoặc hỏi người                                              |
+| Một task chạy                   | ≤ 1 ngày làm việc không có checkpoint → orchestrator kiểm tra, chia nhỏ hoặc dừng                                     |
+| Ngân sách token/ngày            | **Chủ dự án đặt** (chưa có số); khi đạt 80% → chỉ làm việc đường găng, 100% → dừng nhận việc mới và báo               |
+| Dung lượng repo/LFS             | Mỗi PR asset ghi ước lượng LFS; cảnh báo khi vượt 50% quota (quota chưa được ước lượng – báo cáo ngoài repo §6.1 T12) |
+| Chạy dài (loadbot, soak 24 giờ) | Chỉ trên máy local của dự án, ghi rõ tài nguyên; không tự mở dịch vụ ra Internet                                      |
 
 ## 10. Sự cố và dừng khẩn
 
