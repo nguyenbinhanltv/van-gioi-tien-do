@@ -10,8 +10,9 @@ constant from `@vgtd/shared` (see CLAUDE.md hard rules).
 
 ## Order of authority
 
-1. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions).
-2. `docs/DECISIONS.md` (decision log; later entries, including post-doc decisions, override older docs).
+1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3/4 and every
+   doc below, even where the doc text is left verbatim.
+2. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions); D1-D13 mirror section 4.
 3. `@vgtd/shared` source and tests (`packages/shared/src`, `packages/shared/test`).
 4. Detail docs below. On conflict with 1-3 they lose.
 
@@ -34,8 +35,8 @@ If a value is not in any of these, it is unspecified: do not invent it. Record t
 
 ## Procedure
 
-1. `Grep` the keyword (Vietnamese term and English term) across `docs/`; check `docs/DECISIONS.md` first for overrides.
-2. Read the section in docs/00 section 3 table (it names the originating doc in its last column), then that doc.
+1. `Grep` the keyword (Vietnamese term and English term) across `docs/`, starting with `docs/DECISIONS.md`.
+2. Check `docs/DECISIONS.md` for a post-doc entry (D14 onward) on the same topic; it wins. Otherwise read the docs/00 section 3 table (it names the originating doc in its last column), then that doc.
 3. Find the code form: `Grep` the constant or formula name in `packages/shared/src/` (`constants.ts`, `iso.ts`, `formulas/`).
-4. If doc and code disagree, the docs (1-2) win; fix the code via the `vgtd-formula-change` skill.
+4. If doc and code disagree, the docs (1-2, with DECISIONS first) win; fix the code via the `vgtd-formula-change` skill.
 5. Report the answer with the file and section it came from.

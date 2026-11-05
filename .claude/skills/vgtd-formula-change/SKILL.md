@@ -1,6 +1,6 @@
 ---
 name: vgtd-formula-change
-description: Change or add a gameplay constant, formula, balance number or JSON data/schema in Vạn Giới Tiên Đồ (stats, breakthrough, Lôi Kiếp, Ngũ hành, linh căn, drop, economy, iso/grid/network constants). Use whenever a number in docs/ or @vgtd/shared must change, or a worked example in docs/07-cong-thuc-data-schema.md is updated. Enforces the order docs -> @vgtd/shared -> tests -> gen-data -> DECISIONS.
+description: Change or add a gameplay constant, formula, balance number or JSON data/schema in Vạn Giới Tiên Đồ (stats, breakthrough, Lôi Kiếp, Ngũ hành, linh căn, drop, economy, iso/grid/network constants). Use whenever a number in docs/ or @vgtd/shared must change, or a worked example in docs/07-cong-thuc-data-schema.md is updated. Enforces DECISIONS entry + docs -> @vgtd/shared -> tests -> gen-data.
 ---
 
 # Formula / constant change
@@ -11,8 +11,9 @@ Order matters: docs are the source of truth, code follows. Do not start in code.
 
 1. **Locate** the current definition with the `vgtd-spec-lookup` skill. Note which doc owns it
    (`docs/00-ho-so-tong-hop.md` section 3 names the owner in its last column).
-2. **Docs first.** Edit `docs/00-ho-so-tong-hop.md` section 3 (and section 4 if it supersedes an old value), then the owning
-   detail doc (most gameplay numbers: `docs/07-cong-thuc-data-schema.md`). Update every worked example whose result changes.
+2. **Docs first.** Add the `docs/DECISIONS.md` entry (see step 6; entries dated after the docs override docs/00 section 3/4).
+   Then edit `docs/00-ho-so-tong-hop.md` section 3 (and section 4 if it supersedes an old value) and the owning
+   detail doc (most gameplay numbers: `docs/07-cong-thuc-data-schema.md`) with a `[Cập nhật D<n>: ...]` note. Update every worked example whose result changes.
    Keep docs in Vietnamese; mark the change with a short `[Cập nhật ...]` note.
 3. **Code in `@vgtd/shared` only** (`packages/shared/src/constants.ts`, `iso.ts`, `formulas/*`). Never edit a copy in another
    package; other packages import from `@vgtd/shared`. If you find a duplicate elsewhere, replace it with an import.

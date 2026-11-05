@@ -22,12 +22,15 @@ session; cross-package needs go through the public `src/index.ts` export.
 
 ## Source of truth (highest first)
 
-1. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions).
-2. `docs/DECISIONS.md` (decision log, including decisions made after the docs were written).
-3. `@vgtd/shared` (executable form of the above; tests reproduce the worked examples in `docs/07-cong-thuc-data-schema.md`).
+1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3/4 and every
+   doc below, even where the doc text is left verbatim.
+2. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions); D1-D13 mirror section 4.
+3. `@vgtd/shared` (executable form of 1-2; tests reproduce the worked examples in `docs/07-cong-thuc-data-schema.md`).
 4. The other docs (`docs/01`..`docs/08`) for detail. If they conflict with 1-3, they lose.
 
-Changing a value: edit docs/00 section 3 first, then `docs/DECISIONS.md`, then `@vgtd/shared`, then tests. Use the
+Changing a value: add the `docs/DECISIONS.md` entry first (it takes effect immediately), then `@vgtd/shared` and tests,
+then update docs/00 section 3 and the detail doc with a `[Cập nhật D<n>: ...]` note; until the docs are updated the
+DECISIONS entry wins. Use the
 `vgtd-formula-change` skill. Use `vgtd-spec-lookup` to find where a value is specified.
 
 ## Hard rules
