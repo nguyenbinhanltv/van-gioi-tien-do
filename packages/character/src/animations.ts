@@ -42,8 +42,8 @@ export interface AnimationSpec {
   /** Duration in seconds as printed in the spec (rounded to 2 decimals; = frames / fps). */
   readonly durationSec: number;
   /**
-   * Default suggestion for the per-animation "draw all 8 directions" flag: silhouette depends on the right-hand
-   * weapon / gesture. Individual character definitions override via `drawnInEight`. Not stated in the spec.
+   * Default for the Player's per-animation "draw all 8 directions" flag (F-01 / ADR-020). Character definitions
+   * override via `drawnInEight`.
    */
   readonly asymmetric: boolean;
   /** Events the spec pins to this animation (frame numbers exactly as written in the spec). */
@@ -229,7 +229,22 @@ export function frameAt(id: AnimationId, timeSec: number): number {
   return a.loop ? raw % a.frames : Math.min(raw, a.frames - 1);
 }
 
-/** Animations flagged asymmetric by default (candidates to draw in 8 directions). */
-export function defaultAsymmetricAnimations(): AnimationId[] {
-  return ANIMATIONS.filter((a) => a.asymmetric).map((a) => a.id);
+/**
+ * Default asymmetric (drawn-in-8) animations of the Player — docs/31 row F-01 / ADR-020 default: attack, cast, channel.
+ * Not decided yet: data files carry the real per-animation flag (`drawnInEight`); this is only the default.
+ */
+export const DEFAULT_PLAYER_ASYMMETRIC_ANIMATIONS: readonly AnimationId[] = ['attack', 'cast', 'channel'];
+
+/** Bosses default to all-symmetric (ADR-020); a boss data file sets `drawnInEight` per animation on request. */
+export const DEFAULT_BOSS_ASYMMETRIC_ANIMATIONS: readonly AnimationId[] = [];
+
+/** Animations flagged asymmetric by default for an entity kind (F-01 / ADR-020). */
+export function defaultAsymmetricAnimations(kind: 'player' | 'boss' = 'player'): AnimationId[] {
+  return [...(kind === 'player' ? DEFAULT_PLAYER_ASYMMETRIC_ANIMATIONS : DEFAULT_BOSS_ASYMMETRIC_ANIMATIONS)];
 }
+
+/**
+ * Event frame numbers (e.g. Run footstep "frame 2 and 7") are Spine frame indices, 0-based
+ * (docs/29 A.0 #6a, ±1 frame tolerance when checking). docs/31 row F-05.
+ */
+export const EVENT_FRAME_INDEX_BASE = 0;

@@ -6,7 +6,7 @@ import { getHitboxes } from './footprint.js';
 const hit1 = getHitboxes('1x1');
 const hit4 = getHitboxes('4x4');
 if (hit1.multiPart || hit4.multiPart) throw new Error('unreachable: 1x1 and 4x4 are single-volume');
-const asymmetric = new Set<string>(defaultAsymmetricAnimations());
+const asymmetric = new Set<string>(defaultAsymmetricAnimations('player'));
 
 export const SAMPLE_PLAYER: CharacterDefinition = {
   schemaVersion: 1,
@@ -78,7 +78,7 @@ export const SAMPLE_BOSS_4X4: MonsterDefinition = {
   animations: [
     { id: 'idle', loop: true, frames: 12, fps: 12, drawnInEight: false },
     { id: 'run', loop: true, frames: 10, fps: 20, drawnInEight: false },
-    { id: 'attack', loop: false, frames: 10, fps: 24, drawnInEight: true },
+    { id: 'attack', loop: false, frames: 10, fps: 24, drawnInEight: false }, // boss default: symmetric (ADR-020)
     { id: 'skill', loop: false, frames: 14, fps: 28, drawnInEight: false },
     { id: 'hit', loop: false, frames: 4, fps: 20, drawnInEight: false },
     { id: 'die', loop: false, frames: 12, fps: 15, drawnInEight: false },

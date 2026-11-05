@@ -124,7 +124,13 @@ export function validateCharacterDefinition(data: unknown): ValidationResult {
 const MOB_FOOTPRINTS = ['1x1', '2x2'];
 
 /** Schema + cross-field checks for a mob / elite / boss. */
-export function validateMonsterDefinition(data: unknown): ValidationResult {
+export interface MonsterValidationOptions {
+  /** Rig class capping non-boss Spine monsters; null = uncapped. Default 'pet' (docs/31 F-05). */
+  readonly nonBossSpineRig?: RigKind | null;
+}
+export const DEFAULT_NON_BOSS_SPINE_RIG: RigKind = 'pet';
+
+export function validateMonsterDefinition(data: unknown, options: MonsterValidationOptions = {}): ValidationResult {
   const s = validateMonsterSchema(data);
   if (!s.valid) return s;
   const d = data as MonsterDefinition;
@@ -204,8 +210,11 @@ export function validateMonsterDefinition(data: unknown): ValidationResult {
   // rig
   if (d.render === 'spine') {
     if (!d.rig) errors.push('spine monsters require rig stats');
-    // The spec gives rig limits only for Player, Linh thú and Boss: other Spine monsters are not capped.
+    // Boss → boss limits. Other Spine monsters (xà, giao): docs/29 A.0 #8 / docs/31 F-05 default = Linh thú limits
+    // until the art owner sets their own; pass `nonBossSpineRig: null` to leave them uncapped.
+    const nonBoss = options.nonBossSpineRig === undefined ? DEFAULT_NON_BOSS_SPINE_RIG : options.nonBossSpineRig;
     if (d.kind === 'boss') checkRig(d.rig, 'boss', 'rig', errors);
+    else if (nonBoss) checkRig(d.rig, nonBoss, 'rig', errors);
   }
 
   // HP bar

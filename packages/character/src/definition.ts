@@ -47,8 +47,8 @@ export interface CharacterDefinition {
   readonly rig: RigStats;
   readonly animations: readonly AnimationDef[];
   readonly collision: CharacterCollision;
-  /** Optional per-species / per-rig socket overrides (pivot space, y up). */
-  readonly sockets?: Partial<Record<SocketId, { readonly x: number; readonly y: number }>>;
+  /** Optional per-species / per-rig socket overrides (pivot space, y up; ADR-021 / docs/29 A.0 #3b). */
+  readonly socketsOverride?: Partial<Record<SocketId, { readonly x: number; readonly y: number }>>;
   readonly paperdoll?: {
     /** Slots the default outfit fills. */
     readonly equipped: readonly SlotId[];

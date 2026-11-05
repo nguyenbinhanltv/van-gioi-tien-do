@@ -7,3 +7,4 @@ export * from './definition.js';
 export * from './schema.js';
 export * from './validators.js';
 export * from './samples.js';
+export * from './viewer.js';

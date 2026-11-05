@@ -108,7 +108,7 @@ export const characterDefinitionSchema = {
       items: animation({ enum: [...ANIMATION_IDS] }),
     },
     collision,
-    sockets: {
+    socketsOverride: {
       type: 'object',
       additionalProperties: false,
       properties: Object.fromEntries(SOCKET_IDS.map((s) => [s, point])),

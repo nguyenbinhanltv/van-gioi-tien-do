@@ -115,7 +115,11 @@ export function pivotOf(width: number, height: number = width): Vec2 {
   return { x: width / 2, y: height - PIVOT_BOTTOM_OFFSET_PX };
 }
 
-/** Pivot-space point (origin at pivot, y up) → canvas px (origin top-left, y down), optionally mirrored. */
+/**
+ * Pivot-space point (origin at pivot, y up) → canvas px (origin top-left, y down), optionally mirrored.
+ * For image tooling only (tools/procgen, tests). The engine uses pivot space directly (ADR-021): do NOT flip y
+ * for Spine / Cocos nodes.
+ */
 export function pivotToCanvas(p: Vec2, width: number, height: number = width, mirrored = false): Vec2 {
   const pivot = pivotOf(width, height);
   return { x: pivot.x + mirrorX(p.x, mirrored), y: pivot.y - p.y };
@@ -219,6 +223,26 @@ export const ORBIT_ELLIPSE_PX = { width: 36, height: 18 } as const;
 
 export function getSocket(id: SocketId): SocketSpec {
   return SOCKETS.find((s) => s.id === id)!;
+}
+
+/** docs/31 F-02 / ADR-021: socket space is pivot space with y UP (= Spine / Cocos node local). */
+export type SocketAxis = 'y_up' | 'y_down';
+export const DEFAULT_SOCKET_AXIS: SocketAxis = 'y_up';
+
+/**
+ * Socket position in the skeleton's local space (what the Cocos client applies to a child Node / reads from a
+ * bone). Mirrored directions negate x. `axis` only exists to keep F-02 configurable: the default is y up and no
+ * flip is applied; 'y_down' returns the same point with y negated.
+ */
+export function socketLocalPosition(
+  id: SocketId,
+  mirrored = false,
+  override?: Vec2,
+  axis: SocketAxis = DEFAULT_SOCKET_AXIS,
+): Vec2 {
+  const pos = override ?? getSocket(id).pos;
+  if (!pos) throw new Error(`socket '${id}' is per-species: pass an explicit position`);
+  return { x: mirrorX(pos.x, mirrored), y: axis === 'y_up' ? pos.y : -pos.y };
 }
 
 /**

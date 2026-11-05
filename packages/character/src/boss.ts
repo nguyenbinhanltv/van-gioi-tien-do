@@ -108,16 +108,28 @@ export function vSortLineY(fp: SquareFootprint, x: number): number | null {
  *   · 4 × 4 and up: in front when below the V line (covers the corners where its Y is smaller than the boss
  *     sort key but it visually stands before the flank);
  *   · otherwise / outside the V's x-range: plain sort-key comparison (larger Y draws later).
- * Interpretation: the spec says "nằm dưới cạnh thì vẽ trước boss"; read as "stands in front of the boss"
- * (the stated intent), i.e. drawn after it. See PR ambiguity notes.
+ * Rule (docs/31 F-04 / ADR-023 default, `below_draws_after`): below the V edge = nearer the camera = drawn after
+ * the boss. The alternative literal reading of docs/03 §6 is selectable with `{ vRule: 'below_draws_before' }`
+ * (only the V-corner cases flip; the plain sort-key rule below the bottom vertex is unaffected).
  */
-export function isInFrontOfBoss(i: number, j: number, fp: SquareFootprint): boolean {
+export type VSortRule = 'below_draws_after' | 'below_draws_before';
+export const DEFAULT_V_SORT_RULE: VSortRule = 'below_draws_after';
+
+export function isInFrontOfBoss(
+  i: number,
+  j: number,
+  fp: SquareFootprint,
+  options: { readonly vRule?: VSortRule } = {},
+): boolean {
   const entityY = pivotSortY(i, j);
   if (entityY > bossFootprintSortY(fp)) return true;
   if (fp.n >= 4) {
     const x = tileToScreen(i, j).x;
     const vy = vSortLineY(fp, x);
-    if (vy !== null) return entityY > vy;
+    if (vy !== null) {
+      // Literal reading: an entity below the V is drawn BEFORE the boss, so it is never "in front".
+      return (options.vRule ?? DEFAULT_V_SORT_RULE) === 'below_draws_after' ? entityY > vy : false;
+    }
   }
   return false;
 }
