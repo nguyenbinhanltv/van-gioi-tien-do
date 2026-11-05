@@ -42,6 +42,8 @@ Một `RigDocument` có:
 
 Test `tools/procgen/test/kiem-tu-export.test.mjs` kiểm RigSet đã commit bằng `validateRigSet` với `KIEMTU_REQUIRED_ROLES`, rồi gọi `exportDragonBones` cho từng hướng với atlas thật và idle Clip. Test kiểm skin weighted, skin fallback, bone/slot/IK và idle loop; chỉ export trong bộ nhớ, không commit output runtime. Hai constraint chân tên `ik_leg_L/R` để toolkit điều khiển mix khi chết; target bone vẫn tên `ik_foot_L/R`. Đây chưa phải kiểm hình ảnh/nạp asset trong viewer Cocos.
 
+Test cũng chạy `runQa` cho idle trên cả năm rig: khai báo `spine_upper` được dịch chuyển có chủ đích để thở, giữ các ngoại lệ root/hips/IK mặc định; các kiểm tra seam, trượt chân, reach và key vẫn chạy. Manifest phải trỏ đúng texture; kích thước PNG, bounds/kích thước từng region và toàn bộ pixel PMA phải khớp PNG part/piece đã commit.
+
 ## 4. Bone và IK
 
 **34 bones art + 4 helper IK = 38**, dưới giới hạn player 60. Bone anatomical/chain có length và hướng dọc chuỗi; root, target và hand anchor có thể length 0.
