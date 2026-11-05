@@ -112,7 +112,7 @@ export class PerfHud {
       `Draw calls ${s.drawCalls} / ${B.DRAW_CALLS_WEB_MOBILE} ${dcOk}   Tris ${s.triangles}\n` +
       `Tex mem ${s.textureMB.toFixed(2)} MB (est ${s.textureEstMB.toFixed(2)}) / ${B.TEXTURE_RAM_MB_WEB} MB ${texOk}
 ` +
-      `JS heap ${heap}\n` +
+      `JS heap ${heap} (heap + tex / ${B.RAM_MB_WEB} MB ${heapOk})\n` +
       `Nodes ${s.nodes}   L3 ${s.l3Objects}\n` +
       `click / WASD move | ?input=touch for joystick` +
       (this.note
