@@ -22,6 +22,15 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 - Bước deploy: không còn trong phạm vi (D28: không CD). "orchestrator.inc" trong tài liệu nguồn là nhầm lẫn (D29).
 - Demo canvas `example/` của gói client mới biên dịch, chưa chạy trong trình duyệt thật.
 
+### Art/animation ưu tiên trước — quyết định 2026-11-06
+
+[Cập nhật D32: ưu tiên thiết kế nhân vật/asset trau chuốt + animation mượt. Kỹ thuật chỉ phục vụ trình xem animation trong engine (PR #7, #67 + viewer); server/netcode tiếp tục tạm dừng.] Các mục server ở bảng trên không có nghĩa được mở lại.
+
+- **Chưa chỉ định người rig/animate (human animator not assigned).** D33 chọn Hybrid: AI concept + paperdoll tách lớp, con người rig/animate bằng Spine 4.2 Professional; agent không điều khiển Spine editor. Chủ dự án cần chỉ định người đảm nhiệm và quy trình bàn giao trước khi coi animation là hoàn thiện.
+- **Cần xác minh giấy phép Spine Professional và điều khoản Spine Runtimes (Spine Professional license + Spine Runtimes license terms to verify).** D25/D33 khóa phiên bản/quy trình, không xác nhận đã mua license, ai là licensee hoặc quyền phân phối runtime. Liên quan [31 I-06](31-bang-quyet-dinh.md), [18 §9](18-art-bible-am-thanh.md); cần con người kiểm điều khoản trước phát hành.
+
+[Cập nhật D34: tạm chấp nhận ảnh từ `image_gen.imagegen` khi mô hình/phiên bản không được công bố; vẫn phải ghi CLI version, ngày/giờ, prompt đầy đủ vào ASSET-LICENSES.md và rà soát giấy phép/xác minh nguồn gốc trước phát hành.]
+
 ## 3. Mảng chưa có tài liệu thiết kế
 
 > Cập nhật: các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế từng cảnh giới và chiến tranh Linh Mạch đã có **đề xuất** ở [01-gdd.md](01-gdd.md) §3–§4, §9 (chờ duyệt; xem mục "Design A"); nhiệm vụ, chế tạo, PvP, kiếm tiền, onboarding, LiveOps, telemetry có đề xuất ở 12–17 (PR #69). Danh sách dưới giữ nguyên làm lịch sử.
