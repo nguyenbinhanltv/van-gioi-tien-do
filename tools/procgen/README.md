@@ -27,6 +27,20 @@ npm test               # vitest
 
 Bản gốc `pipeline/*.sh` (`local_smoke.sh`, `render_layers.sh`, `compress_textures.sh`) được giữ nguyên cho runner Linux/CI mà `orchestrator_pipeline.yaml` gọi; bản `.js` là bản tương đương cho đa nền tảng (và thân thiện hơn khi thiếu công cụ). `build` / `typecheck` chỉ kiểm cú pháp mọi file `.js` (gói là JavaScript thuần, không có bước biên dịch); `tsconfig.json` có sẵn cho đúng quy ước monorepo (cần `tsconfig.base.json` ở gốc).
 
+## Asset budget gate và CI (`.github/workflows/assets.yml`)
+
+`npm run budget` (`pipeline/budget_gate.mts`, logic ở `src/budget/check.mts`, chạy bằng `tsx`) đọc `build/atlas` (đầu ra của `npm run pack`) và **thoát 20** nếu:
+
+- trang atlas không phải lũy thừa 2, hoặc lớn hơn trần (`BUDGETS.ATLAS_MAX_WEB_MOBILE` = 2048; 4096 chỉ cho atlas map PC, tên bắt đầu `atl_map`, `--platform pc`);
+- thiếu padding (JSON khai báo < `BUDGETS.ATLAS_PADDING_PX` = 2, frame cách mép trang hoặc cách nhau không đủ chỗ) hoặc **thiếu extrude** (đọc pixel: viền 1 px quanh frame phải lặp lại pixel mép; cùng quy tắc `pack_atlas.js`);
+- atlas icon không phải `atl_icon_48/64/128` hoặc frame không vuông đúng cỡ;
+- tile không phải 64 × 32 (@1x) / 128 × 64 (@2x) (`TILE_WIDTH`/`TILE_HEIGHT` của `@vgtd/shared`);
+- **gói tải đầu (Web) ước tính > `BUDGETS.INITIAL_DOWNLOAD_MB_WEB` = 25 MB**.
+
+Ước tính = dung lượng asset + phần không phải asset của gói đầu (engine+code 6 MB, audio 1 MB, dự phòng 2 MB, lấy từ bảng ở `docs/02`; hằng này nằm trong `check.mts` vì `@vgtd/shared` chưa có; đổi bằng `--reservedMb`). Asset tính theo `build/dist/web/*.{ktx2,webp,astc}` nếu có; không có (thiếu `basisu`/`cwebp`/`astcenc`) thì dùng PNG đã đóng gói làm **cận trên** và báo cảnh báo `NOT_COMPRESSED`. Hằng số chưa có trong `@vgtd/shared` (cỡ icon 48/64/128, extrude ≥ 1 px) cũng khai báo cục bộ, ghi rõ nguồn doc. Báo cáo Markdown in ra và ghi vào `$GITHUB_STEP_SUMMARY`. `--no-pixels` bỏ kiểm extrude; `--platform web|mobile|pc`; ngân sách 25 MB chỉ áp dụng cho `web`.
+
+Workflow `assets.yml` (Node 22, chỉ khi đổi `tools/procgen/**`, `packages/shared/src/constants.ts` hoặc chính workflow): `npm ci` → `gen:tilemap` → `gen:items` → `render` (SVG→PNG; bỏ qua shader/snapshot vì không cài `glslangValidator`/Xvfb) → `validate` → `pack` → `compress:web` (tự bỏ qua nếu thiếu công cụ) → `budget`. Không có bước AI, không deploy. Job `assets` độc lập với `verify (18)/(22)` (không đổi `ci.yml`); `npm test` ở `verify` chạy test của gate.
+
 ## Cài công cụ tùy chọn
 
 Không có công cụ nào dưới đây bắt buộc để chạy `gen`/`validate`/`pack`/`smoke` nhánh PC.
