@@ -30,15 +30,14 @@ u = i - j, \qquad w = i + j \qquad\Longrightarrow\qquad x_{\text{màn hình}} = 
 
 AOI là hình chữ nhật 2 × 2 khung màn hình (2560 × 1440 px logic) tâm tại người chơi, tức mỗi phía rộng thêm nửa màn hình ngoài phần đang thấy. Quy ra (u, w):
 
-| Tham số | Giá trị | Ghi chú |
-|---|---|---|
-| Nửa rộng AOI theo u | 40 ô | 1280 px ÷ 32 |
-| Nửa cao AOI theo w | 45 ô | 720 px ÷ 16 |
-| Ô hash cần quét | tối đa 6 × 7 = 42 | Sau đó lọc chính xác từng thực thể |
-| Bán kính thoát (hysteresis) | 1,15 × bán kính vào | Tránh thực thể nhấp nháy ở mép |
-| Dịch tâm khi bay | + vận tốc × 0,5 s | AOI lệch về phía trước khi ngự kiếm |
-| Trần thực thể gửi cho mỗi client | 120 (Mobile/Web), 200 (PC) | Ưu tiên theo loại và khoảng cách |
-
+| Tham số                          | Giá trị                    | Ghi chú                             |
+| -------------------------------- | -------------------------- | ----------------------------------- |
+| Nửa rộng AOI theo u              | 40 ô                       | 1280 px ÷ 32                        |
+| Nửa cao AOI theo w               | 45 ô                       | 720 px ÷ 16                         |
+| Ô hash cần quét                  | tối đa 6 × 7 = 42          | Sau đó lọc chính xác từng thực thể  |
+| Bán kính thoát (hysteresis)      | 1,15 × bán kính vào        | Tránh thực thể nhấp nháy ở mép      |
+| Dịch tâm khi bay                 | + vận tốc × 0,5 s          | AOI lệch về phía trước khi ngự kiếm |
+| Trần thực thể gửi cho mỗi client | 120 (Mobile/Web), 200 (PC) | Ưu tiên theo loại và khoảng cách    |
 
 ### Vòng cập nhật AOI (10 Hz, tách khỏi tick mô phỏng 20 Hz)
 
@@ -49,14 +48,16 @@ AOI là hình chữ nhật 2 × 2 khung màn hình (2560 × 1440 px logic) tâm 
 
 ```ts
 function aoiQuery(grid: CellGrid, me: Entity, out: Set<EntityId>, exiting: boolean) {
-  const lead = me.flying ? 0.5 : 0;                       // dịch tâm theo hướng bay
+  const lead = me.flying ? 0.5 : 0; // dịch tâm theo hướng bay
   const u0 = me.i - me.j + (me.vi - me.vj) * lead;
   const w0 = me.i + me.j + (me.vi + me.vj) * lead;
-  const hu = exiting ? 46 : 40, hw = exiting ? 52 : 45;
+  const hu = exiting ? 46 : 40,
+    hw = exiting ? 52 : 45;
   for (let cw = Math.floor((w0 - hw) / 16); cw <= Math.floor((w0 + hw) / 16); cw++)
     for (let cu = Math.floor((u0 - hu) / 16); cu <= Math.floor((u0 + hu) / 16); cu++)
       for (const e of grid.cell(cu, cw)) {
-        const du = e.i - e.j - u0, dw = e.i + e.j - w0;
+        const du = e.i - e.j - u0,
+          dw = e.i + e.j - w0;
         if (Math.abs(du) <= hu && Math.abs(dw) <= hw) out.add(e.id);
       }
 }
@@ -64,13 +65,12 @@ function aoiQuery(grid: CellGrid, me: Entity, out: Set<EntityId>, exiting: boole
 
 ### Tần số gửi theo khoảng cách
 
-| Vùng | Điều kiện | Tần số cập nhật vị trí |
-|---|---|---|
-| Gần | Trong khung màn hình đang thấy | 20 Hz (mỗi tick mạng) |
-| Giữa | Trong AOI, ngoài khung thấy | 10 Hz |
-| Xa | Gần mép AOI (> 80% bán kính) | 5 Hz |
-| Luôn 20 Hz | Đồng đội, mục tiêu đang chọn, kẻ đang tấn công mình | Bất kể khoảng cách |
-
+| Vùng       | Điều kiện                                           | Tần số cập nhật vị trí |
+| ---------- | --------------------------------------------------- | ---------------------- |
+| Gần        | Trong khung màn hình đang thấy                      | 20 Hz (mỗi tick mạng)  |
+| Giữa       | Trong AOI, ngoài khung thấy                         | 10 Hz                  |
+| Xa         | Gần mép AOI (> 80% bán kính)                        | 5 Hz                   |
+| Luôn 20 Hz | Đồng đội, mục tiêu đang chọn, kẻ đang tấn công mình | Bất kể khoảng cách     |
 
 ## 3. Cell Handover khi ngự kiếm
 
@@ -102,25 +102,23 @@ Client chỉ gửi **ý định** (hướng và cờ hành động), không bao 
 
 ### Gói input (client → server)
 
-| Trường | Kiểu | Ý nghĩa |
-|---|---|---|
-| seq | uint16, vòng | Số thứ tự input, dùng để đối soát |
-| dtMs | uint8 | Thời gian client tuyên bố cho input này (8–50 ms) |
-| dir | uint8 | Góc hướng di chuyển trong không gian ô, lượng tử 256 mức; 255 = đứng yên |
-| mag | uint4 | Độ lớn cần analog 0–15 (Joystick); chuột luôn 15 |
-| flags | uint4 | Né (Space), bật/tắt ngự kiếm, khinh công |
-
+| Trường | Kiểu         | Ý nghĩa                                                                  |
+| ------ | ------------ | ------------------------------------------------------------------------ |
+| seq    | uint16, vòng | Số thứ tự input, dùng để đối soát                                        |
+| dtMs   | uint8        | Thời gian client tuyên bố cho input này (8–50 ms)                        |
+| dir    | uint8        | Góc hướng di chuyển trong không gian ô, lượng tử 256 mức; 255 = đứng yên |
+| mag    | uint4        | Độ lớn cần analog 0–15 (Joystick); chuột luôn 15                         |
+| flags  | uint4        | Né (Space), bật/tắt ngự kiếm, khinh công                                 |
 
 Một gói gom 1–3 input liên tiếp, gửi 20–30 lần mỗi giây (khoảng 6 byte mỗi input). Click-to-move trên PC được client chuyển thành chuỗi hướng dọc đường A*, nên server chỉ có một loại input duy nhất.
 
 ### Tốc độ (ô / giây, đơn vị không gian ô)
 
-| Trạng thái | Tốc độ | Ghi chú |
-|---|---|---|
-| Đi bộ / chạy | 4,5 | Nhân thêm Thân pháp: × (1 + (TP − 100) / 400) |
-| Né (dash) | 12 trong 0,25 s | Hồi 1,5 s, bất tử 0,15 s đầu |
-| Ngự kiếm | 18 | Bỏ qua vật cản mặt đất, bị chặn bởi vùng cấm bay |
-
+| Trạng thái   | Tốc độ          | Ghi chú                                          |
+| ------------ | --------------- | ------------------------------------------------ |
+| Đi bộ / chạy | 4,5             | Nhân thêm Thân pháp: × (1 + (TP − 100) / 400)    |
+| Né (dash)    | 12 trong 0,25 s | Hồi 1,5 s, bất tử 0,15 s đầu                     |
+| Ngự kiếm     | 18              | Bỏ qua vật cản mặt đất, bị chặn bởi vùng cấm bay |
 
 Tốc độ đều trong không gian ô, nên đi theo trục dọc màn hình trông chậm hơn theo trục ngang, đúng với phối cảnh isometric.
 
@@ -135,15 +133,16 @@ Tốc độ đều trong không gian ô, nên đi theo trục dọc màn hình t
 ```ts
 export function step(s: MoveState, inp: Input, grid: CollisionGrid): MoveState {
   const dt = Math.min(inp.dtMs, 50) / 1000;
-  const speed = speedOf(s, inp.flags);                     // đi, dash hoặc ngự kiếm
+  const speed = speedOf(s, inp.flags); // đi, dash hoặc ngự kiếm
   const ang = (inp.dir / 256) * Math.PI * 2;
   const k = inp.dir === 255 ? 0 : (inp.mag / 15) * speed * dt;
-  let di = Math.cos(ang) * k, dj = Math.sin(ang) * k;
+  let di = Math.cos(ang) * k,
+    dj = Math.sin(ang) * k;
   const n = Math.max(1, Math.ceil(Math.hypot(di, dj) / 0.5)); // chia bước nhỏ
   let { i, j } = s;
   for (let q = 0; q < n; q++) {
-    if (!grid.circleBlocked(i + di / n, j, 0.35, s.layer)) i += di / n;   // trục i
-    if (!grid.circleBlocked(i, j + dj / n, 0.35, s.layer)) j += dj / n;   // trục j
+    if (!grid.circleBlocked(i + di / n, j, 0.35, s.layer)) i += di / n; // trục i
+    if (!grid.circleBlocked(i, j + dj / n, 0.35, s.layer)) j += dj / n; // trục j
   }
   return { ...s, i, j, vi: (i - s.i) / dt, vj: (j - s.j) / dt };
 }
@@ -173,9 +172,10 @@ Nhân vật của chính mình được **dự đoán** (đi ngay khi bấm, kh�
 function onSnapshot(me: Predicted, snap: SelfSnapshot) {
   me.pending = me.pending.filter((inp) => seqNewer(inp.seq, snap.lastSeq));
   let s = snap.state;
-  for (const inp of me.pending) s = step(s, inp, grid);      // chạy lại phần chưa được xác nhận
+  for (const inp of me.pending) s = step(s, inp, grid); // chạy lại phần chưa được xác nhận
   const err = Math.hypot(s.i - me.state.i, s.j - me.state.j);
-  if (err > 2) me.renderOffset = { i: 0, j: 0 };             // đặt thẳng
+  if (err > 2)
+    me.renderOffset = { i: 0, j: 0 }; // đặt thẳng
   else me.renderOffset = { i: me.render.i - s.i, j: me.render.j - s.j, decayMs: err < 0.15 ? 100 : 200 };
   me.state = s;
 }
@@ -202,13 +202,12 @@ function onSnapshot(me: Predicted, snap: SelfSnapshot) {
 
 ### Thông số theo nền tảng
 
-| Thông số | PC | Mobile / Web |
-|---|---|---|
-| Tần số gửi input | 30 Hz | 20 Hz |
-| interpDelay mặc định | 100 ms | 150 ms (tự tăng tới 250 ms) |
-| Giới hạn tua lag compensation | 200 ms | 200 ms |
+| Thông số                        | PC           | Mobile / Web                   |
+| ------------------------------- | ------------ | ------------------------------ |
+| Tần số gửi input                | 30 Hz        | 20 Hz                          |
+| interpDelay mặc định            | 100 ms       | 150 ms (tự tăng tới 250 ms)    |
+| Giới hạn tua lag compensation   | 200 ms       | 200 ms                         |
 | Ngưỡng hiện cảnh báo "mạng yếu" | RTT > 250 ms | RTT > 300 ms hoặc mất gói > 5% |
-
 
 ## 6. Anti-cheat: Speedhack và Cooldown hack
 
@@ -242,15 +241,14 @@ t_{\text{server}} \;\ge\; \text{readyAt} - \min\!\left(\tfrac{RTT}{2},\; 100 \te
 
 ### Bảng tổng hợp
 
-| Kiểu gian lận | Dấu hiệu | Server phát hiện bằng | Xử lý |
-|---|---|---|---|
-| Speedhack | Input dồn dập, đồng hồ client nhanh | Ngân sách thời gian, giới hạn quãng đường mỗi tick | Bỏ input dư; tỷ lệ > 1,10 thì ngắt |
-| Teleport / sửa tọa độ | Không áp dụng được | Client không gửi vị trí | — |
-| Cooldown hack | Xin dùng chiêu trước readyAt | So readyAt với giờ server | Từ chối, gửi lại trạng thái đúng |
-| Spam gói / bot macro | Tần số đều bất thường | Token bucket, độ đều khoảng cách giữa các input | Bỏ gói; gắn cờ xem xét |
-| Phát lại gói (replay) | Gói cũ gửi lại | Số thứ tự + mã phiên | Bỏ gói |
-| Sửa sát thương, rơi đồ | Không áp dụng được | Mọi phép tính ở server | — |
-
+| Kiểu gian lận          | Dấu hiệu                            | Server phát hiện bằng                              | Xử lý                              |
+| ---------------------- | ----------------------------------- | -------------------------------------------------- | ---------------------------------- |
+| Speedhack              | Input dồn dập, đồng hồ client nhanh | Ngân sách thời gian, giới hạn quãng đường mỗi tick | Bỏ input dư; tỷ lệ > 1,10 thì ngắt |
+| Teleport / sửa tọa độ  | Không áp dụng được                  | Client không gửi vị trí                            | —                                  |
+| Cooldown hack          | Xin dùng chiêu trước readyAt        | So readyAt với giờ server                          | Từ chối, gửi lại trạng thái đúng   |
+| Spam gói / bot macro   | Tần số đều bất thường               | Token bucket, độ đều khoảng cách giữa các input    | Bỏ gói; gắn cờ xem xét             |
+| Phát lại gói (replay)  | Gói cũ gửi lại                      | Số thứ tự + mã phiên                               | Bỏ gói                             |
+| Sửa sát thương, rơi đồ | Không áp dụng được                  | Mọi phép tính ở server                             | —                                  |
 
 **Điểm nghi vấn:** mỗi vi phạm +1, giảm 1 điểm mỗi phút. 20 điểm: cảnh báo trong log; 50 điểm: ngắt kết nối; 3 lần ngắt trong 24 giờ: chuyển hàng đợi kiểm tra thủ công. Không cấm tài khoản tự động chỉ dựa trên một chỉ số, vì mạng Mobile có thể tạo dương tính giả.
 
@@ -260,27 +258,25 @@ Nguyên tắc tách: Gateway giữ kết nối nhưng không giữ logic; World 
 
 ### Danh sách service
 
-| Service | Trách nhiệm | Trạng thái | Mở rộng | Công nghệ gợi ý |
-|---|---|---|---|---|
-| Gateway | WebSocket và WebTransport cho Web, cùng giao thức cho Mobile/PC; xác thực JWT; giới hạn tần số; định tuyến gói tới World Node / Chat / Economy; hàng đợi gửi có backpressure | Không lưu trạng thái game; bảng định tuyến trong Redis + bộ nhớ đệm | Ngang, sau cân bằng tải L4; mục tiêu 20.000 kết nối mỗi instance | Rust (tokio, QUIC) hoặc Go |
-| Zone Manager | Gán khối chunk và bí cảnh cho World Node, theo dõi tải, tách vùng nóng, điều phối handover | Bản đồ phân vùng trong Redis | 2 instance (chủ – dự phòng) | Go |
-| World Node | Mô phỏng 20 Hz: di chuyển, quái, kỹ năng, PvP, chiến tranh tông môn, instance bí cảnh | Trạng thái thực thể trong RAM, snapshot người chơi vào Redis mỗi 10 s | Mỗi khối chunk hoặc mỗi instance là một tiến trình đơn luồng | TypeScript (Node.js) để dùng chung module step() với client |
-| Economy | Túi đồ, Linh thạch, Vạn Bảo Lâu, kết quả luyện đan / chế tạo, rơi đồ | PostgreSQL là nguồn sự thật; Redis làm cache | Ngang, khóa theo nhân vật | Go hoặc Kotlin |
-| Chat | Kênh thế giới, tông môn, đội, riêng, hệ thống; lọc từ; chống spam | Redis pub/sub + lịch sử ngắn | Ngang theo kênh | Go |
-| Auth / Session | Đăng nhập, cấp JWT, phiên | Redis | Ngang | Bất kỳ |
-
+| Service        | Trách nhiệm                                                                                                                                                                  | Trạng thái                                                            | Mở rộng                                                          | Công nghệ gợi ý                                             |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------- |
+| Gateway        | WebSocket và WebTransport cho Web, cùng giao thức cho Mobile/PC; xác thực JWT; giới hạn tần số; định tuyến gói tới World Node / Chat / Economy; hàng đợi gửi có backpressure | Không lưu trạng thái game; bảng định tuyến trong Redis + bộ nhớ đệm   | Ngang, sau cân bằng tải L4; mục tiêu 20.000 kết nối mỗi instance | Rust (tokio, QUIC) hoặc Go                                  |
+| Zone Manager   | Gán khối chunk và bí cảnh cho World Node, theo dõi tải, tách vùng nóng, điều phối handover                                                                                   | Bản đồ phân vùng trong Redis                                          | 2 instance (chủ – dự phòng)                                      | Go                                                          |
+| World Node     | Mô phỏng 20 Hz: di chuyển, quái, kỹ năng, PvP, chiến tranh tông môn, instance bí cảnh                                                                                        | Trạng thái thực thể trong RAM, snapshot người chơi vào Redis mỗi 10 s | Mỗi khối chunk hoặc mỗi instance là một tiến trình đơn luồng     | TypeScript (Node.js) để dùng chung module step() với client |
+| Economy        | Túi đồ, Linh thạch, Vạn Bảo Lâu, kết quả luyện đan / chế tạo, rơi đồ                                                                                                         | PostgreSQL là nguồn sự thật; Redis làm cache                          | Ngang, khóa theo nhân vật                                        | Go hoặc Kotlin                                              |
+| Chat           | Kênh thế giới, tông môn, đội, riêng, hệ thống; lọc từ; chống spam                                                                                                            | Redis pub/sub + lịch sử ngắn                                          | Ngang theo kênh                                                  | Go                                                          |
+| Auth / Session | Đăng nhập, cấp JWT, phiên                                                                                                                                                    | Redis                                                                 | Ngang                                                            | Bất kỳ                                                      |
 
 ### Phân chia dữ liệu Redis và PostgreSQL
 
-| Dữ liệu | Redis | PostgreSQL |
-|---|---|---|
-| Phiên, trạng thái online, bảng định tuyến Gateway | Có (TTL) | — |
-| Snapshot vị trí / máu người chơi | Mỗi 10 s | Khi thoát, đổi vùng, sự kiện quan trọng |
-| Linh thạch, túi đồ, giao dịch | Cache đọc, khóa idempotency | **Nguồn sự thật**, sổ cái kép |
-| Niêm yết Vạn Bảo Lâu | Chỉ mục tìm kiếm, giá trung bình (CPI) | Bản ghi niêm yết, lịch sử bán |
-| Chat | Pub/sub, 200 tin gần nhất mỗi kênh, token bucket chống spam | Tin riêng và tông môn giữ 30 ngày (ghi bất đồng bộ) |
-| Bảng xếp hạng | Sorted set | Ảnh chụp mỗi ngày |
-
+| Dữ liệu                                           | Redis                                                       | PostgreSQL                                          |
+| ------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------- |
+| Phiên, trạng thái online, bảng định tuyến Gateway | Có (TTL)                                                    | —                                                   |
+| Snapshot vị trí / máu người chơi                  | Mỗi 10 s                                                    | Khi thoát, đổi vùng, sự kiện quan trọng             |
+| Linh thạch, túi đồ, giao dịch                     | Cache đọc, khóa idempotency                                 | **Nguồn sự thật**, sổ cái kép                       |
+| Niêm yết Vạn Bảo Lâu                              | Chỉ mục tìm kiếm, giá trung bình (CPI)                      | Bản ghi niêm yết, lịch sử bán                       |
+| Chat                                              | Pub/sub, 200 tin gần nhất mỗi kênh, token bucket chống spam | Tin riêng và tông môn giữ 30 ngày (ghi bất đồng bộ) |
+| Bảng xếp hạng                                     | Sorted set                                                  | Ảnh chụp mỗi ngày                                   |
 
 ### Giao dịch kinh tế: ví dụ mua trên Vạn Bảo Lâu
 
@@ -315,13 +311,12 @@ Một giao thức nhị phân duy nhất chạy trên hai lớp vận chuyển: 
 
 ### Ánh xạ loại tin lên lớp vận chuyển
 
-| Loại tin | Hướng | WebTransport | WebSocket | Tần số |
-|---|---|---|---|---|
-| Input | Client → Server | Datagram, mỗi gói kèm lại 2 input trước để bù mất gói | Frame nhị phân | 20–30 Hz |
-| Snapshot vị trí | Server → Client | Datagram, delta so với snapshot client đã ACK | Delta so với snapshot gửi ngay trước | 20 / 10 / 5 Hz theo vùng |
-| Spawn, Despawn, kỹ năng, sát thương, rơi đồ | Server → Client | Stream tin cậy | Frame nhị phân | Theo sự kiện |
-| Chat, kinh tế, giao diện | Hai chiều | Stream tin cậy riêng | Frame nhị phân | Theo sự kiện |
-
+| Loại tin                                    | Hướng           | WebTransport                                          | WebSocket                            | Tần số                   |
+| ------------------------------------------- | --------------- | ----------------------------------------------------- | ------------------------------------ | ------------------------ |
+| Input                                       | Client → Server | Datagram, mỗi gói kèm lại 2 input trước để bù mất gói | Frame nhị phân                       | 20–30 Hz                 |
+| Snapshot vị trí                             | Server → Client | Datagram, delta so với snapshot client đã ACK         | Delta so với snapshot gửi ngay trước | 20 / 10 / 5 Hz theo vùng |
+| Spawn, Despawn, kỹ năng, sát thương, rơi đồ | Server → Client | Stream tin cậy                                        | Frame nhị phân                       | Theo sự kiện             |
+| Chat, kinh tế, giao diện                    | Hai chiều       | Stream tin cậy riêng                                  | Frame nhị phân                       | Theo sự kiện             |
 
 - Client ghi số snapshot đã nhận gần nhất vào mỗi gói input; server mã hóa delta dựa trên snapshot đó, quá 1 s chưa có ACK thì gửi trạng thái đầy đủ.
 - Snapshot đóng gói bit thủ công; sự kiện dùng Protobuf hoặc FlatBuffers. Tắt nén permessage-deflate cho snapshot để đỡ CPU, bật cho chat.
@@ -329,23 +324,21 @@ Một giao thức nhị phân duy nhất chạy trên hai lớp vận chuyển: 
 
 ### Bản ghi một thực thể trong snapshot
 
-| Trường | Bit | Ghi chú |
-|---|---|---|
-| Chỉ số cục bộ | 10 | Vị trí trong danh sách đang thấy của client (≤ 1.024) |
-| Delta vị trí i, j | 2 × 8 | Lượng tử 1/32 ô; delta vượt khoảng thì gửi tọa độ tuyệt đối 2 × 16 bit |
-| Animation / trạng thái | 6 | Đứng, chạy, đánh, bay, chết… |
-| Hướng | 3 | 8 hướng |
-| Có đổi máu | 1 | Nếu 1 thì thêm 7 bit phần trăm máu |
-| **Tổng điển hình** | **36–43** | Khoảng 5–6 byte |
-
+| Trường                 | Bit       | Ghi chú                                                                |
+| ---------------------- | --------- | ---------------------------------------------------------------------- |
+| Chỉ số cục bộ          | 10        | Vị trí trong danh sách đang thấy của client (≤ 1.024)                  |
+| Delta vị trí i, j      | 2 × 8     | Lượng tử 1/32 ô; delta vượt khoảng thì gửi tọa độ tuyệt đối 2 × 16 bit |
+| Animation / trạng thái | 6         | Đứng, chạy, đánh, bay, chết…                                           |
+| Hướng                  | 3         | 8 hướng                                                                |
+| Có đổi máu             | 1         | Nếu 1 thì thêm 7 bit phần trăm máu                                     |
+| **Tổng điển hình**     | **36–43** | Khoảng 5–6 byte                                                        |
 
 ### Ước tính băng thông chiều xuống
 
-| Tình huống | Thực thể gần / giữa / xa | Snapshot | Sự kiện + header | Tổng |
-|---|---|---|---|---|
-| Đánh quái dã ngoại | 30 / 20 / 20 | 30×20×6 + 20×10×6 + 20×5×6 ≈ 5,4 KB/s | ~2 KB/s | **~7–8 KB/s** |
-| Chợ tông môn đông (trần 120) | 60 / 40 / 20 | ≈ 10,2 KB/s | ~3 KB/s | **~13 KB/s** |
-| Chiến tranh 100 vs 100 (trần 120) | 60 / 40 / 20 | ≈ 10,2 KB/s | ~10–14 KB/s (kỹ năng, sát thương gộp) | **~20–25 KB/s** |
-
+| Tình huống                        | Thực thể gần / giữa / xa | Snapshot                              | Sự kiện + header                      | Tổng            |
+| --------------------------------- | ------------------------ | ------------------------------------- | ------------------------------------- | --------------- |
+| Đánh quái dã ngoại                | 30 / 20 / 20             | 30×20×6 + 20×10×6 + 20×5×6 ≈ 5,4 KB/s | ~2 KB/s                               | **~7–8 KB/s**   |
+| Chợ tông môn đông (trần 120)      | 60 / 40 / 20             | ≈ 10,2 KB/s                           | ~3 KB/s                               | **~13 KB/s**    |
+| Chiến tranh 100 vs 100 (trần 120) | 60 / 40 / 20             | ≈ 10,2 KB/s                           | ~10–14 KB/s (kỹ năng, sát thương gộp) | **~20–25 KB/s** |
 
 Chiều lên dưới 1 KB/s. Một giờ đánh quái tốn khoảng 28 MB dữ liệu di động.

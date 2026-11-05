@@ -18,30 +18,28 @@ x(r, k) &= (r - 1) + \alpha \cdot \frac{k - 1}{K_r}, \qquad \alpha = 0{,}6 \\
 
 Trong đó r = 1…9 là cảnh giới (Luyện Khí … Độ Kiếp), k là tiểu cảnh, K_r là số tiểu cảnh của cảnh giới đó (Luyện Khí 9 tầng, các cảnh giới khác 4: Sơ, Trung, Hậu, Viên Mãn). Tổng cộng 41 nấc. Thân pháp tăng tuyến tính vì nó quyết định tốc độ di chuyển và né tránh, tăng theo hàm mũ sẽ phá vỡ nhịp chiến đấu.
 
-| Chỉ số | B (Luyện Khí tầng 1) | λ | Lý do chọn λ |
-|---|---|---|---|
-| Khí Huyết (HP) | 1.200 | 1,78 | Nhỉnh hơn Công kích một chút để trận đấu cùng cảnh giới không ngắn dần |
-| Chân Nguyên (MP) | 400 | 1,70 | Chậm hơn để chi phí kỹ năng cao cấp vẫn là ràng buộc |
-| Công kích | 60 | 1,75 | Mốc tham chiếu |
-| Phòng ngự | 40 | 1,72 | Chậm hơn Công kích để giảm sát thương không tăng quá nhanh |
-| Thân pháp | 100 | tuyến tính 0,15 | Trần khoảng 2,3 lần ở cuối game |
-
+| Chỉ số           | B (Luyện Khí tầng 1) | λ               | Lý do chọn λ                                                           |
+| ---------------- | -------------------- | --------------- | ---------------------------------------------------------------------- |
+| Khí Huyết (HP)   | 1.200                | 1,78            | Nhỉnh hơn Công kích một chút để trận đấu cùng cảnh giới không ngắn dần |
+| Chân Nguyên (MP) | 400                  | 1,70            | Chậm hơn để chi phí kỹ năng cao cấp vẫn là ràng buộc                   |
+| Công kích        | 60                   | 1,75            | Mốc tham chiếu                                                         |
+| Phòng ngự        | 40                   | 1,72            | Chậm hơn Công kích để giảm sát thương không tăng quá nhanh             |
+| Thân pháp        | 100                  | tuyến tính 0,15 | Trần khoảng 2,3 lần ở cuối game                                        |
 
 ### Bảng giá trị (chỉ số gốc, chưa tính trang bị)
 
-| Cảnh giới · nấc | x | Khí Huyết | Chân Nguyên | Công kích | Phòng ngự | Thân pháp |
-|---|---|---|---|---|---|---|
-| Luyện Khí tầng 1 | 0 | 1.200 | 400 | 60 | 40 | 100 |
-| Trúc Cơ sơ kỳ | 1 | 2.136 | 680 | 105 | 69 | 115 |
-| Kim Đan sơ kỳ | 2 | 3.802 | 1.156 | 184 | 118 | 130 |
-| Nguyên Anh sơ kỳ | 3 | 6.768 | 1.965 | 322 | 204 | 145 |
-| Hóa Thần sơ kỳ | 4 | 12.047 | 3.341 | 563 | 350 | 160 |
-| Luyện Hư sơ kỳ | 5 | 21.443 | 5.680 | 985 | 602 | 175 |
-| Hợp Thể sơ kỳ | 6 | 38.168 | 9.655 | 1.723 | 1.036 | 190 |
-| Đại Thừa sơ kỳ | 7 | 67.940 | 16.414 | 3.016 | 1.781 | 205 |
-| Độ Kiếp sơ kỳ | 8 | 120.936 | 27.903 | 5.278 | 3.064 | 220 |
-| Độ Kiếp Viên Mãn | 8,45 | 156.733 | 35.437 | 6.788 | 3.910 | 227 |
-
+| Cảnh giới · nấc  | x    | Khí Huyết | Chân Nguyên | Công kích | Phòng ngự | Thân pháp |
+| ---------------- | ---- | --------- | ----------- | --------- | --------- | --------- |
+| Luyện Khí tầng 1 | 0    | 1.200     | 400         | 60        | 40        | 100       |
+| Trúc Cơ sơ kỳ    | 1    | 2.136     | 680         | 105       | 69        | 115       |
+| Kim Đan sơ kỳ    | 2    | 3.802     | 1.156       | 184       | 118       | 130       |
+| Nguyên Anh sơ kỳ | 3    | 6.768     | 1.965       | 322       | 204       | 145       |
+| Hóa Thần sơ kỳ   | 4    | 12.047    | 3.341       | 563       | 350       | 160       |
+| Luyện Hư sơ kỳ   | 5    | 21.443    | 5.680       | 985       | 602       | 175       |
+| Hợp Thể sơ kỳ    | 6    | 38.168    | 9.655       | 1.723     | 1.036     | 190       |
+| Đại Thừa sơ kỳ   | 7    | 67.940    | 16.414      | 3.016     | 1.781     | 205       |
+| Độ Kiếp sơ kỳ    | 8    | 120.936   | 27.903      | 5.278     | 3.064     | 220       |
+| Độ Kiếp Viên Mãn | 8,45 | 156.733   | 35.437      | 6.788     | 3.910     | 227       |
 
 Ví dụ cú nhảy đột phá: Luyện Khí tầng 9 (x = 0,533) có 1.632 Khí Huyết; lên Trúc Cơ sơ kỳ là 2.136, tăng 31% chỉ sau một lần đột phá.
 
@@ -72,38 +70,35 @@ Công thức giữ đúng dạng yêu cầu, bổ sung ba quy tắc để server
 
 ### Base theo ngưỡng đột phá lớn
 
-| Ngưỡng | Base_r | Kiếp đi kèm |
-|---|---|---|
-| Luyện Khí → Trúc Cơ | 0,70 | Không |
-| Trúc Cơ → Kim Đan | 0,55 | Tâm Ma nhẹ |
-| Kim Đan → Nguyên Anh | 0,45 | Lôi Kiếp 3 đạo + Tâm Ma |
-| Nguyên Anh → Hóa Thần | 0,35 | Lôi Kiếp 6 đạo |
-| Hóa Thần → Luyện Hư | 0,30 | Tâm Ma đa người |
-| Luyện Hư → Hợp Thể | 0,25 | Lôi Kiếp 9 đạo |
-| Hợp Thể → Đại Thừa | 0,20 | Lôi Kiếp 18 đạo |
-| Đại Thừa → Độ Kiếp | 0,15 | Tâm Ma + Lôi Kiếp 36 đạo |
-| Độ Kiếp → Phi Thăng | 0,10 | Cửu Cửu Thiên Kiếp 81 đạo |
-
+| Ngưỡng                | Base_r | Kiếp đi kèm               |
+| --------------------- | ------ | ------------------------- |
+| Luyện Khí → Trúc Cơ   | 0,70   | Không                     |
+| Trúc Cơ → Kim Đan     | 0,55   | Tâm Ma nhẹ                |
+| Kim Đan → Nguyên Anh  | 0,45   | Lôi Kiếp 3 đạo + Tâm Ma   |
+| Nguyên Anh → Hóa Thần | 0,35   | Lôi Kiếp 6 đạo            |
+| Hóa Thần → Luyện Hư   | 0,30   | Tâm Ma đa người           |
+| Luyện Hư → Hợp Thể    | 0,25   | Lôi Kiếp 9 đạo            |
+| Hợp Thể → Đại Thừa    | 0,20   | Lôi Kiếp 18 đạo           |
+| Đại Thừa → Độ Kiếp    | 0,15   | Tâm Ma + Lôi Kiếp 36 đạo  |
+| Độ Kiếp → Phi Thăng   | 0,10   | Cửu Cửu Thiên Kiếp 81 đạo |
 
 ### Hệ số đan dược
 
-| Loại đan | b₀ | Ví dụ |
-|---|---|---|
+| Loại đan              | b₀   | Ví dụ                                        |
+| --------------------- | ---- | -------------------------------------------- |
 | Chủ đan (đúng ngưỡng) | 0,40 | Trúc Cơ Đan, Kết Anh Đan, Cửu Chuyển Kim Đan |
-| Phụ đan | 0,20 | Hộ Mạch Đan, Định Tâm Đan |
-
+| Phụ đan               | 0,20 | Hộ Mạch Đan, Định Tâm Đan                    |
 
 Hệ số phẩm q theo 6 cấp: Trắng 0,6 · Lục 0,8 · Lam 1,0 · Tím 1,2 · Vàng 1,4 · Đỏ 1,6.
 
 ### Ví dụ tính
 
-| Tình huống | Base_eff | Pill | Karma_Penalty | Kết quả |
-|---|---|---|---|---|
-| Luyện Khí → Trúc Cơ; Trúc Cơ Đan Lam; K = 0 | 0,70 | 0,40 | 0 | 0,98 → kẹp **95%** |
-| Kim Đan → Nguyên Anh; Kết Anh Đan Tím + Hộ Mạch Đan Lam; K = −400 | 0,45 | 1 − 0,52 × 0,80 = 0,584 | 0,08 | **63,3%** |
-| Độ Kiếp → Phi Thăng, đã thất bại 2 lần; Cửu Chuyển Kim Đan Đỏ + Định Tâm Đan Vàng + Hộ Mạch Đan Vàng; K = −800 | 0,26 | 1 − 0,36 × 0,72 × 0,72 = 0,813 | 0,16 | **31,1%** |
-| Như dòng trên nhưng K = 0 | 0,26 | 0,813 | 0 | **47,1%** |
-
+| Tình huống                                                                                                     | Base_eff | Pill                           | Karma_Penalty | Kết quả            |
+| -------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ | ------------- | ------------------ |
+| Luyện Khí → Trúc Cơ; Trúc Cơ Đan Lam; K = 0                                                                    | 0,70     | 0,40                           | 0             | 0,98 → kẹp **95%** |
+| Kim Đan → Nguyên Anh; Kết Anh Đan Tím + Hộ Mạch Đan Lam; K = −400                                              | 0,45     | 1 − 0,52 × 0,80 = 0,584        | 0,08          | **63,3%**          |
+| Độ Kiếp → Phi Thăng, đã thất bại 2 lần; Cửu Chuyển Kim Đan Đỏ + Định Tâm Đan Vàng + Hộ Mạch Đan Vàng; K = −800 | 0,26     | 1 − 0,36 × 0,72 × 0,72 = 0,813 | 0,16          | **31,1%**          |
+| Như dòng trên nhưng K = 0                                                                                      | 0,26     | 0,813                          | 0             | **47,1%**          |
 
 ## 3. Sát thương Lôi Kiếp
 
@@ -120,27 +115,25 @@ Sét kiếp là **sát thương thuần**: bỏ qua Phòng ngự và Ngũ hành.
 
 HP_ref là Khí Huyết gốc (chưa tính trang bị) ở Viên Mãn của cảnh giới đang độ kiếp; m_r là số tia mỗi đợt. Tia cách nhau 1,5 s trong một đợt, các đợt cách nhau 8 s để người chơi nạp lại trận và uống đan.
 
-| Ngưỡng | Số đạo | Số đợt W | Tia / đợt m | κ_r | Tổng (× HP_ref) | Riêng đợt cuối (× HP_ref) |
-|---|---|---|---|---|---|---|
-| Kim Đan → Nguyên Anh | 3 | 3 | 1 | 0,162 | 0,6 | 0,24 |
-| Nguyên Anh → Hóa Thần | 6 | 6 | 1 | 0,115 | 1,2 | 0,31 |
-| Luyện Hư → Hợp Thể | 9 | 9 | 1 | 0,0794 | 1,8 | 0,39 |
-| Hợp Thể → Đại Thừa | 18 | 9 | 2 | 0,0485 | 2,2 | 0,48 |
-| Đại Thừa → Độ Kiếp | 36 | 9 | 4 | 0,0287 | 2,6 | 0,56 |
-| Độ Kiếp → Phi Thăng | 81 | 9 | 9 | 0,0147 | 3,0 | 0,65 |
-
+| Ngưỡng                | Số đạo | Số đợt W | Tia / đợt m | κ_r    | Tổng (× HP_ref) | Riêng đợt cuối (× HP_ref) |
+| --------------------- | ------ | -------- | ----------- | ------ | --------------- | ------------------------- |
+| Kim Đan → Nguyên Anh  | 3      | 3        | 1           | 0,162  | 0,6             | 0,24                      |
+| Nguyên Anh → Hóa Thần | 6      | 6        | 1           | 0,115  | 1,2             | 0,31                      |
+| Luyện Hư → Hợp Thể    | 9      | 9        | 1           | 0,0794 | 1,8             | 0,39                      |
+| Hợp Thể → Đại Thừa    | 18     | 9        | 2           | 0,0485 | 2,2             | 0,48                      |
+| Đại Thừa → Độ Kiếp    | 36     | 9        | 4           | 0,0287 | 2,6             | 0,56                      |
+| Độ Kiếp → Phi Thăng   | 81     | 9        | 9           | 0,0147 | 3,0             | 0,65                      |
 
 ### Nguồn giảm trừ (chỉ những nguồn này có tác dụng)
 
-| Nguồn | Cơ chế | Giá trị theo phẩm (Trắng → Đỏ) | Tiêu hao |
-|---|---|---|---|
-| Pháp bảo phòng ngự | Khiên hấp thụ trước khi trừ máu | Shield = HP_ref × 0,15 / 0,25 / 0,35 / 0,45 / 0,60 / 0,80 | Mất 10% độ bền mỗi đợt; khiên vỡ thì không hồi trong kiếp |
-| Trận pháp tiêu hao | Giảm % mỗi tia | R = 10 / 16 / 22 / 28 / 34 / 40% | 1 lần nạp trận bàn mỗi đợt; hết lần nạp thì trận tắt |
-| Hộ Mạch Đan | Hồi máu | 20% HP_ref, hồi chiêu 45 s | Đan hồi máu thường bị khóa trong Lôi Kiếp |
-| Công pháp Thể tu | Giảm % cộng với trận | +10% (tổng giảm tối đa 50%) | — |
-| Đồng đạo hộ pháp | Chia sát thương | Mỗi người nhận 25% của mỗi tia, tối đa 2 người | Hộ pháp chịu đúng phần đã chia |
-| Phòng ngự, kháng ngũ hành | Không tác dụng | — | — |
-
+| Nguồn                     | Cơ chế                          | Giá trị theo phẩm (Trắng → Đỏ)                            | Tiêu hao                                                  |
+| ------------------------- | ------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| Pháp bảo phòng ngự        | Khiên hấp thụ trước khi trừ máu | Shield = HP_ref × 0,15 / 0,25 / 0,35 / 0,45 / 0,60 / 0,80 | Mất 10% độ bền mỗi đợt; khiên vỡ thì không hồi trong kiếp |
+| Trận pháp tiêu hao        | Giảm % mỗi tia                  | R = 10 / 16 / 22 / 28 / 34 / 40%                          | 1 lần nạp trận bàn mỗi đợt; hết lần nạp thì trận tắt      |
+| Hộ Mạch Đan               | Hồi máu                         | 20% HP_ref, hồi chiêu 45 s                                | Đan hồi máu thường bị khóa trong Lôi Kiếp                 |
+| Công pháp Thể tu          | Giảm % cộng với trận            | +10% (tổng giảm tối đa 50%)                               | —                                                         |
+| Đồng đạo hộ pháp          | Chia sát thương                 | Mỗi người nhận 25% của mỗi tia, tối đa 2 người            | Hộ pháp chịu đúng phần đã chia                            |
+| Phòng ngự, kháng ngũ hành | Không tác dụng                  | —                                                         | —                                                         |
 
 Điều kiện qua kiếp (D_i là tia thứ i, R_i là mức giảm đang bật):
 
@@ -152,14 +145,13 @@ HP_ref là Khí Huyết gốc (chưa tính trang bị) ở Viên Mãn của cả
 
 HP_ref = 156.733 (Độ Kiếp Viên Mãn); Khí Huyết thực có trang bị +40% = 219.426. Kiếp kéo dài 9 × 12 s + 8 × 8 s = 172 s, đủ cho 4 viên Hộ Mạch Đan.
 
-| Bước | Có trận Vàng (34%) | Không có trận |
-|---|---|---|
-| Sát thương thô (3,0 × HP_ref) | 470.199 | 470.199 |
-| Sau trận | 310.331 | 470.199 |
-| Trừ khiên pháp bảo Vàng (0,60 × HP_ref) | 216.291 | 376.159 |
-| Trừ 4 Hộ Mạch Đan (4 × 31.347) | 90.904 | 250.772 |
-| So với Khí Huyết 219.426 | **Sống, còn ~59% máu** | **Chết** (vượt 31.346) |
-
+| Bước                                    | Có trận Vàng (34%)     | Không có trận          |
+| --------------------------------------- | ---------------------- | ---------------------- |
+| Sát thương thô (3,0 × HP_ref)           | 470.199                | 470.199                |
+| Sau trận                                | 310.331                | 470.199                |
+| Trừ khiên pháp bảo Vàng (0,60 × HP_ref) | 216.291                | 376.159                |
+| Trừ 4 Hộ Mạch Đan (4 × 31.347)          | 90.904                 | 250.772                |
+| So với Khí Huyết 219.426                | **Sống, còn ~59% máu** | **Chết** (vượt 31.346) |
 
 Khi người chơi chết giữa kiếp, phần tiến độ kiếp đã qua quyết định mức hậu quả Nhẹ / Trung / Nặng như trong GDD.
 
@@ -169,14 +161,13 @@ Khắc hệ cho +25% sát thương và giảm 15% Phòng ngự của mục tiêu
 
 ### Ma trận hệ số sát thương (hàng = hệ tấn công, cột = hệ phòng thủ)
 
-| Tấn công \ Phòng thủ | Kim | Mộc | Thủy | Hỏa | Thổ |
-|---|---|---|---|---|---|
-| **Kim** | 1,00 | **1,25** (khắc) | 1,00 (sinh) | 0,85 (bị khắc) | 1,00 |
-| **Mộc** | 0,85 (bị khắc) | 1,00 | 1,00 | 1,00 (sinh) | **1,25** (khắc) |
-| **Thủy** | 1,00 | 1,00 (sinh) | 1,00 | **1,25** (khắc) | 0,85 (bị khắc) |
-| **Hỏa** | **1,25** (khắc) | 1,00 | 0,85 (bị khắc) | 1,00 | 1,00 (sinh) |
-| **Thổ** | 1,00 (sinh) | 0,85 (bị khắc) | **1,25** (khắc) | 1,00 | 1,00 |
-
+| Tấn công \ Phòng thủ | Kim             | Mộc             | Thủy            | Hỏa             | Thổ             |
+| -------------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
+| **Kim**              | 1,00            | **1,25** (khắc) | 1,00 (sinh)     | 0,85 (bị khắc)  | 1,00            |
+| **Mộc**              | 0,85 (bị khắc)  | 1,00            | 1,00            | 1,00 (sinh)     | **1,25** (khắc) |
+| **Thủy**             | 1,00            | 1,00 (sinh)     | 1,00            | **1,25** (khắc) | 0,85 (bị khắc)  |
+| **Hỏa**              | **1,25** (khắc) | 1,00            | 0,85 (bị khắc)  | 1,00            | 1,00 (sinh)     |
+| **Thổ**              | 1,00 (sinh)     | 0,85 (bị khắc)  | **1,25** (khắc) | 1,00            | 1,00            |
 
 Khắc: Kim → Mộc → Thổ → Thủy → Hỏa → Kim. Sinh: Kim → Thủy → Mộc → Hỏa → Thổ → Kim. Khi ô là khắc, Phòng ngự của mục tiêu nhân thêm 0,85.
 
@@ -207,12 +198,11 @@ Khắc: Kim → Mộc → Thổ → Thủy → Hỏa → Kim. Sinh: Kim → Th�
 
 ### Ví dụ (Hóa Thần sơ kỳ, Công 563, mục tiêu Thủ 350, c_skill = 1)
 
-| Trường hợp | Tính | Sát thương | So với trung tính |
-|---|---|---|---|
-| Trung tính | 563² / (563 + 350) | 347 | — |
-| Hỏa đánh Kim (khắc) | 563² / (563 + 297,5) × 1,25 | 460 | +33% |
-| Hỏa đánh Thủy (bị khắc) | 347 × 0,85 | 295 | −15% |
-
+| Trường hợp              | Tính                        | Sát thương | So với trung tính |
+| ----------------------- | --------------------------- | ---------- | ----------------- |
+| Trung tính              | 563² / (563 + 350)          | 347        | —                 |
+| Hỏa đánh Kim (khắc)     | 563² / (563 + 297,5) × 1,25 | 460        | +33%              |
+| Hỏa đánh Thủy (bị khắc) | 347 × 0,85                  | 295        | −15%              |
 
 ## 5. Linh căn và tốc độ hấp thu linh khí
 
@@ -235,27 +225,25 @@ Tốc độ tu luyện phụ thuộc vào độ thuần của linh căn và mứ
 
 ### Loại linh căn
 
-| Loại | Số hệ | Tỷ lệ khi tạo nhân vật | P_n | Phạt sát thương khi dùng kỹ năng ngoài hệ |
-|---|---|---|---|---|
-| Đơn linh căn (Thiên linh căn) | 1 | 5% | 1,6 | −30% |
-| Song linh căn | 2 | 20% | 1,3 | −15% |
-| Tạp linh căn – Tam | 3 | 35% | 1,0 | 0% |
-| Tạp linh căn – Tứ | 4 | 25% | 0,85 | 0% |
-| Tạp linh căn – Ngũ | 5 | 15% | 0,7 | 0% |
-
+| Loại                          | Số hệ | Tỷ lệ khi tạo nhân vật | P_n  | Phạt sát thương khi dùng kỹ năng ngoài hệ |
+| ----------------------------- | ----- | ---------------------- | ---- | ----------------------------------------- |
+| Đơn linh căn (Thiên linh căn) | 1     | 5%                     | 1,6  | −30%                                      |
+| Song linh căn                 | 2     | 20%                    | 1,3  | −15%                                      |
+| Tạp linh căn – Tam            | 3     | 35%                    | 1,0  | 0%                                        |
+| Tạp linh căn – Tứ             | 4     | 25%                    | 0,85 | 0%                                        |
+| Tạp linh căn – Ngũ            | 5     | 15%                    | 0,7  | 0%                                        |
 
 Mỗi lần tạo nhân vật có 2% khả năng một linh căn đổi thành biến dị (Phong, Lôi, Băng), giữ nguyên P_n.
 
 ### Ví dụ tại Bí Cảnh Rừng Độc (Mộc 0,5 · Thủy 0,3 · Hỏa 0,2)
 
-| Linh căn | Σ aₑvₑ | Match | Hệ số tốc độ (P_n × √Match) | Tổng giờ tu thuần nếu tu cả 41 nấc ở đây |
-|---|---|---|---|---|
-| Đơn Mộc | 0,50 | 2,5 | **2,53** | ~18,5 giờ |
-| Song Mộc–Thủy (0,6 / 0,4) | 0,42 | 2,1 | 1,88 | ~25 giờ |
-| Tạp Ngũ (0,2 mỗi hệ) | 0,20 | 1,0 | 0,70 | ~67 giờ |
-| Tạp Tam Kim–Thổ–Hỏa | 0,067 | 0,33 | 0,58 | ~81 giờ |
-| Đơn Kim | 0 | 0,1 (sàn) | 0,51 | ~92 giờ |
-
+| Linh căn                  | Σ aₑvₑ | Match     | Hệ số tốc độ (P_n × √Match) | Tổng giờ tu thuần nếu tu cả 41 nấc ở đây |
+| ------------------------- | ------ | --------- | --------------------------- | ---------------------------------------- |
+| Đơn Mộc                   | 0,50   | 2,5       | **2,53**                    | ~18,5 giờ                                |
+| Song Mộc–Thủy (0,6 / 0,4) | 0,42   | 2,1       | 1,88                        | ~25 giờ                                  |
+| Tạp Ngũ (0,2 mỗi hệ)      | 0,20   | 1,0       | 0,70                        | ~67 giờ                                  |
+| Tạp Tam Kim–Thổ–Hỏa       | 0,067  | 0,33      | 0,58                        | ~81 giờ                                  |
+| Đơn Kim                   | 0      | 0,1 (sàn) | 0,51                        | ~92 giờ                                  |
 
 ## 6. Drop Rate Matrix
 
@@ -263,27 +251,25 @@ Quái dã ngoại chủ yếu rơi nguyên liệu và ít Linh thạch; quái ti
 
 ### Tỷ lệ rơi (xác suất · số lượng)
 
-| Vật phẩm | Quái dã ngoại | Quái tinh anh | Boss bí cảnh |
-|---|---|---|---|
-| Linh thạch hạ phẩm | 35% · 1–3 | 100% · 5–12 | 100% · 40–80 |
-| Linh thạch trung phẩm (= 100 hạ) | 0,5% · 1 | 8% · 1 | 100% · 2–5 |
-| Linh thạch thượng phẩm (= 10.000 hạ) | — | 0,1% · 1 | 12% · 1 |
-| Đan dược hồi phục | 3% · 1 | 15% · 1–2 | 100% · 2–4 |
-| Đan đột phá đúng cảnh giới | 0,02% | 0,5% | 6% |
-| Bản vẽ pháp bảo Trắng – Lục | 0,05% | 1% | 15% |
-| Bản vẽ pháp bảo Lam – Tím | — | 0,05% | 3% |
-| Bản vẽ pháp bảo Vàng – Đỏ | — | — | 0,2% (có pity) |
-| Nguyên liệu nghề | 25% · 1–2 | 60% · 2–4 | 100% · 3–6 |
-
+| Vật phẩm                             | Quái dã ngoại | Quái tinh anh | Boss bí cảnh   |
+| ------------------------------------ | ------------- | ------------- | -------------- |
+| Linh thạch hạ phẩm                   | 35% · 1–3     | 100% · 5–12   | 100% · 40–80   |
+| Linh thạch trung phẩm (= 100 hạ)     | 0,5% · 1      | 8% · 1        | 100% · 2–5     |
+| Linh thạch thượng phẩm (= 10.000 hạ) | —             | 0,1% · 1      | 12% · 1        |
+| Đan dược hồi phục                    | 3% · 1        | 15% · 1–2     | 100% · 2–4     |
+| Đan đột phá đúng cảnh giới           | 0,02%         | 0,5%          | 6%             |
+| Bản vẽ pháp bảo Trắng – Lục          | 0,05%         | 1%            | 15%            |
+| Bản vẽ pháp bảo Lam – Tím            | —             | 0,05%         | 3%             |
+| Bản vẽ pháp bảo Vàng – Đỏ            | —             | —             | 0,2% (có pity) |
+| Nguyên liệu nghề                     | 25% · 1–2     | 60% · 2–4     | 100% · 3–6     |
 
 ### Phân bổ phẩm khi đan dược hoặc bản vẽ đã rơi
 
-| Nguồn | Trắng | Lục | Lam | Tím | Vàng | Đỏ |
-|---|---|---|---|---|---|---|
-| Quái dã ngoại | 50% | 30% | 14% | 5% | 0,9% | 0,1% |
-| Quái tinh anh | 30% | 35% | 22% | 10% | 2,5% | 0,5% |
-| Boss bí cảnh | 10% | 25% | 35% | 22% | 7% | 1% |
-
+| Nguồn         | Trắng | Lục | Lam | Tím | Vàng | Đỏ   |
+| ------------- | ----- | --- | --- | --- | ---- | ---- |
+| Quái dã ngoại | 50%   | 30% | 14% | 5%  | 0,9% | 0,1% |
+| Quái tinh anh | 30%   | 35% | 22% | 10% | 2,5% | 0,5% |
+| Boss bí cảnh  | 10%   | 25% | 35% | 22% | 7%   | 1%   |
 
 Với bản vẽ, phẩm được roll trong khoảng phẩm của dòng đã trúng ở bảng trên.
 
@@ -298,12 +284,11 @@ Với bản vẽ, phẩm được roll trong khoảng phẩm của dòng đã tr
 
 ### Kỳ vọng Linh thạch (quy ra hạ phẩm, cảnh giới 1)
 
-| Nguồn | Kỳ vọng mỗi lần hạ | Nhịp điển hình | Kỳ vọng mỗi giờ |
-|---|---|---|---|
-| Quái dã ngoại | 0,35 × 2 + 0,005 × 100 = 1,2 | 150 con / giờ | 180 |
-| Quái tinh anh | 8,5 + 0,08 × 100 + 0,001 × 10.000 = 26,5 | 20 con / giờ | 530 |
-| Boss bí cảnh (rương tuần) | 60 + 3,5 × 100 + 0,12 × 10.000 = 1.610 | 1 lần / tuần / boss | — |
-
+| Nguồn                     | Kỳ vọng mỗi lần hạ                       | Nhịp điển hình      | Kỳ vọng mỗi giờ |
+| ------------------------- | ---------------------------------------- | ------------------- | --------------- |
+| Quái dã ngoại             | 0,35 × 2 + 0,005 × 100 = 1,2             | 150 con / giờ       | 180             |
+| Quái tinh anh             | 8,5 + 0,08 × 100 + 0,001 × 10.000 = 26,5 | 20 con / giờ        | 530             |
+| Boss bí cảnh (rương tuần) | 60 + 3,5 × 100 + 0,12 × 10.000 = 1.610   | 1 lần / tuần / boss | —               |
 
 Các kỳ vọng này là đầu vào để cân kênh tiêu hao ở mục 7, với mục tiêu tỷ lệ tiêu hao / sinh ra 0,9–1,0 mỗi tuần.
 
@@ -329,23 +314,21 @@ Ba kênh tiêu hao chính dưới đây đều tính theo cảnh giới hoặc t
 
 r là cảnh giới người chơi, d là số vùng đi qua (0 nếu cùng vùng). Miễn phí 1 lần mỗi ngày về Sơn Môn của mình; chỉ truyền tống được khi ngoài chiến đấu.
 
-| Trường hợp | Phí | So với kỳ vọng 1 giờ farm dã ngoại cùng cảnh giới |
-|---|---|---|
-| Luyện Khí, cùng vùng | 20 | 11% |
-| Hóa Thần, qua 2 vùng | 203 | 22% |
-| Độ Kiếp, qua 3 vùng | 1.281 | 28% |
-
+| Trường hợp           | Phí   | So với kỳ vọng 1 giờ farm dã ngoại cùng cảnh giới |
+| -------------------- | ----- | ------------------------------------------------- |
+| Luyện Khí, cùng vùng | 20    | 11%                                               |
+| Hóa Thần, qua 2 vùng | 203   | 22%                                               |
+| Độ Kiếp, qua 3 vùng  | 1.281 | 28%                                               |
 
 ### Hao mòn độ bền trang bị
 
-| Sự kiện | Mất độ bền (mọi món đang mặc) |
-|---|---|
-| Chết khi đánh quái | −8% |
-| Chết trong PvP | −4% (thấp hơn để hạn chế quấy phá) |
-| Chết trong Lôi Kiếp | −15% |
-| Chiến đấu liên tục | −1% mỗi 30 phút |
-| Ma đạo (K ≤ −700) | Mọi mức trên × 1,5 |
-
+| Sự kiện             | Mất độ bền (mọi món đang mặc)      |
+| ------------------- | ---------------------------------- |
+| Chết khi đánh quái  | −8%                                |
+| Chết trong PvP      | −4% (thấp hơn để hạn chế quấy phá) |
+| Chết trong Lôi Kiếp | −15%                               |
+| Chiến đấu liên tục  | −1% mỗi 30 phút                    |
+| Ma đạo (K ≤ −700)   | Mọi mức trên × 1,5                 |
 
 ```latex
 \text{RepairCost} = V_{\text{item}} \cdot 0{,}004 \cdot \Delta\%
@@ -355,15 +338,14 @@ Sửa 1% độ bền tốn 0,4% giá trị gốc của món đồ (sửa từ 0 
 
 ### Cơ cấu tiêu hao mục tiêu
 
-| Kênh tiêu hao | Tỷ trọng mục tiêu |
-|---|---|
-| Đột phá và vật liệu đột phá | 35% |
-| Thuế chợ và phí niêm yết | 15% |
-| Sửa chữa trang bị | 15% |
-| Nạp Hộ Sơn Đại Trận, phí duy trì Linh Mạch | 15% |
-| Truyền tống | 8% |
-| Phí đổi Linh thạch lên phẩm (5%) và kênh khác | 12% |
-
+| Kênh tiêu hao                                 | Tỷ trọng mục tiêu |
+| --------------------------------------------- | ----------------- |
+| Đột phá và vật liệu đột phá                   | 35%               |
+| Thuế chợ và phí niêm yết                      | 15%               |
+| Sửa chữa trang bị                             | 15%               |
+| Nạp Hộ Sơn Đại Trận, phí duy trì Linh Mạch    | 15%               |
+| Truyền tống                                   | 8%                |
+| Phí đổi Linh thạch lên phẩm (5%) và kênh khác | 12%               |
 
 ### Vòng điều chỉnh hằng tuần
 
@@ -398,8 +380,8 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
           "required": ["hp", "mp", "atk", "def", "agi"],
           "additionalProperties": false,
           "properties": {
-            "hp":  { "$ref": "#/$defs/statParam" },
-            "mp":  { "$ref": "#/$defs/statParam" },
+            "hp": { "$ref": "#/$defs/statParam" },
+            "mp": { "$ref": "#/$defs/statParam" },
             "atk": { "$ref": "#/$defs/statParam" },
             "def": { "$ref": "#/$defs/statParam" },
             "agi": { "$ref": "#/$defs/statParam" }
@@ -409,8 +391,18 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
     },
     "breakthrough_rules": {
       "type": "object",
-      "required": ["min_rate", "max_rate", "pity_per_fail", "pity_cap", "max_pills", "wrong_realm_pill_factor",
-                   "karma_penalty_per_1000", "quality_multipliers", "minor_stage_base", "minor_stage_karma_factor"],
+      "required": [
+        "min_rate",
+        "max_rate",
+        "pity_per_fail",
+        "pity_cap",
+        "max_pills",
+        "wrong_realm_pill_factor",
+        "karma_penalty_per_1000",
+        "quality_multipliers",
+        "minor_stage_base",
+        "minor_stage_karma_factor"
+      ],
       "additionalProperties": false,
       "properties": {
         "min_rate": { "$ref": "#/$defs/ratio" },
@@ -420,7 +412,12 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
         "max_pills": { "type": "integer", "minimum": 1, "maximum": 5 },
         "wrong_realm_pill_factor": { "$ref": "#/$defs/ratio" },
         "karma_penalty_per_1000": { "$ref": "#/$defs/ratio" },
-        "quality_multipliers": { "type": "array", "items": { "type": "number", "minimum": 0 }, "minItems": 6, "maxItems": 6 },
+        "quality_multipliers": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0 },
+          "minItems": 6,
+          "maxItems": 6
+        },
         "minor_stage_base": {
           "type": "object",
           "required": ["luyen_khi", "default"],
@@ -475,7 +472,17 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
         "durability_loss_on_death": { "$ref": "#/$defs/ratio" }
       },
       "if": { "properties": { "type": { "enum": ["lightning", "lightning_heart_demon"] } } },
-      "then": { "required": ["strikes", "waves", "strikes_per_wave", "kappa", "wave_growth", "strike_interval_s", "wave_interval_s"] }
+      "then": {
+        "required": [
+          "strikes",
+          "waves",
+          "strikes_per_wave",
+          "kappa",
+          "wave_growth",
+          "strike_interval_s",
+          "wave_interval_s"
+        ]
+      }
     },
     "realm": {
       "type": "object",
@@ -513,72 +520,213 @@ File chứa toàn bộ tham số của mục 1–3: công thức chỉ số, lu�
   "stat_formula": {
     "alpha": 0.6,
     "stats": {
-      "hp":  { "base": 1200, "model": "exponential", "lambda": 1.78 },
-      "mp":  { "base": 400,  "model": "exponential", "lambda": 1.70 },
-      "atk": { "base": 60,   "model": "exponential", "lambda": 1.75 },
-      "def": { "base": 40,   "model": "exponential", "lambda": 1.72 },
-      "agi": { "base": 100,  "model": "linear", "slope": 0.15 }
+      "hp": { "base": 1200, "model": "exponential", "lambda": 1.78 },
+      "mp": { "base": 400, "model": "exponential", "lambda": 1.7 },
+      "atk": { "base": 60, "model": "exponential", "lambda": 1.75 },
+      "def": { "base": 40, "model": "exponential", "lambda": 1.72 },
+      "agi": { "base": 100, "model": "linear", "slope": 0.15 }
     }
   },
   "breakthrough_rules": {
-    "min_rate": 0.05, "max_rate": 0.95,
-    "pity_per_fail": 0.08, "pity_cap": 0.40,
-    "max_pills": 3, "wrong_realm_pill_factor": 0.3,
-    "karma_penalty_per_1000": 0.20,
+    "min_rate": 0.05,
+    "max_rate": 0.95,
+    "pity_per_fail": 0.08,
+    "pity_cap": 0.4,
+    "max_pills": 3,
+    "wrong_realm_pill_factor": 0.3,
+    "karma_penalty_per_1000": 0.2,
     "quality_multipliers": [0.6, 0.8, 1.0, 1.2, 1.4, 1.6],
-    "minor_stage_base": { "luyen_khi": 0.90, "default": 0.85 },
+    "minor_stage_base": { "luyen_khi": 0.9, "default": 0.85 },
     "minor_stage_karma_factor": 0.5
   },
   "cultivation": { "req_base": 1000, "req_growth": 1.35, "absorb_base": 100, "absorb_growth": 1.25 },
   "realms": [
-    { "id": "luyen_khi", "order": 1, "name": "Luyện Khí", "sub_stages": 9, "level_range": [1, 30],
+    {
+      "id": "luyen_khi",
+      "order": 1,
+      "name": "Luyện Khí",
+      "sub_stages": 9,
+      "level_range": [1, 30],
       "unlocks": ["linh_can", "khinh_cong", "artifact_slot_1"],
-      "breakthrough": { "to": "truc_co", "base_rate": 0.70, "main_pill_ids": ["pill_truc_co"],
-                       "tribulation": { "type": "none" } } },
-    { "id": "truc_co", "order": 2, "name": "Trúc Cơ", "sub_stages": 4, "level_range": [31, 50],
+      "breakthrough": {
+        "to": "truc_co",
+        "base_rate": 0.7,
+        "main_pill_ids": ["pill_truc_co"],
+        "tribulation": { "type": "none" }
+      }
+    },
+    {
+      "id": "truc_co",
+      "order": 2,
+      "name": "Trúc Cơ",
+      "sub_stages": 4,
+      "level_range": [31, 50],
       "unlocks": ["fly_low", "divine_sense_50m", "crafting"],
-      "breakthrough": { "to": "kim_dan", "base_rate": 0.55, "main_pill_ids": ["pill_ket_kim_dan"],
-                       "tribulation": { "type": "heart_demon" } } },
-    { "id": "kim_dan", "order": 3, "name": "Kim Đan", "sub_stages": 4, "level_range": [51, 70],
+      "breakthrough": {
+        "to": "kim_dan",
+        "base_rate": 0.55,
+        "main_pill_ids": ["pill_ket_kim_dan"],
+        "tribulation": { "type": "heart_demon" }
+      }
+    },
+    {
+      "id": "kim_dan",
+      "order": 3,
+      "name": "Kim Đan",
+      "sub_stages": 4,
+      "level_range": [51, 70],
       "unlocks": ["fly_free", "natal_artifact"],
-      "breakthrough": { "to": "nguyen_anh", "base_rate": 0.45, "main_pill_ids": ["pill_ket_anh"],
-                       "tribulation": { "type": "lightning_heart_demon", "strikes": 3, "waves": 3, "strikes_per_wave": 1,
-                                         "kappa": 0.162, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } },
-    { "id": "nguyen_anh", "order": 4, "name": "Nguyên Anh", "sub_stages": 4, "level_range": [71, 90],
+      "breakthrough": {
+        "to": "nguyen_anh",
+        "base_rate": 0.45,
+        "main_pill_ids": ["pill_ket_anh"],
+        "tribulation": {
+          "type": "lightning_heart_demon",
+          "strikes": 3,
+          "waves": 3,
+          "strikes_per_wave": 1,
+          "kappa": 0.162,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    },
+    {
+      "id": "nguyen_anh",
+      "order": 4,
+      "name": "Nguyên Anh",
+      "sub_stages": 4,
+      "level_range": [71, 90],
       "unlocks": ["nascent_soul_projection", "blink"],
-      "breakthrough": { "to": "hoa_than", "base_rate": 0.35, "main_pill_ids": ["pill_hoa_than"],
-                       "tribulation": { "type": "lightning", "strikes": 6, "waves": 6, "strikes_per_wave": 1,
-                                         "kappa": 0.115, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } },
-    { "id": "hoa_than", "order": 5, "name": "Hóa Thần", "sub_stages": 4, "level_range": [91, 110],
+      "breakthrough": {
+        "to": "hoa_than",
+        "base_rate": 0.35,
+        "main_pill_ids": ["pill_hoa_than"],
+        "tribulation": {
+          "type": "lightning",
+          "strikes": 6,
+          "waves": 6,
+          "strikes_per_wave": 1,
+          "kappa": 0.115,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    },
+    {
+      "id": "hoa_than",
+      "order": 5,
+      "name": "Hóa Thần",
+      "sub_stages": 4,
+      "level_range": [91, 110],
       "unlocks": ["domain", "upper_realm_access"],
-      "breakthrough": { "to": "luyen_hu", "base_rate": 0.30, "main_pill_ids": ["pill_luyen_hu"],
-                       "tribulation": { "type": "heart_demon_multi" } } },
-    { "id": "luyen_hu", "order": 6, "name": "Luyện Hư", "sub_stages": 4, "level_range": [111, 130],
+      "breakthrough": {
+        "to": "luyen_hu",
+        "base_rate": 0.3,
+        "main_pill_ids": ["pill_luyen_hu"],
+        "tribulation": { "type": "heart_demon_multi" }
+      }
+    },
+    {
+      "id": "luyen_hu",
+      "order": 6,
+      "name": "Luyện Hư",
+      "sub_stages": 4,
+      "level_range": [111, 130],
       "unlocks": ["combat_clone", "void_portal"],
-      "breakthrough": { "to": "hop_the", "base_rate": 0.25, "main_pill_ids": ["pill_hop_the"],
-                       "tribulation": { "type": "lightning", "strikes": 9, "waves": 9, "strikes_per_wave": 1,
-                                         "kappa": 0.0794, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } },
-    { "id": "hop_the", "order": 7, "name": "Hợp Thể", "sub_stages": 4, "level_range": [131, 150],
+      "breakthrough": {
+        "to": "hop_the",
+        "base_rate": 0.25,
+        "main_pill_ids": ["pill_hop_the"],
+        "tribulation": {
+          "type": "lightning",
+          "strikes": 9,
+          "waves": 9,
+          "strikes_per_wave": 1,
+          "kappa": 0.0794,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    },
+    {
+      "id": "hop_the",
+      "order": 7,
+      "name": "Hợp Thể",
+      "sub_stages": 4,
+      "level_range": [131, 150],
       "unlocks": ["dharma_avatar"],
-      "breakthrough": { "to": "dai_thua", "base_rate": 0.20, "main_pill_ids": ["pill_dai_thua"],
-                       "tribulation": { "type": "lightning", "strikes": 18, "waves": 9, "strikes_per_wave": 2,
-                                         "kappa": 0.0485, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } },
-    { "id": "dai_thua", "order": 8, "name": "Đại Thừa", "sub_stages": 4, "level_range": [151, 170],
+      "breakthrough": {
+        "to": "dai_thua",
+        "base_rate": 0.2,
+        "main_pill_ids": ["pill_dai_thua"],
+        "tribulation": {
+          "type": "lightning",
+          "strikes": 18,
+          "waves": 9,
+          "strikes_per_wave": 2,
+          "kappa": 0.0485,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    },
+    {
+      "id": "dai_thua",
+      "order": 8,
+      "name": "Đại Thừa",
+      "sub_stages": 4,
+      "level_range": [151, 170],
       "unlocks": ["great_dao_law"],
-      "breakthrough": { "to": "do_kiep", "base_rate": 0.15, "main_pill_ids": ["pill_do_kiep"],
-                       "tribulation": { "type": "lightning_heart_demon", "strikes": 36, "waves": 9, "strikes_per_wave": 4,
-                                         "kappa": 0.0287, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } },
-    { "id": "do_kiep", "order": 9, "name": "Độ Kiếp", "sub_stages": 4, "level_range": [171, 180],
+      "breakthrough": {
+        "to": "do_kiep",
+        "base_rate": 0.15,
+        "main_pill_ids": ["pill_do_kiep"],
+        "tribulation": {
+          "type": "lightning_heart_demon",
+          "strikes": 36,
+          "waves": 9,
+          "strikes_per_wave": 4,
+          "kappa": 0.0287,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    },
+    {
+      "id": "do_kiep",
+      "order": 9,
+      "name": "Độ Kiếp",
+      "sub_stages": 4,
+      "level_range": [171, 180],
       "unlocks": ["ascension_prep"],
-      "breakthrough": { "to": "phi_thang", "base_rate": 0.10, "main_pill_ids": ["pill_cuu_chuyen_kim_dan"],
-                       "tribulation": { "type": "lightning", "strikes": 81, "waves": 9, "strikes_per_wave": 9,
-                                         "kappa": 0.0147, "wave_growth": 1.22, "strike_interval_s": 1.5,
-                                         "wave_interval_s": 8, "durability_loss_on_death": 0.15 } } }
+      "breakthrough": {
+        "to": "phi_thang",
+        "base_rate": 0.1,
+        "main_pill_ids": ["pill_cuu_chuyen_kim_dan"],
+        "tribulation": {
+          "type": "lightning",
+          "strikes": 81,
+          "waves": 9,
+          "strikes_per_wave": 9,
+          "kappa": 0.0147,
+          "wave_growth": 1.22,
+          "strike_interval_s": 1.5,
+          "wave_interval_s": 8,
+          "durability_loss_on_death": 0.15
+        }
+      }
+    }
   ]
 }
 ```
@@ -601,23 +749,42 @@ File chứa tham số của mục 4–5: quan hệ sinh khắc, ma trận hệ s
   "$id": "https://data.tutien.game/schema/elemental_matrix.schema.json",
   "title": "elemental_matrix",
   "type": "object",
-  "required": ["schema_version", "elements", "overcomes", "generates", "damage_matrix", "overcome_def_multiplier",
-               "generate_support", "mutations", "mutation_chance", "root_types", "absorption"],
+  "required": [
+    "schema_version",
+    "elements",
+    "overcomes",
+    "generates",
+    "damage_matrix",
+    "overcome_def_multiplier",
+    "generate_support",
+    "mutations",
+    "mutation_chance",
+    "root_types",
+    "absorption"
+  ],
   "additionalProperties": false,
   "properties": {
     "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
-    "elements": { "type": "array", "items": { "$ref": "#/$defs/element" }, "minItems": 5, "maxItems": 5, "uniqueItems": true },
+    "elements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/element" },
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
     "overcomes": { "$ref": "#/$defs/elementMap", "description": "khóa khắc giá trị" },
     "generates": { "$ref": "#/$defs/elementMap", "description": "khóa sinh ra giá trị" },
     "damage_matrix": {
       "type": "object",
       "description": "hàng = hệ tấn công, cột = hệ phòng thủ",
       "propertyNames": { "$ref": "#/$defs/element" },
-      "minProperties": 5, "maxProperties": 5,
+      "minProperties": 5,
+      "maxProperties": 5,
       "additionalProperties": {
         "type": "object",
         "propertyNames": { "$ref": "#/$defs/element" },
-        "minProperties": 5, "maxProperties": 5,
+        "minProperties": 5,
+        "maxProperties": 5,
         "additionalProperties": { "type": "number", "minimum": 0, "maximum": 2 }
       }
     },
@@ -690,7 +857,8 @@ File chứa tham số của mục 4–5: quan hệ sinh khắc, ma trận hệ s
       "type": "object",
       "propertyNames": { "$ref": "#/$defs/element" },
       "additionalProperties": { "$ref": "#/$defs/element" },
-      "minProperties": 5, "maxProperties": 5
+      "minProperties": 5,
+      "maxProperties": 5
     }
   }
 }
@@ -705,26 +873,26 @@ File chứa tham số của mục 4–5: quan hệ sinh khắc, ma trận hệ s
   "overcomes": { "kim": "moc", "moc": "tho", "tho": "thuy", "thuy": "hoa", "hoa": "kim" },
   "generates": { "kim": "thuy", "thuy": "moc", "moc": "hoa", "hoa": "tho", "tho": "kim" },
   "damage_matrix": {
-    "kim":  { "kim": 1.00, "moc": 1.25, "thuy": 1.00, "hoa": 0.85, "tho": 1.00 },
-    "moc":  { "kim": 0.85, "moc": 1.00, "thuy": 1.00, "hoa": 1.00, "tho": 1.25 },
-    "thuy": { "kim": 1.00, "moc": 1.00, "thuy": 1.00, "hoa": 1.25, "tho": 0.85 },
-    "hoa":  { "kim": 1.25, "moc": 1.00, "thuy": 0.85, "hoa": 1.00, "tho": 1.00 },
-    "tho":  { "kim": 1.00, "moc": 0.85, "thuy": 1.25, "hoa": 1.00, "tho": 1.00 }
+    "kim": { "kim": 1.0, "moc": 1.25, "thuy": 1.0, "hoa": 0.85, "tho": 1.0 },
+    "moc": { "kim": 0.85, "moc": 1.0, "thuy": 1.0, "hoa": 1.0, "tho": 1.25 },
+    "thuy": { "kim": 1.0, "moc": 1.0, "thuy": 1.0, "hoa": 1.25, "tho": 0.85 },
+    "hoa": { "kim": 1.25, "moc": 1.0, "thuy": 0.85, "hoa": 1.0, "tho": 1.0 },
+    "tho": { "kim": 1.0, "moc": 0.85, "thuy": 1.25, "hoa": 1.0, "tho": 1.0 }
   },
   "overcome_def_multiplier": 0.85,
-  "generate_support": { "mp_restore_pct": 0.10, "cooldown_s": 10, "applies_to_self": false },
+  "generate_support": { "mp_restore_pct": 0.1, "cooldown_s": 10, "applies_to_self": false },
   "mutations": [
     { "id": "phong", "base": "moc" },
-    { "id": "loi",   "base": "kim" },
-    { "id": "bang",  "base": "thuy" }
+    { "id": "loi", "base": "kim" },
+    { "id": "bang", "base": "thuy" }
   ],
   "mutation_chance": 0.02,
   "root_types": [
-    { "id": "don",     "element_count": 1, "spawn_weight": 0.05, "purity": 1.6,  "off_element_damage_penalty": 0.30 },
-    { "id": "song",    "element_count": 2, "spawn_weight": 0.20, "purity": 1.3,  "off_element_damage_penalty": 0.15 },
-    { "id": "tap_tam", "element_count": 3, "spawn_weight": 0.35, "purity": 1.0,  "off_element_damage_penalty": 0.0 },
-    { "id": "tap_tu",  "element_count": 4, "spawn_weight": 0.25, "purity": 0.85, "off_element_damage_penalty": 0.0 },
-    { "id": "tap_ngu", "element_count": 5, "spawn_weight": 0.15, "purity": 0.7,  "off_element_damage_penalty": 0.0 }
+    { "id": "don", "element_count": 1, "spawn_weight": 0.05, "purity": 1.6, "off_element_damage_penalty": 0.3 },
+    { "id": "song", "element_count": 2, "spawn_weight": 0.2, "purity": 1.3, "off_element_damage_penalty": 0.15 },
+    { "id": "tap_tam", "element_count": 3, "spawn_weight": 0.35, "purity": 1.0, "off_element_damage_penalty": 0.0 },
+    { "id": "tap_tu", "element_count": 4, "spawn_weight": 0.25, "purity": 0.85, "off_element_damage_penalty": 0.0 },
+    { "id": "tap_ngu", "element_count": 5, "spawn_weight": 0.15, "purity": 0.7, "off_element_damage_penalty": 0.0 }
   ],
   "absorption": {
     "match_floor": 0.1,

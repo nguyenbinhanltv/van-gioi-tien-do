@@ -6,24 +6,22 @@ Oct 31, 2026 · An Nguyen
 
 Bố cục được chọn theo **cách nhập liệu**, không theo thiết bị: Web trên máy tính dùng chuột thì ra bố cục PC, Web trên điện thoại hoặc máy tính bảng cảm ứng thì ra bố cục Mobile. Người chơi luôn có thể ép chế độ trong Cài đặt.
 
-| Chế độ | Kích hoạt khi | Thao tác chính | Vùng chạm / bấm tối thiểu |
-|---|---|---|---|
-| PC | Client PC; hoặc Web có (pointer: fine) và (hover: hover) | Chuột + phím, phím tắt 1–9, kéo thả cửa sổ | 24 px logic |
-| Mobile / Web cảm ứng | App iOS/Android; hoặc Web có (pointer: coarse) | Joypad ảo, Skill Wheel, chạm và giữ | 44 pt (88 px @2x) |
-| Lai (tablet + bàn phím) | Có cả hai loại sự kiện | Chuyển nóng sang PC khi có phím/chuột, về Mobile khi chạm lại | Theo chế độ hiện tại |
-
+| Chế độ                  | Kích hoạt khi                                            | Thao tác chính                                                | Vùng chạm / bấm tối thiểu |
+| ----------------------- | -------------------------------------------------------- | ------------------------------------------------------------- | ------------------------- |
+| PC                      | Client PC; hoặc Web có (pointer: fine) và (hover: hover) | Chuột + phím, phím tắt 1–9, kéo thả cửa sổ                    | 24 px logic               |
+| Mobile / Web cảm ứng    | App iOS/Android; hoặc Web có (pointer: coarse)           | Joypad ảo, Skill Wheel, chạm và giữ                           | 44 pt (88 px @2x)         |
+| Lai (tablet + bàn phím) | Có cả hai loại sự kiện                                   | Chuyển nóng sang PC khi có phím/chuột, về Mobile khi chạm lại | Theo chế độ hiện tại      |
 
 ### Độ phân giải và hệ số scale
 
 Thiết kế trên khung logic 1280 × 720; hệ số UI bằng tỷ lệ nhỏ hơn giữa chiều rộng và chiều cao màn hình so với khung này, nhân thêm thanh trượt của người chơi (80–120%).
 
-| Màn hình | Hệ số | Bộ asset nạp |
-|---|---|---|
-| 1280 × 720 (720p) | 1,0 | @1x |
-| 1920 × 1080 (1080p) | 1,5 | @2x (thu nhỏ) |
-| 2560 × 1440 (2K) | 2,0 | @2x |
-| 3840 × 2160 (4K) | 3,0 | @3x (chỉ khung 9-slice, icon, bitmap font) |
-
+| Màn hình            | Hệ số | Bộ asset nạp                               |
+| ------------------- | ----- | ------------------------------------------ |
+| 1280 × 720 (720p)   | 1,0   | @1x                                        |
+| 1920 × 1080 (1080p) | 1,5   | @2x (thu nhỏ)                              |
+| 2560 × 1440 (2K)    | 2,0   | @2x                                        |
+| 3840 × 2160 (4K)    | 3,0   | @3x (chỉ khung 9-slice, icon, bitmap font) |
 
 - Ngưỡng chọn bộ: hệ số ≤ 1,25 dùng @1x; ≤ 2,25 dùng @2x; lớn hơn dùng @3x.
 - Bộ @3x chỉ có trong bản PC tải về, không nằm trong gói Core của Web để giữ initial load dưới 30 MB.
@@ -40,15 +38,14 @@ Bố cục PC và Mobile/Web trên khung logic 1280 × 720
 
 Trên Mobile, hai nút nhỏ bên phải Skill Wheel là ngự kiếm / khinh công và ô phù lục nhanh; vùng Hủy chỉ hiện khi đang giữ để nhắm.
 
-| Vùng | PC | Mobile / Web cảm ứng |
-|---|---|---|
-| Di chuyển | Chuột trái vào đất hoặc WASD | Joypad nổi góc trái |
-| Kỹ năng | Thanh 1–9 giữa đáy + thanh phụ Shift + F1–F4 | Skill Wheel góc phải dưới, 2 trang × 5 kỹ năng |
-| Chat | Cố định góc dưới trái, 360 × 200 | Dải 2 dòng trên Joypad, chạm để mở toàn màn hình |
-| Túi đồ và các bảng | Cửa sổ nổi kéo thả, tối đa 4 cửa sổ | Toàn màn hình dạng tab, mỗi lúc một bảng |
-| Khung nhân vật, mục tiêu | Góc trên trái | Góc trên trái |
-| Bản đồ nhỏ | Góc trên phải, 200 × 200 | Góc trên phải, 160 × 160 |
-
+| Vùng                     | PC                                           | Mobile / Web cảm ứng                             |
+| ------------------------ | -------------------------------------------- | ------------------------------------------------ |
+| Di chuyển                | Chuột trái vào đất hoặc WASD                 | Joypad nổi góc trái                              |
+| Kỹ năng                  | Thanh 1–9 giữa đáy + thanh phụ Shift + F1–F4 | Skill Wheel góc phải dưới, 2 trang × 5 kỹ năng   |
+| Chat                     | Cố định góc dưới trái, 360 × 200             | Dải 2 dòng trên Joypad, chạm để mở toàn màn hình |
+| Túi đồ và các bảng       | Cửa sổ nổi kéo thả, tối đa 4 cửa sổ          | Toàn màn hình dạng tab, mỗi lúc một bảng         |
+| Khung nhân vật, mục tiêu | Góc trên trái                                | Góc trên trái                                    |
+| Bản đồ nhỏ               | Góc trên phải, 200 × 200                     | Góc trên phải, 160 × 160                         |
 
 ## 3. Hành vi tương tác
 
@@ -63,15 +60,14 @@ PC ưu tiên đa nhiệm (nhiều cửa sổ cùng mở, kéo thả tự do); Mo
 
 **Cửa sổ nổi đa nhiệm**
 
-| Cửa sổ | Phím tắt | Kích thước mặc định |
-|---|---|---|
-| Túi đồ | I | 420 × 480 |
-| Nhân vật & trang bị | C | 420 × 520 |
-| Kỹ năng / Công pháp | K | 560 × 480 |
-| Tông môn | G | 640 × 480 |
-| Bản đồ thế giới | M | 900 × 600 |
-| Vạn Bảo Lâu | B | 720 × 520 |
-
+| Cửa sổ              | Phím tắt | Kích thước mặc định |
+| ------------------- | -------- | ------------------- |
+| Túi đồ              | I        | 420 × 480           |
+| Nhân vật & trang bị | C        | 420 × 520           |
+| Kỹ năng / Công pháp | K        | 560 × 480           |
+| Tông môn            | G        | 640 × 480           |
+| Bản đồ thế giới     | M        | 900 × 600           |
+| Vạn Bảo Lâu         | B        | 720 × 520           |
 
 - Kéo bằng thanh tiêu đề; hút dính vào mép màn hình và mép cửa sổ khác khi cách dưới 8 px.
 - Tối đa 4 cửa sổ cùng mở; bấm vào cửa sổ để đưa lên trên; Esc đóng cửa sổ trên cùng.
@@ -123,13 +119,12 @@ Mọi khung có góc không bao giờ bị kéo giãn: góc chỉ đổi theo b�
 
 ### Bốn họ khung
 
-| Họ khung | Dùng cho | Ảnh nguồn @1x | Inset trái / trên / phải / dưới @1x | Vùng giữa | Ghi chú |
-|---|---|---|---|---|---|
-| Gỗ cổ | Cửa sổ chính, túi đồ, cửa hàng NPC | 96 × 96 | 24 / 32 / 24 / 24 | **Lặp** (vân gỗ) | Cạnh trên dày hơn vì có bảng tên; góc đinh đồng |
-| Ngọc bích | Tooltip, ô kỹ năng, nút chính, popup phần thưởng | 64 × 64 | 16 / 16 / 16 / 16 | Giãn (dải màu ngọc) | Tùy chọn shader óng ánh chạy chéo |
-| Thủy mặc | Hội thoại, bảng nhiệm vụ, bản đồ, thông báo cốt truyện | 128 × 96 | 32 / 24 / 32 / 24 | Giãn + nhiễu giấy tuyên lặp | Nét cọ trang trí vượt ra ngoài khung 12 px là sprite riêng |
-| Viền sáng Cyber-Xianxia | HUD nhỏ, khung mục tiêu, thanh máu | 32 × 32 | 8 / 8 / 8 / 8 | Giãn | Viền phát sáng theo màu hệ bằng shader |
-
+| Họ khung                | Dùng cho                                               | Ảnh nguồn @1x | Inset trái / trên / phải / dưới @1x | Vùng giữa                   | Ghi chú                                                    |
+| ----------------------- | ------------------------------------------------------ | ------------- | ----------------------------------- | --------------------------- | ---------------------------------------------------------- |
+| Gỗ cổ                   | Cửa sổ chính, túi đồ, cửa hàng NPC                     | 96 × 96       | 24 / 32 / 24 / 24                   | **Lặp** (vân gỗ)            | Cạnh trên dày hơn vì có bảng tên; góc đinh đồng            |
+| Ngọc bích               | Tooltip, ô kỹ năng, nút chính, popup phần thưởng       | 64 × 64       | 16 / 16 / 16 / 16                   | Giãn (dải màu ngọc)         | Tùy chọn shader óng ánh chạy chéo                          |
+| Thủy mặc                | Hội thoại, bảng nhiệm vụ, bản đồ, thông báo cốt truyện | 128 × 96      | 32 / 24 / 32 / 24                   | Giãn + nhiễu giấy tuyên lặp | Nét cọ trang trí vượt ra ngoài khung 12 px là sprite riêng |
+| Viền sáng Cyber-Xianxia | HUD nhỏ, khung mục tiêu, thanh máu                     | 32 × 32       | 8 / 8 / 8 / 8                       | Giãn                        | Viền phát sáng theo màu hệ bằng shader                     |
 
 Inset ở @2x và @3x là đúng gấp 2 và gấp 3 giá trị @1x; họa sĩ vẽ góc sao cho đường cắt rơi đúng số nguyên ở cả ba bộ.
 
@@ -152,12 +147,11 @@ Mỗi icon vẽ một bản gốc 256 × 256 và xuất ra ba kích thước 48,
 
 ### Ba kích thước
 
-| Kích thước | Dùng điển hình | Nền tảng | Ô trên atlas 2048 (padding 2 px) |
-|---|---|---|---|
-| 48 × 48 | Ô túi đồ, thanh skill, buff | Web cấu hình thấp, Mobile 720p | 1.521 (39 × 39) |
-| 64 × 64 | Ô túi đồ, thanh skill, cửa hàng (tiêu chuẩn) | Mobile và PC 1080p | 900 (30 × 30) |
-| 128 × 128 | Tooltip lớn, bảng luyện đan, xem chi tiết | PC 2K / 4K, Mobile cao cấp | 225 (15 × 15) |
-
+| Kích thước | Dùng điển hình                               | Nền tảng                       | Ô trên atlas 2048 (padding 2 px) |
+| ---------- | -------------------------------------------- | ------------------------------ | -------------------------------- |
+| 48 × 48    | Ô túi đồ, thanh skill, buff                  | Web cấu hình thấp, Mobile 720p | 1.521 (39 × 39)                  |
+| 64 × 64    | Ô túi đồ, thanh skill, cửa hàng (tiêu chuẩn) | Mobile và PC 1080p             | 900 (30 × 30)                    |
+| 128 × 128  | Tooltip lớn, bảng luyện đan, xem chi tiết    | PC 2K / 4K, Mobile cao cấp     | 225 (15 × 15)                    |
 
 ### Lưới an toàn (trên lưới 64)
 
@@ -183,23 +177,21 @@ Mỗi icon vẽ một bản gốc 256 × 256 và xuất ra ba kích thước 48,
 
 ### Đan dược
 
-| Đan dược | Cấp | Hình dáng | Bảng màu | Chi tiết nhận diện | Hiệu ứng viền động |
-|---|---|---|---|---|---|
-| Trúc Cơ Đan | Sơ cấp (đột phá Trúc Cơ) | Viên tròn trơn đặt trên lá sen nhỏ | Lục ngọc, lõi sáng | 1 vòng vân xoáy | Nhịp sáng nhẹ, chu kỳ 2,4 s |
-| Tẩy Tủy Đan | Trung cấp | Viên trắng ngà đục, làn khói sữa bốc lên | Trắng ngà, lam nhạt | 2 sợi khói cuộn | Nhịp sáng + khói cuộn chậm (chỉ ở bản 128) |
-| Cửu Chuyển Kim Đan | Cực phẩm | Viên vàng kim lơ lửng, 9 vòng vân xoáy, 4 tia hào quang | Vàng kim, lõi cam đỏ | 9 vân + tia sáng | Hào quang xoay 6 s/vòng, quét sáng chéo mỗi 3 s, 6 hạt bay lên (bản 128 và tooltip) |
-
+| Đan dược           | Cấp                      | Hình dáng                                               | Bảng màu             | Chi tiết nhận diện | Hiệu ứng viền động                                                                  |
+| ------------------ | ------------------------ | ------------------------------------------------------- | -------------------- | ------------------ | ----------------------------------------------------------------------------------- |
+| Trúc Cơ Đan        | Sơ cấp (đột phá Trúc Cơ) | Viên tròn trơn đặt trên lá sen nhỏ                      | Lục ngọc, lõi sáng   | 1 vòng vân xoáy    | Nhịp sáng nhẹ, chu kỳ 2,4 s                                                         |
+| Tẩy Tủy Đan        | Trung cấp                | Viên trắng ngà đục, làn khói sữa bốc lên                | Trắng ngà, lam nhạt  | 2 sợi khói cuộn    | Nhịp sáng + khói cuộn chậm (chỉ ở bản 128)                                          |
+| Cửu Chuyển Kim Đan | Cực phẩm                 | Viên vàng kim lơ lửng, 9 vòng vân xoáy, 4 tia hào quang | Vàng kim, lõi cam đỏ | 9 vân + tia sáng   | Hào quang xoay 6 s/vòng, quét sáng chéo mỗi 3 s, 6 hạt bay lên (bản 128 và tooltip) |
 
 ### Thông số hiệu ứng phát sáng
 
-| Thông số | Sơ cấp | Trung cấp | Cực phẩm |
-|---|---|---|---|
-| Chu kỳ nhịp sáng | 2,4 s | 2,0 s | 1,6 s |
-| Cường độ (alpha đỉnh) | 0,5 | 0,7 | 1,0 |
-| Lớp quét sáng chéo | Không | Không | Mỗi 3 s |
-| Hào quang xoay | Không | Không | 6 s / vòng |
-| Hạt bay | Không | Không | 6 hạt (chỉ bản 128) |
-
+| Thông số              | Sơ cấp | Trung cấp | Cực phẩm            |
+| --------------------- | ------ | --------- | ------------------- |
+| Chu kỳ nhịp sáng      | 2,4 s  | 2,0 s     | 1,6 s               |
+| Cường độ (alpha đỉnh) | 0,5    | 0,7       | 1,0                 |
+| Lớp quét sáng chéo    | Không  | Không     | Mỗi 3 s             |
+| Hào quang xoay        | Không  | Không     | 6 s / vòng          |
+| Hạt bay               | Không  | Không     | 6 hạt (chỉ bản 128) |
 
 - Chỉ tối đa 20 icon động cùng lúc trên màn hình; phần còn lại hiện khung sáng tĩnh.
 - Tôn trọng tùy chọn giảm chuyển động của người chơi và của hệ điều hành.
@@ -219,22 +211,51 @@ gl_FragColor = vec4(base.rgb + glow, max(base.a, m * pulse * u_intensity));
 **CSS cho trang web:**
 
 ```css
-.icon-glow { position: relative; --glow: #7ee0a1; --period: 2.4s; }
+.icon-glow {
+  position: relative;
+  --glow: #7ee0a1;
+  --period: 2.4s;
+}
 .icon-glow::after {
-  content: ""; position: absolute; inset: -4px; border-radius: 8px;
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 8px;
   box-shadow: 0 0 6px 2px var(--glow);
   animation: icon-pulse var(--period) ease-in-out infinite;
 }
-.icon-glow.supreme { --glow: #ffd45a; --period: 1.6s; }
-.icon-glow.supreme::before {
-  content: ""; position: absolute; inset: -6px; border-radius: 50%;
-  background: conic-gradient(transparent 0 70%, rgba(255, 212, 90, .8) 85%, transparent);
-  mix-blend-mode: screen; animation: icon-spin 6s linear infinite;
+.icon-glow.supreme {
+  --glow: #ffd45a;
+  --period: 1.6s;
 }
-@keyframes icon-pulse { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
-@keyframes icon-spin { to { transform: rotate(360deg) } }
+.icon-glow.supreme::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(transparent 0 70%, rgba(255, 212, 90, 0.8) 85%, transparent);
+  mix-blend-mode: screen;
+  animation: icon-spin 6s linear infinite;
+}
+@keyframes icon-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .icon-glow::before, .icon-glow::after { animation: none; }
+  .icon-glow::before,
+  .icon-glow::after {
+    animation: none;
+  }
 }
 ```
 
@@ -242,26 +263,24 @@ gl_FragColor = vec4(base.rgb + glow, max(base.a, m * pulse * u_intensity));
 
 Ba vật phẩm có ba hình dáng khác hẳn nhau (sách nằm ngang, thẻ ngọc đứng mảnh, lá bùa đứng nghiêng) để phân biệt ngay ở 48 px.
 
-| Vật phẩm | Dùng cho | Hình dáng | Bảng màu | Biến thể theo cấp |
-|---|---|---|---|---|
-| Sách cổ rách (Bí tịch) | Công pháp sơ – trung cấp | Sách đóng chỉ nằm nghiêng, gáy sờn, góc trang rách, dải lụa đánh dấu | Giấy vàng úa, bìa nâu hoặc lam đậm | Màu bìa theo hệ ngũ hành; cấp cao thêm khóa đồng và ánh sáng rò ra từ trang |
-| Ngọc giản (thẻ ngọc) | Công pháp cao cấp, truyền thừa | Thẻ ngọc dài dẹt đứng, chữ khắc chìm, dây tua đỏ | Ngọc lục hoặc trắng | Cấp càng cao ngọc càng trong; chữ khắc chạy sáng bằng shader |
-| Bùa vàng chữ đỏ (Phù lục) | Phù lục tiêu hao | Lá bùa chữ nhật đứng nghiêng 15°, chữ chu sa, đuôi lụa | Vàng nghệ, đỏ chu sa | Ký hiệu hệ ở đầu bùa (lửa, sét, nước…); cấp cao có viền vàng kim, chữ phát sáng |
-
+| Vật phẩm                  | Dùng cho                       | Hình dáng                                                            | Bảng màu                           | Biến thể theo cấp                                                               |
+| ------------------------- | ------------------------------ | -------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------- |
+| Sách cổ rách (Bí tịch)    | Công pháp sơ – trung cấp       | Sách đóng chỉ nằm nghiêng, gáy sờn, góc trang rách, dải lụa đánh dấu | Giấy vàng úa, bìa nâu hoặc lam đậm | Màu bìa theo hệ ngũ hành; cấp cao thêm khóa đồng và ánh sáng rò ra từ trang     |
+| Ngọc giản (thẻ ngọc)      | Công pháp cao cấp, truyền thừa | Thẻ ngọc dài dẹt đứng, chữ khắc chìm, dây tua đỏ                     | Ngọc lục hoặc trắng                | Cấp càng cao ngọc càng trong; chữ khắc chạy sáng bằng shader                    |
+| Bùa vàng chữ đỏ (Phù lục) | Phù lục tiêu hao               | Lá bùa chữ nhật đứng nghiêng 15°, chữ chu sa, đuôi lụa               | Vàng nghệ, đỏ chu sa               | Ký hiệu hệ ở đầu bùa (lửa, sét, nước…); cấp cao có viền vàng kim, chữ phát sáng |
 
 ## 7. Khung viền icon 6 cấp phẩm chất
 
 Sáu cấp từ Phàm phẩm (Trắng) đến Tiên phẩm (Đỏ) thay cho thang 5 phẩm trong các tài liệu trước. Mỗi cấp khác nhau ở màu, dấu góc và chuyển động, để người mù màu vẫn đọc được phẩm chất qua dấu góc.
 
-| Cấp | Tên | Màu chính | Dấu góc (không phụ thuộc màu) | Nền trong khung | Hiệu ứng động |
-|---|---|---|---|---|---|
-| 1 | Phàm phẩm | Trắng ngà #E8E4DA | Không có | Xám trung tính | Không |
-| 2 | Linh phẩm | Lục #5FBF6A | 1 chấm ở góc trên trái | Lục 20% | Không |
-| 3 | Huyền phẩm | Lam #4A90D9 | 2 chấm ở hai góc trên | Lam 25% | Ánh sáng tĩnh ở mép trong |
-| 4 | Địa phẩm | Tím #A05FD6 | Hoa văn mây ở 4 góc | Tím 25% | Nhịp sáng chu kỳ 3 s |
-| 5 | Thiên phẩm | Vàng #E8B540 | Góc rồng cuộn vàng kim | Vàng 30%, vân tỏa tia | Nhịp sáng 2 s + quét sáng chéo mỗi 4 s |
-| 6 | Tiên phẩm | Đỏ #E0483A | Góc rồng + ấn triện đỏ ở cạnh trên | Đỏ 30%, vân lửa mực | Nhịp sáng 1,6 s + hào quang xoay + hạt lửa mực (bản 128) |
-
+| Cấp | Tên        | Màu chính         | Dấu góc (không phụ thuộc màu)      | Nền trong khung       | Hiệu ứng động                                            |
+| --- | ---------- | ----------------- | ---------------------------------- | --------------------- | -------------------------------------------------------- |
+| 1   | Phàm phẩm  | Trắng ngà #E8E4DA | Không có                           | Xám trung tính        | Không                                                    |
+| 2   | Linh phẩm  | Lục #5FBF6A       | 1 chấm ở góc trên trái             | Lục 20%               | Không                                                    |
+| 3   | Huyền phẩm | Lam #4A90D9       | 2 chấm ở hai góc trên              | Lam 25%               | Ánh sáng tĩnh ở mép trong                                |
+| 4   | Địa phẩm   | Tím #A05FD6       | Hoa văn mây ở 4 góc                | Tím 25%               | Nhịp sáng chu kỳ 3 s                                     |
+| 5   | Thiên phẩm | Vàng #E8B540      | Góc rồng cuộn vàng kim             | Vàng 30%, vân tỏa tia | Nhịp sáng 2 s + quét sáng chéo mỗi 4 s                   |
+| 6   | Tiên phẩm  | Đỏ #E0483A        | Góc rồng + ấn triện đỏ ở cạnh trên | Đỏ 30%, vân lửa mực   | Nhịp sáng 1,6 s + hào quang xoay + hạt lửa mực (bản 128) |
 
 ### Quy chuẩn dựng khung
 

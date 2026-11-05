@@ -8,12 +8,11 @@ Cả chiêu dùng **một sprite kiếm 64 × 16 px** và **một draw call**: m
 
 ### So sánh phương án
 
-| Phương án | Texture cần | Bộ nhớ ước tính | Draw call | Chi phí CPU mỗi frame | Nhược điểm |
-|---|---|---|---|---|---|
-| Flipbook toàn chiêu (512 × 512, 48 frame) | 3 atlas 2048 | ~12,6 MB (ASTC 4×4), ~50 MB nếu không nén | 1–3 | Thấp | Hình cố định, không bám theo mục tiêu |
-| Particle CPU, 200 sprite | 1 sprite | Không đáng kể | 1 | 200 lần cập nhật trên JS | Giật trên Mobile/Web yếu |
-| **GPU Instancing (chọn)** | 1 sprite kiếm + 1 flipbook va chạm 256² × 8 frame dùng chung | < 0,5 MB | 1 (kiếm) + 1 (va chạm) | Gần 0 | Không Y-sort từng thanh |
-
+| Phương án                                 | Texture cần                                                  | Bộ nhớ ước tính                           | Draw call              | Chi phí CPU mỗi frame    | Nhược điểm                            |
+| ----------------------------------------- | ------------------------------------------------------------ | ----------------------------------------- | ---------------------- | ------------------------ | ------------------------------------- |
+| Flipbook toàn chiêu (512 × 512, 48 frame) | 3 atlas 2048                                                 | ~12,6 MB (ASTC 4×4), ~50 MB nếu không nén | 1–3                    | Thấp                     | Hình cố định, không bám theo mục tiêu |
+| Particle CPU, 200 sprite                  | 1 sprite                                                     | Không đáng kể                             | 1                      | 200 lần cập nhật trên JS | Giật trên Mobile/Web yếu              |
+| **GPU Instancing (chọn)**                 | 1 sprite kiếm + 1 flipbook va chạm 256² × 8 frame dùng chung | < 0,5 MB                                  | 1 (kiếm) + 1 (va chạm) | Gần 0                    | Không Y-sort từng thanh               |
 
 ### Bốn pha và quỹ đạo (tổng 2,4 s)
 
@@ -88,14 +87,13 @@ Tia sét sinh bằng thuật toán chia đôi đoạn thẳng (midpoint displace
 
 ### So sánh với flipbook
 
-| Tiêu chí | Flipbook (128 × 512, 8 frame × 4 biến thể) | Procedural (chọn) |
-|---|---|---|
-| Bộ nhớ texture @1x | ~2,1 MB (ASTC 4×4), ~8,4 MB không nén | 0 (profile tính trong shader) |
-| Bộ nhớ @2x | ~8,4 MB (ASTC 4×4) | 0 |
-| Biến thể | 4, người chơi nhận ra lặp | Vô hạn, theo seed |
-| Bám điểm đánh | Phải xoay / co kéo ảnh | Điểm đầu và cuối là tham số |
-| Chi phí CPU | Đổi UV | Sinh ~80 điểm mỗi lần làm mới (dưới 0,1 ms trên JS) |
-
+| Tiêu chí           | Flipbook (128 × 512, 8 frame × 4 biến thể) | Procedural (chọn)                                   |
+| ------------------ | ------------------------------------------ | --------------------------------------------------- |
+| Bộ nhớ texture @1x | ~2,1 MB (ASTC 4×4), ~8,4 MB không nén      | 0 (profile tính trong shader)                       |
+| Bộ nhớ @2x         | ~8,4 MB (ASTC 4×4)                         | 0                                                   |
+| Biến thể           | 4, người chơi nhận ra lặp                  | Vô hạn, theo seed                                   |
+| Bám điểm đánh      | Phải xoay / co kéo ảnh                     | Điểm đầu và cuối là tham số                         |
+| Chi phí CPU        | Đổi UV                                     | Sinh ~80 điểm mỗi lần làm mới (dưới 0,1 ms trên JS) |
 
 ### Thuật toán sinh tia
 
@@ -111,11 +109,13 @@ function bolt(a: Vec2, b: Vec2, gens: number, amp: number, out: Vec2[][], depth 
   for (let g = 0; g < gens; g++) {
     const next: Vec2[] = [pts[0]];
     for (let i = 0; i < pts.length - 1; i++) {
-      const p = pts[i], q = pts[i + 1];
+      const p = pts[i],
+        q = pts[i + 1];
       const n = perp(normalize(sub(q, p)));
       const m = add(lerp(p, q, 0.5), mul(n, (rand() * 2 - 1) * amp));
       next.push(m, q);
-      if (depth < 2 && g < 3 && rand() < 0.3) {                  // nhánh phụ
+      if (depth < 2 && g < 3 && rand() < 0.3) {
+        // nhánh phụ
         const ang = (rand() < 0.5 ? -1 : 1) * (0.35 + rand() * 0.35);
         const end = add(m, mul(rotate(sub(b, m), ang), 0.3 + rand() * 0.3));
         bolt(m, end, gens - g - 1, amp * 0.5, out, depth + 1);
@@ -124,7 +124,7 @@ function bolt(a: Vec2, b: Vec2, gens: number, amp: number, out: Vec2[][], depth 
     pts = next;
     amp *= 0.5;
   }
-  out.push(pts);                                                  // mỗi phần tử = 1 strip
+  out.push(pts); // mỗi phần tử = 1 strip
 }
 ```
 
@@ -139,11 +139,10 @@ fragColor = vec4(u_color * a, a);
 
 ### Bloom 2D theo cấp máy
 
-| Cấp | Cách làm | Chi phí |
-|---|---|---|
-| Mobile / Web | **Bloom giả:** vẽ mỗi strip 2 lần, lõi 6 px trắng tím (u_sharp = 4) + quầng 28 px tím alpha 0,35 (u_sharp = 1) | Thêm 1 draw call, không có render texture |
-| PC cao | Bloom thật: lọc điểm sáng ở 1/2 độ phân giải, làm mờ Gaussian 2 lượt ở 1/4, cộng lại | 3 render texture nhỏ; chỉ bật trong sự kiện Lôi Kiếp hoặc thiết lập Cao |
-
+| Cấp          | Cách làm                                                                                                       | Chi phí                                                                 |
+| ------------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Mobile / Web | **Bloom giả:** vẽ mỗi strip 2 lần, lõi 6 px trắng tím (u_sharp = 4) + quầng 28 px tím alpha 0,35 (u_sharp = 1) | Thêm 1 draw call, không có render texture                               |
+| PC cao       | Bloom thật: lọc điểm sáng ở 1/2 độ phân giải, làm mờ Gaussian 2 lượt ở 1/4, cộng lại                           | 3 render texture nhỏ; chỉ bật trong sự kiện Lôi Kiếp hoặc thiết lập Cao |
 
 ### Hiệu ứng đi kèm
 
@@ -157,11 +156,10 @@ Ba shader viết bằng GLSL ES 1.0 để chạy được cả WebGL1; cùng ph�
 
 ### 3.1 Mờ khi bị che / Silhouette X-Ray
 
-| Cách | Áp lên | Nền tảng | Chi phí |
-|---|---|---|---|
-| **Khoét lỗ mờ trên vật che** (chính) | Cây, nhà, vật cản đứng trước người chơi | Mọi nền tảng | Vài phép tính mỗi pixel, không thêm draw call |
-| Silhouette X-Ray | Nhân vật của người chơi, vẽ thêm một lượt sau lớp L3 | PC, Mobile cao | 1 draw call + mặt nạ che 1/4 độ phân giải |
-
+| Cách                                 | Áp lên                                               | Nền tảng       | Chi phí                                       |
+| ------------------------------------ | ---------------------------------------------------- | -------------- | --------------------------------------------- |
+| **Khoét lỗ mờ trên vật che** (chính) | Cây, nhà, vật cản đứng trước người chơi              | Mọi nền tảng   | Vài phép tính mỗi pixel, không thêm draw call |
+| Silhouette X-Ray                     | Nhân vật của người chơi, vẽ thêm một lượt sau lớp L3 | PC, Mobile cao | 1 draw call + mặt nạ che 1/4 độ phân giải     |
 
 CPU chỉ bật cờ "đứng trước người chơi" cho vật có sort key lớn hơn người chơi và khung chồng lên pick box của họ. Cờ ghi vào kênh B của vertex color (dành riêng cho shader này); vị trí người chơi là uniform toàn cục dùng chung.
 
@@ -249,11 +247,10 @@ void main() {
 }
 ```
 
-| Cấp | Nguồn u_reflect | Phản chiếu nhân vật |
-|---|---|---|
-| Mobile / Web | Render texture tĩnh 1/4 độ phân giải, vẽ một lần khi chunk được nạp, từ các sprite phản chiếu (lật dọc, tối đi) level designer đặt dọc bờ | Không |
-| PC | Render texture mỗi frame, 1/2 độ phân giải, lật dọc các vật L3 gần mặt nước | Có |
-
+| Cấp          | Nguồn u_reflect                                                                                                                           | Phản chiếu nhân vật |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| Mobile / Web | Render texture tĩnh 1/4 độ phân giải, vẽ một lần khi chunk được nạp, từ các sprite phản chiếu (lật dọc, tối đi) level designer đặt dọc bờ | Không               |
+| PC           | Render texture mỗi frame, 1/2 độ phân giải, lật dọc các vật L3 gần mặt nước                                                               | Có                  |
 
 ## 4. Draw Call Batching
 
@@ -261,18 +258,17 @@ Trần draw call: **80 trên Mobile/Web, 150 trên PC**. Các sprite liền nhau
 
 ### Ngân sách theo lớp
 
-| Lớp | Cách gom atlas | Draw call Mobile/Web | Draw call PC |
-|---|---|---|---|
-| L0 Ground | 1 atlas tileset mỗi vùng; tilemap vẽ theo chunk | ≤ 6 | ≤ 10 |
-| L1 Ground Decal | 1 atlas decal mỗi vùng (gồm cả trận văn, vòng cảnh báo) | ≤ 4 | ≤ 8 |
-| L2 Shadow | 1 atlas bóng nhỏ; không sort nên vẽ gộp một lượt | 1 | 1 |
-| L3 Y-sort | Atlas vùng gồm prop + quái (≤ 2 trang); nhân vật người chơi chia sẻ trang atlas động | ≤ 35 | ≤ 70 |
-| L4 Air + VFX | Atlas VFX theo Class pack; vẽ toàn bộ blend thường trước, blend cộng sau | ≤ 15 | ≤ 30 |
-| L5 Weather / Overlay | 1–2 texture lặp | ≤ 4 | ≤ 6 |
-| L6 World UI | 1 atlas chứa cả thanh máu, icon và bitmap font | ≤ 3 | ≤ 5 |
-| L7 Screen UI | Atlas UI lõi + atlas icon + atlas động cho chữ | ≤ 12 | ≤ 20 |
-| **Tổng** |  | **≤ 80** | **≤ 150** |
-
+| Lớp                  | Cách gom atlas                                                                       | Draw call Mobile/Web | Draw call PC |
+| -------------------- | ------------------------------------------------------------------------------------ | -------------------- | ------------ |
+| L0 Ground            | 1 atlas tileset mỗi vùng; tilemap vẽ theo chunk                                      | ≤ 6                  | ≤ 10         |
+| L1 Ground Decal      | 1 atlas decal mỗi vùng (gồm cả trận văn, vòng cảnh báo)                              | ≤ 4                  | ≤ 8          |
+| L2 Shadow            | 1 atlas bóng nhỏ; không sort nên vẽ gộp một lượt                                     | 1                    | 1            |
+| L3 Y-sort            | Atlas vùng gồm prop + quái (≤ 2 trang); nhân vật người chơi chia sẻ trang atlas động | ≤ 35                 | ≤ 70         |
+| L4 Air + VFX         | Atlas VFX theo Class pack; vẽ toàn bộ blend thường trước, blend cộng sau             | ≤ 15                 | ≤ 30         |
+| L5 Weather / Overlay | 1–2 texture lặp                                                                      | ≤ 4                  | ≤ 6          |
+| L6 World UI          | 1 atlas chứa cả thanh máu, icon và bitmap font                                       | ≤ 3                  | ≤ 5          |
+| L7 Screen UI         | Atlas UI lõi + atlas icon + atlas động cho chữ                                       | ≤ 12                 | ≤ 20         |
+| **Tổng**             |                                                                                      | **≤ 80**             | **≤ 150**    |
 
 ### Giữ batch ở lớp Y-sort
 
@@ -284,14 +280,13 @@ Y-sort xen kẽ nhân vật, quái và prop theo vị trí, nên mỗi lần đ�
 
 ### Những thứ hay làm vỡ batch
 
-| Nguyên nhân | Thay bằng |
-|---|---|
-| Chữ TTF động, mỗi label một texture | Bitmap font, hoặc đưa ký tự vào atlas động |
-| Mask stencil trong danh sách cuộn (túi đồ, chat) | Cắt bằng scissor hình chữ nhật |
-| Material instance riêng cho từng sprite để đổi màu | Vertex color |
-| Xen kẽ VFX blend cộng với blend thường | Tách thành hai lượt liên tiếp |
-| Trộn atlas @1x và @2x trong cùng một lớp | Một bộ cho cả lớp theo cấp máy |
-
+| Nguyên nhân                                        | Thay bằng                                  |
+| -------------------------------------------------- | ------------------------------------------ |
+| Chữ TTF động, mỗi label một texture                | Bitmap font, hoặc đưa ký tự vào atlas động |
+| Mask stencil trong danh sách cuộn (túi đồ, chat)   | Cắt bằng scissor hình chữ nhật             |
+| Material instance riêng cho từng sprite để đổi màu | Vertex color                               |
+| Xen kẽ VFX blend cộng với blend thường             | Tách thành hai lượt liên tiếp              |
+| Trộn atlas @1x và @2x trong cùng một lớp           | Một bộ cho cả lớp theo cấp máy             |
 
 ### Đo đạc
 
@@ -322,17 +317,19 @@ function updateStreaming(cam: Rect, vel: Vec2, inCombat: boolean, flying: boolea
   for (const c of vis) want(c, 0);
   for (const c of ring) want(c, 1);
   for (const c of ahead) want(c, 2);
-  queue.sortBy(r => r.priority * 1e6 + dist(r.center, cam.center));
-  pump(inCombat ? 2 : 4);                                   // số yêu cầu song song
+  queue.sortBy((r) => r.priority * 1e6 + dist(r.center, cam.center));
+  pump(inCombat ? 2 : 4); // số yêu cầu song song
   for (const c of loaded) if (!inWindow(c, cam, 3)) markEvictable(c, now());
   if (textureBytes() > 0.9 * TEXTURE_BUDGET) evictLRU();
 }
 
 function chunksInRect(r: Rect): ChunkId[] {
-  const t = [r.tl, r.tr, r.bl, r.br].map(screenToTile);      // công thức ngược isometric
-  const u0 = Math.floor(Math.min(...t.map(p => p.i)) / 32), u1 = Math.floor(Math.max(...t.map(p => p.i)) / 32);
-  const v0 = Math.floor(Math.min(...t.map(p => p.j)) / 32), v1 = Math.floor(Math.max(...t.map(p => p.j)) / 32);
-  return range2d(u0, u1, v0, v1).filter(c => intersects(chunkDiamond(c), r));
+  const t = [r.tl, r.tr, r.bl, r.br].map(screenToTile); // công thức ngược isometric
+  const u0 = Math.floor(Math.min(...t.map((p) => p.i)) / 32),
+    u1 = Math.floor(Math.max(...t.map((p) => p.i)) / 32);
+  const v0 = Math.floor(Math.min(...t.map((p) => p.j)) / 32),
+    v1 = Math.floor(Math.max(...t.map((p) => p.j)) / 32);
+  return range2d(u0, u1, v0, v1).filter((c) => intersects(chunkDiamond(c), r));
 }
 ```
 
@@ -348,57 +345,53 @@ Trên Web, tổng bộ nhớ của tab game không vượt **500 MB** và gói t
 
 ### Phân bổ 500 MB RAM (Web)
 
-| Hạng mục | Ngân sách | Ghi chú |
-|---|---|---|
-| Runtime engine + code JS/WASM | 60 MB | — |
-| Dữ liệu game trên JS heap | 70 MB | Thực thể, dữ liệu map, mạng |
-| Texture GPU (atlas đang nạp) | 220 MB | Cache LRU tính theo byte; máy yếu hạ còn 150 MB |
-| Render texture | 30 MB | Kim Quang, bloom, phản chiếu, mặt nạ che |
-| Âm thanh đã giải mã | 40 MB | Chỉ SFX; BGM không bao giờ giải mã toàn bộ |
-| Bộ đệm tải và giải nén tạm | 30 MB | Giải phóng ngay sau khi lên GPU |
-| Trình duyệt, DOM, dự phòng | 50 MB | — |
-| **Tổng** | **500 MB** |  |
-
+| Hạng mục                      | Ngân sách  | Ghi chú                                         |
+| ----------------------------- | ---------- | ----------------------------------------------- |
+| Runtime engine + code JS/WASM | 60 MB      | —                                               |
+| Dữ liệu game trên JS heap     | 70 MB      | Thực thể, dữ liệu map, mạng                     |
+| Texture GPU (atlas đang nạp)  | 220 MB     | Cache LRU tính theo byte; máy yếu hạ còn 150 MB |
+| Render texture                | 30 MB      | Kim Quang, bloom, phản chiếu, mặt nạ che        |
+| Âm thanh đã giải mã           | 40 MB      | Chỉ SFX; BGM không bao giờ giải mã toàn bộ      |
+| Bộ đệm tải và giải nén tạm    | 30 MB      | Giải phóng ngay sau khi lên GPU                 |
+| Trình duyệt, DOM, dự phòng    | 50 MB      | —                                               |
+| **Tổng**                      | **500 MB** |                                                 |
 
 ### Bộ nhớ của một atlas 2048 × 2048 trên GPU
 
-| Định dạng | Bit / pixel | Bộ nhớ | Dùng cho |
-|---|---|---|---|
-| RGBA8 không nén | 32 | 16 MB | Chỉ khi máy không hỗ trợ định dạng nén nào |
-| ASTC 4×4, BC7, ETC2 RGBA | 8 | 4 MB | Nhân vật, UI, icon |
-| ETC1S (Basis) → ETC1 / BC1 | 4 | 2 MB | Tileset, prop |
-| ASTC 6×6 | 3,56 | ~1,8 MB | Tile, prop trên Mobile |
-| ASTC 8×8 | 2 | 1 MB | VFX, nền mờ |
-
+| Định dạng                  | Bit / pixel | Bộ nhớ  | Dùng cho                                   |
+| -------------------------- | ----------- | ------- | ------------------------------------------ |
+| RGBA8 không nén            | 32          | 16 MB   | Chỉ khi máy không hỗ trợ định dạng nén nào |
+| ASTC 4×4, BC7, ETC2 RGBA   | 8           | 4 MB    | Nhân vật, UI, icon                         |
+| ETC1S (Basis) → ETC1 / BC1 | 4           | 2 MB    | Tileset, prop                              |
+| ASTC 6×6                   | 3,56        | ~1,8 MB | Tile, prop trên Mobile                     |
+| ASTC 8×8                   | 2           | 1 MB    | VFX, nền mờ                                |
 
 Ngân sách 220 MB vì vậy tương đương khoảng 55 atlas ở 4 MB. Nếu máy không có định dạng nén nào (atlas thành 16 MB), game tự hạ xuống bộ @1x và giảm nửa kích thước cache. Tắt mipmap cho UI và tile (mipmap cộng thêm 33%).
 
 ### Gói tải ban đầu ≤ 25 MB
 
-| Gói | Nội dung | Ngân sách |
-|---|---|---|
-| Engine + code | Runtime, logic game, transcoder Basis, nén brotli | 6 MB |
-| UI lõi | Khung 9-slice @1x, icon 48, bitmap font | 4 MB |
-| Nhân vật | Spine base 2 giới tính + bộ trang bị tân thủ | 4 MB |
-| Bản đồ tân thủ | 3 × 3 chunk quanh điểm hồi sinh + tileset | 5 MB |
-| Quái + VFX cơ bản | Quái vùng đầu, VFX kỹ năng cấp 1 | 3 MB |
-| Âm thanh | Chỉ SFX giao diện | 1 MB |
-| Dự phòng | — | 2 MB |
-
+| Gói               | Nội dung                                          | Ngân sách |
+| ----------------- | ------------------------------------------------- | --------- |
+| Engine + code     | Runtime, logic game, transcoder Basis, nén brotli | 6 MB      |
+| UI lõi            | Khung 9-slice @1x, icon 48, bitmap font           | 4 MB      |
+| Nhân vật          | Spine base 2 giới tính + bộ trang bị tân thủ      | 4 MB      |
+| Bản đồ tân thủ    | 3 × 3 chunk quanh điểm hồi sinh + tileset         | 5 MB      |
+| Quái + VFX cơ bản | Quái vùng đầu, VFX kỹ năng cấp 1                  | 3 MB      |
+| Âm thanh          | Chỉ SFX giao diện                                 | 1 MB      |
+| Dự phòng          | —                                                 | 2 MB      |
 
 ### Danh sách tải lười (lazy-load)
 
-| Nội dung | Thời điểm tải | Cách tải |
-|---|---|---|
-| BGM, ambience | Sau thao tác đầu tiên của người chơi | Stream bằng media element, không giải mã cả bài |
-| SFX chiến đấu đầy đủ | 10 s sau khi vào game, tải nền | Giải mã vào bộ nhớ |
-| Thoại (VO) | Khi mở hội thoại | Stream |
-| VFX cao cấp (Lôi Kiếp, Pháp Tướng, va chạm Vạn Kiếm) | Khi học kỹ năng, hoặc 10 s trước sự kiện kiếp | Atlas VFX theo Class pack |
-| Class pack lớp khác | Khi gặp người chơi lớp đó (hiện placeholder trước) | Bundle |
-| Bộ @2x / @3x | Sau khi game ổn định, theo hệ số màn hình | Thay dần từng atlas |
-| Atlas boss | Khi vào phó bản | Bundle sự kiện |
-| Icon 128 | Khi mở tooltip lớn | Theo atlas nhóm |
-
+| Nội dung                                             | Thời điểm tải                                      | Cách tải                                        |
+| ---------------------------------------------------- | -------------------------------------------------- | ----------------------------------------------- |
+| BGM, ambience                                        | Sau thao tác đầu tiên của người chơi               | Stream bằng media element, không giải mã cả bài |
+| SFX chiến đấu đầy đủ                                 | 10 s sau khi vào game, tải nền                     | Giải mã vào bộ nhớ                              |
+| Thoại (VO)                                           | Khi mở hội thoại                                   | Stream                                          |
+| VFX cao cấp (Lôi Kiếp, Pháp Tướng, va chạm Vạn Kiếm) | Khi học kỹ năng, hoặc 10 s trước sự kiện kiếp      | Atlas VFX theo Class pack                       |
+| Class pack lớp khác                                  | Khi gặp người chơi lớp đó (hiện placeholder trước) | Bundle                                          |
+| Bộ @2x / @3x                                         | Sau khi game ổn định, theo hệ số màn hình          | Thay dần từng atlas                             |
+| Atlas boss                                           | Khi vào phó bản                                    | Bundle sự kiện                                  |
+| Icon 128                                             | Khi mở tooltip lớn                                 | Theo atlas nhóm                                 |
 
 ### Kỷ luật băng thông và bộ nhớ lúc chạy
 
