@@ -44,7 +44,12 @@ describe('sample data validity', () => {
     lightning.forEach((r, i) => {
       const t = r.breakthrough.tribulation;
       const spec = TRIBULATIONS[i]!;
-      expect([t.strikes, t.waves, t.strikes_per_wave, t.kappa]).toEqual([spec.strikes, spec.waves, spec.strikesPerWave, spec.kappa]);
+      expect([t.strikes, t.waves, t.strikes_per_wave, t.kappa]).toEqual([
+        spec.strikes,
+        spec.waves,
+        spec.strikesPerWave,
+        spec.kappa,
+      ]);
       expect(t.wave_growth).toBe(1.22);
       expect(totalMultiplier(spec)).toBeGreaterThan(0.5);
     });

@@ -64,7 +64,11 @@ export const QUALITY_DISTRIBUTION: Readonly<Record<DropSource, readonly number[]
   boss: [0.1, 0.25, 0.35, 0.22, 0.07, 0.01],
 };
 
-const STONE_ITEMS: Readonly<Record<string, number>> = { stone_ha: STONE_VALUE.ha, stone_trung: STONE_VALUE.trung, stone_thuong: STONE_VALUE.thuong };
+const STONE_ITEMS: Readonly<Record<string, number>> = {
+  stone_ha: STONE_VALUE.ha,
+  stone_trung: STONE_VALUE.trung,
+  stone_thuong: STONE_VALUE.thuong,
+};
 
 /** Expected Linh thạch (in hạ phẩm) per kill at realm 1, before modifiers. */
 export function expectedStoneValue(source: DropSource): number {
@@ -125,7 +129,11 @@ export const MARKET = {
 
 /** τ = clamp(0.05 + 0.5 · max(0, CPI_w − 1.02), 0.05, 0.10). `cpi` is the ratio this week / last week. */
 export function marketSaleTax(cpi: number): number {
-  return clamp(MARKET.TAX_MIN + MARKET.TAX_CPI_SLOPE * Math.max(0, cpi - MARKET.TAX_CPI_THRESHOLD), MARKET.TAX_MIN, MARKET.TAX_MAX);
+  return clamp(
+    MARKET.TAX_MIN + MARKET.TAX_CPI_SLOPE * Math.max(0, cpi - MARKET.TAX_CPI_THRESHOLD),
+    MARKET.TAX_MIN,
+    MARKET.TAX_MAX,
+  );
 }
 /** Non-refundable listing fee: 1% of price, min 1 hạ phẩm (rounded up). */
 export function listingFee(price: number): number {
@@ -146,7 +154,11 @@ export function teleportFee(realm: number, zonesCrossed: number): number {
 }
 
 export type DurabilityEvent = 'death_pve' | 'death_pvp' | 'death_tribulation';
-export const DURABILITY_LOSS: Readonly<Record<DurabilityEvent, number>> = { death_pve: 0.08, death_pvp: 0.04, death_tribulation: 0.15 };
+export const DURABILITY_LOSS: Readonly<Record<DurabilityEvent, number>> = {
+  death_pve: 0.08,
+  death_pvp: 0.04,
+  death_tribulation: 0.15,
+};
 export const DURABILITY_LOSS_PER_30MIN_COMBAT = 0.01;
 export const DEMONIC_DURABILITY_MULTIPLIER = 1.5;
 export function durabilityLoss(event: DurabilityEvent, demonic = false): number {

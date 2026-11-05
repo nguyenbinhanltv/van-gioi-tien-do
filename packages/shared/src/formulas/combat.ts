@@ -14,9 +14,21 @@ export type Element = 'kim' | 'moc' | 'thuy' | 'hoa' | 'tho';
 export const ELEMENTS: readonly Element[] = ['kim', 'moc', 'thuy', 'hoa', 'tho'];
 
 /** Khắc (overcomes): Kim → Mộc → Thổ → Thủy → Hỏa → Kim. */
-export const OVERCOMES: Readonly<Record<Element, Element>> = { kim: 'moc', moc: 'tho', tho: 'thuy', thuy: 'hoa', hoa: 'kim' };
+export const OVERCOMES: Readonly<Record<Element, Element>> = {
+  kim: 'moc',
+  moc: 'tho',
+  tho: 'thuy',
+  thuy: 'hoa',
+  hoa: 'kim',
+};
 /** Sinh (generates): Kim → Thủy → Mộc → Hỏa → Thổ → Kim. */
-export const GENERATES: Readonly<Record<Element, Element>> = { kim: 'thuy', thuy: 'moc', moc: 'hoa', hoa: 'tho', tho: 'kim' };
+export const GENERATES: Readonly<Record<Element, Element>> = {
+  kim: 'thuy',
+  thuy: 'moc',
+  moc: 'hoa',
+  hoa: 'tho',
+  tho: 'kim',
+};
 
 export type Mutation = 'phong' | 'loi' | 'bang';
 /** Mutated elements use the row/column of their base element. */
@@ -98,7 +110,10 @@ export function generateSupportRestore(opts: {
 }
 
 /** Defence element: armour element if any, otherwise the main root (highest-weight element). */
-export function defenseElement(armourElement: AnyElement | null | undefined, rootWeights: Partial<Record<AnyElement, number>>): AnyElement {
+export function defenseElement(
+  armourElement: AnyElement | null | undefined,
+  rootWeights: Partial<Record<AnyElement, number>>,
+): AnyElement {
   if (armourElement) return armourElement;
   let best: AnyElement | undefined;
   let bw = -Infinity;
@@ -153,7 +168,16 @@ export function damageBreakdown(i: DamageInput): DamageBreakdown {
   const crit = i.crit ? (i.critMultiplier ?? CRIT_DEFAULT) : 1;
   const sup = suppress(i.defenderRealm ?? 0, i.attackerRealm ?? 0);
   const jitter = i.rand === undefined ? 1 : DAMAGE_JITTER[0] + (DAMAGE_JITTER[1] - DAMAGE_JITTER[0]) * i.rand;
-  return { raw, defEff, base, elementMultiplier: mElem, crit, suppress: sup, jitter, damage: base * mElem * crit * sup * jitter };
+  return {
+    raw,
+    defEff,
+    base,
+    elementMultiplier: mElem,
+    crit,
+    suppress: sup,
+    jitter,
+    damage: base * mElem * crit * sup * jitter,
+  };
 }
 export function computeDamage(i: DamageInput): number {
   return damageBreakdown(i).damage;

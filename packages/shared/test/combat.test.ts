@@ -88,14 +88,20 @@ describe('Công thức §4 — Ngũ hành', () => {
 
   it('sinh does not change damage', () => {
     // Thủy sinh Mộc
-    expect(computeDamage({ atk: 100, def: 50, attackerElement: 'thuy', defenderElement: 'moc' })).toBeCloseTo(computeDamage({ atk: 100, def: 50 }), 10);
+    expect(computeDamage({ atk: 100, def: 50, attackerElement: 'thuy', defenderElement: 'moc' })).toBeCloseTo(
+      computeDamage({ atk: 100, def: 50 }),
+      10,
+    );
   });
 
   it('Pen (max 0.4), Crit ×1.5, jitter U(0.95, 1.05)', () => {
     const base = computeDamage({ atk: 100, def: 100 });
     expect(computeDamage({ atk: 100, def: 100, crit: true })).toBeCloseTo(base * 1.5, 10);
     // Pen above 0.4 is clamped
-    expect(computeDamage({ atk: 100, def: 100, pen: 0.9 })).toBeCloseTo(computeDamage({ atk: 100, def: 100, pen: 0.4 }), 10);
+    expect(computeDamage({ atk: 100, def: 100, pen: 0.9 })).toBeCloseTo(
+      computeDamage({ atk: 100, def: 100, pen: 0.4 }),
+      10,
+    );
     expect(computeDamage({ atk: 100, def: 100, rand: 0 })).toBeCloseTo(base * 0.95, 10);
     expect(computeDamage({ atk: 100, def: 100, rand: 1 })).toBeCloseTo(base * 1.05, 10);
   });

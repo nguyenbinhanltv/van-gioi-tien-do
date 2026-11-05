@@ -14,7 +14,9 @@ import { ELEMENTS } from './formulas/combat.js';
 
 // Ajv is CJS; under NodeNext/ESM the constructor may be on `.default` or the namespace itself.
 type AjvCtor = new (opts?: Record<string, unknown>) => {
-  compile(schema: unknown): ((data: unknown) => boolean) & { errors?: { instancePath: string; message?: string }[] | null };
+  compile(
+    schema: unknown,
+  ): ((data: unknown) => boolean) & { errors?: { instancePath: string; message?: string }[] | null };
 };
 const Ajv: AjvCtor = ((Ajv2020Module as unknown as { default?: { default?: AjvCtor } & AjvCtor }).default?.default ??
   (Ajv2020Module as unknown as { default?: AjvCtor }).default ??
@@ -64,10 +66,18 @@ export function validateRealmProgression(data: unknown): ValidationResult {
     if (r.order !== idx + 1) errors.push(`realms[${idx}].order must be ${idx + 1}, got ${r.order}`);
     const next = d.realms[idx + 1];
     const expectTo = next ? next.id : 'phi_thang';
-    if (r.breakthrough.to !== expectTo) errors.push(`realms[${idx}].breakthrough.to must be "${expectTo}", got "${r.breakthrough.to}"`);
+    if (r.breakthrough.to !== expectTo)
+      errors.push(`realms[${idx}].breakthrough.to must be "${expectTo}", got "${r.breakthrough.to}"`);
     const t = r.breakthrough.tribulation;
-    if (t.strikes !== undefined && t.waves !== undefined && t.strikes_per_wave !== undefined && t.strikes !== t.waves * t.strikes_per_wave) {
-      errors.push(`realms[${idx}] strikes (${t.strikes}) != waves × strikes_per_wave (${t.waves * t.strikes_per_wave})`);
+    if (
+      t.strikes !== undefined &&
+      t.waves !== undefined &&
+      t.strikes_per_wave !== undefined &&
+      t.strikes !== t.waves * t.strikes_per_wave
+    ) {
+      errors.push(
+        `realms[${idx}] strikes (${t.strikes}) != waves × strikes_per_wave (${t.waves * t.strikes_per_wave})`,
+      );
     }
     const [lo, hi] = r.level_range;
     if (lo > hi) errors.push(`realms[${idx}].level_range is not ascending`);
@@ -86,7 +96,9 @@ export function validateRealmProgression(data: unknown): ValidationResult {
       const got = statFromData(d, key, x);
       const want = row[key];
       if (!Number.isFinite(got) || Math.abs(got - want) / want > 0.01) {
-        errors.push(`stat table mismatch at "${row.label}" ${key}: computed ${got.toFixed(1)} vs approved ${want} (>1%)`);
+        errors.push(
+          `stat table mismatch at "${row.label}" ${key}: computed ${got.toFixed(1)} vs approved ${want} (>1%)`,
+        );
       }
     }
   }

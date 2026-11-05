@@ -87,7 +87,13 @@ describe('iso projection', () => {
     expect(screenToTile(tileToScreen(7, 4, 3).x, tileToScreen(7, 4, 3).y, 3)).toEqual({ i: 7, j: 4 });
   });
   it('screenToTile is the inverse of tileToScreen (round trip)', () => {
-    for (const [i, j] of [[0, 0], [10, 3], [-4, 9], [31.5, 0.25], [100, 100]] as const) {
+    for (const [i, j] of [
+      [0, 0],
+      [10, 3],
+      [-4, 9],
+      [31.5, 0.25],
+      [100, 100],
+    ] as const) {
       const p = tileToScreen(i, j);
       const t = screenToTile(p.x, p.y);
       expect(t.i).toBeCloseTo(i, 10);
@@ -95,7 +101,12 @@ describe('iso projection', () => {
     }
   });
   it('screenToTileCell: tile centre maps back to its own cell', () => {
-    for (const [i, j] of [[0, 0], [3, 8], [-2, 5], [40, 40]] as const) {
+    for (const [i, j] of [
+      [0, 0],
+      [3, 8],
+      [-2, 5],
+      [40, 40],
+    ] as const) {
       const c = tileCenterToScreen(i, j);
       expect(screenToTileCell(c.x, c.y)).toEqual({ i, j });
     }
@@ -120,10 +131,20 @@ describe('chunks', () => {
     expect(() => parseChunkKey('a,b')).toThrow();
   });
   it('chunk screen rect is always 2048 × 1024 and tiles of the chunk fit inside', () => {
-    for (const [ci, cj] of [[0, 0], [1, 0], [0, 1], [-2, 3]] as const) {
+    for (const [ci, cj] of [
+      [0, 0],
+      [1, 0],
+      [0, 1],
+      [-2, 3],
+    ] as const) {
       const r = chunkScreenRect(ci, cj);
       expect([r.width, r.height]).toEqual([2048, 1024]);
-      for (const [li, lj] of [[0, 0], [31, 0], [0, 31], [31, 31]] as const) {
+      for (const [li, lj] of [
+        [0, 0],
+        [31, 0],
+        [0, 31],
+        [31, 31],
+      ] as const) {
         const p = tileToScreen(ci * 32 + li, cj * 32 + lj);
         expect(p.x).toBeGreaterThanOrEqual(r.x);
         expect(p.x).toBeLessThanOrEqual(r.x + r.width);

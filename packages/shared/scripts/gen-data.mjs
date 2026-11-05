@@ -1,6 +1,6 @@
 // Generates src/generated.ts from src/data/*.json and src/schemas/*.json so the
 // package has no JSON-import / import-attribute dependency at runtime.
-// Run: npm run gen:data   (a test fails if the committed output is stale)
+// Run: npm run gen:data, then npx prettier --write src/generated.ts   (a test fails if the committed output is stale)
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -18,4 +18,5 @@ for (const [name, rel] of Object.entries(files)) {
   out += `export const ${name}: unknown = ${JSON.stringify(json, null, 2)};\n\n`;
 }
 writeFileSync(join(root, 'generated.ts'), out.trimEnd() + '\n');
+// eslint-disable-next-line no-undef
 console.log('wrote src/generated.ts');

@@ -92,7 +92,8 @@ describe('Công thức §2 — breakthrough', () => {
   });
 
   it('high-realm Ma đạo suffers more in relative terms (nghiệp trừ thẳng)', () => {
-    const rel = (realm: number) => 1 - breakthroughSuccess({ realm, karma: -800 }) / breakthroughSuccess({ realm, karma: 0 });
+    const rel = (realm: number) =>
+      1 - breakthroughSuccess({ realm, karma: -800 }) / breakthroughSuccess({ realm, karma: 0 });
     expect(rel(9)).toBeGreaterThan(rel(1));
   });
 });

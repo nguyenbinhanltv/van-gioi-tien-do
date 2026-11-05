@@ -89,10 +89,18 @@ export function requiredCultivation(s: number): number {
 }
 /** t(s) in minutes = Req(s)/Absorb(s) = 10·1.08^(s−1) / (ρ·P_n·√Match). */
 export function minutesForStage(s: number, rho: number, purity: number, matchValue: number): number {
-  return (10 * Math.pow(CULTIVATION.REQ_GROWTH / CULTIVATION.ABSORB_GROWTH, s - 1)) / (rho * purity * Math.sqrt(matchValue));
+  return (
+    (10 * Math.pow(CULTIVATION.REQ_GROWTH / CULTIVATION.ABSORB_GROWTH, s - 1)) / (rho * purity * Math.sqrt(matchValue))
+  );
 }
 /** Total pure cultivation hours for stages 1..n (default all 41). */
-export function totalHours(rho: number, purity: number, matchValue: number, fromStage = 1, toStage = TOTAL_STAGES): number {
+export function totalHours(
+  rho: number,
+  purity: number,
+  matchValue: number,
+  fromStage = 1,
+  toStage = TOTAL_STAGES,
+): number {
   let minutes = 0;
   for (let s = fromStage; s <= toStage; s++) minutes += minutesForStage(s, rho, purity, matchValue);
   return minutes / 60;

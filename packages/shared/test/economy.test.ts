@@ -35,7 +35,10 @@ describe('Công thức §6 — drops', () => {
 
   it('quality distribution rows sum to 1', () => {
     for (const src of ['field', 'elite', 'boss'] as const) {
-      expect(QUALITY_DISTRIBUTION[src].reduce((a, b) => a + b, 0), src).toBeCloseTo(1, 12);
+      expect(
+        QUALITY_DISTRIBUTION[src].reduce((a, b) => a + b, 0),
+        src,
+      ).toBeCloseTo(1, 12);
       expect(QUALITY_DISTRIBUTION[src]).toHaveLength(6);
     }
   });

@@ -39,7 +39,8 @@ export function subStageCount(r: number): number {
 /** Cultivation progress x(r, k); r = 1..9, k = 1..K_r. */
 export function progressX(r: number, k: number, alpha = ALPHA): number {
   const K = subStageCount(r);
-  if (!Number.isInteger(k) || k < 1 || k > K) throw new RangeError(`sub-stage k=${k} out of range 1..${K} for realm ${r}`);
+  if (!Number.isInteger(k) || k < 1 || k > K)
+    throw new RangeError(`sub-stage k=${k} out of range 1..${K} for realm ${r}`);
   return r - 1 + (alpha * (k - 1)) / K;
 }
 
@@ -67,7 +68,13 @@ export function statsAtX(x: number): Stats {
 /** Integer stats as stored/sent by the server (rounded to nearest). */
 export function roundedStatsAt(r: number, k: number): Stats {
   const s = statsAt(r, k);
-  return { hp: Math.round(s.hp), mp: Math.round(s.mp), atk: Math.round(s.atk), def: Math.round(s.def), agi: Math.round(s.agi) };
+  return {
+    hp: Math.round(s.hp),
+    mp: Math.round(s.mp),
+    atk: Math.round(s.atk),
+    def: Math.round(s.def),
+    agi: Math.round(s.agi),
+  };
 }
 
 /** Max (Viên Mãn) sub-stage of a realm. */
@@ -85,7 +92,8 @@ export interface StageRef {
 
 /** Flat stage index 1..41 → (realm, sub-stage). Luyện Khí = stages 1–9, then 4 per realm. */
 export function stageToRealm(stage: number): StageRef {
-  if (!Number.isInteger(stage) || stage < 1 || stage > TOTAL_STAGES) throw new RangeError(`stage ${stage} out of range 1..${TOTAL_STAGES}`);
+  if (!Number.isInteger(stage) || stage < 1 || stage > TOTAL_STAGES)
+    throw new RangeError(`stage ${stage} out of range 1..${TOTAL_STAGES}`);
   if (stage <= LUYEN_KHI_SUBSTAGES) return { stage, realm: 1, subStage: stage };
   const rest = stage - LUYEN_KHI_SUBSTAGES - 1;
   return { stage, realm: 2 + Math.floor(rest / DEFAULT_SUBSTAGES), subStage: (rest % DEFAULT_SUBSTAGES) + 1 };
@@ -102,5 +110,6 @@ export function hitsToKillEqual(s: Pick<Stats, 'hp' | 'atk' | 'def'>): number {
 }
 
 function assertRealm(r: number): void {
-  if (!Number.isInteger(r) || r < 1 || r > REALM_COUNT) throw new RangeError(`realm ${r} out of range 1..${REALM_COUNT}`);
+  if (!Number.isInteger(r) || r < 1 || r > REALM_COUNT)
+    throw new RangeError(`realm ${r} out of range 1..${REALM_COUNT}`);
 }

@@ -63,7 +63,14 @@ describe('Công thức §3 — Lôi Kiếp', () => {
   });
 
   describe('worked example (HP_ref 156,733; HP_max 219,426)', () => {
-    const base = { hpRef: HP_REF, hpMax: 219_426, spec: SPEC_81, totalMultiplierOverride: 3.0, shieldQuality: 4, healPills: 4 } as const;
+    const base = {
+      hpRef: HP_REF,
+      hpMax: 219_426,
+      spec: SPEC_81,
+      totalMultiplierOverride: 3.0,
+      shieldQuality: 4,
+      healPills: 4,
+    } as const;
 
     it('with Vàng formation (34%): raw 470,199 → 310,331 → shield → 90,904; survives with ~59% HP', () => {
       const o = tribulationOutcome({ ...base, formationQuality: 4 });
@@ -99,9 +106,23 @@ describe('Công thức §3 — Lôi Kiếp', () => {
   });
 
   it('mitigation caps: formation + Thể tu limited to 50% total; escorts share 25% each (max 2)', () => {
-    const a = tribulationOutcome({ hpRef: 1000, hpMax: 1e9, spec: SPEC_81, totalMultiplierOverride: 1, formationQuality: 5, bodyCultivator: true });
+    const a = tribulationOutcome({
+      hpRef: 1000,
+      hpMax: 1e9,
+      spec: SPEC_81,
+      totalMultiplierOverride: 1,
+      formationQuality: 5,
+      bodyCultivator: true,
+    });
     expect(a.reduction).toBe(0.5); // 40% + 10%
-    const b = tribulationOutcome({ hpRef: 1000, hpMax: 1e9, spec: SPEC_81, totalMultiplierOverride: 1, formationQuality: 4, bodyCultivator: true });
+    const b = tribulationOutcome({
+      hpRef: 1000,
+      hpMax: 1e9,
+      spec: SPEC_81,
+      totalMultiplierOverride: 1,
+      formationQuality: 4,
+      bodyCultivator: true,
+    });
     expect(b.reduction).toBeCloseTo(0.44, 12);
     const e = tribulationOutcome({ hpRef: 1000, hpMax: 1e9, spec: SPEC_81, totalMultiplierOverride: 1, escorts: 5 });
     expect(e.afterReduction).toBeCloseTo(500, 10); // capped at 2 escorts → 50%

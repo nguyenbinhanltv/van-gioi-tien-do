@@ -68,11 +68,7 @@
     },
     "generate_support": {
       "type": "object",
-      "required": [
-        "mp_restore_pct",
-        "cooldown_s",
-        "applies_to_self"
-      ],
+      "required": ["mp_restore_pct", "cooldown_s", "applies_to_self"],
       "additionalProperties": false,
       "properties": {
         "mp_restore_pct": {
@@ -93,18 +89,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "base"
-        ],
+        "required": ["id", "base"],
         "additionalProperties": false,
         "properties": {
           "id": {
-            "enum": [
-              "phong",
-              "loi",
-              "bang"
-            ]
+            "enum": ["phong", "loi", "bang"]
           },
           "base": {
             "$ref": "#/$defs/element"
@@ -123,13 +112,7 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "element_count",
-          "spawn_weight",
-          "purity",
-          "off_element_damage_penalty"
-        ],
+        "required": ["id", "element_count", "spawn_weight", "purity", "off_element_damage_penalty"],
         "additionalProperties": false,
         "properties": {
           "id": {
@@ -160,12 +143,7 @@
     },
     "absorption": {
       "type": "object",
-      "required": [
-        "match_floor",
-        "match_scale",
-        "curve",
-        "density"
-      ],
+      "required": ["match_floor", "match_scale", "curve", "density"],
       "additionalProperties": false,
       "properties": {
         "match_floor": {
@@ -177,19 +155,11 @@
           "exclusiveMinimum": 0
         },
         "curve": {
-          "enum": [
-            "linear",
-            "sqrt"
-          ]
+          "enum": ["linear", "sqrt"]
         },
         "density": {
           "type": "object",
-          "required": [
-            "normal",
-            "main_city",
-            "ley_line_base",
-            "ley_line_per_grade"
-          ],
+          "required": ["normal", "main_city", "ley_line_base", "ley_line_per_grade"],
           "additionalProperties": false,
           "properties": {
             "normal": {
@@ -215,13 +185,7 @@
   },
   "$defs": {
     "element": {
-      "enum": [
-        "kim",
-        "moc",
-        "thuy",
-        "hoa",
-        "tho"
-      ]
+      "enum": ["kim", "moc", "thuy", "hoa", "tho"]
     },
     "elementMap": {
       "type": "object",

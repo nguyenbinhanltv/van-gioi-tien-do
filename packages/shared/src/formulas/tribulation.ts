@@ -50,7 +50,11 @@ export function totalDamage(hpRef: number, spec: TribulationSpec, g = LIGHTNING_
 }
 
 /** Wave of m strikes 1.5 s apart ⇒ (m−1)·1.5 s; waves 8 s apart. 81-strike: 9·12 + 8·8 = 172 s. */
-export function tribulationDurationS(spec: TribulationSpec, strikeIntervalS = STRIKE_INTERVAL_S, waveIntervalS = WAVE_INTERVAL_S): number {
+export function tribulationDurationS(
+  spec: TribulationSpec,
+  strikeIntervalS = STRIKE_INTERVAL_S,
+  waveIntervalS = WAVE_INTERVAL_S,
+): number {
   return spec.waves * (spec.strikesPerWave - 1) * strikeIntervalS + (spec.waves - 1) * waveIntervalS;
 }
 
@@ -79,7 +83,9 @@ export function maxHealPills(durationS: number): number {
 }
 
 export function totalReduction(formationQuality: number | null, bodyCultivator: boolean): number {
-  const r = (formationQuality === null ? 0 : (FORMATION_REDUCTION[formationQuality] ?? 0)) + (bodyCultivator ? BODY_CULT_REDUCTION : 0);
+  const r =
+    (formationQuality === null ? 0 : (FORMATION_REDUCTION[formationQuality] ?? 0)) +
+    (bodyCultivator ? BODY_CULT_REDUCTION : 0);
   return Math.min(MAX_TOTAL_REDUCTION, r);
 }
 

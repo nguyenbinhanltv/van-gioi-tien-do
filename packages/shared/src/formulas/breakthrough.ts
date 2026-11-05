@@ -93,7 +93,13 @@ export function breakthroughBreakdown(input: BreakthroughInput): BreakthroughBre
   const pill = pillBonus(input.pills ?? []);
   const kp = karmaPenalty(input.karma ?? 0);
   const raw = be * (1 + pill) - kp;
-  return { baseEff: be, pill, karmaPenalty: kp, raw, success: clamp(raw, BREAKTHROUGH.MIN_RATE, BREAKTHROUGH.MAX_RATE) };
+  return {
+    baseEff: be,
+    pill,
+    karmaPenalty: kp,
+    raw,
+    success: clamp(raw, BREAKTHROUGH.MIN_RATE, BREAKTHROUGH.MAX_RATE),
+  };
 }
 export function breakthroughSuccess(input: BreakthroughInput): number {
   return breakthroughBreakdown(input).success;
