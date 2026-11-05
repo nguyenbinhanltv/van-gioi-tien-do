@@ -14,3 +14,8 @@ export * from './animset.js';
 export * from './qa.js';
 export * from './kiemtu.js';
 export * from './pipeline.js';
+export * from './render/image.js';
+export * from './render/raster.js';
+export * from './render/render.js';
+export * from './render/gif.js';
+export * from './render/refatlas.js';

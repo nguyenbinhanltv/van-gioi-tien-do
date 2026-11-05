@@ -6,6 +6,7 @@
 import { DIRECTION_TILE_VECTORS, TILE_HEIGHT, TILE_WIDTH, type Direction } from '@vgtd/shared';
 import { CLIP_FPS, type BoneTrack, type Key } from './clip.js';
 import type { Vec2 } from './math.js';
+import { evalPose } from './pose.js';
 import type { RigDocument } from './schema.js';
 
 /** Unit screen-space travel axis (y up) of a logical direction, using the iso tile projection from @vgtd/shared. */
@@ -115,4 +116,15 @@ export function crouchFor(legLength: number, axis: Vec2, halfStride: number, mar
   const dy = Math.abs(axis.y) * halfStride;
   const horizontal = Math.sqrt(Math.max(0, legLength * legLength - dx * dx));
   return Math.max(0, legLength + dy - horizontal + margin);
+}
+
+/** Rest-pose straight-line reach (thigh origin to ankle target) of the first leg IK, in px; 34 px when there is none. */
+export function legReach(rig: RigDocument): number {
+  const leg = (rig.ik ?? []).find((k) => k.bones.length === 2 && k.target === rig.roles.ik_foot_L);
+  if (!leg) return 34;
+  const rest = evalPose(rig, null, 0, { noIk: true });
+  const a = rest.byName.get(leg.bones[0]!);
+  const b = rest.byName.get(leg.bones[1]!);
+  if (!a || !b) return 34;
+  return Math.hypot(a.pos.x - b.pos.x, a.pos.y - b.pos.y) + Math.hypot(b.tip.x - b.pos.x, b.tip.y - b.pos.y);
 }

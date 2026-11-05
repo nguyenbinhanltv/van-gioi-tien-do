@@ -35,7 +35,7 @@ Nguồn chuẩn nằm trong repo: **rig.json + mã hoạt cảnh**. DragonBones 
 
 ### Bộ Kiếm tu (bản đầu)
 
-`authorKiemTuSet(rig)`: `idle`, `run`, `attack`, `attack_2`, `attack_3` (combo 3 đòn; sự kiện `hit` và `cancel_window`), `cast` (`vfx_spawn` cuối pha lấy đà), `hit`, `die`; tóc và đai bake chuyển động phụ. Viết cho góc nhìn nghiêng (E) rồi giảm biên độ theo hướng (`viewGain`: S/N ≈ 0,5; chéo ≈ 0,8). Các hoạt cảnh còn lại (walk, dash, meditate, channel, tribulation, emote, sword_fly) làm sau.
+`authorKiemTuSet(rig)`: `idle`, `run`, `attack`, `attack_2`, `attack_3` (combo 3 đòn; sự kiện `hit` và `cancel_window`), `cast` (`vfx_spawn` cuối pha lấy đà), `hit`, `die`; tóc và đai bake chuyển động phụ. Viết cho góc nhìn nghiêng (E) rồi giảm biên độ theo hướng (`viewGain`: S/N ≈ 0,5; chéo ≈ 0,8). Bộ đầy đủ 13 hoạt cảnh của bảng (15 clip vì `attack` có 3 biến thể): thêm `walk`, `dash` (khinh công), `meditate` (đả tọa), `channel`, `sword_fly`, `tribulation` (đoạn giữa 6–24 là đoạn lặp theo đợt sét, ghi ở `phases`), `emote` (bái).
 
 ## 4. QA tự động (`runQa`, `buildCharacterPackage`)
 
@@ -72,3 +72,9 @@ Viewer (`apps/client-cocos`, worker `van-gioi-tien-do-7`) nạp ske/tex, phát t
 - Hướng S/N/chéo chỉ là **chiếu giảm biên độ** từ góc nghiêng; hoạt cảnh đẹp từng hướng cần duyệt trong viewer.
 - QA tính theo bezier chính xác; runtime Cocos xấp xỉ đường cong (< ~1 px trên tầm với 90 px).
 - Chất lượng cảm giác (trọng lượng, nhịp) không đo bằng QA; cần người duyệt (D36).
+
+## 8. Renderer và artifact duyệt (PR 2)
+
+- `renderPose` / `renderClip` / `contactSheet` / `encodeGif` (`src/render/`, chỉ dùng `node:zlib`, không phụ thuộc native): vẽ nhân vật có texture (attachment `region` và mesh có trọng số, skin, thứ tự slot, tint, additive), lớp phủ gỡ lỗi (bone, mục tiêu IK, chấm đỏ chân đang chạm đất, đường nền), lật gương cho SW/W/NW. `decodePng`/`encodePng` đọc atlas PMA của worker nhân vật.
+- Artifact: `RIG_ARTIFACT_DIR=<thư mục> [RIG_DATA_DIR=<thư mục có kiem-tu.rig.json và atlas/<HƯỚNG>/>] npm run artifacts -w @vgtd/rig` sinh: contact sheet PNG và GIF mỗi clip (hướng E), `directions_<clip>.png` (5 hướng), `qa-report.txt`, và gói DragonBones `<id>_<hướng>.ske.json/.tex.json` đã qua cổng QA (nạp thử bằng runtime Cocos nếu có). Không có dữ liệu thật thì dùng rig tham chiếu + atlas giả.
+- **Phát hiện nhờ nhìn artifact trên rig thật** (QA số chưa bắt được) và đã sửa: (1) rig thật bật IK tay mặc định nên chuyển động FK của tay bị ghi đè: `armsFk` tắt IK tay trong clip; (2) mũi chân cắm xuống đất khi shin nghiêng: `alignFeet` bake xoay bàn chân giữ phẳng khi chạm đất; (3) tư thế nằm/ngồi phụ thuộc chiều cao hông: `liftToGround` đặt thân sát đất theo rig; (4) chiều dài chân lấy từ rig (`legReach`), không hằng số; (5) kiểm tra mới `ground` (thân không lún xuống nền; kiếm và chuỗi phụ được phép chạm).

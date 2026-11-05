@@ -7,11 +7,13 @@
  */
 import type { Direction } from '@vgtd/shared';
 import { clipSpec } from './animset.js';
-import { type Clip, type Key } from './clip.js';
+import { sampleScalar, sampleVec, type BoneTrack, type Clip, type Key } from './clip.js';
 import { ClipBuilder, EASE } from './dsl.js';
 import { closeLoop } from './loop.js';
-import { crouchFor, planFeet, screenAxis } from './locomotion.js';
-import { bakeSecondaryMotion } from './secondary.js';
+import { crouchFor, legReach, planFeet, screenAxis } from './locomotion.js';
+import { angleDelta, type Vec2 } from './math.js';
+import { evalPose } from './pose.js';
+import { bakeSecondaryMotion, simplifyScalar } from './secondary.js';
 import type { RigDocument } from './schema.js';
 
 /** The first batch: idle, run, 3-hit combo, cast, hit, die. */
@@ -24,8 +26,6 @@ export type KiemTuClip = (typeof KIEMTU_CLIPS)[number];
 
 /** Authored run speed (px/s along the facing). The runtime sets timeScale = actual / authored to avoid sliding. */
 export const RUN_SPEED_PX_S = 150;
-/** Straight-leg reach (thigh origin to ankle) of the standard humanoid proportions (docs/03 socket table). */
-const LEG_LENGTH_PX = 34;
 /** Authored walk speed (px/s). */
 export const WALK_SPEED_PX_S = 80;
 /** Knees stay bent while running: the hips ride this far below the straight-leg height. */
@@ -429,11 +429,18 @@ export function authorHit(rig: RigDocument): Clip {
   return c.build();
 }
 
+/** Height of the hips above the ground at rest (px): poses on the ground are authored relative to it. */
+export function restHipHeight(rig: RigDocument): number {
+  const hips = rig.roles.hips;
+  return evalPose(rig, null, 0, { noIk: true }).byName.get(hips!)!.pos.y;
+}
+
 export function authorDie(rig: RigDocument): Clip {
   const g = viewGain(rig.direction);
+  const lying = Math.max(10, restHipHeight(rig) - 8); // hips come to rest 8 px above the ground
   const N = clipSpec('die').frames; // 24
   const c = new ClipBuilder(rig, { name: 'die', frames: N, loop: false });
-  const legsIk = (rig.ik ?? []).filter((k) => k.name.startsWith('ik_leg')).map((k) => k.name);
+  const legsIk = ikConstraintsFor(rig, ['ik_foot_L', 'ik_foot_R']).map((k) => k.name);
   for (const ik of legsIk)
     c.ikMix(ik, [
       [0, 1],
@@ -445,9 +452,9 @@ export function authorDie(rig: RigDocument): Clip {
   c.translate('hips', [
     [0, 0, 0, EASE.snapOut],
     [3, -3 * g, -1, EASE.fall],
-    [10, -8 * g, -17, EASE.fall],
-    [16, -21 * g, -28, EASE.out],
-    [N, -22 * g, -28],
+    [10, -8 * g, -0.6 * lying, EASE.fall],
+    [16, -21 * g, -lying, EASE.out],
+    [N, -22 * g, -lying],
   ]);
   c.rotate('hips', [
     [0, 0, EASE.snapOut],
@@ -472,29 +479,55 @@ export function authorDie(rig: RigDocument): Clip {
     c.rotate(`thigh_${side}`, [
       [0, 0],
       [3, 0, EASE.fall],
-      [16, side === 'L' ? 28 : 18, EASE.out],
-      [N, side === 'L' ? 28 : 18],
+      [16, side === 'L' ? 8 : 3, EASE.out],
+      [N, side === 'L' ? 8 : 3],
     ]);
     c.rotate(`shin_${side}`, [
       [0, 0],
       [3, 0, EASE.fall],
-      [16, side === 'L' ? -34 : -26, EASE.out],
-      [N, side === 'L' ? -34 : -26],
+      [16, side === 'L' ? -14 : -8, EASE.out],
+      [N, side === 'L' ? -14 : -8],
     ]);
   }
   c.rotate('upper_arm_R', [
     [0, 0],
     [3, -28 * g, EASE.inOut],
-    [16, -64, EASE.out],
-    [N, -66],
+    [16, 14, EASE.out],
+    [N, 12],
   ]);
   c.rotate('upper_arm_L', [
     [0, 0],
     [3, -22 * g, EASE.inOut],
-    [16, -48, EASE.out],
-    [N, -50],
+    [16, 24, EASE.out],
+    [N, 22],
   ]);
   return c.build();
+}
+
+/** IK constraints driving the given target roles (rig-independent: constraint names are the rig author's choice). */
+export function ikConstraintsFor(
+  rig: RigDocument,
+  roles: readonly ('ik_foot_L' | 'ik_foot_R' | 'ik_hand_L' | 'ik_hand_R')[],
+) {
+  const targets = new Set(roles.map((r) => rig.roles[r]).filter((x): x is string => !!x));
+  return (rig.ik ?? []).filter((k) => targets.has(k.target));
+}
+
+/**
+ * The clips are FK on the arms (rotations on upper/lower arm). A rig may ship hand IK enabled by default; switch it off
+ * for the whole clip unless the clip animates that constraint itself, so the authored arm motion is what plays.
+ */
+export function armsFk(rig: RigDocument, clip: Clip): Clip {
+  const extra = ikConstraintsFor(rig, ['ik_hand_L', 'ik_hand_R'])
+    .filter((k) => (k.mix ?? 1) > 0 && !clip.ik.some((t) => t.ik === k.name))
+    .map((k) => ({
+      ik: k.name,
+      mix: [
+        { frame: 0, value: 0 },
+        { frame: clip.frames, value: 0 },
+      ],
+    }));
+  return extra.length ? { ...clip, ik: [...clip.ik, ...extra] } : clip;
 }
 
 export function authorWalk(rig: RigDocument): Clip {
@@ -503,7 +536,7 @@ export function authorWalk(rig: RigDocument): Clip {
   const speed = WALK_SPEED_PX_S * g;
   const axis = screenAxis(rig.direction);
   // knees stay bent enough that the vertical part of the stride (front/back views) is reachable
-  const crouch = Math.max(6, crouchFor(LEG_LENGTH_PX, axis, (speed * 0.62 * (N / 30)) / 2));
+  const crouch = Math.max(6, crouchFor(legReach(rig), axis, (speed * 0.62 * (N / 30)) / 2));
   const plan = planFeet(rig, {
     frames: N,
     speed,
@@ -596,7 +629,7 @@ export function authorDash(rig: RigDocument): Clip {
 
 /** FK-only seated pose helper (legs leave IK so the hips can sit on the ground). */
 function legsFk(c: ClipBuilder, rig: RigDocument, frames: number): void {
-  for (const ik of (rig.ik ?? []).filter((k) => k.name.startsWith('ik_leg'))) {
+  for (const ik of ikConstraintsFor(rig, ['ik_foot_L', 'ik_foot_R'])) {
     c.ikMix(ik.name, [
       [0, 0],
       [frames, 0],
@@ -609,10 +642,11 @@ export function authorMeditate(rig: RigDocument): Clip {
   const g = viewGain(rig.direction);
   const c = new ClipBuilder(rig, { name: 'meditate', frames: N, loop: true });
   legsFk(c, rig, N);
+  const seat = Math.max(10, restHipHeight(rig) - 10); // seated hips 10 px above the ground
   // cross-legged on the ground: hips drop, thighs forward, shins folded back; slow breathing
   c.translate('hips', [
-    [0, 0, -26],
-    [N, 0, -26],
+    [0, 0, -seat],
+    [N, 0, -seat],
   ]);
   for (const side of ['L', 'R'] as const) {
     const th = side === 'L' ? 78 : 92;
@@ -784,6 +818,82 @@ export function authorEmote(rig: RigDocument): Clip {
   return c.build();
 }
 
+/**
+ * Keep planted feet flat. The IK solver places the ankle, but the foot bone is a child of the shin and pitches with
+ * it, so toes dig into the floor. Bake a counter-rotation per frame so the foot's world angle stays at its rest angle
+ * while the ankle is near the ground, fading out as the foot lifts (swing). Only where the leg IK is active.
+ */
+export function alignFeet(rig: RigDocument, clip: Clip): Clip {
+  const legs = ikConstraintsFor(rig, ['ik_foot_L', 'ik_foot_R']);
+  if (!legs.length) return clip;
+  const rest = evalPose(rig, null, 0, { noIk: true });
+  const bones = [...clip.bones];
+  for (const leg of legs) {
+    const foot = (rig.bones.find((b) => b.parent === leg.bones[leg.bones.length - 1]) ?? null)?.name;
+    if (!foot) continue;
+    const restWorld = rest.byName.get(foot)!.rotation;
+    const restAnkle = rest.byName.get(foot)!.pos.y;
+    const mixTrack = clip.ik.find((t) => t.ik === leg.name)?.mix;
+    const keys: Key<number>[] = [];
+    for (let f = 0; f <= clip.frames; f++) {
+      const mix = mixTrack?.length ? sampleScalar(mixTrack, f) : (leg.mix ?? 1);
+      const pose = evalPose(rig, clip, f);
+      const p = pose.byName.get(foot)!;
+      const flat = angleDelta(p.rotation, restWorld);
+      const lift = Math.max(0, p.pos.y - restAnkle);
+      const weight = mix * (1 - Math.min(1, Math.max(0, (lift - 1) / 7)));
+      keys.push({ frame: f, value: flat * weight });
+    }
+    const existing = bones.findIndex((b) => b.bone === foot);
+    const track = simplifyScalar(keys, 0.25);
+    if (existing >= 0) bones[existing] = { ...bones[existing]!, rotate: track };
+    else bones.push({ bone: foot, rotate: track });
+  }
+  return { ...clip, bones };
+}
+
+/**
+ * For ground poses (lying, seated) the authored hip drop depends on the rig's proportions. Raise the hips per frame by
+ * exactly the amount the lowest point of the body sinks below the floor, so the pose rests on the ground for any rig.
+ * Correct only for FK poses (leg IK off), which is the case for `die` and `meditate`.
+ */
+/** Bones that make up the body (the roles minus IK helpers); props such as a sword may poke through the floor. */
+export function bodyBones(rig: RigDocument): Set<string> {
+  return new Set(
+    Object.entries(rig.roles)
+      .filter(([role]) => !role.startsWith('ik_'))
+      .map(([, bone]) => bone as string),
+  );
+}
+
+export function liftToGround(rig: RigDocument, clip: Clip): Clip {
+  const hips = rig.roles.hips;
+  if (!hips) return clip;
+  const body = bodyBones(rig);
+  const existing = clip.bones.find((b) => b.bone === hips)?.translate;
+  const keys: Key<Vec2>[] = [];
+  for (let f = 0; f <= clip.frames; f++) {
+    const pose = evalPose(rig, clip, f);
+    let minY = Infinity;
+    for (const b of pose.bones) {
+      if (!body.has(b.name)) continue;
+      minY = Math.min(minY, b.pos.y, b.tip.y);
+    }
+    const base = existing?.length ? sampleVec(existing, f) : { x: 0, y: 0 };
+    keys.push({ frame: f, value: { x: base.x, y: base.y + Math.max(0, -minY) } });
+  }
+  const track: BoneTrack = { bone: hips, translate: keys };
+  return {
+    ...clip,
+    bones: [
+      ...clip.bones.filter((b) => b.bone !== hips),
+      ...(clip.bones.some((b) => b.bone === hips)
+        ? [{ ...clip.bones.find((b) => b.bone === hips)!, ...track }]
+        : [track]),
+    ],
+  };
+}
+
 export interface KiemTuOptions {
   /** Bake hair/sash secondary motion into the clips. Default true. */
   readonly secondary?: boolean;
@@ -812,7 +922,8 @@ export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Cli
   };
   const ids = opts.only ?? KIEMTU_CLIPS;
   return ids.map((id) => {
-    const clip = makers[id](rig);
+    const authored = armsFk(rig, makers[id](rig));
+    const clip = id === 'die' || id === 'meditate' ? liftToGround(rig, authored) : alignFeet(rig, authored);
     return opts.secondary === false ? clip : bakeSecondaryMotion(rig, clip);
   });
 }

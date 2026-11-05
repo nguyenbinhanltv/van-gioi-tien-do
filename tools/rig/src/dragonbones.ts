@@ -64,11 +64,19 @@ interface AttachmentContext {
   /** Slot-bone world matrix at the rest pose. */
   readonly slotMatrix: Mat;
   readonly boneWorld: ReadonlyMap<string, Mat>;
+  /** Packed pixel size per atlas region name (atlas textures may be 2x the logical 1x geometry). */
+  readonly regions: ReadonlyMap<string, { width: number; height: number }>;
 }
 
 function exportAttachment(a: RigAttachment, ctx: AttachmentContext): Json {
   if (a.type === 'region') {
-    return { type: 'image', name: a.path, transform: dbTransform(a.x, a.y, a.rotation ?? 0, a.scaleX, a.scaleY) };
+    // A DragonBones image is drawn at its texture's pixel size. When the atlas is packed at 2x (logical geometry 1x),
+    // scale by logical size / packed size so the part keeps its rig-space width and height.
+    const px = ctx.regions.get(a.path);
+    const fx = px && px.width > 0 ? a.width / px.width : 1;
+    const fy = px && px.height > 0 ? a.height / px.height : 1;
+    const t = dbTransform(a.x, a.y, a.rotation ?? 0, (a.scaleX ?? 1) * fx, (a.scaleY ?? 1) * fy);
+    return { type: 'image', name: a.path, transform: t };
   }
   const vertices: number[] = [];
   for (let i = 0; i < a.vertices.length; i += 2) vertices.push(r4(a.vertices[i]!), r4(-a.vertices[i + 1]!));
@@ -209,11 +217,12 @@ export function dbBend(bendPositive: boolean): boolean {
   return bendPositive;
 }
 
-function exportArmature(entry: ExportEntry, opts: ExportOptions): Json {
+function exportArmature(entry: ExportEntry, opts: ExportOptions, atlas: AtlasData): Json {
   const { rig, clips } = entry;
   const lists = displayLists(rig);
   const rest = evalPose(rig, null, 0, { noIk: true });
   const boneWorld = new Map(rest.bones.map((b) => [b.name, b.world]));
+  const regions = new Map(atlas.regions.map((r) => [r.name, { width: r.width, height: r.height }]));
   const name = opts.armatureName ? opts.armatureName(rig) : rig.direction;
   const bone = rig.bones.map((b) => {
     const o: Json = { name: b.name, length: b.length };
@@ -248,7 +257,7 @@ function exportArmature(entry: ExportEntry, opts: ExportOptions): Json {
         const atts = sk.attachments[s.name]!;
         const list = lists.get(s.name)!;
         // DragonBones display lists are positional: fill gaps (attachments missing in this skin) with null displays.
-        const ctx = { rig, slotMatrix: boneWorld.get(s.bone)!, boneWorld };
+        const ctx = { rig, slotMatrix: boneWorld.get(s.bone)!, boneWorld, regions };
         const display = list.map((n) => (atts[n] ? exportAttachment(atts[n]!, ctx) : null));
         return { name: s.name, display };
       }),
@@ -315,7 +324,7 @@ export function exportDragonBones(
       }
     }
   }
-  const armature = entries.map((e) => exportArmature(e, opts));
+  const armature = entries.map((e) => exportArmature(e, opts, atlas));
   const names = armature.map((a) => a.name as string);
   if (new Set(names).size !== names.length) throw new Error(`duplicate armature names: ${names.join(', ')}`);
   return {
