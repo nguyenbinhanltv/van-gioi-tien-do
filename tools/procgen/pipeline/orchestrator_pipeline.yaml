@@ -175,6 +175,9 @@ spec:
         - name: claude_code_review
           timeout: 10m
           secrets: [ANTHROPIC_API_KEY]        # chỉ step này
+          # KHÔNG duyệt sẵn Read/Glob/Grep trần: ở chế độ -p, đọc NGOÀI thư mục làm việc (~, /proc/self/environ
+          # chứa ANTHROPIC_API_KEY...) chỉ bị từ chối khi không được duyệt sẵn. Chỉ duyệt Read(./build/raw/**),
+          # Read(./reports/**); Glob/Grep trong thư mục làm việc vốn tự được phép, ngoài đó bị từ chối.
           # Bảo đảm THỰC SỰ (Claude Code): --allowedTools chỉ DUYỆT SẴN công cụ, không giới hạn đọc.
           #  - Ghi / Bash: ở chế độ -p không có người duyệt nên mọi thứ ngoài allowlist bị từ chối ->
           #    chỉ ghi được reports/**, chỉ chạy được `node pipeline/validate_assets.js ...` (đối số tùy ý,
@@ -185,7 +188,7 @@ spec:
           run: |
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read,Glob,Grep,Write(reports/**),Bash(node pipeline/validate_assets.js:*)"               --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Edit,NotebookEdit,WebFetch,WebSearch" \
+              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)"               --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Read(//proc/**),Read(//etc/**),Read(~/**),Edit,NotebookEdit,WebFetch,WebSearch" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
         - name: verdict
@@ -251,6 +254,10 @@ spec:
             git checkout -B "$BR"
             git add "${CLIENT_ASSET_DIR}"
             if git diff --cached --quiet; then echo "Không có thay đổi asset"; exit 0; fi
+            # qa_review.md do LLM viết sẽ thành body PR: chặn nếu chứa mẫu giống secret / webhook
+            if grep -Eq 'sk-[A-Za-z0-9_-]{10,}|gh[pousr]_[A-Za-z0-9]{20,}|xox[baprs]-|hooks\.slack\.com|AKIA[0-9A-Z]{16}' ../tutien-procgen/reports/qa_review.md; then
+              echo "✖ qa_review.md chứa chuỗi giống secret, không đưa vào PR"; exit 20
+            fi
             VERDICT="$(node -p "require('../tutien-procgen/reports/qa_verdict.json').verdict")"
             git commit -m "chore(assets): seed ${SEED} · run ${run.id}" -m "QA: ${VERDICT}"
             git push --force-with-lease origin "$BR"
