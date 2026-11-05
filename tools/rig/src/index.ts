@@ -27,3 +27,8 @@ export * from './fit.js';
 export * from './soften.js';
 export * from './autoskin.js';
 export * from './pieces.js';
+export * from './classes.js';
+export * from './parts.js';
+export * from './template.js';
+export * from './class-clips.js';
+export * from './characters.js';

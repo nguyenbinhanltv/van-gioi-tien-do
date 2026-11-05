@@ -69,6 +69,8 @@ export const DEFAULT_THRESHOLDS: QaThresholds = {
 };
 
 export interface QaOptions {
+  /** Weapon rule: 'one' (default) = exactly one weapon_R piece visible; 'none' = nothing may be visible (gauntlets). */
+  readonly weapon?: 'one' | 'none';
   /** Check skinned meshes for detached pieces and stretch. Default true when the rig has mesh attachments. */
   readonly mesh?: boolean;
   readonly meshThresholds?: Partial<MeshQaThresholds>;
@@ -440,7 +442,19 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
   // exactly one weapon in the hand per frame, and never the back-sword at the same time (a second sword = ghost sword)
   const weaponSlots = rig.slots.filter((x) => x.paperdoll === 'weapon_R').map((x) => x.name);
   const backSlots = rig.slots.filter((x) => x.paperdoll === 'sword_back').map((x) => x.name);
-  if (weaponSlots.length) {
+  if (opts.weapon === 'none' && weaponSlots.length) {
+    for (let f = 0; f <= N; f++) {
+      if (weaponSlots.some((n) => poses[f]!.attachments.get(n))) {
+        add({
+          severity: 'error',
+          check: 'weapon',
+          frame: f,
+          message: 'a weapon_R piece is visible but this class wears gauntlets (no weapon piece)',
+        });
+        break;
+      }
+    }
+  } else if (weaponSlots.length) {
     for (let f = 0; f <= N; f++) {
       const visible = (names: string[]) => names.filter((n) => poses[f]!.attachments.get(n));
       const hand = visible(weaponSlots).length;

@@ -254,6 +254,7 @@ export function meshQa(rig: RigDocument, clip: Clip, thresholds: Partial<MeshQaT
       if (gap > (worstGap.get(key)?.gap ?? th.gapPx)) worstGap.set(key, { gap, frame: f });
     }
     for (const it of vis) {
+      if (!SEAM_SLOTS.has(it.slot)) continue; // props (weapon), hair and wings may leave the body
       const m = skinAttachment(it.att, it.bone, pose, rest);
       const d = Math.min(...m.verts.map((v) => Math.min(...segs.map(([a, b]) => segDist(v, a, b)))));
       const excess = d - (restDist.get(it.slot) ?? d);

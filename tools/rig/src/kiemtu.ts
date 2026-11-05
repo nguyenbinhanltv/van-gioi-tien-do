@@ -946,6 +946,8 @@ export function skirtFollowsLegs(rig: RigDocument, clip: Clip, gain = 0.55, limi
 }
 
 export interface KiemTuOptions {
+  /** Replace individual clips (class re-targeting): `makers[id](rig)` is used instead of the Kiếm tu clip. */
+  readonly overrides?: Partial<Record<KiemTuClip, (rig: RigDocument) => Clip>>;
   /**
    * Loaded atlas of the rig: when given, every clip is fitted so its silhouette stays whole (limb swings are limited to
    * what the rig's rigid mesh islands can carry); see `fitToSilhouette`.
@@ -978,7 +980,7 @@ export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Cli
   };
   const ids = opts.only ?? KIEMTU_CLIPS;
   return ids.map((id) => {
-    const authored = armsFk(rig, makers[id](rig));
+    const authored = armsFk(rig, (opts.overrides?.[id] ?? makers[id])(rig));
     const grounded = id === 'die' || id === 'meditate' ? liftToGround(rig, authored) : alignFeet(rig, authored);
     const base = skirtFollowsLegs(rig, grounded);
     const bake = (c: Clip) => (opts.secondary === false ? c : bakeSecondaryMotion(rig, c));
