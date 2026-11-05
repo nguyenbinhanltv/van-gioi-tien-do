@@ -1,8 +1,10 @@
 import { Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
-import { depthOf, newNode, tileToCocos } from './IsoAdapter';
+import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+
+let nextId = 1; // id 0 = player
 
 export type TilePos = { i: number; j: number };
 
@@ -22,8 +24,10 @@ export function addProp(ysort: YSortLayer, art: ArtFrames, kind: 'tree' | 'rock'
   const frame = kind === 'tree' ? art.tree : art.rock;
   const [w, h] = kind === 'tree' ? [80, 112] : [56, 40];
   const n = spriteNode(`${kind}${ti},${tj}`, frame, w, h, 0.5, 0.06);
-  n.setPosition(tileToCocos(ti + 0.5, tj + 0.5));
-  ysort.add(n, () => depthOf(ti + 1, tj + 1));
+  const id = nextId++;
+  n.setPosition(tileToWorld(ti + 0.5, tj + 0.5));
+  const key = footprintSortable(id, 0, ti, tj);
+  ysort.add(n, () => key);
 }
 
 /**
@@ -52,7 +56,7 @@ export class PlayerActor {
     this.body = spriteNode('Player', art.player, 48, 72, 0.5, 0.06);
     this.shadow = spriteNode('PlayerShadow', art.shadow, 48, 24, 0.5, 0.5);
     shadowLayer.addChild(this.shadow);
-    ysort.add(this.body, () => depthOf(this.pos.i, this.pos.j));
+    ysort.add(this.body, () => pointSortable(0, 0, this.pos.i, this.pos.j));
     this.place();
   }
 
@@ -79,7 +83,7 @@ export class PlayerActor {
   }
 
   private place(): void {
-    const p = tileToCocos(this.pos.i, this.pos.j);
+    const p = tileToWorld(this.pos.i, this.pos.j);
     this.body.setPosition(p);
     this.shadow.setPosition(p);
   }

@@ -1,5 +1,5 @@
 import { Node, UITransform, game } from 'cc';
-import { cocosToScreen, screenToCocos, type ScreenPoint } from './IsoAdapter';
+import { cameraOffset, cocosToScreen, type ScreenPoint } from './IsoAdapter';
 
 /**
  * Camera follow + client->world conversion.
@@ -20,9 +20,8 @@ export class CameraRig {
 
   /** Centre the camera on a shared-screen point. Offset is rounded to whole px (no sub-pixel shimmer). */
   follow(target: ScreenPoint): void {
-    const p = screenToCocos(target);
     this.worldRoot.setScale(this.zoom, this.zoom, 1);
-    this.worldRoot.setPosition(Math.round(-p.x * this.zoom), Math.round(-p.y * this.zoom), 0);
+    this.worldRoot.setPosition(cameraOffset(target, this.zoom));
   }
 
   /** Browser client px -> UI-space (Canvas-local, y up) design units. */

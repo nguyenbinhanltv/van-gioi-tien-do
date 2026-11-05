@@ -1,10 +1,11 @@
 import { Node } from 'cc';
+import { shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 
 interface Entry {
   node: Node;
-  /** Painter depth (see depthOf): larger = drawn later (on top). */
-  depth: () => number;
+  /** Draw-order key, re-read every frame (see shared compareDrawOrder: group, sortY, x, id). */
+  key: () => shared.Sortable;
 }
 
 /**
@@ -21,9 +22,9 @@ export class YSortLayer {
     this.root = newNode('L3_YSort', parent);
   }
 
-  add(node: Node, depth: () => number): void {
+  add(node: Node, key: () => shared.Sortable): void {
     this.root.addChild(node);
-    this.entries.push({ node, depth });
+    this.entries.push({ node, key });
   }
 
   get count(): number {
@@ -31,8 +32,8 @@ export class YSortLayer {
   }
 
   sort(): void {
-    const keyed = this.entries.map((e) => ({ e, k: e.depth() }));
-    keyed.sort((a, b) => a.k - b.k);
+    const keyed = this.entries.map((e) => ({ e, k: e.key() }));
+    keyed.sort((a, b) => shared.compareDrawOrder(a.k, b.k));
     for (let idx = 0; idx < keyed.length; idx++) {
       const node = keyed[idx].e.node;
       if (this.order[idx] !== node) {

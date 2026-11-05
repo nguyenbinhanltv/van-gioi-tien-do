@@ -12,7 +12,7 @@ import {
   view,
 } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
-import { newNode, tileToCocos } from './IsoAdapter';
+import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView, type TileMapData, type TilesetData } from './WorldView';
 import { YSortLayer } from './YSortLayer';
@@ -190,7 +190,7 @@ export class Bootstrap extends Component {
 
     const dest = this.input.destination(frame);
     this.marker.active = !!dest;
-    if (dest) this.marker.setPosition(tileToCocos(dest.i, dest.j));
+    if (dest) this.marker.setPosition(cellCenterToWorld(dest.i, dest.j));
     this.input.updateVisuals();
 
     const w = this.canvasUi.contentSize.width;

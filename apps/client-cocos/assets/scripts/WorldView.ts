@@ -1,6 +1,6 @@
 import { Node, Sprite, SpriteFrame, Texture2D, UITransform } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
-import { newNode, tileToCocos } from './IsoAdapter';
+import { newNode, tileToWorld } from './IsoAdapter';
 import { makeFrame } from './PlaceholderArt';
 
 /** Shape of tools/procgen `map.json` (tutien-isomap v1) - only the fields we read. */
@@ -68,7 +68,7 @@ export class WorldView {
           const sp = n.addComponent(Sprite);
           sp.sizeMode = Sprite.SizeMode.CUSTOM;
           sp.spriteFrame = frames.get(id)!;
-          n.setPosition(tileToCocos(i, j));
+          n.setPosition(tileToWorld(i, j));
           const variant = l === 0 ? this.waterIds.indexOf(id) : -1;
           if (variant >= 0) this.water.push({ sprite: sp, variant });
           count++;

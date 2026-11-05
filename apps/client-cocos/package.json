@@ -12,7 +12,8 @@
     "prepare:assets": "node scripts/prepare.mjs",
     "build:web": "node scripts/build-web.mjs",
     "serve": "node scripts/serve.mjs",
-    "typecheck": "node scripts/typecheck.mjs"
+    "check:yflip": "node scripts/check-yflip.mjs",
+    "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5"
