@@ -1,8 +1,0 @@
-kiemtu.png
-size: 256, 512
-format: RGBA8888
-filter: Linear, Linear
-repeat: none
-pma: true
-kiemtu
-bounds: 0, 0, 256, 512

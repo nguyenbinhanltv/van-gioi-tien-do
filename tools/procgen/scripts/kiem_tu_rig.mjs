@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// AI-derived placeholder separation and Spine 4.2 handoff. Not a production animation rig.
+// AI-derived art separation and neutral rig DATA. Exporters belong to @vgtd/rig.
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -29,7 +29,7 @@ const require = createRequire(import.meta.url);
 const { Image, decodePNG, resizeArea } = require('../src/lib/png.js');
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 export const SOURCE_DIR = path.join(ROOT, 'assets-src/placeholder/kiem-tu-rig-v1');
-export const CLIENT_DIR = path.join(ROOT, 'apps/client-cocos/assets/bundles/class-kiem-tu/_placeholder/rig-v1');
+export const DATA_DIR = path.join(ROOT, 'tools/rig/data');
 const SIDE = CANVAS_BY_FOOTPRINT['1x1'];
 export const PIVOT = [SIDE / 2, SIDE - PIVOT_BOTTOM_OFFSET_PX];
 const SCALE = 2;
@@ -213,8 +213,8 @@ export function landmarks(direction) {
   return {
     ...p,
     root: [PIVOT[0] * SCALE, PIVOT[1] * SCALE],
-    torso: [p.hip[0], 118],
-    chest: [p.neck[0], 94],
+    spine_mid: [p.hip[0], 118],
+    spine_upper: [p.neck[0], 94],
     thigh_R: [p.hip[0] - 8, 139],
     shin_R: [p.hip[0] - 9, 185],
     foot_R: [p.hip[0] - 10, 223],
@@ -247,14 +247,14 @@ export function boneRig(direction) {
   const graph = [
     ['root', null],
     ['hip', 'root'],
-    ['torso', 'hip'],
-    ['chest', 'torso'],
-    ['neck', 'chest'],
+    ['spine_mid', 'hip'],
+    ['spine_upper', 'spine_mid'],
+    ['neck', 'spine_upper'],
     ['head', 'neck'],
-    ['upper_arm_R', 'chest', 'shoulder_R'],
+    ['upper_arm_R', 'spine_upper', 'shoulder_R'],
     ['lower_arm_R', 'upper_arm_R', 'elbow_R'],
     ['hand_R', 'lower_arm_R'],
-    ['upper_arm_L', 'chest', 'shoulder_L'],
+    ['upper_arm_L', 'spine_upper', 'shoulder_L'],
     ['lower_arm_L', 'upper_arm_L', 'elbow_L'],
     ['hand_L', 'lower_arm_L'],
     ['thigh_R', 'hip'],
@@ -280,7 +280,44 @@ export function boneRig(direction) {
     ['scabbard', 'hip'],
     ['weapon', 'hand_R'],
   ];
+  Object.assign(p, {
+    head_tip: [p.head[0], p.head[1] - 12],
+    hair_back_tip: [p.neck[0] - 2, 112],
+    hair_front_tip: [p.head[0] + 4, 81],
+    ribbon_tip: [p.head[0] - 9, 111],
+    sash_L_tip: [p.hip[0] - 6, 188],
+    sash_R_tip: [p.hip[0] + 9, 194],
+    sleeve_tail_R: [p.hand_R[0] - 3, p.hand_R[1] + 6],
+    sleeve_tail_L: [p.hand_L[0] + 3, p.hand_L[1] + 6],
+    robe_front_tip: [p.hip[0] + 3, 204],
+    robe_back_tip: [p.hip[0] - 3, 204],
+    scabbard_tip: [p.scabbard[0] + (['N', 'NE'].includes(direction) ? -14 : 14), 190],
+    toe_R: [p.foot_R[0] + (direction === 'E' ? 12 : -2), 232],
+    toe_L: [p.foot_L[0] + (direction === 'E' ? 12 : 2), 232],
+  });
   const aim = {
+    hip: 'spine_mid',
+    spine_mid: 'spine_upper',
+    spine_upper: 'neck',
+    neck: 'head',
+    head: 'head_tip',
+    foot_R: 'toe_R',
+    foot_L: 'toe_L',
+    hair_back_1: 'hair_back_2',
+    hair_back_2: 'hair_back_tip',
+    hair_front_1: 'hair_front_2',
+    hair_front_2: 'hair_front_tip',
+    ribbon_1: 'ribbon_2',
+    ribbon_2: 'ribbon_tip',
+    sash_L_1: 'sash_L_2',
+    sash_L_2: 'sash_L_tip',
+    sash_R_1: 'sash_R_2',
+    sash_R_2: 'sash_R_tip',
+    sleeve_tip_R: 'sleeve_tail_R',
+    sleeve_tip_L: 'sleeve_tail_L',
+    robe_front: 'robe_front_tip',
+    robe_back: 'robe_back_tip',
+    scabbard: 'scabbard_tip',
     upper_arm_R: 'elbow_R',
     lower_arm_R: 'hand_R',
     upper_arm_L: 'elbow_L',
@@ -300,7 +337,7 @@ export function boneRig(direction) {
     const angle = target ? (Math.atan2(-(target[1] - point[1]), target[0] - point[0]) * 180) / Math.PI : 0;
     bones.push({
       name,
-      ...(parent ? { parent } : {}),
+      parent,
       x: round(local[0]),
       y: round(local[1]),
       rotation: round(angle - parentWorld.rotation),
@@ -308,12 +345,21 @@ export function boneRig(direction) {
     });
     world[name] = { x: pos[0], y: pos[1], rotation: angle };
   }
+  for (const side of ['L', 'R'])
+    for (const limb of ['foot', 'hand']) {
+      const name = 'ik_' + limb + '_' + side,
+        point = p[limb + '_' + side],
+        x = point[0] / SCALE - PIVOT[0],
+        y = PIVOT[1] - point[1] / SCALE;
+      bones.push({ name, parent: 'root', length: 0, x: round(x), y: round(y), rotation: 0 });
+      world[name] = { x, y, rotation: 0 };
+    }
   return { bones, world };
 }
 
 export const PIECES = [
   ['neck', 'body', 'neck'],
-  ['torso_base', 'body', 'torso'],
+  ['torso_base', 'body', 'spine_mid'],
   ['thigh_R', 'body', 'thigh_R'],
   ['thigh_L', 'body', 'thigh_L'],
   ['shin_R', 'body', 'shin_R'],
@@ -323,7 +369,7 @@ export const PIECES = [
   ['robe_back', 'outfit_lower', 'robe_back'],
   ['robe_front', 'outfit_lower', 'robe_front'],
   ['scabbard', 'outfit_lower', 'scabbard'],
-  ['coat', 'outfit_upper', 'chest'],
+  ['coat', 'outfit_upper', 'spine_upper'],
   ['sash_L_1', 'outfit_upper', 'sash_L_1'],
   ['sash_L_2', 'outfit_upper', 'sash_L_2'],
   ['sash_R_1', 'outfit_upper', 'sash_R_1'],
@@ -477,14 +523,27 @@ export function separateParts(image, direction) {
   return parts;
 }
 
-export function idleAnimation() {
-  const bones = {},
-    times = Array.from({ length: 17 }, (_, n) => Math.round((n * SPINE_KEY_FPS) / 8) / SPINE_KEY_FPS);
-  const wave = (t, phase = 0) => Math.sin(Math.PI * t + phase) - Math.sin(phase);
-  bones.chest = {
-    translate: times.map((t) => ({ time: round(t), x: 0, y: round(0.65 * (1 - Math.cos(Math.PI * t))) })),
-  };
-  for (const [name, amplitude, phase] of [
+export function idleClip(direction = 'S') {
+  const frames = SPINE_KEY_FPS * 2,
+    times = Array.from({ length: 17 }, (_, n) => Math.round((n * SPINE_KEY_FPS) / 8)),
+    tracks = [];
+  const rig = boneRig(direction),
+    parent = rig.world.spine_mid;
+  const translate = times.map((frame) => {
+    const amount = 0.65 * (1 - Math.cos((Math.PI * frame) / SPINE_KEY_FPS)),
+      local = rotate([0, amount], -parent.rotation);
+    return { frame, value: { x: round(local[0]), y: round(local[1]) } };
+  });
+  tracks.push({ bone: 'spine_upper', translate });
+  for (const side of ['L', 'R'])
+    tracks.push({
+      bone: 'ik_hand_' + side,
+      translate: times.map((frame) => ({
+        frame,
+        value: { x: 0, y: round(0.65 * (1 - Math.cos((Math.PI * frame) / SPINE_KEY_FPS))) },
+      })),
+    });
+  for (const [bone, amplitude, phase] of [
     ['hair_back_1', 1.3, 0],
     ['hair_back_2', 2, 0.4],
     ['hair_front_2', 0.8, 0.3],
@@ -496,16 +555,20 @@ export function idleAnimation() {
     ['sash_R_2', -1.8, 0.8],
     ['sleeve_tip_R', 0.7, 0.2],
     ['sleeve_tip_L', -0.7, 0.2],
-  ]) {
-    bones[name] = { rotate: times.map((t) => ({ time: round(t), value: round(amplitude * wave(t, phase)) })) };
-  }
-  return { bones };
+  ])
+    tracks.push({
+      bone,
+      rotate: times.map((frame) => ({
+        frame,
+        value: round(amplitude * (Math.sin((Math.PI * frame) / SPINE_KEY_FPS + phase) - Math.sin(phase))),
+      })),
+    });
+  return { name: 'idle', frames, loop: true, bones: tracks, slots: [], ik: [], events: [] };
 }
 
-export function makeSkeleton(direction, parts, atlas) {
-  const rig = boneRig(direction),
-    bones = rig.bones;
-  const equipped = [...new Set(parts.filter((p) => p.box).map((p) => p.slot))];
+export function makeRigDocument(direction, parts, atlas, canonical = []) {
+  const { bones, world } = boneRig(direction),
+    equipped = [...new Set(parts.filter((p) => p.box).map((p) => p.slot))];
   const view = getCharacterViewState({
     kind: 'player',
     direction,
@@ -514,65 +577,200 @@ export function makeSkeleton(direction, parts, atlas) {
     paperdoll: { swordInHand: true },
     drawnInEight: false,
   });
+  const slotBone = {
+    wing: 'spine_upper',
+    cape: 'spine_upper',
+    sword_back: 'spine_upper',
+    hair_back: 'head',
+    body: 'hip',
+    outfit_lower: 'hip',
+    outfit_upper: 'spine_upper',
+    head: 'head',
+    hair_front: 'head',
+    headwear: 'head',
+    arm_L: 'upper_arm_L',
+    arm_R: 'upper_arm_R',
+    weapon_R: 'weapon',
+  };
   const slots = view.slotOrder.map((name) => ({
     name,
-    bone: name === 'weapon_R' ? 'weapon' : 'root',
-    ...(parts.some((p) => p.slot === name && p.box) ? { attachment: name } : {}),
+    bone: slotBone[name],
+    paperdoll: name,
+    attachment: parts.some((p) => p.slot === name && p.box) ? name : null,
   }));
-  const attachments = {};
+  const attachments = {},
+    fallback = {};
   for (const slot of slots) {
-    const mesh = { type: 'mesh', path: 'kiemtu', uvs: [], triangles: [], vertices: [], hull: 0 };
+    const pose = world[slot.bone],
+      mesh = {
+        type: 'mesh',
+        path: 'kiemtu_page',
+        width: SIDE,
+        height: SIDE,
+        uvs: [],
+        triangles: [],
+        vertices: [],
+        weights: [],
+      };
     for (const part of parts.filter((p) => p.slot === slot.name && p.box)) {
       const box = part.box,
         frame = atlas.frames[part.name],
-        pose = rig.world[part.bone],
-        bone = bones.findIndex((b) => b.name === part.bone),
-        offset = mesh.uvs.length / 2;
+        offset = mesh.vertices.length / 2;
       const xy = [
-        [box.x, box.y],
-        [box.x + box.w, box.y],
-        [box.x + box.w, box.y + box.h],
-        [box.x, box.y + box.h],
-      ];
-      const uv = [
-        [frame.x, frame.y],
-        [frame.x + frame.w, frame.y],
-        [frame.x + frame.w, frame.y + frame.h],
-        [frame.x, frame.y + frame.h],
-      ];
+          [box.x, box.y],
+          [box.x + box.w, box.y],
+          [box.x + box.w, box.y + box.h],
+          [box.x, box.y + box.h],
+        ],
+        uv = [
+          [frame.x, frame.y],
+          [frame.x + frame.w, frame.y],
+          [frame.x + frame.w, frame.y + frame.h],
+          [frame.x, frame.y + frame.h],
+        ];
       xy.forEach(([x, y], i) => {
         const local = rotate([x / SCALE - PIVOT[0] - pose.x, PIVOT[1] - y / SCALE - pose.y], -pose.rotation);
-        mesh.vertices.push(1, bone, round(local[0]), round(local[1]), 1);
+        mesh.vertices.push(round(local[0]), round(local[1]));
         mesh.uvs.push(round(uv[i][0] / atlas.pages[0].width), round(uv[i][1] / atlas.pages[0].height));
+        mesh.weights.push([[part.bone, 1]]);
       });
       mesh.triangles.push(offset, offset + 1, offset + 2, offset + 2, offset + 3, offset);
     }
-    if (mesh.uvs.length) {
+    if (mesh.vertices.length) {
       attachments[slot.name] = { [slot.name]: mesh };
-      // Idle uses the mirrored body silhouette. Keep the API's named variant
-      // available; this alias is not a separately drawn combat attachment.
       if (slot.name === 'weapon_R') attachments[slot.name].weapon_R_mirrored = structuredClone(mesh);
     }
+    const layer = canonical.find((p) => p.name === slot.name),
+      frame = atlas.frames['slot_' + slot.name];
+    if (layer?.box && frame) {
+      const box = layer.box,
+        local = rotate(
+          [(box.x + box.w / 2) / SCALE - PIVOT[0] - pose.x, PIVOT[1] - (box.y + box.h / 2) / SCALE - pose.y],
+          -pose.rotation,
+        );
+      const region = {
+        type: 'region',
+        path: 'slot_' + slot.name,
+        x: round(local[0]),
+        y: round(local[1]),
+        rotation: round(-pose.rotation),
+        width: box.w / SCALE,
+        height: box.h / SCALE,
+      };
+      fallback[slot.name] = { [slot.name]: region };
+      if (slot.name === 'weapon_R') fallback[slot.name].weapon_R_mirrored = structuredClone(region);
+    }
   }
-  return {
-    skeleton: {
-      spine: '4.2.00',
-      x: -PIVOT[0],
-      y: -(SIDE - PIVOT[1]),
-      width: SIDE,
-      height: SIDE,
-      fps: SPINE_KEY_FPS,
-      images: './',
+  const roles = { root: 'root', hips: 'hip', spine_mid: 'spine_mid', spine_upper: 'spine_upper', head: 'head' };
+  for (const side of ['L', 'R'])
+    for (const name of ['upper_arm', 'lower_arm', 'hand', 'thigh', 'shin', 'foot', 'ik_foot', 'ik_hand'])
+      roles[name + '_' + side] = name + '_' + side;
+  const ik = [];
+  for (const side of ['L', 'R'])
+    for (const limb of ['foot', 'hand']) {
+      const names = limb === 'foot' ? ['thigh_' + side, 'shin_' + side] : ['upper_arm_' + side, 'lower_arm_' + side],
+        a = world[names[0]],
+        b = world[names[1]],
+        c = world[limb + '_' + side];
+      ik.push({
+        name: 'ik_' + limb + '_' + side,
+        bones: names,
+        target: 'ik_' + limb + '_' + side,
+        bendPositive: (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x) > 0,
+        mix: 1,
+      });
+    }
+  const chains = [
+    {
+      name: 'hair_back',
+      kind: 'hair',
+      bones: ['hair_back_1', 'hair_back_2'],
+      stiffness: 0.4,
+      damping: 0.3,
+      gravity: 0.5,
+      inertia: 0.7,
     },
+    {
+      name: 'hair_ribbon',
+      kind: 'ribbon',
+      bones: ['ribbon_1', 'ribbon_2'],
+      stiffness: 0.25,
+      damping: 0.35,
+      gravity: 0.7,
+      inertia: 0.8,
+    },
+    ...['L', 'R'].map((side) => ({
+      name: 'sash_' + side,
+      kind: 'sash',
+      bones: ['sash_' + side + '_1', 'sash_' + side + '_2'],
+      stiffness: 0.35,
+      damping: 0.3,
+      gravity: 0.6,
+      inertia: 0.7,
+    })),
+    ...['L', 'R'].map((side) => ({
+      name: 'sleeve_' + side,
+      kind: 'sleeve',
+      bones: ['sleeve_tip_' + side],
+      stiffness: 0.5,
+      damping: 0.4,
+      gravity: 0.3,
+      inertia: 0.5,
+    })),
+  ];
+  const socketBones = {
+    origin: 'root',
+    hand_R: 'hand_R',
+    hand_L: 'hand_L',
+    back: 'spine_upper',
+    chest: 'spine_mid',
+    head_fx: 'head',
+    head_top: 'root',
+    orbit_center: 'root',
+    fly_feet: 'root',
+  };
+  const socketView = getCharacterViewState({
+    kind: 'player',
+    direction,
+    animation: 'idle',
+    equipped,
+    drawnInEight: false,
+    socketsOverride: {
+      hand_R: { x: world.hand_R.x, y: world.hand_R.y },
+      hand_L: { x: world.hand_L.x, y: world.hand_L.y },
+    },
+  });
+  const sockets = Object.entries(socketBones).map(([name, bone]) => {
+    const point = socketView.sockets[name],
+      pose = world[bone],
+      local = rotate([point.x - pose.x, point.y - pose.y], -pose.rotation);
+    return { name, bone, x: round(local[0]), y: round(local[1]) };
+  });
+  return {
+    format: 'vgtd-rig',
+    version: 1,
+    id: 'kiem-tu_' + direction,
+    kind: 'player',
+    direction,
+    canvas: { width: SIDE, height: SIDE },
     bones,
+    ik,
+    chains,
+    roles,
+    sockets,
     slots,
-    skins: [{ name: 'default', attachments }],
-    animations: { idle: idleAnimation() },
+    skins: [
+      { name: 'default', attachments },
+      { name: 'bones-only', attachments: fallback },
+    ],
   };
 }
 
-export function validateSkeleton(skeleton, direction) {
-  assert(skeleton.skeleton.spine.startsWith('4.2.'));
+export function validateRigDocument(rig, direction = rig.direction) {
+  assert.equal(rig.format, 'vgtd-rig');
+  assert.equal(rig.version, 1);
+  assert.equal(rig.direction, direction);
+  assert.deepEqual(rig.canvas, { width: SIDE, height: SIDE });
   const view = getCharacterViewState({
     kind: 'player',
     direction,
@@ -581,71 +779,107 @@ export function validateSkeleton(skeleton, direction) {
     drawnInEight: false,
   });
   assert.deepEqual(
-    skeleton.slots.map((s) => s.name),
+    rig.slots.map((s) => s.name),
     view.slotOrder,
   );
-  assert.equal(skeleton.slots.length, SPINE_SLOT_IDS.length);
-  assert(skeleton.bones.length <= RIG_LIMITS.player.bones);
-  const seen = new Set();
-  for (const b of skeleton.bones) {
-    assert(!seen.has(b.name));
-    assert(!b.parent || seen.has(b.parent));
-    seen.add(b.name);
+  assert.equal(rig.slots.length, SPINE_SLOT_IDS.length);
+  assert(rig.bones.length <= RIG_LIMITS.player.bones);
+  assert(rig.chains.length <= RIG_LIMITS.player.physicsConstraints);
+  const names = new Set();
+  for (const [i, b] of rig.bones.entries()) {
+    assert(!names.has(b.name));
+    assert(i === 0 ? b.parent === null : names.has(b.parent));
+    assert([b.x, b.y, b.rotation, b.length].every(Number.isFinite));
+    assert(b.length >= 0);
+    names.add(b.name);
   }
-  let vertices = 0;
-  for (const group of Object.values(skeleton.skins[0].attachments))
-    for (const mesh of Object.values(group)) {
-      const count = mesh.uvs.length / 2;
-      vertices += count;
-      assert.equal(mesh.vertices.length, count * 5);
-      assert(mesh.uvs.every((n) => Number.isFinite(n) && n >= 0 && n <= 1));
-      assert(mesh.triangles.every((n) => Number.isInteger(n) && n >= 0 && n < count));
-      for (let i = 0; i < mesh.vertices.length; i += 5) {
-        assert.equal(mesh.vertices[i], 1);
-        assert(skeleton.bones[mesh.vertices[i + 1]]);
-        assert.equal(mesh.vertices[i + 4], 1);
+  for (const bone of Object.values(rig.roles)) assert(names.has(bone));
+  for (const ik of rig.ik) {
+    assert(names.has(ik.target));
+    assert.equal(rig.bones.find((b) => b.name === ik.target).parent, 'root');
+    assert.equal(rig.bones.find((b) => b.name === ik.bones[1]).parent, ik.bones[0]);
+  }
+  for (const chain of rig.chains)
+    for (let n = 0; n < chain.bones.length; n++) {
+      assert(names.has(chain.bones[n]));
+      if (n) assert.equal(rig.bones.find((b) => b.name === chain.bones[n]).parent, chain.bones[n - 1]);
+    }
+  let maxVertices = 0;
+  for (const skin of rig.skins) {
+    let vertices = 0;
+    for (const group of Object.values(skin.attachments))
+      for (const mesh of Object.values(group)) {
+        assert(mesh.width > 0 && mesh.height > 0);
+        if (mesh.type === 'region') continue;
+        const count = mesh.vertices.length / 2;
+        vertices += count;
+        assert.equal(mesh.uvs.length, mesh.vertices.length);
+        assert(mesh.vertices.every(Number.isFinite));
+        assert(mesh.uvs.every((n) => Number.isFinite(n) && n >= 0 && n <= 1));
+        assert(
+          mesh.triangles.length % 3 === 0 && mesh.triangles.every((n) => Number.isInteger(n) && n >= 0 && n < count),
+        );
+        assert.equal(mesh.weights.length, count);
+        for (const weights of mesh.weights) {
+          assert(Math.abs(weights.reduce((sum, [, w]) => sum + w, 0) - 1) < 0.0001);
+          for (const [bone, weight] of weights) {
+            assert(names.has(bone));
+            assert(weight >= 0 && weight <= 1);
+          }
+        }
       }
-    }
-  assert(vertices <= RIG_LIMITS.player.meshVertices);
-  for (const [name, tracks] of Object.entries(skeleton.animations.idle.bones)) {
-    assert(seen.has(name));
-    for (const keys of Object.values(tracks)) {
-      assert.equal(keys[0].time, 0);
-      assert.equal(keys.at(-1).time, 2);
-      for (const k of keys) assert(Math.abs(k.time * SPINE_KEY_FPS - Math.round(k.time * SPINE_KEY_FPS)) < 0.001);
-      for (const prop of ['value', 'x', 'y'])
-        if (keys[0][prop] !== undefined) assert.equal(keys[0][prop], keys.at(-1)[prop]);
+    maxVertices = Math.max(maxVertices, vertices);
+  }
+  assert(maxVertices <= RIG_LIMITS.player.meshVertices);
+  const clip = idleClip(direction);
+  for (const track of clip.bones) {
+    assert(names.has(track.bone));
+    for (const keys of [track.translate, track.rotate].filter(Boolean)) {
+      assert.equal(keys[0].frame, 0);
+      assert.equal(keys.at(-1).frame, clip.frames);
+      for (const k of keys) assert(Number.isInteger(k.frame));
+      assert.deepEqual(keys[0].value, keys.at(-1).value);
     }
   }
-  return { bones: skeleton.bones.length, slots: skeleton.slots.length, meshVertices: vertices, physicsConstraints: 0 };
+  return {
+    bones: rig.bones.length,
+    slots: rig.slots.length,
+    meshVertices: maxVertices,
+    chains: rig.chains.length,
+    ik: rig.ik.length,
+  };
 }
 
-export function animatedWorld(skeleton, time = 0) {
-  const world = {};
-  const sample = (keys, t, prop) => {
+export function animatedWorld(rig, time = 0, clip = idleClip(rig.direction)) {
+  const world = {},
+    tracks = Object.fromEntries(clip.bones.map((t) => [t.bone, t])),
+    frame = time * SPINE_KEY_FPS;
+  const sample = (keys, prop) => {
     let a = keys[0],
       b = keys.at(-1);
     for (let i = 1; i < keys.length; i++)
-      if (keys[i].time >= t) {
+      if (keys[i].frame >= frame) {
         a = keys[i - 1];
         b = keys[i];
         break;
       }
-    const u = b.time === a.time ? 0 : (t - a.time) / (b.time - a.time);
-    return (a[prop] || 0) * (1 - u) + (b[prop] || 0) * u;
+    const u = b.frame === a.frame ? 0 : (frame - a.frame) / (b.frame - a.frame),
+      av = prop ? a.value[prop] : a.value,
+      bv = prop ? b.value[prop] : b.value;
+    return av * (1 - u) + bv * u;
   };
-  for (const bone of skeleton.bones) {
+  for (const bone of rig.bones) {
     const parent = bone.parent ? world[bone.parent] : { x: 0, y: 0, rotation: 0 },
-      tracks = skeleton.animations.idle.bones[bone.name] || {};
-    const local = [
-      bone.x + (tracks.translate ? sample(tracks.translate, time, 'x') : 0),
-      bone.y + (tracks.translate ? sample(tracks.translate, time, 'y') : 0),
-    ];
-    const offset = rotate(local, parent.rotation);
+      track = tracks[bone.name] || {},
+      local = [
+        bone.x + (track.translate ? sample(track.translate, 'x') : 0),
+        bone.y + (track.translate ? sample(track.translate, 'y') : 0),
+      ],
+      offset = rotate(local, parent.rotation);
     world[bone.name] = {
       x: parent.x + offset[0],
       y: parent.y + offset[1],
-      rotation: parent.rotation + bone.rotation + (tracks.rotate ? sample(tracks.rotate, time, 'value') : 0),
+      rotation: parent.rotation + bone.rotation + (track.rotate ? sample(track.rotate) : 0),
     };
   }
   return world;
@@ -673,13 +907,13 @@ export function renderPose(skeleton, parts, time = 0) {
   return output;
 }
 
-function packDirection(direction, parts) {
+function packDirection(direction, parts, canonical) {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'vgtd-rig-pack-')),
     input = path.join(temp, 'parts'),
     output = path.join(ROOT, 'tools/procgen/build/kiem-tu', direction);
   fs.mkdirSync(input);
   try {
-    for (const part of parts) {
+    for (const part of [...parts, ...canonical.map((p) => ({ ...p, name: 'slot_' + p.name }))]) {
       part.box = alphaBounds(part.image);
       if (part.box)
         save(path.join(input, part.name + '.png'), crop(part.image, part.box.x, part.box.y, part.box.w, part.box.h));
@@ -705,7 +939,7 @@ function packDirection(direction, parts) {
     );
     assert.equal(run.status, 0);
     const atlas = JSON.parse(fs.readFileSync(path.join(output, 'kiemtu_' + direction + '.json')));
-    assert.equal(atlas.pages.length, 1, 'Each direction must fit a single texture page');
+    assert.equal(atlas.pages.length, 1, 'Each direction must fit one page');
     const qa = spawnSync(
       process.execPath,
       [path.join(ROOT, 'tools/procgen/pipeline/validate_assets.js'), '--stage', 'packed', '--root', output],
@@ -723,79 +957,82 @@ function packDirection(direction, parts) {
 }
 
 async function build() {
-  const manifest = {
-    format: 'vgtd-kiemtu-rig',
-    version: 1,
-    placeholder: true,
-    release: false,
-    coordinateSpace: 'pivot-local-y-up',
-    textureScale: SCALE,
-    pivot: PIVOT,
-    mirrors: MIRRORED_DIRECTIONS,
-    animation: 'idle',
-    drawnInEight: false,
-    swordInHand: true,
-    equipped: [],
-    attachmentVariants: {
-      weapon_R: {
-        default: 'weapon_R',
-        mirrored: 'weapon_R_mirrored',
-        note: 'Idle alias, not separately authored asymmetric combat art',
+  const set = { id: 'kiem-tu', rigs: {} },
+    manifest = {
+      format: 'vgtd-rig-assets',
+      version: 1,
+      id: 'kiem-tu',
+      rig: 'tools/rig/data/kiem-tu.rig.json',
+      idle: 'tools/rig/data/kiem-tu.idle.json',
+      coordinateSpace: 'pivot-local-y-up',
+      textureScale: SCALE,
+      pivot: PIVOT,
+      mirrors: MIRRORED_DIRECTIONS,
+      animation: 'idle',
+      drawnInEight: false,
+      swordInHand: true,
+      equipped: [],
+      attachmentVariants: {
+        weapon_R: {
+          default: 'weapon_R',
+          mirrored: 'weapon_R_mirrored',
+          note: 'Idle alias, not separately authored asymmetric combat art',
+        },
       },
-    },
-    directions: {},
-    drawOrders: {},
-  };
+      directions: {},
+      drawOrders: {},
+    };
   for (const direction of DRAWN_DIRECTIONS) {
     const image = read(path.join(SOURCE_DIR, 'turnaround', direction + '.png'));
     assert.deepEqual([image.width, image.height], [SIZE, SIZE]);
-    const parts = separateParts(image, direction);
-    for (const part of parts) save(path.join(SOURCE_DIR, 'pieces', direction, part.name + '.png'), part.image);
+    const parts = separateParts(image, direction),
+      canonical = [];
+    for (const part of parts) {
+      part.box = alphaBounds(part.image);
+      save(path.join(SOURCE_DIR, 'pieces', direction, part.name + '.png'), part.image);
+    }
     for (const slot of SLOT_IDS) {
       const layer = new Image(SIZE, SIZE);
-      for (const p of parts.filter((p) => p.slot === slot)) layer.drawImage(p.image, 0, 0);
+      for (const part of parts.filter((p) => p.slot === slot)) layer.drawImage(part.image, 0, 0);
+      const box = alphaBounds(layer);
+      canonical.push({ name: slot, image: layer, box });
       save(path.join(SOURCE_DIR, 'parts', direction, slot + '.png'), layer);
     }
-    const { atlas, image: packed } = packDirection(direction, parts),
-      dir = path.join(CLIENT_DIR, direction);
-    const skeleton = makeSkeleton(direction, parts, atlas),
-      stats = validateSkeleton(skeleton, direction);
-    // Editor JSON import resolves image paths, not the runtime .atlas. Keep a
-    // straight-alpha page with the matching attachment path next to this copy.
-    save(path.join(SOURCE_DIR, 'spine', direction, 'kiemtu.png'), packed);
-    await json(path.join(SOURCE_DIR, 'spine', direction, 'kiemtu.json'), skeleton);
-    // Sources/packer are straight-alpha; only the delivered runtime texture is PMA.
+    const { atlas, image: packed } = packDirection(direction, parts, canonical),
+      rig = makeRigDocument(direction, parts, atlas, canonical),
+      stats = validateRigDocument(rig, direction),
+      dir = path.join(SOURCE_DIR, 'atlas', direction),
+      imagePath = 'kiemtu_' + direction + '.png';
+    const regions = [
+      { name: 'kiemtu_page', x: 0, y: 0, width: packed.width, height: packed.height },
+      ...Object.entries(atlas.frames).map(([name, f]) => ({ name, x: f.x, y: f.y, width: f.w, height: f.h })),
+    ];
+    const atlasData = { imagePath, width: packed.width, height: packed.height, premultipliedAlpha: true, regions };
     for (let i = 0; i < packed.data.length; i += 4)
       for (let c = 0; c < 3; c++) packed.data[i + c] = Math.round((packed.data[i + c] * packed.data[i + 3]) / 255);
-    save(path.join(dir, 'kiemtu.png'), packed);
-    fs.writeFileSync(
-      path.join(dir, 'kiemtu.atlas'),
-      `kiemtu.png\nsize: ${packed.width}, ${packed.height}\nformat: RGBA8888\nfilter: Linear, Linear\nrepeat: none\npma: true\nkiemtu\nbounds: 0, 0, ${packed.width}, ${packed.height}\n`,
-    );
-    await json(path.join(dir, 'kiemtu.json'), skeleton);
+    save(path.join(dir, imagePath), packed);
+    await json(path.join(dir, 'atlas.json'), atlasData);
     await json(
       path.join(SOURCE_DIR, 'pieces', direction, 'layout.json'),
       parts.map(({ name, slot, bone, box }) => ({ name, slot, bone, box })),
     );
-    save(path.join(dir, 'turnaround.png'), resizeArea(image, SIDE, SIDE));
-    save(path.join(dir, 'setup-preview.png'), resizeArea(renderPose(skeleton, parts, 0), SIDE, SIDE));
+    save(path.join(SOURCE_DIR, 'preview', direction + '.png'), resizeArea(image, SIDE, SIDE));
+    save(path.join(SOURCE_DIR, 'preview', direction + '_setup.png'), resizeArea(renderPose(rig, parts, 0), SIDE, SIDE));
+    set.rigs[direction] = rig;
     manifest.equipped = [
-      ...new Set([...manifest.equipped, ...skeleton.slots.filter((s) => s.attachment).map((s) => s.name)]),
+      ...new Set([...manifest.equipped, ...rig.slots.filter((s) => s.attachment).map((s) => s.name)]),
     ];
     manifest.directions[direction] = {
-      json: direction + '/kiemtu.json',
-      atlas: direction + '/kiemtu.atlas',
-      texture: direction + '/kiemtu.png',
+      atlas: path.relative(ROOT, path.join(dir, 'atlas.json')).replaceAll('\\', '/'),
+      texture: path.relative(ROOT, path.join(dir, imagePath)).replaceAll('\\', '/'),
       stats,
-      socketsOverride: {
-        ...Object.fromEntries(
-          ['hand_R', 'hand_L', 'chest', 'back'].map((name) => {
-            const pose = animatedWorld(skeleton)[name === 'back' ? 'chest' : name];
-            return [name, { x: round(pose.x), y: round(pose.y) }];
-          }),
-        ),
-        head_top: { x: 0, y: 104 },
-      },
+      packing: { padding: BUDGETS.ATLAS_PADDING_PX, extrude: 1 },
+      socketsOverride: Object.fromEntries(
+        ['hand_R', 'hand_L'].map((name) => {
+          const p = boneRig(direction).world[name];
+          return [name, { x: round(p.x), y: round(p.y) }];
+        }),
+      ),
     };
   }
   for (const direction of DIRECTIONS)
@@ -806,8 +1043,12 @@ async function build() {
       equipped: SLOT_IDS,
       drawnInEight: false,
     }).slotOrder;
-  await json(path.join(CLIENT_DIR, 'manifest.json'), manifest);
-  console.log('PASS: five directions, canonical slots, weighted meshes, rig budgets, looping 30fps-quantized idle');
+  await json(path.join(DATA_DIR, 'kiem-tu.rig.json'), set);
+  await json(path.join(DATA_DIR, 'kiem-tu.idle.json'), idleClip('S'));
+  await json(path.join(DATA_DIR, 'kiem-tu.assets.json'), manifest);
+  console.log(
+    'PASS: neutral RigSet, canonical slots, meshes/region fallback, 4 IK targets, 6 chains and typed idle Clip',
+  );
 }
 
 // Serialized into the review artifact. This is an independent FK preview, not a Spine runtime.
@@ -821,34 +1062,39 @@ function previewApp() {
     const r = (a * Math.PI) / 180;
     return [x * Math.cos(r) - y * Math.sin(r), x * Math.sin(r) + y * Math.cos(r)];
   };
-  function world(s, t) {
+  function world(rig, t) {
     const result = {},
+      clip = data.clips[rig.direction],
+      tracks = Object.fromEntries(clip.bones.map((t) => [t.bone, t])),
+      f = t * data.fps,
       sample = (keys, prop) => {
         let a = keys[0],
           b = keys.at(-1);
         for (let i = 1; i < keys.length; i++)
-          if (keys[i].time >= t) {
+          if (keys[i].frame >= f) {
             a = keys[i - 1];
             b = keys[i];
             break;
           }
-        const u = b.time === a.time ? 0 : (t - a.time) / (b.time - a.time);
-        return (a[prop] || 0) * (1 - u) + (b[prop] || 0) * u;
+        const u = b.frame === a.frame ? 0 : (f - a.frame) / (b.frame - a.frame),
+          av = prop ? a.value[prop] : a.value,
+          bv = prop ? b.value[prop] : b.value;
+        return av * (1 - u) + bv * u;
       };
-    for (const bone of s.bones) {
+    for (const bone of rig.bones) {
       const p = bone.parent ? result[bone.parent] : { x: 0, y: 0, rotation: 0 },
-        tracks = s.animations.idle.bones[bone.name] || {},
-        offset = rot(
+        track = tracks[bone.name] || {},
+        v = rot(
           [
-            bone.x + (tracks.translate ? sample(tracks.translate, 'x') : 0),
-            bone.y + (tracks.translate ? sample(tracks.translate, 'y') : 0),
+            bone.x + (track.translate ? sample(track.translate, 'x') : 0),
+            bone.y + (track.translate ? sample(track.translate, 'y') : 0),
           ],
           p.rotation,
         );
       result[bone.name] = {
-        x: p.x + offset[0],
-        y: p.y + offset[1],
-        rotation: p.rotation + bone.rotation + (tracks.rotate ? sample(tracks.rotate, 'value') : 0),
+        x: p.x + v[0],
+        y: p.y + v[1],
+        rotation: p.rotation + bone.rotation + (track.rotate ? sample(track.rotate) : 0),
       };
     }
     return result;
@@ -856,9 +1102,9 @@ function previewApp() {
   function draw(canvas, t) {
     const facing = select.value,
       base = data.mirrors[facing] || facing,
-      rig = data.directions[base],
-      setup = world(rig.skeleton, 0),
-      posed = world(rig.skeleton, t),
+      r = data.directions[base],
+      setup = world(r.skeleton, 0),
+      posed = world(r.skeleton, t),
       ctx = canvas.getContext('2d'),
       scale = canvas.width / data.side;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -867,24 +1113,23 @@ function previewApp() {
     ctx.translate(data.pivot[0], data.pivot[1]);
     ctx.scale(data.mirrors[facing] ? -1 : 1, -1);
     for (const slot of data.orders[facing])
-      for (const piece of rig.parts.filter((p) => p.slot === slot)) {
-        const a = setup[piece.bone],
-          b = posed[piece.bone];
+      for (const p of r.parts.filter((p) => p.slot === slot)) {
+        const a = setup[p.bone],
+          b = posed[p.bone];
         ctx.save();
         ctx.translate(b.x, b.y);
-        ctx.rotate((b.rotation * Math.PI) / 180);
-        ctx.rotate((-a.rotation * Math.PI) / 180);
+        ctx.rotate(((b.rotation - a.rotation) * Math.PI) / 180);
         ctx.translate(-a.x, -a.y);
         ctx.translate(-data.pivot[0], data.pivot[1]);
         ctx.scale(0.5, -0.5);
-        ctx.drawImage(piece.image, 0, 0);
+        ctx.drawImage(p.image, 0, 0);
         ctx.restore();
       }
     if (showBones.checked) {
       ctx.strokeStyle = '#f88757';
       ctx.lineWidth = 0.5;
-      for (const b of rig.skeleton.bones) {
-        if (!b.parent) continue;
+      for (const b of r.skeleton.bones) {
+        if (!b.parent || b.name.startsWith('ik_')) continue;
         const p = posed[b.parent],
           q = posed[b.name];
         ctx.beginPath();
@@ -935,22 +1180,31 @@ export function reviewArtifacts(directory) {
   fs.mkdirSync(directory, { recursive: true });
   const { Resvg } = require('@resvg/resvg-js');
   let svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1660"><rect width="1600" height="1660" fill="#26333c"/><g font-family="sans-serif" fill="#eef1ed"><text x="24" y="38" font-size="27">CLOUD DISCIPLE / DRAWN SWORD / RIG HANDOFF</text><text x="24" y="68" font-size="17">AI PLACEHOLDER — sources @2x, logical pivot (64,116). Generator FK previews, not Cocos captures.</text>';
+    '<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1660"><rect width="1600" height="1660" fill="#26333c"/><g font-family="sans-serif" fill="#eef1ed"><text x="24" y="38" font-size="27">CLOUD DISCIPLE / DRAWN SWORD / NEUTRAL RIG DATA</text><text x="24" y="68" font-size="17">AI PLACEHOLDER — sources @2x, logical pivot (64,116). Generator FK previews, not Cocos captures.</text>';
   const add = (image, x, y, w, h) => {
     svg += `<image href="data:image/png;base64,${image.toPNG().toString('base64')}" x="${x}" y="${y}" width="${w}" height="${h}"/>`;
   };
-  const payload = { side: SIDE, pivot: PIVOT, mirrors: MIRRORED_DIRECTIONS, orders: {}, directions: {} };
+  const payload = {
+    side: SIDE,
+    pivot: PIVOT,
+    mirrors: MIRRORED_DIRECTIONS,
+    orders: {},
+    directions: {},
+    fps: SPINE_KEY_FPS,
+    clips: {},
+  };
   for (const [n, direction] of DRAWN_DIRECTIONS.entries()) {
     const source = read(path.join(SOURCE_DIR, 'turnaround', direction + '.png')),
       parts = PIECES.map((p) => ({ ...p, image: read(path.join(SOURCE_DIR, 'pieces', direction, p.name + '.png')) }));
     for (const p of parts) p.box = alphaBounds(p.image);
-    const skeleton = JSON.parse(fs.readFileSync(path.join(CLIENT_DIR, direction, 'kiemtu.json'))),
+    const skeleton = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'kiem-tu.rig.json'))).rigs[direction],
       x = 24 + n * 312;
     svg += `<text x="${x}" y="100" font-size="20">${direction} / normalized source</text>`;
     add(source, x + 20, 108, 256, 256);
     svg += `<text x="${x}" y="398" font-size="17">Weighted setup / idle 0.5s</text>`;
     add(resizeArea(renderPose(skeleton, parts, 0), SIDE, SIDE), x + 18, 410, 128, 128);
     add(resizeArea(renderPose(skeleton, parts, 0.5), SIDE, SIDE), x + 160, 410, 128, 128);
+    payload.clips[direction] = idleClip(direction);
     payload.directions[direction] = {
       skeleton,
       parts: parts
@@ -985,22 +1239,22 @@ export function reviewArtifacts(directory) {
       equipped: SLOT_IDS,
       drawnInEight: false,
     }).slotOrder;
-  svg += `<text x="24" y="1625" font-size="16">${SLOT_IDS.length} logical groups / ${SPINE_SLOT_IDS.length} Spine slots / ${boneRig('S').bones.length} bones. Reserved blanks: orbit_back, wing, cape, sword_back, orbit_front.</text></g></svg>`;
+  svg += `<text x="24" y="1625" font-size="16">${SLOT_IDS.length} logical groups / ${SPINE_SLOT_IDS.length} paperdoll slots / ${boneRig('S').bones.length} bones. Reserved blanks: orbit_back, wing, cape, sword_back, orbit_front.</text></g></svg>`;
   fs.writeFileSync(path.join(directory, 'kiem-tu-rig-contact-sheet.png'), new Resvg(svg).render().asPng());
-  const html = `<!doctype html><html lang="vi"><meta charset="utf-8"><title>Kiếm tu — rig handoff</title><style>body{font:16px system-ui;background:#eef0ec;color:#24313a;max-width:1000px;margin:24px auto;padding:0 20px}label{display:inline-block;margin:8px}canvas{background:repeating-conic-gradient(#d6dcd7 0% 25%,#e7ebe5 0% 50%) 0 0/24px 24px;display:inline-block;vertical-align:top}#large{width:512px;max-width:100%;height:auto}#native{width:128px;height:128px;margin:20px}small{display:block;color:#54616a}input[type=range]{width:260px}</style><h1>Kiếm tu — rig bàn giao thử</h1><p>Concept A + kiếm rút tay phải. AI placeholder; chưa được phát hành. Xem FK từ dữ liệu sinh, <b>không phải Spine runtime hoặc Cocos</b>.</p><label>Hướng <select id="direction">${DIRECTIONS.map((d) => `<option>${d}</option>`).join('')}</select></label><label><input id="play" type="checkbox" checked>Chạy idle</label><label><input id="bones" type="checkbox">Hiện bones</label><label><input id="time" type="range" min="0" max="2" step=".01"><span id="clock"></span></label><div><canvas id="large" width="256" height="256"></canvas><canvas id="native" width="128" height="128"></canvas></div><small>Trái: phóng lớn. Phải: canvas thật 128×128. Feet/root cố định; idle 2 giây, khóa khoảng 8 Hz lượng tử hóa trên lưới 30 fps. SW/W/NW dùng mirror + draw order riêng.</small><p id="status">Người animate cần kiểm cutout, vùng vẽ bù ở khớp, mesh/weights và phần kiếm trước khi phát triển run/attack/cast. Chưa có animation sản xuất hoặc idle trong thành.</p><script id="rig-data" type="application/json">${JSON.stringify(payload).replaceAll('<', '\\u003c')}</script><script>(${previewApp.toString()})();</script></html>`;
+  const html = `<!doctype html><html lang="vi"><meta charset="utf-8"><title>Kiếm tu — neutral rig</title><style>body{font:16px system-ui;background:#eef0ec;color:#24313a;max-width:1000px;margin:24px auto;padding:0 20px}label{display:inline-block;margin:8px}canvas{background:repeating-conic-gradient(#d6dcd7 0% 25%,#e7ebe5 0% 50%) 0 0/24px 24px;display:inline-block;vertical-align:top}#large{width:512px;max-width:100%;height:auto}#native{width:128px;height:128px;margin:20px}small{display:block;color:#54616a}input[type=range]{width:260px}</style><h1>Kiếm tu — dữ liệu rig trung lập</h1><p>Concept A + kiếm rút tay phải. AI placeholder; chưa được phát hành. Xem FK từ dữ liệu sinh, <b>không phải DragonBones runtime hoặc Cocos</b>.</p><label>Hướng <select id="direction">${DIRECTIONS.map((d) => `<option>${d}</option>`).join('')}</select></label><label><input id="play" type="checkbox" checked>Chạy idle</label><label><input id="bones" type="checkbox">Hiện bones</label><label><input id="time" type="range" min="0" max="2" step=".01"><span id="clock"></span></label><div><canvas id="large" width="256" height="256"></canvas><canvas id="native" width="128" height="128"></canvas></div><small>Trái: phóng lớn. Phải: canvas thật 128×128. Feet/root cố định; idle 2 giây, khóa khoảng 8 Hz lượng tử hóa trên lưới 30 fps. SW/W/NW dùng mirror + draw order riêng.</small><p id="status">Bộ công cụ animation cần kiểm cutout, vùng vẽ bù ở khớp, mesh/weights và phần kiếm trước khi phát triển run/attack/cast. Chưa có animation sản xuất hoặc idle trong thành.</p><script id="rig-data" type="application/json">${JSON.stringify(payload).replaceAll('<', '\\u003c')}</script><script>(${previewApp.toString()})();</script></html>`;
   fs.writeFileSync(path.join(directory, 'kiem-tu-rig-preview.html'), html);
   console.log('Review artifacts:', directory);
 }
 
 export async function main(args = process.argv.slice(2)) {
   if (args[0] === 'import') {
-    const sheet = read(args[1]);
-    for (const { direction, image } of normalizeTurnaround(sheet))
+    for (const { direction, image } of normalizeTurnaround(read(args[1])))
       save(path.join(SOURCE_DIR, 'turnaround', direction + '.png'), image);
   } else if (args[0] === 'build') await build();
   else if (args[0] === 'validate') {
+    const set = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'kiem-tu.rig.json')));
+    assert.deepEqual(Object.keys(set.rigs), [...DRAWN_DIRECTIONS]);
     for (const d of DRAWN_DIRECTIONS) {
-      const skeleton = JSON.parse(fs.readFileSync(path.join(CLIENT_DIR, d, 'kiemtu.json')));
       for (const slot of SLOT_IDS) {
         const png = read(path.join(SOURCE_DIR, 'parts', d, slot + '.png'));
         assert.deepEqual([png.width, png.height], [SIZE, SIZE]);
@@ -1015,26 +1269,28 @@ export async function main(args = process.argv.slice(2)) {
           .filter((f) => f.endsWith('.png'))
           .sort(),
         PIECES.map((p) => p.name + '.png').sort(),
-        'Stale or missing part files',
+        'Stale/missing piece files',
       );
-      const straight = read(path.join(SOURCE_DIR, 'spine', d, 'kiemtu.png')),
-        pma = read(path.join(CLIENT_DIR, d, 'kiemtu.png'));
-      assert.deepEqual([straight.width, straight.height], [pma.width, pma.height]);
+      const atlas = JSON.parse(fs.readFileSync(path.join(SOURCE_DIR, 'atlas', d, 'atlas.json'))),
+        pma = read(path.join(SOURCE_DIR, 'atlas', d, atlas.imagePath));
+      assert(atlas.premultipliedAlpha);
+      assert.deepEqual([atlas.width, atlas.height], [pma.width, pma.height]);
       assert(pma.width <= BUDGETS.ATLAS_MAX_WEB_MOBILE && pma.height <= BUDGETS.ATLAS_MAX_WEB_MOBILE);
       assert(Number.isInteger(Math.log2(pma.width)) && Number.isInteger(Math.log2(pma.height)));
-      for (let i = 0; i < pma.data.length; i += 4) {
-        assert.equal(pma.data[i + 3], straight.data[i + 3]);
-        for (let c = 0; c < 3; c++)
-          assert.equal(pma.data[i + c], Math.round((straight.data[i + c] * straight.data[i + 3]) / 255));
-      }
-      assert(fs.readFileSync(path.join(CLIENT_DIR, d, 'kiemtu.atlas'), 'utf8').includes('pma: true\nkiemtu\nbounds:'));
-      console.log(d, validateSkeleton(skeleton, d), 'parts / atlas / PMA verified');
+      for (let i = 0; i < pma.data.length; i += 4)
+        for (let c = 0; c < 3; c++) assert(pma.data[i + c] <= pma.data[i + 3]);
+      const regions = new Set(atlas.regions.map((r) => r.name));
+      for (const skin of set.rigs[d].skins)
+        for (const group of Object.values(skin.attachments))
+          for (const a of Object.values(group)) assert(regions.has(a.path), 'Missing atlas region ' + a.path);
+      console.log(d, validateRigDocument(set.rigs[d], d), 'neutral data / pieces / atlas verified');
     }
-  } else if (args[0] === 'animation-table')
+  } else if (args[0] === 'review') reviewArtifacts(args[1]);
+  else if (args[0] === 'animation-table')
     console.log(['idle', 'run', 'attack', 'cast', 'hit', 'die'].map((id) => getAnimation(id)));
-  else if (args[0] === 'review') reviewArtifacts(args[1]);
-  else throw Error('Expected import <sheet.png>, build, validate, animation-table');
+  else throw Error('Expected import, build, validate or review');
 }
+
 if (
   process.argv[1] &&
   path.resolve(process.argv[1]).replaceAll('\\', '/') === fileURLToPath(import.meta.url).replaceAll('\\', '/')

@@ -1,8 +1,9 @@
 {
-  "format": "vgtd-kiemtu-rig",
+  "format": "vgtd-rig-assets",
   "version": 1,
-  "placeholder": true,
-  "release": false,
+  "id": "kiem-tu",
+  "rig": "tools/rig/data/kiem-tu.rig.json",
+  "idle": "tools/rig/data/kiem-tu.idle.json",
   "coordinateSpace": "pivot-local-y-up",
   "textureScale": 2,
   "pivot": [64, 116],
@@ -31,69 +32,39 @@
   },
   "directions": {
     "S": {
-      "json": "S/kiemtu.json",
-      "atlas": "S/kiemtu.atlas",
-      "texture": "S/kiemtu.png",
-      "stats": { "bones": 34, "slots": 13, "meshVertices": 136, "physicsConstraints": 0 },
-      "socketsOverride": {
-        "hand_R": { "x": -19.5, "y": 48 },
-        "hand_L": { "x": 19.5, "y": 48 },
-        "chest": { "x": 0, "y": 69 },
-        "back": { "x": 0, "y": 69 },
-        "head_top": { "x": 0, "y": 104 }
-      }
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/S/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/S/kiemtu_S.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": -19.5, "y": 48 }, "hand_L": { "x": 19.5, "y": 48 } }
     },
     "SE": {
-      "json": "SE/kiemtu.json",
-      "atlas": "SE/kiemtu.atlas",
-      "texture": "SE/kiemtu.png",
-      "stats": { "bones": 34, "slots": 13, "meshVertices": 136, "physicsConstraints": 0 },
-      "socketsOverride": {
-        "hand_R": { "x": -18.5, "y": 48 },
-        "hand_L": { "x": 15, "y": 48 },
-        "chest": { "x": 0, "y": 69 },
-        "back": { "x": 0, "y": 69 },
-        "head_top": { "x": 0, "y": 104 }
-      }
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/SE/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/SE/kiemtu_SE.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": -18.5, "y": 48 }, "hand_L": { "x": 15, "y": 48 } }
     },
     "E": {
-      "json": "E/kiemtu.json",
-      "atlas": "E/kiemtu.atlas",
-      "texture": "E/kiemtu.png",
-      "stats": { "bones": 34, "slots": 13, "meshVertices": 136, "physicsConstraints": 0 },
-      "socketsOverride": {
-        "hand_R": { "x": 0, "y": 47 },
-        "hand_L": { "x": -6, "y": 49 },
-        "chest": { "x": -5, "y": 69 },
-        "back": { "x": -5, "y": 69 },
-        "head_top": { "x": 0, "y": 104 }
-      }
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/E/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/E/kiemtu_E.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 0, "y": 47 }, "hand_L": { "x": -6, "y": 49 } }
     },
     "NE": {
-      "json": "NE/kiemtu.json",
-      "atlas": "NE/kiemtu.atlas",
-      "texture": "NE/kiemtu.png",
-      "stats": { "bones": 34, "slots": 13, "meshVertices": 128, "physicsConstraints": 0 },
-      "socketsOverride": {
-        "hand_R": { "x": 18, "y": 48 },
-        "hand_L": { "x": -16, "y": 48 },
-        "chest": { "x": -2, "y": 69 },
-        "back": { "x": -2, "y": 69 },
-        "head_top": { "x": 0, "y": 104 }
-      }
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/NE/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/NE/kiemtu_NE.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 128, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 18, "y": 48 }, "hand_L": { "x": -16, "y": 48 } }
     },
     "N": {
-      "json": "N/kiemtu.json",
-      "atlas": "N/kiemtu.atlas",
-      "texture": "N/kiemtu.png",
-      "stats": { "bones": 34, "slots": 13, "meshVertices": 128, "physicsConstraints": 0 },
-      "socketsOverride": {
-        "hand_R": { "x": 19.5, "y": 48 },
-        "hand_L": { "x": -19.5, "y": 48 },
-        "chest": { "x": 0, "y": 69 },
-        "back": { "x": 0, "y": 69 },
-        "head_top": { "x": 0, "y": 104 }
-      }
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/N/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/N/kiemtu_N.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 128, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 19.5, "y": 48 }, "hand_L": { "x": -19.5, "y": 48 } }
     }
   },
   "drawOrders": {
