@@ -13,13 +13,11 @@ export interface PackedRegion {
 export interface Atlas {
   readonly page: Bitmap;
   readonly regions: readonly PackedRegion[];
-  /** Spine 4.2 text atlas. */
-  readonly text: string;
 }
 
 /**
- * Atlas export settings the human animators must also use in Spine Editor 4.2
- * (see apps/client-cocos/docs/spine-export.md). Page size limit mirrors BUDGETS.ATLAS_MAX_WEB_MOBILE.
+ * Atlas settings for DragonBones exports (docs/32-animation-viewer.md section 4). Page size limit mirrors
+ * BUDGETS.ATLAS_MAX_WEB_MOBILE; padding mirrors BUDGETS.ATLAS_PADDING_PX; the PNG is stored premultiplied.
  */
 export const ATLAS_SETTINGS = { padding: 2, maxSize: 2048, premultipliedAlpha: true, powerOfTwo: true } as const;
 
@@ -30,7 +28,7 @@ function nextPow2(n: number): number {
 }
 
 /** Shelf packer (tallest first), padding on every side, smallest pow2 square <= maxSize. */
-export function packAtlas(pageName: string, parts: readonly Part[]): Atlas {
+export function packAtlas(parts: readonly Part[]): Atlas {
   const pad = ATLAS_SETTINGS.padding;
   const items = [...parts].sort((a, b) => b.bitmap.height - a.bitmap.height || a.name.localeCompare(b.name));
   for (let size = 64; size <= ATLAS_SETTINGS.maxSize; size = nextPow2(size + 1)) {
@@ -62,10 +60,7 @@ export function packAtlas(pageName: string, parts: readonly Part[]): Atlas {
         page.data.set(src.data.subarray(j * r.w * 4, (j + 1) * r.w * 4), ((r.y + j) * size + r.x) * 4);
       }
     }
-    const lines = [pageName, `size:${size},${size}`, 'filter:Linear,Linear', 'pma:true'];
-    for (const r of [...placed].sort((a, b) => a.name.localeCompare(b.name)))
-      lines.push(r.name, `bounds:${r.x},${r.y},${r.w},${r.h}`);
-    return { page, regions: placed, text: lines.join('\n') + '\n' };
+    return { page, regions: placed };
   }
   throw new Error(`parts do not fit in a ${ATLAS_SETTINGS.maxSize}px page`);
 }

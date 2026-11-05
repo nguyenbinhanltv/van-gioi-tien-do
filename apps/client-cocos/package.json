@@ -13,9 +13,11 @@
     "build:web": "node scripts/build-web.mjs",
     "serve": "node scripts/serve.mjs",
     "check:yflip": "node scripts/check-yflip.mjs",
-    "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs"
+    "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs",
+    "capture": "node scripts/capture.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.21.5"
+    "esbuild": "^0.21.5",
+    "puppeteer-core": "^23.0.0"
   }
 }

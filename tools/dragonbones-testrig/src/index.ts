@@ -2,7 +2,9 @@ import { DIRECTIONS, type Direction } from '@vgtd/shared';
 import { generateRig, type GeneratedRig } from './rig.js';
 
 export * from './atlas.js';
+export * from './dragonbones.js';
 export * from './motion.js';
+export * from './neutral.js';
 export * from './parts.js';
 export * from './png.js';
 export * from './rig.js';

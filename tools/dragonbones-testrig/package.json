@@ -1,7 +1,7 @@
 {
-  "name": "@vgtd/spine-testrig",
+  "name": "@vgtd/dragonbones-testrig",
   "version": "0.1.0",
-  "description": "Generates a minimal Spine 4.2 JSON test rig (placeholder parts, 13 animations, per-direction skeletons + atlases) for the Cocos animation viewer.",
+  "description": "Generates a minimal DragonBones 5.5 test rig (format-neutral rig + exporter; placeholder parts, 13 animations, per-direction armatures + atlases) for the Cocos animation viewer.",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",

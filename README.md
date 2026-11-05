@@ -13,6 +13,7 @@ packages/character      Hướng, paperdoll, bảng animation, footprint/socket/
 apps/client-cocos       Dự án Cocos Creator 3.x (placeholder)
 apps/server             Server MVP TypeScript (placeholder)
 tools/procgen           Sinh asset bằng code (tilemap, icon, ...)
+tools/dragonbones-testrig Sinh rig thử DragonBones 5.5 cho trình xem animation (@vgtd/dragonbones-testrig)
 docs/                   Tài liệu thiết kế
 ```
 

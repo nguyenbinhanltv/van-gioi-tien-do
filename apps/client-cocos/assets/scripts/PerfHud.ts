@@ -71,6 +71,11 @@ export class PerfHud {
     this.bg.getComponent(UITransform)!.setContentSize(w, 150);
   }
 
+  /** Show / hide the overlay. */
+  setVisible(v: boolean): void {
+    this.bg.active = v;
+  }
+
   /** Register a texture for the byte estimate. */
   trackTexture(w: number, h: number): void {
     this.textures.push({ w, h });

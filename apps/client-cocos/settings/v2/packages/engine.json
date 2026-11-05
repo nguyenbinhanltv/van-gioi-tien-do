@@ -149,7 +149,7 @@
             "_value": false
           },
           "spine": {
-            "_value": true,
+            "_value": false,
             "_option": "spine-4.2"
           },
           "spine-3.8": {
@@ -165,7 +165,7 @@
             }
           },
           "dragon-bones": {
-            "_value": false
+            "_value": true
           },
           "marionette": {
             "_value": false
@@ -197,6 +197,7 @@
           "audio",
           "base",
           "custom-pipeline",
+          "dragon-bones",
           "gfx-webgl",
           "gfx-webgl2",
           "graphics",
@@ -204,7 +205,6 @@
           "mask",
           "profiler",
           "rich-text",
-          "spine-4.2",
           "tween",
           "ui",
           "ui-skew"

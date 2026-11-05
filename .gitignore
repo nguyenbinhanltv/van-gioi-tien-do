@@ -25,5 +25,5 @@ apps/client-cocos/assets/scripts/vendor.meta
 apps/client-cocos/assets/scripts/vendor/
 apps/client-cocos/assets/resources/world.meta
 apps/client-cocos/assets/resources/world/
-apps/client-cocos/assets/resources/viewer.meta
-apps/client-cocos/assets/resources/viewer/
+apps/client-cocos/assets/resources/dragonbones/viewer.meta
+apps/client-cocos/assets/resources/dragonbones/viewer/

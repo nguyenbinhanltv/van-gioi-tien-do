@@ -17,6 +17,8 @@ npm run serve -w client-cocos            # http://localhost:7456
 - `--release` (`npm run build:web -w client-cocos -- --release`) build không debug.
 - Không chạy được trên CI (CI không có Cocos). `npm run typecheck -w client-cocos` chỉ chạy khi đã có `temp/` (sau lần build đầu), còn lại bỏ qua.
 
+Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.
+
 Tham số debug: `?input=touch|pointer` ép chế độ nhập; `#autotest` (hoặc `#autotest=dx,dy`) mô phỏng một cú click vào (tâm màn hình + dx,dy px) và in tọa độ nhân vật lên HUD.
 
 ## Cấu trúc
@@ -28,16 +30,16 @@ Tham số debug: `?input=touch|pointer` ép chế độ nhập; `#autotest` (ho�
 | `assets/scripts/vendor/`        | **Sinh ra, không commit**: `vgtd.mjs` bundle của `@vgtd/shared` + `@vgtd/client-core`.                                                                                                                                                          |
 | `assets/resources/world/`       | **Sinh ra, không commit**: bản sao tilemap procgen.                                                                                                                                                                                             |
 | `vendor-src/`                   | Điểm vào esbuild (`entry.ts`, `shared-subset.ts`).                                                                                                                                                                                              |
-| `settings/`                     | Cài đặt dự án (engine modules, trong đó **Spine 4.2**).                                                                                                                                                                                         |
+| `settings/`                     | Cài đặt dự án (engine modules, trong đó **DragonBones**).                                                                                                                                                                                       |
 | `build-config.json`             | Tùy chọn build headless.                                                                                                                                                                                                                        |
 
-Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/DECISIONS.md` (Spine 4.2) và I-07 trong `docs/31-bang-quyet-dinh.md` (cách nạp `@vgtd/*` bằng esbuild, chờ xác nhận).
+Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/DECISIONS.md` (DragonBones) và I-07 trong `docs/31-bang-quyet-dinh.md` (cách nạp `@vgtd/*` bằng esbuild, chờ xác nhận).
 
 > **Lưu ý CI:** CI không có Cocos nên không chạy `tsc` với typing của engine, không chạy eslint (thư mục này bị loại khỏi lint) và không build. Chỉ `check:yflip` chạy trong `typecheck` trên CI. Tên package là `client-cocos` (không phải `@vgtd/*`) vì trường `name` của `package.json` đồng thời là tên dự án Cocos và quyết định tên thư mục build; tên có dấu `@`/`/` có thể làm hỏng đường dẫn.
 
 ## Điểm nối cho các task sau
 
 - `WorldView` thay bằng chunk streaming của `client-world`; giữ hợp đồng `isTerrainWalkable(i, j)`.
-- `PlayerActor.body` thay bằng paperdoll/Spine của `character`; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
+- `PlayerActor.body` thay bằng paperdoll/armature DragonBones của `character`; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
 - `YSortLayer.add(node, depth)` là chỗ đăng ký mọi vật thể L3 (quái, NPC, người chơi khác).
 - `CameraRig.follow()` / `clientToWorld()` là giao diện camera cho client-core.

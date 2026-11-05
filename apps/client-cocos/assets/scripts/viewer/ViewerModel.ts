@@ -1,9 +1,12 @@
 import { character, shared } from '../vendor/vgtd.mjs';
+import type { CacheMode } from './CharacterActor';
 
 export type Direction = shared.Direction;
 export type AnimationId = character.AnimationId;
 export type SlotId = character.SlotId;
 export type SkinName = 'default' | 'red';
+/** single = one actor (A); compare = A and B; review = all 8 directions of A's animation side by side. */
+export type ViewMode = 'single' | 'compare' | 'review';
 
 /** Everything the control panel edits. Plain data: the scene reads it every frame. */
 export interface ViewerSettings {
@@ -12,7 +15,11 @@ export interface ViewerSettings {
   animation: AnimationId;
   /** Animation of actor B in compare mode. */
   animationB: AnimationId;
-  compare: boolean;
+  mode: ViewMode;
+  /** Onion skin: ghost copies of A two frames before (blue) and after (red). */
+  onion: boolean;
+  /** DragonBones animation cache mode (realtime supports mix / scrub / slot edits). */
+  cache: CacheMode;
   paused: boolean;
   /** Loop one-shot animations while viewing (events fire each pass). */
   repeatOneShots: boolean;
@@ -37,7 +44,9 @@ export function defaultSettings(): ViewerSettings {
     direction: 'S',
     animation: 'idle',
     animationB: 'walk',
-    compare: false,
+    mode: 'single',
+    onion: false,
+    cache: 'realtime',
     paused: false,
     repeatOneShots: true,
     timeScale: 1,
@@ -54,12 +63,16 @@ export function defaultSettings(): ViewerSettings {
 /** The Spine slot ids shown as toggles (13); the 2 orbit sprite nodes live outside the skeleton. */
 export const SPINE_SLOTS: readonly SlotId[] = character.SPINE_SLOT_IDS;
 
-export function viewStateFor(s: ViewerSettings, which: 'A' | 'B'): character.CharacterViewState {
+export function viewStateFor(
+  s: ViewerSettings,
+  which: 'A' | 'B',
+  direction: Direction = s.direction,
+): character.CharacterViewState {
   return character.getCharacterViewState({
     kind: 'player',
-    direction: s.direction,
+    direction,
     equipped: s.equipped,
-    animation: which === 'A' || !s.compare ? s.animation : s.animationB,
+    animation: which === 'A' || s.mode !== 'compare' ? s.animation : s.animationB,
     ...(s.drawnInEight === null ? {} : { drawnInEight: s.drawnInEight }),
     paperdoll: {
       mounted: s.flags.mounted,
@@ -76,6 +89,11 @@ export function viewStateFor(s: ViewerSettings, which: 'A' | 'B'): character.Cha
 export function hiddenSpineSlots(view: character.CharacterViewState): Set<SlotId> {
   const visible = new Set(view.visibleSlots.map((r) => r.slot));
   return new Set(SPINE_SLOTS.filter((sl) => !visible.has(sl)));
+}
+
+/** Paperdoll variant index used by DragonBones displays (0 = default, 1 = red). */
+export function skinIndex(s: SkinName): number {
+  return s === 'red' ? 1 : 0;
 }
 
 /**

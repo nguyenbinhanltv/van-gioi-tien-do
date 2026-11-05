@@ -1,6 +1,6 @@
 ---
 name: cocos-creator
-description: Cocos Creator 3.8.8 conventions for the Vạn Giới Tiên Đồ client (apps/client-cocos) - component patterns, the single y-flip adapter, headless build, editor path env var, how @vgtd/* workspace packages reach Cocos, Spine version. Use when editing apps/client-cocos or building/running the Cocos client.
+description: Cocos Creator 3.8.8 conventions for the Vạn Giới Tiên Đồ client (apps/client-cocos) - component patterns, the single y-flip adapter, headless build, editor path env var, how @vgtd/* workspace packages reach Cocos, DragonBones animation format and the animation viewer. Use when editing apps/client-cocos or building/running the Cocos client.
 ---
 
 # Cocos Creator 3.8.8 in this repo
@@ -55,20 +55,19 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 
 ## Engine settings
 
-`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, dragon-bones, video, webview, particle-2d); **Spine 4.2** selected (`spine` `_option: "spine-4.2"` and `spine-4.2` in `includeModules`; locked as D25 in docs/DECISIONS.md - skeletons must be exported from Spine Editor 4.2.x). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
+`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, video, webview, particle-2d); **dragon-bones enabled, Spine cropped** (D35: `dragon-bones` in `includeModules`, `spine._value = false`; reversible by re-adding `spine-4.2`). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
 
 ## Integration seams (later tasks)
 
-`WorldView` -> client-world chunk streaming (keep `isTerrainWalkable`). `PlayerActor.body` -> paperdoll/Spine from the character package (Player/Boss: Spine 5 directions + mirror; keep `pos`). Register every L3 object through `YSortLayer.add(node, depth)`.
+`WorldView` -> client-world chunk streaming (keep `isTerrainWalkable`). `PlayerActor.body` -> paperdoll/DragonBones armature from the character package (Player/Boss: 5 directions + mirror; keep `pos`). Register every L3 object through `YSortLayer.add(node, depth)`.
 
-## Animation viewer (Spine 4.2)
+## Animation viewer (DragonBones)
 
-Scene `assets/scenes/Viewer.scene` (component `ViewerScene`), opened with `http://localhost:7456/#viewer` (Bootstrap redirects on the hash; params in `docs/32-spine-viewer.md`). Code in `assets/scripts/viewer/`: `ViewerModel` (settings + `@vgtd/character` view state), `SpineActor` (one `sp.Skeleton`, applies a view state), `ViewerPanel` (DOM control panel; bottom sheet on mobile), `ViewerScene` (wiring, HUD). The rig comes from `tools/spine-testrig` via `prepare:assets` into `assets/resources/viewer/` (git-ignored); an animator's export goes in another `resources/` folder and is opened with `#viewer&src=<folder>`.
+Scene `assets/scenes/Viewer.scene` (component `ViewerScene`), opened with `http://localhost:7456/#viewer` (Bootstrap redirects on the hash). Full guide, URL params, adapter contract, how to add a character, runtime limits: `docs/32-animation-viewer.md`. Code in `assets/scripts/viewer/`: `CharacterActor` (adapter interface), `DragonBonesActor` (the only implementation), `ViewerModel` (settings + `@vgtd/character` view state), `ViewerPanel` (DOM control panel), `ViewerScene` (modes single / compare / review, onion skin, HUD, `window.__vgtdViewer` hook). Rig from `tools/dragonbones-testrig` via `prepare:assets` into `assets/resources/dragonbones/viewer/` (git-ignored); your own rig goes in another `assets/resources/dragonbones/<name>/` folder, opened with `#viewer&src=dragonbones/<name>&stem=<stem>`. Headless visual QA: `npm run capture -w client-cocos` (contact sheets / GIF / seam metrics).
 
 Gotchas learned the hard way:
 
-- **Cocos runs a LOOSE Babel transform over all scripts in `assets/`, including the vendor bundle**: `[...set]` / `for (x of set)` only work for arrays there. `prepare.mjs` therefore lowers the vendor bundle to ES5 with `ts.transpileModule(downlevelIteration)`. In your own scripts use `Array.from(set)` (never spread a Set/Map/NodeList) - `check-yflip` does not catch this.
-- `sp.Skeleton` realtime mode is required for scrub / mix / live slot edits (`setAnimationCacheMode(REALTIME)`); scrub = set `entry.trackTime`, then `paused=false; updateAnimation(0); paused=prev`.
-- Hide a slot with `slot.setAttachment(null)`, show with `skeleton.setAttachment(slot, slot)`; re-hide after `setSkin`.
-- Spine importer: `rig_X.json` + `rig_X.atlas` + `rig_X.png` in one folder import as `sp.SkeletonData` automatically (headless build is enough); load with `resources.load('<folder>/rig_X', sp.SkeletonData)`.
-- Screenshots of the AO browser are black until the page is fully loaded (10-90 s with software GL), URL query values are redacted (hash params are not), `ao preview` of an already open URL does not reload: open a new tab and close the old one. The DOM panel appears in `ao browser snapshot --interactive` once loaded, so controls can be clicked with `ao browser click`.
+- **Cocos runs a LOOSE Babel transform over all scripts in `assets/`, including the vendor bundle**: `[...set]` / `for (x of set)` only work for arrays there. `prepare.mjs` lowers the vendor bundle to ES5 with `ts.transpileModule(downlevelIteration)`. In your own scripts use `Array.from(set)` (never spread a Set/Map/NodeList); `check-yflip` does not catch this.
+- DragonBones: `ArmatureDisplay.getArmatureNames()` is empty at runtime (use the `<stem>_<DIR>` name); realtime mode only for `animation.fadeIn` / `AnimationState.currentTime` scrub / `slot.displayIndex` (-1 hides); the fade clock stops at `timeScale 0`, so do not fade while paused; shared/private cache modes allow only `playAnimation` + `timeScale`; `premultipliedAlpha = true` for premultiplied PNGs; DragonBones data is y-down / clockwise (conversion lives in the testrig exporter only).
+- Importer: `*_ske.json` + `*_tex.json` + `*_tex.png` in one folder import as `DragonBonesAsset` / `DragonBonesAtlasAsset` (headless build is enough); load with `resources.load('<folder>/<stem>_<DIR>_ske', dragonBones.DragonBonesAsset)` and `..._tex` for the atlas.
+- AO browser: screenshots are black until the page is fully loaded (10-90 s with software GL), URL query values are redacted (hash params are not), `ao preview` of an already open URL does not reload: open a new tab and close the old one. The DOM panel appears in `ao browser snapshot --interactive`, so controls can be clicked with `ao browser click`.

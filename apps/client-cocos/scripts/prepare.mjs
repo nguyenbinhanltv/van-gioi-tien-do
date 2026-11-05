@@ -1,7 +1,7 @@
 // Prepares generated, git-ignored inputs for the Cocos project:
 //   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core
 //   2. assets/resources/world/*                 <- tilemap from @vgtd/procgen (npm run gen:tilemap)
-//   3. assets/resources/viewer/*                <- Spine 4.2 test rig from @vgtd/spine-testrig
+//   3. assets/resources/dragonbones/viewer/*    <- DragonBones 5.5 test rig from @vgtd/dragonbones-testrig
 // Run: npm run prepare:assets -w client-cocos   (also invoked by build:web)
 import { build } from 'esbuild';
 import ts from 'typescript';
@@ -69,11 +69,14 @@ mkdirSync(worldDir, { recursive: true });
 copyFileSync(join(out, 'map.json'), join(worldDir, 'iso-map.json'));
 copyFileSync(join(out, 'tileset.json'), join(worldDir, 'iso-tileset.json'));
 copyFileSync(join(out, 'tileset.png'), join(worldDir, 'iso-tileset.png'));
-// 3. Spine 4.2 test rig for the animation viewer (tools/spine-testrig) -> assets/resources/viewer
-const viewerDir = join(root, 'assets/resources/viewer');
+// 3. DragonBones 5.5 test rig for the animation viewer (tools/dragonbones-testrig) -> assets/resources/dragonbones/viewer
+rmSync(join(root, 'assets/resources/viewer'), { recursive: true, force: true }); // old Spine-era location
+rmSync(join(root, 'assets/resources/viewer.meta'), { force: true });
+const viewerDir = join(root, 'assets/resources/dragonbones/viewer');
 rmSync(viewerDir, { recursive: true, force: true });
-const gen = spawnSync(process.execPath, [join(repo, 'tools/spine-testrig/scripts/generate.mjs'), viewerDir], {
+mkdirSync(viewerDir, { recursive: true });
+const gen = spawnSync(process.execPath, [join(repo, 'tools/dragonbones-testrig/scripts/generate.mjs'), viewerDir], {
   stdio: 'inherit',
 });
-if (gen.status !== 0) throw new Error('spine-testrig generation failed');
-console.log('prepared vendor bundle + tilemap + spine test rig');
+if (gen.status !== 0) throw new Error('dragonbones-testrig generation failed');
+console.log('prepared vendor bundle + tilemap + DragonBones test rig');

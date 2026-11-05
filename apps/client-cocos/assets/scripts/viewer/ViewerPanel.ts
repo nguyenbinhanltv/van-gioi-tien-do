@@ -9,7 +9,7 @@ import {
   type SlotId,
   type ViewerSettings,
 } from './ViewerModel';
-import type { ActorFrame } from './SpineActor';
+import type { ActorFrame, SeamMetric } from './CharacterActor';
 
 export interface PanelInfo {
   a: ActorFrame | null;
@@ -19,6 +19,13 @@ export interface PanelInfo {
   /** Slots whose rig setup order differs from the paperdoll table for the requested direction. */
   drawDelta: string[];
   events: string[];
+  /** Loop seam of A's animation (realtime only). */
+  seam: SeamMetric | null;
+  /** Realtime-only features (scrub, mix, slot edits) available. */
+  canSeek: boolean;
+  rigSource: string;
+  /** performance.now() of the last loop wrap (flashes the seam badge). */
+  wrapAt: number;
 }
 
 export interface PanelHandlers {
@@ -71,6 +78,8 @@ const CSS = `
 .vv .row2{display:flex;gap:6px;margin:6px 0}
 .vv .row2 button{flex:1}
 .vv a{color:#8fb0ff}
+.vv .wrap{display:inline-block;padding:1px 8px;border-radius:10px;background:#1e2740;color:#5a6a95}
+.vv .wrap.hot{background:#d9534f;color:#fff}
 `;
 
 const TABS = [
@@ -78,7 +87,7 @@ const TABS = [
   ['dir', 'Dir'],
   ['play', 'Play'],
   ['layers', 'Layers'],
-  ['compare', 'Compare'],
+  ['compare', 'Modes'],
   ['info', 'Info'],
 ] as const;
 
@@ -144,17 +153,22 @@ export class ViewerPanel {
    <label class="row"><span class="k">mix (s)</span><input type="range" min="0" max="50" value="12" data-r="mix"><span class="v" data-r="mixv">0.12</span></label>
    <label class="row"><span class="k">profile</span><select data-r="profile"><option value="pc">pc (60 fps)</option><option value="mobileWeb">mobile/web (30)</option><option value="far">far (15)</option></select></label>
    <label class="chk"><input type="checkbox" data-r="repeat"><span>repeat one-shots</span></label>
+   <div class="info"><span data-r="wrap" class="wrap">&#9679; wrap</span></div>
    <div class="info" data-r="timeinfo"></div></section>
- <section data-sec="layers"><h3>Paperdoll layers (13 Spine slots)</h3>${slots}
+ <section data-sec="layers"><h3>Paperdoll layers (13 slots)</h3>${slots}
    <div class="info">orbit_back / orbit_front are sprite nodes outside the skeleton (draw order 1 / 15).</div>
    <h3 style="margin-top:10px">Conflicts</h3>${flag('mounted', 'mounted (hides wing)')}${flag('swordInHand', 'sword in hand (hides sword_back)')}${flag('swordFlying', 'sword flying (hides sword_back)')}${flag('hoodedHeadwear', 'hood (hides hair_front)')}${flag('longRobe', 'long robe')}
    <label class="row"><span class="k">skin</span><select data-r="skin"><option value="default">default (blue)</option><option value="red">red</option></select></label>
    <div class="info" data-r="hidden"></div></section>
- <section data-sec="compare"><h3>Compare two animations</h3>
-   <label class="chk"><input type="checkbox" data-r="compare"><span>side by side (A left, B right)</span></label>
+ <section data-sec="compare"><h3>View mode</h3>
+   <div class="row2"><button class="b" data-mode="single">Single</button><button class="b" data-mode="compare">Compare</button><button class="b" data-mode="review">Review</button></div>
+   <div class="info">Compare: A and B side by side. Review: all 8 directions (5 drawn + mirror) of A's animation, synced.</div>
    <label class="row"><span class="k">B plays</span><select data-r="animb">${animsB}</select></label>
+   <label class="chk"><input type="checkbox" data-r="onion"><span>onion skin (blue = -2f, red = +2f)</span></label>
    <div class="row2"><button class="b" data-act="restart">Sync restart</button></div>
-   <div class="info" data-r="cmpinfo"></div></section>
+   <label class="row"><span class="k">cache mode</span><select data-r="cache"><option value="realtime">realtime</option><option value="shared">shared cache</option><option value="private">private cache</option></select></label>
+   <div class="info" data-r="cmpinfo"></div>
+   <div class="info" data-r="seam" style="margin-top:6px"></div></section>
  <section data-sec="info"><h3>Events &amp; checks</h3><div class="info" data-r="events">-</div>
    <div class="info" data-r="draworder" style="margin-top:6px"></div>
    <div class="info" style="margin-top:8px">keys: Space pause, &larr;/&rarr; direction, &uarr;/&darr; animation, [ ] speed<br><a href="#" data-act="world">&larr; world demo</a></div></section>
@@ -176,11 +190,14 @@ export class ViewerPanel {
     };
     this.el.addEventListener('click', (ev) => {
       const t = (ev.target as HTMLElement).closest(
-        '[data-anim],[data-dir],[data-act],[data-tab]',
+        '[data-anim],[data-dir],[data-act],[data-tab],[data-mode]',
       ) as HTMLElement | null;
       if (!t) return;
       const d = t.dataset;
-      if (d.tab) {
+      if (d.mode) {
+        s.mode = d.mode as ViewerSettings['mode'];
+        changed();
+      } else if (d.tab) {
         this.tab = d.tab as typeof this.tab;
         this.sync();
       } else if (d.anim) {
@@ -200,7 +217,7 @@ export class ViewerPanel {
         s.paused = true;
         this.sync();
         this.h.onChange();
-        this.h.onStep((d.act === 'step+' ? 1 : -1) / 30); // one Spine key (30 fps)
+        this.h.onStep((d.act === 'step+' ? 1 : -1) / 30); // one key (30 fps)
       } else if (d.act === 'world') {
         ev.preventDefault();
         location.hash = '';
@@ -239,8 +256,12 @@ export class ViewerPanel {
       s.animationB = (e.target as HTMLSelectElement).value as AnimationId;
       changed();
     });
-    this.q<HTMLInputElement>('[data-r=compare]').addEventListener('change', (e) => {
-      s.compare = (e.target as HTMLInputElement).checked;
+    this.q<HTMLInputElement>('[data-r=onion]').addEventListener('change', (e) => {
+      s.onion = (e.target as HTMLInputElement).checked;
+      changed();
+    });
+    this.q<HTMLSelectElement>('[data-r=cache]').addEventListener('change', (e) => {
+      s.cache = (e.target as HTMLSelectElement).value as ViewerSettings['cache'];
       changed();
     });
     this.q<HTMLInputElement>('[data-r=repeat]').addEventListener('change', (e) => {
@@ -312,7 +333,9 @@ export class ViewerPanel {
     for (const cb of this.all<HTMLInputElement>('[data-slot]')) cb.checked = s.equipped.has(cb.dataset.slot as SlotId);
     for (const cb of this.all<HTMLInputElement>('[data-flag]'))
       cb.checked = (s.flags as Record<string, boolean>)[cb.dataset.flag!]!;
-    this.q<HTMLInputElement>('[data-r=compare]').checked = s.compare;
+    this.q<HTMLInputElement>('[data-r=onion]').checked = s.onion;
+    this.q<HTMLSelectElement>('[data-r=cache]').value = s.cache;
+    for (const b of this.all('[data-mode]')) b.classList.toggle('on', b.dataset.mode === s.mode);
     this.q<HTMLInputElement>('[data-r=repeat]').checked = s.repeatOneShots;
     this.q<HTMLSelectElement>('[data-r=animb]').value = s.animationB;
     this.q<HTMLSelectElement>('[data-r=profile]').value = s.profile;
@@ -350,7 +373,7 @@ export class ViewerPanel {
       this.q<HTMLInputElement>('[data-r=scrub]').value = String(Math.round((info.a.time / info.a.duration) * 1000));
     this.q('[data-r=scrubv]').textContent = info.a ? info.a.time.toFixed(2) : '-';
     this.q('[data-r=timeinfo]').textContent =
-      `A ${fmt(info.a)}\n${a.loop ? 'loop' : 'one-shot'}  table ${a.fps} fps  Spine playback ${a.playbackFps} fps\n` +
+      `A ${fmt(info.a)}\n${a.loop ? 'loop' : 'one-shot'}  table ${a.fps} fps  playback ${a.playbackFps} fps\n` +
       `events: ${a.events.map((e) => `${e.name}@${'frame' in e.at ? 'f' + e.at.frame : e.at.phase}`).join(', ') || '-'}`;
     const v = info.viewA;
     this.q('[data-r=dirinfo]').textContent =
@@ -360,9 +383,26 @@ export class ViewerPanel {
     const unequipped = SPINE_SLOTS.filter((sl) => !s.equipped.has(sl));
     this.q('[data-r=hidden]').textContent =
       `hidden by rules: ${hidden.join(', ') || '-'}\nunequipped: ${unequipped.join(', ') || '-'}`;
-    this.q('[data-r=cmpinfo]').textContent = s.compare
-      ? `A ${s.animation}: ${fmt(info.a)}\nB ${s.animationB}: ${fmt(info.b)}`
-      : 'compare is off';
+    this.q('[data-r=cmpinfo]').textContent =
+      (s.mode === 'compare'
+        ? `A ${s.animation}: ${fmt(info.a)}
+B ${s.animationB}: ${fmt(info.b)}
+`
+        : `mode: ${s.mode}
+`) +
+      `rig: ${info.rigSource}
+` +
+      (info.canSeek
+        ? 'realtime: mix, scrub, slot toggles available'
+        : 'CACHED mode: no mix / scrub / slot toggles (DragonBones limitation)');
+    this.q('[data-r=wrap]').classList.toggle('hot', now - info.wrapAt < 250);
+    const sm = info.seam;
+    this.q('[data-r=seam]').innerHTML = sm
+      ? sm.loop
+        ? `loop seam: wrap step ${sm.seamStep.toFixed(1)} vs mean step ${sm.meanStep.toFixed(1)} (x${sm.ratio.toFixed(2)}) ` +
+          (sm.ratio > 2.5 ? '<span class="warn">POP at the loop point</span>' : 'ok')
+        : 'one-shot: no loop seam'
+      : 'loop seam: n/a';
     this.q('[data-r=events]').textContent = info.events.length ? info.events.join('\n') : 'no events yet';
     const d = info.drawDelta;
     this.q('[data-r=draworder]').innerHTML = d.length
@@ -372,6 +412,11 @@ export class ViewerPanel {
 
   private defaultEight(v: character.CharacterViewState): boolean {
     return v.skeletonDirection === v.direction && !v.mirrored && ['W', 'SW', 'NW'].includes(v.direction);
+  }
+
+  /** Hide / show the whole panel (clean capture frames). */
+  setVisible(v: boolean): void {
+    this.el.style.display = v ? '' : 'none';
   }
 
   destroy(): void {
