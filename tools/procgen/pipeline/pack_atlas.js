@@ -22,7 +22,7 @@ function parseArgs(argv) {
     const m = argv[i].match(/^--([a-z]+)(?:=(.*))?$/);
     if (!m) continue;
     const v = m[2] !== undefined ? m[2] : argv[++i];
-    o[m[1]] = ['max', 'padding', 'size'].includes(m[1]) ? Number(v) : v;
+    o[m[1]] = ['max', 'padding', 'size', 'extrude'].includes(m[1]) ? Number(v) : v;
   }
   if (!o.in) throw new Error('Thiếu --in <thư mục PNG>');
   return o;
@@ -82,7 +82,12 @@ function main() {
     return { name: f.replace(/\.png$/, ''), img, w: img.width, h: img.height };
   });
 
-  const pages = shelfPack(items, o.max, o.padding);
+  // An explicit extrusion reserves its own pixels in addition to clear padding.
+  // Omitted --extrude preserves the legacy padding-as-extrusion behavior.
+  const extrude = o.extrude ?? o.padding;
+  const gutter = o.extrude === undefined ? o.padding : o.padding + extrude;
+  if (!Number.isInteger(extrude) || extrude < 0) throw new Error('Invalid extrusion');
+  const pages = shelfPack(items, o.max, gutter);
   fs.mkdirSync(o.out, { recursive: true });
   const frames = {};
   const meta = [];
@@ -90,7 +95,7 @@ function main() {
     const W = nextPow2(p.usedW), H = nextPow2(p.usedH);
     const sheet = new Image(W, H);
     for (const it of p.placed) {
-      blitExtrude(sheet, it.img, it.x, it.y, o.padding);
+      blitExtrude(sheet, it.img, it.x, it.y, extrude);
       frames[it.name] = { page: k, x: it.x, y: it.y, w: it.w, h: it.h };
     }
     const file = `${o.name}_${k}.png`;
@@ -98,6 +103,7 @@ function main() {
     meta.push({ file, width: W, height: H, count: p.placed.length });
   });
   const json = { format: 'tutien-atlas', version: 1, name: o.name, maxSize: o.max, padding: o.padding, pages: meta, frames };
+  if (o.extrude !== undefined) json.extrude = extrude;
   fs.writeFileSync(path.join(o.out, `${o.name}.json`), JSON.stringify(json, null, 2));
   console.log(`✔ ${o.name}: ${items.length} ảnh → ${meta.map((m) => `${m.file} ${m.width}×${m.height}`).join(', ')}`);
 }

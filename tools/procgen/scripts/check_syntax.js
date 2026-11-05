@@ -13,7 +13,7 @@ const files = [];
     if (SKIP.has(e.name)) continue;
     const p = path.join(d, e.name);
     if (e.isDirectory()) walk(p);
-    else if (e.name.endsWith('.js')) files.push(p);
+    else if (e.name.endsWith('.js') || e.name.endsWith('.mjs')) files.push(p);
   }
 })(root);
 

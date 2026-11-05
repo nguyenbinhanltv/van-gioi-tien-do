@@ -100,6 +100,15 @@ Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất �
 
 - Đã đối chiếu với 20–29 (PR #68): số CCU 100 / tick p99 ≤ 40 ms của 10 và `CastStart` / AOE trên lưới ô của 11 đã được 20–24, 28, 29 dùng làm đầu vào; không phát sinh lệch mới (T12 vẫn mở cho phần sổ cái / link của 20–28).
 
+## Lô art placeholder đầu tiên — 2026-11-05
+
+- Công cụ `image_gen.imagegen` không công bố tên/phiên bản mô hình hoặc seed. [Hồ sơ](ASSET-LICENSES.md) ghi đúng giới hạn này; cần người dùng chấp nhận cách ghi hoặc cung cấp cách xác minh trước khi hoàn tất PR. Không được tự điền phiên bản mô hình.
+- Chủ art tạm thời (người dùng) cần duyệt tỷ lệ ~5,5–6 đầu, hướng sáng NW, thang xám/độ đọc 48 px và lượt chỉnh tay 48 px; lô chưa đủ điều kiện phát hành theo 18 §9, Q3/Q4.
+- ADR-020: animation nào cần đủ 8 hướng vì bất đối xứng? Lô chỉ idle tay không và mirror metadata, không quyết định chính sách animation có vũ khí.
+- ADR-021: quy ước trục/local transform cho socket vũ khí? Lô chưa có rig/socket.
+- Bảng màu Ngũ hành và vùng ở 18 §2.3–2.4 vẫn là đề xuất; màu trong lô không khóa bảng màu sản xuất.
+- Tile nước trong lô là mẫu tĩnh; chuyển cỏ–đá mới có một mặt nạ mẫu, chưa là bộ Wang hoàn chỉnh. KTX2/ASTC/WebP và tích hợp runtime Cocos chưa kiểm chứng trong lô này; âm thanh được bỏ qua theo phạm vi.
+
 ## 8. Rà soát chéo 2026-11-05 (docs 00–29): mâu thuẫn và khoảng trống còn mở
 
 Nguồn: báo cáo rà soát chéo trong mô tả PR của nhánh `docs-cross-review`. Các mục dưới **không được tự quyết**; mỗi mục cần chủ dự án hoặc chủ tài liệu chốt (đề xuất mặc định nằm ở các bảng "Câu hỏi cần chốt" được dẫn).
