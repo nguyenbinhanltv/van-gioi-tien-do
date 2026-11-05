@@ -6,3 +6,4 @@ package-lock.json
 apps/client-cocos/library
 apps/client-cocos/temp
 packages/client-core
+tools/procgen
