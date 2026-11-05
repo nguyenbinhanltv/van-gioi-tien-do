@@ -139,13 +139,22 @@ spec:
       timeout: 25m
       retry: { max_attempts: 2, retry_on_exit_codes: [1, 124] }
       steps:
+        # (1) Chạy script chuẩn TRƯỚC: ghi build/raw/render/logs/*.log. Lỗi shader (mã 20) không làm hỏng
+        #     bước ở đây vì còn cơ hội để agent sửa; kết quả cuối do lần chạy canonical_render phía dưới quyết định.
+        - name: render_first
+          continue_on_error: true
+          run: bash pipeline/render_layers.sh build/raw
+        # (2) Agent CHỈ chạy khi có shader biên dịch lỗi; nó chỉ đọc log và sửa shaders/* (không chạy lệnh nào,
+        #     khớp với --mode accept-edits). Shader sạch / thiếu glslang thì bỏ qua, tiết kiệm tới 15 phút.
         - name: antigravity_agent
           timeout: 15m
           continue_on_error: true
           run: |
+            grep -q '"status": *"error"' build/raw/render/render_manifest.json 2>/dev/null               || { echo "Không có shader lỗi, bỏ qua agent"; exit 0; }
             export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
             script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --sandbox --mode accept-edits' /dev/null \
               | tee reports/agy_render.jsonl
+        # (3) Chạy lại script chuẩn sau khi agent sửa: mã thoát của nó quyết định bước này.
         - name: canonical_render
           run: bash pipeline/render_layers.sh build/raw
           exit_codes: { success: [0], fail_fast: [20, 3] }
@@ -166,12 +175,17 @@ spec:
         - name: claude_code_review
           timeout: 10m
           secrets: [ANTHROPIC_API_KEY]        # chỉ step này
-          # Quyền tối thiểu: đọc chỉ trong build/raw + reports/, ghi chỉ trong reports/ (2 file báo cáo),
-          # chạy lại đúng validate_assets.js; mọi công cụ khác (WebFetch, Bash tùy ý...) bị từ chối ở chế độ -p.
+          # Bảo đảm THỰC SỰ (Claude Code): --allowedTools chỉ DUYỆT SẴN công cụ, không giới hạn đọc.
+          #  - Ghi / Bash: ở chế độ -p không có người duyệt nên mọi thứ ngoài allowlist bị từ chối ->
+          #    chỉ ghi được reports/**, chỉ chạy được `node pipeline/validate_assets.js ...` (đối số tùy ý,
+          #    vd. --report có thể ghi file JSON ở nơi khác: chấp nhận được vì không chạy mã mới).
+          #  - Đọc: Read/Glob/Grep trong thư mục làm việc tự được phép, nên chặn bằng --disallowedTools
+          #    (deny luôn thắng allow). Quy tắc Read(...) áp cho Grep/Glob theo kiểu best-effort, và KHÔNG
+          #    chặn tiến trình con của Bash. Muốn cứng thì chạy trong container chỉ mount build/raw + reports/.
           run: |
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read(build/raw/**),Read(reports/**),Glob,Grep,Write(reports/**),Bash(node pipeline/validate_assets.js:*)" \
+              --allowedTools "Read,Glob,Grep,Write(reports/**),Bash(node pipeline/validate_assets.js:*)"               --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Edit,NotebookEdit,WebFetch,WebSearch" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
         - name: verdict
