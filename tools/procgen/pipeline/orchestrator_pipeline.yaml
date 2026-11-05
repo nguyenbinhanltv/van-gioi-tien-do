@@ -1,3 +1,9 @@
+# #############################################################################
+# CHỈ ĐỂ THAM KHẢO (REFERENCE ONLY) – KHÔNG được chạy bởi bất kỳ CI nào.
+# "orchestrator.inc" trong tài liệu gốc là nhầm lẫn: dự án dùng GitHub Actions, CI ngắn, không CD,
+# chưa có bước AI. Các bước AI (Codex / Antigravity / Claude Code) trong file này PHẢI được rà soát lại
+# (quyền, secret, cô lập container) trước khi có ý định bật.
+# #############################################################################
 # =============================================================================
 # orchestrator_pipeline.yaml – Tu Tiên 2D: sinh asset bằng code → render → QA → đóng gói → deploy
 # -----------------------------------------------------------------------------
@@ -30,7 +36,10 @@ spec:
     cpu: 4
     memory: 8Gi
 
-  secrets: [ANTHROPIC_API_KEY, CODEX_API_KEY, GIT_PUSH_TOKEN, SLACK_WEBHOOK_URL]
+  # Least privilege: KHÔNG khai báo secret ở cấp pipeline. Mỗi secret chỉ được tiêm vào đúng step cần nó
+  # (khóa `secrets:` ở cấp step / hook; cần ánh xạ theo schema thật của orchestrator). Các bước do agent
+  # điều khiển (Antigravity; Codex chỉ thấy CODEX_API_KEY của chính nó) không bao giờ thấy GIT_PUSH_TOKEN / webhook.
+  secrets: []
 
   parameters:
     SEED: { type: int, default: 20261031 }
@@ -69,6 +78,10 @@ spec:
           run: |
             set -o pipefail
             mkdir -p reports build/raw
+            # Codex đã sửa ngoài phạm vi ở lần trước (xem hook codex_self_heal): dừng hẳn, mã 20 không thử lại.
+            if [ -f reports/codex_violation ]; then
+              echo "✖ codex_self_heal vi phạm phạm vi, runner bị coi là nhiễm:"; cat reports/codex_violation; exit 20
+            fi
             { node src/tilemap/generate_tilemap.js --seed "$SEED" --width "$MAP_W" --height "$MAP_H" --out build/raw/tilemap \
               && node src/items/generate_items.js --seed "$SEED" --swordTier "$SWORD_TIER" --out build/raw/items; } \
               2>&1 | tee reports/generate_raw_assets.log
@@ -78,16 +91,78 @@ spec:
           - name: codex_self_heal
             timeout: 20m
             continue_on_error: true
+            secrets: [CODEX_API_KEY]          # chỉ step này
+            # Quyền tối thiểu: sandbox workspace-write (ghi trong workdir, không mạng); KHÔNG dùng
+            # --full-auto / --dangerously-bypass-approvals-and-sandbox. Sandbox không giới hạn được
+            # thư mục con, nên có bước kiểm tra quanh Codex. Phạm vi cho phép: src/, reports/, build/.
+            # Kiểm tra gồm cả file đã theo dõi bị sửa, file MỚI chưa theo dõi và file bị .gitignore
+            # (ví dụ node_modules/ – nơi có thể cài mã chạy ở bước sau): chụp sha256 trước/sau, so sánh.
+            # Vi phạm => xóa file mới, hoàn tác file đã theo dõi, hoàn tác cả src/, ghi
+            # reports/codex_violation và thoát 20. Hook có continue_on_error nên KHÔNG tự dừng run; việc dừng
+            # do run_generators (kiểm tra marker đầu bước, mã 20 không nằm trong retry_on_exit_codes).
+            # Lưu ý: file sẵn có trong node_modules/ bị Codex sửa thì không khôi phục được -> runner được
+            # coi là nhiễm, phải bỏ (marker làm run hỏng). Đây vẫn là heuristic, không thay cho container riêng.
             run: |
-              codex exec --full-auto --sandbox workspace-write --ephemeral --json \
+              # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
+              # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
+              g() { GIT_DIR="$gdir" GIT_WORK_TREE="$top" GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+              base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
+              top="$(git rev-parse --show-toplevel)"   # g() ghim GIT_DIR/GIT_WORK_TREE: git không tự tìm repo khác từ thư mục làm việc
+              # ./.git do agent tạo mới hoặc ghi đè (thư mục / file trỏ gitdir) cũng làm vân tay đổi => dừng
+              dg() { if [ -f .git ]; then sha256sum -- .git; elif [ -d .git ]; then echo "dir $(cd .git && pwd -P)"; fi; }
+              gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+              gsnap() {
+                {
+                  for d in "$gdir" "$gcommon"; do
+                    for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
+                      [ -f "$f" ] && sha256sum -- "$f"
+                    done
+                  done
+                  dg
+                } | sort
+              }
+              gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
+              snap() {
+                { g ls-files -o --exclude-standard; g ls-files -o -i --exclude-standard; } \
+                  | grep -vE '^(src|reports|build)/' | sort -u \
+                  | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
+              }
+              before="$(mktemp)"; after="$(mktemp)"
+              snap > "$before"
+              codex exec --sandbox workspace-write --ephemeral --json \
                 -o reports/codex_fix_summary.md \
                 "$(cat pipeline/prompts/codex_fix_generators.md)" > reports/codex_fix_events.jsonl
-              git diff --stat -- src/ > reports/codex_fix.diffstat
+              gsnap > "$gafter"
+              if ! cmp -s "$gbefore" "$gafter"; then
+                echo "✖ agent sửa cấu hình/hook của .git – không chạy thêm lệnh git, run bị coi là nhiễm" > reports/codex_violation
+                cat reports/codex_violation; exit 20
+              fi
+              rm -f "$gbefore" "$gafter"
+              snap > "$after"
+              tracked="$(g diff --name-only --relative "$base" -- . ':!src' ':!reports' ':!build')"
+              extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"   # file mới / đã đổi nội dung
+              rm -f "$before" "$after"
+              if [ -n "$tracked" ] || [ -n "$extra" ]; then
+                echo "✖ Codex sửa ngoài src/ – hoàn tác và đánh dấu run hỏng"
+                [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout "$base" -- "$f"; done; }
+                [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
+                g checkout "$base" -- src && g clean -fdq -- src
+                { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/codex_violation
+                exit 20
+              fi
+              g diff --stat -- src/ > reports/codex_fix.diffstat
       artifacts: ["build/raw/**", "reports/generate_raw_assets.log", "reports/codex_fix_*"]
 
     # -------------------------------------------------------------------------
     # BƯỚC 2 – Antigravity biên dịch shader và render layer trang bị.
     # agy chỉ in kết quả khi stdout là terminal (lỗi cộng đồng đã báo) nên bọc bằng `script`.
+    # Bảo mật: KHÔNG dùng --dangerously-skip-permissions. agy (đã kiểm tra `agy --help`) không có cờ
+    # allowlist riêng cho từng lệnh; dùng `--sandbox` (hạn chế terminal) + `--mode accept-edits` (chỉ tự
+    # duyệt sửa file, lệnh shell khác vẫn cần duyệt -> ở chế độ -p không có người duyệt nên bị từ chối).
+    # Bước này không nhận secret nào (xem `secrets: []`). Ngay cả khi agent bị từ chối, bước
+    # canonical_render bên dưới vẫn chạy script chuẩn nên pipeline không phụ thuộc agent.
+    # CHƯA KIỂM CHỨNG: quy tắc allow/deny trong `--settings` của agy (khóa chưa có tài liệu); khi có thì
+    # chỉ cho phép `bash pipeline/render_layers.sh`, `glslangValidator`, đọc/ghi build/raw, reports/, shaders/.
     # Sau agent luôn chạy lại script chuẩn: mã thoát của nó mới quyết định bước này.
     # -------------------------------------------------------------------------
     - id: render_paperdoll_layers
@@ -95,15 +170,82 @@ spec:
       timeout: 25m
       retry: { max_attempts: 2, retry_on_exit_codes: [1, 124] }
       steps:
+        # (1) Chạy script chuẩn TRƯỚC: ghi build/raw/render/logs/*.log. Lỗi shader (mã 20) không làm hỏng
+        #     bước ở đây vì còn cơ hội để agent sửa; kết quả cuối do lần chạy canonical_render phía dưới quyết định.
+        #     Nếu agent từng vi phạm phạm vi (retry của task) thì dừng ngay, không chạy mã trong workspace nhiễm.
+        - name: render_first
+          continue_on_error: true
+          run: |
+            if [ -f reports/agy_violation ]; then echo "✖ agent đã vi phạm phạm vi:"; cat reports/agy_violation; exit 20; fi
+            bash pipeline/render_layers.sh build/raw
+        # (2) Agent CHỈ chạy khi có shader biên dịch lỗi; nó chỉ đọc log và sửa shaders/* (không chạy lệnh nào,
+        #     khớp với --mode accept-edits). Shader sạch / thiếu glslang thì bỏ qua, tiết kiệm tới 15 phút.
+        #     --mode accept-edits vẫn cho sửa MỌI file trong workspace, và bước (3) chạy pipeline/render_layers.sh,
+        #     tools/*.js, node_modules/ => cần chặn: chụp sha256 file chưa theo dõi / bị .gitignore trước-sau và
+        #     kiểm cả file đã theo dõi; chỉ shaders/ (cùng reports/, build/) được đổi. Vi phạm => xóa file mới/đổi,
+        #     hoàn tác file đã theo dõi (cả shaders/), ghi reports/agy_violation, thoát 20; canonical_render
+        #     kiểm marker và thoát 20 (không bị continue_on_error của bước này che). Logic giống codex_self_heal
+        #     và để INLINE trong YAML (một script trong pipeline/ thì chính agent có thể sửa).
         - name: antigravity_agent
           timeout: 15m
           continue_on_error: true
           run: |
+            if ! grep -q '"status": *"error"' build/raw/render/render_manifest.json 2>/dev/null; then
+              echo "Không có shader lỗi, bỏ qua agent"; exit 0
+            fi
+            # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
+            # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
+            g() { GIT_DIR="$gdir" GIT_WORK_TREE="$top" GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+            base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
+            top="$(git rev-parse --show-toplevel)"   # g() ghim GIT_DIR/GIT_WORK_TREE: git không tự tìm repo khác từ thư mục làm việc
+            # ./.git do agent tạo mới hoặc ghi đè (thư mục / file trỏ gitdir) cũng làm vân tay đổi => dừng
+            dg() { if [ -f .git ]; then sha256sum -- .git; elif [ -d .git ]; then echo "dir $(cd .git && pwd -P)"; fi; }
+            gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+            gsnap() {
+              {
+                for d in "$gdir" "$gcommon"; do
+                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
+                    [ -f "$f" ] && sha256sum -- "$f"
+                  done
+                done
+                dg
+              } | sort
+            }
+            gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
+            snap() {
+              { g ls-files -o --exclude-standard; g ls-files -o -i --exclude-standard; } \
+                | grep -vE '^(shaders|reports|build)/' | sort -u \
+                | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
+            }
+            before="$(mktemp)"; after="$(mktemp)"
+            snap > "$before"
             export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
-            script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --dangerously-skip-permissions' /dev/null \
+            script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --sandbox --mode accept-edits' /dev/null \
               | tee reports/agy_render.jsonl
+            gsnap > "$gafter"
+            if ! cmp -s "$gbefore" "$gafter"; then
+              echo "✖ agent sửa cấu hình/hook của .git – không chạy thêm lệnh git, run bị coi là nhiễm" > reports/agy_violation
+              cat reports/agy_violation; exit 20
+            fi
+            rm -f "$gbefore" "$gafter"
+            snap > "$after"
+            tracked="$(g diff --name-only --relative "$base" -- . ':!shaders' ':!reports' ':!build')"
+            extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"
+            rm -f "$before" "$after"
+            if [ -n "$tracked" ] || [ -n "$extra" ]; then
+              echo "✖ agy sửa ngoài shaders/ – hoàn tác và đánh dấu run hỏng"
+              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do g checkout "$base" -- "$f"; done; }
+              [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
+              g checkout "$base" -- shaders && g clean -fdq -- shaders
+              { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/agy_violation
+              exit 20
+            fi
+        # (3) Chạy lại script chuẩn sau khi agent sửa: mã thoát của nó quyết định bước này. Marker vi phạm
+        #     làm bước này thất bại cứng (20 nằm trong fail_fast, không thử lại).
         - name: canonical_render
-          run: bash pipeline/render_layers.sh build/raw
+          run: |
+            if [ -f reports/agy_violation ]; then echo "✖ agent đã vi phạm phạm vi:"; cat reports/agy_violation; exit 20; fi
+            bash pipeline/render_layers.sh build/raw
           exit_codes: { success: [0], fail_fast: [20, 3] }
       artifacts: ["build/raw/items/**/*.png", "build/raw/render/**", "reports/agy_render.jsonl"]
 
@@ -121,10 +263,23 @@ spec:
           exit_codes: { success: [0, 10], fail_fast: [20] }
         - name: claude_code_review
           timeout: 10m
+          secrets: [ANTHROPIC_API_KEY]        # chỉ step này
+          # KHÔNG duyệt sẵn Read/Glob/Grep trần: ở chế độ -p, đọc NGOÀI thư mục làm việc (~, /proc/self/environ
+          # chứa ANTHROPIC_API_KEY...) chỉ bị từ chối khi không được duyệt sẵn. Chỉ duyệt Read(./build/raw/**),
+          # Read(./reports/**); Glob/Grep trong thư mục làm việc vốn tự được phép, ngoài đó bị từ chối.
+          # Bảo đảm THỰC SỰ (Claude Code): --allowedTools chỉ DUYỆT SẴN công cụ, không giới hạn đọc.
+          #  - Ghi / Bash: ở chế độ -p không có người duyệt nên mọi thứ ngoài allowlist bị từ chối ->
+          #    chỉ ghi được reports/**, chỉ chạy được `node pipeline/validate_assets.js ...` (đối số tùy ý,
+          #    vd. --report có thể ghi file JSON ở nơi khác: chấp nhận được vì không chạy mã mới).
+          #  - Đọc: Read/Glob/Grep trong thư mục làm việc tự được phép, nên chặn bằng --disallowedTools
+          #    (deny luôn thắng allow). Quy tắc Read(...) áp cho Grep/Glob theo kiểu best-effort, và KHÔNG
+          #    chặn tiến trình con của Bash. Muốn cứng thì chạy trong container chỉ mount build/raw + reports/.
           run: |
+            set -euo pipefail
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read,Glob,Grep,Write,Bash(node pipeline/validate_assets.js:*)" \
+              --allowedTools "Read(./build/raw/**),Read(./reports/**),Write(./reports/**),Bash(node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json)" \
+              --disallowedTools "Read(src/**),Read(pipeline/**),Read(tools/**),Read(shaders/**),Read(.git/**),Read(**/node_modules/**),Read(**/.env*),Read(//proc/**),Read(//etc/**),Read(~/**),Edit,NotebookEdit,WebFetch,WebSearch" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
         - name: verdict
@@ -183,13 +338,19 @@ spec:
             done
         - name: git_commit_push
           workdir: "${workspace}/client"
+          secrets: [GIT_PUSH_TOKEN]           # chỉ step đẩy lên git; copy_to_client không cần
           run: |
             set -euo pipefail
             BR="assets/auto-${run.id}"
             git checkout -B "$BR"
             git add "${CLIENT_ASSET_DIR}"
             if git diff --cached --quiet; then echo "Không có thay đổi asset"; exit 0; fi
+            # qa_review.md do LLM viết sẽ thành body PR: chặn nếu chứa mẫu giống secret / webhook
+            if grep -Eq 'sk-[A-Za-z0-9_-]{10,}|gh[pousr]_[A-Za-z0-9]{20,}|xox[baprs]-|hooks\.slack\.com|AKIA[0-9A-Z]{16}' ../tutien-procgen/reports/qa_review.md; then
+              echo "✖ qa_review.md chứa chuỗi giống secret, không đưa vào PR"; exit 20
+            fi
             VERDICT="$(node -p "require('../tutien-procgen/reports/qa_verdict.json').verdict")"
+            case "$VERDICT" in pass|warn|fail) ;; *) echo "✖ verdict không hợp lệ (cần pass|warn|fail)"; exit 20 ;; esac
             git commit -m "chore(assets): seed ${SEED} · run ${run.id}" -m "QA: ${VERDICT}"
             git push --force-with-lease origin "$BR"
             gh pr create --base main --head "$BR" --title "Asset tự động · run ${run.id}" \
@@ -198,6 +359,7 @@ spec:
 
   on_failure:
     - name: notify_slack
+      secrets: [SLACK_WEBHOOK_URL]            # chỉ step thông báo
       run: |
         curl -s -X POST -H 'Content-type: application/json' \
           --data "{\"text\":\"✖ tutien-asset-pipeline thất bại ở ${failed_task.id} · ${run.url}\"}" "$SLACK_WEBHOOK_URL"
