@@ -48,7 +48,10 @@ export interface ChainTemplate {
   readonly gravity?: number;
 }
 
-/** Largest rotation (deg) each joint is asked to make by the class's animations: drives art overlap (parts spec). */
+/**
+ * Design limits (deg) per joint, documentation of intent. The parts spec does not use them: it uses the angles
+ * measured from the class's actual animation set (`measuredJointCaps`).
+ */
 export interface JointCaps {
   readonly shoulder: number;
   readonly elbow: number;
