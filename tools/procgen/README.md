@@ -58,14 +58,15 @@ Không có công cụ nào dưới đây bắt buộc để chạy `gen`/`valida
 - **Deploy** (tạo PR sang repo client) và **schema thật của `orchestrator.inc`**: YAML chỉ là bản thiết kế theo schema giả định; `workdir: ${workspace}/tutien-procgen` trong đó vẫn trỏ về cấu trúc gói gốc, cần đổi thành `tools/procgen` khi ánh xạ.
 - Chưa chạy `shader_snapshot.js`, `preview/shader_preview.html` (`npm run preview` tạo ra) trên trình duyệt/GPU thật; chưa nạp tileset vào Cocos Creator.
 
-## Lưu ý bảo mật (trước khi chạy `orchestrator_pipeline.yaml` trên runner thật)
+## Bảo mật pipeline (`orchestrator_pipeline.yaml`)
 
-Rà soát tự động đã chỉ ra rủi ro trong YAML (nhập nguyên văn, chưa từng chạy):
+Rà soát tự động từng chỉ ra rủi ro; đã xử lý trong YAML (vẫn **chưa chạy trên runner thật**; khóa `secrets:` ở cấp step/hook là giả định theo schema chung, cần ánh xạ theo schema thật của orchestrator):
 
-- Bước 2 gọi `agy ... --dangerously-skip-permissions`: agent chạy không bị chặn quyền, có thể đọc/ghi/thực thi tùy ý trong runner.
-- `secrets: [ANTHROPIC_API_KEY, CODEX_API_KEY, GIT_PUSH_TOKEN, SLACK_WEBHOOK_URL]` khai báo ở cấp pipeline nên mọi task, kể cả bước render do agent điều khiển, đều thấy `GIT_PUSH_TOKEN` và webhook.
-
-Cần xử lý **trước khi bật bước này**: bỏ `--dangerously-skip-permissions` và cho agy allowlist lệnh (chỉ `bash pipeline/render_layers.sh` / `node pipeline/render_layers.js`, `glslangValidator`); nếu agy không có allowlist thì chạy trong container không có mạng ra ngoài, mount workspace chỉ đọc trừ `build/raw`, không tiêm secret; và chỉ cấp `GIT_PUSH_TOKEN` / `SLACK_WEBHOOK_URL` cho `deploy_assets` và `on_failure`. Vì render đã có bản xác định (`render_layers.js|sh`) và pipeline luôn chạy lại nó sau agent, có thể bỏ hẳn agent khỏi bước này. Các thay đổi này phụ thuộc schema thật của orchestrator nên chưa sửa trong YAML.
+- **Antigravity (bước 2):** đã bỏ `--dangerously-skip-permissions`. `agy --help` không có cờ allowlist theo lệnh nên dùng `--sandbox --mode accept-edits` (hạn chế terminal, chỉ tự duyệt sửa file; lệnh khác không có người duyệt ở chế độ `-p` nên bị từ chối). Quy tắc allow/deny trong `--settings` của agy **chưa kiểm chứng** (khóa chưa có tài liệu). Pipeline không phụ thuộc agent vì luôn chạy lại `render_layers.sh` sau đó; có thể bỏ hẳn agent khỏi bước này. Prompt cho phép agent sửa `shaders/*` khi biên dịch lỗi nên không khóa chặt chỉ `build/raw/` được.
+- **Secrets:** cấp pipeline là `secrets: []`; mỗi secret chỉ vào đúng step cần: `CODEX_API_KEY` → `codex_self_heal`, `ANTHROPIC_API_KEY` → `claude_code_review`, `GIT_PUSH_TOKEN` → `git_commit_push` (không phải cả `deploy_assets`), `SLACK_WEBHOOK_URL` → `notify_slack`. Bước agy không nhận secret nào.
+- **Codex (`codex_self_heal`):** bỏ `--full-auto`, giữ `--sandbox workspace-write` (không mạng). Sandbox không giới hạn được thư mục con nên sau Codex có bước hoàn tác mọi thay đổi ngoài `src/` (thoát 20). Kiểm tra này là heuristic dựa trên `git diff`, không thay cho cô lập bằng container.
+- **Claude QA (`claude_code_review`):** `--allowedTools` thu hẹp thành `Read(build/raw/**)`, `Read(reports/**)`, `Glob`, `Grep`, `Write(reports/**)` và đúng lệnh `node pipeline/validate_assets.js`. Cú pháp `Tool(path)` theo Claude Code; chưa chạy thật.
+- File YAML đã được kiểm tra parse bằng PyYAML; ngữ nghĩa với orchestrator thật chưa kiểm chứng.
 
 ## Cấu trúc
 

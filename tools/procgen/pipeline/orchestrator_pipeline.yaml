@@ -30,7 +30,10 @@ spec:
     cpu: 4
     memory: 8Gi
 
-  secrets: [ANTHROPIC_API_KEY, CODEX_API_KEY, GIT_PUSH_TOKEN, SLACK_WEBHOOK_URL]
+  # Least privilege: KHÔNG khai báo secret ở cấp pipeline. Mỗi secret chỉ được tiêm vào đúng step cần nó
+  # (khóa `secrets:` ở cấp step / hook; cần ánh xạ theo schema thật của orchestrator). Các bước do agent
+  # điều khiển (Antigravity; Codex chỉ thấy CODEX_API_KEY của chính nó) không bao giờ thấy GIT_PUSH_TOKEN / webhook.
+  secrets: []
 
   parameters:
     SEED: { type: int, default: 20261031 }
@@ -78,16 +81,33 @@ spec:
           - name: codex_self_heal
             timeout: 20m
             continue_on_error: true
+            secrets: [CODEX_API_KEY]          # chỉ step này
+            # Quyền tối thiểu: sandbox workspace-write (ghi trong workdir, không mạng); KHÔNG dùng
+            # --full-auto / --dangerously-bypass-approvals-and-sandbox. Sandbox không giới hạn được
+            # thư mục con, nên ngay sau Codex có bước kiểm tra: mọi thay đổi ngoài src/ bị hoàn tác.
             run: |
-              codex exec --full-auto --sandbox workspace-write --ephemeral --json \
+              codex exec --sandbox workspace-write --ephemeral --json \
                 -o reports/codex_fix_summary.md \
                 "$(cat pipeline/prompts/codex_fix_generators.md)" > reports/codex_fix_events.jsonl
+              outside="$(git diff --name-only --relative HEAD -- . ':!src' ':!reports' ':!build')"
+              if [ -n "$outside" ]; then
+                echo "✖ Codex sửa ngoài src/, hoàn tác: $outside"
+                git checkout HEAD -- $outside
+                exit 20
+              fi
               git diff --stat -- src/ > reports/codex_fix.diffstat
       artifacts: ["build/raw/**", "reports/generate_raw_assets.log", "reports/codex_fix_*"]
 
     # -------------------------------------------------------------------------
     # BƯỚC 2 – Antigravity biên dịch shader và render layer trang bị.
     # agy chỉ in kết quả khi stdout là terminal (lỗi cộng đồng đã báo) nên bọc bằng `script`.
+    # Bảo mật: KHÔNG dùng --dangerously-skip-permissions. agy (đã kiểm tra `agy --help`) không có cờ
+    # allowlist riêng cho từng lệnh; dùng `--sandbox` (hạn chế terminal) + `--mode accept-edits` (chỉ tự
+    # duyệt sửa file, lệnh shell khác vẫn cần duyệt -> ở chế độ -p không có người duyệt nên bị từ chối).
+    # Bước này không nhận secret nào (xem `secrets: []`). Ngay cả khi agent bị từ chối, bước
+    # canonical_render bên dưới vẫn chạy script chuẩn nên pipeline không phụ thuộc agent.
+    # CHƯA KIỂM CHỨNG: quy tắc allow/deny trong `--settings` của agy (khóa chưa có tài liệu); khi có thì
+    # chỉ cho phép `bash pipeline/render_layers.sh`, `glslangValidator`, đọc/ghi build/raw, reports/, shaders/.
     # Sau agent luôn chạy lại script chuẩn: mã thoát của nó mới quyết định bước này.
     # -------------------------------------------------------------------------
     - id: render_paperdoll_layers
@@ -100,7 +120,7 @@ spec:
           continue_on_error: true
           run: |
             export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
-            script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --dangerously-skip-permissions' /dev/null \
+            script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --sandbox --mode accept-edits' /dev/null \
               | tee reports/agy_render.jsonl
         - name: canonical_render
           run: bash pipeline/render_layers.sh build/raw
@@ -121,10 +141,13 @@ spec:
           exit_codes: { success: [0, 10], fail_fast: [20] }
         - name: claude_code_review
           timeout: 10m
+          secrets: [ANTHROPIC_API_KEY]        # chỉ step này
+          # Quyền tối thiểu: đọc chỉ trong build/raw + reports/, ghi chỉ trong reports/ (2 file báo cáo),
+          # chạy lại đúng validate_assets.js; mọi công cụ khác (WebFetch, Bash tùy ý...) bị từ chối ở chế độ -p.
           run: |
             claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
               --output-format json \
-              --allowedTools "Read,Glob,Grep,Write,Bash(node pipeline/validate_assets.js:*)" \
+              --allowedTools "Read(build/raw/**),Read(reports/**),Glob,Grep,Write(reports/**),Bash(node pipeline/validate_assets.js:*)" \
               --max-turns 15 --max-budget-usd 2.00 \
               > reports/claude_qa_session.json
         - name: verdict
@@ -183,6 +206,7 @@ spec:
             done
         - name: git_commit_push
           workdir: "${workspace}/client"
+          secrets: [GIT_PUSH_TOKEN]           # chỉ step đẩy lên git; copy_to_client không cần
           run: |
             set -euo pipefail
             BR="assets/auto-${run.id}"
@@ -198,6 +222,7 @@ spec:
 
   on_failure:
     - name: notify_slack
+      secrets: [SLACK_WEBHOOK_URL]            # chỉ step thông báo
       run: |
         curl -s -X POST -H 'Content-type: application/json' \
           --data "{\"text\":\"✖ tutien-asset-pipeline thất bại ở ${failed_task.id} · ${run.url}\"}" "$SLACK_WEBHOOK_URL"
