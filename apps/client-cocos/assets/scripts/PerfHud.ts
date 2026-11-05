@@ -27,6 +27,8 @@ export class PerfHud {
   private logClock = 0;
   /** Extra free-text line (debug hooks). */
   note = '';
+  /** Hint line shown under the numbers. */
+  hint = 'click / WASD move | ?input=touch for joystick';
   private readonly textures: Array<{ w: number; h: number }> = [];
   readonly stats: PerfStats = {
     fps: 0,
@@ -62,6 +64,11 @@ export class PerfHud {
     this.label.verticalAlign = Label.VerticalAlign.TOP;
     this.label.overflow = Label.Overflow.NONE;
     this.label.color = new Color(235, 255, 235, 255);
+  }
+
+  /** Background width in design units (narrow screens). */
+  setWidth(w: number): void {
+    this.bg.getComponent(UITransform)!.setContentSize(w, 150);
   }
 
   /** Register a texture for the byte estimate. */
@@ -114,7 +121,7 @@ export class PerfHud {
 ` +
       `JS heap ${heap} (heap + tex / ${B.RAM_MB_WEB} MB ${heapOk})\n` +
       `Nodes ${s.nodes}   L3 ${s.l3Objects}\n` +
-      `click / WASD move | ?input=touch for joystick` +
+      this.hint +
       (this.note
         ? `
 ${this.note}`

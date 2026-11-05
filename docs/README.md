@@ -39,6 +39,7 @@ Bộ tài liệu thiết kế hệ thống cho MVP (server modular monolith, cli
 | 27  | [27-van-hanh-quan-sat.md](27-van-hanh-quan-sat.md)     | Log, metric, trace, telemetry, dashboard, báo lỗi, cấu hình và cờ tính năng                   |
 | 28  | [28-chien-luoc-kiem-thu.md](28-chien-luoc-kiem-thu.md) | Đơn vị/thuộc tính/xác định, replay, tích hợp, loadbot, hiệu năng thiết bị, các giai đoạn CI   |
 | 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 và OPEN-ITEMS §6             |
+| 32  | [32-spine-viewer.md](32-spine-viewer.md)               | Trình xem animation Spine 4.2 trong Cocos, rig thử, quy trình animator xuất atlas/skeleton    |
 
 ## Thiết kế bổ sung (12–19, đề xuất – chờ duyệt)
 

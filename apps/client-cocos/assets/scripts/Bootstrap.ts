@@ -1,5 +1,6 @@
 import {
   Component,
+  director,
   ImageAsset,
   JsonAsset,
   Node,
@@ -63,6 +64,11 @@ export class Bootstrap extends Component {
   private ready = false;
 
   async start(): Promise<void> {
+    // `#viewer` opens the animation viewer scene instead of the world demo
+    if (/(^|[#&,])viewer(?![\w])/.test(location.hash)) {
+      director.loadScene('Viewer');
+      return;
+    }
     console.log('[vgtd] Bootstrap.start');
     try {
       await this.build();

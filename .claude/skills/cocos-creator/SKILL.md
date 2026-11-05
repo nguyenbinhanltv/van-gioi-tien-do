@@ -60,3 +60,15 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 ## Integration seams (later tasks)
 
 `WorldView` -> client-world chunk streaming (keep `isTerrainWalkable`). `PlayerActor.body` -> paperdoll/Spine from the character package (Player/Boss: Spine 5 directions + mirror; keep `pos`). Register every L3 object through `YSortLayer.add(node, depth)`.
+
+## Animation viewer (Spine 4.2)
+
+Scene `assets/scenes/Viewer.scene` (component `ViewerScene`), opened with `http://localhost:7456/#viewer` (Bootstrap redirects on the hash; params in `docs/32-spine-viewer.md`). Code in `assets/scripts/viewer/`: `ViewerModel` (settings + `@vgtd/character` view state), `SpineActor` (one `sp.Skeleton`, applies a view state), `ViewerPanel` (DOM control panel; bottom sheet on mobile), `ViewerScene` (wiring, HUD). The rig comes from `tools/spine-testrig` via `prepare:assets` into `assets/resources/viewer/` (git-ignored); an animator's export goes in another `resources/` folder and is opened with `#viewer&src=<folder>`.
+
+Gotchas learned the hard way:
+
+- **Cocos runs a LOOSE Babel transform over all scripts in `assets/`, including the vendor bundle**: `[...set]` / `for (x of set)` only work for arrays there. `prepare.mjs` therefore lowers the vendor bundle to ES5 with `ts.transpileModule(downlevelIteration)`. In your own scripts use `Array.from(set)` (never spread a Set/Map/NodeList) - `check-yflip` does not catch this.
+- `sp.Skeleton` realtime mode is required for scrub / mix / live slot edits (`setAnimationCacheMode(REALTIME)`); scrub = set `entry.trackTime`, then `paused=false; updateAnimation(0); paused=prev`.
+- Hide a slot with `slot.setAttachment(null)`, show with `skeleton.setAttachment(slot, slot)`; re-hide after `setSkin`.
+- Spine importer: `rig_X.json` + `rig_X.atlas` + `rig_X.png` in one folder import as `sp.SkeletonData` automatically (headless build is enough); load with `resources.load('<folder>/rig_X', sp.SkeletonData)`.
+- Screenshots of the AO browser are black until the page is fully loaded (10-90 s with software GL), URL query values are redacted (hash params are not), `ao preview` of an already open URL does not reload: open a new tab and close the old one. The DOM panel appears in `ao browser snapshot --interactive` once loaded, so controls can be clicked with `ao browser click`.

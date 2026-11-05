@@ -17,3 +17,5 @@ apps/client-cocos/assets/scripts/vendor
 apps/client-cocos/assets/resources/world
 apps/client-cocos/tsconfig.json
 apps/client-cocos/package.json
+apps/client-cocos/assets/resources/viewer
+tools/spine-testrig/out
