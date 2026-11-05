@@ -44,6 +44,7 @@ Sở hữu package: mỗi package thuộc một worker tại một thời điể
 3. CHẤM ĐIỂM        merge PR đủ điều kiện §6; đóng issue tương ứng
 4. CHỌN VIỆC        việc ưu tiên cao nhất KHÔNG bị chặn bởi quyết định (§4) và không trùng package
 5. GIAO VIỆC        spawn worker kèm brief chuẩn §8; tối đa N worker song song (§9)
+5b. DỌN DẸP         đóng phiên worker đã xong việc (đã merge / không còn cần) để giải phóng đĩa, bộ nhớ (D38); việc tạm dừng giữ PR nháp, worker mới nhận lại bằng claim-pr
 6. TỔNG HỢP         gom câu hỏi cho người vào MỘT bản tin (digest §7), không hỏi lẻ từng cái
 7. GHI NHẬT KÝ      ao report; cập nhật OPEN-ITEMS/DECISIONS khi có quyết định mới
 ```
@@ -70,7 +71,7 @@ Kế hoạch tham chiếu: báo cáo ngoài repo §7.2 (PR #7 → #66 → #9 →
 
 - Mọi thứ đổi/ thêm số gameplay đã khóa hoặc cần game designer duyệt (D16–D22), công thức, cân bằng, schema dữ liệu.
 - Pháp lý, quyền riêng tư, thanh toán, Tiên Ngọc, giấy phép (docs/19); ngân sách tiền; thuê ngoài.
-- Chọn/đổi engine, Spine, nhà cung cấp hosting (D2, D25, D27); thêm phụ thuộc lớn.
+- Chọn/đổi engine, công cụ/runtime hoạt cảnh xương (Spine → DragonBones: D25, D35), nhà cung cấp hosting (D2, D27); thêm phụ thuộc lớn.
 - Quyết định kiến trúc nhóm ADR chặn: 005, 007, 010, 011, 012, 013.
 - Mâu thuẫn X1–X12, G6, G14, G15 (OPEN-ITEMS §8).
 - Phát hành ra ngoài, mời tester, bất kỳ thứ gì công khai, xóa dữ liệu thật, chạy trên dữ liệu người chơi.
@@ -102,7 +103,7 @@ Mỗi spawn phải có: mục tiêu một câu; issue/phase; file docs bắt bu�
 
 | Hạng mục                        | Mặc định đề xuất (chủ dự án chỉnh)                                                                                    |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Worker chạy song song           | ≤ 3 (tối đa 1 worker mỗi package; 1 worker Codex asset)                                                               |
+| Worker chạy song song           | ≤ 6 _[Cập nhật D38: trước đây ≤ 3]_ (tối đa 1 worker mỗi package; 1 worker Codex asset)                               |
 | Thử lại một lỗi CI              | ≤ 3 lần; sau đó `--stuck` kèm log, orchestrator đổi hướng hoặc hỏi người                                              |
 | Một task chạy                   | ≤ 1 ngày làm việc không có checkpoint → orchestrator kiểm tra, chia nhỏ hoặc dừng                                     |
 | Ngân sách token/ngày            | **Chủ dự án đặt** (chưa có số); khi đạt 80% → chỉ làm việc đường găng, 100% → dừng nhận việc mới và báo               |
@@ -124,10 +125,10 @@ Mỗi spawn phải có: mục tiêu một câu; issue/phase; file docs bắt bu�
 
 ## 12. Xác nhận của chủ dự án (2026-11-05)
 
-| #   | Hạng mục                                                     | Kết quả                                                                                                                             |
-| --- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Số worker song song tối đa                                   | **3** (ngân sách token/ngày: **chưa đặt**, orchestrator hỏi lại khi cần; tới lúc đó dùng mức 80%/100% theo thông báo của chủ dự án) |
-| 2   | Orchestrator tự merge PR đủ điều kiện mục 6.4                | **Cho phép**                                                                                                                        |
-| 3   | Quy tắc "mặc định sau 48 giờ" (mục 4)                        | **Bật**                                                                                                                             |
-| 4   | Giờ yên tĩnh                                                 | **UTC+7; chỉ báo khẩn 23:00–07:00**                                                                                                 |
-| 5   | Đưa vào repo (`docs/30`, nhắc trong `CLAUDE.md`/`AGENTS.md`) | **Có** (tài liệu này)                                                                                                               |
+| #   | Hạng mục                                                     | Kết quả                                                                                                                                                                                                                 |
+| --- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Số worker song song tối đa                                   | **3** _[Cập nhật D38 2026-11-06: nay **6**; mỗi chu kỳ orchestrator đóng worker đã xong]_ (ngân sách token/ngày: **chưa đặt**, orchestrator hỏi lại khi cần; tới lúc đó dùng mức 80%/100% theo thông báo của chủ dự án) |
+| 2   | Orchestrator tự merge PR đủ điều kiện mục 6.4                | **Cho phép**                                                                                                                                                                                                            |
+| 3   | Quy tắc "mặc định sau 48 giờ" (mục 4)                        | **Bật**                                                                                                                                                                                                                 |
+| 4   | Giờ yên tĩnh                                                 | **UTC+7; chỉ báo khẩn 23:00–07:00**                                                                                                                                                                                     |
+| 5   | Đưa vào repo (`docs/30`, nhắc trong `CLAUDE.md`/`AGENTS.md`) | **Có** (tài liệu này)                                                                                                                                                                                                   |

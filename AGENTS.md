@@ -15,7 +15,8 @@ npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node >= 18, TypeScript stric
 | `apps/server`               | (placeholder)               | Server MVP, authoritative 20 Hz simulation                                                                                  |
 | `apps/client-cocos`         | (placeholder)               | Cocos Creator project; flips y when rendering shared iso math                                                               |
 | `tools/procgen`             | `@vgtd/procgen`             | Asset generation, QA, atlas packing, compression pipeline                                                                   |
-| `tools/dragonbones-testrig` | `@vgtd/dragonbones-testrig` | Generates the DragonBones 5.5 test rig for the Cocos animation viewer                                                       |
+| `tools/rig`                 | `@vgtd/rig`                 | AI animation authoring: rig schema, animation DSL, DragonBones exporter, automated animation QA (D35/D36)                   |
+| `tools/dragonbones-testrig` | `@vgtd/dragonbones-testrig` | Generates the minimal DragonBones 5.5 test rig used by the Cocos animation viewer (independent of `tools/rig`)              |
 | `docs/`                     | -                           | Design specs (Vietnamese), decision log, open items                                                                         |
 | `.claude/`, `CLAUDE.md`     | -                           | Agent config and project skills                                                                                             |
 
@@ -45,7 +46,7 @@ DECISIONS entry wins. Use the
 - Third-party or MCP-sourced assets require a license check before use (skill `vgtd-asset-pipeline`).
 - Gameplay defaults decided without a designer (D16-D22 etc.) are marked "cần game designer duyệt khi cân bằng": implement
   them as specified, but do not treat them as final balance.
-- Spine runtime 4.2 (D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
+- Character skeletal animation: DragonBones, Cocos built-in `dragon-bones` runtime (D35, replaces Spine 4.2 of D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
 - Do not create or edit `.claude/settings.json` (D30): agent permission self-edits are blocked on purpose.
 - Prefer the latest locked decisions in `docs/DECISIONS.md` over memory or older docs. Do not invent gameplay values that
   the docs do not specify; add the gap to `docs/OPEN-ITEMS.md` instead.
@@ -98,7 +99,7 @@ green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd
 
 ## Autonomous operation (24/7)
 
-Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 3 parallel workers; the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
+Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 6 parallel workers (D38; the orchestrator closes finished worker sessions each cycle); the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
 
 ## Design review
 

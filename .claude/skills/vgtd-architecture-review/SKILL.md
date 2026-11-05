@@ -1,6 +1,6 @@
 ---
 name: vgtd-architecture-review
-description: Review the technical design docs (docs/20-29 and docs/06, docs/08) against the game design docs (docs/01, docs/10-19) - requirement-to-design traceability, cross-doc technical conflicts, Cocos Creator 3.8.8 / Spine 4.2 / Web H5 feasibility, server-authority, determinism and budget checks. Use when technical design docs land, before implementation starts, or when asked "does the technical design cover the game design". Produces a traceability matrix and findings report with file:line and severity.
+description: Review the technical design docs (docs/20-29 and docs/06, docs/08) against the game design docs (docs/01, docs/10-19) - requirement-to-design traceability, cross-doc technical conflicts, Cocos Creator 3.8.8 / DragonBones (D35; formerly Spine 4.2) / Web H5 feasibility, server-authority, determinism and budget checks. Use when technical design docs land, before implementation starts, or when asked "does the technical design cover the game design". Produces a traceability matrix and findings report with file:line and severity.
 ---
 
 <!-- Adapted from Claude-Code-Game-Studios (MIT) @05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418 -->
@@ -51,11 +51,11 @@ Severity: a GAP for authority, persistence/ledger or protocol is Blocker; for to
 - Handover, rollback, reconnect, replay and idempotency each have one owner and one protocol, not several.
 - Security: every client-originated message validated; secrets and tokens handling; rate limits; anti-cheat signals.
 
-## Phase 5: Engine and platform feasibility (Cocos Creator 3.8.8, Spine 4.2, Web H5)
+## Phase 5: Engine and platform feasibility (Cocos Creator 3.8.8, DragonBones per D35, Web H5)
 
 For every engine/API/runtime claim in the technical docs decide: VERIFIED (cite official docs or a repo test) ·
 UNVERIFIED (plausible, no source: say how to verify) · WRONG (contradicts a source). Do not assert Cocos or Spine
-behaviour from memory. Check in particular: 2D Y-sort and tilemap isometric support, Spine 4.2 runtime compatibility with
+behaviour from memory. Check in particular: 2D Y-sort and tilemap isometric support, DragonBones runtime compatibility (D35) with
 Cocos 3.8.8, batching/draw-call claims, asset bundle and compression support (KTX2/ASTC/WebP) per browser, WebSocket
 and WebTransport availability, main-thread/GC limits on mobile browsers, y-flip at the render boundary.
 

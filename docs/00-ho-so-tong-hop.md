@@ -76,6 +76,8 @@ Oct 31, 2026 · An Nguyen
 | Icon                  | Bản gốc 256, xuất 48 / 64 / 128; nền trong suốt; viền ghép lúc chạy                                 | UI/UX                 |
 | Phẩm chất             | 6 cấp: Trắng · Lục · Lam · Tím · Vàng · Đỏ, có dấu góc cho người mù màu                             | UI/UX                 |
 
+> [Cập nhật D35: hoạt cảnh xương nhân vật dùng DragonBones thay Spine 4.2 (runtime `dragon-bones` của Cocos 3.8.8, MIT); "Spine" trong tài liệu này đọc là "skeleton DragonBones"; số liệu không đổi. Xem [art/dragonbones.md](art/dragonbones.md).]
+
 ### Ngân sách hiệu năng
 
 | Hạng mục              | Web / Mobile                                                 | PC                             | Tài liệu gốc |
