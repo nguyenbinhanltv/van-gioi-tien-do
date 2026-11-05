@@ -51,7 +51,7 @@
 | R5  | Điều khoản asset xuất từ editor chưa rõ (quyền thương mại).                                                                 | Trung bình | Ghi vào `ASSET-LICENSES.md` khi có asset đầu tiên; người đọc ToS trước phát hành.                                                                       |
 | R6  | Cache mode không hỗ trợ blend/armature lồng nhau.                                                                           | Thấp       | Chỉ dùng cache cho nhân vật xa/quái; Boss ghép nhiều skeleton (docs/03 8 × 8) dùng REALTIME.                                                            |
 
-> **Editor: tùy chọn (D36).** Không cần editor GUI; LoongBones / DragonBones Pro chỉ dùng nếu chủ dự án muốn chỉnh tay. Nếu dùng, vẫn phải xác minh giá/ToS trước khi ghi vào ASSET-LICENSES.
+> **Editor: tùy chọn (D36).** Không cần editor GUI. Chủ dự án đã đăng ký LoongBones dùng thử miễn phí; dùng để (a) nhập DragonBones JSON do AI sinh ra nhằm đối chiếu, (b) thỉnh thoảng chỉnh tay – không bao giờ bắt buộc; nguồn chuẩn là nguồn rig trung lập + hoạt cảnh sinh trong repo. Điều khoản dùng thử: OPEN-ITEMS. Nếu dùng, vẫn phải xác minh giá/ToS trước khi ghi vào ASSET-LICENSES.
 
 ## 4. Phương án dự phòng
 
