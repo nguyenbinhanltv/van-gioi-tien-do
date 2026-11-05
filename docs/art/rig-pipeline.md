@@ -115,3 +115,18 @@ Quy ước placeholder do orchestrator chốt 2026-11-06 nằm trong [parts-spec
 Đây là **bản art cần sửa tiếp**, chưa đạt mọi seam ≤3 px. Rigid max theo hướng giảm còn S 23,82; SE 24,15; E 29,18; NE 16,29; N 14,49 px; số cảnh báo tăng 452 → 681 do biên quad và quan hệ seam thay đổi, tách bóng 25 → 22 clip/hướng. Không đổi thuật toán/ngưỡng QA để làm số đẹp hơn; chưa áp autoSkin. Margin yêu cầu có thể bị silhouette/alpha occluder cắt ngắn, nên cần kiểm độ phủ thực và xử lý tiếp cùng worker 15; không coi bản này là reference đã nghiệm thu cho lớp mới. Nguồn gốc và thao tác pixel ghi tại [ASSET-LICENSES.md](../ASSET-LICENSES.md).
 
 Đo lại bằng CLI của PR #87: `npm run rig:measure -w @vgtd/rig -- kiem-tu --top 0 --strict` trả mã 1 (NOT clean), đúng với seam còn mở. Preview `--autoskin` (không ghi dữ liệu) cho max gap S/SE/E/NE/N = 19,0/25,0/37,5/25,9/22,3 px; 1.197 cảnh báo seam, 209 lần dãn, strain tối đa 695%, 12 clip/hướng tách bóng. Không được giả định chỉ bật autoSkin sẽ hoàn tất bản art này; cần phối hợp lại margin theo kích thước mảnh thực, alpha coverage và lưới/trọng số.
+
+## Đo lại sau PR #89 — dừng sửa art chờ quyết định rig
+
+[Cập nhật 2026-11-06: metric coverage-aware và margin theo bề rộng mối nối thật của PR #89 thay thế các số probe và quy ước margin cũ trong ghi chép vòng art phía trên.] Đã merge `origin/main` 3398332, giữ nguyên toàn bộ PNG, atlas, rig data và viewer export của head art 19395b2. Không sơn thêm và không ghi autoSkin theo chỉ đạo orchestrator; chờ chủ dự án chọn hướng từ memo của worker 15.
+
+| Bộ đo cùng metric mới     | Seam openings | Max gap px | Clip/hướng tách bóng | Lần dãn | Strain max |
+| ------------------------- | ------------: | ---------: | -------------------: | ------: | ---------: |
+| Main rigid                |            90 |        8,6 |                   25 |       0 |         0% |
+| PR #88 rigid              |           210 |       17,9 |                   22 |       0 |         0% |
+| Main + autoSkin band 16   |            52 |        6,8 |                   22 |     138 |       450% |
+| PR #88 + autoSkin band 16 |           119 |        8,6 |                    9 |     176 |       460% |
+
+AutoSkin hai bên dùng cùng `band 16`, `cell 6`, `touch 2`, tối đa 3 influences; chỉ preview trong bộ nhớ. Main được đo trực tiếp từ rig/atlas đã commit trên `origin/main`, bằng cùng hàm QA hiện tại. Không so số 452/681 của metric cũ với số mới. Lệnh candidate: `npm run rig:measure -w @vgtd/rig -- kiem-tu --top 999 --json`; thêm `--autoskin --band 16 --cell 6 --touch 2` cho preview.
+
+Các seam rigid xấu hơn rõ nhất (ceil max px, ≤3 nghĩa là main không cảnh báo): E shin_R/thigh_R 5 → 18; SE shin_L/thigh_L ≤3 → 15; SE lower_arm_L/upper_arm_L ≤3 → 13; S lower_arm_L/upper_arm_L 6 → 14; E lower_arm_R/upper_arm_R 7 → 15; NE lower_arm_R/upper_arm_R 6 → 14. Contact sheet có toàn bộ residual từng cặp. Tách bóng giảm nhưng seams chưa thấp hơn main; PR giữ draft, chưa là reference hoàn chỉnh. Bước kế tiếp sau quyết định chủ dự án: phối hợp worker 15 sửa parts-spec/mesh/autoSkin hoặc sinh lại mảnh đúng hướng rig đã chọn.
