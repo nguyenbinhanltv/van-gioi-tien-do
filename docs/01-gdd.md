@@ -53,7 +53,7 @@ Hiện hành:
 
 ### 3.3 Lôi Kiếp _[Cập nhật §4: từ mô tả định tính sang số liệu]_
 
-Gốc: mô tả định tính (số đạo, telegraph). Hiện hành: **sát thương thuần theo đợt**, `Strike = HP_ref · κ_r · 1,22^(w−1)`, tổng 0,6 → 3,0 × HP_ref; κ_r riêng cho từng ngưỡng; **nguồn giảm trừ là bắt buộc** (chỉ các nguồn được liệt kê mới có tác dụng). Ví dụ lớn nhất: Cửu Cửu Thiên Kiếp 81 đạo.
+Gốc: mô tả định tính (số đạo, telegraph). Hiện hành: **sát thương thuần theo đợt**, `Strike = HP_ref · κ_r · 1,22^(w−1)`, tổng 0,6 → 3,0 × HP_ref; κ_r riêng cho từng ngưỡng; **từ 9 đạo trở lên bắt buộc có nguồn giảm trừ** (kiếp 3 và 6 đạo, tổng 0,6 và 1,2 × HP_ref, có thể qua không cần); chỉ các nguồn liệt kê ở [07](07-cong-thuc-data-schema.md) §3 mới có tác dụng (Phòng ngự / kháng ngũ hành vô hiệu vì sét kiếp là sát thương thuần). Ví dụ lớn nhất: Cửu Cửu Thiên Kiếp 81 đạo.
 
 **VFX Lôi Kiếp: procedural** (fBm, segment mesh, không texture) _[Cập nhật §4: thay flipbook 128 × 512, 8 frame, 4 biến thể]_; bloom giả/thật theo cấp máy — xem [06](06-toi-uu-render.md).
 
