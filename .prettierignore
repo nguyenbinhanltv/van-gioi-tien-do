@@ -7,3 +7,13 @@ apps/client-cocos/library
 apps/client-cocos/temp
 packages/client-core
 tools/procgen
+apps/client-cocos/settings
+apps/client-cocos/profiles
+apps/client-cocos/local
+apps/client-cocos/native
+apps/client-cocos/assets/**/*.meta
+apps/client-cocos/assets/**/*.scene
+apps/client-cocos/assets/scripts/vendor
+apps/client-cocos/assets/resources/world
+apps/client-cocos/tsconfig.json
+apps/client-cocos/package.json
