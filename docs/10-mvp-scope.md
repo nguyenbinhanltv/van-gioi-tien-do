@@ -271,17 +271,17 @@ Nguồn đo và dashboard: [17-telemetry-kpi.md](17-telemetry-kpi.md) (ngưỡng
 
 ### 9.2 Phễu đột phá (cumulative so với số nhân vật tạo)
 
-| Mốc phễu                              | Mục tiêu đến D14 _(Đề xuất)_ | Chỉ số kèm theo                                                            |
-| ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------- |
-| 1. Tạo nhân vật                       | 100%                         | —                                                                          |
-| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE ≤ 32 phút trung vị (17)                                               |
-| 3. Luyện Khí tầng 5                   | ≥ 60%                        | Thời gian median tới tầng 5 ≤ 1 giờ chơi                                   |
-| 4. Luyện Khí tầng 9 (Viên Mãn)        | ≥ 45%                        | Median ≤ 2,5 – 3 giờ chơi                                                  |
-| 5. **Thử** đột phá Trúc Cơ            | ≥ 40%                        | Tỷ lệ thành công lần đầu 85–95% (có chủ đan Lam trở lên)                   |
-| 6. Trúc Cơ thành công                 | ≥ 35%                        | Trung bình ≤ 1,2 lần thử                                                   |
-| 7. **Thử** đột phá Kim Đan (+ Tâm Ma) | ≥ 18%                        | Tỷ lệ thành công lần đầu 60–80%; Tâm Ma thắng ≥ 80%                        |
-| 8. Kim Đan thành công                 | ≥ 12%                        | Trung bình ≤ 2,0 lần thử (pity +8% / lần, 07 §2)                           |
-| 9. **Thử** Kết Anh (Lôi Kiếp 3 đạo)   | ≥ 5%                         | Tỷ lệ sống qua 3 đạo ≥ 90% (không cần giảm trừ — 07 §3); thành công 55–75% |
+| Mốc phễu                              | Mục tiêu đến D14 _(Đề xuất)_ | Chỉ số kèm theo                                                                       |
+| ------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------- |
+| 1. Tạo nhân vật                       | 100%                         | —                                                                                     |
+| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE ~30 phút theo 16 §3; KPI trung vị ≤ 32 phút ở 17 (bảng KPI, hàng FTUE, dòng 147) |
+| 3. Luyện Khí tầng 5                   | ≥ 60%                        | Thời gian median tới tầng 5 ≤ 1 giờ chơi                                              |
+| 4. Luyện Khí tầng 9 (Viên Mãn)        | ≥ 45%                        | Median ≤ 2,5 – 3 giờ chơi                                                             |
+| 5. **Thử** đột phá Trúc Cơ            | ≥ 40%                        | Tỷ lệ thành công lần đầu 85–95% (có chủ đan Lam trở lên)                              |
+| 6. Trúc Cơ thành công                 | ≥ 35%                        | Trung bình ≤ 1,2 lần thử                                                              |
+| 7. **Thử** đột phá Kim Đan (+ Tâm Ma) | ≥ 18%                        | Tỷ lệ thành công lần đầu 60–80%; Tâm Ma thắng ≥ 80%                                   |
+| 8. Kim Đan thành công                 | ≥ 12%                        | Trung bình ≤ 2,0 lần thử (pity +8% / lần, 07 §2)                                      |
+| 9. **Thử** Kết Anh (Lôi Kiếp 3 đạo)   | ≥ 5%                         | Tỷ lệ sống qua 3 đạo ≥ 90% (không cần giảm trừ — 07 §3); thành công 55–75%            |
 
 Giải thích: một phễu quá dốc (ví dụ < 20% qua Luyện Khí 9) nghĩa là pacing 07 §5 hoặc nguồn đan quá khắt; quá phẳng (> 80% qua Trúc Cơ) nghĩa là đột phá quá dễ, mất khoảnh khắc P1 ([01 §1](01-gdd.md)).
 
