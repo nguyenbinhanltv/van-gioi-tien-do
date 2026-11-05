@@ -58,6 +58,8 @@ Không có công cụ nào dưới đây bắt buộc để chạy `gen`/`valida
 - **Deploy** (tạo PR sang repo client) và **schema thật của `orchestrator.inc`**: YAML chỉ là bản thiết kế theo schema giả định; `workdir: ${workspace}/tutien-procgen` trong đó vẫn trỏ về cấu trúc gói gốc, cần đổi thành `tools/procgen` khi ánh xạ.
 - Chưa chạy `shader_snapshot.js`, `preview/shader_preview.html` (`npm run preview` tạo ra) trên trình duyệt/GPU thật; chưa nạp tileset vào Cocos Creator.
 
+> **Chỉ để tham khảo.** `pipeline/orchestrator_pipeline.yaml` không được chạy bởi CI nào. "orchestrator.inc" trong tài liệu gốc là nhầm lẫn; dự án dùng GitHub Actions, CI ngắn, không CD, chưa có bước AI. Các bước AI trong file đó phải được rà soát lại trước khi bật.
+
 ## Bảo mật pipeline (`orchestrator_pipeline.yaml`)
 
 Rà soát tự động từng chỉ ra rủi ro; đã xử lý trong YAML (vẫn **chưa chạy trên runner thật**; khóa `secrets:` ở cấp step/hook là giả định theo schema chung, cần ánh xạ theo schema thật của orchestrator):

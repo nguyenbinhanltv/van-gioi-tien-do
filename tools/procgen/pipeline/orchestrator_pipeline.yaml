@@ -1,3 +1,9 @@
+# #############################################################################
+# CHỈ ĐỂ THAM KHẢO (REFERENCE ONLY) – KHÔNG được chạy bởi bất kỳ CI nào.
+# "orchestrator.inc" trong tài liệu gốc là nhầm lẫn: dự án dùng GitHub Actions, CI ngắn, không CD,
+# chưa có bước AI. Các bước AI (Codex / Antigravity / Claude Code) trong file này PHẢI được rà soát lại
+# (quyền, secret, cô lập container) trước khi có ý định bật.
+# #############################################################################
 # =============================================================================
 # orchestrator_pipeline.yaml – Tu Tiên 2D: sinh asset bằng code → render → QA → đóng gói → deploy
 # -----------------------------------------------------------------------------
