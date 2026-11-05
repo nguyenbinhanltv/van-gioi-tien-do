@@ -72,6 +72,10 @@ const collision = {
       properties: { width: { type: 'number', exclusiveMinimum: 0 }, height: { type: 'number', exclusiveMinimum: 0 } },
     },
   },
+  // Single-volume entities must carry all three values; multi-part (8x8) entities carry none (parts[] own them).
+  if: { properties: { multiPart: { const: false } } },
+  then: { required: ['colliderRadius', 'hurtboxRadius', 'pickBox'] },
+  else: { properties: { colliderRadius: false, hurtboxRadius: false, pickBox: false } },
 } as const;
 
 const packedAttachment = {

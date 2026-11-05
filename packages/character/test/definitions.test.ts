@@ -164,3 +164,21 @@ describe('sample 4x4 Boss', () => {
     ).toMatch(/cannot draw animations in 8/);
   });
 });
+
+describe('malformed collision does not throw', () => {
+  it('character: { multiPart: false } alone is a schema error', () => {
+    const r = validateCharacterDefinition(player({ collision: { multiPart: false } }));
+    expect(r.valid).toBe(false);
+    expect(r.errors.join()).toMatch(/pickBox|colliderRadius|hurtboxRadius/);
+  });
+  it('monster: { multiPart: false } alone is a schema error', () => {
+    const r = validateMonsterDefinition(boss({ collision: { multiPart: false } }));
+    expect(r.valid).toBe(false);
+    expect(r.errors.join()).toMatch(/pickBox|colliderRadius|hurtboxRadius/);
+  });
+  it('multiPart: true must not carry single-volume fields', () => {
+    const mp = { multiPart: true, colliderRadius: 1 };
+    expect(validateMonsterSchema(boss({ collision: mp })).valid).toBe(false);
+    expect(validateMonsterSchema(boss({ collision: { multiPart: true } })).valid).toBe(true);
+  });
+});
