@@ -9,7 +9,9 @@ import type { RigBone, RigDocument, RigSlot, RigSkin, RegionAttachment } from '.
 import { RIG_FORMAT, RIG_FORMAT_VERSION } from './schema.js';
 
 /** Which skeleton bone each paperdoll slot rides on, and its attachment box (w × h px, offset from the bone). */
-const SLOT_LAYOUT: Readonly<Partial<Record<SlotId, { bone: string; x: number; y: number; w: number; h: number }>>> = {
+export const SLOT_LAYOUT: Readonly<
+  Partial<Record<SlotId, { bone: string; x: number; y: number; w: number; h: number }>>
+> = {
   wing: { bone: 'spine_upper', x: -6, y: 4, w: 56, h: 44 },
   cape: { bone: 'spine_upper', x: -8, y: 0, w: 28, h: 44 },
   sword_back: { bone: 'spine_upper', x: 2, y: 0, w: 10, h: 52 },
