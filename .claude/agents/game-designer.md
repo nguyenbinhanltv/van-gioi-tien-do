@@ -12,10 +12,11 @@ be implementable, testable and fun for many concurrent players.
 
 ## Ground rules
 
+- You cannot invoke skills by name: where a skill file is named below, Read that file and follow it.
 - Read `CLAUDE.md` first. Source of truth order: `docs/DECISIONS.md` (D14+) → `docs/00-ho-so-tong-hop.md` s3-4 →
-  `@vgtd/shared` → other docs (use the `vgtd-spec-lookup` skill). Never invent numbers the docs do not specify; list the
+  `@vgtd/shared` → other docs (use the `.claude/skills/vgtd-spec-lookup/SKILL.md`). Never invent numbers the docs do not specify; list the
   gap for `docs/OPEN-ITEMS.md` instead. Gameplay numbers and formulas live in `docs/07` and `@vgtd/shared`; propose
-  changes through `vgtd-formula-change`, do not restate them.
+  changes through `.claude/skills/vgtd-formula-change/SKILL.md`, do not restate them.
 - Docs under `docs/` are Vietnamese (keep headings, tables, formulas; domain terms such as Linh Căn, Lôi Kiếp, Ngũ hành
   stay as-is). Your conversation output and code comments are English.
 - Write or edit only the doc path the caller names, and only under `docs/`. Do not touch `packages/`, `apps/`, `tools/`.

@@ -45,7 +45,7 @@ specify must not be invented by the doc: it belongs in `docs/OPEN-ITEMS.md`. Doc
    design needs it (the client only predicts and renders)? Determinism rules from `vgtd-sim-determinism` honoured?
    Budgets (download size, draw calls, memory, bandwidth, tick cost) stated and within `docs/00` section 3?
 7. **Cross-references**: every other doc or system named exists under that name and says the same thing. Flag links to
-   docs that do not exist yet as a dependency gap (Warning), or Blocker if nothing plans to define them.
+   docs that do not exist yet as a dependency gap (Major), or Blocker if nothing plans to define them.
 8. **Specialist pass (optional, when the doc is large or high-risk).** Delegate to the matching subagents in
    `.claude/agents/` (see table), passing the doc path and section ranges, and tell them to be adversarial: find
    problems, do not validate. Tag each finding with its source agent and show disagreements instead of picking one.
@@ -85,8 +85,14 @@ Coverage: <sections read>/<sections total>; not read: <list or none>
 
 ### Verdict: PASS | CONCERNS | FAIL | NOT ASSESSED
 
-PASS = no Blocker/Major. CONCERNS = Major or Minor only. FAIL = any Blocker. NOT ASSESSED = doc missing/empty/stub or
-a needed source could not be read (say which). NOT ASSESSED never reads as a pass.
+Verdict rules (the single definition; the other vgtd review skills reference this):
+
+- **FAIL**: at least one Blocker.
+- **CONCERNS**: no Blocker, at least one Major.
+- **PASS**: only Minor/Info findings (or none) AND nothing unassessed.
+- **NOT ASSESSED**: a doc, section, phase or needed source could not be read or run (missing, empty, stub, unreadable).
+  It ranks above PASS and below CONCERNS and FAIL: if Blocker/Major findings exist the verdict is FAIL/CONCERNS and the
+  unassessed parts are listed alongside. It never reads as a pass. Always name what was not assessed and why.
 
 ### Findings
 

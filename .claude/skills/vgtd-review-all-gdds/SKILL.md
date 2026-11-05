@@ -115,10 +115,9 @@ Focus: <full | consistency | design-theory | since <ref>>
 <gaps the docs leave unspecified; do not invent values>
 ```
 
-Verdict rules: FAIL if any Blocker; CONCERNS if Major/Minor only; NOT ASSESSED ranks above PASS and below CONCERNS when a
-whole phase or doc could not be read or fewer than two docs were readable; PASS only with no Blocker/Major and no
-unassessed part. A cross-review that skipped half the docs is indistinguishable from one that found them consistent, so
-always print the coverage line.
+Verdict rules: as defined once in `.claude/skills/vgtd-design-review/SKILL.md`. Skill-specific NOT ASSESSED triggers: a
+whole phase or doc could not be read, or fewer than two docs were readable. A cross-review that skipped half the docs is
+indistinguishable from one that found them consistent, so always print the coverage line.
 
 ## Rules
 

@@ -80,8 +80,8 @@ Design docs: <list> · Technical docs: <list> · Missing: <list> · Not read: <l
 ### Required ADRs / decisions (candidate DECISIONS rows, next free D<n>) and docs/OPEN-ITEMS.md additions
 ```
 
-FAIL if any Blocker; CONCERNS if Major/Minor only; NOT ASSESSED if a phase could not run or design/technical docs are
-absent; PASS only with nothing unassessed. Always print the coverage line.
+Verdict rules: as defined once in `.claude/skills/vgtd-design-review/SKILL.md`. Skill-specific NOT ASSESSED triggers: a
+phase could not run, or design/technical docs are absent. Always print the coverage line.
 
 ## Rules
 
