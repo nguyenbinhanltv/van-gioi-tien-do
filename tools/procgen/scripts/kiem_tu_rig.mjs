@@ -591,6 +591,7 @@ export function paintJointExtensions(parts, source, direction, ranks) {
       // The painted extension remains under an original higher layer at rest.
       if (neighbour && original.get(neighbour.name).image.getPixel(x, y)[3] < alpha) continue;
       if (!neighbour && (x < own.x || y < own.y || x >= own.x + own.w || y >= own.y + own.h)) continue;
+      if (!neighbour && !original.get(part.name).image.getPixel(x, y)[3]) continue;
       const old = part.image.getPixel(x, y);
       if (old[3] >= alpha * coverage) continue;
       const shade = 1 - 0.09 * Math.max(-1, Math.min(1, (x - start[0]) / Math.max(1, radius)));

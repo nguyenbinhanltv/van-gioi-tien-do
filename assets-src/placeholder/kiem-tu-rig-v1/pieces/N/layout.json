@@ -1,5 +1,5 @@
 [
-  { "name": "neck", "slot": "body", "bone": "neck", "box": { "x": 116, "y": 37, "w": 25, "h": 51 } },
+  { "name": "neck", "slot": "body", "bone": "neck", "box": { "x": 118, "y": 37, "w": 21, "h": 50 } },
   { "name": "torso_base", "slot": "body", "bone": "spine_mid", "box": { "x": 113, "y": 63, "w": 31, "h": 111 } },
   { "name": "thigh_R", "slot": "body", "bone": "thigh_R", "box": { "x": 102, "y": 117, "w": 35, "h": 103 } },
   { "name": "thigh_L", "slot": "body", "bone": "thigh_L", "box": { "x": 121, "y": 117, "w": 35, "h": 99 } },
@@ -29,11 +29,11 @@
   { "name": "hair_ribbon_2", "slot": "hair_back", "bone": "ribbon_2", "box": { "x": 112, "y": 74, "w": 17, "h": 36 } },
   { "name": "hairpin", "slot": "headwear", "bone": "head", "box": { "x": 106, "y": 33, "w": 43, "h": 9 } },
   { "name": "upper_sleeve_R", "slot": "arm_R", "bone": "upper_arm_R", "box": { "x": 104, "y": 57, "w": 73, "h": 90 } },
-  { "name": "lower_sleeve_R", "slot": "arm_R", "bone": "lower_arm_R", "box": { "x": 147, "y": 101, "w": 32, "h": 51 } },
+  { "name": "lower_sleeve_R", "slot": "arm_R", "bone": "lower_arm_R", "box": { "x": 147, "y": 103, "w": 32, "h": 49 } },
   { "name": "sleeve_tip_R", "slot": "arm_R", "bone": "sleeve_tip_R", "box": { "x": 148, "y": 112, "w": 28, "h": 31 } },
   { "name": "hand_R", "slot": "arm_R", "bone": "hand_R", "box": { "x": 159, "y": 122, "w": 20, "h": 30 } },
   { "name": "upper_sleeve_L", "slot": "arm_L", "bone": "upper_arm_L", "box": { "x": 80, "y": 57, "w": 73, "h": 89 } },
-  { "name": "lower_sleeve_L", "slot": "arm_L", "bone": "lower_arm_L", "box": { "x": 80, "y": 101, "w": 30, "h": 48 } },
+  { "name": "lower_sleeve_L", "slot": "arm_L", "bone": "lower_arm_L", "box": { "x": 80, "y": 103, "w": 30, "h": 46 } },
   { "name": "sleeve_tip_L", "slot": "arm_L", "bone": "sleeve_tip_L", "box": { "x": 80, "y": 121, "w": 29, "h": 22 } },
   { "name": "hand_L", "slot": "arm_L", "bone": "hand_L", "box": { "x": 81, "y": 122, "w": 18, "h": 27 } },
   { "name": "sword", "slot": "weapon_R", "bone": "weapon", "box": { "x": 168, "y": 140, "w": 35, "h": 69 } }

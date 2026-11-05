@@ -39,14 +39,14 @@
     { "name": "sash_R_2", "x": 93, "y": 374, "width": 12, "height": 37 },
     { "name": "sleeve_tip_L", "x": 111, "y": 374, "width": 27, "height": 35 },
     { "name": "hair_front_1", "x": 144, "y": 374, "width": 39, "height": 33 },
-    { "name": "hand_R", "x": 189, "y": 374, "width": 21, "height": 29 },
-    { "name": "hand_L", "x": 216, "y": 374, "width": 21, "height": 26 },
-    { "name": "hair_front_2", "x": 243, "y": 374, "width": 45, "height": 23 },
-    { "name": "foot_R", "x": 294, "y": 374, "width": 19, "height": 23 },
-    { "name": "foot_L", "x": 319, "y": 374, "width": 27, "height": 22 },
-    { "name": "sleeve_tip_R", "x": 352, "y": 374, "width": 25, "height": 21 },
-    { "name": "sash_L_2", "x": 383, "y": 374, "width": 11, "height": 15 },
-    { "name": "hairpin", "x": 400, "y": 374, "width": 41, "height": 9 },
-    { "name": "slot_headwear", "x": 447, "y": 374, "width": 41, "height": 9 }
+    { "name": "hand_R", "x": 189, "y": 374, "width": 20, "height": 29 },
+    { "name": "hand_L", "x": 215, "y": 374, "width": 21, "height": 26 },
+    { "name": "hair_front_2", "x": 242, "y": 374, "width": 45, "height": 23 },
+    { "name": "foot_R", "x": 293, "y": 374, "width": 19, "height": 23 },
+    { "name": "foot_L", "x": 318, "y": 374, "width": 27, "height": 22 },
+    { "name": "sleeve_tip_R", "x": 351, "y": 374, "width": 25, "height": 21 },
+    { "name": "sash_L_2", "x": 382, "y": 374, "width": 11, "height": 15 },
+    { "name": "hairpin", "x": 399, "y": 374, "width": 41, "height": 9 },
+    { "name": "slot_headwear", "x": 446, "y": 374, "width": 41, "height": 9 }
   ]
 }

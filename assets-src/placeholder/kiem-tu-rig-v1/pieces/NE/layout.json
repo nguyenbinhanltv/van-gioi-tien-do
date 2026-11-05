@@ -1,5 +1,5 @@
 [
-  { "name": "neck", "slot": "body", "bone": "neck", "box": { "x": 114, "y": 37, "w": 50, "h": 92 } },
+  { "name": "neck", "slot": "body", "bone": "neck", "box": { "x": 115, "y": 37, "w": 49, "h": 92 } },
   { "name": "torso_base", "slot": "body", "bone": "spine_mid", "box": { "x": 102, "y": 63, "w": 38, "h": 125 } },
   { "name": "thigh_R", "slot": "body", "bone": "thigh_R", "box": { "x": 98, "y": 118, "w": 37, "h": 107 } },
   { "name": "thigh_L", "slot": "body", "bone": "thigh_L", "box": { "x": 117, "y": 117, "w": 35, "h": 99 } },
@@ -29,11 +29,11 @@
   { "name": "hair_ribbon_2", "slot": "hair_back", "bone": "ribbon_2", "box": { "x": 110, "y": 74, "w": 7, "h": 21 } },
   { "name": "hairpin", "slot": "headwear", "bone": "head", "box": { "x": 101, "y": 33, "w": 43, "h": 9 } },
   { "name": "upper_sleeve_R", "slot": "arm_R", "bone": "upper_arm_R", "box": { "x": 142, "y": 80, "w": 29, "h": 67 } },
-  { "name": "lower_sleeve_R", "slot": "arm_R", "bone": "lower_arm_R", "box": { "x": 143, "y": 107, "w": 30, "h": 45 } },
+  { "name": "lower_sleeve_R", "slot": "arm_R", "bone": "lower_arm_R", "box": { "x": 144, "y": 107, "w": 29, "h": 45 } },
   { "name": "sleeve_tip_R", "slot": "arm_R", "bone": "sleeve_tip_R", "box": { "x": 145, "y": 121, "w": 26, "h": 22 } },
   { "name": "hand_R", "slot": "arm_R", "bone": "hand_R", "box": { "x": 153, "y": 122, "w": 19, "h": 30 } },
   { "name": "upper_sleeve_L", "slot": "arm_L", "bone": "upper_arm_L", "box": { "x": 86, "y": 57, "w": 55, "h": 89 } },
-  { "name": "lower_sleeve_L", "slot": "arm_L", "bone": "lower_arm_L", "box": { "x": 85, "y": 96, "w": 30, "h": 52 } },
+  { "name": "lower_sleeve_L", "slot": "arm_L", "bone": "lower_arm_L", "box": { "x": 85, "y": 96, "w": 29, "h": 52 } },
   { "name": "sleeve_tip_L", "slot": "arm_L", "bone": "sleeve_tip_L", "box": { "x": 86, "y": 107, "w": 27, "h": 35 } },
   { "name": "hand_L", "slot": "arm_L", "bone": "hand_L", "box": { "x": 85, "y": 122, "w": 22, "h": 27 } },
   { "name": "sword", "slot": "weapon_R", "bone": "weapon", "box": { "x": 162, "y": 140, "w": 34, "h": 68 } }
