@@ -61,3 +61,14 @@ Nguồn: mô tả PR #4 (`packages/shared`). Mục A6 và A7 đã được chố
 
 - `@vgtd/shared` chưa có PRNG có seed dùng chung client ↔ server (các công thức hiện nhận giá trị ngẫu nhiên được truyền vào). Cần thêm trước khi viết World Node (xem skill `vgtd-sim-determinism`).
 - Chưa có `docs/ASSET-LICENSES.md`; tạo khi nhập asset bên thứ ba đầu tiên (xem skill `vgtd-asset-pipeline`).
+
+## 7. Nhân vật & Quái vật (`@vgtd/character`)
+
+- Animation bất đối xứng (D14): spec không nói animation nào; mặc định đánh dấu `attack`, `cast`, `channel` (vũ khí tay phải) là `drawnInEight`. Cần xác nhận.
+- Tọa độ socket trong bảng §4 chỉ hợp lý khi y hướng LÊN từ pivot (hand_R = (−18, 52)); lưu như spec in, đổi sang tọa độ canvas bằng `pivotToCanvas`. "head_top theo cỡ nhân vật" chưa có công thức co giãn.
+- Quỹ đạo orbit "ellipse 36 × 18": chưa rõ là trục hay bán trục (lưu là rộng × cao).
+- "≤ 2 draw call mỗi nhân vật" chưa định nghĩa cách đếm: code đếm các đoạn slot Spine liên tiếp đổi trang texture/blend, `wing` coi là additive, node orbit không tính; kiểm tra vừa atlas chỉ theo diện tích.
+- Sự kiện `Run` footstep "frame 2 và 7": chưa rõ đánh số từ 0 hay 1; hit / cancel_window / vfx_spawn không có số frame (chỉ có mốc pha). §1 nhắc "18 animation" nhưng bảng chỉ có 13.
+- Sort line chữ V: "nằm dưới cạnh thì vẽ trước boss" được hiểu là đứng trước mặt boss (vẽ sau boss).
+- Hitbox cho quái tinh anh (canvas 192) và giới hạn rig cho quái Spine thường (xà, giao) không được nêu: tinh anh dùng hàng 1 × 1, quái Spine thường không bị giới hạn.
+- `CANVAS_BY_FOOTPRINT` trong `@vgtd/shared` không có 8 × 8 (ghép mảnh, canvas theo bộ phận).

@@ -24,7 +24,7 @@
     "typecheck": "tsc -p tsconfig.test.json"
   },
   "dependencies": {
-    "@vgtd/shared": "0.1.0",
+    "@vgtd/shared": "*",
     "ajv": "^8.17.1"
   }
 }
