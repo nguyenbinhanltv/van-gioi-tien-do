@@ -24,6 +24,8 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 
 ## 3. Mảng chưa có tài liệu thiết kế
 
+> Cập nhật: các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế từng cảnh giới và chiến tranh Linh Mạch đã có **đề xuất** ở [01-gdd.md](01-gdd.md) §3–§4, §9 (chờ duyệt; xem mục "Design A"); nhiệm vụ, chế tạo, PvP, kiếm tiền, onboarding, LiveOps, telemetry có đề xuất ở 12–17 (PR #69). Danh sách dưới giữ nguyên làm lịch sử.
+
 - Nhiệm vụ và cốt truyện
 - Nghề luyện đan / luyện khí / chế phù chi tiết
 - Luật PvP và đấu trường
@@ -34,7 +36,7 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 
 ## 4. Lưu ý khi chuyển đổi tài liệu
 
-- Không có docx GDD riêng; 01-gdd.md chỉ chứa những gì hồ sơ tổng hợp và tài liệu Công thức ghi lại. Các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế riêng của từng cảnh giới và chi tiết chiến tranh Linh Mạch chưa có nguồn chi tiết.
+- Không có docx GDD riêng; 01-gdd.md chỉ chứa những gì hồ sơ tổng hợp và tài liệu Công thức ghi lại. Các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế riêng của từng cảnh giới và chiến tranh Linh Mạch hiện có **thiết kế đề xuất** trong 01 §3–§4, §9 (chờ duyệt, mục "Design A" ở cuối file); vẫn chưa có nguồn gốc.
 - 03–08 giữ nguyên văn docx, kể cả các chỗ nhắc giá trị cũ để so sánh.
 
 ## 5. Điểm mơ hồ của spec phát hiện khi viết `@vgtd/shared` (PR #4)
@@ -62,6 +64,15 @@ Nguồn: mô tả PR #4 (`packages/shared`). Tất cả A1–A13 đã được c
 - `@vgtd/shared` chưa có PRNG có seed dùng chung client ↔ server (các công thức hiện nhận giá trị ngẫu nhiên được truyền vào). Cần thêm trước khi viết World Node (xem skill `vgtd-sim-determinism`).
 - Chưa có `docs/ASSET-LICENSES.md`; tạo khi nhập asset bên thứ ba đầu tiên (xem skill `vgtd-asset-pipeline`).
 
+## Design A (01, 10, 11)
+
+Các tài liệu [01-gdd.md](01-gdd.md), [10-mvp-scope.md](10-mvp-scope.md), [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md) đã **thiết kế bổ sung** các tầng thời gian, cơ chế từng cảnh giới, chiến tranh Linh Mạch, Nghiệp Lực / Đạo Tâm, phạm vi closed beta và hệ phái / kỹ năng. **Mọi giá trị mới là đề xuất, chờ chủ dự án duyệt** (chưa phải quyết định; chưa vào DECISIONS). Các câu hỏi cần chốt (mỗi mục có mặc định đề xuất):
+
+- GDD: mục "Câu hỏi cần chốt" của 01 (G1–G15), gồm ba mức hậu quả Lôi Kiếp (G1), Linh Mạch 5 hay 6 phẩm (G6).
+- MVP: mục "Câu hỏi cần chốt" của 10 (M1–M13).
+- Hệ phái / kỹ năng: mục "Câu hỏi cần chốt" của 11 (S1–S11).
+- Cần duyệt thêm: ρ của Hậu sơn Sơn Môn khi đả tọa (0,6 theo 07 §5 hay giá trị riêng) — 01 §11.
+
 ## Design C (20–29)
 
 Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất – chờ duyệt". Bảng "Câu hỏi cần chốt" của từng tài liệu: [20](20-kien-truc-tong-the.md#câu-hỏi-cần-chốt), [21](21-kien-truc-client.md#câu-hỏi-cần-chốt), [22](22-server-modules.md#câu-hỏi-cần-chốt), [23](23-mo-hinh-du-lieu.md#câu-hỏi-cần-chốt), [24](24-giao-thuc-mang.md#câu-hỏi-cần-chốt), [25](25-xac-thuc-bao-mat.md#câu-hỏi-cần-chốt), [26](26-kinh-te-ledger.md#câu-hỏi-cần-chốt), [27](27-van-hanh-quan-sat.md#câu-hỏi-cần-chốt), [28](28-chien-luoc-kiem-thu.md#câu-hỏi-cần-chốt), [29](29-adr.md#câu-hỏi-cần-chốt).
@@ -85,3 +96,6 @@ Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất �
 
 - FTUE bước 9 ([16-onboarding.md](16-onboarding.md) §4.2): theo D19 lần đột phá tiểu cảnh đầu tiên là 90% cố định, không đan, không pity. Đề xuất (chưa áp dụng): cân nhắc nâng tỷ lệ riêng cho nhân vật chưa từng đột phá, hoặc giữ nguyên 90%.
 - Nút Né trên Mobile: `docs/05` chưa mô tả vị trí ([16-onboarding.md](16-onboarding.md) Q4).
+- Đã đối chiếu với 12–19 (PR #69): phần phe / Nghiệp / rơi đồ và chiến tranh Linh Mạch của 01 chuyển sang tham chiếu 14; FTUE của 10 chuyển sang 16, KPI sang 17, nhiệm vụ sang 12, chế tạo sang 13. Còn lệch cần chốt: số Trận Nhãn 3 (14) so với 5 (04 §5) (G15); lợi thế phe (G14); chế phù trong beta (M13).
+
+- Đã đối chiếu với 20–29 (PR #68): số CCU 100 / tick p99 ≤ 40 ms của 10 và `CastStart` / AOE trên lưới ô của 11 đã được 20–24, 28, 29 dùng làm đầu vào; không phát sinh lệch mới (T12 vẫn mở cho phần sổ cái / link của 20–28).
