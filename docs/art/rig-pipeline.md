@@ -103,3 +103,7 @@ Viewer (`apps/client-cocos`, worker `van-gioi-tien-do-7`) nạp ske/tex, phát t
 ## 12. Tổng quát hóa cho 4 Đạo Lộ
 
 Registry lớp, đặc tả mảnh cho art, sinh rig mẫu từ thư mục mảnh, re-target hoạt cảnh theo vũ khí và xuất viewer theo nhân vật: xem [rig-classes.md](rig-classes.md).
+
+## 13. Đo chất lượng rig bằng CLI
+
+`npm run rig:measure -w @vgtd/rig -- <nhân-vật> [--dir S,E] [--autoskin] [--top N] [--limit PX] [--json] [--strict]` in bảng theo hướng: số lần hở mối nối (ngưỡng mặc định 3 px), hở tối đa, số sự kiện dãn và dãn tối đa, số clip bị tách mảnh (islands), số đỉnh mesh, rồi danh sách mảnh cần vẽ bù (cặp mảnh, bone, px, clip/khung xấu nhất). `--autoskin` đo thử như thể đã áp `autoSkin` (không đụng dữ liệu); `--strict` thoát mã 1 nếu còn hở/tách/dãn (dùng làm cổng sau khi art vẽ bù xong). Chạy bằng `node` thuần (bundle bằng esbuild, không cần Cocos); cùng bộ kiểm tra với artifact và CI. Ví dụ: `npm run rig:measure -w @vgtd/rig -- kiem-tu --autoskin`.

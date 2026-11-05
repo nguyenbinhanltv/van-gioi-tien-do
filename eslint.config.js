@@ -12,6 +12,7 @@ export default tseslint.config(
       'apps/client-cocos/**',
       'tools/procgen/**',
       'tools/dragonbones-testrig/scripts/**', // plain Node CLI (.mjs), like the procgen scripts
+      'tools/rig/scripts/**/*.mjs', // plain Node launcher (.mjs); the TypeScript scripts there are linted
     ],
   },
   js.configs.recommended,

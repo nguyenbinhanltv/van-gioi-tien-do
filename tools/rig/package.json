@@ -22,11 +22,15 @@
     "artifacts": "vitest run test/artifacts.test.ts",
     "export:kiemtu": "vitest run test/kiemtu-data.test.ts",
     "gen:parts-spec": "vitest run test/classes.test.ts -t \"writes docs/art/parts-spec.md\"",
-    "export:character": "vitest run test/kiemtu-data.test.ts"
+    "export:character": "vitest run test/kiemtu-data.test.ts",
+    "rig:measure": "node scripts/run-ts.mjs scripts/measure.ts"
   },
   "dependencies": {
     "@vgtd/character": "*",
     "@vgtd/shared": "*",
     "ajv": "^8.17.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.5"
   }
 }
