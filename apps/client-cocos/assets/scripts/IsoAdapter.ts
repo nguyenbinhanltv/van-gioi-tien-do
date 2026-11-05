@@ -47,6 +47,21 @@ export function cameraOffset(target: ScreenPoint, zoom: number, out: Vec3 = new 
   return out.set(Math.round(-p.x * zoom), Math.round(-p.y * zoom), 0);
 }
 
+/**
+ * Browser client px (y DOWN, relative to the page) -> Canvas-local UI space (Cocos, y UP) in design units.
+ * `rect` = canvas element bounding rect, `size` = Canvas content size. This is a y-flip, hence it lives here.
+ */
+export function clientToCocosUi(
+  clientX: number,
+  clientY: number,
+  rect: { left: number; top: number; width: number; height: number },
+  size: { width: number; height: number },
+): { x: number; y: number } {
+  const nx = (clientX - rect.left) / rect.width - 0.5;
+  const ny = (clientY - rect.top) / rect.height - 0.5;
+  return { x: nx * size.width, y: -ny * size.height };
+}
+
 /** L3 draw-order key of a point entity (ground Y of its pivot; jump height ignored). */
 export function pointSortable(id: number, group: number, i: number, j: number) {
   return { id, group, sortY: shared.pivotSortY(i, j), x: shared.tileToScreen(i, j).x };

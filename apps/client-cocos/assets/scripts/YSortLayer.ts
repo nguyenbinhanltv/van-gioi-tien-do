@@ -16,7 +16,6 @@ interface Entry {
 export class YSortLayer {
   readonly root: Node;
   private entries: Entry[] = [];
-  private order: Node[] = [];
 
   constructor(parent: Node) {
     this.root = newNode('L3_YSort', parent);
@@ -36,10 +35,7 @@ export class YSortLayer {
     keyed.sort((a, b) => shared.compareDrawOrder(a.k, b.k));
     for (let idx = 0; idx < keyed.length; idx++) {
       const node = keyed[idx].e.node;
-      if (this.order[idx] !== node) {
-        node.setSiblingIndex(idx);
-        this.order[idx] = node;
-      }
+      if (this.root.children[idx] !== node) node.setSiblingIndex(idx);
     }
   }
 }

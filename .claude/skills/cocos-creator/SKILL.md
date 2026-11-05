@@ -25,7 +25,7 @@ Project: `apps/client-cocos` (2D, TypeScript, Web first). Editor: **3.8.8**, ins
 - Perf numbers: `director.root.device.numDrawCalls`, `.numTris`, `.memoryStatus.textureSize`; JS heap from `performance.memory` (Chromium only). The `profiler` engine module also paints its own overlay in debug builds; use it as a cross-check.
 - Code-generated assets must not be committed: `assets/scripts/vendor/` and `assets/resources/world/` are git-ignored (with their `.meta`).
 
-## How workspace packages reach Cocos (decision P2, proposed)
+## How workspace packages reach Cocos (docs/31 I-07, pending confirmation)
 
 Cocos does not resolve npm workspaces for scripts under `assets/`, and ajv (in `@vgtd/shared` validators) needs `new Function`. So:
 
@@ -55,7 +55,7 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 
 ## Engine settings
 
-`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, dragon-bones, video, webview, particle-2d); **Spine 4.2** selected (`spine` `_option: "spine-4.2"` and `spine-4.2` in `includeModules`; proposed decision P1 in docs/DECISIONS.md - skeletons must be exported from Spine Editor 4.2.x). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
+`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, dragon-bones, video, webview, particle-2d); **Spine 4.2** selected (`spine` `_option: "spine-4.2"` and `spine-4.2` in `includeModules`; locked as D25 in docs/DECISIONS.md - skeletons must be exported from Spine Editor 4.2.x). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
 
 ## Integration seams (later tasks)
 

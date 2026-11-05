@@ -69,7 +69,8 @@ export class InputBridge {
     const r = game.canvas!.getBoundingClientRect();
     const ui = this.rig.clientToUi(r.left + joy.base.x, r.top + joy.base.y);
     const kn = this.rig.clientToUi(r.left + joy.knob.x, r.top + joy.knob.y);
-    const k = (this.rig.clientToUi(r.left + r.width, r.top).x - ui.x) / (r.width - joy.base.x) || 1; // design units per css px
+    const unit = this.rig.clientToUi(r.left + 1, r.top).x - this.rig.clientToUi(r.left, r.top).x; // design units per css px
+    const k = Number.isFinite(unit) && unit > 0 ? unit : 1;
     const base = this.joyBase.getComponent(UITransform)!;
     base.setContentSize(joy.radius * 2 * k, joy.radius * 2 * k);
     this.joyBase.setPosition(ui.x, ui.y, 0);

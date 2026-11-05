@@ -4,7 +4,7 @@
 // Run: npm run prepare:assets -w client-cocos   (also invoked by build:web)
 import { build } from 'esbuild';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -39,7 +39,8 @@ writeFileSync(
 // 2. tilemap -----------------------------------------------------------------
 const procgen = join(repo, 'tools/procgen');
 const out = join(procgen, 'out/tilemap');
-if (!existsSync(join(out, 'map.json'))) {
+// always regenerate (0.6 s) so the copied tilemap can never be stale vs tools/procgen
+{
   const r = spawnSync('npm', ['run', 'gen:tilemap'], { cwd: procgen, stdio: 'inherit', shell: true });
   if (r.status !== 0) throw new Error('gen:tilemap failed');
 }

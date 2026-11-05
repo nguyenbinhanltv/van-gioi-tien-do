@@ -1,4 +1,5 @@
 import { Color, Label, Node, Sprite, UITransform, director } from 'cc';
+import { shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 
@@ -16,8 +17,6 @@ export interface PerfStats {
   nodes: number;
   l3Objects: number;
 }
-
-export const BUDGET = { drawCalls: 80, memoryMB: 500 } as const; // docs/06: Mobile/Web
 
 /** Top-left perf overlay. Also publishes the latest numbers on `window.__vgtdPerf` for automation. */
 export class PerfHud {
@@ -103,12 +102,16 @@ export class PerfHud {
         '[vgtd][perf] ' + JSON.stringify(s, (_k, v) => (typeof v === 'number' ? Math.round(v * 100) / 100 : v)),
       );
     }
-    const dcOk = s.drawCalls <= BUDGET.drawCalls ? 'ok' : 'OVER';
+    const B = shared.BUDGETS; // docs/06 Mobile/Web budgets, single-sourced in @vgtd/shared
+    const dcOk = s.drawCalls <= B.DRAW_CALLS_WEB_MOBILE ? 'ok' : 'OVER';
+    const texOk = s.textureMB <= B.TEXTURE_RAM_MB_WEB ? 'ok' : 'OVER';
+    const heapOk = s.jsHeapMB === null || s.jsHeapMB + s.textureMB <= B.RAM_MB_WEB ? 'ok' : 'OVER';
     const heap = s.jsHeapMB === null ? 'n/a' : `${s.jsHeapMB.toFixed(1)} MB`;
     this.label.string =
       `FPS ${s.fps.toFixed(1)}  (${s.frameMs.toFixed(1)} ms)\n` +
-      `Draw calls ${s.drawCalls} / ${BUDGET.drawCalls} ${dcOk}   Tris ${s.triangles}\n` +
-      `Tex mem ${s.textureMB.toFixed(2)} MB (est ${s.textureEstMB.toFixed(2)})  / ${BUDGET.memoryMB} MB\n` +
+      `Draw calls ${s.drawCalls} / ${B.DRAW_CALLS_WEB_MOBILE} ${dcOk}   Tris ${s.triangles}\n` +
+      `Tex mem ${s.textureMB.toFixed(2)} MB (est ${s.textureEstMB.toFixed(2)}) / ${B.TEXTURE_RAM_MB_WEB} MB ${texOk}
+` +
       `JS heap ${heap}\n` +
       `Nodes ${s.nodes}   L3 ${s.l3Objects}\n` +
       `click / WASD move | ?input=touch for joystick` +

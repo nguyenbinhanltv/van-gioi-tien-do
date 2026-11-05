@@ -1,5 +1,5 @@
 import { Node, UITransform, game } from 'cc';
-import { cameraOffset, cocosToScreen, type ScreenPoint } from './IsoAdapter';
+import { cameraOffset, clientToCocosUi, cocosToScreen, type ScreenPoint } from './IsoAdapter';
 
 /**
  * Camera follow + client->world conversion.
@@ -26,9 +26,7 @@ export class CameraRig {
 
   /** Browser client px -> UI-space (Canvas-local, y up) design units. */
   clientToUi(clientX: number, clientY: number): { x: number; y: number } {
-    const r = game.canvas!.getBoundingClientRect();
-    const s = this.canvas.contentSize;
-    return { x: ((clientX - r.left) / r.width - 0.5) * s.width, y: (0.5 - (clientY - r.top) / r.height) * s.height };
+    return clientToCocosUi(clientX, clientY, game.canvas!.getBoundingClientRect(), this.canvas.contentSize);
   }
 
   /** client-core CameraLike: client px -> shared logical screen coords (y down), 1x world px. */

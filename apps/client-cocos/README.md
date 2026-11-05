@@ -31,7 +31,9 @@ Tham số debug: `?input=touch|pointer` ép chế độ nhập; `#autotest` (ho�
 | `settings/`                     | Cài đặt dự án (engine modules, trong đó **Spine 4.2**).                                                                                                                                                                                         |
 | `build-config.json`             | Tùy chọn build headless.                                                                                                                                                                                                                        |
 
-Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước) và mục "Đề xuất chờ xác nhận" trong `docs/DECISIONS.md` (Spine 4.2, cách nạp `@vgtd/*`).
+Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/DECISIONS.md` (Spine 4.2) và I-07 trong `docs/31-bang-quyet-dinh.md` (cách nạp `@vgtd/*` bằng esbuild, chờ xác nhận).
+
+> **Lưu ý CI:** CI không có Cocos nên không chạy `tsc` với typing của engine, không chạy eslint (thư mục này bị loại khỏi lint) và không build. Chỉ `check:yflip` chạy trong `typecheck` trên CI. Tên package là `client-cocos` (không phải `@vgtd/*`) vì trường `name` của `package.json` đồng thời là tên dự án Cocos và quyết định tên thư mục build; tên có dấu `@`/`/` có thể làm hỏng đường dẫn.
 
 ## Điểm nối cho các task sau
 
