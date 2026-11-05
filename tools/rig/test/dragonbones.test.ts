@@ -249,3 +249,22 @@ maybe('events through the real runtime', () => {
     }
   });
 });
+
+describe('2x atlas with 1x logical geometry', () => {
+  it('scales image displays by logical size / packed size', () => {
+    const rig = buildReferenceHumanoid('E');
+    const atlas = atlasFor(rig);
+    const doubled = {
+      ...atlas,
+      regions: atlas.regions.map((r) => ({ ...r, width: r.width * 2, height: r.height * 2 })),
+    };
+    const out = exportDragonBones([{ rig, clips: [] }], doubled, { name: 'x2' });
+    const arm = (out.ske.armature as Record<string, unknown>[])[0]!;
+    const skin = (arm.skin as { slot: { display: { transform: Record<string, number> }[] }[] }[])[0]!;
+    // reference attachments are 56 wide in the atlas (28 in rig px for `cape`), so a 2x region halves the scale
+    const cape = (arm.slot as { name: string }[]).findIndex((s) => s.name === 'cape');
+    const t = skin.slot[cape]!.display[0]!.transform;
+    expect(t.scX).toBeCloseTo(28 / 120, 3);
+    expect(t.scY).toBeCloseTo(44 / 120, 3);
+  });
+});
