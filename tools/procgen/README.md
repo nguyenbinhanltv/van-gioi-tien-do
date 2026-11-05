@@ -1,5 +1,32 @@
 # @vgtd/procgen – sinh asset Tu Tiên 2D Isometric bằng code
 
+## Kiếm tu art and neutral rig data (batch 3)
+
+The selected concept A / drawn-sword art is processed by
+`scripts/kiem_tu_rig.mjs`. It creates source layers, separate parts, packed PMA
+atlas pages, and format-neutral DATA following the coordinated `@vgtd/rig`
+schema. It contains no Spine or DragonBones exporter; worker 15 owns schema,
+exporters and animation authoring in `tools/rig`.
+
+```sh
+npm ci
+npm run gen:kiemtu -w @vgtd/procgen -- build
+npm run gen:kiemtu -w @vgtd/procgen -- validate
+npm run gen:kiemtu -w @vgtd/procgen -- review <session-artifact-dir>
+```
+
+`import <five-column-sheet.png>` replaces normalized art sources.
+The art/data builder imports the public shared/character APIs through the
+locked lightweight vite-node runner. It writes `tools/rig/data/kiem-tu.rig.json`
+(a RigSet), a typed idle Clip, and an asset manifest. Atlas pages include
+piece regions for weighted meshes and canonical regions for the bones-only
+fallback skin. Read `docs/art/kiem-tu-rig-spec.md` for units, roles, IK, chains,
+weights and the coordinated schema contract.
+
+All AI-derived art/data remain placeholders pending art-owner approval and
+license review. The standalone FK review is not a DragonBones/Cocos capture.
+There is no human-animator/editor dependency under D36.
+
 ## First AI placeholder sample batch
 
 The human-authorized exception to “commit seeds, not images” is the first sample

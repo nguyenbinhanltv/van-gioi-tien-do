@@ -49,6 +49,12 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §4 "Các quyết định 
 
 [Cập nhật D36: phần "con người rig/animate" của D33 bị D36 thay (AI làm toàn bộ, người chỉ duyệt trong viewer).] [Cập nhật D35: D25 (Spine runtime 4.2) và phần công cụ "Spine 4.2 Professional" của D33 bị D35 thay; chữ "Spine" ở các dòng D4, D14, D25, D33 giữ nguyên làm lịch sử, đọc là DragonBones khi nói về hoạt cảnh xương.]
 
+## Lựa chọn concept Kiếm tu — 2026-11-06
+
+| #   | Hạng mục                             | Cũ                                                    | Hiện hành                                                                                                                                                                                                                                                                                                                                                                              | Thay ở (tài liệu quyết định)            | Đã áp dụng ở                       |
+| --- | ------------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------- |
+| D37 | Concept và cách cầm kiếm của Kiếm tu | Ba hướng A/B/C chờ chọn; A ban đầu đeo kiếm trong bao | **Chọn A — Cloud Disciple / đệ tử Vân Môn thanh nhã, kết hợp cách cầm kiếm của B.** Idle, combat và locomotion: kiếm **rút, cầm tay, đọc rõ ở 128 px**; chỉ biến thể idle phi chiến đấu/trong thành mới đeo kiếm trong bao. C chỉ giữ làm tham chiếu NPC trưởng lão Sơn Môn, chưa triển khai. D14 vẫn áp dụng cho hướng vẽ; rig/idle thử không phải animation chiến đấu đã hoàn thiện. | Chủ dự án, qua orchestrator, 2026-11-06 | 31 (F-21); art/kiem-tu-rig-spec.md |
+
 ## Ghi chú
 
 - Không có docx GDD: 01-gdd.md được dựng lại từ hồ sơ tổng hợp và tài liệu Công thức (xem đầu file đó).
