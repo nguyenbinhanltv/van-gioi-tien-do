@@ -62,7 +62,7 @@
       "breakthrough": {
         "to": "truc_co",
         "base_rate": 0.7,
-        "main_pill_ids": ["pill_truc_co"],
+        "main_pill_ids": ["pill_truc_co_dan"],
         "tribulation": {
           "type": "none"
         }
@@ -80,7 +80,7 @@
         "base_rate": 0.55,
         "main_pill_ids": ["pill_ket_kim_dan"],
         "tribulation": {
-          "type": "heart_demon"
+          "type": "heart_demon_light"
         }
       }
     },
@@ -94,7 +94,7 @@
       "breakthrough": {
         "to": "nguyen_anh",
         "base_rate": 0.45,
-        "main_pill_ids": ["pill_ket_anh"],
+        "main_pill_ids": ["pill_ket_anh_dan"],
         "tribulation": {
           "type": "lightning_heart_demon",
           "strikes": 3,
@@ -118,7 +118,7 @@
       "breakthrough": {
         "to": "hoa_than",
         "base_rate": 0.35,
-        "main_pill_ids": ["pill_hoa_than"],
+        "main_pill_ids": ["pill_hoa_than_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 6,
@@ -142,7 +142,7 @@
       "breakthrough": {
         "to": "luyen_hu",
         "base_rate": 0.3,
-        "main_pill_ids": ["pill_luyen_hu"],
+        "main_pill_ids": ["pill_luyen_hu_dan"],
         "tribulation": {
           "type": "heart_demon_multi"
         }
@@ -158,7 +158,7 @@
       "breakthrough": {
         "to": "hop_the",
         "base_rate": 0.25,
-        "main_pill_ids": ["pill_hop_the"],
+        "main_pill_ids": ["pill_hop_the_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 9,
@@ -182,7 +182,7 @@
       "breakthrough": {
         "to": "dai_thua",
         "base_rate": 0.2,
-        "main_pill_ids": ["pill_dai_thua"],
+        "main_pill_ids": ["pill_dai_thua_dan"],
         "tribulation": {
           "type": "lightning",
           "strikes": 18,
@@ -206,7 +206,7 @@
       "breakthrough": {
         "to": "do_kiep",
         "base_rate": 0.15,
-        "main_pill_ids": ["pill_do_kiep"],
+        "main_pill_ids": ["pill_do_kiep_dan"],
         "tribulation": {
           "type": "lightning_heart_demon",
           "strikes": 36,
