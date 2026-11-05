@@ -15,6 +15,7 @@ npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node >= 18, TypeScript stric
 | `apps/server`           | (placeholder)       | Server MVP, authoritative 20 Hz simulation                                                                                  |
 | `apps/client-cocos`     | (placeholder)       | Cocos Creator project; flips y when rendering shared iso math                                                               |
 | `tools/procgen`         | `@vgtd/procgen`     | Asset generation, QA, atlas packing, compression pipeline                                                                   |
+| `tools/rig`             | `@vgtd/rig`         | AI animation authoring: rig schema, animation DSL, DragonBones exporter, automated animation QA (D35/D36)                   |
 | `docs/`                 | -                   | Design specs (Vietnamese), decision log, open items                                                                         |
 | `.claude/`, `CLAUDE.md` | -                   | Agent config and project skills                                                                                             |
 
