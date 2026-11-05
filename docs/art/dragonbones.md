@@ -1,10 +1,12 @@
 # DragonBones cho hoạt cảnh xương nhân vật (D35)
 
+> **[Cập nhật D36 (2026-11-06): AI làm toàn bộ nhân vật (concept, tách mảnh, rig, hoạt cảnh); DragonBones ≤ 5.6 sinh trực tiếp từ nguồn rig trung lập; người chỉ duyệt trong viewer. Editor GUI (§1) chỉ là tùy chọn, không còn chặn; phương án §4.1 trở thành quy trình chính.]**
+>
 > **Trạng thái:** kết quả nghiên cứu Task A (2026-11-06) phục vụ [D35](../DECISIONS.md). D35 thay D25 (Spine 4.2) và phần công cụ của D33 (Spine 4.2 Professional → editor DragonBones). Pipeline Hybrid của D33 giữ nguyên: AI concept + paperdoll tách lớp, **con người** rig/animate trong editor; agent không điều khiển editor và không coi JSON do agent sinh ra là animation hoàn thiện.
 >
 > Những mục ghi **[chưa xác minh]** là điều không kiểm được bằng nguồn chính thức hoặc mã engine; chuyển thành spike/OPEN-ITEMS, không coi là sự thật.
 
-## 1. Editor và giấy phép
+## 1. Editor và giấy phép (tùy chọn từ D36)
 
 | Câu hỏi                                   | Kết quả                                                                                                                                                                                                                                                                                                                                    | Nguồn                                                                                                                                                                                                                                                      |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -49,7 +51,7 @@
 | R5  | Điều khoản asset xuất từ editor chưa rõ (quyền thương mại).                                                                 | Trung bình | Ghi vào `ASSET-LICENSES.md` khi có asset đầu tiên; người đọc ToS trước phát hành.                                                                       |
 | R6  | Cache mode không hỗ trợ blend/armature lồng nhau.                                                                           | Thấp       | Chỉ dùng cache cho nhân vật xa/quái; Boss ghép nhiều skeleton (docs/03 8 × 8) dùng REALTIME.                                                            |
 
-> **Editor: mục mở, chưa quyết (2026-11-06).** Chủ dự án đang kiểm giá/điều khoản LoongBones. Ứng viên: LoongBones hoặc DragonBones Pro 5.6; chọn xong mới ghi vào D35/ASSET-LICENSES.
+> **Editor: tùy chọn (D36).** Không cần editor GUI; LoongBones / DragonBones Pro chỉ dùng nếu chủ dự án muốn chỉnh tay. Nếu dùng, vẫn phải xác minh giá/ToS trước khi ghi vào ASSET-LICENSES.
 
 ## 4. Phương án dự phòng
 
@@ -60,6 +62,6 @@
 
 ## 5. Việc phải làm tiếp (đã ghi vào OPEN-ITEMS và 31)
 
-- Chủ dự án đọc giá/ToS LoongBones và quyết định bản editor sử dụng; chỉ định người rig/animate.
+- (D36) Không cần chỉ định animator hay chọn editor. Chủ dự án duyệt hoạt cảnh trong viewer; xây QA hình ảnh tự động (OPEN-ITEMS).
 - Spike S1–S2 đổi thành "DragonBones trên Cocos 3.8.8": nạp JSON xuất mẫu, 30 bản sao, REALTIME vs SHARED_CACHE.
 - Hai worker đang làm phần liên quan: `van-gioi-tien-do-14` (bộ Kiếm tu + xuất rig DragonBones, `tools/rig`) và `van-gioi-tien-do-7` (trình xem DragonBones trong `apps/client-cocos`); PR này không sửa các tệp đó.
