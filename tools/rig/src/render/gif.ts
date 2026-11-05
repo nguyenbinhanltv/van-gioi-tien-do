@@ -28,7 +28,7 @@ function indexFrame(img: Image): Uint8Array {
     for (let x = 0; x < img.width; x++) {
       const i = (y * img.width + x) * 4;
       const a = img.data[i + 3]! / 255 || 1;
-      const t = (bayer[(y & 3) * 4 + (x & 3)]! / 16 - 0.5) * 0.9;
+      const t = (bayer[(y & 3) * 4 + (x & 3)]! / 16 - 0.5) * 0.4;
       const q = (v: number, levels: number) => {
         const f = (v / a / 255) * (levels - 1) + t;
         return Math.max(0, Math.min(levels - 1, Math.round(f)));
@@ -75,8 +75,9 @@ function lzw(indices: Uint8Array, minCode: number): Uint8Array {
     }
     emit(prefix.length === 1 ? prefix.charCodeAt(0) : dict.get(prefix)!);
     dict.set(key, next++);
-    if (next > (1 << size) - 1) size = Math.min(12, size + 1);
-    if (next >= 4095) {
+    // the decoder's table is one entry behind the encoder's: the code width grows once `next` passes 2^size
+    if (next > 1 << size && size < 12) size++;
+    if (next >= 4096) {
       emit(clear);
       reset();
     }

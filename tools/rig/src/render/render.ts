@@ -4,7 +4,7 @@
  * Rig space is y-up with the root at the pivot; the picture puts the pivot at (W/2, H − PIVOT_BOTTOM_OFFSET).
  */
 import { pivotOf } from '@vgtd/character';
-import { applyMat, invertMat, mulMat, type Mat, type Vec2 } from '../math.js';
+import { skinAttachment } from '../skinning.js';
 import { evalPose, type Pose } from '../pose.js';
 import type { Clip } from '../clip.js';
 import type { AtlasData, RigAttachment, RigDocument } from '../schema.js';
@@ -45,65 +45,12 @@ export interface RenderOptions {
   readonly overlay?: boolean;
   /** Mirror horizontally (SW/W/NW reuse SE/E/NE with scaleX = −1). */
   readonly mirror?: boolean;
+  /** Draw the ground line and pivot cross. Default true. */
+  readonly ground?: boolean;
+  /** Slots to leave out (debugging: isolate a piece). */
+  readonly hideSlots?: readonly string[];
   /** Planted flags per ankle bone for the frame (draws a marker under planted feet). */
   readonly planted?: Readonly<Record<string, boolean>>;
-}
-
-function transformPoint(m: Mat, p: Vec2): Vec2 {
-  return applyMat(m, p);
-}
-
-interface Mesh {
-  readonly verts: Vec2[];
-  readonly uvs: Vec2[];
-  readonly tris: readonly number[];
-}
-
-function attachmentMesh(a: RigAttachment, slotBone: string, pose: Pose, rest: Pose): Mesh {
-  const slotPose = pose.byName.get(slotBone)!.world;
-  if (a.type === 'region') {
-    const hw = (a.width / 2) * (a.scaleX ?? 1);
-    const hh = (a.height / 2) * (a.scaleY ?? 1);
-    const r = ((a.rotation ?? 0) * Math.PI) / 180;
-    const cos = Math.cos(r);
-    const sin = Math.sin(r);
-    const corner = (x: number, y: number): Vec2 =>
-      transformPoint(slotPose, { x: a.x + x * cos - y * sin, y: a.y + x * sin + y * cos });
-    return {
-      verts: [corner(-hw, hh), corner(hw, hh), corner(hw, -hh), corner(-hw, -hh)],
-      uvs: [
-        { x: 0, y: 0 },
-        { x: 1, y: 0 },
-        { x: 1, y: 1 },
-        { x: 0, y: 1 },
-      ],
-      tris: [0, 1, 2, 0, 2, 3],
-    };
-  }
-  const verts: Vec2[] = [];
-  const uvs: Vec2[] = [];
-  const restSlot = rest.byName.get(slotBone)!.world;
-  for (let i = 0; i < a.vertices.length / 2; i++) {
-    const local = { x: a.vertices[i * 2]!, y: a.vertices[i * 2 + 1]! };
-    uvs.push({ x: a.uvs[i * 2]!, y: a.uvs[i * 2 + 1]! });
-    const w = a.weights?.[i];
-    if (!w) {
-      verts.push(transformPoint(slotPose, local));
-      continue;
-    }
-    const world0 = transformPoint(restSlot, local);
-    let x = 0;
-    let y = 0;
-    for (const [bone, weight] of w) {
-      const rb = rest.byName.get(bone)!.world;
-      const pb = pose.byName.get(bone)!.world;
-      const p = transformPoint(mulMat(pb, invertMat(rb)), world0);
-      x += p.x * weight;
-      y += p.y * weight;
-    }
-    verts.push({ x, y });
-  }
-  return { verts, uvs, tris: a.triangles };
 }
 
 export function renderPose(rig: RigDocument, pose: Pose, atlas: LoadedAtlas | null, opts: RenderOptions = {}): Image {
@@ -115,15 +62,18 @@ export function renderPose(rig: RigDocument, pose: Pose, atlas: LoadedAtlas | nu
   const sy = (y: number) => (pivot.y - y) * scale;
   const sx = (x: number) => (pivot.x + x) * scale;
 
-  const out = createImage(W, H, opts.background ?? [38, 40, 48, 255]);
+  const out = createImage(W, H, opts.background ?? REVIEW_BACKGROUND);
   // ground line + pivot
-  line(out, 0, sy(0), W, sy(0), [90, 96, 110, 255]);
-  cross(out, sx(0), sy(0), 4, [140, 150, 170, 255]);
+  if (opts.ground !== false) {
+    line(out, 0, sy(0), W, sy(0), [60, 64, 72, 255], 1.5);
+    cross(out, sx(0), sy(0), 4, [60, 64, 72, 255]);
+  }
 
   if (opts.parts !== false && atlas) {
     const rest = evalPose(rig, null, 0, { noIk: true });
     const skinNames = [opts.skin ?? 'default'];
     for (const slot of rig.slots) {
+      if (opts.hideSlots?.includes(slot.name)) continue;
       const name = pose.attachments.get(slot.name);
       if (!name) continue;
       let att: RigAttachment | undefined;
@@ -134,7 +84,7 @@ export function renderPose(rig: RigDocument, pose: Pose, atlas: LoadedAtlas | nu
       if (!att) continue;
       const region = atlas.regions.get(att.path);
       if (!region) continue;
-      const mesh = attachmentMesh(att, slot.bone, pose, rest);
+      const mesh = skinAttachment(att, slot.bone, pose, rest);
       const c = slot.color ?? [1, 1, 1, 1];
       const tint: Rgba = [c[0] * 255, c[1] * 255, c[2] * 255, c[3] * 255];
       for (let t = 0; t < mesh.tris.length; t += 3) {
@@ -174,9 +124,28 @@ export function renderPose(rig: RigDocument, pose: Pose, atlas: LoadedAtlas | nu
   return out;
 }
 
+/** Mid-grey review background: dark enough for light robes, light enough for the dark hair and boots. */
+export const REVIEW_BACKGROUND: Rgba = [118, 122, 130, 255];
+
 export interface ClipRenderOptions extends RenderOptions {
   /** Render every n-th frame. Default 1. */
   readonly step?: number;
+  /** Faint ghosts of the frames `±onion` frames away (previous tinted blue, next red). 0 = off. Default 0. */
+  readonly onion?: number;
+}
+
+function tinted(img: Image, rgb: readonly [number, number, number], alpha: number): Image {
+  const out = createImage(img.width, img.height);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const a = img.data[i + 3]! / 255;
+    if (a === 0) continue;
+    const k = alpha * a;
+    out.data[i] = (img.data[i]! * 0.55 + rgb[0] * a * 0.45) * alpha;
+    out.data[i + 1] = (img.data[i + 1]! * 0.55 + rgb[1] * a * 0.45) * alpha;
+    out.data[i + 2] = (img.data[i + 2]! * 0.55 + rgb[2] * a * 0.45) * alpha;
+    out.data[i + 3] = 255 * k;
+  }
+  return out;
 }
 
 /** Render frames 0..N−1 for looping clips (frame N == 0) and 0..N for the rest. */
@@ -192,7 +161,26 @@ export function renderClip(
     const pose = evalPose(rig, clip, f);
     const planted: Record<string, boolean> = {};
     for (const [bone, flags] of Object.entries(clip.motion?.planted ?? {})) planted[bone] = !!flags[f];
-    frames.push(renderPose(rig, pose, atlas, { ...opts, planted }));
+    const base = renderPose(rig, pose, atlas, { ...opts, planted });
+    if (!opts.onion || !atlas) {
+      frames.push(base);
+      continue;
+    }
+    // onion skin: ghosts under the current frame (previous = blue, next = red), wrapping for loops
+    const wrap = (g: number) =>
+      clip.loop ? ((g % clip.frames) + clip.frames) % clip.frames : Math.min(clip.frames, Math.max(0, g));
+    const ghostOpts = { ...opts, background: [0, 0, 0, 0] as Rgba, ground: false, overlay: false };
+    const frame = renderPose(rig, evalPose(rig, clip, f), atlas, { ...opts, parts: false, planted }); // bg + ground (+ overlay)
+    for (const [df, rgb] of [
+      [-opts.onion, [90, 150, 255]],
+      [opts.onion, [255, 110, 100]],
+    ] as const) {
+      const ghost = renderPose(rig, evalPose(rig, clip, wrap(f + df)), atlas, ghostOpts);
+      blit(frame, tinted(ghost, rgb, 0.4), 0, 0);
+    }
+    const current = renderPose(rig, pose, atlas, { ...ghostOpts, overlay: opts.overlay });
+    blit(frame, current, 0, 0);
+    frames.push(frame);
   }
   return frames;
 }

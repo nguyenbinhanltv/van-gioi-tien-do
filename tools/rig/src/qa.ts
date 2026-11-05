@@ -9,6 +9,7 @@ import { angleDelta, dist, type Vec2 } from './math.js';
 import { evalPose, type Pose } from './pose.js';
 import type { ClipSpec } from './animset.js';
 import { EVENT_FRAME_TOLERANCE } from './animset.js';
+import { meshQa, type MeshQaThresholds } from './qa-mesh.js';
 import type { RigDocument } from './schema.js';
 
 export type QaCheck =
@@ -22,6 +23,9 @@ export type QaCheck =
   | 'duration'
   | 'keys'
   | 'ground'
+  | 'detach'
+  | 'mesh-strain'
+  | 'islands'
   | 'ik-reach';
 
 export interface QaIssue {
@@ -64,6 +68,9 @@ export const DEFAULT_THRESHOLDS: QaThresholds = {
 };
 
 export interface QaOptions {
+  /** Check skinned meshes for detached pieces and stretch. Default true when the rig has mesh attachments. */
+  readonly mesh?: boolean;
+  readonly meshThresholds?: Partial<MeshQaThresholds>;
   readonly spec?: ClipSpec;
   readonly thresholds?: Partial<QaThresholds>;
   /** Travel axis (unit, y up) for the foot-slide check. Default: from `rig.direction`. */
@@ -159,8 +166,19 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
   if (clip.loop) {
     const a = poses[0]!;
     const z = poses[N]!;
-    const pre = poses[N - 1]!;
-    const post = poses[1]!;
+    // legs whose planted flag changes at the seam: a ground contact is an instantaneous velocity change, not a hitch
+    // (foot-slide and the planted flags already police those feet)
+    const contact = new Set<string>();
+    for (const [foot, flags] of Object.entries(clip.motion?.planted ?? {})) {
+      const atSeam = [flags[N - 1], flags[0], flags[1]];
+      if (!atSeam.every((x) => x === atSeam[0])) {
+        const side = foot === rig.roles.foot_R ? 'R' : 'L';
+        for (const r of [`foot_${side}`, `shin_${side}`, `thigh_${side}`, `ik_foot_${side}`] as const) {
+          const name = rig.roles[r];
+          if (name) contact.add(name);
+        }
+      }
+    }
     for (const b of a.bones) {
       const gap = dist(b.pos, z.byName.get(b.name)!.pos);
       maxSeam = Math.max(maxSeam, gap);
@@ -174,16 +192,31 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
           message: `loop seam gap ${gap.toFixed(3)} px (frame ${N} vs 0)`,
         });
       }
-      const before = dist(pre.byName.get(b.name)!.pos, z.byName.get(b.name)!.pos);
-      const after = dist(b.pos, post.byName.get(b.name)!.pos);
-      if (Math.abs(before - after) > th.seamVelocityPx) {
+      if (contact.has(b.name)) continue; // a foot touching down / lifting off at the seam changes velocity by nature
+      // velocity *vectors* across the seam: a change of direction (a knee peaking) is natural; a jump in velocity that
+      // is large compared with the clip's own frame-to-frame accelerations is a hitch.
+      const vel = (f: number) => {
+        const p0 = poses[f]!.byName.get(b.name)!.pos;
+        const p1 = poses[f + 1]!.byName.get(b.name)!.pos;
+        return { x: p1.x - p0.x, y: p1.y - p0.y };
+      };
+      const before = vel(N - 1);
+      const after = vel(0);
+      const jump = Math.hypot(after.x - before.x, after.y - before.y);
+      let typical = 0;
+      for (let f = 0; f < N - 2; f++) {
+        const v0 = vel(f);
+        const v1 = vel(f + 1);
+        typical = Math.max(typical, Math.hypot(v1.x - v0.x, v1.y - v0.y));
+      }
+      if (jump > Math.max(th.seamVelocityPx, 1.6 * typical)) {
         add({
-          severity: 'warning',
+          severity: 'error',
           check: 'loop-seam',
           bone: b.name,
           frame: N,
-          value: Math.abs(before - after),
-          message: `speed jumps ${before.toFixed(2)} → ${after.toFixed(2)} px/frame across the seam (hitch)`,
+          value: jump,
+          message: `velocity jumps by ${jump.toFixed(2)} px/frame across the seam, clip's largest internal change is ${typical.toFixed(2)} (hitch)`,
         });
       }
     }
@@ -402,6 +435,11 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
       add({ severity: 'error', check: 'events', frame: e.frame, message: `unknown event '${e.name}'` });
     }
   }
+
+  const hasMesh = rig.skins.some((s) =>
+    Object.values(s.attachments).some((m) => Object.values(m).some((a) => a.type === 'mesh')),
+  );
+  if (opts.mesh ?? hasMesh) issues.push(...meshQa(rig, clip, opts.meshThresholds));
 
   const errors = issues.filter((i) => i.severity === 'error').length;
   return {
