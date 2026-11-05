@@ -70,7 +70,7 @@ Kế hoạch tham chiếu: báo cáo ngoài repo §7.2 (PR #7 → #66 → #9 →
 
 - Mọi thứ đổi/ thêm số gameplay đã khóa hoặc cần game designer duyệt (D16–D22), công thức, cân bằng, schema dữ liệu.
 - Pháp lý, quyền riêng tư, thanh toán, Tiên Ngọc, giấy phép (docs/19); ngân sách tiền; thuê ngoài.
-- Chọn/đổi engine, Spine, nhà cung cấp hosting (D2, D25, D27); thêm phụ thuộc lớn.
+- Chọn/đổi engine, công cụ/runtime hoạt cảnh xương (Spine → DragonBones: D25, D35), nhà cung cấp hosting (D2, D27); thêm phụ thuộc lớn.
 - Quyết định kiến trúc nhóm ADR chặn: 005, 007, 010, 011, 012, 013.
 - Mâu thuẫn X1–X12, G6, G14, G15 (OPEN-ITEMS §8).
 - Phát hành ra ngoài, mời tester, bất kỳ thứ gì công khai, xóa dữ liệu thật, chạy trên dữ liệu người chơi.

@@ -8,6 +8,8 @@ Oct 31, 2026 · An Nguyen
 
 Toàn bộ asset 3D được thay bằng Sprite Sheet, Spine 2D, Tilemap diamond và Particle 2D theo chuẩn Isometric 2:1. Engine đề xuất là **Cocos Creator 3.x**, vì một dự án xuất được Web H5, iOS/Android và PC với runtime web nhẹ, phù hợp mục tiêu initial load **≤ 25 MB** _[Cập nhật §4: gói tải đầu Web 30 MB (dự phòng 1 MB → 29 MB) → 25 MB]_.
 
+> **[Cập nhật D35: hoạt cảnh xương nhân vật dùng **DragonBones** (runtime `dragon-bones` của Cocos 3.8.8, MIT) thay Spine 4.2; mọi chỗ "Spine" bên dưới đọc là "skeleton DragonBones" khi nói về Player / Boss / Linh thú / NPC chủ chốt. Các con số (30 skeleton, 5 hướng + lật, giới hạn bone/slot/đỉnh, 30 fps key) không đổi. Chi tiết, nguồn và rủi ro: [art/dragonbones.md](art/dragonbones.md).]**
+
 > **Cập nhật §4 — Thể loại / engine / nền tảng / hình thức asset:** tài liệu này là bản 2D đã thay GDD 3D: MMORPG 3D thế giới mở → **2D Isometric 2:1, thế giới mở chia chunk**; Unreal Engine 5 → **Cocos Creator 3.x**; PC + Mobile → **Web H5 + Mobile + PC, cross-play**; Mesh / LOD / Nanite / Niagara → **Sprite Sheet, Spine 2D, Tilemap diamond, Particle 2D, sprite shader**.
 
 | Engine            | Web H5                                            | Spine 2D                         | Đánh giá                           |

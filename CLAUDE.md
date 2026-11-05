@@ -44,7 +44,7 @@ DECISIONS entry wins. Use the
 - Third-party or MCP-sourced assets require a license check before use (skill `vgtd-asset-pipeline`).
 - Gameplay defaults decided without a designer (D16-D22 etc.) are marked "cần game designer duyệt khi cân bằng": implement
   them as specified, but do not treat them as final balance.
-- Spine runtime 4.2 (D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
+- Character skeletal animation: DragonBones, Cocos built-in `dragon-bones` runtime (D35, replaces Spine 4.2 of D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
 - Do not create or edit `.claude/settings.json` (D30): agent permission self-edits are blocked on purpose.
 - Prefer the latest locked decisions in `docs/DECISIONS.md` over memory or older docs. Do not invent gameplay values that
   the docs do not specify; add the gap to `docs/OPEN-ITEMS.md` instead.
