@@ -1,0 +1,21 @@
+{
+  "$schema": "./.creator/asset-template/schema.json",
+  "_version": "1.0.8",
+  "name": "client-cocos",
+  "uuid": "6f1d0c52-6b0e-4f3a-9d5c-0a1b7c2e4d11",
+  "type": "2d",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "private": true,
+  "scripts": {
+    "prepare:assets": "node scripts/prepare.mjs",
+    "build:web": "node scripts/build-web.mjs",
+    "serve": "node scripts/serve.mjs",
+    "check:yflip": "node scripts/check-yflip.mjs",
+    "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.5"
+  }
+}
