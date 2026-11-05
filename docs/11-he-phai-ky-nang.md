@@ -150,19 +150,21 @@ Quy tắc (nguồn 08 §6 trừ ghi chú _Đề xuất_):
 - **Hướng nhắm liên tục** (góc φ trong mặt phẳng (i, j)), không bị cắt vào 8 hướng; **sprite** chỉ hiển thị hướng gần nhất trong số hướng đã vẽ (rig Spine Player / Boss vẽ 5 hướng + lật gương; animation bất đối xứng có thể vẽ đủ 8 — D14). **Gốc tọa độ:** (i, j) nguyên là đỉnh N của ô, tâm ô = (i + 0,5; j + 0,5) (D15); mọi vị trí thực thể và tâm vùng đánh dùng quy ước này.
 - Kiểm tra trúng: khoảng cách tính **đến tâm hurtbox** (bán kính 0,45 ô; `HURTBOX_RADIUS_TILES`) — thực thể trúng khi `dist(tâm, hurtbox) ≤ r + 0,45` _(Đề xuất, ổn định cho server)_.
 
-| `shape.type` | Tham số                                             | Hit test (logic ô)                                                 | Telegraph / vẽ                                   |
-| ------------ | --------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------ |
-| `single`     | —                                                   | Một mục tiêu đã chọn, trong tầm                                    | Vòng chọn dưới chân + đường nối                  |
-| `circle`     | `radius`, `anchor` (caster / target / ground_point) | `dist ≤ r`                                                         | Ellipse 2:1 đổ đầy theo thời gian                |
-| `ring`       | `radius`, `inner_radius`, `anchor`                  | `inner ≤ dist ≤ r`                                                 | Hai ellipse đồng tâm                             |
-| `cone`       | `radius` (tầm), `angle_deg`, hướng φ                | `dist ≤ R` và `                                                    | Δθ                                               | ≤ angle/2` quanh φ | Quạt xoay theo φ rồi chiếu 2:1 (một sprite hình quạt + shader) |
-| `line`       | `length`, `width`                                   | Hình chữ nhật dài `length`, rộng `width` từ người thi triển theo φ | Dải chữ nhật chiếu thành bình hành trên màn hình |
+| `shape.type` | Tham số                                             | Hit test (logic ô)                                                 | Telegraph / vẽ                                                 |
+| ------------ | --------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+| `single`     | —                                                   | Một mục tiêu đã chọn, trong tầm                                    | Vòng chọn dưới chân + đường nối                                |
+| `circle`     | `radius`, `anchor` (caster / target / ground_point) | `dist ≤ r`                                                         | Ellipse 2:1 đổ đầy theo thời gian                              |
+| `ring`       | `radius`, `inner_radius`, `anchor`                  | `inner ≤ dist ≤ r`                                                 | Hai ellipse đồng tâm                                           |
+| `cone`       | `radius` (tầm), `angle_deg`, hướng φ                | `dist ≤ R` và `abs(Δθ) ≤ angle/2` quanh φ                          | Quạt xoay theo φ rồi chiếu 2:1 (một sprite hình quạt + shader) |
+| `line`       | `length`, `width`                                   | Hình chữ nhật dài `length`, rộng `width` từ người thi triển theo φ | Dải chữ nhật chiếu thành bình hành trên màn hình               |
 
 - Giới hạn: bán kính tối đa **12 ô** (≤ ½ cạnh AOI 2 × 2 màn hình, `AOI.HALF_U = 40`); chiều dài `line` ≤ 16; **tối đa 12 mục tiêu / lần thi triển** (`max_targets_per_cast`, _Đề xuất_ — bảo vệ CPU World Node và băng thông ~8 KB/s khi đánh quái; chọn 12 mục tiêu gần nhất).
 - **Đường ngắm** (`requires_los`): tia trên lưới ô (Bresenham), bị chặn bởi ô `Collision = chặn` và bởi vách ≥ 2 tầng (`Elevation`, 04 §4); bay thấp / bay tự do không đổi luật ngắm.
 - **Tầng cao:** đòn chỉ trúng thực thể **cùng nhóm tầng hoặc ±1 tầng** _(Đề xuất)_ — tránh đánh xuyên 3 tầng ở Sơn Môn (5 tầng).
 
 ### 3.4 Hiệu ứng và công thức co giãn
+
+> **Bị động không co giãn theo rank:** `passive_stat` giữ nguyên `magnitude` ở mọi rank (kỹ năng bị động khai báo `max_rank: 1`, `coeff_per_rank: 0`), để các giá trị có nguồn như +10% giảm Lôi Kiếp của Thể tu (07 §3) không bị trôi. Bảng 4.3 – 4.4 và mục 5 chỉ áp rank cho kỹ năng chủ động.
 
 Mỗi `effect` có `scale: {stat, coeff}`. Công thức thống nhất với 07 §4:
 
@@ -579,7 +581,7 @@ Viết theo **JSON Schema draft 2020-12** (như 07 §8–§9), kiểm bằng Ajv
 }
 ```
 
-### Dữ liệu mẫu (4 kỹ năng: linh căn hóa, fixed, bị động, kỹ năng tinh anh có telegraph)
+### Dữ liệu mẫu (4 kỹ năng: linh căn hóa, fixed, bị động, kỹ năng quái thường có telegraph)
 
 ```json
 {
@@ -664,12 +666,12 @@ Viết theo **JSON Schema draft 2020-12** (như 07 §8–§9), kiểm bằng Ajv
         { "type": "passive_stat", "applies_to": "self", "stat": "def_pct", "magnitude": 0.08 },
         { "type": "passive_stat", "applies_to": "self", "stat": "tribulation_reduction", "magnitude": 0.1 }
       ],
-      "progression": { "max_rank": 5, "coeff_per_rank": 0.05 }
+      "progression": { "max_rank": 1, "coeff_per_rank": 0 }
     },
     {
       "id": "doc_thiem_phun_doc",
       "name_key": "skill.doc_thiem_phun_doc.name",
-      "owner": "elite",
+      "owner": "mob",
       "kind": "active",
       "element": "thuy",
       "targeting": { "mode": "ground", "range_tiles": 7, "requires_los": true },

@@ -396,13 +396,13 @@ Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần)
 
 **Động Phủ** là không gian riêng của người chơi trong khu **Hậu sơn** Sơn Môn (lớp Buildable; 04 §5). Công trình đặt theo lưới ô, snap-to-grid, server lưu mỗi công trình bằng 4 giá trị (mã, ô gốc i₀ / j₀, xoay; 04 §6).
 
-| Công trình    | Footprint | Chức năng (04 §6)                                           | Vai trò trong gameplay                                       |
-| ------------- | --------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
-| Bồ đoàn thiền | 1 × 1     | Tăng tốc tu luyện khi đả tọa                                | Đả tọa an toàn tại nhà: ρ nền 1,0 (07 §5) + bonus bồ đoàn    |
-| Linh điền     | 2 × 2     | Trồng 4 cây Tiên Dược (4 trạng thái)                        | Nguồn dược liệu cho Luyện đan; thời gian lớn theo phẩm giống |
-| Tụ linh trận  | 3 × 3     | Vùng 5 × 5: Linh điền lớn nhanh +20%, Bồ đoàn +10% tu luyện | Công trình then chốt, tiêu nạp trận bàn định kỳ (sink)       |
-| Đan lô        | 2 × 2     | Luyện đan                                                   | Thợ đan người chơi (cần `crafting` ở Trúc Cơ)                |
-| Giá kinh thư  | 1 × 2     | Đọc công pháp, trang trí                                    | Lưu bí tịch / công pháp đã đọc                               |
+| Công trình    | Footprint | Chức năng (04 §6)                                           | Vai trò trong gameplay                                                                                                                                                                       |
+| ------------- | --------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bồ đoàn thiền | 1 × 1     | Tăng tốc tu luyện khi đả tọa                                | Đả tọa an toàn tại nhà: Hậu sơn thuộc Sơn Môn (thành chính) nên ρ nền = 0,6 (07 §5) + bonus Bồ đoàn / Tụ linh trận (04 §6); Tụ linh nhãn ở Hậu sơn có thể là Linh Mạch (ρ = 1 + 0,25 × phẩm) |
+| Linh điền     | 2 × 2     | Trồng 4 cây Tiên Dược (4 trạng thái)                        | Nguồn dược liệu cho Luyện đan; thời gian lớn theo phẩm giống                                                                                                                                 |
+| Tụ linh trận  | 3 × 3     | Vùng 5 × 5: Linh điền lớn nhanh +20%, Bồ đoàn +10% tu luyện | Công trình then chốt, tiêu nạp trận bàn định kỳ (sink)                                                                                                                                       |
+| Đan lô        | 2 × 2     | Luyện đan                                                   | Thợ đan người chơi (cần `crafting` ở Trúc Cơ)                                                                                                                                                |
+| Giá kinh thư  | 1 × 2     | Đọc công pháp, trang trí                                    | Lưu bí tịch / công pháp đã đọc                                                                                                                                                               |
 
 Đề xuất mở rộng (chưa có trong 04): **diện tích Động Phủ tăng theo cảnh giới** (ví dụ 12 × 12 ô từ Luyện Khí 9 → 16 × 16 ở Kim Đan → …), **thăm viếng** (người khác xem nhưng không phá), **trộm dược** có giới hạn nhân quả (mục 8.5). Thời gian lớn của Linh điền, giới hạn trộm: _Câu hỏi cần chốt_.
 
