@@ -29,6 +29,8 @@ const KEY_FPS = 30;
 
 interface Slot {
   actor: CharacterActor;
+  /** Rig direction the last apply() asked for (ready() waits until it is loaded). */
+  want: Direction | null;
   floor: Node;
   label: Label | null;
 }
@@ -36,6 +38,8 @@ interface Slot {
 /** Public hook for headless capture (scripts/capture.mjs) and tests: `window.__vgtdViewer`. */
 export interface ViewerHook {
   ready(): boolean;
+  /** Last error shown in the panel (empty string = none): lets scripts fail fast. */
+  error(): string;
   /** Merge a partial settings object (mode, direction, animation, paused, ...) and re-apply. */
   set(patch: Record<string, unknown>): void;
   /** Pause and seek every actor to normalised time 0..1 of its animation. */
@@ -126,7 +130,10 @@ export class ViewerScene extends Component {
         !this.failed &&
         !this.dirty &&
         this.all().length > 0 &&
-        Array.from(this.slots.values()).every((s) => !s.actor.root.active || s.actor.skeletonDirection !== null),
+        Array.from(this.slots.values()).every(
+          (sl) => !sl.actor.root.active || (sl.want !== null && sl.actor.skeletonDirection === sl.want),
+        ),
+      error: () => this.failed,
       set: (patch) => {
         Object.assign(this.settings, patch);
         this.dirty = true;
@@ -203,7 +210,7 @@ export class ViewerScene extends Component {
       label.color = new Color(220, 230, 255, 255);
       label.string = key.slice(2);
     }
-    s = { actor, floor, label };
+    s = { actor, floor, label, want: null };
     this.slots.set(key, s);
     return s;
   }
@@ -323,6 +330,7 @@ export class ViewerScene extends Component {
         sl.label.string = label ?? key.slice(2);
         sl.label.node.setPosition(x, y - 30, 0);
       }
+      sl.want = v.skeletonDirection;
       sl.actor.apply(v, this.opts(hiddenSpineSlots(v), paused));
     };
     const baseY = FEET_Y / this.zoom();
@@ -350,6 +358,7 @@ export class ViewerScene extends Component {
           sl.actor.setVisible(true);
           sl.actor.root.setPosition(-gap, baseY, 0);
           sl.floor.active = false;
+          sl.want = viewA.skeletonDirection;
           sl.actor.apply(viewA, this.opts(hidden, true));
           sl.actor.setTint(tint[0], tint[1], tint[2], tint[3]);
           // behind A: ghosts only show where the pose differs

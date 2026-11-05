@@ -397,12 +397,14 @@ B ${s.animationB}: ${fmt(info.b)}
         : 'CACHED mode: no mix / scrub / slot toggles (DragonBones limitation)');
     this.q('[data-r=wrap]').classList.toggle('hot', now - info.wrapAt < 250);
     const sm = info.seam;
-    this.q('[data-r=seam]').innerHTML = sm
-      ? sm.loop
-        ? `loop seam: wrap step ${sm.seamStep.toFixed(1)} vs mean step ${sm.meanStep.toFixed(1)} (x${sm.ratio.toFixed(2)}) ` +
-          (sm.ratio > 2.5 ? '<span class="warn">POP at the loop point</span>' : 'ok')
-        : 'one-shot: no loop seam'
-      : 'loop seam: n/a';
+    const seamLine = sm
+      ? `wrap step ${sm.seamStep.toFixed(1)} vs mean step ${sm.meanStep.toFixed(1)} (x${sm.ratio.toFixed(2)})`
+      : '';
+    this.q('[data-r=seam]').innerHTML = !sm
+      ? 'loop seam: n/a'
+      : sm.specLoop
+        ? `loop seam: ${seamLine} ` + (sm.ratio > 2.5 ? '<span class="warn">POP at the loop point</span>' : 'ok')
+        : `one-shot (not a loop in the table): ${seamLine}, informational`;
     this.q('[data-r=events]').textContent = info.events.length ? info.events.join('\n') : 'no events yet';
     const d = info.drawDelta;
     this.q('[data-r=draworder]').innerHTML = d.length

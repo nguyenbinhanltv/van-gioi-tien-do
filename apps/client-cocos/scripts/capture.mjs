@@ -10,7 +10,7 @@
 //      <animation>.sheet.png   contact sheet (frames in reading order; review mode = all 8 directions per tile)
 //      <animation>.gif         short looping GIF of the full animation (with --gif; ~30 key frames/s, tiles at 50%)
 //      index.json              per animation: duration, frames, loop-seam metric (ratio > 2.5 = pop), file names
-// Default --out: <tmpdir>/vgtd-capture. Exit code 1 if the viewer reports an error or a loop seam pops.
+// Default --out: <tmpdir>/vgtd-capture. Exit code 1 on a page error, a viewer error, or a popping loop seam (only animations that loop per the table are judged).
 import { spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
 import { createReadStream, existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
@@ -77,7 +77,7 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
   createReadStream(f).pipe(res);
 });
-await new Promise((r) => server.listen(0, r));
+await new Promise((r) => server.listen(0, '127.0.0.1', r)); // loopback only
 const port = server.address().port;
 
 mkdirSync(out, { recursive: true });
@@ -98,12 +98,21 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let failures = 0;
 try {
   const page = await browser.newPage();
-  page.on('pageerror', (e) => console.error('[page error]', e.message));
-  const url = `http://localhost:${port}/#viewer&mode=${mode}&dir=${direction}&src=${src}&stem=${stem}&paused=1`;
+  page.on('pageerror', (e) => {
+    console.error('[page error]', e.message);
+    failures++;
+  });
+  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&src=${src}&stem=${stem}&paused=1`;
   console.log('opening', url);
   await page.goto(url);
   const waitReady = async (timeout = 180000) => {
-    await page.waitForFunction('window.__vgtdViewer && window.__vgtdViewer.ready()', { timeout, polling: 250 });
+    // fail fast when the viewer reports an error (rig missing, exception) instead of waiting for the timeout
+    await page.waitForFunction('window.__vgtdViewer && (window.__vgtdViewer.error() || window.__vgtdViewer.ready())', {
+      timeout,
+      polling: 250,
+    });
+    const err = await page.evaluate('window.__vgtdViewer.error()');
+    if (err) throw new Error(`viewer error: ${err}`);
   };
   await waitReady();
   console.log('viewer ready');
@@ -146,7 +155,8 @@ try {
       writeFileSync(join(out, `${anim}.gif`), encodeGif(clip, Math.max(2, Math.round((100 * info.duration) / n))));
       entry.gif = `${anim}.gif`;
     }
-    if (seam && seam.loop && seam.ratio > 2.5) {
+    // only animations that loop per the table must wrap seamlessly; one-shots (die, dash, hit, ...) just report the ratio
+    if (seam && seam.specLoop && seam.ratio > 2.5) {
       entry.warning = `loop seam pops (x${seam.ratio.toFixed(2)})`;
       failures++;
     }

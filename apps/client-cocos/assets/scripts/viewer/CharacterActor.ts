@@ -37,6 +37,9 @@ export interface ApplyOptions {
 
 /** Loop seam quality of one animation: how big the wrap step is compared with a normal frame step. */
 export interface SeamMetric {
+  /** The animation loops per the animation table (docs/03): only these must wrap seamlessly. */
+  specLoop: boolean;
+  /** Currently played as a loop (spec loop, or a one-shot with `repeat one-shots`): the sampling is the same either way. */
   loop: boolean;
   /** Mean per-frame motion of all bones (px + deg-weighted). */
   meanStep: number;

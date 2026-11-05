@@ -38,7 +38,7 @@ Phím tắt (desktop): `Space` tạm dừng, `←/→` đổi hướng, `↑/↓
 - **Playback:** Pause/Play, Restart, ±1 frame (1/30 s), thanh tua, `timeScale` 0,05–3, `mix` 0–0,5 s (thời gian `fadeIn` khi đổi animation; **không** fade khi đang pause vì đồng hồ fade bị đóng băng), `repeat one-shots`, hiển thị `playbackFps` theo bảng (60/30/15, chưa áp thật).
 - **Paperdoll:** 13 slot bật/tắt (`slot.displayIndex = -1`), cờ xung đột (mounted, kiếm trong tay, ngự kiếm, mũ trùm, áo dài) qua `getCharacterViewState` — slot bị luật ẩn được liệt kê kèm lý do; biến thể (skin) = display thứ hai của slot (`outfit_upper/lower`, `cape`).
 - **Modes → Review:** chạy animation của A ở **cả 8 hướng** (5 vẽ + 3 lật gương, hoặc 8 rig nếu animation "vẽ đủ 8") trên một đồng hồ chung nên frame-step và điểm nối vòng lặp giống nhau ở mọi hướng; mỗi ô có nhãn hướng và rig thật được dùng.
-- **Chỉ báo điểm nối vòng lặp (loop seam):** huy hiệu `wrap` nháy đỏ mỗi lần vòng lặp quay lại, và số đo định lượng: lấy mẫu mọi frame, tính bước chuyển động trung bình (bone global x, y, góc) và bước giữa frame cuối → frame đầu; `ratio = bước nối / bước trung bình`, ≈ 1 là liền mạch, **> 2,5 là giật** (cảnh báo). Chỉ cho animation loop, chế độ realtime.
+- **Chỉ báo điểm nối vòng lặp (loop seam):** huy hiệu `wrap` nháy đỏ mỗi lần vòng lặp quay lại, và số đo định lượng: lấy mẫu mọi frame, tính bước chuyển động trung bình (bone global x, y, góc) và bước giữa frame cuối → frame đầu; `ratio = bước nối / bước trung bình`, ≈ 1 là liền mạch, **> 2,5 là giật** (cảnh báo). Chỉ **animation loop theo bảng** bị coi là lỗi khi giật; animation một lần (die, dash, hit, cast…) vẫn báo `ratio` nhưng chỉ để tham khảo. Chế độ realtime.
 - **Onion-skin:** hai bản mờ của A trước/sau 2 frame, vẽ phía sau A nên chỉ lộ ra chỗ tư thế khác.
 - **Compare:** hai armature cạnh nhau (A trái, B phải); **Sync restart**.
 - **Cache mode** (Modes): realtime / shared cache / private cache để so hiệu năng; xem §5.
@@ -58,6 +58,8 @@ Viewer chỉ nói chuyện với `CharacterActor` (`assets/scripts/viewer/Charac
 4. Chạy `npm run build:web -w client-cocos` (hoặc mở dự án bằng Cocos Creator 3.8.8) để import, rồi mở `#viewer&src=dragonbones/<nhân-vật>&stem=<stem>`.
 
 ## 4. Rig thử và xuất từ DragonBones Pro / LoongBones
+
+> **Sẽ được thay:** theo phân công mới, `tools/rig` (`@vgtd/rig`, PR #78) sở hữu schema rig và bộ xuất DragonBones; rig thử này chỉ là fixture tối thiểu để viewer chạy, sẽ chuyển sang sinh qua bộ xuất của `@vgtd/rig` (việc tiếp theo). Viewer nạp mọi DragonBones JSON từ `assets/resources/dragonbones/<nhân-vật>/` (cần nằm dưới `resources/` để nạp lúc chạy).
 
 `tools/dragonbones-testrig` (`@vgtd/dragonbones-testrig`) sinh rig thử **bằng code**, không dùng asset bên thứ ba: một **mô tả rig trung lập** (y lên, độ CCW, px @1x: `neutral.ts`) + bộ xuất DragonBones 5.5 (`dragonbones.ts`: y xuống, độ CW, thời lượng theo frame; mọi chuyển trục nằm trong bộ xuất).
 
@@ -102,7 +104,7 @@ Script `apps/client-cocos/scripts/capture.mjs`: build web-mobile (trừ khi `--s
 
 - `<animation>.sheet.png`: contact sheet N frame (3 ô mỗi hàng, đánh số bằng chấm);
 - `<animation>.gif` (với `--gif`): GIF lặp toàn animation;
-- `index.json`: thời lượng, số frame, số đo loop seam; script thoát mã 1 nếu có loop seam giật (> 2,5×) hoặc viewer báo lỗi.
+- `index.json`: thời lượng, số frame, số đo loop seam; script thoát mã 1 nếu một animation loop theo bảng có seam giật (> 2,5×) hoặc viewer báo lỗi (animation một lần không tính).
 
 Thư mục đầu ra mặc định là `<tmp>/vgtd-capture`, **không commit**. Hook cho script/kiểm thử: `window.__vgtdViewer` (`ready()`, `set({...})`, `seekNorm()`, `info()`, `seam()`, `chrome(visible)`).
 

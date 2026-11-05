@@ -250,6 +250,12 @@ export class DragonBonesActor implements CharacterActor {
     const seamStep = dist(poses[n - 1]!, poses[0]!);
     st.currentTime = keep;
     armature.advanceTime(0);
-    return { loop: this.loopNow, meanStep, seamStep, ratio: meanStep > 1e-6 ? seamStep / meanStep : 0 };
+    return {
+      specLoop: this.latestView?.animation.loop ?? false,
+      loop: this.loopNow,
+      meanStep,
+      seamStep,
+      ratio: meanStep > 1e-6 ? seamStep / meanStep : 0,
+    };
   }
 }
