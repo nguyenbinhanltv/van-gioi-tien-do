@@ -25,10 +25,17 @@ describe('real Kiếm tu data (tools/rig/data)', () => {
     expect(data.issues.filter((i) => i.severity === 'error')).toEqual([]);
   });
 
-  it('has no scabbard piece (its painted sword would double the drawn one; see rig-pipeline.md section 11)', () => {
+  it('restores the empty scabbard on its original bone without adding a weapon slot', () => {
     for (const [dir, d] of data.byDirection) {
       const bones = [...pieceTable(d.rig).values()].map((p) => p.bone);
-      expect(bones, dir).not.toContain('scabbard');
+      expect(
+        bones.filter((bone) => bone === 'scabbard'),
+        dir,
+      ).toHaveLength(1);
+      expect(
+        d.rig.slots.filter((slot) => slot.name === 'weapon_R'),
+        dir,
+      ).toHaveLength(1);
     }
   });
 

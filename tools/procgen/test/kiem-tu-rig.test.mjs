@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { DRAWN_DIRECTIONS, DIRECTIONS } from '@vgtd/shared';
 import { getCharacterViewState, SLOT_IDS, SPINE_SLOT_IDS } from '@vgtd/character';
 import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
 import {
   boneRig,
   makeRigDocument,
@@ -14,7 +15,7 @@ import {
   renderPose,
 } from '../scripts/kiem_tu_rig.mjs';
 const require = createRequire(import.meta.url);
-const { Image } = require('../src/lib/png.js');
+const { Image, decodePNG } = require('../src/lib/png.js');
 function fixture(direction) {
   const box = { x: 35, y: 120, w: 28, h: 94 },
     parts = [{ name: 'sword', slot: 'weapon_R', bone: 'weapon', box }];
@@ -118,8 +119,20 @@ describe('Neutral Kiếm tu rig data', () => {
   it('does not obscure opaque source pixels with hidden joint underpaint', () => {
     const source = new Image(256, 256);
     source.fill(81, 113, 127, 255);
-    const parts = separateParts(source, 'S');
+    const parts = separateParts(source, 'S', { jointUnderpaint: false });
     for (const part of parts) part.box = alphaBounds(part.image);
     expect(renderPose(fixture('S'), parts, 0).data).toEqual(source.data);
+  });
+  it('conserves the real rest silhouette in all five directions after cap repartition', () => {
+    for (const direction of DRAWN_DIRECTIONS) {
+      const source = decodePNG(readFileSync(new URL(`../../../assets-src/placeholder/kiem-tu-rig-v1/turnaround/${direction}.png`, import.meta.url)));
+      const parts = separateParts(source, direction);
+      for (const part of parts) part.box = alphaBounds(part.image);
+      const composite = renderPose(fixture(direction), parts, 0);
+      for (let i = 3; i < source.data.length; i += 4) {
+        if (source.data[i] === 0) expect(composite.data[i], `${direction}: outside pixel ${i / 4}`).toBe(0);
+        if (source.data[i] === 255) expect(composite.data[i], `${direction}: opaque pixel ${i / 4}`).toBe(255);
+      }
+    }
   });
 });

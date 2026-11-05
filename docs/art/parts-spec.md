@@ -2,7 +2,9 @@
 
 > Sinh tự động bởi `partsSpecMarkdown` (`@vgtd/rig`): chạy `npm run gen:parts-spec -w @vgtd/rig` để cập nhật; CI kiểm file này khớp bản sinh mới. Mục đích: vẽ đúng ngay lần đầu để rig không hở mối nối.
 
-**Quy tắc chung.** Canvas 128 × 128 @1x, pivot (64, 116); vẽ ở texture 2× (256 × 256), hình học 1×. Mỗi hướng vẽ (S, SE, E, NE, N) có bộ mảnh riêng `parts/<HƯỚNG>/<slot>.png`, PNG RGBA premultiplied alpha, padding atlas 2 px (`BUDGETS.ATLAS_PADDING_PX`), nền trong suốt. SW/W/NW là lật gương, không vẽ. **Phần vẽ bù (overlap)** ở bảng dưới là số px @1x mỗi mảnh phải kéo dài _dưới_ mảnh kề ở mỗi khớp để khớp gập tới giới hạn vẫn không lộ nền (công thức `ceil(2·r·sin(θ/2))`, r = nửa bề rộng mảnh kề, θ = góc khớp lớn nhất của bộ animation của lớp). Nhân đôi số px khi vẽ ở texture 2×. Không dán ảnh nền lên chỗ hở bằng cách dãn mesh.
+**Quy tắc chung.** Canvas 128 × 128 @1x, pivot (64, 116); vẽ ở texture 2× (256 × 256), hình học 1×. Mỗi hướng vẽ (S, SE, E, NE, N) có bộ mảnh riêng `parts/<HƯỚNG>/<slot>.png`, PNG RGBA premultiplied alpha, padding atlas 2 px (`BUDGETS.ATLAS_PADDING_PX`), nền trong suốt. SW/W/NW là lật gương, không vẽ. **Phần vẽ bù (overlap)** ở bảng dưới là số px @1x mảnh nằm dưới phải kéo dài _dưới_ mảnh kề ở mỗi khớp để khớp gập tới giới hạn vẫn không lộ nền (công thức `ceil(2·r·sin(θ/2))`, r = nửa bề rộng mảnh kề, θ = góc khớp lớn nhất của bộ animation của lớp). Nhân đôi số px khi vẽ ở texture 2×. Không dán ảnh nền lên chỗ hở bằng cách dãn mesh.
+
+**Quy ước chồng lớp (orchestrator, 2026-11-06; áp dụng cả bốn Đạo Lộ).** Cho phép thay đổi phần chồng màu bên trong ở tư thế nghỉ; đường bao ngoài phải giữ nguyên từng pixel (dung sai AA 1 px), thứ tự slot không đổi. Ở mỗi khớp và mỗi hướng, mảnh nằm dưới trong thứ tự vẽ nhận phần kéo dài chính dưới mảnh kề, ít nhất bằng margin trong bảng; mảnh nằm trên nhận nắp khớp lồi, tròn, cùng màu, biên mềm 1–2 px, nằm trong đường bao nghỉ của chính mảnh và che pivot khi xoay, không để cạnh cắt thẳng. Khi hướng vẽ đảo lớp trước/sau, đảo vai trò hai mảnh tương ứng. Đây là quy ước kỹ thuật cho placeholder; chủ dự án có thể thay đổi khi duyệt art.
 
 ## Kiếm tu (`kiem-tu`)
 

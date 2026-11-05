@@ -147,3 +147,9 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 3. Trục socket: pivot-space y lên, không lật (ADR-021, F-02); `head_top` "theo cỡ nhân vật" chưa có công thức (dùng `socketsOverride`).
 4. Quỹ đạo ellipse 36 × 18: rộng × cao đầy đủ hay bán trục (F-05).
 5. Định nghĩa "draw call": số engine báo là chuẩn, `checkRepack` chỉ ước lượng tĩnh (ADR-022, F-03).
+
+## 10. Kiếm tu — vòng art cap/underpaint (2026-11-06)
+
+Đã có bản sửa raster cho S/SE/E/NE/N và gắn lại vỏ kiếm rỗng trên bone/slot cũ; quy ước mảnh dưới kéo dài, mảnh trên có nắp khớp tròn đã được orchestrator cho phép và ghi trong `art/parts-spec.md`. Ghi đè trạng thái "scabbard chưa dùng" của mục rig vòng 3 phía trên. Không đổi bone/slot/draw order; atlas PMA 512, padding 2 + extrude 1; source alpha giữ toàn bộ pixel opaque và không vẽ ngoài silhouette gốc.
+
+**Chưa nghiệm thu khớp.** Max gap rigid S/SE/E/NE/N lần lượt 30,55/31,62/32,46/22,50/21,85 → 16,35/24,15/27,51/21,58/16,49 px. Cảnh báo seam 452 → 700, clip/hướng tách bóng 25 → 32; có seam riêng lẻ xấu hơn. Vẽ bù bị giới hạn ở vùng mảnh kề che được tại rest; không coi margin yêu cầu là bằng chứng đã phủ đủ. Cần worker 15 đo lại với autoSkin và QA alpha trước khi đặt `seamSeverity: error` hoặc dùng làm art reference đã đạt chuẩn cho ba lớp còn lại. Contact sheet và PR có số đo từng seam; hoạt cảnh/art vẫn cần chủ dự án duyệt.

@@ -103,3 +103,9 @@ Viewer (`apps/client-cocos`, worker `van-gioi-tien-do-7`) nạp ske/tex, phát t
 ## 12. Tổng quát hóa cho 4 Đạo Lộ
 
 Registry lớp, đặc tả mảnh cho art, sinh rig mẫu từ thư mục mảnh, re-target hoạt cảnh theo vũ khí và xuất viewer theo nhân vật: xem [rig-classes.md](rig-classes.md).
+
+## 12. Vòng art: phần dưới kéo dài, phần trên có nắp khớp
+
+Quy ước placeholder do orchestrator chốt 2026-11-06 nằm trong [parts-spec.md](parts-spec.md): phần chồng màu bên trong có thể đổi, silhouette ngoài nghỉ và slot order giữ nguyên. `gen:kiemtu build` sơn tiếp nguồn bằng `paintJointExtensions`: đọc margin từ public `partsSpec`, ghép mọi cặp của `rig-underpaint.md`, giới hạn sơn dưới bằng alpha mảnh kề, bo biên proximal của phần trên và chuyển pixel góc cắt về phần dưới. Nguồn turnaround giữ nguyên; cutout, atlas, rig UV/kích thước và export sinh lại. Vỏ kiếm có lòng tối/viền đồng ở miệng, không còn dấu chuôi; sash được vẽ nối. Test bảo toàn alpha kiểm cả năm hướng; test dữ liệu nay yêu cầu một mảnh `scabbard`, thay cho yêu cầu bỏ quad ở §11.
+
+Đây là **bản art cần sửa tiếp**, chưa đạt mọi seam ≤3 px. Rigid max theo hướng giảm còn S 16,35; SE 24,15; E 27,51; NE 21,58; N 16,49 px; số cảnh báo tăng 452 → 700 do biên quad và quan hệ seam thay đổi, tách bóng 25 → 32 clip/hướng. Không đổi thuật toán/ngưỡng QA để làm số đẹp hơn; chưa áp autoSkin. Margin yêu cầu có thể bị silhouette/alpha occluder cắt ngắn, nên cần kiểm độ phủ thực và xử lý tiếp cùng worker 15; không coi bản này là reference đã nghiệm thu cho lớp mới. Nguồn gốc và thao tác pixel ghi tại [ASSET-LICENSES.md](../ASSET-LICENSES.md).

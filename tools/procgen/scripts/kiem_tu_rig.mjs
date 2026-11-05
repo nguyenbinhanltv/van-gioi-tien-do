@@ -8,6 +8,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { format, resolveConfig } from 'prettier';
+import { partsSpec } from '@vgtd/rig';
 import {
   CANVAS_BY_FOOTPRINT,
   PIVOT_BOTTOM_OFFSET_PX,
@@ -400,7 +401,7 @@ const segmentDistance = ([x, y], a, b) => {
   return Math.hypot(x - a[0] - t * dx, y - a[1] - t * dy);
 };
 /** Every visible source pixel has one owner. Painted-under joints overlap beneath it. */
-export function separateParts(image, direction) {
+export function separateParts(image, direction, { jointUnderpaint = true } = {}) {
   const p = landmarks(direction),
     back = ['NE', 'N'].includes(direction),
     profile = direction === 'E';
@@ -520,7 +521,128 @@ export function separateParts(image, direction) {
   for (let y = 0; y < SIZE; y++)
     for (let x = 0; x < SIZE; x++)
       if (image.getPixel(x, y)[3]) byName[owner(x, y)].image.setPixel(x, y, ...image.getPixel(x, y));
+  if (jointUnderpaint) paintJointExtensions(parts, image, direction, ranks);
   return parts;
+}
+
+/** Source raster edits, not mesh scaling: lower layer extends; front layer has a round cap. */
+export function paintJointExtensions(parts, source, direction, ranks) {
+  const p = landmarks(direction);
+  const byName = Object.fromEntries(parts.map((part) => [part.name, part]));
+  const spec = partsSpec('kiem-tu');
+  const margin = (slot, joint) => spec.parts.find((s) => s.slot === slot)?.joints.find((j) => j.joint === joint)?.overlapPx ?? 0;
+  const pairs = [];
+  const add = (a, b, joint, pivot, minimum = 0) => {
+    const first = byName[a], second = byName[b];
+    pairs.push({ a: first, b: second, joint, pivot, px: Math.max(minimum, margin(first.slot, joint), margin(second.slot, joint)) });
+  };
+  for (const side of ['L', 'R']) {
+    add('coat', 'upper_sleeve_' + side, 'shoulder', p['shoulder_' + side]);
+    add('upper_sleeve_' + side, 'lower_sleeve_' + side, 'elbow', p['elbow_' + side]);
+    add('lower_sleeve_' + side, 'hand_' + side, 'wrist', p['hand_' + side]);
+    add('thigh_' + side, 'shin_' + side, 'knee', p['shin_' + side]);
+    add('shin_' + side, 'foot_' + side, 'ankle', p['foot_' + side]);
+    for (const robe of ['robe_front', 'robe_back']) add('thigh_' + side, robe, 'hip', p['thigh_' + side]);
+    add('neck', 'upper_sleeve_' + side, 'shoulder', p['shoulder_' + side]);
+    add('sash_' + side + '_1', 'sash_' + side + '_2', 'waist', p['sash_' + side + '_2']);
+  }
+  add('robe_back', 'robe_front', 'hip', p.hip);
+  add('neck', 'face', 'neck', p.neck);
+  add('torso_base', 'coat', 'waist', p.spine_mid);
+  add('torso_base', 'robe_front', 'hip', p.hip);
+  // Include every measured seam, including non-anatomical garment seams.
+  const brief = fs.readFileSync(path.join(ROOT, 'docs/art/rig-underpaint.md'), 'utf8').replace(/\r/g, '').split('## ' + direction + '\n')[1]?.split('\n## ')[0] ?? '';
+  const bonePart = Object.fromEntries(parts.map((part) => [part.bone, part.name]));
+  for (const row of brief.split('\n')) {
+    const match = row.match(/:\s*(\w+),[^/]+\/[^:]+:\s*(\w+),[^|]+\|\s*(\d+)/);
+    if (!match) continue;
+    const a = bonePart[match[1]], b = bonePart[match[2]];
+    if (!a || !b) throw new Error('Unknown underpaint pair: ' + row);
+    const existing = pairs.find((pair) => [pair.a.name, pair.b.name].includes(a) && [pair.a.name, pair.b.name].includes(b));
+    if (existing) existing.px = Math.max(existing.px, Number(match[3]));
+    else add(a, b, 'hip', p.hip, Number(match[3]));
+  }
+  const original = new Map(parts.map((part) => [part.name, { image: part.image, box: alphaBounds(part.image) }]));
+  // Read from immutable copies when sampling continuation colours.
+  for (const part of parts) {
+    const copy = new Image(SIZE, SIZE);
+    copy.data.set(part.image.data);
+    original.get(part.name).image = copy;
+  }
+  const sample = (part, at) => {
+    const { image, box } = original.get(part.name);
+    if (!box) return [180, 178, 166];
+    let best = Infinity, colour = [180, 178, 166];
+    for (let y = box.y; y < box.y + box.h; y++) for (let x = box.x; x < box.x + box.w; x++) {
+      const pixel = image.getPixel(x, y);
+      const distance = Math.hypot(x - at[0], y - at[1]);
+      if (pixel[3] > 240 && distance < best) { best = distance; colour = pixel.slice(0, 3); }
+    }
+    return colour;
+  };
+  const paintCapsule = (part, start, end, radius, colour, neighbour = null) => {
+    const own = original.get(part.name).box;
+    for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
+      const alpha = source.getPixel(x, y)[3];
+      if (!alpha) continue;
+      const distance = segmentDistance([x, y], start, end);
+      const coverage = Math.max(0, Math.min(1, (radius - distance) / 2));
+      if (!coverage) continue;
+      // The painted extension remains under an original higher layer at rest.
+      if (neighbour && original.get(neighbour.name).image.getPixel(x, y)[3] < alpha) continue;
+      if (!neighbour && (x < own.x || y < own.y || x >= own.x + own.w || y >= own.y + own.h)) continue;
+      const old = part.image.getPixel(x, y);
+      if (old[3] >= alpha * coverage) continue;
+      const shade = 1 - 0.09 * Math.max(-1, Math.min(1, (x - start[0]) / Math.max(1, radius)));
+      part.image.setPixel(x, y, ...colour.map((c) => Math.round(c * shade)), Math.min(alpha, Math.round(255 * coverage)));
+    }
+  };
+  for (const pair of pairs) {
+    const [lower, higher] = ranks[pair.a.name] < ranks[pair.b.name] ? [pair.a, pair.b] : [pair.b, pair.a];
+    const lowBox = original.get(lower.name).box, highBox = original.get(higher.name).box;
+    if (!lowBox || !highBox) continue;
+    const pivot = pair.pivot;
+    let centre = [highBox.x + highBox.w / 2, highBox.y + highBox.h / 2];
+    if (pair.joint === 'hip' && lower.name.startsWith('thigh_')) centre = [pivot[0], pivot[1] - 1];
+    const delta = [centre[0] - pivot[0], centre[1] - pivot[1]];
+    const length = Math.hypot(...delta) || 1;
+    const end = pivot.map((v, i) => v + delta[i] / length * pair.px * SCALE);
+    const radius = Math.max(4, Math.min(lowBox.w, lowBox.h, 28) / 2);
+    paintCapsule(lower, pivot, end, radius, sample(lower, pivot), higher);
+    // Convex front cap, with a two-texture-pixel feather. Never grows the outer silhouette.
+    const capRadius = Math.max(3, Math.min(highBox.w, highBox.h, 26) / 2);
+    const capCentre = pivot.map((v, i) => Math.max(i ? highBox.y : highBox.x, Math.min((i ? highBox.y + highBox.h : highBox.x + highBox.w) - 1, v)));
+    paintCapsule(higher, capCentre, capCentre, capRadius, sample(higher, pivot));
+    const axis = [highBox.x + highBox.w / 2 - capCentre[0], highBox.y + highBox.h / 2 - capCentre[1]];
+    const axisLength = Math.hypot(...axis) || 1;
+    // Replace the proximal straight cut by the convex cap. The lower layer receives
+    // removed source pixels so the complete rest silhouette is conserved.
+    for (let y = highBox.y; y < highBox.y + highBox.h; y++) for (let x = highBox.x; x < highBox.x + highBox.w; x++) {
+      const dx = x - capCentre[0], dy = y - capCentre[1];
+      if ((dx * axis[0] + dy * axis[1]) / axisLength >= capRadius / 2) continue;
+      const old = higher.image.getPixel(x, y);
+      if (!old[3]) continue;
+      const coverage = Math.max(0, Math.min(1, (capRadius - Math.hypot(dx, dy)) / 2));
+      const alpha = Math.round(old[3] * coverage);
+      if (alpha === old[3]) continue;
+      const sourcePixel = source.getPixel(x, y);
+      if (sourcePixel[3]) lower.image.setPixel(x, y, ...sourcePixel);
+      higher.image.setPixel(x, y, old[0], old[1], old[2], alpha);
+    }
+  }
+  // Repaint the old scabbard mouth: dark open oval, bronze rim, no grip/hilt/blade.
+  const scabbard = byName.scabbard;
+  const box = original.get('scabbard').box;
+  if (box) {
+    const mouth = [p.scabbard[0], Math.max(box.y + 3, p.scabbard[1] + 2)];
+    for (let y = box.y; y < mouth[1] + 8; y++) for (let x = box.x; x < box.x + box.w; x++) {
+      const alpha = scabbard.image.getPixel(x, y)[3];
+      if (!alpha) continue;
+      const d = ((x - mouth[0]) / 5) ** 2 + ((y - mouth[1]) / 3) ** 2;
+      const colour = d < 0.5 ? [30, 32, 34] : d < 1 ? [153, 125, 83] : [57, 64, 69];
+      scabbard.image.setPixel(x, y, ...colour, alpha);
+    }
+  }
 }
 
 export function idleClip(direction = 'S') {
