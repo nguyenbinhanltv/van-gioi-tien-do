@@ -88,3 +88,12 @@ CI (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22) runs ci, typecheck
 | `vgtd-new-package`     | Creating a new workspace package                                             |
 | `vgtd-sim-determinism` | Writing or reviewing server / shared simulation code or the network protocol |
 | `vgtd-asset-pipeline`  | Generating, packing, compressing or importing assets                         |
+
+## Design review
+
+Review skills (read-only, output a Markdown findings report with `file:line` and severity; adapted from
+Claude-Code-Game-Studios, see `THIRD_PARTY_NOTICES.md`): `vgtd-design-review` (one doc, with checklists),
+`vgtd-review-all-gdds` (cross-doc), `vgtd-propagate-design-change` (impact of a changed value or rule),
+`vgtd-architecture-review` (design to technical docs 20-29). Specialist subagents in `.claude/agents/`: game-designer,
+systems-designer, economy-designer, narrative-director, level-designer, network-programmer, security-engineer, qa-lead,
+technical-director, creative-director.
