@@ -104,7 +104,11 @@ Viewer (`apps/client-cocos`, worker `van-gioi-tien-do-7`) nạp ske/tex, phát t
 
 Registry lớp, đặc tả mảnh cho art, sinh rig mẫu từ thư mục mảnh, re-target hoạt cảnh theo vũ khí và xuất viewer theo nhân vật: xem [rig-classes.md](rig-classes.md).
 
-## 12. Vòng art: phần dưới kéo dài, phần trên có nắp khớp
+## 13. Đo chất lượng rig bằng CLI
+
+`npm run rig:measure -w @vgtd/rig -- <nhân-vật> [--dir S,E] [--autoskin] [--top N] [--limit PX] [--json] [--strict]` in bảng theo hướng: số lần hở mối nối (ngưỡng mặc định 3 px), hở tối đa, số sự kiện dãn và dãn tối đa, số clip bị tách mảnh (islands), số đỉnh mesh, rồi danh sách mảnh cần vẽ bù (cặp mảnh, bone, px, clip/khung xấu nhất). `--autoskin` đo thử như thể đã áp `autoSkin` (không đụng dữ liệu); `--strict` thoát mã 1 nếu còn hở/tách/dãn (dùng làm cổng sau khi art vẽ bù xong). Chạy bằng `node` thuần (bundle bằng esbuild, không cần Cocos); cùng bộ kiểm tra với artifact và CI. Ví dụ: `npm run rig:measure -w @vgtd/rig -- kiem-tu --autoskin`.
+
+## 14. Vòng art: phần dưới kéo dài, phần trên có nắp khớp
 
 Quy ước placeholder do orchestrator chốt 2026-11-06 nằm trong [parts-spec.md](parts-spec.md): phần chồng màu bên trong có thể đổi, silhouette ngoài nghỉ và slot order giữ nguyên. `gen:kiemtu build` sơn tiếp nguồn bằng `paintJointExtensions`: đọc margin từ public `partsSpec`, ghép mọi cặp của `rig-underpaint.md`, giới hạn sơn dưới bằng alpha mảnh kề, bo biên proximal của phần trên và chuyển pixel góc cắt về phần dưới. Nguồn turnaround giữ nguyên; cutout, atlas, rig UV/kích thước và export sinh lại. Vỏ kiếm có lòng tối/viền đồng ở miệng, không còn dấu chuôi; sash được vẽ nối. Test bảo toàn alpha kiểm cả năm hướng; test dữ liệu nay yêu cầu một mảnh `scabbard`, thay cho yêu cầu bỏ quad ở §11.
 
