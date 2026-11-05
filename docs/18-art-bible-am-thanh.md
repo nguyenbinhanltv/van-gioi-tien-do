@@ -2,6 +2,8 @@
 
 > **Trạng thái: bản thiết kế đề xuất – chờ duyệt.** Hồ sơ gốc đã khóa phần **kỹ thuật** của hình ảnh: lưới 64 × 32, 8 lớp vẽ, nguồn sáng NW, canvas nhân vật, khung 9-slice, icon 48 / 64 / 128, 6 phẩm, ngân sách render ([02](02-asset-matrix-2d.md), [03](03-nhan-vat-quai-vat.md), [04](04-tilemap.md), [05](05-ui-ux-icon.md), [06](06-toi-uu-render.md)). Hồ sơ **không** có hướng thẩm mỹ thống nhất (trụ cột phong cách, bảng màu, ngôn ngữ VFX theo Ngũ hành, định hướng âm nhạc ngoài bảng số lượng ở 02, chính sách asset AI). Phần này lấp khoảng trống đó. Mọi màu, tỷ lệ và quy tắc ngoài các giá trị đã trích dẫn là _Đề xuất – chờ duyệt_. Quyết định D14 trong [DECISIONS.md](DECISIONS.md) (rig Spine Player / Boss **5 hướng + lật gương**, animation bất đối xứng được vẽ đủ 8 hướng) thay dòng "Hướng" trong 00 §3 và được áp dụng ở đây.
 
+> [Cập nhật D35: hoạt cảnh xương nhân vật dùng DragonBones thay Spine 4.2 (runtime `dragon-bones` của Cocos 3.8.8, MIT); "Spine" trong tài liệu này đọc là "skeleton DragonBones"; số liệu không đổi. Xem [art/dragonbones.md](art/dragonbones.md).]
+
 ## 1. Trụ cột phong cách
 
 | Trụ cột                                           | Ý nghĩa                                                                                                                                     | Cách kiểm tra                                                                      |

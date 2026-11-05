@@ -1,6 +1,6 @@
 ---
 name: cocos-creator
-description: Cocos Creator 3.8.8 conventions for the Vạn Giới Tiên Đồ client (apps/client-cocos) - component patterns, the single y-flip adapter, headless build, editor path env var, how @vgtd/* workspace packages reach Cocos, Spine version. Use when editing apps/client-cocos or building/running the Cocos client.
+description: Cocos Creator 3.8.8 conventions for the Vạn Giới Tiên Đồ client (apps/client-cocos) - component patterns, the single y-flip adapter, headless build, editor path env var, how @vgtd/* workspace packages reach Cocos, DragonBones runtime (D35). Use when editing apps/client-cocos or building/running the Cocos client.
 ---
 
 # Cocos Creator 3.8.8 in this repo
@@ -55,8 +55,8 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 
 ## Engine settings
 
-`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, dragon-bones, video, webview, particle-2d); **Spine 4.2** selected (`spine` `_option: "spine-4.2"` and `spine-4.2` in `includeModules`; locked as D25 in docs/DECISIONS.md - skeletons must be exported from Spine Editor 4.2.x). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
+`apps/client-cocos/settings/v2/packages/engine.json`: 2D modules only (no physics, tiled-map, video, webview, particle-2d). **DragonBones is the character skeleton runtime (D35, replaces Spine 4.2 of D25):** the target is the built-in `dragon-bones` module, with skeleton data exported as DragonBones JSON 5.5/5.6 (engine reads at most 5.6.300; see docs/art/dragonbones.md). As of this PR the checked-in `engine.json` still has the `spine`/`spine-4.2` modules and not `dragon-bones`; switching the module set is **pending**, owned by the client worker (van-gioi-tien-do-7, DragonBones viewer), not done in the docs PR. Skeletons are AI-generated DragonBones JSON (<= 5.6) from a format-neutral rig source (D36); a GUI editor (LoongBones / DragonBones Pro) is optional, not required. The `spine` modules may be cropped once the switch lands. Until then do not add new Spine assets (history: D25). Design resolution is set at runtime (`view.setDesignResolutionSize(1280, 720, FIXED_HEIGHT)` from `@vgtd/shared` `DESIGN_WIDTH/HEIGHT`).
 
 ## Integration seams (later tasks)
 
-`WorldView` -> client-world chunk streaming (keep `isTerrainWalkable`). `PlayerActor.body` -> paperdoll/Spine from the character package (Player/Boss: Spine 5 directions + mirror; keep `pos`). Register every L3 object through `YSortLayer.add(node, depth)`.
+`WorldView` -> client-world chunk streaming (keep `isTerrainWalkable`). `PlayerActor.body` -> paperdoll/DragonBones armature from the character package (Player/Boss: DragonBones 5 directions + mirror, D35; keep `pos`). Register every L3 object through `YSortLayer.add(node, depth)`.
