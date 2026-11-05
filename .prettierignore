@@ -17,3 +17,6 @@ apps/client-cocos/assets/scripts/vendor
 apps/client-cocos/assets/resources/world
 apps/client-cocos/tsconfig.json
 apps/client-cocos/package.json
+
+# Generated DragonBones exports (tools/rig `npm run export:kiemtu`): machine-written, compact JSON
+apps/client-cocos/assets/resources/dragonbones/**/*.json
