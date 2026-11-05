@@ -71,14 +71,14 @@ Thực thể được lặp theo `entityId` tăng dần (không lặp `Map`/`Set
 
 ### 3.4 Vòng tick và ngân sách (giả thiết, tải 200 người + 300 quái trong một node)
 
-| Giai đoạn                        | Ngân sách   | Ghi chú                                                                                                |
-| -------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
-| Input + `step()` (200 người)     | ≤ 12 ms     | Mỗi người tối đa số input tương ứng 50 ms × 1,25 ([08 §4](08-server-architecture.md)); phần dư giữ lại |
-| AI + kỹ năng + sát thương + buff | ≤ 10 ms     | Quái ở xa mọi người chơi: AI giảm tần số (1/4) hoặc ngủ                                                |
-| AOI                              | ≤ 8 ms      | Chỉ **tick chẵn**; 200 truy vấn × tối đa 42 ô hash; mục tiêu ≈ 40 µs/truy vấn                          |
-| Mã hóa snapshot                  | ≤ 12 ms     | ~60 µs/client/tick; ở tick lẻ chỉ gửi delta cho vùng gần (20 Hz)                                       |
-| Dự phòng                         | ≥ 8 ms      | Còn lại ≥ 16%                                                                                          |
-| **Tổng**                         | **≤ 42 ms** | Cảnh báo ở p99 > 45 ms; `tick_overrun` ≥ 1 tick → metric + giảm tải (xem §3.7)                         |
+| Giai đoạn                        | Ngân sách   | Ghi chú                                                                                                                                                               |
+| -------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input + `step()` (200 người)     | ≤ 12 ms     | Mỗi người tối đa số input tương ứng 50 ms × 1,25 ([08 §4](08-server-architecture.md)); phần dư giữ lại                                                                |
+| AI + kỹ năng + sát thương + buff | ≤ 10 ms     | Quái ở xa mọi người chơi: AI giảm tần số (1/4) hoặc ngủ                                                                                                               |
+| AOI                              | ≤ 8 ms      | Chỉ **tick chẵn**; 200 truy vấn × tối đa 42 ô hash; mục tiêu ≈ 40 µs/truy vấn                                                                                         |
+| Mã hóa snapshot                  | ≤ 12 ms     | ~60 µs/client/tick; ở tick lẻ chỉ gửi delta cho vùng gần (20 Hz)                                                                                                      |
+| Dự phòng                         | ≥ 8 ms      | Còn lại ≥ 16%                                                                                                                                                         |
+| **Tổng**                         | **≤ 42 ms** | Mục tiêu vận hành closed beta (docs/10): tick p99 ≤ 40 ms ở 100 CCU; cảnh báo ở p99 > 40 ms, báo động > 45 ms; `tick_overrun` ≥ 1 tick → metric + giảm tải (xem §3.7) |
 
 Giám sát: histogram `world_tick_duration_ms` (p50/p95/p99) và `world_tick_phase_ms{phase=…}`; kiểm tra vượt ngân sách trong test tải ([28 §6](28-chien-luoc-kiem-thu.md)). **Điều kiện thất bại để tách node:** p99 > 40 ms ở 100 v 100 → kích hoạt lộ trình [20 §8](20-kien-truc-tong-the.md).
 
@@ -94,12 +94,12 @@ Giữ nguyên [08 §2](08-server-architecture.md); mã dùng `aoiCell`, `inAoi`,
 
 ### 3.6 Handover – **quyết định cho MVP: một World Node, không handover**
 
-| Việc                                    | Trong MVP                                                                                                       | Chuẩn bị cho sau MVP                                                                       |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Chuyển quyền điều khiển giữa node       | **Không** (chỉ 1 node)                                                                                          | `transferOut/In(state, epoch)` có chữ ký; `epoch` có mặt trong mọi lệnh (hằng 1)           |
-| Ghost / vùng đệm 1 bán kính AOI (~45 ô) | **Không**                                                                                                       | Bật khi `ZonePort` trả ≥ 2 node; ghost cập nhật 10 Hz ([08 §3](08-server-architecture.md)) |
-| Truyền tống / vào bí cảnh               | **Có**, nhưng chỉ là đổi bản đồ **trong cùng World Node** (bản đồ khác = thể hiện `MapInstance` khác) + màn che | Instance riêng một node khi cần cách ly tải                                                |
-| Điều kiện kích hoạt handover thật       | —                                                                                                               | p99 tick > 40 ms ở tải mục tiêu, hoặc CCU > trần đo được trên 1 node                       |
+| Việc                                    | Trong MVP                                                                                                       | Chuẩn bị cho sau MVP                                                                                                                                                                                                            |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Chuyển quyền điều khiển giữa node       | **Không** (chỉ 1 node)                                                                                          | `transferOut/In(state, epoch)` có chữ ký; `epoch` có mặt trong mọi lệnh (hằng 1)                                                                                                                                                |
+| Ghost / vùng đệm 1 bán kính AOI (~45 ô) | **Không**                                                                                                       | Bật khi `ZonePort` trả ≥ 2 node; ghost cập nhật 10 Hz ([08 §3](08-server-architecture.md))                                                                                                                                      |
+| Truyền tống / vào bí cảnh               | **Có**, nhưng chỉ là đổi bản đồ **trong cùng World Node** (bản đồ khác = thể hiện `MapInstance` khác) + màn che | Instance riêng một node khi cần cách ly tải; docs/14 quy định **instance chiến tranh là World Node chuyên dụng** (tự hủy sau 5 phút trống), áp dụng khi bật chiến tranh (ngoài closed beta theo docs/10) và cần mở rộng ADR-005 |
+| Điều kiện kích hoạt handover thật       | —                                                                                                               | p99 tick > 40 ms ở tải mục tiêu, hoặc CCU > trần đo được trên 1 node                                                                                                                                                            |
 
 Lý do đầy đủ ở [20 §5.3](20-kien-truc-tong-the.md). Khi bật handover, bắt buộc có bộ kiểm thử: epoch cũ bị bỏ, B không ACK trong 200 ms → A giữ quyền, 3 lần thất bại → chặn ở biên + báo động Zone Manager ([08 §3](08-server-architecture.md)).
 
@@ -173,11 +173,11 @@ Chi tiết ở [26](26-kinh-te-ledger.md). Phần module:
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                            | Mặc định đề xuất                                                   |
-| --- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Q1  | MVP một World Node, không handover; chuẩn bị chữ ký `epoch`/`transferOut`?                         | **Có**                                                             |
-| Q2  | Chu kỳ lưu trạng thái nhân vật không phải tài sản: 30 s (không Redis)?                             | **Có**; mất tối đa 30 s vị trí/máu khi sập                         |
-| Q3  | Ngân sách pha trong tick (12 / 10 / 8 / 12 / 8 ms) làm mục tiêu thiết kế, kiểm chứng bằng loadbot? | **Có**                                                             |
-| Q4  | Khi Economy tạm thời không phản hồi: World hiển thị "đang chờ" và thử lại, không cấp trong RAM?    | **Có**                                                             |
-| Q5  | Trần người chơi mỗi bản đồ cho MVP (giả thiết 300 CCU)?                                            | Chủ dự án chốt; mặc định 300, hàng đợi vào game khi vượt           |
-| Q6  | Kênh Thế giới có lưu lịch sử vĩnh viễn không?                                                      | **Không** (chỉ vòng đệm RAM 200 tin) – giảm rủi ro dữ liệu cá nhân |
+| #   | Câu hỏi                                                                                            | Mặc định đề xuất                                                             |
+| --- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Q1  | MVP một World Node, không handover; chuẩn bị chữ ký `epoch`/`transferOut`?                         | **Có**                                                                       |
+| Q2  | Chu kỳ lưu trạng thái nhân vật không phải tài sản: 30 s (không Redis)?                             | **Có**; mất tối đa 30 s vị trí/máu khi sập                                   |
+| Q3  | Ngân sách pha trong tick (12 / 10 / 8 / 12 / 8 ms) làm mục tiêu thiết kế, kiểm chứng bằng loadbot? | **Có**                                                                       |
+| Q4  | Khi Economy tạm thời không phản hồi: World hiển thị "đang chờ" và thử lại, không cấp trong RAM?    | **Có**                                                                       |
+| Q5  | Trần người chơi mỗi bản đồ: docs/10 đặt mục tiêu closed beta 100 CCU                               | Mặc định 100 vận hành, trần cứng 300 (giả thiết), hàng đợi vào game khi vượt |
+| Q6  | Kênh Thế giới có lưu lịch sử vĩnh viễn không?                                                      | **Không** (chỉ vòng đệm RAM 200 tin) – giảm rủi ro dữ liệu cá nhân           |

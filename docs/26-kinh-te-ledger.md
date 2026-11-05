@@ -18,26 +18,28 @@
 
 ### 2.1 Đồng tiền
 
-| Mã          | Ý nghĩa                | Quy đổi ([07 §6](07-cong-thuc-data-schema.md))             | Ghi chú                                                       |
-| ----------- | ---------------------- | ---------------------------------------------------------- | ------------------------------------------------------------- |
-| `LT_HA`     | Linh thạch hạ phẩm     | 1                                                          | Đơn vị tính giá mặc định                                      |
-| `LT_TRUNG`  | Linh thạch trung phẩm  | = 100 hạ                                                   | Đổi lên phẩm: **phí 5%** (kênh "Phí đổi Linh thạch lên phẩm") |
-| `LT_THUONG` | Linh thạch thượng phẩm | = 10.000 hạ                                                | —                                                             |
-| `TIEN_NGOC` | Tiên Ngọc              | Theo thiết kế kiếm tiền (chưa có tài liệu – OPEN-ITEMS §3) | Không cấu hình ở MVP ngoài khung kỹ thuật                     |
-| `CONG_HIEN` | Cống hiến (tông môn)   | Theo GDD                                                   | Không chuyển nhượng được giữa người chơi (đề xuất)            |
+| Mã                | Ý nghĩa                | Quy đổi ([07 §6](07-cong-thuc-data-schema.md))        | Ghi chú                                                                                                                                                                                                                             |
+| ----------------- | ---------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LT_HA`           | Linh thạch hạ phẩm     | 1                                                     | Đơn vị tính giá mặc định                                                                                                                                                                                                            |
+| `LT_TRUNG`        | Linh thạch trung phẩm  | = 100 hạ                                              | Đổi lên phẩm: **phí 5%** (kênh "Phí đổi Linh thạch lên phẩm")                                                                                                                                                                       |
+| `LT_THUONG`       | Linh thạch thượng phẩm | = 10.000 hạ                                           | —                                                                                                                                                                                                                                   |
+| `TIEN_NGOC`       | Tiên Ngọc              | Theo docs/15 (1 Tiên Ngọc ≈ 100 ₫ trên Web, chờ chốt) | **Khóa tài khoản, không chuyển giữa người chơi, không đổi ra Linh thạch** (docs/15 Q2). Ví Tiên Ngọc **được phép âm** khi hoàn tiền/chargeback (docs/15) nên bỏ ràng buộc `balance ≥ 0` cho loại ví này; chi tiêu bị vô hiệu khi âm |
+| `TOKEN_<sự kiện>` | Tiền sự kiện           | Theo từng sự kiện (docs/15)                           | Khóa tài khoản, hết hạn khi sự kiện kết thúc (bút toán hủy cuối sự kiện), không đổi sang Linh thạch                                                                                                                                 |
+| `CONG_HIEN`       | Cống hiến (tông môn)   | Theo GDD                                              | Không chuyển nhượng được giữa người chơi (đề xuất)                                                                                                                                                                                  |
 
 Số tiền là `bigint` không dấu đơn vị nhỏ nhất, **không số thập phân**. Phí/thuế tính bằng số nguyên với quy tắc làm tròn **cố định và ghi rõ** (làm tròn xuống phần của người bán, phần dư vào sink): `tax = ceil(price × τ_bps / 10000)`, người bán nhận `price − tax`.
 
 ### 2.2 Loại tài khoản sổ cái
 
-| `kind`                  | Chủ                                   | Ràng buộc              | Dùng cho                                                                                                                                    |
-| ----------------------- | ------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PLAYER_WALLET`         | nhân vật                              | `balance ≥ 0`          | Ví                                                                                                                                          |
-| `SECT_TREASURY`         | tông môn                              | `balance ≥ 0`          | Quỹ tông môn (nạp Hộ Sơn Đại Trận, Linh Mạch)                                                                                               |
-| `ESCROW`                | giao dịch (chợ/đấu giá/đổi trực tiếp) | `balance ≥ 0`          | Giữ tiền trong lúc khớp lệnh                                                                                                                |
-| `SYSTEM_FAUCET_<nguồn>` | hệ thống                              | Có thể âm (nguồn sinh) | `DROP_MOB`, `DROP_ELITE`, `DROP_BOSS`, `QUEST_REWARD`, `EVENT_REWARD`, `NPC_SELL`…                                                          |
-| `SYSTEM_SINK_<kênh>`    | hệ thống                              | Chỉ tăng (tiền bị hủy) | `BREAKTHROUGH`, `MARKET_TAX`, `LISTING_FEE`, `REPAIR`, `SECT_UPKEEP`, `TELEPORT`, `CONVERT_FEE`, `TRADE_TAX`, `NPC_BUY_FEE`, `AUCTION_BURN` |
-| `SYSTEM_GM`             | vận hành                              | Có thể âm/dương        | Chỉ bút toán `GM_ADJUST` có duyệt (§3.3); **loại khỏi** báo cáo faucet/sink nhưng báo cáo riêng                                             |
+| `kind`                  | Chủ                                   | Ràng buộc              | Dùng cho                                                                                                                                                                   |
+| ----------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PLAYER_WALLET`         | nhân vật                              | `balance ≥ 0`          | Ví                                                                                                                                                                         |
+| `SECT_TREASURY`         | tông môn                              | `balance ≥ 0`          | Quỹ tông môn (nạp Hộ Sơn Đại Trận, Linh Mạch)                                                                                                                              |
+| `ESCROW`                | giao dịch (chợ/đấu giá/đổi trực tiếp) | `balance ≥ 0`          | Giữ tiền trong lúc khớp lệnh                                                                                                                                               |
+| `SYSTEM_FAUCET_<nguồn>` | hệ thống                              | Có thể âm (nguồn sinh) | `DROP_MOB`, `DROP_ELITE`, `DROP_BOSS`, `QUEST_REWARD`, `EVENT_REWARD`, `NPC_SELL`…                                                                                         |
+| `SYSTEM_SINK_<kênh>`    | hệ thống                              | Chỉ tăng (tiền bị hủy) | `BREAKTHROUGH`, `MARKET_TAX`, `LISTING_FEE`, `REPAIR`, `SECT_UPKEEP`, `TELEPORT`, `CONVERT_FEE`, `TRADE_TAX`, `NPC_BUY_FEE`, `AUCTION_BURN`                                |
+| `SYSTEM_FAUCET_IAP`     | hệ thống                              | Có thể âm              | Nạp tiền thật → ví Tiên Ngọc; biên lai xác thực **phía server**, khóa idempotency theo mã biên lai (docs/15; tên `SRC_IAP` ở docs/15/17); **ngoài** tỷ lệ tiêu hao/sinh ra |
+| `SYSTEM_GM`             | vận hành                              | Có thể âm/dương        | Chỉ bút toán `GM_ADJUST` có duyệt (§3.3); **loại khỏi** báo cáo faucet/sink nhưng báo cáo riêng                                                                            |
 
 Kênh sink tương ứng bảng "Cơ cấu tiêu hao mục tiêu" của [07 §7](07-cong-thuc-data-schema.md): đột phá và vật liệu đột phá 35%; thuế chợ + phí niêm yết 15%; sửa chữa 15%; nạp Hộ Sơn Đại Trận / duy trì Linh Mạch 15%; truyền tống 8%; đổi phẩm Linh thạch (5%) + khác 12%.
 
@@ -185,13 +187,14 @@ Hai bên mời → đặt vật phẩm/tiền → **khóa** (mỗi bên xác nh�
 - **PRNG:** theo ADR-010 ([29](29-adr.md)): thuật toán của `@vgtd/shared`, nhưng với roll **kinh tế** hạt giống là bí mật phía server (không đoán được từ số sát thương hiển thị), mỗi luồng đặt tên (`drop`, `breakthrough`, `tribulation`, `craft`) và **thứ tự rút cố định, có tài liệu**.
 - **Log:** mỗi roll kinh tế ghi `roll_log(stream, tick, bộ đầu vào, số rút, kết quả)`; tối thiểu đủ để **tái hiện** kết quả từ trạng thái luồng. Bộ đếm **pity** (bản vẽ Vàng–Đỏ, đột phá) lưu **ở server** trong `character_state`/bảng riêng, không client.
 - **Hệ số điều chỉnh** (quái thấp ×0,2/chỉ nguyên liệu, linh khí cạn kiệt ×0,5 sau 2 giờ, tổ đội 1/√n, boss rương tuần…) tính ở World/Economy khi roll theo [07 §6](07-cong-thuc-data-schema.md); `lowRealmFactor` trả `null` cho trường hợp "chỉ nguyên liệu" → **nơi gọi phải xử lý** (OPEN-ITEMS A11).
+- **Chế tạo (docs/13):** Economy là nơi duy nhất ghi kết quả chế; roll hai bước (thành công, phẩm chất) chạy ở Economy với seed ở kho hạn chế, không log.
 - **Ranh giới quyết định:** World Node quyết "rơi gì" (theo trạng thái trận đấu, hạn mức theo ngày), Economy quyết "cấp được không" (túi, hạn mức) và ghi sổ.
 
 ## 7. Faucet / sink và hạch toán theo CPI
 
 ### 7.1 Báo cáo hằng tuần (từ sổ cái)
 
-Với tuần `w`: `faucet_w = Σ delta dương của SYSTEM_FAUCET_*` (quy ra hạ phẩm); `sink_w = Σ delta của SYSTEM_SINK_*` (mọi kênh ở §2.2 đều có dòng trong bảng dưới); `ratio_w = sink_w / faucet_w` (mục tiêu **0,9–1,0**, [00 §3](00-ho-so-tong-hop.md)). Bảng theo kênh so với cơ cấu mục tiêu của [07 §7](07-cong-thuc-data-schema.md):
+Với tuần `w`: `faucet_w = Σ delta dương của SYSTEM_FAUCET_*` (quy ra hạ phẩm); `sink_w = Σ delta của SYSTEM_SINK_*` (mọi kênh ở §2.2 đều có dòng trong bảng dưới); `ratio_w = sink_w / faucet_w` (chỉ các đồng Linh thạch; **loại** `TIEN_NGOC` và `TOKEN_*`, docs/15) (mục tiêu **0,9–1,0**, [00 §3](00-ho-so-tong-hop.md)). Bảng theo kênh so với cơ cấu mục tiêu của [07 §7](07-cong-thuc-data-schema.md):
 
 | Kênh sink                                                 | Tỷ trọng mục tiêu | Tài khoản hệ thống                                                      |
 | --------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------- |
@@ -247,6 +250,6 @@ Ghi chú: M0–M2 phụ thuộc docs game design (nghề luyện đan/chế tạ
 | Q3  | Biên giá niêm yết [P_ref/10, P_ref×10] chống thao túng?                        | **Có** (tham số dữ liệu); cần game design duyệt                              |
 | Q4  | Luật Đấu Giá Hội: tỷ lệ hủy tiền, chống sniping, ai được đưa hàng?             | Chờ game design; kỹ thuật dùng khung §5.4                                    |
 | Q5  | Điều chỉnh τ/sửa chữa hằng tuần có tự động áp dụng không?                      | **Không**: tự đề xuất, người duyệt; cờ tính năng cho tự động sau closed beta |
-| Q6  | `CONG_HIEN`, `TIEN_NGOC` có được chuyển giữa người chơi không?                 | Cống hiến: **không**; Tiên Ngọc: chờ thiết kế kiếm tiền                      |
+| Q6  | `CONG_HIEN`, `TIEN_NGOC`, `TOKEN_*` có được chuyển giữa người chơi không?      | **Không** cho cả ba (docs/15 Q2: Tiên Ngọc khóa tài khoản, một chiều)        |
 | Q7  | Tạo `tools/econ-sim` (M0–M1) trước khi cài đặt Economy?                        | **Có**: khóa hệ số sớm, rẻ hơn sửa sau                                       |
 | Q8  | Hạn mức chuyển/ngày và giá trị tối đa mỗi giao dịch trực tiếp (chống RMT)      | Cần game design + vận hành đặt; khung kỹ thuật là tham số                    |

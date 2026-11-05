@@ -100,15 +100,15 @@ flowchart TB
 
 ### 6.2 Tiêu chí đạt (đều là ngưỡng thiết kế, chưa có số đo thật)
 
-| Chỉ số                      | Ngưỡng                                | Nguồn                               |
-| --------------------------- | ------------------------------------- | ----------------------------------- |
-| Tick p99 (S3)               | ≤ 45 ms; không `tick_overrun` kéo dài | 08, [22 §3.4](22-server-modules.md) |
-| Băng thông xuống (S1/S2/S3) | ≤ 8 / 13 / 25 KB/s mỗi bot            | [00 §3](00-ho-so-tong-hop.md)       |
-| Băng thông lên              | < 1 KB/s                              | 08 §8                               |
-| Số thực thể tối đa gửi/bot  | ≤ 120 (Mobile/Web), ≤ 200 (PC)        | 00 §3                               |
-| Rò bộ nhớ (S5)              | Heap ổn định (± 5%) sau giờ thứ 2     | Đề xuất                             |
-| Độ trễ giao dịch Economy    | p99 ≤ 100 ms ở 50 giao dịch/s         | [22 §6](22-server-modules.md)       |
-| Bất biến sổ cái sau tải     | 0 vi phạm                             | [26 §3.2](26-kinh-te-ledger.md)     |
+| Chỉ số                      | Ngưỡng                                                    | Nguồn                               |
+| --------------------------- | --------------------------------------------------------- | ----------------------------------- |
+| Tick p99 (S3)               | ≤ 40 ms ở 100 CCU (docs/10); không `tick_overrun` kéo dài | 08, [22 §3.4](22-server-modules.md) |
+| Băng thông xuống (S1/S2/S3) | ≤ 8 / 13 / 25 KB/s mỗi bot                                | [00 §3](00-ho-so-tong-hop.md)       |
+| Băng thông lên              | < 1 KB/s                                                  | 08 §8                               |
+| Số thực thể tối đa gửi/bot  | ≤ 120 (Mobile/Web), ≤ 200 (PC)                            | 00 §3                               |
+| Rò bộ nhớ (S5)              | Heap ổn định (± 5%) sau giờ thứ 2                         | Đề xuất                             |
+| Độ trễ giao dịch Economy    | p99 ≤ 100 ms ở 50 giao dịch/s                             | [22 §6](22-server-modules.md)       |
+| Bất biến sổ cái sau tải     | 0 vi phạm                                                 | [26 §3.2](26-kinh-te-ledger.md)     |
 
 Kết quả loadbot quyết định **kích hoạt lộ trình tách service** ([20 §8](20-kien-truc-tong-the.md)) và là mục "đo AOI với 100 vs 100" của [OPEN-ITEMS §1 #6](OPEN-ITEMS.md). Chạy cục bộ hoặc theo lịch (workflow `schedule`), **không** nằm trong CI mỗi PR.
 
@@ -172,12 +172,12 @@ Quy tắc giữ CI ngắn: (1) cache npm (đã có); (2) vitest chạy song song
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                        | Mặc định đề xuất                           |
-| --- | ---------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| Q1  | Thêm job `integration` (PG service) và job `format` vào CI; `nightly` bằng workflow theo lịch? | **Có** (ADR-019); vẫn không CD             |
-| Q2  | `fast-check` cho kiểm thử thuộc tính; `tools/loadbot`; `dependency-cruiser` cho ranh giới?     | **Có**                                     |
-| Q3  | Không build Cocos trong CI ở MVP; đo thiết bị thủ công trước mốc?                              | **Có**                                     |
-| Q4  | FPS mục tiêu 60 / sàn 30 cho hạng thấp (hiện tài liệu chưa quy định)                           | **Có**; chủ dự án duyệt                    |
-| Q5  | Danh sách thiết bị thật (cần chủ dự án cung cấp)                                               | Chủ dự án cung cấp ≥ 1 máy mỗi hạng ở §7.1 |
-| Q6  | Golden đa trình duyệt (Chromium, Firefox, WebKit) cho `step()` – chạy hằng đêm?                | **Có**; dùng Playwright                    |
-| Q7  | Ghi lại luồng input phiên trận trên server (replay) mặc định tắt, bật bằng cờ?                 | **Có**                                     |
+| #   | Câu hỏi                                                                                                                                                        | Mặc định đề xuất                           |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Q1  | Thêm job `integration` (PG service) và job `format` vào CI; `nightly` bằng workflow theo lịch?                                                                 | **Có** (ADR-019); vẫn không CD             |
+| Q2  | `fast-check` cho kiểm thử thuộc tính; `tools/loadbot`; `dependency-cruiser` cho ranh giới?                                                                     | **Có**                                     |
+| Q3  | Không build Cocos trong CI ở MVP; đo thiết bị thủ công trước mốc?                                                                                              | **Có**                                     |
+| Q4  | FPS mục tiêu 60 / sàn 30 cho hạng thấp (hiện tài liệu chưa quy định)                                                                                           | **Có**; chủ dự án duyệt                    |
+| Q5  | Danh sách thiết bị thật (cần chủ dự án cung cấp)                                                                                                               | Chủ dự án cung cấp ≥ 1 máy mỗi hạng ở §7.1 |
+| Q6  | Golden đa trình duyệt (Chromium, Firefox, WebKit) cho `step()` – chạy hằng đêm?                                                                                | **Có**; dùng Playwright                    |
+| Q7  | Replay trên server: docs/14 yêu cầu nút Báo cáo gửi **60 s log chiến đấu gần nhất** nên luôn giữ **vòng đệm 60 s** trong RAM; ghi đầy đủ ra đĩa chỉ khi bật cờ | **Có**                                     |

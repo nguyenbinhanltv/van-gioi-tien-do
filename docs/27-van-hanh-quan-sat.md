@@ -1,6 +1,6 @@
 # Vận hành và quan sát (Observability)
 
-> **Trạng thái:** thiết kế kỹ thuật. Mục "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào [DECISIONS.md](DECISIONS.md). Mảng "Đo lường (telemetry, dashboard KPI)" chưa có tài liệu game design ([OPEN-ITEMS §3](OPEN-ITEMS.md)); tài liệu **docs/17** (đo lường, do nhóm game design viết song song) chưa có khi viết bản này. Phần telemetry sản phẩm ở §4 chỉ định **hạ tầng** (đường ống, định dạng sự kiện, quyền riêng tư); **danh mục sự kiện và KPI sản phẩm** sẽ lấy từ docs/17 khi có, và phải được đối chiếu lại ở lần cập nhật sau (Q1).
+> **Trạng thái:** thiết kế kỹ thuật. Mục "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào [DECISIONS.md](DECISIONS.md). Mảng "Đo lường (telemetry, dashboard KPI)" chưa có tài liệu game design ([OPEN-ITEMS §3](OPEN-ITEMS.md)); tài liệu **docs/17** (telemetry, KPI, dashboard; PR #69) là nguồn của **danh mục sự kiện, envelope và KPI**; bản này đã đối chiếu với docs/17 và **theo docs/17** khi khác nhau (§4). Tài liệu này chỉ định **hạ tầng** thực thi (đường truyền, lưu, cảnh báo kỹ thuật).
 >
 > **Phạm vi MVP:** chạy cục bộ (docker-compose profile `obs`, [20 §6](20-kien-truc-tong-the.md)); không có môi trường phát hành, không CD.
 
@@ -42,27 +42,27 @@
 
 ### 3.1 Chỉ số cốt lõi theo ngân sách
 
-| Chỉ số                                                         | Loại              | Ngưỡng / mục tiêu (nguồn)                                        | Cảnh báo                                          |
-| -------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
-| `vgtd_world_tick_duration_ms` (histogram, nhãn `phase`)        | histogram         | p99 ≤ 45 ms; tổng pha ≤ 42 ms ([22 §3.4](22-server-modules.md))  | p99 > 45 ms 1 phút                                |
-| `vgtd_world_tick_overrun_total`                                | counter           | 0 ở tải mục tiêu                                                 | > 0 liên tục 5 s                                  |
-| `vgtd_world_entities` (gauge, nhãn `kind`)                     | gauge             | ≤ ~1.000 (giả thiết)                                             | > 80% trần                                        |
-| `vgtd_world_aoi_duration_ms`                                   | histogram         | ≤ 8 ms mỗi lượt AOI                                              | p99 > 8 ms                                        |
-| `vgtd_gateway_connections` (gauge)                             | gauge             | ≤ trần CCU                                                       | > 90% trần                                        |
-| `vgtd_gateway_downstream_bytes_per_s` (histogram theo kết nối) | histogram         | 8 / 13 / 25 KB/s theo tình huống ([00 §3](00-ho-so-tong-hop.md)) | p95 vượt ngân sách tình huống                     |
-| `vgtd_gateway_upstream_bytes_per_s`                            | histogram         | < 1 KB/s (08 §8)                                                 | p95 > 1 KB/s                                      |
-| `vgtd_gateway_send_queue_bytes`                                | histogram         | —                                                                | Số kết nối bị `SLOW_CONSUMER`                     |
-| `vgtd_gateway_rate_limited_total{type}`                        | counter           | —                                                                | Tăng đột biến                                     |
-| `vgtd_anticheat_violation_total{kind}`                         | counter           | Điểm 20 cảnh báo / 50 ngắt (08 §6)                               | Tỷ lệ ngắt kết nối tăng                           |
-| `vgtd_anticheat_disconnect_total{reason}`                      | counter           | —                                                                | —                                                 |
-| `vgtd_economy_tx_duration_ms{reason}`                          | histogram         | p95 ≤ 30 ms, p99 ≤ 100 ms (giả thiết)                            | p99 > 100 ms                                      |
-| `vgtd_economy_invariant_violation_total`                       | counter           | **0**                                                            | > 0 → đóng băng ([26 §3.3](26-kinh-te-ledger.md)) |
-| `vgtd_economy_idempotency_replay_total`                        | counter           | —                                                                | Tăng bất thường (client lỗi?)                     |
-| `vgtd_economy_faucet_sink_ratio` (gauge, theo tuần)            | gauge             | 0,9–1,0 ([00 §3](00-ho-so-tong-hop.md))                          | Theo [26 §7.2](26-kinh-te-ledger.md)              |
-| `vgtd_auth_login_total{result}`, `…_hash_ms`                   | counter/histogram | p95 băm ≈ 80–150 ms (mục tiêu)                                   | Thất bại > 20% / IP đột biến                      |
-| `vgtd_db_pool_*`, `vgtd_db_query_duration_ms`                  | gauge/histogram   | —                                                                | Hàng đợi pool > 0 kéo dài                         |
-| `nodejs_eventloop_lag_seconds`, `nodejs_gc_*`, heap            | mặc định          | Lag luồng chính p99 ≤ 20 ms (giả thiết)                          | p99 > 50 ms                                       |
-| `vgtd_chat_messages_total`, `…_filtered_total`                 | counter           | —                                                                | —                                                 |
+| Chỉ số                                                         | Loại              | Ngưỡng / mục tiêu (nguồn)                                                 | Cảnh báo                                          |
+| -------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------- | ------------------------------------------------- |
+| `vgtd_world_tick_duration_ms` (histogram, nhãn `phase`)        | histogram         | p99 ≤ 40 ms (docs/10); tổng pha ≤ 42 ms ([22 §3.4](22-server-modules.md)) | p99 > 40 ms 1 phút                                |
+| `vgtd_world_tick_overrun_total`                                | counter           | 0 ở tải mục tiêu                                                          | > 0 liên tục 5 s                                  |
+| `vgtd_world_entities` (gauge, nhãn `kind`)                     | gauge             | ≤ ~1.000 (giả thiết)                                                      | > 80% trần                                        |
+| `vgtd_world_aoi_duration_ms`                                   | histogram         | ≤ 8 ms mỗi lượt AOI                                                       | p99 > 8 ms                                        |
+| `vgtd_gateway_connections` (gauge)                             | gauge             | ≤ trần CCU                                                                | > 90% trần                                        |
+| `vgtd_gateway_downstream_bytes_per_s` (histogram theo kết nối) | histogram         | 8 / 13 / 25 KB/s theo tình huống ([00 §3](00-ho-so-tong-hop.md))          | p95 vượt ngân sách tình huống                     |
+| `vgtd_gateway_upstream_bytes_per_s`                            | histogram         | < 1 KB/s (08 §8)                                                          | p95 > 1 KB/s                                      |
+| `vgtd_gateway_send_queue_bytes`                                | histogram         | —                                                                         | Số kết nối bị `SLOW_CONSUMER`                     |
+| `vgtd_gateway_rate_limited_total{type}`                        | counter           | —                                                                         | Tăng đột biến                                     |
+| `vgtd_anticheat_violation_total{kind}`                         | counter           | Điểm 20 cảnh báo / 50 ngắt (08 §6)                                        | Tỷ lệ ngắt kết nối tăng                           |
+| `vgtd_anticheat_disconnect_total{reason}`                      | counter           | —                                                                         | —                                                 |
+| `vgtd_economy_tx_duration_ms{reason}`                          | histogram         | p95 ≤ 30 ms, p99 ≤ 100 ms (giả thiết)                                     | p99 > 100 ms                                      |
+| `vgtd_economy_invariant_violation_total`                       | counter           | **0**                                                                     | > 0 → đóng băng ([26 §3.3](26-kinh-te-ledger.md)) |
+| `vgtd_economy_idempotency_replay_total`                        | counter           | —                                                                         | Tăng bất thường (client lỗi?)                     |
+| `vgtd_economy_faucet_sink_ratio` (gauge, theo tuần)            | gauge             | 0,9–1,0 ([00 §3](00-ho-so-tong-hop.md))                                   | Theo [26 §7.2](26-kinh-te-ledger.md)              |
+| `vgtd_auth_login_total{result}`, `…_hash_ms`                   | counter/histogram | p95 băm ≈ 80–150 ms (mục tiêu)                                            | Thất bại > 20% / IP đột biến                      |
+| `vgtd_db_pool_*`, `vgtd_db_query_duration_ms`                  | gauge/histogram   | —                                                                         | Hàng đợi pool > 0 kéo dài                         |
+| `nodejs_eventloop_lag_seconds`, `nodejs_gc_*`, heap            | mặc định          | Lag luồng chính p99 ≤ 20 ms (giả thiết)                                   | p99 > 50 ms                                       |
+| `vgtd_chat_messages_total`, `…_filtered_total`                 | counter           | —                                                                         | —                                                 |
 
 ### 3.2 Metric phía client (qua telemetry – §4)
 
@@ -81,12 +81,12 @@ flowchart LR
   TP --> M["Prometheus (đếm/histogram)"]
 ```
 
-- **Hai loại dữ liệu:** (1) _telemetry kỹ thuật_ (hiệu năng, lỗi, mạng) – lấy mẫu 1–5% phiên, mục đích vận hành; (2) _telemetry sản phẩm_ (hành vi người chơi, KPI) – danh mục theo docs/17 khi có.
-- **Định dạng sự kiện:** `{v, name, ts (ms, đồng hồ client đã hiệu chỉnh), sessionId (ngẫu nhiên, không phải accountId), props{…}}`; bản đồ `name → schema` nằm ở `packages/shared` hoặc `packages/protocol` (một nguồn); server **loại** sự kiện không có trong danh mục.
-- **Quyền riêng tư:** không gửi nội dung chat, mật khẩu, vị trí chính xác lâu dài; `accountId` chỉ gắn phía server khi cần; người chơi có tùy chọn tắt telemetry sản phẩm (tuân thủ thông báo quyền riêng tư – Q4); telemetry kỹ thuật tối thiểu luôn bật nhưng ẩn danh.
-- **Chống lạm dụng:** `POST /telemetry` có rate limit (6 lô/phút/phiên), tối đa 64 KB/lô, bỏ qua nếu hàng đợi đầy (không chặn game); client không thử lại quá 3 lần.
-- **Lưu giữ:** Loki 7 ngày cục bộ; bảng PG telemetry 90 ngày (đề xuất, chờ docs/17); tổng hợp lâu hơn dạng số liệu.
-- **Đồng bộ với docs/17:** khi docs/17 có, thêm bảng ánh xạ `sự kiện KPI → tên sự kiện kỹ thuật` ở đây và kiểm tra bằng test schema rằng mọi sự kiện trong docs/17 có bản ghi trong danh mục.
+- **Hai loại dữ liệu:** (1) _telemetry kỹ thuật_ (hiệu năng, lỗi, mạng): sự kiện `perf.sample`, `net.sample`, `client.load` của docs/17 §3 (lấy mẫu 100% trong closed beta, 10% sau đó); (2) _telemetry sản phẩm_ (hành vi, KPI): danh mục docs/17 §3.3, **không** định nghĩa lại ở đây.
+- **Định dạng sự kiện:** dùng **đúng envelope của docs/17 §3.2** (`event_id` UUIDv7, `event_name` dạng `<domain>.<action>`, `schema_version`, `source`, `ts_server_ms`, `ts_client_ms`, `player_pid` = HMAC-SHA256(accountId, khóa bí mật), `session_id`, `seq`, `platform`…); JSON Schema 2020-12 kiểm bằng Ajv trong CI (như 07 §8). Server **loại** sự kiện không có trong danh mục. Khóa HMAC của `player_pid` là bí mật (không log, §2).
+- **Quyền riêng tư:** theo docs/17 §7 và docs/19 (L10, L13: Nghị định 13/2023/NĐ-CP): không gửi nội dung chat, mật khẩu, IP đầy đủ, ID thiết bị phần cứng; dữ liệu **thiết yếu luôn bật**, **phân tích hành vi tắt được (opt-out, docs/17 Q4)**; xác minh tuổi/đồng ý người giám hộ theo docs/19. Chờ xác nhận pháp lý (Q4).
+- **Đường truyền:** client gom ≤ 50 sự kiện hoặc 10 s (hàng đợi ngoại tuyến 200, bỏ cũ nhất, docs/17 §2) và gửi qua Gateway bằng thông điệp `telemetry_batch` ([24 §5](24-giao-thuc-mang.md)) trong phiên; trước đăng nhập (boot, lỗi tải) dùng `POST /telemetry`. Phía server, sự kiện đi qua `EventBus` với tên chủ đề `telemetry.<domain>` (in-process ở MVP, NATS sau MVP, khớp docs/17 §2) và mẫu outbox. **Chống lạm dụng:** 1 lô/10 s/phiên, ≤ 16 KB/lô (64 KB cho `POST`), bỏ qua nếu hàng đợi đầy (không chặn game).
+- **Lưu giữ:** Loki 7 ngày cục bộ; bảng PG `telemetry_events` phân vùng theo ngày, log thô **90 ngày**, IP (nếu lưu) cắt /24 và xóa ≤ 30 ngày (docs/17 §2, §7); tổng hợp ẩn danh giữ lâu hơn; nâng lên kho cột khi vượt tải (docs/17 Q1).
+- **Đối chiếu với docs/17 (đã làm):** (a) KPI kinh tế của docs/17 §5 đọc `ledger`/`SINK_*`/`SRC_*`; ở đây là `ledger_entries`/`SYSTEM_SINK_*`/`SYSTEM_FAUCET_*` ([26 §2.2](26-kinh-te-ledger.md)), cần bảng ánh xạ tên khi viết view tổng hợp; (b) Tiên Ngọc nằm **ngoài** tỷ lệ tiêu hao/sinh ra (docs/15 §6); (c) metric client ở §3.2 trùng `perf.sample`/`net.sample`. Mọi sự kiện ở docs/17 phải có schema trong CI.
 
 ## 5. Trace (vết phân tán)
 
@@ -154,12 +154,12 @@ Cảnh báo (Alertmanager hoặc Grafana alerting) ở MVP gửi vào **thông b
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                               | Mặc định đề xuất                                                         |
-| --- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Q1  | Đối chiếu danh mục sự kiện/KPI với docs/17 khi có (hiện chưa có)                      | Cập nhật bản sau; hạ tầng ở đây độc lập danh mục                         |
-| Q2  | Không dùng Sentry cục bộ trong MVP; dùng telemetry + Loki?                            | **Có**                                                                   |
-| Q3  | SLO khởi điểm (tick ≤ 50 ms 99,9%, v.v.)?                                             | **Có** làm khởi điểm; chốt sau loadbot                                   |
-| Q4  | Chính sách quyền riêng tư: telemetry sản phẩm mặc định bật hay xin đồng ý (opt-in)?   | **Opt-in** cho sản phẩm; kỹ thuật ẩn danh luôn bật; cần xác nhận pháp lý |
-| Q5  | Thời hạn lưu log ứng dụng (7 ngày cục bộ; môi trường thật?)                           | 7 ngày dev; 30 ngày khi có môi trường thật                               |
-| Q6  | Stack quan sát: Prometheus + Grafana + Loki + Tempo + OTel Collector (profile `obs`)? | **Có**; chỉ chạy khi cần                                                 |
-| Q7  | Hệ cờ tính năng tự viết thay vì dịch vụ ngoài?                                        | **Có** cho MVP                                                           |
+| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                              |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Q1  | Bảng ánh xạ tên sổ cái (`ledger`/`SRC_*`/`SINK_*` ở docs/17 và `SRC_IAP` ở docs/15 so với `ledger_entries`/`SYSTEM_*` ở đây) | Giữ tên của 26 làm chuẩn; sửa docs/15, docs/17 khi PR #69 vào |
+| Q2  | Không dùng Sentry cục bộ trong MVP; dùng telemetry + Loki?                                                                   | **Có**                                                        |
+| Q3  | SLO khởi điểm (tick ≤ 50 ms 99,9%, v.v.)?                                                                                    | **Có** làm khởi điểm; chốt sau loadbot                        |
+| Q4  | Phân tích hành vi: opt-out (docs/17 Q4); thiết yếu luôn bật; xác nhận pháp lý (docs/19)                                      | **Opt-out**, đúng docs/17; cần xác nhận pháp lý               |
+| Q5  | Thời hạn lưu log ứng dụng (7 ngày cục bộ; môi trường thật?)                                                                  | 7 ngày dev; 30 ngày khi có môi trường thật                    |
+| Q6  | Stack quan sát: Prometheus + Grafana + Loki + Tempo + OTel Collector (profile `obs`)?                                        | **Có**; chỉ chạy khi cần                                      |
+| Q7  | Hệ cờ tính năng tự viết thay vì dịch vụ ngoài?                                                                               | **Có** cho MVP                                                |

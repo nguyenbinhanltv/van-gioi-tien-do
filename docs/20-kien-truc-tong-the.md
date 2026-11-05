@@ -154,11 +154,11 @@ Tick 50 ms chia theo giai đoạn (mục tiêu ở tải 200 người + 300 quá
 
 ### 5.3 Một World Node hay nhiều? (đề xuất: một)
 
-| Phương án                                   | Ưu                                                                                           | Nhược                                                                                            | Kết luận         |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------- |
-| **A. 1 World Node cho cả bản đồ 256 × 256** | Không cần handover, ghost, epoch; ít lỗi nhất; đủ cho closed beta (≤ ~300 CCU trên 1 bản đồ) | Trần cứng theo 1 lõi CPU; chiến tranh tông môn 100v100 phải vừa trong 1 tick                     | **Chọn cho MVP** |
-| B. N node theo khối chunk + handover        | Mở rộng ngang                                                                                | Toàn bộ giao thức handover/ghost của [08 §3](08-server-architecture.md) phải có và được kiểm thử | Giai đoạn 2      |
-| C. Mỗi bí cảnh / đấu trường một node        | Cách ly tải                                                                                  | Cần vòng đời instance, dọn dẹp                                                                   | Giai đoạn 2      |
+| Phương án                                   | Ưu                                                                                                                                                   | Nhược                                                                                            | Kết luận         |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------- |
+| **A. 1 World Node cho cả bản đồ 256 × 256** | Không cần handover, ghost, epoch; ít lỗi nhất; đủ cho closed beta (mục tiêu **100 CCU** theo docs/10; giả thiết trần thiết kế ~300 CCU để có dư địa) | Trần cứng theo 1 lõi CPU; chiến tranh tông môn 100v100 phải vừa trong 1 tick                     | **Chọn cho MVP** |
+| B. N node theo khối chunk + handover        | Mở rộng ngang                                                                                                                                        | Toàn bộ giao thức handover/ghost của [08 §3](08-server-architecture.md) phải có và được kiểm thử | Giai đoạn 2      |
+| C. Mỗi bí cảnh / đấu trường một node        | Cách ly tải                                                                                                                                          | Cần vòng đời instance, dọn dẹp                                                                   | Giai đoạn 2      |
 
 Để B và C không phải viết lại: (1) `WorldNodePort` đã có `transferOut/transferIn(snapshot, epoch)`; (2) mọi lệnh mang `epoch` quyền sở hữu ngay từ MVP (giá trị luôn bằng 1); (3) `ZonePort.locate(chunk)` luôn trả node duy nhất; (4) bộ kiểm thử có ca "hai node trong cùng tiến trình" dùng giả lập trước khi tách thật. **Chưa đo:** CCU thực tế trên 1 node – nằm trong [28 §6](28-chien-luoc-kiem-thu.md).
 
@@ -255,11 +255,11 @@ Mỗi bước dùng cùng cổng đã định ở §4; không bước nào đòi
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                            | Mặc định đề xuất                                                                       |
-| --- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Q1  | MVP dùng modular monolith + World Node trong `worker_threads`, một node duy nhất?  | **Có** (ADR-005, ADR-006)                                                              |
-| Q2  | Redis tùy chọn (profile), NATS không dùng trong MVP?                               | **Có**                                                                                 |
-| Q3  | Ngôn ngữ Gateway: giữ TypeScript trong MVP, quyết định Rust/Go sau khi có số đo?   | **Có**, kiểm tra ở mốc loadbot ([28 §6](28-chien-luoc-kiem-thu.md))                    |
-| Q4  | Node tối thiểu cho server: 22 LTS (CI hiện chạy 18 và 22)?                         | Server yêu cầu **≥ 22**; thư viện dùng chung giữ ≥ 18 vì client-core đang khai báo vậy |
-| Q5  | Cần số CCU mục tiêu cho closed beta để chốt trần 1 World Node (giả thiết ~300 CCU) | Chủ dự án xác nhận; **chưa có số trong tài liệu nào**                                  |
-| Q6  | Có cần hỗ trợ nhiều "kênh/shard" của cùng một bản đồ ngay từ MVP?                  | **Không** (một kênh); thêm cột `shard_id` vào `characters` từ đầu để khỏi di trú sau   |
+| #   | Câu hỏi                                                                                                                 | Mặc định đề xuất                                                                       |
+| --- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Q1  | MVP dùng modular monolith + World Node trong `worker_threads`, một node duy nhất?                                       | **Có** (ADR-005, ADR-006)                                                              |
+| Q2  | Redis tùy chọn (profile), NATS không dùng trong MVP?                                                                    | **Có**                                                                                 |
+| Q3  | Ngôn ngữ Gateway: giữ TypeScript trong MVP, quyết định Rust/Go sau khi có số đo?                                        | **Có**, kiểm tra ở mốc loadbot ([28 §6](28-chien-luoc-kiem-thu.md))                    |
+| Q4  | Node tối thiểu cho server: 22 LTS (CI hiện chạy 18 và 22)?                                                              | Server yêu cầu **≥ 22**; thư viện dùng chung giữ ≥ 18 vì client-core đang khai báo vậy |
+| Q5  | Trần CCU của 1 World Node: docs/10 đặt mục tiêu closed beta **100 CCU**, tick p99 ≤ 40 ms; giả thiết trần thiết kế ~300 | Dùng 100 làm mục tiêu vận hành, 300 làm dư địa; chốt trần cứng sau loadbot             |
+| Q6  | Có cần hỗ trợ nhiều "kênh/shard" của cùng một bản đồ ngay từ MVP?                                                       | **Không** (một kênh); thêm cột `shard_id` vào `characters` từ đầu để khỏi di trú sau   |
