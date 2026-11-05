@@ -62,7 +62,7 @@ Nguồn: mô tả PR #4 (`packages/shared`). Mục A6 và A7 đã được chố
 - `@vgtd/shared` chưa có PRNG có seed dùng chung client ↔ server (các công thức hiện nhận giá trị ngẫu nhiên được truyền vào). Cần thêm trước khi viết World Node (xem skill `vgtd-sim-determinism`).
 - Chưa có `docs/ASSET-LICENSES.md`; tạo khi nhập asset bên thứ ba đầu tiên (xem skill `vgtd-asset-pipeline`).
 
-## 7. Việc còn mở từ thiết kế kỹ thuật 20–29
+## Design C (20–29)
 
 Nguồn: PR #68. Mọi ADR ở [29-adr.md](29-adr.md) đang là "Đề xuất – chờ duyệt". Bảng "Câu hỏi cần chốt" của từng tài liệu: [20](20-kien-truc-tong-the.md#câu-hỏi-cần-chốt), [21](21-kien-truc-client.md#câu-hỏi-cần-chốt), [22](22-server-modules.md#câu-hỏi-cần-chốt), [23](23-mo-hinh-du-lieu.md#câu-hỏi-cần-chốt), [24](24-giao-thuc-mang.md#câu-hỏi-cần-chốt), [25](25-xac-thuc-bao-mat.md#câu-hỏi-cần-chốt), [26](26-kinh-te-ledger.md#câu-hỏi-cần-chốt), [27](27-van-hanh-quan-sat.md#câu-hỏi-cần-chốt), [28](28-chien-luoc-kiem-thu.md#câu-hỏi-cần-chốt), [29](29-adr.md#câu-hỏi-cần-chốt).
 
