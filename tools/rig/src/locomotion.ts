@@ -105,3 +105,14 @@ export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
     stanceLength: g.speed * ((g.duty * N) / CLIP_FPS),
   };
 }
+
+/**
+ * Smallest hip drop (px) that keeps a stride of half-length `halfStride` along `axis` reachable by a straight-ish leg
+ * of length `legLength`, plus `margin`. Front/back views stride mostly vertically, diagonals both ways.
+ */
+export function crouchFor(legLength: number, axis: Vec2, halfStride: number, margin = 1): number {
+  const dx = Math.abs(axis.x) * halfStride;
+  const dy = Math.abs(axis.y) * halfStride;
+  const horizontal = Math.sqrt(Math.max(0, legLength * legLength - dx * dx));
+  return Math.max(0, legLength + dy - horizontal + margin);
+}

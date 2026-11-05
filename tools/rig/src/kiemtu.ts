@@ -10,15 +10,24 @@ import { clipSpec } from './animset.js';
 import { type Clip, type Key } from './clip.js';
 import { ClipBuilder, EASE } from './dsl.js';
 import { closeLoop } from './loop.js';
-import { planFeet, screenAxis } from './locomotion.js';
+import { crouchFor, planFeet, screenAxis } from './locomotion.js';
 import { bakeSecondaryMotion } from './secondary.js';
 import type { RigDocument } from './schema.js';
 
-export const KIEMTU_CLIPS = ['idle', 'run', 'attack', 'attack_2', 'attack_3', 'cast', 'hit', 'die'] as const;
+/** The first batch: idle, run, 3-hit combo, cast, hit, die. */
+export const KIEMTU_CORE_CLIPS = ['idle', 'run', 'attack', 'attack_2', 'attack_3', 'cast', 'hit', 'die'] as const;
+/** The rest of the 13-animation table (docs/03 §3). */
+export const KIEMTU_EXTRA_CLIPS = ['walk', 'dash', 'meditate', 'channel', 'sword_fly', 'tribulation', 'emote'] as const;
+/** All 13 table animations (attack has two more combo variants: 15 clips). */
+export const KIEMTU_CLIPS = [...KIEMTU_CORE_CLIPS, ...KIEMTU_EXTRA_CLIPS] as const;
 export type KiemTuClip = (typeof KIEMTU_CLIPS)[number];
 
 /** Authored run speed (px/s along the facing). The runtime sets timeScale = actual / authored to avoid sliding. */
 export const RUN_SPEED_PX_S = 150;
+/** Straight-leg reach (thigh origin to ankle) of the standard humanoid proportions (docs/03 socket table). */
+const LEG_LENGTH_PX = 34;
+/** Authored walk speed (px/s). */
+export const WALK_SPEED_PX_S = 80;
 /** Knees stay bent while running: the hips ride this far below the straight-leg height. */
 export const RUN_CROUCH_PX = 9;
 
@@ -488,6 +497,293 @@ export function authorDie(rig: RigDocument): Clip {
   return c.build();
 }
 
+export function authorWalk(rig: RigDocument): Clip {
+  const N = clipSpec('walk').frames; // 20
+  const g = viewGain(rig.direction);
+  const speed = WALK_SPEED_PX_S * g;
+  const axis = screenAxis(rig.direction);
+  // knees stay bent enough that the vertical part of the stride (front/back views) is reachable
+  const crouch = Math.max(6, crouchFor(LEG_LENGTH_PX, axis, (speed * 0.62 * (N / 30)) / 2));
+  const plan = planFeet(rig, {
+    frames: N,
+    speed,
+    duty: 0.62,
+    footLift: 5,
+    axis,
+    phase: 0,
+    crouch,
+    bob: 1.2,
+    sway: 0.8 * g,
+  });
+  const c = new ClipBuilder(rig, {
+    name: 'walk',
+    frames: N,
+    loop: true,
+    motion: { speed, planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R } },
+  });
+  c.merge(plan.tracks);
+  c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2, phase: 0.1, offset: -2 * g }));
+  c.rotate('spine_upper', sine(N, 2.4 * g, { phase: 0.25 }));
+  c.rotate('head', sine(N, 1, { cycles: 2, phase: 0.3, offset: 2 * g }));
+  c.rotate('upper_arm_L', sine(N, 24 * g, { phase: 0.25 }));
+  c.rotate('upper_arm_R', sine(N, 24 * g, { phase: -0.25 }));
+  c.rotate('lower_arm_L', sine(N, 6 * g, { phase: 0.05, offset: 16 * g }));
+  c.rotate('lower_arm_R', sine(N, 6 * g, { phase: -0.45, offset: 16 * g }));
+  return closeLoop(c.build());
+}
+
+export function authorDash(rig: RigDocument): Clip {
+  const N = clipSpec('dash').frames; // 8
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'dash', frames: N, loop: false });
+  // khinh công: lean hard into the dash, arms swept back, front leg reaching, back leg trailing and lifted
+  c.rotate('spine_mid', [
+    [0, 0, EASE.out],
+    [3, -20 * g, EASE.inOut],
+    [6, -18 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('spine_upper', [
+    [0, 0, EASE.out],
+    [3, -8 * g, EASE.inOut],
+    [6, -8 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('head', [
+    [0, 0, EASE.out],
+    [3, 12, EASE.inOut],
+    [6, 12, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('upper_arm_L', [
+    [0, 0, EASE.out],
+    [3, -75 * g, EASE.inOut],
+    [6, -70 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('upper_arm_R', [
+    [0, 0, EASE.out],
+    [3, -62 * g, EASE.inOut],
+    [6, -58 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('lower_arm_L', [
+    [0, 0],
+    [3, 20, EASE.inOut],
+    [6, 20, EASE.inOut],
+    [N, 0],
+  ]);
+  c.translate('hips', [
+    [0, 0, 0, EASE.out],
+    [3, 3 * g, -9, EASE.inOut],
+    [6, 3 * g, -9, EASE.inOut],
+    [N, 0, 0, EASE.inOut],
+  ]);
+  c.translate('ik_foot_L', [
+    [0, 0, 0, EASE.out],
+    [3, 15 * g, 0, EASE.inOut],
+    [6, 15 * g, 0, EASE.inOut],
+    [N, 0, 0, EASE.inOut],
+  ]);
+  c.translate('ik_foot_R', [
+    [0, 0, 0, EASE.out],
+    [3, -14 * g, 7, EASE.inOut],
+    [6, -14 * g, 7, EASE.inOut],
+    [N, 0, 0, EASE.inOut],
+  ]);
+  return c.build();
+}
+
+/** FK-only seated pose helper (legs leave IK so the hips can sit on the ground). */
+function legsFk(c: ClipBuilder, rig: RigDocument, frames: number): void {
+  for (const ik of (rig.ik ?? []).filter((k) => k.name.startsWith('ik_leg'))) {
+    c.ikMix(ik.name, [
+      [0, 0],
+      [frames, 0],
+    ]);
+  }
+}
+
+export function authorMeditate(rig: RigDocument): Clip {
+  const N = clipSpec('meditate').frames; // 30
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'meditate', frames: N, loop: true });
+  legsFk(c, rig, N);
+  // cross-legged on the ground: hips drop, thighs forward, shins folded back; slow breathing
+  c.translate('hips', [
+    [0, 0, -26],
+    [N, 0, -26],
+  ]);
+  for (const side of ['L', 'R'] as const) {
+    const th = side === 'L' ? 78 : 92;
+    const sh = side === 'L' ? -150 : -135;
+    c.rotate(`thigh_${side}`, [
+      [0, th],
+      [N, th],
+    ]);
+    c.rotate(`shin_${side}`, [
+      [0, sh],
+      [N, sh],
+    ]);
+  }
+  c.rotate('spine_mid', sine(N, 1.1 * g));
+  c.rotate('spine_upper', sine(N, 1.5 * g, { phase: -0.08 }));
+  c.rotate('head', sine(N, 1.2, { phase: -0.16, offset: 2 }));
+  c.rotate('upper_arm_L', sine(N, 1.4, { phase: -0.12, offset: 38 * g }));
+  c.rotate('upper_arm_R', sine(N, 1.4, { phase: -0.12, offset: 38 * g }));
+  c.rotate('lower_arm_L', sine(N, 1.2, { phase: -0.2, offset: 52 }));
+  c.rotate('lower_arm_R', sine(N, 1.2, { phase: -0.2, offset: 52 }));
+  return closeLoop(c.build());
+}
+
+export function authorChannel(rig: RigDocument): Clip {
+  const N = clipSpec('channel').frames; // 12
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'channel', frames: N, loop: true });
+  // sustained cast: both arms thrust forward and tremble with the flow of qi, body braced
+  c.rotate('upper_arm_R', sine(N, 2.2, { cycles: 2, offset: 90 * g }));
+  c.rotate('upper_arm_L', sine(N, 2.2, { cycles: 2, phase: 0.25, offset: 82 * g }));
+  c.rotate('lower_arm_R', sine(N, 3, { cycles: 2, phase: 0.1, offset: 4 }));
+  c.rotate('lower_arm_L', sine(N, 3, { cycles: 2, phase: 0.35, offset: 8 }));
+  c.rotate('spine_mid', sine(N, 1, { offset: -6 * g }));
+  c.rotate('head', sine(N, 1.2, { cycles: 2, phase: 0.2, offset: 2 }));
+  c.translate('hips', [
+    [0, 1 * g, -1.2],
+    [N, 1 * g, -1.2],
+  ]);
+  return closeLoop(c.build());
+}
+
+export function authorSwordFly(rig: RigDocument): Clip {
+  const N = clipSpec('sword_fly').frames; // 20
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'sword_fly', frames: N, loop: true });
+  // standing on the flying sword: wide braced stance, arms out for balance; the up/down bob is a code-driven offset
+  c.translate('hips', [
+    [0, 0, -5],
+    [N, 0, -5],
+  ]);
+  c.translate('ik_foot_L', [
+    [0, 5 * g, 0],
+    [N, 5 * g, 0],
+  ]);
+  c.translate('ik_foot_R', [
+    [0, -5 * g, 0],
+    [N, -5 * g, 0],
+  ]);
+  c.rotate('spine_mid', sine(N, 1.4 * g, { offset: -3 * g }));
+  c.rotate('spine_upper', sine(N, 1.8 * g, { phase: -0.1 }));
+  c.rotate('head', sine(N, 1.2, { phase: -0.2, offset: 3 }));
+  c.rotate('upper_arm_R', sine(N, 3, { phase: 0.1, offset: 28 * g }));
+  c.rotate('upper_arm_L', sine(N, 3, { phase: 0.6, offset: -24 * g }));
+  c.rotate('lower_arm_R', sine(N, 2, { phase: 0.2, offset: 14 }));
+  c.rotate('lower_arm_L', sine(N, 2, { phase: 0.7, offset: 10 }));
+  return closeLoop(c.build());
+}
+
+export function authorTribulation(rig: RigDocument): Clip {
+  const N = clipSpec('tribulation').frames; // 30
+  const g = viewGain(rig.direction);
+  // brace (0-6), endure with a shaking hold that loops per lightning strike (6-24), recover (24-30)
+  const c = new ClipBuilder(rig, {
+    name: 'tribulation',
+    frames: N,
+    loop: false,
+    phases: { loop_start: 6, loop_end: 24 },
+  });
+  const hold = (v: number, amp: number): Key<number>[] => [
+    { frame: 0, value: 0, curve: EASE.out },
+    { frame: 6, value: v, curve: EASE.inOut },
+    { frame: 9, value: v + amp, curve: EASE.inOut },
+    { frame: 12, value: v - amp, curve: EASE.inOut },
+    { frame: 15, value: v + amp, curve: EASE.inOut },
+    { frame: 18, value: v - amp, curve: EASE.inOut },
+    { frame: 21, value: v + amp, curve: EASE.inOut },
+    { frame: 24, value: v, curve: EASE.inOut },
+    { frame: N, value: 0 },
+  ];
+  c.rotate('upper_arm_R', hold(155 * g, 4));
+  c.rotate('upper_arm_L', hold(150 * g, 4));
+  c.rotate('lower_arm_R', hold(-35, 5));
+  c.rotate('lower_arm_L', hold(-30, 5));
+  c.rotate('spine_mid', hold(6 * g, 2));
+  c.rotate('head', hold(14, 3));
+  c.translate('hips', [
+    [0, 0, 0, EASE.out],
+    [6, 0, -9, EASE.inOut],
+    [24, 0, -9, EASE.inOut],
+    [N, 0, 0, EASE.inOut],
+  ]);
+  c.translate('ik_foot_L', [
+    [0, 0, 0],
+    [6, 7 * g, 0, EASE.inOut],
+    [24, 7 * g, 0, EASE.inOut],
+    [N, 0, 0],
+  ]);
+  c.translate('ik_foot_R', [
+    [0, 0, 0],
+    [6, -7 * g, 0, EASE.inOut],
+    [24, -7 * g, 0, EASE.inOut],
+    [N, 0, 0],
+  ]);
+  return c.build();
+}
+
+export function authorEmote(rig: RigDocument): Clip {
+  const N = clipSpec('emote').frames; // 30
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'emote', frames: N, loop: false });
+  // bái (salute): fists together at the chest, a respectful bow, hold, rise
+  c.rotate('upper_arm_R', [
+    [0, 0, EASE.inOut],
+    [8, 62 * g, EASE.inOut],
+    [22, 62 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('upper_arm_L', [
+    [0, 0, EASE.inOut],
+    [8, 66 * g, EASE.inOut],
+    [22, 66 * g, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('lower_arm_R', [
+    [0, 0, EASE.inOut],
+    [8, 100, EASE.inOut],
+    [22, 100, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('lower_arm_L', [
+    [0, 0, EASE.inOut],
+    [8, 96, EASE.inOut],
+    [22, 96, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('spine_mid', [
+    [0, 0, EASE.inOut],
+    [10, 0],
+    [16, -24 * g, EASE.inOut],
+    [20, -24 * g, EASE.inOut],
+    [26, 0, EASE.inOut],
+    [N, 0],
+  ]);
+  c.rotate('head', [
+    [0, 0, EASE.inOut],
+    [10, 0],
+    [16, -8, EASE.inOut],
+    [20, -8, EASE.inOut],
+    [26, 0, EASE.inOut],
+    [N, 0],
+  ]);
+  c.translate('hips', [
+    [0, 0, 0, EASE.inOut],
+    [16, 2 * g, -1.5, EASE.inOut],
+    [20, 2 * g, -1.5, EASE.inOut],
+    [26, 0, 0, EASE.inOut],
+    [N, 0, 0],
+  ]);
+  return c.build();
+}
+
 export interface KiemTuOptions {
   /** Bake hair/sash secondary motion into the clips. Default true. */
   readonly secondary?: boolean;
@@ -506,6 +802,13 @@ export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Cli
     cast: authorCast,
     hit: authorHit,
     die: authorDie,
+    walk: authorWalk,
+    dash: authorDash,
+    meditate: authorMeditate,
+    channel: authorChannel,
+    sword_fly: authorSwordFly,
+    tribulation: authorTribulation,
+    emote: authorEmote,
   };
   const ids = opts.only ?? KIEMTU_CLIPS;
   return ids.map((id) => {
