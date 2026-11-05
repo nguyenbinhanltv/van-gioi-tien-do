@@ -15,6 +15,7 @@ npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node >= 18, TypeScript stric
 | `apps/server`           | (placeholder)       | Server MVP, authoritative 20 Hz simulation                                                                                  |
 | `apps/client-cocos`     | (placeholder)       | Cocos Creator project; flips y when rendering shared iso math                                                               |
 | `tools/procgen`         | `@vgtd/procgen`     | Asset generation, QA, atlas packing, compression pipeline                                                                   |
+| `tools/rig`             | `@vgtd/rig`         | AI animation authoring: rig schema, animation DSL, DragonBones exporter, automated animation QA (D35/D36)                   |
 | `docs/`                 | -                   | Design specs (Vietnamese), decision log, open items                                                                         |
 | `.claude/`, `CLAUDE.md` | -                   | Agent config and project skills                                                                                             |
 
@@ -97,7 +98,7 @@ green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd
 
 ## Autonomous operation (24/7)
 
-Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 3 parallel workers; the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
+Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 6 parallel workers (D38; the orchestrator closes finished worker sessions each cycle); the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
 
 ## Design review
 
