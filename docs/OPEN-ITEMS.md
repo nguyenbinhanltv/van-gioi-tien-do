@@ -34,17 +34,8 @@ Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra đư
 
 ## 4. Lưu ý khi chuyển đổi tài liệu
 
-- Không có docx GDD riêng; 01-gdd.md chỉ chứa những gì hồ sơ tổng hợp và tài liệu Công thức ghi lại. Các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế riêng của từng cảnh giới và chiến tranh Linh Mạch hiện có **thiết kế đề xuất** trong 01 §3–§4, §9 (chờ duyệt, mục 4a); vẫn chưa có nguồn gốc.
+- Không có docx GDD riêng; 01-gdd.md chỉ chứa những gì hồ sơ tổng hợp và tài liệu Công thức ghi lại. Các tầng vòng lặp thời gian (5 phút → 12 tháng), cơ chế riêng của từng cảnh giới và chiến tranh Linh Mạch hiện có **thiết kế đề xuất** trong 01 §3–§4, §9 (chờ duyệt, mục "Design A" ở cuối file); vẫn chưa có nguồn gốc.
 - 03–08 giữ nguyên văn docx, kể cả các chỗ nhắc giá trị cũ để so sánh.
-
-## 4a. Thiết kế bổ sung chờ chủ dự án duyệt (PR #70)
-
-Các tài liệu [01-gdd.md](01-gdd.md), [10-mvp-scope.md](10-mvp-scope.md), [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md) đã **thiết kế bổ sung** các tầng thời gian, cơ chế từng cảnh giới, chiến tranh Linh Mạch, Nghiệp Lực / Đạo Tâm, phạm vi closed beta và hệ phái / kỹ năng. **Mọi giá trị mới là đề xuất, chờ chủ dự án duyệt** (chưa phải quyết định; chưa vào DECISIONS). Các câu hỏi cần chốt (mỗi mục có mặc định đề xuất):
-
-- GDD: mục "Câu hỏi cần chốt" của 01 (G1–G13), gồm ba mức hậu quả Lôi Kiếp (G1), Linh Mạch 5 hay 6 phẩm (G6).
-- MVP: mục "Câu hỏi cần chốt" của 10 (M1–M12).
-- Hệ phái / kỹ năng: mục "Câu hỏi cần chốt" của 11 (S1–S11).
-- Cần duyệt thêm: ρ của Hậu sơn Sơn Môn khi đả tọa (0,6 theo 07 §5 hay giá trị riêng) — 01 §11.
 
 ## 5. Điểm mơ hồ của spec phát hiện khi viết `@vgtd/shared` (PR #4)
 
@@ -70,3 +61,12 @@ Nguồn: mô tả PR #4 (`packages/shared`). Tất cả A1–A13 đã được c
 
 - `@vgtd/shared` chưa có PRNG có seed dùng chung client ↔ server (các công thức hiện nhận giá trị ngẫu nhiên được truyền vào). Cần thêm trước khi viết World Node (xem skill `vgtd-sim-determinism`).
 - Chưa có `docs/ASSET-LICENSES.md`; tạo khi nhập asset bên thứ ba đầu tiên (xem skill `vgtd-asset-pipeline`).
+
+## Design A (01, 10, 11)
+
+Các tài liệu [01-gdd.md](01-gdd.md), [10-mvp-scope.md](10-mvp-scope.md), [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md) đã **thiết kế bổ sung** các tầng thời gian, cơ chế từng cảnh giới, chiến tranh Linh Mạch, Nghiệp Lực / Đạo Tâm, phạm vi closed beta và hệ phái / kỹ năng. **Mọi giá trị mới là đề xuất, chờ chủ dự án duyệt** (chưa phải quyết định; chưa vào DECISIONS). Các câu hỏi cần chốt (mỗi mục có mặc định đề xuất):
+
+- GDD: mục "Câu hỏi cần chốt" của 01 (G1–G13), gồm ba mức hậu quả Lôi Kiếp (G1), Linh Mạch 5 hay 6 phẩm (G6).
+- MVP: mục "Câu hỏi cần chốt" của 10 (M1–M12).
+- Hệ phái / kỹ năng: mục "Câu hỏi cần chốt" của 11 (S1–S11).
+- Cần duyệt thêm: ρ của Hậu sơn Sơn Môn khi đả tọa (0,6 theo 07 §5 hay giá trị riêng) — 01 §11.

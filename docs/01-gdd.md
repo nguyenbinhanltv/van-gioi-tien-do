@@ -51,7 +51,7 @@ Thị trường đầu tiên: **người chơi Việt Nam** (UI Việt hóa đ�
 
 Hệ quả kỹ thuật của việc đổi sang 2D: xem [02](02-asset-matrix-2d.md), [04](04-tilemap.md), [06](06-toi-uu-render.md) và [08](08-server-architecture.md).
 
-### 2.3 Tài khoản & hosting _[Thiết kế mới – chờ duyệt, theo quyết định của chủ dự án]_
+### 2.3 Tài khoản & hosting _[Quyết định D26, D27 trong [DECISIONS.md](DECISIONS.md)]_
 
 - **Đăng nhập MVP: tên đăng nhập + mật khẩu** (quyết định của chủ dự án); **Google SSO làm sau**. Một tài khoản dùng chung trên Web / Mobile / PC (cross-play).
 - **Hosting quyết định sau:** closed beta chạy **local**; CI chỉ GitHub Actions, không CD. Không có thiết kế nào trong GDD được phép phụ thuộc vào một nhà cung cấp đám mây cụ thể.
@@ -226,11 +226,11 @@ Gốc: mô tả định tính (số đạo, telegraph). Hiện hành: **sát th�
 4. **Khóa hồi phục.** Đan hồi máu thường bị khóa trong kiếp; chỉ Hộ Mạch Đan (20% HP_ref, hồi chiêu 45 s) dùng được (07 §3).
 5. **Kết cục.** Sống sót hết W đợt → thăng cảnh giới. Chết giữa kiếp → thất bại với hậu quả theo **tiến độ kiếp đã qua**:
 
-| Mức hậu quả | Tiến độ kiếp đã qua _(Đề xuất)_ | Hậu quả _(Đề xuất, ngoài các giá trị đã có)_                                                                 |
-| ----------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Nhẹ**     | ≥ 2/3 số đợt                    | Mất 15% độ bền mọi món đang mặc (07 §7); giữ nguyên tu vi.                                                   |
-| **Trung**   | 1/3 đến < 2/3                   | Như Nhẹ + mất 25% tu vi của nấc hiện tại + buff xấu "Đạo Cơ Chấn Động" 24 giờ (−10% chỉ số gốc).             |
-| **Nặng**    | < 1/3                           | Như Nhẹ + mất 50% tu vi của nấc hiện tại + "Đạo Cơ Chấn Động" 72 giờ (−20% chỉ số gốc); đan đã dùng mất hết. |
+| Mức hậu quả | Tiến độ kiếp đã qua _(Đề xuất)_ | Hậu quả _(Đề xuất, ngoài các giá trị đã có)_                                                                                                                                                                 |
+| ----------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nhẹ**     | ≥ 2/3 số đợt                    | Mất 15% độ bền mọi món đang mặc (07 §7); giữ nguyên tu vi.                                                                                                                                                   |
+| **Trung**   | 1/3 đến < 2/3                   | Như Nhẹ + mất 25% tu vi của nấc hiện tại + buff xấu "Đạo Cơ Chấn Động" 24 giờ (−10% chỉ số gốc).                                                                                                             |
+| **Nặng**    | < 1/3                           | Như Nhẹ + mất 50% tu vi của nấc hiện tại + "Đạo Cơ Chấn Động" 72 giờ (−20% chỉ số gốc); đan đã dùng mất hết; **khóa đột phá lớn 24 giờ** và mất 1 điểm Đạo Tâm mỗi 10% kiếp chưa qua (Trung / Nhẹ không bị). |
 
 > **Lưu ý nguồn:** 07 §3 viết "mức hậu quả Nhẹ / Trung / Nặng **như trong GDD**" — nhưng GDD gốc không còn trong hồ sơ, nên **ba mức và nội dung của chúng ở trên là dựng lại / thiết kế mới**. Chủ dự án cần đối chiếu với GDD gốc (nếu còn) — xem _Câu hỏi cần chốt_. Ở mọi mức, **không rớt cảnh giới lớn** (00 §3–4).
 

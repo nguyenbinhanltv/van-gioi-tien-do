@@ -226,13 +226,13 @@ Chú thích phase: P1–P5 như mục 12.
 
 **FTUE – 15 phút đầu (Đề xuất):**
 
-| Phút  | Nội dung                                                                                    | Mục tiêu đo                         |
-| ----- | ------------------------------------------------------------------------------------------- | ----------------------------------- |
-| 0–2   | Tạo nhân vật: chọn Đạo Lộ, giới tính, roll Linh căn (xem trước, 2 lần reroll miễn phí — M7) | Tỷ lệ hoàn tất tạo nhân vật         |
-| 2–5   | Quảng trường: di chuyển, đòn thường, kỹ năng đầu (K1/P1/T1/D1) vào mộc nhân, đả tọa         | Thời gian tới kỹ năng đầu ≤ 90 giây |
-| 5–7   | **Lên nấc đầu tiên** (Luyện Khí 1 → 2, ~10 phút tu thuần được rút gọn bằng thưởng tutorial) | Thời gian tới nấc đầu ≤ 7 phút      |
-| 7–12  | Ra Bìa rừng, đánh Độc Thố / Hôi Lang, nhặt vật phẩm, gặp NPC tông môn                       | Số người rời tutorial               |
-| 12–15 | Gia nhập tông môn, nhận nhiệm vụ ngày, mở Vạn Bảo Lâu                                       | FTUE complete ≥ 85%                 |
+| Phút  | Nội dung                                                                                                                                                                     | Mục tiêu đo                         |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| 0–2   | Tạo nhân vật: chọn Đạo Lộ, giới tính, roll Linh căn (xem trước, 2 lần reroll miễn phí — M7)                                                                                  | Tỷ lệ hoàn tất tạo nhân vật         |
+| 2–5   | Quảng trường: di chuyển, đòn thường, kỹ năng đầu (K1/P1/T1/D1) vào mộc nhân, đả tọa                                                                                          | Thời gian tới kỹ năng đầu ≤ 90 giây |
+| 5–7   | **Lên nấc đầu tiên** (Luyện Khí 1 → 2: bước này cần ~10 phút tu thuần ở hệ số 1, nên tutorial tặng sẵn tu vi ~70% của nấc 1 để người mới lên nấc trong ≤ 7 phút _(Đề xuất)_) | Thời gian tới nấc đầu ≤ 7 phút      |
+| 7–12  | Ra Bìa rừng, đánh Độc Thố / Hôi Lang, nhặt vật phẩm, gặp NPC tông môn                                                                                                        | Số người rời tutorial               |
+| 12–15 | Gia nhập tông môn, nhận nhiệm vụ ngày, mở Vạn Bảo Lâu                                                                                                                        | FTUE complete ≥ 85%                 |
 
 ### 8.2 CCU mục tiêu cho test local
 
