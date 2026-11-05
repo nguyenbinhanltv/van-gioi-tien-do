@@ -141,22 +141,55 @@ spec:
       steps:
         # (1) Chạy script chuẩn TRƯỚC: ghi build/raw/render/logs/*.log. Lỗi shader (mã 20) không làm hỏng
         #     bước ở đây vì còn cơ hội để agent sửa; kết quả cuối do lần chạy canonical_render phía dưới quyết định.
+        #     Nếu agent từng vi phạm phạm vi (retry của task) thì dừng ngay, không chạy mã trong workspace nhiễm.
         - name: render_first
           continue_on_error: true
-          run: bash pipeline/render_layers.sh build/raw
+          run: |
+            if [ -f reports/agy_violation ]; then echo "✖ agent đã vi phạm phạm vi:"; cat reports/agy_violation; exit 20; fi
+            bash pipeline/render_layers.sh build/raw
         # (2) Agent CHỈ chạy khi có shader biên dịch lỗi; nó chỉ đọc log và sửa shaders/* (không chạy lệnh nào,
         #     khớp với --mode accept-edits). Shader sạch / thiếu glslang thì bỏ qua, tiết kiệm tới 15 phút.
+        #     --mode accept-edits vẫn cho sửa MỌI file trong workspace, và bước (3) chạy pipeline/render_layers.sh,
+        #     tools/*.js, node_modules/ => cần chặn: chụp sha256 file chưa theo dõi / bị .gitignore trước-sau và
+        #     kiểm cả file đã theo dõi; chỉ shaders/ (cùng reports/, build/) được đổi. Vi phạm => xóa file mới/đổi,
+        #     hoàn tác file đã theo dõi (cả shaders/), ghi reports/agy_violation, thoát 20; canonical_render
+        #     kiểm marker và thoát 20 (không bị continue_on_error của bước này che). Logic giống codex_self_heal
+        #     và để INLINE trong YAML (một script trong pipeline/ thì chính agent có thể sửa).
         - name: antigravity_agent
           timeout: 15m
           continue_on_error: true
           run: |
-            grep -q '"status": *"error"' build/raw/render/render_manifest.json 2>/dev/null               || { echo "Không có shader lỗi, bỏ qua agent"; exit 0; }
+            if ! grep -q '"status": *"error"' build/raw/render/render_manifest.json 2>/dev/null; then
+              echo "Không có shader lỗi, bỏ qua agent"; exit 0
+            fi
+            snap() {
+              { git ls-files -o --exclude-standard; git ls-files -o -i --exclude-standard; } \
+                | grep -vE '^(shaders|reports|build)/' | sort -u \
+                | while IFS= read -r f; do printf '%s  %s\n' "$(sha256sum -- "$f" | cut -d' ' -f1)" "$f"; done
+            }
+            before="$(mktemp)"; after="$(mktemp)"
+            snap > "$before"
             export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
             script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --sandbox --mode accept-edits' /dev/null \
               | tee reports/agy_render.jsonl
-        # (3) Chạy lại script chuẩn sau khi agent sửa: mã thoát của nó quyết định bước này.
+            snap > "$after"
+            tracked="$(git diff --name-only --relative HEAD -- . ':!shaders' ':!reports' ':!build')"
+            extra="$(diff "$before" "$after" | sed -n 's/^> [0-9a-f]*  //p')"
+            rm -f "$before" "$after"
+            if [ -n "$tracked" ] || [ -n "$extra" ]; then
+              echo "✖ agy sửa ngoài shaders/ – hoàn tác và đánh dấu run hỏng"
+              [ -n "$tracked" ] && { echo "$tracked" | while IFS= read -r f; do git checkout HEAD -- "$f"; done; }
+              [ -n "$extra" ] && { echo "$extra" | while IFS= read -r f; do rm -f -- "$f"; done; }
+              git checkout HEAD -- shaders && git clean -fdq -- shaders
+              { echo "tracked:"; echo "$tracked"; echo "untracked/ignored:"; echo "$extra"; } > reports/agy_violation
+              exit 20
+            fi
+        # (3) Chạy lại script chuẩn sau khi agent sửa: mã thoát của nó quyết định bước này. Marker vi phạm
+        #     làm bước này thất bại cứng (20 nằm trong fail_fast, không thử lại).
         - name: canonical_render
-          run: bash pipeline/render_layers.sh build/raw
+          run: |
+            if [ -f reports/agy_violation ]; then echo "✖ agent đã vi phạm phạm vi:"; cat reports/agy_violation; exit 20; fi
+            bash pipeline/render_layers.sh build/raw
           exit_codes: { success: [0], fail_fast: [20, 3] }
       artifacts: ["build/raw/items/**/*.png", "build/raw/render/**", "reports/agy_render.jsonl"]
 
