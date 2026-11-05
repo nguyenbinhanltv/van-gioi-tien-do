@@ -55,6 +55,8 @@ Các mảng mà hồ sơ gốc chưa có ([OPEN-ITEMS.md](OPEN-ITEMS.md) §3). S
 | 18  | [18-art-bible-am-thanh.md](18-art-bible-am-thanh.md)   | Art bible (phong cách, màu, VFX Ngũ hành), âm thanh, quy tắc asset AI / placeholder / giấy phép |
 | 19  | [19-ngon-ngu-phap-ly.md](19-ngon-ngu-phap-ly.md)       | Chiến lược i18n và phông chữ; checklist pháp lý Việt Nam (**phải được luật sư xác minh**)       |
 
+| - | [art/dragonbones.md](art/dragonbones.md) | DragonBones thay Spine (D35): editor/giấy phép, runtime Cocos 3.8.8, rủi ro, dự phòng |
+
 ## Quy ước
 
 - Ngôn ngữ: tiếng Việt, giữ nguyên tiêu đề, bảng và công thức. Công thức LaTeX nằm trong khối `latex`; mã nằm trong khối code có ngôn ngữ (ts, glsl, sql, json, css).

@@ -6,6 +6,8 @@
 >
 > **[Cập nhật rà soát chéo 2026-11-05 – số đo từ PR #67 (draft, đang dừng)]:** dự án Cocos 3.8.8 headless dựng được; bản web debug đo **60 FPS, 5 draw call, ~19 MB GFX texture, JS heap 34–40 MB, build 5,8 MB** — nhưng **chưa có Spine paperdoll, chưa có chunk streaming**, và chưa rõ 5,8 MB đã nén brotli hay chưa; vì vậy S1 (≤ 6 MB cho Engine + code **gồm** Spine WASM và transcoder Basis) **chưa đạt được kết luận**: 5,8 MB đã sát trần 6 MB. Spine 4.2 đã được chấp nhận ở D25 nhưng chạy thực tế với paperdoll 15 lớp (S2) vẫn chưa kiểm chứng. Joystick và chuột thật chưa thử; tốc độ di chuyển 4,5 ô/s là giá trị tạm (khớp 08 §4).
 
+> **[Cập nhật D35: skeleton nhân vật dùng DragonBones (runtime `dragon-bones` của Cocos 3.8.8, MIT), không phải Spine 4.2.** "Spine" ở §1–§12 và S1–S2/Q7 đọc là "skeleton DragonBones"; giả định "Cocos 3.8.8 hỗ trợ Spine 4.2" ở trên **không còn áp dụng**: runtime có sẵn trong engine (dữ liệu tối đa 5.6.300, xem [art/dragonbones.md](art/dragonbones.md)); spike S1–S2 và Q7 đổi thành kiểm DragonBones. Đổi trang bị: `replaceSlotDisplay`/`replaceSkin` thay `Skin.addSkin`; không có physics constraint. Các số ngân sách giữ nguyên.]**
+
 ## 1. Mục tiêu và ràng buộc
 
 | Ràng buộc                                                             | Giá trị (nguồn)                                                               |
@@ -194,6 +196,8 @@ export function cellCenterToWorld(i: number, j: number, elevation = 0): Vec3 {
 Test bắt buộc (tầng 3 chạy trong Cocos headless hoặc mô phỏng): `tileToWorld` và `worldToTile` là nghịch đảo của nhau: `worldToTile(tileToWorld(i, j, e)) = (i, j)` với (i, j) thực bất kỳ, sai số < 1e-6 (test thuộc tính, xem [28 §2](28-chien-luoc-kiem-thu.md)); `cellCenterToWorld(i, j)` bằng `tileToWorld(i + 0,5; j + 0,5)`; không có `y = -` rải rác ngoài `IsoAdapter` (grep trong CI).
 
 ## 9. Tích hợp Spine 4.2 paperdoll
+
+> [Cập nhật D35: mục này áp dụng cho DragonBones; "Skin.addSkin" → `CCFactory.replaceSlotDisplay`/`replaceSkin`; "giấy phép Spine Editor / runtime" → xem OPEN-ITEMS (editor DragonBones/LoongBones, ToS chưa xác minh); runtime là MIT.]
 
 - **Một skeleton duy nhất cho mỗi hướng vẽ** (5 hướng + lật gương – D14); paperdoll 15 lớp (13 slot Spine + 2 sprite-node quỹ đạo) theo `@vgtd/character` (PR #7): `resolvePaperdoll(direction, equipped, options)` trả slot/attachment/draw order; adapter chỉ áp kết quả lên `sp.Skeleton`.
 - **Lật gương** = `scaleX = −1` trên node cha của skeleton, kèm biến thể `weapon_R` đã lật; socket đảo dấu x.
