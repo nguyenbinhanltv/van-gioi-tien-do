@@ -45,16 +45,16 @@ Mô phỏng 20 Hz (`NETWORK.TICK_HZ`): áp input theo `seq`, di chuyển/va ch�
 
 ### 3.2 Cổng công khai (`WorldNodePort`)
 
-| Lệnh / sự kiện                                  | Hướng            | Ý nghĩa                                                                                  |
-| ----------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| `join(characterState, connId, epoch)`           | Gateway → World  | Đặt nhân vật vào thế giới (trạng thái từ DB)                                             |
-| `leave(characterId)` → `PlayerSnapshot`         | Gateway → World  | Xóa; trả snapshot để ghi DB (qua `economy` / `characters` ở [23](23-mo-hinh-du-lieu.md)) |
-| `pushInput(characterId, packet)`                | Gateway → World  | Hàng đợi input đã giải mã                                                                |
-| `castSkill(characterId, req)`                   | Gateway → World  | Yêu cầu thi triển (kiểm hồi chiêu ở server)                                              |
-| `outbound(connId, ArrayBuffer)`                 | World → Gateway  | Buffer snapshot/sự kiện đã mã hóa, chuyển quyền sở hữu buffer                            |
-| `grantRequest({requestId, characterId, items})` | World → Economy  | Rơi đồ, thưởng nhiệm vụ… (idempotent; **không** ghi trực tiếp)                           |
-| `telemetry(event)`                              | World → platform | Số liệu và sự kiện cho [27](27-van-hanh-quan-sat.md)                                     |
-| `transferOut/In(state, epoch)`                  | World ↔ World    | **Sau MVP**, đã có chữ ký (xem §3.6)                                                     |
+| Lệnh / sự kiện                                  | Hướng            | Ý nghĩa                                                                      |
+| ----------------------------------------------- | ---------------- | ---------------------------------------------------------------------------- |
+| `join(characterState, connId, epoch)`           | Gateway → World  | Đặt nhân vật vào thế giới (trạng thái từ DB)                                 |
+| `leave(characterId)` → `PlayerSnapshot`         | Gateway → World  | Xóa; trả snapshot để ghi DB (qua `characters` ở [23](23-mo-hinh-du-lieu.md)) |
+| `pushInput(characterId, packet)`                | Gateway → World  | Hàng đợi input đã giải mã                                                    |
+| `castSkill(characterId, req)`                   | Gateway → World  | Yêu cầu thi triển (kiểm hồi chiêu ở server)                                  |
+| `outbound(connId, ArrayBuffer)`                 | World → Gateway  | Buffer snapshot/sự kiện đã mã hóa, chuyển quyền sở hữu buffer                |
+| `grantRequest({requestId, characterId, items})` | World → Economy  | Rơi đồ, thưởng nhiệm vụ… (idempotent; **không** ghi trực tiếp)               |
+| `telemetry(event)`                              | World → platform | Số liệu và sự kiện cho [27](27-van-hanh-quan-sat.md)                         |
+| `transferOut/In(state, epoch)`                  | World ↔ World    | **Sau MVP**, đã có chữ ký (xem §3.6)                                         |
 
 ### 3.3 Trạng thái trong RAM
 
@@ -118,7 +118,7 @@ Lý do đầy đủ ở [20 §5.3](20-kien-truc-tong-the.md). Khi bật handover
 
 - **Chu kỳ:** ghi snapshot vị trí/máu vào bảng `character_state` mỗi **30 s** (MVP không có Redis; với Redis: mỗi 10 s vào Redis, PG khi thoát/đổi vùng/sự kiện quan trọng – bảng [20 §7](20-kien-truc-tong-the.md)). Ghi theo lô (một câu lệnh `UPSERT` nhiều dòng) ở luồng chính, **không** trong tick.
 - **Khi thoát/đổi vùng/chết/đột phá/hoàn thành nhiệm vụ:** ghi ngay (đồng bộ với Economy nếu có thay đổi tài sản).
-- Chỉ ghi các trường _không phải tài sản_ (vị trí, hp/mp, buff, hồi chiêu). Tài sản (túi đồ, tiền) chỉ đổi qua Economy.
+- Chủ sở hữu bảng `character_state` là module **`characters`** (`CharacterPort.saveBatch`, [20 §4](20-kien-truc-tong-the.md)), không phải Economy. Chỉ ghi các trường _không phải tài sản_ (vị trí, hp/mp, buff, hồi chiêu). Tài sản (túi đồ, tiền) chỉ đổi qua Economy.
 
 ## 4. Zone Manager
 
@@ -167,7 +167,7 @@ Chi tiết ở [26](26-kinh-te-ledger.md). Phần module:
 
 1. Nạp cấu hình, kiểm tra kết nối PG (có migration đã chạy) → từ chối khởi động nếu phiên bản schema DB không khớp.
 2. Nạp dữ liệu tĩnh (bảng cảnh giới, ma trận Ngũ hành, định nghĩa vật phẩm) và kiểm tra bằng schema (`@vgtd/shared` validators); băm `dataVersion` và công bố ở `/version`.
-3. Khởi động World Node (nạp lưới va chạm, quái khởi tạo, PRNG seed từ nguồn bảo mật nhưng **ghi vào log**).
+3. Khởi động World Node (nạp lưới va chạm, quái khởi tạo, hạt giống PRNG cho roll kinh tế lấy từ nguồn entropy bảo mật và lưu ở **kho hạn chế** (bảng `rng_seeds` do vai trò DB riêng đọc, hoặc secret store) để replay vẫn chạy được; **không bao giờ** ghi hạt giống vào log ứng dụng, chỉ ghi vân tay băm `seedId`; xem [27 §2](27-van-hanh-quan-sat.md)).
 4. Mở cổng WebSocket sau cùng.
 5. Tắt máy êm: ngừng nhận kết nối → ghi snapshot mọi người → xả hàng đợi chat/outbox → đóng pool.
 

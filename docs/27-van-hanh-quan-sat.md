@@ -32,7 +32,7 @@
 
 - **Mức log mặc định:** `info`; `debug` bật theo module bằng cờ cấu hình, **không** bật trong đường nóng của tick; log theo từng gói input/snapshot bị cấm ở `info`.
 - **Lấy mẫu:** sự kiện lặp (gói sai định dạng, rate limit) gộp theo khóa trong 10 s với bộ đếm.
-- **Che dữ liệu (redaction):** danh sách đường dẫn che cấu hình sẵn (`*.password`, `*.token`, `*.refreshToken`, `req.headers.authorization`, cookie).
+- **Che dữ liệu (redaction):** danh sách đường dẫn che cấu hình sẵn (`*.password`, `*.token`, `*.refreshToken`, `req.headers.authorization`, cookie, **`*.seed`, `*.rngSeed`, `*.rngState`** của luồng roll kinh tế; chỉ cho phép `seedId`).
 - **Log kiểm toán** (đăng nhập, GM, can thiệp kinh tế) ghi vào bảng `audit_log` ([23](23-mo-hinh-du-lieu.md)), **không** chỉ vào file; log ứng dụng không thay thế.
 - **Lưu giữ cục bộ:** Loki 7 ngày (dev). Hạn lưu thật: chờ chốt (Q5); log chứa mã định danh phải theo [23 §7](23-mo-hinh-du-lieu.md).
 
