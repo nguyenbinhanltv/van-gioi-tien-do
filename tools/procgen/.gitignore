@@ -1,0 +1,7 @@
+# Sản phẩm sinh ra: không commit (cùng seed luôn tái tạo được bằng `npm run gen`)
+out/
+build/
+reports/
+preview/
+node_modules/
+package-lock.json

@@ -1,0 +1,204 @@
+# =============================================================================
+# orchestrator_pipeline.yaml – Tu Tiên 2D: sinh asset bằng code → render → QA → đóng gói → deploy
+# -----------------------------------------------------------------------------
+# Lưu ý: chưa tìm thấy tài liệu schema công khai của orchestrator.inc. Các khóa dưới đây theo dạng
+# DAG phổ biến (tasks / depends_on / timeout / retry / exit_codes / matrix / hooks). Nếu schema thật
+# khác, chỉ cần đổi tên khóa; các lệnh CLI giữ nguyên. Biến nội suy cần ánh xạ: ${workspace},
+# ${git.branch}, ${run.id}, ${run.url}, ${matrix.platform}, ${failed_task.id}.
+#
+# Quy ước mã thoát (mọi script trong pipeline/ tuân theo):
+#   0   đạt                          10  đạt kèm cảnh báo (ghi chú lên run, chạy tiếp)
+#   20  lỗi dữ liệu (dừng, KHÔNG thử lại)   3  thiếu công cụ / khóa (dừng, không thử lại)
+#   1 / 75 / 124 / 137  lỗi tạm thời, hết giờ, bị kill do thiếu RAM (thử lại theo retry)
+# =============================================================================
+apiVersion: orchestrator.inc/v1
+kind: Pipeline
+metadata:
+  name: tutien-asset-pipeline
+  description: "Codex sinh asset → Antigravity render → Claude Code QA → đóng gói atlas / nén → đẩy vào client"
+spec:
+  triggers:
+    - { type: git_push, branches: [main, "release/*"], paths: ["src/**", "shaders/**", "pipeline/**"] }
+    - { type: schedule, cron: "0 19 * * *" }            # 02:00 giờ Việt Nam
+    - { type: manual }
+  concurrency: { group: "tutien-assets-${git.branch}", cancel_in_progress: true }
+
+  runner:
+    # Image cần có: node 22, glslang-tools, xvfb + mesa, basisu, astcenc, cwebp, git, gh,
+    # claude (Claude Code), codex (Codex CLI), agy (Antigravity CLI, đã đăng nhập sẵn)
+    image: ghcr.io/tutien/asset-runner:2026.10
+    cpu: 4
+    memory: 8Gi
+
+  secrets: [ANTHROPIC_API_KEY, CODEX_API_KEY, GIT_PUSH_TOKEN, SLACK_WEBHOOK_URL]
+
+  parameters:
+    SEED: { type: int, default: 20261031 }
+    MAP_W: { type: int, default: 32 }
+    MAP_H: { type: int, default: 32 }
+    SWORD_TIER: { type: int, default: 4 }
+    PLATFORMS: { type: list, default: [web, android, ios, pc] }
+    CLIENT_ASSET_DIR: { type: string, default: assets/resources/generated }
+    DRY_RUN: { type: bool, default: false }
+
+  env:
+    WEB_CORE_BUDGET_KB: "6144"        # phần atlas trong gói Core Web (tổng gói ≤ 25 MB)
+    ASTCENC: astcenc-avx2
+
+  defaults:
+    workdir: "${workspace}/tutien-procgen"
+    shell: bash
+    retry:
+      max_attempts: 2
+      backoff: exponential
+      initial_delay: 20s
+      max_delay: 5m
+      retry_on_exit_codes: [1, 75, 124, 137]
+
+  tasks:
+    # -------------------------------------------------------------------------
+    # BƯỚC 1 – Chạy script (do Codex viết) sinh tilemap và icon thô.
+    # Lần đầu chạy thẳng script để kết quả xác định; nếu lỗi, Codex tự chẩn đoán và sửa src/
+    # trong hook before_retry rồi mới chạy lại.
+    # -------------------------------------------------------------------------
+    - id: generate_raw_assets
+      timeout: 15m
+      retry: { max_attempts: 3, retry_on_exit_codes: [1, 124, 137] }
+      steps:
+        - name: run_generators
+          run: |
+            set -o pipefail
+            mkdir -p reports build/raw
+            { node src/tilemap/generate_tilemap.js --seed "$SEED" --width "$MAP_W" --height "$MAP_H" --out build/raw/tilemap \
+              && node src/items/generate_items.js --seed "$SEED" --swordTier "$SWORD_TIER" --out build/raw/items; } \
+              2>&1 | tee reports/generate_raw_assets.log
+          exit_codes: { success: [0] }
+      hooks:
+        before_retry:
+          - name: codex_self_heal
+            timeout: 20m
+            continue_on_error: true
+            run: |
+              codex exec --full-auto --sandbox workspace-write --ephemeral --json \
+                -o reports/codex_fix_summary.md \
+                "$(cat pipeline/prompts/codex_fix_generators.md)" > reports/codex_fix_events.jsonl
+              git diff --stat -- src/ > reports/codex_fix.diffstat
+      artifacts: ["build/raw/**", "reports/generate_raw_assets.log", "reports/codex_fix_*"]
+
+    # -------------------------------------------------------------------------
+    # BƯỚC 2 – Antigravity biên dịch shader và render layer trang bị.
+    # agy chỉ in kết quả khi stdout là terminal (lỗi cộng đồng đã báo) nên bọc bằng `script`.
+    # Sau agent luôn chạy lại script chuẩn: mã thoát của nó mới quyết định bước này.
+    # -------------------------------------------------------------------------
+    - id: render_paperdoll_layers
+      depends_on: [generate_raw_assets]
+      timeout: 25m
+      retry: { max_attempts: 2, retry_on_exit_codes: [1, 124] }
+      steps:
+        - name: antigravity_agent
+          timeout: 15m
+          continue_on_error: true
+          run: |
+            export AGY_PROMPT="$(cat pipeline/prompts/antigravity_render_layers.md)"
+            script -qec 'agy -p "$AGY_PROMPT" --output-format stream-json --dangerously-skip-permissions' /dev/null \
+              | tee reports/agy_render.jsonl
+        - name: canonical_render
+          run: bash pipeline/render_layers.sh build/raw
+          exit_codes: { success: [0], fail_fast: [20, 3] }
+      artifacts: ["build/raw/items/**/*.png", "build/raw/render/**", "reports/agy_render.jsonl"]
+
+    # -------------------------------------------------------------------------
+    # BƯỚC 3 – Cổng QA: kiểm định xác định chặn lỗi cứng; Claude Code xem ảnh, viết nhận xét
+    # và verdict. Bước chỉ qua khi cả hai đều không "fail".
+    # -------------------------------------------------------------------------
+    - id: qa_validation_gate
+      depends_on: [render_paperdoll_layers]
+      timeout: 15m
+      retry: { max_attempts: 2, retry_on_exit_codes: [1, 124] }    # lỗi API hoặc chạm --max-turns
+      steps:
+        - name: deterministic_validation
+          run: node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json
+          exit_codes: { success: [0, 10], fail_fast: [20] }
+        - name: claude_code_review
+          timeout: 10m
+          run: |
+            claude --bare -p "$(cat pipeline/prompts/claude_qa_gate.md)" \
+              --output-format json \
+              --allowedTools "Read,Glob,Grep,Write,Bash(node pipeline/validate_assets.js:*)" \
+              --max-turns 15 --max-budget-usd 2.00 \
+              > reports/claude_qa_session.json
+        - name: verdict
+          run: |
+            node -e 'const v=require("./reports/qa_verdict.json");
+              console.log("QA:", v.verdict, v.blocking_issues);
+              process.exit(v.verdict==="fail"?20:v.verdict==="warn"?10:0)'
+          exit_codes: { success: [0, 10], fail_fast: [20] }
+      artifacts: ["reports/qa_*.json", "reports/qa_review.md", "reports/claude_qa_session.json"]
+
+    # -------------------------------------------------------------------------
+    # BƯỚC 4 – Đóng gói atlas ≤ 2048 rồi nén theo từng nền tảng (chạy song song theo matrix).
+    # -------------------------------------------------------------------------
+    - id: package_and_compress
+      depends_on: [qa_validation_gate]
+      matrix: { platform: "${PLATFORMS}" }
+      timeout: 20m
+      retry: { max_attempts: 2, retry_on_exit_codes: [1] }
+      steps:
+        - name: pack_atlas
+          run: |
+            set -euo pipefail
+            rm -rf build/atlas && mkdir -p build/atlas
+            for s in 48 64 128; do
+              node pipeline/pack_atlas.js --in build/raw/items/icons --out build/atlas \
+                --name atl_icon_$s --size $s --filter '^(pill|talisman)_.*\.png$'
+            done
+            for t in $(ls build/raw/items/swords | sed -n 's/^flying_sword_sheet_\(.*\)\.svg$/\1/p'); do
+              node pipeline/pack_atlas.js --in build/raw/items/swords --out build/atlas \
+                --name atl_sword_$t --filter "^flying_sword_[A-Z]+_${t}\.png$"
+            done
+            cp build/raw/tilemap/tileset.png build/raw/tilemap/tileset.json build/raw/tilemap/map.json build/atlas/
+            node pipeline/validate_assets.js --stage packed --root build/atlas \
+              --report "reports/qa_packed_${matrix.platform}.json"
+          exit_codes: { success: [0, 10], fail_fast: [20] }
+        - name: compress
+          run: bash pipeline/compress_textures.sh "${matrix.platform}" build/atlas "build/dist/${matrix.platform}"
+          exit_codes: { success: [0], fail_fast: [20, 3] }
+      artifacts: ["build/dist/${matrix.platform}/**", "reports/qa_packed_*.json"]
+
+    # -------------------------------------------------------------------------
+    # BƯỚC 5 – Đẩy asset vào client, commit lên nhánh riêng và mở Pull Request.
+    # -------------------------------------------------------------------------
+    - id: deploy_assets
+      depends_on: [package_and_compress]                 # chờ đủ mọi nền tảng trong matrix
+      when: "${git.branch} == 'main' && ${DRY_RUN} == false"
+      timeout: 10m
+      retry: { max_attempts: 3, backoff: linear, initial_delay: 15s, retry_on_exit_codes: [1] }
+      steps:
+        - name: copy_to_client
+          run: |
+            set -euo pipefail
+            for p in ${PLATFORMS}; do
+              dest="${workspace}/client/${CLIENT_ASSET_DIR}/$p"
+              rm -rf "$dest" && mkdir -p "$dest" && cp -r "build/dist/$p/." "$dest/"
+            done
+        - name: git_commit_push
+          workdir: "${workspace}/client"
+          run: |
+            set -euo pipefail
+            BR="assets/auto-${run.id}"
+            git checkout -B "$BR"
+            git add "${CLIENT_ASSET_DIR}"
+            if git diff --cached --quiet; then echo "Không có thay đổi asset"; exit 0; fi
+            VERDICT="$(node -p "require('../tutien-procgen/reports/qa_verdict.json').verdict")"
+            git commit -m "chore(assets): seed ${SEED} · run ${run.id}" -m "QA: ${VERDICT}"
+            git push --force-with-lease origin "$BR"
+            gh pr create --base main --head "$BR" --title "Asset tự động · run ${run.id}" \
+              --body-file ../tutien-procgen/reports/qa_review.md || gh pr view "$BR" >/dev/null
+          exit_codes: { success: [0] }
+
+  on_failure:
+    - name: notify_slack
+      run: |
+        curl -s -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"✖ tutien-asset-pipeline thất bại ở ${failed_task.id} · ${run.url}\"}" "$SLACK_WEBHOOK_URL"
+  artifacts_retention: 14d
