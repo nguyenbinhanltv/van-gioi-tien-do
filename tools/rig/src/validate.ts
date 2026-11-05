@@ -311,3 +311,37 @@ export function assertValidRig(doc: unknown, options?: ValidateOptions): RigDocu
   if (errors.length) throw new Error(`invalid rig:\n${errors.map((e) => `  ${e.path}: ${e.message}`).join('\n')}`);
   return doc as RigDocument;
 }
+
+/** Validate a `RigSet` envelope: every document valid, keyed by its own drawn direction, same bone names across views. */
+export function validateRigSet(set: unknown, options: ValidateOptions = {}): RigIssue[] {
+  const issues: RigIssue[] = [];
+  const s = set as { id?: unknown; rigs?: Record<string, unknown> };
+  if (typeof s?.id !== 'string' || !s.id || typeof s.rigs !== 'object' || s.rigs === null) {
+    return [
+      { severity: 'error', path: '/', message: 'RigSet needs { id: string, rigs: { <direction>: RigDocument } }' },
+    ];
+  }
+  let reference: string[] | null = null;
+  for (const [dir, doc] of Object.entries(s.rigs)) {
+    for (const i of validateRig(doc, options)) issues.push({ ...i, path: `/rigs/${dir}${i.path}` });
+    const rig = doc as RigDocument;
+    if (rig?.direction !== dir) {
+      issues.push({
+        severity: 'error',
+        path: `/rigs/${dir}`,
+        message: `document direction '${rig?.direction}' does not match key '${dir}'`,
+      });
+    }
+    const names = Array.isArray(rig?.bones) ? rig.bones.map((b) => b.name).sort() : [];
+    if (reference === null) reference = names;
+    else if (names.join() !== reference.join()) {
+      issues.push({
+        severity: 'warning',
+        path: `/rigs/${dir}/bones`,
+        message: 'bone names differ from the first view (animations are shared across views)',
+      });
+    }
+  }
+  if (!Object.keys(s.rigs).length) issues.push({ severity: 'error', path: '/rigs', message: 'no rigs' });
+  return issues;
+}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { DRAWN_DIRECTIONS } from '@vgtd/shared';
-import { buildReferenceHumanoid, evalPose, validateRig, worldPoint } from '../src/index.js';
+import { buildReferenceHumanoid, evalPose, validateRig, validateRigSet, worldPoint } from '../src/index.js';
 
 describe('reference rig', () => {
   it.each(DRAWN_DIRECTIONS)('is a valid rig for %s', (d) => {
@@ -24,5 +24,15 @@ describe('reference rig', () => {
     const bad2 = { ...rig, roles: { ...rig.roles, head: 'nope' } };
     expect(validateRig(bad2).some((i) => i.message.includes("unknown bone 'nope'"))).toBe(true);
     expect(validateRig({ foo: 1 }).length).toBeGreaterThan(0);
+  });
+});
+
+describe('RigSet envelope', () => {
+  it('accepts per-direction documents and flags mismatches', () => {
+    const rigs = Object.fromEntries(DRAWN_DIRECTIONS.map((d) => [d, buildReferenceHumanoid(d)]));
+    expect(validateRigSet({ id: 'kiem-tu', rigs }).filter((i) => i.severity === 'error')).toEqual([]);
+    const bad = validateRigSet({ id: 'x', rigs: { S: buildReferenceHumanoid('E') } });
+    expect(bad.some((i) => i.message.includes("does not match key 'S'"))).toBe(true);
+    expect(validateRigSet({ nope: 1 }).length).toBe(1);
   });
 });

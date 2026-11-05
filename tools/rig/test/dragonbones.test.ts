@@ -149,3 +149,85 @@ maybe('Kiếm tu set through the real Cocos 3.8.8 DragonBones runtime', () => {
     expect(data.getAnimation('run').frameCount).toBe(15);
   });
 });
+
+describe('weighted mesh export', () => {
+  const rig0 = buildReferenceHumanoid('E');
+  // a quad on the body slot (spine_mid), weighted between spine_mid and spine_upper (bone-local, y up)
+  const weightedRig = {
+    ...rig0,
+    skins: [
+      ...rig0.skins,
+      {
+        name: 'weighted',
+        attachments: {
+          body: {
+            body: {
+              type: 'mesh' as const,
+              path: 'body',
+              width: 22,
+              height: 30,
+              uvs: [0, 1, 1, 1, 1, 0, 0, 0],
+              vertices: [-11, 0, 11, 0, 11, 28, -11, 28],
+              triangles: [0, 1, 2, 0, 2, 3],
+              weights: [
+                [['spine_mid', 1]],
+                [['spine_mid', 1]],
+                [
+                  ['spine_mid', 0.5],
+                  ['spine_upper', 0.5],
+                ],
+                [
+                  ['spine_mid', 0.25],
+                  ['spine_upper', 0.75],
+                ],
+              ] as [string, number][][],
+            },
+          },
+        },
+      },
+    ],
+  };
+
+  it('exports slotPose / bonePose / weights in the engine format', () => {
+    const out = exportDragonBones([{ rig: weightedRig, clips: [] }], atlasFor(rig0), { name: 'w' });
+    const arm = (out.ske.armature as Record<string, unknown>[])[0]!;
+    const skin = (arm.skin as { name: string; slot: { name: string; display: Record<string, unknown>[] }[] }[]).find(
+      (s) => s.name === 'weighted',
+    )!;
+    const mesh = skin.slot.find((s) => s.name === 'body')!.display[0]!;
+    expect(mesh.type).toBe('mesh');
+    expect((mesh.slotPose as number[]).length).toBe(6);
+    expect((mesh.bonePose as number[]).length).toBe(14); // 2 bones x [index, a b c d tx ty]
+    expect(mesh.weights).toEqual([1, 2, 1, 1, 2, 1, 2, 2, 0.5, 3, 0.5, 2, 2, 0.25, 3, 0.75]);
+  });
+
+  const maybeEngine = engineRuntimePath() ? it : it.skip;
+  maybeEngine('is accepted by the engine parser and converts to the same bone-local coordinates', async () => {
+    const out = exportDragonBones([{ rig: weightedRig, clips: [] }], atlasFor(rig0), { name: 'w' });
+    const rt = await loadRuntime();
+    const loaded = rt.load(out.ske, out.tex);
+    const mesh = loaded.data.getArmature('E').getMesh('weighted', 'body', 'body');
+    expect(mesh).toBeTruthy();
+    const weight = mesh.vertices.weight;
+    expect(weight.count).toBe(6);
+    expect(weight.bones.map((b: { name: string }) => b.name)).toEqual(['spine_mid', 'spine_upper']);
+    // vertex 2 on spine_upper: engine bone-local (y down) must equal our y-up bone-local with y flipped
+    const ints = loaded.data.intArray as number[];
+    const floats = loaded.data.floatArray as number[];
+    const floatOffset = ints[weight.offset + 1]!;
+    const rest = evalPose(weightedRig, null, 0, { noIk: true });
+    const slotW = rest.byName.get('spine_mid')!.world;
+    const upperW = rest.byName.get('spine_upper')!.world;
+    const world = { x: slotW.a * 11 + slotW.c * 28 + slotW.tx, y: slotW.b * 11 + slotW.d * 28 + slotW.ty };
+    const det = upperW.a * upperW.d - upperW.b * upperW.c;
+    const dx = world.x - upperW.tx;
+    const dy = world.y - upperW.ty;
+    const lx = (upperW.d * dx - upperW.c * dy) / det;
+    const ly = (-upperW.b * dx + upperW.a * dy) / det;
+    // weights of vertex 2 start after vertex 0 (1 influence) and 1 (1 influence): index 2 in the float stream
+    const base = floatOffset + 3 * 2; // two single-influence vertices come first
+    expect(floats[base + 3 + 0]).toBeCloseTo(0.5, 6); // second influence (spine_upper): weight
+    expect(floats[base + 3 + 1]).toBeCloseTo(lx, 2);
+    expect(floats[base + 3 + 2]).toBeCloseTo(-ly, 2);
+  });
+});

@@ -8,7 +8,8 @@
  * Coordinate boundary: rig space is y-up / CCW (ADR-021); DragonBones is y-down / CW, so y and rotation flip here.
  */
 import { CLIP_FPS, type Clip, type Curve, type Key } from './clip.js';
-import type { Vec2 } from './math.js';
+import type { Mat, Vec2 } from './math.js';
+import { evalPose } from './pose.js';
 import type { AtlasData, RigAttachment, RigDocument } from './schema.js';
 
 export const DRAGONBONES_DATA_VERSION = '5.5' as const;
@@ -52,14 +53,25 @@ function dbTransform(x: number, y: number, rotation: number, scaleX = 1, scaleY 
   return t;
 }
 
-function exportAttachment(a: RigAttachment): Json {
+/** Rig-space (y up) world matrix → DragonBones data-space (y down): F·M·F with F = diag(1, −1). */
+function dbMatrix(m: Mat): number[] {
+  return [m.a, -m.b, -m.c, m.d, m.tx, -m.ty].map(r4);
+}
+
+interface AttachmentContext {
+  readonly rig: RigDocument;
+  /** Slot-bone world matrix at the rest pose. */
+  readonly slotMatrix: Mat;
+  readonly boneWorld: ReadonlyMap<string, Mat>;
+}
+
+function exportAttachment(a: RigAttachment, ctx: AttachmentContext): Json {
   if (a.type === 'region') {
     return { type: 'image', name: a.path, transform: dbTransform(a.x, a.y, a.rotation ?? 0, a.scaleX, a.scaleY) };
   }
-  if (a.weights) throw new Error(`weighted mesh '${a.path}' is not supported by the exporter yet`);
   const vertices: number[] = [];
   for (let i = 0; i < a.vertices.length; i += 2) vertices.push(r4(a.vertices[i]!), r4(-a.vertices[i + 1]!));
-  return {
+  const mesh: Json = {
     type: 'mesh',
     name: a.path,
     width: a.width,
@@ -68,6 +80,17 @@ function exportAttachment(a: RigAttachment): Json {
     uvs: a.uvs.map(r4),
     triangles: [...a.triangles],
   };
+  if (a.weights) {
+    // DragonBones weighted mesh: vertices stay in slot space; `slotPose` is the slot bone's setup world matrix,
+    // `bonePose` lists [boneIndex, a b c d tx ty] for every bone used, `weights` is per vertex [n, boneIndex, w, ...].
+    const boneIndex = new Map(ctx.rig.bones.map((b, i) => [b.name, i]));
+    const used: string[] = [];
+    for (const v of a.weights) for (const [b] of v) if (!used.includes(b)) used.push(b);
+    mesh.slotPose = dbMatrix(ctx.slotMatrix);
+    mesh.bonePose = used.flatMap((b) => [boneIndex.get(b)!, ...dbMatrix(ctx.boneWorld.get(b)!)]);
+    mesh.weights = a.weights.flatMap((v) => [v.length, ...v.flatMap(([b, w]) => [boneIndex.get(b)!, r4(w)])]);
+  }
+  return mesh;
 }
 
 /** Display list per slot (all attachments across skins, in skin order) so `displayIndex` is stable. */
@@ -188,6 +211,8 @@ export function dbBend(bendPositive: boolean): boolean {
 function exportArmature(entry: ExportEntry, opts: ExportOptions): Json {
   const { rig, clips } = entry;
   const lists = displayLists(rig);
+  const rest = evalPose(rig, null, 0, { noIk: true });
+  const boneWorld = new Map(rest.bones.map((b) => [b.name, b.world]));
   const name = opts.armatureName ? opts.armatureName(rig) : rig.direction;
   const bone = rig.bones.map((b) => {
     const o: Json = { name: b.name, length: b.length };
@@ -222,7 +247,8 @@ function exportArmature(entry: ExportEntry, opts: ExportOptions): Json {
         const atts = sk.attachments[s.name]!;
         const list = lists.get(s.name)!;
         // DragonBones display lists are positional: fill gaps (attachments missing in this skin) with null displays.
-        const display = list.map((n) => (atts[n] ? exportAttachment(atts[n]!) : null));
+        const ctx = { rig, slotMatrix: boneWorld.get(s.bone)!, boneWorld };
+        const display = list.map((n) => (atts[n] ? exportAttachment(atts[n]!, ctx) : null));
         return { name: s.name, display };
       }),
   }));

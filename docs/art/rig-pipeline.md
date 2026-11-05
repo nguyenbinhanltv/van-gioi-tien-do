@@ -61,7 +61,7 @@ Bộ lấy mẫu chạy không đầu, đánh giá từng khung trên rig và b�
 - Cấu trúc theo parser của engine (`@cocos/dragonbones-js` trong thư mục Cocos): `translateFrame`/`rotateFrame`/`scaleFrame`, `curve:[x1,y1,x2,y2]`, `displayFrame`/`colorFrame`, `ik`, sự kiện ở danh sách `frame` mức animation; vòng lặp bỏ key đóng và dùng `playTimes: 0` (key cuối nội suy về key đầu).
 - **Kiểm chứng bằng runtime thật:** các bài kiểm tra nạp xuất ra vào chính mã DragonBones của Cocos (bộ nạp + IK + hoạt cảnh, lớp hiển thị rỗng) và so vị trí bone với bộ đánh giá của `@vgtd/rig` (FK, IK cả hai chân, track `ik`, vòng lặp, cả 5 hướng). Sai số < 2,5 px do runtime lấy mẫu lại đường cong bezier theo khung. Các bài này **tự bỏ qua** khi không có Cocos (CI); đặt `COCOS_CREATOR_PATH` để bật cục bộ.
 - Phát hiện khi kiểm: runtime ở không gian y-lên (`DragonBones.yDown = false`) nên `bendPositive` giữ nguyên; y và góc lật ở file; hoạt cảnh không lặp có key ở khung N bị bỏ qua khi tua tới cuối (kiểm tới N−1).
-- Chưa hỗ trợ: attachment mesh có trọng số (schema có, bộ xuất báo lỗi rõ ràng); mesh không trọng số xuất được.
+- Mesh: cả mesh không trọng số và có trọng số (`slotPose`/`bonePose`/`weights` đúng định dạng engine; kiểm bằng parser thật) đều xuất được.
 
 ## 6. Duyệt trong viewer
 
