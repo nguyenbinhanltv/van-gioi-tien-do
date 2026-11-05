@@ -1,5 +1,5 @@
 import { Node, Sprite, UITransform, game } from 'cc';
-import { core } from './vendor/vgtd.mjs';
+import { core, shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { CameraRig } from './CameraRig';
@@ -34,7 +34,7 @@ export class InputBridge {
 
     this.layout = new core.AnchorLayout(canvas.parentElement!);
     const applyLayout = (res: core.LayoutResult) => {
-      const tl = core.touchLayoutFromRects(res, 1 / 64);
+      const tl = core.touchLayoutFromRects(res, 1 / shared.TILE_WIDTH); // aim-drag: ~1 tile per TILE_WIDTH screen px at zoom 1 (approximation, not exact iso metric)
       if (tl) this.input.setTouchLayout(tl);
     };
     this.layout.on('layout', applyLayout);
