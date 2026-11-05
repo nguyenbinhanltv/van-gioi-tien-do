@@ -75,7 +75,7 @@
         "max_pills": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 5
+          "maximum": 3
         },
         "wrong_realm_pill_factor": {
           "$ref": "#/$defs/ratio"
@@ -135,7 +135,7 @@
     },
     "realms": {
       "type": "array",
-      "minItems": 7,
+      "minItems": 9,
       "items": {
         "$ref": "#/$defs/realm"
       }
@@ -188,7 +188,14 @@
       "additionalProperties": false,
       "properties": {
         "type": {
-          "enum": ["none", "heart_demon", "heart_demon_multi", "lightning", "lightning_heart_demon"]
+          "enum": [
+            "none",
+            "heart_demon_light",
+            "heart_demon",
+            "heart_demon_multi",
+            "lightning",
+            "lightning_heart_demon"
+          ]
         },
         "strikes": {
           "type": "integer",
@@ -295,7 +302,8 @@
             "main_pill_ids": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "pattern": "^pill_[a-z0-9_]+_dan$"
               }
             },
             "tribulation": {
