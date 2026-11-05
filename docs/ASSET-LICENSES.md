@@ -225,7 +225,7 @@ Use case: precise-object-edit. Correct this five-direction Cloud Disciple rig tu
 
 ### Danh mục từng file lô 3
 
-Mỗi dòng kế thừa công cụ/mô hình, UTC, chủ art và giới hạn trên. `KT2 + procgen` là dữ liệu/ảnh dẫn xuất từ KT1→KT2, không phải output runtime hoặc editor. Schema snapshot chỉ là bản nháp dữ liệu của schema phối hợp; schema chuẩn vẫn do `@vgtd/rig` sở hữu. Contact sheet chỉ để review. Artifact HTML review nhúng lại các ảnh đã liệt kê, không có nguồn art thứ ba mới.
+Mỗi dòng kế thừa công cụ/mô hình, UTC, chủ art và giới hạn trên. `KT2 + procgen` là dữ liệu/ảnh dẫn xuất từ KT1→KT2, không phải output runtime hoặc editor. Schema chuẩn do `@vgtd/rig` sở hữu. Contact sheet chỉ để review. Artifact HTML review nhúng lại các ảnh đã liệt kê, không có nguồn art thứ ba mới.
 
 | Đường dẫn                                                            | Prompt        | Ngày       | Công cụ / mô hình                           | Chủ art                        | Trạng thái IP / giấy phép                                                    | Phát hành? |
 | -------------------------------------------------------------------- | ------------- | ---------- | ------------------------------------------- | ------------------------------ | ---------------------------------------------------------------------------- | ---------- |
@@ -503,4 +503,3 @@ Mỗi dòng kế thừa công cụ/mô hình, UTC, chủ art và giới hạn tr
 | `tools/rig/data/kiem-tu.assets.json`                                 | KT2 + procgen | 2026-11-06 | image_gen.imagegen / không công bố; procgen | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release | no         |
 | `tools/rig/data/kiem-tu.idle.json`                                   | KT2 + procgen | 2026-11-06 | image_gen.imagegen / không công bố; procgen | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release | no         |
 | `tools/rig/data/kiem-tu.rig.json`                                    | KT2 + procgen | 2026-11-06 | image_gen.imagegen / không công bố; procgen | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release | no         |
-| `tools/rig/data/kiem-tu.rig.schema.json`                             | KT2 + procgen | 2026-11-06 | image_gen.imagegen / không công bố; procgen | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release | no         |

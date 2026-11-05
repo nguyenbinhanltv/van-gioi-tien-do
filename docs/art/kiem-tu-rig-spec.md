@@ -11,17 +11,16 @@ Ngày: 2026-11-06. **AI placeholder; chưa phát hành.** D35 chọn DragonBones
 
 ## 2. Cây file
 
-| File / thư mục                                                   | Nội dung                                                                                                                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `tools/rig/data/kiem-tu.rig.json`                                | `RigSet { id, rigs }`, năm `RigDocument` S/SE/E/NE/N theo schema của worker 15                                               |
-| `tools/rig/data/kiem-tu.rig.schema.json`                         | Snapshot JSON Schema **nháp cho dữ liệu này**, lấy từ schema phối hợp của `@vgtd/rig`; schema chuẩn vẫn do package đó sở hữu |
-| `tools/rig/data/kiem-tu.idle.json`                               | Một `Clip` trung lập `idle`, dùng tên bone chung cho cả năm hướng                                                            |
-| `tools/rig/data/kiem-tu.assets.json`                             | Manifest đường dẫn atlas/texture, thông số source scale, mirror, slot order và source sockets                                |
-| `assets-src/placeholder/kiem-tu-rig-v1/turnaround/<dir>.png`     | Năm canvas 256×256 @2x, hình cao 208 px, pivot (128,232), ánh sáng NW                                                        |
-| `parts/<dir>/<slot>.png` dưới thư mục nguồn                      | Đủ 15 nhóm paperdoll; nhóm không trang bị có PNG trống dành chỗ                                                              |
-| `pieces/<dir>/<piece>.png` + `layout.json`                       | 33 mảnh/canvas 256×256 mỗi hướng, bone/group/bounds; mảnh bị che hoàn toàn có thể trống                                      |
-| `atlas/<dir>/atlas.json` + `kiemtu_<dir>.png` dưới thư mục nguồn | `AtlasData` và một page **PMA** chứa mảnh riêng lẫn canonical region fallback                                                |
-| `preview/` và `contact-sheet.png` dưới thư mục nguồn             | Ảnh review tĩnh; không phải capture trong Cocos                                                                              |
+| File / thư mục                                                   | Nội dung                                                                                      |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `tools/rig/data/kiem-tu.rig.json`                                | `RigSet { id, rigs }`, năm `RigDocument` S/SE/E/NE/N theo schema của worker 15                |
+| `tools/rig/data/kiem-tu.idle.json`                               | Một `Clip` trung lập `idle`, dùng tên bone chung cho cả năm hướng                             |
+| `tools/rig/data/kiem-tu.assets.json`                             | Manifest đường dẫn atlas/texture, thông số source scale, mirror, slot order và source sockets |
+| `assets-src/placeholder/kiem-tu-rig-v1/turnaround/<dir>.png`     | Năm canvas 256×256 @2x, hình cao 208 px, pivot (128,232), ánh sáng NW                         |
+| `parts/<dir>/<slot>.png` dưới thư mục nguồn                      | Đủ 15 nhóm paperdoll; nhóm không trang bị có PNG trống dành chỗ                               |
+| `pieces/<dir>/<piece>.png` + `layout.json`                       | 33 mảnh/canvas 256×256 mỗi hướng, bone/group/bounds; mảnh bị che hoàn toàn có thể trống       |
+| `atlas/<dir>/atlas.json` + `kiemtu_<dir>.png` dưới thư mục nguồn | `AtlasData` và một page **PMA** chứa mảnh riêng lẫn canonical region fallback                 |
+| `preview/` và `contact-sheet.png` dưới thư mục nguồn             | Ảnh review tĩnh; không phải capture trong Cocos                                               |
 
 Các đường dẫn trong assets manifest là **tương đối repo root**. `AtlasData.imagePath` tương đối thư mục atlas. Không có file `.atlas` hoặc skeleton Spine trong lô hiện hành. File runtime DragonBones do `@vgtd/rig` sinh sau từ các đầu vào này, không tạo exporter thứ hai ở procgen.
 
@@ -39,7 +38,7 @@ Một `RigDocument` có:
 - `sockets`: gắn bone với offset local; dùng socket công khai của character, override vị trí tay theo art. `head_top`/orbit/feet UI đặt trên root để không rung theo đầu.
 - `slots`, `skins`: cấu trúc theo `@vgtd/rig`, mô tả ở dưới.
 
-Đã chạy **validator thật của draft `@vgtd/rig`** qua public entry point với `requireRoles: BONE_ROLES`: cả năm hướng không có lỗi/cảnh báo. Snapshot schema trong data là để kiểm lại khi package chuẩn chưa ở main; không coi snapshot là một implementation schema mới.
+Đã chạy **validator thật của `@vgtd/rig` trên main** qua public entry point với `requireRoles: BONE_ROLES`: cả năm hướng không có lỗi/cảnh báo. Schema chuẩn là `RIG_JSON_SCHEMA` do `@vgtd/rig` export; lô art không sao chép schema.
 
 ## 4. Bone và IK
 

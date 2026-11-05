@@ -1,4 +1,4 @@
-﻿# Việc còn mở & mảng thiết kế còn thiếu
+# Việc còn mở & mảng thiết kế còn thiếu
 
 Nguồn: [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §6 (chưa kiểm tra được) và §7 (việc còn mở).
 
