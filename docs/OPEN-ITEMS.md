@@ -66,7 +66,13 @@ Nguồn: mô tả PR #4 (`packages/shared`). Tất cả A1–A13 đã được c
 
 Các tài liệu [01-gdd.md](01-gdd.md), [10-mvp-scope.md](10-mvp-scope.md), [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md) đã **thiết kế bổ sung** các tầng thời gian, cơ chế từng cảnh giới, chiến tranh Linh Mạch, Nghiệp Lực / Đạo Tâm, phạm vi closed beta và hệ phái / kỹ năng. **Mọi giá trị mới là đề xuất, chờ chủ dự án duyệt** (chưa phải quyết định; chưa vào DECISIONS). Các câu hỏi cần chốt (mỗi mục có mặc định đề xuất):
 
-- GDD: mục "Câu hỏi cần chốt" của 01 (G1–G13), gồm ba mức hậu quả Lôi Kiếp (G1), Linh Mạch 5 hay 6 phẩm (G6).
-- MVP: mục "Câu hỏi cần chốt" của 10 (M1–M12).
+- GDD: mục "Câu hỏi cần chốt" của 01 (G1–G15), gồm ba mức hậu quả Lôi Kiếp (G1), Linh Mạch 5 hay 6 phẩm (G6).
+- MVP: mục "Câu hỏi cần chốt" của 10 (M1–M13).
 - Hệ phái / kỹ năng: mục "Câu hỏi cần chốt" của 11 (S1–S11).
 - Cần duyệt thêm: ρ của Hậu sơn Sơn Môn khi đả tọa (0,6 theo 07 §5 hay giá trị riêng) — 01 §11.
+
+## 7. Đề xuất từ thiết kế B (PR #69, chờ game designer duyệt)
+
+- FTUE bước 9 ([16-onboarding.md](16-onboarding.md) §4.2): theo D19 lần đột phá tiểu cảnh đầu tiên là 90% cố định, không đan, không pity. Đề xuất (chưa áp dụng): cân nhắc nâng tỷ lệ riêng cho nhân vật chưa từng đột phá, hoặc giữ nguyên 90%.
+- Nút Né trên Mobile: `docs/05` chưa mô tả vị trí ([16-onboarding.md](16-onboarding.md) Q4).
+- Đã đối chiếu với 12–19 (PR #69): phần phe / Nghiệp / rơi đồ và chiến tranh Linh Mạch của 01 chuyển sang tham chiếu 14; FTUE của 10 chuyển sang 16, KPI sang 17, nhiệm vụ sang 12, chế tạo sang 13. Còn lệch cần chốt: số Trận Nhãn 3 (14) so với 5 (04 §5) (G15); lợi thế phe (G14); chế phù trong beta (M13).

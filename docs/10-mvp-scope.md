@@ -85,7 +85,7 @@ Các khu vực là của 04; dải level và luật vùng là đề xuất.
 Ghi chú:
 
 - **Không có bản đồ săn quái cho level 1–5 ngoài Sơn Môn an toàn** → tutorial dùng **mộc nhân** (bất động, không phản công) trong Quảng trường luyện võ; quái thật đầu tiên ở Bìa rừng. Nếu chủ dự án muốn có quái trong Sơn Môn: _Câu hỏi cần chốt_ M3.
-- **Luật PK beta:** chỉ Đầm lầy / Cổ thụ / Độc Hỏa Đàm là PK; Bìa rừng là PvE; Sơn Môn an toàn. Giết người có hậu quả Nghiệp Lực ([01 §8.4](01-gdd.md)). Không có tuần tra / bảo vệ người mới ngoài việc Bìa rừng cấm PK.
+- **Luật PK beta:** chỉ Đầm lầy / Cổ thụ / Độc Hỏa Đàm là PK; Bìa rừng là PvE; Sơn Môn an toàn. Giết người có hậu quả Nghiệp Lực theo [14](14-pvp-chien-tranh.md) §3.3 (ngưỡng phe ±300, 14 §3.2); luật Zone / PK: 14 §2. Không có tuần tra / bảo vệ người mới ngoài việc Bìa rừng cấm PK.
 - **"Mở theo mùa":** beta chạy **Mùa 0** — Rừng Độc mở liên tục; "đóng / mở theo mùa" là hướng sau.
 - **Instance:** một Rừng Độc dùng chung (một World Node); nếu CCU quá giới hạn (mục 8), tách bản sao theo "kênh" (kênh 1/2) — kênh là instance cùng bản đồ, không chuyển cư; chưa làm sharding chunk ở P2.
 - **Chunk / streaming:** quy tắc 3 × 3 / 5 × 5 / 7 × 7 ([02](02-asset-matrix-2d.md) §Streaming); chunk 32 × 32 ô (`@vgtd/shared` `CHUNK_SIZE`).
@@ -149,7 +149,7 @@ Số lượng đề xuất (so với 02 §3 — số đầy đủ ở cột "02 
 | Nhóm                          | 02 SL (đầy đủ) | **Beta**                 | Danh mục beta _(Đề xuất)_                                                                                                                                                                                                                                                                                                                                                  |
 | ----------------------------- | -------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Đan dược**                  | 40             | **12**                   | Hồi Huyết Đan, Hồi Linh Đan, Ngưng Khí Đan (+tu vi), Giải Độc Đan, Thanh Tâm Đan; **đan đột phá:** Trúc Cơ Đan (`pill_truc_co_dan`), Kết Kim Đan (`pill_ket_kim_dan`), Kết Anh Đan (`pill_ket_anh_dan`) — id theo D24; **phụ đan:** Hộ Mạch Đan, Định Tâm Đan (07 §2–§3; id đề xuất `pill_ho_mach_dan`, `pill_dinh_tam_dan` theo cùng mẫu); Tụ Khí Tán; Bạo Lực Đan (buff) |
-| **Phù lục**                   | 30             | **8**                    | Hộ Thể Phù, Hỏa Diễm Phù, Băng Phong Phù, Lôi Phù, Định Thân Phù, Tật Phong Phù, Truyền Tống Phù (về Sơn Môn), Giải Độc Phù — chỉ **mua + rơi**, **chế phù ngoài beta**                                                                                                                                                                                                    |
+| **Phù lục**                   | 30             | **8**                    | Hộ Thể Phù, Hỏa Diễm Phù, Băng Phong Phù, Lôi Phù, Định Thân Phù, Tật Phong Phù, Truyền Tống Phù (về Sơn Môn), Giải Độc Phù — chỉ **mua + rơi** trong beta; công thức chế phù ở 13 §5.2 là stretch (M13)                                                                                                                                                                   |
 | **Pháp bảo**                  | 12 hình dạng   | **6**                    | Cầm tay 4 (trượng, quyền sáo, phất trần / bút phù, pháp khí) + lơ lửng 2; thêm 1 **bản mệnh** ở Kim Đan                                                                                                                                                                                                                                                                    |
 | **Phi kiếm**                  | 20 mẫu         | **4**                    | Cầm tay + kiếm cưỡi khi bay (Trúc Cơ+); nhập cảnh Kiếm tu                                                                                                                                                                                                                                                                                                                  |
 | **Pháp y**                    | 40 bộ          | **12**                   | 4 Đạo Lộ × 3 mốc cảnh giới (Luyện Khí / Trúc Cơ / Kim Đan)                                                                                                                                                                                                                                                                                                                 |
@@ -170,22 +170,22 @@ Chú thích phase: P1–P5 như mục 12.
 
 ### 7.1 IN (bắt buộc cho beta)
 
-| Hệ thống                                                            | Phase | Ghi chú                                                                                                      |
-| ------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------ |
-| Tài khoản **username + password**; tạo nhân vật; roll Linh căn      | P2–P3 | Auth theo quyết định chủ dự án (Google SSO sau). 3 nhân vật / tài khoản (G10, [01](01-gdd.md)).              |
-| Di chuyển click-to-move, joystick, tìm đường; bay thấp / bay tự do  | P1–P2 | `InputManager`, `IsoPathfinder` (packages/client-core); bay mở ở Trúc Cơ / Kim Đan (07 §8).                  |
-| Chiến đấu 4 Đạo Lộ, hồi chiêu server, Ngũ hành, drop 07 §6          | P3    | 11, 07 §4–§6; anti-cheat cơ bản 08 §6                                                                        |
-| Đả tọa + tu vi (`Absorb`), Linh căn, tiểu cảnh                      | P3    | 07 §5                                                                                                        |
-| 2 đột phá lớn + cổng Kết Anh: Tâm Ma nhẹ, Tâm Ma + Lôi Kiếp 3 đạo   | P3–P4 | Công thức 07 §2–§3; Tâm Cảnh instance ([01 §5](01-gdd.md)). Lôi Kiếp VFX procedural (06).                    |
-| Nghiệp Lực (K), Đạo Tâm: ghi nhận, Karma_Penalty, độ bền × 1,5 Ma   | P3–P4 | **Không có nội dung phe độc quyền**; chỉ số học + nhãn hiển thị ([01 §8](01-gdd.md))                         |
-| Độ bền, sửa chữa, chết / hồi sinh                                   | P3    | 07 §7, [01 §12](01-gdd.md)                                                                                   |
-| Tổ đội (4), chat (Thế giới, Vùng, Đội, Thì thầm), bạn bè            | P4    | Personal loot 1/√n (07 §6)                                                                                   |
-| Giao dịch trực tiếp (thuế 3%), **Vạn Bảo Lâu** cơ bản               | P4    | Niêm yết 1%; thuế bán **cố định 5%** trong beta, CPI tuần chạy **chế độ bóng** (không áp dụng) để đo (07 §7) |
-| Truyền tống Sơn Môn ↔ Rừng Độc, phí 07 §7, miễn phí 1 lần / ngày    | P3    | `Fee = 20 · 1,5^(r−1) · (1 + 0,5d)`                                                                          |
-| Tông môn **NPC** Sơn Môn Đại Phái: gia nhập, Cống hiến, kho bí tịch | P4    | Không có tông môn do người chơi lập                                                                          |
-| Nhiệm vụ: **chuỗi tutorial + ~20 nhiệm vụ ngày / tuần / tông môn**  | P4    | Tối giản; hệ nhiệm vụ & cốt truyện chưa thiết kế ([OPEN-ITEMS](OPEN-ITEMS.md))                               |
-| Luyện đan tối giản (đan hồi phục, đan đột phá, phụ đan)             | P4    | Mục 6                                                                                                        |
-| Telemetry sự kiện cốt lõi + dashboard KPI tối thiểu                 | P3–P5 | Mục 9.3                                                                                                      |
+| Hệ thống                                                                                                 | Phase | Ghi chú                                                                                                      |
+| -------------------------------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------ |
+| Tài khoản **username + password**; tạo nhân vật; roll Linh căn                                           | P2–P3 | Auth theo quyết định chủ dự án (Google SSO sau). 3 nhân vật / tài khoản (G10, [01](01-gdd.md)).              |
+| Di chuyển click-to-move, joystick, tìm đường; bay thấp / bay tự do                                       | P1–P2 | `InputManager`, `IsoPathfinder` (packages/client-core); bay mở ở Trúc Cơ / Kim Đan (07 §8).                  |
+| Chiến đấu 4 Đạo Lộ, hồi chiêu server, Ngũ hành, drop 07 §6                                               | P3    | 11, 07 §4–§6; anti-cheat cơ bản 08 §6                                                                        |
+| Đả tọa + tu vi (`Absorb`), Linh căn, tiểu cảnh                                                           | P3    | 07 §5                                                                                                        |
+| 2 đột phá lớn + cổng Kết Anh: Tâm Ma nhẹ, Tâm Ma + Lôi Kiếp 3 đạo                                        | P3–P4 | Công thức 07 §2–§3; Tâm Cảnh instance ([01 §5](01-gdd.md)). Lôi Kiếp VFX procedural (06).                    |
+| Nghiệp Lực (K), Đạo Tâm: ghi nhận, Karma_Penalty, độ bền × 1,5 Ma                                        | P3–P4 | **Không có nội dung phe độc quyền**; chỉ số học + nhãn hiển thị ([01 §8](01-gdd.md))                         |
+| Độ bền, sửa chữa, chết / hồi sinh                                                                        | P3    | 07 §7, [01 §12](01-gdd.md)                                                                                   |
+| Tổ đội (4), chat (Thế giới, Vùng, Đội, Thì thầm), bạn bè                                                 | P4    | Personal loot 1/√n (07 §6)                                                                                   |
+| Giao dịch trực tiếp (thuế 3%), **Vạn Bảo Lâu** cơ bản                                                    | P4    | Niêm yết 1%; thuế bán **cố định 5%** trong beta, CPI tuần chạy **chế độ bóng** (không áp dụng) để đo (07 §7) |
+| Truyền tống Sơn Môn ↔ Rừng Độc, phí 07 §7, miễn phí 1 lần / ngày                                         | P3    | `Fee = 20 · 1,5^(r−1) · (1 + 0,5d)`                                                                          |
+| Tông môn **NPC** Sơn Môn Đại Phái: gia nhập, Cống hiến, kho bí tịch                                      | P4    | Không có tông môn do người chơi lập                                                                          |
+| Nhiệm vụ: **chuỗi chính chương 1–3, nhật thường / tuần / tông môn theo [12](12-nhiem-vu-cot-truyen.md)** | P4    | Phạm vi chi tiết theo 12 (Q1: chương 1–3 khớp tài liệu này); reset 05:00 UTC+7                               |
+| Luyện đan tối giản (đan hồi phục, đan đột phá, phụ đan)                                                  | P4    | Mục 6                                                                                                        |
+| Telemetry sự kiện cốt lõi + dashboard KPI tối thiểu                                                      | P3–P5 | Mục 9.3                                                                                                      |
 
 ### 7.2 Có điều kiện (Stretch — chỉ làm nếu P4 dư thời gian)
 
@@ -197,17 +197,17 @@ Chú thích phase: P1–P5 như mục 12.
 
 ### 7.3 OUT (không làm trong beta)
 
-| Hệ thống                                                              | Lý do                                                                                           | Phase sau beta |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------- |
-| Chiến tranh Linh Mạch, Hộ Sơn Đại Trận (gameplay), Linh Mạch Tâm      | Quy mô 100 vs 100, băng thông 25 KB/s, cần tông môn người chơi                                  | Sau P5         |
-| Cảnh giới ≥ 4: phân thân, Lĩnh Vực, Pháp Tướng, Phi Thăng, Trọng sinh | Ngoài phạm vi 3 cảnh giới                                                                       | Sau beta       |
-| Đấu Giá Hội, Tiên Ngọc, Battle Pass, mọi kiếm tiền                    | Chưa thiết kế; beta **không thu tiền**                                                          | Sau beta       |
-| Google SSO                                                            | Quyết định: SSO làm sau                                                                         | Sau beta       |
-| Linh thú, thú cưỡi, thú đồng hành                                     | Chi phí Spine + hệ tiến hóa                                                                     | Sau beta       |
-| Đạo Lữ, Sư đồ, tông môn người chơi lập                                | Cần hệ xã hội lớn                                                                               | Sau beta       |
-| Chế phù, rèn, minigame đan lô                                         | Nghề chưa thiết kế                                                                              | Sau beta       |
-| Mua bán xuyên server, sự kiện / LiveOps, voice lồng tiếng             | Chưa có thiết kế / nội dung                                                                     | Sau beta       |
-| Bản native iOS / Android trên cửa hàng                                | **Beta phát qua Web H5** (desktop + trình duyệt di động, cảm ứng); app native cần cửa hàng + CD | Sau beta       |
+| Hệ thống                                                              | Lý do                                                                                                                            | Phase sau beta |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| Chiến tranh Linh Mạch, Hộ Sơn Đại Trận (gameplay), Linh Mạch Tâm      | Quy mô 100 vs 100, băng thông 25 KB/s, cần tông môn người chơi                                                                   | Sau P5         |
+| Cảnh giới ≥ 4: phân thân, Lĩnh Vực, Pháp Tướng, Phi Thăng, Trọng sinh | Ngoài phạm vi 3 cảnh giới                                                                                                        | Sau beta       |
+| Đấu Giá Hội, Tiên Ngọc, Battle Pass, mọi kiếm tiền                    | Chưa thiết kế; beta **không thu tiền**                                                                                           | Sau beta       |
+| Google SSO                                                            | Quyết định: SSO làm sau                                                                                                          | Sau beta       |
+| Linh thú, thú cưỡi, thú đồng hành                                     | Chi phí Spine + hệ tiến hóa                                                                                                      | Sau beta       |
+| Đạo Lữ, Sư đồ, tông môn người chơi lập                                | Cần hệ xã hội lớn                                                                                                                | Sau beta       |
+| Chế phù và rèn đầy đủ, minigame đan lô                                | Nghề đã có đề xuất ở [13](13-che-tao.md); beta chỉ **luyện đan** (mục 6); chế phù / luyện khí theo 13 là stretch nếu P4 dư (M13) | Sau beta       |
+| Mua bán xuyên server, sự kiện / LiveOps, voice lồng tiếng             | Chưa có thiết kế / nội dung                                                                                                      | Sau beta       |
+| Bản native iOS / Android trên cửa hàng                                | **Beta phát qua Web H5** (desktop + trình duyệt di động, cảm ứng); app native cần cửa hàng + CD                                  | Sau beta       |
 
 > **Nền tảng beta (đề xuất):** Web H5 là kênh chính (một URL, không qua cửa hàng, khớp "local hosting + không CD"); client PC (đóng gói Cocos) tùy chọn cho nhóm kiểm thử; **bố cục cảm ứng vẫn phải chạy trong trình duyệt di động** để kiểm chứng cross-play ([05](05-ui-ux-icon.md)). Xem _Câu hỏi cần chốt_ M5.
 
@@ -224,15 +224,7 @@ Chú thích phase: P1–P5 như mục 12.
 | Thời gian còn lại ở cap                      | Thử boss, Kết Anh, PK, kinh tế — để thu dữ liệu             |
 | Phiên điển hình                              | 30 – 90 phút PC; 10 – 20 phút mobile (01 §3.2)              |
 
-**FTUE – 15 phút đầu (Đề xuất):**
-
-| Phút  | Nội dung                                                                                                                                                                     | Mục tiêu đo                         |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| 0–2   | Tạo nhân vật: chọn Đạo Lộ, giới tính, roll Linh căn (xem trước, 2 lần reroll miễn phí — M7)                                                                                  | Tỷ lệ hoàn tất tạo nhân vật         |
-| 2–5   | Quảng trường: di chuyển, đòn thường, kỹ năng đầu (K1/P1/T1/D1) vào mộc nhân, đả tọa                                                                                          | Thời gian tới kỹ năng đầu ≤ 90 giây |
-| 5–7   | **Lên nấc đầu tiên** (Luyện Khí 1 → 2: bước này cần ~10 phút tu thuần ở hệ số 1, nên tutorial tặng sẵn tu vi ~70% của nấc 1 để người mới lên nấc trong ≤ 7 phút _(Đề xuất)_) | Thời gian tới nấc đầu ≤ 7 phút      |
-| 7–12  | Ra Bìa rừng, đánh Độc Thố / Hôi Lang, nhặt vật phẩm, gặp NPC tông môn                                                                                                        | Số người rời tutorial               |
-| 12–15 | Gia nhập tông môn, nhận nhiệm vụ ngày, mở Vạn Bảo Lâu                                                                                                                        | FTUE complete ≥ 85%                 |
+**FTUE:** dùng **[16-onboarding.md](16-onboarding.md) §3** (30 phút đầu, 15 bước, bước 9 = đột phá tiểu cảnh đầu tiên ở phút ~18 với Tụ Khí Đan chỉ cộng tu vi, tỷ lệ cố định 90% theo D19). Bản 15 phút trước của tài liệu này **bị thay bởi 16**; các mục tiêu đo FTUE nằm ở 16 §7 và 17.
 
 ### 8.2 CCU mục tiêu cho test local
 
@@ -262,27 +254,27 @@ Kỳ vọng: ~100 CCU là khoảng 20–30% của 300–500 tài khoản mời �
 
 ## 9. Chỉ số thành công (KPI)
 
-Tất cả ngưỡng là **mục tiêu đề xuất** cho closed beta mời có chọn lọc (không phải thị trường mở); cần chủ dự án duyệt.
+Nguồn đo và dashboard: [17-telemetry-kpi.md](17-telemetry-kpi.md) (ngưỡng sàn D1 ≥ 30%, D7 ≥ 12%, D30 ≥ 5%; bảng dưới là mục tiêu cao hơn cho beta mời chọn lọc). Tất cả ngưỡng là **mục tiêu đề xuất** cho closed beta mời có chọn lọc (không phải thị trường mở); cần chủ dự án duyệt.
 
 ### 9.1 Giữ chân và gắn kết
 
-| KPI                                     | Ngưỡng đạt _(Đề xuất)_ | Ngưỡng tốt |
-| --------------------------------------- | ---------------------- | ---------- |
-| **D1 retention**                        | ≥ 40%                  | ≥ 50%      |
-| **D7 retention**                        | ≥ 15%                  | ≥ 25%      |
-| D14 retention                           | ≥ 8%                   | ≥ 15%      |
-| **Độ dài phiên** (median)               | ≥ 25 phút              | ≥ 40 phút  |
-| Độ dài phiên (mean)                     | ≥ 35 phút              | ≥ 50 phút  |
-| Số phiên / ngày (người quay lại, D1–D7) | ≥ 1,8                  | ≥ 2,5      |
-| FTUE hoàn tất                           | ≥ 85%                  | ≥ 92%      |
-| Tỷ lệ ≥ 1 lần vào tổ đội đến D7         | ≥ 30%                  | ≥ 50%      |
+| KPI                                       | Ngưỡng đạt _(Đề xuất)_ | Ngưỡng tốt |
+| ----------------------------------------- | ---------------------- | ---------- |
+| **D1 retention**                          | ≥ 40% (17: sàn ≥ 30%)  | ≥ 50%      |
+| **D7 retention**                          | ≥ 15% (17: sàn ≥ 12%)  | ≥ 25%      |
+| D14 retention                             | ≥ 8%                   | ≥ 15%      |
+| **Độ dài phiên** (median)                 | ≥ 25 phút              | ≥ 40 phút  |
+| Độ dài phiên (mean)                       | ≥ 35 phút              | ≥ 50 phút  |
+| Số phiên / ngày (người quay lại, D1–D7)   | ≥ 1,8                  | ≥ 2,5      |
+| FTUE hoàn tất (17: ≥ 50% trong phiên đầu) | ≥ 85%                  | ≥ 92%      |
+| Tỷ lệ ≥ 1 lần vào tổ đội đến D7           | ≥ 30%                  | ≥ 50%      |
 
 ### 9.2 Phễu đột phá (cumulative so với số nhân vật tạo)
 
 | Mốc phễu                              | Mục tiêu đến D14 _(Đề xuất)_ | Chỉ số kèm theo                                                            |
 | ------------------------------------- | ---------------------------- | -------------------------------------------------------------------------- |
 | 1. Tạo nhân vật                       | 100%                         | —                                                                          |
-| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE time ≤ 15 phút                                                        |
+| 2. Hoàn tất tutorial                  | ≥ 85%                        | FTUE ≤ 32 phút trung vị (17)                                               |
 | 3. Luyện Khí tầng 5                   | ≥ 60%                        | Thời gian median tới tầng 5 ≤ 1 giờ chơi                                   |
 | 4. Luyện Khí tầng 9 (Viên Mãn)        | ≥ 45%                        | Median ≤ 2,5 – 3 giờ chơi                                                  |
 | 5. **Thử** đột phá Trúc Cơ            | ≥ 40%                        | Tỷ lệ thành công lần đầu 85–95% (có chủ đan Lam trở lên)                   |
@@ -453,6 +445,7 @@ Phụ thuộc các mảng chưa thiết kế: nhiệm vụ (P4), nghề (P4, m�
 | M6  | Động Phủ có vào beta không?                                                                                                                   | **Stretch** (Bồ đoàn + Linh điền + Tụ linh trận).                                                      |
 | M7  | Linh căn khi tạo nhân vật: số lần reroll miễn phí?                                                                                            | **2 lần** trong tutorial; reroll về sau tốn tài nguyên (chờ thiết kế).                                 |
 | M8  | Số tester mời, thời lượng beta, ngưỡng CCU 100 / stress 200?                                                                                  | **300–500 mời; 4 tuần; 100 / 200 CCU.**                                                                |
+| M13 | Chế phù / luyện khí (13 §5.2) có vào beta (stretch) không?                                                                                    | Không; chỉ luyện đan trong beta.                                                                       |
 | M9  | KPI D1 / D7 / phiên (mục 9.1) và các ngưỡng phễu (9.2) có đúng kỳ vọng? Đã có mốc "tối thiểu để tiếp tục đầu tư" chưa?                        | Giữ các ngưỡng "đạt"; **tối thiểu để tiếp tục:** D1 ≥ 30%, D7 ≥ 10%.                                   |
 | M10 | Thuế Vạn Bảo Lâu trong beta: cố định 5% + CPI chạy bóng, hay áp dụng CPI thật ngay?                                                           | **5% cố định**, CPI đo bóng.                                                                           |
 | M11 | Mức độ tối giản của nhiệm vụ / luyện đan (mục 6, 7) có chấp nhận được khi chưa có thiết kế nghề / quest?                                      | Chấp nhận; thiết kế chi tiết sau khi có phản hồi beta.                                                 |
