@@ -41,6 +41,10 @@ DECISIONS entry wins. Use the
   The Cocos client must flip y at the rendering boundary.
 - Simulation code is deterministic: no `Math.random`, `Date.now`, `performance.now`; fixed 20 Hz tick (skill `vgtd-sim-determinism`).
 - Third-party or MCP-sourced assets require a license check before use (skill `vgtd-asset-pipeline`).
+- Gameplay defaults decided without a designer (D16-D22 etc.) are marked "cần game designer duyệt khi cân bằng": implement
+  them as specified, but do not treat them as final balance.
+- Spine runtime 4.2 (D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
+- Do not create or edit `.claude/settings.json` (D30): agent permission self-edits are blocked on purpose.
 - Prefer the latest locked decisions in `docs/DECISIONS.md` over memory or older docs. Do not invent gameplay values that
   the docs do not specify; add the gap to `docs/OPEN-ITEMS.md` instead.
 
@@ -55,8 +59,9 @@ npm run lint
 npm run format:check      # `npm run format` to fix
 ```
 
-CI (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22) runs ci, typecheck, test, build and lint. Wait for both
-`verify` jobs to be green on your PR. Generated data: `npm run gen:data -w @vgtd/shared` after editing schema JSON.
+CI is GitHub Actions only (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22): ci, typecheck, test, build and lint.
+Keep it short; there is no CD. `main` has branch protection requiring `verify (18)` and `verify (22)`: wait for both to be
+green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd/shared` after editing schema JSON.
 
 ## Git rules
 

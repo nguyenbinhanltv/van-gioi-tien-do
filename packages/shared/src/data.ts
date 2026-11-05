@@ -13,7 +13,7 @@ export interface StatParamData {
   slope?: number;
 }
 export interface TribulationData {
-  type: 'none' | 'heart_demon' | 'heart_demon_multi' | 'lightning' | 'lightning_heart_demon';
+  type: 'none' | 'heart_demon_light' | 'heart_demon' | 'heart_demon_multi' | 'lightning' | 'lightning_heart_demon';
   strikes?: number;
   waves?: number;
   strikes_per_wave?: number;
