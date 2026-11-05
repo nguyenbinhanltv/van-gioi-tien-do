@@ -27,8 +27,9 @@ the same authority disagree (for example `docs/12` vs `docs/15`), report both an
 3. For each doc extract a compact fact table as you read, with the line number: constants and numbers, formulas,
    named systems/entities (realms, factions, currencies, items, maps), owned data/tuning knobs, declared dependencies
    (what it uses / what uses it), acceptance criteria, pillars and player fantasy.
-4. Also open PRs that touch `docs/`: `gh pr list --state open --json number,title,files` then `gh pr diff <n> -- docs`
-   (read-only) so in-flight changes are reviewed too; label findings from a PR with `#<n>`.
+4. Also open PRs that touch `docs/`: `gh pr list --state open --json number,title,files` to find them, then
+   `gh pr diff <n>` and read only the `docs/` hunks (`gh pr diff` has no pathspec; `--name-only` lists files and
+   `--exclude '<glob>'` drops non-doc files). Read-only. Label findings from a PR with `#<n>`.
 5. Fewer than two readable docs, empty stubs, or undefined pillars: verdict NOT ASSESSED for that part (say which).
 
 If using subagents, pass the extracted fact tables and the line ranges, not bare paths, and tell them to be adversarial.
