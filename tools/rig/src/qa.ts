@@ -21,6 +21,7 @@ export type QaCheck =
   | 'events'
   | 'duration'
   | 'keys'
+  | 'ground'
   | 'ik-reach';
 
 export interface QaIssue {
@@ -45,6 +46,8 @@ export interface QaThresholds {
   readonly boneLengthPx: number;
   /** Max local rotation change per frame (deg). Faster = spike. */
   readonly maxDegPerFrame: number;
+  /** Ground: how far (px) a bone may poke below the ground line (y = 0). */
+  readonly groundPx: number;
   /** Jitter: alternating-sign deltas of at least this size (deg), ≥ 4 in a row. */
   readonly jitterDeg: number;
 }
@@ -57,6 +60,7 @@ export const DEFAULT_THRESHOLDS: QaThresholds = {
   boneLengthPx: 0.02,
   maxDegPerFrame: 80,
   jitterDeg: 0.6,
+  groundPx: 2.5,
 };
 
 export interface QaOptions {
@@ -292,6 +296,38 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
         });
       }
     }
+  }
+
+  // --- ground: nothing may sink through the floor (a collapsed pose authored for the wrong hip height does)
+  // props (sword) and secondary chains may touch the floor; the body (role bones) may not sink through it
+  const groundBodies = new Set(
+    Object.entries(rig.roles)
+      .filter(([r]) => !r.startsWith('ik_'))
+      .map(([, b]) => b as string),
+  );
+  let worstGround = { depth: 0, bone: '', frame: 0 };
+  for (let f = 0; f <= N; f++) {
+    for (const b of poses[f]!.bones) {
+      if (!groundBodies.has(b.name)) continue;
+      for (const y of [b.pos.y, b.tip.y]) {
+        if (-y > worstGround.depth) worstGround = { depth: -y, bone: b.name, frame: f };
+      }
+    }
+  }
+  // In the iso views a stride toward the camera moves the foot down the screen: the floor is not a y = 0 line there,
+  // so locomotion clips get the vertical stride allowance (half the distance travelled per cycle along the axis).
+  const strideAllowance = clip.motion
+    ? Math.abs((opts.axis ?? screenAxis(rig.direction)).y) * clip.motion.speed * (N / CLIP_FPS) * 0.5
+    : 0;
+  if (worstGround.depth > th.groundPx + strideAllowance) {
+    add({
+      severity: 'error',
+      check: 'ground',
+      bone: worstGround.bone,
+      frame: worstGround.frame,
+      value: worstGround.depth,
+      message: `'${worstGround.bone}' sinks ${worstGround.depth.toFixed(1)} px below the ground`,
+    });
   }
 
   // --- IK reach: a leg whose target is out of reach over-extends (looks like a floating foot)

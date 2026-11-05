@@ -26,3 +26,5 @@ const { export: db, reports } = buildCharacterPackage([{ rig, clips }], atlas, {
 Tests: `npm test -w @vgtd/rig`. Tests that load the export into the real Cocos 3.8.8 DragonBones runtime run only
 when the editor is installed (default `C:/ProgramData/cocos/editors/Creator/3.8.8`, or set `COCOS_CREATOR_PATH`);
 they are skipped in CI.
+
+Review artifacts (sheets, GIFs, QA report, DragonBones JSON): `RIG_ARTIFACT_DIR=out RIG_DATA_DIR=<data> npm run artifacts -w @vgtd/rig`.
