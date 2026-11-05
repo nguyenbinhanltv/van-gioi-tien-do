@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Cocos Creator
+apps/client-cocos/library/
+apps/client-cocos/temp/
+apps/client-cocos/local/
+apps/client-cocos/build/
+apps/client-cocos/native/

@@ -1,0 +1,15 @@
+{
+  "name": "@vgtd/client-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Input Abstraction Layer + Responsive UI (engine-agnostic) cho Vạn Giới Tiên Đồ",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "demo": "tsc -p tsconfig.build.json && npx --yes http-server -c-1 -p 8080 ."
+  }
+}
