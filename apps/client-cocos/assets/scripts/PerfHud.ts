@@ -1,4 +1,4 @@
-import { Color, Label, Node, Sprite, UITransform, director } from 'cc';
+import { Color, Director, Label, Node, Sprite, UITransform, director } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
@@ -15,6 +15,10 @@ export interface PerfStats {
   /** performance.memory.usedJSHeapSize (Chromium only), else null. */
   jsHeapMB: number | null;
   nodes: number;
+  /** Average CPU ms per frame in the update phase (components + animation systems). */
+  updateMs: number;
+  /** Average CPU ms per frame submitting the render (GPU time is not included). */
+  renderMs: number;
   l3Objects: number;
 }
 
@@ -25,6 +29,11 @@ export class PerfHud {
   private acc = 0;
   private frames = 0;
   private logClock = 0;
+  private t0 = 0;
+  private updAcc = 0;
+  private updN = 0;
+  private rndAcc = 0;
+  private rndN = 0;
   /** Extra free-text line (debug hooks). */
   note = '';
   /** Hint line shown under the numbers. */
@@ -39,11 +48,23 @@ export class PerfHud {
     textureEstMB: 0,
     jsHeapMB: null,
     nodes: 0,
+    updateMs: 0,
+    renderMs: 0,
     l3Objects: 0,
   };
   extra: () => { l3Objects: number } = () => ({ l3Objects: 0 });
 
   constructor(hudRoot: Node, art: ArtFrames) {
+    director.on(Director.EVENT_BEFORE_UPDATE, () => (this.t0 = performance.now()));
+    director.on(Director.EVENT_AFTER_UPDATE, () => {
+      this.updAcc += performance.now() - this.t0;
+      this.updN++;
+    });
+    director.on(Director.EVENT_BEFORE_RENDER, () => (this.t0 = performance.now()));
+    director.on(Director.EVENT_AFTER_RENDER, () => {
+      this.rndAcc += performance.now() - this.t0;
+      this.rndN++;
+    });
     this.bg = newNode('HudBg', hudRoot);
     const bgUi = this.bg.addComponent(UITransform);
     bgUi.setAnchorPoint(0, 1);
@@ -91,6 +112,9 @@ export class PerfHud {
     this.frames++;
     if (this.acc < 0.5) return;
     const s = this.stats;
+    s.updateMs = this.updN ? this.updAcc / this.updN : 0;
+    s.renderMs = this.rndN ? this.rndAcc / this.rndN : 0;
+    this.updAcc = this.updN = this.rndAcc = this.rndN = 0;
     s.fps = this.frames / this.acc;
     s.frameMs = (this.acc / this.frames) * 1000;
     this.acc = 0;
@@ -123,6 +147,8 @@ export class PerfHud {
       `FPS ${s.fps.toFixed(1)}  (${s.frameMs.toFixed(1)} ms)\n` +
       `Draw calls ${s.drawCalls} / ${B.DRAW_CALLS_WEB_MOBILE} ${dcOk}   Tris ${s.triangles}\n` +
       `Tex mem ${s.textureMB.toFixed(2)} MB (est ${s.textureEstMB.toFixed(2)}) / ${B.TEXTURE_RAM_MB_WEB} MB ${texOk}
+` +
+      `CPU update ${s.updateMs.toFixed(2)} ms  render ${s.renderMs.toFixed(2)} ms
 ` +
       `JS heap ${heap} (heap + tex / ${B.RAM_MB_WEB} MB ${heapOk})\n` +
       `Nodes ${s.nodes}   L3 ${s.l3Objects}\n` +

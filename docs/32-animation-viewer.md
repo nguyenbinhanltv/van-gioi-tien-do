@@ -15,20 +15,22 @@ npm run serve -w client-cocos               # http://localhost:7456
 
 Tham số trong phần hash của URL (tùy chọn, nối bằng `&`):
 
-| Tham số             | Ý nghĩa                                                                                                                  |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `viewer`            | Bắt buộc: mở scene Viewer thay vì demo thế giới                                                                          |
-| `anim=attack`       | Animation của A (13 id: idle, meditate, walk, run, dash, sword_fly, attack, cast, channel, hit, die, tribulation, emote) |
-| `mode=review`       | `single` (mặc định), `compare` (A và B, cần `animb=cast`), `review` (8 hướng)                                            |
-| `dir=NE`            | Hướng nhìn (8 hướng; 5 hướng vẽ + 3 hướng lật gương, D14)                                                                |
-| `paused=1&t=0.25`   | Dừng và tua tới giây 0,25                                                                                                |
-| `ts=0.5`            | `timeScale`                                                                                                              |
-| `skin=red`          | Biến thể paperdoll (display thứ 2 của slot)                                                                              |
-| `off=wing+weapon_R` | Ẩn các slot (nối bằng `+`)                                                                                               |
-| `onion=1`           | Bật onion-skin (bóng mờ −2 frame xanh, +2 frame đỏ)                                                                      |
-| `cache=shared`      | Chế độ cache DragonBones: `realtime` (mặc định), `shared`, `private`                                                     |
-| `src=…&stem=…`      | Thư mục con của `assets/resources/` chứa rig (mặc định `dragonbones/viewer`) và tiền tố tên file (`rig`)                 |
-| `mobile`            | Ép bố cục mobile (bottom sheet) khi thử trên desktop                                                                     |
+| Tham số             | Ý nghĩa                                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `viewer`            | Bắt buộc: mở scene Viewer thay vì demo thế giới                                                                                                   |
+| `anim=attack`       | Animation của A (13 id: idle, meditate, walk, run, dash, sword_fly, attack, cast, channel, hit, die, tribulation, emote)                          |
+| `mode=review`       | `single` (mặc định), `compare` (A và B, cần `animb=cast`), `review` (8 hướng)                                                                     |
+| `dir=NE`            | Hướng nhìn (8 hướng; 5 hướng vẽ + 3 hướng lật gương, D14)                                                                                         |
+| `paused=1&t=0.25`   | Dừng và tua tới giây 0,25                                                                                                                         |
+| `ts=0.5`            | `timeScale`                                                                                                                                       |
+| `skin=red`          | Biến thể paperdoll (display thứ 2 của slot)                                                                                                       |
+| `off=wing+weapon_R` | Ẩn các slot (nối bằng `+`)                                                                                                                        |
+| `onion=1`           | Bật onion-skin (bóng mờ −2 frame xanh, +2 frame đỏ)                                                                                               |
+| `cache=shared`      | Chế độ cache DragonBones: `realtime` (mặc định), `shared`, `private`                                                                              |
+| `mode=crowd&n=30`   | Chế độ crowd: N bản của animation A (đo CPU/draw call), kèm `batch=1` để bật `enableBatch`                                                        |
+| `rig=test`          | Dùng rig thử sinh bằng code thay vì nhân vật mặc định                                                                                             |
+| `src=…&stem=…`      | Thư mục con của `assets/resources/` chứa rig (mặc định: `dragonbones/kiem-tu` khi có, nếu không `dragonbones/viewer`) và tiền tố tên file (`rig`) |
+| `mobile`            | Ép bố cục mobile (bottom sheet) khi thử trên desktop                                                                                              |
 
 Phím tắt (desktop): `Space` tạm dừng, `←/→` đổi hướng, `↑/↓` đổi animation, `[` `]` đổi tốc độ.
 
@@ -46,7 +48,13 @@ Phím tắt (desktop): `Space` tạm dừng, `←/→` đổi hướng, `↑/↓
 - **HUD:** FPS, draw call (so `BUDGETS.DRAW_CALLS_WEB_MOBILE`), tris, bộ nhớ texture GFX (so `BUDGETS.TEXTURE_RAM_MB_WEB`), JS heap, node.
 - **Bố cục:** desktop = thanh bên phải; hẹp (≤ 820 px) hoặc cảm ứng = bottom sheet có tab (Anim / Dir / Play / Layers / Modes / Info), nút ≥ 44 px. Lỗi nạp rig hiện ở dải đỏ trên cùng thanh điều khiển.
 
-## 3. Adapter và hợp đồng nạp rig
+## 2b. Nhân vật mặc định: Kiếm tu
+
+Khi `assets/resources/dragonbones/kiem-tu/kiemtu_S_ske.json` có trong dự án, viewer mở bộ **Kiếm tu** (xuất từ `@vgtd/rig`, 5 hướng vẽ; 38 bone, 13 slot, 4 IK, mesh có trọng số, 15 clip) thay vì rig thử. Các điểm viewer xử lý cho dữ liệu thật:
+
+- **Clip thêm ngoài 13 animation của bảng:** `attack_2`, `attack_3` (combo) hiện trong bảng chọn; chúng là biến thể của `attack` (cùng cờ loop/sự kiện/view state). Nút bị mờ nếu rig không có clip đó.
+- **Thiếu rig SW/W/NW:** animation mặc định "vẽ đủ 8" (attack, cast, channel) cần rig 8 hướng; nếu thư mục chỉ có 5 hướng, viewer dùng rig hướng đã vẽ + lật gương (nhãn "mirror of …") thay vì báo lỗi nạp.
+- Skin `bones-only` của rig không dùng như biến thể display; không có biến thể trang phục → ô "skin red" không có tác dụng với rig này.
 
 Viewer chỉ nói chuyện với `CharacterActor` (`assets/scripts/viewer/CharacterActor.ts`): `apply(viewState, options)`, `time()`, `seek()`, `restart()`, `seamMetric()`… Hiện có **một** hiện thực: `DragonBonesActor` (`dragonBones.ArmatureDisplay`, `DragonBonesAsset`, `DragonBonesAtlasAsset`). Không cài adapter Spine; nếu sau MVP có giấy phép Spine thì thêm một `SpineActor` cùng interface (xem [art/dragonbones.md §4](art/dragonbones.md)).
 
@@ -71,6 +79,21 @@ Viewer chỉ nói chuyện với `CharacterActor` (`assets/scripts/viewer/Charac
 Sinh lại: `npm run gen -w @vgtd/dragonbones-testrig` (ra `tools/dragonbones-testrig/out/`, không commit); `prepare:assets` tự chạy và chép vào `assets/resources/dragonbones/viewer/`. Test (chạy trong CI): `tools/dragonbones-testrig/test`.
 
 **Nếu dùng editor** (tùy chọn từ D36; DragonBones Pro 5.6.x hoặc LoongBones): xuất **DragonBones JSON** (chọn Data Version thấp nhất, ≤ 5.6), một armature mỗi hướng, atlas JSON + PNG với: premultiply alpha **bật**, pow2 **bật**, tối đa **2048**, padding **2**, không xoay; đặt tên theo §3. Kiểm tra bằng viewer: đủ 13 animation, sự kiện đúng mốc, thứ tự vẽ khớp bảng (Info), bộ nhớ/draw call trong ngân sách. File xuất mẫu để thử nhập vào LoongBones: thư mục `dragonbones-import-test/` (artifact của PR).
+
+## 4b. Đo chế độ cache (Kiếm tu, crowd 30 bản)
+
+`npm run capture -w client-cocos -- --perf --n 30 --animations run [--batch]` mở chế độ crowd (30 bản "run", pha bắt đầu lệch nhau), lấy trung vị 5 mẫu 1 s cho mỗi chế độ cache, ghi `perf.json` + `crowd-<mode>.png`. Chrome headless, GL phần mềm: **so sánh CPU giữa các chế độ, không dùng số tuyệt đối làm hiệu năng thiết bị.** `updateMs`/`renderMs` là CPU ms mỗi frame trong pha update (component + hệ animation) và pha submit render.
+
+| Chế độ (30 bản, mesh + IK + trọng số) | `enableBatch` | FPS | update CPU  | render CPU | Draw call | Tris | Texture GFX | JS heap |
+| ------------------------------------- | ------------- | --- | ----------- | ---------- | --------- | ---- | ----------- | ------- |
+| realtime                              | tắt           | 60  | 0,58 ms     | 0,30 ms    | 33        | 2164 | 21,8 MB     | ~41 MB  |
+| shared cache                          | tắt           | 60  | **0,06 ms** | 0,31 ms    | 33        | 2164 | 21,8 MB     | ~33 MB  |
+| private cache                         | tắt           | 60  | 0,06 ms     | 0,32 ms    | 33        | 2164 | 21,8 MB     | ~47 MB  |
+| realtime                              | **bật**       | 60  | 0,55 ms     | 0,34 ms    | **4**     | 2164 | 21,8 MB     | ~30 MB  |
+| shared cache                          | **bật**       | 60  | 0,06 ms     | 0,26 ms    | **4**     | 2164 | 21,8 MB     | ~37 MB  |
+| private cache                         | **bật**       | 60  | 0,05 ms     | 0,28 ms    | 4         | 2164 | 21,8 MB     | ~47 MB  |
+
+Kết luận (cần xác nhận trên máy thật, spike S2): (1) shared/private cache giảm CPU animation ~10× so với realtime và vẫn dựng đúng mesh/IK/trọng số (đã xem `crowd-shared.png`); (2) **không bật `enableBatch` thì mỗi armature tốn một draw call** (33 cho 30 bản, sát trần 80 khi có 30 skeleton + UI) — bật lên còn 4; (3) heap shared cache cao hơn realtime ở vài lần đo (bake frame), cần đo lại trên thiết bị; (4) cache mode không cho `fadeIn`/tua/đổi display (xem §5): dùng realtime cho nhân vật người chơi, shared cache cho đám đông/quái xa (khớp [art/dragonbones.md](art/dragonbones.md)).
 
 ## 5. Giới hạn của runtime DragonBones đã gặp
 

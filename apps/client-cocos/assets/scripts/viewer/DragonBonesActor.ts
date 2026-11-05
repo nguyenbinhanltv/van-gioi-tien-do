@@ -2,7 +2,7 @@ import { Color, Node, UITransform, dragonBones, resources } from 'cc';
 import type { character } from '../vendor/vgtd.mjs';
 import { newNode } from '../IsoAdapter';
 import type { ActorFrame, ApplyOptions, CacheMode, CharacterActor, RigSource, SeamMetric } from './CharacterActor';
-import type { AnimationId, Direction, SlotId } from './ViewerModel';
+import type { Direction, SlotId } from './ViewerModel';
 import { SPINE_SLOTS } from './ViewerModel';
 
 const CACHE_ENUM: Record<CacheMode, number> = {
@@ -40,7 +40,7 @@ export class DragonBonesActor implements CharacterActor {
   /** Latest requested state: applied when a load completes, whatever was requested when it started. */
   private latestView: character.CharacterViewState | null = null;
   private latestOpts: ApplyOptions | null = null;
-  private anim: AnimationId | null = null;
+  private anim: string | null = null;
   private loopNow = true;
   private cache: CacheMode = 'realtime';
   private hiddenSig = '';
@@ -78,6 +78,11 @@ export class DragonBonesActor implements CharacterActor {
 
   slotOrder(): string[] {
     return this.slotNames;
+  }
+
+  clipNames(): string[] {
+    const a = this.display.armature();
+    return a ? [...a.animation.animationNames] : [];
   }
 
   private loadAsset<T>(path: string, type: new () => T): Promise<T> {
@@ -160,13 +165,21 @@ export class DragonBonesActor implements CharacterActor {
 
   private applyLoaded(view: character.CharacterViewState, opts: ApplyOptions): void {
     const d = this.display;
+    if (d.enableBatch !== opts.batch) d.enableBatch = opts.batch;
     if (opts.cache !== this.cache) {
       this.cache = opts.cache;
       d.setAnimationCacheMode(CACHE_ENUM[opts.cache]);
       this.anim = null;
       this.hiddenSig = '';
     }
-    const id = view.animation.id;
+    let id: string = opts.clip ?? view.animation.id;
+    const armatureNow = d.armature();
+    if (armatureNow && !armatureNow.animation.hasAnimation(id)) {
+      this.onError?.(
+        `clip '${id}' is not in ${this.source.folder}/${this.source.stem}_${view.skeletonDirection} (playing ${view.animation.id})`,
+      );
+      id = view.animation.id;
+    }
     const loop = view.animation.loop || opts.repeat;
     const armature = d.armature();
     if (this.cache !== 'realtime' || !armature) {

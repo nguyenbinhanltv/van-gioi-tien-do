@@ -32,8 +32,8 @@ const out = resolve(opt('out', join(tmpdir(), 'vgtd-capture')));
 const frames = Number(opt('frames', 8));
 const mode = opt('mode', 'review');
 const direction = opt('direction', 'S');
-const src = opt('src', 'dragonbones/viewer');
-const stem = opt('stem', 'rig');
+const src = opt('src', ''); // default: the viewer's own default character (Kiem tu when present, else the test rig)
+const stem = opt('stem', '');
 const wantGif = flag('gif');
 /** Region of the 1280x720 viewport holding the actors (panel + HUD hidden during capture). */
 const CLIP =
@@ -102,7 +102,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&src=${src}&stem=${stem}&paused=1`;
+  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&paused=1${src ? `&src=${src}` : ''}${stem ? `&stem=${stem}` : ''}`;
   console.log('opening', url);
   await page.goto(url);
   const waitReady = async (timeout = 180000) => {
@@ -118,8 +118,47 @@ try {
   console.log('viewer ready');
   const all = await page.evaluate('window.__vgtdViewer.animations');
   const names = opt('animations', 'all') === 'all' ? all : opt('animations', 'all').split(',');
+  if (flag('perf')) {
+    // Cache-mode CPU cost: N copies of one animation, median of 5 one-second samples per mode (software GL: compare
+    // update/render CPU ms between modes, do not read absolute numbers as device performance).
+    const n = Number(opt('n', 30));
+    const anim = opt('animations', 'run').split(',')[0];
+    const results = {};
+    const batch = flag('batch');
+    for (const cache of ['realtime', 'shared', 'private']) {
+      await page.evaluate(
+        `window.__vgtdViewer.set({ mode: 'crowd', crowd: ${n}, cache: ${JSON.stringify(cache)}, batch: ${batch}, animation: ${JSON.stringify(anim)}, paused: false })`,
+      );
+      await sleep(500);
+      await waitReady();
+      await sleep(4000);
+      const samples = [];
+      for (let i = 0; i < 5; i++) {
+        await sleep(1000);
+        samples.push(await page.evaluate('({ ...window.__vgtdPerf })'));
+      }
+      const med = (k) => samples.map((x) => x[k]).sort((a, b) => a - b)[Math.floor(samples.length / 2)];
+      results[cache] = Object.fromEntries(
+        ['fps', 'updateMs', 'renderMs', 'drawCalls', 'triangles', 'textureMB', 'jsHeapMB'].map((k) => [
+          k,
+          Number(Number(med(k)).toFixed(2)),
+        ]),
+      );
+      console.log(`${cache}: ${JSON.stringify(results[cache])}`);
+      writeFileSync(join(out, `crowd-${cache}.png`), Buffer.from(await page.screenshot({ type: 'png' })));
+    }
+    const info = await page.evaluate('window.__vgtdViewer.info()');
+    writeFileSync(
+      join(out, 'perf.json'),
+      JSON.stringify({ source: info.source, animation: anim, copies: n, batch, results }, null, 2),
+    );
+    console.log(`perf done -> ${out}`);
+    await browser.close();
+    server.close();
+    process.exit(failures ? 1 : 0);
+  }
   await page.evaluate('window.__vgtdViewer.chrome(false)');
-  const index = { url, mode, direction, src, stem, frames, animations: {} };
+  const index = { url, mode, direction, frames, animations: {} };
 
   for (const anim of names) {
     await page.evaluate(
@@ -143,6 +182,7 @@ try {
     // contact sheet: full-size tiles, 3 per row, composed in Node (no page work needed)
     const tiles = shots.map((png) => downscale(decodePng(png), 1));
     writeFileSync(join(out, `${anim}.sheet.png`), encodePng(contactSheet(tiles, 3)));
+    index.source = info.source;
     const entry = { duration: info.duration, keyFrames: info.frames, seam, sheet: `${anim}.sheet.png` };
     if (wantGif) {
       const n = Math.min(Math.max(info.frames, 4), 36);
