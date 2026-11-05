@@ -64,7 +64,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'truc_co',
         base_rate: 0.7,
-        main_pill_ids: ['pill_truc_co'],
+        main_pill_ids: ['pill_truc_co_dan'],
         tribulation: {
           type: 'none',
         },
@@ -82,7 +82,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
         base_rate: 0.55,
         main_pill_ids: ['pill_ket_kim_dan'],
         tribulation: {
-          type: 'heart_demon',
+          type: 'heart_demon_light',
         },
       },
     },
@@ -96,7 +96,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'nguyen_anh',
         base_rate: 0.45,
-        main_pill_ids: ['pill_ket_anh'],
+        main_pill_ids: ['pill_ket_anh_dan'],
         tribulation: {
           type: 'lightning_heart_demon',
           strikes: 3,
@@ -120,7 +120,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'hoa_than',
         base_rate: 0.35,
-        main_pill_ids: ['pill_hoa_than'],
+        main_pill_ids: ['pill_hoa_than_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 6,
@@ -144,7 +144,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'luyen_hu',
         base_rate: 0.3,
-        main_pill_ids: ['pill_luyen_hu'],
+        main_pill_ids: ['pill_luyen_hu_dan'],
         tribulation: {
           type: 'heart_demon_multi',
         },
@@ -160,7 +160,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'hop_the',
         base_rate: 0.25,
-        main_pill_ids: ['pill_hop_the'],
+        main_pill_ids: ['pill_hop_the_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 9,
@@ -184,7 +184,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'dai_thua',
         base_rate: 0.2,
-        main_pill_ids: ['pill_dai_thua'],
+        main_pill_ids: ['pill_dai_thua_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 18,
@@ -208,7 +208,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'do_kiep',
         base_rate: 0.15,
-        main_pill_ids: ['pill_do_kiep'],
+        main_pill_ids: ['pill_do_kiep_dan'],
         tribulation: {
           type: 'lightning_heart_demon',
           strikes: 36,
@@ -451,7 +451,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
         max_pills: {
           type: 'integer',
           minimum: 1,
-          maximum: 5,
+          maximum: 3,
         },
         wrong_realm_pill_factor: {
           $ref: '#/$defs/ratio',
@@ -511,7 +511,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
     },
     realms: {
       type: 'array',
-      minItems: 7,
+      minItems: 9,
       items: {
         $ref: '#/$defs/realm',
       },
@@ -564,7 +564,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
       additionalProperties: false,
       properties: {
         type: {
-          enum: ['none', 'heart_demon', 'heart_demon_multi', 'lightning', 'lightning_heart_demon'],
+          enum: ['none', 'heart_demon_light', 'heart_demon', 'heart_demon_multi', 'lightning', 'lightning_heart_demon'],
         },
         strikes: {
           type: 'integer',
@@ -672,6 +672,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
               type: 'array',
               items: {
                 type: 'string',
+                pattern: '^pill_[a-z0-9_]+_dan$',
               },
             },
             tribulation: {

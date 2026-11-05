@@ -140,3 +140,43 @@ describe('elemental_matrix validation rejects bad data', () => {
     expect(bad((d) => (d.root_types[1]!.element_count = 1)).errors.join()).toMatch(/element_count/);
   });
 });
+
+describe('schema fixes A12 / A13 (DECISIONS D23, D24)', () => {
+  const bad = (mutate: (d: RealmProgression) => void) => {
+    const d = clone(realmProgression);
+    mutate(d);
+    return validateRealmProgression(d);
+  };
+  it('requires all 9 realms', () => {
+    expect(realmProgression.realms).toHaveLength(9);
+    expect(
+      validateRealmProgressionSchema({ ...clone(realmProgression), realms: realmProgression.realms.slice(0, 8) }).valid,
+    ).toBe(false);
+  });
+  it('max_pills is capped at 3 (rule m <= 3), in schema and data', () => {
+    expect(realmProgression.breakthrough_rules.max_pills).toBe(3);
+    expect(bad((x) => (x.breakthrough_rules.max_pills = 4)).valid).toBe(false);
+    expect(bad((x) => (x.breakthrough_rules.max_pills = 3)).valid).toBe(true);
+  });
+  it('Trúc Cơ → Kim Đan uses the distinct light heart demon; others keep their type', () => {
+    const types = realmProgression.realms.map((r) => r.breakthrough.tribulation.type);
+    expect(types[1]).toBe('heart_demon_light');
+    expect(types.filter((t) => t === 'heart_demon_light')).toHaveLength(1);
+    expect(types[4]).toBe('heart_demon_multi');
+    expect(bad((x) => ((x.realms[1]!.breakthrough.tribulation.type as string) = 'heart_demon_soft')).valid).toBe(false);
+  });
+  it('main pill ids are ASCII snake_case, end in _dan, are unique, and match the doc pill names', () => {
+    const ids = realmProgression.realms.flatMap((r) => r.breakthrough.main_pill_ids ?? []);
+    expect(ids).toHaveLength(9);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) expect(id).toMatch(/^pill_[a-z0-9_]+_dan$/);
+    // names printed in docs/07 section 2 ("Hệ số đan dược")
+    const byThreshold = Object.fromEntries(
+      realmProgression.realms.map((r) => [r.breakthrough.to, r.breakthrough.main_pill_ids]),
+    );
+    expect(byThreshold['truc_co']).toEqual(['pill_truc_co_dan']); // Trúc Cơ Đan
+    expect(byThreshold['nguyen_anh']).toEqual(['pill_ket_anh_dan']); // Kết Anh Đan
+    expect(byThreshold['phi_thang']).toEqual(['pill_cuu_chuyen_kim_dan']); // Cửu Chuyển Kim Đan
+    expect(bad((x) => (x.realms[0]!.breakthrough.main_pill_ids = ['pill_Truc_Co'])).valid).toBe(false);
+  });
+});

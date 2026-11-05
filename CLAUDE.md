@@ -42,6 +42,10 @@ DECISIONS entry wins. Use the
   The Cocos client must flip y at the rendering boundary.
 - Simulation code is deterministic: no `Math.random`, `Date.now`, `performance.now`; fixed 20 Hz tick (skill `vgtd-sim-determinism`).
 - Third-party or MCP-sourced assets require a license check before use (skill `vgtd-asset-pipeline`).
+- Gameplay defaults decided without a designer (D16-D22 etc.) are marked "cần game designer duyệt khi cân bằng": implement
+  them as specified, but do not treat them as final balance.
+- Spine runtime 4.2 (D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
+- Do not create or edit `.claude/settings.json` (D30): agent permission self-edits are blocked on purpose.
 - Prefer the latest locked decisions in `docs/DECISIONS.md` over memory or older docs. Do not invent gameplay values that
   the docs do not specify; add the gap to `docs/OPEN-ITEMS.md` instead.
 
@@ -56,8 +60,9 @@ npm run lint
 npm run format:check      # `npm run format` to fix
 ```
 
-CI (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22) runs ci, typecheck, test, build and lint. Wait for both
-`verify` jobs to be green on your PR. Generated data: `npm run gen:data -w @vgtd/shared` after editing schema JSON.
+CI is GitHub Actions only (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22): ci, typecheck, test, build and lint.
+Keep it short; there is no CD. `main` has branch protection requiring `verify (18)` and `verify (22)`: wait for both to be
+green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd/shared` after editing schema JSON.
 
 ## Git rules
 
@@ -89,3 +94,16 @@ CI (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22) runs ci, typecheck
 | `vgtd-new-package`     | Creating a new workspace package                                             |
 | `vgtd-sim-determinism` | Writing or reviewing server / shared simulation code or the network protocol |
 | `vgtd-asset-pipeline`  | Generating, packing, compressing or importing assets                         |
+
+## Autonomous operation (24/7)
+
+Rules for continuous work until the MVP is done (queue, decision gates, who decides what, merge conditions, limits, emergency stop): `docs/30-quy-tac-van-hanh.md`. Short version: never decide items listed there under "Phải hỏi người"; max 3 parallel workers; the orchestrator may merge a PR only when `verify (18)` and `verify (22)` are green and the conditions in section 6.4 hold.
+
+## Design review
+
+Review skills (read-only, output a Markdown findings report with `file:line` and severity; adapted from
+Claude-Code-Game-Studios, see `THIRD_PARTY_NOTICES.md`): `vgtd-design-review` (one doc, with checklists),
+`vgtd-review-all-gdds` (cross-doc), `vgtd-propagate-design-change` (impact of a changed value or rule),
+`vgtd-architecture-review` (design to technical docs 20-29). Specialist subagents in `.claude/agents/`: game-designer,
+systems-designer, economy-designer, narrative-director, level-designer, network-programmer, security-engineer, qa-lead,
+technical-director, creative-director.
