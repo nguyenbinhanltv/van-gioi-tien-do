@@ -1,46 +1,50 @@
 /**
- * Review artifacts for the animation set: per-clip contact sheets + GIFs, per-direction overview sheets, the QA
- * report and the exported DragonBones JSON. Opt-in (writes files):
+ * Review artifacts for the animation set (opt-in, writes files):
  *
- *   RIG_ARTIFACT_DIR=<out> [RIG_DATA_DIR=<dir with kiem-tu.rig.json and atlas/<DIR>/atlas.json + png>] \
- *     npm run artifacts -w @vgtd/rig
+ *   RIG_ARTIFACT_DIR=<out> npm run artifacts -w @vgtd/rig
  *
- * Without RIG_DATA_DIR it renders the reference humanoid with the procedural stand-in atlas.
+ * Writes for every clip x 5 drawn directions a GIF (mid-grey background, ground line, faint onion skin), contact sheets
+ * for the profile view, direction overview sheets, the QA report (bone QA + mesh QA + silhouette islands), the
+ * QA-gated DragonBones JSON per direction, and one `index.html` contact page tying them together.
+ * Uses the committed Kiếm tu data (tools/rig/data); falls back to the reference humanoid when the art is unavailable.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { DRAWN_DIRECTIONS, type Direction } from '@vgtd/shared';
 import {
   KIEMTU_CLIPS,
-  KIEMTU_REQUIRED_ROLES,
+  REVIEW_BACKGROUND,
   authorKiemTuSet,
   buildCharacterPackage,
   buildReferenceAtlas,
   buildReferenceHumanoid,
+  checkSilhouette,
+  clipSpec,
   contactSheet,
   decodePng,
   encodeGif,
   encodePng,
+  evalPose,
   formatQaReports,
+  loadKiemTuData,
   loadedAtlas,
   renderClip,
   renderPose,
-  evalPose,
-  specIdForClipName,
-  validateRigSet,
-  clipSpec,
   runQa,
+  specIdForClipName,
   type AtlasData,
   type Clip,
   type Image,
   type LoadedAtlas,
+  type QaIssue,
   type RigDocument,
 } from '../src/index.js';
 import { engineRuntimePath, loadRuntime } from './helpers/dbRuntime.js';
 
 const out = process.env.RIG_ARTIFACT_DIR;
-const dataDir = process.env.RIG_DATA_DIR;
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 interface DirectionData {
   readonly rig: RigDocument;
@@ -50,7 +54,19 @@ interface DirectionData {
 
 function loadDirections(): { id: string; byDir: Map<Direction, DirectionData> } {
   const byDir = new Map<Direction, DirectionData>();
-  if (!dataDir) {
+  try {
+    const data = loadKiemTuData(repoRoot);
+    for (const [dir, d] of data.byDirection) {
+      const png = readFileSync(d.texturePath);
+      if (png.subarray(1, 4).toString('ascii') !== 'PNG') throw new Error('atlas PNG is a Git LFS pointer');
+      byDir.set(dir, {
+        rig: d.rig,
+        atlasData: d.atlas,
+        atlas: loadedAtlas(d.atlas, decodePng(png, { premultiplied: d.atlas.premultipliedAlpha })),
+      });
+    }
+    return { id: data.id, byDir };
+  } catch {
     for (const d of DRAWN_DIRECTIONS) {
       const rig = buildReferenceHumanoid(d);
       const ref = buildReferenceAtlas(rig);
@@ -58,24 +74,9 @@ function loadDirections(): { id: string; byDir: Map<Direction, DirectionData> } 
     }
     return { id: 'reference-humanoid', byDir };
   }
-  const set = JSON.parse(readFileSync(join(dataDir, 'kiem-tu.rig.json'), 'utf-8')) as {
-    id: string;
-    rigs: Record<string, RigDocument>;
-  };
-  const issues = validateRigSet(set, { requireRoles: KIEMTU_REQUIRED_ROLES }).filter((i) => i.severity === 'error');
-  expect(issues).toEqual([]);
-  for (const d of DRAWN_DIRECTIONS) {
-    const rig = set.rigs[d];
-    if (!rig) continue;
-    const dir = join(dataDir, 'atlas', d);
-    const atlasData = JSON.parse(readFileSync(join(dir, 'atlas.json'), 'utf-8')) as AtlasData;
-    const real = join(dir, 'real.png'); // LFS-smudged copy when the checkout only has pointers
-    const png = existsSync(real) ? real : join(dir, atlasData.imagePath);
-    const image = decodePng(readFileSync(png), { premultiplied: atlasData.premultipliedAlpha });
-    byDir.set(d, { rig, atlasData, atlas: loadedAtlas(atlasData, image) });
-  }
-  return { id: set.id, byDir };
 }
+
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 (out ? describe : describe.skip)('animation review artifacts', () => {
   it('authors, QA-gates, renders and exports the Kiếm tu set', async () => {
@@ -83,21 +84,29 @@ function loadDirections(): { id: string; byDir: Map<Direction, DirectionData> } 
     const { id, byDir } = loadDirections();
     const reportLines: string[] = [];
     const clipsByDir = new Map<Direction, Clip[]>();
+    const silhouette = new Map<string, QaIssue[]>(); // `${dir}/${clip}`
 
-    for (const [dir, { rig, atlasData }] of byDir) {
+    for (const [dir, { rig, atlasData, atlas }] of byDir) {
       const clips = authorKiemTuSet(rig);
       clipsByDir.set(dir, clips);
       const reports = clips.map((c) => {
         const sid = specIdForClipName(c.name);
         return runQa(rig, c, sid ? { spec: clipSpec(sid) } : {});
       });
-      reportLines.push(`## ${id} / ${dir}`, formatQaReports(reports), '');
+      reportLines.push(`## ${id} / ${dir}`, formatQaReports(reports));
       expect(
         reports.flatMap((r) => r.issues.filter((i) => i.severity === 'error')),
         dir,
       ).toEqual([]);
+      // silhouette islands are reported (not gated): rigid-island rigs can tear in some poses (see rig-pipeline.md §10)
+      const isl = clips.map((c) => ({ c, issues: checkSilhouette(rig, c, atlas, { minPixels: 20 }) }));
+      for (const { c, issues } of isl) silhouette.set(`${dir}/${c.name}`, issues);
+      reportLines.push(
+        `   silhouette islands: ${isl.filter((x) => x.issues.length).length}/${clips.length} clips split`,
+        ...isl.filter((x) => x.issues.length).map((x) => `   w [islands] ${x.c.name}: ${x.issues[0]!.message}`),
+        '',
+      );
 
-      // QA-gated export, one DragonBones package per direction (each direction has its own atlas page)
       const pkg = buildCharacterPackage([{ rig, clips }], atlasData, { name: `${id}_${dir}` });
       writeFileSync(join(out!, `${id}_${dir}.ske.json`), JSON.stringify(pkg.export.ske));
       writeFileSync(join(out!, `${id}_${dir}.tex.json`), JSON.stringify(pkg.export.tex));
@@ -108,20 +117,23 @@ function loadDirections(): { id: string; byDir: Map<Direction, DirectionData> } 
     }
     writeFileSync(join(out!, 'qa-report.txt'), reportLines.join('\n'));
 
-    // per-clip sheet + GIF for the profile view
-    const main = byDir.get('E') ?? [...byDir.values()][0]!;
-    for (const clip of clipsByDir.get(main.rig.direction)!) {
-      const step = Math.max(1, Math.ceil(clip.frames / 14));
-      const sheetFrames = renderClip(main.rig, clip, main.atlas, { scale: 1.5, step, overlay: true });
-      writeFileSync(
-        join(out!, `${clip.name}_${main.rig.direction}_sheet.png`),
-        encodePng(contactSheet(sheetFrames, { columns: 7, step })),
-      );
-      const gifFrames = renderClip(main.rig, clip, main.atlas, { scale: 2 });
-      writeFileSync(join(out!, `${clip.name}_${main.rig.direction}.gif`), encodeGif(gifFrames, 1000 / 30));
+    // GIF per clip x direction (mid-grey, ground line, onion skin), sheets for the profile view
+    const gifBytes: Record<string, number> = {};
+    for (const clipName of KIEMTU_CLIPS.flatMap((n) => (n === 'attack' ? ['attack', 'attack_2', 'attack_3'] : [n]))) {
+      for (const [dir, { rig, atlas }] of byDir) {
+        const clip = clipsByDir.get(dir)!.find((c) => c.name === clipName);
+        if (!clip) continue;
+        const frames = renderClip(rig, clip, atlas, { scale: dir === 'E' ? 2 : 1.5, onion: 2 });
+        const gif = encodeGif(frames, 1000 / 30);
+        gifBytes[`${clipName}_${dir}`] = gif.length;
+        writeFileSync(join(out!, `${clipName}_${dir}.gif`), gif);
+        if (dir === 'E') {
+          const step = Math.max(1, Math.ceil(clip.frames / 14));
+          const sheet = renderClip(rig, clip, atlas, { scale: 1.5, step, overlay: true });
+          writeFileSync(join(out!, `${clipName}_E_sheet.png`), encodePng(contactSheet(sheet, { columns: 7, step })));
+        }
+      }
     }
-
-    // direction overview for the headline clips: rows = directions, columns = 6 frames
     for (const name of ['idle', 'run', 'attack', 'cast', 'die'] as const) {
       const rows: Image[] = [];
       for (const [dir, { rig, atlas }] of byDir) {
@@ -129,10 +141,43 @@ function loadDirections(): { id: string; byDir: Map<Direction, DirectionData> } 
         const picks = [0, 1, 2, 3, 4, 5].map((i) =>
           Math.min(clip.frames - (clip.loop ? 1 : 0), Math.round((i / 5) * clip.frames)),
         );
-        rows.push(...picks.map((f) => renderPose(rig, evalPose(rig, clip, f), atlas, { scale: 1 })));
+        rows.push(
+          ...picks.map((f) =>
+            renderPose(rig, evalPose(rig, clip, f), atlas, { scale: 1, background: REVIEW_BACKGROUND }),
+          ),
+        );
       }
       writeFileSync(join(out!, `directions_${name}.png`), encodePng(contactSheet(rows, { columns: 6 })));
     }
+
+    // contact page
+    const dirs = [...byDir.keys()];
+    const names = [...new Set([...clipsByDir.values()].flatMap((cs) => cs.map((c) => c.name)))];
+    const rows = names
+      .map((n) => {
+        const cells = dirs
+          .map((d) => {
+            const iss = silhouette.get(`${d}/${n}`) ?? [];
+            const flag = iss.length
+              ? `<span class="bad" title="${esc(iss[0]!.message)}">split</span>`
+              : '<span class="ok">whole</span>';
+            return `<td><img loading="lazy" src="${n}_${d}.gif" alt="${n} ${d}"><br><small>${d} ${flag}</small></td>`;
+          })
+          .join('');
+        const spec = specIdForClipName(n);
+        const frames = clipsByDir.get('E')!.find((c) => c.name === n)!.frames;
+        return `<tr><th>${n}<br><small>${frames} f @30${spec ? '' : ''}</small></th>${cells}<td><a href="${n}_E_sheet.png"><img loading="lazy" src="${n}_E_sheet.png" width="260"></a></td></tr>`;
+      })
+      .join('\n');
+    const html = `<!doctype html><meta charset="utf-8"><title>${id} animation review</title>
+<style>body{background:#1b1c21;color:#ddd;font:14px system-ui;margin:16px}table{border-collapse:collapse}td,th{border:1px solid #333;padding:4px;text-align:center;vertical-align:top}
+th{text-align:left;min-width:90px}img{image-rendering:auto}.ok{color:#7c7}.bad{color:#f88;font-weight:bold}small{color:#999}a{color:#9cf}</style>
+<h1>${id}: ${names.length} clips x ${dirs.length} directions</h1>
+<p>Mid-grey background, ground line, onion skin (blue = 2 frames earlier, red = 2 later). <b>whole/split</b> = silhouette island check (rigid-island rig tears in some poses). Full QA: <a href="qa-report.txt">qa-report.txt</a>. Overviews: ${['idle', 'run', 'attack', 'cast', 'die'].map((n) => `<a href="directions_${n}.png">${n}</a>`).join(' · ')}. DragonBones JSON: <code>${id}_&lt;DIR&gt;.ske.json / .tex.json</code>.</p>
+<table><tr><th>clip</th>${dirs.map((d) => `<th>${d}</th>`).join('')}<th>profile sheet (bones)</th></tr>
+${rows}</table>`;
+    writeFileSync(join(out!, 'index.html'), html);
     expect(KIEMTU_CLIPS.length).toBe(15);
-  });
+    expect(Object.keys(gifBytes).length).toBe(names.length * dirs.length);
+  }, 900000);
 });

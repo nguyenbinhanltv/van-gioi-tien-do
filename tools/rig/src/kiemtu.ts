@@ -13,6 +13,8 @@ import { closeLoop } from './loop.js';
 import { crouchFor, legReach, planFeet, screenAxis } from './locomotion.js';
 import { angleDelta, type Vec2 } from './math.js';
 import { evalPose } from './pose.js';
+import { fitToSilhouette } from './fit.js';
+import type { LoadedAtlas } from './render/render.js';
 import { bakeSecondaryMotion, simplifyScalar } from './secondary.js';
 import type { RigDocument } from './schema.js';
 
@@ -894,7 +896,61 @@ export function liftToGround(rig: RigDocument, clip: Clip): Clip {
   };
 }
 
+/** Skirt / robe panels hanging from the hips (rig-specific names): they should swing with the legs, not stay rigid. */
+const SKIRT_BONE = /^(robe|skirt|apron)/i;
+
+/**
+ * Make hip-hung robe panels follow the legs: the front panel lifts with the more-forward thigh, the back panel with the
+ * more-backward one (half the angle, clamped, smoothed over 3 frames). Without this the legs swing out from under a
+ * rigid skirt and read as detached limbs. Bakes plain rotate keys.
+ */
+export function skirtFollowsLegs(rig: RigDocument, clip: Clip, gain = 0.55, limit = 38): Clip {
+  const hips = rig.roles.hips;
+  const tL = rig.roles.thigh_L;
+  const tR = rig.roles.thigh_R;
+  if (!hips || !tL || !tR) return clip;
+  const panels = rig.bones.filter((b) => b.parent === hips && SKIRT_BONE.test(b.name));
+  if (!panels.length) return clip;
+  const rest = evalPose(rig, null, 0, { noIk: true });
+  const restRot = (n: string) => rest.byName.get(n)!.rotation;
+  const delta: { fwd: number; back: number }[] = [];
+  for (let f = 0; f <= clip.frames; f++) {
+    const pose = evalPose(rig, clip, f);
+    const a = angleDelta(restRot(tL), pose.byName.get(tL)!.rotation);
+    const b = angleDelta(restRot(tR), pose.byName.get(tR)!.rotation);
+    delta.push({ fwd: Math.max(a, b, 0), back: Math.min(a, b, 0) });
+  }
+  const smooth = (pick: (d: { fwd: number; back: number }) => number) =>
+    delta.map((_, f) => {
+      const n = [f - 1, f, f + 1].map((i) =>
+        clip.loop ? ((i % clip.frames) + clip.frames) % clip.frames : Math.min(clip.frames, Math.max(0, i)),
+      );
+      return n.reduce((sum, i) => sum + pick(delta[i]!), 0) / n.length;
+    });
+  const fwd = smooth((d) => d.fwd);
+  const back = smooth((d) => d.back);
+  const bones = [...clip.bones];
+  for (const panel of panels) {
+    const isBack = /back/i.test(panel.name);
+    const series = isBack ? back : fwd;
+    const keys: Key<number>[] = series.map((v, f) => ({
+      frame: f,
+      value: Math.max(-limit, Math.min(limit, v * gain)),
+    }));
+    const existing = bones.findIndex((b) => b.bone === panel.name);
+    const track = simplifyScalar(keys, 0.3);
+    if (existing >= 0) bones[existing] = { ...bones[existing]!, rotate: track };
+    else bones.push({ bone: panel.name, rotate: track });
+  }
+  return { ...clip, bones };
+}
+
 export interface KiemTuOptions {
+  /**
+   * Loaded atlas of the rig: when given, every clip is fitted so its silhouette stays whole (limb swings are limited to
+   * what the rig's rigid mesh islands can carry); see `fitToSilhouette`.
+   */
+  readonly fitAtlas?: LoadedAtlas;
   /** Bake hair/sash secondary motion into the clips. Default true. */
   readonly secondary?: boolean;
   /** Restrict to some clips. Default: all of KIEMTU_CLIPS. */
@@ -923,8 +979,11 @@ export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Cli
   const ids = opts.only ?? KIEMTU_CLIPS;
   return ids.map((id) => {
     const authored = armsFk(rig, makers[id](rig));
-    const clip = id === 'die' || id === 'meditate' ? liftToGround(rig, authored) : alignFeet(rig, authored);
-    return opts.secondary === false ? clip : bakeSecondaryMotion(rig, clip);
+    const grounded = id === 'die' || id === 'meditate' ? liftToGround(rig, authored) : alignFeet(rig, authored);
+    const base = skirtFollowsLegs(rig, grounded);
+    const bake = (c: Clip) => (opts.secondary === false ? c : bakeSecondaryMotion(rig, c));
+    if (opts.fitAtlas) return fitToSilhouette(rig, base, opts.fitAtlas, { finalize: bake }).clip;
+    return bake(base);
   });
 }
 

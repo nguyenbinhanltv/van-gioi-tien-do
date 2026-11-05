@@ -101,6 +101,26 @@ describe('PNG codec', () => {
   });
 });
 
+describe('GIF encoder (stress)', () => {
+  it('round-trips a noisy multi-frame image through dictionary growth and resets', () => {
+    // deterministic pseudo-noise: many distinct colour runs force 12-bit codes and several clear codes
+    let seed = 12345;
+    const rnd = () => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) >> 8) / 0x7fffff;
+    const make = () => {
+      const img = createImage(120, 90, [30, 30, 30, 255]);
+      for (let i = 0; i < 120 * 90; i++) img.data.set([rnd() * 255, rnd() * 255, rnd() * 255, 255], i * 4);
+      return img;
+    };
+    const frames = [make(), make()];
+    const gif = encodeGif(frames, 40);
+    const d = decodeGifFirstFrame(gif);
+    expect(d.indices.length).toBe(120 * 90);
+    expect(d.frames).toBe(2);
+    // every decoded index is a valid palette index
+    expect(Math.max(...d.indices)).toBeLessThan(252);
+  });
+});
+
 describe('GIF encoder', () => {
   it('writes a valid animated GIF whose LZW stream decodes to the quantised first frame', () => {
     const a = createImage(40, 30, [10, 20, 30, 255]);

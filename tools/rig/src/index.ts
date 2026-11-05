@@ -20,3 +20,8 @@ export * from './render/render.js';
 export * from './render/gif.js';
 export * from './render/refatlas.js';
 export * from './data.js';
+export * from './skinning.js';
+export * from './qa-mesh.js';
+export * from './render/silhouette.js';
+export * from './fit.js';
+export * from './soften.js';
