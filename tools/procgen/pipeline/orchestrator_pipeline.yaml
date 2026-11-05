@@ -99,15 +99,21 @@ spec:
             run: |
               # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
               # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
-              g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+              g() { GIT_DIR="$gdir" GIT_WORK_TREE="$top" GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
               base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
+              top="$(git rev-parse --show-toplevel)"   # g() ghim GIT_DIR/GIT_WORK_TREE: git không tự tìm repo khác từ thư mục làm việc
+              # ./.git do agent tạo mới hoặc ghi đè (thư mục / file trỏ gitdir) cũng làm vân tay đổi => dừng
+              dg() { if [ -f .git ]; then sha256sum -- .git; elif [ -d .git ]; then echo "dir $(cd .git && pwd -P)"; fi; }
               gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
               gsnap() {
-                for d in "$gdir" "$gcommon"; do
-                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
-                    [ -f "$f" ] && sha256sum -- "$f"
+                {
+                  for d in "$gdir" "$gcommon"; do
+                    for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
+                      [ -f "$f" ] && sha256sum -- "$f"
+                    done
                   done
-                done | sort
+                  dg
+                } | sort
               }
               gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
               snap() {
@@ -183,15 +189,21 @@ spec:
             fi
             # git an toàn: agent có thể ghi .git/config|hooks để chạy mã khi ta gọi git => băm các file đó trước/sau
             # (kiểm TRƯỚC khi gọi git sau agent) và luôn tắt fsmonitor / hooks / untracked cache khi gọi git.
-            g() { GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
+            g() { GIT_DIR="$gdir" GIT_WORK_TREE="$top" GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null git -c core.fsmonitor=false -c core.hooksPath=/dev/null -c core.untrackedCache=false "$@"; }
             base="$(git rev-parse HEAD)"   # so sánh/hoàn tác theo SHA cố định, không tin HEAD/refs sau agent
+            top="$(git rev-parse --show-toplevel)"   # g() ghim GIT_DIR/GIT_WORK_TREE: git không tự tìm repo khác từ thư mục làm việc
+            # ./.git do agent tạo mới hoặc ghi đè (thư mục / file trỏ gitdir) cũng làm vân tay đổi => dừng
+            dg() { if [ -f .git ]; then sha256sum -- .git; elif [ -d .git ]; then echo "dir $(cd .git && pwd -P)"; fi; }
             gdir="$(git rev-parse --absolute-git-dir)"; gcommon="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
             gsnap() {
-              for d in "$gdir" "$gcommon"; do
-                for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
-                  [ -f "$f" ] && sha256sum -- "$f"
+              {
+                for d in "$gdir" "$gcommon"; do
+                  for f in "$d"/config "$d"/config.worktree "$d"/HEAD "$d"/packed-refs "$d"/info/* "$d"/hooks/* "$d"/refs/*/* "$d"/refs/*/*/*; do
+                    [ -f "$f" ] && sha256sum -- "$f"
+                  done
                 done
-              done | sort
+                dg
+              } | sort
             }
             gbefore="$(mktemp)"; gafter="$(mktemp)"; gsnap > "$gbefore"
             snap() {
