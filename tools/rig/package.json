@@ -19,7 +19,8 @@
     "build": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.test.json",
-    "artifacts": "vitest run test/artifacts.test.ts"
+    "artifacts": "vitest run test/artifacts.test.ts",
+    "export:kiemtu": "vitest run test/kiemtu-data.test.ts"
   },
   "dependencies": {
     "@vgtd/character": "*",

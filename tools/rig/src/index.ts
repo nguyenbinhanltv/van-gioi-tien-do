@@ -19,3 +19,4 @@ export * from './render/raster.js';
 export * from './render/render.js';
 export * from './render/gif.js';
 export * from './render/refatlas.js';
+export * from './data.js';
