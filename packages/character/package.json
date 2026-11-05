@@ -1,0 +1,30 @@
+{
+  "name": "@vgtd/character",
+  "version": "0.1.0",
+  "description": "Vạn Giới Tiên Đồ character & monster data/logic: directions, paperdoll, animations, footprints, definition schemas (engine-agnostic).",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.test.json"
+  },
+  "dependencies": {
+    "@vgtd/shared": "0.1.0",
+    "ajv": "^8.17.1"
+  }
+}
