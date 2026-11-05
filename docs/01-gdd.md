@@ -14,14 +14,14 @@
 
 **Tầm nhìn một câu:** _một thế giới tu tiên 2D isometric nơi mỗi bước đột phá là một khoảnh khắc đáng nhớ, mỗi lựa chọn đạo tâm để lại nghiệp quả, và bạn có thể tu cùng đạo hữu trên bất kỳ thiết bị nào._
 
-| #   | Trụ cột                           | Ý nghĩa thiết kế                                                                                                                                                  | Hệ quả cụ thể                                                                                                          |
-| --- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| P1  | **Đột phá là khoảnh khắc**        | Cảnh giới là trục tiến trình chính; mỗi ngưỡng lớn là một "sự kiện" có chuẩn bị, hồi hộp, thất bại có ý nghĩa.                                                    | Tâm Ma, Lôi Kiếp, pity (07 §2); thất bại không rớt cảnh giới lớn; VFX Lôi Kiếp procedural.                             |
-| P2  | **Cảnh giới là vua**              | Người cảnh giới cao luôn mạnh hơn; trang bị / công pháp chỉ cộng tối đa 60% chỉ số gốc cùng cảnh giới (07 §1).                                                    | Suppress −15% mỗi cảnh giới chênh lệch (07 §4); không có "đồ phế liệu đánh thắng người cao cảnh".                      |
-| P3  | **Nghiệp quả có trọng lượng**     | Chính – Tà – Ma không phải nhãn cosmetic mà đổi cách tu: Ma tu nhanh nhưng đột phá khó dần (07 §2). Lựa chọn của người chơi để lại hậu quả dài hạn.                | Nghiệp Lực, Đạo Tâm, nghiệp báo, nhân quả (mục 8).                                                                     |
-| P4  | **Tu cùng đạo hữu**               | MMO đúng nghĩa: tông môn, tổ đội, chợ, chiến tranh Linh Mạch; solo vẫn tiến được nhưng đột phá cao cần hộ pháp / tài nguyên cộng đồng.                            | Hộ pháp Lôi Kiếp (07 §3), personal loot theo đội, tông môn (mục 9, 13).                                                |
-| P5  | **Mượt trên mọi thiết bị**        | Cross-play Web H5 / Mobile / PC; vào game ≤ 25 MB; cùng một tài khoản, cùng một thế giới.                                                                         | Ngân sách 00 §3 (draw call, RAM, băng thông); bố cục theo cách nhập (05).                                              |
-| P6  | **Kinh tế bền, không lạm phát**   | Mọi nguồn tiền có sink tương ứng; mục tiêu tiêu hao / sinh ra 0,9–1,0 mỗi tuần (07 §7).                                                                           | Thuế CPI, truyền tống, độ bền, Đấu Giá Hội hủy tiền.                                                                   |
+| #   | Trụ cột                         | Ý nghĩa thiết kế                                                                                                                                    | Hệ quả cụ thể                                                                                     |
+| --- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| P1  | **Đột phá là khoảnh khắc**      | Cảnh giới là trục tiến trình chính; mỗi ngưỡng lớn là một "sự kiện" có chuẩn bị, hồi hộp, thất bại có ý nghĩa.                                      | Tâm Ma, Lôi Kiếp, pity (07 §2); thất bại không rớt cảnh giới lớn; VFX Lôi Kiếp procedural.        |
+| P2  | **Cảnh giới là vua**            | Người cảnh giới cao luôn mạnh hơn; trang bị / công pháp chỉ cộng tối đa 60% chỉ số gốc cùng cảnh giới (07 §1).                                      | Suppress −15% mỗi cảnh giới chênh lệch (07 §4); không có "đồ phế liệu đánh thắng người cao cảnh". |
+| P3  | **Nghiệp quả có trọng lượng**   | Chính – Tà – Ma không phải nhãn cosmetic mà đổi cách tu: Ma tu nhanh nhưng đột phá khó dần (07 §2). Lựa chọn của người chơi để lại hậu quả dài hạn. | Nghiệp Lực, Đạo Tâm, nghiệp báo, nhân quả (mục 8).                                                |
+| P4  | **Tu cùng đạo hữu**             | MMO đúng nghĩa: tông môn, tổ đội, chợ, chiến tranh Linh Mạch; solo vẫn tiến được nhưng đột phá cao cần hộ pháp / tài nguyên cộng đồng.              | Hộ pháp Lôi Kiếp (07 §3), personal loot theo đội, tông môn (mục 9, 13).                           |
+| P5  | **Mượt trên mọi thiết bị**      | Cross-play Web H5 / Mobile / PC; vào game ≤ 25 MB; cùng một tài khoản, cùng một thế giới.                                                           | Ngân sách 00 §3 (draw call, RAM, băng thông); bố cục theo cách nhập (05).                         |
+| P6  | **Kinh tế bền, không lạm phát** | Mọi nguồn tiền có sink tương ứng; mục tiêu tiêu hao / sinh ra 0,9–1,0 mỗi tuần (07 §7).                                                             | Thuế CPI, truyền tống, độ bền, Đấu Giá Hội hủy tiền.                                              |
 
 ## 2. Người chơi mục tiêu & nền tảng
 
@@ -29,11 +29,11 @@
 
 Thị trường đầu tiên: **người chơi Việt Nam** (UI Việt hóa đầu tiên; Trung / Anh bản địa hóa sau — chữ không vẽ cứng vào ảnh, 02 §5).
 
-| Chân dung                                  | Mô tả                                                                             | Muốn gì                                                      | Thiết kế đáp ứng                                                                                      |
-| ------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| **Tu sĩ hoài niệm** (nhân vật cốt lõi)     | 22–40 tuổi, đọc truyện tiên hiệp, chơi PC / Web vào buổi tối, 1–2 giờ mỗi phiên.  | Cảm giác "tu luyện thật": cảnh giới, đột phá, Lôi Kiếp.      | Vòng lặp cảnh giới dài hạn (mục 3–5), thẩm mỹ thủy mặc × cyber-xianxia (05).                          |
-| **Người chơi mảnh thời gian** (Mobile/Web) | 18–35 tuổi, phiên 10–20 phút, chơi trên điện thoại hoặc tab trình duyệt.          | Tiến bộ rõ ràng sau mỗi phiên ngắn, không bị trừng phạt nặng. | Vòng 5 phút (mục 3), đả tọa / nhiệm vụ ngày, vào game nhanh (≤ 25 MB), thất bại đột phá không rớt cảnh. |
-| **Thủ lĩnh / người chơi xã hội**           | 20–40 tuổi, thích tổ chức tông môn, chiến tranh, giao thương.                     | Quyền lực, uy tín, kinh tế.                                  | Tông môn, Linh Mạch, Vạn Bảo Lâu, Đấu Giá Hội (mục 9–10).                                             |
+| Chân dung                                  | Mô tả                                                                            | Muốn gì                                                       | Thiết kế đáp ứng                                                                                        |
+| ------------------------------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Tu sĩ hoài niệm** (nhân vật cốt lõi)     | 22–40 tuổi, đọc truyện tiên hiệp, chơi PC / Web vào buổi tối, 1–2 giờ mỗi phiên. | Cảm giác "tu luyện thật": cảnh giới, đột phá, Lôi Kiếp.       | Vòng lặp cảnh giới dài hạn (mục 3–5), thẩm mỹ thủy mặc × cyber-xianxia (05).                            |
+| **Người chơi mảnh thời gian** (Mobile/Web) | 18–35 tuổi, phiên 10–20 phút, chơi trên điện thoại hoặc tab trình duyệt.         | Tiến bộ rõ ràng sau mỗi phiên ngắn, không bị trừng phạt nặng. | Vòng 5 phút (mục 3), đả tọa / nhiệm vụ ngày, vào game nhanh (≤ 25 MB), thất bại đột phá không rớt cảnh. |
+| **Thủ lĩnh / người chơi xã hội**           | 20–40 tuổi, thích tổ chức tông môn, chiến tranh, giao thương.                    | Quyền lực, uy tín, kinh tế.                                   | Tông môn, Linh Mạch, Vạn Bảo Lâu, Đấu Giá Hội (mục 9–10).                                               |
 
 ### 2.2 Nền tảng & thông số kỹ thuật _[Giữ nguyên]_
 
@@ -73,12 +73,12 @@ flowchart LR
 
 ### 3.1 Tầng 1 — 5 phút: "Săn – Nhặt – Đả tọa"
 
-| Bước | Hành động                                                                          | Phần thưởng tức thì                                | Nguồn số liệu                    |
-| ---- | ---------------------------------------------------------------------------------- | -------------------------------------------------- | -------------------------------- |
-| 1    | Kéo một nhóm quái, thi triển 2–4 kỹ năng ([11](11-he-phai-ky-nang.md)).                                 | Tu vi từ quái _(Đề xuất)_, Linh thạch hạ phẩm      | 07 §6                            |
-| 2    | Nhặt vật phẩm rơi (cột sáng theo phẩm 1–6, 02 §3).                                 | Nguyên liệu, đan hồi phục, hiếm: bản vẽ / đan      | 07 §6                            |
-| 3    | Hồi Chân Nguyên: đả tọa ngắn hoặc uống đan.                                        | Hấp thu linh khí `Absorb(s)`                       | 07 §5                            |
-| 4    | Lặp: nhịp tham chiếu **~150 quái thường / giờ** (≈ 12 con mỗi 5 phút), 20 tinh anh / giờ. | Kỳ vọng ~180 / ~530 Linh thạch hạ mỗi giờ (cảnh giới 1) | 07 §6 (bảng kỳ vọng)             |
+| Bước | Hành động                                                                                 | Phần thưởng tức thì                                     | Nguồn số liệu        |
+| ---- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------- | -------------------- |
+| 1    | Kéo một nhóm quái, thi triển 2–4 kỹ năng ([11](11-he-phai-ky-nang.md)).                   | Tu vi từ quái _(Đề xuất)_, Linh thạch hạ phẩm           | 07 §6                |
+| 2    | Nhặt vật phẩm rơi (cột sáng theo phẩm 1–6, 02 §3).                                        | Nguyên liệu, đan hồi phục, hiếm: bản vẽ / đan           | 07 §6                |
+| 3    | Hồi Chân Nguyên: đả tọa ngắn hoặc uống đan.                                               | Hấp thu linh khí `Absorb(s)`                            | 07 §5                |
+| 4    | Lặp: nhịp tham chiếu **~150 quái thường / giờ** (≈ 12 con mỗi 5 phút), 20 tinh anh / giờ. | Kỳ vọng ~180 / ~530 Linh thạch hạ mỗi giờ (cảnh giới 1) | 07 §6 (bảng kỳ vọng) |
 
 Nguyên tắc: một vòng 5 phút phải có **ít nhất một thứ nhìn thấy được** (rơi đồ, lên nấc, hoàn thành mục tiêu nhỏ) để phiên mobile 10 phút vẫn thỏa mãn.
 
@@ -86,42 +86,42 @@ Nguyên tắc: một vòng 5 phút phải có **ít nhất một thứ nhìn th�
 
 Một phiên có **một mục tiêu chính** do người chơi tự chọn từ bảng nhiệm vụ / nhật ký tu hành:
 
-| Mục tiêu phiên         | Nội dung                                                                                       | Nhịp                                                       |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Tích đủ một nấc        | Đả tọa + săn quái đến khi đủ `Req(s)`; đột phá tiểu cảnh (Base 0,90 / 0,85, không kiếp — 07 §2). | ~10–15 phút tu thuần ở nấc đầu (hệ số 1; 07 §5), tăng dần 8%/nấc |
-| Săn tinh anh / Bí cảnh | Tuyến săn tinh anh; vào bí cảnh PK; đánh boss tuần (chỉ rương lần đầu).                        | 30–60 phút                                                  |
-| Chuẩn bị đột phá lớn   | Gom đan chủ + đan phụ (tối đa 3 viên, 07 §2), trận bàn, pháp bảo phòng ngự, hộ pháp.            | Cả phiên                                                    |
-| Việc kinh tế           | Luyện đan / chế phù, đăng bán Vạn Bảo Lâu, sửa trang bị, nạp trận tông môn.                    | 10–20 phút xen kẽ                                          |
-| Nhiệm vụ ngày + tông môn | Nhiệm vụ ngày, Cống hiến, giao vật phẩm tông môn.                                             | 15–25 phút                                                  |
+| Mục tiêu phiên           | Nội dung                                                                                         | Nhịp                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Tích đủ một nấc          | Đả tọa + săn quái đến khi đủ `Req(s)`; đột phá tiểu cảnh (Base 0,90 / 0,85, không kiếp — 07 §2). | ~10–15 phút tu thuần ở nấc đầu (hệ số 1; 07 §5), tăng dần 8%/nấc |
+| Săn tinh anh / Bí cảnh   | Tuyến săn tinh anh; vào bí cảnh PK; đánh boss tuần (chỉ rương lần đầu).                          | 30–60 phút                                                       |
+| Chuẩn bị đột phá lớn     | Gom đan chủ + đan phụ (tối đa 3 viên, 07 §2), trận bàn, pháp bảo phòng ngự, hộ pháp.             | Cả phiên                                                         |
+| Việc kinh tế             | Luyện đan / chế phù, đăng bán Vạn Bảo Lâu, sửa trang bị, nạp trận tông môn.                      | 10–20 phút xen kẽ                                                |
+| Nhiệm vụ ngày + tông môn | Nhiệm vụ ngày, Cống hiến, giao vật phẩm tông môn.                                                | 15–25 phút                                                       |
 
 Giới hạn tự nhiên chống "cày một chỗ": farm liên tục quá 2 giờ trong một vùng thì tỷ lệ rơi × 0,5, hồi sau 6 giờ (07 §6) → người chơi luân chuyển vùng giữa phiên.
 
 ### 3.3 Tầng 3 — Tuần _[Thiết kế mới – chờ duyệt, trên các khóa tuần đã có ở 07]_
 
-| Chu kỳ tuần                                | Nội dung                                                                                         | Nguồn                       |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------ | --------------------------- |
-| Rương Boss bí cảnh                         | 1 lần / boss / người / tuần; giết thêm chỉ nhận Linh thạch × 0,3, không bản vẽ                   | 07 §6                       |
-| CPI tuần → thuế chợ τ                      | Thuế bán 5–10% điều chỉnh theo CPI tuần; vòng điều chỉnh hệ số kinh tế hằng tuần                 | 07 §7                       |
-| Chiến tranh Linh Mạch                      | Một cửa sổ chiến tranh mỗi tuần (mục 9.3)                                                        | _Đề xuất_                   |
-| Nhiệm vụ tuần tông môn                     | Gom Cống hiến, mở kho tông môn                                                                   | _Đề xuất_                   |
-| Ngưỡng đột phá lớn                         | Người chơi vừa dự kiến ~1–2 tuần giữa hai ngưỡng lớn ở các cảnh giới đầu                         | _Đề xuất_ (bảng 3.4)        |
-| Reset hằng ngày                            | 1 lần truyền tống miễn phí về Sơn Môn mỗi ngày; reset nhiệm vụ ngày lúc 04:00 (giờ server)       | 07 §7 / _Đề xuất_           |
+| Chu kỳ tuần            | Nội dung                                                                                   | Nguồn                |
+| ---------------------- | ------------------------------------------------------------------------------------------ | -------------------- |
+| Rương Boss bí cảnh     | 1 lần / boss / người / tuần; giết thêm chỉ nhận Linh thạch × 0,3, không bản vẽ             | 07 §6                |
+| CPI tuần → thuế chợ τ  | Thuế bán 5–10% điều chỉnh theo CPI tuần; vòng điều chỉnh hệ số kinh tế hằng tuần           | 07 §7                |
+| Chiến tranh Linh Mạch  | Một cửa sổ chiến tranh mỗi tuần (mục 9.3)                                                  | _Đề xuất_            |
+| Nhiệm vụ tuần tông môn | Gom Cống hiến, mở kho tông môn                                                             | _Đề xuất_            |
+| Ngưỡng đột phá lớn     | Người chơi vừa dự kiến ~1–2 tuần giữa hai ngưỡng lớn ở các cảnh giới đầu                   | _Đề xuất_ (bảng 3.4) |
+| Reset hằng ngày        | 1 lần truyền tống miễn phí về Sơn Môn mỗi ngày; reset nhiệm vụ ngày lúc 04:00 (giờ server) | 07 §7 / _Đề xuất_    |
 
 ### 3.4 Tầng 4 — 12 tháng: hành trình Luyện Khí → Phi Thăng _[Thiết kế mới – chờ duyệt]_
 
 Tu thuần **chỉ khoảng 47 giờ** cho cả 41 nấc (hệ số 1; 07 §5) — phần lớn thời gian trong game là thu thập tài nguyên, đan, trận, hộ pháp, thất bại và thử lại đột phá lớn. Bảng dưới đặt **mục tiêu giờ chơi** (cần mô phỏng xác nhận — OPEN-ITEMS #7):
 
-| Cảnh giới | Số nấc | Tu thuần (giờ, hệ số 1, 07 §5) | Mục tiêu giờ chơi toàn cảnh giới _(Đề xuất)_ | Tích lũy _(Đề xuất)_ |
-| --------- | ------ | ------------------------------ | -------------------------------------------- | -------------------- |
-| Luyện Khí | 9      | 2,1                            | 6                                            | 6                    |
-| Trúc Cơ   | 4      | 1,5                            | 8                                            | 14                   |
-| Kim Đan   | 4      | 2,0                            | 12                                           | 26                   |
-| Nguyên Anh | 4     | 2,8                            | 20                                           | 46                   |
-| Hóa Thần  | 4      | 3,8                            | 35                                           | 81                   |
-| Luyện Hư  | 4      | 5,1                            | 50                                           | 131                  |
-| Hợp Thể   | 4      | 7,0                            | 70                                           | 201                  |
-| Đại Thừa  | 4      | 9,5                            | 90                                           | 291                  |
-| Độ Kiếp   | 4      | 13,0                           | 120                                          | 411                  |
+| Cảnh giới  | Số nấc | Tu thuần (giờ, hệ số 1, 07 §5) | Mục tiêu giờ chơi toàn cảnh giới _(Đề xuất)_ | Tích lũy _(Đề xuất)_ |
+| ---------- | ------ | ------------------------------ | -------------------------------------------- | -------------------- |
+| Luyện Khí  | 9      | 2,1                            | 6                                            | 6                    |
+| Trúc Cơ    | 4      | 1,5                            | 8                                            | 14                   |
+| Kim Đan    | 4      | 2,0                            | 12                                           | 26                   |
+| Nguyên Anh | 4      | 2,8                            | 20                                           | 46                   |
+| Hóa Thần   | 4      | 3,8                            | 35                                           | 81                   |
+| Luyện Hư   | 4      | 5,1                            | 50                                           | 131                  |
+| Hợp Thể    | 4      | 7,0                            | 70                                           | 201                  |
+| Đại Thừa   | 4      | 9,5                            | 90                                           | 291                  |
+| Độ Kiếp    | 4      | 13,0                           | 120                                          | 411                  |
 
 (Cột "Tu thuần" tính từ `t(s) = 10 phút · 1,08^(s−1)` cộng theo nấc của từng cảnh giới; tổng 46,8 giờ khớp 07 §5.) Với người chơi vừa ~8 giờ / tuần, 411 giờ ≈ **12 tháng đến cửa Phi Thăng**. Ba cảnh giới đầu (~26 giờ) cố ý nhanh để giữ chân người mới — đây chính là phạm vi closed beta ([10](10-mvp-scope.md)).
 
@@ -140,17 +140,17 @@ Tu thuần **chỉ khoảng 47 giờ** cho cả 41 nấc (hệ số 1; 07 §5) �
 
 Khóa mở khóa (`unlocks`) và khoảng level lấy từ `realm_progression.json` (`@vgtd/shared`); cột "Hành vi trong game" là thiết kế mới.
 
-| #   | Cảnh giới | Level (07 §8) | Khóa `unlocks` (07 §8)                                  | Cơ chế mới — hành vi trong game _(Đề xuất – chờ duyệt)_                                                                                                                              | Ngưỡng lên cảnh giới sau (07 §2)         |
-| --- | --------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| 1   | Luyện Khí | 1–30          | `linh_can`, `khinh_cong`, `artifact_slot_1`             | Thức tỉnh **Linh căn** (5 hệ), **khinh công** (bước nhảy ngắn, vượt vách 1 tầng — 04 §5), ô **pháp bảo** đầu tiên.                                                                    | Base 0,70 · không kiếp                   |
-| 2   | Trúc Cơ   | 31–50         | `fly_low`, `divine_sense_50m`, `crafting`               | **Ngự kiếm bay thấp** (đi qua ô "chỉ bay qua": nước, hố; không vượt vách > 1 tầng), **thần thức 50 m** (thấy thực thể ẩn / ngắm xa; ~25 ô), **chế tác** (luyện đan, chế phù, rèn).       | Base 0,55 · Tâm Ma nhẹ                   |
-| 3   | Kim Đan   | 51–70         | `fly_free`, `natal_artifact`                            | **Bay tự do** (qua mọi vách, đi theo tầng; đây là nơi streaming 02 mở rộng vùng tải trước), **pháp bảo bản mệnh** (nhận một pháp bảo cùng lớn lên với người chơi).                       | Base 0,45 · Lôi Kiếp 3 đạo + Tâm Ma      |
-| 4   | Nguyên Anh | 71–90        | `nascent_soul_projection`, `blink`                      | **Phân thân Nguyên Anh** (xuất một phân thân thám hiểm / thu hoạch tách khỏi bản thể, ví dụ canh Linh điền hoặc đi nhiệm vụ), **dịch chuyển tức thời** ngắn (blink).                  | Base 0,35 · Lôi Kiếp 6 đạo               |
-| 5   | Hóa Thần  | 91–110        | `domain`, `upper_realm_access`                          | **Lĩnh Vực** (vùng tự dựng quanh người chơi, 5–8 ô bán kính _Đề xuất_: buff đồng đội / debuff địch theo hệ), **vào Thượng giới** (vùng bản đồ cao cấp).                              | Base 0,30 · Tâm Ma đa người              |
-| 6   | Luyện Hư  | 111–130       | `combat_clone`, `void_portal`                           | **Phân thân chiến đấu** (clone chiến đấu cùng lúc, AI điều khiển — chịu ngân sách thực thể 08), **cổng hư không** (truyền tống nhóm).                                                  | Base 0,25 · Lôi Kiếp 9 đạo               |
-| 7   | Hợp Thể   | 131–150       | `dharma_avatar`                                         | **Pháp Tướng Thiên Địa** (hóa thân khổng lồ có thời hạn; sprite 512 × 512, additive — 02 §1), chỉ số tăng theo thời hạn.                                                               | Base 0,20 · Lôi Kiếp 18 đạo              |
-| 8   | Đại Thừa  | 151–170       | `great_dao_law`                                         | **Đại Đạo Pháp Tắc** (chọn một pháp tắc làm "luật" áp lên vùng chiến: ví dụ giảm hồi chiêu, đổi hệ nền của vùng).                                                                      | Base 0,15 · Tâm Ma + Lôi Kiếp 36 đạo     |
-| 9   | Độ Kiếp   | 171–180       | `ascension_prep`                                        | **Chuẩn bị Phi Thăng**: chuỗi nhiệm vụ cuối, mở Cửu Cửu Thiên Kiếp.                                                                                                                    | Base 0,10 · Cửu Cửu Thiên Kiếp 81 đạo    |
+| #   | Cảnh giới  | Level (07 §8) | Khóa `unlocks` (07 §8)                      | Cơ chế mới — hành vi trong game _(Đề xuất – chờ duyệt)_                                                                                                                            | Ngưỡng lên cảnh giới sau (07 §2)      |
+| --- | ---------- | ------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 1   | Luyện Khí  | 1–30          | `linh_can`, `khinh_cong`, `artifact_slot_1` | Thức tỉnh **Linh căn** (5 hệ), **khinh công** (bước nhảy ngắn, vượt vách 1 tầng — 04 §5), ô **pháp bảo** đầu tiên.                                                                 | Base 0,70 · không kiếp                |
+| 2   | Trúc Cơ    | 31–50         | `fly_low`, `divine_sense_50m`, `crafting`   | **Ngự kiếm bay thấp** (đi qua ô "chỉ bay qua": nước, hố; không vượt vách > 1 tầng), **thần thức 50 m** (thấy thực thể ẩn / ngắm xa; ~25 ô), **chế tác** (luyện đan, chế phù, rèn). | Base 0,55 · Tâm Ma nhẹ                |
+| 3   | Kim Đan    | 51–70         | `fly_free`, `natal_artifact`                | **Bay tự do** (qua mọi vách, đi theo tầng; đây là nơi streaming 02 mở rộng vùng tải trước), **pháp bảo bản mệnh** (nhận một pháp bảo cùng lớn lên với người chơi).                 | Base 0,45 · Lôi Kiếp 3 đạo + Tâm Ma   |
+| 4   | Nguyên Anh | 71–90         | `nascent_soul_projection`, `blink`          | **Phân thân Nguyên Anh** (xuất một phân thân thám hiểm / thu hoạch tách khỏi bản thể, ví dụ canh Linh điền hoặc đi nhiệm vụ), **dịch chuyển tức thời** ngắn (blink).               | Base 0,35 · Lôi Kiếp 6 đạo            |
+| 5   | Hóa Thần   | 91–110        | `domain`, `upper_realm_access`              | **Lĩnh Vực** (vùng tự dựng quanh người chơi, 5–8 ô bán kính _Đề xuất_: buff đồng đội / debuff địch theo hệ), **vào Thượng giới** (vùng bản đồ cao cấp).                            | Base 0,30 · Tâm Ma đa người           |
+| 6   | Luyện Hư   | 111–130       | `combat_clone`, `void_portal`               | **Phân thân chiến đấu** (clone chiến đấu cùng lúc, AI điều khiển — chịu ngân sách thực thể 08), **cổng hư không** (truyền tống nhóm).                                              | Base 0,25 · Lôi Kiếp 9 đạo            |
+| 7   | Hợp Thể    | 131–150       | `dharma_avatar`                             | **Pháp Tướng Thiên Địa** (hóa thân khổng lồ có thời hạn; sprite 512 × 512, additive — 02 §1), chỉ số tăng theo thời hạn.                                                           | Base 0,20 · Lôi Kiếp 18 đạo           |
+| 8   | Đại Thừa   | 151–170       | `great_dao_law`                             | **Đại Đạo Pháp Tắc** (chọn một pháp tắc làm "luật" áp lên vùng chiến: ví dụ giảm hồi chiêu, đổi hệ nền của vùng).                                                                  | Base 0,15 · Tâm Ma + Lôi Kiếp 36 đạo  |
+| 9   | Độ Kiếp    | 171–180       | `ascension_prep`                            | **Chuẩn bị Phi Thăng**: chuỗi nhiệm vụ cuối, mở Cửu Cửu Thiên Kiếp.                                                                                                                | Base 0,10 · Cửu Cửu Thiên Kiếp 81 đạo |
 
 Ràng buộc kỹ thuật cho cơ chế đắt tiền (kiểm tra ở [06](06-toi-uu-render.md), [08](08-server-architecture.md)): Pháp Tướng và Lĩnh Vực tính vào ngân sách VFX (≤ 1.000 hạt Web/Mobile); phân thân chiến đấu tính vào số thực thể mỗi client (120 Mobile, 200 PC — `@vgtd/shared` `NETWORK`). Nếu vượt, tự giảm chất lượng, không bỏ cơ chế.
 
@@ -202,11 +202,11 @@ Quy tắc:
 
 Tâm Ma là **trận chiến trong "Tâm Cảnh"** — một instance riêng, tileset sẵn có + shader đảo màu / méo hình, bố cục sinh theo dữ liệu người chơi, 9 biến thể (02 §2 "Tâm cảnh").
 
-| Loại                       | Ngưỡng (07 §2)                    | Hình thức _(Đề xuất)_                                                                                                                                         |
-| -------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tâm Ma nhẹ                 | Trúc Cơ → Kim Đan                 | Solo. Một "bóng" sao chép bộ kỹ năng của chính người chơi, chỉ số = chỉ số gốc × độ khó (bên dưới). Thời hạn tối đa 90 giây _(Đề xuất)_.                         |
-| Tâm Ma + (đi kèm Lôi Kiếp) | Kim Đan → Nguyên Anh, Đại Thừa → Độ Kiếp | Như trên, thêm "Nghiệp Ảnh": mỗi 200 điểm Nghiệp Lực âm sinh một bóng phụ (tối đa 3).                                                                          |
-| Tâm Ma đa người            | Hóa Thần → Luyện Hư               | Tổ 2–4 người cùng vào một Tâm Cảnh; mỗi người đối mặt Tâm Ma của chính mình và Tâm Ma của đồng đội xen vào. Hỗ trợ được, nhưng không được "giết hộ".            |
+| Loại                       | Ngưỡng (07 §2)                           | Hình thức _(Đề xuất)_                                                                                                                                |
+| -------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tâm Ma nhẹ                 | Trúc Cơ → Kim Đan                        | Solo. Một "bóng" sao chép bộ kỹ năng của chính người chơi, chỉ số = chỉ số gốc × độ khó (bên dưới). Thời hạn tối đa 90 giây _(Đề xuất)_.             |
+| Tâm Ma + (đi kèm Lôi Kiếp) | Kim Đan → Nguyên Anh, Đại Thừa → Độ Kiếp | Như trên, thêm "Nghiệp Ảnh": mỗi 200 điểm Nghiệp Lực âm sinh một bóng phụ (tối đa 3).                                                                |
+| Tâm Ma đa người            | Hóa Thần → Luyện Hư                      | Tổ 2–4 người cùng vào một Tâm Cảnh; mỗi người đối mặt Tâm Ma của chính mình và Tâm Ma của đồng đội xen vào. Hỗ trợ được, nhưng không được "giết hộ". |
 
 **Độ khó Tâm Ma:** `Strength = 1,0 + 0,5 · (1 − ĐạoTâm/100) + Phạt_nghiệp`, với `ĐạoTâm ∈ [0, 100]` và `Phạt_nghiệp = max(0, −K)/2000` _(toàn bộ là Đề xuất)_. Đạo Tâm cao → Tâm Ma yếu tới mức 1,0; Đạo Tâm thấp và nghiệp nặng → Tâm Ma mạnh nhất ~2,0 (Đạo Tâm 0, K = −1000). **Định Tâm Đan** (phụ đan của 07) giảm thêm Strength 10% × phẩm q.
 
@@ -226,11 +226,11 @@ Gốc: mô tả định tính (số đạo, telegraph). Hiện hành: **sát th�
 4. **Khóa hồi phục.** Đan hồi máu thường bị khóa trong kiếp; chỉ Hộ Mạch Đan (20% HP_ref, hồi chiêu 45 s) dùng được (07 §3).
 5. **Kết cục.** Sống sót hết W đợt → thăng cảnh giới. Chết giữa kiếp → thất bại với hậu quả theo **tiến độ kiếp đã qua**:
 
-| Mức hậu quả | Tiến độ kiếp đã qua _(Đề xuất)_ | Hậu quả _(Đề xuất, ngoài các giá trị đã có)_                                                                                       |
-| ----------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Nhẹ**     | ≥ 2/3 số đợt                     | Mất 15% độ bền mọi món đang mặc (07 §7); giữ nguyên tu vi.                                                                         |
-| **Trung**   | 1/3 đến < 2/3                    | Như Nhẹ + mất 25% tu vi của nấc hiện tại + buff xấu "Đạo Cơ Chấn Động" 24 giờ (−10% chỉ số gốc).                                     |
-| **Nặng**    | < 1/3                            | Như Nhẹ + mất 50% tu vi của nấc hiện tại + "Đạo Cơ Chấn Động" 72 giờ (−20% chỉ số gốc); đan đã dùng mất hết.                         |
+| Mức hậu quả | Tiến độ kiếp đã qua _(Đề xuất)_ | Hậu quả _(Đề xuất, ngoài các giá trị đã có)_                                                                 |
+| ----------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Nhẹ**     | ≥ 2/3 số đợt                    | Mất 15% độ bền mọi món đang mặc (07 §7); giữ nguyên tu vi.                                                   |
+| **Trung**   | 1/3 đến < 2/3                   | Như Nhẹ + mất 25% tu vi của nấc hiện tại + buff xấu "Đạo Cơ Chấn Động" 24 giờ (−10% chỉ số gốc).             |
+| **Nặng**    | < 1/3                           | Như Nhẹ + mất 50% tu vi của nấc hiện tại + "Đạo Cơ Chấn Động" 72 giờ (−20% chỉ số gốc); đan đã dùng mất hết. |
 
 > **Lưu ý nguồn:** 07 §3 viết "mức hậu quả Nhẹ / Trung / Nặng **như trong GDD**" — nhưng GDD gốc không còn trong hồ sơ, nên **ba mức và nội dung của chúng ở trên là dựng lại / thiết kế mới**. Chủ dự án cần đối chiếu với GDD gốc (nếu còn) — xem _Câu hỏi cần chốt_. Ở mọi mức, **không rớt cảnh giới lớn** (00 §3–4).
 
@@ -275,36 +275,36 @@ Tóm tắt (chi tiết ở [11](11-he-phai-ky-nang.md)):
 
 Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần), trừ điểm neo Ma (K ≤ −700) lấy từ 07:
 
-| Dải               | K (Đề xuất, trừ mốc −700 của 07) | Nhãn      | Karma_Penalty (07 §2) | Ghi chú                                         |
-| ----------------- | --------------------------------- | --------- | ---------------------- | ----------------------------------------------- |
-| Chính             | ≥ +200                            | Chính đạo | 0                      | Hưởng lợi thế riêng (bảng 8.3)                  |
-| Trung lập         | −199 … +199                       | —         | 0 … 4 điểm %           | Chưa vào đạo                                    |
-| Tà                | −699 … −200                       | Tà đạo    | 4 … 14 điểm %          | Tu nhanh hơn, đột phá khó hơn                   |
-| Ma                | ≤ −700                            | Ma đạo    | 14 … 20 điểm %         | Độ bền × 1,5 (07 §7)                            |
+| Dải       | K (Đề xuất, trừ mốc −700 của 07) | Nhãn      | Karma_Penalty (07 §2) | Ghi chú                        |
+| --------- | -------------------------------- | --------- | --------------------- | ------------------------------ |
+| Chính     | ≥ +200                           | Chính đạo | 0                     | Hưởng lợi thế riêng (bảng 8.3) |
+| Trung lập | −199 … +199                      | —         | 0 … 4 điểm %          | Chưa vào đạo                   |
+| Tà        | −699 … −200                      | Tà đạo    | 4 … 14 điểm %         | Tu nhanh hơn, đột phá khó hơn  |
+| Ma        | ≤ −700                           | Ma đạo    | 14 … 20 điểm %        | Độ bền × 1,5 (07 §7)           |
 
 ### 8.3 Lợi thế và đánh đổi từng dải _[Thiết kế mới – chờ duyệt]_
 
 07 cố ý **không** cộng tỷ lệ đột phá cho nghiệp thiện ("lợi thế của Chính đạo nằm ở chỗ khác"). Các lợi thế đó, đề xuất:
 
-| Dải       | Lợi thế                                                                                              | Đánh đổi                                                                                       |
-| --------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Chính     | Đạo Tâm tối đa 100; Tâm Ma yếu hơn (công thức 5.3); giảm 5% giá NPC; vào Sơn Môn Chính đạo tự do; hộ pháp Lôi Kiếp tin cậy (đồng đạo Chính nhận thưởng "Hộ Đạo"). | Tu vi hấp thu × 1,0 (không bonus); ít nguồn "tiền nóng" từ PK.                                   |
-| Trung lập | Linh hoạt, không ràng buộc.                                                                          | Không có bonus phe.                                                                            |
-| Tà        | Hấp thu tu vi × 1,10; Linh thạch rơi × 1,10 (xem 8.4).                                               | Đạo Tâm tối đa 80; Karma_Penalty 4–14 điểm %.                                                  |
-| Ma        | Hấp thu tu vi × 1,20 (hiện thực hóa "Ma đạo tu nhanh", 07 §2); Linh thạch rơi × 1,20; hút máu nhẹ khi PvP _(Đề xuất)_. | Đạo Tâm tối đa 60; Karma_Penalty 14–20 điểm %; độ bền × 1,5; Hộ Sơn Đại Trận Chính đạo gây suy yếu nhẹ khi vào. |
+| Dải       | Lợi thế                                                                                                                                                           | Đánh đổi                                                                                                        |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Chính     | Đạo Tâm tối đa 100; Tâm Ma yếu hơn (công thức 5.3); giảm 5% giá NPC; vào Sơn Môn Chính đạo tự do; hộ pháp Lôi Kiếp tin cậy (đồng đạo Chính nhận thưởng "Hộ Đạo"). | Tu vi hấp thu × 1,0 (không bonus); ít nguồn "tiền nóng" từ PK.                                                  |
+| Trung lập | Linh hoạt, không ràng buộc.                                                                                                                                       | Không có bonus phe.                                                                                             |
+| Tà        | Hấp thu tu vi × 1,10; Linh thạch rơi × 1,10 (xem 8.4).                                                                                                            | Đạo Tâm tối đa 80; Karma_Penalty 4–14 điểm %.                                                                   |
+| Ma        | Hấp thu tu vi × 1,20 (hiện thực hóa "Ma đạo tu nhanh", 07 §2); Linh thạch rơi × 1,20; hút máu nhẹ khi PvP _(Đề xuất)_.                                            | Đạo Tâm tối đa 60; Karma_Penalty 14–20 điểm %; độ bền × 1,5; Hộ Sơn Đại Trận Chính đạo gây suy yếu nhẹ khi vào. |
 
 ### 8.4 Nghiệp Lực: nguồn thay đổi _[Thiết kế mới – chờ duyệt]_
 
-| Hành vi                                                       | ΔK _(Đề xuất)_                         | Giới hạn                       |
-| ------------------------------------------------------------- | -------------------------------------- | ------------------------------ |
-| Hoàn thành nhiệm vụ nhân nghĩa / tông môn Chính đạo           | +2 … +10                               | +60 / ngày                     |
-| Hộ pháp Lôi Kiếp cho người khác                               | +15                                    | 1 lần / người / ngày           |
-| Giết người chơi có K ≥ 0 ngoài chiến tranh, ngoài lôi đài     | −40                                    | −200 / ngày                    |
-| Giết người chơi thấp hơn ≥ 1 cảnh giới                        | −60 (thay vì −40)                      | chung giới hạn trên            |
-| Giết người chơi Tà / Ma (K < −200) tại vùng PK                | +10                                    | +50 / ngày                     |
-| Giết trong chiến tranh Linh Mạch chính danh (mục 9.3), lôi đài | 0                                      | —                              |
-| Phá Trận Nhãn / cướp Linh Mạch đối phương (chiến tranh)       | 0 (chính danh)                         | —                              |
-| Nghiệp tự phai                                                | Về 0 với tốc độ 1% giá trị / ngày (chỉ khi K < 0) | Nghiệp thiện không phai |
+| Hành vi                                                        | ΔK _(Đề xuất)_                                    | Giới hạn                |
+| -------------------------------------------------------------- | ------------------------------------------------- | ----------------------- |
+| Hoàn thành nhiệm vụ nhân nghĩa / tông môn Chính đạo            | +2 … +10                                          | +60 / ngày              |
+| Hộ pháp Lôi Kiếp cho người khác                                | +15                                               | 1 lần / người / ngày    |
+| Giết người chơi có K ≥ 0 ngoài chiến tranh, ngoài lôi đài      | −40                                               | −200 / ngày             |
+| Giết người chơi thấp hơn ≥ 1 cảnh giới                         | −60 (thay vì −40)                                 | chung giới hạn trên     |
+| Giết người chơi Tà / Ma (K < −200) tại vùng PK                 | +10                                               | +50 / ngày              |
+| Giết trong chiến tranh Linh Mạch chính danh (mục 9.3), lôi đài | 0                                                 | —                       |
+| Phá Trận Nhãn / cướp Linh Mạch đối phương (chiến tranh)        | 0 (chính danh)                                    | —                       |
+| Nghiệp tự phai                                                 | Về 0 với tốc độ 1% giá trị / ngày (chỉ khi K < 0) | Nghiệp thiện không phai |
 
 ### 8.5 Nghiệp báo, nhân quả, rơi đồ theo nghiệp _[Thiết kế mới – chờ duyệt]_
 
@@ -324,14 +324,14 @@ Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần)
 
 ### 9.2 Tông môn _[Thiết kế mới – chờ duyệt]_
 
-| Hạng mục       | Thiết kế                                                                                                                                                                                       |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Phe tông môn   | Mỗi tông môn có **phe** Chính / Tà / Ma quyết định kit kiến trúc và theme UI (02 §2, §5). Đệ tử có K lệch hẳn khỏi phe tông (cách ≥ 600 điểm) bị cảnh cáo, sau 7 ngày bị trục xuất.           |
-| Chức vị        | Ngoại môn đệ tử → Nội môn đệ tử → Chân truyền → Trưởng lão → Chưởng môn. Chức vị cấp theo cảnh giới + Cống hiến + biểu quyết.                                                                  |
-| Cống hiến      | Tiền tệ tông môn, kiếm từ nhiệm vụ tông môn / nạp tài nguyên / chiến tranh; **không giao dịch được**; tiêu ở kho tông môn (bí tịch, đan, trận bàn).                                              |
-| Tông môn đầu   | Beta: một **Sơn Môn Đại Phái** (Chính đạo; 04 §5) — NPC, không do người chơi lập. Người chơi tự lập tông môn là thiết kế sau closed beta.                                                       |
-| Sơn Môn        | Thành chính, vùng an toàn, 5 tầng (04 §5): cổng + chợ đệ tử, quảng trường luyện võ (lôi đài 12 × 12), Tàng Kinh Các / Đan Phòng / Luyện Khí Đường, Đại điện (5 Trận Nhãn), Hậu sơn (Động Phủ). |
-| Kho tông môn   | Do Trưởng lão quản; gửi / rút theo chức vị; mọi giao dịch ghi sổ.                                                                                                                              |
+| Hạng mục     | Thiết kế                                                                                                                                                                                       |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Phe tông môn | Mỗi tông môn có **phe** Chính / Tà / Ma quyết định kit kiến trúc và theme UI (02 §2, §5). Đệ tử có K lệch hẳn khỏi phe tông (cách ≥ 600 điểm) bị cảnh cáo, sau 7 ngày bị trục xuất.            |
+| Chức vị      | Ngoại môn đệ tử → Nội môn đệ tử → Chân truyền → Trưởng lão → Chưởng môn. Chức vị cấp theo cảnh giới + Cống hiến + biểu quyết.                                                                  |
+| Cống hiến    | Tiền tệ tông môn, kiếm từ nhiệm vụ tông môn / nạp tài nguyên / chiến tranh; **không giao dịch được**; tiêu ở kho tông môn (bí tịch, đan, trận bàn).                                            |
+| Tông môn đầu | Beta: một **Sơn Môn Đại Phái** (Chính đạo; 04 §5) — NPC, không do người chơi lập. Người chơi tự lập tông môn là thiết kế sau closed beta.                                                      |
+| Sơn Môn      | Thành chính, vùng an toàn, 5 tầng (04 §5): cổng + chợ đệ tử, quảng trường luyện võ (lôi đài 12 × 12), Tàng Kinh Các / Đan Phòng / Luyện Khí Đường, Đại điện (5 Trận Nhãn), Hậu sơn (Động Phủ). |
+| Kho tông môn | Do Trưởng lão quản; gửi / rút theo chức vị; mọi giao dịch ghi sổ.                                                                                                                              |
 
 ### 9.3 Linh Mạch và Hộ Sơn Đại Trận _[Thiết kế mới – chờ duyệt]_
 
@@ -339,20 +339,20 @@ Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần)
 
 **Hộ Sơn Đại Trận** (vòm L5 bán trong suốt + shader nứt / tan; **5 Trận Nhãn** ở Đại điện — 04 §5):
 
-| Thành phần       | Thiết kế _(Đề xuất)_                                                                                                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Năng lượng trận  | Thanh 0–100%, nạp bằng Linh thạch / trận bàn (kênh sink "Nạp Hộ Sơn Đại Trận, phí duy trì Linh Mạch" ≈ 15% tổng tiêu hao mục tiêu, 07 §7). Giảm dần khi bị công phá.                                  |
-| Hiệu ứng         | Khi trận còn ≥ 50% năng lượng: người xâm nhập trong vòm chịu suy yếu nhẹ (−10% Công, −10% Thân pháp), đệ tử tông môn hồi Chân Nguyên + 20% tốc độ hồi. Dưới 50%: hiệu ứng giảm một nửa. Hết: tắt.        |
-| Trận Nhãn        | 5 Trận Nhãn, mỗi cái có thanh Khí riêng; phá ≥ 3 Trận Nhãn thì vòm "tan" và Linh Mạch Tâm mở để chiếm.                                                                                               |
-| Chiếm Linh Mạch Tâm | Đứng trong vòng chiếm giữ 120 giây liên tục (bị gián đoạn khi chết / bị đẩy khỏi vòng); bên chiếm giữ nắm Linh Mạch đến cửa sổ chiến tranh sau.                                                    |
+| Thành phần          | Thiết kế _(Đề xuất)_                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Năng lượng trận     | Thanh 0–100%, nạp bằng Linh thạch / trận bàn (kênh sink "Nạp Hộ Sơn Đại Trận, phí duy trì Linh Mạch" ≈ 15% tổng tiêu hao mục tiêu, 07 §7). Giảm dần khi bị công phá.                              |
+| Hiệu ứng            | Khi trận còn ≥ 50% năng lượng: người xâm nhập trong vòm chịu suy yếu nhẹ (−10% Công, −10% Thân pháp), đệ tử tông môn hồi Chân Nguyên + 20% tốc độ hồi. Dưới 50%: hiệu ứng giảm một nửa. Hết: tắt. |
+| Trận Nhãn           | 5 Trận Nhãn, mỗi cái có thanh Khí riêng; phá ≥ 3 Trận Nhãn thì vòm "tan" và Linh Mạch Tâm mở để chiếm.                                                                                            |
+| Chiếm Linh Mạch Tâm | Đứng trong vòng chiếm giữ 120 giây liên tục (bị gián đoạn khi chết / bị đẩy khỏi vòng); bên chiếm giữ nắm Linh Mạch đến cửa sổ chiến tranh sau.                                                   |
 
 **Chu kỳ tuần** _(Đề xuất)_:
 
-| Ngày       | Sự kiện                                                                                             |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| Thứ 2 – 5  | **Tuyên chiến:** tông môn đủ điều kiện (số thành viên tối thiểu) đăng ký tấn công một Linh Mạch.      |
-| Thứ 7      | **Cửa sổ chiến tranh 2 giờ:** Zone Sơn Môn chuyển An toàn → PK, Hộ Sơn Đại Trận bật (04 §5). Quy mô trần **100 vs 100** (đúng kịch bản đo AOI ở OPEN-ITEMS #6; băng thông ~25 KB/s). |
-| Chủ nhật   | **Kết toán:** Linh Mạch đổi chủ (nếu có), phần thưởng Cống hiến, thuế lãnh thổ chia cho tông môn.   |
+| Ngày      | Sự kiện                                                                                                                                                                              |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Thứ 2 – 5 | **Tuyên chiến:** tông môn đủ điều kiện (số thành viên tối thiểu) đăng ký tấn công một Linh Mạch.                                                                                     |
+| Thứ 7     | **Cửa sổ chiến tranh 2 giờ:** Zone Sơn Môn chuyển An toàn → PK, Hộ Sơn Đại Trận bật (04 §5). Quy mô trần **100 vs 100** (đúng kịch bản đo AOI ở OPEN-ITEMS #6; băng thông ~25 KB/s). |
+| Chủ nhật  | **Kết toán:** Linh Mạch đổi chủ (nếu có), phần thưởng Cống hiến, thuế lãnh thổ chia cho tông môn.                                                                                    |
 
 **Chống lệch quy mô / cảnh giới:** Suppress −15% mỗi cảnh giới chênh (07 §4) đã bảo vệ người thấp cảnh; thêm giới hạn "phe tấn công ≤ 100 người, phe thủ ≤ 100". Chiến tranh Linh Mạch là **ngoài MVP closed beta** ([10](10-mvp-scope.md)).
 
@@ -366,14 +366,14 @@ Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần)
 
 ### 10.2 Tổng quan hệ thống kinh tế _[Số liệu từ 07; mô tả vai trò: Thiết kế mới – chờ duyệt]_
 
-| Tiền tệ                | Giá trị                                                    | Cách kiếm                                                                    | Cách tiêu                                                                                     | Giao dịch      |
-| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------- |
-| Linh thạch hạ phẩm     | 1 (đơn vị gốc)                                             | Quái, tinh anh, boss, nhiệm vụ (07 §6)                                       | Sửa đồ, truyền tống, phí niêm yết, đan, vật liệu                                              | Có             |
-| Linh thạch trung phẩm  | 100 hạ                                                     | Tinh anh (8%), boss (100%) — 07 §6                                           | Đột phá, nạp trận, giao dịch giá trị vừa                                                      | Có             |
-| Linh thạch thượng phẩm | 10.000 hạ                                                  | Tinh anh (0,1%), boss (12%) — 07 §6                                          | Đột phá cao, Đấu Giá Hội                                                                      | Có             |
-| Đổi lên phẩm           | Phí 5% (kênh sink, 07 §7)                                  | —                                                                            | —                                                                                             | —              |
-| **Cống hiến**          | Điểm tông môn                                              | Nhiệm vụ tông môn, chiến tranh                                               | Kho tông môn                                                                                  | **Không**      |
-| **Tiên Ngọc**          | Tiền cao cấp — **chưa thiết kế đầy đủ** (OPEN-ITEMS)       | Nguyên tắc _Đề xuất_ bên dưới                                                | Cosmetic, tiện lợi, slot; **không bán trực tiếp đan đột phá hay sức mạnh gốc**                | Xem câu hỏi    |
+| Tiền tệ                | Giá trị                                              | Cách kiếm                              | Cách tiêu                                                                      | Giao dịch   |
+| ---------------------- | ---------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------ | ----------- |
+| Linh thạch hạ phẩm     | 1 (đơn vị gốc)                                       | Quái, tinh anh, boss, nhiệm vụ (07 §6) | Sửa đồ, truyền tống, phí niêm yết, đan, vật liệu                               | Có          |
+| Linh thạch trung phẩm  | 100 hạ                                               | Tinh anh (8%), boss (100%) — 07 §6     | Đột phá, nạp trận, giao dịch giá trị vừa                                       | Có          |
+| Linh thạch thượng phẩm | 10.000 hạ                                            | Tinh anh (0,1%), boss (12%) — 07 §6    | Đột phá cao, Đấu Giá Hội                                                       | Có          |
+| Đổi lên phẩm           | Phí 5% (kênh sink, 07 §7)                            | —                                      | —                                                                              | —           |
+| **Cống hiến**          | Điểm tông môn                                        | Nhiệm vụ tông môn, chiến tranh         | Kho tông môn                                                                   | **Không**   |
+| **Tiên Ngọc**          | Tiền cao cấp — **chưa thiết kế đầy đủ** (OPEN-ITEMS) | Nguyên tắc _Đề xuất_ bên dưới          | Cosmetic, tiện lợi, slot; **không bán trực tiếp đan đột phá hay sức mạnh gốc** | Xem câu hỏi |
 
 **Nguyên tắc Tiên Ngọc** _(Đề xuất – chờ duyệt; hạn chế rủi ro P2 "Cảnh giới là vua" và P6)_: (1) không mua được trực tiếp tỷ lệ đột phá, đan chủ, Linh thạch số lượng lớn; (2) không chuyển đổi trực tiếp thành Linh thạch (tránh mất cân đối sink / source); (3) closed beta: **không bật** Tiên Ngọc, không thu tiền thật.
 
@@ -385,24 +385,24 @@ Phe là **hàm của Nghiệp Lực K** (không phải lựa chọn một lần)
 
 ### 10.4 Vạn Bảo Lâu và Đấu Giá Hội _[Thiết kế mới – chờ duyệt]_
 
-| Hạng mục        | Vạn Bảo Lâu (chợ)                                                                                         | Đấu Giá Hội                                                                                              |
-| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Vai trò         | Chợ người-với-người, niêm yết giá cố định hoặc đấu giá ngắn.                                              | Sự kiện đấu giá định kỳ (mỗi tuần) cho vật phẩm hiếm do **hệ thống** đưa vào.                              |
-| Thuế            | Niêm yết 1% (tối thiểu 1 hạ, không hoàn) + thuế bán τ 5–10% theo CPI (07 §7); chuyển trực tiếp 3%.         | **100% giá thắng thầu bị hủy** (không trả cho ai) — sink Linh thạch thượng phẩm.                         |
-| Vật phẩm        | Mọi vật phẩm giao dịch được: nguyên liệu, đan, bản vẽ, phù, trang bị.                                      | Bản vẽ pháp bảo Vàng – Đỏ, đan đột phá cấp cao, cosmetic hiếm _(Đề xuất)_.                               |
-| Chống thao túng | Giới hạn số niêm yết đồng thời; giá sàn / trần theo biên quanh giá trung bình tuần (biên: xem _Câu hỏi cần chốt_ G13); log sổ cái kép (08).    | Giới hạn mỗi tài khoản 1 lần thắng / vật phẩm / tuần.                                                    |
+| Hạng mục        | Vạn Bảo Lâu (chợ)                                                                                                                           | Đấu Giá Hội                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Vai trò         | Chợ người-với-người, niêm yết giá cố định hoặc đấu giá ngắn.                                                                                | Sự kiện đấu giá định kỳ (mỗi tuần) cho vật phẩm hiếm do **hệ thống** đưa vào.    |
+| Thuế            | Niêm yết 1% (tối thiểu 1 hạ, không hoàn) + thuế bán τ 5–10% theo CPI (07 §7); chuyển trực tiếp 3%.                                          | **100% giá thắng thầu bị hủy** (không trả cho ai) — sink Linh thạch thượng phẩm. |
+| Vật phẩm        | Mọi vật phẩm giao dịch được: nguyên liệu, đan, bản vẽ, phù, trang bị.                                                                       | Bản vẽ pháp bảo Vàng – Đỏ, đan đột phá cấp cao, cosmetic hiếm _(Đề xuất)_.       |
+| Chống thao túng | Giới hạn số niêm yết đồng thời; giá sàn / trần theo biên quanh giá trung bình tuần (biên: xem _Câu hỏi cần chốt_ G13); log sổ cái kép (08). | Giới hạn mỗi tài khoản 1 lần thắng / vật phẩm / tuần.                            |
 
 ## 11. Động Phủ _[Thiết kế mới – chờ duyệt, trên đặc tả kỹ thuật 04 §6]_
 
 **Động Phủ** là không gian riêng của người chơi trong khu **Hậu sơn** Sơn Môn (lớp Buildable; 04 §5). Công trình đặt theo lưới ô, snap-to-grid, server lưu mỗi công trình bằng 4 giá trị (mã, ô gốc i₀ / j₀, xoay; 04 §6).
 
-| Công trình    | Footprint | Chức năng (04 §6)                                                    | Vai trò trong gameplay                                                                |
-| ------------- | --------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Bồ đoàn thiền | 1 × 1     | Tăng tốc tu luyện khi đả tọa                                         | Đả tọa an toàn tại nhà: ρ nền 1,0 (07 §5) + bonus bồ đoàn                              |
-| Linh điền     | 2 × 2     | Trồng 4 cây Tiên Dược (4 trạng thái)                                 | Nguồn dược liệu cho Luyện đan; thời gian lớn theo phẩm giống                          |
-| Tụ linh trận  | 3 × 3     | Vùng 5 × 5: Linh điền lớn nhanh +20%, Bồ đoàn +10% tu luyện          | Công trình then chốt, tiêu nạp trận bàn định kỳ (sink)                                |
-| Đan lô        | 2 × 2     | Luyện đan                                                            | Thợ đan người chơi (cần `crafting` ở Trúc Cơ)                                         |
-| Giá kinh thư  | 1 × 2     | Đọc công pháp, trang trí                                             | Lưu bí tịch / công pháp đã đọc                                                        |
+| Công trình    | Footprint | Chức năng (04 §6)                                           | Vai trò trong gameplay                                       |
+| ------------- | --------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Bồ đoàn thiền | 1 × 1     | Tăng tốc tu luyện khi đả tọa                                | Đả tọa an toàn tại nhà: ρ nền 1,0 (07 §5) + bonus bồ đoàn    |
+| Linh điền     | 2 × 2     | Trồng 4 cây Tiên Dược (4 trạng thái)                        | Nguồn dược liệu cho Luyện đan; thời gian lớn theo phẩm giống |
+| Tụ linh trận  | 3 × 3     | Vùng 5 × 5: Linh điền lớn nhanh +20%, Bồ đoàn +10% tu luyện | Công trình then chốt, tiêu nạp trận bàn định kỳ (sink)       |
+| Đan lô        | 2 × 2     | Luyện đan                                                   | Thợ đan người chơi (cần `crafting` ở Trúc Cơ)                |
+| Giá kinh thư  | 1 × 2     | Đọc công pháp, trang trí                                    | Lưu bí tịch / công pháp đã đọc                               |
 
 Đề xuất mở rộng (chưa có trong 04): **diện tích Động Phủ tăng theo cảnh giới** (ví dụ 12 × 12 ô từ Luyện Khí 9 → 16 × 16 ở Kim Đan → …), **thăm viếng** (người khác xem nhưng không phá), **trộm dược** có giới hạn nhân quả (mục 8.5). Thời gian lớn của Linh điền, giới hạn trộm: _Câu hỏi cần chốt_.
 
@@ -422,27 +422,27 @@ Sửa 1% độ bền tốn 0,4% giá trị gốc (07 §7). Độ bền về 0 th
 
 ### 12.2 Quy tắc hồi sinh và hình phạt _[Thiết kế mới – chờ duyệt]_
 
-| Tình huống                  | Hồi sinh                                                                                  | Tu vi                                         | Vật phẩm                                                                            |
-| --------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Chết khi săn quái (PvE)     | Điểm hồi sinh gần nhất (lớp Spawn, 04 §4) sau 10 giây, hoặc tại chỗ bằng Hồi Sinh Phù (có phí) | Không mất                                     | Không rơi; −8% độ bền; buff "Hư Nhược" 60 giây (−20% chỉ số) _(Đề xuất)_            |
-| Chết trong PvP ở vùng PK    | Điểm hồi sinh của bản đồ                                                                  | Không mất                                     | Không rơi (Chính / Trung lập); Tà / Ma có thể rơi theo mục 8.5; −4% độ bền          |
-| Chết trong chiến tranh      | Điểm hồi sinh phe (cách xa Linh Mạch Tâm), chờ 30 giây _(Đề xuất)_                         | Không mất                                     | Không rơi; −4% độ bền                                                                |
-| Chết trong Tâm Cảnh         | Thoát Tâm Cảnh về ngoài                                                                   | Không mất                                     | Mất đan đã dùng; không phạt độ bền                                                  |
-| Chết trong Lôi Kiếp         | Về điểm hồi sinh                                                                          | Theo mức Nhẹ / Trung / Nặng (mục 5.4)         | −15% độ bền                                                                          |
+| Tình huống               | Hồi sinh                                                                                       | Tu vi                                 | Vật phẩm                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------- |
+| Chết khi săn quái (PvE)  | Điểm hồi sinh gần nhất (lớp Spawn, 04 §4) sau 10 giây, hoặc tại chỗ bằng Hồi Sinh Phù (có phí) | Không mất                             | Không rơi; −8% độ bền; buff "Hư Nhược" 60 giây (−20% chỉ số) _(Đề xuất)_   |
+| Chết trong PvP ở vùng PK | Điểm hồi sinh của bản đồ                                                                       | Không mất                             | Không rơi (Chính / Trung lập); Tà / Ma có thể rơi theo mục 8.5; −4% độ bền |
+| Chết trong chiến tranh   | Điểm hồi sinh phe (cách xa Linh Mạch Tâm), chờ 30 giây _(Đề xuất)_                             | Không mất                             | Không rơi; −4% độ bền                                                      |
+| Chết trong Tâm Cảnh      | Thoát Tâm Cảnh về ngoài                                                                        | Không mất                             | Mất đan đã dùng; không phạt độ bền                                         |
+| Chết trong Lôi Kiếp      | Về điểm hồi sinh                                                                               | Theo mức Nhẹ / Trung / Nặng (mục 5.4) | −15% độ bền                                                                |
 
 Nguyên tắc: **không rớt cảnh giới lớn** (00), không mất trang bị đang mặc, không mất tiền khi chết thường — hình phạt đủ nhẹ cho người chơi mobile, nặng ở nơi đáng nặng (Lôi Kiếp, PvP của kẻ nghiệp xấu).
 
 ## 13. Xã hội _[Thiết kế mới – chờ duyệt]_
 
-| Hệ thống         | Thiết kế                                                                                                                                         | Nguồn / ràng buộc                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| Chat             | Kênh Thế giới, Vùng, Đội, Tông môn, Thì thầm; PC có khung chat cố định, Mobile chat gọn.                                                         | UI/UX 05                                               |
-| Bạn bè           | Danh sách bạn, trạng thái online, chat riêng; **Đạo Lữ** (cặp đôi) và **Sư đồ** để sau beta.                                                      | _Đề xuất_                                              |
-| Tổ đội           | 2–4 người (tối đa 4 cho beta); **personal loot hệ số 1/√n** (07 §6); chia sẻ tương sinh Ngũ hành (hồi 10% Chân Nguyên, 07 §4).                    | 07                                                     |
-| Giao dịch        | Trực tiếp 3% (07), Vạn Bảo Lâu (mục 10.4).                                                                                                       | 07                                                     |
-| Tông môn         | Mục 9.                                                                                                                                           | —                                                      |
-| An toàn xã hội   | Chặn, tắt chat, báo cáo; PK chỉ ở vùng PK (Zone layer, 04 §4) — vùng an toàn không bị tấn công; spam chat có giới hạn tần số.                      | 08 (token bucket) / _Đề xuất_                          |
-| Hộ pháp Lôi Kiếp | Mối quan hệ xã hội đặc biệt: ân duyên (mục 8.5).                                                                                                 | 07 §3                                                  |
+| Hệ thống         | Thiết kế                                                                                                                       | Nguồn / ràng buộc             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| Chat             | Kênh Thế giới, Vùng, Đội, Tông môn, Thì thầm; PC có khung chat cố định, Mobile chat gọn.                                       | UI/UX 05                      |
+| Bạn bè           | Danh sách bạn, trạng thái online, chat riêng; **Đạo Lữ** (cặp đôi) và **Sư đồ** để sau beta.                                   | _Đề xuất_                     |
+| Tổ đội           | 2–4 người (tối đa 4 cho beta); **personal loot hệ số 1/√n** (07 §6); chia sẻ tương sinh Ngũ hành (hồi 10% Chân Nguyên, 07 §4). | 07                            |
+| Giao dịch        | Trực tiếp 3% (07), Vạn Bảo Lâu (mục 10.4).                                                                                     | 07                            |
+| Tông môn         | Mục 9.                                                                                                                         | —                             |
+| An toàn xã hội   | Chặn, tắt chat, báo cáo; PK chỉ ở vùng PK (Zone layer, 04 §4) — vùng an toàn không bị tấn công; spam chat có giới hạn tần số.  | 08 (token bucket) / _Đề xuất_ |
+| Hộ pháp Lôi Kiếp | Mối quan hệ xã hội đặc biệt: ân duyên (mục 8.5).                                                                               | 07 §3                         |
 
 ## 14. Vật phẩm & phẩm chất _[Giữ nguyên; Cập nhật §4]_
 
@@ -459,18 +459,18 @@ Nguyên tắc: **không rớt cảnh giới lớn** (00), không mất trang b�
 
 Mỗi dòng: câu hỏi → **mặc định đề xuất** (sẽ dùng nếu không có phản hồi).
 
-| #   | Câu hỏi                                                                                                                                                                       | Mặc định đề xuất                                                                                                             |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| G1  | Ba mức hậu quả Lôi Kiếp "Nhẹ / Trung / Nặng" của GDD gốc có nội dung gì? (07 §3 chỉ dẫn "như trong GDD", GDD gốc không còn.)                                                    | Dùng bảng 5.4 ở trên; chủ dự án đối chiếu nếu còn bản gốc.                                                                    |
-| G2  | Thứ tự kiếp / roll: roll Thiên Mệnh **trước** Lôi Kiếp (thất bại rẻ sớm) hay **sau**?                                                                                          | **Roll trước** (5.2).                                                                                                        |
-| G3  | Thua Tâm Ma có tính `n_fail` (pity) không?                                                                                                                                      | **Không** (chống nạp pity cố ý).                                                                                             |
-| G4  | Dải phe theo Nghiệp Lực (Chính ≥ +200, Tà −699…−200, Ma ≤ −700) và các hệ số ở 8.3 có phù hợp ý đồ?                                                                              | Giữ như 8.2–8.3; sẽ chỉnh sau mô phỏng kinh tế.                                                                              |
-| G5  | Ma đạo có bị cấm vào Sơn Môn Chính đạo? Ở beta (không có Ma sect) người rớt K ≤ −700 sẽ kẹt?                                                                                    | Không cấm; chỉ suy yếu nhẹ. Ma tông môn làm sau beta.                                                                        |
-| G6  | Linh Mạch: 5 phẩm (07 §5 công thức ρ) hay 6 phẩm (02 §2 vẽ 6)?                                                                                                                  | Giữ **5 phẩm** cho công thức; phẩm 6 dành cho Linh Mạch Tâm đặc biệt sau này — cần chủ dự án xác nhận để cập nhật 02 hoặc 07. |
-| G7  | Tiên Ngọc: mua bằng tiền thật? tặng? giao dịch được giữa người chơi?                                                                                                            | Beta tắt; sau beta bán cosmetic + tiện lợi, không giao dịch, không đổi sang Linh thạch.                                      |
-| G8  | Sau Phi Thăng: Trọng sinh giữ hay roll lại Linh căn? Mức Đạo Vận?                                                                                                               | Roll lại có đảm bảo ≥ 1 lần reroll; Đạo Vận ≤ +5% tốc độ tu mỗi kiếp.                                                        |
-| G9  | Đấu Giá Hội hủy 100% giá thắng (vật do hệ thống đưa vào) có chấp nhận được?                                                                                                      | Có.                                                                                                                          |
-| G10 | Số nhân vật mỗi tài khoản? Có đổi tên / xóa?                                                                                                                                     | 3 nhân vật / tài khoản; đổi tên 1 lần miễn phí; xóa có chờ 7 ngày.                                                           |
-| G11 | Có "Cải Căn" (đổi Linh căn) không?                                                                                                                                               | Chuỗi nhiệm vụ hiếm, 1 lần / kiếp, ngoài beta.                                                                               |
-| G12 | Mục tiêu giờ chơi bảng 3.4 (411 giờ ≈ 12 tháng ở 8 giờ/tuần) có phải nhịp mong muốn?                                                                                             | Giữ; cần mô phỏng (OPEN-ITEMS #7) để chỉnh.                                                                                  |
-| G13 | Vạn Bảo Lâu: có giới hạn biên giá niêm yết quanh giá trung bình tuần không (chống thao túng / rửa tiền)?                                                                           | Có: giá niêm yết trong khoảng 50% – 200% giá trung bình 7 ngày của vật phẩm đó.                                              |
+| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                                                                                              |
+| --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| G1  | Ba mức hậu quả Lôi Kiếp "Nhẹ / Trung / Nặng" của GDD gốc có nội dung gì? (07 §3 chỉ dẫn "như trong GDD", GDD gốc không còn.) | Dùng bảng 5.4 ở trên; chủ dự án đối chiếu nếu còn bản gốc.                                                                    |
+| G2  | Thứ tự kiếp / roll: roll Thiên Mệnh **trước** Lôi Kiếp (thất bại rẻ sớm) hay **sau**?                                        | **Roll trước** (5.2).                                                                                                         |
+| G3  | Thua Tâm Ma có tính `n_fail` (pity) không?                                                                                   | **Không** (chống nạp pity cố ý).                                                                                              |
+| G4  | Dải phe theo Nghiệp Lực (Chính ≥ +200, Tà −699…−200, Ma ≤ −700) và các hệ số ở 8.3 có phù hợp ý đồ?                          | Giữ như 8.2–8.3; sẽ chỉnh sau mô phỏng kinh tế.                                                                               |
+| G5  | Ma đạo có bị cấm vào Sơn Môn Chính đạo? Ở beta (không có Ma sect) người rớt K ≤ −700 sẽ kẹt?                                 | Không cấm; chỉ suy yếu nhẹ. Ma tông môn làm sau beta.                                                                         |
+| G6  | Linh Mạch: 5 phẩm (07 §5 công thức ρ) hay 6 phẩm (02 §2 vẽ 6)?                                                               | Giữ **5 phẩm** cho công thức; phẩm 6 dành cho Linh Mạch Tâm đặc biệt sau này — cần chủ dự án xác nhận để cập nhật 02 hoặc 07. |
+| G7  | Tiên Ngọc: mua bằng tiền thật? tặng? giao dịch được giữa người chơi?                                                         | Beta tắt; sau beta bán cosmetic + tiện lợi, không giao dịch, không đổi sang Linh thạch.                                       |
+| G8  | Sau Phi Thăng: Trọng sinh giữ hay roll lại Linh căn? Mức Đạo Vận?                                                            | Roll lại có đảm bảo ≥ 1 lần reroll; Đạo Vận ≤ +5% tốc độ tu mỗi kiếp.                                                         |
+| G9  | Đấu Giá Hội hủy 100% giá thắng (vật do hệ thống đưa vào) có chấp nhận được?                                                  | Có.                                                                                                                           |
+| G10 | Số nhân vật mỗi tài khoản? Có đổi tên / xóa?                                                                                 | 3 nhân vật / tài khoản; đổi tên 1 lần miễn phí; xóa có chờ 7 ngày.                                                            |
+| G11 | Có "Cải Căn" (đổi Linh căn) không?                                                                                           | Chuỗi nhiệm vụ hiếm, 1 lần / kiếp, ngoài beta.                                                                                |
+| G12 | Mục tiêu giờ chơi bảng 3.4 (411 giờ ≈ 12 tháng ở 8 giờ/tuần) có phải nhịp mong muốn?                                         | Giữ; cần mô phỏng (OPEN-ITEMS #7) để chỉnh.                                                                                   |
+| G13 | Vạn Bảo Lâu: có giới hạn biên giá niêm yết quanh giá trung bình tuần không (chống thao túng / rửa tiền)?                     | Có: giá niêm yết trong khoảng 50% – 200% giá trung bình 7 ngày của vật phẩm đó.                                               |
