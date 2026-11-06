@@ -517,6 +517,8 @@ Hậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ hal
 
 Chỉnh bảng màu ngọc (không đổi alpha): thêm mẫu jade riêng từ trâm concept A cho trâm và mặt dây; tránh ánh xanh ngọc bị phân loại thành vải xanh hoặc vàng. Đây là hậu xử lý màu bằng mã, không phải lần sinh ảnh mới.
 
+[Cập nhật KT3 — quần ngà và lót khe váy] Hai chân sinh lại từ master, chân cũ và mask; giữ ảnh/prompt cũ trong raw/E/history. Nhãn vật liệu chỉnh thủ công: quần ngà, boot charcoal, viền đế sáng; nếp lót ngà rộng 6 px @2x ở cạnh sau robe_front và cạnh trước robe_back, giữ các dải gấu vàng riêng. Hậu xử lý màu bằng mã, không tô pixel thủ công; alpha từng chân/panel và landmarks giữ nguyên. Rest composite maxExtra/maxMissing 2 px.
+
 ### KT3 / arm_R
 
 - UTC bắt đầu: 2026-11-06 00:36:57 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
@@ -579,22 +581,22 @@ Create ONE production transparent cutout for concept-A Kiếm tu EAST-facing 2D 
 
 ### KT3 / leg_L
 
-- UTC bắt đầu: 2026-11-06 00:45:04 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- UTC bắt đầu: 2026-11-06T02:18:10.215Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
 - Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_L.png`.
 - Prompt đầy đủ:
 
 ```text
-ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY far LEFT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot, ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers continuing fully up to hidden hip, plain smooth knee (no bands or cuts), master dark brown-charcoal boot with restrained ivory sole trim, foot pointing RIGHT. Top atsourcey120, knee185, ankle~122219, toe140228. Never split thigh/shin/boot. Same muted master style, NO robe, skirt or other leg.
+Use case: precise-object-edit. Production 2D painted isometric MMORPG sprite, Kiếm tu concept A, direction E facing right. Image 1 is the MASTER style/material reference. Image 2 is the existing FAR LEFT whole leg, GEOMETRY and BOOT reference only. Image 3 is its white-on-black region mask; black is excluded, not a background to paint. Replace the dark trousers with IVORY/LIGHT cloth trousers matching the master's ivory inner robe and sleeves. Draw ONE continuous whole leg from hidden upper thigh through knee and shin to dark boot, straight neutral. Preserve the supplied leg outline and boot shape, proportions, registration, exact canvas placement. Canvas 512x512, transparent elsewhere. The white mask occupies y240..462; hidden thigh begins at y240, hip y278, knee370, ankle~440, toe~460. Full hidden upper thigh must be painted. Ivory trousers extend down to the top of the dark boot around y410; keep dark charcoal boot below, small pale sole, trouser cuff just above boot. Plain knee with restrained long cloth folds, no knee band or new ornament. Same soft painted linework, muted palette and NW light as master. No white fringe, cast shadow, other limb, body, robe, labels or background. DO NOT enlarge/recenter the part. Genuine RGBA transparency.
 ```
 
 ### KT3 / leg_R
 
-- UTC bắt đầu: 2026-11-06 00:45:04 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- UTC bắt đầu: 2026-11-06T02:18:10.231Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
 - Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_R.png`.
 - Prompt đầy đủ:
 
 ```text
-ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY near RIGHT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot as ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers fully painted up to hidden hip, smooth knee (no band or cut), master's dark charcoal boot ivory sole edge, foot pointing RIGHT. Topsourcey120 knee185 ankle118221 toe140230. NO robe, skirt, other leg or floating boot. Keep full continuousleg under robe.
+Use case: precise-object-edit. Production 2D painted isometric MMORPG sprite, Kiếm tu concept A, direction E facing right. Image 1 is the MASTER style/material reference. Image 2 is the existing NEAR RIGHT whole leg, GEOMETRY and BOOT reference only. Image 3 is its white-on-black region mask; black is excluded, not a background to paint. Replace the dark trousers with IVORY/LIGHT cloth trousers matching the master's ivory inner robe and sleeves. Draw ONE continuous whole leg from hidden upper thigh through knee and shin to dark boot, straight neutral. Preserve the supplied leg outline and boot shape, proportions, registration, exact canvas placement. Canvas 512x512, transparent elsewhere. The white mask occupies y240..462; hidden thigh begins at y240, hip y278, knee370, ankle~440, toe~460. Full hidden upper thigh must be painted. Ivory trousers extend down to the top of the dark boot around y410; keep dark charcoal boot below, small pale sole, trouser cuff just above boot. Plain knee with restrained long cloth folds, no knee band or new ornament. Same soft painted linework, muted palette and NW light as master. No white fringe, cast shadow, other limb, body, robe, labels or background. DO NOT enlarge/recenter the part. Genuine RGBA transparency.
 ```
 
 ### KT3 / sash
@@ -1085,4 +1087,24 @@ ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first 
 
 ```text
 Generate ONLY the small tied HAIR BUN MASS of concept-A Kiếm tu EAST-facing character as its own separately drawn production sprite. Firstimage MASTER gives exact dark-brown hair style/palette/fine soft outline/NWlight; lastimage white REGION MASK locatesbun source2xboxx107..128y22..39 in full512square sharedcanvas. Only the bun hair volume, solid hidden root fullypainted, mutedbrown hair with a few finecurved strands, shape matches originalmastertopknot. NO hairpin/jade/ribbon/hairtie/fronthair/face/body/otherpiece/text/glow/haze/background. Genuine transparent RGBA outside. Never enlarge/recenter/crop. Clean thinAAedge, not shinyblack/anime. Keep thissmallroundedbuninsidewhite mask andmatchmasterproportion.
+```
+
+### KT3 / leg_L
+
+- UTC bắt đầu: 2026-11-06 00:45:04 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/history/leg_L.dark-v1.png`.
+- Prompt đầy đủ:
+
+```text
+ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY far LEFT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot, ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers continuing fully up to hidden hip, plain smooth knee (no bands or cuts), master dark brown-charcoal boot with restrained ivory sole trim, foot pointing RIGHT. Top atsourcey120, knee185, ankle~122219, toe140228. Never split thigh/shin/boot. Same muted master style, NO robe, skirt or other leg.
+```
+
+### KT3 / leg_R
+
+- UTC bắt đầu: 2026-11-06 00:45:04 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/history/leg_R.dark-v1.png`.
+- Prompt đầy đủ:
+
+```text
+ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY near RIGHT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot as ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers fully painted up to hidden hip, smooth knee (no band or cut), master's dark charcoal boot ivory sole edge, foot pointing RIGHT. Topsourcey120 knee185 ankle118221 toe140230. NO robe, skirt, other leg or floating boot. Keep full continuousleg under robe.
 ```

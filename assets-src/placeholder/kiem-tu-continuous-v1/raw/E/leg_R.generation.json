@@ -1,15 +1,20 @@
 {
-  "id": "leg_R",
-  "prompt": "ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY near RIGHT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot as ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers fully painted up to hidden hip, smooth knee (no band or cut), master's dark charcoal boot ivory sole edge, foot pointing RIGHT. Topsourcey120 knee185 ankle118221 toe140230. NO robe, skirt, other leg or floating boot. Keep full continuousleg under robe.",
-  "refs": [
-    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
-    "D:/Temp/vgtd-track2-E/leg_R_mask4x.png"
-  ],
-  "utcStart": "2026-11-06 00:45:04 UTC",
+  "prompt": "Use case: precise-object-edit. Production 2D painted isometric MMORPG sprite, Kiếm tu concept A, direction E facing right. Image 1 is the MASTER style/material reference. Image 2 is the existing NEAR RIGHT whole leg, GEOMETRY and BOOT reference only. Image 3 is its white-on-black region mask; black is excluded, not a background to paint. Replace the dark trousers with IVORY/LIGHT cloth trousers matching the master's ivory inner robe and sleeves. Draw ONE continuous whole leg from hidden upper thigh through knee and shin to dark boot, straight neutral. Preserve the supplied leg outline and boot shape, proportions, registration, exact canvas placement. Canvas 512x512, transparent elsewhere. The white mask occupies y240..462; hidden thigh begins at y240, hip y278, knee370, ankle~440, toe~460. Full hidden upper thigh must be painted. Ivory trousers extend down to the top of the dark boot around y410; keep dark charcoal boot below, small pale sole, trouser cuff just above boot. Plain knee with restrained long cloth folds, no knee band or new ornament. Same soft painted linework, muted palette and NW light as master. No white fringe, cast shadow, other limb, body, robe, labels or background. DO NOT enlarge/recenter the part. Genuine RGBA transparency.",
+  "utc": "2026-11-06T02:18:10.231Z",
   "tool": "image_gen.imagegen",
   "model": "undisclosed",
   "cli": "codex-cli 0.164.0",
+  "id": "leg_R",
+  "generatedPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-37ac7ce2-d3db-4f5f-b26b-0ffce21057b3.png",
   "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_R.png",
+  "revision": "ivory-v2",
+  "previousGeneration": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/history/leg_R.dark-v1.generation.json",
   "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_R.mask.png",
-  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+  "utcStart": "2026-11-06T02:18:10.231Z",
+  "refs": [
+    "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/history/leg_R.dark-v1.registered.png",
+    "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_R.mask.png"
+  ]
 }
