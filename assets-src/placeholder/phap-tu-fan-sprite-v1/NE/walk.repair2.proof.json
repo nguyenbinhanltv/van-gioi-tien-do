@@ -1,0 +1,45 @@
+{
+  "algorithm": "sha256 decoded premultiplied RGBA row-major per cell",
+  "selectedCells0based": [2, 3, 4, 8],
+  "before": {
+    "file": "sheets/walk.reroll1.generated.png",
+    "sha256": "0cf0181791d8a60d8d0efd4de7b56e96baba4675a28c95f97f14589cf6c753a9",
+    "cells": [
+      "1599f04ce94a964be5002fb1a42fd300e20e9c66c44d33578d3ebac62962945a",
+      "4c4e98c351fa01b423b34a92e8a7480e527371048ae26b2fe28f74bb9f8b8d7b",
+      "ee38e53942bf98572a5ae7867a4daa4803b90cf85156a8e4cf00751dfe1e4200",
+      "5e56cc92dd85ba11425a9e49eae972bb70a63ae5771de5a226afe06d7adb1eea",
+      "88b157047f5ed03804a1829ad7223bbfe2113fc0350964c2a6709b4dd0ade2dc",
+      "4e9d6c6a625bd8a1e38c262c755e98841912cc39224efa2c5588bd18a1a8fa3f",
+      "5afb7dc8e79bbdfcea87ccd8b0fb37b0c1660b2b19eadd3a669bde5fb791348b",
+      "28e93273e5643d229264dbbac35b2df98f98e8c62da0135a43825c1f988770b1",
+      "4d557301814f72f53520419be2394b0199678b0713b6a7e55139533d5895ec64",
+      "6d34c168dd5113bdcdd356909d84d78249060d4f9e470ef9820c87fdb60d5ac0",
+      "60b713c50babdf5cf90dd179e9794806f53e450205bac5e24d8c32b6e59b895b",
+      "1e0f4bcbafd318f41de5a8a77728f448b998ff559ab1fe579491bf58c8756479"
+    ]
+  },
+  "after": {
+    "file": "sheets/walk.selected.png",
+    "sha256": "1030b253555d0a153b52301b33738c9c5f59e1b852cad69a5a959f7f32353eb1",
+    "cells": [
+      "1599f04ce94a964be5002fb1a42fd300e20e9c66c44d33578d3ebac62962945a",
+      "4c4e98c351fa01b423b34a92e8a7480e527371048ae26b2fe28f74bb9f8b8d7b",
+      "bd07ea74fc707b70e9aabc42dfb85e451a691b34a33ef3928779763a720e66be",
+      "2faf9a3e505a8714d7b2e861c0805fa9a72cdb94032c630366f2bbaeb3c209b2",
+      "f5b3a0619bf243f361db624e48a40851ddb91755da58163992e9dddccc1b130b",
+      "4e9d6c6a625bd8a1e38c262c755e98841912cc39224efa2c5588bd18a1a8fa3f",
+      "5afb7dc8e79bbdfcea87ccd8b0fb37b0c1660b2b19eadd3a669bde5fb791348b",
+      "28e93273e5643d229264dbbac35b2df98f98e8c62da0135a43825c1f988770b1",
+      "e4ad572a176bdd45d1da780f84d686047dfc06964a528be5f40852c6664350a6",
+      "6d34c168dd5113bdcdd356909d84d78249060d4f9e470ef9820c87fdb60d5ac0",
+      "60b713c50babdf5cf90dd179e9794806f53e450205bac5e24d8c32b6e59b895b",
+      "1e0f4bcbafd318f41de5a8a77728f448b998ff559ab1fe579491bf58c8756479"
+    ]
+  },
+  "editedRaw": {
+    "file": "sheets/walk.repair2.generated.png",
+    "sha256": "811ca64c8581a1e6c3fdaa4ccee7969a2c3185104a92db0b7e5857949bd5318d"
+  },
+  "method": "Public repairCell, only selected full cells; no per-frame scale. Edited sheet resized uniformly if tool output dimensions differ."
+}

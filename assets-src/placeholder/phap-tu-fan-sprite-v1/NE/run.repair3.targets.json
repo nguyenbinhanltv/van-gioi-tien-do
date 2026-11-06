@@ -1,0 +1,36 @@
+{
+  "selectedCells0based": [4, 10],
+  "targets": [
+    {
+      "cell0based": 4,
+      "before": {
+        "left": 113,
+        "right": 279,
+        "top": 13,
+        "bottom": 336,
+        "height": 323,
+        "width": 166,
+        "pelvisX": 189.79788007897744
+      },
+      "targetTop": 13,
+      "targetSole": 352,
+      "extendRawPixels": 16
+    },
+    {
+      "cell0based": 10,
+      "before": {
+        "left": 110,
+        "right": 279,
+        "top": 11,
+        "bottom": 332,
+        "height": 321,
+        "width": 169,
+        "pelvisX": 194.51970833773646
+      },
+      "targetTop": 11,
+      "targetSole": 350,
+      "extendRawPixels": 18
+    }
+  ],
+  "method": "Guide/mask only; no final character pixels painted. Target raw height240@256, lockedscale unchanged."
+}
