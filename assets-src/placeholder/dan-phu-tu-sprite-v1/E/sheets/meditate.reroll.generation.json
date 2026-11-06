@@ -1,0 +1,16 @@
+{
+  "id": "E-meditate-2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:41:42 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:42:06 UTC"
+  },
+  "prompt": "Use case: stylized-concept. EIGHT FRAME SEATED MEDITATION sprite sheet for exact woman in reference1. Reference2 provides 4x2 SQUARE CELL layout ONLY; ignore its standing head line because character sits. CRITICAL: keep SAME ANATOMICAL PIXEL SCALE as standing master, NOT fit seated body to standing height. Each256unit square: sitting knee/lower body ground y232, TOP OF JADE HEADPIECE y90 (not24); seated figure height about142units, headpiece-to-chin span SAME as reference master about55units. Torso/arms/thighs keep master dimensions; cross legs naturally to reduce total height. Leave about35% of each cell EMPTY MAGENTA ABOVE head, feet/knees at91%height. Do not enlarge head or torso. Same adult woman facing RIGHT pure E profile in all8 cells: folded jade headpiece, tied loop hair, ivory sleeves jade split coat blue sidepanel bronze trim dark sash/trousers/boots, gourd/gold belt talismans. Whisk in right hand laid diagonally across lap, paper talisman in left. Calm seated breathing cycle, tiny motion, smooth last-first. EXACT4columns2rows, NO grid lines or text, flat #FF00FF outside figure, no shadows floor glow VFX or extra limbs. Same soft painted fine ink NW light. Entire seated silhouette inside eachcell, equal scale everycell. Do not reuse standing headtop24: seated headpiece top90, bottom232; important small seated pose, not giant seated person.",
+  "references": ["reference/E.master.png", "E/templates/meditate.template.png"],
+  "output": "E/sheets/meditate.png",
+  "toolOutputId": "exec-423036a9-f46c-4338-8190-ca7e43a7da60.png",
+  "supersedes": "meditate.generation.json"
+}

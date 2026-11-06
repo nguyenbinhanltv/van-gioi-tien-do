@@ -1,0 +1,15 @@
+{
+  "id": "E-idle-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:34:27 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:35:05 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production IDLE frame-by-frame sheet for DAN/PHU TU support healer A. Reference1 exact E master identity, reference2 exact template. EXACT 4 columns by 3 rows of SQUARE cells, 12 drawn frames in reading order. Every figure faces pure RIGHT/E, same compact adult woman with folded jade headpiece and looped tied dark hair, ivory fitted sleeves, jade short split overrobe and muted blue side panels with thin bronze trim, dark sash/trousers/boots, medicine gourd and gold belt talismans. RIGHT near hand holds bronze-handled white whisk, LEFT far hand gold paper talisman. Master soft painted game art, fine dark outline NW lighting, identical costume/face/hair/prop dimensions every frame. Each256unit cell head at24 ground232, upright body208 units, allowed202..214. Exact master anatomical scale. Very subtle relaxed breathing loop: inhale through frames1-6 and exhale7-12, boots planted motionless, tiny sleeve/hair/whisk secondary motion; last-to-first smooth, no repeated endpoint. Whisk hair must never hang below soles; no extra limbs or props. Preserve leg lengths/head size. Flat pure #FF00FF everywhere outside figures. Remove template guides and colored ghosts completely. NO grid lines borders text floor shadows motion blur effects or scenery. All complete figures and props stay within own cells. Follow template layout, shared scale, no per-frame resizing.",
+  "references": ["reference/E.master.png", "E/templates/idle.template.png"],
+  "output": "E/sheets/idle.png",
+  "toolOutputId": "exec-a32a2423-98de-4e9f-91e8-0578e346a675.png"
+}
