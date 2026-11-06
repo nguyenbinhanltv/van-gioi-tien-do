@@ -39,14 +39,13 @@ if (args.includes('--capture')) {
     dir: r.dir,
     stem: r.project.stem,
     name: `_batch-${report.character}-${r.dir}`,
+    files: [...r.result.files.keys()],
   }));
   for (const s of staged) {
     const target = assertInside(resources, join(resources, s.name));
     rmSync(target, { recursive: true, force: true });
     mkdirSync(target, { recursive: true });
-    const name = `${s.stem}_${s.dir}`;
-    for (const f of [`${name}_ske.json`, `${name}_tex.json`, `${name}_tex.png`])
-      cpSync(join(out, s.dir, f), join(target, f));
+    for (const f of s.files) cpSync(join(out, s.dir, f), join(target, f));
   }
   const build = spawnSync(process.execPath, [join(client, 'scripts/build-web.mjs')], { stdio: 'inherit' });
   if (build.status !== 0) throw new Error('Cocos web build failed (see the log above)');

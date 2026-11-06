@@ -138,6 +138,10 @@ describe('batch path safety', () => {
       expect(existsSync(join(client, `assets/resources/dragonbones/_batch-kiem-tu-${dir}/kiemtu_${dir}_tex.png`))).toBe(
         true,
       );
+    for (const dir of ['E', 'SE'])
+      expect(
+        existsSync(join(client, `assets/resources/dragonbones/_batch-kiem-tu-${dir}/kiemtu_${dir}.sprite.json`)),
+      ).toBe(true);
     expect(existsSync(join(out, 'index.html'))).toBe(true);
   });
 
