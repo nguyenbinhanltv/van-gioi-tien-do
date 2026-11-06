@@ -227,9 +227,9 @@ describe('animation re-targeting and export, every class', () => {
     const reference = authorKiemTuSet(the, { secondary: false });
     const retargeted = authorClassSet('the-tu', the, { secondary: false });
     const byName = (cs: { name: string }[], n: string) => cs.find((c) => c.name === n)!;
-    for (const same of ['run', 'walk', 'die', 'hit', 'dash'])
+    for (const same of ['run', 'walk', 'die', 'dash'])
       expect(JSON.stringify(byName(retargeted, same))).toBe(JSON.stringify(byName(reference, same)));
-    for (const changed of ['attack', 'attack_2', 'attack_3', 'cast', 'channel', 'idle']) {
+    for (const changed of ['attack', 'attack_2', 'attack_3', 'cast', 'channel', 'idle', 'hit']) {
       expect(JSON.stringify(byName(retargeted, changed))).not.toBe(JSON.stringify(byName(reference, changed)));
     }
     // a Kiếm tu keeps its own hand-authored clips

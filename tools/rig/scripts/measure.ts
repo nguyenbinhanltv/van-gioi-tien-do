@@ -18,8 +18,10 @@
  *   --json             machine-readable output
  *   --strict           exit code 1 if any seam gap > limit, any torn silhouette or any stretch event remains
  */
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import type { Direction } from '@vgtd/shared';
 import {
   ASSEMBLY_PROFILES,
   CHARACTER_IDS,
@@ -34,6 +36,7 @@ import {
   stripQa,
   underpaintNeeds,
   type CharacterId,
+  type Clip,
 } from '../src/index.js';
 
 // run-ts.mjs sets argv[1] to this script's real path (the bundle itself lives in a temp dir)
@@ -89,6 +92,7 @@ interface Row {
 }
 
 const opts = parse(process.argv.slice(2));
+let clipSource = 'authored here';
 // an assembled rig replaces the registry data, so a class without committed data (Thể tu pilot) can be measured
 const data = opts.assembled
   ? ({ id: opts.character, byDirection: new Map(), issues: [] } as ReturnType<typeof loadCharacterData>)
@@ -117,15 +121,32 @@ for (const [dir, d] of data.byDirection) {
         ...(opts.touch !== undefined ? { touchPx: opts.touch } : {}),
       }).rig
     : d.rig;
-  const clips = authorClassSet(opts.character, rig, {
-    detail: true,
-    // an assembled rig is measured with the gait `rig:assemble` exports: --gait, else the class profile's, else robe
-    gait:
-      opts.gait || !(opts.assembled && ASSEMBLY_PROFILES[opts.character])
-        ? (GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
-          GAIT_PROFILES.free)
-        : ASSEMBLY_PROFILES[opts.character]!.gait,
-  });
+  // the clips of the export when `rig:assemble` saved them (the key-pose clips are audited as exported), else authored here
+  const savedClips = opts.assembled
+    ? resolve(process.env.INIT_CWD ?? process.cwd(), opts.assembled, `${opts.stem}_${dir}.clips.json`)
+    : '';
+  if (savedClips && existsSync(savedClips)) clipSource = 'as exported by rig:assemble';
+  const clips: Clip[] =
+    savedClips && existsSync(savedClips)
+      ? (() => {
+          const saved = JSON.parse(readFileSync(savedClips, 'utf8')) as { rigHash?: string; clips: Clip[] };
+          const now = createHash('sha1').update(JSON.stringify(rig)).digest('hex').slice(0, 16);
+          if (saved.rigHash && saved.rigHash !== now)
+            console.warn(
+              `warning: ${savedClips} was exported from a different rig (hash ${saved.rigHash}, rig is ${now}): re-run rig:assemble`,
+            );
+          return saved.clips.filter((c) => c.name !== 'blink_cycle');
+        })()
+      : authorClassSet(opts.character, rig, {
+          detail: true,
+          // an assembled rig is measured with the gait `rig:assemble` exports: --gait, else the class profile's, else robe
+          gait:
+            opts.gait || !(opts.assembled && ASSEMBLY_PROFILES[opts.character])
+              ? (GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
+                GAIT_PROFILES.free)
+              : (ASSEMBLY_PROFILES[opts.character]!.gaitByDir?.[dir as Direction] ??
+                ASSEMBLY_PROFILES[opts.character]!.gait),
+        });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
     throw new Error(`${d.texturePath} is a Git LFS pointer: run 'git lfs pull'`);
@@ -191,7 +212,7 @@ if (opts.json) {
 } else {
   const pad = (v: string | number, n: number) => String(v).padStart(n);
   console.log(
-    `${opts.character}${opts.autoskin ? ' (autoSkin preview)' : ''}: seam limit ${opts.limit} px, ${rows[0]?.clips ?? 0} clips per direction\n`,
+    `${opts.character}${opts.autoskin ? ' (autoSkin preview)' : ''}: clips ${clipSource}, seam limit ${opts.limit} px, ${rows[0]?.clips ?? 0} clips per direction\n`,
   );
   console.log(
     'dir | clips | seam openings | worst gap px | stretch events | worst strain % | torn clips | strip faults | vertices',

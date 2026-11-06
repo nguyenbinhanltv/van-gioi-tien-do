@@ -26,7 +26,6 @@ import type { RigDocument } from './schema.js';
 import { skinAttachment } from './skinning.js';
 import type { Image } from './render/image.js';
 import { renderPose, type LoadedAtlas } from './render/render.js';
-import { DEFAULT_IGNORED_SLOTS } from './render/silhouette.js';
 
 export interface KeyPoseLandmarks {
   readonly [name: string]: readonly [number, number] | readonly string[] | undefined;
@@ -47,8 +46,10 @@ export interface PoseFit {
   readonly maxError: number;
   /** Root-mean-square of the landmark errors (rig px): the per-key gate is RMS <= 2. */
   readonly rms: number;
-  /** Body translation (rig px, y up) the fit added to reach the ankles: shift the reference by it before comparing. */
+  /** Body translation (rig px, y up) the fit added to reach the ankles (pelvis lowering): the ankles / toes do NOT move with it. */
   readonly shift: Vec2;
+  /** Rigid translation `lockContacts` added along the facing to put the planted feet on the ground line: EVERYTHING moves, feet included. */
+  readonly lockShift: Vec2;
   /** Bones whose reference segment length differs from the rig bone by more than 5 %. */
   readonly lengthMismatch: readonly string[];
 }
@@ -133,6 +134,20 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
     rotations[bone] = delta;
     worldRot.set(bone, parentRot + restLocal.get(bone)! + delta);
   };
+  /**
+   * Rotate `bone` by the turn of a landmark VECTOR since the rest pose. For a bone whose axis is that vector this is
+   * `aimDir`; for a spine bone whose child hangs off to the side (the Thể tu neck is 14 px right of the chest) aiming the AXIS
+   * at the landmark would bend an identity pose by the offset angle, so the rest angle of the vector is subtracted.
+   */
+  const aimVector = (bone: string, dir: Vec2, restFrom: Vec2, restTo: Vec2): void => {
+    const rv = sub(restTo, restFrom);
+    if (Math.hypot(rv.x, rv.y) < 1e-6) return aimDir(bone, dir);
+    const parentRot = parentRotOf(bone);
+    const world = restWorld(bone).rotation + wrap(deg(dir) - deg(rv));
+    const delta = wrap(world - parentRot - restLocal.get(bone)!);
+    rotations[bone] = delta;
+    worldRot.set(bone, parentRot + restLocal.get(bone)! + delta);
+  };
   const keep = (bone: string): void => {
     rotations[bone] = 0;
     worldRot.set(bone, parentRotOf(bone) + restLocal.get(bone)!);
@@ -165,10 +180,12 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
   keep(hipsBone);
 
   // 2. spine, neck, head: aimed along the landmark directions
-  aimDir(r.spine_mid!, sub(need('chest'), pelvis));
-  aimDir(r.spine_upper!, sub(need('neck'), need('chest')));
   const neckBone = rig.bones.find((b) => b.name === 'neck')?.name;
-  if (neckBone) aimDir(neckBone, sub(need('head'), need('neck')));
+  aimVector(r.spine_mid!, sub(need('chest'), pelvis), restWorld(hipsBone).pos, restWorld(r.spine_upper!).pos);
+  if (neckBone)
+    aimVector(r.spine_upper!, sub(need('neck'), need('chest')), restWorld(r.spine_upper!).pos, restWorld(neckBone).pos);
+  else aimDir(r.spine_upper!, sub(need('neck'), need('chest')));
+  if (neckBone) aimVector(neckBone, sub(need('head'), need('neck')), restWorld(neckBone).pos, restWorld(neckBone).tip);
   if (r.head) {
     // upright in canvas space: cancel whatever the parents turned
     const base = restWorld(r.head).rotation;
@@ -192,14 +209,10 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
       const rw = restWorld(lo).tip;
       const re = restWorld(lo).pos;
       const side = Math.sign((rw.x - rs.x) * (re.y - rs.y) - (rw.y - rs.y) * (re.x - rs.x));
-      const elbow = twoBoneJoint(
-        shoulder,
-        moved(wrist),
-        lengthOf(up),
-        lengthOf(lo),
-        hint,
-        side === 0 ? undefined : (side as 1 | -1),
-      );
+      // a VISIBLE elbow landmark decides the bend side (the nearest solution); a hidden / guessed one only gives the rest-pose
+      // side, so consecutive keys never flip the elbow on a guess
+      const bendSide = elbowHint && !inferred.has(`elbow_${s}`) ? undefined : side === 0 ? undefined : (side as 1 | -1);
+      const elbow = twoBoneJoint(shoulder, moved(wrist), lengthOf(up), lengthOf(lo), hint, bendSide);
       aimDir(up, sub(elbow, shoulder));
       aimDir(lo, sub(moved(wrist), elbow));
     } else {
@@ -308,6 +321,7 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
     hips,
     feet,
     shift,
+    lockShift: { x: 0, y: 0 },
     error,
     maxError: Math.max(0, ...values),
     rms: values.length ? Math.sqrt(values.reduce((a, v) => a + v * v, 0) / values.length) : 0,
@@ -538,6 +552,13 @@ export interface IouOptions2 extends IouOptions {
 }
 
 /** The rig silhouette rendered on the reference canvas (transparent, no ground). */
+/**
+ * Slots left out of a key-pose comparison: the ground shadow and the additive sword effects only. The DRAWN sword
+ * (`weapon_R`, `sword_back`) stays in, because the reference drawings contain it; hiding it on the rig side only would
+ * bias every IoU down.
+ */
+export const KEYPOSE_IGNORED_SLOTS: readonly string[] = ['shadow', 'sword_trail', 'sword_glint'];
+
 export function renderSilhouette(
   rig: RigDocument,
   clip: Clip,
@@ -550,7 +571,7 @@ export function renderSilhouette(
     scale: size / rig.canvas.width,
     background: [0, 0, 0, 0],
     ground: false,
-    hideSlots: ignore ?? DEFAULT_IGNORED_SLOTS,
+    hideSlots: ignore ?? KEYPOSE_IGNORED_SLOTS,
   });
 }
 
@@ -733,7 +754,7 @@ export function lockContacts(
       ...f,
       hips: { x: f.hips.x + dx, y: f.hips.y + dy },
       feet: Object.fromEntries(Object.entries(f.feet).map(([k, p]) => [k, { x: p.x + dx, y: p.y + dy }])),
-      shift: { x: f.shift.x + dx, y: f.shift.y + dy },
+      lockShift: { x: f.lockShift.x + dx, y: f.lockShift.y + dy },
     };
   });
   return out;
@@ -777,6 +798,7 @@ export function authorKeyPoseClip(
       maxError: 0,
       rms: 0,
       shift: { x: 0, y: 0 },
+      lockShift: { x: 0, y: 0 },
       lengthMismatch: [],
     };
     // ease in from the rest pose and back out; rotation keys of bones the fits drive start at 0 there
@@ -793,4 +815,34 @@ export function authorKeyPoseClip(
     ...(phases ? { phases } : {}),
     ...(speed !== null ? { speed } : {}),
   });
+}
+
+/**
+ * Landmark RMS (rig px) of a FINISHED clip at `frame` against the reference landmarks of a key pose: the joint landmarks
+ * the fit solves for, inferred ones skipped. The reference moves with the fit: body landmarks by `shift` (pelvis lowering)
+ * plus `lockShift` (contact lock), the ankles / toes by `lockShift` only (the lowering does not move the feet).
+ */
+export function finishedLandmarkRms(
+  rig: RigDocument,
+  ref: KeyPoseLandmarks,
+  view: CanvasView,
+  clip: Clip,
+  frame: number,
+  fit: Pick<PoseFit, 'shift' | 'lockShift'>,
+): number {
+  const got = landmarksFromPose(rig, evalPose(rig, clip, frame), view) as Record<string, readonly [number, number]>;
+  const inferred = new Set((ref._inferred as readonly string[] | undefined) ?? []);
+  const errs: number[] = [];
+  for (const [k, v] of Object.entries(ref)) {
+    // the joint landmarks the fit solves for (hem points are outer edges, the sword tip a free end)
+    if (!/^(shoulder|elbow|wrist|hip|knee|ankle|foot_tip)_[LR]$|^(chest|neck|head|pelvis)$/.test(k)) continue;
+    if (inferred.has(k) || !Array.isArray(v) || v.length !== 2) continue;
+    const g = got[k];
+    if (!g) continue;
+    const foot = /^(ankle|foot_tip)_/.test(k);
+    const dx = (fit.lockShift.x + (foot ? 0 : fit.shift.x)) * view.scale;
+    const dy = -(fit.lockShift.y + (foot ? 0 : fit.shift.y)) * view.scale;
+    errs.push(Math.hypot((v[0] as number) + dx - g[0], (v[1] as number) + dy - g[1]) / view.scale);
+  }
+  return errs.length ? Math.sqrt(errs.reduce((a, e) => a + e * e, 0) / errs.length) : 0;
 }

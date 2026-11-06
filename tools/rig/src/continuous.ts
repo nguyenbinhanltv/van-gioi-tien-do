@@ -43,7 +43,8 @@ type Binding =
    * tabard, whose part above the hip follows the spine instead of the hip bone (see `spineWeights`).
    */
   | { readonly kind: 'skirt'; readonly panel?: 'robe_front' | 'robe_back'; readonly spine?: boolean }
-  | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number }
+  /** `alongParent`: the chain lies along the parent bone axis instead of the painted outline (wide bands: trouser hems). */
+  | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number; readonly alongParent?: boolean }
   /** Rigid on the last bone of another hanging piece (tassel under the pendant). */
   | { readonly kind: 'tip'; readonly of: string };
 
@@ -369,6 +370,7 @@ function hangingBones(
   parent: string,
   segments: number,
   pts: readonly Vec2[],
+  alongParent = false,
 ): { bones: RigBone[]; ids: string[] } | null {
   if (!pts.length) return null;
   const maxY = Math.max(...pts.map((p) => p.y));
@@ -380,16 +382,24 @@ function hangingBones(
   // a thin band (cuff, hem strip) has no length of its own: hang it straight down from its top edge by MIN_HANG px
   const thin = maxY - minY < 2 * 3 + 2;
   const root = mean(pts.filter((p) => p.y >= maxY - (thin ? 1 : 3)));
-  const end = thin
-    ? { x: root.x, y: root.y - Math.max(MIN_HANG, maxY - minY) }
-    : mean(pts.filter((p) => p.y <= minY + 3));
+  const rest = evalPose(base, null, 0, { noIk: true });
+  const pw = rest.byName.get(parent);
+  if (!pw) return null;
+  // `alongParent`: a wide band (trouser hem) lies along the parent bone, whatever slant its painted outline has: the chain
+  // follows the parent axis for the painted height, so the strip always turns with the garment it trims
+  const height = Math.max(MIN_HANG, maxY - minY);
+  const end = alongParent
+    ? {
+        x: root.x + Math.cos((pw.rotation * Math.PI) / 180) * height,
+        y: root.y + Math.sin((pw.rotation * Math.PI) / 180) * height,
+      }
+    : thin
+      ? { x: root.x, y: root.y - height }
+      : mean(pts.filter((p) => p.y <= minY + 3));
   const len = Math.hypot(end.x - root.x, end.y - root.y);
   if (len < 2) return null;
   const angle = Math.atan2(end.y - root.y, end.x - root.x);
   const deg = (angle * 180) / Math.PI;
-  const rest = evalPose(base, null, 0, { noIk: true });
-  const pw = rest.byName.get(parent);
-  if (!pw) return null;
   const local = applyMat(invertMat(pw.world), root);
   const seg = len / segments;
   const ids = Array.from({ length: segments }, (_, i) => `${name}_${i + 1}`);
@@ -447,7 +457,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     const t = templates.get(p.binding.template);
     if (!img || !t) continue;
     const parent = withLandmarks.roles[t.parent as keyof typeof withLandmarks.roles] ?? t.parent;
-    const made = hangingBones(withLandmarks, t.name, parent, t.segments, painted(img, view));
+    const made = hangingBones(withLandmarks, t.name, parent, t.segments, painted(img, view), p.binding.alongParent);
     if (!made) {
       skipped.push(`${p.id}: no usable shape for a chain`);
       continue;

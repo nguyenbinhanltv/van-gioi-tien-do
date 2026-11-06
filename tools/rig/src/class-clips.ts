@@ -36,6 +36,14 @@ export interface PoseDelta {
 export interface StrikeSpec {
   readonly windup: PoseDelta;
   readonly hit: PoseDelta;
+  /** Anticipation two frames before the windup end: weight loaded back, hip turned, the striking arm drawn back. */
+  readonly load?: PoseDelta;
+  /** Frames the impact pose is held after the hit frame (2-3 reads as contact). Default 0. Capped to leave one frame before `combo`. */
+  readonly hold?: number;
+  /** Frame of the combo window (the `cancel_window` event, the end of the hold / start of the recoil). Default 9. */
+  readonly combo?: number;
+  /** Pose of the combo window after the hold (recoil). Default: the impact pose scaled by 0.45. */
+  readonly recoil?: PoseDelta;
 }
 
 export interface ClassClipSpec {
@@ -45,6 +53,13 @@ export interface ClassClipSpec {
   readonly attack_2: StrikeSpec;
   readonly attack_3: StrikeSpec;
   readonly cast: { readonly gather: PoseDelta; readonly release: PoseDelta };
+  /** Hit reaction (flinch): the pose at frame 2. Default: the shared Kiếm tu hit. */
+  readonly hit?: PoseDelta;
+  /**
+   * Start and end the one-shot clips (strikes, hit) at the `stance` instead of the bare rest pose, so they join the
+   * idle (guard stance) without a drop of the arms. Default false (the stance is only the idle).
+   */
+  readonly stanceBlend?: boolean;
   /** Looping hold with a tremor on these roles. */
   readonly channel: { readonly pose: PoseDelta; readonly tremor: readonly BoneRole[] };
 }
@@ -78,25 +93,28 @@ function addPoseTracks(
   g: number,
   frames: number,
   stops: readonly { readonly frame: number; readonly pose: PoseDelta; readonly curve: Key<number>['curve'] }[],
+  rest: PoseDelta = {},
 ): void {
-  const { rot, move } = rolesOf(...stops.map((s) => s.pose));
+  const at = (r: (typeof ROT_ROLES)[number], p: PoseDelta) =>
+    (p[r] ?? 0) * (r.startsWith('upper') || r.startsWith('spine') ? g : 1);
+  const mv = (r: (typeof MOVE_ROLES)[number], p: PoseDelta): Vec2 => ({ x: (p[r]?.[0] ?? 0) * g, y: p[r]?.[1] ?? 0 });
+  const { rot, move } = rolesOf(...stops.map((s) => s.pose), rest);
   for (const r of rot) {
     c.rotate(r, [
-      { frame: 0, value: 0, curve: stops[0]!.curve },
+      { frame: 0, value: at(r, rest), curve: stops[0]!.curve },
       ...stops.map((s, i) => ({
         frame: s.frame,
-        value: (s.pose[r] ?? 0) * (r.startsWith('upper') || r.startsWith('spine') ? g : 1),
+        value: at(r, s.pose),
         curve: stops[i + 1]?.curve ?? EASE.inOut,
       })),
-      { frame: frames, value: 0 },
+      { frame: frames, value: at(r, rest) },
     ]);
   }
   for (const r of move) {
-    const v = (s: PoseDelta): Vec2 => ({ x: (s[r]?.[0] ?? 0) * g, y: s[r]?.[1] ?? 0 });
     c.translate(r, [
-      { frame: 0, value: { x: 0, y: 0 }, curve: stops[0]!.curve },
-      ...stops.map((s, i) => ({ frame: s.frame, value: v(s.pose), curve: stops[i + 1]?.curve ?? EASE.inOut })),
-      { frame: frames, value: { x: 0, y: 0 } },
+      { frame: 0, value: mv(r, rest), curve: stops[0]!.curve },
+      ...stops.map((s, i) => ({ frame: s.frame, value: mv(r, s.pose), curve: stops[i + 1]?.curve ?? EASE.inOut })),
+      { frame: frames, value: mv(r, rest) },
     ]);
   }
 }
@@ -106,6 +124,7 @@ function strike(
   name: string,
   spec: StrikeSpec,
   phases: { windupEnd: number; hit: number; combo: number },
+  rest: PoseDelta = {},
 ): Clip {
   const N = clipSpec('attack').frames;
   const g = viewGain(rig.direction);
@@ -116,11 +135,22 @@ function strike(
     phases: { windup_end: phases.windupEnd, hit_frame: phases.hit, combo_window: phases.combo },
   });
   c.event(phases.hit, 'hit').event(phases.combo, 'cancel_window');
-  addPoseTracks(c, g, N, [
-    { frame: phases.windupEnd, pose: spec.windup, curve: EASE.whip },
-    { frame: phases.hit, pose: spec.hit, curve: EASE.snapOut },
-    { frame: phases.combo, pose: scalePose(spec.hit, 0.45), curve: EASE.inOut },
-  ]);
+  const hold = Math.min(spec.hold ?? 0, phases.combo - phases.hit - 1);
+  const loadAt = phases.windupEnd - 2;
+  addPoseTracks(
+    c,
+    g,
+    N,
+    [
+      ...(spec.load && loadAt >= 1 ? [{ frame: loadAt, pose: spec.load, curve: EASE.inOut }] : []),
+      { frame: phases.windupEnd, pose: spec.windup, curve: EASE.whip },
+      { frame: phases.hit, pose: spec.hit, curve: EASE.snapOut },
+      // impact hold: the same pose for a few frames so the contact reads
+      ...(hold > 0 ? [{ frame: phases.hit + hold, pose: spec.hit, curve: EASE.inOut }] : []),
+      { frame: phases.combo, pose: spec.recoil ?? scalePose(spec.hit, 0.45), curve: EASE.inOut },
+    ],
+    rest,
+  );
   return c.build();
 }
 
@@ -167,6 +197,18 @@ function channel(rig: RigDocument, spec: ClassClipSpec['channel']): Clip {
       { frame: N, value: { x: v[0] * g, y: v[1] } },
     ]);
   }
+  return c.build();
+}
+
+/**
+ * Hit reaction: a flinch pose at frame 2, back to the stance. The Thể tu table gives a tank's brace: the guard tightens and the
+ * body gives a little; the head flinch of the shared Kiếm tu hit is left out on purpose (a tank takes the blow on its guard).
+ */
+function hitReaction(rig: RigDocument, pose: PoseDelta, rest: PoseDelta): Clip {
+  const N = clipSpec('hit').frames;
+  const g = viewGain(rig.direction);
+  const c = new ClipBuilder(rig, { name: 'hit', frames: N, loop: false });
+  addPoseTracks(c, g, N, [{ frame: 2, pose, curve: EASE.snapOut }], rest);
   return c.build();
 }
 
@@ -229,43 +271,167 @@ export const CLASS_CLIPS: Readonly<Partial<Record<CharacterId, ClassClipSpec>>> 
       ik_foot_L: [2, 0],
       ik_foot_R: [-2, 0],
     },
+    stanceBlend: true,
+    // CALIBRATED FOR DIRECTION E ONLY (docs/OPEN-ITEMS.md 11): this table is direction-independent, so on S / SE / NE / N and on
+    // the nominal template rigs (vertical arm rest) the +115 / +69 strike deltas point above horizontal until they are
+    // re-calibrated or derived from each direction's rest angles when those directions are assembled.
+    // The Thể tu E arms rest slanted (R back -115 deg, L forward -69 deg from the x axis: upper_arm world rotation), not
+    // straight down, so a straight horizontal punch is about +115 / -9 on R and +69 / +10 on L (upper / lower arm delta).
+    // jab (R): load the weight back, coil, drive the shoulder into a straight arm, plant the front foot, hold, recoil
     attack: {
-      windup: { upper_arm_R: 40, lower_arm_R: 70, upper_arm_L: 60, lower_arm_L: 100, spine_mid: 6, hips: [-2, -3] },
-      hit: {
-        upper_arm_R: 88,
-        lower_arm_R: 0,
-        upper_arm_L: 60,
+      load: {
+        upper_arm_R: 48,
+        lower_arm_R: 92,
+        upper_arm_L: 55,
         lower_arm_L: 100,
-        spine_mid: -14,
-        hips: [5, -4],
-        ik_foot_L: [8, 0],
+        spine_mid: 2,
+        spine_upper: 2,
+        hips: [-3, -2.5],
+        ik_foot_L: [1, 0],
+        ik_foot_R: [-4, 0],
+      },
+      windup: {
+        upper_arm_R: 38,
+        lower_arm_R: 70,
+        upper_arm_L: 60,
+        lower_arm_L: 104,
+        spine_mid: 7,
+        spine_upper: 5,
+        hips: [-4, -3],
+        ik_foot_L: [0, 0],
+        ik_foot_R: [-5, 0],
+      },
+      hit: {
+        upper_arm_R: 115,
+        lower_arm_R: -9,
+        upper_arm_L: 62,
+        lower_arm_L: 105,
+        spine_mid: -15,
+        spine_upper: -9,
+        hips: [7, -3.5],
+        ik_foot_L: [9, 0],
+        ik_foot_R: [-4, 0],
+      },
+      hold: 2,
+      recoil: {
+        upper_arm_R: 85,
+        lower_arm_R: 45,
+        upper_arm_L: 55,
+        lower_arm_L: 100,
+        spine_mid: -8,
+        spine_upper: -4,
+        hips: [3, -2.5],
+        ik_foot_L: [6, 0],
+        ik_foot_R: [-3, 0],
       },
     },
+    // cross (L): the rear hand with the hip turn, a bigger drive than the jab
     attack_2: {
-      windup: { upper_arm_L: 30, lower_arm_L: 85, upper_arm_R: 60, lower_arm_R: 100, spine_mid: 8, hips: [-2, -3] },
-      hit: {
-        upper_arm_L: 85,
-        lower_arm_L: 20,
+      load: {
+        upper_arm_L: 40,
+        lower_arm_L: 98,
+        upper_arm_R: 58,
+        lower_arm_R: 98,
+        spine_mid: 4,
+        spine_upper: 3,
+        hips: [-3, -2.5],
+        ik_foot_R: [-4, 0],
+      },
+      windup: {
+        upper_arm_L: 28,
+        lower_arm_L: 70,
         upper_arm_R: 60,
         lower_arm_R: 100,
-        spine_mid: -16,
-        spine_upper: -6,
-        hips: [4, -4],
-        ik_foot_R: [6, 0],
+        spine_mid: 10,
+        spine_upper: 7,
+        hips: [-5, -3],
+        ik_foot_R: [-6, 0],
+        ik_foot_L: [0, 0],
+      },
+      hit: {
+        upper_arm_L: 69,
+        lower_arm_L: 10,
+        upper_arm_R: 64,
+        lower_arm_R: 102,
+        spine_mid: -19,
+        spine_upper: -11,
+        hips: [8, -4],
+        ik_foot_R: [-2, 0],
+        ik_foot_L: [10, 0],
+      },
+      hold: 2,
+      recoil: {
+        upper_arm_L: 58,
+        lower_arm_L: 55,
+        upper_arm_R: 58,
+        lower_arm_R: 98,
+        spine_mid: -9,
+        spine_upper: -5,
+        hips: [3, -2.5],
+        ik_foot_L: [6, 0],
+        ik_foot_R: [-3, 0],
       },
     },
+    // finisher: double palm strike, both arms drive together, the longest hold
     attack_3: {
-      windup: { upper_arm_R: 30, lower_arm_R: 65, upper_arm_L: 30, lower_arm_L: 65, spine_mid: 10, hips: [-3, -4] },
-      hit: {
-        upper_arm_R: 90,
-        lower_arm_R: 5,
-        upper_arm_L: 85,
-        lower_arm_L: 10,
-        spine_mid: -18,
-        spine_upper: -6,
-        hips: [8, -5],
-        ik_foot_L: [11, 0],
+      load: {
+        upper_arm_R: 48,
+        lower_arm_R: 92,
+        upper_arm_L: 40,
+        lower_arm_L: 98,
+        spine_mid: 5,
+        spine_upper: 3,
+        hips: [-4, -3],
+        ik_foot_R: [-4, 0],
       },
+      windup: {
+        upper_arm_R: 38,
+        lower_arm_R: 70,
+        upper_arm_L: 28,
+        lower_arm_L: 70,
+        spine_mid: 11,
+        spine_upper: 7,
+        hips: [-5, -4],
+        ik_foot_R: [-6, 0],
+        ik_foot_L: [0, 0],
+      },
+      hit: {
+        upper_arm_R: 112,
+        lower_arm_R: -9,
+        upper_arm_L: 69,
+        lower_arm_L: 10,
+        spine_mid: -21,
+        spine_upper: -12,
+        hips: [9, -5],
+        ik_foot_L: [12, 0],
+        ik_foot_R: [-3, 0],
+      },
+      // the longest hold: 3 frames (6-8), so the combo window / recoil starts one frame later than the jab and cross (10)
+      hold: 3,
+      combo: 10,
+      recoil: {
+        upper_arm_R: 85,
+        lower_arm_R: 45,
+        upper_arm_L: 52,
+        lower_arm_L: 55,
+        spine_mid: -10,
+        spine_upper: -5,
+        hips: [4, -3],
+        ik_foot_L: [7, 0],
+        ik_foot_R: [-3, 0],
+      },
+    },
+    // hit reaction of a tank: the guard tightens and the body gives a little, no big recoil
+    hit: {
+      upper_arm_R: 62,
+      lower_arm_R: 105,
+      upper_arm_L: 58,
+      lower_arm_L: 108,
+      spine_mid: 3,
+      spine_upper: 4,
+      hips: [-2.5, -2],
+      ik_foot_L: [3, 0],
+      ik_foot_R: [-4, 0],
     },
     cast: {
       gather: { upper_arm_R: 140, lower_arm_R: -15, upper_arm_L: 140, lower_arm_L: -15, spine_mid: 10, hips: [0, -2] },
@@ -338,16 +504,22 @@ export const CLASS_CLIPS: Readonly<Partial<Record<CharacterId, ClassClipSpec>>> 
 /** Clip makers for a class (empty for a class that keeps the Kiếm tu hand-authored set). */
 export function classOverrides(
   id: CharacterId,
-): Partial<Record<'idle' | 'attack' | 'attack_2' | 'attack_3' | 'cast' | 'channel', (rig: RigDocument) => Clip>> {
+): Partial<
+  Record<'idle' | 'attack' | 'attack_2' | 'attack_3' | 'cast' | 'channel' | 'hit', (rig: RigDocument) => Clip>
+> {
   const s = CLASS_CLIPS[id];
   if (!s) return {};
+  const rest = s.stanceBlend ? s.stance : {};
   return {
     idle: (rig) => idle(rig, s.stance),
-    attack: (rig) => strike(rig, 'attack', s.attack, { windupEnd: 4, hit: 6, combo: 9 }),
-    attack_2: (rig) => strike(rig, 'attack_2', s.attack_2, { windupEnd: 3, hit: 5, combo: 9 }),
-    attack_3: (rig) => strike(rig, 'attack_3', s.attack_3, { windupEnd: 4, hit: 6, combo: 9 }),
+    attack: (rig) => strike(rig, 'attack', s.attack, { windupEnd: 4, hit: 6, combo: s.attack.combo ?? 9 }, rest),
+    attack_2: (rig) =>
+      strike(rig, 'attack_2', s.attack_2, { windupEnd: 3, hit: 5, combo: s.attack_2.combo ?? 9 }, rest),
+    attack_3: (rig) =>
+      strike(rig, 'attack_3', s.attack_3, { windupEnd: 4, hit: 6, combo: s.attack_3.combo ?? 9 }, rest),
     cast: (rig) => cast(rig, s.cast),
     channel: (rig) => channel(rig, s.channel),
+    ...(s.hit ? { hit: (rig: RigDocument) => hitReaction(rig, s.hit!, rest) } : {}),
   };
 }
 

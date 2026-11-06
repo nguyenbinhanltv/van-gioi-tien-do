@@ -69,6 +69,12 @@ describe('Thể tu assembly profile', () => {
     expect(() => getAssemblyProfile('phap-tu')).toThrow(/no continuous-limb/);
   });
 
+  it('direction-specific tuning: the R knee override is E-only, S has its own deeper-knee gait', () => {
+    expect(Object.keys(THE_TU_PROFILE.ikBend!)).toEqual(['E']);
+    expect(THE_TU_PROFILE.gaitByDir!.S!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
+    expect(THE_TU_PROFILE.gaitByDir!.E).toBeUndefined();
+  });
+
   it('keeps piece ids unique and the slots inside the slot budget', () => {
     const ids = THE_TU_E_PIECES.map((p) => p.id);
     expect(new Set(ids).size).toBe(ids.length);
@@ -222,7 +228,7 @@ describe('class-aware helpers', () => {
       dropBones: THE_TU_PROFILE.dropBones,
       snapIk: true,
       extraChains: THE_TU_PROFILE.chains!,
-      ikBend: THE_TU_PROFILE.ikBend!,
+      ikBend: THE_TU_PROFILE.ikBend!.E!,
     });
     expect(res.skipped).toEqual([]);
     expect(validateRig(res.rig).filter((i) => i.severity === 'error')).toEqual([]);
@@ -241,10 +247,103 @@ describe('class-aware helpers', () => {
     expect(parent('trouser_hem_R_1')).toBe('shin_R');
     for (const id of ['sleeve_cuff_L', 'trouser_hem_L', 'trouser_hem_R'])
       expect(res.rig.skins[0]!.attachments[id]![id]!.type).toBe('mesh');
+    // a wide band lies along its parent: the hem chain starts parallel to the shin whatever the painted outline's slant
+    const rest = evalPose(res.rig, null, 0, { noIk: true });
+    for (const s of ['L', 'R'] as const) {
+      const diff = Math.abs(
+        ((rest.byName.get(`trouser_hem_${s}_1`)!.rotation - rest.byName.get(`shin_${s}`)!.rotation + 540) % 360) - 180,
+      );
+      expect(diff, s).toBeLessThan(0.01);
+    }
     expect(res.stats.bones).toBeLessThanOrEqual(res.stats.limits.bones);
     expect(res.stats.vertices).toBeLessThanOrEqual(res.stats.limits.meshVertices);
     expect(res.stats.slots).toBeLessThanOrEqual(res.stats.limits.slots);
     expect(res.stats.chains).toBeLessThanOrEqual(res.stats.limits.chains);
     expect(res.stats.nonPremultiplied).toBe(0);
+  });
+});
+
+describe('Thể tu combat poses', () => {
+  const clips = authorClassSet('the-tu', base, { secondary: false });
+  const get = (n: string) => clips.find((c) => c.name === n)!;
+  const rot = (clip: ReturnType<typeof get>, bone: string, f: number) => {
+    const keys = clip.bones.find((b) => b.bone === bone)!.rotate!;
+    const k = [...keys].reverse().find((x) => x.frame <= f)!;
+    return k.value;
+  };
+
+  it('strikes start and end in the guard stance (no drop of the arms), not in the bare rest pose', () => {
+    for (const n of ['attack', 'attack_2', 'attack_3', 'hit']) {
+      const c = get(n);
+      const first = c.bones.find((b) => b.bone === 'upper_arm_R')!.rotate![0]!.value;
+      const last = c.bones.find((b) => b.bone === 'upper_arm_R')!.rotate!.at(-1)!.value;
+      expect(first, n).toBeCloseTo(55, 3);
+      expect(last, n).toBeCloseTo(55, 3);
+    }
+  });
+
+  it('holds the impact pose for the configured frames, with the hit event on the first of them', () => {
+    const jab = get('attack');
+    const hit = jab.phases!.hit_frame!;
+    const arm = (f: number) => rot(jab, 'upper_arm_R', f);
+    expect(arm(hit)).toBeCloseTo(115, 3);
+    expect(arm(hit + 2)).toBeCloseTo(115, 3);
+    expect(arm(hit + 3)).toBeLessThan(115);
+    // the finisher holds one frame longer than the jab (3 vs 2): it is NOT clamped by the combo window
+    const fin = get('attack_3');
+    const finHit = fin.phases!.hit_frame!;
+    const finArm = (f: number) => rot(fin, 'upper_arm_R', f);
+    expect(fin.phases!.combo_window! - finHit).toBeGreaterThan(jab.phases!.combo_window! - hit);
+    expect(finArm(finHit)).toBeCloseTo(112, 3);
+    expect(finArm(finHit + 3)).toBeCloseTo(112, 3);
+    expect(finArm(finHit + 4)).toBeLessThan(112);
+    // the combo window is strictly inside the clip (30 fps clip length 13 = the table's 10 frames at 24 fps) with room to settle,
+    // and the recoil pose (not the stance) is what the arm shows at the combo frame; the final key is the stance alone
+    for (const c of [jab, get('attack_2'), fin]) expect(c.phases!.combo_window!, c.name).toBeLessThan(c.frames - 1);
+    const finCombo = fin.phases!.combo_window!;
+    expect(finArm(finCombo)).toBeCloseTo(85, 3);
+    const finKeys = fin.bones.find((b) => b.bone === 'upper_arm_R')!.rotate!;
+    expect(finKeys.filter((k) => k.frame === fin.frames)).toHaveLength(1);
+    expect(new Set(finKeys.map((k) => k.frame)).size).toBe(finKeys.length);
+    expect(jab.events.find((e) => e.name === 'hit')!.frame).toBe(hit);
+    expect(get('attack_3').bones.find((b) => b.bone === 'upper_arm_L')).toBeDefined();
+    // anticipation: the striking arm is drawn back before the impact, weight loaded back (hips behind the stance)
+    expect(arm(jab.phases!.windup_end!)).toBeLessThan(arm(0));
+  });
+
+  it('shows the fist at the impact of the jab and cross, open gauntlets at the palm strike', () => {
+    const disp = (names: string[]) => Object.fromEntries(names.map((n) => [n, {} as never]));
+    const rig = {
+      ...base,
+      slots: [
+        ...base.slots,
+        { name: 'hand_R', bone: 'hand_R', attachment: 'gauntlet_R_guard' },
+        { name: 'hand_L', bone: 'hand_L', attachment: 'gauntlet_L_guard' },
+      ],
+      skins: [
+        {
+          name: 'default',
+          attachments: {
+            ...base.skins[0]!.attachments,
+            hand_R: disp(['gauntlet_R_guard', 'gauntlet_R_fist', 'gauntlet_R_open']),
+            hand_L: disp(['gauntlet_L_guard', 'gauntlet_L_fist', 'gauntlet_L_open']),
+          },
+        },
+      ],
+    };
+    const shown = (clip: string, slot: string, frame: number) => {
+      const c = applyDetail(
+        rig,
+        authorClassSet('the-tu', rig, { secondary: false }).find((x) => x.name === clip)!,
+        THE_TU_DETAIL_RULES,
+      );
+      const keys = c.slots.find((s) => s.slot === slot)!.attachment!;
+      return [...keys].reverse().find((k) => k.frame <= frame)!.value;
+    };
+    const hitFrame = (n: string) => get(n).phases!.hit_frame!;
+    expect(shown('attack', 'hand_R', hitFrame('attack'))).toBe('gauntlet_R_fist');
+    expect(shown('attack_2', 'hand_L', hitFrame('attack_2'))).toBe('gauntlet_L_fist');
+    expect(shown('attack_3', 'hand_R', hitFrame('attack_3'))).toBe('gauntlet_R_open');
+    expect(shown('attack_3', 'hand_L', hitFrame('attack_3'))).toBe('gauntlet_L_open');
   });
 });
