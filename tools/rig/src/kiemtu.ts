@@ -10,7 +10,7 @@ import { clipSpec } from './animset.js';
 import { sampleScalar, sampleVec, type BoneTrack, type Clip, type Key } from './clip.js';
 import { ClipBuilder, EASE } from './dsl.js';
 import { closeLoop } from './loop.js';
-import { crouchFor, legReach, planFeet, screenAxis } from './locomotion.js';
+import { crouchFor, legReach, planFeet, screenAxis, touchdowns } from './locomotion.js';
 import { angleDelta, type Vec2 } from './math.js';
 import { evalPose } from './pose.js';
 import { fitToSilhouette } from './fit.js';
@@ -137,12 +137,14 @@ export function authorRun(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.fr
     motion: {
       speed,
       planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R },
+      cycles: gait.cycles,
     },
   });
   c.merge(plan.tracks);
-  // L foot touches down at cycle 0.2, R at 0.7 (docs/03: footsteps at sprite frames 2 and 7 of 10)
-  c.event(Math.round(0.2 * N), 'footstep_L');
-  c.event(Math.round(0.7 * N), 'footstep_R');
+  // footsteps at the real touchdowns of every gait cycle: with the table gait L touches down at 0.2 and R at 0.7 of the
+  // clip (docs/03: sprite frames 2 and 7 of 10); the robe gait has `cycles` of each (4 footsteps in a robe run clip)
+  for (const f of touchdowns(plan.planted.L, N)) c.event(f, 'footstep_L');
+  for (const f of touchdowns(plan.planted.R, N)) c.event(f, 'footstep_R');
   c.rotate('spine_mid', sine(N, 1.6 * g, { cycles: 2 * gait.cycles, phase: 0.1, offset: (-7 - gait.lean) * g }));
   c.rotate('spine_upper', sine(N, 3.2 * g, { cycles: gait.cycles, phase: 0.25, offset: -3 * g }));
   c.rotate('head', sine(N, 1.4, { cycles: 2 * gait.cycles, phase: 0.3, offset: 7 * g }));
@@ -585,7 +587,11 @@ export function authorWalk(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.f
     name: 'walk',
     frames: N,
     loop: true,
-    motion: { speed, planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R } },
+    motion: {
+      speed,
+      planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R },
+      cycles: gait.cycles,
+    },
   });
   c.merge(plan.tracks);
   c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2 * gait.cycles, phase: 0.1, offset: (-2 - gait.lean * 0.5) * g }));

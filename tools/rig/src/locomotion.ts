@@ -69,6 +69,19 @@ function swingEase(s: number): number {
   return s * s * (3 - 2 * s);
 }
 
+/**
+ * Frames at which a foot becomes planted (touchdown), cyclic: frame 0 counts when the foot is planted there and was not at
+ * the last frame of the loop. `planted` has frames + 1 entries (the last equals the first for a loop).
+ */
+export function touchdowns(planted: readonly boolean[], frames: number): number[] {
+  const out: number[] = [];
+  for (let f = 0; f < frames; f++) {
+    const before = f === 0 ? planted[frames - 1] : planted[f - 1];
+    if (planted[f] && !before) out.push(f);
+  }
+  return out;
+}
+
 /** Build IK foot-target tracks (+ optional hips bob/sway) for a gait. Requires roles `ik_foot_L`, `ik_foot_R`. */
 export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
   const axis = g.axis ?? { x: 1, y: 0 };

@@ -3,7 +3,10 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
   E_PIECES,
+  EVENT_FRAME_TOLERANCE,
   GAIT_PROFILES,
+  clipSpec,
+  touchdowns,
   STRIP_SLOTS,
   assembleContinuous,
   authorKiemTuSet,
@@ -228,6 +231,29 @@ describe('the robe gait bakes its cadence into the clip (no runtime timeScale)',
     const issues = runQa(res.rig, run, { mesh: false });
     expect(
       issues.issues.filter((i) => i.severity === 'error' && (i.check === 'foot-slide' || i.check === 'ik-reach')),
+    ).toEqual([]);
+  });
+
+  it('footstep events fire at the real touchdowns: 4 in a robe run clip, each within the tolerance of a touchdown of that foot', () => {
+    const touch = (c: ReturnType<typeof clipOf>, foot: 'L' | 'R') => {
+      const planted = c.motion!.planted![foot === 'L' ? res.rig.roles.foot_L! : res.rig.roles.foot_R!]!;
+      return touchdowns(planted, c.frames);
+    };
+    const free = clipOf('run', 'free');
+    const robe = clipOf('run', 'robe');
+    expect(free.events.filter((e) => e.name.startsWith('footstep')).length).toBe(2);
+    expect(robe.events.filter((e) => e.name.startsWith('footstep')).length).toBe(4);
+    for (const c of [free, robe])
+      for (const e of c.events.filter((x) => x.name.startsWith('footstep'))) {
+        const frames = touch(c, e.name === 'footstep_L' ? 'L' : 'R');
+        expect(
+          frames.some((f) => Math.abs(f - e.frame) <= EVENT_FRAME_TOLERANCE),
+          `${c.name} ${e.name}@${e.frame}`,
+        ).toBe(true);
+      }
+    // the table's footstep frames hold for the one-cycle gait; the robe gait passes the QA with one per cycle
+    expect(
+      runQa(res.rig, robe, { mesh: false, spec: clipSpec('run') }).issues.filter((i) => i.check === 'events'),
     ).toEqual([]);
   });
 });
