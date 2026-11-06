@@ -118,6 +118,43 @@ try {
   console.log('viewer ready');
   const all = await page.evaluate('window.__vgtdViewer.animations');
   const names = opt('animations', 'all') === 'all' ? all : opt('animations', 'all').split(',');
+  if (flag('blink')) {
+    // Blink verification (D39): play each body clip live and sample the eyes slot; the independent blink layer must show
+    // eyes_closed (display 2) every 3-5 s on walk / idle (short loops), and must stay off for meditate / die / hit.
+    //   npm run capture -w client-cocos -- --blink --animations idle,walk,meditate --seconds 14 --src ... --stem ...
+    const seconds = Number(opt('seconds', 14));
+    const report = {};
+    for (const anim of opt('animations', 'idle,walk,meditate').split(',')) {
+      await page.evaluate(
+        `window.__vgtdViewer.set({ animation: ${JSON.stringify(anim)}, mode: 'single', direction: ${JSON.stringify(direction)}, paused: false })`,
+      );
+      await waitReady();
+      const samples = [];
+      const t0 = Date.now();
+      while (Date.now() - t0 < seconds * 1000) {
+        const b = await page.evaluate('window.__vgtdViewer.blink()');
+        samples.push({ t: (Date.now() - t0) / 1000, ...(b ?? { playing: false, eyes: null }) });
+        await sleep(100);
+      }
+      const closed = samples.filter((x) => x.eyes === 'display 2');
+      // blink starts = first closed sample of each run
+      const starts = closed
+        .filter((x, i) => i === 0 || x.t - closed[i - 1].t > 0.5)
+        .map((x) => Math.round(x.t * 10) / 10);
+      const info = await page.evaluate('window.__vgtdViewer.info()');
+      report[anim] = {
+        bodyDurationSec: Math.round(info.duration * 100) / 100,
+        layerPlaying: samples.some((x) => x.playing),
+        eyesSeen: [...new Set(samples.map((x) => x.eyes))],
+        blinkStartsSec: starts,
+      };
+      console.log(anim, JSON.stringify(report[anim]));
+    }
+    writeFileSync(join(out, 'blink.json'), JSON.stringify(report, null, 2));
+    await browser.close();
+    server.close();
+    process.exit(failures ? 1 : 0);
+  }
   if (flag('perf')) {
     // Cache-mode CPU cost: N copies of one animation, median of 5 one-second samples per mode (software GL: compare
     // update/render CPU ms between modes, do not read absolute numbers as device performance).
