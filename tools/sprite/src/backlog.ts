@@ -8,9 +8,42 @@
  *                         declared pose exception
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { DIRECTIONS } from '@vgtd/shared';
 import type { Finding } from './qa.js';
 
 export const BACKLOG_FORMAT = 'vgtd-quality-backlog' as const;
+
+export const MANUAL_KINDS = ['carry_change', 'weak_reversal', 'redraw_drift', 'hair_spill', 'other'] as const;
+
+/** Visual observations only: never an automatic metric acceptance or resolution. */
+export interface ManualArtFinding {
+  readonly kind: (typeof MANUAL_KINDS)[number];
+  readonly clip: string;
+  readonly dir: string;
+  /** Zero-based cells; an empty list means the whole clip. */
+  readonly cells: readonly number[];
+  readonly note: string;
+  /** Art review label, preserved verbatim rather than mapped to automatic QA severity. */
+  readonly severity: string;
+  readonly reviewer: 'art-worker';
+}
+
+export function validateManualFinding(e: ManualArtFinding): void {
+  if (!e || !MANUAL_KINDS.includes(e.kind)) throw new Error('manual finding: unknown kind');
+  if (typeof e.clip !== 'string' || !e.clip.trim()) throw new Error('manual finding: clip is required');
+  if (!(DIRECTIONS as readonly string[]).includes(e.dir)) throw new Error('manual finding: invalid direction');
+  if (
+    !Array.isArray(e.cells) ||
+    e.cells.some((c) => !Number.isSafeInteger(c) || c < 0) ||
+    new Set(e.cells).size !== e.cells.length
+  )
+    throw new Error('manual finding: cells must be unique nonnegative integers');
+  if (typeof e.note !== 'string' || !e.note.trim()) throw new Error('manual finding: note is required');
+  if (typeof e.severity !== 'string' || !e.severity.trim()) throw new Error('manual finding: severity is required');
+  if (e.reviewer !== 'art-worker') throw new Error('manual finding: reviewer must be art-worker');
+  for (const key of ['gate', 'metric', 'value', 'limit', 'cell'])
+    if (key in e) throw new Error(`manual finding: '${key}' belongs to automatic metric entries`);
+}
 
 export interface BacklogEntry {
   readonly clip: string;
@@ -34,6 +67,63 @@ export interface Backlog {
   readonly version: 1;
   readonly character: string;
   readonly entries: readonly BacklogEntry[];
+  /** Kept separate from metric entries; automatic QA never resolves these observations. */
+  readonly manual?: readonly ManualArtFinding[];
+}
+
+/** Import worker 17's v1 companion file. Legacy diagnostics stay prose, never QA metrics. */
+export function migrateManualFindings(backlog: Backlog, source: unknown): Backlog {
+  validateBacklog(backlog);
+  if (!source || typeof source !== 'object') throw new Error('not a manual art companion file');
+  const legacy = source as Record<string, unknown>;
+  if (legacy.format !== 'vgtd-manual-art-findings' || legacy.version !== 1 || !Array.isArray(legacy.entries))
+    throw new Error('not a vgtd-manual-art-findings v1 file');
+  if (legacy.character !== backlog.character) throw new Error('manual companion character differs from backlog');
+  const manual = [...(backlog.manual ?? [])];
+  const identity = (e: ManualArtFinding) =>
+    JSON.stringify([e.kind, e.clip, e.dir, e.cells, e.note, e.severity, e.reviewer]);
+  const have = new Set(manual.map(identity));
+  for (const raw of legacy.entries) {
+    if (!raw || typeof raw !== 'object') throw new Error('invalid manual companion entry');
+    const e = raw as Record<string, unknown>;
+    if (typeof e.kind !== 'string' || !e.kind || typeof e.note !== 'string' || !e.note.trim())
+      throw new Error('manual companion entry needs kind and note');
+    const cell = e.cell0based ?? e.cell;
+    if (e.cell0based === undefined && legacy.cellConvention !== '0based;-1wholeclip')
+      throw new Error('manual companion cell requires explicit zero-based convention');
+    if (e.cell !== undefined && e.cell0based !== undefined && e.cell !== e.cell0based)
+      throw new Error('manual companion has conflicting cell indexes');
+    if (!Number.isSafeInteger(cell) || (cell as number) < -1)
+      throw new Error('manual companion cell must be -1 or a nonnegative integer');
+    const kind =
+      e.kind === 'leg_reversal'
+        ? 'weak_reversal'
+        : e.kind === 'key_spill'
+          ? 'hair_spill'
+          : MANUAL_KINDS.includes(e.kind as ManualArtFinding['kind'])
+            ? (e.kind as ManualArtFinding['kind'])
+            : 'other';
+    const diagnostics = ['kind', 'metric', 'value', 'limit', 'status']
+      .filter((key) => e[key] !== undefined)
+      .map((key) => `${key}=${JSON.stringify(e[key])}`)
+      .join('; ');
+    const finding: ManualArtFinding = {
+      kind,
+      clip: e.clip as string,
+      dir: e.dir as string,
+      cells: cell === -1 ? [] : [cell as number],
+      note: `${e.note}\nLegacy art diagnostic: ${diagnostics}`,
+      severity: e.severity as string,
+      reviewer: 'art-worker',
+    };
+    validateManualFinding(finding);
+    const key = identity(finding);
+    if (!have.has(key)) {
+      manual.push(finding);
+      have.add(key);
+    }
+  }
+  return { ...backlog, manual };
 }
 
 export type FindingClass = 'hard' | 'soft' | 'info';
@@ -64,6 +154,7 @@ export interface BacklogReport {
   /** Backlog entries (of this direction) that no longer occur: fixed, prune them. */
   readonly resolved: readonly BacklogEntry[];
   readonly counts: Readonly<Record<Verdict, number>>;
+  readonly manual: readonly ManualArtFinding[];
 }
 
 const keyOf = (clip: string, dir: string, cell: number, gate: string, metric: string) =>
@@ -76,6 +167,8 @@ const findingKey = (f: Finding, dir: string) => keyOf(f.clip, dir, f.frame ?? -1
 /** Validate a parsed backlog; throws with the reason (hard gates cannot be listed, keys must be unique). */
 export function validateBacklog(b: Backlog): void {
   if (b.format !== BACKLOG_FORMAT || b.version !== 1) throw new Error(`not a ${BACKLOG_FORMAT} v1 file`);
+  if (b.manual !== undefined && !Array.isArray(b.manual)) throw new Error('manual findings must be an array');
+  for (const e of b.manual ?? []) validateManualFinding(e);
   const seen = new Set<string>();
   for (const e of b.entries) {
     if (HARD_GATES.includes(e.gate))
@@ -142,6 +235,7 @@ export function applyBacklog(findings: readonly Finding[], dir: string, backlog:
     judged,
     resolved: [...entries].filter(([k]) => !used.has(k)).map(([, e]) => e),
     counts,
+    manual: (backlog?.manual ?? []).filter((e) => e.dir === dir),
   };
 }
 
@@ -202,14 +296,35 @@ export function backlogMarkdown(b: Backlog): string {
     `Generated from \`quality-backlog.json\` (${b.entries.length} accepted soft finding${b.entries.length === 1 ? '' : 's'}). Hard gates (frames, upright height, similarity, loop seam, export) are never listed. A listed finding passes as a warning while its value is no worse than recorded.`,
     '',
   ];
-  if (!b.entries.length) return lines.join('\n') + '\nNo accepted findings.\n';
-  lines.push(
-    '| clip | dir | cell | gate | metric | value | limit | status | note |',
-    '| --- | --- | --- | --- | --- | --- | --- | --- | --- |',
-  );
-  for (const e of sortEntries(b.entries))
+  if (!b.entries.length) lines.push('No accepted metric findings.', '');
+  if (b.entries.length) {
     lines.push(
-      `| ${e.clip} | ${e.dir} | ${e.cell < 0 ? '-' : e.cell} | ${e.gate} | ${e.metric} | ${e.value} | ${e.limit} | ${e.status}${e.owner ? ` (${e.owner})` : ''} | ${e.note.replace(/\|/g, '/')} |`,
+      '| clip | dir | cell | gate | metric | value | limit | status | note |',
+      '| --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     );
+    for (const e of sortEntries(b.entries))
+      lines.push(
+        `| ${e.clip} | ${e.dir} | ${e.cell < 0 ? '-' : e.cell} | ${e.gate} | ${e.metric} | ${e.value} | ${e.limit} | ${e.status}${e.owner ? ` (${e.owner})` : ''} | ${e.note.replace(/\|/g, '/')} |`,
+      );
+  }
+  const manual = b.manual ?? [];
+  lines.push(
+    '',
+    `## Manual art findings (${manual.length})`,
+    '',
+    'Visual observations; automatic metric pruning never resolves these.',
+    '',
+  );
+  if (manual.length) {
+    lines.push(
+      '| clip | dir | cells | kind | severity | reviewer | note |',
+      '| --- | --- | --- | --- | --- | --- | --- |',
+    );
+    const cell = (s: string) => s.replace(/\|/g, '/').replace(/[\r\n]/g, ' ');
+    for (const e of manual)
+      lines.push(
+        `| ${cell(e.clip)} | ${cell(e.dir)} | ${e.cells.join(', ') || 'all'} | ${e.kind} | ${cell(e.severity)} | ${e.reviewer} | ${cell(e.note)} |`,
+      );
+  }
   return lines.join('\n') + '\n';
 }

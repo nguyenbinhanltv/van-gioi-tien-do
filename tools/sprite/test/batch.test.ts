@@ -53,6 +53,43 @@ function setup(bad = false) {
 }
 
 describe('runBatch', () => {
+  it('carries direction-scoped manual art observations into review without changing metric verdicts', () => {
+    const root = setup();
+    writeFileSync(
+      join(root, 'E/quality-backlog.json'),
+      JSON.stringify({
+        format: 'vgtd-quality-backlog',
+        version: 1,
+        character: 'kiem-tu',
+        entries: [],
+        manual: [
+          {
+            kind: 'carry_change',
+            clip: 'idle',
+            dir: 'E',
+            cells: [0],
+            note: '<script>carry changed</script>',
+            severity: 'warn',
+            reviewer: 'art-worker',
+          },
+        ],
+      }),
+    );
+    const run = runBatch(join(root, 'batch.json'), join(root, 'out'));
+    expect(run.report.ok).toBe(true);
+    expect(run.report.dirs[0]!.manual).toHaveLength(1);
+    expect(run.report.dirs[0]!.resolvedEntries).toBe(0);
+    expect(run.report.dirs[0]!.clips[0]!.counts.accepted).toBe(0);
+    expect(run.report.dirs[1]!.manual).toBeUndefined();
+    const html = reviewHtml([run.report]);
+    expect(html).toContain('1 manual art findings');
+    expect(html).toContain('Manual art findings (1)');
+    expect(html).toContain('carry_change');
+    expect(html).toContain('art-worker');
+    expect(html).toContain('&lt;script&gt;carry changed&lt;/script&gt;');
+    expect(html).not.toContain('<script>carry changed</script>');
+  });
+
   it('builds every direction, writes outputs and a report, and reports ok', () => {
     const root = setup();
     const out = join(root, 'out');
