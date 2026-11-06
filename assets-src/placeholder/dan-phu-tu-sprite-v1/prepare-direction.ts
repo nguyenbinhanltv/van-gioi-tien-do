@@ -28,7 +28,17 @@ for (const clipSpec of SPRITE_CLIPS) {
   const name = clipSpec.name;
   const sourceName = name === 'attack' ? 'attack_1' : name;
   const cols =
-    spec.frames === 24 ? 6 : spec.frames === 14 ? 5 : spec.frames <= 4 ? spec.frames : spec.frames % 5 === 0 ? 5 : 4;
+    spec.frames === 24
+      ? 6
+      : spec.frames === 14
+        ? 5
+        : spec.frames <= 4
+          ? direction === 'E'
+            ? spec.frames
+            : 2
+          : spec.frames % 5 === 0
+            ? 5
+            : 4;
   const durationSec = clipSpec.durationSec;
   const gait = spec.id === 'walk' || spec.id === 'run';
   const cells = gait
