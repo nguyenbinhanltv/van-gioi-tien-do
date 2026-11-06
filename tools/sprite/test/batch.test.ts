@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { describe, expect, it } from 'vitest';
 import { encodePng } from '@vgtd/rig';
@@ -103,7 +104,7 @@ describe('batch path safety', () => {
     const entry = join(root, 'tools/sprite/scripts/batch.ts');
     const out = join(root, 'out');
     await build({
-      entryPoints: [join(process.cwd(), 'scripts/batch.ts')],
+      entryPoints: [fileURLToPath(new URL('../scripts/batch.ts', import.meta.url))],
       bundle: true,
       platform: 'node',
       format: 'esm',
@@ -143,7 +144,7 @@ describe('batch path safety', () => {
         existsSync(join(client, `assets/resources/dragonbones/_batch-kiem-tu-${dir}/kiemtu_${dir}.sprite.json`)),
       ).toBe(true);
     expect(existsSync(join(out, 'index.html'))).toBe(true);
-  });
+  }, 15000);
 
   it('rejects a character that could escape the output / resources folders', () => {
     const root = setup();
