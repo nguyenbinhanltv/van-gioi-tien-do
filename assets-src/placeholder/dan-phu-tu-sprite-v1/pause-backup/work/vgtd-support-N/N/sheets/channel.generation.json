@@ -1,0 +1,18 @@
+{
+  "clip": "channel",
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:49:50 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:50:10 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production 2D isometric cultivation MMORPG frame-by-frame Dan/Phu tu jade ivory whisk healer. Image1 exact N master identity and STRAIGHT BACK camera; image2 exact4columns x2rows frame layout with gait ghosts. Draw ONE8-frame sheet row-major, uniform SQUARE cells, pure flat #ff00ff backdrop, no gutters. Source working DPI anatomy: when cells normalized256px, standing crown-to-lowest-sole about231px; fixed downstream character scale0.90043 produces208px master. Maintain ONE anatomical scale in every cell; never independently fit poses. Master final208px is identity reference, source sheet needs working231px. Keep anatomy compact adult5.75heads, identical head/torso proportions. Camera N: full BACK directly toward TOP, symmetric back robe panels and back of head, NO face/cheek/threequarter turn. RIGHT anatomical hand on SCREEN RIGHT brownbronze whisk handle WHITE horsehair; LEFT hand SCREEN LEFT gold talisman paper. Jade gray robe ivory sleeves goldbronze trim, dark loop hair jadecrown, belt gourd and3papers. ALL EIGHT frames already holding steady channel guard: whisk at upper belt, paper outside left upper chest. Do not cover torso or raise hands through cycle. Feet planted, tiny breathing only, seamless. Fine ink softly painted NW light readable128px. No grid lines/dividers/numbers/ghosts, remove all template guides. No VFX/text/backgroundshadows/blur/newprops. Entire props within each cell.",
+  "outputId": "exec-ae11f135-fd55-4fe3-8ffc-8593ae4cffdb.png",
+  "references": [
+    "reference/N.master.png",
+    "N/templates/channel.template.png"
+  ],
+  "templateToolingCommit": "1c48569f24236566067937b8e2c022509a6dcc26"
+}

@@ -1,0 +1,6 @@
+{
+  "qaTemplateCommit": "1c48569f24236566067937b8e2c022509a6dcc26",
+  "direction": "S",
+  "generationGaitTemplates": "generation-templates/sha256.json",
+  "note": "Original generation inputs archived byte-identically; templates/walk and templates/run are newly generated directional QA inputs, not relabeled generation inputs."
+}

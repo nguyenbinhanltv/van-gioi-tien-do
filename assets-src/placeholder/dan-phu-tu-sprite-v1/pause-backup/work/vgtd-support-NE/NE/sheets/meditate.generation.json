@@ -1,0 +1,21 @@
+{
+  "clip": "meditate",
+  "attempt": 2,
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:40:12 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:40:43 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Draw ONE production sprite sheet of jade/ivory Dan Phu tu whisk healer. Image1 NE master identity and back-right camera, image2 4x2 layout/template ghosts, image3 PASSING idle sheet for WORKING ANATOMICAL SCALE. 8 frames row-major, square uniform cells, pure flat #ff00ff background, no gutters. All8 already seated cross-legged facing upper-right away. Keep EXACT head, shoulders, torso dimensions of idle reference after normalizing both grids to256px cells. Seated crown top about85..95, crossed knees ground232, figure137..147px BEFORE .90043 pipeline, instead of filling cell. Lots of empty magenta ABOVE seated person. Absolutely no enlarged seated head/body. Arms relaxed, white whisk right hand, left gold paper, tiny breathing only seamless. No sit/stand transition. Maintain NE three-quarter BACK upper-right view throughout, back robe panels dominate, only tiny right cheek. Compact adult anatomy, dark hair loop jade crown, ivory sleeves jade gray robe gold bronze trim, gourd3beltpapers, white horsehair whisk brown bronze handle anatomicalRIGHT, gold paper LEFT. Fine ink soft paint NW light, readable128px. Remove ALL ghosts/guides/numbers. No VFX/shadows/text/blur, all props inside cells.",
+  "outputId": "exec-00ce6d5f-db77-4929-8b15-cf8bff0fbbbb.png",
+  "references": [
+    "reference/NE.master.png",
+    "NE/templates/meditate.template.png",
+    "NE/sheets/idle.png"
+  ],
+  "templateToolingCommit": "1c48569f24236566067937b8e2c022509a6dcc26",
+  "supersedes": "attempt1 preserved in working provenance archive"
+}

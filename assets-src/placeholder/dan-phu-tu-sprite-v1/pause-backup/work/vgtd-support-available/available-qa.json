@@ -1,0 +1,157 @@
+[
+  {
+    "clip": "idle",
+    "calibration": {
+      "scale": 0.636085626911315,
+      "targetHeight": 208,
+      "referenceHeight": 327,
+      "referenceFrames": 12
+    },
+    "heights": [
+      208,
+      208,
+      209,
+      209,
+      210,
+      210,
+      210,
+      209,
+      208,
+      207,
+      207,
+      206
+    ],
+    "qa": {
+      "ok": true,
+      "findings": []
+    }
+  },
+  {
+    "clip": "walk",
+    "calibration": {
+      "scale": 0.5036319612590799,
+      "targetHeight": 208,
+      "referenceHeight": 413,
+      "referenceFrames": 8
+    },
+    "heights": [
+      207,
+      208,
+      208,
+      208,
+      208,
+      208,
+      208,
+      207
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "message": "R foot slides 9.6 px/frame between frames 1-2 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 5,
+          "message": "L foot slides 12.4 px/frame between frames 4-5 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 6,
+          "message": "L foot slides 7.5 px/frame between frames 5-6 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "message": "L foot slides 9.8 px/frame between frames 6-7 (limit 3)"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "run",
+    "calibration": {
+      "scale": 0.5892351274787535,
+      "targetHeight": 208,
+      "referenceHeight": 353,
+      "referenceFrames": 10
+    },
+    "heights": [
+      207,
+      210,
+      209,
+      188,
+      207,
+      208,
+      210,
+      210,
+      186,
+      208
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 3,
+          "message": "height 188 px outside 201.8..214.2 (master 208 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 8,
+          "message": "height 186 px outside 201.8..214.2 (master 208 px +-3 %)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 1,
+          "message": "R foot slides 20.6 px/frame between frames 0-1 (limit 3)"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "cast",
+    "calibration": {
+      "scale": 0.7098976109215017,
+      "targetHeight": 208,
+      "referenceHeight": 293,
+      "referenceFrames": 14
+    },
+    "heights": [
+      208,
+      209,
+      208,
+      208,
+      208,
+      209,
+      209,
+      209,
+      209,
+      209,
+      208,
+      208,
+      208,
+      208
+    ],
+    "qa": {
+      "ok": true,
+      "findings": []
+    }
+  }
+]

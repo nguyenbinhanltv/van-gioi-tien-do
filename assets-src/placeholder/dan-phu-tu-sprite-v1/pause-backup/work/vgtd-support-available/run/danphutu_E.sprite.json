@@ -1,0 +1,235 @@
+{
+  "format": "vgtd-sprite-contract",
+  "version": 1,
+  "character": "dan-phu-tu",
+  "direction": "E",
+  "stem": "danphutu",
+  "master": {
+    "sha1": "6b6e718d9e9a491daa3b5596c249a45d144e711f",
+    "metrics": {
+      "left": 91,
+      "right": 163,
+      "top": 24,
+      "bottom": 232,
+      "height": 208,
+      "width": 72,
+      "pelvisX": 127.6311263972485
+    },
+    "guides": {
+      "ground": 232,
+      "head": 24,
+      "pelvis": 128,
+      "centerX": 127.6311263972485
+    }
+  },
+  "calibration": {
+    "scale": 0.5892351274787535,
+    "targetHeight": 208,
+    "referenceHeight": 353,
+    "referenceFrames": 10
+  },
+  "palette": {
+    "size": 32,
+    "locked": true
+  },
+  "atlas": {
+    "pages": 1,
+    "width": 1024,
+    "height": 1024,
+    "regions": 10
+  },
+  "clips": [
+    {
+      "name": "run",
+      "frames": 10,
+      "kind": "upright",
+      "sheetSha1": "3efe2d3ed37db7e29a3e250afb8774f8c8327c89",
+      "calibration": {
+        "scale": 0.5892351274787535,
+        "targetHeight": 208,
+        "referenceHeight": 353,
+        "referenceFrames": 10
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 207.41076487252124,
+            "pelvisX": 115.23525066110636,
+            "soleY": 218.60623229461754
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 127.4410582719357,
+            "soleY": 232
+          },
+          "dx": 12.39587573614213,
+          "dy": 13.393767705382459
+        },
+        {
+          "pre": {
+            "height": 209.76770538243625,
+            "pelvisX": 115.2268937744396,
+            "soleY": 218.60623229461754
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 127.20062262193012,
+            "soleY": 232
+          },
+          "dx": 12.404232622808891,
+          "dy": 13.393767705382459
+        },
+        {
+          "pre": {
+            "height": 209.1784702549575,
+            "pelvisX": 117.86874682654349,
+            "soleY": 218.0169971671388
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 127.42672041462713,
+            "soleY": 232
+          },
+          "dx": 9.762379570705008,
+          "dy": 13.983002832861189
+        },
+        {
+          "pre": {
+            "height": 187.96600566572238,
+            "pelvisX": 116.88944310235955,
+            "soleY": 194.44759206798867
+          },
+          "post": {
+            "height": 188,
+            "pelvisX": 127.38894947291894,
+            "soleY": 232
+          },
+          "dx": 10.741683294888944,
+          "dy": 37.552407932011334
+        },
+        {
+          "pre": {
+            "height": 207.41076487252124,
+            "pelvisX": 118.85599362182151,
+            "soleY": 216.24929178470254
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 127.31290432414028,
+            "soleY": 232
+          },
+          "dx": 8.775132775426982,
+          "dy": 15.750708215297465
+        },
+        {
+          "pre": {
+            "height": 208.58923512747873,
+            "pelvisX": 117.90259429925027,
+            "soleY": 217.42776203966005
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.46081399260007,
+            "soleY": 232
+          },
+          "dx": 9.728532097998226,
+          "dy": 14.572237960339947
+        },
+        {
+          "pre": {
+            "height": 210.356940509915,
+            "pelvisX": 115.80268104738528,
+            "soleY": 218.60623229461754
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 127.34052287581699,
+            "soleY": 232
+          },
+          "dx": 11.828445349863216,
+          "dy": 13.393767705382459
+        },
+        {
+          "pre": {
+            "height": 209.76770538243625,
+            "pelvisX": 118.64272888157083,
+            "soleY": 217.42776203966005
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 127.255330634278,
+            "soleY": 232
+          },
+          "dx": 8.988397515677661,
+          "dy": 14.572237960339947
+        },
+        {
+          "pre": {
+            "height": 186.78753541076486,
+            "pelvisX": 116.59824619940812,
+            "soleY": 192.09065155807363
+          },
+          "post": {
+            "height": 186,
+            "pelvisX": 127.46136946173563,
+            "soleY": 232
+          },
+          "dx": 11.03288019784037,
+          "dy": 39.90934844192637
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 119.44588726990942,
+            "soleY": 217.42776203966005
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.35801674179008,
+            "soleY": 232
+          },
+          "dx": 8.185239127339074,
+          "dy": 14.572237960339947
+        }
+      ],
+      "regions": [
+        "run_01",
+        "run_02",
+        "run_03",
+        "run_04",
+        "run_05",
+        "run_06",
+        "run_07",
+        "run_08",
+        "run_09",
+        "run_10"
+      ]
+    }
+  ],
+  "qa": {
+    "ok": false,
+    "findings": [
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 3,
+        "message": "height 188 px outside 201.8..214.2 (master 208 px +-3 %)"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "message": "height 186 px outside 201.8..214.2 (master 208 px +-3 %)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "message": "R foot slides 20.6 px/frame between frames 0-1 (limit 3)"
+      }
+    ]
+  }
+}

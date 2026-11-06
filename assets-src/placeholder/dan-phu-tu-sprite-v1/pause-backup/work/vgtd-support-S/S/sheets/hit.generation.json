@@ -1,0 +1,18 @@
+{
+  "id": "S-hit-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:27:13 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:27:34 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production hit sprite sheet DAN/PHU TU A supporthealer. EXACT2columns x2rows ofSQUAREcells, 4 drawnposes readingorder. Image1 EXACT S master identity/camera/anatomy; image2 template layout. FIXED S FRONT VIEW: face towardviewer/screenBOTTOM, both eyes/shoulders visible symmetrically, samecamera ALLcells. No sideprofile, no threequarterturn. Sameadultcompactwoman foldedjadeheadpiece, loopedtieddarkhair, ivorysleeves jadeshortsplitoverrobe bluepanels bronzetrim darksashtrousersboots, gourd and3goldbelttalismans. AnatomicalRIGHT hand(screenLEFT) bronzehandle WHITEwhisk; anatomicalLEFT hand(screenRIGHT) GOLDpapertalisman. Never swap hands. Exactmasterface/head/torso/limb/propdimensions in everycell; separateboots visiblebeneathsplithem. Softpaintedfineink gameart NWlight. Upright masterheight208of256cell, band202..214; headtop24sole232, maintain anatomy in bent/seated/collapse poses, no individual resizing. Four recoilposes:ready, shouldersbackwardimpact, settle, returnguard. Originalanatomy andbodyheight, no exaggeratedsquat. No blood/VFX. Whiskhandle bronze/brown NOTpink/violet, paperwarmgold NOTgray. Flatpure#FF00FF background. Remove alltemplateguides/ghosts. NOgridlines/borders/text/letters/shadow/floor/glow/particles/blur/extralimbs. Entirefigures/propsinsideowncells atsharedscale.",
+  "references": [
+    "reference/S.master.png",
+    "S/templates/hit.template.png"
+  ],
+  "output": "S/sheets/hit.png",
+  "toolOutputId": "exec-40e4fe4f-8930-4e9d-969b-a34a19fffbe6.png"
+}

@@ -1,0 +1,26 @@
+{
+  "clip": "emote",
+  "cells": [
+    0,
+    1,
+    2,
+    3,
+    5
+  ],
+  "attempt": 2,
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:43:13 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:43:34 UTC"
+  },
+  "prompt": "Precise-object-edit sprite sheet. Image1 is EDIT TARGET; image2 NE master identity reference. Keep EXACT 4x3 grid square-cell layout and entire sheet aspect ratio, pure magenta background. ONLY cells1,2,3,4,6 (1-based) add tiny 1-2px anatomical knee flex to lower crown by2px at256px cell while soles stay fixed. Current214px final needs212..213. Do not trim crown or squash/resize body, natural breath settling. Preserve EVERY other cell exactly. Preserve camera NE back-right, clothing, face, hands, whisk and paper, fine ink painting. Never duplicate frames or crop hat/boots. No grid lines, numbers, shadows, text or VFX.",
+  "outputId": "exec-8c12c9df-8c71-4109-b222-635929b7d5ba.png",
+  "references": [
+    "NE/sheets/emote.png",
+    "reference/NE.master.png"
+  ],
+  "repair": "shared sprite:repair; every unselected cell byte-identical"
+}

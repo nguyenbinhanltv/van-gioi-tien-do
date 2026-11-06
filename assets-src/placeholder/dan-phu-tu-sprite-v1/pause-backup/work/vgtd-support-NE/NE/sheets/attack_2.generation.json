@@ -1,0 +1,18 @@
+{
+  "clip": "attack_2",
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:34:18 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:34:46 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production frame-by-frame 2D isometric tu tien MMORPG sprite sheet, Dan/Phu tu jade ivory whisk healer A. Image1 is exact NE MASTER identity/style/anatomy reference. Image2 is exact 5 columns by 2 rows layout with leading-leg ghosts. Output ONE sheet, 10 frames row-major, uniform square cells, no gutters. Solid pure #ff00ff background. Remove all guide lines, numbers, ghost marks. Frame scale at conceptual256px cells: master upright207px, head top25, ground232; upright crown-to-sole201..213px. Use one identical anatomical scale for entire sheet; never fit each pose independently. Each entire prop remains inside cell. Camera NE: THREE QUARTER BACK facing upper right away, mostly back robe panel and hair; tiny right cheek profile only, never front or SE view. Match image1 compact adult 5.75-head anatomy, ivory sleeves, jade blue-gray robe, bronze gold trim, dark looped hair and jade crown, gourd and three belt talismans. Anatomical right hand holds brown bronze whisk handle with WHITE horsehair; left holds gold talisman paper. Fine ink edges, softly painted shading, NW light, readable at128px. Ten-frame second combo whisk sideways sweep: small windup, strike fully extended cell5, recovery cell8 then ready. Distinct swing path, NE back view unchanged. No text, no shadows on background, no motion blur, no floating glyphs, no new accessories.",
+  "outputId": "exec-719ef7ad-a668-4dee-ac19-0f54893ae932.png",
+  "references": [
+    "../reference/NE.master.png",
+    "NE/templates/attack_2.template.png"
+  ],
+  "templateToolingCommit": "1c48569f24236566067937b8e2c022509a6dcc26"
+}

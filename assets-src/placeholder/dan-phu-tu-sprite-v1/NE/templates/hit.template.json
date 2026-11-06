@@ -1,0 +1,32 @@
+{
+  "clip": "hit",
+  "grid": {
+    "cols": 2,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 4,
+  "guides": {
+    "ground": 232,
+    "head": 25,
+    "pelvis": 128.5,
+    "centerX": 127.71552221581074
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 512,
+  "height": 512
+}

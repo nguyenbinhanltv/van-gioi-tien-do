@@ -1,0 +1,17 @@
+{
+  "clip": "walk",
+  "attempt": 2,
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:39:40 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:40:09 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Draw ONE production sprite sheet of jade/ivory Dan Phu tu whisk healer. Image1 NE master identity and back-right camera, image2 4x2 layout/template ghosts, image3 PASSING idle sheet for WORKING ANATOMICAL SCALE. 8 frames row-major, square uniform cells, pure flat #ff00ff background, no gutters. Eight-frame gentle upright WALK cycle toward UPPER RIGHT away. Keep spine erect, almost straight knees, low boot lifts. Every crown-to-lowest-sole span at256px cell must be230..234px BEFORE pipeline fixedscale .90043, producing207..211px final. The previous gait crouched and shrank; redraw taller anatomy matching idle, not digitally scaling cells. Frames1-4 right boot leads, frames5-8 LEFT boot leads, actual opposite-leg reversal, not duplicate four poses. Foot ghosts show diagonal x/y placements; preserve enough boot length. Maintain NE three-quarter BACK upper-right view throughout, back robe panels dominate, only tiny right cheek. Compact adult anatomy, dark hair loop jade crown, ivory sleeves jade gray robe gold bronze trim, gourd3beltpapers, white horsehair whisk brown bronze handle anatomicalRIGHT, gold paper LEFT. Fine ink soft paint NW light, readable128px. Remove ALL ghosts/guides/numbers. No VFX/shadows/text/blur, all props inside cells.",
+  "outputId": "exec-513f5c2b-2d2b-4455-8545-ed7ed8a8411f.png",
+  "references": ["reference/NE.master.png", "NE/templates/walk.template.png", "NE/sheets/idle.png"],
+  "templateToolingCommit": "1c48569f24236566067937b8e2c022509a6dcc26",
+  "supersedes": "NE/sheets/walk.attempt1.generation.json"
+}

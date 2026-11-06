@@ -1,0 +1,23 @@
+{
+  "id": "S-emote-repair-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:49:10 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:49:42 UTC"
+  },
+  "prompt": "Edit target image1 is12frame FRONT/S emote sheet,4columns3rows; image2 exactmasteridentity. Repair ONLY bottomrow columns3and4 (zero-basedcells10and11), the finaltwo return-to-guardposes. Allothercellsunchanged. These2figures slightly overextend when rising. Redraw finaltwo in a naturally relaxed guard with a TINY anatomically bent-knee settle, lowering head/shoulders/hips about4 SOURCEpixels while bothsolesstayonground. Preserve exact original headpiece/head/face/torso/limb/weapon dimensions. Noresize, stretching, cropping, shortenedlegs orshavinghat. Keep completehatandbothboots, originaladultproportions, no squat. Hands/whisk/talismanreturntopositionsnear originalfinalguard. Samefrontviewfacingviewer, jade/ivory/bluecostume, bronzewhiskhandle/rightscreenLEFT, GOLDtalismanleftscreenRIGHT. Exact4x3SQUAREgrid original4:3aspect, puremagenta, no text/grid/shadow/VFX.",
+  "references": [
+    "S/sheets/emote.png (original generation)",
+    "reference/S.master.png"
+  ],
+  "output": "S/sheets/emote.png",
+  "toolOutputId": "exec-79c8c90c-035e-4c79-810d-30d88749ac98.png",
+  "cells": [
+    10,
+    11
+  ],
+  "method": "Tiny anatomical knee relaxation, no resizing/cropping; sprite:repair verifies all other cells byte-identical."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "S-emote-repair-2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 18:09:34 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 18:09:55 UTC"
+  },
+  "prompt": "Edit target image1 FRONT/S emote sheet, EXACT4columns3rows squarecells. Image2 exact S master, standing207units tall. Change ONLY bottomrow column2 (zero-basedcell9). Allother11cells must remainunchanged. This is a recovered upright greetingguard, NOTa bow. It is slightly overextended/tall. Redraw ONLY thiscell in a TINY natural knee relaxation, lowering head/shoulders/hips about4SOURCEpixels while both solesstay atoriginalgroundline. Preserve original FULL headpiece/head/face/torso/limb/whisk/talisman dimensions; no resizing,stretching,cropping,shortenedlegs orshavinghat. Verysubtle bentknees, notsquat. Handskeepwhisk/talisman together atbelt likeoriginalcell9; torso/head faceviewer upright. Match standing anatomicalscale ofneighborcell0; finalhead-to-sole heightabout207–211 of256units (master207, limit213), achievedby naturalpose notscaling. Exact jade/ivory/blue clothing, bronzewhiskhandle, goldenpaper, adultwoman face. Preservecompletehatandboots. Same4:3overallaspect,4x3squaregrid, puremagenta, no text/grid/shadow/VFX.",
+  "references": [
+    "S/sheets/emote.png (after emote.repair.generation.json)",
+    "reference/S.master.png"
+  ],
+  "output": "S/sheets/emote.png",
+  "toolOutputId": "exec-8d05d458-d6d8-469e-be22-e3d26481bde0.png",
+  "cells": [
+    9
+  ],
+  "method": "Natural knee relaxation; no resizing/cropping. Other11 cells verified byte-identical."
+}

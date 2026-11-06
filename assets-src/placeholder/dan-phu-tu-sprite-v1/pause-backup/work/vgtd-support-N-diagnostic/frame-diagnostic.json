@@ -1,0 +1,2158 @@
+{
+  "totalArea": 3669684,
+  "reports": [
+    {
+      "clip": "idle",
+      "frames": 12,
+      "area": 267757,
+      "maxWidth": 119,
+      "minWidth": 107,
+      "qa": {
+        "ok": true,
+        "findings": [],
+        "judged": [],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        203,
+        203,
+        203,
+        203,
+        203,
+        203,
+        203,
+        203,
+        202,
+        203,
+        202,
+        202
+      ],
+      "hard": []
+    },
+    {
+      "clip": "meditate",
+      "frames": 8,
+      "area": 189569,
+      "maxWidth": 146,
+      "minWidth": 145,
+      "qa": {
+        "ok": true,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 38.8,
+            "limit": 0,
+            "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 0,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 5,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "meditate",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 38.8,
+              "limit": 0,
+              "message": "163 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 8
+        }
+      },
+      "heights": [
+        163,
+        163,
+        163,
+        163,
+        163,
+        163,
+        163,
+        163
+      ],
+      "hard": []
+    },
+    {
+      "clip": "walk",
+      "frames": 8,
+      "area": 178856,
+      "maxWidth": 110,
+      "minWidth": 108,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 0,
+            "metric": "ghost_distance_2d_px_R",
+            "value": 24.7,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is 24.7 px from its template ghost (xy 143.0,238.0 vs 127.6,218.7, limit 20); not measured (the foot is not on the template)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "walk",
+            "frame": 2,
+            "metric": "slide_ground_px_per_frame_R",
+            "value": 13.67,
+            "limit": 3,
+            "message": "R foot slides 13.7 px/frame between frames 1-2 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 4,
+            "metric": "ghost_distance_2d_px_L",
+            "value": 24.1,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 24.1 px from its template ghost (xy 142.0,238.0 vs 127.6,218.7, limit 20); not measured (the foot is not on the template)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "walk",
+            "frame": 6,
+            "metric": "slide_ground_px_per_frame_L",
+            "value": 10.67,
+            "limit": 3,
+            "message": "L foot slides 10.7 px/frame between frames 5-6 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "walk",
+            "frame": 7,
+            "metric": "slide_ground_px_per_frame_L",
+            "value": 7.67,
+            "limit": 3,
+            "message": "L foot slides 7.7 px/frame between frames 6-7 (limit 3)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "warn",
+              "clip": "walk",
+              "frame": 0,
+              "metric": "ghost_distance_2d_px_R",
+              "value": 24.7,
+              "limit": 20,
+              "message": "R planted foot: nearest sole is 24.7 px from its template ghost (xy 143.0,238.0 vs 127.6,218.7, limit 20); not measured (the foot is not on the template)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "walk",
+              "frame": 2,
+              "metric": "slide_ground_px_per_frame_R",
+              "value": 13.67,
+              "limit": 3,
+              "message": "R foot slides 13.7 px/frame between frames 1-2 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "warn",
+              "clip": "walk",
+              "frame": 4,
+              "metric": "ghost_distance_2d_px_L",
+              "value": 24.1,
+              "limit": 20,
+              "message": "L planted foot: nearest sole is 24.1 px from its template ghost (xy 142.0,238.0 vs 127.6,218.7, limit 20); not measured (the foot is not on the template)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "walk",
+              "frame": 6,
+              "metric": "slide_ground_px_per_frame_L",
+              "value": 10.67,
+              "limit": 3,
+              "message": "L foot slides 10.7 px/frame between frames 5-6 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "walk",
+              "frame": 7,
+              "metric": "slide_ground_px_per_frame_L",
+              "value": 7.67,
+              "limit": 3,
+              "message": "L foot slides 7.7 px/frame between frames 6-7 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 5,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        203,
+        202,
+        202,
+        202,
+        204,
+        203,
+        203,
+        202
+      ],
+      "hard": []
+    },
+    {
+      "clip": "run",
+      "frames": 10,
+      "area": 220290,
+      "maxWidth": 119,
+      "minWidth": 98,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 1,
+            "metric": "slide_ground_px_per_frame_R",
+            "value": 21.5,
+            "limit": 3,
+            "message": "R foot slides 21.5 px/frame between frames 0-1 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 2,
+            "metric": "slide_ground_px_per_frame_R",
+            "value": 6.5,
+            "limit": 3,
+            "message": "R foot slides 6.5 px/frame between frames 1-2 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 3,
+            "metric": "slide_ground_px_per_frame_R",
+            "value": 5.5,
+            "limit": 3,
+            "message": "R foot slides 5.5 px/frame between frames 2-3 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 4,
+            "metric": "slide_ground_px_per_frame_R",
+            "value": 6.5,
+            "limit": 3,
+            "message": "R foot slides 6.5 px/frame between frames 3-4 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "run",
+            "frame": 5,
+            "metric": "ghost_distance_2d_px_L",
+            "value": 25.8,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 25.8 px from its template ghost (xy 117.5,237.0 vs 127.6,213.3, limit 20); not measured (the foot is not on the template)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 7,
+            "metric": "slide_ground_px_per_frame_L",
+            "value": 9.5,
+            "limit": 3,
+            "message": "L foot slides 9.5 px/frame between frames 6-7 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 8,
+            "metric": "slide_ground_px_per_frame_L",
+            "value": 7.5,
+            "limit": 3,
+            "message": "L foot slides 7.5 px/frame between frames 7-8 (limit 3)"
+          },
+          {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 9,
+            "metric": "slide_ground_px_per_frame_L",
+            "value": 7.5,
+            "limit": 3,
+            "message": "L foot slides 7.5 px/frame between frames 8-9 (limit 3)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 1,
+              "metric": "slide_ground_px_per_frame_R",
+              "value": 21.5,
+              "limit": 3,
+              "message": "R foot slides 21.5 px/frame between frames 0-1 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 2,
+              "metric": "slide_ground_px_per_frame_R",
+              "value": 6.5,
+              "limit": 3,
+              "message": "R foot slides 6.5 px/frame between frames 1-2 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 3,
+              "metric": "slide_ground_px_per_frame_R",
+              "value": 5.5,
+              "limit": 3,
+              "message": "R foot slides 5.5 px/frame between frames 2-3 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 4,
+              "metric": "slide_ground_px_per_frame_R",
+              "value": 6.5,
+              "limit": 3,
+              "message": "R foot slides 6.5 px/frame between frames 3-4 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "warn",
+              "clip": "run",
+              "frame": 5,
+              "metric": "ghost_distance_2d_px_L",
+              "value": 25.8,
+              "limit": 20,
+              "message": "L planted foot: nearest sole is 25.8 px from its template ghost (xy 117.5,237.0 vs 127.6,213.3, limit 20); not measured (the foot is not on the template)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 7,
+              "metric": "slide_ground_px_per_frame_L",
+              "value": 9.5,
+              "limit": 3,
+              "message": "L foot slides 9.5 px/frame between frames 6-7 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 8,
+              "metric": "slide_ground_px_per_frame_L",
+              "value": 7.5,
+              "limit": 3,
+              "message": "L foot slides 7.5 px/frame between frames 7-8 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "footSlide",
+              "severity": "fail",
+              "clip": "run",
+              "frame": 9,
+              "metric": "slide_ground_px_per_frame_L",
+              "value": 7.5,
+              "limit": 3,
+              "message": "L foot slides 7.5 px/frame between frames 8-9 (limit 3)"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 8,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        204,
+        202,
+        203,
+        202,
+        203,
+        202,
+        202,
+        202,
+        202,
+        202
+      ],
+      "hard": []
+    },
+    {
+      "clip": "dash",
+      "frames": 6,
+      "area": 156928,
+      "maxWidth": 161,
+      "minWidth": 109,
+      "qa": {
+        "ok": true,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 6.8,
+            "limit": 0,
+            "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 25.8,
+            "limit": 0,
+            "message": "176 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 17.8,
+            "limit": 0,
+            "message": "184 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 16.8,
+            "limit": 0,
+            "message": "185 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "dash",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 6.8,
+              "limit": 0,
+              "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "dash",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 25.8,
+              "limit": 0,
+              "message": "176 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "dash",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 17.8,
+              "limit": 0,
+              "message": "184 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "dash",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 16.8,
+              "limit": 0,
+              "message": "185 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+            },
+            "class": "info",
+            "verdict": "info"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 4
+        }
+      },
+      "heights": [
+        207,
+        195,
+        176,
+        184,
+        185,
+        203
+      ],
+      "hard": []
+    },
+    {
+      "clip": "sword_fly",
+      "frames": 8,
+      "area": 158065,
+      "maxWidth": 118,
+      "minWidth": 98,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 10.8,
+            "limit": 0,
+            "message": "height 191 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 14.8,
+            "limit": 0,
+            "message": "height 187 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 18.8,
+            "limit": 0,
+            "message": "height 183 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 24.8,
+            "limit": 0,
+            "message": "height 177 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 20.8,
+            "limit": 0,
+            "message": "height 181 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 16.8,
+            "limit": 0,
+            "message": "height 185 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 13.8,
+            "limit": 0,
+            "message": "height 188 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 10.8,
+            "limit": 0,
+            "message": "height 191 px outside the upright band and no pose exception declared"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 0,
+              "metric": "height_excess_px",
+              "value": 10.8,
+              "limit": 0,
+              "message": "height 191 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 14.8,
+              "limit": 0,
+              "message": "height 187 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 18.8,
+              "limit": 0,
+              "message": "height 183 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 24.8,
+              "limit": 0,
+              "message": "height 177 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 20.8,
+              "limit": 0,
+              "message": "height 181 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 5,
+              "metric": "height_excess_px",
+              "value": 16.8,
+              "limit": 0,
+              "message": "height 185 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 13.8,
+              "limit": 0,
+              "message": "height 188 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "sword_fly",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 10.8,
+              "limit": 0,
+              "message": "height 191 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 8,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        191,
+        187,
+        183,
+        177,
+        181,
+        185,
+        188,
+        191
+      ],
+      "hard": []
+    },
+    {
+      "clip": "attack",
+      "frames": 10,
+      "area": 229489,
+      "maxWidth": 138,
+      "minWidth": 89,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 6.8,
+            "limit": 0,
+            "message": "height 195 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 8,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 9,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 0,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 6.8,
+              "limit": 0,
+              "message": "height 195 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 8,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack",
+              "frame": 9,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 9,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        194,
+        194,
+        194,
+        194,
+        194,
+        211,
+        195,
+        194,
+        194,
+        194
+      ],
+      "hard": []
+    },
+    {
+      "clip": "attack_2",
+      "frames": 10,
+      "area": 229961,
+      "maxWidth": 146,
+      "minWidth": 96,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 8,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 9,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 0,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 5,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 8,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "attack_2",
+              "frame": 9,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "height 194 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 10,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        194,
+        194,
+        194,
+        194,
+        194,
+        194,
+        194,
+        194,
+        194,
+        194
+      ],
+      "hard": []
+    },
+    {
+      "clip": "attack_3",
+      "frames": 10,
+      "area": 245712,
+      "maxWidth": 134,
+      "minWidth": 105,
+      "qa": {
+        "ok": true,
+        "findings": [],
+        "judged": [],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        203,
+        203,
+        203,
+        203,
+        205,
+        203,
+        204,
+        204,
+        204,
+        204
+      ],
+      "hard": []
+    },
+    {
+      "clip": "cast",
+      "frames": 14,
+      "area": 371290,
+      "maxWidth": 142,
+      "minWidth": 107,
+      "qa": {
+        "ok": true,
+        "findings": [],
+        "judged": [],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213,
+        213
+      ],
+      "hard": []
+    },
+    {
+      "clip": "channel",
+      "frames": 8,
+      "area": 162519,
+      "maxWidth": 98,
+      "minWidth": 97,
+      "qa": {
+        "ok": true,
+        "findings": [],
+        "judged": [],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        208,
+        208,
+        208,
+        208,
+        207,
+        207,
+        207,
+        207
+      ],
+      "hard": []
+    },
+    {
+      "clip": "hit",
+      "frames": 4,
+      "area": 87267,
+      "maxWidth": 120,
+      "minWidth": 104,
+      "qa": {
+        "ok": false,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "hit",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "hit",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "hit",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          },
+          {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "hit",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "hit",
+              "frame": 0,
+              "metric": "height_excess_px",
+              "value": 2.8,
+              "limit": 0,
+              "message": "height 199 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "hit",
+              "frame": 1,
+              "metric": "height_excess_px",
+              "value": 2.8,
+              "limit": 0,
+              "message": "height 199 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "hit",
+              "frame": 2,
+              "metric": "height_excess_px",
+              "value": 2.8,
+              "limit": 0,
+              "message": "height 199 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "warn",
+              "clip": "hit",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 2.8,
+              "limit": 0,
+              "message": "height 199 px outside the upright band and no pose exception declared"
+            },
+            "class": "soft",
+            "verdict": "fail-soft"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 4,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        199,
+        199,
+        199,
+        199
+      ],
+      "hard": []
+    },
+    {
+      "clip": "die",
+      "frames": 12,
+      "area": 271398,
+      "maxWidth": 206,
+      "minWidth": 116,
+      "qa": {
+        "ok": true,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "199 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 8.8,
+            "limit": 0,
+            "message": "193 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 31.8,
+            "limit": 0,
+            "message": "170 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 60.8,
+            "limit": 0,
+            "message": "141 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 92.8,
+            "limit": 0,
+            "message": "109 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 8,
+            "metric": "height_excess_px",
+            "value": 111.8,
+            "limit": 0,
+            "message": "90 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 9,
+            "metric": "height_excess_px",
+            "value": 124.8,
+            "limit": 0,
+            "message": "77 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 10,
+            "metric": "height_excess_px",
+            "value": 127.8,
+            "limit": 0,
+            "message": "74 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 11,
+            "metric": "height_excess_px",
+            "value": 128.8,
+            "limit": 0,
+            "message": "73 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 3,
+              "metric": "height_excess_px",
+              "value": 2.8,
+              "limit": 0,
+              "message": "199 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 4,
+              "metric": "height_excess_px",
+              "value": 8.8,
+              "limit": 0,
+              "message": "193 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 5,
+              "metric": "height_excess_px",
+              "value": 31.8,
+              "limit": 0,
+              "message": "170 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 60.8,
+              "limit": 0,
+              "message": "141 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 92.8,
+              "limit": 0,
+              "message": "109 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 8,
+              "metric": "height_excess_px",
+              "value": 111.8,
+              "limit": 0,
+              "message": "90 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 9,
+              "metric": "height_excess_px",
+              "value": 124.8,
+              "limit": 0,
+              "message": "77 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 10,
+              "metric": "height_excess_px",
+              "value": 127.8,
+              "limit": 0,
+              "message": "74 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "die",
+              "frame": 11,
+              "metric": "height_excess_px",
+              "value": 128.8,
+              "limit": 0,
+              "message": "73 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 9
+        }
+      },
+      "heights": [
+        211,
+        211,
+        206,
+        199,
+        193,
+        170,
+        141,
+        109,
+        90,
+        77,
+        74,
+        73
+      ],
+      "hard": []
+    },
+    {
+      "clip": "tribulation",
+      "frames": 24,
+      "area": 640829,
+      "maxWidth": 140,
+      "minWidth": 119,
+      "qa": {
+        "ok": true,
+        "findings": [],
+        "judged": [],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 0
+        }
+      },
+      "heights": [
+        210,
+        210,
+        210,
+        210,
+        210,
+        209,
+        209,
+        209,
+        209,
+        209,
+        209,
+        209,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        208,
+        207,
+        208,
+        207,
+        208
+      ],
+      "hard": []
+    },
+    {
+      "clip": "emote",
+      "frames": 12,
+      "area": 259754,
+      "maxWidth": 108,
+      "minWidth": 104,
+      "qa": {
+        "ok": true,
+        "findings": [
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "emote",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 8.8,
+            "limit": 0,
+            "message": "193 px outside 201.8..214.2 (declared exception: bow: neck and torso incline in a respectful greeting; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "emote",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 23.8,
+            "limit": 0,
+            "message": "178 px outside 201.8..214.2 (declared exception: bow: neck and torso incline in a respectful greeting; no anatomical resizing)"
+          },
+          {
+            "gate": "height",
+            "severity": "info",
+            "clip": "emote",
+            "frame": 8,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "194 px outside 201.8..214.2 (declared exception: bow-recovery: head and torso remain inclined in drawn cell8 before upright recovery; original anatomical scale retained)"
+          }
+        ],
+        "judged": [
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "emote",
+              "frame": 6,
+              "metric": "height_excess_px",
+              "value": 8.8,
+              "limit": 0,
+              "message": "193 px outside 201.8..214.2 (declared exception: bow: neck and torso incline in a respectful greeting; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "emote",
+              "frame": 7,
+              "metric": "height_excess_px",
+              "value": 23.8,
+              "limit": 0,
+              "message": "178 px outside 201.8..214.2 (declared exception: bow: neck and torso incline in a respectful greeting; no anatomical resizing)"
+            },
+            "class": "info",
+            "verdict": "info"
+          },
+          {
+            "finding": {
+              "gate": "height",
+              "severity": "info",
+              "clip": "emote",
+              "frame": 8,
+              "metric": "height_excess_px",
+              "value": 7.8,
+              "limit": 0,
+              "message": "194 px outside 201.8..214.2 (declared exception: bow-recovery: head and torso remain inclined in drawn cell8 before upright recovery; original anatomical scale retained)"
+            },
+            "class": "info",
+            "verdict": "info"
+          }
+        ],
+        "resolved": [],
+        "counts": {
+          "fail-hard": 0,
+          "fail-soft": 0,
+          "accepted": 0,
+          "regression": 0,
+          "info": 3
+        }
+      },
+      "heights": [
+        207,
+        207,
+        207,
+        207,
+        207,
+        202,
+        193,
+        178,
+        194,
+        207,
+        207,
+        207
+      ],
+      "hard": []
+    }
+  ]
+}

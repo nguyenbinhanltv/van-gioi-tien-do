@@ -1,0 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { loadBacklog, applyBacklog, acceptFindings, saveBacklog } from '__USER_HOME__/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-21/tools/sprite/src/index.ts';
+const p='__TEMP__/vgtd-support-S/quality-backlog.json';
+const contract=JSON.parse(readFileSync('__USER_HOME__/.ao/data/artifacts/van-gioi-tien-do-22/danphutu_S-repaired.sprite.json','utf8'));
+let backlog=loadBacklog(p,'dan-phu-tu');
+const findings=contract.qa.judged.filter(j=>j.class==='soft' && j.finding.gate==='height').map(j=>j.finding);
+const report=applyBacklog(findings,'S',backlog);
+backlog=acceptFindings(backlog,report,'S',{note:'First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8–7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.',owner:'support-art',added:'2026-11-06'});
+saveBacklog(p,backlog);
+console.log(JSON.stringify({acceptedS:backlog.entries.filter(e=>e.dir==='S').length,legacySFoot:backlog.entries.filter(e=>e.dir==='S'&&e.gate==='footSlide').length}));

@@ -1,0 +1,24 @@
+{
+  "clip": "run",
+  "cells": [
+    1,
+    4,
+    6
+  ],
+  "attempt": 2,
+  "tool": "image_gen",
+  "model": "undisclosed by tool",
+  "utcStart": {
+    "current_time": "2026-11-06 18:42:25 UTC"
+  },
+  "utcEnd": {
+    "current_time": "2026-11-06 18:42:46 UTC"
+  },
+  "prompt": "Precise-object-edit sprite sheet. Image1 is EDIT TARGET; image2 NE master identity reference. Keep EXACT 5x2 grid square-cell layout and entire sheet aspect ratio, pure magenta background. ONLY cells2,5,7 (1-based) redraw knees/ankles slightly straighter to extend crown-to-lowest-sole by2px at256px cell. Current selected height200px final needs201..203. Keep crown at original place, no raised props extending bbox. Same anatomical scale, actual boot pose extension, no image enlargement. Preserve EVERY other cell exactly. Preserve camera NE back-right, clothing, face, hands, whisk and paper, fine ink painting. Never duplicate frames or crop hat/boots. No grid lines, numbers, shadows, text or VFX.",
+  "outputId": "exec-77668634-8063-4b1c-a06a-5c83b9effa30.png",
+  "references": [
+    "NE/sheets/run.png",
+    "reference/NE.master.png"
+  ],
+  "repair": "shared sprite:repair; every unselected cell byte-identical"
+}

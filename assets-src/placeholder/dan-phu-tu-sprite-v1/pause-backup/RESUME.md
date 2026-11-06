@@ -1,0 +1,15 @@
+# Emergency pause backup — worker 21
+
+Backup only. Do not open a PR or merge this WIP branch. Owner requested all work paused for machine reset.
+
+Selected S/NE/N sources are in their normal character paths. All 75 clips exist (15 clips / 156 cells per direction, 780 cells overall). E merged in PR121; SE is on origin branch ao/support-sprites/se, PR126 head33bfe0b6ca157c30e50c3b7f01322917d9d10125, CI green, frozen for review. This backup starts from main1f55e72e74fc82ec82798fcf377349a58b57ceae and includes uncommitted S/NE/N art, full backlog, own license rows and multi-page visual reader.
+
+`work/` preserves temporary selected and rejected generations, repair candidates, original generation template hashes, normalized inputs, diagnostic contracts, and helper scripts. `raw-tool-outputs/` preserves every available referenced imagegen output. `review/` preserves the complete owner gallery, GIFs, contact sheets, and exact per-cell backlog. `tooling-helpers/` preserves local wrappers; shared package caches are reproducible from Git and excluded. No active image calls remained when paused.
+
+Machine paths in backup text were replaced: __WORKSPACE__ is the new checkout root; __TEMP__ is a restored working directory containing the saved work directories; __ARTIFACTS__ is restored review directory; __GENERATED_IMAGES__ and __USER_HOME__ are optional restored tool/home locations. Substitute those tokens in working copies before executing temporary scripts. Original S generation PNG/manifest SHA256 files under S/generation-templates are byte-preserved.
+
+Only after orchestrator says RESUME: fetch origin; preserve this backup; create independent direction branches from fresh main, never push this backup to an existing reviewed PR. Wait for shared PR122 (multi-page exporter, published695d43501d118fdedc71c8332e64fecd1bf8f262) and PR123 (directional foot API, published1c48569f24236566067937b8e2c022509a6dcc26) to merge, and SE126 review/merge. Update the thin prepare-direction helper to pass direction, preserve walk/run vertical keep, and retain project-specific actual pose exceptions (upright attacks have no lunge exemptions; N emote6/7/8 are actual bow/recovery).
+
+Then regenerate complete DPI records and final outputs using merged main. Re-run SE directional QA using newly generated guides while archiving original generation inputs; do not relabel old templates or metrics. S/NE/N each passed all per-clip hard gates on frozen123; soft counts32/28/44 plus156 spill records each are in full backlog. Full aggregate export/Cocos checks on merged tooling remain pending. Multi-page visual reader was tested with real695 one/two-page S outputs and rejects missing page before writing backlog.
+
+Resume S first: strict all15 QA, shared phases/event timeline verification, all15 real Cocos3.8.8 zoom2 midpoint GIF/contact captures, backlog honest, update consolidated review page, all required repository checks, one S PR from main. Then independent NE and N PRs. Never drop/rescale frames. Orchestrator triggers AO review; no pushes during review. Do not mark full task complete before all directions gated.

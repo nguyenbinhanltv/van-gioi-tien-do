@@ -1,0 +1,212 @@
+{
+  "format": "vgtd-sprite-contract",
+  "version": 1,
+  "character": "dan-phu-tu",
+  "direction": "E",
+  "stem": "danphutu",
+  "master": {
+    "sha1": "6b6e718d9e9a491daa3b5596c249a45d144e711f",
+    "metrics": {
+      "left": 91,
+      "right": 163,
+      "top": 24,
+      "bottom": 232,
+      "height": 208,
+      "width": 72,
+      "pelvisX": 127.6311263972485
+    },
+    "guides": {
+      "ground": 232,
+      "head": 24,
+      "pelvis": 128,
+      "centerX": 127.6311263972485
+    }
+  },
+  "calibration": {
+    "scale": 0.5036319612590799,
+    "targetHeight": 208,
+    "referenceHeight": 413,
+    "referenceFrames": 8
+  },
+  "palette": {
+    "size": 32,
+    "locked": true
+  },
+  "atlas": {
+    "pages": 1,
+    "width": 512,
+    "height": 512,
+    "regions": 8
+  },
+  "clips": [
+    {
+      "name": "walk",
+      "frames": 8,
+      "kind": "upright",
+      "sheetSha1": "8feb805cc84ab5ee6b8688af317f00038ad41eb1",
+      "calibration": {
+        "scale": 0.5036319612590799,
+        "targetHeight": 208,
+        "referenceHeight": 413,
+        "referenceFrames": 8
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 115.79019382035408,
+            "soleY": 214.54721549636807
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 127.46589018302829,
+            "soleY": 232
+          },
+          "dx": 11.840932576894417,
+          "dy": 17.452784503631932
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 115.74501641845501,
+            "soleY": 214.54721549636807
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.32380546075085,
+            "soleY": 232
+          },
+          "dx": 11.886109978793485,
+          "dy": 17.452784503631932
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 116.31745718395089,
+            "soleY": 214.54721549636807
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.30569306930693,
+            "soleY": 232
+          },
+          "dx": 11.313669213297601,
+          "dy": 17.452784503631932
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 115.44302830424982,
+            "soleY": 214.54721549636807
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.34028073160357,
+            "soleY": 232
+          },
+          "dx": 12.188098092998672,
+          "dy": 17.452784503631932
+        },
+        {
+          "pre": {
+            "height": 207.49636803874094,
+            "pelvisX": 115.30418312009482,
+            "soleY": 214.04358353510898
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.26788756388416,
+            "soleY": 232
+          },
+          "dx": 12.326943277153674,
+          "dy": 17.95641646489102
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 115.36877873660758,
+            "soleY": 214.04358353510898
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.26039016115352,
+            "soleY": 232
+          },
+          "dx": 12.262347660640913,
+          "dy": 17.95641646489102
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 116.93457475245431,
+            "soleY": 214.04358353510898
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.29119732999582,
+            "soleY": 232
+          },
+          "dx": 10.696551644794184,
+          "dy": 17.95641646489102
+        },
+        {
+          "pre": {
+            "height": 207.49636803874094,
+            "pelvisX": 116.35869551221136,
+            "soleY": 214.04358353510898
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 127.30533719486968,
+            "soleY": 232
+          },
+          "dx": 11.272430885037139,
+          "dy": 17.95641646489102
+        }
+      ],
+      "regions": [
+        "walk_01",
+        "walk_02",
+        "walk_03",
+        "walk_04",
+        "walk_05",
+        "walk_06",
+        "walk_07",
+        "walk_08"
+      ]
+    }
+  ],
+  "qa": {
+    "ok": false,
+    "findings": [
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "message": "R foot slides 9.6 px/frame between frames 1-2 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 5,
+        "message": "L foot slides 12.4 px/frame between frames 4-5 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 6,
+        "message": "L foot slides 7.5 px/frame between frames 5-6 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "message": "L foot slides 9.8 px/frame between frames 6-7 (limit 3)"
+      }
+    ]
+  }
+}

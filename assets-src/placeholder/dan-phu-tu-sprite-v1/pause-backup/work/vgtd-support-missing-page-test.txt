@@ -1,0 +1,28 @@
+node : node:fs:560
+At line:2 char:308
++ ... on $hidden; node tools/rig/scripts/run-ts.mjs assets-src/placeholder/ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:560:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open '__TEMP__\vgtd-support-S-multipage-visual-test\danphutu_S_page1_tex.png'
+    at Object.openSync (node:fs:560:18)
+    at readFileSync (node:fs:444:35)
+    at file:///__TEMP__/vgtd-rig-jm0Rrh/script.mjs:21658:20
+    at Array.map (<anonymous>)
+    at file:///__TEMP__/vgtd-rig-jm0Rrh/script.mjs:21657:26
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async 
+file:///__USER_HOME__/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-21/tools/rig/scripts/run-ts.mjs:29:3 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '__LOCAL_DRIVE__/\Temp\\vgtd-support-S-multipage-visual-test\\danphutu_S_page1_tex.png'
+}
+
+Node.js v24.12.0

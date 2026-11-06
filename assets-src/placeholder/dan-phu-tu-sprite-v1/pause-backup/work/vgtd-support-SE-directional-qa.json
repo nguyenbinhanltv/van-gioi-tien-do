@@ -1,0 +1,2129 @@
+{
+  "scale": 0.9004329004329005,
+  "referenceHeight": 231,
+  "heights": [
+    {
+      "name": "idle",
+      "heights": [
+        210,
+        211,
+        212,
+        213,
+        213,
+        212,
+        210,
+        209,
+        209,
+        211,
+        212,
+        213
+      ]
+    },
+    {
+      "name": "meditate",
+      "heights": [
+        139,
+        139,
+        139,
+        139,
+        140,
+        140,
+        140,
+        140
+      ]
+    },
+    {
+      "name": "walk",
+      "heights": [
+        213,
+        206,
+        208,
+        209,
+        211,
+        208,
+        212,
+        213
+      ]
+    },
+    {
+      "name": "run",
+      "heights": [
+        213,
+        213,
+        212,
+        211,
+        210,
+        212,
+        208,
+        212,
+        210,
+        210
+      ]
+    },
+    {
+      "name": "dash",
+      "heights": [
+        204,
+        198,
+        181,
+        161,
+        187,
+        206
+      ]
+    },
+    {
+      "name": "sword_fly",
+      "heights": [
+        203,
+        203,
+        198,
+        194,
+        195,
+        196,
+        199,
+        203
+      ]
+    },
+    {
+      "name": "attack",
+      "heights": [
+        207,
+        206,
+        205,
+        202,
+        199,
+        199,
+        202,
+        204,
+        207,
+        207
+      ]
+    },
+    {
+      "name": "attack_2",
+      "heights": [
+        203,
+        198,
+        194,
+        194,
+        194,
+        195,
+        198,
+        196,
+        198,
+        203
+      ]
+    },
+    {
+      "name": "attack_3",
+      "heights": [
+        208,
+        206,
+        195,
+        191,
+        187,
+        187,
+        183,
+        194,
+        204,
+        209
+      ]
+    },
+    {
+      "name": "cast",
+      "heights": [
+        210,
+        210,
+        209,
+        210,
+        209,
+        209,
+        209,
+        209,
+        211,
+        211,
+        210,
+        210,
+        211,
+        210
+      ]
+    },
+    {
+      "name": "channel",
+      "heights": [
+        204,
+        204,
+        204,
+        204,
+        204,
+        203,
+        203,
+        204
+      ]
+    },
+    {
+      "name": "hit",
+      "heights": [
+        199,
+        192,
+        196,
+        199
+      ]
+    },
+    {
+      "name": "die",
+      "heights": [
+        215,
+        212,
+        204,
+        191,
+        182,
+        166,
+        151,
+        131,
+        120,
+        109,
+        90,
+        71
+      ]
+    },
+    {
+      "name": "tribulation",
+      "heights": [
+        208,
+        208,
+        207,
+        206,
+        205,
+        204,
+        205,
+        204,
+        202,
+        200,
+        196,
+        196,
+        195,
+        199,
+        202,
+        202,
+        204,
+        205,
+        206,
+        205,
+        206,
+        206,
+        206,
+        206
+      ]
+    },
+    {
+      "name": "emote",
+      "heights": [
+        211,
+        211,
+        211,
+        210,
+        210,
+        210,
+        207,
+        202,
+        208,
+        210,
+        210,
+        211
+      ]
+    }
+  ],
+  "qa": {
+    "ok": false,
+    "findings": [
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 61.8,
+        "limit": 0,
+        "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 61.8,
+        "limit": 0,
+        "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 61.8,
+        "limit": 0,
+        "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 61.8,
+        "limit": 0,
+        "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 1,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.19,
+        "limit": 3,
+        "message": "R foot slides 6.2 px/frame between frames 0-1 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 21.09,
+        "limit": 3,
+        "message": "R foot slides 21.1 px/frame between frames 1-2 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 5,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.51,
+        "limit": 3,
+        "message": "L foot slides 3.5 px/frame between frames 4-5 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 6,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 16.17,
+        "limit": 3,
+        "message": "L foot slides 16.2 px/frame between frames 5-6 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 10.22,
+        "limit": 3,
+        "message": "L foot slides 10.2 px/frame between frames 6-7 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 2,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 30.1,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 30.1 px from its template ghost (xy 161.5,244.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.74,
+        "limit": 3,
+        "message": "R foot slides 5.7 px/frame between frames 0-1 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 30.4,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 30.4 px from its template ghost (xy 100.5,208.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 4,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 20,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 20.0 px from its template ghost (xy 113.0,204.0 vs 111.5,224.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 7,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 168.5,243.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 34,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 34.0 px from its template ghost (xy 142.5,202.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 3.8,
+        "limit": 0,
+        "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 20.8,
+        "limit": 0,
+        "message": "181 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 40.8,
+        "limit": 0,
+        "message": "161 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 14.8,
+        "limit": 0,
+        "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "sword_fly",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 3.8,
+        "limit": 0,
+        "message": "height 198 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "sword_fly",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
+        "message": "height 194 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "sword_fly",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "height 195 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "sword_fly",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "height 196 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "sword_fly",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "height 199 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "199 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "199 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 3.8,
+        "limit": 0,
+        "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
+        "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
+        "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
+        "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 3.8,
+        "limit": 0,
+        "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "196 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 3.8,
+        "limit": 0,
+        "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 10.8,
+        "limit": 0,
+        "message": "191 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 14.8,
+        "limit": 0,
+        "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 14.8,
+        "limit": 0,
+        "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 18.8,
+        "limit": 0,
+        "message": "183 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
+        "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "hit",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "height 199 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "hit",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 9.8,
+        "limit": 0,
+        "message": "height 192 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "hit",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "height 196 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "hit",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "height 199 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "die",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 0.8,
+        "limit": 0,
+        "message": "height 215 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 10.8,
+        "limit": 0,
+        "message": "191 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 19.8,
+        "limit": 0,
+        "message": "182 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 35.8,
+        "limit": 0,
+        "message": "166 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 50.8,
+        "limit": 0,
+        "message": "151 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 70.8,
+        "limit": 0,
+        "message": "131 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 81.8,
+        "limit": 0,
+        "message": "120 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 92.8,
+        "limit": 0,
+        "message": "109 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 111.8,
+        "limit": 0,
+        "message": "90 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 130.8,
+        "limit": 0,
+        "message": "71 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "tribulation",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 1.8,
+        "limit": 0,
+        "message": "height 200 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "tribulation",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "height 196 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "tribulation",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "height 196 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "tribulation",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "height 195 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "tribulation",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "height 199 px outside the upright band and no pose exception declared"
+      }
+    ],
+    "judged": [
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "140 px outside 201.8..214.2 (declared exception: seated-meditation: crossed legs reduce pose height; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.19,
+          "limit": 3,
+          "message": "R foot slides 6.2 px/frame between frames 0-1 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 21.09,
+          "limit": 3,
+          "message": "R foot slides 21.1 px/frame between frames 1-2 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 3.51,
+          "limit": 3,
+          "message": "L foot slides 3.5 px/frame between frames 4-5 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 6,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 16.17,
+          "limit": 3,
+          "message": "L foot slides 16.2 px/frame between frames 5-6 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 10.22,
+          "limit": 3,
+          "message": "L foot slides 10.2 px/frame between frames 6-7 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 2,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.1,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 30.1 px from its template ghost (xy 161.5,244.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 1,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 5.74,
+          "limit": 3,
+          "message": "R foot slides 5.7 px/frame between frames 0-1 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 3,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.4,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 30.4 px from its template ghost (xy 100.5,208.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 4,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 20,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 20.0 px from its template ghost (xy 113.0,204.0 vs 111.5,224.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 7,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 36.5,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 168.5,243.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 8,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 34,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 34.0 px from its template ghost (xy 142.5,202.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 20.8,
+          "limit": 0,
+          "message": "181 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 40.8,
+          "limit": 0,
+          "message": "161 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 14.8,
+          "limit": 0,
+          "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "height 198 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "sword_fly",
+          "dir": "SE",
+          "cell": 2,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "height 194 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "sword_fly",
+          "dir": "SE",
+          "cell": 3,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "height 195 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "sword_fly",
+          "dir": "SE",
+          "cell": 4,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "height 196 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "sword_fly",
+          "dir": "SE",
+          "cell": 5,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "sword_fly",
+          "dir": "SE",
+          "cell": 6,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "196 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "198 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 10.8,
+          "limit": 0,
+          "message": "191 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 14.8,
+          "limit": 0,
+          "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 14.8,
+          "limit": 0,
+          "message": "187 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 18.8,
+          "limit": 0,
+          "message": "183 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: lunge: forward torso inclination and bent knees reduce pose height; no rescaling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "hit",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "hit",
+          "dir": "SE",
+          "cell": 0,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "hit",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "message": "height 192 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "hit",
+          "dir": "SE",
+          "cell": 1,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "hit",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "height 196 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "hit",
+          "dir": "SE",
+          "cell": 2,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "hit",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "hit",
+          "dir": "SE",
+          "cell": 3,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "height 215 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "die",
+          "dir": "SE",
+          "cell": 0,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 10.8,
+          "limit": 0,
+          "message": "191 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 19.8,
+          "limit": 0,
+          "message": "182 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 35.8,
+          "limit": 0,
+          "message": "166 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 50.8,
+          "limit": 0,
+          "message": "151 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 70.8,
+          "limit": 0,
+          "message": "131 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 81.8,
+          "limit": 0,
+          "message": "120 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 92.8,
+          "limit": 0,
+          "message": "109 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 10,
+          "metric": "height_excess_px",
+          "value": 111.8,
+          "limit": 0,
+          "message": "90 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 11,
+          "metric": "height_excess_px",
+          "value": 130.8,
+          "limit": 0,
+          "message": "71 px outside 201.8..214.2 (declared exception: die-collapse: knees buckle then body falls sideways; no anatomical resizing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "tribulation",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 1.8,
+          "limit": 0,
+          "message": "height 200 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "tribulation",
+          "dir": "SE",
+          "cell": 9,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 1.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "tribulation",
+          "frame": 10,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "height 196 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "tribulation",
+          "dir": "SE",
+          "cell": 10,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "tribulation",
+          "frame": 11,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "height 196 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "tribulation",
+          "dir": "SE",
+          "cell": 11,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "tribulation",
+          "frame": 12,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "height 195 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "tribulation",
+          "dir": "SE",
+          "cell": 12,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "tribulation",
+          "frame": 13,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "tribulation",
+          "dir": "SE",
+          "cell": 13,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      }
+    ],
+    "resolved": [
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 1,
+        "gate": "footSlide",
+        "metric": "slide_px_per_frame_R",
+        "value": 3.03,
+        "limit": 3,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 30.4,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 37.1,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 4,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 25.7,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 6,
+        "gate": "footSlide",
+        "metric": "slide_px_per_frame_L",
+        "value": 9.02,
+        "limit": 3,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 7,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_L",
+        "value": 34.8,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 8,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_L",
+        "value": 39.4,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 9,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_L",
+        "value": 34.2,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 0,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 35.5,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 23.8,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_R",
+        "value": 30.7,
+        "limit": 20,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 6,
+        "gate": "footSlide",
+        "metric": "slide_px_per_frame_L",
+        "value": 12.67,
+        "limit": 3,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      },
+      {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 7,
+        "gate": "footSlide",
+        "metric": "slide_px_per_frame_L",
+        "value": 3.92,
+        "limit": 3,
+        "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling. Shared gate measures +x sole travel only; SE y motion is unverified, so these are diagnostic first-pass figures.",
+        "status": "open",
+        "owner": "support-art",
+        "added": "2026-11-06"
+      }
+    ],
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 11,
+      "accepted": 15,
+      "regression": 0,
+      "info": 37
+    }
+  }
+}

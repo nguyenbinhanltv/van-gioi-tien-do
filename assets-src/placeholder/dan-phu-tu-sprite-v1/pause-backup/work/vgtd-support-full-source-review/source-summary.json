@@ -1,0 +1,26 @@
+[
+  {
+    "direction": "S",
+    "clips": 15,
+    "frames": 156,
+    "hard": 0,
+    "soft": 32,
+    "visual": 156
+  },
+  {
+    "direction": "NE",
+    "clips": 15,
+    "frames": 156,
+    "hard": 0,
+    "soft": 28,
+    "visual": 156
+  },
+  {
+    "direction": "N",
+    "clips": 15,
+    "frames": 156,
+    "hard": 0,
+    "soft": 44,
+    "visual": 156
+  }
+]

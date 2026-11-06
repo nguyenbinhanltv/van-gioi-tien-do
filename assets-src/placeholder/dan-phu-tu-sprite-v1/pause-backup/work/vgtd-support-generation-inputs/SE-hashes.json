@@ -1,0 +1,122 @@
+[
+    {
+        "file":  "attack_1.template.json",
+        "sha256":  "d97d8c7571e2ba35b8d22d8a975b7cb0fb095742715a4d79fb836e785ef9a936"
+    },
+    {
+        "file":  "attack_1.template.png",
+        "sha256":  "eb0d7f5cee90581cdd867e28e9fd9eff3f7c65ada139601dd22cadf26cee7d2c"
+    },
+    {
+        "file":  "attack_2.template.json",
+        "sha256":  "e87435e8a1c459f10befd701c2e67cac113955e886634421eeee3186cdd87a10"
+    },
+    {
+        "file":  "attack_2.template.png",
+        "sha256":  "eb0d7f5cee90581cdd867e28e9fd9eff3f7c65ada139601dd22cadf26cee7d2c"
+    },
+    {
+        "file":  "attack_3.template.json",
+        "sha256":  "fba5e53107c155d0a40d51bc9af36aaa2b8e9d67da0cd2a39cce3e264fca293e"
+    },
+    {
+        "file":  "attack_3.template.png",
+        "sha256":  "eb0d7f5cee90581cdd867e28e9fd9eff3f7c65ada139601dd22cadf26cee7d2c"
+    },
+    {
+        "file":  "cast.template.json",
+        "sha256":  "aa738063aaf33c8dbda5c27f5d6526ac3ec6ecd2d1594829007a4e34a317644f"
+    },
+    {
+        "file":  "cast.template.png",
+        "sha256":  "1061e3daab09959bb43fecc87d104b725414c6c6825cc5728994f79f93c47f17"
+    },
+    {
+        "file":  "channel.template.json",
+        "sha256":  "ca22a7cd87b7c1ebf79a1f031c0bf5c95be8d30854cb22aadbc579f75fe4d231"
+    },
+    {
+        "file":  "channel.template.png",
+        "sha256":  "3dc0c33c49d7eb4863bf11580559e299b3f731c3c993be1a361937591a7fedfb"
+    },
+    {
+        "file":  "dash.template.json",
+        "sha256":  "a153a6012bae7c7a49559b14504fa712cd1eda695db988a5ab23803a426cc978"
+    },
+    {
+        "file":  "dash.template.png",
+        "sha256":  "7c2ebf199cf5f1882240d892990a497ef297e38a4b2a7bb5b17e822538fff670"
+    },
+    {
+        "file":  "die.template.json",
+        "sha256":  "a29fa6407a50575ab8706c1cf500439cb3563d45961785a67a2e5764deb7c024"
+    },
+    {
+        "file":  "die.template.png",
+        "sha256":  "8a2d497e45950c66f56af0a1453b85ef801bb013d03d2d03ab012059e414ae6a"
+    },
+    {
+        "file":  "emote.template.json",
+        "sha256":  "9f12a166a61244d62a2924ce74641012c4877343d5e8041f85c1e3b096ac3b46"
+    },
+    {
+        "file":  "emote.template.png",
+        "sha256":  "8a2d497e45950c66f56af0a1453b85ef801bb013d03d2d03ab012059e414ae6a"
+    },
+    {
+        "file":  "hit.template.json",
+        "sha256":  "ad784a74d3f3ab8577a0a0901ad04911c8716d34783aa64f0f0f875727ff776b"
+    },
+    {
+        "file":  "hit.template.png",
+        "sha256":  "ecde09bdc67209f2187c7e2bdfa6bdb5bac5412d8791292a62c0ac765c71526d"
+    },
+    {
+        "file":  "idle.template.json",
+        "sha256":  "077f59a39dfc3cd74be80b813a8409558c271bc3db2e4768be8f51d826322445"
+    },
+    {
+        "file":  "idle.template.png",
+        "sha256":  "8a2d497e45950c66f56af0a1453b85ef801bb013d03d2d03ab012059e414ae6a"
+    },
+    {
+        "file":  "meditate.template.json",
+        "sha256":  "ce04a19b422a1493fd2f681a3814bfb5897919035ad4bc968f639e01250b8145"
+    },
+    {
+        "file":  "meditate.template.png",
+        "sha256":  "3dc0c33c49d7eb4863bf11580559e299b3f731c3c993be1a361937591a7fedfb"
+    },
+    {
+        "file":  "run.template.json",
+        "sha256":  "7d529a839012432a2fc5c70cb09a6f8a85a9e0c0a9116411abfe8bb4463b9a8d"
+    },
+    {
+        "file":  "run.template.png",
+        "sha256":  "a400acd81e323d9ad6b02247c8e4118921018caaeee53097e1a7a152504077ea"
+    },
+    {
+        "file":  "sword_fly.template.json",
+        "sha256":  "63feb3659473c14572cbddd2e271363de8f5175e9b4981b476c6f710aba1f9aa"
+    },
+    {
+        "file":  "sword_fly.template.png",
+        "sha256":  "3dc0c33c49d7eb4863bf11580559e299b3f731c3c993be1a361937591a7fedfb"
+    },
+    {
+        "file":  "tribulation.template.json",
+        "sha256":  "08323844f82b76018b7f7e1edf313af9fcb50dbf4e723aabc431ca3c2f1c90d8"
+    },
+    {
+        "file":  "tribulation.template.png",
+        "sha256":  "7319f51062ca1a7f362b0b2ec0ac022256b56041f03a75bbb280b1b311d55338"
+    },
+    {
+        "file":  "walk.template.json",
+        "sha256":  "cd8b6f70f4256c2f4e1ae68de33fd620b1eb5623b629967a5e436fc757ebf3a9"
+    },
+    {
+        "file":  "walk.template.png",
+        "sha256":  "69a89fa81559afaf25a2f29ccdb337e18b871fa38155fe60fe0b7db3b40f9cab"
+    }
+]

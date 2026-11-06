@@ -1,0 +1,21 @@
+node : file:///__TEMP__/vgtd-rig-A2fMzA/script.mjs:22934
+At line:2 char:1004
++ ... ($false))}; node tools/rig/scripts/run-ts.mjs __TEMP__/vgtd-support21- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (file:///__TEMP__...cript.mjs:22934:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    throw new RangeError(
+          ^
+
+RangeError: 2 atlas pages: the DragonBones export carries one page per direction (reduce frames or sizes)
+    at buildArmature (file:///__TEMP__/vgtd-rig-A2fMzA/script.mjs:22934:11)
+    at runProject (file:///__TEMP__/vgtd-rig-A2fMzA/script.mjs:23460:17)
+    at file:///__TEMP__/vgtd-rig-A2fMzA/script.mjs:23600:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async 
+file:///__USER_HOME__/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-21/tools/rig/scripts/run-ts.mjs:29:3
+
+Node.js v24.12.0

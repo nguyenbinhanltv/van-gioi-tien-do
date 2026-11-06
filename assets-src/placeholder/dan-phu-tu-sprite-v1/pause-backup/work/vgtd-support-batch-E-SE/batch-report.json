@@ -1,0 +1,490 @@
+{
+    "format":  "vgtd-sprite-batch",
+    "version":  1,
+    "character":  "dan-phu-tu",
+    "ok":  true,
+    "dirs":  [
+                 {
+                     "dir":  "E",
+                     "stem":  "danphutu",
+                     "ok":  true,
+                     "atlas":  {
+                                   "pages":  1,
+                                   "width":  2048,
+                                   "height":  2048,
+                                   "regions":  156
+                               },
+                     "backlogEntries":  26,
+                     "resolvedEntries":  0,
+                     "folder":  "E",
+                     "clips":  [
+                                   {
+                                       "name":  "idle",
+                                       "frames":  12,
+                                       "durationSec":  1,
+                                       "kind":  "upright",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/idle.gif"
+                                   },
+                                   {
+                                       "name":  "meditate",
+                                       "frames":  8,
+                                       "durationSec":  1,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  8
+                                                  },
+                                       "gif":  "E/capture/meditate.gif"
+                                   },
+                                   {
+                                       "name":  "walk",
+                                       "frames":  8,
+                                       "durationSec":  0.6666666666666666,
+                                       "kind":  "upright",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  4,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/walk.gif"
+                                   },
+                                   {
+                                       "name":  "run",
+                                       "frames":  10,
+                                       "durationSec":  0.5,
+                                       "kind":  "upright",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  8,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/run.gif"
+                                   },
+                                   {
+                                       "name":  "dash",
+                                       "frames":  6,
+                                       "durationSec":  0.25,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  4
+                                                  },
+                                       "gif":  "E/capture/dash.gif"
+                                   },
+                                   {
+                                       "name":  "sword_fly",
+                                       "frames":  8,
+                                       "durationSec":  0.6666666666666666,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  8,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/sword_fly.gif"
+                                   },
+                                   {
+                                       "name":  "attack",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  4
+                                                  },
+                                       "gif":  "E/capture/attack.gif"
+                                   },
+                                   {
+                                       "name":  "attack_2",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  8
+                                                  },
+                                       "gif":  "E/capture/attack_2.gif"
+                                   },
+                                   {
+                                       "name":  "attack_3",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  7
+                                                  },
+                                       "gif":  "E/capture/attack_3.gif"
+                                   },
+                                   {
+                                       "name":  "cast",
+                                       "frames":  14,
+                                       "durationSec":  0.5,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/cast.gif"
+                                   },
+                                   {
+                                       "name":  "channel",
+                                       "frames":  8,
+                                       "durationSec":  0.4,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/channel.gif"
+                                   },
+                                   {
+                                       "name":  "hit",
+                                       "frames":  4,
+                                       "durationSec":  0.2,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  2,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/hit.gif"
+                                   },
+                                   {
+                                       "name":  "die",
+                                       "frames":  12,
+                                       "durationSec":  0.8,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  1,
+                                                      "info":  9
+                                                  },
+                                       "gif":  "E/capture/die.gif"
+                                   },
+                                   {
+                                       "name":  "tribulation",
+                                       "frames":  24,
+                                       "durationSec":  1,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  3,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/tribulation.gif"
+                                   },
+                                   {
+                                       "name":  "emote",
+                                       "frames":  12,
+                                       "durationSec":  1,
+                                       "kind":  "upright",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "E/capture/emote.gif"
+                                   }
+                               ]
+                 },
+                 {
+                     "dir":  "SE",
+                     "stem":  "danphutu",
+                     "ok":  true,
+                     "atlas":  {
+                                   "pages":  1,
+                                   "width":  2048,
+                                   "height":  2048,
+                                   "regions":  156
+                               },
+                     "backlogEntries":  28,
+                     "resolvedEntries":  0,
+                     "folder":  "SE",
+                     "clips":  [
+                                   {
+                                       "name":  "idle",
+                                       "frames":  12,
+                                       "durationSec":  1,
+                                       "kind":  "upright",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/idle.gif"
+                                   },
+                                   {
+                                       "name":  "meditate",
+                                       "frames":  8,
+                                       "durationSec":  1,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  8
+                                                  },
+                                       "gif":  "SE/capture/meditate.gif"
+                                   },
+                                   {
+                                       "name":  "walk",
+                                       "frames":  8,
+                                       "durationSec":  0.6666666666666666,
+                                       "kind":  "upright",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  5,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/walk.gif"
+                                   },
+                                   {
+                                       "name":  "run",
+                                       "frames":  10,
+                                       "durationSec":  0.5,
+                                       "kind":  "upright",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  8,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/run.gif"
+                                   },
+                                   {
+                                       "name":  "dash",
+                                       "frames":  6,
+                                       "durationSec":  0.25,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  4
+                                                  },
+                                       "gif":  "SE/capture/dash.gif"
+                                   },
+                                   {
+                                       "name":  "sword_fly",
+                                       "frames":  8,
+                                       "durationSec":  0.6666666666666666,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  5,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/sword_fly.gif"
+                                   },
+                                   {
+                                       "name":  "attack",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  2
+                                                  },
+                                       "gif":  "SE/capture/attack.gif"
+                                   },
+                                   {
+                                       "name":  "attack_2",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  8
+                                                  },
+                                       "gif":  "SE/capture/attack_2.gif"
+                                   },
+                                   {
+                                       "name":  "attack_3",
+                                       "frames":  10,
+                                       "durationSec":  0.4166666666666667,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  6
+                                                  },
+                                       "gif":  "SE/capture/attack_3.gif"
+                                   },
+                                   {
+                                       "name":  "cast",
+                                       "frames":  14,
+                                       "durationSec":  0.5,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/cast.gif"
+                                   },
+                                   {
+                                       "name":  "channel",
+                                       "frames":  8,
+                                       "durationSec":  0.4,
+                                       "kind":  "free",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/channel.gif"
+                                   },
+                                   {
+                                       "name":  "hit",
+                                       "frames":  4,
+                                       "durationSec":  0.2,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  4,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/hit.gif"
+                                   },
+                                   {
+                                       "name":  "die",
+                                       "frames":  12,
+                                       "durationSec":  0.8,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  1,
+                                                      "info":  9
+                                                  },
+                                       "gif":  "SE/capture/die.gif"
+                                   },
+                                   {
+                                       "name":  "tribulation",
+                                       "frames":  24,
+                                       "durationSec":  1,
+                                       "kind":  "free",
+                                       "status":  "warn",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  5,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/tribulation.gif"
+                                   },
+                                   {
+                                       "name":  "emote",
+                                       "frames":  12,
+                                       "durationSec":  1,
+                                       "kind":  "upright",
+                                       "status":  "ok",
+                                       "counts":  {
+                                                      "hard":  0,
+                                                      "soft":  0,
+                                                      "regression":  0,
+                                                      "accepted":  0,
+                                                      "info":  0
+                                                  },
+                                       "gif":  "SE/capture/emote.gif"
+                                   }
+                               ]
+                 }
+             ]
+}

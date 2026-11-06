@@ -1,0 +1,19 @@
+{
+  "id": "SE-channel-reroll-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:12:03 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:12:25 UTC"
+  },
+  "prompt": "Use case: stylized-concept. EXACT8frame SUSTAINED CHANNEL LOOP,4columns2rows SQUARE cells. Reference1 exact SE master, reference2 layout. ALL EIGHT poses already holding SAME channel guard; NO preparation or armraising transition. Fixed SE three-quarterFRONT facinglower-right everycell. Same adultwoman jadefoldedheadpiece, loopedhair, ivorysleeves jadesplitcoat bluepanels bronzetrim darksashtrousersboots gourd/goldbelttalismans. Right anatomicalhand bronze-handled whitewhisk held horizontally FORWARD at UPPER BELT level, left goldtalisman upright to herleft outside torso silhouette; BOTH hands stay BELOW chest so master upper torso/jade lapels remain visible and identical. Match master EXACT face/head/torso/limb/prop dimensions. Bodyheight208 of256units, headtop24 sole232. All8 feet planted identical, tiny calm breathing1px, small whisk secondary motion only, last-to-first smooth same heldpose. Keep weaponhands fixed like master. Every figure completeinsidecell same scale. Softpainted fineink NWlight. Flat#FF00FF background. NO gridlines/text/ghosts/shadow/floor/VFX/extra limbs. Whiskhandle bronze NOTpurple; paper warmgold NOTgray. Do not rotate into sideview or frontalview.",
+  "references": [
+    "reference/SE.master.png",
+    "SE/templates/channel.template.png"
+  ],
+  "output": "SE/sheets/channel.png",
+  "toolOutputId": "exec-08a4365c-03bc-4edf-be88-cd4acd1e0b09.png",
+  "replaces": "channel.generation.json"
+}

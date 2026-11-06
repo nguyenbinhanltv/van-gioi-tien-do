@@ -1,0 +1,23 @@
+{
+  "id": "SE-run-repair-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:11:29 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:11:52 UTC"
+  },
+  "prompt": "Edit target image1 is SE RUN sheet 5columns2rows; image2 exact master. Repair ONLY top row column3 and bottom row column3 (0-based cells2 and7). Keep all other cells unchanged. In these two cells keep exact original headpiece, head, hair, face, torso, hips, sleeves, hands, whisk and talisman pixels/size/position. REDRAW ONLY LEGS below hips, same original limb dimensions: lower the forward knee slightly and extend its shin/boot diagonally down-right so lowest sole reaches about94% of cellheight, like adjacent poses. Current tucked legs make these2 figures too short. Do NOT resize/stretch/translate figures. Headpiece-top-to-lowest-sole height must match neighboring full-height figures, about89% of squarecell. Backleg trails in run, forwardboot lower but still dynamic. Exact fixed SE three-quarter front view facing lower-right, master jade/ivory/blue costume, bronze whiskhandle white hair, goldtalisman, puremagenta. Same5x2squaregrid, originalaspectratio, no text/grid/shadows/VFX.",
+  "references": [
+    "SE/sheets/run.png (original generation)",
+    "reference/SE.master.png"
+  ],
+  "output": "SE/sheets/run.png",
+  "toolOutputId": "exec-20e1d63c-7b64-4ae6-ba3b-3087f8e5b669.png",
+  "cells": [
+    2,
+    7
+  ],
+  "method": "sprite:repair sequential splices; other9 cells byte-identical each step"
+}

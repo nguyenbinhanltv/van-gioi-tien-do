@@ -1,0 +1,53 @@
+{
+    "character":  "dan-phu-tu",
+    "direction":  "E",
+    "stem":  "danphutu",
+    "master":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\reference\\E.master.png",
+    "clips":  [
+                  {
+                      "name":  "idle",
+                      "sheet":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\sheets\\idle.png",
+                      "cols":  4,
+                      "frames":  12,
+                      "manifest":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\templates\\idle.template.json",
+                      "tableId":  "idle",
+                      "durationSec":  1,
+                      "loop":  true,
+                      "kind":  "upright",
+                      "calibration":  {
+                                          "scale":  0.636085626911315
+                                      }
+                  },
+                  {
+                      "name":  "walk",
+                      "sheet":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\sheets\\walk.png",
+                      "cols":  4,
+                      "frames":  8,
+                      "manifest":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\templates\\walk.template.json",
+                      "tableId":  "walk",
+                      "durationSec":  0.6666666666666666,
+                      "loop":  true,
+                      "kind":  "upright",
+                      "calibration":  {
+                                          "scale":  0.5036319612590799
+                                      }
+                  },
+                  {
+                      "name":  "cast",
+                      "sheet":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\sheets\\cast.png",
+                      "cols":  5,
+                      "frames":  14,
+                      "manifest":  "__LOCAL_DRIVE__/\__USER_HOME__\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-21\\assets-src\\placeholder\\dan-phu-tu-sprite-v1\\E\\templates\\cast.template.json",
+                      "tableId":  "cast",
+                      "durationSec":  0.5,
+                      "loop":  false,
+                      "kind":  "free",
+                      "phases":  {
+                                     "windup_end":  7
+                                 },
+                      "calibration":  {
+                                          "scale":  0.7098976109215017
+                                      }
+                  }
+              ]
+}
