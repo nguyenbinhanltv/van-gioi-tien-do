@@ -1,0 +1,14 @@
+import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,mkdtempSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve,dirname} from 'node:path';
+import {pathToFileURL} from 'node:url';
+const require=createRequire(resolve('package.json')), {build}=require('esbuild');
+const pack=execFileSync('git',['show','27e82d6ffb180747473c78d8e4e2f04c3b39f1d5:tools/sprite/src/pack.ts'],{encoding:'utf8'});
+const outfile=join(mkdtempSync(join(tmpdir(),'vgtd-support-S-maxrects-')),'measure.mjs');
+await build({stdin:{contents:"export {runProject} from './tools/sprite/src/project.ts';",resolveDir:process.cwd()},bundle:true,platform:'node',format:'esm',outfile,banner:{js:"import {createRequire} from 'node:module';const require=createRequire(import.meta.url);"},plugins:[{name:'frozen-pr122',setup(b){b.onLoad({filter:/sprite[\\/]src[\\/]pack\.ts$/},()=>({contents:pack,loader:'ts'}));}}]});
+const {runProject}=await import(pathToFileURL(outfile).href);
+const projectPath='D:/Temp/vgtd-support-S-normalized/project.json';
+const result=runProject(JSON.parse(readFileSync(projectPath,'utf8')),dirname(projectPath));
+console.log(JSON.stringify({atlas:result.contract.atlas,clips:result.contract.clips.length,frames:result.contract.clips.reduce((n,c)=>n+c.frames,0),qa:result.contract.qa.counts}));

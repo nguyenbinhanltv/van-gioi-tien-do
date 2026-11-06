@@ -1,0 +1,505 @@
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "kiem-tu",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 4,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_R",
+      "value": 35.7,
+      "limit": 20,
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_R",
+      "value": 31.6,
+      "limit": 20,
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 6,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 26.8,
+      "limit": 20,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 7,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 38.1,
+      "limit": 20,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 10,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 999,
+      "limit": 20,
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 11,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 999,
+      "limit": 20,
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 1,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "value": 3.34,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 2,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "value": 4.32,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 3,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "value": 4.6,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "value": 5.23,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 6,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 29.7,
+      "limit": 20,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 7,
+      "gate": "footSlide",
+      "metric": "ghost_offset_px_L",
+      "value": 23,
+      "limit": 20,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 9,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_L",
+      "value": 3.11,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 10,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_L",
+      "value": 3.39,
+      "limit": 3,
+      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "status": "open",
+      "owner": "van-gioi-tien-do-17",
+      "added": "2026-11-06"
+    }
+  ],
+  "manual": [
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        6
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        7
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        8
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        9
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        10
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "carry_change",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        11
+      ],
+      "note": "Manually checked: selected whole-cell repair gives same nearRIGHT low hip carry; prior arm-only composite rejected. No automatic resolution based on metric absence.\nLegacy art diagnostic: kind=\"carry_change\"; metric=\"carry_mismatch_count\"; value=0; limit=0; status=\"resolved\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "resolved"
+    },
+    {
+      "kind": "weak_reversal",
+      "clip": "run",
+      "dir": "E",
+      "cells": [],
+      "note": "Manual visual count: near/far lead is not clearly readable in both halves; no claim of automatic anatomical measurement.\nLegacy art diagnostic: kind=\"leg_reversal\"; metric=\"ambiguous_half_cycles\"; value=2; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        4
+      ],
+      "note": "Manual binary flag: regenerated cell robe hem/flared fold volume differs from original run cells; visible in source sheet. D41 first-pass polish backlog.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"robe_length_variant_count\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        5
+      ],
+      "note": "Manual binary flag: regenerated cell robe hem/flared fold volume differs from original run cells; visible in source sheet. D41 first-pass polish backlog.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"robe_length_variant_count\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        7
+      ],
+      "note": "Manual binary flag: regenerated cell robe hem/flared fold volume differs from original run cells; visible in source sheet. D41 first-pass polish backlog.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"robe_length_variant_count\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        10
+      ],
+      "note": "Manual binary flag: regenerated cell robe hem/flared fold volume differs from original run cells; visible in source sheet. D41 first-pass polish backlog.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"robe_length_variant_count\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        11
+      ],
+      "note": "Manual binary flag: regenerated cell robe hem/flared fold volume differs from original run cells; visible in source sheet. D41 first-pass polish backlog.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"robe_length_variant_count\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [],
+      "note": "Actual flat-sole drawings repeat leading-foot contact near end of both halves. Contacts annotated honestly; timing/clear near-far reversal remains first-pass motion defect.\nLegacy art diagnostic: kind=\"contact_phase\"; metric=\"repeated_contact_half_cycles\"; value=2; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "attack_2",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=32; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "attack",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=8; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "attack_3",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=45; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "run",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=33; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "channel",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=6; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "walk",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=21; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "cast",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=6; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "die",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=11; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "hit",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=7; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "idle",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=17; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "tribulation",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=34; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=26; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "emote",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=9; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "sword_fly",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=3; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "hair_spill",
+      "clip": "meditate",
+      "dir": "E",
+      "cells": [],
+      "note": "Colour proxy only, not confirmed visual defect. Per-cell numbers in key-spill-diagnostic.json; may include legitimate master palette colours. Not an automatic failure or resolution.\nLegacy art diagnostic: kind=\"key_spill\"; metric=\"opaque_magenta_dominance_pixels_total\"; value=7; limit=0; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "run",
+      "dir": "E",
+      "cells": [
+        0
+      ],
+      "note": "Manual binary flag: backward hair/lean changes abruptly from last frame to first, despite coarse raster loop gate passing. No automatic resolution claimed.\nLegacy art diagnostic: kind=\"redraw_drift\"; metric=\"loop_hair_flow_flag\"; value=1; limit=0; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    }
+  ]
+}
