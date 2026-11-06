@@ -47,6 +47,7 @@ import {
   CHARACTER_IDS,
   authorClassSet,
   getAssemblyProfile,
+  profilePieces,
   type CharacterId,
   authorBlinkCycle,
   authorKiemTuSet,
@@ -135,7 +136,7 @@ const res = assembleContinuous({
   ...(weapon ? { weapon } : {}),
   ...(profile
     ? {
-        pieces: profile.pieces,
+        pieces: profilePieces(profile, dir),
         dropBones: profile.dropBones,
         snapIk: true,
         ...(profile.chains ? { extraChains: profile.chains } : {}),
