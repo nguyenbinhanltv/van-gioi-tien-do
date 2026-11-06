@@ -10,7 +10,8 @@
  */
 import type { CharacterId } from './classes.js';
 import { REPLACED_BONES, type PieceSpec } from './continuous.js';
-import type { ClipDetail, Hold } from './detail.js';
+import type { ChainTemplate } from './classes.js';
+import type { ClipDetail, DetailGroup, Hold } from './detail.js';
 import type { GaitProfile } from './kiemtu.js';
 
 export interface AssemblyProfile {
@@ -25,6 +26,8 @@ export interface AssemblyProfile {
   readonly detail: Readonly<Record<string, ClipDetail>>;
   /** IK constraint name -> `bendPositive`: knees (and elbows) bend toward the facing, unlike the mirrored base rig. */
   readonly ikBend?: Readonly<Record<string, boolean>>;
+  /** Class chain templates (see `AssembleInput.extraChains`). */
+  readonly chains?: { readonly templates: readonly ChainTemplate[]; readonly groups: readonly DetailGroup[] };
   /** Gait of run / walk / dash (`authorClassSet` and `rig:assemble` use it unless `--gait` says otherwise). */
   readonly gait: GaitProfile;
   /** Weapon rule of the QA gate: a sword is visible (`one`) or no weapon may exist (`none`). */
@@ -46,7 +49,12 @@ const arm = (side: 'L' | 'R'): PieceSpec[] => [
     slot: `arm_${side}`,
     binding: { kind: 'limb', chain: [`upper_arm_${side}`, `lower_arm_${side}`, `hand_${side}`], step: 6, ramp: 6 },
   },
-  { id: `sleeve_cuff_${side}`, slot: `sleeve_cuff_${side}`, binding: { kind: 'rigid', bone: `lower_arm_${side}` } },
+  // cuff: a chain of the shared sleeve_group (parent lower_arm), laid along the painted band
+  {
+    id: `sleeve_cuff_${side}`,
+    slot: `sleeve_cuff_${side}`,
+    binding: { kind: 'hanging', template: `sleeve_edge_${side}`, cols: 3 },
+  },
   ...GAUNTLET_SWAPS.map((v) => gauntlet(side, v)),
 ];
 const leg = (side: 'L' | 'R'): PieceSpec[] => [
@@ -55,7 +63,12 @@ const leg = (side: 'L' | 'R'): PieceSpec[] => [
     slot: `leg_${side}`,
     binding: { kind: 'limb', chain: [`thigh_${side}`, `shin_${side}`, `foot_${side}`], step: 7, ramp: 7 },
   },
-  { id: `trouser_hem_${side}`, slot: `trouser_hem_${side}`, binding: { kind: 'rigid', bone: `shin_${side}` } },
+  // gathered hem above the boot: a chain of hem_group hanging from the shin
+  {
+    id: `trouser_hem_${side}`,
+    slot: `trouser_hem_${side}`,
+    binding: { kind: 'hanging', template: `trouser_hem_${side}`, cols: 3 },
+  },
   { id: `boot_${side}`, slot: `boot_${side}`, binding: { kind: 'rigid', bone: `foot_${side}` } },
 ];
 
@@ -224,6 +237,34 @@ export const THE_TU_DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
 /** Thể tu gait: half stride at the real speed (cycles 2), moderate knee bend and stomp, forward lean of a bruiser. */
 export const THE_TU_GAIT: GaitProfile = { cycles: 2, reachScale: 0.6, crouchScale: 0.3, liftScale: 0.6, lean: 4 };
 
+/** Trouser hems: one short segment from the shin (light cloth, a small swing so the band does not fold over the boot). */
+const trouserHem = (side: 'L' | 'R'): ChainTemplate => ({
+  name: `trouser_hem_${side}`,
+  kind: 'cape',
+  parent: `shin_${side}`,
+  segments: 1,
+  length: 8,
+  at: { x: 0, y: 0, rotation: 0 },
+  stiffness: 0.4,
+  damping: 0.45,
+  gravity: 60,
+});
+export const THE_TU_CHAINS: { readonly templates: readonly ChainTemplate[]; readonly groups: readonly DetailGroup[] } =
+  {
+    templates: [trouserHem('L'), trouserHem('R')],
+    groups: [
+      {
+        name: 'hem_group',
+        kind: 'cape',
+        stiffness: 0.4,
+        damping: 0.45,
+        gravity: 60,
+        maxAngle: 15,
+        members: ['trouser_hem_L', 'trouser_hem_R'],
+      },
+    ],
+  };
+
 export const THE_TU_PROFILE: AssemblyProfile = {
   id: 'the-tu',
   stem: 'thetu',
@@ -234,6 +275,7 @@ export const THE_TU_PROFILE: AssemblyProfile = {
   // stocky tank in trousers: the legs are visible, so keep the stride of the robe gait (two step pairs per clip) but plant
   // harder: a deeper knee than a robe and a higher foot lift than a robe, no splayed squat
   gait: THE_TU_GAIT,
+  chains: THE_TU_CHAINS,
   // the base rig bends the R knee backward (hidden under a robe in the Kiếm tu pilot); trousers show it as bow legs
   ikBend: { ik_leg_R: true },
   qaWeapon: 'none',

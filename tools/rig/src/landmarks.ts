@@ -57,6 +57,21 @@ export function applyLandmarks(rig: RigDocument, landmarks: Landmarks, view: Can
     const t = pr ? target.get(pr) : undefined;
     if (h && t) target.set(h, { o: t.t, t: t.t, keepRotation: true });
   }
+  // IK goals sit at the rest position of what they drive: the feet goals on the ankles, the hand goals on the wrists. A
+  // stale goal (the old rig's ankle) makes every authored foot delta start from the wrong place and splays the legs.
+  for (const [role, lm] of [
+    ['ik_foot_R', 'ankle_R'],
+    ['ik_foot_L', 'ankle_L'],
+    ['ik_hand_R', 'wrist_R'],
+    ['ik_hand_L', 'wrist_L'],
+  ] as const) {
+    const bone = boneOf(role);
+    const at = landmarks[lm];
+    if (bone && at) {
+      const p = landmarkToRig(at, view);
+      target.set(bone, { o: p, t: p, keepRotation: true });
+    }
+  }
   const worlds = new Map<string, Mat>();
   const oldWorlds = new Map<string, Mat>();
   const out: RigBone[] = [];
