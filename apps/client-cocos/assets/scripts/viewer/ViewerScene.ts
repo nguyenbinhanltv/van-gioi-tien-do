@@ -51,7 +51,7 @@ export interface ViewerHook {
   /** Loop seam of the current animation (realtime rigs). */
   seam(): { loop: boolean; meanStep: number; seamStep: number; ratio: number } | null;
   /** Blink layer of the main actor: playing flag and the eyes display now shown (headless blink verification). */
-  blink(): { playing: boolean; eyes: string | null } | null;
+  blink(): { playing: boolean; eyes: string | null; time: number } | null;
   /** Show / hide the DOM panel and the HUD (clean frames for capture). */
   chrome(visible: boolean): void;
   animations: readonly string[];

@@ -268,13 +268,13 @@ export class DragonBonesActor implements CharacterActor {
     else this.display.playAnimation(this.anim, this.loopNow ? 0 : 1);
   }
 
-  blinkProbe(): { playing: boolean; eyes: string | null } | null {
+  blinkProbe(): { playing: boolean; eyes: string | null; time: number } | null {
     const armature = this.cache === 'realtime' ? this.display.armature() : null;
     if (!armature || !armature.animation.hasAnimation(BLINK_CLIP)) return null;
     const st = armature.animation.getState(BLINK_CLIP);
     const shown = armature.getSlot('eyes')?.displayIndex ?? -1;
     // display index in the exported order of the eyes slot (eyes_open, eyes_half, eyes_closed)
-    return { playing: !!st && st.isPlaying, eyes: shown >= 0 ? `display ${shown}` : null };
+    return { playing: !!st && st.isPlaying, eyes: shown >= 0 ? `display ${shown}` : null, time: st?.currentTime ?? 0 };
   }
 
   seamMetric(): SeamMetric | null {
