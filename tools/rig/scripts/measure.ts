@@ -21,6 +21,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import {
+  ASSEMBLY_PROFILES,
   CHARACTER_IDS,
   GAIT_PROFILES,
   autoSkin,
@@ -88,7 +89,10 @@ interface Row {
 }
 
 const opts = parse(process.argv.slice(2));
-const data = loadCharacterData(repoRoot, opts.character);
+// an assembled rig replaces the registry data, so a class without committed data (Thể tu pilot) can be measured
+const data = opts.assembled
+  ? ({ id: opts.character, byDirection: new Map(), issues: [] } as ReturnType<typeof loadCharacterData>)
+  : loadCharacterData(repoRoot, opts.character);
 if (opts.assembled) {
   const dirName = opts.dirs?.[0];
   if (!dirName) throw new Error('--assembled needs --dir <direction>');
@@ -115,9 +119,12 @@ for (const [dir, d] of data.byDirection) {
     : d.rig;
   const clips = authorClassSet(opts.character, rig, {
     detail: true,
+    // an assembled rig is measured with the gait `rig:assemble` exports: --gait, else the class profile's, else robe
     gait:
-      GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
-      GAIT_PROFILES.free,
+      opts.gait || !(opts.assembled && ASSEMBLY_PROFILES[opts.character])
+        ? (GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
+          GAIT_PROFILES.free)
+        : ASSEMBLY_PROFILES[opts.character]!.gait,
   });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
