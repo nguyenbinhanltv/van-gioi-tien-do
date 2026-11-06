@@ -6,32 +6,27 @@ E and SE each contain all 15 public sprite clips (156 source cells per direction
 
 ## Reproduce
 
-Run from the repository root after `npm ci`. Substitute `SE` for `E` to reproduce the second direction:
+Each committed direction project declares `preparation: { kind: "square-cell-dpi-v1", calibration: "../character-calibration.json" }`. The shared pipeline normalizes the complete raw sheet grids, applies the one master-locked scale and records raw hashes, crop bounds and DPI metadata in the contract. No temporary project is required:
 
 ```sh
-node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/prepare-masters.ts assets-src/placeholder/dan-phu-tu-sprite-v1
-node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/prepare-direction.ts assets-src/placeholder/dan-phu-tu-sprite-v1 E
-node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/assemble.ts assets-src/placeholder/dan-phu-tu-sprite-v1/E <temporary-normalized-directory> apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1
-npm run capture -w client-cocos -- --src dragonbones/danphutu-sprite-v1 --stem danphutu --direction E --animations all --frames 12 --mode single --zoom 2 --sample midpoint --gif --out <capture-directory>
+npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/dan-phu-tu-sprite-v1/S/project.json --out <temporary-S-export>
+npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/dan-phu-tu-sprite-v1/batch.json --out <temporary-batch-output>
+npm run sprite:review -w @vgtd/sprite -- --reports <temporary-batch-output>/batch-report.json --out <review-output>
 ```
 
-The committed direction projects point to raw AI grids with different image DPI. Run the DPI-normalization stage before the final shared builder: direct `runProject` / `sprite:build` / `sprite:batch` on these raw project files skips the recorded cell-DPI stage and master-locked 208/231 scale. Such a direct run is not a reproduction of the exported assets. For the merged SE set, the complete command is:
+Use the same build command with E or SE for those directions. The batch lists all completed directions. Copy the complete output folder, including its contract and every atlas page, into the character's runtime folder before Cocos capture. The documented S runtime PNG/texture/skeleton bytes match both the shared declared preparation and the earlier explicit assembly path.
 
-```sh
-node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/assemble.ts assets-src/placeholder/dan-phu-tu-sprite-v1/SE <temporary-SE-normalized-directory> <temporary-SE-export-directory>
-```
+The thin `prepare-direction.ts <character-root> <direction>` helper regenerates templates through the public clip table, passes the facing direction, and reads optional character-owned `clip-overrides.json`. `prepare-masters.ts` derives the fixed masters from the turnaround. `assemble.ts` remains a compatibility/audit command for normalized working sheets and per-direction `dpi-calibration.json`; it strips the declaration before invoking the normalized final stage to avoid double preparation. Already-normalized temporary projects omit `preparation`.
 
-This writes the normalized working `project.json` in the first temporary directory. Pass that prepared project to the shared batch CLI. Rechecked after #123: SE has zero hard findings, zero unlisted soft findings and zero regressions. Its 15 free-pose findings are accepted; 13 earlier foot baselines are preserved while walk/run are explicitly UNMEASURED pending a direction-correct guide migration. The raw-project direct run's 22 hard findings came from skipping these input stages; no source pixels or thresholds were changed. A declared shared DPI stage is being coordinated with the pipeline owner; adopt it when merged.
+The former direct raw-project run skipped cell-DPI normalization and locked calibration, causing the reported 22 SE hard findings. The declaration now reproduces the full stage through the shared CLI without art or threshold changes. SE's legacy walk/run foot measurement remains explicitly UNMEASURED until separate direction-correct guide migration; the earlier baselines remain preserved.
 
-`assemble.ts` fails if a sheet is missing, its cells cannot be normalized without distorting anatomy, a hard gate fails, or a soft finding is unlisted/regresses. `--available` is diagnostic only. `--accept-soft` explicitly records current soft measurements using the public backlog API; it never accepts hard failures.
-
-Clip metadata starts from public `projectClipDefaults`. Event phases use the shared clip-table defaults without character-specific overrides; the drawn contact and talisman-presentation poses span those trigger moments. Only the rendered sheet layout and explicit anatomical pose exceptions are character-owned. Assembly writes `dpi-calibration.json` beside the direction's project file, so the commands above regenerate the committed DPI record. Normalized images and the prepared project for the shared batch/review CLIs stay in temporary working space.
+Timing, loops and gameplay phases come from `SPRITE_CLIPS` / `projectClipDefaults` with no character-specific event overrides. S's 15 serialized timelines were checked against the shared defaults. Each source PNG has a row in `docs/ASSET-LICENSES.md`.
 
 ## Scale and QA
 
 Raw grids first receive DPI normalization to square pipeline cells. The hit sheet's external black letterboxing is cropped with recorded bounds; no character pixels are cropped. One locked character scale, **208 / 231**, then applies across every clip and future direction. Alignment changes translation only. `character-calibration.json` and `E/dpi-calibration.json` record both stages. No frame-specific scaling is used.
 
-Each direction exports one **2048 × 2048 PMA atlas**, 156 regions. Upright heights: E idle 207–210 px, walk 214 px, run 204–207 px; SE idle 209–213 px, walk 205–213 px, run 208–213 px. Seated, lunge, death-collapse and bow exceptions are explicit per-cell entries in the projects; the original anatomy remains at the common scale. The contracts record their measurements. SE uses a 2×2 hit layout to avoid letterboxing; E preserves its existing four-across source.
+The completed E/SE/S directions each export one **2048 × 2048 PMA atlas**, 156 regions. Upright heights: E idle 207–210 px, walk 214 px, run 204–207 px; SE idle 209–213 px, walk 205–213 px, run 208–213 px. Seated, lunge, death-collapse and bow exceptions are explicit per-cell entries in the projects; the original anatomy remains at the common scale. The contracts record their measurements. SE uses a 2×2 hit layout to avoid letterboxing; E preserves its existing four-across source.
 
 The completed E/SE/S contracts have **zero hard failures**, no unlisted soft finding and no regression: E has **26 accepted findings**, S has **32**. SE has **15 accepted free-pose findings** and **13 preserved legacy foot baselines**; its walk/run foot motion is explicitly UNMEASURED. See `quality-backlog.json` / `.md` for exact clip, direction, cell, metric, value, limit and repair note. The JSON's `entries` use the public automated backlog format. Its public `manual` array records observations outside automated gates: weak leg reversal, two E gray talismans, residual violet-spill pixel counts for all cells, and the directional validation limitation below. `manual-art-findings.json` preserves the per-cell numeric evidence and imports through `sprite:backlog --backlog <quality-backlog.json> --import-manual <manual-art-findings.json>`; the shared importer retains those numbers in each observation's note. There are 159 E and 160 SE open visual/validation records. These stay open; never infer they are resolved because a gate does not emit them. Regenerate this manual section with `record-visual-qa.ts` after the final export.
 

@@ -107,6 +107,9 @@ writeFileSync(
       stem: 'danphutu',
       master: `../reference/${direction}.master.png`,
       backlog: '../quality-backlog.json',
+      ...(existsSync(join(root, 'character-calibration.json'))
+        ? { preparation: { kind: 'square-cell-dpi-v1', calibration: '../character-calibration.json' } }
+        : {}),
       clips,
     },
     null,

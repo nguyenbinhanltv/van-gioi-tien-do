@@ -349,7 +349,7 @@
       "metric": "ghost_distance_2d_px_R",
       "value": 25.8,
       "limit": 20,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -362,7 +362,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 7.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -375,7 +375,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 6.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -388,7 +388,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 4.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -401,7 +401,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 9.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -414,7 +414,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 8.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -427,7 +427,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 7.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -440,7 +440,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 19.5,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -986,7 +986,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 6.33,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -999,7 +999,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 3.67,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -1012,7 +1012,7 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 9.67,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -1025,7 +1025,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 7.67,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -1038,7 +1038,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 10.33,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"
@@ -1051,7 +1051,7 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 16.67,
       "limit": 3,
-      "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+      "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
       "status": "open",
       "owner": "support-art",
       "added": "2026-11-06"

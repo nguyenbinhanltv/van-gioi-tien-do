@@ -44,6 +44,21 @@
       "frames": 12,
       "kind": "upright",
       "sheetSha1": "8a95b700d82cf0fb16dc7157347906a6ca59c531",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "5949e5bdef0f39ee9115300fe5681246b8998c4a"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -240,6 +255,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "9801d644906849b4e40c35a56ed9765bd1ea8b85",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "a54165673b99ffba68f648ef474f6b8e1a3e8bd4"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -384,6 +414,21 @@
       "frames": 8,
       "kind": "upright",
       "sheetSha1": "4fdb7c83315bfb32e9a4aa60a554e1ed18553e21",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "c3bd3d91b76e74d3561da624a481bb59a71079f6"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -520,6 +565,21 @@
       "frames": 10,
       "kind": "upright",
       "sheetSha1": "3f895b699ac80f6cb5fc09b5690aa6bec83ce55e",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "98996f11c078e89d835069db6fb1eceb77415bd7"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -686,6 +746,21 @@
       "frames": 6,
       "kind": "free",
       "sheetSha1": "aefff540f704e62331eff1e64a0d3c7b5abb26d8",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "028147b93abe74edc934b8daef830a577ec3996c"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -796,6 +871,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "2663661f27deed05c1d6814c529fe3ca4a454414",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "1c7a4489bcf2d706bd15b83687ed44c54f0c94e2"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -932,6 +1022,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "7d200e1b533128b873f6ae19329f5678508daeb0",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "bbb6adf87868bb8fc2fc14b5de4f72b41f79d281"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1098,6 +1203,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "5a7f35a53fca97dca4cfda77dc96620a9bfc15a9",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "0a4aca48312a911d64d12f663a05adf3195baa4c"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1264,6 +1384,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "2ec3500aa92a23c620dc4ec84d811cd59bc1db3d",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "6e75b341e5597d8c98ff86421f3c216e35662e96"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1430,6 +1565,21 @@
       "frames": 14,
       "kind": "free",
       "sheetSha1": "37619beea1c8f9e70414cf8fd24d232037665210",
+      "preparation": {
+        "raw": [
+          1619,
+          971
+        ],
+        "normalized": [
+          1280,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 971,
+        "dpiScaleX": 0.7906114885731933,
+        "dpiScaleY": 0.7909371781668383,
+        "rawSha1": "1c9cb7a02e97dcb93662dcb4396eb9e339b4106c"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1656,6 +1806,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "203885b07905bc980c28d5c57dd15331dd0541ac",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "c46bd8440dcbf80150679ec2535a0b1e97096943"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1792,6 +1957,21 @@
       "frames": 4,
       "kind": "free",
       "sheetSha1": "330f6566d35c52e2dca33e9838bc13715e7ff961",
+      "preparation": {
+        "raw": [
+          1254,
+          1254
+        ],
+        "normalized": [
+          512,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.4082934609250399,
+        "dpiScaleY": 0.4082934609250399,
+        "rawSha1": "4067297ee576383adb250f493be84482969f1ba4"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -1868,6 +2048,21 @@
       "frames": 12,
       "kind": "free",
       "sheetSha1": "142363d6183311bf64baac176bce73d33d5face1",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "6d5d610f66ffa6a3730107ffaf309744b73b7855"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -2074,6 +2269,21 @@
       "frames": 24,
       "kind": "free",
       "sheetSha1": "785e43a72f82475e481f5a80e4d2de927837a67c",
+      "preparation": {
+        "raw": [
+          1536,
+          1024
+        ],
+        "normalized": [
+          1536,
+          1024
+        ],
+        "cropTop": 0,
+        "cropBottom": 1024,
+        "dpiScaleX": 1,
+        "dpiScaleY": 1,
+        "rawSha1": "e7d7940816dce87d00759e105c6bd5e21bb93687"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -2450,6 +2660,21 @@
       "frames": 12,
       "kind": "upright",
       "sheetSha1": "a900dd2fc2ef5063eb005ea26f370fe049c8e8ca",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "30c3045638326d1c1b310ee7f9aaf0a7aa82420f"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 207,
@@ -3322,7 +3547,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 6.33,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3349,7 +3574,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 3.67,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3376,7 +3601,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 9.67,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3403,7 +3628,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 7.67,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3430,7 +3655,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 10.33,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3457,7 +3682,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 16.67,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3484,7 +3709,7 @@
           "metric": "ghost_distance_2d_px_R",
           "value": 25.8,
           "limit": 20,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3511,7 +3736,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 7.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3538,7 +3763,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 6.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3565,7 +3790,7 @@
           "metric": "slide_ground_px_per_frame_R",
           "value": 4.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3592,7 +3817,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 9.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3619,7 +3844,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 8.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3646,7 +3871,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 7.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
@@ -3673,7 +3898,7 @@
           "metric": "slide_ground_px_per_frame_L",
           "value": 19.5,
           "limit": 3,
-          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "note": "First full-set pass: fresh 2D directional foot QA, source y stride retained with vertical keep, default stanceWidth=0. Revalidated with merged #123/#129 and declared DPI preparation: unchanged measured value. Original generation guides archived separately. Later cell-local redraw; no per-frame rescaling or threshold changes.",
           "status": "open",
           "owner": "support-art",
           "added": "2026-11-06"
