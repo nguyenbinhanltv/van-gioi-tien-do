@@ -42,12 +42,23 @@ if (source !== defaultSource && !manifest.paletteSamples)
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const luminance = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 const silhouette = new Uint8Array(512 * 512);
+const silhouetteMargin = manifest.silhouetteMargin4x ?? 3;
+if (!Number.isFinite(silhouetteMargin) || silhouetteMargin < 0 || silhouetteMargin > 16)
+  throw new Error('silhouetteMargin4x must be between 0 and 16');
+const silhouetteRadius = Math.ceil(silhouetteMargin);
 for (let y = 0; y < 512; y++)
   for (let x = 0; x < 512; x++) {
     // Leave half a texture pixel for AA/downsampling inside the permitted two-pixel rest deviation.
-    for (let dy = -4; dy <= 4 && !silhouette[y * 512 + x]; dy++)
-      for (let dx = -4; dx <= 4; dx++) {
-        if (dx * dx + dy * dy > 9 || x + dx < 0 || y + dy < 0 || x + dx >= 512 || y + dy >= 512) continue;
+    for (let dy = -silhouetteRadius; dy <= silhouetteRadius && !silhouette[y * 512 + x]; dy++)
+      for (let dx = -silhouetteRadius; dx <= silhouetteRadius; dx++) {
+        if (
+          dx * dx + dy * dy > silhouetteMargin * silhouetteMargin ||
+          x + dx < 0 ||
+          y + dy < 0 ||
+          x + dx >= 512 ||
+          y + dy >= 512
+        )
+          continue;
         if (master.getPixel(x + dx, y + dy)[3] >= 128) {
           silhouette[y * 512 + x] = 1;
           break;
@@ -304,8 +315,12 @@ function processPart(part) {
       const c = registered.getPixel(x, y);
       if (c[3] < 8) continue;
       const region = (part.materialRegions ?? []).find((r) => inPolygon(x / 2, y / 2, r.polygon));
+      const inferred = material(c);
       const name =
-        region?.material ?? (part.materialRegions || part.materials.length === 1 ? part.materials[0] : material(c));
+        region?.material ??
+        (part.materialRegions || part.materials.length === 1
+          ? part.materials[0]
+          : (part.materialAliases?.[inferred] ?? inferred));
       const key = part.materials.includes(name) ? name : part.materials[0];
       (groups[key] ??= []).push({ x, y, c });
     }
@@ -387,6 +402,14 @@ if (mode === 'licenses') {
   const previous = fs.readFileSync(filename, 'utf8').split(marker)[0];
   const entries = manifest.parts
     .map((p) => path.join(source, 'raw', direction, `${p.id}.generation.json`))
+    .concat(
+      fs.existsSync(path.join(source, 'raw', direction, 'history'))
+        ? fs
+            .readdirSync(path.join(source, 'raw', direction, 'history'))
+            .filter((p) => p.endsWith('.generation.json'))
+            .map((p) => path.join(source, 'raw', direction, 'history', p))
+        : [],
+    )
     .filter(fs.existsSync)
     .map((p) => JSON.parse(fs.readFileSync(p, 'utf8')));
   let section =
@@ -396,6 +419,8 @@ if (mode === 'licenses') {
     '\n[Cập nhật KT3] Đăng ký cuối dùng cross-section liên tục cho thân, chi, vạt váy, nút đai và dải tóc; các chi tiết nhỏ dùng area resampling để không mất nét mắt/miệng. Các chỉnh sửa mask thủ công gồm bổ sung búi tóc riêng, mở rộng cổ/ngực dưới đầu, cạnh trước vạt váy và nút đai; giữ cả mask lúc sinh (`raw/E/<id>.mask.png`) và guide cuối trong manifest. PNG nguồn là straight alpha; chỉ atlas/export là PMA. Bóng riêng giới hạn alpha 20%. Kiểm tra rest composite chạy bằng mode `check`; không thay thế kiểm tra mesh khi chuyển động.\n';
   section +=
     '\nChỉnh bảng màu ngọc (không đổi alpha): thêm mẫu jade riêng từ trâm concept A cho trâm và mặt dây; tránh ánh xanh ngọc bị phân loại thành vải xanh hoặc vàng. Đây là hậu xử lý màu bằng mã, không phải lần sinh ảnh mới.\n';
+  section +=
+    '\n[Cập nhật KT3 — quần ngà và lót khe váy] Hai chân sinh lại từ master, chân cũ và mask; giữ ảnh/prompt cũ trong raw/E/history. Nhãn vật liệu chỉnh thủ công: quần ngà, boot charcoal, viền đế sáng; nếp lót ngà rộng 6 px @2x ở cạnh sau robe_front và cạnh trước robe_back, giữ các dải gấu vàng riêng. Hậu xử lý màu bằng mã, không tô pixel thủ công; alpha từng chân/panel và landmarks giữ nguyên. Rest composite maxExtra/maxMissing 2 px.\n';
   for (const e of entries)
     section += `\n### KT3 / ${e.id}\n\n- UTC bắt đầu: ${e.utcStart}; công cụ: ${e.tool}; model: ${e.model}; CLI: ${e.cli}.\n- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: \`${e.selectedOutput}\`.\n- Prompt đầy đủ:\n\n\`\`\`text\n${e.prompt}\n\`\`\`\n`;
   fs.writeFileSync(filename, previous + section);

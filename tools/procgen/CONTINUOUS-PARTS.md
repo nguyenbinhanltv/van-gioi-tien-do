@@ -71,4 +71,8 @@ Masks accept `polygons` and rounded `segments` (`{a:[x,y],b:[x,y],r:number}`). `
 
 Outputs are **256×256 straight-alpha PNGs**. PMA conversion belongs only to packing/export. `check` independently measures the complete rest composite against `reference2x` (or an area downsample of the registered @4x master), reporting maximum boundary distances in both directions; it fails above 2 texture px. It does not validate animation, mesh deformation or style. `restOrder` must list active rest displays only, excluding the shadow/effects and inactive swaps.
 
+Optional per-part `materialAliases`, for example `{"skin":"gold"}`, remaps the inferred colour classifier for mixed-material pieces. Explicit `materialRegions` always win, and a single-material part keeps its declared material. Defaults are unchanged.
+
+Optional `silhouetteMargin4x` sets the Euclidean master-alpha dilation radius at the 512 stage (default 3, range 0–16). A tighter value such as 2 can reduce diagonal overshoot after downsampling. This is a processing margin, not an acceptance threshold: the independent `check` still requires maximum extra and missing boundary distances ≤2 px @2x.
+
 The `licenses` subcommand remains Kiếm tu E specific; other art workers maintain their own prompt/tool/model-undisclosed/CLI/UTC provenance. Existing no-option commands and the legacy `masks <out> <manifest>` form remain supported.
