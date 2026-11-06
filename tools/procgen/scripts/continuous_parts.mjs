@@ -252,7 +252,15 @@ function processPart(part) {
   const filename = path.join(source, 'raw', direction, `${part.id}.png`);
   if (!fs.existsSync(filename)) return null;
   const raw = decodePNG(fs.readFileSync(filename));
-  const image = resizeArea(raw, 512, 512);
+  let image = resizeArea(raw, 512, 512);
+  const turns = part.sourceQuarterTurns ?? 0;
+  if (!Number.isInteger(turns) || turns < 0 || turns > 3)
+    throw new Error('sourceQuarterTurns must be an integer between 0 and 3');
+  for (let turn = 0; turn < turns; turn++) {
+    const rotated = new Image(512, 512);
+    for (let y = 0; y < 512; y++) for (let x = 0; x < 512; x++) rotated.setPixel(511 - y, x, ...image.getPixel(x, y));
+    image = rotated;
+  }
   if (part.sourceBounds4x) {
     const [x0, y0, x1, y1] = part.sourceBounds4x;
     if (![x0, y0, x1, y1].every(Number.isFinite) || x0 < 0 || y0 < 0 || x1 >= 512 || y1 >= 512 || x1 < x0 || y1 < y0)
@@ -309,6 +317,10 @@ function processPart(part) {
       }
     }
   }
+  for (let y = 0; y < 512; y++)
+    for (let x = 0; x < 512; x++)
+      if ((part.excludePolygons ?? []).some((polygon) => inPolygon(x / 2, y / 2, polygon)))
+        registered.setPixel(x, y, 0, 0, 0, 0);
   const groups = {};
   for (let y = 0; y < 512; y++)
     for (let x = 0; x < 512; x++) {
@@ -339,7 +351,7 @@ function processPart(part) {
     transfer[name] = { pixels: pixels.length, masterSamples: palette.length, paletteBlend: 0.75 };
   }
   let silhouetteClipped4x = 0;
-  if (!['shadow', 'sword_trail', 'sword_glint'].includes(part.id)) {
+  if (part.clipToMaster !== false && !['shadow', 'sword_trail', 'sword_glint'].includes(part.id)) {
     for (let y = 0; y < 512; y++)
       for (let x = 0; x < 512; x++) {
         if (!silhouette[y * 512 + x] && registered.getPixel(x, y)[3] > 0) {

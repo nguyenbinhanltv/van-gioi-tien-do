@@ -71,6 +71,10 @@ Masks accept `polygons` and rounded `segments` (`{a:[x,y],b:[x,y],r:number}`). `
 
 Outputs are **256×256 straight-alpha PNGs**. PMA conversion belongs only to packing/export. `check` independently measures the complete rest composite against `reference2x` (or an area downsample of the registered @4x master), reporting maximum boundary distances in both directions; it fails above 2 texture px. It does not validate animation, mesh deformation or style. `restOrder` must list active rest displays only, excluding the shadow/effects and inactive swaps.
 
+Optional per-part `sourceQuarterTurns` rotates the normalized 512 canvas clockwise by 0–3 quarter turns, before `sourceBounds4x` and registration (default 0). Crop coordinates refer to the rotated 512 canvas. Optional `clipToMaster: false` skips the rest-master silhouette clamp for alternate hand displays or other non-rest parts; their geometry guides still apply. Keep inactive variants out of `restOrder`; the independent rest check is unchanged.
+
+Optional per-part `excludePolygons` is an array of polygons in registered @2x coordinates. Matching pixels are cleared after contour/bounds fitting and before material transfer/downsampling, allowing an interior neckline window without changing the outer contour. Default: no exclusions.
+
 Optional per-part `materialAliases`, for example `{"skin":"gold"}`, remaps the inferred colour classifier for mixed-material pieces. Explicit `materialRegions` always win, and a single-material part keeps its declared material. Defaults are unchanged.
 
 Optional `silhouetteMargin4x` sets the Euclidean master-alpha dilation radius at the 512 stage (default 3, range 0–16). A tighter value such as 2 can reduce diagonal overshoot after downsampling. This is a processing margin, not an acceptance threshold: the independent `check` still requires maximum extra and missing boundary distances ≤2 px @2x.
