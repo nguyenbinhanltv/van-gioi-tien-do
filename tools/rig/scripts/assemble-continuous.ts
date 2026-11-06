@@ -26,6 +26,7 @@ import {
   type GaitName,
   ATLAS_PADDING,
   KEYPOSE_LABELS,
+  landmarksFromPose,
   applyDetail,
   assembleContinuous,
   authorKeyPoseClip,
@@ -253,7 +254,30 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
             if (v > best.iou) best = { iou: v, dx: ddx, dy: ddy };
           }
       }
-      const bad = (ref && iou < iouMin) || fit.rms > rmsMax;
+      // landmark RMS of the FINISHED clip (after the contact lock, the interpolation between keys, the secondary bake and the
+      // detail layer), not just of the fit: at the exact key time (a fraction of a frame) and at the frame that is actually
+      // exported (whole frames only). Reference landmarks move with the fit shift (the feet only along the facing).
+      const refLm = lms[i]!;
+      const inferredSet = new Set((refLm._inferred as readonly string[] | undefined) ?? []);
+      const finishedRms = (frame: number) => {
+        const got = landmarksFromPose(res.rig, evalPose(res.rig, finished, frame), view);
+        const errs: number[] = [];
+        for (const [k, v] of Object.entries(refLm)) {
+          // the joint landmarks the fit solves for (hem points are outer edges, the sword tip a free end: not joints)
+          if (!/^(shoulder|elbow|wrist|hip|knee|ankle|foot_tip)_[LR]$|^(chest|neck|head|pelvis)$/.test(k)) continue;
+          if (inferredSet.has(k) || !Array.isArray(v) || v.length !== 2) continue;
+          const g = (got as Record<string, readonly [number, number] | undefined>)[k];
+          if (!g) continue;
+          const foot = /^(ankle|foot_tip)_/.test(k);
+          const dx = fit.shift.x * view.scale * 1;
+          const dy = foot ? 0 : -fit.shift.y * view.scale;
+          errs.push(Math.hypot(v[0]! + dx - g[0], v[1]! + dy - g[1]) / view.scale);
+        }
+        return errs.length ? Math.sqrt(errs.reduce((a, e) => a + e * e, 0) / errs.length) : 0;
+      };
+      const rmsExact = finishedRms(at[i]!);
+      const rmsExported = finishedRms(Math.round(at[i]!));
+      const bad = (ref && iou < iouMin) || rmsExported > rmsMax;
       if (bad) iouFailures++;
       const worst = Object.entries(fit.error)
         .sort((p, q) => q[1] - p[1])
@@ -261,7 +285,7 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
         .map(([k, v]) => `${k} ${v.toFixed(1)}`)
         .join(', ');
       console.log(
-        `  ${x}: RMS ${fit.rms.toFixed(2)} px (max ${fit.maxError.toFixed(1)}: ${worst}), IoU ${ref ? iou.toFixed(3) : 'n/a'}${ref ? ` [head ${detail.bands[0]!.toFixed(2)} | torso ${detail.bands[1]!.toFixed(2)} | skirt+legs ${detail.bands[2]!.toFixed(2)}]` : ''}${ref ? `, best shift (${best.dx},${best.dy}) px -> IoU ${best.iou.toFixed(3)}` : ''}${bad ? `  FAIL (IoU >= ${iouMin}, RMS <= ${rmsMax})` : ''}${fit.shift.y ? `, pelvis lowered ${(-fit.shift.y).toFixed(1)} px` : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
+        `  ${x}: fit RMS ${fit.rms.toFixed(2)} px, FINISHED clip RMS ${rmsExact.toFixed(2)} at the key time / ${rmsExported.toFixed(2)} at the exported frame ${Math.round(at[i]!)} (max ${fit.maxError.toFixed(1)}: ${worst}), IoU ${ref ? iou.toFixed(3) : 'n/a'}${ref ? ` [head ${detail.bands[0]!.toFixed(2)} | torso ${detail.bands[1]!.toFixed(2)} | skirt+legs ${detail.bands[2]!.toFixed(2)}]` : ''}${ref ? `, best shift (${best.dx},${best.dy}) px -> IoU ${best.iou.toFixed(3)}` : ''}${bad ? `  FAIL (IoU >= ${iouMin}, RMS <= ${rmsMax})` : ''}${fit.shift.y ? `, pelvis lowered ${(-fit.shift.y).toFixed(1)} px` : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
       );
       const render = (c: (typeof clips)[number] | undefined, f: number) =>
         renderPose(res.rig, evalPose(res.rig, c ?? null, c ? Math.min(f, c.frames) : 0), atlas, {
