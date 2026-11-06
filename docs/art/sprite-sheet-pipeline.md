@@ -101,6 +101,23 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 - **Khóa so khớp:** `clip + dir + cell + gate + metric` (`cell` = chỉ số khung 0-based, `-1` = cấp clip).
 - **Ghi vào backlog là hành động có chủ ý:** `npm run sprite:backlog -w @vgtd/sprite -- --project <project.json> --accept --note "<lý do>" [--owner <worker>] [--prune]` thêm các phát hiện mềm **hiện tại** chưa được ghi (không bao giờ thêm cổng cứng hay hồi quy); không cờ nào thì chỉ báo cáo. `sprite:build` in phán quyết từng phát hiện và thoát 1 nếu còn lỗi cứng, mềm chưa ghi, hoặc hồi quy.
 
+### Phát hiện hình ảnh thủ công
+
+`quality-backlog.json` v1 có thêm mảng `manual` tùy chọn, tách khỏi `entries` chứa số đo tự động.
+Mỗi mục có `kind` (`carry_change`, `weak_reversal`, `redraw_drift`, `hair_spill`, `other`), `clip`, `dir`,
+`cells` (chỉ số từ 0; mảng rỗng áp dụng cả clip), `note`, `severity` và `reviewer: "art-worker"`.
+Giữ nhãn mức độ của người xem (`warn`: lỗi nhìn thấy; `info`: chẩn đoán chưa xác nhận), không quy đổi thành cổng QA.
+Lệnh `sprite:backlog` đếm và liệt kê riêng các mục này; báo cáo batch chuyển chúng tới trang `sprite:review`.
+Chúng không chấp nhận lỗi đo, không thay đổi kết quả cổng build, không nằm trong danh sách tự động đã sửa;
+`--accept` và `--prune` luôn giữ nguyên. Chỉ người xem art mới sửa hoặc xóa sau khi kiểm tra lại.
+Trường `status` tùy chọn (`open`, `planned`, `resolved`, mặc định `open`) chỉ ghi quyết định xem art rõ ràng;
+QA không tự thay đổi nó. Số mục người xem art đã xử lý được hiển thị riêng, không nhập vào số đo tự động đã sửa.
+
+Nhập tệp đồng hành của worker 17 bằng `sprite:backlog --backlog <quality-backlog.json> --import-manual <manual-art-findings.json>`
+(qua npm workspace như hướng dẫn README). Không cần dựng lại art khi nhập. `leg_reversal` đổi thành `weak_reversal`,
+`key_spill` đổi thành `hair_spill`; số chẩn đoán cũ chỉ giữ trong ghi chú, tuyệt đối không tạo `footSlide` giả.
+Sau khi nhập, dựng lại báo cáo batch để trang review nhận các mục mới.
+
 ## Batch + trang duyệt của chủ dự án
 
 - `batch.json` = `{ "character": "kiem-tu", "projects": ["E/project.json", "SE/project.json", ...] }` (đường dẫn tương đối với file batch; mỗi hướng một project, mỗi project có `quality-backlog.json` cạnh nó).
@@ -120,6 +137,34 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 
 ## Hạn chế hiện tại
 
-- Mỗi hướng một trang atlas (xuất nhiều trang sẽ báo lỗi rõ ràng); đủ cho ≈ 130 khung.
+- MaxRects thử giữ một trang; nếu không vừa thì xuất thêm trang, mỗi trang không quá 2048². Không tự giảm kích thước hay bỏ khung để vừa atlas. Vẫn một armature và cùng timeline sự kiện; nhiều trang tăng bộ nhớ texture và có thể tăng draw call khi đổi texture.
 - Bóng chân và cổng trượt chân hiện hiểu hướng E (mặt về phía +x); hướng khác cần chỉnh khi bắt đầu vẽ hướng đó.
 - Palette lock và độ giống master là cổng thô (ngưỡng mặc định, cần chỉnh khi có dữ liệu thật). Ngưỡng là giá trị mặc định chưa duyệt (ghi trong OPEN-ITEMS §12).
+
+### Kiểm chứng MaxRects (2026-11-07)
+
+- Thay shelf bằng MaxRects best-short-side-fit, không xoay; chọn theo cạnh dư ngắn, cạnh dư dài, y, x, rồi thứ tự chiều cao/tên ổn định. Tách mọi vùng trống giao với hình vừa đặt và bỏ vùng bị chứa. Giữ trim, padding, extrude, PMA và hiệu chuẩn đầu vào; không có bước co ảnh để vừa atlas.
+- Dữ liệu thật Thể tu E của worker 18: **15 clip / 156 khung**, tổng diện tích trim có biên **3.906.947 px² (93,15 % trang)**. Shelf cần hai trang; MaxRects xuất **một trang 2048×2048**. Fixture kích thước nằm tại `tools/sprite/test/the-tu-E-trims.json`; test buộc giữ một trang cho toàn bộ 156 khung.
+- Chạy lại project thật ghi đủ bốn tệp xuất, không lỗi QA cứng; 24 phát hiện mềm chưa ghi backlog vẫn làm lệnh build trả lỗi. Đây là việc chất lượng asset của worker art, không được bỏ qua cổng QA khi đổi thuật toán xếp.
+- Tương thích Đan/Phù tu E: skeleton và contract giống từng byte; tọa độ atlas và PNG thay đổi theo bố trí mới. Đủ 156 region giữ nguyên kích thước và pixel PMA. Giữ thứ tự region/display cũ theo chiều cao/tên để tránh đổi chỉ số display không cần thiết. Kết quả QA trước/sau giống nhau; đầu vào trên main vẫn có lỗi QA, không tuyên bố asset đạt chỉ vì xuất được atlas.
+
+### Dự phòng nhiều trang trong Cocos 3.8.8
+
+Đan/Phù tu S chuẩn hóa của worker 21 có **15 clip / 156 khung**, diện tích trim trước biên **3.589.177 px²**.
+MaxRects vẫn cần hai trang: **2048² / 155 region** và **256² / 1 region (`meditate_01`)**.
+Chọn nhiều trang thay vì tách armature vì factory DragonBones của Cocos 3.8.8 nhận nhiều `TextureAtlasData` dưới cùng khóa atlas;
+không cần đổi character API hay chia timeline sự kiện. Cần kiểm chứng bằng capture thật, không suy ra chỉ từ parser.
+
+- Trang đầu giữ `<stem>_<DIR>_tex.json/png`; trang tiếp theo là `<stem>_<DIR>_page1_tex.json/png`, rồi `page2`, v.v.
+- Contract `.sprite.json` chỉ thêm `atlas.textures` khi có nhiều trang: danh sách resource stem không có phần mở rộng, trang đầu trước.
+  Ví dụ `['danphutu_S_tex', 'danphutu_S_page1_tex']`. `atlas.regions` đếm tổng region của tất cả trang.
+- Viewer tải contract nếu có, tải đủ atlas assets, gọi `primary.init(factory)` rồi đăng ký trang thêm bằng API công khai
+  `factory.parseTextureAtlasData(data, texture, primary.uuid)` **trước** khi dựng armature. Kiểm tra danh sách factory để không đăng ký trùng khi có nhiều actor.
+  Không sửa trường private của engine; atlas phụ giữ PMA và tọa độ riêng của trang đó.
+- Skeleton được xuất với kích thước của toàn bộ region, giữ mọi display ở tỷ lệ hình học gốc và sự kiện clip-table nguyên vẹn.
+  Batch capture chép đủ PNG/JSON và contract; đường repo lấy từ entry gốc `process.argv[1]`, không từ URL của bundle tạm.
+- So với head MaxRects một trang, cả bốn tệp Thể tu E và Đan/Phù tu E giống từng byte sau khi thêm dự phòng nhiều trang.
+- Capture thật Cocos Creator **3.8.8** đã hoàn tất đủ **15 clip**, zoom **2×**, **24 mẫu midpoint/clip**, trả mã **0**;
+  có 15 GIF và 15 contact sheet. `meditate_01` từ trang phụ hiện đúng rồi chuyển sang các khung ở trang chính trong cùng clip.
+  Lệnh tái kiểm: `node apps/client-cocos/scripts/capture.mjs --skip-build --src dragonbones/<folder> --stem danphutu --direction S --mode single --animations all --frames 24 --zoom 2 --sample midpoint --gif --out <out>`.
+  Đây là chứng minh tải/render nhiều trang; dữ liệu S chuẩn hóa vẫn có 3 lỗi QA cứng và 24 lỗi mềm của art, không được coi là đã duyệt chất lượng.

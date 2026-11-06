@@ -11,6 +11,7 @@ import {
   RIG_FORMAT,
   RIG_FORMAT_VERSION,
   exportDragonBones,
+  exportTextureAtlas,
   validateRig,
   type AtlasData,
   type Clip,
@@ -100,17 +101,24 @@ export interface BuildArmatureInput {
 export interface BuiltArmature {
   readonly rig: RigDocument;
   readonly clips: readonly Clip[];
+  /** Primary page, retained for existing callers. See textures for every page's export. */
   readonly atlas: AtlasData;
   readonly export: DragonBonesExport;
+  readonly textures: readonly DragonBonesExport['tex'][];
 }
 
-/** Build the single-armature display-swap rig, its clips and the DragonBones export. One atlas page only (for now). */
+/** Build one display-swap armature. Multiple atlas pages share its texture lookup group at runtime. */
 export function buildArmature(input: BuildArmatureInput): BuiltArmature {
-  if (input.pack.pages.length !== 1)
-    throw new RangeError(
-      `${input.pack.pages.length} atlas pages: the DragonBones export carries one page per direction (reduce frames or sizes)`,
-    );
+  if (!input.pack.pages.length) throw new RangeError('no atlas pages to export');
   const atlas = input.pack.pages[0]!.data;
+  // Geometry needs every region's pixel size; page-local coordinates are emitted separately below.
+  const geometryAtlas =
+    input.pack.pages.length === 1
+      ? atlas
+      : {
+          ...atlas,
+          regions: input.pack.pages.flatMap((page) => page.data.regions),
+        };
   const pivot = pivotOf(CELL_PX / TEXTURE_SCALE, CELL_PX / TEXTURE_SCALE);
   const rootX = pivot.x * TEXTURE_SCALE;
   const rootY = pivot.y * TEXTURE_SCALE;
@@ -143,6 +151,12 @@ export function buildArmature(input: BuildArmatureInput): BuiltArmature {
   const clips = input.clips.map(buildClip);
   const errors = validateRig(rig).filter((i) => i.severity === 'error');
   if (errors.length) throw new Error(`sprite rig invalid: ${errors.map((e) => `${e.path}: ${e.message}`).join('; ')}`);
-  const exported = exportDragonBones([{ rig, clips }], atlas, { name: input.name, armatureName: () => input.name });
-  return { rig, clips, atlas, export: exported };
+  const exported = exportDragonBones([{ rig, clips }], geometryAtlas, {
+    name: input.name,
+    armatureName: () => input.name,
+  });
+  const textures = input.pack.pages.map((page, i) =>
+    exportTextureAtlas(page.data, i === 0 ? input.name : `${input.name}_page${i}`),
+  );
+  return { rig, clips, atlas, export: { ske: exported.ske, tex: textures[0]! }, textures };
 }

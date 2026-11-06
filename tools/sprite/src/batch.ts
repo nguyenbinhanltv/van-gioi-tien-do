@@ -6,7 +6,7 @@
  * Writes <out>/<DIR>/<stem>_<DIR>_{ske,tex}.json + _tex.png + .sprite.json for every project and <out>/batch-report.json.
  * Capturing the clips in the Cocos runtime and the review page are layered on top by the CLI (scripts/batch.ts).
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve, isAbsolute } from 'node:path';
 import { DIRECTIONS, type Direction } from '@vgtd/shared';
 import { loadBacklog } from './backlog.js';
@@ -89,9 +89,9 @@ export function runBatch(batchPath: string, outDir: string): BatchRun {
     const folder = join(outDir, project.direction);
     writeOutputs(result, folder);
     const backlogPath = resolve(dirname(projectPath), project.backlog ?? 'quality-backlog.json');
-    const entries = existsSync(backlogPath)
-      ? loadBacklog(backlogPath, project.character).entries.filter((e) => e.dir === project.direction).length
-      : 0;
+    const backlog = loadBacklog(backlogPath, project.character);
+    const entries = backlog.entries.filter((e) => e.dir === project.direction).length;
+    const manual = (backlog.manual ?? []).filter((e) => e.dir === project.direction);
     const c = result.contract;
     reports.push({
       dir: project.direction,
@@ -100,6 +100,7 @@ export function runBatch(batchPath: string, outDir: string): BatchRun {
       atlas: c.atlas,
       backlogEntries: entries,
       resolvedEntries: c.qa.resolved.length,
+      ...(manual.length ? { manual } : {}),
       folder: project.direction,
       clips: project.clips.map((cl) => clipReport(project, result, cl.name)),
     });

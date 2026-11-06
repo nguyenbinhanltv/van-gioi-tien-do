@@ -1,6 +1,9 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { build } from 'esbuild';
 import { describe, expect, it } from 'vitest';
 import { encodePng } from '@vgtd/rig';
 import {
@@ -53,6 +56,46 @@ function setup(bad = false) {
 }
 
 describe('runBatch', () => {
+  it('carries direction-scoped manual art observations into review without changing metric verdicts', () => {
+    const root = setup();
+    writeFileSync(
+      join(root, 'E/quality-backlog.json'),
+      JSON.stringify({
+        format: 'vgtd-quality-backlog',
+        version: 1,
+        character: 'kiem-tu',
+        entries: [],
+        manual: [
+          {
+            kind: 'carry_change',
+            clip: 'idle',
+            dir: 'E',
+            cells: [0],
+            note: '<script>carry changed</script>',
+            severity: 'warn',
+            reviewer: 'art-worker',
+            status: 'resolved',
+          },
+        ],
+      }),
+    );
+    const run = runBatch(join(root, 'batch.json'), join(root, 'out'));
+    expect(run.report.ok).toBe(true);
+    expect(run.report.dirs[0]!.manual).toHaveLength(1);
+    expect(run.report.dirs[0]!.resolvedEntries).toBe(0);
+    expect(run.report.dirs[0]!.clips[0]!.counts.accepted).toBe(0);
+    expect(run.report.dirs[1]!.manual).toBeUndefined();
+    const html = reviewHtml([run.report]);
+    expect(html).toContain('1 manual art findings');
+    expect(html).toContain('Manual art findings (1)');
+    expect(html).toContain('carry_change');
+    expect(html).toContain('art-worker');
+    expect(html).toContain('art status resolved');
+    expect(html).toContain('1 art-worker resolved');
+    expect(html).toContain('&lt;script&gt;carry changed&lt;/script&gt;');
+    expect(html).not.toContain('<script>carry changed</script>');
+  });
+
   it('builds every direction, writes outputs and a report, and reports ok', () => {
     const root = setup();
     const out = join(root, 'out');
@@ -93,6 +136,56 @@ describe('runBatch', () => {
 });
 
 describe('batch path safety', () => {
+  it('uses the original entry for capture staging and Cocos commands when bundled outside the repo', async () => {
+    const root = setup();
+    const bundleDir = mkdtempSync(join(tmpdir(), 'vgtd-relocated-batch-'));
+    const bundle = join(bundleDir, 'script.mjs');
+    const trace = join(bundleDir, 'commands.jsonl');
+    const entry = join(root, 'tools/sprite/scripts/batch.ts');
+    const out = join(root, 'out');
+    await build({
+      entryPoints: [fileURLToPath(new URL('../scripts/batch.ts', import.meta.url))],
+      bundle: true,
+      platform: 'node',
+      format: 'esm',
+      outfile: bundle,
+      banner: {
+        js: `import {createRequire} from 'node:module'; const require=createRequire(import.meta.url); process.argv=[process.argv[0],${JSON.stringify(entry)},'--batch',${JSON.stringify(join(root, 'batch.json'))},'--out',${JSON.stringify(out)},'--capture','--keep-staged'];`,
+      },
+      plugins: [
+        {
+          name: 'stub-cocos-processes',
+          setup(b) {
+            b.onResolve({ filter: /^node:child_process$/ }, () => ({ path: 'commands', namespace: 'capture-stub' }));
+            b.onLoad({ filter: /.*/, namespace: 'capture-stub' }, () => ({
+              contents: `import {appendFileSync} from 'node:fs'; export function spawnSync(exe,args){appendFileSync(${JSON.stringify(trace)},JSON.stringify(args)+'\\n'); return {status:0};}`,
+            }));
+          },
+        },
+      ],
+    });
+    execFileSync(process.execPath, [bundle], { env: { ...process.env, INIT_CWD: root } });
+    const commands = readFileSync(trace, 'utf8')
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line) as string[]);
+    const client = join(root, 'apps/client-cocos');
+    expect(commands[0]![0]).toBe(join(client, 'scripts/build-web.mjs'));
+    expect(commands.slice(1).map((args) => args[0])).toEqual([
+      join(client, 'scripts/capture.mjs'),
+      join(client, 'scripts/capture.mjs'),
+    ]);
+    for (const dir of ['E', 'SE'])
+      expect(existsSync(join(client, `assets/resources/dragonbones/_batch-kiem-tu-${dir}/kiemtu_${dir}_tex.png`))).toBe(
+        true,
+      );
+    for (const dir of ['E', 'SE'])
+      expect(
+        existsSync(join(client, `assets/resources/dragonbones/_batch-kiem-tu-${dir}/kiemtu_${dir}.sprite.json`)),
+      ).toBe(true);
+    expect(existsSync(join(out, 'index.html'))).toBe(true);
+  }, 15000);
+
   it('rejects a character that could escape the output / resources folders', () => {
     const root = setup();
     for (const bad of ['../x', 'a/b', 'a\b', '', 'X', '.', '..', '/abs']) {
