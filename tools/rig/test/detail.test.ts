@@ -82,22 +82,19 @@ const shown = (c: Clip, slot: string, frame: number) => {
 describe('detail layer', () => {
   const rig = detailRig();
 
-  it('blinks open-half-closed-half-open, 3-5 s apart, deterministically, never past the loop end', () => {
-    const idle = clip('idle', 150, true);
-    const a = applyDetail(rig, idle);
-    const b = applyDetail(rig, idle);
-    expect(a).toEqual(b);
-    const starts = blinkStarts('idle', 600);
-    expect(starts.length).toBeGreaterThanOrEqual(3);
-    for (let i = 1; i < starts.length; i++) {
-      expect(starts[i]! - starts[i - 1]!).toBeGreaterThanOrEqual(90);
-      expect(starts[i]! - starts[i - 1]!).toBeLessThanOrEqual(150);
+  it('body clips never key blinks: idle / walk / channel / emote / die leave the eyes slot to blink_cycle', () => {
+    for (const name of ['idle', 'walk', 'channel', 'emote', 'die', 'run', 'attack', 'cast', 'hit']) {
+      for (const [frames, loop] of [
+        [30, true],
+        [150, true],
+        [600, true],
+        [600, false],
+      ] as const)
+        expect(track(applyDetail(rig, clip(name, frames, loop)), 'eyes'), `${name}/${frames}`).toBeUndefined();
     }
-    const long = applyDetail(rig, clip('idle', 600, true));
-    const keys = track(long, 'eyes')!.attachment!;
-    expect(keys.some((k) => k.value === 'eyes_closed')).toBe(true);
-    expect(Math.max(...keys.map((k) => k.frame))).toBeLessThan(600);
-    expect(shown(long, 'eyes', 0)).toBe('eyes_open');
+    // authored Kiem tu set: only meditate keeps an explicit eyes hold
+    const set = authorKiemTuSet(rig, { secondary: false, detail: true });
+    expect(set.filter((c) => track(c, 'eyes')).map((c) => c.name)).toEqual(['meditate']);
     expect(blinkStarts('idle', 30)).toEqual([]);
   });
 
@@ -281,7 +278,7 @@ describe('blink cycle', () => {
   });
   it('every blink gap of a looping clip, including across the wrap, is 3-5 s', () => {
     for (const name of ['blink_cycle', 'idle', 'walk', 'x', 'emote'])
-      for (const frames of [135, 150, 200, 270, 300, 330, 450, 600]) {
+      for (const frames of [135, 150, 180, 200, 270, 300, 330, 450, 600]) {
         const s = blinkStarts(name, frames, true);
         expect(s.length).toBeGreaterThanOrEqual(1);
         expect(Math.max(...s) + 5).toBeLessThan(frames);
@@ -294,6 +291,8 @@ describe('blink cycle', () => {
           }
         }
       }
+    // 151-179 frames: two blinks would be < 3 s apart and one would leave a gap > 5 s, so no blink (documented)
+    for (const f of [151, 160, 170, 179]) expect(blinkStarts('idle', f, true), String(f)).toEqual([]);
     // a single blink per loop is only allowed when the loop itself is 3-5 s
     expect(blinkStarts('idle', 120, true).length).toBe(1);
     expect(blinkStarts('idle', 60, true)).toEqual([]);
