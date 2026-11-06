@@ -46,7 +46,8 @@
       "tableId": "walk",
       "kind": "upright",
       "sheet": "sheets/walk.png",
-      "manifest": "templates/walk.template.json"
+      "manifest": "templates/walk.template.json",
+      "footSlideUnmeasuredReason": "Legacy SE generation used horizontal E-shaped ghosts and sole alignment. Original generation inputs are preserved; directional QA guides, keep alignment and reviewed new metric baselines are pending art-owner migration."
     },
     {
       "name": "run",
@@ -57,7 +58,8 @@
       "tableId": "run",
       "kind": "upright",
       "sheet": "sheets/run.png",
-      "manifest": "templates/run.template.json"
+      "manifest": "templates/run.template.json",
+      "footSlideUnmeasuredReason": "Legacy SE generation used horizontal E-shaped ghosts and sole alignment. Original generation inputs are preserved; directional QA guides, keep alignment and reviewed new metric baselines are pending art-owner migration."
     },
     {
       "name": "dash",

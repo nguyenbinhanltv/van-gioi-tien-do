@@ -53,6 +53,29 @@ function setup(bad = false) {
 }
 
 describe('runBatch', () => {
+  it('labels explicit unmeasured clips in review and still enforces other hard gates', () => {
+    for (const bad of [false, true]) {
+      const root = setup(bad);
+      const file = join(root, 'SE/project.json');
+      const p = JSON.parse(readFileSync(file, 'utf8')) as Project;
+      writeFileSync(
+        file,
+        JSON.stringify({
+          ...p,
+          clips: p.clips.map((c) => ({
+            ...c,
+            footSlideUnmeasuredReason: 'Legacy generation inputs; art-owner migration pending',
+          })),
+        }),
+      );
+      const run = runBatch(join(root, 'batch.json'), join(root, 'out'));
+      const clip = run.report.dirs.find((d) => d.dir === 'SE')!.clips[0]!;
+      expect(clip.unmeasuredFootSlide).toBe(true);
+      expect(clip.status).toBe(bad ? 'fail' : 'warn');
+      expect(clip.counts.accepted).toBe(0);
+      expect(reviewHtml([run.report])).toContain('Foot slide UNMEASURED');
+    }
+  });
   it('carries direction-scoped manual art observations into review without changing metric verdicts', () => {
     const root = setup();
     writeFileSync(

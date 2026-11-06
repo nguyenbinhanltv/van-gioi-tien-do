@@ -26,6 +26,8 @@ export interface Finding {
   readonly metric?: string;
   readonly value?: number;
   readonly limit?: number;
+  /** No automatic comparison was made; absence must not resolve an old metric baseline. */
+  readonly measurement?: 'unmeasured';
 }
 
 export interface QaClip {
@@ -45,6 +47,7 @@ export interface QaClip {
   readonly cells?: readonly CellSpec[];
   /** Expected sole travel of a planted foot per sheet frame (canvas px, the character walks in place). */
   readonly groundPxPerFrame?: number;
+  readonly footSlideUnmeasuredReason?: string;
 }
 
 export interface QaOptions {
@@ -215,6 +218,18 @@ export function nearestSole2D(
 }
 
 export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
+  if (clip.footSlideUnmeasuredReason !== undefined) {
+    if (!clip.footSlideUnmeasuredReason.trim()) throw new Error('foot-slide opt-out needs a reason');
+    return [
+      {
+        gate: 'footSlide',
+        severity: 'info',
+        clip: clip.name,
+        measurement: 'unmeasured',
+        message: `Foot slide UNMEASURED: ${clip.footSlideUnmeasuredReason}`,
+      },
+    ];
+  }
   if (!clip.cells || clip.groundPxPerFrame === undefined) return [];
   const tol = o.slideTolerance ?? 3;
   const maxOffset = o.maxGhostOffset ?? 20;

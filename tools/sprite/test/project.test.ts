@@ -73,6 +73,28 @@ function setup() {
 }
 
 describe('runProject (synthetic end to end)', () => {
+  it('explicitly reports legacy directional foot slide as unmeasured without numeric metrics', () => {
+    const { dir, project } = setup();
+    const p: Project = {
+      ...project,
+      direction: 'S',
+      clips: project.clips.map((c) =>
+        c.name === 'run'
+          ? { ...c, footSlideUnmeasuredReason: 'Legacy E-shaped generation ghosts; migration pending' }
+          : c,
+      ),
+    };
+    const result = runProject(p, dir);
+    const foot = result.contract.qa.findings.filter((f) => f.gate === 'footSlide');
+    expect(foot).toHaveLength(1);
+    expect(foot[0]).toMatchObject({ clip: 'run', severity: 'info', measurement: 'unmeasured' });
+    expect(foot[0]!.message).toContain('UNMEASURED');
+    expect(foot[0]!.metric).toBeUndefined();
+    expect(foot[0]!.value).toBeUndefined();
+    expect(() => runProject({ ...p, clips: [{ ...p.clips[0]!, footSlideUnmeasuredReason: ' ' }] }, dir)).toThrow(
+      /nonempty/,
+    );
+  });
   for (const direction of ['SE', 'S', 'NE', 'N'] as const) {
     it(`${direction}: rejects default/explicit sole alignment for measured y travel and accepts keep`, () => {
       const { dir, project } = setup();
