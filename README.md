@@ -14,6 +14,7 @@ apps/client-cocos       Dự án Cocos Creator 3.x (placeholder)
 apps/server             Server MVP TypeScript (placeholder)
 tools/procgen           Sinh asset bằng code (tilemap, icon, ...)
 tools/dragonbones-testrig Sinh rig thử DragonBones 5.5 cho trình xem animation (@vgtd/dragonbones-testrig)
+tools/sprite              Pipeline sprite sheet AI từng khung cho thân Player (D41) (@vgtd/sprite)
 docs/                   Tài liệu thiết kế
 ```
 

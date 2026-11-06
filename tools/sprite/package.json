@@ -20,7 +20,8 @@
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.test.json",
     "sprite:template": "node ../rig/scripts/run-ts.mjs scripts/template.ts",
-    "sprite:slice": "node ../rig/scripts/run-ts.mjs scripts/slice.ts"
+    "sprite:build": "node ../rig/scripts/run-ts.mjs scripts/build.ts",
+    "sprite:repair": "node ../rig/scripts/run-ts.mjs scripts/repair.ts"
   },
   "dependencies": {
     "@vgtd/character": "*",

@@ -5,15 +5,7 @@
  * manifest only.
  */
 import type { Image } from '@vgtd/rig';
-import {
-  fillEllipse,
-  fillTriangle,
-  hLine,
-  solid,
-  toPremultiplied,
-  vLine,
-  type Straight,
-} from './raster.js';
+import { fillEllipse, fillTriangle, hLine, solid, toPremultiplied, vLine, type Straight } from './raster.js';
 import {
   CELL_PX,
   KEY_MAGENTA,
@@ -74,13 +66,7 @@ function drawCell(img: Straight, ox: number, oy: number, cell: number, g: Guides
   ghost(spec.nearFoot, GUIDE_COLORS.nearFoot);
   // leading leg marker
   if (spec.leading === 'L') {
-    fillTriangle(
-      img,
-      [ox + 6, oy + cell - 6],
-      [ox + 26, oy + cell - 6],
-      [ox + 6, oy + cell - 26],
-      GUIDE_COLORS.leadL,
-    );
+    fillTriangle(img, [ox + 6, oy + cell - 6], [ox + 26, oy + cell - 6], [ox + 6, oy + cell - 26], GUIDE_COLORS.leadL);
   } else if (spec.leading === 'R') {
     fillTriangle(
       img,
@@ -100,7 +86,9 @@ export function buildTemplate(opts: TemplateOptions): Template {
   const grid: SheetGrid = { cols: opts.cols, rows, cell };
   const cells: CellSpec[] = Array.from({ length: opts.frames }, (_, i) => opts.cells?.[i] ?? { leading: null });
   const sheet = solid(opts.cols * cell, rows * cell, key);
-  cells.forEach((spec, i) => drawCell(sheet, (i % opts.cols) * cell, Math.floor(i / opts.cols) * cell, cell, opts.guides, spec));
+  cells.forEach((spec, i) =>
+    drawCell(sheet, (i % opts.cols) * cell, Math.floor(i / opts.cols) * cell, cell, opts.guides, spec),
+  );
   const manifest: TemplateManifest = {
     clip: opts.clip,
     grid,
@@ -161,4 +149,3 @@ export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptio
     } satisfies CellSpec;
   });
 }
-

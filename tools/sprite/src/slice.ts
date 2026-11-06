@@ -55,7 +55,8 @@ export function keyOut(src: Straight, opts: KeyOptions = {}): Straight {
       data[i] = data[i + 1] = data[i + 2] = 0;
       continue;
     }
-    for (let k = 0; k < 3; k++) data[i + k] = Math.round(Math.min(255, Math.max(0, (data[i + k]! - (1 - a) * key[k]!) / a)));
+    for (let k = 0; k < 3; k++)
+      data[i + k] = Math.round(Math.min(255, Math.max(0, (data[i + k]! - (1 - a) * key[k]!) / a)));
     data[i + 3] = Math.round(data[i + 3]! * a);
   }
   return { width: src.width, height: src.height, data };
@@ -254,7 +255,8 @@ export function sliceSheet(
   opts: SliceOptions = {},
 ): SlicedFrame[] {
   const full = toStraight(sheet);
-  const key = opts.key === 'auto' || opts.key === undefined ? (opts.key === 'auto' ? cornerKey(full) : KEY_MAGENTA) : opts.key;
+  const key =
+    opts.key === 'auto' || opts.key === undefined ? (opts.key === 'auto' ? cornerKey(full) : KEY_MAGENTA) : opts.key;
   const frames: SlicedFrame[] = [];
   for (let i = 0; i < grid.frames; i++) {
     const r = cellRect(full.width, full.height, grid.cols, grid.rows, i);

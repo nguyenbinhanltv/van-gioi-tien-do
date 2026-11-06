@@ -1,5 +1,7 @@
 # Bước key pose tham chiếu AI → khớp rig (D39, bổ sung 2026-11-06)
 
+> **[Thay thế một phần bởi D41, 2026-11-06]** Với **thân nhân vật Player**, quyết định D41 (sprite sheet AI từng khung, xem [sprite-sheet-pipeline.md](sprite-sheet-pipeline.md)) thay cách làm bằng rig xương trong tài liệu này; tài liệu giữ lại làm tham chiếu cho boss/NPC và mã `@vgtd/rig` (không phát triển thêm cho thân Player).
+
 Quyết định **D40** của chủ dự án (xem `docs/DECISIONS.md`; bổ sung cho D39): giữ rig xương, **thêm bước key pose tham chiếu** để sửa dáng đi/chạy (phần thân dưới trước đó trông "què").
 
 ## Quy trình
