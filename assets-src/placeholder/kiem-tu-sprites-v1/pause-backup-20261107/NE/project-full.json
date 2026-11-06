@@ -17,7 +17,7 @@
       "loop": true,
       "tableId": "idle",
       "kind": "upright",
-      "sheet": "sheets/idle.png",
+      "sheet": "raw/idle.initial.png",
       "calibration": {
         "referenceHeight": 363
       }
@@ -30,7 +30,7 @@
       "loop": true,
       "tableId": "meditate",
       "kind": "free",
-      "sheet": "sheets/meditate.png",
+      "sheet": "raw/meditate.initial.png",
       "calibration": {
         "referenceHeight": 373
       },
@@ -53,7 +53,7 @@
       "loop": true,
       "tableId": "walk",
       "kind": "upright",
-      "sheet": "sheets/walk.png",
+      "sheet": "raw/walk.initial.png",
       "calibration": {
         "referenceFrames": [
           0,
@@ -80,7 +80,7 @@
       "loop": true,
       "tableId": "run",
       "kind": "upright",
-      "sheet": "sheets/run.png",
+      "sheet": "run.repaired1.png",
       "calibration": {
         "referenceHeight": 304
       },
@@ -94,7 +94,7 @@
       "loop": false,
       "tableId": "dash",
       "kind": "free",
-      "sheet": "sheets/dash.png",
+      "sheet": "raw/dash.initial.png",
       "calibration": {
         "referenceHeight": 362
       },
@@ -113,7 +113,7 @@
       "loop": true,
       "tableId": "sword_fly",
       "kind": "free",
-      "sheet": "sheets/sword_fly.png",
+      "sheet": "raw/sword_fly.initial.png",
       "calibration": {
         "referenceHeight": 362
       },
@@ -141,7 +141,7 @@
         "hit_frame": 5,
         "combo_window": 7
       },
-      "sheet": "sheets/attack.png",
+      "sheet": "raw/attack.initial.png",
       "calibration": {
         "referenceHeight": 363
       },
@@ -166,7 +166,7 @@
         "hit_frame": 4,
         "combo_window": 7
       },
-      "sheet": "sheets/attack_2.png",
+      "sheet": "raw/attack_2.initial.png",
       "calibration": {
         "referenceHeight": 348
       },
@@ -192,7 +192,7 @@
         "hit_frame": 5,
         "combo_window": 7
       },
-      "sheet": "sheets/attack_3.png",
+      "sheet": "raw/attack_3.initial.png",
       "calibration": {
         "referenceHeight": 354
       },
@@ -216,7 +216,7 @@
       "phases": {
         "windup_end": 7
       },
-      "sheet": "sheets/cast.png",
+      "sheet": "raw/cast.initial.png",
       "calibration": {
         "referenceHeight": 372
       }
@@ -229,7 +229,7 @@
       "loop": true,
       "tableId": "channel",
       "kind": "free",
-      "sheet": "sheets/channel.png",
+      "sheet": "raw/channel.initial.png",
       "calibration": {
         "referenceHeight": 359
       }
@@ -242,7 +242,7 @@
       "loop": false,
       "tableId": "hit",
       "kind": "free",
-      "sheet": "sheets/hit.png",
+      "sheet": "raw/hit.initial.png",
       "calibration": {
         "referenceHeight": 429
       }
@@ -255,7 +255,7 @@
       "loop": false,
       "tableId": "die",
       "kind": "free",
-      "sheet": "sheets/die.png",
+      "sheet": "raw/die.initial.png",
       "calibration": {
         "referenceHeight": 374
       },
@@ -277,7 +277,7 @@
       "loop": false,
       "tableId": "tribulation",
       "kind": "free",
-      "sheet": "sheets/tribulation.png",
+      "sheet": "raw/tribulation.initial.png",
       "calibration": {
         "referenceHeight": 272
       },
@@ -301,7 +301,7 @@
       "loop": false,
       "tableId": "emote",
       "kind": "upright",
-      "sheet": "sheets/emote.png",
+      "sheet": "raw/emote.initial.png",
       "calibration": {
         "referenceHeight": 369
       }

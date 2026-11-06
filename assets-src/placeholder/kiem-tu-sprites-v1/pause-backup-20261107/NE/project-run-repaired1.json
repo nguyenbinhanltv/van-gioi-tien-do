@@ -17,7 +17,7 @@
       "loop": true,
       "tableId": "run",
       "kind": "upright",
-      "sheet": "sheets/run.png",
+      "sheet": "run.repaired1.png",
       "calibration": {
         "referenceHeight": 304
       },

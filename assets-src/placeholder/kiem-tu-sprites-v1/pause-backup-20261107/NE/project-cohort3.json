@@ -17,7 +17,7 @@
       "loop": true,
       "tableId": "channel",
       "kind": "free",
-      "sheet": "sheets/channel.png",
+      "sheet": "raw/channel.initial.png",
       "calibration": {
         "referenceHeight": 359
       }
@@ -30,7 +30,7 @@
       "loop": false,
       "tableId": "hit",
       "kind": "free",
-      "sheet": "sheets/hit.png",
+      "sheet": "raw/hit.initial.png",
       "calibration": {
         "referenceHeight": 429
       }
@@ -43,7 +43,7 @@
       "loop": false,
       "tableId": "die",
       "kind": "free",
-      "sheet": "sheets/die.png",
+      "sheet": "raw/die.initial.png",
       "calibration": {
         "referenceHeight": 374
       }
@@ -56,7 +56,7 @@
       "loop": false,
       "tableId": "tribulation",
       "kind": "free",
-      "sheet": "sheets/tribulation.png",
+      "sheet": "raw/tribulation.initial.png",
       "calibration": {
         "referenceHeight": 272
       }
@@ -69,7 +69,7 @@
       "loop": false,
       "tableId": "emote",
       "kind": "upright",
-      "sheet": "sheets/emote.png",
+      "sheet": "raw/emote.initial.png",
       "calibration": {
         "referenceHeight": 369
       }

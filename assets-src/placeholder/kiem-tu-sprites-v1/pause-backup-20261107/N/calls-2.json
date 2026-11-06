@@ -10,7 +10,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T20:02:46.907Z",
-    "resultPath": "sheets/sword_fly.png"
+    "resultPath": "raw/sword_fly.initial.png"
   },
   {
     "clip": "attack",
@@ -23,7 +23,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T20:02:46.907Z",
-    "resultPath": "sheets/attack.png"
+    "resultPath": "raw/attack.initial.png"
   },
   {
     "clip": "attack_2",
@@ -36,7 +36,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T20:02:46.907Z",
-    "resultPath": "sheets/attack_2.png"
+    "resultPath": "raw/attack_2.initial.png"
   },
   {
     "clip": "attack_3",
@@ -49,7 +49,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T20:02:46.908Z",
-    "resultPath": "sheets/attack_3.png"
+    "resultPath": "raw/attack_3.initial.png"
   },
   {
     "clip": "cast",
@@ -62,6 +62,6 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T20:02:46.908Z",
-    "resultPath": "sheets/cast.png"
+    "resultPath": "raw/cast.initial.png"
   }
 ]

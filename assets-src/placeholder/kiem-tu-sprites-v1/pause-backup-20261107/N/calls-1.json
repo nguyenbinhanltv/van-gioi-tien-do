@@ -10,7 +10,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T19:53:31.648Z",
-    "resultPath": "sheets/idle.png"
+    "resultPath": "raw/idle.initial.png"
   },
   {
     "clip": "meditate",
@@ -23,7 +23,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T19:53:31.648Z",
-    "resultPath": "sheets/meditate.png"
+    "resultPath": "raw/meditate.initial.png"
   },
   {
     "clip": "walk",
@@ -36,7 +36,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T19:53:31.648Z",
-    "resultPath": "sheets/walk.png"
+    "resultPath": "raw/walk.initial.png"
   },
   {
     "clip": "run",
@@ -49,7 +49,7 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T19:53:31.648Z",
-    "resultPath": "sheets/run.png"
+    "resultPath": "raw/run.initial.png"
   },
   {
     "clip": "dash",
@@ -62,6 +62,6 @@
       "transparent_background": false
     },
     "startedUtc": "2026-11-06T19:53:31.648Z",
-    "resultPath": "sheets/dash.png"
+    "resultPath": "raw/dash.initial.png"
   }
 ]

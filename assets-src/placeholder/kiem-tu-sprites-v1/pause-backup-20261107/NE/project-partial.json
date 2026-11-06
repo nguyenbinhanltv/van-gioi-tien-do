@@ -17,7 +17,7 @@
       "loop": true,
       "tableId": "idle",
       "kind": "upright",
-      "sheet": "sheets/idle.png",
+      "sheet": "raw/idle.initial.png",
       "calibration": {
         "referenceHeight": 363
       }
@@ -30,7 +30,7 @@
       "loop": true,
       "tableId": "meditate",
       "kind": "free",
-      "sheet": "sheets/meditate.png",
+      "sheet": "raw/meditate.initial.png",
       "calibration": {
         "referenceHeight": 373
       },
@@ -53,7 +53,7 @@
       "loop": true,
       "tableId": "walk",
       "kind": "upright",
-      "sheet": "sheets/walk.png",
+      "sheet": "raw/walk.initial.png",
       "calibration": {
         "referenceFrames": [
           0,
@@ -80,7 +80,7 @@
       "loop": true,
       "tableId": "run",
       "kind": "upright",
-      "sheet": "sheets/run.png",
+      "sheet": "raw/run.initial.png",
       "calibration": {
         "referenceFrames": [
           0,
@@ -107,7 +107,7 @@
       "loop": false,
       "tableId": "dash",
       "kind": "free",
-      "sheet": "sheets/dash.png",
+      "sheet": "raw/dash.initial.png",
       "calibration": {
         "referenceHeight": 362
       },
