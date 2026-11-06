@@ -1,5 +1,56 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## KT-SHEET-E-v2 — đủ 15 clip E, vòng sản xuất đầu (2026-11-06 UTC)
+
+Tiếp tục lô PR #120 theo D41: **126 hình runtime / 15 clip**, không chờ hoàn thiện mọi sai lệch mềm. Thêm 8 sheet (mỗi clip 1 lượt sinh), sửa carry run bằng 1 lượt: giữ kiếm thấp ở cùng tay phải gần trong cả chu kỳ. Tổng lịch sử hai vòng là **32 lượt** (kể cả lượt bị loại trước khi chuyển sang sản xuất đầy đủ); prompt nguyên văn, UTC bắt đầu/lưu file, tool/model/CLI, SHA256 ảnh thô được chọn và sheet cuối ở [provenance.json](../assets-src/placeholder/kiem-tu-sprites-v1/provenance.json). Model không được công cụ công bố. Chủ art tạm: người dùng; giữ điều khoản và hạn chế placeholder của nguồn, cần duyệt nguồn gốc/quyền sử dụng trước phát hành.
+
+- Nguồn master và mốc pipeline bền vững giữ như KT-SHEET-E-v1 bên dưới. Không dùng ảnh ngoài mới.
+- Sheet mới có ô đứng làm **control không xuất runtime**; đo chiều cao control rồi khóa **một tỷ lệ cho toàn sheet**, không fit chiều cao từng khung. Số đo/control cell được ghi trong E/control-calibration.json. Tư thế ngồi, bay, chém, quỳ khai báo exception giải phẫu rõ trong project.
+- attack_3/tribulation có đường guide ở biên ô do model giữ lại: mã chỉ xóa dải biên1% về magenta; hash RGBA của mọi pixel phía trong không đổi, bằng chứng E/repair-inputs/*.guide-cleanup.json. Không vẽ lại nhân vật bằng mã.
+- Run: composite chỉ sửa vùng cánh tay bị loại vì cắt mất bàn tay đối trọng; chọn thay **toàn bộ đúng6 ô7–12** bằng ảnh sinh lại, giữ6 ô đầu nguyên byte. Chuỗi SHA256: run.repair-proof.json kết thúc ở run.carry-before.png; run.carry-proof.json nối từ đó tới sheet hiện tại. Chấp nhận redraw nhỏ ở6 ô này và ghi manual backlog; không khẳng định chân/tóc từng pixel không đổi.
+- Chú thích contact run theo đế giày thực trong hình, không theo nửa chu kỳ template: E/run-contacts.json. Những probe vào chân đã nhấc được bỏ vì chú thích sai, **không** diễn giải thành đã sửa stride.14 phát hiện chân còn lại ghi quality-backlog;999 là sentinel không tìm thấy đế trong vùng dò, không phải khoảng cách đo999px. Không đổi tốc độ/ngưỡng. Sai lệch mỹ thuật thủ công ở manual-art-findings.json, tách khỏi auto metric để không tự nhận resolved.
+- Xuất qua @vgtd/sprite: một atlas2048²/PMA, padding2/extrude1,126 region, DragonBones root/body display-swap + sự kiện từ bảng public SPRITE_CLIPS. Export chọn trong resources/dragonbones/kiem-tu-sprites; không thay nhân vật mặc định. Không tô pixel thủ công; mask/control/guide là hình học bằng mã.
+
+### Sheet nguồn, từng file
+
+Đường dẫn dưới assets-src/placeholder/kiem-tu-sprites-v1/. Mọi file là AI placeholder chưa được duyệt phát hành.
+
+| File                       | Hình runtime | Nguồn/xử lý                           | SHA256                                                             | Phát hành? |
+| -------------------------- | ------------ | ------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| `E/sheets/run.png`         | 12           | `image_gen.imagegen` + xử lý xác định | `58c49e38fdeef585dcad60cab781b25d76ccca56cd13199da93591e7f0cfeb93` | no         |
+| `E/sheets/walk.png`        | 12           | `image_gen.imagegen` + xử lý xác định | `ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a` | no         |
+| `E/sheets/idle.png`        | 8            | `image_gen.imagegen` + xử lý xác định | `dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e` | no         |
+| `E/sheets/attack.png`      | 8            | `image_gen.imagegen` + xử lý xác định | `80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8` | no         |
+| `E/sheets/cast.png`        | 8            | `image_gen.imagegen` + xử lý xác định | `251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d` | no         |
+| `E/sheets/hit.png`         | 4            | `image_gen.imagegen` + xử lý xác định | `09a0b6a48b8f14ca6d8946382c4198b3a92308a2995e44ba87b2886c7dc7ecd0` | no         |
+| `E/sheets/die.png`         | 8            | `image_gen.imagegen` + xử lý xác định | `c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470` | no         |
+| `E/sheets/meditate.png`    | 8            | `image_gen.imagegen` + xử lý xác định | `d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a` | no         |
+| `E/sheets/dash.png`        | 6            | `image_gen.imagegen` + xử lý xác định | `56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7` | no         |
+| `E/sheets/sword_fly.png`   | 8            | `image_gen.imagegen` + xử lý xác định | `2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4` | no         |
+| `E/sheets/attack_2.png`    | 8            | `image_gen.imagegen` + xử lý xác định | `10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2` | no         |
+| `E/sheets/attack_3.png`    | 8            | `image_gen.imagegen` + xử lý xác định | `347cd6656b221798ce560c77d06cbb8d7972991675fda83b5c249edb83590ef0` | no         |
+| `E/sheets/channel.png`     | 8            | `image_gen.imagegen` + xử lý xác định | `c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3` | no         |
+| `E/sheets/tribulation.png` | 12           | `image_gen.imagegen` + xử lý xác định | `47efa32b909270e8ae19a06a5b33f02f5e038cb7d33f971f76bd032ddf29ce7b` | no         |
+| `E/sheets/emote.png`       | 8            | `image_gen.imagegen` + xử lý xác định | `44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46` | no         |
+
+Atlas runtime dẫn xuất: `apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.png`, SHA256 `f1f1241d5d9fe6fab0945a2c02dc54a9039c31eeb913b0cdc2c305c8f5563942`; sinh bằng `@vgtd/sprite` từ các sheet ở bảng, không phải ảnh mới của bên thứ ba. Skeleton/texture/contract JSON có SHA256 từng file trong provenance.
+
+### Ảnh thô được chọn của vòng này, từng file
+
+Mỗi ID nối tới prompt/UTC/hash ở provenance; đầu vào guide ở E/templates/<clip>.template.png sinh bằng buildTemplate của dự án, không phải ảnh bên thứ ba.
+
+| File                                        | ID prompt               | Công cụ                                                    | Phát hành? |
+| ------------------------------------------- | ----------------------- | ---------------------------------------------------------- | ---------- |
+| `E/generation-selected/meditate.raw.png`    | `E_full_meditate_v1`    | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/dash.raw.png`        | `E_full_dash_v1`        | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/sword_fly.raw.png`   | `E_full_sword_fly_v1`   | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/attack_2.raw.png`    | `E_full_attack_2_v1`    | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/attack_3.raw.png`    | `E_full_attack_3_v1`    | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/channel.raw.png`     | `E_full_channel_v1`     | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/tribulation.raw.png` | `E_full_tribulation_v1` | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/emote.raw.png`       | `E_full_emote_v1`       | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+| `E/generation-selected/run-carry.raw.png`   | `E_full_run_carry_v1`   | `image_gen.imagegen`; model undisclosed; codex-cli 0.166.0 | no         |
+
 ## KT-SHEET-E-v1 — mẫu sprite từng khung Kiếm tu E (2026-11-06 UTC)
 
 - Phạm vi: `assets-src/placeholder/kiem-tu-sprites-v1/`; 60 hình toàn thân trong 7 sheet (run/walk 12, idle/attack/cast/die 8, hit 4). Theo D41; chỉ bản nháp để chủ sở hữu xem, chưa nghiệm thu chuyển động.

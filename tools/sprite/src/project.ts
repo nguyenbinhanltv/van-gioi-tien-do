@@ -101,7 +101,14 @@ export interface Contract {
   /** Character-wide calibration (null when every sheet carries its own). */
   readonly calibration: Calibration | null;
   readonly palette: { readonly size: number; readonly locked: boolean };
-  readonly atlas: { readonly pages: number; readonly width: number; readonly height: number; readonly regions: number };
+  readonly atlas: {
+    readonly pages: number;
+    readonly width: number;
+    readonly height: number;
+    readonly regions: number;
+    /** Resource stems (without .json/.png), primary first. Present only for multi-page exports. */
+    readonly textures?: readonly string[];
+  };
   readonly clips: readonly ClipContract[];
   /** `ok` = no hard failure, no unlisted soft finding, no regression of a listed one (see backlog.ts). */
   readonly qa: {
@@ -232,7 +239,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     s.aligned.flatMap((a, i) => (a ? [{ name: `${s.clip.name}_${pad(i)}`, image: a.image }] : [])),
   );
   const name = `${project.stem}_${project.direction}`;
-  const pack = packFrames(inputs, () => `${name}_tex.png`);
+  const textureStem = (page: number) => (page === 0 ? `${name}_tex` : `${name}_page${page}_tex`);
+  const pack = packFrames(inputs, (page) => `${textureStem(page)}.png`);
   const clipInputs: ClipInput[] = aligned.map((s) => ({
     name: s.clip.name,
     frames: s.aligned.flatMap((a, i) => (a ? [`${s.clip.name}_${pad(i)}`] : [])),
@@ -290,7 +298,13 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     master: { sha1: sha1(masterBuf), metrics: m, guides },
     calibration: character,
     palette: { size: palette.length, locked: lock },
-    atlas: { pages: pack.pages.length, width: page.width, height: page.height, regions: page.regions.length },
+    atlas: {
+      pages: pack.pages.length,
+      width: page.width,
+      height: page.height,
+      regions: pack.pages.reduce((n, p) => n + p.data.regions.length, 0),
+      ...(pack.pages.length > 1 ? { textures: pack.pages.map((_, i) => textureStem(i)) } : {}),
+    },
     clips: aligned.map((s) => ({
       name: s.clip.name,
       frames: s.clip.frames,
@@ -304,8 +318,10 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   };
   const files = new Map<string, Buffer | string>();
   files.set(`${name}_ske.json`, JSON.stringify(built.export.ske));
-  files.set(`${name}_tex.json`, JSON.stringify(built.export.tex));
-  files.set(`${name}_tex.png`, encodePng(pack.pages[0]!.image, { premultiplied: true }));
+  pack.pages.forEach((p, i) => {
+    files.set(`${textureStem(i)}.json`, JSON.stringify(built.textures[i]));
+    files.set(`${textureStem(i)}.png`, encodePng(p.image, { premultiplied: true }));
+  });
   files.set(`${name}.sprite.json`, JSON.stringify(contract, null, 2));
   return { contract, files };
 }
