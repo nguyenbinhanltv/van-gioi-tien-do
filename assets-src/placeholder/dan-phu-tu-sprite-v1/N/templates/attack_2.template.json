@@ -1,0 +1,50 @@
+{
+  "clip": "attack_2",
+  "grid": {
+    "cols": 5,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 10,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 127.59572220755216
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 1280,
+  "height": 512
+}

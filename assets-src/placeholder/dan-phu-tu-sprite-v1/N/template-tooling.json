@@ -1,0 +1,13 @@
+{
+  "direction": "N",
+  "generationTooling": {
+    "commit": "1c48569f24236566067937b8e2c022509a6dcc26",
+    "api": "directional locomotionCells",
+    "direction": "N"
+  },
+  "qaToolingMain": "01db718d12054942387d0e3b5e507ecd6ae1f122",
+  "directionalPr": 123,
+  "preparationPr": 129,
+  "originalGaitInputs": "generation-templates/sha256.json",
+  "note": "Original generation PNG/manifests archived byte-identically; freshly regenerate QA templates with merged public API. Default stanceWidth=0; preserve source y stride; first-pass foot findings remain explicit."
+}
