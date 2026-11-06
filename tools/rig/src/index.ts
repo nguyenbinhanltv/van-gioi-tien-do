@@ -38,3 +38,4 @@ export * from './detail.js';
 export * from './continuous.js';
 export * from './qa-strip.js';
 export * from './qa-lower.js';
+export * from './keypose.js';
