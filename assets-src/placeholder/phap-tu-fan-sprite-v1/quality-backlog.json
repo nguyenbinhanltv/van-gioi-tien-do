@@ -4,6 +4,84 @@
   "character": "phap-tu",
   "entries": [
     {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 2,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 5.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 3,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 25.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 4,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 4.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 1,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 4.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 2,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 21.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 3,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 46.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
       "clip": "run",
       "dir": "E",
       "cell": 1,
@@ -121,6 +199,110 @@
       "added": "2026-11-07"
     },
     {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 0,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 7.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 1,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 7.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 2,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 8.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 3,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 8.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 4,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 8.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 5,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 8.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 6,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 7.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 7,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 7.8,
+      "limit": 0,
+      "note": "Owner approved full-set-first quality and D41 pose declarations; retain each measured free-pose height and gait finding without changing scale or thresholds.",
+      "status": "open",
+      "owner": "20",
+      "added": "2026-11-06"
+    },
+    {
       "clip": "walk",
       "dir": "E",
       "cell": 1,
@@ -223,6 +405,38 @@
       "status": "open",
       "owner": "20",
       "added": "2026-11-07"
+    }
+  ],
+  "manual": [
+    {
+      "kind": "weak_reversal",
+      "clip": "run",
+      "dir": "E",
+      "cells": [0, 6],
+      "note": "Two half-cycle contact poses have weak near/far leading-leg reading. Improve shading/occlusion later; keep actual drawings and measured sole/ghost offsets.",
+      "severity": "soft",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "weak_reversal",
+      "clip": "walk",
+      "dir": "E",
+      "cells": [0, 6],
+      "note": "Two contact poses need clearer near/far leg reading; retain numerical sole/ghost offsets in the automatic backlog.",
+      "severity": "soft",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "die",
+      "dir": "E",
+      "cells": [6, 7],
+      "note": "Two final rest poses retain a partly propped upper torso; later local drawing pass should settle it while preserving right-hand fan grip and anatomical scale.",
+      "severity": "soft",
+      "reviewer": "art-worker",
+      "status": "open"
     }
   ]
 }
