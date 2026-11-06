@@ -83,7 +83,10 @@ interface Row {
 }
 
 const opts = parse(process.argv.slice(2));
-const data = loadCharacterData(repoRoot, opts.character);
+// an assembled rig replaces the registry data, so a class without committed data (Thể tu pilot) can be measured
+const data = opts.assembled
+  ? ({ id: opts.character, byDirection: new Map(), issues: [] } as ReturnType<typeof loadCharacterData>)
+  : loadCharacterData(repoRoot, opts.character);
 if (opts.assembled) {
   const dirName = opts.dirs?.[0];
   if (!dirName) throw new Error('--assembled needs --dir <direction>');

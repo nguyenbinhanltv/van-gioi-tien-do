@@ -4,8 +4,10 @@
  * Assemble a continuous-limb direction (D39) from painted parts and export it for the viewer:
  *   <parts>/<dir>/<piece>.png   full-canvas 256x256 RGBA parts (see docs/art/rig-continuous-parts.md)
  *   <parts>/<dir>/landmarks.json
- * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
+ * Writes <out>/<stem>_<dir>_{ske,tex}.json + <stem>_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
+ * --class <id>  kiem-tu (default) | the-tu: the class assembly profile (`class-profile.ts`: its parts, bones to drop, detail rules,
+ * clips; Thể tu has no sword, its gauntlets are displays on the hand slots, stem `thetu`).
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -15,7 +17,11 @@ import type { Direction } from '@vgtd/shared';
 import {
   ATLAS_EXTRUDE,
   ATLAS_PADDING,
+  CHARACTER_IDS,
   assembleContinuous,
+  authorClassSet,
+  getAssemblyProfile,
+  type CharacterId,
   authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
@@ -39,6 +45,11 @@ const opt = (name: string, def = '') => {
 const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
+const character = opt('class', 'kiem-tu') as CharacterId;
+if (!(CHARACTER_IDS as readonly string[]).includes(character))
+  throw new Error(`unknown --class '${character}' (${CHARACTER_IDS.join(', ')})`);
+const profile = character === 'kiem-tu' ? undefined : getAssemblyProfile(character);
+const stem = profile?.stem ?? 'kiemtu';
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -60,7 +71,7 @@ for (const f of readdirSync(partsDir)) {
 
 // sword borrowed from the old atlas: crop its quad and re-express the uvs against the crop
 const oldImg = decodePng(readFileSync(old.texturePath), { premultiplied: old.atlas.premultipliedAlpha });
-const weaponRaw = old.rig.skins[0]!.attachments.weapon_R?.weapon_R;
+const weaponRaw = profile && !profile.borrowsSword ? undefined : old.rig.skins[0]!.attachments.weapon_R?.weapon_R;
 const weaponAtt: MeshAttachment | undefined = weaponRaw?.type === 'mesh' ? weaponRaw : undefined;
 const weapon = (() => {
   if (!weaponAtt) return undefined;
@@ -84,12 +95,13 @@ const weapon = (() => {
 })();
 
 const res = assembleContinuous({
-  base: old.rig,
+  base: profile ? { ...old.rig, id: profile.id } : old.rig,
   landmarks,
   view,
   parts,
   ...(weapon ? { weapon } : {}),
-  atlasName: `kiemtu_${dir}`,
+  ...(profile ? { pieces: profile.pieces, dropBones: profile.dropBones, snapIk: true } : {}),
+  atlasName: `${stem}_${dir}`,
 });
 console.log(`parts: ${res.used.length} used, ${res.missing.length} missing, ${res.skipped.length} skipped`);
 if (res.missing.length) console.log(`  missing: ${res.missing.join(', ')}`);
@@ -117,14 +129,17 @@ if (issues.length) {
 }
 
 const blink = authorBlinkCycle(res.rig);
-const clips = [...authorKiemTuSet(res.rig, { detail: true }), ...(blink ? [blink] : [])];
-const name = `kiemtu_${dir}`;
+const clips = [
+  ...(profile ? authorClassSet(character, res.rig, { detail: true }) : authorKiemTuSet(res.rig, { detail: true })),
+  ...(blink ? [blink] : []),
+];
+const name = `${stem}_${dir}`;
 let pkg;
 try {
   pkg = buildCharacterPackage([{ rig: res.rig, clips }], res.atlas.data, {
     name,
     armatureName: () => name,
-    qa: { weapon: 'one' },
+    qa: { weapon: profile?.qaWeapon ?? 'one' },
     allowErrors: args.includes('--allow-errors'),
   });
 } catch (e) {

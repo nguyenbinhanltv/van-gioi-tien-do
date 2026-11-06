@@ -11,6 +11,7 @@ import { ClipBuilder, EASE, type ClipOptions } from './dsl.js';
 import { authorKiemTuSet, sine, viewGain, type KiemTuOptions } from './kiemtu.js';
 import type { BoneRole, RigDocument } from './schema.js';
 import type { CharacterId } from './classes.js';
+import { ASSEMBLY_PROFILES } from './class-profile.js';
 import type { Vec2 } from './math.js';
 
 type Num = number;
@@ -352,5 +353,10 @@ export function classOverrides(
 
 /** The class's full clip set: Kiếm tu clips for everything the weapon does not change, overrides for the rest. */
 export function authorClassSet(id: CharacterId, rig: RigDocument, opts: KiemTuOptions = {}): Clip[] {
-  return authorKiemTuSet(rig, { ...opts, overrides: { ...classOverrides(id), ...opts.overrides } });
+  const detailRules = ASSEMBLY_PROFILES[id]?.detail;
+  return authorKiemTuSet(rig, {
+    ...(detailRules ? { detailRules } : {}),
+    ...opts,
+    overrides: { ...classOverrides(id), ...opts.overrides },
+  });
 }
