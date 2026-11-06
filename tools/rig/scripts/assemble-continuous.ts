@@ -13,6 +13,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import type { Direction } from '@vgtd/shared';
 import {
+  ATLAS_EXTRUDE,
+  ATLAS_PADDING,
   assembleContinuous,
   authorKiemTuSet,
   buildCharacterPackage,
@@ -92,14 +94,21 @@ if (res.missing.length) console.log(`  missing: ${res.missing.join(', ')}`);
 for (const s of res.skipped) console.log(`  skipped: ${s}`);
 const st = res.stats;
 console.log(
-  `rig: ${st.bones}/${st.limits.bones} bones, ${st.slots}/${st.limits.slots} slots, ${st.vertices}/${st.limits.meshVertices} mesh vertices, ${st.chains}/${st.limits.chains} chains; atlas ${res.atlas.data.width}x${res.atlas.data.height}`,
+  `rig: ${st.bones}/${st.limits.bones} bones, ${st.slots}/${st.limits.slots} slots, ${st.vertices}/${st.limits.meshVertices} mesh vertices (mesh scale ${st.meshScale}), ${st.chains}/${st.limits.chains} chains; atlas ${res.atlas.data.width}x${res.atlas.data.height}`,
 );
 const perPiece = Object.entries(res.rig.skins[0]!.attachments)
   .flatMap(([, m]) => Object.entries(m).map(([n, a]) => [n, a.type === 'mesh' ? a.vertices.length / 2 : 4] as const))
   .sort((a, b) => b[1] - a[1]);
 console.log(`vertices per piece: ${perPiece.map(([n, v]) => `${n} ${v}`).join(', ')}`);
+console.log(`atlas premultiplied check: ${st.nonPremultiplied} pixels with colour above alpha`);
 const issues = validateRig(res.rig).filter((i) => i.severity === 'error');
 for (const i of issues.slice(0, 20)) console.log(`  rig error ${i.path}: ${i.message}`);
+if (st.nonPremultiplied > 0)
+  issues.push({
+    path: '/atlas',
+    message: `${st.nonPremultiplied} atlas pixels have colour above alpha (wrong premultiply)`,
+    severity: 'error',
+  } as (typeof issues)[number]);
 if (issues.length) {
   console.log('\nrig is invalid: nothing exported');
   process.exit(1);
@@ -134,4 +143,25 @@ writeFileSync(join(out, `${name}_tex.png`), encodePng(res.atlas.image));
 // the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
+writeFileSync(
+  join(out, `${name}.assembly.json`),
+  JSON.stringify(
+    {
+      direction: dir,
+      packing: {
+        padding: ATLAS_PADDING,
+        extrude: ATLAS_EXTRUDE,
+        premultipliedAlpha: true,
+        page: [res.atlas.data.width, res.atlas.data.height],
+      },
+      nonPremultipliedPixels: st.nonPremultiplied,
+      stats: st,
+      used: res.used,
+      missing: res.missing,
+      skipped: res.skipped,
+    },
+    null,
+    2,
+  ),
+);
 console.log(`exported ${existsSync(out) ? out : ''}: ${clips.length} clips, ${bad.length} clips with QA errors`);
