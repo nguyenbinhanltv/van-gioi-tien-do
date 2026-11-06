@@ -163,7 +163,7 @@ const SHOUT_AT_HIT: Hold = {
 const GRIT: Hold = { from: { frame: 0 }, to: { phase: 'hit_frame', offset: -2 }, show: 'mouth_grit' };
 const ANGRY_BROWS: Hold = { from: { frame: 0 }, to: { frac: 1 }, show: 'brows_angry' };
 const throwing = (side: 'L' | 'R', v: (typeof GAUNTLET_SWAPS)[number]): Hold => ({
-  from: { phase: 'windup_end' },
+  from: { phase: 'hit_frame', offset: -1 },
   to: { phase: 'hit_frame', offset: 4 },
   show: G(side, v),
 });

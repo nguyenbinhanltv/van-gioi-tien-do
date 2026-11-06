@@ -60,8 +60,8 @@ Vũ khí: gauntlets (worn on arm_L / arm_R, no weapon_R). Texture 2×, atlas pad
 | shoulder | upper arm / vest (`arm_L` / `outfit_upper`)   |           14 |   160° | **14** | `outfit_upper` / `arm_L` / `arm_L` / `arm_L` / `arm_L`                             |
 | shoulder | upper arm / neck-torso (`arm_R` / `body`)     |           14 |   160° | **14** | `body` / `body` / `body` / `body` / `arm_R`                                        |
 | shoulder | upper arm / neck-torso (`arm_L` / `body`)     |           14 |   160° | **14** | `body` / `arm_L` / `arm_L` / `arm_L` / `arm_L`                                     |
-| elbow    | upper arm / forearm (`arm_R` / `arm_R`)       |           13 |   105° | **11** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
-| elbow    | upper arm / forearm (`arm_L` / `arm_L`)       |           13 |   105° | **11** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
+| elbow    | upper arm / forearm (`arm_R` / `arm_R`)       |           13 |   110° | **11** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
+| elbow    | upper arm / forearm (`arm_L` / `arm_L`)       |           13 |   110° | **11** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
 | wrist    | forearm / hand (`arm_R` / `arm_R`)            |           11 |    20° |  **2** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
 | wrist    | forearm / hand (`arm_L` / `arm_L`)            |           11 |    20° |  **2** | cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo / cả hai đảo                     |
 | hip      | thigh / robe panels (`body` / `outfit_lower`) |           18 |    95° | **14** | `body` / `body` / `body` / `body` / `body`                                         |
