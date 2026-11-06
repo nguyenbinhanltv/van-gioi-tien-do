@@ -8,7 +8,10 @@ import {
   DETAIL_CHAINS,
   DEFAULT_IGNORED_SLOTS,
   DETAIL_GROUPS,
+  BLINK_CYCLE_CLIP,
+  BLINK_CYCLE_FRAMES,
   addDetailChains,
+  authorBlinkCycle,
   loadCharacterData,
   validateRig,
   applyDetail,
@@ -256,5 +259,27 @@ describe('chain swing limit and silhouette props', () => {
 
   it('the silhouette check ignores the ground shadow and the sword effect layers', () => {
     for (const s of ['weapon_R', 'shadow', 'sword_trail', 'sword_glint']) expect(DEFAULT_IGNORED_SLOTS).toContain(s);
+  });
+});
+
+describe('blink cycle', () => {
+  const rig = detailRig();
+  it('is an independent looping eyes-only clip with blinks 3-5 s apart and no double blink across the loop', () => {
+    const c = authorBlinkCycle(rig)!;
+    expect(c.name).toBe(BLINK_CYCLE_CLIP);
+    expect(c.loop).toBe(true);
+    expect(c.bones).toEqual([]);
+    expect(c.slots.map((s) => s.slot)).toEqual(['eyes']);
+    const starts = blinkStarts(BLINK_CYCLE_CLIP, BLINK_CYCLE_FRAMES, true);
+    expect(starts.length).toBeGreaterThanOrEqual(2);
+    for (let i = 1; i < starts.length; i++) expect(starts[i]! - starts[i - 1]!).toBeGreaterThanOrEqual(90);
+    expect(BLINK_CYCLE_FRAMES - starts[starts.length - 1]! + starts[0]!).toBeGreaterThanOrEqual(90);
+    const keys = c.slots[0]!.attachment!;
+    expect(keys.filter((k) => k.value === 'eyes_closed')).toHaveLength(starts.length);
+    expect(Math.max(...keys.map((k) => k.frame))).toBeLessThan(BLINK_CYCLE_FRAMES);
+  });
+  it('is null for a rig without the eyes slot and deterministic otherwise', () => {
+    expect(authorBlinkCycle(buildReferenceHumanoid('E'))).toBeNull();
+    expect(authorBlinkCycle(rig)).toEqual(authorBlinkCycle(rig));
   });
 });

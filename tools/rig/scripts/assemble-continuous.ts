@@ -16,6 +16,7 @@ import {
   ATLAS_EXTRUDE,
   ATLAS_PADDING,
   assembleContinuous,
+  authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
   createImage,
@@ -114,7 +115,8 @@ if (issues.length) {
   process.exit(1);
 }
 
-const clips = authorKiemTuSet(res.rig, { detail: true });
+const blink = authorBlinkCycle(res.rig);
+const clips = [...authorKiemTuSet(res.rig, { detail: true }), ...(blink ? [blink] : [])];
 const name = `kiemtu_${dir}`;
 let pkg;
 try {
