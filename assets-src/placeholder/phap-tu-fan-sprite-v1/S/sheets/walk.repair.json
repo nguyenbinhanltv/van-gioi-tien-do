@@ -1,0 +1,37 @@
+{
+  "method": "@vgtd/sprite repairCell, whole-sheet DPI registration of edit only; no figure scaling",
+  "original": "walk.generated.png",
+  "edited": "walk.repair1.generated.png",
+  "originalSize": [2172, 724],
+  "editedSize": [2172, 724],
+  "targets": [3, 4, 7, 8, 9],
+  "changed": [3, 4, 7, 8, 9],
+  "before": [
+    "f040ed7abd9483c1286baf4c186cf9535f201d25",
+    "256de9454c7582ee980c21eda3c11d3e0635c748",
+    "0fd90cb3c40f6651c15d45300c2d5e0420174c23",
+    "c8301d03ac1832175fb07983218494af7ae8eab8",
+    "0a59ba3a805abcf892cdf2e1c33396fe994b1486",
+    "b4a62b10aefaed0443c500ed0429f817135593ec",
+    "cfd517e8d2ab474ce7c1190f6eed49f161f3d0cf",
+    "248b025a202c8b6639924ebc796ac61dfeadb006",
+    "6d54ecdae9a1c08b30c5b89d231197c89dbd4df5",
+    "f6ea2d949bbbd996b768e49964bafa03389fb673",
+    "f1ee4e3edb5b0a986425a0dca61662c0ea20957f",
+    "c34dee076db92ccab17a318b3410ec2297d3aeca"
+  ],
+  "after": [
+    "f040ed7abd9483c1286baf4c186cf9535f201d25",
+    "256de9454c7582ee980c21eda3c11d3e0635c748",
+    "0fd90cb3c40f6651c15d45300c2d5e0420174c23",
+    "5a8968038ff9c83205847f225fe02a6e5534f7fa",
+    "b7100d48a9c90f4f36b67c81a6bf909d7f0ba4ea",
+    "b4a62b10aefaed0443c500ed0429f817135593ec",
+    "cfd517e8d2ab474ce7c1190f6eed49f161f3d0cf",
+    "14cd315afe5d05bc7c039387606ba366a62a934b",
+    "a2dd0da6d333c5058fc66af5bdefd0a6e4ce63d4",
+    "f17cd52847b0340fc50ec6c4f8b6bdec1a168822",
+    "f1ee4e3edb5b0a986425a0dca61662c0ea20957f",
+    "c34dee076db92ccab17a318b3410ec2297d3aeca"
+  ]
+}

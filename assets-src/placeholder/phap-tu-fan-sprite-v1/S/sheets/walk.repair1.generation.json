@@ -1,0 +1,12 @@
+{
+  "id": "B.S.walk-repair-1",
+  "prompt": "Cell-local anatomical correction of the attached S front-facing walk SIXcolumns TWOrows12frame sheet. Change ONLY zero-based cells 3,4,7,8,9. All other cells EXACTLY unchanged. In each target cell extend the lowest leg/boot down by18 SOURCE IMAGE pixels, straightening knee/shin naturally. Current target heights199..201 after fixedscale should reach206..212. Never scale whole figure, head,torso or separate frame. Redraw full leg joints anatomically, preserve same boot size and full leg length; no stretching. Preserve S frontcamera, vermilion/ivory/navyrobe, cyanopenfan in anatomicalRIGHT hand (viewerleft), face/head/torso/fan unchanged. Preserve opposite-leg gait phase, soles fullyvisible inside owncell. Same exact canvas and grid, puremagenta, no text/grid/VFX. Only targetcells extracted withhashverification.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 22:07:41 UTC",
+  "utcEnd": "2026-11-06 22:08:00 UTC",
+  "selectedOutput": "S/sheets/walk.repair1.generated.png",
+  "references": ["S/sheets/walk.generated.png"],
+  "attempt": 2,
+  "targetCells": [3, 4, 7, 8, 9]
+}

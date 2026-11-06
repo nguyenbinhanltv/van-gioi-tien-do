@@ -1,4 +1,4 @@
 {
   "character": "phap-tu",
-  "projects": ["E/project.json", "SE/project.json"]
+  "projects": ["E/project.json", "SE/project.json", "S/project.json"]
 }
