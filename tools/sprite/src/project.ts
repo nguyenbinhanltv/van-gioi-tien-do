@@ -16,9 +16,11 @@ import { groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
-import { runQa, type QaClip, type QaReport } from './qa.js';
+import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
+import { runQa, type Finding, type QaClip } from './qa.js';
 import { resizeImage } from './repair.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
+import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
 
 export interface ProjectClip {
@@ -54,6 +56,8 @@ export interface ProjectClip {
   readonly exceptions?: Readonly<Record<string, string>>;
   /** `sole` (default) or `keep` (airborne: keep the height above the template ground line). */
   readonly vertical?: 'sole' | 'keep';
+  /** The ACTUAL planted-foot frames of the drawings; replaces the template's planted flags in the foot-slide gate. */
+  readonly contacts?: Contacts;
   /** Ground speed (px/s, 1x screen) of the clip; default from the table for run / walk, none otherwise. */
   readonly groundSpeedPxS?: number;
 }
@@ -61,6 +65,8 @@ export interface ProjectClip {
 export interface Project {
   readonly character: string;
   readonly direction: Direction;
+  /** Quality backlog file (accepted soft findings), relative to the project file. Default `quality-backlog.json` beside it. */
+  readonly backlog?: string;
   /** Output stem: files are `<stem>_<DIR>_ske.json` ... */
   readonly stem: string;
   /** Master image (any square size; resized to the 256 cell). */
@@ -95,7 +101,14 @@ export interface Contract {
   readonly palette: { readonly size: number; readonly locked: boolean };
   readonly atlas: { readonly pages: number; readonly width: number; readonly height: number; readonly regions: number };
   readonly clips: readonly ClipContract[];
-  readonly qa: QaReport;
+  /** `ok` = no hard failure, no unlisted soft finding, no regression of a listed one (see backlog.ts). */
+  readonly qa: {
+    readonly ok: boolean;
+    readonly findings: readonly Finding[];
+    readonly judged: BacklogReport['judged'];
+    readonly resolved: BacklogReport['resolved'];
+    readonly counts: BacklogReport['counts'];
+  };
 }
 
 export interface ProjectResult {
@@ -116,14 +129,17 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const palette: Color3[] = paletteFromMaster(master, project.palette);
   const lock = project.palette?.lock !== false;
 
-  // 1. slice + palette lock every sheet
+  // 1. slice + palette lock every sheet (spill cleanup keeps the master palette colours)
+  const sliceOptions: SliceOptions | undefined = project.slice?.spill
+    ? { ...project.slice, spill: { palette, ...project.slice.spill } }
+    : project.slice;
   const sliced = project.clips.map((c) => {
     const buf = readFileSync(resolve(baseDir, c.sheet));
     const sheet = decodePng(buf);
     const frames = sliceSheet(
       sheet,
       { cols: c.cols, rows: Math.ceil(c.frames / c.cols), frames: c.frames },
-      project.slice,
+      sliceOptions,
     ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f));
     const rows = Math.ceil(c.frames / c.cols);
     const r0 = cellRect(sheet.width, sheet.height, c.cols, rows, 0);
@@ -212,7 +228,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
       : null;
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
-    const cells: readonly CellSpec[] | undefined = manifest?.cells;
+    const cells: readonly CellSpec[] | undefined =
+      manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
       loop: s.clip.loop,
@@ -224,7 +241,16 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(speed !== undefined ? { groundPxPerFrame: groundPxPerFrame(speed, s.clip.durationSec, s.clip.frames) } : {}),
     };
   });
-  const qa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const rawQa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
+  const verdict = applyBacklog(rawQa.findings, project.direction, backlog);
+  const qa = {
+    ok: verdict.ok,
+    findings: rawQa.findings,
+    judged: verdict.judged,
+    resolved: verdict.resolved,
+    counts: verdict.counts,
+  };
 
   const page = built.atlas;
   const contract: Contract = {

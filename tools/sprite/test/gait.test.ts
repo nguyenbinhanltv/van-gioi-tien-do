@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, viewGain, type Image } from '@vgtd/rig';
 import {
+  applyContacts,
   checkFootSlide,
   groundPxPerFrame,
   groundSpeedPxS,
@@ -89,5 +90,53 @@ describe('template ghosts agree with the foot-slide gate', () => {
       groundPxPerFrame: groundPxPerFrame(speed, tableDuration('run'), 8),
     };
     expect(checkFootSlide(clip, { masterHeight: 208, master, guides }).length).toBeGreaterThan(0);
+  });
+});
+
+describe('stance and annotated contacts', () => {
+  it('a sprint stance (1/3 of the cycle) has flight cells and still matches the gate speed', () => {
+    const speed = groundSpeedPxS('run', 'E')!;
+    const duration = tableDuration('run');
+    const stance = 1 / 3;
+    const cells = locomotionCells(12, guides, { halfStride: halfStrideFor(speed, duration, stance), lift: 14, stance });
+    expect(cells.some((c) => !c.nearFoot?.planted && !c.farFoot?.planted)).toBe(true); // both feet airborne
+    const clip: QaClip = {
+      name: 'run',
+      loop: true,
+      kind: 'upright',
+      expectedFrames: 12,
+      frames: cells.map(footFrame),
+      cells,
+      groundPxPerFrame: groundPxPerFrame(speed, duration, 12),
+    };
+    expect(checkFootSlide(clip, { masterHeight: 208, master, guides })).toEqual([]);
+    expect(() => locomotionCells(12, guides, { halfStride: 20, lift: 5, stance: 0.8 })).toThrow(RangeError);
+  });
+
+  it('applyContacts replaces the template planted flags by the annotation and keeps the ghosts', () => {
+    const cells = locomotionCells(12, guides, { halfStride: 37.5, lift: 14 });
+    const out = applyContacts(cells, { R: [0, 1], L: [6] });
+    expect(out.map((c) => c.nearFoot?.planted)).toEqual(cells.map((_, i) => [0, 1].includes(i)));
+    expect(out.map((c) => c.farFoot?.planted)).toEqual(cells.map((_, i) => i === 6));
+    expect(out[3]!.nearFoot?.x).toBe(cells[3]!.nearFoot?.x);
+  });
+
+  it('a planted foot that is not on its ghost is reported, not silently skipped', () => {
+    const speed = groundSpeedPxS('run', 'E')!;
+    const cells = locomotionCells(12, guides, { halfStride: halfStrideFor(speed, tableDuration('run')), lift: 14 });
+    const frames = cells.map((c, i) =>
+      footFrame(i === 2 ? { ...c, nearFoot: { ...c.nearFoot!, x: c.nearFoot!.x - 60 } } : c),
+    );
+    const clip: QaClip = {
+      name: 'run',
+      loop: true,
+      kind: 'upright',
+      expectedFrames: 12,
+      frames,
+      cells,
+      groundPxPerFrame: groundPxPerFrame(speed, tableDuration('run'), 12),
+    };
+    const f = checkFootSlide(clip, { masterHeight: 208, master, guides });
+    expect(f.some((x) => x.frame === 2 && x.severity === 'warn' && /not on the template/.test(x.message))).toBe(true);
   });
 });

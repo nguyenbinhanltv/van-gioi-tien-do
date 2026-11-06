@@ -4,6 +4,7 @@
  */
 import type { Image } from '@vgtd/rig';
 import { KEY_MAGENTA, type Rgb } from './types.js';
+import { colorDistance, type Color3 } from './palette.js';
 import { toPremultiplied, toStraight, type Straight } from './raster.js';
 
 export interface KeyOptions {
@@ -60,6 +61,42 @@ export function keyOut(src: Straight, opts: KeyOptions = {}): Straight {
     data[i + 3] = Math.round(data[i + 3]! * a);
   }
   return { width: src.width, height: src.height, data };
+}
+
+export interface SpillOptions {
+  /** `min(r, b) - g` above which a pixel counts as magenta tinted. Default 24. */
+  readonly threshold?: number;
+  /** How much of the tint is removed, 0..1. Default 1 (the pixel ends up with min(r, b) = g). */
+  readonly strength?: number;
+  /** Legitimate colours (the master palette): a pixel within `keepDistance` of one is never touched (pink / purple cloth). */
+  readonly palette?: readonly Color3[];
+  readonly keepDistance?: number;
+}
+
+/**
+ * Interior spill cleanup: every opaque pixel (not only the silhouette edge) whose colour leans magenta (red AND blue above
+ * green by `threshold`, red and blue about equal) loses that cast, unless it is close to a palette colour. This removes the
+ * magenta strands the key colour leaves between hair strands, which the edge-only defringe cannot see.
+ */
+export function despillInterior(src: Straight, opts: SpillOptions = {}): { image: Straight; fixed: number } {
+  const threshold = opts.threshold ?? 24;
+  const strength = opts.strength ?? 1;
+  const keep = opts.keepDistance ?? 36;
+  const data = new Uint8ClampedArray(src.data);
+  let fixed = 0;
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3]! === 0) continue;
+    const r = data[i]!;
+    const g = data[i + 1]!;
+    const b = data[i + 2]!;
+    const m = Math.min(r, b) - g;
+    if (m <= threshold || Math.abs(r - b) > 0.6 * m + 20) continue;
+    if (opts.palette?.some((p) => colorDistance([r, g, b], p) < keep)) continue;
+    data[i] = Math.round(r - strength * m);
+    data[i + 2] = Math.round(b - strength * m);
+    fixed++;
+  }
+  return { image: { width: src.width, height: src.height, data }, fixed };
 }
 
 const N8: readonly (readonly [number, number])[] = [
@@ -211,6 +248,8 @@ export interface SliceOptions extends KeyOptions, FragmentOptions {
   readonly inset?: number;
   /** Run `defringe`. Default true. */
   readonly defringe?: boolean;
+  /** Interior magenta spill cleanup (see `despillInterior`); off unless given. In `runProject` the master palette is added. */
+  readonly spill?: SpillOptions;
 }
 
 export interface SlicedFrame {
@@ -263,6 +302,7 @@ export function sliceSheet(
     const inset = Math.round(Math.min(r.width, r.height) * (opts.inset ?? 0.01));
     let cell = crop(full, r.x + inset, r.y + inset, r.width - 2 * inset, r.height - 2 * inset);
     cell = keyOut(cell, { ...opts, key });
+    if (opts.spill) cell = despillInterior(cell, opts.spill).image;
     if (opts.defringe !== false) cell = defringe(cell);
     const { image, removed } = removeFragments(cell, opts);
     frames.push({ index: i, image, removedFragments: removed });
