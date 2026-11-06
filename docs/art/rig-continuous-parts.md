@@ -1,6 +1,6 @@
 # Kiếm tu: cấu trúc "chi liền" (continuous limbs), hợp đồng mảnh cho art
 
-Quyết định của chủ dự án (2026-11-06): bỏ cách "cắt mảnh chữ nhật từ một ảnh", chuyển sang **vẽ từng bộ phận đầy đủ** và dựng **một mesh liền cho cả tay / cả chân**. Bản này là đặc tả mảnh cho worker art; công cụ nằm ở `tools/rig/src/limb.ts` (`buildLimbMesh`, `buildSkirtMesh`). Nền tảng số liệu: `docs/art/rig-approach-memo.md` (phương án B + C).
+Quyết định **D39** của chủ dự án (2026-11-06, xem `docs/DECISIONS.md`): bỏ cách "cắt mảnh chữ nhật từ một ảnh", chuyển sang **vẽ từng bộ phận đầy đủ** và dựng **một mesh liền cho cả tay / cả chân**. Bản này là đặc tả mảnh cho worker art; công cụ nằm ở `tools/rig/src/limb.ts` (`buildLimbMesh`, `buildSkirtMesh`). Nền tảng số liệu: `docs/art/rig-approach-memo.md` (phương án B + C).
 
 ## 1. Định dạng file
 
