@@ -16,6 +16,7 @@
  * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -372,7 +373,9 @@ console.log(
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
 // the clips exactly as exported (key-pose clips included): `rig:measure --assembled` audits THESE, not a re-authored gait
-writeFileSync(join(out, `${name}.clips.json`), JSON.stringify(clips));
+// the hash of the rig tells `rig:measure` whether the clips still belong to the rig.json next to them
+const rigHash = createHash('sha1').update(JSON.stringify(res.rig)).digest('hex').slice(0, 16);
+writeFileSync(join(out, `${name}.clips.json`), JSON.stringify({ rigHash, clips }));
 writeFileSync(
   join(out, `${name}.assembly.json`),
   JSON.stringify(

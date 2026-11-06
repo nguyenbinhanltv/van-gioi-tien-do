@@ -214,3 +214,20 @@ describe('the finished-clip RMS compensates the lock shift along any facing axis
     });
   });
 });
+
+describe('finishedLandmarkRms in E and in a diagonal direction', () => {
+  for (const dir of ['E', 'SE', 'NE'] as const) {
+    it(`${dir}: a clip authored from its own key poses has a finished RMS near 0 at the key frames`, () => {
+      const r = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get(dir)!.rig;
+      const hand = authorKiemTuSet(r, { only: ['run'], secondary: false, gait: GAIT_PROFILES.free })[0]!;
+      const keyAt = keyPoseFrames('run', 15, hand.phases, hand.events);
+      const refs = keyAt.map((f) => landmarksFromPose(r, evalPose(r, hand, f), view) as KeyPoseLandmarks);
+      const fits = refs.map((lm) => fitPose(r, lm, view));
+      const out: { fits?: PoseFit[] } = {};
+      const clip = authorKeyPoseClip(r, 'run', fits, 15, true, hand.phases, hand.events, out);
+      out.fits!.forEach((fit, i) =>
+        expect(finishedLandmarkRms(r, refs[i]!, view, clip, keyAt[i]!, fit), `${dir} key ${i}`).toBeLessThan(0.8),
+      );
+    });
+  }
+});

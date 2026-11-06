@@ -18,6 +18,7 @@
  *   --json             machine-readable output
  *   --strict           exit code 1 if any seam gap > limit, any torn silhouette or any stretch event remains
  */
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import {
@@ -126,7 +127,15 @@ for (const [dir, d] of data.byDirection) {
   if (savedClips && existsSync(savedClips)) clipSource = 'as exported by rig:assemble';
   const clips: Clip[] =
     savedClips && existsSync(savedClips)
-      ? (JSON.parse(readFileSync(savedClips, 'utf8')) as Clip[]).filter((c) => c.name !== 'blink_cycle')
+      ? (() => {
+          const saved = JSON.parse(readFileSync(savedClips, 'utf8')) as { rigHash?: string; clips: Clip[] };
+          const now = createHash('sha1').update(JSON.stringify(rig)).digest('hex').slice(0, 16);
+          if (saved.rigHash && saved.rigHash !== now)
+            console.warn(
+              `warning: ${savedClips} was exported from a different rig (hash ${saved.rigHash}, rig is ${now}): re-run rig:assemble`,
+            );
+          return saved.clips.filter((c) => c.name !== 'blink_cycle');
+        })()
       : authorClassSet(opts.character, rig, {
           detail: true,
           // an assembled rig is measured with the gait `rig:assemble` exports: --gait, else the class profile's, else robe
