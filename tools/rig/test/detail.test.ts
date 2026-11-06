@@ -6,6 +6,7 @@ import {
   DETAIL_DISPLAYS,
   DETAIL_SLOTS,
   DETAIL_CHAINS,
+  DEFAULT_IGNORED_SLOTS,
   DETAIL_GROUPS,
   addDetailChains,
   loadCharacterData,
@@ -231,5 +232,29 @@ describe('detail chains', () => {
     const run = authorKiemTuSet(rig, { only: ['run'] })[0]!;
     expect(run.bones.find((b) => b.bone === 'ponytail_1')?.rotate?.length ?? 0).toBeGreaterThan(2);
     expect(bakeSecondaryMotion(rig, run, { gain: 0 })).toBe(run);
+  });
+});
+
+describe('chain swing limit and silhouette props', () => {
+  it('maxAngle keeps every bone of a chain within its limit while the body moves', () => {
+    const base = addDetailChains(buildReferenceHumanoid('E')).rig;
+    const limited: RigDocument = {
+      ...base,
+      chains: (base.chains ?? []).map((c) => ({ ...c, maxAngle: 20 })),
+    };
+    const run = authorKiemTuSet(limited, { only: ['run'] })[0]!;
+    const chainBones = new Set((limited.chains ?? []).flatMap((c) => c.bones));
+    let worst = 0;
+    for (const t of run.bones) {
+      if (!chainBones.has(t.bone)) continue;
+      for (const k of t.rotate ?? []) worst = Math.max(worst, Math.abs(k.value));
+    }
+    expect(worst).toBeGreaterThan(1);
+    expect(worst).toBeLessThanOrEqual(20.01);
+    for (const g of DETAIL_GROUPS) expect(g.maxAngle).toBeLessThanOrEqual(35);
+  });
+
+  it('the silhouette check ignores the ground shadow and the sword effect layers', () => {
+    for (const s of ['weapon_R', 'shadow', 'sword_trail', 'sword_glint']) expect(DEFAULT_IGNORED_SLOTS).toContain(s);
   });
 });

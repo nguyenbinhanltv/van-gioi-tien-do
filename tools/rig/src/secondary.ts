@@ -105,7 +105,9 @@ export function bakeSecondaryMotion(rig: RigDocument, clip: Clip, opts: BakeOpti
       const accel = -w0 * w0 * st.theta - 2 * zeta * w0 * st.omega + st.drive - gravity * Math.cos(pb.rotation * DEG);
       st.omega = Math.max(-MAX_OMEGA, Math.min(MAX_OMEGA, st.omega + accel * h));
       st.theta += st.omega * h;
-      st.theta = Math.max(-90, Math.min(90, st.theta));
+      const limit = chain.maxAngle ?? 90;
+      st.theta = Math.max(-limit, Math.min(limit, st.theta));
+      if (Math.abs(st.theta) >= limit && Math.sign(st.omega) === Math.sign(st.theta)) st.omega = 0;
     }
     for (const b of pose.bones) {
       const arr = hist.get(b.name) ?? [];

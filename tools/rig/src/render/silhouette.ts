@@ -9,6 +9,15 @@ import type { RigDocument } from '../schema.js';
 import type { Image } from './image.js';
 import { renderPose, type LoadedAtlas } from './render.js';
 
+/** Slots that are not part of the body silhouette: the sword, the ground shadow and the additive sword effect layers. */
+export const DEFAULT_IGNORED_SLOTS: readonly string[] = [
+  'weapon_R',
+  'sword_back',
+  'shadow',
+  'sword_trail',
+  'sword_glint',
+];
+
 /** Count 8-connected components of pixels with alpha > `alpha`, ignoring components smaller than `minPixels`. */
 export function countIslands(img: Image, minPixels = 8, alpha = 24): number {
   const { width, height, data } = img;
@@ -68,7 +77,7 @@ export function checkSilhouette(
       scale: opts.scale ?? 1,
       background: [0, 0, 0, 0],
       ground: false,
-      hideSlots: opts.ignoreSlots ?? ['weapon_R', 'sword_back'],
+      hideSlots: opts.ignoreSlots ?? DEFAULT_IGNORED_SLOTS,
     });
   const restCount = countIslands(render(null), opts.minPixels);
   const issues: QaIssue[] = [];

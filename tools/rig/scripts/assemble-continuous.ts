@@ -92,7 +92,7 @@ if (res.missing.length) console.log(`  missing: ${res.missing.join(', ')}`);
 for (const s of res.skipped) console.log(`  skipped: ${s}`);
 const st = res.stats;
 console.log(
-  `rig: ${st.bones}/${st.limits.bones} bones, ${st.slots}/${st.limits.slots} slots, ${st.vertices}/${st.limits.meshVertices} mesh vertices, ${st.chains}/${st.limits.chains} chains; atlas ${res.atlas.data.width}x${res.atlas.data.height}`,
+  `rig: ${st.bones}/${st.limits.bones} bones, ${st.slots}/${st.limits.slots} slots, ${st.vertices}/${st.limits.meshVertices} mesh vertices (mesh scale ${st.meshScale}), ${st.chains}/${st.limits.chains} chains; atlas ${res.atlas.data.width}x${res.atlas.data.height}`,
 );
 const perPiece = Object.entries(res.rig.skins[0]!.attachments)
   .flatMap(([, m]) => Object.entries(m).map(([n, a]) => [n, a.type === 'mesh' ? a.vertices.length / 2 : 4] as const))

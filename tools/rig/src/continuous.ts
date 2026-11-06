@@ -202,6 +202,8 @@ export interface AssembleResult {
     readonly slots: number;
     readonly vertices: number;
     readonly chains: number;
+    /** Factor by which the mesh grid/strip steps were coarsened to fit the vertex budget (1 = as designed). */
+    readonly meshScale: number;
     /** The docs/03 limits of the rig kind (`RIG_LIMITS`), to read the headroom: `vertices` of `limits.meshVertices`. */
     readonly limits: {
       readonly bones: number;
@@ -420,6 +422,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
         stiffness: g.stiffness,
         damping: g.damping,
         ...(g.gravity ? { gravity: g.gravity } : {}),
+        maxAngle: g.maxAngle,
       });
   }
   const skeleton: RigDocument = { ...withLandmarks, bones, chains };
@@ -434,80 +437,98 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     readonly mesh: Made;
     readonly slotBone: string;
   }
-  const built: Built[] = [];
-  for (const spec of pieces) {
-    const img = images.get(spec.id);
-    if (!img) {
-      missing.push(spec.id);
-      continue;
-    }
-    const b = spec.binding;
-    let mesh: Made | null = null;
-    let slotBone = '';
-    try {
-      if (b.kind === 'rigid') {
-        slotBone = b.bone;
-        mesh = rigidRegion(skeleton, spec.id, b.bone, img, view);
-      } else if (b.kind === 'limb') {
-        slotBone = b.chain[0]!;
-        mesh = buildLimbMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          chain: b.chain,
-          view,
-          image: img,
-          cols: b.cols ?? 3,
-          step: b.step ?? 5,
-          ...(b.ramp ? { ramp: b.ramp } : {}),
-        });
-      } else if (b.kind === 'skirt') {
-        const r = skeleton.roles;
-        slotBone = r.hips!;
-        mesh = buildSkirtMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          hips: r.hips!,
-          thighs: [r.thigh_L!, r.thigh_R!],
-          view,
-          image: img,
-          cell: 10,
-        });
-      } else if (b.kind === 'hanging') {
-        const ids = hangingIds.get(b.template);
-        if (!ids) {
-          skipped.push(`${spec.id}: chain not created`);
-          continue;
-        }
-        slotBone = ids[0]!;
-        mesh = buildLimbMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          chain: ids,
-          view,
-          image: img,
-          ramp: 2.5,
-          step: 4,
-          cols: b.cols ?? 2,
-        });
-      } else {
-        const ids = hangingIds.get(b.of);
-        if (!ids) {
-          skipped.push(`${spec.id}: needs the '${b.of}' chain`);
-          continue;
-        }
-        slotBone = ids[ids.length - 1]!;
-        mesh = rigidRegion(skeleton, spec.id, slotBone, img, view);
+  const buildAll = (scale: number) => {
+    const built: Built[] = [];
+    const missingNow: string[] = [];
+    const skippedNow: string[] = [];
+    for (const spec of pieces) {
+      const img = images.get(spec.id);
+      if (!img) {
+        missingNow.push(spec.id);
+        continue;
       }
-    } catch (e) {
-      skipped.push(`${spec.id}: ${(e as Error).message}`);
-      continue;
+      const b = spec.binding;
+      let mesh: Made | null = null;
+      let slotBone = '';
+      try {
+        if (b.kind === 'rigid') {
+          slotBone = b.bone;
+          mesh = rigidRegion(skeleton, spec.id, b.bone, img, view);
+        } else if (b.kind === 'limb') {
+          slotBone = b.chain[0]!;
+          mesh = buildLimbMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            chain: b.chain,
+            view,
+            image: img,
+            cols: b.cols ?? 3,
+            step: (b.step ?? 5) * scale,
+            ...(b.ramp ? { ramp: b.ramp } : {}),
+          });
+        } else if (b.kind === 'skirt') {
+          const r = skeleton.roles;
+          slotBone = r.hips!;
+          mesh = buildSkirtMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            hips: r.hips!,
+            thighs: [r.thigh_L!, r.thigh_R!],
+            view,
+            image: img,
+            cell: 10 * scale,
+          });
+        } else if (b.kind === 'hanging') {
+          const ids = hangingIds.get(b.template);
+          if (!ids) {
+            skippedNow.push(`${spec.id}: chain not created`);
+            continue;
+          }
+          slotBone = ids[0]!;
+          mesh = buildLimbMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            chain: ids,
+            view,
+            image: img,
+            ramp: 2.5,
+            step: 4 * scale,
+            cols: b.cols ?? 2,
+          });
+        } else {
+          const ids = hangingIds.get(b.of);
+          if (!ids) {
+            skippedNow.push(`${spec.id}: needs the '${b.of}' chain`);
+            continue;
+          }
+          slotBone = ids[ids.length - 1]!;
+          mesh = rigidRegion(skeleton, spec.id, slotBone, img, view);
+        }
+      } catch (e) {
+        skippedNow.push(`${spec.id}: ${(e as Error).message}`);
+        continue;
+      }
+      if (!mesh) {
+        skippedNow.push(`${spec.id}: empty image`);
+        continue;
+      }
+      built.push({ spec, mesh, slotBone });
     }
-    if (!mesh) {
-      skipped.push(`${spec.id}: empty image`);
-      continue;
-    }
-    built.push({ spec, mesh, slotBone });
+    return { built, missingNow, skippedNow };
+  };
+  // the grid / strip steps coarsen together until the meshes fit the vertex budget (a little headroom kept)
+  const meshVerts = (bs: readonly Built[]) =>
+    bs.reduce((n, x) => n + (x.mesh.attachment.type === 'mesh' ? x.mesh.attachment.vertices.length / 2 : 0), 0) +
+    (input.weapon ? 4 : 0);
+  let meshScale = 1;
+  let result = buildAll(meshScale);
+  while (meshVerts(result.built) > limits.meshVertices - 8 && meshScale < 2.5) {
+    meshScale = Math.round((meshScale + 0.1) * 100) / 100;
+    result = buildAll(meshScale);
   }
+  const built = result.built;
+  missing.push(...result.missingNow);
+  skipped.push(...result.skippedNow);
 
   // 4. weapon borrowed from the old atlas
   const crops = new Map<string, Image>();
@@ -585,6 +606,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
       slots: slots.length,
       vertices,
       chains: chains.length,
+      meshScale,
       limits: {
         bones: limits.bones,
         slots: limits.slots,

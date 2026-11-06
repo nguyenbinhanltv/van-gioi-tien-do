@@ -84,6 +84,8 @@ export interface RigChain {
   readonly gravity?: number;
   /** How strongly parent motion drags the chain, 0..1; default 1. */
   readonly inertia?: number;
+  /** Largest swing of each bone from its rest angle (deg); default 90. Keeps ribbons from whipping over the head. */
+  readonly maxAngle?: number;
 }
 
 export interface RigSocket {
