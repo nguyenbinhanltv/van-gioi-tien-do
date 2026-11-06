@@ -3,6 +3,8 @@
  * and (when captured) the 2x GIF of the clip as rendered by the real Cocos runtime. `reviewHtml` turns one or more reports
  * into a single self-contained page (paths relative to the page).
  */
+import type { ManualArtFinding } from './backlog.js';
+
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 
 export type ClipStatus = 'ok' | 'warn' | 'fail';
@@ -32,6 +34,7 @@ export interface DirReport {
   readonly atlas: { readonly pages: number; readonly width: number; readonly height: number; readonly regions: number };
   readonly backlogEntries: number;
   readonly resolvedEntries: number;
+  readonly manual?: readonly ManualArtFinding[];
   /** Folder of this direction's outputs, relative to the report. */
   readonly folder: string;
   readonly clips: readonly ClipReport[];
@@ -70,11 +73,21 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
   const total = reports.flatMap((r) => r.dirs.flatMap((d) => d.clips));
   const bad = total.filter((c) => c.status === 'fail').length;
   const warn = total.filter((c) => c.status === 'warn').length;
+  const manualCount = reports.reduce((n, r) => n + r.dirs.reduce((m, d) => m + (d.manual?.length ?? 0), 0), 0);
   const nav = reports.map((r) => `<a href="#c-${esc(r.character)}">${esc(r.character)}</a>`).join('');
   const body = reports
     .map((r) => {
       const dirs = r.dirs
         .map((d) => {
+          const manual = d.manual ?? [];
+          const observations = manual.length
+            ? `<div class="grid"><section class="card"><details><summary class="name">Manual art findings (${manual.length}) · ${manual.filter((e) => e.status === 'resolved').length} art-worker resolved</summary>${manual
+                .map(
+                  (e) =>
+                    `<p><strong>${esc(e.clip)} / ${esc(e.dir)}: ${esc(e.kind)}</strong><br>cells ${e.cells.length ? e.cells.join(', ') : 'all'} · ${esc(e.severity)} · ${esc(e.reviewer)} · art status ${esc(e.status ?? 'open')}<br>${esc(e.note)}</p>`,
+                )
+                .join('')}</details></section></div>`
+            : '';
           const cards = d.clips
             .map((c) => {
               const media = c.gif
@@ -84,11 +97,11 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div><div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div></div>`;
             })
             .join('');
-          return `<h3>${esc(r.character)} / ${esc(d.dir)} ${chip(d.ok ? 'ok' : 'fail')} <span class="sum">atlas ${d.atlas.pages}p ${d.atlas.width}x${d.atlas.height}, ${d.atlas.regions} regions · backlog ${d.backlogEntries} (${d.resolvedEntries} resolved) · <a href="${esc(d.folder)}/${esc(d.stem)}_${esc(d.dir)}.sprite.json">contract</a></span></h3><div class="grid">${cards}</div>`;
+          return `<h3>${esc(r.character)} / ${esc(d.dir)} ${chip(d.ok ? 'ok' : 'fail')} <span class="sum">atlas ${d.atlas.pages}p ${d.atlas.width}x${d.atlas.height}, ${d.atlas.regions} regions · backlog ${d.backlogEntries} (${d.resolvedEntries} metric entries resolved) · manual ${manual.length} · <a href="${esc(d.folder)}/${esc(d.stem)}_${esc(d.dir)}.sprite.json">contract</a></span></h3>${observations}<div class="grid">${cards}</div>`;
         })
         .join('');
       return `<h2 id="c-${esc(r.character)}">${esc(r.character)} ${chip(r.ok ? 'ok' : 'fail')}</h2>${dirs}`;
     })
     .join('');
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${CSS}</style></head><body><header><h1>${esc(title)}</h1><div class="sum">${reports.length} characters · ${total.length} clips · ${bad} failing · ${warn} with accepted warnings (GIFs are Cocos captures at 2x)</div></header><nav>${nav}</nav>${body}</body></html>\n`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${CSS}</style></head><body><header><h1>${esc(title)}</h1><div class="sum">${reports.length} characters · ${total.length} clips · ${bad} failing · ${warn} with accepted warnings · ${manualCount} manual art findings (GIFs are Cocos captures at 2x)</div></header><nav>${nav}</nav>${body}</body></html>\n`;
 }
