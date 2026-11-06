@@ -411,7 +411,11 @@ if (mode === 'licenses') {
     throw new Error('The KT3 license writer is Kiếm tu E specific; maintain other character provenance separately');
   const filename = path.join(root, 'docs/ASSET-LICENSES.md');
   const marker = '\n## KT3 — Kiếm tu chi liền, pilot E (2026-11-06 UTC)\n';
-  const previous = fs.readFileSync(filename, 'utf8').split(marker)[0];
+  const existing = fs.readFileSync(filename, 'utf8');
+  const previous = existing.split(marker)[0];
+  const start = existing.indexOf(marker);
+  const followingStart = start < 0 ? -1 : existing.indexOf('\n## ', start + marker.length);
+  const following = followingStart < 0 ? '' : existing.slice(followingStart);
   const entries = manifest.parts
     .map((p) => path.join(source, 'raw', direction, `${p.id}.generation.json`))
     .concat(
@@ -435,7 +439,7 @@ if (mode === 'licenses') {
     '\n[Cập nhật KT3 — quần ngà và lót khe váy] Hai chân sinh lại từ master, chân cũ và mask; giữ ảnh/prompt cũ trong raw/E/history. Nhãn vật liệu chỉnh thủ công: quần ngà, boot charcoal, viền đế sáng; nếp lót ngà rộng 6 px @2x ở cạnh sau robe_front và cạnh trước robe_back, giữ các dải gấu vàng riêng. Hậu xử lý màu bằng mã, không tô pixel thủ công; alpha từng chân/panel và landmarks giữ nguyên. Rest composite maxExtra/maxMissing 2 px.\n';
   for (const e of entries)
     section += `\n### KT3 / ${e.id}\n\n- UTC bắt đầu: ${e.utcStart}; công cụ: ${e.tool}; model: ${e.model}; CLI: ${e.cli}.\n- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: \`${e.selectedOutput}\`.\n- Prompt đầy đủ:\n\n\`\`\`text\n${e.prompt}\n\`\`\`\n`;
-  fs.writeFileSync(filename, previous + section);
+  fs.writeFileSync(filename, previous + section + following);
   console.log(`Logged ${entries.length} generation prompts`);
 } else if (mode === 'check') {
   const master2x = manifest.reference2x

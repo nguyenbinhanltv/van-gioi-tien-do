@@ -1108,3 +1108,229 @@ ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig.
 ```text
 ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY near RIGHT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot as ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers fully painted up to hidden hip, smooth knee (no band or cut), master's dark charcoal boot ivory sole edge, foot pointing RIGHT. Topsourcey120 knee185 ankle118221 toe140230. NO robe, skirt, other leg or floating boot. Keep full continuousleg under robe.
 ```
+
+## KT4 — Kiếm tu, key pose chạy E tham chiếu (2026-11-06 UTC)
+
+Đây là cohort tham chiếu thử nghiệm, chưa nghiệm thu hoạt ảnh. Sinh từng ảnh toàn thân bằng `image_gen.imagegen` từ master concept A E và guide tư thế riêng; model không công bố (`undisclosed`), CLI `codex-cli 0.164.0`. Không thêm nguồn bên thứ ba; tiếp tục nhãn placeholder/quyền sử dụng của KT2.
+
+Hậu xử lý bằng mã: một phép co đồng nhất và dịch chuyển để đăng ký khung 512×512, sau đó area downsample về PNG RGBA straight alpha 256×256, root (128,232). Không warp chi, không tô pixel thủ công. Guide khớp được tác giả dựng thủ công bằng mã; không phải ảnh hoạt ảnh lấy từ bên thứ ba. Mốc cổ tay, tay, đầu/cổ, mũi giày và gấu áo đánh dấu bằng mắt trên lưới tọa độ; vai/khuỷu tay/ngực/chậu/hông/gối và mắt cá bị boot che là suy đoán, ghi rõ `_inferred`. Giữ mũi giày quan sát được; tâm mắt cá suy đoán dùng chiều dài bàn chân master, các đoạn chi suy đoán trong sai số 5%. Sửa cách hiểu ban đầu của chest/pelvis về junction spine và gốc hip bone; không đổi pixel ảnh để ép fit.
+
+Loại các bản có bước quá rộng, nền matte và sai chân chịu lực. Kết quả fit sau sửa mốc: IoU lần lượt 0.668 / 0.701 / 0.704 / 0.604 / 0.710 / 0.671 / 0.678 / 0.671, chưa đạt 0.85; còn hai lỗi trượt chân và hai cảnh báo tầm IK. Không dùng export `--allow-errors` làm bản nghiệm thu. Các ảnh nguồn phần rời KT3 với quần ngà/gấu đồng biến dạng vẫn qua gate cơ học trước bước key pose; hai kết quả này không đồng nghĩa.
+
+Prompt/UTC từng lần gọi (kể cả lần bị loại) được giữ đầy đủ bên dưới. Chỉ 8 ảnh đã chọn trong `keyposes/E/` là đầu vào active; các lần bị loại là lịch sử thử nghiệm, không phải nguồn runtime.
+
+### KT4 / history/run_01_R_contact.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.850Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-bec6391e-c362-4e1e-a513-d09740d23993.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 01_R_contact. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: NEAR RIGHT foot contacts ground a short step forward (screen right), FAR LEFT leg trails back with heel lifted. Right knee softly bent, left knee trailing. Pelvis level, subtle forward torso lean. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_02_R_down.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-d5ff946d-0f18-46e2-afe6-3736f2c553a1.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 02_R_down. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: NEAR RIGHT foot planted forward under weight, right knee compresses slightly; FAR LEFT foot lifts behind. Body lowers only 2 texture pixels. Short controlled stride, no deep crouch. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_03_R_passing.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-8b94882a-e7f9-41b5-8a93-0c3ccbb5894e.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 03_R_passing. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: NEAR RIGHT leg supports under pelvis; FAR LEFT knee passes forward under robe with left foot lifted beside right ankle. Body upright with slight forward lean, robe opening narrow. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_04_R_up.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-34f23ba8-83da-4198-af8d-aff697fc6465.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 04_R_up. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: NEAR RIGHT heel rises into gentle push-off under body; FAR LEFT knee advances forward modestly ready to land. Body rises 2 texture pixels, airborne foot only slightly above ground. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_05_L_contact.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-386015c4-c4b5-4951-a3ae-17ddecae09ab.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 05_L_contact. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: FAR LEFT foot contacts ground a short step forward (screen right), NEAR RIGHT leg trails back heel lifted. Left knee softly bent. Pelvis level with slight forward torso lean. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_06_L_down.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-f89ce1ed-fbca-43ec-bfa4-7bc8565b7c7b.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 06_L_down. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: FAR LEFT foot planted forward taking weight, left knee compresses slightly; NEAR RIGHT foot lifts behind. Body lowers 2 texture pixels. Short controlled stride, no deep crouch. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_06_L_down.wrong-support-v2.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: rejected: forward foot lifted instead of planted.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-06_L_down-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-bb131081-604d-4b4e-a5ff-37411d2de8a7.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 06_L_down, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Weight settles 2px, supporting knee soft, opposite foot lifting. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / history/run_07_L_passing.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-1aab643c-44a0-459c-8c25-6169c5ba3287.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 07_L_passing. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: FAR LEFT leg supports under pelvis; NEAR RIGHT knee passes forward under robe with right foot lifted beside left ankle. Robe opening narrow, soft forward lean. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / history/run_08_L_up.wide-v1.generation.json
+
+- UTC: 2026-11-06T02:27:16.373Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: superseded: excessive backward boot displacement / wide stride.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-31ec3b0c-38bf-4cba-90a1-95b470a2b2be.png.
+- Prompt đầy đủ:
+
+```text
+ONE transparent full-body E-facing-right run key pose of exactly the reference Kiếm tu concept A swordsman. Keep exact character identity, muted slate blue outer vest/split long skirt, fine gold outside hem, IVORY inner robe and trousers, dark boots, NW painted light, slender 5.75-head proportions. Phase RUN 08 LEFT UP: FAR LEFT leg pushes off behind with toe contacting ground, left heel lifted, NEAR RIGHT knee moves a SHORT distance forward under robe, right foot lifted about one boot height. Knee bends modestly, no high step. Torso leans forward subtly, near right hand grips same drawn sword held low forward, far hand counterswings. Skirt follows modest stride: front flap leading right thigh, back flap flowing slightly backward, narrow ivory-lined split. Full figure in same512square framing: pelvis(244,278), head(248,110), neck(236,156), groundy464 and root(256,464), top bun around44. Exact rest-reference scale, no crop or zoom. REAL TRANSPARENT RGBA BACKGROUND ALL AROUND FIGURE. No painted matte, cloudy white/gray halo, glow, smoke, shadow, scenery, text or sheet. Character silhouette only. Keep dark outline inside silhouette.
+```
+
+### KT4 / rejected/run_08_L_up.matte-v1.generation.json
+
+- UTC: 2026-11-06T02:19:57.851Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: painted cloudy matte; not usable RGBA reference.
+- Đầu vào: "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png".
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-34dd59cf-a5fc-4beb-af45-2b6fd0a3c77b.png.
+- Prompt đầy đủ:
+
+```text
+Use case: stylized-concept. Produce ONE full-body animation KEY POSE reference, not a sprite sheet: Kiếm tu concept A, E direction, RUN 08_L_up. The supplied master is the exact character/style/material/proportion reference. Preserve face, hair bun/ponytail, muted slate-blue long outer vest and split skirt with thin gold outer hem, long IVORY inner robe, IVORY trousers, dark charcoal boots, sash/pendant, EMPTY hip scabbard, and drawn sword in RIGHT NEAR hand. Same soft painted 2D isometric side-E view facing SCREEN RIGHT, NW lighting, fine restrained outlines. Match master scale (~5.75 heads), limb lengths, slender adult build. Change only body pose and natural cloth follow-through. PHASE: FAR LEFT heel rises into gentle push-off under body; NEAR RIGHT knee advances modestly ready to land. Body rises 2 texture pixels; airborne foot slightly above ground. Long-robed swordsman running with SHORT stride (forward/back foot displacement about 10-16 px at 256 scale), shallow knee bend, knees travel fore/aft under robe; NO splayed/collapsed legs. Front skirt flap follows leading thigh, back flap trails with hem flaring gently backward; a narrow V split reveals ivory lining/trousers, legs mostly hidden. Modest opposite arm swing constrained by the sword held low safely forward-right, sword blade points diagonally down-forward without touching frame edge. No extreme action pose. Shared 512x512 framing: canonical pelvis about (244,278), head about(248,110), neck(236,156), feet ground at y464, root fixed(256,464). Master head top ~86; preserve full figure size and groundline; do not zoom/crop/recenter. Fully transparent background, genuine RGBA, no ground shadow, glow/trail, annotations, text or other characters. ONE pose only.
+```
+
+### KT4 / run_01_R_contact.generation.json
+
+- UTC: 2026-11-06T02:32:59.718Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run01-poseguide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-6307e454-0bf9-48b8-9025-49eacc19e98a.png.
+- Prompt đầy đủ:
+
+```text
+Create ONE production full-body key-pose illustration: E-facing-right Kiếm tu concept A, RUN 01 RIGHT CONTACT, genuinely transparent background. Image1 is EXACT master style/identity/costume/scale reference. Image2 is a POSITION/PROPORTION GUIDE only: peach=near RIGHT limbs, blue=far LEFT limbs, white dots=joints, thin contour=long robe approximate. Render finished art covering the skeleton; no guide lines/dots/colours/text in output. CRITICAL match image2 bone endpoints and shared512canvas placement, especially SHORT STRIDE: near RIGHT ankle (268,440), toe (302,464); far LEFT ankle (204,430), toe(228,450). Both feet stay UNDER the width of the robe. Do NOT fling the rear leg toward the left edge; rear toe x228, NOT x120. Near right foot JUST touches ground y464, knee softly flexed; far left heel lifted, foot only slightly behind. Hips(236/252,278), knees(262/222,366). Shoulder near(240,172), elbow(244,224), sword wrist(270,270). Keep full thigh/shin/arm lengths matching guide, relaxed long-robed short jog, slight forward lean only. Entire figure top bun~44, ground464, pelvisx244, NO zoom/recenter. Same master muted blue long outer vest/split skirt, narrow gold outer hems, ivory inner robe AND ivory trousers, charcoal boots, sash/jade pendant, empty hip scabbard, drawn sword gripped near right hand low downward-forward like guide. Long robe covers knees almost to ankles, modest front flap follows leading thigh, back flap trails gently, narrow split reveals ivory lining; NO huge flared cape or visible long spread legs. Hair hangs close to master with slight backward flow. Fine softly painted 2D isometric sprite style, identical NW lighting and palette. No smoke, glow, shadow, painted background or matte; clean real alpha silhouette.
+```
+
+### KT4 / run_02_R_down.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-02_R_down-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-20b6a5a1-b1e3-4fa0-a55d-2e08ca1c4352.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 02_R_down, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Weight settles 2px, supporting knee soft, opposite foot lifting. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / run_03_R_passing.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-03_R_passing-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-295c11d9-c746-4c71-a481-57fb4da13a6d.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 03_R_passing, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Swing foot passes close beside supporting ankle, narrow skirt split. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / run_04_R_up.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-04_R_up-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-e25bcc0e-8af1-492f-bfde-75e2fb1fbaf1.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 04_R_up, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Supporting heel gently rises, opposite knee slightly forward, low foot clearance. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / run_05_L_contact.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-05_L_contact-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-bca7552f-b3d7-48f1-a52a-f5a03258f626.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 05_L_contact, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. FAR LEFT foot JUST contacts forward; near right foot trails, heel lifted. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / run_06_L_down.generation.json
+
+- UTC: 2026-11-06T02:43:21.493Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/run_05_L_contact.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-28db243a-3d1c-47ed-ac89-a6c9497db1ab.png.
+- Prompt đầy đủ:
+
+```text
+Precise pose edit of IMAGE2 (Kiếm tu E RUN LEFT CONTACT), IMAGE1 master for materials/style. Produce next frame LEFT DOWN as ONE fullbody sprite, preserving image2 canvas framing/scale/identity/costume/weapon grip, true RGBA transparent. Keep the FORWARD boot at SCREEN RIGHT (far anatomical LEFT foot) PLANTED on ground at y232@256 (y464@512), toe aboutx153@256. This forward left foot takes the weight. Compress its knee just slightly under robe, pelvis lowers 2px. BACK boot at SCREEN LEFT (near anatomical RIGHT foot) lifts HEEL, toe nearx105y228@256, behind the body; NEVER lift the forward screen-right boot. Keep stride short; both boots under robe width. Preserve same whole torso, sword in near right hand low downward-forward, far left hand forward, long slate-blue vest/split skirt with gold outer hem, ivory lining/trousers, dark boots. Slight cloth settle, no huge flare. Body almost unchanged except2px settle. No labels, text, background, matte, halo, shadow, glow or smoke. Image2 is the edit target; keep its outer framing and avoid any zoom/crop.
+```
+
+### KT4 / run_07_L_passing.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-07_L_passing-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-6327fa08-35fd-4c61-8d2c-de52deed9802.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 07_L_passing, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Swing foot passes close beside supporting ankle, narrow skirt split. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```
+
+### KT4 / run_08_L_up.generation.json
+
+- UTC: 2026-11-06T02:35:36.942Z; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Trạng thái: draft pending landmark and fit validation.
+- Đầu vào: ["C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png","D:/Temp/vgtd-run-08_L_up-guide.png"].
+- Đầu ra công cụ: C:\Users\PC\.codex\generated_images\01a1ad56-e833-7ef2-b62b-cda10e79095e\exec-8eeb0f8c-88c4-4198-8231-7dd2f43ce30e.png.
+- Prompt đầy đủ:
+
+```text
+ONE full-body E-facing-right Kiếm tu concept A RUN key 08_L_up, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Supporting heel gently rises, opposite knee slightly forward, low foot clearance. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.
+```

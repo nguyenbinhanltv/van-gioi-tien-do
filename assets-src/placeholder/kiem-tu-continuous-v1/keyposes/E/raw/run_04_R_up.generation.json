@@ -1,0 +1,29 @@
+{
+  "prompt": "ONE full-body E-facing-right Kiếm tu concept A RUN key 04_R_up, true transparent RGBA. Image1 EXACT master identity/style/costume/proportions. Image2 AUTHORITATIVE SHORT-STRIDE pose guide in512 sharedcanvas: peach=NEAR RIGHT limbs, blue=FAR LEFT limbs, dots=joints; thin robe contour approximate. Render finished clothes over guide with no lines/dots/colours/text retained. Match joint/boot positions and limb lengths in guide; do not spread legs wider or fling trailing boot toward left edge. The guide's ground y464/root256464 and pelvis~244278 are fixed. Feet remain below robe; modest thigh motion, shallow knees, NO high step/squat. Supporting heel gently rises, opposite knee slightly forward, low foot clearance. Keep master body width/height, head~248110, neck236156, bun top44. Very slight forward torso lean, moderate opposite arm swing with near right hand gripping drawn sword low forward-down as guide; same grip across keys. Same master muted slate-blue long outer vest/skirt, thin gold outer hem, IVORY inner robe and trousers, charcoal boots, sash/jade pendant, empty hip scabbard. Long robe hides knees and most trousers; front flap follows leading thigh, back flap trails gently, narrow ivory-lined centre split, modest hem movement, NO cape-like giant flare. Hair close to master, slight follow-through. Soft painted isometric2D sprite NW light, exact material/line-weight match. Same512square framing; no recenter/enlarge/crop. Clean real alpha everywhere outside character, no matte/haze/white cloud/shadow/smoke/glow/trail/background.",
+  "utc": "2026-11-06T02:35:36.942Z",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-run-04_R_up-guide.png"
+  ],
+  "label": "04_R_up",
+  "generatedPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-e25bcc0e-8af1-492f-bfde-75e2fb1fbaf1.png",
+  "id": "run_04_R_up",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/run_04_R_up.png",
+  "guide": "assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/guides/run_04_R_up.png",
+  "registration": {
+    "method": "uniform scale and translation, no limb warping",
+    "scale": 0.41379310344827586,
+    "offset4x": [-13, -8],
+    "sourceAlphaY": [125, 1139]
+  },
+  "status": "draft: reference fit below acceptance target",
+  "utcStart": "2026-11-06T02:35:36.942Z",
+  "validation": {
+    "silhouetteIoU": 0.604,
+    "minimumIoU": 0.85,
+    "accepted": false
+  }
+}

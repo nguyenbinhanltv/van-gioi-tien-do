@@ -1,0 +1,27 @@
+{
+  "prompt": "Precise pose edit of IMAGE2 (Kiếm tu E RUN LEFT CONTACT), IMAGE1 master for materials/style. Produce next frame LEFT DOWN as ONE fullbody sprite, preserving image2 canvas framing/scale/identity/costume/weapon grip, true RGBA transparent. Keep the FORWARD boot at SCREEN RIGHT (far anatomical LEFT foot) PLANTED on ground at y232@256 (y464@512), toe aboutx153@256. This forward left foot takes the weight. Compress its knee just slightly under robe, pelvis lowers 2px. BACK boot at SCREEN LEFT (near anatomical RIGHT foot) lifts HEEL, toe nearx105y228@256, behind the body; NEVER lift the forward screen-right boot. Keep stride short; both boots under robe width. Preserve same whole torso, sword in near right hand low downward-forward, far left hand forward, long slate-blue vest/split skirt with gold outer hem, ivory lining/trousers, dark boots. Slight cloth settle, no huge flare. Body almost unchanged except2px settle. No labels, text, background, matte, halo, shadow, glow or smoke. Image2 is the edit target; keep its outer framing and avoid any zoom/crop.",
+  "utc": "2026-11-06T02:43:21.493Z",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/run_05_L_contact.png"
+  ],
+  "id": "run_06_L_down",
+  "generatedPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-28db243a-3d1c-47ed-ac89-a6c9497db1ab.png",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/run_06_L_down.png",
+  "registration": {
+    "method": "uniform scale/translation only",
+    "scale": 0.4329896907216495,
+    "offset4x": [-20, -15],
+    "sourceAlphaY": [136, 1105]
+  },
+  "status": "draft: reference fit below acceptance target",
+  "utcStart": "2026-11-06T02:43:21.493Z",
+  "validation": {
+    "silhouetteIoU": 0.671,
+    "minimumIoU": 0.85,
+    "accepted": false
+  }
+}

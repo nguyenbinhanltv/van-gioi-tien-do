@@ -1,0 +1,28 @@
+{
+  "prompt": "Create ONE production full-body key-pose illustration: E-facing-right Kiếm tu concept A, RUN 01 RIGHT CONTACT, genuinely transparent background. Image1 is EXACT master style/identity/costume/scale reference. Image2 is a POSITION/PROPORTION GUIDE only: peach=near RIGHT limbs, blue=far LEFT limbs, white dots=joints, thin contour=long robe approximate. Render finished art covering the skeleton; no guide lines/dots/colours/text in output. CRITICAL match image2 bone endpoints and shared512canvas placement, especially SHORT STRIDE: near RIGHT ankle (268,440), toe (302,464); far LEFT ankle (204,430), toe(228,450). Both feet stay UNDER the width of the robe. Do NOT fling the rear leg toward the left edge; rear toe x228, NOT x120. Near right foot JUST touches ground y464, knee softly flexed; far left heel lifted, foot only slightly behind. Hips(236/252,278), knees(262/222,366). Shoulder near(240,172), elbow(244,224), sword wrist(270,270). Keep full thigh/shin/arm lengths matching guide, relaxed long-robed short jog, slight forward lean only. Entire figure top bun~44, ground464, pelvisx244, NO zoom/recenter. Same master muted blue long outer vest/split skirt, narrow gold outer hems, ivory inner robe AND ivory trousers, charcoal boots, sash/jade pendant, empty hip scabbard, drawn sword gripped near right hand low downward-forward like guide. Long robe covers knees almost to ankles, modest front flap follows leading thigh, back flap trails gently, narrow split reveals ivory lining; NO huge flared cape or visible long spread legs. Hair hangs close to master with slight backward flow. Fine softly painted 2D isometric sprite style, identical NW lighting and palette. No smoke, glow, shadow, painted background or matte; clean real alpha silhouette.",
+  "utc": "2026-11-06T02:32:59.718Z",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-run01-poseguide.png"
+  ],
+  "label": "01_R_contact",
+  "generatedPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-6307e454-0bf9-48b8-9025-49eacc19e98a.png",
+  "id": "run_01_R_contact",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/run_01_R_contact.png",
+  "guide": "assets-src/placeholder/kiem-tu-continuous-v1/keyposes/E/guides/run_01_R_contact.png",
+  "registration": {
+    "scale": 0.410958904109589,
+    "offset4x": [-7, -6],
+    "sourceAlphaY": [121, 1142]
+  },
+  "status": "draft: reference fit below acceptance target",
+  "utcStart": "2026-11-06T02:32:59.718Z",
+  "validation": {
+    "silhouetteIoU": 0.668,
+    "minimumIoU": 0.85,
+    "accepted": false
+  }
+}
