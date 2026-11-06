@@ -283,6 +283,14 @@ describe('Thể tu combat poses', () => {
     expect(finArm(finHit)).toBeCloseTo(112, 3);
     expect(finArm(finHit + 3)).toBeCloseTo(112, 3);
     expect(finArm(finHit + 4)).toBeLessThan(112);
+    // the combo window is strictly inside the clip (30 fps clip length 13 = the table's 10 frames at 24 fps) with room to settle,
+    // and the recoil pose (not the stance) is what the arm shows at the combo frame; the final key is the stance alone
+    for (const c of [jab, get('attack_2'), fin]) expect(c.phases!.combo_window!, c.name).toBeLessThan(c.frames - 1);
+    const finCombo = fin.phases!.combo_window!;
+    expect(finArm(finCombo)).toBeCloseTo(85, 3);
+    const finKeys = fin.bones.find((b) => b.bone === 'upper_arm_R')!.rotate!;
+    expect(finKeys.filter((k) => k.frame === fin.frames)).toHaveLength(1);
+    expect(new Set(finKeys.map((k) => k.frame)).size).toBe(finKeys.length);
     expect(jab.events.find((e) => e.name === 'hit')!.frame).toBe(hit);
     expect(get('attack_3').bones.find((b) => b.bone === 'upper_arm_L')).toBeDefined();
     // anticipation: the striking arm is drawn back before the impact, weight loaded back (hips behind the stance)
