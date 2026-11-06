@@ -24,7 +24,8 @@
     "gen:parts-spec": "vitest run test/classes.test.ts -t \"writes docs/art/parts-spec.md\"",
     "export:character": "vitest run test/kiemtu-data.test.ts",
     "rig:measure": "node scripts/run-ts.mjs scripts/measure.ts",
-    "rig:gate": "node scripts/gate.mjs"
+    "rig:gate": "node scripts/gate.mjs",
+    "rig:assemble": "node scripts/run-ts.mjs scripts/assemble-continuous.ts"
   },
   "dependencies": {
     "@vgtd/character": "*",
