@@ -26,7 +26,6 @@ import type { RigDocument } from './schema.js';
 import { skinAttachment } from './skinning.js';
 import type { Image } from './render/image.js';
 import { renderPose, type LoadedAtlas } from './render/render.js';
-import { DEFAULT_IGNORED_SLOTS } from './render/silhouette.js';
 
 export interface KeyPoseLandmarks {
   readonly [name: string]: readonly [number, number] | readonly string[] | undefined;
@@ -553,6 +552,13 @@ export interface IouOptions2 extends IouOptions {
 }
 
 /** The rig silhouette rendered on the reference canvas (transparent, no ground). */
+/**
+ * Slots left out of a key-pose comparison: the ground shadow and the additive sword effects only. The DRAWN sword
+ * (`weapon_R`, `sword_back`) stays in, because the reference drawings contain it; hiding it on the rig side only would
+ * bias every IoU down.
+ */
+export const KEYPOSE_IGNORED_SLOTS: readonly string[] = ['shadow', 'sword_trail', 'sword_glint'];
+
 export function renderSilhouette(
   rig: RigDocument,
   clip: Clip,
@@ -565,7 +571,7 @@ export function renderSilhouette(
     scale: size / rig.canvas.width,
     background: [0, 0, 0, 0],
     ground: false,
-    hideSlots: ignore ?? DEFAULT_IGNORED_SLOTS,
+    hideSlots: ignore ?? KEYPOSE_IGNORED_SLOTS,
   });
 }
 
