@@ -1,0 +1,26 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "the-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "kind": "leg_reversal",
+      "clip": "walk",
+      "dir": "E",
+      "cell": -1,
+      "note": "Đảo vai chân chưa mạnh ở lượt đầu 8 frame. Giữ nguyên ảnh đã được chủ dự án chấp thuận; tăng độ rõ bước chân ở lượt polish. Đây là quan sát art, không phải số đo footSlide và không thay đổi hard gate.",
+      "severity": "warn",
+      "status": "open"
+    },
+    {
+      "kind": "leg_reversal",
+      "clip": "run",
+      "dir": "E",
+      "cell": -1,
+      "note": "Độ rõ đảo chân còn yếu ở một số pha của chu kỳ 10 frame. Giữ đủ frame và scale đã khóa; xử lý silhouette chân ở lượt polish. Số đo chân/ghost nằm riêng trong entries tự động.",
+      "severity": "warn",
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "B.S.attack",
+  "prompt": "Production sprite sheet PHAP TU concept B Vermilion Fan Adept, same exact art/style/character as attached master. Direction S: FACE STRAIGHT DOWN SCREEN TOWARD VIEWER, front view, slightly overhead orthographic isometric. Do not turn side-on. Young slender male, dark high bun jade pin/red ribbon, vermilion split robe with restrained bronze cloud border, ivory inner sleeves/trousers, navy sash two tails, dark calf boots. Cyan/teal OPEN folding fan always in anatomical RIGHT hand (viewer LEFT), right forearm across chest like master; left hand free. Preserve master face, clothing construction and full anatomical dimensions. Clean dark lines/soft2-3tone celshade NW light readable128px, no sword/staff/gauntlets. Pure MAGENTA #FF00FF background, no text, grid, ground, shadows, VFX or floating fragments. Ignore reference fringe speckles. Equal SQUARE cells, every sprite wholly within own cell. IMPORTANT fixed character scale: raw visible bun-to-lowest-sole height237px at256px-equivalent cell, allowable231..244px for standing/upright. Bun about localy8, lowest soleabout245; DO NOT shrink character to template standing band, because fixed global208/237 scale applied later. Full raw head and torso size fixed in every cell; seated/collapse shorten naturally without resizing. Template is layout and gait timing reference only, remove guides. 4 columns x 2 rows, 8 frames, row-major. 8frames compact rightfan horizontal sweep:guard,drawin,windup,begin,sweep,RELEASEframe5,recoil,guard. Fanopen noVFX, torsofront, stablefullbody.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 22:02:47 UTC",
+  "utcEnd": "2026-11-06 22:03:10 UTC",
+  "selectedOutput": "S/sheets/attack.generated.png",
+  "references": ["reference/S.master-crop.png", "S/templates/attack.template.png"],
+  "attempt": 1
+}

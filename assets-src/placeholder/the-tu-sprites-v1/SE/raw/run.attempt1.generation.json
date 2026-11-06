@@ -1,0 +1,19 @@
+{
+  "clip": "run",
+  "dir": "SE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 17:39:02 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame RUN SE-DIRECTION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY SIX equal SQUARE columns by TWO rows, 12 full-body frames, row-major left-to-right top-to-bottom, sheet aspect6:2. In every cell face SOUTHEAST / diagonally DOWN-RIGHT, three-quarter FRONT in the same slightly overhead orthographic isometric three-quarter FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x125.68. All12 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. TWELVE-frame RUN in place, heavy earth-tank short-stride jog, modest forward lean. Toprow1..6 near/right heel contact, load, passing, toeoff, brief flight/up, precontact. Bottomrow7..12 far/left leads the opposing step. Frame7 MUST reverse leglead and near-gauntlet swing comparedwith1. Both arms counter-swing with bronze fists held balanced, not a boxing punch. Follow colored boot ghosts, cyanR amberL, aligned with SE down-right travel. Full-length limbs bend naturally under trousers/sleeves; no elastic baggy mesh shapes, no giant knees or stuntedlegs. Keep same217unit full-body measured height (211..223) and head size in everyframe, no deep crouch. Seamless12-to1 loop. EXACT masterSE view: both sides of chest/tabard visible, front sash knot/two tails, master face angle. Never revert to E side-profile or S front view. Pure flat opaque#FF00FF background; REMOVE all guides/borders/ticks/ghosts/text. No floor/shadows/effects/blur/props. Whole figure inside each own squarecell.",
+  "references": ["../../the-tu-continuous-v1/reference/SE.master4x.png", "templates/run.template.png"],
+  "selectedOutput": "sheets/run.png",
+  "status": "source; selected run uses documented donor cells4/9/10; directional QA and real Cocos2x capture PASS",
+  "utcEndObserved": "2026-11-06 17:40:03 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-444e3734-4ba1-46a2-b6b4-19286ee03d6d.png",
+  "rawOutput": "raw/run.attempt1.png",
+  "repairProof": "raw/run.attempt2.repair-proof.json",
+  "originalBackup": "raw/originals/run.attempt1.png",
+  "finalGate": "export/engine-gate.json"
+}

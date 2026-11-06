@@ -1,0 +1,17 @@
+{
+  "clip": "attack",
+  "dir": "SE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 17:57:44 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame ATTACK SE-DIRECTION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FOUR equal SQUARE columns by TWO rows, 8 full-body frames, row-major left-to-right top-to-bottom, sheet aspect2:1. In every cell face SOUTHEAST / diagonally DOWN-RIGHT, three-quarter FRONT in the same slightly overhead orthographic isometric three-quarter FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x125.68. All8 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. EIGHT-frame RIGHT straight punch toward facing SE/down-right.1 low guard;2 chamber right near fist at ribs/left guards;3 torso windup;4 right gauntlet extends in foreshortened punch DOWN-RIGHT toward viewer;5 hit hold;6 retract;7 unwind;8 originalguard. Natural shoulder/elbow articulation with full-sized sleeves, stable boots shallow lunge, no body shrinking. Opposite gauntlet guards chest. Whole extendedfist stays within owncell, no extraarms. Exact masterSE costume/face/camera, bothfronttabard sides, sashfrontknot2tails. No E side-profile/frontS/back view. Pose can fold/raisehands naturally WITHOUT changing anatomical scale. Pure flat opaque#FF00FF, removeallguides/borders/ticks/text; no floor/shadows/VFX/blur. All8 completefigures inowncells.",
+  "references": ["../../the-tu-continuous-v1/reference/SE.master4x.png", "templates/attack.template.png"],
+  "selectedOutput": "sheets/attack.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 17:59:43 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-8ebb1951-f182-40da-9eac-4f3da1a3564f.png",
+  "originalBackup": "raw/originals/attack.attempt1.png",
+  "finalGate": "export/engine-gate.json"
+}

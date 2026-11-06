@@ -1,0 +1,33 @@
+{
+  "source": "../reference/S.master.png",
+  "method": "Alpha>=128 bottom two-row centroid in manually identified boot ROIs; projected perpendicular to public facingGroundVector",
+  "boxes": {
+    "R": {
+      "x0": 96,
+      "x1": 121,
+      "y0": 209,
+      "y1": 232
+    },
+    "L": {
+      "x0": 134,
+      "x1": 158,
+      "y0": 209,
+      "y1": 232
+    }
+  },
+  "R": {
+    "x": 103.78260869565217,
+    "y": 230.43478260869566
+  },
+  "L": {
+    "x": 147.1904761904762,
+    "y": 230.38095238095238
+  },
+  "axis": {
+    "x": 0,
+    "y": 1
+  },
+  "stanceWidth": 43.40786749482403,
+  "runStance": 0.3333333333333333,
+  "walkStance": 0.5
+}

@@ -1,0 +1,217 @@
+{
+  "method": "One frozen character-wide normalized-cell scale from lower median of all 30 upright idle/walk/run samples; each sheet differs only by pixel DPI. Raw height recovered as contract.pre.height / sheet.scale. No per-frame scaling.",
+  "masterHeight": 217,
+  "normalizedReferenceHeight": 0.9155107187894073,
+  "uprightSamples": [
+    {
+      "clip": "idle",
+      "cell0": 0,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 1,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 2,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 3,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 4,
+      "rawHeight": 335.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.925414364640884
+    },
+    {
+      "clip": "idle",
+      "cell0": 5,
+      "rawHeight": 335.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.925414364640884
+    },
+    {
+      "clip": "idle",
+      "cell0": 6,
+      "rawHeight": 335.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.925414364640884
+    },
+    {
+      "clip": "idle",
+      "cell0": 7,
+      "rawHeight": 335.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.925414364640884
+    },
+    {
+      "clip": "idle",
+      "cell0": 8,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 9,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 10,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "idle",
+      "cell0": 11,
+      "rawHeight": 334.0,
+      "rawCellHeight": 362.0,
+      "normalizedHeightFraction": 0.9226519337016574
+    },
+    {
+      "clip": "walk",
+      "cell0": 0,
+      "rawHeight": 403.00000000000006,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9086809470124014
+    },
+    {
+      "clip": "walk",
+      "cell0": 1,
+      "rawHeight": 405.0,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9131905298759865
+    },
+    {
+      "clip": "walk",
+      "cell0": 2,
+      "rawHeight": 405.0,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9131905298759865
+    },
+    {
+      "clip": "walk",
+      "cell0": 3,
+      "rawHeight": 404.0,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.910935738444194
+    },
+    {
+      "clip": "walk",
+      "cell0": 4,
+      "rawHeight": 401.0,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9041713641488163
+    },
+    {
+      "clip": "walk",
+      "cell0": 5,
+      "rawHeight": 403.00000000000006,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9086809470124014
+    },
+    {
+      "clip": "walk",
+      "cell0": 6,
+      "rawHeight": 404.0,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.910935738444194
+    },
+    {
+      "clip": "walk",
+      "cell0": 7,
+      "rawHeight": 403.00000000000006,
+      "rawCellHeight": 443.5,
+      "normalizedHeightFraction": 0.9086809470124014
+    },
+    {
+      "clip": "run",
+      "cell0": 0,
+      "rawHeight": 363.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9155107187894073
+    },
+    {
+      "clip": "run",
+      "cell0": 1,
+      "rawHeight": 363.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9155107187894073
+    },
+    {
+      "clip": "run",
+      "cell0": 2,
+      "rawHeight": 363.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9155107187894073
+    },
+    {
+      "clip": "run",
+      "cell0": 3,
+      "rawHeight": 354.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.89281210592686
+    },
+    {
+      "clip": "run",
+      "cell0": 4,
+      "rawHeight": 354.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.89281210592686
+    },
+    {
+      "clip": "run",
+      "cell0": 5,
+      "rawHeight": 363.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9155107187894073
+    },
+    {
+      "clip": "run",
+      "cell0": 6,
+      "rawHeight": 364.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9180327868852459
+    },
+    {
+      "clip": "run",
+      "cell0": 7,
+      "rawHeight": 363.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9155107187894073
+    },
+    {
+      "clip": "run",
+      "cell0": 8,
+      "rawHeight": 361.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9104665825977302
+    },
+    {
+      "clip": "run",
+      "cell0": 9,
+      "rawHeight": 360.0,
+      "rawCellHeight": 396.5,
+      "normalizedHeightFraction": 0.9079445145018915
+    }
+  ]
+}
