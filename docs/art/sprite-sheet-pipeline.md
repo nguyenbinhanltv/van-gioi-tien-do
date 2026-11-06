@@ -120,6 +120,13 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 
 ## Hạn chế hiện tại
 
-- Mỗi hướng một trang atlas (xuất nhiều trang sẽ báo lỗi rõ ràng); đủ cho ≈ 130 khung.
+- Mỗi hướng một trang atlas (xuất nhiều trang sẽ báo lỗi rõ ràng); sức chứa phụ thuộc kích thước trim, không phải giới hạn số khung cố định. Không tự giảm kích thước khung để vừa atlas.
 - Bóng chân và cổng trượt chân hiện hiểu hướng E (mặt về phía +x); hướng khác cần chỉnh khi bắt đầu vẽ hướng đó.
 - Palette lock và độ giống master là cổng thô (ngưỡng mặc định, cần chỉnh khi có dữ liệu thật). Ngưỡng là giá trị mặc định chưa duyệt (ghi trong OPEN-ITEMS §12).
+
+### Kiểm chứng MaxRects (2026-11-07)
+
+- Thay shelf bằng MaxRects best-short-side-fit, không xoay; chọn theo cạnh dư ngắn, cạnh dư dài, y, x, rồi thứ tự chiều cao/tên ổn định. Tách mọi vùng trống giao với hình vừa đặt và bỏ vùng bị chứa. Giữ trim, padding, extrude, PMA và hiệu chuẩn đầu vào; không có bước co ảnh để vừa atlas.
+- Dữ liệu thật Thể tu E của worker 18: **15 clip / 156 khung**, tổng diện tích trim có biên **3.906.947 px² (93,15 % trang)**. Shelf cần hai trang; MaxRects xuất **một trang 2048×2048**, không cần phương án dự phòng nhiều trang hoặc tách armature. Fixture kích thước nằm tại `tools/sprite/test/the-tu-E-trims.json`; test buộc giữ một trang cho toàn bộ 156 khung.
+- Chạy lại project thật ghi đủ bốn tệp xuất, không lỗi QA cứng; 24 phát hiện mềm chưa ghi backlog vẫn làm lệnh build trả lỗi. Đây là việc chất lượng asset của worker art, không được bỏ qua cổng QA khi đổi thuật toán xếp.
+- Tương thích Đan/Phù tu E: skeleton và contract giống từng byte; tọa độ atlas và PNG thay đổi theo bố trí mới. Đủ 156 region giữ nguyên kích thước và pixel PMA. Giữ thứ tự region/display cũ theo chiều cao/tên để tránh đổi chỉ số display không cần thiết. Kết quả QA trước/sau giống nhau; đầu vào trên main vẫn có lỗi QA, không tuyên bố asset đạt chỉ vì xuất được atlas.
