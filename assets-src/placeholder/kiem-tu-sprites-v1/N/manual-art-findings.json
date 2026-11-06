@@ -1,0 +1,44 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "kiem-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "N",
+      "cell": -1,
+      "kind": "leg_reversal",
+      "severity": "warn",
+      "status": "open",
+      "note": "Long back robe obscures thighs; boot alternation reads subtly and needs future gait polish."
+    },
+    {
+      "clip": "walk",
+      "dir": "N",
+      "cell": -1,
+      "kind": "contact_phase",
+      "severity": "info",
+      "status": "open",
+      "note": "Directional foot slide UNMEASURED pending source-ground registration and direction-correct vertical keep QA guides."
+    },
+    {
+      "clip": "hit",
+      "dir": "N",
+      "cell": 2,
+      "kind": "other",
+      "severity": "warn",
+      "status": "open",
+      "note": "Recoil frame measures195px, outside upright band; free-pose soft warning retained without per-frame scaling."
+    },
+    {
+      "clip": "die",
+      "dir": "N",
+      "cell": 5,
+      "kind": "redraw_drift",
+      "severity": "warn",
+      "status": "open",
+      "note": "Side fall exposes a small cheek sliver compared with the full-back standing master; costume and right-hand sword retained."
+    }
+  ]
+}

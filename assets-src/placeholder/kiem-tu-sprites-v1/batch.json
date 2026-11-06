@@ -1,4 +1,4 @@
 {
   "character": "kiem-tu",
-  "projects": ["E/project.json"]
+  "projects": ["E/project.json", "SE/project.json", "S/project.json", "NE/project.json", "N/project.json"]
 }

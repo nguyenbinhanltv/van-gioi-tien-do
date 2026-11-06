@@ -1,0 +1,1251 @@
+[
+  {
+    "clip": "idle",
+    "heights": [209, 209, 209, 209, 207, 207, 207, 208],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "meditate",
+    "heights": [160, 160, 161, 160, 157, 157, 159, 160],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 40.8,
+          "limit": 0,
+          "message": "161 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 44.8,
+          "limit": 0,
+          "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 44.8,
+          "limit": 0,
+          "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 42.8,
+          "limit": 0,
+          "message": "159 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 40.8,
+            "limit": 0,
+            "message": "161 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 44.8,
+            "limit": 0,
+            "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 44.8,
+            "limit": 0,
+            "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 42.8,
+            "limit": 0,
+            "message": "159 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 8
+      }
+    }
+  },
+  {
+    "clip": "walk",
+    "heights": [208, 208, 208, 208, 208, 208, 207, 207, 207, 207, 208, 207],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "footSlide",
+          "severity": "info",
+          "clip": "walk",
+          "measurement": "unmeasured",
+          "message": "Foot slide UNMEASURED: Pre-#123 generation guides normalize each cell to the lowest sole. Source registration for direction-correct vertical: keep and two-foot ground probes has not been validated; directional foot slide is explicitly UNMEASURED. Original generation templates and raw sheets are retained; no numeric slide acceptance."
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "info",
+            "clip": "walk",
+            "measurement": "unmeasured",
+            "message": "Foot slide UNMEASURED: Pre-#123 generation guides normalize each cell to the lowest sole. Source registration for direction-correct vertical: keep and two-foot ground probes has not been validated; directional foot slide is explicitly UNMEASURED. Original generation templates and raw sheets are retained; no numeric slide acceptance."
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 1
+      }
+    }
+  },
+  {
+    "clip": "run",
+    "heights": [209, 209, 208, 208, 207, 209, 209, 207, 207, 206, 206, 210],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "footSlide",
+          "severity": "info",
+          "clip": "run",
+          "measurement": "unmeasured",
+          "message": "Foot slide UNMEASURED: Pre-#123 generation guides normalize each cell to the lowest sole. Source registration for direction-correct vertical: keep and two-foot ground probes has not been validated; directional foot slide is explicitly UNMEASURED. Original generation templates and raw sheets are retained; no numeric slide acceptance."
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "info",
+            "clip": "run",
+            "measurement": "unmeasured",
+            "message": "Foot slide UNMEASURED: Pre-#123 generation guides normalize each cell to the lowest sole. Source registration for direction-correct vertical: keep and two-foot ground probes has not been validated; directional foot slide is explicitly UNMEASURED. Original generation templates and raw sheets are retained; no numeric slide acceptance."
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 1
+      }
+    }
+  },
+  {
+    "clip": "dash",
+    "heights": [209, 208, 192, 178, 205, 208],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "message": "192 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 23.8,
+          "limit": 0,
+          "message": "178 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 9.8,
+            "limit": 0,
+            "message": "192 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 23.8,
+            "limit": 0,
+            "message": "178 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 2
+      }
+    }
+  },
+  {
+    "clip": "sword_fly",
+    "heights": [206, 200, 197, 197, 201, 202, 205, 205],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "sword_fly",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 1.8,
+          "limit": 0,
+          "message": "200 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "sword_fly",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "197 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "sword_fly",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "197 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "sword_fly",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "201 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "sword_fly",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 1.8,
+            "limit": 0,
+            "message": "200 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "sword_fly",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "197 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "sword_fly",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "197 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "sword_fly",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 0.8,
+            "limit": 0,
+            "message": "201 px outside 201.8..214.2 (declared exception: airborne on sword; same physical scale from standing control)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 4
+      }
+    }
+  },
+  {
+    "clip": "attack",
+    "heights": [208, 204, 202, 199, 194, 197, 205, 208],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: launch lunge)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: contact lunge)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "197 px outside 201.8..214.2 (declared exception: follow-through lunge)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "199 px outside 201.8..214.2 (declared exception: launch lunge)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "194 px outside 201.8..214.2 (declared exception: contact lunge)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "197 px outside 201.8..214.2 (declared exception: follow-through lunge)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 3
+      }
+    }
+  },
+  {
+    "clip": "attack_2",
+    "heights": [213, 209, 204, 223, 224, 207, 206, 208],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 8.8,
+          "limit": 0,
+          "message": "223 px outside 201.8..214.2 (declared exception: rising contact)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "message": "224 px outside 201.8..214.2 (declared exception: raised sword follow-through)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack_2",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 8.8,
+            "limit": 0,
+            "message": "223 px outside 201.8..214.2 (declared exception: rising contact)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack_2",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 9.8,
+            "limit": 0,
+            "message": "224 px outside 201.8..214.2 (declared exception: raised sword follow-through)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 2
+      }
+    }
+  },
+  {
+    "clip": "attack_3",
+    "heights": [208, 207, 217, 215, 203, 200, 207, 208],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "217 px outside 201.8..214.2 (declared exception: overhead sword anticipation)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "215 px outside 201.8..214.2 (declared exception: launch lunge)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 1.8,
+          "limit": 0,
+          "message": "200 px outside 201.8..214.2 (declared exception: follow-through lunge)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack_3",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "217 px outside 201.8..214.2 (declared exception: overhead sword anticipation)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack_3",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 0.8,
+            "limit": 0,
+            "message": "215 px outside 201.8..214.2 (declared exception: launch lunge)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "attack_3",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 1.8,
+            "limit": 0,
+            "message": "200 px outside 201.8..214.2 (declared exception: follow-through lunge)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 3
+      }
+    }
+  },
+  {
+    "clip": "cast",
+    "heights": [208, 208, 208, 208, 208, 208, 208, 208],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "channel",
+    "heights": [209, 209, 209, 209, 209, 209, 208, 208],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "hit",
+    "heights": [208, 204, 195, 208],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "hit",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "height 195 px outside the upright band and no pose exception declared"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "hit",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 6.8,
+            "limit": 0,
+            "message": "height 195 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 1,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "die",
+    "heights": [208, 195, 172, 160, 139, 97, 85, 69],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: knees buckle)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 29.8,
+          "limit": 0,
+          "message": "172 px outside 201.8..214.2 (declared exception: one-knee collapse)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: kneeling collapse)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: side fall)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 104.8,
+          "limit": 0,
+          "message": "97 px outside 201.8..214.2 (declared exception: side-prone landing)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 116.8,
+          "limit": 0,
+          "message": "85 px outside 201.8..214.2 (declared exception: side-prone settling)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 132.8,
+          "limit": 0,
+          "message": "69 px outside 201.8..214.2 (declared exception: side-prone hold)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 6.8,
+            "limit": 0,
+            "message": "195 px outside 201.8..214.2 (declared exception: knees buckle)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 29.8,
+            "limit": 0,
+            "message": "172 px outside 201.8..214.2 (declared exception: one-knee collapse)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: kneeling collapse)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 62.8,
+            "limit": 0,
+            "message": "139 px outside 201.8..214.2 (declared exception: side fall)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 104.8,
+            "limit": 0,
+            "message": "97 px outside 201.8..214.2 (declared exception: side-prone landing)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 116.8,
+            "limit": 0,
+            "message": "85 px outside 201.8..214.2 (declared exception: side-prone settling)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "die",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 132.8,
+            "limit": 0,
+            "message": "69 px outside 201.8..214.2 (declared exception: side-prone hold)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 7
+      }
+    }
+  },
+  {
+    "clip": "tribulation",
+    "heights": [213, 194, 172, 146, 131, 145, 134, 126, 158, 186, 207, 208],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: brace)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 29.8,
+          "limit": 0,
+          "message": "172 px outside 201.8..214.2 (declared exception: kneel)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 55.8,
+          "limit": 0,
+          "message": "146 px outside 201.8..214.2 (declared exception: defensive kneel)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 70.8,
+          "limit": 0,
+          "message": "131 px outside 201.8..214.2 (declared exception: low defensive kneel)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 56.8,
+          "limit": 0,
+          "message": "145 px outside 201.8..214.2 (declared exception: rally from kneel)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 67.8,
+          "limit": 0,
+          "message": "134 px outside 201.8..214.2 (declared exception: hunch against impact)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 75.8,
+          "limit": 0,
+          "message": "126 px outside 201.8..214.2 (declared exception: hunch against impact)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 43.8,
+          "limit": 0,
+          "message": "158 px outside 201.8..214.2 (declared exception: rise from kneel)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 15.8,
+          "limit": 0,
+          "message": "186 px outside 201.8..214.2 (declared exception: push upright)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "194 px outside 201.8..214.2 (declared exception: brace)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 29.8,
+            "limit": 0,
+            "message": "172 px outside 201.8..214.2 (declared exception: kneel)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 55.8,
+            "limit": 0,
+            "message": "146 px outside 201.8..214.2 (declared exception: defensive kneel)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 70.8,
+            "limit": 0,
+            "message": "131 px outside 201.8..214.2 (declared exception: low defensive kneel)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 56.8,
+            "limit": 0,
+            "message": "145 px outside 201.8..214.2 (declared exception: rally from kneel)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 67.8,
+            "limit": 0,
+            "message": "134 px outside 201.8..214.2 (declared exception: hunch against impact)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 75.8,
+            "limit": 0,
+            "message": "126 px outside 201.8..214.2 (declared exception: hunch against impact)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 8,
+            "metric": "height_excess_px",
+            "value": 43.8,
+            "limit": 0,
+            "message": "158 px outside 201.8..214.2 (declared exception: rise from kneel)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "tribulation",
+            "frame": 9,
+            "metric": "height_excess_px",
+            "value": 15.8,
+            "limit": 0,
+            "message": "186 px outside 201.8..214.2 (declared exception: push upright)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 9
+      }
+    }
+  },
+  {
+    "clip": "emote",
+    "heights": [208, 208, 208, 208, 208, 208, 208, 208],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  }
+]

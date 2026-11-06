@@ -1,0 +1,361 @@
+[
+  {
+    "clip": "idle",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 122,
+      "right": 340,
+      "top": 26,
+      "bottom": 396,
+      "height": 370,
+      "width": 218,
+      "pelvisX": 210.39047129643225
+    },
+    "calibration": {
+      "scale": 0.5621621621621622,
+      "targetHeight": 208,
+      "referenceHeight": 370,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "meditate",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 122,
+      "right": 344,
+      "top": 25,
+      "bottom": 391,
+      "height": 366,
+      "width": 222,
+      "pelvisX": 209.21160285339934
+    },
+    "calibration": {
+      "scale": 0.5683060109289617,
+      "targetHeight": 208,
+      "referenceHeight": 366,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "walk",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6645367412140575,
+      "targetHeight": 208,
+      "referenceHeight": 313,
+      "referenceFrames": 12
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "run",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6709677419354839,
+      "targetHeight": 208,
+      "referenceHeight": 310,
+      "referenceFrames": 12
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "dash",
+    "grid": {
+      "cols": 4,
+      "rows": 2,
+      "total": 8,
+      "control1based": 7
+    },
+    "control": {
+      "left": 136,
+      "right": 364,
+      "top": 33,
+      "bottom": 415,
+      "height": 382,
+      "width": 228,
+      "pelvisX": 224.46318144833197
+    },
+    "calibration": {
+      "scale": 0.5445026178010471,
+      "targetHeight": 208,
+      "referenceHeight": 382,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "sword_fly",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 130,
+      "right": 344,
+      "top": 20,
+      "bottom": 394,
+      "height": 374,
+      "width": 214,
+      "pelvisX": 211.4969512195122
+    },
+    "calibration": {
+      "scale": 0.5561497326203209,
+      "targetHeight": 208,
+      "referenceHeight": 374,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "attack",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 134,
+      "right": 333,
+      "top": 28,
+      "bottom": 378,
+      "height": 350,
+      "width": 199,
+      "pelvisX": 210.34778613199666
+    },
+    "calibration": {
+      "scale": 0.5942857142857143,
+      "targetHeight": 208,
+      "referenceHeight": 350,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "attack_2",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 126,
+      "right": 336,
+      "top": 31,
+      "bottom": 391,
+      "height": 360,
+      "width": 210,
+      "pelvisX": 208.9906425452277
+    },
+    "calibration": {
+      "scale": 0.5777777777777777,
+      "targetHeight": 208,
+      "referenceHeight": 360,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "attack_3",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 130,
+      "right": 333,
+      "top": 30,
+      "bottom": 381,
+      "height": 351,
+      "width": 203,
+      "pelvisX": 209.34674720430985
+    },
+    "calibration": {
+      "scale": 0.5925925925925926,
+      "targetHeight": 208,
+      "referenceHeight": 351,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "cast",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 128,
+      "right": 339,
+      "top": 26,
+      "bottom": 382,
+      "height": 356,
+      "width": 211,
+      "pelvisX": 208.8384560400286
+    },
+    "calibration": {
+      "scale": 0.5842696629213483,
+      "targetHeight": 208,
+      "referenceHeight": 356,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "channel",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 143,
+      "right": 338,
+      "top": 27,
+      "bottom": 397,
+      "height": 370,
+      "width": 195,
+      "pelvisX": 220.06157131417385
+    },
+    "calibration": {
+      "scale": 0.5621621621621622,
+      "targetHeight": 208,
+      "referenceHeight": 370,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "hit",
+    "grid": {
+      "cols": 3,
+      "rows": 2,
+      "total": 6,
+      "control1based": 5
+    },
+    "control": {
+      "left": 158,
+      "right": 417,
+      "top": 32,
+      "bottom": 468,
+      "height": 436,
+      "width": 259,
+      "pelvisX": 259.6492062671286
+    },
+    "calibration": {
+      "scale": 0.47706422018348627,
+      "targetHeight": 208,
+      "referenceHeight": 436,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "die",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 129,
+      "right": 339,
+      "top": 26,
+      "bottom": 392,
+      "height": 366,
+      "width": 210,
+      "pelvisX": 210.33259945338597
+    },
+    "calibration": {
+      "scale": 0.5683060109289617,
+      "targetHeight": 208,
+      "referenceHeight": 366,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "tribulation",
+    "grid": {
+      "cols": 5,
+      "rows": 3,
+      "total": 15,
+      "control1based": 13
+    },
+    "control": {
+      "left": 97,
+      "right": 265,
+      "top": 19,
+      "bottom": 288,
+      "height": 269,
+      "width": 168,
+      "pelvisX": 161.54997369805366
+    },
+    "calibration": {
+      "scale": 0.7732342007434945,
+      "targetHeight": 208,
+      "referenceHeight": 269,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  },
+  {
+    "clip": "emote",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 138,
+      "right": 337,
+      "top": 25,
+      "bottom": 395,
+      "height": 370,
+      "width": 199,
+      "pelvisX": 212.4340798891711
+    },
+    "calibration": {
+      "scale": 0.5621621621621622,
+      "targetHeight": 208,
+      "referenceHeight": 370,
+      "referenceFrames": 1
+    },
+    "note": "One fixed scale from unused standing control or original locomotion median; no per-frame scaling."
+  }
+]
