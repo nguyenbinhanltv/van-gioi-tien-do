@@ -22,8 +22,14 @@ projection use that same axis; foot lift remains vertically upward. Ground speed
 are unchanged. Project builds pass their direction to QA automatically; standalone `QaClip`
 callers should set `direction` (default E).
 
+For non-E templates, measure the full stance width from the master and pass `stanceWidth` in
+texture pixels (`sprite:template --stance-width <px>`). R/L lanes are offset by +width/2 and
+-width/2 along the perpendicular `(-axis.y, axis.x)`. Zero retains the old centre-line layout;
+it does not infer anatomical foot separation. Keep the E default width zero for its legacy detector.
+
 Regenerate old non-E templates with the correct direction. Preserve the template cell's ground
-reference with `vertical: "keep"` for clips with y stride; aligning the lowest pixel to a fixed row
+reference with `vertical: "keep"` for clips with y stride; `runProject` rejects measured non-E
+clips with template cells unless this is explicit. Aligning the lowest pixel to a fixed row
 each frame removes the ground-plane motion. Non-E QA finds sole-bottom runs near each ghost in
 2D, reports missing/off-ghost contacts, and projects consecutive planted displacement onto the
 ground axis. Fully occluded feet still require art review. Existing E templates and the E sole

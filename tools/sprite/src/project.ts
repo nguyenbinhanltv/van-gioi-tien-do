@@ -12,7 +12,7 @@ import { decodePng, encodePng, type Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { alignFrame, calibrate, type AlignedFrame, type Calibration, type FrameRecord } from './align.js';
 import { buildArmature, type ClipInput } from './export.js';
-import { groundPxPerFrame, groundSpeedPxS } from './gait.js';
+import { facingGroundVector, groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
@@ -184,9 +184,24 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
 
   // 3. align (translation only) + records
   const aligned = sliced.map((s) => {
+    const manifest: TemplateManifest | null = s.clip.manifest
+      ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
+      : null;
+    const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
+    if (
+      facingGroundVector(project.direction).y !== 0 &&
+      manifest?.cells.length &&
+      speed !== undefined &&
+      s.clip.vertical !== 'keep'
+    )
+      throw new Error(
+        `clip '${s.clip.name}' (${project.direction}): measured ground travel has a y component; set vertical: "keep" to preserve it`,
+      );
     const calibration = sheetCalibration(s);
     return {
       ...s,
+      manifest,
+      speed,
       calibration,
       aligned: s.frames.map((f, i): AlignedFrame | null =>
         alignFrame(f.image, {
@@ -224,10 +239,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
 
   // 5. QA
   const qaClips: QaClip[] = aligned.map((s) => {
-    const manifest: TemplateManifest | null = s.clip.manifest
-      ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
-      : null;
-    const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
+    const { manifest, speed } = s;
     const cells: readonly CellSpec[] | undefined =
       manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {

@@ -107,6 +107,8 @@ export function buildTemplate(opts: TemplateOptions): Template {
 export interface LocomotionOptions {
   /** Ground facing in y-down sprite space. Default E for existing templates. */
   readonly direction?: Direction;
+  /** Full distance between stance lanes perpendicular to the facing, texture px. Default 0 (legacy). */
+  readonly stanceWidth?: number;
   /** Half stride: how far (px @2x) a foot travels from the contact point to the neutral line. */
   readonly halfStride: number;
   /** Peak sole height (px @2x) of the swinging foot. */
@@ -150,12 +152,14 @@ export const STEP_TAGS = ['contact', 'down', 'passing', 'toeoff', 'up', 'precont
 export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptions): CellSpec[] {
   const direction = opts.direction ?? 'E';
   const axis = facingGroundVector(direction);
-  const project = (f: NonNullable<CellSpec['nearFoot']>) =>
-    direction === 'E'
+  const width = opts.stanceWidth ?? 0;
+  if (!Number.isFinite(width) || width < 0) throw new RangeError('stanceWidth must be finite and nonnegative');
+  const project = (f: NonNullable<CellSpec['nearFoot']>, side: 1 | -1) =>
+    direction === 'E' && width === 0
       ? f
       : {
-          x: g.centerX + (f.x - g.centerX) * axis.x,
-          y: g.ground + (f.x - g.centerX) * axis.y + (f.y - g.ground),
+          x: g.centerX + (f.x - g.centerX) * axis.x - (axis.y * side * width) / 2,
+          y: g.ground + (f.x - g.centerX) * axis.y + (f.y - g.ground) + (axis.x * side * width) / 2,
           planted: f.planted,
         };
   const first = opts.first ?? 'R';
@@ -183,8 +187,8 @@ export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptio
     const tag = STEP_TAGS[Math.floor(((i % half) * STEP_TAGS.length) / half)] ?? 'contact';
     return {
       leading: frontIsNear ? 'R' : 'L',
-      nearFoot: project(near),
-      farFoot: project(far),
+      nearFoot: project(near, 1),
+      farFoot: project(far, -1),
       tag: `${step === 0 ? first : first === 'R' ? 'L' : 'R'}_${tag}`,
     } satisfies CellSpec;
   });

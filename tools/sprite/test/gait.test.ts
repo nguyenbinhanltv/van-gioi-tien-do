@@ -100,6 +100,42 @@ describe('template ghosts agree with the foot-slide gate', () => {
 });
 
 describe('directional ground travel', () => {
+  for (const direction of ['S', 'N'] as const) {
+    it(`${direction}: separated stance lanes attribute a stationary near foot only to R`, () => {
+      const speed = groundSpeedPxS('run', direction)!;
+      const duration = tableDuration('run');
+      const cells = locomotionCells(12, guides, {
+        direction,
+        stanceWidth: 40,
+        halfStride: halfStrideFor(speed, duration),
+        lift: 14,
+      });
+      expect(Math.abs(cells[0]!.nearFoot!.x - cells[0]!.farFoot!.x)).toBe(40);
+      const clip: QaClip = {
+        name: 'run',
+        direction,
+        loop: true,
+        kind: 'upright',
+        expectedFrames: 12,
+        cells,
+        frames: cells.map(footFrame),
+        groundPxPerFrame: groundPxPerFrame(speed, duration, 12),
+      };
+      expect(checkFootSlide(clip, { masterHeight: 208, master, guides })).toEqual([]);
+      const frames = cells.map((c, i) => footFrame(i === 3 ? { ...c, nearFoot: cells[2]!.nearFoot } : c));
+      const findings = checkFootSlide({ ...clip, frames }, { masterHeight: 208, master, guides });
+      expect(findings.some((f) => f.metric === 'slide_ground_px_per_frame_R')).toBe(true);
+      expect(findings.some((f) => f.metric?.endsWith('_L'))).toBe(false);
+    });
+  }
+  it('keeps zero-width E templates byte-identical and rejects invalid stance widths', () => {
+    const opts = { halfStride: 30, lift: 14 };
+    expect(JSON.stringify(locomotionCells(12, guides, { ...opts, stanceWidth: 0 }))).toBe(
+      JSON.stringify(locomotionCells(12, guides, opts)),
+    );
+    for (const stanceWidth of [-1, NaN, Infinity])
+      expect(() => locomotionCells(12, guides, { ...opts, stanceWidth })).toThrow(/stanceWidth/);
+  });
   const cases = [
     ['E', 1, 0],
     ['SE', 2, 1],

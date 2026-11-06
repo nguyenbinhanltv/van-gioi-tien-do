@@ -3,7 +3,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { encodePng } from '@vgtd/rig';
-import { runProject, toPremultiplied, type Project } from '../src/index.js';
+import {
+  runProject,
+  toPremultiplied,
+  locomotionCells,
+  guidesFromMaster,
+  measureFigure,
+  type Project,
+} from '../src/index.js';
 import { makeMaster, makeSheet } from './helpers.js';
 
 function setup() {
@@ -66,6 +73,31 @@ function setup() {
 }
 
 describe('runProject (synthetic end to end)', () => {
+  for (const direction of ['SE', 'S', 'NE', 'N'] as const) {
+    it(`${direction}: rejects default/explicit sole alignment for measured y travel and accepts keep`, () => {
+      const { dir, project } = setup();
+      const guides = guidesFromMaster(measureFigure(makeMaster(208, 128))!);
+      writeFileSync(
+        join(dir, 'run.template.json'),
+        JSON.stringify({
+          cells: locomotionCells(4, guides, {
+            direction,
+            halfStride: 20,
+            lift: 10,
+            stanceWidth: 36,
+          }),
+        }),
+      );
+      const clips = project.clips.map((c) => (c.name === 'run' ? { ...c, manifest: 'run.template.json' } : c));
+      const p = { ...project, direction, clips };
+      expect(() => runProject(p, dir)).toThrow(/vertical: "keep"/);
+      expect(() => runProject({ ...p, clips: clips.map((c) => ({ ...c, vertical: 'sole' })) }, dir)).toThrow(
+        /vertical: "keep"/,
+      );
+      expect(() => runProject({ ...p, clips: clips.map((c) => ({ ...c, vertical: 'keep' })) }, dir)).not.toThrow();
+    });
+  }
+
   it('slices, calibrates per sheet, aligns, packs, exports and gates', () => {
     const { dir, project } = setup();
     const res = runProject(project, dir);
