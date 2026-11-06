@@ -43,7 +43,7 @@ function parse(argv: string[]) {
     character: 'kiem-tu' as CharacterId,
     dirs: null as string[] | null,
     assembled: '',
-    gait: 'free',
+    gait: '',
     stem: 'kiemtu',
     autoskin: false,
     band: undefined as number | undefined,
@@ -115,7 +115,9 @@ for (const [dir, d] of data.byDirection) {
     : d.rig;
   const clips = authorClassSet(opts.character, rig, {
     detail: true,
-    gait: GAIT_PROFILES[opts.gait as keyof typeof GAIT_PROFILES] ?? GAIT_PROFILES.free,
+    gait:
+      GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
+      GAIT_PROFILES.free,
   });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')

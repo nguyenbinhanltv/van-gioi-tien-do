@@ -9,7 +9,9 @@
  * --keyposes <dir> [--iou 0.85]  fit run/walk/... clips to reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
  * .landmarks.json), print fit error + silhouette IoU per key and write keypose_<clip>_compare.png sheets.
  * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
- * --gait free|robe|robe-mid  gait of run / walk / dash (default robe: short quick steps, shallow knee, long robe).
+ * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
+ * shallow knee, low foot lift, for a long robe; free = the original gait). The cadence is baked into the clip: the authored
+ * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -60,6 +62,8 @@ const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
 const stem = opt('stem', 'kiemtu');
+// robe: half stride, two step pairs inside the table-length clip at the real ground speed (cadence baked in, no
+// runtime timeScale); `free` is the original gait
 const gaitName = opt('gait', 'robe') as GaitName;
 if (!(gaitName in GAIT_PROFILES))
   throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
@@ -275,6 +279,15 @@ writeFileSync(
         premultipliedAlpha: true,
         page: [res.atlas.data.width, res.atlas.data.height],
       },
+      gait: gaitName,
+      // runtime rule for locomotion clips: timeScale = movement speed (px/s) / authoredSpeedPxS
+      clips: clips.map((c) => ({
+        name: c.name,
+        frames: c.frames,
+        loop: c.loop,
+        seconds: Math.round((c.frames / 30) * 1000) / 1000,
+        authoredSpeedPxS: c.motion?.speed ?? null,
+      })),
       nonPremultipliedPixels: st.nonPremultiplied,
       stats: st,
       used: res.used,
