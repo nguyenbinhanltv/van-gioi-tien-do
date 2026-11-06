@@ -51,6 +51,9 @@ for (const part of manifest.parts) {
   if (typeof part.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(part.id) || ids.has(part.id))
     throw new Error('Part IDs must be unique safe path segments');
   if (!Array.isArray(part.materials) || !part.materials.length) throw new Error(`${part.id}: provide materials`);
+  for (const region of part.materialRegions ?? [])
+    if (!part.materials.includes(region.material))
+      throw new Error(`${part.id}: materialRegions: undeclared material ${String(region.material)}`);
   ids.add(part.id);
 }
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -279,6 +282,10 @@ function processPart(part) {
         }
       if (hi >= lo) rows.push({ y, lo, hi });
     }
+    if (!rows.length)
+      throw new Error(
+        'contour registration needs opaque (alpha>=128) source paint; use registration: bounds for translucent pieces',
+      );
     for (let y = target.y0; y <= target.y1; y++) {
       let lo = 512,
         hi = -1;
@@ -387,11 +394,18 @@ function processPart(part) {
 }
 
 if (mode === 'check') {
+  if (!Array.isArray(manifest.restOrder) || !manifest.restOrder.length)
+    throw new Error('check requires a non-empty restOrder');
+  const unknown = manifest.restOrder.filter((id) => !ids.has(id));
+  if (unknown.length) throw new Error(`restOrder: unknown part ${unknown.map(String).join(', ')}`);
+  const active = new Set();
+  for (const id of manifest.restOrder) {
+    if (active.has(id)) throw new Error(`restOrder: duplicate part ${id}`);
+    active.add(id);
+  }
   const master2x = manifest.reference2x
     ? decodePNG(fs.readFileSync(path.resolve(root, manifest.reference2x)))
     : resizeArea(master, 256, 256);
-  if (!Array.isArray(manifest.restOrder) || !manifest.restOrder.length)
-    throw new Error('check requires a non-empty restOrder');
   const composite = new Image(256, 256);
   const images = new Map();
   for (const part of manifest.parts) {
@@ -446,15 +460,19 @@ if (mode === 'check') {
   for (const part of manifest.parts) maskFor(part).save(path.join(out, `${part.id}_mask4x.png`));
   console.log(`Wrote ${manifest.parts.length} part masks`);
 } else {
+  const skipped = [];
   const reports = manifest.parts
     .map((part) => {
       try {
-        return processPart(part);
+        const report = processPart(part);
+        if (!report) skipped.push(part.id);
+        return report;
       } catch (error) {
         throw new Error(`${part.id}: ${error.message}`, { cause: error });
       }
     })
     .filter(Boolean);
+  if (skipped.length) console.error(`Skipped parts with missing raw PNGs: ${skipped.join(', ')}`);
   const out = positional[1];
   if (out)
     fs.writeFileSync(

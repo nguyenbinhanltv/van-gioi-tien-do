@@ -31,10 +31,19 @@ function fixture(name, manifest, master, raw) {
   for (const [id, image] of Object.entries(raw)) image.save(join(source, 'raw/E', `${id}.png`));
   const save = () => writeFileSync(join(source, 'E.parts.json'), JSON.stringify(manifest));
   save();
-  const run = (mode, status = 0, output) => {
+  const run = (mode, status = 0, output, positionalManifest) => {
     const result = spawnSync(
       process.execPath,
-      [script, mode, ...(output ? [output] : []), '--source', source, '--master', join(source, 'master.png')],
+      [
+        script,
+        mode,
+        ...(output ? [output] : []),
+        ...(positionalManifest ? [positionalManifest] : []),
+        '--source',
+        source,
+        '--master',
+        join(source, 'master.png'),
+      ],
       { cwd: root, encoding: 'utf8', timeout: 15000 },
     );
     expect(result.status, result.stderr).toBe(status);
@@ -78,7 +87,7 @@ describe('Generic deterministic character part preparation', () => {
     f.run('process');
     expect(readFileSync(join(f.source, 'E/piece.png'))).toEqual(first);
     const masks = join(f.source, 'guides');
-    f.run('masks', 0, masks);
+    f.run('masks', 0, masks, join(f.source, 'E.parts.json'));
     expect(decodePNG(readFileSync(join(masks, 'piece_mask4x.png'))).width).toBe(512);
   });
 
@@ -185,6 +194,97 @@ describe('Generic deterministic character part preparation', () => {
     const failed = JSON.parse(readFileSync(report));
     expect(failed.pass).toBe(false);
     expect(failed.maxMissingPx).toBeGreaterThan(2);
+  });
+
+  it('reports translucent contour paint clearly and retains opacity with bounds registration', () => {
+    const master = new Image(512, 512),
+      raw = new Image(512, 512);
+    master.fill(190, 40, 30, 255);
+    rectangle(raw, 200, 200, 240, 320, [190, 40, 30, 100]);
+    const f = fixture(
+      'translucent',
+      {
+        paletteSamples: { cloth: [[100, 100, 110, 110]] },
+        parts: [
+          { id: 'ribbon', materials: ['cloth'], registration: 'contour', polygons: [polygon(100, 100, 120, 160)] },
+        ],
+        restOrder: ['ribbon'],
+      },
+      master,
+      { ribbon: raw },
+    );
+    expect(f.run('process', 1).stderr).toContain('ribbon: contour registration needs opaque (alpha>=128) source paint');
+    f.manifest.parts[0].registration = 'bounds';
+    f.save();
+    f.run('process');
+    expect(f.png('ribbon').getPixel(110, 120)[3]).toBe(100);
+  });
+
+  it('rejects unknown or duplicate rest IDs before reading or compositing outputs', () => {
+    const master = new Image(512, 512);
+    master.fill(70, 60, 50, 255);
+    const f = fixture(
+      'rest-ids',
+      {
+        paletteSamples: { cloth: [[0, 0, 10, 10]] },
+        parts: [{ id: 'piece', materials: ['cloth'], polygons: [polygon(100, 100, 120, 160)] }],
+        restOrder: ['typo', 'missing'],
+      },
+      master,
+      {},
+    );
+    expect(f.run('check', 1).stderr).toContain('restOrder: unknown part typo, missing');
+    f.manifest.restOrder = ['piece', 'piece'];
+    f.save();
+    expect(f.run('check', 1).stderr).toContain('restOrder: duplicate part piece');
+  });
+
+  it('rejects material regions not declared by the part', () => {
+    const master = new Image(512, 512);
+    master.fill(70, 60, 50, 255);
+    const f = fixture(
+      'region-material',
+      {
+        paletteSamples: { cloth: [[0, 0, 10, 10]] },
+        parts: [
+          {
+            id: 'cuff',
+            materials: ['cloth'],
+            polygons: [polygon(100, 100, 120, 160)],
+            materialRegions: [{ material: 'typo', polygon: polygon(100, 100, 110, 110) }],
+          },
+        ],
+        restOrder: ['cuff'],
+      },
+      master,
+      {},
+    );
+    expect(f.run('process', 1).stderr).toContain('cuff: materialRegions: undeclared material typo');
+  });
+
+  it('lists missing raw IDs on stderr while processing the available cohort', () => {
+    const master = new Image(512, 512),
+      raw = new Image(512, 512);
+    master.fill(70, 60, 50, 255);
+    rectangle(raw, 200, 200, 240, 320, [70, 60, 50, 255]);
+    const f = fixture(
+      'partial',
+      {
+        paletteSamples: { cloth: [[0, 0, 10, 10]] },
+        parts: ['ready', 'pending', 'later'].map((id) => ({
+          id,
+          materials: ['cloth'],
+          registration: 'bounds',
+          polygons: [polygon(100, 100, 120, 160)],
+        })),
+        restOrder: ['ready'],
+      },
+      master,
+      { ready: raw },
+    );
+    const result = f.run('process');
+    expect(result.stderr).toContain('Skipped parts with missing raw PNGs: pending, later');
+    expect(JSON.parse(result.stdout).map((part) => part.id)).toEqual(['ready']);
   });
 
   it('requires explicit inputs and rejects unsafe output IDs', () => {

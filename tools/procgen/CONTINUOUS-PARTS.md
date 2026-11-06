@@ -29,6 +29,9 @@ absolute paths are supported. `--source` is required. The manifest defaults to
 512x512 RGBA. Palette and geometry coordinates are in the corresponding 256x256 @2x
 canvas, x right/y down. `paletteSamples` rectangles have inclusive bounds.
 
+`masks <output-directory> <manifest-path>` also accepts the manifest as a third positional
+argument. `--manifest` takes precedence when both are supplied.
+
 ```json
 {
   "reference4x": "assets-src/placeholder/my-character/reference/E.register-master4x.png",
@@ -91,10 +94,13 @@ semitransparent edge RGB with the nearest opaque interior colour without changin
   pixels use the first declared material when explicit regions are supplied. A single
   material always uses that material. Otherwise a coarse cloth/skin/hair/blue/gold
   classifier applies; optional `materialAliases`, such as `{"skin":"gold"}`, remaps it.
+  Every region material must be declared in the part's `materials` list.
 - Guides combine `polygons` and rounded `segments` (`{ "a":[x,y], "b":[x,y], "r":5 }`).
   `registration: "contour"` fits continuous cross-sections; `"bounds"` keeps feature
   shape while fitting its bounds. Common structural arm/leg/torso/robe names default to
   contour fitting; other IDs default to bounds. Explicit registration is recommended.
+  Contour fitting needs source paint with alpha >=128; use bounds registration for
+  uniformly translucent pieces to retain their opacity.
 - `sourceQuarterTurns`: clockwise 0-3, default 0, before `sourceBounds4x` selection.
   Bounds are inclusive `[x0,y0,x1,y1]` on the rotated, normalized **512** canvas; they
   clear outside pixels without recentering.
@@ -105,13 +111,14 @@ semitransparent edge RGB with the nearest opaque interior colour without changin
 - `silhouetteMargin4x`: Euclidean master-alpha dilation radius at 512, default 3,
   range 0-16. Tighten it to reduce diagonal overshoot after downsampling.
 - `restOrder`: active rest displays, back to front; exclude inactive swaps/effects.
-  `check` requires this list. It compares the complete rest alpha composite with
+  `check` requires declared, unique IDs in this list. It compares the complete rest alpha composite with
   `reference2x`, or an area downsample of the registered master if omitted, and fails
   if either maximum boundary distance exceeds **2 texture px** at alpha >=128. A
   processing-margin change never relaxes this independent threshold. Distances larger
   than 20 px are capped at 20 in the report and still fail.
 
-`process` permits partial generation cohorts (missing raw files are skipped). `check`
+`process` permits partial generation cohorts (missing raw files are skipped and their IDs
+are listed on stderr). `check`
 requires every manifest part output. Its report validates rest registration, not mesh
 deformation, lighting, animation, or style. Keep generation prompts, tool/model/CLI/UTC
 and manual processing provenance with the source asset and the project's license log.
