@@ -138,7 +138,13 @@ Sau khi nhập, dựng lại báo cáo batch để trang review nhận các mụ
 ## Hạn chế hiện tại
 
 - MaxRects thử giữ một trang; nếu không vừa thì xuất thêm trang, mỗi trang không quá 2048². Không tự giảm kích thước hay bỏ khung để vừa atlas. Vẫn một armature và cùng timeline sự kiện; nhiều trang tăng bộ nhớ texture và có thể tăng draw call khi đổi texture.
-- Bóng chân và cổng trượt chân hiện hiểu hướng E (mặt về phía +x); hướng khác cần chỉnh khi bắt đầu vẽ hướng đó.
+- Bóng chân và cổng trượt chân dùng cùng véc-tơ mặt đất đẳng cự theo hướng, tọa độ ảnh y xuống: E sang phải, SE xuống/phải, S xuống, NE lên/phải, N lên. Véc-tơ lấy từ phép chiếu tile của `@vgtd/shared` qua `screenAxis` của `@vgtd/rig`, đổi dấu y tại ranh giới ảnh. Không đổi tốc độ bảng hay `viewGain`.
+- Sinh template CLI bằng `--direction <DIR>`; API `locomotionCells` nhận `direction` (mặc định E để giữ tương thích). Trục stride đi theo véc-tơ mặt đất đơn vị; nhấc chân vẫn theo chiều lên của ảnh. Cờ chân dẫn tính theo phase stride, không theo x của hình chiếu.
+- QA nhận hướng từ project; với hướng khác E, tìm cạnh đáy đế chân gần ghost trong cả x/y, rồi chiếu độ dời lên trục mặt đất để so với quãng lùi chuẩn mỗi khung. Khoảng cách tới ghost là khoảng cách 2D; mất đế hoặc lệch quá ngưỡng vẫn báo cảnh báo và ngắt chuỗi đo. E giữ phép dò đế và số đo cũ.
+- Template hướng khác E phải được sinh lại với hướng đúng. Với clip có stride theo y, dùng hiệu chuẩn cố định và `vertical: "keep"` để giữ mốc mặt đất của ô; căn đáy hình về một hàng y ở từng khung sẽ xóa chuyển động cần đo. Vẫn là dò silhouette gần ghost, không phải bộ nhận dạng giải phẫu; hai chân chồng kín cần người xem art kiểm tra.
+- `runProject` báo lỗi cấu hình nếu clip có bóng chân template và tốc độ đo ở hướng có thành phần y nhưng chưa khai báo `vertical: "keep"`; không được tiếp tục đo trên dữ liệu đã xóa stride y.
+- Bề rộng thế đứng do art đo từ master: API `stanceWidth`, CLI `--stance-width`, tính bằng pixel texture. Hai chân lệch ±nửa bề rộng theo véc-tơ vuông góc `(-axis.y, axis.x)` để S/N có hai làn x riêng. Mặc định 0 giữ bố trí đường tâm cũ, không tự suy ra bề rộng giải phẫu; E giữ mặc định 0 cho phép dò cũ. Phải lưu riêng template sinh ảnh gốc khi cập nhật bóng chân QA.
+- Số đo hướng khác E dùng ID mới `slide_ground_px_per_frame_L/R` và `ghost_distance_2d_px_L/R`, không dùng baseline x cũ. Dựng lại QA, xem số đo rồi chấp nhận có ghi chú nếu phù hợp; không đổi tên hay sao chép giá trị cũ. Mục x cũ không còn khớp có thể được prune sau khi xem. Giữ PNG/manifest template đầu vào gốc và nguồn gốc của chúng; template hướng mới là đầu vào mới, không gắn nhãn lại bóng chân E cũ.
 - Palette lock và độ giống master là cổng thô (ngưỡng mặc định, cần chỉnh khi có dữ liệu thật). Ngưỡng là giá trị mặc định chưa duyệt (ghi trong OPEN-ITEMS §12).
 
 ### Kiểm chứng MaxRects (2026-11-07)

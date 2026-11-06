@@ -60,7 +60,7 @@ for (const e of report.manual)
   console.log(
     `  MANUAL [${e.kind}] ${e.clip} ${e.dir} cells ${e.cells.join(',') || 'all'} [${e.severity}/${e.status ?? 'open'}] ${e.reviewer}: ${e.note}`,
   );
-for (const j of report.judged.filter((x) => x.verdict !== 'info'))
+for (const j of report.judged.filter((x) => x.verdict !== 'info' || x.finding.measurement === 'unmeasured'))
   console.log(
     `  ${j.verdict.toUpperCase()} [${j.finding.gate}] ${j.finding.clip}${j.finding.frame === undefined ? '' : ` #${j.finding.frame}`}: ${j.finding.message}`,
   );

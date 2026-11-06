@@ -1,0 +1,92 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "kiem-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": -1,
+      "kind": "leg_reversal",
+      "metric": "weak_half_cycles",
+      "value": 2,
+      "limit": 0,
+      "severity": "warn",
+      "status": "open",
+      "note": "Both halves repeat similar near-boot silhouettes; sword carry remains viewer-left, but far/near reversal needs clearer drawings."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 4,
+      "kind": "redraw_drift",
+      "metric": "cell_repair_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "warn",
+      "status": "open",
+      "note": "Whole-cell AI height repair changes robe fold/leg reach; no per-frame scaling."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 9,
+      "kind": "redraw_drift",
+      "metric": "cell_repair_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "warn",
+      "status": "open",
+      "note": "Whole-cell height repair redraws boot reach and robe folds."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 10,
+      "kind": "redraw_drift",
+      "metric": "cell_repair_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "warn",
+      "status": "open",
+      "note": "Shallower leg redraw fixes height but makes the passing/flight rhythm less distinct."
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": -1,
+      "kind": "contact_phase",
+      "metric": "depth_probe_limitation_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "info",
+      "status": "open",
+      "note": "SE uses depth-separated soles and diagonal travel; current foot QA probes bottom-ground x only. Preserve its numbers, but inspect actual contacts before any gait-speed decision."
+    },
+    {
+      "clip": "die",
+      "dir": "SE",
+      "cell": 5,
+      "kind": "other",
+      "metric": "unexcepted_torso_similarity",
+      "value": 0.68,
+      "limit": 0.7,
+      "severity": "info",
+      "status": "open",
+      "note": "Side-prone landing has declared anatomical exception as E precedent. Upright bbox torso crop is not anatomical here; raw pre-exception diagnostic retained."
+    },
+    {
+      "clip": "die",
+      "dir": "SE",
+      "cell": 6,
+      "kind": "other",
+      "metric": "unexcepted_torso_similarity",
+      "value": 0.65,
+      "limit": 0.7,
+      "severity": "info",
+      "status": "open",
+      "note": "Side-prone settling; same documented pose exception and limitation as prior frame."
+    }
+  ]
+}
