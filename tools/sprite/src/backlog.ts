@@ -186,6 +186,14 @@ export function acceptFindings(backlog: Backlog, report: BacklogReport, dir: str
   return { ...backlog, entries: sortEntries(kept) };
 }
 
+/**
+ * Drop the entries of `report.resolved` (they no longer occur) and add NOTHING: pruning never whitelists a finding.
+ */
+export function pruneResolved(backlog: Backlog, report: BacklogReport): Backlog {
+  const resolved = new Set(report.resolved.map(entryKey));
+  return { ...backlog, entries: sortEntries(backlog.entries.filter((e) => !resolved.has(entryKey(e)))) };
+}
+
 /** Markdown view of a backlog (generated; never edit by hand). */
 export function backlogMarkdown(b: Backlog): string {
   const lines = [

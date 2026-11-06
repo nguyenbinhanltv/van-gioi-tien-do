@@ -3,7 +3,8 @@
  *
  * Runs the project's QA and judges it against its quality backlog (`quality-backlog.json` beside the project, or
  * project.backlog). Without flags it only reports. --accept appends the CURRENT unlisted soft findings (never hard
- * findings, never regressions) with the given note; --prune also drops entries that no longer occur. The generated
+ * findings, never regressions) with the given note; --prune drops entries that no longer occur and NEVER adds anything
+ * (with --accept it prunes and accepts). The generated
  * `quality-backlog.md` is rewritten on every write (--md writes it without touching the JSON).
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -13,6 +14,7 @@ import {
   applyBacklog,
   backlogMarkdown,
   loadBacklog,
+  pruneResolved,
   runProject,
   saveBacklog,
   type Project,
@@ -42,12 +44,15 @@ for (const j of report.judged.filter((x) => x.verdict !== 'info'))
 for (const e of report.resolved)
   console.log(`  RESOLVED ${e.clip} #${e.cell} ${e.metric}: no longer occurs (use --prune)`);
 if (args.includes('--accept') || args.includes('--prune')) {
-  backlog = acceptFindings(backlog, report, project.direction, {
-    note: args.includes('--accept') ? opt('note') : 'pruned',
-    ...(opt('owner') ? { owner: opt('owner') } : {}),
-    added: new Date().toISOString().slice(0, 10),
-    prune: args.includes('--prune'),
-  });
+  // only --accept (with a note) adds entries; --prune alone just drops the resolved ones
+  backlog = args.includes('--accept')
+    ? acceptFindings(backlog, report, project.direction, {
+        note: opt('note'),
+        ...(opt('owner') ? { owner: opt('owner') } : {}),
+        added: new Date().toISOString().slice(0, 10),
+        prune: args.includes('--prune'),
+      })
+    : pruneResolved(backlog, report);
   saveBacklog(backlogPath, backlog);
   report = applyBacklog(res.contract.qa.findings, project.direction, backlog);
   console.log(`wrote ${backlogPath} (${backlog.entries.length} entries); now ${JSON.stringify(report.counts)}`);
