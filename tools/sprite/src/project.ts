@@ -8,10 +8,11 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { type AnimationId } from '@vgtd/character';
-import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, decodePng, encodePng, viewGain, type Image } from '@vgtd/rig';
+import { decodePng, encodePng, type Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { alignFrame, calibrate, type AlignedFrame, type Calibration, type FrameRecord } from './align.js';
-import { buildArmature, TEXTURE_SCALE, type ClipInput } from './export.js';
+import { buildArmature, type ClipInput } from './export.js';
+import { groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
@@ -206,18 +207,11 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   });
 
   // 5. QA
-  const gain = viewGain(project.direction);
   const qaClips: QaClip[] = aligned.map((s) => {
     const manifest: TemplateManifest | null = s.clip.manifest
       ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
       : null;
-    const speed =
-      s.clip.groundSpeedPxS ??
-      (s.clip.tableId === 'run'
-        ? RUN_SPEED_PX_S * gain
-        : s.clip.tableId === 'walk'
-          ? WALK_SPEED_PX_S * gain
-          : undefined);
+    const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
     const cells: readonly CellSpec[] | undefined = manifest?.cells;
     return {
       name: s.clip.name,
@@ -227,9 +221,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       frames: s.aligned,
       exceptions: Object.fromEntries(Object.entries(s.clip.exceptions ?? {}).map(([k, v]) => [Number(k), v])),
       ...(cells ? { cells } : {}),
-      ...(speed !== undefined
-        ? { groundPxPerFrame: (speed * TEXTURE_SCALE * s.clip.durationSec) / s.clip.frames }
-        : {}),
+      ...(speed !== undefined ? { groundPxPerFrame: groundPxPerFrame(speed, s.clip.durationSec, s.clip.frames) } : {}),
     };
   });
   const qa = runQa(qaClips, { masterHeight: m.height, master, guides });

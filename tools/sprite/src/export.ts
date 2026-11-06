@@ -19,11 +19,9 @@ import {
   type RigDocument,
 } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
+import { TEXTURE_SCALE } from './gait.js';
 import type { PackResult } from './pack.js';
 import { CELL_PX } from './types.js';
-
-/** Texture px per rig px (the canvas is drawn at 2x). */
-export const TEXTURE_SCALE = 2;
 
 export interface ClipInput {
   /** Animation name in the armature (`run`, `attack`, ...). */

@@ -2,6 +2,7 @@
 export * from './types.js';
 export * from './raster.js';
 export * from './master.js';
+export * from './gait.js';
 export * from './template.js';
 export * from './slice.js';
 export * from './align.js';

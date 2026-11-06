@@ -1,9 +1,12 @@
 /**
  * `npm run sprite:template -w @vgtd/sprite -- --clip run --frames 12 --cols 6 --master <master.png> --out <dir>
- *      [--gait run|walk|none] [--half-stride 26] [--lift 14] [--first R|L] [--center <x>] [--cells <cells.json>]`
+ *      [--gait run|walk|none] [--direction E] [--duration <s>] [--half-stride <px>] [--lift 14] [--first R|L]
+ *      [--center <x>] [--cells <cells.json>]`
  *
  * Writes <out>/<clip>.template.png and <out>/<clip>.template.json (the manifest the build reads). Guides come from the
  * MEASURED master (ground at the pivot row, head top, pelvis, pelvis axis at the master's measured x unless --center).
+ * --gait run|walk: the half stride is DERIVED from the table ground speed (RUN/WALK_SPEED_PX_S x viewGain(--direction) x
+ * --duration, default the animation table duration), so the ghosts match the foot-slide gate exactly; --half-stride overrides.
  * --cells <json> replaces the generated cells with a hand-authored CellSpec[] (flight frames, flags).
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -16,8 +19,12 @@ import {
   measureFigure,
   resizeImage,
   CELL_PX,
+  groundSpeedPxS,
+  halfStrideFor,
+  tableDuration,
   type CellSpec,
 } from '../src/index.js';
+import type { Direction } from '@vgtd/shared';
 
 const args = process.argv.slice(2);
 const opt = (n: string, d = '') => {
@@ -36,11 +43,18 @@ const m = measureFigure(master);
 if (!m) throw new Error('empty master');
 const guides = guidesFromMaster(m, CELL_PX, opt('center') ? Number(opt('center')) : undefined);
 const gait = opt('gait', 'none');
+const direction = opt('direction', 'E') as Direction;
+const derivedHalfStride = () => {
+  const id = gait as 'run' | 'walk';
+  const speed = groundSpeedPxS(id, direction);
+  if (speed === null) throw new Error(`--gait ${gait} has no table ground speed`);
+  return halfStrideFor(speed, opt('duration') ? Number(opt('duration')) : tableDuration(id));
+};
 let cells: CellSpec[] | undefined;
 if (opt('cells')) cells = JSON.parse(readFileSync(resolve(cwd, opt('cells')), 'utf8')) as CellSpec[];
 else if (gait !== 'none')
   cells = locomotionCells(frames, guides, {
-    halfStride: Number(opt('half-stride', gait === 'run' ? '30' : '22')),
+    halfStride: opt('half-stride') ? Number(opt('half-stride')) : derivedHalfStride(),
     lift: Number(opt('lift', gait === 'run' ? '16' : '10')),
     first: opt('first', 'R') as 'L' | 'R',
   });
