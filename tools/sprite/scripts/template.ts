@@ -1,5 +1,5 @@
 /**
- * `npm run sprite:template -w @vgtd/sprite -- --clip run --frames 12 --cols 6 --master <master.png> --out <dir>
+ * `npm run sprite:template -w @vgtd/sprite -- --clip run [--frames 12 --cols 6] --master <master.png> --out <dir>
  *      [--gait run|walk|none] [--direction E] [--duration <s>] [--stance <0..0.5>] [--half-stride <px>] [--lift 14] [--first R|L]
  *      [--center <x>] [--cells <cells.json>]`
  *
@@ -16,6 +16,7 @@ import {
   buildTemplate,
   guidesFromMaster,
   locomotionCells,
+  SPRITE_CLIPS,
   measureFigure,
   resizeImage,
   CELL_PX,
@@ -33,8 +34,10 @@ const opt = (n: string, d = '') => {
 };
 const cwd = process.env.INIT_CWD ?? process.cwd();
 const clip = opt('clip');
-const frames = Number(opt('frames'));
-const cols = Number(opt('cols', '6'));
+// frames / cols default to the clip table of the pipeline (SPRITE_CLIPS) when the clip is one of the 15
+const tableClip = SPRITE_CLIPS.find((c) => c.name === clip);
+const frames = Number(opt('frames', String(tableClip?.sheet.frames ?? 0)));
+const cols = Number(opt('cols', String(tableClip?.sheet.cols ?? 6)));
 if (!clip || !frames || !opt('master') || !opt('out'))
   throw new Error('usage: --clip <name> --frames <n> --cols <n> --master <png> --out <dir>');
 let master = decodePng(readFileSync(resolve(cwd, opt('master'))));
