@@ -20,6 +20,10 @@ export interface Finding {
   readonly clip: string;
   readonly frame?: number;
   readonly message: string;
+  /** Measured quantity of the finding (soft findings are matched and tracked by it): name, value and the limit it broke. */
+  readonly metric?: string;
+  readonly value?: number;
+  readonly limit?: number;
 }
 
 export interface QaClip {
@@ -74,6 +78,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'info',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `${h} px outside ${lo.toFixed(1)}..${hi.toFixed(1)} (declared exception: ${exception})`,
       });
     else if (clip.kind === 'upright')
@@ -82,6 +89,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'fail',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `height ${h} px outside ${lo.toFixed(1)}..${hi.toFixed(1)} (master ${o.masterHeight} px +-${(tol * 100).toFixed(0)} %)`,
       });
     else
@@ -90,6 +100,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'warn',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `height ${h} px outside the upright band and no pose exception declared`,
       });
   });
@@ -179,6 +192,9 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
             severity: 'fail',
             clip: clip.name,
             frame: b.frame,
+            metric: `slide_px_per_frame_${side}`,
+            value: Math.round(slide * 100) / 100,
+            limit: tol,
             message: `${side} foot slides ${slide.toFixed(1)} px/frame between frames ${a.frame}-${b.frame} (limit ${tol})`,
           });
       }
@@ -196,6 +212,9 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
           severity: 'warn',
           clip: clip.name,
           frame: i,
+          metric: `ghost_offset_px_${side}`,
+          value: near ? Math.round(Math.abs(near.offset) * 10) / 10 : 999,
+          limit: maxOffset,
           message: near
             ? `${side} planted foot: nearest sole is ${near.offset.toFixed(1)} px from its template ghost (x ${near.x.toFixed(1)} vs ${ghost.x.toFixed(1)}, limit ${maxOffset}); not measured (the foot is not on the template)`
             : `${side} planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)`,

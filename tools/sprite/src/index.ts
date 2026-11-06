@@ -12,4 +12,5 @@ export * from './palette.js';
 export * from './pack.js';
 export * from './export.js';
 export * from './qa.js';
+export * from './backlog.js';
 export * from './project.js';

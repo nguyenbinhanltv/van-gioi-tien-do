@@ -16,7 +16,8 @@ import { groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
-import { runQa, type QaClip, type QaReport } from './qa.js';
+import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
+import { runQa, type Finding, type QaClip } from './qa.js';
 import { resizeImage } from './repair.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
@@ -64,6 +65,8 @@ export interface ProjectClip {
 export interface Project {
   readonly character: string;
   readonly direction: Direction;
+  /** Quality backlog file (accepted soft findings), relative to the project file. Default `quality-backlog.json` beside it. */
+  readonly backlog?: string;
   /** Output stem: files are `<stem>_<DIR>_ske.json` ... */
   readonly stem: string;
   /** Master image (any square size; resized to the 256 cell). */
@@ -98,7 +101,14 @@ export interface Contract {
   readonly palette: { readonly size: number; readonly locked: boolean };
   readonly atlas: { readonly pages: number; readonly width: number; readonly height: number; readonly regions: number };
   readonly clips: readonly ClipContract[];
-  readonly qa: QaReport;
+  /** `ok` = no hard failure, no unlisted soft finding, no regression of a listed one (see backlog.ts). */
+  readonly qa: {
+    readonly ok: boolean;
+    readonly findings: readonly Finding[];
+    readonly judged: BacklogReport['judged'];
+    readonly resolved: BacklogReport['resolved'];
+    readonly counts: BacklogReport['counts'];
+  };
 }
 
 export interface ProjectResult {
@@ -231,7 +241,16 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(speed !== undefined ? { groundPxPerFrame: groundPxPerFrame(speed, s.clip.durationSec, s.clip.frames) } : {}),
     };
   });
-  const qa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const rawQa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
+  const verdict = applyBacklog(rawQa.findings, project.direction, backlog);
+  const qa = {
+    ok: verdict.ok,
+    findings: rawQa.findings,
+    judged: verdict.judged,
+    resolved: verdict.resolved,
+    counts: verdict.counts,
+  };
 
   const page = built.atlas;
   const contract: Contract = {

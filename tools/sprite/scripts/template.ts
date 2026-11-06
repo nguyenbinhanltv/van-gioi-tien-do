@@ -1,6 +1,6 @@
 /**
  * `npm run sprite:template -w @vgtd/sprite -- --clip run [--frames 12 --cols 6] --master <master.png> --out <dir>
- *      [--gait run|walk|none] [--direction E] [--duration <s>] [--stance <0..0.5>] [--half-stride <px>] [--lift 14] [--first R|L]
+ *      [--gait run|walk|none (default: the clip name when it is run or walk)] [--direction E] [--duration <s>] [--stance <0..0.5>] [--half-stride <px>] [--lift 14] [--first R|L]
  *      [--center <x>] [--cells <cells.json>]`
  *
  * Writes <out>/<clip>.template.png and <out>/<clip>.template.json (the manifest the build reads). Guides come from the
@@ -45,7 +45,8 @@ if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(
 const m = measureFigure(master);
 if (!m) throw new Error('empty master');
 const guides = guidesFromMaster(m, CELL_PX, opt('center') ? Number(opt('center')) : undefined);
-const gait = opt('gait', 'none');
+// the gait defaults to the clip name for run / walk, so new templates always follow the table ground speed
+const gait = opt('gait', clip === 'run' || clip === 'walk' ? clip : 'none');
 const stance = Number(opt('stance', '0.5'));
 const direction = opt('direction', 'E') as Direction;
 const derivedHalfStride = () => {

@@ -70,6 +70,37 @@ Chạy cả chuỗi: `npm run sprite:build -w @vgtd/sprite -- --project <project
 - `projectClipDefaults(name)` trả các trường của clip trong `project.json` lấy từ bảng (`name`, `cols`, `frames`, `durationSec`, `loop`, `tableId`, `kind`, `phases`); thêm `sheet`, `manifest`, `exceptions`, `calibration`.
 - `sprite:template --clip <tên>` lấy `--frames` / `--cols` mặc định từ bảng này.
 
+## Quality backlog (làm đủ bộ trước, cải thiện sau)
+
+Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `project.backlog`) và `quality-backlog.md` sinh tự động:
+
+```json
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "kiem-tu",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 3,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "value": 5.1,
+      "limit": 3,
+      "note": "giày bị nhấc trong bản vẽ, sửa ở vòng chau chuốt",
+      "status": "open"
+    }
+  ]
+}
+```
+
+- **Cổng cứng, không bao giờ được ghi vào backlog:** đủ khung (`present`), chiều cao khung của clip `upright` ngoài ±3 % (`height` fail), giống master (`similarity`), đường nối vòng lặp (`loopSeam`), lỗi xuất/rig.
+- **Phát hiện mềm (có thể ghi):** `footSlide` (trượt chân; chân đặt đất không nằm trên bóng chân của template), cảnh báo `height` của clip `free` chưa khai báo exception (chỉ số `height_excess_px`: số px vượt ngoài dải).
+- **Phán quyết:** mềm **không** có trong backlog → lỗi (`fail-soft`); có trong backlog và `value` hiện tại ≤ giá trị đã ghi (+1 %) → `accepted` (qua, hiện như cảnh báo); tệ hơn → `regression` (lỗi); mục backlog không còn xảy ra → `resolved` (nên xóa bằng `--prune`).
+- **Khóa so khớp:** `clip + dir + cell + gate + metric` (`cell` = chỉ số khung 0-based, `-1` = cấp clip).
+- **Ghi vào backlog là hành động có chủ ý:** `npm run sprite:backlog -w @vgtd/sprite -- --project <project.json> --accept --note "<lý do>" [--owner <worker>] [--prune]` thêm các phát hiện mềm **hiện tại** chưa được ghi (không bao giờ thêm cổng cứng hay hồi quy); không cờ nào thì chỉ báo cáo. `sprite:build` in phán quyết từng phát hiện và thoát 1 nếu còn lỗi cứng, mềm chưa ghi, hoặc hồi quy.
+
 ## Cổng QA
 
 | Cổng               | Quy tắc                                                                                                                                                                                                                                                                                                                                          |
