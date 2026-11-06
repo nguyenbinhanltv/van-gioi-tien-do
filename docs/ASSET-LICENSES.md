@@ -1,5 +1,94 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## KT-NE1 — bộ sprite NE đủ 15 clip (D41, 2026-11-07)
+
+Nguồn gốc: concept A NE từ PR #80; đường dẫn, SHA256 nguồn/kết quả và phép phóng bilinear premultiplied 256→512 ở reference/NE.master4x.source.json. Công cụ image_gen.imagegen, model không công bố, codex-cli 0.166.0; 16 lần gọi với prompt/UTC/hash ở NE/provenance.json. Điều khoản: https://openai.com/policies/row-terms-of-use/. Không sửa pixel nhân vật bằng tay; chỉ tạo guide/mask bằng mã, ghép nguyên ô run11 đã sinh, chroma key/defringe/palette lock/căn bằng pipeline. Proof SHA256 xác nhận 11 ô khác giữ nguyên. Pipeline main 3dd76398567644d01f0da003dbf2eaad45d8b071; QA hướng walk/run ghi rõ UNMEASURED, không chấp nhận số đo chưa xác minh.
+
+| Tệp                                                                                        | Nguồn / xử lý                                                  | Giấy phép / nguồn gốc                     |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------- |
+| apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE.sprite.json       | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_ske.json          | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.json          | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.png           | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/README.md                                     | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/batch.json                                    | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/control-calibration.json                      | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/attack.raw.png            | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/attack_2.raw.png          | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/attack_3.raw.png          | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/cast.raw.png              | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/channel.raw.png           | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/dash.raw.png              | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/die.raw.png               | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/emote.raw.png             | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/hit.raw.png               | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/idle.raw.png              | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/meditate.raw.png          | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/run.raw.png               | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/run.repair1.raw.png       | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/sword_fly.raw.png         | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/tribulation.raw.png       | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/generation-selected/walk.raw.png              | image_gen.imagegen; prompt/UTC/SHA256 trong NE/provenance.json | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/independent-audit.json                        | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/manual-art-findings.json                      | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/project.json                                  | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/provenance.json                               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/qa-candidate.json                             | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/quality-backlog.json                          | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/quality-backlog.md                            | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/repair-inputs/run-height-repair1.guide.png    | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/repair-inputs/run-height-repair1.mask.png     | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/repair-inputs/run-height-repair1.targets.json | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/run.repair1.proof.json                        | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/attack.png                             | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/attack_2.png                           | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/attack_3.png                           | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/cast.png                               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/channel.png                            | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/dash.png                               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/die.png                                | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/emote.png                              | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/hit.png                                | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/idle.png                               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/meditate.png                           | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/run.png                                | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/sword_fly.png                          | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/tribulation.png                        | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/sheets/walk.png                               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack.template.json                | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack.template.png                 | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack_2.template.json              | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack_2.template.png               | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack_3.template.json              | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/attack_3.template.png               | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/cast.template.json                  | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/cast.template.png                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/channel.template.json               | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/channel.template.png                | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/dash.template.json                  | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/dash.template.png                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/die.template.json                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/die.template.png                    | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/emote.template.json                 | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/emote.template.png                  | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/hit.template.json                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/hit.template.png                    | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/idle.template.json                  | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/idle.template.png                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/meditate.template.json              | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/meditate.template.png               | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/run.template.json                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/run.template.png                    | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/sword_fly.template.json             | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/sword_fly.template.png              | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/tribulation.template.json           | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/tribulation.template.png            | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/walk.template.json                  | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/templates/walk.template.png                   | Guide/mask sinh bằng mã; không phải pixel nhân vật             | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/NE/unexcepted-pose-diagnostic.json               | Dữ liệu dẫn xuất / QA / nguồn gốc                              | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/reference/NE.master4x.png                        | Dẫn xuất có hash từ concept A PR #80                           | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+| assets-src/placeholder/kiem-tu-sprites-v1/reference/NE.master4x.source.json                | Dẫn xuất có hash từ concept A PR #80                           | Nguồn PR #80 / công cụ OpenAI; xem KT-NE1 |
+
 ## KT-S1 — bộ sprite S đủ 15 clip (D41, 2026-11-06 UTC)
 
 Nguồn gốc: concept A S từ PR #80. Đường dẫn, SHA-256 và phép phóng bilinear premultiplied 256→512 được ghi trong reference/S.master4x.source.json. 20 lần gọi image_gen.imagegen, model không công bố, codex-cli 0.166.0; từng prompt, thời điểm UTC, ảnh tham chiếu và hash có trong S/provenance.json. Điều khoản công cụ: https://openai.com/policies/row-terms-of-use/. Không tô pixel nhân vật bằng tay; vạch và mask hướng dẫn được tạo bằng mã, sau đó chroma key, defringe, khóa palette, căn ảnh và xuất bằng @vgtd/sprite. Năm bản sửa toàn sheet loại bỏ vạch, bóng và trail; bản gốc được lưu để truy nguồn, không tuyên bố pixel ngoài vùng sửa giữ nguyên. Pipeline ghim commit main 00d4d4a49144c8ea28af918ba305e23d8a620f49.
