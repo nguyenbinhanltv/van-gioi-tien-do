@@ -74,6 +74,7 @@ export type ChainKind = 'hair' | 'ribbon' | 'sash' | 'sleeve' | 'cape' | 'tail' 
 export interface RigChain {
   readonly name: string;
   readonly kind: ChainKind;
+  /** Bones of the chain, parents first. A plain chain is root→tip; a group may hold several runs. All share the spring settings below. */
   readonly bones: readonly string[];
   /** 0..1 spring pull toward the rest pose per step (higher = stiffer). */
   readonly stiffness: number;
