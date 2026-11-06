@@ -21,6 +21,8 @@ export interface AssemblyProfile {
   readonly stem: string;
   /** Pieces in back-to-front draw order; missing part files are reported, not fatal. */
   readonly pieces: readonly PieceSpec[];
+  /** Per-direction piece lists (draw order + which pieces exist) replacing `pieces`; see `profilePieces`. */
+  readonly piecesByDir?: Readonly<Partial<Record<Direction, readonly PieceSpec[]>>>;
   /** Bones of the base rig removed before assembly. */
   readonly dropBones: readonly string[];
   /** Detail rules by clip name (display swaps synced to the actions). */
@@ -141,6 +143,90 @@ export const THE_TU_E_PIECES: readonly PieceSpec[] = [
   { id: 'hair_strand_3', slot: 'hair_strand_c', binding: { kind: 'hanging', template: 'hair_strand_c' } },
   { id: 'hairpin', slot: 'hairpin', binding: { kind: 'rigid', bone: 'head' } },
 ];
+
+// ---------------------------------------------------------------------------------------------------------------------
+// per-direction pieces: draw order (@vgtd/character slotsInDrawOrder) and visibility
+
+const BY_ID = new Map(THE_TU_E_PIECES.map((p) => [p.id, p] as const));
+const ids = (...groups: (string | readonly string[])[]): string[] => groups.flat();
+const legSet = (s: 'L' | 'R') => [`leg_${s}`, `trouser_hem_${s}`, `boot_${s}`];
+const armSet = (s: 'L' | 'R') => [`arm_${s}`, `sleeve_cuff_${s}`, ...GAUNTLET_SWAPS.map((v) => `gauntlet_${s}_${v}`)];
+const EYES = ['eyes_open', 'eyes_half', 'eyes_closed', 'eyes_angry'];
+const BROWS = ['brows_neutral', 'brows_angry', 'brows_pain'];
+const STRANDS = ['hair_strand_1', 'hair_strand_2', 'hair_strand_3'];
+
+const pick = (order: readonly string[], patch: Readonly<Record<string, Partial<PieceSpec>>> = {}): PieceSpec[] =>
+  order.map((id) => {
+    const p = BY_ID.get(id);
+    if (!p) throw new RangeError(`unknown Thể tu piece '${id}'`);
+    return patch[id] ? ({ ...p, ...patch[id] } as PieceSpec) : p;
+  });
+
+/** Seen from the back the BACK panel is the visible one (over the torso, carries the outfit tag), the front panel hangs behind. */
+const BACK_VIEW_TABARD: Record<string, Partial<PieceSpec>> = {
+  tabard_front: { paperdoll: undefined },
+  tabard_back: { paperdoll: 'outfit_upper' },
+};
+
+/**
+ * Thể tu pieces per direction. E / SE / S: the E order (the art's `restOrder`; SE and S arms draw as in the E table, the S
+ * arms hang at the sides so they never cross the head). NE: far arm and the front panel behind the body, the back panel over
+ * it, the rear hair over the back of the head (drawOrder NE), near arm last; only the visible facial edge (eyes, brows, no
+ * mouth, no ear). N: both arms behind the body, back panel visible, no face at all (11 swaps + ear + facial bangs omitted),
+ * the rear hair covers the head. Part files that do not exist are reported by the assembler, not fatal.
+ */
+export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly PieceSpec[]>>> = {
+  E: THE_TU_E_PIECES,
+  SE: THE_TU_E_PIECES,
+  S: THE_TU_E_PIECES,
+  NE: pick(
+    ids(
+      legSet('L'),
+      'tabard_front',
+      armSet('L'),
+      'torso',
+      legSet('R'),
+      'tabard_back',
+      'tabard_shoulders',
+      'sash_set',
+      'sash_tail_1',
+      'sash_tail_2',
+      'head',
+      EYES,
+      BROWS,
+      STRANDS,
+      'hair_back',
+      'hairpin',
+      armSet('R'),
+    ),
+    // no ear in the back three-quarter view either: the head is composed from `head` only (as in N)
+    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
+  ),
+  N: pick(
+    ids(
+      armSet('L'),
+      armSet('R'),
+      legSet('L'),
+      legSet('R'),
+      'tabard_front',
+      'torso',
+      'tabard_back',
+      'tabard_shoulders',
+      'sash_set',
+      'sash_tail_1',
+      'sash_tail_2',
+      'head',
+      'hair_back',
+      'hairpin',
+    ),
+    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
+  ),
+};
+
+/** The pieces of `profile` for one direction (its `piecesByDir` entry, else `pieces`). */
+export function profilePieces(profile: AssemblyProfile, dir: Direction): readonly PieceSpec[] {
+  return profile.piecesByDir?.[dir] ?? profile.pieces;
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // detail rules: gauntlet swaps and the face, synced to what the body does
@@ -275,6 +361,7 @@ export const THE_TU_PROFILE: AssemblyProfile = {
   id: 'the-tu',
   stem: 'thetu',
   pieces: THE_TU_E_PIECES,
+  piecesByDir: THE_TU_PIECES_BY_DIR,
   // the Kiếm tu base rig lends its roles / IK / sockets; its sword bones go, the quyền sáo hang on the hand bones
   dropBones: [...REPLACED_BONES, 'scabbard', 'weapon'],
   detail: THE_TU_DETAIL_RULES,
