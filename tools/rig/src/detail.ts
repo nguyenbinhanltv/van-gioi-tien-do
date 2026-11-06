@@ -12,6 +12,7 @@
  * partial pilot rigs. Deterministic: the blink schedule is a hash of the clip name, never `Math.random`.
  */
 import { CLIP_FPS, type Clip, type Key, type RGBA, type SlotTrack } from './clip.js';
+import { RIG_LIMITS } from '@vgtd/character';
 import type { ChainTemplate } from './classes.js';
 import type { RigBone, RigChain, RigDocument } from './schema.js';
 
@@ -485,23 +486,79 @@ export const DETAIL_CHAINS: readonly ChainTemplate[] = [
   },
 ];
 
-/** Bones + chains for the templates whose parent exists and that the rig does not have yet. */
-export function addDetailChains(
-  rig: RigDocument,
-  overrides: Readonly<
+/**
+ * Order in which detail chains are added when the rig budget is short (most visible motion first). Chains not listed
+ * come last, in template order.
+ */
+export const DETAIL_CHAIN_PRIORITY: readonly string[] = [
+  'ponytail',
+  'sash_tail_L',
+  'sash_tail_R',
+  'ribbon_tail_L',
+  'ribbon_tail_R',
+  'sleeve_edge_L',
+  'sleeve_edge_R',
+  'robe_hem_front',
+  'robe_hem_back',
+  'pendant',
+  'hair_strand_a',
+  'hair_strand_b',
+  'hair_strand_c',
+];
+
+export interface DetailChainsResult {
+  readonly rig: RigDocument;
+  readonly added: readonly string[];
+  /** Templates not added, with the reason (missing parent, name clash, or which RIG_LIMITS budget they would exceed). */
+  readonly skipped: readonly { readonly name: string; readonly reason: string }[];
+}
+
+export interface DetailChainsOptions {
+  /** Per-chain replacements of placement / size / spring parameters. */
+  readonly overrides?: Readonly<
     Record<string, Partial<Pick<ChainTemplate, 'at' | 'length' | 'segments' | 'stiffness' | 'damping' | 'gravity'>>>
-  > = {},
-  templates: readonly ChainTemplate[] = DETAIL_CHAINS,
-): RigDocument {
+  >;
+  readonly templates?: readonly ChainTemplate[];
+  /** Throw (listing what does not fit) instead of reporting skipped chains. */
+  readonly strict?: boolean;
+}
+
+/**
+ * Bones + chains for the templates whose parent exists and that the rig does not have yet, **within the docs/03 budget**
+ * (`RIG_LIMITS`: bones and secondary-motion chains of the rig's kind). A chain that does not fit is skipped in
+ * `DETAIL_CHAIN_PRIORITY` order and reported; the limits are never exceeded. Needing more chains than the limit is a
+ * limit change (DECISIONS entry + `@vgtd/character`), not something this function works around.
+ */
+export function addDetailChains(rig: RigDocument, opts: DetailChainsOptions = {}): DetailChainsResult {
+  const limits = RIG_LIMITS[rig.kind === 'boss' ? 'boss' : rig.kind === 'pet' ? 'pet' : 'player'];
+  const overrides = opts.overrides ?? {};
+  const rank = (n: string) => {
+    const i = DETAIL_CHAIN_PRIORITY.indexOf(n);
+    return i < 0 ? DETAIL_CHAIN_PRIORITY.length : i;
+  };
+  const templates = [...(opts.templates ?? DETAIL_CHAINS)].sort((x, y) => rank(x.name) - rank(y.name));
   const bones: RigBone[] = [...rig.bones];
   const chains: RigChain[] = [...(rig.chains ?? [])];
   const names = new Set(bones.map((b) => b.name));
+  const added: string[] = [];
+  const skipped: { name: string; reason: string }[] = [];
   for (const t0 of templates) {
     const t = { ...t0, ...(overrides[t0.name] ?? {}) };
     const parent = rig.roles[t.parent as keyof typeof rig.roles] ?? t.parent;
-    if (!names.has(parent) || chains.some((c) => c.name === t.name)) continue;
     const ids = Array.from({ length: t.segments }, (_, i) => `${t.name}_${i + 1}`);
-    if (ids.some((n) => names.has(n))) continue;
+    const why = !names.has(parent)
+      ? `parent bone '${parent}' is missing`
+      : chains.some((c) => c.name === t.name) || ids.some((n) => names.has(n))
+        ? 'the rig already has it'
+        : chains.length + 1 > limits.physicsConstraints
+          ? `chain budget: ${chains.length} chains already, limit ${limits.physicsConstraints}`
+          : bones.length + ids.length > limits.bones
+            ? `bone budget: ${bones.length} bones + ${ids.length} > limit ${limits.bones}`
+            : null;
+    if (why) {
+      skipped.push({ name: t.name, reason: why });
+      continue;
+    }
     ids.forEach((name, i) => {
       bones.push(
         i === 0
@@ -518,6 +575,12 @@ export function addDetailChains(
       damping: t.damping,
       ...(t.gravity ? { gravity: t.gravity } : {}),
     });
+    added.push(t.name);
   }
-  return { ...rig, bones, chains };
+  if (opts.strict && skipped.some((x) => !x.reason.endsWith('already has it'))) {
+    const list = skipped.filter((x) => !x.reason.endsWith('already has it'));
+    const lines = list.map((x) => `  ${x.name}: ${x.reason}`);
+    throw new RangeError(`detail chains do not fit the rig budget:\n${lines.join('\n')}`);
+  }
+  return { rig: { ...rig, bones, chains }, added, skipped };
 }

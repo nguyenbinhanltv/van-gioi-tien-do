@@ -1,8 +1,15 @@
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { RIG_LIMITS } from '@vgtd/character';
 import { describe, expect, it } from 'vitest';
 import {
   DETAIL_DISPLAYS,
   DETAIL_SLOTS,
+  DETAIL_CHAINS,
+  DETAIL_CHAIN_PRIORITY,
   addDetailChains,
+  loadCharacterData,
+  validateRig,
   applyDetail,
   authorKiemTuSet,
   bakeSecondaryMotion,
@@ -137,35 +144,54 @@ describe('detail layer', () => {
 });
 
 describe('detail chains', () => {
-  it('adds the strand, ponytail, ribbon, sash, pendant, sleeve-edge and hem chains on existing parents', () => {
-    const rig = addDetailChains(buildReferenceHumanoid('E'));
-    const names = (rig.chains ?? []).map((c) => c.name);
-    for (const n of [
-      'hair_strand_a',
-      'ponytail',
-      'ribbon_tail_L',
-      'sash_tail_R',
-      'pendant',
-      'sleeve_edge_R',
-      'robe_hem_front',
-    ])
-      expect(names).toContain(n);
-    const boneNames = new Set(rig.bones.map((b) => b.name));
-    for (const c of rig.chains ?? []) for (const b of c.bones) expect(boneNames.has(b)).toBe(true);
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+  const kiem = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get('E')!.rig;
+  const errors = (r: RigDocument) => validateRig(r).filter((i) => i.severity === 'error');
+
+  it('never exceeds RIG_LIMITS: the committed Kiếm tu rig is already at 6 chains, so nothing is added and it stays valid', () => {
+    expect(errors(kiem)).toEqual([]);
+    const res = addDetailChains(kiem);
+    expect(res.added).toEqual([]);
+    expect(res.skipped.length).toBe(DETAIL_CHAINS.length);
+    expect(res.skipped[0]!.reason).toMatch(/chain budget/);
+    expect(errors(res.rig)).toEqual([]);
+  });
+
+  it('on a rig with a free chain budget it adds in priority order up to the limit and validates', () => {
+    const bare: RigDocument = { ...kiem, chains: [] };
+    const res = addDetailChains(bare);
+    expect(res.added).toEqual(DETAIL_CHAIN_PRIORITY.slice(0, RIG_LIMITS.player.physicsConstraints));
+    expect(res.skipped.length).toBe(DETAIL_CHAINS.length - res.added.length);
+    expect(res.rig.chains!.length).toBeLessThanOrEqual(RIG_LIMITS.player.physicsConstraints);
+    expect(res.rig.bones.length).toBeLessThanOrEqual(RIG_LIMITS.player.bones);
+    expect(errors(res.rig)).toEqual([]);
+  });
+
+  it('skips chains whose bones do not fit the bone budget and says so; strict throws', () => {
+    const tight: RigDocument = { ...kiem, chains: [], bones: [...kiem.bones] };
+    const room = RIG_LIMITS.player.bones - tight.bones.length;
+    const res = addDetailChains(tight, { overrides: { ponytail: { segments: room + 1 } } });
+    expect(res.skipped.find((x) => x.name === 'ponytail')!.reason).toMatch(/bone budget/);
+    expect(() => addDetailChains(tight, { overrides: { ponytail: { segments: room + 1 } }, strict: true })).toThrow(
+      /ponytail: bone budget/,
+    );
+    expect(() => addDetailChains(kiem, { strict: true })).toThrow(/chain budget/);
   });
 
   it('is idempotent and honours overrides', () => {
-    const once = addDetailChains(buildReferenceHumanoid('E'), { ponytail: { segments: 3 } });
-    expect(once.chains!.find((c) => c.name === 'ponytail')!.bones).toHaveLength(3);
-    expect(addDetailChains(once)).toEqual(once);
+    const bare: RigDocument = { ...kiem, chains: [] };
+    const once = addDetailChains(bare, { overrides: { ponytail: { segments: 3 } } });
+    expect(once.rig.chains!.find((c) => c.name === 'ponytail')!.bones).toHaveLength(3);
+    const twice = addDetailChains(once.rig);
+    expect(twice.added).toEqual([]);
+    expect(twice.rig).toEqual(once.rig);
   });
 
-  it('the spring bake moves the new chains when the body moves', () => {
-    const rig = addDetailChains(buildReferenceHumanoid('E'));
-    const set = authorKiemTuSet(rig, { only: ['run'] });
-    const run = set[0]!;
-    const track = run.bones.find((b) => b.bone === 'ponytail_1');
-    expect(track?.rotate?.length ?? 0).toBeGreaterThan(2);
+  it('the spring bake moves an added chain when the body moves', () => {
+    const rig = addDetailChains(buildReferenceHumanoid('E')).rig;
+    expect(rig.chains!.some((c) => c.name === 'ponytail')).toBe(true);
+    const run = authorKiemTuSet(rig, { only: ['run'] })[0]!;
+    expect(run.bones.find((b) => b.bone === 'ponytail_1')?.rotate?.length ?? 0).toBeGreaterThan(2);
     expect(bakeSecondaryMotion(rig, run, { gain: 0 })).toBe(run);
   });
 });
