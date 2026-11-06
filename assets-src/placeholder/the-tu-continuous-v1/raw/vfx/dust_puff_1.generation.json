@@ -1,0 +1,13 @@
+{
+  "id": "dust_puff_1",
+  "group": "vfx",
+  "prompt": "Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small compact dust puff, dust grey and ochre, semitransparent soft edge, bold readable game VFX, no stones or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.",
+  "utcStart": "2026-11-06 02:35:20 UTC",
+  "utcEnd": "2026-11-06 02:35:48 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/E.master4x.png",
+  "selectedOutput": "raw/vfx/dust_puff_1.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-0ca42b72-ae18-42a3-bf99-083e31482883.png"
+}
