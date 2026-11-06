@@ -37,7 +37,7 @@ Run from the repository root:
 node tools/rig/scripts/run-ts.mjs assets-src/placeholder/phap-tu-fan-sprite-v1/prepare.ts
 npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-fan-sprite-v1/E/project.json --out <temporary-output>
 npm run sprite:backlog -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-fan-sprite-v1/E/project.json
-npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/phap-tu-fan-sprite-v1/batch.json --out <review-output>
+npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/phap-tu-fan-sprite-v1/batch.json --out <review-output> --capture
 ```
 
-`sprite:batch --capture` currently resolves the bundled script's repository root incorrectly; reported to the owning worker. Direct `apps/client-cocos/scripts/capture.mjs --zoom 2 --sample midpoint --mode single --direction E --stem phaptu --animations all --gif` is the capture fallback, after staging the export in its `--src` resource directory. Gate failures remain failures during review capture.
+Batch capture uses the complete export-file contract, including the sprite contract and every atlas page. It runs the real Cocos 3.8.8 viewer at zoom 2 with midpoint sampling; all 15 E clips must load. Preserve relative files when copying an export.
