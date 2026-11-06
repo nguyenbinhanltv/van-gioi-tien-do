@@ -1,0 +1,3583 @@
+{
+  "format": "vgtd-sprite-contract",
+  "version": 1,
+  "character": "kiem-tu",
+  "direction": "S",
+  "stem": "kiemtu",
+  "master": {
+    "sha1": "22aed5457b7c04548ec0b89dbf6a935898bff262",
+    "metrics": {
+      "left": 55,
+      "right": 176,
+      "top": 24,
+      "bottom": 232,
+      "height": 208,
+      "width": 121,
+      "pelvisX": 127.05986696230599
+    },
+    "guides": {
+      "ground": 232,
+      "head": 24,
+      "pelvis": 128,
+      "centerX": 127.05986696230599
+    }
+  },
+  "calibration": null,
+  "palette": {
+    "size": 32,
+    "locked": true
+  },
+  "atlas": {
+    "pages": 1,
+    "width": 2048,
+    "height": 2048,
+    "regions": 126
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 8,
+      "kind": "upright",
+      "sheetSha1": "3015cc5f83b0d991d29caf2925ce0678953f1e41",
+      "calibration": {
+        "scale": 0.5502645502645502,
+        "targetHeight": 208,
+        "referenceHeight": 378,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208.55026455026453,
+            "pelvisX": 115.09191576620391,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.82087809434843,
+            "soleY": 232
+          },
+          "dx": 11.967951196102078,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 115.0431419564663,
+            "soleY": 218.45502645502646
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.91169617893756,
+            "soleY": 232
+          },
+          "dx": 12.016725005839689,
+          "dy": 13.544973544973544
+        },
+        {
+          "pre": {
+            "height": 209.1005291005291,
+            "pelvisX": 115.14788040319955,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.87065500118231,
+            "soleY": 232
+          },
+          "dx": 11.911986559106438,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 209.1005291005291,
+            "pelvisX": 115.09778128562658,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.80251221214236,
+            "soleY": 232
+          },
+          "dx": 11.962085676679408,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 208.55026455026453,
+            "pelvisX": 115.01041210901967,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.87182474947565,
+            "soleY": 232
+          },
+          "dx": 12.04945485328632,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 208.55026455026453,
+            "pelvisX": 115.08557288201234,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.84878844361603,
+            "soleY": 232
+          },
+          "dx": 11.974294080293646,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 115.0578665412792,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88427438170788,
+            "soleY": 232
+          },
+          "dx": 12.002000421026793,
+          "dy": 12.994708994709015
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 115.00365029031789,
+            "soleY": 219.00529100529099
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.89349801910977,
+            "soleY": 232
+          },
+          "dx": 12.056216671988096,
+          "dy": 12.994708994709015
+        }
+      ],
+      "regions": [
+        "idle_01",
+        "idle_02",
+        "idle_03",
+        "idle_04",
+        "idle_05",
+        "idle_06",
+        "idle_07",
+        "idle_08"
+      ]
+    },
+    {
+      "name": "meditate",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "bbda6824cd01e9ddee99444586f041d2ee3ca8a8",
+      "calibration": {
+        "scale": 0.52,
+        "targetHeight": 208,
+        "referenceHeight": 400,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 171.08,
+            "pelvisX": 110.34597777005905,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 171,
+            "pelvisX": 126.836993504485,
+            "soleY": 232
+          },
+          "dx": 16.71388919224694,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 171.08,
+            "pelvisX": 110.41718095881161,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 171,
+            "pelvisX": 126.82847702012616,
+            "soleY": 232
+          },
+          "dx": 16.642686003494376,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 172.64000000000001,
+            "pelvisX": 110.388425698872,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 173,
+            "pelvisX": 126.83638511518015,
+            "soleY": 232
+          },
+          "dx": 16.67144126343399,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 173.16,
+            "pelvisX": 110.49993528582095,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 173,
+            "pelvisX": 126.84650180940892,
+            "soleY": 232
+          },
+          "dx": 16.559931676485036,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 171.08,
+            "pelvisX": 110.39037497839986,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 171,
+            "pelvisX": 126.8514303291295,
+            "soleY": 232
+          },
+          "dx": 16.669491983906127,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 170.04,
+            "pelvisX": 110.24000000000001,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 170,
+            "pelvisX": 126.8126389329946,
+            "soleY": 232
+          },
+          "dx": 16.81986696230598,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 171.08,
+            "pelvisX": 110.38792267254537,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 171,
+            "pelvisX": 126.84399517199759,
+            "soleY": 232
+          },
+          "dx": 16.671944289760617,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        },
+        {
+          "pre": {
+            "height": 172.12,
+            "pelvisX": 110.41585609157809,
+            "soleY": 204.88
+          },
+          "post": {
+            "height": 172,
+            "pelvisX": 126.86307179642533,
+            "soleY": 232
+          },
+          "dx": 16.644010870727897,
+          "dy": 27.120000000000005,
+          "exception": "seated lotus; fixed standing-control scale"
+        }
+      ],
+      "regions": [
+        "meditate_01",
+        "meditate_02",
+        "meditate_03",
+        "meditate_04",
+        "meditate_05",
+        "meditate_06",
+        "meditate_07",
+        "meditate_08"
+      ]
+    },
+    {
+      "name": "walk",
+      "frames": 12,
+      "kind": "upright",
+      "sheetSha1": "1ea5ce41861445e05433baa0f7237ed14b2943f6",
+      "calibration": {
+        "scale": 0.6303030303030303,
+        "targetHeight": 208,
+        "referenceHeight": 330,
+        "referenceFrames": 12
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 209.26060606060605,
+            "pelvisX": 113.11615322860872,
+            "soleY": 218.08484848484846
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.91124845488257,
+            "soleY": 232
+          },
+          "dx": 13.943713733697265,
+          "dy": 13.915151515151535
+        },
+        {
+          "pre": {
+            "height": 209.26060606060605,
+            "pelvisX": 113.20460306771417,
+            "soleY": 218.08484848484846
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.89342235410484,
+            "soleY": 232
+          },
+          "dx": 13.855263894591815,
+          "dy": 13.915151515151535
+        },
+        {
+          "pre": {
+            "height": 209.26060606060605,
+            "pelvisX": 113.3781806309916,
+            "soleY": 218.08484848484846
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.7629575042987,
+            "soleY": 232
+          },
+          "dx": 13.681686331314395,
+          "dy": 13.915151515151535
+        },
+        {
+          "pre": {
+            "height": 207.99999999999997,
+            "pelvisX": 113.49982135833714,
+            "soleY": 216.8242424242424
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.8922542204568,
+            "soleY": 232
+          },
+          "dx": 13.560045603968845,
+          "dy": 15.175757575757586
+        },
+        {
+          "pre": {
+            "height": 207.36969696969695,
+            "pelvisX": 113.51607833173016,
+            "soleY": 216.1939393939394
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.88041594454073,
+            "soleY": 232
+          },
+          "dx": 13.543788630575833,
+          "dy": 15.806060606060612
+        },
+        {
+          "pre": {
+            "height": 209.26060606060605,
+            "pelvisX": 113.590233958101,
+            "soleY": 218.08484848484846
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.96980945310567,
+            "soleY": 232
+          },
+          "dx": 13.469633004204994,
+          "dy": 13.915151515151535
+        },
+        {
+          "pre": {
+            "height": 208.63030303030303,
+            "pelvisX": 113.22203943073507,
+            "soleY": 216.8242424242424
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.87229813664597,
+            "soleY": 232
+          },
+          "dx": 13.837827531570923,
+          "dy": 15.175757575757586
+        },
+        {
+          "pre": {
+            "height": 207.36969696969695,
+            "pelvisX": 113.06356445196937,
+            "soleY": 215.56363636363633
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.80243538767395,
+            "soleY": 232
+          },
+          "dx": 13.99630251033662,
+          "dy": 16.436363636363666
+        },
+        {
+          "pre": {
+            "height": 207.36969696969695,
+            "pelvisX": 112.89533444937767,
+            "soleY": 215.56363636363633
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.85197123729233,
+            "soleY": 232
+          },
+          "dx": 14.164532512928318,
+          "dy": 16.436363636363666
+        },
+        {
+          "pre": {
+            "height": 207.36969696969695,
+            "pelvisX": 112.67196161434869,
+            "soleY": 215.56363636363633
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.80395061728395,
+            "soleY": 232
+          },
+          "dx": 14.3879053479573,
+          "dy": 16.436363636363666
+        },
+        {
+          "pre": {
+            "height": 205.47878787878787,
+            "pelvisX": 112.81286082373492,
+            "soleY": 213.67272727272726
+          },
+          "post": {
+            "height": 205,
+            "pelvisX": 126.81891891891892,
+            "soleY": 232
+          },
+          "dx": 14.247006138571066,
+          "dy": 18.327272727272742
+        },
+        {
+          "pre": {
+            "height": 207.99999999999997,
+            "pelvisX": 112.76517096702757,
+            "soleY": 216.1939393939394
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88517693640188,
+            "soleY": 232
+          },
+          "dx": 14.294695995278417,
+          "dy": 15.806060606060612
+        }
+      ],
+      "regions": [
+        "walk_01",
+        "walk_02",
+        "walk_03",
+        "walk_04",
+        "walk_05",
+        "walk_06",
+        "walk_07",
+        "walk_08",
+        "walk_09",
+        "walk_10",
+        "walk_11",
+        "walk_12"
+      ]
+    },
+    {
+      "name": "run",
+      "frames": 12,
+      "kind": "upright",
+      "sheetSha1": "597a1a7aba696ce32acb29a5af95b46947184eb6",
+      "calibration": {
+        "scale": 0.6520376175548589,
+        "targetHeight": 208,
+        "referenceHeight": 319,
+        "referenceFrames": 12
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 209.95611285266457,
+            "pelvisX": 118.48884416682186,
+            "soleY": 221.69278996865202
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.86308125880696,
+            "soleY": 232
+          },
+          "dx": 8.571022795484126,
+          "dy": 10.307210031347978
+        },
+        {
+          "pre": {
+            "height": 210.6081504702194,
+            "pelvisX": 118.81976371173991,
+            "soleY": 221.69278996865202
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.86746143057503,
+            "soleY": 232
+          },
+          "dx": 8.24010325056608,
+          "dy": 10.307210031347978
+        },
+        {
+          "pre": {
+            "height": 210.6081504702194,
+            "pelvisX": 119.31402619111228,
+            "soleY": 221.69278996865202
+          },
+          "post": {
+            "height": 211,
+            "pelvisX": 126.95242431140451,
+            "soleY": 232
+          },
+          "dx": 7.745840771193713,
+          "dy": 10.307210031347978
+        },
+        {
+          "pre": {
+            "height": 210.6081504702194,
+            "pelvisX": 118.96656217345871,
+            "soleY": 221.69278996865202
+          },
+          "post": {
+            "height": 211,
+            "pelvisX": 126.84556239015818,
+            "soleY": 232
+          },
+          "dx": 8.093304788847277,
+          "dy": 10.307210031347978
+        },
+        {
+          "pre": {
+            "height": 209.95611285266457,
+            "pelvisX": 119.4848832178021,
+            "soleY": 221.04075235109715
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.96639755618591,
+            "soleY": 232
+          },
+          "dx": 7.574983744503882,
+          "dy": 10.959247648902846
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 119.67259494966999,
+            "soleY": 219.08463949843258
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.92309432255146,
+            "soleY": 232
+          },
+          "dx": 7.387272012636004,
+          "dy": 12.91536050156742
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 118.63527099830536,
+            "soleY": 219.08463949843258
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88414487886783,
+            "soleY": 232
+          },
+          "dx": 8.42459596400063,
+          "dy": 12.91536050156742
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 118.5787963443803,
+            "soleY": 219.08463949843258
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.8583589501064,
+            "soleY": 232
+          },
+          "dx": 8.481070617925695,
+          "dy": 12.91536050156742
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 118.33369429486885,
+            "soleY": 219.08463949843258
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.96232085067037,
+            "soleY": 232
+          },
+          "dx": 8.72617266743714,
+          "dy": 12.91536050156742
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 118.64465964208866,
+            "soleY": 219.08463949843258
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88738738738739,
+            "soleY": 232
+          },
+          "dx": 8.415207320217334,
+          "dy": 12.91536050156742
+        },
+        {
+          "pre": {
+            "height": 207.34796238244513,
+            "pelvisX": 119.08015967887044,
+            "soleY": 218.43260188087774
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.88375725122712,
+            "soleY": 232
+          },
+          "dx": 7.979707283435545,
+          "dy": 13.56739811912226
+        },
+        {
+          "pre": {
+            "height": 206.0438871473354,
+            "pelvisX": 119.23408086166705,
+            "soleY": 217.128526645768
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.80097425191371,
+            "soleY": 232
+          },
+          "dx": 7.825786100638936,
+          "dy": 14.871473354231995
+        }
+      ],
+      "regions": [
+        "run_01",
+        "run_02",
+        "run_03",
+        "run_04",
+        "run_05",
+        "run_06",
+        "run_07",
+        "run_08",
+        "run_09",
+        "run_10",
+        "run_11",
+        "run_12"
+      ]
+    },
+    {
+      "name": "dash",
+      "frames": 6,
+      "kind": "free",
+      "sheetSha1": "d135905cb15eea394b144b883a0ecaa36b4e1656",
+      "calibration": {
+        "scale": 0.538860103626943,
+        "targetHeight": 208,
+        "referenceHeight": 386,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 119.53443610133645,
+            "soleY": 219.85492227979276
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.84523250352278,
+            "soleY": 232
+          },
+          "dx": 7.525430860969536,
+          "dy": 12.14507772020724
+        },
+        {
+          "pre": {
+            "height": 197.22279792746116,
+            "pelvisX": 119.463833756238,
+            "soleY": 215.00518134715028
+          },
+          "post": {
+            "height": 197,
+            "pelvisX": 126.78400189888441,
+            "soleY": 232
+          },
+          "dx": 7.596033206067986,
+          "dy": 16.994818652849716,
+          "exception": "dash load/push/flight/braking"
+        },
+        {
+          "pre": {
+            "height": 194.52849740932643,
+            "pelvisX": 120.60989727688258,
+            "soleY": 218.23834196891193
+          },
+          "post": {
+            "height": 195,
+            "pelvisX": 126.83438448960523,
+            "soleY": 232
+          },
+          "dx": 6.449969685423412,
+          "dy": 13.761658031088075,
+          "exception": "dash load/push/flight/braking"
+        },
+        {
+          "pre": {
+            "height": 194.52849740932643,
+            "pelvisX": 118.2370280502454,
+            "soleY": 220.93264248704665
+          },
+          "post": {
+            "height": 195,
+            "pelvisX": 126.77483593573207,
+            "soleY": 232
+          },
+          "dx": 8.82283891206059,
+          "dy": 11.06735751295335,
+          "exception": "dash load/push/flight/braking"
+        },
+        {
+          "pre": {
+            "height": 195.06735751295338,
+            "pelvisX": 119.94725797166045,
+            "soleY": 219.31606217616581
+          },
+          "post": {
+            "height": 195,
+            "pelvisX": 126.84307178631052,
+            "soleY": 232
+          },
+          "dx": 7.1126089906455405,
+          "dy": 12.683937823834185,
+          "exception": "dash load/push/flight/braking"
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 119.0459584746097,
+            "soleY": 219.85492227979276
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.91137752703338,
+            "soleY": 232
+          },
+          "dx": 8.013908487696284,
+          "dy": 12.14507772020724
+        }
+      ],
+      "regions": [
+        "dash_01",
+        "dash_02",
+        "dash_03",
+        "dash_04",
+        "dash_05",
+        "dash_06"
+      ]
+    },
+    {
+      "name": "sword_fly",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "27937914c14f293d5151c03bb18230156c820a68",
+      "calibration": {
+        "scale": 0.5761772853185596,
+        "targetHeight": 208,
+        "referenceHeight": 361,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 210.30470914127426,
+            "pelvisX": 123.795870617434,
+            "soleY": 225.2853185595568
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.83486963392151,
+            "soleY": 232
+          },
+          "dx": 3.263996344871984,
+          "dy": 6.714681440443201,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 209.15235457063713,
+            "pelvisX": 124.01943435278228,
+            "soleY": 220.67590027700834
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.91118679591303,
+            "soleY": 232
+          },
+          "dx": 3.0404326095237053,
+          "dy": 11.324099722991662,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 209.7285318559557,
+            "pelvisX": 123.56100274552732,
+            "soleY": 217.79501385041553
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.78758829465187,
+            "soleY": 232
+          },
+          "dx": 3.4988642167786708,
+          "dy": 14.204986149584471,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 209.7285318559557,
+            "pelvisX": 122.90875181700997,
+            "soleY": 217.21883656509698
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.78284854563691,
+            "soleY": 232
+          },
+          "dx": 4.151115145296018,
+          "dy": 14.781163434903021,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 208.57617728531858,
+            "pelvisX": 124.30595503424297,
+            "soleY": 218.94736842105266
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.81438213914849,
+            "soleY": 232
+          },
+          "dx": 2.753911928063019,
+          "dy": 13.052631578947341,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 209.7285318559557,
+            "pelvisX": 124.58131648327027,
+            "soleY": 221.2520775623269
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.8088197146563,
+            "soleY": 232
+          },
+          "dx": 2.478550479035718,
+          "dy": 10.747922437673111,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 210.30470914127426,
+            "pelvisX": 124.32638841011358,
+            "soleY": 222.98060941828257
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.82924281984334,
+            "soleY": 232
+          },
+          "dx": 2.733478552192409,
+          "dy": 9.019390581717431,
+          "exception": "airborne on sword; same physical scale from standing control"
+        },
+        {
+          "pre": {
+            "height": 210.30470914127426,
+            "pelvisX": 124.2621176078316,
+            "soleY": 223.55678670360112
+          },
+          "post": {
+            "height": 210,
+            "pelvisX": 126.80791254554919,
+            "soleY": 232
+          },
+          "dx": 2.7977493544743908,
+          "dy": 8.44321329639888,
+          "exception": "airborne on sword; same physical scale from standing control"
+        }
+      ],
+      "regions": [
+        "sword_fly_01",
+        "sword_fly_02",
+        "sword_fly_03",
+        "sword_fly_04",
+        "sword_fly_05",
+        "sword_fly_06",
+        "sword_fly_07",
+        "sword_fly_08"
+      ]
+    },
+    {
+      "name": "attack",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "16868cc41e8bde751d056bb67c3aa595fdd7419a",
+      "calibration": {
+        "scale": 0.5306122448979592,
+        "targetHeight": 208,
+        "referenceHeight": 392,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.65113870628288,
+            "soleY": 214.8979591836735
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.83429951690822,
+            "soleY": 232
+          },
+          "dx": 15.40872825602311,
+          "dy": 17.102040816326507
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 116.89881731853451,
+            "soleY": 214.8979591836735
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.75459940652819,
+            "soleY": 232
+          },
+          "dx": 10.161049643771477,
+          "dy": 17.102040816326507
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 128.52994384421538,
+            "soleY": 214.8979591836735
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 125.69737222061796,
+            "soleY": 232
+          },
+          "dx": -1.4700768819093923,
+          "dy": 17.102040816326507,
+          "exception": "sword anticipation"
+        },
+        {
+          "pre": {
+            "height": 205.87755102040816,
+            "pelvisX": 112.7921644116347,
+            "soleY": 212.77551020408166
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.79612567918734,
+            "soleY": 232
+          },
+          "dx": 14.267702550671288,
+          "dy": 19.224489795918345,
+          "exception": "launch lunge"
+        },
+        {
+          "pre": {
+            "height": 208.53061224489798,
+            "pelvisX": 108.82340737139128,
+            "soleY": 213.83673469387756
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.8947583947584,
+            "soleY": 232
+          },
+          "dx": 18.236459590914706,
+          "dy": 18.16326530612244,
+          "exception": "contact lunge"
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 110.04211764598321,
+            "soleY": 213.83673469387756
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 127.10246227164416,
+            "soleY": 232
+          },
+          "dx": 17.017749316322778,
+          "dy": 18.16326530612244,
+          "exception": "follow-through lunge"
+        },
+        {
+          "pre": {
+            "height": 208.53061224489798,
+            "pelvisX": 113.51220977521444,
+            "soleY": 215.42857142857144
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.69187600213789,
+            "soleY": 232
+          },
+          "dx": 13.547657187091545,
+          "dy": 16.571428571428555,
+          "exception": "lunge recovery"
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.53443391510116,
+            "soleY": 214.8979591836735
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.87270973963356,
+            "soleY": 232
+          },
+          "dx": 15.525433047204828,
+          "dy": 17.102040816326507
+        }
+      ],
+      "regions": [
+        "attack_01",
+        "attack_02",
+        "attack_03",
+        "attack_04",
+        "attack_05",
+        "attack_06",
+        "attack_07",
+        "attack_08"
+      ]
+    },
+    {
+      "name": "attack_2",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "6f30f1bcea066277210283acf2b313454cd867f5",
+      "calibration": {
+        "scale": 0.5502645502645502,
+        "targetHeight": 208,
+        "referenceHeight": 378,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 205.7989417989418,
+            "pelvisX": 118.21947692232271,
+            "soleY": 214.60317460317458
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.75826848249027,
+            "soleY": 232
+          },
+          "dx": 8.840390039983276,
+          "dy": 17.39682539682542
+        },
+        {
+          "pre": {
+            "height": 199.1957671957672,
+            "pelvisX": 119.35077262256017,
+            "soleY": 216.25396825396825
+          },
+          "post": {
+            "height": 199,
+            "pelvisX": 126.81942425123583,
+            "soleY": 232
+          },
+          "dx": 7.709094339745818,
+          "dy": 15.746031746031747,
+          "exception": "sword windup"
+        },
+        {
+          "pre": {
+            "height": 196.44444444444443,
+            "pelvisX": 117.59203257343174,
+            "soleY": 220.65608465608463
+          },
+          "post": {
+            "height": 196,
+            "pelvisX": 126.82940059669107,
+            "soleY": 232
+          },
+          "dx": 9.467834388874252,
+          "dy": 11.34391534391537,
+          "exception": "low lunge"
+        },
+        {
+          "pre": {
+            "height": 214.60317460317458,
+            "pelvisX": 125.49145378713803,
+            "soleY": 223.4074074074074
+          },
+          "post": {
+            "height": 214,
+            "pelvisX": 126.76381182147165,
+            "soleY": 232
+          },
+          "dx": 1.5684131751679615,
+          "dy": 8.59259259259261,
+          "exception": "rising contact"
+        },
+        {
+          "pre": {
+            "height": 224.5079365079365,
+            "pelvisX": 123.88143739606144,
+            "soleY": 225.6084656084656
+          },
+          "post": {
+            "height": 224,
+            "pelvisX": 126.75494350282486,
+            "soleY": 232
+          },
+          "dx": 3.178429566244546,
+          "dy": 6.391534391534407,
+          "exception": "raised sword follow-through"
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 113.7749395563965,
+            "soleY": 223.95767195767195
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.95572263993317,
+            "soleY": 232
+          },
+          "dx": 13.284927405909485,
+          "dy": 8.042328042328052,
+          "exception": "raised sword follow-through"
+        },
+        {
+          "pre": {
+            "height": 209.1005291005291,
+            "pelvisX": 116.25809171948221,
+            "soleY": 220.65608465608463
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.8369785794814,
+            "soleY": 232
+          },
+          "dx": 10.80177524282378,
+          "dy": 11.34391534391537,
+          "exception": "lunge recovery"
+        },
+        {
+          "pre": {
+            "height": 204.69841269841268,
+            "pelvisX": 115.81565437546786,
+            "soleY": 215.7037037037037
+          },
+          "post": {
+            "height": 205,
+            "pelvisX": 126.82073027090695,
+            "soleY": 232
+          },
+          "dx": 11.244212586838131,
+          "dy": 16.296296296296305
+        }
+      ],
+      "regions": [
+        "attack_2_01",
+        "attack_2_02",
+        "attack_2_03",
+        "attack_2_04",
+        "attack_2_05",
+        "attack_2_06",
+        "attack_2_07",
+        "attack_2_08"
+      ]
+    },
+    {
+      "name": "attack_3",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "300ca08373a5bc7d4a0d1fe08a1391a53b2e8e8f",
+      "calibration": {
+        "scale": 0.5667574931880109,
+        "targetHeight": 208,
+        "referenceHeight": 367,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 205.73297002724797,
+            "pelvisX": 118.6059785906539,
+            "soleY": 215.93460490463218
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.88598574821853,
+            "soleY": 232
+          },
+          "dx": 8.453888371652084,
+          "dy": 16.06539509536782
+        },
+        {
+          "pre": {
+            "height": 205.73297002724797,
+            "pelvisX": 123.85544372153949,
+            "soleY": 215.93460490463218
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.80108695652174,
+            "soleY": 232
+          },
+          "dx": 3.204423240766502,
+          "dy": 16.06539509536782,
+          "exception": "windup"
+        },
+        {
+          "pre": {
+            "height": 214.23433242506815,
+            "pelvisX": 126.5078851925873,
+            "soleY": 216.50136239782017
+          },
+          "post": {
+            "height": 214,
+            "pelvisX": 126.7464146023468,
+            "soleY": 232
+          },
+          "dx": 0.5519817697186937,
+          "dy": 15.498637602179826,
+          "exception": "overhead sword anticipation"
+        },
+        {
+          "pre": {
+            "height": 225.00272479564035,
+            "pelvisX": 128.8467316188683,
+            "soleY": 225.00272479564035
+          },
+          "post": {
+            "height": 225,
+            "pelvisX": 126.8521467159511,
+            "soleY": 232
+          },
+          "dx": -1.786864656562301,
+          "dy": 6.997275204359653,
+          "exception": "launch lunge"
+        },
+        {
+          "pre": {
+            "height": 211.40054495912807,
+            "pelvisX": 121.27361150244873,
+            "soleY": 225.00272479564035
+          },
+          "post": {
+            "height": 211,
+            "pelvisX": 126.89076994434137,
+            "soleY": 232
+          },
+          "dx": 5.786255459857259,
+          "dy": 6.997275204359653,
+          "exception": "downward contact lunge"
+        },
+        {
+          "pre": {
+            "height": 211.40054495912807,
+            "pelvisX": 118.22403219841777,
+            "soleY": 225.00272479564035
+          },
+          "post": {
+            "height": 211,
+            "pelvisX": 126.83595602500539,
+            "soleY": 232
+          },
+          "dx": 8.835834763888215,
+          "dy": 6.997275204359653,
+          "exception": "follow-through lunge"
+        },
+        {
+          "pre": {
+            "height": 214.80108991825614,
+            "pelvisX": 118.00477350124304,
+            "soleY": 223.86920980926433
+          },
+          "post": {
+            "height": 215,
+            "pelvisX": 126.78580672993961,
+            "soleY": 232
+          },
+          "dx": 9.055093461062953,
+          "dy": 8.130790190735667,
+          "exception": "lunge recovery"
+        },
+        {
+          "pre": {
+            "height": 208.00000000000003,
+            "pelvisX": 118.37704993024417,
+            "soleY": 217.0681198910082
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88476790296245,
+            "soleY": 232
+          },
+          "dx": 8.68281703206182,
+          "dy": 14.931880108991805
+        }
+      ],
+      "regions": [
+        "attack_3_01",
+        "attack_3_02",
+        "attack_3_03",
+        "attack_3_04",
+        "attack_3_05",
+        "attack_3_06",
+        "attack_3_07",
+        "attack_3_08"
+      ]
+    },
+    {
+      "name": "cast",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "be4c6e2a6a665d60db46939c04ae99acb8a46d59",
+      "calibration": {
+        "scale": 0.537467700258398,
+        "targetHeight": 208,
+        "referenceHeight": 387,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.69745810959772,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.822375127421,
+            "soleY": 232
+          },
+          "dx": 15.36240885270827,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 108.24643129073065,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.92386074157939,
+            "soleY": 232
+          },
+          "dx": 18.813435671575334,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 107.02059743481641,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.86620530565168,
+            "soleY": 232
+          },
+          "dx": 20.03926952748958,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 108.29115173601589,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.89677239844185,
+            "soleY": 232
+          },
+          "dx": 18.768715226290098,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 104.34982391421653,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.94700533082471,
+            "soleY": 232
+          },
+          "dx": 22.71004304808946,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 112.68878370034987,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.79525970751386,
+            "soleY": 232
+          },
+          "dx": 14.371083261956116,
+          "dy": 15.937984496124017
+        },
+        {
+          "pre": {
+            "height": 208.53746770025842,
+            "pelvisX": 112.8297330430751,
+            "soleY": 216.59948320413437
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.85400197628458,
+            "soleY": 232
+          },
+          "dx": 14.230133919230894,
+          "dy": 15.400516795865627
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.6075629733135,
+            "soleY": 216.06201550387598
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.82822868810618,
+            "soleY": 232
+          },
+          "dx": 15.452303988992483,
+          "dy": 15.937984496124017
+        }
+      ],
+      "regions": [
+        "cast_01",
+        "cast_02",
+        "cast_03",
+        "cast_04",
+        "cast_05",
+        "cast_06",
+        "cast_07",
+        "cast_08"
+      ]
+    },
+    {
+      "name": "channel",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "cad8d6a623054337025d6cdad3c4917cafd43903",
+      "calibration": {
+        "scale": 0.5333333333333333,
+        "targetHeight": 208,
+        "referenceHeight": 390,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 207.46666666666667,
+            "pelvisX": 107.59348653173033,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.8472775564409,
+            "soleY": 232
+          },
+          "dx": 19.466380430575654,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 107.33313981615868,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88723007198081,
+            "soleY": 232
+          },
+          "dx": 19.72672714614731,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 107.04936637422401,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.87583982800322,
+            "soleY": 232
+          },
+          "dx": 20.01050058808198,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 208.53333333333333,
+            "pelvisX": 107.5232861504302,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.84601014144648,
+            "soleY": 232
+          },
+          "dx": 19.536580811875794,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 107.6529386464263,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.83823140058247,
+            "soleY": 232
+          },
+          "dx": 19.406928315879682,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 207.46666666666667,
+            "pelvisX": 107.81732568668879,
+            "soleY": 214.93333333333334
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.80273180982401,
+            "soleY": 232
+          },
+          "dx": 19.2425412756172,
+          "dy": 17.066666666666663
+        },
+        {
+          "pre": {
+            "height": 208.53333333333333,
+            "pelvisX": 107.51231231231232,
+            "soleY": 215.46666666666667
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.81529850746269,
+            "soleY": 232
+          },
+          "dx": 19.54755464999367,
+          "dy": 16.53333333333333
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 107.52689613158697,
+            "soleY": 215.46666666666667
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.84281914893617,
+            "soleY": 232
+          },
+          "dx": 19.532970830719023,
+          "dy": 16.53333333333333
+        }
+      ],
+      "regions": [
+        "channel_01",
+        "channel_02",
+        "channel_03",
+        "channel_04",
+        "channel_05",
+        "channel_06",
+        "channel_07",
+        "channel_08"
+      ]
+    },
+    {
+      "name": "hit",
+      "frames": 4,
+      "kind": "free",
+      "sheetSha1": "823ca047c922217c1fce5bcd360caf52e5bd34b2",
+      "calibration": {
+        "scale": 0.46952595936794583,
+        "targetHeight": 208,
+        "referenceHeight": 443,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 120.41613164863729,
+            "soleY": 215.9819413092551
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.81973745897797,
+            "soleY": 232
+          },
+          "dx": 6.643735313668699,
+          "dy": 16.01805869074491
+        },
+        {
+          "pre": {
+            "height": 205.65237020316027,
+            "pelvisX": 121.99849119109895,
+            "soleY": 215.9819413092551
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.78426915208001,
+            "soleY": 232
+          },
+          "dx": 5.0613757712070395,
+          "dy": 16.01805869074491
+        },
+        {
+          "pre": {
+            "height": 201.8961625282167,
+            "pelvisX": 119.03901218798232,
+            "soleY": 215.9819413092551
+          },
+          "post": {
+            "height": 202,
+            "pelvisX": 126.79696394686907,
+            "soleY": 232
+          },
+          "dx": 8.020854774323666,
+          "dy": 16.01805869074491
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 120.39035931134173,
+            "soleY": 215.9819413092551
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.8096018735363,
+            "soleY": 232
+          },
+          "dx": 6.669507650964263,
+          "dy": 16.01805869074491
+        }
+      ],
+      "regions": [
+        "hit_01",
+        "hit_02",
+        "hit_03",
+        "hit_04"
+      ]
+    },
+    {
+      "name": "die",
+      "frames": 8,
+      "kind": "free",
+      "sheetSha1": "b78708617f5a997e051951d4807b247a52276169",
+      "calibration": {
+        "scale": 0.5652173913043478,
+        "targetHeight": 208,
+        "referenceHeight": 368,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 207.99999999999997,
+            "pelvisX": 124.52031244427006,
+            "soleY": 224.39130434782606
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.80088805795747,
+            "soleY": 232
+          },
+          "dx": 2.539554518035928,
+          "dy": 7.608695652173935
+        },
+        {
+          "pre": {
+            "height": 198.39130434782606,
+            "pelvisX": 122.63509540193931,
+            "soleY": 224.39130434782606
+          },
+          "post": {
+            "height": 199,
+            "pelvisX": 126.8573104904952,
+            "soleY": 232
+          },
+          "dx": 4.424771560366679,
+          "dy": 7.608695652173935,
+          "exception": "knees buckle"
+        },
+        {
+          "pre": {
+            "height": 170.69565217391303,
+            "pelvisX": 115.53285669352302,
+            "soleY": 224.39130434782606
+          },
+          "post": {
+            "height": 171,
+            "pelvisX": 126.85900709219858,
+            "soleY": 232
+          },
+          "dx": 11.527010268782973,
+          "dy": 7.608695652173935,
+          "exception": "one-knee collapse"
+        },
+        {
+          "pre": {
+            "height": 139.04347826086956,
+            "pelvisX": 121.92382575835369,
+            "soleY": 204.04347826086956
+          },
+          "post": {
+            "height": 139,
+            "pelvisX": 126.8654467168999,
+            "soleY": 232
+          },
+          "dx": 5.136041203952303,
+          "dy": 27.956521739130437,
+          "exception": "kneeling collapse"
+        },
+        {
+          "pre": {
+            "height": 120.95652173913042,
+            "pelvisX": 131.934862728341,
+            "soleY": 204.04347826086956
+          },
+          "post": {
+            "height": 121,
+            "pelvisX": 126.72484984984985,
+            "soleY": 232
+          },
+          "dx": -4.874995766034999,
+          "dy": 27.956521739130437,
+          "exception": "side fall"
+        },
+        {
+          "pre": {
+            "height": 81.39130434782608,
+            "pelvisX": 133.03304869304478,
+            "soleY": 201.78260869565216
+          },
+          "post": {
+            "height": 81,
+            "pelvisX": 126.60733168840325,
+            "soleY": 232
+          },
+          "dx": -5.973181730738787,
+          "dy": 30.217391304347842,
+          "exception": "side-prone landing"
+        },
+        {
+          "pre": {
+            "height": 61.04347826086956,
+            "pelvisX": 122.26726145166344,
+            "soleY": 202.3478260869565
+          },
+          "post": {
+            "height": 61,
+            "pelvisX": 126.5991967871486,
+            "soleY": 232
+          },
+          "dx": 4.792605510642545,
+          "dy": 29.652173913043498,
+          "exception": "side-prone settling"
+        },
+        {
+          "pre": {
+            "height": 61.04347826086956,
+            "pelvisX": 122.30143211313636,
+            "soleY": 202.3478260869565
+          },
+          "post": {
+            "height": 61,
+            "pelvisX": 126.5934242181235,
+            "soleY": 232
+          },
+          "dx": 4.758434849169632,
+          "dy": 29.652173913043498,
+          "exception": "side-prone hold"
+        }
+      ],
+      "regions": [
+        "die_01",
+        "die_02",
+        "die_03",
+        "die_04",
+        "die_05",
+        "die_06",
+        "die_07",
+        "die_08"
+      ]
+    },
+    {
+      "name": "tribulation",
+      "frames": 12,
+      "kind": "free",
+      "sheetSha1": "8c38a4a5b73298ed60adb336f6e0a14723ac1571",
+      "calibration": {
+        "scale": 0.7074829931972789,
+        "targetHeight": 208,
+        "referenceHeight": 294,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 205.87755102040816,
+            "pelvisX": 131.87776757761927,
+            "soleY": 212.95238095238096
+          },
+          "post": {
+            "height": 206,
+            "pelvisX": 126.96375464684014,
+            "soleY": 232
+          },
+          "dx": -4.8179006153132775,
+          "dy": 19.047619047619037
+        },
+        {
+          "pre": {
+            "height": 194.55782312925172,
+            "pelvisX": 131.13332401345536,
+            "soleY": 212.24489795918367
+          },
+          "post": {
+            "height": 195,
+            "pelvisX": 126.90438616848456,
+            "soleY": 232
+          },
+          "dx": -4.073457051149376,
+          "dy": 19.755102040816325,
+          "exception": "brace"
+        },
+        {
+          "pre": {
+            "height": 169.08843537414967,
+            "pelvisX": 122.80131080154038,
+            "soleY": 210.12244897959184
+          },
+          "post": {
+            "height": 169,
+            "pelvisX": 126.87476280834915,
+            "soleY": 232
+          },
+          "dx": 4.2585561607656075,
+          "dy": 21.877551020408163,
+          "exception": "kneel"
+        },
+        {
+          "pre": {
+            "height": 147.8639455782313,
+            "pelvisX": 116.10947634867901,
+            "soleY": 210.12244897959184
+          },
+          "post": {
+            "height": 148,
+            "pelvisX": 126.91919844861022,
+            "soleY": 232
+          },
+          "dx": 10.950390613626979,
+          "dy": 21.877551020408163,
+          "exception": "defensive kneel"
+        },
+        {
+          "pre": {
+            "height": 125.93197278911565,
+            "pelvisX": 111.41971486680092,
+            "soleY": 210.82993197278913
+          },
+          "post": {
+            "height": 126,
+            "pelvisX": 126.93352706138758,
+            "soleY": 232
+          },
+          "dx": 15.640152095505073,
+          "dy": 21.170068027210874,
+          "exception": "low defensive kneel"
+        },
+        {
+          "pre": {
+            "height": 142.91156462585033,
+            "pelvisX": 132.5493610134494,
+            "soleY": 199.51020408163265
+          },
+          "post": {
+            "height": 143,
+            "pelvisX": 126.9359756097561,
+            "soleY": 232
+          },
+          "dx": -5.489494051143424,
+          "dy": 32.48979591836735,
+          "exception": "rally from kneel"
+        },
+        {
+          "pre": {
+            "height": 140.08163265306123,
+            "pelvisX": 126.56208782858012,
+            "soleY": 199.51020408163265
+          },
+          "post": {
+            "height": 140,
+            "pelvisX": 126.86242852337706,
+            "soleY": 232
+          },
+          "dx": 0.4977791337258708,
+          "dy": 32.48979591836735,
+          "exception": "hunch against impact"
+        },
+        {
+          "pre": {
+            "height": 138.66666666666666,
+            "pelvisX": 118.4443756499099,
+            "soleY": 200.21768707482994
+          },
+          "post": {
+            "height": 139,
+            "pelvisX": 126.96134949230266,
+            "soleY": 232
+          },
+          "dx": 8.615491312396088,
+          "dy": 31.78231292517006,
+          "exception": "hunch against impact"
+        },
+        {
+          "pre": {
+            "height": 159.89115646258503,
+            "pelvisX": 114.22415956673932,
+            "soleY": 197.3877551020408
+          },
+          "post": {
+            "height": 160,
+            "pelvisX": 126.88573005796302,
+            "soleY": 232
+          },
+          "dx": 12.835707395566672,
+          "dy": 34.61224489795919,
+          "exception": "rise from kneel"
+        },
+        {
+          "pre": {
+            "height": 185.36054421768708,
+            "pelvisX": 107.2215133668239,
+            "soleY": 198.8027210884354
+          },
+          "post": {
+            "height": 185,
+            "pelvisX": 126.7867054610564,
+            "soleY": 232
+          },
+          "dx": 19.83835359548209,
+          "dy": 33.19727891156461,
+          "exception": "push upright"
+        },
+        {
+          "pre": {
+            "height": 207.2925170068027,
+            "pelvisX": 131.3296918409902,
+            "soleY": 212.24489795918367
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 126.81465038845727,
+            "soleY": 232
+          },
+          "dx": -4.269824878684204,
+          "dy": 19.755102040816325
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 125.6740254935439,
+            "soleY": 212.24489795918367
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.94219914201851,
+            "soleY": 232
+          },
+          "dx": 1.385841468762095,
+          "dy": 19.755102040816325
+        }
+      ],
+      "regions": [
+        "tribulation_01",
+        "tribulation_02",
+        "tribulation_03",
+        "tribulation_04",
+        "tribulation_05",
+        "tribulation_06",
+        "tribulation_07",
+        "tribulation_08",
+        "tribulation_09",
+        "tribulation_10",
+        "tribulation_11",
+        "tribulation_12"
+      ]
+    },
+    {
+      "name": "emote",
+      "frames": 8,
+      "kind": "upright",
+      "sheetSha1": "a588052bc1b1853ea24319c5fe81336a7abdef3d",
+      "calibration": {
+        "scale": 0.5488126649076517,
+        "targetHeight": 208,
+        "referenceHeight": 379,
+        "referenceFrames": 1
+      },
+      "records": [
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 114.4312165025361,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.84507042253522,
+            "soleY": 232
+          },
+          "dx": 12.628650459769887,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 113.46025933931807,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.88546798029557,
+            "soleY": 232
+          },
+          "dx": 13.599607622987918,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 112.35641460536141,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.8728943338438,
+            "soleY": 232
+          },
+          "dx": 14.703452356944581,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.10185744877454,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.93184210526316,
+            "soleY": 232
+          },
+          "dx": 15.95800951353145,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.03617255116585,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.92823093220339,
+            "soleY": 232
+          },
+          "dx": 16.02369441114014,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208.54881266490764,
+            "pelvisX": 110.86747108609407,
+            "soleY": 215.68337730870712
+          },
+          "post": {
+            "height": 209,
+            "pelvisX": 126.93221690590111,
+            "soleY": 232
+          },
+          "dx": 16.19239587621192,
+          "dy": 16.316622691292878
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 111.88773257647428,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.95042823773683,
+            "soleY": 232
+          },
+          "dx": 15.172134385831711,
+          "dy": 16.86543535620055
+        },
+        {
+          "pre": {
+            "height": 208,
+            "pelvisX": 114.21020563477131,
+            "soleY": 215.13456464379945
+          },
+          "post": {
+            "height": 208,
+            "pelvisX": 126.83747287195563,
+            "soleY": 232
+          },
+          "dx": 12.849661327534676,
+          "dy": 16.86543535620055
+        }
+      ],
+      "regions": [
+        "emote_01",
+        "emote_02",
+        "emote_03",
+        "emote_04",
+        "emote_05",
+        "emote_06",
+        "emote_07",
+        "emote_08"
+      ]
+    }
+  ],
+  "qa": {
+    "ok": true,
+    "findings": [
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 30.8,
+        "limit": 0,
+        "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 30.8,
+        "limit": 0,
+        "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 28.8,
+        "limit": 0,
+        "message": "173 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 28.8,
+        "limit": 0,
+        "message": "173 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 30.8,
+        "limit": 0,
+        "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 31.8,
+        "limit": 0,
+        "message": "170 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 30.8,
+        "limit": 0,
+        "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 29.8,
+        "limit": 0,
+        "message": "172 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 9,
+        "metric": "ghost_offset_px_R",
+        "value": 20,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 20.0 px from its template ghost (x 123.0 vs 103.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "slide_px_per_frame_R",
+        "value": 5.25,
+        "limit": 3,
+        "message": "R foot slides 5.3 px/frame between frames 6-7 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 8,
+        "metric": "slide_px_per_frame_R",
+        "value": 5.42,
+        "limit": 3,
+        "message": "R foot slides 5.4 px/frame between frames 7-8 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 10,
+        "metric": "ghost_offset_px_R",
+        "value": 30.3,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 30.3 px from its template ghost (x 133.3 vs 103.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 11,
+        "metric": "ghost_offset_px_R",
+        "value": 32.4,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 32.4 px from its template ghost (x 135.4 vs 103.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 4,
+        "metric": "ghost_offset_px_L",
+        "value": 29.9,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -29.9 px from its template ghost (x 122.7 vs 152.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 1,
+        "metric": "slide_px_per_frame_L",
+        "value": 5.05,
+        "limit": 3,
+        "message": "L foot slides 5.0 px/frame between frames 0-1 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "slide_px_per_frame_L",
+        "value": 3.43,
+        "limit": 3,
+        "message": "L foot slides 3.4 px/frame between frames 1-2 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "slide_px_per_frame_L",
+        "value": 3.44,
+        "limit": 3,
+        "message": "L foot slides 3.4 px/frame between frames 2-3 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 5,
+        "metric": "ghost_offset_px_L",
+        "value": 29.6,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -29.6 px from its template ghost (x 123.0 vs 152.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_offset_px_R",
+        "value": 22.2,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 22.2 px from its template ghost (x 125.2 vs 103.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 7,
+        "metric": "slide_px_per_frame_R",
+        "value": 11.63,
+        "limit": 3,
+        "message": "R foot slides 11.6 px/frame between frames 6-7 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 9,
+        "metric": "ghost_offset_px_R",
+        "value": 23.5,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 23.5 px from its template ghost (x 126.5 vs 103.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 2,
+        "metric": "ghost_offset_px_L",
+        "value": 20.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -20.1 px from its template ghost (x 132.5 vs 152.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_offset_px_L",
+        "value": 21.3,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -21.3 px from its template ghost (x 131.3 vs 152.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 4.8,
+        "limit": 0,
+        "message": "197 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "199 px outside 201.8..214.2 (declared exception: sword windup)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 5.8,
+        "limit": 0,
+        "message": "196 px outside 201.8..214.2 (declared exception: low lunge)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 9.8,
+        "limit": 0,
+        "message": "224 px outside 201.8..214.2 (declared exception: raised sword follow-through)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 10.8,
+        "limit": 0,
+        "message": "225 px outside 201.8..214.2 (declared exception: launch lunge)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 0.8,
+        "limit": 0,
+        "message": "215 px outside 201.8..214.2 (declared exception: lunge recovery)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
+        "message": "199 px outside 201.8..214.2 (declared exception: knees buckle)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 30.8,
+        "limit": 0,
+        "message": "171 px outside 201.8..214.2 (declared exception: one-knee collapse)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: kneeling collapse)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 80.8,
+        "limit": 0,
+        "message": "121 px outside 201.8..214.2 (declared exception: side fall)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 120.8,
+        "limit": 0,
+        "message": "81 px outside 201.8..214.2 (declared exception: side-prone landing)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 140.8,
+        "limit": 0,
+        "message": "61 px outside 201.8..214.2 (declared exception: side-prone settling)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 140.8,
+        "limit": 0,
+        "message": "61 px outside 201.8..214.2 (declared exception: side-prone hold)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 6.8,
+        "limit": 0,
+        "message": "195 px outside 201.8..214.2 (declared exception: brace)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 32.8,
+        "limit": 0,
+        "message": "169 px outside 201.8..214.2 (declared exception: kneel)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 53.8,
+        "limit": 0,
+        "message": "148 px outside 201.8..214.2 (declared exception: defensive kneel)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 75.8,
+        "limit": 0,
+        "message": "126 px outside 201.8..214.2 (declared exception: low defensive kneel)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 58.8,
+        "limit": 0,
+        "message": "143 px outside 201.8..214.2 (declared exception: rally from kneel)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 61.8,
+        "limit": 0,
+        "message": "140 px outside 201.8..214.2 (declared exception: hunch against impact)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 62.8,
+        "limit": 0,
+        "message": "139 px outside 201.8..214.2 (declared exception: hunch against impact)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 41.8,
+        "limit": 0,
+        "message": "160 px outside 201.8..214.2 (declared exception: rise from kneel)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 16.8,
+        "limit": 0,
+        "message": "185 px outside 201.8..214.2 (declared exception: push upright)"
+      }
+    ],
+    "judged": [
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 30.8,
+          "limit": 0,
+          "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 30.8,
+          "limit": 0,
+          "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 28.8,
+          "limit": 0,
+          "message": "173 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 28.8,
+          "limit": 0,
+          "message": "173 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 30.8,
+          "limit": 0,
+          "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 31.8,
+          "limit": 0,
+          "message": "170 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 30.8,
+          "limit": 0,
+          "message": "171 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 29.8,
+          "limit": 0,
+          "message": "172 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "ghost_offset_px_R",
+          "value": 20,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 20.0 px from its template ghost (x 123.0 vs 103.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 9,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 20,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "slide_px_per_frame_R",
+          "value": 5.25,
+          "limit": 3,
+          "message": "R foot slides 5.3 px/frame between frames 6-7 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 5.25,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 8,
+          "metric": "slide_px_per_frame_R",
+          "value": 5.42,
+          "limit": 3,
+          "message": "R foot slides 5.4 px/frame between frames 7-8 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 8,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 5.42,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "ghost_offset_px_R",
+          "value": 30.3,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 30.3 px from its template ghost (x 133.3 vs 103.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 10,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 30.3,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 11,
+          "metric": "ghost_offset_px_R",
+          "value": 32.4,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 32.4 px from its template ghost (x 135.4 vs 103.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 11,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 32.4,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 4,
+          "metric": "ghost_offset_px_L",
+          "value": 29.9,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -29.9 px from its template ghost (x 122.7 vs 152.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 4,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 29.9,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "slide_px_per_frame_L",
+          "value": 5.05,
+          "limit": 3,
+          "message": "L foot slides 5.0 px/frame between frames 0-1 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 1,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_L",
+          "value": 5.05,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "slide_px_per_frame_L",
+          "value": 3.43,
+          "limit": 3,
+          "message": "L foot slides 3.4 px/frame between frames 1-2 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_L",
+          "value": 3.43,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 3,
+          "metric": "slide_px_per_frame_L",
+          "value": 3.44,
+          "limit": 3,
+          "message": "L foot slides 3.4 px/frame between frames 2-3 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_L",
+          "value": 3.44,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "ghost_offset_px_L",
+          "value": 29.6,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -29.6 px from its template ghost (x 123.0 vs 152.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 5,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 29.6,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 8,
+          "metric": "ghost_offset_px_R",
+          "value": 22.2,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 22.2 px from its template ghost (x 125.2 vs 103.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 8,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 22.2,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 7,
+          "metric": "slide_px_per_frame_R",
+          "value": 11.63,
+          "limit": 3,
+          "message": "R foot slides 11.6 px/frame between frames 6-7 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 11.63,
+          "limit": 3,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 9,
+          "metric": "ghost_offset_px_R",
+          "value": 23.5,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 23.5 px from its template ghost (x 126.5 vs 103.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 9,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 23.5,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 2,
+          "metric": "ghost_offset_px_L",
+          "value": 20.1,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -20.1 px from its template ghost (x 132.5 vs 152.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 20.1,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 3,
+          "metric": "ghost_offset_px_L",
+          "value": 21.3,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -21.3 px from its template ghost (x 131.3 vs 152.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 21.3,
+          "limit": 20,
+          "note": "D41 first pass; S motion is in screen depth, but current foot QA applies horizontal ground speed to lowest-ground soles. Retain exact diagnostic values without claiming actual S slide, changing speeds, or weakening limits.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "197 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: sword windup)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "196 px outside 201.8..214.2 (declared exception: low lunge)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_2",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "message": "224 px outside 201.8..214.2 (declared exception: raised sword follow-through)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 10.8,
+          "limit": 0,
+          "message": "225 px outside 201.8..214.2 (declared exception: launch lunge)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack_3",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "215 px outside 201.8..214.2 (declared exception: lunge recovery)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: knees buckle)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 30.8,
+          "limit": 0,
+          "message": "171 px outside 201.8..214.2 (declared exception: one-knee collapse)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: kneeling collapse)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 80.8,
+          "limit": 0,
+          "message": "121 px outside 201.8..214.2 (declared exception: side fall)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 120.8,
+          "limit": 0,
+          "message": "81 px outside 201.8..214.2 (declared exception: side-prone landing)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 140.8,
+          "limit": 0,
+          "message": "61 px outside 201.8..214.2 (declared exception: side-prone settling)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 140.8,
+          "limit": 0,
+          "message": "61 px outside 201.8..214.2 (declared exception: side-prone hold)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 6.8,
+          "limit": 0,
+          "message": "195 px outside 201.8..214.2 (declared exception: brace)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 32.8,
+          "limit": 0,
+          "message": "169 px outside 201.8..214.2 (declared exception: kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 53.8,
+          "limit": 0,
+          "message": "148 px outside 201.8..214.2 (declared exception: defensive kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 75.8,
+          "limit": 0,
+          "message": "126 px outside 201.8..214.2 (declared exception: low defensive kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 58.8,
+          "limit": 0,
+          "message": "143 px outside 201.8..214.2 (declared exception: rally from kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "140 px outside 201.8..214.2 (declared exception: hunch against impact)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 62.8,
+          "limit": 0,
+          "message": "139 px outside 201.8..214.2 (declared exception: hunch against impact)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: rise from kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "tribulation",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 16.8,
+          "limit": 0,
+          "message": "185 px outside 201.8..214.2 (declared exception: push upright)"
+        },
+        "class": "info",
+        "verdict": "info"
+      }
+    ],
+    "resolved": [],
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 15,
+      "regression": 0,
+      "info": 33
+    }
+  }
+}
