@@ -2,10 +2,16 @@
   "character": "the-tu",
   "concept": "A - Sơn Môn Hộ Vệ",
   "pipeline": "D39 continuous limbs and separate detail sources",
-  "directions": ["E", "S", "SE", "NE", "N"],
+  "directions": [
+    "E",
+    "S",
+    "SE",
+    "NE",
+    "N"
+  ],
   "order": "E art and idle/run/attack gate first; then other directions and all 15 body clips",
   "sourcePromptPack": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
-  "status": "E 50 selected character/detail sources processed; rest registration passes <=2px; all29 shared sources and derivatives exported; class-aware rig assembly and engine gates pending",
+  "status": "E baseline fully gated: strict15 clean and Cocos idle/run/attack PASS with cuff/hem chains; idle2 AI pilot raw references generated; bulk keypose held by orchestrator, other direction art allowed",
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
@@ -203,8 +209,13 @@
       "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
     }
   ],
-  "conditionalParts": ["ear_L", "ear_R"],
-  "optionalParts": ["gauntlet_plate_glow_R"],
+  "conditionalParts": [
+    "ear_L",
+    "ear_R"
+  ],
+  "optionalParts": [
+    "gauntlet_plate_glow_R"
+  ],
   "sharedVfx": [
     "rock_chunk_1",
     "rock_chunk_2",
@@ -241,17 +252,35 @@
   "masterRegistration": {
     "generationReference": "reference/E.master4x.png",
     "registeredMaster": "reference/E.register-master4x.png",
-    "inputCanvas": [512, 512],
-    "resize": [448, 448],
-    "offset": [32, 44],
-    "outputCanvas": [512, 512],
+    "inputCanvas": [
+      512,
+      512
+    ],
+    "resize": [
+      448,
+      448
+    ],
+    "offset": [
+      32,
+      44
+    ],
+    "outputCanvas": [
+      512,
+      512
+    ],
     "method": "alpha-weighted area resampling, straight-alpha source and output",
     "status": "provisional landmarks; silhouette and rig gates pending"
   },
   "keyPosePlan": {
     "stage": "after E assembly",
     "source": "owner decision relayed by orchestrator 2026-11-06",
-    "actions": ["walk", "run", "punch combo", "guard", "ground slam"],
+    "actions": [
+      "walk",
+      "run",
+      "punch combo",
+      "guard",
+      "ground slam"
+    ],
     "workflow": "Generate separate AI pose references and manually annotate landmarks, then use worker15 fitPose/authorFromKeyPoses tooling; gate measured rig and in-engine clips after fitting"
   },
   "integration": {
@@ -263,7 +292,10 @@
   "validation": {
     "registration": {
       "sourceParts": 50,
-      "canvas2x": [256, 256],
+      "canvas2x": [
+        256,
+        256
+      ],
       "alphaThreshold": 128,
       "extraPixels": 439,
       "missingPixels": 137,
@@ -272,9 +304,82 @@
       "pass": true
     },
     "prepCommit": "907f9ed3a569206f1d67e5eefd3c450fc9417d56",
-    "rigMeasure": "not run",
-    "engineCapture": "not run",
-    "otherDirections": "not started"
+    "rigMeasure": {
+      "clips": 15,
+      "openings": 0,
+      "tears": 0,
+      "stretchEvents": 0,
+      "stripFaults": 0
+    },
+    "engineCapture": {
+      "engine": "Cocos Creator3.8.8 WebGL",
+      "animations": {
+        "idle": {
+          "duration": 1,
+          "keyFrames": 30,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 14.281820473429287,
+            "seamStep": 12.122006458424094,
+            "ratio": 0.848771799153796
+          },
+          "sheet": "idle.sheet.png"
+        },
+        "run": {
+          "duration": 0.5,
+          "keyFrames": 15,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 449.9851424922414,
+            "seamStep": 345.44843676795034,
+            "ratio": 0.7676885393475109
+          },
+          "sheet": "run.sheet.png"
+        },
+        "attack": {
+          "duration": 0.43333333333333335,
+          "keyFrames": 13,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 350.0570195409733,
+            "seamStep": 347.8339729687199,
+            "ratio": 0.9936494729482401
+          },
+          "sheet": "attack.sheet.png"
+        }
+      },
+      "source": "dragonbones/the-tu-continuous/thetu"
+    },
+    "otherDirections": "not started",
+    "rigStats": {
+      "bones": 38,
+      "slots": 28,
+      "vertices": 427,
+      "chains": 5,
+      "meshScale": 1,
+      "nonPremultiplied": 0,
+      "limits": {
+        "bones": 60,
+        "slots": 40,
+        "meshVertices": 600,
+        "chains": 6
+      }
+    },
+    "atlas": {
+      "padding": 2,
+      "extrude": 1,
+      "premultipliedAlpha": true,
+      "page": [
+        512,
+        512
+      ]
+    },
+    "encodedAtlasInvalidPmaPixels": 0,
+    "keyPosePilot": "idle2 raw AI references generated, annotations/fit pending",
+    "bulkKeyPose": "held pending owner gait choice"
   },
   "selection": {
     "plateGlow": "raw/E/gauntlet_plate_glow_R_attempt2.png selected as canonical; attempt1 archived under raw/E/rejected",

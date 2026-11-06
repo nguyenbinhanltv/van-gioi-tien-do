@@ -1,0 +1,18 @@
+{
+  "id": "idle_01_in",
+  "clip": "idle",
+  "key": "in",
+  "prompt": "Create ONE full-body AI KEY-POSE reference of Thể tu A Sơn Môn Hộ Vệ for a 2D isometric cultivation MMORPG rig. Reference 1 is the identity/costume/material master. Reference 2 is the exact pose-layout guide: preserve its joint locations, silhouette proportions, planted feet and framing. E direction, facing RIGHT, slight overhead isometric camera. Neutral combat GUARD: both bronze earth gauntlets raised at chest/face height exactly as the layout guide; elbows bent, knees softly bent, balanced stocky stance. IDLE INHALE key: very subtle lifted chest and shoulders, calm steady breath. Keep movement tiny; same head size, limb lengths and outfit volume as the guide. Same adult male identity, short top bun and jade hairpin. Ivory cross-collar inner robe #E9EEF0, mountain-blue short split tabard #5E8798 thin bronze cloud trim #B58A4A, dark-blue sash #294451 with two tails, loose ivory trousers, dark boots, paired bronze stone-block gauntlets with meander emblem, highlights #E3C07F shade #5B4222. Clean hand-painted sprite, readable dark contour, 2-3 tone soft cel shading, light upper-left NW. Eyes open, brows neutral, mouth closed. ONE subject on genuinely transparent background, no text, UI, ground marker, cast shadow or VFX. Square canvas, same placement as guide (feet at 90.625% canvas height), do not zoom/crop/recenter; retain at least 8% clear margin. Preserve the guard stance from guide, not the relaxed arms-down pose of the identity master.",
+  "utcStart": "2026-11-06 04:02:41 UTC",
+  "utcEnd": "2026-11-06 04:03:22 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "references": [
+    "reference/E.register-master4x.png",
+    "reference/keyposes/E/idle_01-guide4x.png"
+  ],
+  "selectedOutput": "raw/keyposes/E/idle_01_in.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-d2f6baa1-c486-48c1-a6a2-0c3143a1c988.png",
+  "status": "raw AI reference; canonical registration and measured landmarks pending"
+}

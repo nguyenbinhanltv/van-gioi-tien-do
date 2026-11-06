@@ -1,0 +1,10 @@
+{
+  "kind": "software-rendered pose-layout guide only, not an AI key-pose result or Cocos gate image",
+  "class": "the-tu",
+  "direction": "E",
+  "clip": "idle",
+  "frame": 15,
+  "scale": 4,
+  "sourceRig": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E.rig.json",
+  "sourceAtlas": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_tex.png"
+}
