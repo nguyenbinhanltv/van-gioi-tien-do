@@ -1,0 +1,61 @@
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "kiem-tu",
+  "entries": [
+    {
+      "clip": "hit",
+      "dir": "N",
+      "cell": 2,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 6.8,
+      "limit": 0,
+      "note": "D41 first pass: retain hit recoil height195px free-pose warning without per-frame scaling. Directional foot slide remains explicitly UNMEASURED; no speed or threshold changes.",
+      "status": "open",
+      "added": "2026-11-06"
+    }
+  ],
+  "manual": [
+    {
+      "kind": "weak_reversal",
+      "clip": "run",
+      "dir": "N",
+      "cells": [],
+      "note": "Long back robe obscures thighs; boot alternation reads subtly and needs future gait polish.\nLegacy art diagnostic: kind=\"leg_reversal\"; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "walk",
+      "dir": "N",
+      "cells": [],
+      "note": "Directional foot slide UNMEASURED pending source-ground registration and direction-correct vertical keep QA guides.\nLegacy art diagnostic: kind=\"contact_phase\"; status=\"open\"",
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "hit",
+      "dir": "N",
+      "cells": [2],
+      "note": "Recoil frame measures195px, outside upright band; free-pose soft warning retained without per-frame scaling.\nLegacy art diagnostic: kind=\"other\"; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "die",
+      "dir": "N",
+      "cells": [5],
+      "note": "Side fall exposes a small cheek sliver compared with the full-back standing master; costume and right-hand sword retained.\nLegacy art diagnostic: kind=\"redraw_drift\"; status=\"open\"",
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open"
+    }
+  ]
+}

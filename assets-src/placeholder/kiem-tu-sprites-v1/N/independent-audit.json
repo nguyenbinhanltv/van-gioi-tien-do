@@ -1,0 +1,33 @@
+{
+  "pipelineCommit": "892a4c3a45b234a5fb5d0962aebb1bf38adb2d87",
+  "writtenPngDecoder": "tools/procgen/src/lib/png.js decodePNG (raw written bytes)",
+  "atlas": {
+    "width": 2048,
+    "height": 2048,
+    "rgbAboveAlphaPixels": 0,
+    "padding": 2,
+    "extrude": 1
+  },
+  "rebuild": [
+    {
+      "file": "kiemtu_N.sprite.json",
+      "sha256": "ce724a2e21cd64fba597ec4aade93135d7e69812551e7e0d5ff18bc94e5d9505",
+      "identical": true
+    },
+    {
+      "file": "kiemtu_N_ske.json",
+      "sha256": "9b7ae6825c0e9304915f18d8fb57d1c42ce377cf02c4b8238e9b619f3a3bce27",
+      "identical": true
+    },
+    {
+      "file": "kiemtu_N_tex.json",
+      "sha256": "399ee40b4d50c0e61f846582dca891f3a9cf41735eae90d14041c3d412087468",
+      "identical": true
+    },
+    {
+      "file": "kiemtu_N_tex.png",
+      "sha256": "eb2ff9e55723249e5a21426b8056d2de45cc296d94c37aa67c206fbe47bcbc2a",
+      "identical": true
+    }
+  ]
+}
