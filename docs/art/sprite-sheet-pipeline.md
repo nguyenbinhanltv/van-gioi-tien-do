@@ -46,6 +46,30 @@ Chạy cả chuỗi: `npm run sprite:build -w @vgtd/sprite -- --project <project
 - **Chú thích tiếp đất thật:** `contacts: { R: [...], L: [...] }` trong clip của project thay cờ `planted` của template bằng các khung mà bản vẽ **thực sự** có chân chạm đất (vị trí bóng chân giữ nguyên).
 - **Đo đế chân:** `soleRuns` tách từng bàn chân (cách nhau ≥ 3 cột) nên hai giày gần nhau không còn bị trung bình hóa; chân đặt đất cách bóng chân > 20 px **không** bị bỏ qua âm thầm mà báo `warn` ("chân không nằm trên template").
 
+## Bảng clip dùng chung (15 clip Player)
+
+`import { SPRITE_CLIPS, SPRITE_CLIP_NAMES, spriteClip, projectClipDefaults } from '@vgtd/sprite'` (`tools/sprite/src/clips.ts`). Bảng **sinh từ `ANIMATIONS`** (`docs/03`) nên thời lượng, cờ lặp, fps, sự kiện không bao giờ lệch; ba nhịp combo `attack`, `attack_2`, `attack_3` dùng chung đặc tả `attack`.
+
+| Clip                             | Bảng (`tableId`) | Ô sheet đề xuất (cols) | Loại    | Gợi ý exception      |
+| -------------------------------- | ---------------- | ---------------------- | ------- | -------------------- |
+| `idle`                           | idle             | 8 (4)                  | upright | -                    |
+| `meditate`                       | meditate         | 8 (4)                  | free    | seated               |
+| `walk`                           | walk             | 12 (6)                 | upright | -                    |
+| `run`                            | run              | 12 (6)                 | upright | -                    |
+| `dash`                           | dash             | 6 (4)                  | free    | lunge                |
+| `sword_fly`                      | sword_fly        | 8 (4)                  | free    | airborne, sword-ride |
+| `attack`, `attack_2`, `attack_3` | attack           | 8 (4)                  | free    | raised-sword, lunge  |
+| `cast`                           | cast             | 8 (4)                  | free    | raised-arms          |
+| `channel`                        | channel          | 8 (4)                  | free    | raised-arms          |
+| `hit`                            | hit              | 4 (4)                  | free    | recoil               |
+| `die`                            | die              | 8 (4)                  | free    | die-collapse         |
+| `tribulation`                    | tribulation      | 12 (6)                 | free    | kneel, raised-arms   |
+| `emote`                          | emote            | 8 (4)                  | upright | -                    |
+
+- `spriteClip(name)` trả `{ tableId, loop, durationSec, asymmetric, kind, sheet: { frames, cols }, events, phases, exceptionHints }`; `phases` là **số khung của bảng** mặc định cho sự kiện neo theo pha (`hit_frame`, `combo_window`, `windup_end`) — giá trị mặc định lấy từ nhịp rig Kiếm tu, chỉnh theo sheet thật (cần game designer duyệt khi cân bằng).
+- `projectClipDefaults(name)` trả các trường của clip trong `project.json` lấy từ bảng (`name`, `cols`, `frames`, `durationSec`, `loop`, `tableId`, `kind`, `phases`); thêm `sheet`, `manifest`, `exceptions`, `calibration`.
+- `sprite:template --clip <tên>` lấy `--frames` / `--cols` mặc định từ bảng này.
+
 ## Quality backlog (làm đủ bộ trước, cải thiện sau)
 
 Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `project.backlog`) và `quality-backlog.md` sinh tự động:
