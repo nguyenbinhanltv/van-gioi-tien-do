@@ -108,6 +108,7 @@ const sampleRegions = {
     [111, 190, 136, 194],
     [118, 80, 122, 83],
   ],
+  jade: [[99, 31, 109, 39]],
   hair: [
     [108, 54, 119, 101],
     [117, 209, 125, 222],
@@ -125,7 +126,8 @@ for (let y = 0; y < master.height; y++)
         (name === 'hair' && l > 125) ||
         (name === 'blue' && (c[0] > c[2] + 5 || l > 180)) ||
         (name === 'skin' && l < 140) ||
-        (name === 'gold' && (c[0] < c[2] + 12 || l < 110))
+        (name === 'gold' && (c[0] < c[2] + 12 || l < 110)) ||
+        (name === 'jade' && (c[1] < c[0] + 4 || c[1] < c[2] - 3))
       )
         continue;
       (palettes[name] ??= []).push(c);
@@ -320,6 +322,8 @@ if (mode === 'licenses') {
     '\nNguồn gốc: master concept A / KT2 (`assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png`), phóng bằng Lanczos tiền nhân alpha lên @4x. Các mảnh mới do `image_gen.imagegen` sinh riêng từ master và mask vùng; model **không công bố (undisclosed)**; CLI `codex-cli 0.164.0`. Chủ art tạm: người dùng. Điều khoản công cụ: https://openai.com/policies/row-terms-of-use/ ; giữ nhãn placeholder của KT2, cần duyệt nguồn gốc và quyền sử dụng trước phát hành. Không thêm nguồn bên thứ ba.\n\nHậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ halo alpha / đốm rời, đăng ký bounding box về mask, chuyển bảng màu theo từng vật liệu bằng mẫu từ master (75% màu mẫu, 25% ảnh sinh), giới hạn silhouette nghỉ trong biên master + 2 px @2x, downsample @4x→@2x. Mask hình học và nhãn vật liệu được tác giả chỉnh thủ công trong `E.parts.json`; mốc khớp chỉnh thủ công trong `E/landmarks.json`. Không tô pixel thủ công lên ảnh đầu ra. Ánh sáng NW và đồng nhất phong cách vẫn phải duyệt bằng mắt; đăng ký không tự chứng minh cổng QA.\n\nĐường dẫn ảnh thô được chọn: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/<id>.png`; ảnh RGBA @2x: `assets-src/placeholder/kiem-tu-continuous-v1/E/<id>.png`; mask tái tạo từ manifest bằng lệnh `node tools/procgen/scripts/continuous_parts.mjs masks <thư-mục-tạm>`. Mỗi JSON cạnh ảnh thô giữ prompt và tham chiếu gốc.\n';
   section +=
     '\n[Cập nhật KT3] Đăng ký cuối dùng cross-section liên tục cho thân, chi, vạt váy, nút đai và dải tóc; các chi tiết nhỏ dùng area resampling để không mất nét mắt/miệng. Các chỉnh sửa mask thủ công gồm bổ sung búi tóc riêng, mở rộng cổ/ngực dưới đầu, cạnh trước vạt váy và nút đai; giữ cả mask lúc sinh (`raw/E/<id>.mask.png`) và guide cuối trong manifest. PNG nguồn là straight alpha; chỉ atlas/export là PMA. Bóng riêng giới hạn alpha 20%. Kiểm tra rest composite chạy bằng mode `check`; không thay thế kiểm tra mesh khi chuyển động.\n';
+  section +=
+    '\nChỉnh bảng màu ngọc (không đổi alpha): thêm mẫu jade riêng từ trâm concept A cho trâm và mặt dây; tránh ánh xanh ngọc bị phân loại thành vải xanh hoặc vàng. Đây là hậu xử lý màu bằng mã, không phải lần sinh ảnh mới.\n';
   for (const e of entries)
     section += `\n### KT3 / ${e.id}\n\n- UTC bắt đầu: ${e.utcStart}; công cụ: ${e.tool}; model: ${e.model}; CLI: ${e.cli}.\n- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: \`${e.selectedOutput}\`.\n- Prompt đầy đủ:\n\n\`\`\`text\n${e.prompt}\n\`\`\`\n`;
   fs.writeFileSync(filename, previous + section);

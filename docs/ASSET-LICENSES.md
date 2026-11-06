@@ -515,6 +515,8 @@ Hậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ hal
 
 [Cập nhật KT3] Đăng ký cuối dùng cross-section liên tục cho thân, chi, vạt váy, nút đai và dải tóc; các chi tiết nhỏ dùng area resampling để không mất nét mắt/miệng. Các chỉnh sửa mask thủ công gồm bổ sung búi tóc riêng, mở rộng cổ/ngực dưới đầu, cạnh trước vạt váy và nút đai; giữ cả mask lúc sinh (`raw/E/<id>.mask.png`) và guide cuối trong manifest. PNG nguồn là straight alpha; chỉ atlas/export là PMA. Bóng riêng giới hạn alpha 20%. Kiểm tra rest composite chạy bằng mode `check`; không thay thế kiểm tra mesh khi chuyển động.
 
+Chỉnh bảng màu ngọc (không đổi alpha): thêm mẫu jade riêng từ trâm concept A cho trâm và mặt dây; tránh ánh xanh ngọc bị phân loại thành vải xanh hoặc vàng. Đây là hậu xử lý màu bằng mã, không phải lần sinh ảnh mới.
+
 ### KT3 / arm_R
 
 - UTC bắt đầu: 2026-11-06 00:36:57 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.

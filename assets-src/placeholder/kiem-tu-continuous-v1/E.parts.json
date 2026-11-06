@@ -424,12 +424,23 @@
     },
     {
       "id": "hairpin",
-      "materials": ["gold", "blue"],
+      "materials": ["jade", "gold"],
       "segments": [
         {
           "a": [101, 35],
           "b": [123, 32],
           "r": 3.2
+        }
+      ],
+      "materialRegions": [
+        {
+          "material": "gold",
+          "polygon": [
+            [105, 29],
+            [112, 29],
+            [112, 40],
+            [105, 40]
+          ]
         }
       ]
     },
@@ -629,7 +640,7 @@
     },
     {
       "id": "pendant",
-      "materials": ["blue", "gold"],
+      "materials": ["blue", "jade", "gold"],
       "segments": [
         {
           "a": [141, 119],
@@ -646,6 +657,26 @@
           [140, 136],
           [140, 132]
         ]
+      ],
+      "materialRegions": [
+        {
+          "material": "gold",
+          "polygon": [
+            [139, 128],
+            [147, 128],
+            [147, 132],
+            [139, 132]
+          ]
+        },
+        {
+          "material": "jade",
+          "polygon": [
+            [139, 132],
+            [147, 132],
+            [147, 140],
+            [139, 140]
+          ]
+        }
       ]
     },
     {
