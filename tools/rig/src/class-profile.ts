@@ -178,7 +178,9 @@ const BACK_VIEW: Record<string, Partial<PieceSpec>> = {
  * arms hang at the sides so they never cross the head). NE: far arm and the front panel behind the body, the back panel over
  * it, the rear hair over the back of the head (drawOrder NE), near arm last; only the visible facial edge (eyes, brows, no
  * mouth, no ear). N: both arms behind the body, back panel visible, no face at all (11 swaps + ear + facial bangs omitted),
- * the rear hair covers the head. Part files that do not exist are reported by the assembler, not fatal.
+ * the rear hair covers the head. In NE and N the sash tails are drawn BEFORE the back panel (right after the torso): the panel
+ * covers their upper part and only the ends peek out below the hem, the band stays over the panel. Part files that do not
+ * exist are reported by the assembler, not fatal.
  */
 export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly PieceSpec[]>>> = {
   E: THE_TU_E_PIECES,
@@ -191,11 +193,11 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       armSet('L'),
       'torso',
       legSet('R'),
+      'sash_tail_1',
+      'sash_tail_2',
       'tabard_back',
       'tabard_shoulders',
       'sash_set',
-      'sash_tail_1',
-      'sash_tail_2',
       'head',
       EYES,
       BROWS,
@@ -215,11 +217,11 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       legSet('R'),
       'tabard_front',
       'torso',
+      'sash_tail_1',
+      'sash_tail_2',
       'tabard_back',
       'tabard_shoulders',
       'sash_set',
-      'sash_tail_1',
-      'sash_tail_2',
       'head',
       'hair_back',
       'hairpin',
