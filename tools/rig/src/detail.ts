@@ -71,6 +71,8 @@ export interface ClipDetail {
   readonly mouth?: { readonly base: string; readonly holds?: readonly Hold[] };
   readonly handR?: { readonly base: string; readonly holds?: readonly Hold[] };
   readonly handL?: { readonly base: string; readonly holds?: readonly Hold[] };
+  /** Class-specific display slots by slot name (Thể tu brows): default display and timed holds, like `mouth`. */
+  readonly extra?: Readonly<Record<string, { readonly base: string; readonly holds?: readonly Hold[] }>>;
   readonly trail?: TrailRule;
   /** Short additive flash around a frame. */
   readonly glint?: { readonly at: At; readonly halfWidth?: number };
@@ -383,6 +385,7 @@ export function applyDetail(
     holdTrack(rig, clip, DETAIL_SLOTS.mouth, rule.mouth),
     holdTrack(rig, clip, DETAIL_SLOTS.handR, rule.handR),
     holdTrack(rig, clip, DETAIL_SLOTS.handL, rule.handL),
+    ...Object.entries(rule.extra ?? {}).map(([slot, spec]) => holdTrack(rig, clip, slot, spec)),
     trailTracks(rig, clip, rule.trail),
     glintTrack(rig, clip, rule.glint),
   ].filter((t): t is SlotTrack => !!t);

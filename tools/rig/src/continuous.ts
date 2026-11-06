@@ -9,7 +9,8 @@
  * displays; all crops are packed into one atlas page.
  */
 import { RIG_LIMITS } from '@vgtd/character';
-import { applyLandmarks, type Landmarks } from './landmarks.js';
+import { applyLandmarks, snapIkTargets, type Landmarks } from './landmarks.js';
+import { spineWeights } from './tabard.js';
 import { buildLimbMesh, buildSkirtMesh, type CanvasView } from './limb.js';
 import { DETAIL_CHAINS, DETAIL_GROUPS } from './detail.js';
 import { applyMat, invertMat, type Vec2 } from './math.js';
@@ -36,8 +37,11 @@ type Binding =
       readonly cols?: number;
       readonly step?: number;
     }
-  /** Skirt / robe mesh on the hips + thighs; `panel` = the skirt panel bone it also follows (front / back flap). */
-  | { readonly kind: 'skirt'; readonly panel?: 'robe_front' | 'robe_back' }
+  /**
+   * Skirt / robe mesh on the hips + thighs; `panel` = the skirt panel bone it also follows (front / back flap); `spine`: a
+   * tabard, whose part above the hip follows the spine instead of the hip bone (see `spineWeights`).
+   */
+  | { readonly kind: 'skirt'; readonly panel?: 'robe_front' | 'robe_back'; readonly spine?: boolean }
   | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number }
   /** Rigid on the last bone of another hanging piece (tassel under the pendant). */
   | { readonly kind: 'tip'; readonly of: string };
@@ -192,6 +196,10 @@ export interface AssembleInput {
   readonly weapon?: WeaponPiece;
   /** Bones removed from the base rig (old chains, panels, strands). Default: everything the new parts replace. */
   readonly dropBones?: readonly string[];
+  /** Move the IK targets onto the new ankles / wrists (a class whose art differs from the base rig, `snapIkTargets`). */
+  readonly snapIk?: boolean;
+  /** IK constraint name -> `bendPositive` override (the base rig mirrors the knees; visible trousers need both forward). */
+  readonly ikBend?: Readonly<Record<string, boolean>>;
   readonly atlasName?: string;
   readonly maxAtlas?: number;
 }
@@ -234,7 +242,7 @@ const MIN_HANG = 6;
 const MESH_HEADROOM = 40;
 
 /** Old chain / strand / panel bones that the new parts replace (the weapon bone and IK stay). */
-const REPLACED_BONES = [
+export const REPLACED_BONES = [
   'hair_back_1',
   'hair_back_2',
   'hair_front_1',
@@ -411,7 +419,8 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
 
   // 1. bones: base minus replaced ones, following the landmarks
   const kept: RigBone[] = input.base.bones.filter((b) => !drop.has(b.name));
-  const withLandmarks = applyLandmarks({ ...input.base, bones: kept, chains: [] }, input.landmarks, view);
+  const landmarked = applyLandmarks({ ...input.base, bones: kept, chains: [] }, input.landmarks, view);
+  const withLandmarks = input.snapIk ? snapIkTargets(landmarked) : landmarked;
   let bones: RigBone[] = [...withLandmarks.bones];
   const chains: RigChain[] = [];
   const templates = new Map(DETAIL_CHAINS.map((t) => [t.name, t]));
@@ -510,7 +519,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
         } else if (b.kind === 'skirt') {
           const r = skeleton.roles;
           slotBone = r.hips!;
-          mesh = buildSkirtMesh(skeleton, {
+          const skirt = buildSkirtMesh(skeleton, {
             name: spec.id,
             slotBone,
             hips: r.hips!,
@@ -520,6 +529,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
             cell: 10 * scale,
             ...(b.panel && skeleton.bones.some((x) => x.name === b.panel) ? { panel: b.panel } : {}),
           });
+          mesh = b.spine ? spineWeights(skeleton, skirt, slotBone) : skirt;
         } else if (b.kind === 'hanging') {
           const ids = hangingIds.get(b.template);
           if (!ids) {
@@ -629,8 +639,12 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     slots.push({ name: 'weapon_R', bone: 'weapon', paperdoll: 'weapon_R', attachment: 'weapon_R' });
     attachments.weapon_R = { weapon_R: { ...borrowWeapon.attachment, path: 'weapon_R' } };
   }
+  const ik = skeleton.ik?.map((k) =>
+    input.ikBend && k.name in input.ikBend ? { ...k, bendPositive: input.ikBend[k.name]! } : k,
+  );
   const rig: RigDocument = {
     ...skeleton,
+    ...(ik ? { ik } : {}),
     slots,
     skins: [{ name: 'default', attachments }],
   };
