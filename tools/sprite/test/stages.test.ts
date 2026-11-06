@@ -10,6 +10,10 @@ import {
   checkHeights,
   checkLoopSeam,
   checkPresent,
+  despillInterior,
+  nearestSole,
+  soleRuns,
+  soleX,
   eventsFromTable,
   guidesFromMaster,
   locomotionCells,
@@ -305,5 +309,59 @@ describe('draws helper sanity', () => {
     drawFigure(s, { height: 10, cx: 16, sole: 30 });
     expect(encodePng(toPremultiplied(s)).length).toBeGreaterThan(50);
     expect(MAGENTA).toEqual([255, 0, 255]);
+  });
+});
+
+describe('interior spill cleanup', () => {
+  it('neutralises magenta-tinted opaque pixels inside hair but keeps palette colours (purple cloth)', () => {
+    const w = 8;
+    const data = new Uint8ClampedArray(w * w * 4);
+    const put = (x: number, y: number, c: [number, number, number]) => data.set([...c, 255], (y * w + x) * 4);
+    for (let y = 0; y < w; y++) for (let x = 0; x < w; x++) put(x, y, [60, 40, 30]); // dark hair
+    put(3, 3, [150, 60, 140]); // strand: key bled into hair
+    put(4, 3, [170, 50, 160]);
+    put(1, 1, [120, 60, 160]); // legitimate purple cloth (in the palette)
+    const img = { width: w, height: w, data };
+    const palette = [[120, 60, 160] as const, [60, 40, 30] as const];
+    const out = despillInterior(img, { palette });
+    const px = (x: number, y: number) => Array.from(out.image.data.slice((y * w + x) * 4, (y * w + x) * 4 + 3));
+    expect(out.fixed).toBe(2);
+    for (const [x, y] of [
+      [3, 3],
+      [4, 3],
+    ] as const) {
+      const [r, g, b] = px(x, y);
+      expect(Math.min(r!, b!) - g!).toBeLessThanOrEqual(1);
+    }
+    expect(px(1, 1)).toEqual([120, 60, 160]); // palette colour untouched
+    expect(px(0, 0)).toEqual([60, 40, 30]);
+    // without the palette the cloth would be cleaned too
+    expect(despillInterior(img).fixed).toBe(3);
+  });
+
+  it('is applied by sliceSheet only when asked', () => {
+    const sheet = makeSheet(1, 1, 64, [{ height: 40, cx: 32, sole: 60, body: [150, 60, 140] }]);
+    const img = toPremultiplied(sheet);
+    const plain = sliceSheet(img, { cols: 1, rows: 1, frames: 1 })[0]!.image;
+    const clean = sliceSheet(img, { cols: 1, rows: 1, frames: 1 }, { spill: {} })[0]!.image;
+    const tint = (s: typeof plain) => {
+      let n = 0;
+      for (let i = 0; i < s.data.length; i += 4)
+        if (s.data[i + 3]! > 0 && Math.min(s.data[i]!, s.data[i + 2]!) - s.data[i + 1]! > 24) n++;
+      return n;
+    };
+    expect(tint(plain)).toBeGreaterThan(0);
+    expect(tint(clean)).toBe(0);
+  });
+});
+
+describe('foot gate diagnostics', () => {
+  it('soleRuns keeps two close feet apart and nearestSole picks the nearer one', () => {
+    const img = figureImage({ height: 100, cx: 128, sole: 232, stride: 0 });
+    const runs = soleRuns(img, 232, 80, 180);
+    expect(runs.length).toBeGreaterThanOrEqual(1);
+    const near = nearestSole(img, 232, 128, 40);
+    expect(near).not.toBeNull();
+    expect(soleX(img, 232, 128 + 60, 28)).toBeNull(); // nothing within the window
   });
 });
