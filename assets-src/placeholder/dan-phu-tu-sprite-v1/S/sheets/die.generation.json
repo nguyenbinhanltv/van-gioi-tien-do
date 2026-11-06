@@ -1,0 +1,15 @@
+{
+  "id": "S-die-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:27:40 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:28:19 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production die sprite sheet DAN/PHU TU A supporthealer. EXACT4columns x3rows ofSQUAREcells, 12 drawnposes readingorder. Image1 EXACT S master identity/camera/anatomy; image2 template layout. FIXED S FRONT VIEW: face towardviewer/screenBOTTOM, both eyes/shoulders visible symmetrically, samecamera ALLcells. No sideprofile, no threequarterturn. Sameadultcompactwoman foldedjadeheadpiece, loopedtieddarkhair, ivorysleeves jadeshortsplitoverrobe bluepanels bronzetrim darksashtrousersboots, gourd and3goldbelttalismans. AnatomicalRIGHT hand(screenLEFT) bronzehandle WHITEwhisk; anatomicalLEFT hand(screenRIGHT) GOLDpapertalisman. Never swap hands. Exactmasterface/head/torso/limb/propdimensions in everycell; separateboots visiblebeneathsplithem. Softpaintedfineink gameart NWlight. Upright masterheight208of256cell, band202..214; headtop24sole232, maintain anatomy in bent/seated/collapse poses, no individual resizing. Deathcollapse towardside:1guard,2-3stagger,4-5kneesbuckle,6kneel,7bend,8reachground,9-10fallsideways,11settle,12still. Keep originalanatomicalscale, compactside-lying endfullyinsidecell. No blood/VFX. Whiskhandle bronze/brown NOTpink/violet, paperwarmgold NOTgray. Flatpure#FF00FF background. Remove alltemplateguides/ghosts. NOgridlines/borders/text/letters/shadow/floor/glow/particles/blur/extralimbs. Entirefigures/propsinsideowncells atsharedscale.",
+  "references": ["reference/S.master.png", "S/templates/die.template.png"],
+  "output": "S/sheets/die.png",
+  "toolOutputId": "exec-8b2bb5c5-4285-4618-8225-c05fede4e964.png"
+}
