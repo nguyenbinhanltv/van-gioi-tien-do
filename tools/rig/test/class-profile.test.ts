@@ -73,6 +73,7 @@ describe('Thể tu assembly profile', () => {
   it('direction-specific tuning: the R knee override is E-only, S has its own deeper-knee gait', () => {
     expect(Object.keys(THE_TU_PROFILE.ikBend!)).toEqual(['E']);
     expect(THE_TU_PROFILE.gaitByDir!.S!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
+    expect(THE_TU_PROFILE.gaitByDir!.SE).toBe(THE_TU_PROFILE.gaitByDir!.S);
     expect(THE_TU_PROFILE.gaitByDir!.E).toBeUndefined();
   });
 

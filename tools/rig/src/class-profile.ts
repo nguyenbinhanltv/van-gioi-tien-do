@@ -354,7 +354,10 @@ export const THE_TU_CHAINS: { readonly templates: readonly ChainTemplate[]; read
     ],
   };
 
-/** S (front view): the stride is vertical on screen, the legs need more knee bend to reach it without sliding. */
+/**
+ * S (front view) and SE: the stride has a large vertical part on screen, the short legs need more knee bend to reach it without
+ * sliding (crouchScale 0.35 still slid 0.7 px/frame in both; 0.45 passes). NE / N / E are not tuned here.
+ */
 export const THE_TU_GAIT_S: GaitProfile = { ...THE_TU_GAIT, crouchScale: 0.45 };
 
 export const THE_TU_PROFILE: AssemblyProfile = {
@@ -368,7 +371,7 @@ export const THE_TU_PROFILE: AssemblyProfile = {
   // stocky tank in trousers: the legs are visible, so keep the stride of the robe gait (two step pairs per clip) but plant
   // harder: a deeper knee than a robe and a higher foot lift than a robe, no splayed squat
   gait: THE_TU_GAIT,
-  gaitByDir: { S: THE_TU_GAIT_S },
+  gaitByDir: { S: THE_TU_GAIT_S, SE: THE_TU_GAIT_S },
   chains: THE_TU_CHAINS,
   // the base rig bends the R knee backward (hidden under a robe in the Kiếm tu pilot); trousers show it as bow legs
   // E only: the profile view needs the R knee forward; the other views keep the base rig's bend until checked there
