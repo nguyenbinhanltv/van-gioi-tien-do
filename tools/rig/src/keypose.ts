@@ -20,7 +20,9 @@ import { simplifyScalar } from './secondary.js';
 import { evalPose, type Pose } from './pose.js';
 import type { CanvasView } from './limb.js';
 import { landmarkToRig, type Landmarks } from './landmarks.js';
+import { visibleAttachments } from './qa-mesh.js';
 import type { RigDocument } from './schema.js';
+import { skinAttachment } from './skinning.js';
 import type { Image } from './render/image.js';
 import { renderPose, type LoadedAtlas } from './render/render.js';
 import { DEFAULT_IGNORED_SLOTS } from './render/silhouette.js';
@@ -42,6 +44,10 @@ export interface PoseFit {
   /** Landmark → distance (px @1x) between the fitted rig and the reference landmark. */
   readonly error: Readonly<Record<string, number>>;
   readonly maxError: number;
+  /** Root-mean-square of the landmark errors (rig px): the per-key gate is RMS <= 2. */
+  readonly rms: number;
+  /** Body translation (rig px, y up) the fit added to reach the ankles: shift the reference by it before comparing. */
+  readonly shift: Vec2;
   /** Bones whose reference segment length differs from the rig bone by more than 5 %. */
   readonly lengthMismatch: readonly string[];
 }
@@ -62,7 +68,41 @@ const toRig = (l: KeyPoseLandmarks, name: string, view: CanvasView): Vec2 | null
 
 const wrap = (a: number) => angleDelta(0, a);
 
-/** Fit `rig` to one key pose. Throws when a landmark needed for the skeleton is missing. */
+/** Where a 2-bone chain (lengths l1, l2) from `s` puts its middle joint so the tip reaches `w`; the solution nearer `hint`. */
+export function twoBoneJoint(s: Vec2, w: Vec2, l1: number, l2: number, hint: Vec2, side?: 1 | -1): Vec2 {
+  const dx = w.x - s.x;
+  const dy = w.y - s.y;
+  const raw = Math.hypot(dx, dy);
+  const d = Math.min(Math.max(raw, Math.abs(l1 - l2) + 1e-6), l1 + l2 - 1e-6);
+  const ux = raw > 1e-9 ? dx / raw : 1;
+  const uy = raw > 1e-9 ? dy / raw : 0;
+  const a = (l1 * l1 - l2 * l2 + d * d) / (2 * d);
+  const h = Math.sqrt(Math.max(0, l1 * l1 - a * a));
+  const mx = s.x + ux * a;
+  const my = s.y + uy * a;
+  const p1 = { x: mx - uy * h, y: my + ux * h };
+  const p2 = { x: mx + uy * h, y: my - ux * h };
+  if (side !== undefined) {
+    // keep the bend on the rest-pose side of the shoulder-to-wrist line: consecutive keys never flip the elbow
+    const sign = (p: Vec2) => Math.sign((w.x - s.x) * (p.y - s.y) - (w.y - s.y) * (p.x - s.x));
+    const ok1 = sign(p1) === side;
+    const ok2 = sign(p2) === side;
+    if (ok1 !== ok2) return ok1 ? p1 : p2;
+  }
+  return dist(p1, hint) <= dist(p2, hint) ? p1 : p2;
+}
+
+/**
+ * Fit `rig` to one key pose, solved in hierarchical order so every stage sees the fitted parents:
+ *  1. pelvis: hips translation to the pelvis landmark, lowered if a leg could not reach its ankle landmark;
+ *  2. spine / neck: aimed along the landmark directions (pelvis, chest, neck, head), the head stays upright;
+ *  3. arms: the fitted torso gives the shoulder positions, then a 2-bone analytic IK puts each wrist ON its landmark, the
+ *     elbow on the side of the elbow landmark (bone lengths stay the rig lengths);
+ *  4. legs: IK foot targets on the ankle landmarks (the knee comes from the IK bend), then the foot aims at the toe;
+ *  5. sword and skirt panels, after the legs: the sword along hand to sword tip, the front / back flap at the hem points.
+ * The body is rigid: when the pelvis is lowered to make the legs reach, arm / head targets move with it (`shift`).
+ * Throws when a landmark needed for the skeleton is missing.
+ */
 export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView, opts: FitOptions = {}): PoseFit {
   const r = rig.roles;
   const get = (n: string) => toRig(lm, n, view);
@@ -76,68 +116,99 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
   const restWorld = (b: string) => rest.byName.get(b)!;
   const parentOf = new Map(rig.bones.map((b) => [b.name, b.parent]));
   const restLocal = new Map(rig.bones.map((b) => [b.name, b.rotation]));
-  const worldRot = new Map<string, number>(); // fitted world rotation (deg) per bone
+  const lengthOf = (b: string) => rig.bones.find((x) => x.name === b)!.length;
+  const worldRot = new Map<string, number>(); // fitted world rotation (deg) of the bones solved so far
   const rotations: Record<string, number> = {};
-  const aim = (bone: string, from: Vec2, to: Vec2): void => {
+  const parentRotOf = (bone: string) => {
     const parent = parentOf.get(bone);
-    const parentRot = parent ? (worldRot.get(parent) ?? restWorld(parent).rotation) : 0;
-    const target = (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI;
-    const delta = wrap(target - parentRot - restLocal.get(bone)!);
+    return parent ? (worldRot.get(parent) ?? restWorld(parent).rotation) : 0;
+  };
+  const deg = (v: Vec2) => (Math.atan2(v.y, v.x) * 180) / Math.PI;
+  const sub = (a: Vec2, b: Vec2): Vec2 => ({ x: a.x - b.x, y: a.y - b.y });
+  /** Rotate `bone` so its axis points along `dir` (world), given the already fitted parent. */
+  const aimDir = (bone: string, dir: Vec2): void => {
+    const parentRot = parentRotOf(bone);
+    const delta = wrap(deg(dir) - parentRot - restLocal.get(bone)!);
     rotations[bone] = delta;
     worldRot.set(bone, parentRot + restLocal.get(bone)! + delta);
   };
   const keep = (bone: string): void => {
-    const parent = parentOf.get(bone);
-    const parentRot = parent ? (worldRot.get(parent) ?? restWorld(parent).rotation) : 0;
     rotations[bone] = 0;
-    worldRot.set(bone, parentRot + restLocal.get(bone)!);
+    worldRot.set(bone, parentRotOf(bone) + restLocal.get(bone)!);
   };
-  // propagate the rest world rotation of every bone not fitted below (children inherit the fitted parents)
-  const fitted = new Set<string>();
+  const evalFit = (hips: Vec2, feet: Record<string, Vec2>) => evalPose(rig, clipOf(rig, { rotations, hips, feet }), 0);
 
-  // hips: translation to the pelvis landmark, rotation kept (upright)
+  // 1. pelvis (hips translation) and leg reach
   const hipsBone = r.hips!;
   const pelvis = need('pelvis');
   const hipsRest = restWorld(hipsBone).pos;
-  const hips = { x: pelvis.x - hipsRest.x, y: pelvis.y - hipsRest.y };
+  let hips = { x: pelvis.x - hipsRest.x, y: pelvis.y - hipsRest.y };
+  const wanted = { ...hips };
+  for (const s of ['R', 'L'] as const) {
+    const thigh = r[`thigh_${s}` as 'thigh_R']!;
+    const shin = r[`shin_${s}` as 'shin_R']!;
+    const ankle = get(`ankle_${s}`);
+    if (!ankle) continue;
+    const reach = (lengthOf(thigh) + lengthOf(shin)) * 0.995;
+    const hipPos = { x: restWorld(thigh).pos.x + hips.x, y: restWorld(thigh).pos.y + hips.y };
+    const dx = hipPos.x - ankle.x;
+    const d = Math.hypot(dx, hipPos.y - ankle.y);
+    if (d > reach && Math.abs(dx) < reach) {
+      // lower the pelvis until the leg is just straight
+      const y = ankle.y + Math.sqrt(reach * reach - dx * dx);
+      hips = { x: hips.x, y: hips.y - (hipPos.y - y) };
+    }
+  }
+  const shift = { x: hips.x - wanted.x, y: hips.y - wanted.y };
+  const moved = (p: Vec2): Vec2 => ({ x: p.x + shift.x, y: p.y + shift.y });
   keep(hipsBone);
-  fitted.add(hipsBone);
-  // spine: pelvis → chest → neck (positions follow from the bone lengths; the aim is what carries the lean)
-  const hipTip = { x: restWorld(hipsBone).tip.x + hips.x, y: restWorld(hipsBone).tip.y + hips.y };
-  aim(r.spine_mid!, hipTip, need('chest'));
-  fitted.add(r.spine_mid!);
-  aim(r.spine_upper!, need('chest'), need('neck'));
-  fitted.add(r.spine_upper!);
-  // neck bone (no role) → head landmark; head keeps the neck-relative upright
+
+  // 2. spine, neck, head: aimed along the landmark directions
+  aimDir(r.spine_mid!, sub(need('chest'), pelvis));
+  aimDir(r.spine_upper!, sub(need('neck'), need('chest')));
   const neckBone = rig.bones.find((b) => b.name === 'neck')?.name;
-  if (neckBone) {
-    aim(neckBone, need('neck'), need('head'));
-    fitted.add(neckBone);
-  }
+  if (neckBone) aimDir(neckBone, sub(need('head'), need('neck')));
   if (r.head) {
-    keep(r.head);
-    // the head stays upright in canvas space: cancel the parent's change
+    // upright in canvas space: cancel whatever the parents turned
     const base = restWorld(r.head).rotation;
-    const cur = worldRot.get(r.head)!;
-    rotations[r.head] = wrap(base - cur);
+    rotations[r.head] = wrap(base - parentRotOf(r.head) - restLocal.get(r.head)!);
     worldRot.set(r.head, base);
-    fitted.add(r.head);
   }
-  // arms: shoulder → elbow → wrist; hand follows the forearm
+  const torso = evalFit(hips, {});
+
+  // 3. arms: 2-bone IK to the wrist landmarks from the fitted shoulder positions
   for (const s of ['R', 'L'] as const) {
     const up = r[`upper_arm_${s}` as 'upper_arm_R']!;
     const lo = r[`lower_arm_${s}` as 'lower_arm_R']!;
     const hand = r[`hand_${s}` as 'hand_R'];
-    aim(up, need(`shoulder_${s}`), need(`elbow_${s}`));
-    aim(lo, need(`elbow_${s}`), need(`wrist_${s}`));
-    fitted.add(up);
-    fitted.add(lo);
-    if (hand) {
-      keep(hand);
-      fitted.add(hand);
+    const wrist = get(`wrist_${s}`);
+    const shoulder = torso.byName.get(up)!.pos;
+    if (wrist) {
+      const elbowHint = get(`elbow_${s}`);
+      const hint = elbowHint ? moved(elbowHint) : { x: shoulder.x, y: shoulder.y - lengthOf(up) };
+      // bend side of the rest pose (cross of shoulder-to-wrist and shoulder-to-elbow)
+      const rs = restWorld(up).pos;
+      const rw = restWorld(lo).tip;
+      const re = restWorld(lo).pos;
+      const side = Math.sign((rw.x - rs.x) * (re.y - rs.y) - (rw.y - rs.y) * (re.x - rs.x));
+      const elbow = twoBoneJoint(
+        shoulder,
+        moved(wrist),
+        lengthOf(up),
+        lengthOf(lo),
+        hint,
+        side === 0 ? undefined : (side as 1 | -1),
+      );
+      aimDir(up, sub(elbow, shoulder));
+      aimDir(lo, sub(moved(wrist), elbow));
+    } else {
+      keep(up);
+      keep(lo);
     }
+    if (hand) keep(hand);
   }
-  // legs: IK foot targets (the knee comes from the IK bend); thigh / shin aims are kept for the foot rotation below
+
+  // 4. legs: IK targets on the ankles
   const feet: Record<string, Vec2> = {};
   for (const s of ['R', 'L'] as const) {
     const ik = r[`ik_foot_${s}` as 'ik_foot_R']!;
@@ -145,53 +216,73 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
     const target = restWorld(ik).pos;
     feet[ik] = { x: ankle.x - target.x, y: ankle.y - target.y };
   }
-  // skirt panels
-  const panelLimit = opts.panelLimit ?? 38;
+  // 5. skirt panels (after the legs): the flaps at the hem points
+  const panelLimit = opts.panelLimit ?? 50;
+  const restItems = visibleAttachments(rig, rest);
+  /**
+   * The hem landmarks are the OUTER EDGE of the robe, not the panel bone axis: measure where that edge sits on the rig at
+   * rest (the lowest point of the panel's mesh on its outer side: front = right, back = left) and turn the panel by the
+   * change of its direction from the pivot, not by the absolute direction of the landmark.
+   */
+  const restHem = (panel: string): Vec2 | null => {
+    const it = restItems.find((x) => x.slot === panel && x.att.type === 'mesh');
+    if (!it) return null;
+    const m = skinAttachment(it.att, it.bone, rest, rest);
+    const ys = m.verts.map((v) => v.y);
+    const low = Math.min(...ys) + (Math.max(...ys) - Math.min(...ys)) * 0.15;
+    const bottom = m.verts.filter((v) => v.y <= low);
+    if (!bottom.length) return null;
+    return /back/i.test(panel)
+      ? bottom.reduce((a, v) => (v.x < a.x ? v : a))
+      : bottom.reduce((a, v) => (v.x > a.x ? v : a));
+  };
   for (const [panel, lmName] of Object.entries(opts.panels ?? DEFAULT_PANELS)) {
     if (!rig.bones.some((b) => b.name === panel)) continue;
     const target = get(lmName);
     if (!target) continue;
-    const origin = { x: restWorld(panel).pos.x + hips.x, y: restWorld(panel).pos.y + hips.y };
-    aim(panel, origin, target);
-    rotations[panel] = Math.max(-panelLimit, Math.min(panelLimit, rotations[panel]!));
-    fitted.add(panel);
+    const origin = restWorld(panel).pos;
+    const hem = restHem(panel);
+    const pivot = { x: origin.x + hips.x, y: origin.y + hips.y };
+    const now = deg(sub(moved(target), pivot));
+    // without a measurable rest hem fall back to the panel axis (the landmark is then taken as its tip)
+    const was = hem ? deg(sub(hem, origin)) : restWorld(panel).rotation;
+    const delta = Math.max(-panelLimit, Math.min(panelLimit, wrap(now - was)));
+    rotations[panel] = delta;
+    worldRot.set(panel, parentRotOf(panel) + restLocal.get(panel)! + delta);
   }
-  // second pass: evaluate the pose, then rotate the feet and the sword against the IK-solved legs
-  const draft: Clip = clipOf(rig, { rotations, hips, feet });
-  const pose = evalPose(rig, draft, 0);
+  // the feet aim at the toes and the sword along the hand, against the IK-solved legs
+  const draft = evalFit(hips, feet);
   for (const s of ['R', 'L'] as const) {
     const foot = r[`foot_${s}` as 'foot_R']!;
     const tip = get(`foot_tip_${s}`);
-    const f = pose.byName.get(foot)!;
-    if (tip && !inferred.has(`foot_tip_${s}`)) {
-      const parentRot = pose.byName.get(parentOf.get(foot)!)!.rotation;
-      const target = (Math.atan2(tip.y - f.pos.y, tip.x - f.pos.x) * 180) / Math.PI;
-      rotations[foot] = wrap(target - parentRot - restLocal.get(foot)!);
+    const ankle = get(`ankle_${s}`);
+    if (tip && ankle && !inferred.has(`foot_tip_${s}`)) {
+      const parentRot = draft.byName.get(parentOf.get(foot)!)!.rotation;
+      rotations[foot] = wrap(deg(sub(tip, ankle)) - parentRot - restLocal.get(foot)!);
     }
   }
-  const sword = get('sword_tip');
   const weapon = rig.bones.find((b) => b.name === 'weapon')?.name;
+  const sword = get('sword_tip');
   if (sword && weapon && r.hand_R && !inferred.has('sword_tip')) {
-    const hp = pose.byName.get(r.hand_R)!;
-    const target = (Math.atan2(sword.y - hp.pos.y, sword.x - hp.pos.x) * 180) / Math.PI;
-    rotations[weapon] = wrap(target - hp.rotation - restLocal.get(weapon)!);
+    const hp = draft.byName.get(r.hand_R)!;
+    rotations[weapon] = wrap(deg(sub(moved(sword), hp.pos)) - hp.rotation - restLocal.get(weapon)!);
   }
 
-  // error + length check against the final pose
-  const final = evalPose(rig, clipOf(rig, { rotations, hips, feet }), 0);
+  // error + length check against the final pose (body landmarks move with the pelvis shift, ankles / toes do not)
+  const final = evalFit(hips, feet);
   const error: Record<string, number> = {};
-  const check = (name: string, p: Vec2) => {
+  const check = (name: string, p: Vec2, body = true) => {
     const ref = get(name);
-    if (ref && !inferred.has(name)) error[name] = dist(ref, p);
+    if (ref && !inferred.has(name)) error[name] = dist(body ? moved(ref) : ref, p);
   };
   for (const s of ['R', 'L'] as const) {
-    check(`shoulder_${s}`, final.byName.get(r[`upper_arm_${s}` as 'upper_arm_R']!)!.pos);
-    check(`elbow_${s}`, final.byName.get(r[`lower_arm_${s}` as 'lower_arm_R']!)!.pos);
     check(`wrist_${s}`, final.byName.get(r[`lower_arm_${s}` as 'lower_arm_R']!)!.tip);
+    check(`elbow_${s}`, final.byName.get(r[`lower_arm_${s}` as 'lower_arm_R']!)!.pos);
+    check(`shoulder_${s}`, final.byName.get(r[`upper_arm_${s}` as 'upper_arm_R']!)!.pos);
     check(`hip_${s}`, final.byName.get(r[`thigh_${s}` as 'thigh_R']!)!.pos);
     check(`knee_${s}`, final.byName.get(r[`shin_${s}` as 'shin_R']!)!.pos);
-    check(`ankle_${s}`, final.byName.get(r[`foot_${s}` as 'foot_R']!)!.pos);
-    check(`foot_tip_${s}`, final.byName.get(r[`foot_${s}` as 'foot_R']!)!.tip);
+    check(`ankle_${s}`, final.byName.get(r[`foot_${s}` as 'foot_R']!)!.pos, false);
+    check(`foot_tip_${s}`, final.byName.get(r[`foot_${s}` as 'foot_R']!)!.tip, false);
   }
   check('chest', final.byName.get(r.spine_upper!)!.pos);
   check('neck', final.byName.get(neckBone ?? r.spine_upper!)!.pos);
@@ -210,12 +301,15 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
     seg(r[`thigh_${s}` as 'thigh_R']!, `hip_${s}`, `knee_${s}`);
     seg(r[`shin_${s}` as 'shin_R']!, `knee_${s}`, `ankle_${s}`);
   }
+  const values = Object.values(error);
   return {
     rotations,
     hips,
     feet,
+    shift,
     error,
-    maxError: Math.max(0, ...Object.values(error)),
+    maxError: Math.max(0, ...values),
+    rms: values.length ? Math.sqrt(values.reduce((a, v) => a + v * v, 0) / values.length) : 0,
     lengthMismatch,
   };
 }
@@ -408,36 +502,83 @@ export interface IouOptions {
   readonly ignoreSlots?: readonly string[];
 }
 
-/** Intersection over union of the opaque areas of two images of the same size. */
-export function maskIoU(a: Image, b: Image, alpha = 128): number {
+/**
+ * Intersection over union of the opaque areas of two images of the same size; `b` is translated by (dx, dy) px first
+ * (image space, y down). Optional `rows` limits the comparison to an image row range [y0, y1).
+ */
+export function maskIoU(a: Image, b: Image, alpha = 128, dx = 0, dy = 0, rows?: readonly [number, number]): number {
   if (a.width !== b.width || a.height !== b.height) throw new RangeError('maskIoU needs images of the same size');
+  const ox = Math.round(dx);
+  const oy = Math.round(dy);
   let inter = 0;
   let uni = 0;
-  for (let i = 0; i < a.width * a.height; i++) {
-    const x = a.data[i * 4 + 3]! >= alpha;
-    const y = b.data[i * 4 + 3]! >= alpha;
-    if (x && y) inter++;
-    if (x || y) uni++;
-  }
+  const y0 = rows ? Math.max(0, Math.floor(rows[0])) : 0;
+  const y1 = rows ? Math.min(a.height, Math.ceil(rows[1])) : a.height;
+  for (let y = y0; y < y1; y++)
+    for (let x = 0; x < a.width; x++) {
+      const sx = x - ox;
+      const sy = y - oy;
+      const inB = sx >= 0 && sy >= 0 && sx < b.width && sy < b.height && b.data[(sy * b.width + sx) * 4 + 3]! >= alpha;
+      const inA = a.data[(y * a.width + x) * 4 + 3]! >= alpha;
+      if (inA && inB) inter++;
+      if (inA || inB) uni++;
+    }
   return uni ? inter / uni : 1;
 }
 
-/** Render the rig at `frame` of `clip` on the reference canvas (transparent, no ground) and return its IoU with `reference`. */
+export interface IouOptions2 extends IouOptions {
+  /** Body shift of the fit (rig px, y up): the reference is translated by it so both sides show the same pose. */
+  readonly shift?: Vec2;
+  /** Image-row bands (px @2x) to report separately (head / torso / skirt and legs). */
+  readonly bands?: readonly (readonly [number, number])[];
+}
+
+/** The rig silhouette rendered on the reference canvas (transparent, no ground). */
+export function renderSilhouette(
+  rig: RigDocument,
+  clip: Clip,
+  frame: number,
+  atlas: LoadedAtlas,
+  size: number,
+  ignore?: readonly string[],
+): Image {
+  return renderPose(rig, evalPose(rig, clip, frame), atlas, {
+    scale: size / rig.canvas.width,
+    background: [0, 0, 0, 0],
+    ground: false,
+    hideSlots: ignore ?? DEFAULT_IGNORED_SLOTS,
+  });
+}
+
+/** Render the rig at `frame` of `clip` on the reference canvas and return its IoU with `reference` (and per band). */
 export function silhouetteIoU(
   rig: RigDocument,
   clip: Clip,
   frame: number,
   atlas: LoadedAtlas,
   reference: Image,
-  opts: IouOptions = {},
+  opts: IouOptions2 = {},
 ): number {
-  const img = renderPose(rig, evalPose(rig, clip, frame), atlas, {
-    scale: reference.width / rig.canvas.width,
-    background: [0, 0, 0, 0],
-    ground: false,
-    hideSlots: opts.ignoreSlots ?? DEFAULT_IGNORED_SLOTS,
-  });
-  return maskIoU(img, reference, opts.alpha ?? 128);
+  return silhouetteIoUDetail(rig, clip, frame, atlas, reference, opts).iou;
+}
+
+export function silhouetteIoUDetail(
+  rig: RigDocument,
+  clip: Clip,
+  frame: number,
+  atlas: LoadedAtlas,
+  reference: Image,
+  opts: IouOptions2 = {},
+): { iou: number; bands: number[] } {
+  const img = renderSilhouette(rig, clip, frame, atlas, reference.width, opts.ignoreSlots);
+  const scale = reference.width / rig.canvas.width;
+  const dx = (opts.shift?.x ?? 0) * scale;
+  const dy = -(opts.shift?.y ?? 0) * scale;
+  const alpha = opts.alpha ?? 128;
+  return {
+    iou: maskIoU(img, reference, alpha, dx, dy),
+    bands: (opts.bands ?? []).map((band) => maskIoU(img, reference, alpha, dx, dy, band)),
+  };
 }
 
 /** Frames per second the key frames are expressed in. */
@@ -489,7 +630,8 @@ export function keyPoseFrames(
   if (clip === 'run' || clip === 'walk') {
     // the R contact key lands on the table's footstep_R frame, so the footstep events and the planted feet agree
     const offset = events?.find((e) => e.name === 'footstep_R')?.frame ?? 0;
-    return evenKeyFrames(labels.length, frames).map((f) => (f + offset) % frames);
+    // even spacing, NOT rounded to whole frames: uneven spacing makes the wrap interval fast and hitches the loop seam
+    return labels.map((_, i) => ((((i * frames) / labels.length + offset) % frames) + frames) % frames);
   }
   if (clip === 'idle') return evenKeyFrames(labels.length, frames);
   if (clip.startsWith('attack'))
@@ -501,6 +643,70 @@ export function keyPoseFrames(
   return [Math.round(frames * 0.1), Math.round(frames * 0.45), Math.round(frames * 0.8)]; // dash
 }
 
+/**
+ * Lock the planted feet to the ground: while a foot is planted at consecutive keys its target must move back at the clip's
+ * constant ground speed, so the key poses (placed by hand in the reference images, never exactly on that line) are
+ * shifted horizontally as a rigid body (hips and both feet) until the contact feet lie on it. `shift` records the move so
+ * the silhouette comparison translates the reference by the same amount.
+ */
+export function lockContacts(
+  rig: RigDocument,
+  clip: string,
+  fits: readonly PoseFit[],
+  at: readonly number[],
+  frames: number,
+): PoseFit[] {
+  const plant = PLANT[clip];
+  if (!plant) return [...fits];
+  const L = rig.roles.ik_foot_L!;
+  const R = rig.roles.ik_foot_R!;
+  const out = fits.map((f) => ({ ...f }));
+  const delta = fits.map(() => [] as number[]);
+  // ground speed per frame: median slope of the planted feet between consecutive keys of one stance
+  const slopes: number[] = [];
+  for (const [foot, ik] of [
+    ['L', L],
+    ['R', R],
+  ] as const)
+    for (let i = 0; i < fits.length; i++) {
+      const j = (i + 1) % fits.length;
+      if (!plant[i]?.[foot] || !plant[j]?.[foot]) continue;
+      const dt = (((at[j]! - at[i]!) % frames) + frames) % frames;
+      if (dt > 0) slopes.push((fits[j]!.feet[ik]!.x - fits[i]!.feet[ik]!.x) / dt);
+    }
+  slopes.sort((a, b) => a - b);
+  const v = slopes.length ? slopes[Math.floor(slopes.length / 2)]! : 0;
+  for (const [foot, ik] of [
+    ['L', L],
+    ['R', R],
+  ] as const) {
+    // consecutive planted keys form a stance; its time axis is unwrapped so it is increasing
+    const idx = fits.map((_, i) => i).filter((i) => plant[i]?.[foot]);
+    if (idx.length < 2) continue;
+    let prev = at[idx[0]!]!;
+    let offset = 0;
+    const t = idx.map((i) => {
+      if (at[i]! + offset < prev) offset += frames; // wrapped past the end of the loop
+      prev = at[i]! + offset;
+      return prev;
+    });
+    const c = idx.reduce((sum, i, k) => sum + fits[i]!.feet[ik]!.x - v * t[k]!, 0) / idx.length;
+    idx.forEach((i, k) => delta[i]!.push(c + v * t[k]! - fits[i]!.feet[ik]!.x));
+  }
+  // note: `delta` is (target - x): the shift that puts the planted foot on the line
+  fits.forEach((f, i) => {
+    const d = delta[i]!.length ? delta[i]!.reduce((a, b) => a + b, 0) / delta[i]!.length : 0;
+    if (!d) return;
+    out[i] = {
+      ...f,
+      hips: { x: f.hips.x + d, y: f.hips.y },
+      feet: Object.fromEntries(Object.entries(f.feet).map(([k, p]) => [k, { x: p.x + d, y: p.y }])),
+      shift: { x: f.shift.x + d, y: f.shift.y },
+    };
+  });
+  return out;
+}
+
 /** Author one clip from its fitted key poses (`fits` in label order). */
 export function authorKeyPoseClip(
   rig: RigDocument,
@@ -510,10 +716,13 @@ export function authorKeyPoseClip(
   loop: boolean,
   phases?: Readonly<Record<string, number>>,
   events?: readonly ClipEvent[],
+  out?: { fits?: PoseFit[] },
 ): Clip {
   const at = keyPoseFrames(clip, frames, phases, events);
   if (fits.length !== at.length)
     throw new RangeError(`clip '${clip}' needs ${at.length} key poses, got ${fits.length}`);
+  if (loop) fits = lockContacts(rig, clip, fits, at, frames);
+  if (out) out.fits = [...fits];
   const plant = PLANT[clip];
   const keys: KeyPoseKey[] = fits.map((fit, i) => ({
     fit,
@@ -527,6 +736,8 @@ export function authorKeyPoseClip(
       feet: Object.fromEntries(Object.keys(fits[0]!.feet).map((k) => [k, { x: 0, y: 0 }])),
       error: {},
       maxError: 0,
+      rms: 0,
+      shift: { x: 0, y: 0 },
       lengthMismatch: [],
     };
     // ease in from the rest pose and back out; rotation keys of bones the fits drive start at 0 there

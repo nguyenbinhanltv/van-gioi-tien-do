@@ -45,7 +45,7 @@ describe('applyLandmarks', () => {
 
   it('keeps unrelated bones (chains, IK targets) local transforms', () => {
     const next = applyLandmarks(rig, E, view);
-    for (const name of ['hair_back_1', 'sash_L_1', 'ik_foot_L', 'robe_front']) {
+    for (const name of ['hair_back_1', 'sash_L_1', 'robe_front']) {
       const a = rig.bones.find((b) => b.name === name)!;
       const b = next.bones.find((x) => x.name === name)!;
       expect([b.x, b.y, b.rotation, b.length]).toEqual([a.x, a.y, a.rotation, a.length]);
@@ -87,5 +87,21 @@ describe('applyLandmarks', () => {
   it('throws when a landmark is missing', () => {
     const { elbow_R: _omit, ...rest } = E;
     expect(() => applyLandmarks(rig, rest, view)).toThrow(/elbow_R/);
+  });
+
+  it('moves the IK goals onto the ankles / wrists of the landmarks (no stale goals of the old rig)', () => {
+    const next = applyLandmarks(rig, E, view);
+    const p = evalPose(next, null, 0, { noIk: true });
+    const at = (bone: string) => p.byName.get(bone)!.pos;
+    for (const [ik, lm] of [
+      ['ik_foot_R', 'ankle_R'],
+      ['ik_foot_L', 'ankle_L'],
+      ['ik_hand_R', 'wrist_R'],
+      ['ik_hand_L', 'wrist_L'],
+    ] as const) {
+      const want = landmarkToRig(E[lm]!, view);
+      expect(at(ik).x, ik).toBeCloseTo(want.x, 2);
+      expect(at(ik).y, ik).toBeCloseTo(want.y, 2);
+    }
   });
 });

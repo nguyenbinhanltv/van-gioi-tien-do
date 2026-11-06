@@ -6,7 +6,7 @@
  *   <parts>/<dir>/landmarks.json
  * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
- * --keyposes <dir> [--iou 0.85]  fit run/walk/... clips to reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
+ * --keyposes <dir> [--iou 0.85] [--rms 2]  fit run/walk/... clips to reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
  * .landmarks.json), print fit error + silhouette IoU per key and write keypose_<clip>_compare.png sheets.
  * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
  * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
@@ -35,7 +35,9 @@ import {
   keyPoseFrames,
   loadedAtlas,
   renderPose,
-  silhouetteIoU,
+  maskIoU,
+  renderSilhouette,
+  silhouetteIoUDetail,
   type Image,
   type KeyPoseLandmarks,
   authorBlinkCycle,
@@ -151,6 +153,7 @@ let clips = [...authorKiemTuSet(res.rig, { detail: true, gait: GAIT_PROFILES[gai
 // .landmarks.json) with clips fitted to them; report the silhouette IoU of every key against its reference image
 const keyDir = opt('keyposes', '');
 const iouMin = Number(opt('iou', '0.85'));
+const rmsMax = Number(opt('rms', '2'));
 let iouFailures = 0;
 if (keyDir) {
   const kdir = resolve(process.env.INIT_CWD ?? process.cwd(), keyDir, dir);
@@ -164,51 +167,107 @@ if (keyDir) {
     const lms = stems.map(
       (x) => JSON.parse(readFileSync(join(kdir, `${x}.landmarks.json`), 'utf8')) as KeyPoseLandmarks,
     );
-    const fits = lms.map((lm) => fitPose(res.rig, lm, view));
+    const fitsRaw = lms.map((lm) => fitPose(res.rig, lm, view));
+    // phases / events from the animation-table gait (free), whatever --gait says: the key poses carry their own stride
+    const table = authorKiemTuSet(res.rig, {
+      only: [clipName as never],
+      secondary: false,
+      gait: GAIT_PROFILES.free,
+    })[0];
+    const outFits: { fits?: typeof fitsRaw } = {};
     const base = authorKeyPoseClip(
       res.rig,
       clipName,
-      fits,
+      fitsRaw,
       spec.frames,
       spec.loop,
-      oldClips.get(clipName)?.phases,
-      oldClips.get(clipName)?.events,
+      table?.phases,
+      table?.events,
+      outFits,
     );
-    const finished = applyDetail(
-      res.rig,
-      bakeSecondaryMotion(res.rig, { ...base, phases: oldClips.get(clipName)?.phases ?? {} }),
-    );
-    const at = keyPoseFrames(clipName, spec.frames, oldClips.get(clipName)?.phases, oldClips.get(clipName)?.events);
+    const fits = outFits.fits ?? fitsRaw;
+    const finished = applyDetail(res.rig, bakeSecondaryMotion(res.rig, { ...base, phases: table?.phases ?? {} }));
+    const at = keyPoseFrames(clipName, spec.frames, table?.phases, table?.events);
     console.log(`
 key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
-    const row: { ref: Image; old: Image; now: Image }[] = [];
+    const row: { ref: Image; old: Image; now: Image; diff: Image }[] = [];
     stems.forEach((x, i) => {
       const refPath = join(kdir, `${x}.png`);
       const ref = existsSync(refPath) ? decodePng(readFileSync(refPath)) : null;
       const fit = fits[i]!;
-      const iou = ref ? silhouetteIoU(res.rig, finished, at[i]!, atlas, ref) : NaN;
-      const bad = ref && iou < iouMin;
+      // bands (image rows @2x): head + arms down to the chest, torso to the hips, skirt and legs
+      const detail = ref
+        ? silhouetteIoUDetail(res.rig, finished, at[i]!, atlas, ref, {
+            shift: fit.shift,
+            bands: [
+              [0, 100],
+              [100, 150],
+              [150, 256],
+            ],
+          })
+        : { iou: NaN, bands: [] as number[] };
+      const iou = detail.iou;
+      // diagnostic: the best whole-body translation of the reference (|dx|, |dy| <= 12 px @2x) and the IoU it would give; a
+      // large gain means a registration offset (annotation), a small one means real shape differences (hair, cloth)
+      let best = { iou: iou, dx: 0, dy: 0 };
+      if (ref) {
+        const sil = renderSilhouette(res.rig, finished, at[i]!, atlas, 256);
+        for (let ddx = -12; ddx <= 12; ddx += 2)
+          for (let ddy = -12; ddy <= 12; ddy += 2) {
+            const v = maskIoU(sil, ref, 128, Math.round(fit.shift.x * 2) + ddx, Math.round(-fit.shift.y * 2) + ddy);
+            if (v > best.iou) best = { iou: v, dx: ddx, dy: ddy };
+          }
+      }
+      const bad = (ref && iou < iouMin) || fit.rms > rmsMax;
       if (bad) iouFailures++;
+      const worst = Object.entries(fit.error)
+        .sort((p, q) => q[1] - p[1])
+        .slice(0, 3)
+        .map(([k, v]) => `${k} ${v.toFixed(1)}`)
+        .join(', ');
       console.log(
-        `  ${x}: fit error max ${fit.maxError.toFixed(1)} px, IoU ${ref ? iou.toFixed(3) : 'n/a (no png)'}${bad ? '  < ' + iouMin : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
+        `  ${x}: RMS ${fit.rms.toFixed(2)} px (max ${fit.maxError.toFixed(1)}: ${worst}), IoU ${ref ? iou.toFixed(3) : 'n/a'}${ref ? ` [head ${detail.bands[0]!.toFixed(2)} | torso ${detail.bands[1]!.toFixed(2)} | skirt+legs ${detail.bands[2]!.toFixed(2)}]` : ''}${ref ? `, best shift (${best.dx},${best.dy}) px -> IoU ${best.iou.toFixed(3)}` : ''}${bad ? `  FAIL (IoU >= ${iouMin}, RMS <= ${rmsMax})` : ''}${fit.shift.y ? `, pelvis lowered ${(-fit.shift.y).toFixed(1)} px` : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
       );
       const render = (c: (typeof clips)[number] | undefined, f: number) =>
         renderPose(res.rig, evalPose(res.rig, c ?? null, c ? Math.min(f, c.frames) : 0), atlas, {
           background: [118, 122, 130, 255],
           ground: true,
         });
+      // overlay: both = grey, reference only = red, rig only = blue (the reference moved by the fit shift)
+      const diff = createImage(256, 256, [30, 30, 36, 255]);
+      if (ref) {
+        const sil = renderSilhouette(res.rig, finished, at[i]!, atlas, 256);
+        const dx = Math.round(fit.shift.x * 2);
+        const dy = Math.round(-fit.shift.y * 2);
+        for (let y = 0; y < 256; y++)
+          for (let x = 0; x < 256; x++) {
+            const a = sil.data[(y * 256 + x) * 4 + 3]! >= 128;
+            const sx = x - dx;
+            const sy = y - dy;
+            const b = sx >= 0 && sy >= 0 && sx < 256 && sy < 256 && ref.data[(sy * 256 + sx) * 4 + 3]! >= 128;
+            const o = (y * 256 + x) * 4;
+            const c = a && b ? [170, 170, 170] : b ? [230, 70, 70] : a ? [70, 110, 235] : null;
+            if (c) {
+              diff.data[o] = c[0]!;
+              diff.data[o + 1] = c[1]!;
+              diff.data[o + 2] = c[2]!;
+            }
+          }
+      }
       row.push({
         ref: ref ?? createImage(256, 256),
         old: render(oldClips.get(clipName), at[i]!),
         now: render(finished, at[i]!),
+        diff,
       });
     });
     // reference | old rig | key-pose rig, one column per key
-    const sheet = createImage(256 * row.length, 256 * 3, [118, 122, 130, 255]);
+    const sheet = createImage(256 * row.length, 256 * 4, [118, 122, 130, 255]);
     row.forEach((r, i) => {
       blit(sheet, r.ref, i * 256, 0);
       blit(sheet, r.old, i * 256, 256);
       blit(sheet, r.now, i * 256, 512);
+      blit(sheet, r.diff, i * 256, 768);
     });
     mkdirSync(out, { recursive: true });
     const file = join(out, `keypose_${clipName}_compare.png`);
@@ -219,7 +278,7 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
   console.log(
     sheets.length
       ? `
-comparison sheets (rows: reference / old rig / key-pose rig): ${sheets.join(', ')}`
+comparison sheets (rows: reference / old rig / key-pose rig / overlay: grey both, red reference only, blue rig only): ${sheets.join(', ')}`
       : `
 no complete key-pose set found in ${kdir}`,
   );

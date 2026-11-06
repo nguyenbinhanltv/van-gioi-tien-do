@@ -106,7 +106,12 @@ describe('authorKeyPoseClip', () => {
     const c = authorKeyPoseClip(rig, 'run', fits, 15, true);
     expect(c.frames).toBe(15);
     expect(c.loop).toBe(true);
-    expect(keyPoseFrames('run', 15)).toEqual([0, 2, 4, 6, 8, 9, 11, 13]);
+    // evenly spaced, not rounded (uneven spacing hitches the loop seam); the offset puts R_contact on footstep_R
+    const even = keyPoseFrames('run', 15);
+    even.forEach((f, i) => expect(f).toBeCloseTo((i * 15) / 8, 6));
+    const shifted = keyPoseFrames('run', 15, undefined, [{ frame: 11, name: 'footstep_R' }]);
+    expect(shifted[0]).toBeCloseTo(11, 6);
+    expect(shifted[2]).toBeCloseTo(((2 * 15) / 8 + 11) % 15, 6);
     const lf = c.motion!.planted![rig.roles.foot_L!]!;
     expect(lf.slice(0, 2)).toEqual([false, false]); // R contact keys: the left foot is in the air
     expect(lf[8]).toBe(true); // L contact
