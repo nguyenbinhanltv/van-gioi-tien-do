@@ -32,3 +32,4 @@ export * from './parts.js';
 export * from './template.js';
 export * from './class-clips.js';
 export * from './characters.js';
+export * from './limb.js';
