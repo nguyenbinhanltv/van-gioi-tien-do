@@ -1,0 +1,17 @@
+{
+  "clip": "emote",
+  "dir": "S",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:07:27 UTC",
+  "prompt": "Production frame-by-frame EMOTE SOUTH sprite sheet for Van Gioi Tien Do. Image1 exact character/style master, image2 layout/pose guide. EXACTLY 4 equal SQUARE columns by 2 rows, 8 full-body frames row-major, sheet aspect 4:2. In every cell face SOUTH / directly toward VIEWER and screen DOWN, straight FRONT in the same slightly overhead orthographic isometric FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y22, planted boot soles y232, standing figure height210 units (allowed204..216), pelvis axis x127.55. All8 identical anatomical scale and head size. Do not shrink figure to center; use82% cellheight and keep whole figure in owncell.  Eight-frame EMOTE martial salute:1 standingguard;2 gauntletsrise;3 rightfistmeetsleftopenpalmatthechest;4 holdsalute;5 slightpolitenod;6 lifthead;7 lowerhands;8 exactfirstguard. AnatomicalrightisscreenLEFT. No effects or text. Bothboots planted, same standingheight210 andsameheadsize. Pure flat opaque #FF00FF background. Remove all guides, arrows, dots, ticks, text and borders. No ground shadow, blur, afterimages, effects or scenery. Every complete figure fits entirely inside its own cell. HEIGHT CORRECTION FOR THIS FRESH SHEET: the prior drawing was uniformly too tall by7..8units, so redraw every figure naturally with the exact master proportions and compact stance. HARD bounding anchors in each256unit cell: topmost bun y24, soles y232, total208units, allowed204..215. Do not fill more than82percent of cell height. Maintain head42units and torso/legs from master; shallow relaxed knee flex in all8frames is fine. All8sameheight, no inflated head or taller elongated legs. Respect the second-image head/ground guides exactly.",
+  "references": ["../../the-tu-continuous-v1/reference/S.master4x.png", "templates/emote.template.png"],
+  "selectedOutput": "raw/emote.attempt2.png",
+  "status": "rejected: 200px: below upright minimum203.7px",
+  "utcEndObserved": "2026-11-06 19:07:52 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-9377e1d5-979d-4e34-82c3-c1e37ba74d6a.png",
+  "originalBackup": "raw/originals/emote.attempt2.png",
+  "sourceSelectionStatus": "rejected: 200px: below upright minimum203.7px"
+}

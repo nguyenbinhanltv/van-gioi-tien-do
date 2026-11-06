@@ -1,0 +1,18 @@
+{
+  "format": "vgtd-visual-quality-notes",
+  "version": 1,
+  "character": "the-tu",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "S",
+      "cell": 0,
+      "gate": "footSlide",
+      "metric": "contact_hold_frames",
+      "value": 2,
+      "limit": 1,
+      "note": "First-pass contact/load hold: cell0 reuses valid R-load cell1 after three AI calls. Preserve all12 cells and frozen scale. Improve unique R-contact pose and reversal in polish. Automated footSlide values are separately judged by the standard backlog; append this manual finding to quality-backlog.md.",
+      "status": "open"
+    }
+  ]
+}

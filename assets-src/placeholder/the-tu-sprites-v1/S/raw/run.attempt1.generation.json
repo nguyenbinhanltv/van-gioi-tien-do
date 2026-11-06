@@ -1,0 +1,21 @@
+{
+  "clip": "run",
+  "dir": "S",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 17:45:23 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame RUN SOUTH-DIRECTION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY SIX equal SQUARE columns by TWO rows, 12 full-body frames, row-major left-to-right top-to-bottom, sheet aspect6:2. In every cell face SOUTH / directly toward VIEWER and screen DOWN, straight FRONT in the same slightly overhead orthographic isometric FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y22, planted boot soles y232, standing figure height210 units (allowed204..216), pelvis axis x127.55. All12 identical anatomical scale and head size. Do not shrink figure to center; use82% cellheight and keep whole figure in owncell. TWELVE-frame heavy earth-tank RUN IN PLACE toward viewer/screenDOWN. Anatomical RIGHT leg = SCREEN-LEFT, LEFT = SCREEN-RIGHT. Toprow1..6 R contact ahead toward viewer, down/load, passing, toeoff, small flight/up, precontact. Bottomrow7..12 L takes lead. Cell7 MUST opposite leading leg and opposite right-gauntlet swing vs1. Broad shoulders rotate only slightly, face continues lookingtowardviewer, no side-profile turn. Full-length natural legs/sleeves under cloth, maintain head-to-lowestboot height204..216units (master210) in EVERY frame including flight; no tucked-bunny-hop squat, shrinking body or oversized head. Arms counter-swing, no punching. Modest small hop/shortstride, keep one leg extended down in flight to retain stature. Pure frontal master proportions. Exact S masterview with symmetrical broad chest, TWO front tabard flaps/cloudtrim, central sash knot/two tails. Never show side-profile/back or mirrored asymmetric costume. Pure flat opaque#FF00FF background, remove all guides/borders/ghosts/ticks/labels/text, no floor/shadow/effects/blur/props. Entire figure in owncell.",
+  "references": ["../../the-tu-continuous-v1/reference/S.master4x.png", "templates/run.template.png"],
+  "selectedOutput": "sheets/run.png",
+  "status": "source; final run uses attempt2 donor cells and documented cell0 contact hold; directional QA and Cocos capture PASS",
+  "utcEndObserved": "2026-11-06 17:46:49 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-e73789ca-d984-4916-8eb2-c3446130675a.png",
+  "rawOutput": "raw/run.attempt1.png",
+  "derivation": "Final sheet uses documented six-cell AI repair plus contact/load hold at cell0; frozen scale unchanged",
+  "repairProofs": ["raw/run.attempt2.repair-proof.json", "raw/run.contact-hold-repair.json"],
+  "originalBackup": "raw/originals/run.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}
