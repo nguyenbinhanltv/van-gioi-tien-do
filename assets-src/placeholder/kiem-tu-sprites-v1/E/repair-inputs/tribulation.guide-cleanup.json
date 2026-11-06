@@ -1,0 +1,120 @@
+{
+  "format": "vgtd-guide-cleanup-proof",
+  "version": 1,
+  "source": {
+    "file": "E/generation-selected/tribulation.raw.png",
+    "sha256": "06a66162ac56066a398d5b47b8b3f059fdfd1ab8e66cc531c6eea92c18d31227"
+  },
+  "selected": {
+    "file": "E/sheets/tribulation.png",
+    "sha256": "47efa32b909270e8ae19a06a5b33f02f5e038cb7d33f971f76bd032ddf29ce7b"
+  },
+  "insetFraction": 0.01,
+  "cells": [
+    {
+      "cell": 1,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "dc4ceaaf05c41984590b92fea35b17c25d8fc7890e4824632daba26a5b0a63f1",
+      "interiorAfterSha256Rgba": "dc4ceaaf05c41984590b92fea35b17c25d8fc7890e4824632daba26a5b0a63f1",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 2,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "3a32b8300dbb7901b74d4533d9574c48d5a687b0fcc76ae1eb33b0e54ce3c3be",
+      "interiorAfterSha256Rgba": "3a32b8300dbb7901b74d4533d9574c48d5a687b0fcc76ae1eb33b0e54ce3c3be",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 3,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "3ee64347d303d3abf32a85c7d736e21b868e60b446d506bf69a68700a3c2a154",
+      "interiorAfterSha256Rgba": "3ee64347d303d3abf32a85c7d736e21b868e60b446d506bf69a68700a3c2a154",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 4,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "5d5d638bc956bad11f0d970c42622969e2a1a74febb1162897e08790852cf10b",
+      "interiorAfterSha256Rgba": "5d5d638bc956bad11f0d970c42622969e2a1a74febb1162897e08790852cf10b",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 5,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "921739667fd42e399b04d1385bf2d0cf6cddd80716f725712b2a37ec946959a4",
+      "interiorAfterSha256Rgba": "921739667fd42e399b04d1385bf2d0cf6cddd80716f725712b2a37ec946959a4",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 6,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "7648feebf4fcb8559b84d6ef40a688688d9636ad0e2a94fe3d78194be91efb04",
+      "interiorAfterSha256Rgba": "7648feebf4fcb8559b84d6ef40a688688d9636ad0e2a94fe3d78194be91efb04",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 7,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "542f149a3e5edbbb4809ac96e98260d52ad1a15ab998a1c829754fc83a189435",
+      "interiorAfterSha256Rgba": "542f149a3e5edbbb4809ac96e98260d52ad1a15ab998a1c829754fc83a189435",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 8,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "56f0df8db3a32029c5e53233b43c23d9b625019a45d923c41182b7e60d79c805",
+      "interiorAfterSha256Rgba": "56f0df8db3a32029c5e53233b43c23d9b625019a45d923c41182b7e60d79c805",
+      "changedBoundaryPixels": 3840
+    },
+    {
+      "cell": 9,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "73889597b5309520d120ac979e07b48b6b81c76c2d1b4a2ec804bee5fcca55b7",
+      "interiorAfterSha256Rgba": "73889597b5309520d120ac979e07b48b6b81c76c2d1b4a2ec804bee5fcca55b7",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 10,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "ecf3851da1384a3572b16fcfddf7c39ecab8466f416f228e5b73b41b41cbff15",
+      "interiorAfterSha256Rgba": "ecf3851da1384a3572b16fcfddf7c39ecab8466f416f228e5b73b41b41cbff15",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 11,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "93e8e0c177e6c2a04c9854ad27d37f1af6482ae8a9063b4597914f82b1402722",
+      "interiorAfterSha256Rgba": "93e8e0c177e6c2a04c9854ad27d37f1af6482ae8a9063b4597914f82b1402722",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 12,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "2ad2d0b469a27f69c095fbb5ccf87a758154f27a4bf5ec6443f9e561edf558e2",
+      "interiorAfterSha256Rgba": "2ad2d0b469a27f69c095fbb5ccf87a758154f27a4bf5ec6443f9e561edf558e2",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 13,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "a74e116960a3c952e7159c44baed38eb10a6aada6c46831028fc839b4e3629b2",
+      "interiorAfterSha256Rgba": "a74e116960a3c952e7159c44baed38eb10a6aada6c46831028fc839b4e3629b2",
+      "changedBoundaryPixels": 3846
+    },
+    {
+      "cell": 14,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "bd1a31442d9957e07e798972af01818817fb86bc3898737659e47eea65c007a4",
+      "interiorAfterSha256Rgba": "bd1a31442d9957e07e798972af01818817fb86bc3898737659e47eea65c007a4",
+      "changedBoundaryPixels": 3852
+    },
+    {
+      "cell": 15,
+      "inset": 3,
+      "interiorBeforeSha256Rgba": "28a5cdac2f04aed79f701582f93741a5ca1c0dfa72aad683506d9487cec10c2a",
+      "interiorAfterSha256Rgba": "28a5cdac2f04aed79f701582f93741a5ca1c0dfa72aad683506d9487cec10c2a",
+      "changedBoundaryPixels": 3852
+    }
+  ]
+}

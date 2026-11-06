@@ -1,0 +1,232 @@
+{
+  "format": "vgtd-standing-control-calibration",
+  "version": 1,
+  "entries": [
+    {
+      "clip": "meditate",
+      "sourceSheet": "E/sheets/meditate.png",
+      "sourceSheetSha256": "d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 152,
+        "right": 274,
+        "top": 27,
+        "bottom": 406,
+        "height": 379,
+        "width": 122,
+        "pelvisX": 214.7108304539497
+      },
+      "referenceHeight": 379,
+      "scale": 0.5488126649076517,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    },
+    {
+      "clip": "dash",
+      "sourceSheet": "E/sheets/dash.png",
+      "sourceSheetSha256": "56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7",
+      "sourceGrid": {
+        "cols": 4,
+        "rows": 2,
+        "total": 8,
+        "control1based": 7
+      },
+      "runtimeFrames": 6,
+      "controlCell0based": 6,
+      "controlMetrics": {
+        "left": 162,
+        "right": 282,
+        "top": 22,
+        "bottom": 412,
+        "height": 390,
+        "width": 120,
+        "pelvisX": 226.31540372670807
+      },
+      "referenceHeight": 390,
+      "scale": 0.5333333333333333,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    },
+    {
+      "clip": "sword_fly",
+      "sourceSheet": "E/sheets/sword_fly.png",
+      "sourceSheetSha256": "2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 153,
+        "right": 271,
+        "top": 17,
+        "bottom": 389,
+        "height": 372,
+        "width": 118,
+        "pelvisX": 212.13173136167592
+      },
+      "referenceHeight": 372,
+      "scale": 0.5591397849462365,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    },
+    {
+      "clip": "attack_2",
+      "sourceSheet": "E/sheets/attack_2.png",
+      "sourceSheetSha256": "10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 150,
+        "right": 267,
+        "top": 23,
+        "bottom": 394,
+        "height": 371,
+        "width": 117,
+        "pelvisX": 209.99832582099162
+      },
+      "referenceHeight": 371,
+      "scale": 0.5606469002695418,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    },
+    {
+      "clip": "attack_3",
+      "sourceSheet": "E/sheets/attack_3.png",
+      "sourceSheetSha256": "347cd6656b221798ce560c77d06cbb8d7972991675fda83b5c249edb83590ef0",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 149,
+        "right": 285,
+        "top": 24,
+        "bottom": 403,
+        "height": 379,
+        "width": 136,
+        "pelvisX": 215.2089953009622
+      },
+      "referenceHeight": 379,
+      "scale": 0.5488126649076517,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": {
+        "operation": "clear1percent cell boundary only; preserve all inner RGBA pixels",
+        "removedGuidePixels": 15012,
+        "removedCharacterPixels": 0,
+        "proofFile": "E/repair-inputs/attack_3.guide-cleanup.json"
+      }
+    },
+    {
+      "clip": "channel",
+      "sourceSheet": "E/sheets/channel.png",
+      "sourceSheetSha256": "c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 157,
+        "right": 274,
+        "top": 17,
+        "bottom": 406,
+        "height": 389,
+        "width": 117,
+        "pelvisX": 217.62733126110123
+      },
+      "referenceHeight": 389,
+      "scale": 0.5347043701799485,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    },
+    {
+      "clip": "tribulation",
+      "sourceSheet": "E/sheets/tribulation.png",
+      "sourceSheetSha256": "47efa32b909270e8ae19a06a5b33f02f5e038cb7d33f971f76bd032ddf29ce7b",
+      "sourceGrid": {
+        "cols": 5,
+        "rows": 3,
+        "total": 15,
+        "control1based": 13
+      },
+      "runtimeFrames": 12,
+      "controlCell0based": 12,
+      "controlMetrics": {
+        "left": 117,
+        "right": 209,
+        "top": 14,
+        "bottom": 308,
+        "height": 294,
+        "width": 92,
+        "pelvisX": 166.2959384858044
+      },
+      "referenceHeight": 294,
+      "scale": 0.7074829931972789,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": {
+        "operation": "clear1percent cell boundary only; preserve all inner RGBA pixels",
+        "removedGuidePixels": 23795,
+        "removedCharacterPixels": 0,
+        "proofFile": "E/repair-inputs/tribulation.guide-cleanup.json"
+      }
+    },
+    {
+      "clip": "emote",
+      "sourceSheet": "E/sheets/emote.png",
+      "sourceSheetSha256": "44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46",
+      "sourceGrid": {
+        "cols": 3,
+        "rows": 3,
+        "total": 9,
+        "control1based": 9
+      },
+      "runtimeFrames": 8,
+      "controlCell0based": 8,
+      "controlMetrics": {
+        "left": 166,
+        "right": 273,
+        "top": 18,
+        "bottom": 392,
+        "height": 374,
+        "width": 107,
+        "pelvisX": 221.03626183175575
+      },
+      "referenceHeight": 374,
+      "scale": 0.5561497326203209,
+      "masterTargetHeight": 208,
+      "operation": "One fixed scale from unused standing control; all runtime frames translated only. Control cells never exported.",
+      "preprocess": null
+    }
+  ]
+}
