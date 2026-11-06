@@ -70,6 +70,37 @@ describe('classification', () => {
 });
 
 describe('applyBacklog', () => {
+  it('does not resolve or prune foot baselines when a clip is explicitly unmeasured', () => {
+    const foot = entry();
+    const height = entry({ gate: 'height', metric: 'height_excess_px' });
+    const b: Backlog = { ...emptyBacklog('kiem-tu'), entries: [foot, height] };
+    const report = applyBacklog(
+      [
+        {
+          gate: 'footSlide',
+          clip: 'run',
+          severity: 'info',
+          measurement: 'unmeasured',
+          message: 'Foot slide UNMEASURED: legacy inputs',
+        },
+      ],
+      'E',
+      b,
+    );
+    expect(report.counts.accepted).toBe(0);
+    expect(report.resolved).toEqual([height]);
+    expect(pruneResolved(b, report).entries).toEqual([foot]);
+    expect(acceptFindings(b, report, 'E', { note: 'prune only', prune: true }).entries).toEqual([foot]);
+  });
+  it('does not accept new non-E ground-projection measurements using old x-only baselines', () => {
+    const old: Backlog = { ...emptyBacklog('kiem-tu'), entries: [entry({ dir: 'SE', value: 99 })] };
+    const finding = { ...slide('run', 2, 5), metric: 'slide_ground_px_per_frame_R' };
+    const report = applyBacklog([finding], 'SE', old);
+    expect(report.counts['fail-soft']).toBe(1);
+    expect(report.counts.accepted).toBe(0);
+    expect(report.resolved).toEqual(old.entries);
+  });
+
   const backlog: Backlog = {
     ...emptyBacklog('kiem-tu'),
     entries: [entry(), entry({ clip: 'walk', cell: 9, value: 4, note: 'old' })],

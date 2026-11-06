@@ -1,0 +1,49 @@
+{
+  "algorithm": "sha256 decoded premultiplied RGBA row-major per cell",
+  "grid": {
+    "cols": 6,
+    "rows": 2
+  },
+  "selectedCells0based": [4, 9, 10, 11],
+  "before": {
+    "file": "repair-inputs/run.after-repair1.png",
+    "sha256": "0aff97dc04886aaf7d3293abc3ff79ea2eeecc605dbf69663bc3f6aac186a9e5",
+    "cells": [
+      "aea641d94660c9f47042ffc11fb27f563541ae75ac5914a51db211689f0145d8",
+      "08557ebf9c2f68718793d1e01e152b86ba3db7d743571378eaa5379401bdc09a",
+      "e182e22ea18f28713b0fc6f7454846783ae5cdf768a48403522580b9ef8d48b7",
+      "127d27f6e931be842e9c5fb0d71288df00489050cdff0d4f3d754d72be1ade28",
+      "671a182a5363db3ed7e371b90665ba1b64feed952475d3004650fba349d0dca5",
+      "5e6c6e6e31e1803e1eed2b4912d9850d22b33fab588b54ad8a4e59f5a4e53d19",
+      "c93eb89b97b793c33a5f20163e7133d44e991c2638c0cb3bbdbc7c2a1ec3505d",
+      "d9973e71348a57d3c07b5810794a49db6f9941dcf3519f16b8b2ccb33a0cdfbe",
+      "1eeffc29151818b16559a7b5aca7a04d6dc2c19facb82d6e24665735fe2b64d2",
+      "14b0789547311b45412e1ba0a481f5b8fa6a6228e10f84be880be94325addd36",
+      "e0ae01c55471cb47a7c13803c567639b9d791c64b6a8ef4fadfa8fd9cb203636",
+      "0b030dbc2ea53896b6109247714e794fa0da3320613f83db11872c35ddce4e19"
+    ]
+  },
+  "after": {
+    "file": "sheets/run.png",
+    "sha256": "f4d3244ef1e8636f251db7ac14ccce7c133d10622be498574a5ee025112a8c07",
+    "cells": [
+      "aea641d94660c9f47042ffc11fb27f563541ae75ac5914a51db211689f0145d8",
+      "08557ebf9c2f68718793d1e01e152b86ba3db7d743571378eaa5379401bdc09a",
+      "e182e22ea18f28713b0fc6f7454846783ae5cdf768a48403522580b9ef8d48b7",
+      "127d27f6e931be842e9c5fb0d71288df00489050cdff0d4f3d754d72be1ade28",
+      "5630c6b4e2b52223422f29493cca7773b48349bf619f37414d6de0bbbe72e9cd",
+      "5e6c6e6e31e1803e1eed2b4912d9850d22b33fab588b54ad8a4e59f5a4e53d19",
+      "c93eb89b97b793c33a5f20163e7133d44e991c2638c0cb3bbdbc7c2a1ec3505d",
+      "d9973e71348a57d3c07b5810794a49db6f9941dcf3519f16b8b2ccb33a0cdfbe",
+      "1eeffc29151818b16559a7b5aca7a04d6dc2c19facb82d6e24665735fe2b64d2",
+      "4fe4e02008b59f5d0696c1b05e382c4ee4359d35766d6487e8c432d2c149971c",
+      "3bcc8e10f9b828d74532d84bde50c8b6f1563669d114b34d1cc977bc44106634",
+      "ea855c2706b6a5ccffe3d561ce6e9cb820aaadee5454638a5e1da5607124340d"
+    ]
+  },
+  "editedRaw": {
+    "file": "generation-selected/run.repair2.raw.png",
+    "sha256": "05ba6266895d71c5567c20428fe0e109e8879a7d18e3e6a81334f6d83907d6c0"
+  },
+  "method": "Public repairCell; replace whole selected cells only; all unselected decoded RGBA hashes identical; original fixed referenceHeight312 retained."
+}

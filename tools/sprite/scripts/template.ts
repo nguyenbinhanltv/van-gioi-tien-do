@@ -1,7 +1,7 @@
 /**
  * `npm run sprite:template -w @vgtd/sprite -- --clip run [--frames 12 --cols 6] --master <master.png> --out <dir>
  *      [--gait run|walk|none (default: the clip name when it is run or walk)] [--direction E] [--duration <s>] [--stance <0..0.5>] [--half-stride <px>] [--lift 14] [--first R|L]
- *      [--center <x>] [--cells <cells.json>]`
+ *      [--center <x>] [--stance-width <px @2x, default 0>] [--cells <cells.json>]`
  *
  * Writes <out>/<clip>.template.png and <out>/<clip>.template.json (the manifest the build reads). Guides come from the
  * MEASURED master (ground at the pivot row, head top, pelvis, pelvis axis at the master's measured x unless --center).
@@ -23,9 +23,9 @@ import {
   groundSpeedPxS,
   halfStrideFor,
   tableDuration,
+  assertDirection,
   type CellSpec,
 } from '../src/index.js';
-import type { Direction } from '@vgtd/shared';
 
 const args = process.argv.slice(2);
 const opt = (n: string, d = '') => {
@@ -48,7 +48,7 @@ const guides = guidesFromMaster(m, CELL_PX, opt('center') ? Number(opt('center')
 // the gait defaults to the clip name for run / walk, so new templates always follow the table ground speed
 const gait = opt('gait', clip === 'run' || clip === 'walk' ? clip : 'none');
 const stance = Number(opt('stance', '0.5'));
-const direction = opt('direction', 'E') as Direction;
+const direction = assertDirection(opt('direction', 'E'));
 const derivedHalfStride = () => {
   const id = gait as 'run' | 'walk';
   const speed = groundSpeedPxS(id, direction);
@@ -59,6 +59,8 @@ let cells: CellSpec[] | undefined;
 if (opt('cells')) cells = JSON.parse(readFileSync(resolve(cwd, opt('cells')), 'utf8')) as CellSpec[];
 else if (gait !== 'none')
   cells = locomotionCells(frames, guides, {
+    direction,
+    stanceWidth: Number(opt('stance-width', '0')),
     halfStride: opt('half-stride') ? Number(opt('half-stride')) : derivedHalfStride(),
     lift: Number(opt('lift', gait === 'run' ? '16' : '10')),
     first: opt('first', 'R') as 'L' | 'R',
