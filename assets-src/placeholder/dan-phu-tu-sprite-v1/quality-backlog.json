@@ -1,0 +1,67 @@
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "dan-phu-tu",
+  "entries": [
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 2,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame",
+      "value": 9.6,
+      "limit": 3,
+      "note": "First full-set pass: measured planted-foot slide; repair leg trajectory in later cell-local pass.",
+      "status": "open",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame",
+      "value": 12.4,
+      "limit": 3,
+      "note": "First full-set pass: measured planted-foot slide; repair leg trajectory in later cell-local pass.",
+      "status": "open",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 6,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame",
+      "value": 7.5,
+      "limit": 3,
+      "note": "First full-set pass: measured planted-foot slide; repair leg trajectory in later cell-local pass.",
+      "status": "open",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 7,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame",
+      "value": 9.8,
+      "limit": 3,
+      "note": "First full-set pass: measured planted-foot slide; repair leg trajectory in later cell-local pass.",
+      "status": "open",
+      "added": "2026-11-06"
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 4,
+      "gate": "footSlide",
+      "metric": "weak_leg_reversal_cells",
+      "value": 4,
+      "limit": 0,
+      "note": "Visual review: cells4-7 repeat near-leg silhouette instead of clear far-leg lead; redraw reversed half-cycle, do not rescale.",
+      "status": "open",
+      "added": "2026-11-06"
+    }
+  ]
+}

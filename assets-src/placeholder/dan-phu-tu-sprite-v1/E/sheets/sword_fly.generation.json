@@ -1,0 +1,15 @@
+{
+  "id": "E-sword_fly-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:39:28 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:39:53 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production sword_fly sprite sheet for DAN/PHU TU support healer A, 8 complete poses. Reference1 exact E master, reference2 exact template. EXACT 4 COLUMNS x 2 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Class flight posture: upright balanced hovering stance with both legs together slightly bent, whisk in right hand and talisman left, feet pointed slightly down. Gentle loop of sleeves and hair only; no vertical bob baked in. No sword or mount drawn: runtime handles flight prop. All eight poses same height with smooth seam. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/sword_fly.template.png"],
+  "output": "E/sheets/sword_fly.png",
+  "toolOutputId": "exec-bdc89162-d01a-432c-9ec3-9c7a60915d69.png"
+}

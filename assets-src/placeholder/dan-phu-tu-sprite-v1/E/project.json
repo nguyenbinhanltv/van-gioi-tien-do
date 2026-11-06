@@ -1,0 +1,204 @@
+{
+  "character": "dan-phu-tu",
+  "direction": "E",
+  "stem": "danphutu",
+  "master": "../reference/E.master.png",
+  "clips": [
+    {
+      "name": "idle",
+      "sheet": "sheets/idle.png",
+      "cols": 4,
+      "frames": 12,
+      "manifest": "templates/idle.template.json",
+      "tableId": "idle",
+      "durationSec": 1,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "meditate",
+      "sheet": "sheets/meditate.png",
+      "cols": 4,
+      "frames": 8,
+      "manifest": "templates/meditate.template.json",
+      "tableId": "meditate",
+      "durationSec": 1,
+      "loop": true,
+      "kind": "free",
+      "exceptions": {
+        "0": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "1": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "2": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "3": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "4": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "5": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "6": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "7": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained"
+      }
+    },
+    {
+      "name": "walk",
+      "sheet": "sheets/walk.png",
+      "cols": 4,
+      "frames": 8,
+      "manifest": "templates/walk.template.json",
+      "tableId": "walk",
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "run",
+      "sheet": "sheets/run.png",
+      "cols": 5,
+      "frames": 10,
+      "manifest": "templates/run.template.json",
+      "tableId": "run",
+      "durationSec": 0.5,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "dash",
+      "sheet": "sheets/dash.png",
+      "cols": 4,
+      "frames": 6,
+      "manifest": "templates/dash.template.json",
+      "tableId": "dash",
+      "durationSec": 0.25,
+      "loop": false,
+      "kind": "free",
+      "exceptions": {
+        "1": "dash-lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "2": "dash-lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "3": "dash-lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "4": "dash-lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "sheet": "sheets/sword_fly.png",
+      "cols": 4,
+      "frames": 8,
+      "manifest": "templates/sword_fly.template.json",
+      "tableId": "sword_fly",
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "free"
+    },
+    {
+      "name": "attack_1",
+      "sheet": "sheets/attack_1.png",
+      "cols": 5,
+      "frames": 10,
+      "manifest": "templates/attack_1.template.json",
+      "tableId": "attack",
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "kind": "free",
+      "phases": {
+        "hit_frame": 5,
+        "combo_window": 8
+      }
+    },
+    {
+      "name": "attack_2",
+      "sheet": "sheets/attack_2.png",
+      "cols": 5,
+      "frames": 10,
+      "manifest": "templates/attack_2.template.json",
+      "tableId": "attack",
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "kind": "free",
+      "phases": {
+        "hit_frame": 5,
+        "combo_window": 8
+      }
+    },
+    {
+      "name": "attack_3",
+      "sheet": "sheets/attack_3.png",
+      "cols": 5,
+      "frames": 10,
+      "manifest": "templates/attack_3.template.json",
+      "tableId": "attack",
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "kind": "free",
+      "phases": {
+        "hit_frame": 5,
+        "combo_window": 8
+      }
+    },
+    {
+      "name": "cast",
+      "sheet": "sheets/cast.png",
+      "cols": 5,
+      "frames": 14,
+      "manifest": "templates/cast.template.json",
+      "tableId": "cast",
+      "durationSec": 0.5,
+      "loop": false,
+      "kind": "free",
+      "phases": {
+        "windup_end": 7
+      }
+    },
+    {
+      "name": "channel",
+      "sheet": "sheets/channel.png",
+      "cols": 4,
+      "frames": 8,
+      "manifest": "templates/channel.template.json",
+      "tableId": "channel",
+      "durationSec": 0.4,
+      "loop": true,
+      "kind": "free"
+    },
+    {
+      "name": "hit",
+      "sheet": "sheets/hit.png",
+      "cols": 4,
+      "frames": 4,
+      "manifest": "templates/hit.template.json",
+      "tableId": "hit",
+      "durationSec": 0.2,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "die",
+      "sheet": "sheets/die.png",
+      "cols": 4,
+      "frames": 12,
+      "manifest": "templates/die.template.json",
+      "tableId": "die",
+      "durationSec": 0.8,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "tribulation",
+      "sheet": "sheets/tribulation.png",
+      "cols": 6,
+      "frames": 24,
+      "manifest": "templates/tribulation.template.json",
+      "tableId": "tribulation",
+      "durationSec": 1,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "emote",
+      "sheet": "sheets/emote.png",
+      "cols": 4,
+      "frames": 12,
+      "manifest": "templates/emote.template.json",
+      "tableId": "emote",
+      "durationSec": 1,
+      "loop": false,
+      "kind": "free"
+    }
+  ]
+}

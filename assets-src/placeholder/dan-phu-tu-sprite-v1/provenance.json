@@ -1,0 +1,51 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "license": "AI-generated, placeholder, needs hand-polish + license review before release",
+  "releaseApproved": false,
+  "interimArtOwner": "user",
+  "calls": [
+    {
+      "id": "concept-abc",
+      "startUtc": {
+        "current_time": "2026-11-06 16:28:13 UTC"
+      },
+      "endUtc": {
+        "current_time": "2026-11-06 16:29:50 UTC"
+      },
+      "prompt": "Use case: stylized-concept. Original Van Gioi Tien Do cultivation MMORPG support class DAN/PHU TU concept comparison sheet. Reference images are project-owned AI art: match their polished soft ink-wash painted game art, compact adult 5.75-head proportions, ivory cross collars, muted mountain-blue clothing, dark blue sash, thin pale bronze trim, jade accents, light from NW. Make landscape parchment sheet with THREE clearly separated full-body adult characters labeled A, B, C, each facing three-quarter right, same scale, boots fully visible. They are three alternatives for one support class (heal shield crowd-control buff), not swordsmen, tanks or long-staff mages. Strong leg separation, simple large shapes readable at 128px; no tiny ornaments. A: calm slim adult female sect healer, high folded jade headpiece, dark hair in short tied back loop, ivory sleeves and jade-green short split overrobe with muted blue side panels, dark fitted trousers and boots, holds a short bronze-handled WHITE HORSEHAIR WHISK distinctly away from body, three broad warm-gold paper talismans hanging from belt, small medicine gourd. B: composed adult male talisman scholar, neat topknot, short ivory and muted blue coat with jade shoulder mantle, dark trousers, holds large short TALISMAN BRUSH with black bristles and a broad golden paper talisman in other hand. C: mature adult female apothecary, broad triangular ivory capelet over jade split tunic, dark trousers, short white whisk and compact medicine satchel, two gold talismans. Each weapon visible, no sword, armor, gauntlets, hovering effects, scenery or glow. Include small palette swatches under each option and one simplified 128px-scale silhouette thumbnail per option. Title DAN / PHU TU — A / B / C. Footer AI CONCEPT / REVIEW ONLY. Maintain restrained reference aesthetic, no photorealism, no chibi.",
+      "references": [
+        "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png",
+        "assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png"
+      ],
+      "output": "reference/concepts-abc.png",
+      "toolOutputId": "exec-5ddf9070-9d08-448f-a6c7-a1ae31a3d0ba.png"
+    },
+    {
+      "id": "turnaround",
+      "startUtc": {
+        "current_time": "2026-11-06 16:30:07 UTC"
+      },
+      "endUtc": {
+        "current_time": "2026-11-06 16:30:53 UTC"
+      },
+      "prompt": "Use case: stylized-concept. Production turnaround reference for Van Gioi Tien Do DAN/PHU TU support character. Use ONLY option A (leftmost woman) from reference concept sheet; preserve face, folded jade headpiece, short looped tied dark hair, ivory sleeves, jade-green short split overrobe, muted mountain blue side panels, bronze thin trim, dark sash, dark fitted trousers, dark boots, medicine gourd and three golden paper talismans. Compact adult 5.75 heads proportions, same soft painted ink-wash game style NW light. Output a single wide image with FIVE equal square cells in one row, solid flat magenta #FF00FF background, no grid lines text shadows floor effects. FULL BODY same character same exact pixel height in every cell, head to boots within cell. Five drawn directions in order: E pure right-facing side profile; SE front-right three-quarter; S front facing viewer; NE back-right three-quarter; N back facing away. Isometric game camera 20 degrees above level, no perspective variation. Each upright neutral idle with feet separated visibly, hands away from torso, short bronze-handled white horsehair whisk in right hand angled forward/down and entirely inside cell; whisk tip must not hang lower than soles, shorten whisk hair if needed. Left hand relaxed holding one paper talisman, three belt talismans always attached. Do not mirror weapon hand between views. Every cell figure head top about 10% from top, soles at 90%, equal figure height; no extra poses, no duplicated front views, no oversized weapon. Character alone, no glow no VFX, no letters or labels. Preserve A identity; do not use B or C.",
+      "references": ["reference/concepts-abc.png"],
+      "output": "reference/turnaround.png",
+      "toolOutputId": "exec-a2b49fb1-c212-4ae6-bdf6-ccc8ff990a10.png"
+    },
+    {
+      "id": "E-walk-1",
+      "startUtc": {
+        "current_time": "2026-11-06 16:32:32 UTC"
+      },
+      "endUtc": {
+        "current_time": "2026-11-06 16:32:59 UTC"
+      },
+      "prompt": "Use case: stylized-concept. Production frame-by-frame WALK sprite sheet for Dan/Phu tu A support healer. Image1 exact E master identity and proportions; image2 exact 4 columns x 2 rows of square cells with leading leg ghosts. Draw EXACTLY EIGHT full-body poses, reading order. All face pure RIGHT/E. Same woman with folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panel, bronze trim, dark sash/trousers/boots, gourd and gold belt talismans, bronze-handled white whisk in RIGHT near hand and paper talisman in far LEFT hand. Match master soft painted ink outline style NW light. Constant anatomical scale, head24 sole232 in each256square cell; body208px, allowed202..214, preserve exact face/head/limb dimensions. Follow alternating leading feet and cyan/amber leg ghosts in template; near right leg forward on frame1, far left forward frame5. Clear opposite-leg reversal, planted feet move backward through stance, lifted feet swing forward, restrained hip bob, tall posture no squat. Split robe must expose separate dark boot silhouettes; whisk held forward/down away from knee/hem, hair never below ground. Eight distinct sequential poses full walk cycle, frame8 transitions smoothly to1 without repeated endpoint. Flat solid #FF00FF background. Remove all template lines ticks ghosts labels. No grid, text, shadow, floor, VFX, blur or extra limbs. Every pose entirely inside its own cell. Exact 4x2 square grid, overall2:1.",
+      "references": ["reference/E.master.png", "E/templates/walk.template.png"],
+      "output": "E/sheets/walk.png",
+      "toolOutputId": "exec-da14f915-91b6-4212-ae9c-a77d2daef6dc.png"
+    }
+  ]
+}

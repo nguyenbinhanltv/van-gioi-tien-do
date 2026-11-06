@@ -1,0 +1,17 @@
+{
+  "id": "E-run-repair-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:37:22 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:37:55 UTC"
+  },
+  "prompt": "Edit target image1 is a 5 columns x2 rows run sheet; image2 master identity only. Repair ONLY the two cells at top row column4 and bottom row column4 (0-based cells3 and8). Keep all other cells pixel-identical if possible. In these two cells retain the EXACT original head, torso, waist, clothing, arms, whisk, talisman and hip position/scale. Redraw only legs BELOW THE HIPS to fix excessively tucked running legs: extend the forward shin and boot diagonally down so the lowest sole is about the same ground height as adjacent frames (about 93% cell height); leave back leg trailing in airborne running pose. Total headpiece-top-to-lowest-sole figure height must be about 89% of square cell, matching other frames; original tucked poses were only80%. Do NOT resize, stretch, squash or translate the character. Anatomically redraw knee and ankle articulation at original limb length, with front knee less raised, boot down/forward. Preserve clear run energy. Exact same face/costume/props/colors/style/pure magenta background. No grid, text, outlines around cells, shadows or VFX. Output same 5x2 cell layout and original overall aspect. The two repaired cells must retain original identity and normal body proportions.",
+  "references": ["E/sheets/run.png (original generation identified in run.generation.json)", "reference/E.master.png"],
+  "output": "E/sheets/run.png",
+  "toolOutputId": "exec-e3703a0e-edd2-430d-8b2a-cf5495131d4a.png",
+  "cells": [3, 8],
+  "method": "sprite:repair applied each cell sequentially; other cell hashes unchanged"
+}
