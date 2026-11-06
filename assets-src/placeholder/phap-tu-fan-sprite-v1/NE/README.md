@@ -4,7 +4,7 @@ D42 B production direction NE: 15 clips, 126 drawings. Anatomical RIGHT/near han
 
 ```sh
 npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-fan-sprite-v1/NE/project.json --out <temporary-directory>
-npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/phap-tu-fan-sprite-v1/NE/batch.json --out <review-directory> --capture
+npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/phap-tu-fan-sprite-v1/batch.json --out <review-directory> --capture
 ```
 
 Raw sheets use declared square-cell-dpi-v1 preparation and the shared locked 208/237 calibration (0.8776371308016878). No per-frame scaling or gameplay speed/threshold changes. Idle heights 203..204 px, walk 201..204, run 204..209 versus master 207 px ±3%. Walk/run use vertical:keep and measured direction-correct public ghosts, with boot spacing measured from the canonical master. No UNMEASURED opt-out.
