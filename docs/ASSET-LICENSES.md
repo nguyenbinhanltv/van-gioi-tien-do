@@ -1,5 +1,14 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## KT-SHEET-E-v1 — mẫu sprite từng khung Kiếm tu E (2026-11-06 UTC)
+
+- Phạm vi: `assets-src/placeholder/kiem-tu-sprites-v1/`; 60 hình toàn thân trong 7 sheet (run/walk 12, idle/attack/cast/die 8, hit 4). Theo D41; chỉ bản nháp để chủ sở hữu xem, chưa nghiệm thu chuyển động.
+- Công cụ sinh/sửa ảnh: **`image_gen.imagegen`**; model **không được công cụ công bố**; **codex-cli 0.166.0**. Toàn bộ 23 prompt nguyên văn, tham chiếu, mã file đầu ra và thời điểm UTC được ghi trong [provenance.json](../assets-src/placeholder/kiem-tu-sprites-v1/provenance.json), gồm cả các lượt bị loại.
+- Tham chiếu: concept A hướng E đã có trong dự án (lô Kiếm tu PR #80); bản master @4x sao chép trong thư mục `reference/`. Không nhập tài sản bên thứ ba mới; quyền sử dụng và hạn chế AI giữ như lô nguồn. Người phụ trách art tạm thời: người dùng.
+- Hậu xử lý xác định bằng `@vgtd/sprite`: chroma key, defringe, khóa palette theo master, một hệ số tỷ lệ cố định cho mỗi sheet, chỉ tịnh tiến theo trục thân/đế chân từng khung; trim và đóng atlas PMA, padding 2/extrude 1. Không co kéo chiều cao riêng từng khung.
+- Sửa nguồn: thay đúng 5 ô run bằng ảnh sinh lại; sửa hai họa tiết thừa trên áo của hit bằng ảnh texture sinh lại, mã chỉ chép pixel trong mask. Các ô khác được giữ nguyên và kiểm tra hash. **Không vẽ pixel thủ công**. Template đầu vào thực tế được giữ nguyên để truy xuất; template đầu tiên có stride ngắn/trục cũ, lượt run sinh lại theo guide sửa đã bị loại vì trượt chân nhiều hơn.
+- Tình trạng: height ±3%, similarity, raster loop seam và đủ khung đều đạt; còn 9 lỗi foot-slide (2 run, 7 walk), cần sửa nhịp chân/độ liên tục và spill màu magenta ở tóc. Không thay ngưỡng QA hay tốc độ trò chơi. Capture Cocos 1x/2x, bảng so sánh rig cũ và log QA là artifact phiên `final-A-E/`, không phải bằng chứng nghiệm thu. Bộ nguồn chưa thay nhân vật mặc định trong game.
+
 ## Lô mẫu đầu tiên — 2026-11-05
 
 **Chỉ placeholder, không phát hành.** Người dùng đã cho phép tạo lô nhỏ bằng AI để kiểm chứng pipeline trong khi phần triển khai khác đang tạm dừng để rà soát thiết kế. Chủ sở hữu con người / người phụ trách art tạm thời: **người dùng (interim art owner)**. Việc ghi tên chủ phụ trách không xác nhận khả năng bảo hộ quyền tác giả của sản phẩm AI.
