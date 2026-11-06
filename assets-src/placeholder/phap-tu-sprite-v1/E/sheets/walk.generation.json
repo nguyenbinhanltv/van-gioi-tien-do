@@ -1,0 +1,11 @@
+{
+  "id": "E.walk",
+  "prompt": "Use case: stylized-concept. Production AI frame-by-frame WALK loop sprite sheet PHAP TU A facing RIGHT/E. Input1 immutable MASTER identity and palette. Input2 EXACT 4 columns x2 rows square-cell template with leading-leg foot ghosts: cyan near RIGHT foot, amber far LEFT foot; follow its foot placements and lifted/grounded phases, REMOVE all colored guides from output. Output 1024x512, EIGHT equal256 square cells, row-major reading. PURE solid magenta #FF00FF background. One complete character per cell: EXACT master high dark bun jade pin, ivory sleeves/trousers, teal gold-trim knee-length split robe with red lining, navy two-tail sash, dark boots, bronze crescent cyan gem STAFF red tassel held in near hand, no sword. Top of bun y24 and boot ground y232 equivalent in EVERY cell; upright head height stays208px +-3%; pelvis at x128. Staff always wholly inside cell, top below bun, tip at ground. 8 sequential true walking poses: right foot forward contact, passing with left foot lifted, left foot moving forward, left contact, left grounded right trailing, right lifted passing, right moving forward, right contact near next cycle. ALTERNATE LEADING LEG halfway; distinguish near leg dark/cyan boot from far leg, use slit robe so BOTH boots/knees visible and legs naturally articulate. Feet follow template ghosts; stance slides backward while planted rather than static boots. Torso upright and stable, staff carried vertical with mild tilt, empty arm counter-swings, mild cloth and tassel follow-through. Same character shape and uniform scale, no individual cell resizing. Smooth loop last-to-first. Crisp dark outlines restrained soft cel shading NW light, game sprite128px readable. NO shadows, grid lines, words, numbers, colored ghost dots, VFX, extra characters, or anatomy changes.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:33:06 UTC",
+  "utcEnd": "2026-11-06 16:34:53 UTC",
+  "selectedOutput": "E/sheets/walk.png",
+  "references": ["reference/E.master-generated.png", "E/templates/walk.template.png"],
+  "attempt": 1
+}

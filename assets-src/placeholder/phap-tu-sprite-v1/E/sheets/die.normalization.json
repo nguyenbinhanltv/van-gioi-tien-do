@@ -1,0 +1,9 @@
+{
+  "method": "whole-sheet uniform DPI normalization before shared character calibration; no individual frame scaling",
+  "source": "sheets/die.generated.png",
+  "output": "sheets/die.png",
+  "sourceSize": [2172, 724],
+  "scale": 0.7071823204419889,
+  "resized": [1536, 512],
+  "canvas": [1536, 512]
+}

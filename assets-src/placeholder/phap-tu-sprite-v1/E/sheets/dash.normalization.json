@@ -1,0 +1,9 @@
+{
+  "method": "whole-sheet uniform DPI normalization before shared character calibration; no individual frame scaling",
+  "source": "sheets/dash.generated.png",
+  "output": "sheets/dash.png",
+  "sourceSize": [1536, 1024],
+  "scale": 0.5,
+  "resized": [768, 512],
+  "canvas": [768, 512]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "E.emote",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. SIX columns TWO rows,TWELVE square cells. Output grid with SQUARE cells matching template, total aspect columns/rows, no decorative margins. Maintain exact head and torso ABSOLUTE SIZE of master in each256cell even when crouching/dying; do not enlarge seated/collapsed character to fillcell. 12-frame respectful greeting:1 guard,2-4 bring free hand to chest while retaining staff in near hand,5-7 small formal bow torso forward,8-10 straighten,11-12 guard. Same body size, no deep squat or giant head. Staff gripped throughout, no effects.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:42:41 UTC",
+  "utcEnd": "2026-11-06 16:43:14 UTC",
+  "selectedOutput": "E/sheets/emote.png",
+  "references": ["reference/E.master-generated.png", "E/templates/emote.template.png"],
+  "attempt": 1
+}

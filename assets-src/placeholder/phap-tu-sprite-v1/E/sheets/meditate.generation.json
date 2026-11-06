@@ -1,0 +1,11 @@
+{
+  "id": "E.meditate",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. FOUR columns TWO rows, EIGHT cells,1024x512. 8-frame looping seated meditation. Kneel or sit cross-legged on ground y232, staff held upright beside body with top below head. Face right, eyes calm closed. Body naturally lower than standing through seated anatomy, never shrunken. Gentle breath inhale frames1-4 exhale5-8, small sleeve/tassel motion, first-last smooth.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:35:12 UTC",
+  "utcEnd": "2026-11-06 16:35:55 UTC",
+  "selectedOutput": "E/sheets/meditate.png",
+  "references": ["reference/E.master-generated.png", "E/templates/meditate.template.png"],
+  "attempt": 1
+}

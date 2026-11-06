@@ -1,0 +1,13 @@
+{
+  "id": "turnaround-generated",
+  "prompt": "Use case: stylized-concept. Production five-direction TURNAROUND for original cultivation MMORPG PHAP TU A. Match provided E MASTER identity, clothing construction, palette and proportions EXACTLY. One landscape sheet with FIVE full body views in single row equal sized and evenly spaced on TRUE TRANSPARENT background. Left to right: E exact RIGHT profile, SE three-quarter FRONT looking down-right, S FRONT facing viewer, NE three-quarter BACK looking up-right, N BACK facing away. No labels or text. Compact 5.75 heads adult male, high dark bun with jade pin and short tied tail, ivory narrow sleeves and trousers, petrol teal split knee robe with bronze cloud edging and vermilion lining, navy sash two separate tails, dark calf boots. Bronze crescent enclosing cyan gem on dark wooden STAFF with small vermilion tassel; staff held in SAME anatomical right hand throughout, staff does not rotate in plane to become sword. Staff no taller than head, bottom at soles. Relaxed neutral pose with boots separated, empty left hand lowered and visible. Modest orthographic overhead isometric camera consistent with master, NW light, clean dark outlines and restrained soft cel shading, large readable shapes at128px, no photorealism. SAME height/width/proportions and same garment details in every view, no weapon swaps, no sword or gauntlets, no shadows, scenery, effects, swatches, frames or watermark. Each view fully visible with ample clear padding, no overlap.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:31:16 UTC",
+  "utcEnd": "2026-11-06 16:32:32 UTC",
+  "selectedOutput": "reference/turnaround-generated.png",
+  "references": ["reference/E.master-generated.png"],
+  "findings": [
+    "NE staff-hand continuity requires verification and cell-local repair before production master selection"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "method": "whole-sheet uniform DPI normalization before shared character calibration; no individual frame scaling",
+  "source": "sheets/cast.generated.png",
+  "output": "sheets/cast.png",
+  "sourceSize": [1774, 887],
+  "scale": 0.8658399098083427,
+  "resized": [1536, 768],
+  "canvas": [1536, 768]
+}

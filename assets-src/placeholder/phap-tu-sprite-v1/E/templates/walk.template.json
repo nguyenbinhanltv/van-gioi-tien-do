@@ -1,0 +1,132 @@
+{
+  "clip": "walk",
+  "grid": {
+    "cols": 4,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 8,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 127.65292096219932
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 154.31958762886597,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 100.98625429553266,
+        "y": 232,
+        "planted": false
+      },
+      "tag": "R_contact"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 140.98625429553266,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 114.31958762886599,
+        "y": 224.92893218813452,
+        "planted": false
+      },
+      "tag": "R_down"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 127.65292096219932,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 127.65292096219932,
+        "y": 222,
+        "planted": false
+      },
+      "tag": "R_toeoff"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 114.31958762886599,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 140.98625429553266,
+        "y": 224.92893218813452,
+        "planted": false
+      },
+      "tag": "R_up"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 100.98625429553266,
+        "y": 232,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 154.31958762886597,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_contact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 114.31958762886599,
+        "y": 224.92893218813452,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 140.98625429553266,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_down"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 127.65292096219932,
+        "y": 222,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 127.65292096219932,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_toeoff"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 140.98625429553266,
+        "y": 224.92893218813452,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 114.31958762886599,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_up"
+    }
+  ],
+  "width": 1024,
+  "height": 512
+}

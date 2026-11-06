@@ -1,0 +1,11 @@
+{
+  "id": "E.attack",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. SIX columns TWO rows,TEN used cells row-major,last2 EMPTY magenta. EVERY cell is SQUARE with same208px standing body at256-equivalent, same face/head size as master, keep top24 and boots232 for standing; use space sideways for weapon rather than extending above bun. 10-frame ranged staff pulse:1 guard,2-3 draw staff back near hip and gather free hand,4 aim staff tip horizontally right,5 RELEASE impact pose aimed right,6 hold impact,7 recoil,8-9 ease back,10 guard. No melee sword slash. Staff stays physically gripped, no stretching.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:37:57 UTC",
+  "utcEnd": "2026-11-06 16:38:34 UTC",
+  "selectedOutput": "E/sheets/attack.png",
+  "references": ["reference/E.master-generated.png", "E/templates/attack.template.png"],
+  "attempt": 1
+}

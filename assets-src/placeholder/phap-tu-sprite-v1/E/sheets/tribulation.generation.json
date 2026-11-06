@@ -1,0 +1,11 @@
+{
+  "id": "E.tribulation",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. SIX columns FOUR rows,TWENTY FOUR square cells. Output grid with SQUARE cells matching template, total aspect columns/rows, no decorative margins. Maintain exact head and torso ABSOLUTE SIZE of master in each256cell even when crouching/dying; do not enlarge seated/collapsed character to fillcell. 24-frame one-shot enduring lightning:1-4 brace with bent knees staff planted,5-8 raise free forearm defensively and look tense,9-16 subtle repeated chest/shoulder flinches holding stance,17-20 tension releases,21-24 return guard. NO actual lightning/effects, added separately. Head size and body proportions exact master, no perspective or direction change, height208 upright except modest braced knee flex.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:41:57 UTC",
+  "utcEnd": "2026-11-06 16:42:40 UTC",
+  "selectedOutput": "E/sheets/tribulation.png",
+  "references": ["reference/E.master-generated.png", "E/templates/tribulation.template.png"],
+  "attempt": 1
+}

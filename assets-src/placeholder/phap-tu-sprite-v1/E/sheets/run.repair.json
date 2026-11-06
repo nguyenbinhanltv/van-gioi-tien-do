@@ -1,0 +1,42 @@
+{
+  "method": "@vgtd/sprite repairCell; changed cells only, no figure scaling",
+  "operations": [
+    {
+      "cell": 3,
+      "changed": [3]
+    },
+    {
+      "cell": 8,
+      "changed": [8]
+    }
+  ],
+  "changed": [3, 8],
+  "before": [
+    "d6a754f38ff1eb4229a98511bee3297ad34d1df7",
+    "3099469c8ca253c179d3d8261c2a0f9b71ffa1fb",
+    "2aa7ab875af7da05dc26d05ca36bc888e5f70b5f",
+    "7e45bf2efa1c9851773992d6e96b37efbad49ef2",
+    "b4ed4ef22d2e47e0d4b5d5512bad319c4b7b2a10",
+    "4cbaf596345a4bed56e6c386e75dedd8668a5c9c",
+    "2b88f8fd873874aa4c03bcab152fc72a3ee46b74",
+    "73a16d27834f1cf89804e96f97425f229eae6c45",
+    "f4de5b7b0966e02b1c462d4339d1771057131c0a",
+    "3026cf207dfac232db2d9b31ed162ed8aa6e1409",
+    "1631d00956e3c69c6a286d7a331534b6e894153d",
+    "b81f962030978c63eb9e1c087a6efdfdcf8c96d5"
+  ],
+  "after": [
+    "d6a754f38ff1eb4229a98511bee3297ad34d1df7",
+    "3099469c8ca253c179d3d8261c2a0f9b71ffa1fb",
+    "2aa7ab875af7da05dc26d05ca36bc888e5f70b5f",
+    "6e07ee0ecd2ddbbd9dc68ac51934c8d933d5257b",
+    "b4ed4ef22d2e47e0d4b5d5512bad319c4b7b2a10",
+    "4cbaf596345a4bed56e6c386e75dedd8668a5c9c",
+    "2b88f8fd873874aa4c03bcab152fc72a3ee46b74",
+    "73a16d27834f1cf89804e96f97425f229eae6c45",
+    "bd819ef02eb42044c057bee2cea173a30a5b4417",
+    "3026cf207dfac232db2d9b31ed162ed8aa6e1409",
+    "1631d00956e3c69c6a286d7a331534b6e894153d",
+    "b81f962030978c63eb9e1c087a6efdfdcf8c96d5"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "E.attack_2-attempt2",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. REVISED narrow combat staging for atlas. EXACT SIX columns TWO rows, TEN frames used row-major, last2cells blank magenta. Same anatomical head/torso/limb dimensions as master, upright headtop24 soles232 figure208px EVERY frame (allowed202..214). Knees only slightly flexed, NO crouch or deep lunge, HEAD NEVER DROPS. Keep weapon and arms CLOSE to torso: complete sprite bbox width atmost150px within256cell, not the entirecellwidth. Staff real length unchanged from master but carried steepDIAGONAL inside silhouette height, NEVER horizontal broadside. Crescent top below bun. Do not shrinkcharacter orstaff; achieve width via arm/weapon pose only. Clear physical grip, free palm to right. Full10-frame attack sequence: guard, gather palm at chest, short forward palm pulse with staff kept steepdiagonal beside torso, impactcell4, hold5, recover6-9. Clean same masteridentity/clothdetails andsmooth pose transitions. NO giant extended arms or stance, no growing staff, no effect/shadow/text/grid.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:48:02 UTC",
+  "utcEnd": "2026-11-06 16:48:28 UTC",
+  "selectedOutput": "E/sheets/attack_2.generated.png",
+  "references": ["reference/E.master-generated.png", "E/templates/attack_2.template.png"],
+  "attempt": 2,
+  "reason": "Narrow staff staging for one2048atlas and upright height stability; no frames removed"
+}

@@ -1,0 +1,9 @@
+{
+  "method": "whole-sheet uniform DPI normalization before shared character calibration; no individual frame scaling",
+  "source": "sheets/tribulation.generated.png",
+  "output": "sheets/tribulation.png",
+  "sourceSize": [1536, 1024],
+  "scale": 1,
+  "resized": [1536, 1024],
+  "canvas": [1536, 1024]
+}

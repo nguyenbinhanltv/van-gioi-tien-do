@@ -1,0 +1,11 @@
+{
+  "id": "E.idle",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame game sprite sheet for PHAP TU A, E direction IDLE breathing. Input1 is immutable character MASTER; Input2 is exact grid TEMPLATE, use as layout only and REMOVE ALL GUIDE LINES. Output 1536x512 landscape sprite sheet exactly SIX columns TWO rows, 12 equal square cells. Read left to right then next row. Every cell contains ONE complete same character, RIGHT-facing profile, matching master face, anatomy, bun, jade pin, teal gold-trim knee robe, ivory sleeves/trousers, navy double-tail sash, dark boots, bronze crescent cyan orb staff and red tassel held in near right hand. SOLID PURE MAGENTA #FF00FF background, no transparent regions. In each 256 equivalent cell, bun top y24, boot soles y232, pelvis x128: same height 208px in EVERY cell, height tolerance +-3%, centered consistent scale. Staff always fully inside cell, not taller than bun, staff foot at boots. Same master pose, feet planted at identical positions, staff held vertically left of torso. 12 subtly different consecutive breathing phases: inhale first6, exhale last6, gentle chest motion and slight cloth/tassel motion, head and feet height unchanged. Last flows naturally to first. EXACTLY 12 frames; never alternate direction or redesign costume. Clean dark outline restrained 2-3 tone soft cel shade, NW light, readable128px. No floor/shadow, no text/numbers, no grid lines, no VFX, no additional characters. Do not paste the master unchanged 12 times; show subtle coherent breathing.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:32:07 UTC",
+  "utcEnd": "2026-11-06 16:33:41 UTC",
+  "selectedOutput": "E/sheets/idle.png",
+  "references": ["reference/E.master-generated.png", "E/templates/idle.template.png"],
+  "attempt": 1
+}

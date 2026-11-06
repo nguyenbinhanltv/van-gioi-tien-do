@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:56689/#viewer&mode=single&dir=E&paused=1&src=dragonbones/phap-tu-sprite-v1&stem=phaptu",
+  "mode": "single",
+  "direction": "E",
+  "frames": 12,
+  "animations": {
+    "idle": {
+      "duration": 1,
+      "keyFrames": 30,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif"
+    }
+  },
+  "source": "dragonbones/phap-tu-sprite-v1/phaptu"
+}

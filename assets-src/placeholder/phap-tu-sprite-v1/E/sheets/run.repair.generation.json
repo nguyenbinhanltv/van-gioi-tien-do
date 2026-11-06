@@ -1,0 +1,12 @@
+{
+  "id": "E.run-repair-1",
+  "prompt": "Edit target RUN sprite sheet. Preserve EXACT canvas1536x512 SIX columns TWO rows. Change ONLY TWO cells: zero-based cell3 (top row FOURTH) and cell8 (bottom row THIRD). All other cells remain pixel identical. In these2 cells the running flight has both boots too high, measured figure height190/187 vs required202..214. REDRAW ANATOMY locally, DO NOT scale any figure or body. Keep head/top, torso, hands, staff, costume identical; rotate and extend the forward leading leg downward into near-contact so lowest boot sole is at y232 in its local256square (top bun near24). Near/far leg alternation remains: cell3 far left leg comes forward, cell8 near right leg comes forward. Naturally articulated hip/knee, other leg trailing and bent, slight flight or near contact. Keep both boots distinct and intact within cell, no anatomy stretching. Same petrol teal robe/ivory trousers/dark boots. Magenta background unchanged, no text or borders. The edit will be extracted by cell-local repair, no other cells used.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:38:23 UTC",
+  "utcEnd": "2026-11-06 16:40:41 UTC",
+  "selectedOutput": "E/sheets/run.png",
+  "references": ["E/sheets/run.png"],
+  "attempt": 2,
+  "changedCells": [3, 8]
+}

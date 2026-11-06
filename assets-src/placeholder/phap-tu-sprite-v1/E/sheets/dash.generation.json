@@ -1,0 +1,11 @@
+{
+  "id": "E.dash",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. SIX columns ONE row,SIX cells,1536x256. 6-frame one-shot dash.1 standing ready,2 weight shifts forward knees bent,3 forward low acceleration pose with leading knee bent trailing leg extended,4 airborne low dash extension,5 landing knee flex,6 recover standing. STAFF gripped in near hand angled backward, not sword, keep crescent visible; torso leans naturally, no effects or motion trails, boots clearly articulated.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:36:07 UTC",
+  "utcEnd": "2026-11-06 16:36:37 UTC",
+  "selectedOutput": "E/sheets/dash.png",
+  "references": ["reference/E.master-generated.png", "E/templates/dash.template.png"],
+  "attempt": 1
+}

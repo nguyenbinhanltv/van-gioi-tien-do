@@ -1,0 +1,11 @@
+{
+  "id": "E.die",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU A game sprite sheet, EAST RIGHT-facing profile throughout. Reference1 immutable MASTER face/anatomy/costume/palette; Reference2 exact equal-square grid layout only, REMOVE guides. PURE solid MAGENTA #FF00FF background, NO grid/borders/shadows/text/numbers/ghost marks/VFX. Same adult male compact5.75heads, high dark bun jade pin short tied tail, ivory sleeves/trousers, teal gold-trim split knee robe red lining, navy two-tail sash, dark boots; visible hand holds dark wooden STAFF bronze crescent cyan gem red tassel, NEVER sword or gauntlets. NW upper-left lighting, dark crisp outlines restrained soft cel shading, readable128px. Same uniform scale EVERY frame, natural articulated limbs and cloth follow-through, preserve identity, fully inside each cell, NO cropping, staff cannot extend beyond head/soles in upright poses. At256 equivalent master upright height208px top24 ground232 pelvis x128; no per-cell resizing. SIX columns TWO rows,TWELVE square cells. Output grid with SQUARE cells matching template, total aspect columns/rows, no decorative margins. Maintain exact head and torso ABSOLUTE SIZE of master in each256cell even when crouching/dying; do not enlarge seated/collapsed character to fillcell. 12-frame one-shot collapse:1 guard,2 stagger,3 knees buckle,4 torso curls,5 kneeling,6 drops to side,7 shoulder approaching ground,8 body on side,9 settles,10 settles hands,11 final rest,12 same final rest. Body naturally changes height through pose, NEVER shrinks body. Head and torso absolute size EXACT master. Staff remains held or rests visibly beside fallen body wholly inside cell. No blood or gore. Keep ground y232, use horizontal space for fallen pose.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:41:16 UTC",
+  "utcEnd": "2026-11-06 16:41:56 UTC",
+  "selectedOutput": "E/sheets/die.png",
+  "references": ["reference/E.master-generated.png", "E/templates/die.template.png"],
+  "attempt": 1
+}

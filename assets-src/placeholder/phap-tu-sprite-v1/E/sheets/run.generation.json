@@ -1,0 +1,11 @@
+{
+  "id": "E.run",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame RUN sprite sheet PHAP TU A EAST exact right-facing profile. Input1 immutable MASTER. Input2 EXACT six-column two-row template (twelve squares): draw TEN frames in row-major order, last2 cells blank PURE MAGENTA. Output1536x512. PURE #FF00FF background, remove guide lines/foot ghosts. Same slender adult5.75 heads, high black bun jade pin, ivory sleeves and trousers, petrol teal bronze-trim knee split robe vermilion lining, navy double sash, dark boots. Near hand visibly holds brown wooden STAFF bronze crescent cyan orb red tassel, no sword. Complete sprite each cell, same uniform scale, upright total height208px equivalent +-3%, bun y24 boots ground232 pelvis128. Run with energetic alternating leg reversal: frame1 near right leg forward contact far left trailing;2 right planted moving backward left knee lifting;3 left knee passes forward right toe trailing;4 left extension in flight;5 left heel lands forward right rear;6 far left forward contact near right trailing;7 left planted right knee lifting;8 right knee passes forward left trailing;9 right extends flight;10 right lands forward approaching frame1. Follow CYAN near-right and AMBER far-left ghost locations in template, keep both feet visible, split robe opens naturally, genuine knee and hip articulation, mild forward torso lean, staff carried slightly diagonal but within cell, empty arm swings opposite legs, hem/hair/tassel follow-through. Maintain head top and measured height without stretching anatomy. NW light clean dark outline soft2-3tone game cel shade readable128px. Seam10->1 smooth. NO ground shadow, text, guides, foot dots, VFX, extra frames/characters, no staff below soles or above bun.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:34:04 UTC",
+  "utcEnd": "2026-11-06 16:37:00 UTC",
+  "selectedOutput": "E/sheets/run.png",
+  "references": ["reference/E.master-generated.png", "E/templates/run.template.png"],
+  "attempt": 1
+}

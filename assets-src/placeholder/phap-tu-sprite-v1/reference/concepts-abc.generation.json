@@ -1,0 +1,14 @@
+{
+  "id": "concepts-abc",
+  "prompt": "Use case: stylized-concept. Create one three-column character concept comparison sheet for original Vietnamese cultivation isometric MMORPG Van Gioi Tien Do. Reference image 1 is the existing The Tu concept STYLE reference; image 2 is Kiem Tu game sprite STYLE reference. Match clean dark outlines, restrained soft 2-3 tone cel shading, ivory cloth, muted mineral colors, NW lighting, practical ancient Chinese cultivation costume, readable at 128px. Three DISTINCT full body young adult Phap Tu ranged spellcasters, slender 5.75 head game proportions, slight overhead orthographic three-quarter view, equal scale. Pale parchment backdrop, no scenery. Columns labeled A, B, C only, include one small 128px-like silhouette thumbnail below each. A recommended: Tideflame scholar, deep petrol teal split robes with ivory inner tunic, restrained vermilion lining and antique gold accents, black hair high tied bun with short loose tail, narrow sleeves, visible boots and separated legs. Holds long dark wooden STAFF with large simple bronze crescent surrounding cyan gem, small red tassel. B: Vermilion fan adept, ivory and muted red robes, dark blue sash, broad open folding FAN cyan ribs, no staff. C: Indigo ritual scholar, dark indigo layered robes with pale blue collar, tall simple STAFF topped with red orb in bronze open ring. No swords, no gauntlets, no heavy armor. Face hands and feet readable, garments not floor length, no glowing effects hiding anatomy, weapon always visibly held. Professional consistent game concept art, no watermark.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:27:54 UTC",
+  "utcEnd": "2026-11-06 16:29:21 UTC",
+  "selectedOutput": "reference/concepts-abc.png",
+  "references": [
+    "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png",
+    "assets-src/placeholder/kiem-tu-rig-v1/turnaround/SE.png"
+  ],
+  "recommendation": "A: Tideflame scholar; owner may swap later"
+}

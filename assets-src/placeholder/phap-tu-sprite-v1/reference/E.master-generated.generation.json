@@ -1,0 +1,10 @@
+{
+  "id": "E.master-generated",
+  "prompt": "Use case: stylized-concept. Production neutral MASTER sprite for original Van Gioi Tien Do MMORPG PHAP TU A Tideflame Scholar. Reference image is concept comparison, use ONLY character A left column. ONE full-body character only, TRUE transparent background. Exact clothing/identity: slender young adult male, compact 5.75-head proportions, dark brown-black hair high bun held with jade pin, short tied back tail, ivory cross-collar tunic with narrow practical sleeves, petrol teal knee-length split sleeveless outer robe with restrained bronze cloud trim and vermilion inner lining, dark navy sash with two distinct tails, ivory trousers and dark calf boots. Long brown wooden STAFF in near hand, large bronze crescent enclosing cyan gem and small vermilion tassel. Staff top no higher than head and staff foot no lower than boot soles. Empty other hand relaxed and visible. No sword, no gauntlets, no armor. Direction E: exact RIGHT-facing profile, nose points screen right, both boots visible separated slightly, neutral balanced standing pose, staff held upright slightly ahead of torso with visible grip. Mild overhead orthographic isometric game camera, NO perspective distortion. Clean dark contour, restrained soft 2-3 tone cel shading matching reference, NW upper-left light, readable at128px, no painted surface noise. Square canvas, entire figure centered, height80% canvas, margins10%, boots at90% canvas height. No scenery, ground shadow, labels, text, VFX, extra poses, border or palette swatches.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:29:45 UTC",
+  "utcEnd": "2026-11-06 16:31:05 UTC",
+  "selectedOutput": "reference/E.master-generated.png",
+  "references": ["reference/concepts-abc.png"]
+}
