@@ -90,6 +90,11 @@ const measuredUprightMedian = median(uprightHeights);
 const referenceHeight = locked.referenceHeight;
 const scale = locked.scale;
 const input: Project = { ...project, master, scale, clips };
+// Absolute paths are confined to this temporary working project, never committed.
+writeFileSync(
+  join(work, 'project.json'),
+  JSON.stringify({ ...input, backlog: resolve(dir, project.backlog ?? 'quality-backlog.json') }, null, 2) + '\n',
+);
 let result = runProject(input, dir);
 if (process.argv.includes('--accept-soft')) {
   const path = resolve(dir, project.backlog ?? 'quality-backlog.json');
