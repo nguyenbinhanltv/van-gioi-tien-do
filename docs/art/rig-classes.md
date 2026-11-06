@@ -41,3 +41,9 @@ Mọi lớp dùng lại bộ Kiếm tu (chạy, đi, dash, hit, chết, đả t�
 
 - Pose ghi đè của ba lớp mới là bản đầu theo mô tả docs/11, chưa duyệt trong viewer; `sword_fly` dùng lại clip Kiếm tu cho mọi lớp (cần biến thể theo vũ khí khi có concept).
 - Chưa có dữ liệu thật của ba lớp: test dùng rig mẫu sinh từ kích thước danh nghĩa.
+
+## 8. Ráp chi liền theo lớp (`src/class-profile.ts`, `rig:assemble --class <id>`)
+
+`AssemblyProfile` gom mọi thứ riêng của một lớp khi ráp theo D39: danh sách mảnh (thứ tự vẽ, kiểu gắn xương), xương của rig gốc bị bỏ, luật detail (đổi display theo hành động), dáng chạy (`GaitProfile`), hướng gập gối (`ikBend`) và luật vũ khí cho cổng QA. Thêm lớp = thêm một entry + thư mục mảnh, không thêm nhánh code. Rig Kiếm tu E vẫn là rig gốc cho vai trò xương, IK và socket; xương theo landmark của lớp, IK đặt lại theo mắt cá (`snapIk`).
+
+**Thể tu A** (`THE_TU_PROFILE`, stem `thetu`): quyền sáo là 5 display mỗi bên (`gauntlet_{L,R}_{relaxed,guard,fist,open,ground}`) trên slot `hand_L` / `hand_R`, không có xương/slot kiếm, `weapon_R`, vỏ kiếm, trail hay glint. Tabard chia trước/sau gắn kiểu `skirt` + `spine` (`spineWeights`): phần trên hông theo xương sống như thân, phần dưới theo đùi và cánh váy `robe_front/back`. Cổ gộp vào thân, hai vai tabard gộp một slot, đai + nút gộp một mảnh theo xương sống; 2 đuôi đai và 2 lọn tóc dài là chain, lọn mái ngắn gắn cứng vào đầu. Mắt/mày/miệng đổi theo clip (mày qua `ClipDetail.extra`); mắt chỉ do `blink_cycle` giữ (trừ meditate), `eyes_angry` để dành cho runtime. Dáng chạy `THE_TU_GAIT`: nửa sải, gối nông vừa phải, bước giậm, nghiêng người; cả hai gối gập về phía trước (rig gốc gập gối R ra sau, bị áo dài che trong pilot Kiếm tu, nhưng với quần lộ chân thì thành chân vòng kiềng).

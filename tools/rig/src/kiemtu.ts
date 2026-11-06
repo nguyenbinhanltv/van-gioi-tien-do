@@ -15,7 +15,7 @@ import { angleDelta, type Vec2 } from './math.js';
 import { evalPose } from './pose.js';
 import { fitToSilhouette } from './fit.js';
 import type { LoadedAtlas } from './render/render.js';
-import { applyDetail } from './detail.js';
+import { applyDetail, type ClipDetail } from './detail.js';
 import { bakeSecondaryMotion, simplifyScalar } from './secondary.js';
 import type { RigDocument } from './schema.js';
 
@@ -996,6 +996,8 @@ export interface KiemTuOptions {
   readonly gait?: GaitProfile;
   /** Add the detail layer (blink, mouth/hand display swaps, sword trail/glint; see `applyDetail`). Default false. */
   readonly detail?: boolean;
+  /** Detail rules by clip name for `detail: true` (class art: Thể tu gauntlets). Default `DETAIL_RULES`. */
+  readonly detailRules?: Readonly<Record<string, ClipDetail>>;
   /** Restrict to some clips. Default: all of KIEMTU_CLIPS. */
   readonly only?: readonly KiemTuClip[];
 }
@@ -1027,7 +1029,7 @@ export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Cli
     const base = skirtFollowsLegs(rig, grounded);
     const bake = (c: Clip) => {
       const baked = opts.secondary === false ? c : bakeSecondaryMotion(rig, c);
-      return opts.detail ? applyDetail(rig, baked) : baked;
+      return opts.detail ? applyDetail(rig, baked, opts.detailRules) : baked;
     };
     if (opts.fitAtlas) return fitToSilhouette(rig, base, opts.fitAtlas, { finalize: bake }).clip;
     return bake(base);

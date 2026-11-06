@@ -1,6 +1,6 @@
 # Bước key pose tham chiếu AI → khớp rig (D39, bổ sung 2026-11-06)
 
-Quyết định của chủ dự án: giữ rig xương, **thêm bước key pose tham chiếu** để sửa dáng đi/chạy (phần thân dưới trước đó trông "què").
+Quyết định **D40** của chủ dự án (xem `docs/DECISIONS.md`; bổ sung cho D39): giữ rig xương, **thêm bước key pose tham chiếu** để sửa dáng đi/chạy (phần thân dưới trước đó trông "què").
 
 ## Quy trình
 
@@ -25,4 +25,4 @@ In sai số khớp + IoU từng key, và ghi `keypose_<clip>_compare.png` (hàng
 - **`hem_left` / `hem_right` là mép ngoài của váy**, không phải trục xương tà váy: tà váy xoay theo **thay đổi hướng** của mép từ pivot so với mép lúc nghỉ đo trên mesh, không theo hướng tuyệt đối.
 - **Đích IK chân/tay đặt đúng mắt cá/cổ tay của landmark** (`applyLandmarks`); trước đây đích IK còn ở vị trí rig cũ nên mọi delta chân đều lệch.
 - **Khóa chân chạm đất:** khi một chân chạm đất qua các key liên tiếp, đích chân phải lùi với tốc độ mặt đất không đổi; các key được dịch ngang như vật rắn (hông + hai chân) cho đến khi chân chạm đất nằm trên đường đó. Khoảng cách key đều nhau (không làm tròn frame) để không giật ở điểm nối vòng.
-- **Cổng mỗi key:** RMS sai số landmark nhìn thấy ≤ 2 px rig **và** IoU silhouette. IoU còn bị giới hạn bởi khác biệt hình dạng giữa ảnh AI và art của rig (tóc dài bay, váy xòe, tay áo): đối chứng idle (tư thế gần như tĩnh) chỉ đạt IoU 0,85-0,87 dù sai số pose = 0. `rig:assemble --keyposes` in thêm IoU theo ba dải (đầu+tay / thân / váy+chân), tịnh tiến tốt nhất của ảnh tham chiếu và ảnh chồng (xám: cả hai; đỏ: chỉ tham chiếu; xanh: chỉ rig) để tách sai lệch đăng ký khỏi sai lệch hình dạng.
+- **Cổng mỗi key:** RMS sai số landmark nhìn thấy ≤ 2 px rig **và** IoU silhouette (ngưỡng IoU do chủ dự án chọn: `docs/OPEN-ITEMS.md` §10 mục 2; mã giữ 0,85). IoU còn bị giới hạn bởi khác biệt hình dạng giữa ảnh AI và art của rig (tóc dài bay, váy xòe, tay áo): đối chứng idle (tư thế gần như tĩnh) chỉ đạt IoU 0,85-0,87 dù sai số pose = 0. `rig:assemble --keyposes` in thêm IoU theo ba dải (đầu+tay / thân / váy+chân), tịnh tiến tốt nhất của ảnh tham chiếu và ảnh chồng (xám: cả hai; đỏ: chỉ tham chiếu; xanh: chỉ rig) để tách sai lệch đăng ký khỏi sai lệch hình dạng.

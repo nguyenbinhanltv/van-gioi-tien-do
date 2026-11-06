@@ -4,10 +4,12 @@
  * Assemble a continuous-limb direction (D39) from painted parts and export it for the viewer:
  *   <parts>/<dir>/<piece>.png   full-canvas 256x256 RGBA parts (see docs/art/rig-continuous-parts.md)
  *   <parts>/<dir>/landmarks.json
- * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
+ * Writes <out>/<stem>_<dir>_{ske,tex}.json + <stem>_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
  * --keyposes <dir> [--iou 0.85] [--rms 2]  fit run/walk/... clips to reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
  * .landmarks.json), print fit error + silhouette IoU per key and write keypose_<clip>_compare.png sheets.
+ * --class <id>  kiem-tu (default) | the-tu: the class assembly profile (`class-profile.ts`: its parts, bones to drop, detail rules,
+ * clips; Thể tu has no sword, its gauntlets are displays on the hand slots, stem `thetu`).
  * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
  * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
  * shallow knee, low foot lift, for a long robe; free = the original gait). The cadence is baked into the clip: the authored
@@ -40,6 +42,10 @@ import {
   silhouetteIoUDetail,
   type Image,
   type KeyPoseLandmarks,
+  CHARACTER_IDS,
+  authorClassSet,
+  getAssemblyProfile,
+  type CharacterId,
   authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
@@ -63,12 +69,18 @@ const opt = (name: string, def = '') => {
 const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
-const stem = opt('stem', 'kiemtu');
+const character = opt('class', 'kiem-tu') as CharacterId;
+if (!(CHARACTER_IDS as readonly string[]).includes(character))
+  throw new Error(`unknown --class '${character}' (${CHARACTER_IDS.join(', ')})`);
+const profile = character === 'kiem-tu' ? undefined : getAssemblyProfile(character);
+const stem = opt('stem', profile?.stem ?? 'kiemtu');
 // robe: half stride, two step pairs inside the table-length clip at the real ground speed (cadence baked in, no
 // runtime timeScale); `free` is the original gait
-const gaitName = opt('gait', 'robe') as GaitName;
-if (!(gaitName in GAIT_PROFILES))
+// default: the class gait of its profile (Thể tu: heavy stomp), robe for Kiếm tu
+const gaitName = (opt('gait', '') || (profile ? 'class' : 'robe')) as GaitName | 'class';
+if (gaitName !== 'class' && !(gaitName in GAIT_PROFILES))
   throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
+const gait = gaitName === 'class' ? profile!.gait : GAIT_PROFILES[gaitName];
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -90,7 +102,7 @@ for (const f of readdirSync(partsDir)) {
 
 // sword borrowed from the old atlas: crop its quad and re-express the uvs against the crop
 const oldImg = decodePng(readFileSync(old.texturePath), { premultiplied: old.atlas.premultipliedAlpha });
-const weaponRaw = old.rig.skins[0]!.attachments.weapon_R?.weapon_R;
+const weaponRaw = profile && !profile.borrowsSword ? undefined : old.rig.skins[0]!.attachments.weapon_R?.weapon_R;
 const weaponAtt: MeshAttachment | undefined = weaponRaw?.type === 'mesh' ? weaponRaw : undefined;
 const weapon = (() => {
   if (!weaponAtt) return undefined;
@@ -114,11 +126,19 @@ const weapon = (() => {
 })();
 
 const res = assembleContinuous({
-  base: old.rig,
+  base: profile ? { ...old.rig, id: profile.id } : old.rig,
   landmarks,
   view,
   parts,
   ...(weapon ? { weapon } : {}),
+  ...(profile
+    ? {
+        pieces: profile.pieces,
+        dropBones: profile.dropBones,
+        snapIk: true,
+        ...(profile.ikBend ? { ikBend: profile.ikBend } : {}),
+      }
+    : {}),
   atlasName: `${stem}_${dir}`,
 });
 console.log(`parts: ${res.used.length} used, ${res.missing.length} missing, ${res.skipped.length} skipped`);
@@ -147,7 +167,12 @@ if (issues.length) {
 }
 
 const blink = authorBlinkCycle(res.rig);
-let clips = [...authorKiemTuSet(res.rig, { detail: true, gait: GAIT_PROFILES[gaitName] }), ...(blink ? [blink] : [])];
+let clips = [
+  ...(profile
+    ? authorClassSet(character, res.rig, { detail: true, gait })
+    : authorKiemTuSet(res.rig, { detail: true, gait })),
+  ...(blink ? [blink] : []),
+];
 
 // --keyposes <dir>: replace the clips that have a full set of reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
 // .landmarks.json) with clips fitted to them; report the silhouette IoU of every key against its reference image
@@ -294,7 +319,7 @@ try {
   pkg = buildCharacterPackage([{ rig: res.rig, clips }], res.atlas.data, {
     name,
     armatureName: () => name,
-    qa: { weapon: 'one' },
+    qa: { weapon: profile?.qaWeapon ?? 'one' },
     allowErrors: args.includes('--allow-errors'),
   });
 } catch (e) {

@@ -102,3 +102,35 @@ export function applyLandmarks(rig: RigDocument, landmarks: Landmarks, view: Can
 }
 
 const round = (v: number) => Math.round(v * 1e4) / 1e4;
+
+/**
+ * Move the IK targets onto the rest position of the end of their chain (ankle for the legs, wrist for the arms): the
+ * targets are children of the root and keep the local transform of the base rig, so after the bones follow new landmarks
+ * they would pull the limb away from the art. Only rest positions change (rotation of the target is kept).
+ */
+export function snapIkTargets(rig: RigDocument): RigDocument {
+  if (!rig.ik?.length) return rig;
+  const worlds = new Map<string, Mat>();
+  const identity: Mat = { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 };
+  const localMat = (b: RigBone) =>
+    composeLocal({ x: b.x, y: b.y, rotation: b.rotation, scaleX: b.scaleX ?? 1, scaleY: b.scaleY ?? 1 });
+  for (const b of rig.bones) worlds.set(b.name, mulMat(b.parent ? worlds.get(b.parent)! : identity, localMat(b)));
+  const move = new Map<string, Vec2>();
+  for (const k of rig.ik) {
+    const end = rig.bones.find((b) => b.name === k.bones[k.bones.length - 1]);
+    const target = rig.bones.find((b) => b.name === k.target);
+    if (!end || !target) continue;
+    const w = worlds.get(end.name)!;
+    // tip of the chain end: the end bone's origin advanced by its length along its x axis
+    const tip = applyMat(w, { x: end.length, y: 0 });
+    const parentW = target.parent ? worlds.get(target.parent)! : identity;
+    move.set(target.name, applyMat(invertMat(parentW), tip));
+  }
+  return {
+    ...rig,
+    bones: rig.bones.map((b) => {
+      const p = move.get(b.name);
+      return p ? { ...b, x: round(p.x), y: round(p.y) } : b;
+    }),
+  };
+}
