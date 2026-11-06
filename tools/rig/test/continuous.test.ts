@@ -143,6 +143,8 @@ describe('assembleContinuous', () => {
       expect.arrayContaining(['arm_L', 'leg_L', 'torso', 'head', 'ribbon_tail_L', 'robe_front']),
     );
     expect(res.missing).toContain('arm_R');
+    expect(res.stats.limits.meshVertices).toBeGreaterThan(res.stats.vertices);
+    expect(res.stats.limits.bones).toBeGreaterThan(res.stats.bones);
     expect(validateRig(res.rig).filter((i) => i.severity === 'error')).toEqual([]);
   });
 

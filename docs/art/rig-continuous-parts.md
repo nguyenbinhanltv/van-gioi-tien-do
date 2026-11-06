@@ -66,7 +66,7 @@ Tùy chọn sau: mặt dây ngọc (chain), lót tay áo, váy lớp trong, lớ
 
 ## 6. Việc kế tiếp (rig side)
 
-Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất vào `apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` (giữ nhân vật cũ để so sánh), thêm blink / đổi tay / đổi miệng vào clip (display index theo khung), sau đó lan sang S/SE/NE/N.
+Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất bằng `npm run rig:assemble -w @vgtd/rig -- --parts <thư mục> --out <thư mục>` (mặc định ra thư mục tạm; để xem trong viewer dùng `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous`, không commit thư mục đó trước khi pilot được nghiệm thu; giữ nhân vật cũ để so sánh), thêm blink / đổi tay / đổi miệng vào clip (display index theo khung), sau đó lan sang S/SE/NE/N.
 
 ## 7. Lớp chi tiết hoạt cảnh (`tools/rig/src/detail.ts`)
 

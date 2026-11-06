@@ -8,6 +8,7 @@
  * to hips and thighs (`buildSkirtMesh`), everything else rigid quads; hand / eye / mouth variants share one slot as
  * displays; all crops are packed into one atlas page.
  */
+import { RIG_LIMITS } from '@vgtd/character';
 import { applyLandmarks, type Landmarks } from './landmarks.js';
 import { buildLimbMesh, buildSkirtMesh, type CanvasView } from './limb.js';
 import { DETAIL_CHAINS, DETAIL_GROUPS } from './detail.js';
@@ -147,6 +148,13 @@ export interface AssembleResult {
     readonly slots: number;
     readonly vertices: number;
     readonly chains: number;
+    /** The docs/03 limits of the rig kind (`RIG_LIMITS`), to read the headroom: `vertices` of `limits.meshVertices`. */
+    readonly limits: {
+      readonly bones: number;
+      readonly slots: number;
+      readonly meshVertices: number;
+      readonly chains: number;
+    };
   };
 }
 
@@ -301,6 +309,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
   const { view } = input;
   const pieces = input.pieces ?? E_PIECES;
   const maxAtlas = input.maxAtlas ?? 2048;
+  const limits = RIG_LIMITS[input.base.kind === 'boss' ? 'boss' : input.base.kind === 'pet' ? 'pet' : 'player'];
   const drop = new Set(input.dropBones ?? REPLACED_BONES);
   const missing: string[] = [];
   const skipped: string[] = [];
@@ -498,6 +507,17 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     used: built.map((b) => b.spec.id),
     missing,
     skipped,
-    stats: { bones: bones.length, slots: slots.length, vertices, chains: chains.length },
+    stats: {
+      bones: bones.length,
+      slots: slots.length,
+      vertices,
+      chains: chains.length,
+      limits: {
+        bones: limits.bones,
+        slots: limits.slots,
+        meshVertices: limits.meshVertices,
+        chains: limits.physicsConstraints,
+      },
+    },
   };
 }
