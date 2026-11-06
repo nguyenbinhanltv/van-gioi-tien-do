@@ -13,6 +13,7 @@ import {
   createImage,
   evalPose,
   evenKeyFrames,
+  finishedLandmarkRms,
   fitPose,
   landmarksFromPose,
   loadCharacterData,
@@ -165,4 +166,68 @@ describe('key-pose locomotion runs at the table ground speed', () => {
     expect(clip.motion!.speed).toBe(handRun.motion!.speed);
     expect(runQa(rig, clip, { mesh: false }).issues.filter((i) => i.check === 'foot-slide')).toEqual([]);
   });
+});
+
+describe('the finished-clip RMS compensates the lock shift along any facing axis', () => {
+  // SE: the facing axis has a vertical component, so the contact lock moves hips and feet vertically too
+  const se = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get('SE')!.rig;
+  const N = 15;
+  const hand = authorKiemTuSet(se, { only: ['run'], secondary: false, gait: GAIT_PROFILES.free })[0]!;
+  const at = keyPoseFrames('run', N, hand.phases, hand.events);
+  const refs = at.map((f) => landmarksFromPose(se, evalPose(se, hand, f), view) as KeyPoseLandmarks);
+
+  it('a clip fitted to its own landmarks has a finished RMS near 0 in SE too', () => {
+    const fits = refs.map((lm) => fitPose(se, lm, view));
+    const out: { fits?: PoseFit[] } = {};
+    const clip = authorKeyPoseClip(se, 'run', fits, N, true, hand.phases, hand.events, out);
+    out.fits!.forEach((fit, i) => {
+      const rms = finishedLandmarkRms(se, refs[i]!, view, clip, at[i]!, fit);
+      expect(rms, `key ${i}`).toBeLessThan(0.8);
+    });
+  });
+
+  it('when the lock moves the keys diagonally the compensation follows: body RMS stays at the fit RMS', () => {
+    // feet drawn 1.5x wider: the lock must shift the keys along the diagonal facing; the legs (feet, knees, hips) are marked
+    // inferred (the wider feet change them by construction), the body landmarks must still agree after compensation
+    const feetNames = ['ankle_L', 'ankle_R', 'foot_tip_L', 'foot_tip_R', 'knee_L', 'knee_R', 'hip_L', 'hip_R'];
+    const wide = refs.map((lm) => {
+      const fit = fitPose(se, lm, view);
+      return {
+        ...fit,
+        feet: Object.fromEntries(Object.entries(fit.feet).map(([k, p]) => [k, { x: p.x * 1.5, y: p.y }])),
+      };
+    });
+    const out: { fits?: PoseFit[] } = {};
+    const clip = authorKeyPoseClip(se, 'run', wide, N, true, hand.phases, hand.events, out);
+    const moved = out.fits!.filter((f) => Math.hypot(f.lockShift.x, f.lockShift.y) > 1);
+    expect(moved.length).toBeGreaterThan(0);
+    expect(moved.some((f) => Math.abs(f.lockShift.y) > 0.3)).toBe(true); // a vertical part: the case the review is about
+    out.fits!.forEach((fit, i) => {
+      const lm = { ...refs[i]!, _inferred: feetNames } as KeyPoseLandmarks;
+      const withLock = finishedLandmarkRms(se, lm, view, clip, at[i]!, fit);
+      const withoutLock = finishedLandmarkRms(se, lm, view, clip, at[i]!, {
+        shift: fit.shift,
+        lockShift: { x: 0, y: 0 },
+      });
+      expect(withLock, `key ${i}`).toBeLessThan(wide[i]!.rms + 0.8);
+      if (Math.hypot(fit.lockShift.x, fit.lockShift.y) > 1) expect(withoutLock).toBeGreaterThan(withLock + 0.5);
+    });
+  });
+});
+
+describe('finishedLandmarkRms in E and in a diagonal direction', () => {
+  for (const dir of ['E', 'SE', 'NE'] as const) {
+    it(`${dir}: a clip authored from its own key poses has a finished RMS near 0 at the key frames`, () => {
+      const r = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get(dir)!.rig;
+      const hand = authorKiemTuSet(r, { only: ['run'], secondary: false, gait: GAIT_PROFILES.free })[0]!;
+      const keyAt = keyPoseFrames('run', 15, hand.phases, hand.events);
+      const refs = keyAt.map((f) => landmarksFromPose(r, evalPose(r, hand, f), view) as KeyPoseLandmarks);
+      const fits = refs.map((lm) => fitPose(r, lm, view));
+      const out: { fits?: PoseFit[] } = {};
+      const clip = authorKeyPoseClip(r, 'run', fits, 15, true, hand.phases, hand.events, out);
+      out.fits!.forEach((fit, i) =>
+        expect(finishedLandmarkRms(r, refs[i]!, view, clip, keyAt[i]!, fit), `${dir} key ${i}`).toBeLessThan(0.8),
+      );
+    });
+  }
 });
