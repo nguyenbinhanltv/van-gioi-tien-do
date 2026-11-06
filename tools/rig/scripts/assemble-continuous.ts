@@ -362,6 +362,8 @@ console.log(
 // the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
+// the clips exactly as exported (key-pose clips included): `rig:measure --assembled` audits THESE, not a re-authored gait
+writeFileSync(join(out, `${name}.clips.json`), JSON.stringify(clips));
 writeFileSync(
   join(out, `${name}.assembly.json`),
   JSON.stringify(
