@@ -5,6 +5,9 @@ import {
   GAIT_PROFILES,
   authorFromKeyPoses,
   authorKeyPoseClip,
+  runQa,
+  tableGroundSpeed,
+  type PoseFit,
   keyPoseFrames,
   authorKiemTuSet,
   createImage,
@@ -129,5 +132,37 @@ describe('authorKeyPoseClip', () => {
 
   it('rejects a wrong number of key poses', () => {
     expect(() => authorKeyPoseClip(rig, 'run', [fitAt(0)], 15, true)).toThrow(/needs 8/);
+  });
+});
+
+describe('key-pose locomotion runs at the table ground speed', () => {
+  const N = 15;
+  // one gait cycle per clip (8 keys = one L+R cycle): the table gait
+  const handRun = authorKiemTuSet(rig, { only: ['run'], secondary: false, gait: GAIT_PROFILES.free })[0]!;
+  const at = keyPoseFrames('run', N, handRun.phases, handRun.events);
+  const fitAt = (f: number) =>
+    fitPose(rig, landmarksFromPose(rig, evalPose(rig, handRun, f), view) as KeyPoseLandmarks, view);
+
+  it('motion.speed equals the hand-authored run of the same rig, and the planted feet do not slide at that speed', () => {
+    const fits = at.map((f) => fitAt(f));
+    const clip = authorKeyPoseClip(rig, 'run', fits, N, true, handRun.phases, handRun.events);
+    expect(clip.motion!.speed).toBe(handRun.motion!.speed);
+    expect(clip.motion!.speed).toBe(tableGroundSpeed(rig, 'run'));
+    const qa = runQa(rig, clip, { mesh: false });
+    expect(qa.issues.filter((i) => i.check === 'foot-slide')).toEqual([]);
+  });
+
+  it('drawings with a wider stride are normalised: the speed stays the table speed, the contacts are shifted onto the line', () => {
+    // stretch the reference feet apart by 60 %: the drawings now imply a faster ground speed
+    const wide = at.map((f) => {
+      const fit = fitAt(f);
+      const stretch = (p: { x: number; y: number }) => ({ x: p.x * 1.6, y: p.y });
+      return { ...fit, feet: Object.fromEntries(Object.entries(fit.feet).map(([k, p]) => [k, stretch(p)])) };
+    });
+    const out: { fits?: PoseFit[]; impliedSpeedPxS?: number | null; tableSpeedPxS?: number | null } = {};
+    const clip = authorKeyPoseClip(rig, 'run', wide, N, true, handRun.phases, handRun.events, out);
+    expect(out.impliedSpeedPxS!).toBeGreaterThan(out.tableSpeedPxS! * 1.2);
+    expect(clip.motion!.speed).toBe(handRun.motion!.speed);
+    expect(runQa(rig, clip, { mesh: false }).issues.filter((i) => i.check === 'foot-slide')).toEqual([]);
   });
 });

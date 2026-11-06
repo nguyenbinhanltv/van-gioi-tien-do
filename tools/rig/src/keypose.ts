@@ -14,7 +14,8 @@
  * of the 256 canvas. Names follow the Kiếm tu landmark contract plus root, chest, pelvis, hand_L/R, sword_tip, hem_*.
  */
 import { CLIP_FPS, type BoneTrack, type Clip, type ClipEvent, type Key } from './clip.js';
-import { armsFk } from './kiemtu.js';
+import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, armsFk, viewGain } from './kiemtu.js';
+import { screenAxis } from './locomotion.js';
 import { angleDelta, cubicBezierEase, dist, type Vec2 } from './math.js';
 import { simplifyScalar } from './secondary.js';
 import { evalPose, type Pose } from './pose.js';
@@ -379,6 +380,8 @@ export interface KeyPoseClipSpec {
   readonly keys: readonly KeyPoseKey[];
   /** Ease between keys (CSS bezier). Default ease in-out. */
   readonly ease?: readonly [number, number, number, number];
+  /** Authored ground speed (px/s): the table movement speed for locomotion clips. Default: from the planted feet. */
+  readonly speed?: number;
   /** Events and phases of the animation table (footsteps, hit, cancel window). */
   readonly events?: readonly ClipEvent[];
   readonly phases?: Readonly<Record<string, number>>;
@@ -473,7 +476,8 @@ export function authorFromKeyPoses(rig: RigDocument, spec: KeyPoseClipSpec): Cli
         speeds.push(Math.hypot(k[f + 1]!.value.x - k[f]!.value.x, k[f + 1]!.value.y - k[f]!.value.y) * CLIP_FPS);
   }
   speeds.sort((x, y) => x - y);
-  const speed = speeds.length ? speeds[Math.floor(speeds.length / 2)]! : 0;
+  // the table speed when the caller gives it (locomotion clips), else the speed the planted feet travel at
+  const speed = spec.speed ?? (speeds.length ? speeds[Math.floor(speeds.length / 2)]! : 0);
   return armsFk(rig, {
     name: spec.name,
     frames: N,
@@ -643,11 +647,49 @@ export function keyPoseFrames(
   return [Math.round(frames * 0.1), Math.round(frames * 0.45), Math.round(frames * 0.8)]; // dash
 }
 
+/** The ground speed (px/s along the facing, screen space) of the clip in the animation table: what the runtime moves at. */
+export function tableGroundSpeed(rig: RigDocument, clip: string): number | null {
+  const g = viewGain(rig.direction);
+  if (clip === 'run') return RUN_SPEED_PX_S * g;
+  if (clip === 'walk') return WALK_SPEED_PX_S * g;
+  return null;
+}
+
+/** Ground speed (px/s, positive) the drawings imply: the median speed at which the planted foot targets move back. */
+export function impliedGroundSpeed(
+  rig: RigDocument,
+  clip: string,
+  fits: readonly PoseFit[],
+  at: readonly number[],
+  frames: number,
+): number | null {
+  const plant = PLANT[clip];
+  if (!plant) return null;
+  const axis = screenAxis(rig.direction);
+  const along = (p: Vec2) => p.x * axis.x + p.y * axis.y;
+  const slopes: number[] = [];
+  for (const [foot, ik] of [
+    ['L', rig.roles.ik_foot_L!],
+    ['R', rig.roles.ik_foot_R!],
+  ] as const)
+    for (let i = 0; i < fits.length; i++) {
+      const j = (i + 1) % fits.length;
+      if (!plant[i]?.[foot] || !plant[j]?.[foot]) continue;
+      const dt = (((at[j]! - at[i]!) % frames) + frames) % frames;
+      if (dt > 0) slopes.push(-(along(fits[j]!.feet[ik]!) - along(fits[i]!.feet[ik]!)) / dt);
+    }
+  if (!slopes.length) return null;
+  slopes.sort((x, y) => x - y);
+  return slopes[Math.floor(slopes.length / 2)]! * CLIP_FPS;
+}
+
 /**
- * Lock the planted feet to the ground: while a foot is planted at consecutive keys its target must move back at the clip's
- * constant ground speed, so the key poses (placed by hand in the reference images, never exactly on that line) are
- * shifted horizontally as a rigid body (hips and both feet) until the contact feet lie on it. `shift` records the move so
- * the silhouette comparison translates the reference by the same amount.
+ * Lock the planted feet to the ground at the TABLE ground speed `speedPxS` (what the runtime moves the character at, so
+ * the character does not slide): while a foot is planted at consecutive keys its target moves back along the facing at
+ * exactly that speed. The key poses (placed by hand in the reference images, never exactly on that line, and drawn with
+ * whatever stride the AI chose) are shifted along the facing as a rigid body (hips and both feet) until the contact feet
+ * lie on it, so the stride of the clip follows the movement speed, not the drawings. `shift` records the move so the
+ * silhouette comparison translates the reference by the same amount.
  */
 export function lockContacts(
   rig: RigDocument,
@@ -655,30 +697,18 @@ export function lockContacts(
   fits: readonly PoseFit[],
   at: readonly number[],
   frames: number,
+  speedPxS: number,
 ): PoseFit[] {
   const plant = PLANT[clip];
   if (!plant) return [...fits];
-  const L = rig.roles.ik_foot_L!;
-  const R = rig.roles.ik_foot_R!;
+  const axis = screenAxis(rig.direction);
+  const along = (p: Vec2) => p.x * axis.x + p.y * axis.y;
   const out = fits.map((f) => ({ ...f }));
   const delta = fits.map(() => [] as number[]);
-  // ground speed per frame: median slope of the planted feet between consecutive keys of one stance
-  const slopes: number[] = [];
+  const v = -speedPxS / CLIP_FPS; // target travel per frame along the facing while planted
   for (const [foot, ik] of [
-    ['L', L],
-    ['R', R],
-  ] as const)
-    for (let i = 0; i < fits.length; i++) {
-      const j = (i + 1) % fits.length;
-      if (!plant[i]?.[foot] || !plant[j]?.[foot]) continue;
-      const dt = (((at[j]! - at[i]!) % frames) + frames) % frames;
-      if (dt > 0) slopes.push((fits[j]!.feet[ik]!.x - fits[i]!.feet[ik]!.x) / dt);
-    }
-  slopes.sort((a, b) => a - b);
-  const v = slopes.length ? slopes[Math.floor(slopes.length / 2)]! : 0;
-  for (const [foot, ik] of [
-    ['L', L],
-    ['R', R],
+    ['L', rig.roles.ik_foot_L!],
+    ['R', rig.roles.ik_foot_R!],
   ] as const) {
     // consecutive planted keys form a stance; its time axis is unwrapped so it is increasing
     const idx = fits.map((_, i) => i).filter((i) => plant[i]?.[foot]);
@@ -690,18 +720,20 @@ export function lockContacts(
       prev = at[i]! + offset;
       return prev;
     });
-    const c = idx.reduce((sum, i, k) => sum + fits[i]!.feet[ik]!.x - v * t[k]!, 0) / idx.length;
-    idx.forEach((i, k) => delta[i]!.push(c + v * t[k]! - fits[i]!.feet[ik]!.x));
+    const c = idx.reduce((sum, i, k) => sum + along(fits[i]!.feet[ik]!) - v * t[k]!, 0) / idx.length;
+    // delta = (target - x): the shift along the facing that puts the planted foot on the line
+    idx.forEach((i, k) => delta[i]!.push(c + v * t[k]! - along(fits[i]!.feet[ik]!)));
   }
-  // note: `delta` is (target - x): the shift that puts the planted foot on the line
   fits.forEach((f, i) => {
     const d = delta[i]!.length ? delta[i]!.reduce((a, b) => a + b, 0) / delta[i]!.length : 0;
     if (!d) return;
+    const dx = d * axis.x;
+    const dy = d * axis.y;
     out[i] = {
       ...f,
-      hips: { x: f.hips.x + d, y: f.hips.y },
-      feet: Object.fromEntries(Object.entries(f.feet).map(([k, p]) => [k, { x: p.x + d, y: p.y }])),
-      shift: { x: f.shift.x + d, y: f.shift.y },
+      hips: { x: f.hips.x + dx, y: f.hips.y + dy },
+      feet: Object.fromEntries(Object.entries(f.feet).map(([k, p]) => [k, { x: p.x + dx, y: p.y + dy }])),
+      shift: { x: f.shift.x + dx, y: f.shift.y + dy },
     };
   });
   return out;
@@ -716,12 +748,19 @@ export function authorKeyPoseClip(
   loop: boolean,
   phases?: Readonly<Record<string, number>>,
   events?: readonly ClipEvent[],
-  out?: { fits?: PoseFit[] },
+  out?: { fits?: PoseFit[]; impliedSpeedPxS?: number | null; tableSpeedPxS?: number | null },
 ): Clip {
   const at = keyPoseFrames(clip, frames, phases, events);
   if (fits.length !== at.length)
     throw new RangeError(`clip '${clip}' needs ${at.length} key poses, got ${fits.length}`);
-  if (loop) fits = lockContacts(rig, clip, fits, at, frames);
+  // locomotion clips run at the TABLE ground speed (the speed the runtime moves the character at), never at the speed the
+  // drawings happen to imply: the stride follows the movement speed
+  const speed = tableGroundSpeed(rig, clip);
+  if (out) {
+    out.impliedSpeedPxS = impliedGroundSpeed(rig, clip, fits, at, frames);
+    out.tableSpeedPxS = speed;
+  }
+  if (loop && speed !== null) fits = lockContacts(rig, clip, fits, at, frames, speed);
   if (out) out.fits = [...fits];
   const plant = PLANT[clip];
   const keys: KeyPoseKey[] = fits.map((fit, i) => ({
@@ -752,5 +791,6 @@ export function authorKeyPoseClip(
     keys,
     ...(events ? { events } : {}),
     ...(phases ? { phases } : {}),
+    ...(speed !== null ? { speed } : {}),
   });
 }

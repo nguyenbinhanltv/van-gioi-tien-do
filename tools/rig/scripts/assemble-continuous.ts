@@ -199,7 +199,7 @@ if (keyDir) {
       secondary: false,
       gait: GAIT_PROFILES.free,
     })[0];
-    const outFits: { fits?: typeof fitsRaw } = {};
+    const outFits: { fits?: typeof fitsRaw; impliedSpeedPxS?: number | null; tableSpeedPxS?: number | null } = {};
     const base = authorKeyPoseClip(
       res.rig,
       clipName,
@@ -213,6 +213,12 @@ if (keyDir) {
     const fits = outFits.fits ?? fitsRaw;
     const finished = applyDetail(res.rig, bakeSecondaryMotion(res.rig, { ...base, phases: table?.phases ?? {} }));
     const at = keyPoseFrames(clipName, spec.frames, table?.phases, table?.events);
+    if (outFits.tableSpeedPxS) {
+      const implied = outFits.impliedSpeedPxS ?? 0;
+      console.log(
+        `  ground speed: the drawings imply ${implied.toFixed(0)} px/s, the table moves the character at ${outFits.tableSpeedPxS.toFixed(0)} px/s: contacts locked to the table speed (key poses shifted along the facing)${implied && Math.abs(implied / outFits.tableSpeedPxS - 1) > 0.5 ? '  WARNING: the drawn stride differs from the table speed by more than 50 %' : ''}`,
+      );
+    }
     console.log(`
 key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
     const row: { ref: Image; old: Image; now: Image; diff: Image }[] = [];
