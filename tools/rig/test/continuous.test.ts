@@ -4,6 +4,9 @@ import { describe, expect, it } from 'vitest';
 import {
   assembleContinuous,
   createImage,
+  decodePng,
+  encodePng,
+  nonPremultipliedPixels,
   loadCharacterData,
   validateRig,
   type Image,
@@ -236,5 +239,13 @@ describe('assembleContinuous', () => {
     const trail = res.rig.slots.find((x) => x.name === 'sword_trail')!;
     expect(trail.attachment).toBeNull();
     expect(trail.blend).toBe('additive');
+  });
+
+  it('the packed atlas PNG written with premultiplied output round-trips and has no colour above alpha', () => {
+    const png = encodePng(res.atlas.image, { premultiplied: true });
+    const back = decodePng(png, { premultiplied: true });
+    expect([...back.data]).toEqual([...res.atlas.image.data]);
+    expect(nonPremultipliedPixels(back)).toBe(0);
+    expect(res.stats.nonPremultiplied).toBe(0);
   });
 });
