@@ -7,7 +7,7 @@ The open cyan/teal folding fan stays in the anatomical right hand in every clip,
 ## Scope and calibration
 
 - Five reference directions: E, SE, S, NE, N. Opposite-side directions mirror under D14.
-- This production project currently contains **E only**, all 15 clips and 126 drawn frames from public `SPRITE_CLIPS` / `projectClipDefaults`.
+- E and SE each contain all 15 clips and 126 drawn frames from public `SPRITE_CLIPS` / `projectClipDefaults`. SE uses declared shared DPI preparation and its own measured quality backlog; see [SE](SE/README.md).
 - Master heights: E 208 px, SE 209 px, S 208 px, NE 207 px, N 208 px.
 - Raw sheets are preserved as `*.generated.png`. `prepare.ts` converts each whole sheet uniformly to template DPI, rejecting a mismatched aspect ratio. It never scales individual frames.
 - Character calibration is locked at `208 / 237`, recorded in `calibration.json`, and reused by the E project.
