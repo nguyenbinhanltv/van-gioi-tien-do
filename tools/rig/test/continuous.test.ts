@@ -228,7 +228,9 @@ describe('assembleContinuous', () => {
     expect(hem.type).toBe('mesh');
     if (hem.type === 'mesh') {
       const bonesUsed = new Set(hem.weights!.flatMap((w) => w.map(([b]) => b)));
-      expect([...bonesUsed].every((b) => ['hip', 'thigh_L', 'thigh_R'].includes(b))).toBe(true);
+      expect([...bonesUsed].every((b) => ['hip', 'thigh_L', 'thigh_R', 'robe_front', 'robe_back'].includes(b))).toBe(
+        true,
+      );
     }
     for (const c of res.rig.chains ?? []) expect(c.maxAngle).toBeLessThanOrEqual(35);
   });

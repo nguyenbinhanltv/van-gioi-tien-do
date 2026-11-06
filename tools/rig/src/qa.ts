@@ -10,6 +10,7 @@ import { evalPose, type Pose } from './pose.js';
 import type { ClipSpec } from './animset.js';
 import { EVENT_FRAME_TOLERANCE } from './animset.js';
 import { meshQa, type MeshQaThresholds } from './qa-mesh.js';
+import { lowerBodyQa } from './qa-lower.js';
 import { stripQa } from './qa-strip.js';
 import type { RigDocument } from './schema.js';
 
@@ -28,6 +29,7 @@ export type QaCheck =
   | 'detach'
   | 'mesh-strain'
   | 'strip'
+  | 'lower-body'
   | 'islands'
   | 'ik-reach';
 
@@ -479,7 +481,8 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
   const hasMesh = rig.skins.some((s) =>
     Object.values(s.attachments).some((m) => Object.values(m).some((a) => a.type === 'mesh')),
   );
-  if (opts.mesh ?? hasMesh) issues.push(...meshQa(rig, clip, opts.meshThresholds), ...stripQa(rig, clip));
+  if (opts.mesh ?? hasMesh)
+    issues.push(...meshQa(rig, clip, opts.meshThresholds), ...stripQa(rig, clip), ...lowerBodyQa(rig, clip));
 
   const errors = issues.filter((i) => i.severity === 'error').length;
   return {

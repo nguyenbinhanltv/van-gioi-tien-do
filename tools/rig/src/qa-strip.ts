@@ -30,6 +30,8 @@ export interface StripQaThresholds {
   /** A strip is a piece whose short side is at most this (px) and long/short ratio at least `minRatio`. */
   /** Largest share of a strip's triangles that may be flipped against rest (a corner of a deforming skirt). */
   readonly maxFlippedShare: number;
+  /** Two strips only count as crossing when their axes differ by more than this (deg): an X, not a graze. */
+  readonly minCrossDeg: number;
   readonly maxThicknessPx: number;
   readonly minRatio: number;
 }
@@ -38,6 +40,7 @@ export const DEFAULT_STRIP_THRESHOLDS: StripQaThresholds = {
   maxAxisDeg: 50,
   leavePx: 6,
   maxFlippedShare: 0.3,
+  minCrossDeg: 60,
   maxThicknessPx: 14,
   minRatio: 2.5,
 };
@@ -217,8 +220,12 @@ export function stripQa(rig: RigDocument, clip: Clip, thresholds: Partial<StripQ
     // 4. two strips crossing each other (the X)
     for (let i = 0; i < axes.length; i++)
       for (let j = i + 1; j < axes.length; j++)
-        if (segmentsCross(axes[i]!.a, axes[i]!.b, axes[j]!.a, axes[j]!.b))
-          note(`${axes[i]!.slot}+${axes[j]!.slot}`, 'cross', 1, f);
+        if (segmentsCross(axes[i]!.a, axes[i]!.b, axes[j]!.a, axes[j]!.b)) {
+          // two near-parallel strips (front and back hem of a swinging skirt) may graze; an X is a large angle
+          const ang = (q: { a: Vec2; b: Vec2 }) => Math.atan2(q.b.y - q.a.y, q.b.x - q.a.x);
+          const between = Math.abs(angleDiff180((ang(axes[i]!) * 180) / Math.PI, (ang(axes[j]!) * 180) / Math.PI));
+          if (between > th.minCrossDeg) note(`${axes[i]!.slot}+${axes[j]!.slot}`, 'cross', between, f);
+        }
   }
   for (const [key, w] of worst) {
     const slot = key.split('|')[0]!;

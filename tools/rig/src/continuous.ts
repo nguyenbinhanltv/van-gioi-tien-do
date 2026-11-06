@@ -36,7 +36,8 @@ type Binding =
       readonly cols?: number;
       readonly step?: number;
     }
-  | { readonly kind: 'skirt' }
+  /** Skirt / robe mesh on the hips + thighs; `panel` = the skirt panel bone it also follows (front / back flap). */
+  | { readonly kind: 'skirt'; readonly panel?: 'robe_front' | 'robe_back' }
   | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number }
   /** Rigid on the last bone of another hanging piece (tassel under the pendant). */
   | { readonly kind: 'tip'; readonly of: string };
@@ -80,10 +81,10 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'ribbon_tail_L', slot: 'ribbon_tail_L', binding: { kind: 'hanging', template: 'ribbon_tail_L' } },
   { id: 'ribbon_tail_R', slot: 'ribbon_tail_R', binding: { kind: 'hanging', template: 'ribbon_tail_R' } },
   { id: 'leg_L', slot: 'leg_L', binding: { kind: 'limb', chain: ['thigh_L', 'shin_L', 'foot_L'], step: 7, ramp: 7 } },
-  { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt' } },
+  { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt', panel: 'robe_back' } },
   // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
   // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
-  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt', panel: 'robe_back' } },
   { id: 'torso', slot: 'torso', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'body' },
   {
     id: 'arm_L',
@@ -104,11 +105,11 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'boot_L', slot: 'boot_L', binding: { kind: 'rigid', bone: 'foot_L' } },
   { id: 'leg_R', slot: 'leg_R', binding: { kind: 'limb', chain: ['thigh_R', 'shin_R', 'foot_R'], step: 7, ramp: 7 } },
   { id: 'boot_R', slot: 'boot_R', binding: { kind: 'rigid', bone: 'foot_R' } },
-  { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt' } },
-  { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt' } },
+  { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt', panel: 'robe_front' } },
+  { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt', panel: 'robe_front' } },
   // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
   // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
-  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt', panel: 'robe_front' } },
   { id: 'vest', slot: 'vest', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'outfit_upper' },
   {
     id: 'vest_edges',
@@ -246,8 +247,6 @@ const REPLACED_BONES = [
   'sash_R_2',
   'sleeve_tip_L',
   'sleeve_tip_R',
-  'robe_front',
-  'robe_back',
 ];
 
 function painted(image: Image, view: CanvasView): Vec2[] {
@@ -455,6 +454,18 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
         maxAngle: g.maxAngle,
       });
   }
+  // the skirt panels (front / back flap, children of the hips) trail with a damped spring on top of skirtFollowsLegs
+  const panels = ['robe_front', 'robe_back'].filter((n) => bones.some((b) => b.name === n));
+  if (panels.length)
+    chains.push({
+      name: 'skirt_group',
+      kind: 'cape',
+      bones: panels,
+      stiffness: 0.3,
+      damping: 0.5,
+      gravity: 0,
+      maxAngle: 18,
+    });
   const skeleton: RigDocument = { ...withLandmarks, bones, chains };
 
   // 3. meshes
@@ -507,6 +518,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
             view,
             image: img,
             cell: 10 * scale,
+            ...(b.panel && skeleton.bones.some((x) => x.name === b.panel) ? { panel: b.panel } : {}),
           });
         } else if (b.kind === 'hanging') {
           const ids = hangingIds.get(b.template);
