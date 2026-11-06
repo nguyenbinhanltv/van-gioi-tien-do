@@ -8,4 +8,4 @@ Nguồn đầu giữ nguyên. Hit đầu yêu cầu 4×1 nhưng công cụ trả
 
 `prepare-guides.ts` là provenance tạo project/template trước khi sinh ảnh; không chạy lại sau lựa chọn vì sẽ ghi đè project. Tái tạo sản phẩm từ project.json đã commit bằng sprite:build/batch, không cần chạy script này. `repair.ts` chỉ dùng để tái tạo các ô đã chọn.
 
-Capture thật Cocos Creator 3.8.8 đang chạy, zoom 2, midpoint; chưa coi runtime-load hoàn tất cho đến khi đủ 15 clip. Artifact B-S-review của phiên lưu GIF và contact sheet.
+Capture thật Cocos Creator 3.8.8 đã hoàn tất cả 15 clip, zoom 2, midpoint, exit 0. Artifact B-S-review của phiên lưu GIF và contact sheet. Repository typecheck/test/build/lint/format:check đều đạt; PNG dùng Git LFS, từng file có dòng giấy phép placeholder.
