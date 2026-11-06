@@ -7,9 +7,21 @@
       "id": "arm_R",
       "materials": ["cloth", "skin"],
       "segments": [
-        { "a": [120, 84], "b": [120, 112], "r": 10 },
-        { "a": [120, 112], "b": [128, 138], "r": 9 },
-        { "a": [128, 136], "b": [128, 142], "r": 4.5 }
+        {
+          "a": [120, 84],
+          "b": [120, 112],
+          "r": 10
+        },
+        {
+          "a": [120, 112],
+          "b": [128, 138],
+          "r": 9
+        },
+        {
+          "a": [128, 136],
+          "b": [128, 142],
+          "r": 4.5
+        }
       ],
       "materialRegions": [
         {
@@ -27,10 +39,26 @@
       "id": "arm_L",
       "materials": ["cloth", "skin"],
       "segments": [
-        { "a": [112, 85], "b": [110, 110], "r": 9 },
-        { "a": [110, 110], "b": [116, 134], "r": 8.5 },
-        { "a": [112, 86], "b": [130, 87], "r": 10 },
-        { "a": [116, 132], "b": [116, 138], "r": 4.5 }
+        {
+          "a": [112, 85],
+          "b": [110, 110],
+          "r": 9
+        },
+        {
+          "a": [110, 110],
+          "b": [116, 134],
+          "r": 8.5
+        },
+        {
+          "a": [112, 86],
+          "b": [130, 87],
+          "r": 10
+        },
+        {
+          "a": [116, 132],
+          "b": [116, 138],
+          "r": 4.5
+        }
       ],
       "materialRegions": [
         {
@@ -49,26 +77,26 @@
       "materials": ["cloth", "skin"],
       "polygons": [
         [
-          [119, 67],
-          [129, 68],
-          [130, 77],
-          [138, 84],
+          [123, 62],
+          [137, 66],
+          [137, 76],
+          [141, 84],
           [140, 112],
           [137, 143],
           [108, 143],
           [108, 113],
           [110, 85],
-          [119, 78]
+          [120, 77]
         ]
       ],
       "materialRegions": [
         {
           "material": "skin",
           "polygon": [
-            [116, 65],
-            [135, 65],
-            [135, 84],
-            [116, 84]
+            [116, 60],
+            [142, 60],
+            [142, 83],
+            [116, 83]
           ]
         }
       ]
@@ -80,8 +108,9 @@
         [
           [118, 74],
           [127, 75],
-          [137, 83],
-          [145, 96],
+          [137, 81],
+          [145, 88],
+          [146, 96],
           [143, 119],
           [130, 125],
           [111, 120],
@@ -111,8 +140,10 @@
         [
           [120, 111],
           [139, 112],
-          [145, 152],
-          [156, 204],
+          [150, 134],
+          [156, 166],
+          [158, 192],
+          [157, 204],
           [105, 203],
           [114, 157]
         ]
@@ -172,9 +203,10 @@
       "polygons": [
         [
           [135, 111],
-          [144, 111],
-          [147, 118],
-          [141, 124],
+          [146, 111],
+          [150, 118],
+          [149, 124],
+          [141, 125],
           [135, 119]
         ]
       ]
@@ -271,12 +303,38 @@
         ]
       ]
     },
-    { "id": "eyes_open", "materials": ["hair", "cloth"], "segments": [{ "a": [138, 54], "b": [142, 54], "r": 1.2 }] },
-    { "id": "brows", "materials": ["hair"], "segments": [{ "a": [137, 51], "b": [142, 52], "r": 0.8 }] },
+    {
+      "id": "eyes_open",
+      "materials": ["hair", "cloth"],
+      "segments": [
+        {
+          "a": [138, 54],
+          "b": [142, 54],
+          "r": 1.2
+        }
+      ]
+    },
+    {
+      "id": "brows",
+      "materials": ["hair"],
+      "segments": [
+        {
+          "a": [137, 51],
+          "b": [142, 52],
+          "r": 0.8
+        }
+      ]
+    },
     {
       "id": "mouth_neutral",
       "materials": ["hair", "skin"],
-      "segments": [{ "a": [141, 64], "b": [144, 64], "r": 0.6 }]
+      "segments": [
+        {
+          "a": [141, 64],
+          "b": [144, 64],
+          "r": 0.6
+        }
+      ]
     },
     {
       "id": "hair_back",
@@ -364,7 +422,17 @@
         ]
       ]
     },
-    { "id": "hairpin", "materials": ["gold", "blue"], "segments": [{ "a": [101, 34], "b": [123, 32], "r": 2.2 }] },
+    {
+      "id": "hairpin",
+      "materials": ["gold", "blue"],
+      "segments": [
+        {
+          "a": [101, 35],
+          "b": [123, 32],
+          "r": 3.2
+        }
+      ]
+    },
     {
       "id": "ribbon_tail_L",
       "materials": ["blue"],
@@ -437,7 +505,9 @@
         [
           [118, 111],
           [139, 111],
-          [145, 157],
+          [150, 134],
+          [156, 166],
+          [158, 192],
           [157, 205],
           [105, 204],
           [113, 158]
@@ -498,16 +568,32 @@
       "id": "vest_edge_L",
       "materials": ["gold", "blue"],
       "segments": [
-        { "a": [117, 78], "b": [112, 91], "r": 1.4 },
-        { "a": [112, 91], "b": [113, 117], "r": 1.4 }
+        {
+          "a": [117, 78],
+          "b": [112, 91],
+          "r": 1.4
+        },
+        {
+          "a": [112, 91],
+          "b": [113, 117],
+          "r": 1.4
+        }
       ]
     },
     {
       "id": "vest_edge_R",
       "materials": ["gold", "blue"],
       "segments": [
-        { "a": [130, 79], "b": [139, 94], "r": 1.4 },
-        { "a": [139, 94], "b": [140, 117], "r": 1.4 }
+        {
+          "a": [130, 79],
+          "b": [139, 94],
+          "r": 1.4
+        },
+        {
+          "a": [139, 94],
+          "b": [140, 117],
+          "r": 1.4
+        }
       ]
     },
     {
@@ -544,7 +630,13 @@
     {
       "id": "pendant",
       "materials": ["blue", "gold"],
-      "segments": [{ "a": [141, 119], "b": [143, 131], "r": 0.7 }],
+      "segments": [
+        {
+          "a": [141, 119],
+          "b": [143, 131],
+          "r": 0.7
+        }
+      ],
       "polygons": [
         [
           [143, 129],
@@ -569,8 +661,28 @@
         ]
       ]
     },
-    { "id": "eyes_half", "materials": ["hair", "cloth"], "segments": [{ "a": [138, 54], "b": [142, 54], "r": 0.8 }] },
-    { "id": "eyes_closed", "materials": ["hair"], "segments": [{ "a": [138, 55], "b": [142, 55], "r": 0.6 }] },
+    {
+      "id": "eyes_half",
+      "materials": ["hair", "cloth"],
+      "segments": [
+        {
+          "a": [138, 54],
+          "b": [142, 54],
+          "r": 0.8
+        }
+      ]
+    },
+    {
+      "id": "eyes_closed",
+      "materials": ["hair"],
+      "segments": [
+        {
+          "a": [138, 55],
+          "b": [142, 55],
+          "r": 0.6
+        }
+      ]
+    },
     {
       "id": "mouth_open",
       "materials": ["hair", "skin"],
@@ -584,7 +696,17 @@
         ]
       ]
     },
-    { "id": "mouth_smile", "materials": ["hair", "skin"], "segments": [{ "a": [141, 64], "b": [144, 63], "r": 0.6 }] },
+    {
+      "id": "mouth_smile",
+      "materials": ["hair", "skin"],
+      "segments": [
+        {
+          "a": [141, 64],
+          "b": [144, 63],
+          "r": 0.6
+        }
+      ]
+    },
     {
       "id": "hand_R_fist",
       "materials": ["skin"],
@@ -709,7 +831,17 @@
         ]
       ]
     },
-    { "id": "sword_glint", "materials": ["cloth"], "segments": [{ "a": [132, 160], "b": [153, 208], "r": 0.7 }] },
+    {
+      "id": "sword_glint",
+      "materials": ["cloth"],
+      "segments": [
+        {
+          "a": [132, 160],
+          "b": [153, 208],
+          "r": 0.7
+        }
+      ]
+    },
     {
       "id": "sword_trail",
       "materials": ["cloth", "blue"],
@@ -762,6 +894,66 @@
           [101, 197]
         ]
       ]
+    },
+    {
+      "id": "hair_bun",
+      "materials": ["hair"],
+      "polygons": [
+        [
+          [112, 22],
+          [122, 23],
+          [128, 29],
+          [126, 36],
+          [117, 39],
+          [108, 35],
+          [107, 29]
+        ]
+      ]
     }
+  ],
+  "reference2x": "assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png",
+  "restOrder": [
+    "hair_bun",
+    "hair_back",
+    "ponytail",
+    "ribbon_tail_L",
+    "ribbon_tail_R",
+    "leg_L",
+    "boot_L",
+    "robe_back",
+    "robe_hem_back",
+    "torso",
+    "arm_L",
+    "sleeve_lining_L",
+    "cuff_L",
+    "hand_L_relaxed",
+    "leg_R",
+    "boot_R",
+    "robe_inner",
+    "robe_front",
+    "robe_hem_front",
+    "vest",
+    "vest_edge_L",
+    "vest_edge_R",
+    "sash",
+    "sash_knot",
+    "sash_tail_L",
+    "sash_tail_R",
+    "pendant",
+    "tassel",
+    "scabbard",
+    "arm_R",
+    "sleeve_lining_R",
+    "cuff_R",
+    "hand_R_grip",
+    "head",
+    "eyes_open",
+    "brows",
+    "mouth_neutral",
+    "hair_front_1",
+    "hair_front_2",
+    "hair_front_3",
+    "hairpin",
+    "weapon_R"
   ]
 }

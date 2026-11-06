@@ -10,5 +10,7 @@
   "model": "undisclosed",
   "cli": "codex-cli 0.164.0",
   "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/arm_R.png",
-  "utcEnd": "2026-11-06 00:39 UTC"
+  "utcEnd": "2026-11-06 00:39 UTC",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/arm_R.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
 }

@@ -1,0 +1,15 @@
+{
+  "id": "sleeve_lining_R",
+  "prompt": "ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY NEAR RIGHT INNER SLEEVE LINING layer, small warmivory/gray interiorfabric wrist surface, sourcex120..134 y128..140, restrained underside shade. No hand/fullarm.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/sleeve_lining_R_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 01:06:25 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sleeve_lining_R.png",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sleeve_lining_R.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
+}

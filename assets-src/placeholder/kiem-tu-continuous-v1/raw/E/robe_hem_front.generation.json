@@ -1,0 +1,15 @@
+{
+  "id": "robe_hem_front",
+  "prompt": "ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY FRONT ROBE HEM strip: slim continuous slateblue fabric with thin antiquegold lower trim and narrow ivoryinneredge, matches masterfrontskirt bottom. White mask is nearhorizontal curvedband sourcex105..156y198..204. No whole skirt/legs.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/robe_hem_front_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 01:10:45 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/robe_hem_front.png",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/robe_hem_front.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
+}

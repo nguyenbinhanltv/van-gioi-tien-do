@@ -9,5 +9,7 @@
   "tool": "image_gen.imagegen",
   "model": "undisclosed",
   "cli": "codex-cli 0.164.0",
-  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hand_L_seal.png"
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hand_L_seal.png",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hand_L_seal.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
 }

@@ -513,6 +513,8 @@ Hậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ hal
 
 Đường dẫn ảnh thô được chọn: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/<id>.png`; ảnh RGBA @2x: `assets-src/placeholder/kiem-tu-continuous-v1/E/<id>.png`; mask tái tạo từ manifest bằng lệnh `node tools/procgen/scripts/continuous_parts.mjs masks <thư-mục-tạm>`. Mỗi JSON cạnh ảnh thô giữ prompt và tham chiếu gốc.
 
+[Cập nhật KT3] Đăng ký cuối dùng cross-section liên tục cho thân, chi, vạt váy, nút đai và dải tóc; các chi tiết nhỏ dùng area resampling để không mất nét mắt/miệng. Các chỉnh sửa mask thủ công gồm bổ sung búi tóc riêng, mở rộng cổ/ngực dưới đầu, cạnh trước vạt váy và nút đai; giữ cả mask lúc sinh (`raw/E/<id>.mask.png`) và guide cuối trong manifest. PNG nguồn là straight alpha; chỉ atlas/export là PMA. Bóng riêng giới hạn alpha 20%. Kiểm tra rest composite chạy bằng mode `check`; không thay thế kiểm tra mesh khi chuyển động.
+
 ### KT3 / arm_R
 
 - UTC bắt đầu: 2026-11-06 00:36:57 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
@@ -673,6 +675,36 @@ Draw ONE anatomical LEFT/FAR hand swap for concept-A EAST/right-facing male cult
 ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY bare FACE BASE + ear + jaw in exact EAST/RIGHT side profile, matching master young male cultivator skin/proportions. No hair, eyes, brows, eyelashes, mouth, facial decoration or neck garment. Leave eye/mouth areas plain skin for separate swaps, not empty holes. Match sourcefaceregion aroundx122..148 y43..70; right-facing nose/jaw/ear contour, subtle NW light, warm desaturated skin, thin master lineweight. NO frontal face, extra eye or detached feature.
 ```
 
+### KT3 / eyes_open
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/eyes_open.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY one OPEN EYE display: small almond/slit side-profile eye with dark brown pupil, subtle ivory sclera and upper eyelid. No eyebrow or surrounding skin. Source2x aroundx138..143y53..56.
+```
+
+### KT3 / brows
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/brows.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY one BROW for right-facing profile: restrained dark brown tapered eyebrow natural male angle, sourcex137..142y51..52; no eye or skin.
+```
+
+### KT3 / mouth_neutral
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/mouth_neutral.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY NEUTRAL CLOSED MOUTH feature in right-facing profile, tiny thin muted warm-brown lip line atsourcex141..144y64, no skin patch/nose/chin/teeth.
+```
+
 ### KT3 / hair_back
 
 - UTC bắt đầu: 2026-11-06 00:47:39 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
@@ -753,6 +785,26 @@ ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. F
 ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. First image MASTER style/palette/NW lighting; LAST image white REGION MASK fixes location/shape/scale on full512square canvas. White requestedpart only; everythingelse genuinely transparent RGBA, no background/haze/text. Never center/enlarge/crop. Match master muted slate-blue cloth, fine brown-gray edge, restrained soft NW light. Solid hidden root extends under neighbouring piece. Chain-friendly continuous neutral strip, no disconnected islands or hard baked bend. No body, weapons or unrequested decoration. ONLY RIGHT HAIR RIBBON TAIL, long narrow desaturated slate-blue cloth strip, taper slightly at end, hidden root at bun. No knot, hair or second tail. Same material as master hair tie.
 ```
 
+### KT3 / scabbard
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/scabbard.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY EMPTY SCABBARD on hip: narrow darkcharcoal lacquered/wood sheath with tinyantiquebronze fittings, EMPTY OPEN MOUTH at top, no sword/grip/blade/guard protruding. MatchconceptAmaterial, slantsdownright atmask sourcex139..154y119..193. Full sheath painted; no belt/body/tails.
+```
+
+### KT3 / weapon_R
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/weapon_R.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY DRAWN SWORD: one straight jian steelblade plus small antiquegold/bronze guard and dark grip; masterreference sword style. Full sword at same down-right diagonal mask sourcegrip(125,143) guard(129,155) tip(155,213). Slim restrained metalshine, no hand/scabbard/trail/glow; keepconnectedblade-guard-grip, fullhiddenhandle.
+```
+
 ### KT3 / robe_inner
 
 - UTC bắt đầu: 2026-11-06 00:51:57 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
@@ -761,6 +813,86 @@ ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. F
 
 ```text
 ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. First image MASTER style/palette/NW lighting; LAST image white REGION MASK fixes location/shape/scale on full512square canvas. White requestedpart only; everythingelse genuinely transparent RGBA, no background/haze/text. Never center/enlarge/crop. Match master muted slate-blue cloth, fine brown-gray edge, restrained soft NW light. Solid hidden root extends under neighbouring piece. Chain-friendly continuous neutral strip, no disconnected islands or hard baked bend. No body, weapons or unrequested decoration. ONLY continuous IVORY INNER ROBE SKIRT PANEL waist-to-hem, plain warm-white cloth under outer blue skirt, broad full hidden hip/leg coverage, veryrestrained vertical folds. No outer blue cloth, sash, legs, feet, torso or sword. Solid fullpanelmask, no centre hole.
+```
+
+### KT3 / sleeve_lining_R
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sleeve_lining_R.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY NEAR RIGHT INNER SLEEVE LINING layer, small warmivory/gray interiorfabric wrist surface, sourcex120..134 y128..140, restrained underside shade. No hand/fullarm.
+```
+
+### KT3 / sleeve_lining_L
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sleeve_lining_L.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY FAR LEFT INNER SLEEVE LINING layer, small warmivory/gray interior fabric surface at wrist, subtle darkerunderside, sourcex109..123 y124..136. No completecuff/hand/full sleeve.
+```
+
+### KT3 / cuff_R
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/cuff_R.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY NEAR RIGHT sleeve CUFF/EDGE band, narrow ivory cloth with restrained seam, sourceboxx121..134 y128..138. Solid closed overlay, no hole or hand/sleevelength.
+```
+
+### KT3 / cuff_L
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/cuff_L.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY FAR LEFT sleeve CUFF/EDGE band, narrow ivory cloth with subtle seam, sourceboxx110..123 y124..134. Solid closed overlay region, no transparent hole, no hand/sleevelength.
+```
+
+### KT3 / vest_edge_L
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/vest_edge_L.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY FAR LEFT OUTER VEST EDGE TRIM strip, narrow muted slateblue cloth border with verythin antiquegold seam alongcurve asmask, fullcontinuouschainfriendlystrip, no completevest/sleeve.
+```
+
+### KT3 / vest_edge_R
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/vest_edge_R.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY NEAR RIGHT OUTER VEST EDGE TRIM strip, narrow mutedslateblue border with thinantiquegold seam followingmask, continuousstrip, no fullvest/arm.
+```
+
+### KT3 / boot_R
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/boot_R.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY NEAR RIGHT BOOT overlay, darkcharcoalsoftleather shaft+foot, rightpointing masterboot silhouette and thinwarmivorysole, fullypaintedhiddenupper shaft. NO knee/trousers/leg/body.
+```
+
+### KT3 / boot_L
+
+- UTC bắt đầu: 2026-11-06 01:06:25 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/boot_L.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separately drawn garment-detail sprite, concept-A EAST/right-facing Kiếm tu. MASTER firstimage fixes style/palette/fineoutline/NWlighting; LAST white REGION MASK fixes location/scale/contour in full512square canvas. Paint only white requestedpart, genuine transparent RGBAelse, no background/haze/text or castshadow. Never recenter/enlarge/crop. Muted warm ivory, dark slateblue cloth, restrained antiquedgold, fine soft brown-gray outlines, understated folds, matchmaster. Hidden roots fully painted. Do not draw body/hand/leg/other garments. ONLY FAR LEFT BOOT overlay, darkcharcoalsoftleather boot shaft+foot, slim master boot proportions, footpointsRIGHT, mutedivory thinsole, solid hiddenupper shaft extendingunder trouserleg. NO leg/knee/trouser/fullbody.
 ```
 
 ### KT3 / pendant
@@ -781,6 +913,46 @@ ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. F
 
 ```text
 ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. First image MASTER style/palette/NW lighting; LAST image white REGION MASK fixes location/shape/scale on full512square canvas. White requestedpart only; everythingelse genuinely transparent RGBA, no background/haze/text. Never center/enlarge/crop. Match master muted slate-blue cloth, fine brown-gray edge, restrained soft NW light. Solid hidden root extends under neighbouring piece. Chain-friendly continuous neutral strip, no disconnected islands or hard baked bend. No body, weapons or unrequested decoration. ONLY tiny pendant TASSEL, muted dark slate-blue silk threads gathered at top under pendant, continuous narrow taper with veryfine strand detail, sourcearoundx141..147y136..152. No jade pendant/cord/body.
+```
+
+### KT3 / eyes_half
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/eyes_half.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY one HALF-CLOSED EYE display for blink, same profile eye position/width, upperlid halfway down iris. No brow or skin.
+```
+
+### KT3 / eyes_closed
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/eyes_closed.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY one CLOSED EYE display for blink: delicate curved brown eyelid stroke matching width/location of master profile eye, no iris/sclera/skin/brow.
+```
+
+### KT3 / mouth_open
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/mouth_open.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY OPEN/SHOUT MOUTH feature right-facing profile, small anatomically plausible dark warm interior and restrained lip contour, subtle upper teeth ifvisible, sourcex140..145y62..67. No skin/nose/chin.
+```
+
+### KT3 / mouth_smile
+
+- UTC bắt đầu: 2026-11-06 01:02:59 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/mouth_smile.png`.
+- Prompt đầy đủ:
+
+```text
+ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY SMALL SMILE MOUTH feature right-facing profile, tiny restrained upward lip line, no teeth grin, no surroundingface/skin/nose/chin. Sourcex141..144y63..64.
 ```
 
 ### KT3 / hand_R_fist
@@ -851,4 +1023,64 @@ Draw ONE anatomical LEFT/FAR hand swap for concept-A EAST/right-facing male cult
 
 ```text
 Draw ONE anatomical LEFT/FAR hand swap for concept-A EAST/right-facing male cultivator. MASTER first image is skin/palette/line/NW-light reference; LAST white REGION MASK fixes location/shape/scale on full512square canvas. Genuine transparent RGBA elsewhere, no haze/background/text. NO sleeve/arm/body/object/weapon. Warm desaturated light skin, fine brown-gray outline, slim adultmale hand, coherent five fingers. Left wrist top source2x(116,126), wristjoint(116,134),8texturepx overlap undercuff, hand hangs down/right at same bind orientation; no recenter/enlarge/crop. Slight far-side shade only. LEFT TWO-FINGER SWORD SEAL (kiếm quyết), index/middle straight together down-right in bindpose, ring/little folded with thumb, coherent anatomy. No magicaleffect.
+```
+
+### KT3 / sword_glint
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sword_glint.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY separate subtle SWORD BLADE GLINT line, narrow paleivory coolsilver highlight matching master blade angle/sourcex132160to153208. Transparent outside, no swordblade/guard/hilt/body/starbursts/background. Designedadditive tinyline, not a solid weapon.
+```
+
+### KT3 / sword_trail
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sword_trail.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY separate restrained SWORD MOTION TRAIL, thin tapered translucent ivory-pale slateblue swept ribbon within white mask, follows blade down-right. No actual sword/hand/body/background. Softfadeedges, graphic painterly matching master, not neon animebeam or particle explosion. Full512 registration.
+```
+
+### KT3 / shadow
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/shadow.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY small soft elliptical GROUND CONTACT SHADOW at feet, sourcex107..149y225..235, neutral darkgray with softalpha falloff. Transparentbackground, no character/boots/groundplane, no hardblackoval. Verysubtle 20%opacity maximum.
+```
+
+### KT3 / robe_hem_front
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/robe_hem_front.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY FRONT ROBE HEM strip: slim continuous slateblue fabric with thin antiquegold lower trim and narrow ivoryinneredge, matches masterfrontskirt bottom. White mask is nearhorizontal curvedband sourcex105..156y198..204. No whole skirt/legs.
+```
+
+### KT3 / robe_hem_back
+
+- UTC bắt đầu: 2026-11-06 01:10:45 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/robe_hem_back.png`.
+- Prompt đầy đủ:
+
+```text
+ONE separate sprite layer for concept-A EAST-facing Kiếm tu rig. MASTER first image is exact style/palette/NWlight reference, LAST white REGION MASK fixes location, scale and contour in full512square canvas. White requestedpart only; everythingelse genuine transparent RGBA, no haze/background/captions/guides. No centering/enlarging/cropping. Fine soft brown-gray outline, muted colors, clean AA1–2pxedge, matchmaster. No unrelated character/body/hands/garments. ONLY BACK ROBE HEM strip: narrow continuous slatebluefabric with thinantiquegold lowertrim alongmask, sourcex101..147y191..198. No whole skirt/legs.
+```
+
+### KT3 / hair_bun
+
+- UTC bắt đầu: 2026-11-06 01:17:50 UTC; công cụ: image_gen.imagegen; model: undisclosed; CLI: codex-cli 0.164.0.
+- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hair_bun.png`.
+- Prompt đầy đủ:
+
+```text
+Generate ONLY the small tied HAIR BUN MASS of concept-A Kiếm tu EAST-facing character as its own separately drawn production sprite. Firstimage MASTER gives exact dark-brown hair style/palette/fine soft outline/NWlight; lastimage white REGION MASK locatesbun source2xboxx107..128y22..39 in full512square sharedcanvas. Only the bun hair volume, solid hidden root fullypainted, mutedbrown hair with a few finecurved strands, shape matches originalmastertopknot. NO hairpin/jade/ribbon/hairtie/fronthair/face/body/otherpiece/text/glow/haze/background. Genuine transparent RGBA outside. Never enlarge/recenter/crop. Clean thinAAedge, not shinyblack/anime. Keep thissmallroundedbuninsidewhite mask andmatchmasterproportion.
 ```

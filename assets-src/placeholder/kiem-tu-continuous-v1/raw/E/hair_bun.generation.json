@@ -1,0 +1,15 @@
+{
+  "id": "hair_bun",
+  "prompt": "Generate ONLY the small tied HAIR BUN MASS of concept-A Kiếm tu EAST-facing character as its own separately drawn production sprite. Firstimage MASTER gives exact dark-brown hair style/palette/fine soft outline/NWlight; lastimage white REGION MASK locatesbun source2xboxx107..128y22..39 in full512square sharedcanvas. Only the bun hair volume, solid hidden root fullypainted, mutedbrown hair with a few finecurved strands, shape matches originalmastertopknot. NO hairpin/jade/ribbon/hairtie/fronthair/face/body/otherpiece/text/glow/haze/background. Genuine transparent RGBA outside. Never enlarge/recenter/crop. Clean thinAAedge, not shinyblack/anime. Keep thissmallroundedbuninsidewhite mask andmatchmasterproportion.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/hair_bun_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 01:17:50 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hair_bun.png",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hair_bun.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
+}

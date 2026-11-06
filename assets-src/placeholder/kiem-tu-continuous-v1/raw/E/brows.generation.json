@@ -1,0 +1,15 @@
+{
+  "id": "brows",
+  "prompt": "ONE tiny separate FACE FEATURE sprite, Kiếm tu male concept-A EAST/right-facing profile. MASTER first image establishes exact delicate brown-gray lineweight/desaturated palette/NWlight; LAST white REGION MASK locates ONLY the requested feature on full512canvas. Genuine transparent RGBA elsewhere. NO face skin patch/head/hair/ear/neck/body, no recenter/crop/enlarge; draw ONLY the tiny feature at mask location, not an entire face. Right-facing SIDE PROFILE has only ONE visible eye/mouth corner, not frontal pair. Thin natural lines, no thick anime/cartooney feature, no text/glow/haze. ONLY one BROW for right-facing profile: restrained dark brown tapered eyebrow natural male angle, sourcex137..142y51..52; no eye or skin.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/brows_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 01:02:59 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/brows.png",
+  "maskSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/brows.mask.png",
+  "referenceSnapshot": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png"
+}
