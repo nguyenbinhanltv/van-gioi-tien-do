@@ -274,10 +274,31 @@ describe('blink cycle', () => {
     expect(starts.length).toBeGreaterThanOrEqual(2);
     for (let i = 1; i < starts.length; i++) expect(starts[i]! - starts[i - 1]!).toBeGreaterThanOrEqual(90);
     expect(BLINK_CYCLE_FRAMES - starts[starts.length - 1]! + starts[0]!).toBeGreaterThanOrEqual(90);
+    expect(BLINK_CYCLE_FRAMES - starts[starts.length - 1]! + starts[0]!).toBeLessThanOrEqual(150);
     const keys = c.slots[0]!.attachment!;
     expect(keys.filter((k) => k.value === 'eyes_closed')).toHaveLength(starts.length);
     expect(Math.max(...keys.map((k) => k.frame))).toBeLessThan(BLINK_CYCLE_FRAMES);
   });
+  it('every blink gap of a looping clip, including across the wrap, is 3-5 s', () => {
+    for (const name of ['blink_cycle', 'idle', 'walk', 'x', 'emote'])
+      for (const frames of [135, 150, 200, 270, 300, 330, 450, 600]) {
+        const s = blinkStarts(name, frames, true);
+        expect(s.length).toBeGreaterThanOrEqual(1);
+        expect(Math.max(...s) + 5).toBeLessThan(frames);
+        if (s.length > 1) {
+          const sorted = [...s].sort((a, b) => a - b);
+          for (let i = 0; i < sorted.length; i++) {
+            const gap = i + 1 < sorted.length ? sorted[i + 1]! - sorted[i]! : frames - sorted[i]! + sorted[0]!;
+            expect(gap, `${name}/${frames}`).toBeGreaterThanOrEqual(90);
+            expect(gap, `${name}/${frames}`).toBeLessThanOrEqual(150);
+          }
+        }
+      }
+    // a single blink per loop is only allowed when the loop itself is 3-5 s
+    expect(blinkStarts('idle', 120, true).length).toBe(1);
+    expect(blinkStarts('idle', 60, true)).toEqual([]);
+  });
+
   it('is null for a rig without the eyes slot and deterministic otherwise', () => {
     expect(authorBlinkCycle(buildReferenceHumanoid('E'))).toBeNull();
     expect(authorBlinkCycle(rig)).toEqual(authorBlinkCycle(rig));
