@@ -4,6 +4,10 @@
   "stem": "danphutu",
   "master": "../reference/SE.master.png",
   "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../character-calibration.json"
+  },
   "clips": [
     {
       "name": "idle",
