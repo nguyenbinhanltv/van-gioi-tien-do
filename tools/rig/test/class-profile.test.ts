@@ -15,6 +15,7 @@ import {
   evalPose,
   getAssemblyProfile,
   loadCharacterData,
+  profilePieces,
   snapIkTargets,
   spineWeights,
   validateRig,
@@ -345,5 +346,74 @@ describe('Thể tu combat poses', () => {
     expect(shown('attack_2', 'hand_L', hitFrame('attack_2'))).toBe('gauntlet_L_fist');
     expect(shown('attack_3', 'hand_R', hitFrame('attack_3'))).toBe('gauntlet_R_open');
     expect(shown('attack_3', 'hand_L', hitFrame('attack_3'))).toBe('gauntlet_L_open');
+  });
+});
+
+describe('Thể tu per-direction pieces', () => {
+  const sources = new Set<string>();
+  for (const p of THE_TU_E_PIECES) {
+    sources.add(p.id);
+    for (const c of p.compose ?? []) sources.add(c);
+  }
+  const parts = new Map<string, Image>(
+    [...sources].map((id, i) => [id, rect(100 + (i % 7) * 6, 70 + (i % 11) * 9, 124 + (i % 7) * 6, 96 + (i % 11) * 9)]),
+  );
+  const assembleDir = (dir: 'E' | 'S' | 'SE' | 'NE' | 'N') => {
+    const dirBase = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get(dir)!.rig;
+    return assembleContinuous({
+      base: { ...dirBase, id: 'the-tu' },
+      landmarks,
+      view,
+      parts,
+      pieces: profilePieces(THE_TU_PROFILE, dir),
+      dropBones: THE_TU_PROFILE.dropBones,
+      snapIk: true,
+      extraChains: THE_TU_PROFILE.chains!,
+    });
+  };
+  const slotNames = (dir: 'E' | 'S' | 'SE' | 'NE' | 'N') => profilePieces(THE_TU_PROFILE, dir).map((p) => p.slot);
+
+  it('every direction assembles into a valid rig inside the budgets with the draw order of its paperdoll preset', () => {
+    for (const dir of ['E', 'S', 'SE', 'NE', 'N'] as const) {
+      const res = assembleDir(dir);
+      expect(res.skipped, dir).toEqual([]);
+      expect(
+        validateRig(res.rig).filter((i) => i.severity === 'error'),
+        dir,
+      ).toEqual([]);
+      expect(res.stats.vertices, dir).toBeLessThanOrEqual(res.stats.limits.meshVertices);
+      expect(res.stats.slots, dir).toBeLessThanOrEqual(res.stats.limits.slots);
+      expect(res.stats.bones, dir).toBeLessThanOrEqual(res.stats.limits.bones);
+    }
+  });
+
+  it('N: no face (swaps, ear, facial bangs), both arms behind the body, the back panel over it, rear hair over the head', () => {
+    const slots = slotNames('N');
+    for (const s of ['eyes', 'brows', 'mouth', 'hair_strand_a', 'hair_strand_b', 'hair_strand_c'])
+      expect(slots, s).not.toContain(s);
+    const at = (s: string) => slots.indexOf(s);
+    expect(at('arm_L')).toBeLessThan(at('torso'));
+    expect(at('arm_R')).toBeLessThan(at('torso'));
+    expect(at('tabard_back')).toBeGreaterThan(at('torso'));
+    expect(at('tabard_front')).toBeLessThan(at('torso'));
+    expect(at('hair_back')).toBeGreaterThan(at('head'));
+    expect(profilePieces(THE_TU_PROFILE, 'N').find((p) => p.id === 'head')!.compose).toEqual(['head']);
+    const res = assembleDir('N');
+    expect(res.rig.slots.some((s) => /eyes|brows|mouth/.test(s.name))).toBe(false);
+  });
+
+  it('NE: only the facial edge (eyes, brows; no mouth, no ear), rear hair over the head, near arm last', () => {
+    const slots = slotNames('NE');
+    expect(slots).toContain('eyes');
+    expect(slots).toContain('brows');
+    expect(slots).not.toContain('mouth');
+    expect(slots.indexOf('hair_back')).toBeGreaterThan(slots.indexOf('head'));
+    expect(slots.at(-1)).toBe('hand_R');
+    expect(slots.indexOf('arm_L')).toBeLessThan(slots.indexOf('torso'));
+    expect(slots.indexOf('arm_R')).toBeGreaterThan(slots.indexOf('hair_back'));
+  });
+
+  it('E / SE / S keep the E pieces unchanged', () => {
+    for (const d of ['E', 'SE', 'S'] as const) expect(profilePieces(THE_TU_PROFILE, d)).toBe(THE_TU_E_PIECES);
   });
 });
