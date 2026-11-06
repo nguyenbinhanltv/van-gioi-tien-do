@@ -3,6 +3,7 @@
 //
 //   npm run rig:gate -w @vgtd/rig -- <character> [--dir E] [--src dragonbones/<id> --stem <stem>] [--animations all|a,b]
 //                                    [--frames 8] [--out <dir>] [--skip-capture] [--skip-measure]
+//                                    [--assembled <rig:assemble output dir> [--stem kiemtu]]  measure THAT data, not the registry
 // The capture sheets land in --out (default: the OS temp dir under vgtd-gate/<character>); attach them to the PR.
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -49,6 +50,7 @@ if (!flag('skip-measure'))
       '--dir',
       dir,
       '--strict',
+      ...(opt('assembled', '') ? ['--assembled', opt('assembled', ''), '--stem', opt('stem', 'kiemtu')] : []),
     ]),
   );
 if (!flag('skip-capture')) {
