@@ -15,6 +15,14 @@ node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/as
 npm run capture -w client-cocos -- --src dragonbones/danphutu-sprite-v1 --stem danphutu --direction E --animations all --frames 12 --mode single --zoom 2 --sample midpoint --gif --out <capture-directory>
 ```
 
+The committed direction projects point to raw AI grids with different image DPI. Run the DPI-normalization stage before the final shared builder: direct `runProject` / `sprite:build` / `sprite:batch` on these raw project files skips the recorded cell-DPI stage and master-locked 208/231 scale. Such a direct run is not a reproduction of the exported assets. For the merged SE set, the complete command is:
+
+```sh
+node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-sprite-v1/assemble.ts assets-src/placeholder/dan-phu-tu-sprite-v1/SE <temporary-SE-normalized-directory> <temporary-SE-export-directory>
+```
+
+This writes the normalized working `project.json` in the first temporary directory. Pass that prepared project to the shared batch CLI. Rechecked against main after #122: SE has zero hard findings, zero unlisted soft findings, 28 accepted findings and zero regressions. The raw-project direct run's 22 hard findings came from skipping these input stages; no source pixels or thresholds were changed. A declared shared DPI stage is being coordinated with the pipeline owner; adopt it when merged.
+
 `assemble.ts` fails if a sheet is missing, its cells cannot be normalized without distorting anatomy, a hard gate fails, or a soft finding is unlisted/regresses. `--available` is diagnostic only. `--accept-soft` explicitly records current soft measurements using the public backlog API; it never accepts hard failures.
 
 Clip metadata starts from public `projectClipDefaults`. Event phases use the shared clip-table defaults without character-specific overrides; the drawn contact and talisman-presentation poses span those trigger moments. Only the rendered sheet layout and explicit anatomical pose exceptions are character-owned. Assembly writes `dpi-calibration.json` beside the direction's project file, so the commands above regenerate the committed DPI record. Normalized images and the prepared project for the shared batch/review CLIs stay in temporary working space.
