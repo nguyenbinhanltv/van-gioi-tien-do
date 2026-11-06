@@ -50,11 +50,12 @@ Generated from `quality-backlog.json` (45 accepted soft findings). Hard gates (f
 | walk      | SE  | 9    | footSlide | ghost_distance_2d_px_L      | 20.6  | 20    | open   | Owner-approved first full-set pass: measured SE directional gait drift and free-pose height variation retained for later art improvement; global scale locked, no per-frame rescaling. |
 | walk      | SE  | 10   | footSlide | ghost_distance_2d_px_L      | 22.6  | 20    | open   | Owner-approved first full-set pass: measured SE directional gait drift and free-pose height variation retained for later art improvement; global scale locked, no per-frame rescaling. |
 
-## Manual art findings (2)
+## Manual art findings (3)
 
 Visual observations; automatic metric pruning never resolves these.
 
-| clip | dir | cells | kind          | severity | reviewer   | art status | note                                                                                                                                                                            |
-| ---- | --- | ----- | ------------- | -------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| walk | SE  | 0, 6  | weak_reversal | soft     | art-worker | open       | Half-cycle contact silhouettes retain similar near-leg occlusion; opposite-leg reversal is weak in cells 0 versus 6. Two inspected contact cells; retain for later gait redraw. |
-| run  | SE  | 0, 6  | weak_reversal | soft     | art-worker | open       | Half-cycle contact silhouettes retain similar near-leg occlusion; opposite-leg reversal is weak in cells 0 versus 6. Two inspected contact cells; retain for later gait redraw. |
+| clip   | dir | cells | kind          | severity | reviewer   | art status | note                                                                                                                                                                                                |
+| ------ | --- | ----- | ------------- | -------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| walk   | SE  | 0, 6  | weak_reversal | soft     | art-worker | open       | Half-cycle contact silhouettes retain similar near-leg occlusion; opposite-leg reversal is weak in cells 0 versus 6. Two inspected contact cells; retain for later gait redraw.                     |
+| run    | SE  | 0, 6  | weak_reversal | soft     | art-worker | open       | Half-cycle contact silhouettes retain similar near-leg occlusion; opposite-leg reversal is weak in cells 0 versus 6. Two inspected contact cells; retain for later gait redraw.                     |
+| attack | SE  | 4, 5  | redraw_drift  | soft     | art-worker | open       | Real Cocos2x attack capture: sweep shoulders and face turn closer to E profile in source cells4-5 while fan remains in right hand. Two inspected cells; later redraw should retain SE torso camera. |

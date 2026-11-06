@@ -564,6 +564,16 @@
       "severity": "soft",
       "reviewer": "art-worker",
       "note": "Half-cycle contact silhouettes retain similar near-leg occlusion; opposite-leg reversal is weak in cells 0 versus 6. Two inspected contact cells; retain for later gait redraw."
+    },
+    {
+      "clip": "attack",
+      "dir": "SE",
+      "cells": [4, 5],
+      "kind": "redraw_drift",
+      "status": "open",
+      "severity": "soft",
+      "reviewer": "art-worker",
+      "note": "Real Cocos2x attack capture: sweep shoulders and face turn closer to E profile in source cells4-5 while fan remains in right hand. Two inspected cells; later redraw should retain SE torso camera."
     }
   ]
 }
