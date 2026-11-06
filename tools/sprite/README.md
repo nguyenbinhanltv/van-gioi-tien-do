@@ -35,3 +35,40 @@ these measurements. Re-run QA, review the new values, then explicitly accept the
 appropriate; do not rename or copy old numeric baselines. Stale x-only entries can be pruned after
 review. Preserve original template PNGs/manifests and their provenance; save regenerated directional
 templates as new generation inputs rather than relabeling old E-shaped ghosts.
+
+Quality backlogs keep measured acceptances in `entries` and optional visual observations in `manual`:
+
+```json
+{
+  "kind": "carry_change",
+  "clip": "run",
+  "dir": "E",
+  "cells": [6, 7],
+  "severity": "warn",
+  "reviewer": "art-worker",
+  "note": "Sword carry changes during the second half of the cycle."
+}
+```
+
+Manual kinds: `carry_change`, `weak_reversal`, `redraw_drift`, `hair_spill`, `other`.
+Cells are zero-based; `[]` covers the whole clip. Severity is a nonempty art-review label (the existing
+companion uses `warn` for visible defects and `info` for unconfirmed diagnostics). These observations
+are displayed and counted separately in `sprite:backlog` and batch-based `sprite:review`; they do not
+accept automatic failures, affect the metric build gate, or enter the automatic resolved list.
+`--accept` and `--prune` preserve them. Remove or revise them only after art review.
+Optional `status` (`open`, `planned`, `resolved`; default `open`) records only explicit art-worker
+review. Automatic QA never changes it, and manual resolutions are displayed separately from metric resolutions.
+
+Migrate worker 17's `vgtd-manual-art-findings` v1 companion without rebuilding art:
+
+```sh
+npm run sprite:backlog -w @vgtd/sprite -- --backlog <quality-backlog.json> --import-manual <manual-art-findings.json>
+```
+
+The character must match. The import keeps existing metric entries, maps `leg_reversal` to
+`weak_reversal` and `key_spill` to `hair_spill`, and maps other unknown kinds to `other`.
+It accepts `cell` with `cellConvention: "0based;-1wholeclip"`, or an explicit `cell0based`;
+`-1` becomes `cells: []`. Explicit art status is preserved; legacy kind, metric, value, limit and status are retained in note text,
+never synthesized as QA findings. Exact reimports do not duplicate observations. The JSON and its
+Markdown view are written; source companion files are unchanged. Re-run `sprite:batch` before
+`sprite:review` to refresh manual observations in existing batch reports.

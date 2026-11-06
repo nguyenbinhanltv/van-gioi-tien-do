@@ -1,0 +1,16 @@
+{
+  "id": "SE-meditate-reroll-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:12:31 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:13:08 UTC"
+  },
+  "prompt": "Use case: stylized-concept. EXACT EIGHT SEATED MEDITATION poses,4columns2rows squarecells. Image1 exact character identity and fixed SE three-quarterFRONT camera facinglower-right. Image2 ONLY posture/scale reference: EVERY cell fully cross-legged SEATED, small seatedbody at original adult anatomical scale. Image3 gridlayout ONLY; IGNORE standingheadtop line. ALL8 figures MUSTALREADY BESEATED; no standing, no crouch, no sitdown/standup transition. Sameadultwoman foldedjadeheadpiece, darkloopedhair ivorysleeves jadesplitcoat bluepanels bronze trim darksashtrousersboots gourd goldenbelttalismans. Right hand bronze-handled whitewhisk acrosslap, left goldpapertalisman onknee. Same master head/torso/arm/thigh dimensions, not enlarged seatedbody. Each256squarecell headpieceTOP90, kneeground232, seatedheight142, upper35%EMPTYmagenta. Small gentle breathingloop only, same seatedsilhouette last-first smooth. Reference2 confirms correct seated height but DO NOTcopy its EASTprofile: use image1 SEthreequarterfront consistently. Softpainted fineink NWlight. Pure#FF00FF background, no grid/text/shadows/floor/VFX/extra limbs. Every cell complete seatedfigure, all8seated! No front-to-side turns.",
+  "references": ["reference/SE.master.png", "E/sheets/meditate.png", "SE/templates/meditate.template.png"],
+  "output": "SE/sheets/meditate.png",
+  "toolOutputId": "exec-0e620de6-7fd9-42d2-973b-74f299293eee.png",
+  "replaces": "meditate.generation.json"
+}
