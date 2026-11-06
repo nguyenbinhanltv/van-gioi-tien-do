@@ -162,10 +162,15 @@ const pick = (order: readonly string[], patch: Readonly<Record<string, Partial<P
     return patch[id] ? ({ ...p, ...patch[id] } as PieceSpec) : p;
   });
 
-/** Seen from the back the BACK panel is the visible one (over the torso, carries the outfit tag), the front panel hangs behind. */
-const BACK_VIEW_TABARD: Record<string, Partial<PieceSpec>> = {
+/**
+ * Seen from the back (NE, N) the BACK panel is the visible one (over the torso, carries the outfit tag), the front panel hangs
+ * behind, and the sash is the band only (no front knot).
+ */
+const BACK_VIEW: Record<string, Partial<PieceSpec>> = {
   tabard_front: { paperdoll: undefined },
   tabard_back: { paperdoll: 'outfit_upper' },
+  // the knot is on the front: from behind only the smooth wrap of the band shows (the tails peek below the back panel)
+  sash_set: { compose: ['sash_band'] },
 };
 
 /**
@@ -200,7 +205,7 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       armSet('R'),
     ),
     // no ear in the back three-quarter view either: the head is composed from `head` only (as in N)
-    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
+    { ...BACK_VIEW, head: { compose: ['head'] } },
   ),
   N: pick(
     ids(
@@ -219,7 +224,7 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       'hair_back',
       'hairpin',
     ),
-    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
+    { ...BACK_VIEW, head: { compose: ['head'] } },
   ),
 };
 
