@@ -399,6 +399,12 @@ describe('Thể tu per-direction pieces', () => {
     expect(at('tabard_front')).toBeLessThan(at('torso'));
     expect(at('hair_back')).toBeGreaterThan(at('head'));
     expect(profilePieces(THE_TU_PROFILE, 'N').find((p) => p.id === 'head')!.compose).toEqual(['head']);
+    expect(profilePieces(THE_TU_PROFILE, 'N').find((p) => p.id === 'sash_set')!.compose).toEqual(['sash_band']);
+    // the front views keep the knot
+    expect(profilePieces(THE_TU_PROFILE, 'S').find((p) => p.id === 'sash_set')!.compose).toEqual([
+      'sash_band',
+      'sash_knot',
+    ]);
     const res = assembleDir('N');
     expect(res.rig.slots.some((s) => /eyes|brows|mouth/.test(s.name))).toBe(false);
   });
@@ -409,6 +415,7 @@ describe('Thể tu per-direction pieces', () => {
     expect(slots).toContain('brows');
     expect(slots).not.toContain('mouth');
     expect(profilePieces(THE_TU_PROFILE, 'NE').find((p) => p.id === 'head')!.compose).toEqual(['head']);
+    expect(profilePieces(THE_TU_PROFILE, 'NE').find((p) => p.id === 'sash_set')!.compose).toEqual(['sash_band']);
     expect(slots.indexOf('hair_back')).toBeGreaterThan(slots.indexOf('head'));
     expect(slots.at(-1)).toBe('hand_R');
     expect(slots.indexOf('arm_L')).toBeLessThan(slots.indexOf('torso'));
