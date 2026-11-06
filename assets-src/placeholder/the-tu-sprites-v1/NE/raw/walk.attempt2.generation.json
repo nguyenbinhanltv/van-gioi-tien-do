@@ -1,0 +1,19 @@
+{
+  "clip": "walk",
+  "dir": "NE",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:17:34 UTC",
+  "prompt": "EDIT TARGET image1: twelve-frame NE walk sheet, six equal SQUARE columns x two rows. Image2 identity master only. Change ONLY cells 3,5,10 (0-based) = row1 col4, row1 col6, row2 col5. All other cells MUST remain exactly untouched; keep canvas/grid/camera/colors. These cells have excessive knee folding and lose upright height. Redraw only those full-body poses with SHALLOW knee flex and upright torso, while preserving exact same adult head/torso/limb sizes and the existing leg cycle: walking swing/push phase with supporting leg almost straight, not compressed. Target figure full-body height214units per256cell, allowed208..220. Groundy232, buny18. Match adjoining cells' standing stature. Do not zoom, resize, stretch or scale any figure. Re-articulate the legs naturally to recover body height. Preserve back three-quarter NE facing away/up-right, rear mountain-blue tabard/bronze cloud back motif, ivory trousers/sleeves, bronze gauntlets, jade bun, dark boots, sash band with hidden front knot. No new face or camera turn. All12 complete figures rowmajor, flat opaque#FF00FF background, no guide marks/text/effects/shadows. DO NOT change any cell outside the listed cells.",
+  "references": ["raw/walk.attempt1.png", "../../the-tu-continuous-v1/reference/NE.master4x.png"],
+  "selectedOutput": "raw/walk.attempt2.edited.png",
+  "repairCells": [3, 5, 10],
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:18:24 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-712ed810-ef5d-4657-a87d-c4fa36e84f6b.png",
+  "originalBackup": "raw/originals/walk.attempt2.png",
+  "sourceSelectionStatus": "donor generated; apply listed cells only after QA",
+  "finalGate": "export/engine-gate.json"
+}
