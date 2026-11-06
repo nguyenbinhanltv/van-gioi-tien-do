@@ -49,6 +49,17 @@ export interface LimbMesh {
   readonly jointArc: readonly number[];
 }
 
+/** Throws unless `v` is a finite number > 0 (an option that would otherwise loop forever or produce NaN weights). */
+function positive(what: string, v: number): number {
+  if (!Number.isFinite(v) || v <= 0) throw new RangeError(`${what} must be a finite number > 0 (got ${v})`);
+  return v;
+}
+
+function checkView(view: CanvasView): void {
+  positive('view.scale', view.scale);
+  if (!view.pivot.every(Number.isFinite)) throw new RangeError('view.pivot must be finite numbers');
+}
+
 const smooth = (t: number) => {
   const x = Math.min(1, Math.max(0, t));
   return x * x * (3 - 2 * x);
@@ -58,8 +69,12 @@ const smooth = (t: number) => {
 export function buildLimbMesh(rig: RigDocument, opts: LimbOptions): LimbMesh {
   const { image, view } = opts;
   const thr = opts.alphaThreshold ?? 8;
-  const step = opts.step ?? 4;
+  const step = positive('step', opts.step ?? 4);
   const pad = opts.pad ?? 2;
+  checkView(view);
+  if (opts.cols !== undefined && !(Number.isInteger(opts.cols) && opts.cols >= 2 && opts.cols <= 5))
+    throw new RangeError(`cols must be an integer in 2..5 (got ${opts.cols})`);
+  for (const r of typeof opts.ramp === 'number' ? [opts.ramp] : (opts.ramp ?? [])) positive('ramp', r);
   if (!opts.chain.length) throw new RangeError('limb chain needs at least one bone');
   const rest = evalPose(rig, null, 0, { noIk: true });
   const bonePose = (n: string) => {
@@ -278,8 +293,9 @@ export interface SkirtOptions {
 export function buildSkirtMesh(rig: RigDocument, opts: SkirtOptions): LimbMesh {
   const { image, view } = opts;
   const thr = opts.alphaThreshold ?? 8;
-  const cell = opts.cell ?? 5;
+  const cell = positive('cell', opts.cell ?? 5);
   const pad = opts.pad ?? 2;
+  checkView(view);
   const rest = evalPose(rig, null, 0, { noIk: true });
   const pose = (n: string) => {
     const b = rest.byName.get(n);

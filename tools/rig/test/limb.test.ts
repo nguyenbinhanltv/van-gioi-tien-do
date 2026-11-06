@@ -143,3 +143,26 @@ describe('buildSkirtMesh', () => {
     for (const w of m.weights!) expect(w.reduce((a, [, v]) => a + v, 0)).toBeCloseTo(1, 3);
   });
 });
+
+describe('option validation', () => {
+  const { rig, img } = armImage();
+  const base = { name: 'a', slotBone: 'upper_arm_R', chain: ['upper_arm_R', 'lower_arm_R'], view, image: img };
+  it('rejects step / ramp / cols / scale that would hang or give NaN weights', () => {
+    for (const step of [0, -1, NaN, Infinity]) expect(() => buildLimbMesh(rig, { ...base, step })).toThrow(RangeError);
+    for (const ramp of [0, -2, NaN, [4, 0]]) expect(() => buildLimbMesh(rig, { ...base, ramp })).toThrow(RangeError);
+    for (const cols of [1, 6, 2.5]) expect(() => buildLimbMesh(rig, { ...base, cols })).toThrow(/cols/);
+    expect(() => buildLimbMesh(rig, { ...base, view: { scale: 0, pivot: [64, 116] } })).toThrow(/scale/);
+  });
+  it('rejects a skirt cell <= 0 and a bad scale', () => {
+    const sk = {
+      name: 's',
+      slotBone: 'hips',
+      hips: 'hips',
+      thighs: ['thigh_L', 'thigh_R'] as [string, string],
+      view,
+      image: img,
+    };
+    for (const cell of [0, -3, NaN]) expect(() => buildSkirtMesh(rig, { ...sk, cell })).toThrow(RangeError);
+    expect(() => buildSkirtMesh(rig, { ...sk, view: { scale: -1, pivot: [64, 116] } })).toThrow(/scale/);
+  });
+});
