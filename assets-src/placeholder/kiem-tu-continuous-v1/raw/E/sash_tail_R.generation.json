@@ -1,0 +1,13 @@
+{
+  "id": "sash_tail_R",
+  "prompt": "ONE separate fine-detail sprite for concept-A EAST-facing cultivation RPG rig. First image MASTER style/palette/NW lighting; LAST image white REGION MASK fixes location/shape/scale on full512square canvas. White requestedpart only; everythingelse genuinely transparent RGBA, no background/haze/text. Never center/enlarge/crop. Match master muted slate-blue cloth, fine brown-gray edge, restrained soft NW light. Solid hidden root extends under neighbouring piece. Chain-friendly continuous neutral strip, no disconnected islands or hard baked bend. No body, weapons or unrequested decoration. ONLY RIGHT WAIST SASH TAIL, slim navy-blue cloth strip with hidden root at waist knot, downward chain-friendly neutral hang. No knot/belt/secondtail.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/sash_tail_R_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:51:57 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/sash_tail_R.png"
+}

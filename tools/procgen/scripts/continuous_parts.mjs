@@ -1,0 +1,194 @@
+/** Deterministic TRACK 2 art preparation. Geometry is supplied by the art manifest. */
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+
+const require = createRequire(import.meta.url);
+const { Image, decodePNG, resizeArea } = require('../src/lib/png.js');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+const source = path.join(root, 'assets-src/placeholder/kiem-tu-continuous-v1');
+const manifest = JSON.parse(fs.readFileSync(path.join(source, 'E.parts.json'), 'utf8'));
+const master = decodePNG(fs.readFileSync(path.join(source, 'reference/E.master4x.png')));
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const luminance = c => .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+const silhouette = new Uint8Array(512 * 512);
+for (let y = 0; y < 512; y++) for (let x = 0; x < 512; x++) {
+  // Two @2x texture pixels of permitted outer rest-pose deviation.
+  for (let dy = -4; dy <= 4 && !silhouette[y * 512 + x]; dy++) for (let dx = -4; dx <= 4; dx++) {
+    if (dx * dx + dy * dy > 16 || x + dx < 0 || y + dy < 0 || x + dx >= 512 || y + dy >= 512) continue;
+    if (master.getPixel(x + dx, y + dy)[3] >= 128) { silhouette[y * 512 + x] = 1; break; }
+  }
+}
+
+function inPolygon(x, y, points) {
+  let inside = false;
+  for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+    const [xi, yi] = points[i], [xj, yj] = points[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+function distance(x, y, a, b) {
+  const dx = b[0] - a[0], dy = b[1] - a[1];
+  const t = clamp(((x - a[0]) * dx + (y - a[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1);
+  return Math.hypot(x - a[0] - t * dx, y - a[1] - t * dy);
+}
+
+function maskFor(part) {
+  const mask = new Image(512, 512);
+  mask.fill(0, 0, 0, 255);
+  for (let y = 0; y < 512; y++) for (let x = 0; x < 512; x++) {
+    const u = (x + .5) / 2, v = (y + .5) / 2;
+    if ((part.polygons ?? []).some(p => inPolygon(u, v, p)) ||
+      (part.segments ?? []).some(s => distance(u, v, s.a, s.b) <= s.r)) mask.setPixel(x, y, 255, 255, 255, 255);
+  }
+  return mask;
+}
+
+function bounds(image, threshold = 127, mask = false) {
+  let x0 = image.width, y0 = image.height, x1 = -1, y1 = -1;
+  for (let y = 0; y < image.height; y++) for (let x = 0; x < image.width; x++) {
+    if (image.getPixel(x, y)[mask ? 0 : 3] > threshold) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); }
+  }
+  if (x1 < x0) throw new Error('Empty part or region mask');
+  return { x0, y0, x1, y1, width: x1 - x0 + 1, height: y1 - y0 + 1 };
+}
+
+function material(c) {
+  const [r, g, b] = c, l = luminance(c);
+  if (l < 92) return 'hair';
+  if (b > r + 3 || (b > r - 5 && b > g - 8 && l < 175)) return 'blue';
+  if (r > b + 18 && r > g + 8 && l > 140) return 'skin';
+  if (r > b + 17 && r > g + 5 && l < 160) return 'gold';
+  return 'cloth';
+}
+
+const palettes = {};
+const sampleRegions = {
+  cloth: [[115, 91, 124, 115], [120, 118, 126, 126], [113, 197, 139, 201]],
+  skin: [[134, 54, 142, 65], [123, 136, 128, 143]],
+  blue: [[114, 146, 136, 180], [127, 88, 133, 107]],
+  gold: [[111, 190, 136, 194], [118, 80, 122, 83]],
+  hair: [[108, 54, 119, 101], [117, 209, 125, 222]],
+};
+for (let y = 0; y < master.height; y++) for (let x = 0; x < master.width; x++) {
+  const c = master.getPixel(x, y);
+  if (c[3] < 240) continue;
+  for (const [name, regions] of Object.entries(sampleRegions)) {
+    if (!regions.some(([x0, y0, x1, y1]) => x / 2 >= x0 && x / 2 <= x1 && y / 2 >= y0 && y / 2 <= y1)) continue;
+    const l = luminance(c);
+    if ((name === 'cloth' && l < 145) || (name === 'hair' && l > 125) ||
+      (name === 'blue' && (c[0] > c[2] + 5 || l > 180)) || (name === 'skin' && l < 140) ||
+      (name === 'gold' && (c[0] < c[2] + 12 || l < 110))) continue;
+    (palettes[name] ??= []).push(c);
+  }
+}
+for (const colors of Object.values(palettes)) colors.sort((a, b) => luminance(a) - luminance(b));
+
+// Remove translucent background haze and isolated speckles; retain antialias only next to opaque paint.
+function cleanAlpha(image) {
+  const opaque = new Uint8Array(image.width * image.height), seen = new Uint8Array(opaque.length);
+  const components = [];
+  for (let i = 0; i < opaque.length; i++) opaque[i] = image.data[i * 4 + 3] >= 160 ? 1 : 0;
+  for (let i = 0; i < opaque.length; i++) {
+    if (!opaque[i] || seen[i]) continue;
+    const queue = [i]; seen[i] = 1;
+    for (let k = 0; k < queue.length; k++) {
+      const p = queue[k], x = p % image.width, y = Math.floor(p / image.width);
+      for (const [dx, dy] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+        const u = x + dx, v = y + dy, q = v * image.width + u;
+        if (u < 0 || v < 0 || u >= image.width || v >= image.height || seen[q] || !opaque[q]) continue;
+        seen[q] = 1; queue.push(q);
+      }
+    }
+    components.push(queue);
+  }
+  components.sort((a, b) => b.length - a.length);
+  const keep = new Uint8Array(opaque.length);
+  for (const component of components.filter(c => c.length >= Math.max(5, (components[0]?.length ?? 0) * .01))) for (const p of component) keep[p] = 1;
+  for (let y = 0; y < image.height; y++) for (let x = 0; x < image.width; x++) {
+    const p = y * image.width + x;
+    if (keep[p]) continue;
+    let near = false;
+    for (let dy = -2; dy <= 2 && !near; dy++) for (let dx = -2; dx <= 2; dx++) {
+      if (x + dx >= 0 && y + dy >= 0 && x + dx < image.width && y + dy < image.height && keep[(y + dy) * image.width + x + dx]) { near = true; break; }
+    }
+    if (!near || image.data[p * 4 + 3] < 8) image.setPixel(x, y, 0, 0, 0, 0);
+  }
+}
+
+function processPart(part) {
+  const filename = path.join(source, 'raw/E', `${part.id}.png`);
+  if (!fs.existsSync(filename)) return null;
+  const raw = decodePNG(fs.readFileSync(filename));
+  const image = resizeArea(raw, 512, 512);
+  cleanAlpha(image);
+  const before = bounds(image), target = bounds(maskFor(part), 127, true);
+  const registered = new Image(512, 512);
+  // Bounding-box registration preserves the generated contour and shared-canvas intent.
+  // A silhouette comparison is reported separately; registration alone is not acceptance.
+  for (let y = target.y0; y <= target.y1; y++) for (let x = target.x0; x <= target.x1; x++) {
+    const u = clamp(Math.round(before.x0 + (x - target.x0) * (before.width - 1) / Math.max(1, target.width - 1)), 0, 511);
+    const v = clamp(Math.round(before.y0 + (y - target.y0) * (before.height - 1) / Math.max(1, target.height - 1)), 0, 511);
+    registered.setPixel(x, y, ...image.getPixel(u, v));
+  }
+  const groups = {};
+  for (let y = 0; y < 512; y++) for (let x = 0; x < 512; x++) {
+    const c = registered.getPixel(x, y);
+    if (c[3] < 8) continue;
+    const region = (part.materialRegions ?? []).find(r => inPolygon(x / 2, y / 2, r.polygon));
+    const name = region?.material ?? (part.materialRegions || part.materials.length === 1 ? part.materials[0] : material(c));
+    const key = part.materials.includes(name) ? name : part.materials[0];
+    (groups[key] ??= []).push({ x, y, c });
+  }
+  const transfer = {};
+  for (const [name, pixels] of Object.entries(groups)) {
+    const palette = palettes[name];
+    if (!palette?.length) throw new Error(`No master palette for ${name}`);
+    pixels.sort((a, b) => luminance(a.c) - luminance(b.c));
+    for (let i = 0; i < pixels.length; i++) {
+      const { x, y, c } = pixels[i];
+      const q = .05 + .9 * i / Math.max(1, pixels.length - 1), targetColor = palette[Math.round(q * (palette.length - 1))];
+      const rgb = c.slice(0, 3).map((v, k) => Math.round(v * .25 + targetColor[k] * .75));
+      registered.setPixel(x, y, ...rgb, c[3]);
+    }
+    transfer[name] = { pixels: pixels.length, masterSamples: palette.length, paletteBlend: .75 };
+  }
+  let silhouetteClipped4x = 0;
+  if (!['shadow', 'sword_trail', 'sword_glint'].includes(part.id)) {
+    for (let y = 0; y < 512; y++) for (let x = 0; x < 512; x++) {
+      if (!silhouette[y * 512 + x] && registered.getPixel(x, y)[3] > 0) {
+        registered.setPixel(x, y, 0, 0, 0, 0); silhouetteClipped4x++;
+      }
+    }
+  }
+  const final = resizeArea(registered, 256, 256);
+  fs.mkdirSync(path.join(source, 'E'), { recursive: true });
+  final.save(path.join(source, 'E', `${part.id}.png`));
+  return { id: part.id, rawSize: [raw.width, raw.height], generatedBounds4x: before, registeredBounds4x: target, transfer, silhouetteClipped4x, finalBounds2x: bounds(final) };
+}
+
+const mode = process.argv[2] ?? 'process';
+if (mode === 'licenses') {
+  const filename = path.join(root, 'docs/ASSET-LICENSES.md');
+  const marker = '\n## KT3 — Kiếm tu chi liền, pilot E (2026-11-06 UTC)\n';
+  const previous = fs.readFileSync(filename, 'utf8').split(marker)[0];
+  const entries = manifest.parts.map(p => path.join(source, 'raw/E', `${p.id}.generation.json`)).filter(fs.existsSync).map(p => JSON.parse(fs.readFileSync(p, 'utf8')));
+  let section = marker + '\nNguồn gốc: master concept A / KT2 (`assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png`), phóng bằng Lanczos tiền nhân alpha lên @4x. Các mảnh mới do `image_gen.imagegen` sinh riêng từ master và mask vùng; model **không công bố (undisclosed)**; CLI `codex-cli 0.164.0`. Chủ art tạm: người dùng. Điều khoản công cụ: https://openai.com/policies/row-terms-of-use/ ; giữ nhãn placeholder của KT2, cần duyệt nguồn gốc và quyền sử dụng trước phát hành. Không thêm nguồn bên thứ ba.\n\nHậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ halo alpha / đốm rời, đăng ký bounding box về mask, chuyển bảng màu theo từng vật liệu bằng mẫu từ master (75% màu mẫu, 25% ảnh sinh), giới hạn silhouette nghỉ trong biên master + 2 px @2x, downsample @4x→@2x. Mask hình học và nhãn vật liệu được tác giả chỉnh thủ công trong `E.parts.json`; mốc khớp chỉnh thủ công trong `E/landmarks.json`. Không tô pixel thủ công lên ảnh đầu ra. Ánh sáng NW và đồng nhất phong cách vẫn phải duyệt bằng mắt; đăng ký không tự chứng minh cổng QA.\n\nĐường dẫn ảnh thô được chọn: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/<id>.png`; ảnh RGBA @2x: `assets-src/placeholder/kiem-tu-continuous-v1/E/<id>.png`; mask tái tạo từ manifest bằng lệnh `node tools/procgen/scripts/continuous_parts.mjs masks <thư-mục-tạm>`. Mỗi JSON cạnh ảnh thô giữ prompt và tham chiếu gốc.\n';
+  for (const e of entries) section += `\n### KT3 / ${e.id}\n\n- UTC bắt đầu: ${e.utcStart}; công cụ: ${e.tool}; model: ${e.model}; CLI: ${e.cli}.\n- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: \`${e.selectedOutput}\`.\n- Prompt đầy đủ:\n\n\`\`\`text\n${e.prompt}\n\`\`\`\n`;
+  fs.writeFileSync(filename, previous + section);
+  console.log(`Logged ${entries.length} generation prompts`);
+} else if (mode === 'masks') {
+  const out = process.argv[3];
+  if (!out) throw new Error('Usage: node continuous_parts.mjs masks <working-directory>');
+  fs.mkdirSync(out, { recursive: true });
+  for (const part of manifest.parts) maskFor(part).save(path.join(out, `${part.id}_mask4x.png`));
+  console.log(`Wrote ${manifest.parts.length} part masks`);
+} else {
+  const reports = manifest.parts.map(processPart).filter(Boolean);
+  const out = process.argv[3];
+  if (out) fs.writeFileSync(out, JSON.stringify({ method: 'alpha cleanup, bounds registration, per-material ranked palette transfer 75%, area downsample', reports }, null, 2) + '\n');
+  console.log(JSON.stringify(reports.map(r => ({ id: r.id, bounds: r.finalBounds2x })), null, 2));
+}

@@ -1,0 +1,13 @@
+{
+  "id": "leg_L",
+  "prompt": "ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY far LEFT WHOLE LEG from upper thigh through knee/shin/ankle to foot/boot, ONE continuous connected piece. Straight relaxed leg, dark charcoal trousers continuing fully up to hidden hip, plain smooth knee (no bands or cuts), master dark brown-charcoal boot with restrained ivory sole trim, foot pointing RIGHT. Top atsourcey120, knee185, ankle~122219, toe140228. Never split thigh/shin/boot. Same muted master style, NO robe, skirt or other leg.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/leg_L_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:45:04 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/leg_L.png"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "robe_back",
+  "prompt": "Create ONE production transparent cutout for concept-A Kiếm tu EAST-facing 2D isometric RPG, TRACK 2 drawn-for-rig. Image1 is the MASTER style/palette/NW-light reference; image2 is the full512square REGION MASK. Draw ONLY the white shape as the requested full part, black must be transparent RGBA, with exact shared-canvas placement and scale. Do not center/enlarge/crop. Fully paint hidden regions, no cut-from-finished-image gaps or inter-part cast shadows. Muted slate blue, warm ivory, restrained antique gold, fine soft brown-gray outline, understated cloth folds, same master proportions. Clean opaque paint and1–2px antialias outer edge, no glow/background haze. No text, guides, anatomy outside requested piece, weapons or other parts. ONLY wide continuous BACK ROBE SKIRT PANEL waist-to-hem. Full muted slate-blue cloth, slim gold hem, plausible long vertical folds, NO legs, boots, hands, sword, belt or torso. Entire interior solid painted including area normally hidden behind legs/front skirt. Top startsy110source and overlaps beneath waist; width mask should allow thigh weighting. No division into disconnected islands.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/robe_back_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:42:12 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/robe_back.png"
+}

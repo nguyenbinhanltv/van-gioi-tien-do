@@ -1,0 +1,13 @@
+{
+  "id": "head",
+  "prompt": "ONE production art part for EAST-facing Kiếm tu concept-A continuous-limb rig. Image1 master style/palette/NW-light reference; LAST image white-region mask controls EXACT placement/shape/scale in full512square canvas. Black region is genuine transparent RGBA. Do not center, enlarge or crop. Match fine brown-gray outlines, subdued earthy palette, NW lighting, slim proportions. Paint all hidden interior, clean edges1–2pxAA, no glow/haze/guide/text. Do not include unrequested parts or cast shadows. ONLY bare FACE BASE + ear + jaw in exact EAST/RIGHT side profile, matching master young male cultivator skin/proportions. No hair, eyes, brows, eyelashes, mouth, facial decoration or neck garment. Leave eye/mouth areas plain skin for separate swaps, not empty holes. Match sourcefaceregion aroundx122..148 y43..70; right-facing nose/jaw/ear contour, subtle NW light, warm desaturated skin, thin master lineweight. NO frontal face, extra eye or detached feature.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/head_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:45:04 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/head.png"
+}

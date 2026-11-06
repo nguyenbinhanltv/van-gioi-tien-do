@@ -1,0 +1,13 @@
+{
+  "id": "hair_front_3",
+  "prompt": "Generate ONE separately drawn production hair/accessory piece for concept-A EAST/right-facing cultivator. First image MASTER establishes exact style muted palette thin brown-gray outline and NW light; LAST IMAGE white REGION MASK establishes full512canvas location, scale, silhouette. Preserve shared-canvas registration, do NOT center or enlarge. White part ONLY, all else genuine transparent RGBA, no haze/glow/background/text. Paint hidden overlap at root fully. Same dark brown long hair, restrained fine strands, not shiny black/anime. One continuous chain-friendly tapered piece, neutral flowing downward, no baked extreme curl or split disconnected islands. NO face, body, other hair/accessories unless requested. ONLY third separate slim side hair strand near ear, darkbrown, taperdownward, solid hidden root, continuous chainfriendly strip. No head/ear/face/haircap.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/hair_front_3_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:47:39 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hair_front_3.png"
+}

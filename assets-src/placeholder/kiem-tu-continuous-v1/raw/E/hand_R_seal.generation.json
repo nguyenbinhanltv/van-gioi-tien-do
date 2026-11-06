@@ -1,0 +1,13 @@
+{
+  "id": "hand_R_seal",
+  "prompt": "Draw ONE anatomical RIGHT/NEAR hand swap for concept-A EAST/right-facing male cultivator. MASTER first image supplies skin tone, lineweight, NW lighting; LAST IMAGE white REGION MASK fixes position/scale on full512canvas. Only skin hand+wrist, all else genuine transparent RGBA, no haze/background/text. No weapon/sleeve/arm/body. Desaturated warm light skin, delicate brown-gray outlines, subtle NW shading, correct five-finger anatomy, slim adult male proportions. Wrist top atsource2x(126,130), wristjoint(128,138); extend8texturepx upward to hide under cuff. Hand hangs down/right in shared rest orientation, no recenter/enlarge/crop. Paint fingers as requested, fingers may extend within this mask. TWO-FINGER SWORD SEAL (kiếm quyết): index and middle straight together pointing down-right in the bind pose; ring/little folded into palm under thumb. Anatomically coherent right hand, no weapon/effect.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/hand_R_seal_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:56:25 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hand_R_seal.png"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "hand_L_seal",
+  "prompt": "Draw ONE anatomical LEFT/FAR hand swap for concept-A EAST/right-facing male cultivator. MASTER first image is skin/palette/line/NW-light reference; LAST white REGION MASK fixes location/shape/scale on full512square canvas. Genuine transparent RGBA elsewhere, no haze/background/text. NO sleeve/arm/body/object/weapon. Warm desaturated light skin, fine brown-gray outline, slim adultmale hand, coherent five fingers. Left wrist top source2x(116,126), wristjoint(116,134),8texturepx overlap undercuff, hand hangs down/right at same bind orientation; no recenter/enlarge/crop. Slight far-side shade only. LEFT TWO-FINGER SWORD SEAL (kiếm quyết), index/middle straight together down-right in bindpose, ring/little folded with thumb, coherent anatomy. No magicaleffect.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/hand_L_seal_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:59:19 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/hand_L_seal.png"
+}

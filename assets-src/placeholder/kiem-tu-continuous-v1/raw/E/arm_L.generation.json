@@ -1,0 +1,14 @@
+{
+  "id": "arm_L",
+  "prompt": "TRACK 2 production art, continuous-limb 2D isometric cultivation RPG. Image1 is the canonical concept-A EAST-facing character master at4x (512square), STYLE/PALETTE/LIGHTING reference only. LAST IMAGE is the REGION/PART MASK: white is this whole piece, black must become fully transparent. Keep full512square canvas, exact white-region placement, scale and neutral pose, no centering, cropping or enlarging. Generate ONE continuous opaque piece, never cut the elbow into separate upper/lower pieces. Slim natural sleeve volume matching the reference, not puffy tubes or bulbous caps; nearly straight/slightly relaxed hanging arm, approximately constant width, a few long restrained folds only. No baked elbow bend, cast shadow between parts, kneepad-like band, elbow cuff, hidden hole or chopped joint edge. Muted warm ivory cloth, fine brown-gray contour, subdued gray-beige shading, consistent NW illumination. Clean outer contour with1-2texturepx AA; hidden shoulder/wrist regions painted solid and plausible. NO sword, guard, weapon, torso, vest, head, detached pieces, captions or guides. A plain cuff base belongs only at the wrist. Hand display is separate: include just a small skin hand-base/wrist stub that will sit under that display, NO fingers or complete hand. Genuine transparent RGBA elsewhere; black is not background paint. ONLY anatomical LEFT/far whole arm base. Canvas4x landmarks shoulder(224,172), elbow(220,220), wrist(232,268), small skin stub around(232,276). White root tab extending toward the vest is HIDDEN shoulder cloth continuation, not a second arm: paint fully, at least14rigpx/28texturepx of shoulder overlap underneath vest. Keep it continuous with the arm, not a separate blob. Far arm uses the SAME ivory cloth/palette and NW light with only restrained additional shade. Match neutral narrow mask, no folded/bent elbow.",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-17/assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "D:/Temp/vgtd-track2-E/arm_L_mask4x.png"
+  ],
+  "utcStart": "2026-11-06 00:36:57 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "cli": "codex-cli 0.164.0",
+  "selectedOutput": "assets-src/placeholder/kiem-tu-continuous-v1/raw/E/arm_L.png",
+  "utcEnd": "2026-11-06 00:39 UTC"
+}
