@@ -1,0 +1,37 @@
+{
+  "algorithm": "sha256 decoded premultiplied RGBA row-major per cell",
+  "selectedCells0based": [5],
+  "before": {
+    "file": "sheets/attack_3.selected.png",
+    "sha256": "2b27b0009d62b30f58872fde2b61f54e7914cab2bf648d30624f0a51d8f36abb",
+    "cells": [
+      "5286931e005836b75870b45436b446a12b4cde42d4d44590790b575801a4b6e6",
+      "8975c1232e08b95323e565a3237dc056349b8c1551b46af43116639ae04223c1",
+      "d812ace2c408f5456c17c66e92d8be497fefed4c04192ddfeec39b11c8207eb1",
+      "51a42d36463bdd75b8966674ead599da32d1d90bad96ec6bcc65ce07412ba213",
+      "a657a13a065f967551038ebc33bbfe352675d44b28d96eade1fda03ad0993b6a",
+      "fe03314caed5ee9214768b255d391bdce2da23b474c287d237253cf8cac31e7e",
+      "3ca219ac7de7e5f82df7ddc5319fb47705d94d87ae264ebc454c8301c44a13b0",
+      "b96d50599303cfbbabf698a5b52a1587985a3aca99fa528cfc9875d8c7c0ed97"
+    ]
+  },
+  "after": {
+    "file": "sheets/attack_3.final-selected.png",
+    "sha256": "fe2e9e53e2311bf2b2c77019f9501cf4faa291fbd94ceb0c7e63fff37a6929ff",
+    "cells": [
+      "5286931e005836b75870b45436b446a12b4cde42d4d44590790b575801a4b6e6",
+      "8975c1232e08b95323e565a3237dc056349b8c1551b46af43116639ae04223c1",
+      "d812ace2c408f5456c17c66e92d8be497fefed4c04192ddfeec39b11c8207eb1",
+      "51a42d36463bdd75b8966674ead599da32d1d90bad96ec6bcc65ce07412ba213",
+      "a657a13a065f967551038ebc33bbfe352675d44b28d96eade1fda03ad0993b6a",
+      "5f839fde62758368a53f709bf85359bc255d0a9c415b5048c07976109aa2b0b3",
+      "3ca219ac7de7e5f82df7ddc5319fb47705d94d87ae264ebc454c8301c44a13b0",
+      "b96d50599303cfbbabf698a5b52a1587985a3aca99fa528cfc9875d8c7c0ed97"
+    ]
+  },
+  "editedRaw": {
+    "file": "sheets/attack_3.repair2.generated.png",
+    "sha256": "8d9a76746a522c7b8842b55d347c2bcb5fddf642e647e3ffe68820428eeca5f5"
+  },
+  "method": "Public repairCell; other7 cells unchanged; no per-frame scale."
+}

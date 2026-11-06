@@ -1,0 +1,66 @@
+{
+  "selectedCells0based": [2, 3, 4, 8],
+  "targets": [
+    {
+      "cell0based": 2,
+      "before": {
+        "left": 119,
+        "right": 246,
+        "top": 11,
+        "bottom": 333,
+        "height": 322,
+        "width": 127,
+        "pelvisX": 174.39283437460156
+      },
+      "targetTop": 11,
+      "targetSole": 346,
+      "extendRawPixels": 13
+    },
+    {
+      "cell0based": 3,
+      "before": {
+        "left": 116,
+        "right": 245,
+        "top": 11,
+        "bottom": 333,
+        "height": 322,
+        "width": 129,
+        "pelvisX": 175.93041075241803
+      },
+      "targetTop": 11,
+      "targetSole": 346,
+      "extendRawPixels": 13
+    },
+    {
+      "cell0based": 4,
+      "before": {
+        "left": 116,
+        "right": 247,
+        "top": 11,
+        "bottom": 331,
+        "height": 320,
+        "width": 131,
+        "pelvisX": 174.9718978570512
+      },
+      "targetTop": 11,
+      "targetSole": 346,
+      "extendRawPixels": 15
+    },
+    {
+      "cell0based": 8,
+      "before": {
+        "left": 116,
+        "right": 246,
+        "top": 11,
+        "bottom": 333,
+        "height": 322,
+        "width": 130,
+        "pelvisX": 175.73382671940794
+      },
+      "targetTop": 11,
+      "targetSole": 346,
+      "extendRawPixels": 13
+    }
+  ],
+  "method": "Guide/mask only; no final character pixels painted. Target raw height237@256, lockedscale unchanged."
+}
