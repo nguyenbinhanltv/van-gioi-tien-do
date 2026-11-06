@@ -30,5 +30,8 @@
     "@vgtd/character": "*",
     "@vgtd/rig": "*",
     "@vgtd/shared": "*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.5"
   }
 }

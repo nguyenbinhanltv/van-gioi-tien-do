@@ -84,6 +84,7 @@ describe('runProject (synthetic end to end)', () => {
     expect(dieRec.post.height).toBeLessThan(120);
     expect(dieRec.post.soleY).toBe(232);
     expect(c.atlas.pages).toBe(1);
+    expect(c.atlas).not.toHaveProperty('textures');
     expect(c.atlas.regions).toBe(8);
     expect(c.qa.findings.filter((f) => f.gate === 'present')).toHaveLength(0);
     // outputs

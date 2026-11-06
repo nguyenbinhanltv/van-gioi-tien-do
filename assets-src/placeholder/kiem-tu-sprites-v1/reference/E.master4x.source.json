@@ -18,7 +18,7 @@
     "note": "This non-main working commit supplied the earlier history; it is not the durable source pin. The sourcePath/sourceCommit above identify the PR80 asset on main, and this PR archives the exact512px output.",
     "tool": "image_gen.imagegen",
     "model": "undisclosed by tool",
-    "cli": "codex-cli0.164.0",
+    "cli": "codex-cli 0.164.0",
     "terms": "https://openai.com/policies/row-terms-of-use/"
   },
   "generationAlias": {

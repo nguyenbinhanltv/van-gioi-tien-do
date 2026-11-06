@@ -6,12 +6,12 @@
     {
       "clip": "run",
       "dir": "E",
-      "cell": 2,
+      "cell": 4,
       "gate": "footSlide",
       "metric": "ghost_offset_px_R",
-      "value": 29.3,
+      "value": 35.7,
       "limit": 20,
-      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
       "status": "open",
       "owner": "van-gioi-tien-do-17",
       "added": "2026-11-06"
@@ -19,12 +19,12 @@
     {
       "clip": "run",
       "dir": "E",
-      "cell": 3,
+      "cell": 5,
       "gate": "footSlide",
       "metric": "ghost_offset_px_R",
-      "value": 34,
+      "value": 31.6,
       "limit": 20,
-      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
       "status": "open",
       "owner": "van-gioi-tien-do-17",
       "added": "2026-11-06"
@@ -58,12 +58,12 @@
     {
       "clip": "run",
       "dir": "E",
-      "cell": 8,
+      "cell": 10,
       "gate": "footSlide",
       "metric": "ghost_offset_px_L",
-      "value": 26.8,
+      "value": 999,
       "limit": 20,
-      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
       "status": "open",
       "owner": "van-gioi-tien-do-17",
       "added": "2026-11-06"
@@ -71,12 +71,12 @@
     {
       "clip": "run",
       "dir": "E",
-      "cell": 9,
+      "cell": 11,
       "gate": "footSlide",
       "metric": "ghost_offset_px_L",
-      "value": 24.7,
+      "value": 999,
       "limit": 20,
-      "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+      "note": "D41 full-production baseline: actual flat-sole contacts annotated in run-contacts.json. Wrong lifted-foot probes pruned, not claimed as stride fixes. Generated contact feet still mismatch old ghosts;999 is not-found sentinel, not measured distance. No speed or tolerance change.",
       "status": "open",
       "owner": "van-gioi-tien-do-17",
       "added": "2026-11-06"

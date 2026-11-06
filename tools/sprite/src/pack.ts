@@ -63,8 +63,8 @@ function nextPow2(n: number): number {
 }
 
 /**
- * Shelf-pack `inputs` (sorted by height, then name: deterministic) into as few pages as needed. Each page is the
- * smallest power-of-two square that holds its shelf layout, never above `maxPage`.
+ * MaxRects best-short-side-fit, without rotation. Stable name tie breaks make input order irrelevant.
+ * Each page is the smallest power-of-two square found for its group, never above `maxPage`.
  */
 export function packFrames(
   inputs: readonly PackInput[],
@@ -79,24 +79,69 @@ export function packFrames(
     if (it.trim.width + 2 * slot > maxPage || it.trim.height + 2 * slot > maxPage)
       throw new RangeError(`frame ${it.name} (${it.trim.width}x${it.trim.height}) does not fit a ${maxPage}px page`);
 
-  // greedy page assignment: fill a page until its shelf layout exceeds maxPage
+  if (!Number.isInteger(maxPage) || maxPage < 64 || (maxPage & (maxPage - 1)) !== 0)
+    throw new RangeError('maxPage must be a power of two >= 64');
+  if (new Set(inputs.map((i) => i.name)).size !== inputs.length) throw new RangeError('frame names must be unique');
+
   const placePage = (list: typeof items, size: number) => {
-    let x = slot;
-    let y = slot;
-    let row = 0;
+    type Rect = { x: number; y: number; width: number; height: number };
+    let free: Rect[] = [{ x: 0, y: 0, width: size, height: size }];
+    const pending = [...list];
     const out: { name: string; x: number; y: number; item: (typeof items)[number] }[] = [];
-    for (const it of list) {
-      const w = it.trim.width;
-      const h = it.trim.height;
-      if (x + w + slot > size) {
-        x = slot;
-        y += row + 2 * slot;
-        row = 0;
+    while (pending.length) {
+      let best: { index: number; rect: Rect; short: number; long: number } | undefined;
+      pending.forEach((item, index) => {
+        const width = item.trim.width + 2 * slot;
+        const height = item.trim.height + 2 * slot;
+        for (const r of free) {
+          if (width > r.width || height > r.height) continue;
+          const short = Math.min(r.width - width, r.height - height);
+          const long = Math.max(r.width - width, r.height - height);
+          if (
+            !best ||
+            short < best.short ||
+            (short === best.short &&
+              (long < best.long ||
+                (long === best.long && (r.y < best.rect.y || (r.y === best.rect.y && r.x < best.rect.x)))))
+          )
+            best = { index, rect: { x: r.x, y: r.y, width, height }, short, long };
+        }
+      });
+      if (!best) break;
+      const chosen = best as { index: number; rect: Rect };
+      const item = pending.splice(chosen.index, 1)[0]!;
+      const used = chosen.rect;
+      out.push({ name: item.name, x: used.x + slot, y: used.y + slot, item });
+      const split: Rect[] = [];
+      for (const r of free) {
+        if (
+          used.x >= r.x + r.width ||
+          used.x + used.width <= r.x ||
+          used.y >= r.y + r.height ||
+          used.y + used.height <= r.y
+        ) {
+          split.push(r);
+          continue;
+        }
+        if (used.x > r.x) split.push({ ...r, width: used.x - r.x });
+        if (used.x + used.width < r.x + r.width)
+          split.push({ ...r, x: used.x + used.width, width: r.x + r.width - used.x - used.width });
+        if (used.y > r.y) split.push({ ...r, height: used.y - r.y });
+        if (used.y + used.height < r.y + r.height)
+          split.push({ ...r, y: used.y + used.height, height: r.y + r.height - used.y - used.height });
       }
-      if (y + h + slot > size) return null;
-      out.push({ name: it.name, x, y, item: it });
-      x += w + 2 * slot;
-      row = Math.max(row, h);
+      free = split.filter(
+        (r, i) =>
+          !split.some(
+            (other, j) =>
+              j !== i &&
+              other.x <= r.x &&
+              other.y <= r.y &&
+              other.x + other.width >= r.x + r.width &&
+              other.y + other.height >= r.y + r.height &&
+              (j < i || other.x !== r.x || other.y !== r.y || other.width !== r.width || other.height !== r.height),
+          ),
+      );
     }
     return out;
   };
@@ -104,12 +149,10 @@ export function packFrames(
   const groups: (typeof items)[] = [];
   let rest = items;
   while (rest.length) {
-    let take = rest.length;
-    // largest prefix of `rest` that fits one maxPage page
-    while (take > 1 && !placePage(rest.slice(0, take), maxPage)) take = Math.floor(take * 0.9) || 1;
-    while (take < rest.length && placePage(rest.slice(0, take + 1), maxPage)) take++;
-    groups.push(rest.slice(0, take));
-    rest = rest.slice(take);
+    const layout = placePage(rest, maxPage);
+    const names = new Set(layout.map((p) => p.name));
+    groups.push(rest.filter((p) => names.has(p.name)));
+    rest = rest.filter((p) => !names.has(p.name));
   }
 
   const trims = new Map<string, Trim>();
@@ -117,13 +160,14 @@ export function packFrames(
   const pages: PackedPage[] = groups.map((g, pi) => {
     let size = 64;
     let layout = placePage(g, size);
-    while (!layout) {
+    while (layout.length !== g.length) {
       size = nextPow2(size + 1);
       layout = placePage(g, size);
     }
     const image = createImage(size, size);
     const regions: AtlasData['regions'][number][] = [];
-    for (const p of layout) {
+    // Preserve the legacy region/display order independently of placement order.
+    for (const p of layout.sort((a, b) => items.indexOf(a.item) - items.indexOf(b.item))) {
       const t = p.item.trim;
       const src = p.item.image;
       // copy the trim, then extrude its border by PACK_EXTRUDE px (premultiplied edge replicate)
