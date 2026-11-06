@@ -26,9 +26,17 @@ for (const relative of batch.projects) {
   const guides = guidesFromMaster(metrics);
   mkdirSync(join(base, 'templates'), { recursive: true });
   for (const clip of project.clips) {
+    const stem = join(base, 'templates', clip.name + '.template');
     const gait = clip.name === 'walk' || clip.name === 'run' ? clip.name : null;
+    // Existing generation guides are provenance. Non-E gait guides need measured stance width from the CLI.
+    const needsTemplate = !existsSync(stem + '.png') || !existsSync(stem + '.json');
+    if (needsTemplate && gait && project.direction !== 'E')
+      throw new Error(
+        `${project.direction}/${clip.name}: create measured directional guides with sprite:template first`,
+      );
     const cells = gait
       ? locomotionCells(clip.frames, guides, {
+          direction: project.direction,
           halfStride: halfStrideFor(groundSpeedPxS(gait, project.direction)!, clip.durationSec),
           lift: gait === 'run' ? 16 : 10,
           first: 'R',
@@ -41,9 +49,13 @@ for (const relative of batch.projects) {
       guides,
       ...(cells ? { cells } : {}),
     });
-    const stem = join(base, 'templates', clip.name + '.template');
-    writeFileSync(stem + '.png', encodePng(template.image));
-    writeFileSync(stem + '.json', JSON.stringify(template.manifest, null, 2) + '\n');
+    if (needsTemplate) {
+      writeFileSync(stem + '.png', encodePng(template.image));
+      writeFileSync(stem + '.json', JSON.stringify(template.manifest, null, 2) + '\n');
+    }
+
+    // Declared raw-sheet preparation belongs to the shared build/batch pipeline.
+    if (project.preparation) continue;
 
     const target = resolve(base, clip.sheet);
     const source = target.replace(/\.png$/, '.generated.png');
