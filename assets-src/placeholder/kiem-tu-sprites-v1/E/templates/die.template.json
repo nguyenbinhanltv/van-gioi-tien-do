@@ -1,0 +1,52 @@
+{
+  "clip": "die",
+  "grid": {
+    "cols": 4,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 8,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 130,
+    "centerX": 128.15341641598624
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "stunned"
+    },
+    {
+      "leading": null,
+      "tag": "knees_soften"
+    },
+    {
+      "leading": null,
+      "tag": "buckle"
+    },
+    {
+      "leading": null,
+      "tag": "kneel"
+    },
+    {
+      "leading": null,
+      "tag": "fall"
+    },
+    {
+      "leading": null,
+      "tag": "land"
+    },
+    {
+      "leading": null,
+      "tag": "settle"
+    },
+    {
+      "leading": null,
+      "tag": "hold"
+    }
+  ],
+  "width": 1024,
+  "height": 512
+}
