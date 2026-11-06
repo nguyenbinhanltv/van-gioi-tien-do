@@ -1767,6 +1767,8 @@ Cùng trạng thái placeholder và chủ art tạm thời như phần trên. Pr
 | `assets-src/placeholder/dan-phu-tu-sprite-v1/SE/templates/tribulation.template.png`     | Nội bộ: `@vgtd/sprite`, số đo master SE; manifest cùng tên                                             | AI/nguồn dẫn xuất placeholder; chưa duyệt phát hành, ghi công chưa xác minh | 2026-11-06    | Đan/Phù tu SE D41/D43        |
 | `assets-src/placeholder/dan-phu-tu-sprite-v1/SE/templates/walk.template.png`            | Nội bộ: `@vgtd/sprite`, số đo master SE; manifest cùng tên                                             | AI/nguồn dẫn xuất placeholder; chưa duyệt phát hành, ghi công chưa xác minh | 2026-11-06    | Đan/Phù tu SE D41/D43        |
 | `apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_tex.png` | Dẫn xuất 15 sheet SE bằng `@vgtd/sprite`, PMA                                                          | Như nguồn AI; chưa duyệt phát hành                                          | 2026-11-06    | Atlas runtime SE 2048 × 2048 |
+| `assets-src/placeholder/dan-phu-tu-sprite-v1/SE/generation-templates/walk.template.png` | Nội bộ: đầu vào sinh ảnh gốc SE; manifest và SHA-256 lưu riêng, không gắn nhãn lại                     | Placeholder nội bộ; chưa duyệt phát hành / ghi công                         | 2026-11-07    | Đan/Phù tu SE D41/D43        |
+| `assets-src/placeholder/dan-phu-tu-sprite-v1/SE/generation-templates/run.template.png`  | Nội bộ: đầu vào sinh ảnh gốc SE; manifest và SHA-256 lưu riêng, không gắn nhãn lại                     | Placeholder nội bộ; chưa duyệt phát hành / ghi công                         | 2026-11-07    | Đan/Phù tu SE D41/D43        |
 
 ### Đan/Phù tu S — nguồn toàn bộ clip D43
 

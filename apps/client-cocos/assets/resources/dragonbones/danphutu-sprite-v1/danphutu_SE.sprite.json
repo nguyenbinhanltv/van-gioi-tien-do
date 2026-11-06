@@ -44,6 +44,21 @@
       "frames": 12,
       "kind": "upright",
       "sheetSha1": "61db234a46f61db14912ac143675070b78df2dbd",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "1e32aa78d4c89d4d3179141a4c614c7147d7dd5e"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -240,6 +255,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "16076ae76100b58d3130f5dde8bade4b2631bef6",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "56c5d08d6bd3d0100807e19d9ca34a9e11bba676"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -384,6 +414,21 @@
       "frames": 8,
       "kind": "upright",
       "sheetSha1": "8224f3b6764139091e469377c767f2ac08ac166f",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "110c2408f0ea123e672a0ee76a40c049347c38bd"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -398,12 +443,12 @@
             "soleY": 217.004329004329
           },
           "post": {
-            "height": 212,
-            "pelvisX": 127.58806818181819,
-            "soleY": 232
+            "height": 213,
+            "pelvisX": 127.52760111930806,
+            "soleY": 243
           },
           "dx": 12.21179853045544,
-          "dy": 14.995670995670991
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -412,12 +457,12 @@
             "soleY": 209.8008658008658
           },
           "post": {
-            "height": 205,
-            "pelvisX": 127.49739511927612,
-            "soleY": 232
+            "height": 206,
+            "pelvisX": 127.64454976303317,
+            "soleY": 236
           },
           "dx": 12.271544867470155,
-          "dy": 22.199134199134193
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -426,12 +471,12 @@
             "soleY": 213.40259740259742
           },
           "post": {
-            "height": 209,
-            "pelvisX": 127.5165100671141,
-            "soleY": 232
+            "height": 208,
+            "pelvisX": 127.54220430107527,
+            "soleY": 239
           },
           "dx": 10.393094813919802,
-          "dy": 18.597402597402578
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -441,11 +486,11 @@
           },
           "post": {
             "height": 209,
-            "pelvisX": 127.52622673434855,
-            "soleY": 232
+            "pelvisX": 127.53062376517076,
+            "soleY": 240
           },
           "dx": 9.463257038939432,
-          "dy": 17.69696969696969
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -456,10 +501,10 @@
           "post": {
             "height": 211,
             "pelvisX": 127.70601919162547,
-            "soleY": 232
+            "soleY": 241
           },
           "dx": 9.888629866051474,
-          "dy": 16.7965367965368
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -469,11 +514,11 @@
           },
           "post": {
             "height": 208,
-            "pelvisX": 127.61981883063409,
-            "soleY": 232
+            "pelvisX": 127.59198242723778,
+            "soleY": 238
           },
           "dx": 13.09231312547827,
-          "dy": 19.497835497835496
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -483,11 +528,11 @@
           },
           "post": {
             "height": 212,
-            "pelvisX": 127.35473927562292,
-            "soleY": 232
+            "pelvisX": 127.33572526909278,
+            "soleY": 242
           },
           "dx": 13.075746898523334,
-          "dy": 15.896103896103881
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -497,11 +542,11 @@
           },
           "post": {
             "height": 213,
-            "pelvisX": 127.48695211553078,
-            "soleY": 232
+            "pelvisX": 127.47234150037889,
+            "soleY": 243
           },
           "dx": 12.083339222436308,
-          "dy": 14.995670995670991
+          "dy": 25.80086580086578
         }
       ],
       "regions": [
@@ -520,6 +565,21 @@
       "frames": 10,
       "kind": "upright",
       "sheetSha1": "c408f6a83df6a737fdba04373a0349ccc13315fb",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "1e0a03bfa5337e3c90afa6599c1c8c55e0f29904"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -535,11 +595,11 @@
           },
           "post": {
             "height": 213,
-            "pelvisX": 127.5685520361991,
-            "soleY": 232
+            "pelvisX": 127.40850776502363,
+            "soleY": 245
           },
           "dx": 7.562550597289132,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -549,11 +609,11 @@
           },
           "post": {
             "height": 213,
-            "pelvisX": 127.57264027838191,
-            "soleY": 232
+            "pelvisX": 127.39705563974886,
+            "soleY": 245
           },
           "dx": 11.856299820646171,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -562,12 +622,12 @@
             "soleY": 217.90476190476193
           },
           "post": {
-            "height": 211,
-            "pelvisX": 127.56511156186613,
-            "soleY": 232
+            "height": 212,
+            "pelvisX": 127.48755816305886,
+            "soleY": 244
           },
           "dx": 17.692206964883752,
-          "dy": 14.095238095238074
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -577,11 +637,11 @@
           },
           "post": {
             "height": 211,
-            "pelvisX": 127.70068853786958,
-            "soleY": 232
+            "pelvisX": 127.59245054501413,
+            "soleY": 245
           },
           "dx": 17.116861107250543,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -591,11 +651,11 @@
           },
           "post": {
             "height": 210,
-            "pelvisX": 127.47683566433567,
-            "soleY": 232
+            "pelvisX": 127.32030401737242,
+            "soleY": 245
           },
           "dx": 14.3698302173093,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -605,11 +665,11 @@
           },
           "post": {
             "height": 212,
-            "pelvisX": 127.53200089827082,
-            "soleY": 232
+            "pelvisX": 127.47788203753352,
+            "soleY": 245
           },
           "dx": 7.674456808873288,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -619,11 +679,11 @@
           },
           "post": {
             "height": 208,
-            "pelvisX": 127.70131315379479,
-            "soleY": 232
+            "pelvisX": 127.70893692890573,
+            "soleY": 240
           },
           "dx": 10.830818848338225,
-          "dy": 17.69696969696969
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -633,11 +693,11 @@
           },
           "post": {
             "height": 212,
-            "pelvisX": 127.41658758777757,
-            "soleY": 232
+            "pelvisX": 127.39253222137984,
+            "soleY": 243
           },
           "dx": 16.566311792791225,
-          "dy": 14.995670995670991
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -647,11 +707,11 @@
           },
           "post": {
             "height": 210,
-            "pelvisX": 127.50319390067999,
-            "soleY": 232
+            "pelvisX": 127.4821979831241,
+            "soleY": 243
           },
           "dx": 16.01831397973784,
-          "dy": 14.995670995670991
+          "dy": 25.80086580086578
         },
         {
           "pre": {
@@ -661,11 +721,11 @@
           },
           "post": {
             "height": 210,
-            "pelvisX": 127.53991788321167,
-            "soleY": 232
+            "pelvisX": 127.40345690243348,
+            "soleY": 245
           },
           "dx": 14.761740713920972,
-          "dy": 13.194805194805184
+          "dy": 25.80086580086578
         }
       ],
       "regions": [
@@ -686,6 +746,21 @@
       "frames": 6,
       "kind": "free",
       "sheetSha1": "fe80d767289e8fff15185b0e6af9e01bd9c5a5a4",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "fc3219c2d6286b5308be91af21a01cbd8dc86603"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -796,6 +871,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "19eb3cea35ae60718985b166c775d3ddfdfa9e1d",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "0afb4bc283f98ff91c61c6a1fceda9679fc27e2b"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -932,6 +1022,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "6a8f2c21964b0ee38abd12405f4e817025c28e6c",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "e00c4da7a7cc196fbb930926fc1d8fb9f8da97a2"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1102,6 +1207,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "184d8106a491508df0f87228841fc096c62a13de",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "ada81da69d163b5e2334308be021b880060af070"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1276,6 +1396,21 @@
       "frames": 10,
       "kind": "free",
       "sheetSha1": "817fce26b70f57a9314f85c7d353cd6e4a23b167",
+      "preparation": {
+        "raw": [
+          1983,
+          793
+        ],
+        "normalized": [
+          1280,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 793,
+        "dpiScaleX": 0.6454866364094806,
+        "dpiScaleY": 0.6456494325346784,
+        "rawSha1": "16cf863a656bed369265a31e4cdb6e06dae850df"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1449,6 +1584,21 @@
       "frames": 14,
       "kind": "free",
       "sheetSha1": "172ea108f4de0c4d4e43e8a70e38b23985c44289",
+      "preparation": {
+        "raw": [
+          1619,
+          971
+        ],
+        "normalized": [
+          1280,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 971,
+        "dpiScaleX": 0.7906114885731933,
+        "dpiScaleY": 0.7909371781668383,
+        "rawSha1": "2cb5744c827fa6e642b3b5984fffe4d29ca1c0a5"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1675,6 +1825,21 @@
       "frames": 8,
       "kind": "free",
       "sheetSha1": "d965486e262d0ae31aafb6cb9cd78e64663a9805",
+      "preparation": {
+        "raw": [
+          1774,
+          887
+        ],
+        "normalized": [
+          1024,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 887,
+        "dpiScaleX": 0.5772266065388951,
+        "dpiScaleY": 0.5772266065388951,
+        "rawSha1": "52b0272c720ac4e85faeeccf3362d258f12024c1"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1811,6 +1976,21 @@
       "frames": 4,
       "kind": "free",
       "sheetSha1": "121cfc74a7ccab28de3c2193c6206a6e1bc133fe",
+      "preparation": {
+        "raw": [
+          1254,
+          1254
+        ],
+        "normalized": [
+          512,
+          512
+        ],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.4082934609250399,
+        "dpiScaleY": 0.4082934609250399,
+        "rawSha1": "40a296e16122bcc9d03b61a75077ead074a5e6b4"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -1887,6 +2067,21 @@
       "frames": 12,
       "kind": "free",
       "sheetSha1": "8026d5e866695191cbe35a7a88f2212a9ce6cebd",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "7d39a5c46b67d971dd2e4067ab077c5887abd5f5"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -2093,6 +2288,21 @@
       "frames": 24,
       "kind": "free",
       "sheetSha1": "ac40cab3e6cca2365092a529fb1e15b120125e5b",
+      "preparation": {
+        "raw": [
+          1536,
+          1024
+        ],
+        "normalized": [
+          1536,
+          1024
+        ],
+        "cropTop": 0,
+        "cropBottom": 1024,
+        "dpiScaleX": 1,
+        "dpiScaleY": 1,
+        "rawSha1": "16893f9e3c40e77054759a80db323628cf42610c"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -2469,6 +2679,21 @@
       "frames": 12,
       "kind": "upright",
       "sheetSha1": "a936ba6a9f78f22ad0831159b69339a129307e65",
+      "preparation": {
+        "raw": [
+          1448,
+          1086
+        ],
+        "normalized": [
+          1024,
+          768
+        ],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889,
+        "rawSha1": "e1c937c61c1093aab7485328c70a2a57a6d280bf"
+      },
       "calibration": {
         "scale": 0.9004329004329005,
         "targetHeight": 208,
@@ -2750,133 +2975,113 @@
       },
       {
         "gate": "footSlide",
-        "severity": "warn",
+        "severity": "fail",
         "clip": "walk",
-        "frame": 0,
-        "metric": "ghost_offset_px_R",
-        "value": 35.5,
-        "limit": 20,
-        "message": "R planted foot: nearest sole is -35.5 px from its template ghost (x 113.4 vs 148.9, limit 20); not measured (the foot is not on the template)"
+        "frame": 1,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.19,
+        "limit": 3,
+        "message": "R foot slides 6.2 px/frame between frames 0-1 (limit 3)"
       },
       {
         "gate": "footSlide",
-        "severity": "warn",
+        "severity": "fail",
         "clip": "walk",
         "frame": 2,
-        "metric": "ghost_offset_px_R",
-        "value": 23.8,
-        "limit": 20,
-        "message": "R planted foot: nearest sole is 23.8 px from its template ghost (x 151.3 vs 127.6, limit 20); not measured (the foot is not on the template)"
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 21.09,
+        "limit": 3,
+        "message": "R foot slides 21.1 px/frame between frames 1-2 (limit 3)"
       },
       {
         "gate": "footSlide",
-        "severity": "warn",
+        "severity": "fail",
         "clip": "walk",
-        "frame": 3,
-        "metric": "ghost_offset_px_R",
-        "value": 30.7,
-        "limit": 20,
-        "message": "R planted foot: nearest sole is 30.7 px from its template ghost (x 147.6 vs 116.9, limit 20); not measured (the foot is not on the template)"
+        "frame": 5,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.51,
+        "limit": 3,
+        "message": "L foot slides 3.5 px/frame between frames 4-5 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 6,
-        "metric": "slide_px_per_frame_L",
-        "value": 12.67,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 16.17,
         "limit": 3,
-        "message": "L foot slides 12.7 px/frame between frames 5-6 (limit 3)"
+        "message": "L foot slides 16.2 px/frame between frames 5-6 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 7,
-        "metric": "slide_px_per_frame_L",
-        "value": 3.92,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 10.22,
         "limit": 3,
-        "message": "L foot slides 3.9 px/frame between frames 6-7 (limit 3)"
+        "message": "L foot slides 10.2 px/frame between frames 6-7 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 2,
-        "metric": "ghost_offset_px_R",
-        "value": 30.4,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 30.1,
         "limit": 20,
-        "message": "R planted foot: nearest sole is 30.4 px from its template ghost (x 163.9 vs 133.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 30.1 px from its template ghost (xy 161.5,244.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 1,
-        "metric": "slide_px_per_frame_R",
-        "value": 3.03,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.74,
         "limit": 3,
-        "message": "R foot slides 3.0 px/frame between frames 0-1 (limit 3)"
+        "message": "R foot slides 5.7 px/frame between frames 0-1 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 3,
-        "metric": "ghost_offset_px_R",
-        "value": 37.1,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 30.4,
         "limit": 20,
-        "message": "R planted foot: nearest sole is 37.1 px from its template ghost (x 158.7 vs 121.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 30.4 px from its template ghost (xy 100.5,208.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 4,
-        "metric": "ghost_offset_px_R",
-        "value": 25.7,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 20,
         "limit": 20,
-        "message": "R planted foot: nearest sole is 25.7 px from its template ghost (x 135.2 vs 109.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 20.0 px from its template ghost (xy 113.0,204.0 vs 111.5,224.0, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 7,
-        "metric": "ghost_offset_px_L",
-        "value": 34.8,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
         "limit": 20,
-        "message": "L planted foot: nearest sole is 34.8 px from its template ghost (x 168.4 vs 133.6, limit 20); not measured (the foot is not on the template)"
-      },
-      {
-        "gate": "footSlide",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 6,
-        "metric": "slide_px_per_frame_L",
-        "value": 9.02,
-        "limit": 3,
-        "message": "L foot slides 9.0 px/frame between frames 5-6 (limit 3)"
+        "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 168.5,243.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 8,
-        "metric": "ghost_offset_px_L",
-        "value": 39.4,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 34,
         "limit": 20,
-        "message": "L planted foot: nearest sole is 39.4 px from its template ghost (x 161.0 vs 121.6, limit 20); not measured (the foot is not on the template)"
-      },
-      {
-        "gate": "footSlide",
-        "severity": "warn",
-        "clip": "run",
-        "frame": 9,
-        "metric": "ghost_offset_px_L",
-        "value": 34.2,
-        "limit": 20,
-        "message": "L planted foot: nearest sole is 34.2 px from its template ghost (x 143.7 vs 109.6, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is 34.0 px from its template ghost (xy 142.5,202.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "height",
@@ -3435,40 +3640,39 @@
       {
         "finding": {
           "gate": "footSlide",
-          "severity": "warn",
+          "severity": "fail",
           "clip": "walk",
-          "frame": 0,
-          "metric": "ghost_offset_px_R",
-          "value": 35.5,
-          "limit": 20,
-          "message": "R planted foot: nearest sole is -35.5 px from its template ghost (x 113.4 vs 148.9, limit 20); not measured (the foot is not on the template)"
+          "frame": 1,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.19,
+          "limit": 3,
+          "message": "R foot slides 6.2 px/frame between frames 0-1 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
         "entry": {
           "clip": "walk",
           "dir": "SE",
-          "cell": 0,
+          "cell": 1,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 35.5,
-          "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.19,
+          "limit": 3,
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
       {
         "finding": {
           "gate": "footSlide",
-          "severity": "warn",
+          "severity": "fail",
           "clip": "walk",
           "frame": 2,
-          "metric": "ghost_offset_px_R",
-          "value": 23.8,
-          "limit": 20,
-          "message": "R planted foot: nearest sole is 23.8 px from its template ghost (x 151.3 vs 127.6, limit 20); not measured (the foot is not on the template)"
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 21.09,
+          "limit": 3,
+          "message": "R foot slides 21.1 px/frame between frames 1-2 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3477,39 +3681,37 @@
           "dir": "SE",
           "cell": 2,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 23.8,
-          "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 21.09,
+          "limit": 3,
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
       {
         "finding": {
           "gate": "footSlide",
-          "severity": "warn",
+          "severity": "fail",
           "clip": "walk",
-          "frame": 3,
-          "metric": "ghost_offset_px_R",
-          "value": 30.7,
-          "limit": 20,
-          "message": "R planted foot: nearest sole is 30.7 px from its template ghost (x 147.6 vs 116.9, limit 20); not measured (the foot is not on the template)"
+          "frame": 5,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 3.51,
+          "limit": 3,
+          "message": "L foot slides 3.5 px/frame between frames 4-5 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
         "entry": {
           "clip": "walk",
           "dir": "SE",
-          "cell": 3,
+          "cell": 5,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 30.7,
-          "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 3.51,
+          "limit": 3,
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3519,10 +3721,10 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 6,
-          "metric": "slide_px_per_frame_L",
-          "value": 12.67,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 16.17,
           "limit": 3,
-          "message": "L foot slides 12.7 px/frame between frames 5-6 (limit 3)"
+          "message": "L foot slides 16.2 px/frame between frames 5-6 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3531,12 +3733,11 @@
           "dir": "SE",
           "cell": 6,
           "gate": "footSlide",
-          "metric": "slide_px_per_frame_L",
-          "value": 12.67,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 16.17,
           "limit": 3,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3546,10 +3747,10 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 7,
-          "metric": "slide_px_per_frame_L",
-          "value": 3.92,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 10.22,
           "limit": 3,
-          "message": "L foot slides 3.9 px/frame between frames 6-7 (limit 3)"
+          "message": "L foot slides 10.2 px/frame between frames 6-7 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3558,12 +3759,11 @@
           "dir": "SE",
           "cell": 7,
           "gate": "footSlide",
-          "metric": "slide_px_per_frame_L",
-          "value": 3.92,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 10.22,
           "limit": 3,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3573,10 +3773,10 @@
           "severity": "warn",
           "clip": "run",
           "frame": 2,
-          "metric": "ghost_offset_px_R",
-          "value": 30.4,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.1,
           "limit": 20,
-          "message": "R planted foot: nearest sole is 30.4 px from its template ghost (x 163.9 vs 133.6, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is 30.1 px from its template ghost (xy 161.5,244.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3585,12 +3785,11 @@
           "dir": "SE",
           "cell": 2,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 30.4,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.1,
           "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3600,10 +3799,10 @@
           "severity": "fail",
           "clip": "run",
           "frame": 1,
-          "metric": "slide_px_per_frame_R",
-          "value": 3.03,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 5.74,
           "limit": 3,
-          "message": "R foot slides 3.0 px/frame between frames 0-1 (limit 3)"
+          "message": "R foot slides 5.7 px/frame between frames 0-1 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3612,12 +3811,11 @@
           "dir": "SE",
           "cell": 1,
           "gate": "footSlide",
-          "metric": "slide_px_per_frame_R",
-          "value": 3.03,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 5.74,
           "limit": 3,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3627,10 +3825,10 @@
           "severity": "warn",
           "clip": "run",
           "frame": 3,
-          "metric": "ghost_offset_px_R",
-          "value": 37.1,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.4,
           "limit": 20,
-          "message": "R planted foot: nearest sole is 37.1 px from its template ghost (x 158.7 vs 121.6, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is 30.4 px from its template ghost (xy 100.5,208.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3639,12 +3837,11 @@
           "dir": "SE",
           "cell": 3,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 37.1,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 30.4,
           "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3654,10 +3851,10 @@
           "severity": "warn",
           "clip": "run",
           "frame": 4,
-          "metric": "ghost_offset_px_R",
-          "value": 25.7,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 20,
           "limit": 20,
-          "message": "R planted foot: nearest sole is 25.7 px from its template ghost (x 135.2 vs 109.6, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is 20.0 px from its template ghost (xy 113.0,204.0 vs 111.5,224.0, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3666,12 +3863,11 @@
           "dir": "SE",
           "cell": 4,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_R",
-          "value": 25.7,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 20,
           "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3681,10 +3877,10 @@
           "severity": "warn",
           "clip": "run",
           "frame": 7,
-          "metric": "ghost_offset_px_L",
-          "value": 34.8,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 36.5,
           "limit": 20,
-          "message": "L planted foot: nearest sole is 34.8 px from its template ghost (x 168.4 vs 133.6, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 168.5,243.0 vs 132.9,234.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3693,39 +3889,11 @@
           "dir": "SE",
           "cell": 7,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_L",
-          "value": 34.8,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 36.5,
           "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
-          "added": "2026-11-06"
-        }
-      },
-      {
-        "finding": {
-          "gate": "footSlide",
-          "severity": "fail",
-          "clip": "run",
-          "frame": 6,
-          "metric": "slide_px_per_frame_L",
-          "value": 9.02,
-          "limit": 3,
-          "message": "L foot slides 9.0 px/frame between frames 5-6 (limit 3)"
-        },
-        "class": "soft",
-        "verdict": "accepted",
-        "entry": {
-          "clip": "run",
-          "dir": "SE",
-          "cell": 6,
-          "gate": "footSlide",
-          "metric": "slide_px_per_frame_L",
-          "value": 9.02,
-          "limit": 3,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
-          "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -3735,10 +3903,10 @@
           "severity": "warn",
           "clip": "run",
           "frame": 8,
-          "metric": "ghost_offset_px_L",
-          "value": 39.4,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 34,
           "limit": 20,
-          "message": "L planted foot: nearest sole is 39.4 px from its template ghost (x 161.0 vs 121.6, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is 34.0 px from its template ghost (xy 142.5,202.0 vs 122.2,229.3, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -3747,39 +3915,11 @@
           "dir": "SE",
           "cell": 8,
           "gate": "footSlide",
-          "metric": "ghost_offset_px_L",
-          "value": 39.4,
+          "metric": "ghost_distance_2d_px_L",
+          "value": 34,
           "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
+          "note": "SE directional migration: fresh 2D ground/ghost measurements with direction-correct QA guides, vertical keep, stanceWidth=0 and unchanged master-locked scale. First full-set pass retains exact foot drift for later cell-local improvement; retired x-only baselines archived in SE/qa-migration.json. No art, scale or threshold change.",
           "status": "open",
-          "owner": "support-art",
-          "added": "2026-11-06"
-        }
-      },
-      {
-        "finding": {
-          "gate": "footSlide",
-          "severity": "warn",
-          "clip": "run",
-          "frame": 9,
-          "metric": "ghost_offset_px_L",
-          "value": 34.2,
-          "limit": 20,
-          "message": "L planted foot: nearest sole is 34.2 px from its template ghost (x 143.7 vs 109.6, limit 20); not measured (the foot is not on the template)"
-        },
-        "class": "soft",
-        "verdict": "accepted",
-        "entry": {
-          "clip": "run",
-          "dir": "SE",
-          "cell": 9,
-          "gate": "footSlide",
-          "metric": "ghost_offset_px_L",
-          "value": 34.2,
-          "limit": 20,
-          "note": "D41 first full-set pass: retain measured foot trajectory or free-pose redraw deviation for later cell-local improvement; no per-frame rescaling.",
-          "status": "open",
-          "owner": "support-art",
           "added": "2026-11-06"
         }
       },
@@ -4599,7 +4739,7 @@
     "counts": {
       "fail-hard": 0,
       "fail-soft": 0,
-      "accepted": 28,
+      "accepted": 26,
       "regression": 0,
       "info": 37
     }
