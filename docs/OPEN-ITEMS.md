@@ -147,3 +147,7 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 3. Trục socket: pivot-space y lên, không lật (ADR-021, F-02); `head_top` "theo cỡ nhân vật" chưa có công thức (dùng `socketsOverride`).
 4. Quỹ đạo ellipse 36 × 18: rộng × cao đầy đủ hay bán trục (F-05).
 5. Định nghĩa "draw call": số engine báo là chuẩn, `checkRepack` chỉ ước lượng tĩnh (ADR-022, F-03).
+
+## 10. Kiếm tu "chi liền": dáng đi váy dài vs bảng animation
+
+1. `GAIT_PROFILES.robe` (opt-in, `rig:assemble --gait robe`) rút ngắn bước chạy/đi cho váy dài; clip giữ thời lượng bảng animation nhưng `motion.speed` ghi trong clip thấp hơn (run ≈ 0,55 × 150 px/s). Runtime cần `timeScale = tốc độ thực / tốc độ ghi` (≈ 1,8×, nhịp bước nhanh hơn) hoặc chấp nhận thay đổi thời lượng; client chưa làm. **Cần chủ dự án quyết:** chấp nhận nhịp nhanh hơn / sửa bảng animation (docs/03) / bỏ `robe` và dùng dáng từ key pose tham chiếu (`docs/art/rig-keypose.md`).

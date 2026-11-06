@@ -194,3 +194,24 @@ describe('lower-body QA and the robe gait', () => {
     expect((res.rig.chains ?? []).some((c) => c.name === 'skirt_group')).toBe(true);
   });
 });
+
+describe('gait profiles carry the authored ground speed the runtime needs', () => {
+  const res = build({ kind: 'skirt', panel: 'robe_front' });
+  const speed = (name: 'run' | 'walk', gait: keyof typeof GAIT_PROFILES) =>
+    authorKiemTuSet(res.rig, { only: [name], secondary: false, gait: GAIT_PROFILES[gait] })[0]!.motion!.speed;
+
+  it('the robe clips store a lower authored speed (stride / cycle time) than the table gait, in the ratio of speedScale', () => {
+    for (const name of ['run', 'walk'] as const) {
+      const free = speed(name, 'free');
+      const robe = speed(name, 'robe');
+      expect(free).toBeGreaterThan(0);
+      expect(robe / free).toBeCloseTo(GAIT_PROFILES.robe.speedScale, 2);
+    }
+  });
+
+  it('every clip keeps the animation-table duration whatever the gait (only the authored speed changes)', () => {
+    const f = authorKiemTuSet(res.rig, { only: ['run', 'walk'], secondary: false, gait: GAIT_PROFILES.free });
+    const r = authorKiemTuSet(res.rig, { only: ['run', 'walk'], secondary: false, gait: GAIT_PROFILES.robe });
+    expect(r.map((c) => c.frames)).toEqual(f.map((c) => c.frames));
+  });
+});
