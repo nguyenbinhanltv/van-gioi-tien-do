@@ -1,0 +1,101 @@
+{
+  "idle": {
+    "exceptions": {}
+  },
+  "meditate": {
+    "exceptions": {
+      "0": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "1": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "2": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "3": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "4": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "5": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "6": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+      "7": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained"
+    }
+  },
+  "walk": {
+    "exceptions": {},
+    "vertical": "keep"
+  },
+  "run": {
+    "exceptions": {},
+    "vertical": "keep"
+  },
+  "dash": {
+    "exceptions": {
+      "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+    }
+  },
+  "sword_fly": {
+    "exceptions": {}
+  },
+  "attack": {
+    "exceptions": {
+      "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+    }
+  },
+  "attack_2": {
+    "exceptions": {
+      "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "8": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+    }
+  },
+  "attack_3": {
+    "exceptions": {
+      "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+      "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+    }
+  },
+  "cast": {
+    "exceptions": {}
+  },
+  "channel": {
+    "exceptions": {}
+  },
+  "hit": {
+    "exceptions": {}
+  },
+  "die": {
+    "exceptions": {
+      "2": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "3": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "4": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "5": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "6": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "7": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "8": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "9": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "10": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+      "11": "die-collapse: knees buckle then body falls sideways; no anatomical resizing"
+    }
+  },
+  "tribulation": {
+    "exceptions": {}
+  },
+  "emote": {
+    "exceptions": {
+      "6": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+      "7": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+      "8": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+      "9": "bow: neck and torso incline in a respectful greeting; no anatomical resizing"
+    }
+  }
+}

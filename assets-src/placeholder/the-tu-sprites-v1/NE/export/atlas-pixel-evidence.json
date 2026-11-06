@@ -1,0 +1,10 @@
+{
+  "width": 2048,
+  "height": 2048,
+  "regions": 126,
+  "padding": 2,
+  "extrude": 1,
+  "pmaBadPixels": 0,
+  "extrudeMismatchPixels": 0,
+  "paddingNonzeroPixels": 0
+}

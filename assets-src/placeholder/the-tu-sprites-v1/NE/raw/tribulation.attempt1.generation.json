@@ -1,0 +1,18 @@
+{
+  "clip": "tribulation",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:27:41 UTC",
+  "prompt": "Production TRIBULATION NE rear3Q sprite sheet. Image1 exact master, image2 layout/poseguide. EXACT 6 equal SQUARE columns 2 rows,12 full-body frames rowmajor, aspect6:2. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking.  Twelve-frameTRIBULATION brace:1guard;2tense;3fistsrise;4crossedgauntletsinfrontofchestAWAYfromcamera;5shallowkneebend;6headlower;7deepbrace;8hold;9rise;10handslower;11guard;12exactfirst. Rearcloudemblemprominent, no lightning/effects. Full-sizeanatomy. Pure flat opaque#FF00FF, NO borders/gridlines/template marks/text/ghosts. No scenery/shadows/floor/particles/rocks/glow/afterimages/weapons. Allfigures sameanatomicalscale insideowncells.",
+  "references": ["../../the-tu-continuous-v1/reference/NE.master4x.png", "templates/tribulation.template.png"],
+  "selectedOutput": "sheets/tribulation.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:29:25 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-adb17e15-2b37-4b24-b058-77f4376f2d85.png",
+  "originalBackup": "raw/originals/tribulation.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}

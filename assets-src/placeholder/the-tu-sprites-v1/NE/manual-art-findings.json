@@ -1,0 +1,17 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "the-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "kind": "leg_reversal",
+      "clip": "run",
+      "dir": "NE",
+      "cell": 10,
+      "note": "First-pass late-cycle hold: cell10 repeats cell9 after three AI calls. All12 frames and frozen scale retained. Restore unique flight/reversal in polish; automated foot/ghost metrics remain separately judged. Manual diagnostic: contact_hold_frames=2, limit=1.",
+      "severity": "warn",
+      "status": "open"
+    }
+  ]
+}

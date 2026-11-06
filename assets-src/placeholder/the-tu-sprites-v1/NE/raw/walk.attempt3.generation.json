@@ -1,0 +1,19 @@
+{
+  "clip": "walk",
+  "dir": "NE",
+  "attempt": 3,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:20:10 UTC",
+  "prompt": "EDIT image1 walk sheet, SIX square columns TWO rows. Only cells 3,5,10 zero-based (row1col4,row1col6,row2col5) need actual LEG REDRAW; last attempt left them unchanged. Keep all other pixels/cells unchanged. Inside each listed cell KEEP head, hair, torso, arms, gauntlets, tabard, and camera exactly as they are. Extend the SUPPORTING leg naturally DOWN: unfold knee and ankle so the dark boot sole reaches SAME GROUND LINE as cell1 (row1col2). DO NOT shrink or resize anything. Redraw the ivory trouser/shin/boot articulation only. Image2 shows correct anatomical identity. Per256cell supporting sole must be y232, buny18, totalheight214units. Current cell3height202, cells5and10height205 is too short because both boots are high. Add about10..12units of downward leg REACH by straightening the planted knee; keep full-sized anatomy and correct NE rear3Q facing awayupperright. Strong clear contact: ONE boot MUST touch y232. Other swingboot stays raised. Preserve original12-cell canvas, eachcell square, no enlargement ofhead/body. Paletteexactblueivorybronze, flat#FF00FF background, no text, effects, guide marks or shadows. Only requested cells change.",
+  "references": ["raw/walk.attempt2.selected.png", "../../the-tu-continuous-v1/reference/NE.master4x.png"],
+  "selectedOutput": "raw/walk.attempt3.edited.png",
+  "repairCells": [3, 5, 10],
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:20:55 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-dea2c23d-8de1-4c4f-9e54-abd31025b35e.png",
+  "originalBackup": "raw/originals/walk.attempt3.png",
+  "sourceSelectionStatus": "donor generated; only specified cells may be applied",
+  "finalGate": "export/engine-gate.json"
+}
