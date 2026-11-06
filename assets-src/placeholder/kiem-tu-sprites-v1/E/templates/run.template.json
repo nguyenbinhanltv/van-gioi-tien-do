@@ -1,0 +1,188 @@
+{
+  "clip": "run",
+  "grid": {
+    "cols": 6,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 12,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 130,
+    "centerX": 118
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 136,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 100,
+        "y": 232,
+        "planted": false
+      },
+      "tag": "R_contact"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 130,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 106.00000000000001,
+        "y": 225,
+        "planted": false
+      },
+      "tag": "R_down"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 124,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 111.99999999999999,
+        "y": 219.87564434701787,
+        "planted": false
+      },
+      "tag": "R_passing"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 118,
+        "y": 232,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 118,
+        "y": 218,
+        "planted": false
+      },
+      "tag": "R_toeoff"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 112,
+        "y": 231,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 124,
+        "y": 219.87564434701784,
+        "planted": false
+      },
+      "tag": "R_up"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 106,
+        "y": 229,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 130,
+        "y": 225,
+        "planted": false
+      },
+      "tag": "R_precontact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 100,
+        "y": 232,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 136,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_contact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 106.00000000000001,
+        "y": 225,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 130,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_down"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 111.99999999999999,
+        "y": 219.87564434701787,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 124.00000000000001,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_passing"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 118,
+        "y": 218,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 118,
+        "y": 232,
+        "planted": true
+      },
+      "tag": "L_toeoff"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 124.00000000000001,
+        "y": 219.87564434701787,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 111.99999999999999,
+        "y": 231,
+        "planted": false
+      },
+      "tag": "L_up"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 130,
+        "y": 225,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 106.00000000000001,
+        "y": 229,
+        "planted": false
+      },
+      "tag": "L_precontact"
+    }
+  ],
+  "width": 1536,
+  "height": 512
+}

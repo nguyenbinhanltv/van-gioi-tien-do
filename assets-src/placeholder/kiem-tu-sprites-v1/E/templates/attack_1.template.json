@@ -1,0 +1,52 @@
+{
+  "clip": "attack_1",
+  "grid": {
+    "cols": 4,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 8,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 130,
+    "centerX": 128.15341641598624
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "guard"
+    },
+    {
+      "leading": null,
+      "tag": "anticipation"
+    },
+    {
+      "leading": null,
+      "tag": "sword_cock"
+    },
+    {
+      "leading": null,
+      "tag": "launch"
+    },
+    {
+      "leading": null,
+      "tag": "hit"
+    },
+    {
+      "leading": null,
+      "tag": "followthrough"
+    },
+    {
+      "leading": null,
+      "tag": "recovery"
+    },
+    {
+      "leading": null,
+      "tag": "guard_return"
+    }
+  ],
+  "width": 1024,
+  "height": 512
+}
