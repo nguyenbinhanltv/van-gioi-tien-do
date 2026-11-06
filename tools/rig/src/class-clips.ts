@@ -38,8 +38,10 @@ export interface StrikeSpec {
   readonly hit: PoseDelta;
   /** Anticipation two frames before the windup end: weight loaded back, hip turned, the striking arm drawn back. */
   readonly load?: PoseDelta;
-  /** Frames the impact pose is held after the hit frame (2-3 reads as contact). Default 0. */
+  /** Frames the impact pose is held after the hit frame (2-3 reads as contact). Default 0. Capped to leave one frame before `combo`. */
   readonly hold?: number;
+  /** Frame of the combo window (the `cancel_window` event, the end of the hold / start of the recoil). Default 9. */
+  readonly combo?: number;
   /** Pose of the combo window after the hold (recoil). Default: the impact pose scaled by 0.45. */
   readonly recoil?: PoseDelta;
 }
@@ -198,7 +200,10 @@ function channel(rig: RigDocument, spec: ClassClipSpec['channel']): Clip {
   return c.build();
 }
 
-/** Hit reaction: a flinch pose at frame 2, back to the stance. */
+/**
+ * Hit reaction: a flinch pose at frame 2, back to the stance. The Thể tu table gives a tank's brace: the guard tightens and the
+ * body gives a little; the head flinch of the shared Kiếm tu hit is left out on purpose (a tank takes the blow on its guard).
+ */
 function hitReaction(rig: RigDocument, pose: PoseDelta, rest: PoseDelta): Clip {
   const N = clipSpec('hit').frames;
   const g = viewGain(rig.direction);
@@ -267,6 +272,9 @@ export const CLASS_CLIPS: Readonly<Partial<Record<CharacterId, ClassClipSpec>>> 
       ik_foot_R: [-2, 0],
     },
     stanceBlend: true,
+    // CALIBRATED FOR DIRECTION E ONLY (docs/OPEN-ITEMS.md 11): this table is direction-independent, so on S / SE / NE / N and on
+    // the nominal template rigs (vertical arm rest) the +115 / +69 strike deltas point above horizontal until they are
+    // re-calibrated or derived from each direction's rest angles when those directions are assembled.
     // The Thể tu E arms rest slanted (R back -115 deg, L forward -69 deg from the x axis: upper_arm world rotation), not
     // straight down, so a straight horizontal punch is about +115 / -9 on R and +69 / +10 on L (upper / lower arm delta).
     // jab (R): load the weight back, coil, drive the shoulder into a straight arm, plant the front foot, hold, recoil
@@ -398,7 +406,9 @@ export const CLASS_CLIPS: Readonly<Partial<Record<CharacterId, ClassClipSpec>>> 
         ik_foot_L: [12, 0],
         ik_foot_R: [-3, 0],
       },
+      // the longest hold: 3 frames (6-8), so the combo window / recoil starts one frame later than the jab and cross (10)
       hold: 3,
+      combo: 10,
       recoil: {
         upper_arm_R: 85,
         lower_arm_R: 45,
@@ -502,9 +512,11 @@ export function classOverrides(
   const rest = s.stanceBlend ? s.stance : {};
   return {
     idle: (rig) => idle(rig, s.stance),
-    attack: (rig) => strike(rig, 'attack', s.attack, { windupEnd: 4, hit: 6, combo: 9 }, rest),
-    attack_2: (rig) => strike(rig, 'attack_2', s.attack_2, { windupEnd: 3, hit: 5, combo: 9 }, rest),
-    attack_3: (rig) => strike(rig, 'attack_3', s.attack_3, { windupEnd: 4, hit: 6, combo: 9 }, rest),
+    attack: (rig) => strike(rig, 'attack', s.attack, { windupEnd: 4, hit: 6, combo: s.attack.combo ?? 9 }, rest),
+    attack_2: (rig) =>
+      strike(rig, 'attack_2', s.attack_2, { windupEnd: 3, hit: 5, combo: s.attack_2.combo ?? 9 }, rest),
+    attack_3: (rig) =>
+      strike(rig, 'attack_3', s.attack_3, { windupEnd: 4, hit: 6, combo: s.attack_3.combo ?? 9 }, rest),
     cast: (rig) => cast(rig, s.cast),
     channel: (rig) => channel(rig, s.channel),
     ...(s.hit ? { hit: (rig: RigDocument) => hitReaction(rig, s.hit!, rest) } : {}),

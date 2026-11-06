@@ -275,6 +275,14 @@ describe('Thể tu combat poses', () => {
     expect(arm(hit)).toBeCloseTo(115, 3);
     expect(arm(hit + 2)).toBeCloseTo(115, 3);
     expect(arm(hit + 3)).toBeLessThan(115);
+    // the finisher holds one frame longer than the jab (3 vs 2): it is NOT clamped by the combo window
+    const fin = get('attack_3');
+    const finHit = fin.phases!.hit_frame!;
+    const finArm = (f: number) => rot(fin, 'upper_arm_R', f);
+    expect(fin.phases!.combo_window! - finHit).toBeGreaterThan(jab.phases!.combo_window! - hit);
+    expect(finArm(finHit)).toBeCloseTo(112, 3);
+    expect(finArm(finHit + 3)).toBeCloseTo(112, 3);
+    expect(finArm(finHit + 4)).toBeLessThan(112);
     expect(jab.events.find((e) => e.name === 'hit')!.frame).toBe(hit);
     expect(get('attack_3').bones.find((b) => b.bone === 'upper_arm_L')).toBeDefined();
     // anticipation: the striking arm is drawn back before the impact, weight loaded back (hips behind the stance)
