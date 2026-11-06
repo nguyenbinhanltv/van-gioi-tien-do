@@ -171,7 +171,14 @@ function hash(s: string): number {
   return h >>> 0;
 }
 
-/** Frames at which a blink starts: first one inside the clip, then every 3-5 s; none too close to the loop end. */
+/** Longest allowed gap between blinks: 5 s. */
+const BLINK_MAX = BLINK_MIN + BLINK_SPAN;
+
+/**
+ * Frames at which a blink starts. One-shot clips: the first inside the clip, then every 3-5 s. Looping clips: every gap,
+ * **including the one across the loop wrap**, is within 3-5 s (n = ceil(frames / 5 s) blinks, gaps jittered around
+ * frames / n and the last gap closing the loop exactly); a loop shorter than 3 s gets none.
+ */
 export function blinkStarts(clipName: string, frames: number, loop = false): number[] {
   const last = frames - 6;
   if (last < 4 || frames < 1.5 * CLIP_FPS) return [];
@@ -180,14 +187,43 @@ export function blinkStarts(clipName: string, frames: number, loop = false): num
     state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
     return state / 4294967296;
   };
-  const out: number[] = [];
-  let t = Math.floor(next() * Math.min(last, BLINK_MIN));
-  while (t <= last) {
-    out.push(t);
-    t += BLINK_MIN + Math.floor(next() * BLINK_SPAN);
+  // a loop shorter than the minimum gap cannot blink at a natural rate: it blinks on the independent clock instead
+  if (loop && frames < BLINK_MIN) return [];
+  if (!loop) {
+    const out: number[] = [];
+    let t = Math.floor(next() * Math.min(last, BLINK_MIN));
+    while (t <= last) {
+      out.push(t);
+      t += BLINK_MIN + Math.floor(next() * BLINK_SPAN);
+    }
+    return out;
   }
-  // a looping clip must not blink twice in a row across the wrap
-  if (loop && out.length > 1 && frames - out[out.length - 1]! + out[0]! < BLINK_MIN) out.pop();
+  const n = Math.ceil(frames / BLINK_MAX);
+  if (frames / n < BLINK_MIN) return frames <= BLINK_MAX ? [Math.floor(next() * Math.max(1, last))] : [];
+  if (n === 1) return [Math.floor(next() * last)];
+  const base = frames / n;
+  const room = Math.floor(Math.min(base - BLINK_MIN, BLINK_MAX - base) * 0.8);
+  const gaps: number[] = [];
+  let used = 0;
+  for (let i = 0; i < n - 1; i++) {
+    const g = Math.round(base + (next() * 2 - 1) * room);
+    gaps.push(g);
+    used += g;
+  }
+  gaps.push(frames - used); // closes the loop; falls back to equal gaps when it leaves the 3-5 s window
+  if (gaps.some((g) => g < BLINK_MIN || g > BLINK_MAX)) {
+    gaps.length = 0;
+    for (let i = 0; i < n; i++) gaps.push(Math.floor(((i + 1) * frames) / n) - Math.floor((i * frames) / n));
+  }
+  // first blink anywhere that keeps the last one (and its 5 frames) inside the clip; later ones follow by the gaps
+  const span = gaps.slice(0, n - 1).reduce((x, y) => x + y, 0);
+  const t0 = Math.floor(next() * Math.max(1, Math.min(gaps[0]!, last - span) + 1));
+  const out: number[] = [];
+  let t = t0;
+  for (let i = 0; i < n; i++) {
+    out.push(t);
+    t += gaps[i]!;
+  }
   return out;
 }
 
