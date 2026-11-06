@@ -1,0 +1,47 @@
+{
+  "clip": "meditate",
+  "grid": {
+    "cols": 3,
+    "rows": 3,
+    "cell": 256
+  },
+  "frames": 9,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 128.15341641598624
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 768,
+  "height": 768
+}

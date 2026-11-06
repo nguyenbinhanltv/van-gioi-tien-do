@@ -15,6 +15,19 @@ armature, slot `body`, stepped `displayFrame`, events from the animation table),
 loop seam, face/torso similarity, all frames present), `repairCell` (one cell replaced, the rest byte-identical),
 `runProject` (the whole chain). Engine-free; images use the `@vgtd/rig` raster / PNG codec.
 
+MaxRects tries one page first and emits additional pages only on overflow, without rotating,
+downscaling or dropping frames. Each page stays within the atlas budget. The first page retains
+`<stem>_<DIR>_tex.json/png`; additional pages use `<stem>_<DIR>_page1_tex.json/png`, etc.
+Multi-page contracts add `atlas.textures`, an ordered list of extensionless resource stems
+(primary first). Single-page exports omit it and remain byte-stable.
+
+The Cocos actor loads all pages before building the same single armature. It registers extra
+pages through public `CCFactory.parseTextureAtlasData` under the primary atlas asset UUID,
+deduplicating shared registrations. The skeleton retains all displays, original geometry and
+clip-table events; each atlas JSON contains only its own regions. Memory reporting sums every
+texture. Copy the complete output folder (including `.sprite.json`); `sprite:batch --capture`
+stages all files automatically and resolves its repository from the original launcher entry.
+
 Quality backlogs keep measured acceptances in `entries` and optional visual observations in `manual`:
 
 ```json

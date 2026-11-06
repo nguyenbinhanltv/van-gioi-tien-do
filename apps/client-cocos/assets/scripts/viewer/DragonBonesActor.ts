@@ -1,4 +1,4 @@
-import { Color, Node, UITransform, dragonBones, resources } from 'cc';
+import { Color, JsonAsset, Node, UITransform, dragonBones, resources } from 'cc';
 import type { character } from '../vendor/vgtd.mjs';
 import { newNode } from '../IsoAdapter';
 import type { ActorFrame, ApplyOptions, CacheMode, CharacterActor, RigSource, SeamMetric } from './CharacterActor';
@@ -25,6 +25,7 @@ const BLINK_OFF: ReadonlySet<string> = new Set(['meditate', 'die', 'hit']);
 interface RigAssets {
   ske: dragonBones.DragonBonesAsset;
   tex: dragonBones.DragonBonesAtlasAsset;
+  textures: readonly dragonBones.DragonBonesAtlasAsset[];
 }
 
 /**
@@ -112,7 +113,41 @@ export class DragonBonesActor implements CharacterActor {
       this.loadAsset(`${base}_ske`, dragonBones.DragonBonesAsset),
       this.loadAsset(`${base}_tex`, dragonBones.DragonBonesAtlasAsset),
     ]);
-    const rig = { ske, tex };
+    let textures = [tex];
+    // Legacy rigs without a sprite contract retain the original single-atlas path.
+    if (resources.getInfoWithPath(`${base}.sprite`, JsonAsset)) {
+      const contract = await this.loadAsset(`${base}.sprite`, JsonAsset);
+      const pages: unknown = contract.json?.atlas?.textures;
+      if (pages !== undefined) {
+        const primary = `${this.source.stem}_${dir}_tex`;
+        if (
+          !Array.isArray(pages) ||
+          pages.length < 2 ||
+          pages[0] !== primary ||
+          pages.some((p) => typeof p !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(p)) ||
+          new Set(pages).size !== pages.length
+        )
+          throw new Error('invalid sprite texture-page list');
+        textures = [
+          tex,
+          ...(await Promise.all(
+            pages
+              .slice(1)
+              .map((page) => this.loadAsset(`${this.source.folder}/${page}`, dragonBones.DragonBonesAtlasAsset)),
+          )),
+        ];
+        const factory = dragonBones.CCFactory.getInstance();
+        tex.init(factory);
+        for (const extra of textures.slice(1)) {
+          const data = JSON.parse(extra.atlasJson) as { name: string; imagePath: string };
+          // Multiple actors share factory data; register each extra page only once under the primary UUID.
+          const registered = factory.getTextureAtlasData(tex.uuid) ?? [];
+          if (!registered.some((page) => page.name === data.name && page.imagePath === data.imagePath))
+            factory.parseTextureAtlasData(data, extra.texture, tex.uuid);
+        }
+      }
+    }
+    const rig = { ske, tex, textures };
     this.assets.set(dir, rig);
     return rig;
   }
@@ -170,8 +205,10 @@ export class DragonBonesActor implements CharacterActor {
         `armature '${d.armatureName}' was not built from ${this.source.folder}/${this.source.stem}_${dir}_ske (names: ${names.join(',') || 'none'})`,
       );
     this.slotNames = armature ? armature.getSlots().map((s) => s.name) : [];
-    const tex = rig.tex.texture;
-    this.onRigLoaded?.(dir, tex ? tex.width * tex.height : 0);
+    this.onRigLoaded?.(
+      dir,
+      rig.textures.reduce((n, page) => n + (page.texture ? page.texture.width * page.texture.height : 0), 0),
+    );
   }
 
   private applyLoaded(view: character.CharacterViewState, opts: ApplyOptions): void {
