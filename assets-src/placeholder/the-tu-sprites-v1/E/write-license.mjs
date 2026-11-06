@@ -47,10 +47,14 @@ const specifications = [
   },
   {
     id: `THES-${direction}-RUNTIME`,
-    glob: `apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_${direction}_*; apps/client-cocos/assets/resources/dragonbones/the-tu-sprites.meta`,
+    glob: `apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_${direction}_*; apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_${direction}.sprite.json*; apps/client-cocos/assets/resources/dragonbones/the-tu-sprites.meta`,
     source: `THES-${direction}-SHEET; @vgtd/sprite PMA atlas and DragonBones display-swap exporter, Cocos Creator metadata`,
     files: [
-      ...walk(runtime).filter((f) => path.basename(f).startsWith(`thetu_${direction}_`)),
+      ...walk(runtime).filter(
+        (f) =>
+          path.basename(f).startsWith(`thetu_${direction}_`) ||
+          path.basename(f).startsWith(`thetu_${direction}.sprite.json`),
+      ),
       ...(existsSync(`${runtime}.meta`) ? [`${runtime}.meta`] : []),
     ],
   },

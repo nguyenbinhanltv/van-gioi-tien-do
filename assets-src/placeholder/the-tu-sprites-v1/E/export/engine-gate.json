@@ -5,6 +5,9 @@
   "zoom": 2,
   "sample": "midpoint",
   "samplesPerClip": 12,
+  "captureObservedUtc": "2026-11-06T21:28:32.234130+00:00",
+  "captureSourceCommit": "e91826e0f6a8dcb037ac22763a6d4e8a601d0b05",
+  "qaSourceCommit": "47ee51e71c4c828abbbdc8a2995dbb6dfbda3673",
   "animations": {
     "idle": {
       "durationSec": 1,
@@ -82,7 +85,6 @@
       "captureLoaded": true
     }
   },
-  "toolCommit": "695d43501d118fdedc71c8332e64fecd1bf8f262",
   "qaCounts": {
     "fail-hard": 0,
     "fail-soft": 0,
@@ -90,6 +92,7 @@
     "regression": 0,
     "info": 35
   },
+  "manualArtFindings": 2,
   "atlas": {
     "pages": 1,
     "width": 2048,
@@ -100,8 +103,10 @@
   "runtimeSha256": {
     "thetu_E_ske.json": "196c36d06267ca27e4e4d4a6671e4e4b6b7c5afbf41cbd0ee2000e4254eb756f",
     "thetu_E_tex.json": "1d8b02e22c6e701537bc8a16d79fb501c4d240ea672b5e03406e1e9ea5ccd34f",
-    "thetu_E_tex.png": "65f49da8b17942b04e684cb9e1915856caf192fd7fbbb69a65bb74ea3f7c16bb"
+    "thetu_E_tex.png": "65f49da8b17942b04e684cb9e1915856caf192fd7fbbb69a65bb74ea3f7c16bb",
+    "thetu_E.sprite.json": "f022d27b4e385ce0f10f969d88082550a485632770034485eab9fb89ca512d3b"
   },
+  "baselineThreeRuntimeFilesUnchanged": true,
   "atlasPixelEvidence": {
     "width": 2048,
     "height": 2048,
@@ -109,10 +114,5 @@
     "pmaBadPixels": 0,
     "extrude1MismatchPixels": 0,
     "padding2NonzeroPixels": 0
-  },
-  "previousCapture": {
-    "toolCommit": "695d43501d118fdedc71c8332e64fecd1bf8f262",
-    "samplesPerClip": 12,
-    "byteIdenticalExportFiles": 4
   }
 }

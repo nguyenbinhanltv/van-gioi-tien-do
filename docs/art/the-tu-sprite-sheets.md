@@ -18,7 +18,7 @@ Run khai báo chân trụ R ở ô 0/1/2, L ở ô 5/6/7; ô 3/4/8/9 là pha bay
 
 `quality-backlog.json` và `.md` dùng schema chính thức của `@vgtd/sprite`. Mỗi lỗi mềm có clip/hướng/ô 0-based, metric, value, limit và ghi chú; tăng quá giá trị đã ghi (+1%) là regression. Không nhận lỗi thiếu frame, chiều cao upright, similarity, loop seam hoặc export vào backlog. Các quan sát đảo chân được nhập từ `manual-art-findings.json` vào mảng `manual` qua CLI của pipeline (#124), tách khỏi số đo tự động và không tự được đánh dấu đã sửa. Lượt đầu giữ lỗi mềm theo chính sách chủ dự án “làm toàn bộ nhân vật đi xong cải tiến dần trong mỗi assets”.
 
-Packer shelf ban đầu cần hai trang; tổng trim có padding là 3.906.947 px². Bản MaxRects ở head #122 đã giữ đủ 156 frame trên một trang 2048 PMA, padding 2 và extrude 1. Capture Cocos 3.8.8 thật, zoom 2 và lấy mẫu midpoint, đã tải đủ 15 clip trước reset; SHA của ba file runtime nằm trong `E/export/engine-gate.json`. Kiểm tra pixel atlas ghi nhận 0 lỗi PMA, 0 lỗi extrude và 0 pixel thừa trong padding. Nhánh art còn chờ tooling merge để xác minh lại build/QA trên main, bao gồm phép đo chân theo hướng của #123; không dùng bản backup WIP làm nhánh PR.
+Packer shelf ban đầu cần hai trang; tổng trim có padding là 3.906.947 px². MaxRects đã lên main qua #122, giữ đủ 156 frame trên một trang 2048 PMA, padding 2 và extrude 1. Build trên main qua gate: 0 hard failure, 0 mềm chưa ghi, 0 regression, 12 finding mềm đã chấp nhận. Ba file hình/animation byte-identical với bản Cocos 3.8.8 đã capture trước reset; #123 giữ nguyên phép đo E và chỉ cập nhật trục cho hướng khác. Kiểm tra pixel atlas ghi nhận 0 lỗi PMA, 0 lỗi extrude và 0 pixel thừa trong padding. Capture trên main dùng zoom 2 và lấy mẫu midpoint cho đủ 15 clip; bằng chứng và SHA runtime nằm trong `E/export/engine-gate.json`.
 
 ## Tái tạo
 
@@ -28,7 +28,7 @@ node assets-src/placeholder/the-tu-sprites-v1/E/sync-dpi.mjs
 npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/the-tu-sprites-v1/E/project.json --out <thu-muc-tam>
 ```
 
-`prepare.ts` giữ nguyên template và layout đã có để bảo toàn đầu vào của prompt, chỉ lấy timing/kind từ bảng công khai. Repair lặp lại từ raw bằng `repair-recovery.ts`; template ngồi tái tạo bằng `meditate-template.ts`. Contract QA ở nguồn, Cocos resources chỉ nhận `_ske.json`, `_tex.json`, `_tex.png` và `.meta` cần thiết.
+`prepare.ts` giữ nguyên template và layout đã có để bảo toàn đầu vào của prompt, chỉ lấy timing/kind từ bảng công khai. Repair lặp lại từ raw bằng `repair-recovery.ts`; template ngồi tái tạo bằng `meditate-template.ts`. Cocos resources nhận đủ output contract #122: `_ske.json`, `_tex.json`, `_tex.png`, `.sprite.json` và `.meta` cần thiết. Viewer đọc `.sprite.json` để tìm các trang texture; không đưa rig/assembly hoặc authoring intermediate vào resources.
 
 Capture thật dùng `apps/client-cocos/scripts/capture.mjs --zoom 2 --sample midpoint --gif`, mode single, hướng E, đủ 15 clip. GIF/contact sheet nằm trong artifact phiên; không commit capture hoặc file trung gian build. Trang review dùng `sprite:review` của pipeline chung.
 

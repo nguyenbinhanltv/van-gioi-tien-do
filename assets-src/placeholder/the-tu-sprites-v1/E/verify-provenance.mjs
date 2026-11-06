@@ -78,8 +78,12 @@ for (const file of walk(base).filter((f) => f.endsWith('.png'))) {
   if (!covered.has(key)) failures.push(`${key}: missing license coverage`);
 }
 for (const file of walk(path.join(repo, 'apps/client-cocos/assets/resources/dragonbones/the-tu-sprites'))) {
-  if (!path.basename(file).startsWith(`thetu_${direction}_`)) continue;
-  if (!/^thetu_(E|SE|S|NE|N)_(ske\.json|tex\.json|tex\.png)(\.meta)?$/.test(path.basename(file)))
+  if (
+    !path.basename(file).startsWith(`thetu_${direction}_`) &&
+    !path.basename(file).startsWith(`thetu_${direction}.sprite.json`)
+  )
+    continue;
+  if (!/^thetu_(E|SE|S|NE|N)(?:_(?:ske\.json|tex\.json|tex\.png)|\.sprite\.json)(\.meta)?$/.test(path.basename(file)))
     failures.push(`${file}: non-runtime authoring file in resources`);
 }
 for (const file of walk(base).filter((f) => f.endsWith('.generation.json'))) {
