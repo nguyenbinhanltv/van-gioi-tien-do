@@ -46,6 +46,30 @@ Chạy cả chuỗi: `npm run sprite:build -w @vgtd/sprite -- --project <project
 - **Chú thích tiếp đất thật:** `contacts: { R: [...], L: [...] }` trong clip của project thay cờ `planted` của template bằng các khung mà bản vẽ **thực sự** có chân chạm đất (vị trí bóng chân giữ nguyên).
 - **Đo đế chân:** `soleRuns` tách từng bàn chân (cách nhau ≥ 3 cột) nên hai giày gần nhau không còn bị trung bình hóa; chân đặt đất cách bóng chân > 20 px **không** bị bỏ qua âm thầm mà báo `warn` ("chân không nằm trên template").
 
+## Bảng clip dùng chung (15 clip Player)
+
+`import { SPRITE_CLIPS, SPRITE_CLIP_NAMES, spriteClip, projectClipDefaults } from '@vgtd/sprite'` (`tools/sprite/src/clips.ts`). Bảng **sinh từ `ANIMATIONS`** (`docs/03`) nên thời lượng, cờ lặp, fps, sự kiện không bao giờ lệch; ba nhịp combo `attack`, `attack_2`, `attack_3` dùng chung đặc tả `attack`.
+
+| Clip                             | Bảng (`tableId`) | Ô sheet đề xuất (cols) | Loại    | Gợi ý exception      |
+| -------------------------------- | ---------------- | ---------------------- | ------- | -------------------- |
+| `idle`                           | idle             | 8 (4)                  | upright | -                    |
+| `meditate`                       | meditate         | 8 (4)                  | free    | seated               |
+| `walk`                           | walk             | 12 (6)                 | upright | -                    |
+| `run`                            | run              | 12 (6)                 | upright | -                    |
+| `dash`                           | dash             | 6 (4)                  | free    | lunge                |
+| `sword_fly`                      | sword_fly        | 8 (4)                  | free    | airborne, sword-ride |
+| `attack`, `attack_2`, `attack_3` | attack           | 8 (4)                  | free    | raised-sword, lunge  |
+| `cast`                           | cast             | 8 (4)                  | free    | raised-arms          |
+| `channel`                        | channel          | 8 (4)                  | free    | raised-arms          |
+| `hit`                            | hit              | 4 (4)                  | free    | recoil               |
+| `die`                            | die              | 8 (4)                  | free    | die-collapse         |
+| `tribulation`                    | tribulation      | 12 (6)                 | free    | kneel, raised-arms   |
+| `emote`                          | emote            | 8 (4)                  | upright | -                    |
+
+- `spriteClip(name)` trả `{ tableId, loop, durationSec, asymmetric, kind, sheet: { frames, cols }, events, phases, exceptionHints }`; `phases` là **số khung của bảng** mặc định cho sự kiện neo theo pha (`hit_frame`, `combo_window`, `windup_end`) — giá trị mặc định lấy từ nhịp rig Kiếm tu, chỉnh theo sheet thật (cần game designer duyệt khi cân bằng).
+- `projectClipDefaults(name)` trả các trường của clip trong `project.json` lấy từ bảng (`name`, `cols`, `frames`, `durationSec`, `loop`, `tableId`, `kind`, `phases`); thêm `sheet`, `manifest`, `exceptions`, `calibration`.
+- `sprite:template --clip <tên>` lấy `--frames` / `--cols` mặc định từ bảng này.
+
 ## Quality backlog (làm đủ bộ trước, cải thiện sau)
 
 Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `project.backlog`) và `quality-backlog.md` sinh tự động:
@@ -76,6 +100,13 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 - **Phán quyết:** mềm **không** có trong backlog → lỗi (`fail-soft`); có trong backlog và `value` hiện tại ≤ giá trị đã ghi (+1 %) → `accepted` (qua, hiện như cảnh báo); tệ hơn → `regression` (lỗi); mục backlog không còn xảy ra → `resolved` (nên xóa bằng `--prune`).
 - **Khóa so khớp:** `clip + dir + cell + gate + metric` (`cell` = chỉ số khung 0-based, `-1` = cấp clip).
 - **Ghi vào backlog là hành động có chủ ý:** `npm run sprite:backlog -w @vgtd/sprite -- --project <project.json> --accept --note "<lý do>" [--owner <worker>] [--prune]` thêm các phát hiện mềm **hiện tại** chưa được ghi (không bao giờ thêm cổng cứng hay hồi quy); không cờ nào thì chỉ báo cáo. `sprite:build` in phán quyết từng phát hiện và thoát 1 nếu còn lỗi cứng, mềm chưa ghi, hoặc hồi quy.
+
+## Batch + trang duyệt của chủ dự án
+
+- `batch.json` = `{ "character": "kiem-tu", "projects": ["E/project.json", "SE/project.json", ...] }` (đường dẫn tương đối với file batch; mỗi hướng một project, mỗi project có `quality-backlog.json` cạnh nó).
+- `npm run sprite:batch -w @vgtd/sprite -- --batch <batch.json> --out <dir> [--capture] [--keep-staged] [--allow-errors]`: build + QA mọi hướng của nhân vật, ghi `<out>/<DIR>/<stem>_<DIR>_{ske,tex}.json`, `_tex.png`, `.sprite.json`, `batch-report.json` (trạng thái từng clip: `ok` / `warn` (chỉ có mục backlog đã chấp nhận) / `fail`) và `index.html`. Thoát 1 nếu một hướng lỗi cổng cứng, phát hiện mềm chưa ghi, hoặc hồi quy.
+- `--capture`: chép từng hướng vào `apps/client-cocos/assets/resources/dragonbones/_batch-<nhân vật>-<DIR>` (git-ignored), build web Cocos **một lần**, chụp mọi clip bằng runtime thật ở **2×** (`--zoom 2 --sample midpoint`) vào `<out>/<DIR>/capture/<clip>.gif`, rồi xóa thư mục tạm (trừ `--keep-staged`). Cần Cocos Creator 3.8.8 và Chrome.
+- `npm run sprite:review -w @vgtd/sprite -- --out <dir> --reports <a/batch-report.json> <b/batch-report.json> ...`: một trang `index.html` cho **mọi nhân vật / hướng / clip** với GIF 2× và trạng thái QA (chép GIF và hợp đồng vào `<out>/<nhân vật>/<DIR>/`), để chủ dự án duyệt.
 
 ## Cổng QA
 
