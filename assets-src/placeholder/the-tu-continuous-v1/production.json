@@ -2,13 +2,7 @@
   "character": "the-tu",
   "concept": "A - Sơn Môn Hộ Vệ",
   "pipeline": "D39 continuous limbs and separate detail sources",
-  "directions": [
-    "E",
-    "S",
-    "SE",
-    "NE",
-    "N"
-  ],
+  "directions": ["E", "S", "SE", "NE", "N"],
   "order": "E art and idle/run/attack gate first; then other directions and all 15 body clips",
   "sourcePromptPack": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
   "status": "E baseline fully gated: strict15 clean and Cocos idle/run/attack PASS with cuff/hem chains; idle2 AI pilot raw references generated; bulk keypose held by orchestrator, other direction art allowed",
@@ -209,13 +203,8 @@
       "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
     }
   ],
-  "conditionalParts": [
-    "ear_L",
-    "ear_R"
-  ],
-  "optionalParts": [
-    "gauntlet_plate_glow_R"
-  ],
+  "conditionalParts": ["ear_L", "ear_R"],
+  "optionalParts": ["gauntlet_plate_glow_R"],
   "sharedVfx": [
     "rock_chunk_1",
     "rock_chunk_2",
@@ -252,35 +241,17 @@
   "masterRegistration": {
     "generationReference": "reference/E.master4x.png",
     "registeredMaster": "reference/E.register-master4x.png",
-    "inputCanvas": [
-      512,
-      512
-    ],
-    "resize": [
-      448,
-      448
-    ],
-    "offset": [
-      32,
-      44
-    ],
-    "outputCanvas": [
-      512,
-      512
-    ],
+    "inputCanvas": [512, 512],
+    "resize": [448, 448],
+    "offset": [32, 44],
+    "outputCanvas": [512, 512],
     "method": "alpha-weighted area resampling, straight-alpha source and output",
     "status": "provisional landmarks; silhouette and rig gates pending"
   },
   "keyPosePlan": {
     "stage": "after E assembly",
     "source": "owner decision relayed by orchestrator 2026-11-06",
-    "actions": [
-      "walk",
-      "run",
-      "punch combo",
-      "guard",
-      "ground slam"
-    ],
+    "actions": ["walk", "run", "punch combo", "guard", "ground slam"],
     "workflow": "Generate separate AI pose references and manually annotate landmarks, then use worker15 fitPose/authorFromKeyPoses tooling; gate measured rig and in-engine clips after fitting"
   },
   "integration": {
@@ -292,10 +263,7 @@
   "validation": {
     "registration": {
       "sourceParts": 50,
-      "canvas2x": [
-        256,
-        256
-      ],
+      "canvas2x": [256, 256],
       "alphaThreshold": 128,
       "extraPixels": 439,
       "missingPixels": 137,
@@ -372,10 +340,7 @@
       "padding": 2,
       "extrude": 1,
       "premultipliedAlpha": true,
-      "page": [
-        512,
-        512
-      ]
+      "page": [512, 512]
     },
     "encodedAtlasInvalidPmaPixels": 0,
     "keyPosePilot": "idle2 raw AI references generated, annotations/fit pending",

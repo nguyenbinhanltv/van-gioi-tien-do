@@ -34,7 +34,7 @@ Mỗi tay/chân phải là một mảnh liên tục; không dùng ảnh master c
 
 Ảnh tay áo đầu tiên có lẫn vai tabard xanh. Các lượt yêu cầu sửa bị công cụ từ chối, không có đầu ra. Config crop chỉ chọn vùng vải ngà liên tục đã được AI vẽ để đăng ký về guide tay; không lấy pixel tay từ master, không tô thêm pixel bằng tay. Phải kiểm tra lại vùng chồng vai/cuff sau xử lý; nếu không đủ thì không ráp nghiệm thu.
 
-Đã nhận ba commit tập trung của worker 17; bản hiện tại trên nhánh là `907f9ed`. Công cụ nhận `--source`, `--dir`, `--manifest`, `--master`, `paletteSamples`, `paletteFilters`, `sourceBounds4x`, `registration`, `edgeDefringe`, `materialAliases`, `sourceQuarterTurns`, `clipToMaster`, `excludePolygons`, `silhouetteMargin4x`. Không nhận các commit art Kiếm tu không liên quan. Worker 15 đang cung cấp `rig:assemble --class the-tu`; tên mảnh trong prompt pack được nhận nguyên trạng.
+Công cụ prep chuẩn đã vào main qua PR #100; nhánh art đã merge main và dùng nguyên bản công cụ đó, không còn diff `tools/procgen`. Các cờ crop, rotation, exclusion, clip, material alias và margin giữ nguyên trong manifest. Bộ ráp theo lớp, chuỗi cuff/hem và giữ detail Thể tu khi fit key-pose đã vào main qua PR #98/#99/#102; worker 19 phụ trách phần tooling Thể tu.
 
 Tay áo chọn vùng vải ngà trên ảnh đã resize 512; đầu chọn vùng mặt thay vì co cả khối tóc vào mặt; mắt crop bỏ mày đi kèm; boot giữ vùng đế ngà. Phần đồng sáng trên tabard dùng alias classifier `skin` → `gold`, không đổi màu da của đầu. Khe cổ áo được xóa **trên mảnh tabard trước** bằng guide để lộ torso ngà riêng bên dưới. Không xóa pixel torso hoặc cắt cổ áo từ master.
 
@@ -53,7 +53,7 @@ Quyền sáo mặc trên tay, đổi display trong `hand_L` / `hand_R`; **không
 
 ## Cổng nghiệm thu
 
-Kiểm tra rest composite hiện đã đạt: **50 mảnh**, max extra **2 px**, max missing **2 px** so master @2x, giữ nguyên ngưỡng kiểm. Đây chỉ là registration, **chưa có nghiệm thu rig/engine Thể tu**. Bắt buộc ghi số đo thực, không suy ra từ ảnh tĩnh hoặc test bộ công cụ:
+Kiểm tra rest composite đã đạt: **50 mảnh**, max extra **2 px**, max missing **2 px** so master @2x, giữ nguyên ngưỡng kiểm. Baseline E đã qua **rig/engine gate**: 44/44 mảnh được dùng sau compose, **38 bones, 28 slots, 427 verts, 5 chains**; atlas **512×512 PMA**, padding 2, extrude 1, không có pixel RGB vượt alpha. Đủ **15 body clip** qua strict với **0 openings / 0 tears / 0 stretch / 0 strip faults**, thêm blink_cycle độc lập. Capture Cocos 3.8.8 thật của **idle/run/attack đạt**, seam lần lượt 0,85 / 0,77 / 0,99. Chưa nghiệm thu capture đủ 15 clip hoặc đủ năm hướng. Giữ các cổng sau:
 
 - `rig:measure --strict`: **0 openings / 0 tears / 0 stretch** trên rig đã ráp.
 - Capture **Cocos thật**: E idle/run/attack trước, cuối cùng đủ 15 clip × 5 hướng. Không thay bằng render phần mềm.
@@ -64,3 +64,14 @@ Kiểm tra rest composite hiện đã đạt: **50 mảnh**, max extra **2 px**,
 ## Trạng thái giấy phép
 
 `image_gen.imagegen`, model không được công cụ công bố, `codex-cli 0.166.0`. Ảnh **AI-generated, placeholder, needs hand-polish + license review before release** theo D34; chưa tự xác nhận giấy phép thương mại. Prompt/UTC và cả các lượt không có đầu ra được ghi trong [ASSET-LICENSES.md](../ASSET-LICENSES.md).
+
+## Tái lập baseline E và kế hoạch tiếp theo
+
+```sh
+npm run rig:assemble -w @vgtd/rig -- --class the-tu --parts assets-src/placeholder/the-tu-continuous-v1 --dir E --out apps/client-cocos/assets/resources/dragonbones/the-tu-continuous
+npm run rig:gate -w @vgtd/rig -- the-tu --dir E --assembled <absolute-export-directory> --src dragonbones/the-tu-continuous --stem thetu --animations idle,run,attack --out <temporary-capture-directory>
+```
+
+Hai nguồn AI idle `in/out` đã lưu kèm prompt/UTC ở `raw/keyposes/E`; guide trong `reference/keyposes/E` chỉ là render phần mềm phục vụ bố cục, không phải bằng chứng engine. Chưa đưa hai nguồn này vào rig: cần chuẩn hóa canvas, đo landmarks độc lập và chạy fit với RMS ≤2 px, IoU ≥0,85, không hạ ngưỡng. **Bulk key-pose run/walk/attack vẫn tạm giữ** chờ orchestrator xác nhận dáng đi chung. Sinh mảnh thường S/SE/NE/N đã được cho phép sau baseline E này.
+
+Báo cáo E và contact sheet/capture lưu trong artifact phiên `van-gioi-tien-do-18`; bốn hướng còn lại và nghiệm thu 15 clip × 5 hướng chưa hoàn tất. PR giữ trạng thái draft đến khi đủ năm hướng đạt.
