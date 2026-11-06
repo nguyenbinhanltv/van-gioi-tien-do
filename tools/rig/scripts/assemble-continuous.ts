@@ -136,6 +136,7 @@ const res = assembleContinuous({
         pieces: profile.pieces,
         dropBones: profile.dropBones,
         snapIk: true,
+        ...(profile.chains ? { extraChains: profile.chains } : {}),
         ...(profile.ikBend ? { ikBend: profile.ikBend } : {}),
       }
     : {}),
