@@ -9,6 +9,6 @@
   "cli": "codex-cli 0.166.0",
   "reference": "reference/S.master4x.png",
   "selectedOutput": "raw/S/rejected/hairpin.attempt1.png",
-  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-af124fc6-e500-44ef-8504-5522ac9ae11d.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-af124fc6-e500-44ef-8504-5522ac9ae11d.png",
   "status": "rejected: generated disassembled clothing with no isolated jade hairpin"
 }

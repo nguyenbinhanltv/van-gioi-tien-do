@@ -10,6 +10,6 @@
   "cli": "codex-cli 0.166.0",
   "references": ["reference/E.register-master4x.png", "reference/keyposes/E/idle_02-guide4x.png"],
   "selectedOutput": "raw/keyposes/E/idle_02_out.png",
-  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-2dd24dff-d6a5-430d-bbbc-b3fdf270d62e.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-2dd24dff-d6a5-430d-bbbc-b3fdf270d62e.png",
   "status": "raw AI reference; canonical registration and measured landmarks pending"
 }

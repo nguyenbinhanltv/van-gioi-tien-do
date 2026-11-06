@@ -4,7 +4,7 @@
   "pipeline": "D39 continuous limbs and separate detail sources",
   "directions": ["E", "S", "SE", "NE", "N"],
   "order": "E art and idle/run/attack gate first; then other directions and all 15 body clips",
-  "sourcePromptPack": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
+  "sourcePromptPack": "assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md",
   "status": "PASS five directions: independent registration, actual exported15bodyclip strict measurement, and real Cocos capture; E AI idle2 accepted; bulk motion keyposes held",
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
@@ -1694,5 +1694,6 @@
   "runtimeReserved": [
     "eyes_angry is a reserved display; blink_cycle owns eyes except meditate",
     "gauntlet_plate_glow_R is source-only, not wired into class rig"
-  ]
+  ],
+  "provenancePathPolicy": "repo-relative paths or stable imagegen/ao-artifact identifiers; local paths redacted, image bytes/prompts/UTC retained"
 }

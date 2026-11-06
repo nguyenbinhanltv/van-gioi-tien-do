@@ -9,23 +9,23 @@
     "tool": "image_gen.imagegen",
     "model": "not disclosed by tool",
     "codex_cli": "codex-cli 0.166.0",
-    "source_file": "C:\\Users\\PC\\.codex\\generated_images\\01a1aceb-a595-7710-abad-538038af6cde\\exec-1497fb11-04ed-487a-bbd4-0f0698461700.png",
-    "references": ["C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-14/character-concepts/concept-a-thanh-nha.png"]
+    "source_file": "imagegen:01a1aceb-a595-7710-abad-538038af6cde/exec-1497fb11-04ed-487a-bbd4-0f0698461700.png",
+    "references": ["ao-artifact:van-gioi-tien-do-14/character-concepts/concept-a-thanh-nha.png"]
   },
-  "upstreamLicenseDraft": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/licenses-draft.md",
+  "upstreamLicenseDraft": "ao-artifact:van-gioi-tien-do-16/character-concepts/licenses-draft.md",
   "license": "AI-generated, placeholder, needs hand-polish + license review before release",
   "releaseApproved": false,
   "interimArtOwner": "user",
   "attribution": "not verified; no CC0 or MIT claim for image",
   "referenceFiles": [
     {
-      "original": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a.png",
+      "original": "ao-artifact:van-gioi-tien-do-16/character-concepts/the-tu-a.png",
       "archive": "reference/concept-a.png",
       "originalSha256": "f948c50869b9d9a04b8ec8d18aecc92f7250bbfd98bb665bae5092d2c932a5e6",
       "archiveSha256": "f948c50869b9d9a04b8ec8d18aecc92f7250bbfd98bb665bae5092d2c932a5e6"
     },
     {
-      "original": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a-ingame.png",
+      "original": "ao-artifact:van-gioi-tien-do-16/character-concepts/the-tu-a-ingame.png",
       "archive": "reference/concept-a-ingame.png",
       "originalSha256": "ab2f64bdfe0580e69f02b005b15707bad995ed765a4150fdbcea0a8665224a45",
       "archiveSha256": "ab2f64bdfe0580e69f02b005b15707bad995ed765a4150fdbcea0a8665224a45"
@@ -36,7 +36,7 @@
     "method": "Upstream license draft: System.Drawing HighQualityBicubic, alpha bounds threshold24, figure104px, pivot64/116 on128 canvas; separate grass tile/background/shadow composite"
   },
   "promptPack": {
-    "original": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
+    "original": "ao-artifact:van-gioi-tien-do-1/Prompt-pack-The-tu.md",
     "archive": "reference/prompt-pack.md",
     "normalization": "Prettier Markdown formatting only",
     "sourceSha256": "a7b5958ef462bb6aa1a745c33c8b1706eb1e7c58ecda97e1007c4f585822dbb5",

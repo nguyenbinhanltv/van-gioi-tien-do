@@ -4,7 +4,7 @@
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
-  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-82a28755-a0e9-43db-92bb-630388cf1038.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-82a28755-a0e9-43db-92bb-630388cf1038.png",
   "selectedOutput": "reference/N.master-generated.png",
   "utcStart": "2026-11-06 04:40:38 UTC",
   "utcEnd": "2026-11-06 04:44:15 UTC",

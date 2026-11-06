@@ -1,0 +1,2315 @@
+{
+  "recordedAtUtc": "2026-11-06T09:12:22.735Z",
+  "utcMeaning": "UTC of this derived-file inventory/repack; original image generation UTC remains in adjacent raw generation metadata",
+  "indexSelfCoveredBy": "TT1-D9; inventory does not hash itself",
+  "groups": [
+    {
+      "id": "TT1-D1",
+      "glob": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/*; apps/client-cocos/assets/resources/dragonbones/the-tu-continuous.meta",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/rig/*; processed parts and class rig profile on main",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/rig DragonBones 5.5 exporter; Cocos Creator 3.8.8 metadata",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous.meta",
+          "sha256": "204533299f390cd94fa94d18e3873e1a5f92d2fcea2ccb528a0630b6c088dff3",
+          "fileLastWriteUtc": "2026-11-06T03:40:32.962Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_ske.json",
+          "sha256": "73982adc7c9e6455688d8adea0bc1d998967cdd1cedf5bdd5cf7a26c0c431250",
+          "fileLastWriteUtc": "2026-11-06T06:43:47.235Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_ske.json.meta",
+          "sha256": "7d0fa312e4f5641b5ad6998027a7b3afeb464ce4eff3fecfa4add39431a1f590",
+          "fileLastWriteUtc": "2026-11-06T03:40:48.498Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_tex.json",
+          "sha256": "3247bd9eeabf9e92aace532e0b8ea43ff3dd676d8c4ac060db01da5006da6475",
+          "fileLastWriteUtc": "2026-11-06T06:43:47.235Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_tex.json.meta",
+          "sha256": "4d066435a2f24c93a10a1f6dfebd6d308414505a1938d9c519a262382bce40b9",
+          "fileLastWriteUtc": "2026-11-06T03:40:48.553Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_tex.png",
+          "sha256": "60686360fdebaac1a510b5d1aa2107bff7ad589dee32bde8d752d70c9fed1cc3",
+          "fileLastWriteUtc": "2026-11-06T06:43:47.263Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_E_tex.png.meta",
+          "sha256": "13781c95b69c85304f89680fb7cf8144f1d6c41b8bdb4b50904de1f8373a31bc",
+          "fileLastWriteUtc": "2026-11-06T03:40:48.543Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_ske.json",
+          "sha256": "2ddc4827ac6444a0b9ef2b84aeae1c61e6bbd36223d53e8c0102055de5e7d85f",
+          "fileLastWriteUtc": "2026-11-06T07:57:36.171Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_ske.json.meta",
+          "sha256": "f77704bb1f4be39dab28db25d2cb3901620bb1944648e411557ffd8b73ee5411",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.588Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_tex.json",
+          "sha256": "686681bcb13fccea0f7021a7fefaff358e71d8b14818822ef73fe6b8196e36e2",
+          "fileLastWriteUtc": "2026-11-06T07:57:36.172Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_tex.json.meta",
+          "sha256": "d57ab7b2e17b161b602e52c32326974da0bf7f36e418515559eba342dc5a239f",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.639Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_tex.png",
+          "sha256": "2804b2dff2a3bfdbeecb90dd6c957a13f4405cae6c0920697281ce00f35c5148",
+          "fileLastWriteUtc": "2026-11-06T07:57:36.205Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_NE_tex.png.meta",
+          "sha256": "ce1feb6dabdce3d4e00356c9efa683533d19fbba9ffa68a3800f82b1f65dfee7",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.632Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_ske.json",
+          "sha256": "db6b9cc3dbff755678a5bea483882a4b9c82555987c93089b9fd1caaf8025f45",
+          "fileLastWriteUtc": "2026-11-06T07:57:37.627Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_ske.json.meta",
+          "sha256": "84f315505914812017d9de212cddccf56702b0e8f9357b98abda549d16b229bf",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.607Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_tex.json",
+          "sha256": "8598aa318628ac4e5d3573d53fb6c8347cfe80eee1cbfdf3d2ccb99484461bd2",
+          "fileLastWriteUtc": "2026-11-06T07:57:37.628Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_tex.json.meta",
+          "sha256": "508fa985d0a17e164611b167f322405b540726f91cdbb59e2789aca207095ef6",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.653Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_tex.png",
+          "sha256": "f12eda15e1d41a01e211b5c781a3b42a87915b05c1343a058994ca2931eb7106",
+          "fileLastWriteUtc": "2026-11-06T07:57:37.663Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_N_tex.png.meta",
+          "sha256": "2360cf44cbbe8c289f52b0be0f90f32e985d76a2376bdc79e08fd531f1e18f54",
+          "fileLastWriteUtc": "2026-11-06T07:58:03.636Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_ske.json",
+          "sha256": "8a006c2ee6c9f99621f542fd7ce0bd5a678ab1806b54b1b297f31d5eb4a6e94e",
+          "fileLastWriteUtc": "2026-11-06T07:09:45.204Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_ske.json.meta",
+          "sha256": "04a242f8a6b060ef8df4b053261d4301562a530d8ecafbf6979673cdca68ba09",
+          "fileLastWriteUtc": "2026-11-06T06:58:08.718Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_tex.json",
+          "sha256": "63f57f14a71ac857eebb2deeb74ef9038c2e3c9a2427f34f36ce5d4e997d61b5",
+          "fileLastWriteUtc": "2026-11-06T07:09:45.204Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_tex.json.meta",
+          "sha256": "44e2e789dba347492da116eb82594d1095814a62a4a8dd3e310b57b5d43c4d2c",
+          "fileLastWriteUtc": "2026-11-06T06:58:08.754Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_tex.png",
+          "sha256": "3198d8d05301e040954b9f0830aebd31015fe80b9c32ca6f09327ebe7d468a5d",
+          "fileLastWriteUtc": "2026-11-06T07:09:45.244Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_SE_tex.png.meta",
+          "sha256": "fcd1f1bc9b254926b2a07a215afabdebc410282a08f7cb495c311040865491d3",
+          "fileLastWriteUtc": "2026-11-06T06:58:08.741Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_ske.json",
+          "sha256": "4c02bd65e6ead1e78ea4896fddf84c655a3bae87cb548ab122d9e38c25bc1274",
+          "fileLastWriteUtc": "2026-11-06T06:38:11.251Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_ske.json.meta",
+          "sha256": "2b3ead097a8a44955b2944b01293186776dbf41ef0f38dad7a0cc50463bc6d00",
+          "fileLastWriteUtc": "2026-11-06T05:45:35.720Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_tex.json",
+          "sha256": "6bd2d74e1c2cb56baf5883122d60226b2911eec5686864aa7d994751241ed7ab",
+          "fileLastWriteUtc": "2026-11-06T06:38:11.251Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_tex.json.meta",
+          "sha256": "9b63e376436f2dc409777f0f44ef1ee96859ef699500c7dec081875648e789d6",
+          "fileLastWriteUtc": "2026-11-06T05:45:35.768Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_tex.png",
+          "sha256": "d006ff64b04eb23fc2444057bdacf823dd89dece34bb717b56ff3e6c227ce5ff",
+          "fileLastWriteUtc": "2026-11-06T06:38:11.278Z"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-continuous/thetu_S_tex.png.meta",
+          "sha256": "0c865d75412eb383202e0bd37f26a8844f8ab9fa70a1ef246b363ece4307f7a4",
+          "fileLastWriteUtc": "2026-11-06T05:45:35.754Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D2",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/rig/*",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/{E,S,SE,NE,N}/*.png + landmarks.json; @vgtd/rig class profile",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/rig assemble, atlas pack and exported clips",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E.assembly.json",
+          "sha256": "99a7bf788bd7b8537b07483815863f91d0f67e91e36998e3309210d75cac44e9",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.511Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E.atlas.json",
+          "sha256": "8ac086dfb645b73ae904a52de2464e358c071e83a910686ff08d99231b46dae8",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.516Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E.clips.json",
+          "sha256": "8b293dbc3b008448b629728aba5dc2d3bcb2b384c71210870a4f15617250206b",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.650Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E.rig.json",
+          "sha256": "01c922a243d823cd13c2c73a9f0cc5d0687ac5ac9fcd09c09c927f35dfb094e9",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.681Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E_ske.json",
+          "sha256": "96e839810f09c057754d8071cc0dbf9435a77b42e99b2445e531506ae85f1725",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.491Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E_tex.json",
+          "sha256": "e1ba298c978b998a1f68df1d44807838140a444dd05edf1bbfdb7f524a8f85e6",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.505Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_E_tex.png",
+          "sha256": "60686360fdebaac1a510b5d1aa2107bff7ad589dee32bde8d752d70c9fed1cc3",
+          "fileLastWriteUtc": "2026-11-06T06:43:47.263Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N.assembly.json",
+          "sha256": "0e033c4f11de3e5bcb3f7ac4441d5e13f938ec80943890b0f7729dacde46fd54",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.829Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N.atlas.json",
+          "sha256": "247bcd2b62e02033ae5f9031e123d26a9797d72f9be2bc4a3931b1070c992cc3",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.833Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N.clips.json",
+          "sha256": "a5b355691692f75f4eb68431970c8fe92422cc4a06fa6ebb5bc00a7eb3c84f0b",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.937Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N.rig.json",
+          "sha256": "2bf3e9ce65e857190c9ce489cdb5bfbc9d2f1695e3c549ba898a12e4cf8babc4",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.971Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE.assembly.json",
+          "sha256": "00c5e007401e43ed37f2bf33fe105177dfd54ae4834336e03037e4fec09f45f8",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.143Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE.atlas.json",
+          "sha256": "9404a9199b9439a173452d679838b64e33ac578d04ab13e3898e4f53cb1a0138",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.147Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE.clips.json",
+          "sha256": "936786727b7eb9e2d82919b708728aaaf26aed98cfc44bbb63a5f2776e360993",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.271Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE.rig.json",
+          "sha256": "324d353cd4903a24b82fe938a4801f75bc53cb11c38535d5298957fc5944543d",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.304Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE_ske.json",
+          "sha256": "6b32a87e4d1227895383e43de00f3b09808ece1b1a2efcc2377fdbeabba44f11",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.130Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE_tex.json",
+          "sha256": "07fb1e2a9dc367b67452b4c0fa6af162ba39271d998d9f317e436dd4992ee0b1",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.138Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_NE_tex.png",
+          "sha256": "2804b2dff2a3bfdbeecb90dd6c957a13f4405cae6c0920697281ce00f35c5148",
+          "fileLastWriteUtc": "2026-11-06T07:57:36.205Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N_ske.json",
+          "sha256": "9bb58049d4aa410f411a3c13896e963986e39839d2840e6cbccd379efbdc9830",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.816Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N_tex.json",
+          "sha256": "3b5d820d4c0aaecf6a80618b3e6270b6e8cc47748eb68e9ba38a8401cb7d4479",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.825Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_N_tex.png",
+          "sha256": "f12eda15e1d41a01e211b5c781a3b42a87915b05c1343a058994ca2931eb7106",
+          "fileLastWriteUtc": "2026-11-06T07:57:37.663Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S.assembly.json",
+          "sha256": "e5b6f69fa4801df29def374a8e405e8a09540549426de6d5d49c2856bfc5ee93",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.486Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S.atlas.json",
+          "sha256": "a8c221d0414d6d843e63d98a672945a8b42101f3df1d13aaba288c79633025eb",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.491Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S.clips.json",
+          "sha256": "6d8f938074ec6e0e000744fa2cb39bcf714eaa8c58f4a28045afafdb668f0992",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.630Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S.rig.json",
+          "sha256": "eadcdc4414e4b36b0176f60cd84ce87abf2959cf2f7bace97d24c266ad74c9b3",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.664Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE.assembly.json",
+          "sha256": "178ea4eee194d890be4ae80e05580ddc94b8caf5661ab34f8245713ede1fe740",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.848Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE.atlas.json",
+          "sha256": "4fc008671d1cad1fd40dcfdef407125ed118373825ac8402007d629338006070",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.852Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE.clips.json",
+          "sha256": "2d0865a573e4d0eae121b8123fcc6d3de800f7ac995beeaeabe1811c6b710b43",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.978Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE.rig.json",
+          "sha256": "453ca0363fadb7d2b945c151c292860d39b09f2f55016b4a2818eb5846f5e38b",
+          "fileLastWriteUtc": "2026-11-06T08:58:15.010Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE_ske.json",
+          "sha256": "2003f06d2fa20631cd3192553aae0bed63f904f60ef4aefe6370533ee746889d",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.836Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE_tex.json",
+          "sha256": "9269b2cb3d1cd518794fe46c00135b65c4df4d2571dccb14f8b269c8dc7baf46",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.844Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_SE_tex.png",
+          "sha256": "3198d8d05301e040954b9f0830aebd31015fe80b9c32ca6f09327ebe7d468a5d",
+          "fileLastWriteUtc": "2026-11-06T07:09:45.244Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S_ske.json",
+          "sha256": "70489299c4914186830d2edcc74ab0a7579f177444042d95e139402342f08eec",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.468Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S_tex.json",
+          "sha256": "74399267609524b6f6524c9c3d3cc0e9a94c48b6d87991675c4b1bcd8e1e178d",
+          "fileLastWriteUtc": "2026-11-06T08:58:14.480Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/rig/thetu_S_tex.png",
+          "sha256": "d006ff64b04eb23fc2444057bdacf823dd89dece34bb717b56ff3e6c227ce5ff",
+          "fileLastWriteUtc": "2026-11-06T06:38:11.278Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D3",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/{E,S,SE,NE,N}/*.png",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/{E,S,SE,NE,N}/*.png; reference/*.register-master4x.png; *.parts.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; procgen continuous_parts.mjs (alpha, palette, registration)",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/arm_L.png",
+          "sha256": "dab3849abd6eaac15838ee454d2ff2e71859e087a39f1cdcc20ac7f663aca87b",
+          "fileLastWriteUtc": "2026-11-06T08:18:27.773Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/arm_R.png",
+          "sha256": "58e6813ba76118cb477391ac163018630ea2f97242671f31cf9b674c985aeea9",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.933Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/boot_L.png",
+          "sha256": "264c460d55021dd643ab67b5927c9bc49046ee6c5bece72068309086b5197992",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.240Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/boot_R.png",
+          "sha256": "b4adf68d813bf53cd3b963c47e938725bfe66bd8095596d34c243300b76a4211",
+          "fileLastWriteUtc": "2026-11-06T08:18:29.312Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/brows_angry.png",
+          "sha256": "6e17096beab43c42c3b4a58cc5e64ad292a48d1bf035cbd658dc66500249bc45",
+          "fileLastWriteUtc": "2026-11-06T08:18:33.876Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/brows_neutral.png",
+          "sha256": "0e72f16289635815a449ad3147f958c767632bd5033ed4c743520316af94101a",
+          "fileLastWriteUtc": "2026-11-06T08:18:33.699Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/brows_pain.png",
+          "sha256": "25d7299dfe918c0037e303e5524aa363908473831faf63f4e7feab77655bf942",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.044Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/ear_R.png",
+          "sha256": "9e12a09e4e44b3b44fbc78b4a71822d4397e1cad7a651cfecfbdbb1e493b5b42",
+          "fileLastWriteUtc": "2026-11-06T08:18:37.101Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/eyes_angry.png",
+          "sha256": "312a40f986ad12e5e5380dfc5b7d35c70f724581adf39e76cd73fca9d3b07c5a",
+          "fileLastWriteUtc": "2026-11-06T08:18:33.539Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/eyes_closed.png",
+          "sha256": "74dea3129d2a43cc35a26f624a9677acbf8ed07aa9fa9e78a0eeda0c8c76169c",
+          "fileLastWriteUtc": "2026-11-06T08:18:33.371Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/eyes_half.png",
+          "sha256": "70383020b6e31657b96881668e297d797b3e4a02f0424860fcc78eb2143e88ac",
+          "fileLastWriteUtc": "2026-11-06T08:18:33.196Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/eyes_open.png",
+          "sha256": "5b362e08a60fd8a470f76a56eaf2afe40da5bbcca47e40f256d449f949181044",
+          "fileLastWriteUtc": "2026-11-06T08:18:32.930Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_L_fist.png",
+          "sha256": "b60fd4e3738ed80212cfda2d5ea0c0b49cc47c0ccd496049f61fcfc03bdb0862",
+          "fileLastWriteUtc": "2026-11-06T08:18:36.034Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_L_ground.png",
+          "sha256": "69e527aef9b53ac64376a1638b35e0f9bb0f9f99e07762f11272bcdfdb074d6f",
+          "fileLastWriteUtc": "2026-11-06T08:18:36.896Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_L_guard.png",
+          "sha256": "c2c388e5f3aafe1df526f3d91f4f1cfcf6e1a437c6abdca993773ef6c062a368",
+          "fileLastWriteUtc": "2026-11-06T08:18:36.703Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_L_open.png",
+          "sha256": "662706c9289231ca77994276045a632d352f7fef83ada1dc681af86b31000830",
+          "fileLastWriteUtc": "2026-11-06T08:18:36.244Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_L_relaxed.png",
+          "sha256": "9bde8960ef9da54c57e0bb01b1f8eecd89ef11cbd83528d3282b87b019d6cf1b",
+          "fileLastWriteUtc": "2026-11-06T08:18:36.496Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_R_fist.png",
+          "sha256": "2d33d6a36e37aac04960d60d02a5bc84873e23c732a5e9fd97ad6e8d253530b9",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.985Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_R_ground.png",
+          "sha256": "b7ff2ecd71cd283447e9e00ace14666432db17e9017cd1b919ef6e75f1667f98",
+          "fileLastWriteUtc": "2026-11-06T08:18:35.841Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_R_guard.png",
+          "sha256": "08e0c212dbfaaa27d6c0d1cd89bb2257519c4ada1315392aef47b699db5bcc13",
+          "fileLastWriteUtc": "2026-11-06T08:18:35.630Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_R_open.png",
+          "sha256": "7cb355394a078dffd9da6da98a4f56293fc8abbcbb10f4ea0e7a69009257e49a",
+          "fileLastWriteUtc": "2026-11-06T08:18:35.196Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_R_relaxed.png",
+          "sha256": "f426b5b9bb859a52f806200e939003da38295135edc96685246c4b846b5e0d5a",
+          "fileLastWriteUtc": "2026-11-06T08:18:35.442Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/gauntlet_plate_glow_R.png",
+          "sha256": "cf6583d04a027373796ca9818da28d3678df836552f24fe5b38212b94a4509e6",
+          "fileLastWriteUtc": "2026-11-06T08:18:37.299Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hair_back.png",
+          "sha256": "f8191657452bad7748f1110fb37e0a1795117a07010ecf73e6e19e03705a8dad",
+          "fileLastWriteUtc": "2026-11-06T08:18:31.368Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hair_bun.png",
+          "sha256": "1de1eff58c5aafcaae062ae2417b45e9153de3ba037bb1cdb7e49b0015398fb0",
+          "fileLastWriteUtc": "2026-11-06T08:18:31.517Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hair_strand_1.png",
+          "sha256": "02a5cd4687393bd078845fdee2c2a84d21c359b3b317ec367db7bbfe0a2f0fce",
+          "fileLastWriteUtc": "2026-11-06T08:18:32.017Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hair_strand_2.png",
+          "sha256": "c4686ab96a155feae3b20a62055257e0a3fcd06ce276c3f2ca5e01dfda64527f",
+          "fileLastWriteUtc": "2026-11-06T08:18:32.309Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hair_strand_3.png",
+          "sha256": "55004fd4761f315ab111d446a75352b89a20be922c4cba5057baf5f462450631",
+          "fileLastWriteUtc": "2026-11-06T08:18:32.542Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/hairpin.png",
+          "sha256": "939ba23b083ccf05c54c35d5fa387ca5244412077eeeb92284a8698d43682919",
+          "fileLastWriteUtc": "2026-11-06T08:18:31.864Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/head.png",
+          "sha256": "0f53b5230789ab39d54521a22fa4bc10c223045766aeb81be28c099fee0eb78b",
+          "fileLastWriteUtc": "2026-11-06T08:18:30.032Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/leg_L.png",
+          "sha256": "8235ad27c88fec325a2c95737d0722b75c7cd3871dda8cc613b1b344ed552793",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.012Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/leg_R.png",
+          "sha256": "42fda19e8378012755d23fa5f54da2017c5d2631851034d4595cbfebebfcdf9a",
+          "fileLastWriteUtc": "2026-11-06T08:18:29.142Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/mouth_grit.png",
+          "sha256": "d43ef3d727257eaa11a22221ca3ec496ede5cfdca86e38e2c1b987b55ea19e54",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.565Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/mouth_neutral.png",
+          "sha256": "12113645908cdd69fa63ee73ce30bf1748b3bfe5bf370546a82c84c2cf65fed5",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.219Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/mouth_pain.png",
+          "sha256": "2eebb793caccf1b9be9ccf9e097aaa3dd46678e90b5b7880e95c6ebb3571cf03",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.757Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/mouth_shout.png",
+          "sha256": "957407cbe89193c18dfe64bdafd5d6537bda9cd1cf86100d5455d7f1fff15652",
+          "fileLastWriteUtc": "2026-11-06T08:18:34.400Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/neck.png",
+          "sha256": "0578d7e673a5829a5deff1ffe217c632507a588605adedd0dc38a0c632bab9a0",
+          "fileLastWriteUtc": "2026-11-06T08:18:27.539Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sash_band.png",
+          "sha256": "0fd3f5b5c3b528784ac34ccca32ff331395658c8ed36eca261416c5944f6f774",
+          "fileLastWriteUtc": "2026-11-06T08:18:30.675Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sash_knot.png",
+          "sha256": "e148396c135f81bfefef36c85bd747c1d800438bc24495518b4ab454d2b2eca4",
+          "fileLastWriteUtc": "2026-11-06T08:18:30.821Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sash_tail_1.png",
+          "sha256": "5a703b7a22ea61235fad46da004676785076827120c7545ac1a10ac1351d5035",
+          "fileLastWriteUtc": "2026-11-06T08:18:31.042Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sash_tail_2.png",
+          "sha256": "7ddc0c8347df2688e7d2996467cbb285ae063fbc21c60270c04d319a12060cea",
+          "fileLastWriteUtc": "2026-11-06T08:18:31.195Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sleeve_cuff_L.png",
+          "sha256": "95000952f571393cd1d3edecd4513da0b0acf752d10231362264eb752707b696",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.528Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/sleeve_cuff_R.png",
+          "sha256": "d5f066cf5b06cc37e99e9f03170b29b67efcbcbf84183ed75fddf06863317b0a",
+          "fileLastWriteUtc": "2026-11-06T08:18:29.584Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/tabard_back.png",
+          "sha256": "a31845d0c2e68b1d5ae84cc12de0a70c0f8c902dbfea3e809d3ba0d2dadd0a6d",
+          "fileLastWriteUtc": "2026-11-06T08:18:30.511Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/tabard_front.png",
+          "sha256": "8675a242369248087fd493aa66f1fe5cce0313c4cb6542e97a017e650d0a7ec4",
+          "fileLastWriteUtc": "2026-11-06T08:18:30.274Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/tabard_shoulder_L.png",
+          "sha256": "1e1637afd36b2235ea81223e38a8bade6a20a0df1f8dfce8d2b6935152bc2cdf",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.411Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/tabard_shoulder_R.png",
+          "sha256": "addd3021089e989a460c4e7ac8826a5aa8cc6aba60f350a719053d265e188713",
+          "fileLastWriteUtc": "2026-11-06T08:18:29.455Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/torso.png",
+          "sha256": "6326fb52a8d3c50b9040efcbae6c3b40aad282e0bcd5520712ad1a8a5ac038e1",
+          "fileLastWriteUtc": "2026-11-06T08:18:27.377Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/trouser_hem_L.png",
+          "sha256": "af1abe3639b3d9d6acfe94f1cff7be9ca2ea2713c39d6193f9c9d47af965cdc3",
+          "fileLastWriteUtc": "2026-11-06T08:18:28.677Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/trouser_hem_R.png",
+          "sha256": "ed774aead28ac1ce43e6055353dbf1b10b47bf64426cbafdacb85e8a8214ec8b",
+          "fileLastWriteUtc": "2026-11-06T08:18:29.719Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/arm_L.png",
+          "sha256": "ad459f4e485a4f6fc1dd7c88e46908214e47bdc66aab4e62f0a3cf20a7713942",
+          "fileLastWriteUtc": "2026-11-06T08:19:09.980Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/arm_R.png",
+          "sha256": "c38da8ef75888d198e80f9ba63dfc3dffc2a7cda7ac3cd02149951aad7b0171a",
+          "fileLastWriteUtc": "2026-11-06T08:19:11.109Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/boot_L.png",
+          "sha256": "f01c85fd9ed1cf87233709269a7d2f32ed4c4c0d09828032fe5731656f63d5aa",
+          "fileLastWriteUtc": "2026-11-06T08:19:10.532Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/boot_R.png",
+          "sha256": "e7d039d33468f374b22e7f38284ae7d9c66ecb86579d87358c0ebdd030a7884b",
+          "fileLastWriteUtc": "2026-11-06T08:19:11.479Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_L_fist.png",
+          "sha256": "c2b763c5da952818f7a539f5135a4223e2c03d3b201be8e9efa8317fc9d97f0a",
+          "fileLastWriteUtc": "2026-11-06T08:19:14.729Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_L_ground.png",
+          "sha256": "5f6d59635ac04a61c1608209cf951ab7f6a1adea510c1e30d4084d268dd371d4",
+          "fileLastWriteUtc": "2026-11-06T08:19:15.306Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_L_guard.png",
+          "sha256": "6693a87c582b51c8749a8d30b6064482c21c8073ccc23c6abcafabb552b48c10",
+          "fileLastWriteUtc": "2026-11-06T08:19:15.164Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_L_open.png",
+          "sha256": "8045ce4507f95aec013b7ff442bc953cdda7786679ca5e975825bdd5fd5723a1",
+          "fileLastWriteUtc": "2026-11-06T08:19:14.877Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_L_relaxed.png",
+          "sha256": "b01aee4e24aae07a98252d679999cee84fb1b908e56f2b90c090b48ae04e20ba",
+          "fileLastWriteUtc": "2026-11-06T08:19:15.025Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_R_fist.png",
+          "sha256": "550bc15435957f56901ff7c7cda7a8f5b0dec0ac409b1e9f8e6f6faf525181e9",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.779Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_R_ground.png",
+          "sha256": "61276b78dc2b5bd449560146dadfb88ac784f83505de8f375cb61e73792af27e",
+          "fileLastWriteUtc": "2026-11-06T08:19:14.579Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_R_guard.png",
+          "sha256": "b0778ea843b628185557d9f30498a457cac896c1ec9c360b7a9e0fd1385ca1e2",
+          "fileLastWriteUtc": "2026-11-06T08:19:14.429Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_R_open.png",
+          "sha256": "d7e3f5dad59fd6b3bac5acf81809f9dd699f86a1a8c489eed0e199a50ae10c00",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.962Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_R_relaxed.png",
+          "sha256": "b3dc662bcc51e77495d6cf197c4446218ea30054775fb064d2961ffaa0927aa8",
+          "fileLastWriteUtc": "2026-11-06T08:19:14.285Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/gauntlet_plate_glow_R.png",
+          "sha256": "af6506bb43f0701cc7ee81a4546b088645ecb0880e6b8c6ec6cd2b49ec432470",
+          "fileLastWriteUtc": "2026-11-06T08:19:15.445Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/hair_back.png",
+          "sha256": "b0f123483d051a863bc9f1f08562471dd5e532d989ad7bfd801ac39161f37d30",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.236Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/hair_bun.png",
+          "sha256": "4f5767468fc6a34af01d40d3458a9b65a8e30b9bbd513136c8790e0a7c05092b",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.370Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/hairpin.png",
+          "sha256": "de0e8e1a0fab5bbac68318faf5efa510ffb159959f59f1c0bc5db496cce8ccec",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.504Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/head.png",
+          "sha256": "6d4df436e175daa6823a1859c59a4bf2a8b31b1ad9006d2a121e457f4cc9891a",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.239Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/leg_L.png",
+          "sha256": "a408faa33ab97a5eeaab32fa0ccc1bcad2a5e895a1f7c4466ea396e30f2c0999",
+          "fileLastWriteUtc": "2026-11-06T08:19:10.216Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/leg_R.png",
+          "sha256": "c41cd2092c4b29a946d0e3067ffc741c3d1f34ada99f4f2936be7a74c7922104",
+          "fileLastWriteUtc": "2026-11-06T08:19:11.308Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/neck.png",
+          "sha256": "c42b3336800f21d159efd3f0f3f7e39c5739a952a3914a9fbe4de71af5cb85d2",
+          "fileLastWriteUtc": "2026-11-06T08:19:09.756Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sash_band.png",
+          "sha256": "0ddb8474a98f1d9aaf8df3658a95242ca16b21d8477011916d22e7ada98cb62b",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.681Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sash_knot.png",
+          "sha256": "16ac29b0472672abbb29ffd44058984703d97355154f29ab3d4c6bf5269fe5dc",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.809Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sash_tail_1.png",
+          "sha256": "f32b65a08cc985bb7aaedf6b1a2c3b0b340dcb47d1ceded29fee8361875cb0eb",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.932Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sash_tail_2.png",
+          "sha256": "1873d8cd2edfdd3e52fab712fd52655a0c5dfda4b3a3a6dbfa11afcf67d5d950",
+          "fileLastWriteUtc": "2026-11-06T08:19:13.074Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sleeve_cuff_L.png",
+          "sha256": "770679bb91504513b14688b08621d8c0906b19b2bb0699803c8ddd7b74d4c28d",
+          "fileLastWriteUtc": "2026-11-06T08:19:10.832Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/sleeve_cuff_R.png",
+          "sha256": "d91107bd720a2d6f18a60c130ab639a9ad3980bb68bfd3e544aac9184dbdc917",
+          "fileLastWriteUtc": "2026-11-06T08:19:11.950Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/tabard_back.png",
+          "sha256": "47ee6cbac9bfee6230fd88a71c856c3fbc06ffcd044bc136e65ef165727cf0ea",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.558Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/tabard_front.png",
+          "sha256": "1bbbc8f1d0ca4461b2b3dd6f2905cce9bd16b8369f3224495181bf3a8603c3ec",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.401Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/tabard_shoulder_L.png",
+          "sha256": "f70461150a4c8135b7d29979f9ac2e55dc51b968bdd631b567c0eede09d78a42",
+          "fileLastWriteUtc": "2026-11-06T08:19:10.701Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/tabard_shoulder_R.png",
+          "sha256": "a1fe42aea8f5f54ada810b2f756f38b08affc3a3981dd9dc7a59ab1caad26511",
+          "fileLastWriteUtc": "2026-11-06T08:19:11.787Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/torso.png",
+          "sha256": "9e9ef952990e793e7cf93b9aa49a535d9b1db4ed49cd989016f29c9c1493c2dc",
+          "fileLastWriteUtc": "2026-11-06T08:19:09.501Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/trouser_hem_L.png",
+          "sha256": "9c777d1fe312dd7ebac7b858c80929bd65f0c211a55de149c2707dffe46cc06a",
+          "fileLastWriteUtc": "2026-11-06T08:19:10.951Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/trouser_hem_R.png",
+          "sha256": "5241359a847c99a2a1ac90fdd9305124ee675c0722d2579f59b57aa5b621dc2c",
+          "fileLastWriteUtc": "2026-11-06T08:19:12.088Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/arm_L.png",
+          "sha256": "594c173f11dcdf1bce52956ee8a61500d26d41dfeef2fde30b1e9028685e1d89",
+          "fileLastWriteUtc": "2026-11-06T08:19:00.789Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/arm_R.png",
+          "sha256": "6d22436acc9e5665a3d2b5b3514a702dfe10621a5d0a08dec8af14b4923bb5f4",
+          "fileLastWriteUtc": "2026-11-06T08:19:02.649Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/boot_L.png",
+          "sha256": "31325673689581e5bfbb2cdbc16caf68a8135d3b6fc27524a1db214b2e87682d",
+          "fileLastWriteUtc": "2026-11-06T08:19:01.453Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/boot_R.png",
+          "sha256": "af1081254d66a0767ec5c3c08b8b65ec5d364eacfc1e3afac42d2615283fcbd4",
+          "fileLastWriteUtc": "2026-11-06T08:19:03.079Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/brows_angry.png",
+          "sha256": "5da95ab884837b254b47c45ae3ebafb00e3d4e073acfa6ff74606ab3c9fa66ca",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.956Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/brows_neutral.png",
+          "sha256": "a231689d1cabc295c056ea39e8a660549b56dacf372cc4584a023f575eb15ae5",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.794Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/brows_pain.png",
+          "sha256": "a97e337a950d57e01fa347c4bc307ee6297c16e3e25b8bde1028783a54fb7dba",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.108Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/ear_R.png",
+          "sha256": "dc490aeb509b343cf08b1e550e392ae0ab45d324af4ced28db79730af8bdf890",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.857Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/eyes_angry.png",
+          "sha256": "6e54c4cbb23680fa28b6b7097035087ce68da891e509a7b8e0d6f1dd5a4fca14",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.623Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/eyes_closed.png",
+          "sha256": "853a08973364694eaf6d85f22746fced3eb8e1afdd6cf725df69c8fdb53e2bfe",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.459Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/eyes_half.png",
+          "sha256": "81f81f3e155e9b90aa5bd7b0be5cae27532fef00feb69358f7ae333c8990fbfe",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.301Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/eyes_open.png",
+          "sha256": "251fdf0eba28be8ce864f10a4e9324c01886e9edc2b4ad81632390bc6fd9f108",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.155Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_L_fist.png",
+          "sha256": "421368e073f8d58046a2a4d2dbcbcdd593307c8ed2936b7090a7de99d36f4b68",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.084Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_L_ground.png",
+          "sha256": "ade4599ec59f031de020e745eda87f3a53b00169d8db20e164a1154e9c3891c6",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.715Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_L_guard.png",
+          "sha256": "09ac350cf90083018aef85d3685dbeb8cbf0b62e894145b2648acec08dfaf59f",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.558Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_L_open.png",
+          "sha256": "f1d43faa449f53098133fa5ee160fb525b2962f2cd3e2e6ad6894514e06c27bb",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.236Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_L_relaxed.png",
+          "sha256": "9c07d261f349054407ff4cb21c799e824872abd149ae8d9ca170251cd0caa1bd",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.407Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_R_fist.png",
+          "sha256": "29693a9d4816951052dae9c560ddc2f56ce3ae64156ec2be66c819195b21f1ab",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.279Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_R_ground.png",
+          "sha256": "b377764b3e87c6e685814f6d30d165f3e4543cad7803b914da164fc25979fe96",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.929Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_R_guard.png",
+          "sha256": "a8c074d496bb6a20987830169d2bca3e78101112c93a85523be04a399ecf6fdc",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.781Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_R_open.png",
+          "sha256": "697892488b63efb02048d64278e44587eb2d8c317cccc0a21e143e1e9f4ad2d4",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.469Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_R_relaxed.png",
+          "sha256": "b34716effb6ada0384cd9ed4e4f5ab7fc4f9b0254fc1d31cdc8b60bf052386fc",
+          "fileLastWriteUtc": "2026-11-06T08:19:07.635Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/gauntlet_plate_glow_R.png",
+          "sha256": "1449a7086ddf0dea8f4e76465fd8f7f3c8c7dc652a36cc70a2afa9f572721917",
+          "fileLastWriteUtc": "2026-11-06T08:19:08.992Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hair_back.png",
+          "sha256": "98e8468f1e9cda3817fa440c67bce3b7b8a8a92d5f9dac9ad666472d5b9e8c32",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.275Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hair_bun.png",
+          "sha256": "43d176b9b518d565288324b33d2bea5ae53d875b77e8e9854a7e519324f51bbb",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.418Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hair_strand_1.png",
+          "sha256": "d4e176c87d525d1dde6e4086e19e63a899eb51d565f5b6ea8d600395cd746281",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.702Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hair_strand_2.png",
+          "sha256": "35cf44b2731dac68d541506939d457a35fdf6a3d9743bd7ce735a42452b7cdb9",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.837Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hair_strand_3.png",
+          "sha256": "320cb67f018a75c9b3177db836ce44d30e217c885272e0b5c1632801e91d0a37",
+          "fileLastWriteUtc": "2026-11-06T08:19:06.003Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/hairpin.png",
+          "sha256": "9caf2b619d13b152fc8e55d8e13820fb01cacd7200b4a9506e926a13f05ed2fe",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.573Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/head.png",
+          "sha256": "78bf1beb9c4bfd01a26113e9a90f555bed1ea28777f6c0daf58fb2870821b707",
+          "fileLastWriteUtc": "2026-11-06T08:19:03.796Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/leg_L.png",
+          "sha256": "9213972c6d67cc742736bc2bbcc58bae4d7760acc63b304bebb3b13e7bec7a8f",
+          "fileLastWriteUtc": "2026-11-06T08:19:01.077Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/leg_R.png",
+          "sha256": "17d0b7153d1c11d3703b3cf8803e28bf20e832b0a7eb1027039ba84cdd0ecac4",
+          "fileLastWriteUtc": "2026-11-06T08:19:02.891Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/neck.png",
+          "sha256": "f02a5e986878f6c47c8e94a2c6574e4a58ad74c745e7ac90e0a21e47a343baf6",
+          "fileLastWriteUtc": "2026-11-06T08:19:00.511Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sash_band.png",
+          "sha256": "1450ba97a1ae6ca5456afb3253e73253fa680c4cb8be73678a2598d71cced2bb",
+          "fileLastWriteUtc": "2026-11-06T08:19:04.663Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sash_knot.png",
+          "sha256": "e9ae9fc378c9b284dede2ce22e5f38a9a5f36783142aab830e1b1dfeceb7aad9",
+          "fileLastWriteUtc": "2026-11-06T08:19:04.817Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sash_tail_1.png",
+          "sha256": "d725e267ebbe9ffe515e19f664c9ce7773b31be71a9a4b7bcfa400df08a2accc",
+          "fileLastWriteUtc": "2026-11-06T08:19:04.961Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sash_tail_2.png",
+          "sha256": "dbd3fb9b3f98561069655bd54147f3dd8dc344822022922f3f87e61a11623865",
+          "fileLastWriteUtc": "2026-11-06T08:19:05.111Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sleeve_cuff_L.png",
+          "sha256": "bbec97c20b289af196c599260a1987fae4c639c95746364cb62e6ea99fd8883e",
+          "fileLastWriteUtc": "2026-11-06T08:19:02.094Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/sleeve_cuff_R.png",
+          "sha256": "6d2979e79eb5d9f9309d3e949e41f49b03271100d6ef4a0f1ce5692c962003e2",
+          "fileLastWriteUtc": "2026-11-06T08:19:03.395Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/tabard_back.png",
+          "sha256": "f918fc6e0a14ee90e9bbd242f54112ec0baaed69bb6b0ec4c1bc7837c1de491c",
+          "fileLastWriteUtc": "2026-11-06T08:19:04.501Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/tabard_front.png",
+          "sha256": "ecbc55391490cd9def0a8f7007b53c047e05e5e2ff0452c871368404ae9fcb39",
+          "fileLastWriteUtc": "2026-11-06T08:19:04.036Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/tabard_shoulder_L.png",
+          "sha256": "caa5d7fece59bf2aab5278f52d52a226ff588c5249a125271472b3903b3cbeb1",
+          "fileLastWriteUtc": "2026-11-06T08:19:01.894Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/tabard_shoulder_R.png",
+          "sha256": "a32c2c9d5db1b923bc590b6a03894d3ef0b6ecf0293214f72505a9340d6e288b",
+          "fileLastWriteUtc": "2026-11-06T08:19:03.244Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/torso.png",
+          "sha256": "fe3de4a032c76f84d5a88cf8d8884554852131f8f1480be4ed89b0db4a12355c",
+          "fileLastWriteUtc": "2026-11-06T08:19:00.186Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/trouser_hem_L.png",
+          "sha256": "adf228888c52cfe8dc1cb995b6357c9810f6c9f7e88ebb31759fd788237e84e7",
+          "fileLastWriteUtc": "2026-11-06T08:19:02.405Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/trouser_hem_R.png",
+          "sha256": "891316ad7cf7fd1303effdb2e4bc3ce89109487d7f660131f93d4313374746ee",
+          "fileLastWriteUtc": "2026-11-06T08:19:03.559Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/arm_L.png",
+          "sha256": "a408be7f3112936eebdf8b134e3e1de747c6f7c8fe5e26ec2df1ea4cda78524e",
+          "fileLastWriteUtc": "2026-11-06T08:18:38.232Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/arm_R.png",
+          "sha256": "1944554bc9dd6ad52144e95563e6d0af218e9905604e020ed23e190817c56a31",
+          "fileLastWriteUtc": "2026-11-06T08:18:39.447Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/boot_L.png",
+          "sha256": "cf4b6587c94760493a8c10018ea8990b4f8dcd959555dff1261b5e7207b371bf",
+          "fileLastWriteUtc": "2026-11-06T08:18:38.759Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/boot_R.png",
+          "sha256": "f1b8cbf62d7411b7ac7b0c126dda0058a427b51f0d8d611159b2919c99b878aa",
+          "fileLastWriteUtc": "2026-11-06T08:18:39.929Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/brows_angry.png",
+          "sha256": "bd24112be4e3f867d28fff63095f508ea569617c12fa89bec3af4be51a736f31",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.004Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/brows_neutral.png",
+          "sha256": "8b2526349bf38cf903ee5a1e821b155b819f345ba0ed058be35690f56f0e9eba",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.869Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/brows_pain.png",
+          "sha256": "759a6aa8b6681791e1bad14fa5038a8c5a61a847a22e80549a3fd87eae9a27dd",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.146Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/ear_R.png",
+          "sha256": "b0bf058cc16082a19dc21aae606c76bef921180b3280959628c0b8365b9fe7f7",
+          "fileLastWriteUtc": "2026-11-06T08:18:47.629Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/eyes_angry.png",
+          "sha256": "d5232662fb5d91bc88682f3149b7cc967e2ec6be81dc7557d68c3e5b087677f2",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.723Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/eyes_closed.png",
+          "sha256": "ea02e3d36d54c17e821201cad4046f9ea255afae8bfb67367ce454c278dcdb6a",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.580Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/eyes_half.png",
+          "sha256": "b2b740c8ab9e24f872054c9ac9201e6ce2970f2e309a9224e6f682bb93965f1e",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.426Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/eyes_open.png",
+          "sha256": "b832abc7ced54aeb9173696f29673ab5b7efd3065c5be9703077d2a506caffc9",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.268Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_L_fist.png",
+          "sha256": "e67f3e6418f06359d4a47ac792c02c8bd9fb8a8cd48efd6c58cfdb5c7eca732c",
+          "fileLastWriteUtc": "2026-11-06T08:18:46.494Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_L_ground.png",
+          "sha256": "39b3aeec9a7b45fa13c75f1d700fe4cd97bb33adc269e8f11a0efe23c24b67bc",
+          "fileLastWriteUtc": "2026-11-06T08:18:47.425Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_L_guard.png",
+          "sha256": "d86112fa0377929a97328c260f37d65e92dfa37465d2bef124661fd32885c23f",
+          "fileLastWriteUtc": "2026-11-06T08:18:47.219Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_L_open.png",
+          "sha256": "5b6164626385958e8a1383180af777f571ff3349ee3b1f690e31af0bfdeefffa",
+          "fileLastWriteUtc": "2026-11-06T08:18:46.718Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_L_relaxed.png",
+          "sha256": "d7474b66db5da710a3d5386d9ff36a7c85ec7e4fa8736e2cbdd98976426eda5b",
+          "fileLastWriteUtc": "2026-11-06T08:18:46.960Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_R_fist.png",
+          "sha256": "5aa95926138af1a7a2c876f33d319e71bc4bac98b5ee47f7b1ac9ddef9ee8f0c",
+          "fileLastWriteUtc": "2026-11-06T08:18:45.198Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_R_ground.png",
+          "sha256": "35efc1d8ccae9c78639f7f74dd0164c019e43de483d473d0c1394dd0e578ce87",
+          "fileLastWriteUtc": "2026-11-06T08:18:46.275Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_R_guard.png",
+          "sha256": "1c9c066808d04d5ba0de3f184fcc18ee9b74ed9ff77d967d48a339d77180ee91",
+          "fileLastWriteUtc": "2026-11-06T08:18:46.057Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_R_open.png",
+          "sha256": "2a286bb3fc3691ad94c432c2614d7e4a258b8667c6a5f3405cfc0f44b63a337d",
+          "fileLastWriteUtc": "2026-11-06T08:18:45.548Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_R_relaxed.png",
+          "sha256": "3b446b3d17e9c63d9eeac591fa5bd2ce1b309fe774783d60437a6385c01af95b",
+          "fileLastWriteUtc": "2026-11-06T08:18:45.816Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/gauntlet_plate_glow_R.png",
+          "sha256": "a98adfd642eabc14d5a9481a5bbfd48be9eb4b1480797acbabdcd6ba57d1d5f0",
+          "fileLastWriteUtc": "2026-11-06T08:18:47.815Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hair_back.png",
+          "sha256": "a79bc6b21e84ac75ac44d1ee567ec4b4cb867489ddc0c474ae54d60960f3d84c",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.385Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hair_bun.png",
+          "sha256": "ce4968c1f2d4f3f4578afd9ee208c15df4599d785872defcd7f54245d6ab1e24",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.530Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hair_strand_1.png",
+          "sha256": "ae5fb645ac73bd2f891028e43068e74386835bba73ef77113af17a8e940808c5",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.801Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hair_strand_2.png",
+          "sha256": "75b9e0b0fdbe1bee603f3b438b0dc0c9ccd286b0e3d2fdd389be912e59274e60",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.940Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hair_strand_3.png",
+          "sha256": "2a057e719db5df1e0ac33a8b177c4178339f1bd5e24946c7dbf39fa548f99f69",
+          "fileLastWriteUtc": "2026-11-06T08:18:43.095Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/hairpin.png",
+          "sha256": "a59a79f5ec7f10c387b4256261d43b9dc1c9766bfcbb8b09b83f78c3bc62e59a",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.664Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/head.png",
+          "sha256": "027a87fc7d15770a059dbfd0a1f5aed399fffd2c2274eb330d7637215b860f39",
+          "fileLastWriteUtc": "2026-11-06T08:18:40.518Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/leg_L.png",
+          "sha256": "6f783b2d3655089914fd702e793e933c9a4de9b5721b86db712be58494d857b9",
+          "fileLastWriteUtc": "2026-11-06T08:18:38.426Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/leg_R.png",
+          "sha256": "3ed8ae231ffd734ae5e540849ee5e8e1acb2e5684853e6ea8abec2952243c147",
+          "fileLastWriteUtc": "2026-11-06T08:18:39.633Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/mouth_grit.png",
+          "sha256": "f85d5415974006af061220421a19ae937fbd2ba5fc86480edf8a61b3331e2789",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.749Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/mouth_neutral.png",
+          "sha256": "71b7b976b637ce6997215089b67ea463d3d25eb8d68a61f4bac443b1d2f1a7c8",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.361Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/mouth_pain.png",
+          "sha256": "923bd94868ad3e4691a5447667e8d46e475370d489da452036810868cead108f",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.940Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/mouth_shout.png",
+          "sha256": "73bc456d449f2fda804d994922cb28d50fadd45b2217e610e70791bbffd0f5c3",
+          "fileLastWriteUtc": "2026-11-06T08:18:44.564Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/neck.png",
+          "sha256": "71ec23152444757f8f2e68ceb7a5ff3c8c34f3fed43aca38f65a2f00cfbf1521",
+          "fileLastWriteUtc": "2026-11-06T08:18:37.998Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sash_band.png",
+          "sha256": "a28823ed79fa51b65f02e2d34d1280481010372156d150bc6ff6f61d26a0ff85",
+          "fileLastWriteUtc": "2026-11-06T08:18:41.604Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sash_knot.png",
+          "sha256": "f9b8a838ecf450d21418787174b8e737334e72c49326ef0ba7dea95028a662bc",
+          "fileLastWriteUtc": "2026-11-06T08:18:41.854Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sash_tail_1.png",
+          "sha256": "dd48438a1afa5c4590319ef365b879f630ce4248eaeab9b9f8fb1c1e7619cf3e",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.017Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sash_tail_2.png",
+          "sha256": "15618007cbb93b6c40702f8c778325b5f3c0848f2c906ff516993682d37b5b31",
+          "fileLastWriteUtc": "2026-11-06T08:18:42.222Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sleeve_cuff_L.png",
+          "sha256": "a44e3369cbf59a46943379b0a3e59864212171e5332c7b3ef455b630c87374b1",
+          "fileLastWriteUtc": "2026-11-06T08:18:39.105Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/sleeve_cuff_R.png",
+          "sha256": "6e045701b3ae2ecb40cc18e519dae7edde4692fc3743f95ac4460deaed51308a",
+          "fileLastWriteUtc": "2026-11-06T08:18:40.202Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/tabard_back.png",
+          "sha256": "092da72fbcd52c62b6c085a61b25e74cb1cb053a5b3c84dd47b9c540d2ef1a92",
+          "fileLastWriteUtc": "2026-11-06T08:18:41.355Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/tabard_front.png",
+          "sha256": "0e0d1cacf7de49c1a3be85b6c3c5cb040e05ccda9f8a0b55796ce73000d7a57c",
+          "fileLastWriteUtc": "2026-11-06T08:18:40.767Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/tabard_shoulder_L.png",
+          "sha256": "064484d640be857e76ce895d65a60ab67721964cfe7a5cdb5a3100ae4dc7e1db",
+          "fileLastWriteUtc": "2026-11-06T08:18:38.939Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/tabard_shoulder_R.png",
+          "sha256": "126beddb9f4da0bd7506ad7f512a78e7d9571b05a0d3b3f07a38bb9ef93b857a",
+          "fileLastWriteUtc": "2026-11-06T08:18:40.070Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/torso.png",
+          "sha256": "f106f81c58487783535cb8076e53d354bab8e11016a5316c37dd182d9c21074e",
+          "fileLastWriteUtc": "2026-11-06T08:18:37.813Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/trouser_hem_L.png",
+          "sha256": "f39151e8391fd0138da3a7f9f5620bc55f113e00481b78c6372f29b83fbe5ad8",
+          "fileLastWriteUtc": "2026-11-06T08:18:39.257Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/trouser_hem_R.png",
+          "sha256": "97ecece8d9599345dd3501b3b92d76fa89e9fb47671aa8935a553b4b0b0a5bbc",
+          "fileLastWriteUtc": "2026-11-06T08:18:40.350Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/arm_L.png",
+          "sha256": "10944cfa3b8bd7ec2f4d9590969bc5fe654a486d66ec01c59798ba39893621ac",
+          "fileLastWriteUtc": "2026-11-06T08:18:49.499Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/arm_R.png",
+          "sha256": "87f762f010d9e2a318ae01e5329104d6f67c1e165bcc3d6b30392d5f9c5df225",
+          "fileLastWriteUtc": "2026-11-06T08:18:51.122Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/boot_L.png",
+          "sha256": "c3761b09c3daf23861cb42a6b52a0e84143841dceb22c42b71277d9a567723ed",
+          "fileLastWriteUtc": "2026-11-06T08:18:49.936Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/boot_R.png",
+          "sha256": "52d71fb381bf225ab381569ce07e755883a6929ef612b6a0b6d28a2d2018f21b",
+          "fileLastWriteUtc": "2026-11-06T08:18:51.532Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/brows_angry.png",
+          "sha256": "4bbf6b10ee3b6d56ca544c3fed4077b78e6a7f18f63c3a5601a0190d10e84025",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.101Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/brows_neutral.png",
+          "sha256": "c0dad2e3c73649838ce573a0f7479810f54ad31ed386d8cb94902f822b9eb44a",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.982Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/brows_pain.png",
+          "sha256": "0453a86f713b533a3b3cedfd02ef9539c64edf20a386964963cd0c3e20a9cb32",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.221Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/ear_R.png",
+          "sha256": "0ea7de3c824ee74e215d113b190bee8aedceb914e154c2bf0f3f07f01b7c0a6f",
+          "fileLastWriteUtc": "2026-11-06T08:18:59.525Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/eyes_angry.png",
+          "sha256": "8e2a4277a3b27b4b524db727acef7bdf8c5d6c6444903227b0a1a57529a61cf0",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.854Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/eyes_closed.png",
+          "sha256": "4188104aa387a1adfa38bd54448a3be530741e37a3e0279505d84af26d9c43ca",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.715Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/eyes_half.png",
+          "sha256": "b484ad3fffd2c8d6b685f52e87280a8cb56971ae89a8612a13a5750f33b58c69",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.576Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/eyes_open.png",
+          "sha256": "24eff7ee593537d5d31b5cd9fda4e63977bc3505556db43ece8011e9be0bd35c",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.436Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_L_fist.png",
+          "sha256": "a41f43fe34b3b849b299c4f19bc0858bb243ab40a724f2a8ac42adf4e163ed48",
+          "fileLastWriteUtc": "2026-11-06T08:18:58.325Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_L_ground.png",
+          "sha256": "e129cc93d626bcbbd2d8c73000d25f1c778183ac159b43d13fee7804f0c2dd2e",
+          "fileLastWriteUtc": "2026-11-06T08:18:59.332Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_L_guard.png",
+          "sha256": "8ce0d073216045382d8e49677e60f5a3fcf59d8899329ca0c4fb5b4fc8949fa3",
+          "fileLastWriteUtc": "2026-11-06T08:18:59.088Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_L_open.png",
+          "sha256": "691248730ba98ed59a8939caf4839c0d314731ad5a7d6a0210f3e6545a201035",
+          "fileLastWriteUtc": "2026-11-06T08:18:58.537Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_L_relaxed.png",
+          "sha256": "cf981cce25128c888e66c0d89663d2394bd31e785766320bd22d52be6e2d7f75",
+          "fileLastWriteUtc": "2026-11-06T08:18:58.761Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_R_fist.png",
+          "sha256": "555e84ef287b241e709b12463932221efd3dd22d405cdc4da7e54c46094a0e23",
+          "fileLastWriteUtc": "2026-11-06T08:18:57.207Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_R_ground.png",
+          "sha256": "7631dcd23852988d2142ae72175ee87e551c66bb4fed29e63b33b6d0b8ca17c8",
+          "fileLastWriteUtc": "2026-11-06T08:18:58.091Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_R_guard.png",
+          "sha256": "6806f79f2e459e2eefdf30868ca7225b6940d71f4233a3ebdecabbff2190c84b",
+          "fileLastWriteUtc": "2026-11-06T08:18:57.888Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_R_open.png",
+          "sha256": "70156980d78588eadc75a4b51243a4ecfff763d4e164c99e6c54caef193aa43a",
+          "fileLastWriteUtc": "2026-11-06T08:18:57.433Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_R_relaxed.png",
+          "sha256": "b7a2805135b163aa1fe45fa427bc9f9953ce52da7cae3a07f635fe007fb1b516",
+          "fileLastWriteUtc": "2026-11-06T08:18:57.667Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/gauntlet_plate_glow_R.png",
+          "sha256": "e5f3f574bb5a00dea0685e5539879ca08286df082a42efcb6caaeb61470fb347",
+          "fileLastWriteUtc": "2026-11-06T08:18:59.716Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hair_back.png",
+          "sha256": "be941cecb9202a1b1f181c99076bc464c7c65b07cc5255ec8149613704b08282",
+          "fileLastWriteUtc": "2026-11-06T08:18:54.570Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hair_bun.png",
+          "sha256": "e29c1f658a63b5aa967cec8a7f67c890cf1040f96baccc5dd220e472d52ed288",
+          "fileLastWriteUtc": "2026-11-06T08:18:54.744Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hair_strand_1.png",
+          "sha256": "f979330afda396cf345180aaa12fd2c0babbfca09d362430f0be4bf9cc646257",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.031Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hair_strand_2.png",
+          "sha256": "2edd0b14a9ac9514fafe0253652614ed754dbc10b6e4a817b524fb0b99a2c299",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.170Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hair_strand_3.png",
+          "sha256": "a57681eef56e28a973b249d9b847b5845f5e593025149f91dd0d97b23834780f",
+          "fileLastWriteUtc": "2026-11-06T08:18:55.296Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/hairpin.png",
+          "sha256": "7a923046c58268fd6edfd0ef1b955b8b899578572c869543a356f52baa01ae6b",
+          "fileLastWriteUtc": "2026-11-06T08:18:54.895Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/head.png",
+          "sha256": "201eeecfaf029a247ff8d4c0984238014d242a11940b989d205ffb07f271a4ca",
+          "fileLastWriteUtc": "2026-11-06T08:18:52.652Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/leg_L.png",
+          "sha256": "917bf9ea93c85e46a30eca28956aac2fa6d1687939dfb0293232dafda8d76a64",
+          "fileLastWriteUtc": "2026-11-06T08:18:49.726Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/leg_R.png",
+          "sha256": "c83c4becdcdbb36b008cb6ae0e4bb58ce1e3006930b5bd9b2c67baf5a9f3987a",
+          "fileLastWriteUtc": "2026-11-06T08:18:51.356Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/mouth_grit.png",
+          "sha256": "55b10fb400aca6808e6dde61dbd9fec9ed28527700866d9504035480c420e97b",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.797Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/mouth_neutral.png",
+          "sha256": "c6a930b4f9918b2856ce89eafbe9e17e08e0346acd2b30cb3e98f6fb84410ef4",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.451Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/mouth_pain.png",
+          "sha256": "6e906d28956d28903c324064a5774a22aba9810c3929a725d467cb33ea0bb9d1",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.984Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/mouth_shout.png",
+          "sha256": "c7dc205ffe9199ccdb0e0bfffb345b85c0f9c24a9926233b1e6178f5c3e99d59",
+          "fileLastWriteUtc": "2026-11-06T08:18:56.619Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/neck.png",
+          "sha256": "a6ed462ad8a734159c683ec071052e265ea7b03815703f658d0257eaeb292fa6",
+          "fileLastWriteUtc": "2026-11-06T08:18:49.209Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sash_band.png",
+          "sha256": "b0425cb3a4fe8477fcbb1ddf54fb644980f561a70e0fc4390676aaf2fbadc2bf",
+          "fileLastWriteUtc": "2026-11-06T08:18:53.615Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sash_knot.png",
+          "sha256": "ee2498a6873bdb8a1168cd04b22d7a98c27dcfa5064b581b8ada760c6dd1b193",
+          "fileLastWriteUtc": "2026-11-06T08:18:53.828Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sash_tail_1.png",
+          "sha256": "f9ba66a454bdc73a86e5cb788508853045973b0f8354f50b701335b11df70d2c",
+          "fileLastWriteUtc": "2026-11-06T08:18:54.049Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sash_tail_2.png",
+          "sha256": "3a8ee23c76ad1cb89f978bbe9c43b57747bcc65dd3f069076cefc992ed7f93b4",
+          "fileLastWriteUtc": "2026-11-06T08:18:54.234Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sleeve_cuff_L.png",
+          "sha256": "48e1fac60d8272ac99d5b912563ff14c7c7d5db33b1af9a633f0efa147b4ba3a",
+          "fileLastWriteUtc": "2026-11-06T08:18:50.485Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/sleeve_cuff_R.png",
+          "sha256": "a0c7a3e489d5d6773e6cc6335d113327fdb75e3e4d58ea54c0473de6c93504f8",
+          "fileLastWriteUtc": "2026-11-06T08:18:51.878Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/tabard_back.png",
+          "sha256": "7a5a4ed3fe2afdbecb87f03d59d3e163b30fb630de668e8daa034b14b890b4e2",
+          "fileLastWriteUtc": "2026-11-06T08:18:53.342Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/tabard_front.png",
+          "sha256": "fd8d0df27cace8f0f5f166200f836be172b048ff0c085e6aa5556cc08f7fa52a",
+          "fileLastWriteUtc": "2026-11-06T08:18:52.900Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/tabard_shoulder_L.png",
+          "sha256": "5ef5fcb7fa178eb24f821ba8bae68cefcecfcf665c21ab496e28e22763299651",
+          "fileLastWriteUtc": "2026-11-06T08:18:50.209Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/tabard_shoulder_R.png",
+          "sha256": "23ee43cf97ee02023f4ce56af0643736d337d56a2725a5fe8f6fa0fe63cc8deb",
+          "fileLastWriteUtc": "2026-11-06T08:18:51.693Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/torso.png",
+          "sha256": "777c197ceb550d4bf8a55eae8c85973b7c0152f49d8f4f3d0e155e50a06447f0",
+          "fileLastWriteUtc": "2026-11-06T08:18:49.045Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/trouser_hem_L.png",
+          "sha256": "c089b9d0e777a60f7563ac2e863af52005cf7941ef6064de912ae3a7fb6fdfae",
+          "fileLastWriteUtc": "2026-11-06T08:18:50.679Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/trouser_hem_R.png",
+          "sha256": "d51855b94613e5753a26df1d8f97dc00154e9831b25c171699018d064820fc88",
+          "fileLastWriteUtc": "2026-11-06T08:18:52.104Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D4",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/icons/*.png; assets-src/placeholder/the-tu-continuous-v1/icons/{48,64,128}/*.png",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/*.png; shared.exports.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; procgen alpha-weighted resizeArea",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/class_emblem_the_tu.png",
+          "sha256": "3a94808c49f1a6123d465769697e96c5961969d2ab33b03f89dc7327d455756e",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.296Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/item_gauntlet_set.png",
+          "sha256": "d11a390c1c8d2f0c4c0302994c6f5147e2e7a64b5903919b4bdd0c4e0bf06b67",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.363Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T1_phach_quyen.png",
+          "sha256": "7f9be479d98499b15a0d09cbf241ee9c6abd748ccf829367af7641ad2e798b85",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.436Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T2_thiet_bo_sam.png",
+          "sha256": "04a1e2f73535d6c5bdae9179c714cfd769367ba3387421e636dd4b1d7026231c",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.503Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T3_dia_chan.png",
+          "sha256": "ca5eb476298e28c195b0b9acc9196cc19db83814b08e7a8a250d5a95c4df64de",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.575Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T4_khieu_khich.png",
+          "sha256": "13dbb3b5fd756f0035d2ac9e4c828cbfeacaa61096c27f910f8b38789a818d9c",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.642Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T5_long_ho_quyen.png",
+          "sha256": "9209bb8db12f5d0f17e8ba0ae53ead3903cb2f09e87be71563974202307c0f8c",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.719Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T6_kim_than_cong.png",
+          "sha256": "77da272191b4899e84d2f09955b0c546b815d27eb6b4fbde9c034c60911ff518",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.798Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T7_thiet_son_khao.png",
+          "sha256": "a3ef7de29fcad3edb58a0193ce382b6d6b9fa2821cf201fb8be7226bab676560",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.880Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "cf30a292ff7a6543f06aafbbaa431d7f70b907cc9d97814f178c814e30bb3bc1",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.952Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/class_emblem_the_tu.png",
+          "sha256": "5910fa64c63ba078bb896bd7794fd17d62802c2efdafe3dbbebc2b19bf7f5c56",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.291Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/item_gauntlet_set.png",
+          "sha256": "a78402fb8518e2a5ee7a0729fdac21b1e88128e383092a79a2801d6c6d079bf4",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.359Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T1_phach_quyen.png",
+          "sha256": "56af8557c809c99aa0653868829be30b45dc5db1f41c6b82420e7fc89e73255f",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.427Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T2_thiet_bo_sam.png",
+          "sha256": "edfd099ead7b0fca1ef9c8c43fd4973add661510d5d2083286a10c8fa9197270",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.499Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T3_dia_chan.png",
+          "sha256": "1dea6098be359a004038457f62392cf18d8c133628947087304df239d0a57788",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.568Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T4_khieu_khich.png",
+          "sha256": "1342d8b36e153a9883e86cb30af2f4960a7a6bcb01b08b46f65571058aa16e0b",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.636Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T5_long_ho_quyen.png",
+          "sha256": "1724577a3362d318d246371ad100efcae0770c1050ca1f8eb1048e8b19b00880",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.711Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T6_kim_than_cong.png",
+          "sha256": "843481ee506d8f712264ad1b900be548d7d13e42f52dd3e175d662cae0a81619",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.794Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T7_thiet_son_khao.png",
+          "sha256": "d7f120e1dc9fd354cc8c631ea2d64c3aad0310973d45bcbce0ff1e5cb4242170",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.873Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "524d86892f48d9c74e8a797b4a2a566887a5580e738ecb7f3097263e9c0396f9",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.943Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/class_emblem_the_tu.png",
+          "sha256": "c042dfa9840fb2ea08ad3459e80cc872fa63a214a62720cd9787192f13f69b86",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.292Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/item_gauntlet_set.png",
+          "sha256": "37df4215b67cbfd69aff47db3af296b8f1747ef45912e677ffc1aa7bca7f03ff",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.360Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T1_phach_quyen.png",
+          "sha256": "6d2f5e4a308fedbf7a66cbdd8218058e70510c02b923b7cf961125bff397148a",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.429Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T2_thiet_bo_sam.png",
+          "sha256": "0af26f6585513ad2ee27fd00dc3639608787fbacb92f201325e247450914c186",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.500Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T3_dia_chan.png",
+          "sha256": "9b2ccbd6ea3484b1abea9724b6215edcabb6db983ce76fdf795607af1865b460",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.570Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T4_khieu_khich.png",
+          "sha256": "96ebef7336e23641b9ed6d97f0240e9666f76e3f1a0c30dd3997291e8e698c6e",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.637Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T5_long_ho_quyen.png",
+          "sha256": "e2f4b5d4262badddb1845c5c52b539e3c124c4e12d45216d1ba38ca70d547fa7",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.713Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T6_kim_than_cong.png",
+          "sha256": "df8f2679af900629ac1582ea0bc1899894b9e1aec1e04e1b79d293711c4a2182",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.796Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T7_thiet_son_khao.png",
+          "sha256": "51870c3f388196d907f79a508a5b2896087b3cdfe7bb7506259b19fc0dc4b2b9",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.876Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "4347d48bde639fe0136be816cca02dc0e11439a5fe63554cad556e6f61ca7fad",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.946Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/class_emblem_the_tu.png",
+          "sha256": "230100d750b95f9fd5c96948cf9ac8b55a82f8cfab949ceabc0917e4026226e7",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.288Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/item_gauntlet_set.png",
+          "sha256": "de1929ca1e95d4ecc191de10830e9f25b01275bc4f8641aa2159759ff449c568",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.357Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T1_phach_quyen.png",
+          "sha256": "b87e082381eee6050e1967752e1ef06cd65e211d249c9421a3cb752e4a2968a5",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.424Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T2_thiet_bo_sam.png",
+          "sha256": "2d126b2494655cf5a31299648f22b685f8a063453e3c8e453d2ddfda9a11037f",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.497Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T3_dia_chan.png",
+          "sha256": "69f64b5cad89c72977d59b1dc48ddfcdf3228c570cbbc69ed6b7748c7a8aafc2",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.566Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T4_khieu_khich.png",
+          "sha256": "55f34c16a0d9694bd43ccca8b4cea5365544fb59adbe17784b01fb05cdb2adce",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.634Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T5_long_ho_quyen.png",
+          "sha256": "a64ab839cd83a92bfa3bcda505999e6506581b9d6cb9a9f377fb8dafd1fc9889",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.710Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T6_kim_than_cong.png",
+          "sha256": "e0e00e018a9b304784942d23f0291ca282f41ec67084a0cff9468154428e81a4",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.793Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T7_thiet_son_khao.png",
+          "sha256": "fcd9fe4fe314f6408e95c25bb492f78f16efa87671133d3d783ce624fb2aedf5",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.872Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "11b4cf51544648a55a19c15f25f3f96362769e9792fd4a97e35d59b0036ff5e1",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.942Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D5",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/vfx/*.png",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/*.png; reference/shared/vfx/*.png; shared.exports.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; procgen straight-alpha resize/planar export",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_aura.png",
+          "sha256": "85ed8e68a74a6f36d089a97b2ead32efa495dcc21b521bc7096623d81f64ba21",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.000Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_1.png",
+          "sha256": "c2e661eb935593c29fed1811bab583f735e8c8ff8c2d3b61cd0b4616f0526340",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.132Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_2.png",
+          "sha256": "bcdc7e8206f469c1186a5c2cee23a9c468182e201bb3f2dd884504b08b42461f",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.359Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_3.png",
+          "sha256": "6321ad21b959d7b9d6540668dd768d4d66d3c8bee6e3b62f375d19d16511c52c",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.546Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dragon_tiger_trail.png",
+          "sha256": "f6aa324e53fad13f3140deb47b583076d94bb9774e7f753e4482efdcb281bb98",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.756Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_1.png",
+          "sha256": "76cd8350f223fec97a9bc2038f759260fe8bba911c2792c28d51dd62540db993",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.903Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_2.png",
+          "sha256": "a7f2f8fe2755211136881242a797824d2cac398237cfabc27881c21fff228288",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.063Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_3.png",
+          "sha256": "b660fa2ee39ebe15e8d4cda335e867ece8270778e3a4132858dac9d8e9d5c9c3",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.276Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/fist_impact_burst.png",
+          "sha256": "7415cd0e46da455a215b5e4510c4e7aee947034d089a7b5d5bce7c0a69313c53",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.500Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/ground_crack_decal.png",
+          "sha256": "f6d40d02e4c5f417623e4f4e1ed01c9848a06971ebb35c61ee89ef28a5fd8a1f",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.691Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/mountain_charge_trail.png",
+          "sha256": "1b52d4be16802b0abbcd0fd9c2fd40a94287a12f6b51b343e531bcdc08b00317",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.834Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_1.png",
+          "sha256": "f1361c865579e9e6a0707cc8e26b92002bffab72fdaf411bdd1b343a0721437a",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.977Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_2.png",
+          "sha256": "31a8c9fea71970a9170b9a82c41e6a34b2466c123814d04c7e21c322837ef991",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.092Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_3.png",
+          "sha256": "ebec945f418bfa27b6ae70baef1fe8ff2f3c68ddcf37fb7ad337d840027c5ce6",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.212Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_4.png",
+          "sha256": "424d41bfdc2eee1b587fec36f5d70ab0d5a2348be74cac8fa8942c223ba2630f",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.346Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/shockwave_ring.png",
+          "sha256": "0efdbd612c093a5c680405d3a57d7cece120ca6d0eeaad84956009a52e5d62ba",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.520Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/stone_skin_overlay.png",
+          "sha256": "1299feec5ccf746d361239dcc4142d5f69cb24b51231f5933861f358fedba985",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.991Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/taunt_ring.png",
+          "sha256": "1451a1b72746eb3e3f0f9c703be3683556cde30f331a0db8d3d394907a9c0f35",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.226Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D6",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/portrait/*.png",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/portrait/*.png; shared.exports.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; procgen alpha-weighted resizeArea",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/portrait/the_tu_portrait.png",
+          "sha256": "e1e63f340931c25805e0553f01d05632832a434a6522984588c26844d64f4dd7",
+          "fileLastWriteUtc": "2026-11-06T02:53:20.036Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D7",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/reference/**",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/* and recorded upstream concept/image IDs; adjacent generation/source/registration JSON",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; procgen normalization, crop/layout guides; in-game mockup from upstream",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-attempt-1.generation.json",
+          "sha256": "f263452859f32a2d9aceaf30e50c908a6839818639577b4d1da36eaa0b849b29",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.221Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-attempt-1.png",
+          "sha256": "e99fafe8430689b4c9df391f09c94fc0783c80d7f41d6a380edf9097a6a3e157",
+          "fileLastWriteUtc": "2026-11-06T01:59:47.963Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-generated.generation.json",
+          "sha256": "b4cc787f2a665ee58ff794df67a4429dfd2432f81e3ecf41118087530c285e19",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.224Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-generated.png",
+          "sha256": "1a4b58670d731842ff021d437f59efe1268691c43dcdd871c9e627dd3907eb52",
+          "fileLastWriteUtc": "2026-11-06T02:00:56.489Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master4x.png",
+          "sha256": "149493d03e89549a21607f267d138ed97e26333ab10b39f5c1111c5d16f9f098",
+          "fileLastWriteUtc": "2026-11-06T02:02:08.057Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.register-master4x.png",
+          "sha256": "61cde31177aecbd524787b8f5e1fb882317935581d205e08f9ceb76d3ffe3d18",
+          "fileLastWriteUtc": "2026-11-06T02:09:28.755Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master-generated.generation.json",
+          "sha256": "432c0779bb7531bf0cfcc17575b1648b7534094f7e188e371f8eaf19417d2c7b",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.246Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master-generated.png",
+          "sha256": "b8c094a52f2a0662ab2060bf50e01f48f1b7d000902e94a367235ea316f1943f",
+          "fileLastWriteUtc": "2026-11-06T04:44:15.932Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master4x.png",
+          "sha256": "6cdb49802246c94d4a90963f02dc7ab2b673de9eb1db2f4ea196d2baa848af8d",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.333Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.register-master4x.png",
+          "sha256": "83bfdaa4f137f70d5064fa60600e75f0913c9182fa7ca77f3ac11708d6dd374f",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.382Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.registration.json",
+          "sha256": "401ab8cbb0b1fb56477660bb16ab8315a96d53090d3cad63087da08ab67acd96",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.958Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master-generated.generation.json",
+          "sha256": "9f99766d5f9fe0adb4a5ba502d6ffb1b11bf8ceb8969859dd0e5089836b86984",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.252Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master-generated.png",
+          "sha256": "46c2a5082f3f2054b794a0d588f25da7b0e7eb3e7f43575216404fa652a4851e",
+          "fileLastWriteUtc": "2026-11-06T04:43:19.712Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master4x.png",
+          "sha256": "2ae6c3dbcd3dc1cad3c9a7ada4dfb76fd6e900e63c1a2e89faab112797c8771c",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.202Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.register-master4x.png",
+          "sha256": "967d4654fd81f881b5803c237876646e311771464c59deda19fab1233c936ddb",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.249Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.registration.json",
+          "sha256": "b0844c689ec15b2872a116bdcfa819ea03b3124a0acf010791c7238d9a0ba745",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.962Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.head-identity-guide4x.png",
+          "sha256": "0974e19c14bd0e4692716a8b0a77b5078f8625fbd192aaa0a7512e974055158a",
+          "fileLastWriteUtc": "2026-11-06T05:53:53.424Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.head-identity-guide4x.source.json",
+          "sha256": "4119a980f4aa10eb7b2ff09973fb32538729e8374456f0c570d2176e8c367dc5",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.120Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master-generated.generation.json",
+          "sha256": "720e6c7ea51c8a79d36219e5be0eeb7ad4982c261488ccca10c9af2a3815dc03",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.260Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master-generated.png",
+          "sha256": "e796a925cda44210f6a2f06bca2e7633ca99d85070b7691963170dba17eaef5b",
+          "fileLastWriteUtc": "2026-11-06T04:41:34.752Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master4x.png",
+          "sha256": "7a2e6c057013d69efed3868d221cda74623dea4f12b4a34919da0a7b7c7e3cfe",
+          "fileLastWriteUtc": "2026-11-06T04:48:23.922Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.register-master4x.png",
+          "sha256": "64ce964c0cf31dbc2726d9cd8c4a0fe57cf5e27ead5f53958da2a4471d833f8f",
+          "fileLastWriteUtc": "2026-11-06T04:48:23.974Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.registration.json",
+          "sha256": "70a41cccfbde8edd3c0c5ed97f934db57bd001787cf6e0bf27f0fac6c1658172",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.965Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master-generated.generation.json",
+          "sha256": "3a2a6e59376feefe432f397fd24d0a2d7ef5f785ba6061b3242b9068d7ac745d",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.265Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master-generated.png",
+          "sha256": "00b14ae8d2fce09370c87ae79477cabdedce65975bfef9443a77f34f10a09f07",
+          "fileLastWriteUtc": "2026-11-06T04:42:26.459Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master4x.png",
+          "sha256": "334d529ba87b1206ddae3b7434a0d0e727ca1cf2cb49a5e0323a0604fdb0afd3",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.060Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.register-master4x.png",
+          "sha256": "b163bceda6bdb752627a45ed2ed63db81f5345ef699520beb51314b24fc0079d",
+          "fileLastWriteUtc": "2026-11-06T04:48:24.110Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.registration.json",
+          "sha256": "0c4a1c0bee8a6961ab0f230876e8ae179df125bc04eee710af0d0c83db8c154d",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.970Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a-ingame.png",
+          "sha256": "ab2f64bdfe0580e69f02b005b15707bad995ed765a4150fdbcea0a8665224a45",
+          "fileLastWriteUtc": "2026-11-05T18:29:37.283Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png",
+          "sha256": "f948c50869b9d9a04b8ec8d18aecc92f7250bbfd98bb665bae5092d2c932a5e6",
+          "fileLastWriteUtc": "2026-11-05T18:16:38.908Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.source.json",
+          "sha256": "0658864689f7b8a3ceea9d736211be3fdb1cd3002af1bb7784074ab05dc5d27c",
+          "fileLastWriteUtc": "2026-11-06T08:58:13.217Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_01-guide4x.png",
+          "sha256": "54d0c120a1918e8bb98a0e13184c84419b920ce51bba82e22a70ed6f82eb47c4",
+          "fileLastWriteUtc": "2026-11-06T04:00:05.343Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_01-guide4x.source.json",
+          "sha256": "848a37c0dee459709e1c43b17669acd02a1f74433e6a587f1e6ec423697f5a6a",
+          "fileLastWriteUtc": "2026-11-06T07:59:03.697Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_01_in.attempt2.registered4x.png",
+          "sha256": "2dcf2078e63b69cb8772969e29f86e4a7b625650ca70b93a88ec91aab4513654",
+          "fileLastWriteUtc": "2026-11-06T05:57:51.968Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_01_in.attempt3.registered4x.png",
+          "sha256": "3c504878d8a82cfe7123dd0e4cd2cece39cd2175369ba2d0e0f4ac080bd69a55",
+          "fileLastWriteUtc": "2026-11-06T06:41:34.673Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_01_in.registered4x.png",
+          "sha256": "804d2c4c4260f1b98d8581093f1bd601d45e824df79449263aadf461067b3301",
+          "fileLastWriteUtc": "2026-11-06T04:43:07.139Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_02-guide4x.png",
+          "sha256": "8d52ed73cc42863577b0f52f3e2cdcbeffe7710c765d8ce161faf4f072b73e1d",
+          "fileLastWriteUtc": "2026-11-06T04:00:05.367Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_02-guide4x.source.json",
+          "sha256": "969db089d71816564501fd4f6e9b45344c1543e0c75595bd5532ebb98886b158",
+          "fileLastWriteUtc": "2026-11-06T07:59:03.698Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_02_out.attempt2.registered4x.png",
+          "sha256": "3323b36b6575c7ec110367ff4ac655bb2e36afbdb2a0a8e5b77332ea2eeba73f",
+          "fileLastWriteUtc": "2026-11-06T06:41:34.794Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/idle_02_out.registered4x.png",
+          "sha256": "8b2653d1d378a72bc752f761eae19d0450fa0636e1907d934b0da601b9cbc416",
+          "fileLastWriteUtc": "2026-11-06T04:43:07.239Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_01_in.first-pilot.landmarks.json",
+          "sha256": "aea287694b8a18a14e51108690bfdd03c905b1f53c1e459d8c0cb2ee78f919de",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.098Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_01_in.first-pilot.png",
+          "sha256": "72baab1a58b6250798c52e4b40351d3c6b8bf602a331bc49b8c60b04f9edcdae",
+          "fileLastWriteUtc": "2026-11-06T04:43:07.149Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_01_in.first-pilot.registration.json",
+          "sha256": "aee566df4f3a73790f44e6e61f78d11c68a8ac38391db6ee67e654c34bf8008f",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.917Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_02_out.first-pilot.landmarks.json",
+          "sha256": "cea9b27da57afcb517a0b6c642d16d13d713c163c2d7f520c025f156bbb5ba31",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.105Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_02_out.first-pilot.png",
+          "sha256": "ccad178d650478d3f7a8b95b1c9545bbf01acebc31798562d90eccf1bcc793a4",
+          "fileLastWriteUtc": "2026-11-06T04:43:07.246Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/keyposes/E/rejected/idle_02_out.first-pilot.registration.json",
+          "sha256": "b5295c23d00672f686fd14b4f523a0aca753f7275f467d5d944c4153584078b6",
+          "fileLastWriteUtc": "2026-11-06T05:08:58.927Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md",
+          "sha256": "378a0d7e250c18c5cd0041812dccb2bdd535e103ff3fb570bf4cc5d40edec1ff",
+          "fileLastWriteUtc": "2026-11-06T03:22:36.685Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_aura.png",
+          "sha256": "a309b5e9f890450144f201552cb079e29a76b177d373e73bc266abc884d46162",
+          "fileLastWriteUtc": "2026-11-06T02:53:15.950Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_1.png",
+          "sha256": "2fb32b11cd88f4eced388668d9884155211a79911f63fbcfa900492e686c2d4f",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.094Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_2.png",
+          "sha256": "7dedddf5d2263dd0349358fe8535918095a745217241a95140ca8b5ab34fd03a",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.341Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_3.png",
+          "sha256": "6495a42bb9d62e621bc9f5fe3189df1189736dc0b44dd7551f82fde21f70b2fb",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.513Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dragon_tiger_trail.png",
+          "sha256": "f9f8d497ee3ef0080f0e138b2bcb441a670db8b141dd398316bff3b832712edd",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.731Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_1.png",
+          "sha256": "f9484ae1e9a5cd0e5ebf41104a6e6aa3e09323faf8373cfa134a19aa7dfb1de7",
+          "fileLastWriteUtc": "2026-11-06T02:53:16.874Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_2.png",
+          "sha256": "1f1447281cd3bc3e61652b058ead8942055d618ab8d38fdcdcb244fc24436f76",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.040Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_3.png",
+          "sha256": "976e75c2da51386babdefddf09282c34d3ed8f1ee2860105c01f473165024dc7",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.232Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/fist_impact_burst.png",
+          "sha256": "025a97e785dfb8c9ffd5efbe4a3fd2e4ea0a1455ad2302fef862c031a11ee1fb",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.474Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/ground_crack_decal.png",
+          "sha256": "c9bf59b5d09eccff242d8ad58d2fdeef907f88d9aabe60eb704e72a56f9b2339",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.639Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/mountain_charge_trail.png",
+          "sha256": "de66684b27f82d6de418ebd971e2fea98754bd11c19258f4b0058376b62a3b58",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.814Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_1.png",
+          "sha256": "0e9eeb5f3cd2b739e8b68c5601bf10af164da9603f4d0f8bd654529e73c489ab",
+          "fileLastWriteUtc": "2026-11-06T02:53:17.947Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_2.png",
+          "sha256": "636a9b881cd390516f335ea1d73f0c5b58e73dcd6c890df22e95c5620f8fbbbb",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.076Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_3.png",
+          "sha256": "aff5755cc0809d3f820ffc22e65ea6ac98e9caad14e29a6daf900fafc7e1eca0",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.195Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_4.png",
+          "sha256": "455f394bb47af90fc6f81a3ba80401c22b920b810e2e64a6325ac993c5ac87ba",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.319Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/shockwave_ring.png",
+          "sha256": "2c9e4c704257837f9ee0a76dffda2698d98de7c47ef30b96a02a62e3a9667a89",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.466Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/stone_skin_overlay.png",
+          "sha256": "4bbc829c0c043a45c60d11942296e2fc2268c8afac6ce3d78218bf34718a4da4",
+          "fileLastWriteUtc": "2026-11-06T02:53:18.663Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/taunt_ring.png",
+          "sha256": "88490da5065b0adfdc435607ddcf7c6b13ec22e74c9a26f599138fb2b520cecd",
+          "fileLastWriteUtc": "2026-11-06T02:53:19.177Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D8",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/*",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/keyposes/E/*.png; reference/keyposes/E/*; annotation audit",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; uniform alpha-weighted registration and manual landmarks; no new generation in derivation",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/annotation-audit.json",
+          "sha256": "5cb4cc3984d65d13576a55a6e6a512d7a2f826c7bdf7d868cbb83f60218a503e",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.084Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_01_in.landmarks.json",
+          "sha256": "8695f7a57abbcf3204971dc7fc34684a650656f75b626c26ae06ffaaca171604",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.089Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_01_in.png",
+          "sha256": "9ce252690f04df60b52c1771ce6b35390f39d41f6b8992cb3bc35b56aaf040b2",
+          "fileLastWriteUtc": "2026-11-06T06:41:34.681Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_01_in.registration.json",
+          "sha256": "80dd363881044333a9a389d6a7775ba2de75db0af5cdfc64a35c258c7cdd63a6",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.093Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_02_out.landmarks.json",
+          "sha256": "dbb5ca23da70d792a4a8a6e90ac60db0b8e99fa4099a50a507e7408dd46f76ae",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.097Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_02_out.png",
+          "sha256": "d16dad0cc990ecbfa72c82eb89d04525c59e61900fda98cfe855ef74209c19dd",
+          "fileLastWriteUtc": "2026-11-06T06:41:34.801Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/keyposes/E/idle_02_out.registration.json",
+          "sha256": "245369f185d23d289d74c1bc7357d447879a5a088ed419f2d15544be442d4564",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.100Z"
+        }
+      ]
+    },
+    {
+      "id": "TT1-D9",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/*.json; assets-src/placeholder/the-tu-continuous-v1/{E,S,SE,NE,N}/landmarks.json",
+      "source": "assets-src/placeholder/the-tu-continuous-v1/raw/**/*.generation.json; class manifests and QA/capture results",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; Codex/procgen/rig metadata authoring",
+      "utc": "2026-11-06T09:12:22.735Z",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E.parts.json",
+          "sha256": "b2ea09e189e82b7ba12c738600b383898f553b7ea28b6aac4588a51815704109",
+          "fileLastWriteUtc": "2026-11-06T08:50:20.816Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/E/landmarks.json",
+          "sha256": "5b99d39614b0dd2c2a96cf21e1373e52c1afe04c7f9ee76f010e90f638e0fb64",
+          "fileLastWriteUtc": "2026-11-06T02:04:18.979Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N.parts.json",
+          "sha256": "c59dbffbb6dfbd5e4bd4966f89a6df72ff7f2e8550559abae3944a75a44a5ea3",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.117Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/N/landmarks.json",
+          "sha256": "5dea21c5721c96f70268c62b7dc98735d151adde72e26b90fc657c75a5314f6b",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.121Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE.parts.json",
+          "sha256": "221406bde6d29751c66d83d977ccfe7ee3eda7a3179ef8358e5324262f794141",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.138Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/NE/landmarks.json",
+          "sha256": "02bc2ac8cbacf50394452d108ada733c23847d97ef3e2ebe3e7d343f7ea13033",
+          "fileLastWriteUtc": "2026-11-06T08:12:14.143Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S.parts.json",
+          "sha256": "7d5d1d12e6e2eb816023686598dfed14ae91cf92fc887426cd3fdcb762afdaa7",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.146Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/S/landmarks.json",
+          "sha256": "32219886a85df9762a0d8a07ac0bc07967480f1d5a54128b2949027e1d42d67a",
+          "fileLastWriteUtc": "2026-11-06T04:51:16.117Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE.parts.json",
+          "sha256": "60510147131ec1e001030fa489827743442c31344e8af3d92b5c2759e73b602b",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.162Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/SE/landmarks.json",
+          "sha256": "46cb313c924e4d3bccf0dba63af5cb3100896952de4476f0edd989c732845a10",
+          "fileLastWriteUtc": "2026-11-06T08:12:15.165Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/production.json",
+          "sha256": "b3296ec23ac80dfdb1cff4985fea4c4fb074851e0bc8b5d924c2a3c85c077f7d",
+          "fileLastWriteUtc": "2026-11-06T08:58:12.341Z"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/shared.exports.json",
+          "sha256": "346707fc83fe5636ab6174b1ce11352429645e872fae6e2d91d85928f48b8c07",
+          "fileLastWriteUtc": "2026-11-06T03:00:00.617Z"
+        }
+      ]
+    }
+  ]
+}

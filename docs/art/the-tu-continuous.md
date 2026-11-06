@@ -5,7 +5,7 @@ Theo yêu cầu chủ dự án ngày 2026-11-06 và D34–D40. Nhánh art chỉ 
 ## Nguồn chuẩn và thứ tự
 
 - Concept: [sheet A](../../assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png) và [mockup in-game](../../assets-src/placeholder/the-tu-continuous-v1/reference/concept-a-ingame.png), sao chép nguyên byte từ artifact worker 16. Metadata/prompt/UTC upstream trong `reference/concept-a.source.json`; mockup chỉ dùng duyệt, không dùng cắt mảnh.
-- Danh sách mảnh, palette, VFX/icon: [prompt pack đã lưu](../../assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md), nguồn từ `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md` (chỉ format Markdown).
+- Danh sách mảnh, palette, VFX/icon: [prompt pack đã lưu](../../assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md), nguồn từ `ao-artifact:van-gioi-tien-do-1/Prompt-pack-The-tu.md` (chỉ format Markdown).
 - Quy trình: [rig-continuous-parts.md](rig-continuous-parts.md), [rig-classes.md](rig-classes.md), [parts-spec.md](parts-spec.md). Khi khác nhau, yêu cầu chủ dự án và quyết định mới nhất ưu tiên.
 - Làm E trước: ảnh → xử lý → ráp rig → idle/run/attack → đo strict và capture Cocos. Báo cáo/contact sheet/capture phải có trước khi mở PR nháp. Sau đó mới S/SE/NE/N và đủ 15 clip; không merge PR.
 - Bổ sung từ chủ dự án qua orchestrator: sau khi ráp E, sinh tham chiếu key-pose AI cho walk/run, combo đấm, guard, ground slam; gắn landmarks, dùng `fitPose` / `authorFromKeyPoses` của worker 15 khi có công cụ.
@@ -67,10 +67,29 @@ Kiểm tra rest composite đã đạt: **50 mảnh**, max extra **2 px**, max mi
 
 ## Tái lập baseline E và kế hoạch tiếp theo
 
-```sh
-npm run rig:assemble -w @vgtd/rig -- --class the-tu --parts assets-src/placeholder/the-tu-continuous-v1 --dir E --out apps/client-cocos/assets/resources/dragonbones/the-tu-continuous
-npm run rig:gate -w @vgtd/rig -- the-tu --dir E --assembled <absolute-export-directory> --src dragonbones/the-tu-continuous --stem thetu --animations idle,run,attack --out <temporary-capture-directory>
+```powershell
+$theTuQa = 'assets-src/placeholder/the-tu-continuous-v1/rig'
+$theTuRuntime = 'apps/client-cocos/assets/resources/dragonbones/the-tu-continuous'
+$theTuCapture = Join-Path ([System.IO.Path]::GetTempPath()) 'vgtd-the-tu-gate-E'
+New-Item -ItemType Directory -Force -Path $theTuRuntime, $theTuCapture | Out-Null
+npm.cmd run rig:assemble -w @vgtd/rig -- --class the-tu --parts assets-src/placeholder/the-tu-continuous-v1 --dir E --keyposes assets-src/placeholder/the-tu-continuous-v1/keyposes --out $theTuQa
+foreach ($theTuFile in @('thetu_E_ske.json', 'thetu_E_tex.json', 'thetu_E_tex.png')) {
+  Copy-Item -LiteralPath (Join-Path $theTuQa $theTuFile) -Destination $theTuRuntime
+}
+$theTuCompare = Join-Path $theTuQa 'keypose_idle_compare.png'
+if (Test-Path -LiteralPath $theTuCompare) {
+  Copy-Item -LiteralPath $theTuCompare -Destination $theTuCapture
+  Remove-Item -LiteralPath $theTuCompare
+}
+$theTuQaAbsolute = (Resolve-Path $theTuQa).Path
+npm.cmd run rig:gate -w @vgtd/rig -- the-tu --dir E --assembled $theTuQaAbsolute --src dragonbones/the-tu-continuous --stem thetu --animations all --out $theTuCapture
+npx.cmd prettier --write "assets-src/placeholder/the-tu-continuous-v1/rig/*.json"
+node assets-src/placeholder/the-tu-continuous-v1/verify-provenance.mjs
 ```
+
+Viewer chỉ load `_ske.json`, `_tex.json` và PNG atlas mà `_tex.json` tham chiếu. `rig/*.rig.json`, `*.atlas.json`, `*.assembly.json`, `*.clips.json` cùng bản atlas dùng kiểm tra nằm ngoài Cocos resources; không đưa dữ liệu QA vào bundle runtime. Các file `.meta` của JSON QA đã bỏ khỏi resources, chỉ giữ metadata cho ba file runtime và thư mục.
+
+`derived-outputs.json` ghi nguồn/tool/model/UTC/chủ art/trạng thái/phát hành và hash từng đầu ra dẫn xuất; bảng tương ứng trong `ASSET-LICENSES.md` bao phủ globs runtime, QA, mảnh xử lý, icon mọi cỡ, VFX, chân dung và tham chiếu. Khi thay đổi đầu ra phải cập nhật inventory/bảng trước khi chạy kiểm tra. Check riêng Thể tu xác nhận UTF-8 hợp lệ, không có U+FFFD hoặc dấu hỏi do mất mã hóa, không có đường dẫn máy cá nhân, đủ license và resources chỉ có file runtime. Đường dẫn sinh ảnh cũ đã thay bằng image ID; prompt và UTC giữ nguyên.
 
 Pilot AI idle `in/out` đã **đạt**: chọn `in` lượt 3 và `out` lượt 2 trong `raw/keyposes/E`, chuẩn hóa đồng đều vào `keyposes/E`. RMS của **clip hoàn thiện** 1,12 / 1,48 px; IoU 0,857 / 0,861, dịch tốt nhất (0,0) ở cả hai key. Giữ nguyên RMS ≤2 px, IoU ≥0,85, không dùng `--allow-errors`. E đã export idle fitted với detail Thể tu và qua lại strict/capture **đủ 15 body clip**. Guide trong `reference/keyposes/E` chỉ là render phần mềm phục vụ bố cục, không phải bằng chứng engine. Các lượt chưa đạt và annotation cũ được giữ trong raw/audit; lỗi round-trip spine đã sửa ở main PR #106 (RMS khoảng 0,17 px), annotation pelvis/chest dùng nghĩa origin xương thay vì tâm hình nhìn thấy. **Bulk key-pose run/walk/attack vẫn tạm giữ** chờ orchestrator xác nhận dáng đi chung.
 
@@ -98,4 +117,4 @@ Tooling theo hướng đến từ main PR #108–#112: gait theo tầm chân, he
 
 `eyes_angry` là display dự trữ (blink_cycle giữ quyền mắt, trừ meditate đóng mắt); `gauntlet_plate_glow_R` chưa wire vào rig. Các clip dùng guard/fist/open/ground theo detail lớp Thể tu; attack/attack_2/attack_3 là jab/cross/palm, cast là ground slam. VFX hiện là sprite thành phần tĩnh; không coi là particle/flipbook đã tích hợp.
 
-Để tái lập E fitted idle, thêm `--keyposes assets-src/placeholder/the-tu-continuous-v1/keyposes` vào lệnh assemble. Các hướng khác dùng cùng lệnh với `--dir S|SE|NE|N`, không thêm key-pose chưa được cho phép. `production.json` lưu số đo và danh sách animation của từng capture; báo cáo HTML cùng contact sheet lưu trong artifact, không đưa frame/log build vào repo.
+Lệnh trên tái lập E fitted idle. Các hướng khác dùng cùng quy trình với `--dir S|SE|NE|N` và ba tên file tương ứng, bỏ `--keyposes` vì chưa được cho phép sinh bulk. `production.json` lưu số đo và danh sách animation của từng capture; báo cáo HTML cùng contact sheet lưu trong artifact, không đưa frame/log build vào repo.

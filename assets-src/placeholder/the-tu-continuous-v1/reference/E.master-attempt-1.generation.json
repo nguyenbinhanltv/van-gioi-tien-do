@@ -4,10 +4,10 @@
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
-  "originalPath": "C:/Users/PC/.codex/generated_images/01a1ae93-8c12-7102-b948-0a9ecd590073/exec-5a3c0546-4cef-44ab-8944-a1c610b4df0e.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-5a3c0546-4cef-44ab-8944-a1c610b4df0e.png",
   "selectedOutput": "reference/E.master-attempt-1.png",
   "utcStart": "not recorded exactly; see ASSET-LICENSES approximate UTC window",
-  "references": ["C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a.png"],
+  "references": ["ao-artifact:van-gioi-tien-do-16/character-concepts/the-tu-a.png"],
   "originalFileLastWriteUtc": "2026-11-06T01:59:47.963Z",
   "timeNote": "Original generated file timestamp; does not replace an unrecorded generation start"
 }

@@ -1,0 +1,183 @@
+{
+  "direction": "NE",
+  "packing": {
+    "padding": 2,
+    "extrude": 1,
+    "premultipliedAlpha": true,
+    "page": [512, 512]
+  },
+  "gait": "class",
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 30,
+      "loop": true,
+      "seconds": 1,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "run",
+      "frames": 15,
+      "loop": true,
+      "seconds": 0.5,
+      "authoredSpeedPxS": 120
+    },
+    {
+      "name": "attack",
+      "frames": 13,
+      "loop": false,
+      "seconds": 0.433,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "attack_2",
+      "frames": 13,
+      "loop": false,
+      "seconds": 0.433,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "attack_3",
+      "frames": 13,
+      "loop": false,
+      "seconds": 0.433,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "cast",
+      "frames": 15,
+      "loop": false,
+      "seconds": 0.5,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "hit",
+      "frames": 6,
+      "loop": false,
+      "seconds": 0.2,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "die",
+      "frames": 24,
+      "loop": false,
+      "seconds": 0.8,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "walk",
+      "frames": 20,
+      "loop": true,
+      "seconds": 0.667,
+      "authoredSpeedPxS": 64
+    },
+    {
+      "name": "dash",
+      "frames": 8,
+      "loop": false,
+      "seconds": 0.267,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "meditate",
+      "frames": 30,
+      "loop": true,
+      "seconds": 1,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "channel",
+      "frames": 12,
+      "loop": true,
+      "seconds": 0.4,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "sword_fly",
+      "frames": 20,
+      "loop": true,
+      "seconds": 0.667,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "tribulation",
+      "frames": 30,
+      "loop": false,
+      "seconds": 1,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "emote",
+      "frames": 30,
+      "loop": false,
+      "seconds": 1,
+      "authoredSpeedPxS": null
+    },
+    {
+      "name": "blink_cycle",
+      "frames": 300,
+      "loop": true,
+      "seconds": 10,
+      "authoredSpeedPxS": null
+    }
+  ],
+  "nonPremultipliedPixels": 0,
+  "stats": {
+    "bones": 38,
+    "slots": 27,
+    "vertices": 434,
+    "chains": 5,
+    "meshScale": 1,
+    "nonPremultiplied": 0,
+    "limits": {
+      "bones": 60,
+      "slots": 40,
+      "meshVertices": 600,
+      "chains": 6
+    }
+  },
+  "used": [
+    "leg_L",
+    "trouser_hem_L",
+    "boot_L",
+    "tabard_front",
+    "arm_L",
+    "sleeve_cuff_L",
+    "gauntlet_L_relaxed",
+    "gauntlet_L_guard",
+    "gauntlet_L_fist",
+    "gauntlet_L_open",
+    "gauntlet_L_ground",
+    "torso",
+    "leg_R",
+    "trouser_hem_R",
+    "boot_R",
+    "sash_tail_1",
+    "sash_tail_2",
+    "tabard_back",
+    "tabard_shoulders",
+    "sash_set",
+    "head",
+    "eyes_open",
+    "eyes_half",
+    "eyes_closed",
+    "eyes_angry",
+    "brows_neutral",
+    "brows_angry",
+    "brows_pain",
+    "hair_strand_1",
+    "hair_strand_2",
+    "hair_strand_3",
+    "hair_back",
+    "hairpin",
+    "arm_R",
+    "sleeve_cuff_R",
+    "gauntlet_R_relaxed",
+    "gauntlet_R_guard",
+    "gauntlet_R_fist",
+    "gauntlet_R_open",
+    "gauntlet_R_ground"
+  ],
+  "missing": [],
+  "skipped": []
+}

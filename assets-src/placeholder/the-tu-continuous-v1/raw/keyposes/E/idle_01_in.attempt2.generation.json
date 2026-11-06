@@ -8,7 +8,7 @@
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
   "references": ["reference/keyposes/E/idle_01-guide4x.png", "raw/keyposes/E/idle_01_in.png"],
-  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-2067a43f-6a63-4515-8cdc-7de6adaee3f6.png",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-2067a43f-6a63-4515-8cdc-7de6adaee3f6.png",
   "selectedOutput": "raw/keyposes/E/idle_01_in.attempt2.png",
   "status": "pending pilot fit, not replacing baseline"
 }
