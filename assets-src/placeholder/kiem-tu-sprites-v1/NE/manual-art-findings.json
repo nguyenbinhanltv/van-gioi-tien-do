@@ -1,0 +1,53 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "kiem-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "NE",
+      "cell": 10,
+      "kind": "redraw_drift",
+      "severity": "warn",
+      "status": "open",
+      "note": "Whole-cell height repair extends the boot reach and changes robe folds. Original fixed referenceHeight304 retained; no per-frame scaling."
+    },
+    {
+      "clip": "run",
+      "dir": "NE",
+      "cell": -1,
+      "kind": "leg_reversal",
+      "severity": "warn",
+      "status": "open",
+      "note": "Near/far boots overlap in the back-threequarter view; half-cycle reversal remains subtle."
+    },
+    {
+      "clip": "walk",
+      "dir": "NE",
+      "cell": -1,
+      "kind": "contact_phase",
+      "severity": "info",
+      "status": "open",
+      "note": "Directional foot slide is UNMEASURED pending source-ground registration with vertical keep and direction-correct QA guides. Legacy probes retained as history, not accepted new metrics."
+    },
+    {
+      "clip": "hit",
+      "dir": "NE",
+      "cell": 2,
+      "kind": "other",
+      "severity": "warn",
+      "status": "open",
+      "note": "Brace frame height195px is a soft free-pose finding; same sheet scale, no resizing."
+    },
+    {
+      "clip": "tribulation",
+      "dir": "NE",
+      "cell": 10,
+      "kind": "other",
+      "severity": "warn",
+      "status": "open",
+      "note": "Recovery frame height196px is a soft free-pose finding; same sheet scale, no resizing."
+    }
+  ]
+}
