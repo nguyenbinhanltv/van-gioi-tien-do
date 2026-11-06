@@ -8,6 +8,10 @@
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
  * --class <id>  kiem-tu (default) | the-tu: the class assembly profile (`class-profile.ts`: its parts, bones to drop, detail rules,
  * clips; Thể tu has no sword, its gauntlets are displays on the hand slots, stem `thetu`).
+ * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
+ * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
+ * shallow knee, low foot lift, for a long robe; free = the original gait). The cadence is baked into the clip: the authored
+ * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -16,6 +20,8 @@ import { dirname, join, resolve } from 'node:path';
 import type { Direction } from '@vgtd/shared';
 import {
   ATLAS_EXTRUDE,
+  GAIT_PROFILES,
+  type GaitName,
   ATLAS_PADDING,
   CHARACTER_IDS,
   assembleContinuous,
@@ -49,7 +55,14 @@ const character = opt('class', 'kiem-tu') as CharacterId;
 if (!(CHARACTER_IDS as readonly string[]).includes(character))
   throw new Error(`unknown --class '${character}' (${CHARACTER_IDS.join(', ')})`);
 const profile = character === 'kiem-tu' ? undefined : getAssemblyProfile(character);
-const stem = profile?.stem ?? 'kiemtu';
+const stem = opt('stem', profile?.stem ?? 'kiemtu');
+// robe: half stride, two step pairs inside the table-length clip at the real ground speed (cadence baked in, no
+// runtime timeScale); `free` is the original gait
+// default: the class gait of its profile (Thể tu: heavy stomp), robe for Kiếm tu
+const gaitName = (opt('gait', '') || (profile ? 'class' : 'robe')) as GaitName | 'class';
+if (gaitName !== 'class' && !(gaitName in GAIT_PROFILES))
+  throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
+const gait = gaitName === 'class' ? profile!.gait : GAIT_PROFILES[gaitName];
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -100,7 +113,14 @@ const res = assembleContinuous({
   view,
   parts,
   ...(weapon ? { weapon } : {}),
-  ...(profile ? { pieces: profile.pieces, dropBones: profile.dropBones, snapIk: true } : {}),
+  ...(profile
+    ? {
+        pieces: profile.pieces,
+        dropBones: profile.dropBones,
+        snapIk: true,
+        ...(profile.ikBend ? { ikBend: profile.ikBend } : {}),
+      }
+    : {}),
   atlasName: `${stem}_${dir}`,
 });
 console.log(`parts: ${res.used.length} used, ${res.missing.length} missing, ${res.skipped.length} skipped`);
@@ -130,7 +150,9 @@ if (issues.length) {
 
 const blink = authorBlinkCycle(res.rig);
 const clips = [
-  ...(profile ? authorClassSet(character, res.rig, { detail: true }) : authorKiemTuSet(res.rig, { detail: true })),
+  ...(profile
+    ? authorClassSet(character, res.rig, { detail: true, gait })
+    : authorKiemTuSet(res.rig, { detail: true, gait })),
   ...(blink ? [blink] : []),
 ];
 const name = `${stem}_${dir}`;
@@ -183,6 +205,15 @@ writeFileSync(
         premultipliedAlpha: true,
         page: [res.atlas.data.width, res.atlas.data.height],
       },
+      gait: gaitName,
+      // runtime rule for locomotion clips: timeScale = movement speed (px/s) / authoredSpeedPxS
+      clips: clips.map((c) => ({
+        name: c.name,
+        frames: c.frames,
+        loop: c.loop,
+        seconds: Math.round((c.frames / 30) * 1000) / 1000,
+        authoredSpeedPxS: c.motion?.speed ?? null,
+      })),
       nonPremultipliedPixels: st.nonPremultiplied,
       stats: st,
       used: res.used,

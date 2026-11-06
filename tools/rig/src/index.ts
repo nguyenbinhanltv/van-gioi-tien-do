@@ -38,3 +38,5 @@ export * from './detail.js';
 export * from './continuous.js';
 export * from './tabard.js';
 export * from './class-profile.js';
+export * from './qa-strip.js';
+export * from './qa-lower.js';

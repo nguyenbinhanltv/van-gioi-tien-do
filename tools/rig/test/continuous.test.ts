@@ -168,6 +168,17 @@ describe('assembleContinuous', () => {
         20,
       ),
     ],
+    // a thin hem strip: no length of its own, hangs straight down from its top edge
+    [
+      'robe_hem_front',
+      stroke(
+        [
+          [105, 198],
+          [135, 198],
+        ],
+        2,
+      ),
+    ],
   ]);
   const res = assembleContinuous({ base, landmarks, view, parts });
 
@@ -196,8 +207,32 @@ describe('assembleContinuous', () => {
   });
 
   it('lays the ribbon chain along the art and groups it into a detail chain', () => {
-    expect(res.rig.chains!.map((c) => c.name)).toEqual(['ribbon_group']);
+    expect(res.rig.chains!.map((c) => c.name)).toContain('ribbon_group');
     expect(res.rig.bones.filter((b) => b.name.startsWith('ribbon_tail_L_'))).toHaveLength(3);
+  });
+
+  it('gives the sleeve cuff chain-driven secondary motion; the wide thin hem stays skirt-weighted (no chain)', () => {
+    const names = res.rig.chains!.map((c) => c.name);
+    expect(names).toContain('sleeve_group');
+    expect(names).not.toContain('hem_group');
+    expect(res.rig.bones.some((b) => b.name.startsWith('sleeve_edge_L_'))).toBe(true);
+    expect(res.rig.bones.some((b) => b.name.startsWith('robe_hem_'))).toBe(false);
+    const cuff = res.rig.skins[0]!.attachments.sleeve_trim_L!.sleeve_trim_L!;
+    expect(cuff.type).toBe('mesh');
+    if (cuff.type === 'mesh') {
+      const bonesUsed = new Set(cuff.weights!.flatMap((w) => w.map(([b]) => b)));
+      expect([...bonesUsed].every((b) => b.startsWith('sleeve_edge_L_'))).toBe(true);
+    }
+    // the hem follows the hips and thighs like the robe
+    const hem = res.rig.skins[0]!.attachments.robe_hem_front!.robe_hem_front!;
+    expect(hem.type).toBe('mesh');
+    if (hem.type === 'mesh') {
+      const bonesUsed = new Set(hem.weights!.flatMap((w) => w.map(([b]) => b)));
+      expect([...bonesUsed].every((b) => ['hip', 'thigh_L', 'thigh_R', 'robe_front', 'robe_back'].includes(b))).toBe(
+        true,
+      );
+    }
+    for (const c of res.rig.chains ?? []) expect(c.maxAngle).toBeLessThanOrEqual(35);
   });
 
   it('packs every crop into one atlas page with a region per attachment', () => {

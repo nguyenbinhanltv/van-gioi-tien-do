@@ -225,9 +225,9 @@ export const CLASS_CLIPS: Readonly<Partial<Record<CharacterId, ClassClipSpec>>> 
       upper_arm_L: 50,
       lower_arm_L: 100,
       spine_mid: -4,
-      hips: [0, -3],
-      ik_foot_L: [5, 0],
-      ik_foot_R: [-5, 0],
+      hips: [0, -1.5],
+      ik_foot_L: [2, 0],
+      ik_foot_R: [-2, 0],
     },
     attack: {
       windup: { upper_arm_R: 40, lower_arm_R: 70, upper_arm_L: 60, lower_arm_L: 100, spine_mid: 6, hips: [-2, -3] },
@@ -353,9 +353,11 @@ export function classOverrides(
 
 /** The class's full clip set: Kiếm tu clips for everything the weapon does not change, overrides for the rest. */
 export function authorClassSet(id: CharacterId, rig: RigDocument, opts: KiemTuOptions = {}): Clip[] {
-  const detailRules = ASSEMBLY_PROFILES[id]?.detail;
+  const profile = ASSEMBLY_PROFILES[id];
   return authorKiemTuSet(rig, {
-    ...(detailRules ? { detailRules } : {}),
+    // the gait is NOT injected here: the committed / template rigs keep the shared locomotion (a class gait is for
+    // assembled continuous-limb rigs, passed explicitly by `rig:assemble` / `rig:measure --assembled`)
+    ...(profile ? { detailRules: profile.detail } : {}),
     ...opts,
     overrides: { ...classOverrides(id), ...opts.overrides },
   });

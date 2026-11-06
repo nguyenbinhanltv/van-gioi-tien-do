@@ -11,6 +11,7 @@
 import type { CharacterId } from './classes.js';
 import { REPLACED_BONES, type PieceSpec } from './continuous.js';
 import type { ClipDetail, Hold } from './detail.js';
+import type { GaitProfile } from './kiemtu.js';
 
 export interface AssemblyProfile {
   readonly id: CharacterId;
@@ -22,6 +23,10 @@ export interface AssemblyProfile {
   readonly dropBones: readonly string[];
   /** Detail rules by clip name (display swaps synced to the actions). */
   readonly detail: Readonly<Record<string, ClipDetail>>;
+  /** IK constraint name -> `bendPositive`: knees (and elbows) bend toward the facing, unlike the mirrored base rig. */
+  readonly ikBend?: Readonly<Record<string, boolean>>;
+  /** Gait of run / walk / dash (`authorClassSet` and `rig:assemble` use it unless `--gait` says otherwise). */
+  readonly gait: GaitProfile;
   /** Weapon rule of the QA gate: a sword is visible (`one`) or no weapon may exist (`none`). */
   readonly qaWeapon: 'one' | 'none';
   /** The class carries a weapon piece borrowed from the old Kiếm tu atlas (only Kiếm tu). */
@@ -64,7 +69,7 @@ export const THE_TU_E_PIECES: readonly PieceSpec[] = [
     compose: ['hair_back', 'hair_bun'],
   },
   ...leg('L'),
-  { id: 'tabard_back', slot: 'tabard_back', binding: { kind: 'skirt', spine: true } },
+  { id: 'tabard_back', slot: 'tabard_back', binding: { kind: 'skirt', spine: true, panel: 'robe_back' } },
   ...arm('L'),
   {
     id: 'torso',
@@ -78,7 +83,7 @@ export const THE_TU_E_PIECES: readonly PieceSpec[] = [
   {
     id: 'tabard_front',
     slot: 'tabard_front',
-    binding: { kind: 'skirt', spine: true },
+    binding: { kind: 'skirt', spine: true, panel: 'robe_front' },
     paperdoll: 'outfit_upper',
   },
   {
@@ -129,11 +134,19 @@ const both = (v: (typeof GAUNTLET_SWAPS)[number]): Pick<ClipDetail, 'handL' | 'h
   handL: { base: G('L', v) },
   handR: { base: G('R', v) },
 });
-const face = (mouth: string, brows = 'brows_neutral', holds: readonly Hold[] = []): Pick<ClipDetail, 'mouth' | 'extra'> => ({
+const face = (
+  mouth: string,
+  brows = 'brows_neutral',
+  holds: readonly Hold[] = [],
+): Pick<ClipDetail, 'mouth' | 'extra'> => ({
   mouth: { base: mouth, holds },
   extra: { brows: { base: brows } },
 });
-const SHOUT_AT_HIT: Hold = { from: { phase: 'hit_frame', offset: -2 }, to: { phase: 'hit_frame', offset: 4 }, show: 'mouth_shout' };
+const SHOUT_AT_HIT: Hold = {
+  from: { phase: 'hit_frame', offset: -2 },
+  to: { phase: 'hit_frame', offset: 4 },
+  show: 'mouth_shout',
+};
 const GRIT: Hold = { from: { frame: 0 }, to: { phase: 'hit_frame', offset: -2 }, show: 'mouth_grit' };
 const ANGRY_BROWS: Hold = { from: { frame: 0 }, to: { frac: 1 }, show: 'brows_angry' };
 const throwing = (side: 'L' | 'R', v: (typeof GAUNTLET_SWAPS)[number]): Hold => ({
@@ -172,11 +185,19 @@ export const THE_TU_DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
   cast: {
     mouth: {
       base: 'mouth_grit',
-      holds: [{ from: { phase: 'windup_end', offset: 1 }, to: { phase: 'windup_end', offset: 9 }, show: 'mouth_shout' }],
+      holds: [
+        { from: { phase: 'windup_end', offset: 1 }, to: { phase: 'windup_end', offset: 9 }, show: 'mouth_shout' },
+      ],
     },
     extra: { brows: { base: 'brows_angry' } },
-    handL: { base: G('L', 'fist'), holds: [{ from: { phase: 'windup_end', offset: 3 }, to: { frac: 1 }, show: G('L', 'ground') }] },
-    handR: { base: G('R', 'fist'), holds: [{ from: { phase: 'windup_end', offset: 3 }, to: { frac: 1 }, show: G('R', 'ground') }] },
+    handL: {
+      base: G('L', 'fist'),
+      holds: [{ from: { phase: 'windup_end', offset: 3 }, to: { frac: 1 }, show: G('L', 'ground') }],
+    },
+    handR: {
+      base: G('R', 'fist'),
+      holds: [{ from: { phase: 'windup_end', offset: 3 }, to: { frac: 1 }, show: G('R', 'ground') }],
+    },
   },
   channel: { ...face('mouth_grit', 'brows_angry'), ...both('open') },
   sword_fly: { ...face('mouth_neutral'), ...both('open') },
@@ -200,6 +221,9 @@ export const THE_TU_DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
   },
 };
 
+/** Thể tu gait: half stride at the real speed (cycles 2), moderate knee bend and stomp, forward lean of a bruiser. */
+export const THE_TU_GAIT: GaitProfile = { cycles: 2, reachScale: 0.6, crouchScale: 0.3, liftScale: 0.6, lean: 4 };
+
 export const THE_TU_PROFILE: AssemblyProfile = {
   id: 'the-tu',
   stem: 'thetu',
@@ -207,6 +231,11 @@ export const THE_TU_PROFILE: AssemblyProfile = {
   // the Kiếm tu base rig lends its roles / IK / sockets; its sword bones go, the quyền sáo hang on the hand bones
   dropBones: [...REPLACED_BONES, 'scabbard', 'weapon'],
   detail: THE_TU_DETAIL_RULES,
+  // stocky tank in trousers: the legs are visible, so keep the stride of the robe gait (two step pairs per clip) but plant
+  // harder: a deeper knee than a robe and a higher foot lift than a robe, no splayed squat
+  gait: THE_TU_GAIT,
+  // the base rig bends the R knee backward (hidden under a robe in the Kiếm tu pilot); trousers show it as bow legs
+  ikBend: { ik_leg_R: true },
   qaWeapon: 'none',
   borrowsSword: false,
 };

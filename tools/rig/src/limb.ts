@@ -291,6 +291,13 @@ export interface SkirtOptions {
   readonly alphaThreshold?: number;
   /** Grid cell (px @1x). Default 5. */
   readonly cell?: number;
+  /**
+   * A skirt panel bone (child of the hips, rotated by `skirtFollowsLegs`): the lower skirt follows it, so the front flap
+   * swings with the leading thigh and the back flap trails, instead of the whole skirt being a plank on the hips.
+   */
+  readonly panel?: string;
+  /** Share of the lower skirt carried by `panel` (the rest goes to the thighs). Default 0.7. */
+  readonly panelShare?: number;
   readonly pad?: number;
 }
 
@@ -382,7 +389,9 @@ export function buildSkirtMesh(rig: RigDocument, opts: SkirtOptions): LimbMesh {
     const inv = opts.thighs.map((b) => 1 / (1 + segD(p, b) ** 2));
     const invSum = inv[0]! + inv[1]!;
     const w: [string, number][] = [[opts.hips, 1 - t]];
-    opts.thighs.forEach((b, n) => w.push([b, (t * inv[n]!) / invSum]));
+    const share = opts.panel ? (opts.panelShare ?? 0.7) : 0;
+    if (opts.panel) w.push([opts.panel, t * share]);
+    opts.thighs.forEach((b, n) => w.push([b, (t * (1 - share) * inv[n]!) / invSum]));
     const kept = w.filter(([, v]) => v > 1e-3);
     const sum = kept.reduce((a, b) => a + b[1], 0);
     weights.push(kept.map(([b, v]): [string, number] => [b, Math.round((v / sum) * 1e4) / 1e4]));

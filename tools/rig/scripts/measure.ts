@@ -21,7 +21,9 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import {
+  ASSEMBLY_PROFILES,
   CHARACTER_IDS,
+  GAIT_PROFILES,
   autoSkin,
   authorClassSet,
   checkSilhouette,
@@ -29,6 +31,7 @@ import {
   loadCharacterData,
   loadedAtlas,
   meshQa,
+  stripQa,
   underpaintNeeds,
   type CharacterId,
 } from '../src/index.js';
@@ -41,6 +44,7 @@ function parse(argv: string[]) {
     character: 'kiem-tu' as CharacterId,
     dirs: null as string[] | null,
     assembled: '',
+    gait: '',
     stem: 'kiemtu',
     autoskin: false,
     band: undefined as number | undefined,
@@ -55,6 +59,7 @@ function parse(argv: string[]) {
     const a = argv[i]!;
     if (a === '--dir') o.dirs = (argv[++i] ?? '').split(',').filter(Boolean);
     else if (a === '--assembled') o.assembled = argv[++i] ?? '';
+    else if (a === '--gait') o.gait = argv[++i] ?? 'free';
     else if (a === '--stem') o.stem = argv[++i] ?? 'kiemtu';
     else if (a === '--autoskin') o.autoskin = true;
     else if (a === '--band') o.band = Number(argv[++i]);
@@ -77,6 +82,7 @@ interface Row {
   readonly worstGapPx: number;
   readonly stretchEvents: number;
   readonly worstStrainPct: number;
+  readonly stripFaults: number;
   readonly tornClips: number;
   readonly tornNames: readonly string[];
   readonly vertices: number;
@@ -111,7 +117,15 @@ for (const [dir, d] of data.byDirection) {
         ...(opts.touch !== undefined ? { touchPx: opts.touch } : {}),
       }).rig
     : d.rig;
-  const clips = authorClassSet(opts.character, rig, { detail: true });
+  const clips = authorClassSet(opts.character, rig, {
+    detail: true,
+    // an assembled rig is measured with the gait `rig:assemble` exports: --gait, else the class profile's, else robe
+    gait:
+      opts.gait || !(opts.assembled && ASSEMBLY_PROFILES[opts.character])
+        ? (GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
+          GAIT_PROFILES.free)
+        : ASSEMBLY_PROFILES[opts.character]!.gait,
+  });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
     throw new Error(`${d.texturePath} is a Git LFS pointer: run 'git lfs pull'`);
@@ -119,13 +133,17 @@ for (const [dir, d] of data.byDirection) {
   let openings = 0;
   let worstGap = 0;
   let strain = 0;
+  let stripFaults = 0;
   let worstStrain = 0;
   const tornNames: string[] = [];
   for (const clip of clips) {
-    for (const i of meshQa(rig, clip, { gapPx: opts.limit })) {
+    for (const i of [...meshQa(rig, clip, { gapPx: opts.limit }), ...stripQa(rig, clip)]) {
       if (i.check === 'detach' && /come apart/.test(i.message)) {
         openings++;
         worstGap = Math.max(worstGap, i.value ?? 0);
+      } else if (i.check === 'strip') {
+        stripFaults++;
+        if (process.env.RIG_MEASURE_VERBOSE) console.log(`  ${clip.name}: ${i.message}`);
       } else if (i.check === 'mesh-strain') {
         strain++;
         worstStrain = Math.max(worstStrain, i.value ?? 0);
@@ -153,6 +171,7 @@ for (const [dir, d] of data.byDirection) {
     worstGapPx: Math.round(worstGap * 10) / 10,
     stretchEvents: strain,
     worstStrainPct: Math.round(worstStrain * 100),
+    stripFaults,
     tornClips: tornNames.length,
     tornNames,
     vertices,
@@ -160,7 +179,7 @@ for (const [dir, d] of data.byDirection) {
   needs[dir] = underpaintNeeds(rig, clips, { gapPx: opts.limit }).slice(0, opts.top);
 }
 
-const dirty = rows.some((r) => r.seamOpenings || r.tornClips || r.stretchEvents);
+const dirty = rows.some((r) => r.seamOpenings || r.tornClips || r.stretchEvents || r.stripFaults);
 if (opts.json) {
   console.log(
     JSON.stringify(
@@ -174,11 +193,15 @@ if (opts.json) {
   console.log(
     `${opts.character}${opts.autoskin ? ' (autoSkin preview)' : ''}: seam limit ${opts.limit} px, ${rows[0]?.clips ?? 0} clips per direction\n`,
   );
-  console.log('dir | clips | seam openings | worst gap px | stretch events | worst strain % | torn clips | vertices');
-  console.log('----|-------|---------------|--------------|----------------|----------------|------------|---------');
+  console.log(
+    'dir | clips | seam openings | worst gap px | stretch events | worst strain % | torn clips | strip faults | vertices',
+  );
+  console.log(
+    '----|-------|---------------|--------------|----------------|----------------|------------|--------------|---------',
+  );
   for (const r of rows) {
     console.log(
-      `${r.direction.padEnd(3)} | ${pad(r.clips, 5)} | ${pad(r.seamOpenings, 13)} | ${pad(r.worstGapPx, 12)} | ${pad(r.stretchEvents, 14)} | ${pad(r.worstStrainPct, 14)} | ${pad(r.tornClips, 10)} | ${pad(r.vertices, 8)}`,
+      `${r.direction.padEnd(3)} | ${pad(r.clips, 5)} | ${pad(r.seamOpenings, 13)} | ${pad(r.worstGapPx, 12)} | ${pad(r.stretchEvents, 14)} | ${pad(r.worstStrainPct, 14)} | ${pad(r.tornClips, 10)} | ${pad(r.stripFaults, 12)} | ${pad(r.vertices, 8)}`,
     );
   }
   for (const r of rows)

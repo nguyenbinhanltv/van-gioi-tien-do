@@ -68,6 +68,10 @@ Tùy chọn sau: mặt dây ngọc (chain), lót tay áo, váy lớp trong, lớ
 
 Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất bằng `npm run rig:assemble -w @vgtd/rig -- --parts <thư mục> --out <thư mục>` (mặc định ra thư mục tạm; để xem trong viewer dùng `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous`, không commit thư mục đó trước khi pilot được nghiệm thu; giữ nhân vật cũ để so sánh), thêm blink / đổi tay / đổi miệng vào clip (display index theo khung), sau đó lan sang S/SE/NE/N.
 
+## 6b. Dáng đi cho váy dài (`GAIT_PROFILES`)
+
+Với váy dài, bước rộng + gập gối sâu trông như tư thế cưỡi ngựa. `rig:assemble --gait robe` (mặc định) dựng run/walk/dash với **hai cặp bước trong cùng một clip** (`cycles: 2`): clip giữ **thời lượng của bảng animation** (run 0,5 s) và **tốc độ mặt đất thật** (`motion.speed` = tốc độ di chuyển, `timeScale` luôn 1), nhưng mỗi bước chỉ dài một nửa; gối nông, nâng chân thấp, nghiêng người. Nhịp bước gấp đôi được **ghi sẵn trong clip**, không phụ thuộc runtime. `--gait free` giữ dáng gốc. Chủ dự án cần xác nhận nhịp bước nhanh hơn: `docs/OPEN-ITEMS.md` §10. Hướng chính để sửa dáng đi là bước key pose tham chiếu (`docs/art/rig-keypose.md`).
+
 ## 7. Lớp chi tiết hoạt cảnh (`tools/rig/src/detail.ts`)
 
 Dữ liệu điều khiển clip, áp dụng cho mọi rig có đủ slot (thiếu slot hoặc display thì bỏ qua, không lỗi).

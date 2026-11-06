@@ -37,8 +37,11 @@ type Binding =
       readonly cols?: number;
       readonly step?: number;
     }
-  /** `spine`: a tabard, whose part above the hip follows the spine instead of the hip bone (see `spineWeights`). */
-  | { readonly kind: 'skirt'; readonly spine?: boolean }
+  /**
+   * Skirt / robe mesh on the hips + thighs; `panel` = the skirt panel bone it also follows (front / back flap); `spine`: a
+   * tabard, whose part above the hip follows the spine instead of the hip bone (see `spineWeights`).
+   */
+  | { readonly kind: 'skirt'; readonly panel?: 'robe_front' | 'robe_back'; readonly spine?: boolean }
   | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number }
   /** Rigid on the last bone of another hanging piece (tassel under the pendant). */
   | { readonly kind: 'tip'; readonly of: string };
@@ -82,8 +85,10 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'ribbon_tail_L', slot: 'ribbon_tail_L', binding: { kind: 'hanging', template: 'ribbon_tail_L' } },
   { id: 'ribbon_tail_R', slot: 'ribbon_tail_R', binding: { kind: 'hanging', template: 'ribbon_tail_R' } },
   { id: 'leg_L', slot: 'leg_L', binding: { kind: 'limb', chain: ['thigh_L', 'shin_L', 'foot_L'], step: 7, ramp: 7 } },
-  { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt' } },
+  { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt', panel: 'robe_back' } },
+  // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
+  // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
+  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt', panel: 'robe_back' } },
   { id: 'torso', slot: 'torso', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'body' },
   {
     id: 'arm_L',
@@ -93,7 +98,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   {
     id: 'sleeve_trim_L',
     slot: 'sleeve_trim_L',
-    binding: { kind: 'rigid', bone: 'lower_arm_L' },
+    binding: { kind: 'hanging', template: 'sleeve_edge_L', cols: 3 },
     compose: ['sleeve_lining_L', 'cuff_L'],
   },
   hand('L', 'relaxed'),
@@ -104,9 +109,11 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'boot_L', slot: 'boot_L', binding: { kind: 'rigid', bone: 'foot_L' } },
   { id: 'leg_R', slot: 'leg_R', binding: { kind: 'limb', chain: ['thigh_R', 'shin_R', 'foot_R'], step: 7, ramp: 7 } },
   { id: 'boot_R', slot: 'boot_R', binding: { kind: 'rigid', bone: 'foot_R' } },
-  { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt' } },
-  { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt' } },
+  { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt', panel: 'robe_front' } },
+  { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt', panel: 'robe_front' } },
+  // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
+  // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
+  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt', panel: 'robe_front' } },
   { id: 'vest', slot: 'vest', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'outfit_upper' },
   {
     id: 'vest_edges',
@@ -128,7 +135,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   {
     id: 'sleeve_trim_R',
     slot: 'sleeve_trim_R',
-    binding: { kind: 'rigid', bone: 'lower_arm_R' },
+    binding: { kind: 'hanging', template: 'sleeve_edge_R', cols: 3 },
     compose: ['sleeve_lining_R', 'cuff_R'],
   },
   hand('R', 'grip'),
@@ -191,6 +198,8 @@ export interface AssembleInput {
   readonly dropBones?: readonly string[];
   /** Move the IK targets onto the new ankles / wrists (a class whose art differs from the base rig, `snapIkTargets`). */
   readonly snapIk?: boolean;
+  /** IK constraint name -> `bendPositive` override (the base rig mirrors the knees; visible trousers need both forward). */
+  readonly ikBend?: Readonly<Record<string, boolean>>;
   readonly atlasName?: string;
   readonly maxAtlas?: number;
 }
@@ -226,6 +235,9 @@ export const ATLAS_EXTRUDE = 1;
 
 const ALPHA = 8;
 
+/** Hang length (px @1x) of a thin band that gets a chain bone. */
+const MIN_HANG = 6;
+
 /** Mesh vertices kept free below the RIG_LIMITS budget (600 -> 560 target) so a repainted part does not break the rig. */
 const MESH_HEADROOM = 40;
 
@@ -243,8 +255,6 @@ export const REPLACED_BONES = [
   'sash_R_2',
   'sleeve_tip_L',
   'sleeve_tip_R',
-  'robe_front',
-  'robe_back',
 ];
 
 function painted(image: Image, view: CanvasView): Vec2[] {
@@ -364,8 +374,12 @@ function hangingBones(
     x: sel.reduce((a, p) => a + p.x, 0) / sel.length,
     y: sel.reduce((a, p) => a + p.y, 0) / sel.length,
   });
-  const root = mean(pts.filter((p) => p.y >= maxY - 3));
-  const end = mean(pts.filter((p) => p.y <= minY + 3));
+  // a thin band (cuff, hem strip) has no length of its own: hang it straight down from its top edge by MIN_HANG px
+  const thin = maxY - minY < 2 * 3 + 2;
+  const root = mean(pts.filter((p) => p.y >= maxY - (thin ? 1 : 3)));
+  const end = thin
+    ? { x: root.x, y: root.y - Math.max(MIN_HANG, maxY - minY) }
+    : mean(pts.filter((p) => p.y <= minY + 3));
   const len = Math.hypot(end.x - root.x, end.y - root.y);
   if (len < 2) return null;
   const angle = Math.atan2(end.y - root.y, end.x - root.x);
@@ -449,6 +463,18 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
         maxAngle: g.maxAngle,
       });
   }
+  // the skirt panels (front / back flap, children of the hips) trail with a damped spring on top of skirtFollowsLegs
+  const panels = ['robe_front', 'robe_back'].filter((n) => bones.some((b) => b.name === n));
+  if (panels.length)
+    chains.push({
+      name: 'skirt_group',
+      kind: 'cape',
+      bones: panels,
+      stiffness: 0.3,
+      damping: 0.5,
+      gravity: 0,
+      maxAngle: 18,
+    });
   const skeleton: RigDocument = { ...withLandmarks, bones, chains };
 
   // 3. meshes
@@ -501,6 +527,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
             view,
             image: img,
             cell: 10 * scale,
+            ...(b.panel && skeleton.bones.some((x) => x.name === b.panel) ? { panel: b.panel } : {}),
           });
           mesh = b.spine ? spineWeights(skeleton, skirt, slotBone) : skirt;
         } else if (b.kind === 'hanging') {
@@ -612,8 +639,12 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     slots.push({ name: 'weapon_R', bone: 'weapon', paperdoll: 'weapon_R', attachment: 'weapon_R' });
     attachments.weapon_R = { weapon_R: { ...borrowWeapon.attachment, path: 'weapon_R' } };
   }
+  const ik = skeleton.ik?.map((k) =>
+    input.ikBend && k.name in input.ikBend ? { ...k, bendPositive: input.ikBend[k.name]! } : k,
+  );
   const rig: RigDocument = {
     ...skeleton,
+    ...(ik ? { ik } : {}),
     slots,
     skins: [{ name: 'default', attachments }],
   };

@@ -147,3 +147,7 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 3. Trục socket: pivot-space y lên, không lật (ADR-021, F-02); `head_top` "theo cỡ nhân vật" chưa có công thức (dùng `socketsOverride`).
 4. Quỹ đạo ellipse 36 × 18: rộng × cao đầy đủ hay bán trục (F-05).
 5. Định nghĩa "draw call": số engine báo là chuẩn, `checkRepack` chỉ ước lượng tĩnh (ADR-022, F-03).
+
+## 10. Kiếm tu "chi liền": dáng đi váy dài vs bảng animation
+
+1. `GAIT_PROFILES.robe` (mặc định của `rig:assemble`) rút ngắn bước chạy/đi cho váy dài bằng cách đặt **hai cặp bước trong clip có thời lượng của bảng animation** (run 0,5 s, walk ~0,67 s), tốc độ mặt đất giữ nguyên: nhịp bước gấp đôi (≈ 8 bước/s khi chạy) nhưng không cần `timeScale` ở runtime. Hệ quả: clip chạy có **4 sự kiện footstep** (mỗi chân 2 lần, tại các lần chạm đất thật) thay vì 2 theo bảng (docs/03 ghi footstep ở frame 2 và 7 trên 10): đây là một lệch khỏi bảng, QA kiểm tra footstep theo từng chu kỳ (`clip.motion.cycles`). **Cần chủ dự án quyết:** chấp nhận nhịp gấp đôi và 4 footstep, hay dùng dáng từ key pose tham chiếu (`docs/art/rig-keypose.md`) thay cho dáng viết tay.
