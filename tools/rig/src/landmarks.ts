@@ -32,49 +32,56 @@ export function landmarkToRig(p: readonly [number, number], view: CanvasView): V
 
 /** Rebuild the rest pose of `rig` from `landmarks`. Throws if a needed landmark is missing. */
 export function applyLandmarks(rig: RigDocument, landmarks: Landmarks, view: CanvasView): RigDocument {
-  const target = new Map<string, { o: Vec2; t: Vec2 }>();
+  // a role maps to its bone; `neck` has no role, so a bone of that name is used
+  const boneOf = (role: string): string | undefined =>
+    rig.roles[role as keyof typeof rig.roles] ?? rig.bones.find((b) => b.name === role)?.name;
+  const target = new Map<string, { o: Vec2; t: Vec2; keepRotation?: boolean }>();
   for (const { role, from, to } of LANDMARK_BONES) {
-    const name = rig.roles[role as keyof typeof rig.roles];
+    const name = boneOf(role);
     if (!name) continue;
     const a = landmarks[from];
     const b = landmarks[to];
     if (!a || !b) throw new RangeError(`landmarks: '${from}' and '${to}' are needed for bone '${name}'`);
     target.set(name, { o: landmarkToRig(a, view), t: landmarkToRig(b, view) });
   }
-  // hands sit at the wrist with zero length: origin = the lower arm's tip
-  for (const [hand, arm] of [
+  // head and hands have no landmark of their own: their origin follows the parent's tip (neck → head landmark, forearm →
+  // wrist) and they KEEP their world rotation, because the head/face and hand art is drawn upright in canvas space, not
+  // along the neck / forearm axis
+  for (const [bone, parentRole] of [
+    ['head', 'neck'],
     ['hand_R', 'lower_arm_R'],
     ['hand_L', 'lower_arm_L'],
   ] as const) {
-    const h = rig.roles[hand];
-    const a = rig.roles[arm];
-    const t = a ? target.get(a) : undefined;
-    if (h && t) target.set(h, { o: t.t, t: t.t });
+    const h = boneOf(bone);
+    const pr = boneOf(parentRole);
+    const t = pr ? target.get(pr) : undefined;
+    if (h && t) target.set(h, { o: t.t, t: t.t, keepRotation: true });
   }
   const worlds = new Map<string, Mat>();
+  const oldWorlds = new Map<string, Mat>();
   const out: RigBone[] = [];
+  const identity: Mat = { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 };
+  const localMat = (b: RigBone) =>
+    composeLocal({ x: b.x, y: b.y, rotation: b.rotation, scaleX: b.scaleX ?? 1, scaleY: b.scaleY ?? 1 });
+  const rotOf = (m: Mat) => Math.atan2(m.b, m.a) / DEG;
   for (const bone of rig.bones) {
-    const parent = bone.parent ? worlds.get(bone.parent)! : null;
-    const parentWorld: Mat = parent ?? { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 };
+    const parentWorld: Mat = bone.parent ? worlds.get(bone.parent)! : identity;
+    oldWorlds.set(bone.name, mulMat(bone.parent ? oldWorlds.get(bone.parent)! : identity, localMat(bone)));
     const tg = target.get(bone.name);
     let nb: RigBone = bone;
     if (tg) {
-      const inv = invertMat(parentWorld);
-      const local = applyMat(inv, tg.o);
-      const length = Math.hypot(tg.t.x - tg.o.x, tg.t.y - tg.o.y);
-      const worldRot = length > 1e-6 ? Math.atan2(tg.t.y - tg.o.y, tg.t.x - tg.o.x) / DEG : undefined;
-      const parentRot = Math.atan2(parentWorld.b, parentWorld.a) / DEG;
-      const rotation = worldRot === undefined ? bone.rotation : ((worldRot - parentRot + 540) % 360) - 180;
+      const local = applyMat(invertMat(parentWorld), tg.o);
+      const length = tg.keepRotation ? bone.length : Math.hypot(tg.t.x - tg.o.x, tg.t.y - tg.o.y);
+      const worldRot = tg.keepRotation
+        ? rotOf(oldWorlds.get(bone.name)!)
+        : length > 1e-6
+          ? Math.atan2(tg.t.y - tg.o.y, tg.t.x - tg.o.x) / DEG
+          : undefined;
+      const rotation = worldRot === undefined ? bone.rotation : ((worldRot - rotOf(parentWorld) + 540) % 360) - 180;
       nb = { ...bone, x: round(local.x), y: round(local.y), rotation: round(rotation), length: round(length) };
     }
     out.push(nb);
-    worlds.set(
-      nb.name,
-      mulMat(
-        parentWorld,
-        composeLocal({ x: nb.x, y: nb.y, rotation: nb.rotation, scaleX: nb.scaleX ?? 1, scaleY: nb.scaleY ?? 1 }),
-      ),
-    );
+    worlds.set(nb.name, mulMat(parentWorld, localMat(nb)));
   }
   return { ...rig, bones: out };
 }

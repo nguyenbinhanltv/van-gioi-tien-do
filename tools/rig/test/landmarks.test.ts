@@ -62,6 +62,28 @@ describe('applyLandmarks', () => {
       ).toBeLessThan(2);
   });
 
+  it('puts the head origin on the head landmark and keeps head and hand world rotation when landmarks move', () => {
+    const moved: Landmarks = { ...E, neck: [121, 80], head: [129, 52], wrist_R: [134, 140], wrist_L: [112, 136] };
+    const next = applyLandmarks(rig, moved, view);
+    const a = evalPose(rig, null, 0, { noIk: true });
+    const b = evalPose(next, null, 0, { noIk: true });
+    const head = landmarkToRig(moved.head!, view);
+    expect(b.byName.get('head')!.pos.x).toBeCloseTo(head.x, 2);
+    expect(b.byName.get('head')!.pos.y).toBeCloseTo(head.y, 2);
+    for (const [bone, wrist] of [
+      ['hand_R', moved.wrist_R!],
+      ['hand_L', moved.wrist_L!],
+    ] as const) {
+      const w = landmarkToRig(wrist, view);
+      expect(b.byName.get(bone)!.pos.x).toBeCloseTo(w.x, 2);
+      expect(b.byName.get(bone)!.pos.y).toBeCloseTo(w.y, 2);
+    }
+    const dRot = (x: string) => Math.abs(((a.byName.get(x)!.rotation - b.byName.get(x)!.rotation + 540) % 360) - 180);
+    for (const bone of ['head', 'hand_R', 'hand_L']) expect(dRot(bone)).toBeLessThan(0.01);
+    // the forearm itself did turn, so a naive local-rotation copy would have rotated the hand with it
+    expect(Math.abs(a.byName.get('lower_arm_R')!.rotation - b.byName.get('lower_arm_R')!.rotation)).toBeGreaterThan(3);
+  });
+
   it('throws when a landmark is missing', () => {
     const { elbow_R: _omit, ...rest } = E;
     expect(() => applyLandmarks(rig, rest, view)).toThrow(/elbow_R/);
