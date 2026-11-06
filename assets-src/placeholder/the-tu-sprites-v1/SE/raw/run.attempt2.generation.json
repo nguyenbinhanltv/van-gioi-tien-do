@@ -1,0 +1,24 @@
+{
+  "clip": "run",
+  "dir": "SE",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 17:48:28 UTC",
+  "prompt": "CELL-LOCAL REPAIR of the supplied SE RUN sprite sheet. Input1 exact Thể tuSE master anatomy/style; input2 EDIT TARGET original12-frame RUN sheet; input3 template. Preserve EXACT6columns2rows, readingorder, canvasaspect3:1 and all12 full figures. ONLY FIX cells5,10,11 (1-based; 0-based indices4,9,10). They are the tucked-up/bunnyhop figures, too short. Redraw natural leg extension and slightly straighter running posture in those3 cells, WITHOUT scaling/resizing the figure or enlarging the head/torso/gauntlets. Match SAME full-body bun-to-lowestboot height and anatomical size as neighboring cells1,2,7,8 in input2. Keep upperbody/head dimensions unchanged; extend one full-length leg down/back rather than folding bothknees up. Lowest boot/bun bounds should match the normal run cells, not float as a compact ball. A shallow run flight pose can have one leg nearlyextended belowbody, other knee slightly forward; keep energy, do not replacewithidle. Both arms still counter-swing and gauntlets stay worn. Keep exact SE three-quarter FRONT facing diagonally DOWN-RIGHT and same face/hairbun/jadepin, ivory robe/trousers, mountainblue short tabard/bronzecloudtrim, darkblue sash2tails, darkboots, pairedbronze blockgauntlets/meander. Fine ink outline,painterlyNW light. NO elastic sleeve/trouser distortion, no extra limbs. The other9 cells MUST remain exactly unchanged, including their positions/scale/colors/poses. In everycell same master proportions. Fix anatomy by drawing legs, NEVER normalize heights/scale individual cells. Keep pure flat opaque#FF00FF background; no guides/borders/text, no shadow/floor/effects/blur. Allcontent stays inowncell.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/SE.master4x.png",
+    "raw/run.attempt1.png",
+    "templates/run.template.png"
+  ],
+  "rawOutput": "raw/run.attempt2.edited.png",
+  "repairCells": [4, 9, 10],
+  "status": "source; selected run uses documented donor cells4/9/10; directional QA and real Cocos2x capture PASS",
+  "utcEndObserved": "2026-11-06 17:48:56 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-3f488f6e-1be4-48d3-acdd-9bfc80ac2414.png",
+  "selectedOutput": "sheets/run.png",
+  "repairProof": "raw/run.attempt2.repair-proof.json",
+  "originalBackup": "raw/originals/run.attempt2.png",
+  "finalGate": "export/engine-gate.json"
+}
