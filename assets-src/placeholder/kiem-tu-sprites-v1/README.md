@@ -1,28 +1,26 @@
-# Kiếm tu concept A — E sprite source candidate
+# Kiếm tu concept A — full E sprite source
 
-D41 player-body frame animation; 60 full-character drawings in seven sheets.
+D41 first-pass player body: 126 runtime drawings in all 15 public SPRITE_CLIPS. This extends PR #120; polish remains explicitly backlogged.
 
 ```sh
 npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/kiem-tu-sprites-v1/E/project.json --out <temporary-directory>
+npm run sprite:batch -w @vgtd/sprite -- --batch assets-src/placeholder/kiem-tu-sprites-v1/batch.json --out <temporary-directory>
 ```
 
-The command passes the D41 backlog policy: zero hard failures,14 accepted soft foot findings,zero regressions. This is an owner-review candidate, not zero-slide production acceptance. See E/quality-backlog.json and its generated Markdown report. All upright frames pass master height ±3%, coarse face/torso similarity, presence and raster loop seam. The master is 208 px high at 2x.
+The build passes D41: zero hard failures, 14 recorded soft foot findings, zero regressions. It does not claim zero sliding or final visual acceptance. E/quality-backlog.json contains metric findings. E/manual-art-findings.json separately records visual defects and deliberate manual resolutions until the public pipeline supports their kinds.
 
-Run/walk contain 12 drawings each; idle, attack, cast and die 8 each; hit 4. Source attack_1 uses the existing runtime name attack. Fixed calibration per sheet handles generation DPI; no per-frame stretching. Lunge, recoil, raised-sword and collapse exceptions are recorded explicitly. Shared pipeline handles chroma key/defringe, master palette, pelvis/sole alignment, trimming,2048 PMA atlas/padding 2/extrude 1 and DragonBones display swaps.
+Run and walk have 12 drawings each; dash 6; hit 4; tribulation 12; other clips 8. Runtime attack is attack_1. New sheets include unused standing controls, documented in E/control-calibration.json. Their measured raw height establishes one fixed scale per sheet; controls never become displays. Frames get translation only. Named exceptions preserve seated, airborne, lunge and kneeling proportions.
 
-## Known issues
+## Source repairs and traceability
 
-- Fourteen corrected-metric foot findings remain (six run template offsets; six walk slides and two walk template offsets). Initial generation guides used insufficient stride; corrected speed-derived run regeneration was rejected because its foot travel was worse. Exact source generation guides remain here for provenance.
-- Clear right/left reversal, run half-cycle hair/arm continuity need further work. Shared interior spill cleanup is enabled; no thresholds or gameplay speeds changed.
-- Attack contact drawing 5 maps to exported hit event tick 7/13; cast release drawing 5 maps to tick 8/15.
-- The single-root viewer bone seam metric is not raster sprite QA. Actual Cocos 1x/2x captures and old-rig comparison are session artifacts, outside the repository.
+reference/E.master4x.source.json records the durable PR #80 source path and SHA256, archived 512 px master and generation-alias hash. The historical premultiplied Lanczos upscale is recorded but not re-verified. Source and tooling pins are main ancestors. Every selected raw output is archived and hash-linked; every current sheet has a SHA256 in provenance.json.
 
-## Provenance
+The original five-cell run repair terminates at E/repair-inputs/run.carry-before.png. run.carry-proof.json continues to the current sheet: cells 7–12 use one low near-RIGHT sword carry, while the first six cells remain byte-identical. The arm-mask composite was rejected for clipped counterhands, so the six selected cells are complete AI redraws. Minor cloth drift remains recorded. hit.repair-proof.json includes unchanged-cell and outside-mask pixel hashes. attack_3 and tribulation guide-cleanup proofs verify that all interior pixels survived boundary cleanup unchanged. No final character pixels were painted manually.
 
-See provenance.json and docs/ASSET-LICENSES.md. Source sheets are AI outputs with deterministic masked/cell repairs; no manually painted final pixels. Rejected generation attempts remain in the provenance log, not as selected art. Prompts are exact; model undisclosed by tool; codex-cli 0.166.0. The reference is the existing project-owned concept-A E art.
+## Remaining findings
 
-## Traceability and event timing
+Actual flat-sole run contacts are annotated in E/run-contacts.json. Four old probes targeted airborne feet; removing them corrects the annotation and does not fix stride. Repeated contacts, weak near/far reversal, robe drift and a hair-flow jump at the loop boundary remain manual findings. The 14 metric entries include wrong ghost positions and walk sliding of 3.1–5.2 px/frame; 999 denotes no sole within the probe window, not a measured 999 px gap. Speeds and tolerances are unchanged. Palette-aware interior magenta cleanup is enabled.
 
-reference/E.master4x.source.json records the exact earlier committed PNG, source/archive SHA256 and unchanged temporary alias used by every generation prompt. The durable source pin is the PR80 turnaround/E.png on main (source path and SHA256 recorded). The historical KT3 entry records a premultiplied Lanczos upscale to512px; that transform is recorded-but-not-re-verified, while both source/output hashes are verified. The prior ba7c2a9 working commit is explicitly non-main, not the durable origin anchor. Every selected raw output is archived and SHA256-linked in provenance.json. repair-inputs/*.repair-proof.json records decoded-RGBA cell hashes, original/final sheet SHA256, selected raw hashes and unchanged cells; hit patch masks also have matching outside-mask hashes.
+attack combo_window 7 retains the shared default: cancel_window tick 9/13. attack hit_frame 5 maps contact drawing 5 to tick 7/13; cast windup_end 7 maps release drawing 5 to tick 8/15. attack_2 and attack_3 use public phase defaults.
 
-attack.combo_window uses the shared default7 (cancel_window tick9/13). Only the visually justified hit_frame5 and cast windup_end7 override their named visual phases; no later gameplay cancellation window is introduced.
+The export uses one 2048² PMA atlas, padding 2, extrude 1 and 126 regions, selectable from dragonbones/kiem-tu-sprites. Full Cocos captures and the owner review page are session artifacts outside git. The single-root viewer bone seam metric is not raster QA.

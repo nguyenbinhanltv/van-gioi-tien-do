@@ -1,0 +1,144 @@
+{
+  "format": "vgtd-cell-repair-proof",
+  "version": 1,
+  "hash": "SHA256 row-major decodedRGBA",
+  "before": {
+    "file": "E/repair-inputs/run.carry-before.png",
+    "sha256": "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6",
+    "cells": [
+      {
+        "cell": 1,
+        "rect": [0, 0, 362, 362],
+        "sha256Rgba": "b8149e408aa1beb31962dbd7243381cb9d27b8dcd964ee4bd3998b6546f40462"
+      },
+      {
+        "cell": 2,
+        "rect": [362, 0, 362, 362],
+        "sha256Rgba": "1bb07f5aa88418eec6e7fb0cde923ec6c8cb84e41387a3ff38896a5af14babe1"
+      },
+      {
+        "cell": 3,
+        "rect": [724, 0, 362, 362],
+        "sha256Rgba": "a86bb161cc4ec749092a5f8c384c0378b1255a10b78e1177c22513ef4780973d"
+      },
+      {
+        "cell": 4,
+        "rect": [1086, 0, 362, 362],
+        "sha256Rgba": "05e8daa76f52476be4ce6eabdb3097969d1e8cfec15be8960fc3bb4f5780a5d6"
+      },
+      {
+        "cell": 5,
+        "rect": [1448, 0, 362, 362],
+        "sha256Rgba": "ce450774823dabe6c21c966f9bfa06e0171ec5c9c650c3d8cb21a49c8d7f6e4d"
+      },
+      {
+        "cell": 6,
+        "rect": [1810, 0, 362, 362],
+        "sha256Rgba": "5d18c1cb444226953e4e4e1dfd304724ba287babaa415f9a71a5086dd48cbd17"
+      },
+      {
+        "cell": 7,
+        "rect": [0, 362, 362, 362],
+        "sha256Rgba": "9a3335d33894f4576645f4c00a328d6fd911e745e7728de85c873894e04eb762"
+      },
+      {
+        "cell": 8,
+        "rect": [362, 362, 362, 362],
+        "sha256Rgba": "c7ab13923eaec4f1d2e8fe1dea273575e991e5c8a1488af0ca038aa7a38dc0f5"
+      },
+      {
+        "cell": 9,
+        "rect": [724, 362, 362, 362],
+        "sha256Rgba": "284a9489004706bf46af094f94b4195a5312d205a464ee20970741a8b069f5e4"
+      },
+      {
+        "cell": 10,
+        "rect": [1086, 362, 362, 362],
+        "sha256Rgba": "837a567114c6356469a103ad618b7b21bd3d4ccf2f58813a53be65d4093a94c0"
+      },
+      {
+        "cell": 11,
+        "rect": [1448, 362, 362, 362],
+        "sha256Rgba": "2a200408a89b32f68ef779a81e61e93ef631cfb1d404ad2d061d1c0443196296"
+      },
+      {
+        "cell": 12,
+        "rect": [1810, 362, 362, 362],
+        "sha256Rgba": "520456553930ac4d23a945f740f2154fd371745b58b644c6e5953de1dd87b2e8"
+      }
+    ]
+  },
+  "after": {
+    "file": "E/sheets/run.png",
+    "sha256": "58c49e38fdeef585dcad60cab781b25d76ccca56cd13199da93591e7f0cfeb93",
+    "cells": [
+      {
+        "cell": 1,
+        "rect": [0, 0, 362, 362],
+        "sha256Rgba": "b8149e408aa1beb31962dbd7243381cb9d27b8dcd964ee4bd3998b6546f40462"
+      },
+      {
+        "cell": 2,
+        "rect": [362, 0, 362, 362],
+        "sha256Rgba": "1bb07f5aa88418eec6e7fb0cde923ec6c8cb84e41387a3ff38896a5af14babe1"
+      },
+      {
+        "cell": 3,
+        "rect": [724, 0, 362, 362],
+        "sha256Rgba": "a86bb161cc4ec749092a5f8c384c0378b1255a10b78e1177c22513ef4780973d"
+      },
+      {
+        "cell": 4,
+        "rect": [1086, 0, 362, 362],
+        "sha256Rgba": "05e8daa76f52476be4ce6eabdb3097969d1e8cfec15be8960fc3bb4f5780a5d6"
+      },
+      {
+        "cell": 5,
+        "rect": [1448, 0, 362, 362],
+        "sha256Rgba": "ce450774823dabe6c21c966f9bfa06e0171ec5c9c650c3d8cb21a49c8d7f6e4d"
+      },
+      {
+        "cell": 6,
+        "rect": [1810, 0, 362, 362],
+        "sha256Rgba": "5d18c1cb444226953e4e4e1dfd304724ba287babaa415f9a71a5086dd48cbd17"
+      },
+      {
+        "cell": 7,
+        "rect": [0, 362, 362, 362],
+        "sha256Rgba": "be6335486bc1ac3c377426f693647b354d80f600da3f5788d2a07c5873364e99"
+      },
+      {
+        "cell": 8,
+        "rect": [362, 362, 362, 362],
+        "sha256Rgba": "3c97873a88bc44620ed73246c599307d34d0040e0afeee62944e4e2e202969e2"
+      },
+      {
+        "cell": 9,
+        "rect": [724, 362, 362, 362],
+        "sha256Rgba": "0cc1708664eaa24ec228f61f7ae3541dc311de6278d52f8a66786618868d7f83"
+      },
+      {
+        "cell": 10,
+        "rect": [1086, 362, 362, 362],
+        "sha256Rgba": "13fce377600e6fd9a7b10e6277cf29920d6101da6bfac460984cda708f649de8"
+      },
+      {
+        "cell": 11,
+        "rect": [1448, 362, 362, 362],
+        "sha256Rgba": "b5650ef4781db6b869eac723d1226537c122b7f73dcf505c50e05aa308a4f88c"
+      },
+      {
+        "cell": 12,
+        "rect": [1810, 362, 362, 362],
+        "sha256Rgba": "3ecfbfc8cb11ddf572fc3aba024c2c65920e2d3ef7cc89a90abf1bcc09d5f0b2"
+      }
+    ]
+  },
+  "sourceRaw": {
+    "file": "E/generation-selected/run-carry.raw.png",
+    "sha256": "a56f64868ca4775c9d0eed3bb9a009aeb1cfe8661f3abb6d5b52ef0d4a32c1c8"
+  },
+  "operation": "Public resizeImage resizes whole edited sheet to original2172x724 grid, then repairCell replaces cells7-12 only. Arm-mask composite rejected because it clipped counterhand; final uses whole affected cells. No per-frame height fitting.",
+  "changedCells1based": [7, 8, 9, 10, 11, 12],
+  "unchangedCells1based": [1, 2, 3, 4, 5, 6]
+}
