@@ -91,6 +91,7 @@ writeFileSync(
     null,
     2,
   ) + '\n',
+  'utf8',
 );
 const start = `<!-- THE-TU-SPRITES-${direction}:START -->`;
 const end = `<!-- THE-TU-SPRITES-${direction}:END -->`;
@@ -126,4 +127,5 @@ const b = old.indexOf(end);
 writeFileSync(
   licenseFile,
   a >= 0 && b >= a ? old.slice(0, a) + section + old.slice(b + end.length) : old.trimEnd() + '\n\n' + section + '\n',
+  'utf8',
 );

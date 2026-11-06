@@ -1,10 +1,29 @@
 import console from 'node:console';
+import { Buffer } from 'node:buffer';
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { inspectText } from '../../the-tu-continuous-v1/verify-provenance.mjs';
+
+export function inspectSpriteText(bytes) {
+  const errors = inspectText(bytes);
+  if (/[\u00c3\u00c6]|\u00e1\u00bb|\u00e2\u20ac/u.test(Buffer.from(bytes).toString('utf8')))
+    errors.push('double-encoded-text');
+  return errors;
+}
+
+if (process.argv.includes('--self-test')) {
+  for (const sample of ['\u00c3', '\u00c6\u00a1', '\u00e1\u00bb', '\u00e2\u20ac']) {
+    if (!inspectSpriteText(Buffer.from(sample, 'utf8')).includes('double-encoded-text'))
+      throw new Error('Mojibake fixture was not rejected');
+  }
+  if (inspectSpriteText(Buffer.from('Thể tu A Sơn Môn Hộ Vệ', 'utf8')).length)
+    throw new Error('Valid Vietnamese text was rejected');
+  console.log('Mojibake guard self-test PASS: 4 corrupt fixtures rejected, valid Vietnamese accepted');
+  process.exit(0);
+}
 
 const directionIndex = process.argv.indexOf('--dir');
 const direction = directionIndex >= 0 ? process.argv[directionIndex + 1] : 'E';
@@ -38,7 +57,7 @@ for (const file of [
   path.join(repo, 'docs/art/the-tu-sprite-sheets.md'),
   path.join(repo, 'docs/ASSET-LICENSES.md'),
 ].filter((f) => /\.(json|md|ts|mjs)$/.test(f))) {
-  for (const error of inspectText(readFileSync(file))) {
+  for (const error of inspectSpriteText(readFileSync(file))) {
     if (error === 'lossy-question-marks' && /\.(ts|mjs)$/.test(file)) continue;
     failures.push(`${path.relative(repo, file)}: ${error}`);
   }
