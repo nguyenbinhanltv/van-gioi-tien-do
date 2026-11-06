@@ -7,25 +7,25 @@
   "clips": [
     {
       "name": "idle",
-      "sheet": "sheets/idle.png",
       "cols": 4,
       "frames": 12,
-      "manifest": "templates/idle.template.json",
-      "tableId": "idle",
       "durationSec": 1,
       "loop": true,
-      "kind": "upright"
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "manifest": "templates/idle.template.json"
     },
     {
       "name": "meditate",
-      "sheet": "sheets/meditate.png",
       "cols": 4,
       "frames": 8,
-      "manifest": "templates/meditate.template.json",
-      "tableId": "meditate",
       "durationSec": 1,
       "loop": true,
+      "tableId": "meditate",
       "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "manifest": "templates/meditate.template.json",
       "exceptions": {
         "0": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
         "1": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
@@ -39,36 +39,36 @@
     },
     {
       "name": "walk",
-      "sheet": "sheets/walk.png",
       "cols": 4,
       "frames": 8,
-      "manifest": "templates/walk.template.json",
-      "tableId": "walk",
       "durationSec": 0.6666666666666666,
       "loop": true,
-      "kind": "upright"
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "manifest": "templates/walk.template.json"
     },
     {
       "name": "run",
-      "sheet": "sheets/run.png",
       "cols": 5,
       "frames": 10,
-      "manifest": "templates/run.template.json",
-      "tableId": "run",
       "durationSec": 0.5,
       "loop": true,
-      "kind": "upright"
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "manifest": "templates/run.template.json"
     },
     {
       "name": "dash",
-      "sheet": "sheets/dash.png",
       "cols": 4,
       "frames": 6,
-      "manifest": "templates/dash.template.json",
-      "tableId": "dash",
       "durationSec": 0.25,
       "loop": false,
+      "tableId": "dash",
       "kind": "free",
+      "sheet": "sheets/dash.png",
+      "manifest": "templates/dash.template.json",
       "exceptions": {
         "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
@@ -78,46 +78,52 @@
     },
     {
       "name": "sword_fly",
-      "sheet": "sheets/sword_fly.png",
       "cols": 4,
       "frames": 8,
-      "manifest": "templates/sword_fly.template.json",
-      "tableId": "sword_fly",
       "durationSec": 0.6666666666666666,
       "loop": true,
-      "kind": "free"
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json"
     },
     {
       "name": "attack",
-      "sheet": "sheets/attack_1.png",
       "cols": 5,
       "frames": 10,
-      "manifest": "templates/attack_1.template.json",
-      "tableId": "attack",
       "durationSec": 0.4166666666666667,
       "loop": false,
+      "tableId": "attack",
       "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_1.png",
+      "manifest": "templates/attack_1.template.json",
       "exceptions": {
         "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
-      },
-      "phases": {
-        "hit_frame": 5,
-        "combo_window": 8
       }
     },
     {
       "name": "attack_2",
-      "sheet": "sheets/attack_2.png",
       "cols": 5,
       "frames": 10,
-      "manifest": "templates/attack_2.template.json",
-      "tableId": "attack",
       "durationSec": 0.4166666666666667,
       "loop": false,
+      "tableId": "attack",
       "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
       "exceptions": {
         "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
@@ -127,22 +133,23 @@
         "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "8": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
-      },
-      "phases": {
-        "hit_frame": 5,
-        "combo_window": 8
       }
     },
     {
       "name": "attack_3",
-      "sheet": "sheets/attack_3.png",
       "cols": 5,
       "frames": 10,
-      "manifest": "templates/attack_3.template.json",
-      "tableId": "attack",
       "durationSec": 0.4166666666666667,
       "loop": false,
+      "tableId": "attack",
       "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
       "exceptions": {
         "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
@@ -151,58 +158,54 @@
         "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
         "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
-      },
-      "phases": {
-        "hit_frame": 5,
-        "combo_window": 8
       }
     },
     {
       "name": "cast",
-      "sheet": "sheets/cast.png",
       "cols": 5,
       "frames": 14,
-      "manifest": "templates/cast.template.json",
-      "tableId": "cast",
       "durationSec": 0.5,
       "loop": false,
+      "tableId": "cast",
       "kind": "free",
       "phases": {
-        "windup_end": 7
-      }
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "manifest": "templates/cast.template.json"
     },
     {
       "name": "channel",
-      "sheet": "sheets/channel.png",
       "cols": 4,
       "frames": 8,
-      "manifest": "templates/channel.template.json",
-      "tableId": "channel",
       "durationSec": 0.4,
       "loop": true,
-      "kind": "free"
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "manifest": "templates/channel.template.json"
     },
     {
       "name": "hit",
-      "sheet": "sheets/hit.png",
       "cols": 4,
       "frames": 4,
-      "manifest": "templates/hit.template.json",
-      "tableId": "hit",
       "durationSec": 0.2,
       "loop": false,
-      "kind": "free"
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.png",
+      "manifest": "templates/hit.template.json"
     },
     {
       "name": "die",
-      "sheet": "sheets/die.png",
       "cols": 4,
       "frames": 12,
-      "manifest": "templates/die.template.json",
-      "tableId": "die",
       "durationSec": 0.8,
       "loop": false,
+      "tableId": "die",
       "kind": "free",
+      "sheet": "sheets/die.png",
+      "manifest": "templates/die.template.json",
       "exceptions": {
         "2": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
         "3": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
@@ -218,25 +221,25 @@
     },
     {
       "name": "tribulation",
-      "sheet": "sheets/tribulation.png",
       "cols": 6,
       "frames": 24,
-      "manifest": "templates/tribulation.template.json",
-      "tableId": "tribulation",
       "durationSec": 1,
       "loop": false,
-      "kind": "free"
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "manifest": "templates/tribulation.template.json"
     },
     {
       "name": "emote",
-      "sheet": "sheets/emote.png",
       "cols": 4,
       "frames": 12,
-      "manifest": "templates/emote.template.json",
-      "tableId": "emote",
       "durationSec": 1,
       "loop": false,
+      "tableId": "emote",
       "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "manifest": "templates/emote.template.json",
       "exceptions": {
         "6": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
         "7": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",

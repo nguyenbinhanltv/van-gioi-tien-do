@@ -17,6 +17,8 @@ npm run capture -w client-cocos -- --src dragonbones/danphutu-sprite-v1 --stem d
 
 `assemble.ts` fails if a sheet is missing, its cells cannot be normalized without distorting anatomy, a hard gate fails, or a soft finding is unlisted/regresses. `--available` is diagnostic only. `--accept-soft` explicitly records current soft measurements using the public backlog API; it never accepts hard failures.
 
+Clip metadata starts from public `projectClipDefaults`. Event phases use the shared clip-table defaults without character-specific overrides; the drawn contact and talisman-presentation poses span those trigger moments. Only the rendered sheet layout and explicit anatomical pose exceptions are character-owned. Assembly writes `dpi-calibration.json` beside the direction's project file, so the commands above regenerate the committed DPI record. Normalized images and the prepared project for the shared batch/review CLIs stay in temporary working space.
+
 ## Scale and QA
 
 Raw grids first receive DPI normalization to square pipeline cells. The hit sheet's external black letterboxing is cropped with recorded bounds; no character pixels are cropped. One locked character scale, **208 / 231**, then applies across every clip and future direction. Alignment changes translation only. `character-calibration.json` and `E/dpi-calibration.json` record both stages. No frame-specific scaling is used.

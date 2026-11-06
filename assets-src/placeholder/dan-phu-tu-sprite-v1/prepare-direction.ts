@@ -11,6 +11,7 @@ import {
   groundSpeedPxS,
   halfStrideFor,
   SPRITE_CLIPS,
+  projectClipDefaults,
   type ProjectClip,
 } from '@vgtd/sprite';
 
@@ -23,12 +24,12 @@ const master = decodePng(readFileSync(join(root, 'reference', `${direction}.mast
 const guides = guidesFromMaster(measureFigure(master)!);
 const clips: ProjectClip[] = [];
 for (const clipSpec of SPRITE_CLIPS) {
-  const spec = { id: clipSpec.tableId, frames: clipSpec.tableFrames, fps: clipSpec.fps, loop: clipSpec.loop };
+  const spec = { id: clipSpec.tableId, frames: clipSpec.tableFrames };
   const name = clipSpec.name;
   const sourceName = name === 'attack' ? 'attack_1' : name;
   const cols =
     spec.frames === 24 ? 6 : spec.frames === 14 ? 5 : spec.frames <= 4 ? spec.frames : spec.frames % 5 === 0 ? 5 : 4;
-  const durationSec = spec.frames / spec.fps;
+  const durationSec = clipSpec.durationSec;
   const gait = spec.id === 'walk' || spec.id === 'run';
   const cells = gait
     ? locomotionCells(spec.frames, guides, {
@@ -72,18 +73,12 @@ for (const clipSpec of SPRITE_CLIPS) {
     ]),
   );
   clips.push({
-    name,
+    ...projectClipDefaults(name),
     sheet: `sheets/${sourceName}.png`,
     cols,
     frames: spec.frames,
     manifest: `templates/${sourceName}.template.json`,
-    tableId: spec.id,
-    durationSec,
-    loop: spec.loop,
-    kind: clipSpec.kind,
     ...(exceptionCells.length ? { exceptions } : {}),
-    ...(spec.id === 'attack' ? { phases: { hit_frame: 5, combo_window: 8 } } : {}),
-    ...(spec.id === 'cast' ? { phases: { windup_end: 7 } } : {}),
   });
 }
 writeFileSync(

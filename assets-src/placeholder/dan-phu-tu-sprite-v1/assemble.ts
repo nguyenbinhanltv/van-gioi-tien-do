@@ -111,7 +111,7 @@ if (process.argv.includes('--accept-soft')) {
 }
 writeOutputs(result, exportDir);
 writeFileSync(
-  join(work, 'dpi-calibration.json'),
+  join(dir, 'dpi-calibration.json'),
   JSON.stringify({ scale, referenceHeight, measuredUprightMedian, masterHeight: target, dpi }, null, 2) + '\n',
 );
 console.log(
