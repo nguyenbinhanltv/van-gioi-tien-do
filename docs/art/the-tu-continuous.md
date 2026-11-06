@@ -4,8 +4,8 @@ Theo yêu cầu chủ dự án ngày 2026-11-06 và D34–D39. Nhánh art chỉ 
 
 ## Nguồn chuẩn và thứ tự
 
-- Concept: `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a.png` và `the-tu-a-ingame.png`.
-- Danh sách mảnh, palette, VFX/icon: `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md`.
+- Concept: [sheet A](../../assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png) và [mockup in-game](../../assets-src/placeholder/the-tu-continuous-v1/reference/concept-a-ingame.png), sao chép nguyên byte từ artifact worker 16. Metadata/prompt/UTC upstream trong `reference/concept-a.source.json`; mockup chỉ dùng duyệt, không dùng cắt mảnh.
+- Danh sách mảnh, palette, VFX/icon: [prompt pack đã lưu](../../assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md), nguồn từ `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md` (chỉ format Markdown).
 - Quy trình: [rig-continuous-parts.md](rig-continuous-parts.md), [rig-classes.md](rig-classes.md), [parts-spec.md](parts-spec.md). Khi khác nhau, yêu cầu chủ dự án và quyết định mới nhất ưu tiên.
 - Làm E trước: ảnh → xử lý → ráp rig → idle/run/attack → đo strict và capture Cocos. Báo cáo/contact sheet/capture phải có trước khi mở PR nháp. Sau đó mới S/SE/NE/N và đủ 15 clip; không merge PR.
 - Bổ sung từ chủ dự án qua orchestrator: sau khi ráp E, sinh tham chiếu key-pose AI cho walk/run, combo đấm, guard, ground slam; gắn landmarks, dùng `fitPose` / `authorFromKeyPoses` của worker 15 khi có công cụ.
