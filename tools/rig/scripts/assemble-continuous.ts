@@ -16,6 +16,7 @@
  * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -26,6 +27,7 @@ import {
   type GaitName,
   ATLAS_PADDING,
   KEYPOSE_LABELS,
+  finishedLandmarkRms,
   applyDetail,
   assembleContinuous,
   authorKeyPoseClip,
@@ -230,10 +232,12 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
       const refPath = join(kdir, `${x}.png`);
       const ref = existsSync(refPath) ? decodePng(readFileSync(refPath)) : null;
       const fit = fits[i]!;
+      // the whole-body move of the fit (pelvis lowering + contact lock): the reference is translated by it before comparing
+      const total = { x: fit.shift.x + fit.lockShift.x, y: fit.shift.y + fit.lockShift.y };
       // bands (image rows @2x): head + arms down to the chest, torso to the hips, skirt and legs
       const detail = ref
         ? silhouetteIoUDetail(res.rig, finished, at[i]!, atlas, ref, {
-            shift: fit.shift,
+            shift: total,
             bands: [
               [0, 100],
               [100, 150],
@@ -249,11 +253,17 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
         const sil = renderSilhouette(res.rig, finished, at[i]!, atlas, 256);
         for (let ddx = -12; ddx <= 12; ddx += 2)
           for (let ddy = -12; ddy <= 12; ddy += 2) {
-            const v = maskIoU(sil, ref, 128, Math.round(fit.shift.x * 2) + ddx, Math.round(-fit.shift.y * 2) + ddy);
+            const v = maskIoU(sil, ref, 128, Math.round(total.x * 2) + ddx, Math.round(-total.y * 2) + ddy);
             if (v > best.iou) best = { iou: v, dx: ddx, dy: ddy };
           }
       }
-      const bad = (ref && iou < iouMin) || fit.rms > rmsMax;
+      // landmark RMS of the FINISHED clip (after the contact lock, the interpolation between keys, the secondary bake and the
+      // detail layer), not just of the fit: at the exact key time (a fraction of a frame) and at the frame that is actually
+      // exported (whole frames only). Reference landmarks move with the fit shift (the feet only along the facing).
+      const finishedRms = (frame: number) => finishedLandmarkRms(res.rig, lms[i]!, view, finished, frame, fit);
+      const rmsExact = finishedRms(at[i]!);
+      const rmsExported = finishedRms(Math.round(at[i]!));
+      const bad = (ref && iou < iouMin) || rmsExported > rmsMax;
       if (bad) iouFailures++;
       const worst = Object.entries(fit.error)
         .sort((p, q) => q[1] - p[1])
@@ -261,7 +271,7 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
         .map(([k, v]) => `${k} ${v.toFixed(1)}`)
         .join(', ');
       console.log(
-        `  ${x}: RMS ${fit.rms.toFixed(2)} px (max ${fit.maxError.toFixed(1)}: ${worst}), IoU ${ref ? iou.toFixed(3) : 'n/a'}${ref ? ` [head ${detail.bands[0]!.toFixed(2)} | torso ${detail.bands[1]!.toFixed(2)} | skirt+legs ${detail.bands[2]!.toFixed(2)}]` : ''}${ref ? `, best shift (${best.dx},${best.dy}) px -> IoU ${best.iou.toFixed(3)}` : ''}${bad ? `  FAIL (IoU >= ${iouMin}, RMS <= ${rmsMax})` : ''}${fit.shift.y ? `, pelvis lowered ${(-fit.shift.y).toFixed(1)} px` : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
+        `  ${x}: fit RMS ${fit.rms.toFixed(2)} px, FINISHED clip RMS ${rmsExact.toFixed(2)} at the key time / ${rmsExported.toFixed(2)} at the exported frame ${Math.round(at[i]!)} (max ${fit.maxError.toFixed(1)}: ${worst}), IoU ${ref ? iou.toFixed(3) : 'n/a'}${ref ? ` [head ${detail.bands[0]!.toFixed(2)} | torso ${detail.bands[1]!.toFixed(2)} | skirt+legs ${detail.bands[2]!.toFixed(2)}]` : ''}${ref ? `, best shift (${best.dx},${best.dy}) px -> IoU ${best.iou.toFixed(3)}` : ''}${bad ? `  FAIL (IoU >= ${iouMin}, RMS <= ${rmsMax})` : ''}${fit.shift.y ? `, pelvis lowered ${(-fit.shift.y).toFixed(1)} px` : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
       );
       const render = (c: (typeof clips)[number] | undefined, f: number) =>
         renderPose(res.rig, evalPose(res.rig, c ?? null, c ? Math.min(f, c.frames) : 0), atlas, {
@@ -272,8 +282,8 @@ key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
       const diff = createImage(256, 256, [30, 30, 36, 255]);
       if (ref) {
         const sil = renderSilhouette(res.rig, finished, at[i]!, atlas, 256);
-        const dx = Math.round(fit.shift.x * 2);
-        const dy = Math.round(-fit.shift.y * 2);
+        const dx = Math.round(total.x * 2);
+        const dy = Math.round(-total.y * 2);
         for (let y = 0; y < 256; y++)
           for (let x = 0; x < 256; x++) {
             const a = sil.data[(y * 256 + x) * 4 + 3]! >= 128;
@@ -362,6 +372,10 @@ console.log(
 // the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
+// the clips exactly as exported (key-pose clips included): `rig:measure --assembled` audits THESE, not a re-authored gait
+// the hash of the rig tells `rig:measure` whether the clips still belong to the rig.json next to them
+const rigHash = createHash('sha1').update(JSON.stringify(res.rig)).digest('hex').slice(0, 16);
+writeFileSync(join(out, `${name}.clips.json`), JSON.stringify({ rigHash, clips }));
 writeFileSync(
   join(out, `${name}.assembly.json`),
   JSON.stringify(
