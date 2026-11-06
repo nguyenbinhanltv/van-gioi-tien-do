@@ -81,7 +81,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'ribbon_tail_R', slot: 'ribbon_tail_R', binding: { kind: 'hanging', template: 'ribbon_tail_R' } },
   { id: 'leg_L', slot: 'leg_L', binding: { kind: 'limb', chain: ['thigh_L', 'shin_L', 'foot_L'], step: 7, ramp: 7 } },
   { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'hanging', template: 'robe_hem_back', cols: 4 } },
   { id: 'torso', slot: 'torso', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'body' },
   {
     id: 'arm_L',
@@ -91,7 +91,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   {
     id: 'sleeve_trim_L',
     slot: 'sleeve_trim_L',
-    binding: { kind: 'rigid', bone: 'lower_arm_L' },
+    binding: { kind: 'hanging', template: 'sleeve_edge_L', cols: 3 },
     compose: ['sleeve_lining_L', 'cuff_L'],
   },
   hand('L', 'relaxed'),
@@ -104,7 +104,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'boot_R', slot: 'boot_R', binding: { kind: 'rigid', bone: 'foot_R' } },
   { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt' } },
   { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'hanging', template: 'robe_hem_front', cols: 4 } },
   { id: 'vest', slot: 'vest', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'outfit_upper' },
   {
     id: 'vest_edges',
@@ -126,7 +126,7 @@ export const E_PIECES: readonly PieceSpec[] = [
   {
     id: 'sleeve_trim_R',
     slot: 'sleeve_trim_R',
-    binding: { kind: 'rigid', bone: 'lower_arm_R' },
+    binding: { kind: 'hanging', template: 'sleeve_edge_R', cols: 3 },
     compose: ['sleeve_lining_R', 'cuff_R'],
   },
   hand('R', 'grip'),
@@ -221,6 +221,9 @@ export const ATLAS_PADDING = 2;
 export const ATLAS_EXTRUDE = 1;
 
 const ALPHA = 8;
+
+/** Hang length (px @1x) of a thin band that gets a chain bone. */
+const MIN_HANG = 6;
 
 /** Mesh vertices kept free below the RIG_LIMITS budget (600 -> 560 target) so a repainted part does not break the rig. */
 const MESH_HEADROOM = 40;
@@ -360,8 +363,12 @@ function hangingBones(
     x: sel.reduce((a, p) => a + p.x, 0) / sel.length,
     y: sel.reduce((a, p) => a + p.y, 0) / sel.length,
   });
-  const root = mean(pts.filter((p) => p.y >= maxY - 3));
-  const end = mean(pts.filter((p) => p.y <= minY + 3));
+  // a thin band (cuff, hem strip) has no length of its own: hang it straight down from its top edge by MIN_HANG px
+  const thin = maxY - minY < 2 * 3 + 2;
+  const root = mean(pts.filter((p) => p.y >= maxY - (thin ? 1 : 3)));
+  const end = thin
+    ? { x: root.x, y: root.y - Math.max(MIN_HANG, maxY - minY) }
+    : mean(pts.filter((p) => p.y <= minY + 3));
   const len = Math.hypot(end.x - root.x, end.y - root.y);
   if (len < 2) return null;
   const angle = Math.atan2(end.y - root.y, end.x - root.x);
