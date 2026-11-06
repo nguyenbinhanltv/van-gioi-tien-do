@@ -45,7 +45,7 @@ templates as new generation inputs rather than relabeling old E-shaped ghosts.
 Legacy migrations may explicitly set `footSlideUnmeasuredReason` on a clip. A nonempty reason
 skips only foot-slide measurement and emits an `UNMEASURED` info finding (no numeric metric).
 Other hard gates still run. Matching old foot-slide baselines are neither resolved nor pruned;
-batch/review marks the clip as a warning with an unmeasured label. The committed Dan/Phu SE
+batch/review marks the clip as a warning with an unmeasured label. The committed Dan/Phu and Kiem tu SE
 walk/run clips use this temporary opt-out until their art owner migrates separate directional
 QA guides and reviewed baselines; original generation inputs remain unchanged. Remove the
 opt-out only after setting `vertical: "keep"` and completing that migration.

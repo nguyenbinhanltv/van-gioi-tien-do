@@ -164,6 +164,8 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
   Giữ nguyên template/manifest sinh ảnh và provenance; chủ art phải thêm bộ bóng chân QA riêng theo SE với bề rộng thế đứng đo từ master,
   dùng `vertical: "keep"`, đo lại và duyệt baseline ID mới rồi mới bỏ opt-out. Không đổi tốc độ/ngưỡng, không đổi tên baseline x cũ.
   Trong thời gian chưa đo, giữ nguyên baseline cũ; QA không tự đánh dấu đã sửa và `--prune` không xóa chúng.
+  Cùng tình trạng và đường chuyển dữ liệu áp dụng cho Kiếm tu SE (`walk`/`run`) vừa nhập main qua PR #127;
+  kiểm tra inventory toàn bộ project đã phát hiện trường hợp này khi main cập nhật trong lúc đồng bộ PR #123.
 
 1. Các ngưỡng QA của `@vgtd/sprite` là **mặc định chưa được duyệt**: chiều cao ±3 % (theo chủ dự án), trượt chân 3 px/khung, đường nối vòng lặp 2,5×, độ giống master 0,7 (mặt/thân), palette lock strength 0,6 / khoảng cách 60. Cần chỉnh khi có sheet thật của cả 13 animation; **không** nới lỏng cổng chiều cao âm thầm: tư thế giải phẫu phải khai báo `exceptions`.
 2. Nhiều trang atlas ≤ 2048 đã có đường tải một armature và capture Cocos 3.8.8 (PR #122). QA theo hướng có PR #123; dữ liệu SE cũ vẫn cần chuyển bóng chân/hiệu chuẩn như mục chờ ở trên, không được coi là đã đo đúng theo hướng chỉ vì xuất được atlas.
