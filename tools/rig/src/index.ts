@@ -36,3 +36,4 @@ export * from './limb.js';
 export * from './landmarks.js';
 export * from './detail.js';
 export * from './continuous.js';
+export * from './qa-strip.js';

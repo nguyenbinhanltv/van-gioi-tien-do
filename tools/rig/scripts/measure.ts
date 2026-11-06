@@ -29,6 +29,7 @@ import {
   loadCharacterData,
   loadedAtlas,
   meshQa,
+  stripQa,
   underpaintNeeds,
   type CharacterId,
 } from '../src/index.js';
@@ -77,6 +78,7 @@ interface Row {
   readonly worstGapPx: number;
   readonly stretchEvents: number;
   readonly worstStrainPct: number;
+  readonly stripFaults: number;
   readonly tornClips: number;
   readonly tornNames: readonly string[];
   readonly vertices: number;
@@ -116,13 +118,17 @@ for (const [dir, d] of data.byDirection) {
   let openings = 0;
   let worstGap = 0;
   let strain = 0;
+  let stripFaults = 0;
   let worstStrain = 0;
   const tornNames: string[] = [];
   for (const clip of clips) {
-    for (const i of meshQa(rig, clip, { gapPx: opts.limit })) {
+    for (const i of [...meshQa(rig, clip, { gapPx: opts.limit }), ...stripQa(rig, clip)]) {
       if (i.check === 'detach' && /come apart/.test(i.message)) {
         openings++;
         worstGap = Math.max(worstGap, i.value ?? 0);
+      } else if (i.check === 'strip') {
+        stripFaults++;
+        if (process.env.RIG_MEASURE_VERBOSE) console.log(`  ${clip.name}: ${i.message}`);
       } else if (i.check === 'mesh-strain') {
         strain++;
         worstStrain = Math.max(worstStrain, i.value ?? 0);
@@ -150,6 +156,7 @@ for (const [dir, d] of data.byDirection) {
     worstGapPx: Math.round(worstGap * 10) / 10,
     stretchEvents: strain,
     worstStrainPct: Math.round(worstStrain * 100),
+    stripFaults,
     tornClips: tornNames.length,
     tornNames,
     vertices,
@@ -157,7 +164,7 @@ for (const [dir, d] of data.byDirection) {
   needs[dir] = underpaintNeeds(rig, clips, { gapPx: opts.limit }).slice(0, opts.top);
 }
 
-const dirty = rows.some((r) => r.seamOpenings || r.tornClips || r.stretchEvents);
+const dirty = rows.some((r) => r.seamOpenings || r.tornClips || r.stretchEvents || r.stripFaults);
 if (opts.json) {
   console.log(
     JSON.stringify(
@@ -171,11 +178,15 @@ if (opts.json) {
   console.log(
     `${opts.character}${opts.autoskin ? ' (autoSkin preview)' : ''}: seam limit ${opts.limit} px, ${rows[0]?.clips ?? 0} clips per direction\n`,
   );
-  console.log('dir | clips | seam openings | worst gap px | stretch events | worst strain % | torn clips | vertices');
-  console.log('----|-------|---------------|--------------|----------------|----------------|------------|---------');
+  console.log(
+    'dir | clips | seam openings | worst gap px | stretch events | worst strain % | torn clips | strip faults | vertices',
+  );
+  console.log(
+    '----|-------|---------------|--------------|----------------|----------------|------------|--------------|---------',
+  );
   for (const r of rows) {
     console.log(
-      `${r.direction.padEnd(3)} | ${pad(r.clips, 5)} | ${pad(r.seamOpenings, 13)} | ${pad(r.worstGapPx, 12)} | ${pad(r.stretchEvents, 14)} | ${pad(r.worstStrainPct, 14)} | ${pad(r.tornClips, 10)} | ${pad(r.vertices, 8)}`,
+      `${r.direction.padEnd(3)} | ${pad(r.clips, 5)} | ${pad(r.seamOpenings, 13)} | ${pad(r.worstGapPx, 12)} | ${pad(r.stretchEvents, 14)} | ${pad(r.worstStrainPct, 14)} | ${pad(r.tornClips, 10)} | ${pad(r.stripFaults, 12)} | ${pad(r.vertices, 8)}`,
     );
   }
   for (const r of rows)

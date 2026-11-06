@@ -4,6 +4,9 @@ import { describe, expect, it } from 'vitest';
 import {
   assembleContinuous,
   createImage,
+  decodePng,
+  encodePng,
+  nonPremultipliedPixels,
   loadCharacterData,
   validateRig,
   type Image,
@@ -208,16 +211,24 @@ describe('assembleContinuous', () => {
     expect(res.rig.bones.filter((b) => b.name.startsWith('ribbon_tail_L_'))).toHaveLength(3);
   });
 
-  it('gives the sleeve cuff and the robe hem real secondary motion (chain bones, not rigid pieces)', () => {
+  it('gives the sleeve cuff chain-driven secondary motion; the wide thin hem stays skirt-weighted (no chain)', () => {
     const names = res.rig.chains!.map((c) => c.name);
-    expect(names).toEqual(expect.arrayContaining(['sleeve_group', 'hem_group']));
+    expect(names).toContain('sleeve_group');
+    expect(names).not.toContain('hem_group');
     expect(res.rig.bones.some((b) => b.name.startsWith('sleeve_edge_L_'))).toBe(true);
-    expect(res.rig.bones.some((b) => b.name.startsWith('robe_hem_front_'))).toBe(true);
+    expect(res.rig.bones.some((b) => b.name.startsWith('robe_hem_'))).toBe(false);
     const cuff = res.rig.skins[0]!.attachments.sleeve_trim_L!.sleeve_trim_L!;
     expect(cuff.type).toBe('mesh');
     if (cuff.type === 'mesh') {
       const bonesUsed = new Set(cuff.weights!.flatMap((w) => w.map(([b]) => b)));
       expect([...bonesUsed].every((b) => b.startsWith('sleeve_edge_L_'))).toBe(true);
+    }
+    // the hem follows the hips and thighs like the robe
+    const hem = res.rig.skins[0]!.attachments.robe_hem_front!.robe_hem_front!;
+    expect(hem.type).toBe('mesh');
+    if (hem.type === 'mesh') {
+      const bonesUsed = new Set(hem.weights!.flatMap((w) => w.map(([b]) => b)));
+      expect([...bonesUsed].every((b) => ['hip', 'thigh_L', 'thigh_R'].includes(b))).toBe(true);
     }
     for (const c of res.rig.chains ?? []) expect(c.maxAngle).toBeLessThanOrEqual(35);
   });
@@ -236,5 +247,13 @@ describe('assembleContinuous', () => {
     const trail = res.rig.slots.find((x) => x.name === 'sword_trail')!;
     expect(trail.attachment).toBeNull();
     expect(trail.blend).toBe('additive');
+  });
+
+  it('the packed atlas PNG written with premultiplied output round-trips and has no colour above alpha', () => {
+    const png = encodePng(res.atlas.image, { premultiplied: true });
+    const back = decodePng(png, { premultiplied: true });
+    expect([...back.data]).toEqual([...res.atlas.image.data]);
+    expect(nonPremultipliedPixels(back)).toBe(0);
+    expect(res.stats.nonPremultiplied).toBe(0);
   });
 });
