@@ -1,0 +1,24 @@
+{
+  "attack": {
+    "exceptions": {}
+  },
+  "attack_2": {
+    "exceptions": {}
+  },
+  "attack_3": {
+    "exceptions": {}
+  },
+  "emote": {
+    "exceptions": {
+      "6": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+      "7": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+      "8": "bow-recovery: head and torso remain inclined in drawn cell8 before upright recovery; original anatomical scale retained"
+    }
+  },
+  "walk": {
+    "vertical": "keep"
+  },
+  "run": {
+    "vertical": "keep"
+  }
+}
