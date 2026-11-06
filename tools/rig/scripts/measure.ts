@@ -108,7 +108,7 @@ for (const [dir, d] of data.byDirection) {
         ...(opts.touch !== undefined ? { touchPx: opts.touch } : {}),
       }).rig
     : d.rig;
-  const clips = authorClassSet(opts.character, rig);
+  const clips = authorClassSet(opts.character, rig, { detail: true });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
     throw new Error(`${d.texturePath} is a Git LFS pointer: run 'git lfs pull'`);

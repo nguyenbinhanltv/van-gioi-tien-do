@@ -204,6 +204,8 @@ export interface AssembleResult {
     readonly chains: number;
     /** Factor by which the mesh grid/strip steps were coarsened to fit the vertex budget (1 = as designed). */
     readonly meshScale: number;
+    /** Atlas pixels with colour above alpha (must be 0 for the premultiplied page). */
+    readonly nonPremultiplied: number;
     /** The docs/03 limits of the rig kind (`RIG_LIMITS`), to read the headroom: `vertices` of `limits.meshVertices`. */
     readonly limits: {
       readonly bones: number;
@@ -214,7 +216,14 @@ export interface AssembleResult {
   };
 }
 
+/** Atlas contract (docs/art): padding 2 between regions, extrude 1, premultiplied alpha. */
+export const ATLAS_PADDING = 2;
+export const ATLAS_EXTRUDE = 1;
+
 const ALPHA = 8;
+
+/** Mesh vertices kept free below the RIG_LIMITS budget (600 -> 560 target) so a repainted part does not break the rig. */
+const MESH_HEADROOM = 40;
 
 /** Old chain / strand / panel bones that the new parts replace (the weapon bone and IK stay). */
 const REPLACED_BONES = [
@@ -371,6 +380,16 @@ function hangingBones(
   return { bones, ids };
 }
 
+/** Number of atlas pixels whose colour exceeds their alpha: 0 for a valid premultiplied page (catches a wrong decode flag). */
+export function nonPremultipliedPixels(image: Image): number {
+  let n = 0;
+  for (let i = 0; i < image.width * image.height; i++) {
+    const a = image.data[i * 4 + 3]!;
+    if (image.data[i * 4]! > a + 1 || image.data[i * 4 + 1]! > a + 1 || image.data[i * 4 + 2]! > a + 1) n++;
+  }
+  return n;
+}
+
 export function assembleContinuous(input: AssembleInput): AssembleResult {
   const { view } = input;
   const pieces = input.pieces ?? E_PIECES;
@@ -522,7 +541,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     (input.weapon ? 4 : 0);
   let meshScale = 1;
   let result = buildAll(meshScale);
-  while (meshVerts(result.built) > limits.meshVertices - 8 && meshScale < 2.5) {
+  while (meshVerts(result.built) > limits.meshVertices - MESH_HEADROOM && meshScale < 2.5) {
     meshScale = Math.round((meshScale + 0.1) * 100) / 100;
     result = buildAll(meshScale);
   }
@@ -538,7 +557,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
 
   // 5. atlas
   const items = [...crops].map(([id, im]) => ({ id, w: im.width, h: im.height }));
-  const pad = 2;
+  const pad = ATLAS_PADDING;
   let size = 256;
   let pos: ReturnType<typeof pack> = null;
   while (size <= maxAtlas && !(pos = pack(items, size, pad))) size *= 2;
@@ -550,6 +569,16 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     for (let y = 0; y < im.height; y++)
       for (let x = 0; x < im.width; x++) {
         const s = (y * im.width + x) * 4;
+        const d = ((at.y + y) * size + at.x + x) * 4;
+        for (let k = 0; k < 4; k++) image.data[d + k] = im.data[s + k]!;
+      }
+    // extrude 1: repeat the edge pixels one pixel outward (no bleeding from neighbours under bilinear filtering)
+    for (let y = -1; y <= im.height; y++)
+      for (let x = -1; x <= im.width; x++) {
+        if (x >= 0 && y >= 0 && x < im.width && y < im.height) continue;
+        const sx = Math.min(im.width - 1, Math.max(0, x));
+        const sy = Math.min(im.height - 1, Math.max(0, y));
+        const s = (sy * im.width + sx) * 4;
         const d = ((at.y + y) * size + at.x + x) * 4;
         for (let k = 0; k < 4; k++) image.data[d + k] = im.data[s + k]!;
       }
@@ -607,6 +636,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
       vertices,
       chains: chains.length,
       meshScale,
+      nonPremultiplied: nonPremultipliedPixels(image),
       limits: {
         bones: limits.bones,
         slots: limits.slots,
