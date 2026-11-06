@@ -21,12 +21,20 @@ const character = args.find((a) => !a.startsWith('--') && !args[args.indexOf(a) 
 const dir = opt('dir', 'E');
 const out = resolve(opt('out', join(tmpdir(), 'vgtd-gate', character)));
 const run = (label, cmd, cmdArgs) => {
-  console.log(`\n== ${label}`);
-  const r = spawnSync(cmd, cmdArgs, {
-    cwd: repo,
-    stdio: 'inherit',
-    shell: cmd === 'npm' && process.platform === 'win32',
-  });
+  console.log(`
+== ${label}`);
+  // never a shell for node itself (paths with spaces); npm runs through the npm CLI script node was started from
+  // (npm_execpath, set by `npm run`), falling back to a shell with quoted arguments
+  const npmCli = cmd === 'npm' ? process.env.npm_execpath : undefined;
+  const r = npmCli
+    ? spawnSync(process.execPath, [npmCli, ...cmdArgs], { cwd: repo, stdio: 'inherit' })
+    : cmd === 'npm'
+      ? spawnSync(['npm', ...cmdArgs.map((a) => JSON.stringify(a))].join(' '), {
+          cwd: repo,
+          stdio: 'inherit',
+          shell: true,
+        })
+      : spawnSync(cmd, cmdArgs, { cwd: repo, stdio: 'inherit' });
   console.log(`== ${label}: ${r.status === 0 ? 'PASS' : 'FAIL'}`);
   return r.status === 0;
 };

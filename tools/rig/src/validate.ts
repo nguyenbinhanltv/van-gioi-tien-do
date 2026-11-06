@@ -220,8 +220,10 @@ export function validateRig(doc: unknown, options: ValidateOptions = {}): RigIss
   (rig.chains ?? []).forEach((c, i) => {
     c.bones.forEach((b, j) => {
       needBone(`/chains/${i}`, b);
-      if (j > 0 && parentOf(b) !== c.bones[j - 1]) {
-        err(`/chains/${i}`, `chain bone '${b}' must be a child of '${c.bones[j - 1]}'`);
+      // a chain is a forest of bone runs sharing one spring setting (one hanging group): a bone's parent is either an
+      // earlier bone of the same chain or a bone outside it (a root of the group), never a later bone of the chain
+      if (j > 0 && c.bones.slice(j + 1).includes(parentOf(b) ?? '')) {
+        err(`/chains/${i}`, `chain bone '${b}' must be listed after its parent '${parentOf(b)}'`);
       }
     });
   });

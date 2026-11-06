@@ -6,7 +6,7 @@ import {
   DETAIL_DISPLAYS,
   DETAIL_SLOTS,
   DETAIL_CHAINS,
-  DETAIL_CHAIN_PRIORITY,
+  DETAIL_GROUPS,
   addDetailChains,
   loadCharacterData,
   validateRig,
@@ -17,6 +17,7 @@ import {
   buildReferenceHumanoid,
   type Clip,
   type RegionAttachment,
+  type RigAttachment,
   type RigDocument,
 } from '../src/index.js';
 
@@ -147,8 +148,42 @@ describe('detail chains', () => {
   const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
   const kiem = loadCharacterData(repoRoot, 'kiem-tu').byDirection.get('E')!.rig;
   const errors = (r: RigDocument) => validateRig(r).filter((i) => i.severity === 'error');
+  /**
+   * The Kiếm tu body without its old chain bones: the starting point of the continuous rig. Mesh weights on a dropped
+   * bone move to its nearest kept ancestor.
+   */
+  const lean: RigDocument = (() => {
+    const drop = new Set((kiem.chains ?? []).flatMap((c) => c.bones));
+    const parent = new Map(kiem.bones.map((b) => [b.name, b.parent]));
+    const kept = (n: string): string => (drop.has(n) ? kept(parent.get(n)!) : n);
+    const remap = (a: RigAttachment): RigAttachment =>
+      a.type === 'mesh' && a.weights
+        ? {
+            ...a,
+            weights: a.weights.map((w) => {
+              const sum = new Map<string, number>();
+              for (const [bone, v] of w) sum.set(kept(bone), (sum.get(kept(bone)) ?? 0) + v);
+              return [...sum];
+            }),
+          }
+        : a;
+    return {
+      ...kiem,
+      chains: [],
+      bones: kiem.bones.filter((b) => !drop.has(b.name)),
+      skins: kiem.skins.map((sk) => ({
+        ...sk,
+        attachments: Object.fromEntries(
+          Object.entries(sk.attachments).map(([slot, m]) => [
+            slot,
+            Object.fromEntries(Object.entries(m).map(([n, a]) => [n, remap(a)])),
+          ]),
+        ),
+      })),
+    };
+  })();
 
-  it('never exceeds RIG_LIMITS: the committed Kiếm tu rig is already at 6 chains, so nothing is added and it stays valid', () => {
+  it('never exceeds RIG_LIMITS: the committed Kiếm tu rig already has 6 chains, so nothing is added and it stays valid', () => {
     expect(errors(kiem)).toEqual([]);
     const res = addDetailChains(kiem);
     expect(res.added).toEqual([]);
@@ -157,39 +192,42 @@ describe('detail chains', () => {
     expect(errors(res.rig)).toEqual([]);
   });
 
-  it('on a rig with a free chain budget it adds in priority order up to the limit and validates', () => {
-    const bare: RigDocument = { ...kiem, chains: [] };
-    const res = addDetailChains(bare);
-    expect(res.added).toEqual(DETAIL_CHAIN_PRIORITY.slice(0, RIG_LIMITS.player.physicsConstraints));
-    expect(res.skipped.length).toBe(DETAIL_CHAINS.length - res.added.length);
+  it('puts all 13 detail templates into 5 grouped chains within the 6-chain / 60-bone budget, and validates', () => {
+    expect(errors(lean)).toEqual([]);
+    const res = addDetailChains(lean);
+    expect(res.skipped).toEqual([]);
+    expect(res.added.length).toBe(DETAIL_CHAINS.length);
+    expect(res.rig.chains!.map((c) => c.name)).toEqual(DETAIL_GROUPS.map((g) => g.name));
     expect(res.rig.chains!.length).toBeLessThanOrEqual(RIG_LIMITS.player.physicsConstraints);
     expect(res.rig.bones.length).toBeLessThanOrEqual(RIG_LIMITS.player.bones);
     expect(errors(res.rig)).toEqual([]);
+    // every chain bone belongs to exactly one group and sits under its template's parent
+    const inChains = (res.rig.chains ?? []).flatMap((c) => c.bones);
+    expect(new Set(inChains).size).toBe(inChains.length);
   });
 
-  it('skips chains whose bones do not fit the bone budget and says so; strict throws', () => {
-    const tight: RigDocument = { ...kiem, chains: [], bones: [...kiem.bones] };
-    const room = RIG_LIMITS.player.bones - tight.bones.length;
-    const res = addDetailChains(tight, { overrides: { ponytail: { segments: room + 1 } } });
+  it('skips templates whose bones do not fit the bone budget and says so; strict throws', () => {
+    const tight = { overrides: { ponytail: { segments: RIG_LIMITS.player.bones } } };
+    const res = addDetailChains(lean, tight);
     expect(res.skipped.find((x) => x.name === 'ponytail')!.reason).toMatch(/bone budget/);
-    expect(() => addDetailChains(tight, { overrides: { ponytail: { segments: room + 1 } }, strict: true })).toThrow(
-      /ponytail: bone budget/,
-    );
+    expect(res.rig.bones.length).toBeLessThanOrEqual(RIG_LIMITS.player.bones);
+    expect(errors(res.rig)).toEqual([]);
+    expect(() => addDetailChains(lean, { ...tight, strict: true })).toThrow(/ponytail: bone budget/);
     expect(() => addDetailChains(kiem, { strict: true })).toThrow(/chain budget/);
   });
 
-  it('is idempotent and honours overrides', () => {
-    const bare: RigDocument = { ...kiem, chains: [] };
-    const once = addDetailChains(bare, { overrides: { ponytail: { segments: 3 } } });
-    expect(once.rig.chains!.find((c) => c.name === 'ponytail')!.bones).toHaveLength(3);
+  it('is idempotent and honours placement overrides', () => {
+    const once = addDetailChains(lean, { overrides: { ponytail: { segments: 3 } } });
+    expect(once.rig.bones.filter((b) => b.name.startsWith('ponytail_'))).toHaveLength(3);
     const twice = addDetailChains(once.rig);
     expect(twice.added).toEqual([]);
     expect(twice.rig).toEqual(once.rig);
   });
 
-  it('the spring bake moves an added chain when the body moves', () => {
+  it('the spring bake moves the grouped chain bones when the body moves', () => {
     const rig = addDetailChains(buildReferenceHumanoid('E')).rig;
-    expect(rig.chains!.some((c) => c.name === 'ponytail')).toBe(true);
+    expect(rig.chains!.some((c) => c.name === 'hair_group')).toBe(true);
+    expect(errors(rig)).toEqual([]);
     const run = authorKiemTuSet(rig, { only: ['run'] })[0]!;
     expect(run.bones.find((b) => b.bone === 'ponytail_1')?.rotate?.length ?? 0).toBeGreaterThan(2);
     expect(bakeSecondaryMotion(rig, run, { gain: 0 })).toBe(run);

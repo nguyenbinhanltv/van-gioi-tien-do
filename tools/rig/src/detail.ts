@@ -250,6 +250,13 @@ function eyesTrack(rig: RigDocument, clip: Clip, rule: ClipDetail): SlotTrack | 
 
 const WHITE = (a: number): RGBA => [1, 1, 1, a];
 
+/** Colour keys sorted by frame, one per frame (last wins): a window starting at frame 0 would otherwise key it twice. */
+function colorKeys(keys: Key<RGBA>[]): Key<RGBA>[] {
+  const byFrame = new Map<number, Key<RGBA>>();
+  for (const k of keys) byFrame.set(k.frame, k);
+  return [...byFrame.values()].sort((x, y) => x.frame - y.frame);
+}
+
 /** Trail: visible from `from` to `to`, alpha ramps 0 → 1 at `peak` → 0. */
 function trailTracks(rig: RigDocument, clip: Clip, rule: TrailRule | undefined): SlotTrack | null {
   const slot = DETAIL_SLOTS.trail;
@@ -267,12 +274,12 @@ function trailTracks(rig: RigDocument, clip: Clip, rule: TrailRule | undefined):
       { frame: a, value: name },
       ...(to < clip.frames ? [{ frame: to, value: null }] : []),
     ]),
-    color: [
+    color: colorKeys([
       { frame: 0, value: WHITE(0) },
       { frame: a, value: WHITE(0) },
       { frame: p, value: WHITE(1) },
       { frame: to, value: WHITE(0) },
-    ],
+    ]),
   };
 }
 
@@ -292,12 +299,12 @@ function glintTrack(rig: RigDocument, clip: Clip, rule: ClipDetail['glint']): Sl
       { frame: a, value: name },
       ...(b < clip.frames ? [{ frame: b, value: null }] : []),
     ]),
-    color: [
+    color: colorKeys([
       { frame: 0, value: WHITE(0) },
       { frame: a, value: WHITE(0) },
       { frame: c, value: WHITE(1) },
       { frame: b, value: WHITE(0) },
-    ],
+    ]),
   };
 }
 
@@ -487,99 +494,139 @@ export const DETAIL_CHAINS: readonly ChainTemplate[] = [
 ];
 
 /**
- * Order in which detail chains are added when the rig budget is short (most visible motion first). Chains not listed
- * come last, in template order.
+ * The 13 detail templates share secondary-motion chains: `RIG_LIMITS.player` allows 6 chains per rig, but a chain may be
+ * a tree of bones with one spring setting, and the springs are baked to keys anyway. Grouping by motion character gives
+ * 5 chains (hair strands + ponytail, sash tails + pendant, ribbon tails, sleeve edges, robe hem), leaving one free.
  */
-export const DETAIL_CHAIN_PRIORITY: readonly string[] = [
-  'ponytail',
-  'sash_tail_L',
-  'sash_tail_R',
-  'ribbon_tail_L',
-  'ribbon_tail_R',
-  'sleeve_edge_L',
-  'sleeve_edge_R',
-  'robe_hem_front',
-  'robe_hem_back',
-  'pendant',
-  'hair_strand_a',
-  'hair_strand_b',
-  'hair_strand_c',
+export interface DetailGroup {
+  readonly name: string;
+  readonly kind: ChainTemplate['kind'];
+  readonly stiffness: number;
+  readonly damping: number;
+  readonly gravity: number;
+  readonly members: readonly string[];
+}
+
+export const DETAIL_GROUPS: readonly DetailGroup[] = [
+  {
+    name: 'hair_group',
+    kind: 'hair',
+    stiffness: 0.35,
+    damping: 0.33,
+    gravity: 110,
+    members: ['ponytail', 'hair_strand_a', 'hair_strand_b', 'hair_strand_c'],
+  },
+  {
+    name: 'sash_group',
+    kind: 'sash',
+    stiffness: 0.25,
+    damping: 0.28,
+    gravity: 220,
+    members: ['sash_tail_L', 'sash_tail_R', 'pendant'],
+  },
+  {
+    name: 'ribbon_group',
+    kind: 'ribbon',
+    stiffness: 0.22,
+    damping: 0.35,
+    gravity: 90,
+    members: ['ribbon_tail_L', 'ribbon_tail_R'],
+  },
+  {
+    name: 'sleeve_group',
+    kind: 'sleeve',
+    stiffness: 0.5,
+    damping: 0.4,
+    gravity: 0,
+    members: ['sleeve_edge_L', 'sleeve_edge_R'],
+  },
+  {
+    name: 'hem_group',
+    kind: 'cape',
+    stiffness: 0.35,
+    damping: 0.4,
+    gravity: 120,
+    members: ['robe_hem_front', 'robe_hem_back'],
+  },
 ];
 
 export interface DetailChainsResult {
   readonly rig: RigDocument;
+  /** Templates whose bones were added. */
   readonly added: readonly string[];
   /** Templates not added, with the reason (missing parent, name clash, or which RIG_LIMITS budget they would exceed). */
   readonly skipped: readonly { readonly name: string; readonly reason: string }[];
 }
 
 export interface DetailChainsOptions {
-  /** Per-chain replacements of placement / size / spring parameters. */
-  readonly overrides?: Readonly<
-    Record<string, Partial<Pick<ChainTemplate, 'at' | 'length' | 'segments' | 'stiffness' | 'damping' | 'gravity'>>>
-  >;
-  readonly templates?: readonly ChainTemplate[];
-  /** Throw (listing what does not fit) instead of reporting skipped chains. */
+  /** Per-template replacements of placement / size. Spring settings belong to the group (`DETAIL_GROUPS`). */
+  readonly overrides?: Readonly<Record<string, Partial<Pick<ChainTemplate, 'at' | 'length' | 'segments'>>>>;
+  /** Throw (listing what does not fit) instead of reporting skipped templates. */
   readonly strict?: boolean;
 }
 
 /**
- * Bones + chains for the templates whose parent exists and that the rig does not have yet, **within the docs/03 budget**
- * (`RIG_LIMITS`: bones and secondary-motion chains of the rig's kind). A chain that does not fit is skipped in
- * `DETAIL_CHAIN_PRIORITY` order and reported; the limits are never exceeded. Needing more chains than the limit is a
- * limit change (DECISIONS entry + `@vgtd/character`), not something this function works around.
+ * Bones + grouped chains for the detail templates whose parent exists and that the rig does not have yet, **within the
+ * docs/03 budget** (`RIG_LIMITS`: bones and secondary-motion chains of the rig's kind). A template that does not fit is
+ * skipped and reported (groups are filled in `DETAIL_GROUPS` order); the limits are never exceeded. Needing more than the
+ * limits allow is a limit change (DECISIONS entry + `@vgtd/character`), not something this function works around.
  */
 export function addDetailChains(rig: RigDocument, opts: DetailChainsOptions = {}): DetailChainsResult {
   const limits = RIG_LIMITS[rig.kind === 'boss' ? 'boss' : rig.kind === 'pet' ? 'pet' : 'player'];
   const overrides = opts.overrides ?? {};
-  const rank = (n: string) => {
-    const i = DETAIL_CHAIN_PRIORITY.indexOf(n);
-    return i < 0 ? DETAIL_CHAIN_PRIORITY.length : i;
-  };
-  const templates = [...(opts.templates ?? DETAIL_CHAINS)].sort((x, y) => rank(x.name) - rank(y.name));
   const bones: RigBone[] = [...rig.bones];
   const chains: RigChain[] = [...(rig.chains ?? [])];
   const names = new Set(bones.map((b) => b.name));
   const added: string[] = [];
   const skipped: { name: string; reason: string }[] = [];
-  for (const t0 of templates) {
-    const t = { ...t0, ...(overrides[t0.name] ?? {}) };
-    const parent = rig.roles[t.parent as keyof typeof rig.roles] ?? t.parent;
-    const ids = Array.from({ length: t.segments }, (_, i) => `${t.name}_${i + 1}`);
-    const why = !names.has(parent)
-      ? `parent bone '${parent}' is missing`
-      : chains.some((c) => c.name === t.name) || ids.some((n) => names.has(n))
-        ? 'the rig already has it'
-        : chains.length + 1 > limits.physicsConstraints
-          ? `chain budget: ${chains.length} chains already, limit ${limits.physicsConstraints}`
-          : bones.length + ids.length > limits.bones
-            ? `bone budget: ${bones.length} bones + ${ids.length} > limit ${limits.bones}`
-            : null;
-    if (why) {
-      skipped.push({ name: t.name, reason: why });
-      continue;
+  const byName = new Map(DETAIL_CHAINS.map((t) => [t.name, t]));
+  for (const g of DETAIL_GROUPS) {
+    for (const member of g.members) {
+      const t0 = byName.get(member);
+      if (!t0) continue;
+      const t = { ...t0, ...(overrides[member] ?? {}) };
+      const parent = rig.roles[t.parent as keyof typeof rig.roles] ?? t.parent;
+      const ids = Array.from({ length: t.segments }, (_, i) => `${t.name}_${i + 1}`);
+      const existing = chains.find((c) => c.name === g.name);
+      const why = !names.has(parent)
+        ? `parent bone '${parent}' is missing`
+        : ids.some((n) => names.has(n))
+          ? 'the rig already has it'
+          : !existing && chains.length + 1 > limits.physicsConstraints
+            ? `chain budget: ${chains.length} chains already, limit ${limits.physicsConstraints}`
+            : bones.length + ids.length > limits.bones
+              ? `bone budget: ${bones.length} bones + ${ids.length} > limit ${limits.bones}`
+              : null;
+      if (why) {
+        skipped.push({ name: member, reason: why });
+        continue;
+      }
+      ids.forEach((name, i) => {
+        bones.push(
+          i === 0
+            ? { name, parent, length: t.length, x: t.at.x, y: t.at.y, rotation: t.at.rotation }
+            : { name, parent: ids[i - 1]!, length: t.length, x: t.length, y: 0, rotation: 0 },
+        );
+        names.add(name);
+      });
+      if (existing) {
+        chains[chains.indexOf(existing)] = { ...existing, bones: [...existing.bones, ...ids] };
+      } else {
+        chains.push({
+          name: g.name,
+          kind: g.kind,
+          bones: ids,
+          stiffness: g.stiffness,
+          damping: g.damping,
+          ...(g.gravity ? { gravity: g.gravity } : {}),
+        });
+      }
+      added.push(member);
     }
-    ids.forEach((name, i) => {
-      bones.push(
-        i === 0
-          ? { name, parent, length: t.length, x: t.at.x, y: t.at.y, rotation: t.at.rotation }
-          : { name, parent: ids[i - 1]!, length: t.length, x: t.length, y: 0, rotation: 0 },
-      );
-      names.add(name);
-    });
-    chains.push({
-      name: t.name,
-      kind: t.kind,
-      bones: ids,
-      stiffness: t.stiffness,
-      damping: t.damping,
-      ...(t.gravity ? { gravity: t.gravity } : {}),
-    });
-    added.push(t.name);
   }
-  if (opts.strict && skipped.some((x) => !x.reason.endsWith('already has it'))) {
-    const list = skipped.filter((x) => !x.reason.endsWith('already has it'));
-    const lines = list.map((x) => `  ${x.name}: ${x.reason}`);
+  const real = skipped.filter((x) => !x.reason.endsWith('already has it'));
+  if (opts.strict && real.length) {
+    const lines = real.map((x) => `  ${x.name}: ${x.reason}`);
     throw new RangeError(`detail chains do not fit the rig budget:\n${lines.join('\n')}`);
   }
   return { rig: { ...rig, bones, chains }, added, skipped };
