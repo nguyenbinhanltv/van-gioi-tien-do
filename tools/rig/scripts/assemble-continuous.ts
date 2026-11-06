@@ -6,6 +6,10 @@
  *   <parts>/<dir>/landmarks.json
  * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
+ * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
+ * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
+ * shallow knee, low foot lift, for a long robe; free = the original gait). The cadence is baked into the clip: the authored
+ * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -14,13 +18,17 @@ import { dirname, join, resolve } from 'node:path';
 import type { Direction } from '@vgtd/shared';
 import {
   ATLAS_EXTRUDE,
+  GAIT_PROFILES,
+  type GaitName,
   ATLAS_PADDING,
   assembleContinuous,
+  authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
   createImage,
   decodePng,
   encodePng,
+  nonPremultipliedPixels,
   formatQaReports,
   loadCharacterData,
   validateRig,
@@ -37,6 +45,12 @@ const opt = (name: string, def = '') => {
 const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
+const stem = opt('stem', 'kiemtu');
+// robe: half stride, two step pairs inside the table-length clip at the real ground speed (cadence baked in, no
+// runtime timeScale); `free` is the original gait
+const gaitName = opt('gait', 'robe') as GaitName;
+if (!(gaitName in GAIT_PROFILES))
+  throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -87,7 +101,7 @@ const res = assembleContinuous({
   view,
   parts,
   ...(weapon ? { weapon } : {}),
-  atlasName: `kiemtu_${dir}`,
+  atlasName: `${stem}_${dir}`,
 });
 console.log(`parts: ${res.used.length} used, ${res.missing.length} missing, ${res.skipped.length} skipped`);
 if (res.missing.length) console.log(`  missing: ${res.missing.join(', ')}`);
@@ -114,8 +128,9 @@ if (issues.length) {
   process.exit(1);
 }
 
-const clips = authorKiemTuSet(res.rig, { detail: true });
-const name = `kiemtu_${dir}`;
+const blink = authorBlinkCycle(res.rig);
+const clips = [...authorKiemTuSet(res.rig, { detail: true, gait: GAIT_PROFILES[gaitName] }), ...(blink ? [blink] : [])];
+const name = `${stem}_${dir}`;
 let pkg;
 try {
   pkg = buildCharacterPackage([{ rig: res.rig, clips }], res.atlas.data, {
@@ -139,7 +154,18 @@ if (bad.length) console.log(formatQaReports(bad).split('\n').slice(0, 40).join('
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, `${name}_ske.json`), JSON.stringify(pkg.export.ske));
 writeFileSync(join(out, `${name}_tex.json`), JSON.stringify(pkg.export.tex));
-writeFileSync(join(out, `${name}_tex.png`), encodePng(res.atlas.image));
+// the tex file says premultipliedAlpha: true, so the PNG must hold the premultiplied colour (encodePng un-premultiplies
+// by default); verify the bytes that were written, not the in-memory image
+const atlasPng = encodePng(res.atlas.image, { premultiplied: true });
+const written = decodePng(atlasPng, { premultiplied: true });
+const badPixels = nonPremultipliedPixels(written);
+const same = written.data.every((v, i) => v === res.atlas.image.data[i]);
+if (badPixels > 0 || !same)
+  throw new Error(`atlas PNG does not round-trip as premultiplied (${badPixels} pixels with colour above alpha)`);
+writeFileSync(join(out, `${name}_tex.png`), atlasPng);
+console.log(
+  `atlas PNG check (encoded bytes, read back as premultiplied): ${badPixels} pixels with colour above alpha, identical to the packed page`,
+);
 // the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
@@ -154,6 +180,15 @@ writeFileSync(
         premultipliedAlpha: true,
         page: [res.atlas.data.width, res.atlas.data.height],
       },
+      gait: gaitName,
+      // runtime rule for locomotion clips: timeScale = movement speed (px/s) / authoredSpeedPxS
+      clips: clips.map((c) => ({
+        name: c.name,
+        frames: c.frames,
+        loop: c.loop,
+        seconds: Math.round((c.frames / 30) * 1000) / 1000,
+        authoredSpeedPxS: c.motion?.speed ?? null,
+      })),
       nonPremultipliedPixels: st.nonPremultiplied,
       stats: st,
       used: res.used,

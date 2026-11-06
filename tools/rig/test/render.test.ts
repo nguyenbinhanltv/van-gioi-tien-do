@@ -216,3 +216,15 @@ describe('pose renderer', () => {
     expect(sheet.height).toBe(2 * (128 + 2) + 2);
   });
 });
+
+describe('encodePng premultiplied output', () => {
+  it('writes straight alpha by default and the raw premultiplied colour on request', () => {
+    const img = createImage(2, 1);
+    // a 50 % red pixel stored premultiplied: (128, 0, 0, 128)
+    img.data.set([128, 0, 0, 128, 0, 0, 0, 0]);
+    const straight = decodePng(encodePng(img), { premultiplied: true });
+    expect(straight.data[0]).toBe(255);
+    const raw = decodePng(encodePng(img, { premultiplied: true }), { premultiplied: true });
+    expect([...raw.data]).toEqual([...img.data]);
+  });
+});

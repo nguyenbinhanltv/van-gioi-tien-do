@@ -60,9 +60,12 @@ export interface TrailRule {
 }
 
 export interface ClipDetail {
-  /** Blink cycles on the eyes slot (3-5 s apart, at least one per clip of 1.5 s or more). */
-  readonly blink?: boolean;
-  /** Display held for the whole clip on the eyes slot instead (meditate: eyes closed). */
+  /**
+   * Display held on the eyes slot for the whole clip (meditate: eyes closed). It is the ONLY eye key a body clip may
+   * have: blinking belongs to the independent `blink_cycle` layer (`authorBlinkCycle`), so body clips never key blinks.
+   * The runtime must stop the blink layer while a clip with an explicit eyes hold (meditate) plays (and while die / hit
+   * play, whose expression is the body clip's own).
+   */
   readonly eyes?: string;
   /** Default display and timed holds per slot key. */
   readonly mouth?: { readonly base: string; readonly holds?: readonly Hold[] };
@@ -90,13 +93,11 @@ const SWORD_ACTION: ClipDetail = {
 /** What each clip of the Kiếm tu set does with the detail layer (sword always in the right hand). */
 export const DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
   idle: {
-    blink: true,
     mouth: { base: 'mouth_neutral' },
     handR: { base: 'hand_R_grip' },
     handL: { base: 'hand_L_relaxed' },
   },
   walk: {
-    blink: true,
     mouth: { base: 'mouth_neutral' },
     handR: { base: 'hand_R_grip' },
     handL: { base: 'hand_L_relaxed' },
@@ -118,7 +119,6 @@ export const DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
     glint: { at: { phase: 'windup_end' }, halfWidth: 3 },
   },
   channel: {
-    blink: true,
     mouth: { base: 'mouth_neutral' },
     handR: { base: 'hand_R_grip' },
     handL: { base: 'hand_L_seal' },
@@ -132,7 +132,6 @@ export const DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
     handL: { base: 'hand_L_relaxed' },
   },
   emote: {
-    blink: true,
     mouth: { base: 'mouth_smile' },
     handR: { base: 'hand_R_grip' },
     handL: { base: 'hand_L_palm' },
@@ -144,7 +143,6 @@ export const DETAIL_RULES: Readonly<Record<string, ClipDetail>> = {
   },
   die: {
     mouth: { base: 'mouth_open', holds: [{ from: { frac: 0.3 }, to: { frac: 1 }, show: 'mouth_neutral' }] },
-    eyes: 'eyes_open',
     handR: { base: 'hand_R_grip', holds: [{ from: { frac: 0.5 }, to: { frac: 1 }, show: 'hand_R_relaxed' }] },
     handL: { base: 'hand_L_fist', holds: [{ from: { frac: 0.5 }, to: { frac: 1 }, show: 'hand_L_relaxed' }] },
   },
@@ -171,8 +169,16 @@ function hash(s: string): number {
   return h >>> 0;
 }
 
-/** Frames at which a blink starts: first one inside the clip, then every 3-5 s; none too close to the loop end. */
-export function blinkStarts(clipName: string, frames: number): number[] {
+/** Longest allowed gap between blinks: 5 s. */
+const BLINK_MAX = BLINK_MIN + BLINK_SPAN;
+
+/**
+ * Frames at which a blink starts. One-shot clips: the first inside the clip, then every 3-5 s. Looping clips: every gap,
+ * **including the one across the loop wrap**, is within 3-5 s (n = ceil(frames / 5 s) blinks, gaps jittered around
+ * frames / n and the last gap closing the loop exactly); a loop shorter than 3 s gets none, and so does one of 151-179 frames (5.0-5.9 s: two blinks would be
+ * under 3 s apart, one would leave a gap over 5 s) -- `blink_cycle` uses 300 frames.
+ */
+export function blinkStarts(clipName: string, frames: number, loop = false): number[] {
   const last = frames - 6;
   if (last < 4 || frames < 1.5 * CLIP_FPS) return [];
   let state = hash(clipName) || 1;
@@ -180,13 +186,60 @@ export function blinkStarts(clipName: string, frames: number): number[] {
     state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
     return state / 4294967296;
   };
+  // a loop shorter than the minimum gap cannot blink at a natural rate: it blinks on the independent clock instead
+  if (loop && frames < BLINK_MIN) return [];
+  if (!loop) {
+    const out: number[] = [];
+    let t = Math.floor(next() * Math.min(last, BLINK_MIN));
+    while (t <= last) {
+      out.push(t);
+      t += BLINK_MIN + Math.floor(next() * BLINK_SPAN);
+    }
+    return out;
+  }
+  const n = Math.ceil(frames / BLINK_MAX);
+  if (frames / n < BLINK_MIN) return frames <= BLINK_MAX ? [Math.floor(next() * Math.max(1, last))] : [];
+  if (n === 1) return [Math.floor(next() * last)];
+  const base = frames / n;
+  const room = Math.floor(Math.min(base - BLINK_MIN, BLINK_MAX - base) * 0.8);
+  const gaps: number[] = [];
+  let used = 0;
+  for (let i = 0; i < n - 1; i++) {
+    const g = Math.round(base + (next() * 2 - 1) * room);
+    gaps.push(g);
+    used += g;
+  }
+  gaps.push(frames - used); // closes the loop; falls back to equal gaps when it leaves the 3-5 s window
+  if (gaps.some((g) => g < BLINK_MIN || g > BLINK_MAX)) {
+    gaps.length = 0;
+    for (let i = 0; i < n; i++) gaps.push(Math.floor(((i + 1) * frames) / n) - Math.floor((i * frames) / n));
+  }
+  // first blink anywhere that keeps the last one (and its 5 frames) inside the clip; later ones follow by the gaps
+  const span = gaps.slice(0, n - 1).reduce((x, y) => x + y, 0);
+  const t0 = Math.floor(next() * Math.max(1, Math.min(gaps[0]!, last - span) + 1));
   const out: number[] = [];
-  let t = Math.floor(next() * Math.min(last, BLINK_MIN));
-  while (t <= last) {
+  let t = t0;
+  for (let i = 0; i < n; i++) {
     out.push(t);
-    t += BLINK_MIN + Math.floor(next() * BLINK_SPAN);
+    t += gaps[i]!;
   }
   return out;
+}
+
+/** Name of the independent blink clip (see `authorBlinkCycle`). */
+export const BLINK_CYCLE_CLIP = 'blink_cycle';
+/** Its length: 10 s at 30 fps, so blinks 3-5 s apart fit (the body loops are 0.5-1 s, too short for that). */
+export const BLINK_CYCLE_FRAMES = 10 * CLIP_FPS;
+
+/**
+ * Independent blink clock: a looping, bone-less clip that only keys the eyes slot (open / half / closed, one blink every
+ * 3-5 s). The runtime plays it on its own animation layer next to the body clip, so idle (1 s), walk and every other short
+ * loop blink at a natural rate without baking blinks into each loop. Returns null when the rig has no eyes slot.
+ */
+export function authorBlinkCycle(rig: RigDocument, frames: number = BLINK_CYCLE_FRAMES): Clip | null {
+  const clip: Clip = { name: BLINK_CYCLE_CLIP, frames, loop: true, bones: [], slots: [], ik: [], events: [] };
+  const track = blinkTrack(rig, clip);
+  return track ? { ...clip, slots: [track] } : null;
 }
 
 function resolve(at: At, clip: Clip): number | null {
@@ -232,14 +285,20 @@ function holdTrack(
   return { slot, attachment: stepped(keys) };
 }
 
-function eyesTrack(rig: RigDocument, clip: Clip, rule: ClipDetail): SlotTrack | null {
+/** Explicit eyes hold of a body clip (meditate: closed). Null for every other clip: the slot is left to `blink_cycle`. */
+function eyesHold(rig: RigDocument, rule: ClipDetail): SlotTrack | null {
+  const slot = DETAIL_SLOTS.eyes;
+  if (!rule.eyes || !hasDisplay(rig, slot, rule.eyes)) return null;
+  return { slot, attachment: stepped([{ frame: 0, value: rule.eyes }]) };
+}
+
+/** Blink keys of the independent blink clip: open, half, closed, half, open at each start of `blinkStarts`. */
+function blinkTrack(rig: RigDocument, clip: Clip): SlotTrack | null {
   const slot = DETAIL_SLOTS.eyes;
   const D = DETAIL_DISPLAYS.eyes;
-  if (rule.eyes && hasDisplay(rig, slot, rule.eyes))
-    return { slot, attachment: stepped([{ frame: 0, value: rule.eyes }]) };
-  if (!rule.blink || !hasDisplay(rig, slot, D.open)) return null;
+  if (!hasDisplay(rig, slot, D.open)) return null;
   const keys: Key<string | null>[] = [{ frame: 0, value: D.open }];
-  for (const start of blinkStarts(clip.name, clip.frames)) {
+  for (const start of blinkStarts(clip.name, clip.frames, clip.loop)) {
     for (const [state, off] of BLINK_FRAMES) {
       const name = D[state];
       keys.push({ frame: start + off, value: hasDisplay(rig, slot, name) ? name : D.open });
@@ -320,7 +379,7 @@ export function applyDetail(
   const rule = rules[clip.name] ?? rules[clip.name.replace(/_\d+$/, '')];
   if (!rule) return clip;
   const added = [
-    eyesTrack(rig, clip, rule),
+    eyesHold(rig, rule),
     holdTrack(rig, clip, DETAIL_SLOTS.mouth, rule.mouth),
     holdTrack(rig, clip, DETAIL_SLOTS.handR, rule.handR),
     holdTrack(rig, clip, DETAIL_SLOTS.handL, rule.handL),

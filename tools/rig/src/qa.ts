@@ -10,6 +10,8 @@ import { evalPose, type Pose } from './pose.js';
 import type { ClipSpec } from './animset.js';
 import { EVENT_FRAME_TOLERANCE } from './animset.js';
 import { meshQa, type MeshQaThresholds } from './qa-mesh.js';
+import { lowerBodyQa } from './qa-lower.js';
+import { stripQa } from './qa-strip.js';
 import type { RigDocument } from './schema.js';
 
 export type QaCheck =
@@ -26,6 +28,8 @@ export type QaCheck =
   | 'weapon'
   | 'detach'
   | 'mesh-strain'
+  | 'strip'
+  | 'lower-body'
   | 'islands'
   | 'ik-reach';
 
@@ -423,13 +427,21 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
         continue;
       }
       const got = clip.events.filter((e) => e.name === want.name);
-      if (!got.some((e) => Math.abs(e.frame - wantFrame) <= EVENT_FRAME_TOLERANCE)) {
-        add({
-          severity: 'error',
-          check: 'events',
-          value: wantFrame,
-          message: `event '${want.name}' expected at frame ${wantFrame} (±${EVENT_FRAME_TOLERANCE}); found ${got.map((e) => e.frame).join(', ') || 'none'}`,
-        });
+      // a gait clip with several cycles repeats its footsteps: the table frame is the position inside ONE cycle, so the
+      // expected frames are (k + frame / frames) / cycles of the clip, one per cycle (the robe run has 4 footsteps)
+      const cycles = want.name.startsWith('footstep') ? Math.max(1, clip.motion?.cycles ?? 1) : 1;
+      const expected = Array.from({ length: cycles }, (_, k) =>
+        cycles === 1 ? wantFrame : ((k + wantFrame / clip.frames) / cycles) * clip.frames,
+      );
+      for (const frame of expected) {
+        if (!got.some((e) => Math.abs(e.frame - frame) <= EVENT_FRAME_TOLERANCE)) {
+          add({
+            severity: 'error',
+            check: 'events',
+            value: frame,
+            message: `event '${want.name}' expected at frame ${Math.round(frame * 10) / 10} (±${EVENT_FRAME_TOLERANCE}); found ${got.map((e) => e.frame).join(', ') || 'none'}`,
+          });
+        }
       }
     }
   }
@@ -477,7 +489,8 @@ export function runQa(rig: RigDocument, clip: Clip, opts: QaOptions = {}): QaRep
   const hasMesh = rig.skins.some((s) =>
     Object.values(s.attachments).some((m) => Object.values(m).some((a) => a.type === 'mesh')),
   );
-  if (opts.mesh ?? hasMesh) issues.push(...meshQa(rig, clip, opts.meshThresholds));
+  if (opts.mesh ?? hasMesh)
+    issues.push(...meshQa(rig, clip, opts.meshThresholds), ...stripQa(rig, clip), ...lowerBodyQa(rig, clip));
 
   const errors = issues.filter((i) => i.severity === 'error').length;
   return {
