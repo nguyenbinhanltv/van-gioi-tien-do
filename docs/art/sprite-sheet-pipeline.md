@@ -174,3 +174,11 @@ không cần đổi character API hay chia timeline sự kiện. Cần kiểm ch
   có 15 GIF và 15 contact sheet. `meditate_01` từ trang phụ hiện đúng rồi chuyển sang các khung ở trang chính trong cùng clip.
   Lệnh tái kiểm: `node apps/client-cocos/scripts/capture.mjs --skip-build --src dragonbones/<folder> --stem danphutu --direction S --mode single --animations all --frames 24 --zoom 2 --sample midpoint --gif --out <out>`.
   Đây là chứng minh tải/render nhiều trang; dữ liệu S chuẩn hóa vẫn có 3 lỗi QA cứng và 24 lỗi mềm của art, không được coi là đã duyệt chất lượng.
+
+### Chuẩn bị DPI có thể tái lập từ project
+
+Project có sheet sinh ở nhiều DPI khai báo `preparation: { kind: "square-cell-dpi-v1", calibration: "../character-calibration.json" }`. File calibration cung cấp `scale` dương hữu hạn, khóa cho nhân vật. `sprite:build`/`sprite:batch` tự chạy bước chuẩn bị trước khi cắt ô; không cần script ngoài hoặc đường dẫn tạm. Không được khai báo `scale` khác calibration.
+
+Phiên bản này giữ thuật toán assembler Đan/Phù tu: chỉ bỏ viền hàng đen/trong suốt ngoài cùng để phục hồi ô vuông, dung sai ô 1 px và làm tròn crop 3 px; chuyển DPI toàn sheet về ô `CELL_PX`, rồi áp dụng scale nhân vật cố định. Không fit từng khung, không thu nhỏ vì atlas. Lỗi lưới không vuông hoặc thiếu calibration báo `non-reproducible project` trước QA art. Assembler đã chuẩn bị sheet phải bỏ trường `preparation` để không chạy hai lần.
+
+Contract giữ `sheetSha1` của PNG chuẩn hóa, thêm `preparation` theo clip: `rawSha1`, kích thước thô/chuẩn hóa, crop và hệ số DPI. Sheet nguồn, guide sinh ảnh, provenance, phase và pose exception giữ nguyên. Audit project đã commit kiểm tra bước chuẩn bị và chặn DPI lẫn chưa khai báo; không diễn giải đầu vào thô thành lỗi art cứng.
