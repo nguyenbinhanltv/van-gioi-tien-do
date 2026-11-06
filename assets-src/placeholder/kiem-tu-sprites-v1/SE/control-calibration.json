@@ -1,0 +1,361 @@
+[
+  {
+    "clip": "idle",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 92,
+      "right": 305,
+      "top": 16,
+      "bottom": 402,
+      "height": 386,
+      "width": 213,
+      "pelvisX": 221.73421617752325
+    },
+    "initialCalibration": {
+      "scale": 0.538860103626943,
+      "targetHeight": 208,
+      "referenceHeight": 386,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "meditate",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 84,
+      "right": 291,
+      "top": 22,
+      "bottom": 400,
+      "height": 378,
+      "width": 207,
+      "pelvisX": 207.32440239763125
+    },
+    "initialCalibration": {
+      "scale": 0.5502645502645502,
+      "targetHeight": 208,
+      "referenceHeight": 378,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "walk",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "initialCalibration": {
+      "scale": 0.6479750778816199,
+      "targetHeight": 208,
+      "referenceHeight": 321,
+      "referenceFrames": 12
+    },
+    "note": "Median of12 original source frames."
+  },
+  {
+    "clip": "run",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "initialCalibration": {
+      "scale": 0.6666666666666666,
+      "targetHeight": 208,
+      "referenceHeight": 312,
+      "referenceFrames": 12
+    },
+    "note": "Initial median312 locked for both repairs; final heights203..214."
+  },
+  {
+    "clip": "dash",
+    "grid": {
+      "cols": 4,
+      "rows": 2,
+      "total": 8,
+      "control1based": 7
+    },
+    "control": {
+      "left": 95,
+      "right": 313,
+      "top": 25,
+      "bottom": 411,
+      "height": 386,
+      "width": 218,
+      "pelvisX": 226.36606772633033
+    },
+    "initialCalibration": {
+      "scale": 0.538860103626943,
+      "targetHeight": 208,
+      "referenceHeight": 386,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "sword_fly",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 85,
+      "right": 285,
+      "top": 20,
+      "bottom": 386,
+      "height": 366,
+      "width": 200,
+      "pelvisX": 208.3293916163758
+    },
+    "initialCalibration": {
+      "scale": 0.5683060109289617,
+      "targetHeight": 208,
+      "referenceHeight": 366,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "attack",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 98,
+      "right": 299,
+      "top": 18,
+      "bottom": 395,
+      "height": 377,
+      "width": 201,
+      "pelvisX": 217.8284679791808
+    },
+    "initialCalibration": {
+      "scale": 0.5517241379310345,
+      "targetHeight": 208,
+      "referenceHeight": 377,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "attack_2",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 91,
+      "right": 295,
+      "top": 10,
+      "bottom": 401,
+      "height": 391,
+      "width": 204,
+      "pelvisX": 214.97009305960077
+    },
+    "initialCalibration": {
+      "scale": 0.5319693094629157,
+      "targetHeight": 208,
+      "referenceHeight": 391,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "attack_3",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 85,
+      "right": 296,
+      "top": 21,
+      "bottom": 393,
+      "height": 372,
+      "width": 211,
+      "pelvisX": 212.8105647989256
+    },
+    "initialCalibration": {
+      "scale": 0.5591397849462365,
+      "targetHeight": 208,
+      "referenceHeight": 372,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "cast",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 104,
+      "right": 300,
+      "top": 16,
+      "bottom": 374,
+      "height": 358,
+      "width": 196,
+      "pelvisX": 224.41545324467637
+    },
+    "initialCalibration": {
+      "scale": 0.5810055865921788,
+      "targetHeight": 208,
+      "referenceHeight": 358,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "channel",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 92,
+      "right": 294,
+      "top": 19,
+      "bottom": 400,
+      "height": 381,
+      "width": 202,
+      "pelvisX": 214.0090388184973
+    },
+    "initialCalibration": {
+      "scale": 0.5459317585301837,
+      "targetHeight": 208,
+      "referenceHeight": 381,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "hit",
+    "grid": {
+      "cols": 3,
+      "rows": 2,
+      "total": 6,
+      "control1based": 5
+    },
+    "control": {
+      "left": 105,
+      "right": 371,
+      "top": 18,
+      "bottom": 483,
+      "height": 465,
+      "width": 266,
+      "pelvisX": 265.95994333447317
+    },
+    "initialCalibration": {
+      "scale": 0.44731182795698926,
+      "targetHeight": 208,
+      "referenceHeight": 465,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "die",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 94,
+      "right": 293,
+      "top": 21,
+      "bottom": 397,
+      "height": 376,
+      "width": 199,
+      "pelvisX": 215.42396936246902
+    },
+    "initialCalibration": {
+      "scale": 0.5531914893617021,
+      "targetHeight": 208,
+      "referenceHeight": 376,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "tribulation",
+    "grid": {
+      "cols": 5,
+      "rows": 3,
+      "total": 15,
+      "control1based": 13
+    },
+    "control": {
+      "left": 70,
+      "right": 235,
+      "top": 14,
+      "bottom": 301,
+      "height": 287,
+      "width": 165,
+      "pelvisX": 171.90166999002992
+    },
+    "initialCalibration": {
+      "scale": 0.7247386759581882,
+      "targetHeight": 208,
+      "referenceHeight": 287,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  },
+  {
+    "clip": "emote",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 90,
+      "right": 289,
+      "top": 17,
+      "bottom": 397,
+      "height": 380,
+      "width": 199,
+      "pelvisX": 213.89709600796874
+    },
+    "initialCalibration": {
+      "scale": 0.5473684210526316,
+      "targetHeight": 208,
+      "referenceHeight": 380,
+      "referenceFrames": 1
+    },
+    "note": "Unused standing control fixes one uniform sheet scale; never exported."
+  }
+]
