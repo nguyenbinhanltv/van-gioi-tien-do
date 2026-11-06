@@ -39,6 +39,13 @@ Chạy cả chuỗi: `npm run sprite:build -w @vgtd/sprite -- --project <project
 
 `npm run sprite:repair -w @vgtd/sprite -- --sheet <gốc.png> --edited <đã sửa.png> --cell <chỉ số> --cols <n> --rows <n> --out <ra.png>`: chép **đúng một ô** từ sheet đã sửa (model hay vẽ lại cả ảnh) vào sheet gốc; mọi ô khác **giống từng byte** (kiểm bằng sha1 từng ô, lệnh lỗi nếu có ô khác đổi).
 
+### Ghi chú khóa nền, chạy nước rút và cổng trượt chân (bổ sung)
+
+- **Dọn màu magenta lọt vào trong (hair strands):** `slice.spill` (`despillInterior`) bỏ ám magenta của **mọi** pixel đục (không chỉ viền): pixel có đỏ và xanh dương cùng vượt xanh lá quá `threshold` (24) bị kéo về `min(r, b) = g`, trừ khi nằm gần một màu của palette master (`keepDistance` 36; `runProject` tự thêm palette master), để không làm hỏng vải tím/hồng thật. Mặc định tắt; bật bằng `"slice": { "spill": {} }` trong project.
+- **Chạy nước rút:** chân chạm đất ngắn hơn nửa chu kỳ. `locomotionCells(..., { stance })` / `sprite:template --stance 0.33` sinh ô bay (cả hai chân rời đất), và `halfStrideFor(speed, duration, stance)` = `speed · duration · 2 · stance / 2` giữ bóng chân khớp cổng trượt chân; dùng **cùng một** `stance` cho cả hai.
+- **Chú thích tiếp đất thật:** `contacts: { R: [...], L: [...] }` trong clip của project thay cờ `planted` của template bằng các khung mà bản vẽ **thực sự** có chân chạm đất (vị trí bóng chân giữ nguyên).
+- **Đo đế chân:** `soleRuns` tách từng bàn chân (cách nhau ≥ 3 cột) nên hai giày gần nhau không còn bị trung bình hóa; chân đặt đất cách bóng chân > 20 px **không** bị bỏ qua âm thầm mà báo `warn` ("chân không nằm trên template").
+
 ## Cổng QA
 
 | Cổng               | Quy tắc                                                                                                                                                                                                                                                                                                                                          |

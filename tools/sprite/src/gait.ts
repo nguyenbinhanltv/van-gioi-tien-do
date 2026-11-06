@@ -29,9 +29,10 @@ export function groundPxPerFrame(speedPxS: number, durationSec: number, frames: 
 }
 
 /**
- * Half stride (texture px) of the template foot ghosts: a planted foot slides back by `2 * halfStride` during the stance half
- * of the cycle (one cycle = `durationSec`, two steps), so `halfStride = speed * durationSec * TEXTURE_SCALE / 4`.
+ * Half stride (texture px) of the template foot ghosts: a planted foot slides back by `2 * halfStride` during its stance
+ * (the fraction `stance` of the cycle, default a half; one cycle = `durationSec`, two steps) at the ground speed, so
+ * `halfStride = speed * durationSec * TEXTURE_SCALE * stance / 2`.
  */
-export function halfStrideFor(speedPxS: number, durationSec: number): number {
-  return (speedPxS * durationSec * TEXTURE_SCALE) / 4;
+export function halfStrideFor(speedPxS: number, durationSec: number, stance = 0.5): number {
+  return (speedPxS * durationSec * TEXTURE_SCALE * stance) / 2;
 }

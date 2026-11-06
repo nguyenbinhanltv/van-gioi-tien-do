@@ -19,6 +19,7 @@ import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type Pal
 import { runQa, type QaClip, type QaReport } from './qa.js';
 import { resizeImage } from './repair.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
+import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
 
 export interface ProjectClip {
@@ -54,6 +55,8 @@ export interface ProjectClip {
   readonly exceptions?: Readonly<Record<string, string>>;
   /** `sole` (default) or `keep` (airborne: keep the height above the template ground line). */
   readonly vertical?: 'sole' | 'keep';
+  /** The ACTUAL planted-foot frames of the drawings; replaces the template's planted flags in the foot-slide gate. */
+  readonly contacts?: Contacts;
   /** Ground speed (px/s, 1x screen) of the clip; default from the table for run / walk, none otherwise. */
   readonly groundSpeedPxS?: number;
 }
@@ -116,14 +119,17 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const palette: Color3[] = paletteFromMaster(master, project.palette);
   const lock = project.palette?.lock !== false;
 
-  // 1. slice + palette lock every sheet
+  // 1. slice + palette lock every sheet (spill cleanup keeps the master palette colours)
+  const sliceOptions: SliceOptions | undefined = project.slice?.spill
+    ? { ...project.slice, spill: { palette, ...project.slice.spill } }
+    : project.slice;
   const sliced = project.clips.map((c) => {
     const buf = readFileSync(resolve(baseDir, c.sheet));
     const sheet = decodePng(buf);
     const frames = sliceSheet(
       sheet,
       { cols: c.cols, rows: Math.ceil(c.frames / c.cols), frames: c.frames },
-      project.slice,
+      sliceOptions,
     ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f));
     const rows = Math.ceil(c.frames / c.cols);
     const r0 = cellRect(sheet.width, sheet.height, c.cols, rows, 0);
@@ -212,7 +218,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
       : null;
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
-    const cells: readonly CellSpec[] | undefined = manifest?.cells;
+    const cells: readonly CellSpec[] | undefined =
+      manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
       loop: s.clip.loop,

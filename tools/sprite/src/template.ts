@@ -107,8 +107,32 @@ export interface LocomotionOptions {
   readonly halfStride: number;
   /** Peak sole height (px @2x) of the swinging foot. */
   readonly lift: number;
+  /**
+   * Fraction of the cycle each foot is planted (stance). Default 0.5 (walk); a sprint is shorter (~0.33) and has flight
+   * cells with both feet off the ground. Use the same value for `halfStrideFor`.
+   */
+  readonly stance?: number;
   /** Which leg is the first to make contact (cell 0). Default R. */
   readonly first?: 'L' | 'R';
+}
+
+/** Annotated ground contacts: the frames (0-based) in which each foot is really planted in the drawings. */
+export interface Contacts {
+  readonly R?: readonly number[];
+  readonly L?: readonly number[];
+}
+
+/**
+ * Replace the template's planted flags by the ACTUAL contact annotation of the drawings (a sprint's stance is shorter than the
+ * template's half cycle, and the artist's feet can be lifted where the template planted them). The ghost positions are kept;
+ * a foot without a ghost stays without one.
+ */
+export function applyContacts(cells: readonly CellSpec[], contacts: Contacts): CellSpec[] {
+  return cells.map((c, i) => ({
+    ...c,
+    ...(c.nearFoot ? { nearFoot: { ...c.nearFoot, planted: contacts.R?.includes(i) ?? false } } : {}),
+    ...(c.farFoot ? { farFoot: { ...c.farFoot, planted: contacts.L?.includes(i) ?? false } } : {}),
+  }));
 }
 
 /** Tags of the 12-cell walk / run cycle (6 cells per step: contact, load, passing, toe-off, up, pre-contact). */
@@ -122,11 +146,13 @@ export const STEP_TAGS = ['contact', 'down', 'passing', 'toeoff', 'up', 'precont
 export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptions): CellSpec[] {
   const first = opts.first ?? 'R';
   const s = opts.halfStride;
+  const stance = opts.stance ?? 0.5;
+  if (!(stance > 0 && stance <= 0.5)) throw new RangeError('stance must be in (0, 0.5]');
   const foot = (phase: number): { x: number; y: number; planted: boolean } => {
-    // phase 0..1 over one full cycle for ONE foot: 0 = front contact; stance until 0.5; swing 0.5..1
+    // phase 0..1 over one full cycle for ONE foot: 0 = front contact; stance until `stance`; swing for the rest
     const p = ((phase % 1) + 1) % 1;
-    if (p < 0.5) return { x: g.centerX + s * (1 - 4 * p), y: g.ground, planted: true };
-    const q = (p - 0.5) / 0.5; // 0..1 swing
+    if (p < stance) return { x: g.centerX + s * (1 - (2 * p) / stance), y: g.ground, planted: true };
+    const q = (p - stance) / (1 - stance); // 0..1 swing
     return { x: g.centerX - s + 2 * s * q, y: g.ground - opts.lift * Math.sin(Math.PI * q), planted: false };
   };
   return Array.from({ length: frames }, (_, i) => {
