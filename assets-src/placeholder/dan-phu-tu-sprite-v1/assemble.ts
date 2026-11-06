@@ -89,7 +89,9 @@ const locked = JSON.parse(readFileSync(resolve(dir, '../character-calibration.js
 const measuredUprightMedian = median(uprightHeights);
 const referenceHeight = locked.referenceHeight;
 const scale = locked.scale;
-const input: Project = { ...project, master, scale, clips };
+// Sheets above are already prepared; do not normalize them a second time.
+const { preparation: _preparation, ...preparedProject } = project;
+const input: Project = { ...preparedProject, master, scale, clips };
 // Absolute paths are confined to this temporary working project, never committed.
 writeFileSync(
   join(work, 'project.json'),
