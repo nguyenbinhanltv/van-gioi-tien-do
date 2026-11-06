@@ -81,12 +81,12 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
         .map((d) => {
           const manual = d.manual ?? [];
           const observations = manual.length
-            ? `<div class="grid"><section class="card"><div class="name">Manual art findings (${manual.length})</div>${manual
+            ? `<div class="grid"><section class="card"><details><summary class="name">Manual art findings (${manual.length}) · ${manual.filter((e) => e.status === 'resolved').length} art-worker resolved</summary>${manual
                 .map(
                   (e) =>
-                    `<p><strong>${esc(e.clip)} / ${esc(e.dir)}: ${esc(e.kind)}</strong><br>cells ${e.cells.length ? e.cells.join(', ') : 'all'} · ${esc(e.severity)} · ${esc(e.reviewer)}<br>${esc(e.note)}</p>`,
+                    `<p><strong>${esc(e.clip)} / ${esc(e.dir)}: ${esc(e.kind)}</strong><br>cells ${e.cells.length ? e.cells.join(', ') : 'all'} · ${esc(e.severity)} · ${esc(e.reviewer)} · art status ${esc(e.status ?? 'open')}<br>${esc(e.note)}</p>`,
                 )
-                .join('')}</section></div>`
+                .join('')}</details></section></div>`
             : '';
           const cards = d.clips
             .map((c) => {

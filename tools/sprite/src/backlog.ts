@@ -26,6 +26,8 @@ export interface ManualArtFinding {
   /** Art review label, preserved verbatim rather than mapped to automatic QA severity. */
   readonly severity: string;
   readonly reviewer: 'art-worker';
+  /** Explicit art review state only; automatic QA never changes it. Omitted means open. */
+  readonly status?: 'open' | 'planned' | 'resolved';
 }
 
 export function validateManualFinding(e: ManualArtFinding): void {
@@ -41,6 +43,8 @@ export function validateManualFinding(e: ManualArtFinding): void {
   if (typeof e.note !== 'string' || !e.note.trim()) throw new Error('manual finding: note is required');
   if (typeof e.severity !== 'string' || !e.severity.trim()) throw new Error('manual finding: severity is required');
   if (e.reviewer !== 'art-worker') throw new Error('manual finding: reviewer must be art-worker');
+  if (e.status !== undefined && !['open', 'planned', 'resolved'].includes(e.status))
+    throw new Error('manual finding: invalid art review status');
   for (const key of ['gate', 'metric', 'value', 'limit', 'cell'])
     if (key in e) throw new Error(`manual finding: '${key}' belongs to automatic metric entries`);
 }
@@ -81,7 +85,7 @@ export function migrateManualFindings(backlog: Backlog, source: unknown): Backlo
   if (legacy.character !== backlog.character) throw new Error('manual companion character differs from backlog');
   const manual = [...(backlog.manual ?? [])];
   const identity = (e: ManualArtFinding) =>
-    JSON.stringify([e.kind, e.clip, e.dir, e.cells, e.note, e.severity, e.reviewer]);
+    JSON.stringify([e.kind, e.clip, e.dir, e.cells, e.note, e.severity, e.reviewer, e.status ?? 'open']);
   const have = new Set(manual.map(identity));
   for (const raw of legacy.entries) {
     if (!raw || typeof raw !== 'object') throw new Error('invalid manual companion entry');
@@ -115,6 +119,7 @@ export function migrateManualFindings(backlog: Backlog, source: unknown): Backlo
       note: `${e.note}\nLegacy art diagnostic: ${diagnostics}`,
       severity: e.severity as string,
       reviewer: 'art-worker',
+      ...(e.status !== undefined ? { status: e.status as ManualArtFinding['status'] } : {}),
     };
     validateManualFinding(finding);
     const key = identity(finding);
@@ -317,13 +322,13 @@ export function backlogMarkdown(b: Backlog): string {
   );
   if (manual.length) {
     lines.push(
-      '| clip | dir | cells | kind | severity | reviewer | note |',
-      '| --- | --- | --- | --- | --- | --- | --- |',
+      '| clip | dir | cells | kind | severity | reviewer | art status | note |',
+      '| --- | --- | --- | --- | --- | --- | --- | --- |',
     );
     const cell = (s: string) => s.replace(/\|/g, '/').replace(/[\r\n]/g, ' ');
     for (const e of manual)
       lines.push(
-        `| ${cell(e.clip)} | ${cell(e.dir)} | ${e.cells.join(', ') || 'all'} | ${e.kind} | ${cell(e.severity)} | ${e.reviewer} | ${cell(e.note)} |`,
+        `| ${cell(e.clip)} | ${cell(e.dir)} | ${e.cells.join(', ') || 'all'} | ${e.kind} | ${cell(e.severity)} | ${e.reviewer} | ${e.status ?? 'open'} | ${cell(e.note)} |`,
       );
   }
   return lines.join('\n') + '\n';

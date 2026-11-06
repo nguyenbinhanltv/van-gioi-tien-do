@@ -41,7 +41,7 @@ if (opt('import-manual')) {
   saveBacklog(path, backlog);
   writeFileSync(path.replace(/\.json$/, '.md'), backlogMarkdown(backlog));
   console.log(
-    `${backlog.character}: ${backlog.entries.length} metric entries; ${backlog.manual?.length ?? 0} manual art findings; wrote ${path}`,
+    `${backlog.character}: ${backlog.entries.length} metric entries; ${backlog.manual?.length ?? 0} manual art findings (${backlog.manual?.filter((e) => e.status === 'resolved').length ?? 0} art-worker resolved); wrote ${path}`,
   );
   process.exit(0);
 }
@@ -54,11 +54,11 @@ const res = runProject(project, baseDir);
 let backlog = loadBacklog(backlogPath, project.character);
 let report = applyBacklog(res.contract.qa.findings, project.direction, backlog);
 console.log(
-  `${project.character} ${project.direction}: ${JSON.stringify(report.counts)}; ${report.resolved.length} resolved metric entries; ${report.manual.length} manual art findings`,
+  `${project.character} ${project.direction}: ${JSON.stringify(report.counts)}; ${report.resolved.length} resolved metric entries; ${report.manual.length} manual art findings (${report.manual.filter((e) => e.status === 'resolved').length} art-worker resolved)`,
 );
 for (const e of report.manual)
   console.log(
-    `  MANUAL [${e.kind}] ${e.clip} ${e.dir} cells ${e.cells.join(',') || 'all'} [${e.severity}] ${e.reviewer}: ${e.note}`,
+    `  MANUAL [${e.kind}] ${e.clip} ${e.dir} cells ${e.cells.join(',') || 'all'} [${e.severity}/${e.status ?? 'open'}] ${e.reviewer}: ${e.note}`,
   );
 for (const j of report.judged.filter((x) => x.verdict !== 'info'))
   console.log(

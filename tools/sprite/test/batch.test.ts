@@ -71,6 +71,7 @@ describe('runBatch', () => {
             note: '<script>carry changed</script>',
             severity: 'warn',
             reviewer: 'art-worker',
+            status: 'resolved',
           },
         ],
       }),
@@ -86,6 +87,8 @@ describe('runBatch', () => {
     expect(html).toContain('Manual art findings (1)');
     expect(html).toContain('carry_change');
     expect(html).toContain('art-worker');
+    expect(html).toContain('art status resolved');
+    expect(html).toContain('1 art-worker resolved');
     expect(html).toContain('&lt;script&gt;carry changed&lt;/script&gt;');
     expect(html).not.toContain('<script>carry changed</script>');
   });

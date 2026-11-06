@@ -110,6 +110,8 @@ Giữ nhãn mức độ của người xem (`warn`: lỗi nhìn thấy; `info`: 
 Lệnh `sprite:backlog` đếm và liệt kê riêng các mục này; báo cáo batch chuyển chúng tới trang `sprite:review`.
 Chúng không chấp nhận lỗi đo, không thay đổi kết quả cổng build, không nằm trong danh sách tự động đã sửa;
 `--accept` và `--prune` luôn giữ nguyên. Chỉ người xem art mới sửa hoặc xóa sau khi kiểm tra lại.
+Trường `status` tùy chọn (`open`, `planned`, `resolved`, mặc định `open`) chỉ ghi quyết định xem art rõ ràng;
+QA không tự thay đổi nó. Số mục người xem art đã xử lý được hiển thị riêng, không nhập vào số đo tự động đã sửa.
 
 Nhập tệp đồng hành của worker 17 bằng `sprite:backlog --backlog <quality-backlog.json> --import-manual <manual-art-findings.json>`
 (qua npm workspace như hướng dẫn README). Không cần dựng lại art khi nhập. `leg_reversal` đổi thành `weak_reversal`,

@@ -87,10 +87,22 @@ describe('manual art backlog', () => {
     expect(() => validateBacklog(emptyBacklog('old-v1'))).not.toThrow();
   });
 
+  it('preserves explicit art resolutions without resolving or accepting any metric finding', () => {
+    const source = { ...legacy, entries: [{ ...legacy.entries[0], status: 'resolved', value: 0 }] };
+    const b = migrateManualFindings(emptyBacklog('kiem-tu'), source);
+    const report = applyBacklog([], 'E', b);
+    expect(report.manual[0]!.status).toBe('resolved');
+    expect(report.resolved).toEqual([]);
+    expect(report.counts.accepted).toBe(0);
+    expect(pruneResolved(b, report).manual).toEqual(b.manual);
+    expect(backlogMarkdown(b)).toContain('art-worker | resolved');
+  });
+
   it('rejects malformed observations and metric fields in the manual collection', () => {
     for (const over of [
       { kind: 'footSlide' },
       { reviewer: 'engine' },
+      { status: 'auto-resolved' },
       { cells: [-1] },
       { cells: [1, 1] },
       { cells: [0.5] },
@@ -118,6 +130,12 @@ describe('manual art backlog', () => {
       ['hair_spill', [0], 'info', 'art-worker'],
     ]);
     expect(migrated.manual?.[0]?.note).toContain('value=2');
+    const unknown = migrateManualFindings(emptyBacklog('kiem-tu'), {
+      ...legacy,
+      entries: [{ ...legacy.entries[0], kind: 'contact_phase' }],
+    });
+    expect(unknown.manual?.[0]?.kind).toBe('other');
+    expect(unknown.manual?.[0]?.note).toContain('contact_phase');
     expect(migrateManualFindings(migrated, legacy)).toEqual(migrated);
     expect(applyBacklog([], 'E', migrated).resolved).toEqual([]);
     expect(() => migrateManualFindings(emptyBacklog('other'), legacy)).toThrow(/character/);
