@@ -1,0 +1,13 @@
+{
+  "id": "E.master-attempt-1",
+  "prompt": "Create ONE production master rig reference sprite, not a sheet. Use attached original concept only as visual reference. THE TU A 'Son Mon Ho Ve', original Van Gioi Tien Do cultivation MMORPG earth tank. Stocky adult male compact 5.75-head proportions, broad square grounded silhouette, calm strong face, short dark brown hair tied in top bun with jade hairpin. Exact outfit: ivory #E9EEF0 cross-collar inner robe long sleeves; mountain-blue #5E8798 sleeveless short split tabard to mid-thigh with thin bronze #B58A4A cloud trim and embroidery; dark-blue #294451 wide sash front knot and TWO hanging tails; loose ivory trousers gathered into dark grey-blue boots; PAIRED rectangular bronze stone-block EARTH GAUNTLETS with meander emblems, highlight #E3C07F shade #5B4222. Direction E: strict side profile facing RIGHT, slight top-down isometric camera. Neutral rig A pose: upright, feet shoulder-width apart, arms nearly straight about 20 degrees from torso, show far and near arm distinct where possible, both gauntlets worn, hands relaxed, tails straight, mouth closed eyes open. Full body bun through soles, figure occupies 80% canvas height, soles at 90%, centered. Hand-painted clean 2D game sprite, crisp readable dark contour, soft cel shading 2-3 tones per material, NW light, NO noise, text, labels, extra subjects, ground, cast shadow, rim glow or VFX. 1024x1024 master (@4x relative to 256 part canvas), genuinely transparent background, at least 8% clear margin. Preserve concept identity and stocky body, simplify tiny details for in-game readability.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "originalPath": "C:/Users/PC/.codex/generated_images/01a1ae93-8c12-7102-b948-0a9ecd590073/exec-5a3c0546-4cef-44ab-8944-a1c610b4df0e.png",
+  "selectedOutput": "reference/E.master-attempt-1.png",
+  "utcStart": "not recorded exactly; see ASSET-LICENSES approximate UTC window",
+  "references": ["C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a.png"],
+  "originalFileLastWriteUtc": "2026-11-06T01:59:47.963Z",
+  "timeNote": "Original generated file timestamp; does not replace an unrecorded generation start"
+}

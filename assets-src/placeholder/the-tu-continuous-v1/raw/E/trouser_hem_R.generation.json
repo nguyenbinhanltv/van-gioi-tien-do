@@ -1,0 +1,13 @@
+{
+  "id": "trouser_hem_R",
+  "part": "trouser_hem_R",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Right near gathered ivory trouser hem fabric above boot only. NO adjacent body parts or costume pieces, no additions. ONLY IVORY FABRIC edge, no blue or metal, no complete arm or leg. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.",
+  "utcStart": "2026-11-06 02:07:15 UTC",
+  "utcEnd": "2026-11-06 02:08:43 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/E.master4x.png",
+  "selectedOutput": "raw/E/trouser_hem_R.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-80284c58-1c4c-449e-ac24-53577721db50.png"
+}

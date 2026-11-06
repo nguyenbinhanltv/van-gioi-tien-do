@@ -1,0 +1,12 @@
+{
+  "id": "leg_L",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE LEFT far LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. ONLY IVORY FABRIC trousers. No blue tabard, no sash, no bronze trim, NO BOOT. Draw ONLY isolated specified part, completely painted including hidden overlap areas, no adjacent costume pieces or decorative additions. Genuinely TRANSPARENT background. No mannequin, text, ground, cast shadow. Same camera and scale as master; preserve clean contours. One subject, one PNG.",
+  "utcStart": "2026-11-06 02:04:44 UTC",
+  "utcEnd": "2026-11-06 02:05:11 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/E.master4x.png",
+  "selectedOutput": "raw/E/leg_L.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-2a08dc6c-cb40-4d89-b095-6b2656c1dbf8.png"
+}

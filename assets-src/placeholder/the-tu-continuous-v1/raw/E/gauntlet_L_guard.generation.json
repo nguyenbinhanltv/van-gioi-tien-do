@@ -1,0 +1,13 @@
+{
+  "id": "gauntlet_L_guard",
+  "part": "gauntlet_L_guard",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.",
+  "utcStart": "2026-11-06 02:21:16 UTC",
+  "utcEnd": "2026-11-06 02:22:25 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/E.master4x.png",
+  "selectedOutput": "raw/E/gauntlet_L_guard.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-33a708ff-710a-4299-98cb-2041d1bd772b.png"
+}

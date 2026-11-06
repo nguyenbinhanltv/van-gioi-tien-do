@@ -1,5 +1,31 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## TT1 — Thể tu A, Sơn Môn Hộ Vệ (2026-11-06 UTC)
+
+Theo yêu cầu chủ dự án: Track 2 / D39, sinh riêng từng mảnh, không cắt ảnh toàn thân để thay thế mảnh. Nguồn tham chiếu: concept AI `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-16/character-concepts/the-tu-a.png`; đặc tả `C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md`. Công cụ **`image_gen.imagegen` (Codex built-in)**; model **không được công cụ công bố**; CLI **`codex-cli 0.166.0`** đã kiểm bằng `codex --version`. Chủ art tạm: người dùng. **AI-generated, placeholder, needs hand-polish + license review before release**; chưa xác nhận quyền thương mại, không phát hành. Theo D34, cần rà soát điều khoản và nguồn gốc trước phát hành; không gán giấy phép CC0/MIT cho ảnh sinh.
+
+### TT1 / E master, lần 1
+
+- UTC: sinh trong khoảng 2026-11-06 01:58–02:03 UTC (không ghi chính xác thời điểm bắt đầu; không suy đoán metadata model).
+- Đầu vào: concept A ở đường dẫn trên. Đầu ra thử: `assets-src/placeholder/the-tu-continuous-v1/reference/E.master-attempt-1.png`.
+- Kiểm tra mắt: đúng phục trang, quyền sáo; tỷ lệ còn cao, lề không đạt prompt. Không dùng làm master nghiệm thu.
+- Prompt đầy đủ:
+
+```text
+Create ONE production master rig reference sprite, not a sheet. Use attached original concept only as visual reference. THE TU A 'Son Mon Ho Ve', original Van Gioi Tien Do cultivation MMORPG earth tank. Stocky adult male compact 5.75-head proportions, broad square grounded silhouette, calm strong face, short dark brown hair tied in top bun with jade hairpin. Exact outfit: ivory #E9EEF0 cross-collar inner robe long sleeves; mountain-blue #5E8798 sleeveless short split tabard to mid-thigh with thin bronze #B58A4A cloud trim and embroidery; dark-blue #294451 wide sash front knot and TWO hanging tails; loose ivory trousers gathered into dark grey-blue boots; PAIRED rectangular bronze stone-block EARTH GAUNTLETS with meander emblems, highlight #E3C07F shade #5B4222. Direction E: strict side profile facing RIGHT, slight top-down isometric camera. Neutral rig A pose: upright, feet shoulder-width apart, arms nearly straight about 20 degrees from torso, show far and near arm distinct where possible, both gauntlets worn, hands relaxed, tails straight, mouth closed eyes open. Full body bun through soles, figure occupies 80% canvas height, soles at 90%, centered. Hand-painted clean 2D game sprite, crisp readable dark contour, soft cel shading 2-3 tones per material, NW light, NO noise, text, labels, extra subjects, ground, cast shadow, rim glow or VFX. 1024x1024 master (@4x relative to 256 part canvas), genuinely transparent background, at least 8% clear margin. Preserve concept identity and stocky body, simplify tiny details for in-game readability.
+```
+
+### TT1 / E master, lần 2
+
+- UTC bắt đầu: 2026-11-06 02:00:16 UTC.
+- Đầu vào: concept A và `reference/E.master-attempt-1.png` (ảnh sửa).
+- Đầu ra: `assets-src/placeholder/the-tu-continuous-v1/reference/E.master-generated.png` (1254×1254); đã chuẩn hóa canvas vuông 512×512: `reference/E.master4x.png` bằng `decodePNG` + `resizeArea` của `tools/procgen/src/lib/png.js` (lọc có trọng số alpha, đầu ra straight alpha). Pillow không có trên máy, không dùng. Chấp nhận ảnh làm việc để tiếp tục sinh mảnh; chưa có QA rig hoặc capture engine, chưa phải chủ art nghiệm thu.
+- Prompt đầy đủ:
+
+```text
+Refine the attached generated Thể tu master (second reference), using original concept sheet (first reference) for identity. ONE E-direction right-facing side-profile production rig master, slight overhead isometric view. IMPORTANT square composition: the ENTIRE character must fit in a SQUARE 1024x1024 canvas, figure from bun to boots occupies only 76% height, all sides at least 10% transparent margin. Make body COMPACT, STOCKY, 5.75 heads tall, earth tank: wide chest and shoulders, stout short legs, thick ivory sleeves and generous trousers. Short top bun with jade hairpin. Ivory cross collar inner robe #E9EEF0; mountain-blue #5E8798 short sleeveless split tabard with bronze #B58A4A cloud trim; dark blue #294451 sash knot and two tails; dark boots; paired chunky bronze stone block gauntlets meander emblem, pale ochre #E3C07F highlights #5B4222 shadows. Neutral straight A pose: arms nearly straight 20 degrees away, no bent elbow, hands relaxed, arms separated from torso enough to register individual pieces, far arm visible. Feet planted slightly apart, both boots fully visible. Clean dark game sprite contours, soft 2-3 tone cel shading, upper-left light, simplified fine detail for readability at 128px. Transparent alpha, no shadows, no ground, no text, no VFX. Do not crop, do not produce a tall portrait composition. Preserve all costume details.
+```
+
 ## Lô mẫu đầu tiên — 2026-11-05
 
 **Chỉ placeholder, không phát hành.** Người dùng đã cho phép tạo lô nhỏ bằng AI để kiểm chứng pipeline trong khi phần triển khai khác đang tạm dừng để rà soát thiết kế. Chủ sở hữu con người / người phụ trách art tạm thời: **người dùng (interim art owner)**. Việc ghi tên chủ phụ trách không xác nhận khả năng bảo hộ quyền tác giả của sản phẩm AI.
@@ -504,3 +530,834 @@ Mỗi dòng kế thừa công cụ/mô hình, UTC, chủ art và giới hạn tr
 | `tools/rig/data/kiem-tu.idle.json`                                                                               | KT2 + procgen               | 2026-11-06 | image_gen.imagegen / không công bố; procgen                                                       | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release                                                                                                                                                                                                                                                                                                                                                                                              | no         |
 | `tools/rig/data/kiem-tu.rig.json`                                                                                | KT2 + procgen               | 2026-11-06 | image_gen.imagegen / không công bố; procgen                                                       | Người dùng (interim art owner) | AI-generated, placeholder, needs hand-polish + license review before release                                                                                                                                                                                                                                                                                                                                                                                              | no         |
 | `apps/client-cocos/assets/resources/dragonbones/kiem-tu/*` (kiemtu_<DIR>_ske.json, _tex.json, _tex.png; 5 hướng) | KT2 + procgen + `@vgtd/rig` | 2026-11-06 | image_gen.imagegen / không công bố; procgen; `@vgtd/rig` exporter (DragonBones 5.5, sinh bằng mã) | Người dùng (interim art owner) | AI-generated, placeholder, dẫn xuất từ atlas PR #80 (ske/tex JSON do `npm run export:kiemtu -w @vgtd/rig` sinh; `_tex.png` là bản sao atlas); needs hand-polish + license review before release; **hoạt cảnh (khóa xương, chuyển động phụ) do `@vgtd/rig` sinh bằng mã; mesh/trọng số lấy từ `tools/rig/data/kiem-tu.rig.json` (mảnh `scabbard` của outfit_lower đã bỏ vòng 3); mesh/weights auto-generated by `@vgtd/rig` chỉ khi dùng `autoSkin` (hiện không áp dụng)** | no         |
+
+### TT1 / E / arm_L
+
+- UTC bắt đầu: 2026-11-06 02:02:25 UTC; kết thúc: 2026-11-06 02:03:31 UTC. Công cụ `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu: `reference/E.master4x.png`; đầu ra thô: `assets-src/placeholder/the-tu-continuous-v1/raw/E/arm_L.png`. Chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE LEFT far ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this part isolated on genuinely TRANSPARENT background. Paint completely including hidden overlaps. No other body parts, no mannequin, no text, no cast shadow, no ground. Keep same part scale and camera as master and its placement on full square canvas if possible, otherwise leave ample margin. Whole limbs are ONE uninterrupted piece, NOT upper/lower separated. Straight neutral pose. One subject in one PNG.
+```
+
+### TT1 / E / arm_R
+
+- UTC bắt đầu: 2026-11-06 02:02:25 UTC; kết thúc: 2026-11-06 02:04:05 UTC. Công cụ `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu: `reference/E.master4x.png`; đầu ra thô: `assets-src/placeholder/the-tu-continuous-v1/raw/E/arm_R.png`. Chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE RIGHT near ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this part isolated on genuinely TRANSPARENT background. Paint completely including hidden overlaps. No other body parts, no mannequin, no text, no cast shadow, no ground. Keep same part scale and camera as master and its placement on full square canvas if possible, otherwise leave ample margin. Whole limbs are ONE uninterrupted piece, NOT upper/lower separated. Straight neutral pose. One subject in one PNG.
+```
+
+### TT1 / E / torso
+
+- UTC bắt đầu: 2026-11-06 02:02:25 UTC; kết thúc: 2026-11-06 02:04:28 UTC. Công cụ `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu: `reference/E.master4x.png`; đầu ra thô: `assets-src/placeholder/the-tu-continuous-v1/raw/E/torso.png`. Chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist. Draw ONLY this part isolated on genuinely TRANSPARENT background. Paint completely including hidden overlaps. No other body parts, no mannequin, no text, no cast shadow, no ground. Keep same part scale and camera as master and its placement on full square canvas if possible, otherwise leave ample margin. Whole limbs are ONE uninterrupted piece, NOT upper/lower separated. Straight neutral pose. One subject in one PNG.
+```
+
+### TT1 / E / leg_R
+
+- UTC bắt đầu: 2026-11-06 02:02:25 UTC; kết thúc: 2026-11-06 02:04:28 UTC. Công cụ `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu: `reference/E.master4x.png`; đầu ra thô: `assets-src/placeholder/the-tu-continuous-v1/raw/E/leg_R.png`. Chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE RIGHT near LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this part isolated on genuinely TRANSPARENT background. Paint completely including hidden overlaps. No other body parts, no mannequin, no text, no cast shadow, no ground. Keep same part scale and camera as master and its placement on full square canvas if possible, otherwise leave ample margin. Whole limbs are ONE uninterrupted piece, NOT upper/lower separated. Straight neutral pose. One subject in one PNG.
+```
+
+### TT1 / E / leg_L
+
+- UTC: 2026-11-06 02:04:44 UTC → 2026-11-06 02:05:11 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/leg_L.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE LEFT far LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. ONLY IVORY FABRIC trousers. No blue tabard, no sash, no bronze trim, NO BOOT. Draw ONLY isolated specified part, completely painted including hidden overlap areas, no adjacent costume pieces or decorative additions. Genuinely TRANSPARENT background. No mannequin, text, ground, cast shadow. Same camera and scale as master; preserve clean contours. One subject, one PNG.
+```
+
+### TT1 / E / boot_R
+
+- UTC: 2026-11-06 02:04:44 UTC → 2026-11-06 02:06:11 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/boot_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Right near dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. ONLY ONE BOOT plus tiny tucked ivory fabric at opening. No trouser leg above boot, no other costume. Draw ONLY isolated specified part, completely painted including hidden overlap areas, no adjacent costume pieces or decorative additions. Genuinely TRANSPARENT background. No mannequin, text, ground, cast shadow. Same camera and scale as master; preserve clean contours. One subject, one PNG.
+```
+
+### TT1 / E / boot_L
+
+- UTC: 2026-11-06 02:04:44 UTC → 2026-11-06 02:06:19 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/boot_L.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Left far dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. ONLY ONE BOOT plus tiny tucked ivory fabric at opening. No trouser leg above boot, no other costume. Draw ONLY isolated specified part, completely painted including hidden overlap areas, no adjacent costume pieces or decorative additions. Genuinely TRANSPARENT background. No mannequin, text, ground, cast shadow. Same camera and scale as master; preserve clean contours. One subject, one PNG.
+```
+
+### TT1 / E / neck
+
+- UTC: 2026-11-06 02:04:44 UTC → 2026-11-06 02:06:38 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/neck.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Warm skin short neck cylinder, extended base hidden beneath collar. ONLY SKIN neck cylinder, no head or hair or clothing. Draw ONLY isolated specified part, completely painted including hidden overlap areas, no adjacent costume pieces or decorative additions. Genuinely TRANSPARENT background. No mannequin, text, ground, cast shadow. Same camera and scale as master; preserve clean contours. One subject, one PNG.
+```
+
+### TT1 / E / tabard_shoulder_L
+
+- UTC: 2026-11-06 02:06:26 UTC → 2026-11-06 02:06:49 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/tabard_shoulder_L.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Left far folded mountain-blue tabard shoulder edge only, bronze cloud trim. NO adjacent body parts or costume pieces, no additions. ONLY named mountain-blue tabard fabric with bronze edge; NO ivory inner robe, arms, body, sash, legs, hair or gauntlets. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sleeve_cuff_L
+
+- UTC: 2026-11-06 02:06:26 UTC → 2026-11-06 02:07:12 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sleeve_cuff_L.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Left far ivory sleeve cuff edge band only. NO adjacent body parts or costume pieces, no additions. ONLY IVORY FABRIC edge, no blue or metal, no complete arm or leg. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / hai lượt sửa tay áo không có đầu ra
+
+- Giờ ghi nhận UTC: 2026-11-06 02:08:43 UTC; công cụ `image_gen.imagegen`, model không công bố, `codex-cli 0.166.0`.
+- `arm_L_attempt2` (request ID `31c0bc06-36aa-439d-b6d7-6ac736e5db9d`) và `arm_R_attempt2` (`06c49291-bab6-475d-adf1-5c2e5e1c1ce8`) bị công cụ từ chối ở bước kiểm tra đầu ra. Không có ảnh để nhập. Không coi là mảnh đã sinh thành công.
+
+Prompt `arm_L_attempt2` (tham chiếu `reference/E.master4x.png`):
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE LEFT far ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. NO adjacent body parts or costume pieces, no additions. ONLY IVORY fabric sleeve shoulder to wrist. Absolutely NO BLUE FABRIC, NO METAL, NO BRONZE, NO SHOULDER ARMOR, NO TABARD, NO TRIM, NO GAUNTLET, NO HAND. Paint a rounded ivory shoulder cap fully. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+Prompt `arm_R_attempt2` (tham chiếu `reference/E.master4x.png`):
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE RIGHT near ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. NO adjacent body parts or costume pieces, no additions. ONLY IVORY fabric sleeve shoulder to wrist. Absolutely NO BLUE FABRIC, NO METAL, NO BRONZE, NO SHOULDER ARMOR, NO TABARD, NO TRIM, NO GAUNTLET, NO HAND. Paint a rounded ivory shoulder cap fully. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sleeve_cuff_R
+
+- UTC: 2026-11-06 02:06:52 UTC → 2026-11-06 02:08:43 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sleeve_cuff_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Right near ivory sleeve cuff edge band only. NO adjacent body parts or costume pieces, no additions. ONLY IVORY FABRIC edge, no blue or metal, no complete arm or leg. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / trouser_hem_R
+
+- UTC: 2026-11-06 02:07:15 UTC → 2026-11-06 02:08:43 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/trouser_hem_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Right near gathered ivory trouser hem fabric above boot only. NO adjacent body parts or costume pieces, no additions. ONLY IVORY FABRIC edge, no blue or metal, no complete arm or leg. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / head
+
+- UTC: 2026-11-06 02:08:47 UTC → 2026-11-06 02:09:13 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/head.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Head base only, warm skin face ears jaw and short hairline, blank skin where eyes brows mouth go, NO eyes eyebrows mouth or bun. NO adjacent body parts or costume pieces, no additions. BLANK skin at eye eyebrow and mouth positions. No facial expressions baked in, no bun, no hairpin. Nose ear jaw silhouette retained. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / tabard_front
+
+- UTC: 2026-11-06 02:09:13 UTC → 2026-11-06 02:09:54 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/tabard_front.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. NO adjacent body parts or costume pieces, no additions. ONLY named mountain-blue tabard fabric with bronze edge; NO ivory inner robe, arms, body, sash, legs, hair or gauntlets. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / trouser_hem_L
+
+- UTC: 2026-11-06 02:06:26 UTC → 2026-11-06 02:10:27 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/trouser_hem_L.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Left far gathered ivory trouser hem fabric above boot only. NO adjacent body parts or costume pieces, no additions. ONLY IVORY FABRIC edge, no blue or metal, no complete arm or leg. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / tabard_back
+
+- UTC: 2026-11-06 02:09:58 UTC → 2026-11-06 02:10:27 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/tabard_back.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. NO adjacent body parts or costume pieces, no additions. ONLY named mountain-blue tabard fabric with bronze edge; NO ivory inner robe, arms, body, sash, legs, hair or gauntlets. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sash_band
+
+- UTC: 2026-11-06 02:10:27 UTC → 2026-11-06 02:10:51 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sash_band.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Wide dark-blue wrapped waist sash BAND only, no knot or tails. NO adjacent body parts or costume pieces, no additions. ONLY named dark blue sash piece, no adjacent sash knot/band/tails unless explicitly requested. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sash_knot
+
+- UTC: 2026-11-06 02:10:51 UTC → 2026-11-06 02:11:14 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sash_knot.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Dark-blue sash front tied KNOT only, no band or tails. NO adjacent body parts or costume pieces, no additions. ONLY named dark blue sash piece, no adjacent sash knot/band/tails unless explicitly requested. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / tabard_shoulder_R
+
+- UTC: 2026-11-06 02:06:26 UTC → 2026-11-06 02:11:14 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/tabard_shoulder_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Right near folded mountain-blue tabard shoulder edge only, bronze cloud trim. NO adjacent body parts or costume pieces, no additions. ONLY named mountain-blue tabard fabric with bronze edge; NO ivory inner robe, arms, body, sash, legs, hair or gauntlets. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sash_tail_2
+
+- UTC: 2026-11-06 02:11:39 UTC → 2026-11-06 02:12:03 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sash_tail_2.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip. NO adjacent body parts or costume pieces, no additions. ONLY named dark blue sash piece, no adjacent sash knot/band/tails unless explicitly requested. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / sash_tail_1
+
+- UTC: 2026-11-06 02:11:13 UTC → 2026-11-06 02:11:39 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/sash_tail_1.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: First dark-blue hanging sash tail only, straight down, tapered tip. NO adjacent body parts or costume pieces, no additions. ONLY named dark blue sash piece, no adjacent sash knot/band/tails unless explicitly requested. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hairpin
+
+- UTC: 2026-11-06 02:12:29 UTC → 2026-11-06 02:12:59 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hairpin.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Straight pale jade green hairpin only, bronze end caps. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hair_back
+
+- UTC: 2026-11-06 02:12:05 UTC → 2026-11-06 02:12:29 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hair_back.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Back mass of short dark brown tied hair only behind the head, no face or bun. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hair_bun
+
+- UTC: 2026-11-06 02:12:29 UTC → 2026-11-06 02:13:27 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hair_bun.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Top hair bun only, dark brown with tie band, no head or pin. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hair_strand_1
+
+- UTC: 2026-11-06 02:13:23 UTC → 2026-11-06 02:13:56 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hair_strand_1.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: One thin tapered loose LEFT front fringe hair strand only. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hair_strand_2
+
+- UTC: 2026-11-06 02:13:03 UTC → 2026-11-06 02:13:56 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hair_strand_2.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: One thin tapered loose RIGHT front fringe hair strand only. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / hair_strand_3
+
+- UTC: 2026-11-06 02:13:58 UTC → 2026-11-06 02:14:24 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/hair_strand_3.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: One thin tapered side-lock hair strand only. NO adjacent body parts or costume pieces, no additions. ONLY requested hair or hairpin element, NO HEAD, NO SKIN, no other hair pieces. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / eyes_open
+
+- UTC: 2026-11-06 02:14:24 UTC → 2026-11-06 02:14:49 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/eyes_open.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyes only as one expression overlay: open calm determined. E right facing profile has only visible eye. No face or skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / eyes_half
+
+- UTC: 2026-11-06 02:14:49 UTC → 2026-11-06 02:15:39 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/eyes_half.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyes only as one expression overlay: half closed blink. E right facing profile has only visible eye. No face or skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / brows_neutral
+
+- UTC: 2026-11-06 02:15:43 UTC → 2026-11-06 02:16:05 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/brows_neutral.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyebrow overlay only, calm neutral. E right-facing profile visible brow only. No skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / eyes_closed
+
+- UTC: 2026-11-06 02:14:49 UTC → 2026-11-06 02:15:40 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/eyes_closed.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyes only as one expression overlay: fully closed blink or meditation. E right facing profile has only visible eye. No face or skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / eyes_angry
+
+- UTC: 2026-11-06 02:15:47 UTC → 2026-11-06 02:16:30 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/eyes_angry.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyes only as one expression overlay: narrowed fierce attack. E right facing profile has only visible eye. No face or skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / mouth_shout
+
+- UTC: 2026-11-06 02:16:59 UTC → 2026-11-06 02:17:45 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/mouth_shout.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mouth overlay only, open shouting kiai. Right-facing profile. No face or large skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / brows_pain
+
+- UTC: 2026-11-06 02:16:33 UTC → 2026-11-06 02:17:47 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/brows_pain.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyebrow overlay only, raised in pain. E right-facing profile visible brow only. No skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / brows_angry
+
+- UTC: 2026-11-06 02:16:10 UTC → 2026-11-06 02:16:59 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/brows_angry.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Eyebrow overlay only, angled down angry. E right-facing profile visible brow only. No skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / mouth_neutral
+
+- UTC: 2026-11-06 02:16:32 UTC → 2026-11-06 02:17:23 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/mouth_neutral.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mouth overlay only, closed calm line. Right-facing profile. No face or large skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_R_fist
+
+- UTC: 2026-11-06 02:18:13 UTC → 2026-11-06 02:18:42 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_R_fist.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_R_open
+
+- UTC: 2026-11-06 02:19:08 UTC → 2026-11-06 02:19:35 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_R_open.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / mouth_grit
+
+- UTC: 2026-11-06 02:17:49 UTC → 2026-11-06 02:18:13 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/mouth_grit.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mouth overlay only, gritted teeth strain or guard. Right-facing profile. No face or large skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / mouth_pain
+
+- UTC: 2026-11-06 02:18:13 UTC → 2026-11-06 02:19:08 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/mouth_pain.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: Mouth overlay only, open in pain. Right-facing profile. No face or large skin patch. NO adjacent body parts or costume pieces, no additions. ONLY the named expression marks; NO head outline, NO hair, NO face, NO skin tile, fully transparent surrounding. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_plate_glow_R
+
+- UTC: 2026-11-06 02:19:11 UTC → 2026-11-06 02:20:09 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_plate_glow_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ONLY the meander emblem plate of the RIGHT earth gauntlet, glowing pale ochre #E3C07F, for a separate additive skill-charge overlay. No whole gauntlet, no hand, no arm. Retain bronze square plate outline and meander shape from master. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / sửa trực tiếp tay áo, không có đầu ra (lần 3)
+
+- Giờ ghi nhận UTC: 2026-11-06 02:20:32 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu riêng từng ảnh `raw/E/arm_L.png` / `raw/E/arm_R.png`. Công cụ từ chối đầu ra cả hai lượt; request ID trái `e70aaa4c-8f87-4be0-ad7d-fbf968200dd1`, phải `f6bf3b87-775f-42de-a221-d8259be26e44`. Không có ảnh nhập repo; dừng thử lại cách sửa này.
+- Prompt đầy đủ (giống nhau ở hai lượt, tham chiếu khác nhau):
+
+```text
+Edit this isolated clothing asset for a layered 2D game sprite. Remove the mountain-blue decorated shoulder cap and all bronze/gold trim. Replace that cap with a simple rounded continuation of IVORY CLOTH, painted completely to the top. Keep ONE straight continuous long ivory robe sleeve from rounded top to plain cloth cuff. Preserve the original ivory folds, clean dark contour, NW lighting and soft cel shading. Absolutely no blue fabric or metal remains. No person or other costume pieces. Fully transparent background. Leave empty margin all around.
+```
+
+### TT1 / E / ear_R
+
+- UTC: 2026-11-06 02:19:11 UTC → 2026-11-06 02:20:33 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/ear_R.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ONE visible near ear only, warm light skin, right-facing profile as on the attached master. No head, no hair or facial features. NO adjacent body parts or costume pieces, no additions.  Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_R_relaxed
+
+- UTC: 2026-11-06 02:18:44 UTC → 2026-11-06 02:20:33 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_R_relaxed.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_R_ground
+
+- UTC: 2026-11-06 02:20:07 UTC → 2026-11-06 02:21:12 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_R_ground.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_R_guard
+
+- UTC: 2026-11-06 02:19:39 UTC → 2026-11-06 02:20:08 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_R_guard.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_L_fist
+
+- UTC: 2026-11-06 02:20:07 UTC → 2026-11-06 02:21:12 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_L_fist.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_L_open
+
+- UTC: 2026-11-06 02:20:42 UTC → 2026-11-06 02:21:12 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_L_open.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_L_relaxed
+
+- UTC: 2026-11-06 02:21:16 UTC → 2026-11-06 02:21:56 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_L_relaxed.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_L_guard
+
+- UTC: 2026-11-06 02:21:16 UTC → 2026-11-06 02:22:25 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_L_guard.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / E / gauntlet_L_ground
+
+- UTC: 2026-11-06 02:22:24 UTC → 2026-11-06 02:22:58 UTC; `image_gen.imagegen`; model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png`; ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_L_ground.png`; chưa xử lý/gate.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. NO adjacent body parts or costume pieces, no additions. ONLY ONE GAUNTLET plus hand, NO arm or sleeve, no separate floating pieces; same meander plate identity for all poses, keep wrist at identical anchor. Draw ONLY this requested part isolated on genuinely TRANSPARENT background. Entire part visible with ample empty margin. Paint hidden overlaps fully. Straight neutral rig pose for limb and fabric pieces. One subject, no mannequin, text, cast shadow, ground, glow or background. Match master camera, brush style and material colors; do not reproduce entire character.
+```
+
+### TT1 / vfx / rock_chunk_1
+
+- UTC: 2026-11-06 02:34:53 UTC → 2026-11-06 02:35:17 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_1.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small flying rock fragment, angular wedge, bronze stone facets, fully visible, no trail or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / rock_chunk_2
+
+- UTC: 2026-11-06 02:34:53 UTC → 2026-11-06 02:35:48 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_2.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small flying rock fragment, squat rectangular block, bronze stone facets, fully visible, no trail or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / dust_puff_1
+
+- UTC: 2026-11-06 02:35:20 UTC → 2026-11-06 02:35:48 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_1.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small compact dust puff, dust grey and ochre, semitransparent soft edge, bold readable game VFX, no stones or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / rock_chunk_3
+
+- UTC: 2026-11-06 02:34:53 UTC → 2026-11-06 02:36:09 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_3.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small flying rock fragment, jagged triangular chip, bronze stone facets, fully visible, no trail or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / dust_puff_3
+
+- UTC: 2026-11-06 02:35:59 UTC → 2026-11-06 02:36:40 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_3.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE large soft-edged dust puff, dust grey and ochre, semitransparent soft edge, bold readable game VFX, no stones or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / dust_puff_2
+
+- UTC: 2026-11-06 02:35:59 UTC → 2026-11-06 02:36:40 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_2.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE medium billowing dust puff, dust grey and ochre, semitransparent soft edge, bold readable game VFX, no stones or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / rock_chunk_4
+
+- UTC: 2026-11-06 02:34:53 UTC → 2026-11-06 02:36:40 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_4.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE small flying rock fragment, rounded broken boulder chip, bronze stone facets, fully visible, no trail or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / ground_crack_decal
+
+- UTC: 2026-11-06 02:36:12 UTC → 2026-11-06 02:36:40 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/ground_crack_decal.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Top-down isometric ground crack decal radiating from center, fits a 2:1 diamond, cracks ONLY, transparent gaps, no solid ground tile. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / stone_skin_overlay
+
+- UTC: 2026-11-06 02:36:46 UTC → 2026-11-06 02:37:53 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/stone_skin_overlay.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Semitransparent stone-plate armor pattern overlay for a standing humanoid body silhouette, plates ONLY, no person, no skin, no character or clothing drawn. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / shockwave_ring
+
+- UTC: 2026-11-06 02:36:46 UTC → 2026-11-06 02:37:53 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/shockwave_ring.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Flat isometric 2:1 ellipse shockwave ring made of dust and small pebbles, transparent center and outside. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / fist_impact_burst
+
+- UTC: 2026-11-06 02:37:53 UTC → 2026-11-06 02:39:06 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/fist_impact_burst.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE punch impact burst with stone sparks, compressed bronze and ochre radial impact, transparent outside, no fist or character. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / dragon_tiger_trail
+
+- UTC: 2026-11-06 02:37:53 UTC → 2026-11-06 02:39:05 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dragon_tiger_trail.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Horizontal sweeping arc trail of earth energy with faint dragon and tiger silhouettes within the trail, no separate animals, bold bronze ochre energy, transparent outside. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / diamond_body_aura
+
+- UTC: 2026-11-06 02:40:04 UTC → 2026-11-06 02:40:48 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_aura.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Golden-bronze diamond-hard aura surrounding an EMPTY standing figure-shaped space, floating stone shards around perimeter, aura ONLY, no person or filled figure. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / taunt_ring
+
+- UTC: 2026-11-06 02:39:10 UTC → 2026-11-06 02:39:36 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/taunt_ring.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Flat isometric pulsing ground ring with bronze abstract rune symbols, 2:1 ellipse, transparent center and outside, no character or ground. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / diamond_body_shards_2
+
+- UTC: 2026-11-06 02:40:51 UTC → 2026-11-06 02:41:16 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_2.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE short broad faceted crystal-stone shard for an orbiting particle, bronze and pale ochre, transparent outside, no additional shards. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / mountain_charge_trail
+
+- UTC: 2026-11-06 02:39:36 UTC → 2026-11-06 02:40:05 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/mountain_charge_trail.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: Horizontal dash streak of compressed earth and dust, bold bronze ochre stone motion trail, no character or scenery. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / diamond_body_shards_1
+
+- UTC: 2026-11-06 02:40:04 UTC → 2026-11-06 02:41:16 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_1.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE long pointed faceted crystal-stone shard for an orbiting particle, bronze and pale ochre, transparent outside, no additional shards. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / vfx / diamond_body_shards_3
+
+- UTC: 2026-11-06 02:41:16 UTC → 2026-11-06 02:41:51 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_3.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested vfx asset: ONE crooked asymmetrical faceted crystal-stone shard for an orbiting particle, bronze and pale ochre, transparent outside, no additional shards. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game VFX sprite, bold readable shape, semitransparency where appropriate, NO baked cast shadow or solid background. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T1_phach_quyen
+
+- UTC: 2026-11-06 02:41:54 UTC → 2026-11-06 02:42:22 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T1_phach_quyen.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A bronze earth gauntlet fist punching forward with stone sparks. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T2_thiet_bo_sam
+
+- UTC: 2026-11-06 02:41:54 UTC → 2026-11-06 02:43:09 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T2_thiet_bo_sam.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A torso silhouette covered in stone plate armor. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T4_khieu_khich
+
+- UTC: 2026-11-06 02:43:01 UTC → 2026-11-06 02:44:29 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T4_khieu_khich.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: Glaring determined eyes above a bronze abstract rune ring. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T5_long_ho_quyen
+
+- UTC: 2026-11-06 02:42:25 UTC → 2026-11-06 02:44:29 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T5_long_ho_quyen.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: Twin sweeping bronze gauntlet fists with dragon and tiger earth energy. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T3_dia_chan
+
+- UTC: 2026-11-06 02:43:01 UTC → 2026-11-06 02:44:29 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T3_dia_chan.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A bronze stone gauntlet fist slamming ground with a crack ring. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T6_kim_than_cong
+
+- UTC: 2026-11-06 02:44:36 UTC → 2026-11-06 02:45:16 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T6_kim_than_cong.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A seated meditating stocky cultivator body glowing bronze. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / skill_T7_thiet_son_khao
+
+- UTC: 2026-11-06 02:45:16 UTC → 2026-11-06 02:45:59 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T7_thiet_son_khao.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A compact stocky cultivator shoulder charge with mountain silhouette behind. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / class_emblem_the_tu
+
+- UTC: 2026-11-06 02:45:59 UTC → 2026-11-06 02:47:14 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/class_emblem_the_tu.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A bronze SQUARE SEAL with a meander motif and a mountain, original class emblem. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / E / gauntlet_plate_glow_R_attempt2
+
+- UTC: 2026-11-06 02:45:42 UTC → 2026-11-06 02:47:14 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Sửa ứng viên `raw/E/gauntlet_plate_glow_R.png` (lượt đầu chứa cả quyền sáo, không nhận làm plate overlay); ảnh mới `assets-src/placeholder/the-tu-continuous-v1/raw/E/gauntlet_plate_glow_R_attempt2.png`.
+- Prompt đầy đủ:
+
+```text
+Edit the attached image into ONE isolated equipment-detail overlay. Keep ONLY the small FRONT SQUARE EMBLEM PLATE in the middle, with the luminous pale ochre meander symbol. Remove EVERYTHING ELSE: upper rings, side plates, lower plates, fingers and all surrounding equipment. Output only a single thin bronze square plaque with its glowing meander emblem, same slight right-facing side-profile angle, NW light, clean dark contour and 2-3 tone cel shading. Pale ochre emission #E3C07F on bronze #B58A4A shade #5B4222. Transparent background, subtle local emblem glow allowed, no large haze, no text, no extra objects. Centered, fully visible, ample margin.
+```
+
+### TT1 / icons / skill_T8_kim_cuong_bat_hoai
+
+- UTC: 2026-11-06 02:45:59 UTC → 2026-11-06 02:47:15 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T8_kim_cuong_bat_hoai.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A diamond-hard golden body silhouette with floating stone shards. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / portrait / the_tu_portrait
+
+- UTC: 2026-11-06 02:47:59 UTC → 2026-11-06 02:48:39 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/portrait/the_tu_portrait.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested portrait asset: Bust portrait head and shoulders, FRONT S facing, calm strong adult male Thể tu A with short top bun and jade hairpin, mountain-blue tabard and ivory cross collar, same identity as master. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI bust portrait, square composition, target512x512, no frame or text. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+### TT1 / icons / item_gauntlet_set
+
+- UTC: 2026-11-06 02:47:19 UTC → 2026-11-06 02:47:59 UTC; `image_gen.imagegen`, model không công bố; `codex-cli 0.166.0`.
+- Tham chiếu `reference/E.master4x.png` (phong cách/palette); ảnh `assets-src/placeholder/the-tu-continuous-v1/raw/icons/item_gauntlet_set.png`; chưa xác nhận dùng trong engine.
+- Prompt đầy đủ:
+
+```text
+Original Van Gioi Tien Do 2D cultivation MMORPG, Thể tu A earth tank asset. Use attached master ONLY for identity/style/material reference, do NOT copy the complete character unless the requested subject is a portrait/body icon. Requested icons asset: A paired set of bronze stone-block EARTH GAUNTLETS with matching meander emblems, one item icon. Palette bronze #B58A4A, pale ochre #E3C07F, bronze shade #5B4222, dust grey; character costume if shown: ivory #E9EEF0, mountain-blue #5E8798, dark-blue #294451, near-black brown hair. Hand-painted clean dark game contour, soft cel shading 2-3 tones, light ALWAYS upper-left NW, no noise. Game UI ICON, centered square composition, target 256x256, NO FRAME, NO QUALITY RIM, no text, readable at 48px. ONE requested asset per image, fully visible with at least 8% clear margin, genuinely TRANSPARENT background, no watermark, no labels, no extra subjects or scenery.
+```
+
+[Cập nhật TT1 / chọn plate glow] Lượt đầu `raw/E/gauntlet_plate_glow_R.png` chứa cả quyền sáo, đã chuyển nguyên byte cùng metadata sang `raw/E/rejected/gauntlet_plate_glow_R.attempt1.*`. Lượt sửa `raw/E/gauntlet_plate_glow_R_attempt2.png` đúng một plate, được sao chép nguyên byte sang tên canonical `raw/E/gauntlet_plate_glow_R.png`; metadata canonical ghi `selectedFrom`. Không có lượt sinh mới khi sao chép. Mọi prompt/UTC/originalPath trước đó vẫn truy xuất trong hồ sơ.
+
+[Cập nhật TT1 / hậu xử lý] Bản prep `907f9ed` (ba commit tập trung do worker 17 bàn giao) giữ PNG nguồn straight alpha, crop ở canvas 512, đăng ký contour/bounds, defringe tùy mảnh, chuyển palette từng vật liệu 75% về mẫu master, downsample 256. Mặt/mắt/cổ tay và neckline guide do tác giả cấu hình trong `E.parts.json`; không tô pixel thủ công. Các gauntlet quay nguồn và căn miệng cổ tay theo relaxed cùng bên; non-rest swaps không bị cắt về silhouette relaxed. Kiểm tra độc lập rest50 mảnh: max extra2px / max missing2px, PASS; không thay thế rig:measure hoặc capture Cocos. Nguồn VFX/icon/chân dung giữ nguyên riêng; xuất resize straight-alpha theo `shared.exports.json`, chưa xác nhận particle/flipbook trong engine.

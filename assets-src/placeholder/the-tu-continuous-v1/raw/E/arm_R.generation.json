@@ -1,0 +1,12 @@
+{
+  "id": "arm_R",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG sprite, Thể tu A Sơn Môn Hộ Vệ. Match attached E master EXACT identity, scale, right-facing side-profile slight overhead angle, clean dark outline, NW lighting and soft cel shaded 2-3 tones, no noise. Palette ivory #E9EEF0 mountain blue #5E8798 dark blue #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm light skin dark brown hair. Part: ENTIRE RIGHT near ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this part isolated on genuinely TRANSPARENT background. Paint completely including hidden overlaps. No other body parts, no mannequin, no text, no cast shadow, no ground. Keep same part scale and camera as master and its placement on full square canvas if possible, otherwise leave ample margin. Whole limbs are ONE uninterrupted piece, NOT upper/lower separated. Straight neutral pose. One subject in one PNG.",
+  "utcStart": "2026-11-06 02:02:25 UTC",
+  "utcEnd": "2026-11-06 02:04:05 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/E.master4x.png",
+  "selectedOutput": "raw/E/arm_R.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-34215948-2a32-4f40-a74f-360b611d5f74.png"
+}

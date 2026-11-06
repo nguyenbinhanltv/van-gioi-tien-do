@@ -1,0 +1,13 @@
+{
+  "id": "gauntlet_plate_glow_R_attempt2",
+  "part": "gauntlet_plate_glow_R",
+  "prompt": "Edit the attached image into ONE isolated equipment-detail overlay. Keep ONLY the small FRONT SQUARE EMBLEM PLATE in the middle, with the luminous pale ochre meander symbol. Remove EVERYTHING ELSE: upper rings, side plates, lower plates, fingers and all surrounding equipment. Output only a single thin bronze square plaque with its glowing meander emblem, same slight right-facing side-profile angle, NW light, clean dark contour and 2-3 tone cel shading. Pale ochre emission #E3C07F on bronze #B58A4A shade #5B4222. Transparent background, subtle local emblem glow allowed, no large haze, no text, no extra objects. Centered, fully visible, ample margin.",
+  "utcStart": "2026-11-06 02:45:42 UTC",
+  "utcEnd": "2026-11-06 02:47:14 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "raw/E/gauntlet_plate_glow_R.png",
+  "selectedOutput": "raw/E/gauntlet_plate_glow_R_attempt2.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-a623102a-db4c-43d0-87c3-3e7add6b519e.png"
+}

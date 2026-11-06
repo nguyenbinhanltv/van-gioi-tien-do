@@ -1,0 +1,284 @@
+{
+  "character": "the-tu",
+  "concept": "A - Sơn Môn Hộ Vệ",
+  "pipeline": "D39 continuous limbs and separate detail sources",
+  "directions": ["E", "S", "SE", "NE", "N"],
+  "order": "E art and idle/run/attack gate first; then other directions and all 15 body clips",
+  "sourcePromptPack": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
+  "status": "E 50 selected character/detail sources processed; rest registration passes <=2px; all29 shared sources and derivatives exported; class-aware rig assembly and engine gates pending",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "parts": [
+    {
+      "id": "torso",
+      "description": "Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist."
+    },
+    {
+      "id": "neck",
+      "description": "Warm skin short neck cylinder, extended base hidden beneath collar."
+    },
+    {
+      "id": "arm_L",
+      "description": "ENTIRE LEFT far ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow."
+    },
+    {
+      "id": "leg_L",
+      "description": "ENTIRE LEFT far LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot."
+    },
+    {
+      "id": "boot_L",
+      "description": "Left far dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap."
+    },
+    {
+      "id": "tabard_shoulder_L",
+      "description": "Left far folded mountain-blue tabard shoulder edge only, bronze cloud trim."
+    },
+    {
+      "id": "sleeve_cuff_L",
+      "description": "Left far ivory sleeve cuff edge band only."
+    },
+    {
+      "id": "trouser_hem_L",
+      "description": "Left far gathered ivory trouser hem fabric above boot only."
+    },
+    {
+      "id": "arm_R",
+      "description": "ENTIRE RIGHT near ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow."
+    },
+    {
+      "id": "leg_R",
+      "description": "ENTIRE RIGHT near LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot."
+    },
+    {
+      "id": "boot_R",
+      "description": "Right near dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap."
+    },
+    {
+      "id": "tabard_shoulder_R",
+      "description": "Right near folded mountain-blue tabard shoulder edge only, bronze cloud trim."
+    },
+    {
+      "id": "sleeve_cuff_R",
+      "description": "Right near ivory sleeve cuff edge band only."
+    },
+    {
+      "id": "trouser_hem_R",
+      "description": "Right near gathered ivory trouser hem fabric above boot only."
+    },
+    {
+      "id": "head",
+      "description": "Head base only, warm skin face ears jaw and short hairline, blank skin where eyes brows mouth go, NO eyes eyebrows mouth or bun."
+    },
+    {
+      "id": "tabard_front",
+      "description": "Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash."
+    },
+    {
+      "id": "tabard_back",
+      "description": "Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash."
+    },
+    {
+      "id": "sash_band",
+      "description": "Wide dark-blue wrapped waist sash BAND only, no knot or tails."
+    },
+    {
+      "id": "sash_knot",
+      "description": "Dark-blue sash front tied KNOT only, no band or tails."
+    },
+    {
+      "id": "sash_tail_1",
+      "description": "First dark-blue hanging sash tail only, straight down, tapered tip."
+    },
+    {
+      "id": "sash_tail_2",
+      "description": "Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip."
+    },
+    {
+      "id": "hair_back",
+      "description": "Back mass of short dark brown tied hair only behind the head, no face or bun."
+    },
+    {
+      "id": "hair_bun",
+      "description": "Top hair bun only, dark brown with tie band, no head or pin."
+    },
+    {
+      "id": "hairpin",
+      "description": "Straight pale jade green hairpin only, bronze end caps."
+    },
+    {
+      "id": "hair_strand_1",
+      "description": "One thin tapered loose LEFT front fringe hair strand only."
+    },
+    {
+      "id": "hair_strand_2",
+      "description": "One thin tapered loose RIGHT front fringe hair strand only."
+    },
+    {
+      "id": "hair_strand_3",
+      "description": "One thin tapered side-lock hair strand only."
+    },
+    {
+      "id": "eyes_open",
+      "description": "Eyes only as one expression overlay: open calm determined. E right facing profile has only visible eye. No face or skin patch."
+    },
+    {
+      "id": "eyes_half",
+      "description": "Eyes only as one expression overlay: half closed blink. E right facing profile has only visible eye. No face or skin patch."
+    },
+    {
+      "id": "eyes_closed",
+      "description": "Eyes only as one expression overlay: fully closed blink or meditation. E right facing profile has only visible eye. No face or skin patch."
+    },
+    {
+      "id": "eyes_angry",
+      "description": "Eyes only as one expression overlay: narrowed fierce attack. E right facing profile has only visible eye. No face or skin patch."
+    },
+    {
+      "id": "brows_neutral",
+      "description": "Eyebrow overlay only, calm neutral. E right-facing profile visible brow only. No skin patch."
+    },
+    {
+      "id": "brows_angry",
+      "description": "Eyebrow overlay only, angled down angry. E right-facing profile visible brow only. No skin patch."
+    },
+    {
+      "id": "brows_pain",
+      "description": "Eyebrow overlay only, raised in pain. E right-facing profile visible brow only. No skin patch."
+    },
+    {
+      "id": "mouth_neutral",
+      "description": "Mouth overlay only, closed calm line. Right-facing profile. No face or large skin patch."
+    },
+    {
+      "id": "mouth_shout",
+      "description": "Mouth overlay only, open shouting kiai. Right-facing profile. No face or large skin patch."
+    },
+    {
+      "id": "mouth_grit",
+      "description": "Mouth overlay only, gritted teeth strain or guard. Right-facing profile. No face or large skin patch."
+    },
+    {
+      "id": "mouth_pain",
+      "description": "Mouth overlay only, open in pain. Right-facing profile. No face or large skin patch."
+    },
+    {
+      "id": "gauntlet_R_fist",
+      "description": "RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_R_open",
+      "description": "RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_R_relaxed",
+      "description": "RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_R_guard",
+      "description": "RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_R_ground",
+      "description": "RIGHT near bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_L_fist",
+      "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_L_open",
+      "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_L_relaxed",
+      "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_L_guard",
+      "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    },
+    {
+      "id": "gauntlet_L_ground",
+      "description": "LEFT far bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm."
+    }
+  ],
+  "conditionalParts": ["ear_L", "ear_R"],
+  "optionalParts": ["gauntlet_plate_glow_R"],
+  "sharedVfx": [
+    "rock_chunk_1",
+    "rock_chunk_2",
+    "rock_chunk_3",
+    "rock_chunk_4",
+    "dust_puff_1",
+    "dust_puff_2",
+    "dust_puff_3",
+    "ground_crack_decal",
+    "shockwave_ring",
+    "stone_skin_overlay",
+    "fist_impact_burst",
+    "dragon_tiger_trail",
+    "taunt_ring",
+    "mountain_charge_trail",
+    "diamond_body_aura",
+    "diamond_body_shards_1",
+    "diamond_body_shards_2",
+    "diamond_body_shards_3"
+  ],
+  "sharedIcons": [
+    "skill_T1_phach_quyen",
+    "skill_T2_thiet_bo_sam",
+    "skill_T3_dia_chan",
+    "skill_T4_khieu_khich",
+    "skill_T5_long_ho_quyen",
+    "skill_T6_kim_than_cong",
+    "skill_T7_thiet_son_khao",
+    "skill_T8_kim_cuong_bat_hoai",
+    "class_emblem_the_tu",
+    "item_gauntlet_set"
+  ],
+  "portrait": "the_tu_portrait",
+  "masterRegistration": {
+    "generationReference": "reference/E.master4x.png",
+    "registeredMaster": "reference/E.register-master4x.png",
+    "inputCanvas": [512, 512],
+    "resize": [448, 448],
+    "offset": [32, 44],
+    "outputCanvas": [512, 512],
+    "method": "alpha-weighted area resampling, straight-alpha source and output",
+    "status": "provisional landmarks; silhouette and rig gates pending"
+  },
+  "keyPosePlan": {
+    "stage": "after E assembly",
+    "source": "owner decision relayed by orchestrator 2026-11-06",
+    "actions": ["walk", "run", "punch combo", "guard", "ground slam"],
+    "workflow": "Generate separate AI pose references and manually annotate landmarks, then use worker15 fitPose/authorFromKeyPoses tooling; gate measured rig and in-engine clips after fitting"
+  },
+  "integration": {
+    "procgenOwner": "van-gioi-tien-do-17",
+    "rigOwner": "van-gioi-tien-do-15",
+    "sourceBoundsStage": "inclusive bounds on resized 512x512 raw, before alpha cleanup; no recentering",
+    "tabardBinding": "hybrid spine above waist, hips/thighs/panel bones below, smooth waist blend"
+  },
+  "validation": {
+    "registration": {
+      "sourceParts": 50,
+      "canvas2x": [256, 256],
+      "alphaThreshold": 128,
+      "extraPixels": 439,
+      "missingPixels": 137,
+      "maxExtraPx": 2,
+      "maxMissingPx": 2,
+      "pass": true
+    },
+    "prepCommit": "907f9ed3a569206f1d67e5eefd3c450fc9417d56",
+    "rigMeasure": "not run",
+    "engineCapture": "not run",
+    "otherDirections": "not started"
+  },
+  "selection": {
+    "plateGlow": "raw/E/gauntlet_plate_glow_R_attempt2.png selected as canonical; attempt1 archived under raw/E/rejected",
+    "nearEar": "ear_R visible for E",
+    "farEar": "not generated because occluded in E"
+  }
+}
