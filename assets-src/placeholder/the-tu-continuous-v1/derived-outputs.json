@@ -1,0 +1,707 @@
+{
+  "recordedAtUtc": "2026-11-06T12:49:29Z",
+  "utcMeaning": "Salvage inventory UTC, not original image generation time; original times and full prompts remain in generation metadata",
+  "sourceCommit": "b16a129a55236078d19fc673a81763df75e7c846",
+  "groups": [
+    {
+      "id": "TS1",
+      "glob": "raw/icons/*",
+      "source": "Original image_gen outputs; adjacent raw/icons/*.generation.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/class_emblem_the_tu.generation.json",
+          "sha256": "f4ec5c4e6dfe67ebd30110c2045178ca8e0a26a51fab7a68632dd26c74a7920f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/class_emblem_the_tu.png",
+          "sha256": "b62fc2a493f94ca9b2944811307ff12d473521b589605f2f8ee39904ca4ab41b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/item_gauntlet_set.generation.json",
+          "sha256": "e959485b5e127b81f02c257e2f0e7d716834c534d0e8c4a84025ddf9de802295"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/item_gauntlet_set.png",
+          "sha256": "fc47f702024117a2d26a4a32600401504f21807925f5972b070bc49e5888ab30"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T1_phach_quyen.generation.json",
+          "sha256": "6de70a1be8e378ba1f39267f145edbb88d7d8e2ff05283ee45a5bdbca8f17186"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T1_phach_quyen.png",
+          "sha256": "987e4c8cfa5e2671eed9f18b9e8eb73774ea37ab86fd8b68ad5e2f127d32fb48"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T2_thiet_bo_sam.generation.json",
+          "sha256": "950c608a53bb7abcc260aec5191da943c48bd8f28382d6032dae5f9eff4e74bd"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T2_thiet_bo_sam.png",
+          "sha256": "1439b7645d0ab380bbf6cf220397de0585e5f21090bd70adb20d55e8bea6414f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T3_dia_chan.generation.json",
+          "sha256": "4612cb7c18fa41687a753b01e6368eed68f5a94da507d6c97915a699cb8b5980"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T3_dia_chan.png",
+          "sha256": "8d7899f3fb1a9f66ca219f01987c6baa46352fcb2c4fe4f6e8b7a0cdea2e450d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T4_khieu_khich.generation.json",
+          "sha256": "3a75378a31e88e7fa3d4d79016c15239fca9d9abade37ea1b7743fdc6b6d20d0"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T4_khieu_khich.png",
+          "sha256": "7500a02dc31d7fa7cb1b2a778c3b1e046c0aa7303de8a570c9c08caecaad8f64"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T5_long_ho_quyen.generation.json",
+          "sha256": "6fb282d1e28f547785b7d33fe8fe9ae5868522067d63afec909e6bcb2fd7d3c1"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T5_long_ho_quyen.png",
+          "sha256": "272a52ab6044b14c5915e2e3985ae9a7cf9cea57b98b08b3fc71e6e14c685e3b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T6_kim_than_cong.generation.json",
+          "sha256": "2a61fbf3de0a3273971154000689bcf746ed3edad763ce73fbbb280879053be4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T6_kim_than_cong.png",
+          "sha256": "93cbe5fa3ad703197f81d75c4b5e96af00e6abb44d70cefab4b2d11e42519387"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T7_thiet_son_khao.generation.json",
+          "sha256": "17781e7eac38cdd7447cf1f4b5036d6909127d83b2cca411638de95aa9e97d42"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T7_thiet_son_khao.png",
+          "sha256": "c24239e4f4f509250702f10e3262390646bd040e721931ea5bd48a99d227e683"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T8_kim_cuong_bat_hoai.generation.json",
+          "sha256": "7f945af618f59ab1dd57de0695239674ad5f0dfc07f2f05b7d4e69450962d63a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/icons/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "39a21125cf2bade5707519fe19619e721098798ca7bf14bb7524c546eafca38c"
+        }
+      ]
+    },
+    {
+      "id": "TS2",
+      "glob": "icons/**/*; icons/*",
+      "source": "raw/icons/*.png; 256px normalization and 48/64/128px derived exports",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0; procgen alpha-weighted resizeArea (inherited)",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/class_emblem_the_tu.png",
+          "sha256": "3a94808c49f1a6123d465769697e96c5961969d2ab33b03f89dc7327d455756e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/item_gauntlet_set.png",
+          "sha256": "d11a390c1c8d2f0c4c0302994c6f5147e2e7a64b5903919b4bdd0c4e0bf06b67"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T1_phach_quyen.png",
+          "sha256": "7f9be479d98499b15a0d09cbf241ee9c6abd748ccf829367af7641ad2e798b85"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T2_thiet_bo_sam.png",
+          "sha256": "04a1e2f73535d6c5bdae9179c714cfd769367ba3387421e636dd4b1d7026231c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T3_dia_chan.png",
+          "sha256": "ca5eb476298e28c195b0b9acc9196cc19db83814b08e7a8a250d5a95c4df64de"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T4_khieu_khich.png",
+          "sha256": "13dbb3b5fd756f0035d2ac9e4c828cbfeacaa61096c27f910f8b38789a818d9c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T5_long_ho_quyen.png",
+          "sha256": "9209bb8db12f5d0f17e8ba0ae53ead3903cb2f09e87be71563974202307c0f8c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T6_kim_than_cong.png",
+          "sha256": "77da272191b4899e84d2f09955b0c546b815d27eb6b4fbde9c034c60911ff518"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T7_thiet_son_khao.png",
+          "sha256": "a3ef7de29fcad3edb58a0193ce382b6d6b9fa2821cf201fb8be7226bab676560"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/128/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "cf30a292ff7a6543f06aafbbaa431d7f70b907cc9d97814f178c814e30bb3bc1"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/class_emblem_the_tu.png",
+          "sha256": "5910fa64c63ba078bb896bd7794fd17d62802c2efdafe3dbbebc2b19bf7f5c56"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/item_gauntlet_set.png",
+          "sha256": "a78402fb8518e2a5ee7a0729fdac21b1e88128e383092a79a2801d6c6d079bf4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T1_phach_quyen.png",
+          "sha256": "56af8557c809c99aa0653868829be30b45dc5db1f41c6b82420e7fc89e73255f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T2_thiet_bo_sam.png",
+          "sha256": "edfd099ead7b0fca1ef9c8c43fd4973add661510d5d2083286a10c8fa9197270"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T3_dia_chan.png",
+          "sha256": "1dea6098be359a004038457f62392cf18d8c133628947087304df239d0a57788"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T4_khieu_khich.png",
+          "sha256": "1342d8b36e153a9883e86cb30af2f4960a7a6bcb01b08b46f65571058aa16e0b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T5_long_ho_quyen.png",
+          "sha256": "1724577a3362d318d246371ad100efcae0770c1050ca1f8eb1048e8b19b00880"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T6_kim_than_cong.png",
+          "sha256": "843481ee506d8f712264ad1b900be548d7d13e42f52dd3e175d662cae0a81619"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T7_thiet_son_khao.png",
+          "sha256": "d7f120e1dc9fd354cc8c631ea2d64c3aad0310973d45bcbce0ff1e5cb4242170"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/48/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "524d86892f48d9c74e8a797b4a2a566887a5580e738ecb7f3097263e9c0396f9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/class_emblem_the_tu.png",
+          "sha256": "c042dfa9840fb2ea08ad3459e80cc872fa63a214a62720cd9787192f13f69b86"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/item_gauntlet_set.png",
+          "sha256": "37df4215b67cbfd69aff47db3af296b8f1747ef45912e677ffc1aa7bca7f03ff"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T1_phach_quyen.png",
+          "sha256": "6d2f5e4a308fedbf7a66cbdd8218058e70510c02b923b7cf961125bff397148a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T2_thiet_bo_sam.png",
+          "sha256": "0af26f6585513ad2ee27fd00dc3639608787fbacb92f201325e247450914c186"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T3_dia_chan.png",
+          "sha256": "9b2ccbd6ea3484b1abea9724b6215edcabb6db983ce76fdf795607af1865b460"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T4_khieu_khich.png",
+          "sha256": "96ebef7336e23641b9ed6d97f0240e9666f76e3f1a0c30dd3997291e8e698c6e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T5_long_ho_quyen.png",
+          "sha256": "e2f4b5d4262badddb1845c5c52b539e3c124c4e12d45216d1ba38ca70d547fa7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T6_kim_than_cong.png",
+          "sha256": "df8f2679af900629ac1582ea0bc1899894b9e1aec1e04e1b79d293711c4a2182"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T7_thiet_son_khao.png",
+          "sha256": "51870c3f388196d907f79a508a5b2896087b3cdfe7bb7506259b19fc0dc4b2b9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/64/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "4347d48bde639fe0136be816cca02dc0e11439a5fe63554cad556e6f61ca7fad"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/class_emblem_the_tu.png",
+          "sha256": "230100d750b95f9fd5c96948cf9ac8b55a82f8cfab949ceabc0917e4026226e7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/item_gauntlet_set.png",
+          "sha256": "de1929ca1e95d4ecc191de10830e9f25b01275bc4f8641aa2159759ff449c568"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T1_phach_quyen.png",
+          "sha256": "b87e082381eee6050e1967752e1ef06cd65e211d249c9421a3cb752e4a2968a5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T2_thiet_bo_sam.png",
+          "sha256": "2d126b2494655cf5a31299648f22b685f8a063453e3c8e453d2ddfda9a11037f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T3_dia_chan.png",
+          "sha256": "69f64b5cad89c72977d59b1dc48ddfcdf3228c570cbbc69ed6b7748c7a8aafc2"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T4_khieu_khich.png",
+          "sha256": "55f34c16a0d9694bd43ccca8b4cea5365544fb59adbe17784b01fb05cdb2adce"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T5_long_ho_quyen.png",
+          "sha256": "a64ab839cd83a92bfa3bcda505999e6506581b9d6cb9a9f377fb8dafd1fc9889"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T6_kim_than_cong.png",
+          "sha256": "e0e00e018a9b304784942d23f0291ca282f41ec67084a0cff9468154428e81a4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T7_thiet_son_khao.png",
+          "sha256": "fcd9fe4fe314f6408e95c25bb492f78f16efa87671133d3d783ce624fb2aedf5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/icons/skill_T8_kim_cuong_bat_hoai.png",
+          "sha256": "11b4cf51544648a55a19c15f25f3f96362769e9792fd4a97e35d59b0036ff5e1"
+        }
+      ]
+    },
+    {
+      "id": "TS3",
+      "glob": "raw/portrait/*; portrait/*",
+      "source": "Original portrait generation and static normalized preview; raw/portrait/*.generation.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0; procgen alpha-weighted resizeArea (inherited)",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/portrait/the_tu_portrait.png",
+          "sha256": "e1e63f340931c25805e0553f01d05632832a434a6522984588c26844d64f4dd7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/portrait/the_tu_portrait.generation.json",
+          "sha256": "8472a8519026a4a74c492c47ceef2c3e495d1e8b4bdee4300748c5c1ce5c21b2"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/portrait/the_tu_portrait.png",
+          "sha256": "4df6ed69d6a1cff537dd53c32f90b5252c9c61d41525bd190ec092125a657820"
+        }
+      ]
+    },
+    {
+      "id": "TS4",
+      "glob": "raw/vfx/*; vfx/*; reference/shared/vfx/*",
+      "source": "Original VFX generations and static reference/processed previews; raw/vfx/*.generation.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0; procgen straight-alpha resize/planar export (inherited)",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_aura.generation.json",
+          "sha256": "380cc403ea6c1938192bfb05e16e3eff993a6a5d4863a021cb4d5b578f56e8fc"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_aura.png",
+          "sha256": "b2f593c01ed2e64a6eafb0554a08f052137878be2c4eb9b96b084a327c40ee2a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_1.generation.json",
+          "sha256": "11c20d720c75c21591866b2e66a87f3df4f58da80d2510b236930a9933083b6a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_1.png",
+          "sha256": "4c1558d8df8d8895f75fe8161b4e2d67a705b1ed7b1da30af6bc3d78d04fcad9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_2.generation.json",
+          "sha256": "6fcbb400692f8a00bb3c295cdf213a606953147efbf095182e8d830f0e887254"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_2.png",
+          "sha256": "3e7bfd50e5e3509d73bb010123fba2837eee2876187bb4dbf8eb098ef6e48a84"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_3.generation.json",
+          "sha256": "77e222100057622a2fddb89dc7fe68faa3fe8a3006051ac341173627f0083840"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/diamond_body_shards_3.png",
+          "sha256": "2b39448d914257978ba4aa26a857f505a59ab69e8ab85a7d8d212e7a542436d8"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dragon_tiger_trail.generation.json",
+          "sha256": "23d9d6efe93d4ee742c3fa2c5cc6a6de9600b58ecdb843df45b0555567e20e1f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dragon_tiger_trail.png",
+          "sha256": "b2944fbd556fa466b2e7c1b19ecf56bb7e7dc058641ca076969b362408cd9264"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_1.generation.json",
+          "sha256": "6330ca042e7d17a947ef753dd5c47155149c7003997b416616d425f732b3bfcc"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_1.png",
+          "sha256": "864084e72ce83a299a2bc4c2771b85a778ae33f1cb193f4b1211c3f33fa0226b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_2.generation.json",
+          "sha256": "4b0fc63b4c8933be4f544cc2b807da00ed76a1934113a0adfd99fbb0704a709b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_2.png",
+          "sha256": "e7ecb523ee9d6246782d9e505b107655bbc3f8851741ac0d3b65ec9921965255"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_3.generation.json",
+          "sha256": "d540b4205b7454fdcbd22afab25bac0bb3715d8992667551ba8aefd9d5db0968"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/dust_puff_3.png",
+          "sha256": "007ab33930b2adb2a2c933e99d25c5b9a3f304dcc32416a06d22e811bf99c364"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/fist_impact_burst.generation.json",
+          "sha256": "0fe158122f4bfbd636e09dc87c63a8fdea7c508a30de94df813412c3e71ea52b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/fist_impact_burst.png",
+          "sha256": "69ebadc403fbec89344e608d9f6a686d3ccfc4c66ea5bf4b7851749e3b650483"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/ground_crack_decal.generation.json",
+          "sha256": "0e43921db37cc38428b600199e21e23334f41ef59c0caaded9450d381761459b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/ground_crack_decal.png",
+          "sha256": "cfa7dd6cf67bc6fc3f531448db986022a95f577083ff87239cdebcef978fdf01"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/mountain_charge_trail.generation.json",
+          "sha256": "378acedffe33e19bc7547e0f942e286327e3bfbcfa2657cf88e0cfadb57ad6a0"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/mountain_charge_trail.png",
+          "sha256": "93c80a4537319a526b3b7121fc143c4e9e5211ab9ca9031c91a48108a8402797"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_1.generation.json",
+          "sha256": "d23f802506aaebe758399b1897a3f6b26d3cc219e35e44cf2db8c8a92ab41803"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_1.png",
+          "sha256": "e66a1cb5e65bb997debe8033abc60f669ce5b7e44911be2e24b05e3246105ca2"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_2.generation.json",
+          "sha256": "d1b96911ce3858064c46a9cf9f10e18acc0035b6bbdb13ba81b8eeb5e3a7374a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_2.png",
+          "sha256": "f6bcc8024b4aa470ed3d260961f2ff49691e40a00665721507a2ff840fe6602f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_3.generation.json",
+          "sha256": "10c7e3e3c54e65b89ccf007aaf3390a79cdc78e40532e1a478933c4dec33dffb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_3.png",
+          "sha256": "af885b368416e72d8a7311e9286ee9975937d121c4b488241e9d2aee7c2375f1"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_4.generation.json",
+          "sha256": "c1ff91818e8b5bcf1b105b3712ab721587ca28b3d3cbcb87a5314b86366414b9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/rock_chunk_4.png",
+          "sha256": "a1dd5cedc6dd80e770c7a06e468f55befd13e498e5da8aca8b1d12286a8b5df8"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/shockwave_ring.generation.json",
+          "sha256": "586e928e87e399282ebe70f3ebace83b4214fe2306447365bcef381ff3cb839d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/shockwave_ring.png",
+          "sha256": "4866f293d12022d1800725b393f496c316702d78f4fa92efb9a6b5f7127cc300"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/stone_skin_overlay.generation.json",
+          "sha256": "be69b3819c8325fc9d9bd66303e760b53ed987846dbc163ae8e62c7b303b3605"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/stone_skin_overlay.png",
+          "sha256": "7bdfdad50e73b1a321e0f9c732f0e8bec77d1706153d980515438f5b4b7363f8"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/taunt_ring.generation.json",
+          "sha256": "baae9a29213dfe8ce1b98e21d4d0a91441412848759e5c7c91884e2b0cd38586"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/raw/vfx/taunt_ring.png",
+          "sha256": "2b65b93a91d5dda21fa7497535b82c812a8e598aed3e9a741ec5fe0fde04dc89"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_aura.png",
+          "sha256": "a309b5e9f890450144f201552cb079e29a76b177d373e73bc266abc884d46162"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_1.png",
+          "sha256": "2fb32b11cd88f4eced388668d9884155211a79911f63fbcfa900492e686c2d4f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_2.png",
+          "sha256": "7dedddf5d2263dd0349358fe8535918095a745217241a95140ca8b5ab34fd03a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/diamond_body_shards_3.png",
+          "sha256": "6495a42bb9d62e621bc9f5fe3189df1189736dc0b44dd7551f82fde21f70b2fb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dragon_tiger_trail.png",
+          "sha256": "f9f8d497ee3ef0080f0e138b2bcb441a670db8b141dd398316bff3b832712edd"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_1.png",
+          "sha256": "f9484ae1e9a5cd0e5ebf41104a6e6aa3e09323faf8373cfa134a19aa7dfb1de7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_2.png",
+          "sha256": "1f1447281cd3bc3e61652b058ead8942055d618ab8d38fdcdcb244fc24436f76"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/dust_puff_3.png",
+          "sha256": "976e75c2da51386babdefddf09282c34d3ed8f1ee2860105c01f473165024dc7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/fist_impact_burst.png",
+          "sha256": "025a97e785dfb8c9ffd5efbe4a3fd2e4ea0a1455ad2302fef862c031a11ee1fb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/ground_crack_decal.png",
+          "sha256": "c9bf59b5d09eccff242d8ad58d2fdeef907f88d9aabe60eb704e72a56f9b2339"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/mountain_charge_trail.png",
+          "sha256": "de66684b27f82d6de418ebd971e2fea98754bd11c19258f4b0058376b62a3b58"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_1.png",
+          "sha256": "0e9eeb5f3cd2b739e8b68c5601bf10af164da9603f4d0f8bd654529e73c489ab"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_2.png",
+          "sha256": "636a9b881cd390516f335ea1d73f0c5b58e73dcd6c890df22e95c5620f8fbbbb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_3.png",
+          "sha256": "aff5755cc0809d3f820ffc22e65ea6ac98e9caad14e29a6daf900fafc7e1eca0"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/rock_chunk_4.png",
+          "sha256": "455f394bb47af90fc6f81a3ba80401c22b920b810e2e64a6325ac993c5ac87ba"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/shockwave_ring.png",
+          "sha256": "2c9e4c704257837f9ee0a76dffda2698d98de7c47ef30b96a02a62e3a9667a89"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/stone_skin_overlay.png",
+          "sha256": "4bbc829c0c043a45c60d11942296e2fc2268c8afac6ce3d78218bf34718a4da4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/shared/vfx/taunt_ring.png",
+          "sha256": "88490da5065b0adfdc435607ddcf7c6b13ec22e74c9a26f599138fb2b520cecd"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_aura.png",
+          "sha256": "85ed8e68a74a6f36d089a97b2ead32efa495dcc21b521bc7096623d81f64ba21"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_1.png",
+          "sha256": "c2e661eb935593c29fed1811bab583f735e8c8ff8c2d3b61cd0b4616f0526340"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_2.png",
+          "sha256": "bcdc7e8206f469c1186a5c2cee23a9c468182e201bb3f2dd884504b08b42461f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/diamond_body_shards_3.png",
+          "sha256": "6321ad21b959d7b9d6540668dd768d4d66d3c8bee6e3b62f375d19d16511c52c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dragon_tiger_trail.png",
+          "sha256": "f6aa324e53fad13f3140deb47b583076d94bb9774e7f753e4482efdcb281bb98"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_1.png",
+          "sha256": "76cd8350f223fec97a9bc2038f759260fe8bba911c2792c28d51dd62540db993"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_2.png",
+          "sha256": "a7f2f8fe2755211136881242a797824d2cac398237cfabc27881c21fff228288"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/dust_puff_3.png",
+          "sha256": "b660fa2ee39ebe15e8d4cda335e867ece8270778e3a4132858dac9d8e9d5c9c3"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/fist_impact_burst.png",
+          "sha256": "7415cd0e46da455a215b5e4510c4e7aee947034d089a7b5d5bce7c0a69313c53"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/ground_crack_decal.png",
+          "sha256": "f6d40d02e4c5f417623e4f4e1ed01c9848a06971ebb35c61ee89ef28a5fd8a1f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/mountain_charge_trail.png",
+          "sha256": "1b52d4be16802b0abbcd0fd9c2fd40a94287a12f6b51b343e531bcdc08b00317"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_1.png",
+          "sha256": "f1361c865579e9e6a0707cc8e26b92002bffab72fdaf411bdd1b343a0721437a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_2.png",
+          "sha256": "31a8c9fea71970a9170b9a82c41e6a34b2466c123814d04c7e21c322837ef991"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_3.png",
+          "sha256": "ebec945f418bfa27b6ae70baef1fe8ff2f3c68ddcf37fb7ad337d840027c5ce6"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/rock_chunk_4.png",
+          "sha256": "424d41bfdc2eee1b587fec36f5d70ab0d5a2348be74cac8fa8942c223ba2630f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/shockwave_ring.png",
+          "sha256": "0efdbd612c093a5c680405d3a57d7cece120ca6d0eeaad84956009a52e5d62ba"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/stone_skin_overlay.png",
+          "sha256": "1299feec5ccf746d361239dcc4142d5f69cb24b51231f5933861f358fedba985"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/vfx/taunt_ring.png",
+          "sha256": "1451a1b72746eb3e3f0f9c703be3683556cde30f331a0db8d3d394907a9c0f35"
+        }
+      ]
+    },
+    {
+      "id": "TS6",
+      "glob": "shared.exports.json",
+      "source": "Inherited deterministic export metadata for shared static assets",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0; procgen alpha-weighted resizeArea (inherited); procgen straight-alpha resize/planar export (inherited)",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/shared.exports.json",
+          "sha256": "346707fc83fe5636ab6174b1ce11352429645e872fae6e2d91d85928f48b8c07"
+        }
+      ]
+    },
+    {
+      "id": "TS5",
+      "glob": "reference/*",
+      "source": "Owner-supplied upstream concept/turnaround; adjacent master generation metadata and concept-a.source.json",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool; codex-cli 0.166.0; procgen master normalization; upstream mockup: System.Drawing HighQualityBicubic",
+      "utc": "2026-11-06T12:49:29Z",
+      "interimOwner": "User (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a-ingame.png",
+          "sha256": "ab2f64bdfe0580e69f02b005b15707bad995ed765a4150fdbcea0a8665224a45"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.png",
+          "sha256": "f948c50869b9d9a04b8ec8d18aecc92f7250bbfd98bb665bae5092d2c932a5e6"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/concept-a.source.json",
+          "sha256": "0658864689f7b8a3ceea9d736211be3fdb1cd3002af1bb7784074ab05dc5d27c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-attempt-1.generation.json",
+          "sha256": "f263452859f32a2d9aceaf30e50c908a6839818639577b4d1da36eaa0b849b29"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-attempt-1.png",
+          "sha256": "e99fafe8430689b4c9df391f09c94fc0783c80d7f41d6a380edf9097a6a3e157"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-generated.generation.json",
+          "sha256": "b4cc787f2a665ee58ff794df67a4429dfd2432f81e3ecf41118087530c285e19"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master-generated.png",
+          "sha256": "1a4b58670d731842ff021d437f59efe1268691c43dcdd871c9e627dd3907eb52"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master4x.png",
+          "sha256": "149493d03e89549a21607f267d138ed97e26333ab10b39f5c1111c5d16f9f098"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master-generated.generation.json",
+          "sha256": "432c0779bb7531bf0cfcc17575b1648b7534094f7e188e371f8eaf19417d2c7b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master-generated.png",
+          "sha256": "b8c094a52f2a0662ab2060bf50e01f48f1b7d000902e94a367235ea316f1943f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master4x.png",
+          "sha256": "6cdb49802246c94d4a90963f02dc7ab2b673de9eb1db2f4ea196d2baa848af8d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master-generated.generation.json",
+          "sha256": "9f99766d5f9fe0adb4a5ba502d6ffb1b11bf8ceb8969859dd0e5089836b86984"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master-generated.png",
+          "sha256": "46c2a5082f3f2054b794a0d588f25da7b0e7eb3e7f43575216404fa652a4851e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master4x.png",
+          "sha256": "2ae6c3dbcd3dc1cad3c9a7ada4dfb76fd6e900e63c1a2e89faab112797c8771c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/prompt-pack.md",
+          "sha256": "378a0d7e250c18c5cd0041812dccb2bdd535e103ff3fb570bf4cc5d40edec1ff"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master-generated.generation.json",
+          "sha256": "720e6c7ea51c8a79d36219e5be0eeb7ad4982c261488ccca10c9af2a3815dc03"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master-generated.png",
+          "sha256": "e796a925cda44210f6a2f06bca2e7633ca99d85070b7691963170dba17eaef5b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master4x.png",
+          "sha256": "7a2e6c057013d69efed3868d221cda74623dea4f12b4a34919da0a7b7c7e3cfe"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master-generated.generation.json",
+          "sha256": "3a2a6e59376feefe432f397fd24d0a2d7ef5f785ba6061b3242b9068d7ac745d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master-generated.png",
+          "sha256": "00b14ae8d2fce09370c87ae79477cabdedce65975bfef9443a77f34f10a09f07"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master4x.png",
+          "sha256": "334d529ba87b1206ddae3b7434a0d0e727ca1cf2cb49a5e0323a0604fdb0afd3"
+        }
+      ]
+    }
+  ]
+}
