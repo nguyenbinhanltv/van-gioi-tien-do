@@ -1,0 +1,15 @@
+{
+  "id": "SE-cast-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:01:06 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:01:55 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production cast frame-by-frame sprite sheet for DAN/PHU TU A support healer. EXACT 5 columns x 3 rows of SQUARE CELLS, 14 poses readingorder. Reference1 is exact SE master identity/proportions/camera; reference2 template layout. FIXED SE view ALL cells: character faces LOWER RIGHT toward viewer, THREE-QUARTER FRONT with both shoulders and front coat visible; NEVER turn into pure sideprofile or straightfront. Same adult compactwoman with folded jadeheadpiece, tiedloopdarkhair, ivorysleeves, jadeshortsplitoverrobe and mutedbluepanels bronze trim, darksash/trousers/boots, medicinegourd and threegoldbelttalismans. SAME weaponhand asmaster: anatomicalRIGHT holds bronze-handled whitehorsehairwhisk, LEFT holds GOLDpapertalisman; never swap. Whiskhandle bronze/brown, NO violet/pink. Fine darkink softpaintedgameart NWlight. Sameface/head/limb/propdimensions everycell. Each256cell upright headtop24 sole232 height208, band202..214. Body208units is exact standing master scale; maintain anatomy in bent/seated/collapsed poses rather than fitting them to standingheight. Healing cast:1-4 gatherbreath/talisman,5-7 extendwhisk/talisman,8windup_end activation,9-11 blessinggesture,12-14 recover. Last fifteenthcell unusedmagenta. No glow/effects. Pure #FF00FF background outside figures. Remove every templateguide/tick/ghost. NO grid lines borders text shadows floor VFX glow motionblur or extra limbs. Every complete figure/prop inside owncell; equal character scale across sheet.",
+  "references": ["reference/SE.master.png", "SE/templates/cast.template.png"],
+  "output": "SE/sheets/cast.png",
+  "toolOutputId": "exec-48231a00-4bf4-4639-adc8-f151013685eb.png"
+}

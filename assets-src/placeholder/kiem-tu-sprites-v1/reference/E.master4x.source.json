@@ -1,0 +1,28 @@
+{
+  "format": "vgtd-reference-source",
+  "version": 1,
+  "sourceCommit": "40c5ea7ed972c28ffc160a6f50d59c03d8e5f0d0",
+  "sourceCommitOnMain": true,
+  "sourcePath": "assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png",
+  "sourceLfsOid": "sha256:0f4d0a6b2c18c11ff883fe28ac696538da0506f8025262aea44353b04dd97e34",
+  "originalSha256": "0f4d0a6b2c18c11ff883fe28ac696538da0506f8025262aea44353b04dd97e34",
+  "originalDimensions": [256, 256],
+  "archivePath": "reference/E.master4x.png",
+  "archiveSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+  "archiveDimensions": [512, 512],
+  "operation": "Historical KT3 license record: premultiplied-alpha Lanczos upscale from256x256 @2x to512x512 @4x. This earlier transform is recorded-but-not-re-verified; the source and archived output hashes are independently verified. The current sprite lot copied the512px master byte-for-byte, without another crop/resize.",
+  "historicalRecord": {
+    "lot": "KT3 continuous-limb E pilot,2026-11-06UTC",
+    "workingBranchCommit": "ba7c2a94e99115c8343e15b5f6bd35c1901aa5e6",
+    "workingBranchCommitOnMain": false,
+    "note": "This non-main working commit supplied the earlier history; it is not the durable source pin. The sourcePath/sourceCommit above identify the PR80 asset on main, and this PR archives the exact512px output.",
+    "tool": "image_gen.imagegen",
+    "model": "undisclosed by tool",
+    "cli": "codex-cli0.164.0",
+    "terms": "https://openai.com/policies/row-terms-of-use/"
+  },
+  "generationAlias": {
+    "name": "vgtd-bakeoff-master.png",
+    "sha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b"
+  }
+}
