@@ -20,6 +20,10 @@ export interface Finding {
   readonly clip: string;
   readonly frame?: number;
   readonly message: string;
+  /** Measured quantity of the finding (soft findings are matched and tracked by it): name, value and the limit it broke. */
+  readonly metric?: string;
+  readonly value?: number;
+  readonly limit?: number;
 }
 
 export interface QaClip {
@@ -47,6 +51,8 @@ export interface QaOptions {
   readonly heightTolerance?: number;
   /** Planted-foot slide tolerance, canvas px per frame. Default 3. */
   readonly slideTolerance?: number;
+  /** A planted foot farther than this (px) from its template ghost is not measured and warned about. Default 20. */
+  readonly maxGhostOffset?: number;
   /** Loop seam: allowed ratio of the seam step to the mean step. Default 2.5 (the viewer's gate). */
   readonly seamRatio?: number;
   /** Minimum region similarity to the master, 0..1. Default 0.7. */
@@ -72,6 +78,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'info',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `${h} px outside ${lo.toFixed(1)}..${hi.toFixed(1)} (declared exception: ${exception})`,
       });
     else if (clip.kind === 'upright')
@@ -80,6 +89,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'fail',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `height ${h} px outside ${lo.toFixed(1)}..${hi.toFixed(1)} (master ${o.masterHeight} px +-${(tol * 100).toFixed(0)} %)`,
       });
     else
@@ -88,6 +100,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'warn',
         clip: clip.name,
         frame: i,
+        metric: 'height_excess_px',
+        value: Math.round((h < lo ? lo - h : h - hi) * 10) / 10,
+        limit: 0,
         message: `height ${h} px outside the upright band and no pose exception declared`,
       });
   });
@@ -96,26 +111,69 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
 
 // ------------------------------------------------------------------------------------------------------------- foot slide
 
-/** x of the sole of the foot near `ghostX`: centroid of the opaque pixels in the bottom rows within `window` px. */
-export function soleX(img: Image, ground: number, ghostX: number, window = 28, rows = 6): number | null {
+/** A separate sole in the bottom rows of a frame: its centroid x and pixel count. */
+export interface SoleRun {
+  readonly x: number;
+  readonly n: number;
+}
+
+/**
+ * The separate soles (columns of opaque pixels in the bottom `rows` rows around the ground line, split by gaps of 3 or more
+ * empty columns) inside [x0, x1], each with its own centroid, so two feet close together are never averaged into one.
+ */
+export function soleRuns(img: Image, ground: number, x0: number, x1: number, rows = 6): SoleRun[] {
+  const xa = Math.max(0, Math.floor(x0));
+  const xb = Math.min(img.width - 1, Math.ceil(x1));
+  const colN: number[] = [];
+  for (let x = xa; x <= xb; x++) {
+    let n = 0;
+    for (let y = Math.max(0, Math.floor(ground - rows)); y <= Math.min(img.height - 1, Math.ceil(ground)); y++)
+      if (img.data[(y * img.width + x) * 4 + 3]! >= 128) n++;
+    colN.push(n);
+  }
+  const runs: SoleRun[] = [];
   let sx = 0;
   let n = 0;
-  for (let y = Math.max(0, Math.floor(ground - rows)); y <= Math.min(img.height - 1, Math.ceil(ground)); y++)
-    for (
-      let x = Math.max(0, Math.floor(ghostX - window));
-      x <= Math.min(img.width - 1, Math.ceil(ghostX + window));
-      x++
-    )
-      if (img.data[(y * img.width + x) * 4 + 3]! >= 128) {
-        sx += x;
-        n++;
-      }
-  return n >= 4 ? sx / n : null;
+  let gap = 0;
+  const close = () => {
+    if (n >= 4) runs.push({ x: sx / n, n });
+    sx = 0;
+    n = 0;
+  };
+  colN.forEach((c, i) => {
+    if (c > 0) {
+      sx += (xa + i) * c;
+      n += c;
+      gap = 0;
+    } else if (++gap === 3) close();
+  });
+  close();
+  return runs;
+}
+
+/** The sole nearest to `ghostX` within `window` px, with its signed offset from the ghost; null when no foot is there. */
+export function nearestSole(
+  img: Image,
+  ground: number,
+  ghostX: number,
+  window = 40,
+): { x: number; offset: number } | null {
+  const runs = soleRuns(img, ground, ghostX - window, ghostX + window);
+  if (!runs.length) return null;
+  const best = runs.reduce((a, b) => (Math.abs(b.x - ghostX) < Math.abs(a.x - ghostX) ? b : a));
+  return { x: best.x, offset: best.x - ghostX };
+}
+
+/** x of the sole of the foot near `ghostX` (nearest separate sole within `window`); null when none or farther than `maxOffset`. */
+export function soleX(img: Image, ground: number, ghostX: number, window = 28, maxOffset = 20): number | null {
+  const s = nearestSole(img, ground, ghostX, window);
+  return s && Math.abs(s.offset) <= maxOffset ? s.x : null;
 }
 
 export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
   if (!clip.cells || clip.groundPxPerFrame === undefined) return [];
   const tol = o.slideTolerance ?? 3;
+  const maxOffset = o.maxGhostOffset ?? 20;
   const out: Finding[] = [];
   for (const side of ['R', 'L'] as const) {
     const key = side === 'R' ? 'nearFoot' : 'farFoot';
@@ -134,6 +192,9 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
             severity: 'fail',
             clip: clip.name,
             frame: b.frame,
+            metric: `slide_px_per_frame_${side}`,
+            value: Math.round(slide * 100) / 100,
+            limit: tol,
             message: `${side} foot slides ${slide.toFixed(1)} px/frame between frames ${a.frame}-${b.frame} (limit ${tol})`,
           });
       }
@@ -143,9 +204,24 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
       const ghost = c[key];
       const f = clip.frames[i];
       if (!ghost?.planted || !f) return flush();
-      const x = soleX(f.image, o.guides.ground, ghost.x);
-      if (x === null) return flush();
-      span.push({ frame: i, x });
+      const near = nearestSole(f.image, o.guides.ground, ghost.x);
+      if (!near || Math.abs(near.offset) > maxOffset) {
+        // do not stay silent: the drawing's planted foot is not where the template put it, so it cannot be judged
+        out.push({
+          gate: 'footSlide',
+          severity: 'warn',
+          clip: clip.name,
+          frame: i,
+          metric: `ghost_offset_px_${side}`,
+          value: near ? Math.round(Math.abs(near.offset) * 10) / 10 : 999,
+          limit: maxOffset,
+          message: near
+            ? `${side} planted foot: nearest sole is ${near.offset.toFixed(1)} px from its template ghost (x ${near.x.toFixed(1)} vs ${ghost.x.toFixed(1)}, limit ${maxOffset}); not measured (the foot is not on the template)`
+            : `${side} planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)`,
+        });
+        return flush();
+      }
+      span.push({ frame: i, x: near.x });
     });
     flush();
   }

@@ -33,10 +33,13 @@ for (const k of c.clips)
 console.log(
   `atlas: ${c.atlas.pages} page ${c.atlas.width}x${c.atlas.height}, ${c.atlas.regions} regions; palette ${c.palette.size} colours${c.palette.locked ? ' (locked)' : ''}`,
 );
-for (const f of c.qa.findings)
+for (const j of c.qa.judged)
   console.log(
-    `  ${f.severity.toUpperCase()} [${f.gate}] ${f.clip}${f.frame === undefined ? '' : ` #${f.frame}`}: ${f.message}`,
+    `  ${j.verdict.toUpperCase()} [${j.finding.gate}] ${j.finding.clip}${j.finding.frame === undefined ? '' : ` #${j.finding.frame}`}: ${j.finding.message}${j.entry ? ` (backlog: ${j.entry.note})` : ''}`,
   );
+for (const e of c.qa.resolved)
+  console.log(`  RESOLVED backlog entry ${e.clip} #${e.cell} ${e.metric}: no longer occurs (sprite:backlog --prune)`);
+console.log(`QA verdicts: ${JSON.stringify(c.qa.counts)}`);
 writeOutputs(res, resolve(cwd, opt('out')));
 console.log(`QA ${c.qa.ok ? 'passed' : 'FAILED'}; wrote ${res.files.size} files to ${resolve(cwd, opt('out'))}`);
 if (!c.qa.ok && !args.includes('--allow-errors')) process.exit(1);
