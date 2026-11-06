@@ -67,3 +67,20 @@ Tùy chọn sau: mặt dây ngọc (chain), lót tay áo, váy lớp trong, lớ
 ## 6. Việc kế tiếp (rig side)
 
 Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất vào `apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` (giữ nhân vật cũ để so sánh), thêm blink / đổi tay / đổi miệng vào clip (display index theo khung), sau đó lan sang S/SE/NE/N.
+
+## 7. Lớp chi tiết hoạt cảnh (`tools/rig/src/detail.ts`)
+
+Dữ liệu điều khiển clip, áp dụng cho mọi rig có đủ slot (thiếu slot hoặc display thì bỏ qua, không lỗi).
+
+| slot          | display (tên attachment)                                                     | dùng khi                                                                                               |
+| ------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `eyes`        | `eyes_open`, `eyes_half`, `eyes_closed`                                      | chớp mắt mỗi 3-5 s (idle, walk, channel, emote); `meditate` nhắm suốt                                  |
+| `mouth`       | `mouth_neutral`, `mouth_open`, `mouth_smile`                                 | quát quanh frame trúng đòn (attack 1-3), niệm (cast), đau (hit), cười (emote)                          |
+| `hand_R`      | `hand_R_grip`, `hand_R_relaxed`, `hand_R_fist`, `hand_R_palm`, `hand_R_seal` | tay cầm kiếm luôn `grip` (thả lỏng khi die/meditate)                                                   |
+| `hand_L`      | `hand_L_relaxed`, `hand_L_fist`, `hand_L_palm`, `hand_L_seal`                | nắm tay khi đánh/bị đánh, kiếm quyết (`seal`) khi cast/channel/sword_fly, `palm` khi emote/tribulation |
+| `sword_trail` | `sword_trail` (blend additive)                                               | vệt kiếm từ `windup_end` đến `hit_frame` + 5, alpha 0 → 1 → 0                                          |
+| `sword_glint` | `sword_glint` (blend additive)                                               | chớp sáng ±2 frame quanh `hit_frame` (và cast)                                                         |
+
+Chain thứ cấp (`addDetailChains`, bake lò xo ở 30 fps như tóc/đai hiện có): `hair_strand_a/b/c`, `ponytail`, `ribbon_tail_L/R`, `sash_tail_L/R`, `pendant`, `sleeve_edge_L/R`, `robe_hem_front/back`; vị trí đặt (`at`) chỉnh theo rig thật bằng tham số `overrides`. Mỗi chain cần mảnh art riêng đã tách (hoặc nhóm display) và xương cha: `head`, `hips`, `lower_arm_L/R`.
+
+Cổng nghiệm thu một lệnh: `npm run rig:gate -w @vgtd/rig -- <character> --dir E [--src dragonbones/<id> --stem <stem>]` chạy `rig:measure --strict` rồi chụp trong engine đủ clip (kết quả chụp ở thư mục `--out`, đính vào PR).

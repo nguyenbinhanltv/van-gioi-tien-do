@@ -34,3 +34,4 @@ export * from './class-clips.js';
 export * from './characters.js';
 export * from './limb.js';
 export * from './landmarks.js';
+export * from './detail.js';
