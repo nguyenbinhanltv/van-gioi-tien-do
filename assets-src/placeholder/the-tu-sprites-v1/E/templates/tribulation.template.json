@@ -1,0 +1,92 @@
+{
+  "clip": "tribulation",
+  "grid": {
+    "cols": 6,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 24,
+  "guides": {
+    "ground": 232,
+    "head": 15,
+    "pelvis": 123.5,
+    "centerX": 127.81284974093265
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 1536,
+  "height": 1024
+}
