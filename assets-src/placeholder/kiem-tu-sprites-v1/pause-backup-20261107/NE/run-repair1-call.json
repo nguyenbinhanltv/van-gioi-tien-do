@@ -1,0 +1,15 @@
+{
+  "clip": "run",
+  "call": {
+    "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges.  SINGLE CELL REPAIR on this6column x2row RUN sheet. Image1 guide blanks cell11 only (bottom row,column5); image2 original gives intended run pose; image3 white mask selects that ONE cell; image4 master identity. Redraw cell11 as same back-threequarter running character with sameheadsize/torso/bluevest/hair and swordlowviewerRIGHT. It is currently too tucked-up/short: extend the lowest dark-boot foot DOWN by about14 raw pixels with a shallower running knee, not by scaling/enlarging the figure. Bun-to-lowestboot must be304pixels in this341px-high cell (headtop29, lowestsole333 relative to row); follow marked head/waist/floor, preserve anatomicalRviewerRIGHT/LEFTviewerLEFT alternation. No grid/guides/markers in final. Keep other11cells unchanged. Entire6x2sheet, sameflatmagenta.",
+    "referenced_image_paths": [
+      "run-height-repair1.guide.png",
+      "sheets/run.png",
+      "run-height-repair1.mask.png",
+      "NE.master4x.png"
+    ],
+    "transparent_background": false
+  },
+  "startedUtc": "2026-11-06T19:46:57.548Z",
+  "resultPath": "raw/run.repair1.png"
+}

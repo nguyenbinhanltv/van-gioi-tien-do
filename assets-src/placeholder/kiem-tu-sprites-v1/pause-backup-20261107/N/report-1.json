@@ -1,0 +1,855 @@
+[
+  {
+    "clip": "idle",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 122,
+      "right": 340,
+      "top": 26,
+      "bottom": 396,
+      "height": 370,
+      "width": 218,
+      "pelvisX": 210.39047129643225
+    },
+    "calibration": {
+      "scale": 0.5621621621621622,
+      "targetHeight": 208,
+      "referenceHeight": 370,
+      "referenceFrames": 1
+    },
+    "heights": [
+      209,
+      209,
+      209,
+      209,
+      207,
+      207,
+      207,
+      208
+    ],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "meditate",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 122,
+      "right": 344,
+      "top": 25,
+      "bottom": 391,
+      "height": 366,
+      "width": 222,
+      "pelvisX": 209.21160285339934
+    },
+    "calibration": {
+      "scale": 0.5683060109289617,
+      "targetHeight": 208,
+      "referenceHeight": 366,
+      "referenceFrames": 1
+    },
+    "heights": [
+      160,
+      160,
+      161,
+      160,
+      157,
+      157,
+      159,
+      160
+    ],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 40.8,
+          "limit": 0,
+          "message": "161 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 44.8,
+          "limit": 0,
+          "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 44.8,
+          "limit": 0,
+          "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 42.8,
+          "limit": 0,
+          "message": "159 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 40.8,
+            "limit": 0,
+            "message": "161 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 44.8,
+            "limit": 0,
+            "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 44.8,
+            "limit": 0,
+            "message": "157 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 42.8,
+            "limit": 0,
+            "message": "159 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "meditate",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 41.8,
+            "limit": 0,
+            "message": "160 px outside 201.8..214.2 (declared exception: seated lotus; fixed standing-control scale)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 8
+      }
+    }
+  },
+  {
+    "clip": "walk",
+    "rawSize": [
+      2172,
+      724
+    ],
+    "sourceGrid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6645367412140575,
+      "targetHeight": 208,
+      "referenceHeight": 313,
+      "referenceFrames": 12
+    },
+    "heights": [
+      208,
+      208,
+      208,
+      208,
+      208,
+      208,
+      207,
+      207,
+      207,
+      207,
+      208,
+      207
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "ghost_offset_px_R",
+          "value": 32,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -32.0 px from its template ghost (x 120.0 vs 152.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "ghost_offset_px_R",
+          "value": 30.1,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -30.1 px from its template ghost (x 121.9 vs 152.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "slide_px_per_frame_R",
+          "value": 4.91,
+          "limit": 3,
+          "message": "R foot slides 4.9 px/frame between frames 8-9 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 11,
+          "metric": "ghost_offset_px_R",
+          "value": 30.3,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -30.3 px from its template ghost (x 121.7 vs 152.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 0,
+          "metric": "ghost_offset_px_L",
+          "value": 21,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 21.0 px from its template ghost (x 127.2 vs 106.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "ghost_offset_px_L",
+          "value": 29.7,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 29.7 px from its template ghost (x 135.9 vs 106.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "ghost_offset_px_L",
+          "value": 27.6,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 27.6 px from its template ghost (x 133.8 vs 106.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 4,
+          "metric": "ghost_offset_px_L",
+          "value": 25.9,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 25.9 px from its template ghost (x 132.1 vs 106.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "ghost_offset_px_L",
+          "value": 26.2,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 26.2 px from its template ghost (x 132.4 vs 106.2, limit 20); not measured (the foot is not on the template)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 7,
+            "metric": "ghost_offset_px_R",
+            "value": 32,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is -32.0 px from its template ghost (x 120.0 vs 152.0, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 10,
+            "metric": "ghost_offset_px_R",
+            "value": 30.1,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is -30.1 px from its template ghost (x 121.9 vs 152.0, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "walk",
+            "frame": 9,
+            "metric": "slide_px_per_frame_R",
+            "value": 4.91,
+            "limit": 3,
+            "message": "R foot slides 4.9 px/frame between frames 8-9 (limit 3)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 11,
+            "metric": "ghost_offset_px_R",
+            "value": 30.3,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is -30.3 px from its template ghost (x 121.7 vs 152.0, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 0,
+            "metric": "ghost_offset_px_L",
+            "value": 21,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 21.0 px from its template ghost (x 127.2 vs 106.2, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 1,
+            "metric": "ghost_offset_px_L",
+            "value": 29.7,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 29.7 px from its template ghost (x 135.9 vs 106.2, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 2,
+            "metric": "ghost_offset_px_L",
+            "value": 27.6,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 27.6 px from its template ghost (x 133.8 vs 106.2, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 4,
+            "metric": "ghost_offset_px_L",
+            "value": 25.9,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 25.9 px from its template ghost (x 132.1 vs 106.2, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "walk",
+            "frame": 5,
+            "metric": "ghost_offset_px_L",
+            "value": 26.2,
+            "limit": 20,
+            "message": "L planted foot: nearest sole is 26.2 px from its template ghost (x 132.4 vs 106.2, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 9,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "run",
+    "rawSize": [
+      2172,
+      724
+    ],
+    "sourceGrid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6709677419354839,
+      "targetHeight": 208,
+      "referenceHeight": 310,
+      "referenceFrames": 12
+    },
+    "heights": [
+      209,
+      209,
+      208,
+      208,
+      207,
+      209,
+      209,
+      207,
+      207,
+      206,
+      206,
+      210
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 8,
+          "metric": "ghost_offset_px_R",
+          "value": 22.3,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -22.3 px from its template ghost (x 129.7 vs 152.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 7,
+          "metric": "slide_px_per_frame_R",
+          "value": 5.06,
+          "limit": 3,
+          "message": "R foot slides 5.1 px/frame between frames 6-7 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 9,
+          "metric": "ghost_offset_px_R",
+          "value": 24.1,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -24.1 px from its template ghost (x 128.0 vs 152.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 1,
+          "metric": "slide_px_per_frame_L",
+          "value": 6.71,
+          "limit": 3,
+          "message": "L foot slides 6.7 px/frame between frames 0-1 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 2,
+          "metric": "slide_px_per_frame_L",
+          "value": 10.32,
+          "limit": 3,
+          "message": "L foot slides 10.3 px/frame between frames 1-2 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 3,
+          "metric": "slide_px_per_frame_L",
+          "value": 8.55,
+          "limit": 3,
+          "message": "L foot slides 8.6 px/frame between frames 2-3 (limit 3)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "run",
+            "frame": 8,
+            "metric": "ghost_offset_px_R",
+            "value": 22.3,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is -22.3 px from its template ghost (x 129.7 vs 152.0, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 7,
+            "metric": "slide_px_per_frame_R",
+            "value": 5.06,
+            "limit": 3,
+            "message": "R foot slides 5.1 px/frame between frames 6-7 (limit 3)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "warn",
+            "clip": "run",
+            "frame": 9,
+            "metric": "ghost_offset_px_R",
+            "value": 24.1,
+            "limit": 20,
+            "message": "R planted foot: nearest sole is -24.1 px from its template ghost (x 128.0 vs 152.0, limit 20); not measured (the foot is not on the template)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 1,
+            "metric": "slide_px_per_frame_L",
+            "value": 6.71,
+            "limit": 3,
+            "message": "L foot slides 6.7 px/frame between frames 0-1 (limit 3)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 2,
+            "metric": "slide_px_per_frame_L",
+            "value": 10.32,
+            "limit": 3,
+            "message": "L foot slides 10.3 px/frame between frames 1-2 (limit 3)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "footSlide",
+            "severity": "fail",
+            "clip": "run",
+            "frame": 3,
+            "metric": "slide_px_per_frame_L",
+            "value": 8.55,
+            "limit": 3,
+            "message": "L foot slides 8.6 px/frame between frames 2-3 (limit 3)"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 6,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "dash",
+    "rawSize": [
+      1774,
+      887
+    ],
+    "sourceGrid": {
+      "cols": 4,
+      "rows": 2,
+      "total": 8,
+      "control1based": 7
+    },
+    "control": {
+      "left": 136,
+      "right": 364,
+      "top": 33,
+      "bottom": 415,
+      "height": 382,
+      "width": 228,
+      "pelvisX": 224.46318144833197
+    },
+    "calibration": {
+      "scale": 0.5445026178010471,
+      "targetHeight": 208,
+      "referenceHeight": 382,
+      "referenceFrames": 1
+    },
+    "heights": [
+      209,
+      208,
+      192,
+      178,
+      205,
+      208
+    ],
+    "qa": {
+      "ok": true,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 9.8,
+          "limit": 0,
+          "message": "192 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        },
+        {
+          "gate": "height",
+          "severity": "info",
+          "clip": "dash",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 23.8,
+          "limit": 0,
+          "message": "178 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 9.8,
+            "limit": 0,
+            "message": "192 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+          },
+          "class": "info",
+          "verdict": "info"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "info",
+            "clip": "dash",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 23.8,
+            "limit": 0,
+            "message": "178 px outside 201.8..214.2 (declared exception: dash load/push/flight/braking)"
+          },
+          "class": "info",
+          "verdict": "info"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 2
+      }
+    }
+  }
+]

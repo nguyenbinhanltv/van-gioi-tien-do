@@ -1,0 +1,100 @@
+{
+  "url": "http://127.0.0.1:59177/#viewer&mode=single&dir=E&paused=1&src=dragonbones/kiem-tu-continuous&stem=kiemtu",
+  "mode": "single",
+  "direction": "E",
+  "frames": 12,
+  "animations": {
+    "idle": {
+      "duration": 1,
+      "keyFrames": 30,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 18.47196033456429,
+        "seamStep": 15.917404877413956,
+        "ratio": 0.8617063153621919
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif"
+    },
+    "run": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 498.73269987330406,
+        "seamStep": 313.51845745564214,
+        "ratio": 0.6286302412801227
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif"
+    },
+    "walk": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 335.4097887568685,
+        "seamStep": 234.79389586834574,
+        "ratio": 0.700021000396452
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif"
+    },
+    "attack": {
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 500.25790375495643,
+        "seamStep": 989.9244745154775,
+        "ratio": 1.978828254556427
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif"
+    },
+    "cast": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 494.41748058787374,
+        "seamStep": 254.41629781504315,
+        "ratio": 0.5145778776117227
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif"
+    },
+    "hit": {
+      "duration": 0.2,
+      "keyFrames": 6,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 461.26315551374785,
+        "seamStep": 634.0663013467306,
+        "ratio": 1.3746302815808413
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif"
+    },
+    "die": {
+      "duration": 0.8,
+      "keyFrames": 24,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 472.8841950915771,
+        "seamStep": 6217.020762087413,
+        "ratio": 13.147025903209656
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif"
+    }
+  },
+  "source": "dragonbones/kiem-tu-continuous/kiemtu"
+}

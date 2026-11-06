@@ -1,0 +1,34 @@
+{
+  "algorithm": "sha1 decoded RGBA per cell",
+  "selected": [
+    10
+  ],
+  "before": [
+    "e670843c9d33effd586fd2733995ddaf81a51898",
+    "1219b7265dbf54c76c51a95fd39fcbbdb1b0bf8f",
+    "7e6240432d82401f155794c04db43eaa584a862f",
+    "fffe3c3cf245c48c6d19bc91ccba6ea17e9b4488",
+    "ead38f6158276f08e1f5bdbdbeeb58a59f95d011",
+    "8ee5d71d42f87825ae1a4de6d69b833309d0385b",
+    "72ef09366e980e607e91df314edbfade8ebd4883",
+    "98b31b400b155a0f8cfb971ee3ae2297b0b33102",
+    "e9ddde606ca221743f27d1a95bbe6a55643cb3fc",
+    "fd160f5807df3126a9a368da34acd2a7106e352e",
+    "52768f53c0cb66af9c8e8671bc7de24ecb3d1dd9",
+    "817cfa549c3e4099e7f388f55bbf84ded3a2088f"
+  ],
+  "after": [
+    "e670843c9d33effd586fd2733995ddaf81a51898",
+    "1219b7265dbf54c76c51a95fd39fcbbdb1b0bf8f",
+    "7e6240432d82401f155794c04db43eaa584a862f",
+    "fffe3c3cf245c48c6d19bc91ccba6ea17e9b4488",
+    "ead38f6158276f08e1f5bdbdbeeb58a59f95d011",
+    "8ee5d71d42f87825ae1a4de6d69b833309d0385b",
+    "72ef09366e980e607e91df314edbfade8ebd4883",
+    "98b31b400b155a0f8cfb971ee3ae2297b0b33102",
+    "e9ddde606ca221743f27d1a95bbe6a55643cb3fc",
+    "fd160f5807df3126a9a368da34acd2a7106e352e",
+    "6ddba554371705eef1132876456499ad01d7289d",
+    "817cfa549c3e4099e7f388f55bbf84ded3a2088f"
+  ]
+}

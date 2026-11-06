@@ -1,0 +1,27 @@
+{
+  "character": "kiem-tu",
+  "direction": "NE",
+  "stem": "kiemtu",
+  "master": "NE.master4x.png",
+  "slice": {
+    "key": "auto",
+    "inset": 0,
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "run",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "calibration": {
+        "referenceHeight": 304
+      },
+      "manifest": "templates/run.template.json"
+    }
+  ]
+}

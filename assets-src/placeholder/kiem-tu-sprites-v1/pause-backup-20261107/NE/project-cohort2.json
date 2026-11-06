@@ -1,0 +1,96 @@
+{
+  "character": "kiem-tu",
+  "direction": "NE",
+  "stem": "kiemtu",
+  "master": "NE.master4x.png",
+  "slice": {
+    "key": "auto",
+    "inset": 0,
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "sword_fly",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "calibration": {
+        "referenceHeight": 362
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.png",
+      "calibration": {
+        "referenceHeight": 363
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "calibration": {
+        "referenceHeight": 348
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "calibration": {
+        "referenceHeight": 354
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "calibration": {
+        "referenceHeight": 372
+      }
+    }
+  ]
+}

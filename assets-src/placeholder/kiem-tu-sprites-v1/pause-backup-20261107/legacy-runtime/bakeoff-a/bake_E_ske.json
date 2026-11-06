@@ -1,0 +1,331 @@
+{
+  "name": "bake_E",
+  "version": "5.5",
+  "compatibleVersion": "5.5",
+  "frameRate": 30,
+  "armature": [
+    {
+      "name": "bake_E",
+      "type": "Armature",
+      "frameRate": 30,
+      "aabb": {
+        "x": -64,
+        "y": -116,
+        "width": 128,
+        "height": 128
+      },
+      "bone": [
+        {
+          "name": "root",
+          "transform": {}
+        }
+      ],
+      "slot": [
+        {
+          "name": "sprite",
+          "parent": "root",
+          "displayIndex": 0
+        }
+      ],
+      "skin": [
+        {
+          "name": "default",
+          "slot": [
+            {
+              "name": "sprite",
+              "display": [
+                {
+                  "name": "run_0",
+                  "path": "run_0",
+                  "type": "image",
+                  "transform": {
+                    "x": -1.75,
+                    "y": -41.75,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_1",
+                  "path": "run_1",
+                  "type": "image",
+                  "transform": {
+                    "x": -3.75,
+                    "y": -41.25,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_2",
+                  "path": "run_2",
+                  "type": "image",
+                  "transform": {
+                    "x": -6.25,
+                    "y": -41.75,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_3",
+                  "path": "run_3",
+                  "type": "image",
+                  "transform": {
+                    "x": -4.25,
+                    "y": -39,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_4",
+                  "path": "run_4",
+                  "type": "image",
+                  "transform": {
+                    "x": -1.5,
+                    "y": -41.5,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_5",
+                  "path": "run_5",
+                  "type": "image",
+                  "transform": {
+                    "x": -4,
+                    "y": -41.25,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_6",
+                  "path": "run_6",
+                  "type": "image",
+                  "transform": {
+                    "x": -6.75,
+                    "y": -41.75,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "run_7",
+                  "path": "run_7",
+                  "type": "image",
+                  "transform": {
+                    "x": -4.75,
+                    "y": -38.25,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_0",
+                  "path": "walk_0",
+                  "type": "image",
+                  "transform": {
+                    "x": 3.75,
+                    "y": -51.75,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_1",
+                  "path": "walk_1",
+                  "type": "image",
+                  "transform": {
+                    "x": 1,
+                    "y": -51.5,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_2",
+                  "path": "walk_2",
+                  "type": "image",
+                  "transform": {
+                    "x": 0.5,
+                    "y": -52,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_3",
+                  "path": "walk_3",
+                  "type": "image",
+                  "transform": {
+                    "x": 1,
+                    "y": -53,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_4",
+                  "path": "walk_4",
+                  "type": "image",
+                  "transform": {
+                    "x": 4.25,
+                    "y": -51.5,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_5",
+                  "path": "walk_5",
+                  "type": "image",
+                  "transform": {
+                    "x": 2.5,
+                    "y": -51.5,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_6",
+                  "path": "walk_6",
+                  "type": "image",
+                  "transform": {
+                    "x": 3,
+                    "y": -52,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                },
+                {
+                  "name": "walk_7",
+                  "path": "walk_7",
+                  "type": "image",
+                  "transform": {
+                    "x": 2.5,
+                    "y": -53,
+                    "scX": 0.5,
+                    "scY": 0.5
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "animation": [
+        {
+          "name": "idle",
+          "duration": 30,
+          "playTimes": 0,
+          "slot": [
+            {
+              "name": "sprite",
+              "displayFrame": [
+                {
+                  "duration": 30,
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "run",
+          "duration": 15,
+          "playTimes": 0,
+          "slot": [
+            {
+              "name": "sprite",
+              "displayFrame": [
+                {
+                  "duration": 2,
+                  "value": 0
+                },
+                {
+                  "duration": 2,
+                  "value": 1
+                },
+                {
+                  "duration": 2,
+                  "value": 2
+                },
+                {
+                  "duration": 2,
+                  "value": 3
+                },
+                {
+                  "duration": 2,
+                  "value": 4
+                },
+                {
+                  "duration": 2,
+                  "value": 5
+                },
+                {
+                  "duration": 2,
+                  "value": 6
+                },
+                {
+                  "duration": 1,
+                  "value": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "walk",
+          "duration": 20,
+          "playTimes": 0,
+          "slot": [
+            {
+              "name": "sprite",
+              "displayFrame": [
+                {
+                  "duration": 3,
+                  "value": 8
+                },
+                {
+                  "duration": 2,
+                  "value": 9
+                },
+                {
+                  "duration": 3,
+                  "value": 10
+                },
+                {
+                  "duration": 2,
+                  "value": 11
+                },
+                {
+                  "duration": 3,
+                  "value": 12
+                },
+                {
+                  "duration": 2,
+                  "value": 13
+                },
+                {
+                  "duration": 3,
+                  "value": 14
+                },
+                {
+                  "duration": 2,
+                  "value": 15
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "defaultActions": [
+        {
+          "gotoAndPlay": "run"
+        }
+      ]
+    }
+  ]
+}

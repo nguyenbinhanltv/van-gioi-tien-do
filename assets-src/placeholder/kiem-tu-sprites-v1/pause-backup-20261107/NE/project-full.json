@@ -1,0 +1,311 @@
+{
+  "character": "kiem-tu",
+  "direction": "NE",
+  "stem": "kiemtu",
+  "master": "NE.master4x.png",
+  "slice": {
+    "key": "auto",
+    "inset": 0,
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "calibration": {
+        "referenceHeight": 363
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "calibration": {
+        "referenceHeight": 373
+      },
+      "exceptions": {
+        "0": "seated lotus; fixed standing-control scale",
+        "1": "seated lotus; fixed standing-control scale",
+        "2": "seated lotus; fixed standing-control scale",
+        "3": "seated lotus; fixed standing-control scale",
+        "4": "seated lotus; fixed standing-control scale",
+        "5": "seated lotus; fixed standing-control scale",
+        "6": "seated lotus; fixed standing-control scale",
+        "7": "seated lotus; fixed standing-control scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "calibration": {
+        "referenceFrames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "manifest": "templates/walk.template.json"
+    },
+    {
+      "name": "run",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "calibration": {
+        "referenceHeight": 304
+      },
+      "manifest": "templates/run.template.json"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheet": "sheets/dash.png",
+      "calibration": {
+        "referenceHeight": 362
+      },
+      "exceptions": {
+        "1": "dash load/push/flight/braking",
+        "2": "dash load/push/flight/braking",
+        "3": "dash load/push/flight/braking",
+        "4": "dash load/push/flight/braking"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "calibration": {
+        "referenceHeight": 362
+      },
+      "exceptions": {
+        "0": "airborne on sword; same physical scale from standing control",
+        "1": "airborne on sword; same physical scale from standing control",
+        "2": "airborne on sword; same physical scale from standing control",
+        "3": "airborne on sword; same physical scale from standing control",
+        "4": "airborne on sword; same physical scale from standing control",
+        "5": "airborne on sword; same physical scale from standing control",
+        "6": "airborne on sword; same physical scale from standing control",
+        "7": "airborne on sword; same physical scale from standing control"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.png",
+      "calibration": {
+        "referenceHeight": 363
+      },
+      "exceptions": {
+        "2": "sword anticipation",
+        "3": "launch lunge",
+        "4": "contact lunge",
+        "5": "follow-through lunge",
+        "6": "lunge recovery"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "calibration": {
+        "referenceHeight": 348
+      },
+      "exceptions": {
+        "1": "sword windup",
+        "2": "low lunge",
+        "3": "rising contact",
+        "4": "raised sword follow-through",
+        "5": "raised sword follow-through",
+        "6": "lunge recovery"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "calibration": {
+        "referenceHeight": 354
+      },
+      "exceptions": {
+        "1": "windup",
+        "2": "overhead sword anticipation",
+        "3": "launch lunge",
+        "4": "downward contact lunge",
+        "5": "follow-through lunge",
+        "6": "lunge recovery"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 7
+      },
+      "sheet": "sheets/cast.png",
+      "calibration": {
+        "referenceHeight": 372
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "calibration": {
+        "referenceHeight": 359
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 3,
+      "frames": 4,
+      "durationSec": 0.2,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.png",
+      "calibration": {
+        "referenceHeight": 429
+      }
+    },
+    {
+      "name": "die",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.8,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "calibration": {
+        "referenceHeight": 374
+      },
+      "exceptions": {
+        "1": "knees buckle",
+        "2": "one-knee collapse",
+        "3": "kneeling collapse",
+        "4": "side fall",
+        "5": "side-prone landing",
+        "6": "side-prone settling",
+        "7": "side-prone hold"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 5,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "calibration": {
+        "referenceHeight": 272
+      },
+      "exceptions": {
+        "1": "brace",
+        "2": "kneel",
+        "3": "defensive kneel",
+        "4": "low defensive kneel",
+        "5": "rally from kneel",
+        "6": "hunch against impact",
+        "7": "hunch against impact",
+        "8": "rise from kneel",
+        "9": "push upright"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "calibration": {
+        "referenceHeight": 369
+      }
+    }
+  ],
+  "backlog": "quality-backlog.json"
+}

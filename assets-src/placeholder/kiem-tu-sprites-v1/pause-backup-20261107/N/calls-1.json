@@ -1,0 +1,67 @@
+[
+  {
+    "clip": "idle",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 FULL BACK standing breath loop, feetfixed, tiny1-2unit shoulder/hair/ribbon/sash rise/fall, SAME208unit body +/-3%, swordlowviewerRIGHT throughout. Cell8 into1 seamless. Cell9 unused STANDING MASTER CONTROL, sameheadsize/physicalscale. All upright heads and shoulders remain FULL BACK, never reveal face by looking over shoulder.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/idle.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:53:31.648Z",
+    "resultPath": "sheets/idle.png"
+  },
+  {
+    "clip": "meditate",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 seatedlotus seen from FULL BACK facingup-screen, crossedlegs and flowingrobe, headtop96/seatsole232/pelvis200; samephysicalheadsize as standing master, NEVERenlarge seatedbody tofillcell. Swordlaid beside viewerRIGHTknee, oneblade, emptyhipscabbardviewerLEFT. Tinybreathing only. Cell9 unused standingMASTERCONTROL top24/sole232 physical208units. All upright heads and shoulders remain FULL BACK, never reveal face by looking over shoulder.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/meditate.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:53:31.648Z",
+    "resultPath": "sheets/meditate.png"
+  },
+  {
+    "clip": "walk",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT6columns x2rows,12frame WALK AWAY towardup-screen, fixedFULL BACK camera. Cells1-6 anatomicalLEFT/viewerLEFT leg leads contact/down/pass/latepass/toeoff/precontact; cells7-12 anatomicalRIGHT/viewerRIGHT leg leads samephases. CyanRfootviewerRIGHT/amberLfootviewerLEFT ghosts indicate diagonal depth travel. Alternate visible boots/knees naturally underlongrobe; shortstride, backrobe split follows legs, hairback remainslong. SwordLOWviewerRIGHT samehand/carry all12, never crossesbehindtootherhand. Same208unit figure +/-3%, sameheadsize, no bigcrouch. Cell12 into1 seamless. All upright heads and shoulders remain FULL BACK, never reveal face by looking over shoulder.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/walk.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:53:31.648Z",
+    "resultPath": "sheets/walk.png"
+  },
+  {
+    "clip": "run",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT6columns x2rows,12frame RUN AWAY up-screen, FULL BACK view fixed. Cells1-6 anatomicalLEFT/viewerLEFT leads contact/down/pass/toeoff/up/precontact; cells7-12 anatomicalRIGHT/viewerRIGHT leads samephases. Clearly alternate boot/knee leading acrosshalves, follow cyanRviewerRIGHT/amberLviewerLEFT footghosts. Shortstride longrobed swordsman, shallowknees, slightforwardlean away, backrobe follows leadingthigh/flaresbehind; no trousersballoons. Keep bun-to-lowestboot208units +/-3% all12, avoid hightuckedknee shrinking figure; sameheadsize. SwordlowviewerRIGHT all12 samehand/carry. Seamless12to1. All upright heads and shoulders remain FULL BACK, never reveal face by looking over shoulder.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/run.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:53:31.648Z",
+    "resultPath": "sheets/run.png"
+  },
+  {
+    "clip": "dash",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT4columns x2rows. Cells1-6 FULL BACK DASH away/up-screen:1ready,2shallowload,3push,4burstlean,5brake,6ready. Samephysicalheadsize/scale, robe/hairtrailsback naturally, noFX. SwordlowviewerRIGHT always. Cells7/8 unused STANDING MASTER CONTROLS top24/sole232 height208units. All upright heads and shoulders remain FULL BACK, never reveal face by looking over shoulder.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/dash.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:53:31.648Z",
+    "resultPath": "sheets/dash.png"
+  }
+]

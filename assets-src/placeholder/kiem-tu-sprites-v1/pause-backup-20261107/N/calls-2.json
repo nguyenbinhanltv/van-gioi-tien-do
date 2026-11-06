@@ -1,0 +1,67 @@
+[
+  {
+    "clip": "sword_fly",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 flying on ONE physical straight jian under both boots, blade angled gently up-screen with view, bodyhead16/board224. FULL BACK facingawayup-screen always. Both hands EMPTY: sword is the flying board; anatomicalRIGHT/viewerRIGHT emptyhand raises twofingerseal near shoulder/chest partlyhidden, farLEFTrelaxed. Samephysicalheadsize/bodyproportions as standing master. Tinyhover/breathe seamless8to1. Cell9 unused STANDING MASTER CONTROL head24/sole232 carrying swordlowviewerRIGHT. NO grid/guidelines or effects. The one flying blade lies across both boots, nearly horizontal across the canvas; no handheld second sword. Camera FULL BACK throughout; small natural shoulder twist allowed but do not reveal face/front chest. No grids/guides/shadows/trails/effects in final.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/sword_fly.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T20:02:46.907Z",
+    "resultPath": "sheets/sword_fly.png"
+  },
+  {
+    "clip": "attack",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 FULL BACK attack AWAY towardup-screen:1ready,2load,3RIGHTswordarmdraws outwardviewerRIGHT,4shortlaunchlunge,5HIT forward/down diagonal cut away,6followthrough,7recover,8lowready. Keep backbluevest/hairmass visible, no turntofront face/chest. ONEswordheldanatomicalRIGHT/viewerRIGHT handallcells, farLEFTemptyhand balances. Smallnatural torsotwist only. Fullblade includingtipINSIDE owncell minimum12unitmargin; sameblade length and physicalbodyscale. Cell9unusedstandingMASTERCONTROL. No lines/shadows/trails/streaks/VFX. Camera FULL BACK throughout; small natural shoulder twist allowed but do not reveal face/front chest. No grids/guides/shadows/trails/effects in final.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/attack.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T20:02:46.907Z",
+    "resultPath": "sheets/attack.png"
+  },
+  {
+    "clip": "attack_2",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 FULL BACK risingcut awayup-screen:1ready,2coilrightbladelow,3shallowlunge,4HIT risingdiagonalawaycut,5raisedRIGHTarmfollowthrough,6settleblade,7recover,8lowready. Camera fixedFULL BACK, hair/backpanel authoritative, nofrontchest. SameRIGHT/viewerRIGHT swordhandalways; freeLEFTviewerLEFT handbalances. Swordtip/handallinsidecell with12unitmargin, sameheadsize/scale. Cell9unusedstandingMASTERCONTROL. No grids/FX/shadows. Camera FULL BACK throughout; small natural shoulder twist allowed but do not reveal face/front chest. No grids/guides/shadows/trails/effects in final.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/attack_2.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T20:02:46.907Z",
+    "resultPath": "sheets/attack_2.png"
+  },
+  {
+    "clip": "attack_3",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 FULL BACK overheadfinish AWAY up-screen:1ready,2load,3raiseRIGHTswordarmdiagonallyabovehead,4shortstepaway,5HIT downwardcutaway/ground,6followthrough,7recover,8ready. Swordpoint MUST stayminimum12unitmargininsidethecell: tilt blade sideways ratherthan cuttopborder, keepnormalbladelength. Samephysicalheadsize/scalethroughout, nofrontface/chest, right/viewerRIGHThandgripsallframes. Cell9unusedstandingMASTERCONTROL. No grid/trail/glow/shadows. Camera FULL BACK throughout; small natural shoulder twist allowed but do not reveal face/front chest. No grids/guides/shadows/trails/effects in final.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/attack_3.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T20:02:46.908Z",
+    "resultPath": "sheets/attack_3.png"
+  },
+  {
+    "clip": "cast",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH direction: FULL STRAIGHT BACK view, character facing directly AWAY/up-screen. Symmetrical back/shoulders, blue vest BACK and long dark hair downcentre; NO FACE/CHEEKS/CHEST, NO NE threequarter, NO SE, NO sideprofile in upright poses. Same slim masterproportions, darkhairbun/jadepin/blueribbontails, long mutedslateblue sleeveless backvest/robe narrowgoldtrim and backcentresplit, ivorysleeves/innerrobe/loosetrousers, darkANKLEboots, navysash, empty scabbardviewerLEFT hip. AnatomicalRIGHT is VIEWER-RIGHT in backview, samehandcarries ONEthin straightjian LOW outsideviewer-right hip, bladedown/out-right likeMASTER. No handedness/carryswitch orsecondhilt. Restrained painterly NWlight, fine darkgreybrown outlines, noarmour/floralredesign. Image2 template positions only: equal256unit cells, pelvisaxis127.81, standingbuntop24/lowestsole232, fullbody208units; sameheadsize/limblengths inallcells, uprightheight+/-3%. Lowered head/waistguides mean seated/collapsedbody folds, NEVERzoom/enlarge. FullfigureandbladeINSIDEeachcell. Finalsheet uninterrupted PERFECTflatMAGENTA#ff00ff, no blackgrids/panelborders/dashedguides/marks/text, nofloor/shadows/VFX/glow/trails/streaks/blur; erasealltemplatemarks evenouteredges. EXACT3columns x3rows. Cells1-8 FULL BACK cast towardup-screenaway:1ready,2farLEFT/viewerLEFT emptyhandlifts,3twofingerseal aheadchestpartiallyhidden,4gathers,5RELEASE openLEFTpalm towardup-screenaway,6followthrough,7lower,8ready. RIGHT/viewerRIGHThandkeepsONEswordLOWoutsidehipall8,nohandoff. Keepbluebackvest and longhair/backribbonvisible, nofrontface. Cell9unusedstandingMASTERCONTROL samebodyscale. No VFX/glow/grid/shadow. Camera FULL BACK throughout; small natural shoulder twist allowed but do not reveal face/front chest. No grids/guides/shadows/trails/effects in final.",
+      "referenced_image_paths": [
+        "N.master4x.png",
+        "templates/cast.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T20:02:46.908Z",
+    "resultPath": "sheets/cast.png"
+  }
+]

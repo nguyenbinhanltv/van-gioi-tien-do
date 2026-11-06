@@ -1,0 +1,67 @@
+[
+  {
+    "clip": "idle",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges. EXACT3columns x3rows. Cells1-8 back-threequarter standing breath loop, feetfixed, tiny1-2unit shoulder/hair/ribbon/sash rise/fall, SAME208unit body +/-3%, swordlowviewerRIGHT throughout. Cell8 into1 seamless. Cell9 unused STANDING MASTER CONTROL, sameheadsize/physicalscale.",
+      "referenced_image_paths": [
+        "NE.master4x.png",
+        "templates/idle.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:34:24.737Z",
+    "resultPath": "sheets/idle.png"
+  },
+  {
+    "clip": "meditate",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges. EXACT3columns x3rows. Cells1-8 seatedlotus seen from BACK THREEQUARTER facingup-right, crossedlegs and flowingrobe, headtop96/seatsole232/pelvis200; samephysicalheadsize as standing master, NEVERenlarge seatedbody tofillcell. Swordlaid beside viewerRIGHTknee, oneblade, emptyhipscabbardviewerLEFT. Tinybreathing only. Cell9 unused standingMASTERCONTROL top24/sole232 physical208units.",
+      "referenced_image_paths": [
+        "NE.master4x.png",
+        "templates/meditate.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:34:24.737Z",
+    "resultPath": "sheets/meditate.png"
+  },
+  {
+    "clip": "walk",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges. EXACT6columns x2rows,12frame WALK AWAY towardupperRIGHT, fixedbackthreequarter camera. Cells1-6 anatomicalLEFT/viewerLEFT leg leads contact/down/pass/latepass/toeoff/precontact; cells7-12 anatomicalRIGHT/viewerRIGHT leg leads samephases. CyanRfootviewerRIGHT/amberLfootviewerLEFT ghosts indicate diagonal depth travel. Alternate visible boots/knees naturally underlongrobe; shortstride, backrobe split follows legs, hairback remainslong. SwordLOWviewerRIGHT samehand/carry all12, never crossesbehindtootherhand. Same208unit figure +/-3%, sameheadsize, no bigcrouch. Cell12 into1 seamless.",
+      "referenced_image_paths": [
+        "NE.master4x.png",
+        "templates/walk.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:34:24.737Z",
+    "resultPath": "sheets/walk.png"
+  },
+  {
+    "clip": "run",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges. EXACT6columns x2rows,12frame RUN AWAY upperRIGHT, backthreequarter view fixed. Cells1-6 anatomicalLEFT/viewerLEFT leads contact/down/pass/toeoff/up/precontact; cells7-12 anatomicalRIGHT/viewerRIGHT leads samephases. Clearly alternate boot/knee leading acrosshalves, follow cyanRviewerRIGHT/amberLviewerLEFT footghosts. Shortstride longrobed swordsman, shallowknees, slightforwardlean away, backrobe follows leadingthigh/flaresbehind; no trousersballoons. Keep bun-to-lowestboot208units +/-3% all12, avoid hightuckedknee shrinking figure; sameheadsize. SwordlowviewerRIGHT all12 samehand/carry. Seamless12to1.",
+      "referenced_image_paths": [
+        "NE.master4x.png",
+        "templates/run.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:34:24.737Z",
+    "resultPath": "sheets/run.png"
+  },
+  {
+    "clip": "dash",
+    "call": {
+      "prompt": "Production 2D isometric cultivation MMO sprite sheet, Kiếm tu concept A. Image1 MASTER authoritative NORTH-EAST view: BACK THREE-QUARTER, character facing AWAY and toward screenRIGHT/up-right. Show blue vest BACK and long dark hair down the back; only a small cheek/ear sliver on viewerRIGHT as master, NO front face/chest, NO SE front threequarter, NO pure profile. Same slim physical proportions, hairbun/jadepin/blue ribbon tails, long muted slate-blue sleeveless vest with narrow gold trim and back centre split, ivory sleeves/innerrobe/loose trousers, dark ANKLE boots, navy sash, pendant, empty scabbard on viewerLEFT hip. AnatomicalRIGHT/near sword arm is VIEWER-RIGHT in this back view; SAME hand carries ONE thin straight jian LOW outside viewer-right hip, blade down/out-right like master. Never switch hand/carry or show a second scabbard hilt. Fine dark grey-brown outlines, restrained painterly NW lighting, no armour/floral redesign. Image2 TEMPLATE is ONLY positional guidance: equal256unit square cells, pelvis axis124.61, standing headtop24/lowestsole232, physical figure208units, sameheadsize and limb lengths allframes, +/-3% upright height. Lower head/waist guides mean genuinely seated/collapsed poses, not enlargement. FULL figure and sword inside each cell. FINISHED sheet is one uninterrupted PERFECT #ff00ff MAGENTA field with separated figures: ABSOLUTELY NO black grid/panel borders, dashed guide lines, markers/ticks, text/numbers, floor/shadow, effects/glow/trails/streaks/blur. Erase ALL template marks, even at outer edges. EXACT4columns x2rows. Cells1-6 backthreequarter DASH away/up-right:1ready,2shallowload,3push,4burstlean,5brake,6ready. Samephysicalheadsize/scale, robe/hairtrailsback naturally, noFX. SwordlowviewerRIGHT always. Cells7/8 unused STANDING MASTER CONTROLS top24/sole232 height208units.",
+      "referenced_image_paths": [
+        "NE.master4x.png",
+        "templates/dash.template.png"
+      ],
+      "transparent_background": false
+    },
+    "startedUtc": "2026-11-06T19:34:24.737Z",
+    "resultPath": "sheets/dash.png"
+  }
+]

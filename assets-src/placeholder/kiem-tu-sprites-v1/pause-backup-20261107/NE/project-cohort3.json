@@ -1,0 +1,78 @@
+{
+  "character": "kiem-tu",
+  "direction": "NE",
+  "stem": "kiemtu",
+  "master": "NE.master4x.png",
+  "slice": {
+    "key": "auto",
+    "inset": 0,
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "channel",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.4,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "calibration": {
+        "referenceHeight": 359
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 3,
+      "frames": 4,
+      "durationSec": 0.2,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.png",
+      "calibration": {
+        "referenceHeight": 429
+      }
+    },
+    {
+      "name": "die",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 0.8,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "calibration": {
+        "referenceHeight": 374
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 5,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "calibration": {
+        "referenceHeight": 272
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "calibration": {
+        "referenceHeight": 369
+      }
+    }
+  ]
+}

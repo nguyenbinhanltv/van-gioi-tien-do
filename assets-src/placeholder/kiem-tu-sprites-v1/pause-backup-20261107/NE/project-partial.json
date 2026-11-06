@@ -1,0 +1,122 @@
+{
+  "character": "kiem-tu",
+  "direction": "NE",
+  "stem": "kiemtu",
+  "master": "NE.master4x.png",
+  "slice": {
+    "key": "auto",
+    "inset": 0,
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "calibration": {
+        "referenceHeight": 363
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 3,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "calibration": {
+        "referenceHeight": 373
+      },
+      "exceptions": {
+        "0": "seated lotus; fixed standing-control scale",
+        "1": "seated lotus; fixed standing-control scale",
+        "2": "seated lotus; fixed standing-control scale",
+        "3": "seated lotus; fixed standing-control scale",
+        "4": "seated lotus; fixed standing-control scale",
+        "5": "seated lotus; fixed standing-control scale",
+        "6": "seated lotus; fixed standing-control scale",
+        "7": "seated lotus; fixed standing-control scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "calibration": {
+        "referenceFrames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "manifest": "templates/walk.template.json"
+    },
+    {
+      "name": "run",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "calibration": {
+        "referenceFrames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "manifest": "templates/run.template.json"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheet": "sheets/dash.png",
+      "calibration": {
+        "referenceHeight": 362
+      },
+      "exceptions": {
+        "1": "dash load/push/flight/braking",
+        "2": "dash load/push/flight/braking",
+        "3": "dash load/push/flight/braking",
+        "4": "dash load/push/flight/braking"
+      }
+    }
+  ]
+}

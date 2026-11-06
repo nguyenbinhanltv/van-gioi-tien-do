@@ -1,0 +1,59 @@
+{
+  "format": "vgtd-contact-annotation",
+  "version": 1,
+  "clip": "run",
+  "dir": "E",
+  "cellConvention": "0based",
+  "source": "Visual review of selected run source sheet; phase-based R firsthalf/L secondhalf. Ambiguous side reversal remains in manual art backlog.",
+  "contacts": {
+    "R": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "L": [
+      6,
+      7,
+      10,
+      11
+    ]
+  },
+  "excluded": [
+    {
+      "cells": [
+        2,
+        3
+      ],
+      "side": "R",
+      "reason": "Leading knee raised, forward boot airborne; rear dangling toe is not a full planted stance."
+    },
+    {
+      "cells": [
+        8,
+        9
+      ],
+      "side": "L",
+      "reason": "Leading knee raised, forward boot airborne; earlier half-cycle template falsely marked it planted."
+    }
+  ],
+  "includedExtra": [
+    {
+      "cells": [
+        4,
+        5
+      ],
+      "side": "R",
+      "reason": "Leading boot sole flat below extended shin in selected source; contact repeats before phase change, manual motion defect remains."
+    },
+    {
+      "cells": [
+        10,
+        11
+      ],
+      "side": "L",
+      "reason": "Leading boot sole flat below extended shin; ghost position may not match and must remain a finding."
+    }
+  ],
+  "note": "Contact labels do not change any source pixels, gameplay speed,ghost positions or QA tolerances; this is not a zero-slide claim."
+}

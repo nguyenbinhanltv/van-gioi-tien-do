@@ -1,0 +1,122 @@
+{
+  "1x/idle": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "1x/meditate": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "1x/walk": {
+    "frames": 20,
+    "centiseconds": 67
+  },
+  "1x/run": {
+    "frames": 15,
+    "centiseconds": 50
+  },
+  "1x/dash": {
+    "frames": 8,
+    "centiseconds": 27
+  },
+  "1x/sword_fly": {
+    "frames": 20,
+    "centiseconds": 67
+  },
+  "1x/attack": {
+    "frames": 13,
+    "centiseconds": 43
+  },
+  "1x/cast": {
+    "frames": 15,
+    "centiseconds": 50
+  },
+  "1x/channel": {
+    "frames": 12,
+    "centiseconds": 40
+  },
+  "1x/hit": {
+    "frames": 6,
+    "centiseconds": 20
+  },
+  "1x/die": {
+    "frames": 24,
+    "centiseconds": 80
+  },
+  "1x/tribulation": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "1x/emote": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "1x/attack_2": {
+    "frames": 13,
+    "centiseconds": 43
+  },
+  "1x/attack_3": {
+    "frames": 13,
+    "centiseconds": 43
+  },
+  "2x/idle": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "2x/meditate": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "2x/walk": {
+    "frames": 20,
+    "centiseconds": 67
+  },
+  "2x/run": {
+    "frames": 15,
+    "centiseconds": 50
+  },
+  "2x/dash": {
+    "frames": 8,
+    "centiseconds": 27
+  },
+  "2x/sword_fly": {
+    "frames": 20,
+    "centiseconds": 67
+  },
+  "2x/attack": {
+    "frames": 13,
+    "centiseconds": 43
+  },
+  "2x/cast": {
+    "frames": 15,
+    "centiseconds": 50
+  },
+  "2x/channel": {
+    "frames": 12,
+    "centiseconds": 40
+  },
+  "2x/hit": {
+    "frames": 6,
+    "centiseconds": 20
+  },
+  "2x/die": {
+    "frames": 24,
+    "centiseconds": 80
+  },
+  "2x/tribulation": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "2x/emote": {
+    "frames": 30,
+    "centiseconds": 100
+  },
+  "2x/attack_2": {
+    "frames": 13,
+    "centiseconds": 43
+  },
+  "2x/attack_3": {
+    "frames": 13,
+    "centiseconds": 43
+  }
+}

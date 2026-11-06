@@ -1,0 +1,2596 @@
+{
+  "pausedUtc": "2026-11-06T20:04:48Z",
+  "note": "Backup only. Text paths made relative; original and saved hashes distinguish sanitization. No new generation after pause.",
+  "files": [
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/calls-1.json",
+      "originalSha256": "f5292e561696e33acbce71981c56e1b0315e27bc2101d5e6fa9bd310f5e6e35a",
+      "savedSha256": "25086a6a3716be92fc7751f8b6195a64494f01ce8e557682415fcc37a41d7ec8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/calls-2.json",
+      "originalSha256": "6dd8125bccccf96d6aaef5ef1a5a69ebc78f5ca7b3a0308ae754f1e765b321e7",
+      "savedSha256": "b09c2ece0d78fd32ed4da51603b305cede5960083d45778c2abcac6c2de9fc62"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/calls-3.json",
+      "originalSha256": "52340052bad2afcc58f9528a063f6dd5f5fa8ef498a50d41f12ff5c55624460b",
+      "savedSha256": "f5a6874d350bb1ef3d7ca2dc7e4b722af04af3e39130fbd0dae6c49a018f147b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/clips.json",
+      "originalSha256": "f2e3224a1aece95740ccb526fc31274a906cded4db87fdc64f3c2a06136bd86a",
+      "savedSha256": "bcdc23d5eb422f7c75ba9603a2c521e87e8043ebebc14ea6177b748ef4773b15"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/NE.master4x.png",
+      "originalSha256": "f61fbe2af2b0469351608aee492850716c8576778c385b8870d9576157d0f7d3",
+      "savedSha256": "f61fbe2af2b0469351608aee492850716c8576778c385b8870d9576157d0f7d3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/NE.master4x.source.json",
+      "originalSha256": "9e7ca61d2a07e99e8be5606942266b27206dbdee59bc9d8a3a36dca5e523a424",
+      "savedSha256": "2db4b3dbcaa761a031ec39dcb7f9aad02375826ca7efed10f764f8db81fed386"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/project-cohort2.json",
+      "originalSha256": "fc481a838eefdda009f8ba5f0aba4b74fcc0b7f44f626d6717930a2af2565817",
+      "savedSha256": "4961d735898a993e52598cfcdc2f2ca2ee1372d13d7ce1a3531ecab833bf20f4"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/project-cohort3.json",
+      "originalSha256": "ab21974fd7821252ea3fdf7e644cfbc2bd8da4e5e548e4a5ebbb29cb9d11de51",
+      "savedSha256": "84354e5d945acbd0d08eb5180d71efc39f5064d2edeeb4e1a27722a6fe853230"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/project-full.json",
+      "originalSha256": "a6e55b11c983cd90d597f2f9fdec0bfdb674d32d91bec15d03a8cc408aaed878",
+      "savedSha256": "89aef9fc72f5ba6e417c37ec2fb7a2d05ed5ad01c0cc0dee449586b03ef8a67b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/project-partial.json",
+      "originalSha256": "b37d7b2c5ab0761c5e7ddc133a3881b99783c6540e1fe183dce3ed4f35d26f69",
+      "savedSha256": "4665d34f1c5b93a266cd7c4aa62b1084f0a829377ae837dd8886f6975d3bcdda"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/project-run-repaired1.json",
+      "originalSha256": "1ca2a463dbaa2ae550d75ad5c75494e2d7ff7b83c7c095f7469fca93b4413897",
+      "savedSha256": "573a8e8d22b27b5c79162f126da2faeb446b919ae66615e20cfe97bf94186d37"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/quality-backlog.json",
+      "originalSha256": "b32512fb0c20ee7798a81a1504e9a17de74dadc268e4eb34234da08a20120b82",
+      "savedSha256": "b32512fb0c20ee7798a81a1504e9a17de74dadc268e4eb34234da08a20120b82"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/quality-backlog.md",
+      "originalSha256": "853b5f8e01a267c03eba329c148d348ca5d88929b94cbc42f5f24d1e8c75dcbf",
+      "savedSha256": "853b5f8e01a267c03eba329c148d348ca5d88929b94cbc42f5f24d1e8c75dcbf"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/report-1.json",
+      "originalSha256": "7da8546b850990cdac8d5f38b9eb1cbfacd0d2dae7932d7a0894ec4b0decf9dc",
+      "savedSha256": "0077d8f8bf48d56b9f7286654fbfc28a36149dadcdb532978ca9922c8f700425"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/report-2.json",
+      "originalSha256": "109e495d926948abf9f1f81f7537943750ff41fd2849f557726d06dcdd165533",
+      "savedSha256": "ba8ac1be06baef031714fcb00f95187cf12c7a65c04fd96af5e811cb0b5d99a0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/report-3.json",
+      "originalSha256": "dfbe9b68efedf14f3bd64ed44122b16d43a32eeffa90e4841b9d52fb4f7f90ab",
+      "savedSha256": "72d7337e0b627d495cc5f0deb32a389472ffe9ad45c8c53836b2b6dad3622670"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run-height-repair1.guide.png",
+      "originalSha256": "ecdca22bd7c755601e5fc6a995d482302c9bf7eef3e81eb020c518c7a0a43c84",
+      "savedSha256": "ecdca22bd7c755601e5fc6a995d482302c9bf7eef3e81eb020c518c7a0a43c84"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run-height-repair1.mask.png",
+      "originalSha256": "c6934d5a02d68636a6d1b86353db496fc13a788520c17ef4cae24f91ae79e68c",
+      "savedSha256": "c6934d5a02d68636a6d1b86353db496fc13a788520c17ef4cae24f91ae79e68c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run-height-repair1.targets.json",
+      "originalSha256": "d6b3deef331481cc547a90991c51925fb8aea749021c2c56259de8961ec5b506",
+      "savedSha256": "cd1188e2c685bcbac1d3866e6e31a9b27ce1dd05f8f289d808121b8e6a36998f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run-repair1-call.json",
+      "originalSha256": "979dc32cf9e8b8c8696e2afbf4f3ed97bf7f3fd6003af49a88ada83a36136f0e",
+      "savedSha256": "cf0a8b72a87d8fef0c2b4c63e8eba86fc9d536589b64956916b0e5920ec7f2cd"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run.repaired1.png",
+      "originalSha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308",
+      "savedSha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/run.repaired1.proof.json",
+      "originalSha256": "fd9553c58464dc25ee4855af6d056f64c2cbe1273285b9f6f0599a3b8f369956",
+      "savedSha256": "eac0358d7dfd9fab1f8797102267f24a6d7c341ab3e8bcdcbbdc97d241db4f24"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack.template.json",
+      "originalSha256": "759d59ce175b790cedd337bfd83b1cd89f93b3d82214f33f61eeaef8489c67cb",
+      "savedSha256": "7cfc49a103c4cae69e3034edf42ea7070cf138997520723e97c8b550826a6380"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack.template.png",
+      "originalSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693",
+      "savedSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack_2.template.json",
+      "originalSha256": "a59a7626d637720ad3ea869da8a068878d615691bab6b04efe87bba7d2ce73a4",
+      "savedSha256": "9ad087aae0b1c439c095661f9e059620bb0afe96a06d33263e84df9e28a26c88"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack_2.template.png",
+      "originalSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693",
+      "savedSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack_3.template.json",
+      "originalSha256": "6925caa2ee82a5dc0aa7a83eb44dcf212ac39e77a879c2df036e26e22cc050a9",
+      "savedSha256": "144a64269a84e3653106c4adeedece76aa1961d987306ba0aa5feb58fad606e9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/attack_3.template.png",
+      "originalSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693",
+      "savedSha256": "8e281bb6ed8b19962afcd96eec9208e089e72325a3450b27447f18aafb68e693"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/cast.template.json",
+      "originalSha256": "205227b1e32dd94503d383c967ace995a38b581cf028f5acc021e54af159a522",
+      "savedSha256": "d604f75e42ccc1f72c141580c0345ae2f6fe40efbdebd5fe2ac32f65af9f3189"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/cast.template.png",
+      "originalSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0",
+      "savedSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/channel.template.json",
+      "originalSha256": "5f22a258352708168ca087b3025272c7af9340758c7af382633efccea67bdaaa",
+      "savedSha256": "da04ae3e515feefed9255a343d8d713841ff5ec10cb1e462c1de6e9242f49988"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/channel.template.png",
+      "originalSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0",
+      "savedSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/dash.template.json",
+      "originalSha256": "a140b584bc5b3240e524282416520c7f242b67c7192bb4b5f247d8a350289939",
+      "savedSha256": "6ea72a2aa91da0b79ae5301ba649c2dbd1d4da18f2754cbad5e350dcaad93812"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/dash.template.png",
+      "originalSha256": "2f141f0eef64a6270e923ebe876c20bef596b88987ebc33730b1d34a2b1f66f1",
+      "savedSha256": "2f141f0eef64a6270e923ebe876c20bef596b88987ebc33730b1d34a2b1f66f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/die.template.json",
+      "originalSha256": "187c70d8c7a6c5b086561d5b0d4d3b3ff9157bd06123ce8023ae7a55e5da890c",
+      "savedSha256": "677ff52ba2372f96f971c980ecd18e557fbe679e2a8079eecc27fdef6f440a9a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/die.template.png",
+      "originalSha256": "b7af4adb617724e288f6b10513024b851e64a0e6000c3a9e33fe40ec8ae93dbb",
+      "savedSha256": "b7af4adb617724e288f6b10513024b851e64a0e6000c3a9e33fe40ec8ae93dbb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/emote.template.json",
+      "originalSha256": "0ef25a2695cf641199c454202d8507d0614c0f5a14c172e5abb9fe2e33883d4e",
+      "savedSha256": "88c81d384ef4b2a585e7ff8bb0453525fc2796db5c774106fa414cc6ae3fc238"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/emote.template.png",
+      "originalSha256": "b3930962740d17cc2941b657e8f9c3f74ff6226e59ca48a4d115190a124d2a83",
+      "savedSha256": "b3930962740d17cc2941b657e8f9c3f74ff6226e59ca48a4d115190a124d2a83"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/hit.template.json",
+      "originalSha256": "7de085c679fb3c8fa7ed659873cba2b5bc9e3ab5501771102bd001b4506960f9",
+      "savedSha256": "1ab3cc7f14a94defc800b375f358cf2226faedb374efbe61ff246364637a809d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/hit.template.png",
+      "originalSha256": "406a19a7f33a9b852d9eb73f334e765cc8569656457392ed27b1eca3deb3aefb",
+      "savedSha256": "406a19a7f33a9b852d9eb73f334e765cc8569656457392ed27b1eca3deb3aefb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/idle.template.json",
+      "originalSha256": "2244e291163a2ee1dd7855884660992e0ec773cbcce77ba3f113e1b2108cbec1",
+      "savedSha256": "939d486a8e2bedf9ed08eeaadaa22a614838e7c523eb164ac186bc69da20725b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/idle.template.png",
+      "originalSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0",
+      "savedSha256": "b1bd199ff59f013e250cef4628b6acf3b5097b6e0fd950616471f2db5f2ca8c0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/meditate.template.json",
+      "originalSha256": "8421d3b3dc98f1728e44ab10d7ee075a0f9d919f6df070f4ff43139c46052580",
+      "savedSha256": "11944ef57192fd09ccf1c4765e94ecef3e6b9232a5028395058d74deaf0a104a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/meditate.template.png",
+      "originalSha256": "a655bbad550a7229c3bfb1ef1746483758a5306c44e24e92875b6890db4e92e8",
+      "savedSha256": "a655bbad550a7229c3bfb1ef1746483758a5306c44e24e92875b6890db4e92e8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/run.template.json",
+      "originalSha256": "24099a57451aa4891be66e4daabd4b2251cb4a6225f0212fe9b5979eabe4c83f",
+      "savedSha256": "cf04d7c202bcc0946d16bbfd5da887fefb86d00490066c6e017470bbd4dc20bd"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/run.template.png",
+      "originalSha256": "f3bf2709fa7f1637dcb4394eb9e092008392ebec0c7b42f36762fe2c1e5c1f82",
+      "savedSha256": "f3bf2709fa7f1637dcb4394eb9e092008392ebec0c7b42f36762fe2c1e5c1f82"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/sword_fly.template.json",
+      "originalSha256": "9f92c54eb0dbf0a27b9ee23dbe25b385a09895905f4537247ad70518568fbfe3",
+      "savedSha256": "342ffcd2c3e5df546b8dd750ef44e4b855069a43b0ebfa13ff9634787c8b12b1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/sword_fly.template.png",
+      "originalSha256": "ded0a965e54ab60d59cb7b2756bfe0d9018308ce7c2c34014aa7266ced0c8402",
+      "savedSha256": "ded0a965e54ab60d59cb7b2756bfe0d9018308ce7c2c34014aa7266ced0c8402"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/tribulation.template.json",
+      "originalSha256": "65fba8a0f91618acf54001ea6f3293467a9ba6cebd78546f20aebb1c64154670",
+      "savedSha256": "2212e6117efc35a1022c812643502db02d7eb6f6195fff7b1101f70fbe3949ef"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/tribulation.template.png",
+      "originalSha256": "793c30621f2a6a3e9273bdf24d36afc80bf08fe253a8b1c85daa7689d0d4ae5f",
+      "savedSha256": "793c30621f2a6a3e9273bdf24d36afc80bf08fe253a8b1c85daa7689d0d4ae5f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/walk.template.json",
+      "originalSha256": "8097100ee63831717bf511410736d3ce0e265baafe10e566a1f00423e35f2e53",
+      "savedSha256": "7db5e098839ab29225af99d70407cfd8b0728353ba1ca36a4676fe8c2edb9b52"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/templates/walk.template.png",
+      "originalSha256": "3a74c3f5b799c7a6ec4199dd95976a45105fbfbe4de0d148ca22354c39b3afdc",
+      "savedSha256": "3a74c3f5b799c7a6ec4199dd95976a45105fbfbe4de0d148ca22354c39b3afdc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/export/kiemtu_NE.sprite.json",
+      "originalSha256": "938c880779e93af3aa12536370ecf12793b528690ae2ec12562fabdb44cf8de5",
+      "savedSha256": "eee0d71c344e7c12ea77db64ef4e81e670d59ca271e540937e321242bd4fcfbc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/export/kiemtu_NE_ske.json",
+      "originalSha256": "991aac2ab4d95c30e9a2a78dd33eb0b5944359e507c22c298aa57bf07410c474",
+      "savedSha256": "01b40b90dcd8cc4c0ae68cd7a3fef909aab851a8a1fc206162267b49067964fb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/export/kiemtu_NE_tex.json",
+      "originalSha256": "818e29179d0d93188c45ccc38ec292d1a09a1e861fbfb02dd43415e60655da29",
+      "savedSha256": "60215fa4fce0687e7fb3a2e07bb5374b863ce989f93ffbb517053622b4069c66"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/export/kiemtu_NE_tex.png",
+      "originalSha256": "dec206a5f643aef379627bd8c7e1bf2609528273bb17bd9f2ce06103ac9d44c6",
+      "savedSha256": "dec206a5f643aef379627bd8c7e1bf2609528273bb17bd9f2ce06103ac9d44c6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack.gif",
+      "originalSha256": "af01543da852840944d05fe686365e243170ed344ba2c83df6df8a3fe10e3b30",
+      "savedSha256": "af01543da852840944d05fe686365e243170ed344ba2c83df6df8a3fe10e3b30"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack.sheet.png",
+      "originalSha256": "474f2b1d3a6aed5ae9cd5010fea878a2268aaaf519bd0091f79b9864ae0e58a7",
+      "savedSha256": "474f2b1d3a6aed5ae9cd5010fea878a2268aaaf519bd0091f79b9864ae0e58a7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack_2.gif",
+      "originalSha256": "95674cb9124a6fe2f328d7c2a98bf4ad7f7caf1a3e643da1f7e27fa3f1ff44ea",
+      "savedSha256": "95674cb9124a6fe2f328d7c2a98bf4ad7f7caf1a3e643da1f7e27fa3f1ff44ea"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack_2.sheet.png",
+      "originalSha256": "c6f05dba1271f8b706272da8c3a541ef1e960a2dc4fe4e2714132e1ed77cd1d3",
+      "savedSha256": "c6f05dba1271f8b706272da8c3a541ef1e960a2dc4fe4e2714132e1ed77cd1d3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack_3.gif",
+      "originalSha256": "719b362df28b3ffe4f3b4d15bfc7bac9269ee2f8ce5f23b419d96ff6f39c92c6",
+      "savedSha256": "719b362df28b3ffe4f3b4d15bfc7bac9269ee2f8ce5f23b419d96ff6f39c92c6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/attack_3.sheet.png",
+      "originalSha256": "30454af14546f0cf105bb8e34a38a8856026c08aa964163c8cc1bc150000731e",
+      "savedSha256": "30454af14546f0cf105bb8e34a38a8856026c08aa964163c8cc1bc150000731e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/cast.gif",
+      "originalSha256": "24aa8853f569571f20e5410f574d60f5bbf88540d184a879ec28a3dab2a13ef3",
+      "savedSha256": "24aa8853f569571f20e5410f574d60f5bbf88540d184a879ec28a3dab2a13ef3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/cast.sheet.png",
+      "originalSha256": "9529af3fb1d180bec4130bcbb28903c51d19c5b97c49ddb5d586c094247ffd03",
+      "savedSha256": "9529af3fb1d180bec4130bcbb28903c51d19c5b97c49ddb5d586c094247ffd03"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/channel.gif",
+      "originalSha256": "b6e7796235b335171ac0577a5d41f065d012b72b87cffd51b315146a579f28f1",
+      "savedSha256": "b6e7796235b335171ac0577a5d41f065d012b72b87cffd51b315146a579f28f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/channel.sheet.png",
+      "originalSha256": "c4d545fb76733a0739c0c5a7362555ac3974da73800ba8796f71652bdfe68c18",
+      "savedSha256": "c4d545fb76733a0739c0c5a7362555ac3974da73800ba8796f71652bdfe68c18"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/dash.gif",
+      "originalSha256": "f4e1434844fc74944a0cffe5f1669421cbd20e98478fd3fc5ed8c00042fc5d1a",
+      "savedSha256": "f4e1434844fc74944a0cffe5f1669421cbd20e98478fd3fc5ed8c00042fc5d1a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/dash.sheet.png",
+      "originalSha256": "2e6611cd2f6bc061014b11d6cc52a69a1c2be4a8ddc55fc71e3f3c33acfe1a7b",
+      "savedSha256": "2e6611cd2f6bc061014b11d6cc52a69a1c2be4a8ddc55fc71e3f3c33acfe1a7b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/die.gif",
+      "originalSha256": "f4e7ea616646ec4e994b24c4b33f318cceef170a343a654477ef8791c313373e",
+      "savedSha256": "f4e7ea616646ec4e994b24c4b33f318cceef170a343a654477ef8791c313373e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/die.sheet.png",
+      "originalSha256": "6255bbd46355edd8303a02ca847f213ec99e01e9b000596660130f7b9e7e5c92",
+      "savedSha256": "6255bbd46355edd8303a02ca847f213ec99e01e9b000596660130f7b9e7e5c92"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/emote.gif",
+      "originalSha256": "c8abf270ea5ce084d231d46e374ba22cbbf732ad61402a0cf1cf70627b915cfc",
+      "savedSha256": "c8abf270ea5ce084d231d46e374ba22cbbf732ad61402a0cf1cf70627b915cfc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/emote.sheet.png",
+      "originalSha256": "80bc052bc1506f4221606a12b75dfd27ffcd24d570348b8fb74ac9ddd7621892",
+      "savedSha256": "80bc052bc1506f4221606a12b75dfd27ffcd24d570348b8fb74ac9ddd7621892"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/hit.gif",
+      "originalSha256": "25a247c8f4a9abc613b9812b474c566abed1ade29ba978df6a28b3c39275a2d2",
+      "savedSha256": "25a247c8f4a9abc613b9812b474c566abed1ade29ba978df6a28b3c39275a2d2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/hit.sheet.png",
+      "originalSha256": "9ca5d9810177571ee0b04f18c599d27d523c524eea3018c17717da14780bef94",
+      "savedSha256": "9ca5d9810177571ee0b04f18c599d27d523c524eea3018c17717da14780bef94"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/idle.gif",
+      "originalSha256": "5dc3c0a26adffd34a1e42a9a90bf5923b8ced2f7f11c29d06d1eb4bc7ebc3203",
+      "savedSha256": "5dc3c0a26adffd34a1e42a9a90bf5923b8ced2f7f11c29d06d1eb4bc7ebc3203"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/idle.sheet.png",
+      "originalSha256": "237fa7d05cdc50398b9170b1cb7fe36eda58b87c0227500784d1c213fd36d5df",
+      "savedSha256": "237fa7d05cdc50398b9170b1cb7fe36eda58b87c0227500784d1c213fd36d5df"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/index.json",
+      "originalSha256": "22825acf7e69e64efb349facab24aba09851c071411f91dec4bfd44c40334be0",
+      "savedSha256": "bddf9579c6a9524ab97048babeaac30d8d26854a3bf8505e51bcc577d62c4971"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/meditate.gif",
+      "originalSha256": "31c593e9c57fac0e8caf8f9374cb9de2216b053dac258b449ee0c66a9a33d54b",
+      "savedSha256": "31c593e9c57fac0e8caf8f9374cb9de2216b053dac258b449ee0c66a9a33d54b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/meditate.sheet.png",
+      "originalSha256": "3d571cfa6ee15a835fc340dceceef9000f80284b9d4839e48d4fbc06dec0aa62",
+      "savedSha256": "3d571cfa6ee15a835fc340dceceef9000f80284b9d4839e48d4fbc06dec0aa62"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/run.gif",
+      "originalSha256": "b320933817e33332421c66c050548f8e12320633227eddde67885aa38b63f2af",
+      "savedSha256": "b320933817e33332421c66c050548f8e12320633227eddde67885aa38b63f2af"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/run.sheet.png",
+      "originalSha256": "0f9fab3a65c7b8127c5800b9b6677ec1b6e2e0a8d099ae75446e2f193f271be7",
+      "savedSha256": "0f9fab3a65c7b8127c5800b9b6677ec1b6e2e0a8d099ae75446e2f193f271be7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/sword_fly.gif",
+      "originalSha256": "c698e0b4c57786212d538c470baafdbc16635b0052fc855834d09b6e9f745462",
+      "savedSha256": "c698e0b4c57786212d538c470baafdbc16635b0052fc855834d09b6e9f745462"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/sword_fly.sheet.png",
+      "originalSha256": "3dc643ff7fabe7835f71f95d9f6de4b5706e3887763d70cace419431b5f35cd7",
+      "savedSha256": "3dc643ff7fabe7835f71f95d9f6de4b5706e3887763d70cace419431b5f35cd7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/tribulation.gif",
+      "originalSha256": "e0af9117950e612d2894becd0bf74989d56dc320d3eb1df70739dfc28f803fe7",
+      "savedSha256": "e0af9117950e612d2894becd0bf74989d56dc320d3eb1df70739dfc28f803fe7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/tribulation.sheet.png",
+      "originalSha256": "caae67a2244b3c8bb40cb0dd1447689143f9414ea62dff177552dd1cbb048ace",
+      "savedSha256": "caae67a2244b3c8bb40cb0dd1447689143f9414ea62dff177552dd1cbb048ace"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/walk.gif",
+      "originalSha256": "9f032962d80f25f4b687d166e4981805876f6ba8a2afc888cd964d989e62239c",
+      "savedSha256": "9f032962d80f25f4b687d166e4981805876f6ba8a2afc888cd964d989e62239c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/capture-2x/walk.sheet.png",
+      "originalSha256": "88a8e638679ad696764d96bb1ff8b6469e1b437be595a4becb8d3ca285cbec44",
+      "savedSha256": "88a8e638679ad696764d96bb1ff8b6469e1b437be595a4becb8d3ca285cbec44"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/idle.initial.png",
+      "originalSha256": "fd59d76cfdd4911a8fd1da5a24e3e03b007cbc5555438142241f44f9bf1f1ab7",
+      "savedSha256": "fd59d76cfdd4911a8fd1da5a24e3e03b007cbc5555438142241f44f9bf1f1ab7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/meditate.initial.png",
+      "originalSha256": "73c3fcbb5a64fb5288323cbc398830f2115660e3e2d8fa1c67fd5db7d83782ba",
+      "savedSha256": "73c3fcbb5a64fb5288323cbc398830f2115660e3e2d8fa1c67fd5db7d83782ba"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/walk.initial.png",
+      "originalSha256": "cfb0cf6d55c322736c6c4c1b02cb11252864bae14c699c74d76ffd6dc348831f",
+      "savedSha256": "cfb0cf6d55c322736c6c4c1b02cb11252864bae14c699c74d76ffd6dc348831f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/run.initial.png",
+      "originalSha256": "b83342430231827d7bd502966fe60d9447c1eb3ac22f956982ebad98b79fc0cc",
+      "savedSha256": "b83342430231827d7bd502966fe60d9447c1eb3ac22f956982ebad98b79fc0cc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/dash.initial.png",
+      "originalSha256": "44f7ab3a69bc94f187e67489d0f913d2d2eb1148858b1293f305a864c56e0dea",
+      "savedSha256": "44f7ab3a69bc94f187e67489d0f913d2d2eb1148858b1293f305a864c56e0dea"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/sword_fly.initial.png",
+      "originalSha256": "64700f88a1b3631f79b4ba411fe6d4f80d9ef32c2562dea661275b80fbfd57f1",
+      "savedSha256": "64700f88a1b3631f79b4ba411fe6d4f80d9ef32c2562dea661275b80fbfd57f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/attack.initial.png",
+      "originalSha256": "443915ab9c0793aa1da97531c0911a9eaf7c7d536c8f3656ec276db33c6b6527",
+      "savedSha256": "443915ab9c0793aa1da97531c0911a9eaf7c7d536c8f3656ec276db33c6b6527"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/attack_2.initial.png",
+      "originalSha256": "1082d5fc888782489f84f7b2cff4fec097a8e05779fd47f8aff192697b8107bb",
+      "savedSha256": "1082d5fc888782489f84f7b2cff4fec097a8e05779fd47f8aff192697b8107bb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/attack_3.initial.png",
+      "originalSha256": "177a73f3c9f28117f29b07a5df89a9745711bc000741c8696c0197474de84493",
+      "savedSha256": "177a73f3c9f28117f29b07a5df89a9745711bc000741c8696c0197474de84493"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/cast.initial.png",
+      "originalSha256": "05d3007150d5eafd5bc2f1ec50340885cd78ed0e0e34340bbec772e84dcb57f8",
+      "savedSha256": "05d3007150d5eafd5bc2f1ec50340885cd78ed0e0e34340bbec772e84dcb57f8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/channel.initial.png",
+      "originalSha256": "8dafcc9e5bdb8c9eab3c9fbbd092a3d1439515f8ffa79797329c1c43da8ac881",
+      "savedSha256": "8dafcc9e5bdb8c9eab3c9fbbd092a3d1439515f8ffa79797329c1c43da8ac881"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/hit.initial.png",
+      "originalSha256": "1ff2d7f3b0966e39549cb837e073e54f93026e83c30fd10071e6c2fe4dac6bef",
+      "savedSha256": "1ff2d7f3b0966e39549cb837e073e54f93026e83c30fd10071e6c2fe4dac6bef"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/die.initial.png",
+      "originalSha256": "f07f89310ea3eef26bbe18f76ca4ac10220ba5d3e2de30514aa92da0b917037f",
+      "savedSha256": "f07f89310ea3eef26bbe18f76ca4ac10220ba5d3e2de30514aa92da0b917037f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/tribulation.initial.png",
+      "originalSha256": "820d4e96b6251ad47c53f3d73789471b80aa8a8d3bc58c4a5d955a38d36ffac3",
+      "savedSha256": "820d4e96b6251ad47c53f3d73789471b80aa8a8d3bc58c4a5d955a38d36ffac3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/emote.initial.png",
+      "originalSha256": "4768a03629ac2eb60ed686e80b3f66bfd5e0d4f91ff3318910997f0caa50479a",
+      "savedSha256": "4768a03629ac2eb60ed686e80b3f66bfd5e0d4f91ff3318910997f0caa50479a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/raw/run.repair1.png",
+      "originalSha256": "4b68f8b7b58140d2818a1e4d85d4e6738684566357520588a874ce1e9704e12d",
+      "savedSha256": "4b68f8b7b58140d2818a1e4d85d4e6738684566357520588a874ce1e9704e12d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/idle.png",
+      "originalSha256": "fd59d76cfdd4911a8fd1da5a24e3e03b007cbc5555438142241f44f9bf1f1ab7",
+      "savedSha256": "fd59d76cfdd4911a8fd1da5a24e3e03b007cbc5555438142241f44f9bf1f1ab7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/meditate.png",
+      "originalSha256": "73c3fcbb5a64fb5288323cbc398830f2115660e3e2d8fa1c67fd5db7d83782ba",
+      "savedSha256": "73c3fcbb5a64fb5288323cbc398830f2115660e3e2d8fa1c67fd5db7d83782ba"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/walk.png",
+      "originalSha256": "cfb0cf6d55c322736c6c4c1b02cb11252864bae14c699c74d76ffd6dc348831f",
+      "savedSha256": "cfb0cf6d55c322736c6c4c1b02cb11252864bae14c699c74d76ffd6dc348831f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/run.png",
+      "originalSha256": "b83342430231827d7bd502966fe60d9447c1eb3ac22f956982ebad98b79fc0cc",
+      "savedSha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/dash.png",
+      "originalSha256": "44f7ab3a69bc94f187e67489d0f913d2d2eb1148858b1293f305a864c56e0dea",
+      "savedSha256": "44f7ab3a69bc94f187e67489d0f913d2d2eb1148858b1293f305a864c56e0dea"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/sword_fly.png",
+      "originalSha256": "64700f88a1b3631f79b4ba411fe6d4f80d9ef32c2562dea661275b80fbfd57f1",
+      "savedSha256": "64700f88a1b3631f79b4ba411fe6d4f80d9ef32c2562dea661275b80fbfd57f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/attack.png",
+      "originalSha256": "443915ab9c0793aa1da97531c0911a9eaf7c7d536c8f3656ec276db33c6b6527",
+      "savedSha256": "443915ab9c0793aa1da97531c0911a9eaf7c7d536c8f3656ec276db33c6b6527"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/attack_2.png",
+      "originalSha256": "1082d5fc888782489f84f7b2cff4fec097a8e05779fd47f8aff192697b8107bb",
+      "savedSha256": "1082d5fc888782489f84f7b2cff4fec097a8e05779fd47f8aff192697b8107bb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/attack_3.png",
+      "originalSha256": "177a73f3c9f28117f29b07a5df89a9745711bc000741c8696c0197474de84493",
+      "savedSha256": "177a73f3c9f28117f29b07a5df89a9745711bc000741c8696c0197474de84493"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/cast.png",
+      "originalSha256": "05d3007150d5eafd5bc2f1ec50340885cd78ed0e0e34340bbec772e84dcb57f8",
+      "savedSha256": "05d3007150d5eafd5bc2f1ec50340885cd78ed0e0e34340bbec772e84dcb57f8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/channel.png",
+      "originalSha256": "8dafcc9e5bdb8c9eab3c9fbbd092a3d1439515f8ffa79797329c1c43da8ac881",
+      "savedSha256": "8dafcc9e5bdb8c9eab3c9fbbd092a3d1439515f8ffa79797329c1c43da8ac881"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/hit.png",
+      "originalSha256": "1ff2d7f3b0966e39549cb837e073e54f93026e83c30fd10071e6c2fe4dac6bef",
+      "savedSha256": "1ff2d7f3b0966e39549cb837e073e54f93026e83c30fd10071e6c2fe4dac6bef"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/die.png",
+      "originalSha256": "f07f89310ea3eef26bbe18f76ca4ac10220ba5d3e2de30514aa92da0b917037f",
+      "savedSha256": "f07f89310ea3eef26bbe18f76ca4ac10220ba5d3e2de30514aa92da0b917037f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/tribulation.png",
+      "originalSha256": "820d4e96b6251ad47c53f3d73789471b80aa8a8d3bc58c4a5d955a38d36ffac3",
+      "savedSha256": "820d4e96b6251ad47c53f3d73789471b80aa8a8d3bc58c4a5d955a38d36ffac3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/emote.png",
+      "originalSha256": "4768a03629ac2eb60ed686e80b3f66bfd5e0d4f91ff3318910997f0caa50479a",
+      "savedSha256": "4768a03629ac2eb60ed686e80b3f66bfd5e0d4f91ff3318910997f0caa50479a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/NE/sheets/run.png",
+      "originalSha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308",
+      "savedSha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/calls-1.json",
+      "originalSha256": "f2542515c41ddc95702a201419cccdcdb2ee459e91bedbc8dd709e029cb03683",
+      "savedSha256": "dd56c365b0b0ef5c541eb84de48ad26f95a82e5a7caae7498f0203531df72b0b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/calls-2.json",
+      "originalSha256": "35b8e611dab48192321e3038a6b499bb49b68d7b166f8e37313bd02115dbd8fc",
+      "savedSha256": "e4544df4880549ebbda682b9523bb42e7d69703f71553aeb6631a3d7af4712f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/clips.json",
+      "originalSha256": "d2ba3afb15ac9b1fc6ff3d54eff2e0311eced224f274ab1f774db9c7d5ffc279",
+      "savedSha256": "bc02985508a4256c41e9aa7021565b5a70297d7da6b9c47e84eb476469a84198"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/N.master4x.png",
+      "originalSha256": "40b5414951e480e78cefa591b1c4d83118748959891d72a02b32f8f1d7a68db7",
+      "savedSha256": "40b5414951e480e78cefa591b1c4d83118748959891d72a02b32f8f1d7a68db7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/N.master4x.source.json",
+      "originalSha256": "d146a71d215e29cb4caf1344960ae9b310ffd208f440eb0363ec43cd6cfb0c78",
+      "savedSha256": "60dfee0aa2f0ad64020df3e353f52a36f6b7c9714240ba5538317d909830c18c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/project-partial.json",
+      "originalSha256": "a1d7aa3a6115d044a16c1506d73835ebb73c76ff4d75bc5b8d3665ccb94d4e9d",
+      "savedSha256": "8ca56a0a2ddaa1f03870f7b8c389d24831df1c3d429857fca3fd457abaddf480"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/report-1.json",
+      "originalSha256": "70b607f2df263851183c79c817c2be030d9c68fe95f125333d3ba56f301a5f7a",
+      "savedSha256": "4e803189532f576685b79ffb62c0e60d05d2a07311016d804f458627079d5af3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack.template.json",
+      "originalSha256": "c0cf628b844c1efe101fbc7166193826c4188dd35e2270b7327299fb2bb0da74",
+      "savedSha256": "7501084e53769d6d8520e8532fb3fc977aacc3b4335cd7b07e6fd412cf1c4f57"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack.template.png",
+      "originalSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197",
+      "savedSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack_2.template.json",
+      "originalSha256": "c8f8ffe2538f55406de8be334419513ec0aa687008e274e052f4edcac0267ed5",
+      "savedSha256": "2a8213b3b9738b0fa88330a7db438095eec8c82a3fd5e4307f13c6a3824cabef"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack_2.template.png",
+      "originalSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197",
+      "savedSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack_3.template.json",
+      "originalSha256": "f8e9ac00f4ca4766ca92b0557b31e86ae75651e22bc340bf5a7a57a23da2ddbb",
+      "savedSha256": "2f6196e7a1fa7fdacc46a0ff76f1513fabda163e076fc180b986d3735948ed0d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/attack_3.template.png",
+      "originalSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197",
+      "savedSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/cast.template.json",
+      "originalSha256": "950365dabf452409c472b58bbeb08a14a45872996b91017818205775aa3dbaf9",
+      "savedSha256": "dbea8c0e1fc5c18056b4d365dc220a38d41b646a0ed7432b2eac25f860ff0bbc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/cast.template.png",
+      "originalSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82",
+      "savedSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/channel.template.json",
+      "originalSha256": "ddc9a6a068ee3d4cb3cbf9137496937c4b4b16003bbb32b1c0ca8d780369028c",
+      "savedSha256": "dc833fa4bfab5d45c795d4a8ebddd2a628f330ee219217df373acba7430028dd"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/channel.template.png",
+      "originalSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82",
+      "savedSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/dash.template.json",
+      "originalSha256": "46994dce689b4fa70bc81a171a5bcfd619b40404de4ad0eddc3cbf7bafa5b320",
+      "savedSha256": "d5148d8c6a6c620cd7d49b92cb8601ddc6f31d14151b81504fa0bf5807997ea3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/dash.template.png",
+      "originalSha256": "b5d04a5a81a4b08a31c954e114e000a33fb7471ca4d119696a4c53bdf3d7026a",
+      "savedSha256": "b5d04a5a81a4b08a31c954e114e000a33fb7471ca4d119696a4c53bdf3d7026a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/die.template.json",
+      "originalSha256": "3384c4d4e15556744770a56a9f999c80fc598dd1a735cf65924f642fca2a382e",
+      "savedSha256": "8e005029f670c96af88eb5a62f745125b3c4503b45e87eee12c38acecb8bbae1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/die.template.png",
+      "originalSha256": "959c6adee09d1a9b650290822d186463c222849f22f683b022a29077e264e772",
+      "savedSha256": "959c6adee09d1a9b650290822d186463c222849f22f683b022a29077e264e772"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/emote.template.json",
+      "originalSha256": "9403425ff51eb19c3350a1138db3bc1f5efe0caa097f0233e14ac97543dc9c39",
+      "savedSha256": "4efb9083267bfd415f3ebad9a3694ee427b342730fe51b612faef7435edf2f73"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/emote.template.png",
+      "originalSha256": "7aa738715c24e4dd82da4db8b5d5dcd856ded2079e5b598eb9de9e76e75f50e3",
+      "savedSha256": "7aa738715c24e4dd82da4db8b5d5dcd856ded2079e5b598eb9de9e76e75f50e3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/hit.template.json",
+      "originalSha256": "f74624f358b01a7b068bc4733795c4d68bf7e934e2d9622835b6457c2f80aa19",
+      "savedSha256": "347ec94499320a9b800ae31dc38c4ff9466afa9e2f7a37b981433bbce7f89f3d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/hit.template.png",
+      "originalSha256": "a0613a8074aa16e76ad99f6341031f6b71522c321288a4bd95534ebd14a30972",
+      "savedSha256": "a0613a8074aa16e76ad99f6341031f6b71522c321288a4bd95534ebd14a30972"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/idle.template.json",
+      "originalSha256": "e656e7c8e33ea2d272af65ae0ae6a168fec256b60e8627eb479fb0090e91e123",
+      "savedSha256": "112cb9f45dd927bafd17b3f4f50db143387db3e7ab45c87b54048e5ae08318b7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/idle.template.png",
+      "originalSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82",
+      "savedSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/meditate.template.json",
+      "originalSha256": "c277fc2b8121493338c1af749c99815a3d09879e8ae28902000cbfb10b5a0db6",
+      "savedSha256": "a4df0a59574f68aa0e1af8edd587a39c041ef89c612c6d9015f02612a8833ea2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/meditate.template.png",
+      "originalSha256": "f3e1fef7c67f030d6334a35e6d543a6f1bd86e3333e1ad0ac4b21f082d8d93a2",
+      "savedSha256": "f3e1fef7c67f030d6334a35e6d543a6f1bd86e3333e1ad0ac4b21f082d8d93a2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/run.template.json",
+      "originalSha256": "dfbb0ff2cecdcee534a56e15ab1c6bfae7ebe5f3482dc1285aa439813c59f54a",
+      "savedSha256": "a1a080fc72826b26b7ab32d9375edb0a40072344a266cbd6fb9491a796b3e5dc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/run.template.png",
+      "originalSha256": "3f25ade8546b92518700d2310ec184477eaaa5fcaa4b633e76cff7bf6a80da5e",
+      "savedSha256": "3f25ade8546b92518700d2310ec184477eaaa5fcaa4b633e76cff7bf6a80da5e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/sword_fly.template.json",
+      "originalSha256": "0e9560c5550b0bbdefbb2062308a49d598f3ea667a1370dce9fa387bd6734535",
+      "savedSha256": "a781bff82e9a99d10b7fd5195c9edd66a58ef14061f825a92703597e903f4124"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/sword_fly.template.png",
+      "originalSha256": "b22e2f32ba192e5d1953d651f00cd08fd101f35a37c16c8ea8b5706a8cf7bdec",
+      "savedSha256": "b22e2f32ba192e5d1953d651f00cd08fd101f35a37c16c8ea8b5706a8cf7bdec"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/tribulation.template.json",
+      "originalSha256": "9f243ed26ded6a78225141fbac8335b6f2834c9ef612603075df1b582cd49710",
+      "savedSha256": "aade89895046ed1fd32c6ecf6b626341df1601d2d2b6c57b5e94d8a408bb3551"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/tribulation.template.png",
+      "originalSha256": "ecf7b895275f36bf80d203458a10278894790fc888f9448e119b3a3ebe873eca",
+      "savedSha256": "ecf7b895275f36bf80d203458a10278894790fc888f9448e119b3a3ebe873eca"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/walk.template.json",
+      "originalSha256": "6a43fad23ba2b1b15b442adc3e690826b35e487363d7b9314c50be1f8c73fe59",
+      "savedSha256": "7bd33cb2b9e43f27fc5b31862a3bff5af4a2c11a8c45d743768bcb3c0ba280a5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/templates/walk.template.png",
+      "originalSha256": "48366043fcc0e0bf9ccfb1685bdc559849907fcbc1b34f16c906501e10104511",
+      "savedSha256": "48366043fcc0e0bf9ccfb1685bdc559849907fcbc1b34f16c906501e10104511"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/idle.initial.png",
+      "originalSha256": "d5c80873fcbca81f8bdb5e6b9e3de2ebae3052fc6a4dd89afd28952d89630f04",
+      "savedSha256": "d5c80873fcbca81f8bdb5e6b9e3de2ebae3052fc6a4dd89afd28952d89630f04"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/meditate.initial.png",
+      "originalSha256": "196a8ef1799e505fb6251d5f9ca266ce40073cb9152c466f9f358545064ce966",
+      "savedSha256": "196a8ef1799e505fb6251d5f9ca266ce40073cb9152c466f9f358545064ce966"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/walk.initial.png",
+      "originalSha256": "112db9de6268430e1f8125fda4200799e0008afe4103be94839ebd406d613202",
+      "savedSha256": "112db9de6268430e1f8125fda4200799e0008afe4103be94839ebd406d613202"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/run.initial.png",
+      "originalSha256": "5b196d1aa28525e78f6355caec4a9e76fc2ec23a764a75d1d95da75e578dbc51",
+      "savedSha256": "5b196d1aa28525e78f6355caec4a9e76fc2ec23a764a75d1d95da75e578dbc51"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/dash.initial.png",
+      "originalSha256": "8b1782739ab3de4454334fb78eae2cd1523277b7f3d363054c188492172aa00e",
+      "savedSha256": "8b1782739ab3de4454334fb78eae2cd1523277b7f3d363054c188492172aa00e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/sword_fly.initial.png",
+      "originalSha256": "6c6ff2196b85bacfa099aaacb21fab0b2184da9c76e6ab6c4647f9b1138f95b1",
+      "savedSha256": "6c6ff2196b85bacfa099aaacb21fab0b2184da9c76e6ab6c4647f9b1138f95b1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/attack.initial.png",
+      "originalSha256": "2e56b0ad649581f5e638b8f6ec3904ef43c19bc56d3e77ac99ce798165009c62",
+      "savedSha256": "2e56b0ad649581f5e638b8f6ec3904ef43c19bc56d3e77ac99ce798165009c62"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/attack_2.initial.png",
+      "originalSha256": "dcebb8ce5e856d3e9a7e0c67fa3cfb1942698a2739193f7d1fdd38e412a8759f",
+      "savedSha256": "dcebb8ce5e856d3e9a7e0c67fa3cfb1942698a2739193f7d1fdd38e412a8759f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/attack_3.initial.png",
+      "originalSha256": "bbdf6e9b520cae7a8982cb39053f9fe18b1367c453874e04bdfdf8f77dbd9820",
+      "savedSha256": "bbdf6e9b520cae7a8982cb39053f9fe18b1367c453874e04bdfdf8f77dbd9820"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/raw/cast.initial.png",
+      "originalSha256": "505d16ee56b77915e79e8d821ee2f4f3d2dd96e87b14836db43ce2c09be19314",
+      "savedSha256": "505d16ee56b77915e79e8d821ee2f4f3d2dd96e87b14836db43ce2c09be19314"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/idle.png",
+      "originalSha256": "d5c80873fcbca81f8bdb5e6b9e3de2ebae3052fc6a4dd89afd28952d89630f04",
+      "savedSha256": "d5c80873fcbca81f8bdb5e6b9e3de2ebae3052fc6a4dd89afd28952d89630f04"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/meditate.png",
+      "originalSha256": "196a8ef1799e505fb6251d5f9ca266ce40073cb9152c466f9f358545064ce966",
+      "savedSha256": "196a8ef1799e505fb6251d5f9ca266ce40073cb9152c466f9f358545064ce966"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/walk.png",
+      "originalSha256": "112db9de6268430e1f8125fda4200799e0008afe4103be94839ebd406d613202",
+      "savedSha256": "112db9de6268430e1f8125fda4200799e0008afe4103be94839ebd406d613202"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/run.png",
+      "originalSha256": "5b196d1aa28525e78f6355caec4a9e76fc2ec23a764a75d1d95da75e578dbc51",
+      "savedSha256": "5b196d1aa28525e78f6355caec4a9e76fc2ec23a764a75d1d95da75e578dbc51"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/dash.png",
+      "originalSha256": "8b1782739ab3de4454334fb78eae2cd1523277b7f3d363054c188492172aa00e",
+      "savedSha256": "8b1782739ab3de4454334fb78eae2cd1523277b7f3d363054c188492172aa00e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/sword_fly.png",
+      "originalSha256": "6c6ff2196b85bacfa099aaacb21fab0b2184da9c76e6ab6c4647f9b1138f95b1",
+      "savedSha256": "6c6ff2196b85bacfa099aaacb21fab0b2184da9c76e6ab6c4647f9b1138f95b1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/attack.png",
+      "originalSha256": "2e56b0ad649581f5e638b8f6ec3904ef43c19bc56d3e77ac99ce798165009c62",
+      "savedSha256": "2e56b0ad649581f5e638b8f6ec3904ef43c19bc56d3e77ac99ce798165009c62"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/attack_2.png",
+      "originalSha256": "dcebb8ce5e856d3e9a7e0c67fa3cfb1942698a2739193f7d1fdd38e412a8759f",
+      "savedSha256": "dcebb8ce5e856d3e9a7e0c67fa3cfb1942698a2739193f7d1fdd38e412a8759f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/attack_3.png",
+      "originalSha256": "bbdf6e9b520cae7a8982cb39053f9fe18b1367c453874e04bdfdf8f77dbd9820",
+      "savedSha256": "bbdf6e9b520cae7a8982cb39053f9fe18b1367c453874e04bdfdf8f77dbd9820"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/N/sheets/cast.png",
+      "originalSha256": "505d16ee56b77915e79e8d821ee2f4f3d2dd96e87b14836db43ce2c09be19314",
+      "savedSha256": "505d16ee56b77915e79e8d821ee2f4f3d2dd96e87b14836db43ce2c09be19314"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/atlas-check.json",
+      "originalSha256": "01789785bd5a88e08e218b15ee0d303e04382be70f46a95deda8f2de1e1dbc08",
+      "savedSha256": "f77a7cdffa84874eecf8b7dab621d3324eb311e895af1efeba3258b70bf33ce7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-timing.json",
+      "originalSha256": "81f3dc94d9170d66b1d5c820b46109eb440a5c0061333bfaf1595162467f8fa1",
+      "savedSha256": "cc48a7420a8f5ffcf00ee21975c6a78d6b6d2a8fbd701fb778efa71757eb5a32"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/attack.gif",
+      "originalSha256": "0f847890659ebd86192ba17773f66eb17e43c7f66e2583ebb32060dbb2cb2756",
+      "savedSha256": "0f847890659ebd86192ba17773f66eb17e43c7f66e2583ebb32060dbb2cb2756"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/attack.sheet.png",
+      "originalSha256": "b2699eb6e4c58160a2adafcde3f1e69258a967b617d11d2322c3c588f9da715e",
+      "savedSha256": "b2699eb6e4c58160a2adafcde3f1e69258a967b617d11d2322c3c588f9da715e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/cast.gif",
+      "originalSha256": "94e2550ef3e70d3d49bd1e40280934636f52862349c29033922b631cf5d7070c",
+      "savedSha256": "94e2550ef3e70d3d49bd1e40280934636f52862349c29033922b631cf5d7070c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/cast.sheet.png",
+      "originalSha256": "098e91ea4485f5ecbae1ff693493558732d676a11a9a476b1fe9d2ca8984762c",
+      "savedSha256": "098e91ea4485f5ecbae1ff693493558732d676a11a9a476b1fe9d2ca8984762c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/die.gif",
+      "originalSha256": "8e6e63f66df55b94f98e1ff953a753cc47bc9cd87bec638d6e53e73f3c467b3d",
+      "savedSha256": "8e6e63f66df55b94f98e1ff953a753cc47bc9cd87bec638d6e53e73f3c467b3d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/die.sheet.png",
+      "originalSha256": "5e6a7fda9926f91db4013f7f3a759b1242894c55f88d101aa5390b4f8131bdf1",
+      "savedSha256": "5e6a7fda9926f91db4013f7f3a759b1242894c55f88d101aa5390b4f8131bdf1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/hit.gif",
+      "originalSha256": "47fc9d107d978aca219b0fd8c692a9125451b23cc0175a52dc7ad4348e6104b3",
+      "savedSha256": "47fc9d107d978aca219b0fd8c692a9125451b23cc0175a52dc7ad4348e6104b3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/hit.sheet.png",
+      "originalSha256": "0657264a58b6b31f4030cd6190da231fcd61d9672dc54dee8150081f74bc7573",
+      "savedSha256": "0657264a58b6b31f4030cd6190da231fcd61d9672dc54dee8150081f74bc7573"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/idle.gif",
+      "originalSha256": "b922f4888692f3bfa244b2072271ad1e5cd81cd3c3cc6d722828a25d3f7c6971",
+      "savedSha256": "b922f4888692f3bfa244b2072271ad1e5cd81cd3c3cc6d722828a25d3f7c6971"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/idle.sheet.png",
+      "originalSha256": "e5824ecc41348d29b7caf9f8d2fd3ab968c8a08975e1a0c101f07e35cdb7603d",
+      "savedSha256": "e5824ecc41348d29b7caf9f8d2fd3ab968c8a08975e1a0c101f07e35cdb7603d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/index.json",
+      "originalSha256": "98a4de82168457f25034b0cc4fd2d510e0fd4f0ac44802e6fc15fa3bd181b0e3",
+      "savedSha256": "c3645df8f7279e20087156be984cdbe3f32735df867e7f5d5a061067d57298a3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/run.gif",
+      "originalSha256": "ff0512da12210deec7382787c4e0e58371d565c9f314e254c1c0f02146afcc5f",
+      "savedSha256": "ff0512da12210deec7382787c4e0e58371d565c9f314e254c1c0f02146afcc5f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/run.sheet.png",
+      "originalSha256": "cbf41d4618af91be8670ba24e7fbee511af71a8c9ba980029246c924f94c421d",
+      "savedSha256": "cbf41d4618af91be8670ba24e7fbee511af71a8c9ba980029246c924f94c421d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/walk.gif",
+      "originalSha256": "f40045d023d9908a0f66df3965fc175d4bd2049cc4f1820b78b5041cef9e20e2",
+      "savedSha256": "f40045d023d9908a0f66df3965fc175d4bd2049cc4f1820b78b5041cef9e20e2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-1x/walk.sheet.png",
+      "originalSha256": "60c513a5486bfb6498bbc32f85bae83445459f8421bbfe68576af231f3284c5e",
+      "savedSha256": "60c513a5486bfb6498bbc32f85bae83445459f8421bbfe68576af231f3284c5e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/attack.gif",
+      "originalSha256": "47b8a054c846d5cd0929370044a29e11b53c1504c2eb86613fa053ba79492273",
+      "savedSha256": "47b8a054c846d5cd0929370044a29e11b53c1504c2eb86613fa053ba79492273"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/attack.sheet.png",
+      "originalSha256": "a5acceb33bc5a14e366093c8742464c071cfbc0be7d26361dc07b65cf9729cf9",
+      "savedSha256": "a5acceb33bc5a14e366093c8742464c071cfbc0be7d26361dc07b65cf9729cf9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/cast.gif",
+      "originalSha256": "15c8ef6a330f540c786e7299ecd95fc37f2acf664d7418802410e259b2cc2286",
+      "savedSha256": "15c8ef6a330f540c786e7299ecd95fc37f2acf664d7418802410e259b2cc2286"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/cast.sheet.png",
+      "originalSha256": "6e25388675e99eb0c300a6af37b047dede8a184a3979d26e3c2ba33a0774880a",
+      "savedSha256": "6e25388675e99eb0c300a6af37b047dede8a184a3979d26e3c2ba33a0774880a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/die.gif",
+      "originalSha256": "b04b053ec247a9690c76432ba305ca23a550da2753d17298ae808396d367b461",
+      "savedSha256": "b04b053ec247a9690c76432ba305ca23a550da2753d17298ae808396d367b461"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/die.sheet.png",
+      "originalSha256": "136f02e59e287cef6b1481a5084e47d9be8c6849332595a8e11d50f34e271b1e",
+      "savedSha256": "136f02e59e287cef6b1481a5084e47d9be8c6849332595a8e11d50f34e271b1e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/hit.gif",
+      "originalSha256": "de2d3c7001602169340c7ffdce92e251424619b26253204621488a37045fc6d5",
+      "savedSha256": "de2d3c7001602169340c7ffdce92e251424619b26253204621488a37045fc6d5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/hit.sheet.png",
+      "originalSha256": "7c28add6e56ce1cb9c7fd510abccbd9989708749fa4415a3b799158c9490c54a",
+      "savedSha256": "7c28add6e56ce1cb9c7fd510abccbd9989708749fa4415a3b799158c9490c54a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/idle.gif",
+      "originalSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859",
+      "savedSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/idle.sheet.png",
+      "originalSha256": "e7fbe7839fef2e31218b39ec79a48d7601c47857c63a99d33606b79d3117f4fd",
+      "savedSha256": "e7fbe7839fef2e31218b39ec79a48d7601c47857c63a99d33606b79d3117f4fd"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/index.json",
+      "originalSha256": "fdd4ae6a22b13247379079c62b42ce7351338bfeea62d63f1331771f8c49b03b",
+      "savedSha256": "a39d54216470d6dc67f639ca01ce6e5b96b1edacedb53287debdcb2411ba74be"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/run.gif",
+      "originalSha256": "af26f571da515188cf000dab96ecd5d2ebb23cc759638d810b96a04dddebb9a7",
+      "savedSha256": "af26f571da515188cf000dab96ecd5d2ebb23cc759638d810b96a04dddebb9a7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/run.sheet.png",
+      "originalSha256": "426e6d93b872e5fc4b4d2df8ecf7eb8ef96a83adb459f7b63483ac15ffa166b2",
+      "savedSha256": "426e6d93b872e5fc4b4d2df8ecf7eb8ef96a83adb459f7b63483ac15ffa166b2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/walk.gif",
+      "originalSha256": "61e77f2d4ecc56115a29bb5a243510ce7f995f7658af21f8c2b2712ce852c5db",
+      "savedSha256": "61e77f2d4ecc56115a29bb5a243510ce7f995f7658af21f8c2b2712ce852c5db"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/capture-v4-2x/walk.sheet.png",
+      "originalSha256": "c55a7774a2cffcf746127cd2b7c74b5915428c0bbd737293a458144c500ff426",
+      "savedSha256": "c55a7774a2cffcf746127cd2b7c74b5915428c0bbd737293a458144c500ff426"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/contact-sheets.html",
+      "originalSha256": "7ddc018a97c8de04523511a17131dcfa25deec3272efa01ec08505ec139df83c",
+      "savedSha256": "7ddc018a97c8de04523511a17131dcfa25deec3272efa01ec08505ec139df83c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack.gif",
+      "originalSha256": "7c57f3afacb53bc9ec75e2c2550bd3ad5f127125c56c8a0241eb6ed322aeeffe",
+      "savedSha256": "7c57f3afacb53bc9ec75e2c2550bd3ad5f127125c56c8a0241eb6ed322aeeffe"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack.sheet.png",
+      "originalSha256": "216f65fc816a3621c516a36fcd59161ebfcfbe798bee414660a2e2c3df963c95",
+      "savedSha256": "216f65fc816a3621c516a36fcd59161ebfcfbe798bee414660a2e2c3df963c95"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack_2.gif",
+      "originalSha256": "31a73553853b995bce7e51f693f6fed6ea44925a476e8fde71d0f4e29d9ba37b",
+      "savedSha256": "31a73553853b995bce7e51f693f6fed6ea44925a476e8fde71d0f4e29d9ba37b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack_2.sheet.png",
+      "originalSha256": "7716914d93090df3dc839bcbb65ff15303809b241fca1da2241b546fbd418a80",
+      "savedSha256": "7716914d93090df3dc839bcbb65ff15303809b241fca1da2241b546fbd418a80"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack_3.gif",
+      "originalSha256": "9852a44385cf540ffd9ed9728d153601edccd84be550c7ba7902862dd9e397d1",
+      "savedSha256": "9852a44385cf540ffd9ed9728d153601edccd84be550c7ba7902862dd9e397d1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/attack_3.sheet.png",
+      "originalSha256": "95d0755583002ff7b3e68c163e20c349cfb4994f402492af67b919559756145f",
+      "savedSha256": "95d0755583002ff7b3e68c163e20c349cfb4994f402492af67b919559756145f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/cast.gif",
+      "originalSha256": "e27fb37bab9869c75bd6f85904d3b63060af74aaac9eccc99003a9116a523237",
+      "savedSha256": "e27fb37bab9869c75bd6f85904d3b63060af74aaac9eccc99003a9116a523237"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/cast.sheet.png",
+      "originalSha256": "6d6b029cf33895a75d0d5bd0e06d0a4ca5cc09d4e41e6b96376bb9c211a6daa1",
+      "savedSha256": "6d6b029cf33895a75d0d5bd0e06d0a4ca5cc09d4e41e6b96376bb9c211a6daa1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/channel.gif",
+      "originalSha256": "efff50ec7a80c54b6a3308f49d8011e4572542449c615cb91d58c0deb8b6c910",
+      "savedSha256": "efff50ec7a80c54b6a3308f49d8011e4572542449c615cb91d58c0deb8b6c910"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/channel.sheet.png",
+      "originalSha256": "02ac5bdc40c0a80d0eeca608f4581ab9d49e6a49af303b393c5d7f323a0a5842",
+      "savedSha256": "02ac5bdc40c0a80d0eeca608f4581ab9d49e6a49af303b393c5d7f323a0a5842"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/dash.gif",
+      "originalSha256": "be141e41332ad2782e51399870871709068a49414497cde2d9fbea6c276bb126",
+      "savedSha256": "be141e41332ad2782e51399870871709068a49414497cde2d9fbea6c276bb126"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/dash.sheet.png",
+      "originalSha256": "2afa8dc7c9eabff5738bd5c20e03378c48bdfee005e1d48a297b7ed428b7040b",
+      "savedSha256": "2afa8dc7c9eabff5738bd5c20e03378c48bdfee005e1d48a297b7ed428b7040b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/die.gif",
+      "originalSha256": "ef97e59f496bdb3d387e074b1c102c69bfea503933c5ad5dd709fdcdec52132a",
+      "savedSha256": "ef97e59f496bdb3d387e074b1c102c69bfea503933c5ad5dd709fdcdec52132a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/die.sheet.png",
+      "originalSha256": "04c5e38db3ba060252479483bbccce1cf18793cbee703c1f58018b112172bbfe",
+      "savedSha256": "04c5e38db3ba060252479483bbccce1cf18793cbee703c1f58018b112172bbfe"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/emote.gif",
+      "originalSha256": "c0442c92c743b3c1ab5eb38c2db17d1322e888857204a9bf0a838eaeb2d7134e",
+      "savedSha256": "c0442c92c743b3c1ab5eb38c2db17d1322e888857204a9bf0a838eaeb2d7134e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/emote.sheet.png",
+      "originalSha256": "205726513faa84eb83e86ded8ed8c7f8f069189ded4c7664f7276baf025293d1",
+      "savedSha256": "205726513faa84eb83e86ded8ed8c7f8f069189ded4c7664f7276baf025293d1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/hit.gif",
+      "originalSha256": "47fc9d107d978aca219b0fd8c692a9125451b23cc0175a52dc7ad4348e6104b3",
+      "savedSha256": "47fc9d107d978aca219b0fd8c692a9125451b23cc0175a52dc7ad4348e6104b3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/hit.sheet.png",
+      "originalSha256": "2c144efd8b52457f3b002c4ba5245fdbcb0a106deaf137a5d90c1eb15c158747",
+      "savedSha256": "2c144efd8b52457f3b002c4ba5245fdbcb0a106deaf137a5d90c1eb15c158747"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/idle.gif",
+      "originalSha256": "92414fdeb0fc106186f9a5eb6f5699a47cec8c5ddc661a47eb22abc5b8f56126",
+      "savedSha256": "92414fdeb0fc106186f9a5eb6f5699a47cec8c5ddc661a47eb22abc5b8f56126"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/idle.sheet.png",
+      "originalSha256": "b65493b30d0eefe54fe4c914a631c839511965c9a908f69eb1257bbbd42accfd",
+      "savedSha256": "b65493b30d0eefe54fe4c914a631c839511965c9a908f69eb1257bbbd42accfd"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/index.json",
+      "originalSha256": "f8fd355510694499bb8a51883fa968df2b72502ebff1d6570614c1d4eb214f66",
+      "savedSha256": "856f22687798200d04dfa667bd69adf2dc6ad6c4defdcafe2bec2da95efe87aa"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/meditate.gif",
+      "originalSha256": "49a146f871f9aeb409f91ce91059987c74faf367e3509392bacaccbaf2b375f2",
+      "savedSha256": "49a146f871f9aeb409f91ce91059987c74faf367e3509392bacaccbaf2b375f2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/meditate.sheet.png",
+      "originalSha256": "57b5a3703abfad2861e816db3808e32b36c8384de9895ce39848f17a69af104b",
+      "savedSha256": "57b5a3703abfad2861e816db3808e32b36c8384de9895ce39848f17a69af104b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/run.gif",
+      "originalSha256": "5cf43c0270d753e490cb358c15b0c6b1b6df3d9c97d2f2045561adf32a74047f",
+      "savedSha256": "5cf43c0270d753e490cb358c15b0c6b1b6df3d9c97d2f2045561adf32a74047f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/run.sheet.png",
+      "originalSha256": "9918ef062c5e0734ccea51e31f81e93780eebc88e642394cd19ed65cf69c3083",
+      "savedSha256": "9918ef062c5e0734ccea51e31f81e93780eebc88e642394cd19ed65cf69c3083"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/sword_fly.gif",
+      "originalSha256": "ccb11b36f6cf5e13c890afd52a8c6d43a47b9e8cb3555dff749afb1b2b75a607",
+      "savedSha256": "ccb11b36f6cf5e13c890afd52a8c6d43a47b9e8cb3555dff749afb1b2b75a607"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/sword_fly.sheet.png",
+      "originalSha256": "666e479844c701c6561d513fb41b895492c059b5db3e9e369209657fe63aa4c0",
+      "savedSha256": "666e479844c701c6561d513fb41b895492c059b5db3e9e369209657fe63aa4c0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/tribulation.gif",
+      "originalSha256": "402c1b1641bf8b9530fe57d089a308c2cd811e4c14846bf6dd1e78ff91c9b594",
+      "savedSha256": "402c1b1641bf8b9530fe57d089a308c2cd811e4c14846bf6dd1e78ff91c9b594"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/tribulation.sheet.png",
+      "originalSha256": "e2088bb0d00270abf964c581a00a8ff88d9d3b5f415ebdeea8f5389e68730c19",
+      "savedSha256": "e2088bb0d00270abf964c581a00a8ff88d9d3b5f415ebdeea8f5389e68730c19"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/walk.gif",
+      "originalSha256": "faef819b7f90735537e7301357de0c503d9a00462a0eef5931e5fa5a263e6f02",
+      "savedSha256": "faef819b7f90735537e7301357de0c503d9a00462a0eef5931e5fa5a263e6f02"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-1x/walk.sheet.png",
+      "originalSha256": "c533f78e4b4d7eaa42ca8c0a42bc46aa3ae068fade5c55855f08753057c22e08",
+      "savedSha256": "c533f78e4b4d7eaa42ca8c0a42bc46aa3ae068fade5c55855f08753057c22e08"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack.gif",
+      "originalSha256": "063aa1432bac7a6f73c728b9979a5850eebfa66b25cb2261d22ecd16d67b1ba9",
+      "savedSha256": "063aa1432bac7a6f73c728b9979a5850eebfa66b25cb2261d22ecd16d67b1ba9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack.sheet.png",
+      "originalSha256": "ae4aa8a483484400187f5e5a256319fb01f8e287a0232a603b1ecee8196520c7",
+      "savedSha256": "ae4aa8a483484400187f5e5a256319fb01f8e287a0232a603b1ecee8196520c7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack_2.gif",
+      "originalSha256": "fee2587ae1d7563ef2926e52a2dc9e5ee7efe6c1f245ce9cd92305f683327119",
+      "savedSha256": "fee2587ae1d7563ef2926e52a2dc9e5ee7efe6c1f245ce9cd92305f683327119"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack_2.sheet.png",
+      "originalSha256": "5c79aed6fceb76349a1ae7b387175eab42e6e363928aa9906dea39520e9f6868",
+      "savedSha256": "5c79aed6fceb76349a1ae7b387175eab42e6e363928aa9906dea39520e9f6868"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack_3.gif",
+      "originalSha256": "bce2757bf7dcb00f973083821d4856f6482e1f2479f246bab68dcb6f7385d145",
+      "savedSha256": "bce2757bf7dcb00f973083821d4856f6482e1f2479f246bab68dcb6f7385d145"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/attack_3.sheet.png",
+      "originalSha256": "2f6138769975d5fc8f1236f4dfb3c88b8cbffe8bbb10c94db981f1bb77a58a7a",
+      "savedSha256": "2f6138769975d5fc8f1236f4dfb3c88b8cbffe8bbb10c94db981f1bb77a58a7a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/cast.gif",
+      "originalSha256": "5595abbf4b32b6e86d3f6ad8877112d83d687d26ffdde37218119496acaff2c6",
+      "savedSha256": "5595abbf4b32b6e86d3f6ad8877112d83d687d26ffdde37218119496acaff2c6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/cast.sheet.png",
+      "originalSha256": "18f815ecd5a20fea93bab5307dd0435ec02601c3f5b7cd340ba7538aaa8f151c",
+      "savedSha256": "18f815ecd5a20fea93bab5307dd0435ec02601c3f5b7cd340ba7538aaa8f151c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/channel.gif",
+      "originalSha256": "d39cbc0616a4bf4283576bf3f8a7c73cc90f7ea5cc003ba3367333d8fa67e1e6",
+      "savedSha256": "d39cbc0616a4bf4283576bf3f8a7c73cc90f7ea5cc003ba3367333d8fa67e1e6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/channel.sheet.png",
+      "originalSha256": "da6961e59b923e1167c49d1a5ff7cf09f990979761c3a276796a2375bf532806",
+      "savedSha256": "da6961e59b923e1167c49d1a5ff7cf09f990979761c3a276796a2375bf532806"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/dash.gif",
+      "originalSha256": "77b8ec149fe558ed15a6e793a7c79202875575542e5ed00cd2805bf77a0f96da",
+      "savedSha256": "77b8ec149fe558ed15a6e793a7c79202875575542e5ed00cd2805bf77a0f96da"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/dash.sheet.png",
+      "originalSha256": "c20ddedbe29f8932053d6bac4ec62a476910498f25dd2d44ebc349445ce91f98",
+      "savedSha256": "c20ddedbe29f8932053d6bac4ec62a476910498f25dd2d44ebc349445ce91f98"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/die.gif",
+      "originalSha256": "38a35d8b7d87348f77d87fd9febe8f7ddb520efa0cefeec14c571b10831ad849",
+      "savedSha256": "38a35d8b7d87348f77d87fd9febe8f7ddb520efa0cefeec14c571b10831ad849"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/die.sheet.png",
+      "originalSha256": "2bd67581042a4549bdcea2f52fc1f6e7572e1e3cd50951c9a9abdf4cd59ed861",
+      "savedSha256": "2bd67581042a4549bdcea2f52fc1f6e7572e1e3cd50951c9a9abdf4cd59ed861"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/emote.gif",
+      "originalSha256": "3d4e4de6b4865b8d32fdfe821d283865b759fa9ec387e65054a72f34c0936edc",
+      "savedSha256": "3d4e4de6b4865b8d32fdfe821d283865b759fa9ec387e65054a72f34c0936edc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/emote.sheet.png",
+      "originalSha256": "a02348f16fba36a0e9f10cfd19741425cb07c5b3feb7d2267e2f1ebb79375421",
+      "savedSha256": "a02348f16fba36a0e9f10cfd19741425cb07c5b3feb7d2267e2f1ebb79375421"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/hit.gif",
+      "originalSha256": "8ac03373e5342040706d8fec6afcd0fcb2fa23235a4ba6c4d743739e1ab8df0a",
+      "savedSha256": "8ac03373e5342040706d8fec6afcd0fcb2fa23235a4ba6c4d743739e1ab8df0a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/hit.sheet.png",
+      "originalSha256": "58d518d9fd9ed9678f77b9d3ec34b2b569ad4d4d15b612e37f87ad0ee31f6524",
+      "savedSha256": "58d518d9fd9ed9678f77b9d3ec34b2b569ad4d4d15b612e37f87ad0ee31f6524"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/idle.gif",
+      "originalSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859",
+      "savedSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/idle.sheet.png",
+      "originalSha256": "e5069d7982a42c5f2b7e412329e8f605dcf196fc1360a7af67f85316ff50ec98",
+      "savedSha256": "e5069d7982a42c5f2b7e412329e8f605dcf196fc1360a7af67f85316ff50ec98"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/index.json",
+      "originalSha256": "f5e36da227d0e11f8b2377c4a5f6b0868febce8eadd54d1da14dc0e6989a2c9c",
+      "savedSha256": "462a9701ca8e18c84c8608d8a182022fe281eb221dc8de97e3355c8abd3c2d39"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/meditate.gif",
+      "originalSha256": "fa45c3a379efb995ca808f3ab76284fe98c0969ace06026698a105e9eb1103e8",
+      "savedSha256": "fa45c3a379efb995ca808f3ab76284fe98c0969ace06026698a105e9eb1103e8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/meditate.sheet.png",
+      "originalSha256": "37993819fe357df0cc59ea1994dcd809b94c906496663ffb8630b536f7bc5e47",
+      "savedSha256": "37993819fe357df0cc59ea1994dcd809b94c906496663ffb8630b536f7bc5e47"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/run.gif",
+      "originalSha256": "38ddd97674ed3ae4359b8cf63ef28e5be1a7b8cc24c738491ac73753d853e673",
+      "savedSha256": "38ddd97674ed3ae4359b8cf63ef28e5be1a7b8cc24c738491ac73753d853e673"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/run.sheet.png",
+      "originalSha256": "d4826cdd761bf48d0a896f842610b7e7dd8c229dd2bd760adf5319d51bf6e933",
+      "savedSha256": "d4826cdd761bf48d0a896f842610b7e7dd8c229dd2bd760adf5319d51bf6e933"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/sword_fly.gif",
+      "originalSha256": "9643077fed003f566abf58d8ab15bcd86481b725411d4f30391945038438a915",
+      "savedSha256": "9643077fed003f566abf58d8ab15bcd86481b725411d4f30391945038438a915"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/sword_fly.sheet.png",
+      "originalSha256": "ae9fd4cfb32a30d07112f4a797147846240a1d5d0e94e961d207d543cc68e608",
+      "savedSha256": "ae9fd4cfb32a30d07112f4a797147846240a1d5d0e94e961d207d543cc68e608"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/tribulation.gif",
+      "originalSha256": "8953ca874394ee36146b463000b866bdbdb1a097c531d2be9ba7b85f97eafd7b",
+      "savedSha256": "8953ca874394ee36146b463000b866bdbdb1a097c531d2be9ba7b85f97eafd7b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/tribulation.sheet.png",
+      "originalSha256": "25553c21982bd46eac52821a7c0a352c65ff4259057af71e399f2fa2fd3958a0",
+      "savedSha256": "25553c21982bd46eac52821a7c0a352c65ff4259057af71e399f2fa2fd3958a0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/walk.gif",
+      "originalSha256": "b85bd907edc857d508177849c929f104726fddd27bb08558c0f68d7c550bd670",
+      "savedSha256": "b85bd907edc857d508177849c929f104726fddd27bb08558c0f68d7c550bd670"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/full-2x/walk.sheet.png",
+      "originalSha256": "c8155125f4fcdf2c42158afac29c018400df2845024a1263da0535bbfa434b27",
+      "savedSha256": "c8155125f4fcdf2c42158afac29c018400df2845024a1263da0535bbfa434b27"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/hit-cell-repair-proof.json",
+      "originalSha256": "2fa5de3f0a1c35e3c184550f82be8571e16f36f6e0c356198c8e2e864448e6b0",
+      "savedSha256": "547e16454d327a29d30860d31cb1b8b32d011fe3304b4c6710bb7c34a437126a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/index.html",
+      "originalSha256": "ca9c2fc72f78a4a326ddab75bf626a92b604df527f8cc5ebbb8e75cb55681f1d",
+      "savedSha256": "ca9c2fc72f78a4a326ddab75bf626a92b604df527f8cc5ebbb8e75cb55681f1d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/key-spill-diagnostic.json",
+      "originalSha256": "faec03c005b6b3476d782e1f30f6b9321996478066e9d74d1768c21365424af6",
+      "savedSha256": "faec03c005b6b3476d782e1f30f6b9321996478066e9d74d1768c21365424af6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/attack.gif",
+      "originalSha256": "063aa1432bac7a6f73c728b9979a5850eebfa66b25cb2261d22ecd16d67b1ba9",
+      "savedSha256": "063aa1432bac7a6f73c728b9979a5850eebfa66b25cb2261d22ecd16d67b1ba9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/attack_2.gif",
+      "originalSha256": "fee2587ae1d7563ef2926e52a2dc9e5ee7efe6c1f245ce9cd92305f683327119",
+      "savedSha256": "fee2587ae1d7563ef2926e52a2dc9e5ee7efe6c1f245ce9cd92305f683327119"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/attack_3.gif",
+      "originalSha256": "bce2757bf7dcb00f973083821d4856f6482e1f2479f246bab68dcb6f7385d145",
+      "savedSha256": "bce2757bf7dcb00f973083821d4856f6482e1f2479f246bab68dcb6f7385d145"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/cast.gif",
+      "originalSha256": "5595abbf4b32b6e86d3f6ad8877112d83d687d26ffdde37218119496acaff2c6",
+      "savedSha256": "5595abbf4b32b6e86d3f6ad8877112d83d687d26ffdde37218119496acaff2c6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/channel.gif",
+      "originalSha256": "d39cbc0616a4bf4283576bf3f8a7c73cc90f7ea5cc003ba3367333d8fa67e1e6",
+      "savedSha256": "d39cbc0616a4bf4283576bf3f8a7c73cc90f7ea5cc003ba3367333d8fa67e1e6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/dash.gif",
+      "originalSha256": "77b8ec149fe558ed15a6e793a7c79202875575542e5ed00cd2805bf77a0f96da",
+      "savedSha256": "77b8ec149fe558ed15a6e793a7c79202875575542e5ed00cd2805bf77a0f96da"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/die.gif",
+      "originalSha256": "38a35d8b7d87348f77d87fd9febe8f7ddb520efa0cefeec14c571b10831ad849",
+      "savedSha256": "38a35d8b7d87348f77d87fd9febe8f7ddb520efa0cefeec14c571b10831ad849"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/emote.gif",
+      "originalSha256": "3d4e4de6b4865b8d32fdfe821d283865b759fa9ec387e65054a72f34c0936edc",
+      "savedSha256": "3d4e4de6b4865b8d32fdfe821d283865b759fa9ec387e65054a72f34c0936edc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/hit.gif",
+      "originalSha256": "8ac03373e5342040706d8fec6afcd0fcb2fa23235a4ba6c4d743739e1ab8df0a",
+      "savedSha256": "8ac03373e5342040706d8fec6afcd0fcb2fa23235a4ba6c4d743739e1ab8df0a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/idle.gif",
+      "originalSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859",
+      "savedSha256": "fc56c7ad62ef5961e350e7477e646560804213640f28788d8f8e928a972d8859"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/kiemtu_E.sprite.json",
+      "originalSha256": "28681e919342e18a7d5c5bd1d95dc70b3d8cb9090605f9c0810272cd53311909",
+      "savedSha256": "8e664a24aa96ccbbf0e606c6a286cd3b732046c46f74b2e81e08c5fb9dccd493"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/meditate.gif",
+      "originalSha256": "fa45c3a379efb995ca808f3ab76284fe98c0969ace06026698a105e9eb1103e8",
+      "savedSha256": "fa45c3a379efb995ca808f3ab76284fe98c0969ace06026698a105e9eb1103e8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/run.gif",
+      "originalSha256": "38ddd97674ed3ae4359b8cf63ef28e5be1a7b8cc24c738491ac73753d853e673",
+      "savedSha256": "38ddd97674ed3ae4359b8cf63ef28e5be1a7b8cc24c738491ac73753d853e673"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/sword_fly.gif",
+      "originalSha256": "9643077fed003f566abf58d8ab15bcd86481b725411d4f30391945038438a915",
+      "savedSha256": "9643077fed003f566abf58d8ab15bcd86481b725411d4f30391945038438a915"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/tribulation.gif",
+      "originalSha256": "8953ca874394ee36146b463000b866bdbdb1a097c531d2be9ba7b85f97eafd7b",
+      "savedSha256": "8953ca874394ee36146b463000b866bdbdb1a097c531d2be9ba7b85f97eafd7b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/kiem-tu/E/walk.gif",
+      "originalSha256": "b85bd907edc857d508177849c929f104726fddd27bb08558c0f68d7c550bd670",
+      "savedSha256": "b85bd907edc857d508177849c929f104726fddd27bb08558c0f68d7c550bd670"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/live-run.json",
+      "originalSha256": "b6ea572c618ad54454b67c0061aafaa12e2d9f3cb045ce6cc534fa9420655a51",
+      "savedSha256": "4a1046adf7054bcd48798760c193b13bdc94251cbee62dc1be38b7da9ed71ca5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/manual-art-findings.json",
+      "originalSha256": "3bc014ad0476c6a8fcb883cbc112e8401903acbce89658063909e8de926fc101",
+      "savedSha256": "3bc014ad0476c6a8fcb883cbc112e8401903acbce89658063909e8de926fc101"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/attack.gif",
+      "originalSha256": "6793df507fdf4f3d8509ec20e605c8114ce54ee74430c1de86e810bc4c2bf0b6",
+      "savedSha256": "6793df507fdf4f3d8509ec20e605c8114ce54ee74430c1de86e810bc4c2bf0b6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/attack.sheet.png",
+      "originalSha256": "d378dd09040808b452390d4fc2aafae10581fd29eebd900d84bbe53bd5808388",
+      "savedSha256": "d378dd09040808b452390d4fc2aafae10581fd29eebd900d84bbe53bd5808388"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/cast.gif",
+      "originalSha256": "55f05df94cc932d90a8e4d3924bc8960d11f2d7c53262ac8a2d9ea1c82112f43",
+      "savedSha256": "55f05df94cc932d90a8e4d3924bc8960d11f2d7c53262ac8a2d9ea1c82112f43"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/cast.sheet.png",
+      "originalSha256": "345d40502a7eb5e638d5901bd23f79fcc8530fa46fff60d006b2dfd8c1cd7899",
+      "savedSha256": "345d40502a7eb5e638d5901bd23f79fcc8530fa46fff60d006b2dfd8c1cd7899"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/die.gif",
+      "originalSha256": "8c17d1f61bd3f43ab58c0e50b32fa8e7431088a686feed3c46acc8c0ec629175",
+      "savedSha256": "8c17d1f61bd3f43ab58c0e50b32fa8e7431088a686feed3c46acc8c0ec629175"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/die.sheet.png",
+      "originalSha256": "2a7cdebae950949fc51f2b4122c389931993d447f6d169a98149dc420b468c45",
+      "savedSha256": "2a7cdebae950949fc51f2b4122c389931993d447f6d169a98149dc420b468c45"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/hit.gif",
+      "originalSha256": "655201592abe5dcc8a0fd4049f3350292086785e85c44dc6f733c24064e00441",
+      "savedSha256": "655201592abe5dcc8a0fd4049f3350292086785e85c44dc6f733c24064e00441"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/hit.sheet.png",
+      "originalSha256": "4f1f3cb0b7d329b5dd5176114a17245d128e735aad23243b6c2277f2ee44aa03",
+      "savedSha256": "4f1f3cb0b7d329b5dd5176114a17245d128e735aad23243b6c2277f2ee44aa03"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/idle.gif",
+      "originalSha256": "349d0ec832855606910ddd8708211afaa9f40d4ac35ba9170c31c18354b4656d",
+      "savedSha256": "349d0ec832855606910ddd8708211afaa9f40d4ac35ba9170c31c18354b4656d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/idle.sheet.png",
+      "originalSha256": "3f67375ff35a54ea35ca55cd338d2cf386cb3fa4b94ffece1cfa63090e8b4881",
+      "savedSha256": "3f67375ff35a54ea35ca55cd338d2cf386cb3fa4b94ffece1cfa63090e8b4881"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/index.json",
+      "originalSha256": "5a44b4bf66cb5f7ad5c0bee105fdd544cd4e02d740911389a88938c663328d7c",
+      "savedSha256": "e2bbcced3e2b8c194b02b84e3f148934d53a564dc242160c2dde683a903559b0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/run.gif",
+      "originalSha256": "4d2c014345197ad64b90db54af5270237786dda32b0e563a70a4c564cb283211",
+      "savedSha256": "4d2c014345197ad64b90db54af5270237786dda32b0e563a70a4c564cb283211"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/run.sheet.png",
+      "originalSha256": "6036d3d5d74bf1bb32a78a258eeda62ef40b04c9e05820c385dd60f7292f28b9",
+      "savedSha256": "6036d3d5d74bf1bb32a78a258eeda62ef40b04c9e05820c385dd60f7292f28b9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/walk.gif",
+      "originalSha256": "2250153268f8dd9507ee2e629b92657bc0dcb0de11f18a0ec3571c5c86b42904",
+      "savedSha256": "2250153268f8dd9507ee2e629b92657bc0dcb0de11f18a0ec3571c5c86b42904"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-1x/walk.sheet.png",
+      "originalSha256": "44c19793775ed92b6bbb14e5c4dff2be8f6f13968a19a33612c4a31c903e9db1",
+      "savedSha256": "44c19793775ed92b6bbb14e5c4dff2be8f6f13968a19a33612c4a31c903e9db1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/attack.gif",
+      "originalSha256": "8e9cdcce673e8741aa241aaf118c9b46825c97d124a8d9130f3f116c746dad00",
+      "savedSha256": "8e9cdcce673e8741aa241aaf118c9b46825c97d124a8d9130f3f116c746dad00"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/attack.sheet.png",
+      "originalSha256": "3d7985361a73aafa358b9235dcd2eaf9007eb0ac0c884149eda86a1c4944802c",
+      "savedSha256": "3d7985361a73aafa358b9235dcd2eaf9007eb0ac0c884149eda86a1c4944802c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/cast.gif",
+      "originalSha256": "8c72ed0424349ac591807709bfaf79c69472d1b5c06430e3650634c09b1e0f6d",
+      "savedSha256": "8c72ed0424349ac591807709bfaf79c69472d1b5c06430e3650634c09b1e0f6d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/cast.sheet.png",
+      "originalSha256": "efdc5ad3e777566bfaf26d7dc22c10b16d46bc686f8d6383321747694bafead1",
+      "savedSha256": "efdc5ad3e777566bfaf26d7dc22c10b16d46bc686f8d6383321747694bafead1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/die.gif",
+      "originalSha256": "5e9eaa5ced0dd6e20e4b31e62f5b2345b623901f9c27f26511a894d1a98438e7",
+      "savedSha256": "5e9eaa5ced0dd6e20e4b31e62f5b2345b623901f9c27f26511a894d1a98438e7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/die.sheet.png",
+      "originalSha256": "f448608149da477986a2870f35aac4ebc7625a5ad46bf745539f8f5800961f91",
+      "savedSha256": "f448608149da477986a2870f35aac4ebc7625a5ad46bf745539f8f5800961f91"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/hit.gif",
+      "originalSha256": "fbaf2f5961e9cbf7c97364775ac8f631509a95b80227b88aefb161b798e6b65f",
+      "savedSha256": "fbaf2f5961e9cbf7c97364775ac8f631509a95b80227b88aefb161b798e6b65f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/hit.sheet.png",
+      "originalSha256": "23e8796a7a997423b9f1b11b59ccfa5eeaaaeaf0d860b9b9a60e624bdaa88d64",
+      "savedSha256": "23e8796a7a997423b9f1b11b59ccfa5eeaaaeaf0d860b9b9a60e624bdaa88d64"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/idle.gif",
+      "originalSha256": "d139e8b615d1962ca6f85b73e37c2636b433ab59adc5e9562d5fa881009fb29a",
+      "savedSha256": "d139e8b615d1962ca6f85b73e37c2636b433ab59adc5e9562d5fa881009fb29a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/idle.sheet.png",
+      "originalSha256": "df13862b3c2ae95584f9660c83e9f81ba2c59ec2ef55f0629911bc2b4eea894b",
+      "savedSha256": "df13862b3c2ae95584f9660c83e9f81ba2c59ec2ef55f0629911bc2b4eea894b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/index.json",
+      "originalSha256": "a24cecbb6b58bc2a263a93f574d71a2026ea691e0ae6020b105595132c0d5c7f",
+      "savedSha256": "20f60a12193b9da0d8d7ab9acbbf6e22bcd7decd783e8c8911725e7a3bb6f542"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/run.gif",
+      "originalSha256": "e7989f33a2a36bd0a2126113b3c0ddf3c71e38c07b7e1780448794c11b5e0f62",
+      "savedSha256": "e7989f33a2a36bd0a2126113b3c0ddf3c71e38c07b7e1780448794c11b5e0f62"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/run.sheet.png",
+      "originalSha256": "8b4cb7b3f5ab61da2da8f82b16be78ac0b28aa24161ef0fc81fe183433397235",
+      "savedSha256": "8b4cb7b3f5ab61da2da8f82b16be78ac0b28aa24161ef0fc81fe183433397235"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/walk.gif",
+      "originalSha256": "dacc4c075358df27714b461bb6bf378b21ebd8245f6d089ba0a85e6f6c51d17d",
+      "savedSha256": "dacc4c075358df27714b461bb6bf378b21ebd8245f6d089ba0a85e6f6c51d17d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/oldrig-2x/walk.sheet.png",
+      "originalSha256": "dc460112455a273bfbb2ca608fbc5bda32efe544377476cb0437ea49d6fc24ff",
+      "savedSha256": "dc460112455a273bfbb2ca608fbc5bda32efe544377476cb0437ea49d6fc24ff"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/pilot-comparison.html",
+      "originalSha256": "8aff715989eb12c9a47405adf78a3824f5f81eb20dad5aaff0a96013186d76cf",
+      "savedSha256": "8aff715989eb12c9a47405adf78a3824f5f81eb20dad5aaff0a96013186d76cf"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/pilot-provenance.json",
+      "originalSha256": "a1c0959ff547ed7caaea8ed9412c7e8c1734c649e8f36e0ecd4e02e47cdde6e4",
+      "savedSha256": "bafa2aeb3474214b1a5f4d98573442445c5ff0329141317e1b0389311ccdb760"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/pilot-qa.json",
+      "originalSha256": "82488d267ca60f2ce821232009c5e7d66a6a6e57c2c63869849d35030f5b7031",
+      "savedSha256": "a31ffe33ebc718fff6a3a2fb6e1d03cb6dbc5b9249adf4b0fc1507c742a4bfbe"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/provenance.json",
+      "originalSha256": "4a15c916e02c8da533fea608233fb40cf8c59df4f40f7f37d3a6ff3a6b6ea1a4",
+      "savedSha256": "4026fd33a839a9b319460062499be80c940f588787ffc6bfacf0a40a9db0f386"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/qa.json",
+      "originalSha256": "28681e919342e18a7d5c5bd1d95dc70b3d8cb9090605f9c0810272cd53311909",
+      "savedSha256": "8e664a24aa96ccbbf0e606c6a286cd3b732046c46f74b2e81e08c5fb9dccd493"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/quality-backlog.json",
+      "originalSha256": "9dd42dd1ec2ed893c6f23398c76e6e7c850e7c58eaad7eb109e461b4ffee78dc",
+      "savedSha256": "9dd42dd1ec2ed893c6f23398c76e6e7c850e7c58eaad7eb109e461b4ffee78dc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/quality-backlog.md",
+      "originalSha256": "e82d60fc1eaec67580504af203562dccdafb85c0e1f3afb1b45dbb613a32d29d",
+      "savedSha256": "e82d60fc1eaec67580504af203562dccdafb85c0e1f3afb1b45dbb613a32d29d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/run-cell-repair-proof.json",
+      "originalSha256": "a3f8e0ed39afecbfcd746a5db763497bacb1eff2d4c6eb75fbaf824e0a97e24c",
+      "savedSha256": "4b215d84f40d8fb795e8c92daa62380ed3842e2882592f076b551d17d3d238d7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/run-contacts.json",
+      "originalSha256": "2a3b3ed4ae632b93e97d5455d1d97a1ece23be9c60de409fd26419ff285c6741",
+      "savedSha256": "e58aaf298e7104701a380dc3b1089fd34909cdf39295ad45318c13ab8172a186"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/attack.png",
+      "originalSha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8",
+      "savedSha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/cast.png",
+      "originalSha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d",
+      "savedSha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/die.png",
+      "originalSha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470",
+      "savedSha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/hit.png",
+      "originalSha256": "09a0b6a48b8f14ca6d8946382c4198b3a92308a2995e44ba87b2886c7dc7ecd0",
+      "savedSha256": "09a0b6a48b8f14ca6d8946382c4198b3a92308a2995e44ba87b2886c7dc7ecd0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/idle.png",
+      "originalSha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e",
+      "savedSha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/run.png",
+      "originalSha256": "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6",
+      "savedSha256": "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-E/source-sheets/walk.png",
+      "originalSha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a",
+      "savedSha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/capture-timing.json",
+      "originalSha256": "0c7a938b078d4818df7f0745f7be0a1bc48a7d6999ccfb2e143ee9319107a628",
+      "savedSha256": "a8241af8e18936d122707d9d5492ace9ce5e56d487f8ea0d3c352c1caad16bab"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack.gif",
+      "originalSha256": "32fd7248651d3b4fee01b20b5ed78ab7c831f6c7cd57a607db8b785283fecef4",
+      "savedSha256": "32fd7248651d3b4fee01b20b5ed78ab7c831f6c7cd57a607db8b785283fecef4"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack.sheet.png",
+      "originalSha256": "e9e883944cf78da9d25ece47d4705b31fe76e66ba0298d4f71f4905924fed8f7",
+      "savedSha256": "e9e883944cf78da9d25ece47d4705b31fe76e66ba0298d4f71f4905924fed8f7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack_2.gif",
+      "originalSha256": "e06b09df90895dbd18353faf27c68fe09f5566f50758c1d2bba18a5f7ebcc18f",
+      "savedSha256": "e06b09df90895dbd18353faf27c68fe09f5566f50758c1d2bba18a5f7ebcc18f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack_2.sheet.png",
+      "originalSha256": "ded15ff4b63bfe28c846de7a93c03dafc637fc24d0fb628287d289641d986664",
+      "savedSha256": "ded15ff4b63bfe28c846de7a93c03dafc637fc24d0fb628287d289641d986664"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack_3.gif",
+      "originalSha256": "bb2dd8c4364b4154df80ef0052627c4a4574c2e125fcdd3ef17099d2f06c362e",
+      "savedSha256": "bb2dd8c4364b4154df80ef0052627c4a4574c2e125fcdd3ef17099d2f06c362e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/attack_3.sheet.png",
+      "originalSha256": "cf01cf42e6bfee3c5bbe5f4ecd9e96d6feb585043907e013c73de42906843a38",
+      "savedSha256": "cf01cf42e6bfee3c5bbe5f4ecd9e96d6feb585043907e013c73de42906843a38"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/cast.gif",
+      "originalSha256": "1c992acad6f1da8365c324ba3c6d19a272969bdc5d13ba04dab3f971d85f0ef8",
+      "savedSha256": "1c992acad6f1da8365c324ba3c6d19a272969bdc5d13ba04dab3f971d85f0ef8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/cast.sheet.png",
+      "originalSha256": "a724971c91a77d881d2331d93b398a291c983eb80cf5e001b3ef520f07402ddc",
+      "savedSha256": "a724971c91a77d881d2331d93b398a291c983eb80cf5e001b3ef520f07402ddc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/channel.gif",
+      "originalSha256": "2c60abd161a6575a32a8b362a785b3bc44409d70070009efc722f59a29108b2c",
+      "savedSha256": "2c60abd161a6575a32a8b362a785b3bc44409d70070009efc722f59a29108b2c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/channel.sheet.png",
+      "originalSha256": "84111b41d693bb41f7747a935f100f65213a23154f92f68d433c913d58ce96cf",
+      "savedSha256": "84111b41d693bb41f7747a935f100f65213a23154f92f68d433c913d58ce96cf"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/dash.gif",
+      "originalSha256": "bea98fde1731bb33e0708fb6b944e481bf928a1f192b85a5d37ae17eb2fb3ff1",
+      "savedSha256": "bea98fde1731bb33e0708fb6b944e481bf928a1f192b85a5d37ae17eb2fb3ff1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/dash.sheet.png",
+      "originalSha256": "d042f7f8a13e77665095d53d417c22577c44621d247d9c660a93b59fe76762df",
+      "savedSha256": "d042f7f8a13e77665095d53d417c22577c44621d247d9c660a93b59fe76762df"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/die.gif",
+      "originalSha256": "453877560c09afc756841a5204fba9cfd2f30941f7973977a40d44903f9ea2b6",
+      "savedSha256": "453877560c09afc756841a5204fba9cfd2f30941f7973977a40d44903f9ea2b6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/die.sheet.png",
+      "originalSha256": "173ba9b3cb4ba28462ef5cf36f0d44b1848104183078d069f1ef94a71a85563c",
+      "savedSha256": "173ba9b3cb4ba28462ef5cf36f0d44b1848104183078d069f1ef94a71a85563c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/emote.gif",
+      "originalSha256": "536e75de10919bf8f31f7b2b82e05377bf74bdf683a02ddfd61f0d32e819f867",
+      "savedSha256": "536e75de10919bf8f31f7b2b82e05377bf74bdf683a02ddfd61f0d32e819f867"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/emote.sheet.png",
+      "originalSha256": "f89b167636df6d7e6ec10f30545af44d8d1edc5602615c222db3d552da9e88eb",
+      "savedSha256": "f89b167636df6d7e6ec10f30545af44d8d1edc5602615c222db3d552da9e88eb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/hit.gif",
+      "originalSha256": "89d9191a5ec88e8084b51d03ba6ce75d3eaaeaa9d0b53959ae2e6c19594d709b",
+      "savedSha256": "89d9191a5ec88e8084b51d03ba6ce75d3eaaeaa9d0b53959ae2e6c19594d709b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/hit.sheet.png",
+      "originalSha256": "274a6235903795b9058e0e6a51c2eeed3c0ba818022411351cc45dd5a6b19aaa",
+      "savedSha256": "274a6235903795b9058e0e6a51c2eeed3c0ba818022411351cc45dd5a6b19aaa"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/idle.gif",
+      "originalSha256": "9d16823d939900aba67fae39991507cd9d879ddbac407c090a7e52a6e99db5e5",
+      "savedSha256": "9d16823d939900aba67fae39991507cd9d879ddbac407c090a7e52a6e99db5e5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/idle.sheet.png",
+      "originalSha256": "055a5fbcd21933ac69f9a3e98209f83214e9b090c3641753225a761de2448a29",
+      "savedSha256": "055a5fbcd21933ac69f9a3e98209f83214e9b090c3641753225a761de2448a29"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/index.json",
+      "originalSha256": "c5b441b73734fdc3cc55215e6faede0a9cce48eeb270938f5121d4e2705117a4",
+      "savedSha256": "45ccafa4cd59768994479671881774fc1eb2fcd167a3f245798b3896a7e9dbe3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/meditate.gif",
+      "originalSha256": "9ed21a9cb725a6aef8be73ac30bcda33b6832929ffbba24e8496cdca215f2479",
+      "savedSha256": "9ed21a9cb725a6aef8be73ac30bcda33b6832929ffbba24e8496cdca215f2479"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/meditate.sheet.png",
+      "originalSha256": "73c1df24357d3a718902abcf62e7592ddccf2ebcc12ba9264fff9d6cba8a34d0",
+      "savedSha256": "73c1df24357d3a718902abcf62e7592ddccf2ebcc12ba9264fff9d6cba8a34d0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/run.gif",
+      "originalSha256": "9034f1cc41b4f48f7f803885c2e574052457eafb337333e8cbf50c0a7e9d9dc8",
+      "savedSha256": "9034f1cc41b4f48f7f803885c2e574052457eafb337333e8cbf50c0a7e9d9dc8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/run.sheet.png",
+      "originalSha256": "9be5df87810895d15a5f8027d03f834979deb9d1123c4afcc52c3aa03e57366c",
+      "savedSha256": "9be5df87810895d15a5f8027d03f834979deb9d1123c4afcc52c3aa03e57366c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/sword_fly.gif",
+      "originalSha256": "e162e8df32aa60b71fa3b3781d168c87e93fbac1a04825322a1e589bc0d7c39f",
+      "savedSha256": "e162e8df32aa60b71fa3b3781d168c87e93fbac1a04825322a1e589bc0d7c39f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/sword_fly.sheet.png",
+      "originalSha256": "960e1035ff7c3e435c3d5d3552c728690f8e8ec965534577036914bc61edb50b",
+      "savedSha256": "960e1035ff7c3e435c3d5d3552c728690f8e8ec965534577036914bc61edb50b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/tribulation.gif",
+      "originalSha256": "8891255030ec5f67133f236f088588afb2642cdf530550b69a909caa2cf563c8",
+      "savedSha256": "8891255030ec5f67133f236f088588afb2642cdf530550b69a909caa2cf563c8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/tribulation.sheet.png",
+      "originalSha256": "1881005fad06ab04ac1ebafc672e54fcf44e04eea655ddbdc8e34fd9541cdc12",
+      "savedSha256": "1881005fad06ab04ac1ebafc672e54fcf44e04eea655ddbdc8e34fd9541cdc12"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/walk.gif",
+      "originalSha256": "fb6dcaf24f75d2c2627c77c6a163703cc98cd4bbfab6524681324539ebcb2565",
+      "savedSha256": "fb6dcaf24f75d2c2627c77c6a163703cc98cd4bbfab6524681324539ebcb2565"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-1x/walk.sheet.png",
+      "originalSha256": "7a8b885b7a4dfb916e50fe70ddb6fe0c3c0ea6d48e978f443d264744ed8ac6af",
+      "savedSha256": "7a8b885b7a4dfb916e50fe70ddb6fe0c3c0ea6d48e978f443d264744ed8ac6af"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack.gif",
+      "originalSha256": "d1dd5fce0ea6160fcca58512b104d317b26ec0594ae5400f70992cfe4e0a7543",
+      "savedSha256": "d1dd5fce0ea6160fcca58512b104d317b26ec0594ae5400f70992cfe4e0a7543"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack.sheet.png",
+      "originalSha256": "fd284f41da6c68948389a5a9636d38513937dacaa2ba42a0381b2b07c39c3ec8",
+      "savedSha256": "fd284f41da6c68948389a5a9636d38513937dacaa2ba42a0381b2b07c39c3ec8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack_2.gif",
+      "originalSha256": "af4528149fdaea2acde0a22aedf7b0f7dd5237f4c3b7073d8ee2fed4f94fe144",
+      "savedSha256": "af4528149fdaea2acde0a22aedf7b0f7dd5237f4c3b7073d8ee2fed4f94fe144"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack_2.sheet.png",
+      "originalSha256": "a0feb116f587233aeba24a39ecbf45b06fd41f2a393710bf5d7f0c3e5a176e98",
+      "savedSha256": "a0feb116f587233aeba24a39ecbf45b06fd41f2a393710bf5d7f0c3e5a176e98"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack_3.gif",
+      "originalSha256": "f29a24e34adad6318f13a10d5d62b5df761230850e55121d8145d203c1e4a0a7",
+      "savedSha256": "f29a24e34adad6318f13a10d5d62b5df761230850e55121d8145d203c1e4a0a7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/attack_3.sheet.png",
+      "originalSha256": "015c41fc5cd4ec161abae901869835ad3d68fd3f68fbaff117806f824b4df516",
+      "savedSha256": "015c41fc5cd4ec161abae901869835ad3d68fd3f68fbaff117806f824b4df516"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/cast.gif",
+      "originalSha256": "c42d2cc3bad3b65e996a0859a31421b5838718eb31db408a8db08129f9b9e1ff",
+      "savedSha256": "c42d2cc3bad3b65e996a0859a31421b5838718eb31db408a8db08129f9b9e1ff"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/cast.sheet.png",
+      "originalSha256": "384a0567e80d07748633352978ebd9b70bd9122b67895250fe56909abeda6bce",
+      "savedSha256": "384a0567e80d07748633352978ebd9b70bd9122b67895250fe56909abeda6bce"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/channel.gif",
+      "originalSha256": "bc7d9ddc2f25ebc24825f166fc26c7c20312baf97f15923d6f0372c24494c888",
+      "savedSha256": "bc7d9ddc2f25ebc24825f166fc26c7c20312baf97f15923d6f0372c24494c888"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/channel.sheet.png",
+      "originalSha256": "736d8a3cd355e8089e757eba87f1fb3f93f4f2e6d63a63b01e3c69a600ff3082",
+      "savedSha256": "736d8a3cd355e8089e757eba87f1fb3f93f4f2e6d63a63b01e3c69a600ff3082"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/dash.gif",
+      "originalSha256": "bcca88fea24c00aaee0262e0185e430d29c9a1e0c0b9d1e279b8817eaabbe40d",
+      "savedSha256": "bcca88fea24c00aaee0262e0185e430d29c9a1e0c0b9d1e279b8817eaabbe40d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/dash.sheet.png",
+      "originalSha256": "052099aeb30422ed8d58b73570702cf5ad78ae6ec45ef749463f6ce01816bf02",
+      "savedSha256": "052099aeb30422ed8d58b73570702cf5ad78ae6ec45ef749463f6ce01816bf02"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/die.gif",
+      "originalSha256": "8ab68a9910e611a041ca7b74b51c5a433be3a387e79d298fb0e0aa4f861f6a7a",
+      "savedSha256": "8ab68a9910e611a041ca7b74b51c5a433be3a387e79d298fb0e0aa4f861f6a7a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/die.sheet.png",
+      "originalSha256": "79d3a2c78627d25d14cc7c7930fd9f387b6347a49b771cc8f2f3176b35304cbb",
+      "savedSha256": "79d3a2c78627d25d14cc7c7930fd9f387b6347a49b771cc8f2f3176b35304cbb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/emote.gif",
+      "originalSha256": "5113e49b3c73796df43f10903cabe585b44d84732f004b6ea351857dc89f6770",
+      "savedSha256": "5113e49b3c73796df43f10903cabe585b44d84732f004b6ea351857dc89f6770"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/emote.sheet.png",
+      "originalSha256": "ea367e594fc553a5b46d1a436b1fe3c630c77d28cab8eaab03b3e2482ab166a8",
+      "savedSha256": "ea367e594fc553a5b46d1a436b1fe3c630c77d28cab8eaab03b3e2482ab166a8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/hit.gif",
+      "originalSha256": "d8a7713a236737a4a3aadc4d9f9cfcb57586c43d52a6c7085aae0d404a218008",
+      "savedSha256": "d8a7713a236737a4a3aadc4d9f9cfcb57586c43d52a6c7085aae0d404a218008"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/hit.sheet.png",
+      "originalSha256": "bce9cc56368d3bd4f3af8c778d923994fe0b3a596332e0c550e14305e62b0354",
+      "savedSha256": "bce9cc56368d3bd4f3af8c778d923994fe0b3a596332e0c550e14305e62b0354"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/idle.gif",
+      "originalSha256": "316809f7425408b50a186d0f28257a86b1cbfbfaed5b11f18764a304839abbc5",
+      "savedSha256": "316809f7425408b50a186d0f28257a86b1cbfbfaed5b11f18764a304839abbc5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/idle.sheet.png",
+      "originalSha256": "f26ab1087de17a96293cbec26f341e27388d508c2a87a73331e241803039065c",
+      "savedSha256": "f26ab1087de17a96293cbec26f341e27388d508c2a87a73331e241803039065c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/index.json",
+      "originalSha256": "7e6ddce9a87688bc786327de8c5977b728e959f80622acb91540d5b2a2971c24",
+      "savedSha256": "8c94faa0739d4ca2ca9b42eb419845a39a8a37d83389995f7d4915d13e5697ec"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/meditate.gif",
+      "originalSha256": "168f15f1bbf878801649b5515b8bb587c60b76eb361572768380634c304faac0",
+      "savedSha256": "168f15f1bbf878801649b5515b8bb587c60b76eb361572768380634c304faac0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/meditate.sheet.png",
+      "originalSha256": "668770df099b9d117c697cd3015b55d45015c690b3af471107bb7c803822ba8f",
+      "savedSha256": "668770df099b9d117c697cd3015b55d45015c690b3af471107bb7c803822ba8f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/run.gif",
+      "originalSha256": "7cbb7c08c5569dfaf55a38662c4723dcf22b82d7998598bd416f899b1cbde02f",
+      "savedSha256": "7cbb7c08c5569dfaf55a38662c4723dcf22b82d7998598bd416f899b1cbde02f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/run.sheet.png",
+      "originalSha256": "eab4bb0ccd53c6ba1e07132508bee0130a444b8c118c870a09f5f55b65e28d44",
+      "savedSha256": "eab4bb0ccd53c6ba1e07132508bee0130a444b8c118c870a09f5f55b65e28d44"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/sword_fly.gif",
+      "originalSha256": "2c0b447ce1182c0a1c522c97d1db9fc34a20b073c9127ab087f147681bc1fdde",
+      "savedSha256": "2c0b447ce1182c0a1c522c97d1db9fc34a20b073c9127ab087f147681bc1fdde"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/sword_fly.sheet.png",
+      "originalSha256": "6aa85b68b2915bd333053389eada8c6b724df907f5ae222a88228e18012ed665",
+      "savedSha256": "6aa85b68b2915bd333053389eada8c6b724df907f5ae222a88228e18012ed665"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/tribulation.gif",
+      "originalSha256": "b1a230ac98467858c34150b68e5d02c00f2d76f39d4add80ac8fa41b63602da2",
+      "savedSha256": "b1a230ac98467858c34150b68e5d02c00f2d76f39d4add80ac8fa41b63602da2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/tribulation.sheet.png",
+      "originalSha256": "85fe3e124b744f959b93de3996064b91e00112506515f7c9921573f86ed0011a",
+      "savedSha256": "85fe3e124b744f959b93de3996064b91e00112506515f7c9921573f86ed0011a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/walk.gif",
+      "originalSha256": "44e7a80b8c60b1f1ddaad65ed4cb561065e41fea6d51a67f01f62bba28954b6c",
+      "savedSha256": "44e7a80b8c60b1f1ddaad65ed4cb561065e41fea6d51a67f01f62bba28954b6c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/full-2x/walk.sheet.png",
+      "originalSha256": "3fe90001daf9f99155fbbd0705be3d3ddbf8f67a2348127433ca2e7eb2633a00",
+      "savedSha256": "3fe90001daf9f99155fbbd0705be3d3ddbf8f67a2348127433ca2e7eb2633a00"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/independent-audit.json",
+      "originalSha256": "6ae644c3196943ee450a48a34fc9ec79218c77716691b8b84b12ca8d73a7b718",
+      "savedSha256": "6ae644c3196943ee450a48a34fc9ec79218c77716691b8b84b12ca8d73a7b718"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/index.html",
+      "originalSha256": "ada8b85ef4e69f253ea90294e43adeaeeeb480d738e0f07eceb8393f82bb96e2",
+      "savedSha256": "ada8b85ef4e69f253ea90294e43adeaeeeb480d738e0f07eceb8393f82bb96e2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/kiem-tu/SE/kiemtu_SE.sprite.json",
+      "originalSha256": "88d820f57fa7ae0f82a691076bde06a3231a483c5a1a518c885fc6eaf33b686d",
+      "savedSha256": "f6dd0a0fb818531460a40606a34fd633e5119158754de3e11eb773687221ce18"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/manual-art-findings.json",
+      "originalSha256": "1e6fd59292e2a7364f351756b337c16ff9f54dc0a35037ee8cf92bd39fae0aae",
+      "savedSha256": "1e6fd59292e2a7364f351756b337c16ff9f54dc0a35037ee8cf92bd39fae0aae"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/provenance.json",
+      "originalSha256": "a92b01b312f407937c485b1b6d19bae58be2cda3bdcc648d36c18f305f73a025",
+      "savedSha256": "12818b8d908d9c6bf41b371562362e0ade0fc77d071ddd677158a407699a7f30"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/quality-backlog.json",
+      "originalSha256": "9d04439f8e427e9b74a981ab6f71c0c60e94a77707c1e03eb68479c5861bbbb9",
+      "savedSha256": "9d04439f8e427e9b74a981ab6f71c0c60e94a77707c1e03eb68479c5861bbbb9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-SE/unexcepted-pose-diagnostic.json",
+      "originalSha256": "8dc421d181cc868183aa11fc2725beb45d0adf88049d66fa3f01e7208e38d10d",
+      "savedSha256": "8163485209a818cc8dcf3c54013afd063cb4ecbc1cf30d1d8ab6cfb0c87038f7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/capture-timing.json",
+      "originalSha256": "0c7a938b078d4818df7f0745f7be0a1bc48a7d6999ccfb2e143ee9319107a628",
+      "savedSha256": "a8241af8e18936d122707d9d5492ace9ce5e56d487f8ea0d3c352c1caad16bab"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack.gif",
+      "originalSha256": "b0755e2650e58fe69d8bbb373e6237083ea8cd4a844936aeec923cdeceddc3c1",
+      "savedSha256": "b0755e2650e58fe69d8bbb373e6237083ea8cd4a844936aeec923cdeceddc3c1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack.sheet.png",
+      "originalSha256": "a4ad45875c5736e2d4f999d033f7fa3f571be6f5aab79a319de929756c3f1a13",
+      "savedSha256": "a4ad45875c5736e2d4f999d033f7fa3f571be6f5aab79a319de929756c3f1a13"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack_2.gif",
+      "originalSha256": "30bbc70b9f8cca7ea0fdef1dd04233a0846be30d40ecffad28d1185ba8a9315a",
+      "savedSha256": "30bbc70b9f8cca7ea0fdef1dd04233a0846be30d40ecffad28d1185ba8a9315a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack_2.sheet.png",
+      "originalSha256": "095b8ec2050c6ec8d498e02bc0bf5ea7ca2dfc377f0beca80047cc76709722e1",
+      "savedSha256": "095b8ec2050c6ec8d498e02bc0bf5ea7ca2dfc377f0beca80047cc76709722e1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack_3.gif",
+      "originalSha256": "a705e1cbe7b07fa24efc78c2bc02d382de4f1b27fd7e93341d1f1e8c2c794c42",
+      "savedSha256": "a705e1cbe7b07fa24efc78c2bc02d382de4f1b27fd7e93341d1f1e8c2c794c42"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/attack_3.sheet.png",
+      "originalSha256": "6b00169dd468a073770cc1b61bf261ba3726c7f4d998e131427066893a8080d2",
+      "savedSha256": "6b00169dd468a073770cc1b61bf261ba3726c7f4d998e131427066893a8080d2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/cast.gif",
+      "originalSha256": "b1725549cbddf1d34b85472e7034bc185ff8be5d136bcfce4ab2f16b92673408",
+      "savedSha256": "b1725549cbddf1d34b85472e7034bc185ff8be5d136bcfce4ab2f16b92673408"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/cast.sheet.png",
+      "originalSha256": "bcadfa94fe23210652cf17c33560355e65625fe4dbe751451ab9c757fe5f2526",
+      "savedSha256": "bcadfa94fe23210652cf17c33560355e65625fe4dbe751451ab9c757fe5f2526"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/channel.gif",
+      "originalSha256": "2076794c9891c4b3284b5af8cc1e3dfeb68a28eb5eb42dea70dad5c7bbae7ff3",
+      "savedSha256": "2076794c9891c4b3284b5af8cc1e3dfeb68a28eb5eb42dea70dad5c7bbae7ff3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/channel.sheet.png",
+      "originalSha256": "d0c07d7e846c8fa213243da0665f471cf1ca1e96f7dde76b7fce9ec1174aec5b",
+      "savedSha256": "d0c07d7e846c8fa213243da0665f471cf1ca1e96f7dde76b7fce9ec1174aec5b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/dash.gif",
+      "originalSha256": "f398ab58de8c1bad26450a0b83adf86526d08f5146a4c717cecca376c11675ea",
+      "savedSha256": "f398ab58de8c1bad26450a0b83adf86526d08f5146a4c717cecca376c11675ea"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/dash.sheet.png",
+      "originalSha256": "80468d6d0762be5bc5fb1d7958f20251d314b9f49df4daa6f5fc72e1f1980904",
+      "savedSha256": "80468d6d0762be5bc5fb1d7958f20251d314b9f49df4daa6f5fc72e1f1980904"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/die.gif",
+      "originalSha256": "bcd484af528fa71f6c30812f8ee5bd4462536f6194ae06d549e7fde025e30717",
+      "savedSha256": "bcd484af528fa71f6c30812f8ee5bd4462536f6194ae06d549e7fde025e30717"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/die.sheet.png",
+      "originalSha256": "dfaed83c10424ab38e8811c60212364fc154eb98caaadfc44a914292e8bc72a1",
+      "savedSha256": "dfaed83c10424ab38e8811c60212364fc154eb98caaadfc44a914292e8bc72a1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/emote.gif",
+      "originalSha256": "f8fed236313191bf37c60cd26dc7529a5dcceaee572068e50084be88a465e22c",
+      "savedSha256": "f8fed236313191bf37c60cd26dc7529a5dcceaee572068e50084be88a465e22c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/emote.sheet.png",
+      "originalSha256": "5caf37a894be0776c9be7c1c50b4459a998504495a268665c2f3b86754f2947a",
+      "savedSha256": "5caf37a894be0776c9be7c1c50b4459a998504495a268665c2f3b86754f2947a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/hit.gif",
+      "originalSha256": "b1404520677dba35ed50e660079c52f9e9284012995aac1f21ebfc99a4ad6f53",
+      "savedSha256": "b1404520677dba35ed50e660079c52f9e9284012995aac1f21ebfc99a4ad6f53"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/hit.sheet.png",
+      "originalSha256": "4778a127bda5be53307fa6b70ab60061fbc8f0d6d5d170abc95b838845c8d9df",
+      "savedSha256": "4778a127bda5be53307fa6b70ab60061fbc8f0d6d5d170abc95b838845c8d9df"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/idle.gif",
+      "originalSha256": "9be2bf4058ae8d51942c8fa1cb6e15f3eeb2a8ed25e6aaa63ed803072641d45d",
+      "savedSha256": "9be2bf4058ae8d51942c8fa1cb6e15f3eeb2a8ed25e6aaa63ed803072641d45d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/idle.sheet.png",
+      "originalSha256": "7060f62851d56692a9b222d8efd04a51da4f1cc533537645cc0019b015ffa90f",
+      "savedSha256": "7060f62851d56692a9b222d8efd04a51da4f1cc533537645cc0019b015ffa90f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/index.json",
+      "originalSha256": "5c78e60f0b65dea6ff2ea2c8212af347d5be9472f37118c9b5d365e5cd31992b",
+      "savedSha256": "bc18082a785dfef3765d82ed92c0e5f0549930b2c261e50f630d81420661fe34"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/meditate.gif",
+      "originalSha256": "21b3c2660a2ee8072b28a3213c88e71306dd26146325e5d736a68aacdc7d42b4",
+      "savedSha256": "21b3c2660a2ee8072b28a3213c88e71306dd26146325e5d736a68aacdc7d42b4"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/meditate.sheet.png",
+      "originalSha256": "f9637294794d282107d2d7b4aadb7f2d57e39564492989207f64cda63bb73aeb",
+      "savedSha256": "f9637294794d282107d2d7b4aadb7f2d57e39564492989207f64cda63bb73aeb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/run.gif",
+      "originalSha256": "5e68ad8e3724ed157bf67217554e45293a2df4b714fbdbc94568367aa13f3b12",
+      "savedSha256": "5e68ad8e3724ed157bf67217554e45293a2df4b714fbdbc94568367aa13f3b12"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/run.sheet.png",
+      "originalSha256": "7499ae5f41134d8bf941989fb87e726ab4130d7e7f2a664466e50cb3e517c9c3",
+      "savedSha256": "7499ae5f41134d8bf941989fb87e726ab4130d7e7f2a664466e50cb3e517c9c3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/sword_fly.gif",
+      "originalSha256": "a786c640346680cb78fd959639bcd10a59ad2a0c035b93eae9355ae9f512c27c",
+      "savedSha256": "a786c640346680cb78fd959639bcd10a59ad2a0c035b93eae9355ae9f512c27c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/sword_fly.sheet.png",
+      "originalSha256": "6cc7b91bf516dacea897dcfe83df7577df94cc8d1cb98b87c156a9413b607f03",
+      "savedSha256": "6cc7b91bf516dacea897dcfe83df7577df94cc8d1cb98b87c156a9413b607f03"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/tribulation.gif",
+      "originalSha256": "2215b21f29843c303d6fb04e6604c60a4d8e7ed430e56012f9c12887c79d751e",
+      "savedSha256": "2215b21f29843c303d6fb04e6604c60a4d8e7ed430e56012f9c12887c79d751e"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/tribulation.sheet.png",
+      "originalSha256": "d4ecd64ae918eb3a468e481833ca2a2f0e81aca7d51f3ae8f210e2ec05b3377f",
+      "savedSha256": "d4ecd64ae918eb3a468e481833ca2a2f0e81aca7d51f3ae8f210e2ec05b3377f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/walk.gif",
+      "originalSha256": "5f2a8afff8c8f51bf9031442ca3bee775df1d7cad15c1ccc425200c7a896b965",
+      "savedSha256": "5f2a8afff8c8f51bf9031442ca3bee775df1d7cad15c1ccc425200c7a896b965"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-1x/walk.sheet.png",
+      "originalSha256": "8e9e80a82131e174bb1d0f916d6615708d2226ffe486d973037de9c38f7ce9a1",
+      "savedSha256": "8e9e80a82131e174bb1d0f916d6615708d2226ffe486d973037de9c38f7ce9a1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack.gif",
+      "originalSha256": "3a0b5f7dc474a2e81de99380e3a3f0002d9f0fe1ba776abf2f9c06e0b2553b40",
+      "savedSha256": "3a0b5f7dc474a2e81de99380e3a3f0002d9f0fe1ba776abf2f9c06e0b2553b40"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack.sheet.png",
+      "originalSha256": "36abcb17f8b2d35005d83acbef6e1dcd40a0b1902f16c43cccc4a7926297d80c",
+      "savedSha256": "36abcb17f8b2d35005d83acbef6e1dcd40a0b1902f16c43cccc4a7926297d80c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack_2.gif",
+      "originalSha256": "c47526b4be08849440a5e50835e3e85c4d850440073f9dd757fedf54054430f2",
+      "savedSha256": "c47526b4be08849440a5e50835e3e85c4d850440073f9dd757fedf54054430f2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack_2.sheet.png",
+      "originalSha256": "aa6bc984f8930d6a6bd08820e8eb4876f3d3fb299aa06acc45a5c2ead60fe903",
+      "savedSha256": "aa6bc984f8930d6a6bd08820e8eb4876f3d3fb299aa06acc45a5c2ead60fe903"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack_3.gif",
+      "originalSha256": "25ebf2935455b8180ff0a7a27fae9b74dd34a9aff9867eb5388aa56c51646347",
+      "savedSha256": "25ebf2935455b8180ff0a7a27fae9b74dd34a9aff9867eb5388aa56c51646347"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/attack_3.sheet.png",
+      "originalSha256": "474ae7534d4031a690febbf1e0fcd2ff5efd48ce379b82da2ffd290ea17c972c",
+      "savedSha256": "474ae7534d4031a690febbf1e0fcd2ff5efd48ce379b82da2ffd290ea17c972c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/cast.gif",
+      "originalSha256": "2d89afb6dfc73e68ba87772d0725594f022d462caf4b7b24ca0d6840f2b29bf7",
+      "savedSha256": "2d89afb6dfc73e68ba87772d0725594f022d462caf4b7b24ca0d6840f2b29bf7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/cast.sheet.png",
+      "originalSha256": "c04ecda15652c4ade6f457abdbba509179b4f8d8d2a97a1208260c2ae3455551",
+      "savedSha256": "c04ecda15652c4ade6f457abdbba509179b4f8d8d2a97a1208260c2ae3455551"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/channel.gif",
+      "originalSha256": "f8e4d3351d8a50a86a4b7fd0a47bf2dbb5813073753e52e9f8a844e331fdd210",
+      "savedSha256": "f8e4d3351d8a50a86a4b7fd0a47bf2dbb5813073753e52e9f8a844e331fdd210"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/channel.sheet.png",
+      "originalSha256": "6dad0dd2ada8afc8f12425313f1e23a32fe92e95eb41fbbdd67a18cb48a7f87b",
+      "savedSha256": "6dad0dd2ada8afc8f12425313f1e23a32fe92e95eb41fbbdd67a18cb48a7f87b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/dash.gif",
+      "originalSha256": "33aace2d4a9bf71c5cd83cb414da8b4d103bff5ee12be1b70cd9d6b4f47e71f1",
+      "savedSha256": "33aace2d4a9bf71c5cd83cb414da8b4d103bff5ee12be1b70cd9d6b4f47e71f1"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/dash.sheet.png",
+      "originalSha256": "3bec65a6bd68ceec8a8d0113d09b043b30d7ef11f94ceb9bbb034b84a41baff0",
+      "savedSha256": "3bec65a6bd68ceec8a8d0113d09b043b30d7ef11f94ceb9bbb034b84a41baff0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/die.gif",
+      "originalSha256": "df59304134d37ba95f740ef6a00da2d6f65252bfe6e9c4e2eeb7e56af30dda7b",
+      "savedSha256": "df59304134d37ba95f740ef6a00da2d6f65252bfe6e9c4e2eeb7e56af30dda7b"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/die.sheet.png",
+      "originalSha256": "0e1769ef90cf217a3b4c50bad157ad77f825300f54375814ba7a785872e36bfc",
+      "savedSha256": "0e1769ef90cf217a3b4c50bad157ad77f825300f54375814ba7a785872e36bfc"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/emote.gif",
+      "originalSha256": "34b019c01b2dd7b9d7db34625d0618907341512e2e834541a6ba73d163a59f41",
+      "savedSha256": "34b019c01b2dd7b9d7db34625d0618907341512e2e834541a6ba73d163a59f41"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/emote.sheet.png",
+      "originalSha256": "5d960384a1ddf91af2a12fb1fc49c13f4814e12d8efe121c18b2ff5a26f4ea30",
+      "savedSha256": "5d960384a1ddf91af2a12fb1fc49c13f4814e12d8efe121c18b2ff5a26f4ea30"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/hit.gif",
+      "originalSha256": "939592019a94db7e794db75bb05d979b01cfa9da5d37f2ade17c43d4d0625fb4",
+      "savedSha256": "939592019a94db7e794db75bb05d979b01cfa9da5d37f2ade17c43d4d0625fb4"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/hit.sheet.png",
+      "originalSha256": "38b571e5e5eb9152321aa87fe391c6a822f81a00ee8877f3a4ec4a26eb727a71",
+      "savedSha256": "38b571e5e5eb9152321aa87fe391c6a822f81a00ee8877f3a4ec4a26eb727a71"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/idle.gif",
+      "originalSha256": "3306137ea3e9873af8a3b161dedaedbb0da26a6f3357e8d9797b76d5dffc5555",
+      "savedSha256": "3306137ea3e9873af8a3b161dedaedbb0da26a6f3357e8d9797b76d5dffc5555"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/idle.sheet.png",
+      "originalSha256": "3037e0ed11a39e1d7f5260440fea8d5b21cc0c35d5a6e38fbfe3d8a124f98310",
+      "savedSha256": "3037e0ed11a39e1d7f5260440fea8d5b21cc0c35d5a6e38fbfe3d8a124f98310"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/index.json",
+      "originalSha256": "cbf32114e8b2299a8d896932714589065dac20787af887632e4ee4c4368526b2",
+      "savedSha256": "a7bbd80c0bf27e3f6ebd5727d86abdb7bdf903e55203f227cdc3875d197b7a07"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/meditate.gif",
+      "originalSha256": "7a28f7a0f2187a1ec2c2446b01b9cf84356e0bc722b8708da48c798021f29193",
+      "savedSha256": "7a28f7a0f2187a1ec2c2446b01b9cf84356e0bc722b8708da48c798021f29193"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/meditate.sheet.png",
+      "originalSha256": "95c024ba9bed2d68f6fab3d566a23753c74b55af9943e36962a5382e8959f8ad",
+      "savedSha256": "95c024ba9bed2d68f6fab3d566a23753c74b55af9943e36962a5382e8959f8ad"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/run.gif",
+      "originalSha256": "3f630798e11f03bd0da828e09cfe3feefd5e191fbe8dacf02c36864ee25f7c48",
+      "savedSha256": "3f630798e11f03bd0da828e09cfe3feefd5e191fbe8dacf02c36864ee25f7c48"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/run.sheet.png",
+      "originalSha256": "05fd48010a5569b9817d76a39d462489f3a4b64b4e5b55f05d7af659d6fd9cb0",
+      "savedSha256": "05fd48010a5569b9817d76a39d462489f3a4b64b4e5b55f05d7af659d6fd9cb0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/sword_fly.gif",
+      "originalSha256": "db956e866918eb91a88858815ee563f36171c4a33746401b4ff1c5712a7e542a",
+      "savedSha256": "db956e866918eb91a88858815ee563f36171c4a33746401b4ff1c5712a7e542a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/sword_fly.sheet.png",
+      "originalSha256": "b10a022670f3a6a4b49fc045ebdec226a820eb8b88e079fb1bc1ea246c554476",
+      "savedSha256": "b10a022670f3a6a4b49fc045ebdec226a820eb8b88e079fb1bc1ea246c554476"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/tribulation.gif",
+      "originalSha256": "ee91050fb55fbec875177c9e2797c524e46f48ce57be6fea7c5035297d352d92",
+      "savedSha256": "ee91050fb55fbec875177c9e2797c524e46f48ce57be6fea7c5035297d352d92"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/tribulation.sheet.png",
+      "originalSha256": "2b1a030d06bf718c73a8f20a4a3220f8d6059f3aeec2461d3ea7ceaa443a0632",
+      "savedSha256": "2b1a030d06bf718c73a8f20a4a3220f8d6059f3aeec2461d3ea7ceaa443a0632"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/walk.gif",
+      "originalSha256": "9b0e38f4cbfc75dedada52281e44e901de37e0f62026d833f9b73108679ed4bf",
+      "savedSha256": "9b0e38f4cbfc75dedada52281e44e901de37e0f62026d833f9b73108679ed4bf"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/full-2x/walk.sheet.png",
+      "originalSha256": "9ace3beb3d5d64003278b0ab6fbdc122f364a03bfe372d0e78cee2e0a242c64d",
+      "savedSha256": "9ace3beb3d5d64003278b0ab6fbdc122f364a03bfe372d0e78cee2e0a242c64d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/independent-audit.json",
+      "originalSha256": "24e8ff64685495f843ab747e74a94e341f5e0d1de2ef9dd9d65b6aaa4e08529c",
+      "savedSha256": "24e8ff64685495f843ab747e74a94e341f5e0d1de2ef9dd9d65b6aaa4e08529c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/index.html",
+      "originalSha256": "722731e87e9587936bf839aa5b5f68bbd04dcc1d6b2a74ba16b1c3614b1512a7",
+      "savedSha256": "722731e87e9587936bf839aa5b5f68bbd04dcc1d6b2a74ba16b1c3614b1512a7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/kiem-tu/S/kiemtu_S.sprite.json",
+      "originalSha256": "f616867685d7e30c918bdba0cbb584815001d00b31e6f8f24a36a89bbb747300",
+      "savedSha256": "5768849900a543376df15c8ffab0f5b8c70951b5372b8889b07aef508c7edd88"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/manual-art-findings.json",
+      "originalSha256": "73cafca24f09b9dfcab0923c392b66810123ce0bfeca14e343af26689cf7ea13",
+      "savedSha256": "73cafca24f09b9dfcab0923c392b66810123ce0bfeca14e343af26689cf7ea13"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/provenance.json",
+      "originalSha256": "b508792ebc8b962c4cdf0028bde5703619afed95e4f6b06415fa809530ac9c99",
+      "savedSha256": "b508792ebc8b962c4cdf0028bde5703619afed95e4f6b06415fa809530ac9c99"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/quality-backlog.json",
+      "originalSha256": "43ddc04957b9cfebfc637b0f1982195c21d654e1e23754ec9aed8528948a1610",
+      "savedSha256": "43ddc04957b9cfebfc637b0f1982195c21d654e1e23754ec9aed8528948a1610"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/review/final-A-S/unexcepted-pose-diagnostic.json",
+      "originalSha256": "ab19076e19370203dd73c0440579ab0ceb9870a48bc14b3272ce8d06034ad34f",
+      "savedSha256": "055e059b523a38b51e02e8b937c11bd97c4bb6cabf8de609f992cb59813d6075"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_ske.json",
+      "originalSha256": "b56bb6de8d6028736de7e4b577e92e00931218adaf959fbc64b435c9546d8321",
+      "savedSha256": "60ec40bd4b2cb6a7159d26caa0fdc99112baf467402b022044577ed971590229"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_ske.json.meta",
+      "originalSha256": "6cb7de1fd2961d8d6564da712b4ff5428a9c2fede452633d08ad9d44c419303c",
+      "savedSha256": "6cb7de1fd2961d8d6564da712b4ff5428a9c2fede452633d08ad9d44c419303c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_tex.json",
+      "originalSha256": "d191332f3d52485bb6d1368f68d70eb98347e74029303bdf4432eb0a241c343d",
+      "savedSha256": "2a5a85d988229285e203ea3984dc3e51c7d4da53a14c9eb3291caefbf7745090"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_tex.json.meta",
+      "originalSha256": "a1b21ffcaea77182063b31feddf657d98f94ca2c0e458c117ce95e207ac3c8e9",
+      "savedSha256": "a1b21ffcaea77182063b31feddf657d98f94ca2c0e458c117ce95e207ac3c8e9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_tex.png",
+      "originalSha256": "23a6403b71ebb6fc6d29d7d0706e4386e8d572cb2d92fae7e55bc57821400b38",
+      "savedSha256": "23a6403b71ebb6fc6d29d7d0706e4386e8d572cb2d92fae7e55bc57821400b38"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a/bake_E_tex.png.meta",
+      "originalSha256": "0fc1ad7682efd3cb5f35b7aebc52e9d190520888e27c961e037b302a31188cbb",
+      "savedSha256": "0fc1ad7682efd3cb5f35b7aebc52e9d190520888e27c961e037b302a31188cbb"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/bakeoff-a.meta",
+      "originalSha256": "41f776b20117c6596fa91a1264aa117672d2894ad6b76d3d64a8abf16fd6cdf0",
+      "savedSha256": "41f776b20117c6596fa91a1264aa117672d2894ad6b76d3d64a8abf16fd6cdf0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.assembly.json",
+      "originalSha256": "74a383a450771d32a923aa9e9230ffce96e4492e440c520a892d8cb54293b1f6",
+      "savedSha256": "1d6cafcd5e3ca66c56cd158013dc206b510ab0232c5319b9d0f7cea96379f833"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.assembly.json.meta",
+      "originalSha256": "07546b32cb6c76aba9a4933c0d3bc9250f17e1efcd0c08d074bab3fbb94a46a4",
+      "savedSha256": "07546b32cb6c76aba9a4933c0d3bc9250f17e1efcd0c08d074bab3fbb94a46a4"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.atlas.json",
+      "originalSha256": "a099791db9ae009150b64601e3f112b86d4c161845fc3dd7dbbcdbf04faffe48",
+      "savedSha256": "5596123577292e192fd2351cc0f597503dfdf609ca00acca68d782609e2924c2"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.atlas.json.meta",
+      "originalSha256": "b1286f190876e5617be7712d59566bd2c4af4aeef71622a95a6ad15f049b41b0",
+      "savedSha256": "b1286f190876e5617be7712d59566bd2c4af4aeef71622a95a6ad15f049b41b0"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.rig.json",
+      "originalSha256": "ff1fae4b54e271e4f7ac5e03b019099307b6e64c151dbe39746dc0356ce27c8e",
+      "savedSha256": "81fbe29f0de502f66681e86cd9b8eca45090b452fd812335ef3ec2d70b31bed8"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E.rig.json.meta",
+      "originalSha256": "9553f53ef57dbd38d5b06c9f85f43864e944db004b6dc193f7f6c1cdcde4f3d3",
+      "savedSha256": "9553f53ef57dbd38d5b06c9f85f43864e944db004b6dc193f7f6c1cdcde4f3d3"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_ske.json",
+      "originalSha256": "c52442d2564e986e138c64fb6730fa75019c17364c3371aa67621af42171eca4",
+      "savedSha256": "eda202e57d59a1c6c76c2f07bd58993d3afabf2c92227c961644fc9989084d42"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_ske.json.meta",
+      "originalSha256": "41c49662e06a4ee880b16de02bf9a57280702f388c8d3d1c2f3e0df6f9f9cb98",
+      "savedSha256": "41c49662e06a4ee880b16de02bf9a57280702f388c8d3d1c2f3e0df6f9f9cb98"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_tex.json",
+      "originalSha256": "f3065a663ae62cffe8749d49bd814c4a6ea1ff1a84ca907cf0bba599b706f025",
+      "savedSha256": "a04b791fee34afd5bb9ef884c314d075f964dcc47175d1c98957dcc06dcb5f53"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_tex.json.meta",
+      "originalSha256": "df8c9a840b4c2bb29759e754cd218bb1b77d0893e16e957bea6f8061d5ad5967",
+      "savedSha256": "df8c9a840b4c2bb29759e754cd218bb1b77d0893e16e957bea6f8061d5ad5967"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_tex.png",
+      "originalSha256": "4bd5ec55c988ac82080bf33f13b8c5b57776ab7dd8bc1b869169dfd12ee27f50",
+      "savedSha256": "4bd5ec55c988ac82080bf33f13b8c5b57776ab7dd8bc1b869169dfd12ee27f50"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous/kiemtu_E_tex.png.meta",
+      "originalSha256": "2cb8e9a979a0eb530f1f81b86346e2093f0d2cdb3c18eb1d2b75e3f2e056cfe6",
+      "savedSha256": "2cb8e9a979a0eb530f1f81b86346e2093f0d2cdb3c18eb1d2b75e3f2e056cfe6"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/legacy-runtime/kiem-tu-continuous.meta",
+      "originalSha256": "ae2b2c714b944111184689938e2ee50aba0a22d9dce31805407f831afe24c21a",
+      "savedSha256": "ae2b2c714b944111184689938e2ee50aba0a22d9dce31805407f831afe24c21a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-N-guide-pose.ts",
+      "originalSha256": "ac616544393305ea21862af3396b558e54af8c0967474cc0e6e3ae5b0ec2fea8",
+      "savedSha256": "11866f494424b3c4a448a7d1b1238f82702c439095f915ff2c192d83b086adb5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-N-plan.ts",
+      "originalSha256": "a7950270e1debfb25b8a3dc8f0903e50d5c984c08c98abf6dfb124e3d1a2f610",
+      "savedSha256": "bbdb3aa1ed8bf05a714e26618bf405f5f19408884f4d0e6c863a5666852db9a7"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-N-preflight1.ts",
+      "originalSha256": "157cecd5ebe21de2c8feda10c2c541939e91a3a60fe92ea97809246f4d0efa91",
+      "savedSha256": "43e42d679b695eaf3a5f3f0bc6bed8a8c1191c7bb972b1a02b3aab6d1c888e45"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-guide-pose.ts",
+      "originalSha256": "bf524b19517237854b6f7b8c89cc41f675666c01b32ca2ca8535369130a00f9e",
+      "savedSha256": "ab13244192b863bdcbc68c95ecf1b280f6d5aa64677e884e2f51603f827abaa9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-plan.ts",
+      "originalSha256": "396b6f45e1f0111f9f5feb6bb14a3f5b895cde675c0914f9cffb96e8cc1e1a20",
+      "savedSha256": "b9ed08a894a763d6ac0f3ff8cb86cf8c6c464378fc6572781c80f89df998415f"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-preflight1.ts",
+      "originalSha256": "58772b63e2fb0816fd1e7e5e158345aa4342bf4e5c42859a14393d52d3c8dc64",
+      "savedSha256": "98ed85952ce7b4fe4d4279d239d3ce35b767ee44e8912e04c31daa8a1549202c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-preflight2.ts",
+      "originalSha256": "7daba75a7441827a177e554800b9d7814bc473ab0764d5ee64ecf2d0dc9a905d",
+      "savedSha256": "544fa38024139c673c62d99c3faea512776da8c6eea8490c5353fdf721165f8a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-preflight3.ts",
+      "originalSha256": "1722bdd7a7db4484d5009df597dbe3cbab847fabffb077a773d0f0d50b3c1c52",
+      "savedSha256": "28d08ddad47416dc783bd762c0c04efecd03812c3849bed158ac2befd25e7443"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-kiem-tu-NE-run-height-guide.ts",
+      "originalSha256": "d7530bc2e316c9926f13a1c7d55aac30aa3b245d8cedbc107a222ace5018f987",
+      "savedSha256": "2ac5c7d700b427684a14b7cd6b306c54558ca075352156fd07e49488716b2380"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-NE-full.ts",
+      "originalSha256": "18b9c32dcc079e71bff0fbf31086e0115f1ac4581f6541111ffbf61303fe4423",
+      "savedSha256": "c3b8b038729fb44e40fff522f79cf75c1a6fe6077da842223dddbf2ae457cf34"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-NE-run-repair1.ts",
+      "originalSha256": "9f4b279324ed2337c0ecae3abe6e11d6354e2082e024ed087bc834e878bf7d29",
+      "savedSha256": "239b841844ae5d040e71893f88399f4e37a14a2147085bc51adf74f271fbc1e5"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-S-package.cjs",
+      "originalSha256": "83de148559e12802e3cfe2196c253a06ec4aa99d9a9e0e302fe0cac97c3b586d",
+      "savedSha256": "83de148559e12802e3cfe2196c253a06ec4aa99d9a9e0e302fe0cac97c3b586d"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-audit.cjs",
+      "originalSha256": "de31a9696c21cae7eaf896a46e494b75d2b2588b52434be6bf0427b6d6567d7c",
+      "savedSha256": "de31a9696c21cae7eaf896a46e494b75d2b2588b52434be6bf0427b6d6567d7c"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-gallery-1x.cjs",
+      "originalSha256": "3199c2c81c9e5de2e728d0b3445c2e8456019241c5773a4413244bbbf2744032",
+      "savedSha256": "b4ba1bb2222bd478f96d3e6138c734663a2dde1dac1ebf6edf6e68758cc0c523"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-gallery-links.cjs",
+      "originalSha256": "aef6375b26a04a3e1eaa61cac95f242631567bbcf6a7bcde7b314c303a8c2050",
+      "savedSha256": "0e61a9ce04b7f23d6e71399e67fd88b8d70dc3bc5ac9e266a5dbbdce79600bad"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-gallery-prepare.cjs",
+      "originalSha256": "ceb67643f577540269bcb757b11b25858034a25add28eaabc47f00206f86d497",
+      "savedSha256": "20520394b18e93cf13edfe6ee2c3ec822afdfb04477ca9eba75a393c73f0035a"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-package.ts",
+      "originalSha256": "5be4a326c118ba04680676c338bee54ad48129489babdfce9783f78a1c985014",
+      "savedSha256": "27c2ae8e31de9449e5924ba53d609dcb2fed857c7252c28dc5585b3801fab825"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-run-repair1.ts",
+      "originalSha256": "feacfaf94e2d8458d0d6d0550c01cb69804bd3f8df3c70b84ce0e9ed49bc9897",
+      "savedSha256": "6917117a47aa91d7e108a307685cb888b116aee3f636d18942aed94431add169"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-run-repair2.ts",
+      "originalSha256": "3d6e0f7162ee5791155a8ec02dd4c45e51e4b458cf22130f3ca6622a8eaf51d9",
+      "savedSha256": "c915e23edde79d184daf1934fdfd9a4108f8b73e70f81ca107cb999ad9ad6bf9"
+    },
+    {
+      "file": "assets-src/placeholder/kiem-tu-sprites-v1/pause-backup-20261107/helpers/vgtd-SE-source-audit.ts",
+      "originalSha256": "0da3a306fa26d21df8378b4115989e87122b6902636543664f29786261320a5e",
+      "savedSha256": "cdf4e94a5ebe08f0c1989920806d1151d5b2e15ea7b9fad46a30b397879a2375"
+    }
+  ]
+}

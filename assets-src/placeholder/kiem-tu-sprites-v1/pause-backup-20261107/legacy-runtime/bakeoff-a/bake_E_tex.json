@@ -1,0 +1,121 @@
+{
+  "name": "bake_E",
+  "imagePath": "bake_E_tex.png",
+  "width": 1024,
+  "height": 1024,
+  "premultipliedAlpha": true,
+  "SubTexture": [
+    {
+      "name": "run_0",
+      "x": 3,
+      "y": 3,
+      "width": 87,
+      "height": 169
+    },
+    {
+      "name": "run_1",
+      "x": 96,
+      "y": 3,
+      "width": 81,
+      "height": 167
+    },
+    {
+      "name": "run_2",
+      "x": 183,
+      "y": 3,
+      "width": 89,
+      "height": 169
+    },
+    {
+      "name": "run_3",
+      "x": 278,
+      "y": 3,
+      "width": 113,
+      "height": 158
+    },
+    {
+      "name": "run_4",
+      "x": 397,
+      "y": 3,
+      "width": 86,
+      "height": 168
+    },
+    {
+      "name": "run_5",
+      "x": 489,
+      "y": 3,
+      "width": 76,
+      "height": 167
+    },
+    {
+      "name": "run_6",
+      "x": 571,
+      "y": 3,
+      "width": 87,
+      "height": 169
+    },
+    {
+      "name": "run_7",
+      "x": 664,
+      "y": 3,
+      "width": 113,
+      "height": 155
+    },
+    {
+      "name": "walk_0",
+      "x": 783,
+      "y": 3,
+      "width": 109,
+      "height": 209
+    },
+    {
+      "name": "walk_1",
+      "x": 898,
+      "y": 3,
+      "width": 88,
+      "height": 208
+    },
+    {
+      "name": "walk_2",
+      "x": 3,
+      "y": 218,
+      "width": 74,
+      "height": 210
+    },
+    {
+      "name": "walk_3",
+      "x": 83,
+      "y": 218,
+      "width": 78,
+      "height": 214
+    },
+    {
+      "name": "walk_4",
+      "x": 167,
+      "y": 218,
+      "width": 109,
+      "height": 210
+    },
+    {
+      "name": "walk_5",
+      "x": 282,
+      "y": 218,
+      "width": 80,
+      "height": 208
+    },
+    {
+      "name": "walk_6",
+      "x": 368,
+      "y": 218,
+      "width": 70,
+      "height": 210
+    },
+    {
+      "name": "walk_7",
+      "x": 444,
+      "y": 218,
+      "width": 76,
+      "height": 214
+    }
+  ]
+}

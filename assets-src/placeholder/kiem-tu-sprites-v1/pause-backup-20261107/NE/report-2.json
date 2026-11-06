@@ -1,0 +1,679 @@
+[
+  {
+    "clip": "sword_fly",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 139,
+      "right": 333,
+      "top": 26,
+      "bottom": 388,
+      "height": 362,
+      "width": 194,
+      "pelvisX": 211.61416880616176
+    },
+    "calibration": {
+      "scale": 0.574585635359116,
+      "targetHeight": 208,
+      "referenceHeight": 362,
+      "referenceFrames": 1
+    },
+    "heights": [
+      201,
+      198,
+      197,
+      197,
+      198,
+      199,
+      199,
+      196
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "height 201 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "height 198 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "height 197 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "height 197 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "height 198 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "height 199 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "sword_fly",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 5.8,
+          "limit": 0,
+          "message": "height 196 px outside the upright band and no pose exception declared"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 0,
+            "metric": "height_excess_px",
+            "value": 0.8,
+            "limit": 0,
+            "message": "height 201 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 1,
+            "metric": "height_excess_px",
+            "value": 3.8,
+            "limit": 0,
+            "message": "height 198 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "height 197 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "height 197 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 3.8,
+            "limit": 0,
+            "message": "height 198 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 6,
+            "metric": "height_excess_px",
+            "value": 2.8,
+            "limit": 0,
+            "message": "height 199 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "sword_fly",
+            "frame": 7,
+            "metric": "height_excess_px",
+            "value": 5.8,
+            "limit": 0,
+            "message": "height 196 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 8,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "attack",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 137,
+      "right": 327,
+      "top": 23,
+      "bottom": 386,
+      "height": 363,
+      "width": 190,
+      "pelvisX": 208.7256688002626
+    },
+    "calibration": {
+      "scale": 0.5730027548209367,
+      "targetHeight": 208,
+      "referenceHeight": 363,
+      "referenceFrames": 1
+    },
+    "heights": [
+      209,
+      209,
+      209,
+      203,
+      203,
+      201,
+      205,
+      208
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "height 201 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 3,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 4,
+          "message": "torso similarity 0.69 < 0.7"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 0.8,
+            "limit": 0,
+            "message": "height 201 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "similarity",
+            "severity": "fail",
+            "clip": "attack",
+            "frame": 3,
+            "message": "torso similarity 0.69 < 0.7"
+          },
+          "class": "hard",
+          "verdict": "fail-hard"
+        },
+        {
+          "finding": {
+            "gate": "similarity",
+            "severity": "fail",
+            "clip": "attack",
+            "frame": 4,
+            "message": "torso similarity 0.69 < 0.7"
+          },
+          "class": "hard",
+          "verdict": "fail-hard"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 2,
+        "fail-soft": 1,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "attack_2",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 116,
+      "right": 306,
+      "top": 37,
+      "bottom": 385,
+      "height": 348,
+      "width": 190,
+      "pelvisX": 187.51204297348812
+    },
+    "calibration": {
+      "scale": 0.5977011494252874,
+      "targetHeight": 208,
+      "referenceHeight": 348,
+      "referenceFrames": 1
+    },
+    "heights": [
+      209,
+      206,
+      194,
+      197,
+      219,
+      198,
+      204,
+      207
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "height 194 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "height 197 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 4.8,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "height 198 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_2",
+          "frame": 2,
+          "message": "torso similarity 0.69 < 0.7"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 7.8,
+            "limit": 0,
+            "message": "height 194 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 3,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "height 197 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 4,
+            "metric": "height_excess_px",
+            "value": 4.8,
+            "limit": 0,
+            "message": "height 219 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_2",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 3.8,
+            "limit": 0,
+            "message": "height 198 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "similarity",
+            "severity": "fail",
+            "clip": "attack_2",
+            "frame": 2,
+            "message": "torso similarity 0.69 < 0.7"
+          },
+          "class": "hard",
+          "verdict": "fail-hard"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 1,
+        "fail-soft": 4,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "attack_3",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 132,
+      "right": 320,
+      "top": 25,
+      "bottom": 379,
+      "height": 354,
+      "width": 188,
+      "pelvisX": 204.84658520254436
+    },
+    "calibration": {
+      "scale": 0.5875706214689266,
+      "targetHeight": 208,
+      "referenceHeight": 354,
+      "referenceFrames": 1
+    },
+    "heights": [
+      207,
+      207,
+      218,
+      211,
+      203,
+      201,
+      207,
+      207
+    ],
+    "qa": {
+      "ok": false,
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_3",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 3.8,
+          "limit": 0,
+          "message": "height 218 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_3",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "height 201 px outside the upright band and no pose exception declared"
+        }
+      ],
+      "judged": [
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_3",
+            "frame": 2,
+            "metric": "height_excess_px",
+            "value": 3.8,
+            "limit": 0,
+            "message": "height 218 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        },
+        {
+          "finding": {
+            "gate": "height",
+            "severity": "warn",
+            "clip": "attack_3",
+            "frame": 5,
+            "metric": "height_excess_px",
+            "value": 0.8,
+            "limit": 0,
+            "message": "height 201 px outside the upright band and no pose exception declared"
+          },
+          "class": "soft",
+          "verdict": "fail-soft"
+        }
+      ],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 2,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  },
+  {
+    "clip": "cast",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "sourceGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 142,
+      "right": 344,
+      "top": 18,
+      "bottom": 390,
+      "height": 372,
+      "width": 202,
+      "pelvisX": 215.00758161844345
+    },
+    "calibration": {
+      "scale": 0.5591397849462365,
+      "targetHeight": 208,
+      "referenceHeight": 372,
+      "referenceFrames": 1
+    },
+    "heights": [
+      208,
+      208,
+      208,
+      208,
+      208,
+      208,
+      208,
+      208
+    ],
+    "qa": {
+      "ok": true,
+      "findings": [],
+      "judged": [],
+      "resolved": [],
+      "counts": {
+        "fail-hard": 0,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      }
+    }
+  }
+]

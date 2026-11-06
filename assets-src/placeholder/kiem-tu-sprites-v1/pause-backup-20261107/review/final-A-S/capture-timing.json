@@ -1,0 +1,92 @@
+[
+  {
+    "clip": "idle",
+    "exportedDurationSec": 1,
+    "gifCentiseconds": 100,
+    "frames": 30
+  },
+  {
+    "clip": "meditate",
+    "exportedDurationSec": 1,
+    "gifCentiseconds": 100,
+    "frames": 30
+  },
+  {
+    "clip": "walk",
+    "exportedDurationSec": 0.6666666666666666,
+    "gifCentiseconds": 67,
+    "frames": 20
+  },
+  {
+    "clip": "run",
+    "exportedDurationSec": 0.5,
+    "gifCentiseconds": 50,
+    "frames": 15
+  },
+  {
+    "clip": "dash",
+    "exportedDurationSec": 0.26666666666666666,
+    "gifCentiseconds": 27,
+    "frames": 8
+  },
+  {
+    "clip": "sword_fly",
+    "exportedDurationSec": 0.6666666666666666,
+    "gifCentiseconds": 67,
+    "frames": 20
+  },
+  {
+    "clip": "attack",
+    "exportedDurationSec": 0.43333333333333335,
+    "gifCentiseconds": 43,
+    "frames": 13
+  },
+  {
+    "clip": "cast",
+    "exportedDurationSec": 0.5,
+    "gifCentiseconds": 50,
+    "frames": 15
+  },
+  {
+    "clip": "channel",
+    "exportedDurationSec": 0.4,
+    "gifCentiseconds": 40,
+    "frames": 12
+  },
+  {
+    "clip": "hit",
+    "exportedDurationSec": 0.2,
+    "gifCentiseconds": 20,
+    "frames": 6
+  },
+  {
+    "clip": "die",
+    "exportedDurationSec": 0.8,
+    "gifCentiseconds": 80,
+    "frames": 24
+  },
+  {
+    "clip": "tribulation",
+    "exportedDurationSec": 1,
+    "gifCentiseconds": 100,
+    "frames": 30
+  },
+  {
+    "clip": "emote",
+    "exportedDurationSec": 1,
+    "gifCentiseconds": 100,
+    "frames": 30
+  },
+  {
+    "clip": "attack_2",
+    "exportedDurationSec": 0.43333333333333335,
+    "gifCentiseconds": 43,
+    "frames": 13
+  },
+  {
+    "clip": "attack_3",
+    "exportedDurationSec": 0.43333333333333335,
+    "gifCentiseconds": 43,
+    "frames": 13
+  }
+]

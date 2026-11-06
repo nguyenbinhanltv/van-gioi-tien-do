@@ -1,0 +1,365 @@
+{
+  "imagePath": "kiemtu_E_tex.png",
+  "width": 512,
+  "height": 512,
+  "premultipliedAlpha": true,
+  "regions": [
+    {
+      "name": "shadow",
+      "x": 190,
+      "y": 180,
+      "width": 41,
+      "height": 13
+    },
+    {
+      "name": "hair_back",
+      "x": 78,
+      "y": 2,
+      "width": 41,
+      "height": 104
+    },
+    {
+      "name": "ponytail",
+      "x": 291,
+      "y": 2,
+      "width": 23,
+      "height": 90
+    },
+    {
+      "name": "ribbon_tail_L",
+      "x": 26,
+      "y": 119,
+      "width": 22,
+      "height": 58
+    },
+    {
+      "name": "ribbon_tail_R",
+      "x": 2,
+      "y": 119,
+      "width": 22,
+      "height": 59
+    },
+    {
+      "name": "leg_L",
+      "x": 42,
+      "y": 2,
+      "width": 34,
+      "height": 113
+    },
+    {
+      "name": "robe_back",
+      "x": 239,
+      "y": 2,
+      "width": 50,
+      "height": 92
+    },
+    {
+      "name": "robe_hem_back",
+      "x": 267,
+      "y": 180,
+      "width": 50,
+      "height": 11
+    },
+    {
+      "name": "torso",
+      "x": 316,
+      "y": 2,
+      "width": 37,
+      "height": 85
+    },
+    {
+      "name": "arm_L",
+      "x": 451,
+      "y": 2,
+      "width": 43,
+      "height": 71
+    },
+    {
+      "name": "sleeve_trim_L",
+      "x": 151,
+      "y": 180,
+      "width": 17,
+      "height": 16
+    },
+    {
+      "name": "hand_L_relaxed",
+      "x": 20,
+      "y": 180,
+      "width": 15,
+      "height": 23
+    },
+    {
+      "name": "hand_L_grip",
+      "x": 2,
+      "y": 180,
+      "width": 16,
+      "height": 23
+    },
+    {
+      "name": "hand_L_fist",
+      "x": 493,
+      "y": 119,
+      "width": 16,
+      "height": 23
+    },
+    {
+      "name": "hand_L_palm",
+      "x": 432,
+      "y": 119,
+      "width": 20,
+      "height": 26
+    },
+    {
+      "name": "hand_L_seal",
+      "x": 359,
+      "y": 119,
+      "width": 19,
+      "height": 28
+    },
+    {
+      "name": "boot_L",
+      "x": 271,
+      "y": 119,
+      "width": 33,
+      "height": 29
+    },
+    {
+      "name": "leg_R",
+      "x": 2,
+      "y": 2,
+      "width": 38,
+      "height": 115
+    },
+    {
+      "name": "boot_R",
+      "x": 306,
+      "y": 119,
+      "width": 35,
+      "height": 29
+    },
+    {
+      "name": "robe_inner",
+      "x": 121,
+      "y": 2,
+      "width": 57,
+      "height": 98
+    },
+    {
+      "name": "robe_front",
+      "x": 180,
+      "y": 2,
+      "width": 57,
+      "height": 97
+    },
+    {
+      "name": "robe_hem_front",
+      "x": 319,
+      "y": 180,
+      "width": 55,
+      "height": 10
+    },
+    {
+      "name": "vest",
+      "x": 87,
+      "y": 119,
+      "width": 41,
+      "height": 55
+    },
+    {
+      "name": "vest_edges",
+      "x": 159,
+      "y": 119,
+      "width": 36,
+      "height": 47
+    },
+    {
+      "name": "scabbard",
+      "x": 355,
+      "y": 2,
+      "width": 19,
+      "height": 78
+    },
+    {
+      "name": "sash_set",
+      "x": 93,
+      "y": 180,
+      "width": 44,
+      "height": 20
+    },
+    {
+      "name": "sash_tail_L",
+      "x": 211,
+      "y": 119,
+      "width": 12,
+      "height": 32
+    },
+    {
+      "name": "sash_tail_R",
+      "x": 225,
+      "y": 119,
+      "width": 13,
+      "height": 32
+    },
+    {
+      "name": "pendant",
+      "x": 481,
+      "y": 119,
+      "width": 10,
+      "height": 25
+    },
+    {
+      "name": "tassel",
+      "x": 139,
+      "y": 180,
+      "width": 10,
+      "height": 20
+    },
+    {
+      "name": "arm_R",
+      "x": 376,
+      "y": 2,
+      "width": 31,
+      "height": 77
+    },
+    {
+      "name": "sleeve_trim_R",
+      "x": 170,
+      "y": 180,
+      "width": 18,
+      "height": 16
+    },
+    {
+      "name": "hand_R_grip",
+      "x": 56,
+      "y": 180,
+      "width": 17,
+      "height": 23
+    },
+    {
+      "name": "hand_R_relaxed",
+      "x": 75,
+      "y": 180,
+      "width": 16,
+      "height": 23
+    },
+    {
+      "name": "hand_R_fist",
+      "x": 37,
+      "y": 180,
+      "width": 17,
+      "height": 23
+    },
+    {
+      "name": "hand_R_palm",
+      "x": 454,
+      "y": 119,
+      "width": 25,
+      "height": 26
+    },
+    {
+      "name": "hand_R_seal",
+      "x": 410,
+      "y": 119,
+      "width": 20,
+      "height": 27
+    },
+    {
+      "name": "head",
+      "x": 240,
+      "y": 119,
+      "width": 29,
+      "height": 31
+    },
+    {
+      "name": "eyes_open",
+      "x": 422,
+      "y": 180,
+      "width": 10,
+      "height": 6
+    },
+    {
+      "name": "eyes_half",
+      "x": 410,
+      "y": 180,
+      "width": 10,
+      "height": 6
+    },
+    {
+      "name": "eyes_closed",
+      "x": 398,
+      "y": 180,
+      "width": 10,
+      "height": 6
+    },
+    {
+      "name": "mouth_neutral",
+      "x": 434,
+      "y": 180,
+      "width": 9,
+      "height": 6
+    },
+    {
+      "name": "mouth_open",
+      "x": 376,
+      "y": 180,
+      "width": 9,
+      "height": 9
+    },
+    {
+      "name": "mouth_smile",
+      "x": 387,
+      "y": 180,
+      "width": 9,
+      "height": 7
+    },
+    {
+      "name": "hair_front_1",
+      "x": 380,
+      "y": 119,
+      "width": 28,
+      "height": 27
+    },
+    {
+      "name": "hair_front_2",
+      "x": 343,
+      "y": 119,
+      "width": 14,
+      "height": 29
+    },
+    {
+      "name": "hair_front_3",
+      "x": 197,
+      "y": 119,
+      "width": 12,
+      "height": 36
+    },
+    {
+      "name": "hairpin",
+      "x": 233,
+      "y": 180,
+      "width": 32,
+      "height": 12
+    },
+    {
+      "name": "weapon_R",
+      "x": 409,
+      "y": 2,
+      "width": 40,
+      "height": 74
+    },
+    {
+      "name": "sword_trail",
+      "x": 50,
+      "y": 119,
+      "width": 35,
+      "height": 57
+    },
+    {
+      "name": "sword_glint",
+      "x": 130,
+      "y": 119,
+      "width": 27,
+      "height": 54
+    }
+  ]
+}

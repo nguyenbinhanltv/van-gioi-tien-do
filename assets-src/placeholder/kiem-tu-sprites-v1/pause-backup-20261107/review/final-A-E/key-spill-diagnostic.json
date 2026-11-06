@@ -1,0 +1,764 @@
+{
+  "format": "vgtd-key-spill-diagnostic",
+  "version": 1,
+  "definition": "Count within each trimmed region:alpha>=200 and(min(R,B)-G)/alpha*255>24. Proxy can include legitimate master colours; not automatically a confirmed fringe defect.",
+  "total": 265,
+  "rows": [
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 11,
+      "opaqueMagentaDominancePixels": 6
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 6
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 9
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 9
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "cast",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "hit",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 11,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 6
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "channel",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "emote",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "hit",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 6
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "idle",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 7
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 8,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 9,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 10,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "walk",
+      "dir": "E",
+      "cell": 11,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "hit",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 8,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 9,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "run",
+      "dir": "E",
+      "cell": 10,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 10,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 9
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 11
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "hit",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 9,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "sword_fly",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "attack_3",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "attack",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 7
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 8,
+      "opaqueMagentaDominancePixels": 5
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "dash",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 4
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "tribulation",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 3,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 0,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 1,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 2,
+      "opaqueMagentaDominancePixels": 0
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 4,
+      "opaqueMagentaDominancePixels": 1
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 5,
+      "opaqueMagentaDominancePixels": 2
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 6,
+      "opaqueMagentaDominancePixels": 3
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 7,
+      "opaqueMagentaDominancePixels": 0
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+[
+  {
+    "name": "idle",
+    "tableId": "idle",
+    "loop": true,
+    "tableFrames": 12,
+    "fps": 12,
+    "durationSec": 1,
+    "asymmetric": false,
+    "kind": "upright",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+  },
+  {
+    "name": "meditate",
+    "tableId": "meditate",
+    "loop": true,
+    "tableFrames": 8,
+    "fps": 8,
+    "durationSec": 1,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "seated"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "f3e1fef7c67f030d6334a35e6d543a6f1bd86e3333e1ad0ac4b21f082d8d93a2"
+  },
+  {
+    "name": "walk",
+    "tableId": "walk",
+    "loop": true,
+    "tableFrames": 8,
+    "fps": 12,
+    "durationSec": 0.6666666666666666,
+    "asymmetric": false,
+    "kind": "upright",
+    "sheet": {
+      "frames": 12,
+      "cols": 6
+    },
+    "events": [],
+    "exceptionHints": [],
+    "guideGait": {
+      "first": "L",
+      "stance": 0.5,
+      "speed": 40,
+      "halfStride": 13.333333333333332,
+      "lift": 4,
+      "axis": {
+        "x": 0,
+        "y": -1
+      },
+      "nearRestX": 152.0373831775701,
+      "farRestX": 106.19827586206897,
+      "notes": "Side lanes measured from master soles. Shared speed-derived displacement projected along screenAxis; lowest sole registered to ground232, flight gap3px. Current QA footSlide is horizontal/E-oriented; nonE limitation must remain explicit."
+    },
+    "productionGrid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "generationTemplateSha256": "48366043fcc0e0bf9ccfb1685bdc559849907fcbc1b34f16c906501e10104511"
+  },
+  {
+    "name": "run",
+    "tableId": "run",
+    "loop": true,
+    "tableFrames": 10,
+    "fps": 20,
+    "durationSec": 0.5,
+    "asymmetric": false,
+    "kind": "upright",
+    "sheet": {
+      "frames": 12,
+      "cols": 6
+    },
+    "events": [
+      {
+        "name": "footstep_L",
+        "at": {
+          "frame": 2
+        }
+      },
+      {
+        "name": "footstep_R",
+        "at": {
+          "frame": 7
+        }
+      }
+    ],
+    "exceptionHints": [],
+    "guideGait": {
+      "first": "L",
+      "stance": 0.33,
+      "speed": 75,
+      "halfStride": 12.375,
+      "lift": 4,
+      "axis": {
+        "x": 0,
+        "y": -1
+      },
+      "nearRestX": 152.0373831775701,
+      "farRestX": 106.19827586206897,
+      "notes": "Side lanes measured from master soles. Shared speed-derived displacement projected along screenAxis; lowest sole registered to ground232, flight gap3px. Current QA footSlide is horizontal/E-oriented; nonE limitation must remain explicit."
+    },
+    "productionGrid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "generationTemplateSha256": "3f25ade8546b92518700d2310ec184477eaaa5fcaa4b633e76cff7bf6a80da5e"
+  },
+  {
+    "name": "dash",
+    "tableId": "dash",
+    "loop": false,
+    "tableFrames": 6,
+    "fps": 24,
+    "durationSec": 0.25,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 6,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "lunge"
+    ],
+    "productionGrid": {
+      "cols": 4,
+      "rows": 2,
+      "total": 8,
+      "control1based": 7
+    },
+    "generationTemplateSha256": "b5d04a5a81a4b08a31c954e114e000a33fb7471ca4d119696a4c53bdf3d7026a"
+  },
+  {
+    "name": "sword_fly",
+    "tableId": "sword_fly",
+    "loop": true,
+    "tableFrames": 8,
+    "fps": 12,
+    "durationSec": 0.6666666666666666,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "airborne",
+      "sword-ride"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "b22e2f32ba192e5d1953d651f00cd08fd101f35a37c16c8ea8b5706a8cf7bdec"
+  },
+  {
+    "name": "attack",
+    "tableId": "attack",
+    "loop": false,
+    "tableFrames": 10,
+    "fps": 24,
+    "durationSec": 0.4166666666666667,
+    "asymmetric": true,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [
+      {
+        "name": "hit",
+        "at": {
+          "phase": "hit_frame"
+        }
+      },
+      {
+        "name": "cancel_window",
+        "at": {
+          "phase": "combo_window"
+        }
+      }
+    ],
+    "phases": {
+      "windup_end": 3,
+      "hit_frame": 5,
+      "combo_window": 7
+    },
+    "exceptionHints": [
+      "raised-sword",
+      "lunge"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+  },
+  {
+    "name": "attack_2",
+    "tableId": "attack",
+    "loop": false,
+    "tableFrames": 10,
+    "fps": 24,
+    "durationSec": 0.4166666666666667,
+    "asymmetric": true,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [
+      {
+        "name": "hit",
+        "at": {
+          "phase": "hit_frame"
+        }
+      },
+      {
+        "name": "cancel_window",
+        "at": {
+          "phase": "combo_window"
+        }
+      }
+    ],
+    "phases": {
+      "windup_end": 2,
+      "hit_frame": 4,
+      "combo_window": 7
+    },
+    "exceptionHints": [
+      "raised-sword",
+      "lunge"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+  },
+  {
+    "name": "attack_3",
+    "tableId": "attack",
+    "loop": false,
+    "tableFrames": 10,
+    "fps": 24,
+    "durationSec": 0.4166666666666667,
+    "asymmetric": true,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [
+      {
+        "name": "hit",
+        "at": {
+          "phase": "hit_frame"
+        }
+      },
+      {
+        "name": "cancel_window",
+        "at": {
+          "phase": "combo_window"
+        }
+      }
+    ],
+    "phases": {
+      "windup_end": 3,
+      "hit_frame": 5,
+      "combo_window": 7
+    },
+    "exceptionHints": [
+      "raised-sword",
+      "lunge"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "ba6b5df19294befa6d93c680a493674a9577b69ed5f26e16f54358781a9ea197"
+  },
+  {
+    "name": "cast",
+    "tableId": "cast",
+    "loop": false,
+    "tableFrames": 14,
+    "fps": 28,
+    "durationSec": 0.5,
+    "asymmetric": true,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [
+      {
+        "name": "vfx_spawn",
+        "at": {
+          "phase": "windup_end"
+        }
+      }
+    ],
+    "phases": {
+      "windup_end": 6
+    },
+    "exceptionHints": [
+      "raised-arms"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+  },
+  {
+    "name": "channel",
+    "tableId": "channel",
+    "loop": true,
+    "tableFrames": 8,
+    "fps": 20,
+    "durationSec": 0.4,
+    "asymmetric": true,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "raised-arms"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "e1ea3337ad0785a97bed7ffef7ad7b67732445eab4c658d20dadb5d52b7cfc82"
+  },
+  {
+    "name": "hit",
+    "tableId": "hit",
+    "loop": false,
+    "tableFrames": 4,
+    "fps": 20,
+    "durationSec": 0.2,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 4,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "recoil"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 2,
+      "total": 6,
+      "control1based": 5
+    },
+    "generationTemplateSha256": "a0613a8074aa16e76ad99f6341031f6b71522c321288a4bd95534ebd14a30972"
+  },
+  {
+    "name": "die",
+    "tableId": "die",
+    "loop": false,
+    "tableFrames": 12,
+    "fps": 15,
+    "durationSec": 0.8,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [
+      "die-collapse"
+    ],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "959c6adee09d1a9b650290822d186463c222849f22f683b022a29077e264e772"
+  },
+  {
+    "name": "tribulation",
+    "tableId": "tribulation",
+    "loop": false,
+    "tableFrames": 24,
+    "fps": 24,
+    "durationSec": 1,
+    "asymmetric": false,
+    "kind": "free",
+    "sheet": {
+      "frames": 12,
+      "cols": 6
+    },
+    "events": [],
+    "exceptionHints": [
+      "kneel",
+      "raised-arms"
+    ],
+    "productionGrid": {
+      "cols": 5,
+      "rows": 3,
+      "total": 15,
+      "control1based": 13
+    },
+    "generationTemplateSha256": "ecf7b895275f36bf80d203458a10278894790fc888f9448e119b3a3ebe873eca"
+  },
+  {
+    "name": "emote",
+    "tableId": "emote",
+    "loop": false,
+    "tableFrames": 12,
+    "fps": 12,
+    "durationSec": 1,
+    "asymmetric": false,
+    "kind": "upright",
+    "sheet": {
+      "frames": 8,
+      "cols": 4
+    },
+    "events": [],
+    "exceptionHints": [],
+    "productionGrid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "generationTemplateSha256": "7aa738715c24e4dd82da4db8b5d5dcd856ded2079e5b598eb9de9e76e75f50e3"
+  }
+]
