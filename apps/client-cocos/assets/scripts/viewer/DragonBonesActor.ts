@@ -11,6 +11,17 @@ const CACHE_ENUM: Record<CacheMode, number> = {
   private: dragonBones.ArmatureDisplay.AnimationCacheMode.PRIVATE_CACHE,
 };
 
+/**
+ * Independent blink clock: an eyes-only looping clip (`authorBlinkCycle` in @vgtd/rig, 3-5 s between blinks) played on its
+ * own animation layer and group next to the body clip (the default fade-out mode only touches the same layer+group, so the body clip is never faded out by it), so 0.5-1 s body loops still blink at a natural rate. It is an auxiliary clip:
+ * not a user-facing body animation (see `clipNames`). REALTIME mode only (layers need the live animation state).
+ */
+const BLINK_CLIP = 'blink_cycle';
+const BLINK_LAYER = 1;
+const BLINK_GROUP = 'blink';
+/** Body clips that own the eyes or must not blink (eyes closed / pain / dead). */
+const BLINK_OFF: ReadonlySet<string> = new Set(['meditate', 'die', 'hit']);
+
 interface RigAssets {
   ske: dragonBones.DragonBonesAsset;
   tex: dragonBones.DragonBonesAtlasAsset;
@@ -82,7 +93,7 @@ export class DragonBonesActor implements CharacterActor {
 
   clipNames(): string[] {
     const a = this.display.armature();
-    return a ? [...a.animation.animationNames] : [];
+    return a ? a.animation.animationNames.filter((n) => n !== BLINK_CLIP) : [];
   }
 
   private loadAsset<T>(path: string, type: new () => T): Promise<T> {
@@ -192,6 +203,7 @@ export class DragonBonesActor implements CharacterActor {
       d.timeScale = opts.paused ? 0 : opts.timeScale;
       return;
     }
+    this.syncBlink(armature, id);
     if (this.anim !== id || this.loopNow !== loop) {
       // no fade while paused: the fade clock is frozen at timeScale 0 and the old animation would keep dominating
       armature.animation.fadeIn(id, this.anim && this.anim !== id && !opts.paused ? opts.mix : 0, loop ? 0 : 1);
@@ -200,6 +212,21 @@ export class DragonBonesActor implements CharacterActor {
     }
     armature.animation.timeScale = opts.paused ? 0 : opts.timeScale;
     this.setSlotDisplays(armature, opts);
+  }
+
+  /**
+   * Keep the blink clip running on its own layer while the body clip does not own the eyes. Started BEFORE the body clip is
+   * faded in, so the body clip stays `lastAnimationState` (time(), seek() and the seam metric read that state).
+   */
+  private syncBlink(armature: dragonBones.Armature, bodyClip: string): void {
+    const anim = armature.animation;
+    if (!anim.hasAnimation(BLINK_CLIP)) return;
+    const state = anim.getState(BLINK_CLIP);
+    if (BLINK_OFF.has(bodyClip)) {
+      if (state) anim.stop(BLINK_CLIP);
+      return;
+    }
+    if (!state || !state.isPlaying) anim.fadeIn(BLINK_CLIP, 0, 0, BLINK_LAYER, BLINK_GROUP);
   }
 
   /** Hide / show slots and pick the paperdoll variant (extra display index) for slots that ship one. */
@@ -239,6 +266,15 @@ export class DragonBonesActor implements CharacterActor {
     if (!armature || !this.anim) return;
     if (this.cache === 'realtime') armature.animation.play(this.anim, this.loopNow ? 0 : 1);
     else this.display.playAnimation(this.anim, this.loopNow ? 0 : 1);
+  }
+
+  blinkProbe(): { playing: boolean; eyes: string | null } | null {
+    const armature = this.cache === 'realtime' ? this.display.armature() : null;
+    if (!armature || !armature.animation.hasAnimation(BLINK_CLIP)) return null;
+    const st = armature.animation.getState(BLINK_CLIP);
+    const shown = armature.getSlot('eyes')?.displayIndex ?? -1;
+    // display index in the exported order of the eyes slot (eyes_open, eyes_half, eyes_closed)
+    return { playing: !!st && st.isPlaying, eyes: shown >= 0 ? `display ${shown}` : null };
   }
 
   seamMetric(): SeamMetric | null {
