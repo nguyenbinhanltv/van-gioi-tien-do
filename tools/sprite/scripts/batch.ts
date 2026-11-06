@@ -12,7 +12,7 @@ import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { runBatch, reviewHtml, type BatchReport } from '../src/index.js';
+import { assertInside, runBatch, reviewHtml, type BatchReport } from '../src/index.js';
 
 const args = process.argv.slice(2);
 const opt = (n: string, d = '') => {
@@ -41,7 +41,7 @@ if (args.includes('--capture')) {
     name: `_batch-${report.character}-${r.dir}`,
   }));
   for (const s of staged) {
-    const target = join(resources, s.name);
+    const target = assertInside(resources, join(resources, s.name));
     rmSync(target, { recursive: true, force: true });
     mkdirSync(target, { recursive: true });
     const name = `${s.stem}_${s.dir}`;
@@ -84,8 +84,8 @@ if (args.includes('--capture')) {
   }
   if (!args.includes('--keep-staged'))
     for (const s of staged) {
-      rmSync(join(resources, s.name), { recursive: true, force: true });
-      rmSync(join(resources, `${s.name}.meta`), { force: true });
+      rmSync(assertInside(resources, join(resources, s.name)), { recursive: true, force: true });
+      rmSync(assertInside(resources, join(resources, `${s.name}.meta`)), { force: true });
     }
   report = {
     ...report,

@@ -7,7 +7,7 @@
  */
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { reviewHtml, type BatchReport } from '../src/index.js';
+import { assertDirection, assertSlug, reviewHtml, type BatchReport } from '../src/index.js';
 
 const args = process.argv.slice(2);
 const cwd = process.env.INIT_CWD ?? process.cwd();
@@ -22,6 +22,8 @@ for (const rel of reportFiles) {
   const file = resolve(cwd, rel);
   const src = JSON.parse(readFileSync(file, 'utf8')) as BatchReport;
   const root = dirname(file);
+  assertSlug(src.character, `${rel}: character`);
+  for (const d of src.dirs) assertDirection(d.dir, `${rel}: direction`);
   const dirs = src.dirs.map((d) => {
     const target = join(out, src.character, d.dir);
     mkdirSync(target, { recursive: true });

@@ -3,7 +3,16 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { encodePng } from '@vgtd/rig';
-import { reviewHtml, runBatch, toPremultiplied, type BatchReport, type Project } from '../src/index.js';
+import {
+  assertDirection,
+  assertInside,
+  assertSlug,
+  reviewHtml,
+  runBatch,
+  toPremultiplied,
+  type BatchReport,
+  type Project,
+} from '../src/index.js';
 import { makeMaster, makeSheet } from './helpers.js';
 
 function setup(bad = false) {
@@ -80,6 +89,37 @@ describe('runBatch', () => {
     expect(() => runBatch(join(root, 'dup.json'), join(root, 'o'))).toThrow(/twice/);
     writeFileSync(join(root, 'other.json'), JSON.stringify({ character: 'the-tu', projects: [batch.projects[0]] }));
     expect(() => runBatch(join(root, 'other.json'), join(root, 'o'))).toThrow(/character/);
+  });
+});
+
+describe('batch path safety', () => {
+  it('rejects a character that could escape the output / resources folders', () => {
+    const root = setup();
+    for (const bad of ['../x', 'a/b', 'a\b', '', 'X', '.', '..', '/abs']) {
+      writeFileSync(join(root, 'bad.json'), JSON.stringify({ character: bad, projects: ['E/project.json'] }));
+      expect(() => runBatch(join(root, 'bad.json'), join(root, 'o')), bad).toThrow(/slug/);
+    }
+    expect(assertSlug('kiem-tu', 'c')).toBe('kiem-tu');
+    expect(assertSlug('the_tu2', 'c')).toBe('the_tu2');
+  });
+
+  it('rejects an invalid direction or stem in a project', () => {
+    const root = setup();
+    const p = JSON.parse(readFileSync(join(root, 'E/project.json'), 'utf8')) as Project;
+    writeFileSync(join(root, 'E/project.json'), JSON.stringify({ ...p, direction: '../E' }));
+    expect(() => runBatch(join(root, 'batch.json'), join(root, 'o'))).toThrow(/direction/);
+    writeFileSync(join(root, 'E/project.json'), JSON.stringify({ ...p, stem: '../evil' }));
+    expect(() => runBatch(join(root, 'batch.json'), join(root, 'o'))).toThrow(/stem/);
+    expect(assertDirection('SE')).toBe('SE');
+    expect(() => assertDirection('X')).toThrow();
+  });
+
+  it('assertInside refuses the root itself and anything outside it', () => {
+    const root = join(tmpdir(), 'resources');
+    expect(assertInside(root, join(root, '_batch-x-E'))).toContain('_batch-x-E');
+    expect(() => assertInside(root, join(root, '..', 'other'))).toThrow(/outside/);
+    expect(() => assertInside(root, root)).toThrow(/outside/);
+    expect(() => assertInside(root, join(root, 'a', '..', '..', 'x'))).toThrow(/outside/);
   });
 });
 

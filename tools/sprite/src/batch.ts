@@ -7,10 +7,37 @@
  * Capturing the clips in the Cocos runtime and the review page are layered on top by the CLI (scripts/batch.ts).
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, relative, resolve, isAbsolute } from 'node:path';
+import { DIRECTIONS, type Direction } from '@vgtd/shared';
 import { loadBacklog } from './backlog.js';
 import { runProject, writeOutputs, type Project, type ProjectResult } from './project.js';
 import { BATCH_FORMAT, type BatchReport, type ClipReport, type ClipStatus, type DirReport } from './review.js';
+
+const SLUG = /^[a-z0-9][a-z0-9_-]*$/;
+
+/** A character id / file stem used to build paths (and delete staged folders): lowercase slug, no separators, no `..`. */
+export function assertSlug(value: string, what: string): string {
+  if (typeof value !== 'string' || !SLUG.test(value))
+    throw new Error(
+      `${what} '${String(value)}' is not a valid slug (lowercase letters, digits, '_' and '-', starting with a letter or digit)`,
+    );
+  return value;
+}
+
+/** A drawn direction id of `@vgtd/shared` (S, SE, E, NE, N, NW, W, SW). */
+export function assertDirection(value: string, what = 'direction'): Direction {
+  if (!(DIRECTIONS as readonly string[]).includes(value))
+    throw new Error(`${what} '${String(value)}' is not one of ${DIRECTIONS.join(', ')}`);
+  return value as Direction;
+}
+
+/** Throw unless `target` resolves to a path strictly inside `root` (guard before any recursive delete). */
+export function assertInside(root: string, target: string): string {
+  const rel = relative(resolve(root), resolve(target));
+  if (!rel || rel.startsWith('..') || isAbsolute(rel))
+    throw new Error(`refusing to touch '${target}': outside '${root}'`);
+  return resolve(target);
+}
 
 export interface BatchFile {
   readonly character: string;
@@ -45,12 +72,15 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
 export function runBatch(batchPath: string, outDir: string): BatchRun {
   const batch = JSON.parse(readFileSync(batchPath, 'utf8')) as BatchFile;
   const base = dirname(resolve(batchPath));
+  assertSlug(batch.character, 'batch character');
   const dirs = new Set<string>();
   const results: BatchRun['results'][number][] = [];
   const reports: DirReport[] = [];
   for (const rel of batch.projects) {
     const projectPath = resolve(base, rel);
     const project = JSON.parse(readFileSync(projectPath, 'utf8')) as Project;
+    assertSlug(project.stem, `${rel}: stem`);
+    assertDirection(project.direction, `${rel}: direction`);
     if (project.character !== batch.character)
       throw new Error(`${rel}: character '${project.character}' differs from the batch character '${batch.character}'`);
     if (dirs.has(project.direction)) throw new Error(`${rel}: direction ${project.direction} is listed twice`);
