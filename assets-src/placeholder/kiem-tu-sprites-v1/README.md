@@ -20,3 +20,9 @@ Run/walk contain 12 drawings each; idle, attack, cast and die 8 each; hit 4. Sou
 ## Provenance
 
 See provenance.json and docs/ASSET-LICENSES.md. Source sheets are AI outputs with deterministic masked/cell repairs; no manually painted final pixels. Rejected generation attempts remain in the provenance log, not as selected art. Prompts are exact; model undisclosed by tool; codex-cli 0.166.0. The reference is the existing project-owned concept-A E art.
+
+## Traceability and event timing
+
+reference/E.master4x.source.json records the exact earlier committed PNG, source/archive SHA256 and unchanged temporary alias used by every generation prompt. The source was copied from continuous-art commit ba7c2a9; no unverified PR80 resize is claimed. Every selected raw output is archived and SHA256-linked in provenance.json. repair-inputs/*.repair-proof.json records decoded-RGBA cell hashes, original/final sheet SHA256, selected raw hashes and unchanged cells; hit patch masks also have matching outside-mask hashes.
+
+attack.combo_window uses the shared default7 (cancel_window tick9/13). Only the visually justified hit_frame5 and cast windup_end7 override their named visual phases; no later gameplay cancellation window is introduced.

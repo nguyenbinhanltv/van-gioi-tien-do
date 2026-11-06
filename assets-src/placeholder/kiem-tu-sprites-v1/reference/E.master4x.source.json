@@ -1,0 +1,17 @@
+{
+  "format": "vgtd-reference-source",
+  "version": 1,
+  "sourceCommit": "ba7c2a94e99115c8343e15b5f6bd35c1901aa5e6",
+  "sourcePath": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+  "sourceLfsOid": "sha256:15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+  "originalSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+  "archivePath": "reference/E.master4x.png",
+  "archiveSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+  "dimensions": [512, 512],
+  "operation": "Byte-for-byte copy from the earlier committed continuous-art cohort. No crop, resize, palette or alpha operation in this sprite lot.",
+  "generationAlias": {
+    "name": "vgtd-bakeoff-master.png",
+    "sha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b"
+  },
+  "upstreamNote": "Concept-A E style reference reused from the previous continuous-art cohort. This lot does not claim a verified pixel transform from the PR80 256px turnaround; its earlier resize history was not recorded."
+}

@@ -71,7 +71,7 @@
       },
       "phases": {
         "hit_frame": 5,
-        "combo_window": 8
+        "combo_window": 7
       }
     },
     {

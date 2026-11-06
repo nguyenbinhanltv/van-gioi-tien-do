@@ -11,7 +11,10 @@
       "references": ["vgtd-bakeoff-master.png", "run.template.png"],
       "resultFile": "exec-799243de-6cf6-4fab-8628-45061a24cf82.png",
       "utcOutputSaved": "2026-11-06T12:54:54.666Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "67091272167fa2a05a2c5753dfc13737a59b8675384d097b0ee9527c48cb0591",
+      "selectedArchivePath": "E/repair-inputs/run.sheet-before.png",
+      "selectedArchiveSha256": "67091272167fa2a05a2c5753dfc13737a59b8675384d097b0ee9527c48cb0591"
     },
     {
       "clip": "walk",
@@ -20,7 +23,10 @@
       "references": ["vgtd-bakeoff-master.png", "walk.template.png"],
       "resultFile": "exec-096982cc-4fb1-463e-8cbc-4e311f41d86d.png",
       "utcOutputSaved": "2026-11-06T12:55:30.972Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a",
+      "selectedArchivePath": "E/sheets/walk.png",
+      "selectedArchiveSha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a"
     },
     {
       "clip": "idle",
@@ -29,7 +35,10 @@
       "references": ["vgtd-bakeoff-master.png", "idle.template.png"],
       "resultFile": "exec-e0f02d53-de33-4a83-aae6-0ca776ea4ca7.png",
       "utcOutputSaved": "2026-11-06T13:04:20.884Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e",
+      "selectedArchivePath": "E/sheets/idle.png",
+      "selectedArchiveSha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e"
     },
     {
       "clip": "attack_1",
@@ -38,7 +47,10 @@
       "references": ["vgtd-bakeoff-master.png", "attack_1.template.png"],
       "resultFile": "exec-01b5927a-7ebe-4405-90c5-54cc14cb0d3f.png",
       "utcOutputSaved": "2026-11-06T13:04:57.483Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8",
+      "selectedArchivePath": "E/sheets/attack.png",
+      "selectedArchiveSha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8"
     },
     {
       "clip": "cast",
@@ -47,7 +59,10 @@
       "references": ["vgtd-bakeoff-master.png", "cast.template.png"],
       "resultFile": "exec-82d86589-b0e3-44b9-9eaa-10f66de574fa.png",
       "utcOutputSaved": "2026-11-06T13:05:58.796Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d",
+      "selectedArchivePath": "E/sheets/cast.png",
+      "selectedArchiveSha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d"
     },
     {
       "clip": "hit",
@@ -56,7 +71,10 @@
       "references": ["vgtd-bakeoff-master.png", "hit.template.png"],
       "resultFile": "exec-95d09150-b25b-4ae2-a084-7a48b854a6bf.png",
       "utcOutputSaved": "2026-11-06T13:05:31.340Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "6cdf721b44283e33db416eb6da09e619095162ba34cc768afe8ba8d474aa0000",
+      "selectedArchivePath": "E/repair-inputs/hit.sheet-before.png",
+      "selectedArchiveSha256": "6cdf721b44283e33db416eb6da09e619095162ba34cc768afe8ba8d474aa0000"
     },
     {
       "clip": "die",
@@ -65,7 +83,10 @@
       "references": ["vgtd-bakeoff-master.png", "die.template.png"],
       "resultFile": "exec-02e4e90d-abab-42c9-8d59-d651cd3a19ea.png",
       "utcOutputSaved": "2026-11-06T13:06:34.624Z",
-      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs"
+      "status": "selected base sheet; run has5 cell replacements,hit has2 masked motif repairs",
+      "resultSha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470",
+      "selectedArchivePath": "E/sheets/die.png",
+      "selectedArchiveSha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470"
     },
     {
       "clip": "run",
@@ -76,11 +97,12 @@
         "run_5.before.png",
         "vgtd-bakeoff-master.png",
         "run_5.guide.png",
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
+        "exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
       ],
       "resultFile": "exec-5fb1279d-45db-4c48-af2b-fe599fa9daa3.png",
       "utcOutputSaved": "2026-11-06T13:03:28.292Z",
-      "status": "rejected; repaired body too short"
+      "status": "rejected; repaired body too short",
+      "resultSha256": "5642c31937ed9311749680850f9d0f9764e13880049a5d860366918ec75336b3"
     },
     {
       "clip": "run",
@@ -91,11 +113,12 @@
         "run_6.before.png",
         "vgtd-bakeoff-master.png",
         "run_6.guide.png",
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
+        "exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
       ],
       "resultFile": "exec-c1156bcb-cdae-43ae-808f-708416f90650.png",
       "utcOutputSaved": "2026-11-06T13:05:19.449Z",
-      "status": "rejected; repaired body too short"
+      "status": "rejected; repaired body too short",
+      "resultSha256": "613b6817fec2cf3ccf326ce11481daab63df11fa1a11c65678507c43f0bbafe2"
     },
     {
       "clip": "run",
@@ -106,11 +129,12 @@
         "run_8.before.png",
         "vgtd-bakeoff-master.png",
         "run_8.guide.png",
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
+        "exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
       ],
       "resultFile": "exec-3bef8dda-3ed3-4dd9-8307-50c7bee5f959.png",
       "utcOutputSaved": "2026-11-06T13:06:28.542Z",
-      "status": "rejected; repaired body too short"
+      "status": "rejected; repaired body too short",
+      "resultSha256": "a85ebe35a258e243735ed92cb7410627f9db9fa5a1a33c2cda5abc65335b58c7"
     },
     {
       "clip": "run",
@@ -121,11 +145,12 @@
         "run_11.before.png",
         "vgtd-bakeoff-master.png",
         "run_11.guide.png",
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
+        "exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
       ],
       "resultFile": "exec-147aa8d4-048b-412d-a13b-55ad4a3c3a9a.png",
       "utcOutputSaved": "2026-11-06T13:07:10.748Z",
-      "status": "rejected; repaired body too short"
+      "status": "rejected; repaired body too short",
+      "resultSha256": "bb529d7d71dd5eccede831eaa6fc2a11deef8e0f49146e242fb93ac0b7cb40f1"
     },
     {
       "clip": "run",
@@ -136,11 +161,12 @@
         "run_12.before.png",
         "vgtd-bakeoff-master.png",
         "run_12.guide.png",
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
+        "exec-799243de-6cf6-4fab-8628-45061a24cf82.png"
       ],
       "resultFile": "exec-1907d921-feb2-4628-85af-c5d83972f967.png",
       "utcOutputSaved": "2026-11-06T13:07:42.311Z",
-      "status": "rejected; repaired body too short"
+      "status": "rejected; repaired body too short",
+      "resultSha256": "ee0a30851f0186f5b0c2102b920295b1d59c32b53b0a532e67532c3b378ddbd4"
     },
     {
       "clip": "run",
@@ -150,7 +176,10 @@
       "references": ["run_5.skeleton.png", "vgtd-bakeoff-master.png", "run_5.before.png"],
       "resultFile": "exec-7647f905-bb00-4fc0-a47f-06479d9dd5aa.png",
       "utcOutputSaved": "2026-11-06T13:09:38.901Z",
-      "status": "selected; source cell replacement"
+      "status": "selected; source cell replacement",
+      "resultSha256": "b1cdb95b5b94d50f01cfbcfe91374a9ac2c8633f37df3ad0ac8bf0dec4ac6ec8",
+      "selectedArchivePath": "E/generation-selected/run_05.png",
+      "selectedArchiveSha256": "b1cdb95b5b94d50f01cfbcfe91374a9ac2c8633f37df3ad0ac8bf0dec4ac6ec8"
     },
     {
       "clip": "run",
@@ -160,7 +189,10 @@
       "references": ["run_6.skeleton.png", "vgtd-bakeoff-master.png", "run_6.before.png"],
       "resultFile": "exec-68d5a258-2739-4a6c-a603-58402d33b2ec.png",
       "utcOutputSaved": "2026-11-06T13:13:18.183Z",
-      "status": "selected; source cell replacement"
+      "status": "selected; source cell replacement",
+      "resultSha256": "5f54e535a6d81771d7b7d991d5ea12527b846535ae8ab0ab95588251e3c6b352",
+      "selectedArchivePath": "E/generation-selected/run_06.png",
+      "selectedArchiveSha256": "5f54e535a6d81771d7b7d991d5ea12527b846535ae8ab0ab95588251e3c6b352"
     },
     {
       "clip": "run",
@@ -170,7 +202,10 @@
       "references": ["run_8.skeleton.png", "vgtd-bakeoff-master.png", "run_8.before.png"],
       "resultFile": "exec-5bd1edbc-c8bb-49f4-abce-900b6ec5b946.png",
       "utcOutputSaved": "2026-11-06T13:13:45.431Z",
-      "status": "selected; source cell replacement"
+      "status": "selected; source cell replacement",
+      "resultSha256": "55d85335ab7705e000cfc9d428a20d900bacbb01eda376a0c08ffc7935ed6d1f",
+      "selectedArchivePath": "E/generation-selected/run_08.png",
+      "selectedArchiveSha256": "55d85335ab7705e000cfc9d428a20d900bacbb01eda376a0c08ffc7935ed6d1f"
     },
     {
       "clip": "run",
@@ -180,7 +215,10 @@
       "references": ["run_11.skeleton.png", "vgtd-bakeoff-master.png", "run_11.before.png"],
       "resultFile": "exec-3418e151-b5d9-4af4-93cf-fb15d79b85ad.png",
       "utcOutputSaved": "2026-11-06T13:14:19.763Z",
-      "status": "selected; source cell replacement"
+      "status": "selected; source cell replacement",
+      "resultSha256": "4072510f22fbfe79e553b24b0166f577c45f837517655205908ede5e076ffadd",
+      "selectedArchivePath": "E/generation-selected/run_11.png",
+      "selectedArchiveSha256": "4072510f22fbfe79e553b24b0166f577c45f837517655205908ede5e076ffadd"
     },
     {
       "clip": "run",
@@ -190,7 +228,10 @@
       "references": ["run_12.skeleton.png", "vgtd-bakeoff-master.png", "run_12.before.png"],
       "resultFile": "exec-c2a65b63-5840-4c50-b994-9f6f0dbe0e61.png",
       "utcOutputSaved": "2026-11-06T13:14:48.543Z",
-      "status": "selected; source cell replacement"
+      "status": "selected; source cell replacement",
+      "resultSha256": "f2d046c187f06a40b526792197d1345970d7038a5386736b02e5f6e2fcb5725c",
+      "selectedArchivePath": "E/generation-selected/run_12.png",
+      "selectedArchiveSha256": "f2d046c187f06a40b526792197d1345970d7038a5386736b02e5f6e2fcb5725c"
     },
     {
       "key": "finalAE_run_cell11_repair3",
@@ -199,7 +240,8 @@
       "references": ["run_11.upper-only.png", "run_11.filled-guide.png", "vgtd-bakeoff-master.png"],
       "resultFile": "exec-9a661cea-7fca-472a-9ba7-f3e05e424d7f.png",
       "utcOutputSaved": "2026-11-06T14:50:03.604Z",
-      "status": "rejected; still too short"
+      "status": "rejected; still too short",
+      "resultSha256": "fef9156256ae6b0e875827a27b734b7cf9b66ef98e7d653fb2ae20b3767f4e4b"
     },
     {
       "key": "finalAE_hit_cell2_patch2",
@@ -207,7 +249,10 @@
       "references": ["hit_2.motif-patch.png", "hit_2.motif-mask.png"],
       "resultFile": "exec-2d19c2d7-fd48-42d9-a4e3-db9b5d9c1ef7.png",
       "utcOutputSaved": "2026-11-06T15:05:39.961Z",
-      "status": "selected; paint hard-clipped to source motif mask"
+      "status": "selected; paint hard-clipped to source motif mask",
+      "resultSha256": "174a37ab8f311706adfd8717e48663fbfd364763cc163d3b17bcc38ce13cc299",
+      "selectedArchivePath": "E/generation-selected/finalAE_hit_cell2_patch2.png",
+      "selectedArchiveSha256": "174a37ab8f311706adfd8717e48663fbfd364763cc163d3b17bcc38ce13cc299"
     },
     {
       "key": "finalAE_hit_cell3_patch2",
@@ -215,20 +260,20 @@
       "references": ["hit_3.motif-patch.png", "hit_3.motif-mask.png"],
       "resultFile": "exec-3836e2b3-8243-4c30-bfaf-268b2f3e6242.png",
       "utcOutputSaved": "2026-11-06T15:05:22.534Z",
-      "status": "selected; paint hard-clipped to source motif mask"
+      "status": "selected; paint hard-clipped to source motif mask",
+      "resultSha256": "67167095933f62674e863876f172309e6d129781ea88a74147409c0033c33552",
+      "selectedArchivePath": "E/generation-selected/finalAE_hit_cell3_patch2.png",
+      "selectedArchiveSha256": "67167095933f62674e863876f172309e6d129781ea88a74147409c0033c33552"
     },
     {
       "key": "finalAE_hit_motifs_v1",
       "utcStart": "2026-11-06T13:59:21.548Z",
       "prompt": "Precise LOCAL INPAINT of the existing 2x2 hit-reaction sprite sheet inimage1. Image2 is exact costume master, image3 black/white EDIT MASK. Change ONLY the two tiny WHITE mask rectangles: REMOVE the small gold floral/fleur embroidery motifs on the BLUE robe panel in top-right cell2 and bottom-left cell3. The master has plain blue cloth with GOLD BORDER TRIM ONLY, no gold interior symbols. Replace each interior motif with plausible continuation of SAME mutedblue cloth/folds/shading, matched perfectly to surrounding pixels. KEEP gold edging at robe hem and seam unchanged, keep every face/hair/hand/pose/sword/foot/background pixel elsewhere unchanged. No repaint of whole cells, no new texture/design, no adjustments of size or registration. Return SAME1254x1254 full2x2sheet, flatmagenta background. Only tiny interior goldmotifs vanish, surrounding cloth and edges retain originalstyle.",
-      "references": [
-        "C:\\Users\\PC\\.codex\\generated_images\\01a1ad56-e833-7ef2-b62b-cda10e79095e\\exec-95d09150-b25b-4ae2-a084-7a48b854a6bf.png",
-        "vgtd-bakeoff-master.png",
-        "hit_motifs.mask.png"
-      ],
+      "references": ["exec-95d09150-b25b-4ae2-a084-7a48b854a6bf.png", "vgtd-bakeoff-master.png", "hit_motifs.mask.png"],
       "resultFile": "exec-33e9a227-4b8e-4b70-acdd-04eb29cbc696.png",
       "utcOutputSaved": "2026-11-06T14:00:24.538Z",
-      "status": "rejected; motif remained"
+      "status": "rejected; motif remained",
+      "resultSha256": "95fc97c61c6161735e16ace0cb8992cbee4e6b7b405c7a651e5550b92c9f0554"
     },
     {
       "clip": "run",
@@ -237,7 +282,8 @@
       "references": ["run.template.png", "vgtd-bakeoff-master.png"],
       "resultFile": "exec-40d75e0c-79d6-4a3d-8cc0-6d8959a0e720.png",
       "utcOutputSaved": "2026-11-06T16:07:44.508Z",
-      "status": "rejected; more foot-slide findings and weak leg reversal"
+      "status": "rejected; more foot-slide findings and weak leg reversal",
+      "resultSha256": "96bfc4a46a7238001d6e170121c26e1c873363b67358bac579de48e89adb6152"
     },
     {
       "clip": "walk",
@@ -246,13 +292,61 @@
       "utcOutputSaved": "2026-11-06T16:29:44.051Z",
       "prompt": "Precisely repair ONLY the WHITE MASK regions of image3 in this6x2 WALK sprite sheet. Image1 is target with unfinished lower portions TOP ROW ONLY, colored footprints tell EXACT boot sole position. Image2 is original character/style and untouched bottom row reference. Image3 white=editable, black=protect. Output same complete6x2 sheet, same registration and size. Preserve ALL head/face/torso/arms/sword/hair and ALL bottom-row cells byte-identically as closely as possible; only repaint six top-row lower robes, ivory trouser hems and dark ankle boots. Image1 TOP ROW cyan footprint=NEAR RIGHT sole centre on ground, amber=farLEFT sole centre elevated during swing. Put boot soles EXACTLY on those dots and REMOVE colored guides. The right boot is PLANTED all six top frames and travels BACKWARDS under body: top1 extended FORWARD/right, top2 lessforward, top3 passingunderbody, top4 beneathhip, top5 behindhip,left, top6 furtherback,left. FarLEFT boot swings forward from behind at1 to infrontat6, elevated naturally2-6. Do NOT repeat original top row's incorrect feet; it had too short a right stance. Complete long blue gold-edged robe hem and ivory lining continuously at mask boundary, feet follow through from hidden trousers under robe. Maintain exact SAME body scale/ankle boot size/palette as original, plausible short stride, two legs only, no sword duplication or bent blade. No added ornaments or costume changes, no motionblur or shadows. Pure magenta background. Correct frame-to-frame ground travel is essential; every cyan sole moves backward by same amount between consecutive top cells. Return finished art without dots, masks, gridlines or labels.",
       "references": ["walk-lower.guide.png", "walk.png", "walk-lower.mask.png"],
-      "resultFile": "exec-4f8c95b4-f28f-49e1-8b75-58f49e8f38db.png"
+      "resultFile": "exec-4f8c95b4-f28f-49e1-8b75-58f49e8f38db.png",
+      "resultSha256": "46c285e9580679197b953f53a83a919cecfc633cf7000c21b702e97abe85860d"
     }
   ],
-  "postprocess": "Shared @vgtd/sprite from main9da982d: chroma key, defringe,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048 PMA atlas,pad2/extrude1. Five run cells replaced with repairCell hashes. Two AI robe texture patches hard-clipped to tiny declared masks; all other pixels retained. No hand-painted final pixels. Updated shared interior spill cleanup enabled (slice.spill={}): palette-aware opaque magenta removal. Updated per-foot sole metric records14 findings in D41 quality backlog; no guessed contact overrides, no speed/threshold changes.",
+  "postprocess": "Shared @vgtd/sprite pipeline at commit 6704de84e918b924d717e5adf9fe57a3c982530e: chroma key, edge defringe plus palette-aware interior spill cleanup,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048PMA atlas with padding2/extrude1. Source repairCell replacements and masked AI texture patches are audited by SHA256 in E/repair-inputs/*.repair-proof.json. Unchanged cells and pixels outside hit masks are verified by equal before/after RGBA hashes. D41 backlog records14 soft findings; no contact guesses, speed or threshold changes.",
   "capture": "Actual Cocos3 WebGL, single E, World scale1/2, paused midpoint source-pose contact sheets and30fps runtime-tick GIFs. GIF delays distributed to exact centisecond totals. Viewer bone seam metric=0 for single-bone sprites is NOT raster QA.",
   "status": "owner-review candidate;D41 hard gates pass,14 foot findings recorded as accepted soft backlog,zero regressions",
   "callCount": 23,
   "manualPixelEdits": "none; code-only source-cell replacement and AI paint hard-clipped to declared masks",
-  "pipelineCommit": "abc7b809bca79313a89b4e705a51baa1dea9d303"
+  "pipelineCommit": "6704de84e918b924d717e5adf9fe57a3c982530e",
+  "master": {
+    "format": "vgtd-reference-source",
+    "version": 1,
+    "sourceCommit": "ba7c2a94e99115c8343e15b5f6bd35c1901aa5e6",
+    "sourcePath": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
+    "sourceLfsOid": "sha256:15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+    "originalSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+    "archivePath": "reference/E.master4x.png",
+    "archiveSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+    "dimensions": [512, 512],
+    "operation": "Byte-for-byte copy from the earlier committed continuous-art cohort. No crop, resize, palette or alpha operation in this sprite lot.",
+    "generationAlias": {
+      "name": "vgtd-bakeoff-master.png",
+      "sha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b"
+    },
+    "upstreamNote": "Concept-A E style reference reused from the previous continuous-art cohort. This lot does not claim a verified pixel transform from the PR80 256px turnaround; its earlier resize history was not recorded."
+  },
+  "committedSheets": [
+    {
+      "path": "E/sheets/attack.png",
+      "sha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8"
+    },
+    {
+      "path": "E/sheets/cast.png",
+      "sha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d"
+    },
+    {
+      "path": "E/sheets/die.png",
+      "sha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470"
+    },
+    {
+      "path": "E/sheets/hit.png",
+      "sha256": "09a0b6a48b8f14ca6d8946382c4198b3a92308a2995e44ba87b2886c7dc7ecd0"
+    },
+    {
+      "path": "E/sheets/idle.png",
+      "sha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e"
+    },
+    {
+      "path": "E/sheets/run.png",
+      "sha256": "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6"
+    },
+    {
+      "path": "E/sheets/walk.png",
+      "sha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a"
+    }
+  ]
 }
