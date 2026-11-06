@@ -16,7 +16,7 @@
       "frames": 30,
       "loop": true,
       "seconds": 1,
-      "authoredSpeedPxS": null
+      "authoredSpeedPxS": 0
     },
     {
       "name": "run",

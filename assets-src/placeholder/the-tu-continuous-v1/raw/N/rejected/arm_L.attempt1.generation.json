@@ -1,0 +1,14 @@
+{
+  "id": "arm_L",
+  "direction": "N",
+  "attempt": 1,
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ONE complete continuous ivory cloth robe SLEEVE only, anatomical left sleeve on screen-left. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.",
+  "utcStart": "2026-11-06 06:49:58 UTC",
+  "utcFailureRecorded": "2026-11-06 07:04:35 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "status": "no image; output-stage moderation rejected",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID d07dc223-993c-4ff3-a977-0a86e9fa0e51. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "reference": "reference/N.master4x.png"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "idle_01_in",
+  "attempt": 3,
+  "prompt": "Make a near-identical second idle breathing key of the FIRST attached sprite. Keep its EXACT silhouette, facial/head proportions, clothes volume, foot positions, hand positions, angle and square canvas registration. This is inhalation: lift chest/shoulders imperceptibly by about2 pixels on the supplied512px canvas, and keep head/arms/feet essentially unchanged. Use SECOND attached image only to check the quiet guard pose layout; preserve the first image's compact shape. DO NOT widen head or sleeves, puff trousers, splay tabard, grow hair, change limb lengths, move planted boots, change gauntlet design, add ornaments, or enlarge the figure. Same Thể tu A male, bronze meander earth gauntlets raised guard, ivory robe/trousers, mountain-blue bronze-cloud short tabard, dark-blue sash two tails, brown short top bun jade hairpin, E right-facing slight overhead view. Clean restrained game sprite contour and2-3tone NW cel shading. Transparent square512 composition exactly as first image; no ground/shadow/text/effects/scene. ONE figure.",
+  "utcStart": "2026-11-06 06:08:50 UTC",
+  "utcEnd": "2026-11-06 06:09:26 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "references": [
+    "reference/keyposes/E/idle_02_out.attempt2.registered4x.png",
+    "reference/keyposes/E/idle_01-guide4x.png"
+  ],
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-b3030a42-9e45-4745-ae26-89da83d14492.png",
+  "selectedOutput": "raw/keyposes/E/idle_01_in.attempt3.png",
+  "status": "pending pilot fit"
+}

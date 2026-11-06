@@ -1,0 +1,10 @@
+{
+  "method": "uniform alpha-weighted scale by figure height; translation by bottom and lower-20-percent foot bounding centre; no silhouette warp",
+  "alphaThreshold": 128,
+  "sourceBounds": [481, 226, 914, 1140],
+  "guideBounds": [198, 92, 379, 465],
+  "scale": 0.4087431693989071,
+  "translation4x": [0, -1],
+  "source": "raw/keyposes/E/idle_01_in.attempt3.png",
+  "guide": "reference/keyposes/E/idle_01-guide4x.png"
+}

@@ -1391,3 +1391,2159 @@ Create ONE full-body AI KEY-POSE reference of Thể tu A Sơn Môn Hộ Vệ for
 ```text
 Create ONE full-body AI KEY-POSE reference of Thể tu A Sơn Môn Hộ Vệ for a 2D isometric cultivation MMORPG rig. Reference 1 is the identity/costume/material master. Reference 2 is the exact pose-layout guide: preserve its joint locations, silhouette proportions, planted feet and framing. E direction, facing RIGHT, slight overhead isometric camera. Neutral combat GUARD: both bronze earth gauntlets raised at chest/face height exactly as the layout guide; elbows bent, knees softly bent, balanced stocky stance. IDLE EXHALE key: chest/shoulders relax very slightly, feet and hands remain steady. Keep movement tiny; same head size, limb lengths and outfit volume as the guide. Same adult male identity, short top bun and jade hairpin. Ivory cross-collar inner robe #E9EEF0, mountain-blue short split tabard #5E8798 thin bronze cloud trim #B58A4A, dark-blue sash #294451 with two tails, loose ivory trousers, dark boots, paired bronze stone-block gauntlets with meander emblem, highlights #E3C07F shade #5B4222. Clean hand-painted sprite, readable dark contour, 2-3 tone soft cel shading, light upper-left NW. Eyes open, brows neutral, mouth closed. ONE subject on genuinely transparent background, no text, UI, ground marker, cast shadow or VFX. Square canvas, same placement as guide (feet at 90.625% canvas height), do not zoom/crop/recenter; retain at least 8% clear margin. Preserve the guard stance from guide, not the relaxed arms-down pose of the identity master.
 ```
+
+### Thể tu S master - 2026-11-06 04:40:38 UTC
+
+- Tool: `image_gen.imagegen`; model: không công bố; CLI: `codex-cli 0.166.0`.
+- UTC kết thúc: 2026-11-06 04:41:34 UTC. Nguồn/prompt/tham chiếu: `assets-src/placeholder/the-tu-continuous-v1/reference/S.master-generated.generation.json`.
+- AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Production reference master for Vạn Giới Tiên Đồ, Thể tu A Sơn Môn Hộ Vệ. Match the supplied concept and E sprite EXACTLY: compact stocky earth tank, broad chest, stout legs, short brown top bun and jade hairpin; ivory cross collar robe #E9EEF0, mountain-blue #5E8798 sleeveless short split tabard with bronze #B58A4A cloud trim, dark-blue #294451 sash band knot TWO separate tails, loose ivory trousers into dark boots, paired chunky bronze stone-block EARTH GAUNTLETS with square meander emblems. Same outfit construction and 5.75-head proportions, no sword. Clean game sprite dark contours and restrained 2-3 tone soft cel shading, upper-left NW lighting, readable at128px. Slight overhead orthographic isometric camera. Neutral A pose arms straight and 20 degrees away from torso, relaxed gauntlets down, both hands and boots fully visible and separated, feet planted apart. ONE full-body figure only, square canvas, figure height76% canvas, transparent margin10% all sides. True transparent background. No ground shadow, text, layout, extra views, scene, or VFX.
+DIRECTION S: Front facing toward viewer, symmetrical front view, looking toward bottom of screen.
+```
+
+### Thể tu SE master - 2026-11-06 04:40:38 UTC
+
+- Tool: `image_gen.imagegen`; model: không công bố; CLI: `codex-cli 0.166.0`.
+- UTC kết thúc: 2026-11-06 04:42:26 UTC. Nguồn/prompt/tham chiếu: `assets-src/placeholder/the-tu-continuous-v1/reference/SE.master-generated.generation.json`.
+- AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Production reference master for Vạn Giới Tiên Đồ, Thể tu A Sơn Môn Hộ Vệ. Match the supplied concept and E sprite EXACTLY: compact stocky earth tank, broad chest, stout legs, short brown top bun and jade hairpin; ivory cross collar robe #E9EEF0, mountain-blue #5E8798 sleeveless short split tabard with bronze #B58A4A cloud trim, dark-blue #294451 sash band knot TWO separate tails, loose ivory trousers into dark boots, paired chunky bronze stone-block EARTH GAUNTLETS with square meander emblems. Same outfit construction and 5.75-head proportions, no sword. Clean game sprite dark contours and restrained 2-3 tone soft cel shading, upper-left NW lighting, readable at128px. Slight overhead orthographic isometric camera. Neutral A pose arms straight and 20 degrees away from torso, relaxed gauntlets down, both hands and boots fully visible and separated, feet planted apart. ONE full-body figure only, square canvas, figure height76% canvas, transparent margin10% all sides. True transparent background. No ground shadow, text, layout, extra views, scene, or VFX.
+DIRECTION SE: Three-quarter FRONT facing down and screen-right (southeast). Show front chest and near right-facing facial profile, both arms and both legs.
+```
+
+### Thể tu NE master - 2026-11-06 04:40:38 UTC
+
+- Tool: `image_gen.imagegen`; model: không công bố; CLI: `codex-cli 0.166.0`.
+- UTC kết thúc: 2026-11-06 04:43:19 UTC. Nguồn/prompt/tham chiếu: `assets-src/placeholder/the-tu-continuous-v1/reference/NE.master-generated.generation.json`.
+- AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Production reference master for Vạn Giới Tiên Đồ, Thể tu A Sơn Môn Hộ Vệ. Match the supplied concept and E sprite EXACTLY: compact stocky earth tank, broad chest, stout legs, short brown top bun and jade hairpin; ivory cross collar robe #E9EEF0, mountain-blue #5E8798 sleeveless short split tabard with bronze #B58A4A cloud trim, dark-blue #294451 sash band knot TWO separate tails, loose ivory trousers into dark boots, paired chunky bronze stone-block EARTH GAUNTLETS with square meander emblems. Same outfit construction and 5.75-head proportions, no sword. Clean game sprite dark contours and restrained 2-3 tone soft cel shading, upper-left NW lighting, readable at128px. Slight overhead orthographic isometric camera. Neutral A pose arms straight and 20 degrees away from torso, relaxed gauntlets down, both hands and boots fully visible and separated, feet planted apart. ONE full-body figure only, square canvas, figure height76% canvas, transparent margin10% all sides. True transparent background. No ground shadow, text, layout, extra views, scene, or VFX.
+DIRECTION NE: Three-quarter BACK facing up and screen-right (northeast). Show back tabard cloud emblem, rear hair and only small right facial edge, front sash tails may peek beyond sides. Both arms and legs visible.
+```
+
+### Thể tu N master - 2026-11-06 04:40:38 UTC
+
+- Tool: `image_gen.imagegen`; model: không công bố; CLI: `codex-cli 0.166.0`.
+- UTC kết thúc: 2026-11-06 04:44:15 UTC. Nguồn/prompt/tham chiếu: `assets-src/placeholder/the-tu-continuous-v1/reference/N.master-generated.generation.json`.
+- AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Production reference master for Vạn Giới Tiên Đồ, Thể tu A Sơn Môn Hộ Vệ. Match the supplied concept and E sprite EXACTLY: compact stocky earth tank, broad chest, stout legs, short brown top bun and jade hairpin; ivory cross collar robe #E9EEF0, mountain-blue #5E8798 sleeveless short split tabard with bronze #B58A4A cloud trim, dark-blue #294451 sash band knot TWO separate tails, loose ivory trousers into dark boots, paired chunky bronze stone-block EARTH GAUNTLETS with square meander emblems. Same outfit construction and 5.75-head proportions, no sword. Clean game sprite dark contours and restrained 2-3 tone soft cel shading, upper-left NW lighting, readable at128px. Slight overhead orthographic isometric camera. Neutral A pose arms straight and 20 degrees away from torso, relaxed gauntlets down, both hands and boots fully visible and separated, feet planted apart. ONE full-body figure only, square canvas, figure height76% canvas, transparent margin10% all sides. True transparent background. No ground shadow, text, layout, extra views, scene, or VFX.
+DIRECTION N: Straight BACK view facing away toward top of screen. Rear head and bun, no facial features. Back tabard cloud emblem, both relaxed gauntlets and boots visible; two front sash tails visible only where naturally peeking below tabard.
+```
+
+### Thể tu S boot_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/boot_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:52:21 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_L: anatomical left, screen-right dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S boot_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/boot_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:53:18 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_R: anatomical right, screen-left dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/rejected/head.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:57:04 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART head: Head base only, warm skin face ears jaw and short hairline, blank skin where eyes brows mouth go, NO eyes eyebrows mouth or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S leg_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/leg_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:51:46 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_L: ENTIRE anatomical LEFT, screen-RIGHT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S leg_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/leg_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:52:44 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_R: ENTIRE anatomical RIGHT, screen-LEFT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S neck
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/neck.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:50:40 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART neck: Warm skin short neck cylinder, extended base hidden beneath collar. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/rejected/arm_L.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: not retained by failed batch wrapper / 2026-11-06 04:57:01 UTC.
+- Trạng thái: generation was requested; no selected image persisted; orchestration discarded settled rejection detail.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ENTIRE anatomical LEFT, screen-RIGHT ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S arm_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/rejected/arm_R.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: not retained by failed batch wrapper / 2026-11-06 04:57:04 UTC.
+- Trạng thái: generation was requested; no selected image persisted; orchestration discarded settled rejection detail.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_R: ENTIRE anatomical RIGHT, screen-LEFT ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sash_knot
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sash_knot.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:56:49 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_knot: Dark-blue sash front tied KNOT only, no band or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S tabard_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/tabard_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:54:12 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_back: Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S tabard_front
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/tabard_front.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:54:53 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_front: Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S tabard_shoulder_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/tabard_shoulder_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:55:29 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_L: anatomical left, screen-right folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S tabard_shoulder_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/tabard_shoulder_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:56:08 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_R: anatomical right, screen-left folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S torso
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/torso.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:49:04 UTC / 2026-11-06 04:49:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART torso: Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/arm_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:57:47 UTC / 2026-11-06 04:59:17 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ONE complete continuous ivory cloth robe SLEEVE only, screen-right. Garment component with rounded shoulder cap and continuous unbroken fabric down to wrist opening, neutral straight diagonal20 degrees outward. No skin, human hand, glove, blue tabard, or jewelry. Fully painted ivory fabric including elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S arm_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/arm_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:57:47 UTC / 2026-11-06 04:58:21 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_R: ONE complete continuous ivory cloth robe SLEEVE only, screen-left. Garment component with rounded shoulder cap and continuous unbroken fabric down to wrist opening, neutral straight diagonal20 degrees outward. No skin, human hand, glove, blue tabard, or jewelry. Fully painted ivory fabric including elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S ear_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/ear_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 05:01:04 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART ear_R: ONE visible near ear only, warm light skin, front-facing as on the attached master. No head, no hair or facial features. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S eyes_closed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/eyes_closed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:02:51 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_closed: Eyes only as one expression overlay: fully closed blink or meditation. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S eyes_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/eyes_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:02:15 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_open: Eyes only as one expression overlay: open calm determined. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_R_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_R_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:03:06 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_fist: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hair_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hair_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:58:09 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_back: Back mass of short dark brown tied hair only behind the head, no face or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hair_bun
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hair_bun.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:57:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_bun: Top hair bun only, dark brown with tie band, no head or pin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hair_strand_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hair_strand_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:59:18 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_1: One thin tapered loose LEFT front fringe hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hair_strand_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hair_strand_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 05:00:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_2: One thin tapered loose RIGHT front fringe hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hair_strand_3
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hair_strand_3.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:59:52 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_3: One thin tapered side-lock hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hairpin
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/rejected/hairpin.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:58:50 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hairpin: Straight pale jade green hairpin only, bronze end caps. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sash_band
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sash_band.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:57:29 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_band: Wide dark-blue wrapped waist sash BAND only, no knot or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sash_tail_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sash_tail_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:57:58 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_1: First dark-blue hanging sash tail only, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sash_tail_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sash_tail_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:53:35 UTC / 2026-11-06 04:58:30 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_2: Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sleeve_cuff_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sleeve_cuff_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:57:47 UTC / 2026-11-06 04:58:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_L: anatomical left, screen-right ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S sleeve_cuff_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/sleeve_cuff_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:57:47 UTC / 2026-11-06 04:59:47 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_R: anatomical right, screen-left ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S trouser_hem_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/trouser_hem_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:57:47 UTC / 2026-11-06 05:00:22 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_L: anatomical left, screen-right gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S trouser_hem_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/trouser_hem_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:00:22 UTC / 2026-11-06 05:00:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_R: anatomical right, screen-left gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S brows_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/brows_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:04:49 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_angry: Eyebrow overlay only, angled down angry. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S brows_neutral
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/brows_neutral.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:03:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_neutral: Eyebrow overlay only, calm neutral. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S eyes_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/eyes_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:04:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_angry: Eyes only as one expression overlay: narrowed fierce attack. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S eyes_half
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/eyes_half.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:03:28 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_half: Eyes only as one expression overlay: half closed blink. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_R_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_R_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:03:47 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_open: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_R_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_R_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:04:24 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_relaxed: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hairpin
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hairpin.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:03:24 UTC / 2026-11-06 05:04:20 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+One single pale jade hairpin accessory only for a Chinese cultivation 2D MMORPG sprite. Long straight horizontal slim jade-green shaft with two small bronze end caps, one round pale jade bead near left end. Front view, slight overhead orthographic, clean dark outline, restrained 2-tone cel shading, light upper-left. Jade #8EAF9A bronze #B58A4A. Isolated object centered in square transparent canvas with large margin. Absolutely no hair, head, character, robe, arms, legs, hands, weapons, or extra objects. Exactly ONE horizontal jade hairpin, transparent alpha PNG.
+```
+
+### Thể tu S brows_pain
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/brows_pain.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:05:18 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_pain: Eyebrow overlay only, raised in pain. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_L_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_L_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:06:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_fist: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_L_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_L_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:08:41 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_ground: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_L_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_L_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:08:05 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_guard: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_L_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_L_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:07:02 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_open: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_L_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_L_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:07:32 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_relaxed: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_R_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_R_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:05:47 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_ground: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_R_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_R_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:05:03 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_guard: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S mouth_grit
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/mouth_grit.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:07:01 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_grit: Mouth overlay only, gritted teeth strain or guard. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S mouth_neutral
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/mouth_neutral.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:05:54 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_neutral: Mouth overlay only, closed calm line. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S mouth_pain
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/mouth_pain.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:07:36 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_pain: Mouth overlay only, open in pain. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S mouth_shout
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/mouth_shout.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:01:39 UTC / 2026-11-06 05:06:28 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_shout: Mouth overlay only, open shouting kiai. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S gauntlet_plate_glow_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/gauntlet_plate_glow_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:02:28 UTC / 2026-11-06 05:09:12 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_plate_glow_R: ONLY the meander emblem plate of the RIGHT earth gauntlet, glowing pale ochre #E3C07F, for a separate additive skill-charge overlay. No whole gauntlet, no hand, no arm. Retain bronze square plate outline and meander shape from master. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S hairpin attempt 2 - 2026-11-06 05:03:24 UTC
+
+- Tool `image_gen.imagegen`; model không công bố; CLI `codex-cli 0.166.0`. UTC kết thúc: 2026-11-06 05:04:20 UTC.
+- Nguồn chọn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/hairpin.generation.json`; bản sai giữ trong `raw/S/rejected/`. AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+One single pale jade hairpin accessory only for a Chinese cultivation 2D MMORPG sprite. Long straight horizontal slim jade-green shaft with two small bronze end caps, one round pale jade bead near left end. Front view, slight overhead orthographic, clean dark outline, restrained 2-tone cel shading, light upper-left. Jade #8EAF9A bronze #B58A4A. Isolated object centered in square transparent canvas with large margin. Absolutely no hair, head, character, robe, arms, legs, hands, weapons, or extra objects. Exactly ONE horizontal jade hairpin, transparent alpha PNG.
+```
+
+### Thể tu SE arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/arm_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:29:51 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ONE complete continuous ivory cloth robe SLEEVE only, anatomical left sleeve on screen-right. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE arm_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/arm_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:30:59 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_R: ONE complete continuous ivory cloth robe SLEEVE only, anatomical right sleeve on screen-left. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE boot_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/boot_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:32:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_R: anatomical right, screen-left dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE leg_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/leg_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:31:29 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_L: ENTIRE anatomical LEFT, screen-RIGHT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE leg_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/leg_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:32:04 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_R: ENTIRE anatomical RIGHT, screen-LEFT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE neck
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/neck.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:30:25 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART neck: Warm skin short neck cylinder, extended base hidden beneath collar. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE tabard_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/tabard_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:32:20 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_back: Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE tabard_front
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/tabard_front.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:31:44 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_front: Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE torso
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/torso.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:29:17 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART torso: Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE boot_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/boot_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:28:42 UTC / 2026-11-06 05:33:06 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_L: anatomical left, screen-right dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE brows_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/brows_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:51:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_angry: Eyebrow overlay only, angled down angry. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE ear_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/ear_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:39:41 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART ear_R: ONE visible near ear only, warm light skin, front-facing as on the attached master. No head, no hair or facial features. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE eyes_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/eyes_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:50:50 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_angry: Eyes only as one expression overlay: narrowed fierce attack. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE eyes_closed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/eyes_closed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:49:30 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_closed: Eyes only as one expression overlay: fully closed blink or meditation. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE eyes_half
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/eyes_half.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:50:09 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_half: Eyes only as one expression overlay: half closed blink. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE eyes_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/eyes_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:48:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_open: Eyes only as one expression overlay: open calm determined. Front facing, BOTH eyes as a paired overlay. No face or skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hairpin
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hairpin.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:37:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hairpin: Straight pale jade green hairpin only, bronze end caps. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hair_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hair_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:36:23 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_back: Back mass of short dark brown tied hair only behind the head, no face or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hair_bun
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hair_bun.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:36:58 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_bun: Top hair bun only, dark brown with tie band, no head or pin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hair_strand_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hair_strand_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:38:32 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_1: One thin tapered loose LEFT front fringe hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hair_strand_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hair_strand_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:38:00 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_2: One thin tapered loose RIGHT front fringe hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE hair_strand_3
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/hair_strand_3.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:39:06 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_3: One thin tapered side-lock hair strand only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/head.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:35:50 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART head: Head base only, warm skin face ears jaw and short hairline, blank skin where eyes brows mouth go, NO eyes eyebrows mouth or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sash_band
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sash_band.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:33:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_band: Wide dark-blue wrapped waist sash BAND only, no knot or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sash_knot
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sash_knot.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:34:41 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_knot: Dark-blue sash front tied KNOT only, no band or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sash_tail_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sash_tail_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:35:27 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_1: First dark-blue hanging sash tail only, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sash_tail_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sash_tail_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:36:00 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_2: Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sleeve_cuff_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sleeve_cuff_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:40:09 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_L: anatomical left, screen-right ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE sleeve_cuff_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/sleeve_cuff_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:40:48 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_R: anatomical right, screen-left ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE tabard_shoulder_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/tabard_shoulder_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:32:55 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_L: anatomical left, screen-right folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE tabard_shoulder_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/tabard_shoulder_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:31:07 UTC / 2026-11-06 05:34:03 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_R: anatomical right, screen-left folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE trouser_hem_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/trouser_hem_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:41:29 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_L: anatomical left, screen-right gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE trouser_hem_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/trouser_hem_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:35:17 UTC / 2026-11-06 05:42:03 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_R: anatomical right, screen-left gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu E idle_01_in attempt2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/keyposes/E/idle_01_in.attempt2.generation.json`; tool `image_gen.imagegen`; model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:10 UTC / 2026-11-06 05:49:27 UTC. AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Refine the first image into a clean illustrated 2D game animation reference, with EXACTLY THE SAME full-body silhouette, compact proportions, limb positions, garment outlines, head size, wrist positions and planted boot positions as the first image. It is a production pose-layout guide for Thể tu A Sơn Môn Hộ Vệ. Use the second image only for refined line/shading language and facial identity, NOT its wider silhouette. CRITICAL preserve narrow short-haired head, modest ivory sleeve volume, compact ivory trousers and short mountain-blue split tabard outlines from first image; do not enlarge head, puff trousers, lengthen limbs, splay tabard, or add cloth. Paired bronze stone-block meander gauntlets raised in quiet guard, nose faces screen-right, E slight overhead orthographic view. Ivory inner robe, mountain-blue bronze-cloud trimmed tabard, dark-blue sash knot and TWO tails, dark boots, short top bun jade hairpin. Clean dark contour, simple 2-3 tone cel shading, NW light, readable128px sprite. Pose is idle gentle inhalation, only tiny breathing difference exactly as first image. Keep exact square512 reference composition and foot registration (bottom near y464), all figure visible, transparent background. No ground shadow, text, effects, extra items or scene. ONE figure.
+```
+
+### Thể tu E idle_02_out attempt2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/keyposes/E/idle_02_out.attempt2.generation.json`; tool `image_gen.imagegen`; model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:10 UTC / 2026-11-06 05:48:49 UTC. AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Refine the first image into a clean illustrated 2D game animation reference, with EXACTLY THE SAME full-body silhouette, compact proportions, limb positions, garment outlines, head size, wrist positions and planted boot positions as the first image. It is a production pose-layout guide for Thể tu A Sơn Môn Hộ Vệ. Use the second image only for refined line/shading language and facial identity, NOT its wider silhouette. CRITICAL preserve narrow short-haired head, modest ivory sleeve volume, compact ivory trousers and short mountain-blue split tabard outlines from first image; do not enlarge head, puff trousers, lengthen limbs, splay tabard, or add cloth. Paired bronze stone-block meander gauntlets raised in quiet guard, nose faces screen-right, E slight overhead orthographic view. Ivory inner robe, mountain-blue bronze-cloud trimmed tabard, dark-blue sash knot and TWO tails, dark boots, short top bun jade hairpin. Clean dark contour, simple 2-3 tone cel shading, NW light, readable128px sprite. Pose is idle gentle exhalation, only tiny breathing difference exactly as first image. Keep exact square512 reference composition and foot registration (bottom near y464), all figure visible, transparent background. No ground shadow, text, effects, extra items or scene. ONE figure.
+```
+
+### Thể tu SE brows_neutral
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/brows_neutral.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:54:49 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_neutral: Eyebrow overlay only, calm neutral. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE brows_pain
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/brows_pain.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:51:59 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_pain: Eyebrow overlay only, raised in pain. Front facing BOTH brows as paired overlay. No skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_L_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_L_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:57:33 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_fist: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_L_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_L_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:59:54 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_ground: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_L_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_L_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:59:16 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_guard: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_L_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_L_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:58:03 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_open: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_L_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_L_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:58:35 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_relaxed: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_R_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_R_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:54:42 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_fist: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_R_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_R_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:56:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_ground: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_R_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_R_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:56:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_guard: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_R_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_R_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:55:53 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_open: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_R_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_R_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 05:55:18 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_relaxed: anatomical RIGHT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE mouth_grit
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/mouth_grit.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:53:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_grit: Mouth overlay only, gritted teeth strain or guard. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE mouth_neutral
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/mouth_neutral.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:52:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_neutral: Mouth overlay only, closed calm line. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE mouth_shout
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/mouth_shout.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 05:53:01 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_shout: Mouth overlay only, open shouting kiai. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu S head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/head.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:07 UTC / 2026-11-06 05:54:44 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Create ONE isolated HEAD BASE sprite component for this exact frontal male cultivation MMORPG character. Reference is ONLY identity/style. Render head only from short brown hairline to chin, both ears and angular jaw. Crucial: retain a clearly modeled small straight NOSE with bridge, nose tip, nostril shading and subtle cheek planes; keep the recognisable face proportions. Leave clean skin ONLY in the eye sockets / eyebrow area / mouth area because separate expression overlays will be added. NO eyes, NO eyebrows, NO lips or mouth. Do NOT erase the NOSE. Ivory warm skin, dark short brown hairline, clean thin dark contour and restrained 2-3 tone cel shading, NW light, frontal slight overhead camera. NO bun, jade pin, neck, collar, torso, body, mannequin, sheet, labels, or background. One isolated head on transparent square canvas with generous margin, no shadow. Full head and ears visible. No other object.
+```
+
+### Thể tu S head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/S/rejected/head.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 04:56:23 UTC / 2026-11-06 04:57:04 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART head: Head base only, warm skin face ears jaw and short hairline, blank skin where eyes brows mouth go, NO eyes eyebrows mouth or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE gauntlet_plate_glow_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/gauntlet_plate_glow_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:54:16 UTC / 2026-11-06 06:00:28 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_plate_glow_R: ONLY the meander emblem plate of the RIGHT earth gauntlet, glowing pale ochre #E3C07F, for a separate additive skill-charge overlay. No whole gauntlet, no hand, no arm. Retain bronze square plate outline and meander shape from master. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu SE mouth_pain
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/SE/mouth_pain.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 05:48:19 UTC / 2026-11-06 06:00:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART mouth_pain: Mouth overlay only, open in pain. Front facing. No face or large skin patch. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu E idle_01_in attempt3
+
+- Nguồn `assets-src/placeholder/the-tu-continuous-v1/raw/keyposes/E/idle_01_in.attempt3.generation.json`; tool `image_gen.imagegen`; model không công bố; CLI `codex-cli 0.166.0`.
+- UTC 2026-11-06 06:08:50 UTC / 2026-11-06 06:09:26 UTC. AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Make a near-identical second idle breathing key of the FIRST attached sprite. Keep its EXACT silhouette, facial/head proportions, clothes volume, foot positions, hand positions, angle and square canvas registration. This is inhalation: lift chest/shoulders imperceptibly by about2 pixels on the supplied512px canvas, and keep head/arms/feet essentially unchanged. Use SECOND attached image only to check the quiet guard pose layout; preserve the first image's compact shape. DO NOT widen head or sleeves, puff trousers, splay tabard, grow hair, change limb lengths, move planted boots, change gauntlet design, add ornaments, or enlarge the figure. Same Thể tu A male, bronze meander earth gauntlets raised guard, ivory robe/trousers, mountain-blue bronze-cloud short tabard, dark-blue sash two tails, brown short top bun jade hairpin, E right-facing slight overhead view. Clean restrained game sprite contour and2-3tone NW cel shading. Transparent square512 composition exactly as first image; no ground/shadow/text/effects/scene. ONE figure.
+```
+
+### Thể tu NE arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/arm_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:41:10 UTC / 2026-11-06 06:41:44 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+One detached garment component: an empty opaque IVORY WOVEN-CLOTH ROBE SLEEVE matching this reference sleeve. Draw the opposite sleeve: rounded shoulder cap upper-right, tapered circular cuff opening lower-left, continuous long fabric tube with subtle elbow folds, no breaks or seams through middle. Slight overhead rear three-quarter game sprite camera, NW light, dark outline, simple2-3tone ivory-grey cel shading. Only fabric. No skin, hand, body, head, glove, gold armor, mannequin, scenery, lettering, or other objects. Transparent square canvas, whole sleeve completely visible with generous margin. One empty cloth sleeve.
+```
+
+### Thể tu NE arm_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/arm_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:20:45 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_R: ONE complete continuous ivory cloth robe SLEEVE only, anatomical right sleeve on screen-right. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE boot_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/boot_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:22:58 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_L: anatomical left, screen-left dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE boot_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/boot_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:23:34 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_R: anatomical right, screen-right dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE brows_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/brows_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:05:07 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_angry: ONLY one narrow near eyebrow expression brows_angry on RIGHT-facing facial edge of rear three-quarter NE view. No far brow, head or skin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE brows_neutral
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/brows_neutral.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:03:46 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_neutral: ONLY one narrow near eyebrow expression brows_neutral on RIGHT-facing facial edge of rear three-quarter NE view. No far brow, head or skin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE brows_pain
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/brows_pain.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:04:27 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART brows_pain: ONLY one narrow near eyebrow expression brows_pain on RIGHT-facing facial edge of rear three-quarter NE view. No far brow, head or skin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE ear_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/ear_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:52:59 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART ear_R: ONE visible near ear only, warm light skin, front-facing as on the attached master. No head, no hair or facial features. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE eyes_angry
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/eyes_angry.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:03:08 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_angry: ONLY the tiny visible near eye expression eyes_angry on the narrow RIGHT-facing facial edge of a rear three-quarter NE view. No far eye, face, skin patch, hair or body. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE eyes_closed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/eyes_closed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:06:54 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_closed: ONLY the tiny visible near eye expression eyes_closed on the narrow RIGHT-facing facial edge of a rear three-quarter NE view. No far eye, face, skin patch, hair or body. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE eyes_half
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/eyes_half.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:02:28 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_half: ONLY the tiny visible near eye expression eyes_half on the narrow RIGHT-facing facial edge of a rear three-quarter NE view. No far eye, face, skin patch, hair or body. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE eyes_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/eyes_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:00:33 UTC / 2026-11-06 07:01:14 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART eyes_open: ONLY the tiny visible near eye expression eyes_open on the narrow RIGHT-facing facial edge of a rear three-quarter NE view. No far eye, face, skin patch, hair or body. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_L_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_L_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:06:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_fist: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_L_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_L_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:10:00 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_ground: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_L_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_L_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:08:48 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_guard: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_L_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_L_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:07:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_open: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_L_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_L_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:08:13 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_relaxed: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_plate_glow_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_plate_glow_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:09:20 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_plate_glow_R: ONLY the meander emblem plate of the RIGHT earth gauntlet, glowing pale ochre #E3C07F, for a separate additive skill-charge overlay. No whole gauntlet, no hand, no arm. Retain bronze square plate outline and meander shape from master. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_R_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_R_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:03:43 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_fist: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_R_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_R_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:06:21 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_ground: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_R_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_R_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:05:43 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_guard: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_R_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_R_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:04:25 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_open: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE gauntlet_R_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/gauntlet_R_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:03:07 UTC / 2026-11-06 07:05:05 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_relaxed: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hairpin
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hairpin.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:36 UTC / 2026-11-06 06:50:55 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hairpin: Straight pale jade green hairpin only, bronze end caps. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hair_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hair_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:36 UTC / 2026-11-06 06:50:17 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_back: Back mass of short dark brown tied hair only behind the head, no face or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hair_bun
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hair_bun.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:36 UTC / 2026-11-06 06:49:45 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_bun: Top hair bun only, dark brown with tie band, no head or pin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hair_strand_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hair_strand_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:51:23 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_1: One thin tapered short dark-brown loose hair strand viewed from the BACK, no scalp or head. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hair_strand_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hair_strand_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:51:51 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_2: One thin tapered short dark-brown loose hair strand viewed from the BACK, no scalp or head. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE hair_strand_3
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/hair_strand_3.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:52:22 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_strand_3: One thin tapered short dark-brown loose hair strand viewed from the BACK, no scalp or head. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/head.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:36 UTC / 2026-11-06 06:49:11 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART head: REAR HEAD BASE only: back of head with short hairline and nape; for NE a small right ear and jaw edge may show, for N absolutely no face. No eyes, brows, mouth, bun, or pin. Do not turn toward viewer. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE leg_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/leg_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:21:52 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_L: ENTIRE anatomical LEFT, screen-LEFT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE leg_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/leg_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:22:25 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_R: ENTIRE anatomical RIGHT, screen-RIGHT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE neck
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/neck.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:20:12 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART neck: Warm skin short neck cylinder, extended base hidden beneath collar. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/rejected/arm_L.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:35:07 UTC.
+- Trạng thái: no image; output-stage moderation rejected.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ONE complete continuous ivory cloth robe SLEEVE only, anatomical left sleeve on screen-left. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sash_band
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sash_band.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:27:08 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_band: Wide dark-blue wrapped waist sash BAND only, no knot or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sash_knot
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sash_knot.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:26:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_knot: Dark-blue sash front tied KNOT only, no band or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sash_tail_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sash_tail_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:28:09 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_1: First dark-blue hanging sash tail only, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sash_tail_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sash_tail_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:27:40 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_2: Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sleeve_cuff_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sleeve_cuff_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:53:29 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_L: anatomical left, screen-left ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE sleeve_cuff_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/sleeve_cuff_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:54:02 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_R: anatomical right, screen-right ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE tabard_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/tabard_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:24:43 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_back: Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE tabard_front
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/tabard_front.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:24:07 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_front: Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE tabard_shoulder_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/tabard_shoulder_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:25:19 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_L: anatomical left, screen-left folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE tabard_shoulder_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/tabard_shoulder_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:25:55 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_R: anatomical right, screen-right folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE torso
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/torso.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:19:01 UTC / 2026-11-06 06:19:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART torso: Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE trouser_hem_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/trouser_hem_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:54:36 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_L: anatomical left, screen-left gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu NE trouser_hem_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/NE/trouser_hem_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:48:37 UTC / 2026-11-06 06:55:12 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached NE master exactly: THREE-QUARTER BACK facing up and SCREEN-RIGHT, back tabard cloud emblem visible, only slight right facial edge, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_R: anatomical right, screen-right gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/arm_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:05:50 UTC / 2026-11-06 07:06:24 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+One detached garment component only: empty opaque IVORY WOVEN-CLOTH ROBE SLEEVE matching the reference. Opposite LEFT sleeve seen from STRAIGHT BACK view: rounded shoulder cap upper-right, circular cuff opening lower-left, straight continuous fabric tube20degrees outward, subtle elbow folds. No separation into upper/lower parts. Dark game sprite contour, simple ivory-grey2-3tone cel shading, NW light. Only cloth; no skin, hand, glove, body, head, gold armor, mannequin, scene or text. Transparent square canvas, fully visible sleeve with generous margin.
+```
+
+### Thể tu N arm_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/arm_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:59:07 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_R: ONE complete continuous ivory cloth robe SLEEVE only, anatomical right sleeve on screen-right. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N boot_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/boot_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:50:23 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_L: anatomical left, screen-left dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N boot_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/boot_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:52:06 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_R: anatomical right, screen-right dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_L_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_L_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:10:55 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_fist: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_L_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_L_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:13:35 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_ground: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_L_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_L_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:12:57 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_guard: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_L_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_L_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:11:36 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_open: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_L_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_L_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:12:19 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_relaxed: anatomical LEFT, screen-LEFT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_plate_glow_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_plate_glow_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:14:08 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_plate_glow_R: ONLY the meander emblem plate of the RIGHT earth gauntlet, glowing pale ochre #E3C07F, for a separate additive skill-charge overlay. No whole gauntlet, no hand, no arm. Retain bronze square plate outline and meander shape from master. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_R_fist
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_R_fist.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:07:40 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_fist: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose closed fist punch-ready. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_R_ground
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_R_ground.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:10:15 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_ground: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose fist pointing DOWN knuckles first for ground slam. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_R_guard
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_R_guard.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:09:40 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_guard: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose raised edge-on guard. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_R_open
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_R_open.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:08:21 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_open: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose open palm facing forward for palm strike. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N gauntlet_R_relaxed
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/gauntlet_R_relaxed.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:07:03 UTC / 2026-11-06 07:08:57 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_R_relaxed: anatomical RIGHT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N hairpin
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/hairpin.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:04:37 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hairpin: Straight pale jade green hairpin only, bronze end caps. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N hair_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/hair_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:03:51 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_back: Back mass of short dark brown tied hair only behind the head, no face or bun. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N hair_bun
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/hair_bun.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:03:11 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART hair_bun: Top hair bun only, dark brown with tie band, no head or pin. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N head
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/head.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:02:30 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART head: REAR HEAD BASE only: back of head with short hairline and nape; for NE a small right ear and jaw edge may show, for N absolutely no face. No eyes, brows, mouth, bun, or pin. Do not turn toward viewer. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N leg_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/leg_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:57:26 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_L: ENTIRE anatomical LEFT, screen-LEFT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N leg_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/leg_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:50:56 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART leg_R: ENTIRE anatomical RIGHT, screen-RIGHT LEG as one continuous straight piece, hip to ankle in loose ivory trousers. Fully painted hidden hip and knee. No boot. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N neck
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/neck.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:56:13 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART neck: Warm skin short neck cylinder, extended base hidden beneath collar. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N arm_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/rejected/arm_L.attempt1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 07:04:35 UTC.
+- Trạng thái: no image; output-stage moderation rejected.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ONE complete continuous ivory cloth robe SLEEVE only, anatomical left sleeve on screen-left. Rounded shoulder cap and uninterrupted fabric to wrist opening, neutral straight diagonal20 degrees outward. No skin, hand, glove, blue tabard, or jewelry. Fully paint elbow folds and hidden shoulder overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sash_band
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sash_band.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:54:43 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_band: Wide dark-blue wrapped waist sash BAND only, no knot or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sash_knot
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sash_knot.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:56:54 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_knot: Dark-blue sash front tied KNOT only, no band or tails. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sash_tail_1
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sash_tail_1.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:55:11 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_1: First dark-blue hanging sash tail only, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sash_tail_2
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sash_tail_2.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:55:40 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sash_tail_2: Second dark-blue hanging sash tail only, slightly shorter, straight down, tapered tip. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sleeve_cuff_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sleeve_cuff_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:05:41 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_L: anatomical left, screen-left ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N sleeve_cuff_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/sleeve_cuff_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:05:11 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART sleeve_cuff_R: anatomical right, screen-right ivory sleeve cuff edge band only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N tabard_back
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/tabard_back.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:52:39 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_back: Mountain-blue short split tabard BACK panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N tabard_front
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/tabard_front.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:53:16 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_front: Mountain-blue short split tabard FRONT panel only shoulders to mid-thigh, bronze cloud trim and embroidery. Complete hidden fabric, no body limbs or sash. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N tabard_shoulder_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/tabard_shoulder_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:54:03 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_L: anatomical left, screen-left folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N tabard_shoulder_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/tabard_shoulder_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:58:32 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART tabard_shoulder_R: anatomical right, screen-right folded mountain-blue tabard shoulder edge only, bronze cloud trim. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N torso
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/torso.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 06:49:58 UTC / 2026-11-06 06:51:31 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART torso: Ivory cross-collar inner robe torso from neck to hips only, no arms, no tabard or sash, rounded hidden shoulder caps and 15% extra below waist. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N trouser_hem_L
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/trouser_hem_L.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:06:16 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_L: anatomical left, screen-left gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```
+
+### Thể tu N trouser_hem_R
+
+- Nguồn: `assets-src/placeholder/the-tu-continuous-v1/raw/N/trouser_hem_R.generation.json`; tool `image_gen.imagegen`, model không công bố; CLI `codex-cli 0.166.0`.
+- UTC: 2026-11-06 07:01:50 UTC / 2026-11-06 07:06:54 UTC.
+- Trạng thái: AI-generated placeholder; needs hand-polish + license review before release.
+- Prompt:
+
+```text
+Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART trouser_hem_R: anatomical right, screen-right gathered ivory trouser hem fabric above boot only. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.
+```

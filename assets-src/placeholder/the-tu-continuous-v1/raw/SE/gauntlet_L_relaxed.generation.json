@@ -1,0 +1,13 @@
+{
+  "id": "gauntlet_L_relaxed",
+  "direction": "SE",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached SE master exactly: THREE-QUARTER FRONT view facing down and SCREEN-RIGHT (southeast), nose points down-right, chest front visible, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART gauntlet_L_relaxed: anatomical LEFT, screen-RIGHT bronze stone-block EARTH GAUNTLET and hand as one piece, rectangular layered plates with meander emblem. Pose relaxed half closed idle. Include painted wrist opening overlapping ivory sleeve cuff. No sleeve or whole arm. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.",
+  "utcStart": "2026-11-06 05:54:16 UTC",
+  "utcEnd": "2026-11-06 05:58:35 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/SE.master4x.png",
+  "selectedOutput": "raw/SE/gauntlet_L_relaxed.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-7daf9753-2ffe-4d10-9c48-f8a46c2cff6b.png"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "hairpin",
+  "direction": "S",
+  "attempt": 2,
+  "prompt": "One single pale jade hairpin accessory only for a Chinese cultivation 2D MMORPG sprite. Long straight horizontal slim jade-green shaft with two small bronze end caps, one round pale jade bead near left end. Front view, slight overhead orthographic, clean dark outline, restrained 2-tone cel shading, light upper-left. Jade #8EAF9A bronze #B58A4A. Isolated object centered in square transparent canvas with large margin. Absolutely no hair, head, character, robe, arms, legs, hands, weapons, or extra objects. Exactly ONE horizontal jade hairpin, transparent alpha PNG.",
+  "utcStart": "2026-11-06 05:03:24 UTC",
+  "utcEnd": "2026-11-06 05:04:20 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "none; isolated accessory from textual design",
+  "selectedOutput": "raw/S/hairpin.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-40170c7b-700a-4a87-939b-d9379c243bd3.png"
+}

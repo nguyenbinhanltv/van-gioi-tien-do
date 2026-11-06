@@ -1,0 +1,13 @@
+{
+  "id": "boot_L",
+  "direction": "N",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached N master exactly: STRAIGHT BACK view facing away toward top screen, no face visible, slight overhead camera. Anatomical RIGHT is screen-RIGHT; anatomical LEFT is screen-LEFT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART boot_L: anatomical left, screen-left dark grey-blue boot only, ivory trouser cuff visible inside opening for overlap. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.",
+  "utcStart": "2026-11-06 06:49:58 UTC",
+  "utcEnd": "2026-11-06 06:50:23 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/N.master4x.png",
+  "selectedOutput": "raw/N/boot_L.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-ba155b31-ca5e-40f3-b4eb-a6ab5a7e76ee.png"
+}

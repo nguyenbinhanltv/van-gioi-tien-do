@@ -1,0 +1,18 @@
+{
+  "id": "arm_L",
+  "attempt": 1,
+  "direction": "S",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "prompt": "Original Van Gioi Tien Do 2D isometric MMORPG, The tu A Son Mon Ho Ve. Match attached S master exactly: FRONT view facing viewer toward bottom screen, slight overhead camera. Anatomical RIGHT is screen-LEFT; anatomical LEFT screen-RIGHT. Broad stocky tank, clean dark sprite contour, simple 2-3 tone cel shading, upper-left NW light. Palette ivory #E9EEF0 mountain blue #5E8798 sash #294451 bronze #B58A4A highlight #E3C07F shade #5B4222, warm skin brown hair. PART arm_L: ENTIRE anatomical LEFT, screen-RIGHT ARM in one continuous straight piece, rounded shoulder cap to wrist in ivory long sleeve. No hand or gauntlet. Fully paint elbow and hidden sleeve, extra fabric overlap at shoulder. Do not bend elbow. Draw ONLY this isolated part in one PNG, transparent alpha background. Paint complete hidden overlap. Whole arm and whole leg each ONE continuous piece, no joint breaks, no blue tabard on ivory sleeves. Keep camera and anatomical orientation of master. Match placement on full square canvas if possible, ample transparent margin. No other body parts, mannequin, labels, text, shadow, ground, or scene. Neutral straight A pose.",
+  "status": "generation was requested; no selected image persisted; orchestration discarded settled rejection detail",
+  "utcStart": "not retained by failed batch wrapper",
+  "utcAudit": "2026-11-06 04:57:01 UTC",
+  "reference": "reference/S.master4x.png",
+  "companionBatchUtcRange": {
+    "from": "2026-11-06 04:49:04 UTC",
+    "to": "2026-11-06 04:49:04 UTC",
+    "note": "successful companion requests in same8-request batch; failed start was not retained, this is context not an exact timestamp"
+  }
+}

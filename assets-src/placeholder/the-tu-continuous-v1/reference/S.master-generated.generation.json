@@ -1,0 +1,13 @@
+{
+  "id": "S.master-generated",
+  "prompt": "Production reference master for Vạn Giới Tiên Đồ, Thể tu A Sơn Môn Hộ Vệ. Match the supplied concept and E sprite EXACTLY: compact stocky earth tank, broad chest, stout legs, short brown top bun and jade hairpin; ivory cross collar robe #E9EEF0, mountain-blue #5E8798 sleeveless short split tabard with bronze #B58A4A cloud trim, dark-blue #294451 sash band knot TWO separate tails, loose ivory trousers into dark boots, paired chunky bronze stone-block EARTH GAUNTLETS with square meander emblems. Same outfit construction and 5.75-head proportions, no sword. Clean game sprite dark contours and restrained 2-3 tone soft cel shading, upper-left NW lighting, readable at128px. Slight overhead orthographic isometric camera. Neutral A pose arms straight and 20 degrees away from torso, relaxed gauntlets down, both hands and boots fully visible and separated, feet planted apart. ONE full-body figure only, square canvas, figure height76% canvas, transparent margin10% all sides. True transparent background. No ground shadow, text, layout, extra views, scene, or VFX.\nDIRECTION S: Front facing toward viewer, symmetrical front view, looking toward bottom of screen.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-ec170e01-49d9-4944-8c90-4263eb83ada2.png",
+  "selectedOutput": "reference/S.master-generated.png",
+  "utcStart": "2026-11-06 04:40:38 UTC",
+  "utcEnd": "2026-11-06 04:41:34 UTC",
+  "references": ["reference/concept-a.png", "reference/E.master4x.png"],
+  "status": "generated, pending direction and silhouette acceptance"
+}

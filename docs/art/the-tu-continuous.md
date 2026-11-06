@@ -1,6 +1,6 @@
 # Thể tu A — Sơn Môn Hộ Vệ, Track 2
 
-Theo yêu cầu chủ dự án ngày 2026-11-06 và D34–D39. Nhánh art chỉ chứa dữ liệu Thể tu; công cụ dùng chung do worker 17 (`tools/procgen`) và worker 15 (`@vgtd/rig`) phụ trách. Không sửa dữ liệu Kiếm tu.
+Theo yêu cầu chủ dự án ngày 2026-11-06 và D34–D40. Nhánh art chỉ chứa dữ liệu Thể tu; công cụ dùng chung do worker 17 (`tools/procgen`) và worker 19 (`@vgtd/rig`, phối hợp worker 15 về key-pose) phụ trách. Không sửa dữ liệu Kiếm tu.
 
 ## Nguồn chuẩn và thứ tự
 
@@ -53,7 +53,7 @@ Quyền sáo mặc trên tay, đổi display trong `hand_L` / `hand_R`; **không
 
 ## Cổng nghiệm thu
 
-Kiểm tra rest composite đã đạt: **50 mảnh**, max extra **2 px**, max missing **2 px** so master @2x, giữ nguyên ngưỡng kiểm. Baseline E đã qua **rig/engine gate**: 44/44 mảnh được dùng sau compose, **38 bones, 28 slots, 427 verts, 5 chains**; atlas **512×512 PMA**, padding 2, extrude 1, không có pixel RGB vượt alpha. Đủ **15 body clip** qua strict với **0 openings / 0 tears / 0 stretch / 0 strip faults**, thêm blink_cycle độc lập. Capture Cocos 3.8.8 thật của **idle/run/attack đạt**, seam lần lượt 0,85 / 0,77 / 0,99. Chưa nghiệm thu capture đủ 15 clip hoặc đủ năm hướng. Giữ các cổng sau:
+Kiểm tra rest composite đã đạt: **50 mảnh**, max extra **2 px**, max missing **2 px** so master @2x, giữ nguyên ngưỡng kiểm. Baseline E đã qua **rig/engine gate**: 44/44 mảnh được dùng sau compose, **38 bones, 28 slots, 427 verts, 5 chains**; atlas **512×512 PMA**, padding 2, extrude 1, không có pixel RGB vượt alpha. Đủ **15 body clip** qua strict với **0 openings / 0 tears / 0 stretch / 0 strip faults**, thêm blink_cycle độc lập. Capture Cocos 3.8.8 thật của **đủ 15 body clip đạt**, 8 mẫu mỗi clip; seam idle/run/attack lần lượt 0,85 / 0,77 / 0,99. Chưa nghiệm thu đủ năm hướng. Giữ các cổng sau:
 
 - `rig:measure --strict`: **0 openings / 0 tears / 0 stretch** trên rig đã ráp.
 - Capture **Cocos thật**: E idle/run/attack trước, cuối cùng đủ 15 clip × 5 hướng. Không thay bằng render phần mềm.
@@ -72,6 +72,30 @@ npm run rig:assemble -w @vgtd/rig -- --class the-tu --parts assets-src/placehold
 npm run rig:gate -w @vgtd/rig -- the-tu --dir E --assembled <absolute-export-directory> --src dragonbones/the-tu-continuous --stem thetu --animations idle,run,attack --out <temporary-capture-directory>
 ```
 
-Hai nguồn AI idle `in/out` đã lưu kèm prompt/UTC ở `raw/keyposes/E`; guide trong `reference/keyposes/E` chỉ là render phần mềm phục vụ bố cục, không phải bằng chứng engine. Chưa đưa hai nguồn này vào rig: cần chuẩn hóa canvas, đo landmarks độc lập và chạy fit với RMS ≤2 px, IoU ≥0,85, không hạ ngưỡng. **Bulk key-pose run/walk/attack vẫn tạm giữ** chờ orchestrator xác nhận dáng đi chung. Sinh mảnh thường S/SE/NE/N đã được cho phép sau baseline E này.
+Pilot AI idle `in/out` đã **đạt**: chọn `in` lượt 3 và `out` lượt 2 trong `raw/keyposes/E`, chuẩn hóa đồng đều vào `keyposes/E`. RMS của **clip hoàn thiện** 1,12 / 1,48 px; IoU 0,857 / 0,861, dịch tốt nhất (0,0) ở cả hai key. Giữ nguyên RMS ≤2 px, IoU ≥0,85, không dùng `--allow-errors`. E đã export idle fitted với detail Thể tu và qua lại strict/capture **đủ 15 body clip**. Guide trong `reference/keyposes/E` chỉ là render phần mềm phục vụ bố cục, không phải bằng chứng engine. Các lượt chưa đạt và annotation cũ được giữ trong raw/audit; lỗi round-trip spine đã sửa ở main PR #106 (RMS khoảng 0,17 px), annotation pelvis/chest dùng nghĩa origin xương thay vì tâm hình nhìn thấy. **Bulk key-pose run/walk/attack vẫn tạm giữ** chờ orchestrator xác nhận dáng đi chung.
 
-Báo cáo E và contact sheet/capture lưu trong artifact phiên `van-gioi-tien-do-18`; bốn hướng còn lại và nghiệm thu 15 clip × 5 hướng chưa hoàn tất. PR giữ trạng thái draft đến khi đủ năm hướng đạt.
+Báo cáo/contact sheet/capture lưu trong artifact phiên `van-gioi-tien-do-18`. **Đủ năm hướng E/S/SE/NE/N đã đạt registration, strict và capture Cocos, tổng 75 body clip**. PR #104 là PR duy nhất; không tự merge. Bulk key-pose chuyển động vẫn giữ theo chỉ đạo, không được coi là đã sinh.
+
+## Checkpoint S
+
+Đã sinh riêng đủ 50 nguồn, xử lý ra PNG straight alpha 256×256 và kiểm tra rest composite: max extra **2 px**, max missing **2 px**, đạt registration. Các ảnh sinh thêm thân/áo được crop nguồn theo `sourceBounds4x` trước registration; raw giữ nguyên. Trâm ngọc lượt đầu sai nội dung được lưu trong `raw/S/rejected/`; lượt hai chỉ sinh trâm đơn lẻ. Hai lượt tay đầu không lưu được đầu ra, wrapper không giữ chi tiết lỗi/UTC bắt đầu; đã ghi rõ thiếu metadata đó thay vì suy đoán. Hai tay được sinh lại bằng mô tả ống tay áo liền và đã có đủ prompt/UTC.
+
+Sau main PR #108, S đã ráp 44/44 mảnh, **38 bones / 28 slots / 445 verts / 5 chains**, atlas 512×512 PMA không có RGB vượt alpha. Nguồn đầu được sinh lại để giữ mũi/tai/hàm; crop overlay mắt/miệng đo trên nguồn 512, mảnh môi nghỉ dùng palette nét tối để đọc ở kích thước game. Đã xuất viewer và gate lại sau thay đổi art cuối: **đủ 15 clip strict 0 openings / 0 tears / 0 stretch / 0 strip faults; capture Cocos đủ 15 clip PASS**. Lỗi gait/hem trước đó được sửa trong tooling do worker 19 sở hữu, không bỏ QA hoặc đổi ngưỡng.
+
+## Nghiệm thu đủ năm hướng
+
+| Hướng | PNG nguồn chọn | Mảnh ráp dùng | Bones | Slots | Verts | Chains | Strict / Cocos |
+| ----- | -------------- | ------------- | ----- | ----- | ----- | ------ | -------------- |
+| E     | 50             | 44            | 38    | 28    | 427   | 5      | 15/15 đạt      |
+| S     | 50             | 44            | 38    | 28    | 445   | 5      | 15/15 đạt      |
+| SE    | 50             | 44            | 38    | 28    | 439   | 5      | 15/15 đạt      |
+| NE    | 46             | 40            | 38    | 27    | 434   | 5      | 15/15 đạt      |
+| N     | 35             | 30            | 34    | 22    | 414   | 4      | 15/15 đạt      |
+
+Mỗi hướng: max extra/missing **2 px**, atlas **512×512 PMA**, pad 2, extrude 1, zero pixel RGB vượt alpha (cả kiểm tra trang pack và PNG encode đọc lại). Strict đo **clip thực đã export** theo main PR #103: **0 openings / 0 tears / 0 stretch / 0 strip faults** trên cả 75 body clip. Capture Cocos thật lấy 8 mẫu/clip, đầy đủ 15 clip/hướng. N không có blink_cycle vì không có slot mắt; bốn hướng còn lại có thêm lớp blink độc lập.
+
+Tooling theo hướng đến từ main PR #108–#112: gait theo tầm chân, hem theo shin, thứ tự lớp sau và visibility. NE chỉ có mép mắt/mày nhìn thấy, không miệng/tai rời; N không có 11 overlay mặt hoặc ba lọn tóc mái trước. Mảnh knot phía trước không compose lên đai sau; hai đuôi đai nằm **dưới** vạt lưng và chỉ ló phần thấp. Raw tùy chọn vẫn được giữ. Số mảnh ít hơn ở NE/N là phần bị che theo registry, không phải thiếu đầu ra bắt buộc.
+
+`eyes_angry` là display dự trữ (blink_cycle giữ quyền mắt, trừ meditate đóng mắt); `gauntlet_plate_glow_R` chưa wire vào rig. Các clip dùng guard/fist/open/ground theo detail lớp Thể tu; attack/attack_2/attack_3 là jab/cross/palm, cast là ground slam. VFX hiện là sprite thành phần tĩnh; không coi là particle/flipbook đã tích hợp.
+
+Để tái lập E fitted idle, thêm `--keyposes assets-src/placeholder/the-tu-continuous-v1/keyposes` vào lệnh assemble. Các hướng khác dùng cùng lệnh với `--dir S|SE|NE|N`, không thêm key-pose chưa được cho phép. `production.json` lưu số đo và danh sách animation của từng capture; báo cáo HTML cùng contact sheet lưu trong artifact, không đưa frame/log build vào repo.

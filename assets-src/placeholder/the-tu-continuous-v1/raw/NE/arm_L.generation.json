@@ -1,0 +1,14 @@
+{
+  "id": "arm_L",
+  "direction": "NE",
+  "attempt": 2,
+  "prompt": "One detached garment component: an empty opaque IVORY WOVEN-CLOTH ROBE SLEEVE matching this reference sleeve. Draw the opposite sleeve: rounded shoulder cap upper-right, tapered circular cuff opening lower-left, continuous long fabric tube with subtle elbow folds, no breaks or seams through middle. Slight overhead rear three-quarter game sprite camera, NW light, dark outline, simple2-3tone ivory-grey cel shading. Only fabric. No skin, hand, body, head, glove, gold armor, mannequin, scenery, lettering, or other objects. Transparent square canvas, whole sleeve completely visible with generous margin. One empty cloth sleeve.",
+  "utcStart": "2026-11-06 06:41:10 UTC",
+  "utcEnd": "2026-11-06 06:41:44 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "raw/NE/arm_R.png",
+  "selectedOutput": "raw/NE/arm_L.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-a45c0547-2394-4a7d-85b6-da47a86c6295.png"
+}

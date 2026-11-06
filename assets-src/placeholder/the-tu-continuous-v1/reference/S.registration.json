@@ -1,0 +1,9 @@
+{
+  "source": "S.master-generated.png",
+  "targetCanvas": [512, 512],
+  "alphaThreshold": 128,
+  "method": "uniform scale by opaque figure height 380px, centre x256 and floor y464; preserve aspect",
+  "scale": 0.3682170542635659,
+  "translation": [26, 44],
+  "bounds4x": [152, 85, 361, 464]
+}

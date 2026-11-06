@@ -1,0 +1,14 @@
+{
+  "id": "head",
+  "direction": "S",
+  "attempt": 2,
+  "prompt": "Create ONE isolated HEAD BASE sprite component for this exact frontal male cultivation MMORPG character. Reference is ONLY identity/style. Render head only from short brown hairline to chin, both ears and angular jaw. Crucial: retain a clearly modeled small straight NOSE with bridge, nose tip, nostril shading and subtle cheek planes; keep the recognisable face proportions. Leave clean skin ONLY in the eye sockets / eyebrow area / mouth area because separate expression overlays will be added. NO eyes, NO eyebrows, NO lips or mouth. Do NOT erase the NOSE. Ivory warm skin, dark short brown hairline, clean thin dark contour and restrained 2-3 tone cel shading, NW light, frontal slight overhead camera. NO bun, jade pin, neck, collar, torso, body, mannequin, sheet, labels, or background. One isolated head on transparent square canvas with generous margin, no shadow. Full head and ears visible. No other object.",
+  "utcStart": "2026-11-06 05:54:07 UTC",
+  "utcEnd": "2026-11-06 05:54:44 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "reference": "reference/S.head-identity-guide4x.png",
+  "selectedOutput": "raw/S/head.png",
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-ae08b1ee-a2c5-4920-a407-ae57042682a1.png"
+}

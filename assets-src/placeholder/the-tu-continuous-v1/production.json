@@ -5,7 +5,7 @@
   "directions": ["E", "S", "SE", "NE", "N"],
   "order": "E art and idle/run/attack gate first; then other directions and all 15 body clips",
   "sourcePromptPack": "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-1/Prompt-pack-The-tu.md",
-  "status": "E baseline fully gated: strict15 clean and Cocos idle/run/attack PASS with cuff/hem chains; idle2 AI pilot raw references generated; bulk keypose held by orchestrator, other direction art allowed",
+  "status": "PASS five directions: independent registration, actual exported15bodyclip strict measurement, and real Cocos capture; E AI idle2 accepted; bulk motion keyposes held",
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
@@ -246,7 +246,7 @@
     "offset": [32, 44],
     "outputCanvas": [512, 512],
     "method": "alpha-weighted area resampling, straight-alpha source and output",
-    "status": "provisional landmarks; silhouette and rig gates pending"
+    "status": "five directions registered and strict/Cocos gated"
   },
   "keyPosePlan": {
     "stage": "after E assembly",
@@ -256,8 +256,8 @@
   },
   "integration": {
     "procgenOwner": "van-gioi-tien-do-17",
-    "rigOwner": "van-gioi-tien-do-15",
-    "sourceBoundsStage": "inclusive bounds on resized 512x512 raw, before alpha cleanup; no recentering",
+    "rigOwner": "van-gioi-tien-do-19 (class tooling), coordinated with15 for keypose",
+    "sourceBoundsStage": "inclusive bounds on normalized512 raw AFTER optional clockwise quarter turns, BEFORE alpha cleanup; no recentering",
     "tabardBinding": "hybrid spine above waist, hips/thighs/panel bones below, smooth waist blend"
   },
   "validation": {
@@ -271,16 +271,19 @@
       "maxMissingPx": 2,
       "pass": true
     },
-    "prepCommit": "907f9ed3a569206f1d67e5eefd3c450fc9417d56",
     "rigMeasure": {
       "clips": 15,
       "openings": 0,
       "tears": 0,
       "stretchEvents": 0,
-      "stripFaults": 0
+      "stripFaults": 0,
+      "source": "actual exported clips.json, main PR103"
     },
     "engineCapture": {
-      "engine": "Cocos Creator3.8.8 WebGL",
+      "engine": "Cocos Creator3.8.8 real WebGL capture",
+      "direction": "E",
+      "bodyClips": 15,
+      "framesPerClip": 8,
       "animations": {
         "idle": {
           "duration": 1,
@@ -288,11 +291,35 @@
           "seam": {
             "specLoop": true,
             "loop": true,
-            "meanStep": 14.281820473429287,
-            "seamStep": 12.122006458424094,
-            "ratio": 0.848771799153796
+            "meanStep": 8.407744663959607,
+            "seamStep": 1.6282751607445154,
+            "ratio": 0.1936637262218764
           },
           "sheet": "idle.sheet.png"
+        },
+        "meditate": {
+          "duration": 1,
+          "keyFrames": 30,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 8.235575119217659,
+            "seamStep": 9.218665856884185,
+            "ratio": 1.1193712307198183
+          },
+          "sheet": "meditate.sheet.png"
+        },
+        "walk": {
+          "duration": 0.6666666666666666,
+          "keyFrames": 20,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 315.49295833760846,
+            "seamStep": 223.86044904202873,
+            "ratio": 0.7095576719733823
+          },
+          "sheet": "walk.sheet.png"
         },
         "run": {
           "duration": 0.5,
@@ -300,11 +327,35 @@
           "seam": {
             "specLoop": true,
             "loop": true,
-            "meanStep": 449.9851424922414,
-            "seamStep": 345.44843676795034,
-            "ratio": 0.7676885393475109
+            "meanStep": 449.5582604959859,
+            "seamStep": 345.1684469833867,
+            "ratio": 0.7677946938458462
           },
           "sheet": "run.sheet.png"
+        },
+        "dash": {
+          "duration": 0.26666666666666666,
+          "keyFrames": 8,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 370.9701940098329,
+            "seamStep": 939.6721339661866,
+            "ratio": 2.533012487632038
+          },
+          "sheet": "dash.sheet.png"
+        },
+        "sword_fly": {
+          "duration": 0.6666666666666666,
+          "keyFrames": 20,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 18.770597970149307,
+            "seamStep": 14.252053239025518,
+            "ratio": 0.759275397709248
+          },
+          "sheet": "sword_fly.sheet.png"
         },
         "attack": {
           "duration": 0.43333333333333335,
@@ -312,16 +363,112 @@
           "seam": {
             "specLoop": false,
             "loop": true,
-            "meanStep": 350.0570195409733,
-            "seamStep": 347.8339729687199,
-            "ratio": 0.9936494729482401
+            "meanStep": 347.78238735501117,
+            "seamStep": 306.5187938423044,
+            "ratio": 0.8813522621817375
           },
           "sheet": "attack.sheet.png"
+        },
+        "cast": {
+          "duration": 0.5,
+          "keyFrames": 15,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 350.1915173111517,
+            "seamStep": 535.5897583475924,
+            "ratio": 1.529419565784944
+          },
+          "sheet": "cast.sheet.png"
+        },
+        "channel": {
+          "duration": 0.4,
+          "keyFrames": 12,
+          "seam": {
+            "specLoop": true,
+            "loop": true,
+            "meanStep": 17.355309086524304,
+            "seamStep": 15.79345790383639,
+            "ratio": 0.910007296620224
+          },
+          "sheet": "channel.sheet.png"
+        },
+        "hit": {
+          "duration": 0.2,
+          "keyFrames": 6,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 439.7463713650953,
+            "seamStep": 426.4067292490437,
+            "ratio": 0.9696651456733079
+          },
+          "sheet": "hit.sheet.png"
+        },
+        "die": {
+          "duration": 0.8,
+          "keyFrames": 24,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 260.9179879865399,
+            "seamStep": 3908.481391866887,
+            "ratio": 14.979731455190109
+          },
+          "sheet": "die.sheet.png"
+        },
+        "tribulation": {
+          "duration": 1,
+          "keyFrames": 30,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 339.71019816096066,
+            "seamStep": 268.3950596590172,
+            "ratio": 0.7900706576134252
+          },
+          "sheet": "tribulation.sheet.png"
+        },
+        "emote": {
+          "duration": 1,
+          "keyFrames": 30,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 135.87505182991825,
+            "seamStep": 245.704231338032,
+            "ratio": 1.8083101204302947
+          },
+          "sheet": "emote.sheet.png"
+        },
+        "attack_2": {
+          "duration": 0.43333333333333335,
+          "keyFrames": 13,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 303.5733231558204,
+            "seamStep": 200.17274926153345,
+            "ratio": 0.6593884705698837
+          },
+          "sheet": "attack_2.sheet.png"
+        },
+        "attack_3": {
+          "duration": 0.43333333333333335,
+          "keyFrames": 13,
+          "seam": {
+            "specLoop": false,
+            "loop": true,
+            "meanStep": 316.42573889900535,
+            "seamStep": 418.90609579682683,
+            "ratio": 1.3238685868425213
+          },
+          "sheet": "attack_3.sheet.png"
         }
       },
-      "source": "dragonbones/the-tu-continuous/thetu"
+      "pass": true
     },
-    "otherDirections": "not started",
+    "otherDirections": "all five passed",
     "rigStats": {
       "bones": 38,
       "slots": 28,
@@ -343,12 +490,1209 @@
       "page": [512, 512]
     },
     "encodedAtlasInvalidPmaPixels": 0,
-    "keyPosePilot": "idle2 raw AI references generated, annotations/fit pending",
-    "bulkKeyPose": "held pending owner gait choice"
+    "keyPosePilot": {
+      "status": "PASS, selected canonical references",
+      "finishedRms": [1.12, 1.48],
+      "iou": [0.857, 0.861],
+      "threshold": {
+        "rms": 2,
+        "iou": 0.85
+      },
+      "bestShift": [
+        [0, 0],
+        [0, 0]
+      ],
+      "selection": {
+        "in": "raw/keyposes/E/idle_01_in.attempt3.png",
+        "out": "raw/keyposes/E/idle_02_out.attempt2.png"
+      },
+      "roundtripRms": [0.167, 0.169],
+      "allowErrors": false
+    },
+    "bulkKeyPose": "held pending owner gait choice",
+    "byDirection": {
+      "E": {
+        "sourceParts": 50,
+        "registration": {
+          "sourceParts": 50,
+          "canvas2x": [256, 256],
+          "alphaThreshold": 128,
+          "extraPixels": 439,
+          "missingPixels": 137,
+          "maxExtraPx": 2,
+          "maxMissingPx": 2,
+          "pass": true
+        },
+        "stats": {
+          "bones": 38,
+          "slots": 28,
+          "vertices": 427,
+          "chains": 5,
+          "meshScale": 1,
+          "nonPremultiplied": 0,
+          "limits": {
+            "bones": 60,
+            "slots": 40,
+            "meshVertices": 600,
+            "chains": 6
+          }
+        },
+        "packing": {
+          "padding": 2,
+          "extrude": 1,
+          "premultipliedAlpha": true,
+          "page": [512, 512]
+        },
+        "strict": {
+          "actualExportedClips": true,
+          "bodyClips": 15,
+          "openings": 0,
+          "tears": 0,
+          "stretchEvents": 0,
+          "stripFaults": 0
+        },
+        "engineCapture": {
+          "engine": "Cocos Creator3.8.8 WebGL",
+          "pass": true,
+          "bodyClips": 15,
+          "framesPerClip": 8,
+          "animations": {
+            "idle": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 8.407744663959607,
+                "seamStep": 1.6282751607445154,
+                "ratio": 0.1936637262218764
+              },
+              "sheet": "idle.sheet.png"
+            },
+            "meditate": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 8.235575119217659,
+                "seamStep": 9.218665856884185,
+                "ratio": 1.1193712307198183
+              },
+              "sheet": "meditate.sheet.png"
+            },
+            "walk": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 315.49295833760846,
+                "seamStep": 223.86044904202873,
+                "ratio": 0.7095576719733823
+              },
+              "sheet": "walk.sheet.png"
+            },
+            "run": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 449.5582604959859,
+                "seamStep": 345.1684469833867,
+                "ratio": 0.7677946938458462
+              },
+              "sheet": "run.sheet.png"
+            },
+            "dash": {
+              "duration": 0.26666666666666666,
+              "keyFrames": 8,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 370.9701940098329,
+                "seamStep": 939.6721339661866,
+                "ratio": 2.533012487632038
+              },
+              "sheet": "dash.sheet.png"
+            },
+            "sword_fly": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 18.770597970149307,
+                "seamStep": 14.252053239025518,
+                "ratio": 0.759275397709248
+              },
+              "sheet": "sword_fly.sheet.png"
+            },
+            "attack": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 347.78238735501117,
+                "seamStep": 306.5187938423044,
+                "ratio": 0.8813522621817375
+              },
+              "sheet": "attack.sheet.png"
+            },
+            "cast": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 350.1915173111517,
+                "seamStep": 535.5897583475924,
+                "ratio": 1.529419565784944
+              },
+              "sheet": "cast.sheet.png"
+            },
+            "channel": {
+              "duration": 0.4,
+              "keyFrames": 12,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 17.355309086524304,
+                "seamStep": 15.79345790383639,
+                "ratio": 0.910007296620224
+              },
+              "sheet": "channel.sheet.png"
+            },
+            "hit": {
+              "duration": 0.2,
+              "keyFrames": 6,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 439.7463713650953,
+                "seamStep": 426.4067292490437,
+                "ratio": 0.9696651456733079
+              },
+              "sheet": "hit.sheet.png"
+            },
+            "die": {
+              "duration": 0.8,
+              "keyFrames": 24,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 260.9179879865399,
+                "seamStep": 3908.481391866887,
+                "ratio": 14.979731455190109
+              },
+              "sheet": "die.sheet.png"
+            },
+            "tribulation": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 339.71019816096066,
+                "seamStep": 268.3950596590172,
+                "ratio": 0.7900706576134252
+              },
+              "sheet": "tribulation.sheet.png"
+            },
+            "emote": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 135.87505182991825,
+                "seamStep": 245.704231338032,
+                "ratio": 1.8083101204302947
+              },
+              "sheet": "emote.sheet.png"
+            },
+            "attack_2": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 303.5733231558204,
+                "seamStep": 200.17274926153345,
+                "ratio": 0.6593884705698837
+              },
+              "sheet": "attack_2.sheet.png"
+            },
+            "attack_3": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 316.42573889900535,
+                "seamStep": 418.90609579682683,
+                "ratio": 1.3238685868425213
+              },
+              "sheet": "attack_3.sheet.png"
+            }
+          }
+        },
+        "pass": true
+      },
+      "S": {
+        "sourceParts": 50,
+        "registration": {
+          "sourceParts": 50,
+          "canvas2x": [256, 256],
+          "alphaThreshold": 128,
+          "extraPixels": 570,
+          "missingPixels": 188,
+          "maxExtraPx": 2,
+          "maxMissingPx": 2,
+          "pass": true
+        },
+        "stats": {
+          "bones": 38,
+          "slots": 28,
+          "vertices": 445,
+          "chains": 5,
+          "meshScale": 1,
+          "nonPremultiplied": 0,
+          "limits": {
+            "bones": 60,
+            "slots": 40,
+            "meshVertices": 600,
+            "chains": 6
+          }
+        },
+        "packing": {
+          "padding": 2,
+          "extrude": 1,
+          "premultipliedAlpha": true,
+          "page": [512, 512]
+        },
+        "strict": {
+          "actualExportedClips": true,
+          "bodyClips": 15,
+          "openings": 0,
+          "tears": 0,
+          "stretchEvents": 0,
+          "stripFaults": 0
+        },
+        "engineCapture": {
+          "engine": "Cocos Creator3.8.8 WebGL",
+          "pass": true,
+          "bodyClips": 15,
+          "framesPerClip": 8,
+          "animations": {
+            "idle": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 11.185288134136844,
+                "seamStep": 7.849094294801105,
+                "ratio": 0.7017337596200253
+              },
+              "sheet": "idle.sheet.png"
+            },
+            "meditate": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 5.394842227264917,
+                "seamStep": 5.6997312190740335,
+                "ratio": 1.0565149042298665
+              },
+              "sheet": "meditate.sheet.png"
+            },
+            "walk": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 171.71820399483772,
+                "seamStep": 183.3754707164206,
+                "ratio": 1.0678860275171136
+              },
+              "sheet": "walk.sheet.png"
+            },
+            "run": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 305.6615725804368,
+                "seamStep": 241.91715253331722,
+                "ratio": 0.7914542560617598
+              },
+              "sheet": "run.sheet.png"
+            },
+            "dash": {
+              "duration": 0.26666666666666666,
+              "keyFrames": 8,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 264.6061248966276,
+                "seamStep": 701.9944481644523,
+                "ratio": 2.652978831985454
+              },
+              "sheet": "dash.sheet.png"
+            },
+            "sword_fly": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 12.868693346089644,
+                "seamStep": 11.706075726118131,
+                "ratio": 0.9096553481612962
+              },
+              "sheet": "sword_fly.sheet.png"
+            },
+            "attack": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 188.65553315758598,
+                "seamStep": 237.1274516583773,
+                "ratio": 1.2569334579776266
+              },
+              "sheet": "attack.sheet.png"
+            },
+            "cast": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 225.75038667506848,
+                "seamStep": 458.1967804278081,
+                "ratio": 2.0296611101149917
+              },
+              "sheet": "cast.sheet.png"
+            },
+            "channel": {
+              "duration": 0.4,
+              "keyFrames": 12,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 16.57875484171784,
+                "seamStep": 15.131692637865038,
+                "ratio": 0.9127158693358868
+              },
+              "sheet": "channel.sheet.png"
+            },
+            "hit": {
+              "duration": 0.2,
+              "keyFrames": 6,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 142.7314701161064,
+                "seamStep": 317.6489897912905,
+                "ratio": 2.225500721970394
+              },
+              "sheet": "hit.sheet.png"
+            },
+            "die": {
+              "duration": 0.8,
+              "keyFrames": 24,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 246.84507394301133,
+                "seamStep": 3696.9055896052505,
+                "ratio": 14.976622909877262
+              },
+              "sheet": "die.sheet.png"
+            },
+            "tribulation": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 164.10765601157135,
+                "seamStep": 198.48022210280567,
+                "ratio": 1.2094513255908712
+              },
+              "sheet": "tribulation.sheet.png"
+            },
+            "emote": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 100.21145892766765,
+                "seamStep": 176.44670595482572,
+                "ratio": 1.7607438095695669
+              },
+              "sheet": "emote.sheet.png"
+            },
+            "attack_2": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 213.47140155847254,
+                "seamStep": 237.87885608306004,
+                "ratio": 1.1143359454540425
+              },
+              "sheet": "attack_2.sheet.png"
+            },
+            "attack_3": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 237.08743594156374,
+                "seamStep": 347.51147362504304,
+                "ratio": 1.4657523805297559
+              },
+              "sheet": "attack_3.sheet.png"
+            }
+          }
+        },
+        "pass": true
+      },
+      "SE": {
+        "sourceParts": 50,
+        "registration": {
+          "sourceParts": 50,
+          "canvas2x": [256, 256],
+          "alphaThreshold": 128,
+          "extraPixels": 547,
+          "missingPixels": 131,
+          "maxExtraPx": 2,
+          "maxMissingPx": 2,
+          "pass": true
+        },
+        "stats": {
+          "bones": 38,
+          "slots": 28,
+          "vertices": 439,
+          "chains": 5,
+          "meshScale": 1,
+          "nonPremultiplied": 0,
+          "limits": {
+            "bones": 60,
+            "slots": 40,
+            "meshVertices": 600,
+            "chains": 6
+          }
+        },
+        "packing": {
+          "padding": 2,
+          "extrude": 1,
+          "premultipliedAlpha": true,
+          "page": [512, 512]
+        },
+        "strict": {
+          "actualExportedClips": true,
+          "bodyClips": 15,
+          "openings": 0,
+          "tears": 0,
+          "stretchEvents": 0,
+          "stripFaults": 0
+        },
+        "engineCapture": {
+          "engine": "Cocos Creator3.8.8 WebGL",
+          "pass": true,
+          "bodyClips": 15,
+          "framesPerClip": 8,
+          "animations": {
+            "idle": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 12.982102849385088,
+                "seamStep": 10.280848108415348,
+                "ratio": 0.7919247157175552
+              },
+              "sheet": "idle.sheet.png"
+            },
+            "meditate": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 6.877800356263778,
+                "seamStep": 7.688407845109426,
+                "ratio": 1.1178585371567826
+              },
+              "sheet": "meditate.sheet.png"
+            },
+            "walk": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 283.6723560396644,
+                "seamStep": 269.9467834838888,
+                "ratio": 0.9516146982124108
+              },
+              "sheet": "walk.sheet.png"
+            },
+            "run": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 420.8158427873651,
+                "seamStep": 283.1545231881667,
+                "ratio": 0.672870396971348
+              },
+              "sheet": "run.sheet.png"
+            },
+            "dash": {
+              "duration": 0.26666666666666666,
+              "keyFrames": 8,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 335.46619389466804,
+                "seamStep": 844.5907385064252,
+                "ratio": 2.5176627447939377
+              },
+              "sheet": "dash.sheet.png"
+            },
+            "sword_fly": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 15.75315055958958,
+                "seamStep": 13.307779953952494,
+                "ratio": 0.8447694258753535
+              },
+              "sheet": "sword_fly.sheet.png"
+            },
+            "attack": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 325.90413673988627,
+                "seamStep": 273.4680217234328,
+                "ratio": 0.8391057089947149
+              },
+              "sheet": "attack.sheet.png"
+            },
+            "cast": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 297.04850386734086,
+                "seamStep": 498.60805897451405,
+                "ratio": 1.6785408863637565
+              },
+              "sheet": "cast.sheet.png"
+            },
+            "channel": {
+              "duration": 0.4,
+              "keyFrames": 12,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 16.22616752390267,
+                "seamStep": 14.807808864735897,
+                "ratio": 0.9125881908295721
+              },
+              "sheet": "channel.sheet.png"
+            },
+            "hit": {
+              "duration": 0.2,
+              "keyFrames": 6,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 411.5292821552715,
+                "seamStep": 378.52582938978884,
+                "ratio": 0.9198029054150505
+              },
+              "sheet": "hit.sheet.png"
+            },
+            "die": {
+              "duration": 0.8,
+              "keyFrames": 24,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 254.53950033031057,
+                "seamStep": 3729.0522619447947,
+                "ratio": 14.650190862737146
+              },
+              "sheet": "die.sheet.png"
+            },
+            "tribulation": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 191.14941898788373,
+                "seamStep": 241.17501577646877,
+                "ratio": 1.2617093844881422
+              },
+              "sheet": "tribulation.sheet.png"
+            },
+            "emote": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 118.67115550101046,
+                "seamStep": 208.74053733315756,
+                "ratio": 1.7589829344113885
+              },
+              "sheet": "emote.sheet.png"
+            },
+            "attack_2": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 267.7548970570496,
+                "seamStep": 225.3574864142635,
+                "ratio": 0.8416558908584494
+              },
+              "sheet": "attack_2.sheet.png"
+            },
+            "attack_3": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 287.89257224099083,
+                "seamStep": 395.6301599845788,
+                "ratio": 1.3742284384239076
+              },
+              "sheet": "attack_3.sheet.png"
+            }
+          }
+        },
+        "pass": true
+      },
+      "NE": {
+        "sourceParts": 46,
+        "registration": {
+          "sourceParts": 46,
+          "canvas2x": [256, 256],
+          "alphaThreshold": 128,
+          "extraPixels": 602,
+          "missingPixels": 89,
+          "maxExtraPx": 2,
+          "maxMissingPx": 2,
+          "pass": true
+        },
+        "stats": {
+          "bones": 38,
+          "slots": 27,
+          "vertices": 434,
+          "chains": 5,
+          "meshScale": 1,
+          "nonPremultiplied": 0,
+          "limits": {
+            "bones": 60,
+            "slots": 40,
+            "meshVertices": 600,
+            "chains": 6
+          }
+        },
+        "packing": {
+          "padding": 2,
+          "extrude": 1,
+          "premultipliedAlpha": true,
+          "page": [512, 512]
+        },
+        "strict": {
+          "actualExportedClips": true,
+          "bodyClips": 15,
+          "openings": 0,
+          "tears": 0,
+          "stretchEvents": 0,
+          "stripFaults": 0
+        },
+        "engineCapture": {
+          "engine": "Cocos Creator3.8.8 WebGL",
+          "pass": true,
+          "bodyClips": 15,
+          "framesPerClip": 8,
+          "animations": {
+            "idle": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 13.005013047823478,
+                "seamStep": 10.60962108875007,
+                "ratio": 0.8158101072052133
+              },
+              "sheet": "idle.sheet.png"
+            },
+            "meditate": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 6.951734359630036,
+                "seamStep": 7.702225388188143,
+                "ratio": 1.1079573800915556
+              },
+              "sheet": "meditate.sheet.png"
+            },
+            "walk": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 274.4604737362161,
+                "seamStep": 163.0165634396714,
+                "ratio": 0.5939527875199493
+              },
+              "sheet": "walk.sheet.png"
+            },
+            "run": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 418.1584810088089,
+                "seamStep": 309.4652040153236,
+                "ratio": 0.7400667882395632
+              },
+              "sheet": "run.sheet.png"
+            },
+            "dash": {
+              "duration": 0.26666666666666666,
+              "keyFrames": 8,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 345.7211738552023,
+                "seamStep": 891.3775431316984,
+                "ratio": 2.578313422900248
+              },
+              "sheet": "dash.sheet.png"
+            },
+            "sword_fly": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 16.663768371573102,
+                "seamStep": 13.920908083340654,
+                "ratio": 0.8353997591018174
+              },
+              "sheet": "sword_fly.sheet.png"
+            },
+            "attack": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 227.17109575645395,
+                "seamStep": 264.62733341029485,
+                "ratio": 1.1648811770226133
+              },
+              "sheet": "attack.sheet.png"
+            },
+            "cast": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 302.4320168094802,
+                "seamStep": 509.6113914762964,
+                "ratio": 1.6850444501625985
+              },
+              "sheet": "cast.sheet.png"
+            },
+            "channel": {
+              "duration": 0.4,
+              "keyFrames": 12,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 16.768820558904768,
+                "seamStep": 15.501989358947736,
+                "ratio": 0.9244531721532254
+              },
+              "sheet": "channel.sheet.png"
+            },
+            "hit": {
+              "duration": 0.2,
+              "keyFrames": 6,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 408.83822598665597,
+                "seamStep": 383.437279832878,
+                "ratio": 0.9378704227265504
+              },
+              "sheet": "hit.sheet.png"
+            },
+            "die": {
+              "duration": 0.8,
+              "keyFrames": 24,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 255.04446484188446,
+                "seamStep": 3771.334751545375,
+                "ratio": 14.786969612861133
+              },
+              "sheet": "die.sheet.png"
+            },
+            "tribulation": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 199.88574028761582,
+                "seamStep": 277.56744630271226,
+                "ratio": 1.388630554152188
+              },
+              "sheet": "tribulation.sheet.png"
+            },
+            "emote": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 122.02304275390297,
+                "seamStep": 214.65596823526351,
+                "ratio": 1.759142891299501
+              },
+              "sheet": "emote.sheet.png"
+            },
+            "attack_2": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 359.8853501693427,
+                "seamStep": 239.4926345509992,
+                "ratio": 0.6654692513554854
+              },
+              "sheet": "attack_2.sheet.png"
+            },
+            "attack_3": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 284.45459673834404,
+                "seamStep": 391.6403113808387,
+                "ratio": 1.3768113290188437
+              },
+              "sheet": "attack_3.sheet.png"
+            }
+          }
+        },
+        "pass": true
+      },
+      "N": {
+        "sourceParts": 35,
+        "registration": {
+          "sourceParts": 35,
+          "canvas2x": [256, 256],
+          "alphaThreshold": 128,
+          "extraPixels": 671,
+          "missingPixels": 127,
+          "maxExtraPx": 2,
+          "maxMissingPx": 2,
+          "pass": true
+        },
+        "stats": {
+          "bones": 34,
+          "slots": 22,
+          "vertices": 414,
+          "chains": 4,
+          "meshScale": 1,
+          "nonPremultiplied": 0,
+          "limits": {
+            "bones": 60,
+            "slots": 40,
+            "meshVertices": 600,
+            "chains": 6
+          }
+        },
+        "packing": {
+          "padding": 2,
+          "extrude": 1,
+          "premultipliedAlpha": true,
+          "page": [512, 512]
+        },
+        "strict": {
+          "actualExportedClips": true,
+          "bodyClips": 15,
+          "openings": 0,
+          "tears": 0,
+          "stretchEvents": 0,
+          "stripFaults": 0
+        },
+        "engineCapture": {
+          "engine": "Cocos Creator3.8.8 WebGL",
+          "pass": true,
+          "bodyClips": 15,
+          "framesPerClip": 8,
+          "animations": {
+            "idle": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 9.899146000920624,
+                "seamStep": 7.175387497294262,
+                "ratio": 0.7248491432116416
+              },
+              "sheet": "idle.sheet.png"
+            },
+            "meditate": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 4.48249889321176,
+                "seamStep": 5.006008703660897,
+                "ratio": 1.1167897244195495
+              },
+              "sheet": "meditate.sheet.png"
+            },
+            "walk": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 151.2720726842054,
+                "seamStep": 121.89005680924426,
+                "ratio": 0.805767083417315
+              },
+              "sheet": "walk.sheet.png"
+            },
+            "run": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 289.4214375168703,
+                "seamStep": 208.12463285748223,
+                "ratio": 0.7191057947991524
+              },
+              "sheet": "run.sheet.png"
+            },
+            "dash": {
+              "duration": 0.26666666666666666,
+              "keyFrames": 8,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 225.50471264875088,
+                "seamStep": 582.3452805681867,
+                "ratio": 2.582408472656868
+              },
+              "sheet": "dash.sheet.png"
+            },
+            "sword_fly": {
+              "duration": 0.6666666666666666,
+              "keyFrames": 20,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 9.661996117229126,
+                "seamStep": 10.639653970709835,
+                "ratio": 1.1011859083380673
+              },
+              "sheet": "sword_fly.sheet.png"
+            },
+            "attack": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 149.199294515305,
+                "seamStep": 203.74642087722754,
+                "ratio": 1.3655990903919926
+              },
+              "sheet": "attack.sheet.png"
+            },
+            "cast": {
+              "duration": 0.5,
+              "keyFrames": 15,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 197.55137007515967,
+                "seamStep": 282.21532378544697,
+                "ratio": 1.4285667757104208
+              },
+              "sheet": "cast.sheet.png"
+            },
+            "channel": {
+              "duration": 0.4,
+              "keyFrames": 12,
+              "seam": {
+                "specLoop": true,
+                "loop": true,
+                "meanStep": 16.174257531660636,
+                "seamStep": 15.460080976761295,
+                "ratio": 0.9558448631412378
+              },
+              "sheet": "channel.sheet.png"
+            },
+            "hit": {
+              "duration": 0.2,
+              "keyFrames": 6,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 105.66290222186237,
+                "seamStep": 161.31323456348338,
+                "ratio": 1.5266780598622114
+              },
+              "sheet": "hit.sheet.png"
+            },
+            "die": {
+              "duration": 0.8,
+              "keyFrames": 24,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 199.1532754357858,
+                "seamStep": 3158.843717247543,
+                "ratio": 15.861369642730622
+              },
+              "sheet": "die.sheet.png"
+            },
+            "tribulation": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 132.46437461620184,
+                "seamStep": 177.9343047970188,
+                "ratio": 1.3432615774056995
+              },
+              "sheet": "tribulation.sheet.png"
+            },
+            "emote": {
+              "duration": 1,
+              "keyFrames": 30,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 82.77458256176891,
+                "seamStep": 77.13763598008973,
+                "ratio": 0.9319000300910883
+              },
+              "sheet": "emote.sheet.png"
+            },
+            "attack_2": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 171.2441143223435,
+                "seamStep": 215.33792299551496,
+                "ratio": 1.2574909441276967
+              },
+              "sheet": "attack_2.sheet.png"
+            },
+            "attack_3": {
+              "duration": 0.43333333333333335,
+              "keyFrames": 13,
+              "seam": {
+                "specLoop": false,
+                "loop": true,
+                "meanStep": 198.3016122401699,
+                "seamStep": 311.0274958865647,
+                "ratio": 1.568456717890264
+              },
+              "sheet": "attack_3.sheet.png"
+            }
+          }
+        },
+        "pass": true
+      }
+    },
+    "initialEPrepCommit": "907f9ed3a569206f1d67e5eefd3c450fc9417d56",
+    "prepTooling": {
+      "mainPr": 100,
+      "script": "tools/procgen/scripts/continuous_parts.mjs",
+      "explicitSource": true,
+      "paletteSamplesRequired": true
+    },
+    "deterministicReplay": {
+      "method": "SHA256 of every processed PNG before and after explicit-source CLI replay",
+      "parts": 231,
+      "changed": 0
+    }
   },
   "selection": {
     "plateGlow": "raw/E/gauntlet_plate_glow_R_attempt2.png selected as canonical; attempt1 archived under raw/E/rejected",
     "nearEar": "ear_R visible for E",
     "farEar": "not generated because occluded in E"
-  }
+  },
+  "directionSourceCounts": {
+    "E": 50,
+    "S": 50,
+    "SE": 50,
+    "NE": 46,
+    "N": 35
+  },
+  "directionVisibility": {
+    "NE": "profile hides mouth+ear, rear hair covers head, visible eye/brow edge only; band-only sash, tails behind back panel",
+    "N": "profile omits all11face swaps,ear,three facial strands; no blink slot; band-only sash, tails behind back panel"
+  },
+  "runtimeReserved": [
+    "eyes_angry is a reserved display; blink_cycle owns eyes except meditate",
+    "gauntlet_plate_glow_R is source-only, not wired into class rig"
+  ]
 }

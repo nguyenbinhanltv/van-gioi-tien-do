@@ -2,7 +2,7 @@
   "direction": "E",
   "canvas2x": [256, 256],
   "coordinates": "geometry in @2x pixels; registered master and processing canvas @4x (512)",
-  "status": "provisional guide geometry; not an acceptance result",
+  "status": "PASS registration<=2px, actual exported15clip strict0/0/0/0, real CocosALL15; no allow-errors",
   "generationMaster": "reference/E.master4x.png",
   "registeredMaster": "reference/E.register-master4x.png",
   "parts": [

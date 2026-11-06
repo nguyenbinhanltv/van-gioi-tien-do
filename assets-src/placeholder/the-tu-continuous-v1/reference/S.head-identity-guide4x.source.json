@@ -1,0 +1,9 @@
+{
+  "kind": "software-derived identity reference only, not a generated part",
+  "source": "reference/S.register-master4x.png",
+  "sourceSha256": "64ce964c0cf31dbc2726d9cd8c4a0fe57cf5e27ead5f53958da2a4471d833f8f",
+  "sourceBounds4xInclusive": [211, 80, 300, 169],
+  "cropSize": [90, 90],
+  "outputSize": [512, 512],
+  "resize": "procgen resizeArea, alpha-weighted straight alpha"
+}

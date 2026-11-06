@@ -1,0 +1,14 @@
+{
+  "id": "idle_02_out",
+  "attempt": 2,
+  "prompt": "Refine the first image into a clean illustrated 2D game animation reference, with EXACTLY THE SAME full-body silhouette, compact proportions, limb positions, garment outlines, head size, wrist positions and planted boot positions as the first image. It is a production pose-layout guide for Thể tu A Sơn Môn Hộ Vệ. Use the second image only for refined line/shading language and facial identity, NOT its wider silhouette. CRITICAL preserve narrow short-haired head, modest ivory sleeve volume, compact ivory trousers and short mountain-blue split tabard outlines from first image; do not enlarge head, puff trousers, lengthen limbs, splay tabard, or add cloth. Paired bronze stone-block meander gauntlets raised in quiet guard, nose faces screen-right, E slight overhead orthographic view. Ivory inner robe, mountain-blue bronze-cloud trimmed tabard, dark-blue sash knot and TWO tails, dark boots, short top bun jade hairpin. Clean dark contour, simple 2-3 tone cel shading, NW light, readable128px sprite. Pose is idle gentle exhalation, only tiny breathing difference exactly as first image. Keep exact square512 reference composition and foot registration (bottom near y464), all figure visible, transparent background. No ground shadow, text, effects, extra items or scene. ONE figure.",
+  "utcStart": "2026-11-06 05:48:10 UTC",
+  "utcEnd": "2026-11-06 05:48:49 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "references": ["reference/keyposes/E/idle_02-guide4x.png", "raw/keyposes/E/idle_02_out.png"],
+  "originalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1ae93-8c12-7102-b948-0a9ecd590073\\exec-ee619e8c-dd65-4a50-9da0-7461708bfa5a.png",
+  "selectedOutput": "raw/keyposes/E/idle_02_out.attempt2.png",
+  "status": "pending pilot fit, not replacing baseline"
+}

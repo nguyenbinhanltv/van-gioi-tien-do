@@ -1,0 +1,747 @@
+{
+  "direction": "N",
+  "canvas2x": [256, 256],
+  "coordinates": "@2x pixels, normalized512 source processing",
+  "status": "PASS registration<=2px, actual exported15clip strict0/0/0/0, real CocosALL15; no allow-errors",
+  "generationMaster": "reference/N.master4x.png",
+  "registeredMaster": "reference/N.register-master4x.png",
+  "reference4x": "assets-src/placeholder/the-tu-continuous-v1/reference/N.register-master4x.png",
+  "parts": [
+    {
+      "id": "torso",
+      "materials": ["cloth"],
+      "polygons": [
+        [
+          [117, 78],
+          [139, 78],
+          [154, 94],
+          [152, 128],
+          [145, 151],
+          [110, 151],
+          [102, 128],
+          [102, 94]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true
+    },
+    {
+      "id": "neck",
+      "materials": ["skin"],
+      "polygons": [
+        [
+          [119, 75],
+          [137, 75],
+          [137, 82],
+          [119, 82]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [237, 112, 276, 124]
+    },
+    {
+      "id": "arm_L",
+      "materials": ["cloth"],
+      "segments": [
+        {
+          "a": [104, 97],
+          "b": [95, 116],
+          "r": 10
+        },
+        {
+          "a": [95, 116],
+          "b": [87, 134],
+          "r": 9.5
+        }
+      ],
+      "registration": "contour",
+      "edgeDefringe": true
+    },
+    {
+      "id": "leg_L",
+      "materials": ["cloth"],
+      "segments": [
+        {
+          "a": [113, 150],
+          "b": [107, 184],
+          "r": 16
+        },
+        {
+          "a": [107, 184],
+          "b": [105, 215],
+          "r": 16
+        }
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "excludePolygons": [
+        [
+          [0, 202],
+          [99, 202],
+          [99, 255],
+          [0, 255]
+        ],
+        [
+          [111, 202],
+          [255, 202],
+          [255, 255],
+          [111, 255]
+        ],
+        [
+          [0, 221],
+          [255, 221],
+          [255, 255],
+          [0, 255]
+        ]
+      ]
+    },
+    {
+      "id": "boot_L",
+      "materials": ["boot", "cloth"],
+      "polygons": [
+        [
+          [91, 199],
+          [116, 199],
+          [116, 233],
+          [91, 233]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "sourceBounds4x": [0, 260, 511, 511]
+    },
+    {
+      "id": "tabard_shoulder_L",
+      "materials": ["blue", "gold"],
+      "polygons": [
+        [
+          [99, 91],
+          [104, 86],
+          [115, 86],
+          [113, 98],
+          [106, 102]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "materialAliases": {
+        "skin": "gold"
+      },
+      "sourceBounds4x": [160, 50, 360, 190]
+    },
+    {
+      "id": "sleeve_cuff_L",
+      "materials": ["cloth"],
+      "polygons": [
+        [
+          [77, 119],
+          [96, 119],
+          [96, 131],
+          [77, 131]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true
+    },
+    {
+      "id": "trouser_hem_L",
+      "materials": ["cloth"],
+      "polygons": [
+        [
+          [94, 191],
+          [120, 191],
+          [120, 202],
+          [94, 202]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [158, 329, 248, 397]
+    },
+    {
+      "id": "arm_R",
+      "materials": ["cloth"],
+      "segments": [
+        {
+          "a": [152, 97],
+          "b": [161, 116],
+          "r": 10
+        },
+        {
+          "a": [161, 116],
+          "b": [169, 134],
+          "r": 9.5
+        }
+      ],
+      "registration": "contour",
+      "edgeDefringe": true
+    },
+    {
+      "id": "leg_R",
+      "materials": ["cloth"],
+      "segments": [
+        {
+          "a": [143, 150],
+          "b": [149, 184],
+          "r": 16
+        },
+        {
+          "a": [149, 184],
+          "b": [151, 215],
+          "r": 16
+        }
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "excludePolygons": [
+        [
+          [0, 202],
+          [145, 202],
+          [145, 255],
+          [0, 255]
+        ],
+        [
+          [157, 202],
+          [255, 202],
+          [255, 255],
+          [157, 255]
+        ],
+        [
+          [0, 221],
+          [255, 221],
+          [255, 255],
+          [0, 255]
+        ]
+      ]
+    },
+    {
+      "id": "boot_R",
+      "materials": ["boot", "cloth"],
+      "polygons": [
+        [
+          [141, 199],
+          [166, 199],
+          [166, 233],
+          [141, 233]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "sourceBounds4x": [0, 205, 511, 511]
+    },
+    {
+      "id": "tabard_shoulder_R",
+      "materials": ["blue", "gold"],
+      "polygons": [
+        [
+          [142, 86],
+          [153, 86],
+          [158, 91],
+          [149, 102],
+          [143, 98]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "materialAliases": {
+        "skin": "gold"
+      }
+    },
+    {
+      "id": "sleeve_cuff_R",
+      "materials": ["cloth"],
+      "polygons": [
+        [
+          [159, 119],
+          [178, 119],
+          [178, 131],
+          [159, 131]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true
+    },
+    {
+      "id": "trouser_hem_R",
+      "materials": ["cloth"],
+      "polygons": [
+        [
+          [136, 191],
+          [162, 191],
+          [162, 202],
+          [136, 202]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true
+    },
+    {
+      "id": "head",
+      "materials": ["skin", "hair"],
+      "polygons": [
+        [
+          [119, 54],
+          [135, 54],
+          [143, 62],
+          [141, 74],
+          [133, 80],
+          [122, 80],
+          [114, 72],
+          [113, 62]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [220, 56, 289, 123]
+    },
+    {
+      "id": "tabard_front",
+      "materials": ["blue", "gold"],
+      "polygons": [
+        [
+          [108, 123],
+          [147, 124],
+          [163, 174],
+          [156, 179],
+          [137, 144],
+          [116, 179],
+          [92, 174]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "materialAliases": {
+        "skin": "gold"
+      }
+    },
+    {
+      "id": "tabard_back",
+      "materials": ["blue", "gold"],
+      "polygons": [
+        [
+          [99, 88],
+          [117, 80],
+          [139, 80],
+          [157, 88],
+          [151, 115],
+          [155, 128],
+          [166, 172],
+          [147, 178],
+          [128, 176],
+          [109, 178],
+          [91, 172],
+          [101, 128],
+          [105, 115]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "materialAliases": {
+        "skin": "gold"
+      }
+    },
+    {
+      "id": "sash_band",
+      "materials": ["sash"],
+      "polygons": [
+        [
+          [107, 116],
+          [149, 116],
+          [149, 132],
+          [107, 132]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [211, 216, 301, 249]
+    },
+    {
+      "id": "sash_knot",
+      "materials": ["sash"],
+      "polygons": [
+        [
+          [122, 120],
+          [135, 120],
+          [135, 129],
+          [122, 129]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [239, 232, 272, 257]
+    },
+    {
+      "id": "sash_tail_1",
+      "materials": ["sash"],
+      "polygons": [
+        [
+          [122, 129],
+          [130, 129],
+          [130, 185],
+          [127, 193],
+          [121, 187]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true
+    },
+    {
+      "id": "sash_tail_2",
+      "materials": ["sash"],
+      "polygons": [
+        [
+          [129, 129],
+          [136, 129],
+          [138, 182],
+          [132, 192],
+          [126, 185]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true
+    },
+    {
+      "id": "hair_back",
+      "materials": ["hair"],
+      "polygons": [
+        [
+          [117, 53],
+          [136, 53],
+          [143, 60],
+          [142, 70],
+          [137, 76],
+          [128, 79],
+          [119, 76],
+          [113, 70],
+          [112, 61]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "sourceBounds4x": [218, 55, 292, 124]
+    },
+    {
+      "id": "hair_bun",
+      "materials": ["hair", "gold"],
+      "polygons": [
+        [
+          [121, 43],
+          [135, 43],
+          [135, 55],
+          [121, 55]
+        ]
+      ],
+      "registration": "contour",
+      "edgeDefringe": true,
+      "sourceBounds4x": [238, 45, 273, 76]
+    },
+    {
+      "id": "hairpin",
+      "materials": ["jade", "gold"],
+      "polygons": [
+        [
+          [112, 51],
+          [145, 51],
+          [145, 55],
+          [112, 55]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "sourceBounds4x": [220, 66, 290, 78]
+    },
+    {
+      "id": "gauntlet_R_fist",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [160, 120],
+          [178, 120],
+          [181, 129],
+          [180, 153],
+          [175, 159],
+          [162, 159],
+          [157, 152],
+          [157, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false
+    },
+    {
+      "id": "gauntlet_R_open",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [157, 120],
+          [181, 120],
+          [184, 129],
+          [183, 158],
+          [178, 164],
+          [159, 164],
+          [154, 157],
+          [154, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false,
+      "sourceQuarterTurns": 2
+    },
+    {
+      "id": "gauntlet_R_relaxed",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [160, 120],
+          [178, 120],
+          [181, 129],
+          [180, 153],
+          [175, 159],
+          [162, 159],
+          [157, 152],
+          [157, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true
+    },
+    {
+      "id": "gauntlet_R_guard",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [160, 120],
+          [178, 120],
+          [181, 129],
+          [180, 153],
+          [175, 159],
+          [162, 159],
+          [157, 152],
+          [157, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false,
+      "sourceQuarterTurns": 2
+    },
+    {
+      "id": "gauntlet_R_ground",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [160, 120],
+          [178, 120],
+          [181, 129],
+          [180, 153],
+          [175, 159],
+          [162, 159],
+          [157, 152],
+          [157, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false
+    },
+    {
+      "id": "gauntlet_L_fist",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [79, 120],
+          [97, 120],
+          [100, 129],
+          [99, 153],
+          [94, 159],
+          [81, 159],
+          [76, 152],
+          [76, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false
+    },
+    {
+      "id": "gauntlet_L_open",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [76, 120],
+          [100, 120],
+          [103, 129],
+          [102, 158],
+          [97, 164],
+          [78, 164],
+          [73, 157],
+          [73, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false,
+      "sourceQuarterTurns": 2
+    },
+    {
+      "id": "gauntlet_L_relaxed",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [79, 120],
+          [97, 120],
+          [100, 129],
+          [99, 153],
+          [94, 159],
+          [81, 159],
+          [76, 152],
+          [76, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true
+    },
+    {
+      "id": "gauntlet_L_guard",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [79, 120],
+          [97, 120],
+          [100, 129],
+          [99, 153],
+          [94, 159],
+          [81, 159],
+          [76, 152],
+          [76, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false
+    },
+    {
+      "id": "gauntlet_L_ground",
+      "materials": ["gold", "cloth"],
+      "polygons": [
+        [
+          [79, 120],
+          [97, 120],
+          [100, 129],
+          [99, 153],
+          [94, 159],
+          [81, 159],
+          [76, 152],
+          [76, 130]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": true,
+      "clipToMaster": false
+    },
+    {
+      "id": "gauntlet_plate_glow_R",
+      "materials": ["gold"],
+      "polygons": [
+        [
+          [162, 130],
+          [176, 130],
+          [176, 143],
+          [162, 143]
+        ]
+      ],
+      "registration": "bounds",
+      "edgeDefringe": false
+    }
+  ],
+  "paletteSamples": {
+    "cloth": [
+      [96, 104, 104, 113],
+      [151, 104, 159, 113],
+      [101, 180, 115, 191],
+      [143, 180, 155, 191]
+    ],
+    "skin": [[120, 76, 135, 79]],
+    "blue": [
+      [118, 99, 137, 111],
+      [112, 143, 130, 163]
+    ],
+    "sash": [[114, 120, 142, 129]],
+    "boot": [
+      [99, 208, 109, 220],
+      [147, 208, 156, 220]
+    ],
+    "gold": [
+      [79, 125, 97, 153],
+      [159, 125, 177, 153]
+    ],
+    "hair": [
+      [120, 58, 135, 70],
+      [123, 47, 131, 52]
+    ],
+    "jade": [[113, 52, 119, 54]]
+  },
+  "paletteFilters": {
+    "cloth": {
+      "minLuma": 0
+    },
+    "skin": {
+      "minLuma": 140,
+      "minRedMinusBlue": 10
+    },
+    "blue": {
+      "minLuma": 0,
+      "maxLuma": 180,
+      "maxRedMinusBlue": 5
+    },
+    "sash": {
+      "maxLuma": 115
+    },
+    "boot": {
+      "maxLuma": 115
+    },
+    "gold": {
+      "minLuma": 80,
+      "minRedMinusBlue": 12
+    },
+    "hair": {
+      "maxLuma": 125
+    },
+    "jade": {
+      "minGreenMinusRed": 4,
+      "minGreenMinusBlue": -3
+    }
+  },
+  "edgeDefringe": true,
+  "silhouetteMargin4x": 2,
+  "restOrder": [
+    "arm_L",
+    "sleeve_cuff_L",
+    "gauntlet_L_relaxed",
+    "arm_R",
+    "sleeve_cuff_R",
+    "gauntlet_R_relaxed",
+    "leg_L",
+    "trouser_hem_L",
+    "boot_L",
+    "leg_R",
+    "trouser_hem_R",
+    "boot_R",
+    "tabard_front",
+    "torso",
+    "neck",
+    "sash_tail_1",
+    "sash_tail_2",
+    "tabard_back",
+    "tabard_shoulder_L",
+    "tabard_shoulder_R",
+    "sash_band",
+    "head",
+    "hair_back",
+    "hair_bun",
+    "hairpin"
+  ]
+}
