@@ -135,6 +135,20 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
     rotations[bone] = delta;
     worldRot.set(bone, parentRot + restLocal.get(bone)! + delta);
   };
+  /**
+   * Rotate `bone` by the turn of a landmark VECTOR since the rest pose. For a bone whose axis is that vector this is
+   * `aimDir`; for a spine bone whose child hangs off to the side (the Thể tu neck is 14 px right of the chest) aiming the AXIS
+   * at the landmark would bend an identity pose by the offset angle, so the rest angle of the vector is subtracted.
+   */
+  const aimVector = (bone: string, dir: Vec2, restFrom: Vec2, restTo: Vec2): void => {
+    const rv = sub(restTo, restFrom);
+    if (Math.hypot(rv.x, rv.y) < 1e-6) return aimDir(bone, dir);
+    const parentRot = parentRotOf(bone);
+    const world = restWorld(bone).rotation + wrap(deg(dir) - deg(rv));
+    const delta = wrap(world - parentRot - restLocal.get(bone)!);
+    rotations[bone] = delta;
+    worldRot.set(bone, parentRot + restLocal.get(bone)! + delta);
+  };
   const keep = (bone: string): void => {
     rotations[bone] = 0;
     worldRot.set(bone, parentRotOf(bone) + restLocal.get(bone)!);
@@ -167,10 +181,12 @@ export function fitPose(rig: RigDocument, lm: KeyPoseLandmarks, view: CanvasView
   keep(hipsBone);
 
   // 2. spine, neck, head: aimed along the landmark directions
-  aimDir(r.spine_mid!, sub(need('chest'), pelvis));
-  aimDir(r.spine_upper!, sub(need('neck'), need('chest')));
   const neckBone = rig.bones.find((b) => b.name === 'neck')?.name;
-  if (neckBone) aimDir(neckBone, sub(need('head'), need('neck')));
+  aimVector(r.spine_mid!, sub(need('chest'), pelvis), restWorld(hipsBone).pos, restWorld(r.spine_upper!).pos);
+  if (neckBone)
+    aimVector(r.spine_upper!, sub(need('neck'), need('chest')), restWorld(r.spine_upper!).pos, restWorld(neckBone).pos);
+  else aimDir(r.spine_upper!, sub(need('neck'), need('chest')));
+  if (neckBone) aimVector(neckBone, sub(need('head'), need('neck')), restWorld(neckBone).pos, restWorld(neckBone).tip);
   if (r.head) {
     // upright in canvas space: cancel whatever the parents turned
     const base = restWorld(r.head).rotation;
