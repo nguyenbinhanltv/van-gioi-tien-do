@@ -1,0 +1,15 @@
+{
+  "clip": "meditate",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:46:22 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame MEDITATE sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FOUR equal SQUARE columns by TWO rows, 8 full-body frames, row-major left-to-right top-to-bottom, sheet aspect4:2. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, upright anatomical figure height217 units, seated/collapsed pose naturally shorter without changing limb or head size, pelvis axis x128. All8 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. EIGHT-frame seated MEDITATION breathing loop. All eight show SAME adult sitting cross-legged toward screen-right, upright straight back, eyes gently closed, both bronze gauntlets resting on knees with palms relaxed. Cell1 calm settled pose,2 inhale starts,3 chest tiny expansion,4 full inhale,5 exhale,6 relax,7 settle,8 return exact cell1. Fold full-size legs naturally into seated pose; SAME head/torso/limb anatomical dimensions as standing master, NOT a smaller standing figure or chibi. Bounding height becomes shorter because legs fold, sole/seat base stays y232. No stool, mat, rocks, aura, glow, prayer symbols or scenery. Hold character pose stable for seamless loop, tiny sash/robe breathing only. Exact master costume, no added props. Pure flat opaque#FF00FF background, REMOVE ALL guides/borders/ghosts/ticks/text/labels; no floor, shadows, blur or effects. One complete character in each own cell.",
+  "references": ["../../the-tu-continuous-v1/reference/E.master4x.png", "raw/meditate.attempt1.template.png"],
+  "selectedOutput": "raw/meditate.attempt1.png",
+  "status": "rejected: seated figure fills standing-height cell; head and torso enlarged",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-5cf59741-0f7d-431a-a7f8-b61ea347fb5d.png",
+  "utcEndObserved": "2026-11-06 16:48:26 UTC",
+  "originalBackup": "raw/originals/meditate.attempt1.png"
+}

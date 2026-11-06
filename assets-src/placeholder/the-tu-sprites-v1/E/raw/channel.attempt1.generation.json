@@ -1,0 +1,16 @@
+{
+  "clip": "channel",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:46:22 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame CHANNEL sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FOUR equal SQUARE columns by TWO rows, 8 full-body frames, row-major left-to-right top-to-bottom, sheet aspect4:2. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x128. All8 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. EIGHT-frame standing CHANNEL cultivation loop. Feet planted, shallow grounded stance, eyes focused screen-right. Both open bronze-gauntleted palms held forward at chest height, elbows naturally bent, channeling invisible earth power. Cells1..4 subtle inhale and palm press forward3px,5..8 exhale and return. Same pose/anatomical dimensions and217unit stature in all8, head movement <=2px. Both hands in gauntlets with clear fingers, no extra arms or detached armor. No aura, projectile, glow, particles or floating rocks. Lastcell returns smoothly to first. Exact master costume, no added props. Pure flat opaque#FF00FF background, REMOVE ALL guides/borders/ghosts/ticks/text/labels; no floor, shadows, blur or effects. One complete character in each own cell.",
+  "references": ["../../the-tu-continuous-v1/reference/E.master4x.png", "templates/channel.template.png"],
+  "selectedOutput": "sheets/channel.png",
+  "status": "selected; main QA PASS, real Cocos2x capture all15 clips PASS",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-89331590-d675-4e33-8173-f77037b6718b.png",
+  "utcEndObserved": "2026-11-06 16:48:26 UTC",
+  "originalBackup": "raw/originals/channel.attempt1.png",
+  "finalGate": "export/engine-gate.json"
+}
