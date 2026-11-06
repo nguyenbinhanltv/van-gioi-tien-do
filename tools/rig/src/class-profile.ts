@@ -219,7 +219,7 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       'hair_back',
       'hairpin',
     ),
-    { ...BACK_VIEW_TABARD, head: { compose: ['head'] }, hair_back: { paperdoll: 'hair_back' } },
+    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
   ),
 };
 
