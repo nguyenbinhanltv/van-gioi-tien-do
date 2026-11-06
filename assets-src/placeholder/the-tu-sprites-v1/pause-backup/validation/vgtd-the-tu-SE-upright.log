@@ -1,0 +1,452 @@
+{
+  "dir": "SE",
+  "normalizedReferenceHeight": 0.9199549041713642,
+  "clips": [
+    {
+      "name": "idle",
+      "heights": [
+        218,
+        218,
+        219,
+        220,
+        219,
+        218,
+        218,
+        217
+      ]
+    },
+    {
+      "name": "walk",
+      "heights": [
+        219,
+        218,
+        212,
+        212,
+        213,
+        213,
+        218,
+        218,
+        214,
+        217,
+        215,
+        214
+      ]
+    },
+    {
+      "name": "run",
+      "heights": [
+        218,
+        218,
+        218,
+        211,
+        219,
+        214,
+        218,
+        219,
+        212,
+        217,
+        219,
+        216
+      ]
+    }
+  ],
+  "qa": {
+    "ok": false,
+    "findings": [
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "ghost_offset_px_R",
+        "value": 28,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -28.0 px from its template ghost (x 97.7 vs 125.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 1,
+        "metric": "slide_px_per_frame_R",
+        "value": 6.91,
+        "limit": 3,
+        "message": "R foot slides 6.9 px/frame between frames 0-1 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "slide_px_per_frame_R",
+        "value": 16.7,
+        "limit": 3,
+        "message": "R foot slides 16.7 px/frame between frames 1-2 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 4,
+        "metric": "ghost_offset_px_R",
+        "value": 21.8,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 21.8 px from its template ghost (x 140.4 vs 118.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 5,
+        "metric": "ghost_offset_px_R",
+        "value": 28.7,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 28.7 px from its template ghost (x 140.1 vs 111.5, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 9,
+        "metric": "ghost_offset_px_L",
+        "value": 26.4,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 26.4 px from its template ghost (x 152.1 vs 125.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "slide_px_per_frame_L",
+        "value": 8.55,
+        "limit": 3,
+        "message": "L foot slides 8.6 px/frame between frames 6-7 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 10,
+        "metric": "ghost_offset_px_L",
+        "value": 26.4,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 26.4 px from its template ghost (x 145.0 vs 118.6, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 11,
+        "metric": "ghost_offset_px_L",
+        "value": 29.2,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 29.2 px from its template ghost (x 140.6 vs 111.5, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 4,
+        "metric": "ghost_offset_px_R",
+        "value": 30.3,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 30.3 px from its template ghost (x 146.0 vs 115.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 2,
+        "metric": "slide_px_per_frame_R",
+        "value": 9.7,
+        "limit": 3,
+        "message": "R foot slides 9.7 px/frame between frames 1-2 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 5,
+        "metric": "ghost_offset_px_R",
+        "value": 20.1,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 20.1 px from its template ghost (x 125.8 vs 105.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 9,
+        "metric": "ghost_offset_px_L",
+        "value": 25.3,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 25.3 px from its template ghost (x 151.0 vs 125.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "metric": "slide_px_per_frame_L",
+        "value": 3.66,
+        "limit": 3,
+        "message": "L foot slides 3.7 px/frame between frames 7-8 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 10,
+        "metric": "ghost_offset_px_L",
+        "value": 35.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 35.1 px from its template ghost (x 150.8 vs 115.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 11,
+        "metric": "ghost_offset_px_L",
+        "value": 26.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 26.1 px from its template ghost (x 131.8 vs 105.7, limit 20); not measured (the foot is not on the template)"
+      }
+    ],
+    "judged": [
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 3,
+          "metric": "ghost_offset_px_R",
+          "value": 28,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -28.0 px from its template ghost (x 97.7 vs 125.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "slide_px_per_frame_R",
+          "value": 6.91,
+          "limit": 3,
+          "message": "R foot slides 6.9 px/frame between frames 0-1 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "slide_px_per_frame_R",
+          "value": 16.7,
+          "limit": 3,
+          "message": "R foot slides 16.7 px/frame between frames 1-2 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 4,
+          "metric": "ghost_offset_px_R",
+          "value": 21.8,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 21.8 px from its template ghost (x 140.4 vs 118.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "ghost_offset_px_R",
+          "value": 28.7,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 28.7 px from its template ghost (x 140.1 vs 111.5, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "ghost_offset_px_L",
+          "value": 26.4,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 26.4 px from its template ghost (x 152.1 vs 125.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "slide_px_per_frame_L",
+          "value": 8.55,
+          "limit": 3,
+          "message": "L foot slides 8.6 px/frame between frames 6-7 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "ghost_offset_px_L",
+          "value": 26.4,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 26.4 px from its template ghost (x 145.0 vs 118.6, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 11,
+          "metric": "ghost_offset_px_L",
+          "value": 29.2,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 29.2 px from its template ghost (x 140.6 vs 111.5, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 4,
+          "metric": "ghost_offset_px_R",
+          "value": 30.3,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 30.3 px from its template ghost (x 146.0 vs 115.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 2,
+          "metric": "slide_px_per_frame_R",
+          "value": 9.7,
+          "limit": 3,
+          "message": "R foot slides 9.7 px/frame between frames 1-2 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 5,
+          "metric": "ghost_offset_px_R",
+          "value": 20.1,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is 20.1 px from its template ghost (x 125.8 vs 105.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 9,
+          "metric": "ghost_offset_px_L",
+          "value": 25.3,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 25.3 px from its template ghost (x 151.0 vs 125.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 8,
+          "metric": "slide_px_per_frame_L",
+          "value": 3.66,
+          "limit": 3,
+          "message": "L foot slides 3.7 px/frame between frames 7-8 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 10,
+          "metric": "ghost_offset_px_L",
+          "value": 35.1,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 35.1 px from its template ghost (x 150.8 vs 115.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 11,
+          "metric": "ghost_offset_px_L",
+          "value": 26.1,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 26.1 px from its template ghost (x 131.8 vs 105.7, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "fail-soft"
+      }
+    ],
+    "resolved": [],
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 16,
+      "accepted": 0,
+      "regression": 0,
+      "info": 0
+    }
+  }
+}

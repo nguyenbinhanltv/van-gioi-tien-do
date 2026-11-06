@@ -1,0 +1,35 @@
+
+> @vgtd/sprite@0.1.0 sprite:backlog
+> node ../rig/scripts/run-ts.mjs scripts/backlog.ts --project assets-src/placeholder/the-tu-sprites-v1/SE/project.json --accept --note Owner first-pass policy: recorded foot trajectory and free-clip standing redraw drift; preserve all frames and frozen character scale, polish after full set. --owner 18
+
+the-tu SE: {"fail-hard":0,"fail-soft":29,"accepted":0,"regression":0,"info":28}; 0 resolved entries
+  FAIL-SOFT [footSlide] walk #3: R planted foot: nearest sole is -28.0 px from its template ghost (x 97.7 vs 125.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #1: R foot slides 6.9 px/frame between frames 0-1 (limit 3)
+  FAIL-SOFT [footSlide] walk #2: R foot slides 16.7 px/frame between frames 1-2 (limit 3)
+  FAIL-SOFT [footSlide] walk #4: R planted foot: nearest sole is 21.8 px from its template ghost (x 140.4 vs 118.6, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #5: R planted foot: nearest sole is 28.7 px from its template ghost (x 140.1 vs 111.5, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #9: L planted foot: nearest sole is 26.4 px from its template ghost (x 152.1 vs 125.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #7: L foot slides 8.6 px/frame between frames 6-7 (limit 3)
+  FAIL-SOFT [footSlide] walk #10: L planted foot: nearest sole is 26.4 px from its template ghost (x 145.0 vs 118.6, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #11: L planted foot: nearest sole is 29.2 px from its template ghost (x 140.6 vs 111.5, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #4: R planted foot: nearest sole is 30.3 px from its template ghost (x 146.0 vs 115.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #2: R foot slides 9.7 px/frame between frames 1-2 (limit 3)
+  FAIL-SOFT [footSlide] run #5: R planted foot: nearest sole is 20.1 px from its template ghost (x 125.8 vs 105.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #9: L planted foot: nearest sole is 25.3 px from its template ghost (x 151.0 vs 125.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #8: L foot slides 3.7 px/frame between frames 7-8 (limit 3)
+  FAIL-SOFT [footSlide] run #10: L planted foot: nearest sole is 35.1 px from its template ghost (x 150.8 vs 115.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #11: L planted foot: nearest sole is 26.1 px from its template ghost (x 131.8 vs 105.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [height] dash #0: height 210 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] dash #5: height 210 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #0: height 226 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #1: height 226 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #2: height 226 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #3: height 226 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #4: height 225 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #5: height 225 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #6: height 225 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] channel #7: height 225 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #0: height 203 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #3: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] die #0: height 225 px outside the upright band and no pose exception declared
+wrote $WORKSPACE\assets-src\placeholder\the-tu-sprites-v1\SE\quality-backlog.json (29 entries); now {"fail-hard":0,"fail-soft":0,"accepted":29,"regression":0,"info":28}

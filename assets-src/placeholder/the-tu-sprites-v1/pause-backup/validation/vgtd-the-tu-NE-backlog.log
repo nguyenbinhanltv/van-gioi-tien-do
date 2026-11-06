@@ -1,0 +1,28 @@
+
+> @vgtd/sprite@0.1.0 sprite:backlog
+> node ../rig/scripts/run-ts.mjs scripts/backlog.ts --project assets-src/placeholder/the-tu-sprites-v1/NE/project.json --accept --note First production pass: keep frozen scale and all frames; measured foot/ghost drift or free-pose redraw height remains open for polish. No hard gates accepted. --owner 18
+
+the-tu NE: {"fail-hard":0,"fail-soft":22,"accepted":0,"regression":0,"info":26}; 0 resolved entries
+  FAIL-SOFT [footSlide] walk #2: R foot slides 6.4 px/frame between frames 1-2 (limit 3)
+  FAIL-SOFT [footSlide] walk #4: R foot slides 5.5 px/frame between frames 3-4 (limit 3)
+  FAIL-SOFT [footSlide] walk #5: R foot slides 16.4 px/frame between frames 4-5 (limit 3)
+  FAIL-SOFT [footSlide] walk #6: L planted foot: nearest sole is -30.1 px from its template ghost (x 118.1 vs 148.2, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #7: L planted foot: nearest sole is -25.7 px from its template ghost (x 115.4 vs 141.1, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #11: L planted foot: nearest sole is 33.4 px from its template ghost (x 146.1 vs 112.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #9: L foot slides 5.4 px/frame between frames 8-9 (limit 3)
+  FAIL-SOFT [footSlide] walk #10: L foot slides 19.5 px/frame between frames 9-10 (limit 3)
+  FAIL-SOFT [footSlide] run #3: R planted foot: nearest sole is -23.3 px from its template ghost (x 103.5 vs 126.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #1: R foot slides 6.9 px/frame between frames 0-1 (limit 3)
+  FAIL-SOFT [footSlide] run #4: R planted foot: nearest sole is -25.3 px from its template ghost (x 91.6 vs 116.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #5: R planted foot: nearest sole is 34.3 px from its template ghost (x 141.2 vs 106.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #7: L planted foot: nearest sole is -20.5 px from its template ghost (x 126.4 vs 146.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #9: L planted foot: nearest sole is -21.2 px from its template ghost (x 105.7 vs 126.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #11: L planted foot: nearest sole is 24.6 px from its template ghost (x 131.5 vs 106.9, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [height] dash #0: height 206 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] dash #5: height 206 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] sword_fly #1: height 205 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] sword_fly #2: height 203 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #0: height 206 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #3: height 206 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] die #1: height 203 px outside the upright band and no pose exception declared
+wrote $WORKSPACE\assets-src\placeholder\the-tu-sprites-v1\NE\quality-backlog.json (22 entries); now {"fail-hard":0,"fail-soft":0,"accepted":22,"regression":0,"info":26}

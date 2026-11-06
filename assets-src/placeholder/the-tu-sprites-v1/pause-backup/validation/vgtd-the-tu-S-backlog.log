@@ -1,0 +1,32 @@
+
+> @vgtd/sprite@0.1.0 sprite:backlog
+> node ../rig/scripts/run-ts.mjs scripts/backlog.ts --project assets-src/placeholder/the-tu-sprites-v1/S/project.json --accept --note First production pass: preserve frozen character scale and all frames. Measured foot/ghost drift or free-clip redraw height remains open for polish; no hard gates accepted. --owner 18
+
+the-tu S: {"fail-hard":0,"fail-soft":26,"accepted":0,"regression":0,"info":29}; 0 resolved entries
+  FAIL-SOFT [footSlide] walk #3: R foot slides 29.2 px/frame between frames 2-3 (limit 3)
+  FAIL-SOFT [footSlide] walk #4: R foot slides 3.9 px/frame between frames 3-4 (limit 3)
+  FAIL-SOFT [footSlide] walk #10: L planted foot: nearest sole is 20.9 px from its template ghost (x 144.0 vs 123.1, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #9: L foot slides 7.1 px/frame between frames 8-9 (limit 3)
+  FAIL-SOFT [footSlide] walk #11: L planted foot: nearest sole is 29.6 px from its template ghost (x 148.2 vs 118.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #0: R planted foot: nearest sole is -31.8 px from its template ghost (x 114.5 vs 146.3, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #1: R planted foot: nearest sole is -26.9 px from its template ghost (x 113.2 vs 140.1, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #2: R planted foot: nearest sole is -21.9 px from its template ghost (x 111.9 vs 133.8, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #4: R foot slides 3.5 px/frame between frames 3-4 (limit 3)
+  FAIL-SOFT [footSlide] run #5: R foot slides 5.4 px/frame between frames 4-5 (limit 3)
+  FAIL-SOFT [footSlide] run #7: L foot slides 10.3 px/frame between frames 6-7 (limit 3)
+  FAIL-SOFT [footSlide] run #8: L foot slides 7.5 px/frame between frames 7-8 (limit 3)
+  FAIL-SOFT [footSlide] run #9: L foot slides 16.8 px/frame between frames 8-9 (limit 3)
+  FAIL-SOFT [footSlide] run #10: L foot slides 7.5 px/frame between frames 9-10 (limit 3)
+  FAIL-SOFT [footSlide] run #11: L foot slides 7.5 px/frame between frames 10-11 (limit 3)
+  FAIL-SOFT [height] sword_fly #2: height 203 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #0: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #1: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #2: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #3: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #4: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #5: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #6: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #7: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #0: height 199 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #3: height 199 px outside the upright band and no pose exception declared
+wrote $WORKSPACE\assets-src\placeholder\the-tu-sprites-v1\S\quality-backlog.json (26 entries); now {"fail-hard":0,"fail-soft":0,"accepted":26,"regression":0,"info":29}

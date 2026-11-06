@@ -1,0 +1,50 @@
+
+> @vgtd/sprite@0.1.0 sprite:batch
+> node ../rig/scripts/run-ts.mjs scripts/batch.ts --batch assets-src/placeholder/the-tu-sprites-v1/batch-E.json --out $TEMP/vgtd-the-tu-sprites-E-final --capture
+
+the-tu E: OK; idle=ok meditate=ok walk=warn run=warn dash=warn sword_fly=ok attack=ok attack_2=ok attack_3=ok cast=ok channel=ok hit=ok die=ok tribulation=ok emote=ok; backlog 12
+npm.cmd : node:internal/modules/cjs/loader:1424
+At line:2 char:550
++ ... parse HEAD; npm.cmd run sprite:batch -w @vgtd/sprite -- --batch asset ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/modules/cjs/loader:1424:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  throw err;
+  ^
+
+Error: Cannot find module '$LOCAL_PATH'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v24.12.0
+file:///$TEMP/vgtd-rig-YDBMMV/script.mjs:23601
+  if (build2.status !== 0) throw new Error("Cocos web build failed (see the log above)");
+                                 ^
+
+Error: Cocos web build failed (see the log above)
+    at file:///$TEMP/vgtd-rig-YDBMMV/script.mjs:23601:34
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async 
+file:///$WORKSPACE/tools/rig/scripts/run-ts.mjs:29:3
+
+Node.js v24.12.0
+npm error Lifecycle script `sprite:batch` failed with error:
+npm error code 1
+npm error path $WORKSPACE\tools\sprite
+npm error workspace @vgtd/sprite@0.1.0
+npm error location $WORKSPACE\tools\sprite
+npm error command failed
+npm error command $LOCAL_PATH /d /s /c node ../rig/scripts/run-ts.mjs scripts/batch.ts --batch 
+assets-src/placeholder/the-tu-sprites-v1/batch-E.json --out $TEMP/vgtd-the-tu-sprites-E-final --capture

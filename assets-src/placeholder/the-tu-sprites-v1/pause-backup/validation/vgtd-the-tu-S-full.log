@@ -1,0 +1,91 @@
+
+> @vgtd/sprite@0.1.0 sprite:build
+> node ../rig/scripts/run-ts.mjs scripts/build.ts --project assets-src/placeholder/the-tu-sprites-v1/S/project.json --out $TEMP/vgtd-the-tu-S-full
+
+  idle: scale 0.52109 (raw 403.0 px -> 210 px)
+  meditate: scale 0.52109 (raw 403.0 px -> 210 px)
+  walk: scale 0.63841 (raw 328.9 px -> 210 px)
+  run: scale 0.63841 (raw 328.9 px -> 210 px)
+  dash: scale 0.45138 (raw 465.2 px -> 210 px)
+  sword_fly: scale 0.52109 (raw 403.0 px -> 210 px)
+  attack: scale 0.52109 (raw 403.0 px -> 210 px)
+  attack_2: scale 0.52109 (raw 403.0 px -> 210 px)
+  attack_3: scale 0.52109 (raw 403.0 px -> 210 px)
+  cast: scale 0.52109 (raw 403.0 px -> 210 px)
+  channel: scale 0.52109 (raw 403.0 px -> 210 px)
+  hit: scale 0.31920 (raw 657.9 px -> 210 px)
+  die: scale 0.52109 (raw 403.0 px -> 210 px)
+  tribulation: scale 0.63841 (raw 328.9 px -> 210 px)
+  emote: scale 0.52109 (raw 403.0 px -> 210 px)
+atlas: 1 page 2048x2048, 126 regions; palette 32 colours (locked)
+  INFO [height] meditate #0: 167 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #1: 167 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #2: 168 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #3: 168 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #4: 168 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #5: 167 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #6: 167 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  INFO [height] meditate #7: 167 px outside 203.7..216.3 (declared exception: seated: full-sized legs folded cross-legged, head and torso remain at character scale)
+  FAIL-SOFT [footSlide] walk #3: R foot slides 29.2 px/frame between frames 2-3 (limit 3)
+  FAIL-SOFT [footSlide] walk #4: R foot slides 3.9 px/frame between frames 3-4 (limit 3)
+  FAIL-SOFT [footSlide] walk #10: L planted foot: nearest sole is 20.9 px from its template ghost (x 144.0 vs 123.1, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] walk #9: L foot slides 7.1 px/frame between frames 8-9 (limit 3)
+  FAIL-SOFT [footSlide] walk #11: L planted foot: nearest sole is 29.6 px from its template ghost (x 148.2 vs 118.7, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #0: R planted foot: nearest sole is -31.8 px from its template ghost (x 114.5 vs 146.3, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #1: R planted foot: nearest sole is -26.9 px from its template ghost (x 113.2 vs 140.1, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #2: R planted foot: nearest sole is -21.9 px from its template ghost (x 111.9 vs 133.8, limit 20); not measured (the foot is not on the template)
+  FAIL-SOFT [footSlide] run #4: R foot slides 3.5 px/frame between frames 3-4 (limit 3)
+  FAIL-SOFT [footSlide] run #5: R foot slides 5.4 px/frame between frames 4-5 (limit 3)
+  FAIL-SOFT [footSlide] run #7: L foot slides 10.3 px/frame between frames 6-7 (limit 3)
+  FAIL-SOFT [footSlide] run #8: L foot slides 7.5 px/frame between frames 7-8 (limit 3)
+  FAIL-SOFT [footSlide] run #9: L foot slides 16.8 px/frame between frames 8-9 (limit 3)
+  FAIL-SOFT [footSlide] run #10: L foot slides 7.5 px/frame between frames 9-10 (limit 3)
+  FAIL-SOFT [footSlide] run #11: L foot slides 7.5 px/frame between frames 10-11 (limit 3)
+  INFO [height] dash #1: 196 px outside 203.7..216.3 (declared exception: dash-lunge: full-sized torso leans and legs fold naturally)
+  INFO [height] dash #2: 187 px outside 203.7..216.3 (declared exception: dash-lunge: full-sized torso leans and legs fold naturally)
+  INFO [height] dash #3: 158 px outside 203.7..216.3 (declared exception: dash-lunge: full-sized torso leans and legs fold naturally)
+  INFO [height] dash #4: 179 px outside 203.7..216.3 (declared exception: dash-lunge: full-sized torso leans and legs fold naturally)
+  FAIL-SOFT [height] sword_fly #2: height 203 px outside the upright band and no pose exception declared
+  INFO [height] attack_3 #3: 203 px outside 203.7..216.3 (declared exception: ground-slam-crouch: full-sized legs and torso fold naturally)
+  INFO [height] attack_3 #4: 163 px outside 203.7..216.3 (declared exception: ground-slam-crouch: full-sized legs and torso fold naturally)
+  INFO [height] attack_3 #5: 164 px outside 203.7..216.3 (declared exception: ground-slam-crouch: full-sized legs and torso fold naturally)
+  INFO [height] attack_3 #6: 202 px outside 203.7..216.3 (declared exception: ground-slam-crouch: full-sized legs and torso fold naturally)
+  FAIL-SOFT [height] cast #0: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #1: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #2: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #3: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #4: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #5: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #6: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] cast #7: height 202 px outside the upright band and no pose exception declared
+  FAIL-SOFT [height] hit #0: height 199 px outside the upright band and no pose exception declared
+  INFO [height] hit #1: 189 px outside 203.7..216.3 (declared exception: recoil: knees flex and shoulders lean backward)
+  INFO [height] hit #2: 193 px outside 203.7..216.3 (declared exception: recoil: knees flex and shoulders lean backward)
+  FAIL-SOFT [height] hit #3: height 199 px outside the upright band and no pose exception declared
+  INFO [height] die #2: 182 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] die #3: 157 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] die #4: 144 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] die #5: 133 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] die #6: 84 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] die #7: 84 px outside 203.7..216.3 (declared exception: die-collapse: body kneels then lies sideways; upright bounding-box face ROI does not apply)
+  INFO [height] tribulation #4: 200 px outside 203.7..216.3 (declared exception: brace-bend: lowered head behind crossed gauntlets and bent knees)
+  INFO [height] tribulation #5: 192 px outside 203.7..216.3 (declared exception: brace-bend: lowered head behind crossed gauntlets and bent knees)
+  INFO [height] tribulation #6: 186 px outside 203.7..216.3 (declared exception: brace-bend: lowered head behind crossed gauntlets and bent knees)
+  INFO [height] tribulation #7: 188 px outside 203.7..216.3 (declared exception: brace-bend: lowered head behind crossed gauntlets and bent knees)
+  INFO [height] tribulation #8: 199 px outside 203.7..216.3 (declared exception: brace-bend: lowered head behind crossed gauntlets and bent knees)
+QA verdicts: {"fail-hard":0,"fail-soft":26,"accepted":0,"regression":0,"info":29}
+QA FAILED; wrote 4 files to $TEMP\vgtd-the-tu-S-full
+npm.cmd : npm error Lifecycle script `sprite:build` failed with error:
+At line:2 char:113
++ ... pright.log; npm.cmd run sprite:build -w @vgtd/sprite -- --project ass ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm error Lifec...led with error::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm error code 1
+npm error path $WORKSPACE\tools\sprite
+npm error workspace @vgtd/sprite@0.1.0
+npm error location $WORKSPACE\tools\sprite
+npm error command failed
+npm error command $LOCAL_PATH /d /s /c node ../rig/scripts/run-ts.mjs scripts/build.ts --project 
+assets-src/placeholder/the-tu-sprites-v1/S/project.json --out $TEMP/vgtd-the-tu-S-full
