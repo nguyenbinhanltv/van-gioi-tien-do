@@ -40,3 +40,4 @@ export * from './tabard.js';
 export * from './class-profile.js';
 export * from './qa-strip.js';
 export * from './qa-lower.js';
+export * from './keypose.js';
