@@ -53,6 +53,8 @@ export interface ClipMotion {
    * separate "lift" from "travel" for front/back views, so the plan that produced the clip records it for QA.
    */
   readonly planted?: Readonly<Record<string, readonly boolean[]>>;
+  /** Gait cycles (L+R step pairs) inside the clip; default 1. The footstep QA expects that many touchdowns per foot. */
+  readonly cycles?: number;
 }
 
 export interface Clip {

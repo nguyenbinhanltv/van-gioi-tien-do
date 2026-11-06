@@ -19,8 +19,13 @@ export function screenAxis(direction: Direction): Vec2 {
 }
 
 export interface GaitParams {
-  /** Cycle length in 30 fps frames. */
+  /** Clip length in 30 fps frames. */
   readonly frames: number;
+  /**
+   * Gait cycles (L+R step pairs) inside the clip, default 1; an integer so the clip loops. More cycles = shorter stride
+   * at the same ground speed: the cadence is baked into the clip, no runtime timeScale involved.
+   */
+  readonly cycles?: number;
   /** Ground speed in screen px/s along the travel axis. */
   readonly speed: number;
   /** Fraction of the cycle a foot is planted (walk ≈ 0.62, run ≈ 0.4). */
@@ -64,6 +69,19 @@ function swingEase(s: number): number {
   return s * s * (3 - 2 * s);
 }
 
+/**
+ * Frames at which a foot becomes planted (touchdown), cyclic: frame 0 counts when the foot is planted there and was not at
+ * the last frame of the loop. `planted` has frames + 1 entries (the last equals the first for a loop).
+ */
+export function touchdowns(planted: readonly boolean[], frames: number): number[] {
+  const out: number[] = [];
+  for (let f = 0; f < frames; f++) {
+    const before = f === 0 ? planted[frames - 1] : planted[f - 1];
+    if (planted[f] && !before) out.push(f);
+  }
+  return out;
+}
+
 /** Build IK foot-target tracks (+ optional hips bob/sway) for a gait. Requires roles `ik_foot_L`, `ik_foot_R`. */
 export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
   const axis = g.axis ?? { x: 1, y: 0 };
@@ -72,12 +90,14 @@ export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
   if (!L || !R) throw new RangeError("planFeet needs roles 'ik_foot_L' and 'ik_foot_R'");
   const phase = g.phase ?? 0;
   const N = g.frames;
+  const cyc = g.cycles ?? 1;
+  const cycle = { ...g, frames: N / cyc };
   const mk = (offset: number) => {
     const keys: Key<Vec2>[] = [];
     const planted: boolean[] = [];
     for (let f = 0; f <= N; f++) {
-      const u = (((f / N + offset) % 1) + 1) % 1;
-      const c = footCycle(u, g);
+      const u = ((((f / N) * cyc + offset) % 1) + 1) % 1;
+      const c = footCycle(u, cycle);
       keys.push({ frame: f, value: { x: axis.x * c.along, y: axis.y * c.along + c.lift } });
       planted.push(c.planted);
     }
@@ -93,7 +113,7 @@ export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
   if (hips && (g.bob || g.sway || g.crouch)) {
     const keys: Key<Vec2>[] = [];
     for (let f = 0; f <= N; f++) {
-      const u = f / N;
+      const u = (f / N) * cyc;
       const dip = -(g.crouch ?? 0) - (g.bob ?? 0) * (1 - Math.cos(4 * Math.PI * (u + phase))) * 0.5;
       const sw = (g.sway ?? 0) * Math.sin(2 * Math.PI * (u + phase));
       keys.push({ frame: f, value: { x: axis.x * sw, y: axis.y * sw + dip } });
@@ -103,7 +123,7 @@ export function planFeet(rig: RigDocument, g: GaitParams): FootPlan {
   return {
     tracks,
     planted: { L: a.planted, R: b.planted },
-    stanceLength: g.speed * ((g.duty * N) / CLIP_FPS),
+    stanceLength: g.speed * ((g.duty * N) / cyc / CLIP_FPS),
   };
 }
 

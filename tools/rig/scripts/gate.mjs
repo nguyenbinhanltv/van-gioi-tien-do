@@ -51,6 +51,7 @@ if (!flag('skip-measure'))
       dir,
       '--strict',
       ...(opt('assembled', '') ? ['--assembled', opt('assembled', ''), '--stem', opt('stem', 'kiemtu')] : []),
+      ...(opt('gait', '') ? ['--gait', opt('gait', '')] : []),
     ]),
   );
 if (!flag('skip-capture')) {

@@ -118,6 +118,67 @@ try {
   console.log('viewer ready');
   const all = await page.evaluate('window.__vgtdViewer.animations');
   const names = opt('animations', 'all') === 'all' ? all : opt('animations', 'all').split(',');
+  if (flag('blink')) {
+    // Blink verification (D39): play each body clip live and sample the eyes slot; the independent blink layer must show
+    // eyes_closed (display 2) every 3-5 s on walk / idle (short loops), and must stay off for meditate / die / hit.
+    //   npm run capture -w client-cocos -- --blink --animations idle,walk,meditate --seconds 14 --src ... --stem ...
+    const seconds = Number(opt('seconds', 14));
+    const report = {};
+    for (const anim of opt('animations', 'idle,walk,meditate').split(',')) {
+      await page.evaluate(
+        `window.__vgtdViewer.set({ animation: ${JSON.stringify(anim)}, mode: 'single', direction: ${JSON.stringify(direction)}, paused: false })`,
+      );
+      await waitReady();
+      // sample in the page on every rendered frame (requestAnimationFrame): polling from node every 100 ms can miss the
+      // 2-frame closed phase of a blink entirely. Software GL renders slowly, so also record the blink LAYER CLOCK
+      // (AnimationState.currentTime): the cadence is judged on that clock, the eyes display only confirms the swaps.
+      const samples = await page.evaluate(
+        (sec) =>
+          new Promise((resolve) => {
+            const out = [];
+            const t0 = performance.now();
+            const tick = () => {
+              const b = window.__vgtdViewer.blink();
+              const t = (performance.now() - t0) / 1000;
+              out.push({ t, ...(b ?? { playing: false, eyes: null, time: 0 }) });
+              if (t < sec) requestAnimationFrame(tick);
+              else resolve(out);
+            };
+            tick();
+          }),
+        seconds,
+      );
+      const closed = samples.filter((x) => x.eyes === 'display 2');
+      const starts = closed
+        .filter((x, i) => i === 0 || x.t - closed[i - 1].t > 0.5)
+        .map((x) => Math.round(x.t * 10) / 10);
+      // unwrap the layer clock over the 10 s loop and compare it with wall time
+      let unwrapped = 0;
+      let prev = samples[0]?.time ?? 0;
+      for (const x of samples) {
+        unwrapped += x.time >= prev ? x.time - prev : x.time + 10 - prev;
+        prev = x.time;
+      }
+      const wall = samples.length ? samples[samples.length - 1].t - samples[0].t : 0;
+      const frameMs = samples.length > 1 ? Math.round((wall / (samples.length - 1)) * 1000) : 0;
+      const info = await page.evaluate('window.__vgtdViewer.info()');
+      report[anim] = {
+        bodyDurationSec: Math.round(info.duration * 100) / 100,
+        layerPlaying: samples.some((x) => x.playing),
+        eyesSeen: [...new Set(samples.map((x) => x.eyes))],
+        blinkStartsSec: starts,
+        renderedFrames: samples.length,
+        meanFrameMs: frameMs,
+        layerClockSec: Math.round(unwrapped * 100) / 100,
+        wallSec: Math.round(wall * 100) / 100,
+      };
+      console.log(anim, JSON.stringify(report[anim]));
+    }
+    writeFileSync(join(out, 'blink.json'), JSON.stringify(report, null, 2));
+    await browser.close();
+    server.close();
+    process.exit(failures ? 1 : 0);
+  }
   if (flag('perf')) {
     // Cache-mode CPU cost: N copies of one animation, median of 5 one-second samples per mode (software GL: compare
     // update/render CPU ms between modes, do not read absolute numbers as device performance).
