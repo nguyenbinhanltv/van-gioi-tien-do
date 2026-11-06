@@ -11,7 +11,6 @@
 import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { assertInside, runBatch, reviewHtml, type BatchReport } from '../src/index.js';
 
 const args = process.argv.slice(2);
@@ -32,21 +31,21 @@ for (const d of report.dirs)
   );
 
 if (args.includes('--capture')) {
-  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+  // run-ts bundles into a temp directory but preserves the original entry in argv[1].
+  const repoRoot = resolve(dirname(process.argv[1]!), '../../..');
   const client = join(repoRoot, 'apps/client-cocos');
   const resources = join(client, 'assets/resources/dragonbones');
   const staged = run.results.map((r) => ({
     dir: r.dir,
     stem: r.project.stem,
     name: `_batch-${report.character}-${r.dir}`,
+    files: [...r.result.files.keys()],
   }));
   for (const s of staged) {
     const target = assertInside(resources, join(resources, s.name));
     rmSync(target, { recursive: true, force: true });
     mkdirSync(target, { recursive: true });
-    const name = `${s.stem}_${s.dir}`;
-    for (const f of [`${name}_ske.json`, `${name}_tex.json`, `${name}_tex.png`])
-      cpSync(join(out, s.dir, f), join(target, f));
+    for (const f of s.files) cpSync(join(out, s.dir, f), join(target, f));
   }
   const build = spawnSync(process.execPath, [join(client, 'scripts/build-web.mjs')], { stdio: 'inherit' });
   if (build.status !== 0) throw new Error('Cocos web build failed (see the log above)');
