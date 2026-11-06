@@ -74,6 +74,9 @@ describe('Thể tu assembly profile', () => {
     expect(Object.keys(THE_TU_PROFILE.ikBend!)).toEqual(['E']);
     expect(THE_TU_PROFILE.gaitByDir!.S!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
     expect(THE_TU_PROFILE.gaitByDir!.SE).toBe(THE_TU_PROFILE.gaitByDir!.S);
+    expect(THE_TU_PROFILE.gaitByDir!.NE).toBe(THE_TU_PROFILE.gaitByDir!.N);
+    expect(THE_TU_PROFILE.gaitByDir!.NE!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
+    expect(THE_TU_PROFILE.gaitByDir!.NE!.crouchScale).toBeLessThan(THE_TU_PROFILE.gaitByDir!.S!.crouchScale);
     expect(THE_TU_PROFILE.gaitByDir!.E).toBeUndefined();
   });
 
@@ -397,6 +400,9 @@ describe('Thể tu per-direction pieces', () => {
     expect(at('arm_R')).toBeLessThan(at('torso'));
     expect(at('tabard_back')).toBeGreaterThan(at('torso'));
     expect(at('tabard_front')).toBeLessThan(at('torso'));
+    expect(at('sash_tail_L')).toBeGreaterThan(at('torso'));
+    expect(at('sash_tail_R')).toBeLessThan(at('tabard_back'));
+    expect(at('sash_set')).toBeGreaterThan(at('tabard_back'));
     expect(at('hair_back')).toBeGreaterThan(at('head'));
     expect(profilePieces(THE_TU_PROFILE, 'N').find((p) => p.id === 'head')!.compose).toEqual(['head']);
     expect(profilePieces(THE_TU_PROFILE, 'N').find((p) => p.id === 'sash_set')!.compose).toEqual(['sash_band']);
@@ -418,6 +424,10 @@ describe('Thể tu per-direction pieces', () => {
     expect(profilePieces(THE_TU_PROFILE, 'NE').find((p) => p.id === 'sash_set')!.compose).toEqual(['sash_band']);
     expect(slots.indexOf('hair_back')).toBeGreaterThan(slots.indexOf('head'));
     expect(slots.at(-1)).toBe('hand_R');
+    // sash tails behind the back panel (only their ends peek below the hem), the band over it
+    expect(slots.indexOf('sash_tail_L')).toBeGreaterThan(slots.indexOf('torso'));
+    expect(slots.indexOf('sash_tail_R')).toBeLessThan(slots.indexOf('tabard_back'));
+    expect(slots.indexOf('sash_set')).toBeGreaterThan(slots.indexOf('tabard_back'));
     expect(slots.indexOf('arm_L')).toBeLessThan(slots.indexOf('torso'));
     expect(slots.indexOf('arm_R')).toBeGreaterThan(slots.indexOf('hair_back'));
   });
