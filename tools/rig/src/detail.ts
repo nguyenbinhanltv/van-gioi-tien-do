@@ -172,7 +172,7 @@ function hash(s: string): number {
 }
 
 /** Frames at which a blink starts: first one inside the clip, then every 3-5 s; none too close to the loop end. */
-export function blinkStarts(clipName: string, frames: number): number[] {
+export function blinkStarts(clipName: string, frames: number, loop = false): number[] {
   const last = frames - 6;
   if (last < 4 || frames < 1.5 * CLIP_FPS) return [];
   let state = hash(clipName) || 1;
@@ -186,7 +186,25 @@ export function blinkStarts(clipName: string, frames: number): number[] {
     out.push(t);
     t += BLINK_MIN + Math.floor(next() * BLINK_SPAN);
   }
+  // a looping clip must not blink twice in a row across the wrap
+  if (loop && out.length > 1 && frames - out[out.length - 1]! + out[0]! < BLINK_MIN) out.pop();
   return out;
+}
+
+/** Name of the independent blink clip (see `authorBlinkCycle`). */
+export const BLINK_CYCLE_CLIP = 'blink_cycle';
+/** Its length: 10 s at 30 fps, so blinks 3-5 s apart fit (the body loops are 0.5-1 s, too short for that). */
+export const BLINK_CYCLE_FRAMES = 10 * CLIP_FPS;
+
+/**
+ * Independent blink clock: a looping, bone-less clip that only keys the eyes slot (open / half / closed, one blink every
+ * 3-5 s). The runtime plays it on its own animation layer next to the body clip, so idle (1 s), walk and every other short
+ * loop blink at a natural rate without baking blinks into each loop. Returns null when the rig has no eyes slot.
+ */
+export function authorBlinkCycle(rig: RigDocument, frames: number = BLINK_CYCLE_FRAMES): Clip | null {
+  const clip: Clip = { name: BLINK_CYCLE_CLIP, frames, loop: true, bones: [], slots: [], ik: [], events: [] };
+  const track = eyesTrack(rig, clip, { blink: true });
+  return track ? { ...clip, slots: [track] } : null;
 }
 
 function resolve(at: At, clip: Clip): number | null {
@@ -239,7 +257,7 @@ function eyesTrack(rig: RigDocument, clip: Clip, rule: ClipDetail): SlotTrack | 
     return { slot, attachment: stepped([{ frame: 0, value: rule.eyes }]) };
   if (!rule.blink || !hasDisplay(rig, slot, D.open)) return null;
   const keys: Key<string | null>[] = [{ frame: 0, value: D.open }];
-  for (const start of blinkStarts(clip.name, clip.frames)) {
+  for (const start of blinkStarts(clip.name, clip.frames, clip.loop)) {
     for (const [state, off] of BLINK_FRAMES) {
       const name = D[state];
       keys.push({ frame: start + off, value: hasDisplay(rig, slot, name) ? name : D.open });

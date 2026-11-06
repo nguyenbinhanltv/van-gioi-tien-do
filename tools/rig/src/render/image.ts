@@ -48,8 +48,16 @@ function chunk(type: string, body: Buffer): Buffer {
   return Buffer.concat([len, td, crc]);
 }
 
-/** Encode as a straight-alpha RGBA PNG. */
-export function encodePng(img: Image): Buffer {
+export interface EncodeOptions {
+  /**
+   * Write the premultiplied colour as it is (a premultiplied atlas page: `premultipliedAlpha: true` in the tex file).
+   * Default false: the PNG is straight alpha (colour un-premultiplied), the usual file format.
+   */
+  readonly premultiplied?: boolean;
+}
+
+/** Encode as an RGBA PNG: straight alpha by default, or raw premultiplied colour with `{ premultiplied: true }`. */
+export function encodePng(img: Image, opts: EncodeOptions = {}): Buffer {
   const { width, height, data } = img;
   const raw = Buffer.alloc((width * 4 + 1) * height);
   for (let y = 0; y < height; y++) {
@@ -58,7 +66,7 @@ export function encodePng(img: Image): Buffer {
       const i = (y * width + x) * 4;
       const a = data[i + 3]!;
       const o = y * (width * 4 + 1) + 1 + x * 4;
-      const un = a === 0 ? 0 : 255 / a; // un-premultiply
+      const un = opts.premultiplied ? 1 : a === 0 ? 0 : 255 / a; // un-premultiply unless writing a premultiplied page
       raw[o] = Math.min(255, Math.round(data[i]! * un));
       raw[o + 1] = Math.min(255, Math.round(data[i + 1]! * un));
       raw[o + 2] = Math.min(255, Math.round(data[i + 2]! * un));
