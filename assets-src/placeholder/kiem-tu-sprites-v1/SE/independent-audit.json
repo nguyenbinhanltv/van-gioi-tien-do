@@ -1,0 +1,29 @@
+{
+  "atlas": {
+    "width": 2048,
+    "height": 2048,
+    "colourAboveAlphaPixels": 0
+  },
+  "files": [
+    {
+      "file": "kiemtu_SE_ske.json",
+      "sha256": "9a129bc407cca2425e07c2779b13c5833795e0f887034b5204a663a0cdb1704b",
+      "rebuildSha256": "9a129bc407cca2425e07c2779b13c5833795e0f887034b5204a663a0cdb1704b"
+    },
+    {
+      "file": "kiemtu_SE_tex.json",
+      "sha256": "851febd77e0331887287fca155211152fc36c03d6a851fe41bf54e876ece4449",
+      "rebuildSha256": "851febd77e0331887287fca155211152fc36c03d6a851fe41bf54e876ece4449"
+    },
+    {
+      "file": "kiemtu_SE_tex.png",
+      "sha256": "1bef0cd166a8d291b4e76bf387b4bf53e3be2362bfeb61e71e5a95be4f3d729c",
+      "rebuildSha256": "1bef0cd166a8d291b4e76bf387b4bf53e3be2362bfeb61e71e5a95be4f3d729c"
+    },
+    {
+      "file": "kiemtu_SE.sprite.json",
+      "sha256": "88d820f57fa7ae0f82a691076bde06a3231a483c5a1a518c885fc6eaf33b686d",
+      "rebuildSha256": "88d820f57fa7ae0f82a691076bde06a3231a483c5a1a518c885fc6eaf33b686d"
+    }
+  ]
+}
