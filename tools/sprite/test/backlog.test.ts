@@ -10,6 +10,7 @@ import {
   classify,
   emptyBacklog,
   loadBacklog,
+  pruneResolved,
   runProject,
   saveBacklog,
   toPremultiplied,
@@ -139,6 +140,25 @@ describe('backlog file', () => {
     expect(backlogMarkdown(b)).toContain(
       '| run | E | 2 | footSlide | slide_px_per_frame_R | 5.1 | 3 | open (17) | polish later |',
     );
+  });
+});
+
+describe('pruneResolved', () => {
+  it('drops resolved entries and adds nothing: a new unlisted soft finding still fails', () => {
+    const b: Backlog = {
+      ...emptyBacklog('kiem-tu'),
+      entries: [entry({ clip: 'walk', cell: 9, note: 'fixed since' })],
+    };
+    const findings = [slide('run', 4, 6)]; // new, unlisted; the walk #9 entry no longer occurs
+    const before = applyBacklog(findings, 'E', b);
+    expect(before.resolved).toHaveLength(1);
+    expect(before.counts['fail-soft']).toBe(1);
+    const pruned = pruneResolved(b, before);
+    expect(pruned.entries).toHaveLength(0); // the resolved entry is gone
+    const after = applyBacklog(findings, 'E', pruned);
+    expect(pruned.entries.some((e) => e.clip === 'run')).toBe(false); // the new finding was NOT added
+    expect(after.counts['fail-soft']).toBe(1);
+    expect(after.ok).toBe(false);
   });
 });
 
