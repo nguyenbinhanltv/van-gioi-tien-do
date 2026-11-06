@@ -7,18 +7,19 @@ Platforms: Web H5 + Mobile + PC, cross-play. This file is mirrored in `AGENTS.md
 
 npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node >= 18, TypeScript strict, vitest.
 
-| Path                        | Package                     | Purpose                                                                                                                     |
-| --------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `packages/shared`           | `@vgtd/shared`              | Constants, iso math, gameplay formulas, JSON schemas + sample data                                                          |
-| `packages/client-core`      | `@vgtd/client-core`         | Input Abstraction Layer, pathfinding, responsive HUD layout (engine-free)                                                   |
-| `packages/character`        | `@vgtd/character`           | Direction model, paperdoll, animation table, footprint/sockets/hitboxes, boss descriptors, definition schemas (engine-free) |
-| `apps/server`               | (placeholder)               | Server MVP, authoritative 20 Hz simulation                                                                                  |
-| `apps/client-cocos`         | (placeholder)               | Cocos Creator project; flips y when rendering shared iso math                                                               |
-| `tools/procgen`             | `@vgtd/procgen`             | Asset generation, QA, atlas packing, compression pipeline                                                                   |
-| `tools/rig`                 | `@vgtd/rig`                 | AI animation authoring: rig schema, animation DSL, DragonBones exporter, automated animation QA (D35/D36)                   |
-| `tools/dragonbones-testrig` | `@vgtd/dragonbones-testrig` | Generates the minimal DragonBones 5.5 test rig used by the Cocos animation viewer (independent of `tools/rig`)              |
-| `docs/`                     | -                           | Design specs (Vietnamese), decision log, open items                                                                         |
-| `.claude/`, `CLAUDE.md`     | -                           | Agent config and project skills                                                                                             |
+| Path                        | Package                     | Purpose                                                                                                                                                      |
+| --------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `packages/shared`           | `@vgtd/shared`              | Constants, iso math, gameplay formulas, JSON schemas + sample data                                                                                           |
+| `packages/client-core`      | `@vgtd/client-core`         | Input Abstraction Layer, pathfinding, responsive HUD layout (engine-free)                                                                                    |
+| `packages/character`        | `@vgtd/character`           | Direction model, paperdoll, animation table, footprint/sockets/hitboxes, boss descriptors, definition schemas (engine-free)                                  |
+| `apps/server`               | (placeholder)               | Server MVP, authoritative 20 Hz simulation                                                                                                                   |
+| `apps/client-cocos`         | (placeholder)               | Cocos Creator project; flips y when rendering shared iso math                                                                                                |
+| `tools/procgen`             | `@vgtd/procgen`             | Asset generation, QA, atlas packing, compression pipeline                                                                                                    |
+| `tools/rig`                 | `@vgtd/rig`                 | AI animation authoring: rig schema, animation DSL, DragonBones exporter, automated animation QA (D35/D36)                                                    |
+| `tools/dragonbones-testrig` | `@vgtd/dragonbones-testrig` | Generates the minimal DragonBones 5.5 test rig used by the Cocos animation viewer (independent of `tools/rig`)                                               |
+| `tools/sprite`              | `@vgtd/sprite`              | Frame-by-frame AI sprite-sheet pipeline for Player bodies (D41): template, slicer, aligner, palette lock, atlas, DragonBones display-swap exporter, QA gates |
+| `docs/`                     | -                           | Design specs (Vietnamese), decision log, open items                                                                                                          |
+| `.claude/`, `CLAUDE.md`     | -                           | Agent config and project skills                                                                                                                              |
 
 Each package owns its own directory. Do not edit another package's files without coordinating through the orchestrator
 session; cross-package needs go through the public `src/index.ts` export.
@@ -46,7 +47,7 @@ DECISIONS entry wins. Use the
 - Third-party or MCP-sourced assets require a license check before use (skill `vgtd-asset-pipeline`).
 - Gameplay defaults decided without a designer (D16-D22 etc.) are marked "cần game designer duyệt khi cân bằng": implement
   them as specified, but do not treat them as final balance.
-- Character skeletal animation: DragonBones, Cocos built-in `dragon-bones` runtime (D35, replaces Spine 4.2 of D25); MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
+- Character animation: Player bodies are AI sprite sheets frame by frame exported as one DragonBones display-swap armature (D41, amends D36/D39/D40; pipeline `@vgtd/sprite`, `docs/art/sprite-sheet-pipeline.md`); skeletal rigs (D35 DragonBones, `@vgtd/rig`) remain for bosses/NPCs; MVP auth is username/password, Google SSO later (D26); hosting is local-only for now (D27).
 - Do not create or edit `.claude/settings.json` (D30): agent permission self-edits are blocked on purpose.
 - Prefer the latest locked decisions in `docs/DECISIONS.md` over memory or older docs. Do not invent gameplay values that
   the docs do not specify; add the gap to `docs/OPEN-ITEMS.md` instead.

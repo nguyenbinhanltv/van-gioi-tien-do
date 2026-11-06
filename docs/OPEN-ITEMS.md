@@ -156,3 +156,9 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 ## 11. Thể tu "chi liền": tư thế đòn đánh chỉ chuẩn cho hướng E
 
 1. Bảng `CLASS_CLIPS['the-tu']` (`tools/rig/src/class-clips.ts`: đấm / móc / chưởng đôi, hit, stance, cast) **không phụ thuộc hướng**, nhưng góc đòn đánh được hiệu chỉnh theo tư thế nghỉ nghiêng của tay Thể tu hướng **E** (`upper_arm` world: R −115°, L −69°; đấm ngang ≈ +115 / −9 trên R, +69 / +10 trên L). Trên S / SE / NE / N và trên rig mẫu (tay nghỉ thẳng đứng) delta +115 đưa nắm đấm lên trên mặt phẳng ngang. Chỉ E đã kiểm trong engine. Khi ráp các hướng còn lại: hiệu chỉnh lại theo từng hướng, hoặc suy góc từ góc nghỉ của rig từng hướng (cần áp cho cả stance / idle / cast để chỗ nối clip không lệch). Sau đó key pose AI (D40) sẽ thay các bảng này.
+
+## 12. Pipeline sprite sheet (D41): ngưỡng mặc định chưa duyệt
+
+1. Các ngưỡng QA của `@vgtd/sprite` là **mặc định chưa được duyệt**: chiều cao ±3 % (theo chủ dự án), trượt chân 3 px/khung, đường nối vòng lặp 2,5×, độ giống master 0,7 (mặt/thân), palette lock strength 0,6 / khoảng cách 60. Cần chỉnh khi có sheet thật của cả 13 animation; **không** nới lỏng cổng chiều cao âm thầm: tư thế giải phẫu phải khai báo `exceptions`.
+2. Một hướng một trang atlas ≤ 2048 (xuất nhiều trang chưa hỗ trợ); bóng chân và cổng trượt chân mới hiểu hướng E.
+3. Mục §10 mục 2 (ngưỡng IoU của key pose D40) không còn áp dụng cho thân Player (D41).

@@ -1,0 +1,31 @@
+{
+  "name": "@vgtd/sprite",
+  "version": "0.1.0",
+  "description": "Frame-by-frame AI sprite-sheet pipeline for Player bodies (D41): template, slicer, aligner, palette lock, atlas, exporter, QA.",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "sprite:template": "node ../rig/scripts/run-ts.mjs scripts/template.ts",
+    "sprite:build": "node ../rig/scripts/run-ts.mjs scripts/build.ts",
+    "sprite:repair": "node ../rig/scripts/run-ts.mjs scripts/repair.ts"
+  },
+  "dependencies": {
+    "@vgtd/character": "*",
+    "@vgtd/rig": "*",
+    "@vgtd/shared": "*"
+  }
+}
