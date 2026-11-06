@@ -101,6 +101,23 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 - **Khóa so khớp:** `clip + dir + cell + gate + metric` (`cell` = chỉ số khung 0-based, `-1` = cấp clip).
 - **Ghi vào backlog là hành động có chủ ý:** `npm run sprite:backlog -w @vgtd/sprite -- --project <project.json> --accept --note "<lý do>" [--owner <worker>] [--prune]` thêm các phát hiện mềm **hiện tại** chưa được ghi (không bao giờ thêm cổng cứng hay hồi quy); không cờ nào thì chỉ báo cáo. `sprite:build` in phán quyết từng phát hiện và thoát 1 nếu còn lỗi cứng, mềm chưa ghi, hoặc hồi quy.
 
+### Phát hiện hình ảnh thủ công
+
+`quality-backlog.json` v1 có thêm mảng `manual` tùy chọn, tách khỏi `entries` chứa số đo tự động.
+Mỗi mục có `kind` (`carry_change`, `weak_reversal`, `redraw_drift`, `hair_spill`, `other`), `clip`, `dir`,
+`cells` (chỉ số từ 0; mảng rỗng áp dụng cả clip), `note`, `severity` và `reviewer: "art-worker"`.
+Giữ nhãn mức độ của người xem (`warn`: lỗi nhìn thấy; `info`: chẩn đoán chưa xác nhận), không quy đổi thành cổng QA.
+Lệnh `sprite:backlog` đếm và liệt kê riêng các mục này; báo cáo batch chuyển chúng tới trang `sprite:review`.
+Chúng không chấp nhận lỗi đo, không thay đổi kết quả cổng build, không nằm trong danh sách tự động đã sửa;
+`--accept` và `--prune` luôn giữ nguyên. Chỉ người xem art mới sửa hoặc xóa sau khi kiểm tra lại.
+Trường `status` tùy chọn (`open`, `planned`, `resolved`, mặc định `open`) chỉ ghi quyết định xem art rõ ràng;
+QA không tự thay đổi nó. Số mục người xem art đã xử lý được hiển thị riêng, không nhập vào số đo tự động đã sửa.
+
+Nhập tệp đồng hành của worker 17 bằng `sprite:backlog --backlog <quality-backlog.json> --import-manual <manual-art-findings.json>`
+(qua npm workspace như hướng dẫn README). Không cần dựng lại art khi nhập. `leg_reversal` đổi thành `weak_reversal`,
+`key_spill` đổi thành `hair_spill`; số chẩn đoán cũ chỉ giữ trong ghi chú, tuyệt đối không tạo `footSlide` giả.
+Sau khi nhập, dựng lại báo cáo batch để trang review nhận các mục mới.
+
 ## Batch + trang duyệt của chủ dự án
 
 - `batch.json` = `{ "character": "kiem-tu", "projects": ["E/project.json", "SE/project.json", ...] }` (đường dẫn tương đối với file batch; mỗi hướng một project, mỗi project có `quality-backlog.json` cạnh nó).
