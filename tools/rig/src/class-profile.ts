@@ -8,6 +8,7 @@
  * with strands, and quyền sáo (gauntlets) WORN on the hands: five displays per side on the `hand_L` / `hand_R` slots.
  * There is no weapon bone, no `weapon_R`, no scabbard and no trail / glint layer.
  */
+import type { Direction } from '@vgtd/shared';
 import type { CharacterId } from './classes.js';
 import { REPLACED_BONES, type PieceSpec } from './continuous.js';
 import type { ChainTemplate } from './classes.js';
@@ -25,11 +26,13 @@ export interface AssemblyProfile {
   /** Detail rules by clip name (display swaps synced to the actions). */
   readonly detail: Readonly<Record<string, ClipDetail>>;
   /** IK constraint name -> `bendPositive`: knees (and elbows) bend toward the facing, unlike the mirrored base rig. */
-  readonly ikBend?: Readonly<Record<string, boolean>>;
+  readonly ikBend?: Readonly<Partial<Record<Direction, Readonly<Record<string, boolean>>>>>;
   /** Class chain templates (see `AssembleInput.extraChains`). */
   readonly chains?: { readonly templates: readonly ChainTemplate[]; readonly groups: readonly DetailGroup[] };
   /** Gait of run / walk / dash (`authorClassSet` and `rig:assemble` use it unless `--gait` says otherwise). */
   readonly gait: GaitProfile;
+  /** Per-direction replacement of `gait` (the stride runs along the screen's vertical axis in S / N: deeper knee for short legs). */
+  readonly gaitByDir?: Readonly<Partial<Record<Direction, GaitProfile>>>;
   /** Weapon rule of the QA gate: a sword is visible (`one`) or no weapon may exist (`none`). */
   readonly qaWeapon: 'one' | 'none';
   /** The class carries a weapon piece borrowed from the old Kiếm tu atlas (only Kiếm tu). */
@@ -67,7 +70,7 @@ const leg = (side: 'L' | 'R'): PieceSpec[] => [
   {
     id: `trouser_hem_${side}`,
     slot: `trouser_hem_${side}`,
-    binding: { kind: 'hanging', template: `trouser_hem_${side}`, cols: 3 },
+    binding: { kind: 'hanging', template: `trouser_hem_${side}`, cols: 3, alongParent: true },
   },
   { id: `boot_${side}`, slot: `boot_${side}`, binding: { kind: 'rigid', bone: `foot_${side}` } },
 ];
@@ -265,6 +268,9 @@ export const THE_TU_CHAINS: { readonly templates: readonly ChainTemplate[]; read
     ],
   };
 
+/** S (front view): the stride is vertical on screen, the legs need more knee bend to reach it without sliding. */
+export const THE_TU_GAIT_S: GaitProfile = { ...THE_TU_GAIT, crouchScale: 0.45 };
+
 export const THE_TU_PROFILE: AssemblyProfile = {
   id: 'the-tu',
   stem: 'thetu',
@@ -275,9 +281,11 @@ export const THE_TU_PROFILE: AssemblyProfile = {
   // stocky tank in trousers: the legs are visible, so keep the stride of the robe gait (two step pairs per clip) but plant
   // harder: a deeper knee than a robe and a higher foot lift than a robe, no splayed squat
   gait: THE_TU_GAIT,
+  gaitByDir: { S: THE_TU_GAIT_S },
   chains: THE_TU_CHAINS,
   // the base rig bends the R knee backward (hidden under a robe in the Kiếm tu pilot); trousers show it as bow legs
-  ikBend: { ik_leg_R: true },
+  // E only: the profile view needs the R knee forward; the other views keep the base rig's bend until checked there
+  ikBend: { E: { ik_leg_R: true } },
   qaWeapon: 'none',
   borrowsSword: false,
 };

@@ -69,6 +69,12 @@ describe('Thể tu assembly profile', () => {
     expect(() => getAssemblyProfile('phap-tu')).toThrow(/no continuous-limb/);
   });
 
+  it('direction-specific tuning: the R knee override is E-only, S has its own deeper-knee gait', () => {
+    expect(Object.keys(THE_TU_PROFILE.ikBend!)).toEqual(['E']);
+    expect(THE_TU_PROFILE.gaitByDir!.S!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
+    expect(THE_TU_PROFILE.gaitByDir!.E).toBeUndefined();
+  });
+
   it('keeps piece ids unique and the slots inside the slot budget', () => {
     const ids = THE_TU_E_PIECES.map((p) => p.id);
     expect(new Set(ids).size).toBe(ids.length);
@@ -222,7 +228,7 @@ describe('class-aware helpers', () => {
       dropBones: THE_TU_PROFILE.dropBones,
       snapIk: true,
       extraChains: THE_TU_PROFILE.chains!,
-      ikBend: THE_TU_PROFILE.ikBend!,
+      ikBend: THE_TU_PROFILE.ikBend!.E!,
     });
     expect(res.skipped).toEqual([]);
     expect(validateRig(res.rig).filter((i) => i.severity === 'error')).toEqual([]);
@@ -241,6 +247,14 @@ describe('class-aware helpers', () => {
     expect(parent('trouser_hem_R_1')).toBe('shin_R');
     for (const id of ['sleeve_cuff_L', 'trouser_hem_L', 'trouser_hem_R'])
       expect(res.rig.skins[0]!.attachments[id]![id]!.type).toBe('mesh');
+    // a wide band lies along its parent: the hem chain starts parallel to the shin whatever the painted outline's slant
+    const rest = evalPose(res.rig, null, 0, { noIk: true });
+    for (const s of ['L', 'R'] as const) {
+      const diff = Math.abs(
+        ((rest.byName.get(`trouser_hem_${s}_1`)!.rotation - rest.byName.get(`shin_${s}`)!.rotation + 540) % 360) - 180,
+      );
+      expect(diff, s).toBeLessThan(0.01);
+    }
     expect(res.stats.bones).toBeLessThanOrEqual(res.stats.limits.bones);
     expect(res.stats.vertices).toBeLessThanOrEqual(res.stats.limits.meshVertices);
     expect(res.stats.slots).toBeLessThanOrEqual(res.stats.limits.slots);

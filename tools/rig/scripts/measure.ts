@@ -21,6 +21,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import type { Direction } from '@vgtd/shared';
 import {
   ASSEMBLY_PROFILES,
   CHARACTER_IDS,
@@ -143,7 +144,8 @@ for (const [dir, d] of data.byDirection) {
             opts.gait || !(opts.assembled && ASSEMBLY_PROFILES[opts.character])
               ? (GAIT_PROFILES[(opts.gait || (opts.assembled ? 'robe' : 'free')) as keyof typeof GAIT_PROFILES] ??
                 GAIT_PROFILES.free)
-              : ASSEMBLY_PROFILES[opts.character]!.gait,
+              : (ASSEMBLY_PROFILES[opts.character]!.gaitByDir?.[dir as Direction] ??
+                ASSEMBLY_PROFILES[opts.character]!.gait),
         });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')

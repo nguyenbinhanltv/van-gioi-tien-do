@@ -82,7 +82,7 @@ const stem = opt('stem', profile?.stem ?? 'kiemtu');
 const gaitName = (opt('gait', '') || (profile ? 'class' : 'robe')) as GaitName | 'class';
 if (gaitName !== 'class' && !(gaitName in GAIT_PROFILES))
   throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
-const gait = gaitName === 'class' ? profile!.gait : GAIT_PROFILES[gaitName];
+const gait = gaitName === 'class' ? (profile!.gaitByDir?.[dir] ?? profile!.gait) : GAIT_PROFILES[gaitName];
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -139,7 +139,7 @@ const res = assembleContinuous({
         dropBones: profile.dropBones,
         snapIk: true,
         ...(profile.chains ? { extraChains: profile.chains } : {}),
-        ...(profile.ikBend ? { ikBend: profile.ikBend } : {}),
+        ...(profile.ikBend?.[dir] ? { ikBend: profile.ikBend[dir] } : {}),
       }
     : {}),
   atlasName: `${stem}_${dir}`,
