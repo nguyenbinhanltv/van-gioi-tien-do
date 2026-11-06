@@ -209,6 +209,9 @@ describe('class-aware helpers', () => {
       ['gauntlet_R_relaxed', rect(90, 124, 112, 165)],
       ['eyes_open', rect(136, 64, 142, 67)],
       ['boot_L', rect(134, 199, 162, 228)],
+      ['sleeve_cuff_L', rect(150, 125, 165, 136)],
+      ['trouser_hem_L', rect(134, 193, 155, 206)],
+      ['trouser_hem_R', rect(102, 194, 127, 207)],
     ]);
     const res = assembleContinuous({
       base: { ...base, id: 'the-tu' },
@@ -218,6 +221,7 @@ describe('class-aware helpers', () => {
       pieces: THE_TU_PROFILE.pieces,
       dropBones: THE_TU_PROFILE.dropBones,
       snapIk: true,
+      extraChains: THE_TU_PROFILE.chains!,
       ikBend: THE_TU_PROFILE.ikBend!,
     });
     expect(res.skipped).toEqual([]);
@@ -227,6 +231,16 @@ describe('class-aware helpers', () => {
     expect(res.rig.slots.find((s) => s.name === 'hand_L')!.attachment).toBe('gauntlet_L_relaxed');
     expect(Object.keys(res.rig.skins[0]!.attachments.hand_L!)).toEqual(['gauntlet_L_relaxed', 'gauntlet_L_fist']);
     expect(res.rig.ik!.find((k) => k.name === 'ik_leg_R')!.bendPositive).toBe(true);
+    // cuffs and trouser hems are chains hanging from the forearm / shin, in the shared sleeve_group and the hem_group
+    const chain = (n: string) => res.rig.chains!.find((c) => c.name === n)!;
+    expect(chain('sleeve_group').bones).toEqual(['sleeve_edge_L_1']);
+    expect(chain('hem_group').bones).toEqual(['trouser_hem_L_1', 'trouser_hem_R_1']);
+    const parent = (n: string) => res.rig.bones.find((b) => b.name === n)!.parent;
+    expect(parent('sleeve_edge_L_1')).toBe('lower_arm_L');
+    expect(parent('trouser_hem_L_1')).toBe('shin_L');
+    expect(parent('trouser_hem_R_1')).toBe('shin_R');
+    for (const id of ['sleeve_cuff_L', 'trouser_hem_L', 'trouser_hem_R'])
+      expect(res.rig.skins[0]!.attachments[id]![id]!.type).toBe('mesh');
     expect(res.stats.bones).toBeLessThanOrEqual(res.stats.limits.bones);
     expect(res.stats.vertices).toBeLessThanOrEqual(res.stats.limits.meshVertices);
     expect(res.stats.slots).toBeLessThanOrEqual(res.stats.limits.slots);

@@ -12,7 +12,8 @@ import { RIG_LIMITS } from '@vgtd/character';
 import { applyLandmarks, snapIkTargets, type Landmarks } from './landmarks.js';
 import { spineWeights } from './tabard.js';
 import { buildLimbMesh, buildSkirtMesh, type CanvasView } from './limb.js';
-import { DETAIL_CHAINS, DETAIL_GROUPS } from './detail.js';
+import { DETAIL_CHAINS, DETAIL_GROUPS, type DetailGroup } from './detail.js';
+import type { ChainTemplate } from './classes.js';
 import { applyMat, invertMat, type Vec2 } from './math.js';
 import { evalPose } from './pose.js';
 import { createImage, type Image } from './render/image.js';
@@ -198,6 +199,8 @@ export interface AssembleInput {
   readonly dropBones?: readonly string[];
   /** Move the IK targets onto the new ankles / wrists (a class whose art differs from the base rig, `snapIkTargets`). */
   readonly snapIk?: boolean;
+  /** Class-specific chain templates and groups next to `DETAIL_CHAINS` / `DETAIL_GROUPS` (Thể tu trouser hems). */
+  readonly extraChains?: { readonly templates: readonly ChainTemplate[]; readonly groups: readonly DetailGroup[] };
   /** IK constraint name -> `bendPositive` override (the base rig mirrors the knees; visible trousers need both forward). */
   readonly ikBend?: Readonly<Record<string, boolean>>;
   readonly atlasName?: string;
@@ -423,8 +426,10 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
   const withLandmarks = input.snapIk ? snapIkTargets(landmarked) : landmarked;
   let bones: RigBone[] = [...withLandmarks.bones];
   const chains: RigChain[] = [];
-  const templates = new Map(DETAIL_CHAINS.map((t) => [t.name, t]));
-  const groupOf = new Map(DETAIL_GROUPS.flatMap((g) => g.members.map((m) => [m, g] as const)));
+  const templates = new Map([...DETAIL_CHAINS, ...(input.extraChains?.templates ?? [])].map((t) => [t.name, t]));
+  const groupOf = new Map(
+    [...DETAIL_GROUPS, ...(input.extraChains?.groups ?? [])].flatMap((g) => g.members.map((m) => [m, g] as const)),
+  );
   const hangingIds = new Map<string, string[]>();
 
   // composed pieces (several part files drawn into one piece) come first: chains and meshes use the composites

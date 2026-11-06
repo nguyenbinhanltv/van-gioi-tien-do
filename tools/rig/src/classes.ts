@@ -37,7 +37,7 @@ export interface ChainTemplate {
   readonly name: string;
   readonly kind: ChainKind;
   /** Role bone the chain hangs from. */
-  readonly parent: 'head' | 'hips' | 'spine_upper' | 'lower_arm_L' | 'lower_arm_R' | 'hand_R';
+  readonly parent: 'head' | 'hips' | 'spine_upper' | 'lower_arm_L' | 'lower_arm_R' | 'hand_R' | 'shin_L' | 'shin_R';
   readonly segments: number;
   /** Segment length in px. */
   readonly length: number;
