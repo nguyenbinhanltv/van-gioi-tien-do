@@ -195,11 +195,9 @@ if (keyDir) {
     );
     const fitsRaw = lms.map((lm) => fitPose(res.rig, lm, view));
     // phases / events from the animation-table gait (free), whatever --gait says: the key poses carry their own stride
-    const table = authorKiemTuSet(res.rig, {
-      only: [clipName as never],
-      secondary: false,
-      gait: GAIT_PROFILES.free,
-    })[0];
+    // (a class takes the phases of its own strikes: its clip table, not the Kiếm tu one)
+    const tableOpts = { only: [clipName as never], secondary: false, gait: GAIT_PROFILES.free };
+    const table = (profile ? authorClassSet(character, res.rig, tableOpts) : authorKiemTuSet(res.rig, tableOpts))[0];
     const outFits: { fits?: typeof fitsRaw; impliedSpeedPxS?: number | null; tableSpeedPxS?: number | null } = {};
     const base = authorKeyPoseClip(
       res.rig,
@@ -212,7 +210,12 @@ if (keyDir) {
       outFits,
     );
     const fits = outFits.fits ?? fitsRaw;
-    const finished = applyDetail(res.rig, bakeSecondaryMotion(res.rig, { ...base, phases: table?.phases ?? {} }));
+    // the class's detail rules (Thể tu gauntlet / face swaps), not the Kiếm tu defaults
+    const finished = applyDetail(
+      res.rig,
+      bakeSecondaryMotion(res.rig, { ...base, phases: table?.phases ?? {} }),
+      profile?.detail,
+    );
     const at = keyPoseFrames(clipName, spec.frames, table?.phases, table?.events);
     if (outFits.tableSpeedPxS) {
       const implied = outFits.impliedSpeedPxS ?? 0;

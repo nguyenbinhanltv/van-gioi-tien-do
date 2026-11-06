@@ -1,4 +1,4 @@
-/** Deterministic TRACK 2 art preparation. Geometry is supplied by the art manifest. */
+/** Deterministic character-part preparation from explicit master, geometry and material inputs. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
@@ -16,14 +16,20 @@ for (let i = 2; i < process.argv.length; i++) {
     continue;
   }
   const key = arg.slice(2);
-  if (!['source', 'dir', 'manifest', 'master'].includes(key) || !process.argv[i + 1])
+  if (
+    !['source', 'dir', 'manifest', 'master'].includes(key) ||
+    !process.argv[i + 1] ||
+    process.argv[i + 1].startsWith('--')
+  )
     throw new Error(`Unknown or incomplete option ${arg}`);
   options[key] = process.argv[++i];
 }
 const mode = positional[0] ?? 'process';
-const defaultSource = path.join(root, 'assets-src/placeholder/kiem-tu-continuous-v1');
-const source = options.source ? path.resolve(root, options.source) : defaultSource;
+if (!['process', 'masks', 'check'].includes(mode)) throw new Error(`Unsupported mode ${mode}`);
+if (!options.source) throw new Error('Provide --source <character source directory>');
+const source = path.resolve(root, options.source);
 const direction = options.dir ?? 'E';
+if (!/^[a-zA-Z0-9_-]+$/.test(direction)) throw new Error('Direction must be a single safe path segment');
 const manifestPath = path.resolve(
   root,
   options.manifest ??
@@ -37,8 +43,19 @@ const masterPath = options.master
     : path.join(source, `reference/${direction}.master4x.png`);
 const master = decodePNG(fs.readFileSync(masterPath));
 if (master.width !== 512 || master.height !== 512) throw new Error('Master must be a 512x512 @4x RGBA image');
-if (source !== defaultSource && !manifest.paletteSamples)
-  throw new Error('A different character must supply paletteSamples in its geometry manifest');
+if (!manifest.paletteSamples || !Object.keys(manifest.paletteSamples).length)
+  throw new Error('Provide paletteSamples in the geometry manifest');
+if (!Array.isArray(manifest.parts) || !manifest.parts.length) throw new Error('Provide a non-empty parts list');
+const ids = new Set();
+for (const part of manifest.parts) {
+  if (typeof part.id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(part.id) || ids.has(part.id))
+    throw new Error('Part IDs must be unique safe path segments');
+  if (!Array.isArray(part.materials) || !part.materials.length) throw new Error(`${part.id}: provide materials`);
+  for (const region of part.materialRegions ?? [])
+    if (!part.materials.includes(region.material))
+      throw new Error(`${part.id}: materialRegions: undeclared material ${String(region.material)}`);
+  ids.add(part.id);
+}
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const luminance = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 const silhouette = new Uint8Array(512 * 512);
@@ -128,42 +145,8 @@ function material(c) {
 }
 
 const palettes = {};
-const sampleRegions = manifest.paletteSamples ?? {
-  cloth: [
-    [115, 91, 124, 115],
-    [120, 118, 126, 126],
-    [113, 197, 139, 201],
-  ],
-  skin: [
-    [134, 54, 142, 65],
-    [123, 136, 128, 143],
-  ],
-  blue: [
-    [114, 146, 136, 180],
-    [127, 88, 133, 107],
-  ],
-  gold: [
-    [111, 190, 136, 194],
-    [118, 80, 122, 83],
-  ],
-  jade: [[99, 31, 109, 39]],
-  hair: [
-    [108, 54, 119, 101],
-    [117, 209, 125, 222],
-  ],
-};
-const paletteFilters =
-  manifest.paletteFilters ??
-  (source === defaultSource
-    ? {
-        cloth: { minLuma: 145 },
-        hair: { maxLuma: 125 },
-        blue: { maxLuma: 180, maxRedMinusBlue: 5 },
-        skin: { minLuma: 140 },
-        gold: { minLuma: 110, minRedMinusBlue: 12 },
-        jade: { minGreenMinusRed: 4, minGreenMinusBlue: -3 },
-      }
-    : {});
+const sampleRegions = manifest.paletteSamples;
+const paletteFilters = manifest.paletteFilters ?? {};
 for (let y = 0; y < master.height; y++)
   for (let x = 0; x < master.width; x++) {
     const c = master.getPixel(x, y);
@@ -299,6 +282,10 @@ function processPart(part) {
         }
       if (hi >= lo) rows.push({ y, lo, hi });
     }
+    if (!rows.length)
+      throw new Error(
+        'contour registration needs opaque (alpha>=128) source paint; use registration: bounds for translucent pieces',
+      );
     for (let y = target.y0; y <= target.y1; y++) {
       let lo = 512,
         hi = -1;
@@ -406,38 +393,16 @@ function processPart(part) {
   };
 }
 
-if (mode === 'licenses') {
-  if (source !== defaultSource || direction !== 'E')
-    throw new Error('The KT3 license writer is Kiếm tu E specific; maintain other character provenance separately');
-  const filename = path.join(root, 'docs/ASSET-LICENSES.md');
-  const marker = '\n## KT3 — Kiếm tu chi liền, pilot E (2026-11-06 UTC)\n';
-  const previous = fs.readFileSync(filename, 'utf8').split(marker)[0];
-  const entries = manifest.parts
-    .map((p) => path.join(source, 'raw', direction, `${p.id}.generation.json`))
-    .concat(
-      fs.existsSync(path.join(source, 'raw', direction, 'history'))
-        ? fs
-            .readdirSync(path.join(source, 'raw', direction, 'history'))
-            .filter((p) => p.endsWith('.generation.json'))
-            .map((p) => path.join(source, 'raw', direction, 'history', p))
-        : [],
-    )
-    .filter(fs.existsSync)
-    .map((p) => JSON.parse(fs.readFileSync(p, 'utf8')));
-  let section =
-    marker +
-    '\nNguồn gốc: master concept A / KT2 (`assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png`), phóng bằng Lanczos tiền nhân alpha lên @4x. Các mảnh mới do `image_gen.imagegen` sinh riêng từ master và mask vùng; model **không công bố (undisclosed)**; CLI `codex-cli 0.164.0`. Chủ art tạm: người dùng. Điều khoản công cụ: https://openai.com/policies/row-terms-of-use/ ; giữ nhãn placeholder của KT2, cần duyệt nguồn gốc và quyền sử dụng trước phát hành. Không thêm nguồn bên thứ ba.\n\nHậu xử lý bằng mã `tools/procgen/scripts/continuous_parts.mjs`: bỏ halo alpha / đốm rời, đăng ký bounding box về mask, chuyển bảng màu theo từng vật liệu bằng mẫu từ master (75% màu mẫu, 25% ảnh sinh), giới hạn silhouette nghỉ trong biên master + 2 px @2x, downsample @4x→@2x. Mask hình học và nhãn vật liệu được tác giả chỉnh thủ công trong `E.parts.json`; mốc khớp chỉnh thủ công trong `E/landmarks.json`. Không tô pixel thủ công lên ảnh đầu ra. Ánh sáng NW và đồng nhất phong cách vẫn phải duyệt bằng mắt; đăng ký không tự chứng minh cổng QA.\n\nĐường dẫn ảnh thô được chọn: `assets-src/placeholder/kiem-tu-continuous-v1/raw/E/<id>.png`; ảnh RGBA @2x: `assets-src/placeholder/kiem-tu-continuous-v1/E/<id>.png`; mask tái tạo từ manifest bằng lệnh `node tools/procgen/scripts/continuous_parts.mjs masks <thư-mục-tạm>`. Mỗi JSON cạnh ảnh thô giữ prompt và tham chiếu gốc.\n';
-  section +=
-    '\n[Cập nhật KT3] Đăng ký cuối dùng cross-section liên tục cho thân, chi, vạt váy, nút đai và dải tóc; các chi tiết nhỏ dùng area resampling để không mất nét mắt/miệng. Các chỉnh sửa mask thủ công gồm bổ sung búi tóc riêng, mở rộng cổ/ngực dưới đầu, cạnh trước vạt váy và nút đai; giữ cả mask lúc sinh (`raw/E/<id>.mask.png`) và guide cuối trong manifest. PNG nguồn là straight alpha; chỉ atlas/export là PMA. Bóng riêng giới hạn alpha 20%. Kiểm tra rest composite chạy bằng mode `check`; không thay thế kiểm tra mesh khi chuyển động.\n';
-  section +=
-    '\nChỉnh bảng màu ngọc (không đổi alpha): thêm mẫu jade riêng từ trâm concept A cho trâm và mặt dây; tránh ánh xanh ngọc bị phân loại thành vải xanh hoặc vàng. Đây là hậu xử lý màu bằng mã, không phải lần sinh ảnh mới.\n';
-  section +=
-    '\n[Cập nhật KT3 — quần ngà và lót khe váy] Hai chân sinh lại từ master, chân cũ và mask; giữ ảnh/prompt cũ trong raw/E/history. Nhãn vật liệu chỉnh thủ công: quần ngà, boot charcoal, viền đế sáng; nếp lót ngà rộng 6 px @2x ở cạnh sau robe_front và cạnh trước robe_back, giữ các dải gấu vàng riêng. Hậu xử lý màu bằng mã, không tô pixel thủ công; alpha từng chân/panel và landmarks giữ nguyên. Rest composite maxExtra/maxMissing 2 px.\n';
-  for (const e of entries)
-    section += `\n### KT3 / ${e.id}\n\n- UTC bắt đầu: ${e.utcStart}; công cụ: ${e.tool}; model: ${e.model}; CLI: ${e.cli}.\n- Đầu vào: master E @4x + mask riêng của mảnh từ manifest. Đầu ra: \`${e.selectedOutput}\`.\n- Prompt đầy đủ:\n\n\`\`\`text\n${e.prompt}\n\`\`\`\n`;
-  fs.writeFileSync(filename, previous + section);
-  console.log(`Logged ${entries.length} generation prompts`);
-} else if (mode === 'check') {
+if (mode === 'check') {
+  if (!Array.isArray(manifest.restOrder) || !manifest.restOrder.length)
+    throw new Error('check requires a non-empty restOrder');
+  const unknown = manifest.restOrder.filter((id) => !ids.has(id));
+  if (unknown.length) throw new Error(`restOrder: unknown part ${unknown.map(String).join(', ')}`);
+  const active = new Set();
+  for (const id of manifest.restOrder) {
+    if (active.has(id)) throw new Error(`restOrder: duplicate part ${id}`);
+    active.add(id);
+  }
   const master2x = manifest.reference2x
     ? decodePNG(fs.readFileSync(path.resolve(root, manifest.reference2x)))
     : resizeArea(master, 256, 256);
@@ -495,15 +460,19 @@ if (mode === 'licenses') {
   for (const part of manifest.parts) maskFor(part).save(path.join(out, `${part.id}_mask4x.png`));
   console.log(`Wrote ${manifest.parts.length} part masks`);
 } else {
+  const skipped = [];
   const reports = manifest.parts
     .map((part) => {
       try {
-        return processPart(part);
+        const report = processPart(part);
+        if (!report) skipped.push(part.id);
+        return report;
       } catch (error) {
         throw new Error(`${part.id}: ${error.message}`, { cause: error });
       }
     })
     .filter(Boolean);
+  if (skipped.length) console.error(`Skipped parts with missing raw PNGs: ${skipped.join(', ')}`);
   const out = positional[1];
   if (out)
     fs.writeFileSync(

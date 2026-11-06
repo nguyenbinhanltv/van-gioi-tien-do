@@ -1,82 +1,124 @@
-# Continuous-part preparation
+# Deterministic character-part preparation
 
-`scripts/continuous_parts.mjs` prepares separately generated full-canvas art. Defaults retain the Kiếm tu E workflow. Other characters supply their own geometry, palette samples and registered master; no game dependencies or environment changes are required.
+`scripts/continuous_parts.mjs` prepares registered, transparent character parts from an
+explicit master and geometry/material manifest. It contains no character art, palette
+coordinates or character-specific license writer.
 
-```sh
-node tools/procgen/scripts/continuous_parts.mjs masks <temporary-mask-dir> --source assets-src/placeholder/the-tu-continuous-v1 --dir E
-node tools/procgen/scripts/continuous_parts.mjs process <temporary-report.json> --source assets-src/placeholder/the-tu-continuous-v1 --dir E
-node tools/procgen/scripts/continuous_parts.mjs check <temporary-registration.json> --source assets-src/placeholder/the-tu-continuous-v1 --dir E
+The workspace entry point is `npm run prep:parts -w @vgtd/procgen -- <mode> <flags>`.
+
+```bash
+node tools/procgen/scripts/continuous_parts.mjs process report.json \
+  --source assets-src/placeholder/my-character \
+  --dir E \
+  --manifest assets-src/placeholder/my-character/E.parts.json \
+  --master assets-src/placeholder/my-character/reference/E.register-master4x.png
+
+# Same inputs; independently measure the rest composite against the master.
+node tools/procgen/scripts/continuous_parts.mjs check registration.json \
+  --source assets-src/placeholder/my-character --dir E
+
+# Generate full-canvas part-region guides before image generation.
+node tools/procgen/scripts/continuous_parts.mjs masks /tmp/part-guides \
+  --source assets-src/placeholder/my-character --dir E
 ```
 
-Options, relative to the repository root (absolute paths also work):
+Paths supplied in flags or `reference4x`/`reference2x` resolve from the repository root;
+absolute paths are supported. `--source` is required. The manifest defaults to
+`<source>/<dir>.parts.json`; the direction defaults to `E`. `--master` overrides
+`reference4x`, otherwise `<source>/reference/<dir>.master4x.png` is used. Masters are
+512x512 RGBA. Palette and geometry coordinates are in the corresponding 256x256 @2x
+canvas, x right/y down. `paletteSamples` rectangles have inclusive bounds.
 
-- `--source`: class source root. Input `raw/<dir>/<id>.png`, output `<dir>/<id>.png`.
-- `--dir`: direction, default `E`.
-- `--manifest`: geometry manifest, default `<source>/<dir>.parts.json`.
-- `--master`: registered 512×512 RGBA @4x master, default manifest `reference4x` or `<source>/reference/<dir>.master4x.png`.
-
-The generation reference may be retained separately. Use the **registered** master for palette/outer-silhouette preparation. Store the actual generation reference and masks in provenance; changing a registration guide does not change the history of the generation input.
-
-Minimal geometry manifest (coordinates are @2x texture pixels, x right / y down):
+`masks <output-directory> <manifest-path>` also accepts the manifest as a third positional
+argument. `--manifest` takes precedence when both are supplied.
 
 ```json
 {
-  "reference4x": "assets-src/placeholder/the-tu-continuous-v1/reference/E.registered4x.png",
-  "reference2x": "assets-src/placeholder/the-tu-continuous-v1/reference/E.registered2x.png",
+  "reference4x": "assets-src/placeholder/my-character/reference/E.register-master4x.png",
   "paletteSamples": {
-    "cloth": [[100, 80, 110, 100]],
-    "skin": [[120, 50, 130, 60]],
-    "boots": [[115, 215, 125, 225]]
+    "cloth": [[100, 100, 110, 120]],
+    "gold": [[115, 100, 118, 120]]
   },
-  "paletteFilters": {
-    "cloth": { "minLuma": 145 },
-    "skin": { "minLuma": 80 }
-  },
+  "paletteFilters": { "cloth": { "minLuma": 145 } },
   "edgeDefringe": true,
+  "silhouetteMargin4x": 2,
   "parts": [
     {
-      "id": "leg_R",
-      "materials": ["cloth", "boots"],
+      "id": "sleeve",
+      "materials": ["cloth", "gold"],
       "registration": "contour",
       "polygons": [
         [
-          [110, 120],
-          [125, 120],
-          [125, 220],
-          [110, 220]
+          [100, 85],
+          [115, 85],
+          [120, 140],
+          [100, 140]
         ]
       ],
+      "sourceQuarterTurns": 0,
+      "sourceBounds4x": [0, 180, 511, 440],
       "materialRegions": [
         {
-          "material": "boots",
+          "material": "gold",
           "polygon": [
-            [100, 205],
-            [145, 205],
-            [145, 235],
-            [100, 235]
+            [100, 135],
+            [120, 135],
+            [120, 140],
+            [100, 140]
           ]
         }
       ]
     }
   ],
-  "restOrder": ["leg_R"]
+  "restOrder": ["sleeve"]
 }
 ```
 
-The numbers above are schema examples, **not Thể tu landmarks or sample regions**. The art owner must author them for their master.
+Input pieces are `<source>/raw/<dir>/<id>.png`, straight alpha at any square resolution;
+they are normalized to 512 before processing. Outputs are full-canvas
+`<source>/<dir>/<id>.png`, **256x256 straight alpha**. Packing/export owns PMA conversion;
+do not premultiply these source PNGs. Existing atlas packers are unchanged. Continuous
+rig packing remains in `@vgtd/rig`; this CLI does not export or repack a rig.
 
-`paletteSamples` is required for another character; each rectangle is inclusive. Samples use master alpha ≥240. Optional filters are `minLuma`, `maxLuma`, `minRedMinusBlue`, `maxRedMinusBlue`, `minGreenMinusRed`, `minGreenMinusBlue`. Other characters have no implicit Kiếm tu filters. Use explicit `materialRegions` for mixed pieces: regions are tested in order; remaining pixels use the first material when regions are supplied. Every material needs non-empty master samples.
+The processing order is normalization, optional clockwise quarter turns, source-region
+selection, alpha cleanup, registration, exclusions, palette transfer, master-silhouette
+clamp, optional defringe, then alpha-weighted area downsampling. Palette transfer blends
+75% ranked master samples with 25% generated colour. Alpha cleanup removes disconnected
+speckles and translucent haze away from opaque paint. Defringe replaces unusually light
+semitransparent edge RGB with the nearest opaque interior colour without changing alpha.
 
-Masks accept `polygons` and rounded `segments` (`{a:[x,y],b:[x,y],r:number}`). `registration` chooses `contour` (continuous cross-sections) or `bounds` (preserves generated feature shape). The default retains existing structural-name rules. Optional per-part `sourceBounds4x: [x0,y0,x1,y1]` clears pixels outside inclusive bounds on the normalized 512 canvas before registration; use it to select an ivory sleeve without a generated blue shoulder cap. It does not crop/recenter the shared canvas. Optional `edgeDefringe` replaces unusually light semitransparent edge RGB with the nearest opaque interior colour, without eroding alpha; it defaults off to retain existing Kiếm tu pixels.
+- `paletteSamples` is required and may use arbitrary material names. Optional filters:
+  `minLuma`, `maxLuma`, `minRedMinusBlue`, `maxRedMinusBlue`, `minGreenMinusRed`,
+  `minGreenMinusBlue`. Luma uses 0-255; channel-difference thresholds may be negative.
+- `materialRegions` are tested in order and override inferred colour labels. Remaining
+  pixels use the first declared material when explicit regions are supplied. A single
+  material always uses that material. Otherwise a coarse cloth/skin/hair/blue/gold
+  classifier applies; optional `materialAliases`, such as `{"skin":"gold"}`, remaps it.
+  Every region material must be declared in the part's `materials` list.
+- Guides combine `polygons` and rounded `segments` (`{ "a":[x,y], "b":[x,y], "r":5 }`).
+  `registration: "contour"` fits continuous cross-sections; `"bounds"` keeps feature
+  shape while fitting its bounds. Common structural arm/leg/torso/robe names default to
+  contour fitting; other IDs default to bounds. Explicit registration is recommended.
+  Contour fitting needs source paint with alpha >=128; use bounds registration for
+  uniformly translucent pieces to retain their opacity.
+- `sourceQuarterTurns`: clockwise 0-3, default 0, before `sourceBounds4x` selection.
+  Bounds are inclusive `[x0,y0,x1,y1]` on the rotated, normalized **512** canvas; they
+  clear outside pixels without recentering.
+- `excludePolygons`: registered @2x polygons cleared after fitting, for neckline or
+  other interior windows. They preserve the outer registration contour.
+- `clipToMaster: false`: let an inactive display swap keep a different silhouette.
+  Its geometry guide still applies. Default true; shadow/trail/glint are exempt.
+- `silhouetteMargin4x`: Euclidean master-alpha dilation radius at 512, default 3,
+  range 0-16. Tighten it to reduce diagonal overshoot after downsampling.
+- `restOrder`: active rest displays, back to front; exclude inactive swaps/effects.
+  `check` requires declared, unique IDs in this list. It compares the complete rest alpha composite with
+  `reference2x`, or an area downsample of the registered master if omitted, and fails
+  if either maximum boundary distance exceeds **2 texture px** at alpha >=128. A
+  processing-margin change never relaxes this independent threshold. Distances larger
+  than 20 px are capped at 20 in the report and still fail.
 
-Outputs are **256×256 straight-alpha PNGs**. PMA conversion belongs only to packing/export. `check` independently measures the complete rest composite against `reference2x` (or an area downsample of the registered @4x master), reporting maximum boundary distances in both directions; it fails above 2 texture px. It does not validate animation, mesh deformation or style. `restOrder` must list active rest displays only, excluding the shadow/effects and inactive swaps.
-
-Optional per-part `sourceQuarterTurns` rotates the normalized 512 canvas clockwise by 0–3 quarter turns, before `sourceBounds4x` and registration (default 0). Crop coordinates refer to the rotated 512 canvas. Optional `clipToMaster: false` skips the rest-master silhouette clamp for alternate hand displays or other non-rest parts; their geometry guides still apply. Keep inactive variants out of `restOrder`; the independent rest check is unchanged.
-
-Optional per-part `excludePolygons` is an array of polygons in registered @2x coordinates. Matching pixels are cleared after contour/bounds fitting and before material transfer/downsampling, allowing an interior neckline window without changing the outer contour. Default: no exclusions.
-
-Optional per-part `materialAliases`, for example `{"skin":"gold"}`, remaps the inferred colour classifier for mixed-material pieces. Explicit `materialRegions` always win, and a single-material part keeps its declared material. Defaults are unchanged.
-
-Optional `silhouetteMargin4x` sets the Euclidean master-alpha dilation radius at the 512 stage (default 3, range 0–16). A tighter value such as 2 can reduce diagonal overshoot after downsampling. This is a processing margin, not an acceptance threshold: the independent `check` still requires maximum extra and missing boundary distances ≤2 px @2x.
-
-The `licenses` subcommand remains Kiếm tu E specific; other art workers maintain their own prompt/tool/model-undisclosed/CLI/UTC provenance. Existing no-option commands and the legacy `masks <out> <manifest>` form remain supported.
+`process` permits partial generation cohorts (missing raw files are skipped and their IDs
+are listed on stderr). `check`
+requires every manifest part output. Its report validates rest registration, not mesh
+deformation, lighting, animation, or style. Keep generation prompts, tool/model/CLI/UTC
+and manual processing provenance with the source asset and the project's license log.
