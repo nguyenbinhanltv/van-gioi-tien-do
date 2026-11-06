@@ -13,3 +13,5 @@ export * from './export.js';
 export * from './qa.js';
 export * from './backlog.js';
 export * from './project.js';
+export * from './review.js';
+export * from './batch.js';

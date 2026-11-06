@@ -29,3 +29,6 @@ apps/client-cocos/assets/resources/dragonbones/viewer.meta
 apps/client-cocos/assets/resources/dragonbones/viewer/
 # stray git-lfs hook stubs written when core.hooksPath=/dev/null resolves relatively (Git for Windows)
 /dev/
+
+# staged sprite batches (sprite:batch --capture)
+apps/client-cocos/assets/resources/dragonbones/_batch-*

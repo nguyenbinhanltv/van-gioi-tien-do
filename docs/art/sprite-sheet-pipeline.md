@@ -77,6 +77,13 @@ Mỗi nhân vật có `quality-backlog.json` (cạnh `project.json`, hoặc `pro
 - **Khóa so khớp:** `clip + dir + cell + gate + metric` (`cell` = chỉ số khung 0-based, `-1` = cấp clip).
 - **Ghi vào backlog là hành động có chủ ý:** `npm run sprite:backlog -w @vgtd/sprite -- --project <project.json> --accept --note "<lý do>" [--owner <worker>] [--prune]` thêm các phát hiện mềm **hiện tại** chưa được ghi (không bao giờ thêm cổng cứng hay hồi quy); không cờ nào thì chỉ báo cáo. `sprite:build` in phán quyết từng phát hiện và thoát 1 nếu còn lỗi cứng, mềm chưa ghi, hoặc hồi quy.
 
+## Batch + trang duyệt của chủ dự án
+
+- `batch.json` = `{ "character": "kiem-tu", "projects": ["E/project.json", "SE/project.json", ...] }` (đường dẫn tương đối với file batch; mỗi hướng một project, mỗi project có `quality-backlog.json` cạnh nó).
+- `npm run sprite:batch -w @vgtd/sprite -- --batch <batch.json> --out <dir> [--capture] [--keep-staged] [--allow-errors]`: build + QA mọi hướng của nhân vật, ghi `<out>/<DIR>/<stem>_<DIR>_{ske,tex}.json`, `_tex.png`, `.sprite.json`, `batch-report.json` (trạng thái từng clip: `ok` / `warn` (chỉ có mục backlog đã chấp nhận) / `fail`) và `index.html`. Thoát 1 nếu một hướng lỗi cổng cứng, phát hiện mềm chưa ghi, hoặc hồi quy.
+- `--capture`: chép từng hướng vào `apps/client-cocos/assets/resources/dragonbones/_batch-<nhân vật>-<DIR>` (git-ignored), build web Cocos **một lần**, chụp mọi clip bằng runtime thật ở **2×** (`--zoom 2 --sample midpoint`) vào `<out>/<DIR>/capture/<clip>.gif`, rồi xóa thư mục tạm (trừ `--keep-staged`). Cần Cocos Creator 3.8.8 và Chrome.
+- `npm run sprite:review -w @vgtd/sprite -- --out <dir> --reports <a/batch-report.json> <b/batch-report.json> ...`: một trang `index.html` cho **mọi nhân vật / hướng / clip** với GIF 2× và trạng thái QA (chép GIF và hợp đồng vào `<out>/<nhân vật>/<DIR>/`), để chủ dự án duyệt.
+
 ## Cổng QA
 
 | Cổng               | Quy tắc                                                                                                                                                                                                                                                                                                                                          |
