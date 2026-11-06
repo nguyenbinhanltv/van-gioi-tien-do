@@ -296,28 +296,39 @@
       "resultSha256": "46c285e9580679197b953f53a83a919cecfc633cf7000c21b702e97abe85860d"
     }
   ],
-  "postprocess": "Shared @vgtd/sprite pipeline at commit 6704de84e918b924d717e5adf9fe57a3c982530e: chroma key, edge defringe plus palette-aware interior spill cleanup,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048PMA atlas with padding2/extrude1. Source repairCell replacements and masked AI texture patches are audited by SHA256 in E/repair-inputs/*.repair-proof.json. Unchanged cells and pixels outside hit masks are verified by equal before/after RGBA hashes. D41 backlog records14 soft findings; no contact guesses, speed or threshold changes.",
+  "postprocess": "Shared @vgtd/sprite pipeline at commit 00d4d4a49144c8ea28af918ba305e23d8a620f49: chroma key, edge defringe plus palette-aware interior spill cleanup,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048PMA atlas with padding2/extrude1. Source repairCell replacements and masked AI texture patches are audited by SHA256 in E/repair-inputs/*.repair-proof.json. Unchanged cells and pixels outside hit masks are verified by equal before/after RGBA hashes. D41 backlog records14 soft findings; no contact guesses, speed or threshold changes.",
   "capture": "Actual Cocos3 WebGL, single E, World scale1/2, paused midpoint source-pose contact sheets and30fps runtime-tick GIFs. GIF delays distributed to exact centisecond totals. Viewer bone seam metric=0 for single-bone sprites is NOT raster QA.",
   "status": "owner-review candidate;D41 hard gates pass,14 foot findings recorded as accepted soft backlog,zero regressions",
   "callCount": 23,
   "manualPixelEdits": "none; code-only source-cell replacement and AI paint hard-clipped to declared masks",
-  "pipelineCommit": "6704de84e918b924d717e5adf9fe57a3c982530e",
+  "pipelineCommit": "00d4d4a49144c8ea28af918ba305e23d8a620f49",
   "master": {
     "format": "vgtd-reference-source",
     "version": 1,
-    "sourceCommit": "ba7c2a94e99115c8343e15b5f6bd35c1901aa5e6",
-    "sourcePath": "assets-src/placeholder/kiem-tu-continuous-v1/reference/E.master4x.png",
-    "sourceLfsOid": "sha256:15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
-    "originalSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+    "sourceCommit": "40c5ea7ed972c28ffc160a6f50d59c03d8e5f0d0",
+    "sourceCommitOnMain": true,
+    "sourcePath": "assets-src/placeholder/kiem-tu-rig-v1/turnaround/E.png",
+    "sourceLfsOid": "sha256:0f4d0a6b2c18c11ff883fe28ac696538da0506f8025262aea44353b04dd97e34",
+    "originalSha256": "0f4d0a6b2c18c11ff883fe28ac696538da0506f8025262aea44353b04dd97e34",
+    "originalDimensions": [256, 256],
     "archivePath": "reference/E.master4x.png",
     "archiveSha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
-    "dimensions": [512, 512],
-    "operation": "Byte-for-byte copy from the earlier committed continuous-art cohort. No crop, resize, palette or alpha operation in this sprite lot.",
+    "archiveDimensions": [512, 512],
+    "operation": "Historical KT3 license record: premultiplied-alpha Lanczos upscale from256x256 @2x to512x512 @4x. This earlier transform is recorded-but-not-re-verified; the source and archived output hashes are independently verified. The current sprite lot copied the512px master byte-for-byte, without another crop/resize.",
+    "historicalRecord": {
+      "lot": "KT3 continuous-limb E pilot,2026-11-06UTC",
+      "workingBranchCommit": "ba7c2a94e99115c8343e15b5f6bd35c1901aa5e6",
+      "workingBranchCommitOnMain": false,
+      "note": "This non-main working commit supplied the earlier history; it is not the durable source pin. The sourcePath/sourceCommit above identify the PR80 asset on main, and this PR archives the exact512px output.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli0.164.0",
+      "terms": "https://openai.com/policies/row-terms-of-use/"
+    },
     "generationAlias": {
       "name": "vgtd-bakeoff-master.png",
       "sha256": "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b"
-    },
-    "upstreamNote": "Concept-A E style reference reused from the previous continuous-art cohort. This lot does not claim a verified pixel transform from the PR80 256px turnaround; its earlier resize history was not recorded."
+    }
   },
   "committedSheets": [
     {
@@ -348,5 +359,6 @@
       "path": "E/sheets/walk.png",
       "sha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a"
     }
-  ]
+  ],
+  "pipelineTree": "433c9263519c4b06505d2b78be93c935731d5000"
 }
