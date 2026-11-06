@@ -2,7 +2,7 @@
   "tool": "image_gen.imagegen",
   "model": "undisclosed by tool",
   "cli": "codex-cli 0.166.0",
-  "utcPackaged": "2026-11-06T16:21:55.052Z",
+  "utcPackaged": "2026-11-06T17:44:36.829Z",
   "calls": [
     {
       "clip": "run",
@@ -294,12 +294,232 @@
       "references": ["walk-lower.guide.png", "walk.png", "walk-lower.mask.png"],
       "resultFile": "exec-4f8c95b4-f28f-49e1-8b75-58f49e8f38db.png",
       "resultSha256": "46c285e9580679197b953f53a83a919cecfc633cf7000c21b702e97abe85860d"
+    },
+    {
+      "clip": "meditate",
+      "key": "E_full_meditate_v1",
+      "utcStart": "2026-11-06T17:18:06.082Z",
+      "utcOutputSaved": "2026-11-06T17:18:49.566Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet. Cells1..8 are an eight-key SEATED MEDITATION loop: identical cross-legged lotus on groundline232, knees and robe spread naturally within owncell, folded legs remain credible, long robe rests over knees, torso upright, bun top~90 (seated height~142, NOT full standingheight), SAME head/limb physicalsize as master. Eyes gentlyclosed throughout, hands relaxed over knees, drawn sword laid horizontally across lap with grip on near rightside, one sword only. Very subtle breath inhale1..4 andexhale5..8, hair/ribbon/sash1-2px secondary motion; first/last blend seamlessly; no standing transitions. Cell9 bottom-right is UNUSED CALIBRATION CONTROL: master neutral STANDING fullbody, sword heldlow nearRIGHT, bun24sole232. Keep control same physicalhead/torso size as seatedposes; do NOT scale seatedfigures to standingheight.",
+      "references": ["reference/E.master4x.png", "E/templates/meditate.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-f0ec7c3a-3ce8-48e5-9f39-afddec06f0d6.png",
+      "resultSha256": "d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a",
+      "selectedArchivePath": "E/generation-selected/meditate.raw.png",
+      "selectedArchiveSha256": "d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a",
+      "selectedSheet": "E/sheets/meditate.png",
+      "selectedSheetSha256": "d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "dash",
+      "key": "E_full_dash_v1",
+      "utcStart": "2026-11-06T17:18:06.082Z",
+      "utcOutputSaved": "2026-11-06T17:19:16.899Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a4columns×2rows sheet. Cells1..6 are a coherent six-key ground DASH facingright:1standing slightanticipation;2lowered shallowknee load;3strong forward push;4low forwardlean speedpose, rearboot lifts;5frontfoot braking touchdown;6recoveruprightguard. Long robe flows backward naturally, no crippled stretched legs, one nearRIGHT sword hand keeps blade lowdownward behind hip acrossall6, left handcounterbalances. Short fast controlled swordfighter dash, same physicalhead/torso/leg lengths, plantedtoe ground232, no afterimages. Cells7AND8 are UNUSED CALIBRATION CONTROLS: identical neutralstanding masterbun24sole232, relaxed nearRIGHT low swordcarry. All8cellsdrawn atidentical physicalscale.",
+      "references": ["reference/E.master4x.png", "E/templates/dash.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "3dc0c33c49d7eb4863bf11580559e299b3f731c3c993be1a361937591a7fedfb"
+      ],
+      "resultFile": "exec-5787e78e-b59d-4d44-b460-81aa2e5d33d2.png",
+      "resultSha256": "56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7",
+      "selectedArchivePath": "E/generation-selected/dash.raw.png",
+      "selectedArchiveSha256": "56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7",
+      "selectedSheet": "E/sheets/dash.png",
+      "selectedSheetSha256": "56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "sword_fly",
+      "key": "E_full_sword_fly_v1",
+      "utcStart": "2026-11-06T17:18:06.082Z",
+      "utcOutputSaved": "2026-11-06T17:20:06.823Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet. Cells1..8 are an eight-key LOOP of SWORD FLIGHT: youngcultivator standsbalanced withbothdarkboots on ONE horizontal flyingSTRAIGHTsword underfeet (bladepointingRIGHT), torso upright slightforwardlean, knees softlybent, headmasterphysicalsize, robeandhair streamgentlyleft. NearRIGHThand makes twofinger swordseal atchest, farLEFThand balances; NO swordinhand, no secondsword. Swordundersoleatabouty232, characterbootsslightlyabove, bunaroundy24; gentle1-2px bob/robe/hairwave, cell8blends1. NO glow/trail/windcloud/motionblur. Cell9 bottom-right UNUSED CALIBRATION CONTROL: neutralSTANDING masterpose holdingdrawnswordlow nearRIGHT, bun24sole232, same head/bodyphysicaldimensions.",
+      "references": ["reference/E.master4x.png", "E/templates/sword_fly.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-159f6498-1d70-4a20-9546-eee6a5f10f1d.png",
+      "resultSha256": "2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4",
+      "selectedArchivePath": "E/generation-selected/sword_fly.raw.png",
+      "selectedArchiveSha256": "2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4",
+      "selectedSheet": "E/sheets/sword_fly.png",
+      "selectedSheetSha256": "2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "attack_2",
+      "key": "E_full_attack_2_v1",
+      "utcStart": "2026-11-06T17:18:06.082Z",
+      "utcOutputSaved": "2026-11-06T17:20:53.908Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet. Cells1..8 are the SECOND COMBO STRIKE, a readable reverse/rising diagonal cut facingRIGHT:1lowreadyguard;2drawnearRIGHTswordback tolowerleft;3loadhip/shoulder slightlunge;4HIT CONTACT risingcut bladeforwarduprightdiagonal;5swordcontinuesup;6controlledfollowthrough;7recover;8readyguardfornextstrike. NearRIGHThand holds SAME sword throughout, farLEFThand counterbalances, no handchange/extraweapon. Clearanticipation, forcefulcontactcell4, followthrough, kneessoft, fullleglength, loose robe movesascloth. Keep completebladeinsideeachsquare, doNOTshrinkbodytocramraisedblade. Masterphysicalhead/torso/legs; poseheightcanlowerlegitimately. Cell9 bottom-right UNUSED CALIBRATION CONTROL: masterneutralstanding nearRIGHT lowdrawnsword, bun24sole232.",
+      "references": ["reference/E.master4x.png", "E/templates/attack_2.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-62a5b1c3-68d3-4ba2-9f5c-20e14ee688db.png",
+      "resultSha256": "10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2",
+      "selectedArchivePath": "E/generation-selected/attack_2.raw.png",
+      "selectedArchiveSha256": "10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2",
+      "selectedSheet": "E/sheets/attack_2.png",
+      "selectedSheetSha256": "10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "attack_3",
+      "key": "E_full_attack_3_v1",
+      "utcStart": "2026-11-06T17:21:18.160Z",
+      "utcOutputSaved": "2026-11-06T17:22:08.073Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet, all9cells filled. Cells1..8 are THIRD COMBO FINISHER, a forceful downward swordcleave facingRIGHT:1readyguard;2nearRIGHT sworddrawsup;3fullanticipation swordraised diagonallywithoutcropping;4launchshallowlunge;5HIT CONTACT forceful downward-forward cleave, stableplantedfrontfoot;6strongfollowthroughswordlow;7weightrecovers;8lowreadyguard. Near anatomicalRIGHT hand gripsONEswordthroughout, farLEFThand balances, nohandchange/extrablade. Clearclothoverlap/folds and soundanatomy, fullleg/forearm lengths, doNOTbendmesh-lookingrubberlimbs. Swordfitscell, doNOT shrinkbodytoshowoverheadblade. Cell9bottom-right UNUSED CALIBRATION CONTROL neutralSTANDING exactmaster, swordlownearRIGHT, bun24sole232, samephysicalhead/torso size.",
+      "references": ["reference/E.master4x.png", "E/templates/attack_3.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-516bb7e3-60a4-4911-8eab-18ff061e5545.png",
+      "resultSha256": "39190453f9f0f5cc6f8b6226dfdbdc2b8a74f8be82e23de9b38dc8ff9437fd31",
+      "selectedArchivePath": "E/generation-selected/attack_3.raw.png",
+      "selectedArchiveSha256": "39190453f9f0f5cc6f8b6226dfdbdc2b8a74f8be82e23de9b38dc8ff9437fd31",
+      "selectedSheet": "E/sheets/attack_3.png",
+      "selectedSheetSha256": "347cd6656b221798ce560c77d06cbb8d7972991675fda83b5c249edb83590ef0",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": {
+        "operation": "clear1percent cell boundary only; preserve all inner RGBA pixels",
+        "removedGuidePixels": 15012,
+        "removedCharacterPixels": 0,
+        "proofFile": "E/repair-inputs/attack_3.guide-cleanup.json"
+      }
+    },
+    {
+      "clip": "channel",
+      "key": "E_full_channel_v1",
+      "utcStart": "2026-11-06T17:21:18.160Z",
+      "utcOutputSaved": "2026-11-06T17:22:47.262Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet, all9cells filled. Cells1..8 are sustained CHANNEL LOOP: uprightfacingRIGHT, swordgrippedlow near anatomicalRIGHT hip bladepointingdown/forward likeMASTER inALLcells, farLEFThand makesTWO-FINGER SWORDSEAL atchest andholdsposition, concentratedeyesopen, gentlebreathshoulders1-2px andtinyhair/ribbon/robeoverlap, stablefeetground232. No changing swordcarry/hands, no big gestures or crouch, no glow or trail. Cells1..4inhale,5..8exhale,8blends1seamlessly. Same208pxstandingheight inALL8; consistentface/headsize. Cell9bottom-right UNUSED CALIBRATION CONTROL neutralMASTER STANDING nearRIGHT lowsword, bun24sole232; samephysicalbody/head dimensions.",
+      "references": ["reference/E.master4x.png", "E/templates/channel.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-ee73f34c-b02a-4e02-8f67-a48736ba61d6.png",
+      "resultSha256": "c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3",
+      "selectedArchivePath": "E/generation-selected/channel.raw.png",
+      "selectedArchiveSha256": "c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3",
+      "selectedSheet": "E/sheets/channel.png",
+      "selectedSheetSha256": "c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "tribulation",
+      "key": "E_full_tribulation_v1",
+      "utcStart": "2026-11-06T17:21:18.160Z",
+      "utcOutputSaved": "2026-11-06T17:23:27.042Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a5columns×3rows sheet, all15cells filled, EXACTequalSQUAREcells. Cells1..12 are TWELVEKEY LIGHTNINGTRIBULATION REACTION facingRIGHT, ONLY BODYART (lightningVFXwillbeexternal):1standingbraced;2kneessoften;3kneelweightdown;4kneelbraced;5farLEFThandraisesguard;6looksup/handprotects;7impactduck/hitweight;8kneelingrecover;9exhalebraced;10pushupright;11settle;12standbracedready. NearRIGHT hand grips SAME swordlow/downward atside throughout, NOTswitchhands; keepbladecompleteinowncell, no lightning/glow/shadow/cloud/afterimage. Posechangescredibleloosecloth, kneesfold underivoryrobe, no longrubberlimbs or limbdetachment. Masterphysicalheadsize~28units neverenlargeseatedfigures. Cells13,14,15 bottomrowlast3 are UNUSED CALIBRATION CONTROLS: identical neutralSTANDING MASTER, nearRIGHT lowsword, bun24sole232. Samephysicaldimensionsacrossall15, groundedfeet/kneesremainy232.",
+      "references": ["reference/E.master4x.png", "E/templates/tribulation.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "c0e136a1b68501a3ffe3c119c890ff3e1a7898db679e70b0f2d073cc77acfad9"
+      ],
+      "resultFile": "exec-35463ced-e5d8-414a-8071-ef93780ea6d3.png",
+      "resultSha256": "06a66162ac56066a398d5b47b8b3f059fdfd1ab8e66cc531c6eea92c18d31227",
+      "selectedArchivePath": "E/generation-selected/tribulation.raw.png",
+      "selectedArchiveSha256": "06a66162ac56066a398d5b47b8b3f059fdfd1ab8e66cc531c6eea92c18d31227",
+      "selectedSheet": "E/sheets/tribulation.png",
+      "selectedSheetSha256": "47efa32b909270e8ae19a06a5b33f02f5e038cb7d33f971f76bd032ddf29ce7b",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": {
+        "operation": "clear1percent cell boundary only; preserve all inner RGBA pixels",
+        "removedGuidePixels": 23795,
+        "removedCharacterPixels": 0,
+        "proofFile": "E/repair-inputs/tribulation.guide-cleanup.json"
+      }
+    },
+    {
+      "clip": "emote",
+      "key": "E_full_emote_v1",
+      "utcStart": "2026-11-06T17:21:18.160Z",
+      "utcOutputSaved": "2026-11-06T17:24:04.280Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "Create one production sprite animation sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A, EAST/right-facing. MASTER image1 defines EXACT same young male face, long dark hair and tied bun/jade pin/blue ribbon, slim5.75head proportions, muted slate-blue LONG split outer robe/vest with narrow gold edging, long IVORY inner robe and trousers, dark ANKLE boots, dark sash/jade pendant, empty hip scabbard and straight sword. Soft painterly2D-isometric sprite, fine brown-gray outline, restrained NW lighting, no style/costume/face drift. TEMPLATE image2 has equal square256-unit cells; same character scale across ALL cells, head approximately28units tall, standing control bun top24/sole232/pelvis128/axisx128.15. Do not enlarge seated characters or shrink lunges. Every body/sword fully inside its own cell; generous edge margin; no overlaps. Flat perfectly uniform pure #ff00ff background; NO grid/guides/text/numbers/shadows/floor/smoke/glow/trail/motionblur. Reading order left-to-right then next row. Keep sword in anatomical near RIGHT hand except explicitly sword-riding. Do not switch hands/carry midcycle. Remove all template marks. Draw a3columns×3rows square sheet, all9cellsfilled. Cells1..8 form STANDING GREETING EMOTE, uprightfacingRIGHT:1neutral;2farLEFThandrisestochest;3openspalmgreeting;4friendlysmallsmile;5tinyheadnod;6leftpalmholds;7handlowers;8neutral. NearRIGHT handcontinuesholdingONEswordLOWBYHIP bladepointingdown/forward EXACTSAMEcarryall8, masterbootssameground232, bun24, physicalbodyheight208+/-3percent, NO bow/crouch/deepsway. Samefaceoutfitproportionsandheadsize, crediblefivefingerhand, smallnaturalgesture. Cell9bottom-right UNUSED CALIBRATION CONTROL masterneutralSTANDING nearRIGHT lowswordcarry, bun24sole232. Puremagenta, no speechbubble/icon/text.",
+      "references": ["reference/E.master4x.png", "E/templates/emote.template.png"],
+      "referenceSha256": [
+        "15504152ee3a55f26fd2f0737462e7b34b1aec8ab1d4f2f70930758ace87745b",
+        "5567e126f31e3b5983ed9686ca6d1d13fb01a155c22d43283db7341d51facd54"
+      ],
+      "resultFile": "exec-4fbc0b69-4af7-46bb-8536-605502f5020c.png",
+      "resultSha256": "44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46",
+      "selectedArchivePath": "E/generation-selected/emote.raw.png",
+      "selectedArchiveSha256": "44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46",
+      "selectedSheet": "E/sheets/emote.png",
+      "selectedSheetSha256": "44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46",
+      "status": "selected first-pass full-production sheet; runtime subset excludes standing control",
+      "preprocess": null
+    },
+    {
+      "clip": "run",
+      "key": "E_full_run_carry_v1",
+      "utcStart": "2026-11-06T17:25:13.116Z",
+      "utcOutputSaved": "2026-11-06T17:25:40.793Z",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed by tool",
+      "cli": "codex-cli 0.166.0",
+      "prompt": "EDIT existing6columns×2rows12frameEAST RUN sprite sheet IMAGE1. IMAGE2 is strict mask: WHITE editable, BLACK preserve. IMAGE3 CELL1 is AUTHORITATIVE SWORD CARRY REFERENCE. Fix ONLY bottomrowcells7..12 swordarm/carry INSIDEWHITE. DO NOT changeanytoprowcell1..6. Preserveallfaces,heads,hair,legs,boots,bodypositions,scale,andcostume outsideWHITE. The sword must remain nearRIGHT hand hanging LOW beside/back of HIP with bladeDOWNWARD, likeimage3 and topcells1..6. Bottomrowcurrently incorrectlyswingswordforward—REMOVEoldforwardforearm/hand/blade and repaintoccludedrobe/vest underneath, then draw relaxednearrightsleeve/forearmdownatbackhip,wristbelowwaist,straightbladedownwardslightlyforward towardground, SAMEgrip/hilt/bladelength ascell1. FarLEFThand maycounterbalance but NEVERholdsword. ONE swordonlypercell, NOhandchange/extrablade,carryLOWall12, notforwardpointing or acrosschest. ExistingfootposesandhairflowMUSTremainunchanged. Fitallnewarm/blade insidewhiteregion, doNOTheadswap/reshape/zoom/crop. Puremagenta#ff00ffbackground, samepainterlystyle,palette,lighting,outline. Returnwhole6x2sheet,no mask/lines/text; onlywhitepaintedited.",
+      "references": [
+        "E/repair-inputs/run.carry-before.png",
+        "E/repair-inputs/run-carry.mask.png",
+        "E/repair-inputs/run-carry-cell1.png"
+      ],
+      "referenceSha256": [
+        "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6",
+        "0ad37cfd5141823e66027e5c22938d8a40b9cd023a44b2da48a512ccd7838814",
+        "e2817110c35ba49a09202063014aac7b269ac30a4d9da4adf8ae53622b094463"
+      ],
+      "resultFile": "exec-f1fda2d5-4774-45ba-957f-26152e976b8f.png",
+      "resultSha256": "a56f64868ca4775c9d0eed3bb9a009aeb1cfe8661f3abb6d5b52ef0d4a32c1c8",
+      "selectedArchivePath": "E/generation-selected/run-carry.raw.png",
+      "selectedArchiveSha256": "a56f64868ca4775c9d0eed3bb9a009aeb1cfe8661f3abb6d5b52ef0d4a32c1c8",
+      "status": "selected whole cells7-12; arm-only composite rejected due clipped counterhand",
+      "proof": "E/repair-inputs/run.carry-proof.json"
     }
   ],
-  "postprocess": "Shared @vgtd/sprite pipeline at commit 00d4d4a49144c8ea28af918ba305e23d8a620f49: chroma key, edge defringe plus palette-aware interior spill cleanup,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048PMA atlas with padding2/extrude1. Source repairCell replacements and masked AI texture patches are audited by SHA256 in E/repair-inputs/*.repair-proof.json. Unchanged cells and pixels outside hit masks are verified by equal before/after RGBA hashes. D41 backlog records14 soft findings; no contact guesses, speed or threshold changes.",
+  "postprocess": "Shared @vgtd/sprite pipeline at commit 00d4d4a49144c8ea28af918ba305e23d8a620f49: chroma key, edge defringe plus palette-aware interior spill cleanup,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048PMA atlas with padding2/extrude1. Source repairCell replacements and masked AI texture patches are audited by SHA256 in E/repair-inputs/*.repair-proof.json. Unchanged cells and pixels outside hit masks are verified by equal before/after RGBA hashes. D41 backlog records14 soft findings; no contact guesses, speed or threshold changes. Full-production extension: eight sheets use unused standing control cells to establish a fixed sheet scale, documented in E/control-calibration.json. attack_3 and tribulation boundary guide removal preserves all interior RGBA hashes. Run carry fixed by six whole-cell replacements; prior repair proof now terminates at carry-before archive,then carry proof links to current sheet. Contact annotation follows flat-sole drawings; uncertain side reversal remains manual backlog, not hidden.",
   "capture": "Actual Cocos3 WebGL, single E, World scale1/2, paused midpoint source-pose contact sheets and30fps runtime-tick GIFs. GIF delays distributed to exact centisecond totals. Viewer bone seam metric=0 for single-bone sprites is NOT raster QA.",
-  "status": "owner-review candidate;D41 hard gates pass,14 foot findings recorded as accepted soft backlog,zero regressions",
-  "callCount": 23,
+  "status": "full15clipE first-pass,126runtime drawings;hardgates pass,foot/art polish explicitly backlogged",
+  "callCount": 32,
   "manualPixelEdits": "none; code-only source-cell replacement and AI paint hard-clipped to declared masks",
   "pipelineCommit": "00d4d4a49144c8ea28af918ba305e23d8a620f49",
   "master": {
@@ -322,7 +542,7 @@
       "note": "This non-main working commit supplied the earlier history; it is not the durable source pin. The sourcePath/sourceCommit above identify the PR80 asset on main, and this PR archives the exact512px output.",
       "tool": "image_gen.imagegen",
       "model": "undisclosed by tool",
-      "cli": "codex-cli0.164.0",
+      "cli": "codex-cli 0.164.0",
       "terms": "https://openai.com/policies/row-terms-of-use/"
     },
     "generationAlias": {
@@ -336,12 +556,32 @@
       "sha256": "80d217dc81ff6fca67d7b694b18470c348700101a3fd9db1dec533f1c50cd3b8"
     },
     {
+      "path": "E/sheets/attack_2.png",
+      "sha256": "10e8f48361ffb8bbd99411818a7ffb03423085a060225c7fb53630a8fb38e4e2"
+    },
+    {
+      "path": "E/sheets/attack_3.png",
+      "sha256": "347cd6656b221798ce560c77d06cbb8d7972991675fda83b5c249edb83590ef0"
+    },
+    {
       "path": "E/sheets/cast.png",
       "sha256": "251ff7422cdc9ad36ea03ca7b9e960252fd6865a3800174aa00088d01e2d015d"
     },
     {
+      "path": "E/sheets/channel.png",
+      "sha256": "c97689bca5ba33f0c80b3336730c5ccb1ead0038ab9b319a53442b130b2e4af3"
+    },
+    {
+      "path": "E/sheets/dash.png",
+      "sha256": "56875f82b7460ac978434e5bd7667a970ab30a99b82c9926a2d0babb1b6782d7"
+    },
+    {
       "path": "E/sheets/die.png",
       "sha256": "c22c482adc1d99ff96b347f2f93e8b4f628cad08227fa74d88a4f1f78a054470"
+    },
+    {
+      "path": "E/sheets/emote.png",
+      "sha256": "44bc77080d26ad21ef371187f4d05935d2d35067d857beeb4f1ac995dbd79e46"
     },
     {
       "path": "E/sheets/hit.png",
@@ -352,13 +592,57 @@
       "sha256": "dc762a840d92553a3132adc4a28457426a272c1224ea375c3e8184f0acfbb78e"
     },
     {
+      "path": "E/sheets/meditate.png",
+      "sha256": "d7f94504daf5e1891aa0e7407134f076c5806ec05e2684e3896850f4e2d6772a"
+    },
+    {
       "path": "E/sheets/run.png",
-      "sha256": "f1456dec6745650a8ab9ab3727a3bf4c436010d9f548f8c78c9393e50839b3b6"
+      "sha256": "58c49e38fdeef585dcad60cab781b25d76ccca56cd13199da93591e7f0cfeb93"
+    },
+    {
+      "path": "E/sheets/sword_fly.png",
+      "sha256": "2e40ebcd76556e20e134835ca15dab0e407625e90ab112665dda15ad31653bd4"
+    },
+    {
+      "path": "E/sheets/tribulation.png",
+      "sha256": "47efa32b909270e8ae19a06a5b33f02f5e038cb7d33f971f76bd032ddf29ce7b"
     },
     {
       "path": "E/sheets/walk.png",
       "sha256": "ad6e4aff0d9f9420e74beea3a28ee7b97a1126d12ee87eb36dc0fb9ab76fff8a"
     }
   ],
-  "pipelineTree": "433c9263519c4b06505d2b78be93c935731d5000"
+  "pipelineTree": "433c9263519c4b06505d2b78be93c935731d5000",
+  "exports": [
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_ske.json",
+      "sha256": "2de9f54e5757d59ebbfd60b9d31212d18bca16150004195f7ba6fc4e5d673d24"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.json",
+      "sha256": "11cbf619e357a29f8e2382c0fd22b893f2c0894c8dcbb7e9b6537860b3456e1c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.png",
+      "sha256": "f1f1241d5d9fe6fab0945a2c02dc54a9039c31eeb913b0cdc2c305c8f5563942"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E.sprite.json",
+      "sha256": "28681e919342e18a7d5c5bd1d95dc70b3d8cb9090605f9c0810272cd53311909"
+    }
+  ],
+  "captureValidation": {
+    "clips": 15,
+    "zooms": [1, 2],
+    "framesPerSheet": 12,
+    "sampling": "midpoint",
+    "engine": "Cocos Creator3.8.8 built-in DragonBones runtime",
+    "result": "all15 load and captured",
+    "qa": {
+      "hard": 0,
+      "acceptedSoft": 14,
+      "regression": 0
+    },
+    "pmaInvalidPixels": 0
+  }
 }
