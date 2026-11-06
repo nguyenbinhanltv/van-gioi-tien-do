@@ -16,11 +16,13 @@ import {
   ATLAS_EXTRUDE,
   ATLAS_PADDING,
   assembleContinuous,
+  authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
   createImage,
   decodePng,
   encodePng,
+  nonPremultipliedPixels,
   formatQaReports,
   loadCharacterData,
   validateRig,
@@ -114,7 +116,8 @@ if (issues.length) {
   process.exit(1);
 }
 
-const clips = authorKiemTuSet(res.rig, { detail: true });
+const blink = authorBlinkCycle(res.rig);
+const clips = [...authorKiemTuSet(res.rig, { detail: true }), ...(blink ? [blink] : [])];
 const name = `kiemtu_${dir}`;
 let pkg;
 try {
@@ -139,7 +142,18 @@ if (bad.length) console.log(formatQaReports(bad).split('\n').slice(0, 40).join('
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, `${name}_ske.json`), JSON.stringify(pkg.export.ske));
 writeFileSync(join(out, `${name}_tex.json`), JSON.stringify(pkg.export.tex));
-writeFileSync(join(out, `${name}_tex.png`), encodePng(res.atlas.image));
+// the tex file says premultipliedAlpha: true, so the PNG must hold the premultiplied colour (encodePng un-premultiplies
+// by default); verify the bytes that were written, not the in-memory image
+const atlasPng = encodePng(res.atlas.image, { premultiplied: true });
+const written = decodePng(atlasPng, { premultiplied: true });
+const badPixels = nonPremultipliedPixels(written);
+const same = written.data.every((v, i) => v === res.atlas.image.data[i]);
+if (badPixels > 0 || !same)
+  throw new Error(`atlas PNG does not round-trip as premultiplied (${badPixels} pixels with colour above alpha)`);
+writeFileSync(join(out, `${name}_tex.png`), atlasPng);
+console.log(
+  `atlas PNG check (encoded bytes, read back as premultiplied): ${badPixels} pixels with colour above alpha, identical to the packed page`,
+);
 // the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
 writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
 writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
