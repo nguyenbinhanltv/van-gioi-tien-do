@@ -1,0 +1,12 @@
+{
+  "id": "B.S.meditate-reroll-1",
+  "prompt": "Correct the SEATED SCALE of attached S meditation sheet, using attached STANDING IDLE sheet as exact anatomical size reference. FOURcolumns TWOrows EIGHTsquarecells aspect2:1. Each cell seated same young Vermilion Fan Adept frontview, cross-legged, right hand cyanOPENfan viewerleft, left hand onknee. Current seatedsheet is enlarged: REDRAW at SAME anatomical head/torso/hand size as standing idle, NOT same fullfigureheight. No postprocess resizing, redraw natural matchingparts. At256equivalentcell headincludingbun~43px same asidle, entire seatedpose only145..165px tall. Leave TOP35PERCENT of EVERYcell PUREMAGENTA EMPTY. Bun starts localy85..95, seatedboots endlocaly245. Fullstandingbody would237px but seatedfoldedlegs shorten naturally. Keep head45px not80px; torsoheight~65px, foldedlegheight~45px. Preserve masterface, vermilionivoryrobe/navysash, fullopenfanatrightchest same sizeasidle. Eightgentlebreathingframes, seamless. No text/grid/shadow/VFX. SolidMAGENTA clean nofragments. Everyfigure whollyinsideowncell, squarecells. Do not fill emptyspace by enlarging pose.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 22:08:23 UTC",
+  "utcEnd": "2026-11-06 22:08:48 UTC",
+  "selectedOutput": "S/sheets/meditate.reroll1.generated.png",
+  "references": ["S/sheets/meditate.generated.png", "S/sheets/idle.generated.png"],
+  "attempt": 2,
+  "reason": "Redraw enlarged seated pose to preserve standing anatomical scale; no individual frame rescaling"
+}
