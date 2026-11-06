@@ -35,17 +35,20 @@ const opt = (name: string, def = '') => {
 const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
-const out = resolve(repoRoot, opt('out', join(tmpdir(), 'vgtd-assemble', dir)));
-const partsDir = resolve(partsRoot, dir);
+const outArg = opt('out', '');
+const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
+// relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
+const partsDir = resolve(process.env.INIT_CWD ?? process.cwd(), partsRoot, dir);
 const view = { scale: 2, pivot: [64, 116] as const };
 
 const data = loadCharacterData(repoRoot, 'kiem-tu');
 const old = data.byDirection.get(dir)!;
 const landmarks = JSON.parse(readFileSync(join(partsDir, 'landmarks.json'), 'utf8')) as Landmarks;
+// source parts are STRAIGHT-alpha PNGs: decodePng multiplies them (the old atlas below is already premultiplied)
 const parts = new Map<string, ReturnType<typeof decodePng>>();
 for (const f of readdirSync(partsDir)) {
   if (!f.endsWith('.png')) continue;
-  const img = decodePng(readFileSync(join(partsDir, f)), { premultiplied: true });
+  const img = decodePng(readFileSync(join(partsDir, f)));
   if (img.width !== 256 || img.height !== 256)
     throw new Error(`${f}: expected a 256x256 canvas, got ${img.width}x${img.height}`);
   parts.set(f.replace(/\.png$/, ''), img);
@@ -128,4 +131,7 @@ mkdirSync(out, { recursive: true });
 writeFileSync(join(out, `${name}_ske.json`), JSON.stringify(pkg.export.ske));
 writeFileSync(join(out, `${name}_tex.json`), JSON.stringify(pkg.export.tex));
 writeFileSync(join(out, `${name}_tex.png`), encodePng(res.atlas.image));
+// the assembled rig and atlas description, so `rig:measure --assembled` / `rig:gate --assembled` check THIS data
+writeFileSync(join(out, `${name}.rig.json`), JSON.stringify(res.rig));
+writeFileSync(join(out, `${name}.atlas.json`), JSON.stringify(res.atlas.data));
 console.log(`exported ${existsSync(out) ? out : ''}: ${clips.length} clips, ${bad.length} clips with QA errors`);

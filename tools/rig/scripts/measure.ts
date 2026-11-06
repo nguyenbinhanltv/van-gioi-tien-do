@@ -8,6 +8,8 @@
  *
  *   <character>        kiem-tu | the-tu | phap-tu | dan-phu-tu  (default kiem-tu)
  *   --dir S,E          only these directions (default: all drawn directions)
+ *   --assembled DIR    measure the rig assembled by `rig:assemble` (DIR/<stem>_<dir>.rig.json + .atlas.json + _tex.png;
+ *                      needs --dir) instead of the committed data of the character
  *   --autoskin         measure as if autoSkin were applied (preview; data files are not touched)
  *   --band PX --cell PX --touch PX   autoSkin parameters for --autoskin (defaults 10 / 6 / 2)
  *   --band PX --cell PX --touch PX   autoSkin parameters for --autoskin (defaults 10 / 6 / 2)
@@ -38,6 +40,8 @@ function parse(argv: string[]) {
   const o = {
     character: 'kiem-tu' as CharacterId,
     dirs: null as string[] | null,
+    assembled: '',
+    stem: 'kiemtu',
     autoskin: false,
     band: undefined as number | undefined,
     cell: undefined as number | undefined,
@@ -50,6 +54,8 @@ function parse(argv: string[]) {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]!;
     if (a === '--dir') o.dirs = (argv[++i] ?? '').split(',').filter(Boolean);
+    else if (a === '--assembled') o.assembled = argv[++i] ?? '';
+    else if (a === '--stem') o.stem = argv[++i] ?? 'kiemtu';
     else if (a === '--autoskin') o.autoskin = true;
     else if (a === '--band') o.band = Number(argv[++i]);
     else if (a === '--cell') o.cell = Number(argv[++i]);
@@ -72,11 +78,24 @@ interface Row {
   readonly stretchEvents: number;
   readonly worstStrainPct: number;
   readonly tornClips: number;
+  readonly tornNames: readonly string[];
   readonly vertices: number;
 }
 
 const opts = parse(process.argv.slice(2));
 const data = loadCharacterData(repoRoot, opts.character);
+if (opts.assembled) {
+  const dirName = opts.dirs?.[0];
+  if (!dirName) throw new Error('--assembled needs --dir <direction>');
+  const base = resolve(process.env.INIT_CWD ?? process.cwd(), opts.assembled, `${opts.stem}_${dirName}`);
+  data.byDirection.clear();
+  data.byDirection.set(dirName as never, {
+    direction: dirName as never,
+    rig: JSON.parse(readFileSync(`${base}.rig.json`, 'utf8')),
+    atlas: JSON.parse(readFileSync(`${base}.atlas.json`, 'utf8')),
+    texturePath: `${base}_tex.png`,
+  });
+}
 const rows: Row[] = [];
 const needs: Record<string, ReturnType<typeof underpaintNeeds>> = {};
 
@@ -98,7 +117,7 @@ for (const [dir, d] of data.byDirection) {
   let worstGap = 0;
   let strain = 0;
   let worstStrain = 0;
-  let torn = 0;
+  const tornNames: string[] = [];
   for (const clip of clips) {
     for (const i of meshQa(rig, clip, { gapPx: opts.limit })) {
       if (i.check === 'detach' && /come apart/.test(i.message)) {
@@ -109,7 +128,11 @@ for (const [dir, d] of data.byDirection) {
         worstStrain = Math.max(worstStrain, i.value ?? 0);
       }
     }
-    if (checkSilhouette(rig, clip, atlas, { minPixels: 20 }).length) torn++;
+    const sil = checkSilhouette(rig, clip, atlas, { minPixels: 20 });
+    if (sil.length) {
+      tornNames.push(clip.name);
+      if (process.env.RIG_MEASURE_VERBOSE) for (const i of sil.slice(0, 3)) console.log(`  ${clip.name}: ${i.message}`);
+    }
   }
   const vertices = Math.max(
     0,
@@ -127,7 +150,8 @@ for (const [dir, d] of data.byDirection) {
     worstGapPx: Math.round(worstGap * 10) / 10,
     stretchEvents: strain,
     worstStrainPct: Math.round(worstStrain * 100),
-    tornClips: torn,
+    tornClips: tornNames.length,
+    tornNames,
     vertices,
   });
   needs[dir] = underpaintNeeds(rig, clips, { gapPx: opts.limit }).slice(0, opts.top);
@@ -154,6 +178,10 @@ if (opts.json) {
       `${r.direction.padEnd(3)} | ${pad(r.clips, 5)} | ${pad(r.seamOpenings, 13)} | ${pad(r.worstGapPx, 12)} | ${pad(r.stretchEvents, 14)} | ${pad(r.worstStrainPct, 14)} | ${pad(r.tornClips, 10)} | ${pad(r.vertices, 8)}`,
     );
   }
+  for (const r of rows)
+    if (r.tornNames.length)
+      console.log(`
+${r.direction}: torn silhouettes in ${r.tornNames.join(', ')}`);
   for (const [dir, list] of Object.entries(needs)) {
     if (!list.length) continue;
     console.log(`\n${dir}: underpaint needed (px @1x, atlas px = 2x)`);

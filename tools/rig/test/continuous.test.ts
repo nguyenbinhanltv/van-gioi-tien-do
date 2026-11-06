@@ -126,6 +126,36 @@ describe('assembleContinuous', () => {
       ),
     ],
     [
+      'cuff_L',
+      stroke(
+        [
+          [116, 128],
+          [116, 134],
+        ],
+        7,
+      ),
+    ],
+    [
+      'sleeve_lining_L',
+      stroke(
+        [
+          [116, 124],
+          [116, 132],
+        ],
+        6,
+      ),
+    ],
+    [
+      'sword_trail',
+      stroke(
+        [
+          [130, 140],
+          [160, 200],
+        ],
+        3,
+      ),
+    ],
+    [
       'robe_front',
       stroke(
         [
@@ -172,5 +202,14 @@ describe('assembleContinuous', () => {
     for (const id of res.used) expect(names.has(id)).toBe(true);
     expect(res.atlas.data.width).toBe(res.atlas.image.width);
     expect(res.atlas.data.premultipliedAlpha).toBe(true);
+  });
+
+  it('composes separate source parts into one slot piece and keeps trail layers hidden by default', () => {
+    expect(res.used).toContain('sleeve_trim_L');
+    expect(res.used).not.toContain('cuff_L');
+    expect(res.rig.slots.some((x) => x.name === 'cuff_L')).toBe(false);
+    const trail = res.rig.slots.find((x) => x.name === 'sword_trail')!;
+    expect(trail.attachment).toBeNull();
+    expect(trail.blend).toBe('additive');
   });
 });
