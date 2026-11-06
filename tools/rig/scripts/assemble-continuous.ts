@@ -6,6 +6,10 @@
  *   <parts>/<dir>/landmarks.json
  * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
+ * --keyposes <dir> [--iou 0.85]  fit run/walk/... clips to reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
+ * .landmarks.json), print fit error + silhouette IoU per key and write keypose_<clip>_compare.png sheets.
+ * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
+ * --gait free|robe|robe-mid  gait of run / walk / dash (default robe: short quick steps, shallow knee, long robe).
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -14,8 +18,24 @@ import { dirname, join, resolve } from 'node:path';
 import type { Direction } from '@vgtd/shared';
 import {
   ATLAS_EXTRUDE,
+  GAIT_PROFILES,
+  type GaitName,
   ATLAS_PADDING,
+  KEYPOSE_LABELS,
+  applyDetail,
   assembleContinuous,
+  authorKeyPoseClip,
+  bakeSecondaryMotion,
+  blit,
+  clipSpec,
+  evalPose,
+  fitPose,
+  keyPoseFrames,
+  loadedAtlas,
+  renderPose,
+  silhouetteIoU,
+  type Image,
+  type KeyPoseLandmarks,
   authorBlinkCycle,
   authorKiemTuSet,
   buildCharacterPackage,
@@ -39,6 +59,10 @@ const opt = (name: string, def = '') => {
 const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
+const stem = opt('stem', 'kiemtu');
+const gaitName = opt('gait', 'robe') as GaitName;
+if (!(gaitName in GAIT_PROFILES))
+  throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
 const outArg = opt('out', '');
 const out = outArg ? resolve(process.env.INIT_CWD ?? process.cwd(), outArg) : join(tmpdir(), 'vgtd-assemble', dir);
 // relative paths are relative to where `npm run` was started, not to tools/rig (npm changes the cwd)
@@ -89,7 +113,7 @@ const res = assembleContinuous({
   view,
   parts,
   ...(weapon ? { weapon } : {}),
-  atlasName: `kiemtu_${dir}`,
+  atlasName: `${stem}_${dir}`,
 });
 console.log(`parts: ${res.used.length} used, ${res.missing.length} missing, ${res.skipped.length} skipped`);
 if (res.missing.length) console.log(`  missing: ${res.missing.join(', ')}`);
@@ -117,8 +141,91 @@ if (issues.length) {
 }
 
 const blink = authorBlinkCycle(res.rig);
-const clips = [...authorKiemTuSet(res.rig, { detail: true }), ...(blink ? [blink] : [])];
-const name = `kiemtu_${dir}`;
+let clips = [...authorKiemTuSet(res.rig, { detail: true, gait: GAIT_PROFILES[gaitName] }), ...(blink ? [blink] : [])];
+
+// --keyposes <dir>: replace the clips that have a full set of reference key poses (<dir>/<DIR>/<clip>_<NN>_<label>.png +
+// .landmarks.json) with clips fitted to them; report the silhouette IoU of every key against its reference image
+const keyDir = opt('keyposes', '');
+const iouMin = Number(opt('iou', '0.85'));
+let iouFailures = 0;
+if (keyDir) {
+  const kdir = resolve(process.env.INIT_CWD ?? process.cwd(), keyDir, dir);
+  const atlas = loadedAtlas(res.atlas.data, res.atlas.image);
+  const sheets: string[] = [];
+  const oldClips = new Map(clips.map((c) => [c.name, c]));
+  for (const [clipName, labels] of Object.entries(KEYPOSE_LABELS)) {
+    const stems = labels.map((l, i) => `${clipName}_${String(i + 1).padStart(2, '0')}_${l}`);
+    if (!stems.every((x) => existsSync(join(kdir, `${x}.landmarks.json`)))) continue;
+    const spec = clipSpec(clipName as never);
+    const lms = stems.map(
+      (x) => JSON.parse(readFileSync(join(kdir, `${x}.landmarks.json`), 'utf8')) as KeyPoseLandmarks,
+    );
+    const fits = lms.map((lm) => fitPose(res.rig, lm, view));
+    const base = authorKeyPoseClip(
+      res.rig,
+      clipName,
+      fits,
+      spec.frames,
+      spec.loop,
+      oldClips.get(clipName)?.phases,
+      oldClips.get(clipName)?.events,
+    );
+    const finished = applyDetail(
+      res.rig,
+      bakeSecondaryMotion(res.rig, { ...base, phases: oldClips.get(clipName)?.phases ?? {} }),
+    );
+    const at = keyPoseFrames(clipName, spec.frames, oldClips.get(clipName)?.phases, oldClips.get(clipName)?.events);
+    console.log(`
+key poses ${clipName}: ${labels.length} keys, frames ${at.join(',')}`);
+    const row: { ref: Image; old: Image; now: Image }[] = [];
+    stems.forEach((x, i) => {
+      const refPath = join(kdir, `${x}.png`);
+      const ref = existsSync(refPath) ? decodePng(readFileSync(refPath)) : null;
+      const fit = fits[i]!;
+      const iou = ref ? silhouetteIoU(res.rig, finished, at[i]!, atlas, ref) : NaN;
+      const bad = ref && iou < iouMin;
+      if (bad) iouFailures++;
+      console.log(
+        `  ${x}: fit error max ${fit.maxError.toFixed(1)} px, IoU ${ref ? iou.toFixed(3) : 'n/a (no png)'}${bad ? '  < ' + iouMin : ''}${fit.lengthMismatch.length ? ', length mismatch ' + fit.lengthMismatch.join('/') : ''}`,
+      );
+      const render = (c: (typeof clips)[number] | undefined, f: number) =>
+        renderPose(res.rig, evalPose(res.rig, c ?? null, c ? Math.min(f, c.frames) : 0), atlas, {
+          background: [118, 122, 130, 255],
+          ground: true,
+        });
+      row.push({
+        ref: ref ?? createImage(256, 256),
+        old: render(oldClips.get(clipName), at[i]!),
+        now: render(finished, at[i]!),
+      });
+    });
+    // reference | old rig | key-pose rig, one column per key
+    const sheet = createImage(256 * row.length, 256 * 3, [118, 122, 130, 255]);
+    row.forEach((r, i) => {
+      blit(sheet, r.ref, i * 256, 0);
+      blit(sheet, r.old, i * 256, 256);
+      blit(sheet, r.now, i * 256, 512);
+    });
+    mkdirSync(out, { recursive: true });
+    const file = join(out, `keypose_${clipName}_compare.png`);
+    writeFileSync(file, encodePng(sheet));
+    sheets.push(file);
+    clips = clips.map((c) => (c.name === clipName ? finished : c));
+  }
+  console.log(
+    sheets.length
+      ? `
+comparison sheets (rows: reference / old rig / key-pose rig): ${sheets.join(', ')}`
+      : `
+no complete key-pose set found in ${kdir}`,
+  );
+}
+if (iouFailures && !args.includes('--allow-errors')) {
+  console.log(`
+${iouFailures} key pose(s) below IoU ${iouMin}: nothing exported (use --allow-errors to export anyway)`);
+  process.exit(1);
+}
+const name = `${stem}_${dir}`;
 let pkg;
 try {
   pkg = buildCharacterPackage([{ rig: res.rig, clips }], res.atlas.data, {

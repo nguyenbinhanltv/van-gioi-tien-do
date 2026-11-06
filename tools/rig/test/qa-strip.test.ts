@@ -3,11 +3,14 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
   E_PIECES,
+  GAIT_PROFILES,
   STRIP_SLOTS,
   assembleContinuous,
   authorKiemTuSet,
   createImage,
   loadCharacterData,
+  lowerBodyMetrics,
+  lowerBodyQa,
   principalAxis,
   stripQa,
   type Image,
@@ -158,5 +161,36 @@ describe('strip QA (hem / cuff / lining strips)', () => {
     const issues = stripQa(res.rig, swung);
     expect(issues.length).toBeGreaterThan(0);
     expect(issues.every((i) => i.check === 'strip' && i.severity === 'error')).toBe(true);
+  });
+});
+
+describe('lower-body QA and the robe gait', () => {
+  const res = build({ kind: 'skirt', panel: 'robe_front' });
+  const stride = (gait: keyof typeof GAIT_PROFILES) =>
+    lowerBodyMetrics(
+      res.rig,
+      authorKiemTuSet(res.rig, { only: ['run'], secondary: false, gait: GAIT_PROFILES[gait] })[0]!,
+    )!;
+
+  it('the free gait spreads the feet over a leg length; the robe gait keeps the stride short', () => {
+    const free = stride('free');
+    const robe = stride('robe');
+    expect(free.strideRatio).toBeGreaterThan(0.9);
+    expect(robe.strideRatio).toBeLessThan(free.strideRatio * 0.8);
+    expect(robe.strideRatio).toBeLessThanOrEqual(0.7);
+  });
+
+  it('flags a squat stride and passes the robe gait', () => {
+    const run = (g: keyof typeof GAIT_PROFILES) =>
+      lowerBodyQa(res.rig, authorKiemTuSet(res.rig, { only: ['run'], secondary: false, gait: GAIT_PROFILES[g] })[0]!);
+    expect(run('free').some((i) => /squat stride/.test(i.message))).toBe(true);
+    expect(run('robe').some((i) => /squat stride/.test(i.message))).toBe(false);
+  });
+
+  it('the skirt panels follow the legs: the front panel bone is weighted into the front skirt mesh', () => {
+    const front = res.rig.skins[0]!.attachments.robe_front!.robe_front!;
+    expect(front.type).toBe('mesh');
+    if (front.type === 'mesh') expect(front.weights!.some((w) => w.some(([b]) => b === 'robe_front'))).toBe(true);
+    expect((res.rig.chains ?? []).some((c) => c.name === 'skirt_group')).toBe(true);
   });
 });

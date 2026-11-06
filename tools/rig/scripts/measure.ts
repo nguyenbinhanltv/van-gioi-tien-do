@@ -22,6 +22,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import {
   CHARACTER_IDS,
+  GAIT_PROFILES,
   autoSkin,
   authorClassSet,
   checkSilhouette,
@@ -42,6 +43,7 @@ function parse(argv: string[]) {
     character: 'kiem-tu' as CharacterId,
     dirs: null as string[] | null,
     assembled: '',
+    gait: 'free',
     stem: 'kiemtu',
     autoskin: false,
     band: undefined as number | undefined,
@@ -56,6 +58,7 @@ function parse(argv: string[]) {
     const a = argv[i]!;
     if (a === '--dir') o.dirs = (argv[++i] ?? '').split(',').filter(Boolean);
     else if (a === '--assembled') o.assembled = argv[++i] ?? '';
+    else if (a === '--gait') o.gait = argv[++i] ?? 'free';
     else if (a === '--stem') o.stem = argv[++i] ?? 'kiemtu';
     else if (a === '--autoskin') o.autoskin = true;
     else if (a === '--band') o.band = Number(argv[++i]);
@@ -110,7 +113,10 @@ for (const [dir, d] of data.byDirection) {
         ...(opts.touch !== undefined ? { touchPx: opts.touch } : {}),
       }).rig
     : d.rig;
-  const clips = authorClassSet(opts.character, rig, { detail: true });
+  const clips = authorClassSet(opts.character, rig, {
+    detail: true,
+    gait: GAIT_PROFILES[opts.gait as keyof typeof GAIT_PROFILES] ?? GAIT_PROFILES.free,
+  });
   const png = readFileSync(d.texturePath);
   if (png.subarray(1, 4).toString('ascii') !== 'PNG')
     throw new Error(`${d.texturePath} is a Git LFS pointer: run 'git lfs pull'`);

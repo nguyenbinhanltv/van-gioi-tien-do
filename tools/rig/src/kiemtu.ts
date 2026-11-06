@@ -87,20 +87,43 @@ export function authorIdle(rig: RigDocument): Clip {
   return c.build();
 }
 
-export function authorRun(rig: RigDocument): Clip {
+/**
+ * Gait shaping for a long robe. A long skirt hides the legs, so a wide stride with deep knee bend and a high foot lift
+ * reads as a squat / horse stance with the legs poking out of a rigid plank. `speedScale` shortens the authored stride
+ * at the same cycle length (the runtime plays the clip faster by timeScale = real speed / authored speed: quick short
+ * steps), `crouchScale` and `liftScale` flatten the knee bend and the foot lift, `lean` leans the body forward (deg).
+ */
+export interface GaitProfile {
+  readonly speedScale: number;
+  readonly crouchScale: number;
+  readonly liftScale: number;
+  readonly lean: number;
+}
+
+export const GAIT_PROFILES = {
+  /** The original free-leg gait (short robe / trousers). */
+  free: { speedScale: 1, crouchScale: 1, liftScale: 1, lean: 0 },
+  /** Long robe: short quick steps, shallow knee, low foot lift, a little forward lean. */
+  robe: { speedScale: 0.55, crouchScale: 0.45, liftScale: 0.45, lean: 3 },
+  /** Between the two. */
+  'robe-mid': { speedScale: 0.75, crouchScale: 0.65, liftScale: 0.65, lean: 2 },
+} as const satisfies Record<string, GaitProfile>;
+export type GaitName = keyof typeof GAIT_PROFILES;
+
+export function authorRun(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.free): Clip {
   const N = clipSpec('run').frames; // 15
   const g = viewGain(rig.direction);
   const axis = screenAxis(rig.direction);
   // foreshortened views move less on screen: scale the authored screen speed so the stride stays reachable
-  const speed = RUN_SPEED_PX_S * g;
+  const speed = RUN_SPEED_PX_S * g * gait.speedScale;
   const plan = planFeet(rig, {
     frames: N,
     speed,
     duty: 0.42,
-    footLift: 9,
+    footLift: 9 * gait.liftScale,
     axis,
     phase: -0.2,
-    crouch: RUN_CROUCH_PX,
+    crouch: RUN_CROUCH_PX * gait.crouchScale,
     bob: 2,
     sway: 1.2 * g,
   });
@@ -117,7 +140,7 @@ export function authorRun(rig: RigDocument): Clip {
   // L foot touches down at cycle 0.2, R at 0.7 (docs/03: footsteps at sprite frames 2 and 7 of 10)
   c.event(Math.round(0.2 * N), 'footstep_L');
   c.event(Math.round(0.7 * N), 'footstep_R');
-  c.rotate('spine_mid', sine(N, 1.6 * g, { cycles: 2, phase: 0.1, offset: -7 * g }));
+  c.rotate('spine_mid', sine(N, 1.6 * g, { cycles: 2, phase: 0.1, offset: (-7 - gait.lean) * g }));
   c.rotate('spine_upper', sine(N, 3.2 * g, { cycles: 1, phase: 0.25, offset: -3 * g }));
   c.rotate('head', sine(N, 1.4, { cycles: 2, phase: 0.3, offset: 7 * g }));
   c.rotate('upper_arm_L', sine(N, 46 * g, { cycles: 1, phase: 0.25 }));
@@ -533,18 +556,21 @@ export function armsFk(rig: RigDocument, clip: Clip): Clip {
   return extra.length ? { ...clip, ik: [...clip.ik, ...extra] } : clip;
 }
 
-export function authorWalk(rig: RigDocument): Clip {
+export function authorWalk(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.free): Clip {
   const N = clipSpec('walk').frames; // 20
   const g = viewGain(rig.direction);
-  const speed = WALK_SPEED_PX_S * g;
+  const speed = WALK_SPEED_PX_S * g * gait.speedScale;
   const axis = screenAxis(rig.direction);
   // knees stay bent enough that the vertical part of the stride (front/back views) is reachable
-  const crouch = Math.max(6, crouchFor(legReach(rig), axis, (speed * 0.62 * (N / 30)) / 2));
+  const crouch = Math.max(
+    Math.max(4, 6 * gait.crouchScale),
+    crouchFor(legReach(rig), axis, (speed * 0.62 * (N / 30)) / 2),
+  );
   const plan = planFeet(rig, {
     frames: N,
     speed,
     duty: 0.62,
-    footLift: 5,
+    footLift: 5 * gait.liftScale,
     axis,
     phase: 0,
     crouch,
@@ -558,7 +584,7 @@ export function authorWalk(rig: RigDocument): Clip {
     motion: { speed, planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R } },
   });
   c.merge(plan.tracks);
-  c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2, phase: 0.1, offset: -2 * g }));
+  c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2, phase: 0.1, offset: (-2 - gait.lean * 0.5) * g }));
   c.rotate('spine_upper', sine(N, 2.4 * g, { phase: 0.25 }));
   c.rotate('head', sine(N, 1, { cycles: 2, phase: 0.3, offset: 2 * g }));
   c.rotate('upper_arm_L', sine(N, 24 * g, { phase: 0.25 }));
@@ -568,7 +594,7 @@ export function authorWalk(rig: RigDocument): Clip {
   return closeLoop(c.build());
 }
 
-export function authorDash(rig: RigDocument): Clip {
+export function authorDash(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.free): Clip {
   const N = clipSpec('dash').frames; // 8
   const g = viewGain(rig.direction);
   const c = new ClipBuilder(rig, { name: 'dash', frames: N, loop: false });
@@ -611,20 +637,20 @@ export function authorDash(rig: RigDocument): Clip {
   ]);
   c.translate('hips', [
     [0, 0, 0, EASE.out],
-    [3, 3 * g, -9, EASE.inOut],
-    [6, 3 * g, -9, EASE.inOut],
+    [3, 3 * g, -9 * gait.crouchScale, EASE.inOut],
+    [6, 3 * g, -9 * gait.crouchScale, EASE.inOut],
     [N, 0, 0, EASE.inOut],
   ]);
   c.translate('ik_foot_L', [
     [0, 0, 0, EASE.out],
-    [3, 15 * g, 0, EASE.inOut],
-    [6, 15 * g, 0, EASE.inOut],
+    [3, 15 * g * gait.speedScale, 0, EASE.inOut],
+    [6, 15 * g * gait.speedScale, 0, EASE.inOut],
     [N, 0, 0, EASE.inOut],
   ]);
   c.translate('ik_foot_R', [
     [0, 0, 0, EASE.out],
-    [3, -14 * g, 7, EASE.inOut],
-    [6, -14 * g, 7, EASE.inOut],
+    [3, -14 * g * gait.speedScale, 7 * gait.liftScale, EASE.inOut],
+    [6, -14 * g * gait.speedScale, 7 * gait.liftScale, EASE.inOut],
     [N, 0, 0, EASE.inOut],
   ]);
   return c.build();
@@ -956,6 +982,8 @@ export interface KiemTuOptions {
   readonly fitAtlas?: LoadedAtlas;
   /** Bake hair/sash secondary motion into the clips. Default true. */
   readonly secondary?: boolean;
+  /** Gait for run / walk / dash (`GAIT_PROFILES`): `robe` for a long skirt. Default `free` (the original gait). */
+  readonly gait?: GaitProfile;
   /** Add the detail layer (blink, mouth/hand display swaps, sword trail/glint; see `applyDetail`). Default false. */
   readonly detail?: boolean;
   /** Restrict to some clips. Default: all of KIEMTU_CLIPS. */
@@ -964,17 +992,18 @@ export interface KiemTuOptions {
 
 /** Author the Kiếm tu set on `rig`. Throws if the rig lacks the roles the animations need. */
 export function authorKiemTuSet(rig: RigDocument, opts: KiemTuOptions = {}): Clip[] {
+  const gait = opts.gait ?? GAIT_PROFILES.free;
   const makers: Record<KiemTuClip, (r: RigDocument) => Clip> = {
     idle: authorIdle,
-    run: authorRun,
+    run: (r) => authorRun(r, gait),
     attack: authorAttack1,
     attack_2: authorAttack2,
     attack_3: authorAttack3,
     cast: authorCast,
     hit: authorHit,
     die: authorDie,
-    walk: authorWalk,
-    dash: authorDash,
+    walk: (r) => authorWalk(r, gait),
+    dash: (r) => authorDash(r, gait),
     meditate: authorMeditate,
     channel: authorChannel,
     sword_fly: authorSwordFly,
