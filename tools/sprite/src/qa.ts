@@ -8,6 +8,8 @@
  *   present     every expected frame exists and is not empty
  */
 import type { Image } from '@vgtd/rig';
+import type { Direction } from '@vgtd/shared';
+import { facingGroundVector } from './gait.js';
 import { measureFigure } from './master.js';
 import type { AlignedFrame } from './align.js';
 import type { CellSpec, Guides } from './types.js';
@@ -28,6 +30,8 @@ export interface Finding {
 
 export interface QaClip {
   readonly name: string;
+  /** Facing of the ground travel, default E for existing API callers. */
+  readonly direction?: Direction;
   readonly loop: boolean;
   /** `upright`: every frame within the height tolerance; `free`: bending / airborne poses, exceptions must be declared. */
   readonly kind: 'upright' | 'free';
@@ -170,29 +174,72 @@ export function soleX(img: Image, ground: number, ghostX: number, window = 28, m
   return s && Math.abs(s.offset) <= maxOffset ? s.x : null;
 }
 
+/** Nearest horizontal sole-bottom run in a 2D ghost window; y is the row below the opaque sole. */
+export function nearestSole2D(
+  img: Image,
+  ghost: { x: number; y: number },
+  window = 40,
+): { x: number; y: number; offset: number } | null {
+  const opaque = (x: number, y: number) =>
+    x >= 0 && x < img.width && y >= 0 && y < img.height && img.data[(y * img.width + x) * 4 + 3]! >= 128;
+  let best: { x: number; y: number; offset: number } | null = null;
+  for (
+    let y = Math.max(0, Math.floor(ghost.y - window));
+    y <= Math.min(img.height - 1, Math.ceil(ghost.y + window));
+    y++
+  ) {
+    let sx = 0,
+      n = 0;
+    const close = () => {
+      if (n >= 4) {
+        const x = sx / n;
+        const offset = Math.hypot(x - ghost.x, y + 1 - ghost.y);
+        if (offset <= window && (!best || offset < best.offset)) best = { x, y: y + 1, offset };
+      }
+      sx = 0;
+      n = 0;
+    };
+    for (
+      let x = Math.max(0, Math.floor(ghost.x - window));
+      x <= Math.min(img.width - 1, Math.ceil(ghost.x + window));
+      x++
+    ) {
+      if (opaque(x, y) && !opaque(x, y + 1)) {
+        sx += x;
+        n++;
+      } else close();
+    }
+    close();
+  }
+  return best;
+}
+
 export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
   if (!clip.cells || clip.groundPxPerFrame === undefined) return [];
   const tol = o.slideTolerance ?? 3;
   const maxOffset = o.maxGhostOffset ?? 20;
+  const direction = clip.direction ?? 'E';
+  const axis = facingGroundVector(direction);
   const out: Finding[] = [];
   for (const side of ['R', 'L'] as const) {
     const key = side === 'R' ? 'nearFoot' : 'farFoot';
     // consecutive planted spans
-    let span: { frame: number; x: number }[] = [];
+    let span: { frame: number; x: number; y: number }[] = [];
     const flush = () => {
       for (let k = 1; k < span.length; k++) {
         const a = span[k - 1]!;
         const b = span[k]!;
         const steps = b.frame - a.frame;
-        // the planted foot travels BACKWARD relative to the in-place body: dx = -speed per frame (facing +x)
-        const slide = Math.abs(b.x - a.x + clip.groundPxPerFrame! * steps) / steps;
+        // The planted foot travels backward along the same ground axis as the template ghosts.
+        const along = (b.x - a.x) * axis.x + (b.y - a.y) * axis.y;
+        const slide = Math.abs(along + clip.groundPxPerFrame! * steps) / steps;
         if (slide > tol)
           out.push({
             gate: 'footSlide',
             severity: 'fail',
             clip: clip.name,
             frame: b.frame,
-            metric: `slide_px_per_frame_${side}`,
+            metric: `${direction === 'E' ? 'slide_px_per_frame' : 'slide_ground_px_per_frame'}_${side}`,
             value: Math.round(slide * 100) / 100,
             limit: tol,
             message: `${side} foot slides ${slide.toFixed(1)} px/frame between frames ${a.frame}-${b.frame} (limit ${tol})`,
@@ -204,7 +251,8 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
       const ghost = c[key];
       const f = clip.frames[i];
       if (!ghost?.planted || !f) return flush();
-      const near = nearestSole(f.image, o.guides.ground, ghost.x);
+      const legacy = direction === 'E' ? nearestSole(f.image, o.guides.ground, ghost.x) : null;
+      const near = direction === 'E' ? legacy && { ...legacy, y: o.guides.ground } : nearestSole2D(f.image, ghost);
       if (!near || Math.abs(near.offset) > maxOffset) {
         // do not stay silent: the drawing's planted foot is not where the template put it, so it cannot be judged
         out.push({
@@ -212,16 +260,16 @@ export function checkFootSlide(clip: QaClip, o: QaOptions): Finding[] {
           severity: 'warn',
           clip: clip.name,
           frame: i,
-          metric: `ghost_offset_px_${side}`,
+          metric: `${direction === 'E' ? 'ghost_offset_px' : 'ghost_distance_2d_px'}_${side}`,
           value: near ? Math.round(Math.abs(near.offset) * 10) / 10 : 999,
           limit: maxOffset,
           message: near
-            ? `${side} planted foot: nearest sole is ${near.offset.toFixed(1)} px from its template ghost (x ${near.x.toFixed(1)} vs ${ghost.x.toFixed(1)}, limit ${maxOffset}); not measured (the foot is not on the template)`
+            ? `${side} planted foot: nearest sole is ${near.offset.toFixed(1)} px from its template ghost (${direction === 'E' ? `x ${near.x.toFixed(1)} vs ${ghost.x.toFixed(1)}` : `xy ${near.x.toFixed(1)},${near.y.toFixed(1)} vs ${ghost.x.toFixed(1)},${ghost.y.toFixed(1)}`}, limit ${maxOffset}); not measured (the foot is not on the template)`
             : `${side} planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)`,
         });
         return flush();
       }
-      span.push({ frame: i, x: near.x });
+      span.push({ frame: i, x: near.x, y: near.y });
     });
     flush();
   }

@@ -5,6 +5,8 @@
  * manifest only.
  */
 import type { Image } from '@vgtd/rig';
+import type { Direction } from '@vgtd/shared';
+import { facingGroundVector } from './gait.js';
 import { fillEllipse, fillTriangle, hLine, solid, toPremultiplied, vLine, type Straight } from './raster.js';
 import {
   CELL_PX,
@@ -103,6 +105,8 @@ export function buildTemplate(opts: TemplateOptions): Template {
 }
 
 export interface LocomotionOptions {
+  /** Ground facing in y-down sprite space. Default E for existing templates. */
+  readonly direction?: Direction;
   /** Half stride: how far (px @2x) a foot travels from the contact point to the neutral line. */
   readonly halfStride: number;
   /** Peak sole height (px @2x) of the swinging foot. */
@@ -144,6 +148,16 @@ export const STEP_TAGS = ['contact', 'down', 'passing', 'toeoff', 'up', 'precont
  * centre); the swinging foot returns along a raised arc.
  */
 export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptions): CellSpec[] {
+  const direction = opts.direction ?? 'E';
+  const axis = facingGroundVector(direction);
+  const project = (f: NonNullable<CellSpec['nearFoot']>) =>
+    direction === 'E'
+      ? f
+      : {
+          x: g.centerX + (f.x - g.centerX) * axis.x,
+          y: g.ground + (f.x - g.centerX) * axis.y + (f.y - g.ground),
+          planted: f.planted,
+        };
   const first = opts.first ?? 'R';
   const s = opts.halfStride;
   const stance = opts.stance ?? 0.5;
@@ -169,8 +183,8 @@ export function locomotionCells(frames: number, g: Guides, opts: LocomotionOptio
     const tag = STEP_TAGS[Math.floor(((i % half) * STEP_TAGS.length) / half)] ?? 'contact';
     return {
       leading: frontIsNear ? 'R' : 'L',
-      nearFoot: near,
-      farFoot: far,
+      nearFoot: project(near),
+      farFoot: project(far),
       tag: `${step === 0 ? first : first === 'R' ? 'L' : 'R'}_${tag}`,
     } satisfies CellSpec;
   });

@@ -3,6 +3,7 @@ import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, viewGain, type Image } from '@vgtd/rig
 import {
   applyContacts,
   checkFootSlide,
+  facingGroundVector,
   groundPxPerFrame,
   groundSpeedPxS,
   guidesFromMaster,
@@ -58,13 +59,18 @@ describe('template ghosts agree with the foot-slide gate', () => {
     ['run', 8],
     ['walk', 12],
   ] as const) {
-    for (const dir of ['E', 'SE'] as const) {
+    for (const dir of ['E', 'SE', 'S', 'NE', 'N'] as const) {
       it(`${id} ${frames} cells ${dir}: feet drawn exactly on the planted ghosts produce no foot-slide finding`, () => {
         const speed = groundSpeedPxS(id, dir)!;
         const duration = tableDuration(id);
-        const cells = locomotionCells(frames, guides, { halfStride: halfStrideFor(speed, duration), lift: 14 });
+        const cells = locomotionCells(frames, guides, {
+          direction: dir,
+          halfStride: halfStrideFor(speed, duration),
+          lift: 14,
+        });
         const clip: QaClip = {
           name: id,
+          direction: dir,
           loop: true,
           kind: 'upright',
           expectedFrames: frames,
@@ -91,6 +97,66 @@ describe('template ghosts agree with the foot-slide gate', () => {
     };
     expect(checkFootSlide(clip, { masterHeight: 208, master, guides }).length).toBeGreaterThan(0);
   });
+});
+
+describe('directional ground travel', () => {
+  const cases = [
+    ['E', 1, 0],
+    ['SE', 2, 1],
+    ['S', 0, 1],
+    ['NE', 2, -1],
+    ['N', 0, -1],
+  ] as const;
+  for (const [direction, x, y] of cases) {
+    it(`${direction}: ghosts follow the y-down isometric axis and the table speed`, () => {
+      const axis = facingGroundVector(direction);
+      expect(axis.x).toBeCloseTo(x / Math.hypot(x, y));
+      expect(axis.y).toBeCloseTo(y / Math.hypot(x, y));
+      const speed = groundSpeedPxS('run', direction)!;
+      const duration = tableDuration('run');
+      const cells = locomotionCells(12, guides, { direction, halfStride: halfStrideFor(speed, duration), lift: 14 });
+      const a = cells[0]!.nearFoot!,
+        b = cells[1]!.nearFoot!;
+      const step = groundPxPerFrame(speed, duration, 12);
+      expect(b.x - a.x).toBeCloseTo(-step * axis.x);
+      expect(b.y - a.y).toBeCloseTo(-step * axis.y);
+      // Leading labels follow the gait phase even in vertical views and while the swing foot is lifted.
+      expect(cells[0]!.leading).toBe('R');
+      expect(cells[6]!.leading).toBe('L');
+    });
+
+    for (const mode of ['stationary', 'reversed'] as const) {
+      it(`${direction}: detects ${mode} planted travel`, () => {
+        const speed = groundSpeedPxS('run', direction)!;
+        const duration = tableDuration('run');
+        const cells = locomotionCells(12, guides, { direction, halfStride: halfStrideFor(speed, duration), lift: 14 });
+        const frames = cells.map((c, i) =>
+          footFrame({
+            ...c,
+            farFoot: undefined,
+            nearFoot: cells[mode === 'stationary' ? 2 : i === 2 ? 3 : 2]!.nearFoot,
+          }),
+        );
+        const clip: QaClip = {
+          name: 'run',
+          direction,
+          loop: true,
+          kind: 'upright',
+          expectedFrames: 12,
+          frames,
+          cells: cells.map((c, i) => ({
+            ...c,
+            farFoot: undefined,
+            nearFoot: { ...c.nearFoot!, planted: i === 2 || i === 3 },
+          })),
+          groundPxPerFrame: groundPxPerFrame(speed, duration, 12),
+        };
+        const findings = checkFootSlide(clip, { masterHeight: 208, master, guides });
+        const metric = direction === 'E' ? 'slide_px_per_frame_R' : 'slide_ground_px_per_frame_R';
+        expect(findings.some((f) => f.metric === metric && f.value! > 3)).toBe(true);
+      });
+    }
+  }
 });
 
 describe('stance and annotated contacts', () => {

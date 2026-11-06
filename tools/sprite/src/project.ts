@@ -232,6 +232,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
+      direction: project.direction,
       loop: s.clip.loop,
       kind: s.clip.kind ?? 'upright',
       expectedFrames: s.clip.frames,

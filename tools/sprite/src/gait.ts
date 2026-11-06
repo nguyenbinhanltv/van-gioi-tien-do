@@ -3,11 +3,17 @@
  * follows exactly and the gate that judges the result can never disagree.
  */
 import { ANIMATIONS, type AnimationId } from '@vgtd/character';
-import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, viewGain } from '@vgtd/rig';
+import { RUN_SPEED_PX_S, WALK_SPEED_PX_S, viewGain, screenAxis } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 
 /** Texture px per rig px (the canvas is drawn at 2x). */
 export const TEXTURE_SCALE = 2;
+
+/** Unit facing vector on the isometric ground, in sprite texture coordinates (y down). */
+export function facingGroundVector(direction: Direction): { x: number; y: number } {
+  const axis = screenAxis(direction);
+  return { x: axis.x, y: axis.y === 0 ? 0 : -axis.y };
+}
 
 /** Duration (s) of a table animation (frames / fps). */
 export function tableDuration(id: AnimationId): number {

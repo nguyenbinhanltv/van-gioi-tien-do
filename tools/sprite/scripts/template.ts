@@ -23,9 +23,9 @@ import {
   groundSpeedPxS,
   halfStrideFor,
   tableDuration,
+  assertDirection,
   type CellSpec,
 } from '../src/index.js';
-import type { Direction } from '@vgtd/shared';
 
 const args = process.argv.slice(2);
 const opt = (n: string, d = '') => {
@@ -48,7 +48,7 @@ const guides = guidesFromMaster(m, CELL_PX, opt('center') ? Number(opt('center')
 // the gait defaults to the clip name for run / walk, so new templates always follow the table ground speed
 const gait = opt('gait', clip === 'run' || clip === 'walk' ? clip : 'none');
 const stance = Number(opt('stance', '0.5'));
-const direction = opt('direction', 'E') as Direction;
+const direction = assertDirection(opt('direction', 'E'));
 const derivedHalfStride = () => {
   const id = gait as 'run' | 'walk';
   const speed = groundSpeedPxS(id, direction);
@@ -59,6 +59,7 @@ let cells: CellSpec[] | undefined;
 if (opt('cells')) cells = JSON.parse(readFileSync(resolve(cwd, opt('cells')), 'utf8')) as CellSpec[];
 else if (gait !== 'none')
   cells = locomotionCells(frames, guides, {
+    direction,
     halfStride: opt('half-stride') ? Number(opt('half-stride')) : derivedHalfStride(),
     lift: Number(opt('lift', gait === 'run' ? '16' : '10')),
     first: opt('first', 'R') as 'L' | 'R',
