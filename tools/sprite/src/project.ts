@@ -12,7 +12,7 @@ import { decodePng, encodePng, type Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { alignFrame, calibrate, type AlignedFrame, type Calibration, type FrameRecord } from './align.js';
 import { buildArmature, type ClipInput } from './export.js';
-import { groundPxPerFrame, groundSpeedPxS } from './gait.js';
+import { facingGroundVector, groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
@@ -60,6 +60,8 @@ export interface ProjectClip {
   readonly contacts?: Contacts;
   /** Ground speed (px/s, 1x screen) of the clip; default from the table for run / walk, none otherwise. */
   readonly groundSpeedPxS?: number;
+  /** Explicit migration opt-out: report foot slide as unmeasured, preserving old baselines. */
+  readonly footSlideUnmeasuredReason?: string;
 }
 
 export interface Project {
@@ -126,6 +128,24 @@ export interface ProjectResult {
 const sha1 = (b: Buffer) => createHash('sha1').update(b).digest('hex');
 const pad = (i: number) => String(i + 1).padStart(2, '0');
 
+/** Validate configuration without loading images; also used by the committed-project audit. */
+export function validateFootSlideAlignment(
+  project: Pick<Project, 'direction'>,
+  clip: ProjectClip,
+  cells?: readonly CellSpec[],
+): void {
+  if (clip.footSlideUnmeasuredReason !== undefined) {
+    if (typeof clip.footSlideUnmeasuredReason !== 'string' || !clip.footSlideUnmeasuredReason.trim())
+      throw new Error(`clip '${clip.name}': footSlideUnmeasuredReason must be a nonempty explanation`);
+    return;
+  }
+  const speed = clip.groundSpeedPxS ?? groundSpeedPxS(clip.tableId, project.direction) ?? undefined;
+  if (facingGroundVector(project.direction).y !== 0 && cells?.length && speed !== undefined && clip.vertical !== 'keep')
+    throw new Error(
+      `clip '${clip.name}' (${project.direction}): measured ground travel has a y component; set vertical: "keep" to preserve it`,
+    );
+}
+
 export function runProject(project: Project, baseDir: string): ProjectResult {
   const masterBuf = readFileSync(resolve(baseDir, project.master));
   let master: Image = decodePng(masterBuf);
@@ -191,9 +211,16 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
 
   // 3. align (translation only) + records
   const aligned = sliced.map((s) => {
+    const manifest: TemplateManifest | null = s.clip.manifest
+      ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
+      : null;
+    const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
+    validateFootSlideAlignment(project, s.clip, manifest?.cells);
     const calibration = sheetCalibration(s);
     return {
       ...s,
+      manifest,
+      speed,
       calibration,
       aligned: s.frames.map((f, i): AlignedFrame | null =>
         alignFrame(f.image, {
@@ -232,14 +259,15 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
 
   // 5. QA
   const qaClips: QaClip[] = aligned.map((s) => {
-    const manifest: TemplateManifest | null = s.clip.manifest
-      ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
-      : null;
-    const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
+    const { manifest, speed } = s;
     const cells: readonly CellSpec[] | undefined =
       manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
+      direction: project.direction,
+      ...(s.clip.footSlideUnmeasuredReason !== undefined
+        ? { footSlideUnmeasuredReason: s.clip.footSlideUnmeasuredReason }
+        : {}),
       loop: s.clip.loop,
       kind: s.clip.kind ?? 'upright',
       expectedFrames: s.clip.frames,
