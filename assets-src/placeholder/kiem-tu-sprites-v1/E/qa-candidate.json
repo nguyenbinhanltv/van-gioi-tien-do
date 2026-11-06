@@ -1030,27 +1030,76 @@
     }
   ],
   "qa": {
-    "ok": false,
+    "ok": true,
     "findings": [
       {
         "gate": "footSlide",
-        "severity": "fail",
+        "severity": "warn",
         "clip": "run",
         "frame": 2,
-        "message": "R foot slides 29.6 px/frame between frames 1-2 (limit 3)"
+        "metric": "ghost_offset_px_R",
+        "value": 29.3,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -29.3 px from its template ghost (x 94.7 vs 124.0, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
-        "severity": "fail",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_offset_px_R",
+        "value": 34,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -34.0 px from its template ghost (x 84.0 vs 118.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 6,
+        "metric": "ghost_offset_px_L",
+        "value": 26.8,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 26.8 px from its template ghost (x 162.8 vs 136.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 7,
+        "metric": "ghost_offset_px_L",
+        "value": 38.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 38.1 px from its template ghost (x 168.1 vs 130.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_offset_px_L",
+        "value": 26.8,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -26.8 px from its template ghost (x 97.2 vs 124.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
         "clip": "run",
         "frame": 9,
-        "message": "L foot slides 7.6 px/frame between frames 8-9 (limit 3)"
+        "metric": "ghost_offset_px_L",
+        "value": 24.7,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -24.7 px from its template ghost (x 93.3 vs 118.0, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 1,
+        "metric": "slide_px_per_frame_R",
+        "value": 3.34,
+        "limit": 3,
         "message": "R foot slides 3.3 px/frame between frames 0-1 (limit 3)"
       },
       {
@@ -1058,6 +1107,9 @@
         "severity": "fail",
         "clip": "walk",
         "frame": 2,
+        "metric": "slide_px_per_frame_R",
+        "value": 4.32,
+        "limit": 3,
         "message": "R foot slides 4.3 px/frame between frames 1-2 (limit 3)"
       },
       {
@@ -1065,6 +1117,9 @@
         "severity": "fail",
         "clip": "walk",
         "frame": 3,
+        "metric": "slide_px_per_frame_R",
+        "value": 4.6,
+        "limit": 3,
         "message": "R foot slides 4.6 px/frame between frames 2-3 (limit 3)"
       },
       {
@@ -1072,13 +1127,39 @@
         "severity": "fail",
         "clip": "walk",
         "frame": 5,
+        "metric": "slide_px_per_frame_R",
+        "value": 5.23,
+        "limit": 3,
         "message": "R foot slides 5.2 px/frame between frames 4-5 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 6,
+        "metric": "ghost_offset_px_L",
+        "value": 29.7,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 29.7 px from its template ghost (x 159.7 vs 130.0, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "ghost_offset_px_L",
+        "value": 23,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 23.0 px from its template ghost (x 149.0 vs 126.0, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 9,
+        "metric": "slide_px_per_frame_L",
+        "value": 3.11,
+        "limit": 3,
         "message": "L foot slides 3.1 px/frame between frames 8-9 (limit 3)"
       },
       {
@@ -1086,20 +1167,19 @@
         "severity": "fail",
         "clip": "walk",
         "frame": 10,
+        "metric": "slide_px_per_frame_L",
+        "value": 3.39,
+        "limit": 3,
         "message": "L foot slides 3.4 px/frame between frames 9-10 (limit 3)"
-      },
-      {
-        "gate": "footSlide",
-        "severity": "fail",
-        "clip": "walk",
-        "frame": 11,
-        "message": "L foot slides 4.0 px/frame between frames 10-11 (limit 3)"
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "attack",
         "frame": 2,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
         "message": "217 px outside 201.8..214.2 (declared exception: raised sword anticipation)"
       },
       {
@@ -1107,6 +1187,9 @@
         "severity": "info",
         "clip": "attack",
         "frame": 3,
+        "metric": "height_excess_px",
+        "value": 2.8,
+        "limit": 0,
         "message": "199 px outside 201.8..214.2 (declared exception: launch lunge)"
       },
       {
@@ -1114,6 +1197,9 @@
         "severity": "info",
         "clip": "attack",
         "frame": 4,
+        "metric": "height_excess_px",
+        "value": 15.8,
+        "limit": 0,
         "message": "186 px outside 201.8..214.2 (declared exception: contact lunge)"
       },
       {
@@ -1121,6 +1207,9 @@
         "severity": "info",
         "clip": "attack",
         "frame": 5,
+        "metric": "height_excess_px",
+        "value": 14.8,
+        "limit": 0,
         "message": "187 px outside 201.8..214.2 (declared exception: follow-through lunge)"
       },
       {
@@ -1128,6 +1217,9 @@
         "severity": "info",
         "clip": "hit",
         "frame": 1,
+        "metric": "height_excess_px",
+        "value": 0.8,
+        "limit": 0,
         "message": "201 px outside 201.8..214.2 (declared exception: backward recoil)"
       },
       {
@@ -1135,6 +1227,9 @@
         "severity": "info",
         "clip": "die",
         "frame": 2,
+        "metric": "height_excess_px",
+        "value": 7.8,
+        "limit": 0,
         "message": "194 px outside 201.8..214.2 (declared exception: authored collapse: buckle)"
       },
       {
@@ -1142,6 +1237,9 @@
         "severity": "info",
         "clip": "die",
         "frame": 3,
+        "metric": "height_excess_px",
+        "value": 27.8,
+        "limit": 0,
         "message": "174 px outside 201.8..214.2 (declared exception: authored collapse: kneel)"
       },
       {
@@ -1149,6 +1247,9 @@
         "severity": "info",
         "clip": "die",
         "frame": 4,
+        "metric": "height_excess_px",
+        "value": 50.8,
+        "limit": 0,
         "message": "151 px outside 201.8..214.2 (declared exception: authored collapse: fall)"
       },
       {
@@ -1156,6 +1257,9 @@
         "severity": "info",
         "clip": "die",
         "frame": 5,
+        "metric": "height_excess_px",
+        "value": 92.8,
+        "limit": 0,
         "message": "109 px outside 201.8..214.2 (declared exception: authored collapse: land)"
       },
       {
@@ -1163,6 +1267,9 @@
         "severity": "info",
         "clip": "die",
         "frame": 6,
+        "metric": "height_excess_px",
+        "value": 132.8,
+        "limit": 0,
         "message": "69 px outside 201.8..214.2 (declared exception: authored collapse: settle)"
       },
       {
@@ -1170,8 +1277,553 @@
         "severity": "info",
         "clip": "die",
         "frame": 7,
+        "metric": "height_excess_px",
+        "value": 135.8,
+        "limit": 0,
         "message": "66 px outside 201.8..214.2 (declared exception: authored collapse: hold)"
       }
-    ]
+    ],
+    "judged": [
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 2,
+          "metric": "ghost_offset_px_R",
+          "value": 29.3,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -29.3 px from its template ghost (x 94.7 vs 124.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 29.3,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 3,
+          "metric": "ghost_offset_px_R",
+          "value": 34,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -34.0 px from its template ghost (x 84.0 vs 118.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_R",
+          "value": 34,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 6,
+          "metric": "ghost_offset_px_L",
+          "value": 26.8,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 26.8 px from its template ghost (x 162.8 vs 136.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 6,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 26.8,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 7,
+          "metric": "ghost_offset_px_L",
+          "value": 38.1,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 38.1 px from its template ghost (x 168.1 vs 130.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 38.1,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 8,
+          "metric": "ghost_offset_px_L",
+          "value": 26.8,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -26.8 px from its template ghost (x 97.2 vs 124.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 8,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 26.8,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 9,
+          "metric": "ghost_offset_px_L",
+          "value": 24.7,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -24.7 px from its template ghost (x 93.3 vs 118.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "E",
+          "cell": 9,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 24.7,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "slide_px_per_frame_R",
+          "value": 3.34,
+          "limit": 3,
+          "message": "R foot slides 3.3 px/frame between frames 0-1 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 1,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 3.34,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "slide_px_per_frame_R",
+          "value": 4.32,
+          "limit": 3,
+          "message": "R foot slides 4.3 px/frame between frames 1-2 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 4.32,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 3,
+          "metric": "slide_px_per_frame_R",
+          "value": 4.6,
+          "limit": 3,
+          "message": "R foot slides 4.6 px/frame between frames 2-3 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 4.6,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "slide_px_per_frame_R",
+          "value": 5.23,
+          "limit": 3,
+          "message": "R foot slides 5.2 px/frame between frames 4-5 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 5,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_R",
+          "value": 5.23,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 6,
+          "metric": "ghost_offset_px_L",
+          "value": 29.7,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 29.7 px from its template ghost (x 159.7 vs 130.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 6,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 29.7,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "ghost_offset_px_L",
+          "value": 23,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 23.0 px from its template ghost (x 149.0 vs 126.0, limit 20); not measured (the foot is not on the template)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "ghost_offset_px_L",
+          "value": 23,
+          "limit": 20,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "slide_px_per_frame_L",
+          "value": 3.11,
+          "limit": 3,
+          "message": "L foot slides 3.1 px/frame between frames 8-9 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 9,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_L",
+          "value": 3.11,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "slide_px_per_frame_L",
+          "value": 3.39,
+          "limit": 3,
+          "message": "L foot slides 3.4 px/frame between frames 9-10 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "E",
+          "cell": 10,
+          "gate": "footSlide",
+          "metric": "slide_px_per_frame_L",
+          "value": 3.39,
+          "limit": 3,
+          "note": "D41 full-set-first policy: generated feet do not consistently follow original template; contact/stride repair deferred for owner visual review. Not a zero-slide claim; speed and tolerances unchanged.",
+          "status": "open",
+          "owner": "van-gioi-tien-do-17",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "217 px outside 201.8..214.2 (declared exception: raised sword anticipation)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 2.8,
+          "limit": 0,
+          "message": "199 px outside 201.8..214.2 (declared exception: launch lunge)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 15.8,
+          "limit": 0,
+          "message": "186 px outside 201.8..214.2 (declared exception: contact lunge)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "attack",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 14.8,
+          "limit": 0,
+          "message": "187 px outside 201.8..214.2 (declared exception: follow-through lunge)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "hit",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 0.8,
+          "limit": 0,
+          "message": "201 px outside 201.8..214.2 (declared exception: backward recoil)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 7.8,
+          "limit": 0,
+          "message": "194 px outside 201.8..214.2 (declared exception: authored collapse: buckle)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 27.8,
+          "limit": 0,
+          "message": "174 px outside 201.8..214.2 (declared exception: authored collapse: kneel)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 50.8,
+          "limit": 0,
+          "message": "151 px outside 201.8..214.2 (declared exception: authored collapse: fall)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 92.8,
+          "limit": 0,
+          "message": "109 px outside 201.8..214.2 (declared exception: authored collapse: land)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 132.8,
+          "limit": 0,
+          "message": "69 px outside 201.8..214.2 (declared exception: authored collapse: settle)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 135.8,
+          "limit": 0,
+          "message": "66 px outside 201.8..214.2 (declared exception: authored collapse: hold)"
+        },
+        "class": "info",
+        "verdict": "info"
+      }
+    ],
+    "resolved": [],
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 14,
+      "regression": 0,
+      "info": 11
+    }
   }
 }

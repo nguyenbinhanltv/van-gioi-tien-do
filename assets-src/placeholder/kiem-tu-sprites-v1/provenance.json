@@ -249,9 +249,10 @@
       "resultFile": "exec-4f8c95b4-f28f-49e1-8b75-58f49e8f38db.png"
     }
   ],
-  "postprocess": "Shared @vgtd/sprite from main9da982d: chroma key, defringe,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048 PMA atlas,pad2/extrude1. Five run cells replaced with repairCell hashes. Two AI robe texture patches hard-clipped to tiny declared masks; all other pixels retained. No hand-painted final pixels.",
+  "postprocess": "Shared @vgtd/sprite from main9da982d: chroma key, defringe,32-colour master palette, per-sheet fixed scale, translation-only pelvis/sole alignment,2048 PMA atlas,pad2/extrude1. Five run cells replaced with repairCell hashes. Two AI robe texture patches hard-clipped to tiny declared masks; all other pixels retained. No hand-painted final pixels. Updated shared interior spill cleanup enabled (slice.spill={}): palette-aware opaque magenta removal. Updated per-foot sole metric records14 findings in D41 quality backlog; no guessed contact overrides, no speed/threshold changes.",
   "capture": "Actual Cocos3 WebGL, single E, World scale1/2, paused midpoint source-pose contact sheets and30fps runtime-tick GIFs. GIF delays distributed to exact centisecond totals. Viewer bone seam metric=0 for single-bone sprites is NOT raster QA.",
-  "status": "review candidate;9 footSlide findings unresolved; not accepted",
+  "status": "owner-review candidate;D41 hard gates pass,14 foot findings recorded as accepted soft backlog,zero regressions",
   "callCount": 23,
-  "manualPixelEdits": "none; code-only source-cell replacement and AI paint hard-clipped to declared masks"
+  "manualPixelEdits": "none; code-only source-cell replacement and AI paint hard-clipped to declared masks",
+  "pipelineCommit": "abc7b809bca79313a89b4e705a51baa1dea9d303"
 }

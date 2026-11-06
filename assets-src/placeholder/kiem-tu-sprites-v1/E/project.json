@@ -5,7 +5,8 @@
   "master": "../reference/E.master4x.png",
   "slice": {
     "key": "auto",
-    "inset": 0
+    "inset": 0,
+    "spill": {}
   },
   "clips": [
     {
