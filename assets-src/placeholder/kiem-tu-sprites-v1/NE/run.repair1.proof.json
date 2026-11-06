@@ -1,0 +1,49 @@
+{
+  "algorithm": "sha256 decoded premultiplied RGBA, row-major per cell",
+  "grid": {
+    "cols": 6,
+    "rows": 2
+  },
+  "selectedCells0based": [10],
+  "before": {
+    "file": "generation-selected/run.raw.png",
+    "sha256": "b83342430231827d7bd502966fe60d9447c1eb3ac22f956982ebad98b79fc0cc",
+    "cells": [
+      "acb31aba40f5fd7b31bee80364ca3e74abf0873067fe17e63c5dedb191f7574f",
+      "133746f007d3d902ee883a89605d02da69625f1dfb62f184e0c70b1c93a8f194",
+      "c727ee1170f3449216a69a00faac9df0f66a59c98e3cf057d584276727db9f83",
+      "6b153eeca64c73d35145809c0d9dc8cd84fda7f01db25bdf8daaf35c4242c233",
+      "4604ae56876e10ce491efc0f01844e0e717ceca379bca0d5880465087ddab525",
+      "c2cc22fe30fb41e663214d39fde6a5db403a09ee8603a42147f4832ba95dcb73",
+      "12340676c783aaa0c7d75b0607bdd00ed6c3e4c62dadf97fdc1ac4281bb9f1ec",
+      "95dbdac6ac1c489c37b168b37891a4eab0802c6070e44a2c5875b7fa9bef4c90",
+      "6f3589725df4043b00e355d9505c19136d1fda9d99e2f5de34808dd3fe66f13d",
+      "e85c39287b695113753cbf82e9b26fbed8f56c4a2b74e817a038d4e9b38dfff3",
+      "5dd44796a8d07160412c6bbc850e8ca7706f490f674904091217c1b525914901",
+      "7d53e8749d97af5b5661ceb8830faca87833de376ce8a790533ede6637aae3be"
+    ]
+  },
+  "after": {
+    "file": "sheets/run.png",
+    "sha256": "2b91254e8dda1f08b9402392b40f12f5cf48fccb2ef02c4aa2ca68e264be5308",
+    "cells": [
+      "acb31aba40f5fd7b31bee80364ca3e74abf0873067fe17e63c5dedb191f7574f",
+      "133746f007d3d902ee883a89605d02da69625f1dfb62f184e0c70b1c93a8f194",
+      "c727ee1170f3449216a69a00faac9df0f66a59c98e3cf057d584276727db9f83",
+      "6b153eeca64c73d35145809c0d9dc8cd84fda7f01db25bdf8daaf35c4242c233",
+      "4604ae56876e10ce491efc0f01844e0e717ceca379bca0d5880465087ddab525",
+      "c2cc22fe30fb41e663214d39fde6a5db403a09ee8603a42147f4832ba95dcb73",
+      "12340676c783aaa0c7d75b0607bdd00ed6c3e4c62dadf97fdc1ac4281bb9f1ec",
+      "95dbdac6ac1c489c37b168b37891a4eab0802c6070e44a2c5875b7fa9bef4c90",
+      "6f3589725df4043b00e355d9505c19136d1fda9d99e2f5de34808dd3fe66f13d",
+      "e85c39287b695113753cbf82e9b26fbed8f56c4a2b74e817a038d4e9b38dfff3",
+      "ffd38b3405dd60961a2ff48b3309dbc44b2accebc2c91998e48d44106d9319cf",
+      "7d53e8749d97af5b5661ceb8830faca87833de376ce8a790533ede6637aae3be"
+    ]
+  },
+  "editedRaw": {
+    "file": "generation-selected/run.repair1.raw.png",
+    "sha256": "4b68f8b7b58140d2818a1e4d85d4e6738684566357520588a874ce1e9704e12d"
+  },
+  "method": "Public repairCell replaces cell11 only; other11 decoded RGBA cell hashes identical. Original fixed referenceHeight304 retained."
+}

@@ -1,0 +1,18 @@
+{
+  "badCells1based": [11],
+  "fixedCalibration": {
+    "scale": 0.6842105263157895,
+    "targetHeight": 208,
+    "referenceHeight": 304,
+    "referenceFrames": 12
+  },
+  "targets": [
+    {
+      "cell1based": 11,
+      "bodyHeightRaw": 304,
+      "topRawInCell": 29,
+      "bottomRawInCell": 333,
+      "targetCanonicalAfterFixedScale": 208
+    }
+  ]
+}

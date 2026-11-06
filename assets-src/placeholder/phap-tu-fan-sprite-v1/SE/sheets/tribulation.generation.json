@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.tribulation",
+  "prompt": "undefined6 columns x2 rows,12 square cells, exact square-cell grid, row-major. 12 frames enduring lightning without effects:1guard,2brace upright,3-5small shoulder flinch and defensive left forearm,6-8controlled repeated flinch,9tension releases,10-12return guard. Open fan retained by right hand at chest. Stable head height, no deep kneel, body203..215px.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:24:40 UTC",
+  "utcEnd": "2026-11-06 21:25:05 UTC",
+  "selectedOutput": "SE/sheets/tribulation.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/tribulation.template.png"],
+  "attempt": 1
+}
