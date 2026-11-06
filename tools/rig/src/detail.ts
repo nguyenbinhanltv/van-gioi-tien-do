@@ -504,6 +504,8 @@ export interface DetailGroup {
   readonly stiffness: number;
   readonly damping: number;
   readonly gravity: number;
+  /** Largest swing of each bone from rest (deg); the whole chain of 3 segments then bends at most 3x this. */
+  readonly maxAngle: number;
   readonly members: readonly string[];
 }
 
@@ -514,6 +516,7 @@ export const DETAIL_GROUPS: readonly DetailGroup[] = [
     stiffness: 0.35,
     damping: 0.33,
     gravity: 110,
+    maxAngle: 30,
     members: ['ponytail', 'hair_strand_a', 'hair_strand_b', 'hair_strand_c'],
   },
   {
@@ -522,6 +525,7 @@ export const DETAIL_GROUPS: readonly DetailGroup[] = [
     stiffness: 0.25,
     damping: 0.28,
     gravity: 220,
+    maxAngle: 35,
     members: ['sash_tail_L', 'sash_tail_R', 'pendant'],
   },
   {
@@ -530,6 +534,7 @@ export const DETAIL_GROUPS: readonly DetailGroup[] = [
     stiffness: 0.22,
     damping: 0.35,
     gravity: 90,
+    maxAngle: 30,
     members: ['ribbon_tail_L', 'ribbon_tail_R'],
   },
   {
@@ -538,6 +543,7 @@ export const DETAIL_GROUPS: readonly DetailGroup[] = [
     stiffness: 0.5,
     damping: 0.4,
     gravity: 0,
+    maxAngle: 25,
     members: ['sleeve_edge_L', 'sleeve_edge_R'],
   },
   {
@@ -546,6 +552,7 @@ export const DETAIL_GROUPS: readonly DetailGroup[] = [
     stiffness: 0.35,
     damping: 0.4,
     gravity: 120,
+    maxAngle: 20,
     members: ['robe_hem_front', 'robe_hem_back'],
   },
 ];
@@ -619,6 +626,7 @@ export function addDetailChains(rig: RigDocument, opts: DetailChainsOptions = {}
           stiffness: g.stiffness,
           damping: g.damping,
           ...(g.gravity ? { gravity: g.gravity } : {}),
+          maxAngle: g.maxAngle,
         });
       }
       added.push(member);

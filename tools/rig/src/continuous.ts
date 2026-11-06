@@ -37,7 +37,7 @@ type Binding =
       readonly step?: number;
     }
   | { readonly kind: 'skirt' }
-  | { readonly kind: 'hanging'; readonly template: string }
+  | { readonly kind: 'hanging'; readonly template: string; readonly cols?: number }
   /** Rigid on the last bone of another hanging piece (tassel under the pendant). */
   | { readonly kind: 'tip'; readonly of: string };
 
@@ -50,6 +50,13 @@ export interface PieceSpec {
   /** Paperdoll tag, only where the draw order agrees with the paperdoll order of the direction. */
   readonly paperdoll?: RigSlot['paperdoll'];
   readonly blend?: RigSlot['blend'];
+  /** The slot starts with no attachment shown (trail / glint layers, driven by clip keys). */
+  readonly hidden?: boolean;
+  /**
+   * Part files drawn together (back to front) into this piece at assembly time, to stay inside the slot budget: the
+   * sources stay separate files, only the atlas piece is composited. Missing sources are skipped.
+   */
+  readonly compose?: readonly string[];
 }
 
 const SPINE = ['hip', 'spine_mid', 'spine_upper'] as const;
@@ -61,32 +68,54 @@ const hand = (side: 'L' | 'R', v: string): PieceSpec => ({
 
 /** Pieces of the Kiếm tu E pilot in back-to-front draw order. Missing files are skipped. */
 export const E_PIECES: readonly PieceSpec[] = [
-  { id: 'hair_back', slot: 'hair_back', binding: { kind: 'rigid', bone: 'head' }, paperdoll: 'hair_back' },
+  { id: 'shadow', slot: 'shadow', binding: { kind: 'rigid', bone: 'root' } },
+  {
+    id: 'hair_back',
+    slot: 'hair_back',
+    binding: { kind: 'rigid', bone: 'head' },
+    paperdoll: 'hair_back',
+    compose: ['hair_back', 'hair_bun'],
+  },
   { id: 'ponytail', slot: 'ponytail', binding: { kind: 'hanging', template: 'ponytail' } },
   { id: 'ribbon_tail_L', slot: 'ribbon_tail_L', binding: { kind: 'hanging', template: 'ribbon_tail_L' } },
   { id: 'ribbon_tail_R', slot: 'ribbon_tail_R', binding: { kind: 'hanging', template: 'ribbon_tail_R' } },
   { id: 'leg_L', slot: 'leg_L', binding: { kind: 'limb', chain: ['thigh_L', 'shin_L', 'foot_L'], step: 7, ramp: 7 } },
   { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt' } },
   { id: 'torso', slot: 'torso', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'body' },
   {
     id: 'arm_L',
     slot: 'arm_L',
     binding: { kind: 'limb', chain: ['upper_arm_L', 'lower_arm_L', 'hand_L'], step: 6, ramp: 6 },
   },
-  { id: 'cuff_L', slot: 'cuff_L', binding: { kind: 'rigid', bone: 'lower_arm_L' } },
+  {
+    id: 'sleeve_trim_L',
+    slot: 'sleeve_trim_L',
+    binding: { kind: 'rigid', bone: 'lower_arm_L' },
+    compose: ['sleeve_lining_L', 'cuff_L'],
+  },
   hand('L', 'relaxed'),
   hand('L', 'grip'),
   hand('L', 'fist'),
   hand('L', 'palm'),
   hand('L', 'seal'),
+  { id: 'boot_L', slot: 'boot_L', binding: { kind: 'rigid', bone: 'foot_L' } },
   { id: 'leg_R', slot: 'leg_R', binding: { kind: 'limb', chain: ['thigh_R', 'shin_R', 'foot_R'], step: 7, ramp: 7 } },
+  { id: 'boot_R', slot: 'boot_R', binding: { kind: 'rigid', bone: 'foot_R' } },
   { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt' } },
   { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt' } },
+  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt' } },
   { id: 'vest', slot: 'vest', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'outfit_upper' },
-  { id: 'sash', slot: 'sash', binding: { kind: 'rigid', bone: 'hip' } },
+  {
+    id: 'vest_edges',
+    slot: 'vest_edges',
+    binding: { kind: 'rigid', bone: 'spine_upper' },
+    compose: ['vest_edge_L', 'vest_edge_R'],
+  },
+  { id: 'scabbard', slot: 'scabbard', binding: { kind: 'rigid', bone: 'scabbard' } },
+  { id: 'sash_set', slot: 'sash_set', binding: { kind: 'rigid', bone: 'hip' }, compose: ['sash', 'sash_knot'] },
   { id: 'sash_tail_L', slot: 'sash_tail_L', binding: { kind: 'hanging', template: 'sash_tail_L' } },
   { id: 'sash_tail_R', slot: 'sash_tail_R', binding: { kind: 'hanging', template: 'sash_tail_R' } },
-  { id: 'sash_knot', slot: 'sash_knot', binding: { kind: 'rigid', bone: 'hip' } },
   { id: 'pendant', slot: 'pendant', binding: { kind: 'hanging', template: 'pendant' } },
   { id: 'tassel', slot: 'tassel', binding: { kind: 'tip', of: 'pendant' } },
   {
@@ -94,17 +123,27 @@ export const E_PIECES: readonly PieceSpec[] = [
     slot: 'arm_R',
     binding: { kind: 'limb', chain: ['upper_arm_R', 'lower_arm_R', 'hand_R'], step: 6, ramp: 6 },
   },
-  { id: 'cuff_R', slot: 'cuff_R', binding: { kind: 'rigid', bone: 'lower_arm_R' } },
+  {
+    id: 'sleeve_trim_R',
+    slot: 'sleeve_trim_R',
+    binding: { kind: 'rigid', bone: 'lower_arm_R' },
+    compose: ['sleeve_lining_R', 'cuff_R'],
+  },
   hand('R', 'grip'),
   hand('R', 'relaxed'),
   hand('R', 'fist'),
   hand('R', 'palm'),
   hand('R', 'seal'),
-  { id: 'head', slot: 'head', binding: { kind: 'rigid', bone: 'head' }, paperdoll: 'head' },
+  {
+    id: 'head',
+    slot: 'head',
+    binding: { kind: 'rigid', bone: 'head' },
+    paperdoll: 'head',
+    compose: ['head', 'brows'],
+  },
   { id: 'eyes_open', slot: 'eyes', binding: { kind: 'rigid', bone: 'head' } },
   { id: 'eyes_half', slot: 'eyes', binding: { kind: 'rigid', bone: 'head' } },
   { id: 'eyes_closed', slot: 'eyes', binding: { kind: 'rigid', bone: 'head' } },
-  { id: 'brows', slot: 'brows', binding: { kind: 'rigid', bone: 'head' } },
   { id: 'mouth_neutral', slot: 'mouth', binding: { kind: 'rigid', bone: 'head' } },
   { id: 'mouth_open', slot: 'mouth', binding: { kind: 'rigid', bone: 'head' } },
   { id: 'mouth_smile', slot: 'mouth', binding: { kind: 'rigid', bone: 'head' } },
@@ -112,6 +151,21 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'hair_front_2', slot: 'hair_strand_b', binding: { kind: 'hanging', template: 'hair_strand_b' } },
   { id: 'hair_front_3', slot: 'hair_strand_c', binding: { kind: 'hanging', template: 'hair_strand_c' } },
   { id: 'hairpin', slot: 'hairpin', binding: { kind: 'rigid', bone: 'head' } },
+  { id: 'weapon_R', slot: 'weapon_R', binding: { kind: 'rigid', bone: 'weapon' }, paperdoll: 'weapon_R' },
+  {
+    id: 'sword_trail',
+    slot: 'sword_trail',
+    binding: { kind: 'rigid', bone: 'weapon' },
+    blend: 'additive',
+    hidden: true,
+  },
+  {
+    id: 'sword_glint',
+    slot: 'sword_glint',
+    binding: { kind: 'rigid', bone: 'weapon' },
+    blend: 'additive',
+    hidden: true,
+  },
 ];
 
 export interface WeaponPiece {
@@ -148,6 +202,10 @@ export interface AssembleResult {
     readonly slots: number;
     readonly vertices: number;
     readonly chains: number;
+    /** Factor by which the mesh grid/strip steps were coarsened to fit the vertex budget (1 = as designed). */
+    readonly meshScale: number;
+    /** Atlas pixels with colour above alpha (must be 0 for the premultiplied page). */
+    readonly nonPremultiplied: number;
     /** The docs/03 limits of the rig kind (`RIG_LIMITS`), to read the headroom: `vertices` of `limits.meshVertices`. */
     readonly limits: {
       readonly bones: number;
@@ -158,7 +216,14 @@ export interface AssembleResult {
   };
 }
 
+/** Atlas contract (docs/art): padding 2 between regions, extrude 1, premultiplied alpha. */
+export const ATLAS_PADDING = 2;
+export const ATLAS_EXTRUDE = 1;
+
 const ALPHA = 8;
+
+/** Mesh vertices kept free below the RIG_LIMITS budget (600 -> 560 target) so a repainted part does not break the rig. */
+const MESH_HEADROOM = 40;
 
 /** Old chain / strand / panel bones that the new parts replace (the weapon bone and IK stay). */
 const REPLACED_BONES = [
@@ -176,7 +241,6 @@ const REPLACED_BONES = [
   'sleeve_tip_R',
   'robe_front',
   'robe_back',
-  'scabbard',
 ];
 
 function painted(image: Image, view: CanvasView): Vec2[] {
@@ -236,6 +300,17 @@ function rigidRegion(
     },
     crop,
   };
+}
+
+/** Composite premultiplied images back to front. */
+function over(layers: readonly Image[]): Image {
+  const out = createImage(layers[0]!.width, layers[0]!.height);
+  for (const l of layers)
+    for (let i = 0; i < out.width * out.height; i++) {
+      const a = l.data[i * 4 + 3]!;
+      for (let k = 0; k < 4; k++) out.data[i * 4 + k] = l.data[i * 4 + k]! + (out.data[i * 4 + k]! * (255 - a)) / 255;
+    }
+  return out;
 }
 
 function cropImage(image: Image, c: { x: number; y: number; width: number; height: number }): Image {
@@ -305,6 +380,16 @@ function hangingBones(
   return { bones, ids };
 }
 
+/** Number of atlas pixels whose colour exceeds their alpha: 0 for a valid premultiplied page (catches a wrong decode flag). */
+export function nonPremultipliedPixels(image: Image): number {
+  let n = 0;
+  for (let i = 0; i < image.width * image.height; i++) {
+    const a = image.data[i * 4 + 3]!;
+    if (image.data[i * 4]! > a + 1 || image.data[i * 4 + 1]! > a + 1 || image.data[i * 4 + 2]! > a + 1) n++;
+  }
+  return n;
+}
+
 export function assembleContinuous(input: AssembleInput): AssembleResult {
   const { view } = input;
   const pieces = input.pieces ?? E_PIECES;
@@ -323,10 +408,18 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
   const groupOf = new Map(DETAIL_GROUPS.flatMap((g) => g.members.map((m) => [m, g] as const)));
   const hangingIds = new Map<string, string[]>();
 
+  // composed pieces (several part files drawn into one piece) come first: chains and meshes use the composites
+  const images = new Map(input.parts);
+  for (const spec of pieces) {
+    if (!spec.compose) continue;
+    const srcs = spec.compose.map((id) => input.parts.get(id)).filter((i): i is Image => !!i);
+    if (!srcs.length) continue;
+    images.set(spec.id, over(srcs));
+  }
   // 2. hanging chains laid along the art
   for (const p of pieces) {
     if (p.binding.kind !== 'hanging') continue;
-    const img = input.parts.get(p.id);
+    const img = images.get(p.id);
     const t = templates.get(p.binding.template);
     if (!img || !t) continue;
     const parent = withLandmarks.roles[t.parent as keyof typeof withLandmarks.roles] ?? t.parent;
@@ -348,6 +441,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
         stiffness: g.stiffness,
         damping: g.damping,
         ...(g.gravity ? { gravity: g.gravity } : {}),
+        maxAngle: g.maxAngle,
       });
   }
   const skeleton: RigDocument = { ...withLandmarks, bones, chains };
@@ -362,89 +456,108 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     readonly mesh: Made;
     readonly slotBone: string;
   }
-  const built: Built[] = [];
-  for (const spec of pieces) {
-    const img = input.parts.get(spec.id);
-    if (!img) {
-      missing.push(spec.id);
-      continue;
-    }
-    const b = spec.binding;
-    let mesh: Made | null = null;
-    let slotBone = '';
-    try {
-      if (b.kind === 'rigid') {
-        slotBone = b.bone;
-        mesh = rigidRegion(skeleton, spec.id, b.bone, img, view);
-      } else if (b.kind === 'limb') {
-        slotBone = b.chain[0]!;
-        mesh = buildLimbMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          chain: b.chain,
-          view,
-          image: img,
-          cols: b.cols ?? 3,
-          step: b.step ?? 5,
-          ...(b.ramp ? { ramp: b.ramp } : {}),
-        });
-      } else if (b.kind === 'skirt') {
-        const r = skeleton.roles;
-        slotBone = r.hips!;
-        mesh = buildSkirtMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          hips: r.hips!,
-          thighs: [r.thigh_L!, r.thigh_R!],
-          view,
-          image: img,
-          cell: 10,
-        });
-      } else if (b.kind === 'hanging') {
-        const ids = hangingIds.get(b.template);
-        if (!ids) {
-          skipped.push(`${spec.id}: chain not created`);
-          continue;
-        }
-        slotBone = ids[0]!;
-        mesh = buildLimbMesh(skeleton, {
-          name: spec.id,
-          slotBone,
-          chain: ids,
-          view,
-          image: img,
-          ramp: 2.5,
-          step: 4,
-          cols: 2,
-        });
-      } else {
-        const ids = hangingIds.get(b.of);
-        if (!ids) {
-          skipped.push(`${spec.id}: needs the '${b.of}' chain`);
-          continue;
-        }
-        slotBone = ids[ids.length - 1]!;
-        mesh = rigidRegion(skeleton, spec.id, slotBone, img, view);
+  const buildAll = (scale: number) => {
+    const built: Built[] = [];
+    const missingNow: string[] = [];
+    const skippedNow: string[] = [];
+    for (const spec of pieces) {
+      const img = images.get(spec.id);
+      if (!img) {
+        missingNow.push(spec.id);
+        continue;
       }
-    } catch (e) {
-      skipped.push(`${spec.id}: ${(e as Error).message}`);
-      continue;
+      const b = spec.binding;
+      let mesh: Made | null = null;
+      let slotBone = '';
+      try {
+        if (b.kind === 'rigid') {
+          slotBone = b.bone;
+          mesh = rigidRegion(skeleton, spec.id, b.bone, img, view);
+        } else if (b.kind === 'limb') {
+          slotBone = b.chain[0]!;
+          mesh = buildLimbMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            chain: b.chain,
+            view,
+            image: img,
+            cols: b.cols ?? 3,
+            step: (b.step ?? 5) * scale,
+            ...(b.ramp ? { ramp: b.ramp } : {}),
+          });
+        } else if (b.kind === 'skirt') {
+          const r = skeleton.roles;
+          slotBone = r.hips!;
+          mesh = buildSkirtMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            hips: r.hips!,
+            thighs: [r.thigh_L!, r.thigh_R!],
+            view,
+            image: img,
+            cell: 10 * scale,
+          });
+        } else if (b.kind === 'hanging') {
+          const ids = hangingIds.get(b.template);
+          if (!ids) {
+            skippedNow.push(`${spec.id}: chain not created`);
+            continue;
+          }
+          slotBone = ids[0]!;
+          mesh = buildLimbMesh(skeleton, {
+            name: spec.id,
+            slotBone,
+            chain: ids,
+            view,
+            image: img,
+            ramp: 2.5,
+            step: 4 * scale,
+            cols: b.cols ?? 2,
+          });
+        } else {
+          const ids = hangingIds.get(b.of);
+          if (!ids) {
+            skippedNow.push(`${spec.id}: needs the '${b.of}' chain`);
+            continue;
+          }
+          slotBone = ids[ids.length - 1]!;
+          mesh = rigidRegion(skeleton, spec.id, slotBone, img, view);
+        }
+      } catch (e) {
+        skippedNow.push(`${spec.id}: ${(e as Error).message}`);
+        continue;
+      }
+      if (!mesh) {
+        skippedNow.push(`${spec.id}: empty image`);
+        continue;
+      }
+      built.push({ spec, mesh, slotBone });
     }
-    if (!mesh) {
-      skipped.push(`${spec.id}: empty image`);
-      continue;
-    }
-    built.push({ spec, mesh, slotBone });
+    return { built, missingNow, skippedNow };
+  };
+  // the grid / strip steps coarsen together until the meshes fit the vertex budget (a little headroom kept)
+  const meshVerts = (bs: readonly Built[]) =>
+    bs.reduce((n, x) => n + (x.mesh.attachment.type === 'mesh' ? x.mesh.attachment.vertices.length / 2 : 0), 0) +
+    (input.weapon ? 4 : 0);
+  let meshScale = 1;
+  let result = buildAll(meshScale);
+  while (meshVerts(result.built) > limits.meshVertices - MESH_HEADROOM && meshScale < 2.5) {
+    meshScale = Math.round((meshScale + 0.1) * 100) / 100;
+    result = buildAll(meshScale);
   }
+  const built = result.built;
+  missing.push(...result.missingNow);
+  skipped.push(...result.skippedNow);
 
   // 4. weapon borrowed from the old atlas
   const crops = new Map<string, Image>();
-  for (const bt of built) crops.set(bt.spec.id, cropImage(input.parts.get(bt.spec.id)!, bt.mesh.crop));
-  if (input.weapon) crops.set('weapon_R', input.weapon.crop);
+  for (const bt of built) crops.set(bt.spec.id, cropImage(images.get(bt.spec.id)!, bt.mesh.crop));
+  const borrowWeapon = input.weapon && !built.some((b) => b.spec.id === 'weapon_R') ? input.weapon : undefined;
+  if (borrowWeapon) crops.set('weapon_R', borrowWeapon.crop);
 
   // 5. atlas
   const items = [...crops].map(([id, im]) => ({ id, w: im.width, h: im.height }));
-  const pad = 2;
+  const pad = ATLAS_PADDING;
   let size = 256;
   let pos: ReturnType<typeof pack> = null;
   while (size <= maxAtlas && !(pos = pack(items, size, pad))) size *= 2;
@@ -456,6 +569,16 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     for (let y = 0; y < im.height; y++)
       for (let x = 0; x < im.width; x++) {
         const s = (y * im.width + x) * 4;
+        const d = ((at.y + y) * size + at.x + x) * 4;
+        for (let k = 0; k < 4; k++) image.data[d + k] = im.data[s + k]!;
+      }
+    // extrude 1: repeat the edge pixels one pixel outward (no bleeding from neighbours under bilinear filtering)
+    for (let y = -1; y <= im.height; y++)
+      for (let x = -1; x <= im.width; x++) {
+        if (x >= 0 && y >= 0 && x < im.width && y < im.height) continue;
+        const sx = Math.min(im.width - 1, Math.max(0, x));
+        const sy = Math.min(im.height - 1, Math.max(0, y));
+        const s = (sy * im.width + sx) * 4;
         const d = ((at.y + y) * size + at.x + x) * 4;
         for (let k = 0; k < 4; k++) image.data[d + k] = im.data[s + k]!;
       }
@@ -471,7 +594,7 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
       slot = {
         name: spec.slot,
         bone: slotBone,
-        attachment: spec.id,
+        attachment: spec.hidden ? null : spec.id,
         ...(spec.paperdoll ? { paperdoll: spec.paperdoll } : {}),
         ...(spec.blend ? { blend: spec.blend } : {}),
       };
@@ -479,9 +602,9 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
     }
     (attachments[spec.slot] ??= {})[spec.id] = mesh.attachment;
   }
-  if (input.weapon) {
+  if (borrowWeapon) {
     slots.push({ name: 'weapon_R', bone: 'weapon', paperdoll: 'weapon_R', attachment: 'weapon_R' });
-    attachments.weapon_R = { weapon_R: { ...input.weapon.attachment, path: 'weapon_R' } };
+    attachments.weapon_R = { weapon_R: { ...borrowWeapon.attachment, path: 'weapon_R' } };
   }
   const rig: RigDocument = {
     ...skeleton,
@@ -512,6 +635,8 @@ export function assembleContinuous(input: AssembleInput): AssembleResult {
       slots: slots.length,
       vertices,
       chains: chains.length,
+      meshScale,
+      nonPremultiplied: nonPremultipliedPixels(image),
       limits: {
         bones: limits.bones,
         slots: limits.slots,

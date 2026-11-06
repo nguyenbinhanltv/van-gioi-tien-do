@@ -115,6 +115,7 @@ export const RIG_JSON_SCHEMA = {
           damping: { type: 'number', minimum: 0, maximum: 1 },
           gravity: num,
           inertia: { type: 'number', minimum: 0, maximum: 1 },
+          maxAngle: { type: 'number', exclusiveMinimum: 0, maximum: 180 },
         },
       },
     },
