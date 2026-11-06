@@ -2,7 +2,11 @@
 //
 //   npm run capture -w client-cocos -- [--out <dir>] [--animations idle,walk|all] [--frames 8] [--mode review|single]
 //                                      [--direction S] [--src dragonbones/viewer] [--stem rig] [--skip-build] [--gif]
+//                                      [--zoom 1|2] [--sample start|midpoint]
 //
+// --zoom 2 captures at deviceScaleFactor 2 (sheets and GIF frames have twice the pixels; the GIF stays half of the sheet).
+// --sample midpoint seeks frame i of N at (i + 0.5) / N of the clip (the middle of each source frame of a frame-by-frame
+// sprite sheet) instead of i / N; default start keeps the old behaviour.
 // 1. (unless --skip-build) builds web-mobile with scripts/build-web.mjs
 // 2. serves build/web-mobile on a free port, opens the viewer in headless Chrome/Edge (puppeteer-core, no browser download;
 //    set CHROME_PATH to override the browser) with software WebGL
@@ -35,6 +39,11 @@ const direction = opt('direction', 'S');
 const src = opt('src', ''); // default: the viewer's own default character (Kiem tu when present, else the test rig)
 const stem = opt('stem', '');
 const wantGif = flag('gif');
+const zoom = Number(opt('zoom', 1));
+if (![1, 2].includes(zoom)) throw new Error('--zoom must be 1 or 2');
+const sample = opt('sample', 'start');
+if (!['start', 'midpoint'].includes(sample)) throw new Error('--sample must be start or midpoint');
+const at = (i, n) => (i + (sample === 'midpoint' ? 0.5 : 0)) / n;
 /** Region of the 1280x720 viewport holding the actors (panel + HUD hidden during capture). */
 const CLIP =
   mode === 'review' ? { x: 190, y: 120, width: 900, height: 470 } : { x: 340, y: 120, width: 600, height: 470 };
@@ -84,7 +93,7 @@ mkdirSync(out, { recursive: true });
 const browser = await puppeteer.launch({
   executablePath: findBrowser(),
   headless: 'new',
-  defaultViewport: { width: 1280, height: 720 },
+  defaultViewport: { width: 1280, height: 720, deviceScaleFactor: zoom },
   protocolTimeout: 600000,
   args: [
     '--no-sandbox',
@@ -235,7 +244,7 @@ try {
     const shots = [];
     for (let i = 0; i < frames; i++) {
       console.log(`    frame ${i}: seek`);
-      await page.evaluate(`window.__vgtdViewer.seekNorm(${i / frames})`);
+      await page.evaluate(`window.__vgtdViewer.seekNorm(${at(i, frames)})`);
       await sleep(250); // two or more rendered frames in software GL
       console.log(`    frame ${i}: screenshot`);
       shots.push(Buffer.from(await page.screenshot({ type: 'png', clip: CLIP })));
@@ -249,7 +258,7 @@ try {
       const n = Math.min(Math.max(info.frames, 4), 36);
       const clip = [];
       for (let i = 0; i < n; i++) {
-        await page.evaluate(`window.__vgtdViewer.seekNorm(${i / n})`);
+        await page.evaluate(`window.__vgtdViewer.seekNorm(${at(i, n)})`);
         await sleep(200);
         clip.push(downscale(decodePng(Buffer.from(await page.screenshot({ type: 'png', clip: CLIP }))), 2));
       }
