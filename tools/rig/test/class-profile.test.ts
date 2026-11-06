@@ -74,6 +74,9 @@ describe('Thể tu assembly profile', () => {
     expect(Object.keys(THE_TU_PROFILE.ikBend!)).toEqual(['E']);
     expect(THE_TU_PROFILE.gaitByDir!.S!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
     expect(THE_TU_PROFILE.gaitByDir!.SE).toBe(THE_TU_PROFILE.gaitByDir!.S);
+    expect(THE_TU_PROFILE.gaitByDir!.NE).toBe(THE_TU_PROFILE.gaitByDir!.N);
+    expect(THE_TU_PROFILE.gaitByDir!.NE!.crouchScale).toBeGreaterThan(THE_TU_PROFILE.gait.crouchScale);
+    expect(THE_TU_PROFILE.gaitByDir!.NE!.crouchScale).toBeLessThan(THE_TU_PROFILE.gaitByDir!.S!.crouchScale);
     expect(THE_TU_PROFILE.gaitByDir!.E).toBeUndefined();
   });
 
