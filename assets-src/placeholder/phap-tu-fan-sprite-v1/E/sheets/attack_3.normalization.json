@@ -1,0 +1,9 @@
+{
+  "method": "whole-sheet uniform DPI conversion before one character calibration; no individual frame scaling",
+  "source": "sheets/attack_3.generated.png",
+  "output": "sheets/attack_3.png",
+  "sourceSize": [1774, 887],
+  "scale": 0.5772266065388951,
+  "resized": [1024, 512],
+  "canvas": [1024, 512]
+}

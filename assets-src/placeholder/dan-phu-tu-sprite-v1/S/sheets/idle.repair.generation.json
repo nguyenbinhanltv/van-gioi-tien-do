@@ -1,0 +1,17 @@
+{
+  "id": "S-idle-repair-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 17:48:21 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 17:48:49 UTC"
+  },
+  "prompt": "Edit target image1 is12frame FRONT/S idle sheet,4columns3rows; image2 exactmasteridentity. Repair ONLY bottom-right cell12 (zero-based11). Every othercell unchanged. Cell12 standingfigure is slightly too tall; redraw it in a natural EXHALE with a TINY anatomically bent-knee relaxation, lowering head/shoulders/hips together by about4 SOURCEpixels while both soles keep originalgroundline. KEEP exact original headpiece/head/face/torso/limb/prop dimensions; do NOTresize/stretch/crop thefigure orshaveheadpiece. Adjust kneearticulation only, no squat, no shorterlegs. Target standingheight matches neighboringcells1-3, tinyrelaxedstance, sameadultwoman samefrontview. Whiskbronzehandle/rightscreenLEFT, goldtalismanleftscreenRIGHT, exactjade/ivory/bluecloth. Preservecompleteheadpieceandbothboots. Exact4x3SQUAREgrid originalaspect4:3; puremagenta, no text/grid/shadow/VFX.",
+  "references": ["S/sheets/idle.png (original generation)", "reference/S.master.png"],
+  "output": "S/sheets/idle.png",
+  "toolOutputId": "exec-d85de5bc-6475-4646-95c9-c7feaf9a41a1.png",
+  "cells": [11],
+  "method": "Tiny anatomical knee relaxation, no resizing/cropping; sprite:repair verifies all other cells byte-identical."
+}

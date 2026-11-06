@@ -19,6 +19,7 @@ import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type Pal
 import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
 import { runQa, type Finding, type QaClip } from './qa.js';
 import { resizeImage } from './repair.js';
+import { normalizeSheetDpi, preparationScale, type ProjectPreparation, type SheetPreparation } from './preparation.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
@@ -77,6 +78,8 @@ export interface Project {
   readonly slice?: SliceOptions;
   /** Explicit calibration scale; default: from the reference clips. */
   readonly scale?: number;
+  /** Explicit whole-grid DPI normalization followed by a locked character scale. */
+  readonly preparation?: ProjectPreparation;
   readonly clips: readonly ProjectClip[];
 }
 
@@ -85,6 +88,8 @@ export interface ClipContract {
   readonly frames: number;
   readonly kind: 'upright' | 'free';
   readonly sheetSha1: string;
+  /** Present only for explicitly prepared source sheets. */
+  readonly preparation?: SheetPreparation & { readonly rawSha1: string };
   /** The fixed scale this sheet was aligned with (the character calibration unless the sheet has its own). */
   readonly calibration: Calibration;
   readonly records: readonly (FrameRecord | null)[];
@@ -147,6 +152,9 @@ export function validateFootSlideAlignment(
 }
 
 export function runProject(project: Project, baseDir: string): ProjectResult {
+  const scale = project.preparation ? preparationScale(project.preparation, baseDir) : project.scale;
+  if (project.preparation && project.scale !== undefined && project.scale !== scale)
+    throw new Error('non-reproducible project: explicit scale conflicts with preparation calibration');
   const masterBuf = readFileSync(resolve(baseDir, project.master));
   let master: Image = decodePng(masterBuf);
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
@@ -162,7 +170,11 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     : project.slice;
   const sliced = project.clips.map((c) => {
     const buf = readFileSync(resolve(baseDir, c.sheet));
-    const sheet = decodePng(buf);
+    const raw = decodePng(buf);
+    const prepared = project.preparation ? normalizeSheetDpi(raw, c.cols, c.frames) : undefined;
+    // The original assembler writes then reads a PNG: retain its PMA quantization exactly.
+    const preparedBuf = prepared ? encodePng(prepared.image) : buf;
+    const sheet = prepared ? decodePng(preparedBuf) : raw;
     const frames = sliceSheet(
       sheet,
       { cols: c.cols, rows: Math.ceil(c.frames / c.cols), frames: c.frames },
@@ -172,7 +184,13 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     const r0 = cellRect(sheet.width, sheet.height, c.cols, rows, 0);
     const inset = Math.round(Math.min(r0.width, r0.height) * (project.slice?.inset ?? 0.01));
     const groundY = (guides.ground / CELL_PX) * r0.height - inset;
-    return { clip: c, frames, sheetSha1: sha1(buf), groundY };
+    return {
+      clip: c,
+      frames,
+      sheetSha1: sha1(preparedBuf),
+      groundY,
+      preparation: prepared ? { ...prepared.record, rawSha1: sha1(buf) } : undefined,
+    };
   });
 
   // 2. calibration: one per character, unless a sheet declares its own FIXED scale (different generation DPI)
@@ -180,11 +198,11 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const refs = sliced.filter((s) => !own(s.clip) && (s.clip.reference ?? (s.clip.kind ?? 'upright') === 'upright'));
   const rawHeight = (f: { image: Parameters<typeof measureFigure>[0] }) => measureFigure(f.image)?.height ?? 0;
   let character: Calibration | null = null;
-  if (project.scale !== undefined) {
+  if (scale !== undefined) {
     character = {
-      scale: project.scale,
+      scale,
       targetHeight: m.height,
-      referenceHeight: m.height / project.scale,
+      referenceHeight: m.height / scale,
       referenceFrames: 0,
     };
   } else if (sliced.some((s) => !own(s.clip))) {
@@ -310,6 +328,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       frames: s.clip.frames,
       kind: s.clip.kind ?? 'upright',
       sheetSha1: s.sheetSha1,
+      ...(s.preparation ? { preparation: s.preparation } : {}),
       calibration: s.calibration,
       records: s.aligned.map((a) => a?.record ?? null),
       regions: s.aligned.flatMap((a, i) => (a ? [`${s.clip.name}_${pad(i)}`] : [])),

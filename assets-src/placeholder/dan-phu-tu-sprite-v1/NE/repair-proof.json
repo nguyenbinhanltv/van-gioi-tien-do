@@ -1,0 +1,141 @@
+{
+  "method": "Shared cellHashes over decoded raw source pixels; no cropping or per-frame scale; unchanged cells must be byte-identical.",
+  "records": [
+    {
+      "clip": "run",
+      "originalToolOutputId": "exec-ea098bd0-7cb8-4df4-8ff7-1e53023a8523.png",
+      "originalAvailableAt": "wip/van-gioi-tien-do-21-pause-20261107@15cec8459ced4326324eff0ddc373bf60d992574:assets-src/placeholder/dan-phu-tu-sprite-v1/pause-backup/raw-tool-outputs",
+      "sourceSize": [1983, 793],
+      "originalSha256": "8941b5784aa4380e58923e27d005615587a17afbc40481c9938159d4ee7daaac",
+      "selectedSha256": "01bb695bb6ba0c0dc37cbc84631e5dba0f218a8765a09fa5ea57b713753a3cf8",
+      "changedCells": [1, 4, 6],
+      "untouchedCells": 7,
+      "untouchedPixelHashesEqual": true,
+      "cells": [
+        {
+          "cell": 0,
+          "before": "1abd762f66ecba3abb7d74d6d5cbdfdffaca2072",
+          "after": "1abd762f66ecba3abb7d74d6d5cbdfdffaca2072"
+        },
+        {
+          "cell": 1,
+          "before": "e21d75b09785cb17349489173ab72c2cb7b81ff2",
+          "after": "e3365462083b8bcd60a28ca7b145f4ffb8a5fb7e"
+        },
+        {
+          "cell": 2,
+          "before": "6a68d19a9888dd63b1b4be67ddfa28044a4d0396",
+          "after": "6a68d19a9888dd63b1b4be67ddfa28044a4d0396"
+        },
+        {
+          "cell": 3,
+          "before": "4d586e5bce06a9af05c9dcea1eb4fb9cbe221445",
+          "after": "4d586e5bce06a9af05c9dcea1eb4fb9cbe221445"
+        },
+        {
+          "cell": 4,
+          "before": "f31dfa1d2fa6870791c15a0d57d275adf3b92716",
+          "after": "b1ecfda3410c69351efee05ec8c58da844307f7b"
+        },
+        {
+          "cell": 5,
+          "before": "0538be551279db818026e680132a595fca38572f",
+          "after": "0538be551279db818026e680132a595fca38572f"
+        },
+        {
+          "cell": 6,
+          "before": "b7de7a00084fcf1c1a1f811a05701dd8db73a965",
+          "after": "4f9fc1217d1a179dbd27347d06669e7f3640b804"
+        },
+        {
+          "cell": 7,
+          "before": "f2cad0266d92707585e5a2441fa8d8715554c77c",
+          "after": "f2cad0266d92707585e5a2441fa8d8715554c77c"
+        },
+        {
+          "cell": 8,
+          "before": "6301342c5439ec03eec5237141329af95aa8db72",
+          "after": "6301342c5439ec03eec5237141329af95aa8db72"
+        },
+        {
+          "cell": 9,
+          "before": "43598a1feff87b77cf679abcd03c78d2074a34ba",
+          "after": "43598a1feff87b77cf679abcd03c78d2074a34ba"
+        }
+      ]
+    },
+    {
+      "clip": "emote",
+      "originalToolOutputId": "exec-6254c140-fa8e-4745-a08f-932a43370122.png",
+      "originalAvailableAt": "wip/van-gioi-tien-do-21-pause-20261107@15cec8459ced4326324eff0ddc373bf60d992574:assets-src/placeholder/dan-phu-tu-sprite-v1/pause-backup/raw-tool-outputs",
+      "sourceSize": [1448, 1086],
+      "originalSha256": "9c8bda0d87717bde05ca508ccefe86681e7962fd8fac95ca14fd193726d746fc",
+      "selectedSha256": "ab735559500fe2f2e3306a4b48e6f70344ed8effe7efcdfd3a4be612cb3e3adc",
+      "changedCells": [0, 1, 2, 3, 5],
+      "untouchedCells": 7,
+      "untouchedPixelHashesEqual": true,
+      "cells": [
+        {
+          "cell": 0,
+          "before": "af9a2cfb13f83d1e9f13a44403a24960a8411566",
+          "after": "f91c7cfa4ff0170a2586b832687b02d214684344"
+        },
+        {
+          "cell": 1,
+          "before": "1a97a16baedbb913303f843bc6f6015f7f0a9626",
+          "after": "7dee907f708f51409be1a9c5b1e07ad098cce994"
+        },
+        {
+          "cell": 2,
+          "before": "b1109ece58807e646a8507df985cca77d1b973b4",
+          "after": "0485bdf4fe985aa6f3baaa2e9bc8937490a20dd7"
+        },
+        {
+          "cell": 3,
+          "before": "0b6f85a69ca27015fb9f3fe1f8ed9edc024f2a61",
+          "after": "719d3755baa3955c3849603b0eff8c05ba71e28f"
+        },
+        {
+          "cell": 4,
+          "before": "939af289eeb027f648fbda3faf773753c1a1980f",
+          "after": "939af289eeb027f648fbda3faf773753c1a1980f"
+        },
+        {
+          "cell": 5,
+          "before": "f81d26918069614805b2e37b57088ead0db57748",
+          "after": "3dc6aafca951673e1af65ae54e9d3aaa1819ba69"
+        },
+        {
+          "cell": 6,
+          "before": "b3a9fb57dc075e238bcecb22058cc47187249505",
+          "after": "b3a9fb57dc075e238bcecb22058cc47187249505"
+        },
+        {
+          "cell": 7,
+          "before": "23a2b629f864ed414d67a9ac16446b94e7fe2331",
+          "after": "23a2b629f864ed414d67a9ac16446b94e7fe2331"
+        },
+        {
+          "cell": 8,
+          "before": "f3fd2f4b2adfc5c123b23e369b59e54399dddb57",
+          "after": "f3fd2f4b2adfc5c123b23e369b59e54399dddb57"
+        },
+        {
+          "cell": 9,
+          "before": "03ae7c75b321ab5b0bc8d9c4f6424861d3083676",
+          "after": "03ae7c75b321ab5b0bc8d9c4f6424861d3083676"
+        },
+        {
+          "cell": 10,
+          "before": "c1972c46c895222d60e58913943c2105ad03c96d",
+          "after": "c1972c46c895222d60e58913943c2105ad03c96d"
+        },
+        {
+          "cell": 11,
+          "before": "076e92b5134f05d4e867933ce89deedb1e6ddba2",
+          "after": "076e92b5134f05d4e867933ce89deedb1e6ddba2"
+        }
+      ]
+    }
+  ]
+}

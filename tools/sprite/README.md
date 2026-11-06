@@ -99,3 +99,11 @@ It accepts `cell` with `cellConvention: "0based;-1wholeclip"`, or an explicit `c
 never synthesized as QA findings. Exact reimports do not duplicate observations. The JSON and its
 Markdown view are written; source companion files are unchanged. Re-run `sprite:batch` before
 `sprite:review` to refresh manual observations in existing batch reports.
+
+## Reproducible mixed-DPI source projects
+
+Raw mixed-DPI grids can declare `"preparation": { "kind": "square-cell-dpi-v1", "calibration": "../character-calibration.json" }` in `project.json`. The calibration JSON supplies a positive finite `scale` shared by every direction. `sprite:build`, `sprite:batch`, and backlog commands use the same preparation automatically; no external assembler or temporary absolute paths are required. An explicit conflicting project `scale` is rejected.
+
+This version matches the original Dan/Phu assembler: remove external blank black/transparent top/bottom rows only when needed to recover square cells (1px cell-grid tolerance, 3px crop rounding), resize the entire grid to `CELL_PX` cells, then apply the locked character scale. This is an explicit sheet DPI conversion, never a per-frame fit or atlas downscale. Non-square content and missing/invalid calibration fail as **non-reproducible project** before art QA. Sheets already normalized by an external assembler must omit `preparation`.
+
+Prepared contracts retain `sheetSha1` for the normalized PNG and add each clip's `preparation` with `rawSha1`, raw/normalized dimensions, crop bounds, and DPI scale factors. Original sheets, generation guides, phases, pose annotations, and backlog remain unchanged. Projects without preparation retain the existing export format. The committed-project audit validates preparation and rejects undeclared mixed sheet DPI without per-sheet calibration; it does not label raw normalization errors as art findings.
