@@ -1,0 +1,44 @@
+{
+  "clip": "cast",
+  "grid": {
+    "cols": 4,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 8,
+  "guides": {
+    "ground": 232,
+    "head": 23,
+    "pelvis": 127.5,
+    "centerX": 127.17745887294365
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 1024,
+  "height": 512
+}

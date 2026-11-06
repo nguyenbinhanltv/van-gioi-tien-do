@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.cast",
+  "prompt": "undefined4 columns x2 rows,8 equal square cells,aspect2:1, row-major. Compact combat staging, full sprite at most150px wide in256cell. Body upright203..215px all frames, stable head height, shallow knee flex only. Open fan and arms stay close enough to body; fan never extends above bun or hides face. 8 frames:1guard,2left palm gathers at chest,3fan/palm prepare,4RELEASE right-hand fan sweep southeast with left palm guiding,5hold,6recoil,7recover,8guard. vfx_spawn matches drawing4. No baked VFX.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:22:59 UTC",
+  "utcEnd": "2026-11-06 21:23:29 UTC",
+  "selectedOutput": "SE/sheets/cast.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/cast.template.png"],
+  "attempt": 1
+}

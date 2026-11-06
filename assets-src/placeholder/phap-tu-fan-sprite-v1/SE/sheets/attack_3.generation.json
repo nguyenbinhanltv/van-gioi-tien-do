@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.attack_3",
+  "prompt": "undefined4 columns x2 rows,8 equal square cells,aspect2:1, row-major. Compact combat staging, full sprite at most150px wide in256cell. Body upright203..215px all frames, stable head height, shallow knee flex only. Open fan and arms stay close enough to body; fan never extends above bun or hides face. 8 frames:1guard,2weight shifts without dropping head,3gather fan across chest,4start sweep,5RELEASE stronger broad fan arc southeast,6hold,7recover,8guard. Event matches drawing5; no deep lunge.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:21:36 UTC",
+  "utcEnd": "2026-11-06 21:22:23 UTC",
+  "selectedOutput": "SE/sheets/attack_3.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/attack_3.template.png"],
+  "attempt": 1
+}

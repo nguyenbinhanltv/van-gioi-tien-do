@@ -1,0 +1,217 @@
+{
+  "character": "phap-tu",
+  "direction": "SE",
+  "stem": "phaptu",
+  "master": "../reference/SE.master.png",
+  "backlog": "quality-backlog.json",
+  "slice": {
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.generated.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.generated.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated",
+        "1": "seated",
+        "2": "seated",
+        "3": "seated",
+        "4": "seated",
+        "5": "seated",
+        "6": "seated",
+        "7": "seated"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.generated.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "run",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.selected.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheet": "sheets/dash.generated.png",
+      "manifest": "templates/dash.template.json"
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.generated.png",
+      "manifest": "templates/sword_fly.template.json"
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.generated.png",
+      "manifest": "templates/attack.template.json"
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.generated.png",
+      "manifest": "templates/attack_2.template.json"
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.generated.png",
+      "manifest": "templates/attack_3.template.json"
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.generated.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.generated.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 2,
+      "frames": 4,
+      "durationSec": 0.2,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.generated.png",
+      "manifest": "templates/hit.template.json"
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.8,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.selected.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "4": "die-collapse",
+        "5": "die-collapse",
+        "6": "die-collapse",
+        "7": "die-collapse"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 6,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.generated.png",
+      "manifest": "templates/tribulation.template.json"
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.generated.png",
+      "manifest": "templates/emote.template.json"
+    }
+  ],
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../calibration.json"
+  }
+}

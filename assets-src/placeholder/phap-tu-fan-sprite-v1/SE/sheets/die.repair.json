@@ -1,0 +1,27 @@
+{
+  "method": "@vgtd/sprite repairCell, no figure scaling",
+  "original": "die.generated.png",
+  "edited": "die.repair1.generated.png",
+  "targets": [3],
+  "changed": [3],
+  "before": [
+    "02dc44a1e3fc1d58fd3f477cbf47fbbf44c24e7f",
+    "5d6f95ac5d9172c03dcdaa934c116334d69b71ca",
+    "e0e1ea4087f8b70aba6936da3341f65f358be3af",
+    "97d2529ee8b51099f74cd6d39a301fc475bdce56",
+    "745b14e0d46582fb52a46ec655fbdf9876d30558",
+    "a9da3d8707c62b6181e29f83b93f474eae08920e",
+    "be087205dd139009602cbb2d732580d74dfc6061",
+    "811dc6e125c3aebedf8acb2219bca46f50cbeeea"
+  ],
+  "after": [
+    "02dc44a1e3fc1d58fd3f477cbf47fbbf44c24e7f",
+    "5d6f95ac5d9172c03dcdaa934c116334d69b71ca",
+    "e0e1ea4087f8b70aba6936da3341f65f358be3af",
+    "ebcd909ad34854471855dc74fb170de809ce24f4",
+    "745b14e0d46582fb52a46ec655fbdf9876d30558",
+    "a9da3d8707c62b6181e29f83b93f474eae08920e",
+    "be087205dd139009602cbb2d732580d74dfc6061",
+    "811dc6e125c3aebedf8acb2219bca46f50cbeeea"
+  ]
+}
