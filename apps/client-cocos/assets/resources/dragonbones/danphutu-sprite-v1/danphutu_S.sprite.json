@@ -2645,7 +2645,7 @@
     }
   ],
   "qa": {
-    "ok": false,
+    "ok": true,
     "findings": [
       {
         "gate": "height",
@@ -2732,140 +2732,140 @@
         "severity": "fail",
         "clip": "walk",
         "frame": 1,
-        "metric": "slide_px_per_frame_R",
-        "value": 6.46,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.33,
         "limit": 3,
-        "message": "R foot slides 6.5 px/frame between frames 0-1 (limit 3)"
+        "message": "R foot slides 6.3 px/frame between frames 0-1 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 2,
-        "metric": "slide_px_per_frame_R",
-        "value": 15.7,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 3.67,
         "limit": 3,
-        "message": "R foot slides 15.7 px/frame between frames 1-2 (limit 3)"
+        "message": "R foot slides 3.7 px/frame between frames 1-2 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 3,
-        "metric": "slide_px_per_frame_R",
-        "value": 25.63,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 9.67,
         "limit": 3,
-        "message": "R foot slides 25.6 px/frame between frames 2-3 (limit 3)"
+        "message": "R foot slides 9.7 px/frame between frames 2-3 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 5,
-        "metric": "slide_px_per_frame_L",
-        "value": 5.8,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 7.67,
         "limit": 3,
-        "message": "L foot slides 5.8 px/frame between frames 4-5 (limit 3)"
+        "message": "L foot slides 7.7 px/frame between frames 4-5 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 6,
-        "metric": "slide_px_per_frame_L",
-        "value": 28.78,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 10.33,
         "limit": 3,
-        "message": "L foot slides 28.8 px/frame between frames 5-6 (limit 3)"
+        "message": "L foot slides 10.3 px/frame between frames 5-6 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "walk",
         "frame": 7,
-        "metric": "slide_px_per_frame_L",
-        "value": 14.69,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 16.67,
         "limit": 3,
-        "message": "L foot slides 14.7 px/frame between frames 6-7 (limit 3)"
+        "message": "L foot slides 16.7 px/frame between frames 6-7 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "warn",
         "clip": "run",
         "frame": 0,
-        "metric": "ghost_offset_px_R",
-        "value": 22.6,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 25.8,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -22.6 px from its template ghost (x 105.0 vs 127.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 25.8 px from its template ghost (xy 102.5,245.0 vs 127.6,250.8, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 2,
-        "metric": "slide_px_per_frame_R",
-        "value": 4.7,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 7.5,
         "limit": 3,
-        "message": "R foot slides 4.7 px/frame between frames 1-2 (limit 3)"
+        "message": "R foot slides 7.5 px/frame between frames 1-2 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 3,
-        "metric": "slide_px_per_frame_R",
-        "value": 12.44,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.5,
         "limit": 3,
-        "message": "R foot slides 12.4 px/frame between frames 2-3 (limit 3)"
+        "message": "R foot slides 6.5 px/frame between frames 2-3 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 4,
-        "metric": "slide_px_per_frame_R",
-        "value": 9,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 4.5,
         "limit": 3,
-        "message": "R foot slides 9.0 px/frame between frames 3-4 (limit 3)"
-      },
-      {
-        "gate": "footSlide",
-        "severity": "warn",
-        "clip": "run",
-        "frame": 9,
-        "metric": "ghost_offset_px_L",
-        "value": 20.3,
-        "limit": 20,
-        "message": "L planted foot: nearest sole is -20.3 px from its template ghost (x 107.3 vs 127.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R foot slides 4.5 px/frame between frames 3-4 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 6,
-        "metric": "slide_px_per_frame_L",
-        "value": 7.02,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 9.5,
         "limit": 3,
-        "message": "L foot slides 7.0 px/frame between frames 5-6 (limit 3)"
+        "message": "L foot slides 9.5 px/frame between frames 5-6 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 7,
-        "metric": "slide_px_per_frame_L",
-        "value": 5.52,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 8.5,
         "limit": 3,
-        "message": "L foot slides 5.5 px/frame between frames 6-7 (limit 3)"
+        "message": "L foot slides 8.5 px/frame between frames 6-7 (limit 3)"
       },
       {
         "gate": "footSlide",
         "severity": "fail",
         "clip": "run",
         "frame": 8,
-        "metric": "slide_px_per_frame_L",
-        "value": 6.21,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 7.5,
         "limit": 3,
-        "message": "L foot slides 6.2 px/frame between frames 7-8 (limit 3)"
+        "message": "L foot slides 7.5 px/frame between frames 7-8 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 9,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 19.5,
+        "limit": 3,
+        "message": "L foot slides 19.5 px/frame between frames 8-9 (limit 3)"
       },
       {
         "gate": "height",
@@ -3307,13 +3307,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 1,
-          "metric": "slide_px_per_frame_R",
-          "value": 6.46,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.33,
           "limit": 3,
-          "message": "R foot slides 6.5 px/frame between frames 0-1 (limit 3)"
+          "message": "R foot slides 6.3 px/frame between frames 0-1 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 1,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.33,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3321,13 +3334,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 2,
-          "metric": "slide_px_per_frame_R",
-          "value": 15.7,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 3.67,
           "limit": 3,
-          "message": "R foot slides 15.7 px/frame between frames 1-2 (limit 3)"
+          "message": "R foot slides 3.7 px/frame between frames 1-2 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 3.67,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3335,13 +3361,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 3,
-          "metric": "slide_px_per_frame_R",
-          "value": 25.63,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 9.67,
           "limit": 3,
-          "message": "R foot slides 25.6 px/frame between frames 2-3 (limit 3)"
+          "message": "R foot slides 9.7 px/frame between frames 2-3 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 9.67,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3349,13 +3388,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 5,
-          "metric": "slide_px_per_frame_L",
-          "value": 5.8,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 7.67,
           "limit": 3,
-          "message": "L foot slides 5.8 px/frame between frames 4-5 (limit 3)"
+          "message": "L foot slides 7.7 px/frame between frames 4-5 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 5,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 7.67,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3363,13 +3415,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 6,
-          "metric": "slide_px_per_frame_L",
-          "value": 28.78,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 10.33,
           "limit": 3,
-          "message": "L foot slides 28.8 px/frame between frames 5-6 (limit 3)"
+          "message": "L foot slides 10.3 px/frame between frames 5-6 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 6,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 10.33,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3377,13 +3442,26 @@
           "severity": "fail",
           "clip": "walk",
           "frame": 7,
-          "metric": "slide_px_per_frame_L",
-          "value": 14.69,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 16.67,
           "limit": 3,
-          "message": "L foot slides 14.7 px/frame between frames 6-7 (limit 3)"
+          "message": "L foot slides 16.7 px/frame between frames 6-7 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "walk",
+          "dir": "S",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 16.67,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3391,13 +3469,26 @@
           "severity": "warn",
           "clip": "run",
           "frame": 0,
-          "metric": "ghost_offset_px_R",
-          "value": 22.6,
+          "metric": "ghost_distance_2d_px_R",
+          "value": 25.8,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -22.6 px from its template ghost (x 105.0 vs 127.6, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is 25.8 px from its template ghost (xy 102.5,245.0 vs 127.6,250.8, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 0,
+          "gate": "footSlide",
+          "metric": "ghost_distance_2d_px_R",
+          "value": 25.8,
+          "limit": 20,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3405,13 +3496,26 @@
           "severity": "fail",
           "clip": "run",
           "frame": 2,
-          "metric": "slide_px_per_frame_R",
-          "value": 4.7,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 7.5,
           "limit": 3,
-          "message": "R foot slides 4.7 px/frame between frames 1-2 (limit 3)"
+          "message": "R foot slides 7.5 px/frame between frames 1-2 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 2,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 7.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3419,13 +3523,26 @@
           "severity": "fail",
           "clip": "run",
           "frame": 3,
-          "metric": "slide_px_per_frame_R",
-          "value": 12.44,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.5,
           "limit": 3,
-          "message": "R foot slides 12.4 px/frame between frames 2-3 (limit 3)"
+          "message": "R foot slides 6.5 px/frame between frames 2-3 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 3,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 6.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3433,27 +3550,26 @@
           "severity": "fail",
           "clip": "run",
           "frame": 4,
-          "metric": "slide_px_per_frame_R",
-          "value": 9,
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 4.5,
           "limit": 3,
-          "message": "R foot slides 9.0 px/frame between frames 3-4 (limit 3)"
+          "message": "R foot slides 4.5 px/frame between frames 3-4 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
-      },
-      {
-        "finding": {
-          "gate": "footSlide",
-          "severity": "warn",
+        "verdict": "accepted",
+        "entry": {
           "clip": "run",
-          "frame": 9,
-          "metric": "ghost_offset_px_L",
-          "value": 20.3,
-          "limit": 20,
-          "message": "L planted foot: nearest sole is -20.3 px from its template ghost (x 107.3 vs 127.6, limit 20); not measured (the foot is not on the template)"
-        },
-        "class": "soft",
-        "verdict": "fail-soft"
+          "dir": "S",
+          "cell": 4,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_R",
+          "value": 4.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3461,13 +3577,26 @@
           "severity": "fail",
           "clip": "run",
           "frame": 6,
-          "metric": "slide_px_per_frame_L",
-          "value": 7.02,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 9.5,
           "limit": 3,
-          "message": "L foot slides 7.0 px/frame between frames 5-6 (limit 3)"
+          "message": "L foot slides 9.5 px/frame between frames 5-6 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 6,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 9.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3475,13 +3604,26 @@
           "severity": "fail",
           "clip": "run",
           "frame": 7,
-          "metric": "slide_px_per_frame_L",
-          "value": 5.52,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 8.5,
           "limit": 3,
-          "message": "L foot slides 5.5 px/frame between frames 6-7 (limit 3)"
+          "message": "L foot slides 8.5 px/frame between frames 6-7 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 7,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 8.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -3489,13 +3631,53 @@
           "severity": "fail",
           "clip": "run",
           "frame": 8,
-          "metric": "slide_px_per_frame_L",
-          "value": 6.21,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 7.5,
           "limit": 3,
-          "message": "L foot slides 6.2 px/frame between frames 7-8 (limit 3)"
+          "message": "L foot slides 7.5 px/frame between frames 7-8 (limit 3)"
         },
         "class": "soft",
-        "verdict": "fail-soft"
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 8,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 7.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
+      },
+      {
+        "finding": {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 9,
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 19.5,
+          "limit": 3,
+          "message": "L foot slides 19.5 px/frame between frames 8-9 (limit 3)"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "run",
+          "dir": "S",
+          "cell": 9,
+          "gate": "footSlide",
+          "metric": "slide_ground_px_per_frame_L",
+          "value": 19.5,
+          "limit": 3,
+          "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
+          "status": "open",
+          "owner": "support-art",
+          "added": "2026-11-06"
+        }
       },
       {
         "finding": {
@@ -4180,194 +4362,11 @@
         "verdict": "info"
       }
     ],
-    "resolved": [
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 0,
-        "gate": "footSlide",
-        "metric": "ghost_distance_2d_px_R",
-        "value": 25.8,
-        "limit": 20,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 2,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 7.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 3,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 6.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 4,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 4.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 6,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 9.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 7,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 8.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 8,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 7.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "run",
-        "dir": "S",
-        "cell": 9,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 19.5,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 1,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 6.33,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 2,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 3.67,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 3,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_R",
-        "value": 9.67,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 5,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 7.67,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 6,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 10.33,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      },
-      {
-        "clip": "walk",
-        "dir": "S",
-        "cell": 7,
-        "gate": "footSlide",
-        "metric": "slide_ground_px_per_frame_L",
-        "value": 16.67,
-        "limit": 3,
-        "note": "First full-set pass: free-pose redraw drift at fixed master-locked scale; sword_fly 2.8â€“7.8 px, attack_3 0.8 px. Standing attacks retain identity checks and no pose exemption. Improve source drawings in later asset pass; no per-frame rescaling.",
-        "status": "open",
-        "owner": "support-art",
-        "added": "2026-11-06"
-      }
-    ],
+    "resolved": [],
     "counts": {
       "fail-hard": 0,
-      "fail-soft": 14,
-      "accepted": 18,
+      "fail-soft": 0,
+      "accepted": 32,
       "regression": 0,
       "info": 22
     }

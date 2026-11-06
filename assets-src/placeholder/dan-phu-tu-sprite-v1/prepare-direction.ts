@@ -50,6 +50,7 @@ for (const clipSpec of SPRITE_CLIPS) {
         halfStride: halfStrideFor(groundSpeedPxS(spec.id, direction)!, durationSec),
         lift: spec.id === 'run' ? 16 : 10,
         first: 'R',
+        direction,
       })
     : undefined;
   const template = buildTemplate({ clip: name, frames: spec.frames, cols, guides, ...(cells ? { cells } : {}) });
