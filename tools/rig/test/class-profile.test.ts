@@ -248,3 +248,72 @@ describe('class-aware helpers', () => {
     expect(res.stats.nonPremultiplied).toBe(0);
   });
 });
+
+describe('Thể tu combat poses', () => {
+  const clips = authorClassSet('the-tu', base, { secondary: false });
+  const get = (n: string) => clips.find((c) => c.name === n)!;
+  const rot = (clip: ReturnType<typeof get>, bone: string, f: number) => {
+    const keys = clip.bones.find((b) => b.bone === bone)!.rotate!;
+    const k = [...keys].reverse().find((x) => x.frame <= f)!;
+    return k.value;
+  };
+
+  it('strikes start and end in the guard stance (no drop of the arms), not in the bare rest pose', () => {
+    for (const n of ['attack', 'attack_2', 'attack_3', 'hit']) {
+      const c = get(n);
+      const first = c.bones.find((b) => b.bone === 'upper_arm_R')!.rotate![0]!.value;
+      const last = c.bones.find((b) => b.bone === 'upper_arm_R')!.rotate!.at(-1)!.value;
+      expect(first, n).toBeCloseTo(55, 3);
+      expect(last, n).toBeCloseTo(55, 3);
+    }
+  });
+
+  it('holds the impact pose for the configured frames, with the hit event on the first of them', () => {
+    const jab = get('attack');
+    const hit = jab.phases!.hit_frame!;
+    const arm = (f: number) => rot(jab, 'upper_arm_R', f);
+    expect(arm(hit)).toBeCloseTo(115, 3);
+    expect(arm(hit + 2)).toBeCloseTo(115, 3);
+    expect(arm(hit + 3)).toBeLessThan(115);
+    expect(jab.events.find((e) => e.name === 'hit')!.frame).toBe(hit);
+    expect(get('attack_3').bones.find((b) => b.bone === 'upper_arm_L')).toBeDefined();
+    // anticipation: the striking arm is drawn back before the impact, weight loaded back (hips behind the stance)
+    expect(arm(jab.phases!.windup_end!)).toBeLessThan(arm(0));
+  });
+
+  it('shows the fist at the impact of the jab and cross, open gauntlets at the palm strike', () => {
+    const disp = (names: string[]) => Object.fromEntries(names.map((n) => [n, {} as never]));
+    const rig = {
+      ...base,
+      slots: [
+        ...base.slots,
+        { name: 'hand_R', bone: 'hand_R', attachment: 'gauntlet_R_guard' },
+        { name: 'hand_L', bone: 'hand_L', attachment: 'gauntlet_L_guard' },
+      ],
+      skins: [
+        {
+          name: 'default',
+          attachments: {
+            ...base.skins[0]!.attachments,
+            hand_R: disp(['gauntlet_R_guard', 'gauntlet_R_fist', 'gauntlet_R_open']),
+            hand_L: disp(['gauntlet_L_guard', 'gauntlet_L_fist', 'gauntlet_L_open']),
+          },
+        },
+      ],
+    };
+    const shown = (clip: string, slot: string, frame: number) => {
+      const c = applyDetail(
+        rig,
+        authorClassSet('the-tu', rig, { secondary: false }).find((x) => x.name === clip)!,
+        THE_TU_DETAIL_RULES,
+      );
+      const keys = c.slots.find((s) => s.slot === slot)!.attachment!;
+      return [...keys].reverse().find((k) => k.frame <= frame)!.value;
+    };
+    const hitFrame = (n: string) => get(n).phases!.hit_frame!;
+    expect(shown('attack', 'hand_R', hitFrame('attack'))).toBe('gauntlet_R_fist');
+    expect(shown('attack_2', 'hand_L', hitFrame('attack_2'))).toBe('gauntlet_L_fist');
+    expect(shown('attack_3', 'hand_R', hitFrame('attack_3'))).toBe('gauntlet_R_open');
+    expect(shown('attack_3', 'hand_L', hitFrame('attack_3'))).toBe('gauntlet_L_open');
+  });
+});
