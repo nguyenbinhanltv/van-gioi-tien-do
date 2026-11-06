@@ -25,6 +25,7 @@ export interface ClipReport {
   };
   /** Relative path (to the report folder) of the 2x GIF, when captured. */
   readonly gif?: string;
+  readonly unmeasuredFootSlide?: boolean;
 }
 
 export interface DirReport {
@@ -72,7 +73,7 @@ function chip(status: ClipStatus): string {
 export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite review'): string {
   const total = reports.flatMap((r) => r.dirs.flatMap((d) => d.clips));
   const bad = total.filter((c) => c.status === 'fail').length;
-  const warn = total.filter((c) => c.status === 'warn').length;
+  const warn = total.filter((c) => c.status === 'warn' && c.counts.accepted > 0).length;
   const manualCount = reports.reduce((n, r) => n + r.dirs.reduce((m, d) => m + (d.manual?.length ?? 0), 0), 0);
   const nav = reports.map((r) => `<a href="#c-${esc(r.character)}">${esc(r.character)}</a>`).join('');
   const body = reports
@@ -94,7 +95,10 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
                 ? `<img src="${esc(c.gif)}" alt="${esc(`${r.character} ${d.dir} ${c.name}`)}" loading="lazy">`
                 : '<div class="nogif">no capture</div>';
               const k = c.counts;
-              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div><div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div></div>`;
+              const unmeasuredNote = c.unmeasuredFootSlide
+                ? '<div class="meta">Foot slide UNMEASURED (migration pending)</div>'
+                : '';
+              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div>${unmeasuredNote}<div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div></div>`;
             })
             .join('');
           return `<h3>${esc(r.character)} / ${esc(d.dir)} ${chip(d.ok ? 'ok' : 'fail')} <span class="sum">atlas ${d.atlas.pages}p ${d.atlas.width}x${d.atlas.height}, ${d.atlas.regions} regions · backlog ${d.backlogEntries} (${d.resolvedEntries} metric entries resolved) · manual ${manual.length} · <a href="${esc(d.folder)}/${esc(d.stem)}_${esc(d.dir)}.sprite.json">contract</a></span></h3>${observations}<div class="grid">${cards}</div>`;

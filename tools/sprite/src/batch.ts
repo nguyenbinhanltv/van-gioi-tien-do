@@ -55,6 +55,9 @@ export interface BatchRun {
 function clipReport(project: Project, result: ProjectResult, name: string): ClipReport {
   const c = project.clips.find((x) => x.name === name)!;
   const counts = { hard: 0, soft: 0, regression: 0, accepted: 0, info: 0 };
+  const unmeasuredFootSlide = result.contract.qa.judged.some(
+    (j) => j.finding.clip === name && j.finding.gate === 'footSlide' && j.finding.measurement === 'unmeasured',
+  );
   for (const j of result.contract.qa.judged) {
     if (j.finding.clip !== name) continue;
     if (j.verdict === 'fail-hard') counts.hard++;
@@ -64,8 +67,20 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
     else counts.info++;
   }
   const status: ClipStatus =
-    counts.hard + counts.soft + counts.regression > 0 ? 'fail' : counts.accepted > 0 ? 'warn' : 'ok';
-  return { name, frames: c.frames, durationSec: c.durationSec, kind: c.kind ?? 'upright', status, counts };
+    counts.hard + counts.soft + counts.regression > 0
+      ? 'fail'
+      : counts.accepted > 0 || unmeasuredFootSlide
+        ? 'warn'
+        : 'ok';
+  return {
+    name,
+    frames: c.frames,
+    durationSec: c.durationSec,
+    kind: c.kind ?? 'upright',
+    status,
+    counts,
+    ...(unmeasuredFootSlide ? { unmeasuredFootSlide } : {}),
+  };
 }
 
 /** Run every project of a batch file and write the outputs under `outDir`. */

@@ -238,7 +238,13 @@ export function applyBacklog(findings: readonly Finding[], dir: string, backlog:
   return {
     ok: counts['fail-hard'] + counts['fail-soft'] + counts.regression === 0,
     judged,
-    resolved: [...entries].filter(([k]) => !used.has(k)).map(([, e]) => e),
+    resolved: [...entries]
+      .filter(
+        ([k, e]) =>
+          !used.has(k) &&
+          !findings.some((f) => f.measurement === 'unmeasured' && f.clip === e.clip && f.gate === e.gate),
+      )
+      .map(([, e]) => e),
     counts,
     manual: (backlog?.manual ?? []).filter((e) => e.dir === dir),
   };
