@@ -129,24 +129,48 @@ try {
         `window.__vgtdViewer.set({ animation: ${JSON.stringify(anim)}, mode: 'single', direction: ${JSON.stringify(direction)}, paused: false })`,
       );
       await waitReady();
-      const samples = [];
-      const t0 = Date.now();
-      while (Date.now() - t0 < seconds * 1000) {
-        const b = await page.evaluate('window.__vgtdViewer.blink()');
-        samples.push({ t: (Date.now() - t0) / 1000, ...(b ?? { playing: false, eyes: null }) });
-        await sleep(100);
-      }
+      // sample in the page on every rendered frame (requestAnimationFrame): polling from node every 100 ms can miss the
+      // 2-frame closed phase of a blink entirely. Software GL renders slowly, so also record the blink LAYER CLOCK
+      // (AnimationState.currentTime): the cadence is judged on that clock, the eyes display only confirms the swaps.
+      const samples = await page.evaluate(
+        (sec) =>
+          new Promise((resolve) => {
+            const out = [];
+            const t0 = performance.now();
+            const tick = () => {
+              const b = window.__vgtdViewer.blink();
+              const t = (performance.now() - t0) / 1000;
+              out.push({ t, ...(b ?? { playing: false, eyes: null, time: 0 }) });
+              if (t < sec) requestAnimationFrame(tick);
+              else resolve(out);
+            };
+            tick();
+          }),
+        seconds,
+      );
       const closed = samples.filter((x) => x.eyes === 'display 2');
-      // blink starts = first closed sample of each run
       const starts = closed
         .filter((x, i) => i === 0 || x.t - closed[i - 1].t > 0.5)
         .map((x) => Math.round(x.t * 10) / 10);
+      // unwrap the layer clock over the 10 s loop and compare it with wall time
+      let unwrapped = 0;
+      let prev = samples[0]?.time ?? 0;
+      for (const x of samples) {
+        unwrapped += x.time >= prev ? x.time - prev : x.time + 10 - prev;
+        prev = x.time;
+      }
+      const wall = samples.length ? samples[samples.length - 1].t - samples[0].t : 0;
+      const frameMs = samples.length > 1 ? Math.round((wall / (samples.length - 1)) * 1000) : 0;
       const info = await page.evaluate('window.__vgtdViewer.info()');
       report[anim] = {
         bodyDurationSec: Math.round(info.duration * 100) / 100,
         layerPlaying: samples.some((x) => x.playing),
         eyesSeen: [...new Set(samples.map((x) => x.eyes))],
         blinkStartsSec: starts,
+        renderedFrames: samples.length,
+        meanFrameMs: frameMs,
+        layerClockSec: Math.round(unwrapped * 100) / 100,
+        wallSec: Math.round(wall * 100) / 100,
       };
       console.log(anim, JSON.stringify(report[anim]));
     }

@@ -87,5 +87,5 @@ export interface CharacterActor {
   /** Sample the current animation to measure the loop seam (realtime only). */
   seamMetric(): SeamMetric | null;
   /** Auxiliary blink layer: whether it plays and which eyes display is showing (null when the rig has none). */
-  blinkProbe?(): { playing: boolean; eyes: string | null } | null;
+  blinkProbe?(): { playing: boolean; eyes: string | null; time: number } | null;
 }
