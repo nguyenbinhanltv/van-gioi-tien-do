@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.run-repair-2",
+  "prompt": "Precise anatomical cell-local edit of this SIXcolumns TWOrows run sheet. Keep canvas, square cells, camera, body/head/fan size EXACTLY. Only zero-based cells 0,1,2,3,5,7,8,9 need change. In each of these eight cells REDRAW the lowest boot, ankle, shin and knee with a slightly straighter natural leg so lowest sole extends DOWN by 12 source-image pixels (about9pixels at256-cell equivalent). Reposition leg joints anatomically; NEVER stretch/scale whole sprite or body. Keep bun/head/torso/right hand cyan fan and red ivory navy robe identical. One opposite leg remains bent behind for true running, preserve alternating leg phase and SE direction. Cells4,6,10,11 unchanged. Entire figure remains inside own cell. Magenta background no text/grid/shadow. Only these eight target cells will be extracted by cell repair. Existing target boot is too high: extend it modestly downwards, not forwards horizontally. Preserve full foot drawn with dark calf boot and same boot size.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:48:52 UTC",
+  "utcEnd": "2026-11-06 21:49:11 UTC",
+  "selectedOutput": "SE/sheets/run.repair2.generated.png",
+  "references": ["SE/sheets/run.reroll1.generated.png"],
+  "attempt": 3
+}

@@ -1,0 +1,11 @@
+{
+  "id": "B.turnaround-generated",
+  "prompt": "Use case: stylized-concept. Production FIVE-DIRECTION TURNAROUND for original MMORPG PHAP TU B VERMILION FAN ADEPT, exact identity andcostume of supplied E master. TRUE TRANSPARENT backdrop, landscape single row FIVE fullbody equal scale views left to right E exactRIGHTprofile, SE threequarterFRONT facingdownright, S fullFRONT facingviewer, NE threequarterBACK facingup-right, N fullBACK facingaway. No labels/text. Same compact5.75head youngmale high darkbun jadepin, red hairribbon shorttail, ivorycrosscollar/sleeves/trousers, mutedVERMILION knee split outerrobe thinbronzecloudtrim, navy two-tail sash, darkcalfboots. ONE cyan/teal OPEN foldingfan darkribs bronzecloudmotif held by SAME ANATOMICAL RIGHT HAND everyview, visiblephysicalgrip. Empty left hand lowered. Fan held aroundchestheight, doesnot hideface; inbackview right hand is onscreenRIGHT; NE right arm should remain anatomicallyconsistent, notswap hands. Fan angle naturally changes around body and can show backoffan inNE/N; no mirrored costume. Bothfeet separated, neutralstance. Match master anatomy/headsize/robeconstruction, NWlight, darkcleanoutlines restrainedsoftcelshade readable128px. Allcharacterswholeinsideown equallyspacedcolumn, sameheight, no overlaps. NO staff/sword/gauntlets, shadow,scene, effects, swatches,borders or extrafigures.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:53:42 UTC",
+  "utcEnd": "2026-11-06 16:56:43 UTC",
+  "selectedOutput": "reference/turnaround-generated.png",
+  "references": ["reference/E.master-generated.png"],
+  "handContinuity": "Visual inspection: open fan in anatomical right hand across E/SE/S/NE/N; recheck in each production clip"
+}

@@ -1,5 +1,5 @@
 /** Create character-owned inputs through public package APIs. */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { decodePng, encodePng } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
@@ -18,6 +18,10 @@ import {
 const root = process.argv[2]!;
 const direction = process.argv[3]! as Direction;
 const dir = join(root, direction);
+const overridePath = join(dir, 'clip-overrides.json');
+const overrides: Record<string, Pick<ProjectClip, 'exceptions' | 'vertical'>> = existsSync(overridePath)
+  ? JSON.parse(readFileSync(overridePath, 'utf8'))
+  : {};
 mkdirSync(join(dir, 'templates'), { recursive: true });
 mkdirSync(join(dir, 'sheets'), { recursive: true });
 const master = decodePng(readFileSync(join(root, 'reference', `${direction}.master.png`)));
@@ -46,6 +50,7 @@ for (const clipSpec of SPRITE_CLIPS) {
         halfStride: halfStrideFor(groundSpeedPxS(spec.id, direction)!, durationSec),
         lift: spec.id === 'run' ? 16 : 10,
         first: 'R',
+        direction,
       })
     : undefined;
   const template = buildTemplate({ clip: name, frames: spec.frames, cols, guides, ...(cells ? { cells } : {}) });
@@ -82,13 +87,15 @@ for (const clipSpec of SPRITE_CLIPS) {
             : 'lunge: forward torso inclination and bent knees reduce pose height; no rescaling',
     ]),
   );
+  const selectedExceptions = overrides[name]?.exceptions ?? exceptions;
   clips.push({
     ...projectClipDefaults(name),
     sheet: `sheets/${sourceName}.png`,
     cols,
     frames: spec.frames,
     manifest: `templates/${sourceName}.template.json`,
-    ...(exceptionCells.length ? { exceptions } : {}),
+    ...(Object.keys(selectedExceptions).length ? { exceptions: selectedExceptions } : {}),
+    ...(overrides[name]?.vertical ? { vertical: overrides[name].vertical } : {}),
   });
 }
 writeFileSync(
@@ -100,6 +107,9 @@ writeFileSync(
       stem: 'danphutu',
       master: `../reference/${direction}.master.png`,
       backlog: '../quality-backlog.json',
+      ...(existsSync(join(root, 'character-calibration.json'))
+        ? { preparation: { kind: 'square-cell-dpi-v1', calibration: '../character-calibration.json' } }
+        : {}),
       clips,
     },
     null,

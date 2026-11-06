@@ -1,0 +1,35 @@
+{
+  "method": "@vgtd/sprite repairCell, no figure scaling",
+  "original": "run.reroll1.generated.png",
+  "edited": "run.repair2.generated.png",
+  "targets": [0, 1, 2, 3, 5, 7, 8, 9],
+  "changed": [0, 1, 2, 3, 5, 7, 8, 9],
+  "before": [
+    "b10cbfe67df971b7483b89fc3b5ab6e820fb7815",
+    "43b53e73cabf8f3baee9fa7185ed12f7832ffdc5",
+    "b14daa9ad142a4f412000687d07016d3b202c334",
+    "ab730e0db1b7a0301fa20a73db67a5dadc55383c",
+    "79e2019c7ef7fc2d810acc1ca7e187b0f10927dc",
+    "1389a444575e2af23709123b8d4b9d4fadcf149a",
+    "cf79126d6ed081262bf926424fe8cec5c069a9d6",
+    "ff1893bb426a74aeeca19a5ed47eb782cc1a6dfd",
+    "d9ae09d849f7efe8620eb29cb23fce50bd1840e2",
+    "aa6ffbfbbabe52fc9621db013e207b54aeaa5d7b",
+    "e10dfe73c595dd377f40d0b2f2034690a74abd09",
+    "400c616f90981b9f749a6a7c7e277ca5fff46453"
+  ],
+  "after": [
+    "b221e34177abcff96e6b56c7afd4b8c58d276dd5",
+    "bc9dcf11100f2b7ab2c7c5dfd7cedfc28f484892",
+    "bec6a584d2e34efa82b02270d5f42469117c69a5",
+    "fd6ec28e1d20d392a3bc6f7c7f56ad395761fc6b",
+    "79e2019c7ef7fc2d810acc1ca7e187b0f10927dc",
+    "60274e837bdd96d3a8f828c18fdaa842806f555d",
+    "cf79126d6ed081262bf926424fe8cec5c069a9d6",
+    "223c06519e1273a278a464561d6ecd057eb2bdb6",
+    "57259094e483c5a10c2ef811902b9cbd52409cf3",
+    "5da56bf434f1b5ed839aeb7f81087ee4e0ad14be",
+    "e10dfe73c595dd377f40d0b2f2034690a74abd09",
+    "400c616f90981b9f749a6a7c7e277ca5fff46453"
+  ]
+}
