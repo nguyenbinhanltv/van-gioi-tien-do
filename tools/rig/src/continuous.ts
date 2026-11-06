@@ -81,7 +81,9 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'ribbon_tail_R', slot: 'ribbon_tail_R', binding: { kind: 'hanging', template: 'ribbon_tail_R' } },
   { id: 'leg_L', slot: 'leg_L', binding: { kind: 'limb', chain: ['thigh_L', 'shin_L', 'foot_L'], step: 7, ramp: 7 } },
   { id: 'robe_back', slot: 'robe_back', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'hanging', template: 'robe_hem_back', cols: 4 } },
+  // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
+  // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
+  { id: 'robe_hem_back', slot: 'robe_hem_back', binding: { kind: 'skirt' } },
   { id: 'torso', slot: 'torso', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'body' },
   {
     id: 'arm_L',
@@ -104,7 +106,9 @@ export const E_PIECES: readonly PieceSpec[] = [
   { id: 'boot_R', slot: 'boot_R', binding: { kind: 'rigid', bone: 'foot_R' } },
   { id: 'robe_inner', slot: 'robe_inner', binding: { kind: 'skirt' } },
   { id: 'robe_front', slot: 'robe_front', binding: { kind: 'skirt' } },
-  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'hanging', template: 'robe_hem_front', cols: 4 } },
+  // hem strips are thin, WIDE bands: a vertical hanging chain gives them a ~2 px lever arm and flips them into X shapes
+  // under the feet, so they stay skirt-weighted (hips + thighs) like the robe they belong to
+  { id: 'robe_hem_front', slot: 'robe_hem_front', binding: { kind: 'skirt' } },
   { id: 'vest', slot: 'vest', binding: { kind: 'limb', chain: SPINE, ramp: 6, step: 8 }, paperdoll: 'outfit_upper' },
   {
     id: 'vest_edges',
