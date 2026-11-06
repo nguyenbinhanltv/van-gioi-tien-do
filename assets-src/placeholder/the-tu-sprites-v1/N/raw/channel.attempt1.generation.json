@@ -1,0 +1,19 @@
+{
+  "clip": "channel",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:42:02 UTC",
+  "prompt": "Production CHANNEL NORTH straightBACK sprite sheet. Image1 exactmasteridentity/camera, image2 layoutguide. EXACT 4 equalSQUARE columns 2 rows,8fullbodyframes rowmajor,aspect4:2. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking.  Eight-frame seamless standingCHANNEL. Gauntletsheld atlowerchest AWAYfromcamera, handsmostlyhiddenbehindtorso. Backcloudemblemvisible.1neutral;2inhale;3inhalepeak;4relax;5neutral;6exhale;7relax;8exactfirst. Feetplanted, stable212unitstature. Pureflatopaque#FF00FF background, removeALL borders/gridlines/template marks/ticks/text. No shadows/scenery/floor/glow/particles/rocks/afterimages/weapons. Allfigures sameanatomicalscale, entirelyinowncells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/N.master4x.png",
+    "templates/channel.template.png"
+  ],
+  "selectedOutput": "sheets/channel.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 19:43:27 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-8dc77796-6182-4bfa-952d-983b71aec4ef.png",
+  "originalBackup": "raw/originals/channel.attempt1.png"
+}

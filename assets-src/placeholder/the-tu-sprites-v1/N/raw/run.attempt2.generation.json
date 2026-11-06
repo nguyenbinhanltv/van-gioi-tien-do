@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "dir": "N",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:36:07 UTC",
+  "prompt": "EDIT image1: NORTH straightBACK twelve-frame RUN sheet, SIX equal square columns TWO rows. Image2 masteridentity only. CHANGE ONLY 0-based cells4,6,7,8,10,11 (row1col5; row2cols1,2,3,5,6). Other6 cells remain exactly unchanged. These six figures are a little too tall. REDRAW their leg articulation with a VERY SHALLOW knee flex to lower shoulders/head by about6..8units per256cell while keeping boots on originalgroundline. Preserve exact same head/torso/arm/leg anatomical sizes and identity. NO zoom, rescale, squashing, cropping or changing the canvas. Keep their current leading/swing legs and opposite arm motion, only softly flex the supporting knee to reduce upright boundingheight to210..214units (allowed206..218). Do not deeply crouch or tuck feet. Natural ivory trouser folds and dark boots. Keep flat straightBACK NORTH camera facingAWAY UP, nofacevisible, backcloudbronzeemblem, mountainblue shorttabard, darkblue sashbandNOfrontknot, darkbun/jadepin, bothbronze blockgauntlets. Sameflat#FF00FF background, no guides/borders/text/shadows/effects. Full12-cellgrid preserved; only listed cells change.",
+  "references": [
+    "raw/run.attempt1.png",
+    "../../the-tu-continuous-v1/reference/N.master4x.png"
+  ],
+  "selectedOutput": "raw/run.attempt2.edited.png",
+  "repairCells": [
+    4,
+    6,
+    7,
+    8,
+    10,
+    11
+  ],
+  "status": "donor generated; selected cells only pending QA",
+  "utcEndObserved": "2026-11-06 19:36:30 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-fd8602f4-b7f6-4f55-b8ed-91ae13565fae.png",
+  "originalBackup": "raw/originals/run.attempt2.png"
+}

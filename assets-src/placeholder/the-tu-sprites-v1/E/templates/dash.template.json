@@ -1,0 +1,38 @@
+{
+  "clip": "dash",
+  "grid": {
+    "cols": 3,
+    "rows": 2,
+    "cell": 256
+  },
+  "frames": 6,
+  "guides": {
+    "ground": 232,
+    "head": 15,
+    "pelvis": 123.5,
+    "centerX": 127.81284974093265
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    },
+    {
+      "leading": null
+    }
+  ],
+  "width": 768,
+  "height": 512
+}

@@ -1,0 +1,34 @@
+{
+  "clip": "run",
+  "dir": "S",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 17:57:07 UTC",
+  "prompt": "CELL-LOCAL REPAIR of the SOUTH/FRONT RUN sprite sheet. Input1 exact masterS body/face/outfit; input2 EDIT TARGET original12-frame run; input3 layout. Preserve EXACT6columns2rows/aspect3:1 and frontal camera lookingtowardviewer/screenDOWN. ONLY change these six 1-basedcells:1,2,5,7,10,11 (=0based0,1,4,6,9,10). Cells1,2,7 are slightly too upright/tall: gently soften knees/lean stance a few pixels to match full-body height of normalcell3 or9, WITHOUT shrinking/scalinghead,torso orlimbs. Cells5,10,11 are tucked-up/too short: REDRAW knee/hip extension with one full-length leg extending downward under body, not both boots tuckedup, so bun-to-lowestboot height matches normalcell3/9. Preserve head/face dimensions and stocky adult anatomy exactly. Do not scale/resize figures to fit! Change pose joint articulation only. Aim same fullbodyheight across all12, matching normalcells3/9 (standing anatomy210units on256cell, allowed204..216). All other6 cells MUST remain pixel-identical in position,color,scale,pose. R anatomical leg is SCREEN-LEFT, L SCREEN-RIGHT; true frontal run not turning sideways. Keep arm counter-swing, paired worn bronze earth gauntlets/meanderplates, ivory baggy robe/trousers with natural folds not elastic mesh, short mountainblue split tabard/bronzecloudtrim, darkblue sashknot2tails, darkboots, shortdarkbrown topbun/jadepin, exactmasterface. Fine ink and restrained celshading NWlight. No extra limbs/props/swords. Keep opaque flatmagenta#FF00FF, no text,borders,guides,shadows,floor,VFX/blur. One entirefigure eachowncell.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/S.master4x.png",
+    "raw/run.attempt1.png",
+    "templates/run.template.png"
+  ],
+  "rawOutput": "raw/run.attempt2.edited.png",
+  "repairCells": [
+    0,
+    1,
+    4,
+    6,
+    9,
+    10
+  ],
+  "status": "edited donor; patch selection pending",
+  "utcEndObserved": "2026-11-06 17:57:35 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-cc1a73d9-f062-460d-907a-93d2a7d4fb00.png",
+  "selectedOutput": "raw/run.attempt2.selected.png",
+  "derivation": "Final sheet uses documented six-cell AI repair plus contact/load hold at cell0; frozen scale unchanged",
+  "repairProofs": [
+    "raw/run.attempt2.repair-proof.json",
+    "raw/run.contact-hold-repair.json"
+  ],
+  "originalBackup": "raw/originals/run.attempt2.png"
+}

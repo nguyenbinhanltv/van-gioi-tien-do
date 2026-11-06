@@ -1,0 +1,19 @@
+{
+  "clip": "walk",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:14:16 UTC",
+  "prompt": "Production frame-by-frame WALK NORTHEAST sprite sheet for Van Gioi Tien Do, The tu A Son Mon Ho Ve. Image1 EXACT rear NE identity/style master; image2 exact layout and leading-leg ghost guide. EXACTLY 6 equal SQUARE columns by 2 rows, 12 complete full-body cells row-major, sheet aspect 6:2. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking. Twelve-frame WALK loop at table speed, in place facing awayupperright. Follow template leading-boot ghosts EXACTLY.1 right boot forward contact,2 Rload,3 Rmidstance/Lpassing,4 Rpush/Lswings,5 Lapproachescontact,6 passing intoL;7 left boot forward contact;8 Lload;9 Lmidstance/Rpassing;10 Lpush/Rswings;11 Rapproachescontact;12 returnRcontact. Clear alternating leg reversal; hips translate only slightly, no growth. Boots planted when ghost says contact. Keep headtop and bodyheight stable214units, no deep crouch. Pure opaque flat#FF00FF background. Remove all template lines, ghostmarks, ticks, dots, borders, numbers and text. No shadows, floor, blur, effects, scenery, aura or afterimages. One whole figure percell, never clipped or merged across cells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/NE.master4x.png",
+    "templates/walk.template.png"
+  ],
+  "selectedOutput": "sheets/walk.png",
+  "status": "selected; awaiting upright QA",
+  "utcEndObserved": "2026-11-06 19:15:03 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-337bde66-6823-4a1f-9c58-317cdc70c85a.png",
+  "originalBackup": "raw/originals/walk.attempt1.png"
+}

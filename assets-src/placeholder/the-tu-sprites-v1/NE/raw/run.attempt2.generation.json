@@ -1,0 +1,23 @@
+{
+  "clip": "run",
+  "dir": "NE",
+  "attempt": 2,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:17:34 UTC",
+  "prompt": "EDIT TARGET image1: twelve-frame NE run sheet, six equal SQUARE columns x two rows. Image2 identity master only. Change ONLY cells 4,10 (0-based) = row1 col5 and row2 col5. All other cells MUST remain exactly untouched; keep canvas/grid/camera/colors. These cells have excessive knee folding and lose upright height. Redraw only those full-body poses with SHALLOW knee flex and upright torso, while preserving exact same adult head/torso/limb sizes and the existing leg cycle: brief flight phase with one boot reaching DOWN to near ground instead of both legs deeply tucked. Target figure full-body height214units per256cell, allowed208..220. Groundy232, buny18. Match adjoining cells' standing stature. Do not zoom, resize, stretch or scale any figure. Re-articulate the legs naturally to recover body height. Preserve back three-quarter NE facing away/up-right, rear mountain-blue tabard/bronze cloud back motif, ivory trousers/sleeves, bronze gauntlets, jade bun, dark boots, sash band with hidden front knot. No new face or camera turn. All12 complete figures rowmajor, flat opaque#FF00FF background, no guide marks/text/effects/shadows. DO NOT change any cell outside the listed cells.",
+  "references": [
+    "raw/run.attempt1.png",
+    "../../the-tu-continuous-v1/reference/NE.master4x.png"
+  ],
+  "selectedOutput": "raw/run.attempt2.edited.png",
+  "repairCells": [
+    4,
+    10
+  ],
+  "status": "donor generated; apply listed cells only after QA",
+  "utcEndObserved": "2026-11-06 19:18:24 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-fbb03bb3-fd5d-4102-9f6e-fb5de1b2e989.png",
+  "originalBackup": "raw/originals/run.attempt2.png"
+}

@@ -1,0 +1,249 @@
+{
+  "format": "vgtd-sprite-batch",
+  "version": 1,
+  "character": "the-tu",
+  "ok": true,
+  "dirs": [
+    {
+      "dir": "NE",
+      "stem": "thetu",
+      "ok": true,
+      "atlas": {
+        "pages": 1,
+        "width": 2048,
+        "height": 2048,
+        "regions": 126
+      },
+      "backlogEntries": 22,
+      "resolvedEntries": 0,
+      "folder": "NE",
+      "clips": [
+        {
+          "name": "idle",
+          "frames": 8,
+          "durationSec": 1,
+          "kind": "upright",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/idle.gif"
+        },
+        {
+          "name": "meditate",
+          "frames": 8,
+          "durationSec": 1,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 8
+          },
+          "gif": "NE/capture/meditate.gif"
+        },
+        {
+          "name": "walk",
+          "frames": 12,
+          "durationSec": 0.6666666666666666,
+          "kind": "upright",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 8,
+            "info": 0
+          },
+          "gif": "NE/capture/walk.gif"
+        },
+        {
+          "name": "run",
+          "frames": 12,
+          "durationSec": 0.5,
+          "kind": "upright",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 7,
+            "info": 0
+          },
+          "gif": "NE/capture/run.gif"
+        },
+        {
+          "name": "dash",
+          "frames": 6,
+          "durationSec": 0.25,
+          "kind": "free",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 2,
+            "info": 4
+          },
+          "gif": "NE/capture/dash.gif"
+        },
+        {
+          "name": "sword_fly",
+          "frames": 8,
+          "durationSec": 0.6666666666666666,
+          "kind": "free",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 2,
+            "info": 0
+          },
+          "gif": "NE/capture/sword_fly.gif"
+        },
+        {
+          "name": "attack",
+          "frames": 8,
+          "durationSec": 0.4166666666666667,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/attack.gif"
+        },
+        {
+          "name": "attack_2",
+          "frames": 8,
+          "durationSec": 0.4166666666666667,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/attack_2.gif"
+        },
+        {
+          "name": "attack_3",
+          "frames": 8,
+          "durationSec": 0.4166666666666667,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 3
+          },
+          "gif": "NE/capture/attack_3.gif"
+        },
+        {
+          "name": "cast",
+          "frames": 8,
+          "durationSec": 0.5,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/cast.gif"
+        },
+        {
+          "name": "channel",
+          "frames": 8,
+          "durationSec": 0.4,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/channel.gif"
+        },
+        {
+          "name": "hit",
+          "frames": 4,
+          "durationSec": 0.2,
+          "kind": "free",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 2,
+            "info": 2
+          },
+          "gif": "NE/capture/hit.gif"
+        },
+        {
+          "name": "die",
+          "frames": 8,
+          "durationSec": 0.8,
+          "kind": "free",
+          "status": "warn",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 1,
+            "info": 6
+          },
+          "gif": "NE/capture/die.gif"
+        },
+        {
+          "name": "tribulation",
+          "frames": 12,
+          "durationSec": 1,
+          "kind": "free",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 3
+          },
+          "gif": "NE/capture/tribulation.gif"
+        },
+        {
+          "name": "emote",
+          "frames": 8,
+          "durationSec": 1,
+          "kind": "upright",
+          "status": "ok",
+          "counts": {
+            "hard": 0,
+            "soft": 0,
+            "regression": 0,
+            "accepted": 0,
+            "info": 0
+          },
+          "gif": "NE/capture/emote.gif"
+        }
+      ]
+    }
+  ]
+}

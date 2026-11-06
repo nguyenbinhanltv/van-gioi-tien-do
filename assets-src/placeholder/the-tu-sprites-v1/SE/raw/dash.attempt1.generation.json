@@ -1,0 +1,20 @@
+{
+  "clip": "dash",
+  "dir": "SE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 18:14:20 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame DASH SE-DIRECTION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY THREE equal SQUARE columns by TWO rows, 6 full-body frames, row-major left-to-right top-to-bottom, sheet aspect3:2. In every cell face SOUTHEAST / diagonally DOWN-RIGHT, three-quarter FRONT in the same slightly overhead orthographic isometric three-quarter FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x125.68. All6 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. SIX-frame DASH toward SE/down-right.1 guard;2 shallow crouched anticipation;3 rearboot drivesbodyforward, gauntlets chestguard;4 brief low forward flight with one leg extended, no tuckedball;5 frontbootlands;6 originalguard. Samefull-size anatomy andhead, natural clothknees/elbows. No blur/speedlines/dust/afterimages. Entirefigure staysincell. ExactmasterSEcamera/costume/identity, notEprofile/Sfront/back. Posecanbend withoutanatomyscalechange. Pure flatopaque#FF00FFbackground; removeallguides/borders/ticks/text/ghosts, no floor/shadows/blur/effects. Onecompletefigureeachowncell.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/SE.master4x.png",
+    "raw/dash.attempt1.template.png"
+  ],
+  "selectedOutput": "sheets/dash.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 18:15:22 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-3e2cb15f-9072-4883-a69b-6e89ccb53144.png",
+  "layoutNote": "Generation followed requested3x2 layout, not initial4-column reference template. Slicer manifest corrected to actual3x2; no resampling or frame drop.",
+  "originalBackup": "raw/originals/dash.attempt1.png"
+}

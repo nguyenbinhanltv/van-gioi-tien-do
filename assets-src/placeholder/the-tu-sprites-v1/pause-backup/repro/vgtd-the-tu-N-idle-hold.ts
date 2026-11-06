@@ -1,0 +1,17 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { decodePng, encodePng } from '@vgtd/rig';
+import { cellRect, cellHashes, repairCell } from '@vgtd/sprite';
+const base=join(process.cwd(),'assets-src/placeholder/the-tu-sprites-v1/N'),grid={cols:4,rows:2};
+const bytes=readFileSync(join(base,'sheets/idle.png')),original=decodePng(bytes);
+writeFileSync(join(base,'raw/idle.attempt1.png'),bytes);
+const from=cellRect(original.width,original.height,4,2,7),to=cellRect(original.width,original.height,4,2,5);
+if(from.width!==to.width||from.height!==to.height)throw new Error('Pose reuse needs equal cell dimensions');
+const data=new Uint8ClampedArray(original.data);
+for(let y=0;y<to.height;y++)data.set(original.data.subarray(((from.y+y)*original.width+from.x)*4,((from.y+y)*original.width+from.x+from.width)*4),((to.y+y)*original.width+to.x)*4);
+const result=repairCell(original,{...original,data},grid,5),before=cellHashes(original,grid),after=cellHashes(result.image,grid);
+if(before.some((h,i)=>i!==5&&h!==after[i]))throw new Error('Unselected cell changed');
+writeFileSync(join(base,'sheets/idle.png'),encodePng(result.image));
+writeFileSync(join(base,'raw/idle.pose-reuse-repair.json'),JSON.stringify({clip:'idle',dir:'N',method:'Exact guard pose reuse, no scale/resampling',sourceCell:7,targetCell:5,rawSource:'raw/idle.attempt1.png',selected:'sheets/idle.png',unchangedOtherCells:7,before,after},null,2)+'\n');
+writeFileSync(join(base,'quality-visual-notes.json'),JSON.stringify({format:'vgtd-visual-quality-notes',version:1,character:'the-tu',entries:[{clip:'idle',dir:'N',cell:5,gate:'redrawDrift',metric:'reused_guard_cells',value:1,limit:0,note:'First-pass neutral guard reused from cell7 for exhale cell5. All8 frames retained;7 other cells byte-identical; no scaling. Restore a unique shallow exhale in polish.',status:'open'}]},null,2)+'\n');
+console.log('N idle: exact guard cell7 -> cell5;7 other cells byte-identical');

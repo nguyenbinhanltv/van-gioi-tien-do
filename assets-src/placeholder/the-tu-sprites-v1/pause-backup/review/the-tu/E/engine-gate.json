@@ -1,0 +1,118 @@
+{
+  "character": "the-tu",
+  "direction": "E",
+  "capture": "real Cocos Creator 3.8.8 web-mobile, headless browser",
+  "zoom": 2,
+  "sample": "midpoint",
+  "samplesPerClip": 12,
+  "animations": {
+    "idle": {
+      "durationSec": 1,
+      "gifKeyFrames": 30,
+      "captureLoaded": true
+    },
+    "meditate": {
+      "durationSec": 1,
+      "gifKeyFrames": 30,
+      "captureLoaded": true
+    },
+    "walk": {
+      "durationSec": 0.6666666666666666,
+      "gifKeyFrames": 20,
+      "captureLoaded": true
+    },
+    "run": {
+      "durationSec": 0.5,
+      "gifKeyFrames": 15,
+      "captureLoaded": true
+    },
+    "dash": {
+      "durationSec": 0.26666666666666666,
+      "gifKeyFrames": 8,
+      "captureLoaded": true
+    },
+    "sword_fly": {
+      "durationSec": 0.6666666666666666,
+      "gifKeyFrames": 20,
+      "captureLoaded": true
+    },
+    "attack": {
+      "durationSec": 0.43333333333333335,
+      "gifKeyFrames": 13,
+      "captureLoaded": true
+    },
+    "cast": {
+      "durationSec": 0.5,
+      "gifKeyFrames": 15,
+      "captureLoaded": true
+    },
+    "channel": {
+      "durationSec": 0.4,
+      "gifKeyFrames": 12,
+      "captureLoaded": true
+    },
+    "hit": {
+      "durationSec": 0.2,
+      "gifKeyFrames": 6,
+      "captureLoaded": true
+    },
+    "die": {
+      "durationSec": 0.8,
+      "gifKeyFrames": 24,
+      "captureLoaded": true
+    },
+    "tribulation": {
+      "durationSec": 1,
+      "gifKeyFrames": 30,
+      "captureLoaded": true
+    },
+    "emote": {
+      "durationSec": 1,
+      "gifKeyFrames": 30,
+      "captureLoaded": true
+    },
+    "attack_2": {
+      "durationSec": 0.43333333333333335,
+      "gifKeyFrames": 13,
+      "captureLoaded": true
+    },
+    "attack_3": {
+      "durationSec": 0.43333333333333335,
+      "gifKeyFrames": 13,
+      "captureLoaded": true
+    }
+  },
+  "toolCommit": "695d43501d118fdedc71c8332e64fecd1bf8f262",
+  "qaCounts": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 12,
+    "regression": 0,
+    "info": 35
+  },
+  "atlas": {
+    "pages": 1,
+    "width": 2048,
+    "height": 2048,
+    "regions": 156
+  },
+  "viewerMetricNote": "Rig-transform seam is not image-animation proof for display swaps. Image loop seam uses the sprite QA contract.",
+  "runtimeSha256": {
+    "thetu_E_ske.json": "196c36d06267ca27e4e4d4a6671e4e4b6b7c5afbf41cbd0ee2000e4254eb756f",
+    "thetu_E_tex.json": "1d8b02e22c6e701537bc8a16d79fb501c4d240ea672b5e03406e1e9ea5ccd34f",
+    "thetu_E_tex.png": "65f49da8b17942b04e684cb9e1915856caf192fd7fbbb69a65bb74ea3f7c16bb"
+  },
+  "atlasPixelEvidence": {
+    "width": 2048,
+    "height": 2048,
+    "regions": 156,
+    "pmaBadPixels": 0,
+    "extrude1MismatchPixels": 0,
+    "padding2NonzeroPixels": 0
+  },
+  "previousCapture": {
+    "toolCommit": "695d43501d118fdedc71c8332e64fecd1bf8f262",
+    "samplesPerClip": 12,
+    "byteIdenticalExportFiles": 4
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "clip": "tribulation",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:57:39 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame TRIBULATION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY SIX equal SQUARE columns by FOUR rows, 24 full-body frames, row-major left-to-right top-to-bottom, sheet aspect6:4. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x128. All24 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. TWENTY-FOUR-frame TRIBULATION endurance, EXACT6columns4rows all24 distinct complete figures in reading order. Phase cells1-4 standing calm guard turns tense,5-8 both bronze gauntlets rise cross-block in front of upper chest/face,9-12 shoulders brace knees slightly bend against invisible force,13-16 holds crossed-forearm iron-body guard with subtle strain,17-20 lowers arms gradually and breathes out,21-24 returns to original standing guard. Still same EAST-facing full-grown stocky man in everycell,217unit anatomical stature. Keep head/boots and both worn bronze gauntlets visible, no deep squat/shrinking or enlarged head. Same outfit/meanderemblems and NW light. No lightning, sky, electricity, wounds, glow, rocks, particles or effects baked in. All24cells must be filled with samecharacter, no text/layout labels. Pure flat opaque#FF00FF background; REMOVE ALL template lines/ghosts/ticks/borders, no floor/shadow, blur, text, labels or baked VFX. Each figure stays entirely inside its owncell. No new props or costume.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/E.master4x.png",
+    "templates/tribulation.template.png"
+  ],
+  "selectedOutput": "sheets/tribulation.png",
+  "status": "selected; per-clip hard QA PASS, final atlas/capture pending",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-69d0dd0e-9eeb-481a-af69-4244c3d43d96.png",
+  "utcEndObserved": "2026-11-06 16:59:55 UTC",
+  "originalBackup": "raw/originals/tribulation.attempt1.png"
+}

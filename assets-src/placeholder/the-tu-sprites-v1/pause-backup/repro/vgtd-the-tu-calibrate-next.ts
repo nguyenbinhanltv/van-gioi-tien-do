@@ -1,0 +1,18 @@
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { decodePng } from '@vgtd/rig';
+import { median, measureFigure, sliceSheet, runProject, writeOutputs, type Project } from '@vgtd/sprite';
+const dir=process.argv[2]!;
+const base=join(process.cwd(),'assets-src/placeholder/the-tu-sprites-v1',dir);
+const project=JSON.parse(readFileSync(join(base,'project.json'),'utf8')) as Project;
+const refs=project.clips.filter(c=>['idle','walk','run'].includes(c.name));
+const samples=refs.flatMap(c=>{const s=decodePng(readFileSync(join(base,c.sheet)));const rows=Math.ceil(c.frames/c.cols);return sliceSheet(s,{cols:c.cols,rows,frames:c.frames},project.slice).map((f,cell)=>({clip:c.name,cell,rawHeight:measureFigure(f.image)!.height,rawCellHeight:s.height/rows}));});
+const calibrationFile=join(base,'calibration.json');
+const frozen=existsSync(calibrationFile)?JSON.parse(readFileSync(calibrationFile,'utf8')):null;
+const normalizedReferenceHeight=frozen?.normalizedReferenceHeight ?? median(samples.map(s=>s.rawHeight/s.rawCellHeight));
+if(!frozen) writeFileSync(join(base,'calibration.json'),JSON.stringify({method:'One character-wide normalized-cell scale from all32 upright raw samples, fixed per-sheet DPI conversion only; no frame-specific scaling',normalizedReferenceHeight,samples},null,2)+'\n');
+const clips=project.clips.map(c=>{try{const s=decodePng(readFileSync(join(base,c.sheet)));return {...c,calibration:{referenceHeight:normalizedReferenceHeight*s.height/Math.ceil(c.frames/c.cols)}};}catch{return c;}});
+writeFileSync(join(base,'project.json'),JSON.stringify({...project,clips},null,2)+'\n');
+const partial={...project,clips:clips.filter(c=>['idle','walk','run'].includes(c.name))};
+const result=runProject(partial,base);writeOutputs(result,`$TEMP/vgtd-the-tu-${dir}-upright`);
+console.log(JSON.stringify({dir,normalizedReferenceHeight,clips:result.contract.clips.map(c=>({name:c.name,heights:c.records.map(r=>r?.post.height)})),qa:result.contract.qa},null,2));

@@ -1,0 +1,102 @@
+[
+  {
+    "dir": "E",
+    "source": "assets-src/placeholder/the-tu-continuous-v1/reference/E.master4x.png",
+    "sha256": "149493d03e89549a21607f267d138ed97e26333ab10b39f5c1111c5d16f9f098",
+    "metrics": {
+      "left": 84,
+      "right": 175,
+      "top": 24,
+      "bottom": 241,
+      "height": 217,
+      "width": 91,
+      "pelvisX": 127.81284974093265
+    },
+    "guides": {
+      "ground": 232,
+      "head": 15,
+      "pelvis": 123.5,
+      "centerX": 127.81284974093265
+    }
+  },
+  {
+    "dir": "SE",
+    "source": "assets-src/placeholder/the-tu-continuous-v1/reference/SE.master4x.png",
+    "sha256": "334d529ba87b1206ddae3b7434a0d0e727ca1cf2cb49a5e0323a0604fdb0afd3",
+    "metrics": {
+      "left": 73,
+      "right": 182,
+      "top": 21,
+      "bottom": 238,
+      "height": 217,
+      "width": 109,
+      "pelvisX": 125.67735507246377
+    },
+    "guides": {
+      "ground": 232,
+      "head": 15,
+      "pelvis": 123.5,
+      "centerX": 125.67735507246377
+    }
+  },
+  {
+    "dir": "S",
+    "source": "assets-src/placeholder/the-tu-continuous-v1/reference/S.master4x.png",
+    "sha256": "7a2e6c057013d69efed3868d221cda74623dea4f12b4a34919da0a7b7c7e3cfe",
+    "metrics": {
+      "left": 70,
+      "right": 186,
+      "top": 23,
+      "bottom": 233,
+      "height": 210,
+      "width": 116,
+      "pelvisX": 127.55207771181867
+    },
+    "guides": {
+      "ground": 232,
+      "head": 22,
+      "pelvis": 127,
+      "centerX": 127.55207771181867
+    }
+  },
+  {
+    "dir": "NE",
+    "source": "assets-src/placeholder/the-tu-continuous-v1/reference/NE.master4x.png",
+    "sha256": "2ae6c3dbcd3dc1cad3c9a7ada4dfb76fd6e900e63c1a2e89faab112797c8771c",
+    "metrics": {
+      "left": 79,
+      "right": 176,
+      "top": 24,
+      "bottom": 238,
+      "height": 214,
+      "width": 97,
+      "pelvisX": 126.893515641185
+    },
+    "guides": {
+      "ground": 232,
+      "head": 18,
+      "pelvis": 125,
+      "centerX": 126.893515641185
+    }
+  },
+  {
+    "dir": "N",
+    "source": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master4x.png",
+    "sha256": "6cdb49802246c94d4a90963f02dc7ab2b673de9eb1db2f4ea196d2baa848af8d",
+    "metrics": {
+      "left": 73,
+      "right": 183,
+      "top": 23,
+      "bottom": 235,
+      "height": 212,
+      "width": 110,
+      "pelvisX": 127.54115853658537
+    },
+    "guides": {
+      "ground": 232,
+      "head": 20,
+      "pelvis": 126,
+      "centerX": 127.54115853658537
+    }
+  }
+]

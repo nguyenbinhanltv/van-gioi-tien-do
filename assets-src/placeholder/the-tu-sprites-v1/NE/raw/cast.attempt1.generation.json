@@ -1,0 +1,19 @@
+{
+  "clip": "cast",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:20:55 UTC",
+  "prompt": "Production CAST NE rear3Q sprite sheet. Image1 exact identity/camera master, image2 layoutguide. EXACT FOUR equal SQUARE columns TWO rows,8 full-body frames rowmajor, aspect2:1. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking.  Eight-frame standing EARTH PALM CAST.1 guard;2 palmsgatheratabdomen;3 risechest;4 gather;5 bothopenbronze palms pushAWAY upperright;6 hold;7 retract;8 exactguard. Keepfeetplanted, headheight214, backfacing camera throughout, no facefront. Pure flat opaque#FF00FF, no scenery/shadows/floor/guides/text/ticks/particles/rocks/glow/afterimages. No weapon. All8completefigures sameanatomicalscale insideowncells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/NE.master4x.png",
+    "templates/cast.template.png"
+  ],
+  "selectedOutput": "sheets/cast.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 19:22:48 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-58b57f30-39df-4466-b835-367808b35a35.png",
+  "originalBackup": "raw/originals/cast.attempt1.png"
+}

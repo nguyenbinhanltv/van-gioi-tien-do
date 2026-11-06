@@ -1,0 +1,47 @@
+{
+  "clip": "run",
+  "dir": "S",
+  "method": "Public sprite:repair, selected AI donor cells only; no frame-specific scale/height fitting",
+  "cells0": [
+    0,
+    1,
+    4,
+    6,
+    9,
+    10
+  ],
+  "unchangedOtherCells": 6,
+  "before": [
+    "bcb44cc326e2f25f3e7a6cc72905e00cc9247142",
+    "253b53e170e3b5c5192a3ba18d148c7d56a99e51",
+    "ddb4ad8a50d2bd21d6247701010183b487d6a151",
+    "9517f8271a384ec94e1290a1d2ef710fb03a418f",
+    "35020424871ca7894e8370f5b6d14e93edbcb59a",
+    "987b553009094e1f8095d938d9ad19fe041bbf9b",
+    "d982a3643e690c31c5f15cd8898691756382079d",
+    "156ad1f415dded58e83bdcb9202c07410a2caf84",
+    "ec7b026418645883f284a4d872e7b9cb3c749a1f",
+    "24e04acf379c8b063fe3b762283ac525cfe34218",
+    "c1e045645d4968dfe1c3192b96227bcb8dacaec3",
+    "76ac5262e3363ba325e377179312e26020a483e3"
+  ],
+  "after": [
+    "d5d115f39c1f0eb1b0b688da9321e97d067279cd",
+    "209ec2aa1f17406298c713a2fd0f6c18ad4b75ba",
+    "ddb4ad8a50d2bd21d6247701010183b487d6a151",
+    "9517f8271a384ec94e1290a1d2ef710fb03a418f",
+    "8a3c552a1663e2596f7adf8f8529c80c82f49b65",
+    "987b553009094e1f8095d938d9ad19fe041bbf9b",
+    "9d3be8f82365e8a049982e5307231d12d525bf89",
+    "156ad1f415dded58e83bdcb9202c07410a2caf84",
+    "ec7b026418645883f284a4d872e7b9cb3c749a1f",
+    "c65821fb8c01390b687b4773032941d98bb4c56c",
+    "b7c36439e2dd9bda1ca41f7c00b6b2abff3db12c",
+    "76ac5262e3363ba325e377179312e26020a483e3"
+  ],
+  "rawSource": "raw/run.attempt1.png",
+  "donor": "raw/run.attempt2.edited.png",
+  "selected": "raw/run.attempt2.selected.png",
+  "sourceSha256": "5c1ba3112f0f6f8142a527ead1cf19ce49b3b48ef8d871aaed42f6b807cf0c7f",
+  "selectedSha256": "e5621ee3b30df3e3b44b06ae13d7196ce6e9cb59cbff1b96e303a834f644e447"
+}

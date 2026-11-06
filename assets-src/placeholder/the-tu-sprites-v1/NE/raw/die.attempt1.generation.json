@@ -1,0 +1,19 @@
+{
+  "clip": "die",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:27:41 UTC",
+  "prompt": "Production DIE NE rear3Q sprite sheet. Image1 exact master, image2 layout/poseguide. EXACT 4 equal SQUARE columns 2 rows,8 full-body frames rowmajor, aspect4:2. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking.  Eight-frameDIE:1guard;2slump;3kneel;4bothkneesground;5leanontoleftarm;6collapseSIDEWAYS;7lyingonrightside;8exactsamefinalpose. StillrearNEcamera, headawayupperright, full-sizedbody whenlying, no miniaturecorpse. Alllimbssamephysicalsize; no blood. Pure flat opaque#FF00FF, NO borders/gridlines/template marks/text/ghosts. No scenery/shadows/floor/particles/rocks/glow/afterimages/weapons. Allfigures sameanatomicalscale insideowncells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/NE.master4x.png",
+    "templates/die.template.png"
+  ],
+  "selectedOutput": "sheets/die.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 19:29:25 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-64081090-9999-467e-b924-41f4c2333728.png",
+  "originalBackup": "raw/originals/die.attempt1.png"
+}

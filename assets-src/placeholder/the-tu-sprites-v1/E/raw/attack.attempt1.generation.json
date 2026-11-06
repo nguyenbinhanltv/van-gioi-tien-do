@@ -1,0 +1,18 @@
+{
+  "clip": "attack",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:38:45 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame ATTACK sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FIVE equal SQUARE columns by TWO rows, 10 full-body frames, row-major left-to-right top-to-bottom, sheet aspect5:2. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x128. All10 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. TEN-frame near RIGHT straight heavy PUNCH. Sequence1 guard low,2 raise both bronze gauntlets to chest,3 right fist chambers at ribs and left guards,4 shift weight and twist torso,5 RIGHT near fist extends STRAIGHT FORWARD screen-right at chest height,6 hit held with full extension and firm wrist,7 right retracts,8 shoulders unwind,9 lower guard,10 recover same initial stance. Left far gauntlet guards near chest, never another prop. Punch driven by shoulder/torso, anatomically natural elbow, no inflated sleeves or stretched bronze blocks. Two boots stay grounded, slight shallow lunge, preserve stature and head size, no deep crouch. Whole extended right fist within cell. Preserve exact costume and gauntlet ornament, ONE character per cell. PURE flat opaque#FF00FF background, remove ALL template guides/borders/ticks. No floor/shadows, effects, blur, text, labels or added objects. If pose crouches/raises fists, change pose bounding box naturally but NEVER anatomical scale.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/E.master4x.png",
+    "templates/attack.template.png"
+  ],
+  "selectedOutput": "sheets/attack.png",
+  "status": "selected; per-clip hard QA PASS, final atlas/capture pending",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-3e08e804-ba58-4e46-b808-07197abf3f8b.png",
+  "utcEndObserved": "2026-11-06 16:41:07 UTC",
+  "originalBackup": "raw/originals/attack.attempt1.png"
+}

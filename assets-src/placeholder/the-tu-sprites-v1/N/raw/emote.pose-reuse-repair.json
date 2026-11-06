@@ -1,0 +1,44 @@
+{
+  "clip": "emote",
+  "dir": "N",
+  "method": "Exact pose reuse using public repairCell; one-pixel magenta-matte-only edge pad/trim, no scale/resampling",
+  "trimMatteRange": {
+    "minRed": 240,
+    "maxGreen": 24,
+    "minBlue": 240,
+    "alpha": 255
+  },
+  "sourceCell": 2,
+  "targetCell": 4,
+  "sourceDimensions": [
+    444,
+    444
+  ],
+  "targetDimensions": [
+    444,
+    443
+  ],
+  "rawSource": "raw/emote.before-pose-reuse.png",
+  "selected": "sheets/emote.png",
+  "unchangedOtherCells": 7,
+  "before": [
+    "fe241bdcf1e610c3c05aef3ee14384ce91f138c6",
+    "67f664d72d971f063be12e42b2e30d6371caa81f",
+    "e8f7114304c46938ee5f8d0bcd6a9dfd4ee5d380",
+    "99fa62cf22caab60ec03392982105afad1688d8b",
+    "75d11682b4968f3af7d0071bc8a8c87019fe3cf2",
+    "09ff3aeeece674d9144e04dedcecb9a8b8b3b722",
+    "51e17cdfb4e1ebf01118e66cd44543d471a49bb6",
+    "7c32db226d9754dcdbe7f53abffaa43d4bacbd6f"
+  ],
+  "after": [
+    "fe241bdcf1e610c3c05aef3ee14384ce91f138c6",
+    "67f664d72d971f063be12e42b2e30d6371caa81f",
+    "e8f7114304c46938ee5f8d0bcd6a9dfd4ee5d380",
+    "99fa62cf22caab60ec03392982105afad1688d8b",
+    "663a6fb89f0581231d173dd6b08727c354615672",
+    "09ff3aeeece674d9144e04dedcecb9a8b8b3b722",
+    "51e17cdfb4e1ebf01118e66cd44543d471a49bb6",
+    "7c32db226d9754dcdbe7f53abffaa43d4bacbd6f"
+  ]
+}

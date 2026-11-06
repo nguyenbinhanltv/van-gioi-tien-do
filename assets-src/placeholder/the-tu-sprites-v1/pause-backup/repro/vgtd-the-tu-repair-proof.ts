@@ -1,0 +1,17 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { createHash } from 'node:crypto';
+import { decodePng } from '@vgtd/rig';
+import { cellHashes } from '@vgtd/sprite';
+const dir=process.argv[2]!,cells=process.argv[3]!.split(',').map(Number);
+const base=join(process.cwd(),'assets-src/placeholder/the-tu-sprites-v1',dir);
+const project=JSON.parse(readFileSync(join(base,'project.json'),'utf8'));
+const clip=project.clips.find((c)=>c.name==='run');
+const original=readFileSync(join(base,'raw/run.attempt1.png')),final=readFileSync(join(base,'sheets/run.png'));
+const grid={cols:clip.cols,rows:Math.ceil(clip.frames/clip.cols)};
+const before=cellHashes(decodePng(original),grid),after=cellHashes(decodePng(final),grid);
+const unexpected=before.map((h,i)=>({h,i})).filter(({h,i})=>!cells.includes(i)&&h!==after[i]);
+if(unexpected.length)throw new Error('Unselected cells changed');
+const proof={clip:'run',dir,method:'Public sprite:repair, selected AI donor cells only; no frame-specific scale/height fitting',cells0:cells,unchangedOtherCells:clip.frames-cells.length,before,after,rawSource:'raw/run.attempt1.png',donor:'raw/run.attempt2.edited.png',selected:'sheets/run.png',sourceSha256:createHash('sha256').update(original).digest('hex'),selectedSha256:createHash('sha256').update(final).digest('hex')};
+writeFileSync(join(base,'raw/run.attempt2.repair-proof.json'),JSON.stringify(proof,null,2)+'\n');
+console.log(dir,proof.unchangedOtherCells,'unselected cells byte-identical');

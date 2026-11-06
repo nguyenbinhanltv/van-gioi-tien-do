@@ -1,0 +1,18 @@
+{
+  "format": "vgtd-visual-quality-notes",
+  "version": 1,
+  "character": "the-tu",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "NE",
+      "cell": 10,
+      "gate": "footSlide",
+      "metric": "contact_hold_frames",
+      "value": 2,
+      "limit": 1,
+      "note": "First-pass late-cycle hold: cell10 repeats cell9 after three AI calls. All12 frames and frozen scale retained. Restore unique flight/reversal in polish; automated foot/ghost metrics remain separately judged.",
+      "status": "open"
+    }
+  ]
+}

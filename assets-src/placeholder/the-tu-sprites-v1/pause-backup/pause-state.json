@@ -1,0 +1,28 @@
+{
+  "snapshotUtc": "2026-11-06T20:09:29.179355+00:00",
+  "branch": "wip/van-gioi-tien-do-18-pause-20261107",
+  "baseCommit": "695d43501d118fdedc71c8332e64fecd1bf8f262",
+  "directions": [
+    "E",
+    "SE",
+    "S",
+    "NE",
+    "N"
+  ],
+  "clips": 75,
+  "frames": 660,
+  "sourceGenerationRecords": 86,
+  "originalCacheBackups": 86,
+  "missingOriginals": [],
+  "hardFailures": 0,
+  "acceptedSoft": {
+    "E": 12,
+    "SE": 29,
+    "S": 26,
+    "NE": 22,
+    "N": 30
+  },
+  "capturesSaved": 75,
+  "publication": "WIP backup only; no PR; final ASSET-LICENSES integration and root checks pending",
+  "resume": "Wait for explicit RESUME; merge origin/main after PR122 lands; restore/verify E from this WIP and publish one direction per PR. Do not rerun bootstrap or repair scripts blindly."
+}

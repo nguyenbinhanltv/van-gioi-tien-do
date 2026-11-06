@@ -1,0 +1,19 @@
+{
+  "clip": "attack_3",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:37:36 UTC",
+  "prompt": "Production ATTACK_3 NORTH straightBACK sprite sheet. Image1 exactmasteridentity/camera; image2 layoutguide. FOUR equalSQUARE columns TWO rows,8completefullbodyframes rowmajor,aspect2:1. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking.  Eight-frame TWO-GAUNTLET GROUNDSLAM.1guard;2bothfistsatshoulders;3bothbronze fists ABOVE bun;4torsofoldsforward/kneesbend;5bothgauntlets smashground inFRONTofbodyAWAYfromcamera;6holdlow;7rise;8exactguard. Groundimpacthiddenpartlybybodyfromrearview; keepfulllimbsize andnaturalclothingfolds. NoVFX, no camera turn. Pureflatopaque#FF00FF background, removeALL borders/gridlines/template marks/ticks/text. No shadows/scenery/floor/glow/particles/rocks/afterimages/weapons. All8figures sameanatomicalscale, entirelyinowncells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/N.master4x.png",
+    "templates/attack_3.template.png"
+  ],
+  "selectedOutput": "sheets/attack_3.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 19:39:07 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-2650798d-d453-4945-af10-02d74f59f7fa.png",
+  "originalBackup": "raw/originals/attack_3.attempt1.png"
+}

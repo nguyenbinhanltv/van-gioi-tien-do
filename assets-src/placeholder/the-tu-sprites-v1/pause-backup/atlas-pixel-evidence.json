@@ -1,0 +1,62 @@
+[
+  {
+    "dir": "E",
+    "width": 2048,
+    "height": 2048,
+    "regions": 156,
+    "premultipliedAlpha": true,
+    "padding": 2,
+    "extrude": 1,
+    "pmaBadPixels": 0,
+    "extrudeMismatchPixels": 0,
+    "paddingNonzeroPixels": 0
+  },
+  {
+    "dir": "SE",
+    "width": 2048,
+    "height": 2048,
+    "regions": 126,
+    "premultipliedAlpha": true,
+    "padding": 2,
+    "extrude": 1,
+    "pmaBadPixels": 0,
+    "extrudeMismatchPixels": 0,
+    "paddingNonzeroPixels": 0
+  },
+  {
+    "dir": "S",
+    "width": 2048,
+    "height": 2048,
+    "regions": 126,
+    "premultipliedAlpha": true,
+    "padding": 2,
+    "extrude": 1,
+    "pmaBadPixels": 0,
+    "extrudeMismatchPixels": 0,
+    "paddingNonzeroPixels": 0
+  },
+  {
+    "dir": "NE",
+    "width": 2048,
+    "height": 2048,
+    "regions": 126,
+    "premultipliedAlpha": true,
+    "padding": 2,
+    "extrude": 1,
+    "pmaBadPixels": 0,
+    "extrudeMismatchPixels": 0,
+    "paddingNonzeroPixels": 0
+  },
+  {
+    "dir": "N",
+    "width": 2048,
+    "height": 2048,
+    "regions": 126,
+    "premultipliedAlpha": true,
+    "padding": 2,
+    "extrude": 1,
+    "pmaBadPixels": 0,
+    "extrudeMismatchPixels": 0,
+    "paddingNonzeroPixels": 0
+  }
+]

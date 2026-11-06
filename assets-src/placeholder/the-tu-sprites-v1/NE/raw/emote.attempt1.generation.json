@@ -1,0 +1,19 @@
+{
+  "clip": "emote",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:27:41 UTC",
+  "prompt": "EDIT target image1 NE rear3Q sprite sheet. Image1 is acceptedidle EDIT TARGET, image2 masterreference. EXACT 4 equal SQUARE columns 2 rows,8 full-body frames rowmajor, aspect4:2. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking.  EDIT image1 acceptedIDLEsheet intoEMOTEsalute. PRESERVE exactcanvas, figureheight, head/bunposition, legs/boots, torso, colors/camera inall8cells. ONLY change arms/gauntlets:1unchangedidle;2handsrise;3rightfistmeetsleftpalmatthechestAWAYfromcamera;4hold;5slightchinnodwithoutmovingbun;6returnchin;7handslower;8unchangedidle. Salute mostlyhiddeninfrontofchestfromrear; nearforearmmovesnaturally. Do NOT zoom/rescale/elongate legs. Image2 identityreferenceonly. Pure flat opaque#FF00FF, NO borders/gridlines/template marks/text/ghosts. No scenery/shadows/floor/particles/rocks/glow/afterimages/weapons. Allfigures sameanatomicalscale insideowncells.",
+  "references": [
+    "sheets/idle.png",
+    "../../the-tu-continuous-v1/reference/NE.master4x.png"
+  ],
+  "selectedOutput": "sheets/emote.png",
+  "status": "selected; awaiting QA",
+  "utcEndObserved": "2026-11-06 19:29:26 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-16b3e0d7-3144-4d30-a7a5-7fabc5be1714.png",
+  "originalBackup": "raw/originals/emote.attempt1.png"
+}

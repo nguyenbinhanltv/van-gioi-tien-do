@@ -1,0 +1,18 @@
+{
+  "clip": "dash",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:57:39 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame DASH sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY THREE equal SQUARE columns by TWO rows, 6 full-body frames, row-major left-to-right top-to-bottom, sheet aspect3:2. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, standing figure height217 units (allowed211..223), pelvis axis x128. All6 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. SIX-frame heavy martial DASH to screen-right, no loop. Cells1 grounded guard,2 shallow crouched anticipation with gauntlets close chest,3 strong forward drive one boot pushing off,4 body leans forward in brief airborne lunge with both bronze gauntlets leading defensively,5 forward foot lands,6 settles into same standing guard. Same adult head/torso/limb sizes and same gauntlets in all6; no smearing or elastic stretched legs. Keep full figure inside cell, no translation outsidecell. Costume and sash follow naturally. No speed lines, blur, afterimages or dust. Pure flat opaque#FF00FF background; REMOVE ALL template lines/ghosts/ticks/borders, no floor/shadow, blur, text, labels or baked VFX. Each figure stays entirely inside its owncell. No new props or costume.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/E.master4x.png",
+    "templates/dash.template.png"
+  ],
+  "selectedOutput": "sheets/dash.png",
+  "status": "selected; per-clip hard QA PASS, final atlas/capture pending",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-50b05c57-8970-45b9-b5c6-d9ef8b00f058.png",
+  "utcEndObserved": "2026-11-06 16:59:55 UTC",
+  "originalBackup": "raw/originals/dash.attempt1.png"
+}

@@ -1,0 +1,467 @@
+{
+  "recordedAtUtc": "2026-11-06T20:09:47.272Z",
+  "utcMeaning": "Inventory UTC; original generation times remain in raw metadata",
+  "indexSelfCoveredBy": "THES-N-QA (no recursive self hash)",
+  "groups": [
+    {
+      "id": "THES-N-GEN",
+      "glob": "assets-src/placeholder/the-tu-sprites-v1/N/raw/*",
+      "source": "Original image_gen outputs, adjacent full prompt/UTC/image-ID records; deterministic recovery repair proof",
+      "utc": "2026-11-06T20:09:47.272Z",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/sprite deterministic processing; Cocos Creator 3.8.8",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/attack.attempt1.generation.json",
+          "sha256": "2207ff221fa5267b5deb4ff541dac9ccb3196e81d80b68e50d232c41ba402dcf"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/attack_2.attempt1.generation.json",
+          "sha256": "204b1c75e48b1d58e6ef0ede87e65bc37f42fb6d9132d749d891c974ba843856"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/attack_3.attempt1.generation.json",
+          "sha256": "f0768d1b45f4f0bc042be93caeed3057a6cd2080e94d80fea6b040428a8d283e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/cast.attempt1.generation.json",
+          "sha256": "0aa6731829335893e1ea5e4629855d075364ea756188a6933df388e194831e81"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/channel.attempt1.generation.json",
+          "sha256": "e5fe11f6b22b88698de1832458ce74d10f22519edac56e91121220a536655d72"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/dash.attempt1.generation.json",
+          "sha256": "94310f35db0b8d264bb668b9d65fb7d85c7d0fbc95b5a58c4c7d2821d6b52523"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/die.attempt1.generation.json",
+          "sha256": "66ceb414eca7f2db9f8cf02add818f927293ee49cdd2594ecb1a7ddacf950908"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/emote.attempt1.generation.json",
+          "sha256": "782ff7f90dbefffe286ea277cd6d941fced595a8bc3e9f858163f6de020fac06"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/emote.before-pose-reuse.png",
+          "sha256": "cf93ad870b161ca55fd01e6b2f7c25fc90d08bd64cf28188a24f7c11b10dc5a7"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/emote.pose-reuse-repair.json",
+          "sha256": "cd9f7efae3b0a5c7a68b77c56d73465fbb3513904c0775b827303d58b31d2dff"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/hit.attempt1.generation.json",
+          "sha256": "2062e03286d5cd724016b8d378b530cdd6aca27c92ba6f7e2ad2cadb736bf32c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/idle.attempt1.generation.json",
+          "sha256": "3b1ec06d9b1a467176f30b32b2894d26daa0a8f1a90d86bf7f7bca7583e488cd"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/idle.attempt1.png",
+          "sha256": "6f7a64a242736aa69a7863ac7bcb2d83cc00c3935dddf6670614932e88f835f1"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/idle.pose-reuse-repair.json",
+          "sha256": "7ffe6e73177947426141590d258c851c85c0a3ad389098dd6d16a520262bd8de"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/meditate.attempt1.generation.json",
+          "sha256": "1e221145acb0994507e5a1c6859824b9b2f95da3b720216b33a537e3aa77770b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/attack.attempt1.png",
+          "sha256": "cdb94f1d8dc3e04a5de5a5dfd68b433b736829e199f8bb53f230f5d7dec9f90a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/attack_2.attempt1.png",
+          "sha256": "9fd02770a70825664a6d45a4560c31f7887a915b6d822dd963c067daf753c29c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/attack_3.attempt1.png",
+          "sha256": "1fc00f5f2cd6ec529eb830be5cc8bd32363489beca8b7d6116db0a9fe7bf67e6"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/cast.attempt1.png",
+          "sha256": "8d6afd64b74ee01456c348db98f8cca29dab30d803a2a728c94126a9b1ad0c27"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/channel.attempt1.png",
+          "sha256": "342ad743bff95d1667f861124347d0789f03a7bbceb7f45ad7f305498867bec5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/dash.attempt1.png",
+          "sha256": "86f7fb76c90d0a97a426fbbdae8f57b506403ef754c891906a91f3dce6c977a4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/die.attempt1.png",
+          "sha256": "8922be20e423be1690d98f04bc40c202c54451ccbd94e790ab4f953948fb4497"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/emote.attempt1.png",
+          "sha256": "f8139f48a1b823be6b9bc40dd3406b9d07d1d8ecfada7684edab042bbdb790b6"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/hit.attempt1.png",
+          "sha256": "f982be174f656047b2bd6e9d4e2d0684ec69a0a007a80bdde6a576a6121b1398"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/idle.attempt1.png",
+          "sha256": "6f7a64a242736aa69a7863ac7bcb2d83cc00c3935dddf6670614932e88f835f1"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/meditate.attempt1.png",
+          "sha256": "1df122965014c398cc03cfa12a9f9b27c22f0b4256a7d0111ff172f9edb00ca5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/run.attempt1.png",
+          "sha256": "cf4027966c5ddc2687ac24bcc11475411234111aea6984ec5b7d295aa700972f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/run.attempt2.png",
+          "sha256": "d2504f48f28f2bb989c6703f96339bf00e9fcf1fe5d230f800eb30fcf7b8e791"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/sword_fly.attempt1.png",
+          "sha256": "69434a7bcaba4d016ac26d675c9d4844b3a49a0e8db62df7bc24e21fde2ffada"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/tribulation.attempt1.png",
+          "sha256": "58f560abfb859edaef8d85f8920dedc4a6b8f954d3023573f9b9b598c161ca9a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/originals/walk.attempt1.png",
+          "sha256": "099002a725a5e6456e701bbb59f64d4da28df018b72858a6d70d2f7f3f0f7d30"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/run.attempt1.generation.json",
+          "sha256": "1b28bd4b83d434d059695240acbacbfc37bf976253dee2831bfc3a77bb77ae02"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/run.attempt1.png",
+          "sha256": "cf4027966c5ddc2687ac24bcc11475411234111aea6984ec5b7d295aa700972f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/run.attempt2.edited.png",
+          "sha256": "d2504f48f28f2bb989c6703f96339bf00e9fcf1fe5d230f800eb30fcf7b8e791"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/run.attempt2.generation.json",
+          "sha256": "ccddc9b3640d7276ed5408c06d5a5feca15cfc149bc1bfb89e81cd7001e05b7c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/run.attempt2.repair-proof.json",
+          "sha256": "963b46bc053912a3b28179714ceb16d76f3f1ba542e20fef7a6acd65f2a9d6ba"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/sword_fly.attempt1.generation.json",
+          "sha256": "7f730e6bc546887cf218be58e4e97398d0ea752d3a4b11acfe561e62925a93e3"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/tribulation.attempt1.generation.json",
+          "sha256": "08a9bfc86e064ba649ca0df1f5876e76fa977fc0e189a1e7270ed520aef8c621"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/raw/walk.attempt1.generation.json",
+          "sha256": "46dd948f0ee4b315b9e3a0dc2f257c5f08c8fc12d0d1babc0a60bb90607ef993"
+        }
+      ]
+    },
+    {
+      "id": "THES-N-SHEET",
+      "glob": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/*; assets-src/placeholder/the-tu-sprites-v1/N/templates/*",
+      "source": "THES-N-GEN; public @vgtd/sprite template and cell-local repair; frozen character calibration",
+      "utc": "2026-11-06T20:09:47.272Z",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/sprite deterministic processing; Cocos Creator 3.8.8",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/attack.png",
+          "sha256": "cdb94f1d8dc3e04a5de5a5dfd68b433b736829e199f8bb53f230f5d7dec9f90a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/attack_2.png",
+          "sha256": "9fd02770a70825664a6d45a4560c31f7887a915b6d822dd963c067daf753c29c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/attack_3.png",
+          "sha256": "1fc00f5f2cd6ec529eb830be5cc8bd32363489beca8b7d6116db0a9fe7bf67e6"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/cast.png",
+          "sha256": "8d6afd64b74ee01456c348db98f8cca29dab30d803a2a728c94126a9b1ad0c27"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/channel.png",
+          "sha256": "342ad743bff95d1667f861124347d0789f03a7bbceb7f45ad7f305498867bec5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/dash.png",
+          "sha256": "86f7fb76c90d0a97a426fbbdae8f57b506403ef754c891906a91f3dce6c977a4"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/die.png",
+          "sha256": "8922be20e423be1690d98f04bc40c202c54451ccbd94e790ab4f953948fb4497"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/emote.png",
+          "sha256": "2f74a8e76d672ab0ad601da6d60dc6366832f9467f42f837b51b752a7bbadfd9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/hit.png",
+          "sha256": "f982be174f656047b2bd6e9d4e2d0684ec69a0a007a80bdde6a576a6121b1398"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/idle.png",
+          "sha256": "3b8ba06595cfd64ae76e8db0fb92c41d1eb981656ec41059448d12e1bebb370b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/meditate.png",
+          "sha256": "1df122965014c398cc03cfa12a9f9b27c22f0b4256a7d0111ff172f9edb00ca5"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/run.png",
+          "sha256": "f1e9981c91a720e4c6b759ece528e0c13cff51834b322bfc19f70cf4ad1ec696"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/sword_fly.png",
+          "sha256": "69434a7bcaba4d016ac26d675c9d4844b3a49a0e8db62df7bc24e21fde2ffada"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/tribulation.png",
+          "sha256": "58f560abfb859edaef8d85f8920dedc4a6b8f954d3023573f9b9b598c161ca9a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/sheets/walk.png",
+          "sha256": "099002a725a5e6456e701bbb59f64d4da28df018b72858a6d70d2f7f3f0f7d30"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack.template.json",
+          "sha256": "d1904b548ee4e86b7166a0f76a4cb10e92dc36e7f3fb3474f302a546839ee047"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack_2.template.json",
+          "sha256": "4c46c60ed4001317c1f8b37ea9f092c9a0361170abcda3d862ddff79da6b9595"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack_2.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack_3.template.json",
+          "sha256": "518b43195daeb46e7f4144b50700b132dfc1ed8109edc5f2241564ffb7dded52"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/attack_3.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/cast.template.json",
+          "sha256": "bcff11fdf5eb90e45df5d5eb086f19fbea5a363f925a17146e5a438d6667da83"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/cast.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/channel.template.json",
+          "sha256": "f7fa8a9c5fac9017b6b1480b2ecbb52da6f92b583637516ff1bb2c84e6c7ad88"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/channel.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/dash.template.json",
+          "sha256": "b3ee48109df838a78d81dd19460a62f0ead293a3407c8e6916e5dcaff4d7eefb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/dash.template.png",
+          "sha256": "e8e2bfd074a38d64aa537edbdc0f07d3c8fbae334602532b757ef94bfd45425f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/die.template.json",
+          "sha256": "55bedfbe1173c475153512ed5e0c945e64854ee312ec6da017b3c57d6511d47f"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/die.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/emote.template.json",
+          "sha256": "2abc72ca3e6b177f13f40c129fac68924558d210524bb6d978ebced9b484135c"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/emote.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/hit.template.json",
+          "sha256": "af67666a6a5090d030583d9a20557e857aa23546eb47e4c48267a4a25dd06e40"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/hit.template.png",
+          "sha256": "4736b7db9d0c2e2c9d3b12704640c9c3b9ea963740d945a9d1441c7c643ebfac"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/idle.template.json",
+          "sha256": "b849daf16bc2bd375a7d9c1321aa2d3ae620241485d6cb6b66598a770874da2e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/idle.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/meditate.template.json",
+          "sha256": "9863e56ce9d56dcdfcb8c8e5b217385ba106b7d333cf2c9df582ba0e1cab007e"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/meditate.template.png",
+          "sha256": "0b8dec13a41a74caecfd672c003c4f55c1c19254a45e535c8920dfda09a1914b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/run.template.json",
+          "sha256": "53031639d3d957ad9675eec2d74fea615e969e932a7bc3e0e00a00f6b9967a4d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/run.template.png",
+          "sha256": "a88844bdfbf2794e01c1dbc58beb261419b633a9b9d758661abb31cb1f2c80b2"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/sword_fly.template.json",
+          "sha256": "00b8c7294abdfb693efe4a931d75b3e0532e6635abedc91f06d6f699f72ea34a"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/sword_fly.template.png",
+          "sha256": "c535d300a40f7cff438db5980097616bcec560814d61b82cd6477385656fc0cb"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/tribulation.template.json",
+          "sha256": "90a71f7c09b012f78a1b6c588657ca601f6ec783c86d87a2510f4b9b5c0f2365"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/tribulation.template.png",
+          "sha256": "4bb7fe8276725d0a52f077008ff40e7d54b37c57b8138bcf21afa86d98289840"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/walk.template.json",
+          "sha256": "f262fe25bbb46bf22a1f520e4ba02d04e715f8d270a948723be9deffc5f88b4b"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/templates/walk.template.png",
+          "sha256": "edf07250de1c838b102e86f569b9066962701d8cfe24d5fb358931991a8642d6"
+        }
+      ]
+    },
+    {
+      "id": "THES-N-QA",
+      "glob": "assets-src/placeholder/the-tu-sprites-v1/N/*.json; assets-src/placeholder/the-tu-sprites-v1/N/quality-backlog.md; assets-src/placeholder/the-tu-sprites-v1/N/export/*; assets-src/placeholder/the-tu-sprites-v1/batch-N.json",
+      "source": "THES-N-SHEET; project clip-table timing, calibration, quality backlog and sprite export contract",
+      "utc": "2026-11-06T20:09:47.272Z",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/sprite deterministic processing; Cocos Creator 3.8.8",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/calibration.json",
+          "sha256": "d12854a4cab2f544249de1792d29cef3d9dea33bcddf698285a4f6419d37aeab"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/export/capture-index.json",
+          "sha256": "d6ae9434de1dd682b1d016e38bfc38366afed0a3ba088095b9bd79f85b968667"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/export/thetu_N.sprite.json",
+          "sha256": "18f95f17b847407798b64da7268fda88feaa50280c675d7ed654d33845ad1476"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/project.json",
+          "sha256": "3fab22aa040a8ace59345d59579e24778c10a1f06d5b86cee37f97f838c2a4a0"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/quality-backlog.json",
+          "sha256": "acc92a9efa04bce54314e13cae83d0fb6e09afc4345197b9b864b3a895b048e9"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/quality-backlog.md",
+          "sha256": "0043d316695f6ed1cfe5e87ee55b42030681e942f97e24ce133cd22c58038b4d"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/N/quality-visual-notes.json",
+          "sha256": "3604d1b799bc0fb94729446b1d2f1a5333c603617942c042c6fd7fd7f3e1a614"
+        },
+        {
+          "path": "assets-src/placeholder/the-tu-sprites-v1/batch-N.json",
+          "sha256": "b288568009e36da5a4587abe2c26e02f4999a59f2526287c0a05c01e57416262"
+        }
+      ]
+    },
+    {
+      "id": "THES-N-RUNTIME",
+      "glob": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_*; apps/client-cocos/assets/resources/dragonbones/the-tu-sprites.meta",
+      "source": "THES-N-SHEET; @vgtd/sprite PMA atlas and DragonBones display-swap exporter, Cocos Creator metadata",
+      "utc": "2026-11-06T20:09:47.272Z",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/sprite deterministic processing; Cocos Creator 3.8.8",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites.meta",
+          "sha256": "018d00f8475572825d7911f2f5f95f37581b8840543a38f42f74a775c7394e71"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_ske.json",
+          "sha256": "ab07a13db7944f8edb6367ee4b009ed21e06b3f2b6802897cbe4d496338fc9a7"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_ske.json.meta",
+          "sha256": "b45995c7ea1bfc313bf1210d7f744bb1e2b6b0d51fc3a4cf00825d179e69ebf5"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.json",
+          "sha256": "a4396f8950bb06b03e9f89dd22e4068f3238867d916db51579f1f5be17cf12b9"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.json.meta",
+          "sha256": "ea75ada67d8a9702f0119b9de4c476daf5fe80c83fa76dc0f22ce279dbd6d418"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.png",
+          "sha256": "d6e422923d6706e596970284e74ae5bf445a657e5ec6f4903b08e35c8a99ea18"
+        },
+        {
+          "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.png.meta",
+          "sha256": "5b19ed43486bf7826c517698436603a8e295c5efbe181842bd450a9444810d80"
+        }
+      ]
+    },
+    {
+      "id": "THES-N-REF",
+      "glob": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master4x.png",
+      "source": "Preserved The tu master from PR #113; see upstream concept/master provenance in the same license log",
+      "utc": "2026-11-06T20:09:47.272Z",
+      "toolModel": "image_gen.imagegen / model undisclosed by tool (inherited); codex-cli 0.166.0; @vgtd/sprite deterministic processing; Cocos Creator 3.8.8",
+      "interimOwner": "Người dùng (interim art owner)",
+      "status": "AI-generated, placeholder, needs hand-polish + license review before release",
+      "release": "no",
+      "files": [
+        {
+          "path": "assets-src/placeholder/the-tu-continuous-v1/reference/N.master4x.png",
+          "sha256": "6cdb49802246c94d4a90963f02dc7ab2b673de9eb1db2f4ea196d2baa848af8d"
+        }
+      ]
+    }
+  ]
+}

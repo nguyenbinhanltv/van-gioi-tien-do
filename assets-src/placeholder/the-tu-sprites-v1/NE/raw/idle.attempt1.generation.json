@@ -1,0 +1,19 @@
+{
+  "clip": "idle",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:14:16 UTC",
+  "prompt": "Production frame-by-frame IDLE NORTHEAST sprite sheet for Van Gioi Tien Do, The tu A Son Mon Ho Ve. Image1 EXACT rear NE identity/style master; image2 exact layout and leading-leg ghost guide. EXACTLY 4 equal SQUARE columns by 2 rows, 8 complete full-body cells row-major, sheet aspect 4:2. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking. Eight-frame seamless IDLE: planted feet, tiny chest breathing and hand/cloth sway;1 calmguard,2 inhale,3 inhalepeak,4 relax,5 neutral,6 exhale,7 relax,8 exact1. Figure height214units throughout. Pure opaque flat#FF00FF background. Remove all template lines, ghostmarks, ticks, dots, borders, numbers and text. No shadows, floor, blur, effects, scenery, aura or afterimages. One whole figure percell, never clipped or merged across cells.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/NE.master4x.png",
+    "templates/idle.template.png"
+  ],
+  "selectedOutput": "sheets/idle.png",
+  "status": "selected; awaiting upright QA",
+  "utcEndObserved": "2026-11-06 19:15:04 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-6591cb43-3e56-4358-8b19-4c0e03422b10.png",
+  "originalBackup": "raw/originals/idle.attempt1.png"
+}
