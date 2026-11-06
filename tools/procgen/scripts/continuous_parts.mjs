@@ -7,11 +7,38 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 const { Image, decodePNG, resizeArea } = require('../src/lib/png.js');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const source = path.join(root, 'assets-src/placeholder/kiem-tu-continuous-v1');
-const manifestPath =
-  process.argv[2] === 'masks' && process.argv[4] ? process.argv[4] : path.join(source, 'E.parts.json');
+const options = {};
+const positional = [];
+for (let i = 2; i < process.argv.length; i++) {
+  const arg = process.argv[i];
+  if (!arg.startsWith('--')) {
+    positional.push(arg);
+    continue;
+  }
+  const key = arg.slice(2);
+  if (!['source', 'dir', 'manifest', 'master'].includes(key) || !process.argv[i + 1])
+    throw new Error(`Unknown or incomplete option ${arg}`);
+  options[key] = process.argv[++i];
+}
+const mode = positional[0] ?? 'process';
+const defaultSource = path.join(root, 'assets-src/placeholder/kiem-tu-continuous-v1');
+const source = options.source ? path.resolve(root, options.source) : defaultSource;
+const direction = options.dir ?? 'E';
+const manifestPath = path.resolve(
+  root,
+  options.manifest ??
+    (mode === 'masks' && positional[2] ? positional[2] : path.join(source, `${direction}.parts.json`)),
+);
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-const master = decodePNG(fs.readFileSync(path.join(source, 'reference/E.master4x.png')));
+const masterPath = options.master
+  ? path.resolve(root, options.master)
+  : manifest.reference4x
+    ? path.resolve(root, manifest.reference4x)
+    : path.join(source, `reference/${direction}.master4x.png`);
+const master = decodePNG(fs.readFileSync(masterPath));
+if (master.width !== 512 || master.height !== 512) throw new Error('Master must be a 512x512 @4x RGBA image');
+if (source !== defaultSource && !manifest.paletteSamples)
+  throw new Error('A different character must supply paletteSamples in its geometry manifest');
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const luminance = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 const silhouette = new Uint8Array(512 * 512);
@@ -90,7 +117,7 @@ function material(c) {
 }
 
 const palettes = {};
-const sampleRegions = {
+const sampleRegions = manifest.paletteSamples ?? {
   cloth: [
     [115, 91, 124, 115],
     [120, 118, 126, 126],
@@ -114,6 +141,18 @@ const sampleRegions = {
     [117, 209, 125, 222],
   ],
 };
+const paletteFilters =
+  manifest.paletteFilters ??
+  (source === defaultSource
+    ? {
+        cloth: { minLuma: 145 },
+        hair: { maxLuma: 125 },
+        blue: { maxLuma: 180, maxRedMinusBlue: 5 },
+        skin: { minLuma: 140 },
+        gold: { minLuma: 110, minRedMinusBlue: 12 },
+        jade: { minGreenMinusRed: 4, minGreenMinusBlue: -3 },
+      }
+    : {});
 for (let y = 0; y < master.height; y++)
   for (let x = 0; x < master.width; x++) {
     const c = master.getPixel(x, y);
@@ -121,13 +160,14 @@ for (let y = 0; y < master.height; y++)
     for (const [name, regions] of Object.entries(sampleRegions)) {
       if (!regions.some(([x0, y0, x1, y1]) => x / 2 >= x0 && x / 2 <= x1 && y / 2 >= y0 && y / 2 <= y1)) continue;
       const l = luminance(c);
+      const f = paletteFilters[name] ?? {};
       if (
-        (name === 'cloth' && l < 145) ||
-        (name === 'hair' && l > 125) ||
-        (name === 'blue' && (c[0] > c[2] + 5 || l > 180)) ||
-        (name === 'skin' && l < 140) ||
-        (name === 'gold' && (c[0] < c[2] + 12 || l < 110)) ||
-        (name === 'jade' && (c[1] < c[0] + 4 || c[1] < c[2] - 3))
+        (f.minLuma !== undefined && l < f.minLuma) ||
+        (f.maxLuma !== undefined && l > f.maxLuma) ||
+        (f.minRedMinusBlue !== undefined && c[0] - c[2] < f.minRedMinusBlue) ||
+        (f.maxRedMinusBlue !== undefined && c[0] - c[2] > f.maxRedMinusBlue) ||
+        (f.minGreenMinusRed !== undefined && c[1] - c[0] < f.minGreenMinusRed) ||
+        (f.minGreenMinusBlue !== undefined && c[1] - c[2] < f.minGreenMinusBlue)
       )
         continue;
       (palettes[name] ??= []).push(c);
@@ -198,10 +238,17 @@ function cleanAlpha(image) {
 }
 
 function processPart(part) {
-  const filename = path.join(source, 'raw/E', `${part.id}.png`);
+  const filename = path.join(source, 'raw', direction, `${part.id}.png`);
   if (!fs.existsSync(filename)) return null;
   const raw = decodePNG(fs.readFileSync(filename));
   const image = resizeArea(raw, 512, 512);
+  if (part.sourceBounds4x) {
+    const [x0, y0, x1, y1] = part.sourceBounds4x;
+    if (![x0, y0, x1, y1].every(Number.isFinite) || x0 < 0 || y0 < 0 || x1 >= 512 || y1 >= 512 || x1 < x0 || y1 < y0)
+      throw new Error('sourceBounds4x must be inclusive bounds inside the normalized 512 canvas');
+    for (let y = 0; y < 512; y++)
+      for (let x = 0; x < 512; x++) if (x < x0 || y < y0 || x > x1 || y > y1) image.setPixel(x, y, 0, 0, 0, 0);
+  }
   if (part.id !== 'shadow') cleanAlpha(image);
   const guide = maskFor(part);
   const before = bounds(image, part.id === 'shadow' ? 1 : 8),
@@ -215,9 +262,9 @@ function processPart(part) {
   const fitted = resizeArea(crop, target.width, target.height);
   for (let y = 0; y < fitted.height; y++)
     for (let x = 0; x < fitted.width; x++) registered.setPixel(x + target.x0, y + target.y0, ...fitted.getPixel(x, y));
-  const contourFit = /^(arm_[LR]|leg_[LR]|torso|vest|robe_front|robe_back|robe_inner|sash_knot|ribbon_tail_[LR])$/.test(
-    part.id,
-  );
+  const contourFit = part.registration
+    ? part.registration === 'contour'
+    : /^(arm_[LR]|leg_[LR]|torso|vest|robe_front|robe_back|robe_inner|sash_knot|ribbon_tail_[LR])$/.test(part.id);
   if (contourFit) {
     // Fit each continuous cross-section to the neutral art guide. This registers the curved front skirt,
     // fully painted hidden hips and round limb caps instead of leaving the generated trapezoid unchanged.
@@ -293,9 +340,33 @@ function processPart(part) {
         registered.setPixel(x, y, 25, 27, 30, Math.min(51, c[3]));
       }
   }
+  if (manifest.edgeDefringe) {
+    const original = new Uint8ClampedArray(registered.data);
+    for (let y = 0; y < 512; y++)
+      for (let x = 0; x < 512; x++) {
+        const i = (y * 512 + x) * 4,
+          alpha = original[i + 3];
+        if (alpha === 0 || alpha >= 250) continue;
+        let nearest = null,
+          best = Infinity;
+        for (let dy = -4; dy <= 4; dy++)
+          for (let dx = -4; dx <= 4; dx++) {
+            const u = x + dx,
+              v = y + dy,
+              d = dx * dx + dy * dy;
+            if (u < 0 || v < 0 || u >= 512 || v >= 512 || d >= best) continue;
+            const j = (v * 512 + u) * 4;
+            if (original[j + 3] < 250) continue;
+            best = d;
+            nearest = original.slice(j, j + 3);
+          }
+        const color = original.slice(i, i + 3);
+        if (nearest && luminance(color) > luminance(nearest) + 12) registered.setPixel(x, y, ...nearest, alpha);
+      }
+  }
   const final = resizeArea(registered, 256, 256);
-  fs.mkdirSync(path.join(source, 'E'), { recursive: true });
-  final.save(path.join(source, 'E', `${part.id}.png`));
+  fs.mkdirSync(path.join(source, direction), { recursive: true });
+  final.save(path.join(source, direction, `${part.id}.png`));
   return {
     id: part.id,
     rawSize: [raw.width, raw.height],
@@ -308,13 +379,14 @@ function processPart(part) {
   };
 }
 
-const mode = process.argv[2] ?? 'process';
 if (mode === 'licenses') {
+  if (source !== defaultSource || direction !== 'E')
+    throw new Error('The KT3 license writer is Kiếm tu E specific; maintain other character provenance separately');
   const filename = path.join(root, 'docs/ASSET-LICENSES.md');
   const marker = '\n## KT3 — Kiếm tu chi liền, pilot E (2026-11-06 UTC)\n';
   const previous = fs.readFileSync(filename, 'utf8').split(marker)[0];
   const entries = manifest.parts
-    .map((p) => path.join(source, 'raw/E', `${p.id}.generation.json`))
+    .map((p) => path.join(source, 'raw', direction, `${p.id}.generation.json`))
     .filter(fs.existsSync)
     .map((p) => JSON.parse(fs.readFileSync(p, 'utf8')));
   let section =
@@ -329,11 +401,13 @@ if (mode === 'licenses') {
   fs.writeFileSync(filename, previous + section);
   console.log(`Logged ${entries.length} generation prompts`);
 } else if (mode === 'check') {
-  const master2x = decodePNG(fs.readFileSync(path.join(root, manifest.reference2x)));
+  const master2x = manifest.reference2x
+    ? decodePNG(fs.readFileSync(path.resolve(root, manifest.reference2x)))
+    : resizeArea(master, 256, 256);
   const composite = new Image(256, 256);
   const images = new Map();
   for (const part of manifest.parts) {
-    const image = decodePNG(fs.readFileSync(path.join(source, 'E', `${part.id}.png`)));
+    const image = decodePNG(fs.readFileSync(path.join(source, direction, `${part.id}.png`)));
     if (image.width !== 256 || image.height !== 256) throw new Error(`${part.id}: expected RGBA256 canvas`);
     if (!image.data.some((v, i) => i % 4 === 3 && v > 8)) throw new Error(`${part.id}: empty alpha`);
     images.set(part.id, image);
@@ -374,11 +448,11 @@ if (mode === 'licenses') {
     maxMissingPx,
     pass: maxExtraPx <= 2 && maxMissingPx <= 2,
   };
-  if (process.argv[3]) fs.writeFileSync(process.argv[3], JSON.stringify(result, null, 2) + '\n');
+  if (positional[1]) fs.writeFileSync(positional[1], JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify(result, null, 2));
   if (!result.pass) process.exitCode = 1;
 } else if (mode === 'masks') {
-  const out = process.argv[3];
+  const out = positional[1];
   if (!out) throw new Error('Usage: node continuous_parts.mjs masks <working-directory>');
   fs.mkdirSync(out, { recursive: true });
   for (const part of manifest.parts) maskFor(part).save(path.join(out, `${part.id}_mask4x.png`));
@@ -393,7 +467,7 @@ if (mode === 'licenses') {
       }
     })
     .filter(Boolean);
-  const out = process.argv[3];
+  const out = positional[1];
   if (out)
     fs.writeFileSync(
       out,
