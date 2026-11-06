@@ -11,6 +11,7 @@ import {
   loadCharacterData,
   lowerBodyMetrics,
   lowerBodyQa,
+  runQa,
   principalAxis,
   stripQa,
   type Image,
@@ -195,23 +196,38 @@ describe('lower-body QA and the robe gait', () => {
   });
 });
 
-describe('gait profiles carry the authored ground speed the runtime needs', () => {
+describe('the robe gait bakes its cadence into the clip (no runtime timeScale)', () => {
   const res = build({ kind: 'skirt', panel: 'robe_front' });
-  const speed = (name: 'run' | 'walk', gait: keyof typeof GAIT_PROFILES) =>
-    authorKiemTuSet(res.rig, { only: [name], secondary: false, gait: GAIT_PROFILES[gait] })[0]!.motion!.speed;
+  const clipOf = (name: 'run' | 'walk', gait: keyof typeof GAIT_PROFILES) =>
+    authorKiemTuSet(res.rig, { only: [name], secondary: false, gait: GAIT_PROFILES[gait] })[0]!;
 
-  it('the robe clips store a lower authored speed (stride / cycle time) than the table gait, in the ratio of speedScale', () => {
+  it('the authored ground speed is the real speed for every gait (the movement speed, so timeScale stays 1)', () => {
     for (const name of ['run', 'walk'] as const) {
-      const free = speed(name, 'free');
-      const robe = speed(name, 'robe');
-      expect(free).toBeGreaterThan(0);
-      expect(robe / free).toBeCloseTo(GAIT_PROFILES.robe.speedScale, 2);
+      expect(clipOf(name, 'robe').motion!.speed).toBe(clipOf(name, 'free').motion!.speed);
+      expect(clipOf(name, 'free').motion!.speed).toBeGreaterThan(0);
     }
   });
 
-  it('every clip keeps the animation-table duration whatever the gait (only the authored speed changes)', () => {
-    const f = authorKiemTuSet(res.rig, { only: ['run', 'walk'], secondary: false, gait: GAIT_PROFILES.free });
-    const r = authorKiemTuSet(res.rig, { only: ['run', 'walk'], secondary: false, gait: GAIT_PROFILES.robe });
-    expect(r.map((c) => c.frames)).toEqual(f.map((c) => c.frames));
+  it('the robe clips keep the animation-table duration and hold two step pairs: the foot lifts twice per clip', () => {
+    for (const name of ['run', 'walk'] as const) {
+      const free = clipOf(name, 'free');
+      const robe = clipOf(name, 'robe');
+      expect(robe.frames).toBe(free.frames);
+      const lifts = (c: typeof free) => {
+        const foot = c.motion!.planted![res.rig.roles.foot_L!]!;
+        let n = 0;
+        for (let f = 1; f < foot.length; f++) if (foot[f - 1] && !foot[f]) n++;
+        return n;
+      };
+      expect(lifts(robe)).toBe(2 * lifts(free));
+    }
+  });
+
+  it('the shorter stride stays reachable: no foot-slide error and no IK-reach error on the robe run', () => {
+    const run = clipOf('run', 'robe');
+    const issues = runQa(res.rig, run, { mesh: false });
+    expect(
+      issues.issues.filter((i) => i.severity === 'error' && (i.check === 'foot-slide' || i.check === 'ik-reach')),
+    ).toEqual([]);
   });
 });

@@ -7,9 +7,9 @@
  * Writes <out>/kiemtu_<dir>_{ske,tex}.json + kiemtu_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).
  * --stem <name>  file stem (default kiemtu), to put several variants in one viewer folder.
- * --gait free|robe|robe-mid  gait of run / walk / dash (default free = the animation-table gait; robe = short quick steps,
- * shallow knee, long robe, OPT-IN: the clips carry a lower authored ground speed that the runtime must divide by,
- * assembly.json lists `authoredSpeedPxS` per clip).
+ * --gait robe|free  gait of run / walk / dash (default robe: half stride = two step pairs per clip at the real ground speed,
+ * shallow knee, low foot lift, for a long robe; free = the original gait). The cadence is baked into the clip: the authored
+ * speed is the real speed, nothing depends on a runtime timeScale.
  * The old Kiếm tu rig supplies roles, IK, sockets and (until the new sword is painted) the sword art.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -46,9 +46,9 @@ const partsRoot = opt('parts');
 if (!partsRoot) throw new Error('usage: --parts <dir> [--dir E] [--out <dir>] [--allow-errors]');
 const dir = opt('dir', 'E') as Direction;
 const stem = opt('stem', 'kiemtu');
-// robe is opt-in: it authors a shorter stride and so needs the runtime to play the locomotion clips with
-// timeScale = movement speed / authored speed (see docs/art/rig-continuous-parts.md); `free` is the animation-table gait
-const gaitName = opt('gait', 'free') as GaitName;
+// robe: half stride, two step pairs inside the table-length clip at the real ground speed (cadence baked in, no
+// runtime timeScale); `free` is the original gait
+const gaitName = opt('gait', 'robe') as GaitName;
 if (!(gaitName in GAIT_PROFILES))
   throw new Error(`unknown --gait '${gaitName}' (${Object.keys(GAIT_PROFILES).join(', ')})`);
 const outArg = opt('out', '');

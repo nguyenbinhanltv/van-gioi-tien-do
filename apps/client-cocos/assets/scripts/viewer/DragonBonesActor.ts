@@ -223,7 +223,12 @@ export class DragonBonesActor implements CharacterActor {
     if (!anim.hasAnimation(BLINK_CLIP)) return;
     const state = anim.getState(BLINK_CLIP);
     if (BLINK_OFF.has(bodyClip)) {
-      if (state) anim.stop(BLINK_CLIP);
+      if (state) {
+        // a blink may be mid-way (closed): show the open display first; a body clip that owns the eyes (meditate) keys its own
+        const eyes = armature.getSlot('eyes');
+        if (eyes) eyes.displayIndex = 0;
+        anim.stop(BLINK_CLIP);
+      }
       return;
     }
     if (!state || !state.isPlaying) anim.fadeIn(BLINK_CLIP, 0, 0, BLINK_LAYER, BLINK_GROUP);

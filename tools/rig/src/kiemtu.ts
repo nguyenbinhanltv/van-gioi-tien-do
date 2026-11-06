@@ -89,12 +89,16 @@ export function authorIdle(rig: RigDocument): Clip {
 
 /**
  * Gait shaping for a long robe. A long skirt hides the legs, so a wide stride with deep knee bend and a high foot lift
- * reads as a squat / horse stance with the legs poking out of a rigid plank. `speedScale` shortens the authored stride
- * at the same cycle length (the runtime plays the clip faster by timeScale = real speed / authored speed: quick short
- * steps), `crouchScale` and `liftScale` flatten the knee bend and the foot lift, `lean` leans the body forward (deg).
+ * reads as a squat / horse stance with the legs poking out of a rigid plank. `cycles` packs more L+R step pairs into the
+ * SAME clip duration (the animation-table length) at the SAME ground speed: shorter, quicker steps with the cadence baked
+ * into the clip, so nothing depends on a runtime timeScale and the authored speed stays the real speed. `reachScale`
+ * shortens the one-shot dash reach, `crouchScale` and `liftScale` flatten the knee bend and the foot lift, `lean` leans the
+ * body forward (deg).
  */
 export interface GaitProfile {
-  readonly speedScale: number;
+  /** Integer number of gait cycles inside the clip (1 = the table gait). */
+  readonly cycles: number;
+  readonly reachScale: number;
   readonly crouchScale: number;
   readonly liftScale: number;
   readonly lean: number;
@@ -102,11 +106,9 @@ export interface GaitProfile {
 
 export const GAIT_PROFILES = {
   /** The original free-leg gait (short robe / trousers). */
-  free: { speedScale: 1, crouchScale: 1, liftScale: 1, lean: 0 },
-  /** Long robe: short quick steps, shallow knee, low foot lift, a little forward lean. */
-  robe: { speedScale: 0.55, crouchScale: 0.45, liftScale: 0.45, lean: 3 },
-  /** Between the two. */
-  'robe-mid': { speedScale: 0.75, crouchScale: 0.65, liftScale: 0.65, lean: 2 },
+  free: { cycles: 1, reachScale: 1, crouchScale: 1, liftScale: 1, lean: 0 },
+  /** Long robe: half stride (two step pairs per clip), shallow knee, low foot lift, a little forward lean. */
+  robe: { cycles: 2, reachScale: 0.55, crouchScale: 0.45, liftScale: 0.45, lean: 3 },
 } as const satisfies Record<string, GaitProfile>;
 export type GaitName = keyof typeof GAIT_PROFILES;
 
@@ -115,9 +117,10 @@ export function authorRun(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.fr
   const g = viewGain(rig.direction);
   const axis = screenAxis(rig.direction);
   // foreshortened views move less on screen: scale the authored screen speed so the stride stays reachable
-  const speed = RUN_SPEED_PX_S * g * gait.speedScale;
+  const speed = RUN_SPEED_PX_S * g;
   const plan = planFeet(rig, {
     frames: N,
+    cycles: gait.cycles,
     speed,
     duty: 0.42,
     footLift: 9 * gait.liftScale,
@@ -140,13 +143,13 @@ export function authorRun(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.fr
   // L foot touches down at cycle 0.2, R at 0.7 (docs/03: footsteps at sprite frames 2 and 7 of 10)
   c.event(Math.round(0.2 * N), 'footstep_L');
   c.event(Math.round(0.7 * N), 'footstep_R');
-  c.rotate('spine_mid', sine(N, 1.6 * g, { cycles: 2, phase: 0.1, offset: (-7 - gait.lean) * g }));
-  c.rotate('spine_upper', sine(N, 3.2 * g, { cycles: 1, phase: 0.25, offset: -3 * g }));
-  c.rotate('head', sine(N, 1.4, { cycles: 2, phase: 0.3, offset: 7 * g }));
-  c.rotate('upper_arm_L', sine(N, 46 * g, { cycles: 1, phase: 0.25 }));
-  c.rotate('upper_arm_R', sine(N, 46 * g, { cycles: 1, phase: -0.25 }));
-  c.rotate('lower_arm_L', sine(N, 10 * g, { cycles: 1, phase: 0.05, offset: 70 * g }));
-  c.rotate('lower_arm_R', sine(N, 10 * g, { cycles: 1, phase: -0.45, offset: 70 * g }));
+  c.rotate('spine_mid', sine(N, 1.6 * g, { cycles: 2 * gait.cycles, phase: 0.1, offset: (-7 - gait.lean) * g }));
+  c.rotate('spine_upper', sine(N, 3.2 * g, { cycles: gait.cycles, phase: 0.25, offset: -3 * g }));
+  c.rotate('head', sine(N, 1.4, { cycles: 2 * gait.cycles, phase: 0.3, offset: 7 * g }));
+  c.rotate('upper_arm_L', sine(N, 46 * g, { cycles: gait.cycles, phase: 0.25 }));
+  c.rotate('upper_arm_R', sine(N, 46 * g, { cycles: gait.cycles, phase: -0.25 }));
+  c.rotate('lower_arm_L', sine(N, 10 * g, { cycles: gait.cycles, phase: 0.05, offset: 70 * g }));
+  c.rotate('lower_arm_R', sine(N, 10 * g, { cycles: gait.cycles, phase: -0.45, offset: 70 * g }));
   return closeLoop(c.build());
 }
 
@@ -559,15 +562,16 @@ export function armsFk(rig: RigDocument, clip: Clip): Clip {
 export function authorWalk(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.free): Clip {
   const N = clipSpec('walk').frames; // 20
   const g = viewGain(rig.direction);
-  const speed = WALK_SPEED_PX_S * g * gait.speedScale;
+  const speed = WALK_SPEED_PX_S * g;
   const axis = screenAxis(rig.direction);
   // knees stay bent enough that the vertical part of the stride (front/back views) is reachable
   const crouch = Math.max(
     Math.max(4, 6 * gait.crouchScale),
-    crouchFor(legReach(rig), axis, (speed * 0.62 * (N / 30)) / 2),
+    crouchFor(legReach(rig), axis, (speed * 0.62 * (N / gait.cycles / 30)) / 2),
   );
   const plan = planFeet(rig, {
     frames: N,
+    cycles: gait.cycles,
     speed,
     duty: 0.62,
     footLift: 5 * gait.liftScale,
@@ -584,13 +588,13 @@ export function authorWalk(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.f
     motion: { speed, planted: { [rig.roles.foot_L!]: plan.planted.L, [rig.roles.foot_R!]: plan.planted.R } },
   });
   c.merge(plan.tracks);
-  c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2, phase: 0.1, offset: (-2 - gait.lean * 0.5) * g }));
-  c.rotate('spine_upper', sine(N, 2.4 * g, { phase: 0.25 }));
-  c.rotate('head', sine(N, 1, { cycles: 2, phase: 0.3, offset: 2 * g }));
-  c.rotate('upper_arm_L', sine(N, 24 * g, { phase: 0.25 }));
-  c.rotate('upper_arm_R', sine(N, 24 * g, { phase: -0.25 }));
-  c.rotate('lower_arm_L', sine(N, 6 * g, { phase: 0.05, offset: 16 * g }));
-  c.rotate('lower_arm_R', sine(N, 6 * g, { phase: -0.45, offset: 16 * g }));
+  c.rotate('spine_mid', sine(N, 1.2 * g, { cycles: 2 * gait.cycles, phase: 0.1, offset: (-2 - gait.lean * 0.5) * g }));
+  c.rotate('spine_upper', sine(N, 2.4 * g, { cycles: gait.cycles, phase: 0.25 }));
+  c.rotate('head', sine(N, 1, { cycles: 2 * gait.cycles, phase: 0.3, offset: 2 * g }));
+  c.rotate('upper_arm_L', sine(N, 24 * g, { cycles: gait.cycles, phase: 0.25 }));
+  c.rotate('upper_arm_R', sine(N, 24 * g, { cycles: gait.cycles, phase: -0.25 }));
+  c.rotate('lower_arm_L', sine(N, 6 * g, { cycles: gait.cycles, phase: 0.05, offset: 16 * g }));
+  c.rotate('lower_arm_R', sine(N, 6 * g, { cycles: gait.cycles, phase: -0.45, offset: 16 * g }));
   return closeLoop(c.build());
 }
 
@@ -643,14 +647,14 @@ export function authorDash(rig: RigDocument, gait: GaitProfile = GAIT_PROFILES.f
   ]);
   c.translate('ik_foot_L', [
     [0, 0, 0, EASE.out],
-    [3, 15 * g * gait.speedScale, 0, EASE.inOut],
-    [6, 15 * g * gait.speedScale, 0, EASE.inOut],
+    [3, 15 * g * gait.reachScale, 0, EASE.inOut],
+    [6, 15 * g * gait.reachScale, 0, EASE.inOut],
     [N, 0, 0, EASE.inOut],
   ]);
   c.translate('ik_foot_R', [
     [0, 0, 0, EASE.out],
-    [3, -14 * g * gait.speedScale, 7 * gait.liftScale, EASE.inOut],
-    [6, -14 * g * gait.speedScale, 7 * gait.liftScale, EASE.inOut],
+    [3, -14 * g * gait.reachScale, 7 * gait.liftScale, EASE.inOut],
+    [6, -14 * g * gait.reachScale, 7 * gait.liftScale, EASE.inOut],
     [N, 0, 0, EASE.inOut],
   ]);
   return c.build();

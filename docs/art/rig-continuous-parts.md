@@ -68,9 +68,9 @@ Tùy chọn sau: mặt dây ngọc (chain), lót tay áo, váy lớp trong, lớ
 
 Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất bằng `npm run rig:assemble -w @vgtd/rig -- --parts <thư mục> --out <thư mục>` (mặc định ra thư mục tạm; để xem trong viewer dùng `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous`, không commit thư mục đó trước khi pilot được nghiệm thu; giữ nhân vật cũ để so sánh), thêm blink / đổi tay / đổi miệng vào clip (display index theo khung), sau đó lan sang S/SE/NE/N.
 
-## 6b. Dáng đi cho váy dài (`GAIT_PROFILES`) và tốc độ ghi trong clip
+## 6b. Dáng đi cho váy dài (`GAIT_PROFILES`)
 
-Với váy dài, bước rộng + gập gối sâu trông như tư thế cưỡi ngựa. `rig:assemble --gait robe` (**chọn thêm, mặc định `free`** = dáng của bảng animation) dựng run/walk/dash với bước ngắn (`speedScale` 0,55), gối nông, nâng chân thấp, nghiêng người. Hệ quả cần runtime: clip giữ **thời lượng của bảng animation** (run 0,5 s) nhưng **tốc độ mặt đất ghi trong clip thấp hơn** (`motion.speed`, px/s, liệt kê ở `<stem>_<dir>.assembly.json` → `clips[].authoredSpeedPxS`). Quy tắc runtime: `timeScale = tốc độ di chuyển thực / authoredSpeedPxS` cho clip chạy/đi; nếu để `timeScale = 1` khi nhân vật di chuyển đúng tốc độ thực thì chân trượt ~45 % sải bước. Client hiện **chưa** đặt `timeScale` theo tốc độ di chuyển; chấp nhận nhịp bước nhanh hơn (≈ 1,8×) hay không là quyết định của chủ dự án: xem `docs/OPEN-ITEMS.md` §10. Hướng chính để sửa dáng đi là bước key pose tham chiếu (`docs/art/rig-keypose.md`).
+Với váy dài, bước rộng + gập gối sâu trông như tư thế cưỡi ngựa. `rig:assemble --gait robe` (mặc định) dựng run/walk/dash với **hai cặp bước trong cùng một clip** (`cycles: 2`): clip giữ **thời lượng của bảng animation** (run 0,5 s) và **tốc độ mặt đất thật** (`motion.speed` = tốc độ di chuyển, `timeScale` luôn 1), nhưng mỗi bước chỉ dài một nửa; gối nông, nâng chân thấp, nghiêng người. Nhịp bước gấp đôi được **ghi sẵn trong clip**, không phụ thuộc runtime. `--gait free` giữ dáng gốc. Chủ dự án cần xác nhận nhịp bước nhanh hơn: `docs/OPEN-ITEMS.md` §10. Hướng chính để sửa dáng đi là bước key pose tham chiếu (`docs/art/rig-keypose.md`).
 
 ## 7. Lớp chi tiết hoạt cảnh (`tools/rig/src/detail.ts`)
 
