@@ -407,6 +407,7 @@ describe('Thể tu per-direction pieces', () => {
     expect(slots).toContain('eyes');
     expect(slots).toContain('brows');
     expect(slots).not.toContain('mouth');
+    expect(profilePieces(THE_TU_PROFILE, 'NE').find((p) => p.id === 'head')!.compose).toEqual(['head']);
     expect(slots.indexOf('hair_back')).toBeGreaterThan(slots.indexOf('head'));
     expect(slots.at(-1)).toBe('hand_R');
     expect(slots.indexOf('arm_L')).toBeLessThan(slots.indexOf('torso'));

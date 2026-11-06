@@ -199,7 +199,8 @@ export const THE_TU_PIECES_BY_DIR: Readonly<Partial<Record<Direction, readonly P
       'hairpin',
       armSet('R'),
     ),
-    BACK_VIEW_TABARD,
+    // no ear in the back three-quarter view either: the head is composed from `head` only (as in N)
+    { ...BACK_VIEW_TABARD, head: { compose: ['head'] } },
   ),
   N: pick(
     ids(
