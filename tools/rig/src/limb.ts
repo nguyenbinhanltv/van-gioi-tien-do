@@ -86,6 +86,14 @@ export function buildLimbMesh(rig: RigDocument, opts: LimbOptions): LimbMesh {
   // chain polyline: bone origins, then the last bone's tip; extended linearly beyond both ends when sampling
   const pts: Vec2[] = opts.chain.map((n) => bonePose(n).pos);
   pts.push(bonePose(opts.chain[opts.chain.length - 1]!).tip);
+  // a zero-length last bone (hand, foot tip of a one-point bone) continues the axis of the bone before it
+  const n = pts.length;
+  if (n >= 3 && Math.hypot(pts[n - 1]!.x - pts[n - 2]!.x, pts[n - 1]!.y - pts[n - 2]!.y) < 1e-6) {
+    const a = pts[n - 3]!;
+    const b = pts[n - 2]!;
+    const l = Math.hypot(b.x - a.x, b.y - a.y);
+    if (l > 1e-6) pts[n - 1] = { x: b.x + ((b.x - a.x) / l) * 6, y: b.y + ((b.y - a.y) / l) * 6 };
+  }
   const segLen: number[] = [];
   const arcAt: number[] = [0];
   for (let i = 0; i + 1 < pts.length; i++) {
