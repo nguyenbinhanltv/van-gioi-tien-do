@@ -59,6 +59,7 @@ function fixture() {
       id: 'T2',
       masterProject: 't1.json',
       masterProjectSha256: sha(masterBytes),
+      masterImageSha256: sha(readFileSync(join(dir, 'master.png'))),
       edit: { tool: 'test-edit-tool', prompt: 'Change clothing only, preserve all poses and faces.' },
       thresholds: { minSilhouetteIou: 0.95, maxJointDistancePx: 1, minFaceSimilarity: 0.99 },
     },
@@ -72,6 +73,80 @@ function fixture() {
 }
 
 describe('edit-from-master variants', () => {
+  it.each([
+    { vertical: 'keep' as const },
+    { kind: 'free' as const },
+    { groundSpeedPxS: 200 },
+    { contacts: { L: [0] } },
+    { exceptions: { 0: 'new exemption' } },
+    { reference: false },
+    { footSlideUnmeasuredReason: 'new opt-out' },
+    { phases: { windup_end: 1 } },
+  ])('rejects changed placement/QA controls: %j', (patch) => {
+    const { dir, project } = fixture();
+    expect(() =>
+      auditProjectVariant({ ...project, clips: project.clips.map((c) => ({ ...c, ...patch })) }, dir),
+    ).toThrow(/changed master motion\/timing/);
+  });
+
+  it('preserves the T1 alignment origin when added cloth changes the edited centroid', () => {
+    const { dir, project, master } = fixture();
+    const sheet = makeSheet(
+      2,
+      1,
+      256,
+      [0, 1].map(() => ({ height: 208, cx: 128, sole: 232 })),
+    );
+    for (const offset of [0, 256])
+      for (let y = 100; y < 110; y++)
+        for (let x = 88; x < 100; x++) {
+          const i = (y * sheet.width + offset + x) * 4;
+          sheet.data.set([40, 80, 160, 255], i);
+        }
+    writeFileSync(join(dir, 't2.png'), encodePng(toPremultiplied(sheet)));
+    const a = runProject(master, dir),
+      b = runProject(project, dir);
+    const original = a.contract.clips[0]!.records[0]!,
+      edited = b.contract.clips[0]!.records[0]!;
+    expect(edited.pre.pelvisX).not.toBe(original.pre.pelvisX);
+    expect(edited.dx).toBe(original.dx);
+    expect(edited.dy).toBe(original.dy);
+    expect(b.contract.qa.findings.filter((f) => f.gate === 'poseLock' || f.gate === 'faceLock')).toEqual([]);
+  });
+
+  it('rejects altered slicing, master image, template cells and missing clips', () => {
+    const { dir, project, master } = fixture();
+    expect(() => auditProjectVariant({ ...project, slice: { inset: 0 } }, dir)).toThrow(/slicing controls/);
+    expect(() => auditProjectVariant({ ...project, clips: [] }, dir)).toThrow(/clip set/);
+    writeFileSync(join(dir, 'other-master.png'), encodePng(makeMaster(180)));
+    expect(() => auditProjectVariant({ ...project, master: 'other-master.png' }, dir)).toThrow(
+      /variant master image: SHA256/,
+    );
+    const manifest = {
+      grid: { cols: 2, rows: 1, cell: 256 },
+      guides: { centerX: 128, ground: 232, head: 24, pelvis: 128 },
+      cells: [{ leading: 'L' }, { leading: 'R' }],
+    };
+    writeFileSync(join(dir, 't1-template.json'), JSON.stringify(manifest));
+    writeFileSync(
+      join(dir, 't2-template.json'),
+      JSON.stringify({ ...manifest, cells: [{ leading: 'R' }, { leading: 'L' }] }),
+    );
+    const bytes = Buffer.from(
+      JSON.stringify({ ...master, clips: master.clips.map((c) => ({ ...c, manifest: 't1-template.json' })) }),
+    );
+    writeFileSync(join(dir, 't1.json'), bytes);
+    expect(() =>
+      auditProjectVariant(
+        {
+          ...project,
+          variant: { ...project.variant!, masterProjectSha256: sha(bytes) },
+          clips: project.clips.map((c) => ({ ...c, manifest: 't2-template.json' })),
+        },
+        dir,
+      ),
+    ).toThrow(/changed master motion\/timing/);
+  });
   it('audits through the lightweight CLI without building an atlas', () => {
     const { dir, project } = fixture();
     writeFileSync(join(dir, 'project.json'), JSON.stringify(project));

@@ -153,6 +153,7 @@ Declare `project.variant`:
   "id": "T2",
   "masterProject": "../T1/project.json",
   "masterProjectSha256": "<64 lowercase hex characters>",
+  "masterImageSha256": "<SHA256 of T1 master PNG>",
   "edit": { "tool": "<image edit tool/model>", "prompt": "<exact edit prompt>" },
   "thresholds": { "minSilhouetteIou": 1, "maxJointDistancePx": 0, "minFaceSimilarity": 1 }
 }
@@ -163,8 +164,8 @@ there are no inferred defaults. Record the chosen production thresholds after ar
 calibration, also pin that file with `masterCalibrationSha256`. Each target clip must declare
 `variant: { masterSheetSha256: '<hash of original T1 PNG>', annotations: 'idle.pose-lock.json' }`.
 The source must be a non-variant project of the same character/direction. Names, frame counts, duration, loop, table id and
-phase anchors must match. Master and target require explicit fixed scale (`scale`, preparation calibration, or
-`calibration.scale`); inferred reference heights/frames are rejected. Different raw DPI is allowed only with equal output scale.
+phase anchors, vertical placement, kind, contacts, speed, pose exceptions and every other non-storage clip control must match. Selected template cells/guides and slicing controls also stay locked; the complete clip set must remain present. Master and target require explicit fixed scale (`scale`, preparation calibration, or
+`calibration.scale`); inferred reference heights/frames are rejected. Different raw DPI is allowed only with equal output scale. Both projects reference the pinned T1 master PNG; disable palette locking when new outfit colours need to remain unchanged. Variants reuse T1 per-cell alignment origins, so altered clothing centroids cannot shift the anatomy after QA.
 
 The annotations file is an array in clip-local order, one object per cell:
 

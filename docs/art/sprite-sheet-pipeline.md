@@ -253,3 +253,5 @@ Không phải nhận dạng danh tính ngữ nghĩa. Áo thay hình có thể đ
 Cổng poseLock/faceLock là cổng cứng, không cho backlog hay exception bỏ qua. Sai hash, thiếu bằng chứng hoặc đổi timing/scale
 là lỗi cấu hình. Sheet gộp dùng mapping clip cho cả hai phía. Contract lưu hash nguồn/project/calibration, sheet đã sửa,
 annotations và số đo từng ô, kể cả ô đạt. Xem schema/ví dụ ở README của `@vgtd/sprite`.
+
+Biến thể cũng pin masterImageSha256 của PNG master T1 và dùng lại PNG đó làm reference. Khóa mọi điều khiển ngoài storage/provenance: vertical (mặc định sole), kind (upright), contacts, tốc độ, exceptions, manifest cells/guides và slice; giữ đủ clip. Chỉ thay layout/DPI khi scale đầu ra bằng nhau. Khi xuất, dùng lại gốc căn từng ô T1 để phần vải mới không làm lệch thân vì centroid khác. Màu áo mới có thể giữ bằng palette lock tắt; không thay reference hình học T1.

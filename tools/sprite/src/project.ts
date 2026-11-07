@@ -257,6 +257,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
     validateFootSlideAlignment(project, s.clip, manifest?.cells);
     const calibration = sheetCalibration(s);
+    const origins = variant?.clips.find((c) => c.name === s.clip.name)?.alignmentOrigins;
     return {
       ...s,
       manifest,
@@ -268,6 +269,9 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
           guides,
           vertical: s.clip.vertical ?? 'sole',
           groundY: s.groundY,
+          ...(origins
+            ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
+            : {}),
           ...(s.clip.exceptions?.[i] ? { exception: s.clip.exceptions[i]! } : {}),
         }),
       ),

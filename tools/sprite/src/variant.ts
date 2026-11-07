@@ -2,14 +2,17 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { decodePng } from '@vgtd/rig';
+import { decodePng, encodePng } from '@vgtd/rig';
 import type { Project, ProjectClip } from './project.js';
 import type { Finding } from './qa.js';
 import { normalizeSheetDpi, preparationScale } from './preparation.js';
-import { toStraight, type Straight } from './raster.js';
-import { cellRect, crop, keyOut } from './slice.js';
+import { toStraight, toPremultiplied, type Straight } from './raster.js';
+import { cellRect, crop, keyOut, sliceSheet } from './slice.js';
 import { CELL_PX } from './types.js';
-import { sheetLayout } from './grouped.js';
+import { sheetLayout, selectSheetCells } from './grouped.js';
+import type { TemplateManifest, Guides } from './types.js';
+import { guidesFromMaster, measureFigure } from './master.js';
+import { resizeImage } from './repair.js';
 
 export const POSE_JOINTS = [
   'crown',
@@ -46,6 +49,7 @@ export interface VariantProject {
   readonly id: string;
   readonly masterProject: string;
   readonly masterProjectSha256: string;
+  readonly masterImageSha256: string;
   /** Required when the source master uses an external preparation calibration file. */
   readonly masterCalibrationSha256?: string;
   readonly edit: { readonly tool: string; readonly prompt: string };
@@ -70,6 +74,8 @@ export interface VariantAudit {
     readonly masterSheetSha256: string;
     readonly editedSheetSha256: string;
     readonly annotationsSha256: string;
+    /** T1 alignment origins in output pixel units; variants must reuse these anchors. */
+    readonly alignmentOrigins: readonly { readonly x: number; readonly y: number }[];
     readonly metrics: readonly VariantMetrics[];
   }[];
   readonly findings: readonly Finding[];
@@ -78,6 +84,41 @@ export interface VariantAudit {
 const hash = (data: Buffer) => createHash('sha256').update(data).digest('hex');
 function verifyHash(data: Buffer, expected: string, label: string): void {
   if (!/^[a-f0-9]{64}$/.test(expected) || hash(data) !== expected) throw new Error(`${label}: SHA256 mismatch`);
+}
+
+function canonical(value: unknown): string {
+  const ordered = (v: unknown): unknown =>
+    Array.isArray(v)
+      ? v.map(ordered)
+      : v && typeof v === 'object'
+        ? Object.fromEntries(
+            Object.entries(v)
+              .filter(([, item]) => item !== undefined)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([k, item]) => [k, ordered(item)]),
+          )
+        : v;
+  return JSON.stringify(ordered(value));
+}
+
+/** Storage/provenance may differ; every other present or future clip control stays locked. */
+function motionControls(c: ProjectClip): string {
+  const storage = new Set(['sheet', 'cols', 'sheetSelection', 'manifest', 'variant', 'calibration']);
+  return canonical({
+    ...Object.fromEntries(Object.entries(c).filter(([key]) => !storage.has(key))),
+    kind: c.kind ?? 'upright',
+    vertical: c.vertical ?? 'sole',
+    phases: c.phases ?? {},
+    calibrationOptions: Object.fromEntries(Object.entries(c.calibration ?? {}).filter(([key]) => key !== 'scale')),
+  });
+}
+
+function templateControls(c: ProjectClip, baseDir: string): string {
+  if (!c.manifest) return canonical(null);
+  const m = JSON.parse(readFileSync(resolve(baseDir, c.manifest), 'utf8')) as TemplateManifest;
+  const grid = sheetLayout(c);
+  if (m.grid.cols !== grid.cols || m.grid.rows !== grid.rows) throw new Error('variant template grid mismatch');
+  return canonical({ guides: m.guides, cells: selectSheetCells(m.cells, c.sheetSelection) });
 }
 function validatePoint(p: { x: number; y: number } | undefined): void {
   if (!p || ![p.x, p.y].every((n) => Number.isFinite(n) && n >= 0 && n < CELL_PX))
@@ -152,7 +193,7 @@ export function compareVariantCell(
   return { cell, silhouetteIou: intersection / union, maxJointDistancePx, faceSimilarity };
 }
 
-function sourceCells(project: Project, clip: ProjectClip, baseDir: string) {
+function sourceCells(project: Project, clip: ProjectClip, baseDir: string, guides?: Guides) {
   const bytes = readFileSync(resolve(baseDir, clip.sheet));
   const raw = decodePng(bytes);
   const grid = sheetLayout(clip);
@@ -170,7 +211,27 @@ function sourceCells(project: Project, clip: ProjectClip, baseDir: string) {
     clip.calibration?.scale ?? (project.preparation ? preparationScale(project.preparation, baseDir) : project.scale);
   if (scale === undefined || !Number.isFinite(scale) || scale <= 0)
     throw new Error('variant QA needs a locked explicit scale');
-  return { bytes, cells, outputCell: scale * (project.preparation ? CELL_PX : raw.width / clip.cols) };
+  const renderSheet = project.preparation ? decodePng(encodePng(normalized)) : raw;
+  const first = cellRect(renderSheet.width, renderSheet.height, grid.cols, grid.rows, 0);
+  const inset = Math.round(Math.min(first.width, first.height) * (project.slice?.inset ?? 0.01));
+  const alignmentOrigins = guides
+    ? selectSheetCells(sliceSheet(renderSheet, grid, project.slice), clip.sheetSelection).map((f) => {
+        const m = measureFigure(toPremultiplied(f.image));
+        if (!m) throw new Error('variant master alignment frame is empty');
+        return {
+          x: m.pelvisX * scale,
+          y:
+            ((clip.vertical ?? 'sole') === 'sole' ? m.bottom : (guides.ground / CELL_PX) * first.height - inset) *
+            scale,
+        };
+      })
+    : [];
+  return {
+    bytes,
+    cells,
+    alignmentOrigins,
+    outputCell: scale * (project.preparation ? CELL_PX : raw.width / clip.cols),
+  };
 }
 
 /** Validates every variant clip, pins master bytes, and records all passing/failing metrics. */
@@ -197,6 +258,17 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
   const masterBytes = readFileSync(masterPath);
   verifyHash(masterBytes, v.masterProjectSha256, 'master project');
   const master = JSON.parse(masterBytes.toString('utf8')) as Project;
+  const masterImageBytes = readFileSync(resolve(dirname(masterPath), master.master));
+  verifyHash(masterImageBytes, v.masterImageSha256, 'T1 master image');
+  verifyHash(readFileSync(resolve(baseDir, project.master)), v.masterImageSha256, 'variant master image');
+  const decodedMaster = decodePng(masterImageBytes);
+  const normalizedMaster =
+    decodedMaster.width === CELL_PX && decodedMaster.height === CELL_PX
+      ? decodedMaster
+      : resizeImage(decodedMaster, CELL_PX, CELL_PX);
+  const masterMetrics = measureFigure(normalizedMaster);
+  if (!masterMetrics) throw new Error('variant master image is empty');
+  const guides = guidesFromMaster(masterMetrics);
   if (master.preparation)
     verifyHash(
       readFileSync(resolve(dirname(masterPath), master.preparation.calibration)),
@@ -205,6 +277,14 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
     );
   if (master.variant || master.character !== project.character || master.direction !== project.direction)
     throw new Error('variant source must be the same character/direction T1 master project');
+  if (canonical(project.slice ?? {}) !== canonical(master.slice ?? {}))
+    throw new Error('variant changed master slicing controls');
+  if (
+    project.clips.length !== master.clips.length ||
+    new Set(project.clips.map((c) => c.name)).size !== project.clips.length ||
+    master.clips.some((c) => !project.clips.some((v) => v.name === c.name))
+  )
+    throw new Error('variant changed master clip set');
   const findings: Finding[] = [];
   const clips = project.clips.map((clip) => {
     const ref = clip.variant;
@@ -212,16 +292,12 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
     if (!ref || sources.length !== 1)
       throw new Error(`variant '${clip.name}' needs one master clip and a hashed reference`);
     const source = sources[0]!;
-    const phases = (c: ProjectClip) => Object.entries(c.phases ?? {}).sort(([a], [b]) => a.localeCompare(b));
     if (
-      source.frames !== clip.frames ||
-      source.durationSec !== clip.durationSec ||
-      source.loop !== clip.loop ||
-      source.tableId !== clip.tableId ||
-      JSON.stringify(phases(source)) !== JSON.stringify(phases(clip))
+      motionControls(source) !== motionControls(clip) ||
+      templateControls(source, dirname(masterPath)) !== templateControls(clip, baseDir)
     )
       throw new Error(`variant '${clip.name}' changed master motion/timing`);
-    const a = sourceCells(master, source, dirname(masterPath)),
+    const a = sourceCells(master, source, dirname(masterPath), guides),
       b = sourceCells(project, clip, baseDir);
     verifyHash(a.bytes, ref.masterSheetSha256, `master sheet '${clip.name}'`);
     if (Math.abs(a.outputCell - b.outputCell) > 1e-9)
@@ -266,6 +342,7 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
       masterSheetSha256: hash(a.bytes),
       editedSheetSha256: hash(b.bytes),
       annotationsSha256: hash(annotationBytes),
+      alignmentOrigins: a.alignmentOrigins,
       metrics,
     };
   });
