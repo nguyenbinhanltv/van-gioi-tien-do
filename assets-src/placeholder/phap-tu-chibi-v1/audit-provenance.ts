@@ -1,6 +1,6 @@
 /** Retain checksums and per-file rights for the selected art and every raw attempt. */
 import { createHash } from 'node:crypto';
-import { appendFileSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { appendFileSync, existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 
 const root = resolve('assets-src/placeholder/phap-tu-chibi-v1');
@@ -15,7 +15,7 @@ for (const file of files(resolve(root, 'E/raw')).filter((name) => name.endsWith(
   const raw = readFileSync(resolve(root, 'E', entry.raw));
   entry.rawSha256 = hash(raw);
   entry.rawDimensions = [raw.readUInt32BE(16), raw.readUInt32BE(20)];
-  entry.utcRawOutputFileModified = statSync(resolve(root, 'E', entry.raw)).mtime.toISOString();
+  entry.utcRawOutputFileModified ??= statSync(resolve(root, 'E', entry.raw)).mtime.toISOString();
   entry.referenceSnapshots = entry.references.map((file: string) =>
     file === 'reference/E.master.png' ? 'reference/E.master.generation-v1.png' : file,
   );
@@ -34,7 +34,7 @@ provenance.masterLock = {
   sourceSha256: hash(readFileSync(resolve(root, 'reference/T1-turnaround.raw.png'))),
 };
 provenance.files = files(root)
-  .filter((file) => file.endsWith('.png'))
+  .filter((file) => file.endsWith('.png') && !relative(root, file).replaceAll('\\', '/').startsWith('E/export/'))
   .map((file) => {
     const data = readFileSync(file);
     return {
@@ -48,6 +48,14 @@ provenance.files = files(root)
   });
 provenance.motionProvenance = 'E/raw/*.generation.json';
 provenance.referenceAliases = { 'worker23/phap-tu-t3.raw.png': 'reference/approved-T3.reference.png' };
+provenance.generationMasterSnapshot = 'reference/E.master.generation-v1.png';
+const runtimeRoot = resolve('apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1');
+if (existsSync(runtimeRoot))
+  provenance.runtimeAssets = [...files(runtimeRoot), `${runtimeRoot}.meta`].map((file) => ({
+    file: relative(resolve('.'), file).replaceAll('\\', '/'),
+    sha256: hash(readFileSync(file)),
+    bytes: statSync(file).size,
+  }));
 writeFileSync(provenancePath, JSON.stringify(provenance, null, 2) + '\n');
 const licensePath = resolve('docs/ASSET-LICENSES.md');
 const marker = '<!-- PHAP-TU-CHIBI-E-MOTION:BEGIN -->';

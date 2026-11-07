@@ -7,6 +7,7 @@ import { alignFrame, CELL_PX, crop, guidesFromMaster, measureFigure, sliceSheet 
 import { keyExteriorWhite } from './key-exterior.js';
 
 const root = resolve('assets-src/placeholder/phap-tu-chibi-v1');
+const framing = JSON.parse(readFileSync(resolve(root, 'character-framing.json'), 'utf8'));
 const input = readFileSync(resolve(root, 'reference/T1-turnaround.raw.png'));
 const source = decodePng(input);
 // Label-free crop measured in the actual 2172×724 source, not its chat preview.
@@ -33,7 +34,7 @@ const calibration = {
   referenceHeight: anatomy.anatomicalHeight,
   referenceFrames: 1,
 };
-const guides = guidesFromMaster({ ...measurements[0]!, height: targetHeight }, CELL_PX, CELL_PX / 2);
+const guides = guidesFromMaster({ ...measurements[0]!, height: targetHeight }, CELL_PX, CELL_PX / 2 + framing.x);
 const records = sliced.map((frame, index) => {
   const direction = ['E', 'SE', 'S', 'NE', 'N'][index]!;
   const aligned = alignFrame(frame.image, { calibration, guides });

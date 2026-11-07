@@ -1,5 +1,5 @@
 {
-  "status": "reviewed-art-worker",
+  "status": "approved-by-orchestrator",
   "reason": "Correct white-key transparency holes while preserving raw art and canonical216px anatomy. Final bbox remains218px; changed measured pelvis anchor/subpixel placement changes two soft measurements. Raw motion PNG hashes are unchanged.",
   "oldMaster": {
     "file": "reference/E.master.generation-v1.png",
@@ -21,7 +21,7 @@
     }
   },
   "newMaster": {
-    "file": "reference/E.master.png",
+    "file": "reference/E.master.alpha-fixed-unframed.png",
     "sha256": "3b15a09a63c97e4250b6db8df5a0dcddcbb506cafee3a5c69b6ad46ba516aa93",
     "metrics": {
       "left": 82,
@@ -64,5 +64,10 @@
     }
   ],
   "reviewer": "worker25",
-  "reviewNote": "Intentional input-calibration migration, not a redraw improvement or removal of findings. Old/new values and input hashes retained. Orchestrator notified; no hard thresholds changed."
+  "reviewNote": "Intentional input-calibration migration, not a redraw improvement or removal of findings. Old/new values and input hashes retained. Orchestrator notified; no hard thresholds changed. Orchestrator explicitly approved this master-alpha baseline migration; foot findings remain open.",
+  "currentFraming": {
+    "file": "reference/E.master.png",
+    "x": 1,
+    "note": "Separate fixed character-wide translation; approved alpha-baseline snapshot retained unchanged."
+  }
 }

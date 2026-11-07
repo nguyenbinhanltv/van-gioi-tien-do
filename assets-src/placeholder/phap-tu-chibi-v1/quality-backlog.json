@@ -542,7 +542,7 @@
       "cells": [0],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":136,\"y\":20}; chin={\"x\":150,\"y\":65}; head=47.127px; ratio=1.0119; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":137,\"y\":20}; chin={\"x\":151,\"y\":65}; head=47.127px; ratio=1.0119; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -552,7 +552,7 @@
       "cells": [3],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":137,\"y\":20}; chin={\"x\":150.5,\"y\":65}; head=46.981px; ratio=1.0088; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":138,\"y\":20}; chin={\"x\":151.5,\"y\":65}; head=46.981px; ratio=1.0088; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -562,7 +562,7 @@
       "cells": [4],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":136,\"y\":20}; chin={\"x\":149,\"y\":65}; head=46.840px; ratio=1.0057; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":137,\"y\":20}; chin={\"x\":150,\"y\":65}; head=46.840px; ratio=1.0057; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -572,7 +572,7 @@
       "cells": [8],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":139,\"y\":20}; chin={\"x\":152.5,\"y\":65}; head=46.981px; ratio=1.0088; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":140,\"y\":20}; chin={\"x\":153.5,\"y\":65}; head=46.981px; ratio=1.0088; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -582,7 +582,7 @@
       "cells": [9],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":135,\"y\":20}; chin={\"x\":149,\"y\":65}; head=47.127px; ratio=1.0119; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":136,\"y\":20}; chin={\"x\":150,\"y\":65}; head=47.127px; ratio=1.0119; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -592,7 +592,7 @@
       "cells": [13],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":140,\"y\":20}; chin={\"x\":153.5,\"y\":65}; head=46.981px; ratio=1.0088; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":141,\"y\":20}; chin={\"x\":154.5,\"y\":65}; head=46.981px; ratio=1.0088; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -602,7 +602,7 @@
       "cells": [14],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":141,\"y\":21}; chin={\"x\":155,\"y\":66}; head=47.127px; ratio=1.0119; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":142,\"y\":21}; chin={\"x\":156,\"y\":66}; head=47.127px; ratio=1.0119; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -612,7 +612,7 @@
       "cells": [0],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":143,\"y\":42}; chin={\"x\":156.5,\"y\":87}; head=46.981px; ratio=1.0088; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":144,\"y\":42}; chin={\"x\":157.5,\"y\":87}; head=46.981px; ratio=1.0088; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -622,7 +622,7 @@
       "cells": [1],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":147,\"y\":52}; chin={\"x\":163,\"y\":96}; head=46.819px; ratio=1.0053; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":148,\"y\":52}; chin={\"x\":164,\"y\":96}; head=46.819px; ratio=1.0053; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -632,7 +632,7 @@
       "cells": [2],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":145,\"y\":62}; chin={\"x\":162,\"y\":105}; head=46.239px; ratio=0.9928; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":146,\"y\":62}; chin={\"x\":163,\"y\":105}; head=46.239px; ratio=0.9928; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -642,7 +642,7 @@
       "cells": [3],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":150,\"y\":59}; chin={\"x\":167,\"y\":102}; head=46.239px; ratio=0.9928; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":151,\"y\":59}; chin={\"x\":168,\"y\":102}; head=46.239px; ratio=0.9928; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -652,7 +652,7 @@
       "cells": [4],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":149,\"y\":81}; chin={\"x\":169,\"y\":122}; head=45.618px; ratio=0.9795; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":150,\"y\":81}; chin={\"x\":170,\"y\":122}; head=45.618px; ratio=0.9795; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -662,7 +662,7 @@
       "cells": [5],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":152,\"y\":89}; chin={\"x\":172.5,\"y\":130}; head=45.839px; ratio=0.9843; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":153,\"y\":89}; chin={\"x\":173.5,\"y\":130}; head=45.839px; ratio=0.9843; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -672,7 +672,7 @@
       "cells": [6],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":150,\"y\":48}; chin={\"x\":166.5,\"y\":92}; head=46.992px; ratio=1.0090; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":151,\"y\":48}; chin={\"x\":167.5,\"y\":92}; head=46.992px; ratio=1.0090; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -682,7 +682,7 @@
       "cells": [7],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":146,\"y\":40}; chin={\"x\":161.5,\"y\":84}; head=46.650px; ratio=1.0017; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":147,\"y\":40}; chin={\"x\":162.5,\"y\":84}; head=46.650px; ratio=1.0017; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     },
     {
@@ -692,7 +692,7 @@
       "cells": [8],
       "severity": "info",
       "reviewer": "art-worker",
-      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":141,\"y\":32}; chin={\"x\":155,\"y\":77}; head=47.127px; ratio=1.0119; reviewed aligned-output landmarks in E/head-landmarks.review.json; no per-frame scaling.",
+      "note": "D47 head-size evidence: reason=posture; master=46.573px; crown={\"x\":142,\"y\":32}; chin={\"x\":156,\"y\":77}; head=47.127px; ratio=1.0119; fixed global framing+1px; no per-frame scaling.",
       "status": "open"
     }
   ]

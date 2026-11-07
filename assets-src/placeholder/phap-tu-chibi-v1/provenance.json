@@ -103,22 +103,6 @@
   ],
   "files": [
     {
-      "file": "E/export/phaptuchibi_E_page1_tex.png",
-      "sha256": "d2b379d5dc51dee880a4cd7e6f6395246d8698073ed789c57fd1bc652d80822c",
-      "bytes": 4292120,
-      "width": 2048,
-      "height": 2048,
-      "utcFileModified": "2026-11-07T21:16:17.642Z"
-    },
-    {
-      "file": "E/export/phaptuchibi_E_tex.png",
-      "sha256": "3b0c61668edc077e7c639ebf25c7f29df4aab1a85e3d3bd213f1446086435a22",
-      "bytes": 5434470,
-      "width": 2048,
-      "height": 2048,
-      "utcFileModified": "2026-11-07T21:16:17.640Z"
-    },
-    {
       "file": "E/raw/attack.attempt1.png",
       "sha256": "fa0d12a22b4cae8f2371340f75fbbe67def7e283ef66f72cd0572ee872a2e235",
       "bytes": 1903912,
@@ -503,6 +487,14 @@
       "utcFileModified": "2026-11-07T20:02:25.536Z"
     },
     {
+      "file": "reference/E.master.alpha-fixed-unframed.png",
+      "sha256": "3b15a09a63c97e4250b6db8df5a0dcddcbb506cafee3a5c69b6ad46ba516aa93",
+      "bytes": 35485,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:39:05.780Z"
+    },
+    {
       "file": "reference/E.master.generation-v1.png",
       "sha256": "65225c5a3692491be0b9b06b1eff7a4261dd400978a1956dac414b91356a28d0",
       "bytes": 37021,
@@ -512,43 +504,43 @@
     },
     {
       "file": "reference/E.master.png",
-      "sha256": "3b15a09a63c97e4250b6db8df5a0dcddcbb506cafee3a5c69b6ad46ba516aa93",
+      "sha256": "323b0673909e584e2736a8cdaa2c2ae055216a9eae6a96aa5f431eedfd928cc5",
       "bytes": 35485,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.045Z"
+      "utcFileModified": "2026-11-07T21:35:15.946Z"
     },
     {
       "file": "reference/N.master.png",
-      "sha256": "f30080bfcdea903e3cc20865a0ee80f2d45cfbddf6593f7b3a094f551b4d9bb5",
+      "sha256": "df9211449640c9d084ba660154fe73e454bfafb0cf38f612bfe96a61229e9105",
       "bytes": 36257,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.092Z"
+      "utcFileModified": "2026-11-07T21:35:16.002Z"
     },
     {
       "file": "reference/NE.master.png",
-      "sha256": "08783a99b22bcceaaa9bc70b12738997467841d6eb6ff382b0b9a30ea8ed795e",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
       "bytes": 37654,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.080Z"
+      "utcFileModified": "2026-11-07T21:35:15.989Z"
     },
     {
       "file": "reference/S.master.png",
-      "sha256": "dbad0402da289645f64ef9920c8ca549c085d75cf58e77fe52239d327d3b7824",
+      "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168",
       "bytes": 39559,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.067Z"
+      "utcFileModified": "2026-11-07T21:35:15.977Z"
     },
     {
       "file": "reference/SE.master.png",
-      "sha256": "fb4958beab0576746fe6e3e1b3d63f8a550fc39ee017bd1d45fc1c0a6f2aa133",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95",
       "bytes": 39301,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.059Z"
+      "utcFileModified": "2026-11-07T21:35:15.963Z"
     },
     {
       "file": "reference/T1-T5-front.raw.png",
@@ -568,43 +560,43 @@
     },
     {
       "file": "reference/T1.front.master.png",
-      "sha256": "29cfd1390400324b7e12a6f09d28849404de8a864b5e2cec928439a1c199c8c2",
+      "sha256": "218a0cd2b49fe4450500f93fa0d6ef6517e25978e89270a0ef4e8c0409a24e34",
       "bytes": 39611,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.634Z"
+      "utcFileModified": "2026-11-07T21:35:17.089Z"
     },
     {
       "file": "reference/T2.front.master.png",
-      "sha256": "55dd4e15d6c6559c2c05d5bf71931ffa5c281020ef829ca88aa62908e163b73d",
+      "sha256": "4e359fb64a1ab5adac47c9697f5f6308613c6c7113c618478dcadb24fc9b7c7b",
       "bytes": 41017,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.736Z"
+      "utcFileModified": "2026-11-07T21:35:17.248Z"
     },
     {
       "file": "reference/T3.front.master.png",
-      "sha256": "89c7387927dac196f6b3b209e651bef1c86a8ebbe9b04024303c8d3156324bb9",
+      "sha256": "409623f88cf6680e4c5702ee55546697c1413960a733e4470e0ab47aa62e7804",
       "bytes": 55630,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.818Z"
+      "utcFileModified": "2026-11-07T21:35:17.369Z"
     },
     {
       "file": "reference/T4.front.master.png",
-      "sha256": "62782346d212e62f43132e5b9b0bae66f8ecc3806c880f14c3d165b47e22e092",
+      "sha256": "2393d62b6eef202a905111a12dfe59c57a7891dbd31d231a80f4dfc1bfec5e74",
       "bytes": 60192,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:25.937Z"
+      "utcFileModified": "2026-11-07T21:35:17.487Z"
     },
     {
       "file": "reference/T5.front.master.png",
-      "sha256": "5a26ff4e2c9c3525e042be86c1f8e22747847de1655504bd9cdd646bb8cdd11c",
+      "sha256": "eb7cadf7f4c1ade437ba8757dca2a112b01a72f535f778424848dd23f466c792",
       "bytes": 72492,
       "width": 256,
       "height": 256,
-      "utcFileModified": "2026-11-07T21:07:26.068Z"
+      "utcFileModified": "2026-11-07T21:35:17.686Z"
     },
     {
       "file": "reference/tiers.attempt1.raw.png",
@@ -664,5 +656,73 @@
   "motionProvenance": "E/raw/*.generation.json",
   "referenceAliases": {
     "worker23/phap-tu-t3.raw.png": "reference/approved-T3.reference.png"
-  }
+  },
+  "generationMasterSnapshot": "reference/E.master.generation-v1.png",
+  "runtimeAssets": [
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json",
+      "sha256": "d8a066307e513783994e27811a4a1ec5c685b8a1d98472725dea955ab5ecdfa3",
+      "bytes": 230411
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json.meta",
+      "sha256": "93168401066cf4caca79f4f9058d54af5497712ca8bb4360a2e12a36aa882ad1",
+      "bytes": 179
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json",
+      "sha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95",
+      "bytes": 6153
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json.meta",
+      "sha256": "55b3b3f7d9ab213e666f1cf9ad8509b16b1f686dc4a932232abccc3562c444a7",
+      "bytes": 192
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png",
+      "sha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa",
+      "bytes": 4249461
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png.meta",
+      "sha256": "65c5a8a663affad199ae33d3f482e555143bbf2672bf20f95f6ab46c65de98d0",
+      "bytes": 993
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json",
+      "sha256": "27df785109cc3b0537fb8b78b31e98deebe986c0a929c38dcca9ddec9d1882d5",
+      "bytes": 25756
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json.meta",
+      "sha256": "8a431821215016a79d8900013f4b3e4e955ab42eb2fd0fe1ee79d8274b4734ee",
+      "bytes": 186
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json",
+      "sha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34",
+      "bytes": 6712
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json.meta",
+      "sha256": "d68e7c42dad4d11907705eec729a07c1fdaafcab5cb6931c5e49a07bb7c48fa7",
+      "bytes": 192
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png",
+      "sha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2",
+      "bytes": 5473085
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png.meta",
+      "sha256": "186879f032d8bc605fd07a6701bb5bc49490e6643c3852e9dcdf4aaae4984923",
+      "bytes": 987
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1.meta",
+      "sha256": "fb340ba61a51bbbfc735653d96846bec5f71bef22931e7500b3c7f533427304b",
+      "bytes": 169
+    }
+  ]
 }

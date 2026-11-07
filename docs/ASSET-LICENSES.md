@@ -4381,3 +4381,17 @@ The corrected T1 turnaround was visually approved and locked by the orchestrator
 All OpenAI source rights above refer to the linked terms checked in the worker 25 section. No required attribution; no commercial reference image input. D45 extraction/layer swapping remains a follow-up and is not claimed by this full-frame export.
 
 <!-- PHAP-TU-CHIBI-V1-REVISION:END -->
+
+### Ghi chú kiểm chứng Pháp tu semi-chibi E — worker 25
+
+T1 đã được orchestrator khóa hình ảnh: áo ngắn và quần, tay áo dài, trâm có tua, khuyên tai; quạt đỏ son luôn ở tay trái giải phẫu trong cả năm hướng. Bộ E có 15 clip / 202 khung theo D46. Các sheet đầy đủ giữ quạt là nguồn trích lớp D45 về sau; chưa tuyên bố đổi trang phục/vũ khí độc lập ở runtime.
+
+Đã sửa lỗi tách nền trắng làm nhạt alpha ở vùng mặt sáng; raw được duyệt và các raw motion được chọn không đổi. Bản master đầu vào chính xác khi sinh ảnh được giữ ở `reference/E.master.generation-v1.png`. Hai số đo mềm đổi sau khi sửa đầu vào master được ghi cả giá trị cũ/mới và SHA trong `E/quality-baseline-migration.json`; lỗi chân vẫn mở, không bị đánh dấu đã sửa. Cổng D47 dùng 16 chú thích đầu theo từng ô run/dash, có bằng chứng và ghi INFO trong backlog; không co giãn riêng khung, không giảm độ động để ép hộp bao.
+
+Các bảng nguồn/quyền ở trên là sổ đăng ký từng tệp, giữ tên công cụ, thuật ngữ quyền và đường dẫn gốc để đối chiếu provenance. Bản xuất chính thức nằm ở thư mục Cocos mới `dragonbones/phap-tu-chibi-v1`; không thay các bộ bán hiện thực cũ.
+
+| Tệp bổ sung trong `assets-src/placeholder/phap-tu-chibi-v1/` | Nguồn                                                                                    | Quyền                                                                   |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `reference/E.master.alpha-fixed-unframed.png`                | Dẫn xuất xác định từ ảnh gốc của dự án; lưu master sau sửa alpha, trước dịch khung chung | Quyền đầu ra OpenAI đã kiểm tra ở mục worker 25; không yêu cầu ghi công |
+
+Toàn bộ master và khung chuyển động được dịch ngang cố định +1 px, không co giãn riêng khung. Kiểm tra canvas xác nhận không mất pixel alpha ở cả 202 khung; bản dựng Cocos 3.8.8 được chụp lại sau dịch khung.

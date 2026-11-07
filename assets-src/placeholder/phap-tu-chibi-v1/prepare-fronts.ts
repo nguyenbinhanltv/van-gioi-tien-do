@@ -6,10 +6,11 @@ import { alignFrame, CELL_PX, crop, guidesFromMaster, measureFigure, sliceSheet 
 import { keyExteriorWhite } from './key-exterior.js';
 
 const root = resolve('assets-src/placeholder/phap-tu-chibi-v1');
+const framing = JSON.parse(readFileSync(resolve(root, 'character-framing.json'), 'utf8'));
 const source = decodePng(readFileSync(resolve(root, 'reference/T1-T5-front.raw.png')));
 const prepared = JSON.parse(readFileSync(resolve(root, 'reference/master-preparation.json'), 'utf8'));
 const master = measureFigure(decodePng(readFileSync(resolve(root, 'reference/S.master.png'))))!;
-const guides = guidesFromMaster(master, CELL_PX, CELL_PX / 2);
+const guides = guidesFromMaster(master, CELL_PX, CELL_PX / 2 + framing.x);
 const edges = [0, 410, 800, 1190, 1600, 2048].map((x) => Math.round((x * source.width) / 2048));
 const records = edges.slice(0, -1).map((left, index) => {
   const panel = crop(source, left, 0, edges[index + 1]! - left, prepared.cropBottom);

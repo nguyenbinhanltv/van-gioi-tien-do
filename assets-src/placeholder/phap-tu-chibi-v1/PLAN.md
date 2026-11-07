@@ -7,4 +7,4 @@
 
 Only this new character path and its own export directory are used. Existing semi-realistic assets are preserved. Higher tiers/costumes must be image edits of the T1 motion sheets with identical poses. Body/weapon/FX layering follows D45 when merged.
 
-Current dependency: worker 27 requested waiting for the merged official v2 defaults before motion generation. Canonical masters are being corrected; no animation or engine gate is claimed yet.
+Checkpoint: canonical masters and turnaround are visually approved. E has all 15 smooth-v2 clips / 202 frames; D47 hard gates and zero-loss canvas checks pass. Real Cocos Creator 3.8.8 capture at 2× is complete for all 15 clips. Soft findings remain explicitly open. E publication is next; SE, S, NE and N remain in production, each on a fresh-main direction branch.

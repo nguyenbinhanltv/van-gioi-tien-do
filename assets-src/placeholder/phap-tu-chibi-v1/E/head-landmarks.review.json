@@ -3,73 +3,29 @@
   "status": "manual-landmarks-reviewed-on-output-overlays",
   "master": {
     "crown": {
-      "x": 130,
+      "x": 131,
       "y": 19
     },
     "chin": {
-      "x": 142,
+      "x": 143,
       "y": 64
     },
-    "note": "E-profile skull crown under the main cap (excluding bun/pin/ponytail); lower jaw tip reviewed on enlarged opaque-face master."
+    "note": "E-profile skull crown under the main cap (excluding bun/pin/ponytail); lower jaw tip reviewed on enlarged opaque-face master. Fixed global character framing x=+1px, no scale change."
   },
   "clips": {
     "run": {
       "0": {
         "crown": {
-          "x": 136,
-          "y": 20
-        },
-        "chin": {
-          "x": 150,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "1": {
-        "crown": {
-          "x": 139,
-          "y": 20
-        },
-        "chin": {
-          "x": 152.5,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 1; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "2": {
-        "crown": {
-          "x": 140,
-          "y": 20
-        },
-        "chin": {
-          "x": 154,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 2; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "3": {
-        "crown": {
           "x": 137,
           "y": 20
         },
         "chin": {
-          "x": 150.5,
+          "x": 151,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "4": {
-        "crown": {
-          "x": 136,
-          "y": 20
-        },
-        "chin": {
-          "x": 149,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "5": {
+      "1": {
         "crown": {
           "x": 140,
           "y": 20
@@ -78,20 +34,42 @@
           "x": 153.5,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 5; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 1; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "6": {
+      "2": {
         "crown": {
-          "x": 142,
+          "x": 141,
           "y": 20
         },
         "chin": {
-          "x": 155.5,
+          "x": 155,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 6; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 2; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "7": {
+      "3": {
+        "crown": {
+          "x": 138,
+          "y": 20
+        },
+        "chin": {
+          "x": 151.5,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "4": {
+        "crown": {
+          "x": 137,
+          "y": 20
+        },
+        "chin": {
+          "x": 150,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "5": {
         "crown": {
           "x": 141,
           "y": 20
@@ -100,64 +78,31 @@
           "x": 154.5,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 7; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 5; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "8": {
+      "6": {
         "crown": {
-          "x": 139,
+          "x": 143,
           "y": 20
         },
         "chin": {
-          "x": 152.5,
+          "x": 156.5,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 6; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "9": {
-        "crown": {
-          "x": 135,
-          "y": 20
-        },
-        "chin": {
-          "x": 149,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 9; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "10": {
-        "crown": {
-          "x": 138,
-          "y": 20
-        },
-        "chin": {
-          "x": 152,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 10; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "11": {
-        "crown": {
-          "x": 138,
-          "y": 20
-        },
-        "chin": {
-          "x": 152,
-          "y": 65
-        },
-        "note": "Reviewed aligned E run cell 11; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "12": {
+      "7": {
         "crown": {
           "x": 142,
-          "y": 21
+          "y": 20
         },
         "chin": {
-          "x": 156,
-          "y": 66
+          "x": 155.5,
+          "y": 65
         },
-        "note": "Reviewed aligned E run cell 12; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 7; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "13": {
+      "8": {
         "crown": {
           "x": 140,
           "y": 20
@@ -166,141 +111,196 @@
           "x": 153.5,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 13; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
-      "14": {
+      "9": {
         "crown": {
-          "x": 141,
-          "y": 21
-        },
-        "chin": {
-          "x": 155,
-          "y": 66
-        },
-        "note": "Reviewed aligned E run cell 14; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
-      },
-      "15": {
-        "crown": {
-          "x": 138,
+          "x": 136,
           "y": 20
         },
         "chin": {
-          "x": 152,
+          "x": 150,
           "y": 65
         },
-        "note": "Reviewed aligned E run cell 15; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E run cell 9; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "10": {
+        "crown": {
+          "x": 139,
+          "y": 20
+        },
+        "chin": {
+          "x": 153,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 10; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "11": {
+        "crown": {
+          "x": 139,
+          "y": 20
+        },
+        "chin": {
+          "x": 153,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 11; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "12": {
+        "crown": {
+          "x": 143,
+          "y": 21
+        },
+        "chin": {
+          "x": 157,
+          "y": 66
+        },
+        "note": "Reviewed aligned E run cell 12; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "13": {
+        "crown": {
+          "x": 141,
+          "y": 20
+        },
+        "chin": {
+          "x": 154.5,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 13; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "14": {
+        "crown": {
+          "x": 142,
+          "y": 21
+        },
+        "chin": {
+          "x": 156,
+          "y": 66
+        },
+        "note": "Reviewed aligned E run cell 14; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+      },
+      "15": {
+        "crown": {
+          "x": 139,
+          "y": 20
+        },
+        "chin": {
+          "x": 153,
+          "y": 65
+        },
+        "note": "Reviewed aligned E run cell 15; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       }
     },
     "dash": {
       "0": {
         "crown": {
-          "x": 143,
+          "x": 144,
           "y": 42
         },
         "chin": {
-          "x": 156.5,
+          "x": 157.5,
           "y": 87
         },
-        "note": "Reviewed aligned E dash cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "1": {
         "crown": {
-          "x": 147,
+          "x": 148,
           "y": 52
         },
         "chin": {
-          "x": 163,
+          "x": 164,
           "y": 96
         },
-        "note": "Reviewed aligned E dash cell 1; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 1; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "2": {
         "crown": {
-          "x": 145,
+          "x": 146,
           "y": 62
         },
         "chin": {
-          "x": 162,
+          "x": 163,
           "y": 105
         },
-        "note": "Reviewed aligned E dash cell 2; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 2; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "3": {
         "crown": {
-          "x": 150,
+          "x": 151,
           "y": 59
         },
         "chin": {
-          "x": 167,
+          "x": 168,
           "y": 102
         },
-        "note": "Reviewed aligned E dash cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "4": {
         "crown": {
-          "x": 149,
+          "x": 150,
           "y": 81
         },
         "chin": {
-          "x": 169,
+          "x": 170,
           "y": 122
         },
-        "note": "Reviewed aligned E dash cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "5": {
         "crown": {
-          "x": 152,
+          "x": 153,
           "y": 89
         },
         "chin": {
-          "x": 172.5,
+          "x": 173.5,
           "y": 130
         },
-        "note": "Reviewed aligned E dash cell 5; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 5; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "6": {
         "crown": {
-          "x": 150,
+          "x": 151,
           "y": 48
         },
         "chin": {
-          "x": 166.5,
+          "x": 167.5,
           "y": 92
         },
-        "note": "Reviewed aligned E dash cell 6; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 6; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "7": {
         "crown": {
-          "x": 146,
+          "x": 147,
           "y": 40
         },
         "chin": {
-          "x": 161.5,
+          "x": 162.5,
           "y": 84
         },
-        "note": "Reviewed aligned E dash cell 7; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 7; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "8": {
         "crown": {
-          "x": 141,
+          "x": 142,
           "y": 32
         },
         "chin": {
-          "x": 155,
+          "x": 156,
           "y": 77
         },
-        "note": "Reviewed aligned E dash cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       },
       "9": {
         "crown": {
-          "x": 132,
+          "x": 133,
           "y": 29
         },
         "chin": {
-          "x": 146.3,
+          "x": 147.3,
           "y": 74
         },
-        "note": "Reviewed aligned E dash cell 9; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale."
+        "note": "Reviewed aligned E dash cell 9; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
       }
     }
   }
