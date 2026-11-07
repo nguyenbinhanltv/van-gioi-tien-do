@@ -1,0 +1,21 @@
+{
+  "name": "hit-dash",
+  "prompt": "Fix ONLY layout of this sprite sheet: OUTPUT MUST BE SQUARE 1:1, 2048x2048 requested. Exact4columns4rows of equal SQUARE cells, NOT landscape. Keep16poses rowmajor in sameorder. Do NOT squash/stretch/resize individual characters relative to eachother; all have one anatomicalscale. Reflow/pad into squarecells with generous magenta space around figures. Same fixed female Phap tu T1 appearance, natural left-hand open fan, shorttunic/trousers, long sleeves, compact bun/horizontalpin. First6cellshit recovery, next10cellsdash. Pure flat#FF00FF. No grid/borders/text, no artifacts. Entirebodyinclfeetfan insideeachsquarecell. Preserve pose details, facial identity, silhouette and colors from input.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:34:58 UTC"
+  },
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:36:06 UTC"
+  },
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "references": ["E/raw/hit-dash.attempt1.png"],
+  "raw": "raw/hit-dash.attempt2.png",
+  "selected": "sheets/hit-dash.png",
+  "status": "selected; complete E hard QA passed; accepted soft findings are explicit in quality-backlog.json",
+  "rawSha256": "630dad3d9d643627bd27af47b14cd0e44db45a6cf589a0edbcffbef3d3399015",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:35:40.242Z",
+  "selectedSha256": "630dad3d9d643627bd27af47b14cd0e44db45a6cf589a0edbcffbef3d3399015",
+  "referenceSnapshots": ["E/raw/hit-dash.attempt1.png"]
+}

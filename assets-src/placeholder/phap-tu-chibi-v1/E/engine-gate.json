@@ -1,0 +1,271 @@
+{
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "direction": "E",
+  "zoom": 2,
+  "midpointSamplesPerClip": 24,
+  "captureExitCode": 0,
+  "utcCaptureIndexModified": "2026-11-07T20:56:22.606Z",
+  "captureIndexSha256": "29897458b22f628d4688386d40f561f7044dcfde1fde7ce01e09946558b38a0c",
+  "clips": [
+    {
+      "name": "idle",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif",
+      "filesExist": true
+    },
+    {
+      "name": "meditate",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif",
+      "filesExist": true
+    },
+    {
+      "name": "walk",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif",
+      "filesExist": true
+    },
+    {
+      "name": "run",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif",
+      "filesExist": true
+    },
+    {
+      "name": "dash",
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif",
+      "filesExist": true
+    },
+    {
+      "name": "sword_fly",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif",
+      "filesExist": true
+    },
+    {
+      "name": "attack",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif",
+      "filesExist": true
+    },
+    {
+      "name": "cast",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif",
+      "filesExist": true
+    },
+    {
+      "name": "channel",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif",
+      "filesExist": true
+    },
+    {
+      "name": "hit",
+      "duration": 0.26666666666666666,
+      "keyFrames": 8,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif",
+      "filesExist": true
+    },
+    {
+      "name": "die",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif",
+      "filesExist": true
+    },
+    {
+      "name": "tribulation",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif",
+      "filesExist": true
+    },
+    {
+      "name": "emote",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif",
+      "filesExist": true
+    },
+    {
+      "name": "attack_2",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif",
+      "filesExist": true
+    },
+    {
+      "name": "attack_3",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif",
+      "filesExist": true
+    }
+  ],
+  "runtimeAssets": [
+    {
+      "file": "phaptuchibi_E_page1_tex.json",
+      "sha256": "352f01bf6f0e8933848d2b95bc7a660db4d04cc0a7d54f62cf8ec7f9fa0e7c08",
+      "stagedSha256": "2f4312d818203342bc78beae194aaae9b2404a53f4812f2142797cac76786015",
+      "equivalent": true
+    },
+    {
+      "file": "phaptuchibi_E_page1_tex.png",
+      "sha256": "b460afd234c3c81e8a88b2d893a0e7960eea8cd446a3b295c3183195229847e2",
+      "stagedSha256": "b460afd234c3c81e8a88b2d893a0e7960eea8cd446a3b295c3183195229847e2",
+      "equivalent": true
+    },
+    {
+      "file": "phaptuchibi_E_ske.json",
+      "sha256": "19fab0db7a6e064384e500c803fea1cad2bbd98b098e64c00ccec05b4dfb6139",
+      "stagedSha256": "facf78fd70f9fd05db9c13ed5106a38b1838d4718045c687432aa756ce921305",
+      "equivalent": true
+    },
+    {
+      "file": "phaptuchibi_E_tex.json",
+      "sha256": "5b6ddb11ebed6956d88881f3172549c5c9e1be48dc581905026a2b592ae8e6b7",
+      "stagedSha256": "3a1bf69e12212fb3acd8ec8c9ce7c3cd09d47ecf5790c681141cc45baded0d61",
+      "equivalent": true
+    },
+    {
+      "file": "phaptuchibi_E_tex.png",
+      "sha256": "9c6550199348c6c3f0c0cc4371a647e54d2e0f05b761772131e623b9c61f54dd",
+      "stagedSha256": "9c6550199348c6c3f0c0cc4371a647e54d2e0f05b761772131e623b9c61f54dd",
+      "equivalent": true
+    }
+  ],
+  "status": "superseded-pending-final-capture",
+  "note": "Actual Cocos runtime capture of selected full-frame source. JSON equivalence ignores formatting only; atlas PNG bytes match. QA/backlog contract metadata is not a rendered asset. New head-size gate integration is tracked separately. Master alpha/palette extraction corrected after this capture; final export must be recaptured."
+}
