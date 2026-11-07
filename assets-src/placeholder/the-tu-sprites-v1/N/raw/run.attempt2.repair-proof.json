@@ -1,0 +1,42 @@
+{
+  "clip": "run",
+  "dir": "N",
+  "method": "Public repairCell: selected AI donor cells only, no per-frame scaling or height fitting",
+  "cells0": [4, 6, 7, 8, 10, 11],
+  "unchangedOtherCells": 6,
+  "originalDimensions": [2172, 724],
+  "donorDimensions": [2172, 724],
+  "before": [
+    "bc9eb141200900c4ce09192b36dce16d3cd8dab6",
+    "f7c4ed5e9e2ebe7ccd3feabd78e98c53207751b8",
+    "a4321976187320f7d5638dfde7905197d02103b2",
+    "9e7956aa8ca1207203e67589b3099d889b4ef1a2",
+    "3c62f29a947a99253fcdb3ec78052384507afcf6",
+    "ca9ef4fbf447fb449724eaf35d4779f2fdba6a9b",
+    "52b0dafa3093d5d13dd96b0778f0ba637f80100d",
+    "401d61699ab91c1d45901afb4e7ca2d4277030ba",
+    "12c54f87dc7ff2af732c2b9d2c6979177fa3fcf5",
+    "3518ab9af342d70b2867d9f7be588a9b6bd3b7a6",
+    "f43943a655d0e2ba3651a4bec79cd314445ca29a",
+    "b0f581edf5b70c692badcd7014d024bd9a718f41"
+  ],
+  "after": [
+    "bc9eb141200900c4ce09192b36dce16d3cd8dab6",
+    "f7c4ed5e9e2ebe7ccd3feabd78e98c53207751b8",
+    "a4321976187320f7d5638dfde7905197d02103b2",
+    "9e7956aa8ca1207203e67589b3099d889b4ef1a2",
+    "5bbc63d35011778bd9f6bd15e2438dd16e6a2756",
+    "ca9ef4fbf447fb449724eaf35d4779f2fdba6a9b",
+    "e51a0dd7a5c8245ad9660e1558d3b4c78c31f42c",
+    "e484b0c21d3aa2ce32d86f1eb3dde5bee43c664e",
+    "155cad5995ada0e9efc19d03963f988951b6653f",
+    "3518ab9af342d70b2867d9f7be588a9b6bd3b7a6",
+    "8c9502dc55f5c7262dae1237a639aee12e13ab3e",
+    "f255d0a333c2ee46501db9b9b9fa5f912c69889a"
+  ],
+  "rawSource": "raw/run.attempt1.png",
+  "donor": "raw/run.attempt2.edited.png",
+  "selected": "sheets/run.png",
+  "sourceSha256": "cf4027966c5ddc2687ac24bcc11475411234111aea6984ec5b7d295aa700972f",
+  "selectedSha256": "f1e9981c91a720e4c6b759ece528e0c13cff51834b322bfc19f70cf4ad1ec696"
+}
