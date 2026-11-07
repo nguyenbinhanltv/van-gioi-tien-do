@@ -4356,3 +4356,23 @@ Bảng đầy đủ tại checkpoint E, bao gồm bản thô bị thay và guide
 | `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.png`        | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
 
 <!-- THE-TU-CHIBI-E-INVENTORY:END -->
+
+<!-- THE-TU-CHIBI-E-D47-INVENTORY:BEGIN -->
+
+### Thể tu E — sửa cỡ đầu theo D47 (2026-11-07 UTC)
+
+Giữ pose chạy/nhào động; chỉ sửa đầu lệch cỡ. Walk gốc được giữ vì bản edit toàn sheet làm xấu chỉ số chân; run chỉ thay ô6 và15ô khác giống từng byte; hit/dash chỉ sửa tiếp ô toàn sheet10/11/13 và13ô khác giữ nguyên. Không fit từng frame. Cùng điều khoản OpenAI Output đã kiểm tra ở trên; các bản chưa chọn không là nghiệm thu.
+
+| Tệp                                                                          | Nguồn / xử lý                                                 | Điều khoản               |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------ |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/emote.head-corrected.png`      | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/hit-dash.head-corrected.png`   | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/hit-dash.head-repair-edit.png` | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/hit-dash.head-repaired.png`    | Ghép nguyên ô AI qua repairCell, không rescale; có proof hash | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/idle.head-corrected.png`       | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/run.head-cell6.png`            | Ghép nguyên ô AI qua repairCell, không rescale; có proof hash | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/run.head-corrected.png`        | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/run.unused-leg-edit.png`       | AI edit không chọn; giữ nguyên bản thô và prompt              | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/walk.head-corrected.png`       | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
+
+<!-- THE-TU-CHIBI-E-D47-INVENTORY:END -->

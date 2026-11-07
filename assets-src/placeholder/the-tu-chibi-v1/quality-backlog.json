@@ -412,6 +412,86 @@
       "reviewer": "art-worker",
       "status": "open",
       "note": "Review visible hook impact/hold against the official legacy-table event anchors in Cocos playback; do not infer event alignment merely from requested prompt phases."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [6],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 143, 'y': 37}, chin {'x': 163, 'y': 83} on aligned256 output; head 50.16 px / master 50.70 px, ratio 0.9894. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [1],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 150, 'y': 44}, chin {'x': 171, 'y': 89} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [2],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 58}, chin {'x': 176, 'y': 102} on aligned256 output; head 49.65 px / master 50.70 px, ratio 0.9794. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [3],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 150, 'y': 65}, chin {'x': 171, 'y': 110} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [4],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 86}, chin {'x': 175, 'y': 131} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [5],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 157, 'y': 86}, chin {'x': 180, 'y': 131} on aligned256 output; head 50.54 px / master 50.70 px, ratio 0.9969. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [6],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 66}, chin {'x': 175, 'y': 111} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "E",
+      "cells": [7],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 142, 'y': 38}, chin {'x': 165, 'y': 84} on aligned256 output; head 51.43 px / master 50.70 px, ratio 1.0145. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
     }
   ]
 }

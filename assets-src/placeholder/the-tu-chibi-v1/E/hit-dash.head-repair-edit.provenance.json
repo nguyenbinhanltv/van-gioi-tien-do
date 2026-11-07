@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:07:46.998Z",
+  "utcRecordedCompleted": "2026-11-07T21:09:02.134Z",
+  "prompt": "Use case: precise-object-edit. Exact4x4grouped hit/dash sprite sheet. Correct HEAD SIZE in ONLY THREE cells; every BODY POSE and all othercells stay unchanged. Zero-basedGLOBALcell10=ROW3COL3 (dashlocal4): entire skull/face/maincap about6%SMALLER, same headcenter/tilt/identity. GLOBALcell11=ROW3COL4 (dashlocal5): entire skull/face/maincap about6%SMALLER, same center/tilt. GLOBALcell13=ROW4COL2 (dashlocal7): entire skull/face/maincap about4%LARGER, same center/tilt. Target for these3heads: anatomical skull crown-to-chin length about62nativepx in313.5pxcell (=50.7logicalpx in256cell), Euclidean length accounts for headtilt. Exclude raisedbun/loose ribbons. Preserve internal facial proportions/exact adulttan squarejaw amber-eye thickbrowidentity. DO NOT resizewholeframes, alter deepdash/lunge/legs/torso/hands/gauntlets/cloth/feet, or flatten motion. Keep master-body anatomicalscale and ALL dynamicposes. Neck connects naturally. Same squarecanvas/cellpositions, opaque uniformmagenta, no text/effects. Only these three heads receive slightsizecorrection. Allother13cells preserved; pipeline will composite onlyselectedcells.",
+  "references": ["raw/hit-dash.head-corrected.png", "../reference/E.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-453c21b3-68d1-4df5-bceb-c298aebed2a6.png",
+  "status": "AI head-size repair for global10/11/13; composed through repairCell with13othercells byte-identical; head evidence QA pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T21:09:02.134Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  }
+}

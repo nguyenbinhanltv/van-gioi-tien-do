@@ -40,14 +40,39 @@
     "sha256": "207608605ca2d82da225c025ac76cc87ccf85a742ee588d7aa1ebd9f361f73d7"
   },
   {
+    "file": "E/raw/emote.head-corrected.png",
+    "bytes": 1659991,
+    "sha256": "a01748e640f1ea7a1429674fa274f83c3a86dbe59edd52826c95c62638f99753"
+  },
+  {
     "file": "E/raw/hit-dash.attempt1.png",
     "bytes": 1748975,
     "sha256": "195b4afe8ea89d5096ec524dd7850d572d31ccc6fc81cbdeebfe495e25a810c0"
   },
   {
+    "file": "E/raw/hit-dash.head-corrected.png",
+    "bytes": 1693680,
+    "sha256": "8d2a2023664164616bab623cbd5b98c2da036eb0d4d891f84c05f65fff074bb0"
+  },
+  {
+    "file": "E/raw/hit-dash.head-repair-edit.png",
+    "bytes": 1682715,
+    "sha256": "8e8cb9fa3f1180bd15712d69d6d15bcee9754832a850eb75fe556c659f54991f"
+  },
+  {
+    "file": "E/raw/hit-dash.head-repaired.png",
+    "bytes": 2069757,
+    "sha256": "6f39e5f73b26b20466be6d5e5ec8dbbb15608fb353120daaac5f52f69185df72"
+  },
+  {
     "file": "E/raw/idle.attempt1.png",
     "bytes": 1747256,
     "sha256": "1698094ddaa23d15bf0dea00b3fa61002fecedb48b75aae23adc0813946318d6"
+  },
+  {
+    "file": "E/raw/idle.head-corrected.png",
+    "bytes": 1690170,
+    "sha256": "f3fa0a93e8166bc8aeaf35daed075c199067b5cf83b88f2a284e80eaba609f45"
   },
   {
     "file": "E/raw/meditate.attempt1.png",
@@ -58,6 +83,21 @@
     "file": "E/raw/run.attempt1.png",
     "bytes": 1915892,
     "sha256": "12a8beae993e87b353a75c98085825d3642e5a6d2dc8d1c2cb1044175666310d"
+  },
+  {
+    "file": "E/raw/run.head-cell6.png",
+    "bytes": 2363278,
+    "sha256": "003b95494a609a32ca28310c5546cec9c6d2edd5748ccece5c838d833d5317b6"
+  },
+  {
+    "file": "E/raw/run.head-corrected.png",
+    "bytes": 1848224,
+    "sha256": "a57555e5ab9caab12ec443175314a11d2db79776c0aafd2ff94d680fe75afe1e"
+  },
+  {
+    "file": "E/raw/run.unused-leg-edit.png",
+    "bytes": 1901239,
+    "sha256": "94c4abd0868764a03ba606aa1cb942dbfac601f803c2b71f9a97198b546f7cfe"
   },
   {
     "file": "E/raw/sword_fly.attempt1.png",
@@ -73,6 +113,11 @@
     "file": "E/raw/walk.attempt1.png",
     "bytes": 1682699,
     "sha256": "5e068f5cf0a805c87fed794876c1478e7e4b485ae6cc8e146a0356b20a86414f"
+  },
+  {
+    "file": "E/raw/walk.head-corrected.png",
+    "bytes": 1649236,
+    "sha256": "a8fbcdf9db4eb1e52e19b8e4f4c31050eb8a200559d9322e3243fd53f9da265b"
   },
   {
     "file": "E/templates/attack.template.png",

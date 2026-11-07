@@ -187,5 +187,18 @@
     "26 accepted locomotion soft findings; manual art observations remain open",
     "Full-weapon source compatibility export only; D45 layered extraction/composition pending tooling",
     "SE/S/NE/N have reference masters only at this E milestone"
-  ]
+  ],
+  "policyTransition": {
+    "policy": "D47 head-size-v1",
+    "state": "official merged-gate validation and refreshedcapture pending",
+    "historicalCapture": "cocos-capture.json captures originalD46selectedsources beforeheadcorrections",
+    "preflightCounts": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 26,
+      "regression": 0,
+      "info": 70
+    },
+    "evidence": "head-evidence.review.json"
+  }
 }

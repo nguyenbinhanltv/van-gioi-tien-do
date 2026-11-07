@@ -20,8 +20,9 @@
       "loop": true,
       "tableId": "idle",
       "kind": "upright",
-      "sheet": "raw/idle.attempt1.png",
-      "manifest": "templates/idle.template.json"
+      "sheet": "raw/idle.head-corrected.png",
+      "manifest": "templates/idle.template.json",
+      "heightPolicy": "head-size-v1"
     },
     {
       "name": "meditate",
@@ -61,7 +62,8 @@
       "tableId": "walk",
       "kind": "upright",
       "sheet": "raw/walk.attempt1.png",
-      "manifest": "templates/walk.template.json"
+      "manifest": "templates/walk.template.json",
+      "heightPolicy": "head-size-v1"
     },
     {
       "name": "run",
@@ -71,11 +73,25 @@
       "loop": true,
       "tableId": "run",
       "kind": "upright",
-      "sheet": "raw/run.attempt1.png",
+      "sheet": "raw/run.head-cell6.png",
       "manifest": "templates/run.template.json",
       "exceptions": {
-        "6": "airborne: both legs tucked in visible flight pose; original anatomical scale retained"
-      }
+        "6": "posture"
+      },
+      "headEvidence": {
+        "6": {
+          "crown": {
+            "x": 143,
+            "y": 37
+          },
+          "chin": {
+            "x": 163,
+            "y": 83
+          },
+          "note": "Reviewed aligned run local6: tucked flight pose preserved; AI head-only scale correction; skull/maincap excludes bun and ribbons."
+        }
+      },
+      "heightPolicy": "head-size-v1"
     },
     {
       "name": "dash",
@@ -84,22 +100,102 @@
       "durationSec": 0.4166666666666667,
       "loop": false,
       "tableId": "dash",
-      "kind": "free",
+      "kind": "upright",
       "sheetSelection": {
         "rows": 4,
         "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
       },
-      "sheet": "raw/hit-dash.attempt1.png",
+      "sheet": "raw/hit-dash.head-repaired.png",
       "manifest": "templates/hit-dash/group.template.json",
       "exceptions": {
-        "1": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained",
-        "2": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained",
-        "3": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
-        "4": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
-        "5": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
-        "6": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
-        "7": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained"
-      }
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 150,
+            "y": 44
+          },
+          "chin": {
+            "x": 171,
+            "y": 89
+          },
+          "note": "Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "2": {
+          "crown": {
+            "x": 153,
+            "y": 58
+          },
+          "chin": {
+            "x": 176,
+            "y": 102
+          },
+          "note": "Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "3": {
+          "crown": {
+            "x": 150,
+            "y": 65
+          },
+          "chin": {
+            "x": 171,
+            "y": 110
+          },
+          "note": "Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "4": {
+          "crown": {
+            "x": 153,
+            "y": 86
+          },
+          "chin": {
+            "x": 175,
+            "y": 131
+          },
+          "note": "Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "5": {
+          "crown": {
+            "x": 157,
+            "y": 86
+          },
+          "chin": {
+            "x": 180,
+            "y": 131
+          },
+          "note": "Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "6": {
+          "crown": {
+            "x": 153,
+            "y": 66
+          },
+          "chin": {
+            "x": 175,
+            "y": 111
+          },
+          "note": "Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "7": {
+          "crown": {
+            "x": 142,
+            "y": 38
+          },
+          "chin": {
+            "x": 165,
+            "y": 84
+          },
+          "note": "Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        }
+      },
+      "heightPolicy": "head-size-v1"
     },
     {
       "name": "sword_fly",
@@ -218,8 +314,13 @@
         "rows": 4,
         "cells": [0, 1, 2, 3, 4, 5]
       },
-      "sheet": "raw/hit-dash.attempt1.png",
-      "manifest": "templates/hit-dash/group.template.json"
+      "sheet": "raw/hit-dash.head-repaired.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "exceptions": {
+        "1": "recoil: chest bends during impact flinch; original anatomical scale retained",
+        "2": "recoil: chest bends backward at hit peak; original anatomical scale retained",
+        "3": "recoil: recovery from impact; original anatomical scale retained"
+      }
     },
     {
       "name": "die",
@@ -232,6 +333,8 @@
       "sheet": "raw/die.attempt1.png",
       "manifest": "templates/die.template.json",
       "exceptions": {
+        "1": "recoil: chest bends backward before collapse, original anatomical scale retained",
+        "2": "recoil: chest bends backward before collapse, original anatomical scale retained",
         "3": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
         "4": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
         "5": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
@@ -240,9 +343,7 @@
         "8": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
         "9": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
         "10": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
-        "11": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
-        "1": "recoil: chest bends backward before collapse, original anatomical scale retained",
-        "2": "recoil: chest bends backward before collapse, original anatomical scale retained"
+        "11": "die-collapse: kneeling then lying curled on side; original anatomical scale retained"
       }
     },
     {
@@ -282,8 +383,19 @@
       "loop": false,
       "tableId": "emote",
       "kind": "upright",
-      "sheet": "raw/emote.attempt1.png",
-      "manifest": "templates/emote.template.json"
+      "sheet": "raw/emote.head-corrected.png",
+      "manifest": "templates/emote.template.json",
+      "heightPolicy": "head-size-v1"
     }
-  ]
+  ],
+  "masterHead": {
+    "crown": {
+      "x": 127,
+      "y": 19
+    },
+    "chin": {
+      "x": 146,
+      "y": 66
+    }
+  }
 }
