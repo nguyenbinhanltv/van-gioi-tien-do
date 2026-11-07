@@ -450,6 +450,11 @@
     "sha256": "b562addbde1d256222b7abd4a55cb5ad2609e88f1b5e0e7b21f3ecd076de16c5"
   },
   {
+    "file": "SE/raw/walk.feet-corrected.png",
+    "bytes": 1828968,
+    "sha256": "7cfb6a6c4338be50e35ba0b41d43900fb61d95d1f0ed05d7e4e93894b0267312"
+  },
+  {
     "file": "SE/templates/attack.head-stencil.template.png",
     "bytes": 70358,
     "sha256": "4e922415981c85e4bfbc9dc2c5b4e0de2374c2988d8d727138b68951031e8a7c"

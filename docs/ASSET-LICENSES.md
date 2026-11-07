@@ -4607,3 +4607,9 @@ Giữ động tác lao sâu, chỉ sửa đầu sai cỡ và búi tóc phụ gâ
 | `assets-src/placeholder/the-tu-chibi-v1/SE/raw/cast.headroom.png`           | AI image edit; prompt/tool/model không công bố/UTC cạnh nguồn | OpenAI Output / mã dự án |
 | `assets-src/placeholder/the-tu-chibi-v1/SE/raw/hit-dash.head-corrected.png` | AI image edit; prompt/tool/model không công bố/UTC cạnh nguồn | OpenAI Output / mã dự án |
 | `assets-src/placeholder/the-tu-chibi-v1/SE/raw/hit-dash.head-repaired.png`  | Ghép nguyên ô AI bằng repairCell, proof6ô thay/10ô giống byte | OpenAI Output / mã dự án |
+
+### Thể tu SE — thử sửa chân không chọn (worker24, 2026-11-08)
+
+| Tệp                                                                     | Nguồn / xử lý                                                                                                                         | Điều khoản                       |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/walk.feet-corrected.png` | OpenAI image edit, giữ raw/prompt/model không công bố/UTC tại `SE/walk.feet-corrected.provenance.json`; không chọn vì7regression chân | OpenAI Output, đầu vào dự án gốc |

@@ -1618,6 +1618,16 @@
       "reviewer": "art-worker",
       "status": "open",
       "note": "Bobbing cycle approaches the ground guide at its endpoints; inspect clear airborne readability in Cocos. No platform/sword/FX is baked into this gauntlet-class full source."
+    },
+    {
+      "kind": "other",
+      "clip": "walk",
+      "dir": "SE",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Source prompt mislabeled cyan/amber anatomical feet; actual guide and QA mapping are cyan=R, amber=L. Feet-only correction with fixed wording was tested and rejected for7foot regressions/3newsoft findings. Originalwalk and10explicitcontact findings retained. Eprompts were checked and already labelcolorscorrectly; futureSguides use verified mapping and measuredstance."
     }
   ]
 }
