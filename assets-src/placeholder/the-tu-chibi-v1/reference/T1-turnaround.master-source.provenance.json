@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:25:58.543Z",
+  "utcRecordedCompleted": "2026-11-07T20:26:39.286Z",
+  "prompt": "Use case: precise-object-edit. MINIMAL TOPKNOT HEADROOM FIX ONLY. In this exact five-view original Thể tu turnaround, reduce the vertical height of the ELEVATED BUN/TOPKNOT by 10 native pixels in EACH of the five views: lower the very top of the bun from y17-19 to approximately y28-30 on this724px-high sheet, gently compressing only the raised bun mass. Preserve the main hair cap attached to skull, forehead, entire face and all facial landmarks EXACTLY; do not move crown of main hair cap or eyes/chin. Preserve hair ribbons, tie, costume, ivory ink-wash apron, amber sash, simple gauntlets, shoulders/body/feet/poses/scale and positions. Do NOT resize body or whole heads. Only the elevated bun needs slightly less height so it fits the fixed game canvas. Keep same five-view E SE S NE N layout. OPAQUE uniform RGB255,0,255 magenta background, clean tinted outlines, no stray halo/fragments, no text, no shadow, no new objects. Do not change anything else.",
+  "references": ["T1-turnaround.lock-source.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-d7d95f96-6a26-4b34-a044-b057dc47bee5.png",
+  "status": "bun headroom correction for common216px anatomical normalization; body scale unchanged in AI request",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:26:39.286Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

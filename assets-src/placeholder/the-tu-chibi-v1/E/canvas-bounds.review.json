@@ -1,0 +1,8 @@
+{
+  "coordinateSpace": "256px aligned output @2x",
+  "alphaThreshold": 128,
+  "calibrationScale": 1,
+  "tested": 202,
+  "loss": [],
+  "method": "Keyed/defringed source bounds plus recorded fixed-scale translation; no per-frame fitting"
+}
