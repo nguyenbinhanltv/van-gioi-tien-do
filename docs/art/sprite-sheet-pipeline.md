@@ -341,6 +341,20 @@ Alpha trên thân đục, phần hình học bị che và anatomy inpaint vẫn 
 phần khuất. Vùng matte ít khác nền nhưng không đổi được báo để kiểm. Ngưỡng phải khai báo, chưa chốt cấu hình chung.
 CLI tạo guide chuẩn và xuất set độc lập theo sau ở PR riêng.
 
+## Guide chuẩn để edit bỏ vũ khí D45
+
+Chạy `sprite:layer-template --project project.json --out <thư-mục>` trong workspace `@vgtd/sprite` sau khi QA nguồn qua,
+kể cả canvasLoss và regression backlog. Lệnh ghi source-N.full.png trong suốt và layer-inputs.json có SHA256 của
+project/master/guide cùng map clip→ô. Guide là 4×4, mỗi ô256px, sheet1024px; sao chép đúng pixel output đã căn, không fit
+hay căn lại từng pose. Sheet nhóm giữ mapping; cùng ô nguồn có hai bản aligned khác nhau thì báo lỗi.
+
+Dùng đúng guide này làm ảnh tham chiếu AI edit bỏ vũ khí + inpaint tay/da lộ ra, giữ body/face/pose/scale và lattice.
+Matte grayscale alpha vũ khí phải được xem riêng. Nếu model trả DPI khác thì chuẩn bị toàn sheet, không căn body/weapon
+độc lập. Quyền giáp đôi nằm trong weapon set và cần cả hand_L/R. Giữ full-pose gốc làm provenance.
+
+API công khai prepareLayerSources/writeLayerTemplates; runProject có tùy chọn includeAlignedFrames giữ pixel trong RAM,
+không đổi file export mặc định. Xuất layer set độc lập theo sau; lệnh này chỉ tạo tham chiếu edit.
+
 ## Không mất nội dung khi căn vào canvas
 
 Cổng cứng `canvasLoss` chiếu bbox opaque nguồn (alpha ≥128) qua scale cố định và dx/dy của alignment.
