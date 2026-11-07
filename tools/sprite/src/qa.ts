@@ -17,7 +17,7 @@ import type { CellSpec, Guides } from './types.js';
 export type Severity = 'fail' | 'warn' | 'info';
 
 export interface Finding {
-  readonly gate: 'height' | 'footSlide' | 'loopSeam' | 'similarity' | 'present';
+  readonly gate: 'height' | 'footSlide' | 'loopSeam' | 'similarity' | 'present' | 'poseLock' | 'faceLock';
   readonly severity: Severity;
   readonly clip: string;
   readonly frame?: number;
