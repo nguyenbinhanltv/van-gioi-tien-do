@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://data.tutien.game/schema/skill_definitions.schema.json",
+  "title": "skill_definitions",
+  "description": "Class skill kits (D49): 6 paths x 8 skills, 2 cong phap branches per path. Every number is 'Đề xuất – chờ duyệt'.",
+  "type": "object",
+  "required": ["schema_version", "global", "classes", "branches", "skills"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "global": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gcd_ms": { "type": "integer", "minimum": 0, "maximum": 2000 },
+        "max_targets_per_cast": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "cdr_cap": { "$ref": "#/$defs/ratio" }
+      }
+    },
+    "classes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/class" } },
+    "branches": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/branch" } },
+    "skills": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/skill" } }
+  },
+  "$defs": {
+    "ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+    "path": { "enum": ["kiem", "phap", "the", "dan_phu", "thuong", "dao"] },
+    "element": {
+      "enum": ["kim", "moc", "thuy", "hoa", "tho", "phong", "loi", "bang", "root_main", "none"]
+    },
+    "stat": { "enum": ["atk", "def", "hp_max", "target_hp_max", "mp_max", "agi"] },
+    "scale": {
+      "type": "object",
+      "required": ["stat", "coeff"],
+      "additionalProperties": false,
+      "properties": {
+        "stat": { "$ref": "#/$defs/stat" },
+        "coeff": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "stat_weights": {
+      "type": "object",
+      "required": ["hp", "mp", "atk", "def", "agi"],
+      "additionalProperties": false,
+      "properties": {
+        "hp": { "type": "number", "minimum": 0.85, "maximum": 1.25 },
+        "mp": { "type": "number", "minimum": 0.85, "maximum": 1.25 },
+        "atk": { "type": "number", "minimum": 0.85, "maximum": 1.25 },
+        "def": { "type": "number", "minimum": 0.85, "maximum": 1.25 },
+        "agi": { "type": "number", "minimum": 0.85, "maximum": 1.25 }
+      }
+    },
+    "class": {
+      "type": "object",
+      "required": [
+        "path",
+        "name_key",
+        "weapon",
+        "element",
+        "role",
+        "stat_weights",
+        "basic_attack",
+        "solo_branch",
+        "team_branch"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "name_key": { "type": "string", "minLength": 1 },
+        "weapon": { "type": "string", "minLength": 1 },
+        "element": { "$ref": "#/$defs/element" },
+        "role": { "type": "string", "minLength": 1 },
+        "stat_weights": { "$ref": "#/$defs/stat_weights" },
+        "basic_attack": {
+          "type": "object",
+          "required": ["range_tiles", "interval_ms", "coeffs"],
+          "additionalProperties": false,
+          "properties": {
+            "range_tiles": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 },
+            "interval_ms": { "type": "integer", "minimum": 300 },
+            "coeffs": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 5,
+              "items": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        "trait": {
+          "type": "object",
+          "required": ["id", "gain_on", "max_stacks", "duration_ms", "per_stack"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "gain_on": { "enum": ["hit_dealt", "hit_taken", "both"] },
+            "max_stacks": { "type": "integer", "minimum": 1, "maximum": 10 },
+            "duration_ms": { "type": "integer", "minimum": 1000 },
+            "per_stack": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "dr_pct": { "type": "number", "minimum": 0, "maximum": 0.1 },
+                "lifesteal": { "type": "number", "minimum": 0, "maximum": 0.05 },
+                "dmg_pct": { "type": "number", "minimum": 0, "maximum": 0.1 }
+              }
+            }
+          }
+        },
+        "solo_branch": { "$ref": "#/$defs/id" },
+        "team_branch": { "$ref": "#/$defs/id" }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "required": ["id", "path", "mode", "name_key", "unlock_level", "switch", "stat_mods"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "path": { "$ref": "#/$defs/path" },
+        "mode": { "enum": ["solo", "team"] },
+        "name_key": { "type": "string", "minLength": 1 },
+        "unlock_level": { "type": "integer", "minimum": 1 },
+        "switch": { "enum": ["out_of_combat"] },
+        "stat_mods": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "dmg_mult": { "type": "number", "minimum": 0.3, "maximum": 1.5 },
+            "dmg_taken_mult": { "type": "number", "minimum": 0.5, "maximum": 1.5 },
+            "heal_mult": { "type": "number", "minimum": 0.5, "maximum": 3 },
+            "shield_mult": { "type": "number", "minimum": 0.5, "maximum": 3 },
+            "threat_mult": { "type": "number", "minimum": 0.5, "maximum": 5 },
+            "lifesteal_add": { "type": "number", "minimum": 0, "maximum": 0.2 },
+            "ally_crit_bonus": { "type": "number", "minimum": 0, "maximum": 0.3 },
+            "team_dmg": { "type": "number", "minimum": 0, "maximum": 0.2 },
+            "team_dr": { "type": "number", "minimum": 0, "maximum": 0.2 }
+          }
+        },
+        "skill_patches": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "damage_mult": { "type": "number", "minimum": 0.5, "maximum": 2 },
+              "cooldown_mult": { "type": "number", "minimum": 0.5, "maximum": 1.5 },
+              "shield_mult": { "type": "number", "minimum": 0.5, "maximum": 3 },
+              "buff_mult": { "type": "number", "minimum": 0.5, "maximum": 3 },
+              "debuff_mult": { "type": "number", "minimum": 0.5, "maximum": 3 },
+              "duration_mult": { "type": "number", "minimum": 0.5, "maximum": 3 }
+            }
+          }
+        }
+      }
+    },
+    "shape": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["single", "circle", "ring", "cone", "line"] },
+        "anchor": { "enum": ["caster", "target", "ground_point"] },
+        "radius": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 },
+        "inner_radius": { "type": "number", "minimum": 0, "maximum": 12 },
+        "angle_deg": { "type": "number", "exclusiveMinimum": 0, "maximum": 360 },
+        "length": { "type": "number", "exclusiveMinimum": 0, "maximum": 16 },
+        "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 8 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "enum": ["circle", "ring"] } }, "required": ["type"] },
+          "then": { "required": ["radius", "anchor"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "ring" } }, "required": ["type"] },
+          "then": { "required": ["inner_radius"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "cone" } }, "required": ["type"] },
+          "then": { "required": ["radius", "angle_deg"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "line" } }, "required": ["type"] },
+          "then": { "required": ["length", "width"] }
+        }
+      ]
+    },
+    "effect": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "damage",
+            "heal",
+            "shield",
+            "dot",
+            "hot",
+            "status",
+            "dash",
+            "knockback",
+            "pull",
+            "taunt",
+            "buff",
+            "debuff",
+            "mark",
+            "detonate",
+            "summon",
+            "revive",
+            "restore_mp",
+            "passive_stat"
+          ]
+        },
+        "applies_to": { "enum": ["enemy", "ally", "self", "all"] },
+        "context": { "enum": ["any", "solo", "group"] },
+        "scale": { "$ref": "#/$defs/scale" },
+        "hits": { "type": "integer", "minimum": 1, "maximum": 20 },
+        "duration_ms": { "type": "integer", "minimum": 1 },
+        "tick_interval_ms": { "type": "integer", "minimum": 50 },
+        "status_id": { "enum": ["stun", "root", "slow", "freeze", "knockup", "silence"] },
+        "magnitude": { "type": "number" },
+        "distance_tiles": { "type": "number", "exclusiveMinimum": 0, "maximum": 8 },
+        "direction": { "enum": ["forward", "back"] },
+        "radius": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 },
+        "pen": { "type": "number", "minimum": 0, "maximum": 0.4 },
+        "mark_id": { "$ref": "#/$defs/id" },
+        "max_stacks": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "detonate_coeff": { "type": "number", "exclusiveMinimum": 0 },
+        "detonate_radius": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 },
+        "overheal_to_shield": { "$ref": "#/$defs/ratio" },
+        "shield_duration_ms": { "type": "integer", "minimum": 1 },
+        "explode": {
+          "type": "object",
+          "required": ["coeff", "radius"],
+          "additionalProperties": false,
+          "properties": {
+            "coeff": { "type": "number", "exclusiveMinimum": 0 },
+            "radius": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 }
+          }
+        },
+        "stat": {
+          "enum": [
+            "crit_chance",
+            "pen",
+            "def_pct",
+            "dmg_pct",
+            "dr_pct",
+            "lifesteal",
+            "move_speed_pct",
+            "def_shred",
+            "low_hp_dmg_pct",
+            "max_mp_pct",
+            "mp_regen_pct_per_s",
+            "tribulation_reduction",
+            "potion_power"
+          ]
+        },
+        "pvp_mult": { "type": "number", "minimum": 0, "maximum": 2 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "enum": ["damage", "heal", "shield", "dot", "hot", "detonate"] } },
+            "required": ["type"]
+          },
+          "then": { "required": ["scale"] }
+        },
+        {
+          "if": {
+            "properties": { "type": { "enum": ["dot", "hot", "status", "taunt", "shield", "buff", "debuff"] } },
+            "required": ["type"]
+          },
+          "then": { "required": ["duration_ms"] }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["dot", "hot"] } }, "required": ["type"] },
+          "then": { "required": ["tick_interval_ms"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "status" } }, "required": ["type"] },
+          "then": { "required": ["status_id"] }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["dash", "knockback", "pull"] } }, "required": ["type"] },
+          "then": { "required": ["distance_tiles"] }
+        },
+        {
+          "if": {
+            "properties": { "type": { "enum": ["passive_stat", "buff", "debuff", "revive", "restore_mp"] } },
+            "required": ["type"]
+          },
+          "then": { "required": ["magnitude"] }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["passive_stat", "buff", "debuff"] } }, "required": ["type"] },
+          "then": { "required": ["stat"] }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["mark", "detonate"] } }, "required": ["type"] },
+          "then": { "required": ["mark_id"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "mark" } }, "required": ["type"] },
+          "then": { "required": ["max_stacks", "duration_ms", "detonate_coeff"] }
+        }
+      ]
+    },
+    "skill": {
+      "type": "object",
+      "required": [
+        "id",
+        "name_key",
+        "owner",
+        "path",
+        "kind",
+        "tier",
+        "element",
+        "unlock",
+        "targeting",
+        "shape",
+        "timing",
+        "effects",
+        "tags",
+        "progression"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name_key": { "type": "string", "minLength": 1 },
+        "desc_key": { "type": "string", "minLength": 1 },
+        "owner": { "enum": ["player"] },
+        "path": { "$ref": "#/$defs/path" },
+        "kind": { "enum": ["active", "passive"] },
+        "tier": { "enum": ["basic", "core", "ultimate"] },
+        "element": { "$ref": "#/$defs/element" },
+        "elemental_rider": { "type": "boolean" },
+        "unlock": {
+          "type": "object",
+          "required": ["level_min"],
+          "additionalProperties": false,
+          "properties": {
+            "level_min": { "type": "integer", "minimum": 1 },
+            "realm_min": { "type": "string", "pattern": "^[a-z_]+$" },
+            "source": { "enum": ["level", "tome", "quest", "sect_shop"] }
+          }
+        },
+        "targeting": {
+          "type": "object",
+          "required": ["mode"],
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "enum": ["self", "ally_or_self", "enemy", "ground", "direction", "auto_nearest_enemy"] },
+            "range_tiles": { "type": "number", "minimum": 0, "maximum": 16 },
+            "requires_los": { "type": "boolean" },
+            "aim_ui": { "enum": ["tap", "drag_aim", "drag_ground"] }
+          }
+        },
+        "shape": { "$ref": "#/$defs/shape" },
+        "timing": {
+          "type": "object",
+          "required": ["cast_ms", "cooldown_ms"],
+          "additionalProperties": false,
+          "properties": {
+            "cast_ms": { "type": "integer", "minimum": 0 },
+            "channel_ms": { "type": "integer", "minimum": 0 },
+            "channel_ticks": { "type": "integer", "minimum": 1, "maximum": 20 },
+            "recovery_ms": { "type": "integer", "minimum": 0 },
+            "cooldown_ms": { "type": "integer", "minimum": 0 },
+            "gcd": { "type": "boolean" },
+            "move_during_cast": { "enum": ["lock", "slow", "free"] },
+            "interruptible": { "type": "boolean" },
+            "invuln_ms": { "type": "integer", "minimum": 0, "maximum": 500 }
+          }
+        },
+        "cost": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mp_pct": { "$ref": "#/$defs/ratio" },
+            "item_id": { "$ref": "#/$defs/id" },
+            "item_qty": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "effects": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/effect" } },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": ["context_aware", "dual_use", "cc", "interrupt", "mobility", "sustain", "pet"]
+          }
+        },
+        "anim_clip": { "enum": ["attack", "attack_2", "attack_3", "cast", "channel", "dash"] },
+        "progression": {
+          "type": "object",
+          "required": ["max_rank"],
+          "additionalProperties": false,
+          "properties": {
+            "max_rank": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "coeff_per_rank": { "type": "number", "minimum": 0, "maximum": 0.2 },
+            "mp_cost_reduction_per_rank": { "type": "number", "minimum": 0, "maximum": 0.1 }
+          }
+        },
+        "vfx": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cast_fx": { "$ref": "#/$defs/id" },
+            "projectile_fx": { "$ref": "#/$defs/id" },
+            "hit_fx": { "$ref": "#/$defs/id" },
+            "max_draw_calls": { "type": "integer", "minimum": 1, "maximum": 2 },
+            "instanced": { "type": "boolean" }
+          }
+        },
+        "icon_id": { "$ref": "#/$defs/id" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "active" } }, "required": ["kind"] },
+          "then": { "required": ["cost", "anim_clip", "vfx"] }
+        }
+      ]
+    }
+  }
+}
