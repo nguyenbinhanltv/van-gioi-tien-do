@@ -395,3 +395,26 @@ Swap cùng motion/clip giữ clock tại lúc cài rig, không phát lại frame
 thành muộn không được đè selection mới. Layered dùng REALTIME; rig đơn cũ vẫn hỗ trợ cache và multi-page như trước.
 Dispose chỉ hủy asset composition tự tạo, resource nguồn do Cocos quản lý. Xem apps/client-cocos/LAYERED-SPRITES.md cho
 layout resource, preview config, capture và kiểm thử procedural trên engine3.8.8; nguồn art vẫn phải qua QA sprite.
+
+## Xuất set độc lập D45 từ removal edit
+
+`sprite:layers --project layer-extraction.json --out <thư-mục>` trong @vgtd/sprite nhận format vgtd-layer-extraction,
+version1, source project + SHA256, motionId T1 chung, ba ID bodySet/weaponSet/fxSet riêng, glowRadiusPx, thresholds tường
+minh và đầy đủ clips. Mỗi clip có name, templateSha256, bodySheet/bodySheetSha256, weaponMatte/weaponMatteSha256,
+edit `{tool,prompt}` và mảng cells evidence nội bộ clip. Đường dẫn tương đối với JSON extraction; mapping ô lấy từ
+layer-inputs.json là chỉ số trên lattice4×4 chuẩn, không phải tọa độ lưới nguồn cũ.
+
+Body/matte chuẩn bị DPI toàn sheet4×4; không căn lại, palette-fit hay scale từng ô. Body edit chỉ key theo nguồn, không
+dọn spill/defringe để che repaint. Evidence tay/grip/inpaint dùng ô chuẩn256px, order front/back khai báo từng frame.
+Source QA được kiểm lại; report giữ hash project/master/full nguồn/guide/body/matte, provenance edit, DPI records,
+mọi metric/evidence và lỗi cứng. QA lỗi chỉ ghi report và exit1. Mỗi attempt dùng root mới; từ chối report/manifest cùng
+direction đã có để không nhầm asset cũ là output mới. Các direction khác có thể thêm vào cùng root; report riêng theo hướng.
+
+Qua QA mới ghi thư mục từng set: manifest layer.json và các trang atlas PMA MaxRects riêng. Giữ nguyên clock/duration/loop,
+mọi bản vẽ và event do body sở hữu; clock quá ngắn làm mất bản vẽ bị từ chối. FX trắng chỉ tint lúc chạy, có derivedFromWeapon;
+skin vũ khí trỏ FX đúng hoặc null. Biến thể tier/costume/weapon-skin đều có thể dùng provenance edit-from-master và cổng
+pose/face/motion/origin trước khi tách. Không nhân body theo tích áo×vũ khí. API công khai runLayerExtraction,
+writeLayerExtraction và buildSpriteLayerSet; API pack trực tiếp đòi caller giữ QA authoring.
+
+Matte, phần khuất và anatomy tay inpaint vẫn phải xem art thật. Ngưỡng difference/contact phải khai báo và duyệt theo
+dữ liệu thật; không coi fixture đúng tuyệt đối là ngưỡng art chung. Xem OPEN-ITEMS và hợp đồng runtime Cocos.

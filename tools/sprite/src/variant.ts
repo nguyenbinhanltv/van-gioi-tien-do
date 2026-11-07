@@ -46,7 +46,7 @@ export interface VariantReference {
 }
 export interface VariantProject {
   readonly kind: 'edit-from-master-v1';
-  readonly category: 'tier' | 'costume';
+  readonly category: 'tier' | 'costume' | 'weapon-skin';
   readonly id: string;
   readonly masterProject: string;
   readonly masterProjectSha256: string;
@@ -253,7 +253,7 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
   const t = v.thresholds;
   if (
     v.kind !== 'edit-from-master-v1' ||
-    !['tier', 'costume'].includes(v.category) ||
+    !['tier', 'costume', 'weapon-skin'].includes(v.category) ||
     !v.id?.trim() ||
     !v.edit?.tool?.trim() ||
     !v.edit.prompt?.trim() ||
