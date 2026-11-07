@@ -323,3 +323,13 @@ Contract giữ masterHead và headEvidence; batch/backlog report giữ INFO, `sp
 có mục mở rộng **Head-size INFO evidence** theo ô. Bằng chứng nằm trong project/contract, không tự ghi vào danh sách
 soft finding đã chấp nhận của quality-backlog.json. Các pose được chấp nhận phải được người xem kiểm landmarks;
 chưa có head detector tự động. Variants phải giữ masterHead và các điều khiển/evidence của T1.
+
+## Không mất nội dung khi căn vào canvas
+
+Cổng cứng `canvasLoss` chiếu bbox opaque nguồn (alpha ≥128) qua scale cố định và dx/dy của alignment.
+Bất kỳ cạnh nào ra ngoài ô output đều thất bại, kể cả khi bbox sau cắt lọt band chiều cao hoặc head evidence đúng.
+Scale/record không hợp lệ cũng thất bại. Cổng không sửa ảnh, thu nhỏ hay fit từng ô; exception/INFO/backlog không được miễn.
+
+Ca thật đã gặp: pre.height241, post.height232, scale1,dy-14 làm mất9px búi tóc nhưng cổng bbox/head vẫn có thể qua.
+Regression test giữ nguyên kích thước đầu và tái hiện mất9px secondary hair; canvasLoss chặn source project đó.
+Cổng kiểm loss do alignment, không khôi phục phần đã mất trong raw sheet hoặc inset; vẫn cần giữ và xem ảnh nguồn.
