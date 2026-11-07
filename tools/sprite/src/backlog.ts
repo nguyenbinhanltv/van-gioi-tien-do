@@ -142,6 +142,7 @@ export const HARD_GATES: readonly Finding['gate'][] = [
   'faceLock',
   'weaponExtraction',
   'handAlignment',
+  'canvasLoss',
 ];
 
 /** hard / soft / info class of a finding (see the file header). */

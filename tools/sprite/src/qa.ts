@@ -34,7 +34,8 @@ export interface Finding {
     | 'poseLock'
     | 'faceLock'
     | 'weaponExtraction'
-    | 'handAlignment';
+    | 'handAlignment'
+    | 'canvasLoss';
   readonly severity: Severity;
   readonly clip: string;
   readonly frame?: number;
@@ -464,10 +465,51 @@ export interface QaReport {
   readonly findings: readonly Finding[];
 }
 
+/** Project the original opaque bounds; post-crop height alone can falsely look valid after content was discarded. */
+export function checkCanvasLoss(clip: QaClip): Finding[] {
+  return clip.frames.flatMap((f, i) => {
+    if (!f) return [];
+    const scale = f.record.pre.height / f.source.height;
+    if (![scale, f.record.dx, f.record.dy].every(Number.isFinite) || scale <= 0)
+      return [
+        {
+          gate: 'canvasLoss' as const,
+          severity: 'fail' as const,
+          clip: clip.name,
+          frame: i,
+          metric: 'canvas_transform_invalid',
+          value: 1,
+          limit: 0,
+          message: 'canvas-loss QA requires a valid fixed calibration and source alignment record',
+        },
+      ];
+    const left = Math.max(0, -(f.source.left * scale + f.record.dx));
+    const top = Math.max(0, -(f.source.top * scale + f.record.dy));
+    const right = Math.max(0, f.source.right * scale + f.record.dx - f.image.width);
+    const bottom = Math.max(0, f.source.bottom * scale + f.record.dy - f.image.height);
+    const loss = Math.max(left, top, right, bottom);
+    return loss > 1e-9
+      ? [
+          {
+            gate: 'canvasLoss' as const,
+            severity: 'fail' as const,
+            clip: clip.name,
+            frame: i,
+            metric: 'canvas_loss_px',
+            value: loss,
+            limit: 0,
+            message: `opaque source bounds leave the output canvas (left ${left.toFixed(2)}, top ${top.toFixed(2)}, right ${right.toFixed(2)}, bottom ${bottom.toFixed(2)} px); no pose/head exception can waive clipping`,
+          },
+        ]
+      : [];
+  });
+}
+
 /** Run every gate on every clip. */
 export function runQa(clips: readonly QaClip[], o: QaOptions): QaReport {
   const findings = clips.flatMap((c) => [
     ...checkPresent(c),
+    ...checkCanvasLoss(c),
     ...checkHeights(c, o),
     ...checkFootSlide(c, o),
     ...checkLoopSeam(c, o),

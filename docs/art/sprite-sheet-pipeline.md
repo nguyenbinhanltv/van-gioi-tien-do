@@ -340,3 +340,13 @@ vũ khí hiện/ẩn, khoảng cách contact/tay/grip và pixel đục gần đi
 Alpha trên thân đục, phần hình học bị che và anatomy inpaint vẫn cần xem art; primitive không nhận dạng anatomy hay tự vẽ
 phần khuất. Vùng matte ít khác nền nhưng không đổi được báo để kiểm. Ngưỡng phải khai báo, chưa chốt cấu hình chung.
 CLI tạo guide chuẩn và xuất set độc lập theo sau ở PR riêng.
+
+## Không mất nội dung khi căn vào canvas
+
+Cổng cứng `canvasLoss` chiếu bbox opaque nguồn (alpha ≥128) qua scale cố định và dx/dy của alignment.
+Bất kỳ cạnh nào ra ngoài ô output đều thất bại, kể cả khi bbox sau cắt lọt band chiều cao hoặc head evidence đúng.
+Scale/record không hợp lệ cũng thất bại. Cổng không sửa ảnh, thu nhỏ hay fit từng ô; exception/INFO/backlog không được miễn.
+
+Ca thật đã gặp: pre.height241, post.height232, scale1,dy-14 làm mất9px búi tóc nhưng cổng bbox/head vẫn có thể qua.
+Regression test giữ nguyên kích thước đầu và tái hiện mất9px secondary hair; canvasLoss chặn source project đó.
+Cổng kiểm loss do alignment, không khôi phục phần đã mất trong raw sheet hoặc inset; vẫn cần giữ và xem ảnh nguồn.
