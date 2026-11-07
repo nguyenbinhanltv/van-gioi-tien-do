@@ -126,3 +126,15 @@ DPI preparation normalizes the full shared grid before cell selection; provenanc
 The shared manifest is selected with the same mapping, so ghosts and leading-leg labels cannot leak from another clip.
 A 6-frame hit + 10-frame dash fits 4x4. Larger combinations (including smooth hit+die or idle+emote) exceed 16 cells;
 choose smaller groups or separate sheets. Grouping saves generation calls, not runtime atlas memory or QA requirements.
+
+### Semi-chibi smooth profile (D46)
+
+Use `--profile smooth-v2` with `sprite:template`, and spread `smoothProjectClipDefaults(name)` into each project clip.
+The legacy APIs remain unchanged. `SMOOTH_SPRITE_CLIPS` provides the official counts, duration and inherited table anchors;
+`smoothPoseTags` provides attack anticipation/strike/impact/impact_hold/follow_through labels.
+The first attack remains named `attack` at runtime. Draw every cell; do not duplicate poses to meet the count.
+Nominal playback is 24 fps, duration = drawings / 24, quantized by the existing 30 Hz export clock (at most half a tick).
+Event phases remain in legacy TABLE coordinates. This is presentation timing, not a simulation/balance change.
+Maximum lattice: 4x4; logical cells remain 256 texture pixels at 2x. A raw 2048-square 4x4 sheet has 512-pixel cells:
+declare DPI preparation and the locked character calibration. Regenerate locomotion ghosts using the new duration.
+See `docs/art/sprite-sheet-pipeline.md` for counts and the production contract.
