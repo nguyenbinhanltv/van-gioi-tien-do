@@ -45,6 +45,8 @@ Oct 31, 2026 · An Nguyen
 
 ## 3. Thông số chuẩn hợp nhất
 
+> **[Cập nhật D44: Player mới dùng premium semi-chibi khoảng 4,5 đầu, mặt cố định theo Đạo Lộ; trang phục/vũ khí đổi hình qua T1–T5 theo 9 cảnh giới, còn 6 phẩm D6 chỉ tint viền/glow lúc chạy. Trang phục cosmetic và skin vũ khí bán riêng; chưa chốt giá/chỉ số. Giữ pipeline từng khung D41 và hướng D14. Chi tiết: [chuẩn phong cách](art/style-semichibi.md), [D44](DECISIONS.md). Concept là tham chiếu, chưa thay asset đang chạy.]**
+
 Đây là bộ giá trị đang có hiệu lực. Mọi thay đổi về sau nên sửa ở đây trước, rồi mới cập nhật tài liệu gốc.
 
 ### Nền tảng và lưới
