@@ -1,3 +1,4 @@
+import { authoredOriginPoint, validateAuthoredOrigins } from './authored-origin.js';
 /** Edit-from-master provenance and pre-alignment pose/face gates. No image model is invoked here. */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -194,6 +195,7 @@ export function compareVariantCell(
 }
 
 function sourceCells(project: Project, clip: ProjectClip, baseDir: string, guides?: Guides) {
+  validateAuthoredOrigins(clip);
   const bytes = readFileSync(resolve(baseDir, clip.sheet));
   const raw = decodePng(bytes);
   const grid = sheetLayout(clip);
@@ -215,9 +217,16 @@ function sourceCells(project: Project, clip: ProjectClip, baseDir: string, guide
   const first = cellRect(renderSheet.width, renderSheet.height, grid.cols, grid.rows, 0);
   const inset = Math.round(Math.min(first.width, first.height) * (project.slice?.inset ?? 0.01));
   const alignmentOrigins = guides
-    ? selectSheetCells(sliceSheet(renderSheet, grid, project.slice), clip.sheetSelection).map((f) => {
+    ? selectSheetCells(sliceSheet(renderSheet, grid, project.slice), clip.sheetSelection).map((f, i) => {
         const m = measureFigure(toPremultiplied(f.image));
         if (!m) throw new Error('variant master alignment frame is empty');
+        const e = clip.authoredOrigins?.[i];
+        const defaultY =
+          (clip.vertical ?? 'sole') === 'sole' ? m.bottom : (guides.ground / CELL_PX) * first.height - inset;
+        if (e) {
+          const p = authoredOriginPoint(e, first.width, first.height, inset, defaultY);
+          return { x: p.x * scale, y: p.y * scale };
+        }
         return {
           x: m.pelvisX * scale,
           y:

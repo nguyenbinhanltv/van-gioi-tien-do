@@ -55,6 +55,11 @@ export interface BatchRun {
 function clipReport(project: Project, result: ProjectResult, name: string): ClipReport {
   const c = project.clips.find((x) => x.name === name)!;
   const counts = { hard: 0, soft: 0, regression: 0, accepted: 0, info: 0 };
+  const originEvidence = result.contract.qa.judged.flatMap((j) =>
+    j.finding.clip === name && j.finding.originEvidence
+      ? [{ cell: j.finding.frame!, measurement: j.finding.originEvidence }]
+      : [],
+  );
   const headEvidence = result.contract.qa.judged.flatMap((j) =>
     j.finding.clip === name && j.finding.headEvidence
       ? [{ cell: j.finding.frame!, measurement: j.finding.headEvidence }]
@@ -85,6 +90,7 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
     status,
     counts,
     ...(unmeasuredFootSlide ? { unmeasuredFootSlide } : {}),
+    ...(originEvidence.length ? { originEvidence } : {}),
     ...(headEvidence.length ? { headEvidence } : {}),
   };
 }

@@ -200,3 +200,29 @@ secondary hair; grouped sheet indices remain clip-local. From sliced-cell coordi
 contract record.dx/dy. Contract/batch/backlog INFO and expandable review cards retain measurements, coordinates, bbox and
 note. Foot errors remain actionable. No automatic head detector or semantic anatomy certification is claimed.
 See the Vietnamese pipeline doc for the full authoring contract and migration notes.
+
+## Reviewed authored origins
+
+Optional `clip.authoredOrigins` uses **clip-local** keys, including grouped sheets:
+
+```json
+{
+  "authoredOrigins": {
+    "6": {
+      "pelvisX": 118,
+      "reason": "Wide lunge: reviewed anatomical pelvis",
+      "evidence": "source frame6 pelvis landmark, reviewed against pinned T1"
+    }
+  }
+}
+```
+
+Coordinates are on the normalized256px SOURCE cell before slice inset (x right/y down). The pipeline converts by actual
+cell pitch, then subtracts inset; this does not alter the fixed calibration scale. pelvisX replaces measured centroid X.
+Without groundY, existing sole/keep Y behavior is unchanged. Optional groundY requires vertical keep and the same declared
+ground on EVERY clip cell; per-frame ground fitting is rejected. Both reason and human-reviewed evidence are mandatory.
+Anatomical pelvis/root evidence must be honest: this is not permission to shift each pose merely to hide an art error.
+
+When overrides are omitted, existing pixels/placement are unchanged. Overrides and applied source point/scale/dx/dy appear as INFO in contract,
+backlog CLI and review page. Height/head, foot and canvasLoss gates remain unchanged; incorrect origins can still fail.
+Variants inherit the T1 origins and cannot override them. Manual landmarks are not an automatic pelvis detector.
