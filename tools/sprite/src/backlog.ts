@@ -134,7 +134,15 @@ export function migrateManualFindings(backlog: Backlog, source: unknown): Backlo
 export type FindingClass = 'hard' | 'soft' | 'info';
 
 /** Gates that can never be accepted into the backlog. */
-export const HARD_GATES: readonly Finding['gate'][] = ['present', 'loopSeam', 'similarity', 'poseLock', 'faceLock'];
+export const HARD_GATES: readonly Finding['gate'][] = [
+  'present',
+  'loopSeam',
+  'similarity',
+  'poseLock',
+  'faceLock',
+  'weaponExtraction',
+  'handAlignment',
+];
 
 /** hard / soft / info class of a finding (see the file header). */
 export function classify(f: Finding): FindingClass {

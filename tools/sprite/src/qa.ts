@@ -25,7 +25,16 @@ export type Severity = 'fail' | 'warn' | 'info';
 
 export interface Finding {
   readonly headEvidence?: HeadMeasurement;
-  readonly gate: 'height' | 'footSlide' | 'loopSeam' | 'similarity' | 'present' | 'poseLock' | 'faceLock';
+  readonly gate:
+    | 'height'
+    | 'footSlide'
+    | 'loopSeam'
+    | 'similarity'
+    | 'present'
+    | 'poseLock'
+    | 'faceLock'
+    | 'weaponExtraction'
+    | 'handAlignment';
   readonly severity: Severity;
   readonly clip: string;
   readonly frame?: number;
