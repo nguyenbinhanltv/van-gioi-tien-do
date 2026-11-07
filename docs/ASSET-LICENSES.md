@@ -4282,8 +4282,6 @@ All paths below are under `assets-src/placeholder/phap-tu-chibi-v1/`. This regis
 
 | File                                      | Source / author                                                | Rights basis                                                 |
 | ----------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------ |
-| `E/export/phaptuchibi_E_page1_tex.png`    | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
-| `E/export/phaptuchibi_E_tex.png`          | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
 | `E/raw/attack.attempt1.png`               | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
 | `E/raw/attack_2.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
 | `E/raw/attack_3.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
@@ -4349,8 +4347,6 @@ All paths below are under `assets-src/placeholder/phap-tu-chibi-v1/`. This regis
 | `reference/turnaround.attempt2.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
 | `reference/turnaround.attempt3.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
 | `reference/turnaround.attempt4.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
-
-Export JSON files in `E/export/` are in-house pipeline derivatives of the registered source PNGs, with the same source rights.
 
 <!-- PHAP-TU-CHIBI-E-MOTION:END -->
 

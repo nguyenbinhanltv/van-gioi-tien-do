@@ -277,5 +277,11 @@
   "headEvidenceCells": 16,
   "status": "passed",
   "note": "Final fixed +1 px character-wide framing; all 15 clips captured at 2x in real Cocos Creator 3.8.8. No per-frame fitting. Zero-loss canvas gate passed for all 202 frames. Soft findings remain open.",
-  "canvasGate": "canvas-gate.json"
+  "canvasGate": "canvas-gate.json",
+  "nativeCanvasLossGate": {
+    "status": "passed",
+    "source": "PR152 merged main; official sprite:build",
+    "frames": 202,
+    "failHard": 0
+  }
 }
