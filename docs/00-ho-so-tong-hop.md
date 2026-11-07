@@ -67,7 +67,7 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D47: upright semi-chibi có exception/bbox ngoài band dùng bằng chứng kích thước đầu master ±3%, reason `posture`/`secondary-overhang`, không ép phẳng flight tuck/dash/lunge. Ô trong band không exception giữ cổng cũ; evidence đã khai báo luôn được kiểm. Chi tiết tọa độ và INFO review ở `art/sprite-sheet-pipeline.md`.]
 
-[Tinh chỉnh D47: NE/N bị che cằm dùng `rear-skull-base`, crown→đáy sọ tại chỗ nối gáy/cổ và bề ngang sọ tối đa đều ±3% cùng master của hướng đó. Không bịa hay chiếu cằm. Kind, landmark và bề ngang giữ trong INFO; chi tiết schema ở pipeline.]
+[Cập nhật D48, bổ sung D47: NE/N bị che cằm dùng `rear-skull-base`, crown→đáy sọ tại chỗ nối gáy/cổ và bề ngang sọ tối đa đều ±3% cùng master của hướng đó. Không bịa hay chiếu cằm. Kind, landmark và bề ngang giữ trong INFO; chi tiết schema ở pipeline.]
 
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 

@@ -383,7 +383,7 @@ evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvi
 đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
 Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.
 
-## Tinh chỉnh D47: đầu phía sau NE/N che cằm
+## Cập nhật D48, bổ sung D47: đầu phía sau NE/N che cằm
 
 Không bịa hay chiếu landmark cằm. Dùng `masterHead` trên master khóa của chính direction đó và `headEvidence` ở ô aligned:
 kind `rear-skull-base`, crown, skullBase, breadth `{left,right}`; mỗi điểm là `{x,y}`. Evidence ô thêm note đã xem.

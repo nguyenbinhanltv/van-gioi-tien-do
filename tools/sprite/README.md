@@ -201,7 +201,7 @@ contract record.dx/dy. Contract/batch/backlog INFO and expandable review cards r
 note. Foot errors remain actionable. No automatic head detector or semantic anatomy certification is claimed.
 See the Vietnamese pipeline doc for the full authoring contract and migration notes.
 
-### Occluded rear chin (NE/N)
+### Occluded rear chin (NE/N, D48 amends D47)
 
 Do not fabricate or project a chin. For an occluded rear view, use the same measurement on that direction's locked master
 and affected aligned cells:
