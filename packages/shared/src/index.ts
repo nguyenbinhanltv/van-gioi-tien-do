@@ -6,5 +6,8 @@ export * from './formulas/tribulation.js';
 export * from './formulas/combat.js';
 export * from './formulas/cultivation.js';
 export * from './formulas/economy.js';
+export * from './formulas/skills.js';
+export * from './formulas/skill_sim.js';
+export * from './formulas/skill_sim_report.js';
 export * from './data.js';
 export * from './validators.js';
