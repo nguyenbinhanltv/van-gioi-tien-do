@@ -377,3 +377,8 @@ Reason và bằng chứng landmark/ảnh nguồn đã xem bắt buộc, không �
 Không khai báo thì giữ hành vi cũ. Contract, backlog CLI và review giữ origin, source point áp dụng, scale,dx/dy dưới INFO.
 Các cổng head/height/foot/canvasLoss không đổi; còn mất nội dung vẫn lỗi cứng. Variant giữ origin T1, không được thay.
 Đây là annotation thủ công, không phải detector pelvis tự động; không thay bbox hay thu nhỏ body để lách gate.
+
+Với lunge có pelvis di chuyển có chủ đích: dùng `kind: "lattice-root"`, reason chính xác `"preserve authored root travel"`,
+evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvisX là X đăng ký cố định, **không phải pelvis anatomy
+đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
+Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.

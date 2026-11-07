@@ -227,6 +227,12 @@ When overrides are omitted, existing pixels/placement are unchanged. Overrides a
 backlog CLI and review page. Height/head, foot and canvasLoss gates remain unchanged; incorrect origins can still fail.
 Variants inherit the T1 origins and cannot override them. Manual landmarks are not an automatic pelvis detector.
 
+For a lunge with intentional pelvis travel, use `kind: "lattice-root"`, `reason: "preserve authored root travel"`, and
+evidence naming the reviewed fixed source/T1 lattice registration axis. The historical `pelvisX` field then stores that
+registration X, **not the moving anatomical pelvis**. Declare this same X/kind on every clip cell. This preserves authored
+root travel without per-frame fitting; scale/thresholds and the canvas gate remain unchanged. The default kind is
+`anatomical-pelvis`; contract/backlog/review explicitly show the supplied kind.
+
 ## Weapon extraction and hand QA primitives (D45)
 
 `extractWeaponLayer(full, bodyEdit, grayscaleMatte, cellEvidence, thresholds, { clip, frame })` compares same-sized,

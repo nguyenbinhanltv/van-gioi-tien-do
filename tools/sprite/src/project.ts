@@ -391,7 +391,7 @@ export function runProject(
           clip: s.clip.name,
           frame: i,
           originEvidence: { ...e, source, scale: s.calibration.scale, dx: f.record.dx, dy: f.record.dy },
-          message: `reviewed authored origin: ${e.reason}; ${e.evidence}; source (${source.x}, ${source.y}), scale ${s.calibration.scale}, dx ${f.record.dx}, dy ${f.record.dy}`,
+          message: `reviewed authored origin (${e.kind ?? 'anatomical-pelvis'}): ${e.reason}; ${e.evidence}; source (${source.x}, ${source.y}), scale ${s.calibration.scale}, dx ${f.record.dx}, dy ${f.record.dy}`,
         },
       ];
     }),

@@ -78,6 +78,32 @@ describe('reviewed authored origins', () => {
     );
     expect(wrong.contract.qa.findings.some((f) => f.gate === 'canvasLoss')).toBe(true);
   });
+  it('accepts a fixed reviewed lattice root and rejects chasing the moving pelvis', () => {
+    const e: AuthoredOrigin = {
+      ...origin,
+      kind: 'lattice-root',
+      reason: 'preserve authored root travel',
+      evidence: 'Reviewed source/T1 lattice axis128, anatomical pelvis moves independently',
+    };
+    expect(() => validateAuthoredOrigins({ frames: 2, authoredOrigins: { 0: e, 1: e } })).not.toThrow();
+    expect(() => validateAuthoredOrigins({ frames: 2, authoredOrigins: { 0: e, 1: { ...e, pelvisX: 140 } } })).toThrow(
+      /fixed registration/,
+    );
+    expect(() => validateAuthoredOrigins({ frames: 2, authoredOrigins: { 0: e } })).toThrow(/every clip cell/);
+    expect(() =>
+      validateAuthoredOrigins({ frames: 1, authoredOrigins: { 0: { ...e, reason: 'recenter pelvis' } } }),
+    ).toThrow(/preserve authored root travel/);
+    const { dir, project } = setup();
+    const p: Project = { ...project, clips: project.clips.map((c) => ({ ...c, authoredOrigins: { 0: e } })) };
+    writeFileSync(join(dir, 'project.json'), JSON.stringify(p));
+    writeFileSync(join(dir, 'batch.json'), JSON.stringify({ character: 'test', projects: ['project.json'] }));
+    const batch = runBatch(join(dir, 'batch.json'), join(dir, 'out'));
+    expect(batch.report.dirs[0]!.clips[0]!.originEvidence![0]!.measurement.kind).toBe('lattice-root');
+    expect(reviewHtml([batch.report])).toContain('lattice-root');
+    expect(runProject(p, dir).contract.qa.findings.find((f) => f.gate === 'authoredOrigin')?.message).toContain(
+      'lattice-root',
+    );
+  });
   it('requires reviewed clip-local evidence and rejects per-frame/custom sole ground fitting', () => {
     const invalid: Record<string, AuthoredOrigin>[] = [
       { 1: origin },

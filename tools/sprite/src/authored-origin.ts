@@ -2,7 +2,9 @@
 import { CELL_PX } from './types.js';
 
 export interface AuthoredOrigin {
-  /** Reviewed pelvis X in the normalized 256px source cell, BEFORE slice inset. */
+  /** Default anatomical-pelvis; lattice-root explicitly preserves authored pelvis travel. */
+  readonly kind?: 'anatomical-pelvis' | 'lattice-root';
+  /** Reviewed pelvis or fixed lattice registration X in normalized256 source coordinates, BEFORE slice inset. */
   readonly pelvisX: number;
   /** Fixed source ground in the same coordinates; only allowed with vertical keep. */
   readonly groundY?: number;
@@ -23,11 +25,13 @@ export function validateAuthoredOrigins(clip: {
   readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
 }): void {
   const grounds = new Set<number>();
+  const roots = new Set<number>();
   for (const [key, e] of Object.entries(clip.authoredOrigins ?? {})) {
     if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= clip.frames)
       throw new Error(`authored origin '${key}' is not a valid clip-local frame`);
     if (
       !e ||
+      (e.kind !== undefined && !['anatomical-pelvis', 'lattice-root'].includes(e.kind)) ||
       !Number.isFinite(e.pelvisX) ||
       e.pelvisX < 0 ||
       e.pelvisX >= CELL_PX ||
@@ -37,6 +41,11 @@ export function validateAuthoredOrigins(clip: {
       !e.evidence.trim()
     )
       throw new Error('authored origin requires a finite pelvis X and reviewed reason/evidence');
+    if (e.kind === 'lattice-root') {
+      if (e.reason !== 'preserve authored root travel')
+        throw new Error('lattice-root requires reason: preserve authored root travel');
+      roots.add(e.pelvisX);
+    }
     if (e.groundY !== undefined) {
       if (clip.vertical !== 'keep' || !Number.isFinite(e.groundY) || e.groundY < 0 || e.groundY > CELL_PX)
         throw new Error('authored ground requires vertical keep and a finite source ground');
@@ -44,6 +53,14 @@ export function validateAuthoredOrigins(clip: {
     }
   }
   if (grounds.size > 1) throw new Error('authored ground must be fixed across a clip, never fitted per frame');
+  if (
+    roots.size > 1 ||
+    (roots.size &&
+      Array.from({ length: clip.frames }, (_, i) => clip.authoredOrigins?.[i]).some(
+        (e) => e?.kind !== 'lattice-root' || e.pelvisX !== [...roots][0],
+      ))
+  )
+    throw new Error('lattice-root requires one fixed registration X on every clip cell');
   if (
     grounds.size &&
     Array.from({ length: clip.frames }, (_, i) => clip.authoredOrigins?.[i]?.groundY).some((y) => y !== [...grounds][0])
