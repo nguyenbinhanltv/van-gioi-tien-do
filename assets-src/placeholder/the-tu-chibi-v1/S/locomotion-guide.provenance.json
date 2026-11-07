@@ -1,0 +1,18 @@
+{
+  "kind": "authoring-guide",
+  "direction": "S",
+  "master": "reference/S.master.png",
+  "manualBootTrackCenters": {
+    "R": 106,
+    "L": 150
+  },
+  "stanceWidthPxAt2x": 44,
+  "basis": "Approximate centers of the locked master's boot soles, rounded symmetrically around pipeline pelvis axis127.78; no frame fitting",
+  "colors": {
+    "cyan": "anatomical right / nearFoot",
+    "amber": "anatomical left / farFoot"
+  },
+  "sourceUnits": "normalized256 source before inset",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectionRegistry": "project.json"
+}

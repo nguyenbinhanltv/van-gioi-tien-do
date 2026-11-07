@@ -1,0 +1,565 @@
+{
+  "character": "the-tu-chibi-v1",
+  "direction": "S",
+  "stem": "thetuchibi",
+  "master": "../reference/S.master.png",
+  "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "palette": {
+    "lock": true
+  },
+  "masterHead": {
+    "crown": {
+      "x": 130,
+      "y": 18.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 66.5
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.attempt1.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.attempt1.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated: cross-legged pose retains original body lengths",
+        "1": "seated: cross-legged pose retains original body lengths",
+        "2": "seated: cross-legged pose retains original body lengths",
+        "3": "seated: cross-legged pose retains original body lengths",
+        "4": "seated: cross-legged pose retains original body lengths",
+        "5": "seated: cross-legged pose retains original body lengths",
+        "6": "seated: cross-legged pose retains original body lengths",
+        "7": "seated: cross-legged pose retains original body lengths",
+        "8": "seated: cross-legged pose retains original body lengths",
+        "9": "seated: cross-legged pose retains original body lengths",
+        "10": "seated: cross-legged pose retains original body lengths",
+        "11": "seated: cross-legged pose retains original body lengths",
+        "12": "seated: cross-legged pose retains original body lengths",
+        "13": "seated: cross-legged pose retains original body lengths",
+        "14": "seated: cross-legged pose retains original body lengths",
+        "15": "seated: cross-legged pose retains original body lengths"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.attempt1.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "12": "posture"
+      },
+      "headEvidence": {
+        "12": {
+          "crown": {
+            "x": 130,
+            "y": 20
+          },
+          "chin": {
+            "x": 129,
+            "y": 67
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Walking contact/down posture; fixed44px boot tracks. Approximate boundary uncertainty1px; native coordinate review retained."
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.head-corrected.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "6": "posture",
+        "11": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 126,
+            "y": 27
+          },
+          "chin": {
+            "x": 130,
+            "y": 76
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "1": {
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 132,
+            "y": 76
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "2": {
+          "crown": {
+            "x": 137,
+            "y": 32
+          },
+          "chin": {
+            "x": 137,
+            "y": 80
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "3": {
+          "crown": {
+            "x": 128,
+            "y": 31
+          },
+          "chin": {
+            "x": 129,
+            "y": 80
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "6": {
+          "crown": {
+            "x": 131,
+            "y": 32
+          },
+          "chin": {
+            "x": 132,
+            "y": 79
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "11": {
+          "crown": {
+            "x": 138,
+            "y": 32
+          },
+          "chin": {
+            "x": 137,
+            "y": 80
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        },
+        "15": {
+          "crown": {
+            "x": 131,
+            "y": 28
+          },
+          "chin": {
+            "x": 132,
+            "y": 77
+          },
+          "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/hit-dash.head-repaired2.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 130,
+            "y": 50
+          },
+          "chin": {
+            "x": 130,
+            "y": 98
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "2": {
+          "crown": {
+            "x": 130,
+            "y": 48
+          },
+          "chin": {
+            "x": 130,
+            "y": 97
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "3": {
+          "crown": {
+            "x": 137,
+            "y": 48
+          },
+          "chin": {
+            "x": 137,
+            "y": 97
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "4": {
+          "crown": {
+            "x": 130,
+            "y": 78
+          },
+          "chin": {
+            "x": 130,
+            "y": 125
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "5": {
+          "crown": {
+            "x": 128,
+            "y": 87
+          },
+          "chin": {
+            "x": 128,
+            "y": 134
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "6": {
+          "crown": {
+            "x": 132,
+            "y": 44
+          },
+          "chin": {
+            "x": 130,
+            "y": 93
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        },
+        "7": {
+          "crown": {
+            "x": 132,
+            "y": 34
+          },
+          "chin": {
+            "x": 130,
+            "y": 82
+          },
+          "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6)."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.attempt1.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "1": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "2": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "3": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "4": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "5": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "6": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "7": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "8": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "9": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "10": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale",
+        "11": "airborne: bent-knee hover pose retains source vertical travel and anatomical scale"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.attempt1.png",
+      "manifest": "templates/attack.template.json"
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.attempt1.png",
+      "manifest": "templates/attack_2.template.json"
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.attempt1.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "1": "crouch: uppercut knee loading retains anatomical scale",
+        "2": "crouch: uppercut knee loading retains anatomical scale",
+        "3": "crouch: uppercut knee loading retains anatomical scale",
+        "4": "crouch: uppercut knee loading retains anatomical scale"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.headroom2.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.attempt1.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "raw/hit-dash.head-repaired2.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "exceptions": {
+        "1": "recoil: visible chest/shoulder reaction",
+        "2": "recoil: visible chest/shoulder reaction",
+        "3": "recoil: visible chest/shoulder reaction"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.attempt1.png",
+      "manifest": "templates/die.template.json",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 127.78143401454797,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed original S die4x3 source and locked S master: head/hips intentionally travel right during collapse around the source lattice registrationX127.78143. Same registration on all12cells; Y remains sole alignment, body scale unchanged; no per-frame fitting."
+        }
+      },
+      "exceptions": {
+        "1": "recoil-collapse: knee buckle and side fall retain body scale",
+        "2": "recoil-collapse: knee buckle and side fall retain body scale",
+        "3": "recoil-collapse: knee buckle and side fall retain body scale",
+        "4": "recoil-collapse: knee buckle and side fall retain body scale",
+        "5": "recoil-collapse: knee buckle and side fall retain body scale",
+        "6": "recoil-collapse: knee buckle and side fall retain body scale",
+        "7": "recoil-collapse: knee buckle and side fall retain body scale",
+        "8": "recoil-collapse: knee buckle and side fall retain body scale",
+        "9": "recoil-collapse: knee buckle and side fall retain body scale",
+        "10": "recoil-collapse: knee buckle and side fall retain body scale",
+        "11": "recoil-collapse: knee buckle and side fall retain body scale"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.attempt1.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "0": "kneel: braced one-knee pose retains original body lengths",
+        "1": "kneel: braced one-knee pose retains original body lengths",
+        "2": "kneel: braced one-knee pose retains original body lengths",
+        "3": "kneel: braced one-knee pose retains original body lengths",
+        "4": "kneel: braced one-knee pose retains original body lengths",
+        "5": "kneel: braced one-knee pose retains original body lengths",
+        "6": "kneel: braced one-knee pose retains original body lengths",
+        "7": "kneel: braced one-knee pose retains original body lengths",
+        "8": "kneel: braced one-knee pose retains original body lengths",
+        "9": "kneel: braced one-knee pose retains original body lengths",
+        "10": "kneel: braced one-knee pose retains original body lengths",
+        "11": "kneel: braced one-knee pose retains original body lengths",
+        "12": "kneel: braced one-knee pose retains original body lengths",
+        "13": "kneel: braced one-knee pose retains original body lengths",
+        "14": "kneel: braced one-knee pose retains original body lengths",
+        "15": "kneel: braced one-knee pose retains original body lengths"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.attempt1.png",
+      "manifest": "templates/emote.template.json"
+    }
+  ]
+}

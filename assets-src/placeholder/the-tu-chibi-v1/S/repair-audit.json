@@ -1,0 +1,21 @@
+{
+  "utc": "2026-11-07T23:26:06.223Z",
+  "method": "Recomputed decoded RGBA per-cell SHA1 using public cellHashes; all unchanged-cell pairs verified",
+  "rows": [
+    {
+      "file": "cast.headroom2.repair.json",
+      "changed": [5, 7, 13],
+      "passed": true
+    },
+    {
+      "file": "hit-dash.head-repaired.repair.json",
+      "changed": [7, 8, 9, 10, 11, 12, 13],
+      "passed": true
+    },
+    {
+      "file": "hit-dash.head-repaired2.repair.json",
+      "changed": [7, 8, 9, 12, 13],
+      "passed": true
+    }
+  ]
+}
