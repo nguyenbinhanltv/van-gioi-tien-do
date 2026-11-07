@@ -40,6 +40,8 @@ export function calibrate(targetHeight: number, referenceHeights: readonly numbe
 }
 
 export interface AlignOptions {
+  /** Variant-only: T1 source anchor converted into this frame's raw pixel units. */
+  readonly referenceOrigin?: { readonly x: number; readonly y: number };
   /** The character calibration (same object for every frame of every clip). */
   readonly calibration: Calibration;
   readonly guides: Guides;
@@ -125,13 +127,14 @@ export function alignFrame(frame: Straight, opts: AlignOptions): AlignedFrame | 
   const m = measureFigure(src, alpha);
   if (!m) return null;
   const vertical = opts.vertical ?? 'sole';
-  const refY = vertical === 'sole' ? m.bottom : (opts.groundY ?? m.bottom);
-  const image = placeScaled(src, scale, m.pelvisX, refY, opts.guides.centerX, opts.guides.ground, cell);
+  const refX = opts.referenceOrigin?.x ?? m.pelvisX;
+  const refY = opts.referenceOrigin?.y ?? (vertical === 'sole' ? m.bottom : (opts.groundY ?? m.bottom));
+  const image = placeScaled(src, scale, refX, refY, opts.guides.centerX, opts.guides.ground, cell);
   const metrics = measureFigure(image, alpha)!;
   const record: FrameRecord = {
     pre: { height: m.height * scale, pelvisX: m.pelvisX * scale, soleY: m.bottom * scale },
     post: { height: metrics.height, pelvisX: metrics.pelvisX, soleY: metrics.bottom },
-    dx: opts.guides.centerX - m.pelvisX * scale,
+    dx: opts.guides.centerX - refX * scale,
     dy: opts.guides.ground - refY * scale,
     ...(opts.exception ? { exception: opts.exception } : {}),
   };

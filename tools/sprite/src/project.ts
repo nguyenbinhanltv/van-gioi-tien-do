@@ -24,8 +24,14 @@ import { normalizeSheetDpi, preparationScale, type ProjectPreparation, type Shee
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
+import { auditProjectVariant, type VariantProject, type VariantReference, type VariantAudit } from './variant.js';
+import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPolicy } from './head-evidence.js';
 
 export interface ProjectClip {
+  readonly heightPolicy?: HeightPolicy;
+  /** Clip-local frame indices; coordinates in the aligned 256px output cell. */
+  readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
+  readonly variant?: VariantReference;
   /** Armature animation name. */
   readonly name: string;
   /** Raw sheet PNG, relative to the project file. */
@@ -69,6 +75,9 @@ export interface ProjectClip {
 }
 
 export interface Project {
+  /** Skull crown/chin on the resized 256px master; excludes secondary hair. */
+  readonly masterHead?: HeadLandmarks;
+  readonly variant?: VariantProject;
   readonly character: string;
   readonly direction: Direction;
   /** Quality backlog file (accepted soft findings), relative to the project file. Default `quality-backlog.json` beside it. */
@@ -87,6 +96,8 @@ export interface Project {
 }
 
 export interface ClipContract {
+  readonly heightPolicy?: HeightPolicy;
+  readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
   readonly name: string;
   readonly frames: number;
   readonly kind: 'upright' | 'free';
@@ -101,12 +112,18 @@ export interface ClipContract {
 }
 
 export interface Contract {
+  readonly variant?: VariantAudit;
   readonly format: 'vgtd-sprite-contract';
   readonly version: 1;
   readonly character: string;
   readonly direction: Direction;
   readonly stem: string;
-  readonly master: { readonly sha1: string; readonly metrics: MasterMetrics; readonly guides: Guides };
+  readonly master: {
+    readonly sha1: string;
+    readonly metrics: MasterMetrics;
+    readonly guides: Guides;
+    readonly head?: HeadLandmarks;
+  };
   /** Character-wide calibration (null when every sheet carries its own). */
   readonly calibration: Calibration | null;
   readonly palette: { readonly size: number; readonly locked: boolean };
@@ -156,6 +173,10 @@ export function validateFootSlideAlignment(
 }
 
 export function runProject(project: Project, baseDir: string): ProjectResult {
+  for (const clip of project.clips)
+    if (clip.heightPolicy !== undefined && clip.heightPolicy !== 'head-size-v1')
+      throw new Error(`unknown height policy '${clip.heightPolicy}'`);
+  const variant = auditProjectVariant(project, baseDir);
   const scale = project.preparation ? preparationScale(project.preparation, baseDir) : project.scale;
   if (project.preparation && project.scale !== undefined && project.scale !== scale)
     throw new Error('non-reproducible project: explicit scale conflicts with preparation calibration');
@@ -164,6 +185,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
+  if (project.masterHead !== undefined && headLandmarkSize(project.masterHead, master.width, master.height) === null)
+    throw new Error('invalid master skull crown/chin landmarks');
   const guides = guidesFromMaster(m);
   const palette: Color3[] = paletteFromMaster(master, project.palette);
   const lock = project.palette?.lock !== false;
@@ -252,6 +275,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
     validateFootSlideAlignment(project, s.clip, manifest?.cells);
     const calibration = sheetCalibration(s);
+    const origins = variant?.clips.find((c) => c.name === s.clip.name)?.alignmentOrigins;
     return {
       ...s,
       manifest,
@@ -263,6 +287,9 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
           guides,
           vertical: s.clip.vertical ?? 'sole',
           groundY: s.groundY,
+          ...(origins
+            ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
+            : {}),
           ...(s.clip.exceptions?.[i] ? { exception: s.clip.exceptions[i]! } : {}),
         }),
       ),
@@ -299,6 +326,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
+      ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
+      ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
       direction: project.direction,
       ...(s.clip.footSlideUnmeasuredReason !== undefined
         ? { footSlideUnmeasuredReason: s.clip.footSlideUnmeasuredReason }
@@ -312,12 +341,18 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(speed !== undefined ? { groundPxPerFrame: groundPxPerFrame(speed, s.clip.durationSec, s.clip.frames) } : {}),
     };
   });
-  const rawQa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const rawQa = runQa(qaClips, {
+    masterHeight: m.height,
+    master,
+    guides,
+    ...(project.masterHead ? { masterHead: project.masterHead } : {}),
+  });
   const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
-  const verdict = applyBacklog(rawQa.findings, project.direction, backlog);
+  const findings = [...rawQa.findings, ...(variant?.findings ?? [])];
+  const verdict = applyBacklog(findings, project.direction, backlog);
   const qa = {
     ok: verdict.ok,
-    findings: rawQa.findings,
+    findings,
     judged: verdict.judged,
     resolved: verdict.resolved,
     counts: verdict.counts,
@@ -327,10 +362,11 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const contract: Contract = {
     format: 'vgtd-sprite-contract',
     version: 1,
+    ...(variant ? { variant } : {}),
     character: project.character,
     direction: project.direction,
     stem: project.stem,
-    master: { sha1: sha1(masterBuf), metrics: m, guides },
+    master: { sha1: sha1(masterBuf), metrics: m, guides, ...(project.masterHead ? { head: project.masterHead } : {}) },
     calibration: character,
     palette: { size: palette.length, locked: lock },
     atlas: {
@@ -341,6 +377,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(pack.pages.length > 1 ? { textures: pack.pages.map((_, i) => textureStem(i)) } : {}),
     },
     clips: aligned.map((s) => ({
+      ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
+      ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
       name: s.clip.name,
       frames: s.clip.frames,
       kind: s.clip.kind ?? 'upright',

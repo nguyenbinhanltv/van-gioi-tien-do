@@ -4,6 +4,7 @@
  * into a single self-contained page (paths relative to the page).
  */
 import type { ManualArtFinding } from './backlog.js';
+import type { HeadMeasurement } from './head-evidence.js';
 
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 
@@ -26,6 +27,7 @@ export interface ClipReport {
   /** Relative path (to the report folder) of the 2x GIF, when captured. */
   readonly gif?: string;
   readonly unmeasuredFootSlide?: boolean;
+  readonly headEvidence?: readonly { readonly cell: number; readonly measurement: HeadMeasurement }[];
 }
 
 export interface DirReport {
@@ -98,7 +100,10 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               const unmeasuredNote = c.unmeasuredFootSlide
                 ? '<div class="meta">Foot slide UNMEASURED (migration pending)</div>'
                 : '';
-              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div>${unmeasuredNote}<div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div></div>`;
+              const evidence = c.headEvidence?.length
+                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>crown (${e.frame.crown.x}, ${e.frame.crown.y}), chin (${e.frame.chin.x}, ${e.frame.chin.y})<br>master crown (${e.master.crown.x}, ${e.master.crown.y}), chin (${e.master.chin.x}, ${e.master.chin.y})<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                : '';
+              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div>${unmeasuredNote}<div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div>${evidence}</div>`;
             })
             .join('');
           return `<h3>${esc(r.character)} / ${esc(d.dir)} ${chip(d.ok ? 'ok' : 'fail')} <span class="sum">atlas ${d.atlas.pages}p ${d.atlas.width}x${d.atlas.height}, ${d.atlas.regions} regions · backlog ${d.backlogEntries} (${d.resolvedEntries} metric entries resolved) · manual ${manual.length} · <a href="${esc(d.folder)}/${esc(d.stem)}_${esc(d.dir)}.sprite.json">contract</a></span></h3>${observations}<div class="grid">${cards}</div>`;

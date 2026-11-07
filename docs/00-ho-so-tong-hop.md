@@ -45,6 +45,8 @@ Oct 31, 2026 · An Nguyen
 
 ## 3. Thông số chuẩn hợp nhất
 
+> **[Cập nhật D44: Player mới dùng premium semi-chibi khoảng 4,5 đầu, mặt cố định theo Đạo Lộ; trang phục/vũ khí đổi hình qua T1–T5 theo 9 cảnh giới, còn 6 phẩm D6 chỉ tint viền/glow lúc chạy. Trang phục cosmetic và skin vũ khí bán riêng; chưa chốt giá/chỉ số. Giữ pipeline từng khung D41 và hướng D14. Chi tiết: [chuẩn phong cách](art/style-semichibi.md), [D44](DECISIONS.md). Concept là tham chiếu, chưa thay asset đang chạy.]**
+
 Đây là bộ giá trị đang có hiệu lực. Mọi thay đổi về sau nên sửa ở đây trước, rồi mới cập nhật tài liệu gốc.
 
 ### Nền tảng và lưới
@@ -62,6 +64,8 @@ Oct 31, 2026 · An Nguyen
 | Nguồn sáng        | Cố định hướng NW cho mọi asset                                                                                                                                                                                    | Asset Matrix           |
 
 ### Nhân vật, layer, atlas
+
+[Cập nhật D47: upright semi-chibi có exception/bbox ngoài band dùng bằng chứng kích thước đầu master ±3%, reason `posture`/`secondary-overhang`, không ép phẳng flight tuck/dash/lunge. Ô trong band không exception giữ cổng cũ; evidence đã khai báo luôn được kiểm. Chi tiết tọa độ và INFO review ở `art/sprite-sheet-pipeline.md`.]
 
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 

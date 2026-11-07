@@ -2,6 +2,8 @@
 
 Oct 31, 2026 · An Nguyen
 
+> **[Cập nhật D44: hướng Player mới là premium semi-chibi, khoảng 4,5 đầu, mặt cố định từng Đạo Lộ; áo và vũ khí có hình riêng T1–T5 theo nhóm cảnh giới. Sáu phẩm D6 dùng tint viền/glow runtime, không sinh sáu bộ hình; trang phục cosmetic và skin vũ khí bán riêng. D41 frame-by-frame và D14 5 hướng + lật vẫn áp dụng; chưa thay bộ semi-realistic đang chạy. Chuẩn chi tiết và giới hạn concept: [art/style-semichibi.md](art/style-semichibi.md).]**
+
 > **[Cập nhật D35: hoạt cảnh xương nhân vật dùng **DragonBones** (runtime `dragon-bones` của Cocos 3.8.8, MIT) thay Spine 4.2; mọi chỗ "Spine" bên dưới đọc là "skeleton DragonBones" khi nói về Player / Boss / Linh thú / NPC chủ chốt. Các con số (30 skeleton, 5 hướng + lật, giới hạn bone/slot/đỉnh, 30 fps key) không đổi. Chi tiết, nguồn và rủi ro: [art/dragonbones.md](art/dragonbones.md).]**
 
 ## 1. Phương án dựng: Spine 2D hay Pre-render 3D
