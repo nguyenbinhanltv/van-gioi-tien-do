@@ -19,3 +19,5 @@ supports eviction/clear. The runtime adapter must reject stale asynchronous sele
 The composer is tested with synthetic manifests and, when Cocos Creator3.8.8 is installed, the real DragonBones parser.
 This model does not extract weapons, paint hands, load Cocos textures or render aura/glow by itself. See
 `docs/art/sprite-sheet-pipeline.md` and subsequent tooling/runtime changes for those stages.
+
+Quality glow requires an FX layer: providing glowTint without fx throws an explicit error. For a mapping with fxSet null, the caller must deliberately omit glowTint; that composition is unlit and shows no quality glow. Body and weapon pixels are never used as an implicit tint fallback.

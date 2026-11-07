@@ -178,7 +178,7 @@ function eventFrames(clip: SpriteLayerClip) {
   return frames;
 }
 
-/** One armature, independent per-frame body/weapon displays, weapon z-order and exactly one event timeline. */
+/** One armature and event clock. Quality tint requires an FX layer; omit it for explicitly unlit compositions. */
 export function composeSpriteLayers(input: {
   readonly name: string;
   readonly body: SpriteLayerSet;
@@ -187,6 +187,7 @@ export function composeSpriteLayers(input: {
   readonly glowTint?: VisualTint;
 }) {
   assertVisualSetId(input.name);
+  if (input.glowTint !== undefined && !input.fx) throw new Error('quality glow tint requires an fx layer');
   if (input.body.role !== 'body' || input.weapon.role !== 'weapon' || (input.fx && input.fx.role !== 'fx'))
     throw new Error('layer roles do not match composition slots');
   const sets = input.fx ? [input.fx, input.body, input.weapon] : [input.body, input.weapon];

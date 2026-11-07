@@ -108,6 +108,12 @@ describe('D45 equipment appearance', () => {
 });
 
 describe('layered sprite composer', () => {
+  it('rejects a quality tint without an FX layer instead of silently dropping it', () => {
+    expect(() =>
+      composeSpriteLayers({ name: 'unlit', body: layer('body'), weapon: layer('weapon'), glowTint: [1, 0, 0, 1] }),
+    ).toThrow('quality glow tint requires an fx layer');
+    expect(() => composeSpriteLayers({ name: 'unlit', body: layer('body'), weapon: layer('weapon') })).not.toThrow();
+  });
   const runtimePath = join(
     dirname(process.env.COCOS_CREATOR_PATH ?? 'C:/ProgramData/cocos/editors/Creator/3.8.8/CocosCreator.exe'),
     'resources/resources/3d/engine/node_modules/@cocos/dragonbones-js/out/dragonBones.js',
