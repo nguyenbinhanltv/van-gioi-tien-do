@@ -364,3 +364,21 @@ Scale/record không hợp lệ cũng thất bại. Cổng không sửa ảnh, th
 Ca thật đã gặp: pre.height241, post.height232, scale1,dy-14 làm mất9px búi tóc nhưng cổng bbox/head vẫn có thể qua.
 Regression test giữ nguyên kích thước đầu và tái hiện mất9px secondary hair; canvasLoss chặn source project đó.
 Cổng kiểm loss do alignment, không khôi phục phần đã mất trong raw sheet hoặc inset; vẫn cần giữ và xem ảnh nguồn.
+
+## Origin nguồn được duyệt cho pose động
+
+`clip.authoredOrigins` tùy chọn dùng chỉ số ô **nội bộ clip**, kể cả sheet nhóm. Mỗi ô:
+`{ "pelvisX": 118, "reason": "Wide lunge pelvis", "evidence": "Reviewed source frame6 landmark" }`.
+Tọa độ nằm trên ô NGUỒN chuẩn hóa256px trước inset, x sang phải/y xuống. Pipeline đổi theo pitch thật rồi trừ inset;
+scale calibration giữ nguyên. pelvisX thay centroid X bằng pelvis/axis đã xem. Không có groundY thì Y sole/keep như cũ.
+`groundY` tùy chọn chỉ cho vertical keep, phải khai báo cùng một ground trên TẤT CẢ ô clip; không fit ground từng frame.
+Reason và bằng chứng landmark/ảnh nguồn đã xem bắt buộc, không được dịch tùy ý chỉ để che anatomy/foot sai.
+
+Không khai báo thì giữ hành vi cũ. Contract, backlog CLI và review giữ origin, source point áp dụng, scale,dx/dy dưới INFO.
+Các cổng head/height/foot/canvasLoss không đổi; còn mất nội dung vẫn lỗi cứng. Variant giữ origin T1, không được thay.
+Đây là annotation thủ công, không phải detector pelvis tự động; không thay bbox hay thu nhỏ body để lách gate.
+
+Với lunge có pelvis di chuyển có chủ đích: dùng `kind: "lattice-root"`, reason chính xác `"preserve authored root travel"`,
+evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvisX là X đăng ký cố định, **không phải pelvis anatomy
+đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
+Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.

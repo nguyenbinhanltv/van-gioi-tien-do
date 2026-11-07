@@ -21,13 +21,17 @@ import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
 import { runQa, type Finding, type QaClip } from './qa.js';
 import { resizeImage } from './repair.js';
 import { normalizeSheetDpi, preparationScale, type ProjectPreparation, type SheetPreparation } from './preparation.js';
+import { toPremultiplied } from './raster.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
 import { auditProjectVariant, type VariantProject, type VariantReference, type VariantAudit } from './variant.js';
 import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPolicy } from './head-evidence.js';
 
+import { authoredOriginPoint, validateAuthoredOrigins, type AuthoredOrigin } from './authored-origin.js';
+
 export interface ProjectClip {
+  readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
   readonly heightPolicy?: HeightPolicy;
   /** Clip-local frame indices; coordinates in the aligned 256px output cell. */
   readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
@@ -96,6 +100,7 @@ export interface Project {
 }
 
 export interface ClipContract {
+  readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
   readonly heightPolicy?: HeightPolicy;
   readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
   readonly name: string;
@@ -182,6 +187,7 @@ export function runProject(
   for (const clip of project.clips)
     if (clip.heightPolicy !== undefined && clip.heightPolicy !== 'head-size-v1')
       throw new Error(`unknown height policy '${clip.heightPolicy}'`);
+  for (const clip of project.clips) validateAuthoredOrigins(clip);
   const variant = auditProjectVariant(project, baseDir);
   const scale = project.preparation ? preparationScale(project.preparation, baseDir) : project.scale;
   if (project.preparation && project.scale !== undefined && project.scale !== scale)
@@ -221,6 +227,7 @@ export function runProject(
       frames,
       sheetSha1: sha1(preparedBuf),
       groundY,
+      sourceCell: { width: r0.width, height: r0.height, inset },
       preparation: prepared ? { ...prepared.record, rawSha1: sha1(buf) } : undefined,
     };
   });
@@ -287,18 +294,32 @@ export function runProject(
       manifest,
       speed,
       calibration,
-      aligned: s.frames.map((f, i): AlignedFrame | null =>
-        alignFrame(f.image, {
+      aligned: s.frames.map((f, i): AlignedFrame | null => {
+        const authored = s.clip.authoredOrigins?.[i];
+        const metrics = authored ? measureFigure(toPremultiplied(f.image)) : null;
+        const origin =
+          authored && metrics
+            ? authoredOriginPoint(
+                authored,
+                s.sourceCell.width,
+                s.sourceCell.height,
+                s.sourceCell.inset,
+                (s.clip.vertical ?? 'sole') === 'sole' ? metrics.bottom : s.groundY,
+              )
+            : undefined;
+        return alignFrame(f.image, {
           calibration,
           guides,
           vertical: s.clip.vertical ?? 'sole',
           groundY: s.groundY,
           ...(origins
             ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
-            : {}),
+            : origin
+              ? { referenceOrigin: origin }
+              : {}),
           ...(s.clip.exceptions?.[i] ? { exception: s.clip.exceptions[i]! } : {}),
-        }),
-      ),
+        });
+      }),
     };
   });
 
@@ -334,6 +355,7 @@ export function runProject(
       name: s.clip.name,
       ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
       ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
+      ...(s.clip.authoredOrigins ? { authoredOrigins: s.clip.authoredOrigins } : {}),
       direction: project.direction,
       ...(s.clip.footSlideUnmeasuredReason !== undefined
         ? { footSlideUnmeasuredReason: s.clip.footSlideUnmeasuredReason }
@@ -354,7 +376,27 @@ export function runProject(
     ...(project.masterHead ? { masterHead: project.masterHead } : {}),
   });
   const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
-  const findings = [...rawQa.findings, ...(variant?.findings ?? [])];
+  const originFindings: Finding[] = aligned.flatMap((s) =>
+    s.aligned.flatMap((f, i) => {
+      const e = s.clip.authoredOrigins?.[i];
+      if (!e || !f) return [];
+      const source = {
+        x: (guides.centerX - f.record.dx) / s.calibration.scale,
+        y: (guides.ground - f.record.dy) / s.calibration.scale,
+      };
+      return [
+        {
+          gate: 'authoredOrigin' as const,
+          severity: 'info' as const,
+          clip: s.clip.name,
+          frame: i,
+          originEvidence: { ...e, source, scale: s.calibration.scale, dx: f.record.dx, dy: f.record.dy },
+          message: `reviewed authored origin (${e.kind ?? 'anatomical-pelvis'}): ${e.reason}; ${e.evidence}; source (${source.x}, ${source.y}), scale ${s.calibration.scale}, dx ${f.record.dx}, dy ${f.record.dy}`,
+        },
+      ];
+    }),
+  );
+  const findings = [...rawQa.findings, ...originFindings, ...(variant?.findings ?? [])];
   const verdict = applyBacklog(findings, project.direction, backlog);
   const qa = {
     ok: verdict.ok,
@@ -385,6 +427,7 @@ export function runProject(
     clips: aligned.map((s) => ({
       ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
       ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
+      ...(s.clip.authoredOrigins ? { authoredOrigins: s.clip.authoredOrigins } : {}),
       name: s.clip.name,
       frames: s.clip.frames,
       kind: s.clip.kind ?? 'upright',

@@ -74,6 +74,7 @@ function fixture() {
 
 describe('edit-from-master variants', () => {
   it.each([
+    { authoredOrigins: { 0: { pelvisX: 128, reason: 'new axis', evidence: 'reviewed' } } },
     { vertical: 'keep' as const },
     { kind: 'free' as const },
     { groundSpeedPxS: 200 },
@@ -112,6 +113,26 @@ describe('edit-from-master variants', () => {
     expect(edited.dx).toBe(original.dx);
     expect(edited.dy).toBe(original.dy);
     expect(b.contract.qa.findings.filter((f) => f.gate === 'poseLock' || f.gate === 'faceLock')).toEqual([]);
+  });
+
+  it('uses the same reviewed authored master origin for variants', () => {
+    const { dir, project, master } = fixture();
+    const authoredOrigins = {
+      0: { pelvisX: 120, reason: 'Reviewed lunge pelvis', evidence: 'T1 normalized source axis120' },
+    };
+    const original = { ...master, clips: master.clips.map((c) => ({ ...c, authoredOrigins })) };
+    const bytes = Buffer.from(JSON.stringify(original));
+    writeFileSync(join(dir, 't1.json'), bytes);
+    const edited: Project = {
+      ...project,
+      variant: { ...project.variant!, masterProjectSha256: sha(bytes) },
+      clips: project.clips.map((c) => ({ ...c, authoredOrigins })),
+    };
+    const a = runProject(original, dir),
+      b = runProject(edited, dir);
+    expect(b.contract.clips[0]!.records[0]!.dx).toBe(a.contract.clips[0]!.records[0]!.dx);
+    expect(b.contract.clips[0]!.records[0]!.dy).toBe(a.contract.clips[0]!.records[0]!.dy);
+    expect(b.contract.qa.findings.find((f) => f.gate === 'authoredOrigin')?.originEvidence?.pelvisX).toBe(120);
   });
 
   it('rejects altered slicing, master image, template cells and missing clips', () => {

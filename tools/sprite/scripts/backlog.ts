@@ -61,7 +61,11 @@ for (const e of report.manual)
     `  MANUAL [${e.kind}] ${e.clip} ${e.dir} cells ${e.cells.join(',') || 'all'} [${e.severity}/${e.status ?? 'open'}] ${e.reviewer}: ${e.note}`,
   );
 for (const j of report.judged.filter(
-  (x) => x.verdict !== 'info' || x.finding.measurement === 'unmeasured' || x.finding.headEvidence,
+  (x) =>
+    x.verdict !== 'info' ||
+    x.finding.measurement === 'unmeasured' ||
+    x.finding.headEvidence ||
+    x.finding.originEvidence,
 ))
   console.log(
     `  ${j.verdict.toUpperCase()} [${j.finding.gate}] ${j.finding.clip}${j.finding.frame === undefined ? '' : ` #${j.finding.frame}`}: ${j.finding.message}`,
