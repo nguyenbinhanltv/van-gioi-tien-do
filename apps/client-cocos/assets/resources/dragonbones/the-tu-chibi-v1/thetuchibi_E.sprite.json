@@ -20,6 +20,16 @@
       "head": 6,
       "pelvis": 119,
       "centerX": 127.69085805934242
+    },
+    "head": {
+      "crown": {
+        "x": 127,
+        "y": 19
+      },
+      "chin": {
+        "x": 146,
+        "y": 66
+      }
     }
   },
   "calibration": {
@@ -44,10 +54,11 @@
   },
   "clips": [
     {
+      "heightPolicy": "head-size-v1",
       "name": "idle",
       "frames": 16,
       "kind": "upright",
-      "sheetSha1": "338acceead6004880e1f3c4a1ef5b7faf10bbe6b",
+      "sheetSha1": "0dfa737f9b64344a9bfc930146531ae74f468848",
       "preparation": {
         "raw": [
           1254,
@@ -61,7 +72,7 @@
         "cropBottom": 1254,
         "dpiScaleX": 0.8165869218500797,
         "dpiScaleY": 0.8165869218500797,
-        "rawSha1": "1759873fa7b96f8067b8904a7db1e9b28dc1a128"
+        "rawSha1": "18559817d88bad2fd7e46bf131cdbaffa11b4761"
       },
       "calibration": {
         "scale": 1,
@@ -72,226 +83,226 @@
       "records": [
         {
           "pre": {
-            "height": 235,
-            "pelvisX": 137.89070090215128,
+            "height": 229,
+            "pelvisX": 138.56236481614997,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.014000700035,
+            "height": 229,
+            "pelvisX": 127.60411403825334,
             "soleY": 232
           },
-          "dx": -10.199842842808863,
+          "dx": -10.871506756807548,
           "dy": -13
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 138.33162041795134,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 127.77054914305701,
-            "soleY": 232
-          },
-          "dx": -10.640762358608924,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 236,
-            "pelvisX": 138.92727272727274,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.12224168126096,
-            "soleY": 232
-          },
-          "dx": -11.236414667930319,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 237,
-            "pelvisX": 138.95470262793916,
+            "height": 229,
+            "pelvisX": 138.74791439970983,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.28068941259232,
+            "height": 229,
+            "pelvisX": 127.71008708272859,
             "soleY": 232
           },
-          "dx": -11.263844568596738,
+          "dx": -11.05705634036741,
           "dy": -12
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 140.13944766450734,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.28129346314324,
-            "soleY": 232
-          },
-          "dx": -12.448589605164926,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 238,
-            "pelvisX": 141.04737903225808,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.2048275862069,
-            "soleY": 232
-          },
-          "dx": -13.35652097291566,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 239,
-            "pelvisX": 141.98445253059873,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.30226960110042,
-            "soleY": 232
-          },
-          "dx": -14.293594471256313,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 240,
-            "pelvisX": 142.64660648612505,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.11841204654345,
-            "soleY": 232
-          },
-          "dx": -14.955748426782634,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 238,
-            "pelvisX": 140.87521136286776,
+            "height": 229,
+            "pelvisX": 138.94702228717574,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.24515905947442,
+            "height": 229,
+            "pelvisX": 127.82961608775138,
             "soleY": 232
           },
-          "dx": -13.184353303525342,
+          "dx": -11.256164227833324,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 139.78991015894954,
+            "height": 230,
+            "pelvisX": 139.00107604017217,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.033934252386,
+            "height": 230,
+            "pelvisX": 127.92346388789076,
             "soleY": 232
           },
-          "dx": -12.099052099607121,
+          "dx": -11.310217980829748,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 139.15932553337922,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 128.24209416725228,
-            "soleY": 232
-          },
-          "dx": -11.4684674740368,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 235,
-            "pelvisX": 138.66678370786516,
+            "height": 230,
+            "pelvisX": 140.51479915433404,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.88535031847134,
+            "height": 230,
+            "pelvisX": 127.54651162790698,
             "soleY": 232
           },
-          "dx": -10.975925648522747,
+          "dx": -12.823941094991625,
           "dy": -12
         },
         {
           "pre": {
-            "height": 235,
-            "pelvisX": 137.81578947368422,
-            "soleY": 245
+            "height": 231,
+            "pelvisX": 141.31168384879726,
+            "soleY": 244
+          },
+          "post": {
+            "height": 231,
+            "pelvisX": 127.43805918788713,
+            "soleY": 232
+          },
+          "dx": -13.620825789454841,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 231,
+            "pelvisX": 142.39827288428324,
+            "soleY": 244
+          },
+          "post": {
+            "height": 231,
+            "pelvisX": 127.51465012064806,
+            "soleY": 232
+          },
+          "dx": -14.707414824940827,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 232,
+            "pelvisX": 142.73128061581525,
+            "soleY": 244
           },
           "post": {
             "height": 232,
-            "pelvisX": 127.95712260807937,
+            "pelvisX": 127.71498599439776,
             "soleY": 232
           },
-          "dx": -10.124931414341802,
+          "dx": -15.040422556472834,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 231,
+            "pelvisX": 141.43917525773196,
+            "soleY": 244
+          },
+          "post": {
+            "height": 231,
+            "pelvisX": 127.54385964912281,
+            "soleY": 232
+          },
+          "dx": -13.748317198389543,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 230,
+            "pelvisX": 140.16820440028388,
+            "soleY": 244
+          },
+          "post": {
+            "height": 230,
+            "pelvisX": 127.94024045261669,
+            "soleY": 232
+          },
+          "dx": -12.477346340941466,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 230,
+            "pelvisX": 139.60312389066382,
+            "soleY": 245
+          },
+          "post": {
+            "height": 230,
+            "pelvisX": 127.6104403409091,
+            "soleY": 232
+          },
+          "dx": -11.912265831321406,
           "dy": -13
         },
         {
           "pre": {
-            "height": 235,
-            "pelvisX": 137.98558368495077,
+            "height": 229,
+            "pelvisX": 138.98549673676578,
+            "soleY": 244
+          },
+          "post": {
+            "height": 229,
+            "pelvisX": 127.88542422044961,
+            "soleY": 232
+          },
+          "dx": -11.294638677423364,
+          "dy": -12
+        },
+        {
+          "pre": {
+            "height": 229,
+            "pelvisX": 138.4419191919192,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.1124911284599,
+            "height": 229,
+            "pelvisX": 127.56146059291396,
             "soleY": 232
           },
-          "dx": -10.29472562560835,
+          "dx": -10.75106113257678,
           "dy": -13
         },
         {
           "pre": {
-            "height": 234,
-            "pelvisX": 138.03417015341702,
+            "height": 229,
+            "pelvisX": 138.63791228706052,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.04366499642092,
+            "height": 229,
+            "pelvisX": 127.65942028985508,
             "soleY": 232
           },
-          "dx": -10.343312094074605,
+          "dx": -10.947054227718098,
           "dy": -13
         },
         {
           "pre": {
-            "height": 234,
-            "pelvisX": 138.1096751659099,
+            "height": 229,
+            "pelvisX": 138.63182984965164,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.03480444922857,
+            "height": 229,
+            "pelvisX": 127.65872434017595,
             "soleY": 232
           },
-          "dx": -10.418817106567474,
+          "dx": -10.94097179030922,
+          "dy": -13
+        },
+        {
+          "pre": {
+            "height": 229,
+            "pelvisX": 138.47128129602356,
+            "soleY": 245
+          },
+          "post": {
+            "height": 229,
+            "pelvisX": 127.52482530342037,
+            "soleY": 232
+          },
+          "dx": -10.780423236681145,
           "dy": -13
         }
       ],
@@ -602,6 +613,7 @@
       ]
     },
     {
+      "heightPolicy": "head-size-v1",
       "name": "walk",
       "frames": 16,
       "kind": "upright",
@@ -873,10 +885,123 @@
       ]
     },
     {
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 141,
+            "y": 19
+          },
+          "chin": {
+            "x": 163,
+            "y": 65
+          },
+          "note": "Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "1": {
+          "crown": {
+            "x": 141,
+            "y": 19
+          },
+          "chin": {
+            "x": 162,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "2": {
+          "crown": {
+            "x": 133,
+            "y": 19
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "3": {
+          "crown": {
+            "x": 132,
+            "y": 19
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "5": {
+          "crown": {
+            "x": 137,
+            "y": 31
+          },
+          "chin": {
+            "x": 158,
+            "y": 76
+          },
+          "note": "Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "6": {
+          "crown": {
+            "x": 142,
+            "y": 40
+          },
+          "chin": {
+            "x": 164,
+            "y": 85
+          },
+          "note": "Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "7": {
+          "crown": {
+            "x": 140,
+            "y": 26
+          },
+          "chin": {
+            "x": 161,
+            "y": 71
+          },
+          "note": "Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "12": {
+          "crown": {
+            "x": 132,
+            "y": 18
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "13": {
+          "crown": {
+            "x": 132,
+            "y": 25
+          },
+          "chin": {
+            "x": 154,
+            "y": 70
+          },
+          "note": "Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "14": {
+          "crown": {
+            "x": 130,
+            "y": 31
+          },
+          "chin": {
+            "x": 153,
+            "y": 76
+          },
+          "note": "Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        }
+      },
       "name": "run",
       "frames": 16,
       "kind": "upright",
-      "sheetSha1": "b6415336ef918b3169325e16bb4d682b4a3919b9",
+      "sheetSha1": "38de7d9cf69d9edc8aed9d11beebaea22165c5d2",
       "preparation": {
         "raw": [
           1254,
@@ -890,7 +1015,7 @@
         "cropBottom": 1254,
         "dpiScaleX": 0.8165869218500797,
         "dpiScaleY": 0.8165869218500797,
-        "rawSha1": "c3fe62b6cb3b4fb9132e2a66e36cc13b6c1f3e0b"
+        "rawSha1": "c195721510e6f38c3e62db8be046e7f72d3110d7"
       },
       "calibration": {
         "scale": 1,
@@ -901,227 +1026,236 @@
       "records": [
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 129.63288377627924,
+            "height": 218,
+            "pelvisX": 128.75237717908084,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.1889638745534,
+            "height": 218,
+            "pelvisX": 127.75237717908082,
             "soleY": 232
           },
-          "dx": -1.9420257169368256,
-          "dy": -14
+          "dx": -1.0615191197384206,
+          "dy": -14,
+          "exception": "secondary-overhang"
         },
         {
           "pre": {
-            "height": 239,
-            "pelvisX": 127.65192527640107,
+            "height": 218,
+            "pelvisX": 127.46099706744869,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.46058732612056,
+            "height": 218,
+            "pelvisX": 127.50870330530022,
             "soleY": 232
           },
-          "dx": 0.03893278294134461,
-          "dy": -14
+          "dx": 0.22986099189373022,
+          "dy": -14,
+          "exception": "secondary-overhang"
         },
         {
           "pre": {
-            "height": 240,
-            "pelvisX": 134.91249354672175,
+            "height": 218,
+            "pelvisX": 134.9224620303757,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.9797507788162,
+            "height": 218,
+            "pelvisX": 127.81949265687584,
             "soleY": 232
           },
-          "dx": -7.221635487379331,
-          "dy": -14
+          "dx": -7.23160397103328,
+          "dy": -14,
+          "exception": "secondary-overhang"
         },
         {
           "pre": {
-            "height": 241,
-            "pelvisX": 134.48888293597642,
+            "height": 218,
+            "pelvisX": 135.3914590747331,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.83888437584619,
+            "height": 218,
+            "pelvisX": 127.53619229718656,
             "soleY": 232
           },
-          "dx": -6.798024876634003,
-          "dy": -14
+          "dx": -7.700601015390674,
+          "dy": -14,
+          "exception": "secondary-overhang"
         },
         {
           "pre": {
-            "height": 240,
-            "pelvisX": 134.53266913809082,
+            "height": 224,
+            "pelvisX": 135.16678596993557,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.84465569209367,
+            "height": 224,
+            "pelvisX": 127.94699140401146,
             "soleY": 232
           },
-          "dx": -6.841811078748407,
+          "dx": -7.475927910593157,
           "dy": -13
         },
         {
           "pre": {
-            "height": 223,
-            "pelvisX": 130.68026163909195,
+            "height": 207,
+            "pelvisX": 130.42886220232037,
             "soleY": 228
           },
           "post": {
-            "height": 223,
-            "pelvisX": 127.68026163909195,
+            "height": 207,
+            "pelvisX": 127.52863256572243,
             "soleY": 232
           },
-          "dx": -2.989403579749535,
-          "dy": 4
+          "dx": -2.7380041429779567,
+          "dy": 4,
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 216,
-            "pelvisX": 127.92514686374834,
-            "soleY": 220
+            "height": 198,
+            "pelvisX": 126.15105315947844,
+            "soleY": 219
           },
           "post": {
-            "height": 216,
-            "pelvisX": 127.84000759157335,
+            "height": 198,
+            "pelvisX": 128.00080128205127,
             "soleY": 232
           },
-          "dx": -0.23428880440592081,
-          "dy": 12,
-          "exception": "airborne: both legs tucked in visible flight pose; original anatomical scale retained"
+          "dx": 1.5398048998639808,
+          "dy": 13,
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 229,
-            "pelvisX": 127.31507405153175,
-            "soleY": 233
+            "height": 211,
+            "pelvisX": 127.1576019777503,
+            "soleY": 232
           },
           "post": {
-            "height": 229,
-            "pelvisX": 127.5004060089322,
+            "height": 211,
+            "pelvisX": 127.81068261497217,
             "soleY": 232
           },
-          "dx": 0.37578400781066534,
-          "dy": -1
+          "dx": 0.5332560815921141,
+          "dy": 0,
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 239,
-            "pelvisX": 129.5313679245283,
+            "height": 221,
+            "pelvisX": 128.2784926470588,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.15873393622084,
+            "height": 221,
+            "pelvisX": 127.45945325063175,
             "soleY": 232
           },
-          "dx": -1.8405098651858793,
+          "dx": -0.5876345877163942,
           "dy": -12
         },
         {
           "pre": {
-            "height": 239,
-            "pelvisX": 126.28086486486487,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 126.92229804094211,
-            "soleY": 232
-          },
-          "dx": 1.4099931944775506,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 238,
-            "pelvisX": 126.54977678571429,
+            "height": 222,
+            "pelvisX": 125.91788526434196,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.99708585518943,
+            "height": 222,
+            "pelvisX": 127.86164229471316,
             "soleY": 232
           },
-          "dx": 1.1410812736281315,
+          "dx": 1.772972795000456,
           "dy": -14
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 134.59066288367293,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 127.23323841573907,
-            "soleY": 232
-          },
-          "dx": -6.899804824330516,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 238,
-            "pelvisX": 137.55357142857142,
-            "soleY": 245
-          },
-          "post": {
-            "height": 232,
-            "pelvisX": 127.72016149381781,
-            "soleY": 232
-          },
-          "dx": -9.862713369228999,
-          "dy": -13
-        },
-        {
-          "pre": {
-            "height": 230,
-            "pelvisX": 135.36469072164948,
-            "soleY": 237
-          },
-          "post": {
-            "height": 230,
-            "pelvisX": 127.49381761978361,
-            "soleY": 232
-          },
-          "dx": -7.673832662307063,
-          "dy": -5
-        },
-        {
-          "pre": {
-            "height": 227,
-            "pelvisX": 138.73488615545668,
-            "soleY": 232
-          },
-          "post": {
-            "height": 226,
-            "pelvisX": 127.69003115264798,
-            "soleY": 232
-          },
-          "dx": -11.04402809611426,
-          "dy": 0
-        },
-        {
-          "pre": {
-            "height": 239,
-            "pelvisX": 133.8098111227702,
+            "height": 221,
+            "pelvisX": 125.9694293478261,
             "soleY": 246
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.59468085106383,
+            "height": 221,
+            "pelvisX": 127.92441728897941,
             "soleY": 232
           },
-          "dx": -6.118953063427796,
+          "dx": 1.7214287115163245,
+          "dy": -14
+        },
+        {
+          "pre": {
+            "height": 220,
+            "pelvisX": 133.42006758513128,
+            "soleY": 245
+          },
+          "post": {
+            "height": 220,
+            "pelvisX": 127.52459016393442,
+            "soleY": 232
+          },
+          "dx": -5.7292095257888604,
+          "dy": -13
+        },
+        {
+          "pre": {
+            "height": 219,
+            "pelvisX": 137.39154929577464,
+            "soleY": 245
+          },
+          "post": {
+            "height": 219,
+            "pelvisX": 127.48836019442312,
+            "soleY": 232
+          },
+          "dx": -9.70069123643222,
+          "dy": -13,
+          "exception": "posture"
+        },
+        {
+          "pre": {
+            "height": 212,
+            "pelvisX": 134.91839762611275,
+            "soleY": 238
+          },
+          "post": {
+            "height": 211,
+            "pelvisX": 128.0022533800701,
+            "soleY": 231
+          },
+          "dx": -7.227539566770332,
+          "dy": -6,
+          "exception": "posture"
+        },
+        {
+          "pre": {
+            "height": 207,
+            "pelvisX": 138.397021706209,
+            "soleY": 232
+          },
+          "post": {
+            "height": 207,
+            "pelvisX": 127.48295884877557,
+            "soleY": 232
+          },
+          "dx": -10.706163646866571,
+          "dy": 0,
+          "exception": "posture"
+        },
+        {
+          "pre": {
+            "height": 220,
+            "pelvisX": 132.95153601694915,
+            "soleY": 246
+          },
+          "post": {
+            "height": 220,
+            "pelvisX": 127.92326012172532,
+            "soleY": 232
+          },
+          "dx": -5.260677957606731,
           "dy": -14
         }
       ],
@@ -1145,10 +1279,90 @@
       ]
     },
     {
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 150,
+            "y": 44
+          },
+          "chin": {
+            "x": 171,
+            "y": 89
+          },
+          "note": "Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "2": {
+          "crown": {
+            "x": 153,
+            "y": 58
+          },
+          "chin": {
+            "x": 176,
+            "y": 102
+          },
+          "note": "Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "3": {
+          "crown": {
+            "x": 150,
+            "y": 65
+          },
+          "chin": {
+            "x": 171,
+            "y": 110
+          },
+          "note": "Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "4": {
+          "crown": {
+            "x": 153,
+            "y": 86
+          },
+          "chin": {
+            "x": 175,
+            "y": 131
+          },
+          "note": "Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "5": {
+          "crown": {
+            "x": 157,
+            "y": 86
+          },
+          "chin": {
+            "x": 180,
+            "y": 131
+          },
+          "note": "Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "6": {
+          "crown": {
+            "x": 153,
+            "y": 66
+          },
+          "chin": {
+            "x": 175,
+            "y": 111
+          },
+          "note": "Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        },
+        "7": {
+          "crown": {
+            "x": 142,
+            "y": 38
+          },
+          "chin": {
+            "x": 165,
+            "y": 84
+          },
+          "note": "Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+        }
+      },
       "name": "dash",
       "frames": 10,
-      "kind": "free",
-      "sheetSha1": "628a940d12344c468c952175872eb508d06ecca2",
+      "kind": "upright",
+      "sheetSha1": "175dd14f0ecfc1cfdbb7d3d33370205bfcb9b532",
       "sheetSelection": {
         "rows": 4,
         "cells": [
@@ -1177,7 +1391,7 @@
         "cropBottom": 1254,
         "dpiScaleX": 0.8165869218500797,
         "dpiScaleY": 0.8165869218500797,
-        "rawSha1": "2a4acd89dcd50b986c43fe21e220a8f279c1fccf"
+        "rawSha1": "16c8f459ab863df32674eea476f947b942e46764"
       },
       "calibration": {
         "scale": 1,
@@ -1188,149 +1402,149 @@
       "records": [
         {
           "pre": {
-            "height": 230,
-            "pelvisX": 138.50926612305412,
+            "height": 223,
+            "pelvisX": 139.46057767369243,
             "soleY": 239
           },
           "post": {
-            "height": 230,
-            "pelvisX": 127.56591162272558,
+            "height": 223,
+            "pelvisX": 127.5456674473068,
             "soleY": 232
           },
-          "dx": -10.8184080637117,
+          "dx": -11.76971961435001,
           "dy": -7
         },
         {
           "pre": {
-            "height": 211,
-            "pelvisX": 125.67910685805423,
+            "height": 205,
+            "pelvisX": 125.29408020369192,
             "soleY": 239
           },
           "post": {
-            "height": 211,
-            "pelvisX": 127.67910685805423,
+            "height": 205,
+            "pelvisX": 127.4462126034373,
             "soleY": 232
           },
-          "dx": 2.0117512012881917,
+          "dx": 2.396777855650498,
           "dy": -7,
-          "exception": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained"
-        },
-        {
-          "pre": {
-            "height": 198,
-            "pelvisX": 130.92131147540982,
-            "soleY": 236
-          },
-          "post": {
-            "height": 198,
-            "pelvisX": 127.83020554066131,
-            "soleY": 232
-          },
-          "dx": -3.230453416067405,
-          "dy": -4,
-          "exception": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained"
+          "exception": "posture"
         },
         {
           "pre": {
             "height": 190,
-            "pelvisX": 141.87817775066097,
+            "pelvisX": 129.58160504959423,
+            "soleY": 237
+          },
+          "post": {
+            "height": 190,
+            "pelvisX": 127.61894736842105,
+            "soleY": 232
+          },
+          "dx": -1.890746990251813,
+          "dy": -5,
+          "exception": "posture"
+        },
+        {
+          "pre": {
+            "height": 182,
+            "pelvisX": 140.27007924609123,
             "soleY": 235
           },
           "post": {
-            "height": 190,
-            "pelvisX": 127.82147214314762,
+            "height": 182,
+            "pelvisX": 127.54195205479452,
             "soleY": 232
           },
-          "dx": -14.18731969131855,
+          "dx": -12.57922118674881,
           "dy": -3,
-          "exception": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained"
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 171,
-            "pelvisX": 146.85606489341635,
+            "height": 164,
+            "pelvisX": 144.71591388771634,
             "soleY": 219
           },
           "post": {
-            "height": 171,
-            "pelvisX": 127.81470311027333,
+            "height": 164,
+            "pelvisX": 127.70783196115686,
             "soleY": 232
           },
-          "dx": -19.165206834073928,
+          "dx": -17.025055828373922,
           "dy": 13,
-          "exception": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained"
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 174,
-            "pelvisX": 149.25193798449612,
+            "height": 164,
+            "pelvisX": 146.86213866990096,
             "soleY": 228
           },
           "post": {
-            "height": 174,
-            "pelvisX": 127.40168984333744,
+            "height": 164,
+            "pelvisX": 127.76764408493428,
             "soleY": 232
           },
-          "dx": -21.561079925153706,
+          "dx": -19.17128061055854,
           "dy": 4,
-          "exception": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained"
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 192,
-            "pelvisX": 138.84864753252117,
+            "height": 185,
+            "pelvisX": 137.63354444201792,
             "soleY": 239
           },
           "post": {
-            "height": 192,
-            "pelvisX": 127.74375387156721,
+            "height": 185,
+            "pelvisX": 127.67321974661424,
             "soleY": 232
           },
-          "dx": -11.157789473178752,
+          "dx": -9.942686382675504,
           "dy": -7,
-          "exception": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained"
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 216,
-            "pelvisX": 126.46183310533516,
-            "soleY": 239
+            "height": 210,
+            "pelvisX": 126.68382352941177,
+            "soleY": 240
           },
           "post": {
-            "height": 215,
-            "pelvisX": 127.48902141501762,
+            "height": 210,
+            "pelvisX": 127.68382352941177,
             "soleY": 232
           },
-          "dx": 1.229024954007258,
-          "dy": -7,
-          "exception": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained"
+          "dx": 1.0070345299306496,
+          "dy": -8,
+          "exception": "posture"
         },
         {
           "pre": {
-            "height": 228,
-            "pelvisX": 133.05489923558025,
+            "height": 220,
+            "pelvisX": 133.98754122389153,
             "soleY": 239
           },
           "post": {
-            "height": 228,
-            "pelvisX": 127.92166377816291,
+            "height": 220,
+            "pelvisX": 127.84970674486803,
             "soleY": 232
           },
-          "dx": -5.3640411762378335,
+          "dx": -6.296683164549108,
           "dy": -7
         },
         {
           "pre": {
-            "height": 229,
-            "pelvisX": 137.35390946502056,
+            "height": 221,
+            "pelvisX": 138.12091254752852,
             "soleY": 239
           },
           "post": {
-            "height": 229,
-            "pelvisX": 127.46719160104986,
+            "height": 221,
+            "pelvisX": 127.94750855838721,
             "soleY": 232
           },
-          "dx": -9.663051405678146,
+          "dx": -10.430054488186101,
           "dy": -7
         }
       ],
@@ -1815,7 +2029,7 @@
       "name": "attack_2",
       "frames": 14,
       "kind": "free",
-      "sheetSha1": "d4e2f5689994cb05c304f26e34f50b8311f7ad9f",
+      "sheetSha1": "801954c20a42885e7fc403bf4c05e8fed5a06576",
       "preparation": {
         "raw": [
           1254,
@@ -1829,7 +2043,7 @@
         "cropBottom": 1254,
         "dpiScaleX": 0.8165869218500797,
         "dpiScaleY": 0.8165869218500797,
-        "rawSha1": "d17b4c8159657c7be4762c178805af17e601f475"
+        "rawSha1": "a634f8d1adfc4c6c39b13d96f456c2c018c1ab5f"
       },
       "calibration": {
         "scale": 1,
@@ -1840,198 +2054,198 @@
       "records": [
         {
           "pre": {
-            "height": 241,
-            "pelvisX": 133.4459282534695,
+            "height": 219,
+            "pelvisX": 131.38277511961724,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.84292160180485,
+            "height": 219,
+            "pelvisX": 127.48880358285349,
             "soleY": 232
           },
-          "dx": -5.755070194127086,
+          "dx": -3.691917060274818,
           "dy": -13
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 126.74225732695905,
+            "height": 218,
+            "pelvisX": 123.39974779319041,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.95535714285714,
+            "height": 218,
+            "pelvisX": 127.5055443548387,
             "soleY": 232
           },
-          "dx": 0.948600732383369,
+          "dx": 4.291110266152003,
           "dy": -13
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 121.03112912138515,
+            "height": 217,
+            "pelvisX": 119.12114438980778,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.98986228003061,
+            "height": 217,
+            "pelvisX": 127.91768904751282,
             "soleY": 232
           },
-          "dx": 6.659728937957269,
+          "dx": 8.569713669534636,
           "dy": -13
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 117.99308142629059,
+            "height": 217,
+            "pelvisX": 116.5926813330429,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.03653136531365,
+            "height": 217,
+            "pelvisX": 127.61909941266043,
             "soleY": 232
           },
-          "dx": 9.69777663305183,
+          "dx": 11.098176726299513,
           "dy": -13
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 121.28654068646355,
+            "height": 220,
+            "pelvisX": 118.91858085057994,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.63507298540291,
+            "height": 220,
+            "pelvisX": 127.82612653618571,
             "soleY": 232
           },
-          "dx": 6.4043173728788645,
+          "dx": 8.772277208762475,
           "dy": -13
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 133.20940484937546,
+            "height": 219,
+            "pelvisX": 131.29114626699973,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 126.95705209656926,
+            "height": 219,
+            "pelvisX": 127.52204047685056,
             "soleY": 232
           },
-          "dx": -5.518546790033042,
+          "dx": -3.6002882076573144,
           "dy": -13
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 142.85584988962472,
+            "height": 219,
+            "pelvisX": 139.06815270304892,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.48371669323616,
+            "height": 219,
+            "pelvisX": 127.85527663934427,
             "soleY": 232
           },
-          "dx": -15.164991830282304,
+          "dx": -11.377294643706506,
           "dy": -13
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 143.40914060791602,
+            "height": 219,
+            "pelvisX": 139.34789311408016,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.28755364806867,
+            "height": 219,
+            "pelvisX": 127.52514109799897,
             "soleY": 232
           },
-          "dx": -15.718282548573598,
+          "dx": -11.657035054737747,
           "dy": -13
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 145.09315673289183,
+            "height": 219,
+            "pelvisX": 140.2563138097797,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.32753092075126,
+            "height": 219,
+            "pelvisX": 127.36810970691046,
             "soleY": 232
           },
-          "dx": -17.40229867354941,
+          "dx": -12.56545575043728,
           "dy": -13
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 142.48777648428404,
+            "height": 219,
+            "pelvisX": 139.8894778690697,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.10666347075743,
+            "height": 219,
+            "pelvisX": 127.81629944252721,
             "soleY": 232
           },
-          "dx": -14.796918424941623,
+          "dx": -12.19861980972729,
           "dy": -13
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 138.7876900074757,
+            "height": 219,
+            "pelvisX": 136.04885714285714,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.07050285121825,
+            "height": 219,
+            "pelvisX": 127.85930365296804,
             "soleY": 232
           },
-          "dx": -11.096831948133286,
+          "dx": -8.357999083514727,
           "dy": -13
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 135.59765338548033,
+            "height": 219,
+            "pelvisX": 133.68089490727112,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.21951844262296,
+            "height": 219,
+            "pelvisX": 127.68089490727112,
             "soleY": 232
           },
-          "dx": -7.90679532613791,
+          "dx": -5.990036847928707,
           "dy": -13
         },
         {
           "pre": {
-            "height": 238,
-            "pelvisX": 134.10260784791615,
+            "height": 219,
+            "pelvisX": 132.42454492072812,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.57967313585291,
+            "height": 219,
+            "pelvisX": 127.52671755725191,
             "soleY": 232
           },
-          "dx": -6.411749788573729,
+          "dx": -4.733686861385706,
           "dy": -13
         },
         {
           "pre": {
-            "height": 239,
-            "pelvisX": 134.58145727426773,
+            "height": 219,
+            "pelvisX": 133.41765053128688,
             "soleY": 245
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.18614270941055,
+            "height": 219,
+            "pelvisX": 127.49793510324484,
             "soleY": 232
           },
-          "dx": -6.890599214925317,
+          "dx": -5.726792471944464,
           "dy": -13
         }
       ],
@@ -2572,7 +2786,7 @@
       "name": "channel",
       "frames": 12,
       "kind": "free",
-      "sheetSha1": "aaea1ec425fc0bb42ccdfdbc7cdd7195ba17197b",
+      "sheetSha1": "ac3fd2c1a64b41568df0395fd2cfbb1b465a541c",
       "preparation": {
         "raw": [
           1448,
@@ -2586,7 +2800,7 @@
         "cropBottom": 1086,
         "dpiScaleX": 0.7071823204419889,
         "dpiScaleY": 0.7071823204419889,
-        "rawSha1": "72358d1553eb16946637e191f461319b12fa571d"
+        "rawSha1": "e926470cf5f8cc1120ae9ff24a62214d0284fc71"
       },
       "calibration": {
         "scale": 1,
@@ -2597,170 +2811,170 @@
       "records": [
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 137.30850422195417,
+            "height": 228,
+            "pelvisX": 138.05237062286955,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.75524691358025,
+            "height": 228,
+            "pelvisX": 127.95196777192439,
             "soleY": 232
           },
-          "dx": -9.617646162611749,
+          "dx": -10.361512563527128,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 138.5723058028861,
+            "height": 228,
+            "pelvisX": 139.19246597024375,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.8961937716263,
+            "height": 228,
+            "pelvisX": 127.37765115542894,
             "soleY": 232
           },
-          "dx": -10.881447743543674,
+          "dx": -11.501607910901328,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 139.90840176879342,
+            "height": 228,
+            "pelvisX": 139.99699398797594,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.86230693394677,
+            "height": 228,
+            "pelvisX": 127.8908969210174,
             "soleY": 232
           },
-          "dx": -12.217543709451007,
+          "dx": -12.306135928633523,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 140.57097084267863,
+            "height": 229,
+            "pelvisX": 140.45074834667594,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.54861343133979,
+            "height": 229,
+            "pelvisX": 127.5316411682893,
             "soleY": 232
           },
-          "dx": -12.880112783336216,
+          "dx": -12.75989028733352,
           "dy": -12
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 140.86977491961414,
+            "height": 229,
+            "pelvisX": 140.75582608695652,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.76809651474531,
+            "height": 229,
+            "pelvisX": 127.74756606397774,
             "soleY": 232
           },
-          "dx": -13.178916860271727,
+          "dx": -13.0649680276141,
           "dy": -12
         },
         {
           "pre": {
-            "height": 237,
-            "pelvisX": 140.44289340101523,
+            "height": 229,
+            "pelvisX": 140.32214994864773,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.5385633896061,
+            "height": 229,
+            "pelvisX": 127.43106397536778,
             "soleY": 232
           },
-          "dx": -12.752035341672808,
+          "dx": -12.631291889305317,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 139.3441717791411,
+            "height": 229,
+            "pelvisX": 139.42379058979458,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.51162790697674,
+            "height": 229,
+            "pelvisX": 127.5,
             "soleY": 232
           },
-          "dx": -11.653313719798689,
+          "dx": -11.73293253045216,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 138.43422263109477,
+            "height": 229,
+            "pelvisX": 139.10893316195373,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.81952291274325,
+            "height": 228,
+            "pelvisX": 128.006309148265,
             "soleY": 232
           },
-          "dx": -10.743364571752352,
+          "dx": -11.418075102611311,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 138.01320638820638,
+            "height": 228,
+            "pelvisX": 138.56632173095014,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.1894869373623,
+            "height": 228,
+            "pelvisX": 127.57272727272728,
             "soleY": 232
           },
-          "dx": -10.322348328863967,
+          "dx": -10.875463671607719,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 138.15933558904953,
+            "height": 228,
+            "pelvisX": 138.59456040480708,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 128.16966256701357,
+            "height": 228,
+            "pelvisX": 127.60290863104647,
             "soleY": 232
           },
-          "dx": -10.468477529707116,
+          "dx": -10.903702345464666,
           "dy": -12
         },
         {
           "pre": {
-            "height": 236,
-            "pelvisX": 137.72721712538225,
+            "height": 228,
+            "pelvisX": 138.25872367180133,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.97994359135068,
+            "height": 228,
+            "pelvisX": 127.4276749294007,
             "soleY": 232
           },
-          "dx": -10.036359066039836,
+          "dx": -10.567865612458917,
           "dy": -12
         },
         {
           "pre": {
-            "height": 235,
-            "pelvisX": 137.56190182154987,
+            "height": 228,
+            "pelvisX": 138.0779139176877,
             "soleY": 244
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.80505302557704,
+            "height": 228,
+            "pelvisX": 127.96519285042334,
             "soleY": 232
           },
-          "dx": -9.87104376220745,
+          "dx": -10.387055858345292,
           "dy": -12
         }
       ],
@@ -2783,7 +2997,7 @@
       "name": "hit",
       "frames": 6,
       "kind": "free",
-      "sheetSha1": "628a940d12344c468c952175872eb508d06ecca2",
+      "sheetSha1": "175dd14f0ecfc1cfdbb7d3d33370205bfcb9b532",
       "sheetSelection": {
         "rows": 4,
         "cells": [
@@ -2808,7 +3022,7 @@
         "cropBottom": 1254,
         "dpiScaleX": 0.8165869218500797,
         "dpiScaleY": 0.8165869218500797,
-        "rawSha1": "2a4acd89dcd50b986c43fe21e220a8f279c1fccf"
+        "rawSha1": "16c8f459ab863df32674eea476f947b942e46764"
       },
       "calibration": {
         "scale": 1,
@@ -2819,86 +3033,89 @@
       "records": [
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 138.575956284153,
+            "height": 223,
+            "pelvisX": 139.195793499044,
             "soleY": 239
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.62258652094718,
+            "height": 223,
+            "pelvisX": 127.41657077100115,
             "soleY": 232
           },
-          "dx": -10.885098224810577,
+          "dx": -11.504935439701569,
           "dy": -7
         },
         {
           "pre": {
-            "height": 226,
-            "pelvisX": 140.39241334205363,
+            "height": 217,
+            "pelvisX": 142.00734802939212,
             "soleY": 239
           },
           "post": {
-            "height": 226,
-            "pelvisX": 127.51304631441617,
+            "height": 217,
+            "pelvisX": 127.84617951284618,
             "soleY": 232
           },
-          "dx": -12.701555282711212,
-          "dy": -7
+          "dx": -14.316489970049702,
+          "dy": -7,
+          "exception": "recoil: chest bends during impact flinch; original anatomical scale retained"
+        },
+        {
+          "pre": {
+            "height": 214,
+            "pelvisX": 139.83844866071428,
+            "soleY": 239
+          },
+          "post": {
+            "height": 214,
+            "pelvisX": 127.77526521496371,
+            "soleY": 232
+          },
+          "dx": -12.14759060137186,
+          "dy": -7,
+          "exception": "recoil: chest bends backward at hit peak; original anatomical scale retained"
+        },
+        {
+          "pre": {
+            "height": 218,
+            "pelvisX": 137.92210144927537,
+            "soleY": 239
+          },
+          "post": {
+            "height": 218,
+            "pelvisX": 127.85507246376811,
+            "soleY": 232
+          },
+          "dx": -10.231243389932956,
+          "dy": -7,
+          "exception": "recoil: recovery from impact; original anatomical scale retained"
         },
         {
           "pre": {
             "height": 222,
-            "pelvisX": 137.8473469387755,
+            "pelvisX": 139.84088269454122,
             "soleY": 239
           },
           "post": {
             "height": 222,
-            "pelvisX": 127.8,
+            "pelvisX": 127.80162412993039,
             "soleY": 232
           },
-          "dx": -10.156488879433084,
+          "dx": -12.150024635198804,
           "dy": -7
         },
         {
           "pre": {
-            "height": 229,
-            "pelvisX": 136.65171317555635,
+            "height": 223,
+            "pelvisX": 139.36356619065998,
             "soleY": 239
           },
           "post": {
-            "height": 229,
-            "pelvisX": 127.66737363025804,
+            "height": 223,
+            "pelvisX": 127.46412037037037,
             "soleY": 232
           },
-          "dx": -8.960855116213935,
-          "dy": -7
-        },
-        {
-          "pre": {
-            "height": 229,
-            "pelvisX": 138.97084771768317,
-            "soleY": 239
-          },
-          "post": {
-            "height": 228,
-            "pelvisX": 128.0060218291306,
-            "soleY": 232
-          },
-          "dx": -11.279989658340753,
-          "dy": -7
-        },
-        {
-          "pre": {
-            "height": 231,
-            "pelvisX": 138.2984312294783,
-            "soleY": 239
-          },
-          "post": {
-            "height": 231,
-            "pelvisX": 127.41378053226394,
-            "soleY": 232
-          },
-          "dx": -10.607573170135879,
+          "dx": -11.672708131317563,
           "dy": -7
         }
       ],
@@ -3421,10 +3638,11 @@
       ]
     },
     {
+      "heightPolicy": "head-size-v1",
       "name": "emote",
       "frames": 12,
       "kind": "upright",
-      "sheetSha1": "b207f85934611854e0b81a59da3733f63106c88c",
+      "sheetSha1": "a3a18b8b80563892527139e5c22a766fa5e672ad",
       "preparation": {
         "raw": [
           1448,
@@ -3438,7 +3656,7 @@
         "cropBottom": 1086,
         "dpiScaleX": 0.7071823204419889,
         "dpiScaleY": 0.7071823204419889,
-        "rawSha1": "58a858d5b95b274042edd894df9755405cdc12f4"
+        "rawSha1": "eba94cefd194315f95e4a41bc9e38805e1abd1bb"
       },
       "calibration": {
         "scale": 1,
@@ -3449,171 +3667,171 @@
       "records": [
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 135.05889190236343,
+            "height": 226,
+            "pelvisX": 135.62755102040816,
             "soleY": 238
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.96283391405342,
+            "height": 226,
+            "pelvisX": 127.64454045561665,
             "soleY": 232
           },
-          "dx": -7.36803384302101,
+          "dx": -7.936692961065745,
           "dy": -6
         },
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 134.9941702293043,
+            "height": 226,
+            "pelvisX": 135.6109134045077,
             "soleY": 238
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.92113442113443,
+            "height": 226,
+            "pelvisX": 127.62672993277975,
             "soleY": 232
           },
-          "dx": -7.303312169961885,
+          "dx": -7.920055345165281,
           "dy": -6
         },
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 137.46787658802177,
+            "height": 226,
+            "pelvisX": 138.35479097299296,
             "soleY": 238
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.53848946986201,
+            "height": 225,
+            "pelvisX": 127.4568997410285,
             "soleY": 232
           },
-          "dx": -9.77701852867935,
+          "dx": -10.663932913650541,
           "dy": -6
         },
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 139.96456953642385,
+            "height": 226,
+            "pelvisX": 140.52925170068028,
             "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.77650897226754,
+            "height": 226,
+            "pelvisX": 127.57531451887114,
             "soleY": 232
           },
-          "dx": -12.273711477081434,
+          "dx": -12.83839364133786,
           "dy": -6
         },
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 139.28468158347675,
+            "height": 226,
+            "pelvisX": 139.0829109341057,
             "soleY": 238
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.42217630853995,
+            "height": 226,
+            "pelvisX": 127.97069464544138,
             "soleY": 232
           },
-          "dx": -11.593823524134336,
+          "dx": -11.392052874763294,
           "dy": -6
         },
         {
           "pre": {
-            "height": 232,
-            "pelvisX": 139.34380393510529,
+            "height": 226,
+            "pelvisX": 139.1540413193186,
             "soleY": 238
           },
           "post": {
-            "height": 232,
-            "pelvisX": 127.45667932343804,
+            "height": 226,
+            "pelvisX": 127.96564195298373,
             "soleY": 232
           },
-          "dx": -11.652945875762867,
+          "dx": -11.463183259976176,
           "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 139.41500506928017,
+            "height": 226,
+            "pelvisX": 139.5164676076728,
             "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.53310810810811,
+            "height": 226,
+            "pelvisX": 127.52206946454415,
             "soleY": 232
           },
-          "dx": -11.724147009937752,
+          "dx": -11.825609548330391,
           "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 139.33435270132517,
+            "height": 226,
+            "pelvisX": 139.27962085308056,
             "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.41344195519348,
+            "height": 226,
+            "pelvisX": 127.44383661560904,
             "soleY": 232
           },
-          "dx": -11.643494641982755,
+          "dx": -11.588762793738141,
           "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 139.44883485309018,
-            "soleY": 237
+            "height": 227,
+            "pelvisX": 139.30788620813829,
+            "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.50658561296859,
+            "height": 227,
+            "pelvisX": 127.38774774774775,
             "soleY": 232
           },
-          "dx": -11.757976793747758,
-          "dy": -5
+          "dx": -11.617028148795868,
+          "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 139.47584620440355,
-            "soleY": 237
+            "height": 227,
+            "pelvisX": 140.0212256076686,
+            "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.53239066096678,
+            "height": 227,
+            "pelvisX": 127.95513698630137,
             "soleY": 232
           },
-          "dx": -11.784988145061135,
-          "dy": -5
+          "dx": -12.330367548326194,
+          "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 136.21381578947367,
-            "soleY": 237
+            "height": 227,
+            "pelvisX": 137.0918057663126,
+            "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.37691745799854,
+            "height": 227,
+            "pelvisX": 127.92024306874288,
             "soleY": 232
           },
-          "dx": -8.522957730131253,
-          "dy": -5
+          "dx": -9.400947706970186,
+          "dy": -6
         },
         {
           "pre": {
-            "height": 231,
-            "pelvisX": 134.94863932541205,
-            "soleY": 237
+            "height": 227,
+            "pelvisX": 135.67963111467523,
+            "soleY": 238
           },
           "post": {
-            "height": 231,
-            "pelvisX": 127.88162951575711,
+            "height": 227,
+            "pelvisX": 127.68617234468938,
             "soleY": 232
           },
-          "dx": -7.257781266069628,
-          "dy": -5
+          "dx": -7.988773055332814,
+          "dy": -6
         }
       ],
       "regions": [
@@ -3919,11 +4137,391 @@
         "gate": "height",
         "severity": "info",
         "clip": "run",
+        "frame": 0,
+        "metric": "head_size_px",
+        "value": 50.99019513592785,
+        "limit": 52.21602244522269,
+        "message": "secondary-overhang: skull 50.99 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "secondary-overhang",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 141,
+              "y": 19
+            },
+            "chin": {
+              "x": 163,
+              "y": 65
+            },
+            "note": "Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.99019513592785,
+          "ratio": 1.0058196417603769,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 218
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 1,
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "secondary-overhang: skull 49.66 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "secondary-overhang",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 141,
+              "y": 19
+            },
+            "chin": {
+              "x": 162,
+              "y": 64
+            },
+            "note": "Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 218
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 2,
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "secondary-overhang: skull 49.66 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "secondary-overhang",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 133,
+              "y": 19
+            },
+            "chin": {
+              "x": 154,
+              "y": 64
+            },
+            "note": "Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 218
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 3,
+        "metric": "head_size_px",
+        "value": 50.08991914547277,
+        "limit": 52.21602244522269,
+        "message": "secondary-overhang: skull 50.09 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "secondary-overhang",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 132,
+              "y": 19
+            },
+            "chin": {
+              "x": 154,
+              "y": 64
+            },
+            "note": "Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.08991914547277,
+          "ratio": 0.9880610261718092,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 218
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 5,
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 49.66 px / master 50.70 px; bbox 207 px / master 226 px; Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 137,
+              "y": 31
+            },
+            "chin": {
+              "x": 158,
+              "y": 76
+            },
+            "note": "Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 207
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
         "frame": 6,
-        "metric": "height_excess_px",
-        "value": 3.2,
-        "limit": 0,
-        "message": "216 px outside 219.2..232.8 (declared exception: airborne: both legs tucked in visible flight pose; original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 50.08991914547277,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.09 px / master 50.70 px; bbox 198 px / master 226 px; Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 142,
+              "y": 40
+            },
+            "chin": {
+              "x": 164,
+              "y": 85
+            },
+            "note": "Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.08991914547277,
+          "ratio": 0.9880610261718092,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 198
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 7,
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 49.66 px / master 50.70 px; bbox 211 px / master 226 px; Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 140,
+              "y": 26
+            },
+            "chin": {
+              "x": 161,
+              "y": 71
+            },
+            "note": "Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 211
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 12,
+        "metric": "head_size_px",
+        "value": 50.99019513592785,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.99 px / master 50.70 px; bbox 219 px / master 226 px; Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 132,
+              "y": 18
+            },
+            "chin": {
+              "x": 154,
+              "y": 64
+            },
+            "note": "Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.99019513592785,
+          "ratio": 1.0058196417603769,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 219
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 13,
+        "metric": "head_size_px",
+        "value": 50.08991914547277,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.09 px / master 50.70 px; bbox 211 px / master 226 px; Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 132,
+              "y": 25
+            },
+            "chin": {
+              "x": 154,
+              "y": 70
+            },
+            "note": "Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.08991914547277,
+          "ratio": 0.9880610261718092,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 211
+        }
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 14,
+        "metric": "head_size_px",
+        "value": 50.537115073973105,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.54 px / master 50.70 px; bbox 207 px / master 226 px; Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 130,
+              "y": 31
+            },
+            "chin": {
+              "x": 153,
+              "y": 76
+            },
+            "note": "Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.537115073973105,
+          "ratio": 0.9968822995048854,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 207
+        }
       },
       {
         "gate": "footSlide",
@@ -3931,9 +4529,9 @@
         "clip": "run",
         "frame": 1,
         "metric": "ghost_offset_px_R",
-        "value": 24.9,
+        "value": 24.7,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -24.9 px from its template ghost (x 140.3 vs 165.2, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is -24.7 px from its template ghost (x 140.5 vs 165.2, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -3941,9 +4539,9 @@
         "clip": "run",
         "frame": 2,
         "metric": "ghost_offset_px_R",
-        "value": 28.2,
+        "value": 24.3,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -28.2 px from its template ghost (x 124.5 vs 152.7, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is -24.3 px from its template ghost (x 128.4 vs 152.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -3951,9 +4549,9 @@
         "clip": "run",
         "frame": 3,
         "metric": "ghost_offset_px_R",
-        "value": 24.5,
+        "value": 24.6,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -24.5 px from its template ghost (x 115.7 vs 140.2, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is -24.6 px from its template ghost (x 115.6 vs 140.2, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -3961,9 +4559,9 @@
         "clip": "run",
         "frame": 4,
         "metric": "ghost_offset_px_R",
-        "value": 26.2,
+        "value": 25.7,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -26.2 px from its template ghost (x 101.5 vs 127.7, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is -25.7 px from its template ghost (x 102.0 vs 127.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -3981,9 +4579,9 @@
         "clip": "run",
         "frame": 6,
         "metric": "ghost_offset_px_R",
-        "value": 34.7,
+        "value": 32.8,
         "limit": 20,
-        "message": "R planted foot: nearest sole is -34.7 px from its template ghost (x 68.0 vs 102.7, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is -32.8 px from its template ghost (x 69.9 vs 102.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -4001,9 +4599,9 @@
         "clip": "run",
         "frame": 10,
         "metric": "ghost_offset_px_L",
-        "value": 27.5,
+        "value": 26.6,
         "limit": 20,
-        "message": "L planted foot: nearest sole is -27.5 px from its template ghost (x 125.1 vs 152.7, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is -26.6 px from its template ghost (x 126.1 vs 152.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -4011,9 +4609,9 @@
         "clip": "run",
         "frame": 9,
         "metric": "slide_px_per_frame_L",
-        "value": 12.05,
+        "value": 11.76,
         "limit": 3,
-        "message": "L foot slides 12.1 px/frame between frames 8-9 (limit 3)"
+        "message": "L foot slides 11.8 px/frame between frames 8-9 (limit 3)"
       },
       {
         "gate": "footSlide",
@@ -4021,9 +4619,9 @@
         "clip": "run",
         "frame": 11,
         "metric": "ghost_offset_px_L",
-        "value": 32.9,
+        "value": 32.2,
         "limit": 20,
-        "message": "L planted foot: nearest sole is -32.9 px from its template ghost (x 107.3 vs 140.2, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is -32.2 px from its template ghost (x 107.9 vs 140.2, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -4031,9 +4629,9 @@
         "clip": "run",
         "frame": 12,
         "metric": "ghost_offset_px_L",
-        "value": 36,
+        "value": 35.7,
         "limit": 20,
-        "message": "L planted foot: nearest sole is -36.0 px from its template ghost (x 91.7 vs 127.7, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is -35.7 px from its template ghost (x 92.0 vs 127.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -4041,9 +4639,9 @@
         "clip": "run",
         "frame": 13,
         "metric": "ghost_offset_px_L",
-        "value": 37.2,
+        "value": 36.5,
         "limit": 20,
-        "message": "L planted foot: nearest sole is -37.2 px from its template ghost (x 78.0 vs 115.2, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is -36.5 px from its template ghost (x 78.7 vs 115.2, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "footSlide",
@@ -4051,89 +4649,282 @@
         "clip": "run",
         "frame": 14,
         "metric": "ghost_offset_px_L",
-        "value": 32.8,
+        "value": 31.9,
         "limit": 20,
-        "message": "L planted foot: nearest sole is -32.8 px from its template ghost (x 69.9 vs 102.7, limit 20); not measured (the foot is not on the template)"
-      },
-      {
-        "gate": "footSlide",
-        "severity": "warn",
-        "clip": "run",
-        "frame": 15,
-        "metric": "ghost_offset_px_L",
-        "value": 21.1,
-        "limit": 20,
-        "message": "L planted foot: nearest sole is -21.1 px from its template ghost (x 69.1 vs 90.2, limit 20); not measured (the foot is not on the template)"
+        "message": "L planted foot: nearest sole is -31.9 px from its template ghost (x 70.8 vs 102.7, limit 20); not measured (the foot is not on the template)"
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 1,
-        "metric": "height_excess_px",
-        "value": 8.2,
-        "limit": 0,
-        "message": "211 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 49.66 px / master 50.70 px; bbox 205 px / master 226 px; Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 150,
+              "y": 44
+            },
+            "chin": {
+              "x": 171,
+              "y": 89
+            },
+            "note": "Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 205
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 2,
-        "metric": "height_excess_px",
-        "value": 21.2,
-        "limit": 0,
-        "message": "198 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 49.64876634922564,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 49.65 px / master 50.70 px; bbox 190 px / master 226 px; Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 153,
+              "y": 58
+            },
+            "chin": {
+              "x": 176,
+              "y": 102
+            },
+            "note": "Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.64876634922564,
+          "ratio": 0.9793589581310805,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 190
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 3,
-        "metric": "height_excess_px",
-        "value": 29.2,
-        "limit": 0,
-        "message": "190 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 49.65883607174055,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 49.66 px / master 50.70 px; bbox 182 px / master 226 px; Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 150,
+              "y": 65
+            },
+            "chin": {
+              "x": 171,
+              "y": 110
+            },
+            "note": "Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 49.65883607174055,
+          "ratio": 0.9795575909204939,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 182
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 4,
-        "metric": "height_excess_px",
-        "value": 48.2,
-        "limit": 0,
-        "message": "171 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 50.08991914547277,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.09 px / master 50.70 px; bbox 164 px / master 226 px; Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 153,
+              "y": 86
+            },
+            "chin": {
+              "x": 175,
+              "y": 131
+            },
+            "note": "Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.08991914547277,
+          "ratio": 0.9880610261718092,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 164
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 5,
-        "metric": "height_excess_px",
-        "value": 45.2,
-        "limit": 0,
-        "message": "174 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 50.537115073973105,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.54 px / master 50.70 px; bbox 164 px / master 226 px; Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 157,
+              "y": 86
+            },
+            "chin": {
+              "x": 180,
+              "y": 131
+            },
+            "note": "Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.537115073973105,
+          "ratio": 0.9968822995048854,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 164
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 6,
-        "metric": "height_excess_px",
-        "value": 27.2,
-        "limit": 0,
-        "message": "192 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 50.08991914547277,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 50.09 px / master 50.70 px; bbox 185 px / master 226 px; Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 153,
+              "y": 66
+            },
+            "chin": {
+              "x": 175,
+              "y": 111
+            },
+            "note": "Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 50.08991914547277,
+          "ratio": 0.9880610261718092,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 185
+        }
       },
       {
         "gate": "height",
         "severity": "info",
         "clip": "dash",
         "frame": 7,
-        "metric": "height_excess_px",
-        "value": 4.2,
-        "limit": 0,
-        "message": "215 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+        "metric": "head_size_px",
+        "value": 51.42956348249517,
+        "limit": 52.21602244522269,
+        "message": "posture: skull 51.43 px / master 50.70 px; bbox 210 px / master 226 px; Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+        "headEvidence": {
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 127,
+              "y": 19
+            },
+            "chin": {
+              "x": 146,
+              "y": 66
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 142,
+              "y": 38
+            },
+            "chin": {
+              "x": 165,
+              "y": 84
+            },
+            "note": "Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+          },
+          "masterSizePx": 50.6951674225463,
+          "sizePx": 51.42956348249517,
+          "ratio": 1.0144865101998313,
+          "masterBboxHeightPx": 226,
+          "bboxHeightPx": 210
+        }
       },
       {
         "gate": "height",
@@ -4257,6 +5048,136 @@
       },
       {
         "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 1.2,
+        "limit": 0,
+        "message": "height 218 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 2.2,
+        "limit": 0,
+        "message": "height 217 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 2.2,
+        "limit": 0,
+        "message": "height 217 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "attack_2",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 0.2,
+        "limit": 0,
+        "message": "height 219 px outside the upright band and no pose exception declared"
+      },
+      {
+        "gate": "height",
         "severity": "info",
         "clip": "attack_3",
         "frame": 2,
@@ -4294,6 +5215,36 @@
         "value": 5.2,
         "limit": 0,
         "message": "214 px outside 219.2..232.8 (declared exception: crouch: bent knees during uppercut anticipation, original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "hit",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 2.2,
+        "limit": 0,
+        "message": "217 px outside 219.2..232.8 (declared exception: recoil: chest bends during impact flinch; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "hit",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 5.2,
+        "limit": 0,
+        "message": "214 px outside 219.2..232.8 (declared exception: recoil: chest bends backward at hit peak; original anatomical scale retained)"
+      },
+      {
+        "gate": "height",
+        "severity": "info",
+        "clip": "hit",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 1.2,
+        "limit": 0,
+        "message": "218 px outside 219.2..232.8 (declared exception: recoil: recovery from impact; original anatomical scale retained)"
       },
       {
         "gate": "height",
@@ -5120,11 +6071,427 @@
           "gate": "height",
           "severity": "info",
           "clip": "run",
+          "frame": 0,
+          "metric": "head_size_px",
+          "value": 50.99019513592785,
+          "limit": 52.21602244522269,
+          "message": "secondary-overhang: skull 50.99 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "secondary-overhang",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 141,
+                "y": 19
+              },
+              "chin": {
+                "x": 163,
+                "y": 65
+              },
+              "note": "Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.99019513592785,
+            "ratio": 1.0058196417603769,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 218
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 1,
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "secondary-overhang: skull 49.66 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "secondary-overhang",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 141,
+                "y": 19
+              },
+              "chin": {
+                "x": 162,
+                "y": 64
+              },
+              "note": "Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 218
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 2,
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "secondary-overhang: skull 49.66 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "secondary-overhang",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 133,
+                "y": 19
+              },
+              "chin": {
+                "x": 154,
+                "y": 64
+              },
+              "note": "Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 218
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 3,
+          "metric": "head_size_px",
+          "value": 50.08991914547277,
+          "limit": 52.21602244522269,
+          "message": "secondary-overhang: skull 50.09 px / master 50.70 px; bbox 218 px / master 226 px; Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "secondary-overhang",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 132,
+                "y": 19
+              },
+              "chin": {
+                "x": 154,
+                "y": 64
+              },
+              "note": "Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.08991914547277,
+            "ratio": 0.9880610261718092,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 218
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 5,
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 49.66 px / master 50.70 px; bbox 207 px / master 226 px; Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 137,
+                "y": 31
+              },
+              "chin": {
+                "x": 158,
+                "y": 76
+              },
+              "note": "Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 207
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
           "frame": 6,
-          "metric": "height_excess_px",
-          "value": 3.2,
-          "limit": 0,
-          "message": "216 px outside 219.2..232.8 (declared exception: airborne: both legs tucked in visible flight pose; original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 50.08991914547277,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.09 px / master 50.70 px; bbox 198 px / master 226 px; Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 142,
+                "y": 40
+              },
+              "chin": {
+                "x": 164,
+                "y": 85
+              },
+              "note": "Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.08991914547277,
+            "ratio": 0.9880610261718092,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 198
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 7,
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 49.66 px / master 50.70 px; bbox 211 px / master 226 px; Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 140,
+                "y": 26
+              },
+              "chin": {
+                "x": 161,
+                "y": 71
+              },
+              "note": "Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 211
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 12,
+          "metric": "head_size_px",
+          "value": 50.99019513592785,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.99 px / master 50.70 px; bbox 219 px / master 226 px; Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 132,
+                "y": 18
+              },
+              "chin": {
+                "x": 154,
+                "y": 64
+              },
+              "note": "Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.99019513592785,
+            "ratio": 1.0058196417603769,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 219
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 13,
+          "metric": "head_size_px",
+          "value": 50.08991914547277,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.09 px / master 50.70 px; bbox 211 px / master 226 px; Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 132,
+                "y": 25
+              },
+              "chin": {
+                "x": 154,
+                "y": 70
+              },
+              "note": "Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.08991914547277,
+            "ratio": 0.9880610261718092,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 211
+          }
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "run",
+          "frame": 14,
+          "metric": "head_size_px",
+          "value": 50.537115073973105,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.54 px / master 50.70 px; bbox 207 px / master 226 px; Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 130,
+                "y": 31
+              },
+              "chin": {
+                "x": 153,
+                "y": 76
+              },
+              "note": "Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.537115073973105,
+            "ratio": 0.9968822995048854,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 207
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5136,9 +6503,9 @@
           "clip": "run",
           "frame": 1,
           "metric": "ghost_offset_px_R",
-          "value": 24.9,
+          "value": 24.7,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -24.9 px from its template ghost (x 140.3 vs 165.2, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is -24.7 px from its template ghost (x 140.5 vs 165.2, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5163,9 +6530,9 @@
           "clip": "run",
           "frame": 2,
           "metric": "ghost_offset_px_R",
-          "value": 28.2,
+          "value": 24.3,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -28.2 px from its template ghost (x 124.5 vs 152.7, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is -24.3 px from its template ghost (x 128.4 vs 152.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5190,9 +6557,9 @@
           "clip": "run",
           "frame": 3,
           "metric": "ghost_offset_px_R",
-          "value": 24.5,
+          "value": 24.6,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -24.5 px from its template ghost (x 115.7 vs 140.2, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is -24.6 px from its template ghost (x 115.6 vs 140.2, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5217,9 +6584,9 @@
           "clip": "run",
           "frame": 4,
           "metric": "ghost_offset_px_R",
-          "value": 26.2,
+          "value": 25.7,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -26.2 px from its template ghost (x 101.5 vs 127.7, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is -25.7 px from its template ghost (x 102.0 vs 127.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5271,9 +6638,9 @@
           "clip": "run",
           "frame": 6,
           "metric": "ghost_offset_px_R",
-          "value": 34.7,
+          "value": 32.8,
           "limit": 20,
-          "message": "R planted foot: nearest sole is -34.7 px from its template ghost (x 68.0 vs 102.7, limit 20); not measured (the foot is not on the template)"
+          "message": "R planted foot: nearest sole is -32.8 px from its template ghost (x 69.9 vs 102.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5325,9 +6692,9 @@
           "clip": "run",
           "frame": 10,
           "metric": "ghost_offset_px_L",
-          "value": 27.5,
+          "value": 26.6,
           "limit": 20,
-          "message": "L planted foot: nearest sole is -27.5 px from its template ghost (x 125.1 vs 152.7, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is -26.6 px from its template ghost (x 126.1 vs 152.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5352,9 +6719,9 @@
           "clip": "run",
           "frame": 9,
           "metric": "slide_px_per_frame_L",
-          "value": 12.05,
+          "value": 11.76,
           "limit": 3,
-          "message": "L foot slides 12.1 px/frame between frames 8-9 (limit 3)"
+          "message": "L foot slides 11.8 px/frame between frames 8-9 (limit 3)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5379,9 +6746,9 @@
           "clip": "run",
           "frame": 11,
           "metric": "ghost_offset_px_L",
-          "value": 32.9,
+          "value": 32.2,
           "limit": 20,
-          "message": "L planted foot: nearest sole is -32.9 px from its template ghost (x 107.3 vs 140.2, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is -32.2 px from its template ghost (x 107.9 vs 140.2, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5406,9 +6773,9 @@
           "clip": "run",
           "frame": 12,
           "metric": "ghost_offset_px_L",
-          "value": 36,
+          "value": 35.7,
           "limit": 20,
-          "message": "L planted foot: nearest sole is -36.0 px from its template ghost (x 91.7 vs 127.7, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is -35.7 px from its template ghost (x 92.0 vs 127.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5433,9 +6800,9 @@
           "clip": "run",
           "frame": 13,
           "metric": "ghost_offset_px_L",
-          "value": 37.2,
+          "value": 36.5,
           "limit": 20,
-          "message": "L planted foot: nearest sole is -37.2 px from its template ghost (x 78.0 vs 115.2, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is -36.5 px from its template ghost (x 78.7 vs 115.2, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5460,9 +6827,9 @@
           "clip": "run",
           "frame": 14,
           "metric": "ghost_offset_px_L",
-          "value": 32.8,
+          "value": 31.9,
           "limit": 20,
-          "message": "L planted foot: nearest sole is -32.8 px from its template ghost (x 69.9 vs 102.7, limit 20); not measured (the foot is not on the template)"
+          "message": "L planted foot: nearest sole is -31.9 px from its template ghost (x 70.8 vs 102.7, limit 20); not measured (the foot is not on the template)"
         },
         "class": "soft",
         "verdict": "accepted",
@@ -5482,41 +6849,43 @@
       },
       {
         "finding": {
-          "gate": "footSlide",
-          "severity": "warn",
-          "clip": "run",
-          "frame": 15,
-          "metric": "ghost_offset_px_L",
-          "value": 21.1,
-          "limit": 20,
-          "message": "L planted foot: nearest sole is -21.1 px from its template ghost (x 69.1 vs 90.2, limit 20); not measured (the foot is not on the template)"
-        },
-        "class": "soft",
-        "verdict": "accepted",
-        "entry": {
-          "clip": "run",
-          "dir": "E",
-          "cell": 15,
-          "gate": "footSlide",
-          "metric": "ghost_offset_px_L",
-          "value": 21.1,
-          "limit": 20,
-          "note": "Initial smooth-v2 E locomotion: visible sole/ghost mismatch and slide retained as soft art debt for targeted AI repair. Original scale and guide preserved; no hard gates accepted.",
-          "status": "open",
-          "owner": "24",
-          "added": "2026-11-07"
-        }
-      },
-      {
-        "finding": {
           "gate": "height",
           "severity": "info",
           "clip": "dash",
           "frame": 1,
-          "metric": "height_excess_px",
-          "value": 8.2,
-          "limit": 0,
-          "message": "211 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 49.66 px / master 50.70 px; bbox 205 px / master 226 px; Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 150,
+                "y": 44
+              },
+              "chin": {
+                "x": 171,
+                "y": 89
+              },
+              "note": "Reviewed aligned dash local1 (group global7): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 205
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5527,10 +6896,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 2,
-          "metric": "height_excess_px",
-          "value": 21.2,
-          "limit": 0,
-          "message": "198 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 49.64876634922564,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 49.65 px / master 50.70 px; bbox 190 px / master 226 px; Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 153,
+                "y": 58
+              },
+              "chin": {
+                "x": 176,
+                "y": 102
+              },
+              "note": "Reviewed aligned dash local2 (group global8): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.64876634922564,
+            "ratio": 0.9793589581310805,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 190
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5541,10 +6939,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 3,
-          "metric": "height_excess_px",
-          "value": 29.2,
-          "limit": 0,
-          "message": "190 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 49.65883607174055,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 49.66 px / master 50.70 px; bbox 182 px / master 226 px; Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 150,
+                "y": 65
+              },
+              "chin": {
+                "x": 171,
+                "y": 110
+              },
+              "note": "Reviewed aligned dash local3 (group global9): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 49.65883607174055,
+            "ratio": 0.9795575909204939,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 182
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5555,10 +6982,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 4,
-          "metric": "height_excess_px",
-          "value": 48.2,
-          "limit": 0,
-          "message": "171 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 50.08991914547277,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.09 px / master 50.70 px; bbox 164 px / master 226 px; Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 153,
+                "y": 86
+              },
+              "chin": {
+                "x": 175,
+                "y": 131
+              },
+              "note": "Reviewed aligned dash local4 (group global10): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.08991914547277,
+            "ratio": 0.9880610261718092,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 164
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5569,10 +7025,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 5,
-          "metric": "height_excess_px",
-          "value": 45.2,
-          "limit": 0,
-          "message": "174 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 50.537115073973105,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.54 px / master 50.70 px; bbox 164 px / master 226 px; Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 157,
+                "y": 86
+              },
+              "chin": {
+                "x": 180,
+                "y": 131
+              },
+              "note": "Reviewed aligned dash local5 (group global11): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.537115073973105,
+            "ratio": 0.9968822995048854,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 164
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5583,10 +7068,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 6,
-          "metric": "height_excess_px",
-          "value": 27.2,
-          "limit": 0,
-          "message": "192 px outside 219.2..232.8 (declared exception: lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 50.08991914547277,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 50.09 px / master 50.70 px; bbox 185 px / master 226 px; Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 153,
+                "y": 66
+              },
+              "chin": {
+                "x": 175,
+                "y": 111
+              },
+              "note": "Reviewed aligned dash local6 (group global12): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 50.08991914547277,
+            "ratio": 0.9880610261718092,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 185
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5597,10 +7111,39 @@
           "severity": "info",
           "clip": "dash",
           "frame": 7,
-          "metric": "height_excess_px",
-          "value": 4.2,
-          "limit": 0,
-          "message": "215 px outside 219.2..232.8 (declared exception: lunge: knee bend anticipation or landing recovery, original anatomical scale retained)"
+          "metric": "head_size_px",
+          "value": 51.42956348249517,
+          "limit": 52.21602244522269,
+          "message": "posture: skull 51.43 px / master 50.70 px; bbox 210 px / master 226 px; Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction.",
+          "headEvidence": {
+            "reason": "posture",
+            "master": {
+              "crown": {
+                "x": 127,
+                "y": 19
+              },
+              "chin": {
+                "x": 146,
+                "y": 66
+              }
+            },
+            "frame": {
+              "crown": {
+                "x": 142,
+                "y": 38
+              },
+              "chin": {
+                "x": 165,
+                "y": 84
+              },
+              "note": "Reviewed aligned dash local7 (group global13): original knee bend/deep lunge preserved; skull/maincap excludes elevated bun/ribbons; AI head-only scale correction."
+            },
+            "masterSizePx": 50.6951674225463,
+            "sizePx": 51.42956348249517,
+            "ratio": 1.0144865101998313,
+            "masterBboxHeightPx": 226,
+            "bboxHeightPx": 210
+          }
         },
         "class": "info",
         "verdict": "info"
@@ -5776,6 +7319,357 @@
       {
         "finding": {
           "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 0,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 218 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 1,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 217 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 2,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 217 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 3,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 5,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 6,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 7,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 8,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 9,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 10,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 10,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 11,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 11,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 12,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 12,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "attack_2",
+          "frame": 13,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 219 px outside the upright band and no pose exception declared"
+        },
+        "class": "soft",
+        "verdict": "accepted",
+        "entry": {
+          "clip": "attack_2",
+          "dir": "E",
+          "cell": 13,
+          "gate": "height",
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+          "status": "open",
+          "owner": "24",
+          "added": "2026-11-08"
+        }
+      },
+      {
+        "finding": {
+          "gate": "height",
           "severity": "info",
           "clip": "attack_3",
           "frame": 2,
@@ -5825,6 +7719,48 @@
           "value": 5.2,
           "limit": 0,
           "message": "214 px outside 219.2..232.8 (declared exception: crouch: bent knees during uppercut anticipation, original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "hit",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "217 px outside 219.2..232.8 (declared exception: recoil: chest bends during impact flinch; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "hit",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 5.2,
+          "limit": 0,
+          "message": "214 px outside 219.2..232.8 (declared exception: recoil: chest bends backward at hit peak; original anatomical scale retained)"
+        },
+        "class": "info",
+        "verdict": "info"
+      },
+      {
+        "finding": {
+          "gate": "height",
+          "severity": "info",
+          "clip": "hit",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "218 px outside 219.2..232.8 (declared exception: recoil: recovery from impact; original anatomical scale retained)"
         },
         "class": "info",
         "verdict": "info"
@@ -6208,13 +8144,27 @@
         "verdict": "info"
       }
     ],
-    "resolved": [],
+    "resolved": [
+      {
+        "clip": "run",
+        "dir": "E",
+        "cell": 15,
+        "gate": "footSlide",
+        "metric": "ghost_offset_px_L",
+        "value": 21.1,
+        "limit": 20,
+        "note": "Initial smooth-v2 E locomotion: visible sole/ghost mismatch and slide retained as soft art debt for targeted AI repair. Original scale and guide preserved; no hard gates accepted.",
+        "status": "open",
+        "owner": "24",
+        "added": "2026-11-07"
+      }
+    ],
     "counts": {
       "fail-hard": 0,
       "fail-soft": 0,
-      "accepted": 26,
+      "accepted": 38,
       "regression": 0,
-      "info": 67
+      "info": 79
     }
   }
 }

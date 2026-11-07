@@ -4376,3 +4376,17 @@ Giữ pose chạy/nhào động; chỉ sửa đầu lệch cỡ. Walk gốc đư
 | `assets-src/placeholder/the-tu-chibi-v1/E/raw/walk.head-corrected.png`       | AI edit sửa cỡ đầu; prompt/model không công bố/UTC cạnh tệp   | OpenAI Output / mã dự án |
 
 <!-- THE-TU-CHIBI-E-D47-INVENTORY:END -->
+
+<!-- THE-TU-CHIBI-E-HEADROOM:BEGIN -->
+
+### The tu E — sửa khoảng trống tóc (2026-11-08)
+
+Sửa búi tóc phụ để tránh cắt canvas, giữ động tác và cỡ thân. Giữ toàn bộ bản gốc; không fit từng frame. Điều khoản OpenAI Output đã kiểm tra trong mục của worker24.
+
+| Tệp                                                                  | Nguồn / provenance                                                                       | Điều khoản                             |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------- |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/run.headroom.png`      | OpenAI image edit; prompt / model undisclosed / UTC: E/run.headroom.provenance.json      | OpenAI Output; original project inputs |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/attack_2.headroom.png` | OpenAI image edit; prompt / model undisclosed / UTC: E/attack_2.headroom.provenance.json | OpenAI Output; original project inputs |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/channel.headroom.png`  | OpenAI image edit; prompt / model undisclosed / UTC: E/channel.headroom.provenance.json  | OpenAI Output; original project inputs |
+
+<!-- THE-TU-CHIBI-E-HEADROOM:END -->

@@ -15,6 +15,11 @@
     "sha256": "1156d2349f454c87592d1b44b81bc4e5e47284ddbab0ead7210feb8d3b3ac1fc"
   },
   {
+    "file": "E/raw/attack_2.headroom.png",
+    "bytes": 1696102,
+    "sha256": "0ffb24e1559213ae7de0e2ecfb25826c3fd3e266f3c7348dc377ca48f87535c0"
+  },
+  {
     "file": "E/raw/attack_3.attempt1.png",
     "bytes": 1684206,
     "sha256": "0b194e7313caae5a42994608c18e8201881f41db064bd8891d413eeb2d966fa8"
@@ -28,6 +33,11 @@
     "file": "E/raw/channel.attempt1.png",
     "bytes": 1692308,
     "sha256": "eac9922ca4ddb49f58767b383309c98f8b8e6030a783faa1734a89685d7dbcf7"
+  },
+  {
+    "file": "E/raw/channel.headroom.png",
+    "bytes": 1652836,
+    "sha256": "1429edd1b03d20cf94d83956816bf30009e6fe5d657483d82df3808dcaf706b5"
   },
   {
     "file": "E/raw/die.attempt1.png",
@@ -93,6 +103,11 @@
     "file": "E/raw/run.head-corrected.png",
     "bytes": 1848224,
     "sha256": "a57555e5ab9caab12ec443175314a11d2db79776c0aafd2ff94d680fe75afe1e"
+  },
+  {
+    "file": "E/raw/run.headroom.png",
+    "bytes": 1811420,
+    "sha256": "be261c8d224b7f3e6883fa38006a32c9430cf075d3dba78a746eb9295deec22d"
   },
   {
     "file": "E/raw/run.unused-leg-edit.png",

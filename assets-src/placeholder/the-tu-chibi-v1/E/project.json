@@ -73,25 +73,133 @@
       "loop": true,
       "tableId": "run",
       "kind": "upright",
-      "sheet": "raw/run.head-cell6.png",
+      "sheet": "raw/run.headroom.png",
       "manifest": "templates/run.template.json",
+      "heightPolicy": "head-size-v1",
       "exceptions": {
-        "6": "posture"
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture"
       },
       "headEvidence": {
-        "6": {
+        "0": {
           "crown": {
-            "x": 143,
-            "y": 37
+            "x": 141,
+            "y": 19
           },
           "chin": {
             "x": 163,
-            "y": 83
+            "y": 65
           },
-          "note": "Reviewed aligned run local6: tucked flight pose preserved; AI head-only scale correction; skull/maincap excludes bun and ribbons."
+          "note": "Manually traced aligned run local0 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "1": {
+          "crown": {
+            "x": 141,
+            "y": 19
+          },
+          "chin": {
+            "x": 162,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local1 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "2": {
+          "crown": {
+            "x": 133,
+            "y": 19
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local2 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "3": {
+          "crown": {
+            "x": 132,
+            "y": 19
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local3 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "5": {
+          "crown": {
+            "x": 137,
+            "y": 31
+          },
+          "chin": {
+            "x": 158,
+            "y": 76
+          },
+          "note": "Manually traced aligned run local5 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "6": {
+          "crown": {
+            "x": 142,
+            "y": 40
+          },
+          "chin": {
+            "x": 164,
+            "y": 85
+          },
+          "note": "Manually traced aligned run local6 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "7": {
+          "crown": {
+            "x": 140,
+            "y": 26
+          },
+          "chin": {
+            "x": 161,
+            "y": 71
+          },
+          "note": "Manually traced aligned run local7 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "12": {
+          "crown": {
+            "x": 132,
+            "y": 18
+          },
+          "chin": {
+            "x": 154,
+            "y": 64
+          },
+          "note": "Manually traced aligned run local12 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "13": {
+          "crown": {
+            "x": 132,
+            "y": 25
+          },
+          "chin": {
+            "x": 154,
+            "y": 70
+          },
+          "note": "Manually traced aligned run local13 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
+        },
+        "14": {
+          "crown": {
+            "x": 130,
+            "y": 31
+          },
+          "chin": {
+            "x": 153,
+            "y": 76
+          },
+          "note": "Manually traced aligned run local14 headroom candidate: main hair cap to chin excludes compact bun/ribbons; contact/flight knee pose preserved, no per-frame rescale."
         }
-      },
-      "heightPolicy": "head-size-v1"
+      }
     },
     {
       "name": "dash",
@@ -252,7 +360,7 @@
         "hit_frame": 4,
         "combo_window": 7
       },
-      "sheet": "raw/attack_2.attempt1.png",
+      "sheet": "raw/attack_2.headroom.png",
       "manifest": "templates/attack_2.template.json"
     },
     {
@@ -299,7 +407,7 @@
       "loop": true,
       "tableId": "channel",
       "kind": "free",
-      "sheet": "raw/channel.attempt1.png",
+      "sheet": "raw/channel.headroom.png",
       "manifest": "templates/channel.template.json"
     },
     {

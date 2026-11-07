@@ -340,6 +340,175 @@
       "status": "open",
       "owner": "24",
       "added": "2026-11-07"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 0,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 1,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 1.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 2,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 2.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 3,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 2.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 5,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 6,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 7,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 8,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 9,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 10,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 11,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 12,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 13,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Headroom correction: compact secondary bun removes real canvas overflow; attack stance bbox 0.2–2.2 px below band retained as soft review finding. No body fitting or threshold change.",
+      "status": "open",
+      "owner": "24",
+      "added": "2026-11-08"
     }
   ],
   "manual": [
@@ -415,23 +584,13 @@
     },
     {
       "kind": "other",
-      "clip": "run",
-      "dir": "E",
-      "cells": [6],
-      "severity": "info",
-      "reviewer": "art-worker",
-      "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 143, 'y': 37}, chin {'x': 163, 'y': 83} on aligned256 output; head 50.16 px / master 50.70 px, ratio 0.9894. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
-    },
-    {
-      "kind": "other",
       "clip": "dash",
       "dir": "E",
       "cells": [1],
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 150, 'y': 44}, chin {'x': 171, 'y': 89} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 150, 'y': 44}, chin {'x': 171, 'y': 89} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -441,7 +600,7 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 153, 'y': 58}, chin {'x': 176, 'y': 102} on aligned256 output; head 49.65 px / master 50.70 px, ratio 0.9794. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 58}, chin {'x': 176, 'y': 102} on aligned256 output; head 49.65 px / master 50.70 px, ratio 0.9794. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -451,7 +610,7 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 150, 'y': 65}, chin {'x': 171, 'y': 110} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 150, 'y': 65}, chin {'x': 171, 'y': 110} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -461,7 +620,7 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 153, 'y': 86}, chin {'x': 175, 'y': 131} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 86}, chin {'x': 175, 'y': 131} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -471,7 +630,7 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 157, 'y': 86}, chin {'x': 180, 'y': 131} on aligned256 output; head 50.54 px / master 50.70 px, ratio 0.9969. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 157, 'y': 86}, chin {'x': 180, 'y': 131} on aligned256 output; head 50.54 px / master 50.70 px, ratio 0.9969. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -481,7 +640,7 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 153, 'y': 66}, chin {'x': 175, 'y': 111} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 153, 'y': 66}, chin {'x': 175, 'y': 111} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     },
     {
       "kind": "other",
@@ -491,7 +650,107 @@
       "severity": "info",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "D47 INFO: posture; crown {'x': 142, 'y': 38}, chin {'x': 165, 'y': 84} on aligned256 output; head 51.43 px / master 50.70 px, ratio 1.0145. See E/head-evidence.review.json and review overlay. Dynamic pose retained; no per-frame fit."
+      "note": "D47 INFO: posture; crown {'x': 142, 'y': 38}, chin {'x': 165, 'y': 84} on aligned256 output; head 51.43 px / master 50.70 px, ratio 1.0145. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [0],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: secondary-overhang; crown {'x': 141, 'y': 19}, chin {'x': 163, 'y': 65} on aligned256 output; head 50.99 px / master 50.70 px, ratio 1.0058. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [1],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: secondary-overhang; crown {'x': 141, 'y': 19}, chin {'x': 162, 'y': 64} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [2],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: secondary-overhang; crown {'x': 133, 'y': 19}, chin {'x': 154, 'y': 64} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [3],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: secondary-overhang; crown {'x': 132, 'y': 19}, chin {'x': 154, 'y': 64} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [5],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 137, 'y': 31}, chin {'x': 158, 'y': 76} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [6],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 142, 'y': 40}, chin {'x': 164, 'y': 85} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [7],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 140, 'y': 26}, chin {'x': 161, 'y': 71} on aligned256 output; head 49.66 px / master 50.70 px, ratio 0.9796. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [12],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 132, 'y': 18}, chin {'x': 154, 'y': 64} on aligned256 output; head 50.99 px / master 50.70 px, ratio 1.0058. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [13],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 132, 'y': 25}, chin {'x': 154, 'y': 70} on aligned256 output; head 50.09 px / master 50.70 px, ratio 0.9881. See E/head-evidence.review.json and review overlay; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "E",
+      "cells": [14],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "D47 INFO: posture; crown {'x': 130, 'y': 31}, chin {'x': 153, 'y': 76} on aligned256 output; head 50.54 px / master 50.70 px, ratio 0.9969. See E/head-evidence.review.json and review overlay; no per-frame fitting."
     }
   ]
 }
