@@ -1,0 +1,33 @@
+{
+  "pipelineCommit": "3ab3e934ce50c5ef3c359c7213477434ba734cb4",
+  "writtenPngDecoder": "tools/procgen/src/lib/png.js decodePNG raw written bytes",
+  "atlas": {
+    "width": 2048,
+    "height": 2048,
+    "rgbAboveAlphaPixels": 0,
+    "padding": 2,
+    "extrude": 1
+  },
+  "rebuild": [
+    {
+      "file": "phaptu_N.sprite.json",
+      "sha256": "4469a7c34899595e97f815dc0f83b4ce670bff97001db36afd57b29a31d64f74",
+      "identical": true
+    },
+    {
+      "file": "phaptu_N_ske.json",
+      "sha256": "04b278cb6cfa1b87a983b8f49c10f1784c06dd00d07a329b8688dc445e4e87b6",
+      "identical": true
+    },
+    {
+      "file": "phaptu_N_tex.json",
+      "sha256": "01be2527889e90cb5eb16ab7960daae2aae61af23ea3b7721365ae234ca724f4",
+      "identical": true
+    },
+    {
+      "file": "phaptu_N_tex.png",
+      "sha256": "6a355d29dee014f911e387987cdfd37128a75f89411ff4b4d5ca375acd882ded",
+      "identical": true
+    }
+  ]
+}
