@@ -1,0 +1,30 @@
+{
+  "clip": "idle",
+  "dir": "N",
+  "method": "Exact guard pose reuse, no scale/resampling",
+  "sourceCell": 7,
+  "targetCell": 5,
+  "rawSource": "raw/idle.attempt1.png",
+  "selected": "sheets/idle.png",
+  "unchangedOtherCells": 7,
+  "before": [
+    "d5c2065c854bed4efbb9aef2bc7f08a68636ed18",
+    "61e1520232b979376bf76b59deaa4f112c0e6808",
+    "41b60dcd2fcb12f025e97599aa0a146dd6fb1a37",
+    "f5b4c09f09320bec1fbae3f6a8453b4f1c9bf96c",
+    "34cf17c7257946e60ce469f1084424e721244a06",
+    "fa6f4b587a5644f42182037c32097be8eb6a393b",
+    "5e611719726757e2a63cf3eb747c9c7320ab0c98",
+    "709b315a96a8d83fc5eeb5ee57d2e3c0374eeb9b"
+  ],
+  "after": [
+    "d5c2065c854bed4efbb9aef2bc7f08a68636ed18",
+    "61e1520232b979376bf76b59deaa4f112c0e6808",
+    "41b60dcd2fcb12f025e97599aa0a146dd6fb1a37",
+    "f5b4c09f09320bec1fbae3f6a8453b4f1c9bf96c",
+    "34cf17c7257946e60ce469f1084424e721244a06",
+    "709b315a96a8d83fc5eeb5ee57d2e3c0374eeb9b",
+    "5e611719726757e2a63cf3eb747c9c7320ab0c98",
+    "709b315a96a8d83fc5eeb5ee57d2e3c0374eeb9b"
+  ]
+}

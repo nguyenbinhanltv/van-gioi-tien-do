@@ -1,0 +1,18 @@
+{
+  "clip": "dash",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:42:02 UTC",
+  "prompt": "Production DASH NORTH straightBACK sprite sheet. Image1 exactmasteridentity/camera, image2 layoutguide. EXACT 3 equalSQUARE columns 2 rows,6fullbodyframes rowmajor,aspect3:2. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking.  Six-frameDASH directlyAWAY/UP:1guard;2bendknees/torsoleansAWAY;3launchonelegbehind;4airbornelunge;5landbentknees;6exactguard. Backcamera staysstraightN, noface. Samefulllimbsizes, no shrinking. Pureflatopaque#FF00FF background, removeALL borders/gridlines/template marks/ticks/text. No shadows/scenery/floor/glow/particles/rocks/afterimages/weapons. Allfigures sameanatomicalscale, entirelyinowncells.",
+  "references": ["../../the-tu-continuous-v1/reference/N.master4x.png", "templates/dash.template.png"],
+  "selectedOutput": "sheets/dash.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:42:48 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-4d3ed418-abd2-4852-be65-8d8742c1a8e9.png",
+  "originalBackup": "raw/originals/dash.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}

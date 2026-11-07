@@ -1,0 +1,26 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "the-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "kind": "redraw_drift",
+      "clip": "idle",
+      "dir": "N",
+      "cell": 5,
+      "note": "First-pass neutral guard reused from cell7 for exhale cell5. All8 frames retained;7 other cells byte-identical; no scaling. Restore a unique shallow exhale in polish. Manual diagnostic: reused_guard_cells=1, limit=0.",
+      "severity": "warn",
+      "status": "open"
+    },
+    {
+      "kind": "redraw_drift",
+      "clip": "emote",
+      "dir": "N",
+      "cell": 4,
+      "note": "First-pass salute hold replaces the chin-nod cell, reusing cell2 after the original dipped below upright height by0.6px. All8 frames retained;7 other cells byte-identical, no scaling. Restore a shallow nod at the character stature in polish. Manual diagnostic: reused_salute_cells=1, limit=0.",
+      "severity": "warn",
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "clip": "run",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:32:23 UTC",
+  "prompt": "Production frame-by-frame RUN NORTH sprite sheet for Van Gioi Tien Do, The tu A Son Mon Ho Ve. Image1 exactN master/style, image2 exactlayout/leading-legghostguide. EXACT 6 equalSQUARE columns 2 rows, 12 completefullbodyframes rowmajor, aspect6:2. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking. Twelve-frame RUN in place AWAY/UP, straightBACK camera. RscreenRIGHT/LscreenLEFT.1Rcontact;2Rload;3Rmidstance/Lpassing;4Rpush/Lswing;5Rlatepush;6Lprecontact;7Lcontact;8Lload;9Lmidstance/Rpassing;10Lpush/Rswing;11Llatepush;12Rprecontact. Strong alternatinglegreversal and heelsolevisibility, heavygauntlets swingoppositelegs. Keeponeboot DOWN near groundy232 evenbetweencontacts, no deepjump/tuckedflight, legsremainfulllength. Upperbodyupright, shallowkneeflex, stableheight212 (allowed206..218). Matchleadingghosts withoutturningcamera. Pure flatopaque#FF00FF background. Removeallgrid/borders/ghosts/dots/ticks/text/labels. No floor/shadows/blur/effects/scenery/afterimages. Onewholefigurepercell, no cropping or overlappingcells.",
+  "references": ["../../the-tu-continuous-v1/reference/N.master4x.png", "templates/run.template.png"],
+  "selectedOutput": "sheets/run.png",
+  "status": "source; final sheet uses documented donor cells; directional QA and Cocos capture PASS",
+  "utcEndObserved": "2026-11-06 19:33:10 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-cecf630f-651b-4eea-9b35-b975e0e3e6d9.png",
+  "originalBackup": "raw/originals/run.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting upright QA",
+  "finalGate": "export/engine-gate.json"
+}
