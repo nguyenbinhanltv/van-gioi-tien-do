@@ -6,10 +6,16 @@
   "prompt": "Use case: precise-object-edit. Edit EXACTLY ONE CELL of this square4x4run sprite sheet. Zero-based cell6 = SECOND ROW, THIRD COLUMN. All other15cells MUST remain unchanged. In cell6 keep EXACT face/hair/torso/arm/gauntlet/apron positions and anatomical size, but reduce leg tuck during flight: extend the near lower leg downward more naturally and slightly straighten knee, so the full opaque hair-top-to-sole height becomes roughly282nativepx in its313.5pxcell (logical230px in256cell), matching adjacent frames' upright height. Original cell6 is too compressed(~216logicalpx); target224-230logicalpx, not above233. Do NOT resize or stretch the figure. Change leg POSE only, same limb lengths and boot sizes. Bothfeet remain in a natural running flight pose, not plantedspread. Keep E profile, charcoal/ivory/amber/bronze colors, paired worn gauntlets, small flattenedbun. Entire canvas same square dimensions and4x4grid, uniform opaque magenta. No guide marks/text/effects. Preserve every other cell pixel as closely as possible; production pipeline will retain original other cells. Use second image master for scale/design identity only.",
   "references": ["raw/run.attempt1.png", "../reference/E.master.png"],
   "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-792a88bd-57d4-4705-bc4d-50adc36b90f5.png",
-  "status": "UNUSED: call started under initial bbox policy; later refinement requires preserving dynamic posture and using head-size evidence. Original run.attempt1.png remains selected.",
+  "status": "Retained historical raw attempt/edit; not the selected full sheet. E/project.json is authoritative.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:56:59.257Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
-  }
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": false,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  },
+  "priorStatus": "UNUSED: call started under initial bbox policy; later refinement requires preserving dynamic posture and using head-size evidence. Original run.attempt1.png remains selected."
 }

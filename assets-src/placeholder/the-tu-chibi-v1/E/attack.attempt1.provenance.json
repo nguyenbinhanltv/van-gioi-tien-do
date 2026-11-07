@@ -8,10 +8,16 @@
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-9daa3912-5832-476f-8b59-25ad483d7e8c.png",
   "clipProfile": "smooth-v2",
   "frames": 14,
-  "status": "rejected: nonsquare cells",
+  "status": "Retained historical raw attempt/edit; not the selected full sheet. E/project.json is authoritative.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:34:12.090Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
-  }
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": false,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  },
+  "priorStatus": "rejected: nonsquare cells"
 }

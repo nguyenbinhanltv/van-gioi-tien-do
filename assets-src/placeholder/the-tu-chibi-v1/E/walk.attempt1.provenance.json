@@ -10,10 +10,15 @@
   "frames": 16,
   "nominalFps": 24,
   "pipelineCommit": "645387a6129ab28c4a95c1943ba8f3fc9c3978cc",
-  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:30:26.235Z",
     "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
   }
 }

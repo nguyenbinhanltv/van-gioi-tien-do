@@ -8,10 +8,16 @@
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-9ac802df-29f4-423f-a925-9256eae72510.png",
   "clipProfile": "smooth-v2",
   "frames": 14,
-  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "status": "Retained historical raw attempt/edit; not the selected full sheet. E/project.json is authoritative.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:34:15.311Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
-  }
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": false,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  },
+  "priorStatus": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json"
 }

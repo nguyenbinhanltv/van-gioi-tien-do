@@ -6,10 +6,16 @@
   "prompt": "Use case: identity-preserve / precise-object-edit. HEAD-SIZE CONSISTENCY REPAIR ONLY. Image1 exact sprite sheet edit target, image2 PINNED MASTER headsize and identity. Preserve ALL dynamic body POSES, torso/limbs/gauntlets/feet positions, deep lean/lunge/flight tuck, secondary ribbon/apron motion, anatomical limb lengths, body scale and4x4square lattice exactly. DO NOT straighten knees, flatten motion, raise bodies or resize whole figures. Fix ONLY oversized skull/face/main-hair-cap units to match the pinnedmaster: crown-to-chin anatomical HEAD length about48logicalpx in256cell, approximately59nativepx in313.5rawcell, within\u00c2\u00b11logicalpx. Exclude raisedbun/loose ribbons from headsize. Current heads are somewhat too large; redraw entire head uniformly SMALLER only as needed, generally10-15%, keeping the SAME adult tan squarejaw/amber eyes/thickbrows/face/hair identity and internal facial proportions. Neck connects naturally to unchanged torso. Keep every head angle/expression and head-center position coherent with its original pose. Bun stays small and amberribbon trajectory preserved. Both gauntlets/ivory apron/amber sash unchanged. Opaque uniformmagenta, exact same4x4square canvas, no labels/guide/effects/shadows. This is run clip source; preserve its entire rowmajor motion sequence and cell mapping. Body is NOT being fitted to a height band: preserve tuckedflight/deepdash. Only actual headscale drift is corrected.",
   "references": ["raw/run.attempt1.png", "../reference/E.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-9829d966-d889-4e17-9e21-aee11847390b.png",
-  "status": "whole-sheet candidate NOT selected: foot regressions. Originalwalk retained; only runcell6 composed into run.head-cell6.png with15othercells byte-identical.",
+  "status": "Retained historical raw attempt/edit; not the selected full sheet. E/project.json is authoritative.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T21:02:24.423Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
-  }
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": false,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  },
+  "priorStatus": "whole-sheet candidate NOT selected: foot regressions. Originalwalk retained; only runcell6 composed into run.head-cell6.png with15othercells byte-identical."
 }

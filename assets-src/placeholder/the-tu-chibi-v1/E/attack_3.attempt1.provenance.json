@@ -8,10 +8,15 @@
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-7409014d-cde2-47f4-9a6a-4ce9c9f96598.png",
   "clipProfile": "smooth-v2",
   "frames": 14,
-  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:34:18.975Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
   }
 }

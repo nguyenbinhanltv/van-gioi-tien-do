@@ -6,10 +6,15 @@
   "prompt": "Use case: identity-preserve / precise-object-edit. Correct HEAD SCALE DRIFT in this4x4IDLE sprite sheet. Image1 sheet edit target; image2 PINNED MASTER and exact headsize reference. Every generated head is about15%too large relative to the unchanged body. In ALL16cells make the ENTIRE skull/face/main-hair-cap unit about15%SMALLER, matching master anatomical crown-to-chin distance48logicalpixels in256logicalcell (about59nativepixels in313.5pxrawcell), excluding elevatedbun/ribbons. Keep exact same facial features/identity and proportional eyes/nose/mouth/jaw inside head; uniformly redraw head at correct smaller size, no facial redesign. Neck must connect naturally to original torso. Keep bun/ribbon identity but fit above new head. EVERYTHING BELOW NECK must remain unchanged: exact torso/arms/gauntlets/ivory apron/sash/trousers/boots/poses/positions and body size. Do NOT change breathing sequence, camera, stance, figurebodyheight or cellgrid. Do NOT shrink entire figures or cells. Only actual oversized heads need correction to pinnedmaster. Opaque uniformmagenta, same4x4squarecanvas, clean tinted outlines, same2tonecel. Target master maincap-crown/chin distance48px at256cell, tolerance\u00c2\u00b11px; head size consistent across16drawings. Preserve every dynamicdetail and sameoriginaldesign.",
   "references": ["raw/idle.attempt1.png", "../reference/E.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-10943551-c6c5-46dd-b699-f0f2ce0f5ce1.png",
-  "status": "selected head-size source (hit-dash further repaired atglobal10/11/13); D47preflight passes; official merged-gate validation and refreshedcapture pending",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T21:02:24.416Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
   }
 }

@@ -10,10 +10,16 @@
   "frames": 16,
   "nominalFps": 24,
   "pipelineCommit": "645387a6129ab28c4a95c1943ba8f3fc9c3978cc",
-  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "status": "Retained historical raw attempt/edit; not the selected full sheet. E/project.json is authoritative.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T20:30:27.059Z",
     "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
-  }
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": false,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  },
+  "priorStatus": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json"
 }

@@ -6,10 +6,15 @@
   "prompt": "Use case: precise-object-edit / identity-preserve. Fix REAL TOP-EDGE CLIPPING in this16frame4x4RUN source. Preserve every dynamic bodypose, deep knee/flight tuck, torso/arms/gauntlets/ivory apron/sash/leg lengths/body size and Eprofile. Do NOT flatten motion or scale wholefigures. Current main skull/face units are already corrected toward pinnedmaster (image2); keep their sizes/identity. ONLY HAIR HEADROOM: compress the ELEVATED TOPKNOT/BUN in ALL16cells so its top extends at most6logicalpixels above the main skull/mainhaircap crown (about7nativepx in313.5cell). Make bun a SMALL compact tied tuft, not a tall ponytail; preserve hairtie and two amberribbons. Keep ALL loosehair/ribbons at or below that bun-top level, flowing sideways/back/down, no upwardarches. Main face/skull unchanged; bun only secondaryhair is shortened. This must leave several pixels of clear magenta ABOVE the entire figure before alignment; source standing fullsilhouette max228logicalpx in256cell, achieved by secondaryhair correction, not bodyshrinking. ALSO CELL2 (firstrow thirdcolumn): move only the nearest planted boot sole about6nativepx toward RIGHT (toward its templateghost), adjusting ankle naturally, samebootshape/leglength; otherfeet unchanged. Current footprint needs slight improvement, not a wholeleg posechange. Keep same4x4squarecanvas/positions, fixed adulttan face/ambereyes/squarejaw, simplegauntlets, charcoal/ivory/amber/bronze,two-tonecel, uniformopaque magenta. No shadow/effects/text/guides. Originaldesign, no duplicatedheads.",
   "references": ["raw/run.head-corrected.png", "../reference/E.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-7ef0c895-982e-47fc-897e-35c35ed61f97.png",
-  "status": "selected source; official D47 hard QA passed; source height overflow zero; refreshed Cocos capture pending",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "checkedUtc": "2026-11-07T21:39:34.234Z",
     "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
   }
 }
