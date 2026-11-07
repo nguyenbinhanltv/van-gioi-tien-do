@@ -6,9 +6,11 @@
   "prompt": "Use case: identity-preserve. Production original Th\u1ec3 tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. SE front-right3quarter slightly elevated isometric camera allframes. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. GROUPED SOURCE16cells in4x4SQUARE2048x2048canvas, exactrowmajor layout, NOT onecontinuousanimation. Cells0-5 HIT6frames:0neutralmasterguard,1flinch chestimpact,2strongestbackwardshoulderrecoil/headtilt,3recoverbreath,4guardreturns,5neutral. Feetstaygrounded, do notcollapse. Cells6-15 DASH10frames, local0-9:0guardanticipation;1kneesbend/gauntletdrawback;2-3accelerate toward lower-right with forwardlean;4-5deepdynamic lowlunge/flighttuck, preservingheadsize;6-7extend/brake;8recoverknees;9neutralguard. Headstencils translated for thosepostures, retainfullskullsize, doNOTflattenlunge or shrinkfigures. Distinct progressive poses, weapons in natural fists/forearms. SEviewthroughout, noEprofile/frontflips. No cutsbetween neighboringcells, preserveexactmapping HITglobal0..5 andDASHglobal6..15; all16filledonce. Secondaryribbon/apronmomentum clear. Renderall16completefullbody drawings with consistent scale.",
   "references": ["templates/hit-dash/group.head-stencil.template.png", "../reference/SE.master.png"],
   "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-0c840436-3e8b-4f73-96c0-1d0589ff7f28.png",
-  "status": "SE candidate; pending clip-local QA",
+  "status": "Historical generation/edit input retained; selected fullsheets are authoritative in project.json.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output, original project inputs only"
-  }
+  },
+  "selectedFullSheet": false,
+  "selectionRegistry": "project.json"
 }

@@ -18,5 +18,7 @@
     "regression": 7,
     "info": 96,
     "note": "Inherited head points were comparison-only; candidate not selected, no new head certification claimed"
-  }
+  },
+  "selectedFullSheet": false,
+  "selectionRegistry": "project.json"
 }

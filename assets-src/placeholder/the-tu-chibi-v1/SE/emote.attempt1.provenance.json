@@ -6,9 +6,11 @@
   "prompt": "Use case: identity-preserve. Production original Th\u1ec3 tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. SE front-right3quarter slightly elevated isometric camera allframes. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT12consecutivedrawings in4columns x3rows RECTANGULAR4:3canvas2048x1536; square512cells, NO fourthrow, all12filledrowmajor. CONFIDENT TANK EMOTE. Feetplanted masterstance, SEfacefixed.0-2neutralstart,3-4rightgauntlet tapschest in acknowledgement,5-7botharms flexconfidently besidechest/shoulders (gauntlets belowtopedge, noaboveheadgesture),8-10relaxwith clothlag,11returnneutral. Friendlysubtleconfidentsmile sameface, noidentitychange. Distinctprogressivedrawings, no duplicatedholdblocks, stablebody/headscale. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background.",
   "references": ["templates/emote.head-stencil.template.png", "../reference/SE.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-d48cd77f-6da0-43cd-8cd7-b7ee53daa66a.png",
-  "status": "SE candidate; QA pending",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output; original project inputs"
-  }
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
 }

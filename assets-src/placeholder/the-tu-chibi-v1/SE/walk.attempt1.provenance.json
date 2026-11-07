@@ -6,9 +6,11 @@
   "prompt": "Use case: identity-preserve. Production Th\u1ec3 tu T1 WALK SE animation, exactly16 consecutive drawings in4x4SQUARE lattice. Image1 is official direction-aware lattice with unscaled master HEAD STENCILS in every cell and colored leading-foot ghosts. Image2 pinned SE master. Complete natural muscular tank bodies BELOW the same-sized heads. Preserve fixed adult tan squarejaw amber eyes thick brows, black swept maincap and small bun; do not enlarge head or become babyface. SE/front-right threequarter view in EVERY frame, slightly elevated isometric camera. Charcoal sleeveless wrap/trousers, IVORY ink-wash apron under broad amber hip sash, two amber tails, paired simple worn charcoal gauntlets one bronze wristband/smooth knuckleplate each, gold trim. WALK toward lower-right, alternating legs, smooth16phase fullcycle: frame0 right forward heelcontact;0-7 right leg planted travels backward along direction plane to toeoff;8 left forward heelcontact;8-15 left leg planted backward to toeoff; opposite leg swing natural. Orange ghosts RIGHT sole and cyan ghosts LEFT sole: place the indicated planted boot sole EXACTLY on its colored ellipse INCLUDING its varying screen Y, not on one common baseline. Frameleading orange0-5 and14-15, cyan6-13 per guide; small realistic knee/contact bob. Head units remain same size as stencils; no per-frame fit/shrink; small2px verticalheadbob permitted. Pelvis axis stays guide center. Anatomical216px crown-to-sole @2x neutral, head/master face scale exact, ribbons/apron lag/settle; compact bun no tall hair upwardarch. At most4x4, requested2048x2048square; identical squarecells; draw all16different poses rowmajor, seamless lastfirst. Flat opaque RGB255,0,255 magenta. Two-tone cel+smallhighlight/rim,tinted outlines,NWlight. Remove all guides/ghosts/lines/labels/stencil duplicates in final. No shadows/FX/text/objects. Original design only. Both gauntlets worn naturally. Keep entire character inside eachcell with margin.",
   "references": ["templates/walk.head-stencil.template.png", "../reference/SE.master.png"],
   "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-8f3d3ca9-87a8-40de-85e0-f841e7a074df.png",
-  "status": "SE temporary candidate; pending direction-specific QA",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output, original project inputs only"
-  }
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
 }

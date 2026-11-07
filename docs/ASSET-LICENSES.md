@@ -4613,3 +4613,10 @@ Giữ động tác lao sâu, chỉ sửa đầu sai cỡ và búi tóc phụ gâ
 | Tệp                                                                     | Nguồn / xử lý                                                                                                                         | Điều khoản                       |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | `assets-src/placeholder/the-tu-chibi-v1/SE/raw/walk.feet-corrected.png` | OpenAI image edit, giữ raw/prompt/model không công bố/UTC tại `SE/walk.feet-corrected.provenance.json`; không chọn vì7regression chân | OpenAI Output, đầu vào dự án gốc |
+
+### Thể tu SE — atlas xuất (worker24, 2026-11-08)
+
+| Tệp                                                                                          | Nguồn / xử lý                                                                    | Điều khoản               |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.png` | Atlas dẫn xuất @vgtd/sprite từ nguồn SE AI đã kê ở trên; không đổi cỡ từng frame | OpenAI Output / mã dự án |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.png`       | Atlas dẫn xuất @vgtd/sprite từ nguồn SE AI đã kê ở trên; không đổi cỡ từng frame | OpenAI Output / mã dự án |
