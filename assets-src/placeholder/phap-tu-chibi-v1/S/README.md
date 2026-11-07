@@ -27,4 +27,4 @@ Input project SHA256: `c9c0e3f79a5334687bd9b3f3bcf467ff87601f280db711200e293a59c
 | source-12.full.png | 7efddbb5d941b0a7e3561a7e8747e93ce377c58da3665a0be80b1df12e66be8a |
 | source-13.full.png | 24e6d3de6f23b3cacd7201d2f21750df2d2d9e84984d585b8fa7583e59eeab06 |
 
-S/selection.json preserves the reviewed attempt choices. Head evidence and open foot findings are in the review/backlog records. engine-gate.json records real Cocos3.8.8 2� capture of all15 clips against matching runtime source bytes.
+S/selection.json preserves the reviewed attempt choices. Head evidence and open foot findings are in the review/backlog records. engine-gate.json records real Cocos3.8.8 2× capture of all15 clips against matching runtime source bytes.
