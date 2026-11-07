@@ -9,6 +9,7 @@ import { normalizeSheetDpi, preparationScale } from './preparation.js';
 import { toStraight, type Straight } from './raster.js';
 import { cellRect, crop, keyOut } from './slice.js';
 import { CELL_PX } from './types.js';
+import { sheetLayout } from './grouped.js';
 
 export const POSE_JOINTS = [
   'crown',
@@ -154,22 +155,12 @@ export function compareVariantCell(
 function sourceCells(project: Project, clip: ProjectClip, baseDir: string) {
   const bytes = readFileSync(resolve(baseDir, clip.sheet));
   const raw = decodePng(bytes);
-  // Structural support for grouped sheets; these optional fields become public with the grouped-sheet API.
-  const selected = (clip as ProjectClip & { sheetSelection?: { rows: number; cells: readonly number[] } })
-    .sheetSelection;
-  const rows = selected?.rows ?? Math.ceil(clip.frames / clip.cols);
-  const count = selected ? rows * clip.cols : clip.frames;
-  const normalized = normalizeSheetDpi(raw, clip.cols, count).image;
+  const grid = sheetLayout(clip);
+  const normalized = normalizeSheetDpi(raw, grid.cols, grid.frames).image;
   const straight = toStraight(normalized);
-  const indices = selected?.cells ?? Array.from({ length: clip.frames }, (_, i) => i);
-  if (
-    indices.length !== clip.frames ||
-    new Set(indices).size !== clip.frames ||
-    indices.some((i) => !Number.isInteger(i) || i < 0 || i >= rows * clip.cols)
-  )
-    throw new Error('variant QA: invalid sheet cell selection');
+  const indices = clip.sheetSelection?.cells ?? Array.from({ length: clip.frames }, (_, i) => i);
   const cells = indices.map((i) => {
-    const r = cellRect(straight.width, straight.height, clip.cols, rows, i);
+    const r = cellRect(straight.width, straight.height, clip.cols, grid.rows, i);
     return keyOut(crop(straight, r.x, r.y, r.width, r.height), project.slice);
   });
   // Fixed authored scale must agree in output cell units even when raw sheets have different DPI.

@@ -170,3 +170,10 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 1. Các ngưỡng QA của `@vgtd/sprite` là **mặc định chưa được duyệt**: chiều cao ±3 % (theo chủ dự án), trượt chân 3 px/khung, đường nối vòng lặp 2,5×, độ giống master 0,7 (mặt/thân), palette lock strength 0,6 / khoảng cách 60. Cần chỉnh khi có sheet thật của cả 13 animation; **không** nới lỏng cổng chiều cao âm thầm: tư thế giải phẫu phải khai báo `exceptions`.
 2. Nhiều trang atlas ≤ 2048 đã có đường tải một armature và capture Cocos 3.8.8 (PR #122). QA theo hướng có PR #123; dữ liệu SE cũ vẫn cần chuyển bóng chân/hiệu chuẩn như mục chờ ở trên, không được coi là đã đo đúng theo hướng chỉ vì xuất được atlas.
 3. Mục §10 mục 2 (ngưỡng IoU của key pose D40) không còn áp dụng cho thân Player (D41).
+
+### Ngưỡng kiểm biến thể từ T1
+
+- Tooling cung cấp pose-lock (IoU silhouette + khoảng cách khớp chú thích) và face-lock pixel theo từng ô,
+  nhưng chưa có dữ liệu art đã duyệt để chốt ngưỡng chung cho T2–T5/trang phục. Project phải khai báo ngưỡng tường minh;
+  ví dụ kiểm đúng tuyệt đối không phải cân chỉnh art đã duyệt. Cần xem biến thể thật để chọn ngưỡng và ghi lại.
+- Chú thích khớp/mặt là bằng chứng thủ công, không phải nhận dạng giải phẫu tự động; mặt khuất N/NE phải giữ nhãn chưa đo.

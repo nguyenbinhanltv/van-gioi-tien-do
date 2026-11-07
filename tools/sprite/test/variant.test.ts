@@ -1,7 +1,9 @@
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { encodePng } from '@vgtd/rig';
 import {
@@ -70,6 +72,49 @@ function fixture() {
 }
 
 describe('edit-from-master variants', () => {
+  it('audits through the lightweight CLI without building an atlas', () => {
+    const { dir, project } = fixture();
+    writeFileSync(join(dir, 'project.json'), JSON.stringify(project));
+    const cwd = fileURLToPath(new URL('../', import.meta.url));
+    const invoke = () =>
+      spawnSync(
+        process.execPath,
+        [resolve(cwd, '../rig/scripts/run-ts.mjs'), 'scripts/variant-check.ts', '--project', join(dir, 'project.json')],
+        { cwd, encoding: 'utf8' },
+      );
+    const good = invoke();
+    expect(good.status, good.stderr).toBe(0);
+    expect(JSON.parse(good.stdout).clips[0].metrics).toHaveLength(2);
+    const annotations = [annotation(), annotation()];
+    (annotations[0]!.edited.hand_L as { x: number }).x += 10;
+    writeFileSync(join(dir, 'annotations.json'), JSON.stringify(annotations));
+    const bad = invoke();
+    expect(bad.status, bad.stderr).toBe(1);
+    expect(JSON.parse(bad.stdout).findings[0].gate).toBe('poseLock');
+  });
+
+  it('pins external calibration and handles selected cells from grouped sheets', () => {
+    const { dir, project, master } = fixture();
+    const calibration = Buffer.from('{"scale":1}');
+    writeFileSync(join(dir, 'calibration.json'), calibration);
+    const selection = { rows: 1, cells: [1, 0] };
+    const bytes = Buffer.from(
+      JSON.stringify({
+        ...master,
+        preparation: { kind: 'square-cell-dpi-v1', calibration: 'calibration.json' },
+        clips: master.clips.map((c) => ({ ...c, sheetSelection: selection })),
+      }),
+    );
+    writeFileSync(join(dir, 't1.json'), bytes);
+    const p: Project = {
+      ...project,
+      variant: { ...project.variant!, masterProjectSha256: sha(bytes), masterCalibrationSha256: sha(calibration) },
+      clips: project.clips.map((c) => ({ ...c, sheetSelection: selection })),
+    };
+    expect(auditProjectVariant(p, dir)!.findings).toEqual([]);
+    writeFileSync(join(dir, 'calibration.json'), '{"scale":0.9}');
+    expect(() => auditProjectVariant(p, dir)).toThrow(/master calibration: SHA256 mismatch/);
+  });
   it('pins provenance and records every cell in normal project output', () => {
     const { dir, project } = fixture();
     const result = runProject(project, dir);
