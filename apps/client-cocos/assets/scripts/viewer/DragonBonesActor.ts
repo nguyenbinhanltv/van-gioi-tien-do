@@ -1,9 +1,10 @@
 import { Color, JsonAsset, Node, UITransform, dragonBones, resources } from 'cc';
-import type { character } from '../vendor/vgtd.mjs';
+import { character } from '../vendor/vgtd.mjs';
 import { newNode } from '../IsoAdapter';
 import type { ActorFrame, ApplyOptions, CacheMode, CharacterActor, RigSource, SeamMetric } from './CharacterActor';
 import type { Direction, SlotId } from './ViewerModel';
 import { SPINE_SLOTS } from './ViewerModel';
+import { LayeredSpriteAssets, disposeLayeredRig, type LayeredRigAssets } from './LayeredSpriteAssets';
 
 const CACHE_ENUM: Record<CacheMode, number> = {
   realtime: dragonBones.ArmatureDisplay.AnimationCacheMode.REALTIME,
@@ -22,11 +23,7 @@ const BLINK_GROUP = 'blink';
 /** Body clips that own the eyes or must not blink (eyes closed / pain / dead). */
 const BLINK_OFF: ReadonlySet<string> = new Set(['meditate', 'die', 'hit']);
 
-interface RigAssets {
-  ske: dragonBones.DragonBonesAsset;
-  tex: dragonBones.DragonBonesAtlasAsset;
-  textures: readonly dragonBones.DragonBonesAtlasAsset[];
-}
+type RigAssets = LayeredRigAssets;
 
 /**
  * One DragonBones armature on screen (Cocos built-in `dragon-bones` module, `ArmatureDisplay`, REALTIME by default).
@@ -45,10 +42,17 @@ export class DragonBonesActor implements CharacterActor {
 
   private readonly dbNode: Node;
   private readonly display: dragonBones.ArmatureDisplay;
-  private readonly assets = new Map<Direction, RigAssets>();
+  private readonly assets = new Map<string, RigAssets>();
+  onEquipmentFx: ((selection: character.ResolvedEquipmentVisuals | null) => void) | null = null;
+  private layers: LayeredSpriteAssets | null = null;
+  private selection: character.ResolvedEquipmentVisuals | null = null;
+  private installedSelection: character.ResolvedEquipmentVisuals | null = null;
+  private currentRig: RigAssets | null = null;
+  private loadedKey: string | null = null;
+  private loadingKey: string | null = null;
+  private generation = 0;
+  private disposed = false;
   private rigDir: Direction | null = null;
-  /** Direction whose assets are being loaded (so a second apply() does not start a duplicate load). */
-  private loadingDir: Direction | null = null;
   /** Latest requested state: applied when a load completes, whatever was requested when it started. */
   private latestView: character.CharacterViewState | null = null;
   private latestOpts: ApplyOptions | null = null;
@@ -73,7 +77,9 @@ export class DragonBonesActor implements CharacterActor {
   }
 
   get skeletonDirection(): Direction | null {
-    return this.rigDir;
+    return this.latestView && this.loadedKey === this.requestKey(this.latestView.skeletonDirection)
+      ? this.rigDir
+      : null;
   }
 
   get canSeek(): boolean {
@@ -89,7 +95,12 @@ export class DragonBonesActor implements CharacterActor {
   }
 
   slotOrder(): string[] {
-    return this.slotNames;
+    return (
+      this.display
+        .armature()
+        ?.getSlots()
+        .map((s) => s.name) ?? this.slotNames
+    );
   }
 
   clipNames(): string[] {
@@ -106,9 +117,9 @@ export class DragonBonesActor implements CharacterActor {
   }
 
   private async loadRig(dir: Direction): Promise<RigAssets> {
-    const cached = this.assets.get(dir);
-    if (cached) return cached;
     const base = `${this.source.folder}/${this.source.stem}_${dir}`;
+    const cached = this.assets.get(base);
+    if (cached) return cached;
     const [ske, tex] = await Promise.all([
       this.loadAsset(`${base}_ske`, dragonBones.DragonBonesAsset),
       this.loadAsset(`${base}_tex`, dragonBones.DragonBonesAtlasAsset),
@@ -148,44 +159,123 @@ export class DragonBonesActor implements CharacterActor {
       }
     }
     const rig = { ske, tex, textures };
-    this.assets.set(dir, rig);
+    this.assets.set(base, rig);
     return rig;
   }
 
   apply(view: character.CharacterViewState, opts: ApplyOptions): void {
+    if (this.disposed) return;
+    if (this.layers && opts.cache !== 'realtime')
+      throw new Error('layered equipment requires realtime animation cache');
     this.latestView = view;
     this.latestOpts = opts;
     this.root.setScale(view.scaleX, 1, 1);
-    if (this.rigDir !== view.skeletonDirection) {
+    if (this.loadedKey !== this.requestKey(view.skeletonDirection)) {
       this.ensureRig(view.skeletonDirection);
       return;
     }
     this.applyLoaded(view, opts);
   }
 
+  /** Cosmetic changes affect only selected sets; tier aura remains a caller-owned FX hook. */
+  setEquipmentVisuals(
+    folder: string,
+    mapping: character.EquipmentVisualMapping,
+    appearance: character.EquipmentAppearance,
+  ): void {
+    const resolved = character.resolveEquipmentVisuals(mapping, appearance);
+    const key = JSON.stringify([folder, resolved]);
+    if (this.layers && key === JSON.stringify([this.layers.folder, this.selection])) return;
+    if (!this.layers || this.layers.folder !== folder) {
+      this.layers?.clear();
+      this.layers = new LayeredSpriteAssets(folder);
+    }
+    this.selection = resolved;
+    this.generation++;
+    this.loadingKey = null;
+  }
+
+  clearEquipmentVisuals(): void {
+    this.layers?.clear();
+    this.layers = null;
+    this.selection = null;
+    this.generation++;
+    this.loadingKey = null;
+  }
+
+  equipmentState() {
+    return {
+      requested: this.selection,
+      installed: this.installedSelection,
+      loading: !!this.loadingKey,
+      cacheEntries: this.layers?.cacheEntries ?? 0,
+      slots:
+        this.display
+          .armature()
+          ?.getSlots()
+          .map((s) => ({ name: s.name, display: s.displayIndex, visible: s.visible })) ?? [],
+    };
+  }
+
+  private requestKey(dir: Direction): string {
+    return JSON.stringify(
+      this.layers ? [this.layers.folder, this.selection, dir] : [this.source.folder, this.source.stem, dir],
+    );
+  }
+
   private ensureRig(dir: Direction): void {
-    if (this.loadingDir === dir) return;
-    this.loadingDir = dir;
-    const keepTime = this.time()?.time ?? 0;
-    void this.loadRig(dir)
+    const key = this.requestKey(dir);
+    if (this.loadingKey === key) return;
+    this.loadingKey = key;
+    const generation = ++this.generation,
+      loader = this.layers,
+      selection = this.selection;
+    const pending = loader && selection ? loader.compose(selection, dir) : this.loadRig(dir);
+    void pending
       .then((rig) => {
-        if (this.loadingDir === dir) this.loadingDir = null;
-        const latest = this.latestView;
-        if (!latest || !this.latestOpts) return;
-        if (latest.skeletonDirection !== dir) {
-          this.apply(latest, this.latestOpts); // the request moved on while loading: follow it
+        if (this.disposed || generation !== this.generation || this.requestKey(dir) !== key) {
+          disposeLayeredRig(rig);
           return;
         }
+        this.loadingKey = null;
+        const latest = this.latestView,
+          opts = this.latestOpts;
+        if (!latest || !opts || latest.skeletonDirection !== dir) {
+          disposeLayeredRig(rig);
+          return;
+        }
+        const old = this.currentRig,
+          state = this.display.armature()?.animation.lastAnimationState;
+        const restore =
+          state && this.anim === (opts.clip ?? latest.animation.id) && old?.motionId === rig.motionId
+            ? { time: state.currentTime, completed: state.isCompleted }
+            : undefined;
         this.installRig(dir, rig);
-        this.applyLoaded(latest, this.latestOpts);
-        this.seek(keepTime);
+        this.currentRig = rig;
+        this.loadedKey = key;
+        this.installedSelection = selection;
+        this.applyLoaded(latest, opts, restore);
+        disposeLayeredRig(old);
+        this.onEquipmentFx?.(selection);
       })
       .catch((e: unknown) => {
-        if (this.loadingDir === dir) this.loadingDir = null;
-        this.onError?.(
-          `${this.source.folder}/${this.source.stem}_${dir}: ${e instanceof Error ? e.message : String(e)}`,
-        );
+        if (this.disposed || generation !== this.generation) return;
+        this.loadingKey = null;
+        this.onError?.(`${key}: ${e instanceof Error ? e.message : String(e)}`);
       });
+  }
+
+  dispose(): void {
+    this.disposed = true;
+    this.generation++;
+    this.loadingKey = null;
+    this.loadedKey = null;
+    this.layers?.clear();
+    this.assets.clear();
+    this.display.dragonAsset = null;
+    this.display.dragonAtlasAsset = null;
+    disposeLayeredRig(this.currentRig);
+    this.currentRig = null;
   }
 
   private installRig(dir: Direction, rig: RigAssets): void {
@@ -193,7 +283,7 @@ export class DragonBonesActor implements CharacterActor {
     d.dragonAsset = rig.ske;
     d.dragonAtlasAsset = rig.tex;
     // getArmatureNames() can be empty at runtime (it is built for the editor): fall back to the <stem>_<DIR> convention.
-    const want = `${this.source.stem}_${dir}`;
+    const want = rig.armatureName ?? `${this.source.stem}_${dir}`;
     const names = d.getArmatureNames();
     d.armatureName = names.length === 0 || names.includes(want) ? want : names[0]!;
     this.rigDir = dir;
@@ -211,7 +301,11 @@ export class DragonBonesActor implements CharacterActor {
     );
   }
 
-  private applyLoaded(view: character.CharacterViewState, opts: ApplyOptions): void {
+  private applyLoaded(
+    view: character.CharacterViewState,
+    opts: ApplyOptions,
+    restore?: { time: number; completed: boolean },
+  ): void {
     const d = this.display;
     if (d.enableBatch !== opts.batch) d.enableBatch = opts.batch;
     if (opts.cache !== this.cache) {
@@ -243,12 +337,26 @@ export class DragonBonesActor implements CharacterActor {
     this.syncBlink(armature, id);
     if (this.anim !== id || this.loopNow !== loop) {
       // no fade while paused: the fade clock is frozen at timeScale 0 and the old animation would keep dominating
-      armature.animation.fadeIn(id, this.anim && this.anim !== id && !opts.paused ? opts.mix : 0, loop ? 0 : 1);
+      if (restore) {
+        const config = armature.animation.animationConfig;
+        config.animation = id;
+        config.fadeInTime = 0;
+        config.playTimes = loop ? 0 : 1;
+        const duration = armature.animation.animations[id]!.duration;
+        config.position = loop ? restore.time % duration : Math.min(restore.time, Math.max(0, duration - 1e-7));
+        config.actionEnabled = false;
+        const state = armature.animation.playConfig(config);
+        armature.advanceTime(0);
+        if (state) {
+          state.actionEnabled = true;
+          if (restore.completed && !loop) state.stop();
+        }
+      } else armature.animation.fadeIn(id, this.anim && this.anim !== id && !opts.paused ? opts.mix : 0, loop ? 0 : 1);
       this.anim = id;
       this.loopNow = loop;
     }
     armature.animation.timeScale = opts.paused ? 0 : opts.timeScale;
-    this.setSlotDisplays(armature, opts);
+    if (!this.layers) this.setSlotDisplays(armature, opts);
   }
 
   /**
@@ -327,6 +435,8 @@ export class DragonBonesActor implements CharacterActor {
     const dur = st.totalTime;
     const n = Math.max(2, Math.round(dur * 30));
     const keep = st.currentTime;
+    const actions = st.actionEnabled;
+    st.actionEnabled = false;
     const sample = (i: number): number[] => {
       st.currentTime = (i / n) * dur;
       armature.advanceTime(0);
@@ -341,6 +451,7 @@ export class DragonBonesActor implements CharacterActor {
     const seamStep = dist(poses[n - 1]!, poses[0]!);
     st.currentTime = keep;
     armature.advanceTime(0);
+    st.actionEnabled = actions;
     return {
       specLoop: this.latestView?.animation.loop ?? false,
       loop: this.loopNow,

@@ -382,3 +382,16 @@ Với lunge có pelvis di chuyển có chủ đích: dùng `kind: "lattice-root"
 evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvisX là X đăng ký cố định, **không phải pelvis anatomy
 đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
 Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.
+
+## Runtime body/weapon/FX trong Cocos
+
+DragonBonesActor nhận mapping + appearance qua setEquipmentVisuals, chỉ tải các set/direction được chọn và mọi trang atlas
+của chúng. Composer công khai trong packages/character tạo một armature, body/weapon display-swap và z-order theo frame.
+Không áp paperdoll displayIndex cũ lên layer timeline. Costume/hide costume chỉ chọn body; weapon skin chọn weapon và FX
+tương ứng. FX trắng nhận tint sáu phẩm chất; aura tier qua callback onEquipmentFx cho hệ FX của client. Mapping FX null
+chủ đích không phát sáng. Halo có derivedFromWeapon sai weapon đang chọn bị từ chối.
+
+Swap cùng motion/clip giữ clock tại lúc cài rig, không phát lại frame event; one-shot đã xong giữ pose cuối. Load cũ hoàn
+thành muộn không được đè selection mới. Layered dùng REALTIME; rig đơn cũ vẫn hỗ trợ cache và multi-page như trước.
+Dispose chỉ hủy asset composition tự tạo, resource nguồn do Cocos quản lý. Xem apps/client-cocos/LAYERED-SPRITES.md cho
+layout resource, preview config, capture và kiểm thử procedural trên engine3.8.8; nguồn art vẫn phải qua QA sprite.

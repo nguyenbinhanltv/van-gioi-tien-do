@@ -75,6 +75,16 @@ function mapping(): EquipmentVisualMapping {
 }
 
 describe('D45 equipment appearance', () => {
+  it('keeps a weapon skin halo independent from the tier aura', () => {
+    const map = mapping();
+    const result = resolveEquipmentVisuals(
+      { ...map, weaponSkins: { jade: { weapon: 'jade_weapon', fx: 'jade_glow' } } },
+      { tier: 'T3', quality: 'gold', weaponSkin: 'jade' },
+    );
+    expect(result.weaponSet).toBe('jade_weapon');
+    expect(result.fxSet).toBe('jade_glow');
+    expect(result.aura).toBe('T3-aura');
+  });
   it('swaps body and weapon independently and hides only the costume', () => {
     const map = mapping();
     const appearance = { tier: 'T3' as const, quality: 'gold' as const, costume: 'ceremonial', weaponSkin: 'jade' };
@@ -108,6 +118,17 @@ describe('D45 equipment appearance', () => {
 });
 
 describe('layered sprite composer', () => {
+  it('rejects a halo derived from a different selected weapon silhouette', () => {
+    expect(() =>
+      composeSpriteLayers({
+        name: 'wrong_halo',
+        body: layer('body'),
+        weapon: layer('weapon'),
+        fx: { ...layer('fx'), derivedFromWeapon: 'other_weapon' },
+        glowTint: [1, 0, 0, 1],
+      }),
+    ).toThrow(/different weapon/);
+  });
   it('rejects a quality tint without an FX layer instead of silently dropping it', () => {
     expect(() =>
       composeSpriteLayers({ name: 'unlit', body: layer('body'), weapon: layer('weapon'), glowTint: [1, 0, 0, 1] }),

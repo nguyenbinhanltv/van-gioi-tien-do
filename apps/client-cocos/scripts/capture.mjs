@@ -38,6 +38,11 @@ const mode = opt('mode', 'review');
 const direction = opt('direction', 'S');
 const src = opt('src', ''); // default: the viewer's own default character (Kiem tu when present, else the test rig)
 const stem = opt('stem', '');
+const equipment = opt('equipment', '');
+const equipmentHash = ['tier', 'quality', 'costume', 'weapon-skin', 'hide-costume']
+  .filter((k) => opt(k, '') !== '')
+  .map((k) => `&${k}=${encodeURIComponent(opt(k, ''))}`)
+  .join('');
 const wantGif = flag('gif');
 const zoom = Number(opt('zoom', 1));
 if (![1, 2].includes(zoom)) throw new Error('--zoom must be 1 or 2');
@@ -111,7 +116,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&paused=1${src ? `&src=${src}` : ''}${stem ? `&stem=${stem}` : ''}`;
+  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&paused=1${src ? `&src=${src}` : ''}${stem ? `&stem=${stem}` : ''}${equipment ? `&equipment=${encodeURIComponent(equipment)}${equipmentHash}` : ''}`;
   console.log('opening', url);
   await page.goto(url);
   const waitReady = async (timeout = 180000) => {
@@ -125,6 +130,123 @@ try {
   };
   await waitReady();
   console.log('viewer ready');
+  if (flag('layer-smoke')) {
+    if (!equipment) throw new Error('--layer-smoke requires the procedural --equipment resource');
+    const snapshot = () =>
+      page.evaluate(() => ({
+        state: window.__vgtdViewer.equipment(),
+        info: window.__vgtdViewer.info(),
+        events: window.__vgtdViewer.events(),
+      }));
+    const assert = (ok, message) => {
+      if (!ok) throw new Error(`layer smoke: ${message}`);
+    };
+    const patch = async (appearance) => {
+      await page.evaluate((p) => window.__vgtdViewer.setEquipment(p), appearance);
+      await waitReady();
+      await sleep(150);
+      return snapshot();
+    };
+    await page.evaluate(() =>
+      window.__vgtdViewer.set({ mode: 'single', animation: 'attack', paused: true, repeatOneShots: false }),
+    );
+    await waitReady();
+    await page.evaluate(() => window.__vgtdViewer.chrome(false));
+    const initial = await snapshot();
+    assert(initial.state?.cacheEntries === 3, 'initial loading must request only body/weapon/fx');
+    await page.evaluate(() => window.__vgtdViewer.seekNorm(0.2));
+    await sleep(200);
+    const back = await snapshot();
+    assert(
+      back.state.slots.findIndex((s) => s.name === 'weapon') < back.state.slots.findIndex((s) => s.name === 'body'),
+      'back weapon order',
+    );
+    await page.screenshot({ path: join(out, 'layers-back.png'), clip: CLIP });
+    await page.evaluate(() => window.__vgtdViewer.seekNorm(0.7));
+    await sleep(200);
+    const front = await snapshot();
+    assert(
+      front.state.slots.findIndex((s) => s.name === 'weapon') > front.state.slots.findIndex((s) => s.name === 'body'),
+      'front weapon order',
+    );
+    await page.screenshot({ path: join(out, 'layers-front.png'), clip: CLIP });
+    const costume = await patch({ costume: 'test_costume' });
+    assert(
+      costume.state.installed.bodySet === 'body_b' && costume.state.installed.weaponSet === 'weapon_a',
+      'costume changes body independently',
+    );
+    assert(Math.abs(costume.info.time - front.info.time) < 0.001, 'same-motion costume swap preserves current time');
+    assert(JSON.stringify(costume.events) === JSON.stringify(front.events), 'swap must not replay events');
+    const hidden = await patch({ hideCostume: true });
+    assert(hidden.state.installed.bodySet === 'body_a', 'hide costume restores tier body');
+    const skin = await patch({ weaponSkin: 'test_skin' });
+    assert(
+      skin.state.installed.bodySet === 'body_a' &&
+        skin.state.installed.weaponSet === 'weapon_b' &&
+        skin.state.installed.fxSet === 'fx_b',
+      'weapon skin selects matching halo independently',
+    );
+    const quality = await patch({ quality: 'red' });
+    assert(
+      quality.state.installed.quality === 'red' && quality.state.installed.aura === 'aura_T1',
+      'quality tint retains tier aura',
+    );
+    // Rapid superseding selections must install only the latest request.
+    await page.evaluate(() => {
+      window.__vgtdViewer.setEquipment({ tier: 'T2', weaponSkin: null });
+      window.__vgtdViewer.setEquipment({ tier: 'T1', weaponSkin: 'test_skin' });
+    });
+    await waitReady();
+    await sleep(200);
+    const latest = await snapshot();
+    assert(
+      latest.state.installed.bodySet === 'body_a' && latest.state.installed.weaponSet === 'weapon_b',
+      'latest selection wins',
+    );
+    assert(latest.state.cacheEntries === 6, 'unselected tiers must not be eagerly loaded');
+    await page.screenshot({ path: join(out, 'layers-quality.png'), clip: CLIP });
+    // Live playback must still dispatch the original gameplay events.
+    await page.evaluate(() => {
+      window.__vgtdViewer.seekNorm(0);
+    });
+    await sleep(200);
+    await page.evaluate(() => {
+      window.__vgtdViewer.events(true);
+      window.__vgtdViewer.set({ paused: false, timeScale: 1 });
+    });
+    await page.waitForFunction(() => window.__vgtdViewer.info().time >= 0.85, { timeout: 30000 });
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: true }));
+    await sleep(150);
+    const live = await snapshot();
+    assert(
+      live.events.some((e) => e.includes('hit')) && live.events.some((e) => e.includes('cancel_window')),
+      'live hit/cancel events preserved',
+    );
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: false }));
+    await page.waitForFunction(() => window.__vgtdViewer.info().time >= 0.9999, { timeout: 30000 });
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: true }));
+    await sleep(150);
+    const completed = await snapshot();
+    const completedSwap = await patch({ quality: 'white' });
+    assert(
+      Math.abs(completedSwap.info.time - completed.info.time) < 0.001,
+      'completed one-shot remains at end after swap',
+    );
+    assert(
+      JSON.stringify(completedSwap.events) === JSON.stringify(completed.events),
+      'completed swap must not replay events',
+    );
+    writeFileSync(
+      join(out, 'layer-smoke.json'),
+      JSON.stringify(
+        { initial, back, front, costume, hidden, skin, quality, latest, live, completed, completedSwap },
+        null,
+        2,
+      ),
+    );
+    console.log('layer smoke passed: z-order, lazy loading, independent swaps, clock, events and latest selection');
+  }
+
   const all = await page.evaluate('window.__vgtdViewer.animations');
   const names = opt('animations', 'all') === 'all' ? all : opt('animations', 'all').split(',');
   if (flag('blink')) {
