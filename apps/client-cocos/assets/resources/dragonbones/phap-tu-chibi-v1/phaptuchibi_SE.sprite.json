@@ -4107,8 +4107,10 @@
         "metric": "head_size_px",
         "value": 48.43810483493342,
         "limit": 48.802873890786394,
-        "message": "secondary-overhang: skull 48.44 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+        "message": "secondary-overhang: crown-chin skull 48.44 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "secondary-overhang",
           "master": {
             "crown": {
@@ -4146,8 +4148,10 @@
         "metric": "head_size_px",
         "value": 48.507731342539614,
         "limit": 48.802873890786394,
-        "message": "secondary-overhang: skull 48.51 px / master 47.38 px; bbox 226 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+        "message": "secondary-overhang: crown-chin skull 48.51 px / master 47.38 px; bbox 226 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "secondary-overhang",
           "master": {
             "crown": {
@@ -4185,8 +4189,10 @@
         "metric": "head_size_px",
         "value": 48.507731342539614,
         "limit": 48.802873890786394,
-        "message": "secondary-overhang: skull 48.51 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+        "message": "secondary-overhang: crown-chin skull 48.51 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "secondary-overhang",
           "master": {
             "crown": {
@@ -4314,8 +4320,10 @@
         "metric": "head_size_px",
         "value": 48.43810483493342,
         "limit": 48.802873890786394,
-        "message": "posture: skull 48.44 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 48.44 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4353,8 +4361,10 @@
         "metric": "head_size_px",
         "value": 47.32071428032337,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.32 px / master 47.38 px; bbox 181 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.32 px / master 47.38 px; bbox 181 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4392,8 +4402,10 @@
         "metric": "head_size_px",
         "value": 47.447339229929426,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.45 px / master 47.38 px; bbox 205 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.45 px / master 47.38 px; bbox 205 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4431,8 +4443,10 @@
         "metric": "head_size_px",
         "value": 47.67598976424087,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.68 px / master 47.38 px; bbox 194 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.68 px / master 47.38 px; bbox 194 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4470,8 +4484,10 @@
         "metric": "head_size_px",
         "value": 47.51841748206689,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.52 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.52 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4509,8 +4525,10 @@
         "metric": "head_size_px",
         "value": 48.58240422210494,
         "limit": 48.802873890786394,
-        "message": "posture: skull 48.58 px / master 47.38 px; bbox 209 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 48.58 px / master 47.38 px; bbox 209 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4548,8 +4566,10 @@
         "metric": "head_size_px",
         "value": 47.447339229929426,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.45 px / master 47.38 px; bbox 196 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.45 px / master 47.38 px; bbox 196 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4677,8 +4697,10 @@
         "metric": "head_size_px",
         "value": 46.97073557013984,
         "limit": 48.802873890786394,
-        "message": "posture: skull 46.97 px / master 47.38 px; bbox 202 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 46.97 px / master 47.38 px; bbox 202 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4716,8 +4738,10 @@
         "metric": "head_size_px",
         "value": 47.07440918375928,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.07 px / master 47.38 px; bbox 198 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.07 px / master 47.38 px; bbox 198 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4755,8 +4779,10 @@
         "metric": "head_size_px",
         "value": 47.415714694603096,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.42 px / master 47.38 px; bbox 189 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.42 px / master 47.38 px; bbox 189 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4794,8 +4820,10 @@
         "metric": "head_size_px",
         "value": 46.98137929009748,
         "limit": 48.802873890786394,
-        "message": "posture: skull 46.98 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 46.98 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4833,8 +4861,10 @@
         "metric": "head_size_px",
         "value": 47.94006675005783,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.94 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.94 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4872,8 +4902,10 @@
         "metric": "head_size_px",
         "value": 47.66812352086036,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.67 px / master 47.38 px; bbox 188 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.67 px / master 47.38 px; bbox 188 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -4911,8 +4943,10 @@
         "metric": "head_size_px",
         "value": 46.77873448480623,
         "limit": 48.802873890786394,
-        "message": "posture: skull 46.78 px / master 47.38 px; bbox 206 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 46.78 px / master 47.38 px; bbox 206 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -5540,8 +5574,10 @@
         "metric": "head_size_px",
         "value": 47.2784306000104,
         "limit": 48.802873890786394,
-        "message": "posture: skull 47.28 px / master 47.38 px; bbox 210 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+        "message": "posture: crown-chin skull 47.28 px / master 47.38 px; bbox 210 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
         "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
           "reason": "posture",
           "master": {
             "crown": {
@@ -5806,8 +5842,10 @@
           "metric": "head_size_px",
           "value": 48.43810483493342,
           "limit": 48.802873890786394,
-          "message": "secondary-overhang: skull 48.44 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+          "message": "secondary-overhang: crown-chin skull 48.44 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "secondary-overhang",
             "master": {
               "crown": {
@@ -5849,8 +5887,10 @@
           "metric": "head_size_px",
           "value": 48.507731342539614,
           "limit": 48.802873890786394,
-          "message": "secondary-overhang: skull 48.51 px / master 47.38 px; bbox 226 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+          "message": "secondary-overhang: crown-chin skull 48.51 px / master 47.38 px; bbox 226 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "secondary-overhang",
             "master": {
               "crown": {
@@ -5892,8 +5932,10 @@
           "metric": "head_size_px",
           "value": 48.507731342539614,
           "limit": 48.802873890786394,
-          "message": "secondary-overhang: skull 48.51 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
+          "message": "secondary-overhang: crown-chin skull 48.51 px / master 47.38 px; bbox 225 px / master 218 px; Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "secondary-overhang",
             "master": {
               "crown": {
@@ -6178,8 +6220,10 @@
           "metric": "head_size_px",
           "value": 48.43810483493342,
           "limit": 48.802873890786394,
-          "message": "posture: skull 48.44 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 48.44 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6221,8 +6265,10 @@
           "metric": "head_size_px",
           "value": 47.32071428032337,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.32 px / master 47.38 px; bbox 181 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.32 px / master 47.38 px; bbox 181 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6264,8 +6310,10 @@
           "metric": "head_size_px",
           "value": 47.447339229929426,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.45 px / master 47.38 px; bbox 205 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.45 px / master 47.38 px; bbox 205 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6307,8 +6355,10 @@
           "metric": "head_size_px",
           "value": 47.67598976424087,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.68 px / master 47.38 px; bbox 194 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.68 px / master 47.38 px; bbox 194 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6350,8 +6400,10 @@
           "metric": "head_size_px",
           "value": 47.51841748206689,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.52 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.52 px / master 47.38 px; bbox 208 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6393,8 +6445,10 @@
           "metric": "head_size_px",
           "value": 48.58240422210494,
           "limit": 48.802873890786394,
-          "message": "posture: skull 48.58 px / master 47.38 px; bbox 209 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 48.58 px / master 47.38 px; bbox 209 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6436,8 +6490,10 @@
           "metric": "head_size_px",
           "value": 47.447339229929426,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.45 px / master 47.38 px; bbox 196 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.45 px / master 47.38 px; bbox 196 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6722,8 +6778,10 @@
           "metric": "head_size_px",
           "value": 46.97073557013984,
           "limit": 48.802873890786394,
-          "message": "posture: skull 46.97 px / master 47.38 px; bbox 202 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 46.97 px / master 47.38 px; bbox 202 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6765,8 +6823,10 @@
           "metric": "head_size_px",
           "value": 47.07440918375928,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.07 px / master 47.38 px; bbox 198 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.07 px / master 47.38 px; bbox 198 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6808,8 +6868,10 @@
           "metric": "head_size_px",
           "value": 47.415714694603096,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.42 px / master 47.38 px; bbox 189 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.42 px / master 47.38 px; bbox 189 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6851,8 +6913,10 @@
           "metric": "head_size_px",
           "value": 46.98137929009748,
           "limit": 48.802873890786394,
-          "message": "posture: skull 46.98 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 46.98 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6894,8 +6958,10 @@
           "metric": "head_size_px",
           "value": 47.94006675005783,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.94 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.94 px / master 47.38 px; bbox 175 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6937,8 +7003,10 @@
           "metric": "head_size_px",
           "value": 47.66812352086036,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.67 px / master 47.38 px; bbox 188 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.67 px / master 47.38 px; bbox 188 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -6980,8 +7048,10 @@
           "metric": "head_size_px",
           "value": 46.77873448480623,
           "limit": 48.802873890786394,
-          "message": "posture: skull 46.78 px / master 47.38 px; bbox 206 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 46.78 px / master 47.38 px; bbox 206 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {
@@ -7849,8 +7919,10 @@
           "metric": "head_size_px",
           "value": 47.2784306000104,
           "limit": 48.802873890786394,
-          "message": "posture: skull 47.28 px / master 47.38 px; bbox 210 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
+          "message": "posture: crown-chin skull 47.28 px / master 47.38 px; bbox 210 px / master 218 px; Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin.",
           "headEvidence": {
+            "kind": "crown-chin",
+            "direction": "SE",
             "reason": "posture",
             "master": {
               "crown": {

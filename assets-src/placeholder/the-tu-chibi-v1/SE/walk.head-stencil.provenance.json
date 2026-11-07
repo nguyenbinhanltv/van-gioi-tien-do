@@ -1,0 +1,21 @@
+{
+  "kind": "generation-guide-only",
+  "master": "../reference/SE.master.png",
+  "masterSha256": "b0d176b957e8f518f703a41c8c41f6f4ea62706fb5c3ea6805935d773ed0060b",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "frames": 16,
+  "layout": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "operation": "existing blit, unscaled master head stencil per cell; original lattice retained",
+  "note": "Guide is not output head-size proof; generated art still needs D47 QA.",
+  "utcRecorded": "2026-11-07T22:18:00.113101+00:00"
+}

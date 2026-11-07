@@ -1,6 +1,6 @@
 # Thể tu premium semi-chibi v1
 
-Original premium semi-chibi source set. The old `the-tu-sprites-v1` set is untouched. E contains 15 clips / 202 drawings using D46 smooth-v2; other directions currently contain reference masters only.
+Original premium semi-chibi source set. The old `the-tu-sprites-v1` set is untouched. E and SE each contain 15 clips / 202 drawings using D46 smooth-v2; S/NE/N motion remains in production.
 
 ## Master checkpoint
 
@@ -32,3 +32,7 @@ Full E sprite build: 0 hard failures, 0 unlisted soft failures, 38 accepted soft
 ### D47 / headroom correction
 
 Run, attack_2 and channel select their `.headroom.png` AI edits: compact secondary buns remove actual top-edge clipping while preserving dynamic poses and one fixed calibration. `E/head-evidence.review.json` records 17 manual skull crown/chin measurements for run/dash, not detector certification. `E/canvas-bounds.review.json` audits all202 keyed source bounds plus their fixed translations: no bounds lost. Earlier raw attempts and repair proofs remain historical sources; `E/project.json` is the selected-sheet registry.13 small attack_2 bbox-height findings remain explicit soft debt rather than being hidden by an exception.
+
+## SE motion checkpoint
+
+SE uses its pinned47.82px crown/chin baseline cross-checked by style-owner23,34 manually annotated aligned head cells and diagonal keep alignment. Six dash cells use AI head correction with10othergroup cells byte-identical; attack/cast secondary buns were reduced to eliminate clipping. Full15clip hard QA and real Cocos3.8.8 2x capture pass.39 explicit soft findings remain:25 foot contacts/slides and14 free-clip bbox differences. The walk color-label mistake and rejected7regression feet edit are documented without replacing the better source. All root checks pass; after-runtime158 compatibility smoke passes for run/attack_3 at2x. See SE/validation.json and SE/cocos-capture.json. Canonical E/SE extraction guides were generated with the merged CLI, not hand-authored layer manifests.

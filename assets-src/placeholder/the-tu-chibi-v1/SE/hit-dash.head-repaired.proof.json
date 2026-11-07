@@ -1,0 +1,52 @@
+{
+  "operation": "public repairCell; no resampling (matching full-sheet dimensions)",
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "input": "raw/hit-dash.attempt1.png",
+  "edit": "raw/hit-dash.head-corrected.png",
+  "output": "raw/hit-dash.head-repaired.png",
+  "requestedCells": [7, 8, 9, 10, 11, 12],
+  "changedCells": [7, 8, 9, 10, 11, 12],
+  "unchangedCells": [0, 1, 2, 3, 4, 5, 6, 13, 14, 15],
+  "before": [
+    "9ae6701e54004bbaa9c352fa63ce809177d9c58b",
+    "7a5445d4d6fc728cd4a4de327de82e769a57e4e7",
+    "3cd6a05b0c97fa15bce3202cc6520c767b670766",
+    "a95bb82389b620cce7e1d90399fe35b7edef2e5d",
+    "e44171c3f650510af53637b7bb3e566644c64112",
+    "75cf28d6ea772c399c3b03133d5eeb59c2e83226",
+    "80cb2b8ec635c2b53584ef3da0a215cd1becac5f",
+    "92b5fcadf249a0d968dc0af98ce307631324f0a5",
+    "56dc3f4c980b6a79147e4d6d10a305a8f3bfddc2",
+    "259d8e421d9ff94e57f8d2d1ad1811777f8330ba",
+    "649027b13d70ce1215e1b4e3ac128f55bca68221",
+    "b52965417c087832e35a787f77471543ca67c1aa",
+    "77db1fb09a3d5b4e02a09ad00e17128aedf29412",
+    "1dbd7c0f89647999ae6b45ec5f7e8d155b2fe87b",
+    "284fcfc70f3177ee3d91fcdfa498e09de46cf1fc",
+    "4fef173cf82e90349e13a405575aba568edfe7c9"
+  ],
+  "after": [
+    "9ae6701e54004bbaa9c352fa63ce809177d9c58b",
+    "7a5445d4d6fc728cd4a4de327de82e769a57e4e7",
+    "3cd6a05b0c97fa15bce3202cc6520c767b670766",
+    "a95bb82389b620cce7e1d90399fe35b7edef2e5d",
+    "e44171c3f650510af53637b7bb3e566644c64112",
+    "75cf28d6ea772c399c3b03133d5eeb59c2e83226",
+    "80cb2b8ec635c2b53584ef3da0a215cd1becac5f",
+    "ce80e1a1316d646c84a49191549522e61dff18ad",
+    "0e9e0de212877172bb9b5624af82883cffae4418",
+    "2f8833939c7c7415a801c6848e3a857727db2fa0",
+    "64dfeed49939a634e10cf31c84a251fbcedb744f",
+    "6c11602df1e9a6b8fd47127f541bf39ec4bc53e4",
+    "d0285c6c1031279eaceec21921fa7bb60539917e",
+    "1dbd7c0f89647999ae6b45ec5f7e8d155b2fe87b",
+    "284fcfc70f3177ee3d91fcdfa498e09de46cf1fc",
+    "4fef173cf82e90349e13a405575aba568edfe7c9"
+  ],
+  "inputEditProvenance": "hit-dash.head-corrected.provenance.json",
+  "model": "undisclosed",
+  "utcRecorded": "2026-11-07T22:14:33.335Z"
+}

@@ -5,7 +5,7 @@ import type { OriginMeasurement } from './authored-origin.js';
  * into a single self-contained page (paths relative to the page).
  */
 import type { ManualArtFinding } from './backlog.js';
-import type { HeadMeasurement } from './head-evidence.js';
+import { headEvidenceKind, headLandmarkEnd, type HeadMeasurement } from './head-evidence.js';
 
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 
@@ -103,7 +103,7 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
                 ? '<div class="meta">Foot slide UNMEASURED (migration pending)</div>'
                 : '';
               const evidence = c.headEvidence?.length
-                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>crown (${e.frame.crown.x}, ${e.frame.crown.y}), chin (${e.frame.chin.x}, ${e.frame.chin.y})<br>master crown (${e.master.crown.x}, ${e.master.crown.y}), chin (${e.master.chin.x}, ${e.master.chin.y})<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>crown (${e.frame.crown.x}, ${e.frame.crown.y}), ${e.frame.kind === 'rear-skull-base' ? 'skull base' : 'chin'} (${headLandmarkEnd(e.frame).x}, ${headLandmarkEnd(e.frame).y})<br>master crown (${e.master.crown.x}, ${e.master.crown.y}), ${e.master.kind === 'rear-skull-base' ? 'skull base' : 'chin'} (${headLandmarkEnd(e.master).x}, ${headLandmarkEnd(e.master).y})${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
                 : '';
               const origins = c.originEvidence?.length
                 ? `<details><summary>Authored-origin INFO evidence (${c.originEvidence.length})</summary>${c.originEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} ; ${esc(e.kind ?? 'anatomical-pelvis')} ; pelvisX ${e.pelvisX} ; groundY ${e.groundY ?? 'default'} ; source (${e.source.x}, ${e.source.y}) ; scale ${e.scale} ; dx ${e.dx}, dy ${e.dy}<br>${esc(e.reason)}<br>${esc(e.evidence)}</p>`).join('')}</details>`

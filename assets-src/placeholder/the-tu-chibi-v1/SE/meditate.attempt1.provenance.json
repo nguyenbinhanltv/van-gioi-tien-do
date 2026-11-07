@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:07:22.690Z",
+  "utcRecordedCompleted": "2026-11-07T22:07:51.153Z",
+  "prompt": "Use case: identity-preserve. Production original Th\u1ec3 tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. SE front-right3quarter slightly elevated isometric camera allframes. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT16consecutivedrawings in4x4SQUAREcanvas2048x2048, all16cellsfilledrowmajor. CROSS-LEGGED MEDITATE loop. Fixedheadstencils are lower in eachcell to represent seatedheight, NOT enlargedheads. Figure sitscrosslegged with correctsame-length thighs/calves folded naturally; pairedgauntlets rest on knees, straight relaxedtorso, adultfacecalm eyesgentlyclosed.0-7gentle inhale torsoexpand/shouldersrise2px,8-15exhale settle; abdomen/forearms subtle, ribbons/apron lag2frames. Pelvis/feet stable, lastfirstseamless. Sitting heightnaturally~180logicalpx, keeporiginalhead47ishlogicalpx and bodypartlengths; doNOT fillcell by enlarging character. Ivoryapron drapes OVER foldedlegs. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background.",
+  "references": ["templates/meditate.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-57f1bb54-4467-41e1-8b9e-da7d7fff267d.png",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
+}

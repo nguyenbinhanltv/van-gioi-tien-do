@@ -428,6 +428,16 @@
       "reviewer": "art-worker",
       "note": "Foot placements do not consistently follow the directional ghosts; the 18 metric foot findings remain open across walk/run. Preserve dynamic flight and improve stance timing in a later source polish pass.",
       "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "meditate",
+      "dir": "SE",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "note": "AO optional art-review concern: fixed whole-sheet scale0.775 downsamples the seated source about23%; inspect thin rim/trim sharpness against idle in future polish. Head/body scale is matched, no per-frame fitting.",
+      "status": "open"
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:12:35.003Z",
+  "utcRecordedCompleted": "2026-11-07T22:13:12.005Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Image1 is the original source to edit; image2 pinnedcanonicalSEmaster. Originalprojectdesign only. Precise head-size correction ONLY. This16frame4x4group is HITglobal0..5 andDASHglobal6..15. Correct ONLY DASHlocal1..6 = GLOBAL7,8,9,10,11,12. Their skull/maincap-to-chin headunit is slightlyenlarged: REDUCE THOSE SIX HEADS byabout8%, toward pinned SE master47.76logicalpx crown-to-chin Euclideandistance (about58.5nativepx at313.5nativecell). Maincap excludes elevatedbun/loosestrands. Keep adult fixedface/featuregeometry/expression/headtilt and neckattachment, all dynamic deepdash/lunge/tuck poses EXACT. DoNOT flatten or shrink body/limbs; doNOT move anygauntlet/hand/foot/torso/apron. Other10cells untouched. Keep samecanvas4x4/cellboundaries andpositions. Magentauniformbackground. No ruler/labels/addedheads. This is source correction, not costume change.",
+  "references": ["raw/hit-dash.attempt1.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-9de75f72-2170-43bf-98ad-5c984c5eb931.png",
+  "status": "Historical generation/edit input retained; selected fullsheets are authoritative in project.json.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectedFullSheet": false,
+  "selectionRegistry": "project.json"
+}

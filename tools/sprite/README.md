@@ -201,6 +201,30 @@ contract record.dx/dy. Contract/batch/backlog INFO and expandable review cards r
 note. Foot errors remain actionable. No automatic head detector or semantic anatomy certification is claimed.
 See the Vietnamese pipeline doc for the full authoring contract and migration notes.
 
+### Occluded rear chin (NE/N, D48 amends D47)
+
+Do not fabricate or project a chin. For an occluded rear view, use the same measurement on that direction's locked master
+and affected aligned cells:
+
+```json
+{
+  "kind": "rear-skull-base",
+  "crown": { "x": 128, "y": 24 },
+  "skullBase": { "x": 128, "y": 61 },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+These are illustrative coordinates, not character defaults. `masterHead` belongs to the project's direction-specific
+master. Per-cell `headEvidence` uses that shape plus a reviewed `note`, with clip-local keys and aligned output coordinates.
+The base is the visible occipital head/neck junction or nape hairline. Both crown-to-base Euclidean distance and maximum
+skull breadth (excluding loose hair/ornaments) must be within the same master's±3%. Rear evidence requires breadth and is
+restricted to NE/N; mismatched kinds, fabricated chin fields, absent/invalid breadth and scale drift fail.
+
+Existing crown/chin objects remain compatible (`kind` defaults to `crown-chin`). Breadth is optional for front evidence;
+when supplied, both master and frame must carry it and it is checked. Master references, kind, sizes, breadth and notes
+remain in contract/backlog/review INFO. No bbox, foot or canvas threshold changes and no rescaling are introduced.
+
 ## Reviewed authored origins
 
 Optional `clip.authoredOrigins` uses **clip-local** keys, including grouped sheets:

@@ -1,0 +1,19 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:25:53.415Z",
+  "utcRecordedCompleted": "2026-11-07T21:27:06.276Z",
+  "prompt": "Use case: identity-preserve. Production Th\u1ec3 tu T1 SE direction IDLE16frames. Image1 is an EXACT4x4square lattice with UNSCALED MASTER HEAD STENCILS already placed in ALL16cells. Complete the bodies BELOW these heads. Preserve those head units at EXACT SAME SIZE and same fixed tan adult squarejaw/amber eyes/thickbrow identity; do NOT enlarge skulls or redraw as babyfaces. Stencils constrain size but finished art will be measured. Image2 fullSEmaster defines exact costume/anatomy/camera: SE/front-right3quarter facing, slightly elevated isometric camera. Charcoal sleeveless wrap/trousers, warm IVORY ink-wash APRON UNDER broad amber hip sash, two narrowamber tails, amber hairribbons/smallflattenedbun, paired simple WORN charcoal gauntlets with one bronze wristband and smoothknuckleplate each. Same face/body/weapondesign in everyframe. Exactly16consecutive rowmajor breathing-idle drawings,4x4SQUAREcells on SQUARE2048x2048requestedcanvas. Logical256cell ground232, uprightanatomicalH216; overallbun-to-sole225. Headstencils already correct native logical size, body completes naturally below. Feet planted at samepositions asSEmaster, pelvisstable, chest expands0-7settles8-15, small delayed hair/ribbon/sash/apron sway, lastfirstseamless. KeepSEview in everycell, NO Eprofile orfront rotation. Opaque flat RGB255,0,255 magenta. Clean tinted outlines,TWO cel tones+smallhighlight/rim,NWkeylight. No labels/numbers/extraheads/ghostheadstencilsleftover, no interiorguidelines visible afterpainting, no shadow/effects/aura/objects. Bothgauntlets worn naturally, no weapon detached. Preserve identical masterheadscale; do not fill-to-box eachpose.",
+  "references": ["templates/idle.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-db8b66f9-1ca3-4a02-b6c1-8a3540591c06.png",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
+  "clipProfile": "smooth-v2",
+  "frames": 16,
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T21:27:06.276Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
+}
