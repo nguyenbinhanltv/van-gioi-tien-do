@@ -1,0 +1,8 @@
+{
+  "defaultAttempt": 1,
+  "attempts": { "walk": 1, "hit-dash": 2 },
+  "notes": {
+    "walk": "Attempt2 phase correction increased foot findings from9 to13 and worst measured slide from20.3 to23.3 px/frame. Retain attempt1; all9 original foot findings remain open, no threshold changes.",
+    "hit-dash": "Attempt2 restores the locked frontal head cores while preserving body/weapon/secondary-hair poses. Both raw attempts retained."
+  }
+}
