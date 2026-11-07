@@ -21,3 +21,5 @@ export * from './variant.js';
 export * from './head-evidence.js';
 export * from './extract.js';
 export * from './grouped.js';
+
+export * from './layer-guides.js';

@@ -223,3 +223,23 @@ pixels, plus reconstruction in the declared order. weaponExtraction/handAlignmen
 Matte coverage, hidden geometry and new hand anatomy need visual review; differences cannot uniquely identify alpha over an
 opaque background or reconstruct unseen weapon/body parts. Unchanged low-contrast matte pixels are reported for review.
 These are pixel/contact checks, not semantic anatomy recognition. Canonical guide/export CLIs follow in a separate change.
+
+## Canonical layer-edit references
+
+```sh
+npm run sprite:layer-template -w @vgtd/sprite -- --project path/to/project.json --out /tmp/layer-guides
+```
+
+Run only after the source project's QA passes, including canvas loss and backlog regression checks. The command writes
+transparent `source-N.full.png` sheets and `layer-inputs.json` with SHA256 project/master/guide hashes and clip-to-cell maps.
+Guides are canonical 4x4 at256px per cell (1024square); they copy exact aligned output pixels, never fit or realign poses.
+Original sheet grouping is retained, flattened into the canonical lattice. Conflicting versions of a shared cell fail.
+
+Use these exact full-pose references for AI weapon-removal edits: preserve all body/face/pose pixels and scale, remove only
+the weapon, inpaint exposed hands/skin, and retain the lattice. Produce a reviewed grayscale weapon-alpha matte separately.
+Declare returned DPI for subsequent whole-sheet normalization; do not align body and weapon independently. Paired gauntlets
+belong to the weapon set and need both hand contacts. Keep the original full-pose sources as provenance.
+
+`prepareLayerSources`/`writeLayerTemplates` are public APIs. `runProject(..., { includeAlignedFrames: true })` optionally
+retains aligned images in memory; default calls and serialized export files are byte-compatible. Independent layer-set
+export follows separately; this command produces edit references only.
