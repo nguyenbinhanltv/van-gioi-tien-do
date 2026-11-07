@@ -1,0 +1,238 @@
+{
+  "master": {
+    "crown": {
+      "x": 132,
+      "y": 17
+    },
+    "chin": {
+      "x": 138,
+      "y": 64
+    }
+  },
+  "method": "Manual skull-crown review on exact aligned source overlays; visible skin-region chin candidates cross-checked by eye. Excludes bun/ornaments/secondary hair. No inferred chin accepted.",
+  "clips": {
+    "walk": {
+      "0": {
+        "crown": {
+          "x": 133,
+          "y": 31
+        },
+        "chin": {
+          "x": 139.5,
+          "y": 79
+        },
+        "note": "Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands."
+      },
+      "7": {
+        "crown": {
+          "x": 134,
+          "y": 25
+        },
+        "chin": {
+          "x": 141,
+          "y": 73
+        },
+        "note": "Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands."
+      },
+      "8": {
+        "crown": {
+          "x": 132,
+          "y": 26
+        },
+        "chin": {
+          "x": 139,
+          "y": 74
+        },
+        "note": "Reviewed aligned source: stable skull and visible jaw; pin/main-hair secondary silhouette expands the bbox during stride. Crown excludes bun, pin and trailing strands."
+      }
+    },
+    "run": {
+      "2": {
+        "crown": {
+          "x": 145,
+          "y": 37
+        },
+        "chin": {
+          "x": 151.5,
+          "y": 85
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "3": {
+        "crown": {
+          "x": 145,
+          "y": 38
+        },
+        "chin": {
+          "x": 150.5,
+          "y": 85
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "7": {
+        "crown": {
+          "x": 143,
+          "y": 37
+        },
+        "chin": {
+          "x": 149.5,
+          "y": 84
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "8": {
+        "crown": {
+          "x": 145,
+          "y": 36
+        },
+        "chin": {
+          "x": 153,
+          "y": 83
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "11": {
+        "crown": {
+          "x": 141,
+          "y": 41
+        },
+        "chin": {
+          "x": 148,
+          "y": 88
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "12": {
+        "crown": {
+          "x": 146,
+          "y": 40
+        },
+        "chin": {
+          "x": 153.5,
+          "y": 88
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "13": {
+        "crown": {
+          "x": 147,
+          "y": 37
+        },
+        "chin": {
+          "x": 153.5,
+          "y": 84
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      }
+    },
+    "dash": {
+      "1": {
+        "crown": {
+          "x": 143,
+          "y": 39
+        },
+        "chin": {
+          "x": 152.5,
+          "y": 85
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "2": {
+        "crown": {
+          "x": 151,
+          "y": 41
+        },
+        "chin": {
+          "x": 161,
+          "y": 87
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "3": {
+        "crown": {
+          "x": 149,
+          "y": 54
+        },
+        "chin": {
+          "x": 160.5,
+          "y": 100
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "4": {
+        "crown": {
+          "x": 146,
+          "y": 69
+        },
+        "chin": {
+          "x": 159.5,
+          "y": 114
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "5": {
+        "crown": {
+          "x": 150,
+          "y": 72
+        },
+        "chin": {
+          "x": 163.5,
+          "y": 118
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "6": {
+        "crown": {
+          "x": 151,
+          "y": 53
+        },
+        "chin": {
+          "x": 163.5,
+          "y": 99
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      },
+      "7": {
+        "crown": {
+          "x": 143,
+          "y": 33
+        },
+        "chin": {
+          "x": 151.5,
+          "y": 79
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      }
+    },
+    "emote": {
+      "8": {
+        "crown": {
+          "x": 129,
+          "y": 40
+        },
+        "chin": {
+          "x": 143.5,
+          "y": 85
+        },
+        "note": "Reviewed aligned source: visible jaw and main skull crown, excluding bun/pin/trailing hair. Dynamic knee tuck, dash lean or bow changes bbox height; source-head corrections retain body pose. SE output-cell coordinates; no projected or occluded chin."
+      }
+    }
+  },
+  "meditationSheetCalibration": {
+    "masterHeadSize": 47.38143096192854,
+    "sourceNormalizedHeadSize": 61.165368795343504,
+    "referenceAlignedAtCharacterScale": {
+      "crown": {
+        "x": 130,
+        "y": 58
+      },
+      "chin": {
+        "x": 145,
+        "y": 114
+      },
+      "scale": 0.9478260869565217
+    },
+    "scale": 0.7746447359855643,
+    "note": "One measured whole-sheet occupancy correction for all16 seated poses, including body/fan; never per-frame fitting. Raw attempt and original guide retained."
+  }
+}

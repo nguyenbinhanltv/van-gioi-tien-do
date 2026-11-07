@@ -1,0 +1,25 @@
+{
+  "clip": "meditate",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Image2 contains EXACT UNSCALED master-head stencils. Preserve the head dimensions and fixed face from those stencils, complete the body beneath them. These are size+identity anchors, NOT extra heads. CLIP MEDITATE:16frames4x4, seated crosslegged onground at232, head crown~110 as stencil not upright y16. Adult body folded at hips/knees; NEVER enlarge head to fill empty space. Tiny breathing loop with hands calm: left hand holds vermilion fan across lap, righthand resting on rightknee. Subtle eyelid relaxation, two-frame lag on sleeveends/hair/sash, no FX. Same SE threequarter camera throughout. All16 frames same anatomy and headsize, one smooth loop ending connected toframe0. No floating or duplicated fan.",
+  "utcStart": "2026-11-07 22:05:32 UTC",
+  "references": ["reference/SE.master.png", "SE/templates/meditate.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": "2026-11-07 22:06:16 UTC",
+  "raw": "raw/meditate.attempt1.png",
+  "selected": "sheets/meditate.png",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "b40ffe1769e0fc93916aaa32829e99f03dda435891e8b51865e778b9f68c71d8",
+  "utcRawOutputFileModified": "2026-11-07T22:05:54.358Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/meditate.head-guide.png",
+      "sha256": "c2fb76c7fec4b19ab2cf79abdc623b7abcaebbb13d42a2acc0f9fc724634686a"
+    }
+  ],
+  "selectedSha256": "b40ffe1769e0fc93916aaa32829e99f03dda435891e8b51865e778b9f68c71d8"
+}

@@ -1,0 +1,26 @@
+{
+  "clip": "hit-dash",
+  "attempt": 2,
+  "prompt": "HEAD-SIZE SOURCE CORRECTION ONLY. Image1 is exact16frame4x4 sheet, global0-5hit and6-15dash. Preserve EVERY current body/limb/foot pose, fan hand/grip/location, sleeve, sash, lattice, magenta background, dynamicdeepdash and hair/ribbon flows. Correct only skull+mainhaircap proportions about7% smaller acrossALL16 cells, neck reattached naturally. Image2 canonical SE master fixes face/skull, headspan about48 logicalpx aligned after fixedsheetcalibration. Current heads slightlytoo large, especiallydeepdash. Do NOT shrink wholebody or resize individualframes, doNOT flatten knee tucks/lunges. Fixedadultovalface,narroweyes,brow,rightbeautymark,pin,tassel,earrings. All16 wholefigures safelyinsidecells. Samegrid/roworder andfootpositions; no shadows/grid/FX.",
+  "utcStart": "2026-11-07 22:20:35 UTC",
+  "references": ["SE/raw/hit-dash.attempt1.png", "reference/SE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/hit-dash.attempt2.png",
+  "selected": "sheets/hit-dash.png",
+  "utcEndObserved": "2026-11-07 22:21:10 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "ce4445f75d51355b749da7e9e025bb67e670bf18e49ad5da52b015c440e04e5d",
+  "utcRawOutputFileModified": "2026-11-07T22:21:09.937Z",
+  "referenceSnapshots": [
+    {
+      "file": "SE/raw/hit-dash.attempt1.png",
+      "sha256": "1b71529dbeb9b8b5a394f59e81d1ee5916adb8d506253fd68af2294257b5b20c"
+    },
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    }
+  ],
+  "selectedSha256": "ce4445f75d51355b749da7e9e025bb67e670bf18e49ad5da52b015c440e04e5d"
+}

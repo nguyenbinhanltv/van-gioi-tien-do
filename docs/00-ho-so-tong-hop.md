@@ -69,6 +69,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D48, bổ sung D47: NE/N bị che cằm dùng `rear-skull-base`, crown→đáy sọ tại chỗ nối gáy/cổ và bề ngang sọ tối đa đều ±3% cùng master của hướng đó. Không bịa hay chiếu cằm. Kind, landmark và bề ngang giữ trong INFO; chi tiết schema ở pipeline.]
 
+[Cập nhật D50, bổ sung D48: nếu tóc của master đã duyệt che gáy, không sửa master hay đoán skull base; dùng `rear-crown-shoulder`, crown sọ→trung điểm đường đỉnh vai nhìn thấy và bề ngang sọ đều ±3% đúng master cùng hướng. Kind ghi trên masterHead theo direction, chỉ NE/N; ngưỡng/gates khác giữ nguyên.]
+
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 
 | Hạng mục              | Giá trị chốt                                                                                        | Tài liệu gốc          |

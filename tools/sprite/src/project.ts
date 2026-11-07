@@ -197,8 +197,11 @@ export function runProject(
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
-  if (project.masterHead?.kind === 'rear-skull-base' && !['NE', 'N'].includes(project.direction))
-    throw new Error('rear-skull-base master is allowed only for NE/N direction projects');
+  if (
+    (project.masterHead?.kind === 'rear-skull-base' || project.masterHead?.kind === 'rear-crown-shoulder') &&
+    !['NE', 'N'].includes(project.direction)
+  )
+    throw new Error('rear skull master is allowed only for NE/N direction projects');
   if (project.masterHead !== undefined && headLandmarkSize(project.masterHead, master.width, master.height) === null)
     throw new Error('invalid master skull landmarks/breadth');
   const guides = guidesFromMaster(m);

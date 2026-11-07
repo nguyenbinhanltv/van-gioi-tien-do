@@ -43,3 +43,13 @@ Real Cocos Creator 3.8.8 capture completed successfully for all 15 E clips. The 
 ## Provenance
 
 `provenance.json` registers source/reference PNG hashes, master lock and input aliases. Every motion generation/edit has exact prompt, tool, model undisclosed, UTC observations and raw/selected hashes in `E/raw/*.generation.json`. Rejected attempts remain raw only. Per-file rights rows are appended in the worker's own sections of `docs/ASSET-LICENSES.md`; source terms are linked there. All designs are original project art, with no commercial reference image input.
+
+## SE motion
+
+`SE/` contains the next 15-clip / 202-frame smooth-v2 direction. `prepare-SE.ts` builds SE foot ghosts from the master sole landmarks and unscaled canonical head stencils; generation guides and raw outputs remain intact. `prepare-SE-review.ts` reproduces exact aligned-cell overlays for manual crown/chin review. Stencils guide the model; actual output landmarks remain the hard D47 evidence.
+
+Walk/run use `vertical: keep` to preserve SE depth travel. Hit/dash share one explicit 6+10 mapping and one fixed whole-sheet scale in `SE/group-calibration.json`. Meditation uses one whole-sheet scale from its reviewed head occupancy, recorded in `SE/head-landmarks.review.json`. Every body, hand and fan on each sheet uses that same scale; individual frames are never fitted. Run/hit-dash attempt 2 correct source head proportions while retaining dynamic poses; emote attempt 2 exposes the bowed chin for a real measurement. Superseded raw attempts remain available.
+
+The separate `SE/quality-backlog.json` keeps SE findings and 18 reviewed head-evidence INFO cells without changing E baselines. `SE/provenance.json` and `SE/raw/*.generation.json` retain exact prompts, tool/model-undisclosed, UTC and source/input/runtime hashes. `audit-SE.ts` audits those records and the direction's per-file license section.
+
+Reproduce the SE export with `npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1`. The same engine capture command above uses `--direction SE`. All 15 SE clips passed real Cocos Creator 3.8.8 capture at 2× after merging the layered-runtime update; `SE/engine-gate.json` records the matching source hashes.
