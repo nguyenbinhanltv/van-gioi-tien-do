@@ -31,6 +31,6 @@ reference/provenance.json retains construction prompts, tool, undisclosed model,
 Run from repository root:
 node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-chibi-v1/qa-generated.ts assets-src/placeholder/dan-phu-tu-chibi-v1/E <temporary-output-directory>
 
-PR #166 delivers the E full-source compatibility export plus official D45 aligned extraction guides in E/layer-guides. This is not an extracted layered runtime delivery. Dedicated body/weapon/FX extraction is scheduled by the orchestrator after all5 T1 directions are merged.
+PR #166 delivers the E full-source compatibility export plus reproducible official D45 aligned-guide provenance in E/layer-guide-provenance.json. Derived guide PNGs are not committed in this pass. This is not an extracted layered runtime delivery. Dedicated body/weapon/FX extraction is scheduled by the orchestrator after all5 T1 directions are merged.
 
 Rear NE/N construction chin placeholders are not visible anatomical evidence. Before rear motion, use the merged D50 rear-crown-shoulder policy with actual same-direction crown, visible shoulder-top and skull-breadth landmarks; never project a chin or guess an occluded nape.

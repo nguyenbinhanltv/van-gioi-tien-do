@@ -1,0 +1,166 @@
+{
+  "kind": "reproducible-D45-guide-provenance",
+  "tool": "@vgtd/sprite sprite:layer-template",
+  "utc": "2026-11-07T23:49:59.117Z",
+  "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/layer-template.ts --project assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json --out D:/Temp/vgtd26-E-official-guides166",
+  "reproduction": "Run the same command from repository root with any fresh temporary output directory. Output bytes are independent of that directory. Derived guide PNGs and layer-inputs.json are not committed in this full-source compatibility pass.",
+  "project": "project.json",
+  "master": "../reference/E.corrected-master.png",
+  "layerInputsSha256": "295b730cdb8400a6303f9a2bc097e7d8708bcdb4622686cb9f77b4580a653c7e",
+  "inputs": {
+    "projectSha256": "aef17e6835fa8e045c407e1ce47d8159cbae879d5a46f8a6e076a6bd6dd50fb5",
+    "masterImageSha256": "1a2e22da5b831a000e30978da194f90bfe5899793c9efc6a5f5e6e581d6dba21",
+    "grid": {
+      "cols": 4,
+      "rows": 4,
+      "cell": 256
+    },
+    "templates": [
+      {
+        "file": "source-0.full.png",
+        "sha256": "826c8a0d9c208ef314a3674938c46482166e61540776696191cff0972d926d32",
+        "clips": [
+          {
+            "name": "idle",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-1.full.png",
+        "sha256": "aede063a75a406bcf99c53308961ad29efbeb5788caa6f578aa994275eb9c3c2",
+        "clips": [
+          {
+            "name": "meditate",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-2.full.png",
+        "sha256": "d7a67c3207bb4669b462cf1683fe5747b006a914e00fd41e3dc73f6e3a92c764",
+        "clips": [
+          {
+            "name": "walk",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-3.full.png",
+        "sha256": "6cf1d9850cfcb33d5ebc0301ce440711824cc0e5fdbbab24576d391c338ed8ef",
+        "clips": [
+          {
+            "name": "run",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-4.full.png",
+        "sha256": "00ae11cbd3babda0e3674edffa01992b9d6af46b5763cd51c4351c5a27968c83",
+        "clips": [
+          {
+            "name": "dash",
+            "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          },
+          {
+            "name": "hit",
+            "cells": [0, 1, 2, 3, 4, 5]
+          }
+        ]
+      },
+      {
+        "file": "source-5.full.png",
+        "sha256": "b6131ad4675790f9616e7603573d2043dc2e7311d0c4ef8f6cfb28013bf2c1c7",
+        "clips": [
+          {
+            "name": "sword_fly",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+          }
+        ]
+      },
+      {
+        "file": "source-6.full.png",
+        "sha256": "dcdccaf08256fe10c6e7503346a54d34c4b8a0ab06f5dc864b55af09d232300c",
+        "clips": [
+          {
+            "name": "attack",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+          }
+        ]
+      },
+      {
+        "file": "source-7.full.png",
+        "sha256": "ceb15d88d184efc0c3aa7c0941f2e42b4f252e9e6ec720c5ac8d62de3f73b7f8",
+        "clips": [
+          {
+            "name": "attack_2",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+          }
+        ]
+      },
+      {
+        "file": "source-8.full.png",
+        "sha256": "6ef8e333175ba16a8fc3c481344c3d86ddd1f1199f840182ba60e20d2247a090",
+        "clips": [
+          {
+            "name": "attack_3",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+          }
+        ]
+      },
+      {
+        "file": "source-9.full.png",
+        "sha256": "96ec43ae7066bcc352e23d340802b61ab4762d8e98ca383a5646e2293812da86",
+        "clips": [
+          {
+            "name": "cast",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-10.full.png",
+        "sha256": "912412a23092b48fbf9e7e530a54f6c51be9cdb1f0e95b695ca1c0c62099c5de",
+        "clips": [
+          {
+            "name": "channel",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+          }
+        ]
+      },
+      {
+        "file": "source-11.full.png",
+        "sha256": "8080cf06c29e0ba212f8e5bcc92f14d02c2d74feab179be36d6ffa935c984df7",
+        "clips": [
+          {
+            "name": "die",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+          }
+        ]
+      },
+      {
+        "file": "source-12.full.png",
+        "sha256": "4f2ed6eae9a5d36c871e9dbc43eafb0763130712b1b95b0b6176a081ebe34385",
+        "clips": [
+          {
+            "name": "tribulation",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          }
+        ]
+      },
+      {
+        "file": "source-13.full.png",
+        "sha256": "8c9475aa65154da545ff61a114dbddab55b91c1a570554fef3f15724ef55fc0d",
+        "clips": [
+          {
+            "name": "emote",
+            "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": "Public generator requires source QA pass and emits exact aligned frames with pinned mappings. All14 file hashes verified; no independent alignment/scaling. Body-only AI removal, matte, contact/order evidence and extracted runtime sets remain a separate orchestrator-scheduled pass after all5 T1 directions merge."
+}
