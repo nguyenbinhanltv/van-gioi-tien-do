@@ -230,6 +230,34 @@ Với hướng có stride y, giữ `vertical: "keep"`; khai báo tiếp đất t
 Magenta là đường đi chroma-key hiện hành; giữ sheet gốc và guide/provenance. Atlas nhiều trang được phép,
 không giảm ô hay scale để ép vừa một trang. Chưa có helper AI in-between trong profile này.
 
+## Layer manifest và composer D45
+
+`@vgtd/character` xuất `SpriteLayerSet`, `validateSpriteLayerSet`, `composeSpriteLayers`,
+`namespaceSpriteLayerAtlas`, `SpriteLayerCache`, `EquipmentVisualMapping` và `resolveEquipmentVisuals`.
+Đây là hợp đồng browser-safe, không đọc file hay gọi model/engine. Extraction/export và adapter Cocos là bước riêng;
+manifest/composer chưa chứng minh art đã được trích hoặc swap set trong game.
+
+Manifest `vgtd-sprite-layer-set` v1 gồm `id`, `role` (`body`/`weapon`/`fx`), `direction`, `motionId` dùng chung T1,
+`frameRate` từ clock công khai, `canvas` (width/height/pivotX/pivotY), `textures` (resource stem trong thư mục set),
+`displays` (tên/region, vị trí tâm y xuống so pivot, kích thước logic + kích thước texture) và `clips`.
+Clip gồm `name`, `duration` tick, `loop`, `frames: [{ at, display, order? }]`, `events: [{ at, name }]`.
+Frame đầu ở tick 0, ticks tăng nghiêm ngặt trong duration. Weapon bắt buộc `order: front/back` ở mọi khung,
+kể cả khung ẩn (`display: null`); body không được ẩn. Cả ba set phải có cùng motionId, hướng, canvas, tick, loop và sự kiện.
+
+Composer tạo đúng một armature với display-swap body/weapon, FX additive tùy chọn, z-order từng khung và **một** timeline
+sự kiện lấy từ body. Atlas/displays được namespace theo role + setId để các set không đụng region.
+Phải namespace từng atlas page trước khi đăng ký chung nhóm texture; không sửa atlas đầu vào.
+Geometry dùng tỉ lệ kích thước logic/texture, không giảm body theo atlas. Test parser DragonBones thật Cocos 3.8.8
+xác nhận cấu trúc hợp lệ; test render/swap runtime theo sau adapter.
+
+Mapping `vgtd-equipment-visuals` v1 có `tiers.T1..T5: { body, weapon, fx, aura }`, `costumes: { id: { body } }`,
+`weaponSkins: { id: { weapon } }` và `qualityGlow` chứa đầy đủ sáu QualityId từ shared, mỗi màu RGBA chuẩn hóa 0..1.
+Màu phải lấy từ nội dung chuẩn D6/D44; module không sao chép palette hay quyết định giá/chỉ số.
+`resolveEquipmentVisuals(mapping, { tier, quality, costume?, weaponSkin?, hideCostume? })` chọn độc lập body/weapon;
+hideCostume chỉ bỏ body cosmetic, không bỏ weapon skin. FX/aura theo tier; glowTint áp dụng slot FX, không nhuộm lại thân.
+`aura` là ID hook riêng, không phải chỉ số chiến đấu. Cache chỉ tải cặp set/hướng được yêu cầu, gộp request đồng thời,
+cho retry khi lỗi và hỗ trợ evict/clear; không preload toàn bộ tier/cosmetic.
+
 ## Biến thể sửa từ master T1
 
 T2–T5 và trang phục phải sửa ảnh từ sheet master T1 với cùng pose. Khai báo `project.variant` loại
@@ -255,3 +283,43 @@ là lỗi cấu hình. Sheet gộp dùng mapping clip cho cả hai phía. Contra
 annotations và số đo từng ô, kể cả ô đạt. Xem schema/ví dụ ở README của `@vgtd/sprite`.
 
 Biến thể cũng pin masterImageSha256 của PNG master T1 và dùng lại PNG đó làm reference. Khóa mọi điều khiển ngoài storage/provenance: vertical (mặc định sole), kind (upright), contacts, tốc độ, exceptions, manifest cells/guides và slice; giữ đủ clip. Chỉ thay layout/DPI khi scale đầu ra bằng nhau. Khi xuất, dùng lại gốc căn từng ô T1 để phần vải mới không làm lệch thân vì centroid khác. Màu áo mới có thể giữ bằng palette lock tắt; không thay reference hình học T1.
+
+## Bằng chứng kích thước đầu D47
+
+[Cập nhật D47: giữ flight tuck, dash sâu, lunge và tóc secondary động; không làm phẳng pose để ép bbox.]
+
+`smoothProjectClipDefaults` tự gắn `heightPolicy: "head-size-v1"` cho clip upright; dash v2 nay là upright.
+Project đã viết trước PR phải thêm trường này và sửa dash thành `kind: "upright"`. Profile legacy không đổi.
+Emote upright cũng theo cùng chính sách. Dùng `exceptions` theo chỉ số clip từ 0, chỉ hai reason hợp lệ:
+`posture` và `secondary-overhang`. Generic `airborne`, `lunge`, `crouch` không được miễn cổng upright mới.
+
+Schema:
+
+```ts
+project.masterHead = { crown: { x, y }, chin: { x, y } };
+clip.heightPolicy = 'head-size-v1';
+clip.exceptions = { '6': 'posture' };
+clip.headEvidence = {
+  '6': { crown: { x, y }, chin: { x, y }, note: 'Mô tả pose và bằng chứng đã xem' },
+};
+```
+
+Mọi x/y là số hữu hạn, đo thực tế, không sao chép tùy tiện từ ví dụ. Crown là đỉnh sọ/main-cap gắn đầu,
+không lấy búi tóc, ponytail, dải vải hay secondary hair; chin là cằm. Độ lớn đầu = khoảng cách Euclid crown–chin,
+để đầu nghiêng không bị hiểu nhầm là co người. Master đo trên PNG master sau resize về ô 256 px @2x của pipeline.
+Điểm từng khung đo trên **ô output đã căn 256 px @2x**, không phải atlas trim, toàn sheet hay tọa độ Cocos.
+Nếu đo trên ô đã slice trước căn: `output = slicedPoint * calibration.scale + record.dx/dy`.
+Nếu bắt đầu từ toàn ô chuẩn hóa, trừ inset trước; calibration là hệ số cố định của sheet/nhân vật, không fit từng khung.
+Sheet gộp vẫn dùng chỉ số cục bộ clip: hit6 + dash10 có dash ở global6..15 nhưng evidence dash là local0..9.
+
+- Ô upright bbox trong master ±3%, không exception: giữ cổng bbox cũ, không bắt buộc evidence.
+- Ô exception hoặc bbox ngoài band: bắt buộc evidence + note, masterHead và reason hợp lệ.
+- Đầu phải trong master ±3%; sai đầu/thiếu evidence/generic reason là lỗi cứng. Không có crouch band -8%.
+- Mọi evidence đã cung cấp đều được kiểm, kể cả ô bbox trong band hay API legacy/free.
+- Khi đầu ổn và reason được xem, lưu INFO cùng bbox thật, kích thước đầu, điểm đo và note. Không đổi scale hay ảnh.
+- Lỗi chân, khung rỗng và cổng khác vẫn chạy; INFO không cho phép che foot slide/anatomy/face drift thật.
+
+Contract giữ masterHead và headEvidence; batch/backlog report giữ INFO, `sprite:backlog` in chúng và trang review
+có mục mở rộng **Head-size INFO evidence** theo ô. Bằng chứng nằm trong project/contract, không tự ghi vào danh sách
+soft finding đã chấp nhận của quality-backlog.json. Các pose được chấp nhận phải được người xem kiểm landmarks;
+chưa có head detector tự động. Variants phải giữ masterHead và các điều khiển/evidence của T1.

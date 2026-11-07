@@ -279,6 +279,8 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
     throw new Error('variant source must be the same character/direction T1 master project');
   if (canonical(project.slice ?? {}) !== canonical(master.slice ?? {}))
     throw new Error('variant changed master slicing controls');
+  if (canonical(project.masterHead ?? null) !== canonical(master.masterHead ?? null))
+    throw new Error('variant changed master head reference');
   if (
     project.clips.length !== master.clips.length ||
     new Set(project.clips.map((c) => c.name)).size !== project.clips.length ||

@@ -8,3 +8,5 @@ export * from './schema.js';
 export * from './validators.js';
 export * from './samples.js';
 export * from './viewer.js';
+export * from './equipment-visuals.js';
+export * from './sprite-layers.js';

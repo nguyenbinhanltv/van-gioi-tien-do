@@ -65,6 +65,8 @@ Oct 31, 2026 · An Nguyen
 
 ### Nhân vật, layer, atlas
 
+[Cập nhật D47: upright semi-chibi có exception/bbox ngoài band dùng bằng chứng kích thước đầu master ±3%, reason `posture`/`secondary-overhang`, không ép phẳng flight tuck/dash/lunge. Ô trong band không exception giữ cổng cũ; evidence đã khai báo luôn được kiểm. Chi tiết tọa độ và INFO review ở `art/sprite-sheet-pipeline.md`.]
+
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 
 | Hạng mục              | Giá trị chốt                                                                                        | Tài liệu gốc          |

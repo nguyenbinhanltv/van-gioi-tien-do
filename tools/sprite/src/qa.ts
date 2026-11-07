@@ -13,10 +13,18 @@ import { facingGroundVector } from './gait.js';
 import { measureFigure } from './master.js';
 import type { AlignedFrame } from './align.js';
 import type { CellSpec, Guides } from './types.js';
+import {
+  checkHeadEvidence,
+  type HeadEvidence,
+  type HeadLandmarks,
+  type HeadMeasurement,
+  type HeightPolicy,
+} from './head-evidence.js';
 
 export type Severity = 'fail' | 'warn' | 'info';
 
 export interface Finding {
+  readonly headEvidence?: HeadMeasurement;
   readonly gate: 'height' | 'footSlide' | 'loopSeam' | 'similarity' | 'present' | 'poseLock' | 'faceLock';
   readonly severity: Severity;
   readonly clip: string;
@@ -31,6 +39,8 @@ export interface Finding {
 }
 
 export interface QaClip {
+  readonly heightPolicy?: HeightPolicy;
+  readonly headEvidence?: Readonly<Record<number, HeadEvidence>>;
   readonly name: string;
   /** Facing of the ground travel, default E for existing API callers. */
   readonly direction?: Direction;
@@ -51,6 +61,7 @@ export interface QaClip {
 }
 
 export interface QaOptions {
+  readonly masterHead?: HeadLandmarks;
   readonly masterHeight: number;
   readonly master: Image;
   readonly guides: Guides;
@@ -73,10 +84,30 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
   const lo = o.masterHeight * (1 - tol);
   const hi = o.masterHeight * (1 + tol);
   const out: Finding[] = [];
+  for (const key of Object.keys(clip.headEvidence ?? {}))
+    if (!/^(0|[1-9]\d*)$/.test(key) || Number(key) >= clip.frames.length)
+      out.push({
+        gate: 'height',
+        severity: 'fail',
+        clip: clip.name,
+        metric: 'head_evidence_index',
+        value: 1,
+        limit: 0,
+        message: `head evidence cell '${key}' is not a valid clip-local frame`,
+      });
   clip.frames.forEach((f, i) => {
     if (!f) return;
     const h = f.metrics.height;
     const inBand = h >= lo && h <= hi;
+    const head = checkHeadEvidence(clip, o, i, inBand, tol);
+    if (head !== null) {
+      out.push(...head);
+      if (
+        (clip.heightPolicy === 'head-size-v1' && clip.kind === 'upright') ||
+        head.some((finding) => finding.severity === 'fail')
+      )
+        return;
+    }
     const exception = clip.exceptions?.[i];
     if (inBand) return;
     if (exception)
