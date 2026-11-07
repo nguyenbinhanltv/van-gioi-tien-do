@@ -7,6 +7,7 @@
  *   similarity  face and torso of every frame still look like the master
  *   present     every expected frame exists and is not empty
  */
+import type { OriginMeasurement } from './authored-origin.js';
 import type { Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { facingGroundVector } from './gait.js';
@@ -24,6 +25,7 @@ import {
 export type Severity = 'fail' | 'warn' | 'info';
 
 export interface Finding {
+  readonly originEvidence?: OriginMeasurement;
   readonly headEvidence?: HeadMeasurement;
   readonly gate:
     | 'height'
@@ -33,9 +35,10 @@ export interface Finding {
     | 'present'
     | 'poseLock'
     | 'faceLock'
+    | 'canvasLoss'
+    | 'authoredOrigin'
     | 'weaponExtraction'
-    | 'handAlignment'
-    | 'canvasLoss';
+    | 'handAlignment';
   readonly severity: Severity;
   readonly clip: string;
   readonly frame?: number;
