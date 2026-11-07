@@ -2477,6 +2477,16 @@
       "reviewer": "art-worker",
       "status": "open",
       "note": "Subtle breathing/cloth motion; perceived smoothness requires real Cocos playback beyond nominal24fps drawing count."
+    },
+    {
+      "kind": "weak_reversal",
+      "clip": "run",
+      "dir": "S",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Frontal overlapping flight/tuck silhouettes sometimes obscure which boot leads. Near/far leg reversal readability needs targeted art review alongside25 measured foot contacts/slides. Nominal16 drawings/24fps is not proof of perceived gait smoothness; dynamic poses retained, not flattened."
     }
   ]
 }

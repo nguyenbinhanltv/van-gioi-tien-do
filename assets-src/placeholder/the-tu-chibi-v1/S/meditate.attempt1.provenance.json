@@ -6,11 +6,28 @@
   "prompt": "Use case: identity-preserve. Production original Thể tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. S STRAIGHT FRONTAL view facing down toward viewer/bottomscreen, slightly elevated isometric camera allframes. Both eyes/symmetricfrontface visible, NOT SE/Eprofile. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT16consecutivedrawings in4x4SQUAREcanvas2048x2048, all16cellsfilledrowmajor. CROSS-LEGGED MEDITATE loop. Fixedheadstencils are lower in eachcell to represent seatedheight, NOT enlargedheads. Figure sitscrosslegged with correctsame-length thighs/calves folded naturally; pairedgauntlets rest on knees, straight relaxedtorso, adultfacecalm eyesgentlyclosed.0-7gentle inhale torsoexpand/shouldersrise2px,8-15exhale settle; abdomen/forearms subtle, ribbons/apron lag2frames. Pelvis/feet stable, lastfirstseamless. Sitting heightnaturally~180logicalpx, keeporiginalhead47ishlogicalpx and bodypartlengths; doNOT fillcell by enlarging character. Ivoryapron drapes OVER foldedlegs. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background. FrontcameraS and fixedmasterface/headsize are mandatory. Preserve ivoryapron beneathsash and naturalpairedgauntlets; originaldesignonly.",
   "references": ["templates/meditate.head-stencil.template.png", "../reference/S.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-52517a63-762f-40b4-90b8-877913b8b05c.png",
-  "status": "S candidate; QA pending",
+  "status": "Selected fullsheet: native hard gates and all15 Cocos2x clips passed;53 accepted soft findings retained.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output; original project inputs"
   },
   "selectionRegistry": "project.json",
-  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": true,
+  "archivedRaw": {
+    "file": "raw/meditate.attempt1.png",
+    "sha256": "7c7742882a18fe5b462b74b53fa52e8da986ad3d5dadb6a46b33854a476a7b56",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "templates/meditate.head-stencil.template.png",
+      "sha256": "aa9e78ed5a6fd62d049631eb9500eb5a6c7612a6fbdb3f18b93daecc59f0a881"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:36.189545+00:00"
 }

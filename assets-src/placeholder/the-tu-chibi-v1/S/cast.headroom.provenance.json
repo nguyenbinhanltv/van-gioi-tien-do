@@ -6,11 +6,28 @@
   "prompt": "Use case: precise-object-edit. Image1 is the EDIT TARGET: a 4x4,16-frame frontal S casting animation sprite sheet. Image2 is the locked S master identity reference. Make ONE narrow correction in ALL16 cells: compact the elevated hair bun and any upward secondary ribbon tips so the highest secondary hair is at most 5 logical pixels above the attached skull hair cap. The current bun is too tall and clips after fixed-scale export. Remove roughly 6 logical pixels of excess elevated bun height, reconstruct a tiny compact tied tuft with its gold fitting, retain natural lateral amber ribbon motion. Do NOT move or resize the main skull hair cap, face, chin, head, neck, body, boots, gauntlets, apron or sash. Keep every pose, fist location, expression, camera, body scale, foot ground and exact cell registration unchanged. Preserve original adult tan square-jaw face, charcoal/amber/gold/ivory palette and cel shading with tinted outlines. Exact same square image dimensions and4x4 lattice, opaque pure magenta background and existing thin black dividers. No added FX, text or ruler. This is secondary-hair surgery only, no character shrink and no pose flattening.",
   "references": ["raw/cast.attempt1.png", "../reference/S.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-6481771f-d769-43a9-ac09-12ddf3b5821c.png",
-  "status": "candidate; native QA pending",
+  "status": "Historical generation/edit input retained; project.json selects final fullsheets. Cell compositions use adjacent repair proofs.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output; original project inputs"
   },
   "selectionRegistry": "project.json",
-  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": false,
+  "archivedRaw": {
+    "file": "raw/cast.headroom.png",
+    "sha256": "9e189f6b873af5e02e636a96939aa8a56066f2bb22a45da653fbb07808b5dced",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "raw/cast.attempt1.png",
+      "sha256": "db441c1a798ec672b8a8e0e77dca1d5deae2a016f7a91e4321a88d9538434fec"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:35.204282+00:00"
 }

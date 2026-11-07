@@ -6,11 +6,28 @@
   "prompt": "Use case: identity-preserve. Production original Thể tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. S STRAIGHT FRONTAL view facing down toward viewer/bottomscreen, slightly elevated isometric camera allframes. Both eyes/symmetricfrontface visible, NOT SE/Eprofile. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT12consecutivedrawings in4columns x3rows RECTANGULAR4:3canvas2048x1536; square512cells, NO fourthrow, all12filledrowmajor. DEATH NONLOOP.0neutralguard,1stagger/shoulderrecoil,2kneesgive,3loweronto one knee,4torsofalls diagonallyright,5-7collapsecontrolled onto rightside,8-11lie still on side withtinyfinalcloth/hairsettling. Finalbodyfull-lengthsameanatomy216ishpx, lyingdiagonally lowercell; headsame47ishlogicalunit rotated inplane naturally withbody, neverenlarged. Stencils show approximateposition+size, mayrotateskull withcollapse not keepfloatinguprighthead. Feet endtowardleft, headtowardright, entirefigure/gauntlets/ribbons staywithincell afterpelviscentering; no limbdetachment/bodyshrink. Finalgauntlets restnaturalnextbody. FixedSidentity evenwhenheadtilts; noextraweapons/FX/blood. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background. FrontcameraS and fixedmasterface/headsize are mandatory. Preserve ivoryapron beneathsash and naturalpairedgauntlets; originaldesignonly.",
   "references": ["templates/die.head-stencil.template.png", "../reference/S.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-867e6622-95d6-46b0-93e5-074855eb44ef.png",
-  "status": "S candidate; QA pending",
+  "status": "Selected fullsheet: native hard gates and all15 Cocos2x clips passed;53 accepted soft findings retained.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output; original project inputs"
   },
   "selectionRegistry": "project.json",
-  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": true,
+  "archivedRaw": {
+    "file": "raw/die.attempt1.png",
+    "sha256": "9042bb4f08fb53bd8c6259c96be888cc8a6de6a5839746237d393de316f0b185",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "templates/die.head-stencil.template.png",
+      "sha256": "6aa4ffd4dac6a72f4225761f20d156398052bc7a499cbf98b8a30ae15365e421"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:35.573116+00:00"
 }

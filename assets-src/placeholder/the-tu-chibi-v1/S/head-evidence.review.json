@@ -372,5 +372,72 @@
       "masterSizePx": 48.041648597857254,
       "note": "Initial source manual sample, not passing evidence; cap beneath fitting excludes bun/tips. Preserve dynamic body/head pitch; head-only correction planned."
     }
-  ]
+  ],
+  "rejectedEditObservations": {
+    "source": "raw/hit-dash.head-repaired.png",
+    "status": "Superseded in shallow dash locals1,2,3,6,7 by head-edit2; deep locals4/5 retained",
+    "reason": "First AI correction made shallow cap-to-chin units too small. Do not select semantic boundaries to obtain pass. Approximate manually selected diagnostic points below, uncertainty1px; not final evidence.",
+    "rows": [
+      {
+        "cell": 1,
+        "crown": {
+          "x": 130,
+          "y": 52
+        },
+        "chin": {
+          "x": 130,
+          "y": 96
+        },
+        "sizePx": 44.0
+      },
+      {
+        "cell": 2,
+        "crown": {
+          "x": 130,
+          "y": 52
+        },
+        "chin": {
+          "x": 130,
+          "y": 97
+        },
+        "sizePx": 45.0
+      },
+      {
+        "cell": 3,
+        "crown": {
+          "x": 137,
+          "y": 49
+        },
+        "chin": {
+          "x": 137,
+          "y": 94
+        },
+        "sizePx": 45.0
+      },
+      {
+        "cell": 6,
+        "crown": {
+          "x": 132,
+          "y": 46
+        },
+        "chin": {
+          "x": 130,
+          "y": 90
+        },
+        "sizePx": 44.04543109109048
+      },
+      {
+        "cell": 7,
+        "crown": {
+          "x": 132,
+          "y": 38
+        },
+        "chin": {
+          "x": 130,
+          "y": 81
+        },
+        "sizePx": 43.04648650006177
+      }
+    ]
+  }
 }

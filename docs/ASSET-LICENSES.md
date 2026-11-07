@@ -4772,3 +4772,10 @@ Giữ động tác chạy/bay/lao sâu; sửa đầu sai cỡ và tóc phụ c�
 | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------- |
 | `assets-src/placeholder/the-tu-chibi-v1/S/raw/hit-dash.head-edit2.png`     | OpenAI image_gen; raw/prompt/tool/model không công bố/UTC cạnh nguồn; gồm cả bản không chọn | OpenAI Output / mã dự án gốc |
 | `assets-src/placeholder/the-tu-chibi-v1/S/raw/hit-dash.head-repaired2.png` | Ghép nguyên ô AI bằng repairCell; proof hash cạnh nguồn                                     | OpenAI Output / mã dự án gốc |
+
+### Thể tu S — atlas xuất (worker24, 2026-11-08)
+
+| Tệp                                                                                         | Nguồn / xử lý                                                        | Điều khoản               |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------ |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_page1_tex.png` | Atlas PMA @vgtd/sprite từ nguồn S AI đã kê; không rescale từng frame | OpenAI Output / mã dự án |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_tex.png`       | Atlas PMA @vgtd/sprite từ nguồn S AI đã kê; không rescale từng frame | OpenAI Output / mã dự án |

@@ -1,5 +1,5 @@
 {
-  "utcRecorded": "2026-11-07T23:22:38.348182+00:00",
+  "utcRecorded": "2026-11-07T23:31:31.999265+00:00",
   "sourceProfile": "D46 smooth-v2 / D47 head-size-v1",
   "clips": 15,
   "drawings": 202,
@@ -14,6 +14,233 @@
   "headEvidence": "15 manually annotated aligned cells; no detector claim",
   "calibration": "Lockedscale1 after whole-sheet square-cell DPI normalization; no per-frame fitting",
   "canvasLoss": "Native hard projected-bounds gate passes all202cells",
-  "repositoryChecks": "pending latest-main integration",
-  "cocos": "pending real3.8.8 2x all15clip capture"
+  "repositoryChecks": {
+    "npm ci": "passed",
+    "npm run typecheck": "passed",
+    "npm test": "passed",
+    "npm run build": "passed",
+    "npm run lint": "passed",
+    "npm run format:check": "passed"
+  },
+  "cocos": {
+    "version": "3.8.8",
+    "clips": 15,
+    "zoom": 2,
+    "samplesPerClip": 24,
+    "sample": "midpoint",
+    "index": "cocos-capture.json",
+    "command": "node apps/client-cocos/scripts/capture.mjs --src dragonbones/the-tu-chibi-v1 --stem thetuchibi --direction S --mode single --animations all --frames 24 --zoom 2 --sample midpoint --gif --out <temporary-capture-dir>",
+    "files": [
+      {
+        "file": "attack.gif",
+        "bytes": 230785,
+        "sha256": "340611a6a6783022d10126defdeb81fb16fc673410fe37e9e0ab81303297fd12"
+      },
+      {
+        "file": "attack.sheet.png",
+        "bytes": 6405001,
+        "sha256": "be2b240f7c39553db41ac9c99b2f1f1c045cb4d0bbd115e6325340c39aeb1482"
+      },
+      {
+        "file": "attack_2.gif",
+        "bytes": 211823,
+        "sha256": "e506bbe3ec1d83cb50ac61b82ba81c4d2bb670dedcd64ff7956dba955c49d0c6"
+      },
+      {
+        "file": "attack_2.sheet.png",
+        "bytes": 5843626,
+        "sha256": "4892e239182515e3783b9274bba4ffbdad5dad1a155ba9279d8ed76ff352ef25"
+      },
+      {
+        "file": "attack_3.gif",
+        "bytes": 235500,
+        "sha256": "19f11912ced7910d18058be700a7b89c9e0df653245aa2581edf12eb5a3853f7"
+      },
+      {
+        "file": "attack_3.sheet.png",
+        "bytes": 6518690,
+        "sha256": "c94b24c1dc153e63d062679f0cc977f69061a20d29fa4cbdf2b7ac1ab452502a"
+      },
+      {
+        "file": "cast.gif",
+        "bytes": 254300,
+        "sha256": "5e0fa4c2fc6d60c27e25ebb179cccbbd43cbfc1f4e253abf56f08349cbcdaa3c"
+      },
+      {
+        "file": "cast.sheet.png",
+        "bytes": 6500224,
+        "sha256": "ebbab184b48208a9b2832f0fda33761d515e80e4f379521caa3bf5ebc49e49a1"
+      },
+      {
+        "file": "channel.gif",
+        "bytes": 180829,
+        "sha256": "56dbd0474afb5bc3e1758c61ef00825f4be7fff8ed50de6ab459b1f610c5934d"
+      },
+      {
+        "file": "channel.sheet.png",
+        "bytes": 4866734,
+        "sha256": "2f261059e5e58d36dab9002a4a144daa521e30f38b9f1c232998ffbaf0d1ecca"
+      },
+      {
+        "file": "dash.gif",
+        "bytes": 172645,
+        "sha256": "99150dfcf1c0914938d166d737a95f01ea2541bcee77104e346e0725fc32f7ac"
+      },
+      {
+        "file": "dash.sheet.png",
+        "bytes": 4839165,
+        "sha256": "c50e19bce58168a2c4c96361c7ca07592e19a118d73533740e2104352c9e956e"
+      },
+      {
+        "file": "die.gif",
+        "bytes": 162626,
+        "sha256": "c861edde1f7092ba1a85678876e6599eefaaa6aed47cebefdbb3af25f6b8a4b3"
+      },
+      {
+        "file": "die.sheet.png",
+        "bytes": 4508653,
+        "sha256": "8bfa0bab5d58f868cfbfe5b45427e9e10090f8f368d95c6f41f9c2250ec0378d"
+      },
+      {
+        "file": "emote.gif",
+        "bytes": 193680,
+        "sha256": "bdc3a395989c1994ff7d458f4430b2343a0778bfeb9a0e06797b16f205a8209e"
+      },
+      {
+        "file": "emote.sheet.png",
+        "bytes": 5215284,
+        "sha256": "ab5c61aecc3dee34324aa8a6245278262db5711115b42a56b411625524d06cd0"
+      },
+      {
+        "file": "hit.gif",
+        "bytes": 110125,
+        "sha256": "3be74e6808a0ad5e8fcdbfe763690ffb48743c68a7f08ca2349c993449aad0ef"
+      },
+      {
+        "file": "hit.sheet.png",
+        "bytes": 3399729,
+        "sha256": "455a7ee80cc067decdd9191d6e2ae3531d6c6a164191b2cc3b6dd4b23aa8cef3"
+      },
+      {
+        "file": "idle.gif",
+        "bytes": 270245,
+        "sha256": "9304bd419e10a354085b81612c9ca951a965e96c561733fa51ae3096024f61c9"
+      },
+      {
+        "file": "idle.sheet.png",
+        "bytes": 6585854,
+        "sha256": "6b471c6b0d0df2b81e749d10906cf2faa7789ba2936d7d80375d389e444a5d5a"
+      },
+      {
+        "file": "meditate.gif",
+        "bytes": 211207,
+        "sha256": "c813bc58f0dfd61b2363931b171e44848642a79239de89ac617d1411707a53ad"
+      },
+      {
+        "file": "meditate.sheet.png",
+        "bytes": 5249847,
+        "sha256": "f91ea825617ae69e2dc0fa590415d423441f3e93140b931861dccb7afea64b40"
+      },
+      {
+        "file": "run.gif",
+        "bytes": 255904,
+        "sha256": "aa102fca3a3d501ba0d3ac706ef8838ff155cb12bb85c338dbc19bd99c0b0bd1"
+      },
+      {
+        "file": "run.sheet.png",
+        "bytes": 6441337,
+        "sha256": "11fe11ef217d4d802939e136410bca4897ba6d26476f53b369e32a8f9840e8d5"
+      },
+      {
+        "file": "sword_fly.gif",
+        "bytes": 174825,
+        "sha256": "8f39ba623e420c5cf44b78fd9c24ccb47321b652357b27f6c66b62df96a2d0e9"
+      },
+      {
+        "file": "sword_fly.sheet.png",
+        "bytes": 4641978,
+        "sha256": "b838c695f5f00c37aa1a7dc449a8b0b00327b753d79dbad590bc857320ecd3df"
+      },
+      {
+        "file": "tribulation.gif",
+        "bytes": 230634,
+        "sha256": "2ed5c945036a3abcdbda068443d3fdd199068000c535d4c4d91cc9a4c576e487"
+      },
+      {
+        "file": "tribulation.sheet.png",
+        "bytes": 5726698,
+        "sha256": "7172372281c2bb04ffaae69564f0a96f461aa5958e640fd6805727f4b10e8ca2"
+      },
+      {
+        "file": "walk.gif",
+        "bytes": 252521,
+        "sha256": "4c920167d4cd20be3522d6e25c1b800ed7ac08ec334ab7d0b3217ab989a1154d"
+      },
+      {
+        "file": "walk.sheet.png",
+        "bytes": 6260487,
+        "sha256": "d6c6e8a06d60da02833f53a79452432dee43dd9a05d7520693dd16ec013f9e59"
+      }
+    ],
+    "shellWrapperExitCode": 1,
+    "processStatusConfirmation": "passed: cocos-confirmation.json; direct Node status0 on all15clips/24samples/2x;0page errors/loop warnings",
+    "exitCode": 0,
+    "confirmationIndex": "cocos-confirmation-index.json"
+  },
+  "exportFiles": [
+    {
+      "file": "thetuchibi_S.sprite.json",
+      "sha256": "9b3c146bb8b43eb791f9f252876cb612df285f4b490ba0594f9c2f222343c6ce"
+    },
+    {
+      "file": "thetuchibi_S_page1_tex.json",
+      "sha256": "5b2c72d5a50cf79b41b3ef76b0bb2322b4172df7d93deff98e0273169559db32"
+    },
+    {
+      "file": "thetuchibi_S_page1_tex.png",
+      "sha256": "a73ab18475214b59a916b28598eb3abba19843d7f8db3b3f26214f6475313024"
+    },
+    {
+      "file": "thetuchibi_S_ske.json",
+      "sha256": "ff8d6240e4f53099d1d885b7d82e92d9f6fe0cc0700e4fe4c7a5b275e3ea7bb8"
+    },
+    {
+      "file": "thetuchibi_S_tex.json",
+      "sha256": "c628a99b71b89579e4fbd52120bc2811ba40607a2e512a8dffc6e236ca613554"
+    },
+    {
+      "file": "thetuchibi_S_tex.png",
+      "sha256": "bcd136104a015076099652a7c13ee67e1592edbf8faa1b73e501f436227615f4"
+    }
+  ],
+  "sourceProjectSha256": "da9e985f855d814dc65481e3552ebdaea3f716c89a3d7ef101463e418ee81160",
+  "independentAudit": {
+    "licensedClassPngs": 179,
+    "verifiedSourcePngHashes": 173,
+    "pma": {
+      "thetuchibi_S_page1_tex.png": {
+        "width": 2048,
+        "height": 2048,
+        "rgbOverAlpha": 0
+      },
+      "thetuchibi_S_tex.png": {
+        "width": 2048,
+        "height": 2048,
+        "rgbOverAlpha": 0
+      }
+    }
+  },
+  "layerPreparation": {
+    "state": "canonical guides generated",
+    "sheets": 14,
+    "command": "sprite:layer-template --project S/project.json --out <temp>",
+    "note": "Exact aligned4x4 references and layer-inputs hashes/maps; removal edits, reviewed mattes/contacts and independent sets follow source lock."
+  },
+  "limitations": [
+    "53 accepted soft findings:25 foot contacts/slides +28 free-clip bbox differences; manual art backlog remains open",
+    "15 manual head selections carry approximate1px semantic boundary uncertainty; not automatic detector certification",
+    "Full-frame compatibility export only; gauntlets remain naturally worn for later D45 extraction",
+    "NE/N motion still pending",
+    "Frontal run overlapping flight/tuck silhouettes can obscure leading-boot readability; weak_reversal manual backlog remains open."
+  ]
 }

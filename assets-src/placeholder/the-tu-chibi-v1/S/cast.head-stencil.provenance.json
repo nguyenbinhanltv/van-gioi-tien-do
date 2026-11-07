@@ -1,6 +1,6 @@
 {
   "kind": "generation-guide-only",
-  "master": "reference/S.master.png",
+  "master": "../reference/S.master.png",
   "crop": {
     "x": 72,
     "y": 4,
@@ -76,5 +76,9 @@
   ],
   "operation": "Unscaled head stencils translated to intended pose locations; output still needs D47 measurement",
   "selectionRegistry": "project.json",
-  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "masterSha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9",
+  "tool": "@vgtd/sprite template + @vgtd/rig unscaled image blit",
+  "utcProvenanceAudit": "2026-11-07T23:26:00.765544+00:00",
+  "measurementNote": "Stencil is generation guidance only, never passing D47 evidence; motion landmarks are measured on actual aligned output."
 }

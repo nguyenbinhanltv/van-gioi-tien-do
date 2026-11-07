@@ -6,11 +6,28 @@
   "prompt": "Use case: identity-preserve. Production original Thể tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. S STRAIGHT FRONTAL view facing down toward viewer/bottomscreen, slightly elevated isometric camera allframes. Both eyes/symmetricfrontface visible, NOT SE/Eprofile. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT16consecutiverowmajor drawings in4x4SQUARE2048x2048canvas, squarecells. 16phaseIDLEloop. Feet planted exactly at masterboot positions (characterR/viewerLEFT aroundx106, characterL/viewerRIGHT aroundx150), stablepelvis.0-7inhale chestexpand/forearmsrise1-3px,8-15exhalesettle. Hairribbons/sashtails/ivoryapron lag2frames, restrainedbutclearlyperceptible breathing. Exactmasterfrontalface/headunit, looplastfirst. Rendercompletefullbodies, preserve fixedadultface/classpalette/weapongeometry. Removeguideghosts/labels/lines/stencilduplicateheads. No extraobjects/FX.",
   "references": ["templates/idle.head-stencil.template.png", "../reference/S.master.png"],
   "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-5426a491-83d2-4665-ac86-c9ae39bb30cf.png",
-  "status": "S temporary candidate; QA pending, independent fresh-main direction branch follows SE",
+  "status": "Selected fullsheet: native hard gates and all15 Cocos2x clips passed;53 accepted soft findings retained.",
   "license": {
     "source": "https://openai.com/policies/row-terms-of-use/",
     "basis": "OpenAI Output; original project inputs"
   },
   "selectionRegistry": "project.json",
-  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": true,
+  "archivedRaw": {
+    "file": "raw/idle.attempt1.png",
+    "sha256": "53c61b7f09e8bcd4e31e1968b9c9f1e51e19a99cf783ebfb729af3a58b5f9c66",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "templates/idle.head-stencil.template.png",
+      "sha256": "4f95f2e7913165ec774ac12677548a1865606f2955bcca85baee96a06f995f19"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:36.070774+00:00"
 }

@@ -1,6 +1,6 @@
 {
   "kind": "generation-guide-only",
-  "master": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-24/assets-src/placeholder/the-tu-chibi-v1/reference/S.master.png",
+  "master": "../reference/S.master.png",
   "masterSha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9",
   "crop": {
     "x": 72,
@@ -17,5 +17,8 @@
   },
   "operation": "existing blit, unscaled master head stencil per cell; original lattice retained",
   "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
-  "selectionRegistry": "project.json"
+  "selectionRegistry": "project.json",
+  "tool": "@vgtd/sprite template + @vgtd/rig unscaled image blit",
+  "utcProvenanceAudit": "2026-11-07T23:26:00.884581+00:00",
+  "measurementNote": "Stencil is generation guidance only, never passing D47 evidence; motion landmarks are measured on actual aligned output."
 }
