@@ -397,6 +397,18 @@ khai báo thì phải có cả master/ô và luôn kiểm. Điều kiện except
 Contract, backlog và review hiện kind, điểm skullBase, kích thước/bề ngang cùng giá trị master theo direction dưới INFO.
 Lỗi chân và canvasLoss vẫn giữ nguyên; annotation này không phải detector sọ tự động.
 
+### Cập nhật D50: tóc đã duyệt che gáy
+
+Không sửa master hay đoán skullBase khi hairstyle đã duyệt che điểm gáy/chẩm. NE/N dùng kind rear-crown-shoulder trên
+masterHead của chính hướng đó, với crown, shoulderTop `{left,right}` là hai đầu đường đỉnh vai nhìn thấy, và breadth
+`{left,right}` là bề ngang sọ tối đa bắt buộc. Mọi điểm `{x,y}`; evidence ô thêm note đã xem giải thích gáy bị che.
+Khoảng cách Euclid crown→trung điểm shoulderTop và breadth đều trong ±3% cùng phép đo trên master khóa cùng direction.
+Crown không tính khối tóc nhô trên sọ; breadth không tính tóc rời. Master dùng ô256px sau resize, ô motion dùng output
+đã aligned256px, chỉ số nội bộ clip kể cả sheet nhóm. Không fit/rescale và không thêm chin/skullBase giả vào kind này.
+
+INFO contract/backlog/review giữ kind, hai đầu vai, trung điểm, breadth và giá trị master/ô. Vai thiếu/ngoài ô/đường vai
+co thành một điểm, kind/direction không khớp hoặc drift là lỗi cứng. D47/D48 và các cổng foot/canvas giữ nguyên.
+
 ## Runtime body/weapon/FX trong Cocos
 
 DragonBonesActor nhận mapping + appearance qua setEquipmentVisuals, chỉ tải các set/direction được chọn và mọi trang atlas

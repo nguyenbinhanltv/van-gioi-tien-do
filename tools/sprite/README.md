@@ -225,6 +225,27 @@ Existing crown/chin objects remain compatible (`kind` defaults to `crown-chin`).
 when supplied, both master and frame must carry it and it is checked. Master references, kind, sizes, breadth and notes
 remain in contract/backlog/review INFO. No bbox, foot or canvas threshold changes and no rescaling are introduced.
 
+### Approved long hair hides the nape (D50 amends D48)
+
+Keep the approved master; do not guess a skull base. For NE/N use the same kind on that direction's masterHead and cells:
+
+```json
+{
+  "kind": "rear-crown-shoulder",
+  "crown": { "x": 128, "y": 24 },
+  "shoulderTop": { "left": { "x": 100, "y": 80 }, "right": { "x": 156, "y": 80 } },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+Illustrative coordinates only. Measure Euclidean crown-to-shoulder-midpoint and maximum skull breadth, each within the
+same-direction master's±3%. Crown excludes hair volume above the skull; breadth excludes loose strands. Shoulder endpoints
+must be visible, distinct and inside the cell. Cell evidence adds a reviewed note identifying the approved nape occlusion.
+Master points are on its resized256px cell; motion points are on aligned256px output cells, keyed clip-locally.
+
+Chin/skullBase fields are rejected for this kind. INFO review/backlog retain both shoulder endpoints, computed midpoint,
+kind and master/frame reference values. No approved master pixels, calibration scale, foot or canvas thresholds change.
+
 ## Reviewed authored origins
 
 Optional `clip.authoredOrigins` uses **clip-local** keys, including grouped sheets:
