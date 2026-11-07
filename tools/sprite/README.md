@@ -185,3 +185,18 @@ not semantic identity recognition. Outfit geometry can change silhouette: calibr
 Pose/face findings are hard gates, cannot be accepted into the quality backlog, and receive no pose-exception bypass.
 Grouped sheets use each clip's selected cells for both source and edit. Pinning source project/sheet/calibration plus recorded
 edited-sheet/annotation SHA256 hashes makes later source drift visible. Hashes prove bytes, not model honesty or image licensing.
+
+### Dynamic upright head evidence (D47)
+
+Smooth-v2 upright defaults include `heightPolicy: 'head-size-v1'`; smooth dash is now upright. Existing projects must adopt
+the flag and upright dash explicitly. Ordinary in-band cells without exceptions retain bbox QA; exception/out-of-band cells
+need `project.masterHead` and clip-local `headEvidence[index]` with skull `crown`, `chin` and a reviewed `note`.
+Use only `posture` or `secondary-overhang` in the matching `exceptions` entry. Generic reasons fail the new upright policy.
+Head crown-to-chin Euclidean size must remain within master±3%; any supplied evidence is validated, even on in-band cells.
+Keep dynamic run flight tucks, deep dash and lunges when the head scale is correct. There is no crouch band or per-frame fit.
+
+Master landmarks are on the resized256px@2x master. Frame landmarks are on the aligned256px@2x output cell, excluding
+secondary hair; grouped sheet indices remain clip-local. From sliced-cell coordinates, apply fixed calibration scale and
+contract record.dx/dy. Contract/batch/backlog INFO and expandable review cards retain measurements, coordinates, bbox and
+note. Foot errors remain actionable. No automatic head detector or semantic anatomy certification is claimed.
+See the Vietnamese pipeline doc for the full authoring contract and migration notes.
