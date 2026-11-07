@@ -117,9 +117,11 @@ describe('group boss', () => {
     expect(r.players[0]!.counters.soak).toBeGreaterThan(0);
     expect(r.players[1]!.counters.healOthers + r.players[1]!.counters.shieldOthers).toBeGreaterThan(0);
   });
-  it('every path has a CC that can stagger the boss nuke (the boss never wins by ignoring it)', () => {
+  it('every path interrupts the boss nuke at least once per fight (D49 principle 5)', () => {
     for (const p of PATHS) {
       const r = runBoss([solo(p), solo(p), solo(p), solo(p)], 1);
+      const interrupts = r.players.reduce((n, x) => n + x.counters.interrupts, 0);
+      expect(interrupts, p).toBeGreaterThanOrEqual(1);
       expect(r.win, p).toBe(true);
     }
   });

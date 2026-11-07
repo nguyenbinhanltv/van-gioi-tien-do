@@ -60,6 +60,16 @@ describe('skills.json (D49)', () => {
       'ally';
     expect(validateSkillDefinitions(buffNoCaster).errors.join()).toMatch(/must include the caster/);
   });
+  it('timing checks still apply to zero-damage sustain skills', () => {
+    const badCd = clone(skillDefinitions) as SkillDefinitions;
+    const ult = badCd.skills.find((s) => s.id === 'ba_the_bat_hoai')!;
+    ult.timing.cooldown_ms = 100;
+    expect(validateSkillDefinitions(badCd).errors.join()).toMatch(/ba_the_bat_hoai: cooldown shorter/);
+    const noTicks = clone(skillDefinitions) as SkillDefinitions;
+    const heal = noTicks.skills.find((s) => s.id === 'thien_y_vo_phung')!;
+    delete heal.timing.channel_ticks;
+    expect(validateSkillDefinitions(noTicks).errors.join()).toMatch(/thien_y_vo_phung: .*channel/);
+  });
   it('context filtering: group-only effects are skipped solo and vice versa', () => {
     const taunt = skillDefinitions.skills.find((s) => s.id === 'khieu_khich')!;
     const solo = taunt.effects.filter((e) => effectActive(e, false)).map((e) => e.type);

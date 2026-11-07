@@ -458,17 +458,17 @@ Kết quả (chạy trên nhánh này; test khẳng định các ngưỡng bên 
 
 | Team                                  | Win  | Kill s | Deaths/run | Team ETD |
 | ------------------------------------- | ---- | ------ | ---------- | -------- |
-| 4x kiem (solo branch)                 | 100% | 109    | 1.00       | 1094     |
-| 4x phap (solo branch)                 | 100% | 141    | 1.00       | 809      |
-| 4x the (solo branch)                  | 100% | 157    | 0.00       | 736      |
+| 4x kiem (solo branch)                 | 100% | 109    | 0.00       | 1100     |
+| 4x phap (solo branch)                 | 100% | 137    | 0.00       | 835      |
+| 4x the (solo branch)                  | 100% | 159    | 0.00       | 727      |
 | 4x dan_phu (solo branch)              | 100% | 82     | 0.00       | 1385     |
-| 4x thuong (solo branch)               | 100% | 140    | 1.00       | 815      |
-| 4x dao (solo branch)                  | 100% | 110    | 0.00       | 1106     |
+| 4x thuong (solo branch)               | 100% | 134    | 1.00       | 853      |
+| 4x dao (solo branch)                  | 100% | 113    | 0.00       | 1083     |
 | kiem+phap+thuong+dao (no tank/healer) | 100% | 117    | 0.00       | 1021     |
-| the+dan_phu solo + kiem+phap          | 100% | 118    | 0.00       | 1006     |
-| the+dan_phu TEAM + kiem+phap          | 100% | 129    | 0.00       | 914      |
-| hard boss x1.6: all solo              | 100% | 117    | 0.00       | 1036     |
-| hard boss x1.6: tank+healer TEAM      | 100% | 130    | 0.00       | 925      |
+| the+dan_phu solo + kiem+phap          | 100% | 116    | 0.00       | 1019     |
+| the+dan_phu TEAM + kiem+phap          | 100% | 129    | 0.00       | 918      |
+| hard boss x1.6: all solo              | 100% | 116    | 0.00       | 1041     |
+| hard boss x1.6: tank+healer TEAM      | 100% | 128    | 0.00       | 938      |
 
 Effective team DPS (ETD) = damage + damage others gained from the member's buffs + 0.5 x HP healed/shielded/mitigated for others (+ aggro soak).
 
@@ -476,12 +476,12 @@ Effective team DPS (ETD) = damage + damage others gained from the member's buffs
 
 | Path    | Team ETD solo br. | Team ETD team br. | Ratio | Kill s solo/team |
 | ------- | ----------------- | ----------------- | ----- | ---------------- |
-| Kiếm    | 1089              | 1115              | 1.02  | 112 / 109        |
-| Pháp    | 1025              | 977               | 0.95  | 117 / 123        |
-| Thể     | 1091              | 1044              | 0.96  | 112 / 116        |
-| Đan/Phù | 1093              | 1041              | 0.95  | 112 / 118        |
-| Thương  | 1055              | 1099              | 1.04  | 114 / 113        |
-| Đao     | 1089              | 1156              | 1.06  | 112 / 109        |
+| Kiếm    | 1086              | 1085              | 1.00  | 112 / 112        |
+| Pháp    | 1023              | 991               | 0.97  | 116 / 121        |
+| Thể     | 1089              | 1043              | 0.96  | 112 / 116        |
+| Đan/Phù | 1088              | 1028              | 0.94  | 112 / 119        |
+| Thương  | 1052              | 1106              | 1.05  | 114 / 112        |
+| Đao     | 1087              | 1129              | 1.04  | 112 / 112        |
 
 **Ngưỡng được test khẳng định:**
 
@@ -491,8 +491,9 @@ Effective team DPS (ETD) = damage + damage others gained from the member's buffs
 | Thời gian dọn đàn quái solo lệch ≤ ±10%                                                                  | ±10% quanh trung bình 6 lớp                                               | 23,9 – 27,4 s (trung bình ≈ 25,3 s)                   |
 | Tỉ lệ chết tương đương                                                                                   | mọi lớp ≤ 25%, chênh lớp–lớp ≤ 25 điểm %                                  | 0% – 21%                                              |
 | Nhánh TEAM kém 15–20% DPS                                                                                | tỉ lệ DPS TEAM/SOLO trong 0,79–0,86                                       | 0,807 – 0,841                                         |
-| Giá trị đội bù đắp                                                                                       | ETD cả đội khi đổi 1 thành viên sang nhánh TEAM: 0,93–1,10×               | 0,95 – 1,06                                           |
+| Giá trị đội bù đắp                                                                                       | ETD cả đội khi đổi 1 thành viên sang nhánh TEAM: 0,93–1,10×               | 0,94 – 1,05                                           |
 | Bảng TTK tĩnh trong dải 23–51                                                                            | 36 ô ∈ [23, 51]                                                           | 27 – 42                                               |
+| Mỗi lớp ngắt được Đại Chiêu boss                                                                         | ≥ 1 lần ngắt / trận cho cả 6 lớp (`PlayerCounters.interrupts`)            | đạt (AI giữ kỹ năng ngắt cho Đại Chiêu)               |
 | Không lớp nào bắt buộc                                                                                   | đội 4× cùng một lớp thắng ≥ 90%, đội 4 DPS không tank / healer thắng 100% | thắng 100% cả 6 lớp, đội DPS 117 s, 0 chết            |
 
 **Cách bù đắp giữa DPS và sống sót:** Thể tu và Đan/Phù tu có DPS ×đòn thường thấp nhất nhưng dọn đàn quái ngang các lớp nhờ **AOE gắn với phòng thủ** (khiên nổ, kéo gom, vùng gai độc, Phù Ấn nổ lan) và sống sót cao nhất (HP còn lại 64% / 95%); Kiếm / Thương / Pháp chết nhiều hơn khi quái mạnh (0,9→1,3×) — cái giá của burst; Đao tu đổi rủi ro (−15% phòng ngự khi Cuồng Huyết) lấy hút máu.

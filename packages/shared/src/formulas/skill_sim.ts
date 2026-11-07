@@ -169,6 +169,8 @@ export interface PlayerCounters {
   casts: number;
   mpSpent: number;
   deaths: number;
+  /** boss casts (Đại Chiêu) this player interrupted */
+  interrupts: number;
   /** casts per skill id (rotation breakdown) */
   bySkill: Record<string, number>;
 }
@@ -188,6 +190,7 @@ const newCounters = (): PlayerCounters => ({
   casts: 0,
   mpSpent: 0,
   deaths: 0,
+  interrupts: 0,
   bySkill: {},
 });
 
@@ -598,7 +601,7 @@ class World {
     const hard = HARD_CC.includes(id);
     if (e.boss) {
       if (hard) {
-        this.interruptBoss(e);
+        this.interruptBoss(src, e);
         return;
       }
       if (id === 'slow') {
@@ -615,8 +618,9 @@ class World {
     }
     void src;
   }
-  private interruptBoss(e: Enemy): void {
+  private interruptBoss(src: Player, e: Enemy): void {
     if (this.bossNukeAt >= 0) {
+      src.c.interrupts++;
       this.bossNukeAt = -1;
       this.bossNextNuke = this.t + SIM.BOSS.nuke_every_ms;
       e.staggerUntil = this.t + SIM.BOSS.stagger_ms;
@@ -644,6 +648,13 @@ class World {
     return out.slice(0, this.defs.global.max_targets_per_cast ?? 12);
   }
   /** Best aim for a skill, or null when it cannot do anything useful. */
+  private isInterrupt(s: SkillDef, grouped: boolean): boolean {
+    return this.activeEffects(s, grouped).some(
+      (e) =>
+        e.type === 'knockback' ||
+        (e.type === 'status' && e.status_id !== undefined && (HARD_CC as readonly string[]).includes(e.status_id)),
+    );
+  }
   private aimFor(p: Player, s: SkillDef): Aim | null {
     const tg = s.targeting;
     const range = tg.range_tiles ?? 0;
@@ -920,7 +931,7 @@ class World {
           break;
         case 'knockback':
           for (const en of targets) {
-            if (en.boss) this.interruptBoss(en);
+            if (en.boss) this.interruptBoss(p, en);
             else this.push(p, en, e.distance_tiles ?? 0);
           }
           break;
@@ -1245,6 +1256,8 @@ class World {
     let best: { s: SkillDef; aim: Aim; v: number } | null = null;
     for (const s of p.skills) {
       if (s.kind !== 'active' || !this.ready(p, s)) continue;
+      // Hold boss-interrupt skills when casting now would leave them on cooldown at the next Đại Chiêu.
+      if (boss && this.isInterrupt(s, g) && this.bossNextNuke - this.t <= this.cooldownOf(p, s) + 1000) continue;
       const aim = this.aimFor(p, s);
       if (!aim) continue;
       const v = this.score(p, s, aim, { grouped: g, adj, engaged });

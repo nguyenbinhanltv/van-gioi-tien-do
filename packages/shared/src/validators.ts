@@ -241,8 +241,9 @@ export function validateSkillDefinitions(data: unknown): ValidationResult {
     if (k.kind === 'active') {
       const [lo, hi] = E_BAND[k.tier];
       const e = skillE(k);
-      if (e === 0 && k.tags.includes('sustain')) continue;
-      if (e < lo || e > hi) errors.push(`${k.id}: damage E ${e.toFixed(2)} outside ${k.tier} band ${lo}-${hi}`);
+      const exempt = e === 0 && k.tags.includes('sustain');
+      if (!exempt && (e < lo || e > hi))
+        errors.push(`${k.id}: damage E ${e.toFixed(2)} outside ${k.tier} band ${lo}-${hi}`);
       const t = k.timing;
       if (t.cooldown_ms * (1 - (d.global.cdr_cap ?? 0)) < t.cast_ms + (t.channel_ms ?? 0))
         errors.push(`${k.id}: cooldown shorter than cast + channel`);
