@@ -190,3 +190,19 @@ Các mục sau chưa được concept hoặc D44 giải quyết. Không coi vi�
 | D44-04 | Quy trình khóa canonical master/turnaround, đo landmark giải phẫu riêng với alpha bbox, giữ mặt và scale trước sinh motion | **Mở — art 23–26 + tooling 27**. H216 px @2x ±3%, đầu20–24%H, mắt15–17%H và dải vai đã chốt D44; thủ tục/gate landmark còn cần hoàn tất, không suy pass từ prompt hoặc bbox                                                  | Lưu raw, prompt/hash/UTC, crown tóc chính/chin/eye/shoulder/sole cùng cách chọn; loại bun/ponytail/ornament khỏi H, một scale cố định, kiểm đủ5 hướng và mặt, đủ headroom; tooling kiểm landmark + provenance và người phụ trách khóa master trước motion. Bbox QA D41 vẫn là kiểm tra riêng, không thay số đo giải phẫu |
 
 Tham chiếu: [D44](DECISIONS.md), [chuẩn semi-chibi](art/style-semichibi.md), [sheet tỉ lệ](art/semichibi-proportions.svg). D46 chỉ chốt profile số khung/thời gian smooth-v2, không tự đóng các mục D44-02–04.
+
+## 14. Hệ kỹ năng 6 Đạo Lộ (D49): việc còn mở
+
+Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `@vgtd/shared` chỉ là mốc kiểm tra, không phải cân bằng cuối.
+
+| ID     | Khoảng trống                                                                                                                                                                                                       | Trạng thái / người chốt                |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| D49-01 | Concept ngoại hình, tên, bảng màu và bộ clip **Thương tu** (trường thương) và **Đao tu** (trảm đao) theo D41/D44/D45 (master, body / weapon / FX tách lớp; weapon thương dài 3–4 ô cần socket / hitbox dài hơn)    | **Mở — art + chủ dự án duyệt concept** |
+| D49-02 | Ngân sách asset 10-mvp-scope (Pháp y 4 Đạo Lộ × 3 mốc = 12 bộ, phi kiếm, class pack 02 §5) cần tính lại cho 6 Đạo Lộ                                                                                               | **Mở — orchestrator / art**            |
+| D49-03 | Game designer duyệt hệ số cân bằng: DPS solo, hệ số nhánh TEAM, ETD (hệ số 0,5), boss / đàn quái mẫu; thay bằng dữ liệu chơi thật khi có beta                                                                      | **Mở — game designer** (OPEN-ITEMS #7) |
+| D49-04 | Chưa mô phỏng PvP, quái có CC, kite liên tục của Pháp tu, dấu hệ Linh căn và phạt ngoài hệ, boss nhiều mục tiêu; Pháp tu chết nhiều nhất khi quái mạnh (21%) — theo dõi                                            | **Mở — mở rộng `skill_sim.ts`**        |
+| D49-05 | Phí / hồi chiêu đổi nhánh công pháp (docs/11 S12), quy tắc đổi trong chiến tranh tông môn / PvP; hệ Lôi (Thương) và Phong (Đao) là đề xuất, cần xác nhận với bảng Ngũ hành / biến dị                               | **Mở — chủ dự án**                     |
+| D49-06 | Kỹ năng quái / boss dùng chung schema nhưng `skill_definitions.schema.json` hiện chỉ phủ `owner = player`; mở rộng (telegraph, owner) khi làm nội dung quái; cơ chế "CC cứng ngắt chiêu boss" cần vào docs/08 / 24 | **Mở — network / server**              |
+| D49-07 | Phù Linh (linh thú của Đan/Phù tu) là thực thể phụ chưa có spec asset / netcode (AOI, đồng bộ, giới hạn số thực thể)                                                                                               | **Mở — network + art**                 |
+
+Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
