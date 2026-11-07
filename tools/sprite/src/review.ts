@@ -5,7 +5,7 @@ import type { OriginMeasurement } from './authored-origin.js';
  * into a single self-contained page (paths relative to the page).
  */
 import type { ManualArtFinding } from './backlog.js';
-import { headEvidenceKind, headLandmarkEnd, type HeadMeasurement } from './head-evidence.js';
+import { headEvidenceKind, headLandmarkEnd, type HeadMeasurement, type HeadLandmarks } from './head-evidence.js';
 
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 
@@ -55,6 +55,20 @@ export interface BatchReport {
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+function headLandmarkHtml(head: HeadLandmarks): string {
+  const end = headLandmarkEnd(head);
+  const label =
+    head.kind === 'rear-skull-base' ? 'skull base' : head.kind === 'rear-crown-shoulder' ? 'shoulder midpoint' : 'chin';
+  const shoulders =
+    head.kind === 'rear-crown-shoulder'
+      ? `; shoulderTop left (${head.shoulderTop.left.x}, ${head.shoulderTop.left.y}), right (${head.shoulderTop.right.x}, ${head.shoulderTop.right.y})`
+      : '';
+  const breadth = head.breadth
+    ? `; breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y})`
+    : '';
+  return esc(`crown (${head.crown.x}, ${head.crown.y}), ${label} (${end.x}, ${end.y})${shoulders}${breadth}`);
+}
+
 const CSS = `
 body{font:14px/1.4 system-ui,sans-serif;margin:0;background:#14171c;color:#e6e8eb}
 header{padding:16px 24px;background:#1d2229;border-bottom:1px solid #2c333d;position:sticky;top:0;z-index:2}
@@ -103,7 +117,7 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
                 ? '<div class="meta">Foot slide UNMEASURED (migration pending)</div>'
                 : '';
               const evidence = c.headEvidence?.length
-                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>crown (${e.frame.crown.x}, ${e.frame.crown.y}), ${e.frame.kind === 'rear-skull-base' ? 'skull base' : 'chin'} (${headLandmarkEnd(e.frame).x}, ${headLandmarkEnd(e.frame).y})<br>master crown (${e.master.crown.x}, ${e.master.crown.y}), ${e.master.kind === 'rear-skull-base' ? 'skull base' : 'chin'} (${headLandmarkEnd(e.master).x}, ${headLandmarkEnd(e.master).y})${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
                 : '';
               const origins = c.originEvidence?.length
                 ? `<details><summary>Authored-origin INFO evidence (${c.originEvidence.length})</summary>${c.originEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} ; ${esc(e.kind ?? 'anatomical-pelvis')} ; pelvisX ${e.pelvisX} ; groundY ${e.groundY ?? 'default'} ; source (${e.source.x}, ${e.source.y}) ; scale ${e.scale} ; dx ${e.dx}, dy ${e.dy}<br>${esc(e.reason)}<br>${esc(e.evidence)}</p>`).join('')}</details>`

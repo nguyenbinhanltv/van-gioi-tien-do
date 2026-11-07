@@ -11,7 +11,7 @@ export interface SkullBreadth {
   readonly left: HeadPoint;
   readonly right: HeadPoint;
 }
-export type HeadEvidenceKind = 'crown-chin' | 'rear-skull-base';
+export type HeadEvidenceKind = 'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder';
 export interface FrontHeadLandmarks {
   readonly kind?: 'crown-chin';
   readonly crown: HeadPoint;
@@ -25,7 +25,14 @@ export interface RearHeadLandmarks {
   readonly skullBase: HeadPoint;
   readonly breadth: SkullBreadth;
 }
-export type HeadLandmarks = FrontHeadLandmarks | RearHeadLandmarks;
+export interface RearShoulderLandmarks {
+  readonly kind: 'rear-crown-shoulder';
+  readonly crown: HeadPoint;
+  /** Visible shoulder-top endpoints; never an inferred hidden skull-base point. */
+  readonly shoulderTop: { readonly left: HeadPoint; readonly right: HeadPoint };
+  readonly breadth: SkullBreadth;
+}
+export type HeadLandmarks = FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks;
 export type HeadEvidence = HeadLandmarks & { readonly note: string };
 export interface HeadMeasurement {
   readonly kind?: HeadEvidenceKind;
@@ -44,8 +51,15 @@ export interface HeadMeasurement {
 }
 
 export const headEvidenceKind = (head: HeadLandmarks): HeadEvidenceKind => head.kind ?? 'crown-chin';
-export const headLandmarkEnd = (head: HeadLandmarks): HeadPoint =>
-  head.kind === 'rear-skull-base' ? head.skullBase : head.chin;
+export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
+  if (head.kind === 'rear-skull-base') return head.skullBase;
+  if (head.kind === 'rear-crown-shoulder')
+    return {
+      x: (head.shoulderTop.left.x + head.shoulderTop.right.x) / 2,
+      y: (head.shoulderTop.left.y + head.shoulderTop.right.y) / 2,
+    };
+  return head.chin;
+}
 const validPoint = (p: HeadPoint | undefined, width: number, height: number) =>
   p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.y >= 0 && p.x <= width && p.y <= height;
 export function headLandmarkBreadth(head: HeadLandmarks, width: number, height: number): number | null {
@@ -55,12 +69,23 @@ export function headLandmarkBreadth(head: HeadLandmarks, width: number, height: 
   return size > 0 ? size : null;
 }
 export function headLandmarkSize(head: HeadLandmarks | undefined, width: number, height: number): number | null {
-  if (!head || !['crown-chin', 'rear-skull-base'].includes(headEvidenceKind(head))) return null;
-  if (head.kind === 'rear-skull-base' && 'chin' in head) return null;
+  if (!head || !['crown-chin', 'rear-skull-base', 'rear-crown-shoulder'].includes(headEvidenceKind(head))) return null;
+  if (head.kind !== undefined && head.kind !== 'crown-chin' && 'chin' in head) return null;
+  if (head.kind === 'rear-crown-shoulder') {
+    const line = head.shoulderTop;
+    if (
+      'skullBase' in head ||
+      !line ||
+      !validPoint(line.left, width, height) ||
+      !validPoint(line.right, width, height) ||
+      Math.hypot(line.left.x - line.right.x, line.left.y - line.right.y) === 0
+    )
+      return null;
+  }
   const end = headLandmarkEnd(head);
   if (!validPoint(head.crown, width, height) || !validPoint(end, width, height)) return null;
   if (
-    (head.kind === 'rear-skull-base' || head.breadth !== undefined) &&
+    (head.kind === 'rear-skull-base' || head.kind === 'rear-crown-shoulder' || head.breadth !== undefined) &&
     headLandmarkBreadth(head, width, height) === null
   )
     return null;
@@ -100,8 +125,11 @@ export function checkHeadEvidence(
   const image = clip.frames[frame]?.image;
   if (options.masterHead && headEvidenceKind(evidence) !== headEvidenceKind(options.masterHead))
     return failure('head_evidence_kind', 'master/frame must use the same skull measurement kind');
-  if (evidence.kind === 'rear-skull-base' && !['NE', 'N'].includes(clip.direction ?? 'E'))
-    return failure('head_evidence_direction', 'rear-skull-base is allowed only for NE/N locked masters');
+  if (
+    (evidence.kind === 'rear-skull-base' || evidence.kind === 'rear-crown-shoulder') &&
+    !['NE', 'N'].includes(clip.direction ?? 'E')
+  )
+    return failure('head_evidence_direction', 'rear skull evidence is allowed only for NE/N locked masters');
   const masterSize = headLandmarkSize(options.masterHead, options.master.width, options.master.height);
   const size = image ? headLandmarkSize(evidence, image.width, image.height) : null;
   if (masterSize === null || size === null || typeof evidence.note !== 'string' || !evidence.note.trim())
