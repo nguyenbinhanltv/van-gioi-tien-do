@@ -7,10 +7,10 @@ The open cyan/teal folding fan stays in the anatomical right hand in every clip,
 ## Scope and calibration
 
 - Five reference directions: E, SE, S, NE, N. Opposite-side directions mirror under D14.
-- E, SE and S each contain all 15 clips and 126 drawn frames from public `SPRITE_CLIPS` / `projectClipDefaults`. SE/S use declared shared DPI preparation and direction-local measured quality backlogs; see [SE](SE/README.md) and [S](S/README.md).
+- All five directions E, SE, S, NE and N each contain 15 clips and 126 drawings (75 clips / 630 drawings total). The character batch builds every direction. See [SE](SE/README.md), [S](S/README.md), [NE](NE/README.md) and [N](N/README.md) for direction-local measured backlogs and provenance.
 - Master heights: E 208 px, SE 209 px, S 208 px, NE 207 px, N 208 px.
 - Raw sheets are preserved as `*.generated.png`. `prepare.ts` converts each whole sheet uniformly to template DPI, rejecting a mismatched aspect ratio. It never scales individual frames.
-- Character calibration is locked at `208 / 237`, recorded in `calibration.json`, and reused by the E project.
+- Character calibration is locked at `208 / 237`, recorded in `calibration.json`, and reused by all five direction projects.
 - Run cells **4 and 10** received local anatomical redraws. `run.repair.json` proves that all other cell bytes stayed unchanged; the edited source and exact prompt are retained.
 - Every generation record includes the exact prompt, tool, **model undisclosed by tool**, UTC start/end and relative references. Per-file source/license rows are in `docs/ASSET-LICENSES.md`.
 

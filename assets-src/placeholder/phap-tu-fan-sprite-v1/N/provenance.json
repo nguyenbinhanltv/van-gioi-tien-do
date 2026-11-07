@@ -1,0 +1,588 @@
+{
+  "format": "vgtd-sprite-provenance",
+  "version": 1,
+  "character": "phap-tu",
+  "direction": "N",
+  "concept": "D42 B Vermilion Fan Adept",
+  "pipelineCommit": "3ab3e934ce50c5ef3c359c7213477434ba734cb4",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "codexCliVersion": "0.166.0",
+  "terms": "https://openai.com/policies/row-terms-of-use/",
+  "master": {
+    "file": "../reference/N.master.png",
+    "sha256": "7e4be1f90e025850aa6f6475d7d2fe3df43a42cf324ded4c7bf1b8ff05ada4d4",
+    "generationReference": "../reference/N.master-crop.png",
+    "generationReferenceSha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55",
+    "derivation": "../reference/turnaround-derivation.json"
+  },
+  "calls": [
+    {
+      "id": "B.N.idle",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells, total2:1aspect. IDLE BREATH LOOP: same standingmasterbackstance, feetfixed, RIGHTviewerRIGHTfan atchest all8. Tinyinhale1..4/exhale5..8shoulder/ribbonmotiononly. Samehead/body/bootheight everycell. Smooth8->1. Noextrafigures/cells.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:34:46.444Z",
+      "utcEnd": "2026-11-06T22:35:11.640Z",
+      "selectedOutput": "sheets/idle.generated.png",
+      "resultSha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1",
+      "references": ["../reference/N.master-crop.png", "templates/idle.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/idle.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        }
+      ]
+    },
+    {
+      "id": "B.N.dash",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows=8square cells, aspect2:1; ONLYfirst6used:1ready,2shallowload,3push-off,4lowfastreach,5brake,6recoverready. Cells7/8 unused copies of ready, no text. Dash north directlyaway/up-screen, no face/chestturn. Slight forwardlean and natural shallowknees, same physical head/limbs/garment scale, no lowcrouch shrinking. OPENfan inRIGHTnear hand before chest, neverbehindback, left hand free. Clear acceleration/brake, robe/ribbon backwardfollowthrough. NOtrail, duplicate limbs, dust, shadows or VFX. Keep wholebody insideeachcell. FULLSTRAIGHTBACKnorth inEVERYcell, NO NE/SEthreequarter/frontview. RIGHT=viewerRIGHTfanhand, LEFTviewerLEFTempty.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:38:10.308Z",
+      "utcEnd": "2026-11-06T22:39:54.144Z",
+      "selectedOutput": "sheets/dash.generated.png",
+      "resultSha256": "2c3ab56cd6033ec1452edbda785c8834bf14e09e90b717a7b96185e580b955ed",
+      "references": ["../reference/N.master-crop.png", "templates/dash.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/dash.template.png",
+          "sha256": "96417a4c8656c0aa4f22dc8232445c539f4ccb4028301a53be2ef4899e8c5d2e"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.meditate",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells overall2:1. MEDITATEseatedlotusLOOP. StandingheightinstructionsdoNOTapplytofoldedpose: LEAVETOP35PERCENT ofeverycellEMPTYMAGENTA, bunabout90, seatedbodyends245, visibleheightabout155rawunits. SAMEphysicalhead/torso/fansize asIDLEreference3, neverenlargefoldedbodytofillcell. FullstraightBACKnorthawayup-screen, vermilionbackrobe andponytailvisible, noface/chest/threequarter. OPENfan staysRIGHTviewerRIGHT hand at rightknee/chest, emptyLEFTseal. Tinybreathing1..4inhale5..8exhale, stablebody/ground, smooth8->1. Noeffects/cushion/floor/shadow/grid. FULLSTRAIGHTBACKnorth inEVERYcell, NO NE/SEthreequarter/frontview. RIGHT=viewerRIGHTfanhand, LEFTviewerLEFTempty.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:38:10.308Z",
+      "utcEnd": "2026-11-06T22:38:38.267Z",
+      "selectedOutput": "sheets/meditate.generated.png",
+      "resultSha256": "77e7c9f00c917360ee06e91e3fbe3ee89b74ae65f085cb9b356b3ae968899e9c",
+      "references": ["../reference/N.master-crop.png", "templates/meditate.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/meditate.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.run",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT6columns x2rows=12square cells, aspect3:1. Twelve-frame brisk RUN LOOP north directlyaway/up-screen: cells1..6 RIGHT contact/load/passing/toeoff/up/precontact,7..12 LEFT equivalents. Strong R/L boot alternation under split knee robe, modest natural forward lean. Use cyanRIGHT/amberLEFT ghosts, isometric diagonal travel up-screen, planted boots move down-screen, maintain lateral boot lanes. RUN stance one-thirdcycle, small flight phase. Keep one long anatomical leg extended to lowest boot rather than tucking both knees: raw standingfigure231..243px everycell, sameheadsize, no shrinking. RIGHT/near hand keeps SAME OPENfan before right chest/shoulder all12; emptyleftarm swings. Robe/ribbon lag and settle, no streaks/shadow/VFX, allfeet/bun/fan insidecell. Smooth12->1. FULLSTRAIGHTBACKnorth inEVERYcell, NO NE/SEthreequarter/frontview. RIGHT=viewerRIGHTfanhand, LEFTviewerLEFTempty.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:38:10.308Z",
+      "utcEnd": "2026-11-06T22:39:24.237Z",
+      "selectedOutput": "sheets/run.generated.png",
+      "resultSha256": "99cf78cbbebf624c2297f531fe943df7b42c8ccae23a20b08d2a53315c22fccc",
+      "references": ["../reference/N.master-crop.png", "templates/run.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/run.template.png",
+          "sha256": "cdcc20b19edd7e3ecc32f991f98b4f94dc0af15573dd9989cb21ddcec20e88bd"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.walk",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT6columns x2rows=12square cells, aspect3:1. Twelve-frame WALK LOOP north directlyaway/up-screen: right contact/down/passing/toeoff/up/precontact in cells1..6, left equivalents7..12. Clear anatomical R/L leg reversal. Follow CYAN RIGHTviewerRIGHT and AMBER LEFTviewerLEFT foot ghosts projected diagonally; planted boots travel backward/down-screen while figure stays centred. Preserve separation/depth of boots, not horizontal E gait. Short relaxed stride and mild knee bend; one boot reaches downward so upright rawheight remains231..243 eachcell. OPENfan stays in RIGHT/near hand at chest, leftarm counter-swings. Robe splits move as cloth, no rubbery leg stretch, no squat/tuckedbothknees. Natural12->1 loop. No guide marks in final. FULLSTRAIGHTBACKnorth inEVERYcell, NO NE/SEthreequarter/frontview. RIGHT=viewerRIGHTfanhand, LEFTviewerLEFTempty.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:38:10.308Z",
+      "utcEnd": "2026-11-06T22:39:00.887Z",
+      "selectedOutput": "sheets/walk.generated.png",
+      "resultSha256": "3c1bd32a31aa7ed37862b8d6f6b869ae4351278503ddb5de88b9396d14eba928",
+      "references": ["../reference/N.master-crop.png", "templates/walk.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/walk.template.png",
+          "sha256": "cee99589e86d328713bd55677b0825bbb9ea8cdee0bdb0c0ad3690d665cf97bd"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.run.repair1",
+      "prompt": "LOCAL WHOLE-CELL LEG ANATOMY REPAIR. Exact6columns x2rows12squarecells originalrunsheetinput1. Input2cyanlinecurrentbun/yellowlinerequiredLOWESTBOOTSOLE, input3whitemaskselectsONLYCELLS2,4,5,11,12; allothersmustremainunchanged. In selectedcells keep HEAD/TORSO/VERMILIONROBE/FAN exactoriginalphysicalsize andposition. Redraw ONE NATURAL WHOLE LEG reachingDOWN soBOOTSOLETOUCHESYELLOWLINE, 18..37rawpixelsbelowoldsole, especiallycells5and11 needmuchshallowerreachingknee. DoNOT move/rescale/stretch thewholefigure. Straighten reachingknee slightly; anatomicallyextendtrouser/shin/boot together, otherlegcanbendback. Neverbothkneestuckedup. MaintaintrueRIGHT/LEFTalternation. FULLSTRAIGHTBACKnorthawayup-screen, noface/chest/threequarter; OPENtealfanalwaysRIGHT=viewerRIGHThandatshoulder, emptyleft. Sameivorysleeves/trousers/navysash/bronzecloudhem/darkcalfboots. No mask/guide/grid/text/floor/shadow/VFX. Magenta#ff00ff. Whole6x2sheetoutputsameframing, onlyselectedcellschange. BunMUSTstaycyanline, lowestsoleMUSTreachyellowline.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:45:29.526Z",
+      "utcEnd": "2026-11-06T22:46:15.841Z",
+      "selectedOutput": "sheets/run.repair1.generated.png",
+      "resultSha256": "5c4b2a8eb7d5ae067260d1ccd6cc8d09f5d8c3ea50210e6ba537e61ce2d92d09",
+      "references": [
+        "sheets/run.generated.png",
+        "run.repair1.guide.png",
+        "run.repair1.mask.png",
+        "../reference/N.master-crop.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/run.generated.png",
+          "sha256": "99cf78cbbebf624c2297f531fe943df7b42c8ccae23a20b08d2a53315c22fccc"
+        },
+        {
+          "file": "run.repair1.guide.png",
+          "sha256": "bf7203e3174f2b1ecb65f29fc798400d34878947ba940ae8c4e33d3b90a01762"
+        },
+        {
+          "file": "run.repair1.mask.png",
+          "sha256": "b84ec375c487d5b1b269f818dd6c6165808fcb1446f8cd568052a42f3bef3888"
+        },
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        }
+      ]
+    },
+    {
+      "id": "B.N.walk.repair1",
+      "prompt": "LOCAL WHOLE-CELL LEG ANATOMY REPAIR. Exact6columns x2rows12squarecells originalwalksheetinput1. Input2cyanlinecurrentbun/yellowlinerequiredLOWESTBOOTSOLE, input3whitemaskselectsONLYCELL5(row1col5); allothersmustremainunchanged. In selectedcells keep HEAD/TORSO/VERMILIONROBE/FAN exactoriginalphysicalsize andposition. Redraw ONE NATURAL WHOLE LEG reachingDOWN soBOOTSOLETOUCHESYELLOWLINE, 22rawpixelsbelowoldsole. DoNOT move/rescale/stretch thewholefigure. Straighten reachingknee slightly; anatomicallyextendtrouser/shin/boot together, otherlegcanbendback. Neverbothkneestuckedup. MaintaintrueRIGHT/LEFTalternation. FULLSTRAIGHTBACKnorthawayup-screen, noface/chest/threequarter; OPENtealfanalwaysRIGHT=viewerRIGHThandatshoulder, emptyleft. Sameivorysleeves/trousers/navysash/bronzecloudhem/darkcalfboots. No mask/guide/grid/text/floor/shadow/VFX. Magenta#ff00ff. Whole6x2sheetoutputsameframing, onlyselectedcellschange. BunMUSTstaycyanline, lowestsoleMUSTreachyellowline.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:45:29.526Z",
+      "utcEnd": "2026-11-06T22:45:51.535Z",
+      "selectedOutput": "sheets/walk.repair1.generated.png",
+      "resultSha256": "a9e202c1381c205cc18a764b4ec9579efb2aa07eca80ae1fdcc2e9243ba297b7",
+      "references": [
+        "sheets/walk.generated.png",
+        "walk.repair1.guide.png",
+        "walk.repair1.mask.png",
+        "../reference/N.master-crop.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/walk.generated.png",
+          "sha256": "3c1bd32a31aa7ed37862b8d6f6b869ae4351278503ddb5de88b9396d14eba928"
+        },
+        {
+          "file": "walk.repair1.guide.png",
+          "sha256": "c3840f5a6ccf0fda8cf2ede7e33c90bcb3cb98584b21977a60b3135e94ec00f1"
+        },
+        {
+          "file": "walk.repair1.mask.png",
+          "sha256": "3d7aa3a561df10a7a0e7a469d125d145e8112bfb9d11baae493a59a3ae88d4d7"
+        },
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        }
+      ]
+    },
+    {
+      "id": "B.N.attack",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK1:1readyrightfanatchest,2turnshoulderbackslightlyNEviewretained,3fanwindupbesideearbelowbun,4shortstepandfansweep,5clearhitposefanextendedup-screenatshoulderheight,6follow-through,7recover,8ready. OneOPENfan alwaysRIGHThand, leftarmcounterbalances; no VFX/waves/trails. Masterbody/headsize fixed, standingraw237heightwhenupright; lungeusesnaturallegbendnotshrinking. Ivorysleevefoldsflow, vermilionrobe/backcloudtrimvisible. Fullfigure/faninsidecell, samecameraall8, no frontview. AUTHORITATIVEFULLSTRAIGHTBACKNORTHinEVERYframe, facingdirectlyaway/up-screen, no NE/SEthreequarter, nofrontchest/face. RIGHT=viewerRIGHTfanhand, LEFTempty. Keepstagecamera/headbodyphysicalscale likeNidle.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:53:54.638Z",
+      "utcEnd": "2026-11-06T22:54:44.070Z",
+      "selectedOutput": "sheets/attack.generated.png",
+      "resultSha256": "c797995a908d57fc775b3c8723b93f8d1baf9e2d5632a0f2a0c62e376e1e04ca",
+      "references": ["../reference/N.master-crop.png", "templates/attack.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/attack.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.attack_2",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK2 follow-up:1ready,2rightfanloadlownearhip,3lowshallowstep/coil,4upwarddiagonalrightfansweep/HITtowardup-screen,5fanfinishesatshoulderheightbelowbun,6settle,7recover,8ready. OPENfan alwaysanatomicalRIGHTviewerRIGHT hand, no secondfan/handchange. EmptyLEFTarm balances. Same physicalhead/torso/limblengths, no perframezoom. FULLBACKNmasterneverfrontchest. No effects/trails/water/fire. Allbody/fanwithincell. AUTHORITATIVEFULLSTRAIGHTBACKNORTHinEVERYframe, facingdirectlyaway/up-screen, no NE/SEthreequarter, nofrontchest/face. RIGHT=viewerRIGHTfanhand, LEFTempty. Keepstagecamera/headbodyphysicalscale likeNidle.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:53:54.638Z",
+      "utcEnd": "2026-11-06T22:55:04.972Z",
+      "selectedOutput": "sheets/attack_2.generated.png",
+      "resultSha256": "31285b9707360cd4b378a285b44ac545354f15d313e0af31374021d14b10124b",
+      "references": ["../reference/N.master-crop.png", "templates/attack_2.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/attack_2.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.attack_3",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK3 finisher:1ready,2weightbackshallowload,3rightfanbesideearwindupbelowbun,4stepforwardNE,5decisiveoutwardDOWNwarddiagonalfansweep/HITtowardup-screen,6earlyrecoverytorsoUPRIGHTfanreturnscloseRIGHTchest,7returntorso,8ready. ONEOPENtealfan inRIGHTviewerRIGHT hand all8, not sword/staff. Fullbodysamephysical237rawstandingheight/headsize asidle, lungefoldslegsanatomicallynotrescaling. Vermilionrobe/ivorysleeves/navysash/goldcloudtrimconsistent, FULLBACKNalways. No VFX/shadows/duplicates. AUTHORITATIVEFULLSTRAIGHTBACKNORTHinEVERYframe, facingdirectlyaway/up-screen, no NE/SEthreequarter, nofrontchest/face. RIGHT=viewerRIGHTfanhand, LEFTempty. Keepstagecamera/headbodyphysicalscale likeNidle.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:53:54.638Z",
+      "utcEnd": "2026-11-06T22:55:25.601Z",
+      "selectedOutput": "sheets/attack_3.generated.png",
+      "resultSha256": "dc65a38fed36f745be786dd098deeb6feefb95d957215a15b8fbc80e3b30e3be",
+      "references": ["../reference/N.master-crop.png", "templates/attack_3.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/attack_3.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.cast",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. Standing SPELL CAST:1readyrightfanatshoulder,2leftfreehandformstwofingerseal,3gatherwithfancloserchest,4fanwindupbesideear,5clearreleaseposeRIGHTarmextendsOPENfanup-screenatshoulderheight,6holdrelease,7return,8ready. Fulluprightbun-to-bootrawheight231..243target237 eachcell, bun8sole245, fixedfeet/headsize/costume. SameFULLSTRAIGHTBACKnorthawayup-screen, neverfacefront. No magic/fire/water/glow/VFX. OnlyONEOPENtealfanRIGHThand, leftemptyseal. AUTHORITATIVEFULLSTRAIGHTBACKNORTHinEVERYframe, facingdirectlyaway/up-screen, no NE/SEthreequarter, nofrontchest/face. RIGHT=viewerRIGHTfanhand, LEFTempty. Keepstagecamera/headbodyphysicalscale likeNidle.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:53:54.638Z",
+      "utcEnd": "2026-11-06T22:55:55.179Z",
+      "selectedOutput": "sheets/cast.generated.png",
+      "resultSha256": "90a635a556be82df012bb70de73cbbe0c0c42ce2f253cf79a66720945fe0e744",
+      "references": ["../reference/N.master-crop.png", "templates/cast.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/cast.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "id": "B.N.sword_fly",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. Eight-frame MAGIC FLIGHT LOOP northdirectlyaway/up-screen. Same standing physical237rawheight/head/limbs as idle; boots relaxed slightlypointdown, torso upright, gentlyfloating posture, no ground/cushion/platform/sword/cloud/VFX. OPENfan stays in RIGHTviewerRIGHT hand at rightchest, emptyleftarm balances. Small robe/ribbon flutter, constant size, clean8->1 loop. Flight support/effects belong to runtime; do not paint them. AUTHORITATIVEFULLSTRAIGHTBACKNORTHinEVERYframe, facingdirectlyaway/up-screen, no NE/SEthreequarter, nofrontchest/face. RIGHT=viewerRIGHTfanhand, LEFTempty. Keepstagecamera/headbodyphysicalscale likeNidle.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:53:54.638Z",
+      "utcEnd": "2026-11-06T22:54:14.462Z",
+      "selectedOutput": "sheets/sword_fly.generated.png",
+      "resultSha256": "2dd1cccdd0e890f39b16257e1ab20d666965b155301f7f3e95b0c123fb65c24e",
+      "references": ["../reference/N.master-crop.png", "templates/sword_fly.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/sword_fly.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      },
+      "id": "B.N.channel",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. Standing CHANNEL LOOP: ONEOPENtealfan steadyinRIGHTviewerRIGHT hand at rightchest/shoulder, emptyLEFT hand twofingerseal partlyvisiblebesidebody. SameFULLSTRAIGHTBACKnorthawayup-screen, stableboots/head/body237rawheighttarget, onlytinybreathing/ribbon/sleeveflutter. Gentle8->1loop. No glow/effects/particles/grid/shadows. FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T22:59:39.819Z",
+      "selectedOutput": "sheets/channel.generated.png",
+      "resultSha256": "b02956ebeeca2c2f0aa9823bb8cd38d91d40128417d2b41a6347f36f769e64ba",
+      "references": ["../reference/N.master-crop.png", "templates/channel.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/channel.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      },
+      "id": "B.N.die",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. Non-graphic DIE:1standingready,2lightstagger,3deeperstaggerbuttorsovertical,4kneebucklewithtorsoalmostupright,5one-kneecollapse,6sidefall,7side-pronesettle,8pronehold. SAMEphysicalhead/torso/limblengths asidle, doNOTenlargefoldedbody. Characterfacesawayup-screenNE, backvermilionrobe/ponytailvisible, neverturnfrontforpose. Fan staysOPENinRIGHTviewerRIGHT hand thenrestsbesiderighthandonfloor, no secondfan. Collapsereducesvisibleheightnaturally, no perframezoom. Fullyinsidecellandmagenta, no blood/skull/shadow/floor/effects. FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:03.607Z",
+      "selectedOutput": "sheets/die.generated.png",
+      "resultSha256": "5bb8e9fc8933f05580413e56e4386517db890deeaa35ae30780a6b7b0d45811d",
+      "references": ["../reference/N.master-crop.png", "templates/die.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/die.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      },
+      "id": "B.N.emote",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT4columns x2rows8squarecells aspect2:1. GREETING EMOTE:1ready,2LEFTemptyhandrises,3smallleftwave,4holdwave,5smallwave,6lowerleftarm,7settle,8ready. RIGHTviewerRIGHT handkeepsSAMEOPENtealfanatchest throughout, neverwaveswithfan orswitcheshands. BackthreequarterNEawayup-screenall8. Uprightbun-to-bootRAW237targeteachcell, sameface/headbody/costumeasidle, feetfixed, nozoom. No effects/floor/shadow/text/grid. FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:01:06.867Z",
+      "selectedOutput": "sheets/emote.generated.png",
+      "resultSha256": "38f694a2cd6f05bcbb4a3f876743b6274c16f72fbe02db55bcf70cb7740b8183",
+      "references": ["../reference/N.master-crop.png", "templates/emote.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/emote.template.png",
+          "sha256": "0a96d256352a05494f4d8e4daff27f7ead8766e58e7d818a282df951603e3e25"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      },
+      "id": "B.N.hit",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT2columns x2rows=4squarecells, overall1:1 SQUAREcanvas. HIT REACTION fourframes:1ready,2smalluppertorso recoil,3bracewithshallowknees,4recoverready. SameFULLSTRAIGHTBACKnorthall4, nofrontface. Samephysicalheadsize/torso/limbs, rawstanding237, no enlargingorzoom; bendkneesonlyslightly. Fan staysOPEN inanatomicalRIGHTviewerRIGHT hand beforechest, emptyLEFTarmbalances. No effects/floor/shadows. Allbodyandfaninsideeachsquare. FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:26.874Z",
+      "selectedOutput": "sheets/hit.generated.png",
+      "resultSha256": "890c470eb28dd55fdae56985009377ab15e5422d84f2e781ef0bb54d11bbff1c",
+      "references": [
+        "../reference/N.master-crop.png",
+        "templates/hit.square2x2.template.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/hit.square2x2.template.png",
+          "sha256": "966aeadce68b441bc741b4d0cb4b9f7f384e02deea57ff30ea40c49c1cf41ea5"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    },
+    {
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      },
+      "id": "B.N.tribulation",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept, direction N. Input1 exact MASTER identity/style, Input2 equal-square TEMPLATE layout only; remove ALL guides/grid. Camera slight-overhead orthographic isometric FULL STRAIGHT BACK, character faces directly AWAY/up-screen. Show fullvermilionBACK and longdarkponytail, NO frontface/chest/cheek, NO NE/SEthreequarterorprofile. Slenderadultmale5.75headproportions, highdarkbun/jadepin/redribbon, ivorycollar/sleeves/trousers, mutedvermilionkneesplitrobe withbronzecloudedging/navysash/darkcalfboots. ONEOPENcyan/tealfoldingfan/darkribs/bronzecloudmotif ALWAYSanatomicalRIGHT=viewerRIGHT hand at rightupperchest/shoulder, partlyoccludednaturallylike master; nofanhand/carryswitch, LEFTempty. Samephysicalhead/torso/limbs/fansize allframes. Fineclean darkoutline/restraint2-3tonesoftcelshading/NWlight, noarmour/staff/sword. Ignore all red/yellowspeckles outside master; clean silhouettes. PurePERFECTflatMAGENTA#ff00ff, NOshadow/floor/text/numbers/grid/guide/VFX/particles/fragments. Fullbody/faninsideeachcell. RAWPRODUCTION SIZE in each256unit cell: visiblebun-to-lowestboot~240units, allowed235..243, bunabout6..8, soleabout246..248, pelvisaxis127. This willreceiveoneLOCKED208/237scale later; doNOTdraw208rawheight, doNOTresizeindividualframes. Templatefaintoldhead/groundlinesarelayoutonly; sizeinstructiontakesprecedence. EXACT6columns x2rows12squarecells aspect3:1. TRIBULATION bracing reaction, NOlightning/VFX:1ready,2slightbrace,3shallowkneebend,4defensivebracerightfanbeforechest,5lowbrace,6rally,7hunchagainstimaginedimpact,8holdbrace,9rise,10pushupright,11recover,12ready. KeepmasterFULLSTRAIGHTBACKnorthawayup-screen, physicalheadsize/torso/limblengths sameasidle, neverzoom/enlargeseatedbody. OPENfan alwaysRIGHTviewerRIGHT hand likeashield, leftemptyseals/balances. Samegarmentconstructionandbronzecloudtrim. No effects/shadows/marks, allbodyinsidecell. FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:47.790Z",
+      "selectedOutput": "sheets/tribulation.generated.png",
+      "resultSha256": "88427063c3b6ccb03c7ecc5c316da2e36a1193b8802177e34c2429770bd5ac40",
+      "references": [
+        "../reference/N.master-crop.png",
+        "templates/tribulation.template.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/N.master-crop.png",
+          "sha256": "ec20b8a7d628a6896ce6b52a24f6d09b587d6487e7ddf319d85c4953bd407c55"
+        },
+        {
+          "file": "templates/tribulation.template.png",
+          "sha256": "1b2541903951cb55463566b55215f8a96188144c05005975af617df2f4953ec6"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+        }
+      ]
+    }
+  ],
+  "committedSheets": [
+    {
+      "clip": "idle",
+      "file": "sheets/idle.generated.png",
+      "sha256": "943b29bdf1ff3a2c8a9b1dbe69cc9bd2ef2edd58c84e3b332a58fd6d4ae1d7d1"
+    },
+    {
+      "clip": "meditate",
+      "file": "sheets/meditate.generated.png",
+      "sha256": "77e7c9f00c917360ee06e91e3fbe3ee89b74ae65f085cb9b356b3ae968899e9c"
+    },
+    {
+      "clip": "walk",
+      "file": "sheets/walk.selected.png",
+      "sha256": "8795f2bfc07aac031d9ebc34098c875096d97c61abc7fc194b379c9eeb5eea5f"
+    },
+    {
+      "clip": "run",
+      "file": "sheets/run.selected.png",
+      "sha256": "5c11e915cf74272c88cfd29db3358e294131cc60f3e3e92ea4f7ecf6ccc03cd8"
+    },
+    {
+      "clip": "dash",
+      "file": "sheets/dash.generated.png",
+      "sha256": "2c3ab56cd6033ec1452edbda785c8834bf14e09e90b717a7b96185e580b955ed"
+    },
+    {
+      "clip": "sword_fly",
+      "file": "sheets/sword_fly.generated.png",
+      "sha256": "2dd1cccdd0e890f39b16257e1ab20d666965b155301f7f3e95b0c123fb65c24e"
+    },
+    {
+      "clip": "attack",
+      "file": "sheets/attack.generated.png",
+      "sha256": "c797995a908d57fc775b3c8723b93f8d1baf9e2d5632a0f2a0c62e376e1e04ca"
+    },
+    {
+      "clip": "attack_2",
+      "file": "sheets/attack_2.generated.png",
+      "sha256": "31285b9707360cd4b378a285b44ac545354f15d313e0af31374021d14b10124b"
+    },
+    {
+      "clip": "attack_3",
+      "file": "sheets/attack_3.generated.png",
+      "sha256": "dc65a38fed36f745be786dd098deeb6feefb95d957215a15b8fbc80e3b30e3be"
+    },
+    {
+      "clip": "cast",
+      "file": "sheets/cast.generated.png",
+      "sha256": "90a635a556be82df012bb70de73cbbe0c0c42ce2f253cf79a66720945fe0e744"
+    },
+    {
+      "clip": "channel",
+      "file": "sheets/channel.generated.png",
+      "sha256": "b02956ebeeca2c2f0aa9823bb8cd38d91d40128417d2b41a6347f36f769e64ba"
+    },
+    {
+      "clip": "hit",
+      "file": "sheets/hit.generated.png",
+      "sha256": "890c470eb28dd55fdae56985009377ab15e5422d84f2e781ef0bb54d11bbff1c"
+    },
+    {
+      "clip": "die",
+      "file": "sheets/die.generated.png",
+      "sha256": "5bb8e9fc8933f05580413e56e4386517db890deeaa35ae30780a6b7b0d45811d"
+    },
+    {
+      "clip": "tribulation",
+      "file": "sheets/tribulation.generated.png",
+      "sha256": "88427063c3b6ccb03c7ecc5c316da2e36a1193b8802177e34c2429770bd5ac40"
+    },
+    {
+      "clip": "emote",
+      "file": "sheets/emote.generated.png",
+      "sha256": "38f694a2cd6f05bcbb4a3f876743b6274c16f72fbe02db55bcf70cb7740b8183"
+    }
+  ],
+  "postprocess": "Public @vgtd/sprite square-cell-dpi-v1 whole-sheet preparation and locked208/237 calibration. Source images straight alpha; chroma key/defringe/palette-aware spill cleanup/master palette lock; per-frame translation only. No hand-painted or code-painted final character pixels. Public repairCell selects whole AI-redrawn cells, with SHA256 proof of unchanged cells. Repair guides/masks instruct anatomical leg reach at target240rawpx per256cell; original public QA templates remain unchanged. Walk/run measured using vertical keep and public direction-correct ghosts, no UNMEASURED opt-out. Only meditate0..7 and die4..7 use declared folded-pose exceptions."
+}
