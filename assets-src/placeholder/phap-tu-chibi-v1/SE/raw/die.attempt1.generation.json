@@ -1,0 +1,25 @@
+{
+  "clip": "die",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Image2 unscaled canonical HEAD STENCILS lock skullsize and face; their position may translate/tilt with pose, NEVER enlarge head or change face. CLIP die:12frames4columns3rows exactsquarecells. One nonloop collapse:0standingready,1shock,2kneesgiveway,3-4kneel,5rightpalm touchesground,6-8body rolls slowly onto right side,9-11settled lying/collapsed onground at232. Continuous plausible anatomy, same skullsize evenhorizontal, head translates downward matchingguide. Keep fan naturally held loosely in anatomicalLEFT hand and resting beside body in finalpose, NO separatefloatingfan. Face fixed, eyes close late. Sleeves/hair/ribbons fall a beat later and settle, preserve folded legs/shorttunic/trousers. Fullcorpsewithin256cell, no disappearing legs/cuthead/FX/gore. Keep SE camera fixed; death doesnotloop.",
+  "utcStart": "2026-11-07 22:12:53 UTC",
+  "references": ["reference/SE.master.png", "SE/templates/die.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/die.attempt1.png",
+  "selected": "sheets/die.png",
+  "utcEndObserved": "2026-11-07 22:13:17 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "3fdea8cbf349c22b332afe290f2e43256024795e1ee3f4080b50291173e95e4c",
+  "utcRawOutputFileModified": "2026-11-07T22:13:17.306Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/die.head-guide.png",
+      "sha256": "288667dd8016f3ee6a104dbb17b8bc4f84ce83e413d3ee6785d5ba666601ccfc"
+    }
+  ],
+  "selectedSha256": "3fdea8cbf349c22b332afe290f2e43256024795e1ee3f4080b50291173e95e4c"
+}

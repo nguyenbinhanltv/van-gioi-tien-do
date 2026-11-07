@@ -1,0 +1,29 @@
+{
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP cast: EXACT16 frames4columns4rows, smooth nonloop casting sequence24fps.0ready leftfan chest,1-3anticipation knees bend and torso winds slightly,4-6left arm raises fan alongside face free right hand draws a deliberate sigil gesture,7-9fan sweeps diagonally toward screen-down-right in a clear elegant release,10-11brief impact hold,12-15followthrough sleeves/ribbons lag then settle to ready. Clear readable hand/fan arc, natural grip, onefan only. No drawn magic FX: effects will be separate runtime layer. Anatomical head size fixed216px body scale even in knee bend, face identity exact SE camera throughout. No overheadfan outsidecell. Sleeve fabric follows arm oneframe late; preserve short tunic trousers and ear jewelry.",
+  "start": {
+    "current_time": "2026-11-07 21:55:40 UTC"
+  },
+  "utcObserved": "2026-11-07 21:56:17 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "direction": "SE",
+  "clip": "cast",
+  "references": ["reference/SE.master.png", "templates/cast.template.png"],
+  "raw": "raw/cast.attempt1.png",
+  "selected": "sheets/cast.png",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "7aa8534a98a5d9025d4af358fd625d90c237eb27a286fd4bd68fe7ef9678f8f9",
+  "utcStart": "2026-11-07 21:55:40 UTC",
+  "utcRawOutputFileModified": "2026-11-07T21:56:07.998Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/cast.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20"
+    }
+  ],
+  "selectedSha256": "7aa8534a98a5d9025d4af358fd625d90c237eb27a286fd4bd68fe7ef9678f8f9"
+}

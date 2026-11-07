@@ -1,0 +1,29 @@
+{
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP walk: EXACT16 frames,4columns4rows, rowmajor. One complete smooth in-place walking cycle at24fps. Image2 is the leg-contact guide: CYAN and ORANGE sole ghosts show exact per-frame foot positions and leading-leg triangle alternates; COPY foot positions then REMOVE markers. Clearly swap near/far leg at half-cycle, with real weight transfer, straight planted stance foot and raised passing foot, no skating. SE ground travel includes vertical displacement as well as horizontal, retain those directional sole positions rather than flattening. Fixed pelvis/scale, gentle down/contact and up/pass. Fan left hand stable near chest, free right sleeve counter-swings, hair/sash/sleeves lag one to two frames and settle continuously. Frame15 connects smoothly to0, no repeated static rows. Do not rotate to E side view, stay SE threequarter down-right.",
+  "start": {
+    "current_time": "2026-11-07 21:51:08 UTC"
+  },
+  "utcObserved": "2026-11-07 21:51:56 UTC",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "direction": "SE",
+  "clip": "walk",
+  "references": ["reference/SE.master.png", "templates/walk.template.png"],
+  "raw": "raw/walk.attempt1.png",
+  "selected": "sheets/walk.png",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "c8a0ca134e32aede4b73db6048eeafe3ad283c93b78f859bae3c339996ebe55a",
+  "utcStart": "2026-11-07 21:51:08 UTC",
+  "utcRawOutputFileModified": "2026-11-07T21:51:48.173Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/walk.template.png",
+      "sha256": "ffceeca2b691b9dd48efe035510c0614ef38347a39c2113b5cdb40988717971d"
+    }
+  ],
+  "selectedSha256": "c8a0ca134e32aede4b73db6048eeafe3ad283c93b78f859bae3c339996ebe55a"
+}

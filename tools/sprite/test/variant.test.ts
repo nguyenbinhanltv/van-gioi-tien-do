@@ -73,6 +73,14 @@ function fixture() {
 }
 
 describe('edit-from-master variants', () => {
+  it('accepts weapon-skin provenance under the same pose/face and motion locks', () => {
+    const { dir, project } = fixture();
+    const skin: Project = { ...project, variant: { ...project.variant!, category: 'weapon-skin' } };
+    expect(auditProjectVariant(skin, dir)?.source.category).toBe('weapon-skin');
+    expect(() =>
+      auditProjectVariant({ ...skin, clips: skin.clips.map((c) => ({ ...c, vertical: 'keep' })) }, dir),
+    ).toThrow(/changed master motion/);
+  });
   it.each([
     { authoredOrigins: { 0: { pelvisX: 128, reason: 'new axis', evidence: 'reviewed' } } },
     { vertical: 'keep' as const },

@@ -320,3 +320,38 @@ belong to the weapon set and need both hand contacts. Keep the original full-pos
 `prepareLayerSources`/`writeLayerTemplates` are public APIs. `runProject(..., { includeAlignedFrames: true })` optionally
 retains aligned images in memory; default calls and serialized export files are byte-compatible. Independent layer-set
 export follows separately; this command produces edit references only.
+
+## Independent layer-set export (D45)
+
+```sh
+npm run sprite:layers -w @vgtd/sprite -- --project path/to/layer-extraction.json --out /tmp/layers-E-attempt1
+```
+
+`LayerExtractionProject` is exported publicly. Its header is `format: 'vgtd-layer-extraction'`, `version: 1`, source
+`project`/`projectSha256`/`masterImageSha256`, shared T1 `motionId`, distinct `bodySet`/`weaponSet`/`fxSet`, `glowRadiusPx`, and explicit
+`ExtractionThresholds`. Every source clip must appear once in `clips`, declaring `name`, canonical `templateSha256`,
+`bodySheet`/`bodySheetSha256`, `weaponMatte`/`weaponMatteSha256`, edit `{tool,prompt}` and clip-local `cells: ExtractionCell[]`.
+File paths are relative to the extraction JSON. Use `layer-inputs.json` for the project/master hashes, canonical guide and cell map.
+Its `cells` indices refer to the canonical4x4 lattice, including when the original source grid had another column count.
+
+Body edits and mattes are normalized as whole4x4 sheets; every selected output cell retains the original aligned pose,
+scale and origin. The removal edit is keyed with the source settings but receives no palette/spill/defringe cleanup that
+could hide repaint. Matte values are reviewed grayscale alpha coverage. Hand/contact anchors and inpaint rectangles use
+the canonical256px cell. Front/back order is explicit for every weapon frame, including hidden ones.
+
+The command rechecks source QA and pins source project/master/full sheets, guide, body edit and matte hashes. Reports retain
+edit provenance, preparation records, all per-cell evidence/metrics and hard findings. Failure writes diagnostic reports
+only and exits1. Use a fresh output root per attempt; an existing same-direction report/manifest is rejected to avoid stale
+runtime files. Distinct directions may append to one set root. `layer-report_<DIR>.json` retains each direction and
+`layer-report.json` is the latest summary.
+
+Passed output contains `<setId>/<setId>_<DIR>.layer.json` plus independent PMA MaxRects atlas pages. Body, weapon and neutral
+quality-glow FX retain source duration, loops, every drawn frame and body-owned events. A too-short30Hz timeline that would
+drop drawings fails. FX declares `derivedFromWeapon`; weapon skins map to their matching FX or explicit null. For tiers,
+costumes and weapon skins, use edit-from-master variants (`category: 'tier' | 'costume' | 'weapon-skin'`) so the same pose,
+face, motion and origin locks apply before extraction. Do not generate body×weapon Cartesian products.
+
+Public APIs: `runLayerExtraction`, `writeLayerExtraction`, `buildSpriteLayerSet`. The last API packs already aligned layer
+images; callers must retain authoring QA. Stage passed set directories beneath the Cocos equipment resource root, then use
+the mapping/preview contract in `apps/client-cocos/LAYERED-SPRITES.md`. These pixel/contact gates do not certify unseen
+geometry or inpaint anatomy; mattes and thresholds need real-art review, as recorded in OPEN-ITEMS.
