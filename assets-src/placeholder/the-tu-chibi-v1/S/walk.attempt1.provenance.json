@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:30:14.890Z",
+  "utcRecordedCompleted": "2026-11-07T22:30:54.668Z",
+  "prompt": "Use case: identity-preserve. Production original Thể tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. S STRAIGHT FRONTAL view facing down toward viewer/bottomscreen, slightly elevated isometric camera allframes. Both eyes/symmetricfrontface visible, NOT SE/Eprofile. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT16consecutiverowmajor drawings in4x4SQUARE2048x2048canvas, squarecells. 16phase forwardWALK toward bottomscreen/viewer, characterstays in cellframe. Authoritativeghostcolors: CYAN=character anatomicalRIGHT foot on VIEWER LEFT trackx~106; AMBER=anatomicalLEFT on VIEWER RIGHTtrackx~150. Match brightplanted SOLES EXACTLY to their ghostX AND Y; dimghostis swingfoot. Tracks44logicalpxapart frommaster. FirsthalfRcontact/down/push/toeoff, secondhalfL, alternatingnaturallegs/arms, no skating feet acrossframes. Preserve prescribedforwardground-planeYtravel, notonecommonbaseline; lift swingboot naturally. Body/headsamefixedunit, dynamicstance notbodyfitting. Seamless16framecycle. Rendercompletefullbodies, preserve fixedadultface/classpalette/weapongeometry. Removeguideghosts/labels/lines/stencilduplicateheads. No extraobjects/FX.",
+  "references": ["templates/walk.head-stencil.template.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-e37b670d-d62f-4282-8ae3-00972602ad95.png",
+  "status": "Selected fullsheet: native hard gates and all15 Cocos2x clips passed;53 accepted soft findings retained.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": true,
+  "archivedRaw": {
+    "file": "raw/walk.attempt1.png",
+    "sha256": "1f740c10b3c19aaf150f6b7b5f6619be1a1db1f57a415fb3b0bebb46bbf98d2e",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "templates/walk.head-stencil.template.png",
+      "sha256": "332d6f5c7031ef4ffb78982f9f7345650d8e58f23ac990eb11747fbfd6d4185a"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:36.633026+00:00"
+}

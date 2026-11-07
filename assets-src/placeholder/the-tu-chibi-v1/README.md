@@ -1,6 +1,6 @@
 # Thể tu premium semi-chibi v1
 
-Original premium semi-chibi source set. The old `the-tu-sprites-v1` set is untouched. E and SE each contain 15 clips / 202 drawings using D46 smooth-v2; S/NE/N motion remains in production.
+Original premium semi-chibi source set. The old `the-tu-sprites-v1` set is untouched. E, SE and S each contain 15 clips /202 drawings using D46 smooth-v2; all three pass real Cocos2x capture, and NE/N motion remains in production.
 
 ## Master checkpoint
 
@@ -23,11 +23,11 @@ Generated from merged D46 defaults (`smoothProjectClipDefaults`) and official di
 
 Counts from D46: idle/walk/run/cast/meditate/tribulation 16; dash 10; attack/attack_2/attack_3 14 each; channel/die/emote/sword_fly 12; hit 6. Nominal 24 fps, duration/event anchors from the public v2 defaults. Runtime first attack remains `attack`. The project records explicit seated, airborne, lunge, crouch, recoil and collapse exceptions for visible affected poses. Hair/ribbon/sash lag is drawn into the sheets.
 
-Gauntlets are naturally worn in full frames. Tooling27 confirms these are D45 extraction sources; the current full-source compatibility export has one body slot and is not a layered runtime delivery. Body/weapon/FX extraction/composition remains pending tooling. T2-T5 and costumes will be AI edits of completed T1 motion sheets. Quality grades are runtime glow/trim tint only.
+Gauntlets are naturally worn in full frames. Tooling27 confirms these are D45 extraction sources; the current full-source compatibility export has one body slot and is not a layered runtime delivery. D45 schema/composer, extraction/export CLI and layered Cocos runtime are now merged; reviewed gauntlet-removal edits/mattes/contacts remain a follow-up after the full-frame directions are locked. T2-T5 and costumes will be AI edits of completed T1 motion sheets. Quality grades are runtime glow/trim tint only.
 
 ## Validation status
 
-Full E sprite build: 0 hard failures, 0 unlisted soft failures, 38 accepted soft findings (25 locomotion, 13 small attack_2 bbox differences), 0 regressions. Those findings remain in the quality backlog; no threshold was relaxed. Pose exceptions remain explicit in `E/project.json`. Export: 202 regions on two MaxRects atlas pages in the new `dragonbones/the-tu-chibi-v1` folder. Cocos Creator 3.8.8 capture passes for all15 clips at2x,24 midpoint samples each, with15 GIFs and15 contact sheets. All root verification commands pass, plus22 committed-project audit tests including this project. See E/validation.json and E/cocos-capture.json; review media live in the session artifact, not the git repository.
+Full E sprite build: 0 hard failures, 0 unlisted soft failures, 38 current accepted soft findings (25 locomotion, 13 small attack_2 bbox differences), 0 regressions. The stored backlog also retains one resolved historical E run15 entry, so its39 stored E metric rows are not39 current findings. Those findings remain in the quality backlog; no threshold was relaxed. Pose exceptions remain explicit in `E/project.json`. Export: 202 regions on two MaxRects atlas pages in the new `dragonbones/the-tu-chibi-v1` folder. Cocos Creator 3.8.8 capture passes for all15 clips at2x,24 midpoint samples each, with15 GIFs and15 contact sheets. All root verification commands pass, plus22 committed-project audit tests including this project. See E/validation.json and E/cocos-capture.json; review media live in the session artifact, not the git repository.
 
 ### D47 / headroom correction
 
@@ -36,3 +36,9 @@ Run, attack_2 and channel select their `.headroom.png` AI edits: compact seconda
 ## SE motion checkpoint
 
 SE uses its pinned47.82px crown/chin baseline cross-checked by style-owner23,34 manually annotated aligned head cells and diagonal keep alignment. Six dash cells use AI head correction with10othergroup cells byte-identical; attack/cast secondary buns were reduced to eliminate clipping. Full15clip hard QA and real Cocos3.8.8 2x capture pass.39 explicit soft findings remain:25 foot contacts/slides and14 free-clip bbox differences. The walk color-label mistake and rejected7regression feet edit are documented without replacing the better source. All root checks pass; after-runtime158 compatibility smoke passes for run/attack_3 at2x. See SE/validation.json and SE/cocos-capture.json. Canonical E/SE extraction guides were generated with the merged CLI, not hand-authored layer manifests.
+
+## S motion checkpoint
+
+S uses the locked frontal master and15 aligned manual head annotations against its independently refined48.04px maincap-to-centraljaw baseline. The refinement excludes the gold fitting; unchanged master hash and earlier measurements are retained in `S/head-evidence.review.json`. Head-only AI edits preserve run flight and deep dash posture; an overcorrected shallow-dash attempt remains rejected in provenance. Cast secondary bun edits clear actual clipping. Die uses one reviewed lattice-root X across all12cells to preserve authored rightward collapse without centroid clipping. No individual frame fitting or body rescaling.
+
+All15clips/202drawings pass native hard gates after latest-main tooling integration.53 current soft findings remain explicitly backlogged (25 footSlide, 28 height);0 unlistedsoft/0regression. Real Cocos3.8.8 2x capture passes for all15clips with24 midpoint samples each; all required root checks pass after latest-main integration. See `S/validation.json`; final raw selection is `S/project.json`, with original attempts, exact prompts, undisclosed model, UTC and repair hash proofs retained.

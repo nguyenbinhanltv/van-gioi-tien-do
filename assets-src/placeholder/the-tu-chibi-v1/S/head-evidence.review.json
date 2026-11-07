@@ -1,0 +1,443 @@
+{
+  "policy": "D47 head-size-v1",
+  "coordinateSpace": "Aligned256px output cells at2x; clip-local indices",
+  "measurement": "Manual selected front-cap summit and central jaw tip; excludes bun/gold/strands/neck. Master selected before motion measurement, no automatic certification or per-finding adjustment.",
+  "masterFile": "../reference/S.master.png",
+  "masterSha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9",
+  "master": {
+    "crown": {
+      "x": 130,
+      "y": 18.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 66.5
+    }
+  },
+  "masterSizePx": 48.041648597857254,
+  "constructionCrossCheck": {
+    "source": "../character-calibration.json",
+    "sourceCrownY": 64,
+    "sourceChinY": 210,
+    "scale": 0.3375,
+    "expectedSkullVerticalPx": 49.275,
+    "note": "Previously locked S front construction, independent of new motion; selected aligned landmarks within1px visual uncertainty"
+  },
+  "rows": [
+    {
+      "clip": "walk",
+      "cell": 12,
+      "crown": {
+        "x": 130,
+        "y": 20
+      },
+      "chin": {
+        "x": 129,
+        "y": 67
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Walking contact/down posture; fixed44px boot tracks. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 47.01063709417264,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/walk.attempt1.png",
+      "utcRecorded": "2026-11-07T23:15:12.691717+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 0,
+      "crown": {
+        "x": 126,
+        "y": 27
+      },
+      "chin": {
+        "x": 130,
+        "y": 76
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 49.16299421312742,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691746+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 1,
+      "crown": {
+        "x": 130,
+        "y": 29
+      },
+      "chin": {
+        "x": 132,
+        "y": 76
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 47.042533945356304,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691757+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 2,
+      "crown": {
+        "x": 137,
+        "y": 32
+      },
+      "chin": {
+        "x": 137,
+        "y": 80
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 48.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691765+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 3,
+      "crown": {
+        "x": 128,
+        "y": 31
+      },
+      "chin": {
+        "x": 129,
+        "y": 80
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 49.01020301937138,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691772+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 6,
+      "crown": {
+        "x": 131,
+        "y": 32
+      },
+      "chin": {
+        "x": 132,
+        "y": 79
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 47.01063709417264,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691776+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 11,
+      "crown": {
+        "x": 138,
+        "y": 32
+      },
+      "chin": {
+        "x": 137,
+        "y": 80
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 48.010415536631214,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691781+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "run",
+      "cell": 15,
+      "crown": {
+        "x": 131,
+        "y": 28
+      },
+      "chin": {
+        "x": 132,
+        "y": 77
+      },
+      "note": "Manually selected attached maincap beneath gold fitting and central dark jaw tip above neck on actual aligned256 output; excludes bun/gold/strands. Dynamic frontal stride/flight posture retained; AI head-only correction source, no body rescale. Approximate boundary uncertainty1px; native coordinate review retained.",
+      "sizePx": 49.01020301937138,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/run.head-corrected.png",
+      "utcRecorded": "2026-11-07T23:15:12.691787+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 1,
+      "crown": {
+        "x": 130,
+        "y": 50
+      },
+      "chin": {
+        "x": 130,
+        "y": 98
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 48.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679327+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 2,
+      "crown": {
+        "x": 130,
+        "y": 48
+      },
+      "chin": {
+        "x": 130,
+        "y": 97
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 49.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679348+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 3,
+      "crown": {
+        "x": 137,
+        "y": 48
+      },
+      "chin": {
+        "x": 137,
+        "y": 97
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 49.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679356+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "crown": {
+        "x": 130,
+        "y": 78
+      },
+      "chin": {
+        "x": 130,
+        "y": 125
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 47.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679360+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "crown": {
+        "x": 128,
+        "y": 87
+      },
+      "chin": {
+        "x": 128,
+        "y": 134
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 47.0,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679365+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 6,
+      "crown": {
+        "x": 132,
+        "y": 44
+      },
+      "chin": {
+        "x": 130,
+        "y": 93
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 49.040799340956916,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679368+00:00",
+      "uncertaintyPx": 1
+    },
+    {
+      "clip": "dash",
+      "cell": 7,
+      "crown": {
+        "x": 132,
+        "y": 34
+      },
+      "chin": {
+        "x": 130,
+        "y": 82
+      },
+      "note": "Reviewed actual aligned256 S dash cell; attached maincap below gold fitting to central dark jaw, excluding bun/gold/loose hair and warm neck. Strong forward head pitch and deep knee/flight posture retained. Head-only AI correction, fixed body calibration; semantic boundary uncertainty approximately1px. Group-local index (global=local+6).",
+      "sizePx": 48.041648597857254,
+      "masterSizePx": 48.041648597857254,
+      "source": "raw/hit-dash.head-repaired2.png",
+      "utcRecorded": "2026-11-07T23:19:00.679375+00:00",
+      "uncertaintyPx": 1
+    }
+  ],
+  "masterSelectionRefinement": {
+    "priorProvisional": {
+      "crown": {
+        "x": 130,
+        "y": 17
+      },
+      "chin": {
+        "x": 128,
+        "y": 66
+      }
+    },
+    "reason": "Independent style-owner23 cross-check found provisional130,17 in gold fitting/base. Selected attached maincap130,18.5 and centraljaw128,66.5 above warm neck67+. Frozen before motion measurement; unchanged master hash. Sourceconstruction49.275 is a cross-check, not rendered-boundary proof.",
+    "reviewer": "style-owner23 coarse guidance; precise points selected by art-worker24",
+    "uncertaintyPx": 1,
+    "utcRecorded": "2026-11-07T23:09:00.502843+00:00"
+  },
+  "rejectedSourceObservations": [
+    {
+      "clip": "run",
+      "cell": 3,
+      "crown": {
+        "x": 127,
+        "y": 32
+      },
+      "chin": {
+        "x": 129,
+        "y": 85
+      },
+      "sizePx": 53.03772242470448,
+      "masterSizePx": 48.041648597857254,
+      "note": "Initial source manual sample, not passing evidence; cap beneath fitting excludes bun/tips. Preserve dynamic body/head pitch; head-only correction planned."
+    },
+    {
+      "clip": "run",
+      "cell": 5,
+      "crown": {
+        "x": 129,
+        "y": 32
+      },
+      "chin": {
+        "x": 129,
+        "y": 84
+      },
+      "sizePx": 52.0,
+      "masterSizePx": 48.041648597857254,
+      "note": "Initial source manual sample, not passing evidence; cap beneath fitting excludes bun/tips. Preserve dynamic body/head pitch; head-only correction planned."
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "crown": {
+        "x": 132,
+        "y": 76
+      },
+      "chin": {
+        "x": 132,
+        "y": 130
+      },
+      "sizePx": 54.0,
+      "masterSizePx": 48.041648597857254,
+      "note": "Initial source manual sample, not passing evidence; cap beneath fitting excludes bun/tips. Preserve dynamic body/head pitch; head-only correction planned."
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "crown": {
+        "x": 130,
+        "y": 89
+      },
+      "chin": {
+        "x": 129,
+        "y": 142
+      },
+      "sizePx": 53.009433122794285,
+      "masterSizePx": 48.041648597857254,
+      "note": "Initial source manual sample, not passing evidence; cap beneath fitting excludes bun/tips. Preserve dynamic body/head pitch; head-only correction planned."
+    }
+  ],
+  "rejectedEditObservations": {
+    "source": "raw/hit-dash.head-repaired.png",
+    "status": "Superseded in shallow dash locals1,2,3,6,7 by head-edit2; deep locals4/5 retained",
+    "reason": "First AI correction made shallow cap-to-chin units too small. Do not select semantic boundaries to obtain pass. Approximate manually selected diagnostic points below, uncertainty1px; not final evidence.",
+    "rows": [
+      {
+        "cell": 1,
+        "crown": {
+          "x": 130,
+          "y": 52
+        },
+        "chin": {
+          "x": 130,
+          "y": 96
+        },
+        "sizePx": 44.0
+      },
+      {
+        "cell": 2,
+        "crown": {
+          "x": 130,
+          "y": 52
+        },
+        "chin": {
+          "x": 130,
+          "y": 97
+        },
+        "sizePx": 45.0
+      },
+      {
+        "cell": 3,
+        "crown": {
+          "x": 137,
+          "y": 49
+        },
+        "chin": {
+          "x": 137,
+          "y": 94
+        },
+        "sizePx": 45.0
+      },
+      {
+        "cell": 6,
+        "crown": {
+          "x": 132,
+          "y": 46
+        },
+        "chin": {
+          "x": 130,
+          "y": 90
+        },
+        "sizePx": 44.04543109109048
+      },
+      {
+        "cell": 7,
+        "crown": {
+          "x": 132,
+          "y": 38
+        },
+        "chin": {
+          "x": 130,
+          "y": 81
+        },
+        "sizePx": 43.04648650006177
+      }
+    ]
+  }
+}
