@@ -4,6 +4,7 @@ import {
   ELEMENTAL_MATRIX_SCHEMA,
   REALM_PROGRESSION_JSON,
   REALM_PROGRESSION_SCHEMA,
+  SKILL_DEFINITIONS_SCHEMA,
 } from './generated.js';
 
 export interface StatParamData {
@@ -88,6 +89,7 @@ export interface ElementalMatrix {
 export const realmProgression = REALM_PROGRESSION_JSON as RealmProgression;
 export const elementalMatrix = ELEMENTAL_MATRIX_JSON as ElementalMatrix;
 export const realmProgressionSchema = REALM_PROGRESSION_SCHEMA as Record<string, unknown>;
+export const skillDefinitionsSchema = SKILL_DEFINITIONS_SCHEMA as Record<string, unknown>;
 export const elementalMatrixSchema = ELEMENTAL_MATRIX_SCHEMA as Record<string, unknown>;
 
 /** Approved base-stat table (Công thức §1, "Bảng giá trị") — CI rejects data deviating > 1%. */
