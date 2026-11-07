@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:12:13.532Z",
+  "utcCompleted": "2026-11-07T23:13:11.214Z",
+  "prompt": "Use case: precise-object-edit. Image1 is the EDIT TARGET: a 4x4,16-frame frontal S casting animation sprite sheet. Image2 is the locked S master identity reference. Make ONE narrow correction in ALL16 cells: compact the elevated hair bun and any upward secondary ribbon tips so the highest secondary hair is at most 5 logical pixels above the attached skull hair cap. The current bun is too tall and clips after fixed-scale export. Remove roughly 6 logical pixels of excess elevated bun height, reconstruct a tiny compact tied tuft with its gold fitting, retain natural lateral amber ribbon motion. Do NOT move or resize the main skull hair cap, face, chin, head, neck, body, boots, gauntlets, apron or sash. Keep every pose, fist location, expression, camera, body scale, foot ground and exact cell registration unchanged. Preserve original adult tan square-jaw face, charcoal/amber/gold/ivory palette and cel shading with tinted outlines. Exact same square image dimensions and4x4 lattice, opaque pure magenta background and existing thin black dividers. No added FX, text or ruler. This is secondary-hair surgery only, no character shrink and no pose flattening.",
+  "references": ["raw/cast.attempt1.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-6481771f-d769-43a9-ac09-12ddf3b5821c.png",
+  "status": "candidate; native QA pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+}

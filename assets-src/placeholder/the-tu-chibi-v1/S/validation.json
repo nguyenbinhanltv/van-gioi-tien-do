@@ -1,0 +1,19 @@
+{
+  "utcRecorded": "2026-11-07T23:22:38.348182+00:00",
+  "sourceProfile": "D46 smooth-v2 / D47 head-size-v1",
+  "clips": 15,
+  "drawings": 202,
+  "spriteQa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 53,
+    "regression": 0,
+    "info": 88
+  },
+  "masterHead": "Frozen S cap130,18.5 to centraljaw128,66.5,48.04165px; semantic refinement recorded without image edit",
+  "headEvidence": "15 manually annotated aligned cells; no detector claim",
+  "calibration": "Lockedscale1 after whole-sheet square-cell DPI normalization; no per-frame fitting",
+  "canvasLoss": "Native hard projected-bounds gate passes all202cells",
+  "repositoryChecks": "pending latest-main integration",
+  "cocos": "pending real3.8.8 2x all15clip capture"
+}

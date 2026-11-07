@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:14:26.449Z",
+  "utcCompleted": "2026-11-07T23:15:47.135Z",
+  "prompt": "Use case: precise-object-edit. EDIT this exact16-cell4x4 cast sheet. Only rowmajor cells5,7,13 (zero-based) need a tiny repair: their highest bun tip still projects1pixel above the output canvas after fixed registration. Shorten the compact bun/topknot by another3logicalpixels, only in these3cells. Keep attached maincap, face, skullsize, gold hair fitting, ribbons lateral rather than upward, and allbody/weapon/boot/cloth pixels unchanged. Allother13cells unchanged. Same exact image dimensions,4x4lattice,puremagenta background,thinblackdividers. No body rescale, no translation, no newFX/text. Only lower the secondary bun silhouette tip in cells5,7,13 while retaining natural tiny tiedtuft.",
+  "references": ["raw/cast.headroom.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-c8f1bbcd-3a2d-496b-8459-eeb9c1670c76.png",
+  "status": "candidate; global5,7,13 composed only",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+}

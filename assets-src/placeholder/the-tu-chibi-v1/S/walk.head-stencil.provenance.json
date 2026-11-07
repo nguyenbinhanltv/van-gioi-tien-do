@@ -1,0 +1,21 @@
+{
+  "kind": "generation-guide-only",
+  "master": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-24/assets-src/placeholder/the-tu-chibi-v1/reference/S.master.png",
+  "masterSha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "frames": 16,
+  "layout": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "operation": "existing blit, unscaled master head stencil per cell; original lattice retained",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectionRegistry": "project.json"
+}

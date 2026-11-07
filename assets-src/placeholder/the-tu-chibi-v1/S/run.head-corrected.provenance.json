@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:12:40.431Z",
+  "utcCompleted": "2026-11-07T23:13:36.647Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Image1 EDIT TARGET is a16-frame4x4 frontal S running sprite sheet. Image2 locked S master fixes face and head size. Correct ONLY enlarged heads in rowmajor cells1 through14 (zero-based); cells0 and15 already match and must remain unchanged. Attached skull-cap summit to central chin must measure48 logical pixels in256logical cells, about58.8nativepixels in each313.5pixel cell, matching image2. Existing enlarged heads are roughly52–54logicalpx; reduce only their skull/face units to the locked unit, around8–10percent, preserving their center, exact head pitch/yaw and neck connection by minimal local inpaint. Preserve the same mature tan squarejaw, amber eyes, brow nick, swept dark hair and tiny compactbun. Do NOT rescale whole characters, move bodies or flatten the forward head pitch. Bodies, arms, paired gauntlets, knee bends, airborne tucks, boots, ivory apron and amber sash must stay in their EXACT existing pose, scale and position. Retain the strong dynamic run and secondary ribbons; minimal neck blend only. Same exact4x4 square canvas dimensions, opaque pure magenta background and black cell dividers. No extra FX/text/props. Only anatomically enlarged HEADS change; no global redraw.",
+  "references": ["raw/run.attempt1.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-2dffc972-6cb4-40f5-b556-8fdb0700b49b.png",
+  "status": "candidate; head measurements/native QA pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver."
+}

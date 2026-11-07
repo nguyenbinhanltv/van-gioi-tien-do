@@ -1,0 +1,71 @@
+{
+  "kind": "generation-guide-only",
+  "master": "reference/S.master.png",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "offsets": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 0,
+      "y": 6
+    },
+    {
+      "x": 2,
+      "y": 12
+    },
+    {
+      "x": 3,
+      "y": 18
+    },
+    {
+      "x": 4,
+      "y": 22
+    },
+    {
+      "x": 6,
+      "y": 20
+    },
+    {
+      "x": 8,
+      "y": 14
+    },
+    {
+      "x": 10,
+      "y": 7
+    },
+    {
+      "x": 10,
+      "y": 0
+    },
+    {
+      "x": 9,
+      "y": 0
+    },
+    {
+      "x": 6,
+      "y": 2
+    },
+    {
+      "x": 3,
+      "y": 4
+    },
+    {
+      "x": 1,
+      "y": 2
+    },
+    {
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectionRegistry": "project.json"
+}
