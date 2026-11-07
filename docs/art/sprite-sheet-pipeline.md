@@ -257,3 +257,29 @@ Màu phải lấy từ nội dung chuẩn D6/D44; module không sao chép palett
 hideCostume chỉ bỏ body cosmetic, không bỏ weapon skin. FX/aura theo tier; glowTint áp dụng slot FX, không nhuộm lại thân.
 `aura` là ID hook riêng, không phải chỉ số chiến đấu. Cache chỉ tải cặp set/hướng được yêu cầu, gộp request đồng thời,
 cho retry khi lỗi và hỗ trợ evict/clear; không preload toàn bộ tier/cosmetic.
+
+## Biến thể sửa từ master T1
+
+T2–T5 và trang phục phải sửa ảnh từ sheet master T1 với cùng pose. Khai báo `project.variant` loại
+`edit-from-master-v1`, `category` (`tier`/`costume`), `id`, đường dẫn/hash SHA256 project T1,
+`edit: { tool, prompt }` và `thresholds: { minSilhouetteIou, maxJointDistancePx, minFaceSimilarity }`.
+Không có ngưỡng ngầm; phải chọn và ghi rõ qua xem art. Nếu T1 dùng file calibration ngoài, thêm
+`masterCalibrationSha256`. Mỗi clip khai báo `variant: { masterSheetSha256, annotations }`.
+Giữ PNG nguồn, prompt chính xác và hướng nhân vật; project nguồn không được là một biến thể khác.
+Số khung, thời lượng, loop, tableId và phase phải khớp T1. Cả hai cần scale cố định tường minh, không suy từ bbox quần áo.
+
+Annotations là mảng theo thứ tự ô trong clip, mỗi ô có `master`/`edited`: các tọa độ khớp theo `POSE_JOINTS`
+(crown của main hair cap, chin, shoulder_L/R, elbow_L/R, hand_L/R, pelvis, knee_L/R, foot_L/R),
+và `face: { rect: { x, y, width, height } }`. Tọa độ dùng ô nguồn chuẩn hóa 256 px trước inset/crop/căn/palette lock,
+không dùng bbox chứa búi tóc/vũ khí làm chiều cao giải phẫu. Khớp là chú thích thủ công cần xem ảnh; chưa có mô hình dò khớp.
+Vùng mặt phải chứa mặt thật, cùng hình chữ nhật cho master/edited; ô mặt rỗng thất bại.
+N/NE có thể ghi `face: { occluded: '<lý do đã xem>' }`, luôn báo **chưa đo**, không tuyên bố qua face-lock.
+
+`sprite:variant-check --project <json>` chạy nhanh trước atlas; build/batch tự chạy cùng audit trước palette/căn.
+Pose-lock kiểm IoU silhouette (alpha ≥128) và khoảng cách khớp lớn nhất; face-lock so RGBA tiền nhân trên hợp pixel có nội dung.
+Không phải nhận dạng danh tính ngữ nghĩa. Áo thay hình có thể đổi silhouette, cần ngưỡng được xem art chấp nhận.
+Cổng poseLock/faceLock là cổng cứng, không cho backlog hay exception bỏ qua. Sai hash, thiếu bằng chứng hoặc đổi timing/scale
+là lỗi cấu hình. Sheet gộp dùng mapping clip cho cả hai phía. Contract lưu hash nguồn/project/calibration, sheet đã sửa,
+annotations và số đo từng ô, kể cả ô đạt. Xem schema/ví dụ ở README của `@vgtd/sprite`.
+
+Biến thể cũng pin masterImageSha256 của PNG master T1 và dùng lại PNG đó làm reference. Khóa mọi điều khiển ngoài storage/provenance: vertical (mặc định sole), kind (upright), contacts, tốc độ, exceptions, manifest cells/guides và slice; giữ đủ clip. Chỉ thay layout/DPI khi scale đầu ra bằng nhau. Khi xuất, dùng lại gốc căn từng ô T1 để phần vải mới không làm lệch thân vì centroid khác. Màu áo mới có thể giữ bằng palette lock tắt; không thay reference hình học T1.

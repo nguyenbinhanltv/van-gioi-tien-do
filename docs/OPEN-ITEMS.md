@@ -171,6 +171,13 @@ Chi tiết và đề xuất: [29-adr.md Phụ lục A](29-adr.md). Các hàng c�
 2. Nhiều trang atlas ≤ 2048 đã có đường tải một armature và capture Cocos 3.8.8 (PR #122). QA theo hướng có PR #123; dữ liệu SE cũ vẫn cần chuyển bóng chân/hiệu chuẩn như mục chờ ở trên, không được coi là đã đo đúng theo hướng chỉ vì xuất được atlas.
 3. Mục §10 mục 2 (ngưỡng IoU của key pose D40) không còn áp dụng cho thân Player (D41).
 
+### Ngưỡng kiểm biến thể từ T1
+
+- Tooling cung cấp pose-lock (IoU silhouette + khoảng cách khớp chú thích) và face-lock pixel theo từng ô,
+  nhưng chưa có dữ liệu art đã duyệt để chốt ngưỡng chung cho T2–T5/trang phục. Project phải khai báo ngưỡng tường minh;
+  ví dụ kiểm đúng tuyệt đối không phải cân chỉnh art đã duyệt. Cần xem biến thể thật để chọn ngưỡng và ghi lại.
+- Chú thích khớp/mặt là bằng chứng thủ công, không phải nhận dạng giải phẫu tự động; mặt khuất N/NE phải giữ nhãn chưa đo.
+
 ## 13. Semi-chibi D44: hợp đồng và nghiệm thu còn mở
 
 Các mục sau chưa được concept hoặc D44 giải quyết. Không coi việc chủ dự án duyệt hướng art là nghiệm thu kỹ thuật hoặc ủy quyền làm cửa hàng/thanh toán.
