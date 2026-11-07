@@ -182,3 +182,35 @@ Project có sheet sinh ở nhiều DPI khai báo `preparation: { kind: "square-c
 Phiên bản này giữ thuật toán assembler Đan/Phù tu: chỉ bỏ viền hàng đen/trong suốt ngoài cùng để phục hồi ô vuông, dung sai ô 1 px và làm tròn crop 3 px; chuyển DPI toàn sheet về ô `CELL_PX`, rồi áp dụng scale nhân vật cố định. Không fit từng khung, không thu nhỏ vì atlas. Lỗi lưới không vuông hoặc thiếu calibration báo `non-reproducible project` trước QA art. Assembler đã chuẩn bị sheet phải bỏ trường `preparation` để không chạy hai lần.
 
 Contract giữ `sheetSha1` của PNG chuẩn hóa, thêm `preparation` theo clip: `rawSha1`, kích thước thô/chuẩn hóa, crop và hệ số DPI. Sheet nguồn, guide sinh ảnh, provenance, phase và pose exception giữ nguyên. Audit project đã commit kiểm tra bước chuẩn bị và chặn DPI lẫn chưa khai báo; không diễn giải đầu vào thô thành lỗi art cứng.
+
+## Clip semi-chibi mượt v2
+
+[Cập nhật D46: profile mới opt-in, bảng D41 phía trên vẫn phục vụ asset cũ.]
+
+API: `SMOOTH_SPRITE_CLIPS`, `smoothSpriteClip(name)`, `smoothProjectClipDefaults(name)`, `smoothPoseTags(name)`.
+CLI: `npm run sprite:template -w @vgtd/sprite -- --profile smooth-v2 --clip run --master <master.png> --direction E --out <dir>`.
+Spread `smoothProjectClipDefaults('run')` vào project, rồi thêm `sheet`, `manifest`, calibration và exceptions.
+Runtime dùng `attack` cho nhịp đầu (tên sản xuất attack_1); không thêm animation alias.
+
+| Clip                                         | Ô vẽ | Thời lượng danh nghĩa (giây) |
+| -------------------------------------------- | ---- | ---------------------------- |
+| idle, walk, run, cast, meditate, tribulation | 16   | 16/24                        |
+| attack, attack_2, attack_3                   | 14   | 14/24                        |
+| dash                                         | 10   | 10/24                        |
+| channel, die, emote, sword_fly               | 12   | 12/24                        |
+| hit                                          | 6    | 6/24                         |
+
+Mỗi bản vẽ là một pose riêng ở 24 fps danh nghĩa, không nhân bản ô để giả tăng độ mượt.
+Chọn 14 khung mỗi đòn để có lấy đà, vung, trúng, giữ lực một khung và thu thế; nhãn pose nằm trong manifest.
+`phases` vẫn là chỉ số TABLE cũ, không phải số ô mới; exporter đổi tỉ lệ sự kiện theo thời lượng.
+Không kéo dài hit/cancel gameplay theo clip: đây là profile trình diễn, cần tích hợp gameplay riêng khi nối chiến đấu.
+Clock DragonBones hiện tại là 30 Hz: thời lượng được làm tròn tới tick gần nhất (sai số ≤ 1/60 giây),
+độ dài hiển thị ô có thể khác một tick; test bảo đảm đủ mọi bản vẽ, không tuyên bố cadence 24 Hz chính xác.
+
+Lưới tối đa 4×4. Ô logic giữ 256 px @2x; template 4×4 là 1024², có thể sinh ở 2048²
+(512 px thô mỗi ô) rồi dùng `square-cell-dpi-v1` + calibration nhân vật đã khóa để chuẩn hóa.
+Không resize master hoặc fit từng pose để lấp ô; giữ cùng camera, tỷ lệ và trục hông.
+Walk/run dùng duration v2 để tính stride và ghost; sinh lại template, không dùng ghost từ bảng cũ.
+Với hướng có stride y, giữ `vertical: "keep"`; khai báo tiếp đất thật và kiểm QA như D41.
+Magenta là đường đi chroma-key hiện hành; giữ sheet gốc và guide/provenance. Atlas nhiều trang được phép,
+không giảm ô hay scale để ép vừa một trang. Chưa có helper AI in-between trong profile này.
