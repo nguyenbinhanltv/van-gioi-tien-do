@@ -1,0 +1,21 @@
+{
+  "name": "attack_3",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED E master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT E strict right-facing profile in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx127.72. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP ATTACK_3 FINISHER: square2048x2048 exact4columns4rows ofequalSQUAREcells. EXACT14posesincells1-14 rowmajor,lasttwoEMPTYmagenta. High-to-low finishingFANsweep.1neutral;2leftfanhandbeginslifting;3fanrisesforwardtoheadlevel;4highwindupwithkneesslightlybent;5begindownwardsweep;6sweepdiagonallydown;7extendlowforward;8IMPACT lowfanatwaistheight withforwardlunge;9HOLDimpactnearlysamepose;10followthroughfangoesacrosskneeline;11recoverfanhand;12torsoreturnsupright/hairandsleevesstilltrailing;13settle;14neutral. No spin/twirl orcamerachange, facealwaysstrictE rightprofile. Fan alwaysopen andLEFTgripped, no detachedweapon, rightfreearmclearcounterbalance. Samewholebodyscaleallframes, no shrinktofit; fan/hair/feetallinsidecellx10..246y6..246. Keep masterface/costumegeometry/material2tones. Clear anticipation impacthold followthrough, secondarymotionlags2frames. No paintedFX/blur/groundshadow/grid/text.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:38:56 UTC"
+  },
+  "references": ["reference/E.master.png", "E/templates/attack_3.template.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:39:55 UTC"
+  },
+  "raw": "raw/attack_3.attempt1.png",
+  "selected": "sheets/attack_3.png",
+  "status": "selected; complete E hard QA passed; accepted soft findings are explicit in quality-backlog.json",
+  "rawSha256": "e866aedc38f6bfccc277df2e164e4f5146c595d0232261e1a39a38773db66a93",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:39:37.393Z",
+  "selectedSha256": "e866aedc38f6bfccc277df2e164e4f5146c595d0232261e1a39a38773db66a93",
+  "referenceSnapshots": ["reference/E.master.generation-v1.png", "E/templates/attack_3.template.png"]
+}

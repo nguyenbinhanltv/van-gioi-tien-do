@@ -1,0 +1,728 @@
+{
+  "format": "vgtd-image-provenance",
+  "character": "phap-tu-chibi-v1",
+  "license": {
+    "checkedUtc": "2026-11-07 20:14:13 UTC",
+    "source": "https://openai.com/policies/terms-of-use/",
+    "basis": "OpenAI output ownership terms; original project-owned concept reference; no third-party commercial images used",
+    "attributionRequired": false
+  },
+  "attempts": [
+    {
+      "file": "reference/turnaround.attempt1.raw.png",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStart": {
+        "current_time": "2026-11-07 20:12:07 UTC"
+      },
+      "prompt": "Use case: identity-preserve. Production canonical T1 five-direction turnaround for original Phap tu B in Van Gioi Tien Do. Reference attached is APPROVED T3 FACE AND STYLE, not the T1 costume. Preserve precisely her oval adult female face, narrow dark brown eyes, arched brows, small nose, composed smile, beauty mark below anatomical right eye, black half-up hair and split vermilion pin. Redraw at compact 4.5 heads crown-to-sole, head/main hair cap 22 percent of body height. Five full body figures in ONE horizontal row, equal scale, same baseline, ample empty spacing: E strict right profile; SE front three quarter toward screen right; S straight front; NE back three quarter toward screen right; N straight back. Slight overhead orthographic game camera. All five have same anatomy, hair and T1 outfit. T1: SIMPLE ink-plum plain robe, vermilion waist sash and sleeve ends, thin pale-gold edging only, long hanging sleeves split away from hands, short split hem exposes BOTH feet/ankles for animation. Remove T3 shoulder armor, gems, dangling chains, ornate embroidery and auras. Keep elegant adult premium semi-chibi silhouette. Right hand holds ONE modest open vermilion folding fan naturally, visible outside torso silhouette in EVERY view including NE and N; left hand relaxed. Fan same structure in every view: seven broad panels, eight straight pale-gold ribs joining one small plain pivot, one single small black ink crescent near outer panel tip, no complex painting, no gems. Backside plain vermilion with same ribs. Consistent NW light; precisely two cel tones plus small highlight and narrow rim light; material-tinted outlines, no pure black outlines. Sparse ink-wash at sleeve tips only. Uniform white background, NO ground shadow, effects, construction lines or measuring guides. Small labels E SE S NE N beneath figures only. No commercial imitation, no extra poses, no weapon omission, no perspective growth, no juvenile face.",
+      "references": ["worker23/phap-tu-t3.raw.png"],
+      "status": "rejected: tall proportions; rear fan hand inconsistent"
+    },
+    {
+      "file": "reference/turnaround.attempt2.raw.png",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStart": {
+        "current_time": "2026-11-07 20:13:20 UTC"
+      },
+      "prompt": "Correct this T1 turnaround. Keep same five views E SE S NE N, original plum/vermilion plain robe, fixed approved female face/hair, restrained gold trim, open fan, white background and labels. TWO precise corrections: (1) make every body compact PREMIUM SEMI-CHIBI at exactly 4.5 heads crown to sole. Enlarge main head/hair cap and shorten torso plus legs; current figures are too tall. Whole head/hair cap excluding pin is 22 percent of crown-to-sole. Adult face, no baby cheeks. (2) fan must be in ANATOMICAL LEFT HAND consistently: front S screen RIGHT, E profile forward/right, rear N screen LEFT, NE fan at screen LEFT silhouette. Back views must match front anatomy, never switch hands. Fan outside silhouette visible all views, fixed seven panels/eight ribs, simple small black crescent on front outer tip and plain back. Sleeves long but feet and hands exposed. Precisely two cel tones, small highlight and rim. Keep face and garment design unchanged except proportion correction. Same baseline and anatomical size all five, no effects/shadows. Full figures safely inside canvas.",
+      "references": ["reference/turnaround.attempt1.raw.png"],
+      "status": "revision: NE fan hand inconsistent; not canonical"
+    },
+    {
+      "file": "reference/turnaround.attempt3.raw.png",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStart": {
+        "current_time": "2026-11-07 20:14:14 UTC"
+      },
+      "prompt": "Edit ONLY the fourth figure labelled NE. Preserve the other four figures exactly. NE must hold fan in her anatomical LEFT hand, consistently with front S and back N: move the open fan, gripping left hand and its sleeve to the screen LEFT edge of her silhouette, extending out beyond her hair; the free RIGHT hand is lowered at screen RIGHT of torso. Currently NE incorrectly holds fan in right hand. Keep NE body facing back three-quarter to screen RIGHT, same face/hair/scale/robe, feet, baseline. Fan plain vermilion backside eight ribs seven panels, no crescent visible on backside. Keep entire sheet layout E SE S NE N, same compact 4.5-head adult premium semi-chibi style, all other figures unchanged. White background.",
+      "references": ["reference/turnaround.attempt2.raw.png"],
+      "status": "superseded: T1 long robe was incorrect; costume corrected after orchestrator review"
+    },
+    {
+      "file": "reference/tiers.attempt1.raw.png",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStart": {
+        "current_time": "2026-11-07 20:14:48 UTC"
+      },
+      "prompt": "Use case: identity-preserve. From the attached corrected T1 turnaround, create FIVE FRONT S full body gear-tier masters in one horizontal row. Use ONLY the center S view as exact body/face/pose/scale reference. Same compact 4.5-head adult female face and identical black half-up hair, split vermilion pin, eyes/beauty mark, hands/feet positioning in ALL five; same anatomical left-hand open fan at screen RIGHT, right arm lowered at screen LEFT, same stance and baseline. Labels T1 T2 T3 T4 T5 beneath. T1 must exactly match attached plain plum wrap robe, long vermilion-tipped sleeves, simple red sash, thin gold edge, no armor/gems. T2 adds modest gold hem motif and small sash clasp plus one fan tassel. T3 adds elegant layered split overskirt, single small shoulder plate, one sash gem and gem fan pivot. T4 adds longer ornate split outer tails and refined shoulder layer, sparse vermilion ink-wash trail around fan kept separate from body silhouette. T5 adds two floating plum/vermilion cloth fragments and transformed gold fan rim, sparse separate vermilion arc; premium but legible simplified shapes. All keep ink-plum dominant base, vermilion sole accent, restrained pale gold trim. Face/hairstyle and body anatomy NEVER change with tier. Fan blade structure same seven panels/eight ribs and small ink crescent, progressively decorated only, always same grip position. TWO cel tones plus tiny highlight/rim, tinted outlines, NW light, no realistic gradients. White background no shadows, no extra views, no quality-color variants, no commercial copying. Equal figure size, no overlap. These are front edit masters for same poses, not new character designs.",
+      "references": ["reference/turnaround.attempt3.raw.png"],
+      "status": "superseded: incorrect T1 long robe"
+    },
+    {
+      "file": "reference/turnaround.attempt4.raw.png",
+      "prompt": "Correct the first image turnaround using the SECOND approved tier strip's LEFTMOST T1 COSTUME and the THIRD approved T3 FACE. Five fullbody views in one row E strict right profile, SE front threequarter right, S front, NE backthreequarter right, N straightback. Main required corrections: T1 is a SHORT PLAIN INK-PLUM TUNIC ending at MID-THIGH over separate loose full-length PLUM TROUSERS gathered at ankles, simple plum/gold pointed ankle shoes. NO ankle-length robe/skirt, NO long outer tails, NO shoulder armor/gems. Long draping sleeves hang to knees, thin pale-gold sleeve seam, vermilion waist sash. Split vermilion hairpin has small three-bead gold/red hanging TASSEL, small gold vermilion drop EARRINGS in visible ears, matching approved T1. T1 fan is simple OPEN VERMILION semicircle, plain panels with fixed gold ribs, small plain pivot, NO ink motif (motif starts T3), no tassel on T1 fan. Keep fan in ANATOMICAL LEFT hand visible outside silhouette in EVERY view: front S screenRIGHT, back N screenLEFT, NE screenLEFT. Other hand relaxed free. Correct proportions from overly big head: premium SEMI-CHIBI adult at ABOUT 4.5 HEADS. Main head/hair cap excluding projecting bun and pin is ONLY22% crown-to-sole. Make head ~15% SMALLER relative to body than image1, slightly lengthen torso/legs. Adult same narrow darkbrown eyes, arched brows, oval face, composed mouth, beauty mark anatomicalright eye; identical black half-up hair with modest bun, fixed facial structure from image3, no baby face. All figures same scale and baseline. Celshading EXACTLY2 tones + small highlight/rim, tinted contours, NWlight, sparse inkwash on sleeve ends only. White background, no shadows/effects/labels except E SE S NE N below. Original game design. Preserve corrected hand consistency, make no extra character.",
+      "utcStart": {
+        "current_time": "2026-11-07 20:19:15 UTC"
+      },
+      "references": [
+        "reference/turnaround.attempt3.raw.png",
+        "reference/approved-tiers.reference.png",
+        "reference/approved-T3.reference.png"
+      ],
+      "status": "superseded: correct T1 costume; ornament headroom subsequently refined",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed"
+    },
+    {
+      "file": "reference/T1-turnaround.raw.png",
+      "prompt": "Refine this corrected Phap tu T1 five-direction turnaround for shared production proportion lock. Preserve exact short plum tunic + separate loose trousers, long sleeves, red sash, gold/red earrings, pin tassel, fixed adult oval face and brown eyes, fan in ANATOMICAL LEFT HAND in all five views, same E SE S NE N camera/layout. TWO anatomy adjustments only: reduce the skull+MAIN hair cap volume about 8 percent (preserve recognizable facial structure, no face swap), so crown of main hair attached to skull to chin is22% of crown-to-sole height, around4.5heads. Increase visible adult neck slightly, keep shoulders natural/slender26%bodyH. BUN+PIN must be COMPACT and lowered close to skull: whole ornament extends no more than7% of anatomical H ABOVE main hair crown. Flatten bun vertically and angle split vermilion pin mostly sideways, preserving its recognizable shape and dangling3-bead tassel. Do not change height of the five figures relative to each other; all crowns and soles at same level. Maintain eye line16%bodyH below maincap crown. No fake rulers or annotation. Same tinted outlines, exactly2celtones + small highlight/rim, NWlight, original design. Fan T1 plain open vermilion panels/gold ribs, no motif. White background, labels E SE S NE N below. No effects, no groundshadow, no extra art. Keep both feet and natural gripping hands visible.",
+      "utcStart": {
+        "current_time": "2026-11-07 20:22:29 UTC"
+      },
+      "references": ["reference/turnaround.attempt4.raw.png"],
+      "status": "selected master candidate; common anatomical 216px target; art lock awaiting review",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed"
+    },
+    {
+      "file": "reference/tiers.attempt2.raw.png",
+      "prompt": "Edit the FIRST corrected T1 turnaround into a five-column FRONT S tier master strip T1 T2 T3 T4 T5. SECOND image is approved tier progression reference; match its COSTUME EVOLUTION and weapon evolution, but preserve FIRST image's fixed smaller-head ~4.5head anatomy, face, left-hand fan grip/pose, hairstyle and equal size. All five straight FRONT S using center S of image1 exactly, same stance/feet/hands/face. T1 exact plain short plum tunic ending midthigh, loose ankle-gathered trousers, small pointed ankle shoes, long sleeves, red sash, gold edging only at cuffs, vermilion pin three-bead tassels and gold/red earrings; SIMPLE open vermilion fan plain panels/no ink motif. T2 still short tunic/trousers but longer tunic hem trimmed gold, sash clasp with hanging ornament, fan gold trim + tassel. T3 major evolution to ankle-length layered robe/split skirt, ivory sleeve lining with vermilion inkwash tips, asymmetric small plum/gold shoulder armor, gem sash, fan ink crescent and gem pivot. T4 ornate long tails, longer sleeve tips, two restrained separate vermilion ink arcs by fan. T5 transformed fan with leaflike outer rim, two floating cloth fragments and sparse separate arc; still original iconic fan/long sleeves. Keep main plum + vermilion + gold, ivory lining secondary only from T3. NO costume-face changes. ~4.5head compact adult anatomy across ALL, no giant baby heads. Precisely2 cel tones+small highlight/rim, tinted outlines, NWlight. Plain white background, no shadows, no extra poses. Labels T1 T2 T3 T4 T5 below figures. Maintain fixed anatomicalleft hand fan front screenRIGHT.",
+      "utcStart": {
+        "current_time": "2026-11-07 20:20:03 UTC"
+      },
+      "references": ["reference/turnaround.attempt4.raw.png", "reference/approved-tiers.reference.png"],
+      "status": "superseded: costume progression correct; bun/pin refinement followed",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed"
+    },
+    {
+      "file": "reference/T1-T5-front.raw.png",
+      "prompt": "Edit FIRST T1-T5 front tier strip for HEAD/HAIR AND PIN CONSISTENCY ONLY, using center S figure of SECOND corrected turnaround as exact master. In ALL FIVE columns preserve costumes, hands/pose, fan evolution, shoes, scale and baseline exactly. Replace each head/main hair/face/bun/pin with same fixed adult face and compact low bun + mostly horizontal split vermilion pin and 3-bead tassel of SECOND image center S. Keep same facial identity, narrow brown eyes/arched brows/oval face/right beauty mark, gold/red earrings. Head/maincap22% anatomicalheight, do not enlarge head. T1 shorttunict+trousers; T2 longertrimmedtunic+trousers; T3-T5 robe progression must stay unchanged. FIRST strip currently uses tall bun and steep pin: lower and compact it consistently to match SECOND. Flatwhitebackground, same T1 T2 T3 T4 T5 labels, tinted outlines2celtones smallhighlight/rim. No additional changes, no commercial references.",
+      "utcStart": {
+        "current_time": "2026-11-07 20:23:45 UTC"
+      },
+      "references": ["reference/tiers.attempt2.raw.png", "reference/T1-turnaround.raw.png"],
+      "status": "selected tier front candidate; face/pose inherited from corrected T1",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed"
+    }
+  ],
+  "files": [
+    {
+      "file": "E/raw/attack.attempt1.png",
+      "sha256": "fa0d12a22b4cae8f2371340f75fbbe67def7e283ef66f72cd0572ee872a2e235",
+      "bytes": 1903912,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:37:30.478Z"
+    },
+    {
+      "file": "E/raw/attack_2.attempt1.png",
+      "sha256": "3258b6625b1cd9fe213318ad60ba26af33dde2da188cedf28644836513f848ca",
+      "bytes": 1843684,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:38:33.198Z"
+    },
+    {
+      "file": "E/raw/attack_3.attempt1.png",
+      "sha256": "e866aedc38f6bfccc277df2e164e4f5146c595d0232261e1a39a38773db66a93",
+      "bytes": 1875722,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:39:37.393Z"
+    },
+    {
+      "file": "E/raw/cast.attempt1.png",
+      "sha256": "088c20fa9e8b12cbc02026ff5d67a00db9c99baeacb589a552486b3cd5bed88b",
+      "bytes": 1819797,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:40:48.508Z"
+    },
+    {
+      "file": "E/raw/channel.attempt1.png",
+      "sha256": "2f67f605196e0d71d49cba4714b149a8f9251c8bd01f0a62c94f5c7404b94e6b",
+      "bytes": 1831159,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:41:34.233Z"
+    },
+    {
+      "file": "E/raw/die.attempt1.png",
+      "sha256": "012c355ea2b0472fbd978a01c00d70236ec0a34e9b2e6f6585263d209fe23a87",
+      "bytes": 1842616,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:42:33.360Z"
+    },
+    {
+      "file": "E/raw/emote.attempt1.png",
+      "sha256": "a820d0e131af2103bb6b93e098ecccb071ba28a03f7e034250a55462494680b6",
+      "bytes": 1792588,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:44:21.260Z"
+    },
+    {
+      "file": "E/raw/hit-dash.attempt1.png",
+      "sha256": "bb4fe86daf401b34503c7808485b90fe3d16c76d17c5490db144ac2c7d5a4487",
+      "bytes": 1702789,
+      "width": 1774,
+      "height": 887,
+      "utcFileModified": "2026-11-07T20:34:39.186Z"
+    },
+    {
+      "file": "E/raw/hit-dash.attempt2.png",
+      "sha256": "630dad3d9d643627bd27af47b14cd0e44db45a6cf589a0edbcffbef3d3399015",
+      "bytes": 1739959,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:35:40.242Z"
+    },
+    {
+      "file": "E/raw/idle.attempt1.png",
+      "sha256": "e70609ef5707c27098c1bb7d031373dd71e16773b4bf97b55b43e52bf7b391f5",
+      "bytes": 1803541,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:29:28.251Z"
+    },
+    {
+      "file": "E/raw/meditate.attempt1.png",
+      "sha256": "711a8501d712b3510a34081c8714c1f9b7038a250020c9539807f0e68c3e2c75",
+      "bytes": 2155348,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:43:24.978Z"
+    },
+    {
+      "file": "E/raw/run.attempt1.png",
+      "sha256": "a842b9f8df5aa54533560d9b794e94513a369bfe2bbb14695198413d3f30ff23",
+      "bytes": 1946501,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:32:22.043Z"
+    },
+    {
+      "file": "E/raw/run.attempt2.png",
+      "sha256": "c67b387f6060361305b67d7d0065f475bca8259ccfcc159e6916602c6c0f2cf8",
+      "bytes": 1963571,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:54:31.698Z"
+    },
+    {
+      "file": "E/raw/sword_fly.attempt1.png",
+      "sha256": "dfee27e0d311580b40d665fddc1d1d154a19be4c97e8b418c26e7f91b6098502",
+      "bytes": 1763219,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:45:45.688Z"
+    },
+    {
+      "file": "E/raw/tribulation.attempt1.png",
+      "sha256": "4a47b392f99448ef6f4ac6c5b4ee0044475dff4161a2895dc7d5bab0fe0a9263",
+      "bytes": 1899552,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:46:55.840Z"
+    },
+    {
+      "file": "E/raw/walk.attempt1.png",
+      "sha256": "3e5e6917b7515455aed798a332493a170f44225770adf9176a9fba2d25daced3",
+      "bytes": 1873940,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:31:09.798Z"
+    },
+    {
+      "file": "E/sheets/attack.png",
+      "sha256": "fa0d12a22b4cae8f2371340f75fbbe67def7e283ef66f72cd0572ee872a2e235",
+      "bytes": 1903912,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:37:30.478Z"
+    },
+    {
+      "file": "E/sheets/attack_2.png",
+      "sha256": "3258b6625b1cd9fe213318ad60ba26af33dde2da188cedf28644836513f848ca",
+      "bytes": 1843684,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:38:33.198Z"
+    },
+    {
+      "file": "E/sheets/attack_3.png",
+      "sha256": "e866aedc38f6bfccc277df2e164e4f5146c595d0232261e1a39a38773db66a93",
+      "bytes": 1875722,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:39:37.393Z"
+    },
+    {
+      "file": "E/sheets/cast.png",
+      "sha256": "088c20fa9e8b12cbc02026ff5d67a00db9c99baeacb589a552486b3cd5bed88b",
+      "bytes": 1819797,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:40:48.508Z"
+    },
+    {
+      "file": "E/sheets/channel.png",
+      "sha256": "2f67f605196e0d71d49cba4714b149a8f9251c8bd01f0a62c94f5c7404b94e6b",
+      "bytes": 1831159,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:41:34.233Z"
+    },
+    {
+      "file": "E/sheets/die.png",
+      "sha256": "012c355ea2b0472fbd978a01c00d70236ec0a34e9b2e6f6585263d209fe23a87",
+      "bytes": 1842616,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:42:33.360Z"
+    },
+    {
+      "file": "E/sheets/emote.png",
+      "sha256": "a820d0e131af2103bb6b93e098ecccb071ba28a03f7e034250a55462494680b6",
+      "bytes": 1792588,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:44:21.260Z"
+    },
+    {
+      "file": "E/sheets/hit-dash.png",
+      "sha256": "630dad3d9d643627bd27af47b14cd0e44db45a6cf589a0edbcffbef3d3399015",
+      "bytes": 1739959,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:35:40.242Z"
+    },
+    {
+      "file": "E/sheets/idle.png",
+      "sha256": "e70609ef5707c27098c1bb7d031373dd71e16773b4bf97b55b43e52bf7b391f5",
+      "bytes": 1803541,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:29:28.251Z"
+    },
+    {
+      "file": "E/sheets/meditate.png",
+      "sha256": "711a8501d712b3510a34081c8714c1f9b7038a250020c9539807f0e68c3e2c75",
+      "bytes": 2155348,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:43:24.978Z"
+    },
+    {
+      "file": "E/sheets/run.png",
+      "sha256": "a842b9f8df5aa54533560d9b794e94513a369bfe2bbb14695198413d3f30ff23",
+      "bytes": 1946501,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:32:22.043Z"
+    },
+    {
+      "file": "E/sheets/sword_fly.png",
+      "sha256": "dfee27e0d311580b40d665fddc1d1d154a19be4c97e8b418c26e7f91b6098502",
+      "bytes": 1763219,
+      "width": 1448,
+      "height": 1086,
+      "utcFileModified": "2026-11-07T20:45:45.688Z"
+    },
+    {
+      "file": "E/sheets/tribulation.png",
+      "sha256": "4a47b392f99448ef6f4ac6c5b4ee0044475dff4161a2895dc7d5bab0fe0a9263",
+      "bytes": 1899552,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:46:55.840Z"
+    },
+    {
+      "file": "E/sheets/walk.png",
+      "sha256": "3e5e6917b7515455aed798a332493a170f44225770adf9176a9fba2d25daced3",
+      "bytes": 1873940,
+      "width": 1254,
+      "height": 1254,
+      "utcFileModified": "2026-11-07T20:31:09.798Z"
+    },
+    {
+      "file": "E/templates/attack.template.png",
+      "sha256": "f80cfdb5d0d2c0c373d100c40ca8df1f34f207e0f27e682f003385176a95861c",
+      "bytes": 14938,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:39.046Z"
+    },
+    {
+      "file": "E/templates/attack_2.template.png",
+      "sha256": "f80cfdb5d0d2c0c373d100c40ca8df1f34f207e0f27e682f003385176a95861c",
+      "bytes": 14938,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:39.076Z"
+    },
+    {
+      "file": "E/templates/attack_3.template.png",
+      "sha256": "f80cfdb5d0d2c0c373d100c40ca8df1f34f207e0f27e682f003385176a95861c",
+      "bytes": 14938,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:39.108Z"
+    },
+    {
+      "file": "E/templates/cast.template.png",
+      "sha256": "cdcec7367c808f6c20c318bf855af3f11dca17d85e47132f75ed513df4c0f2a9",
+      "bytes": 15525,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:39.139Z"
+    },
+    {
+      "file": "E/templates/channel.template.png",
+      "sha256": "6bf68f1b593fcdc78144bca3a218a983ad84c794d85f4728cb35394ab863a94a",
+      "bytes": 11658,
+      "width": 1024,
+      "height": 768,
+      "utcFileModified": "2026-11-07T20:28:39.160Z"
+    },
+    {
+      "file": "E/templates/dash.template.png",
+      "sha256": "fe7c2f5d0b5b81b00ae4753a614c8a0981d7bc5a7c2a65f515578c7d84e76e6b",
+      "bytes": 11067,
+      "width": 1024,
+      "height": 768,
+      "utcFileModified": "2026-11-07T20:28:38.985Z"
+    },
+    {
+      "file": "E/templates/die.template.png",
+      "sha256": "6bf68f1b593fcdc78144bca3a218a983ad84c794d85f4728cb35394ab863a94a",
+      "bytes": 11658,
+      "width": 1024,
+      "height": 768,
+      "utcFileModified": "2026-11-07T20:28:39.209Z"
+    },
+    {
+      "file": "E/templates/emote.template.png",
+      "sha256": "6bf68f1b593fcdc78144bca3a218a983ad84c794d85f4728cb35394ab863a94a",
+      "bytes": 11658,
+      "width": 1024,
+      "height": 768,
+      "utcFileModified": "2026-11-07T20:28:39.265Z"
+    },
+    {
+      "file": "E/templates/hit-dash/group.template.png",
+      "sha256": "cdcec7367c808f6c20c318bf855af3f11dca17d85e47132f75ed513df4c0f2a9",
+      "bytes": 15525,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:33:56.261Z"
+    },
+    {
+      "file": "E/templates/hit.template.png",
+      "sha256": "d8dd930e335cec9ea938b853aaca9f8b4b65699133d267f8d1e19632759ebc8a",
+      "bytes": 7208,
+      "width": 1024,
+      "height": 512,
+      "utcFileModified": "2026-11-07T20:28:39.178Z"
+    },
+    {
+      "file": "E/templates/idle.template.png",
+      "sha256": "cdcec7367c808f6c20c318bf855af3f11dca17d85e47132f75ed513df4c0f2a9",
+      "bytes": 15525,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:38.875Z"
+    },
+    {
+      "file": "E/templates/meditate.template.png",
+      "sha256": "cdcec7367c808f6c20c318bf855af3f11dca17d85e47132f75ed513df4c0f2a9",
+      "bytes": 15525,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:38.902Z"
+    },
+    {
+      "file": "E/templates/run.template.png",
+      "sha256": "98c4850c743e7c2d46464026d0ab388fe0e0ebd546074bdec682ea8431c27fd1",
+      "bytes": 17238,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:38.964Z"
+    },
+    {
+      "file": "E/templates/sword_fly.template.png",
+      "sha256": "6bf68f1b593fcdc78144bca3a218a983ad84c794d85f4728cb35394ab863a94a",
+      "bytes": 11658,
+      "width": 1024,
+      "height": 768,
+      "utcFileModified": "2026-11-07T20:28:39.005Z"
+    },
+    {
+      "file": "E/templates/tribulation.template.png",
+      "sha256": "cdcec7367c808f6c20c318bf855af3f11dca17d85e47132f75ed513df4c0f2a9",
+      "bytes": 15525,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:39.244Z"
+    },
+    {
+      "file": "E/templates/walk.template.png",
+      "sha256": "d656c93699265e1ae28c0d725c7cc28e2e21e9b4530bae15261df45cdb455734",
+      "bytes": 17091,
+      "width": 1024,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:28:38.932Z"
+    },
+    {
+      "file": "reference/approved-T3.reference.png",
+      "sha256": "b764283c3062f529183b664655a09caa36d845aef2dd99850aa0f90872a45c99",
+      "bytes": 2056341,
+      "width": 1536,
+      "height": 1024,
+      "utcFileModified": "2026-11-07T20:00:19.395Z"
+    },
+    {
+      "file": "reference/approved-tiers.reference.png",
+      "sha256": "a84cdbe670bcea36266e535d579252ab4721f9b41e80d027a043461588d589da",
+      "bytes": 2111137,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:02:25.536Z"
+    },
+    {
+      "file": "reference/E.master.alpha-fixed-unframed.png",
+      "sha256": "3b15a09a63c97e4250b6db8df5a0dcddcbb506cafee3a5c69b6ad46ba516aa93",
+      "bytes": 35485,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:39:05.780Z"
+    },
+    {
+      "file": "reference/E.master.generation-v1.png",
+      "sha256": "65225c5a3692491be0b9b06b1eff7a4261dd400978a1956dac414b91356a28d0",
+      "bytes": 37021,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T20:23:35.657Z"
+    },
+    {
+      "file": "reference/E.master.png",
+      "sha256": "323b0673909e584e2736a8cdaa2c2ae055216a9eae6a96aa5f431eedfd928cc5",
+      "bytes": 35485,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:15.946Z"
+    },
+    {
+      "file": "reference/N.master.png",
+      "sha256": "df9211449640c9d084ba660154fe73e454bfafb0cf38f612bfe96a61229e9105",
+      "bytes": 36257,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:16.002Z"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
+      "bytes": 37654,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:15.989Z"
+    },
+    {
+      "file": "reference/S.master.png",
+      "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168",
+      "bytes": 39559,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:15.977Z"
+    },
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95",
+      "bytes": 39301,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:15.963Z"
+    },
+    {
+      "file": "reference/T1-T5-front.raw.png",
+      "sha256": "a99e1d41fc4a558200a8fd5aa43bc4ce0da0f3f7a5163af8e8465df678892f17",
+      "bytes": 2214528,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:24:25.771Z"
+    },
+    {
+      "file": "reference/T1-turnaround.raw.png",
+      "sha256": "fe73228bdd26965b627cffe920f17dee3999e1a9030b3bdddb17e2824c76dd31",
+      "bytes": 1576235,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:22:54.526Z"
+    },
+    {
+      "file": "reference/T1.front.master.png",
+      "sha256": "218a0cd2b49fe4450500f93fa0d6ef6517e25978e89270a0ef4e8c0409a24e34",
+      "bytes": 39611,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:17.089Z"
+    },
+    {
+      "file": "reference/T2.front.master.png",
+      "sha256": "4e359fb64a1ab5adac47c9697f5f6308613c6c7113c618478dcadb24fc9b7c7b",
+      "bytes": 41017,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:17.248Z"
+    },
+    {
+      "file": "reference/T3.front.master.png",
+      "sha256": "409623f88cf6680e4c5702ee55546697c1413960a733e4470e0ab47aa62e7804",
+      "bytes": 55630,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:17.369Z"
+    },
+    {
+      "file": "reference/T4.front.master.png",
+      "sha256": "2393d62b6eef202a905111a12dfe59c57a7891dbd31d231a80f4dfc1bfec5e74",
+      "bytes": 60192,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:17.487Z"
+    },
+    {
+      "file": "reference/T5.front.master.png",
+      "sha256": "eb7cadf7f4c1ade437ba8757dca2a112b01a72f535f778424848dd23f466c792",
+      "bytes": 72492,
+      "width": 256,
+      "height": 256,
+      "utcFileModified": "2026-11-07T21:35:17.686Z"
+    },
+    {
+      "file": "reference/tiers.attempt1.raw.png",
+      "sha256": "7aaabf07dc22feefffc7be9496870d58172abd08a9c62b20bf08017bd839a5f4",
+      "bytes": 1815719,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:15:19.540Z"
+    },
+    {
+      "file": "reference/tiers.attempt2.raw.png",
+      "sha256": "87792d7457a6e685dabea9799154ca8fbd52aa82217404e458511a2fedfec815",
+      "bytes": 2045542,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:20:55.647Z"
+    },
+    {
+      "file": "reference/turnaround.attempt1.raw.png",
+      "sha256": "8de0d9c52235ceb548aebdbbb2b932f71949b61c318586e915b366df49a8c212",
+      "bytes": 1675071,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:12:59.434Z"
+    },
+    {
+      "file": "reference/turnaround.attempt2.raw.png",
+      "sha256": "477ec6da2daee42c058da2f8e2ca9f292fa4af17ed711582ceff3f67ea9411b0",
+      "bytes": 1669030,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:13:51.656Z"
+    },
+    {
+      "file": "reference/turnaround.attempt3.raw.png",
+      "sha256": "dfb1c0bc21db1647f21e0d3ef0e62daa71462c0557712c15ba816999187b9ad2",
+      "bytes": 2000569,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:14:36.128Z"
+    },
+    {
+      "file": "reference/turnaround.attempt4.raw.png",
+      "sha256": "92007c4d6763f9dde8d189355599a75547b96e2a951535b97b861f7843bc7eec",
+      "bytes": 1633140,
+      "width": 2172,
+      "height": 724,
+      "utcFileModified": "2026-11-07T20:19:44.848Z"
+    }
+  ],
+  "masterLock": {
+    "approvedBy": "project orchestrator, after requested costume and proportion corrections",
+    "anatomicalHeight2x": 216,
+    "landmarks": "reference/anatomy-landmarks.json",
+    "sourceSha256": "fe73228bdd26965b627cffe920f17dee3999e1a9030b3bdddb17e2824c76dd31"
+  },
+  "motionProvenance": "E/raw/*.generation.json",
+  "referenceAliases": {
+    "worker23/phap-tu-t3.raw.png": "reference/approved-T3.reference.png"
+  },
+  "generationMasterSnapshot": "reference/E.master.generation-v1.png",
+  "runtimeAssets": [
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json",
+      "sha256": "d8a066307e513783994e27811a4a1ec5c685b8a1d98472725dea955ab5ecdfa3",
+      "bytes": 230411
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json.meta",
+      "sha256": "93168401066cf4caca79f4f9058d54af5497712ca8bb4360a2e12a36aa882ad1",
+      "bytes": 179
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json",
+      "sha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95",
+      "bytes": 6153
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json.meta",
+      "sha256": "55b3b3f7d9ab213e666f1cf9ad8509b16b1f686dc4a932232abccc3562c444a7",
+      "bytes": 192
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png",
+      "sha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa",
+      "bytes": 4249461
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png.meta",
+      "sha256": "65c5a8a663affad199ae33d3f482e555143bbf2672bf20f95f6ab46c65de98d0",
+      "bytes": 993
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json",
+      "sha256": "27df785109cc3b0537fb8b78b31e98deebe986c0a929c38dcca9ddec9d1882d5",
+      "bytes": 25756
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json.meta",
+      "sha256": "8a431821215016a79d8900013f4b3e4e955ab42eb2fd0fe1ee79d8274b4734ee",
+      "bytes": 186
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json",
+      "sha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34",
+      "bytes": 6712
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json.meta",
+      "sha256": "d68e7c42dad4d11907705eec729a07c1fdaafcab5cb6931c5e49a07bb7c48fa7",
+      "bytes": 192
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png",
+      "sha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2",
+      "bytes": 5473085
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png.meta",
+      "sha256": "186879f032d8bc605fd07a6701bb5bc49490e6643c3852e9dcdf4aaae4984923",
+      "bytes": 987
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1.meta",
+      "sha256": "fb340ba61a51bbbfc735653d96846bec5f71bef22931e7500b3c7f533427304b",
+      "bytes": 169
+    }
+  ]
+}
