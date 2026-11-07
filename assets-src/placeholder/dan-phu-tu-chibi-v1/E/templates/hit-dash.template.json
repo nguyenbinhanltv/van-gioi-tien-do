@@ -1,0 +1,84 @@
+{
+  "clip": "hit+dash",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 3,
+    "pelvis": 117.5,
+    "centerX": 117.63257993384785
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "hit_0"
+    },
+    {
+      "leading": null,
+      "tag": "hit_1"
+    },
+    {
+      "leading": null,
+      "tag": "hit_2"
+    },
+    {
+      "leading": null,
+      "tag": "hit_3"
+    },
+    {
+      "leading": null,
+      "tag": "hit_4"
+    },
+    {
+      "leading": null,
+      "tag": "hit_5"
+    },
+    {
+      "leading": null,
+      "tag": "dash_0"
+    },
+    {
+      "leading": null,
+      "tag": "dash_1"
+    },
+    {
+      "leading": null,
+      "tag": "dash_2"
+    },
+    {
+      "leading": null,
+      "tag": "dash_3"
+    },
+    {
+      "leading": null,
+      "tag": "dash_4"
+    },
+    {
+      "leading": null,
+      "tag": "dash_5"
+    },
+    {
+      "leading": null,
+      "tag": "dash_6"
+    },
+    {
+      "leading": null,
+      "tag": "dash_7"
+    },
+    {
+      "leading": null,
+      "tag": "dash_8"
+    },
+    {
+      "leading": null,
+      "tag": "dash_9"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

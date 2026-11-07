@@ -1,0 +1,169 @@
+{
+  "calibration": {
+    "scale": 0.34098360655737703,
+    "targetHeight": 208,
+    "referenceHeight": 610,
+    "referenceFrames": 1
+  },
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 128
+  },
+  "records": [
+    {
+      "direction": "E",
+      "panel": {
+        "left": 0,
+        "right": 434,
+        "height": 724
+      },
+      "source": {
+        "left": 84,
+        "right": 370,
+        "top": 47,
+        "bottom": 657,
+        "height": 610,
+        "width": 286,
+        "pelvisX": 212.13895486935866
+      },
+      "pre": {
+        "height": 208,
+        "pelvisX": 72.33590592266656,
+        "soleY": 224.0262295081967
+      },
+      "post": {
+        "height": 208,
+        "pelvisX": 127.47503607503607,
+        "soleY": 232
+      },
+      "dx": 55.664094077333445,
+      "dy": 7.973770491803293
+    },
+    {
+      "direction": "SE",
+      "panel": {
+        "left": 434,
+        "right": 869,
+        "height": 724
+      },
+      "source": {
+        "left": 23,
+        "right": 390,
+        "top": 47,
+        "bottom": 659,
+        "height": 612,
+        "width": 367,
+        "pelvisX": 195.7377352897584
+      },
+      "pre": {
+        "height": 208.68196721311475,
+        "pelvisX": 66.743358918475,
+        "soleY": 224.70819672131145
+      },
+      "post": {
+        "height": 209,
+        "pelvisX": 127.63680438448567,
+        "soleY": 232
+      },
+      "dx": 61.256641081525004,
+      "dy": 7.291803278688548
+    },
+    {
+      "direction": "S",
+      "panel": {
+        "left": 869,
+        "right": 1303,
+        "height": 724
+      },
+      "source": {
+        "left": 2,
+        "right": 383,
+        "top": 47,
+        "bottom": 659,
+        "height": 612,
+        "width": 381,
+        "pelvisX": 181.78751528293617
+      },
+      "pre": {
+        "height": 208.68196721311475,
+        "pelvisX": 61.986562588279874,
+        "soleY": 224.70819672131145
+      },
+      "post": {
+        "height": 209,
+        "pelvisX": 127.6445058196883,
+        "soleY": 232
+      },
+      "dx": 66.01343741172013,
+      "dy": 7.291803278688548
+    },
+    {
+      "direction": "NE",
+      "panel": {
+        "left": 1303,
+        "right": 1738,
+        "height": 724
+      },
+      "source": {
+        "left": 29,
+        "right": 400,
+        "top": 46,
+        "bottom": 658,
+        "height": 612,
+        "width": 371,
+        "pelvisX": 228.67514302275762
+      },
+      "pre": {
+        "height": 208.68196721311475,
+        "pelvisX": 77.9744749979239,
+        "soleY": 224.3672131147541
+      },
+      "post": {
+        "height": 209,
+        "pelvisX": 127.63456151691446,
+        "soleY": 232
+      },
+      "dx": 50.025525002076094,
+      "dy": 7.632786885245906
+    },
+    {
+      "direction": "N",
+      "panel": {
+        "left": 1738,
+        "right": 2172,
+        "height": 724
+      },
+      "source": {
+        "left": 34,
+        "right": 406,
+        "top": 46,
+        "bottom": 656,
+        "height": 610,
+        "width": 372,
+        "pelvisX": 229.9956057752668
+      },
+      "pre": {
+        "height": 208,
+        "pelvisX": 78.42473114959917,
+        "soleY": 223.68524590163932
+      },
+      "post": {
+        "height": 208,
+        "pelvisX": 127.86133498656747,
+        "soleY": 232
+      },
+      "dx": 49.57526885040083,
+      "dy": 8.31475409836068
+    }
+  ],
+  "selection": {
+    "base": "raw/turnaround.attempt1.png",
+    "correction": "raw/turnaround.attempt2.png",
+    "panel": "NE",
+    "x0": 1303,
+    "x1": 1738,
+    "otherPanels": "byte-identical RGBA copied from base; no resampling before global calibration"
+  }
+}

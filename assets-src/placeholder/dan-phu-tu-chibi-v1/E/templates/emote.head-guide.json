@@ -1,0 +1,73 @@
+{
+  "master": "../../reference/E.corrected-master.png",
+  "scale": 1,
+  "poses": [
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    }
+  ],
+  "stencil": {
+    "left": 95,
+    "right": 156,
+    "top": 3,
+    "bottom": 71
+  },
+  "note": "Authoring intentions only, not measured output annotations. Unscaled master-head stencil transformed in input guide only; generated artwork is never scaled or repainted by code. Review actual output landmarks independently."
+}

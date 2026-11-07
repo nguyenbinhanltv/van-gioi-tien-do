@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 5,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:19:46 UTC",
+  "utcEnd": "2026-11-07 22:20:11 UTC",
+  "prompt": "Precise localized head-scale anatomy edit. TARGETimage1:16-frame4x4RUN sheet. Image2canonicalidentity. Change ONLY zero-basedcells7,14,15 (row2col4,row4col3,row4col4). Eachofthese3heads is slightlyoversized. Redraw ENTIREattachedhead (mainhaircap+face+jaw) about3percentSMALLER aroundfixedNECKANCHOR. Make a subtle butactualvisible reduction in bothheadwidthandheight; sameadultfemaleidentity andALLfacialproportions, olivebrownalmond eye/straightbrow/nose/serenelips/jaw retained. Maincapcrown-tochin target53logicalpx per256cell (currently~55.5); doNOT shrinkbody. Preserve headtilt/expression/neckattachment; elevatedbun/pin mayfollowhead naturally, notbecomeextraobjects. Everything belowneck EXACT: torso/arms/hands/whisk/robe/boots/root/motion/secondarycloth. Preserve BOTHFEETAIRBORNEtuck in7and15 anddynamicstride14. No standing orposeflattening. Other13cells COMPLETELYUNCHANGED. Brownshaftwhisk ONEbronze collarwhitehorsehairheldnaturallyright hand. Same1254x1254square4x4rowmajor andflatmagenta. No text/grid/FX/shadow. Thisis localizedactualheadanatomy correction ONLY3cells, notperframewholebodyrescale.",
+  "references": ["../raw/run.attempt3.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt5.png",
+  "status": "localized whole-head correction candidate cells7,14,15; actual measurements pending",
+  "rawSha256": "bf0663aab884b026c2aa9671e5510b0dc5d76c88c50d61ecb881c81a4924acc3",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt3.png",
+      "sha256": "0eb667e5965ee463ad2f7424ce61d1e5eb4afe65532b893b3ad26f553084ff30"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

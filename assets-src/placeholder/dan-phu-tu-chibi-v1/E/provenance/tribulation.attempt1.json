@@ -1,0 +1,28 @@
+{
+  "clip": "tribulation",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:30:15 UTC",
+  "utcEnd": "2026-11-07 21:30:54 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the SIXTEEN master-head stamps in image 1 into the T1 TRIBULATION brace animation. Image 2 is the exact jade healer, fixed face, robe and held whisk. Preserve each head's actual size, profile and guided path. Four columns × four rows, 16 frames row-major. Every figure faces screen RIGHT.\n\nFrames 1–2 guard and tense; 3–4 bend the knees and bring the arms into a protective brace; 5–7 sink into a deep low kneel; 8–9 hold the strongest brace while sleeves and hair continue settling; 10–12 rise through the hips and knees; 13–14 unwind the arms; 15–16 recover to guard. Keep the low kneel dynamic and anatomically believable. The head moves down with posture but its crown-to-chin size stays the same.\n\nRight hand always grips the same plain brown whisk shaft with ONE cylindrical bronze collar and white horsehair. Hold it naturally across the chest during the brace; left forearm/palm supports the guarding gesture. Never lose, duplicate or swap the weapon. White strands, sleeves, side hair and sash lag the movement and settle, with the full silhouette inside each cell.\n\nSame adult female face: olive-brown almond eye, straight delicate brow, serene but focused lips/jaw. Flatter main cap, separate folded bun, jade pin and side strands. Plain ivory T1 wrap robe, jade collar/cuffs/sash, narrow antique-gold edging, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nPreserve the actual head stamps' approximately 53.5 logical-pixel crown-to-chin scale. Do not enlarge the kneeling character or flatten the pose to match standing height. Remove all grid, guides, borders and crop edges. Flat opaque #FF00FF. NO lightning, aura, glow, talismans, lotus, particles, impact rings, floor, shadows, text, blur, afterimages or extra figures. Final guard flows back to the first.",
+  "references": ["../templates/tribulation.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/tribulation.attempt1.png",
+  "status": "candidate; all expected frames present visually; natural whisk held; actual complete QA pending",
+  "sha256": "06c6663d406519768947882e052861bd4671fd867e83bffb42679752c9ad2966",
+  "rawSha256": "06c6663d406519768947882e052861bd4671fd867e83bffb42679752c9ad2966",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/tribulation.head-guide.png",
+      "sha256": "5dc72932ecd4b1ed2d288d6ee237c12b3c6f536c1989de9b0a2b471322b8348c"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

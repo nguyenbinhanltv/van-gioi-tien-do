@@ -1,0 +1,28 @@
+{
+  "clip": "attack_3",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:57:52 UTC",
+  "utcEnd": "2026-11-07 21:58:28 UTC",
+  "prompt": "Use case: precise localized sprite animation edit. TARGET image1 is4x4 sheet,14attackframes+2blank. Image2 fixed E femaleidentity. Change ONLY frame1 and frame2 (top-left two cells). Add a visibly knee-flexed anticipation stance in both: bendknees underrobe, lowerpelvis/shoulders/head together12logicalpx in256cell while keeping bothboots grounded at their existingcoordinates. Same limbsegment lengths andsamehead/face size. NOT shrinking/rescaling figure. Right hand still naturallygraspscontinuousplainbrownwhisk ONEbronze collar whitehorsehair; leftopenpalm. Preserve exactface,hair,whisk,outfit. This earlykneeflexshould lead naturally into thirdframe crouchedwindup. No other changes: keep all12otherattackposes EXACT, especiallyverywideforwardlungeframes7-10, heldimpact,recoveryandlasttwoemptycells. Preserve exact1254x1254square4x4mapping, uniformflatmagenta#ff00ffbackground. No guides/text/FX/shadows. IvoryjadeT1 narrowantiquegoldtrim inkhem, tinted2tonecelstyle. Only sourcepose articulation first2cells, never wholebody scalechange.",
+  "references": ["../raw/attack_3.attempt1.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/attack_3.attempt2.png",
+  "status": "only source cells0,1 selected; dynamic wide lunge preserved from attempt1; awaiting authored origin alignment",
+  "sha256": "61de701b62eb0e7b09a62f5a490ece4895a2987502c6e822d0182adda82eca52",
+  "rawSha256": "61de701b62eb0e7b09a62f5a490ece4895a2987502c6e822d0182adda82eca52",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/attack_3.attempt1.png",
+      "sha256": "5e07be768cf751f2c61ca9bf055f1479389dbad848dde1ea700c58c2bc13cd15"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

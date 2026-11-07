@@ -1,0 +1,36 @@
+{
+  "clip": "hit-dash",
+  "clips": ["hit", "dash"],
+  "mapping": "../templates/hit-dash.clips.json",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:20:46 UTC",
+  "utcEnd": "2026-11-07 21:21:25 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the sixteen master-head stamps in image 1 into TWO INDEPENDENT animations on one 4×4 sheet. Image 2 supplies the exact T1 jade healer, fixed face, robe and right-hand whisk. Preserve head size, identity, profile and guided path. Every figure faces screen RIGHT. Do not treat this as one 16-frame action.\n\nCells 1–6 are HIT, six frames: 1 guard; 2 sudden recoil through the shoulders; 3 deepest recoil and soft knees; 4 recover balance; 5 arms and sleeves settle; 6 guard. Keep the right-hand whisk held close; left palm reacts naturally.\n\nCells 7–16 are DASH, ten frames: 7 guard; 8 load into the legs; 9 push off; 10 accelerate into a low forward drive; 11 deepest committed crouched dash; 12 brief flight with tucked rear leg; 13 extend into landing; 14 absorb the landing; 15 recover; 16 guard. Use a strong lean and genuine knee tuck, not a flat standing slide. The head stamps deliberately move down and forward for this posture. Preserve head scale and body anatomy, not constant bounding-box height.\n\nRight hand always naturally grips the same continuous plain brown shaft, ONE cylindrical bronze collar and white horsehair. The whisk strands, sleeves, sash and side hair trail LEFT and lag the motion, then settle. Never switch hands, lose the whisk, add a second weapon or shorten its shaft. Keep all hair, weapon and boots inside the cell.\n\nSame adult female face, olive-brown almond eye, straight delicate brow, serene lips, flatter main hair cap, separate folded bun, jade pin and side strands. Ivory T1 robe, jade collar/cuffs/sash, narrow antique-gold edging, sparse ink hem, jade/ivory shoes. Two cel tones, highlight, narrow rim, tinted outlines, NW light.\n\nKeep actual head stamps at approximately 53.5 logical pixels crown-to-chin. Remove all grid, marks, borders and crop edges. Opaque #FF00FF. No floor, shadows, text, aura, lotus, talismans, particles, trails, blur, afterimages or extra figures.",
+  "references": ["../templates/hit-dash.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/hit-dash.attempt1.png",
+  "status": "candidate; full expected cells visually present; actual QA and posture evidence pending",
+  "sha256": "eff048a27e1e530ac832dfdfa0b3db17724df06b0a05ecb240bbbab9f096fc2f",
+  "historicalInputGuide": {
+    "originalToolPath": "../templates/hit-dash.head-guide.png",
+    "retainedReconstruction": "../templates/hit-dash-v1.head-guide.png",
+    "parameters": "../templates/hit-dash-v1.head-guide.json",
+    "method": "The original guide path was regenerated when dash stencil neck positions changed. This historical snapshot is deterministically reconstructed from the preserved initial dx/dy/angle arrays, same unchanged E master and same grouped-template public API. Raw AI output and original tool path/prompt are retained; no tool-attested call-time input hash exists."
+  },
+  "rawSha256": "eff048a27e1e530ac832dfdfa0b3db17724df06b0a05ecb240bbbab9f096fc2f",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/hit-dash.head-guide.png",
+      "sha256": "7918ecf4318ce4c944f01485f0442541982265301072020a262bafeceed3c1a8"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}
