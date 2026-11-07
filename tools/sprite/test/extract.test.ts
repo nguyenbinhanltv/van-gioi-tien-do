@@ -43,6 +43,24 @@ function cellFixture() {
   return { body, full, matte, expected };
 }
 describe('difference-assisted weapon extraction', () => {
+  it('recovers a back weapon underneath a semi-transparent body edge', () => {
+    const body = createImage(64, 64);
+    rect(body, 12, 12, 44, 52, [20, 40, 60, 128]);
+    const full = structuredClone(body),
+      matte = createImage(64, 64),
+      expected = createImage(64, 64);
+    // Independently calculated: PMA body(20,40,60,128) over red(255,0,0,255).
+    rect(full, 30, 20, 38, 40, [147, 40, 60, 255]);
+    rect(matte, 30, 20, 38, 40, [255, 255, 255, 255]);
+    rect(expected, 30, 20, 38, 40, [255, 0, 0, 255]);
+    const result = extractWeaponLayer(full, body, matte, { ...evidence(), order: 'back' }, thresholds, {
+      clip: 'attack',
+      frame: 0,
+    });
+    expect(result.findings).toEqual([]);
+    expect(result.weapon).toEqual(expected);
+    expect(result.recomposed).toEqual(full);
+  });
   it('recovers a semi-transparent foreground over opaque body using the reviewed matte', () => {
     const { full, body, matte, expected } = cellFixture();
     const result = extractWeaponLayer(full, body, matte, evidence(), thresholds, { clip: 'attack', frame: 0 });

@@ -186,7 +186,12 @@ export function extractWeaponLayer(
       const alpha = ba < 1 ? Math.max(0, Math.min(1, (fa - ba) / (1 - ba))) : coverage;
       let inconsistent = Math.abs((alpha + ba * (1 - alpha) - fa) * 255) > t.maxMatteError;
       for (let k = 0; k < 3; k++) {
-        const value = full.data[i + k]! - body.data[i + k]! * (1 - alpha),
+        const value =
+            e.order === 'front'
+              ? full.data[i + k]! - body.data[i + k]! * (1 - alpha)
+              : ba < 1
+                ? (full.data[i + k]! - body.data[i + k]!) / (1 - ba)
+                : 0,
           clamped = Math.max(0, Math.min(255 * alpha, value));
         if (Math.abs(value - clamped) > t.maxMatteError) inconsistent = true;
         weapon.data[i + k] = Math.round(clamped);
