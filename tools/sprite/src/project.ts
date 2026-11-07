@@ -79,7 +79,7 @@ export interface ProjectClip {
 }
 
 export interface Project {
-  /** Skull crown/chin on the resized 256px master; excludes secondary hair. */
+  /** Direction-specific skull landmarks on the resized256px master; excludes secondary hair. */
   readonly masterHead?: HeadLandmarks;
   readonly variant?: VariantProject;
   readonly character: string;
@@ -197,8 +197,10 @@ export function runProject(
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
+  if (project.masterHead?.kind === 'rear-skull-base' && !['NE', 'N'].includes(project.direction))
+    throw new Error('rear-skull-base master is allowed only for NE/N direction projects');
   if (project.masterHead !== undefined && headLandmarkSize(project.masterHead, master.width, master.height) === null)
-    throw new Error('invalid master skull crown/chin landmarks');
+    throw new Error('invalid master skull landmarks/breadth');
   const guides = guidesFromMaster(m);
   const palette: Color3[] = paletteFromMaster(master, project.palette);
   const lock = project.palette?.lock !== false;
