@@ -61,7 +61,9 @@ Cả **trang phục và vũ khí** đổi hình theo mốc cảnh giới. Cùng 
 | T4  | Luyện Hư–Hợp Thể    | Đuôi vải dài cầu kỳ; vũ khí nguyên tố có vệt, hạt hào quang thưa |
 | T5  | Đại Thừa–Độ Kiếp    | Mảnh nguyên tố nổi / pháp tướng; vũ khí biến hình                |
 
-Đây là nhóm **9 cảnh giới hiện hành**, không thêm cảnh giới mới và không đổi cân bằng. Trang phục cosmetic và skin vũ khí **bán riêng**; D44 không chốt giá, cửa hàng, chỉ số hay quyền lợi. Cách tách lớp và ghép khi chạy theo hợp đồng tooling được duyệt tiếp theo, không suy diễn từ sheet concept.
+Đây là nhóm **9 cảnh giới hiện hành**, không thêm cảnh giới mới và không đổi cân bằng. Trang phục cosmetic và skin vũ khí **bán riêng**; giá, cửa hàng, chỉ số và quyền lợi còn cần **chủ dự án xác nhận rõ** theo docs/30 §5. D44 không ủy quyền triển khai shop hoặc thanh toán; theo dõi [OPEN-ITEMS §13 D44-01](../OPEN-ITEMS.md#13-semi-chibi-d44-hợp-đồng-và-nghiệm-thu-còn-mở).
+
+**D44 bắt buộc sửa hợp đồng xuất D41 thành các lớp body + weapon + FX (D45, worker 27 đang xây dựng, chưa chốt/triển khai đầy đủ).** Chỉ giữ phương pháp vẽ AI từng khung và các cổng D41; **không giữ nguyên hợp đồng một body slot display-swap** và không khẳng định exporter hiện tại hỗ trợ đổi áo/skin vũ khí độc lập. Cần chốt socket/occlusion, đồng bộ frame, thứ tự vẽ và ghép runtime; không vẽ lại mọi tổ hợp áo × vũ khí × tier. Theo dõi D44-02; runtime tint/glow ở D44-03 và thủ tục khóa/đo canonical master ở D44-04 trong OPEN-ITEMS §13. Concept không đóng các khoảng trống đó.
 
 ## Phẩm chất độc lập với cấp hình dáng
 
