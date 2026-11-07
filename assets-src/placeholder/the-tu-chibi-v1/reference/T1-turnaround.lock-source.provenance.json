@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:24:02.099Z",
+  "utcRecordedCompleted": "2026-11-07T20:25:14.473Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. TINY anatomy/hair-cap correction to this five-view Thể tu T1 turnaround. KEEP EVERY FACE EXACTLY UNCHANGED: eyes/nose/mouth/chin/jaw positions and features must not move or reshape. Keep all poses/soles/clothes/ivory ink-wash apron/amber sash/simple gauntlets identical. Only two edits: (1) extend the TOP of MAIN HAIR CAP attached to skull UPWARD by about 10-12 pixels on this native724px-high sheet, making slightly taller cranial hair volume behind the swept bangs. This is NOT enlarging the elevated bun/topknot; keep bun top around20px native so it fits runtime headroom. In center FRONT S panel target main-cap crown y62-64, existing eye line stays y158-165, chin stays around210, soles700-704. Keep swept black hairstyle and face identity. (2) broaden anatomical shoulder joints modestly without lengthening body: in center FRONT S panel target shoulder joint span about205 native pixels vs current~186, symmetric; retain natural arm/gauntlet pose and compact tank anatomy. Carry same anatomical proportions to E/SE/NE/N, adjust projection naturally. H maincap crown-to-sole ~640; head cap-to-chin ~23%H, eyes ~15-16%H, shoulder joints~32%H. No written rulers or labels. Do not move facial features, do not stretch entire image, do not increase topknot height. Entire background perfectly flat opaque RGB255,0,255 MAGENTA. No transparent pixels, no halos, no shadows, no new decorations/armor/gems. Clean tinted outlines two-tone cel plus small highlight/rim, original premium semi-chibi design. Preserve five full bodies E SE S NE N and layout.",
+  "references": ["T1-turnaround.magenta.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-2ee0e35d-d7df-4ac7-8e0d-a2c81e35b4b9.png",
+  "status": "shared-landmark correction candidate; keyed derivation and manual measurements recorded separately",
+  "reviewBasis": "Style owner23 recommended raising main cap crown10-12 native pixels, preserving face, widening shoulder joints to~205 native px; one anatomical216/640 scale",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:25:14.473Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:21:05.717Z",
+  "utcRecordedCompleted": "2026-11-07T20:22:38.694Z",
+  "prompt": "Use case: identity-preserve. PROPORTION CORRECTION to this exact original Thể tu five-direction turnaround, not costume redesign. Preserve fixed tan adult square-jawed face, amber eyes, thick brows, anatomical left eyebrow nick, hairstyle/topknot, plain charcoal outfit, warm ivory ink-wash apron UNDER amber sash, simple paired charcoal gauntlets with bronze bands, same neutral poses and directions E SE S NE N. Required measurable construction: define upright H from TOP OF MAIN HAIR CAP THAT FOLLOWS SKULL to soles, exclude topknot/ponytail/loose strands. Main hair cap to chin must be 22-24%H; eye line 15-17%H BELOW main cap crown. Current eyes sit too high within overall H. Enlarge the WHOLE head including face and main hair cap uniformly about 12%, do not distort individual facial features; keep exact facial identity. Keep compact adult semi-chibi body. In front S anatomical shoulder-to-shoulder span (excluding biceps bulk, armor or gauntlets) must be 30-34%H, target32%; broaden shoulders slightly while preserving natural tank anatomy. Same anatomical proportions across all five views; same nominal standing height. Maintain small hands/feet, strong compact torso/legs, around4.5 heads. Keep two-tone cel shading plus small highlight/rim, tinted clean outlines, NW light, charcoal base/amber accent/bronze trim. OPAQUE SOLID RGB255,0,255 MAGENTA BACKGROUND ONLY, zero transparent pixels, no halos/fragments, no text/grid/rulers/shadows. Five full bodies in same layout, safe margins for slightly larger heads. Do not add decorations, gems, shoulder armor or aura. Original design.",
+  "references": ["T1-turnaround.magenta.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-14384f06-afb9-4348-b9f9-8437a910a800.png",
+  "status": "proportion candidate only; shared landmarks not yet verified; not canonical"
+}

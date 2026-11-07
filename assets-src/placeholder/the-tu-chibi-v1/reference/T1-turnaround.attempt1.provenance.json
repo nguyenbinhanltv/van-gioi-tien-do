@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:11:18.087Z",
+  "utcRecordedCompleted": "2026-11-07T20:12:28.471Z",
+  "prompt": "Use case: identity-preserve. Production character turnaround edit, original Thể tu male tank for a 2D isometric cultivation MMORPG. Reference image: approved T3 concept sheet; preserve its exact tan adult face, square jaw, amber eyes, thick brows and anatomical LEFT eyebrow nick, swept black hair and tied small topknot. Create canonical T1 Luyen Khi master turnaround in FIVE equally sized panels LEFT TO RIGHT E (right profile), SE (front right three-quarter), S (front), NE (back right three-quarter), N (back). Consistent slightly elevated isometric camera. Exactly the same neutral relaxed guarded standing pose, same crown and sole level, same anatomy and body height in all panels, roughly 4.5 heads crown to sole, compact strong adult body. Canonical SE figure also serves T1 master. Plain sleeveless charcoal wrap tunic, plain loose charcoal trousers, simple boots, broad amber orange hip sash with TWO short broad ends and sparse ink wash only at tips. Simplify T1 cloth: no embroidery, shoulder armor, gems, floating objects or aura. Paired oversized simple charcoal metal gauntlets WORN naturally on hands, exactly one smooth central knuckle plate and one bronze gold wrist band each, identical construction across views, no extra facets or jewels. Both fists separated from torso, visible where camera permits, fingers correct. Premium clean cel shading exactly two tones plus small highlight and narrow rim, tinted outlines, NW key light. One charcoal base plus amber accent and subordinate bronze gold trim, neutral skin/hair. Transparent background, no ground shadows, no labels, no diagrams, no text, no border, no commercial character resemblance. Five full bodies with generous safe margins, no cropping. Match fixed identity faithfully; change only tier outfit and arrange requested views.",
+  "references": ["C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-23/the-tu-t3.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-776f2391-5b1a-46f6-9f2e-99e6f95186aa.png",
+  "status": "candidate; anatomy, facial nick and shading review pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:12:28.471Z",
+    "basis": "Output ownership assigned to user subject to terms; original project-owned concept reference; no commercial reference inputs."
+  }
+}

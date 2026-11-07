@@ -4206,3 +4206,123 @@ Cùng điều khoản Output OpenAI ở mục Pháp tu B; model undisclosed by t
 ```
 
 <!-- THE-TU-SPRITES-N:END -->
+
+<!-- THE-TU-CHIBI-V1:BEGIN -->
+
+## Thể tu premium semi-chibi v1 — master checkpoint (2026-11-07 UTC)
+
+Nguồn: concept T3 gốc do worker 23 tạo cho dự án, chủ dự án duyệt phong cách ngày 2026-11-07. Không dùng ảnh tham chiếu thương mại. Công cụ `image_gen.imagegen`, model không công bố. Prompt, UTC bắt đầu/ghi nhận hoàn tất và đường dẫn đầu vào nằm trong các tệp provenance cạnh PNG; SHA256 trong `reference/image-hashes.json`. Bản thô được giữ nguyên; crop panel không nội suy, không vẽ lại pixel.
+
+Điều khoản kiểm tra ngày 2026-11-07 UTC: <https://openai.com/policies/row-terms-of-use/>, mục Content: quyền đối với Output được chuyển cho người dùng trong phạm vi pháp luật cho phép, theo điều khoản dịch vụ. Không gán nhãn CC0; không yêu cầu dòng ghi công riêng cho các Output này. Chưa xác nhận chất lượng hoạt cảnh, export hoặc capture Cocos tại checkpoint.
+
+| Tệp trong `assets-src/placeholder/the-tu-chibi-v1/reference/` | Nguồn / xử lý                                                    | Điều khoản                                     |
+| ------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------- |
+| `T1-turnaround.attempt1.raw.png`                              | AI từ concept T3 của worker 23; lần đầu                          | OpenAI Output; provenance cùng tên             |
+| `T1-turnaround.raw.png`                                       | AI edit lần đầu để đơn giản hóa shading và giữ dấu lông mày trái | OpenAI Output; `T1-turnaround.provenance.json` |
+| `T1-T5-front.attempt1.raw.png`                                | AI edit từ turnaround T1 và tier concept của worker 23           | OpenAI Output; provenance cùng tên             |
+| `T1-T5-front.raw.png`                                         | AI edit T5 để phân biệt silhouette với T4; giữ bản thô           | OpenAI Output; `T1-T5-front.provenance.json`   |
+| `T1.master-native.png`                                        | Bản sao panel SE canonical, không rescale                        | Dẫn xuất từ OpenAI Output                      |
+| `T1.front-native.png`                                         | Crop panel T1 từ `T1-T5-front.raw.png`, không rescale            | Dẫn xuất từ OpenAI Output                      |
+| `T2.front-native.png`                                         | Crop panel T2 từ `T1-T5-front.raw.png`, không rescale            | Dẫn xuất từ OpenAI Output                      |
+| `T3.front-native.png`                                         | Crop panel T3 từ `T1-T5-front.raw.png`, không rescale            | Dẫn xuất từ OpenAI Output                      |
+| `T4.front-native.png`                                         | Crop panel T4 từ `T1-T5-front.raw.png`, không rescale            | Dẫn xuất từ OpenAI Output                      |
+| `T5.front-native.png`                                         | Crop panel T5 từ `T1-T5-front.raw.png`, không rescale            | Dẫn xuất từ OpenAI Output                      |
+| `E.master-native.png`                                         | Crop panel E từ `T1-turnaround.raw.png`, không rescale           | Dẫn xuất từ OpenAI Output                      |
+| `SE.master-native.png`                                        | Crop panel SE từ `T1-turnaround.raw.png`, không rescale          | Dẫn xuất từ OpenAI Output                      |
+| `S.master-native.png`                                         | Crop panel S từ `T1-turnaround.raw.png`, không rescale           | Dẫn xuất từ OpenAI Output                      |
+| `NE.master-native.png`                                        | Crop panel NE từ `T1-turnaround.raw.png`, không rescale          | Dẫn xuất từ OpenAI Output                      |
+| `N.master-native.png`                                         | Crop panel N từ `T1-turnaround.raw.png`, không rescale           | Dẫn xuất từ OpenAI Output                      |
+
+<!-- THE-TU-CHIBI-V1:END -->
+
+### Thể tu chibi v1 — bổ sung sửa apron / key nền (2026-11-07 UTC)
+
+Cùng điều khoản OpenAI Output đã ghi ở mục trên. Các bản transparent đầu bị halo, không dùng làm master khóa. Master hiện tại chưa khóa tỉ lệ giải phẫu 216 px; giữ riêng số đo bbox và mốc tóc chính. Tất cả tệp dưới đây ở `assets-src/placeholder/the-tu-chibi-v1/reference/`.
+
+| Tệp                                       | Nguồn / xử lý                                                     | Điều khoản                                               |
+| ----------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------- |
+| `T1-apron.failed-alpha.raw.png`           | AI edit thêm apron; bị loại vì halo alpha                         | OpenAI Output; provenance cùng tên                       |
+| `T1-turnaround.magenta.raw.png`           | AI edit nền magenta, giữ apron                                    | OpenAI Output; provenance cùng tên                       |
+| `T1-turnaround.png`                       | `@vgtd/sprite` keyOut → defringe → removeFragments, không rescale | Dẫn xuất từ OpenAI Output                                |
+| `T1-proportions.attempt1.magenta.raw.png` | AI edit thử sửa tỉ lệ, chưa khóa                                  | OpenAI Output; `T1-proportions.attempt1.provenance.json` |
+| `T1-T5-front.magenta.raw.png`             | AI edit T1 thêm apron, nền magenta                                | OpenAI Output; provenance cùng tên                       |
+| `T1-T5-front.png`                         | `@vgtd/sprite` keyOut → defringe, không xóa mảnh trang bị T5      | Dẫn xuất từ OpenAI Output                                |
+
+Các crop `E/SE/S/NE/N.master-native.png` và `T1.master-native.png` hiện dẫn xuất từ `T1-turnaround.png`; `T1/T2/T3/T4/T5.front-native.png` hiện dẫn xuất từ `T1-T5-front.png`. Đây là cập nhật nguồn dẫn xuất sau sửa yêu cầu apron; các bản thô trước vẫn được giữ nguyên.
+
+<!-- THE-TU-CHIBI-E-INVENTORY:BEGIN -->
+
+### Thể tu chibi E — kiểm kê từng tệp (2026-11-07 UTC)
+
+Bảng đầy đủ tại checkpoint E, bao gồm bản thô bị thay và guide; không coi các bản bị loại là asset được nghiệm thu. Prompt, tool, model không công bố và UTC trong provenance. Không có ảnh thương mại làm đầu vào.
+
+| Tệp                                                                                          | Nguồn / xử lý                                     | Điều khoản                             |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------- | -------------------------------------- |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/attack.attempt1.png`                           | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/attack.attempt2.png`                           | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/attack_2.attempt1.png`                         | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/attack_3.attempt1.png`                         | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/cast.attempt1.png`                             | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/channel.attempt1.png`                          | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/die.attempt1.png`                              | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/emote.attempt1.png`                            | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/hit-dash.attempt1.png`                         | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/idle.attempt1.png`                             | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/meditate.attempt1.png`                         | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/run.attempt1.png`                              | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/sword_fly.attempt1.png`                        | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/tribulation.attempt1.png`                      | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/raw/walk.attempt1.png`                             | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/attack.template.png`                     | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/attack_2.template.png`                   | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/attack_3.template.png`                   | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/cast.template.png`                       | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/channel.template.png`                    | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/dash.template.png`                       | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/die.template.png`                        | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/emote.template.png`                      | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/hit-dash/group.template.png`             | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/hit.template.png`                        | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/idle.template.png`                       | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/meditate.template.png`                   | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/run.template.png`                        | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/sword_fly.template.png`                  | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/tribulation.template.png`                | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/E/templates/walk.template.png`                       | Guide từ mã dự án                                 | Nội bộ dự án                           |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/E.master-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/E.master.png`                              | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/N.master-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/N.master.png`                              | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/NE.master-native.png`                      | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/NE.master.png`                             | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/S.master-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/S.master.png`                              | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/SE.master-native.png`                      | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/SE.master.png`                             | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-apron.failed-alpha.raw.png`             | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-proportions.attempt1.magenta.raw.png`   | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-T5-front.attempt1.raw.png`              | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-T5-front.magenta.raw.png`               | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-T5-front.png`                           | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-T5-front.raw.png`                       | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.attempt1.raw.png`            | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.lock-source.raw.png`         | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.magenta.raw.png`             | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.master-source.raw.png`       | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.png`                         | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1-turnaround.raw.png`                     | AI Output thô; provenance cạnh tệp                | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1.front-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1.master-native.png`                      | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T1.master.png`                             | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T2.front-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T3.front-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T4.front-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `assets-src/placeholder/the-tu-chibi-v1/reference/T5.front-native.png`                       | Dẫn xuất AI Output; xem master-panels/calibration | OpenAI Output theo mục Thể tu chibi v1 |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E.sprite.json`    | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.json` | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.png`  | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_ske.json`       | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.json`       | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.png`        | Export DragonBones/atlas/contract từ project E    | Dẫn xuất OpenAI Output / mã dự án      |
+
+<!-- THE-TU-CHIBI-E-INVENTORY:END -->

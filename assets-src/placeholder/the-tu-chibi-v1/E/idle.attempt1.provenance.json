@@ -1,0 +1,19 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:27:05.677Z",
+  "utcRecordedCompleted": "2026-11-07T20:28:09.537Z",
+  "prompt": "Use case: identity-preserve. Production E-facing IDLE sprite sheet, original Th\u00e1\u00bb\u0192 tu T1 semi-chibi tank. Image1 EXACT master identity/outfit/scale, image2 exact4x4 lattice template. Fill16cells row-major with16CONSECUTIVE NEW drawings of a smooth subtle breathing idle loop, nominal24fps. ALL face strictly EAST/right profile, same fixed tan adult square-jawed amber-eyed thick-brow face, swept black hair/small flattened topknot, charcoal sleeveless wrap/trousers, warm IVORY ink-wash APRON under broad amber hip sash, amber hair ribbons, simple paired worn charcoal gauntlets one bronze wrist band/knuckle plate. Gauntlets stay naturally worn in relaxed guarded hands, far arm may be naturally occluded. Preserve exact original design, no armor/gems/aura. Both feet planted at fixed positions, pelvis stable; slight chest expand/rise frames0-7 then settle8-15. Hair/ribbon/sash/apron lag1-2frames and settle, SMALL motion, last to first seamless. Same body proportions and size EVERY frame, no camera motion or zoom. Template logical256cell: ground232, pelvis119, overall hair top6, anatomical cap near16, figure full silhouette226high. Requested output2048x2048 with4x4 square512px cells: double these guide coordinates. Fill each cell with exact master same scale, NEVER fill-to-box pose size. Keep whole body/weapon inside safe margins. MAGENTA RGB255,0,255 opaque background, clean tinted outlines two-tone cel plus small highlight/rim NW lighting. Template border lines may remain only exactly at cell boundaries; REMOVE interior guide lines under character and all guide marks, no labels/numbers/text, no shadows/effects/extra objects. Exactly16frames, no extra rows/columns. Smooth sequential breathing, not sixteen unrelated poses. Premium original game sprites.",
+  "references": ["../reference/E.master.png", "templates/idle.template.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-8b18eb13-8249-4f70-8c22-d2d8f864ed5f.png",
+  "clipProfile": "smooth-v2",
+  "frames": 16,
+  "nominalFps": 24,
+  "pipelineCommit": "645387a6129ab28c4a95c1943ba8f3fc9c3978cc",
+  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:28:09.538Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

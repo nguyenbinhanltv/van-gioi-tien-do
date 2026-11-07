@@ -1,0 +1,191 @@
+{
+  "utcRecorded": "2026-11-07T20:50:31.043061+00:00",
+  "sourceProfile": "D46 smooth-v2",
+  "clips": 15,
+  "drawings": 202,
+  "spriteQa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 26,
+    "regression": 0,
+    "info": 67
+  },
+  "poseExceptions": "Explicit per-frame in project.json; no threshold changes or individual frame fitting",
+  "repositoryChecks": {
+    "npm ci": "passed",
+    "npm run typecheck": "passed",
+    "npm test": "passed (existing legacy skips retained)",
+    "npm run build": "passed",
+    "npm run lint": "passed",
+    "npm run format:check": "passed",
+    "committed-projects.test.ts": "22 tests passed including new E project"
+  },
+  "cocos": {
+    "version": "3.8.8",
+    "exitCode": 0,
+    "zoom": 2,
+    "sample": "midpoint",
+    "samplesPerClip": 24,
+    "clips": 15,
+    "command": "node apps/client-cocos/scripts/capture.mjs --src dragonbones/the-tu-chibi-v1 --stem thetuchibi --direction E --mode single --animations all --frames 24 --zoom 2 --sample midpoint --gif --out <temporary-capture-dir>",
+    "index": "cocos-capture.json",
+    "artifacts": "AO session van-gioi-tien-do-24 master-checkpoint.html with15GIFs/15contact sheets",
+    "files": [
+      {
+        "file": "attack.gif",
+        "bytes": 189776,
+        "sha256": "a43358bbda05d1a513c0786cd48262cce3a20db54b4e669413762a3e4dc1f14c"
+      },
+      {
+        "file": "attack.sheet.png",
+        "bytes": 5599605,
+        "sha256": "04c7d174ce1edff89f9c1b87609fa45ff088d1cd336b2dcf61fb465fc252bb8f"
+      },
+      {
+        "file": "attack_2.gif",
+        "bytes": 200782,
+        "sha256": "98dd94ad2fd8c65cbc8f8e597f6210958fd42be1729da10f691443772c738980"
+      },
+      {
+        "file": "attack_2.sheet.png",
+        "bytes": 6177885,
+        "sha256": "c40842225f660335162cd5bf1cc4c1412b8a0533f202679cd0781010c097158f"
+      },
+      {
+        "file": "attack_3.gif",
+        "bytes": 185801,
+        "sha256": "77ec04a7c24fbe789a8eddc27670b2f24498bbece02fcf32f74d387d318214ce"
+      },
+      {
+        "file": "attack_3.sheet.png",
+        "bytes": 5320222,
+        "sha256": "cf480f8ade2cec132bf4a27e70cd5a3a7049b6ccd59a954d166657eab7a08c67"
+      },
+      {
+        "file": "cast.gif",
+        "bytes": 205426,
+        "sha256": "10bf2232a7532f6297a10b71d83585c37524db52299b6c6b174ea60debc7c2b8"
+      },
+      {
+        "file": "cast.sheet.png",
+        "bytes": 5149662,
+        "sha256": "2a8d08b4d761da077a911328b2c13e368250750eb977e78039916449f8e4821d"
+      },
+      {
+        "file": "channel.gif",
+        "bytes": 156918,
+        "sha256": "1c13ee71045fb5a1c7b8b16d172450d325b2a41ee9277e0d9ede0838144b3e8d"
+      },
+      {
+        "file": "channel.sheet.png",
+        "bytes": 4343242,
+        "sha256": "08f2d484f43082b144ed4c611315b5ad204ff04f51b8009519be69bf6e30843f"
+      },
+      {
+        "file": "dash.gif",
+        "bytes": 136794,
+        "sha256": "b4826779ec9b4360512dd01ff3f754fce4f128d5e7b215ef19a6e96cad85e2a5"
+      },
+      {
+        "file": "dash.sheet.png",
+        "bytes": 4005268,
+        "sha256": "d203f5a35b3a581054f84917ec9c23ff0d935bb2ba455273f80442392730c835"
+      },
+      {
+        "file": "die.gif",
+        "bytes": 140689,
+        "sha256": "fbb23d60e2151144517dfb0d79943b764a7cdbabb77dbc8158048ec122263552"
+      },
+      {
+        "file": "die.sheet.png",
+        "bytes": 4001398,
+        "sha256": "f115bf9fa3d04597d572e5961e548397a27a20beeebb2dfaf0501fed893aff98"
+      },
+      {
+        "file": "emote.gif",
+        "bytes": 136226,
+        "sha256": "a82d456476691044238d5843406c9078ab7e252247fca566c1dd081628873161"
+      },
+      {
+        "file": "emote.sheet.png",
+        "bytes": 3831372,
+        "sha256": "591687133b2b868291baf234c8758029cc47a21d61b67043ca97855f5fa1331b"
+      },
+      {
+        "file": "hit.gif",
+        "bytes": 81658,
+        "sha256": "2ab190d709ad33b7a62f0a7db44aef71b6f94a247e5471c56697b7f14e3fc901"
+      },
+      {
+        "file": "hit.sheet.png",
+        "bytes": 2664831,
+        "sha256": "e617786b05d1867173cb110089d5474537b3cb65c99a9026c47c952859fe539f"
+      },
+      {
+        "file": "idle.gif",
+        "bytes": 221855,
+        "sha256": "85f208f0888fb0aca14427f8f096da56c38724559d4b01b90dd245adc0797d83"
+      },
+      {
+        "file": "idle.sheet.png",
+        "bytes": 5295470,
+        "sha256": "6362385a8c6e49a1fcdaeb0d901126dda4195fdeaa9f5253a48211b675e119a6"
+      },
+      {
+        "file": "meditate.gif",
+        "bytes": 219588,
+        "sha256": "15ec8e1041c6522c566facf3f40aa245d8a5252bb18b2c79cdbb0412fb7bd812"
+      },
+      {
+        "file": "meditate.sheet.png",
+        "bytes": 5825874,
+        "sha256": "eb8278fa69563cad134a47f6e4972d05ecdcc2a4bcc4e05cfb9fa47b042f937c"
+      },
+      {
+        "file": "run.gif",
+        "bytes": 248677,
+        "sha256": "842a8992cf09a839fb3e4a9fb585fd163287bc4472cd599399559bbfbcf3583a"
+      },
+      {
+        "file": "run.sheet.png",
+        "bytes": 6550297,
+        "sha256": "c1b50c1da0f6acf4b33d9b98f08d9ca56168ff1ea2193c2d19ade7c3c4736ef2"
+      },
+      {
+        "file": "sword_fly.gif",
+        "bytes": 159216,
+        "sha256": "e8f3804a67de5405cc10930711d824bb68753f2bda112a63de3d2f3a967f5f3e"
+      },
+      {
+        "file": "sword_fly.sheet.png",
+        "bytes": 4487706,
+        "sha256": "81f2b90f877bd5dd661a6b96da86d85809ce9dc3b0f27c8f9647eee7e7c7e096"
+      },
+      {
+        "file": "tribulation.gif",
+        "bytes": 241680,
+        "sha256": "1999882f0c940cfec4d06b6c46b662c091f61b2c10adea399c4c296fe58253fb"
+      },
+      {
+        "file": "tribulation.sheet.png",
+        "bytes": 6953945,
+        "sha256": "7652ccc8c92b09c2d16f538a4c5e4e5b36ad8115f6d817cf500ef2bd7e4effea"
+      },
+      {
+        "file": "walk.gif",
+        "bytes": 195602,
+        "sha256": "743bc30c15bb80bb0fc071aafa5e6e277435e0dcb904c64ceffeeab6230ca166"
+      },
+      {
+        "file": "walk.sheet.png",
+        "bytes": 4960505,
+        "sha256": "69417bc1e0482d15acd3d16d5647d1e5d9647cee11abcef8cd8a129dd86887d2"
+      }
+    ]
+  },
+  "limitations": [
+    "26 accepted locomotion soft findings; manual art observations remain open",
+    "Full-weapon source compatibility export only; D45 layered extraction/composition pending tooling",
+    "SE/S/NE/N have reference masters only at this E milestone"
+  ]
+}

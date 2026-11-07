@@ -1,0 +1,18 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:13:05.407Z",
+  "utcRecordedCompleted": "2026-11-07T20:13:57.912Z",
+  "prompt": "Use case: identity-preserve. Create five FRONT-facing neutral standing full-body master variants of the same original Thể tu adult male semi-chibi tank. Image 1 is exact T1 master/identity target (use its central S front figure); image 2 is tier progression reference ONLY for outfit vocabulary. Five equal panels left-to-right T1,T2,T3,T4,T5. All five have EXACTLY IDENTICAL face, hair, body anatomy, arm/hand/foot pose, silhouette of the anatomical body and identical crown/sole levels. Lock tan skin, square adult jaw, amber eyes, thick brows with anatomical LEFT eyebrow nick, swept black hair/small tied topknot from image1. About 4.5 heads. Change only outfit and worn gauntlet designs across tiers. T1 EXACT plain charcoal sleeveless wrap and plain trousers, broad amber hip sash two short ends with sparse ink tips; simple chunky gauntlets with one central smooth knuckle plate and bronze wrist band, no gems/shoulder armor. T2 modest bronze edging and small sash knot ornaments, same large forms. T3 layered charcoal cloth panels, one bronze shoulder piece, amber inset gauntlet gem. T4 ornate longer amber/charcoal tails and angular bronze gauntlets. T5 regal broad layered sash, sparse floating bronze fragments associated with gauntlets. Do not change body pose for ornament. No aura painted over face/body, no giant background spirit, no floor shadow, no glow except tiny amber class accents. Quality grades are NOT variants. One charcoal base, one amber accent, subordinate bronze gold; clean tinted outlines, exactly two-tone cel shading plus small highlight/rim, NW lighting. All designs original. Transparent background. No text, labels, measurements or borders, no cropping. These are production front outfit references for later AI edits of T1 motion sheets, not separate motion sets.",
+  "references": [
+    "T1-turnaround.attempt1.raw.png",
+    "C:/Users/PC/.ao/data/artifacts/van-gioi-tien-do-23/the-tu-tiers.raw.png"
+  ],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-5fc30f68-1ada-4145-94d5-90deff439cef.png",
+  "status": "front outfit reference; not pose-registered motion edits",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:13:57.912Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

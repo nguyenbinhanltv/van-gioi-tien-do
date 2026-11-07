@@ -1,0 +1,17 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:31:53.083Z",
+  "utcRecordedCompleted": "2026-11-07T20:34:08.297Z",
+  "prompt": "SQUARE CANVAS 2048x2048. EXACTLY FOUR COLUMNS AND FOUR ROWS OF SQUARE512x512CELLS, total16cells,14used+2blank. DO NOT MAKE A WIDE RECTANGULAR SHEET. Match square geometry of attached lattice. Production original Th\u00e1\u00bb\u0192 tu T1 premium semi-chibi E/right-facing sprite animation. Image1 exact master identity/outfit/scale; image2 exact clip lattice. Fixed tan adult square-jawed amber-eyed thick-brow face, swept black hair/flattened topknot and amber ribbons, plain charcoal sleeveless wrap/trousers, warm IVORY ink-wash APRON under amber hip sash, simple paired WORN charcoal gauntlets one bronze wrist band and smooth knuckle plate. Same anatomy/face/outfit every frame. Natural hands IN gauntlets, no detached weapons. One charcoal base amber accent bronze trim, tinted outlines, TWO cel tones+small highlight/rim, NW light. Strict E profile except natural torso twist, do not change to SE. Logical cell256, ground232, standing silhouette226 with anatomical H216; template raw output2048wide with4columns =>512pxsquarecells (double coordinates). Preserve scale, camera and grid, never fit each pose to cell. Opaque uniform RGB255,0,255 MAGENTA; no labels/text/shadows/aura/extra objects. Remove interior guide marks, border only at exact cell edges. No cropping. Original design only.  Clip ATTACK straight near-fist punch E profile,14frames in row-major order. Cells0-3anticipation draw fist back and plant feet;4-6strike forward;7impact full extension;8impacthold;9-13retract/recover guard. Cells14,15EMPTY magenta. Every pose same anatomical size as reference (standing226of256 logicalcell height, crouch may shorten but NEVER shrink whole figure). Gauntlets stay oversized as master, ivory apron visible under amber sash. No camera changes. Delayed hair/ribbon/sash/apron movement. Clear2-tone cel original design. Square4x4lattice mandatory. No effects, no labels, no interiorguides, no shadow. Uniform opaque magenta background.",
+  "references": ["templates/attack.template.png", "../reference/E.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-141090b8-354d-46c2-8e24-31163b2c2266.png",
+  "clipProfile": "smooth-v2",
+  "frames": 14,
+  "status": "selected source; full E hard gates and real Cocos2x capture passed; soft/manual findings retained in quality-backlog.json",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:34:08.297Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  }
+}

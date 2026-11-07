@@ -1,0 +1,289 @@
+{
+  "character": "the-tu-chibi-v1",
+  "direction": "E",
+  "stem": "thetuchibi",
+  "master": "../reference/E.master.png",
+  "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "palette": {
+    "lock": true
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "raw/idle.attempt1.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.attempt1.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated: cross-legged pose; original anatomical scale retained",
+        "1": "seated: cross-legged pose; original anatomical scale retained",
+        "2": "seated: cross-legged pose; original anatomical scale retained",
+        "3": "seated: cross-legged pose; original anatomical scale retained",
+        "4": "seated: cross-legged pose; original anatomical scale retained",
+        "5": "seated: cross-legged pose; original anatomical scale retained",
+        "6": "seated: cross-legged pose; original anatomical scale retained",
+        "7": "seated: cross-legged pose; original anatomical scale retained",
+        "8": "seated: cross-legged pose; original anatomical scale retained",
+        "9": "seated: cross-legged pose; original anatomical scale retained",
+        "10": "seated: cross-legged pose; original anatomical scale retained",
+        "11": "seated: cross-legged pose; original anatomical scale retained",
+        "12": "seated: cross-legged pose; original anatomical scale retained",
+        "13": "seated: cross-legged pose; original anatomical scale retained",
+        "14": "seated: cross-legged pose; original anatomical scale retained",
+        "15": "seated: cross-legged pose; original anatomical scale retained"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "raw/walk.attempt1.png",
+      "manifest": "templates/walk.template.json"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "raw/run.attempt1.png",
+      "manifest": "templates/run.template.json",
+      "exceptions": {
+        "6": "airborne: both legs tucked in visible flight pose; original anatomical scale retained"
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "raw/hit-dash.attempt1.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "exceptions": {
+        "1": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained",
+        "2": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained",
+        "3": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
+        "4": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
+        "5": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
+        "6": "lunge: deep forward torso lean and compact airborne legs; original anatomical scale retained",
+        "7": "lunge: knee bend anticipation or landing recovery, original anatomical scale retained"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.attempt1.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "1": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "2": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "3": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "4": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "5": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "6": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "7": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "8": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "9": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "10": "airborne: bent knees in continuous hover, original anatomical scale retained",
+        "11": "airborne: bent knees in continuous hover, original anatomical scale retained"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.attempt2.png",
+      "manifest": "templates/attack.template.json"
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.attempt1.png",
+      "manifest": "templates/attack_2.template.json"
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.attempt1.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "2": "crouch: bent knees during uppercut anticipation, original anatomical scale retained",
+        "3": "crouch: bent knees during uppercut anticipation, original anatomical scale retained",
+        "4": "crouch: bent knees during uppercut anticipation, original anatomical scale retained",
+        "5": "crouch: bent knees during uppercut anticipation, original anatomical scale retained"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.attempt1.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.attempt1.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "raw/hit-dash.attempt1.png",
+      "manifest": "templates/hit-dash/group.template.json"
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.attempt1.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "3": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "4": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "5": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "6": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "7": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "8": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "9": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "10": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "11": "die-collapse: kneeling then lying curled on side; original anatomical scale retained",
+        "1": "recoil: chest bends backward before collapse, original anatomical scale retained",
+        "2": "recoil: chest bends backward before collapse, original anatomical scale retained"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.attempt1.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "0": "kneel: braced one-knee pose; original anatomical scale retained",
+        "1": "kneel: braced one-knee pose; original anatomical scale retained",
+        "2": "kneel: braced one-knee pose; original anatomical scale retained",
+        "3": "kneel: braced one-knee pose; original anatomical scale retained",
+        "4": "kneel: braced one-knee pose; original anatomical scale retained",
+        "5": "kneel: braced one-knee pose; original anatomical scale retained",
+        "6": "kneel: braced one-knee pose; original anatomical scale retained",
+        "7": "kneel: braced one-knee pose; original anatomical scale retained",
+        "8": "kneel: braced one-knee pose; original anatomical scale retained",
+        "9": "kneel: braced one-knee pose; original anatomical scale retained",
+        "10": "kneel: braced one-knee pose; original anatomical scale retained",
+        "11": "kneel: braced one-knee pose; original anatomical scale retained",
+        "12": "kneel: braced one-knee pose; original anatomical scale retained",
+        "13": "kneel: braced one-knee pose; original anatomical scale retained",
+        "14": "kneel: braced one-knee pose; original anatomical scale retained",
+        "15": "kneel: braced one-knee pose; original anatomical scale retained"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "raw/emote.attempt1.png",
+      "manifest": "templates/emote.template.json"
+    }
+  ]
+}
