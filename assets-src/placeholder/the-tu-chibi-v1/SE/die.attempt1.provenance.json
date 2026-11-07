@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:09:19.908Z",
+  "utcRecordedCompleted": "2026-11-07T22:09:48.225Z",
+  "prompt": "Use case: identity-preserve. Production original Th\u1ec3 tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. SE front-right3quarter slightly elevated isometric camera allframes. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT12consecutivedrawings in4columns x3rows RECTANGULAR4:3canvas2048x1536; square512cells, NO fourthrow, all12filledrowmajor. DEATH NONLOOP.0neutralguard,1stagger/shoulderrecoil,2kneesgive,3loweronto one knee,4torsofalls diagonallyright,5-7collapsecontrolled onto rightside,8-11lie still on side withtinyfinalcloth/hairsettling. Finalbodyfull-lengthsameanatomy216ishpx, lyingdiagonally lowercell; headsame47ishlogicalunit rotated inplane naturally withbody, neverenlarged. Stencils show approximateposition+size, mayrotateskull withcollapse not keepfloatinguprighthead. Feet endtowardleft, headtowardright, entirefigure/gauntlets/ribbons staywithincell afterpelviscentering; no limbdetachment/bodyshrink. Finalgauntlets restnaturalnextbody. FixedSEidentity evenwhenheadtilts; noextraweapons/FX/blood. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background.",
+  "references": ["templates/die.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-6c618c2d-06c7-4559-8d1b-540d2a0f80a1.png",
+  "status": "SE candidate; QA pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  }
+}

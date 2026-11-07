@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:05:10.879Z",
+  "utcRecordedCompleted": "2026-11-07T22:05:51.840Z",
+  "prompt": "Use case: identity-preserve. Production original Th\u1ec3 tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. SE front-right3quarter slightly elevated isometric camera allframes. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT14consecutive drawings in4x4SQUARE2048x2048canvas, squarecells; fillrowmajorcells0-13, leavecells14-15UNIFORMmagentaEMPTY. No rectangularcanvas. HEAVY LEFT HOOK toward lower-right.0-3guard/lowercenter/coil leftshoulder;4-6leftgauntlet sweeps broad chestlevelarc,7-8impacthold,9-11followthrough/clothlag,12-13returnguard. Rightgauntlet protects cheek, fist/forearm clearlyattached, no bodyviewflip. Broad tank shoulderpower, notmagicspell. Distinctprogressive smooth drawings, preserveimpact2framehold andfollowthrough, secondaryribbons/apron lag/settle. Headstencils indicate position+fixedsize, allowphysicalheadtilt but neverenlarge. No text/effects/extraweapons/emptyusedcells.",
+  "references": ["templates/attack_2.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-4154694c-8107-4d94-b3f9-042c3d30ffd9.png",
+  "status": "SE candidate; QA pending",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  }
+}

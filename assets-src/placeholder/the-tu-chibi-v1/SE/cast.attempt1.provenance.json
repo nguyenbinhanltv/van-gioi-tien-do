@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:58:56.484Z",
+  "utcRecordedCompleted": "2026-11-07T22:00:41.911Z",
+  "prompt": "Use case: identity-preserve. Production Th\u1ec3 tu T1 CAST SE,16consecutive animation drawings,4x4square2048x2048sheet. Image1 lattice with unscaled canonical head stencils; image2 full pinned SE master. Complete bodies below EXACT SAME SIZE heads; preserve adult tan squarejaw/ambereyes/thickbrows/leftbrow nick/black swept hair/smallbun. Do NOT enlarge head, no babyface. Same SE front-right threequarter slightly elevated isometric view throughout. Fullbody216px maincap crown-to-sole neutral atlogical256cell, ground232, entirebun-to-sole225maximum; NO perframefit/shrink. Feet stay planted in masterstance. Outfit charcoal sleeveless wrap/trousers, ivory ink-wash apron UNDER broad amber hip sash, simplepaired worncharcoal gauntlets one bronze wristband/smoothknuckleplate, amberribbons, goldtrim, no redesign. CAST gauntlet-based earth-energy palm:0-3anticipation settle/knee bend bringing gauntlets inward at waist,4-7inhale chest/armsrise and turn palms inward at chest,8-10forceful controlled two-handed forwardpress palms/fists naturally attached,11-12held release,13-15smoothfollowthroughsettle backmaster. Everyframe distinct and evenlyprogressive, impacthold2drawings subtle variation; preservegauntletweapons in naturalhands. No visualenergy/FX layer baked in; animation silhouette communicates cast. Hair/ribbon/sleeves/apron/sash lag6-10 then settle11-15. Fixedface/headstencilsize and bodypartlengths, no bodyrotation toEprofile. Keep all alpha awaycellborders afterpelviscentering, compactbun neverupwardarch. Two-tone cel+smallhighlight/rim,NWlight,tintedoutlines,charcoalbaseamberaccentbronze/ivorypanel. Flat uniformopaque255,0,255magenta, all16rowmajor squarecells. Remove guides/ghosts/text/stencilduplicateheads. No shadows/props/extraeffects. Originaldesign only.",
+  "references": ["templates/cast.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-29c6f64b-ec38-4734-8f97-832f6813aec0.png",
+  "status": "SE candidate; pending direction-specific QA",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output, original project inputs only"
+  }
+}

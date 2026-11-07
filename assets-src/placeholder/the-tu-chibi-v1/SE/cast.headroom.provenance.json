@@ -1,0 +1,14 @@
+﻿{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:13:51.725Z",
+  "utcRecordedCompleted": "2026-11-07T22:14:28.383Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Image1 is the original source to edit; image2 pinnedcanonicalSEmaster. Originalprojectdesign only. Precise SECONDARY HAIR HEADROOM correction ONLY in this16frame4x4cast sheet. Keep all16bodyposes/headfaceSKULLSIZE/camera/gauntlets/feet/clothes/cellpositions EXACT. Compact the ELEVATED BUN/TOPKNOT in ALL16cells: bun top at most6logicalpx ABOVE skull/mainhaircap crown, smalltiedtuft ratherthan tallbun. Allamberribbons/loosestrands flow back/down, no upwardarches. Maincap/faceunchanged. Reduceonlysecondaryhair enough that fullsilhouette max228logicalpx at256cell; no bodyshrinking/poseflattening. Existing alignment clips2-3pixels at top, so leave extra4-6logicalpx headroom. Retainhairtie/amberribbonidentity andsimplecelart. Same4x4squarecanvas/lattice, opaqueuniformmagenta, no text/FX.",
+  "references": ["raw/cast.attempt1.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-f4add57e-97fb-4d59-b15f-ea455606b10a.png",
+  "status": "Correction candidate; QA pending; original retained",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  }
+}
