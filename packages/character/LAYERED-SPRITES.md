@@ -21,3 +21,5 @@ This model does not extract weapons, paint hands, load Cocos textures or render 
 `docs/art/sprite-sheet-pipeline.md` and subsequent tooling/runtime changes for those stages.
 
 Quality glow requires an FX layer: providing glowTint without fx throws an explicit error. For a mapping with fxSet null, the caller must deliberately omit glowTint; that composition is unlit and shows no quality glow. Body and weapon pixels are never used as an implicit tint fallback.
+
+Weapon skin mappings may declare their matching fx set. Generated halos carry derivedFromWeapon; composition rejects a halo bound to another selected weapon. Tier aura remains independent from this silhouette-specific quality overlay.

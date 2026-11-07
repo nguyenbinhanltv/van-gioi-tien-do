@@ -58,6 +58,22 @@ export interface SeamMetric {
  * implementation; a Spine adapter could be added post-MVP if licensed (docs/32 section 6).
  */
 export interface CharacterActor {
+  setEquipmentVisuals?(
+    folder: string,
+    mapping: character.EquipmentVisualMapping,
+    appearance: character.EquipmentAppearance,
+  ): void;
+  clearEquipmentVisuals?(): void;
+  equipmentState?(): {
+    requested: character.ResolvedEquipmentVisuals | null;
+    installed: character.ResolvedEquipmentVisuals | null;
+    loading: boolean;
+    cacheEntries: number;
+    slots: readonly { name: string; display: number; visible: boolean }[];
+  };
+  onEquipmentFx?: ((selection: character.ResolvedEquipmentVisuals | null) => void) | null;
+  dispose?(): void;
+
   /** Node carrying position / mirror (scale.x = +-1). */
   readonly root: Node;
   /** Rig source folder / stem (may be changed before the first apply). */
@@ -79,7 +95,7 @@ export interface CharacterActor {
   restart(): void;
   /** Names of the clips in the loaded armature (empty when unknown). */
   clipNames(): string[];
-  /** Setup slot order of the loaded rig (back -> front). */
+  /** Current slot order, including per-frame z-order (back -> front). */
   slotOrder(): string[];
   /** RGBA tint (0..255) for ghost / onion-skin copies. */
   setTint(r: number, g: number, b: number, a: number): void;
