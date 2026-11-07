@@ -4237,6 +4237,161 @@ Cùng điều khoản Output OpenAI ở mục Pháp tu B; model undisclosed by t
 
 <!-- THE-TU-SPRITES-N:END -->
 
+<!-- PHAP-TU-CHIBI-V1:BEGIN -->
+
+## Pháp tu B premium semi-chibi — worker 25, 2026-11-07 owner style approval
+
+Original project-owned character design. No commercial game image used as an input. Built-in `image_gen.imagegen`; model undisclosed. Source terms checked 2026-11-07 UTC: [OpenAI Terms of Use](https://openai.com/policies/terms-of-use/), content/output ownership. No attribution required by those terms. Source attempts, exact prompts, UTC start observations and checksums are retained in `assets-src/placeholder/phap-tu-chibi-v1/provenance.json`. Generation is not proof of exclusive copyright or quality approval.
+
+| File under `assets-src/placeholder/phap-tu-chibi-v1/` | Source / author                                                  | Rights basis                                   | Use / status                                          |
+| ----------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------- |
+| `reference/approved-T3.reference.png`                 | Worker 23 original `phap-tu-t3.raw.png`; OpenAI image generation | Project-owned input/output; OpenAI terms above | Approved fixed-face/style reference; copied unchanged |
+| `reference/turnaround.attempt1.raw.png`               | Worker 25 / OpenAI image generation                              | OpenAI output ownership terms above            | Rejected raw; proportions and rear hand inconsistency |
+| `reference/turnaround.attempt2.raw.png`               | Worker 25 / OpenAI image edit                                    | Same                                           | Superseded raw; NE hand inconsistency                 |
+| `reference/T1-turnaround.raw.png`                     | Worker 25 / OpenAI image edit                                    | Same                                           | Selected turnaround candidate; anatomy review pending |
+| `reference/T1-T5-front.raw.png`                       | Worker 25 / OpenAI image edit                                    | Same                                           | Selected front tier candidates; FX extraction pending |
+| `reference/E.master.png`                              | Deterministic derivative of selected turnaround                  | Same source rights                             | Pipeline master candidate; one shared scale           |
+| `reference/SE.master.png`                             | Deterministic derivative of selected turnaround                  | Same source rights                             | Pipeline master candidate; one shared scale           |
+| `reference/S.master.png`                              | Deterministic derivative of selected turnaround                  | Same source rights                             | Pipeline master candidate; one shared scale           |
+| `reference/NE.master.png`                             | Deterministic derivative of selected turnaround                  | Same source rights                             | Pipeline master candidate; one shared scale           |
+| `reference/N.master.png`                              | Deterministic derivative of selected turnaround                  | Same source rights                             | Pipeline master candidate; one shared scale           |
+
+No production motion, hard QA, runtime swap or engine capture approval is asserted by these rows. Review notes live beside the assets. Higher tiers/costumes must derive from T1 motion sheets by pose-preserving image edits; quality colours are runtime tints.
+
+<!-- PHAP-TU-CHIBI-V1:END -->
+
+### Pháp tu B master corrections — worker 25
+
+Append-only clarification: the initial long-robe T1 candidates above are superseded. Selected T1 now matches the approved short tunic/trousers, earrings and pin tassel. The pin/bun is compacted for the shared 216 px anatomical crown-to-sole target; source anatomy landmarks exclude ornaments. The following additional files use the same OpenAI output-ownership terms and no required attribution:
+
+| File under `assets-src/placeholder/phap-tu-chibi-v1/` | Source / author                            | Use / status                                                   |
+| ----------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| `reference/approved-tiers.reference.png`              | Worker 23 original `phap-tu-tiers.raw.png` | Approved T1 costume and tier evolution input; copied unchanged |
+| `reference/turnaround.attempt3.raw.png`               | Worker 25 / OpenAI image edit              | Superseded long-robe T1 candidate                              |
+| `reference/turnaround.attempt4.raw.png`               | Worker 25 / OpenAI image edit              | Correct short-tunic T1; superseded ornament proportions        |
+| `reference/tiers.attempt1.raw.png`                    | Worker 25 / OpenAI image edit              | Superseded long-robe T1 tier strip                             |
+| `reference/tiers.attempt2.raw.png`                    | Worker 25 / OpenAI image edit              | Correct tier evolution; superseded tall pin/bun                |
+
+The existing rows for `T1-turnaround.raw.png`, `T1-T5-front.raw.png` and five derived masters refer to the corrected selected versions. Each version's exact prompt and input chain are retained in `provenance.json`; rejected raws are preserved under attempt filenames. All are master candidates until art review; no motion or engine approval is implied.
+
+<!-- PHAP-TU-CHIBI-E-MOTION:BEGIN -->
+
+### Pháp tu premium semi-chibi E — per-file asset register
+
+All paths below are under `assets-src/placeholder/phap-tu-chibi-v1/`. This register includes preserved rejected attempts and selected sheets; it does not approve rejected files for runtime. Exact prompts, tool/model-undisclosed, UTC observations and SHA-256 are in the adjacent provenance records. No commercial reference image was used.
+
+| File                                      | Source / author                                                | Rights basis                                                 |
+| ----------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------ |
+| `E/raw/attack.attempt1.png`               | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/attack_2.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/attack_3.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/cast.attempt1.png`                 | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/channel.attempt1.png`              | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/die.attempt1.png`                  | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/emote.attempt1.png`                | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/hit-dash.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/hit-dash.attempt2.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/idle.attempt1.png`                 | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/meditate.attempt1.png`             | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/run.attempt1.png`                  | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/sword_fly.attempt1.png`            | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/tribulation.attempt1.png`          | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/raw/walk.attempt1.png`                 | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/attack.png`                     | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/attack_2.png`                   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/attack_3.png`                   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/cast.png`                       | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/channel.png`                    | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/die.png`                        | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/emote.png`                      | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/hit-dash.png`                   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/idle.png`                       | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/meditate.png`                   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/run.png`                        | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/sword_fly.png`                  | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/tribulation.png`                | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/sheets/walk.png`                       | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `E/templates/attack.template.png`         | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/attack_2.template.png`       | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/attack_3.template.png`       | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/cast.template.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/channel.template.png`        | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/dash.template.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/die.template.png`            | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/emote.template.png`          | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/hit-dash/group.template.png` | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/hit.template.png`            | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/idle.template.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/meditate.template.png`       | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/run.template.png`            | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/sword_fly.template.png`      | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/tribulation.template.png`    | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `E/templates/walk.template.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/approved-T3.reference.png`     | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/approved-tiers.reference.png`  | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/E.master.png`                  | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/N.master.png`                  | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/NE.master.png`                 | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/S.master.png`                  | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/SE.master.png`                 | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/T1-T5-front.raw.png`           | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/T1-turnaround.raw.png`         | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/T1.front.master.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/T2.front.master.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/T3.front.master.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/T4.front.master.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/T5.front.master.png`           | In-house deterministic derivative; original project art inputs | OpenAI output ownership terms above; no attribution required |
+| `reference/tiers.attempt1.raw.png`        | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/tiers.attempt2.raw.png`        | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/turnaround.attempt1.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/turnaround.attempt2.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/turnaround.attempt3.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+| `reference/turnaround.attempt4.raw.png`   | Original project art; OpenAI imagegen output/edit              | OpenAI output ownership terms above; no attribution required |
+
+<!-- PHAP-TU-CHIBI-E-MOTION:END -->
+
+<!-- PHAP-TU-CHIBI-V1-REVISION:BEGIN -->
+
+### Pháp tu B corrected extraction and shipped E resources
+
+The corrected T1 turnaround was visually approved and locked by the orchestrator before E generation. The raw approved artwork is unchanged. Master extraction was subsequently corrected to preserve enclosed pale face/eye highlights and clear trapped white backdrop. This changes the derived master/palette, not the source design or anatomy. Exact generation input remains archived; all source sheet prompts/hashes remain traceable.
+
+| File                                                                                                | Source / author                                              | Rights basis / use                                                              |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| `assets-src/placeholder/phap-tu-chibi-v1/reference/E.master.generation-v1.png`                      | In-house derivative of original OpenAI-generated project art | Same OpenAI output ownership terms; archived exact input, superseded extraction |
+| `assets-src/placeholder/phap-tu-chibi-v1/E/raw/run.attempt2.png`                                    | OpenAI image edit of original project run sheet              | Same terms; unused attempt, earlier policy superseded during generation         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json`            | In-house sprite pipeline                                     | Original registered project art; full-frame D41 runtime export                  |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json`            | In-house sprite pipeline                                     | Same source rights; primary atlas metadata                                      |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png`             | In-house sprite pipeline derivative                          | Same source rights; primary PMA atlas                                           |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json`      | In-house sprite pipeline                                     | Same source rights; secondary atlas metadata                                    |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png`       | In-house sprite pipeline derivative                          | Same source rights; secondary PMA atlas                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json`         | In-house sprite pipeline                                     | Same source rights; reproducibility/QA contract                                 |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1.meta`                              | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json.meta`       | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json.meta`       | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png.meta`        | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json.meta` | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png.meta`  | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json.meta`    | Cocos Creator 3.8.8 project importer                         | Project-owned generated import metadata                                         |
+
+All OpenAI source rights above refer to the linked terms checked in the worker 25 section. No required attribution; no commercial reference image input. D45 extraction/layer swapping remains a follow-up and is not claimed by this full-frame export.
+
+<!-- PHAP-TU-CHIBI-V1-REVISION:END -->
+
+### Ghi chú kiểm chứng Pháp tu semi-chibi E — worker 25
+
+T1 đã được orchestrator khóa hình ảnh: áo ngắn và quần, tay áo dài, trâm có tua, khuyên tai; quạt đỏ son luôn ở tay trái giải phẫu trong cả năm hướng. Bộ E có 15 clip / 202 khung theo D46. Các sheet đầy đủ giữ quạt là nguồn trích lớp D45 về sau; chưa tuyên bố đổi trang phục/vũ khí độc lập ở runtime.
+
+Đã sửa lỗi tách nền trắng làm nhạt alpha ở vùng mặt sáng; raw được duyệt và các raw motion được chọn không đổi. Bản master đầu vào chính xác khi sinh ảnh được giữ ở `reference/E.master.generation-v1.png`. Hai số đo mềm đổi sau khi sửa đầu vào master được ghi cả giá trị cũ/mới và SHA trong `E/quality-baseline-migration.json`; lỗi chân vẫn mở, không bị đánh dấu đã sửa. Cổng D47 dùng 16 chú thích đầu theo từng ô run/dash, có bằng chứng và ghi INFO trong backlog; không co giãn riêng khung, không giảm độ động để ép hộp bao.
+
+Các bảng nguồn/quyền ở trên là sổ đăng ký từng tệp, giữ tên công cụ, thuật ngữ quyền và đường dẫn gốc để đối chiếu provenance. Bản xuất chính thức nằm ở thư mục Cocos mới `dragonbones/phap-tu-chibi-v1`; không thay các bộ bán hiện thực cũ.
+
+| Tệp bổ sung trong `assets-src/placeholder/phap-tu-chibi-v1/` | Nguồn                                                                                    | Quyền                                                                   |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `reference/E.master.alpha-fixed-unframed.png`                | Dẫn xuất xác định từ ảnh gốc của dự án; lưu master sau sửa alpha, trước dịch khung chung | Quyền đầu ra OpenAI đã kiểm tra ở mục worker 25; không yêu cầu ghi công |
+
+Toàn bộ master và khung chuyển động được dịch ngang cố định +1 px, không co giãn riêng khung. Kiểm tra canvas xác nhận không mất pixel alpha ở cả 202 khung; bản dựng Cocos 3.8.8 được chụp lại sau dịch khung.
+
 <!-- THE-TU-CHIBI-V1:BEGIN -->
 
 ## Thể tu premium semi-chibi v1 — master checkpoint (2026-11-07 UTC)

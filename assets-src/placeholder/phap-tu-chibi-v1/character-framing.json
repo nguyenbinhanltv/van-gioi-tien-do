@@ -1,0 +1,5 @@
+{
+  "x": 1,
+  "y": 0,
+  "reason": "One fixed character-wide +1px horizontal translation contains the leftmost dash edge: original dash local cell5 lost1opaque/6nonzero-alpha pixels. No fitting/rescale; anatomical216 and skull-size distances unchanged."
+}

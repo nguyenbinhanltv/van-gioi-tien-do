@@ -147,6 +147,8 @@ export interface Contract {
 }
 
 export interface ProjectResult {
+  /** Opt-in in-memory aligned pixels; never serialized to the contract. */
+  readonly alignedClips?: readonly { readonly name: string; readonly frames: readonly (Image | null)[] }[];
   readonly contract: Contract;
   readonly files: ReadonlyMap<string, Buffer | string>;
 }
@@ -172,7 +174,11 @@ export function validateFootSlideAlignment(
     );
 }
 
-export function runProject(project: Project, baseDir: string): ProjectResult {
+export function runProject(
+  project: Project,
+  baseDir: string,
+  options: { readonly includeAlignedFrames?: boolean } = {},
+): ProjectResult {
   for (const clip of project.clips)
     if (clip.heightPolicy !== undefined && clip.heightPolicy !== 'head-size-v1')
       throw new Error(`unknown height policy '${clip.heightPolicy}'`);
@@ -398,7 +404,13 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     files.set(`${textureStem(i)}.png`, encodePng(p.image, { premultiplied: true }));
   });
   files.set(`${name}.sprite.json`, JSON.stringify(contract, null, 2));
-  return { contract, files };
+  return {
+    contract,
+    files,
+    ...(options.includeAlignedFrames
+      ? { alignedClips: aligned.map((s) => ({ name: s.clip.name, frames: s.aligned.map((f) => f?.image ?? null) })) }
+      : {}),
+  };
 }
 
 /** Write the result files into `outDir`. */

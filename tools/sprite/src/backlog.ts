@@ -140,6 +140,8 @@ export const HARD_GATES: readonly Finding['gate'][] = [
   'similarity',
   'poseLock',
   'faceLock',
+  'weaponExtraction',
+  'handAlignment',
   'canvasLoss',
 ];
 

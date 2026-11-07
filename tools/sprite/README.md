@@ -200,3 +200,46 @@ secondary hair; grouped sheet indices remain clip-local. From sliced-cell coordi
 contract record.dx/dy. Contract/batch/backlog INFO and expandable review cards retain measurements, coordinates, bbox and
 note. Foot errors remain actionable. No automatic head detector or semantic anatomy certification is claimed.
 See the Vietnamese pipeline doc for the full authoring contract and migration notes.
+
+## Weapon extraction and hand QA primitives (D45)
+
+`extractWeaponLayer(full, bodyEdit, grayscaleMatte, cellEvidence, thresholds, { clip, frame })` compares same-sized,
+aligned premultiplied cells. The body-only edit removes the weapon and inpaints newly exposed hands/skin; the reviewed matte
+uses black/transparent=0, white=opaque, gray=weapon alpha coverage. Difference plus matte recovers visible foreground colour,
+including alpha over opaque body when the matte is accurate. It returns body/weapon/recomposed images, per-cell metrics and
+hard findings; no model is called and no art threshold is inferred.
+
+Each `ExtractionCell` declares front/back order, visible/hidden status, held/ridden/carried/detached attachment,
+requiredAnchors, anchors (`name`, source/body/optional weapon points), integer inpaint rectangles and reviewed note.
+Held weapons need hand_L/R contacts; paired gauntlets must declare both. Ridden weapons need foot contacts. Every required
+anchor must be present. Detached contacts are explicitly UNMEASURED INFO. Inpaint is bounded around reviewed body contacts.
+
+Explicit `ExtractionThresholds`: differenceThreshold, maxOutsideChangedPixels, maxInpaintAreaPixels,
+maxReconstructionChangedPixels, maxMatteError, minWeaponPixels, maxAnchorDistancePx and anchorRadiusPx.
+QA checks unrelated repaint, matte feasibility, visible/hidden consistency, source/body/grip alignment and nearby opaque
+pixels, plus reconstruction in the declared order. weaponExtraction/handAlignment failures cannot enter the quality backlog.
+
+`qualityGlowLayer(weapon, radius)` emits a neutral white premultiplied halo for runtime quality tinting, without six redraws.
+Matte coverage, hidden geometry and new hand anatomy need visual review; differences cannot uniquely identify alpha over an
+opaque background or reconstruct unseen weapon/body parts. Unchanged low-contrast matte pixels are reported for review.
+These are pixel/contact checks, not semantic anatomy recognition. Canonical guide/export CLIs follow in a separate change.
+
+## Canonical layer-edit references
+
+```sh
+npm run sprite:layer-template -w @vgtd/sprite -- --project path/to/project.json --out /tmp/layer-guides
+```
+
+Run only after the source project's QA passes, including canvas loss and backlog regression checks. The command writes
+transparent `source-N.full.png` sheets and `layer-inputs.json` with SHA256 project/master/guide hashes and clip-to-cell maps.
+Guides are canonical 4x4 at256px per cell (1024square); they copy exact aligned output pixels, never fit or realign poses.
+Original sheet grouping is retained, flattened into the canonical lattice. Conflicting versions of a shared cell fail.
+
+Use these exact full-pose references for AI weapon-removal edits: preserve all body/face/pose pixels and scale, remove only
+the weapon, inpaint exposed hands/skin, and retain the lattice. Produce a reviewed grayscale weapon-alpha matte separately.
+Declare returned DPI for subsequent whole-sheet normalization; do not align body and weapon independently. Paired gauntlets
+belong to the weapon set and need both hand contacts. Keep the original full-pose sources as provenance.
+
+`prepareLayerSources`/`writeLayerTemplates` are public APIs. `runProject(..., { includeAlignedFrames: true })` optionally
+retains aligned images in memory; default calls and serialized export files are byte-compatible. Independent layer-set
+export follows separately; this command produces edit references only.
