@@ -25,8 +25,12 @@ import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
 import { auditProjectVariant, type VariantProject, type VariantReference, type VariantAudit } from './variant.js';
+import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPolicy } from './head-evidence.js';
 
 export interface ProjectClip {
+  readonly heightPolicy?: HeightPolicy;
+  /** Clip-local frame indices; coordinates in the aligned 256px output cell. */
+  readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
   readonly variant?: VariantReference;
   /** Armature animation name. */
   readonly name: string;
@@ -71,6 +75,8 @@ export interface ProjectClip {
 }
 
 export interface Project {
+  /** Skull crown/chin on the resized 256px master; excludes secondary hair. */
+  readonly masterHead?: HeadLandmarks;
   readonly variant?: VariantProject;
   readonly character: string;
   readonly direction: Direction;
@@ -90,6 +96,8 @@ export interface Project {
 }
 
 export interface ClipContract {
+  readonly heightPolicy?: HeightPolicy;
+  readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
   readonly name: string;
   readonly frames: number;
   readonly kind: 'upright' | 'free';
@@ -110,7 +118,12 @@ export interface Contract {
   readonly character: string;
   readonly direction: Direction;
   readonly stem: string;
-  readonly master: { readonly sha1: string; readonly metrics: MasterMetrics; readonly guides: Guides };
+  readonly master: {
+    readonly sha1: string;
+    readonly metrics: MasterMetrics;
+    readonly guides: Guides;
+    readonly head?: HeadLandmarks;
+  };
   /** Character-wide calibration (null when every sheet carries its own). */
   readonly calibration: Calibration | null;
   readonly palette: { readonly size: number; readonly locked: boolean };
@@ -160,6 +173,9 @@ export function validateFootSlideAlignment(
 }
 
 export function runProject(project: Project, baseDir: string): ProjectResult {
+  for (const clip of project.clips)
+    if (clip.heightPolicy !== undefined && clip.heightPolicy !== 'head-size-v1')
+      throw new Error(`unknown height policy '${clip.heightPolicy}'`);
   const variant = auditProjectVariant(project, baseDir);
   const scale = project.preparation ? preparationScale(project.preparation, baseDir) : project.scale;
   if (project.preparation && project.scale !== undefined && project.scale !== scale)
@@ -169,6 +185,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
+  if (project.masterHead !== undefined && headLandmarkSize(project.masterHead, master.width, master.height) === null)
+    throw new Error('invalid master skull crown/chin landmarks');
   const guides = guidesFromMaster(m);
   const palette: Color3[] = paletteFromMaster(master, project.palette);
   const lock = project.palette?.lock !== false;
@@ -308,6 +326,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       manifest && s.clip.contacts ? applyContacts(manifest.cells, s.clip.contacts) : manifest?.cells;
     return {
       name: s.clip.name,
+      ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
+      ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
       direction: project.direction,
       ...(s.clip.footSlideUnmeasuredReason !== undefined
         ? { footSlideUnmeasuredReason: s.clip.footSlideUnmeasuredReason }
@@ -321,7 +341,12 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(speed !== undefined ? { groundPxPerFrame: groundPxPerFrame(speed, s.clip.durationSec, s.clip.frames) } : {}),
     };
   });
-  const rawQa = runQa(qaClips, { masterHeight: m.height, master, guides });
+  const rawQa = runQa(qaClips, {
+    masterHeight: m.height,
+    master,
+    guides,
+    ...(project.masterHead ? { masterHead: project.masterHead } : {}),
+  });
   const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
   const findings = [...rawQa.findings, ...(variant?.findings ?? [])];
   const verdict = applyBacklog(findings, project.direction, backlog);
@@ -341,7 +366,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     character: project.character,
     direction: project.direction,
     stem: project.stem,
-    master: { sha1: sha1(masterBuf), metrics: m, guides },
+    master: { sha1: sha1(masterBuf), metrics: m, guides, ...(project.masterHead ? { head: project.masterHead } : {}) },
     calibration: character,
     palette: { size: palette.length, locked: lock },
     atlas: {
@@ -352,6 +377,8 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       ...(pack.pages.length > 1 ? { textures: pack.pages.map((_, i) => textureStem(i)) } : {}),
     },
     clips: aligned.map((s) => ({
+      ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
+      ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
       name: s.clip.name,
       frames: s.clip.frames,
       kind: s.clip.kind ?? 'upright',

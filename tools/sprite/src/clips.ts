@@ -6,11 +6,13 @@
  *   import { SPRITE_CLIPS, spriteClip, SPRITE_CLIP_NAMES } from '@vgtd/sprite';
  */
 import { ANIMATIONS, type AnimationId, type AnimationEventSpec } from '@vgtd/character';
+import type { HeightPolicy } from './head-evidence.js';
 
 /** `upright`: every frame holds the master height (+-3 %); `free`: bending / airborne / seated poses declare exceptions. */
 export type ClipKind = 'upright' | 'free';
 
 export interface SpriteClipSpec {
+  readonly heightPolicy?: HeightPolicy;
   /** Armature animation name (`run`, `attack_2`, ...). */
   readonly name: string;
   /** Animation table entry the timing / events come from. */
@@ -122,6 +124,7 @@ function defaultsFor(c: SpriteClipSpec) {
     loop: c.loop,
     tableId: c.tableId,
     kind: c.kind,
+    ...(c.heightPolicy ? { heightPolicy: c.heightPolicy } : {}),
     ...(c.phases ? { phases: c.phases } : {}),
   };
 }
@@ -149,7 +152,17 @@ const SMOOTH_FRAMES: Readonly<Record<string, number>> = {
 /** New drawings at nominal 24 fps; export duration is quantized to the rig's 30 Hz clock. */
 export const SMOOTH_SPRITE_CLIPS: readonly SpriteClipSpec[] = SPRITE_CLIPS.map((legacy) => {
   const frames = SMOOTH_FRAMES[legacy.name]!;
-  return { ...legacy, fps: SMOOTH_CLIP_FPS, durationSec: frames / SMOOTH_CLIP_FPS, sheet: { frames, cols: 4 } };
+  const kind = legacy.name === 'dash' ? 'upright' : legacy.kind;
+  return {
+    ...legacy,
+    kind,
+    fps: SMOOTH_CLIP_FPS,
+    durationSec: frames / SMOOTH_CLIP_FPS,
+    sheet: { frames, cols: 4 },
+    ...(kind === 'upright'
+      ? { heightPolicy: 'head-size-v1' as const, exceptionHints: ['posture', 'secondary-overhang'] }
+      : {}),
+  };
 });
 
 export function smoothSpriteClip(name: string): SpriteClipSpec {

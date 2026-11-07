@@ -255,3 +255,43 @@ là lỗi cấu hình. Sheet gộp dùng mapping clip cho cả hai phía. Contra
 annotations và số đo từng ô, kể cả ô đạt. Xem schema/ví dụ ở README của `@vgtd/sprite`.
 
 Biến thể cũng pin masterImageSha256 của PNG master T1 và dùng lại PNG đó làm reference. Khóa mọi điều khiển ngoài storage/provenance: vertical (mặc định sole), kind (upright), contacts, tốc độ, exceptions, manifest cells/guides và slice; giữ đủ clip. Chỉ thay layout/DPI khi scale đầu ra bằng nhau. Khi xuất, dùng lại gốc căn từng ô T1 để phần vải mới không làm lệch thân vì centroid khác. Màu áo mới có thể giữ bằng palette lock tắt; không thay reference hình học T1.
+
+## Bằng chứng kích thước đầu D47
+
+[Cập nhật D47: giữ flight tuck, dash sâu, lunge và tóc secondary động; không làm phẳng pose để ép bbox.]
+
+`smoothProjectClipDefaults` tự gắn `heightPolicy: "head-size-v1"` cho clip upright; dash v2 nay là upright.
+Project đã viết trước PR phải thêm trường này và sửa dash thành `kind: "upright"`. Profile legacy không đổi.
+Emote upright cũng theo cùng chính sách. Dùng `exceptions` theo chỉ số clip từ 0, chỉ hai reason hợp lệ:
+`posture` và `secondary-overhang`. Generic `airborne`, `lunge`, `crouch` không được miễn cổng upright mới.
+
+Schema:
+
+```ts
+project.masterHead = { crown: { x, y }, chin: { x, y } };
+clip.heightPolicy = 'head-size-v1';
+clip.exceptions = { '6': 'posture' };
+clip.headEvidence = {
+  '6': { crown: { x, y }, chin: { x, y }, note: 'Mô tả pose và bằng chứng đã xem' },
+};
+```
+
+Mọi x/y là số hữu hạn, đo thực tế, không sao chép tùy tiện từ ví dụ. Crown là đỉnh sọ/main-cap gắn đầu,
+không lấy búi tóc, ponytail, dải vải hay secondary hair; chin là cằm. Độ lớn đầu = khoảng cách Euclid crown–chin,
+để đầu nghiêng không bị hiểu nhầm là co người. Master đo trên PNG master sau resize về ô 256 px @2x của pipeline.
+Điểm từng khung đo trên **ô output đã căn 256 px @2x**, không phải atlas trim, toàn sheet hay tọa độ Cocos.
+Nếu đo trên ô đã slice trước căn: `output = slicedPoint * calibration.scale + record.dx/dy`.
+Nếu bắt đầu từ toàn ô chuẩn hóa, trừ inset trước; calibration là hệ số cố định của sheet/nhân vật, không fit từng khung.
+Sheet gộp vẫn dùng chỉ số cục bộ clip: hit6 + dash10 có dash ở global6..15 nhưng evidence dash là local0..9.
+
+- Ô upright bbox trong master ±3%, không exception: giữ cổng bbox cũ, không bắt buộc evidence.
+- Ô exception hoặc bbox ngoài band: bắt buộc evidence + note, masterHead và reason hợp lệ.
+- Đầu phải trong master ±3%; sai đầu/thiếu evidence/generic reason là lỗi cứng. Không có crouch band -8%.
+- Mọi evidence đã cung cấp đều được kiểm, kể cả ô bbox trong band hay API legacy/free.
+- Khi đầu ổn và reason được xem, lưu INFO cùng bbox thật, kích thước đầu, điểm đo và note. Không đổi scale hay ảnh.
+- Lỗi chân, khung rỗng và cổng khác vẫn chạy; INFO không cho phép che foot slide/anatomy/face drift thật.
+
+Contract giữ masterHead và headEvidence; batch/backlog report giữ INFO, `sprite:backlog` in chúng và trang review
+có mục mở rộng **Head-size INFO evidence** theo ô. Bằng chứng nằm trong project/contract, không tự ghi vào danh sách
+soft finding đã chấp nhận của quality-backlog.json. Các pose được chấp nhận phải được người xem kiểm landmarks;
+chưa có head detector tự động. Variants phải giữ masterHead và các điều khiển/evidence của T1.
