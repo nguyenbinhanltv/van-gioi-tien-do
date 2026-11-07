@@ -324,6 +324,23 @@ có mục mở rộng **Head-size INFO evidence** theo ô. Bằng chứng nằm 
 soft finding đã chấp nhận của quality-backlog.json. Các pose được chấp nhận phải được người xem kiểm landmarks;
 chưa có head detector tự động. Variants phải giữ masterHead và các điều khiển/evidence của T1.
 
+## Primitive trích vũ khí và kiểm tay D45
+
+`extractWeaponLayer` nhận ô full/body-only/matte đã căn cùng kích thước, evidence và thresholds tường minh;
+không tự gọi model hay suy ngưỡng. Body-only là image edit bỏ vũ khí + inpaint tay/da. Matte grayscale biểu diễn alpha
+(đen/trong=0, trắng=đục, xám=bán trong). Difference + matte phục hồi phần vũ khí nhìn thấy, trả ảnh body/weapon/ghép lại,
+số đo và cổng cứng weaponExtraction/handAlignment.
+
+Mỗi ô khai báo front/back, hiện/ẩn, held/ridden/carried/detached, requiredAnchors, source/body/weapon points,
+vùng inpaint pixel nguyên và note đã xem. Quyền giáp đôi cần cả hand_L/R; ngự kiếm dùng foot; contact rời tay phải ghi chưa đo.
+Inpaint chỉ quanh contact đã xem và trong ngân sách diện tích khai báo. Kiểm repaint ngoài vùng, matte, sai order khi ghép,
+vũ khí hiện/ẩn, khoảng cách contact/tay/grip và pixel đục gần điểm bám. Backlog không miễn các lỗi cứng này.
+`qualityGlowLayer` tạo halo trắng tiền nhân, tint phẩm chất lúc chạy, không vẽ lại sáu bộ.
+
+Alpha trên thân đục, phần hình học bị che và anatomy inpaint vẫn cần xem art; primitive không nhận dạng anatomy hay tự vẽ
+phần khuất. Vùng matte ít khác nền nhưng không đổi được báo để kiểm. Ngưỡng phải khai báo, chưa chốt cấu hình chung.
+CLI tạo guide chuẩn và xuất set độc lập theo sau ở PR riêng.
+
 ## Không mất nội dung khi căn vào canvas
 
 Cổng cứng `canvasLoss` chiếu bbox opaque nguồn (alpha ≥128) qua scale cố định và dx/dy của alignment.

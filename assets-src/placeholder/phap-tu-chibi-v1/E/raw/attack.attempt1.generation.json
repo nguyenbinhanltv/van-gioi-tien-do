@@ -1,0 +1,21 @@
+{
+  "name": "attack",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED E master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT E strict right-facing profile in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx127.72. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP ATTACK_1 runtime'attack': SQUARE1:1CANVAS2048x2048. EXACT4equalcolumns4equalSQUARErows. Draw EXACT14 completeposes incells1-14rowmajor; cells15and16(lastrowlasttwo) EMPTY magenta. Smooth horizontal FAN STRIKE, no magicaltrail. 1neutral;2shouldersprepare;3drawleftfanhandback;4deepenwindupkneesbentslightly;5beginhorizontalwrist/armstrike;6fansweepforward;7extendarm;8IMPACT fanforwardatshoulderheight, firmleftgrip, freehandcounterbalance;9HOLDimpactnearlysamepose;10followthroughfanarcsacrossfront;11recoverfanhandtowardchest;12sleeves/hairlag;13settle;14neutralreadyforcombo. Face staysstrictE, no fullfrontalturn. Bodyanatomicalscaleconstant, clearanticipationnotjustidenticalposes; naturaljointarticulation. Fan remainsOPEN samevermilionpanels/goldribs, neverbecomessword. Keep hands readable, allhair/fan/feet insidelogicalx12..244 y8..244, don'tshrinkbodyforaction. Secondaryhair/sash/sleeveslag2framesandsettle. No effects/shadow/text/ghosts.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:36:48 UTC"
+  },
+  "references": ["reference/E.master.png", "E/templates/attack.template.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:37:44 UTC"
+  },
+  "raw": "raw/attack.attempt1.png",
+  "selected": "sheets/attack.png",
+  "status": "selected; complete E hard QA passed; accepted soft findings are explicit in quality-backlog.json",
+  "rawSha256": "fa0d12a22b4cae8f2371340f75fbbe67def7e283ef66f72cd0572ee872a2e235",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:37:30.478Z",
+  "selectedSha256": "fa0d12a22b4cae8f2371340f75fbbe67def7e283ef66f72cd0572ee872a2e235",
+  "referenceSnapshots": ["reference/E.master.generation-v1.png", "E/templates/attack.template.png"]
+}

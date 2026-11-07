@@ -36,7 +36,9 @@ export interface Finding {
     | 'poseLock'
     | 'faceLock'
     | 'canvasLoss'
-    | 'authoredOrigin';
+    | 'authoredOrigin'
+    | 'weaponExtraction'
+    | 'handAlignment';
   readonly severity: Severity;
   readonly clip: string;
   readonly frame?: number;

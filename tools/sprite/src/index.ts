@@ -19,6 +19,7 @@ export * from './batch.js';
 export * from './preparation.js';
 export * from './variant.js';
 export * from './head-evidence.js';
+export * from './extract.js';
 export * from './grouped.js';
 
 export * from './authored-origin.js';

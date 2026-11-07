@@ -1,0 +1,1093 @@
+{
+  "productionCell": 256,
+  "status": "pass",
+  "clips": [
+    {
+      "clip": "idle",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "walk",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "run",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "dash",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "sword_fly",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "attack",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "attack_2",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "attack_3",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "cast",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "channel",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "hit",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "tribulation",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 12,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 13,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 14,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 15,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    },
+    {
+      "clip": "emote",
+      "cells": [
+        {
+          "cell": 0,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 1,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 2,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 3,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 4,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 5,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 6,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 7,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 8,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 9,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 10,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        },
+        {
+          "cell": 11,
+          "opaqueLost": 0,
+          "anyAlphaLost": 0
+        }
+      ]
+    }
+  ],
+  "findings": [],
+  "note": "Same fixed calibration/translation sampled on a larger diagnostic canvas. Counts every nonzero-alpha pixel outside the production cell; no pose fitting or scaling."
+}

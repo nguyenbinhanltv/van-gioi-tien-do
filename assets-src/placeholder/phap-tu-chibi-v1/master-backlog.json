@@ -1,0 +1,31 @@
+{
+  "character": "phap-tu-chibi-v1",
+  "stage": "master-review",
+  "status": "locked-by-orchestrator",
+  "findings": [
+    {
+      "id": "anatomy-ratio",
+      "severity": "review",
+      "status": "reviewed",
+      "note": "Corrected oversized head and compacted bun/pin. Approximate front landmarks, excluding ornaments: anatomical H573 source px ->216px@2x, head23.9%, eyes16.4%, shoulder25.8%, with ±4sourcepx manual uncertainty. See anatomy-landmarks.json. Whole-alpha bounds are separate. Orchestrator visually approved and locked the corrected master before E motion generation."
+    },
+    {
+      "id": "fan-ribs",
+      "severity": "warn",
+      "status": "open",
+      "note": "T1 fan is now plain vermilion with no motif, matching the approved T1. Fan stays visible in rear views; small rib count/spacing differences remain. Lock weapon geometry during motion and layer extraction."
+    },
+    {
+      "id": "face-microdetail",
+      "severity": "warn",
+      "status": "open",
+      "note": "Face follows approved T3 identity; tiny beauty-mark placement and eyelash details need close inspection at game scale. They are not sole identity cues."
+    },
+    {
+      "id": "tier-fx",
+      "severity": "info",
+      "status": "planned",
+      "note": "T4/T5 concept arcs/fragments must become separate FX; do not bake them into runtime body/weapon layers."
+    }
+  ]
+}

@@ -226,3 +226,26 @@ Anatomical pelvis/root evidence must be honest: this is not permission to shift 
 When overrides are omitted, existing pixels/placement are unchanged. Overrides and applied source point/scale/dx/dy appear as INFO in contract,
 backlog CLI and review page. Height/head, foot and canvasLoss gates remain unchanged; incorrect origins can still fail.
 Variants inherit the T1 origins and cannot override them. Manual landmarks are not an automatic pelvis detector.
+
+## Weapon extraction and hand QA primitives (D45)
+
+`extractWeaponLayer(full, bodyEdit, grayscaleMatte, cellEvidence, thresholds, { clip, frame })` compares same-sized,
+aligned premultiplied cells. The body-only edit removes the weapon and inpaints newly exposed hands/skin; the reviewed matte
+uses black/transparent=0, white=opaque, gray=weapon alpha coverage. Difference plus matte recovers visible foreground colour,
+including alpha over opaque body when the matte is accurate. It returns body/weapon/recomposed images, per-cell metrics and
+hard findings; no model is called and no art threshold is inferred.
+
+Each `ExtractionCell` declares front/back order, visible/hidden status, held/ridden/carried/detached attachment,
+requiredAnchors, anchors (`name`, source/body/optional weapon points), integer inpaint rectangles and reviewed note.
+Held weapons need hand_L/R contacts; paired gauntlets must declare both. Ridden weapons need foot contacts. Every required
+anchor must be present. Detached contacts are explicitly UNMEASURED INFO. Inpaint is bounded around reviewed body contacts.
+
+Explicit `ExtractionThresholds`: differenceThreshold, maxOutsideChangedPixels, maxInpaintAreaPixels,
+maxReconstructionChangedPixels, maxMatteError, minWeaponPixels, maxAnchorDistancePx and anchorRadiusPx.
+QA checks unrelated repaint, matte feasibility, visible/hidden consistency, source/body/grip alignment and nearby opaque
+pixels, plus reconstruction in the declared order. weaponExtraction/handAlignment failures cannot enter the quality backlog.
+
+`qualityGlowLayer(weapon, radius)` emits a neutral white premultiplied halo for runtime quality tinting, without six redraws.
+Matte coverage, hidden geometry and new hand anatomy need visual review; differences cannot uniquely identify alpha over an
+opaque background or reconstruct unseen weapon/body parts. Unchanged low-contrast matte pixels are reported for review.
+These are pixel/contact checks, not semantic anatomy recognition. Canonical guide/export CLIs follow in a separate change.

@@ -1,0 +1,21 @@
+{
+  "name": "run",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED E master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT E strict right-facing profile in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx127.72. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP RUN: EXACT16frames4columns4rows square2048x2048,512rawpixelcells. Smooth energetic RUN IN PLACE screenRIGHT. Match image2 ghosts and coloredleadinglegmarkers; short planted stance then airborneflight, nearRbootcyan farLbootamber, two alternatinghalfcycles. Frames1Rcontactleftfoottrailing;2Rload;3Rpush;4earlyflight;5Lforwardswing;6Lcontact;7Lload;8Lpush;9flight;10Rforwardswing;11Rcontact;12Rload;13Rpush;14flight;15Lswing;16prepareseam. Feet describe broad clearopposedarcs, kneeslift but keep headheightstable within3% using pelviscompensation. Torsoleansforwardslightly no turningface, no croucheddeformedbody. Leftfanhand holdsopenfan infront naturally stablewrist. Rightfreearm pumps subtly. Hair/ribbons/sleevestreamback and lag2frames, recoverthroughseam. Keep wholebodyinclflights within eachcell no trails/FX. Same character shape/scale asidle, no shrink or stretch.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:31:43 UTC"
+  },
+  "references": ["reference/E.master.png", "E/templates/run.template.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:32:44 UTC"
+  },
+  "raw": "raw/run.attempt1.png",
+  "selected": "sheets/run.png",
+  "status": "selected; complete E hard QA passed; accepted soft findings are explicit in quality-backlog.json",
+  "rawSha256": "a842b9f8df5aa54533560d9b794e94513a369bfe2bbb14695198413d3f30ff23",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:32:22.043Z",
+  "selectedSha256": "a842b9f8df5aa54533560d9b794e94513a369bfe2bbb14695198413d3f30ff23",
+  "referenceSnapshots": ["reference/E.master.generation-v1.png", "E/templates/run.template.png"]
+}
