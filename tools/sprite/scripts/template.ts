@@ -17,6 +17,8 @@ import {
   guidesFromMaster,
   locomotionCells,
   SPRITE_CLIPS,
+  SMOOTH_SPRITE_CLIPS,
+  smoothPoseTags,
   measureFigure,
   resizeImage,
   CELL_PX,
@@ -34,10 +36,17 @@ const opt = (n: string, d = '') => {
 };
 const cwd = process.env.INIT_CWD ?? process.cwd();
 const clip = opt('clip');
+const profile = opt('profile', 'legacy');
+if (!['legacy', 'smooth-v2'].includes(profile)) throw new Error('--profile must be legacy or smooth-v2');
 // frames / cols default to the clip table of the pipeline (SPRITE_CLIPS) when the clip is one of the 15
-const tableClip = SPRITE_CLIPS.find((c) => c.name === clip);
+const tableClip = (profile === 'smooth-v2' ? SMOOTH_SPRITE_CLIPS : SPRITE_CLIPS).find((c) => c.name === clip);
+if (profile === 'smooth-v2' && !tableClip) throw new Error(`unknown smooth-v2 clip '${clip}'`);
 const frames = Number(opt('frames', String(tableClip?.sheet.frames ?? 0)));
 const cols = Number(opt('cols', String(tableClip?.sheet.cols ?? 6)));
+if (!Number.isInteger(frames) || frames < 1 || !Number.isInteger(cols) || cols < 1)
+  throw new Error('frames and cols must be positive integers');
+if (profile === 'smooth-v2' && (frames !== tableClip!.sheet.frames || cols > 4 || Math.ceil(frames / cols) > 4))
+  throw new Error('smooth-v2 requires the official frame count and at most a 4x4 lattice');
 if (!clip || !frames || !opt('master') || !opt('out'))
   throw new Error('usage: --clip <name> --frames <n> --cols <n> --master <png> --out <dir>');
 let master = decodePng(readFileSync(resolve(cwd, opt('master'))));
@@ -53,7 +62,11 @@ const derivedHalfStride = () => {
   const id = gait as 'run' | 'walk';
   const speed = groundSpeedPxS(id, direction);
   if (speed === null) throw new Error(`--gait ${gait} has no table ground speed`);
-  return halfStrideFor(speed, opt('duration') ? Number(opt('duration')) : tableDuration(id), stance);
+  return halfStrideFor(
+    speed,
+    opt('duration') ? Number(opt('duration')) : (tableClip?.durationSec ?? tableDuration(id)),
+    stance,
+  );
 };
 let cells: CellSpec[] | undefined;
 if (opt('cells')) cells = JSON.parse(readFileSync(resolve(cwd, opt('cells')), 'utf8')) as CellSpec[];
@@ -66,6 +79,7 @@ else if (gait !== 'none')
     first: opt('first', 'R') as 'L' | 'R',
     stance,
   });
+if (profile === 'smooth-v2' && !cells) cells = smoothPoseTags(clip).map((tag) => ({ leading: null, tag }));
 const t = buildTemplate({ clip, frames, cols, guides, ...(cells ? { cells } : {}) });
 const out = resolve(cwd, opt('out'));
 mkdirSync(out, { recursive: true });
