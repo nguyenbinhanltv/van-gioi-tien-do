@@ -183,6 +183,21 @@ Phiên bản này giữ thuật toán assembler Đan/Phù tu: chỉ bỏ viền 
 
 Contract giữ `sheetSha1` của PNG chuẩn hóa, thêm `preparation` theo clip: `rawSha1`, kích thước thô/chuẩn hóa, crop và hệ số DPI. Sheet nguồn, guide sinh ảnh, provenance, phase và pose exception giữ nguyên. Audit project đã commit kiểm tra bước chuẩn bị và chặn DPI lẫn chưa khai báo; không diễn giải đầu vào thô thành lỗi art cứng.
 
+## Nhiều clip trên một sheet
+
+`buildGroupedTemplate` và CLI `sprite:template-group --group <json> --master <png> --out <dir>` gộp clip ngắn
+vào một lưới tối đa 4×4. JSON gồm `clips: [{ name, frames, cells? }]` và `cols?` (mặc định 4).
+API/CLI xuất template, manifest toàn sheet và mapping cho từng clip (`group.clips.json`).
+Pose/ghost của từng clip phải được tạo theo thời lượng/hướng của chính clip trước khi gộp.
+
+Trong project, mỗi clip giữ `name`, thời lượng, sự kiện, calibration, loại và exceptions riêng;
+cùng trỏ `sheet`/`manifest`, thêm `sheetSelection: { rows, cells }`. `cols`/`rows` mô tả toàn sheet,
+`cells` là chỉ số ô từ 0 theo hàng, theo thứ tự phát của clip; số phần tử phải bằng `frames`, không trùng hay vượt lưới.
+Manifest được chọn bằng đúng mapping này. Chỉ số exceptions, contacts, referenceFrames và QA vẫn tính từ 0 trong từng clip.
+Chuẩn bị DPI chạy trên toàn sheet rồi mới chọn ô; hợp đồng giữ hash toàn sheet + mapping, không suy đoán vị trí từ tên clip.
+Không khai báo selection thì giữ đường đi cũ. `hit` 6 + `dash` 10 vừa 4×4; `hit` + `die` hay `idle` + `emote`
+của v2 vượt 16 ô, phải tách hoặc chọn nhóm khác. Gộp chỉ giảm lần gọi sinh ảnh, không miễn QA hay giảm số khung.
+
 ## Clip semi-chibi mượt v2
 
 [Cập nhật D46: profile mới opt-in, bảng D41 phía trên vẫn phục vụ asset cũ.]

@@ -5,6 +5,7 @@ import { createImage, decodePng, type Image } from '@vgtd/rig';
 import type { Project } from './project.js';
 import { resizeImage } from './repair.js';
 import { CELL_PX } from './types.js';
+import { sheetLayout } from './grouped.js';
 
 export interface ProjectPreparation {
   readonly kind: 'square-cell-dpi-v1';
@@ -19,7 +20,8 @@ export function auditProjectPreparation(project: Project, baseDir: string): void
     const pitches: number[] = [];
     for (const clip of project.clips) {
       const raw = decodePng(readFileSync(resolve(baseDir, clip.sheet)));
-      if (project.preparation) normalizeSheetDpi(raw, clip.cols, clip.frames);
+      const grid = sheetLayout(clip);
+      if (project.preparation) normalizeSheetDpi(raw, grid.cols, grid.frames);
       else if (!clip.calibration) pitches.push(raw.width / clip.cols);
     }
     if (pitches.length > 1 && Math.max(...pitches) - Math.min(...pitches) > 1)
