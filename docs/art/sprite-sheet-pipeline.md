@@ -229,3 +229,31 @@ Walk/run dùng duration v2 để tính stride và ghost; sinh lại template, kh
 Với hướng có stride y, giữ `vertical: "keep"`; khai báo tiếp đất thật và kiểm QA như D41.
 Magenta là đường đi chroma-key hiện hành; giữ sheet gốc và guide/provenance. Atlas nhiều trang được phép,
 không giảm ô hay scale để ép vừa một trang. Chưa có helper AI in-between trong profile này.
+
+## Layer manifest và composer D45
+
+`@vgtd/character` xuất `SpriteLayerSet`, `validateSpriteLayerSet`, `composeSpriteLayers`,
+`namespaceSpriteLayerAtlas`, `SpriteLayerCache`, `EquipmentVisualMapping` và `resolveEquipmentVisuals`.
+Đây là hợp đồng browser-safe, không đọc file hay gọi model/engine. Extraction/export và adapter Cocos là bước riêng;
+manifest/composer chưa chứng minh art đã được trích hoặc swap set trong game.
+
+Manifest `vgtd-sprite-layer-set` v1 gồm `id`, `role` (`body`/`weapon`/`fx`), `direction`, `motionId` dùng chung T1,
+`frameRate` từ clock công khai, `canvas` (width/height/pivotX/pivotY), `textures` (resource stem trong thư mục set),
+`displays` (tên/region, vị trí tâm y xuống so pivot, kích thước logic + kích thước texture) và `clips`.
+Clip gồm `name`, `duration` tick, `loop`, `frames: [{ at, display, order? }]`, `events: [{ at, name }]`.
+Frame đầu ở tick 0, ticks tăng nghiêm ngặt trong duration. Weapon bắt buộc `order: front/back` ở mọi khung,
+kể cả khung ẩn (`display: null`); body không được ẩn. Cả ba set phải có cùng motionId, hướng, canvas, tick, loop và sự kiện.
+
+Composer tạo đúng một armature với display-swap body/weapon, FX additive tùy chọn, z-order từng khung và **một** timeline
+sự kiện lấy từ body. Atlas/displays được namespace theo role + setId để các set không đụng region.
+Phải namespace từng atlas page trước khi đăng ký chung nhóm texture; không sửa atlas đầu vào.
+Geometry dùng tỉ lệ kích thước logic/texture, không giảm body theo atlas. Test parser DragonBones thật Cocos 3.8.8
+xác nhận cấu trúc hợp lệ; test render/swap runtime theo sau adapter.
+
+Mapping `vgtd-equipment-visuals` v1 có `tiers.T1..T5: { body, weapon, fx, aura }`, `costumes: { id: { body } }`,
+`weaponSkins: { id: { weapon } }` và `qualityGlow` chứa đầy đủ sáu QualityId từ shared, mỗi màu RGBA chuẩn hóa 0..1.
+Màu phải lấy từ nội dung chuẩn D6/D44; module không sao chép palette hay quyết định giá/chỉ số.
+`resolveEquipmentVisuals(mapping, { tier, quality, costume?, weaponSkin?, hideCostume? })` chọn độc lập body/weapon;
+hideCostume chỉ bỏ body cosmetic, không bỏ weapon skin. FX/aura theo tier; glowTint áp dụng slot FX, không nhuộm lại thân.
+`aura` là ID hook riêng, không phải chỉ số chiến đấu. Cache chỉ tải cặp set/hướng được yêu cầu, gộp request đồng thời,
+cho retry khi lỗi và hỗ trợ evict/clear; không preload toàn bộ tier/cosmetic.
