@@ -382,3 +382,17 @@ Với lunge có pelvis di chuyển có chủ đích: dùng `kind: "lattice-root"
 evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvisX là X đăng ký cố định, **không phải pelvis anatomy
 đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
 Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.
+
+## Tinh chỉnh D47: đầu phía sau NE/N che cằm
+
+Không bịa hay chiếu landmark cằm. Dùng `masterHead` trên master khóa của chính direction đó và `headEvidence` ở ô aligned:
+kind `rear-skull-base`, crown, skullBase, breadth `{left,right}`; mỗi điểm là `{x,y}`. Evidence ô thêm note đã xem.
+SkullBase là điểm chẩm nơi đầu phía sau nối cổ/đường chân tóc gáy nhìn thấy. Đo Euclid crown→skullBase và bề ngang sọ
+tối đa, không tính tóc rời/búi/phụ kiện; cả hai phải trong ±3% đúng phép đo trên master cùng hướng. Master dùng ô256px
+sau resize, evidence dùng ô output256px đã căn; chỉ số nội bộ clip, kể cả sheet nhóm. Không đổi scale/fit từng frame.
+
+Kind này chỉ cho NE/N và bắt buộc breadth ở master lẫn ô; kind khác master, chin giả kèm theo, điểm/breadth sai hoặc drift
+đều lỗi cứng. Evidence crown/chin cũ vẫn tương thích, kind mặc định crown-chin. Breadth phía trước tùy chọn nhưng nếu
+khai báo thì phải có cả master/ô và luôn kiểm. Điều kiện exception/bbox và reason posture/secondary-overhang giữ nguyên.
+Contract, backlog và review hiện kind, điểm skullBase, kích thước/bề ngang cùng giá trị master theo direction dưới INFO.
+Lỗi chân và canvasLoss vẫn giữ nguyên; annotation này không phải detector sọ tự động.
