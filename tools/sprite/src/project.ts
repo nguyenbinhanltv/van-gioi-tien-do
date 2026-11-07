@@ -12,6 +12,7 @@ import { decodePng, encodePng, type Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { alignFrame, calibrate, type AlignedFrame, type Calibration, type FrameRecord } from './align.js';
 import { buildArmature, type ClipInput } from './export.js';
+import { selectSheetCells, sheetLayout, type SheetSelection } from './grouped.js';
 import { facingGroundVector, groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
 import { packFrames } from './pack.js';
@@ -32,6 +33,8 @@ export interface ProjectClip {
   readonly cols: number;
   /** Frames (cells in use). */
   readonly frames: number;
+  /** Explicit cells from a shared sheet; absent preserves the legacy contiguous layout. */
+  readonly sheetSelection?: SheetSelection;
   /** Template manifest JSON of this sheet (foot ghosts, leading legs); optional. */
   readonly manifest?: string;
   readonly tableId?: AnimationId;
@@ -88,6 +91,7 @@ export interface ClipContract {
   readonly frames: number;
   readonly kind: 'upright' | 'free';
   readonly sheetSha1: string;
+  readonly sheetSelection?: SheetSelection;
   /** Present only for explicitly prepared source sheets. */
   readonly preparation?: SheetPreparation & { readonly rawSha1: string };
   /** The fixed scale this sheet was aligned with (the character calibration unless the sheet has its own). */
@@ -171,16 +175,15 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const sliced = project.clips.map((c) => {
     const buf = readFileSync(resolve(baseDir, c.sheet));
     const raw = decodePng(buf);
-    const prepared = project.preparation ? normalizeSheetDpi(raw, c.cols, c.frames) : undefined;
+    const grid = sheetLayout(c);
+    const prepared = project.preparation ? normalizeSheetDpi(raw, grid.cols, grid.frames) : undefined;
     // The original assembler writes then reads a PNG: retain its PMA quantization exactly.
     const preparedBuf = prepared ? encodePng(prepared.image) : buf;
     const sheet = prepared ? decodePng(preparedBuf) : raw;
-    const frames = sliceSheet(
-      sheet,
-      { cols: c.cols, rows: Math.ceil(c.frames / c.cols), frames: c.frames },
-      sliceOptions,
-    ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f));
-    const rows = Math.ceil(c.frames / c.cols);
+    const frames = selectSheetCells(sliceSheet(sheet, grid, sliceOptions), c.sheetSelection).map((f) =>
+      lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f,
+    );
+    const rows = grid.rows;
     const r0 = cellRect(sheet.width, sheet.height, c.cols, rows, 0);
     const inset = Math.round(Math.min(r0.width, r0.height) * (project.slice?.inset ?? 0.01));
     const groundY = (guides.ground / CELL_PX) * r0.height - inset;
@@ -229,9 +232,23 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
 
   // 3. align (translation only) + records
   const aligned = sliced.map((s) => {
-    const manifest: TemplateManifest | null = s.clip.manifest
+    const sourceManifest: TemplateManifest | null = s.clip.manifest
       ? (JSON.parse(readFileSync(resolve(baseDir, s.clip.manifest), 'utf8')) as TemplateManifest)
       : null;
+    if (
+      sourceManifest &&
+      s.clip.sheetSelection &&
+      (sourceManifest.grid.cols !== s.clip.cols || sourceManifest.grid.rows !== s.clip.sheetSelection.rows)
+    )
+      throw new Error(`clip '${s.clip.name}': shared manifest grid does not match sheetSelection`);
+    const manifest =
+      sourceManifest && s.clip.sheetSelection
+        ? {
+            ...sourceManifest,
+            cells: selectSheetCells(sourceManifest.cells, s.clip.sheetSelection),
+            frames: s.clip.frames,
+          }
+        : sourceManifest;
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
     validateFootSlideAlignment(project, s.clip, manifest?.cells);
     const calibration = sheetCalibration(s);
@@ -328,6 +345,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
       frames: s.clip.frames,
       kind: s.clip.kind ?? 'upright',
       sheetSha1: s.sheetSha1,
+      ...(s.clip.sheetSelection ? { sheetSelection: s.clip.sheetSelection } : {}),
       ...(s.preparation ? { preparation: s.preparation } : {}),
       calibration: s.calibration,
       records: s.aligned.map((a) => a?.record ?? null),

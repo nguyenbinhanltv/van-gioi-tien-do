@@ -107,3 +107,22 @@ Raw mixed-DPI grids can declare `"preparation": { "kind": "square-cell-dpi-v1", 
 This version matches the original Dan/Phu assembler: remove external blank black/transparent top/bottom rows only when needed to recover square cells (1px cell-grid tolerance, 3px crop rounding), resize the entire grid to `CELL_PX` cells, then apply the locked character scale. This is an explicit sheet DPI conversion, never a per-frame fit or atlas downscale. Non-square content and missing/invalid calibration fail as **non-reproducible project** before art QA. Sheets already normalized by an external assembler must omit `preparation`.
 
 Prepared contracts retain `sheetSha1` for the normalized PNG and add each clip's `preparation` with `rawSha1`, raw/normalized dimensions, crop bounds, and DPI scale factors. Original sheets, generation guides, phases, pose annotations, and backlog remain unchanged. Projects without preparation retain the existing export format. The committed-project audit validates preparation and rejects undeclared mixed sheet DPI without per-sheet calibration; it does not label raw normalization errors as art findings.
+
+## Grouped clip sheets
+
+`buildGroupedTemplate({ clips: [{ name: 'hit', frames: 6 }, { name: 'dash', frames: 10 }], guides })`
+returns a maximum 4x4 template and `clips` mappings. Each clip may supply its own `cells` (pose tags/foot ghosts).
+Generate those locomotion cells using that clip's duration and direction before grouping.
+CLI: `npm run sprite:template-group -w @vgtd/sprite -- --group <group.json> --master <master.png> --out <dir>`.
+The group JSON contains `clips` and optional `cols` (default 4); output is `group.template.png`, `group.template.json`,
+and `group.clips.json`. The latter contains exact project mappings; add each clip's own timing/events/kind/calibration,
+and point `sheet` and `manifest` at the shared generated PNG and full-sheet manifest.
+
+Project clips opt in with `sheetSelection: { rows: 4, cells: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15] }`.
+`cols` describes the whole sheet; `frames` is this clip's count. `cells` are unique zero-based row-major sheet indices
+in playback order. Counts, integer bounds and full-manifest dimensions are checked. Without selection, old behavior is unchanged.
+`exceptions`, `contacts`, calibration reference frames and QA frame indices remain clip-local (starting at zero).
+DPI preparation normalizes the full shared grid before cell selection; provenance records full-sheet hash and selection.
+The shared manifest is selected with the same mapping, so ghosts and leading-leg labels cannot leak from another clip.
+A 6-frame hit + 10-frame dash fits 4x4. Larger combinations (including smooth hit+die or idle+emote) exceed 16 cells;
+choose smaller groups or separate sheets. Grouping saves generation calls, not runtime atlas memory or QA requirements.
