@@ -4,7 +4,7 @@ Chủ dự án đã duyệt hướng concept ngày 2026-11-08: “ổn đó tri�
 
 ## Tỉ lệ và khuôn mặt cố định
 
-**[Cập nhật D44: dùng chung [sheet dựng tỉ lệ bốn Đạo Lộ](semichibi-proportions.svg).]** Sheet là vector có mốc đo thật, không phải thước do AI vẽ và không thay mặt/costume master. Chuẩn hóa chiều cao đứng H từ đỉnh khối tóc chính đến đế chân; cùng H danh định cho bốn lớp, dải dựng 98–102% H. Pixel đích khi chuẩn hóa theo hợp đồng tooling chung, không tự tạo hằng số pipeline mới ở từng lớp.
+**[Cập nhật D44: dùng chung [sheet dựng tỉ lệ bốn Đạo Lộ](semichibi-proportions.svg).]** Sheet là vector có mốc đo thật, không phải thước do AI vẽ và không thay mặt/costume master. Chuẩn hóa chiều cao đứng H từ đỉnh khối tóc chính đến đế chân; cùng H danh định **216 px @2x (108 px @1x), dung sai pipeline ±3%** cho bốn lớp. Ô logical 256 px, vạch đất 232 để lại khoảng 16 px trên đỉnh danh định cho tóc/trâm. Đây là khóa master mỹ thuật đã đo, không thêm hằng số tooling. Vũ khí giơ cao, mảnh nổi và FX dùng lớp riêng hoặc ngoại lệ pose khai báo; không thu nhỏ thân.
 
 | Mốc dựng        | Dải theo H                     | Cách đo                                                      |
 | --------------- | ------------------------------ | ------------------------------------------------------------ |

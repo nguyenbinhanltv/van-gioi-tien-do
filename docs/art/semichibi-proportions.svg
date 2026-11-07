@@ -52,8 +52,8 @@
 <path d="M-48 118H48" stroke="#70bda0" stroke-width="2" stroke-dasharray="4 3"/>
 <text x="0" y="443" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#213544">Đan/Phù tu</text><text x="0" y="472" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#52636b">Vai 24–28% H</text></g>
 <rect x="60" y="705" width="1320" height="165" rx="10" fill="#e9e2d3"/><g font-family="sans-serif" fill="#344c59" font-size="17">
-<text x="85" y="738">H = chiều cao từ đỉnh khối tóc chính đến đế chân; cùng H danh định, dải dựng 98–102% của H.</text>
+<text x="85" y="738">H từ đỉnh tóc chính đến đế: 216 px @2x (108 px @1x), dung sai pipeline ±3%; mọi lớp cùng H.</text>
 <text x="85" y="769">Đầu + tóc chính: mục tiêu 22% H, cho phép 20–24%. Mắt: 15–17% H dưới đỉnh (giữ mặt master).</text>
 <text x="85" y="800">H và đầu đều bỏ búi cao / topknot / đuôi tóc / trang trí. Vai bỏ giáp và tay áo; VFX / vũ khí ở ngoài H.</text>
-<text x="85" y="831">Tỉ lệ là chuẩn dựng mỹ thuật; pixel đích theo hợp đồng tooling chung. Giữ một tỉ lệ toàn cục, không kéo giãn từng frame.</text>
+<text x="85" y="831">Ô 256, đất 232: đỉnh H danh định ở y16. Tóc/trâm phải vừa; vũ khí/FX ở lớp riêng. Không thu nhỏ thân.</text>
 </g></svg>
