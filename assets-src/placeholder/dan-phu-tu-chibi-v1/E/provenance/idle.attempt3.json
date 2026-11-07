@@ -1,0 +1,28 @@
+{
+  "clip": "idle",
+  "dir": "E",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:49:55 UTC",
+  "utcEnd": "2026-11-07 21:50:18 UTC",
+  "prompt": "Use case: precise sprite animation edit. Image 1 is TARGET: 4x4 lattice containing 16 identical calibrated master figures as authoring scaffolding. Image 2 is fixed E-facing female identity. Produce a finished 16-frame IDLE LOOP, row-major, on EXACT same square lattice. Preserve the character dimensions and anatomical proportions already placed in each cell: canonical 216px crown-maincap to soles in a logical256 cell, bun top3px, soles232px, head maincap-to-chin53.5px. Do NOT enlarge body/head or lengthen legs. Preserve bootsole coordinates and overall standing pose. Animate subtle breathing across16 distinct sequential frames: chest/shoulder rises at most1px; left open palm slightly flexes; whisk horsehair, side strands, sleeves and jade sash softly lag and settle, smoothly return into frame1. Hair bun never grows or exits cell. Right hand naturally grasps one continuous plain brown whisk shaft, ONE bronze cylindrical collar, white horsehair. Fixed adult female face, olive brown almond eyes, delicate straight brow, same nose lips jaw. Ivory and jade T1 robes, antique gold narrow trims, sparse ink-wash hem. Cel shading2tones + highlight + thin rim, tinted outlines, NW light. Remove ALL lattice rules, dashed lines and guides, keep perfectly uniform flat #ff00ff magenta outside character; no shadows, no text, no floating talisman or other FX. Exact4x4 16figures, generous margins, no cropping. Edit the full-body reference figures into motion; preserve their existing size and anatomical construction.",
+  "references": ["../templates/idle.master-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/idle.attempt3.png",
+  "status": "full-body calibrated input edit candidate; actual QA pending",
+  "sha256": "fb2700f2c1a7ad238922bfcfcb1b49c76272bd638e1f6e285d5b2d0f41cdbfa3",
+  "rawSha256": "fb2700f2c1a7ad238922bfcfcb1b49c76272bd638e1f6e285d5b2d0f41cdbfa3",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/idle.master-guide.png",
+      "sha256": "af06533355a09ea84c84eb4b1813b04f75b8affc001b2d40ccb13a03bbbec2fd"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

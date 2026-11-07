@@ -1,0 +1,29 @@
+{
+  "convention": "Semantic boundary edges; crown midpoint before first attached-maincap row excluding identifiable bun/tie/pin; chin midpoint after last jaw row. Integer raster samples are pixel centers, not edges.",
+  "original": {
+    "crown": {
+      "x": 120,
+      "y": 16
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 66.2
+    },
+    "status": "superseded manual approximation; crown at transparent gap; previous denominator must not be retained"
+  },
+  "selected": {
+    "crown": {
+      "x": 119,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 137.5,
+      "y": 66.5
+    }
+  },
+  "size": 53.31275644721439,
+  "band": [51.71337375379796, 54.91213914063082],
+  "reference": "../reference/E.corrected-master.png",
+  "review": "Style23 explicit semantic-boundary decision 2026-11-07 UTC; PNG unchanged; no source rescale.",
+  "masterSha256": "1a2e22da5b831a000e30978da194f90bfe5899793c9efc6a5f5e6e581d6dba21"
+}

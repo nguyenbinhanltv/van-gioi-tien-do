@@ -1,0 +1,28 @@
+{
+  "clip": "meditate",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:07:14 UTC",
+  "utcEnd": "2026-11-07 21:07:39 UTC",
+  "prompt": "Use case: precise-object-edit. Image1 is EDIT TARGET, a4x4lattice with sixteen ACTUAL MASTER HEAD STAMPS atCORRECT seatedposition andCORRECT fixedsize. Image2 isfullT1Eidentity/outfit/whiskreferenceONLY. COMPLETE the sixteen SEATED MEDITATION bodies BELOW theexistingheads; KEEP EXISTINGHEADS their exactpixel-size, sameposition/orientation, samefaceidentity. DoNOT enlargeor move heads tofillcells. Eyesmayclosegently,buthead/facegeometryunchanged. SameadultfemaleEprofile noseRIGHT/maincap/foldedbun/jadepin. Existingheadscrown-to-chin~53.5logicalpx iscorrect; retain it. Addplainivorywraprobe/jadecollar,cuffs,sash/thinantiquegoldedge/tinysparseinkhem,seatedcrossleggedfoldedlegs,jadeivoryshoesatgroundline232. Headstampsinlogical256cell: buntop67,maincap80,chin130; shoulderaround143,pelvis170,foldedknees190–215,robe/heelsground232. So seatedfiguretop-to-sole165logicalpx, NOT227standingheight. Leave LARGE EMPTYMAGENTA SPACE ABOVEheads exactlyasguide; do notfillthatspacebyupsizingfigure. Right handnaturallyholds SAMEbrownwoodwhiskcontinuousshaftONE cylindricalbronze collarwhitehorsehair curled acrosslap/outsideknee, fullyretainedALL16frames. Lefthandrestspalmupfrontknee. NOlotus/talismans/aura/platform/FX. Sixteen sequentialsubtlebreathingposes: neutral→gentleinhale4poses→peak2→settle2→neutral→gentleexhale4→settle→nearfirst. Head/bodyscaleconstant, onlytinychest/sleeve/sidehairlag, shaft/collarandgripstable. Same2celtones+highlight+narrowrim/materialtintedlines/NWlight. KEEP4cols4rows16wholecharacters, square sheet SAMElayout. RemoveALLgridlines/guideborders/headcropedges/text/dots. FlatopaqueMAGENTA#FF00FF background, no shadows/floor/extraheads. Originalclassidentityfixed. Keypriority: preserveheadstampsSIZEandPOSITION, finishnaturalseatedbodiesunderneath; NOTredrawlargerfullcellcharacters.",
+  "references": ["../templates/meditate.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/meditate.attempt2.png",
+  "status": "candidate; authoring head stamps preserve intended scale; actual output QA and measurements pending",
+  "sha256": "e562a9f8d5bb50b83a1349b1eb7e143aecdbc71ef5bb0fa5bcb4ce323a3d9624",
+  "rawSha256": "e562a9f8d5bb50b83a1349b1eb7e143aecdbc71ef5bb0fa5bcb4ce323a3d9624",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/meditate.head-guide.png",
+      "sha256": "20c358d0a84b5c49b73484266b644986fd25b85abe9a9153578be140dca6e897"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

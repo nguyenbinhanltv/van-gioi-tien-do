@@ -1,0 +1,73 @@
+{
+  "status": "construction candidate; approximate art landmarks from corrected T1, not an automatic detector",
+  "targetHeight": 216,
+  "ground": 232,
+  "reference": "T1",
+  "inputs": [
+    {
+      "id": "T1",
+      "source": "raw/front.attempt8.png",
+      "output": "T1.corrected-front.png",
+      "landmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      }
+    },
+    {
+      "id": "T2",
+      "source": "raw/tier2.attempt2.png",
+      "output": "T2.corrected-front.png",
+      "landmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      }
+    },
+    {
+      "id": "T3",
+      "source": "raw/tier3.attempt2.png",
+      "output": "T3.corrected-front.png",
+      "landmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      }
+    },
+    {
+      "id": "T4",
+      "source": "raw/tier4.attempt2.png",
+      "output": "T4.corrected-front.png",
+      "landmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      }
+    },
+    {
+      "id": "T5",
+      "source": "raw/tier5.attempt2.png",
+      "output": "T5.corrected-front.png",
+      "landmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      }
+    }
+  ]
+}
