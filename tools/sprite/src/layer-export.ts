@@ -49,6 +49,7 @@ export interface LayerExtractionProject {
   readonly version: 1;
   readonly project: string;
   readonly projectSha256: string;
+  readonly masterImageSha256: string;
   readonly motionId: string;
   readonly bodySet: string;
   readonly weaponSet: string;
@@ -164,11 +165,18 @@ export function runLayerExtraction(spec: LayerExtractionProject, baseDir: string
   )
     throw new Error('invalid layered extraction project');
   [spec.bodySet, spec.weaponSet, spec.fxSet].forEach(assertVisualSetId);
+  if (new Set([spec.bodySet, spec.weaponSet, spec.fxSet].map((id) => id.toLowerCase())).size !== 3)
+    throw new Error('layer set IDs must not collide on a case-insensitive filesystem');
   validateExtractionThresholds(spec.thresholds);
   const projectPath = resolve(baseDir, spec.project),
     bytes = readFileSync(projectPath);
   verify(bytes, spec.projectSha256, 'source project');
   const source = prepareLayerSources(projectPath);
+  verify(
+    readFileSync(resolve(dirname(projectPath), source.project.master)),
+    spec.masterImageSha256,
+    'source master image',
+  );
   if (
     spec.clips.length !== source.project.clips.length ||
     new Set(spec.clips.map((c) => c.name)).size !== spec.clips.length

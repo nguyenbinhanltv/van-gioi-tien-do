@@ -307,10 +307,10 @@ npm run sprite:layers -w @vgtd/sprite -- --project path/to/layer-extraction.json
 ```
 
 `LayerExtractionProject` is exported publicly. Its header is `format: 'vgtd-layer-extraction'`, `version: 1`, source
-`project`/`projectSha256`, shared T1 `motionId`, distinct `bodySet`/`weaponSet`/`fxSet`, `glowRadiusPx`, and explicit
+`project`/`projectSha256`/`masterImageSha256`, shared T1 `motionId`, distinct `bodySet`/`weaponSet`/`fxSet`, `glowRadiusPx`, and explicit
 `ExtractionThresholds`. Every source clip must appear once in `clips`, declaring `name`, canonical `templateSha256`,
 `bodySheet`/`bodySheetSha256`, `weaponMatte`/`weaponMatteSha256`, edit `{tool,prompt}` and clip-local `cells: ExtractionCell[]`.
-File paths are relative to the extraction JSON. Use `layer-inputs.json` to select the canonical guide and its cell map.
+File paths are relative to the extraction JSON. Use `layer-inputs.json` for the project/master hashes, canonical guide and cell map.
 Its `cells` indices refer to the canonical4x4 lattice, including when the original source grid had another column count.
 
 Body edits and mattes are normalized as whole4x4 sheets; every selected output cell retains the original aligned pose,

@@ -113,6 +113,7 @@ function projectFixture() {
     version: 1,
     project: 'project.json',
     projectSha256: source.projectSha256,
+    masterImageSha256: source.masterImageSha256,
     motionId: 'test-t1-v2',
     bodySet: 'body_t1',
     weaponSet: 'weapon_t1',
@@ -205,6 +206,24 @@ describe('canonical layer authoring/export', () => {
   it('pins references and writes diagnostics without runtime sets when extraction QA fails', () => {
     const { dir, spec } = projectFixture();
     expect(() => runLayerExtraction({ ...spec, projectSha256: '0'.repeat(64) }, dir)).toThrow(/SHA256/);
+    expect(() => runLayerExtraction({ ...spec, masterImageSha256: '0'.repeat(64) }, dir)).toThrow(
+      /source master image: SHA256/,
+    );
+    expect(() => runLayerExtraction({ ...spec, weaponSet: spec.bodySet.toUpperCase() }, dir)).toThrow(
+      /case-insensitive/,
+    );
+    const masterBytes = readFileSync(join(dir, 'master.png')),
+      changedMaster = decodePng(masterBytes);
+    changedMaster.data[(40 * 256 + 128) * 4] = 100;
+    writeFileSync(join(dir, 'master.png'), encodePng(changedMaster));
+    expect(() => runLayerExtraction(spec, dir)).toThrow(/source master image: SHA256/);
+    writeFileSync(join(dir, 'master.png'), masterBytes);
+    expect(() =>
+      runLayerExtraction({ ...spec, clips: spec.clips.map((c) => ({ ...c, bodySheetSha256: '0'.repeat(64) })) }, dir),
+    ).toThrow(/body-only edit: SHA256/);
+    expect(() =>
+      runLayerExtraction({ ...spec, clips: spec.clips.map((c) => ({ ...c, weaponMatteSha256: '0'.repeat(64) })) }, dir),
+    ).toThrow(/weapon matte: SHA256/);
     expect(() =>
       runLayerExtraction({ ...spec, clips: spec.clips.map((c) => ({ ...c, templateSha256: '0'.repeat(64) })) }, dir),
     ).toThrow(/template SHA256/);

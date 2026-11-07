@@ -413,7 +413,7 @@ layout resource, preview config, capture và kiểm thử procedural trên engin
 ## Xuất set độc lập D45 từ removal edit
 
 `sprite:layers --project layer-extraction.json --out <thư-mục>` trong @vgtd/sprite nhận format vgtd-layer-extraction,
-version1, source project + SHA256, motionId T1 chung, ba ID bodySet/weaponSet/fxSet riêng, glowRadiusPx, thresholds tường
+version1, source project + SHA256 và masterImageSha256 từ layer-inputs.json, motionId T1 chung, ba ID bodySet/weaponSet/fxSet riêng, glowRadiusPx, thresholds tường
 minh và đầy đủ clips. Mỗi clip có name, templateSha256, bodySheet/bodySheetSha256, weaponMatte/weaponMatteSha256,
 edit `{tool,prompt}` và mảng cells evidence nội bộ clip. Đường dẫn tương đối với JSON extraction; mapping ô lấy từ
 layer-inputs.json là chỉ số trên lattice4×4 chuẩn, không phải tọa độ lưới nguồn cũ.
