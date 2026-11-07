@@ -19,6 +19,7 @@
     "build": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.test.json",
+    "sprite:layer-template": "node ../rig/scripts/run-ts.mjs scripts/layer-template.ts",
     "sprite:template": "node ../rig/scripts/run-ts.mjs scripts/template.ts",
     "sprite:variant-check": "node ../rig/scripts/run-ts.mjs scripts/variant-check.ts",
     "sprite:template-group": "node ../rig/scripts/run-ts.mjs scripts/template-group.ts",
