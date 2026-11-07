@@ -21,6 +21,7 @@
     "typecheck": "tsc -p tsconfig.test.json",
     "sprite:template": "node ../rig/scripts/run-ts.mjs scripts/template.ts",
     "sprite:variant-check": "node ../rig/scripts/run-ts.mjs scripts/variant-check.ts",
+    "sprite:template-group": "node ../rig/scripts/run-ts.mjs scripts/template-group.ts",
     "sprite:build": "node ../rig/scripts/run-ts.mjs scripts/build.ts",
     "sprite:repair": "node ../rig/scripts/run-ts.mjs scripts/repair.ts",
     "sprite:backlog": "node ../rig/scripts/run-ts.mjs scripts/backlog.ts",
