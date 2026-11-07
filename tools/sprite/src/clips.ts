@@ -16,8 +16,9 @@ export interface SpriteClipSpec {
   /** Animation table entry the timing / events come from. */
   readonly tableId: AnimationId;
   readonly loop: boolean;
-  /** Frames and fps of the table (sprite-sheet reference); the exported clip lasts `durationSec`. */
+  /** Legacy TABLE frame count for event anchors (also in the smooth profile). */
   readonly tableFrames: number;
+  /** Nominal drawing playback rate; export uses the rig clock. */
   readonly fps: number;
   readonly durationSec: number;
   /** The animation is asymmetric: drawn in all 8 directions (F-01 / ADR-020 default), not mirrored. */
@@ -109,7 +110,10 @@ export function spriteClip(name: string): SpriteClipSpec {
  * `phases`): spread it into a project and add `sheet`, `manifest`, `exceptions`, `calibration`...
  */
 export function projectClipDefaults(name: string) {
-  const c = spriteClip(name);
+  return defaultsFor(spriteClip(name));
+}
+
+function defaultsFor(c: SpriteClipSpec) {
   return {
     name: c.name,
     cols: c.sheet.cols,
@@ -120,4 +124,61 @@ export function projectClipDefaults(name: string) {
     kind: c.kind,
     ...(c.phases ? { phases: c.phases } : {}),
   };
+}
+
+/** D46: opt-in semi-chibi production profile. Event anchors remain in legacy TABLE frames. */
+export const SMOOTH_CLIP_FPS = 24;
+const SMOOTH_FRAMES: Readonly<Record<string, number>> = {
+  idle: 16,
+  meditate: 16,
+  walk: 16,
+  run: 16,
+  dash: 10,
+  sword_fly: 12,
+  attack: 14,
+  attack_2: 14,
+  attack_3: 14,
+  cast: 16,
+  channel: 12,
+  hit: 6,
+  die: 12,
+  tribulation: 16,
+  emote: 12,
+};
+
+/** New drawings at nominal 24 fps; export duration is quantized to the rig's 30 Hz clock. */
+export const SMOOTH_SPRITE_CLIPS: readonly SpriteClipSpec[] = SPRITE_CLIPS.map((legacy) => {
+  const frames = SMOOTH_FRAMES[legacy.name]!;
+  return { ...legacy, fps: SMOOTH_CLIP_FPS, durationSec: frames / SMOOTH_CLIP_FPS, sheet: { frames, cols: 4 } };
+});
+
+export function smoothSpriteClip(name: string): SpriteClipSpec {
+  const clip = SMOOTH_SPRITE_CLIPS.find((c) => c.name === name);
+  if (!clip) throw new RangeError(`unknown smooth sprite clip '${name}'`);
+  return clip;
+}
+
+/** Spread into ProjectClip, then add source sheet/manifest and explicit pose exceptions. */
+export function smoothProjectClipDefaults(name: string) {
+  return defaultsFor(smoothSpriteClip(name));
+}
+
+/** Artist pose labels only; phases/events still use the legacy table coordinate system. */
+export function smoothPoseTags(name: string): readonly string[] {
+  const c = smoothSpriteClip(name);
+  if (c.tableId !== 'attack') return Array.from({ length: c.sheet.frames }, (_, i) => `${name}_${i}`);
+  const at = (phase: string) => Math.round((c.phases![phase]! * c.sheet.frames) / c.tableFrames);
+  const windup = at('windup_end');
+  const impact = at('hit_frame');
+  return Array.from({ length: c.sheet.frames }, (_, i) =>
+    i < windup
+      ? 'anticipation'
+      : i < impact
+        ? 'strike'
+        : i === impact
+          ? 'impact'
+          : i === impact + 1
+            ? 'impact_hold'
+            : 'follow_through',
+  );
 }

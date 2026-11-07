@@ -107,3 +107,15 @@ Raw mixed-DPI grids can declare `"preparation": { "kind": "square-cell-dpi-v1", 
 This version matches the original Dan/Phu assembler: remove external blank black/transparent top/bottom rows only when needed to recover square cells (1px cell-grid tolerance, 3px crop rounding), resize the entire grid to `CELL_PX` cells, then apply the locked character scale. This is an explicit sheet DPI conversion, never a per-frame fit or atlas downscale. Non-square content and missing/invalid calibration fail as **non-reproducible project** before art QA. Sheets already normalized by an external assembler must omit `preparation`.
 
 Prepared contracts retain `sheetSha1` for the normalized PNG and add each clip's `preparation` with `rawSha1`, raw/normalized dimensions, crop bounds, and DPI scale factors. Original sheets, generation guides, phases, pose annotations, and backlog remain unchanged. Projects without preparation retain the existing export format. The committed-project audit validates preparation and rejects undeclared mixed sheet DPI without per-sheet calibration; it does not label raw normalization errors as art findings.
+
+### Semi-chibi smooth profile (D46)
+
+Use `--profile smooth-v2` with `sprite:template`, and spread `smoothProjectClipDefaults(name)` into each project clip.
+The legacy APIs remain unchanged. `SMOOTH_SPRITE_CLIPS` provides the official counts, duration and inherited table anchors;
+`smoothPoseTags` provides attack anticipation/strike/impact/impact_hold/follow_through labels.
+The first attack remains named `attack` at runtime. Draw every cell; do not duplicate poses to meet the count.
+Nominal playback is 24 fps, duration = drawings / 24, quantized by the existing 30 Hz export clock (at most half a tick).
+Event phases remain in legacy TABLE coordinates. This is presentation timing, not a simulation/balance change.
+Maximum lattice: 4x4; logical cells remain 256 texture pixels at 2x. A raw 2048-square 4x4 sheet has 512-pixel cells:
+declare DPI preparation and the locked character calibration. Regenerate locomotion ghosts using the new duration.
+See `docs/art/sprite-sheet-pipeline.md` for counts and the production contract.

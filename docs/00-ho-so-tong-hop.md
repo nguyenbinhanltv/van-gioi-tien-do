@@ -63,6 +63,8 @@ Oct 31, 2026 · An Nguyen
 
 ### Nhân vật, layer, atlas
 
+[Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
+
 | Hạng mục              | Giá trị chốt                                                                                        | Tài liệu gốc          |
 | --------------------- | --------------------------------------------------------------------------------------------------- | --------------------- |
 | Phương án dựng        | Spine: Player, Linh thú, Boss · Pre-render 3D: quái thường, tinh anh                                | Nhân vật              |
