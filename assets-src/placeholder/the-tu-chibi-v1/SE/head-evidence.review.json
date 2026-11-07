@@ -1,0 +1,602 @@
+{
+  "policy": "D47 head-size-v1",
+  "coordinateSpace": "Aligned256px output cells at2x; clip-local indices",
+  "measurement": "Manual art-worker tracing; maincap excludes elevated bun/ribbons, chin excludes neck; diagnostic zooms never production rescaling",
+  "masterFile": "../reference/SE.master.png",
+  "masterSha256": "b0d176b957e8f518f703a41c8c41f6f4ea62706fb5c3ea6805935d773ed0060b",
+  "master": {
+    "crown": {
+      "x": 129,
+      "y": 18
+    },
+    "chin": {
+      "x": 134.5,
+      "y": 65.5
+    }
+  },
+  "rows": [
+    {
+      "clip": "walk",
+      "cell": 0,
+      "reason": "posture",
+      "crown": {
+        "x": 131,
+        "y": 20
+      },
+      "chin": {
+        "x": 142,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local0; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 1,
+      "reason": "posture",
+      "crown": {
+        "x": 131,
+        "y": 20
+      },
+      "chin": {
+        "x": 142,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local1; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 2,
+      "reason": "posture",
+      "crown": {
+        "x": 131,
+        "y": 20
+      },
+      "chin": {
+        "x": 143,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local2; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.53945729601885,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9941882286479098
+    },
+    {
+      "clip": "walk",
+      "cell": 3,
+      "reason": "posture",
+      "crown": {
+        "x": 130,
+        "y": 20
+      },
+      "chin": {
+        "x": 141,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local3; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 4,
+      "reason": "posture",
+      "crown": {
+        "x": 126,
+        "y": 20
+      },
+      "chin": {
+        "x": 137,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local4; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 5,
+      "reason": "posture",
+      "crown": {
+        "x": 127,
+        "y": 20
+      },
+      "chin": {
+        "x": 138,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local5; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 6,
+      "reason": "posture",
+      "crown": {
+        "x": 126,
+        "y": 20
+      },
+      "chin": {
+        "x": 138,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local6; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.53945729601885,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9941882286479098
+    },
+    {
+      "clip": "walk",
+      "cell": 7,
+      "reason": "posture",
+      "crown": {
+        "x": 132,
+        "y": 20
+      },
+      "chin": {
+        "x": 144,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local7; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.53945729601885,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9941882286479098
+    },
+    {
+      "clip": "walk",
+      "cell": 8,
+      "reason": "posture",
+      "crown": {
+        "x": 129,
+        "y": 20
+      },
+      "chin": {
+        "x": 141,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local8; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.53945729601885,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9941882286479098
+    },
+    {
+      "clip": "walk",
+      "cell": 9,
+      "reason": "posture",
+      "crown": {
+        "x": 130,
+        "y": 20
+      },
+      "chin": {
+        "x": 141,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local9; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 10,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 20
+      },
+      "chin": {
+        "x": 147,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local10; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 11,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 20
+      },
+      "chin": {
+        "x": 147,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local11; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 12,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 21
+      },
+      "chin": {
+        "x": 146,
+        "y": 67
+      },
+      "note": "Manually traced aligned SE walk local12; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 13,
+      "reason": "posture",
+      "crown": {
+        "x": 132,
+        "y": 20
+      },
+      "chin": {
+        "x": 144,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local13; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.53945729601885,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9941882286479098
+    },
+    {
+      "clip": "walk",
+      "cell": 14,
+      "reason": "posture",
+      "crown": {
+        "x": 131,
+        "y": 20
+      },
+      "chin": {
+        "x": 142,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local14; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "walk",
+      "cell": 15,
+      "reason": "posture",
+      "crown": {
+        "x": 133,
+        "y": 20
+      },
+      "chin": {
+        "x": 144,
+        "y": 66
+      },
+      "note": "Manually traced aligned SE walk local15; skull/maincap excludes secondary bun/ribbons, chin excludes neck. Diagonal extended-foot posture/ground-plane Y travel preserved under keep alignment; head stencil is guide only.",
+      "sizePx": 47.29693436154187,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9891163691789892
+    },
+    {
+      "clip": "run",
+      "cell": 0,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 21
+      },
+      "chin": {
+        "x": 149,
+        "y": 67
+      },
+      "note": "Manually traced aligned SE run local0: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 47.80167361086848,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9996719339405397
+    },
+    {
+      "clip": "run",
+      "cell": 4,
+      "reason": "posture",
+      "crown": {
+        "x": 140,
+        "y": 21
+      },
+      "chin": {
+        "x": 153,
+        "y": 68
+      },
+      "note": "Manually traced aligned SE run local4: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "run",
+      "cell": 5,
+      "reason": "posture",
+      "crown": {
+        "x": 140,
+        "y": 21
+      },
+      "chin": {
+        "x": 153,
+        "y": 68
+      },
+      "note": "Manually traced aligned SE run local5: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "run",
+      "cell": 6,
+      "reason": "posture",
+      "crown": {
+        "x": 142,
+        "y": 22
+      },
+      "chin": {
+        "x": 155,
+        "y": 69
+      },
+      "note": "Manually traced aligned SE run local6: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "run",
+      "cell": 9,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 21
+      },
+      "chin": {
+        "x": 148,
+        "y": 67
+      },
+      "note": "Manually traced aligned SE run local9: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 47.80167361086848,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9996719339405397
+    },
+    {
+      "clip": "run",
+      "cell": 12,
+      "reason": "posture",
+      "crown": {
+        "x": 140,
+        "y": 21
+      },
+      "chin": {
+        "x": 153,
+        "y": 68
+      },
+      "note": "Manually traced aligned SE run local12: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "run",
+      "cell": 13,
+      "reason": "posture",
+      "crown": {
+        "x": 140,
+        "y": 21
+      },
+      "chin": {
+        "x": 153,
+        "y": 68
+      },
+      "note": "Manually traced aligned SE run local13: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "run",
+      "cell": 14,
+      "reason": "posture",
+      "crown": {
+        "x": 142,
+        "y": 21
+      },
+      "chin": {
+        "x": 155,
+        "y": 68
+      },
+      "note": "Manually traced aligned SE run local14: original stride/flight tuck retained under keep alignment; maincap excludes bun/ribbons; chin excludes neck; no body fitting.",
+      "sizePx": 48.76474136094644,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.019812479815011
+    },
+    {
+      "clip": "dash",
+      "cell": 0,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 38
+      },
+      "chin": {
+        "x": 146,
+        "y": 85
+      },
+      "note": "Manually traced aligned SE dash local0 (group global6): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 48.05205510693585,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.0049081387737464
+    },
+    {
+      "clip": "dash",
+      "cell": 1,
+      "reason": "posture",
+      "crown": {
+        "x": 152,
+        "y": 65
+      },
+      "chin": {
+        "x": 162,
+        "y": 111
+      },
+      "note": "Manually traced aligned SE dash local1 (group global7): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 47.07440918375928,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9844627209273554
+    },
+    {
+      "clip": "dash",
+      "cell": 2,
+      "reason": "posture",
+      "crown": {
+        "x": 153,
+        "y": 62
+      },
+      "chin": {
+        "x": 166,
+        "y": 107
+      },
+      "note": "Manually traced aligned SE dash local2 (group global8): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 46.84015371452148,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9795637581865224
+    },
+    {
+      "clip": "dash",
+      "cell": 3,
+      "reason": "posture",
+      "crown": {
+        "x": 163,
+        "y": 73
+      },
+      "chin": {
+        "x": 173,
+        "y": 119
+      },
+      "note": "Manually traced aligned SE dash local3 (group global9): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 47.07440918375928,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9844627209273554
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "reason": "posture",
+      "crown": {
+        "x": 169,
+        "y": 86
+      },
+      "chin": {
+        "x": 179,
+        "y": 132
+      },
+      "note": "Manually traced aligned SE dash local4 (group global10): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 47.07440918375928,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.9844627209273554
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "reason": "posture",
+      "crown": {
+        "x": 175,
+        "y": 101
+      },
+      "chin": {
+        "x": 184,
+        "y": 147
+      },
+      "note": "Manually traced aligned SE dash local5 (group global11): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 46.87216658103186,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 0.980233240272776
+    },
+    {
+      "clip": "dash",
+      "cell": 6,
+      "reason": "posture",
+      "crown": {
+        "x": 157,
+        "y": 64
+      },
+      "chin": {
+        "x": 168,
+        "y": 111
+      },
+      "note": "Manually traced aligned SE dash local6 (group global12): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 48.27007354458868,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.0094675379901275
+    },
+    {
+      "clip": "dash",
+      "cell": 7,
+      "reason": "posture",
+      "crown": {
+        "x": 140,
+        "y": 42
+      },
+      "chin": {
+        "x": 150,
+        "y": 89
+      },
+      "note": "Manually traced aligned SE dash local7 (group global13): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 48.05205510693585,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.0049081387737464
+    },
+    {
+      "clip": "dash",
+      "cell": 8,
+      "reason": "posture",
+      "crown": {
+        "x": 134,
+        "y": 36
+      },
+      "chin": {
+        "x": 144,
+        "y": 84
+      },
+      "note": "Manually traced aligned SE dash local8 (group global14): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 49.03060268852505,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.0253724129182755
+    },
+    {
+      "clip": "dash",
+      "cell": 9,
+      "reason": "posture",
+      "crown": {
+        "x": 134,
+        "y": 27
+      },
+      "chin": {
+        "x": 144,
+        "y": 74
+      },
+      "note": "Manually traced aligned SE dash local9 (group global15): guard knee flex/deep lunge/tuck retained; crown excludes secondary bun/ribbons and chin excludes neck. Local1..6 use AI head-only correction via six-cell repair; other10group cells byte-identical.",
+      "sizePx": 48.05205510693585,
+      "masterSizePx": 47.81736086402093,
+      "ratio": 1.0049081387737464
+    }
+  ],
+  "masterSelection": {
+    "reviewer": "style-owner23 cross-check, selected by art-worker24",
+    "note": "MAIN attached cap summit and central jaw tip exclude bun/gold fitting/strands/neck; approximate visual uncertainty1px. Baseline updated47.76 to47.82 after independent cross-check; existing frame points/drawings unchanged, never adjusted per finding to obtain pass.",
+    "utcRecorded": "2026-11-07T22:17:58.257101+00:00"
+  }
+}
