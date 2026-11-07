@@ -4545,3 +4545,164 @@ Sửa búi tóc phụ để tránh cắt canvas, giữ động tác và cỡ th�
 | `assets-src/placeholder/the-tu-chibi-v1/E/raw/channel.headroom.png`  | OpenAI image edit; prompt / model undisclosed / UTC: E/channel.headroom.provenance.json  | OpenAI Output; original project inputs |
 
 <!-- THE-TU-CHIBI-E-HEADROOM:END -->
+
+<!-- PHAP-TU-CHIBI-SE:BEGIN -->
+
+### Pháp tu semi-chibi SE — worker 25
+
+Thiết kế gốc dự án, không dùng ảnh thương mại. Quyền đầu ra OpenAI theo điều khoản đã kiểm tra ở mục worker 25; không yêu cầu ghi công. Công cụ `image_gen.imagegen`, model không công bố; prompt, UTC và SHA nằm ở `SE/raw/*.generation.json` và `SE/provenance.json`. Các bản bị thay thế được giữ để truy vết, không dùng ở runtime. Stencil chỉ hướng dẫn sinh ảnh; cổng D47 vẫn đo từng ô cần bằng chứng.
+
+| Tệp                                                                                                  | Nguồn                                                            | Quyền                                    |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------- |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/attack.attempt1.png`                                 | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/attack_2.attempt1.png`                               | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/attack_3.attempt1.png`                               | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/cast.attempt1.png`                                   | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/channel.attempt1.png`                                | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/die.attempt1.png`                                    | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/emote.attempt1.png`                                  | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/emote.attempt2.png`                                  | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/hit-dash.attempt1.png`                               | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/hit-dash.attempt2.png`                               | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/idle.attempt1.png`                                   | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/meditate.attempt1.png`                               | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/run.attempt1.png`                                    | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/run.attempt2.png`                                    | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/sword_fly.attempt1.png`                              | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/tribulation.attempt1.png`                            | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/raw/walk.attempt1.png`                                   | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/attack.png`                                       | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/attack_2.png`                                     | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/attack_3.png`                                     | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/cast.png`                                         | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/channel.png`                                      | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/die.png`                                          | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/emote.png`                                        | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/hit-dash.png`                                     | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/idle.png`                                         | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/meditate.png`                                     | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/run.png`                                          | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/sword_fly.png`                                    | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/tribulation.png`                                  | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/sheets/walk.png`                                         | Ảnh gốc dự án; OpenAI imagegen tạo hoặc sửa                      | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack.head-guide.png`                         | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack.template.png`                           | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack_2.head-guide.png`                       | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack_2.template.png`                         | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack_3.head-guide.png`                       | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/attack_3.template.png`                         | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/cast.head-guide.png`                           | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/cast.template.png`                             | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/channel.head-guide.png`                        | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/channel.template.png`                          | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/dash.head-guide.png`                           | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/dash.template.png`                             | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/die.head-guide.png`                            | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/die.template.png`                              | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/emote.head-guide.png`                          | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/emote.template.png`                            | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/hit-dash.head-guide.png`                       | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/hit-dash.template.png`                         | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/hit.head-guide.png`                            | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/hit.template.png`                              | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/idle.head-guide.png`                           | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/idle.template.png`                             | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/meditate.head-guide.png`                       | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/meditate.template.png`                         | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/run.head-guide.png`                            | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/run.template.png`                              | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/sword_fly.head-guide.png`                      | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/sword_fly.template.png`                        | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/tribulation.head-guide.png`                    | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/tribulation.template.png`                      | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/walk.head-guide.png`                           | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `assets-src/placeholder/phap-tu-chibi-v1/SE/templates/walk.template.png`                             | Dẫn xuất xác định từ master; lattice và stencil không đổi cỡ đầu | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE.sprite.json`         | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE.sprite.json.meta`    | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.json`      | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.json.meta` | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.png`       | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.png.meta`  | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_ske.json`            | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_ske.json.meta`       | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.json`            | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.json.meta`       | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.png`             | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+| `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.png.meta`        | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
+
+<!-- PHAP-TU-CHIBI-SE:END -->
+
+### Thể tu SE — nguồn và guide semi-chibi (worker24, 2026-11-08)
+
+Mọi bản thô được giữ để truy xuất, không mặc nhiên là nghiệm thu. `SE/project.json` ghi nguồn được chọn; điều khoản OpenAI Output đã kiểm tra trong mục worker24 ở trên. Giữ prompt chính xác, tool, model không công bố và UTC cho từng call.
+
+| Tệp                                                                                            | Nguồn / xử lý                                                                                   | Điều khoản                                      |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/attack.attempt1.png`                            | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/attack_2.attempt1.png`                          | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/attack_3.attempt1.png`                          | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/cast.attempt1.png`                              | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/channel.attempt1.png`                           | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/die.attempt1.png`                               | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/emote.attempt1.png`                             | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/hit-dash.attempt1.png`                          | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/idle.attempt1.png`                              | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/meditate.attempt1.png`                          | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/run.attempt1.png`                               | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/sword_fly.attempt1.png`                         | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/tribulation.attempt1.png`                       | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/walk.attempt1.png`                              | OpenAI imagegen; model không công bố, prompt/UTC trong provenance cạnh nguồn                    | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack.head-stencil.template.png`         | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack.template.png`                      | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack_2.head-stencil.template.png`       | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack_2.template.png`                    | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack_3.head-stencil.template.png`       | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/attack_3.template.png`                    | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/cast.head-stencil.template.png`           | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/cast.template.png`                        | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/channel.head-stencil.template.png`        | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/channel.template.png`                     | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/dash.template.png`                        | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/die.head-stencil.template.png`            | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/die.template.png`                         | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/emote.head-stencil.template.png`          | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/emote.template.png`                       | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/hit-dash/group.head-stencil.template.png` | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/hit-dash/group.template.png`              | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/hit.template.png`                         | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/idle.head-stencil.template.png`           | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/idle.template.png`                        | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/meditate.head-stencil.template.png`       | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/meditate.template.png`                    | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/run.head-stencil.template.png`            | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/run.template.png`                         | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/sword_fly.head-stencil.template.png`      | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/sword_fly.template.png`                   | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/tribulation.head-stencil.template.png`    | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/tribulation.template.png`                 | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/walk.head-stencil.template.png`           | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/templates/walk.template.png`                        | Guide nội bộ @vgtd/sprite; stencil crop/blit nguyên cỡ từ master AI, không là bằng chứng QA đầu | OpenAI Output / mã dự án; đầu vào gốc của dự án |
+
+### Thể tu SE — sửa đầu và khoảng trống tóc (worker24, 2026-11-08)
+
+Giữ động tác lao sâu, chỉ sửa đầu sai cỡ và búi tóc phụ gây cắt canvas. Không fit/rescale từng frame; giữ nguồn trước sửa và proof ô.
+
+| Tệp                                                                         | Nguồn / xử lý                                                 | Điều khoản               |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------ |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/attack.headroom.png`         | AI image edit; prompt/tool/model không công bố/UTC cạnh nguồn | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/cast.headroom.png`           | AI image edit; prompt/tool/model không công bố/UTC cạnh nguồn | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/hit-dash.head-corrected.png` | AI image edit; prompt/tool/model không công bố/UTC cạnh nguồn | OpenAI Output / mã dự án |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/hit-dash.head-repaired.png`  | Ghép nguyên ô AI bằng repairCell, proof6ô thay/10ô giống byte | OpenAI Output / mã dự án |
+
+### Thể tu SE — thử sửa chân không chọn (worker24, 2026-11-08)
+
+| Tệp                                                                     | Nguồn / xử lý                                                                                                                         | Điều khoản                       |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `assets-src/placeholder/the-tu-chibi-v1/SE/raw/walk.feet-corrected.png` | OpenAI image edit, giữ raw/prompt/model không công bố/UTC tại `SE/walk.feet-corrected.provenance.json`; không chọn vì7regression chân | OpenAI Output, đầu vào dự án gốc |
+
+### Thể tu SE — atlas xuất (worker24, 2026-11-08)
+
+| Tệp                                                                                          | Nguồn / xử lý                                                                    | Điều khoản               |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.png` | Atlas dẫn xuất @vgtd/sprite từ nguồn SE AI đã kê ở trên; không đổi cỡ từng frame | OpenAI Output / mã dự án |
+| `apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.png`       | Atlas dẫn xuất @vgtd/sprite từ nguồn SE AI đã kê ở trên; không đổi cỡ từng frame | OpenAI Output / mã dự án |

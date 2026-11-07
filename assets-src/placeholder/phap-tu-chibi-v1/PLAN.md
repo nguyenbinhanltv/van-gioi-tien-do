@@ -7,4 +7,4 @@
 
 Only this new character path and its own export directory are used. Existing semi-realistic assets are preserved. Higher tiers/costumes must be image edits of the T1 motion sheets with identical poses. Body/weapon/FX layering follows D45 when merged.
 
-Checkpoint: canonical masters and turnaround are visually approved. E has all 15 smooth-v2 clips / 202 frames; D47 hard gates and zero-loss canvas checks pass. Real Cocos Creator 3.8.8 capture at 2× is complete for all 15 clips. Soft findings remain explicitly open. E publication is next; SE, S, NE and N remain in production, each on a fresh-main direction branch.
+Checkpoint: canonical masters and turnaround are visually approved. E merged in PR153 with all 15 smooth-v2 clips / 202 frames, D47/canvas gates and real Cocos 3.8.8 capture. SE now has all 15 sources / 202 frames, hard gates pass, 18 soft locomotion findings remain open, and 18 reviewed head-evidence cells are recorded. SE real Cocos 3.8.8 capture at 2× and repository validation passed; direction PR publication is next. S, NE and N follow on fresh-main direction branches; rear-view evidence will use the merged rear-skull contract when available.

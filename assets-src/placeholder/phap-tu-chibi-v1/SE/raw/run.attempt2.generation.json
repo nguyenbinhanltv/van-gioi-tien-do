@@ -1,0 +1,30 @@
+{
+  "clip": "run",
+  "attempt": 2,
+  "prompt": "SOURCE HEAD-ONLY CORRECTION of image1 run sheet. Keep EXACT 4x4 lattice,16frame order, all current body/limb poses, torso/pelvis positions, leg-flight tucks and lunges, shoes footpositions, leftfan grip, long sleeves, ribbons, outfit, background. Do NOT flatten motion. In ALL16 cells correct only the skull/head+main hair cap to be about9% smaller than current, reattach neck naturally, preserve facial identity exactly matching image2 approved SE master. Current heads drift too large; desired master crown-to-chin47.4 logicalpx in aligned256cell, about50logicalpx before fixedcalibration. Image3 unscaledheadstencils reinforce targetidentity/size but doNOT move heads up toguideposition; preserve currentpose head locations. Head must remain adultoval/narrowbroweyes, blackhalfuphair, samepin/tassel/earring. Do not shrink wholefigure or change body/limbs/fan. Preserve dynamicrun anatomy and secondaryhair. All16 completedfullfigures onpure#FF00FF, no guides/text/shadows/FX. Frame-by-frame source artwork correction only; same overall sheet bounds and cell occupancy except smaller head mass.",
+  "utcStart": "2026-11-07 22:18:40 UTC",
+  "references": ["SE/raw/run.attempt1.png", "reference/SE.master.png", "SE/templates/run.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "raw": "raw/run.attempt2.png",
+  "selected": "sheets/run.png",
+  "utcEndObserved": "2026-11-07 22:19:15 UTC",
+  "rawSha256": "7be264fd0aa9b183d0232e14f9ac1ef68436d737eb2db2b17a118e5644a1c5f7",
+  "utcRawOutputFileModified": "2026-11-07T22:19:15.306Z",
+  "referenceSnapshots": [
+    {
+      "file": "SE/raw/run.attempt1.png",
+      "sha256": "d5e60c5a752b5cc8ce59a83d5deb73efa08a48c25112c08b12a11819efbf0d9d"
+    },
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/run.head-guide.png",
+      "sha256": "4de93369c206fbaa253b1ca5abb9a57b3d4a93f734689fbe5eb7b9842d03ec9d"
+    }
+  ],
+  "selectedSha256": "7be264fd0aa9b183d0232e14f9ac1ef68436d737eb2db2b17a118e5644a1c5f7"
+}

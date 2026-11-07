@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:13:14.778Z",
+  "utcRecordedCompleted": "2026-11-07T22:13:44.639Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Image1 is the original source to edit; image2 pinnedcanonicalSEmaster. Originalprojectdesign only. Precise SECONDARY HAIR HEADROOM correction ONLY in this14frame4x4punch sheet. Keep all14bodyposes/headfaceSKULLSIZE/camera/gauntlets/feet/clothes/cellpositions EXACT. Leave last2cells14/15 blankmagenta. Compact the ELEVATED BUN/TOPKNOT in ALL14usedcells: bun top at most6logicalpx ABOVE skull/mainhaircap crown, tiny tiedtuft ratherthan tallbun. Allamberribbons/loosestrands flow back/down, no upwardarches. Maincap and faceunchanged. Reduceonlysecondaryhair enough that neutral fullsilhouette max228logicalpx at256cell; no bodyshrinking/poseflattening. Existing alignment clips1-3pixels at top, so leave extra3-5logicalpx headroom. Retain original topknot tie/ribbonidentity, simplecelart. Same4x4squarecanvas/lattice, opaqueuniformmagenta, no text/FX.",
+  "references": ["raw/attack.attempt1.png", "../reference/SE.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-b083832e-e174-47a1-9056-e9560105e4fc.png",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
+}

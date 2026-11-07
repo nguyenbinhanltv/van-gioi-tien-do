@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:00:59.751Z",
+  "utcRecordedCompleted": "2026-11-07T22:02:23.340Z",
+  "prompt": "Use case: identity-preserve. Th\u1ec3 tu T1 CHANNEL SE loop12consecutiveframes, EXACT4columns x3rows RECTANGULAR4:3canvas, requested2048x1536pixels, squarecells512px. Image1 official4x3lattice contains unscaledmasterheadstencils; image2 pinnedSEmaster. Complete bodiesbelow heads at EXACT headunit size; noheadenlargement. Adulttan squarejaw/ambereyes/thickbrows/leftbrow nick, black swept mainhaircap smallcompactbun/amberribbons. SameSEfront-right3quarter/isometricview throughout. AnatomicalneutralH216logicalpx, ground232/256cell; entirebun-to-sole<=225logicalpx, fixedbodypartlengths, nofitperframe. Charcoal sleevelesswrap/trousers, IVORYinkwashapron UNDER amberhip sash, bronze/goldtrim, pairedsimpleWORNcharcoalgauntlets bronze wristband+smoothknuckleplate naturallyworn. Feetplanted in samemasterstance, kneeslightflex stablepelvis. Bothgauntlets held near sternum, palms/fistsinward in sustained cultivationchannel.12phaseloop:0-5slowinhale chestexpand/forearmsrise2-4logicalpx;6-11exhale armssettle/chestrelax; subtle distinctprogressive drawings, lastfirstseamless. Shoulders relax, fingers/handsattachedcorrectly. Hairribbons/sashtails/apron followchestwith2frame lag andsettle. Do notbake energy/FX; no glow/clouds/shadows/props. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines, premiumadultsemichibi. All12fullbodydrawings rowmajor in4x3squarecells; no extra fourthrow. Keepalphaawaycellborders/compactbun neverarchesabove. Opaqueuniform255,0,255magenta; removeallguide lines/labels/ghosts/extrastencilheads. Originaldesignonly, lockedface/camera/body/headscale.",
+  "references": ["templates/channel.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-949709e7-7e1d-4fca-9f08-820d035d4dd0.png",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output, original project inputs only"
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
+}

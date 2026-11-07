@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:57:02.668Z",
+  "utcRecordedCompleted": "2026-11-07T21:57:58.898Z",
+  "prompt": "Use case: identity-preserve. Th\u1ec3 tu T1 RUN SE production16frames,4x4square2048sheet. Image1 official lattice with fixed-size master-head stencils at intended head positions plus leading-foot ghosts. Image2 full canonicalSEmaster. Complete bodies under heads, match head face/skull size EXACTLY (no enlargement), preserve adulttan squarejaw/ambereyes/thickbrows/black swept hair/smallbun. SE front-right3quarter, slightly elevated isometric throughout; no Eprofile rotation. Charcoal sleeveless wraps/trousers, ivory ink-wash apron beneath amber hip sash, bronze trim and simple worn charcoal paired gauntlets, not ornate armor. Smooth powerful16phase alternating RUN, rightcontact0, push1-3,tuckedflight4-6,landing7; leftcontact8,push9-11,tuckedflight12-14,landing15; varied distinct progressive poses, clear alternatinglegs. Hands wear gauntlets naturally, arms counter-swing; deep dynamic flight knees allowed, same bodypart lengths and fixed headsize, NO flattened pose. Follow footghost ground contacts in BOTHscreenXandY: orange right,cyanleft, including diagonalYtravel. Airbornefeet rise naturally. Hairribbons/sash/apron lag and settle with momentum, compactbun no tall upwardarch. Logicalcell256 anatomicalH216neutral, headunits precisely guide-size, uprightneutral entirebbox225max; no independentfigure fit, everyframe samecalibration. Keep sources completely insidecell even after pelvis-centering; neither weapon nor ribbons touch celledge. Two-tone cel+smallhighlight/rim,NWlight,tinted outlines, 1basecharcoal1accentamber+ivorypanel+bronze. Rowmajor16completefullbodydrawings, looplastfirst. Opaque uniform255,0,255magenta; remove all guides/stencil duplicates/ghosts/lines/text. No FX/shadows/objects. Originaldesign only.",
+  "references": ["templates/run.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-10ccfe32-b5ab-4819-a6c3-6f39a245a382.png",
+  "status": "Selected fullsheet: official hard gates and15clip Cocos2x capture passed; soft/manual backlog retained; runtime158compatibility smoke passed.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output, original project inputs only"
+  },
+  "selectedFullSheet": true,
+  "selectionRegistry": "project.json"
+}

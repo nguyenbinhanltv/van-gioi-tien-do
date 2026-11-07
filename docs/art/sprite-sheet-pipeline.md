@@ -383,6 +383,32 @@ evidence chỉ rõ trục đăng ký lattice nguồn/T1 đã xem. Khi đó pelvi
 đang di chuyển**; khai báo cùng X/kind trên tất cả ô clip. Không fit từng frame; scale, ngưỡng và canvasLoss giữ nguyên.
 Kind mặc định là anatomical-pelvis. Contract/backlog/review hiện kind để người xem phân biệt hai loại bằng chứng.
 
+## Cập nhật D48, bổ sung D47: đầu phía sau NE/N che cằm
+
+Không bịa hay chiếu landmark cằm. Dùng `masterHead` trên master khóa của chính direction đó và `headEvidence` ở ô aligned:
+kind `rear-skull-base`, crown, skullBase, breadth `{left,right}`; mỗi điểm là `{x,y}`. Evidence ô thêm note đã xem.
+SkullBase là điểm chẩm nơi đầu phía sau nối cổ/đường chân tóc gáy nhìn thấy. Đo Euclid crown→skullBase và bề ngang sọ
+tối đa, không tính tóc rời/búi/phụ kiện; cả hai phải trong ±3% đúng phép đo trên master cùng hướng. Master dùng ô256px
+sau resize, evidence dùng ô output256px đã căn; chỉ số nội bộ clip, kể cả sheet nhóm. Không đổi scale/fit từng frame.
+
+Kind này chỉ cho NE/N và bắt buộc breadth ở master lẫn ô; kind khác master, chin giả kèm theo, điểm/breadth sai hoặc drift
+đều lỗi cứng. Evidence crown/chin cũ vẫn tương thích, kind mặc định crown-chin. Breadth phía trước tùy chọn nhưng nếu
+khai báo thì phải có cả master/ô và luôn kiểm. Điều kiện exception/bbox và reason posture/secondary-overhang giữ nguyên.
+Contract, backlog và review hiện kind, điểm skullBase, kích thước/bề ngang cùng giá trị master theo direction dưới INFO.
+Lỗi chân và canvasLoss vẫn giữ nguyên; annotation này không phải detector sọ tự động.
+
+### Cập nhật D50: tóc đã duyệt che gáy
+
+Không sửa master hay đoán skullBase khi hairstyle đã duyệt che điểm gáy/chẩm. NE/N dùng kind rear-crown-shoulder trên
+masterHead của chính hướng đó, với crown, shoulderTop `{left,right}` là hai đầu đường đỉnh vai nhìn thấy, và breadth
+`{left,right}` là bề ngang sọ tối đa bắt buộc. Mọi điểm `{x,y}`; evidence ô thêm note đã xem giải thích gáy bị che.
+Khoảng cách Euclid crown→trung điểm shoulderTop và breadth đều trong ±3% cùng phép đo trên master khóa cùng direction.
+Crown không tính khối tóc nhô trên sọ; breadth không tính tóc rời. Master dùng ô256px sau resize, ô motion dùng output
+đã aligned256px, chỉ số nội bộ clip kể cả sheet nhóm. Không fit/rescale và không thêm chin/skullBase giả vào kind này.
+
+INFO contract/backlog/review giữ kind, hai đầu vai, trung điểm, breadth và giá trị master/ô. Vai thiếu/ngoài ô/đường vai
+co thành một điểm, kind/direction không khớp hoặc drift là lỗi cứng. D47/D48 và các cổng foot/canvas giữ nguyên.
+
 ## Runtime body/weapon/FX trong Cocos
 
 DragonBonesActor nhận mapping + appearance qua setEquipmentVisuals, chỉ tải các set/direction được chọn và mọi trang atlas
@@ -395,3 +421,26 @@ Swap cùng motion/clip giữ clock tại lúc cài rig, không phát lại frame
 thành muộn không được đè selection mới. Layered dùng REALTIME; rig đơn cũ vẫn hỗ trợ cache và multi-page như trước.
 Dispose chỉ hủy asset composition tự tạo, resource nguồn do Cocos quản lý. Xem apps/client-cocos/LAYERED-SPRITES.md cho
 layout resource, preview config, capture và kiểm thử procedural trên engine3.8.8; nguồn art vẫn phải qua QA sprite.
+
+## Xuất set độc lập D45 từ removal edit
+
+`sprite:layers --project layer-extraction.json --out <thư-mục>` trong @vgtd/sprite nhận format vgtd-layer-extraction,
+version1, source project + SHA256 và masterImageSha256 từ layer-inputs.json, motionId T1 chung, ba ID bodySet/weaponSet/fxSet riêng, glowRadiusPx, thresholds tường
+minh và đầy đủ clips. Mỗi clip có name, templateSha256, bodySheet/bodySheetSha256, weaponMatte/weaponMatteSha256,
+edit `{tool,prompt}` và mảng cells evidence nội bộ clip. Đường dẫn tương đối với JSON extraction; mapping ô lấy từ
+layer-inputs.json là chỉ số trên lattice4×4 chuẩn, không phải tọa độ lưới nguồn cũ.
+
+Body/matte chuẩn bị DPI toàn sheet4×4; không căn lại, palette-fit hay scale từng ô. Body edit chỉ key theo nguồn, không
+dọn spill/defringe để che repaint. Evidence tay/grip/inpaint dùng ô chuẩn256px, order front/back khai báo từng frame.
+Source QA được kiểm lại; report giữ hash project/master/full nguồn/guide/body/matte, provenance edit, DPI records,
+mọi metric/evidence và lỗi cứng. QA lỗi chỉ ghi report và exit1. Mỗi attempt dùng root mới; từ chối report/manifest cùng
+direction đã có để không nhầm asset cũ là output mới. Các direction khác có thể thêm vào cùng root; report riêng theo hướng.
+
+Qua QA mới ghi thư mục từng set: manifest layer.json và các trang atlas PMA MaxRects riêng. Giữ nguyên clock/duration/loop,
+mọi bản vẽ và event do body sở hữu; clock quá ngắn làm mất bản vẽ bị từ chối. FX trắng chỉ tint lúc chạy, có derivedFromWeapon;
+skin vũ khí trỏ FX đúng hoặc null. Biến thể tier/costume/weapon-skin đều có thể dùng provenance edit-from-master và cổng
+pose/face/motion/origin trước khi tách. Không nhân body theo tích áo×vũ khí. API công khai runLayerExtraction,
+writeLayerExtraction và buildSpriteLayerSet; API pack trực tiếp đòi caller giữ QA authoring.
+
+Matte, phần khuất và anatomy tay inpaint vẫn phải xem art thật. Ngưỡng difference/contact phải khai báo và duyệt theo
+dữ liệu thật; không coi fixture đúng tuyệt đối là ngưỡng art chung. Xem OPEN-ITEMS và hợp đồng runtime Cocos.

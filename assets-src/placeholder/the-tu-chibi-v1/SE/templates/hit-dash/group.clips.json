@@ -1,0 +1,20 @@
+[
+  {
+    "name": "hit",
+    "frames": 6,
+    "cols": 4,
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5]
+    }
+  },
+  {
+    "name": "dash",
+    "frames": 10,
+    "cols": 4,
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  }
+]

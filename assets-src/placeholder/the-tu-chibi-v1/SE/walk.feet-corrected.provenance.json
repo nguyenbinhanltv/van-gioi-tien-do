@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:25:36.215Z",
+  "utcRecordedCompleted": "2026-11-07T22:27:15.080Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. FEET/LOWER LEGS CORRECTION for existing16frame SE WALK (image1); official exact4x4registered footghost guide image2; pinnedSEmaster image3. IMPORTANT authoritativecolor mapping: CYAN is anatomical RIGHT(R) foot; AMBER/ORANGE is anatomical LEFT(L) foot. Earlier prompt reversed the wording; correct the ART now using actualguide. In eachcell, move the appropriate planted boot SOLE to the matching BRIGHT footprintellipse, in BOTHscreenX andscreenY. Follow clip-local guide contacts; dim/smallerellipse means swingfoot, do notplant it. Rearticulate knees/shins/ankles naturally with SAME legsegmentlengths; alternatewalking16phase, correctleadingleg, smoothcycle, no disconnected/stretchyboots. Preserve upperthighs/hipplacement as much as possible; preserve ALL upperbody/headface/headsize/hair/camera/gauntlets/arms/ivoryapron/amber sash EXACT. Do not scale anywholefigure, do not movehead orhip tofitboots. Same4x4SQUAREcanvas andcellpositions, same SE/front-right3quarter view, adultfixedface, charcoal/ivory/amber/bronze originaldesign. Keep maincap-to-chin size unchanged, naturalgauntlets worn. Footcontact musttracktheghosttrajectory INCLUDING diagonal ground-planeY travel, notallbaseline232. Remove ALL ghosts/guidelines aftercorrection; opaqueuniform255,0,255magenta. No extraheads/labels/FX/shadows/props. Keep all16fullbodyframes, seamlesslastfirst.",
+  "references": ["raw/walk.attempt1.png", "templates/walk.head-stencil.template.png", "../reference/SE.master.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-bdc3e27f-b6ca-4fd1-9ae8-909eb03ef968.png",
+  "status": "REJECTED:7foot regressions and3newsoft findings; originalwalk remains selected. Corrected ghost wording did not improve measured motion.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output, original project inputs"
+  },
+  "comparison": {
+    "fail-hard": 0,
+    "fail-soft": 3,
+    "accepted": 30,
+    "regression": 7,
+    "info": 96,
+    "note": "Inherited head points were comparison-only; candidate not selected, no new head certification claimed"
+  },
+  "selectedFullSheet": false,
+  "selectionRegistry": "project.json"
+}
