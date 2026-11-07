@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="920" viewBox="0 0 1440 920" role="img" aria-labelledby="title desc">
+<title id="title">Chuẩn tỉ lệ semi-chibi cho bốn Đạo Lộ</title><desc id="desc">Cùng chiều cao đứng H. Đầu và khối tóc chính22%H, dải cho phép20–24%. Đường mắt15–17%H tính từ đỉnh đầu. Vai Kiếm26–30%,Thể30–34%,Pháp và Đan24–28%H. Hình dựng sơ đồ,không thay mặt hoặc concept.</desc>
+<rect width="1440" height="920" fill="#f6f2e8"/><text x="60" y="55" font-family="sans-serif" font-size="16" fill="#52636b">VẠN GIỚI TIÊN ĐỒ · D44 · HƯỚNG DỰNG MASTER</text><text x="60" y="100" font-family="sans-serif" font-size="34" fill="#213544">Một tỉ lệ chung — bốn silhouette riêng</text>
+<text x="60" y="133" font-family="sans-serif" font-size="17" fill="#52636b">Sơ đồ cấu trúc, không phải tranh nhân vật. Cùng H danh định; không đo theo đuôi tóc, vũ khí, giáp hoặc VFX.</text>
+<g font-family="sans-serif" font-size="15" fill="#52636b">
+<text x="48" y="205">Đỉnh = 0%</text><text x="48" y="269">Mắt 15–17%</text><text x="48" y="300">Đầu 20–24%</text><text x="48" y="345">Vai giải phẫu</text><text x="48" y="407">Hông ~50%</text><text x="48" y="605">Đế = 100%</text>
+</g>
+<g stroke="#8da2ab" stroke-dasharray="5 5" opacity=".55"><path d="M200 200H1370M200 264H1370M200 288H1370M200 400H1370M200 600H1370"/><path d="M200 280H1370M200 296H1370" stroke="#bd9041"/></g>
+<g transform="translate(340 200)"><path d="M0 0V400" stroke="#97a8b0" stroke-dasharray="3 5"/>
+<rect x="-55" y="80" width="110" height="16" fill="#dbb97d" opacity=".3"/>
+<path d="M-23 82L-20 110L-42 125L-32 184L-30 212L-38 245L-32 325L-27 383L-48 400L-4 400L0 292L4 400L48 400L27 383L32 325L38 245L30 212L32 184L42 125L20 110L23 82Z" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-56 108L-69 147L-77 195L-76 226L-63 228L-59 197L-54 156L-38 122M56 108L69 147L77 195L76 226L63 228L59 197L54 156L38 122" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-20 100L-56 108L-30 174L-30 205L30 205L30 174L56 108L20 100" fill="#57c9de" fill-opacity=".2" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 40Q-39 0 0 0Q39 0 39 40L35 61Q29 81 0 88Q-29 81 -35 61Z" fill="#e5c7aa" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 43Q-42 -2 0 0Q42 -2 39 43L26 23L5 12L-20 26Z" fill="#354953"/>
+<path d="M-35 64H35" stroke="#ba6655" stroke-width="2"/>
+<path d="M-60 106H60M-60 100V112M60 100V112" stroke="#57c9de" stroke-width="10" opacity=".22"/>
+<path d="M-56 108H56M-56 102V114M56 102V114" stroke="#57c9de" stroke-width="3"/>
+<path d="M-52 118H52" stroke="#57c9de" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="0" y="443" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#213544">Kiếm tu</text><text x="0" y="472" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#52636b">Vai 26–30% H</text></g><g transform="translate(620 200)"><path d="M0 0V400" stroke="#97a8b0" stroke-dasharray="3 5"/>
+<rect x="-55" y="80" width="110" height="16" fill="#dbb97d" opacity=".3"/>
+<path d="M-23 82L-20 110L-42 125L-32 184L-30 212L-38 245L-32 325L-27 383L-48 400L-4 400L0 292L4 400L48 400L27 383L32 325L38 245L30 212L32 184L42 125L20 110L23 82Z" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-64 108L-77 147L-85 195L-84 226L-71 228L-67 197L-62 156L-46 122M64 108L77 147L85 195L84 226L71 228L67 197L62 156L46 122" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-20 100L-64 108L-30 174L-30 205L30 205L30 174L64 108L20 100" fill="#dda044" fill-opacity=".2" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 40Q-39 0 0 0Q39 0 39 40L35 61Q29 81 0 88Q-29 81 -35 61Z" fill="#e5c7aa" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 43Q-42 -2 0 0Q42 -2 39 43L26 23L5 12L-20 26Z" fill="#354953"/>
+<path d="M-35 64H35" stroke="#ba6655" stroke-width="2"/>
+<path d="M-68 106H68M-68 100V112M68 100V112" stroke="#dda044" stroke-width="10" opacity=".22"/>
+<path d="M-64 108H64M-64 102V114M64 102V114" stroke="#dda044" stroke-width="3"/>
+<path d="M-60 118H60" stroke="#dda044" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="0" y="443" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#213544">Thể tu</text><text x="0" y="472" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#52636b">Vai 30–34% H</text></g><g transform="translate(900 200)"><path d="M0 0V400" stroke="#97a8b0" stroke-dasharray="3 5"/>
+<rect x="-55" y="80" width="110" height="16" fill="#dbb97d" opacity=".3"/>
+<path d="M-23 82L-20 110L-42 125L-32 184L-30 212L-38 245L-32 325L-27 383L-48 400L-4 400L0 292L4 400L48 400L27 383L32 325L38 245L30 212L32 184L42 125L20 110L23 82Z" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-52 108L-65 147L-73 195L-72 226L-59 228L-55 197L-50 156L-34 122M52 108L65 147L73 195L72 226L59 228L55 197L50 156L34 122" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-20 100L-52 108L-30 174L-30 205L30 205L30 174L52 108L20 100" fill="#e27068" fill-opacity=".2" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 40Q-39 0 0 0Q39 0 39 40L35 61Q29 81 0 88Q-29 81 -35 61Z" fill="#e5c7aa" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 43Q-42 -2 0 0Q42 -2 39 43L26 23L5 12L-20 26Z" fill="#354953"/>
+<path d="M-35 64H35" stroke="#ba6655" stroke-width="2"/>
+<path d="M-56 106H56M-56 100V112M56 100V112" stroke="#e27068" stroke-width="10" opacity=".22"/>
+<path d="M-52 108H52M-52 102V114M52 102V114" stroke="#e27068" stroke-width="3"/>
+<path d="M-48 118H48" stroke="#e27068" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="0" y="443" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#213544">Pháp tu</text><text x="0" y="472" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#52636b">Vai 24–28% H</text></g><g transform="translate(1180 200)"><path d="M0 0V400" stroke="#97a8b0" stroke-dasharray="3 5"/>
+<rect x="-55" y="80" width="110" height="16" fill="#dbb97d" opacity=".3"/>
+<path d="M-23 82L-20 110L-42 125L-32 184L-30 212L-38 245L-32 325L-27 383L-48 400L-4 400L0 292L4 400L48 400L27 383L32 325L38 245L30 212L32 184L42 125L20 110L23 82Z" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-52 108L-65 147L-73 195L-72 226L-59 228L-55 197L-50 156L-34 122M52 108L65 147L73 195L72 226L59 228L55 197L50 156L34 122" fill="#d2dce0" stroke="#637c89" stroke-width="2"/>
+<path d="M-20 100L-52 108L-30 174L-30 205L30 205L30 174L52 108L20 100" fill="#70bda0" fill-opacity=".2" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 40Q-39 0 0 0Q39 0 39 40L35 61Q29 81 0 88Q-29 81 -35 61Z" fill="#e5c7aa" stroke="#637c89" stroke-width="2"/>
+<path d="M-39 43Q-42 -2 0 0Q42 -2 39 43L26 23L5 12L-20 26Z" fill="#354953"/>
+<path d="M-35 64H35" stroke="#ba6655" stroke-width="2"/>
+<path d="M-56 106H56M-56 100V112M56 100V112" stroke="#70bda0" stroke-width="10" opacity=".22"/>
+<path d="M-52 108H52M-52 102V114M52 102V114" stroke="#70bda0" stroke-width="3"/>
+<path d="M-48 118H48" stroke="#70bda0" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="0" y="443" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#213544">Đan/Phù tu</text><text x="0" y="472" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#52636b">Vai 24–28% H</text></g>
+<rect x="60" y="705" width="1320" height="165" rx="10" fill="#e9e2d3"/><g font-family="sans-serif" fill="#344c59" font-size="17">
+<text x="85" y="738">H = chiều cao từ đỉnh khối tóc chính đến đế chân; cùng H danh định, dải dựng 98–102% của H.</text>
+<text x="85" y="769">Đầu + tóc chính: mục tiêu 22% H, cho phép 20–24%. Mắt: 15–17% H dưới đỉnh (giữ mặt master).</text>
+<text x="85" y="800">H và đầu đều bỏ búi cao / topknot / đuôi tóc / trang trí. Vai bỏ giáp và tay áo; VFX / vũ khí ở ngoài H.</text>
+<text x="85" y="831">Tỉ lệ là chuẩn dựng mỹ thuật; pixel đích theo hợp đồng tooling chung. Giữ một tỉ lệ toàn cục, không kéo giãn từng frame.</text>
+</g></svg>
