@@ -15,7 +15,7 @@ export interface EquipmentVisualMapping {
     >
   >;
   readonly costumes: Readonly<Record<string, { readonly body: string }>>;
-  readonly weaponSkins: Readonly<Record<string, { readonly weapon: string }>>;
+  readonly weaponSkins: Readonly<Record<string, { readonly weapon: string; readonly fx?: string | null }>>;
   readonly qualityGlow: Readonly<Record<QualityId, VisualTint>>;
 }
 export interface EquipmentAppearance {
@@ -61,6 +61,7 @@ export function validateEquipmentVisualMapping(mapping: EquipmentVisualMapping):
   for (const [id, skin] of Object.entries(mapping.weaponSkins)) {
     assertVisualSetId(id);
     assertVisualSetId(skin.weapon);
+    if (skin.fx !== undefined && skin.fx !== null) assertVisualSetId(skin.fx);
   }
 }
 
@@ -74,7 +75,8 @@ export function resolveEquipmentVisuals(
   if (!QUALITY_TIERS.some((q) => q.id === appearance.quality)) throw new Error('unknown quality');
   const tier = mapping.tiers[appearance.tier];
   let body = tier.body,
-    weapon = tier.weapon;
+    weapon = tier.weapon,
+    fx = tier.fx;
   if (!appearance.hideCostume && appearance.costume) {
     const costume = Object.prototype.hasOwnProperty.call(mapping.costumes, appearance.costume)
       ? mapping.costumes[appearance.costume]
@@ -88,11 +90,12 @@ export function resolveEquipmentVisuals(
       : undefined;
     if (!skin) throw new Error(`unknown weapon skin '${appearance.weaponSkin}'`);
     weapon = skin.weapon;
+    if (skin.fx !== undefined) fx = skin.fx;
   }
   return {
     bodySet: body,
     weaponSet: weapon,
-    fxSet: tier.fx,
+    fxSet: fx,
     aura: tier.aura,
     quality: appearance.quality,
     glowTint: [...mapping.qualityGlow[appearance.quality]],

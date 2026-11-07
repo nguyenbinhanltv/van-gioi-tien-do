@@ -29,6 +29,8 @@ export interface SpriteLayerClip {
   readonly events: readonly { readonly at: number; readonly name: SpineEventName }[];
 }
 export interface SpriteLayerSet {
+  /** Quality halos name the exact weapon silhouette they were derived from. */
+  readonly derivedFromWeapon?: string;
   readonly format: 'vgtd-sprite-layer-set';
   readonly version: 1;
   readonly id: string;
@@ -60,6 +62,10 @@ export function validateSpriteLayerSet(set: SpriteLayerSet): void {
   )
     throw new Error('invalid sprite layer header/motion clock');
   assertVisualSetId(set.id);
+  if (set.derivedFromWeapon !== undefined) {
+    if (set.role !== 'fx') throw new Error('only FX sets may declare a source weapon');
+    assertVisualSetId(set.derivedFromWeapon);
+  }
   if (
     !set.canvas ||
     ![set.canvas.width, set.canvas.height, set.canvas.pivotX, set.canvas.pivotY].every(Number.isFinite) ||
@@ -187,6 +193,8 @@ export function composeSpriteLayers(input: {
   readonly glowTint?: VisualTint;
 }) {
   assertVisualSetId(input.name);
+  if (input.fx?.derivedFromWeapon !== undefined && input.fx.derivedFromWeapon !== input.weapon.id)
+    throw new Error('quality FX belongs to a different weapon set');
   if (input.glowTint !== undefined && !input.fx) throw new Error('quality glow tint requires an fx layer');
   if (input.body.role !== 'body' || input.weapon.role !== 'weapon' || (input.fx && input.fx.role !== 'fx'))
     throw new Error('layer roles do not match composition slots');
