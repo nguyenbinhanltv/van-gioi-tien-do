@@ -24,8 +24,10 @@ import { normalizeSheetDpi, preparationScale, type ProjectPreparation, type Shee
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
+import { auditProjectVariant, type VariantProject, type VariantReference, type VariantAudit } from './variant.js';
 
 export interface ProjectClip {
+  readonly variant?: VariantReference;
   /** Armature animation name. */
   readonly name: string;
   /** Raw sheet PNG, relative to the project file. */
@@ -69,6 +71,7 @@ export interface ProjectClip {
 }
 
 export interface Project {
+  readonly variant?: VariantProject;
   readonly character: string;
   readonly direction: Direction;
   /** Quality backlog file (accepted soft findings), relative to the project file. Default `quality-backlog.json` beside it. */
@@ -101,6 +104,7 @@ export interface ClipContract {
 }
 
 export interface Contract {
+  readonly variant?: VariantAudit;
   readonly format: 'vgtd-sprite-contract';
   readonly version: 1;
   readonly character: string;
@@ -156,6 +160,7 @@ export function validateFootSlideAlignment(
 }
 
 export function runProject(project: Project, baseDir: string): ProjectResult {
+  const variant = auditProjectVariant(project, baseDir);
   const scale = project.preparation ? preparationScale(project.preparation, baseDir) : project.scale;
   if (project.preparation && project.scale !== undefined && project.scale !== scale)
     throw new Error('non-reproducible project: explicit scale conflicts with preparation calibration');
@@ -252,6 +257,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
     const speed = s.clip.groundSpeedPxS ?? groundSpeedPxS(s.clip.tableId, project.direction) ?? undefined;
     validateFootSlideAlignment(project, s.clip, manifest?.cells);
     const calibration = sheetCalibration(s);
+    const origins = variant?.clips.find((c) => c.name === s.clip.name)?.alignmentOrigins;
     return {
       ...s,
       manifest,
@@ -263,6 +269,9 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
           guides,
           vertical: s.clip.vertical ?? 'sole',
           groundY: s.groundY,
+          ...(origins
+            ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
+            : {}),
           ...(s.clip.exceptions?.[i] ? { exception: s.clip.exceptions[i]! } : {}),
         }),
       ),
@@ -314,10 +323,11 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   });
   const rawQa = runQa(qaClips, { masterHeight: m.height, master, guides });
   const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
-  const verdict = applyBacklog(rawQa.findings, project.direction, backlog);
+  const findings = [...rawQa.findings, ...(variant?.findings ?? [])];
+  const verdict = applyBacklog(findings, project.direction, backlog);
   const qa = {
     ok: verdict.ok,
-    findings: rawQa.findings,
+    findings,
     judged: verdict.judged,
     resolved: verdict.resolved,
     counts: verdict.counts,
@@ -327,6 +337,7 @@ export function runProject(project: Project, baseDir: string): ProjectResult {
   const contract: Contract = {
     format: 'vgtd-sprite-contract',
     version: 1,
+    ...(variant ? { variant } : {}),
     character: project.character,
     direction: project.direction,
     stem: project.stem,

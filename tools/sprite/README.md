@@ -138,3 +138,50 @@ Event phases remain in legacy TABLE coordinates. This is presentation timing, no
 Maximum lattice: 4x4; logical cells remain 256 texture pixels at 2x. A raw 2048-square 4x4 sheet has 512-pixel cells:
 declare DPI preparation and the locked character calibration. Regenerate locomotion ghosts using the new duration.
 See `docs/art/sprite-sheet-pipeline.md` for counts and the production contract.
+
+## Edit-from-master variants
+
+T2–T5 and costumes use image edits of T1 motion sheets. The pipeline verifies declared references and measurements; it does
+not call an image model or automatically detect joints. Keep the source PNGs and generation/edit prompts.
+
+Declare `project.variant`:
+
+```json
+{
+  "kind": "edit-from-master-v1",
+  "category": "tier",
+  "id": "T2",
+  "masterProject": "../T1/project.json",
+  "masterProjectSha256": "<64 lowercase hex characters>",
+  "masterImageSha256": "<SHA256 of T1 master PNG>",
+  "edit": { "tool": "<image edit tool/model>", "prompt": "<exact edit prompt>" },
+  "thresholds": { "minSilhouetteIou": 1, "maxJointDistancePx": 0, "minFaceSimilarity": 1 }
+}
+```
+
+The thresholds above demand exact preservation and are an example, not approved art tolerances. All three are required;
+there are no inferred defaults. Record the chosen production thresholds after art review. If T1 uses external preparation
+calibration, also pin that file with `masterCalibrationSha256`. Each target clip must declare
+`variant: { masterSheetSha256: '<hash of original T1 PNG>', annotations: 'idle.pose-lock.json' }`.
+The source must be a non-variant project of the same character/direction. Names, frame counts, duration, loop, table id and
+phase anchors, vertical placement, kind, contacts, speed, pose exceptions and every other non-storage clip control must match. Selected template cells/guides and slicing controls also stay locked; the complete clip set must remain present. Master and target require explicit fixed scale (`scale`, preparation calibration, or
+`calibration.scale`); inferred reference heights/frames are rejected. Different raw DPI is allowed only with equal output scale. Both projects reference the pinned T1 master PNG; disable palette locking when new outfit colours need to remain unchanged. Variants reuse T1 per-cell alignment origins, so altered clothing centroids cannot shift the anatomy after QA.
+
+The annotations file is an array in clip-local order, one object per cell:
+
+- `master` and `edited`: maps for every `POSE_JOINTS` name, each `{ x, y }` in normalized 256px source-cell coordinates,
+  before inset/crop, palette lock and alignment. Review the annotations against the images; copied coordinates do not prove pose identity.
+- `face: { rect: { x, y, width, height } }`: one shared integer rectangle containing only the visible face in both cells.
+  Face similarity compares premultiplied RGBA differences on the nonempty pixel union; blank face crops fail.
+- N/NE only may use `face: { occluded: '<reviewed reason>' }`; this is explicitly **unmeasured**, never a face-similarity pass.
+
+`POSE_JOINTS`: crown (main hair cap), chin, shoulder_L/R, elbow_L/R, hand_L/R, pelvis, knee_L/R, foot_L/R.
+Use the same anatomical convention as D44; the existing full-alpha bounding-box QA remains a separate diagnostic.
+
+`npm run sprite:variant-check -w @vgtd/sprite -- --project <project.json>` prints hashes, every cell's metrics and findings;
+exit1 means a lock failure. Normal `sprite:build`/batch runs the same audit before alignment/palette lock and includes it
+in `.sprite.json`. Silhouette IoU uses alpha>=128; joint gate uses maximum paired distance; face comparison is pixel-based,
+not semantic identity recognition. Outfit geometry can change silhouette: calibrate explicit thresholds with reviewed art.
+Pose/face findings are hard gates, cannot be accepted into the quality backlog, and receive no pose-exception bypass.
+Grouped sheets use each clip's selected cells for both source and edit. Pinning source project/sheet/calibration plus recorded
+edited-sheet/annotation SHA256 hashes makes later source drift visible. Hashes prove bytes, not model honesty or image licensing.

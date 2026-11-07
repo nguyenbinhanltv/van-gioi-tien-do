@@ -17,4 +17,5 @@ export * from './project.js';
 export * from './review.js';
 export * from './batch.js';
 export * from './preparation.js';
+export * from './variant.js';
 export * from './grouped.js';
