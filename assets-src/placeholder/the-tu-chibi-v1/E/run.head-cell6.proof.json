@@ -1,0 +1,49 @@
+{
+  "source": "raw/run.attempt1.png",
+  "edit": "raw/run.head-corrected.png",
+  "output": "raw/run.head-cell6.png",
+  "selected": [6],
+  "hashKind": "SHA1 of premultiplied RGBA cell bytes",
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "before": [
+    "5ac6748003b326cacb586bed7595ef8a55b60160",
+    "00484253743ae4777a957c3a90a69e08bc0c3637",
+    "f76d618c291ea425cd10ccf53c2583460bfba80c",
+    "e12fc310072b2478defc80d16c742f4f0568102b",
+    "cc01c636356df1c6fd41b34988c20fa8c2ecc7f4",
+    "d5cd25f05da40bb4447ce8994b2069778ec2ff71",
+    "adb8aff62fc039636c32f6e8b7b3442d989cf0fa",
+    "b093d8b3d68bcb9cd1214a150e2dc87a9ae776fd",
+    "1b8a694e6f790238b7cd7c0ccc6ec4017ba0b3b8",
+    "d302f2a8a4779d2a21e731b1e8e1d4bfe9a6020e",
+    "a44a8c8c03eca3cf1c45e3d7fca66ec4be508ae0",
+    "40a7b76a1e4ead4b1aa21f63bc37c9ab3a2a06c2",
+    "476adbcf7f80da3e816d85ee8c3c011fee1a0001",
+    "e177787f99f435d1946a8fbcb1ffc26671ab94c3",
+    "07c3696ea598c8d6ae5a52c0034f40a687b66789",
+    "a62c611edd09ef089fd7d58c02c927e1d3971122"
+  ],
+  "after": [
+    "5ac6748003b326cacb586bed7595ef8a55b60160",
+    "00484253743ae4777a957c3a90a69e08bc0c3637",
+    "f76d618c291ea425cd10ccf53c2583460bfba80c",
+    "e12fc310072b2478defc80d16c742f4f0568102b",
+    "cc01c636356df1c6fd41b34988c20fa8c2ecc7f4",
+    "d5cd25f05da40bb4447ce8994b2069778ec2ff71",
+    "161c00dc0e8fd9683988baf51d0509b165b56d5f",
+    "b093d8b3d68bcb9cd1214a150e2dc87a9ae776fd",
+    "1b8a694e6f790238b7cd7c0ccc6ec4017ba0b3b8",
+    "d302f2a8a4779d2a21e731b1e8e1d4bfe9a6020e",
+    "a44a8c8c03eca3cf1c45e3d7fca66ec4be508ae0",
+    "40a7b76a1e4ead4b1aa21f63bc37c9ab3a2a06c2",
+    "476adbcf7f80da3e816d85ee8c3c011fee1a0001",
+    "e177787f99f435d1946a8fbcb1ffc26671ab94c3",
+    "07c3696ea598c8d6ae5a52c0034f40a687b66789",
+    "a62c611edd09ef089fd7d58c02c927e1d3971122"
+  ],
+  "unchangedOtherCells": 15,
+  "resampling": false
+}

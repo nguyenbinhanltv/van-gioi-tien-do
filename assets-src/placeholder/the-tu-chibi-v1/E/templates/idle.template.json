@@ -1,0 +1,84 @@
+{
+  "clip": "idle",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 6,
+    "pelvis": 119,
+    "centerX": 127.69085805934242
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "idle_0"
+    },
+    {
+      "leading": null,
+      "tag": "idle_1"
+    },
+    {
+      "leading": null,
+      "tag": "idle_2"
+    },
+    {
+      "leading": null,
+      "tag": "idle_3"
+    },
+    {
+      "leading": null,
+      "tag": "idle_4"
+    },
+    {
+      "leading": null,
+      "tag": "idle_5"
+    },
+    {
+      "leading": null,
+      "tag": "idle_6"
+    },
+    {
+      "leading": null,
+      "tag": "idle_7"
+    },
+    {
+      "leading": null,
+      "tag": "idle_8"
+    },
+    {
+      "leading": null,
+      "tag": "idle_9"
+    },
+    {
+      "leading": null,
+      "tag": "idle_10"
+    },
+    {
+      "leading": null,
+      "tag": "idle_11"
+    },
+    {
+      "leading": null,
+      "tag": "idle_12"
+    },
+    {
+      "leading": null,
+      "tag": "idle_13"
+    },
+    {
+      "leading": null,
+      "tag": "idle_14"
+    },
+    {
+      "leading": null,
+      "tag": "idle_15"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

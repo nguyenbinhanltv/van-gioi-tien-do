@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:15:07.313Z",
+  "utcRecordedCompleted": "2026-11-07T20:15:51.185Z",
+  "prompt": "Use case: identity-preserve / precise-object-edit. Edit this exact five-panel original Thể tu T1 turnaround. Preserve every figure's pose, silhouette, scale, position, panel ordering E SE S NE N, hair/face anatomy, costume and gauntlet construction EXACTLY. Change only two things: (1) consistently show a small clean SINGLE nick through the character's anatomical LEFT thick eyebrow in the SE and S views where visible; in S it is the viewer RIGHT eyebrow, do not put a forehead scar or eye scar, do not add on other eyebrow. E right profile should not show a nick on the right eyebrow. Back views hide brows naturally. (2) simplify material shading to two clean cel-shaded tone regions per material plus one small highlight and thin rim. Remove extra painterly grey/brown facets especially trousers/skin without changing outlines or anatomy. Preserve tan skin, amber eyes, charcoal cloth, amber two-ended hip sash, restrained bronze bands. Same fixed adult face from approved T3, same original design. No extra ornament, no weapon redesign, no missing gauntlet, no text or grid. Transparent background, preserve full five-body layout and generous margins. This is a targeted production master correction, not a redesign.",
+  "references": ["T1-turnaround.attempt1.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-cc410cf2-705d-457a-bf64-1bba002333c6.png",
+  "status": "canonical reference candidate; no animation acceptance claimed",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:15:51.185Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

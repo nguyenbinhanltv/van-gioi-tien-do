@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:18:53.517Z",
+  "utcRecordedCompleted": "2026-11-07T20:19:57.558Z",
+  "prompt": "Use case: precise-object-edit / background-extraction. Correct this five-panel original Thể tu character turnaround. REPLACE EVERY BACKGROUND PIXEL, all red/yellow/white/grey/black noisy background and stray fragments, with perfectly flat solid RGB(255,0,255) MAGENTA. OPAQUE background, NO transparency, NO checkerboard, NO texture, NO shadows or effects. Five clean separated character silhouettes only. Preserve the characters' exact poses, sizes, positions, anatomy, fixed adult tan face amber eyes thick brows left brow nick, black hair/topknot amber ribbons, plain charcoal outfit and simple charcoal/bronze gauntlets. Preserve the restored warm IVORY front ink-wash apron underneath amber sash in E/SE/S and a side glimpse in NE, rear naturally hidden in N. Two narrow amber sash ends OVER the ivory apron. Keep the ivory panel plain and ink wash only tips. No red or yellow edge halo: only crisp tinted character outlines directly against solid magenta. Five views E SE S NE N, all full body, exact same layout. This is a chroma-key PRODUCTION SOURCE. Do not add labels/text/grid, no new objects, no body redraw, no ornament. Original premium semi-chibi 4.5-head tank. Entire background must be uniform opaque magenta right up to all character contours.",
+  "references": ["T1-apron.failed-alpha.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-c4789bfb-67c9-4137-86c6-1c7185d2599d.png",
+  "status": "canonical T1 source; restored ivory apron; opaque magenta for pipeline keying",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:19:57.558Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

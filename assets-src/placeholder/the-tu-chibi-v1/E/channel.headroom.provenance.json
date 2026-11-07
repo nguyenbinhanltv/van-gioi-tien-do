@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:36:56.198Z",
+  "utcRecordedCompleted": "2026-11-07T21:39:34.247Z",
+  "prompt": "Use case: identity-preserve / precise-object-edit. Fix real top-edge clipping in this12frame4x3CHANNEL sheet. Preserve exact12sustainedbracing poses/breathing loop, all bodies/arms/gauntlets/feet/ivoryapron/sash positions and bodyscale. DO NOT resizewholefigures or flattenpose. Match skull/face/maincap headunit to pinnedmaster image2 (about50.7logicalpx crown-to-chinEuclidean in256cell; onthis362pxrawcell about72nativepx), correcting current slightlyoversizedheads only. Preserve EXACT adulttan squarejaw/ambereyes/thickbrow identity/internalfacialproportions, headcenter/angle and naturalneckconnection. Make elevated TOPKNOT/BUN a SMALL compact tiedtuft with atmost6logicalpx above maincapcrown (~8nativepx). Keep amberhairribbons flowing sideways/back/down, no upwardhairarches. This fixes hairheadroom and trueheadscale only; whole sourcefigure max228logicalpx beforealignment, achieved without bodyshrinking. Same4columns3rows SQUAREcells, exactcanvasdimensions/sequence, opaqueuniformmagenta, clean2-tonecel+smallhighlight/rim. No effects, symbols, labels, shadow or extraobjects. Seamlesslastfirst, gauntletsremainnaturallyworn.",
+  "references": ["raw/channel.attempt1.png", "../reference/E.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-ebb95511-229f-4306-8338-1d24f50b272c.png",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T21:39:34.247Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  }
+}
