@@ -22,7 +22,7 @@ motion-calibration.json fixes logical scale1 across normalized sheets. Whole-she
 
 E/policy-notes.json records D41 free-pose declarations and D47 upright head-size evidence. Upright idle/walk/run/dash use D47; emote conservatively follows the current public upright default. Free meditation/fall/attacks/hit/hover/tribulation/cast release retain D41 declarations. None waives clipping, anatomy drift or true foot errors.
 
-qa-generated.ts runs native gates plus local projected-canvas guards. Missing sheets cannot imply a full pass. Native canvasLoss PR152 is merged. Calibrated full-master edits cleared idle/walk/channel clipping. Outstanding: actual run/dash head drift correction and evidence, authored origins for wide attack3, foot findings, final export and real Cocos3.8.8 2× capture. No direction-wide hard pass, runtime-ready export or PR is claimed yet.
+qa-generated.ts runs native gates plus local projected-canvas guards; missing sheets cannot imply a full pass. All202 E frames pass the native hard gates with zero canvas loss. Run/dash head repairs and D47 evidence, attack3 fixed-root origins and rear-boot repair are resolved. The E full-source compatibility export and real Cocos Creator3.8.8 capture passed: all15 clips at2x,24 midpoint samples each; E/engine-gate.json records source/runtime/capture hashes. The24 soft foot/height findings, manual landmark uncertainty and mobile texture residency remain open in quality-backlog.json. SE/S/NE/N motion remain pending.
 
 ## Provenance
 
@@ -31,6 +31,6 @@ reference/provenance.json retains construction prompts, tool, undisclosed model,
 Run from repository root:
 node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dan-phu-tu-chibi-v1/qa-generated.ts assets-src/placeholder/dan-phu-tu-chibi-v1/E <temporary-output-directory>
 
-Production export and direction PR follow hard gates and real Cocos capture.
+PR #166 delivers the E full-source compatibility export plus official D45 aligned extraction guides in E/layer-guides. This is not an extracted layered runtime delivery. Dedicated body/weapon/FX extraction is scheduled by the orchestrator after all5 T1 directions are merged.
 
 Rear NE/N construction chin placeholders are not visible anatomical evidence. Before rear motion, use the merged D50 rear-crown-shoulder policy with actual same-direction crown, visible shoulder-top and skull-breadth landmarks; never project a chin or guess an occluded nape.
