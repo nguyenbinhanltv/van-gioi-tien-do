@@ -7,3 +7,5 @@ export * from '../../../packages/character/src/paperdoll.js';
 export * from '../../../packages/character/src/animations.js';
 export * from '../../../packages/character/src/footprint.js';
 export * from '../../../packages/character/src/viewer.js';
+export * from '../../../packages/character/src/equipment-visuals.js';
+export * from '../../../packages/character/src/sprite-layers.js';

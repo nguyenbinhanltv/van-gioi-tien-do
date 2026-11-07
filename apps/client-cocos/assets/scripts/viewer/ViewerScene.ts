@@ -1,4 +1,16 @@
-import { Color, Component, Label, Node, ResolutionPolicy, Sprite, UITransform, _decorator, resources, view } from 'cc';
+import {
+  Color,
+  Component,
+  JsonAsset,
+  Label,
+  Node,
+  ResolutionPolicy,
+  Sprite,
+  UITransform,
+  _decorator,
+  resources,
+  view,
+} from 'cc';
 import { character, shared } from '../vendor/vgtd.mjs';
 import { newNode } from '../IsoAdapter';
 import { buildPlaceholderArt, type ArtFrames } from '../PlaceholderArt';
@@ -40,6 +52,9 @@ interface Slot {
 /** Public hook for headless capture (scripts/capture.mjs) and tests: `window.__vgtdViewer`. */
 export interface ViewerHook {
   ready(): boolean;
+  setEquipment(patch: Partial<character.EquipmentAppearance>): void;
+  equipment(): ReturnType<NonNullable<CharacterActor['equipmentState']>> | null;
+  events(clear?: boolean): readonly string[];
   /** Last error shown in the panel (empty string = none): lets scripts fail fast. */
   error(): string;
   /** Merge a partial settings object (mode, direction, animation, paused, ...) and re-apply. */
@@ -85,6 +100,13 @@ export class ViewerScene extends Component {
   private lastWrap = 0;
   private src = { folder: 'dragonbones/viewer', stem: 'rig' };
   private crowdStagger = 0;
+  private equipmentLoading = false;
+  private equipmentPath: string | null = null;
+  private equipmentConfig: {
+    folder: string;
+    mapping: character.EquipmentVisualMapping;
+    appearance: character.EquipmentAppearance;
+  } | null = null;
   /** Directions that have a rig file in the source folder (empty = unknown). */
   private rigDirs = new Set<Direction>();
   private readonly events: string[] = [];
@@ -134,6 +156,7 @@ export class ViewerScene extends Component {
     this.panel.onLayout = () => (this.lastPanelSig = '');
     (globalThis as unknown as { __vgtdViewer?: ViewerHook }).__vgtdViewer = this.makeHook();
     this.ready = true;
+    if (this.equipmentPath) void this.loadEquipment(this.equipmentPath).catch((e) => this.fail(e));
   }
 
   private makeHook(): ViewerHook {
@@ -142,6 +165,7 @@ export class ViewerScene extends Component {
     return {
       ready: () =>
         this.ready &&
+        !this.equipmentLoading &&
         !this.failed &&
         !this.dirty &&
         this.all().length > 0 &&
@@ -149,6 +173,13 @@ export class ViewerScene extends Component {
           (sl) => !sl.actor.root.active || (sl.want !== null && sl.actor.skeletonDirection === sl.want),
         ),
       error: () => this.failed,
+      setEquipment: (patch) => this.setEquipment(patch),
+      equipment: () => (this.equipmentConfig ? (this.mainActor().equipmentState?.() ?? null) : null),
+      events: (clear = false) => {
+        const result = [...this.events];
+        if (clear) this.events.length = 0;
+        return result;
+      },
       set: (patch) => {
         Object.assign(this.settings, patch);
         this.dirty = true;
@@ -168,7 +199,7 @@ export class ViewerScene extends Component {
           frames: a ? Math.round(a.duration * KEY_FPS) : 0,
           rig: this.mainActor().skeletonDirection,
           mode: this.settings.mode,
-          source: `${this.src.folder}/${this.src.stem}`,
+          source: this.equipmentConfig ? this.equipmentConfig.folder : `${this.src.folder}/${this.src.stem}`,
         };
       },
       seam: () => this.mainActor().seamMetric(),
@@ -220,6 +251,12 @@ export class ViewerScene extends Component {
     }
     const actor = new DragonBonesActor(this.world, `Actor_${key}`);
     actor.source = { ...this.src };
+    if (this.equipmentConfig)
+      actor.setEquipmentVisuals(
+        this.equipmentConfig.folder,
+        this.equipmentConfig.mapping,
+        this.equipmentConfig.appearance,
+      );
     actor.onError = (m) => this.fail(new Error(m));
     actor.onRigLoaded = (dir, px) => {
       const k = `${this.src.folder}/${dir}`;
@@ -260,6 +297,8 @@ export class ViewerScene extends Component {
   private readHash(): void {
     const q = new URLSearchParams(location.hash.slice(1).replace(/,/g, '&'));
     const s = this.settings;
+    this.equipmentPath = q.get('equipment');
+    this.equipmentLoading = !!this.equipmentPath;
     const anim = q.get('anim') as ClipId | null;
     if (anim && ALL_CLIPS.includes(anim)) s.animation = anim;
     const animb = q.get('animb') as ClipId | null;
@@ -287,6 +326,58 @@ export class ViewerScene extends Component {
     if (off) for (const slot of off.split('+')) s.equipped.delete(slot as never);
     const t = Number(q.get('t'));
     if (q.has('t') && Number.isFinite(t)) this.pendingSeek = t;
+  }
+
+  private async loadEquipment(path: string): Promise<void> {
+    if (!/^[\w-]+(?:\/[\w.-]+)*$/.test(path) || path.includes('..'))
+      throw new Error('invalid equipment preview resource');
+    const asset = await new Promise<JsonAsset>((resolve, reject) =>
+      resources.load(path, JsonAsset, (error, asset) =>
+        error || !asset ? reject(error ?? new Error('equipment config missing')) : resolve(asset),
+      ),
+    );
+    const config = asset.json as {
+      format: string;
+      version: number;
+      folder: string;
+      mapping: character.EquipmentVisualMapping;
+      appearance: character.EquipmentAppearance;
+    };
+    if (config.format !== 'vgtd-equipment-preview' || config.version !== 1)
+      throw new Error('invalid equipment preview config');
+    character.resolveEquipmentVisuals(config.mapping, config.appearance);
+    this.equipmentConfig = { folder: config.folder, mapping: config.mapping, appearance: config.appearance };
+    const q = new URLSearchParams(location.hash.slice(1).replace(/,/g, '&'));
+    const patch: Record<string, unknown> = {};
+    for (const [key, param] of [
+      ['tier', 'tier'],
+      ['quality', 'quality'],
+      ['costume', 'costume'],
+      ['weaponSkin', 'weapon-skin'],
+    ] as const)
+      if (q.has(param)) patch[key] = q.get(param) || null;
+    if (q.has('hide-costume')) patch.hideCostume = q.get('hide-costume') !== '0';
+    this.setEquipment(patch as Partial<character.EquipmentAppearance>);
+    this.equipmentLoading = false;
+  }
+
+  private setEquipment(patch: Partial<character.EquipmentAppearance>): void {
+    const config = this.equipmentConfig;
+    if (!config) throw new Error('no equipment preview config loaded');
+    const appearance = { ...config.appearance, ...patch };
+    const selected = character.resolveEquipmentVisuals(config.mapping, appearance);
+    config.appearance = appearance;
+    this.settings.cache = 'realtime';
+    this.rigDirs.clear();
+    for (const d of ALL_DIRECTIONS)
+      if (resources.getInfoWithPath(`${config.folder}/${selected.bodySet}/${selected.bodySet}_${d}.layer`, JsonAsset))
+        this.rigDirs.add(d);
+    for (const slot of Array.from(this.slots.values()))
+      slot.actor.setEquipmentVisuals?.(config.folder, config.mapping, appearance);
+    this.seamCache.clear();
+    this.rigOrderCache.clear();
+    this.dirty = true;
+    this.panel.sync();
   }
 
   // ------------------------------------------------------------------ actions
@@ -462,7 +553,7 @@ export class ViewerScene extends Component {
   // ------------------------------------------------------------------ frame
 
   update(dt: number): void {
-    if (!this.ready) return;
+    if (!this.ready || this.equipmentLoading) return;
     try {
       this.tick(dt);
     } catch (e) {
@@ -568,5 +659,6 @@ export class ViewerScene extends Component {
 
   onDestroy(): void {
     this.panel?.destroy();
+    for (const slot of Array.from(this.slots.values())) slot.actor.dispose?.();
   }
 }
