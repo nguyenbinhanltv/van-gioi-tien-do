@@ -1,0 +1,25 @@
+{
+  "clip": "channel",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Image2 unscaled canonical HEAD STENCILS lock skullsize and face; their position may translate/tilt with pose, NEVER enlarge head or change face. CLIP channel:12frames4columns3rows EXACT equal squarecells. One smooth casting channel loop, standing216px anatomy. Leftfan held chest beforebody, free right hand forms twofinger mudra near sternum. Breathing weight shift2px and tiny fanpulse, no stepping.0-3inhale,4-6peak,7-11exhaleandreturn0; eyelids calm determined. Hair/sash/sleeve ends lag then settle; maintain footplant, canonicalskullsize and fixed SE face. No energy/FX drawn, puremagenta. Whole figure within eachcell. Never turn camera or enlarge head.",
+  "utcStart": "2026-11-07 22:12:11 UTC",
+  "references": ["reference/SE.master.png", "SE/templates/channel.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/channel.attempt1.png",
+  "selected": "sheets/channel.png",
+  "utcEndObserved": "2026-11-07 22:12:33 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "3efbe2350f205e8d91a6958894284151c306b3750aa539dba93ef506f24bef89",
+  "utcRawOutputFileModified": "2026-11-07T22:12:33.752Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/channel.head-guide.png",
+      "sha256": "007073beade5dfe123d108550fb27931af901da7ff829dab497c7b00a07adf25"
+    }
+  ],
+  "selectedSha256": "3efbe2350f205e8d91a6958894284151c306b3750aa539dba93ef506f24bef89"
+}
