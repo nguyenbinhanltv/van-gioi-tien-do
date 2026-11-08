@@ -167,6 +167,12 @@ export const BUDGETS = {
   ATLAS_MAX_WEB_MOBILE: 2048,
   ATLAS_MAX_PC: 4096,
   ATLAS_PADDING_PX: 2,
+  /** Extrude around each atlas frame (docs/02: padding 2 px + extrude 1 px). */
+  ATLAS_EXTRUDE_MIN_PX: 1,
+  /** Icon export sizes in px (docs/05, docs/00 section 3: 48 / 64 / 128). */
+  ICON_SIZES_PX: [48, 64, 128],
+  /** Non-asset part of the Web initial package, MB (docs/02 table; D5: 6 + 4 + 4 + 5 + 3 + 1 + 2). */
+  INITIAL_RESERVED_MB_WEB: { ENGINE_CODE: 6, AUDIO: 1, SPARE: 2 },
 } as const;
 
 /**

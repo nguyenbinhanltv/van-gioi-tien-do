@@ -100,6 +100,32 @@ describe('runBudget with chibi', () => {
   });
 });
 
+describe('gate fails on an oversized bundle', () => {
+  it('flags loco, bundle and class GPU overruns and the initial package', () => {
+    const root = path.join(TMP, 'oversized');
+    const dir = path.join(root, 'big-chibi-v1');
+    fs.mkdirSync(dir, { recursive: true });
+    const frame = (n: string, i: number) => ({ name: n, x: (i % 4) * 500, y: Math.floor(i / 4) * 500, width: 480, height: 480 });
+    const names = [...['idle', 'walk', 'run'].flatMap((c) => Array.from({ length: 16 }, (_, i) => `${c}_${i}`)), ...Array.from({ length: 80 }, (_, i) => `attack_${i}`)];
+    fs.writeFileSync(
+      path.join(dir, 'bigchibi_E_tex.json'),
+      JSON.stringify({ name: 'bigchibi_E', imagePath: 'x.png', width: 2048, height: 2048, SubTexture: names.map(frame) }),
+    );
+    const display = names.map((n) => ({ type: 'image', name: n, transform: { scX: 0.5, scY: 0.5 } }));
+    const anim = (n: string) => ({ name: n, slot: [{ displayFrame: names.map((x, i) => ({ x, i })).filter((o) => o.x.startsWith(n + '_')).map((o) => ({ duration: 1, value: o.i })) }] });
+    fs.writeFileSync(
+      path.join(dir, 'bigchibi_E_ske.json'),
+      JSON.stringify({ armature: [{ slot: [{ name: 'body', displayIndex: 0 }], skin: [{ slot: [{ name: 'body', display }] }], animation: ['idle', 'walk', 'run', 'attack'].map(anim) }] }),
+    );
+    const r = checkChibi(root);
+    const codes = new Set(r.findings.map((f) => f.code));
+    expect(codes.has('CHIBI_LOCO_OVER')).toBe(true);
+    expect(codes.has('CHIBI_BUNDLE_OVER')).toBe(true);
+    const full = runBudget({ atlasDir: TMP, chibiDir: root, checkPixels: false });
+    expect(full.ok).toBe(false);
+  });
+});
+
 describe('buildBundle', () => {
   it('full tier is pixel-identical per frame; 1x halves pages and compensates the display scale', () => {
     const s = discoverSources(SRC).find((x) => x.classId === 'the-tu' && x.dir === 'S')!;
