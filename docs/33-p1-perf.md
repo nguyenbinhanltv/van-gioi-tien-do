@@ -27,10 +27,10 @@ Giới hạn của phép đo, nên đọc cùng kết quả:
 
 ### Bước còn lại cho chủ dự án: đo trên điện thoại thật qua LAN
 
-Điều kiện: máy tính và điện thoại cùng Wi-Fi; tường lửa Windows cho phép Node.js nhận kết nối vào cổng 7456 (hộp thoại "Allow access" lần đầu, chọn mạng Private).
+Điều kiện: máy tính và điện thoại cùng Wi-Fi; tường lửa Windows cho phép Node.js nhận kết nối vào cổng 8456 (hộp thoại "Allow access" lần đầu, chọn mạng Private).
 
 1. Trên máy tính, từ gốc repo: `npm ci`, rồi `npm run build:web -w client-cocos -- --release` (cần Cocos Creator 3.8.8, `COCOS_CREATOR_PATH` nếu cài lệch đường dẫn mặc định). Ổ C đầy thì đặt `apps/client-cocos/{library,temp,build,assets/chibi}` thành junction sang ổ khác trước khi build.
-2. `npm run serve -w client-cocos`. Server in các dòng `LAN: http://<IP-máy-tính>:7456/?npcs=20` (mỗi card mạng một dòng; chọn IP cùng dải với điện thoại, thường `192.168.x.x` hoặc `10.x.x.x`).
+2. `npm run serve -w client-cocos`. Server in các dòng `LAN: http://<IP-máy-tính>:8456/?npcs=20` (mỗi card mạng một dòng; chọn IP cùng dải với điện thoại, thường `192.168.x.x` hoặc `10.x.x.x`).
 3. Trên điện thoại mở đúng URL đó bằng Chrome (Android) hoặc Safari (iOS). Không cần cờ nào khác: mặc định đã là 20 NPC chibi nhiều lớp, người chơi lớp mặc định, map Sơn Môn 256 × 256. Muốn đo chuyến đi bộ tự động mở thêm `&route=1` (đi vòng quanh toàn bản đồ, giữ nguyên các cờ khác). Muốn thử tier streaming thấp: `&tier=low`.
 4. Chờ ~30 giây cho số ổn định, rồi vừa di chuyển (joystick cảm ứng hiện sẵn; hoặc `&route=1` để máy tự đi) vừa chụp màn hình HUD góc trên-trái: **FPS**, **Draw calls / 80**, **Tex mem**, **JS heap**, **Nodes / Chunks (đang dựng / đang giữ) / NPC**, **Loaded MB** (gói đã tải).
 5. Console (tuỳ chọn, chính xác hơn): Android Chrome nối USB (bật USB debugging) → mở `chrome://inspect` trên máy tính → Console in dòng `[vgtd][perf] {...}` mỗi 2 giây (JSON đủ số liệu, gồm `frameMsMax`, `hitches50`, `hitches100`). Tab Memory cho tổng RAM của tab. iOS: Safari Web Inspector qua cáp (không có `performance.memory`: chỉ FPS / draw call trên HUD).
@@ -57,10 +57,10 @@ Tham số URL (cũng dùng trên máy thật): `?npcs=N` (mặc định 20, 0 = 
 
 ## Cách đo trên máy mobile thật
 
-Điều kiện: máy tính và điện thoại cùng mạng Wi-Fi, tường lửa cho phép cổng 7456.
+Điều kiện: máy tính và điện thoại cùng mạng Wi-Fi, tường lửa cho phép cổng 8456 (cổng mặc định của server tĩnh client; 7456 là của Cocos Creator nên không dùng). Cách nhanh nhất: `npm run play` (README gốc) in sẵn các URL LAN.
 
 1. `npm run build:web -w client-cocos -- --release` (cần Cocos Creator, xem README).
-2. `npm run serve -w client-cocos` — server lắng nghe mọi giao diện và in ra các dòng `LAN: http://<IP-máy-tính>:7456/?npcs=20`.
+2. `npm run serve -w client-cocos` — server lắng nghe mọi giao diện và in ra các dòng `LAN: http://<IP-máy-tính>:8456/?npcs=20`.
 3. Trên điện thoại mở đúng URL đó bằng Chrome (Android) hoặc Safari (iOS). Cờ URL: `?npcs=20` (số NPC, mặc định 20), `?npcart=placeholder` (NPC sprite đơn giản thay vì chibi thật), `?tier=low|medium|high` (cửa sổ streaming), `?class=<id>` (lớp người chơi), `?input=touch`.
 4. Số liệu hiện **ngay trên màn hình** (HUD góc trên-trái): FPS, Draw calls / 80, Tex mem, JS heap, Nodes, Chunks, NPC, Loaded MB. Đợi 30 giây cho số ổn định, vừa click/joystick di chuyển vừa chụp màn hình HUD. FPS trung vị lấy bằng mắt qua nhiều lần chụp hoặc từ console (bước 5).
 5. Console: Android Chrome → `chrome://inspect` trên máy tính (USB debugging) → Console in dòng `[vgtd][perf] {...}` mỗi 2 giây (JSON đủ số liệu); tab Memory cho tổng RAM của tab. iOS: Safari Web Inspector qua cáp (`performance.memory` không có, chỉ FPS / draw call trên HUD).

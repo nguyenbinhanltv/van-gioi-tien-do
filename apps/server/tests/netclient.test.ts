@@ -46,7 +46,7 @@ beforeAll(async () => {
     port: 0,
     auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
     world: { mapTiles: MAP, spawn: { i0: 50, j0: 50, side: 10 } },
-    gateway: { corsOrigins: ['http://localhost:7456'] },
+    gateway: { corsOrigins: ['http://localhost:8456'] },
   });
 });
 afterAll(async () => {
@@ -137,14 +137,14 @@ describe('NetClient against the real server', () => {
   it('answers CORS preflight and tags responses only for allowed origins', async () => {
     const pre = await fetch(`http://127.0.0.1:${srv.port}/auth/login`, {
       method: 'OPTIONS',
-      headers: { origin: 'http://localhost:7456', 'access-control-request-method': 'POST' },
+      headers: { origin: 'http://localhost:8456', 'access-control-request-method': 'POST' },
     });
     expect(pre.status).toBe(204);
-    expect(pre.headers.get('access-control-allow-origin')).toBe('http://localhost:7456');
+    expect(pre.headers.get('access-control-allow-origin')).toBe('http://localhost:8456');
     expect(pre.headers.get('access-control-allow-headers')).toContain('content-type');
     const bad = await fetch(`http://127.0.0.1:${srv.port}/health`, { headers: { origin: 'http://evil.example' } });
     expect(bad.headers.get('access-control-allow-origin')).toBeNull();
-    const ok = await fetch(`http://127.0.0.1:${srv.port}/health`, { headers: { origin: 'http://localhost:7456' } });
-    expect(ok.headers.get('access-control-allow-origin')).toBe('http://localhost:7456');
+    const ok = await fetch(`http://127.0.0.1:${srv.port}/health`, { headers: { origin: 'http://localhost:8456' } });
+    expect(ok.headers.get('access-control-allow-origin')).toBe('http://localhost:8456');
   });
 });
