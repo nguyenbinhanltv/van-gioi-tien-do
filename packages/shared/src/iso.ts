@@ -121,6 +121,21 @@ export function inAoi(entity: TileCoord, centre: TileCoord, exiting = false): bo
   const hw = exiting ? AOI.EXIT_HALF_W : AOI.HALF_W;
   return Math.abs(e.u - c.u) <= hu && Math.abs(e.w - c.w) <= hw;
 }
+/**
+ * Allocation-free `inAoi` for hot loops (the server tests every entity against every player each AOI tick): the entity at tile
+ * (ei, ej) against an AOI centre already converted to screen axes, (cu, cw) = `toUW(centre)`. Same result as `inAoi`.
+ */
+export function inAoiAt(ei: number, ej: number, cu: number, cw: number, exiting = false): boolean {
+  const hu = exiting ? AOI.EXIT_HALF_U : AOI.HALF_U;
+  const hw = exiting ? AOI.EXIT_HALF_W : AOI.HALF_W;
+  return Math.abs(ei - ej - cu) <= hu && Math.abs(ei + ej - cw) <= hw;
+}
+/** Squared distance in (u, w) screen-axis space from tile (ei, ej) to (cu, cw) = `toUW(centre)`: the key AOI enters are ordered by. */
+export function uwDistSq(ei: number, ej: number, cu: number, cw: number): number {
+  const du = ei - ej - cu;
+  const dw = ei + ej - cw;
+  return du * du + dw * dw;
+}
 /** AOI centre; shifted by velocity × 0.5 s while flying. Velocity is in tiles/s. */
 export function aoiCentre(pos: TileCoord, vel: TileCoord, flying: boolean): TileCoord {
   const lead = flying ? AOI.FLIGHT_LEAD_S : 0;

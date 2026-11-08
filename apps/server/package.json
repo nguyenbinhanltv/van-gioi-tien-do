@@ -12,7 +12,8 @@
     "test": "vitest run",
     "dev": "node scripts/dev.mjs",
     "loadtest": "node scripts/loadtest.mjs",
-    "p2exit": "node scripts/p2-exit.mjs"
+    "p2exit": "node scripts/p2-exit.mjs",
+    "bench:tick": "node scripts/bench-tick.mjs"
   },
   "dependencies": {
     "@vgtd/protocol": "*",
