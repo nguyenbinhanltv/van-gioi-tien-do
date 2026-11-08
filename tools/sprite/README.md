@@ -355,3 +355,28 @@ Public APIs: `runLayerExtraction`, `writeLayerExtraction`, `buildSpriteLayerSet`
 images; callers must retain authoring QA. Stage passed set directories beneath the Cocos equipment resource root, then use
 the mapping/preview contract in `apps/client-cocos/LAYERED-SPRITES.md`. These pixel/contact gates do not certify unseen
 geometry or inpaint anatomy; mattes and thresholds need real-art review, as recorded in OPEN-ITEMS.
+
+## Rigid ornament hides the N crown (D52 supplements D47/D48/D50)
+
+Keep the approved master. Do not call a side/under-ring edge the crown or project a hidden crown. Only N with genuine
+rigid-ornament crown occlusion may use `rear-base-ornament`; soft hair volume is not an anchor.
+
+```json
+{
+  "kind": "rear-base-ornament",
+  "ornamentAnchor": { "x": 128, "y": 28 },
+  "anchorDefinition": "Lowest visible point where the rigid bun ring meets hair; the ring hides the crown",
+  "skullBase": { "x": 128, "y": 61 },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+Illustrative coordinates only. The direction's `masterHead` defines one fixed rigid anchor. Per-cell `headEvidence` uses
+this shape, the same nonempty `anchorDefinition`, and a reviewed `note`. Both base-to-anchor Euclidean distance and maximum
+skull breadth must be within the locked N master's ±3%. The base is the visible nape/occipital junction, not the collar.
+Master points are on its resized256px cell; motion points are on aligned256px output cells with clip-local indices.
+
+Crown/chin/shoulderTop fields, missing or changed definitions, missing breadth, invalid coordinates, wrong direction/kind,
+and either size drift fail. Review INFO shows the anchor definition and master/frame landmarks and measurements. A human
+must verify that the crown is occluded by a rigid ornament and that the chosen point is its lowest visible hair contact;
+this is not automatic semantic certification. Existing head kinds, fixed scale, exception rules and foot/canvas gates stay unchanged.

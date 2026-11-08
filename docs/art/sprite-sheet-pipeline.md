@@ -444,3 +444,29 @@ writeLayerExtraction và buildSpriteLayerSet; API pack trực tiếp đòi calle
 
 Matte, phần khuất và anatomy tay inpaint vẫn phải xem art thật. Ngưỡng difference/contact phải khai báo và duyệt theo
 dữ liệu thật; không coi fixture đúng tuyệt đối là ngưỡng art chung. Xem OPEN-ITEMS và hợp đồng runtime Cocos.
+
+## Phụ kiện cứng che crown ở N — D52 bổ sung D47/D48/D50
+
+Giữ nguyên master đã duyệt. Nếu crown thật sự bị vòng búi tóc/miện cứng che, không gọi cạnh bên/cạnh dưới vòng là crown,
+không chiếu đỉnh sọ. Chỉ hướng N được dùng `rear-base-ornament`; tóc mềm/phồng không phải neo phụ kiện.
+
+```json
+{
+  "kind": "rear-base-ornament",
+  "ornamentAnchor": { "x": 128, "y": 28 },
+  "anchorDefinition": "Điểm thấp nhất nhìn thấy nơi vòng búi tóc cứng tiếp xúc tóc; crown bị vòng che",
+  "skullBase": { "x": 128, "y": 61 },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+Tọa độ chỉ minh họa. `masterHead` ghi định nghĩa neo riêng cho hướng N; evidence ô dùng cùng `anchorDefinition` và thêm
+`note` đã xem, không chuyển sang một điểm khác để đạt gate. Đo Euclid skullBase↔ornamentAnchor và bề ngang sọ tối đa,
+mỗi phép đo phải trong ±3% giá trị master khóa cùng hướng. Neo là điểm thấp nhất **nhìn thấy** nơi phụ kiện **cứng, cố định**
+tiếp xúc tóc; đáy sọ là đường tóc gáy/chẩm nhìn thấy, không phải cổ áo. Người xem xác nhận che khuất và ngữ nghĩa neo;
+công cụ không tự chứng nhận giải phẫu hay độ cứng từ pixel.
+
+Master dùng ô256px sau resize; motion dùng ô output256px aligned, chỉ số nội bộ clip kể cả sheet nhóm. Không khai báo
+crown/chin/shoulderTop giả cho kind này. Thiếu neo/định nghĩa/bề ngang, kind/hướng sai, định nghĩa neo đổi, hoặc một trong hai
+kích thước lệch band đều là lỗi cứng. Contract/backlog/review INFO giữ cả hai điểm, định nghĩa neo, bề ngang và tham chiếu
+master/ô. Quy tắc evidence cho exception/bbox ngoài band, reason posture/secondary-overhang và các cổng foot/canvas không đổi.
