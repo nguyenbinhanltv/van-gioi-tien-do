@@ -4,7 +4,15 @@
  */
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { WebSocket } from 'ws';
-import { ErrorCode, decode, encode, type BaselinePos, type Message, type SnapshotMsg } from '@vgtd/protocol';
+import {
+  ErrorCode,
+  PROTOCOL_VERSION,
+  decode,
+  encode,
+  type BaselinePos,
+  type Message,
+  type SnapshotMsg,
+} from '@vgtd/protocol';
 import { NetClient, type NetDeps } from '@vgtd/client-core/src/net/index.js';
 import { ANTICHEAT, TileGrid, budgetMs } from '@vgtd/sim';
 import {
@@ -444,7 +452,11 @@ describe('resume through the real gateway', () => {
       new Promise((resolve) => {
         const ws = new WebSocket(`ws://127.0.0.1:${s.port}/ws`);
         let ack: Record<string, unknown> | null = null;
-        ws.on('open', () => ws.send(JSON.stringify({ type: 'hello', protocolMin: 3, protocolMax: 3, resume })));
+        ws.on('open', () =>
+          ws.send(
+            JSON.stringify({ type: 'hello', protocolMin: PROTOCOL_VERSION, protocolMax: PROTOCOL_VERSION, resume }),
+          ),
+        );
         ws.on('message', (d, bin) => {
           if (!bin) ack = JSON.parse(d.toString()) as Record<string, unknown>;
         });
@@ -476,7 +488,14 @@ describe('resume through the real gateway', () => {
     const first = await new Promise<{ id: number; token: string }>((resolve, reject) => {
       const ws = new WebSocket(`ws://127.0.0.1:${s.port}/ws`);
       ws.on('open', () =>
-        ws.send(JSON.stringify({ type: 'hello', protocolMin: 3, protocolMax: 3, token: login.token })),
+        ws.send(
+          JSON.stringify({
+            type: 'hello',
+            protocolMin: PROTOCOL_VERSION,
+            protocolMax: PROTOCOL_VERSION,
+            token: login.token,
+          }),
+        ),
       );
       ws.on('message', (d, bin) => {
         if (bin) return;
@@ -495,8 +514,8 @@ describe('resume through the real gateway', () => {
         ws.send(
           JSON.stringify({
             type: 'hello',
-            protocolMin: 3,
-            protocolMax: 3,
+            protocolMin: PROTOCOL_VERSION,
+            protocolMax: PROTOCOL_VERSION,
             resume: { entityId: first.id, token: first.token },
           }),
         ),

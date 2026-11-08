@@ -10,6 +10,8 @@ import {
   decode,
   encode,
   type EnterEntity,
+  type InvResultMsg,
+  type InvStateMsg,
   type Message,
   type SelfState,
   type SkillResultMsg,
@@ -19,6 +21,7 @@ import { NETWORK } from '@vgtd/shared';
 import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
 import { RemoteWorld, type RemoteView } from './remote.js';
+import { BagModel, makeRequestId } from './bag.js';
 
 /** The slice of the WebSocket API we use (browser WebSocket and `ws` both satisfy it). */
 export interface SocketLike {
@@ -44,6 +47,8 @@ export interface NetDeps {
   /** timers for the reconnect loop; default: the global setTimeout / clearTimeout */
   setTimeout?: (fn: () => void, ms: number) => unknown;
   clearTimeout?: (handle: unknown) => void;
+  /** random source for request ids (default `Math.random`; request ids are not simulation state) */
+  random?: () => number;
 }
 
 /** `reconnecting`: the connection dropped and the client is trying to resume the session (or log in again). */
@@ -78,6 +83,17 @@ export interface ReconnectOptions {
   backoffMs?: readonly number[];
   /** treat the connection as dead after this long without any server frame while online (default 3 s; snapshots come every 50 ms) */
   staleMs?: number;
+}
+
+/**
+ * Inventory callbacks (D79), a SEPARATE object from `NetEvents` on purpose: the scene replaces `events` wholesale (combat attaches its own),
+ * which would silently drop hooks living there. Set `net.inventoryEvents`; `net.bag` is always up to date whether or not anyone listens.
+ */
+export interface InventoryEvents {
+  /** The bag changed: `net.bag` already holds the new state. */
+  onInventory?(msg: InvStateMsg): void;
+  /** The server answered an inventory command (`net.bag.lastResult` is set). */
+  onInvResult?(msg: InvResultMsg): void;
 }
 
 export interface NetOptions {
@@ -146,6 +162,7 @@ export class NetClient {
 
   constructor(private readonly o: NetOptions) {
     this.remote = new RemoteWorld(o.interpDelayMs);
+    this.bag = new BagModel();
     this.events = o.events ?? {};
   }
 
@@ -173,6 +190,30 @@ export class NetClient {
     }
   }
 
+  /** The visible bag (D79): updated from `inv_state` / `inv_result`, read by the bag panel. */
+  readonly bag: BagModel;
+  /** Callbacks for the bag (own object, see `InventoryEvents`). */
+  inventoryEvents: InventoryEvents = {};
+
+  /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
+  sendBagMove(from: number, to: number): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.moveCmd(from, to, () => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
+  }
+  /** Ask the server to move pending loot into the bag. False when nothing is pending or the socket is not open. */
+  sendBagClaim(): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.claimCmd(() => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
+  }
+
   private async post(path: string, body: unknown): Promise<{ status: number; json: Record<string, unknown> }> {
     const r = await this.o.deps.fetch(`${this.o.baseUrl}${path}`, {
       method: 'POST',
@@ -191,6 +232,7 @@ export class NetClient {
       this.adopt(ack, false);
     } catch (e) {
       this.status = 'closed';
+      this.bag.reset();
       this.lastError = (e as Error).message;
       throw e;
     }
@@ -217,6 +259,7 @@ export class NetClient {
     // a new connection starts from the server's state: no stale prediction, interpolation buffers, baselines or acks
     this.predictor = new Predictor(this.o.makeGrid(ack.mapTiles), this.o.agi);
     this.remote.clear();
+    this.bag.reset();
     this.lastSnapshotSeq = 0;
     this.acc = 0;
     this.pings.clear();
@@ -279,11 +322,13 @@ export class NetClient {
       // an unexpected drop of a live session: try to come back unless we were kicked / closed on purpose
       if (!this.userClosed && !this.fatal && this.rc) {
         this.lastError = `connection lost (${ev.code} ${ev.reason})`;
+        this.bag.reset(); // belonged to the lost connection; the server re-sends state to the next one
         this.emit(() => this.events.onConnectionLost?.());
         void this.reconnectLoop();
         return;
       }
       this.status = 'closed';
+      this.bag.reset();
       if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
     }
   }
@@ -321,6 +366,7 @@ export class NetClient {
       }
       if (!this.userClosed) this.lastError = `${this.lastError || 'connection lost'} (gave up reconnecting)`;
       this.status = 'closed';
+      this.bag.reset();
     } finally {
       this.reconnecting = false;
     }
@@ -353,6 +399,14 @@ export class NetClient {
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
+        break;
+      case 'inv_state':
+        this.bag.applyState(msg);
+        this.emit(() => this.inventoryEvents.onInventory?.(msg));
+        break;
+      case 'inv_result':
+        this.bag.applyResult(msg);
+        this.emit(() => this.inventoryEvents.onInvResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -454,6 +508,7 @@ export class NetClient {
   close(): void {
     this.userClosed = true;
     this.status = 'closed';
+    this.bag.reset();
     this.ws?.close(1000, 'bye'); // a normal close: the server removes the character at once instead of holding it for a resume
   }
 }

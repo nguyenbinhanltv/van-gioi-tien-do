@@ -6,4 +6,5 @@ export * from './input/TouchController.js';
 export * from './input/InputManager.js';
 export * from './ui/AnchorLayout.js';
 export * from './ui/InventoryInteraction.js';
+export * from './ui/BagPanelLogic.js';
 export * from './net/index.js';

@@ -313,7 +313,7 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 
 - Argon2id thay scrypt (docs/25 §2.3): cần thử thư viện native trên Windows/Linux/CI rồi đo thời gian băm thật; hiện **chưa đo** trên máy chủ thật.
 - Refresh token / xoay vòng họ token / thu hồi cả họ, cookie `__Host-`, CSRF, kho `AccountStore` PostgreSQL, `audit_log` cho đăng nhập (docs/25 §3).
-- `hello` / `hello_ack` Protobuf (docs/24 §4): vẫn là JSON. ~~`resume` sau rớt mạng ≤ 10 s~~ **đã xử lý ở D79** (qua `hello` JSON, không phải thông điệp Protobuf `resume`).
+- `hello` / `hello_ack` Protobuf (docs/24 §4): vẫn là JSON. ~~`resume` sau rớt mạng ≤ 10 s~~ **đã xử lý ở D80** (qua `hello` JSON, không phải thông điệp Protobuf `resume`).
 - Chưa có Cell Handover giữa nhiều World Node, lag compensation, kỹ năng có sát thương (`hits[]` rỗng), `CastInput` điểm đất/hướng.
 - Số đo tải mới chạy bot trên cùng máy với server (worker thread, loopback): chưa phản ánh độ trễ mạng thật, TLS, nhiều lõi bận khác; cần chạy lại trên máy chủ mục tiêu và với client Cocos thật.
 
@@ -405,7 +405,17 @@ Còn mở / lưu ý:
 5. **Lưu trữ thật**: ví thuộc sổ cái và hiện chỉ ở bộ nhớ (mất khi khởi động lại); khóa idempotency chỉ giữ trong tiến trình (docs/26 §4.1: 7 ngày); cần PostgreSQL (docs/23 §4.3-4.4, `item_events` MINT/BURN/MOVE, đối chiếu §3.3), giao dịch đồng thời giữa vật phẩm và sổ cái cho cùng một kill.
 6. **Drop vào túi đầy**: roll không vừa thì cả roll vào hàng chờ (tất cả hoặc không gì); chưa có UI nhắc hay thời hạn hết hạn cho hàng chờ.
 
-## D79 — resume: còn mở
+## D79 — túi đồ hiển thị: còn mở (worker39, 2026-11-09)
+
+1. **Chưa có art vật phẩm, tên hiển thị, mô tả, tooltip**: bảng túi dùng ô màu + mã ngắn (HP, BT, B1-B3, MA) và ASCII; cần icon (docs/05), tên Việt hóa, chi tiết khi chạm.
+2. **Chưa có**: dùng / tách chồng / vứt / sắp xếp / ô nhanh (giao diện `InventoryInteraction` có sẵn trong client-core cho kéo-thả chưa nối), trang bị và độ bền hiển thị khi mặc, kho, thư, chợ.
+3. **Nhịp lệnh (10/s, burst 10), số ô túi 40 (D77), số mục hàng chờ tối đa** là mặc định tạm cần game designer duyệt.
+4. **Gửi toàn bộ túi mỗi thay đổi** (≤ ~0,6 KB với 40 ô, tối đa 20/s mỗi người khi nhặt liên tục): đủ cho beta, cần delta nếu túi lớn hơn hoặc nhặt dày đặc; chưa đo băng thông với 100 người nhặt cùng lúc.
+5. **Bảng túi chưa kiểm trên điện thoại thật / màn hình nhỏ**; chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
+6. **Hàng chờ có trần số lượng**: mỗi mục hàng chờ tối đa 65.535 (giới hạn u16 của dây); phần vượt của một roll bị tính mất (`lostItems`), không bao giờ làm `inv_state` lỗi mã hóa; mỗi chủ gửi lỗi chỉ tính vào `metrics.inventorySendErrors` và không dừng tick. Cần luật cho hàng chờ đầy lâu (hết hạn / thư hệ thống).
+7. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.
+
+## D80 — resume: còn mở
 
 - **Refresh token** (docs/25 §3: xoay vòng họ token, thu hồi, cookie `__Host-`, kho bền) chưa có; token resume dùng một lần chỉ phủ các lần rớt ≤ 10 s. Quá hạn thì client đăng nhập lại bằng mật khẩu đã lưu, nên một client không lưu mật khẩu (đăng nhập tay) sẽ rơi về màn hình đăng nhập.
 - Thông điệp Protobuf `resume{sessionId, lastSnapshotSeq}` của docs/24 §5 (id 12) không dùng: resume nằm trong `hello` JSON. Cũng chưa gửi lại phần snapshot "thiếu" theo `lastSnapshotSeq`: nối lại luôn nhận trạng thái đầy đủ mới.

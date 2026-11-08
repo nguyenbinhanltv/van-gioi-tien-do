@@ -27,7 +27,7 @@ class FakeSocket implements SocketLike {
             entityId: 1,
             serverTimeMs: 0,
             tickHz: 20,
-            protocol: 3,
+            protocol: 4,
             mapTiles: 64,
           }),
         }),
