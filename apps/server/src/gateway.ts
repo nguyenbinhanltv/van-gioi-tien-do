@@ -18,7 +18,7 @@ import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
 import { AuthError, type AuthService } from './auth/accounts.js';
 import { TokenError } from './auth/jwt.js';
 import { GATEWAY_CONFIG } from './config.js';
-import { WorldFullError, type WorldNode } from './world/node.js';
+import { WorldFullError, type ClientTransport, type WorldNode } from './world/node.js';
 
 export interface GatewayHandle {
   http: Server;
@@ -60,7 +60,7 @@ export interface GatewayOptions {
 }
 
 export function createGateway(auth: AuthService, world: WorldNode, opts: GatewayOptions = {}): GatewayHandle {
-  const online = new Map<string, { ws: WebSocket; entityId: number }>();
+  const online = new Map<string, { ws: WebSocket; entityId: number; transport: ClientTransport }>();
 
   const cors = new Set(opts.corsOrigins ?? []);
   const http = createServer((req, res) => {
@@ -113,6 +113,8 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
 
   wss.on('connection', (ws) => {
     let entityId = 0;
+    /** this connection's handle in the world: every call below is bound to it, never to the bare entity id (ids are recycled) */
+    let transport: ClientTransport | undefined;
     let accountId = '';
     const closeWith = (code: ErrorCode, text: string): void => {
       if (ws.readyState === ws.OPEN) {
@@ -150,34 +152,36 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           return closeWith(expired ? ErrorCode.SessionExpired : ErrorCode.Unauthorized, 'unauthorized');
         }
         if (world.clients.size >= GATEWAY_CONFIG.MAX_PLAYERS) return closeWith(ErrorCode.ServerFull, 'server full');
+        // refuse BEFORE replacing the older connection: a refused join must not also log the user out of the live session
+        if (!world.canAcceptPlayer()) return closeWith(ErrorCode.ServerFull, 'server full');
         const prev = online.get(accountId);
         if (prev) {
           // one live connection per account: the newer login replaces the older
-          world.removePlayer(prev.entityId);
+          world.removePlayer(prev.entityId, prev.transport);
           if (prev.ws.readyState === prev.ws.OPEN) {
             prev.ws.send(encode({ type: 'error', code: ErrorCode.Kicked, text: 'logged in elsewhere' }), {
               binary: true,
             });
             prev.ws.close(1008, 'replaced');
+            // do not wait for a peer that never answers the close handshake
+            setTimeout(() => prev.ws.terminate(), 1000).unref();
           }
         }
         clearTimeout(helloTimer);
         try {
-          entityId = world.addPlayer(
-            {
-              send: (bytes) => {
-                if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
-              },
-              close: (code, text) => closeWith(code, text),
-              buffered: () => ws.bufferedAmount,
+          transport = {
+            send: (bytes) => {
+              if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
             },
-            accountId,
-          );
+            close: (code, text) => closeWith(code, text),
+            buffered: () => ws.bufferedAmount,
+          };
+          entityId = world.addPlayer(transport, accountId);
         } catch (e) {
           if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');
           throw e;
         }
-        online.set(accountId, { ws, entityId });
+        online.set(accountId, { ws, entityId, transport });
         ws.send(
           JSON.stringify({
             type: 'hello_ack',
@@ -192,14 +196,14 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
       }
       if (!isBinary) return closeWith(ErrorCode.BadMessage, 'binary frames only');
       const buf = data as Buffer;
-      world.receive(entityId, new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength));
+      world.receive(entityId, new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength), transport);
     });
 
     ws.on('close', () => {
       clearTimeout(helloTimer);
       if (entityId) {
-        if (online.get(accountId)?.entityId === entityId) online.delete(accountId);
-        world.removePlayer(entityId);
+        if (online.get(accountId)?.transport === transport) online.delete(accountId);
+        world.removePlayer(entityId, transport);
       }
     });
     ws.on('error', () => ws.terminate());
