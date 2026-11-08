@@ -2,6 +2,42 @@
 
 Tiêu chí thoát P1 ([docs/10 §12](10-mvp-scope.md)): chạy Web + 1 máy mobile thật với **≤ 80 draw call, RAM ≤ 500 MB, ≥ 30 FPS với 20 NPC, gói tải đầu ≤ 25 MB**, tìm đường + click-to-move đúng.
 
+## Báo cáo thoát P1 (đo cuối, sau D71 / PR #197)
+
+Đo ngày 2026-11-08 trên `main` ở commit `fb3f0c4` (đã có map Sơn Môn 256 × 256, `WorldView` theo chunk, chibi theo bundle D71): headless Chrome + SwiftShader (WebGL phần mềm, không phải GPU thật), 1280 × 720, tier streaming `medium`, art chibi thật (`ChibiBody`, 6 lớp lẫn nhau cho NPC). Lệnh: `npm run perf:p1 -w client-cocos -- --skip-build [--route] --npcs N`. Gói đầu = file yêu cầu lần đầu cho tới khi world chơi được; phần tải lười sau đó in riêng.
+
+| Tiêu chí P1 (docs/10 §12)              | Ngưỡng   | 0 NPC, đi bộ 60 s | **20 NPC chibi, đi bộ 90 s** | 20 NPC chibi, đứng yên 30 s | Kết quả (Web headless)                                                                                                    |
+| -------------------------------------- | -------- | ----------------- | ---------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Draw call (max)                        | ≤ 80     | 35                | **69**                       | 53                          | **ĐẠT**                                                                                                                   |
+| RAM: JS heap + texture (max)           | ≤ 500 MB | 188,0             | **225,8**                    | 128,4                       | **ĐẠT**                                                                                                                   |
+| FPS với 20 NPC (trung vị, WebGL mềm)   | ≥ 30     | 34,5 (0 NPC)      | **33,5**                     | 36,1                        | **ĐẠT** (chưa phải GPU)                                                                                                   |
+| Gói tải đầu (đến khi chơi được)        | ≤ 25 MB  | 8,88 (gzip 2,11)  | **9,26** (gzip 2,40)         | 10,25 (gzip 2,80)           | **ĐẠT**                                                                                                                   |
+| Tải lười sau đó (không nằm trong cổng) | -        | 0                 | 7,18 (gzip 2,81)             | 6,19 (gzip 2,41)            | thông tin                                                                                                                 |
+| Tìm đường + click-to-move đúng         | đúng     | -                 | -                            | -                           | Có test (`packages/client-core` pathfinder / touch / layout, `npm test`) và hook `#autotest`; chưa chạy lại trên máy thật |
+| Chạy trên 1 máy mobile thật            | có       | -                 | -                            | -                           | **CHƯA ĐO** (bước của chủ dự án, bên dưới)                                                                                |
+
+Thêm từ lần đi bộ 90 s với 20 NPC chibi (map nhiều chunk): 37 lần dựng / hủy cây node chunk, khung nhìn không bao giờ thiếu nền, 3 frame > 50 ms và 0 frame > 100 ms, lát dựng chunk tệ nhất 7,6 ms, heap giữ lại sau GC 74,4 → 61,8 MB (không rò rỉ). So với trước D71 (cùng cấu hình): RAM 771 → 226 MB, gói đầu 71,3 → 9,3 MB; draw call không đổi (69).
+
+Giới hạn của phép đo, nên đọc cùng kết quả:
+
+- Web headless **đạt** cả 4 số đo; P1 chỉ đóng khi có 1 lần đo máy mobile thật (cột cuối). FPS 30+ trên WebGL phần mềm là cận dưới của chi phí CPU / JS, không thay thế GPU điện thoại; máy dùng chung nên FPS dao động vài đơn vị giữa các lần chạy.
+- Texture chibi ở desktop headless dùng tier `1x` cho NPC / `full` cho người chơi; texture ASTC chỉ có trên thiết bị hỗ trợ, SwiftShader rơi về WebP / PNG nên số RAM texture trên điện thoại có thể khác.
+- RAM = heap JS + bộ nhớ texture GPU của engine; chưa gồm bộ nhớ native của trình duyệt (xem tab Memory trên máy thật).
+- Map vẫn là procgen một vùng (không có vật thể L3 theo chunk), props chỉ rải quanh điểm spawn; thêm vật thể / hiệu ứng sẽ tăng draw call và node.
+
+### Bước còn lại cho chủ dự án: đo trên điện thoại thật qua LAN
+
+Điều kiện: máy tính và điện thoại cùng Wi-Fi; tường lửa Windows cho phép Node.js nhận kết nối vào cổng 7456 (hộp thoại "Allow access" lần đầu, chọn mạng Private).
+
+1. Trên máy tính, từ gốc repo: `npm ci`, rồi `npm run build:web -w client-cocos -- --release` (cần Cocos Creator 3.8.8, `COCOS_CREATOR_PATH` nếu cài lệch đường dẫn mặc định). Ổ C đầy thì đặt `apps/client-cocos/{library,temp,build,assets/chibi}` thành junction sang ổ khác trước khi build.
+2. `npm run serve -w client-cocos`. Server in các dòng `LAN: http://<IP-máy-tính>:7456/?npcs=20` (mỗi card mạng một dòng; chọn IP cùng dải với điện thoại, thường `192.168.x.x` hoặc `10.x.x.x`).
+3. Trên điện thoại mở đúng URL đó bằng Chrome (Android) hoặc Safari (iOS). Không cần cờ nào khác: mặc định đã là 20 NPC chibi nhiều lớp, người chơi lớp mặc định, map Sơn Môn 256 × 256. Muốn đo chuyến đi bộ tự động mở thêm `&route=1` (đi vòng quanh toàn bản đồ, giữ nguyên các cờ khác). Muốn thử tier streaming thấp: `&tier=low`.
+4. Chờ ~30 giây cho số ổn định, rồi vừa di chuyển (joystick cảm ứng hiện sẵn; hoặc `&route=1` để máy tự đi) vừa chụp màn hình HUD góc trên-trái: **FPS**, **Draw calls / 80**, **Tex mem**, **JS heap**, **Nodes / Chunks (đang dựng / đang giữ) / NPC**, **Loaded MB** (gói đã tải).
+5. Console (tuỳ chọn, chính xác hơn): Android Chrome nối USB (bật USB debugging) → mở `chrome://inspect` trên máy tính → Console in dòng `[vgtd][perf] {...}` mỗi 2 giây (JSON đủ số liệu, gồm `frameMsMax`, `hitches50`, `hitches100`). Tab Memory cho tổng RAM của tab. iOS: Safari Web Inspector qua cáp (không có `performance.memory`: chỉ FPS / draw call trên HUD).
+6. Ghi lại: model máy, hệ điều hành + phiên bản trình duyệt, độ phân giải, draw call lớn nhất, RAM lớn nhất (heap + tex, và RAM tab nếu có), FPS trung vị với 20 NPC, gói đã tải (Loaded MB) sau khi chơi được, và nhận xét cảm nhận (giật khi sang chunk mới? click-to-move đúng?). Dán vào bảng kết quả ở trên và đóng OPEN-ITEMS #5 khi mọi dòng đạt (draw call ≤ 80, RAM ≤ 500 MB, ≥ 30 FPS, gói đầu ≤ 25 MB, tìm đường / click-to-move đúng).
+
+Nếu FPS dưới 30 hoặc RAM vượt ngưỡng trên máy thật, chạy thêm `?npcart=placeholder` (tách chi phí NPC chibi) và `&tier=low` rồi báo lại cả ba số.
+
 ## Cách đo trên Web (headless)
 
 ```bash
@@ -30,7 +66,7 @@ Tham số URL (cũng dùng trên máy thật): `?npcs=N` (mặc định 20, 0 = 
 5. Console: Android Chrome → `chrome://inspect` trên máy tính (USB debugging) → Console in dòng `[vgtd][perf] {...}` mỗi 2 giây (JSON đủ số liệu); tab Memory cho tổng RAM của tab. iOS: Safari Web Inspector qua cáp (`performance.memory` không có, chỉ FPS / draw call trên HUD).
 6. Ghi lại: model máy, hệ điều hành + phiên bản trình duyệt, độ phân giải, draw call lớn nhất, RAM lớn nhất, FPS trung vị với 20 NPC chibi (mặc định), rồi dán vào bảng dưới và đóng OPEN-ITEMS #5 khi mọi dòng đạt.
 
-## Kết quả
+## Kết quả (lịch sử, trước D71: các số FAIL ở đây đã được sửa bởi PR #197, xem báo cáo thoát P1 ở trên)
 
 Đo bằng `npm run perf:p1 -w client-cocos` ngày 2026-11-08, Windows 11, headless Chrome + SwiftShader, 1280×720, tier `medium`, world 32×32 ô = **1 chunk**. Hai dòng đầu dùng nhân vật chibi thật (`ChibiBody`, PR #193) cho người chơi; đủ 20 NPC chibi lớp lẫn nhau dùng cả 6 lớp:
 
@@ -46,7 +82,7 @@ Chi tiết dòng mặc định: frame 24,1 ms (CPU update 0,29 + submit render 0
 
 **Chưa đủ để đóng P1** (OPEN-ITEMS #5): (a) chưa đo trên máy mobile thật; (b) map hiện chỉ 1 chunk nên streaming chưa chịu tải nhiều chunk; (c) RAM native của trình duyệt chưa tính; (d) asset `resources` dev-only trong thư mục build (~228 MB) phải tách khỏi gói phát hành.
 
-## Streaming trên map nhiều chunk (đi bộ theo tuyến)
+## Streaming trên map nhiều chunk (đi bộ theo tuyến; số liệu bảng là trước D71, báo cáo thoát P1 ở trên là số cuối)
 
 Map lát cắt nay là **Sơn Môn 256 × 256 ô = 8 × 8 chunk** (docs/04 §5, docs/10 §12; `prepare.mjs` sinh bằng procgen, đặt `VGTD_MAP_TILES=32` để quay lại map 1 chunk), nên `ChunkStreamer` thực sự nạp / giữ / bỏ chunk. `--route` (`?route=1`) cho người chơi đi một vòng 8 điểm quanh map theo đường A\* của `client-core` (đường được tính trước, không có hitch tìm đường trong lúc đo), mặc định 90 s, và thêm vào báo cáo: số lần dựng / hủy cây node chunk, thời gian dựng chunk, frame tệ nhất, số frame > 50 / > 100 ms, số lần khung nhìn thiếu nền, heap giữ lại sau GC cưỡng bức đầu và cuối đoạn đo (`window.gc`, chrome `--js-flags=--expose-gc`).
 
