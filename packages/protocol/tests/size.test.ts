@@ -122,7 +122,7 @@ describe('bandwidth budgets (docs/08 §8)', () => {
     expect(encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: { qi: 100, qj: 200 } }).length).toBe(15);
     expect(encode({ type: 'ping', clientTimeMs: 1 }).length).toBe(6);
     expect(encode({ type: 'pong', clientTimeMs: 1, serverTimeMs: 2 }).length).toBe(10);
-    // D87 mob attack telegraphs: a start is 20 B, an end 5 B (cheap enough to send to every client whose AOI holds the anchor)
+    // D89 mob attack telegraphs: a start is 20 B, an end 5 B (cheap enough to send to every client whose AOI holds the anchor)
     expect(
       encode({
         type: 'telegraph_start',

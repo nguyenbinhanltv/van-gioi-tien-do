@@ -1,5 +1,5 @@
 /**
- * Mob attack telegraphs on the client (D87, protocol v5): the ground decals that warn where a mob attack will land. Engine-free: the
+ * Mob attack telegraphs on the client (D89, protocol v5): the ground decals that warn where a mob attack will land. Engine-free: the
  * Cocos layer just draws `NetClient.telegraphs()` every frame (shape, tile-space geometry, `progress` 0..1 for the fill).
  *
  * A telegraph lives from `telegraph_start` until `telegraph_end` (landed or cancelled) or, if that frame is lost, until its own time

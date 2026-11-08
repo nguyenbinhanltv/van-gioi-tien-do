@@ -1,4 +1,4 @@
-/** Mob attack telegraphs on the wire (D87, protocol v5): who gets `telegraph_start` / `telegraph_end`, and what they carry. */
+/** Mob attack telegraphs on the wire (D89, protocol v5): who gets `telegraph_start` / `telegraph_end`, and what they carry. */
 import { describe, expect, it } from 'vitest';
 import { MOB_ID_BASE, mobAttacksOf, mobDefByKey, type MobDef } from '@vgtd/shared';
 import { decode, peekHeader, TelegraphShape, type Message } from '@vgtd/protocol';

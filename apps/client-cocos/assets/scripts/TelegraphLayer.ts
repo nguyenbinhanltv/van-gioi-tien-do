@@ -2,7 +2,7 @@ import { Color, Graphics, Node, Vec3 } from 'cc';
 import { sim } from './vendor/vgtd.mjs';
 import { newNode, tileToWorld } from './IsoAdapter';
 
-/** The slice of client-core's `TelegraphView` this layer draws (tile space; D87). */
+/** The slice of client-core's `TelegraphView` this layer draws (tile space; D89). */
 export interface TelegraphShapeView {
   id: number;
   shape: 'circle' | 'cone' | 'line';
@@ -16,11 +16,11 @@ export interface TelegraphShapeView {
 }
 
 const OUTLINE = new Color(255, 70, 50, 230);
-const FILL = new Color(255, 60, 40, 110);
+const FILL = new Color(255, 60, 40, 150);
 const EDGE_STEPS = 24;
 
 /**
- * Mob attack danger areas as ground decals (D87): a red outline of the locked shape plus a fill that grows from the origin to the
+ * Mob attack danger areas as ground decals (D89): a red outline of the locked shape plus a fill that grows from the origin to the
  * full shape over the telegraph time. Placeholder art (one `Graphics`, redrawn every frame; no sprites). The shape is built in
  * TILE space and projected point by point through `tileToWorld`, the client's only y-flip, so it lies correctly on the iso ground.
  */
@@ -32,7 +32,7 @@ export class TelegraphLayer {
   constructor(parent: Node) {
     this.node = newNode('Telegraphs', parent);
     this.g = this.node.addComponent(Graphics);
-    this.g.lineWidth = 2;
+    this.g.lineWidth = 3;
   }
 
   /** Redraw `views` (an empty list clears the decals). Call once per frame. */

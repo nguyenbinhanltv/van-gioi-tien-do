@@ -244,7 +244,7 @@ describe('NetClient reconnect / resume', () => {
     expect(r.net.status).toBe('reconnecting');
   });
 
-  it('mob attack telegraphs (D87): decal grows with time, ends on telegraph_end, expires on its own, and is cleared by a reconnect', async () => {
+  it('mob attack telegraphs (D89): decal grows with time, ends on telegraph_end, expires on its own, and is cleared by a reconnect', async () => {
     const r = rig({ reconnect: { staleMs: 60_000 } });
     Fake.answer = (h, s) => s.ack(7, h.resume ? 'tok-2' : 'tok-1', !!h.resume);
     await r.net.connect();

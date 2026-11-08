@@ -9,7 +9,7 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
 /** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
 /** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
 /** v4 (D79): inventory messages inv_state / inv_cmd / inv_result (cold ids 66-68); one bump shared with the reconnect work. */
-/** v5 (D87): mob attack telegraphs telegraph_start / telegraph_end (hot ids 15-16; 10-14 stay reserved for the docs/24 hello family). */
+/** v5 (D89): mob attack telegraphs telegraph_start / telegraph_end (hot ids 15-16; 10-14 stay reserved for the docs/24 hello family). */
 export const PROTOCOL_VERSION = 5;
 
 export enum MsgType {
@@ -197,14 +197,14 @@ export interface SkillResultMsg {
   hits: SkillHit[];
 }
 
-/** Ground shape of a mob attack telegraph (D87). */
+/** Ground shape of a mob attack telegraph (D89). */
 export enum TelegraphShape {
   Circle = 0,
   Cone = 1,
   Line = 2,
 }
 /**
- * A mob started a telegraphed attack (D87): draw the danger area on the ground until `durationMs` is over or `telegraph_end` arrives.
+ * A mob started a telegraphed attack (D89): draw the danger area on the ground until `durationMs` is over or `telegraph_end` arrives.
  * Sent only to clients whose AOI contains the anchor. Positions / sizes use the snapshot quantum (1/32 tile); the shape is locked at
  * the start (the server tests it again when the telegraph ends), so the client never has to track the mob.
  */

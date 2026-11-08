@@ -988,11 +988,11 @@ export class WorldNode {
   }
 
   /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */
-  /** Live telegraphs (D87): wire id -> the clients that were told about the start (the end goes to the same ones). */
+  /** Live telegraphs (D89): wire id -> the clients that were told about the start (the end goes to the same ones). */
   private readonly telegraphAudience = new Map<number, number[]>();
 
   /**
-   * Mob attack telegraphs (D87): `telegraph_start` goes only to the clients whose AOI holds the anchor (the circle centre, or the
+   * Mob attack telegraphs (D89): `telegraph_start` goes only to the clients whose AOI holds the anchor (the circle centre, or the
    * mob for a cone / line), `telegraph_end` to exactly those that got the start (a client that left the area just drops the decal
    * when its time is up). A held (dropped) or dead connection is skipped.
    */

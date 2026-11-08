@@ -68,7 +68,7 @@ export class OnlineSession {
   /** `<server origin>|<username>`: key of per-account browser storage (the remembered class) */
   readonly accountKey: string;
   private readonly actors = new Map<number, RemotePlayer>();
-  /** mob attack danger areas (D87): ground decals under the actors */
+  /** mob attack danger areas (D89): ground decals under the actors */
   private readonly telegraphs: TelegraphLayer;
   private failed = '';
   /** server-authoritative combat backend (`?online=1&combat=1`); null = no combat HUD */
@@ -147,6 +147,7 @@ export class OnlineSession {
       rttMs: this.net.rttMs,
       snapshots: this.net.snapshots,
       reconnects: this.net.reconnects,
+      telegraphs: this.net.telegraphs().map((t) => ({ id: t.id, shape: t.shape, progress: t.progress })),
       lastError: this.net.lastError,
       others: Array.from(this.actors.values()).map((a) => ({
         entityId: a.entityId,

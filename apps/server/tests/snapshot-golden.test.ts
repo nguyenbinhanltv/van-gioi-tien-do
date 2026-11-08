@@ -12,7 +12,7 @@
  * Re-captured for D82 (class selection): a player's `aoi_enter` record now carries its class wire id in `defId` (was 0). Frame counts and
  * byte totals are unchanged (same field, same width): only the checksums moved.
  *
- * Re-captured for D87 (protocol v5): every frame starts with the version byte, which went 4 -> 5. Frame counts and byte totals are
+ * Re-captured for D89 (protocol v5): every frame starts with the version byte, which went 4 -> 5. Frame counts and byte totals are
  * unchanged: only the checksums moved. (The integration world runs with `mobAttacks: false`, so no telegraph frames are in it.)
  */
 import { describe, expect, it } from 'vitest';

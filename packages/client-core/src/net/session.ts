@@ -575,7 +575,7 @@ export class NetClient {
     return this.predictor?.display() ?? null;
   }
 
-  /** Mob attack danger areas to draw this frame (D87); empty offline / when no mob is winding up near the player. */
+  /** Mob attack danger areas to draw this frame (D89); empty offline / when no mob is winding up near the player. */
   telegraphs(): TelegraphView[] {
     return this.telegraph.active(this.o.deps.now());
   }

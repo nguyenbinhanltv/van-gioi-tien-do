@@ -9,7 +9,7 @@
  *
  * Because the shape is fixed when the telegraph starts and tested again when it ends, moving out of it dodges the hit. A mob that dies
  * or despawns during its telegraph cancels the attack. Damage reaches the client through the own-vitals block of the snapshot (no wire
- * change); the telegraph itself goes out as `telegraph_start` / `telegraph_end` (protocol v5, D87): `step` reports them as
+ * change); the telegraph itself goes out as `telegraph_start` / `telegraph_end` (protocol v5, D89): `step` reports them as
  * `telegraphs` and `WorldNode` sends them to the clients whose AOI holds the anchor.
  *
  * Determinism (skill `vgtd-sim-determinism`): no clocks, no ambient randomness. The only random input is the damage jitter, drawn from
@@ -49,7 +49,7 @@ export interface MobAttackPort {
   attackView(id: number): MobAttackView | undefined;
 }
 
-/** A telegraph that started or ended this tick (D87); the node turns it into wire messages. Not part of the simulation state. */
+/** A telegraph that started or ended this tick (D89); the node turns it into wire messages. Not part of the simulation state. */
 export type MobTelegraphEvent =
   | {
       kind: 'start';
