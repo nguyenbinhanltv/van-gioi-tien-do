@@ -175,7 +175,7 @@ export class OnlineSession {
   step(dt: number, frame: InputFrame, walkMode: boolean): TilePos | null {
     const f = walkMode ? { ...frame, magnitude: frame.magnitude * 0.5 } : frame;
     this.net.update(dt * 1000, core.InputManager.toPacket(f));
-    this.syncRemotes();
+    this.syncRemotes(dt * 1000);
     this.syncMobs();
     return this.net.selfPosition();
   }
@@ -194,7 +194,7 @@ export class OnlineSession {
     }
   }
 
-  private syncRemotes(): void {
+  private syncRemotes(dtMs: number): void {
     const seen = new Set<number>();
     for (const v of this.net.remotes()) {
       if (v.kind !== KIND_PLAYER) continue; // monsters / NPCs get their own actors later
@@ -207,7 +207,7 @@ export class OnlineSession {
         a = new RemotePlayer(this.ysort, this.shadowLayer, this.art, v.entityId, cls, v);
         this.actors.set(v.entityId, a);
       }
-      a.update(v, v.dir, v.speed);
+      a.update(v, v.dir, v.speed, v.hpPct, dtMs);
     }
     // Cocos transpiles scripts loosely: for-of / spread over a Map silently breaks, so use forEach
     const gone: number[] = [];

@@ -331,13 +331,4 @@ Kiểm tra bổ sung ngoài schema (script CI đề xuất): `quests_done` khôn
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                               | Mặc định đề xuất                                                                              |
-| --- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Q1  | Phạm vi cốt truyện MVP: dừng ở chương 3 (Tâm Ma, mở cổng Kim Đan) hay chỉ chương 1–2? | Chương 1–3 như §3.2, khớp với [10-mvp-scope.md](10-mvp-scope.md) sau khi nhóm A chốt          |
-| Q2  | Giờ reset ngày / tuần                                                                 | 05:00 UTC+7; tuần bắt đầu thứ Hai                                                             |
-| Q3  | Có cho một Trúc Cơ Đan phẩm Trắng từ nhiệm vụ chương 1 không (ngoại lệ ở §4.1)?       | Có, đúng 1 viên cho mỗi nhân vật, khóa không giao dịch                                        |
-| Q4  | Thang ΔK của các lựa chọn Chính / Tà / Ma (§3.4) và trần ±250                         | Dùng bảng §3.4; trần ±250; ngưỡng phe thống nhất với [14](14-pvp-chien-tranh.md) §3           |
-| Q5  | Tên chính thức của tông môn khởi đầu (Thiên Kiếm Tông hay giữ "Sơn Môn Đại Phái")     | Giữ "Sơn Môn Đại Phái" làm tên bản đồ; tên tông môn chờ nhóm [11](11-he-phai-ky-nang.md) chốt |
-| Q6  | Trần faucet từ nhiệm vụ ≤ 15% tổng Linh thạch săn quái hằng tuần (§4.2) có đủ không?  | Giữ 15% và hiệu chỉnh lại sau mô phỏng kinh tế (OPEN-ITEMS #7)                                |
-| Q7  | Có cho phép nhiệm vụ `pvp_win` trong `weekly` không (rủi ro quấy phá)?                | Không trong MVP; chỉ trong sự kiện đấu trường có luật riêng                                   |
-| Q8  | Nhiệm vụ Nhân quả (karma) ngưỡng ±300 và lượng "trả nghiệp" +100 mỗi tuần             | Dùng như §3.4                                                                                 |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (12 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

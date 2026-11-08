@@ -36,11 +36,7 @@ function main() {
   const failures = [];
   const files = walk(pack);
   const licenses = readFileSync(path.join(repo, 'docs/ASSET-LICENSES.md'), 'utf8');
-  for (const file of [
-    ...files,
-    path.join(repo, 'docs/ASSET-LICENSES.md'),
-    path.join(repo, 'docs/art/the-tu-shared-art.md'),
-  ]) {
+  for (const file of [...files, path.join(repo, 'docs/ASSET-LICENSES.md'), path.join(repo, 'docs/art/the-tu.md')]) {
     if (!/\.(?:json|md|mjs)$/.test(file)) continue;
     for (const error of inspectText(readFileSync(file))) failures.push(`${relative(file)}: ${error}`);
   }

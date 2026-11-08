@@ -184,13 +184,4 @@ Chế phù ảnh hưởng PvP nên chỉ hạn chế, không tạo "sát thươn
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                    | Mặc định đề xuất                                                                       |
-| --- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Q1  | Nghề mở ở Trúc Cơ nên Trúc Cơ Đan không tự chế được; chấp nhận hay mở một nghề "Luyện Đan sơ" ở Luyện Khí? | Chấp nhận (tạo kết nối với người chơi cao hơn); cho 1 viên Trắng qua nhiệm vụ chương 1 |
-| Q2  | Giá trị tham số bậc thang thăng phẩm a = (0,50; 0,40; 0,30; 0,18; 0,08) và hệ số 0,04 mỗi điểm Score       | Dùng như §4.3; kiểm bằng mô phỏng, giữ Score 0 trùng hàng "Quái dã ngoại"              |
-| Q3  | Thất bại hủy 60% nguyên liệu, Hộ Lô Phù giảm còn 20%                                                       | Giữ; điều chỉnh sau mô phỏng                                                           |
-| Q4  | Phí lò 3% và có tách một dòng "Chế tạo" trong cơ cấu tiêu hao 07 §7 hay không                              | Giữ 3%; tách dòng riêng nếu sink chế tạo > 5% tổng tiêu hao                            |
-| Q5  | Hạn ngạch 5 đan chủ b ≥ 3 mỗi tuần                                                                         | Có, nhưng chỉ bật khi CPI giảm quá 0,95 (kích hoạt linh hoạt qua dữ liệu)              |
-| Q6  | Phẩm trần theo bản vẽ / đan phương (phẩm Vàng–Đỏ chỉ từ Boss) có làm nghề kém hấp dẫn?                     | Giữ để bảo vệ giá trị Boss; bổ sung dòng thưởng cống hiến cho chế tạo thành công       |
-| Q7  | Có cho phép phân giải đồ thành "bụi linh" (sink vật phẩm) hay không                                        | Có, chỉ bụi linh, tuyệt đối không ra Linh thạch                                        |
-| Q8  | Điểm hái nguyên liệu ngoài bản đồ: có hay chỉ rơi từ quái (đơn giản hóa MVP)?                              | Có, nhưng ít (≤ 30% tổng nguyên liệu), có linh khí cạn kiệt                            |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (13 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

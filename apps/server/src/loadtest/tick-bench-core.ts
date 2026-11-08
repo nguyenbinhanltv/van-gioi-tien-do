@@ -19,6 +19,8 @@ export interface TickBenchOptions {
   mobs: number;
   /** server combat on (default true). Off = a world of pure movement + AOI + encode: the stable basis for golden checks. */
   combat?: boolean;
+  /** mobs in chase attack their target (D86, default true). The pre-D86 golden streams pin it false. */
+  mobAttacks?: boolean;
   /** fold every byte sent into `checksum` (slow: for equivalence checks, not for timing) */
   hash: boolean;
 }
@@ -74,11 +76,12 @@ export function runTickBench(o: TickBenchOptions): TickBenchResult {
   let virtualMs = 0; // the packet-rate window runs on simulated time: the benchmark must not depend on how fast the server is
   const node = new WorldNode({
     packetClock: () => virtualMs,
+    wallClock: () => virtualMs, // same virtual time: the lag credit (D85) stays 0 however slow the host is, so output is host-independent
     seed: 1,
     mapTiles: MAP,
     spawn: { i0: lo, j0: lo, side: o.area },
     skills,
-    combat: o.combat === false ? undefined : {},
+    combat: o.combat === false ? undefined : { mobAttacks: o.mobAttacks },
     mobs:
       o.mobs > 0
         ? { zones: [{ zone: 'bia_rung', i0: lo, j0: lo, i1: lo + o.area, j1: lo + o.area }], density: o.mobs / per }

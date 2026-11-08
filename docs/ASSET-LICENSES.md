@@ -4861,6 +4861,7 @@ Thiết kế gốc dự án, không dùng ảnh thương mại. Quyền đầu r
 | `apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.png.meta`        | Pipeline dự án / Cocos Creator 3.8.8                             | Quyền gốc dự án / đầu ra OpenAI nêu trên |
 
 <!-- PHAP-TU-CHIBI-S:END -->
+
 ### Thể tu S — nguồn smooth-v2 và sửa cục bộ (worker24, 2026-11-08)
 
 Giữ động tác chạy/bay/lao sâu; sửa đầu sai cỡ và tóc phụ cắt canvas bằng AI. Không rescale từng frame. Project là đăng ký nguồn được chọn; raw và bản bị loại vẫn giữ để truy nguồn.
