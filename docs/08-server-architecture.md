@@ -217,6 +217,8 @@ Vì server quyết định vị trí và hồi chiêu, client sửa bộ nhớ k
 
 ### Speedhack: ngân sách thời gian input
 
+[Cập nhật D85: các guard dưới đây (ngân sách thời gian, hàng đợi input, cửa sổ tỷ lệ, túi token cast, hồi chiêu / GCD) tính theo **giờ mô phỏng cộng tín dụng trễ** của khách (giờ thật đã trôi mà giờ sim không trôi kể từ khi vào, do máy chủ chạy chậm), nên máy chủ quá tải không kick khách trung thực; cận hợp lệ vẫn là giờ thật kể từ khi vào. Xem DECISIONS D85.]
+
 Speedhack làm đồng hồ client chạy nhanh, nên tổng thời gian input tuyên bố vượt thời gian thực trên server:
 
 ```latex
