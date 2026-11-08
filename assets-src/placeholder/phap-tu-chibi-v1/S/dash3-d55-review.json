@@ -1,0 +1,157 @@
+{
+  "kind": "D55-evidence-only-followup",
+  "projectSha256": "529046d6d3863bda3523ba8b155f8f5d0434abc7ae0887c98b2507b58d7b31cc",
+  "masterSha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168",
+  "clip": "dash",
+  "cell": 3,
+  "headEvidence": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 130,
+      "y": 44
+    },
+    "chin": {
+      "x": 130,
+      "y": 92
+    },
+    "note": "Reviewed exact aligned256px S dash3: same main skull-cap semantics as locked S master and dash2, excluding elevated bun/curl, pins, tassel and ribbon. Top main-cap row44 has a contiguous qualifying run at x128..132, midpoint130, alpha>=128; visible chin outline ends row92 at x130, excluding neck. No projection, repaint, scale change or pose exemption; D55 uses the anchored window."
+  },
+  "crownRgba": [141, 80, 106, 255],
+  "chinRgba": [184, 94, 75, 255],
+  "mainCapQualifyingRun": {
+    "y": 44,
+    "left": 128,
+    "right": 132,
+    "midpoint": 130,
+    "alphaThreshold": 128,
+    "excluded": "elevated bun/curl, pins, tassel and ribbon"
+  },
+  "baselineFallbackHeadLab": 15.499403942287934,
+  "anchoredPalette": {
+    "distance": 6.063786006504826,
+    "chroma": 4.569425060687072,
+    "lightness": 3.9862081415110158,
+    "axes": [3.9862081415110158, 3.7886294910358815, 2.554590371250986],
+    "opaqueMaster": 2015,
+    "opaqueFrame": 2488
+  },
+  "headSize": {
+    "kind": "crown-chin",
+    "direction": "S",
+    "reason": "in-band",
+    "master": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 130,
+        "y": 16
+      },
+      "chin": {
+        "x": 131,
+        "y": 64
+      }
+    },
+    "frame": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 130,
+        "y": 44
+      },
+      "chin": {
+        "x": 130,
+        "y": 92
+      },
+      "note": "Reviewed exact aligned256px S dash3: same main skull-cap semantics as locked S master and dash2, excluding elevated bun/curl, pins, tassel and ribbon. Top main-cap row44 has a contiguous qualifying run at x128..132, midpoint130, alpha>=128; visible chin outline ends row92 at x130, excluding neck. No projection, repaint, scale change or pose exemption; D55 uses the anchored window."
+    },
+    "masterSizePx": 48.010415536631214,
+    "sizePx": 48,
+    "ratio": 0.9997830567281121,
+    "masterBboxHeightPx": 218,
+    "bboxHeightPx": 217
+  },
+  "anchoredWindows": {
+    "method": "landmarks",
+    "master": {
+      "method": "landmarks",
+      "headKind": "face",
+      "evidenceKind": "crown-chin",
+      "cropRule": "annotated-endpoints",
+      "widthSource": "head-length-window",
+      "head": {
+        "left": 104.57437561021914,
+        "top": 14.08,
+        "right": 156.42562438978086,
+        "bottom": 65.92
+      },
+      "torso": {
+        "left": 83.03999999999999,
+        "top": 65.92,
+        "right": 178.96,
+        "bottom": 120.42
+      }
+    },
+    "frame": {
+      "method": "landmarks",
+      "headKind": "face",
+      "evidenceKind": "crown-chin",
+      "cropRule": "annotated-endpoints",
+      "widthSource": "head-length-window",
+      "head": {
+        "left": 104.08,
+        "top": 42.08,
+        "right": 155.92,
+        "bottom": 93.92
+      },
+      "torso": {
+        "left": 82.03999999999999,
+        "top": 93.92,
+        "right": 177.96,
+        "bottom": 148.42000000000002
+      }
+    },
+    "scorer": "lab-palette"
+  },
+  "qa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 17,
+    "regression": 0,
+    "info": 210
+  },
+  "renderAssets": [
+    {
+      "file": "phaptuchibi_S_ske.json",
+      "existingSha256": "b6758f124544fa3e5323e92c291c67b739926f161997f138f8f0fed49c0d9298",
+      "rebuiltSha256": "b6758f124544fa3e5323e92c291c67b739926f161997f138f8f0fed49c0d9298",
+      "byteIdentical": true
+    },
+    {
+      "file": "phaptuchibi_S_tex.json",
+      "existingSha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda",
+      "rebuiltSha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda",
+      "byteIdentical": true
+    },
+    {
+      "file": "phaptuchibi_S_tex.png",
+      "existingSha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26",
+      "rebuiltSha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26",
+      "byteIdentical": true
+    },
+    {
+      "file": "phaptuchibi_S_page1_tex.json",
+      "existingSha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d",
+      "rebuiltSha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d",
+      "byteIdentical": true
+    },
+    {
+      "file": "phaptuchibi_S_page1_tex.png",
+      "existingSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
+      "rebuiltSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
+      "byteIdentical": true
+    }
+  ],
+  "artUnchanged": true,
+  "thresholdsUnchanged": true,
+  "poseExceptionsUnchanged": true,
+  "note": "Actual visible main-cap/jaw evidence replaces missing-cell centroid fallback. Crown semantics match stored S master and existing dash2, no projected crown or repaint. Existing source capture/render assets remain unchanged; runtime contract is historical and no runtime files are rewritten in this evidence-only follow-up.",
+  "anchoredTorsoLab": 5.631270301817457
+}

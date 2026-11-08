@@ -196,6 +196,18 @@
         },
         "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
       },
+      "3": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 44
+        },
+        "chin": {
+          "x": 130,
+          "y": 92
+        },
+        "note": "Reviewed exact aligned256px S dash3: same main skull-cap semantics as locked S master and dash2, excluding elevated bun/curl, pins, tassel and ribbon. Top main-cap row44 has a contiguous qualifying run at x128..132, midpoint130, alpha>=128; visible chin outline ends row92 at x130, excluding neck. No projection, repaint, scale change or pose exemption; D55 uses the anchored window."
+      },
       "4": {
         "kind": "crown-chin",
         "crown": {
@@ -246,6 +258,18 @@
         },
         "note": "Reviewed selected emote source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Emote posture retained at fixed global scale. No frame fitting or rescaling."
       }
+    }
+  },
+  "dash3D55Followup": {
+    "method": "Evidence-only: main-cap crown excluding elevated bun matches stored S master semantics; same rule as existing dash2. Main-cap qualifying run128..132 row44; chin outline row92.",
+    "artUnchanged": true,
+    "crown": {
+      "x": 130,
+      "y": 44
+    },
+    "chin": {
+      "x": 130,
+      "y": 92
     }
   }
 }
