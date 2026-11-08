@@ -32,11 +32,18 @@ export class InputBridge {
     const canvas = game.canvas as HTMLCanvasElement;
     const q = new URLSearchParams(location.search).get('input');
     const forcedMode = q === 'touch' || q === 'pointer' ? q : null;
-    this.input = new core.InputManager(canvas, { grid, camera: rig, player, forcedMode, pickEntity });
+    this.input = new core.InputManager(canvas, {
+      grid,
+      camera: rig,
+      player,
+      forcedMode,
+      pickEntity,
+      zoom: rig.zoomCtl,
+    });
 
     this.layout = new core.AnchorLayout(canvas.parentElement!);
     const applyLayout = (res: core.LayoutResult) => {
-      const tl = core.touchLayoutFromRects(res, 1 / shared.TILE_WIDTH); // aim-drag: ~1 tile per TILE_WIDTH screen px at zoom 1 (approximation, not exact iso metric)
+      const tl = core.touchLayoutFromRects(res, 1 / shared.TILE_WIDTH); // aim-drag: ~1 tile per TILE_WIDTH screen px at zoom 1 (approximation, not exact iso metric; TouchController.aimZoom divides it by the live camera zoom)
       if (tl) this.input.setTouchLayout(tl);
     };
     this.layout.on('layout', applyLayout);
@@ -59,6 +66,7 @@ export class InputBridge {
 
   /** Call once per frame before simulating the player. */
   poll(): InputFrame {
+    this.input.touch.aimZoom = this.rig.zoom; // aim-drag range tracks the camera zoom (1 screen px = 1/zoom world px)
     return this.input.poll();
   }
 
