@@ -556,3 +556,21 @@ trong band. D54 vẫn kiểm similarity độc lập, D55 khi merge vẫn áp d�
 foot/canvas/scale và mọi kind cũ. Pháp tu NE master đã xác nhận crown(140,16), breadth(114,36)–(166,36)=52px,
 acromion(156,79); neo acromion là góc ngoài vai đổi độ dốc lớn nhất của contour áo dưới cổ, không phải điểm nối cổ.
 Chỉ dash local4/5/7 được áp dụng D56 cho bộ này sau khi tooling merge; giữ tư thế động đã duyệt.
+
+## D55 — gate palette identity và temporal review (worker24, 2026-11-08)
+
+A là gate cứng similarity: khoảng cách phân bố màu Lab(D65), chỉ pixel alpha≥250, đầu ≤15 / thân ≤23.
+Không dùng L1 8×8 làm fail cứng nữa; giữ score cũ để chẩn đoán. C giữ head-size ±3% cho scale, control đầu85%
+bị full QA từ chối bởi C. B là SSIM luminance native-pixel giữa drawing liên tiếp và seam loop, chỉ tịnh tiến ±3px;
+min(head,torso)<0,45 ghi INFO `review-by-eye`, không fail. Mirror được flag B cộng review contact sheet bằng mắt
+bắt buộc mỗi PR hướng. Alpha IoU chỉ chẩn đoán. Không fit scale/rotation và không flatten pose để hợp score.
+
+Cửa sổ không tạo evidence: front crown/chin và breadth thật hoặc rộng một chiều dài đầu; rear dùng endpoint thật
+và breadth, span vai tối đa một breadth dưới top. D52 dùng neo phụ kiện. D56 dùng crown→crown+breadth cho cả ô
+và master D53; temporal D56/D53 cùng quy tắc. Margin tổng8%; torso cao25%, rộng44% H master. Thiếu một phía
+ghi centroid-fallback; điểm sai không fallback im lặng. Lab loại RGB ẩn/background; thiếu opaque ở ô không miễn
+là lỗi cứng không đo được. Giữ phạm vi pose D41 và head-reason D54;10ô D41-exempt thiếu opaque chỉ ghi coverage.
+
+Audit pin hash nguồn/mã, ghi mọi ô/pair, control matrix, score L1 lịch sử và A+C hiện tại; không sửa source/evidence
+hay export.11ô Lab vượt15 chặn rebuild, cần sửa hoặc quyết định giải thích; OPEN-ITEMS liệt kê từng ô và owner.
+33ô fail L1 cũ được đánh giá lại theo A+C, không tự ép redraw. Lệnh và công thức tại README, tóm tắt audit D55 trong docs/art.

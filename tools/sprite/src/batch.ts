@@ -68,6 +68,11 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
   const unmeasuredFootSlide = result.contract.qa.judged.some(
     (j) => j.finding.clip === name && j.finding.gate === 'footSlide' && j.finding.measurement === 'unmeasured',
   );
+  const similarityCrops = result.contract.qa.judged.flatMap((j) =>
+    j.finding.clip === name && j.finding.severity === 'info' && j.finding.similarityCrop
+      ? [{ cell: j.finding.frame!, measurement: j.finding.similarityCrop }]
+      : [],
+  );
   for (const j of result.contract.qa.judged) {
     if (j.finding.clip !== name) continue;
     if (j.verdict === 'fail-hard') counts.hard++;
@@ -92,6 +97,7 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
     ...(unmeasuredFootSlide ? { unmeasuredFootSlide } : {}),
     ...(originEvidence.length ? { originEvidence } : {}),
     ...(headEvidence.length ? { headEvidence } : {}),
+    ...(similarityCrops.length ? { similarityCrops } : {}),
   };
 }
 

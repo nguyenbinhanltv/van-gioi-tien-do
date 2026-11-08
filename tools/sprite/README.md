@@ -502,3 +502,60 @@ and the span `ratio` are absent. Idle/walk/emote/cast, missing occluders, invisi
 reasons fail even when the bbox is in band. D54 similarity still runs; D55 crops apply when merged.
 Do not redraw the dynamic pose or reclassify a similarity failure to bypass QA. Phap tu NE dash4/5/7
 may adopt this only after D56 merges. Other head kinds and foot/canvas/scale gates are unchanged.
+
+### D55: Lab identity gate and temporal diagnostics
+
+D55 replaces the hard 8x8 L1 similarity score with Lab palette identity: head distance<=15, torso distance<=23.
+L1 remains diagnostic. Temporal SSIM below 0.45 is `review-by-eye` INFO, never a hard failure; mirror coverage combines
+that flag with mandatory visual contact-sheet review for every direction PR. The existing 3% head-size band controls
+scale. D41 pose exemptions and D54 head-reason scope are unchanged. Static-master SSIM failed pose calibration and is
+retained only as a historical diagnostic. No frames are fitted or repainted to satisfy a similarity metric.
+
+Both windows use actual supplied landmarks. Front spans crown to chin, with width equal to annotated breadth or one
+Euclidean head length when breadth is absent. Rear is labelled `rear-head`, using existing endpoints and breadth;
+shoulder spans are capped at one breadth below the top, and D52 uses its existing ornament anchor. D56 pairs use crown
+to crown plus each side's breadth, including the locked D53 master. Temporal D56/D53 pairs use that same window rule.
+Head windows expand 8% total per dimension (4% per edge). Torso starts at the padded head bottom, has depth 25% and
+width 44% of master figure height, and is centred on front chin x or rear window x. These windows never create evidence.
+Missing either side's points uses paired centroid windows, flagged `centroid-fallback`. Invalid points are not hidden.
+
+A uses opaque pixels (alpha>=250), unpremultiplies RGB, converts sRGB through linear RGB/XYZ to CIELab relative to D65,
+and normalizes one-unit histograms of L, a and b. Per-axis 1-Wasserstein distances are combined with a Euclidean norm;
+chroma distance is also reported. This is a marginal-distribution distance in Lab units, not per-pixel DeltaE or CSS
+lab(D50). The fixed hard ceilings are 15 (head) and 23 (torso). Spatial rearrangement and transparent RGB do not affect it. Missing opaque samples are explicitly unavailable,
+not zero distance or pass. Source for colour-space equations: https://www.w3.org/TR/css-color-4/#color-conversion-code.
+
+B computes Wang et al. (2004), Eq.13 SSIM on native-pixel BT.601 premultiplied luminance, with K1=0.01, K2=0.03, L=255.
+Each window is a statistical sample, not an 8x8 reduction. A shared physical-pixel canvas centres paired windows without
+resizing them; bilinear sampling supports fractional centres. Registration tests 49 integer translations within +/-3 px,
+never scale/rotation. Non-256 masters are normalized once exactly as `runProject`; frames retain production calibration.
+Consecutive pairs are clip-local; looping clips also include last->first. Pairs touching a D41 exemption remain labelled
+separately. Alpha IoU and RGB histogram affinity are diagnostics only. Reference: https://ece.uwaterloo.ca/~z70wang/publications/ssim.pdf.
+
+| Control          | Intended check        | Current diagnostic                                            |
+| ---------------- | --------------------- | ------------------------------------------------------------- |
+| Other-class head | A: head palette       | Lab18.9767                                                    |
+| Wrong torso      | A: torso palette      | Lab35.3382                                                    |
+| Hue change       | A: chroma/palette     | Lab31.8389: hard reject; luminance alone misses it            |
+| Mirrored head    | B: temporal or layout | SSIM0.3683: review-by-eye plus mandatory contact-sheet review |
+| Head scaled 85%  | C: full QA head band  | 42.82px, below49.17..52.22; correctly fails                   |
+
+The controls use a deterministic master/control/master sequence and frozen construction geometry; they are synthetic
+QA fixtures, never production evidence or art edits. Calibrated known-good head/torso maxima are 11.0535/11.5766,
+below the approved 15/23 ceilings. Temporal known-good minimum 0.1749 overlaps the mirror, so B is diagnostic with
+mandatory eye review. L1 is never a hard failure. See `docs/OPEN-ITEMS.md` for the 11 Lab rebuild blockers and D54
+re-evaluation; source validation snapshots predating D55 do not prove a clean rebuild.
+
+The read-only audit reports all frame/pair scores, exemptions, actual annotations, windows, registration, component
+distributions, input/code hashes, the control matrix and the original 33 D54 cells. It rejects input/code changes during
+evaluation and protects input directories and unrelated report files. Outputs must be outside inputs:
+
+```bash
+npm run sprite:audit-similarity-crops -w @vgtd/sprite -- --root assets-src/placeholder --baseline docs/art/head-reason-similarity-cohort-d54.json --control-matrix /absolute/path/similarity-identity-temporal-controls.json --out /absolute/path/similarity-identity-temporal-audit.json
+```
+
+Repeat `--project /absolute/path/project.json` for frozen worker candidates. JSON contains every cell/pair, including
+explicit Lab coverage gaps and actual A+C failures. A dedicated `*-palette-findings.html` page contains the merged
+Lab hard findings with exact master/cell crops. HTML and supporting PNGs show the old/static-master experiment alongside candidate A/B
+distributions. `--sensitivity-report` accepts the historical static-SSIM control report. The audit never exports assets,
+rewrites annotations, updates backlogs, or turns an exemption into a pass.

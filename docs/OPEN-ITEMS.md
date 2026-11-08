@@ -218,15 +218,17 @@ Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nan
 
 ## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
 
+[Cập nhật D55: mục D54 dưới đây là lịch sử trước D55. Audit pin mới xác nhận cả 33 ô hết lỗi cứng A+C; danh sách đang mở hiện tại là 11 ô Lab trong mục D55 bên dưới. Không cần repaint chỉ vì L1 cũ.]
+
 **Mở — các hướng dưới đây không thể rebuild sạch sau D54 cho tới khi sửa art và kiểm lại similarity.** Ngưỡng vẫn ≥0,70; không hạ ngưỡng, không đổi dash thành free, không sửa art trong PR tooling. `validation.json` hiện có là bằng chứng lịch sử trước D54, không phải nghiệm thu lại.
 
-| Project                                                     | Clip   | Ô local (0-based) fail | Chủ sửa                |
-| ----------------------------------------------------------- | ------ | ---------------------- | ---------------------- |
-| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `dash` | 1–7                    | worker26               |
-| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `run`  | 0–15                   | worker26               |
-| `assets-src/placeholder/dao-tu-chibi-v1/SE/project.json`    | `dash` | 3–6                    | orchestrator phân công |
-| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `dash` | 3–6                    | worker24               |
-| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `run`  | 5–6                    | worker24               |
+| Project                                                     | Clip   | Ô local (0-based) fail | Chủ sửa  |
+| ----------------------------------------------------------- | ------ | ---------------------- | -------- |
+| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `dash` | 1–7                    | worker26 |
+| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `run`  | 0–15                   | worker26 |
+| `assets-src/placeholder/dao-tu-chibi-v1/SE/project.json`    | `dash` | 3–6                    | worker33 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `dash` | 3–6                    | worker24 |
+| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `run`  | 5–6                    | worker24 |
 
 Bản [tóm tắt audit trong repo](art/head-reason-similarity-audit-d54.md) giữ số lượng, mốc mã/hash và phạm vi exemptions. 15 ô bow upright D41 giữ miễn như trước, không phát sinh gate mới; head reasons không miễn similarity.
 
@@ -237,3 +239,40 @@ npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeh
 ```
 
 Điều kiện đóng: PR art riêng giữ motion arc, edit-from-master và khóa mặt/thân; similarity ≥0,70, các gate khác và capture Cocos theo pipeline. Worker24 sửa 6 ô Thể tu E sau PR NE; worker26 phụ trách Đan/Phù E. Audit đầy đủ chỉ báo cáo, không tự đóng mục này.
+
+## D55 — 11 ô palette chặn rebuild (worker24, 2026-11-08)
+
+**Mở — gate cứng Lab: đầu ≤15 / thân ≤23.** Các project/ô dưới đây không rebuild sạch cho tới khi sửa hoặc có
+quyết định tiếp theo chứng minh đó là lighting/expression hay vấn đề cửa sổ đo. Không tự hạ trần, đổi điểm để hợp score,
+hoặc thêm pose exception để che lỗi. `validation.json` đã commit trước D55 là bằng chứng lịch sử, không thay audit hiện tại.
+Không sửa art/evidence/export trong PR tooling này.
+
+| Project                                                       | Clip       | Ô local (0-based)      | Owner    |
+| ------------------------------------------------------------- | ---------- | ---------------------- | -------- |
+| `assets-src/placeholder/phap-tu-chibi-v1/S/project.json`      | `dash`     | 3                      | worker25 |
+| `assets-src/placeholder/phap-tu-fan-sprite-v1/N/project.json` | `attack`   | 2                      | worker25 |
+| `assets-src/placeholder/phap-tu-fan-sprite-v1/N/project.json` | `cast`     | 3                      | worker25 |
+| `assets-src/placeholder/the-tu-sprites-v1/S/project.json`     | `attack_2` | 0, 1, 2, 3, 4, 5, 6, 7 | worker24 |
+
+Artifact `similarity-identity-temporal-audit-palette-findings.html` trong [session worker24](ao://sessions/van-gioi-tien-do/van-gioi-tien-do-24)
+có từng crop master/ô, context 256px, tọa độ và SHA256. Không scale lại frame; crop chỉ phóng to đồng đều để xem.
+Bản [tóm tắt D55 trong repo](art/identity-temporal-calibration-d55.md) giữ từng ô và giá trị; audit JSON giữ mọi score/pair/hash.
+Tái lập bằng `sprite:audit-similarity-controls` và `sprite:audit-similarity-crops` theo README của `@vgtd/sprite`.
+
+**Đánh giá lại D54: 33 ô L1 cũ đều có 0 lỗi cứng A+C và 0 lỗi cứng khác trong audit pin D55.** Đan/Phù E run0–15,
+dash1–7; Thể E run5–6, dash3–6; Đao SE dash3–6 không còn là rebuild blockers theo metric mới. Đóng phần việc repaint
+chỉ do L1 của danh sách D54, không gọi đó là sửa art hoặc chứng nhận identity bằng thuật toán. L1 chỉ chẩn đoán;
+review contact sheet bằng mắt vẫn bắt buộc. Bảng D54 phía trên giữ lịch sử của gate trước D55.
+
+Temporal pair <0,45 là INFO review-by-eye, không fail; mirror được flag này cộng review contact sheet. Head-size ±3%
+vẫn là gate scale. 10 ô thiếu opaque đều miễn D41, ghi coverage riêng và không tính fail. Đan/Phù SE candidate dash5
+vẫn fail head-size thật; Kiếm E candidate còn thiếu bằng chứng đầu, không được suy pass từ palette.
+
+### D55 — annotation cần review, không phải repaint (Đao SE, worker33)
+
+Emote local7/8 có điểm đầu cũ chưa đăng ký semantic đúng theo kiểm tra native của owner33: chin7 ở cheek, crown7 ở
+curl nâng cao, breadth chưa ở cực trị tóc ôm sọ; điểm8 cũng chưa theo đúng dịch chuyển đầu. Face/costume vẫn nhất quán,
+không repaint từ score. Chưa có full replacement landmarks được freeze; không sửa điểm trong PR D55 và không dịch điểm
+để hợp ngưỡng. Pair temporal thấp được flag review-by-eye; owner33 cần cross-check cùng contour master rồi đánh giá lại.
+Đây là việc review annotation riêng, không cộng vào11ô Lab hard ở trên. Cohort33ô D54 được lưu portable tại
+`docs/art/head-reason-similarity-cohort-d54.json` để mọi worker tái lập A+C.
