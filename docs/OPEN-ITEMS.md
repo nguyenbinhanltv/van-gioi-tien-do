@@ -215,3 +215,25 @@ Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `
 | D49-07 | Phù Linh (linh thú của Đan/Phù tu) là thực thể phụ chưa có spec asset / netcode (AOI, đồng bộ, giới hạn số thực thể)                                                                                               | **Mở — network + art**                 |
 
 Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
+
+## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
+
+**Mở — các hướng dưới đây không thể rebuild sạch sau D54 cho tới khi sửa art và kiểm lại similarity.** Ngưỡng vẫn ≥0,70; không hạ ngưỡng, không đổi dash thành free, không sửa art trong PR tooling. `validation.json` hiện có là bằng chứng lịch sử trước D54, không phải nghiệm thu lại.
+
+| Project                                                     | Clip   | Ô local (0-based) fail | Chủ sửa                |
+| ----------------------------------------------------------- | ------ | ---------------------- | ---------------------- |
+| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `dash` | 1–7                    | worker26               |
+| `assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json` | `run`  | 0–15                   | worker26               |
+| `assets-src/placeholder/dao-tu-chibi-v1/SE/project.json`    | `dash` | 3–6                    | orchestrator phân công |
+| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `dash` | 3–6                    | worker24               |
+| `assets-src/placeholder/the-tu-chibi-v1/E/project.json`     | `run`  | 5–6                    | worker24               |
+
+Bản [tóm tắt audit trong repo](art/head-reason-similarity-audit-d54.md) giữ số lượng, mốc mã/hash và phạm vi exemptions. 15 ô bow upright D41 giữ miễn như trước, không phát sinh gate mới; head reasons không miễn similarity.
+
+Tái lập từ repo root sau `npm ci`:
+
+```bash
+npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder --out D:/Temp/head-reason-similarity-audit.json
+```
+
+Điều kiện đóng: PR art riêng giữ motion arc, edit-from-master và khóa mặt/thân; similarity ≥0,70, các gate khác và capture Cocos theo pipeline. Worker24 sửa 6 ô Thể tu E sau PR NE; worker26 phụ trách Đan/Phù E. Audit đầy đủ chỉ báo cáo, không tự đóng mục này.
