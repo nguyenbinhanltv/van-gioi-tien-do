@@ -416,7 +416,7 @@
             "x": 159,
             "y": 82.5
           },
-          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Prior157,82.5 falls in left neck-shadow. Candidate159: skinrow81, dark jaw outline82, following neck shadow83; no transparent boundary because neck connects. UNRESOLVED outside-band candidate retained to keep gate rejecting pending independent contour review."
+          "note": "Adjudicated Lanczos3 aligned256 semantic edges: front-cap147,28.5 excluding elevated bun/pin; chin159,82.5 is last jaw outline row82. Skin81 is interior; row83 neck and157 back-neck shadow excluded. Genuine marginal oversize remains rejected; post-D55 head-only source repair pending, body/root/legs unchanged. Native neighborhoods/history in head-landmarks.lanczos3.json; owner decision in head-contour-review.json. No waiver/coordinate shift."
         },
         "6": {
           "crown": {

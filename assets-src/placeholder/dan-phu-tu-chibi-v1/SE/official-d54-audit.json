@@ -1,9 +1,9 @@
 {
   "format": "vgtd-head-reason-similarity-audit",
   "version": 1,
-  "utc": "2026-11-08T01:58:11.446Z",
-  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/dan-phu-tu-chibi-v1/SE --out D:/Temp/vgtd26-SE-D55/official-d54-audit.json",
-  "gitHead": "2f533df7539104750c06cd6c4e81550dca045d48",
+  "utc": "2026-11-08T02:06:37.815Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/dan-phu-tu-chibi-v1/SE --out D:/Temp/vgtd26-SE-D55/adjudicated/official-d54-audit.json",
+  "gitHead": "3f67ad4f145cbc85f0c4d15216dc249a5cd5f8f7",
   "gateSourceSha256": "9650fbd20f8e625c61750d4263843bd6be93d85f8433d108912f10848e358981",
   "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
   "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
@@ -626,7 +626,7 @@
   "scannedProjects": [
     {
       "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
-      "sha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
+      "sha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859"
     }
   ],
   "totals": {
@@ -644,11 +644,11 @@
       "inputs": [
         {
           "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
-          "sha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
+          "sha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859"
         },
         {
           "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/quality-backlog.json",
-          "sha256": "b66e25e430cee12b9e0a005d503ca404820b038c13c340a9cbe76f2d7da86af7"
+          "sha256": "86cbc39fc707dfc95e513bd91784afbd8e6368c7fc0550ce856e6d52555bcaa7"
         },
         {
           "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/attack.attempt1.png",

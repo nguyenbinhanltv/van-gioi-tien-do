@@ -443,7 +443,7 @@
       "severity": "error",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "Current central-jaw candidate159,82.5 with front-cap147,28.5 is nominally outside the SE master head band. Old157,82.5 appears left neck shadow. Independent style23 contour review requested; current project intentionally rejects the candidate. No point moved to pass, no source repaint for similarity."
+      "note": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules."
     }
   ]
 }

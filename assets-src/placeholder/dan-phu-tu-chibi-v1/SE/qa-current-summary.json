@@ -1,8 +1,8 @@
 {
-  "status": "NOT ready for export. Official D54 enforces unskipped head reasons:18/29 formerly skipped cells fail similarity. D55 pending; no further run repaints. Dash5 frozen internal-jaw candidate remains provisionally overband and rejected pending orchestrator contour adjudication. Sources and fixed scale1 unchanged.",
+  "status": "NOT ready for export. Official D54 similarity failures retained pending D55. Dash5 frozen contour is adjudicated correct and genuinely marginally oversized; local head-only repair deferred until after D55. No coordinate/source-pixel/scale/threshold change.",
   "readyForExport": false,
   "resample": "lanczos3",
-  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
+  "projectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
   "nativeHeadFindings": [
     {
@@ -13,7 +13,7 @@
       "metric": "head_size_px",
       "value": 55.31726674375733,
       "limit": 55.06407358704948,
-      "message": "skull crown-chin 55.32 px outside 51.86..55.06 (master 53.46); Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Prior157,82.5 falls in left neck-shadow. Candidate159: skinrow81, dark jaw outline82, following neck shadow83; no transparent boundary because neck connects. UNRESOLVED outside-band candidate retained to keep gate rejecting pending independent contour review."
+      "message": "skull crown-chin 55.32 px outside 51.86..55.06 (master 53.46); Adjudicated Lanczos3 aligned256 semantic edges: front-cap147,28.5 excluding elevated bun/pin; chin159,82.5 is last jaw outline row82. Skin81 is interior; row83 neck and157 back-neck shadow excluded. Genuine marginal oversize remains rejected; post-D55 head-only source repair pending, body/root/legs unchanged. Native neighborhoods/history in head-landmarks.lanczos3.json; owner decision in head-contour-review.json. No waiver/coordinate shift."
     }
   ],
   "canvasClipping": [],
@@ -22,8 +22,8 @@
   "cleanupReview": "cleanup-review.json",
   "headEvidence": "head-landmarks.lanczos3.json",
   "softFindings": "soft-findings.lanczos3.json",
-  "d54UnskippedAudit": "unskipped-similarity-audit.json",
-  "d55Status": "Assigned to worker24; read-only TEMP project-v2 and actual source landmarks delivered. Rerun unskipped numbers after merge; only real remaining identity failures will be repaired.",
+  "d54UnskippedAudit": "official-d54-audit.json",
+  "d55Status": "Assigned to worker24; read-only project-v3 includes all29 actual crown/chin annotations including the adjudicated dash5 head-size failure. No inferred front breadth. Window contract received for tooling only; wait D55 merge and sensitivity controls before any fix claim. Post-D55 repair retains body/root/legs and remeasures identical contour rules.",
   "previousBilinearCheckpoint": "qa-bilinear-checkpoint.json",
   "productionExport": "pending",
   "cocosCapture": "pending",
@@ -57,5 +57,10 @@
     },
     "similarityFindings": 30
   },
-  "headContourAdjudication": "head-contour-review.json"
+  "headContourAdjudication": "head-contour-review.json (decision received; repair OPEN, no waiver)",
+  "unchangedSourcePixelCheck": {
+    "frames": 202,
+    "allAlignedPngHashesMatchPriorCleanup": true
+  },
+  "priorProxyAudit": "unskipped-similarity-audit.json (historical)"
 }

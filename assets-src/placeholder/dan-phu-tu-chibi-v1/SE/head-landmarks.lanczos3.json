@@ -1,5 +1,5 @@
 {
-  "status": "Actual aligned Lanczos3 source annotations;28 reviewed candidates and1 unresolved dash5 candidate. Old bilinear evidence is separate history. No per-frame body scaling or measurement projection.",
+  "status": "Actual Lanczos3 source annotations:28 reviewed heads plus1 adjudicated marginal oversize. No point shift, waiver or per-frame body scaling; repair pending after D55.",
   "master": "../reference/SE.corrected-master.png",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
   "masterHead": {
@@ -8926,9 +8926,15 @@
           ]
         }
       ],
-      "status": "UNRESOLVED: central jaw candidate outside nominal band; independent style review pending. Do not treat as certified or choose another point to pass.",
-      "refinement": "Prior157,82.5 falls in left neck-shadow. Candidate159: skinrow81, dark jaw outline82, following neck shadow83; no transparent boundary because neck connects.",
-      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
+      "status": "ADJUDICATED correct contour; genuine marginal oversize remains OPEN for post-D55 head-only repair.",
+      "refinement": "Keep147,28.5->159,82.5 exactly. Row82 is jaw outline,81 interior skin,83 neck.157 is neck shadow. Prior provisional uncertainty cannot waive the actual overband finding.",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "adjudication": {
+        "reviewer": "orchestrator1",
+        "recordedUtc": "2026-11-08T02:03:38.937Z",
+        "statement": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules."
+      },
+      "failureClassification": "Genuine marginal oversize by orchestrator adjudication; prior uncertainty does not waive this failure."
     },
     {
       "clip": "dash",
@@ -10943,5 +10949,5 @@
       ]
     }
   ],
-  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
+  "projectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859"
 }

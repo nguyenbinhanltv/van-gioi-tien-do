@@ -1,6 +1,6 @@
 # Head-reason similarity audit (D54)
 
-UTC: 2026-11-08T01:58:11.446Z. Git head: 2f533df7539104750c06cd6c4e81550dca045d48.
+UTC: 2026-11-08T02:06:37.815Z. Git head: 3f67ad4f145cbc85f0c4d15216dc249a5cd5f8f7.
 
 Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.
 
