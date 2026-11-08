@@ -179,6 +179,8 @@ export class NetClient {
   /** the server answered a resume `hello` with an Unauthorized error frame: the token is unknown / the hold is over */
   private resumeRejected = false;
   private lastRxMs = 0;
+  /** wall time of the previous `update()`: a gap means the client's OWN loop stalled, not the link */
+  private lastUpdateMs = 0;
   private reconnecting = false;
   /** number of times the session came back after a drop (resumed or re-logged-in) */
   reconnects = 0;
@@ -495,6 +497,11 @@ export class NetClient {
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return;
     const now = this.o.deps.now();
+    // If this loop itself was starved (busy tab / CPU-starved host) frames sat unread in the socket queue: silence we cannot
+    // attribute to the link. Forgive the gap instead of tearing down a healthy connection.
+    const rcStale = this.rc?.staleMs ?? 0;
+    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0) this.lastRxMs = now;
+    this.lastUpdateMs = now;
     // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
     const rc = this.rc;
     if (rc && this.lastRxMs > 0 && now - this.lastRxMs > rc.staleMs) {

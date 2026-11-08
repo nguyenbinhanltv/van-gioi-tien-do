@@ -211,13 +211,33 @@ describe('NetClient reconnect / resume', () => {
     Fake.all[0]!.snapshot(SELF);
     r.net.update(16);
     expect(r.net.status).toBe('online');
-    r.clock.t += 3500; // the link went silent (no close event, nothing arrives)
-    r.net.update(16);
+    for (let k = 0; k < 35; k++) {
+      r.clock.t += 100; // the link went silent (no close event, nothing arrives) while the frame loop keeps running
+      r.net.update(16);
+    }
     expect(r.net.status).toBe('reconnecting');
     expect(r.net.lastError).toContain('no server frames');
     await settle();
     expect(r.net.status).toBe('online');
     expect(r.events).toEqual(['lost', 'reconnect resumed=true']);
+  });
+
+  it('a stall of the OWN update loop is not mistaken for a dead link (no reconnect)', async () => {
+    const r = rig({ reconnect: { staleMs: 3000 } });
+    Fake.answer = (h, s) => s.ack(7, h.resume ? 'tok-2' : 'tok-1', !!h.resume);
+    await r.net.connect();
+    Fake.all[0]!.snapshot(SELF);
+    r.net.update(16);
+    r.clock.t += 3500; // the whole tab / host was starved: nothing ran, frames sat unread
+    r.net.update(16);
+    expect(r.net.status).toBe('online');
+    expect(r.events).toEqual([]);
+    // ...but real silence afterwards is still detected
+    for (let k = 0; k < 35; k++) {
+      r.clock.t += 100;
+      r.net.update(16);
+    }
+    expect(r.net.status).toBe('reconnecting');
   });
 
   it('gives up after maxMs and ends in "closed" with a reason', async () => {

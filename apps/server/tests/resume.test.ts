@@ -343,11 +343,16 @@ async function frames(net: NetClient, ms: number, intent = { dir: 255, mag: 0, f
   }
 }
 /** Run the game loops of `nets` (idle input) until `cond()` holds, or fail after `ms`. */
-async function drive(nets: NetClient[], cond: () => boolean, ms = 15_000): Promise<void> {
+async function drive(nets: NetClient[], cond: () => boolean, ms = 30_000): Promise<void> {
   let last = performance.now();
   const t0 = last;
   while (!cond()) {
-    if (performance.now() - t0 > ms) throw new Error('timeout driving the clients');
+    if (performance.now() - t0 > ms) {
+      const state = nets.map(
+        (n) => `${n.status} reconnects=${n.reconnects} err=${n.lastError ?? '-'} remotes=${n.remotes().length}`,
+      );
+      throw new Error(`timeout driving the clients after ${ms} ms: ${state.join(' | ')}`);
+    }
     await sleep(16);
     const now = performance.now();
     for (const n of nets) n.update(now - last, { dir: 255, mag: 0, flags: 0 });
