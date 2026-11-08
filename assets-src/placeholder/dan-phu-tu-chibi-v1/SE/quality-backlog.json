@@ -372,8 +372,8 @@
       "cells": [],
       "severity": "warn",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Residual warm-magenta chroma spill is visible around some hair/jaw edges and whisk fibres. Existing public spill settings improve saturated magenta but skip asymmetric red/blue contamination. Wider key220 comparison is TEMP only; current sources/outputs remain unchanged. Awaiting coordinated tooling option or AI cleanup before final source/export claim."
+      "status": "resolved",
+      "note": "Merged PR174 edge-limited asymmetric cleanup applied with threshold16, maxImbalance100, native edgeRadius3 and approved soft-pink protection. All202 before/after frame alpha arrays match; master pink123,81 remains unchanged. Actual source preview reviewed; no global pink/red bleaching. Full proof in cleanup-review.json."
     },
     {
       "kind": "other",
@@ -383,7 +383,7 @@
       "severity": "error",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "Unskipped Lanczos3 similarity audit fails all16 run cells and dash3/5. Prior native hard0 used legacy posture skips and is not D54 compliance. Full-master identity repair run5 retained unselected because all16 still fail. Exact public crop windows show sampling displacement under forward lean; orchestrator decision requested, no threshold waiver/free-pose relabeling."
+      "note": "Unskipped Lanczos3 similarity audit fails all16 run cells and dash3/5. Prior native hard0 used legacy posture skips and is not D54 compliance. Full-master identity repair run5 retained unselected because all16 still fail. Exact public crop windows show sampling displacement under forward lean; orchestrator decision requested, no threshold waiver/free-pose relabeling. Orchestrator confirmed silhouette-centroid crop mismatch and assigned D55 to24; STOP further similarity redraws until D55 recheck. Current selected run sources retained."
     },
     {
       "kind": "other",
@@ -394,6 +394,56 @@
       "reviewer": "art-worker",
       "status": "open",
       "note": "Lanczos3 migration selected for this unexported direction. Prior bilinear head coordinate traces and20 soft baselines are retained as historical evidence, not transferred certification; actual aligned head points, canvas/source-border and all gates must be rerun before export."
+    },
+    {
+      "kind": "other",
+      "clip": "attack",
+      "dir": "SE",
+      "cells": [0, 13],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Single-pass source neutral boot depths234.36/234.77 sit2.36/2.77px below template ground232. Fixed lattice-root/vertical-keep preserves the authored lunge and avoids centroid/sole placement clipping; depth/entry continuity remains open for Cocos review. No body/head rescale or clipping waiver."
+    },
+    {
+      "kind": "other",
+      "clip": "walk",
+      "dir": "SE",
+      "cells": [1, 2, 4, 5, 6, 7, 9, 12, 13, 14, 15],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Lanczos3 current soft measurements: 11 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "SE",
+      "cells": [2, 3, 4, 5, 8, 11, 10, 12, 13],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Lanczos3 current soft measurements: 9 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+    },
+    {
+      "kind": "other",
+      "clip": "die",
+      "dir": "SE",
+      "cells": [0],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Lanczos3 current soft measurements: 1 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "SE",
+      "cells": [5],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Current central-jaw candidate159,82.5 with front-cap147,28.5 is nominally outside the SE master head band. Old157,82.5 appears left neck shadow. Independent style23 contour review requested; current project intentionally rejects the candidate. No point moved to pass, no source repaint for similarity."
     }
   ]
 }

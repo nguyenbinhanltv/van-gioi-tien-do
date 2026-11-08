@@ -1,0 +1,237 @@
+{
+  "status": "Current Lanczos3 soft measurements remain open. Historical bilinear baselines retained unchanged; new/regressed values are NOT accepted or hidden. Final source freeze follows D55 and head review.",
+  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
+  "findings": [
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 1,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 5.85,
+      "limit": 3,
+      "message": "R foot slides 5.8 px/frame between frames 0-1 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 2,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 3.54,
+      "limit": 3,
+      "message": "R foot slides 3.5 px/frame between frames 1-2 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "fail-soft",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 4,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 7.57,
+      "limit": 3,
+      "message": "R foot slides 7.6 px/frame between frames 3-4 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 5,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 8.98,
+      "limit": 3,
+      "message": "R foot slides 9.0 px/frame between frames 4-5 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 6,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 3.16,
+      "limit": 3,
+      "message": "R foot slides 3.2 px/frame between frames 5-6 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 7,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 16.96,
+      "limit": 3,
+      "message": "R foot slides 17.0 px/frame between frames 6-7 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "fail-soft",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 9,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 9.36,
+      "limit": 3,
+      "message": "L foot slides 9.4 px/frame between frames 8-9 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 12,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.06,
+      "limit": 3,
+      "message": "L foot slides 4.1 px/frame between frames 11-12 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 13,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 5.85,
+      "limit": 3,
+      "message": "L foot slides 5.8 px/frame between frames 12-13 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "regression",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 14,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.44,
+      "limit": 3,
+      "message": "L foot slides 4.4 px/frame between frames 13-14 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 15,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 14.28,
+      "limit": 3,
+      "message": "L foot slides 14.3 px/frame between frames 14-15 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 2,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 28.8,
+      "limit": 20,
+      "message": "R planted foot: nearest sole is 28.8 px from its template ghost (xy 138.0,210.0 vs 124.8,235.6, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 3,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 4,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 27.7,
+      "limit": 20,
+      "message": "R planted foot: nearest sole is 27.7 px from its template ghost (xy 80.0,220.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "regression",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 5,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "regression",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 8,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 22,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 22.0 px from its template ghost (xy 162.5,235.0 vs 142.7,244.5, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "regression",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 11,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 38.4,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 38.4 px from its template ghost (xy 77.5,228.0 vs 115.8,231.1, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 10,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 8.21,
+      "limit": 3,
+      "message": "L foot slides 8.2 px/frame between frames 9-10 (limit 3)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "regression",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 12,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 999,
+      "limit": 20,
+      "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 13,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 36.7,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 36.7 px from its template ghost (xy 78.5,191.0 vs 97.9,222.2, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "verdictAgainstHistoricalBilinearBacklog": "accepted",
+      "gate": "height",
+      "severity": "warn",
+      "clip": "die",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "message": "height 222 px outside the upright band and no pose exception declared"
+    }
+  ]
+}

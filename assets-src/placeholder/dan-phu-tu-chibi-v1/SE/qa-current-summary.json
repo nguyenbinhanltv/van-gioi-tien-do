@@ -1,261 +1,37 @@
 {
-  "status": "NOT ready for export. Lanczos3 selected for the new SE direction. Explicit unskipped similarity audit fails run0..15 and dash3/5; repair attempt5 still fails and is unselected. Prior bilinear native hard0 relied on legacy posture skips and is historical only.",
+  "status": "NOT ready for export. D55 anatomical similarity pending; prior silhouette-window audit failures retained, no more run repaints. Native head gate intentionally rejects unresolved dash5. All sources remain at fixed scale1.",
+  "readyForExport": false,
   "resample": "lanczos3",
-  "projectSha256": "915d8069d7b701219ff1bc46ad4174b5d27377cd2808978f24a9de7f58bb587e",
-  "previousBilinearCheckpoint": "qa-bilinear-checkpoint.json",
-  "previousBilinearCounts": {
-    "fail-hard": 0,
-    "fail-soft": 0,
-    "accepted": 20,
-    "regression": 0,
-    "info": 125
+  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "nativeCountsBeforeD55": {
+    "fail-hard": 1,
+    "fail-soft": 2,
+    "accepted": 14,
+    "regression": 5,
+    "info": 141
   },
-  "unskippedSimilarityAudit": {
-    "method": "Public runProject, with all upright height exceptions omitted in this diagnostic only; threshold unchanged. Height findings remain separate.",
-    "projectSha256": "18beb007f95ef2fd998c09ffa8a2ac5190dc389f0022ca63b623e6d6ec100f88",
-    "resample": "lanczos3",
-    "similarityFailures": [
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 0,
-        "message": "face similarity 0.65 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 1,
-        "message": "face similarity 0.64 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 2,
-        "message": "face similarity 0.65 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 2,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 3,
-        "message": "face similarity 0.61 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 3,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 4,
-        "message": "face similarity 0.57 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 4,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 5,
-        "message": "face similarity 0.58 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 5,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 6,
-        "message": "face similarity 0.55 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 7,
-        "message": "face similarity 0.53 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 7,
-        "message": "torso similarity 0.67 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 8,
-        "message": "face similarity 0.53 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 8,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 9,
-        "message": "face similarity 0.55 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 9,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 10,
-        "message": "face similarity 0.56 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 10,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 11,
-        "message": "face similarity 0.57 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 11,
-        "message": "torso similarity 0.70 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 12,
-        "message": "face similarity 0.55 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 13,
-        "message": "face similarity 0.60 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 13,
-        "message": "torso similarity 0.67 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 14,
-        "message": "face similarity 0.59 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 14,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 15,
-        "message": "face similarity 0.59 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 15,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "dash",
-        "frame": 3,
-        "message": "face similarity 0.66 < 0.7"
-      },
-      {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "dash",
-        "frame": 5,
-        "message": "face similarity 0.64 < 0.7"
-      }
-    ],
-    "clips": [
-      {
-        "name": "idle",
-        "frames": 16,
-        "failedCells": []
-      },
-      {
-        "name": "walk",
-        "frames": 16,
-        "failedCells": []
-      },
-      {
-        "name": "run",
-        "frames": 16,
-        "failedCells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-      },
-      {
-        "name": "dash",
-        "frames": 10,
-        "failedCells": [3, 5]
-      },
-      {
-        "name": "emote",
-        "frames": 12,
-        "failedCells": []
-      }
-    ]
-  },
-  "currentFullNativeQa": "Pending source identity repair, Lanczos3 per-cell head remeasurement, spill tooling merge and final source freeze.",
+  "nativeHeadFindings": [
+    {
+      "gate": "height",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 5,
+      "metric": "head_size_px",
+      "value": 55.31726674375733,
+      "limit": 55.06407358704948,
+      "message": "skull crown-chin 55.32 px outside 51.86..55.06 (master 53.46); Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Prior157,82.5 falls in left neck-shadow. Candidate159: skinrow81, dark jaw outline82, following neck shadow83; no transparent boundary because neck connects. UNRESOLVED outside-band candidate retained to keep gate rejecting pending independent contour review."
+    }
+  ],
+  "canvasClipping": [],
+  "projectedCanvasLoss": [],
   "sourceBorderReview": "source-border-review.json",
-  "samplingEvidence": "AO consolidated review / similarity-crop-review: exact public face/torso windows; threshold0.70 unchanged. Requested orchestrator direction on crop misregistration; no QA code or source pose alteration.",
-  "unskippedSimilarityAuditFile": "unskipped-similarity-audit.json"
+  "cleanupReview": "cleanup-review.json",
+  "headEvidence": "head-landmarks.lanczos3.json",
+  "softFindings": "soft-findings.lanczos3.json",
+  "d54UnskippedAudit": "unskipped-similarity-audit.json",
+  "d55Status": "Assigned to worker24; read-only TEMP project-v2 and actual source landmarks delivered. Rerun unskipped numbers after merge; only real remaining identity failures will be repaired.",
+  "previousBilinearCheckpoint": "qa-bilinear-checkpoint.json",
+  "productionExport": "pending",
+  "cocosCapture": "pending"
 }

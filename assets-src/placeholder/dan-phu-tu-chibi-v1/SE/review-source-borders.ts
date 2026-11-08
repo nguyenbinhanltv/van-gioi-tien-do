@@ -13,8 +13,15 @@ const sheets = project.clips.flatMap((clip) => {
   seen.add(clip.sheet);
   const raw = readFileSync(resolve(base, clip.sheet));
   const grid = sheetLayout(clip);
-  const prepared = normalizeSheetDpi(decodePng(raw), grid.cols, grid.frames).image;
-  const full = keyOut(toStraight(prepared));
+  const resample = project.resample ?? 'bilinear';
+  const deferred = resample !== 'bilinear';
+  const prepared = normalizeSheetDpi(
+    decodePng(raw),
+    grid.cols,
+    grid.frames,
+    deferred ? { resample, defer: true } : {},
+  ).image;
+  const full = keyOut(toStraight(prepared), project.slice);
   const cells = Array.from({ length: grid.frames }, (_, index) => {
     const rect = cellRect(full.width, full.height, grid.cols, grid.rows, index);
     let margin32 = Math.min(rect.width, rect.height),
@@ -30,7 +37,15 @@ const sheets = project.clips.flatMap((clip) => {
       }
     return { index, margin32, margin128, edgeSamples };
   });
-  return [{ sheet: clip.sheet, sha256: createHash('sha256').update(raw).digest('hex'), cells }];
+  return [
+    {
+      sheet: clip.sheet,
+      sha256: createHash('sha256').update(raw).digest('hex'),
+      resample,
+      pixelUnits: deferred ? 'native input raster' : 'normalized input raster',
+      cells,
+    },
+  ];
 });
 const contacts = sheets.flatMap((s) =>
   s.cells.filter((c) => c.edgeSamples.length).map((c) => ({ sheet: s.sheet, ...c })),
@@ -40,7 +55,7 @@ writeFileSync(
   JSON.stringify(
     {
       method:
-        'Public whole-sheet DPI preparation then chroma key, before crop/inset/fragment removal. Native opaque128 and component32 support are recorded separately. No pixel, pose or scale is changed.',
+        'Public DPI preparation with native deferral for single-pass resampling, then project chroma key before crop/inset/fragment removal. Opaque128 and component32 support are recorded in input raster units. No pixel, pose or scale is changed.',
       contacts,
       sheets,
     },
