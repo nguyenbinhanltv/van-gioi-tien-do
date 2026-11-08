@@ -409,6 +409,31 @@ Crown không tính khối tóc nhô trên sọ; breadth không tính tóc rời.
 INFO contract/backlog/review giữ kind, hai đầu vai, trung điểm, breadth và giá trị master/ô. Vai thiếu/ngoài ô/đường vai
 co thành một điểm, kind/direction không khớp hoặc drift là lỗi cứng. D47/D48 và các cổng foot/canvas giữ nguyên.
 
+## Bổ sung D53: một đầu vai bị che trên master
+
+Chỉ NE/N khi **một đầu vai thật sự bị che trên master đã duyệt** dùng `rear-crown-shoulder-single`.
+Ưu tiên D50 nếu cả hai đầu nhìn thấy; không dùng loại một vai chỉ vì dễ đo. Không sửa master hay chiếu điểm bị che.
+Ví dụ Pháp tu NE: vai trái bị quạt/tóc/ribbon che; crown và vai phải vẫn nhìn thấy.
+
+```json
+{
+  "kind": "rear-crown-shoulder-single",
+  "crown": { "x": 140, "y": 16 },
+  "shoulderTop": { "x": 161, "y": 78 },
+  "breadth": { "left": { "x": 111, "y": 42 }, "right": { "x": 165, "y": 42 } },
+  "occludedSide": "left",
+  "occluder": "approved fan, long hair and ribbon hide the left shoulder"
+}
+```
+
+MasterHead và headEvidence ô dùng cùng kind và cùng occludedSide (`left`/`right`); ô thêm note đã xem.
+`shoulderTop` là **một điểm** vai còn nhìn thấy, không có điểm cho phía bị che. Khoảng cách là
+`shoulderTop.y - crown.y`, phải dương; không lấy khoảng cách Euclid dù x thay đổi. Bề ngang sọ vẫn là khoảng cách
+Euclid giữa hai đầu nhìn thấy. Cả hai ±3% master khóa cùng hướng, tọa độ master resize256/ô aligned256, chỉ số nội bộ clip.
+Occluder bắt buộc là chuỗi chỉ rõ vật che có `fan`, `hair` hoặc `ribbon`; trống hoặc lý do chung như `hidden`/`unknown`
+bị lỗi. Định nghĩa phía bị che không được đổi giữa master/ô. Nếu vai còn lại cũng bị che trong ô, báo ô đó, không bịa điểm.
+INFO/review hiện trục dọc, vai còn nhìn thấy, phía/lý do bị che, breadth và giá trị master/ô; foot/canvas và scale giữ nguyên.
+
 ## Runtime body/weapon/FX trong Cocos
 
 DragonBonesActor nhận mapping + appearance qua setEquipmentVisuals, chỉ tải các set/direction được chọn và mọi trang atlas

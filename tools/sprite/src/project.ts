@@ -198,7 +198,9 @@ export function runProject(
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
   if (
-    (project.masterHead?.kind === 'rear-skull-base' || project.masterHead?.kind === 'rear-crown-shoulder') &&
+    (project.masterHead?.kind === 'rear-skull-base' ||
+      project.masterHead?.kind === 'rear-crown-shoulder' ||
+      project.masterHead?.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(project.direction)
   )
     throw new Error('rear skull master is allowed only for NE/N direction projects');

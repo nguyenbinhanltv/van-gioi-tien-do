@@ -355,3 +355,17 @@ Public APIs: `runLayerExtraction`, `writeLayerExtraction`, `buildSpriteLayerSet`
 images; callers must retain authoring QA. Stage passed set directories beneath the Cocos equipment resource root, then use
 the mapping/preview contract in `apps/client-cocos/LAYERED-SPRITES.md`. These pixel/contact gates do not certify unseen
 geometry or inpaint anatomy; mattes and thresholds need real-art review, as recorded in OPEN-ITEMS.
+
+### D53: one shoulder endpoint occluded on the locked rear master
+
+NE/N may use `kind: 'rear-crown-shoulder-single'` only when one shoulder endpoint is genuinely hidden on the approved
+master. Prefer D50 when both endpoints are visible. Record `crown`, one visible `shoulderTop: {x,y}`, mandatory skull
+`breadth: {left,right}`, `occludedSide: 'left' | 'right'`, and a concrete `occluder` string containing `fan`, `hair` or
+`ribbon`. Frame evidence uses the same kind/occluded side and adds a reviewed `note`; generic `hidden`/`unknown` reasons fail.
+
+The size is the positive **vertical** difference `shoulderTop.y - crown.y`, not the diagonal length. Skull breadth remains
+Euclidean. Both must match the same-direction master within the unchanged head tolerance. Coordinates are resized256px
+on the master and aligned256px in motion cells, using clip-local indices. Never project a hidden shoulder/chin/skull base,
+edit the approved master, or substitute a convenience point. If a frame also hides the remaining shoulder, report it
+instead of supplying invented evidence. INFO/review retains the visible point, occluded side/reason, and master values;
+foot/canvas gates and fixed scale remain unchanged.
