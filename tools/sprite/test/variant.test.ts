@@ -73,6 +73,46 @@ function fixture() {
 }
 
 describe('edit-from-master variants', () => {
+  it('reuses native-DPI T1 origins with single-pass resampling', () => {
+    const { dir, project, master } = fixture();
+    const sheet = encodePng(
+      toPremultiplied(
+        makeSheet(
+          2,
+          1,
+          314,
+          [0, 1].map(() => ({ height: 255, cx: 158, sole: 285 })),
+        ),
+      ),
+    );
+    writeFileSync(join(dir, 't1.png'), sheet);
+    writeFileSync(join(dir, 't2.png'), sheet);
+    writeFileSync(join(dir, 'scale.json'), JSON.stringify({ scale: 0.964 }));
+    const updated: Project = {
+      ...master,
+      scale: undefined,
+      resample: 'lanczos3',
+      preparation: { kind: 'square-cell-dpi-v1', calibration: 'scale.json' },
+    };
+    const bytes = Buffer.from(JSON.stringify(updated));
+    writeFileSync(join(dir, 't1.json'), bytes);
+    const variant: Project = {
+      ...project,
+      scale: undefined,
+      resample: updated.resample,
+      preparation: updated.preparation,
+      variant: {
+        ...project.variant!,
+        masterProjectSha256: sha(bytes),
+        masterCalibrationSha256: sha(readFileSync(join(dir, 'scale.json'))),
+      },
+      clips: project.clips.map((c) => ({ ...c, variant: { ...c.variant!, masterSheetSha256: sha(sheet) } })),
+    };
+    const t1 = runProject(updated, dir, { includeAlignedFrames: true });
+    const t2 = runProject(variant, dir, { includeAlignedFrames: true });
+    expect(t2.alignedClips).toEqual(t1.alignedClips);
+    expect(t2.contract.clips[0]!.records).toEqual(t1.contract.clips[0]!.records);
+  });
   it('accepts weapon-skin provenance under the same pose/face and motion locks', () => {
     const { dir, project } = fixture();
     const skin: Project = { ...project, variant: { ...project.variant!, category: 'weapon-skin' } };
@@ -146,6 +186,7 @@ describe('edit-from-master variants', () => {
   it('rejects altered slicing, master image, template cells and missing clips', () => {
     const { dir, project, master } = fixture();
     expect(() => auditProjectVariant({ ...project, slice: { inset: 0 } }, dir)).toThrow(/slicing controls/);
+    expect(() => auditProjectVariant({ ...project, resample: 'area' }, dir)).toThrow(/resampling method/);
     expect(() => auditProjectVariant({ ...project, clips: [] }, dir)).toThrow(/clip set/);
     writeFileSync(join(dir, 'other-master.png'), encodePng(makeMaster(180)));
     expect(() => auditProjectVariant({ ...project, master: 'other-master.png' }, dir)).toThrow(

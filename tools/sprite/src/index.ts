@@ -25,3 +25,4 @@ export * from './grouped.js';
 export * from './authored-origin.js';
 export * from './layer-guides.js';
 export * from './layer-export.js';
+export * from './resample.js';
