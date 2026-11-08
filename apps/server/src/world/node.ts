@@ -45,6 +45,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import { CombatSystem, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 import type { InventoryService } from './inventory/index.js';
 
@@ -141,6 +142,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
+  combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
   playerIdQuarantineMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
@@ -219,6 +222,8 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
+  readonly combat: CombatSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
   /** inventory + drop sink (D77); null when the node runs without one */
@@ -243,6 +248,15 @@ export class WorldNode {
       this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
+    // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
+    this.combat = opts.combat
+      ? new CombatSystem(this.ctx, {
+          seed,
+          respawnPoint: () => this.spawnPoint(),
+          ...opts.combat,
+          mobs: opts.combat.mobs ?? this.mobs ?? undefined,
+        })
+      : null;
   }
 
   // ------------------------------------------------------------------ players
@@ -272,15 +286,14 @@ export class WorldNode {
 
   addPlayer(transport: ClientTransport, accountId: string): number {
     const id = this.allocateId();
-    const [a, r1] = rngFloat(this.spawnRng);
-    const [b, r2] = rngFloat(r1);
-    this.spawnRng = r2;
+    const at = this.spawnPoint();
+    const stats = this.combat?.addPlayer(id);
     this.world = spawnEntity(this.world, {
       id,
-      i: this.spawn.i0 + a * this.spawn.side,
-      j: this.spawn.j0 + b * this.spawn.side,
-      hp: WORLD_CONFIG.PLAYER_MAX_HP,
-      mpMax: WORLD_CONFIG.PLAYER_MAX_MP,
+      i: at.i,
+      j: at.j,
+      hp: stats?.hpMax ?? WORLD_CONFIG.PLAYER_MAX_HP,
+      mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.inventory?.onJoin(accountId);
     this.clients.set(id, {
@@ -304,6 +317,14 @@ export class WorldNode {
     return id;
   }
 
+  /** A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. */
+  private spawnPoint(): { i: number; j: number } {
+    const [a, r1] = rngFloat(this.spawnRng);
+    const [b, r2] = rngFloat(r1);
+    this.spawnRng = r2;
+    return { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+  }
+
   /**
    * Remove a player. `from` (the connection's transport) makes the call connection-bound: a stale socket that still holds an
    * id which has since been recycled to someone else is ignored instead of removing the new owner. Internal callers (kick)
@@ -314,6 +335,7 @@ export class WorldNode {
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
     this.inventory?.onLeave(c.accountId);
+    this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
   }
@@ -402,9 +424,22 @@ export class WorldNode {
       for (const i of c.inbox) inputs.push(i);
       c.inbox.length = 0;
     }
-    const r = step(this.world, inputs, this.ctx, NETWORK.TICK_MS);
+    let simInputs: SimInput[] = inputs;
+    if (this.combat) {
+      const pre = this.combat.preStep(inputs, this.world);
+      simInputs = pre.inputs;
+      for (const res of pre.results) this.sendCombatResult(res);
+    }
+    const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS);
     const t1 = clock();
-    this.world = this.mobs ? this.mobs.step(r.world) : r.world;
+    this.world = r.world;
+    if (this.combat) {
+      const post = this.combat.postStep(this.world, r.events);
+      this.world = post.world;
+      for (const res of post.results) this.sendCombatResult(res);
+    }
+    // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
+    if (this.mobs) this.world = this.mobs.step(this.world);
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -441,7 +476,8 @@ export class WorldNode {
         case 'cast_ok': {
           this.metrics.castOk++;
           const c = this.clients.get(ev.entityId);
-          if (c)
+          // with combat on, the `skill_result` (with hits) is sent when the cast resolves
+          if (c && !this.combat)
             this.send(c, {
               type: 'skill_result',
               seq: ev.seq,
@@ -597,8 +633,34 @@ export class WorldNode {
     }
   }
 
+  /** Max HP of an entity: a player's combat profile, a mob's (manager, else the `MobPort`), else the skeleton constant. */
   private maxHpOf(e: EntityState): number {
-    return this.mobs?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+    return (
+      this.combat?.maxHpOf(e.id) ??
+      this.mobs?.maxHpOf(e.id) ??
+      this.combat?.mobHpMax(e.id) ??
+      WORLD_CONFIG.PLAYER_MAX_HP
+    );
+  }
+
+  /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */
+  private sendCombatResult(res: CombatResult): void {
+    const c = this.clients.get(res.entityId);
+    if (!c) return;
+    const hits = [];
+    for (const h of res.hits) {
+      const v = c.visible.get(h.targetId);
+      if (v) hits.push({ targetIndex: v.index, damage: h.damage, flags: h.flags });
+    }
+    this.send(c, {
+      type: 'skill_result',
+      seq: res.seq,
+      reason: res.reason,
+      skillId: res.skillId,
+      readyAtMs: Math.max(0, Math.round(res.readyAtMs)),
+      casterIndex: 0,
+      hits,
+    });
   }
 
   private hpPct(e: EntityState): number {

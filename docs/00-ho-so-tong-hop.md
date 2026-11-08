@@ -156,6 +156,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D70: khung `@vgtd/server` (Gateway + World Node): xác thực tên/mật khẩu qua HTTP (scrypt tạm thời thay argon2id, JWT EdDSA 10 phút), bắt tay WS bằng `hello` JSON 5 s, AOI 10 Hz tối đa 120 thực thể, snapshot delta theo băng 20/10/5 Hz, công cụ `loadtest`.]
 
+[Cập nhật D75: lõi combat server (`apps/server/src/world/combat/`): chí mạng gốc 5 % (trần 60 %), hồi sinh PvE 10 s, hit flag bit1 = hạ gục; xem `docs/DECISIONS.md` và `docs/34-combat-server.md`.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Những giá trị ở cột "Cũ" vẫn còn nằm trong tài liệu gốc tương ứng; khi gặp, dùng giá trị ở cột "Hiện hành".

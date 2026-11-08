@@ -17,7 +17,7 @@ import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
-import { CombatUi } from './Combat';
+import { CombatUi, createMockBackend } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -211,10 +211,8 @@ export class Bootstrap extends Component {
         worldRoot,
         this.ysort,
         art,
-        this.chibi.classInfo.id,
-        { i: spawn.i + 0.5, j: spawn.j + 0.5 },
-        walkable,
-        rng(11),
+        // offline mock backend; online mode will pass a `ServerCombat` fed by the net client instead (see docs/33-combat)
+        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
         () => this.player.pos,
         (x, y) => this.rig.clientToUi(x, y),
       );

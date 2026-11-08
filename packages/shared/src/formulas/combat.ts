@@ -43,6 +43,20 @@ export const NGU_HANH = {
   MUTATION_CHANCE: 0.02,
 } as const;
 
+/**
+ * Server combat rules taken from the docs (D75): base crit chance 5% inside a 60% cap (docs/31 B-10), PvE respawn after 10 s at
+ * the nearest spawn point (docs/01 §12.2, "Thiết kế mới – chờ duyệt"). Crit multiplier is `CRIT_DEFAULT`.
+ */
+export const COMBAT_RULES = {
+  BASE_CRIT_CHANCE: 0.05,
+  CRIT_CHANCE_CAP: 0.6,
+  RESPAWN_PVE_MS: 10_000,
+} as const;
+
+/** `skill_result.hits[].flags` bits on the wire: bit0 crit, bit1 the hit killed its target. */
+export const HIT_FLAG_CRIT = 1;
+export const HIT_FLAG_KILL = 2;
+
 export const CRIT_DEFAULT = 1.5;
 export const PEN_MAX = 0.4;
 export const SUPPRESS_PER_REALM = 0.15;

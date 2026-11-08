@@ -5,6 +5,9 @@ import {
   OVERCOMES,
   baseElement,
   buildDamageMatrix,
+  COMBAT_RULES,
+  HIT_FLAG_CRIT,
+  HIT_FLAG_KILL,
   computeDamage,
   damageBreakdown,
   defenseElement,
@@ -84,6 +87,11 @@ describe('Công thức §4 — Ngũ hành', () => {
       expect(Math.round(d)).toBe(295);
       expect(d / computeDamage({ atk: 563, def: 350 })).toBeCloseTo(0.85, 10);
     });
+  });
+
+  it('server combat rules (D75): 5% base crit inside a 60% cap, PvE respawn 10 s, hit flag bits', () => {
+    expect(COMBAT_RULES).toEqual({ BASE_CRIT_CHANCE: 0.05, CRIT_CHANCE_CAP: 0.6, RESPAWN_PVE_MS: 10_000 });
+    expect([HIT_FLAG_CRIT, HIT_FLAG_KILL]).toEqual([1, 2]);
   });
 
   it('sinh does not change damage', () => {

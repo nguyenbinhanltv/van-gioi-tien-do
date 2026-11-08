@@ -20,6 +20,14 @@ export interface HotbarSlot {
   readonly castable: boolean;
 }
 
+/** What `Hotbar.commit` changed, so exactly that prediction can be taken back (`Hotbar.undo`). */
+export interface HotbarUndo {
+  readonly index: number;
+  readonly prev: { cdStart: number; cdEnd: number; gcdStart: number; gcdEnd: number };
+  /** The values `commit` wrote: `undo` only restores a window nobody changed since. */
+  readonly applied: { cdEnd: number; gcdStart: number; gcdEnd: number };
+}
+
 export class Hotbar {
   readonly slots: readonly HotbarSlot[];
   /** Global cooldown (ms) from the skill definitions (`global.gcd_ms`, default 800). */
@@ -80,15 +88,53 @@ export class Hotbar {
   }
 
   /** Start the slot's cooldown (and the GCD when it uses it). Call once the cast is accepted. */
-  commit(index: number, nowMs: number): void {
+  commit(index: number, nowMs: number): HotbarUndo | null {
     const s = this.slots[index];
-    if (!s) return;
+    if (!s) return null;
+    const prev = {
+      cdStart: this.cdStart[index]!,
+      cdEnd: this.cdEnd[index]!,
+      gcdStart: this.gcdStart,
+      gcdEnd: this.gcdEnd,
+    };
     this.cdStart[index] = nowMs;
     this.cdEnd[index] = nowMs + s.skill.timing.cooldown_ms;
     if (this.usesGcd(index)) {
       this.gcdStart = nowMs;
       this.gcdEnd = nowMs + this.gcdMs;
     }
+    return { index, prev, applied: { cdEnd: this.cdEnd[index]!, gcdStart: this.gcdStart, gcdEnd: this.gcdEnd } };
+  }
+
+  /**
+   * Take back one `commit` (a cast the authority refused): restore that slot's previous cooldown and the previous GCD window, but only
+   * where nothing has changed them since (a later cast or a server sync keeps its own value). Other slots are never touched.
+   */
+  undo(u: HotbarUndo): void {
+    if (this.cdEnd[u.index] === u.applied.cdEnd) {
+      this.cdStart[u.index] = u.prev.cdStart;
+      this.cdEnd[u.index] = u.prev.cdEnd;
+    }
+    if (this.gcdStart === u.applied.gcdStart && this.gcdEnd === u.applied.gcdEnd) {
+      this.gcdStart = u.prev.gcdStart;
+      this.gcdEnd = u.prev.gcdEnd;
+    }
+  }
+
+  /** Make the GCD agree with an authority: `remainingMs` left from `nowMs`. */
+  setGcdRemaining(nowMs: number, remainingMs: number): void {
+    const remaining = Math.max(0, remainingMs);
+    this.gcdEnd = nowMs + remaining;
+    this.gcdStart = this.gcdEnd - Math.max(this.gcdMs, remaining);
+  }
+
+  /** Make a slot's cooldown agree with an authority: `remainingMs` left from `nowMs` (the total stays the skill's cooldown). */
+  setCooldownRemaining(index: number, nowMs: number, remainingMs: number): void {
+    const s = this.slots[index];
+    if (!s) return;
+    const remaining = Math.max(0, remainingMs);
+    this.cdEnd[index] = nowMs + remaining;
+    this.cdStart[index] = this.cdEnd[index]! - Math.max(s.skill.timing.cooldown_ms, remaining);
   }
 
   /** Reset every cooldown (respawn / testing). */
