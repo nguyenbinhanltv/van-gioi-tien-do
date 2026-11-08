@@ -343,3 +343,9 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
   - AOI 100 vs 100 (cả 100 bot trong một vùng 30-40 ô, mỗi người thấy 96-99 người khác): 100/100 giữ kết nối, nhưng **băng thông xuống của người xấu nhất vượt ngân sách 8 KB/s**: 8,04 KB/s (vùng 40 ô, trung bình 7,08, thấy 96,6) và 8,67 KB/s (vùng 30 ô, trung bình 8,08, thấy 98,6). Tick p99 25,2 ms và 38,5 ms (sát 40 ms; lần sau đo khi máy còn Chrome/Cocos chạy nền nên có nhiễu CPU). Mật độ vừa (~40 người thấy nhau) vẫn đạt: 3,3-3,7 KB/s.
   - Hướng giảm (chưa làm, cần quyết định): hạ tần số dải "gần" khi số người thấy > ~60, bỏ `anim`/`dir` khi không đổi, hoặc hạ `MAX_VISIBLE` từ 120. Cho tới khi đó tiêu chí "100 vs 100 ≤ 8 KB/s" **chưa đạt** ở mật độ 100%.
   - Chưa đo với client Cocos thật trên mạng thật.
+
+## D73 — băng thông snapshot: còn mở
+
+- **Client chưa chịu được tần số thấp**: `RemoteWorld` (PR client online #199) nội suy với trễ cố định 150 ms; thực thể vùng 5 Hz (khoảng cách 200 ms) sẽ đứng khựng ~50 ms mỗi chu kỳ. Cần trễ thích ứng theo từng thực thể (max(150 ms, 1,25 × khoảng cách snapshot gần nhất)); làm sau khi #199 merge.
+- Chưa có "luôn 20 Hz cho đồng đội / mục tiêu / kẻ tấn công" (chưa có nhóm và chọn mục tiêu); trần 40 thực thể ở 20 Hz đang áp cho mọi người.
+- Số đo mới chạy bot trên cùng máy, loopback (xem PR); bot không nội suy nên chưa đo cảm giác mượt của vùng 10/5 Hz.
