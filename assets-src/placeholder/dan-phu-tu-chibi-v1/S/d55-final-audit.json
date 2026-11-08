@@ -1,0 +1,376 @@
+{
+  "utc": "2026-11-08T06:37:55.009Z",
+  "policy": "D55: Lab head15/torso23 hard; head reasons do not skip; L1 diagnostic only. Visual identity and temporal review separate.",
+  "checkedCells": 145,
+  "labFailFindings": 0,
+  "labPassCells": 145,
+  "D41ExemptCells": 57,
+  "runChecked": 16,
+  "dashChecked": 10,
+  "temporalFlags": 20,
+  "temporal": [
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.34570982886813983,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.7108, torso 0.3457; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.41286908697980695,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.6969, torso 0.4129; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2592652901191528,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.9552, torso 0.2593; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.18710834209487243,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.3741, torso 0.1871; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.37703838047000393,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.9351, torso 0.3770; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 2,
+      "metric": "temporal_review_by_eye",
+      "value": 0.18350327335658548,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 1->2; head 0.8900, torso 0.1835; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.10362138590142139,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.7340, torso 0.1036; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.10119973664382591,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.9287, torso 0.1012; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2390133009609806,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.7472, torso 0.2390; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.1883566237234629,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.9495, torso 0.1884; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4451200507134277,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.6770, torso 0.4451; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.20699325511932296,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.7984, torso 0.2070; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.22939253094980025,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.6800, torso 0.2294; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "hit",
+      "frame": 2,
+      "metric": "temporal_review_by_eye",
+      "value": 0.398134701347248,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 1->2; head 0.7353, torso 0.3981; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3739255385747072,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.8159, torso 0.3739; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.030274796363285242,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.7711, torso 0.0303; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2064979965604256,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.2462, torso 0.2065; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3786355209219617,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.3786, torso 0.5591; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.004621435220559523,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.0046, torso 0.5142; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.0012265383518284263,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.0012, torso 0.2891; centroid-fallback; D41 pose pair"
+    }
+  ],
+  "visualStatus": "All15 current realCocos2x contact sheets reviewed by art-worker26; identity/whisk grip intact, no mirror reversal/weapon detachment.20temporal flags eye-reviewed; rapid sweeps, run/dash phase changes and collapse/recovery remain OPEN polish, not hard-gate waivers.",
+  "temporalReview": [
+    {
+      "clip": "dash",
+      "frame": 1,
+      "value": 0.34570982886813983,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Dash phase/root and foot-depth continuity remains OPEN; original-body dynamics retained, repaired2/4 face/hairstyle coherent."
+    },
+    {
+      "clip": "dash",
+      "frame": 4,
+      "value": 0.41286908697980695,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Dash phase/root and foot-depth continuity remains OPEN; original-body dynamics retained, repaired2/4 face/hairstyle coherent."
+    },
+    {
+      "clip": "attack",
+      "frame": 10,
+      "value": 0.2592652901191528,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack",
+      "frame": 11,
+      "value": 0.18710834209487243,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 1,
+      "value": 0.37703838047000393,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 2,
+      "value": 0.18350327335658548,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 5,
+      "value": 0.10362138590142139,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 6,
+      "value": 0.10119973664382591,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 10,
+      "value": 0.2390133009609806,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 11,
+      "value": 0.1883566237234629,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 5,
+      "value": 0.4451200507134277,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 6,
+      "value": 0.20699325511932296,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 9,
+      "value": 0.22939253094980025,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "hit",
+      "frame": 2,
+      "value": 0.398134701347248,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 3,
+      "value": 0.3739255385747072,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 4,
+      "value": 0.030274796363285242,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 7,
+      "value": 0.2064979965604256,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 8,
+      "value": 0.3786355209219617,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 9,
+      "value": 0.004621435220559523,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    },
+    {
+      "clip": "die",
+      "frame": 10,
+      "value": 0.0012265383518284263,
+      "reviewer": "art-worker26",
+      "status": "reviewed-open-polish",
+      "note": "Fast whisk/sleeve, recoil, collapse or recovery transition reviewed on actual captured poses; no identity/side swap seen. Smoothing remains polish."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 04:53:21 UTC"
+  },
+  "prompt": "ONE4x4 production CAST animation sheet, EXACTLY16unique sequential FULL-BODY drawings row-major. Edit image1 master lattice; image2 is approved S identity reference. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Calm healer casting toward camera/SOUTH. Frames0-3 anticipate: relaxed free LEFT palm (viewerRIGHT) draws inward toward chest, fingers form a small seal. Frames4-7 lift/open the palm smoothly forward; frames8-10 release with the open palm held at chest/shoulder height, then frames11-15 follow-through and return toward neutral. Same RIGHT hand/viewerLEFT holds the same whisk naturally throughout; do not swap hands or invent another whisk. Face remains serene, upright, fixed-size and front-facing, eyes/nose/lips unchanged. Gentle torso weight transfer without size changes; sleeve and sash lag/settle; white horsehair sways softly. Keep feet near the fixed ground and visible, all bun/hand/whisk/soles INSIDE own cell. No spell VFX, glowing aura, floating papers, magic circle, ground/shadow or talismans (they are separate runtime FX). No black panel lines, text or visible guides: final continuous solid #FF00FF background between all16 figures. Make16 genuinely distinct smooth drawings, not repeated standstill poses. Preserve exact T1 costume/weapon design and locked scale.",
+  "inputs": ["templates/cast.master-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/cast.attempt1.png",
+  "status": "raw cast candidate; partial/full QA pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-bd50383b-49dd-40c3-9ae1-83953ab4035d.png",
+  "sha256": "3802964e8b5b3bb8f959d584a22d14949cd5bda244aa6cbb2c5632ebad72347b",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/cast.master-guide.png",
+      "sha256": "aae2423a46dfda5044b589b77e6dbf7d7cd7f4ed63deb600b3736d5bf460d37b"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "status": "Frozen manual semantic boundary selections before gate evaluation; approximately 1px uncertainty, not automated anatomical certification",
+  "source": "raw/hit-dash.head-replacement1.png",
+  "alignedReview": "D:/Temp/vgtd26-S-headreplacement1-qa/aligned/dash",
+  "convention": "Same S master: first >=2-pixel attached front main-cap row INCLUDING genuine partial cream highlight; exclude elevated bun/pin; boundary edge = first row minus0.5. Chin includes last jaw outline, excludes neck; edge = last jaw row plus0.5. Both adjacent columns inspected; alpha cannot distinguish opaque jaw/neck.",
+  "rows": [
+    {
+      "cell": 2,
+      "crown": {
+        "x": 130.5,
+        "y": 32.5
+      },
+      "chin": {
+        "x": 131,
+        "y": 85.5
+      },
+      "note": "Actual AI replacement from ORIGINAL: cap row32 dark upper bun/cap seam; row33 contains genuine partial attached front-cap rim at129..132 (130RGB213,198,184;131RGB211,195,179), row34 bright rim, not a brown-only interior selection. Central jaw row84 pale skin, row85 shaded jaw outline at130/131, row86 neck; near134/135 is sloping jaw-side/neck, not central tip. Elevated bun and jade pin excluded. Original registration retained by verified D57; no deterministic scale used on this AI replacement.",
+      "alignedSha256": "2f52d83ef1626d0ab8fe6c9b890429713d071dd304d266de87e8448a7efd2047",
+      "measuredHeadPx": 53.002358438092166
+    },
+    {
+      "cell": 4,
+      "crown": {
+        "x": 133.5,
+        "y": 34.5
+      },
+      "chin": {
+        "x": 134.5,
+        "y": 87.5
+      },
+      "note": "Actual AI replacement from ORIGINAL: cap row34 dark upper seam, row35 first partial cream attached main-cap highlight at133/134 (RGB230,222,213 and230,221,214), row36 brighter rim. Jaw row86 skin/AA, row87 actual brown outline across134/135, row88 neck below; include jaw outline, exclude neck. Elevated bun and jade pin excluded. Same semantic rules as master. Original registration retained by verified D57; no deterministic scale used on this AI replacement.",
+      "alignedSha256": "cf01fd952b48a2fc26bfe762760d4cb52d1c13e817bad85a721bd95f5ab3e48c",
+      "measuredHeadPx": 53.009433122794285
+    }
+  ],
+  "sourceSha256": "6063eede226a261b4edba410bbacfc4894d60c9756070f6a5a46d39d744e3a9d",
+  "masterReferenceSha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83",
+  "utc": "2026-11-08T06:32:51.094Z",
+  "nativeTraces": "repair/dash.head-replacement1.native-traces.json"
+}

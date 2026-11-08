@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:06:02 UTC"
+  },
+  "prompt": "ONE square4columns x4rows ATTACK3 production sprite sheet, EXACTLY14 sequential FULL-BODY drawings rowmajor; LAST TWO cells14/15 EMPTYpuremagenta. Image1 canonicalheadsize/height INPUT guide;image2 fullapprovedS master. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Combo finisher: powerful low frontal stepping lunge with whisk thrust/sweep at chest height, camera SOUTH not sideview. RIGHT hand/viewerLEFT grips same whisk naturally, freeLEFTpalm stabilizes beside torso.0-3 anticipation bendknees progressively and retract whisk toward own right shoulder;4-6 drive leading leg toward camera, bend hips/knees and extend right arm/whisk across front;7 full lunge impact;8 nearlysame impacthold as bristles/sleeves catch up;9-11 retract whisk and push out of lunge;12-13 stand/settle towardmaster. Head remains upright-ish and facesS, same53logicalpxskull/face, no foreshortened headgrowth, same216px standinganatomicalscale, lowering solely knee/hip posture. Keep dynamic leg stride/knee load and secondary cloth lag, no body scaling. Whisk stays below top margin and wholly within cell; no enlarged foreground prop. Full shoes and heel visible, no cross-cell pixels.16celllattice with14drawings at24fps,2empty finalcells. NoFX, afterimages, shadow, talismans or newobjects. Continuous PURE #FF00FF, remove ALL grid borders/labels/ghosts and headcropedges.",
+  "inputs": ["templates/attack_3.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/attack_3.attempt1.png",
+  "status": "raw candidate; full-source lunge/contacts/native-canvas review pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-041e49db-ef17-4966-9490-6a2acc08efb6.png",
+  "sha256": "1df89abe5a4695f11a57114ed592adb24579198bd6670126847fbbd6cc1b39a9",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/attack_3.head-guide.png",
+      "sha256": "a396f7e23b29040b19e77e185712fff48791aec1bbf56e1edd4ff6ddc915c990"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

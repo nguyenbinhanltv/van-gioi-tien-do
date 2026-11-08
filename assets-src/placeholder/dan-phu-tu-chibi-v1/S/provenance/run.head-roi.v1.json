@@ -1,0 +1,430 @@
+{
+  "tool": "@vgtd/sprite resampleAffine; deterministic owner-authorized HEAD ROI only",
+  "model": "not applicable; original AI provenance retained",
+  "utc": "2026-11-08T06:00:35.153Z",
+  "authorization": "Orchestrator2026-11-08: uniform head ROI <=5%, chin/neck anchored, Lanczos3 feather, exact outside RGBA, D57,4x seam review. No frame/body scale.",
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "edited": "raw/run.head-roi.v1.png",
+  "editedSha256": "f78de0d360531730ae4e34d89867a3a6c7f66db47c855cf75c1ea95c79c0b1f5",
+  "mask": "repair/run.head-roi.v1.mask.png",
+  "maskSha256": "3be8de52eb7b91ad3067f31850439fee1bd6bf5529fd2be6f5e4232110001092",
+  "inheritedRegistration": {
+    "kind": "inherited-registration",
+    "source": "raw/run.attempt1.png",
+    "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+    "mask": "repair/run.head-roi.v1.mask.png",
+    "maskSha256": "3be8de52eb7b91ad3067f31850439fee1bd6bf5529fd2be6f5e4232110001092",
+    "cells": [0, 1, 2, 3, 6, 7, 8, 9, 10, 14, 15]
+  },
+  "rotation": 0,
+  "shear": 0,
+  "bodyCalibrationScale": 1,
+  "featherFunction": "smoothstep(clamp(min logical distance to ROI edge /3,0,1)); base band fully locked",
+  "geometry": "Exact whole-grid DPI/inset/registration conversion; +0.5 converts integer-centred annotation coordinates to resampler pixel edges",
+  "originalInputOnly": true,
+  "outsideMaskRgbaMismatches": 0,
+  "rows": [
+    {
+      "cell": 0,
+      "chin": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 0,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 119,
+        "y": 0,
+        "width": 91,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 38.61823814824089,
+        "y": 85.72265625
+      },
+      "permittedPixels": 6950,
+      "changedPixels": 6663,
+      "registration": {
+        "dx": -1.7089919169048216,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 1,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 1,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 430,
+        "y": 0,
+        "width": 92,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 40.4505195324183,
+        "y": 85.72265625
+      },
+      "permittedPixels": 6897,
+      "changedPixels": 6567,
+      "registration": {
+        "dx": -0.16374162774826573,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 2,
+      "chin": {
+        "x": 127.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 2,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 742,
+        "y": 0,
+        "width": 92,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 42.00759449037446,
+        "y": 85.72265625
+      },
+      "permittedPixels": 6950,
+      "changedPixels": 6621,
+      "registration": {
+        "dx": 0.7896517080196332,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 3,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 3,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 1056,
+        "y": 0,
+        "width": 92,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 40.754245820791766,
+        "y": 85.72265625
+      },
+      "permittedPixels": 6950,
+      "changedPixels": 6556,
+      "registration": {
+        "dx": 0.4048263791940485,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 6,
+      "chin": {
+        "x": 130.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 6,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 739,
+        "y": 314,
+        "width": 92,
+        "height": 82
+      },
+      "sourceAnchorInPatch": {
+        "x": 45.59414037415911,
+        "y": 85.22265625
+      },
+      "permittedPixels": 7035,
+      "changedPixels": 6693,
+      "registration": {
+        "dx": 3.310686010256063,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 7,
+      "chin": {
+        "x": 128.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 7,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 1055,
+        "y": 314,
+        "width": 91,
+        "height": 82
+      },
+      "sourceAnchorInPatch": {
+        "x": 42.58935687828625,
+        "y": 85.22265625
+      },
+      "permittedPixels": 7031,
+      "changedPixels": 6752,
+      "registration": {
+        "dx": 1.7228856113516144,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 8,
+      "chin": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "factor": 0.95,
+      "estimatedSourceSpanPx": 56,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 8,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 67.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=67.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 116,
+        "y": 627,
+        "width": 91,
+        "height": 84
+      },
+      "sourceAnchorInPatch": {
+        "x": 41.39432469303088,
+        "y": 86.947265625
+      },
+      "permittedPixels": 7024,
+      "changedPixels": 6849,
+      "registration": {
+        "dx": 0.4738528822459216,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 9,
+      "chin": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "factor": 0.95,
+      "estimatedSourceSpanPx": 56,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 9,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 67.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=67.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 428,
+        "y": 627,
+        "width": 92,
+        "height": 84
+      },
+      "sourceAnchorInPatch": {
+        "x": 41.86704232897114,
+        "y": 86.947265625
+      },
+      "permittedPixels": 6946,
+      "changedPixels": 6800,
+      "registration": {
+        "dx": 1.3127182257843373,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 10,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 10,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 740,
+        "y": 627,
+        "width": 92,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 40.37598688977744,
+        "y": 85.72265625
+      },
+      "permittedPixels": 6897,
+      "changedPixels": 6610,
+      "registration": {
+        "dx": 2.755174979958511,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 14,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 14,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 744,
+        "y": 941,
+        "width": 91,
+        "height": 82
+      },
+      "sourceAnchorInPatch": {
+        "x": 40.064353911045146,
+        "y": 85.22265625
+      },
+      "permittedPixels": 7031,
+      "changedPixels": 6729,
+      "registration": {
+        "dx": -0.2566972925919089,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 15,
+      "chin": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward.",
+      "global": 15,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 66.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=66.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above40, ramps to106 at47; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 1059,
+        "y": 941,
+        "width": 91,
+        "height": 82
+      },
+      "sourceAnchorInPatch": {
+        "x": 38.57957973701946,
+        "y": 85.22265625
+      },
+      "permittedPixels": 7034,
+      "changedPixels": 6731,
+      "registration": {
+        "dx": -1.2691305029568838,
+        "dy": 1
+      }
+    }
+  ],
+  "status": "REJECTED source-matte boundary artifacts: whole opaque magenta patch resampling introduced rectangular edge fringes. D57 preservation passed but visual gate failed. Algorithm revised with head-foreground-union support; next attempt uses ORIGINAL source, never chained scaling.",
+  "generatorSnapshot": "repair/repair-head-roi.v1.rectangular.failed.ts",
+  "generatorSha256": "a071219eab9806e964267dc9c9e8a4ff8afe224b9796a8a4df747ed10f93b096",
+  "generatorPreFormatSha256": "0dc80a58041012e45674e28679d6f1037c60b1df6f25dd28bf8be73f43277b8c",
+  "generatorFormattingNote": "Snapshot formatted with Prettier; semantics retained. Pre-format SHA preserved; failed native image/mask hashes unchanged."
+}

@@ -625,3 +625,47 @@ Cửa sổ Lab D55 cho master D59 và mọi ô ghép là hình vuông: cạnh b�
 crown→nape, tâm tại trung điểm hai điểm, nới tổng 8% cả hai chiều. Kể cả ô D48 có breadth thật,
 vẫn dùng cửa sổ span giống master; breadth thật chỉ là evidence riêng. Torso giữ quy tắc D55.
 Temporal D59/D48 dùng cùng cửa sổ; không tạo hay ghi cửa sổ thành landmark.
+
+## Bổ sung D60: bracketed-occlusion không tạo bằng chứng đo giả
+
+Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`: khi ô không có phép đo đầu hợp lệ vì bị che,
+khai kind **chỉ cho ô**, crown nhìn thấy alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review.
+Không thêm nape/cằm/breadth suy diễn. Cả hai lân cận **trực tiếp** i−1/i+1 cùng clip phải có bằng chứng
+đầu được đo thật đạt band; loop wrap, đầu/cuối nonloop không có đủ hai lân cận nên bị loại.
+**Tối đa 2 ô bracketed mỗi clip.** Không có trần phần trăm hay trần chuỗi riêng: các ô bracketed không
+được kề nhau vì không thể chứng nhận cho nhau. Master/idle/walk/emote và clip khác bị loại.
+
+```json
+{
+  "kind": "bracketed-occlusion",
+  "crown": { "x": 157, "y": 57 },
+  "occluder": "raised shoulder, ribbon and forelock hide the other endpoints",
+  "hiddenEndpoints": ["skullBase", "breadth.left", "breadth.right"],
+  "note": "Example schema only; actual native source and neighbour measurements must be reviewed"
+}
+```
+
+Lab đầu≤15/thân≤23 vẫn bắt buộc, kể cả khi reason pose D41 bình thường được miễn similarity. Cả hai
+pair temporal với lân cận phải có min(head,torso)≥0,45; thiếu phép đo/NaN/review-by-eye là lỗi cứng
+**cho điều kiện D60**. Các ô khác giữ chính sách D55: temporal chỉ chẩn đoán.
+
+Cửa sổ **chỉ để so ảnh**: lấy nguyên chiều rộng/cao cửa sổ đầu D55 có padding của master được chứng nhận
+(ví dụ D59 span-square+8%, D56-master giữ chính sách padding riêng). Tâm ngang=crown.x;
+top=crown.y−Hwindow×0,08/(2×1,08), quy ước margin từng cạnh của cửa sổ D60, không phải kích thước đầu suy diễn.
+Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
+phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng 44%/cao 25% H master,
+tâm ngang theo crown. Master và các phía so phải có crown thật nhìn thấy; không thay bằng neo phụ kiện,
+không fallback centroid, không ghi cửa sổ thành anatomy.
+
+INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
+size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.
+
+## Bổ sung D62: ngoại lệ sửa HEAD-BAND bằng ROI đầu
+
+[Cập nhật D62: ghi nhận đúng phạm vi orchestrator phê duyệt ngày 2026-11-08; áp dụng mọi lớp/hướng có master đã khóa, không chỉ Đan/Phù S. D41/D47 vẫn cấm scale thân hoặc toàn ô; chỉ ngoại lệ vùng đầu dưới đây được phép.]
+
+- Chỉ sửa head-band: scale đồng đều ROI đầu đúng một lượt, độ lệch hệ số so với 1 không quá 5%, không rotation/shear; Lanczos3 với mặt nạ feather và dải base khóa. Pivot là chin/nape base đã khóa, hoặc đường tiếp giáp đầu–trang phục nhìn thấy khi cả hai bị che. Không chiếu hoặc bịa landmark để chọn pivot.
+- Mỗi sửa chữa bắt đầu từ ORIGINAL hoặc từ đúng một AI head edit khóa master. AI head replacement tối đa một lần thử mỗi ô; giữ tóc/bun/mặt/phụ kiện và trang phục đã khóa. Chỉ được thêm tối đa một lượt scale xác định sau AI, không nối chồng thêm.
+- RGBA ngoài mask phải giống từng byte, kể cả RGB ẩn. D57 inherited-registration giữ đăng ký căn chỉnh từ nguồn đã kiểm chứng; tỉ lệ thân/nhân vật D41 không đổi. Mask chỉ bao vùng đầu/tóc; giữ nguyên thân, cổ áo, tay, vũ khí và chân ngoài mask.
+- Provenance giữ nguồn, prompt/tool/model-undisclosed/UTC của AI nếu có, hệ số, pivot, bề rộng feather/dải base và SHA256 mask. Xem seam 4× bằng mắt; đo lại crown/chin hoặc rear landmarks trên ô aligned thực theo cùng quy tắc master. Kích thước yêu cầu trong prompt không phải bằng chứng.
+- Mọi gate head/Lab/foot/canvas/export/capture giữ nguyên. Không sửa pose động hoặc scale toàn ô để lọt bbox; không dùng ngoại lệ này để miễn lỗi chân, clipping hay thay thiết kế.

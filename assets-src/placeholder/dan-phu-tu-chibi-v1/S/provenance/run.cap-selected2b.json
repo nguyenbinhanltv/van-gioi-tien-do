@@ -1,0 +1,140 @@
+{
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "candidate": "raw/run-cap2.attempt1.png",
+  "candidateSha256": "13975f247ed2b2f3bea2bbcd7423763f2209198990de8bfd5ed2a708888aec67",
+  "out": "raw/run.cap-selected2b.png",
+  "outSha256": "eab2300f2b32d1681725a3236c4b2408f8663d6f38ef25f003a72cf55e573a74",
+  "mask": "templates/run.cap-mask2b.png",
+  "maskSha256": "af80fa581ea787440da219699edd502f057a084430434b974286c7d5076fcfdf",
+  "method": "Exact AI-output pixel selection only inside the per-cell normalizedSourcePolygon coordinates recorded below: x106..138, top15 or16 according to source cap rim, bottom32. Original face/jaw/neck/body and elevated bun above cap band remain exact source RGBA. Pin zone x>138 excluded. D57 computes original registration. No geometric output transform. Nominal cap ownership awaits independent style review.",
+  "regions": [
+    {
+      "cell": 0,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2390
+    },
+    {
+      "cell": 1,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2393
+    },
+    {
+      "cell": 2,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2389
+    },
+    {
+      "cell": 3,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2411
+    },
+    {
+      "cell": 6,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2375
+    },
+    {
+      "cell": 7,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2383
+    },
+    {
+      "cell": 8,
+      "normalizedSourcePolygon": [
+        [106, 16],
+        [138, 16],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2153
+    },
+    {
+      "cell": 9,
+      "normalizedSourcePolygon": [
+        [106, 16],
+        [138, 16],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2163
+    },
+    {
+      "cell": 10,
+      "normalizedSourcePolygon": [
+        [106, 16],
+        [138, 16],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2179
+    },
+    {
+      "cell": 13,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2387
+    },
+    {
+      "cell": 14,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2399
+    },
+    {
+      "cell": 15,
+      "normalizedSourcePolygon": [
+        [106, 15],
+        [138, 15],
+        [138, 32],
+        [106, 32]
+      ],
+      "changedBytes": 2384
+    }
+  ],
+  "changedBytes": 28006,
+  "status": "REJECTED by orchestrator: additional coil bands change locked hairstyle identity; shifted cream stripe cannot certify actual maincap crown. Raw/mask/preservation evidence retained as failed history; not active project source.",
+  "provenanceRecordedUtc": "2026-11-08T05:50:22.384Z",
+  "selectedFileMtimeUtc": "2026-11-08T05:30:39.222Z",
+  "maskFileMtimeUtc": "2026-11-08T05:30:39.263Z",
+  "selectionTool": "Node + public @vgtd/rig PNG codec; @vgtd/sprite connected components for dash mask",
+  "rejection": "2026-11-08 orchestrator guidance + independent style23 review: do not reinterpret these bands as skull summit."
+}

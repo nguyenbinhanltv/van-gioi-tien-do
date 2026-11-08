@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:07:19 UTC"
+  },
+  "prompt": "ONE square4columns x4rows GROUPED production sheet EXACTLY16 full-body cells in rowmajor. FIRST6 cells0-5 HIT, NEXT10 cells6-15 DASH. Image1 head-size/placement guide;image2 original S full master;image3 lattice. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. HIT sequence global0neutral,1small chest recoil,2strong recoil with knees bent,3recover,4settle,5neutral. Whisk retained right/viewerLEFT, freeleft balances. DASH sequence starts global6 neutral;7 load knees,8 push off,9 forward acceleration,10 deepest dynamic frontal sprint tuck,11 flight/forwardlegexchange,12 extend landing leg,13 landing/absorb,14 recover,15 neutral. Camera SOUTH/front remains fixed, movement toward camera shown with knees/legs and lowering hips, not head/bodygrowth. Keep actual SAME53pxfrontcap-to-chin skullsize and upright-ish face, body anatomical scale locked. Head input offsets show lower posture, not shrinkage. RIGHT hand/viewerLEFT naturally holds samewhisk throughout, no swaps or detachedprops; left arm balances. Strong legmotion and cloth/hair/sleeve lag1-2frames, no frozen repeated drawings.24fps durations hit6/24,dash10/24. Allbun/boots/bristles fully inside owncell with margin; no cross-cellforeground. No effects/speedlines/shadow/talisman. Remove ALL grid/guide/text/stencil edges, pure #FF00FF. Exactly6hit then10dash, not16singleclip.",
+  "inputs": [
+    "templates/hit-dash.head-guide.png",
+    "../reference/S.corrected-master.png",
+    "templates/hit-dash.template.png"
+  ],
+  "rawOutput": "raw/hit-dash.attempt1.png",
+  "mapping": "global0..5 hit local0..5; global6..15 dash local0..9",
+  "status": "raw candidate; dash actual aligned head/contacts evidence pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-ef4057d2-a223-4376-bd1e-65d4510fb2ff.png",
+  "sha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/hit-dash.head-guide.png",
+      "sha256": "ecce45b2709746d2852bb2fc3bc321b3e473ff95787fb422335bfde67751267a"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    },
+    {
+      "file": "templates/hit-dash.template.png",
+      "sha256": "34abc2e211c4a831a95b72b91a5eddf44a004f49a1c4c525acd7ce1ab851e024"
+    }
+  ]
+}

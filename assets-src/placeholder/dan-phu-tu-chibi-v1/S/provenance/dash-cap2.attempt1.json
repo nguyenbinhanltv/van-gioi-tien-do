@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:31:29 UTC"
+  },
+  "prompt": "LOCAL UPPER MAIN-HAIR-CAP REPAIR ONLY of original grouped HIT6+DASH10 sheet, same1254square4x4. FIRST6 globalcells0-5 untouched. Preserve EVERY FACE pixel, eyes/brows/fringe/nose/mouth/jaw/chin/neck and elevated bun/jadepin exactly. Only flatten/lower upper ATTACHED FRONT MAIN CAP volume and its cream top rim in dashglobal6-15, NOT shrink/replace the whole head or face. These caps are overly tall relative to fixed approved53logicalpxskull height. Specific small cap lowering in LOGICAL256pxcell coordinates (native source is1.225x): global6 lower2px;7 lower6px;8 lower4px;9 lower4px;10 lower7px;11 lower5px;12 lower4px;13 lower4px;14 lower2px;15 lower2px. Native displacement therefore~2.5..8.5px. Draw actual compact rounded upper cap construction with natural brown hair/creamrim layering, not a recolored stripe. Elevated bun behind and pin do NOT move; facial fringe/face/jaw remain unchanged, only excess uppercap volume compresses. Keep samefixedface proportions and neckanchor, body scale, root/dashflightknees/legposes. ALL whisk/hands/sleeves/robe/sash/shoes/body pixels remain identical. Do NOT warp or rescale wholefigure/head; no poseflattening. Final pure #FF00FF background and exactsame16figures/cellregistration, no newgrid/text/FX. Intent: preserve face and lower only maincap top just enough to restore approved skullheight; do not alter facialfeatures or chin. Hitcells0-5 unchanged.",
+  "inputs": ["raw/hit-dash.attempt1.png"],
+  "rawOutput": "raw/dash-cap2.attempt1.png",
+  "status": "unselected cap-only candidate; no geometric transform; actual boundary selection and D57 proof pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-62969813-1406-4c99-b17b-f0d5e72dbf2d.png",
+  "sha256": "f5e90b9c12b806d1d58e55a6bba8b37ad5d8617ec8ab67357b170a37af2bbcfc",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "raw/hit-dash.attempt1.png",
+      "sha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc"
+    }
+  ]
+}
