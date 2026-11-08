@@ -74,6 +74,7 @@ export function runTickBench(o: TickBenchOptions): TickBenchResult {
   let virtualMs = 0; // the packet-rate window runs on simulated time: the benchmark must not depend on how fast the server is
   const node = new WorldNode({
     packetClock: () => virtualMs,
+    wallClock: () => virtualMs, // same virtual time: the lag credit (D85) stays 0 however slow the host is, so output is host-independent
     seed: 1,
     mapTiles: MAP,
     spawn: { i0: lo, j0: lo, side: o.area },

@@ -60,6 +60,16 @@ export const ANTICHEAT = {
   CAST_BUCKET: 10,
   /** Cooldown check tolerates min(RTT/2, this) ms of latency. */
   CAST_LATENCY_COMP_MAX_MS: 100,
+  /**
+   * Server-overload credit (`StepOptions.lagMs`): real time that passed WITHOUT sim time passing since a client joined (the server ran
+   * behind real time). It makes the guards' clock equal to wall time since join, which is exactly the legitimate bound, so it cannot
+   * create headroom for cheating; this cap is only a sanity bound (10 min) against absurd values.
+   */
+  MAX_LAG_CREDIT_MS: 600_000,
+  /** With lag credit a backlog of inputs drains faster: up to this many extra ticks' worth of declared time per tick. */
+  LAG_DRAIN_TICKS: 2,
+  /** Extra queue room (inputs) an overloaded server grants on top of MAX_PENDING_INPUTS: one per INPUT_DT_MAX_MS of credit, at most this many (memory bound). */
+  LAG_QUEUE_EXTRA_MAX: 128,
 } as const;
 
 // ---------------------------------------------------------------- skills

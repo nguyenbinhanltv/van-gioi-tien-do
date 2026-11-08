@@ -463,3 +463,10 @@ Còn mở / lưu ý:
 5. **Mốc "khu săn" lấy theo bố cục mặc định `defaultMobZones`**: khi có vùng Sơn Môn thật (OPEN-ITEMS D83 #2) cần đổi bước 1 sang vùng đó.
 6. **Phát hiện khi chạy client thật: server chưa hồi MP**: `CombatSystem` không có hồi MP (chỉ mô phỏng offline `skill_sim` có `MP_REGEN_COMBAT_PCT_PER_S`), nên cả phiên chỉ có đúng 400 MP (khoảng 5 con quái ~500 HP với bộ kỹ năng đầu của Kiếm tu). Quái ~1.500 HP gần như không hạ nổi; bước "hạ 3 quái" của vòng phiên đầu vẫn đạt được nhưng không dư dả. Cần luật hồi MP phía server (việc của worker combat) trước khi cân bằng onboarding.
 7. **bag:smoke** cần `class=` trên URL (hộp chọn lớp D82 chặn tài khoản mới) và có thể chạy chậm khi hết MP (ngân sách 400 s); nó không chạy trong CI.
+
+## D85 — tín dụng trễ: còn mở
+
+- Xử lý mục 6 của "D79 — túi đồ hiển thị: còn mở" (khách thật bị kick vì máy chủ chậm). Chỉ phủ các guard trong `step()`; **hẹn giờ trong sim vẫn theo giờ sim** (AI quái, hồi sinh, hồi chiêu phía combat do worker 37, thời gian cast): máy chủ quá tải thì thế giới chạy chậm hơn giờ thật nhưng không ai bị phạt. Không "bắt kịp" giờ sim.
+- Chưa có số đo trên máy đích: kiểm bằng test mô phỏng (đồng hồ thật giả). Cần chạy lại bag-smoke trên máy đang bị CPU bão hòa để xác nhận không còn bị kick.
+- Kích thước tín dụng không hiện ra metric / log: nên thêm `lagCreditMs` lớn nhất vào số đo World Node (và cảnh báo vận hành khi một khách có > 1 s tín dụng: máy chủ đang quá tải).
+- Khách nối lại (resume) giữ tín dụng cũ của phiên (mốc lúc vào không đổi) và luật trượt ngân sách lúc resume (D80) chạy trên **đồng hồ của guard** (giờ sim + tín dụng), nên không để lại ngân sách chưa kiếm; phiên đăng nhập mới bắt đầu từ 0. Khách vào giữa lúc máy chủ đang đơ cũng không nhận tín dụng cho khoảng đơ trước khi nó vào (mốc = drift thật lúc vào).
