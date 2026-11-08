@@ -1,0 +1,46 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 03:49:25 UTC"
+  },
+  "prompt": "Localized sprite repair, not a new design. EDIT TARGET: first image is one existing native dash animation cell, female jade-whisk healer in a dynamic airborne tucked-knee pose on solid magenta. Second image is the approved SE master, IDENTITY REFERENCE ONLY. Keep target canvas framing, body, tucked legs, feet, hands, whisk, ribbons, robe, root placement and dynamic lean EXACTLY unchanged. Repaint ONLY the head and its attached hair, preserving this exact adult face, eyes, nose, mouth, expression, viewing angle, jade pin and bun design. The target head is marginally too large: make the main head construction subtly about 2 percent smaller, anchored at the same jaw-to-neck junction, so the head crown-to-jaw length decreases by roughly one target-native pixel. Do not make it chibi-er or change the face. Preserve the head tilt. Preserve the neck/collar connection without a seam. This is a tiny head-only correction; do NOT resize the whole figure or move the character. Keep the solid magenta background and existing tinted cel-shaded palette. No new FX, text, rulers, outlines around the cell or added objects. Return the same whole cell with identical pose and framing; only this localized head correction.",
+  "input": "../raw/dash-head.input.png",
+  "reference": "../../reference/SE.corrected-master.png",
+  "rawOutput": "../raw/dash-head.attempt1.png",
+  "sourceSheet": "../raw/hit-dash.selected.png",
+  "sourceCell": {
+    "index": 11,
+    "clip": "dash",
+    "localFrame": 5,
+    "x": 941,
+    "y": 627,
+    "width": 313,
+    "height": 314
+  },
+  "status": "candidate; not selected or passing until actual pixel/landmark and full QA review",
+  "files": [
+    {
+      "file": "raw/dash-head.input.png",
+      "sha256": "76b7e6fdfa0e4dc732983931ccabb00453b416bae19858576f31a1835a828530"
+    },
+    {
+      "file": "raw/dash-head.attempt1.png",
+      "sha256": "b1c9dc2a8906e551e6e92675c12a00cfa1c75cfe926225f52d68702882bf7a85"
+    },
+    {
+      "file": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
+    },
+    {
+      "file": "raw/hit-dash.head1.selected.png",
+      "sha256": "035b1db1423762663f293f17dd66ce2a1258503ac9824541498a89319369957d"
+    },
+    {
+      "file": "repair/dash5.head-mask.png",
+      "sha256": "074da18a2639cf71d1fca094e68090a843e23895bcaddef32493df9fe7ff726e"
+    }
+  ],
+  "normalization": "Generated1254x1254 cell -> source313x314 canvas with one Lanczos3 DPI-normalization pass. Only reviewed head-mask pixels copied; no body/frame scaling or fitting.",
+  "selectionProof": "../repair/dash5.head-selection.json"
+}
