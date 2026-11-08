@@ -329,9 +329,18 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 6. **Ngân sách `CHIBI_RUNTIME`** (trần loco/bundle/GPU lớp) là mặc định kỹ thuật, cần game designer/đo thiết bị duyệt.
 7. **Atlas tile/bản đồ**: đo `perf:p1 --route` (bản đồ 8×8 chunk, release, ASTC/WebP): gói tải đầu 7,29 MB (gzip 2,51), trong đó `iso-tileset.png` 0,16 MB và JSON bản đồ 0,62 MB (≈ 11 %); engine `cc.js` 1,86 MB và các armature chibi của người chơi chiếm phần lớn. Nén atlas tile **chưa cần**; nếu bản đồ lớn hơn, ứng viên là tách JSON bản đồ theo chunk (nạp lười) chứ không phải nén tileset.
 
-8. **Atlas tile/bản đồ**: chưa nén/nạp lười; theo dõi phần bản đồ của gói tải đầu khi chạy `perf:p1 --route` (#198).
+## P2-3 — còn mở sau D72 (client online)
 
-Quyết định D71 mô tả cả phần client; PR này chỉ có công cụ + cổng CI. Còn chờ PR client-cocos (stack lên PR này): (1) preset nén texture ASTC 4x4 / 6x6 + WebP trong `settings/v2/packages/builder.json`, gắn vào PNG qua `.meta`; (2) bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:assets`; (3) nạp lười có hàng đợi, bootstrap chỉ nhóm `loco` của người chơi; (4) chọn tier `?restier=1x|full`. Số đo trước/sau (RAM, gói tải đầu) chỉ có ý nghĩa sau khi (1)–(4) merge.
+- **Bản đồ**: server dùng lưới mở, client vẽ tilemap procgen 256x256; nước/cây/đá chỉ chặn ở client offline (không chặn online). Cần nạp lưới va chạm procgen (cờ đi được, tầng) vào `WorldNode`/client chung nguồn trước khi coi online là chơi được.
+- **Lớp nhân vật trên dây**: `aoi_enter` chưa có lớp, nên lớp người khác suy ra từ `entityId` (D72); cần giao thức v2 (kèm tên hiển thị, trang bị cho paperdoll).
+- **Nội suy**: trễ cố định 150 ms, tuyến tính, không ngoại suy (docs/08 §5 yêu cầu trễ thích ứng 100-250 ms theo jitter, Hermite, ngoại suy 250 ms); đồng hồ server (8 gói ping/pong, trung vị) chưa có nên dùng giờ nhận gói.
+- **Chưa làm phía client**: `skill_cast`/`skill_result`, bay/né/khinh công (cờ có trong input nhưng chưa gán phím), resume sau rớt mạng, hiển thị tên/HP người khác, quái/NPC (chỉ vẽ `kind` 0).
+- **Chưa chạy được trên CI**: build Cocos và chơi 2 tab không có trong CI; phần tự động là test đơn vị `packages/client-core/tests/net.test.ts` và test đầu-cuối `apps/server/tests/netclient.test.ts` (2 NetClient + server thật). Chưa kiểm bằng trình duyệt thật trên di động.
+- **Tiêu chí P2 còn lại (đo 2026-11-08, bot trên cùng máy, loopback, 100 bot, 30 s)**:
+  - Chặn gian lận: 3 bot speedhack bị ngắt sau 0,3 s, 3 bot teleport bị ngắt sau 3,8 s (tốc độ quan sát tối đa được kẹp ở tốc độ trung thực 4,55 ô/s): **đạt**.
+  - AOI 100 vs 100 (cả 100 bot trong một vùng 30-40 ô, mỗi người thấy 96-99 người khác): 100/100 giữ kết nối, nhưng **băng thông xuống của người xấu nhất vượt ngân sách 8 KB/s**: 8,04 KB/s (vùng 40 ô, trung bình 7,08, thấy 96,6) và 8,67 KB/s (vùng 30 ô, trung bình 8,08, thấy 98,6). Tick p99 25,2 ms và 38,5 ms (sát 40 ms; lần sau đo khi máy còn Chrome/Cocos chạy nền nên có nhiễu CPU). Mật độ vừa (~40 người thấy nhau) vẫn đạt: 3,3-3,7 KB/s.
+  - Hướng giảm (chưa làm, cần quyết định): hạ tần số dải "gần" khi số người thấy > ~60, bỏ `anim`/`dir` khi không đổi, hoặc hạ `MAX_VISIBLE` từ 120. Cho tới khi đó tiêu chí "100 vs 100 ≤ 8 KB/s" **chưa đạt** ở mật độ 100%.
+  - Chưa đo với client Cocos thật trên mạng thật.
 
 ## D73 — băng thông snapshot: còn mở
 
