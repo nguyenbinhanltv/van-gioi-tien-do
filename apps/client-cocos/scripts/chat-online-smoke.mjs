@@ -272,6 +272,33 @@ try {
   );
   check(!!refused, 'a flood is refused with visible answers');
 
+  // ---- touch screen: the box must not sit over the floating joystick zone (shared layout, D87 review)
+  for (const [label, vp] of [
+    ['landscape', { width: 844, height: 390 }],
+    ['portrait', { width: 390, height: 844 }],
+  ]) {
+    const tp = await browser.newPage();
+    await tp.setViewport({ ...vp, deviceScaleFactor: 1, hasTouch: true, isMobile: true });
+    await tp.goto(url(`cht${label[0]}${stamp}`));
+    const ready = await until(`touch ${label} chat box exists`, tp, (p) => p.evaluate('!!window.__vgtdChat'));
+    if (ready) {
+      const hit = (r) =>
+        r &&
+        r.box.x < r.joystick.x + r.joystick.w &&
+        r.joystick.x < r.box.x + r.box.w &&
+        r.box.y < r.joystick.y + r.joystick.h &&
+        r.joystick.y < r.box.y + r.box.h;
+      const folded = await tp.evaluate('window.__vgtdChat.placement()');
+      await tp.evaluate("document.getElementById('vgtd-chat-input').focus()");
+      const opened = await tp.evaluate('window.__vgtdChat.placement()');
+      check(
+        !!folded.joystick && !hit(folded) && !hit(opened),
+        `touch ${label}: chat box (folded ${JSON.stringify(folded.box)}, opened ${JSON.stringify(opened.box)}) does not intersect joystick-zone ${JSON.stringify(folded.joystick)}`,
+      );
+    }
+    await tp.close();
+  }
+
   await a.bringToFront();
   await sleep(1200);
   await a.screenshot({ path: join(out, 'chat-a.png') });

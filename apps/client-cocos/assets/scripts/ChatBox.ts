@@ -6,7 +6,8 @@
  *
  * Keys: Enter or `/` focuses the input (the `/` starts a command), Enter sends, Esc leaves the box. While the input has focus none of its
  * key events reach the game (a typed "m" must not toggle meditation, "b" the bag, digits the hotbar, WASD walks). On small / touch screens
- * the box folds into a 2-line strip above the bottom edge (docs/05) and unfolds when tapped.
+ * the box folds into a 2-line strip and unfolds when tapped; on touch screens it sits at the shared `chat-ticker` rect, outside the
+ * joystick zone (`touchChatPlacement`).
  */
 import { core } from './vendor/vgtd.mjs';
 
@@ -161,6 +162,12 @@ export class ChatBox {
       say: (raw: string) => this.log.submit(raw, (m) => this.net.sendChat(m)),
       focused: () => document.activeElement === this.input,
       compact: () => this.compact,
+      /** box rect and the shared joystick zone, for the touch smoke check */
+      placement: () => {
+        const r = this.root.getBoundingClientRect();
+        const j = core.touchChatPlacement(window.innerWidth, window.innerHeight).joystick;
+        return { box: { x: r.x, y: r.y, w: r.width, h: r.height }, joystick: j };
+      },
     };
   }
 
@@ -202,7 +209,30 @@ export class ChatBox {
     const touch = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
     this.compact = touch || window.innerWidth < 700;
     const open = !this.compact || document.activeElement === this.input;
-    this.root.style.height = `${open ? HEIGHT : STRIP_HEIGHT}px`;
+    let height = open ? HEIGHT : STRIP_HEIGHT;
+    if (touch) {
+      // the bottom-left corner belongs to the floating joystick (shared `joystick-zone`): follow the shared `chat-ticker` rect instead,
+      // and grow the opened box upwards from it (never down into the joystick zone)
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const { strip } = core.touchChatPlacement(vw, vh);
+      const bottom = vh - (strip.y + strip.h);
+      height = Math.min(height, vh - bottom);
+      Object.assign(this.root.style, {
+        left: `${strip.x}px`,
+        bottom: `${bottom}px`,
+        width: `${strip.w}px`,
+        maxWidth: 'none',
+      } as Partial<CSSStyleDeclaration>);
+    } else {
+      Object.assign(this.root.style, {
+        left: '8px',
+        bottom: '8px',
+        width: `${WIDTH}px`,
+        maxWidth: 'calc(100vw - 16px)',
+      } as Partial<CSSStyleDeclaration>);
+    }
+    this.root.style.height = `${height}px`;
     this.list.style.pointerEvents = this.compact ? 'auto' : 'none';
     this.drawn = -1; // the number of visible lines may have changed
   }
