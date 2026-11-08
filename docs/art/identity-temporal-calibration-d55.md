@@ -61,9 +61,13 @@ Audit pin xác nhận cả 33 ô D54 có 0 palette failures, 0 head-size failure
 
 ```bash
 npm run sprite:audit-similarity-controls -w @vgtd/sprite -- --out D:/Temp/d55-controls.json
-npm run sprite:audit-similarity-crops -w @vgtd/sprite -- --root assets-src/placeholder --control-matrix D:/Temp/d55-controls.json --out D:/Temp/d55-merged-audit.json
+npm run sprite:audit-similarity-crops -w @vgtd/sprite -- --root assets-src/placeholder --baseline docs/art/head-reason-similarity-cohort-d54.json --control-matrix D:/Temp/d55-controls.json --out D:/Temp/d55-merged-audit.json
 ```
 
-Tập 31 project thêm `--project D:/Temp/vgtd23-d55-E-input/project.json --project D:/Temp/vgtd26-SE-D55/selfcontained-v4/project.json`; đây là snapshot local chỉ đọc, không nhập vào repo. `--baseline` nhận JSON audit D54 để gắn chính xác 33 ô. Report ghi lệnh đầy đủ, mọi ô/pair, source/code SHA256, windows, annotations, registration và coverage. Các file/mã đo không được đổi trong lần chạy.
+Tập 31 project thêm `--project D:/Temp/vgtd23-d55-E-input/project.json --project D:/Temp/vgtd26-SE-D55/selfcontained-v4/project.json`; đây là snapshot local chỉ đọc, không nhập vào repo. `--baseline docs/art/head-reason-similarity-cohort-d54.json` dùng cohort33ô đã commit, kèm SHA256 audit lịch sử; không cần file AO local để chọn đúng33ô. Report ghi lệnh đầy đủ, mọi ô/pair, source/code SHA256, windows, annotations, registration và coverage. Các file/mã đo không được đổi trong lần chạy.
 
 HTML/JSON đầy đủ, control matrix và crop 11 ô được đính kèm tại [session worker24](ao://sessions/van-gioi-tien-do/van-gioi-tien-do-24). Công thức: [Wang 2004 Eq.13](https://ece.uwaterloo.ca/~z70wang/publications/ssim.pdf), [W3C chuyển đổi màu](https://www.w3.org/TR/css-color-4/#color-conversion-code).
+
+[Cập nhật kiểm tra native từ owner33: Đao SE emote7/8 có face/costume nhất quán, không có căn cứ repaint. Các điểm cũ chưa đăng ký semantic đúng: chin7 nằm ở cheek, crown7 ở curl nâng cao, breadth chưa ở cực trị cap; điểm8 cũng lệch chuyển động đầu. Chưa có bộ điểm thay thế được freeze, nên audit giữ nguyên nguồn/điểm hiện tại. Pair0,174881 là cờ review annotation, không chứng minh drift; cần cross-check contour master trước khi chọn điểm thật, không dời điểm theo score.]
+
+Audit phát hành được chạy lại sau merge D58 (clock24Hz); thay đổi clock không phải sửa art. Source/code hashes trong JSON là mốc của lần đánh giá thực tế.

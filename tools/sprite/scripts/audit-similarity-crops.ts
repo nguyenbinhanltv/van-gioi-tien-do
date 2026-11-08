@@ -304,6 +304,8 @@ const baselineKeys = new Set(
 const baselineCells = projects.flatMap((p) =>
   p.cells.filter((c) => baselineKeys.has(p.project + '|' + c.clip + '|' + c.cell)),
 );
+if (baseline && baselineCells.length !== baselineKeys.size)
+  throw new Error(`baseline coverage incomplete: matched ${baselineCells.length}/${baselineKeys.size} cells`);
 const stats = (numbers: number[]) => {
   const values = [...numbers].sort((a, b) => a - b);
   return {

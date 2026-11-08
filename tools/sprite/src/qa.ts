@@ -451,10 +451,19 @@ export const SPRITE_SIMILARITY_MIN = 0.7;
 
 /** D55: Lab palette is hard; legacy L1 and temporal continuity are diagnostic. */
 export function checkSimilarity(clip: QaClip, o: QaOptions): Finding[] {
-  if (!legacySimilarityRegions(o.master)) return [];
+  if (!legacySimilarityRegions(o.master))
+    return [
+      {
+        gate: 'similarity',
+        severity: 'fail',
+        clip: clip.name,
+        metric: 'palette_unmeasured',
+        message: 'Master image is empty; Lab identity cannot be measured',
+      },
+    ];
   const out: Finding[] = [];
   clip.frames.forEach((f, i) => {
-    if (!f || !legacySimilarityRegions(f.image) || isSimilarityExemptReason(clip.exceptions?.[i])) return;
+    if (!f || isSimilarityExemptReason(clip.exceptions?.[i])) return;
     try {
       const crops: SimilarityCropMeasurement = {
         ...similarityRegionsForPair(o.master, f.image, o.masterHeight, o.masterHead, clip.headEvidence?.[i]),

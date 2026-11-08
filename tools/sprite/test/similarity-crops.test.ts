@@ -29,7 +29,7 @@ function figure(x: number, lean = false) {
 const head = (x: number): HeadLandmarks => ({ crown: { x, y: 30 }, chin: { x, y: 70 } });
 
 describe('D55 annotated similarity windows', () => {
-  it('preserves legacy similarity handling of empty images while replacement is disabled', () => {
+  it('fails unmeasured empty samples under the active Lab gate', () => {
     const image = figure(118),
       guides = guidesFromMaster(measureFigure(image)!);
     const aligned = alignFrame(toStraight(image), {
@@ -37,13 +37,15 @@ describe('D55 annotated similarity windows', () => {
       calibration: { scale: 1, targetHeight: 202, referenceHeight: 202, referenceFrames: 1 },
     })!;
     const clip: QaClip = { name: 'idle', kind: 'upright', loop: false, expectedFrames: 1, frames: [aligned] };
-    expect(checkSimilarity(clip, { master: createImage(256, 256), masterHeight: 202, guides })).toEqual([]);
+    expect(checkSimilarity(clip, { master: createImage(256, 256), masterHeight: 202, guides })).toContainEqual(
+      expect.objectContaining({ severity: 'fail', metric: 'palette_unmeasured' }),
+    );
     expect(
       checkSimilarity(
         { ...clip, frames: [{ ...aligned, image: createImage(256, 256) }] },
         { master: image, masterHeight: 202, guides },
       ),
-    ).toEqual([]);
+    ).toContainEqual(expect.objectContaining({ severity: 'fail', metric: 'palette_unmeasured' }));
   });
   it('finds the leaning head outside the silhouette-centroid crop and preserves identity scores', () => {
     const master = figure(118),

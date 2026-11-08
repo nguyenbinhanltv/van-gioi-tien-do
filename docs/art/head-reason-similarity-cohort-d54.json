@@ -1,0 +1,188 @@
+{
+  "format": "vgtd-d54-cohort",
+  "description": "33 ô fail L1 lịch sử D54; chỉ là cohort tái kiểm, không phải miễn gate hoặc kết quả hiện tại.",
+  "sourceSummary": "head-reason-similarity-audit-d54.md",
+  "sourceAuditSha256": "263cb37005e3a158457c923d75320cc46831422e7c424c731c11c4c3f201f346",
+  "projects": [
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json",
+      "cells": [
+        {
+          "clip": "run",
+          "cell": 0,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 1,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 2,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 8,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 9,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 14,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 7,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "cells": [
+        {
+          "clip": "dash",
+          "cell": 3,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "status": "fail"
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/the-tu-chibi-v1/E/project.json",
+      "cells": [
+        {
+          "clip": "run",
+          "cell": 5,
+          "status": "fail"
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "status": "fail"
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "status": "fail"
+        }
+      ]
+    }
+  ]
+}

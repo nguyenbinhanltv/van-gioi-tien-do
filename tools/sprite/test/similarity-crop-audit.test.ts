@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,7 +45,7 @@ describe('D55 read-only crop audit', () => {
       file,
       bytes: readFileSync(join(inputs, file)),
     }));
-    const run = (out: string) =>
+    const run = (out: string, extra: string[] = []) =>
       execFileSync(
         process.execPath,
         [
@@ -55,6 +55,7 @@ describe('D55 read-only crop audit', () => {
           inputs,
           '--out',
           out,
+          ...extra,
         ],
         { cwd: repo, env: { ...process.env, INIT_CWD: repo }, stdio: 'pipe' },
       );
@@ -94,6 +95,15 @@ describe('D55 read-only crop audit', () => {
     writeFileSync(protectedOutput, '{"keep":true}', 'utf8');
     expect(() => run(protectedOutput)).toThrow();
     expect(readFileSync(protectedOutput, 'utf8')).toBe('{"keep":true}');
+    const missing = join(dir, 'missing-baseline.json'),
+      incomplete = join(dir, 'incomplete.json');
+    writeFileSync(
+      missing,
+      JSON.stringify({ projects: [{ project: projectPath, cells: [{ clip: 'idle', cell: 99, status: 'fail' }] }] }),
+      'utf8',
+    );
+    expect(() => run(incomplete, ['--baseline', missing])).toThrow();
+    expect(existsSync(incomplete)).toBe(false);
     for (const { file, bytes } of originals) expect(readFileSync(join(inputs, file))).toEqual(bytes);
   }, 30000);
 });

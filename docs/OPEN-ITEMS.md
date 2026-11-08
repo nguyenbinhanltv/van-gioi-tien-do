@@ -267,3 +267,12 @@ review contact sheet bằng mắt vẫn bắt buộc. Bảng D54 phía trên gi�
 Temporal pair <0,45 là INFO review-by-eye, không fail; mirror được flag này cộng review contact sheet. Head-size ±3%
 vẫn là gate scale. 10 ô thiếu opaque đều miễn D41, ghi coverage riêng và không tính fail. Đan/Phù SE candidate dash5
 vẫn fail head-size thật; Kiếm E candidate còn thiếu bằng chứng đầu, không được suy pass từ palette.
+
+### D55 — annotation cần review, không phải repaint (Đao SE, worker33)
+
+Emote local7/8 có điểm đầu cũ chưa đăng ký semantic đúng theo kiểm tra native của owner33: chin7 ở cheek, crown7 ở
+curl nâng cao, breadth chưa ở cực trị tóc ôm sọ; điểm8 cũng chưa theo đúng dịch chuyển đầu. Face/costume vẫn nhất quán,
+không repaint từ score. Chưa có full replacement landmarks được freeze; không sửa điểm trong PR D55 và không dịch điểm
+để hợp ngưỡng. Pair temporal thấp được flag review-by-eye; owner33 cần cross-check cùng contour master rồi đánh giá lại.
+Đây là việc review annotation riêng, không cộng vào11ô Lab hard ở trên. Cohort33ô D54 được lưu portable tại
+`docs/art/head-reason-similarity-cohort-d54.json` để mọi worker tái lập A+C.

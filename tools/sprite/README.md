@@ -551,7 +551,7 @@ distributions, input/code hashes, the control matrix and the original 33 D54 cel
 evaluation and protects input directories and unrelated report files. Outputs must be outside inputs:
 
 ```bash
-npm run sprite:audit-similarity-crops -w @vgtd/sprite -- --root assets-src/placeholder --baseline /absolute/path/head-reason-similarity-audit.json --control-matrix /absolute/path/similarity-identity-temporal-controls.json --out /absolute/path/similarity-identity-temporal-audit.json
+npm run sprite:audit-similarity-crops -w @vgtd/sprite -- --root assets-src/placeholder --baseline docs/art/head-reason-similarity-cohort-d54.json --control-matrix /absolute/path/similarity-identity-temporal-controls.json --out /absolute/path/similarity-identity-temporal-audit.json
 ```
 
 Repeat `--project /absolute/path/project.json` for frozen worker candidates. JSON contains every cell/pair, including
