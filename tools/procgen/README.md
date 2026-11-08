@@ -103,7 +103,7 @@ Bản gốc `pipeline/*.sh` (`local_smoke.sh`, `render_layers.sh`, `compress_tex
 - tile không phải 64 × 32 (@1x) / 128 × 64 (@2x) (`TILE_WIDTH`/`TILE_HEIGHT` của `@vgtd/shared`);
 - **gói tải đầu (Web) ước tính > `BUDGETS.INITIAL_DOWNLOAD_MB_WEB` = 25 MB**.
 
-Ước tính = dung lượng asset + phần không phải asset của gói đầu (engine+code 6 MB, audio 1 MB, dự phòng 2 MB, lấy từ bảng ở `docs/02`; hằng này nằm trong `check.mts` vì `@vgtd/shared` chưa có; đổi bằng `--reservedMb`). Asset tính theo `build/dist/web/*.{ktx2,webp,astc}` nếu có; không có (thiếu `basisu`/`cwebp`/`astcenc`) thì dùng PNG đã đóng gói làm **cận trên** và báo cảnh báo `NOT_COMPRESSED`. Hằng số chưa có trong `@vgtd/shared` (cỡ icon 48/64/128, extrude ≥ 1 px) cũng khai báo cục bộ, ghi rõ nguồn doc. Báo cáo Markdown in ra và ghi vào `$GITHUB_STEP_SUMMARY`. `--no-pixels` bỏ kiểm extrude; `--platform web|mobile|pc`; ngân sách 25 MB chỉ áp dụng cho `web`.
+Ước tính = dung lượng asset + phần không phải asset của gói đầu (engine+code 6 MB, audio 1 MB, dự phòng 2 MB, lấy từ bảng ở `docs/02`; hằng này là `BUDGETS.INITIAL_RESERVED_MB_WEB` trong `@vgtd/shared`; đổi bằng `--reservedMb`). Asset tính theo `build/dist/web/*.{ktx2,webp,astc}` nếu có; không có (thiếu `basisu`/`cwebp`/`astcenc`) thì dùng PNG đã đóng gói làm **cận trên** và báo cảnh báo `NOT_COMPRESSED`. Hằng số chưa có trong `@vgtd/shared` (cỡ icon 48/64/128, extrude ≥ 1 px) cũng khai báo cục bộ, ghi rõ nguồn doc. Báo cáo Markdown in ra và ghi vào `$GITHUB_STEP_SUMMARY`. `--no-pixels` bỏ kiểm extrude; `--platform web|mobile|pc`; ngân sách 25 MB chỉ áp dụng cho `web`.
 
 Workflow `assets.yml` (Node 22, chỉ khi đổi `tools/procgen/**`, `packages/shared/src/constants.ts` hoặc chính workflow): `npm ci` → `gen:tilemap` → `gen:items` → `render` (SVG→PNG; bỏ qua shader/snapshot vì không cài `glslangValidator`/Xvfb) → `validate` → `pack` → `compress:web` (tự bỏ qua nếu thiếu công cụ) → `budget`. Không có bước AI, không deploy. Job `assets` độc lập với `verify (18)/(22)` (không đổi `ci.yml`); `npm test` ở `verify` chạy test của gate.
 
@@ -176,6 +176,6 @@ npx tsx pipeline/chibi_runtime.mts --src ../../apps/client-cocos/assets/resource
 npm run budget -w @vgtd/procgen   # also plans the bundles and checks loco / bundle / class GPU budgets (CHIBI_RUNTIME in @vgtd/shared)
 ```
 
-The gate is geometry only (no encoder needed): sizes are the fixed-rate ASTC sizes the Cocos build produces (4x4 for `1x`, 6x6 for `full`). Desktop WebP and real downloads are measured on a build with `npm run perf:p1 -w client-cocos`.
+The gate is geometry only (no encoder needed): sizes are the fixed-rate ASTC sizes the Cocos build produces (4x4 for `1x`, 6x6 for `full`). Desktop WebP and real downloads are measured on a build with `npm run perf:p1 -w client-cocos` (xem `docs/33-p1-perf.md`).
 
 Số liệu mã hóa một trang atlas chibi 2048² (`phaptuchibi_SE_tex.png`, đo bằng `astcenc` và `cwebp` đi kèm Cocos Creator 3.8.8: `astcenc -cl in.png out.astc 6x6 -medium`, `astcenc -tl ...` cho PSNR, `cwebp -q 85 -alpha_q 100 -exact`): PNG 6,37 MB · WebP q85 1,07 MB (35,6 dB) · ASTC 4x4 4,19 MB (41,7 dB) · ASTC 6x6 1,87 MB (35,1 dB) · ASTC 8x8 1,05 MB (31,5 dB). Với tier `1x` ASTC 4x4 một trang 1024² là 1,0 MB.

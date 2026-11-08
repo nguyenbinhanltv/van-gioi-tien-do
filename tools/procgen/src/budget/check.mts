@@ -8,8 +8,7 @@
  *   - icon atlases / frames that are not 48 / 64 / 128 square,
  *   - tile size that is not 64x32 (@1x) or 128x64 (@2x),
  *   - initial-package size estimate over the Web budget (25 MB).
- * Numbers come from @vgtd/shared where it defines them; the few it does not (icon sizes, extrude width, the
- * non-asset part of the initial package) are local constants below with the doc they come from.
+ * Every budget number comes from @vgtd/shared (BUDGETS, TILE_*, CHIBI_RUNTIME).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -20,13 +19,11 @@ import { checkChibi, renderChibiMarkdown, type ChibiReport } from './chibi.mjs';
 const require = createRequire(import.meta.url);
 const { decodePNG } = require('../lib/png.js') as { decodePNG: (buf: Buffer) => RGBAImage };
 
-// ---- constants not (yet) in @vgtd/shared --------------------------------------------------------------------
-/** Icon export sizes (docs/05-ui-ux-icon.md, docs/00 section 3: "Icon: ... xuất 48 / 64 / 128"). */
-export const ICON_SIZES: readonly number[] = [48, 64, 128];
-/** Minimum extrude (docs/02-asset-matrix-2d.md: "padding 2 px + extrude 1 px"; tile atlas uses 2, docs/04). */
-export const EXTRUDE_MIN_PX = 1;
-/** Non-asset part of the Web initial package (docs/02 table): engine+code 6 MB, audio 1 MB, spare 2 MB. */
-export const INITIAL_PACKAGE_RESERVED_MB = 6 + 1 + 2;
+// ---- budget numbers live in @vgtd/shared (BUDGETS); these aliases keep the local names used by tests/CLI ----------
+export const ICON_SIZES: readonly number[] = BUDGETS.ICON_SIZES_PX;
+export const EXTRUDE_MIN_PX = BUDGETS.ATLAS_EXTRUDE_MIN_PX;
+export const INITIAL_PACKAGE_RESERVED_MB =
+  BUDGETS.INITIAL_RESERVED_MB_WEB.ENGINE_CODE + BUDGETS.INITIAL_RESERVED_MB_WEB.AUDIO + BUDGETS.INITIAL_RESERVED_MB_WEB.SPARE;
 /** PC map atlases (only these may reach ATLAS_MAX_PC) are named with this prefix. */
 export const PC_MAP_ATLAS_PREFIX = 'atl_map';
 const COMPRESSED_EXT = ['.ktx2', '.webp', '.astc'];
