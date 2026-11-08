@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:57:56.169Z",
+  "utcRecordedCompleted": "2026-11-08T00:00:04.899Z",
+  "prompt": "Use case: precise-object-edit. FIRST exact4x4 template, DAO TU T1 sword_fly AIRBORNE WEAPON-RIDE LOOP,12unique sequential frames0-11 rowmajor, final4cells EMPTYmagenta.24fps. Image2 E male canonical. Same adult lean anatomy standing216px/skull50px breadth38px in256cell, stern greyeyes/black sweptfringe/low looseponytail, plain sleeveless muted darkteal tunic/stormgreyblue collar+sash/darkpants/boots/bracers minimalbrass. Strict E profile RIGHT allframes. SAME heavy broad single-edge DAO longdarkgrip and steelink-mountain panorama blade floats HORIZONTALLY beneath BOTH BOOTS, pointtowardRIGHT. Both boots physically rest on broad blade flats; no secondweapon, no dao onshoulder while ridden. Slightly crouched balanced stance, handsfree held nearwaist forbalance, torso leanforward6deg. Subtle 12frame airborne bob cycle and cloth/ponytail streamingbehind, body+dao rise/fall together2-3px, ankles maintainbladecontact. Keep fullsizebody/head/dao, no miniature mount or giant sword. Canvas rootx128 ground232 is registration only: blade aroundy225, boots aroundy210, head can lower via naturalkneeflex to keep top margin; preserve anatomy, don't scale. Full hair/dao/handle insideeachcell with8pxmargin, no cropping/overlap. Smooth11->0loop, 12different inbetweens, no idle repeatedpaste. Remove guides to UNIFORM OPAQUE PURE RGB255,0,255 MAGENTA background. NO windtrails/aura/clouds/shadows/particles/text/labels/borders. Premium clean painted semi-chibi lightNW.",
+  "references": ["templates/sword_fly.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/sword_fly.png",
+  "status": "candidate; airborne contact and loop QA pending"
+}

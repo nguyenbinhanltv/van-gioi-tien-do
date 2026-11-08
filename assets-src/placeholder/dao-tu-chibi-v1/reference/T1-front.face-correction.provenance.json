@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:30:50.307Z",
+  "utcRecordedCompleted": "2026-11-07T23:32:58.551Z",
+  "prompt": "Use case: precise-object-edit. Minimal anatomical landmark correction ONLY to the exact attached T1 master. Keep canvas1145x1374, body/limbs/sword/clothes unchanged. Main attached hair crown is near y118, soles1332; target crown-to-chin267px (22% of1214), eyes at y312 (16% down from crown). Current eyes around y286 and chin360 are too high. Move both eyes/nose/mouth and chin LOWER approximately25px inside the head, extend lower head to chin y385 with natural neck integration. Preserve forehead hair silhouette and main crown, keep same stern grey eyes, same eyebrows/face identity, grey-blue/teal T1 costume. Do not enlarge torso, change pose or move feet. Keep full sword and all margins. Pure opaque uniform RGB255,0,255 magenta background. No new details or text.",
+  "reference": "raw/T1-front.head-correction.png",
+  "rawOutput": "raw/T1-front.face-correction.png",
+  "status": "selected front construction candidate; manual landmark measurement pending"
+}

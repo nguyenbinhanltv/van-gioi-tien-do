@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:52:39.896Z",
+  "utcRecordedCompleted": "2026-11-07T23:54:27.156Z",
+  "prompt": "Use case: precise-object-edit. MINIMAL TWO-CELL BLADE HEADROOM REPAIR on this EXACT4x4 Dao tu attack_2 sheet. Change ONLY cells2 and3 (zero-based, TOP ROW THIRD and FOURTH). In each, the broad dao's leftmost tip reaches/touches the LEFT CELL EDGE. Keep hands/grip/body/head/pose identical; rotate just the blade very slightly inward around its grip so the extreme LEFT tip has at least10 native pixels of pure magenta clearance from that cell's left border. Preserve blade shape/length/mountain painting and hand grip contact. Do NOT shrink whole frame, body or weapon; use tiny natural rotation to bring tip inside. Every other14cell and all faces/bodies/clothes must remain unchanged. Same sheet dimensions1254x1254, same4x4lattice, same opaque RGB255,0,255 magenta. No text/FX/new objects. This is only cell2/3 left-tip clearance, not a redraw of animation.",
+  "references": ["raw/attack_2.png"],
+  "rawOutput": "raw/attack_2.clearance-edit.png",
+  "selectedOutput": "raw/attack_2.repaired.png",
+  "operation": "Official sprite:repair twice, cells2 and3 only. All other cells must remain byte-identical; original and edit retained.",
+  "status": "repair candidate; gates pending"
+}

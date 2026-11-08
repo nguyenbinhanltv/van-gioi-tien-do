@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:50:56.475Z",
+  "utcRecordedCompleted": "2026-11-07T23:51:52.148Z",
+  "prompt": "Use case: precise-object-edit. Fill FIRST exact4x4 template for DAO TU T1 attack_2 BROAD ARC SWEEP,14 distinct sequential frames cells0-13 row-major, final2 EMPTY magenta.24fps. Reference2 canonical E master. Adult lean male stern grey eyes/black swept fringe/low loose ponytail, same plain sleeveless dark muted teal tunic, storm grey-blue collar+sash, short skirt/darkpants/boots/bracers minimalbrass. Exact same face and skull size head50px/breadth38px per256cell; anatomical standing216-219px, no global shrink. E-facing RIGHT overall, hips can turn through sweep but return E, no new costume. Same heavy BROAD single-edge mountain-ink dao steelblade/blackgrip/brassguard, two-handed sweep.0-3 crouched low windup with dao drawn back low to LEFT behind hips;4-6 pivot on back foot and open chest, blade travels rising diagonal broad ARC from lowback to forward-right at waist;7-8 widest sweeping extension with strong hip rotation/frontknee bent;9 hold momentum;10-12 blade continues across body/cloth+hair lag;13 recover toward E shoulder-ready. Distinct from first horizontal cut: circular upward broad sweep with pivot/turn, not straight step slash. Full weight transfer, clear anticipation-impact-followthrough14 inbetweens. Lattice registrationx128 ground232; lunging pelvis may travel naturally, don't recenter each pose. Entire blade/hair inside256cell with margin; rotate blade naturally to avoid crop, keep body/head scale. Head stencil indicates size/identity, may translate/rotate. NO trail/FX/particles/blood/aura/duplicateweapon/shadows/text/grid. Remove all guides and replace with uniform OPAQUE pure RGB255,0,255 magenta. All14 frames rendered, final2cells empty.",
+  "references": ["templates/attack_2.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/attack_2.png",
+  "status": "candidate; retained border requires standard inset check; dynamic QA pending"
+}

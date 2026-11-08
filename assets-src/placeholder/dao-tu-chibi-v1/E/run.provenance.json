@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:46:07.722Z",
+  "utcRecordedCompleted": "2026-11-07T23:46:45.803Z",
+  "prompt": "Use case: precise-object-edit. Fill exact FIRST IMAGE square4x4 lattice with16 unique sequential RUN cycle frames, DAO TU T1 male, strict E profile looking RIGHT,24fps. Image1 is template+unscaled exact head stencil and run foot ghosts; Image2 E master. Same stern grey eyes, swept fringe, low loose black ponytail; adult lean semi-chibi head~50px high/breadth38px per256cell, anatomical standing216-219px. Preserve plain sleeveless dark muted teal wrap tunic, storm grey-blue collar/sash, short plain overskirt, dark trousers/boots/bracers/minimal brass. Heavy mountain-ink single-edge dao gripped on RIGHT shoulder whole cycle; left fist pumps. RUN, not walk: torso leans15degrees forward from hips, large alternating thigh extension/knee drive, heel recovers high behind, quick contact/toe-off. Frames0-3 RIGHT foot forward then sweeping backward as left high recovery;4-7 left knee drives forward/right toeoff;8-11 LEFT planted/opposite0;12-15 right recovery/lefttoeoff and return to0. Right/near boot sole follows CYAN foot ghosts, far/left AMBER. Clearly switch near vs far lead atframe8, don't reuse same planted leg through both halves. Full continuous stride row-major0..15, same body/head scale, realistic restrained vertical bob; hair/cloth lag backward. Lattice rootx128, nominalground232, actual feet preserve ghost positions. Head stencil indicates identity and size; lean head with torso, don't shrink. Entire broad dao and hair inside each cell with top margin; sword may tilt with shoulder but no motion trail. Remove all template lines/markers/ghosts/head-crop rectangles. Uniform opaque PURE MAGENTA RGB255,0,255 background, no shadows/FX/text/labels/borders. All16cells occupied. No crop/fit/rescale individual characters.",
+  "references": ["templates/run.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/run.png",
+  "status": "candidate; head/foot contact/canvas QA pending"
+}

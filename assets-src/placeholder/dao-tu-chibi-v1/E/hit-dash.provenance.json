@@ -1,0 +1,14 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:56:34.723Z",
+  "utcRecordedCompleted": "2026-11-07T23:58:55.772Z",
+  "prompt": "Use case: precise-object-edit. EXACT FIRST IMAGE4x4 stencil grid TWO CLIPS, all16cells, DAO TU T1 male E profile facingRIGHT. Image2 canonical E master. Same stern greyeyes/swept blackfringe/low looseponytail, lean adult anatomical216px/skull50px/breadth38px per256cell, plain sleeveless muted darkteal tunic/stormgreyblue collar+sash/darkpants+boots+bracers minimalbrass. Same HEAVY BROAD mountain-ink single-edge dao with long darkgrip/brassguard always present, no dagger. GROUP mapping row-major cells0-5=HIT sixframes, cells6-15=DASH tenframes. HIT0 neutral E dao-on-shoulder;1 sudden chest recoil/backlean,2 peak recoil with leftarm bracing but weapongrip maintained,3 recover weight,4 settle,5 return Eready. No blood/injury/death. DASH6 anticipation crouch with dao close shoulder;7 lower center/lean forward;8-10 drive explosive RIGHTWARD charge with legs extending and head/torso leaningforward, hairlagsleft;11-12 strongest lowlunge with authored pelvis travel towardright,13 decelerate/frontfoot brace,14 rise,15 Eshoulderready. Dash is heavy berserker charge, not teleport or swordflight. Head stencil is SIZE/IDENTITY only; translate/rotate head naturally, maintain same skullsize, don't shrinkbody. Fixed lattice source registrationx128/ground232, preserve intentional roottravel; do not recenter eachcell. All blade/hair/limbs fully within eachcell,8pxmargin, no clipping/overlap. All16 distinct inbetweens, hit separate fromdash. No motiontrail/wind/aura/FX/shadows/text/labels/borders. Remove all guides/headrects to opaque UNIFORM PURE RGB255,0,255 MAGENTA. Same premium painted semi-chibiNWlight.",
+  "references": ["templates/hit-dash.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/hit-dash.png",
+  "mapping": {
+    "hit": [0, 1, 2, 3, 4, 5],
+    "dash": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  },
+  "status": "candidate; dynamic dash skull evidence pending"
+}
