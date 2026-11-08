@@ -15,16 +15,17 @@ WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":2,"pr
 
 ## Layout
 
-| Path                   | What                                                                                                                                                                                          |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/auth/`            | scrypt hashing + policy, EdDSA JWT, `AuthService` (lockout, per-IP limits, bounded hash queue), in-memory `AccountStore`                                                                      |
-| `src/gateway.ts`       | HTTP auth endpoints, WebSocket handshake (hello timeout, one live connection per account, frame cap)                                                                                          |
-| `src/world/node.ts`    | `WorldNode`: input intake (dedup by seq), `step()`, AOI at 10 Hz, per-band snapshots, kicks, tick/phase metrics                                                                               |
-| `src/world/combat/`    | `CombatSystem`: skill ownership, cast time, shapes, damage (shared formulas), HP / death / respawn, mob kills via `MobPort`, drops (D75, docs/34)                                             |
-| `src/world/inventory/` | inventory + drop sink (D77): bag, double-entry stone ledger, `InventoryService.grantDrops`, store seam, `DropSink` (combat `onDrops` -> the killer's bag, `INVENTORY=1`, on in `npm run dev`) |
-| `src/loadtest/`        | headless `Bot` (speaks the real protocol), fleet runner, report (`summarize`/`formatReport`), CLI + worker thread                                                                             |
-| `scripts/loadtest.mjs` | bundles the TS entry with esbuild into `node_modules/.vgtd-loadtest/` and runs it                                                                                                             |
-| `src/config.ts`        | server-only tunables (auth limits, frame/rate limits, visible cap). Network/AOI/tick constants come from `@vgtd/shared`.                                                                      |
+| Path                          | What                                                                                                                                                                                          |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/auth/`                   | scrypt hashing + policy, EdDSA JWT, `AuthService` (lockout, per-IP limits, bounded hash queue), in-memory `AccountStore`                                                                      |
+| `src/gateway.ts`              | HTTP auth endpoints, WebSocket handshake (hello timeout, one live connection per account, frame cap)                                                                                          |
+| `src/world/node.ts`           | `WorldNode`: input intake (dedup by seq), `step()`, AOI at 10 Hz, per-band snapshots, kicks, tick/phase metrics                                                                               |
+| `src/world/combat/`           | `CombatSystem`: skill ownership, cast time, shapes, damage (shared formulas), HP / death / respawn, mob kills via `MobPort`, drops (D75, docs/34)                                             |
+| `src/world/inventory/`        | inventory + drop sink (D77): bag, double-entry stone ledger, `InventoryService.grantDrops`, store seam, `DropSink` (combat `onDrops` -> the killer's bag, `INVENTORY=1`, on in `npm run dev`) |
+| `src/world/inventory/sync.ts` | the visible bag (D79): `inv_state` out (one per tick), `inv_cmd` in (move / claim, request-id replay, rate limit), `inv_result`                                                               |
+| `src/loadtest/`               | headless `Bot` (speaks the real protocol), fleet runner, report (`summarize`/`formatReport`), CLI + worker thread                                                                             |
+| `scripts/loadtest.mjs`        | bundles the TS entry with esbuild into `node_modules/.vgtd-loadtest/` and runs it                                                                                                             |
+| `src/config.ts`               | server-only tunables (auth limits, frame/rate limits, visible cap). Network/AOI/tick constants come from `@vgtd/shared`.                                                                      |
 
 `src/progression/` (D76) holds the tu vi module: `ProgressionService` (meditation, minor/major breakthrough, seeded rolls, anti-abuse,
 idempotent `requestId`), pure rules in `state.ts` (all numbers from `@vgtd/shared`, docs/07 §2 §5), and the `ProgressionStore` / `RollLog`

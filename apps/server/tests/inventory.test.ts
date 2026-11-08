@@ -307,6 +307,22 @@ describe('drop sink', () => {
     expect(s.pendingOf('a')).toEqual([]);
     expect(s.bagOf('a').count(HEAL.id)).toBe(3);
   });
+  it('a pending entry never exceeds what the wire can carry (u16): the rest of a roll is lost and counted', () => {
+    const s = new InventoryService({ bagSlots: 1, pendingMax: 2 });
+    s.grantDrops('a', rolls({ item: 'blueprint_white_green', qty: 1, quality: 0 }), 'field', 'fill'); // the only slot
+    const r1 = s.grantDrops('a', rolls({ item: 'craft_material', qty: 60_000 }), 'field', 'k1');
+    const r2 = s.grantDrops('a', rolls({ item: 'craft_material', qty: 60_000 }), 'field', 'k2');
+    const r3 = s.grantDrops('a', rolls({ item: 'craft_material', qty: 10 }), 'field', 'k3');
+    expect([r1.items[0]!.where, r2.items[0]!.where, r3.items[0]!.where]).toEqual(['pending', 'pending', 'lost']);
+    expect(s.pendingOf('a')).toEqual([{ defId: MAT.id, quality: 0, qty: 65_535 }]);
+    expect(s.lostItems).toBe(120_000 + 10 - 65_535);
+    // a single roll bigger than the cap is cut at the cap too
+    const s2 = new InventoryService({ bagSlots: 1 });
+    s2.grantDrops('b', rolls({ item: 'blueprint_white_green', qty: 1, quality: 0 }), 'field', 'fill');
+    s2.grantDrops('b', rolls({ item: 'heal_pill', qty: 100_000, quality: 1 }), 'field', 'big');
+    expect(s2.pendingOf('b')[0]!.qty).toBe(65_535);
+    expect(s2.lostItems).toBe(100_000 - 65_535);
+  });
   it('conservation over many real kills: granted = bag + pending + lost, ledger consistent', () => {
     const s = new InventoryService({ bagSlots: 6, pendingMax: 3 });
     let rng: RngState = rngSeed(77);

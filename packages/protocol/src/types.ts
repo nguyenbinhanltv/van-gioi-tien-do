@@ -8,7 +8,8 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
 /** Bump on any wire-incompatible change; decoders reject other versions with ProtocolError('version'). */
 /** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
 /** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
-export const PROTOCOL_VERSION = 3;
+/** v4 (D79): inventory messages inv_state / inv_cmd / inv_result (cold ids 66-68); one bump shared with the reconnect work. */
+export const PROTOCOL_VERSION = 4;
 
 export enum MsgType {
   Input = 1,

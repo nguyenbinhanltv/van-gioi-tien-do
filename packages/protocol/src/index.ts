@@ -4,5 +4,6 @@ export * from './validate.js';
 export * from './binary.js';
 export * from './json.js';
 export * from './progression.js';
+export * from './inventory.js';
 export * from './adapt.js';
 export { BitReader, BitWriter } from './bits.js';
