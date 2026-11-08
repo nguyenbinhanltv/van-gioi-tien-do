@@ -133,7 +133,7 @@ try {
     if (/online|vgtd\]\[net|hook/i.test(t) && m.type() !== 'log') console.log('[page]', t);
   });
   await page.goto(
-    `http://127.0.0.1:${webPort}/?online=1&combat=1&npcs=0&server=127.0.0.1:${gwPort}&name=smoke${Date.now() % 100000}`,
+    `http://127.0.0.1:${webPort}/?online=1&combat=1&npcs=0&class=kiem&server=127.0.0.1:${gwPort}&name=smoke${Date.now() % 100000}`,
   );
   await page.waitForFunction('window.__vgtdOnline && window.__vgtdOnline().active && window.__vgtdCombat', {
     timeout: 180000,
@@ -141,7 +141,15 @@ try {
   });
   const st = () => page.evaluate('JSON.parse(JSON.stringify(window.__vgtdCombat.state()))');
   check(true, 'online session active, combat HUD attached');
-  await sleep(2500); // snapshots + AOI
+  // own vitals (snapshot self.vitals) + AOI: wait for them instead of a fixed sleep (a busy machine needs longer)
+  await page.waitForFunction(
+    'window.__vgtdCombat.state().hpMax > 1 && window.__vgtdCombat.state().enemies.length > 0',
+    {
+      timeout: 60000,
+      polling: 250,
+    },
+  );
+  await sleep(500);
   let s = await st();
   console.log(`path ${s.path}, hp ${s.hp}/${s.hpMax}, mp ${s.mp}/${s.mpMax}, enemies in view: ${s.enemies.length}`);
   check(s.hpMax > 1 && s.hp === s.hpMax, 'own HP arrived from the server (snapshot self.vitals)');

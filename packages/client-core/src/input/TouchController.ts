@@ -51,8 +51,11 @@ export interface TouchVisualState {
   joystick: { base: Vec2; knob: Vec2; radius: number } | null;
   page: number;
   buttons: Array<{ id: string; center: Vec2; radius: number; pressed: boolean; slot: number | null }>;
-  aim: { from: Vec2; to: Vec2; overCancel: boolean } | null;
+  /** `tile`: where the cast would land if released now (ground / direction aim); `backAtOrigin`: released here the cast is dropped. */
+  aim: { from: Vec2; to: Vec2; overCancel: boolean; tile: TilePos; backAtOrigin: boolean } | null;
   cancelVisible: boolean;
+  /** where the Cancel zone is (client px), for the renderer; only meaningful while `cancelVisible` */
+  cancelRect: Rect | null;
 }
 
 export class TouchController {
@@ -194,12 +197,23 @@ export class TouchController {
     if (p.overCancel) { this.pendingCancel = true; return; }
     const slot = b.kind === 'attack' ? 0 : 1 + this.page * SKILLS_PER_PAGE + b.index;
     if (!p.aiming) { this.pendingCasts.push({ slot }); return; }      // chạm nhanh: tự nhắm
-    // Kéo để nhắm: hướng kéo trên màn hình -> hướng trong không gian ô, độ dài kéo -> tầm
+    // Kéo rồi kéo ngược về nút = hủy (không thi triển): docs/05 "kéo ngược để hủy"
+    if (this.backAtOrigin(p)) return;
+    this.pendingCasts.push({ slot, aimTile: this.aimTileOf(p) });
+  }
+
+  /** Kéo để nhắm: hướng kéo trên màn hình -> hướng trong không gian ô, độ dài kéo -> tầm. */
+  private aimTileOf(p: Press): TilePos {
     const dx = p.current.x - p.origin.x, dy = p.current.y - p.origin.y;
     const dir = screenDirToTileDir(dx, dy);
     const range = Math.hypot(dx, dy) * this.layout!.tilesPerPixel / (this.aimZoom > 0 ? this.aimZoom : 1);
     const pos = this.player.position();
-    this.pendingCasts.push({ slot, aimTile: { i: pos.i + dir.i * range, j: pos.j + dir.j * range } });
+    return { i: pos.i + dir.i * range, j: pos.j + dir.j * range };
+  }
+
+  /** Đã nhắm nhưng ngón tay quay về trong vùng ngưỡng quanh nút: thả ở đây là hủy. */
+  private backAtOrigin(p: Press): boolean {
+    return p.aiming && Math.hypot(p.current.x - p.origin.x, p.current.y - p.origin.y) <= AIM_START_PX;
   }
 
   private angleAt(p: Vec2): number {
@@ -245,8 +259,17 @@ export class TouchController {
       joystick: this.joy ? { base: this.joy.base, knob: this.joy.knob, radius: L.joystickRadius } : null,
       page: this.page,
       buttons,
-      aim: aimPress ? { from: aimPress.origin, to: aimPress.current, overCancel: aimPress.overCancel } : null,
+      aim: aimPress
+        ? {
+            from: aimPress.origin,
+            to: aimPress.current,
+            overCancel: aimPress.overCancel,
+            tile: this.aimTileOf(aimPress),
+            backAtOrigin: this.backAtOrigin(aimPress),
+          }
+        : null,
       cancelVisible: !!aimPress,
+      cancelRect: L.cancelRect,
     };
   }
 }

@@ -3,6 +3,7 @@
  * `ServerCombat` pushes a `death` event only while applying the player's OWN `skill_result` hits (KILL flag, server-confirmed), so
  * counting enemy `death` events here counts kills made by the player's skills. Other events and every property pass through.
  */
+import type { TilePoint } from './targeting.js';
 import type { CombatBackend } from './backend.js';
 import type { CombatEvent } from './mock-combat.js';
 import { PLAYER_ID } from './mock-combat.js';
@@ -15,7 +16,9 @@ export function withKillObserver(backend: CombatBackend, onKill: (enemyId: numbe
   return new Proxy(backend, {
     get(target, prop, receiver) {
       if (prop === 'update') return (nowMs: number): CombatEvent[] => watch(target.update(nowMs));
-      if (prop === 'cast') return (slot: number, nowMs: number): CombatEvent[] => watch(target.cast(slot, nowMs));
+      if (prop === 'cast')
+        return (slot: number, nowMs: number, aim?: TilePoint | null): CombatEvent[] =>
+          watch(target.cast(slot, nowMs, aim)); // keep the touch aim
       const v = Reflect.get(target, prop, receiver) as unknown;
       return typeof v === 'function' ? (v as (...a: unknown[]) => unknown).bind(target) : v;
     },

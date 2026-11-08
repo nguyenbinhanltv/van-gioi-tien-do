@@ -34,8 +34,12 @@ export interface CombatBackend {
   setPlayerPos(p: TilePoint): void;
   /** Where the player is aiming (pointer position in tile coordinates), or null. Used by backends that send an aim point (ground / direction skills). */
   setAim?(p: TilePoint | null): void;
-  /** Request a cast of a hotbar slot. Returns the immediate events (`cast_start`, or `blocked` with a reason). */
-  cast(slot: number, nowMs: number): CombatEvent[];
+  /** Returns the immediate events (`cast_start`, or `blocked` with a reason). */
+  /**
+   * Request a cast of a hotbar slot. `aim` (tile coordinates) overrides the pointer aim for this one cast: the touch skill wheel's
+   * drag-to-aim passes it (touch has no hover). Backends without an aim point (the offline mock) ignore it.
+   */
+  cast(slot: number, nowMs: number, aim?: TilePoint | null): CombatEvent[];
   /** Advance to `nowMs`; returns the events since the last call. */
   update(nowMs: number): CombatEvent[];
 }
