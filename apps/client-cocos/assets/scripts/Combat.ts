@@ -494,7 +494,8 @@ export class CombatUi {
     }
     this.enemyNodes.forEach((n, id) => {
       if (seen.has(id)) return;
-      this.ysort.remove(n);
+      this.ysort.remove(n); // unregisters only: destroy the node here
+      n.destroy();
       this.enemyNodes.delete(id);
     });
   }
