@@ -251,3 +251,5 @@ Hai gói được bàn giao dưới dạng file zip trong cuộc trò chuyện; 
 ### Mảng chưa có tài liệu
 
 Nhiệm vụ và cốt truyện; nghề luyện đan / luyện khí / chế phù chi tiết; luật PvP và đấu trường; kiếm tiền (Tiên Ngọc, Battle Pass, cửa hàng); hướng dẫn người chơi mới; sự kiện và LiveOps; đo lường (telemetry, dashboard KPI).
+
+> [Cập nhật D52, bổ sung D47/D48/D50: chỉ N có crown bị phụ kiện cứng che dùng `rear-base-ornament`, đo gáy nhìn thấy↔điểm thấp nhất nhìn thấy nơi phụ kiện cứng tiếp xúc tóc, cộng bề ngang sọ; cả hai ±3% master khóa cùng hướng. MasterHead ghi định nghĩa neo cố định, ô dùng cùng định nghĩa và note đã xem. Không chiếu crown/lấy cạnh vòng làm crown, không sửa master, không dùng tóc mềm làm neo. Chi tiết schema/INFO ở `art/sprite-sheet-pipeline.md`; các gate và scale khác giữ nguyên.]

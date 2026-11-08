@@ -5,7 +5,13 @@ import type { OriginMeasurement } from './authored-origin.js';
  * into a single self-contained page (paths relative to the page).
  */
 import type { ManualArtFinding } from './backlog.js';
-import { headEvidenceKind, headLandmarkEnd, type HeadMeasurement, type HeadLandmarks } from './head-evidence.js';
+import {
+  headEvidenceKind,
+  headLandmarkStart,
+  headLandmarkEnd,
+  type HeadMeasurement,
+  type HeadLandmarks,
+} from './head-evidence.js';
 
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 
@@ -56,9 +62,15 @@ export interface BatchReport {
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function headLandmarkHtml(head: HeadLandmarks): string {
+  const start = headLandmarkStart(head);
   const end = headLandmarkEnd(head);
   const label =
-    head.kind === 'rear-skull-base' ? 'skull base' : head.kind === 'rear-crown-shoulder' ? 'shoulder midpoint' : 'chin';
+    head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament'
+      ? 'skull base'
+      : head.kind === 'rear-crown-shoulder'
+        ? 'shoulder midpoint'
+        : 'chin';
+  const anchor = head.kind === 'rear-base-ornament' ? `; anchor definition: ${head.anchorDefinition}` : '';
   const shoulders =
     head.kind === 'rear-crown-shoulder'
       ? `; shoulderTop left (${head.shoulderTop.left.x}, ${head.shoulderTop.left.y}), right (${head.shoulderTop.right.x}, ${head.shoulderTop.right.y})`
@@ -66,7 +78,9 @@ function headLandmarkHtml(head: HeadLandmarks): string {
   const breadth = head.breadth
     ? `; breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y})`
     : '';
-  return esc(`crown (${head.crown.x}, ${head.crown.y}), ${label} (${end.x}, ${end.y})${shoulders}${breadth}`);
+  return esc(
+    `${head.kind === 'rear-base-ornament' ? 'ornament anchor' : 'crown'} (${start.x}, ${start.y}), ${label} (${end.x}, ${end.y})${anchor}${shoulders}${breadth}`,
+  );
 }
 
 const CSS = `
