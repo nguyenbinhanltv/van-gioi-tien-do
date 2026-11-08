@@ -7,8 +7,8 @@
  * `ai` PRNG stream drawn in a fixed order (spawn: slots ascending; per tick: respawns ascending, then AI ascending),
  * no clocks, ties by id. Nothing here reads `Math.random`, `Date.now` or `performance.now`.
  *
- * Content (D81): each tier lives in a distance band around the centre of the mob area (nothing spawns in the safe
- * zone around it); normal mobs spawn in packs around an anchor point. Threat (D81): `onDamage` (called by the combat step
+ * Content (D83): each tier lives in a distance band around the centre of the mob area (nothing spawns in the safe
+ * zone around it); normal mobs spawn in packs around an anchor point. Threat (D83): `onDamage` (called by the combat step
  * through `MobPort`) adds threat on the attacker; a mob chases the player with the most threat, with a hysteresis ratio.
  * `kill()` is the hook the combat step calls; it despawns the mob and schedules its respawn.
  */
@@ -112,7 +112,7 @@ interface Slot {
   alive: boolean;
   brain: MobBrain;
   respawnAtTick: number;
-  /** attacker id -> threat (D81); empty for a mob nobody has hurt */
+  /** attacker id -> threat (D83); empty for a mob nobody has hurt */
   threat: Map<number, number>;
 }
 
@@ -227,7 +227,7 @@ export class MobManager {
   }
 
   /**
-   * A walkable point inside `rect` and inside the tier's distance band (D81). Up to SPAWN_ATTEMPTS tries (2 floats each);
+   * A walkable point inside `rect` and inside the tier's distance band (D83). Up to SPAWN_ATTEMPTS tries (2 floats each);
    * when none lands in the band the last WALKABLE point is used, else the rect centre.
    */
   private drawPoint(rect: MobZone, def: MobDef): [number, number] {
@@ -320,7 +320,7 @@ export class MobManager {
 
   // ------------------------------------------------------------------ combat hooks
   /**
-   * `attackerId` hurt mob `id` for `amount`: add that much threat on the attacker (D81). Ignored for dead / unknown mobs,
+   * `attackerId` hurt mob `id` for `amount`: add that much threat on the attacker (D83). Ignored for dead / unknown mobs,
    * attackers that are mobs, and non-positive amounts. At most THREAT_ENTRIES attackers are tracked per mob (the lowest
    * threat is dropped).
    */
@@ -419,7 +419,7 @@ export class MobManager {
   }
 
   /**
-   * Threat bookkeeping for one mob with a non-empty table (D81), no RNG: drop attackers that are gone, decay the ones far
+   * Threat bookkeeping for one mob with a non-empty table (D83), no RNG: drop attackers that are gone, decay the ones far
    * away, then point the brain at the highest threat (a returning mob gives up and forgets everything).
    */
   private applyThreat(s: Slot, e: EntityState, playerById: (id: number) => PlayerRef | undefined): MobBrain {

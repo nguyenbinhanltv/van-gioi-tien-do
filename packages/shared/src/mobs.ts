@@ -264,9 +264,9 @@ export const MOB_ID_BASE = 1_000_000;
 export interface SpawnGroup {
   /** `MobDef.key` */
   def: string;
-  /** how many of this mob the zone keeps alive at density 1 (PLACEHOLDER counts, D74 / D81) */
+  /** how many of this mob the zone keeps alive at density 1 (PLACEHOLDER counts, D74 / D83) */
   count: number;
-  /** members that spawn together around one anchor point (packs); 1 = every mob has its own point (D81) */
+  /** members that spawn together around one anchor point (packs); 1 = every mob has its own point (D83) */
   pack?: number;
 }
 export interface ZoneSpawnTable {
@@ -277,22 +277,22 @@ export interface ZoneSpawnTable {
 /**
  * Where a tier lives, as a fraction of the half-size `R` of the mob area (the distance from the area's centre, the
  * player spawn square, measured as Chebyshev tiles): safe zone around the centre where nothing spawns, then normal
- * mobs near, elites farther, bosses farthest. Fractions, so any map size works. PLACEHOLDERS (D81, cần game designer duyệt).
+ * mobs near, elites farther, bosses farthest. Fractions, so any map size works. PLACEHOLDERS (D83, cần game designer duyệt).
  */
 export const MOB_BANDS: Readonly<Record<MobTier, { minFrac: number; maxFrac: number }>> = {
   normal: { minFrac: 0.12, maxFrac: 0.55 },
   elite: { minFrac: 0.4, maxFrac: 0.85 },
   boss: { minFrac: 0.7, maxFrac: 1.0 },
 };
-/** Pack members spawn within this many tiles of the pack anchor (D81, PLACEHOLDER). */
+/** Pack members spawn within this many tiles of the pack anchor (D83, PLACEHOLDER). */
 export const MOB_PACK_RADIUS = 3;
-/** Pack size of normal mobs (elites and bosses spawn alone; D81, PLACEHOLDER). */
+/** Pack size of normal mobs (elites and bosses spawn alone; D83, PLACEHOLDER). */
 export const MOB_PACK_NORMAL = 3;
-/** Normal mobs per def and zone (4 packs of 3; was 10 in D74); elites 2, boss 1 (D81, PLACEHOLDERS). */
+/** Normal mobs per def and zone (4 packs of 3; was 10 in D74); elites 2, boss 1 (D83, PLACEHOLDERS). */
 export const MOB_COUNT_NORMAL = 12;
 
 /**
- * Threat (aggro) table parameters (D81, PLACEHOLDERS, cần game designer duyệt). A mob that takes damage gains threat on the
+ * Threat (aggro) table parameters (D83, PLACEHOLDERS, cần game designer duyệt). A mob that takes damage gains threat on the
  * attacker equal to the damage; it chases the player with the most threat. A switch needs more than `switchRatio` times the
  * current target's threat (no ping-pong between two players). Threat on a player farther than `forgetRadius` tiles from the mob
  * decays by `decayPerS` (fraction per second); entries under `minThreat` are dropped. All threat is cleared when the mob
@@ -305,7 +305,7 @@ export const MOB_THREAT = {
   minThreat: 1,
 } as const;
 
-/** One table per zone: every def of the zone, counts by tier (normal 12 in packs of 3 / elite 2 / boss 1), PLACEHOLDERS (D74, D81). */
+/** One table per zone: every def of the zone, counts by tier (normal 12 in packs of 3 / elite 2 / boss 1), PLACEHOLDERS (D74, D83). */
 export const ZONE_SPAWN_TABLES: readonly ZoneSpawnTable[] = (
   ['bia_rung', 'dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam'] as const
 ).map((zone) => ({

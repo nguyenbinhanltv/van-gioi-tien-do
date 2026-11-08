@@ -57,7 +57,7 @@ const dataSkill = (id: string): SkillDef => skillDefinitions.skills.find((s) => 
 
 class FakeMobs implements MobPort {
   killed: number[] = [];
-  /** threat hook calls (D81): [mobId, attackerId, amount] */
+  /** threat hook calls (D83): [mobId, attackerId, amount] */
   damaged: Array<[number, number, number]> = [];
   constructor(readonly stats = new Map<number, MobCombatStats>()) {}
   onDamage(id: number, attackerId: number, amount: number): void {

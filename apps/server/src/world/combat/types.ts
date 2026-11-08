@@ -29,7 +29,7 @@ export interface MobPort {
   combatStats(id: number): MobCombatStats | undefined;
   /** The mob died: despawn it and schedule its respawn. Returns the new world (like `MobManager.kill`). */
   kill(world: SimWorld, id: number): SimWorld;
-  /** Optional: `attackerId` damaged the living mob `id` for `amount` (threat / aggro, D81). Called once per hit. */
+  /** Optional: `attackerId` damaged the living mob `id` for `amount` (threat / aggro, D83). Called once per hit. */
   onDamage?(id: number, attackerId: number, amount: number): void;
 }
 

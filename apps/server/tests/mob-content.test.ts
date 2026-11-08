@@ -37,7 +37,7 @@ function infos(m: MobManager): ReturnType<MobManager['info']>[] {
   return Array.from({ length: m.size }, (_, k) => m.info(MOB_ID_BASE + k));
 }
 
-describe('spawn layout: tier bands, safe zone, packs (D81)', () => {
+describe('spawn layout: tier bands, safe zone, packs (D83)', () => {
   it('is identical for the same seed and different for another one', () => {
     const a = build(SEED);
     const b = build(SEED);
@@ -112,7 +112,7 @@ describe('spawn layout: tier bands, safe zone, packs (D81)', () => {
   });
 });
 
-describe('threat table (D81)', () => {
+describe('threat table (D83)', () => {
   const tho = mobDefByKey('mob_doc_tho')!;
   const ai = MOB_AI[tho.tier];
   const open = (): TileGrid => TileGrid.fromRows(Array.from({ length: 96 }, () => '.'.repeat(96)));

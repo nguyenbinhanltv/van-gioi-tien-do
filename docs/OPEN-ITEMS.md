@@ -437,7 +437,7 @@ Còn mở / lưu ý:
 - `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
 
-## D81 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09)
+## D83 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09)
 
 1. **Mọi số là tạm, cần game designer duyệt**: băng khoảng cách theo cấp, kích thước bầy 3, số lượng 12/2/1, bán kính bầy 3 ô, `MOB_THREAT` (tỉ lệ đổi mục tiêu 1,1, quên sau 24 ô, giảm 20%/s). docs/10 chưa nói quái đứng ở đâu so với điểm vào.
 2. **Chưa có tên vùng thật của Sơn Môn**: `defaultMobZones` vẫn là bốn góc phần tư của bản đồ thử; cần tọa độ vùng từ level designer (docs/10 §4) thay cho tỉ lệ R.
