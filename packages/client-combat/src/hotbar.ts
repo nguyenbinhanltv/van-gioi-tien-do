@@ -91,6 +91,15 @@ export class Hotbar {
     }
   }
 
+  /** Make a slot's cooldown agree with an authority: `remainingMs` left from `nowMs` (the total stays the skill's cooldown). */
+  setCooldownRemaining(index: number, nowMs: number, remainingMs: number): void {
+    const s = this.slots[index];
+    if (!s) return;
+    const remaining = Math.max(0, remainingMs);
+    this.cdEnd[index] = nowMs + remaining;
+    this.cdStart[index] = this.cdEnd[index]! - Math.max(s.skill.timing.cooldown_ms, remaining);
+  }
+
   /** Reset every cooldown (respawn / testing). */
   reset(): void {
     this.cdEnd.fill(0);

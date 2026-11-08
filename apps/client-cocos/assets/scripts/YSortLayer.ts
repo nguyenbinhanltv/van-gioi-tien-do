@@ -26,6 +26,13 @@ export class YSortLayer {
     this.entries.push({ node, key });
   }
 
+  /** Unregister and destroy an object (an enemy that left the AOI). */
+  remove(node: Node): void {
+    const k = this.entries.findIndex((e) => e.node === node);
+    if (k >= 0) this.entries.splice(k, 1);
+    node.destroy();
+  }
+
   get count(): number {
     return this.entries.length;
   }

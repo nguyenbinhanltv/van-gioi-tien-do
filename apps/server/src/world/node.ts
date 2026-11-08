@@ -34,6 +34,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import { CombatSystem, type CombatOptions, type CombatResult } from './combat/index.js';
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -116,6 +117,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
+  combat?: CombatOptions;
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -185,6 +188,8 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
+  readonly combat: CombatSystem | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -195,20 +200,22 @@ export class WorldNode {
     this.spawnRng = rngFork(rngSeed(seed), 'spawn');
     this.spawn = opts.spawn ?? { i0: n / 2 - 48, j0: n / 2 - 48, side: 96 };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    this.combat = opts.combat
+      ? new CombatSystem(this.ctx, { seed, respawnPoint: () => this.spawnPoint(), ...opts.combat })
+      : null;
   }
 
   // ------------------------------------------------------------------ players
   addPlayer(transport: ClientTransport, accountId: string): number {
     const id = this.nextId++;
-    const [a, r1] = rngFloat(this.spawnRng);
-    const [b, r2] = rngFloat(r1);
-    this.spawnRng = r2;
+    const at = this.spawnPoint();
+    const stats = this.combat?.addPlayer(id);
     this.world = spawnEntity(this.world, {
       id,
-      i: this.spawn.i0 + a * this.spawn.side,
-      j: this.spawn.j0 + b * this.spawn.side,
-      hp: WORLD_CONFIG.PLAYER_MAX_HP,
-      mpMax: WORLD_CONFIG.PLAYER_MAX_MP,
+      i: at.i,
+      j: at.j,
+      hp: stats?.hpMax ?? WORLD_CONFIG.PLAYER_MAX_HP,
+      mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.clients.set(id, {
       id,
@@ -230,7 +237,16 @@ export class WorldNode {
     return id;
   }
 
+  /** A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. */
+  private spawnPoint(): { i: number; j: number } {
+    const [a, r1] = rngFloat(this.spawnRng);
+    const [b, r2] = rngFloat(r1);
+    this.spawnRng = r2;
+    return { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+  }
+
   removePlayer(id: number): void {
+    this.combat?.removePlayer(id);
     if (!this.clients.delete(id)) return;
     this.world = removeEntity(this.world, id);
   }
@@ -318,9 +334,20 @@ export class WorldNode {
       for (const i of c.inbox) inputs.push(i);
       c.inbox.length = 0;
     }
-    const r = step(this.world, inputs, this.ctx, NETWORK.TICK_MS);
+    let simInputs: SimInput[] = inputs;
+    if (this.combat) {
+      const pre = this.combat.preStep(inputs, this.world);
+      simInputs = pre.inputs;
+      for (const res of pre.results) this.sendCombatResult(res);
+    }
+    const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS);
     const t1 = clock();
     this.world = r.world;
+    if (this.combat) {
+      const post = this.combat.postStep(this.world, r.events);
+      this.world = post.world;
+      for (const res of post.results) this.sendCombatResult(res);
+    }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -357,7 +384,8 @@ export class WorldNode {
         case 'cast_ok': {
           this.metrics.castOk++;
           const c = this.clients.get(ev.entityId);
-          if (c)
+          // with combat on, the `skill_result` (with hits) is sent when the cast resolves
+          if (c && !this.combat)
             this.send(c, {
               type: 'skill_result',
               seq: ev.seq,
@@ -475,7 +503,7 @@ export class WorldNode {
           anim: se.anim,
           dir: se.dir,
           hpPct,
-          maxHp: WORLD_CONFIG.PLAYER_MAX_HP,
+          maxHp: this.hpMaxOf(e),
         });
       }
 
@@ -504,8 +532,33 @@ export class WorldNode {
     }
   }
 
+  /** Max HP of an entity: the combat profile's when combat is on, else the skeleton constant. */
+  private hpMaxOf(e: EntityState): number {
+    return this.combat?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+  }
+
+  /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */
+  private sendCombatResult(res: CombatResult): void {
+    const c = this.clients.get(res.entityId);
+    if (!c) return;
+    const hits = [];
+    for (const h of res.hits) {
+      const v = c.visible.get(h.targetId);
+      if (v) hits.push({ targetIndex: v.index, damage: h.damage, flags: h.flags });
+    }
+    this.send(c, {
+      type: 'skill_result',
+      seq: res.seq,
+      reason: res.reason,
+      skillId: res.skillId,
+      readyAtMs: Math.max(0, Math.round(res.readyAtMs)),
+      casterIndex: 0,
+      hits,
+    });
+  }
+
   private hpPct(e: EntityState): number {
-    return Math.max(0, Math.min(127, Math.round((e.hp / WORLD_CONFIG.PLAYER_MAX_HP) * 100)));
+    return Math.max(0, Math.min(127, Math.round((e.hp / this.hpMaxOf(e)) * 100)));
   }
 
   /** 0 idle, 1 run, 2 fly */
