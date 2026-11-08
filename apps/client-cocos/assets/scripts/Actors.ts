@@ -46,12 +46,14 @@ export class PlayerActor {
   readonly body: Node;
   readonly shadow: Node;
   private facingRight = true;
-  /** Holding Shift plays the walk animation while moving; it does not change the movement speed. */
+  /** Holding Shift walks: PLAY-TEST ONLY, speed scaled by WALK_SPEED_FACTOR (see below). */
   walkMode = false;
   /**
-   * Play-test PRESENTATION thresholds only (tiles/s, animation selection; they never change movement speed): below
-   * WALK_SPEED idle, below RUN_SPEED walk, else run. Temporary client values, see docs/OPEN-ITEMS.md section 15.
+   * PLAY-TEST ONLY placeholders, not specified by the docs (docs/08 section 4 gives only the move speed formula; I-08 in
+   * docs/31 tracks 4.5 tiles/s as a placeholder): Shift walk mode speed factor, and the idle/walk/run animation thresholds
+   * (tiles/s: below WALK_SPEED idle, below RUN_SPEED walk, else run). Pending design: docs/OPEN-ITEMS.md section 15.
    */
+  static readonly WALK_SPEED_FACTOR = 0.5;
   static readonly WALK_SPEED = 0.3;
   static readonly RUN_SPEED = 3.2;
   private facing: shared.Direction = 'S';
@@ -79,7 +81,7 @@ export class PlayerActor {
   update(dt: number, frame: { move: TilePos; magnitude: number }): void {
     let speed = 0; // tiles/s actually moved this frame
     if (frame.magnitude > 0) {
-      const step = PlayerActor.SPEED * frame.magnitude * dt;
+      const step = PlayerActor.SPEED * frame.magnitude * (this.walkMode ? PlayerActor.WALK_SPEED_FACTOR : 1) * dt;
       const oi = this.pos.i,
         oj = this.pos.j;
       const ni = this.pos.i + frame.move.i * step;
@@ -101,7 +103,6 @@ export class PlayerActor {
     }
     if (this.chibi) {
       this.chibi.face(this.facing);
-      // Shift (walkMode) only forces the walk ANIMATION; movement speed is unchanged (no walk speed is specified).
       this.chibi.state(
         speed < PlayerActor.WALK_SPEED ? 'idle' : this.walkMode || speed < PlayerActor.RUN_SPEED ? 'walk' : 'run',
       );

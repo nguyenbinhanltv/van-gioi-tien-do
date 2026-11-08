@@ -29,7 +29,7 @@ npm run serve -w client-cocos     # mở http://localhost:7456/?class=phap-tu
 ```
 
 - **Lớp**: tham số URL `?class=the-tu|phap-tu|dan-phu-tu|dao-tu|kiem-tu|thuong-tu` (mặc định `the-tu`), hoặc phím số **1-6** (theo thứ tự trên) để đổi ngay trong game.
-- **Di chuyển**: click-to-move, WASD hoặc joystick cảm ứng như trước; tốc độ di chuyển không đổi. Clip theo tốc độ thực: `idle` dưới 0,3 ô/s, `walk` dưới 3,2 ô/s, `run` từ 3,2 ô/s (ngưỡng trình bày tạm, xem docs/OPEN-ITEMS.md mục 15). WASD/click đi tối đa nên ra `run`; giữ **Shift** chỉ ép clip `walk` (không đổi tốc độ).
+- **Di chuyển**: click-to-move, WASD hoặc joystick cảm ứng như trước. Clip theo tốc độ thực: `idle` dưới 0,3 ô/s, `walk` dưới 3,2 ô/s, `run` từ 3,2 ô/s. WASD/click đi tối đa nên ra `run`; giữ **Shift** để đi bộ (tốc độ ×0,5). Ngưỡng và hệ số đi bộ là **placeholder chỉ để play-test**, chờ thiết kế (docs/OPEN-ITEMS.md mục 15).
 - **Hướng**: 8 hướng từ vector di chuyển (`directionFromTileVector`); 5 hướng vẽ E/SE/S/NE/N, W/SW/NW là bản lật của E/SE/NE (D14). Hướng nào chưa merge thì dùng hướng gần nhất (bước 45°, ưu tiên bản không lật) và HUD ghi `facing X -> nearest Y`. Các hướng đang có của lớp hiện tại hiện trên HUD (`chibi <lớp> [E/SE/S]`); khi merge thêm rig, game tự nhận (dò `resources`, không cần sửa code).
 - Y-sort L3, camera follow và `pos` (tọa độ ô liên tục) giữ nguyên.
 
