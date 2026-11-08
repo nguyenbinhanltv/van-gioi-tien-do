@@ -7,7 +7,7 @@
 import { build } from 'esbuild';
 import ts from 'typescript';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { prepareChibiBundles } from './chibi-bundles.mjs';
@@ -99,4 +99,21 @@ const gen = spawnSync(process.execPath, [join(repo, 'tools/dragonbones-testrig/s
 if (gen.status !== 0) throw new Error('dragonbones-testrig generation failed');
 // 4. chibi runtime bundles (D71): per-direction Asset Bundles with tiers and clip groups, compress presets in the metas
 prepareChibiBundles({ root, repo });
-console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles');
+// 5. owner-provided Gemini props + item icons (assets-src/gemini, Git LFS): keyed / trimmed / packed by tools/procgen, copied next to
+// the tilemap. `--allow-missing`: without the LFS sources the client falls back to its placeholder props and text bag tiles.
+{
+  const g = spawnSync(process.execPath, [join(procgen, 'scripts/gemini_assets.js'), '--allow-missing'], {
+    stdio: 'inherit',
+  });
+  if (g.status !== 0) throw new Error('gen:gemini failed');
+  const gdir = join(procgen, 'out/gemini');
+  for (const f of ['gemini.json', 'atl_prop_2x_0.png', 'atl_prop_1x_0.png', 'atl_gicon_2x_0.png', 'atl_gicon_1x_0.png'])
+    rmSync(join(worldDir, f), { force: true }); // never leave stale art behind
+  if (existsSync(join(gdir, 'gemini.json'))) {
+    copyFileSync(join(gdir, 'gemini.json'), join(worldDir, 'gemini.json'));
+    const sidecar = JSON.parse(readFileSync(join(gdir, 'gemini.json'), 'utf8'));
+    for (const pages of Object.values(sidecar.atlases))
+      for (const p of pages) copyFileSync(join(gdir, 'atlas', p.file), join(worldDir, p.file));
+  }
+}
+console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles + gemini props');

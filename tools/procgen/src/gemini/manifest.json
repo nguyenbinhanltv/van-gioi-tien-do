@@ -1,5 +1,5 @@
 {
-  "_doc": "Owner-provided Gemini exports (assets-src/gemini). target = content size in px @2x (w or h); @1x is half. block = tile offsets from the anchor tile (the tile containing the prop's foot point) that the prop blocks; [] = walk-through decoration. biomes: sect (grass / dirt near the Son Mon), swamp (shoreline), lava, courtyard (fixed buildings). weight = relative scatter frequency. clear = rects (fractions of the keyed content box) erased as source-art artifacts.",
+  "_doc": "Owner-provided Gemini exports (assets-src/gemini). target = content size in px @2x (w or h); @1x is half. block = tile offsets from the anchor tile (the tile containing the prop's foot point) that the prop blocks; [] = walk-through decoration. biomes: sect (grass / dirt near the Son Mon), swamp (shoreline), lava, courtyard (fixed buildings). weight = relative scatter frequency. spacing = free tiles kept around the prop when scattered (default 1; tall trees 2). clear = rects (fractions of the keyed content box) erased as source-art artifacts.",
   "props": {
     "bush_round_01": { "target": { "w": 150 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 5 },
     "fence_wood_segment": { "target": { "w": 190 }, "pivotX": 0.5, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 },
@@ -11,11 +11,11 @@
     "rock_mossy_small": { "target": { "w": 150 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
     "sect_gate_paifang": { "target": { "w": 560 }, "pivotX": 0.5, "block": [[-2, 2], [2, -2]], "biomes": ["courtyard"], "weight": 0 },
     "spirit_herb_patch": { "target": { "w": 170 }, "block": [], "biomes": ["sect"], "weight": 2 },
-    "tree_bamboo_cluster": { "target": { "h": 400 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 3 },
-    "tree_dead_swamp": { "target": { "h": 380 }, "block": [[0, 0]], "biomes": ["swamp"], "weight": 4 },
-    "tree_peach_blossom": { "target": { "h": 440 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 2, "clear": [{ "x": 0.55, "y": 0, "w": 0.2, "h": 0.105 }] },
-    "tree_pine_01": { "target": { "h": 460 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
-    "tree_pine_02": { "target": { "h": 460 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
+    "tree_bamboo_cluster": { "target": { "h": 400 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 3 },
+    "tree_dead_swamp": { "target": { "h": 380 }, "spacing": 2, "block": [[0, 0]], "biomes": ["swamp"], "weight": 4 },
+    "tree_peach_blossom": { "target": { "h": 440 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 2, "clear": [{ "x": 0.55, "y": 0, "w": 0.2, "h": 0.105 }] },
+    "tree_pine_01": { "target": { "h": 460 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
+    "tree_pine_02": { "target": { "h": 460 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
     "well_stone": { "target": { "h": 220 }, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 }
   },
   "icons": ["heal_pill", "breakthrough_pill", "blueprint_white_green", "blueprint_blue_purple", "blueprint_gold_red", "craft_material", "stone_low", "stone_mid", "stone_high"],

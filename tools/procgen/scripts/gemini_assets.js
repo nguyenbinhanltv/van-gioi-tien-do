@@ -103,7 +103,7 @@ function main() {
     r.x2.save(path.join(OUT, 'props_2x', `${name}.png`));
     r.x1.save(path.join(OUT, 'props_1x', `${name}.png`));
     sidecar.props[name] = {
-      w2: r.x2.width, h2: r.x2.height, pivot: r.pivot, block: def.block, biomes: def.biomes, weight: def.weight,
+      w2: r.x2.width, h2: r.x2.height, pivot: r.pivot, block: def.block, biomes: def.biomes, weight: def.weight, spacing: def.spacing || 1,
     };
     console.log(`  props/${name}: ${r.x2.width}x${r.x2.height} @2x, pivot ${r.pivot.x},${r.pivot.y}, sparkle ${r.sparkle.pixels}px`);
   }
