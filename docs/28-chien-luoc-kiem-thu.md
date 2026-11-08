@@ -172,12 +172,4 @@ Quy tắc giữ CI ngắn: (1) cache npm (đã có); (2) vitest chạy song song
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                                                                        | Mặc định đề xuất                           |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| Q1  | Thêm job `integration` (PG service) và job `format` vào CI; `nightly` bằng workflow theo lịch?                                                                 | **Có** (ADR-019); vẫn không CD             |
-| Q2  | `fast-check` cho kiểm thử thuộc tính; `tools/loadbot`; `dependency-cruiser` cho ranh giới?                                                                     | **Có**                                     |
-| Q3  | Không build Cocos trong CI ở MVP; đo thiết bị thủ công trước mốc?                                                                                              | **Có**                                     |
-| Q4  | FPS mục tiêu 60 / sàn 30 cho hạng thấp (hiện tài liệu chưa quy định)                                                                                           | **Có**; chủ dự án duyệt                    |
-| Q5  | Danh sách thiết bị thật (cần chủ dự án cung cấp)                                                                                                               | Chủ dự án cung cấp ≥ 1 máy mỗi hạng ở §7.1 |
-| Q6  | Golden đa trình duyệt (Chromium, Firefox, WebKit) cho `step()` – chạy hằng đêm?                                                                                | **Có**; dùng Playwright                    |
-| Q7  | Replay trên server: docs/14 yêu cầu nút Báo cáo gửi **60 s log chiến đấu gần nhất** nên luôn giữ **vòng đệm 60 s** trong RAM; ghi đầy đủ ra đĩa chỉ khi bật cờ | **Có**                                     |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (28 Q1–Q7). Nội dung gốc của mục này nằm trong lịch sử git.

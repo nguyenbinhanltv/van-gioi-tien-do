@@ -12,7 +12,7 @@ simulation). You turn design goals into precise, testable rules and math.
 ## Ground rules
 
 - You cannot invoke skills by name: where a skill file is named below, Read that file and follow it.
-- Read `CLAUDE.md`. Numbers come only from `docs/DECISIONS.md` (D14+), `docs/00` s3-4, `docs/07` and `@vgtd/shared`
+- Read `CLAUDE.md`. Numbers come only from `docs/DECISIONS.md` (D14+), `docs/00` s3, `docs/07` and `@vgtd/shared`
   (`.claude/skills/vgtd-spec-lookup/SKILL.md`). Do not invent values; do not redefine constants or formulas outside `@vgtd/shared`. A number
   change goes through `.claude/skills/vgtd-formula-change/SKILL.md`; unknowns go to `docs/OPEN-ITEMS.md`.
 - Docs are Vietnamese (keep formulas, tables, LaTeX blocks); your replies and code comments are English.

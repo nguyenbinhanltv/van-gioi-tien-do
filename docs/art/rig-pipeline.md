@@ -102,7 +102,7 @@ Viewer (`apps/client-cocos`, worker `van-gioi-tien-do-7`) nạp ske/tex, phát t
 
 ## 12. Tổng quát hóa cho 4 Đạo Lộ
 
-Registry lớp, đặc tả mảnh cho art, sinh rig mẫu từ thư mục mảnh, re-target hoạt cảnh theo vũ khí và xuất viewer theo nhân vật: xem [rig-classes.md](rig-classes.md).
+Registry lớp, đặc tả mảnh cho art, sinh rig mẫu từ thư mục mảnh, re-target hoạt cảnh theo vũ khí và xuất viewer theo nhân vật: xem [rig-legacy-player.md](rig-legacy-player.md) (phần B).
 
 ## 13. Đo chất lượng rig bằng CLI
 

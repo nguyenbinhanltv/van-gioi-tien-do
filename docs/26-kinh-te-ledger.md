@@ -170,7 +170,7 @@ Giá được **chốt từ bản ghi khóa** trong bước 2, không từ giá 
 
 ### 5.4 Đấu Giá Hội (hủy tiền)
 
-GDD ghi Đấu Giá Hội là kênh **hủy tiền** ([00 §5.1](00-ho-so-tong-hop.md)); chi tiết luật chưa có trong docs → tạm thiết kế khung kỹ thuật, **đề xuất – chờ duyệt**:
+GDD ghi Đấu Giá Hội là kênh **hủy tiền** ([01 §10](01-gdd.md)); chi tiết luật chưa có trong docs → tạm thiết kế khung kỹ thuật, **đề xuất – chờ duyệt**:
 
 - Mỗi phiên đấu giá: vật phẩm do hệ thống hoặc người chơi đưa (khi người chơi đưa: chuyển vào `ESCROW`).
 - Đặt giá: tiền của người đặt giá cao nhất nằm trong `ESCROW` của phiên; bị vượt → hoàn ngay (`ESCROW → ví`) trong cùng giao dịch đặt giá mới (khóa theo thứ tự).
@@ -243,13 +243,4 @@ Ghi chú: M0–M2 phụ thuộc docs game design (nghề luyện đan/chế tạ
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                        | Mặc định đề xuất                                                             |
-| --- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| Q1  | Ba đồng Linh thạch riêng + bút toán đổi (phí 5%) thay vì một đồng quy hạ phẩm? | **Có** (khớp "phí đổi lên phẩm 5%")                                          |
-| Q2  | Làm tròn thuế: `ceil` (thuế làm tròn lên, người bán nhận phần còn lại)?        | **Có**                                                                       |
-| Q3  | Biên giá niêm yết [P_ref/10, P_ref×10] chống thao túng?                        | **Có** (tham số dữ liệu); cần game design duyệt                              |
-| Q4  | Luật Đấu Giá Hội: tỷ lệ hủy tiền, chống sniping, ai được đưa hàng?             | Chờ game design; kỹ thuật dùng khung §5.4                                    |
-| Q5  | Điều chỉnh τ/sửa chữa hằng tuần có tự động áp dụng không?                      | **Không**: tự đề xuất, người duyệt; cờ tính năng cho tự động sau closed beta |
-| Q6  | `CONG_HIEN`, `TIEN_NGOC`, `TOKEN_*` có được chuyển giữa người chơi không?      | **Không** cho cả ba (docs/15 Q2: Tiên Ngọc khóa tài khoản, một chiều)        |
-| Q7  | Tạo `tools/econ-sim` (M0–M1) trước khi cài đặt Economy?                        | **Có**: khóa hệ số sớm, rẻ hơn sửa sau                                       |
-| Q8  | Hạn mức chuyển/ngày và giá trị tối đa mỗi giao dịch trực tiếp (chống RMT)      | Cần game design + vận hành đặt; khung kỹ thuật là tham số                    |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (26 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

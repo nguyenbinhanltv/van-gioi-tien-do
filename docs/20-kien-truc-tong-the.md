@@ -255,11 +255,4 @@ Mỗi bước dùng cùng cổng đã định ở §4; không bước nào đòi
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                                 | Mặc định đề xuất                                                                       |
-| --- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Q1  | MVP dùng modular monolith + World Node trong `worker_threads`, một node duy nhất?                                       | **Có** (ADR-005, ADR-006)                                                              |
-| Q2  | Redis tùy chọn (profile), NATS không dùng trong MVP?                                                                    | **Có**                                                                                 |
-| Q3  | Ngôn ngữ Gateway: giữ TypeScript trong MVP, quyết định Rust/Go sau khi có số đo?                                        | **Có**, kiểm tra ở mốc loadbot ([28 §6](28-chien-luoc-kiem-thu.md))                    |
-| Q4  | Node tối thiểu cho server: 22 LTS (CI hiện chạy 18 và 22)?                                                              | Server yêu cầu **≥ 22**; thư viện dùng chung giữ ≥ 18 vì client-core đang khai báo vậy |
-| Q5  | Trần CCU của 1 World Node: docs/10 đặt mục tiêu closed beta **100 CCU**, tick p99 ≤ 40 ms; giả thiết trần thiết kế ~300 | Dùng 100 làm mục tiêu vận hành, 300 làm dư địa; chốt trần cứng sau loadbot             |
-| Q6  | Có cần hỗ trợ nhiều "kênh/shard" của cùng một bản đồ ngay từ MVP?                                                       | **Không** (một kênh); thêm cột `shard_id` vào `characters` từ đầu để khỏi di trú sau   |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (20 Q1–Q6). Nội dung gốc của mục này nằm trong lịch sử git.

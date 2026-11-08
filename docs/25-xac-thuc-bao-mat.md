@@ -196,13 +196,4 @@ Mọi can thiệp và lý do ghi `audit_log`; người chơi bị ảnh hưởng
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                    | Mặc định đề xuất                                                                            |
-| --- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Q1  | Chính sách mật khẩu theo NIST (10–128 ký tự, không quy tắc thành phần, kiểm danh sách lộ)? | **Có** (ADR-007)                                                                            |
-| Q2  | argon2id m ≥ 19 MiB/t = 2 (sàn), mục tiêu 46 MiB/t = 1, hiệu chỉnh theo máy thật?          | **Có**; chốt số cuối sau đo                                                                 |
-| Q3  | Nơi lưu refresh token trên Web: cookie `HttpOnly` (cần cùng site) hay IndexedDB?           | **Cookie `__Host-` HttpOnly** nếu API cùng site với client; nếu không, IndexedDB + CSP chặt |
-| Q4  | Có yêu cầu email và 2FA ở MVP không?                                                       | Email **tùy chọn**; 2FA ngoài MVP                                                           |
-| Q5  | Quy trình khôi phục tài khoản (quên mật khẩu, SSO mất)                                     | Email liên kết; nếu không có: hỗ trợ thủ công có xác minh                                   |
-| Q6  | Vai trò GM/quản trị và quyền tối thiểu (RBAC)                                              | 3 vai trò: `viewer`, `support`, `admin`; mọi hành động ghi log                              |
-| Q7  | Có kiểm thử xâm nhập độc lập trước closed beta không? Ngân sách?                           | **Có**; chủ dự án quyết ngân sách                                                           |
-| Q8  | Ngưỡng/ nấc xử lý kinh tế (§7.2–7.3) và giới hạn chuyển/ngày                               | Hiệu chỉnh bằng mô phỏng kinh tế ([26 §8](26-kinh-te-ledger.md)); do game design duyệt      |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (25 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

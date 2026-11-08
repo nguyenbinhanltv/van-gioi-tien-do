@@ -28,9 +28,9 @@ session; cross-package needs go through the public `src/index.ts` export.
 
 ## Source of truth (highest first)
 
-1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3/4 and every
+1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3 and every
    doc below, even where the doc text is left verbatim.
-2. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions); D1-D13 mirror section 4.
+2. `docs/00-ho-so-tong-hop.md` section 3 (standard values); the superseded decisions D1-D13 (formerly section 4) are in `docs/DECISIONS.md`.
 3. `@vgtd/shared` (executable form of 1-2; tests reproduce the worked examples in `docs/07-cong-thuc-data-schema.md`).
 4. The other docs (`docs/01`..`docs/08`) for detail. If they conflict with 1-3, they lose.
 
@@ -63,9 +63,10 @@ npm test
 npm run build
 npm run lint
 npm run format:check      # `npm run format` to fix
+npm run docs:links        # relative doc links and docs/ paths in agent files
 ```
 
-CI is GitHub Actions only (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22): ci, typecheck, test, build and lint.
+CI is GitHub Actions only (`.github/workflows/ci.yml`, job `verify`, Node 18 and 22): ci, typecheck, test, build, lint and docs:links.
 Keep it short; there is no CD. `main` has branch protection requiring `verify (18)` and `verify (22)`: wait for both to be
 green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd/shared` after editing schema JSON.
 
@@ -86,6 +87,7 @@ green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd
 ## Where things go
 
 - Open questions, ambiguities, unverified work, missing design areas: `docs/OPEN-ITEMS.md`.
+- Open design questions that need an owner decision (the only home for the old per-doc "Câu hỏi cần chốt" sections; decision gate in `docs/30`): `docs/31-bang-quyet-dinh.md`.
 - Locked decisions and superseded values: `docs/DECISIONS.md` (new row per decision, next free `D<n>`).
 - Package conventions: name `@vgtd/<name>`, `tsconfig.json` extends `../../tsconfig.base.json`, scripts `build` / `test` /
   `typecheck`, `exports` -> `src/index.ts` (skill `vgtd-new-package`).

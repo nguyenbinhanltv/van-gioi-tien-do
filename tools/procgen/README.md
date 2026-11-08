@@ -20,7 +20,7 @@ The art/data builder imports the public shared/character APIs through the
 locked lightweight vite-node runner. It writes `tools/rig/data/kiem-tu.rig.json`
 (a RigSet), a typed idle Clip, and an asset manifest. Atlas pages include
 piece regions for weighted meshes and canonical regions for the bones-only
-fallback skin. Read `docs/art/kiem-tu-rig-spec.md` for units, roles, IK, chains,
+fallback skin. Read `docs/art/rig-legacy-player.md (section A)` for units, roles, IK, chains,
 weights and the coordinated schema contract.
 
 All AI-derived art/data remain placeholders pending art-owner approval and
