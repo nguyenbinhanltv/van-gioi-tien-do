@@ -436,3 +436,10 @@ Còn mở / lưu ý:
 - Thông điệp trong tay người chơi khi rớt (input chưa ack, cast đang bay) bị bỏ: client dựng lại từ trạng thái server sau khi nối. Client Cocos mới đứng yên khi `reconnecting`; chưa có giao diện báo "mất kết nối".
 - `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
+
+## D83 — tín dụng trễ: còn mở
+
+- Xử lý mục 6 của "D79 — túi đồ hiển thị: còn mở" (khách thật bị kick vì máy chủ chậm). Chỉ phủ các guard trong `step()`; **hẹn giờ trong sim vẫn theo giờ sim** (AI quái, hồi sinh, hồi chiêu phía combat do worker 37, thời gian cast): máy chủ quá tải thì thế giới chạy chậm hơn giờ thật nhưng không ai bị phạt. Không "bắt kịp" giờ sim.
+- Chưa có số đo trên máy đích: kiểm bằng test mô phỏng (đồng hồ thật giả). Cần chạy lại bag-smoke trên máy đang bị CPU bão hòa để xác nhận không còn bị kick.
+- Kích thước tín dụng không hiện ra metric / log: nên thêm `lagCreditMs` lớn nhất vào số đo World Node (và cảnh báo vận hành khi một khách có > 1 s tín dụng: máy chủ đang quá tải).
+- Khách nối lại (resume) giữ tín dụng cũ của phiên (mốc lúc vào không đổi); phiên đăng nhập mới bắt đầu từ 0.

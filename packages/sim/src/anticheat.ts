@@ -90,7 +90,8 @@ export function tickAntiCheat(
 
 /** Token bucket for cast packets (10/s). Returns the updated state and whether the packet may pass. */
 export function takeCastToken(ac: AntiCheatState, nowMs: number): { ac: AntiCheatState; ok: boolean } {
-  const refill = ((nowMs - ac.castRefillMs) / 1000) * ANTICHEAT.CAST_RATE_PER_S;
+  // max(0, ...): with lag credit the clock handed in never goes backwards (the node keeps it monotonic), but never refill by a negative amount
+  const refill = (Math.max(0, nowMs - ac.castRefillMs) / 1000) * ANTICHEAT.CAST_RATE_PER_S;
   const tokens = Math.min(ANTICHEAT.CAST_BUCKET, ac.castTokens + refill);
   if (tokens < 1) return { ac: { ...ac, castTokens: tokens, castRefillMs: nowMs }, ok: false };
   return { ac: { ...ac, castTokens: tokens - 1, castRefillMs: nowMs }, ok: true };
