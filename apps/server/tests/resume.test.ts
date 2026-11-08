@@ -334,6 +334,18 @@ async function frames(net: NetClient, ms: number, intent = { dir: 255, mag: 0, f
     last = now;
   }
 }
+/** Run the game loops of `nets` (idle input) until `cond()` holds, or fail after `ms`. */
+async function drive(nets: NetClient[], cond: () => boolean, ms = 15_000): Promise<void> {
+  let last = performance.now();
+  const t0 = last;
+  while (!cond()) {
+    if (performance.now() - t0 > ms) throw new Error('timeout driving the clients');
+    await sleep(16);
+    const now = performance.now();
+    for (const n of nets) n.update(now - last, { dir: 255, mag: 0, flags: 0 });
+    last = now;
+  }
+}
 const dropAll = (s: RunningServer): void => {
   for (const ws of s.gateway.wss.clients) ws.terminate();
 };
@@ -345,34 +357,29 @@ describe('resume through the real gateway', () => {
     const b = client(s, 'res_b');
     await a.connect();
     await b.connect();
-    await frames(a, 600);
-    await frames(b, 600);
+    const sees = (x: NetClient, y: NetClient): boolean => x.remotes().some((r) => r.entityId === y.entityId);
+    // run both game loops until each is synchronised and sees the other (condition-driven: no fixed sleeps, CI machines are slower)
+    await drive([a, b], () => !!a.predictor?.ready && !!b.predictor?.ready && sees(a, b) && sees(b, a));
     const id = a.entityId;
     const posBefore = { ...a.selfPosition()! };
-    expect(b.remotes().some((r) => r.entityId === id)).toBe(true);
     const resumed: boolean[] = [];
     a.events = { onReconnect: (i) => resumed.push(i.resumed) };
 
-    // drop ONLY a's connection (server side terminate of its socket)
-    const wsA = [...s.gateway.wss.clients].find((w) => w !== undefined)!;
-    // identify a's socket: the first connected client belongs to a
-    const sockets = [...s.gateway.wss.clients];
-    sockets[0]!.terminate();
-    void wsA;
+    // drop ONLY a's connection: a connected first, so its server-side socket is the first one
+    [...s.gateway.wss.clients][0]!.terminate();
     await until(() => a.reconnects === 1 && a.status === 'online');
     expect(a.entityId).toBe(id); // the same entity
     expect(resumed).toEqual([true]);
-    await frames(a, 700);
-    await frames(b, 100);
-    expect(a.predictor!.ready).toBe(true);
+    await drive([a, b], () => !!a.predictor?.ready && sees(a, b) && sees(b, a));
     const pos = a.selfPosition()!;
     expect(Math.hypot(pos.i - posBefore.i, pos.j - posBefore.j)).toBeLessThan(0.5); // it stood still while held
     expect(s.world.clients.size).toBe(2); // no duplicate character
-    expect(a.remotes().some((r) => r.entityId === b.entityId)).toBe(true); // AOI re-announced
-    expect(b.remotes().some((r) => r.entityId === id)).toBe(true); // b never saw it leave
+    expect(sees(a, b)).toBe(true); // AOI re-announced
+    expect(sees(b, a)).toBe(true); // b never saw it leave
+    expect(b.remotes().find((r) => r.entityId === id)).toBeDefined();
     a.close();
     b.close();
-  }, 30_000);
+  }, 40_000);
 
   it('after the hold expired the client logs in again (fresh character, resumed=false)', async () => {
     const s = await server(300);
