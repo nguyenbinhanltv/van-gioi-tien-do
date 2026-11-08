@@ -282,6 +282,8 @@ Mặc định cho bộ khung server đầu tiên; mọi mục là **mặc địn
 
 [Bổ sung D75: số ngẫu nhiên của một cast sinh từ PRNG gieo bằng `cast_ok.roll` (luồng `combat` của sim), drops từ luồng `drop` riêng; chỉ số người chơi mặc định Luyện Khí 1 tới khi tiến trình cấp cảnh giới; effect ngoài damage / heal / shield chưa mô phỏng, skill `ground` chưa có điểm ngắm. Chi tiết và giới hạn: `docs/34-combat-server.md`. Cần game designer duyệt khi cân bằng (chí mạng gốc, hồi sinh là đề xuất chưa duyệt).]
 
+[Cập nhật (npm run play, 2026-11-09): cổng mặc định của server tĩnh client đổi từ 7456 sang **8456** (7456 là server preview của Cocos Creator, build headless chiếm cổng đó); CORS mặc định của `npm run dev` nay là `http://localhost:8456` và `http://127.0.0.1:8456`; `npm run play` tự chọn cổng trống kế tiếp khi cổng mặc định bận.]
+
 ## D73 — băng thông snapshot: vùng theo khoảng cách ô + bỏ bản ghi không đổi (orchestrator duyệt 2026-11-08)
 
 Đo P2-2/P2-3 (100 bot cùng thấy 96-99 người): người xấu nhất 8,04-8,67 KB/s so với ngân sách 8 KB/s. **Giữ nguyên ngân sách 8 KB/s**, giảm lượng gửi.
