@@ -2,6 +2,22 @@
 
 Frame-by-frame AI sprite-sheet pipeline for Player bodies (D41, `docs/art/sprite-sheet-pipeline.md`).
 
+### Optional warm-magenta edge cleanup
+
+`slice.spill.asymmetric` extends `despillInterior` to asymmetric red/blue contamination that the legacy
+balanced-magenta test rejects. Example: `"spill": { "asymmetric": { "maxImbalance": 80, "edgeRadius": 2 } }`.
+Both fields are required: `maxImbalance` is the maximum absolute red/blue channel difference (0..255), and
+`edgeRadius` is an integer >=1 measured in **input raster pixels**. With single-pass resampling this is native
+sheet DPI; with the legacy path it is the already normalized raster. Review the radius when changing resampling.
+
+Only the additional asymmetric candidates within that 8-neighbour distance of alpha <128 or the outside
+canvas are eligible. The existing threshold, strength and master-palette protection still apply. Alpha and
+geometry are untouched. Omit the option to retain the exact legacy output; its balanced-magenta interior
+cleanup remains unchanged even when the extension is enabled. The extension preserves asymmetric interior
+pink beyond its radius, but it cannot distinguish a legitimate pink accent at the edge from contamination:
+keep approved pink/purple palette colours protected and inspect the result. Do not use a broad radius to
+conceal repaint, change matte evidence, or certify source/pose defects as fixed.
+
 ### Optional single-pass resampling
 
 `sprite:build --resample bilinear|lanczos3|area` overrides `project.resample`. Omitted or explicit
