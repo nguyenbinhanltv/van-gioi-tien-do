@@ -177,3 +177,5 @@ npm run budget -w @vgtd/procgen   # also plans the bundles and checks loco / bun
 ```
 
 The gate is geometry only (no encoder needed): sizes are the fixed-rate ASTC sizes the Cocos build produces (4x4 for `1x`, 6x6 for `full`). Desktop WebP and real downloads are measured on a build with `npm run perf:p1 -w client-cocos`.
+
+Số liệu mã hóa một trang atlas chibi 2048² (`phaptuchibi_SE_tex.png`, đo bằng `astcenc` và `cwebp` đi kèm Cocos Creator 3.8.8: `astcenc -cl in.png out.astc 6x6 -medium`, `astcenc -tl ...` cho PSNR, `cwebp -q 85 -alpha_q 100 -exact`): PNG 6,37 MB · WebP q85 1,07 MB (35,6 dB) · ASTC 4x4 4,19 MB (41,7 dB) · ASTC 6x6 1,87 MB (35,1 dB) · ASTC 8x8 1,05 MB (31,5 dB). Với tier `1x` ASTC 4x4 một trang 1024² là 1,0 MB.

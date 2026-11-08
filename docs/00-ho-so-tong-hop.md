@@ -148,9 +148,13 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D62: ngoại lệ hẹp của D47 chỉ để sửa head-band, áp dụng mọi lớp/hướng: một lượt scale ROI đầu đồng đều không quá 5%, không xoay/shear, Lanczos3 + feather, pivot chin/nape base đã khóa hoặc đường tiếp giáp đầu–trang phục nhìn thấy khi cả hai bị che; khóa dải base. Nguồn ORIGINAL hoặc đúng một AI head edit khóa master; không nối chồng. AI head replacement tối đa một lần thử/ô, cùng mặt nạ và bằng chứng, giữ thiết kế đã khóa. RGBA ngoài mask giống từng byte, D57 inherited-registration, xem seam 4×, ghi hệ số + SHA mask/provenance và đo lại landmark thật. Tỉ lệ thân/toàn ô D41 và mọi gate giữ nguyên; chi tiết tại D62 và pipeline.]
 
+[Cập nhật D63–D67: stream tier low/high, camera thấy 4–6 chunk, `staticSortBias` trong `@vgtd/shared`, pivot vách `(i+j+1)·16` + keep-out 1 ô, schema tùy chọn `elevation`/`objects[]`; xem `docs/DECISIONS.md`.]
+
 [Cập nhật D68: PRNG mô phỏng là xoshiro128** (4 × uint32, gieo splitmix32) trong `@vgtd/shared`, luồng `combat` nằm trong `stateHash()`; `SkillDef` của `@vgtd/sim` biên dịch từ dữ liệu kỹ năng D49 (cooldown, GCD, MP theo % MP tối đa, tầm, LOS).]
 
 [Cập nhật D69: mặc định mô phỏng/giao thức v1 (khinh công chỉ lưu cờ, bay dạng xung, input vượt ngân sách bị giữ và +1 điểm nghi ngờ, wire float32 + cờ delta, kết quả kỹ năng không kèm sát thương); cảm giác chơi xem lại sau playtest, cần game designer duyệt khi cân bằng.]
+
+[Cập nhật D70: khung `@vgtd/server` (Gateway + World Node): xác thực tên/mật khẩu qua HTTP (scrypt tạm thời thay argon2id, JWT EdDSA 10 phút), bắt tay WS bằng `hello` JSON 5 s, AOI 10 Hz tối đa 120 thực thể, snapshot delta theo băng 20/10/5 Hz, công cụ `loadtest`.]
 
 ## 4. Các quyết định đã bị thay thế
 

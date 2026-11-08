@@ -165,6 +165,18 @@ export function clampElevation(level: number): number {
 export function compareDrawOrder(a: Sortable, b: Sortable): number {
   return a.group - b.group || a.sortY - b.sortY || a.x - b.x || a.id - b.id;
 }
+/**
+ * D65: static objects are nudged slightly *behind* on sortY ties; the bigger the footprint the more, so that
+ *  - an entity (bias 0) standing in the cell directly in front (+j) of a prop is drawn after it
+ *    (the `x` tie-break of compareDrawOrder alone would flip it), and
+ *  - on an exact tie a larger footprint is drawn before a smaller neighbour.
+ * Subtract it from a static object's sortY. Stays far below the 16 px spacing of integer footprint vertices.
+ */
+export const STATIC_SORT_BIAS = 0.01;
+const STATIC_SORT_AREA_BIAS = 0.001;
+export function staticSortBias(footprintArea: number): number {
+  return STATIC_SORT_BIAS + STATIC_SORT_AREA_BIAS * Math.min(footprintArea, 100);
+}
 /** Single comparable number for hot loops: group-major, then Y (x/id tie-breaks still need compareDrawOrder). */
 export function sortKey(group: number, sortY: number): number {
   // sortY of a 4-level map stays far below 2^20 px, so group · 2^21 keeps group-major ordering exact.
