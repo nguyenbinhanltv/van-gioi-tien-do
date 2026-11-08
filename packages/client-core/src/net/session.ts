@@ -115,6 +115,8 @@ export interface NetOptions {
   username: string;
   password: string;
   deps: NetDeps;
+  /** Class to create the character with on its first login: a class path id (`'kiem'`) or its wire id (D82). Ignored for an existing character. */
+  classId?: string | number;
   /** builds the prediction grid from the map size the server announces in hello_ack */
   makeGrid: (mapTiles: number) => CollisionGrid;
   agi?: number;
@@ -127,6 +129,8 @@ export interface NetOptions {
 const WS_OPEN = 1;
 
 interface HelloAck {
+  /** class the server holds for this character (wire id 1..6, D82); 0 = the server did not say */
+  classId: number;
   entityId: number;
   mapTiles: number;
   resumed: boolean;
@@ -149,6 +153,10 @@ export class NetClient {
   /** why the session ended (server error text, close reason, ...) */
   lastError = '';
   entityId = 0;
+  /** Class asked for at the next login (initially `NetOptions.classId`); the scene may set it after a picker, before `connect()`. */
+  classRequest: string | number | undefined;
+  /** class of the local character as the SERVER holds it (wire id 1..6; 0 until the first hello_ack, D82) */
+  classId = 0;
   mapTiles = 0;
   readonly remote: RemoteWorld;
   predictor: Predictor | null = null;
@@ -179,6 +187,7 @@ export class NetClient {
 
   constructor(private readonly o: NetOptions) {
     this.remote = new RemoteWorld(o.interpDelayMs);
+    this.classRequest = o.classId;
     this.bag = new BagModel();
     this.events = o.events ?? {};
   }
@@ -264,12 +273,17 @@ export class NetClient {
     const login = await this.post('/auth/login', cred);
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
-    return this.openSocket({ token: String(login.json.token) });
+    // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
+    return this.openSocket({
+      token: String(login.json.token),
+      ...(this.classRequest !== undefined ? { classId: this.classRequest } : {}),
+    });
   }
 
   /** Take over a (re)connected session: reset everything that belonged to the old connection and go online. */
   private adopt(ack: HelloAck, isReconnect: boolean): void {
     this.entityId = ack.entityId;
+    this.classId = ack.classId;
     this.mapTiles = ack.mapTiles;
     this.resumeToken = ack.resumeToken;
     this.resumeHoldMs = ack.resumeHoldMs;
@@ -311,6 +325,7 @@ export class NetClient {
             if (mapTiles <= 0) return reject(new Error('server did not announce mapTiles'));
             acked = true;
             resolve({
+              classId: typeof m.classId === 'number' ? m.classId : 0,
               entityId: m.entityId ?? 0,
               mapTiles,
               resumed: m.resumed === true,
