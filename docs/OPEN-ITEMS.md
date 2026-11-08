@@ -395,3 +395,12 @@ Còn mở / lưu ý:
 - **Giai đoạn cuối**: tầng 41 (Độ Kiếp viên mãn) không thể đột phá tiếp (Phi Thăng chưa thiết kế).
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).
+
+## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
+
+1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).
+2. **Chưa nối chiến đấu**: PR chiến đấu (`onDrops`) cần adapter `killerId (sim id) → accountId` và `killKey` ổn định (ví dụ `mobId@tick`); chưa có.
+3. **Chưa có giao thức**: client chưa thấy túi đồ / ví (không có thông điệp `inv_*`, `inv_cmd`); thêm sau khi các thay đổi giao thức của 35 và 37 đã merge, tránh va id.
+4. **Chưa có**: trang bị / mặc, độ bền hao theo 07 §7 (mới có API `loseDurability`), sửa chữa (sink `REPAIR`), kho / thư / chợ / ký quỹ, Tiên Ngọc và mọi tiền tệ khác Linh thạch, nhân vật (chủ hiện là tài khoản), `affixes`.
+5. **Lưu trữ thật**: ví thuộc sổ cái và hiện chỉ ở bộ nhớ (mất khi khởi động lại); khóa idempotency chỉ giữ trong tiến trình (docs/26 §4.1: 7 ngày); cần PostgreSQL (docs/23 §4.3-4.4, `item_events` MINT/BURN/MOVE, đối chiếu §3.3), giao dịch đồng thời giữa vật phẩm và sổ cái cho cùng một kill.
+6. **Drop vào túi đầy**: roll không vừa thì cả roll vào hàng chờ (tất cả hoặc không gì); chưa có UI nhắc hay thời hạn hết hạn cho hàng chờ.
