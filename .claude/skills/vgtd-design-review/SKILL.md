@@ -17,7 +17,7 @@ Review is read-only: the output is a report, not edits. Do not decide design que
 Same order as `vgtd-spec-lookup` (read it for the lookup procedure and the doc map):
 
 1. `docs/DECISIONS.md`, entries D14 onward override everything below them.
-2. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions).
+2. `docs/00-ho-so-tong-hop.md` section 3 (standard values); superseded decisions D1-D13 are in `docs/DECISIONS.md`.
 3. `@vgtd/shared` (`packages/shared/src`, tests) and the worked examples in `docs/07-cong-thuc-data-schema.md`.
 4. Detail docs `docs/01`..`docs/08`, then the new `docs/10`..`docs/29`.
 
@@ -34,7 +34,7 @@ specify must not be invented by the doc: it belongs in `docs/OPEN-ITEMS.md`. Doc
    - server, netcode, protocol, data, security, client architecture, ADR-style docs: `checklists/technical-design.md`
 2. **Read the doc by section, not whole.** Docs are Vietnamese and can exceed 40 KB. Use Grep with `^#` (content mode,
    line numbers) to get the outline, then Read ranges with `offset`/`limit`. Never skip a section because the file is
-   large. Read `docs/00` section 3-4 and `docs/DECISIONS.md` once per session.
+   large. Read `docs/00` section 3 and `docs/DECISIONS.md` once per session.
 3. **Completeness**: walk the matching checklist; mark each item PRESENT / THIN / ABSENT with the heading line.
 4. **Numbers**: grep the doc for every number, unit and constant (`grep -n -E '[0-9]'` scoped to table/formula lines,
    or per-topic: tile, chunk, tick, Hz, MB, ms, KB, phẩm, cảnh giới, Ngũ hành). For each, find its owner via

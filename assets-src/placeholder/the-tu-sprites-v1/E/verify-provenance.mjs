@@ -54,7 +54,7 @@ if (tableHeader < 0 || !/^\|(?:\s*[-:]+\s*\|){7}$/.test(lines[tableHeader + 1] |
   failures.push('License file table must have a contiguous Markdown header/separator');
 for (const file of [
   ...walk(base),
-  path.join(repo, 'docs/art/the-tu-sprite-sheets.md'),
+  path.join(repo, 'docs/art/the-tu.md'),
   path.join(repo, 'docs/ASSET-LICENSES.md'),
 ].filter((f) => /\.(json|md|ts|mjs)$/.test(f))) {
   for (const error of inspectSpriteText(readFileSync(file))) {

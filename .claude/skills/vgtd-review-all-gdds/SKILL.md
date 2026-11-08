@@ -14,7 +14,7 @@ Read-only: produce the report, do not edit docs, `@vgtd/shared` or `DECISIONS.md
 **Argument (optional):** `full` (default) · `consistency` (Phase 2 only) · `design-theory` (Phase 3 only) ·
 `since <ref>` (only docs changed since a git ref: `git diff --name-only <ref>..HEAD -- docs`).
 
-Source of truth when two docs disagree, highest first: `docs/DECISIONS.md` (D14 onward) → `docs/00` section 3-4 →
+Source of truth when two docs disagree, highest first: `docs/DECISIONS.md` (D14 onward) → `docs/00` section 3 →
 `@vgtd/shared` → other docs (see `vgtd-spec-lookup`). The lower-authority doc is the one flagged as stale. If two docs of
 the same authority disagree (for example `docs/12` vs `docs/15`), report both and do not pick a winner.
 
@@ -22,7 +22,7 @@ the same authority disagree (for example `docs/12` vs `docs/15`), report both an
 
 1. List what exists: Glob `docs/*.md`. Note every number 01-29 that is absent: a missing doc is reported, not guessed.
 2. For each doc, get the outline: Grep `^#{1,3} ` in content mode with line numbers. Docs are Vietnamese and often over
-   40 KB; read in ranges with `offset`/`limit`. Read `docs/00` section 3-4, `docs/DECISIONS.md`, `docs/OPEN-ITEMS.md`
+   40 KB; read in ranges with `offset`/`limit`. Read `docs/00` section 3, `docs/DECISIONS.md`, `docs/OPEN-ITEMS.md`
    completely first.
 3. For each doc extract a compact fact table as you read, with the line number: constants and numbers, formulas,
    named systems/entities (realms, factions, currencies, items, maps), owned data/tuning knobs, declared dependencies
@@ -42,7 +42,7 @@ Use `game-designer` for Phase 3, `systems-designer` for 2e, `economy-designer` f
 - **2b Rule contradictions.** Same situation, different rules: floors/ceilings, resource ownership, state transitions
   (death, breakthrough, handover), timing (same tick vs async), stacking of statuses or buffs.
 - **2c Stale references and locked values.** Names/numbers cited from another doc must exist there with the same
-  meaning. Check every number against `docs/00` section 3-4 and the D14+ entries in `DECISIONS.md`: values superseded by
+  meaning. Check every number against `docs/00` section 3 and the D14+ entries in `DECISIONS.md`: values superseded by
   a decision but still written in a doc (known hot spots: `docs/06`, `docs/02`, `docs/03` verbatim text that predates
   the decisions) are Major unless the doc carries a `[Cập nhật D<n>: ...]` note, then Minor. Reference to something that
   no doc defines is Blocker; to a planned-but-unwritten doc is Major (name which doc should define it).

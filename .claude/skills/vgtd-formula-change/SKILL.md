@@ -11,8 +11,8 @@ Order matters: docs are the source of truth, code follows. Do not start in code.
 
 1. **Locate** the current definition with the `vgtd-spec-lookup` skill. Note which doc owns it
    (`docs/00-ho-so-tong-hop.md` section 3 names the owner in its last column).
-2. **Docs first.** Add the `docs/DECISIONS.md` entry (see step 6; entries dated after the docs override docs/00 section 3/4).
-   Then edit `docs/00-ho-so-tong-hop.md` section 3 (and section 4 if it supersedes an old value) and the owning
+2. **Docs first.** Add the `docs/DECISIONS.md` entry (see step 6; entries dated after the docs override docs/00 section 3).
+   Then edit `docs/00-ho-so-tong-hop.md` section 3 (superseded old values are recorded only in `docs/DECISIONS.md`) and the owning
    detail doc (most gameplay numbers: `docs/07-cong-thuc-data-schema.md`) with a `[Cập nhật D<n>: ...]` note. Update every worked example whose result changes.
    Keep docs in Vietnamese; mark the change with a short `[Cập nhật ...]` note.
 3. **Code in `@vgtd/shared` only** (`packages/shared/src/constants.ts`, `iso.ts`, `formulas/*`). Never edit a copy in another

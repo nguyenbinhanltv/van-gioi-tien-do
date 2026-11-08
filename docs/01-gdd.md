@@ -1,14 +1,14 @@
 # GDD – MMORPG Tu Tiên "Vạn Giới Tiên Đồ"
 
-> **Nguồn & phạm vi.** Bộ hồ sơ **không có file `.docx` GDD riêng**. GDD gốc (viết khi dự án còn định hướng 3D / UE5) chỉ được **tóm tắt** trong [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) (§1, §2, §5.1) và được lượng hóa trong [07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md). Bản này **dựng lại từ các nguồn đó** rồi **thiết kế bổ sung** những phần còn thiếu theo yêu cầu của chủ dự án.
+> **Nguồn & phạm vi.** Bộ hồ sơ **không có file `.docx` GDD riêng**. GDD gốc (viết khi dự án còn định hướng 3D / UE5) chỉ được **tóm tắt** trong [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) (§1; các bản tóm tắt cũ đã gỡ, xem lịch sử git) và được lượng hóa trong [07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md). Bản này **dựng lại từ các nguồn đó** rồi **thiết kế bổ sung** những phần còn thiếu theo yêu cầu của chủ dự án.
 >
 > **Chú thích đánh dấu (dùng xuyên suốt):**
 >
 > - _[Giữ nguyên]_ — nội dung sống sót từ bản dựng lại trước, đã áp dụng toàn bộ [DECISIONS.md](DECISIONS.md) (D1–D13).
 > - _[Thiết kế mới – chờ duyệt]_ — phần mới, **chưa có trong tài liệu nguồn**; mọi con số trong các phần này là **Đề xuất – chờ duyệt** trừ khi ghi rõ nguồn (07 / `@vgtd/shared`).
-> - _[Cập nhật §4: …]_ — chỗ khác GDD gốc do áp dụng [00 §4](00-ho-so-tong-hop.md).
+> - _[Cập nhật §4: …]_ — chỗ khác GDD gốc do áp dụng [DECISIONS D1–D13](DECISIONS.md).
 >
-> **Thứ bậc căn cứ:** [DECISIONS.md](DECISIONS.md) (D14 trở đi) > [00 §3–§4](00-ho-so-tong-hop.md) > [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` (số liệu gameplay) > GDD này. Nếu GDD mâu thuẫn với các mục đứng trước thì GDD sai. Phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md). Hệ phái và kỹ năng: [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md). Mảng còn chưa thiết kế: [OPEN-ITEMS.md](OPEN-ITEMS.md).
+> **Thứ bậc căn cứ:** [DECISIONS.md](DECISIONS.md) (D14 trở đi) > [00 §3](00-ho-so-tong-hop.md) > [07](07-cong-thuc-data-schema.md) / `@vgtd/shared` (số liệu gameplay) > GDD này. Nếu GDD mâu thuẫn với các mục đứng trước thì GDD sai. Phạm vi closed beta: [10-mvp-scope.md](10-mvp-scope.md). Hệ phái và kỹ năng: [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md). Mảng còn chưa thiết kế: [OPEN-ITEMS.md](OPEN-ITEMS.md).
 
 ## 1. Tầm nhìn & trụ cột _[Thiết kế mới – chờ duyệt]_
 
@@ -423,22 +423,4 @@ Nguyên tắc: **không rớt cảnh giới lớn** (00), không mất trang b�
 
 ## Câu hỏi cần chốt
 
-Mỗi dòng: câu hỏi → **mặc định đề xuất** (sẽ dùng nếu không có phản hồi).
-
-| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                                                                                              |
-| --- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| G1  | Ba mức hậu quả Lôi Kiếp "Nhẹ / Trung / Nặng" của GDD gốc có nội dung gì? (07 §3 chỉ dẫn "như trong GDD", GDD gốc không còn.) | Dùng bảng 5.4 ở trên; chủ dự án đối chiếu nếu còn bản gốc.                                                                    |
-| G2  | Thứ tự kiếp / roll: roll Thiên Mệnh **trước** Lôi Kiếp (thất bại rẻ sớm) hay **sau**?                                        | **Roll trước** (5.2).                                                                                                         |
-| G3  | Thua Tâm Ma có tính `n_fail` (pity) không?                                                                                   | **Không** (chống nạp pity cố ý).                                                                                              |
-| G4  | Dải phe theo Nghiệp Lực (14 §3.2: ±300, −700) — đã thống nhất theo 14; còn lại là Đạo Tâm ở 8.3 (G14).                       | Theo 14.                                                                                                                      |
-| G5  | Ma đạo có bị cấm vào Sơn Môn Chính đạo? Ở beta (không có Ma sect) người rớt K ≤ −700 sẽ kẹt?                                 | Không cấm; chỉ suy yếu nhẹ. Ma tông môn làm sau beta.                                                                         |
-| G6  | Linh Mạch: 5 phẩm (07 §5 công thức ρ) hay 6 phẩm (02 §2 vẽ 6)?                                                               | Giữ **5 phẩm** cho công thức; phẩm 6 dành cho Linh Mạch Tâm đặc biệt sau này — cần chủ dự án xác nhận để cập nhật 02 hoặc 07. |
-| G7  | Tiên Ngọc: mua bằng tiền thật? tặng? giao dịch được giữa người chơi?                                                         | Beta tắt; sau beta bán cosmetic + tiện lợi, không giao dịch, không đổi sang Linh thạch.                                       |
-| G8  | Sau Phi Thăng: Trọng sinh giữ hay roll lại Linh căn? Mức Đạo Vận?                                                            | Roll lại có đảm bảo ≥ 1 lần reroll; Đạo Vận ≤ +5% tốc độ tu mỗi kiếp.                                                         |
-| G9  | Đấu Giá Hội hủy 100% giá thắng (vật do hệ thống đưa vào) có chấp nhận được?                                                  | Có.                                                                                                                           |
-| G10 | Số nhân vật mỗi tài khoản? Có đổi tên / xóa?                                                                                 | 3 nhân vật / tài khoản; đổi tên 1 lần miễn phí; xóa có chờ 7 ngày.                                                            |
-| G11 | Có "Cải Căn" (đổi Linh căn) không?                                                                                           | Chuỗi nhiệm vụ hiếm, 1 lần / kiếp, ngoài beta.                                                                                |
-| G12 | Mục tiêu giờ chơi bảng 3.4 (411 giờ ≈ 12 tháng ở 8 giờ/tuần) có phải nhịp mong muốn?                                         | Giữ; cần mô phỏng (OPEN-ITEMS #7) để chỉnh.                                                                                   |
-| G13 | Vạn Bảo Lâu: có giới hạn biên giá niêm yết quanh giá trung bình tuần không (chống thao túng / rửa tiền)?                     | Có: giá niêm yết trong khoảng 50% – 200% giá trung bình 7 ngày của vật phẩm đó.                                               |
-| G14 | Lợi thế phe (Đạo Tâm tối đa, có hay không bonus +% hấp thu cho Tà / Ma) — 14 §3.2 nói phe không tạo hiệu ứng mạnh.           | Chỉ Đạo Tâm tối đa như 8.3; không thêm bonus hấp thu / rơi đồ.                                                                |
-| G15 | Số Trận Nhãn: 3 (14 §5.1) hay 5 (04 §5)?                                                                                     | Theo 14 (3) cho gameplay; sửa 04 hoặc ghi chú.                                                                                |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (G1–G15). Nội dung gốc của mục này nằm trong lịch sử git.
