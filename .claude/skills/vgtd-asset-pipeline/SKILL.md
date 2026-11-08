@@ -6,7 +6,7 @@ description: Generate, validate, pack, compress or import game assets for Vạn 
 # Asset pipeline
 
 Authoritative numbers live in docs, not here. Read them before deciding anything:
-`docs/00-ho-so-tong-hop.md` section 3 (budgets, atlas, compression, icon rows) and section 4,
+`docs/00-ho-so-tong-hop.md` section 3 (budgets, atlas, compression, icon rows) and the D1-D13 rows of `docs/DECISIONS.md`,
 `docs/02-asset-matrix-2d.md` (bundles, formats, initial-load table), `docs/06-toi-uu-render.md` (RAM and initial package budgets,
 memory per format), `docs/05-ui-ux-icon.md` (icons, 9-slice), `docs/04-tilemap.md`, `docs/03-nhan-vat-quai-vat.md`.
 Grid, chunk, layer and direction constants come from `@vgtd/shared`; asset code must not redefine them.

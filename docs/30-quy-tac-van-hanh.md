@@ -7,7 +7,7 @@
 
 1. **Tự động hóa việc làm, không tự động hóa quyền quyết định.** 24/7 nghĩa là luôn có việc không bị chặn để làm tiếp; không có nghĩa là agent tự chốt các câu hỏi thiết kế/pháp lý/tiền bạc.
 2. **Thiết kế đứng trước cài đặt** (quyết định của chủ dự án, epic #64): không viết code cho phần còn có dòng "Chặn" chưa được chốt ở `docs/31-bang-quyet-dinh.md`.
-3. **Nguồn sự thật:** DECISIONS (D14+) > docs/00 §3–§4 > `@vgtd/shared` > docs khác. Không bịa số gameplay; thiếu thì ghi vào `docs/OPEN-ITEMS.md`.
+3. **Nguồn sự thật:** DECISIONS (D14+) > docs/00 §3 > `@vgtd/shared` > docs khác. Không bịa số gameplay; thiếu thì ghi vào `docs/OPEN-ITEMS.md`.
 4. **Mọi thứ phải kiểm chứng được:** không báo "xong" nếu chưa chạy bộ kiểm tra; báo cả thất bại và phần bỏ qua.
 
 ## 1. Điều kiện dừng: "MVP hoàn thiện" nghĩa là gì

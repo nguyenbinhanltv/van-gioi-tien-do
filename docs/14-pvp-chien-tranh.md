@@ -235,14 +235,4 @@ Instance chiến tranh là một **World Node chuyên dụng**. Kiểm chứng t
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                 | Mặc định đề xuất                                                        |
-| --- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Q1  | Ngưỡng phe Chính ≥ +300, Tà −699…−300, Ma ≤ −700 (§3.2), và bảng ΔK §3.3                | Dùng như đề xuất; chỉ danh hiệu, không thêm buff mới ngoài 07           |
-| Q2  | Có rơi đồ trong vùng PK cho Tà / Ma (10% / 25%) hay bỏ hẳn rơi đồ ở MVP?                | Có, như §3.4 (đúng với GDD "rơi đồ theo nghiệp"); tắt được bằng dữ liệu |
-| Q3  | Chuẩn hóa đấu trường: Viên Mãn + trang bị tối đa +30%                                   | Dùng như §4.1                                                           |
-| Q4  | Giờ chiến tranh mặc định Thứ Bảy 20:00–21:30 UTC+7 và 1 cửa sổ mỗi tuần                 | Giữ; cân nhắc 2 cửa sổ nếu server đông                                  |
-| Q5  | Chiếm Linh Mạch chỉ thưởng ρ + thẩm mỹ (không có thu nhập Linh thạch thụ động)          | Có; thêm nguyên liệu "Linh Tinh" hằng ngày nếu thiếu động lực           |
-| Q6  | Cùng hàng chờ đấu trường cho mọi nền tảng, tách hàng nếu chênh thắng > 5 điểm phần trăm | Có                                                                      |
-| Q7  | Giá trị khởi điểm F₀ = 10.000 và cọc tuyên chiến (30% hủy)                              | Dùng làm mốc mô phỏng                                                   |
-| Q8  | Mùa đấu trường 8 tuần có cần đồng bộ với Battle Pass hay độc lập?                       | Đồng bộ (đơn giản vận hành)                                             |
-| Q9  | Có mở PvP trong các vùng bí cảnh khác ngoài Rừng Độc ở MVP không?                       | Không; chỉ Rừng Độc `pvp = true`                                        |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (14 Q1–Q9). Nội dung gốc của mục này nằm trong lịch sử git.

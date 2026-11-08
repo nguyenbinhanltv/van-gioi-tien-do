@@ -6,12 +6,12 @@
 
 ## 1. Cách đọc
 
-| Trạng thái                       | Ý nghĩa                                                                                                       |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Đã chốt**                      | Có trong DECISIONS.md hoặc 00 §3–4; không đổi ở đây                                                           |
-| **Có trong tài liệu gốc**        | Được nêu trong [08](08-server-architecture.md)/02–07 (hiệu lực theo 00 §2) nhưng chưa có dòng DECISIONS riêng |
-| **Đề xuất – chờ duyệt**          | Quyết định mới do bộ tài liệu 20–28 đề xuất; chưa có hiệu lực                                                 |
-| **Chờ xác nhận (từ PR đang mở)** | Điểm mơ hồ phát hiện khi cài đặt, cần chủ tài liệu trả lời (Phụ lục A–B)                                      |
+| Trạng thái                       | Ý nghĩa                                                                                                                                      |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Đã chốt**                      | Có trong DECISIONS.md hoặc 00 §3–4; không đổi ở đây                                                                                          |
+| **Có trong tài liệu gốc**        | Được nêu trong [08](08-server-architecture.md)/02–07 (hiệu lực theo 01–08 (bản đồ ở [README](README.md))) nhưng chưa có dòng DECISIONS riêng |
+| **Đề xuất – chờ duyệt**          | Quyết định mới do bộ tài liệu 20–28 đề xuất; chưa có hiệu lực                                                                                |
+| **Chờ xác nhận (từ PR đang mở)** | Điểm mơ hồ phát hiện khi cài đặt, cần chủ tài liệu trả lời (Phụ lục A–B)                                                                     |
 
 Mỗi ADR: **Bối cảnh → Quyết định → Phương án khác → Hệ quả**, ở dạng rút gọn một dòng/bảng; lập luận đầy đủ nằm ở tài liệu được link.
 
@@ -191,10 +191,4 @@ Không phải yêu cầu của nhiệm vụ này nhưng ảnh hưởng thiết k
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                                                                                                          | Mặc định đề xuất                                                                               |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| Q1  | Chấp nhận **toàn bộ** ADR-005…025 như đề xuất, hay duyệt từng nhóm (server 005–009, dữ liệu 010–012, mạng 013–014, client 015–017, vận hành 018–019, nhân vật 020–023, kinh tế/bảo mật 024–025)? | Duyệt theo nhóm; nhóm chặn cài đặt: 005, 007, 010, 011, 012, 013                               |
-| Q2  | ADR-010 (PRNG xoshiro128\*\*) có thay thế mulberry32 của PR #10 không?                                                                                                                           | **Có** (trước khi PR #10 hợp nhất)                                                             |
-| Q3  | Ai là chủ art để xác nhận ADR-020, ADR-021, điểm A.0 #4, #6b, #8?                                                                                                                                | Chủ dự án chỉ định                                                                             |
-| Q4  | Số `D<n>` tiếp theo khi ghi vào DECISIONS.md: bắt đầu từ **D32** (D1–D31 đã dùng), theo thứ tự duyệt?                                                                                            | **Có**                                                                                         |
-| Q5  | Có sửa trực tiếp 03/06/08 (erratum) hay chỉ giữ trong DECISIONS cho tới khi nhóm tài liệu game design xong?                                                                                      | Giữ trong DECISIONS trước; cập nhật tài liệu gốc bằng một PR docs riêng sau khi docs 10–19 vào |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (29 Q1–Q5). Nội dung gốc của mục này nằm trong lịch sử git.

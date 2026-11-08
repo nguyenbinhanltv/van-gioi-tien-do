@@ -173,11 +173,4 @@ Chi tiết ở [26](26-kinh-te-ledger.md). Phần module:
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                            | Mặc định đề xuất                                                             |
-| --- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Q1  | MVP một World Node, không handover; chuẩn bị chữ ký `epoch`/`transferOut`?                         | **Có**                                                                       |
-| Q2  | Chu kỳ lưu trạng thái nhân vật không phải tài sản: 30 s (không Redis)?                             | **Có**; mất tối đa 30 s vị trí/máu khi sập                                   |
-| Q3  | Ngân sách pha trong tick (12 / 10 / 8 / 12 / 8 ms) làm mục tiêu thiết kế, kiểm chứng bằng loadbot? | **Có**                                                                       |
-| Q4  | Khi Economy tạm thời không phản hồi: World hiển thị "đang chờ" và thử lại, không cấp trong RAM?    | **Có**                                                                       |
-| Q5  | Trần người chơi mỗi bản đồ: docs/10 đặt mục tiêu closed beta 100 CCU                               | Mặc định 100 vận hành, trần cứng 300 (giả thiết), hàng đợi vào game khi vượt |
-| Q6  | Kênh Thế giới có lưu lịch sử vĩnh viễn không?                                                      | **Không** (chỉ vòng đệm RAM 200 tin) – giảm rủi ro dữ liệu cá nhân           |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (22 Q1–Q6). Nội dung gốc của mục này nằm trong lịch sử git.

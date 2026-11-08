@@ -1,12 +1,12 @@
 # Bảng quyết định (docs/31)
 
-> **Trạng thái:** đề xuất, chờ chủ dự án điền cột "Quyết định". Nguồn: rà soát chéo docs 00–29 và báo cáo thiết kế (ngoài repo) 2026-11-05. Quy tắc dùng bảng này: [30-quy-tac-van-hanh.md](30-quy-tac-van-hanh.md) §4–§5. Cột "Ngày" ghi ngày chốt. Quyết định đã điền phải được ghi vào [DECISIONS.md](DECISIONS.md) từ D32 trước khi cài đặt.
+> **Trạng thái:** đề xuất, chờ chủ dự án điền cột "Quyết định". Nguồn: rà soát chéo docs 00–29 và báo cáo thiết kế (ngoài repo) 2026-11-05. Quy tắc dùng bảng này: [30-quy-tac-van-hanh.md](30-quy-tac-van-hanh.md) §4–§5. **Nguồn duy nhất của câu hỏi mở** của docs 01 và 10–29: mục "Câu hỏi cần chốt" trong các tài liệu đó chỉ còn là con trỏ về đây. Cột "Ngày" ghi ngày chốt. Quyết định đã điền phải được ghi vào [DECISIONS.md](DECISIONS.md) từ D32 trước khi cài đặt.
 
 **Cách dùng.** Mỗi dòng là một quyết định đã **loại trùng** từ mọi mục "Câu hỏi cần chốt" của docs 01 (G*), 10 (M*), 11 (S*), 12–19 (Q*), 20–29 (Q*), các đề xuất ADR 005–025 (docs/29), các điểm mơ hồ trong mô tả PR #7, #9, #10, #66, #67 và các mâu thuẫn X1–X12 (OPEN-ITEMS §8). Cột "Câu hỏi" ghi **mọi ID nguồn đã gộp**. **Cột "Quyết định" để trống** cho chủ dự án. "Đề xuất mặc định" là giá trị tài liệu sẽ dùng nếu không có phản hồi (không phải quyết định). Quyết định đã chốt sẽ vào `DECISIONS.md` từ **D32**.
 
 **Mức ưu tiên:** _Chặn P1_ = phải chốt trước/trong client slice; _Chặn P2_ = trước server/netcode; _Chặn P3_ = trước core loop; _Chặn P4_ = trước nội dung & xã hội; _Trước beta_ = trước closed beta (P5); _Sau_ = có thể để sau beta. (Ngoài ba mức yêu cầu – chặn P1 / chặn P3 / sau – bảng tách thêm P2, P4 và "Trước beta" để chính xác hơn.)
 
-**Đã đóng, không cần quyết:** 16 Q3 (đan áp dụng cho tiểu cảnh → D19); 27 Q1 (tên sổ cái → theo 26, đã sửa ở PR #72); 29 Q4 (số D kế tiếp = D32). Toàn bộ D1–D31 đã khóa.
+**Đã đóng, không cần quyết:** 16 Q3 (đan áp dụng cho tiểu cảnh → D19); 27 Q1 (tên sổ cái → theo 26, đã sửa ở PR #72); 29 Q4 (số D kế tiếp = D32). Toàn bộ D1–D31 đã khóa. Các quyết định từ D32 trở đi chỉ nằm ở [DECISIONS.md](DECISIONS.md); nhiều câu hỏi bên dưới đã được một mục D đó trả lời nên cột "Quyết định" ở đây có thể lỗi thời, và DECISIONS luôn thắng.
 
 ## A. Phạm vi, vòng lặp, cảnh giới
 
@@ -239,3 +239,14 @@
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------- | ---------- | ---------- | ---- |
 | K-01 | Cho phép làm P2 (vd. PR #10 sau ADR-010) song song với P1 trước khi P1 đạt tiêu chí thoát? (docs/10 §11–§12 chỉ cho P4 song song một phần) | Không / có, theo từng PR được duyệt | **Không**: P2 mở sau khi P1 đạt tiêu chí thoát (docs/10)    | Có → cần dòng DECISIONS (D32+) và `[Cập nhật D<n>]` ở docs/10 §11–§12 | Chặn P2    |            |      |
 | K-02 | Thêm xác minh pháp lý bởi luật sư (docs/19 Q1) vào cổng ra P5? (không có trong docs/10 §12)                                                | Thêm / giữ nguyên docs/10           | Đề xuất thêm vì phát hành cho tester ngoài đội cần xác minh | Thêm → sửa docs/10 §12 bằng DECISIONS                                 | Trước beta |            |      |
+
+## L. Câu hỏi chuyển từ docs 10 và 11
+
+Bốn câu hỏi này có trong mục "Câu hỏi cần chốt" của 10 và 11 nhưng chưa có dòng ở A–K; chuyển nguyên văn khi gỡ mục đó khỏi hai tài liệu. Chưa xếp mức ưu tiên.
+
+| ID   | Câu hỏi (nguồn)                                                                                              | Đề xuất mặc định                                                                        | Quyết định | Ngày |
+| ---- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ---------- | ---- |
+| L-01 | Chế phù / luyện khí (13 §5.2) có vào beta không? (10 M13)                                                    | Không; chỉ luyện đan trong beta.                                                        |            |      |
+| L-02 | Phí và hồi chiêu đổi nhánh công pháp ngoài chiến đấu (D49)? Có khóa theo Cống hiến / đan? (11 S12)           | Miễn phí lần đầu, về sau phí nhỏ bằng Cống hiến; chỉ ngoài chiến đấu và ngoài trận PvP. |            |      |
+| L-03 | Hệ số mô phỏng 4.8 (ETD hệ số 0,5, mob 6 con, boss mẫu) có là mốc cân bằng chính thức không? (11 S13)        | Không: chỉ là mốc kiểm tra; cân bằng cuối cần game designer duyệt + dữ liệu chơi thật.  |            |      |
+| L-04 | Kỹ năng quái / boss dùng chung schema cần thêm `telegraph`, `owner`; mở rộng khi làm nội dung quái. (11 S14) | Mở rộng schema ở PR nội dung quái.                                                      |            |      |

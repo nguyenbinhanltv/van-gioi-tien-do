@@ -253,12 +253,4 @@ Chiều lên: input 30 Hz × 10 B = 300 B/s (+ header WS 6–8 B/khung với m�
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                 | Mặc định đề xuất                                                                                                               |
-| --- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Q1  | Xác thực qua HTTPS riêng (không qua WS); token truyền ở `hello` (ADR-013)?                              | **Có**                                                                                                                         |
-| Q2  | Hai họ mã hóa: Nóng thủ công + Lạnh Protobuf (ADR-013)?                                                 | **Có**                                                                                                                         |
-| Q3  | Chính sách phiên bản: chỉ 1 phiên bản ở MVP, N và N−1 sau MVP?                                          | **Có**                                                                                                                         |
-| Q4  | Ngân sách 8/13/25 KB/s có **gồm** tiêu đề WS + TCP/TLS không? Nếu gồm, cần giảm số thực thể hoặc tần số | Đề xuất: tính **tải trọng ứng dụng** làm ngân sách chính; thêm ngân sách "trên dây" = ×1,15 để quản lý chi phí dữ liệu di động |
-| Q5  | Bản ghi snapshot thêm 1 bit "tuyệt đối" (37–44 bit thay vì 36–43)?                                      | **Chấp nhận**, ghi nhận trong OPEN-ITEMS                                                                                       |
-| Q6  | Giá trị rate limit ở §7 (trừ các giá trị có nguồn 08)                                                   | Chấp nhận làm khởi điểm, hiệu chỉnh sau khi có loadbot                                                                         |
-| Q7  | Khi nào bật WebTransport (điều kiện kích hoạt)?                                                         | Khi p95 RTT Web > 150 ms do mất gói TCP hoặc Safari hỗ trợ ổn định; đo sau closed beta                                         |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (24 Q1–Q7). Nội dung gốc của mục này nằm trong lịch sử git.
