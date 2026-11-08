@@ -20,7 +20,8 @@
     "perf:p1": "node scripts/perf-p1.mjs",
     "test": "vitest run test",
     "combat:smoke": "node scripts/combat-smoke.mjs",
-    "combat:online": "node scripts/combat-online-smoke.mjs"
+    "combat:online": "node scripts/combat-online-smoke.mjs",
+    "progression:online": "node scripts/progression-online-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",

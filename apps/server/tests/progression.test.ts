@@ -155,6 +155,21 @@ describe('tu vi accumulation (docs/07 §5 golden numbers)', () => {
     expect(advanceTuVi(r, 3000, env).exp).toBeCloseTo(995, 10);
     expect(r.exp).toBe(990);
   });
+  it('dev speed multiplier (never a gameplay value) scales the gain and defaults to 1', async () => {
+    const fast = await rig({ exp: 0 }, { devTuViSpeed: 600 });
+    fast.cmd(meditate(1));
+    fast.run(20); // 1 s at 20 Hz: 100 per minute x 600 = 1000 per second = Req(1)
+    expect(fast.svc.recordOf(1)!.exp).toBe(1000);
+    expect(fast.svc.isMeditating(1)).toBe(false);
+    const normal = await rig({ exp: 0 });
+    normal.cmd(meditate(1));
+    normal.run(20);
+    expect(normal.svc.recordOf(1)!.exp).toBeLessThan(2);
+    const bad = await rig({ exp: 0 }, { devTuViSpeed: -5 });
+    bad.cmd(meditate(1));
+    bad.run(20);
+    expect(bad.svc.recordOf(1)!.exp).toBeLessThan(2);
+  });
   it('progress is pushed about once a second, not every tick', async () => {
     const x = await rig({}, {});
     x.cmd(meditate(1));
