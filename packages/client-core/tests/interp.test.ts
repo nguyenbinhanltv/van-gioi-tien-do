@@ -6,7 +6,9 @@ import { DEFAULT_INTERP_DELAY_MS, MAX_INTERP_DELAY_MS, RemoteWorld } from '@vgtd
 const Q = 32;
 const enter = (i: number, j: number): AoiEnterMsg => ({
   type: 'aoi_enter',
-  entities: [{ index: 1, entityId: 7, kind: 0, defId: 0, qi: i * Q, qj: j * Q, anim: 0, dir: 2, hpPct: 100, maxHp: 1000 }],
+  entities: [
+    { index: 1, entityId: 7, kind: 0, defId: 0, qi: i * Q, qj: j * Q, anim: 0, dir: 2, hpPct: 100, maxHp: 1000 },
+  ],
 });
 const snap = (i: number, j: number): SnapshotMsg => ({
   type: 'snapshot',

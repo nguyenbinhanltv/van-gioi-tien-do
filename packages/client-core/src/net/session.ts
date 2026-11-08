@@ -3,7 +3,17 @@
  * (or a test) injects `fetch`, a WebSocket constructor and a clock. The game loop calls `update(dtMs, intent)` every
  * frame and reads `selfPosition()` / `remotes(now)` to draw.
  */
-import { ErrorCode, PROTOCOL_VERSION, decode, encode, type Message, type SelfState } from '@vgtd/protocol';
+import {
+  ErrorCode,
+  PROTOCOL_VERSION,
+  decode,
+  encode,
+  type EnterEntity,
+  type Message,
+  type SelfState,
+  type SkillResultMsg,
+  type SnapshotEntity,
+} from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
 import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
@@ -34,6 +44,20 @@ export interface NetDeps {
 
 export type NetStatus = 'idle' | 'connecting' | 'online' | 'closed';
 
+/**
+ * Callbacks for systems that follow the wire (server-driven combat, HUD, ...). They run synchronously inside the socket
+ * handler, after `NetClient` has applied the message to its own state, so `entityOfIndex()` / `remote` already reflect it
+ * (except `onAoiLeave`, see below). A throwing hook is caught and reported in `NetClient.lastError`; it never breaks the session.
+ */
+export interface NetEvents {
+  onSkillResult?(msg: SkillResultMsg): void;
+  onAoiEnter?(entities: readonly EnterEntity[]): void;
+  /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
+  onAoiLeave?(indices: readonly number[]): void;
+  /** `tick` is the simulation tick (x NETWORK.TICK_MS = server time); `entities` are the records in this snapshot only (unchanged ones are omitted, D73). */
+  onSnapshot?(tick: number, entities: readonly SnapshotEntity[], self: SelfState | null): void;
+}
+
 export interface NetOptions {
   /** e.g. `http://localhost:8080` */
   baseUrl: string;
@@ -44,6 +68,7 @@ export interface NetOptions {
   makeGrid: (mapTiles: number) => CollisionGrid;
   agi?: number;
   interpDelayMs?: number;
+  events?: NetEvents;
 }
 
 const WS_OPEN = 1;
@@ -58,6 +83,8 @@ export class NetClient {
   predictor: Predictor | null = null;
   rttMs = 0;
   snapshots = 0;
+  /** replaceable at any time (e.g. when combat is attached after the session started) */
+  events: NetEvents;
   private ws: SocketLike | null = null;
   private lastSnapshotSeq = 0;
   private acc = 0;
@@ -66,6 +93,20 @@ export class NetClient {
 
   constructor(private readonly o: NetOptions) {
     this.remote = new RemoteWorld(o.interpDelayMs);
+    this.events = o.events ?? {};
+  }
+
+  /** Entity id behind a local (per-client) index, or undefined when that slot is empty. */
+  entityOfIndex(index: number): number | undefined {
+    return this.remote.entities.get(index)?.entityId;
+  }
+
+  private emit(fn: () => void): void {
+    try {
+      fn();
+    } catch (e) {
+      this.lastError = `hook: ${(e as Error).message}`;
+    }
   }
 
   private async post(path: string, body: unknown): Promise<{ status: number; json: Record<string, unknown> }> {
@@ -148,12 +189,18 @@ export class NetClient {
         this.lastSnapshotSeq = msg.seq;
         this.remote.onSnapshot(msg, now);
         if (msg.self) this.onSelf(msg.self);
+        this.emit(() => this.events.onSnapshot?.(msg.tick, msg.entities, msg.self));
         break;
       case 'aoi_enter':
         this.remote.onEnter(msg, now);
+        this.emit(() => this.events.onAoiEnter?.(msg.entities));
         break;
       case 'aoi_leave':
+        this.emit(() => this.events.onAoiLeave?.(msg.indices)); // before removal: indices still resolve
         this.remote.onLeave(msg);
+        break;
+      case 'skill_result':
+        this.emit(() => this.events.onSkillResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
