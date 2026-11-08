@@ -46,6 +46,7 @@ import {
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+import type { InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -144,6 +145,8 @@ export interface WorldNodeOptions {
   playerIdQuarantineMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
+  /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
+  inventory?: InventoryService;
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -218,6 +221,8 @@ export class WorldNode {
   private byId = new Map<number, EntityState>();
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
+  /** inventory + drop sink (D77); null when the node runs without one */
+  readonly inventory: InventoryService | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -231,6 +236,7 @@ export class WorldNode {
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
+    this.inventory = opts.inventory ?? null;
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -276,6 +282,7 @@ export class WorldNode {
       hp: WORLD_CONFIG.PLAYER_MAX_HP,
       mpMax: WORLD_CONFIG.PLAYER_MAX_MP,
     });
+    this.inventory?.onJoin(accountId);
     this.clients.set(id, {
       id,
       accountId,
@@ -306,6 +313,7 @@ export class WorldNode {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    this.inventory?.onLeave(c.accountId);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
   }
