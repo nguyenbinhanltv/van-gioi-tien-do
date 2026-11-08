@@ -24,11 +24,12 @@ import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
 import { chibiStreamer } from './ChibiAssets';
-import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
+import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
 import { ProgressionHud } from './ProgressionHud';
+import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
 
@@ -79,6 +80,11 @@ export class Bootstrap extends Component {
   private online: OnlineSession | null = null;
   /** tu vi panel (D76), only online: the server owns the progression state */
   private progressionHud: ProgressionHud | null = null;
+  /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
+  private classApplied = false;
+  private uiRoot: Node | null = null;
+  private worldRootNode: Node | null = null;
+  private artFrames: ArtFrames | null = null;
   private keyHandlers: { down: (e: KeyboardEvent) => void; up: (e: KeyboardEvent) => void } | null = null;
   /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
   private scriptedWalk: shared.Direction[] | null = null;
@@ -198,6 +204,9 @@ export class Bootstrap extends Component {
     this.marker.active = false;
 
     const hudRoot = newNode('Hud', this.node);
+    this.uiRoot = hudRoot;
+    this.worldRootNode = worldRoot;
+    this.artFrames = art;
     this.combatOn = ['1', 'true'].includes(params.get('combat') ?? '');
     this.hud = new PerfHud(hudRoot, art);
     this.hud.trackTexture(tilesetImage.width, tilesetImage.height);
@@ -213,28 +222,13 @@ export class Bootstrap extends Component {
     this.hud.note = `tier ${this.world.tier}`;
     // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
     if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
-    if (this.combatOn) {
-      let backend: cb.CombatBackend;
-      if (this.online) {
-        // the server decides the class (no class selection on the wire yet: every player is 'kiem'), the HUD must show that kit
-        const online = this.online;
-        const sc = new cb.ServerCombat({ path: 'kiem', send: (m) => online.sendCast(m) });
-        online.attachCombat(sc);
-        backend = sc;
-      } else {
-        backend = createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11));
-      }
-      this.combat = new CombatUi(
-        hudRoot,
-        worldRoot,
-        this.ysort,
-        art,
-        backend,
-        () => this.player.pos,
-        (x, y) => this.rig.clientToUi(x, y),
-        (x, y) => this.rig.clientToWorld(x, y),
+    if (this.combatOn && !this.online) {
+      // offline: the local mock combat runs for the class the player picked with ?class= (or the default body class)
+      this.makeCombatUi(
+        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
       );
     }
+    // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D81)
     this.bagPanel = this.makeBagPanel(hudRoot, art);
     this.input = new InputBridge(
       this.rig,
@@ -242,13 +236,58 @@ export class Bootstrap extends Component {
       this.player,
       art,
       hudRoot,
-      this.combat ? (tile) => this.combat!.pick(tile) : undefined,
+      this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
     if (this.online)
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
     this.rig.follow(this.playerScreen());
-    this.online?.connect();
+    if (this.online) void this.startOnline();
     this.maybeAutotest();
+  }
+
+  private makeCombatUi(backend: cb.CombatBackend): void {
+    this.combat = new CombatUi(
+      this.uiRoot!,
+      this.worldRootNode!,
+      this.ysort,
+      this.artFrames!,
+      backend,
+      () => this.player.pos,
+      (x, y) => this.rig.clientToUi(x, y),
+      (x, y) => this.rig.clientToWorld(x, y),
+    );
+    this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
+  }
+
+  /**
+   * Online start (D81): decide which class to ASK for (`?class=` > what this browser used for the account > the picker), then log in.
+   * The class is a character property the server keeps: whatever it answers in `hello_ack` is what we apply.
+   */
+  private async startOnline(): Promise<void> {
+    const online = this.online!;
+    const q =
+      new URLSearchParams(location.search).get('class') ?? new URLSearchParams(location.hash.slice(1)).get('class');
+    const fromUrl = q ? (shared.parseClass(pathOfChibiId(q) ?? q) ?? null) : null;
+    const asked = fromUrl ?? rememberedClass(online.accountKey) ?? (await pickClass());
+    online.net.classRequest = shared.classWireId(asked);
+    online.connect();
+  }
+
+  /** The server told us the class (hello_ack): remember it, draw the body with its art and build the combat HUD with its kit. */
+  private applyServerClass(): void {
+    const online = this.online;
+    if (!online || this.classApplied || online.net.classId <= 0) return;
+    const path = shared.pathOfClassWireId(online.net.classId);
+    if (!path) return;
+    this.classApplied = true;
+    rememberClass(online.accountKey, path);
+    const chibiId = chibiIdOfPath(path);
+    if (chibiId) this.chibi.setClass(chibiId);
+    if (this.combatOn && !this.combat) {
+      const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
+      online.attachCombat(sc);
+      this.makeCombatUi(sc);
+    }
   }
 
   /**
@@ -311,7 +350,7 @@ export class Bootstrap extends Component {
   private bindPlayTestKeys(): void {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'Shift') this.player.walkMode = true;
-      const n = !this.combatOn && /^[1-6]$/.test(e.key) ? Number(e.key) : 0; // digits are hotbar keys in combat mode
+      const n = !this.combatOn && !this.online && /^[1-6]$/.test(e.key) ? Number(e.key) : 0; // digits are hotbar keys in combat mode; online the server owns the class
       if (n && !e.ctrlKey && !e.metaKey && !e.altKey) this.chibi.setClass(CHIBI_CLASSES[n - 1]!.id);
     };
     const up = (e: KeyboardEvent) => {
@@ -387,6 +426,7 @@ export class Bootstrap extends Component {
     } else {
       this.player.update(dt, frame); // offline (default), or the connection failed / dropped
     }
+    this.applyServerClass();
     this.combat?.update(dt, frame.target);
     if (this.progressionHud) {
       this.progressionHud.update();

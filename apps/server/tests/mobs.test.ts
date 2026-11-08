@@ -22,7 +22,7 @@ import {
   type EntityState,
   type SimWorld,
 } from '@vgtd/sim';
-import { COLLIDER_RADIUS_TILES } from '@vgtd/shared';
+import { COLLIDER_RADIUS_TILES, DEFAULT_CLASS, classWireId } from '@vgtd/shared';
 import {
   MobManager,
   WorldFullError,
@@ -402,7 +402,7 @@ describe('AOI replicates mobs', () => {
     const again = c.msgs.slice(before).flatMap((m) => (m.type === 'aoi_enter' ? m.entities : []));
     expect(again.some((e) => e.entityId === victim.entityId)).toBe(true);
   });
-  it('a node without mobs behaves as before (no monsters, defId 0)', () => {
+  it('a node without mobs behaves as before (no monsters; a player carries its class wire id as defId, D81)', () => {
     const n = new WorldNode({ seed: SEED, mapTiles: 160, spawn: { i0: 78, j0: 78, side: 4 } });
     const c = new Fake();
     n.addPlayer(c, 'a');
@@ -412,6 +412,6 @@ describe('AOI replicates mobs', () => {
     expect(n.mobs).toBeNull();
     const ents = c.msgs.flatMap((m) => (m.type === 'aoi_enter' ? m.entities : []));
     expect(ents.length).toBeGreaterThan(0);
-    for (const e of ents) expect([e.kind, e.defId]).toEqual([0, 0]);
+    for (const e of ents) expect([e.kind, e.defId]).toEqual([0, classWireId(DEFAULT_CLASS)]);
   });
 });

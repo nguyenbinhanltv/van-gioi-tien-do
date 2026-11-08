@@ -7,14 +7,17 @@
  */
 import {
   AOI,
+  DEFAULT_CLASS,
   MOB_ID_BASE,
   NETWORK,
   aoiCentre,
+  classWireId,
   inAoi,
   rngFloat,
   rngFork,
   rngSeed,
   toUW,
+  type PathId,
   type RngState,
 } from '@vgtd/shared';
 import {
@@ -129,6 +132,8 @@ function sameToken(a: string, b: unknown): boolean {
 interface Client {
   id: number;
   accountId: string;
+  /** class of the character (D81); sent as `EnterEntity.defId` of this player and echoed in `hello_ack` */
+  classPath: PathId;
   transport: ClientTransport;
   /** single-use secret that lets this player's NEXT connection resume the session; rotated on every (re)connect */
   resumeToken: string;
@@ -374,10 +379,11 @@ export class WorldNode {
     return this.nextId++;
   }
 
-  addPlayer(transport: ClientTransport, accountId: string): number {
+  /** `classPath`: the character's class (D81), resolved by the gateway from the stored character (`ProgressionService.resolveClass`). */
+  addPlayer(transport: ClientTransport, accountId: string, classPath: PathId = DEFAULT_CLASS): number {
     const id = this.allocateId();
     const at = this.spawnPoint();
-    const stats = this.combat?.addPlayer(id);
+    const stats = this.combat?.addPlayer(id, classPath);
     this.world = spawnEntity(this.world, {
       id,
       i: at.i,
@@ -390,6 +396,7 @@ export class WorldNode {
     this.clients.set(id, {
       id,
       accountId,
+      classPath,
       transport,
       resumeToken: newResumeToken(),
       authStamp: undefined,
@@ -411,6 +418,15 @@ export class WorldNode {
     });
     this.progression?.join(id, accountId, this.world.timeMs);
     return id;
+  }
+
+  /** Class wire id (1..6) of a player entity, 0 for anything that is not a connected player. */
+  classWireIdOf(entityId: number): number {
+    const c = this.clients.get(entityId);
+    return c ? classWireId(c.classPath) : 0;
+  }
+  classPathOf(entityId: number): PathId | undefined {
+    return this.clients.get(entityId)?.classPath;
   }
 
   /** A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. */
@@ -837,7 +853,8 @@ export class WorldNode {
           index,
           entityId: e.id,
           kind: this.mobs?.kindOf(e.id) ?? 0,
-          defId: this.mobs?.defIdOf(e.id) ?? 0,
+          // monsters: their definition id; players: the class wire id (D81, 0 when unknown)
+          defId: this.mobs?.defIdOf(e.id) || this.classWireIdOf(e.id),
           qi,
           qj,
           anim: se.anim,

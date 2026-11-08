@@ -32,6 +32,24 @@ export const CHIBI_CLASSES: readonly ChibiClass[] = [
 ];
 /** The five authored directions; W/SW/NW are always the mirror of E/SE/NE (D14). */
 const AUTHORED: readonly Direction[] = ['E', 'SE', 'S', 'NE', 'N'];
+/** Chibi class id of each playable class path (D81): the server decides the class, the client only maps it to art. */
+const CHIBI_OF_PATH: Readonly<Record<string, string>> = {
+  kiem: 'kiem-tu',
+  phap: 'phap-tu',
+  the: 'the-tu',
+  dan_phu: 'dan-phu-tu',
+  thuong: 'thuong-tu',
+  dao: 'dao-tu',
+};
+/** `CHIBI_CLASSES` id of a class path id (`'kiem'` -> `'kiem-tu'`), or undefined for anything else. */
+export function chibiIdOfPath(path: string): string | undefined {
+  return CHIBI_OF_PATH[path];
+}
+/** Class path id of a chibi class id (`'kiem-tu'` -> `'kiem'`), or undefined. */
+export function pathOfChibiId(id: string): string | undefined {
+  return Object.keys(CHIBI_OF_PATH).find((p) => CHIBI_OF_PATH[p] === id);
+}
+
 export type MoveState = 'idle' | 'walk' | 'run';
 /** Chibi masters are ~208 px tall in a 256 px cell; tiles are 64 px wide, so scale to ~1.3 tiles of height. */
 export const CHIBI_SCALE = 0.42;

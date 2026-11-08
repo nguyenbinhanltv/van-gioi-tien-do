@@ -13,3 +13,4 @@ export * from '../../../packages/shared/src/formulas/cultivation.js';
 export * from '../../../packages/shared/src/formulas/economy.js';
 export * from '../../../packages/shared/src/formulas/skills.js'; // class skill kits (D49) for the combat HUD
 export * from '../../../packages/shared/src/items.js'; // item / currency definitions for the bag panel (D79)
+export * from '../../../packages/shared/src/classes.js'; // class wire ids (D81)
