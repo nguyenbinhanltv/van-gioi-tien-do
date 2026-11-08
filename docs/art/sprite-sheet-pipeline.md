@@ -177,6 +177,17 @@ không cần đổi character API hay chia timeline sự kiện. Cần kiểm ch
 
 ### Chuẩn bị DPI có thể tái lập từ project
 
+Tùy chọn mới: `project.resample` hoặc `sprite:build --resample bilinear|lanczos3|area`.
+Mặc định và `bilinear` giữ nguyên đường xuất cũ và byte cũ. `lanczos3` lọc sinc ba thùy có chống alias;
+`area` tích phân diện tích pixel, đều dùng alpha premultiplied. Khi có `square-cell-dpi-v1`, hai chế độ mới
+giữ ô nguồn ở DPI gốc, ghép phép đổi DPI với scale/căn đã khóa rồi chỉ lấy mẫu hình học **một lần**;
+không tạo ảnh trung gian ô 256 px đã làm tròn màu. Key/despill/palette chạy ở DPI gốc trước lần lấy mẫu cuối.
+Gốc tác giả, calibration và bằng chứng canvas vẫn theo tọa độ logical; sai số làm tròn biên/inset của ô được
+đổi bằng affine tường minh, không fit chiều cao từng khung. Contract ghi `resample`, `preparation.singlePass`;
+`sheetSha1` của chế độ này pin PNG chuẩn bị còn DPI gốc, `rawSha1` vẫn pin nguồn nguyên bản.
+Đổi chế độ phải đo lại đầu, xem matte, chạy toàn bộ QA và capture Cocos; không tự coi nét hoặc spill đã sửa.
+T1 và biến thể cosmetic phải dùng cùng chế độ. Chưa chuyển bất kỳ bộ art đã merge nào sang tùy chọn mới.
+
 Project có sheet sinh ở nhiều DPI khai báo `preparation: { kind: "square-cell-dpi-v1", calibration: "../character-calibration.json" }`. File calibration cung cấp `scale` dương hữu hạn, khóa cho nhân vật. `sprite:build`/`sprite:batch` tự chạy bước chuẩn bị trước khi cắt ô; không cần script ngoài hoặc đường dẫn tạm. Không được khai báo `scale` khác calibration.
 
 Phiên bản này giữ thuật toán assembler Đan/Phù tu: chỉ bỏ viền hàng đen/trong suốt ngoài cùng để phục hồi ô vuông, dung sai ô 1 px và làm tròn crop 3 px; chuyển DPI toàn sheet về ô `CELL_PX`, rồi áp dụng scale nhân vật cố định. Không fit từng khung, không thu nhỏ vì atlas. Lỗi lưới không vuông hoặc thiếu calibration báo `non-reproducible project` trước QA art. Assembler đã chuẩn bị sheet phải bỏ trường `preparation` để không chạy hai lần.
@@ -409,6 +420,37 @@ Crown không tính khối tóc nhô trên sọ; breadth không tính tóc rời.
 INFO contract/backlog/review giữ kind, hai đầu vai, trung điểm, breadth và giá trị master/ô. Vai thiếu/ngoài ô/đường vai
 co thành một điểm, kind/direction không khớp hoặc drift là lỗi cứng. D47/D48 và các cổng foot/canvas giữ nguyên.
 
+## Bổ sung D53: một đầu vai bị che trên master
+
+Chỉ NE/N khi **một đầu vai thật sự bị che trên master đã duyệt** dùng `rear-crown-shoulder-single`.
+Ưu tiên D50 nếu cả hai đầu nhìn thấy; không dùng loại một vai chỉ vì dễ đo. Không sửa master hay chiếu điểm bị che.
+Ví dụ Pháp tu NE: vai trái bị quạt/tóc/ribbon che; crown và vai phải vẫn nhìn thấy.
+
+```json
+{
+  "kind": "rear-crown-shoulder-single",
+  "crown": { "x": 140, "y": 16 },
+  "shoulderTop": { "x": 161, "y": 78 },
+  "breadth": { "left": { "x": 111, "y": 42 }, "right": { "x": 165, "y": 42 } },
+  "occludedSide": "left",
+  "occluder": "approved fan, long hair and ribbon hide the left shoulder"
+}
+```
+
+MasterHead và headEvidence ô dùng cùng kind và cùng occludedSide (`left`/`right`); ô thêm note đã xem.
+`shoulderTop` là **một điểm** vai còn nhìn thấy, không có điểm cho phía bị che. Khoảng cách là
+`shoulderTop.y - crown.y`, phải dương; không lấy khoảng cách Euclid dù x thay đổi. Bề ngang sọ vẫn là khoảng cách
+Euclid giữa hai đầu nhìn thấy. Cả hai ±3% master khóa cùng hướng, tọa độ master resize256/ô aligned256, chỉ số nội bộ clip.
+Occluder bắt buộc là chuỗi chỉ rõ vật che có `fan`, `hair` hoặc `ribbon`; trống hoặc lý do chung như `hidden`/`unknown`
+bị lỗi. Định nghĩa phía bị che không được đổi giữa master/ô. Nếu vai còn lại cũng bị che trong ô, báo ô đó, không bịa điểm.
+Trên cả master và ô, `shoulderTop.x` phải nằm đúng phía còn nhìn thấy so với trung tuyến sọ
+`(breadth.left.x + breadth.right.x) / 2`: lớn hơn nếu `occludedSide:left`, nhỏ hơn nếu `occludedSide:right`.
+Điểm nằm trên trung tuyến hoặc phía bị che bị lỗi. Trên master và ô, độ lệch ngang tuyệt đối còn phải nằm trong
+**0,25–1,25 lần breadth**, gồm hai biên; master NE thật có tỷ lệ khoảng 0,43. Điểm quá sát trung tuyến hoặc quá xa bị
+`head_evidence_invalid`. Kiểm tra vị trí không tự nhận dạng giải phẫu vai; người xem nguồn vẫn
+phải loại điểm ở bàn tay, đầu quạt hoặc điểm tiện đo khác.
+INFO/review hiện trục dọc, vai còn nhìn thấy, phía/lý do bị che, breadth và giá trị master/ô; foot/canvas và scale giữ nguyên.
+
 ## Runtime body/weapon/FX trong Cocos
 
 DragonBonesActor nhận mapping + appearance qua setEquipmentVisuals, chỉ tải các set/direction được chọn và mọi trang atlas
@@ -444,3 +486,29 @@ writeLayerExtraction và buildSpriteLayerSet; API pack trực tiếp đòi calle
 
 Matte, phần khuất và anatomy tay inpaint vẫn phải xem art thật. Ngưỡng difference/contact phải khai báo và duyệt theo
 dữ liệu thật; không coi fixture đúng tuyệt đối là ngưỡng art chung. Xem OPEN-ITEMS và hợp đồng runtime Cocos.
+
+## Phụ kiện cứng che crown ở N — D52 bổ sung D47/D48/D50
+
+Giữ nguyên master đã duyệt. Nếu crown thật sự bị vòng búi tóc/miện cứng che, không gọi cạnh bên/cạnh dưới vòng là crown,
+không chiếu đỉnh sọ. Chỉ hướng N được dùng `rear-base-ornament`; tóc mềm/phồng không phải neo phụ kiện.
+
+```json
+{
+  "kind": "rear-base-ornament",
+  "ornamentAnchor": { "x": 128, "y": 28 },
+  "anchorDefinition": "Điểm thấp nhất nhìn thấy nơi vòng búi tóc cứng tiếp xúc tóc; crown bị vòng che",
+  "skullBase": { "x": 128, "y": 61 },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+Tọa độ chỉ minh họa. `masterHead` ghi định nghĩa neo riêng cho hướng N; evidence ô dùng cùng `anchorDefinition` và thêm
+`note` đã xem, không chuyển sang một điểm khác để đạt gate. Đo Euclid skullBase↔ornamentAnchor và bề ngang sọ tối đa,
+mỗi phép đo phải trong ±3% giá trị master khóa cùng hướng. Neo là điểm thấp nhất **nhìn thấy** nơi phụ kiện **cứng, cố định**
+tiếp xúc tóc; đáy sọ là đường tóc gáy/chẩm nhìn thấy, không phải cổ áo. Người xem xác nhận che khuất và ngữ nghĩa neo;
+công cụ không tự chứng nhận giải phẫu hay độ cứng từ pixel.
+
+Master dùng ô256px sau resize; motion dùng ô output256px aligned, chỉ số nội bộ clip kể cả sheet nhóm. Không khai báo
+crown/chin/shoulderTop giả cho kind này. Thiếu neo/định nghĩa/bề ngang, kind/hướng sai, định nghĩa neo đổi, hoặc một trong hai
+kích thước lệch band đều là lỗi cứng. Contract/backlog/review INFO giữ cả hai điểm, định nghĩa neo, bề ngang và tham chiếu
+master/ô. Quy tắc evidence cho exception/bbox ngoài band, reason posture/secondary-overhang và các cổng foot/canvas không đổi.
