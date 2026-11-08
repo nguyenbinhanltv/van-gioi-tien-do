@@ -8,7 +8,8 @@
 // and draw calls / RAM / chunk count over the walk.
 //
 // 1. (unless --skip-build) builds web-mobile (scripts/build-web.mjs, needs the Cocos editor, see README)
-// 2. serves it and records every file the page requests until the world is playable = the initial package (raw and gzip)
+// 2. serves it and records every file the page requests; the initial package = files first requested until the world is playable
+//    (raw and gzip), the total fetched during the whole run (lazy / streamed assets) is reported separately
 // 3. serves the build on loopback, opens `/?npcs=N&tier=T` in headless Chrome/Edge (puppeteer-core, set CHROME_PATH to
 //    override) and samples `window.__vgtdPerf` (published by PerfHud) twice a second after a warm-up
 // 4. prints a table against the exit criteria and writes <out>/p1-perf.json (default <tmpdir>/vgtd-perf)
@@ -98,14 +99,17 @@ const types = {
   '.png': 'image/png',
   '.css': 'text/css',
   '.wasm': 'application/wasm',
+  '.webp': 'image/webp',
 };
-const served = new Set(); // files the page actually requested (= the startup download)
+const served = new Set(); // files the page actually requested
+const servedAt = new Map(); // file -> ms timestamp of first request (initial vs streamed split)
 const server = createServer((req, res) => {
   const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
   let f = join(webDir, p || 'index.html');
   if (!f.startsWith(webDir) || !existsSync(f)) return void res.writeHead(404).end();
   if (statSync(f).isDirectory()) f = join(f, 'index.html');
   served.add(f);
+  if (!servedAt.has(f)) servedAt.set(f, Date.now());
   res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
   createReadStream(f).pipe(res);
 });
@@ -133,6 +137,7 @@ const browser = await puppeteer.launch({
   ],
 });
 let failures = 0;
+let tPlayable = Infinity;
 const samples = [];
 let meta = {};
 let retained = null; // { startMB, endMB } heap after a forced GC (route runs)
@@ -149,6 +154,7 @@ try {
     timeout: 180000,
     polling: 250,
   });
+  tPlayable = Date.now();
   console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
   await sleep(warmup * 1000);
   const heapAfterGc = async () => {
@@ -176,10 +182,16 @@ if (samples.length === 0) throw new Error('no perf samples collected');
 let rawBytes = 0;
 let gzipBytes = 0;
 const fetched = [];
+let initRaw = 0;
+let initGzip = 0;
 served.forEach((f) => {
   const buf = readFileSync(f);
   rawBytes += buf.length;
   gzipBytes += gzipSync(buf, { level: 6 }).length;
+  if (servedAt.get(f) <= tPlayable) {
+    initRaw += buf.length;
+    initGzip += gzipSync(buf, { level: 6 }).length;
+  }
   fetched.push({ file: relative(webDir, f).replaceAll(sep, '/'), bytes: buf.length });
 });
 fetched.sort((a, b) => b.bytes - a.bytes);
@@ -239,6 +251,8 @@ const result = {
     chunksMax: Math.max(...col('chunks')),
     npcs: Math.max(...col('npcs')),
     loadedMB: Math.max(...col('loadedMB')),
+    initialMBRaw: initRaw / MB,
+    initialMBGzip: initGzip / MB,
     packageMBRaw: rawBytes / MB,
     packageMBGzip: gzipBytes / MB,
     buildOutputMB: buildRaw / MB,
@@ -269,10 +283,10 @@ const rows = [
     flag('gate-fps'),
   ],
   [
-    'Initial package MB fetched (raw / gzip)',
-    `${m.packageMBRaw.toFixed(2)} / ${m.packageMBGzip.toFixed(2)}`,
+    'Initial package MB until playable (raw / gzip)',
+    `${m.initialMBRaw.toFixed(2)} / ${m.initialMBGzip.toFixed(2)}`,
     `<= ${LIMITS.packageMB}`,
-    m.packageMBRaw <= LIMITS.packageMB,
+    m.initialMBRaw <= LIMITS.packageMB,
     true,
   ],
 ];
@@ -283,7 +297,9 @@ for (const [name, value, limit, ok, gates] of rows) {
   );
 }
 console.log(
-  `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
+  `  info  total fetched incl. streamed after playable: ${m.packageMBRaw.toFixed(2)} MB raw / ${m.packageMBGzip.toFixed(2)} MB gzip
+` +
+    `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
     `heap ${m.jsHeapMBMax.toFixed(1)} MB, tex ${m.textureMBMax.toFixed(1)} MB, nodes ${m.nodesMax}, chunks ${m.chunksMax}, loaded ${m.loadedMB.toFixed(2)} MB, fetched ${fetched.length} files, whole build dir ${m.buildOutputMB.toFixed(0)} MB (lazy resources incl.)`,
 );
 if (result.streaming) {

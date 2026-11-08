@@ -15,7 +15,7 @@ Cần Cocos Creator 3.8.8 (`COCOS_CREATOR_PATH`) để build và Chrome/Edge (`C
 
 - **Draw call**: `director.root.device.numDrawCalls`.
 - **RAM**: `performance.memory.usedJSHeapSize` (bật `--enable-precise-memory-info`) cộng bộ nhớ texture GPU `device.memoryStatus.textureSize`. Chưa gồm bộ nhớ native của trình duyệt.
-- **Gói tải đầu**: tổng kích thước (thô và gzip) mọi file mà trang thực sự yêu cầu cho tới khi world chơi được. Thư mục build còn chứa asset `resources` tải lười của trình xem animation (dev-only, ~228 MB) không nằm trong lần tải đầu.
+- **Gói tải đầu**: tổng kích thước (thô và gzip) mọi file mà trang yêu cầu lần đầu **cho tới khi world chơi được**; tổng đã tải trong cả lần chạy (gồm asset stream / tải lười sau đó, ví dụ rig các hướng khác khi đi bộ) in riêng ở dòng `total fetched`. Cổng 25 MB chỉ áp lên gói tải đầu (patch từ worker 39, D71). Thư mục build còn chứa asset `resources` tải lười của trình xem animation (dev-only, ~228 MB) không nằm trong lần tải đầu.
 
 Tham số URL (cũng dùng trên máy thật): `?npcs=N` (mặc định 20, 0 = tắt), `?tier=low|medium|high` (cửa sổ streaming, D63), `?input=touch|pointer`.
 
@@ -65,6 +65,6 @@ Kết quả (headless Chrome + SwiftShader, 1280 × 720, tier `medium`, đi 60�
 
 - Chunk: 25–37 lần dựng và hủy cây trên một vòng, giữ dữ liệu tối đa 44–46 chunk (cửa sổ giữ 7 × 7 + 30 s hold), khung nhìn **không bao giờ thiếu nền**.
 - Rò rỉ: heap giữ lại sau GC đầu / cuối đoạn đo 63,8 → 58,2 MB (placeholder), 62,4 → 65,5 MB (0 NPC), 85,0 → 77,0 MB (chibi); heap thô tăng trong lúc đi là do GC chưa chạy, không phải rò rỉ.
-- **Gói tải đầu vẫn FAIL (31 MB với 0 NPC; 136 MB với NPC chibi)**: khi đi, người chơi quay đủ 5 hướng nên rig chibi của các hướng được nạp lười và tính vào số liệu. Đây là phần việc nén texture / bundle lười của asset budget, không đổi ở đây.
+- **Gói tải đầu vẫn FAIL trên main trước PR #197 (31 MB với 0 NPC; 136 MB với NPC chibi, đo theo định nghĩa cũ = mọi file đã tải trong cả lần chạy)**: khi đi, người chơi quay đủ 5 hướng nên rig chibi của các hướng được nạp lười và tính vào số liệu. Đây là phần việc nén texture / bundle lười của asset budget, không đổi ở đây.
 - Chibi mặc định: RAM 700 MB (đã tăng so với 537 MB trước vì giờ đi hết hướng và nạp hết rig), 108 frame > 50 ms do nạp / upload texture rig (47 ms một lát), không do dựng chunk; vẫn thuộc việc nén texture + nạp lười.
 - Props L3 hiện chỉ rải quanh điểm spawn (bán kính 40 ô, vì mọi object L3 được sort mỗi frame và chưa stream theo chunk); `objects[]` theo chunk (D67) sẽ thay khi procgen phát ra.
