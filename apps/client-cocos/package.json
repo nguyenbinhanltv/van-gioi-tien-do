@@ -1,0 +1,34 @@
+{
+  "$schema": "./.creator/asset-template/schema.json",
+  "_version": "1.0.8",
+  "name": "client-cocos",
+  "uuid": "6f1d0c52-6b0e-4f3a-9d5c-0a1b7c2e4d11",
+  "type": "2d",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "private": true,
+  "scripts": {
+    "prepare:assets": "node scripts/prepare.mjs",
+    "build:web": "node scripts/build-web.mjs",
+    "serve": "node scripts/serve.mjs",
+    "check:yflip": "node scripts/check-yflip.mjs",
+    "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs",
+    "fixture:layers": "node ../../tools/rig/scripts/run-ts.mjs scripts/layer-smoke.ts",
+    "capture": "node scripts/capture.mjs",
+    "capture:play": "node scripts/capture-play.mjs",
+    "perf:p1": "node scripts/perf-p1.mjs",
+    "test": "vitest run test",
+    "combat:smoke": "node scripts/combat-smoke.mjs",
+    "combat:online": "node scripts/combat-online-smoke.mjs",
+    "telegraph:online": "node scripts/telegraph-online-smoke.mjs",
+    "touch:aim": "node scripts/touch-aim-smoke.mjs",
+    "bag:smoke": "node scripts/bag-smoke.mjs",
+    "progression:online": "node scripts/progression-online-smoke.mjs",
+    "class:online": "node scripts/class-online-smoke.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.5",
+    "puppeteer-core": "^23.0.0"
+  }
+}
