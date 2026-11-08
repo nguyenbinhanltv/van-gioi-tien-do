@@ -1,0 +1,142 @@
+#!/usr/bin/env node
+'use strict';
+/**
+ * Owner-provided Gemini exports (assets-src/gemini/{props,items}) -> game sprites + atlases.
+ *   node scripts/gemini_assets.js [--src <dir>] [--out <dir>] [--force] [--allow-missing]
+ *
+ * Output (default out/gemini, git-ignored, regenerated; skipped when the stamp of sources + tool is unchanged):
+ *   props_2x/ props_1x/ icons_2x/ icons_1x/   processed single PNGs (magenta keyed, sparkle removed, trimmed)
+ *   atlas/atl_prop_2x_0.png ... + .json       packed with pipeline/pack_atlas.js (padding + extrude), fed to the budget gate
+ *   gemini.json                               sidecar: per prop pivot / blocked tiles / biomes / frames; per icon frames
+ *
+ * Exit codes: 0 ok (or skipped with --allow-missing when sources are absent / Git LFS pointers) · 3 sources missing ·
+ * 4 a verification failed (sparkle not found / still present, empty sprite).
+ */
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { spawnSync } = require('child_process');
+const { decodePNG } = require('../src/lib/png');
+const G = require('../src/gemini/process');
+const manifest = require('../src/gemini/manifest.json');
+
+const args = process.argv.slice(2);
+const opt = (n, d) => { const i = args.indexOf('--' + n); return i >= 0 ? args[i + 1] : d; };
+const flag = (n) => args.includes('--' + n);
+const root = path.resolve(__dirname, '..');
+const SRC = path.resolve(opt('src', path.join(root, '../../assets-src/gemini')));
+const OUT = path.resolve(opt('out', path.join(root, 'out/gemini')));
+
+const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
+const files = [
+  ...Object.keys(manifest.props).map((n) => ['props', n]),
+  ...manifest.icons.map((n) => ['items', n]),
+];
+const srcPath = (dir, name) => path.join(SRC, dir, `${name}.png`);
+
+function loadSources() {
+  const missing = [];
+  const bufs = new Map();
+  for (const [dir, name] of files) {
+    const f = srcPath(dir, name);
+    if (!fs.existsSync(f)) { missing.push(`${dir}/${name}.png (missing)`); continue; }
+    const b = fs.readFileSync(f);
+    if (!isPng(b)) { missing.push(`${dir}/${name}.png (not a PNG: Git LFS pointer? run git lfs pull)`); continue; }
+    bufs.set(`${dir}/${name}`, b);
+  }
+  return { missing, bufs };
+}
+
+function stampOf(bufs) {
+  const h = crypto.createHash('sha1');
+  for (const k of [...bufs.keys()].sort()) { h.update(k); h.update(bufs.get(k)); }
+  for (const f of ['../src/gemini/process.js', '../src/gemini/manifest.json', __filename, '../pipeline/pack_atlas.js', '../src/lib/png.js']) {
+    h.update(fs.readFileSync(path.resolve(__dirname, f)));
+  }
+  return h.digest('hex');
+}
+
+function pack(dir, name) {
+  const r = spawnSync(
+    process.execPath,
+    [path.join(root, 'pipeline/pack_atlas.js'), '--in', path.join(OUT, dir), '--out', path.join(OUT, 'atlas'), '--name', name, '--padding', '2', '--extrude', '2'],
+    { stdio: 'inherit' },
+  );
+  if (r.status !== 0) throw new Error(`pack_atlas failed for ${name}`);
+  return JSON.parse(fs.readFileSync(path.join(OUT, 'atlas', `${name}.json`), 'utf8'));
+}
+
+function main() {
+  const { missing, bufs } = loadSources();
+  if (missing.length) {
+    const msg = `gemini sources unavailable:\n  ${missing.join('\n  ')}`;
+    if (flag('allow-missing')) { console.warn(`⚠ ${msg}\n  (skipped: --allow-missing)`); return 0; }
+    console.error(`✖ ${msg}`);
+    return 3;
+  }
+  const stamp = stampOf(bufs);
+  const stampFile = path.join(OUT, '.stamp');
+  if (!flag('force') && fs.existsSync(stampFile) && fs.readFileSync(stampFile, 'utf8') === stamp && fs.existsSync(path.join(OUT, 'gemini.json'))) {
+    console.log(`✔ gemini assets up to date (${OUT})`);
+    return 0;
+  }
+  fs.rmSync(OUT, { recursive: true, force: true });
+  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
+
+  const problems = [];
+  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, atlases: {} };
+  const verify = (key, srcBuf, sparkle) => {
+    if (sparkle.components < 1) problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
+    else {
+      // re-run on a fresh copy of the source with the mark removed: nothing may be found a second time
+      const img = decodePNG(srcBuf);
+      G.removeSparkle(img);
+      if (G.removeSparkle(img).components !== 0) problems.push(`${key}: sparkle still present after removal`);
+    }
+  };
+
+  for (const [name, def] of Object.entries(manifest.props)) {
+    const buf = bufs.get(`props/${name}`);
+    const r = G.processProp(decodePNG(buf), def.target, { clear: def.clear });
+    verify(`props/${name}`, buf, r.sparkle);
+    if (def.pivotX !== undefined) r.pivot.x = def.pivotX;
+    r.x2.save(path.join(OUT, 'props_2x', `${name}.png`));
+    r.x1.save(path.join(OUT, 'props_1x', `${name}.png`));
+    sidecar.props[name] = {
+      w2: r.x2.width, h2: r.x2.height, pivot: r.pivot, block: def.block, biomes: def.biomes, weight: def.weight,
+    };
+    console.log(`  props/${name}: ${r.x2.width}x${r.x2.height} @2x, pivot ${r.pivot.x},${r.pivot.y}, sparkle ${r.sparkle.pixels}px`);
+  }
+  for (const name of manifest.icons) {
+    const buf = bufs.get(`items/${name}`);
+    const r = G.processIcon(decodePNG(buf), manifest.iconSize2x);
+    verify(`items/${name}`, buf, r.sparkle);
+    r.x2.save(path.join(OUT, 'icons_2x', `${name}.png`));
+    r.x1.save(path.join(OUT, 'icons_1x', `${name}.png`));
+    sidecar.icons[name] = {};
+    console.log(`  items/${name}: ${r.x2.width}px @2x, sparkle ${r.sparkle.pixels}px`);
+  }
+  if (problems.length) {
+    console.error(`✖ verification failed:\n  ${problems.join('\n  ')}`);
+    return 4;
+  }
+
+  for (const [dir, atlasName, kind] of [
+    ['props_2x', 'atl_prop_2x', 'props'], ['props_1x', 'atl_prop_1x', 'props'],
+    ['icons_2x', 'atl_gicon_2x', 'icons'], ['icons_1x', 'atl_gicon_1x', 'icons'],
+  ]) {
+    const a = pack(dir, atlasName);
+    const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
+    sidecar.atlases[atlasName] = a.pages.map((p) => ({ file: p.file, width: p.width, height: p.height }));
+    for (const [n, f] of Object.entries(a.frames)) {
+      const target = sidecar[kind][n];
+      target[scale] = { file: a.pages[f.page].file, x: f.x, y: f.y, w: f.w, h: f.h };
+    }
+  }
+  fs.writeFileSync(path.join(OUT, 'gemini.json'), JSON.stringify(sidecar, null, 2));
+  fs.writeFileSync(stampFile, stamp);
+  console.log(`✔ gemini assets -> ${OUT}`);
+  return 0;
+}
+
+try { process.exit(main()); } catch (e) { console.error('✖', e.message); process.exit(1); }

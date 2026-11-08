@@ -40,4 +40,10 @@ for (const t of tiers) {
 for (const f of ['tileset.png', 'tileset.json', 'map.json']) {
   fs.copyFileSync(path.join(RAW, 'tilemap', f), path.join(ATLAS, f));
 }
+// Owner-provided Gemini props / item icons (npm run gen:gemini already packed them): include them in the atlas dir so
+// the budget gate checks power-of-two pages, padding / extrude and the size caps.
+const gem = path.join(RAW, 'gemini', 'atlas');
+if (fs.existsSync(gem)) {
+  for (const f of fs.readdirSync(gem)) fs.copyFileSync(path.join(gem, f), path.join(ATLAS, f));
+}
 console.log(`✔ đóng gói xong -> ${ATLAS}`);
