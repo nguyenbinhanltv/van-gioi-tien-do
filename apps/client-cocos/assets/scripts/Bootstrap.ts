@@ -18,6 +18,8 @@ import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderA
 import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
+import { PropArt } from './PropArt';
+import { placeProps } from './PropPlacement';
 import { CombatUi, createMockBackend } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
@@ -71,6 +73,8 @@ export class Bootstrap extends Component {
   private combatOn = false;
   /** the bag (key B): the server's inventory when online, a local sample with `#bagdemo` */
   private bagPanel: BagPanel | null = null;
+  /** owner-provided Gemini props + item icons (null = placeholders) */
+  private propArt: PropArt | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -144,18 +148,42 @@ export class Bootstrap extends Component {
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
     const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
-    const rand = rng(map.seed ?? 1);
-    // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
-    const PROP_RADIUS = 40;
-    for (let n = 0; n < 140; n++) {
-      const i = Math.floor(spawn.i + (rand() * 2 - 1) * PROP_RADIUS);
-      const j = Math.floor(spawn.j + (rand() * 2 - 1) * PROP_RADIUS);
-      if (i < 0 || j < 0 || i >= map.width || j >= map.height) continue;
-      const k = j * map.width + i;
-      if (!this.world.isTerrainWalkable(i, j) || blocked[k] || (Math.abs(i - spawn.i) < 2 && Math.abs(j - spawn.j) < 2))
-        continue;
-      blocked[k] = 1;
-      addProp(this.ysort, art, rand() < 0.7 ? 'tree' : 'rock', i, j);
+    // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
+    // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
+    this.propArt = await PropArt.load(tier === 'low');
+    if (this.propArt) {
+      // courtyard + biome scatter around the spawn (L3 objects are not chunk-streamed yet; every one is sorted each frame)
+      const placed = placeProps({
+        width: map.width,
+        height: map.height,
+        seed: map.seed ?? 1,
+        spawn,
+        terrain: (i, j) => this.world.terrainAt(i, j),
+        defs: this.propArt.defs(),
+        count: 110,
+        radius: 40,
+      });
+      for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
+      for (const p of placed.courtyard) this.propArt.add(this.ysort, p);
+      for (const p of placed.props) this.propArt.add(this.ysort, p);
+    } else {
+      const rand = rng(map.seed ?? 1);
+      // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
+      const PROP_RADIUS = 40;
+      for (let n = 0; n < 140; n++) {
+        const i = Math.floor(spawn.i + (rand() * 2 - 1) * PROP_RADIUS);
+        const j = Math.floor(spawn.j + (rand() * 2 - 1) * PROP_RADIUS);
+        if (i < 0 || j < 0 || i >= map.width || j >= map.height) continue;
+        const k = j * map.width + i;
+        if (
+          !this.world.isTerrainWalkable(i, j) ||
+          blocked[k] ||
+          (Math.abs(i - spawn.i) < 2 && Math.abs(j - spawn.j) < 2)
+        )
+          continue;
+        blocked[k] = 1;
+        addProp(this.ysort, art, rand() < 0.7 ? 'tree' : 'rock', i, j);
+      }
     }
 
     this.chibi = new ChibiBody(newNode('ChibiHolder'), { local: true });
@@ -316,6 +344,7 @@ export class Bootstrap extends Component {
         move: (from, to) => (demo ? demo.move(from, to) : (online?.net.sendBagMove(from, to) ?? false)),
         claim: () => (demo ? demo.claim() : (online?.net.sendBagClaim() ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
+        icon: (key) => this.propArt?.icon(key) ?? null,
       },
       !!demo,
     );
