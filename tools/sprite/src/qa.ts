@@ -10,12 +10,16 @@
 import type { OriginMeasurement } from './authored-origin.js';
 import type { Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
+import { registeredNativeSsim, type RegisteredSsim } from './native-similarity.js';
+import { labPaletteDistance, HEAD_PALETTE_LAB_MAX, TORSO_PALETTE_LAB_MAX } from './palette-similarity.js';
+import { measureTemporalSimilarity, TEMPORAL_REVIEW_MIN } from './temporal-similarity.js';
 import { facingGroundVector } from './gait.js';
 import {
   legacySimilarityRegions,
   similarityBlockMeans,
   similarityRegionsForPair,
   type SimilarityCropMeasurement,
+  type SimilarityFrameHead,
 } from './similarity-crops.js';
 import type { AlignedFrame } from './align.js';
 import type { CellSpec, Guides } from './types.js';
@@ -93,7 +97,7 @@ export interface QaOptions {
   readonly maxGhostOffset?: number;
   /** Loop seam: allowed ratio of the seam step to the mean step. Default 2.5 (the viewer's gate). */
   readonly seamRatio?: number;
-  /** Minimum region similarity to the master, 0..1. Default 0.7. */
+  /** Historical L1 diagnostic threshold, 0..1; no longer controls hard similarity (D55). */
   readonly minSimilarity?: number;
 }
 
@@ -389,10 +393,15 @@ export function measureSimilarity(
   options: {
     masterHeight: number;
     masterHead?: HeadLandmarks;
-    frameHead?: HeadLandmarks;
+    frameHead?: SimilarityFrameHead;
     mode?: 'landmarks' | 'legacy';
   },
-): { head: number; torso: number; crops: SimilarityCropMeasurement } {
+): {
+  head: number;
+  torso: number;
+  crops: SimilarityCropMeasurement;
+  components?: { head: RegisteredSsim; torso: RegisteredSsim };
+} {
   const crops =
     options.mode === 'legacy'
       ? (() => {
@@ -412,7 +421,25 @@ export function measureSimilarity(
       throw new Error(`empty annotated ${region} similarity window`);
     return blockSimilarity(a, b);
   };
-  return { head: score('head'), torso: score('torso'), crops };
+  if (options.mode === 'legacy')
+    return { head: score('head'), torso: score('torso'), crops: { ...crops, scorer: 'legacy-block-l1' } };
+  // Validate nonempty annotated regions before structural comparison; no invalid-evidence fallback.
+  if (crops.method === 'landmarks') {
+    score('head');
+    score('torso');
+  }
+  const h = registeredNativeSsim(master, frame, crops.master.head, crops.frame.head),
+    t = registeredNativeSsim(master, frame, crops.master.torso, crops.frame.torso);
+  return {
+    head: h.score,
+    torso: t.score,
+    components: { head: h, torso: t },
+    crops: {
+      ...crops,
+      scorer: 'native-ssim',
+      registration: { head: { dx: h.dx, dy: h.dy }, torso: { dx: t.dx, dy: t.dy } },
+    },
+  };
 }
 
 /** D54 changes only head reasons; a documented D41 pose may exempt the crop on any clip kind. */
@@ -422,65 +449,99 @@ export function isSimilarityExemptReason(reason: string | undefined): boolean {
 
 export const SPRITE_SIMILARITY_MIN = 0.7;
 
+/** D55: Lab palette is hard; legacy L1 and temporal continuity are diagnostic. */
 export function checkSimilarity(clip: QaClip, o: QaOptions): Finding[] {
-  const min = o.minSimilarity ?? SPRITE_SIMILARITY_MIN;
+  if (!legacySimilarityRegions(o.master)) return [];
   const out: Finding[] = [];
   clip.frames.forEach((f, i) => {
-    if (!f) return;
-    const reason = clip.exceptions?.[i];
-    if (isSimilarityExemptReason(reason)) return;
-    let measured: ReturnType<typeof measureSimilarity>;
+    if (!f || !legacySimilarityRegions(f.image) || isSimilarityExemptReason(clip.exceptions?.[i])) return;
     try {
-      measured = measureSimilarity(o.master, f.image, {
-        masterHeight: o.masterHeight,
-        ...(o.masterHead ? { masterHead: o.masterHead } : {}),
-        ...(clip.headEvidence?.[i] ? { frameHead: clip.headEvidence[i] } : {}),
+      const crops: SimilarityCropMeasurement = {
+        ...similarityRegionsForPair(o.master, f.image, o.masterHeight, o.masterHead, clip.headEvidence?.[i]),
+        scorer: 'lab-palette',
+      };
+      const legacy = measureSimilarity(o.master, f.image, { masterHeight: o.masterHeight, mode: 'legacy' });
+      out.push({
+        gate: 'similarity',
+        severity: 'info',
+        clip: clip.name,
+        frame: i,
+        metric: 'legacy_l1_diagnostic',
+        value: Math.min(legacy.head, legacy.torso),
+        limit: o.minSimilarity ?? SPRITE_SIMILARITY_MIN,
+        similarityCrop: crops,
+        message: `diagnostic only: legacy L1 head ${legacy.head.toFixed(4)}, torso ${legacy.torso.toFixed(4)}; ${crops.method}${crops.reason ? ': ' + crops.reason : ''}`,
       });
+      for (const [part, limit] of [
+        ['head', HEAD_PALETTE_LAB_MAX],
+        ['torso', TORSO_PALETTE_LAB_MAX],
+      ] as const) {
+        const palette = labPaletteDistance(o.master, f.image, crops.master[part], crops.frame[part]);
+        if (palette.distance > limit)
+          out.push({
+            gate: 'similarity',
+            severity: 'fail',
+            clip: clip.name,
+            frame: i,
+            metric: `palette_${part}_lab`,
+            value: palette.distance,
+            limit,
+            similarityCrop: crops,
+            message: `${part === 'head' ? crops.frame.headKind : 'torso'} Lab palette distance ${palette.distance.toFixed(4)} > ${limit}`,
+          });
+      }
     } catch (error) {
       out.push({
         gate: 'similarity',
         severity: 'fail',
         clip: clip.name,
         frame: i,
-        metric: 'similarity_crop_invalid',
+        metric: 'palette_unmeasured',
         message: error instanceof Error ? error.message : String(error),
       });
-      return;
     }
-    const { head, torso, crops } = measured;
-    out.push({
-      gate: 'similarity',
-      severity: 'info',
-      clip: clip.name,
-      frame: i,
-      metric: crops.method === 'centroid-fallback' ? 'centroid_fallback' : 'similarity_crop_windows',
-      value: 1,
-      limit: 0,
-      similarityCrop: crops,
-      message:
-        crops.method === 'centroid-fallback'
-          ? `centroid-fallback: ${crops.reason}; legacy crop still measured`
-          : `landmark ${crops.frame.headKind} and torso windows; ${crops.frame.widthSource}`,
-    });
-    if (head < min)
-      out.push({
-        gate: 'similarity',
-        severity: 'fail',
-        clip: clip.name,
-        frame: i,
-        similarityCrop: crops,
-        message: `${crops.frame.headKind} similarity ${head.toFixed(2)} < ${min}`,
-      });
-    if (torso < min)
-      out.push({
-        gate: 'similarity',
-        severity: 'fail',
-        clip: clip.name,
-        frame: i,
-        similarityCrop: crops,
-        message: `torso similarity ${torso.toFixed(2)} < ${min}`,
-      });
   });
+  return out;
+}
+
+/** D55: every low continuity pair is review-by-eye INFO, including approved D41 pose pairs. */
+export function checkTemporalContinuity(clip: QaClip, o: QaOptions): Finding[] {
+  const pairs = clip.frames.slice(1).map((_, i) => ({ from: i, to: i + 1, seam: false }));
+  if (clip.loop && clip.frames.length > 1) pairs.push({ from: clip.frames.length - 1, to: 0, seam: true });
+  const out: Finding[] = [];
+  for (const pair of pairs) {
+    const a = clip.frames[pair.from],
+      b = clip.frames[pair.to];
+    if (!a || !b) continue;
+    try {
+      const result = measureTemporalSimilarity(a.image, b.image, {
+        masterHeight: o.masterHeight,
+        ...(clip.headEvidence?.[pair.from] ? { firstHead: clip.headEvidence[pair.from] } : {}),
+        ...(clip.headEvidence?.[pair.to] ? { secondHead: clip.headEvidence[pair.to] } : {}),
+      });
+      const value = Math.min(result.head, result.torso);
+      if (value < TEMPORAL_REVIEW_MIN)
+        out.push({
+          gate: 'similarity',
+          severity: 'info',
+          clip: clip.name,
+          frame: pair.to,
+          metric: 'temporal_review_by_eye',
+          value,
+          limit: TEMPORAL_REVIEW_MIN,
+          message: `review-by-eye: temporal ${pair.from}->${pair.to}${pair.seam ? ' loop seam' : ''}; head ${result.head.toFixed(4)}, torso ${result.torso.toFixed(4)}; ${result.crops.method}${isSimilarityExemptReason(clip.exceptions?.[pair.from]) || isSimilarityExemptReason(clip.exceptions?.[pair.to]) ? '; D41 pose pair' : ''}`,
+        });
+    } catch (error) {
+      out.push({
+        gate: 'similarity',
+        severity: 'info',
+        clip: clip.name,
+        frame: pair.to,
+        metric: 'temporal_unmeasured',
+        message: `review-by-eye: temporal ${pair.from}->${pair.to} unavailable: ${error instanceof Error ? error.message : String(error)}`,
+      });
+    }
+  }
   return out;
 }
 
@@ -556,6 +617,7 @@ export function runQa(clips: readonly QaClip[], o: QaOptions): QaReport {
     ...checkFootSlide(c, o),
     ...checkLoopSeam(c, o),
     ...checkSimilarity(c, o),
+    ...checkTemporalContinuity(c, o),
   ]);
   return { ok: !findings.some((f) => f.severity === 'fail'), findings };
 }

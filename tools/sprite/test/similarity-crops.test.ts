@@ -10,6 +10,7 @@ import {
   similarityRegionsForPair,
   alignFrame,
   toStraight,
+  labPaletteDistance,
   type HeadLandmarks,
   type QaClip,
 } from '../src/index.js';
@@ -28,6 +29,22 @@ function figure(x: number, lean = false) {
 const head = (x: number): HeadLandmarks => ({ crown: { x, y: 30 }, chin: { x, y: 70 } });
 
 describe('D55 annotated similarity windows', () => {
+  it('preserves legacy similarity handling of empty images while replacement is disabled', () => {
+    const image = figure(118),
+      guides = guidesFromMaster(measureFigure(image)!);
+    const aligned = alignFrame(toStraight(image), {
+      guides,
+      calibration: { scale: 1, targetHeight: 202, referenceHeight: 202, referenceFrames: 1 },
+    })!;
+    const clip: QaClip = { name: 'idle', kind: 'upright', loop: false, expectedFrames: 1, frames: [aligned] };
+    expect(checkSimilarity(clip, { master: createImage(256, 256), masterHeight: 202, guides })).toEqual([]);
+    expect(
+      checkSimilarity(
+        { ...clip, frames: [{ ...aligned, image: createImage(256, 256) }] },
+        { master: image, masterHeight: 202, guides },
+      ),
+    ).toEqual([]);
+  });
   it('finds the leaning head outside the silhouette-centroid crop and preserves identity scores', () => {
     const master = figure(118),
       frame = figure(200, true);
@@ -39,6 +56,23 @@ describe('D55 annotated similarity windows', () => {
     expect(old.head).toBeLessThan(0.7);
     expect(fresh.head).toBeCloseTo(1);
     expect(fresh.torso).toBeCloseTo(1);
+    const m = measureFigure(frame)!;
+    const position = { height: m.height, pelvisX: m.pelvisX, soleY: m.bottom };
+    const findings = checkSimilarity(
+      {
+        name: 'run',
+        kind: 'upright',
+        loop: false,
+        expectedFrames: 1,
+        frames: [{ image: frame, source: m, metrics: m, record: { pre: position, post: position, dx: 0, dy: 0 } }],
+        headEvidence: { 0: { ...head(200), note: 'Known synthetic leaning fixture geometry' } },
+      },
+      { master, masterHeight: 202, masterHead: head(118), guides: guidesFromMaster(measureFigure(master)!) },
+    );
+    expect(findings.filter((f) => f.severity === 'fail')).toEqual([]);
+    expect(findings).toContainEqual(
+      expect.objectContaining({ severity: 'info', metric: 'legacy_l1_diagnostic', value: expect.any(Number) }),
+    );
   });
   it('uses provided breadth or the documented1x head-length window with8% total margin', () => {
     const image = figure(118),
@@ -146,18 +180,52 @@ describe('D55 annotated similarity windows', () => {
       guides,
     })!;
     const clip: QaClip = { name: 'idle', kind: 'upright', loop: false, expectedFrames: 1, frames: [aligned] };
-    expect(checkSimilarity(clip, { master: image, masterHeight: 202, guides })).toContainEqual(
-      expect.objectContaining({ severity: 'info', metric: 'centroid_fallback' }),
-    );
+    expect(
+      checkSimilarity(clip, { master: image, masterHeight: 202, guides }).filter((f) => f.severity === 'fail'),
+    ).toEqual([]);
   });
   it('still fails real colour drift, without modifying pixels', () => {
     const master = figure(118),
       frame = figure(118);
     rect(frame, 93, 30, 143, 70, [0, 255, 0, 255]);
     const before = frame.data.slice();
+    const measured = measureSimilarity(master, frame, {
+      masterHeight: 202,
+      masterHead: head(118),
+      frameHead: head(118),
+    });
+    // Luminance alone is insufficient: the candidate Lab diagnostic must expose the chroma change.
     expect(
-      measureSimilarity(master, frame, { masterHeight: 202, masterHead: head(118), frameHead: head(118) }).head,
-    ).toBeLessThan(0.7);
+      labPaletteDistance(master, frame, measured.crops.master.head, measured.crops.frame.head).chroma,
+    ).toBeGreaterThan(50);
     expect(frame.data).toEqual(before);
+  });
+  it('uses the same crown-plus-breadth window on a D53 master and D56 frame', () => {
+    const image = figure(128),
+      breadth = { left: { x: 108, y: 40 }, right: { x: 148, y: 40 } };
+    const master: HeadLandmarks = {
+      kind: 'rear-crown-shoulder-single',
+      crown: { x: 128, y: 20 },
+      shoulderTop: { x: 160, y: 50 },
+      breadth,
+      occludedSide: 'left',
+      occluder: 'hair covers left shoulder',
+    };
+    const frame = {
+      kind: 'rear-breadth-only' as const,
+      crown: { x: 140, y: 30 },
+      breadth: { left: { x: 120, y: 50 }, right: { x: 160, y: 50 } },
+      occluder: 'fan covers shoulder in lean',
+    };
+    const before = JSON.stringify({ master, frame }),
+      pair = similarityRegionsForPair(image, image, 200, master, frame);
+    expect(pair.master.cropRule).toBe('rear-breadth-window');
+    expect(pair.frame.cropRule).toBe('rear-breadth-window');
+    expect(pair.master.head.bottom - pair.master.head.top).toBeCloseTo(40 * 1.08);
+    expect(pair.frame.head.bottom - pair.frame.head.top).toBeCloseTo(40 * 1.08);
+    expect(pair.master.evidenceKind).toBe('rear-crown-shoulder-single');
+    expect(pair.frame.evidenceKind).toBe('rear-breadth-only');
+    expect(JSON.stringify({ master, frame })).toBe(before);
+    expect(() => similarityRegionsForPair(image, image, 200, head(128), frame)).toThrow(/D53/);
   });
 });
