@@ -149,8 +149,11 @@ export const AOI = {
   HASH_CELL: 16,
   /** Shift AOI centre by velocity × this many seconds while flying. */
   FLIGHT_LEAD_S: 0.5,
-  /** Fraction of radius beyond which an entity is in the "far" band. */
-  FAR_BAND_FRACTION: 0.8,
+  /** Snapshot bands by tile distance to the receiving player (D73): near <= 10 tiles (20 Hz), mid <= 25 (10 Hz), far beyond (5 Hz). */
+  NEAR_BAND_TILES: 10,
+  MID_BAND_TILES: 25,
+  /** At most this many entities per receiver get the full near rate (the closest ones); the rest of the near band drops to mid (D73). */
+  NEAR_MAX_ENTITIES: 40,
 } as const;
 
 // ---------------------------------------------------------------- performance budgets

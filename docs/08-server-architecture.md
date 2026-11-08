@@ -72,6 +72,8 @@ function aoiQuery(grid: CellGrid, me: Entity, out: Set<EntityId>, exiting: boole
 | Xa         | Gần mép AOI (> 80% bán kính)                        | 5 Hz                   |
 | Luôn 20 Hz | Đồng đội, mục tiêu đang chọn, kẻ đang tấn công mình | Bất kể khoảng cách     |
 
+[Cập nhật D73: vùng tính theo **khoảng cách ô** tới người nhận: gần ≤ 10 ô (20 Hz), giữa ≤ 25 ô (10 Hz), xa > 25 ô (5 Hz); chỉ 40 thực thể gần nhất được 20 Hz (`AOI.NEAR_MAX_ENTITIES`); bản ghi không đổi (vị trí lượng tử, anim, hướng, HP) bị bỏ qua. Bảng trên là bản gốc; DECISIONS D73 thắng. Dòng "Luôn 20 Hz" chưa cài (chưa có nhóm / chọn mục tiêu).]
+
 ## 3. Cell Handover khi ngự kiếm
 
 Chuyển vùng có hai cấp. Qua ranh giới ô hash hay chunk **trong cùng một World Node** chỉ là bước so tập AOI ở mục 2. Qua ranh giới **giữa hai World Node** cần chuyển quyền điều khiển nhân vật mà client không phải kết nối lại; Gateway giữ nguyên socket và chỉ đổi đích chuyển tiếp.
