@@ -6,11 +6,14 @@
  *    "đ" counts as "d", "ạ" as "a"), so "CursewordX" and "cursẹwordx" are both caught, and the mask lands on the ORIGINAL characters.
  */
 
+/* eslint-disable no-control-regex, no-misleading-character-class -- intentional: these patterns exist to match control and combining / invisible characters */
 /** C0 / C1 controls (incl. newline, tab, DEL) */
 const CONTROL = /[\u0000-\u001f\u007f-\u009f]/gu;
 /** zero-width, bidi marks / overrides / isolates, BOM, word joiner and similar invisible characters */
 const INVISIBLE =
   /[\u00ad\u034f\u061c\u115f\u1160\u17b4\u17b5\u180e\u200b-\u200f\u202a-\u202e\u2060-\u206f\u3164\ufeff\uffa0]/gu;
+
+/* eslint-enable no-control-regex, no-misleading-character-class */
 
 export function sanitize(text: string): string {
   return text.replace(CONTROL, ' ').replace(INVISIBLE, '').replace(/\s+/gu, ' ').trim();
