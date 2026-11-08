@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP run: 16figures4x4 seamless FAST running loop NE towardupperright, same rear3quarter master orientation. More dynamic than walk: forwardlean10degrees, strong alternating right/left push-offs and airborne flight tucks, never flatten legs to satisfy heightbox.0rightcontact,1compression,2push,3-6flight/oppositelegforward,7descent;8leftcontact9compression10push11-14oppositeflight15descentconnecting0. Legs alternate correctly and follow colored leadingleg sole ghosts inimage2; plantedfeetanchor correct NE diagonal, airborne knees bend with visiblebothfeet whenappropriate. Head/skullcore and shoulderbreadth EXACTmaster scale; depth/crouch change wholeposture only. Natural leftfan grip screenleft, tucked closerback forrun; rightarmcounterbalances. Hair/ribbons/sleeves stream behind towardlowerleft with2frame lag and settlement. All16fullbody safeinsidecells, no smear/FX/grid/text, noface towardcamera.",
+  "utcStart": "2026-11-08 00:03:37 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/run.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt1.png",
+  "selected": "sheets/run.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:04:10 UTC",
+  "rawSha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7",
+  "utcRawOutputFileModified": "2026-11-08T00:04:10.182Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/run.head-guide.png",
+      "sha256": "332260e5b88a6395580e91b50c0ee8fec7a0d7644839d98248913d5a701a2d6d"
+    }
+  ],
+  "selectedSha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7"
+}

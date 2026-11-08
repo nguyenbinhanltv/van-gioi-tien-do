@@ -1,0 +1,13 @@
+{
+  "purpose": "AI EDIT GUIDE ONLY; target placements are authoring intentions, not measured QA evidence",
+  "tool": "@vgtd/rig + @vgtd/sprite deterministic guide compositor",
+  "model": "not applicable",
+  "utc": "2026-11-08T02:04:42.870Z",
+  "command": "node tools/rig/scripts/run-ts.mjs assets-src/placeholder/phap-tu-chibi-v1/prepare-NE-head-edit.ts",
+  "sourceSha256": "ce86cfe050601ae9e0e05ab828e503a85910ab11863f546c26ab7768ff2560eb",
+  "masterSha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
+  "planSha256": "fae57eae273d3de4915132c9eee046584e802d01f484c3c8b09ba69e49ab00d5",
+  "outputSha256": "a87e8930c2bb0dbfa2424ce648d14e9551396073ed0e09e56d0e0cfe0c04b904",
+  "fixedStencilScale": 1.0550458715596331,
+  "noIndividualFrameRescale": true
+}

@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 7,
+  "prompt": "EDIT IMAGE1 surgically in TWO CELLS ONLY: row2 col1 (zero-based cell4) and row4 col1 (zero-based cell12) of this exact4x4 NE run sheet. Those TWO skull/main hair caps are slightly too narrow. Broaden only their skull-cap/coil widths by about4%, centred on existing head centreline, from50px to52px after global pipeline scale. DO NOT change head height, crown Y, ear/face, neck or shoulder. Do not enlarge the whole head vertically. Image2 is the locked canonical identity reference. Keep every other pixel/cell unchanged; the other14 heads already have correct width. PreserveALL body/hand/fan LEFT-hand/arm/sleeve/leg/foot positions and size, dynamic running poses and secondary streaming hair/ribbons. Same cropped cap core only, no body rescale, no new pose/camera. Same original premium plum/vermilion/gold adult female Phap tu T1 design. Exact4x4 composition on pure opaque magenta background. No labels/new FX/ground strokes. Source face fixed, compactcoil wraps skull, pins/tassels/earrings preserved.",
+  "utcStart": "2026-11-08 02:17:49 UTC",
+  "utcEndObserved": "2026-11-08 02:19:43 UTC",
+  "references": ["NE/raw/run.attempt6.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt7.png",
+  "status": "selected partial head contributor; full body remains attempt1",
+  "headContributionCells": [4, 12],
+  "contributesTo": "prepared/run.png",
+  "rawSha256": "24efd06dbc9c36ade0b7b3c02a840261f6ba57bc81f4fe2a3c071c97e34f476e",
+  "utcRawOutputFileModified": "2026-11-08T02:18:21.825Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/raw/run.attempt6.png",
+      "sha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}
