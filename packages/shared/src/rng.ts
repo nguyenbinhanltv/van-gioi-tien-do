@@ -1,5 +1,5 @@
 /**
- * Seeded PRNG for every simulation roll (ADR-010 / D63): xoshiro128** with a serializable 4 x uint32 state,
+ * Seeded PRNG for every simulation roll (ADR-010 / D68): xoshiro128** with a serializable 4 x uint32 state,
  * seeded with splitmix32. Uses only `Math.imul`, shifts and rotates, so results are identical on every JS engine.
  * All functions are pure and return the next state; the state belongs in the world and in `stateHash()`.
  * Never use `Math.random` / `Date.now` in simulation code (skill vgtd-sim-determinism).
