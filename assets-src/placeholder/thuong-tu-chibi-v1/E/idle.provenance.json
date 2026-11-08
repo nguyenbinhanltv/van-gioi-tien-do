@@ -1,0 +1,37 @@
+{
+  "name": "E-idle",
+  "start": "2026-11-07T23:33:43.443Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/idle.head-stencil.template.png"
+  ],
+  "prompt": "PRODUCTION GAME SPRITE SHEET, THUONG TU T1 MALE, E EXACT RIGHT PROFILE in EVERY FRAME. First input256-square is the locked master: use same adult face/slate almond eye/straight brow/angular jaw, swept black main hair and LOW ponytail, navy plain sleeveless wrap with ivory undercollar, red sash tails, compact dark trousers, wrist wraps and small dark boots; no armor/gems/embroidery. Same dark straight spear, simple steel leaf tip and forked RED pennon. Second input is authoritative4x4 LATTICE plus EXACT MASTER HEAD STENCILS for scale/identity and ground/foot guides. Draw a square2048x2048 sheet with4columns x4rows, each cell512square, exactly16 row-major cells; preserve every cell registration; no overlap between cells. Logical cell256: standing main crown y16, soles y232, head skull+hair about50px tall matching stencil; enlarged2x in512cell so crown32/soles464/head100. Scale fixed; body main-crown-to-sole216logicalpx, NEVER fit individual frame heights. Stencil is size/face guide, head may translate/rotate with pose but must not shrink/grow. Art 2cel tones+one highlight, material-tinted clean outline, NW light. Solid perfectly flat magenta #FF00FF everywhere outside artwork. REMOVE ALL guide lines/foot ghosts/markers, no text/numbers/borders/ground shadows/halos. Entire spear/banner/low ponytail/hands/feet stay inside each cell with safe margin; do not clip at grid edges, do not shrink body to fit spear. First frame must closely match master scale/identity. No perspective zoom, no front face/three-quarter. Small hands/feet, adult compact4.5-head anatomy. Animate IDLE LOOP,16 unique smooth successive frames, one gentle breathing cycle: subtle chest rise/fall and relaxed knees, minimal head translation, weight anchored on same feet. Spear held vertical beside body exactly as master, tip remains above skull but below cell top with margin, hand grip follows tiny breathing. Low ponytail and red pennon have subtle delayed sway and settle, sash tails lag gently. No walking, no foot slides, no body turns, no duplicate panels. Frame16 blends naturally to frame1. All16 populated, readable at108px body height in game.",
+  "endObserved": "2026-11-07T23:34:21.307Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f9f3ca2c-2536-4b46-b367-ea16102351d8.png",
+  "output": "raw/idle.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/idle.png",
+    "sha256": "db820f677e121c7713b061425716110e147a122c5e44ca6f88ca00ebbce77345",
+    "bytes": 1655371,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/idle.head-stencil.template.png",
+      "path": "E/templates/tribulation.head-stencil.template.png",
+      "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708",
+      "bytes": 50525,
+      "dimensions": [1024, 1024]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

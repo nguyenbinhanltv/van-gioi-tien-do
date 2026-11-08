@@ -1,0 +1,45 @@
+{
+  "name": "E-run-cycle-repair",
+  "start": "2026-11-07T23:41:20.240Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-46f766c1-8330-4eed-bdea-fc0e9877c4fe.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.head-stencil.template.png"
+  ],
+  "prompt": "Repair this exact16-cell THUONG TU E RUN sheet into a TRUE CONTINUOUS steady RUN LOOP. Keep its male face, compact T1 navy/ivory/red costume, low ponytail, two-hand diagonal spear with red banner, same skull/head size, same4x4 square lattice and magenta background. Main issue: current frames0/15 stand upright ready, causing pause. Frame0 must ALREADY BE RUNNING in long contact stride with forward lean; frame15 is airborne recovery leading smoothly INTO frame0, never standing. Spread a full left/right stride evenly over16 drawings:0 right lead contact/front knee bent and left leg trailing;1 compression;2 push-off;3 flight tuck;4 left-leg recovery;5 left contact;6 compression;7 push-off;8 flight tuck;9 right recovery;10 right contact;11 compression;12 push-off;13 flight tuck;14 recovery;15 just before next right contact. No startup/stop. Keep stronger dynamic poses like current middle cells; no flattening torso/knee motion to fit height. Head size exactly locked stencil, cannot shrink when leaning. Foot ghosts guide positions. Safe entire spear/feet/tails within each cell; keep spear angled forward within cell, no clipping. Preserve consistent scale at all16 drawings, no camera zoom. Remove guide/grid lines. Magenta #FF00FF flat background, no shadows or FX. All16 populated, no duplicate panels.",
+  "endObserved": "2026-11-07T23:42:00.567Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a522dd4e-0fcb-4508-801b-35fec0ec5d4e.png",
+  "output": "raw/run.cycle.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/run.cycle.png",
+    "sha256": "c2909ceb52ba729c9d04e1120291c8f41242bf489fc84c2f76924f341f42a7ea",
+    "bytes": 1975500,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-46f766c1-8330-4eed-bdea-fc0e9877c4fe.png",
+      "path": "E/raw/run.png",
+      "sha256": "853b73152c7c01fff9b4c851d3cbc23f25ccd49c9c91c198070b22b1a81111b1",
+      "bytes": 1915457,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.head-stencil.template.png",
+      "path": "E/templates/run.head-stencil.template.png",
+      "sha256": "c159524b235318c3ed67d730a822c1ea86eb9457c42d55b5fbecc9a19d7f98ef",
+      "bytes": 52150,
+      "dimensions": [1024, 1024]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

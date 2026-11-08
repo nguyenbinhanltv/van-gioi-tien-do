@@ -1,0 +1,31 @@
+{
+  "name": "E-attack_3-headroom",
+  "start": "2026-11-07T23:56:58.081Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-51f852cd-fa93-4cb6-80d2-b2b9acf7c516.png"
+  ],
+  "prompt": "Tiny one-cell WEAPON HEADROOM repair on this exact THUONG TU E ATTACK_3 4x4 magenta sprite sheet. ONLY sourcecell1, firstrow SECONDcolumn: raised spear steel leaf tip is too close to top and loses0.4logicalpixel afteralignment. Shorten ONLY that simple steel leaf tip by about8nativeimagepixels (6logical) while keeping same socket/shaft/handgrips/weaponangle/redpennon. Do not move/shrink body/head/feet/hands. All other15cells exactly unchanged, including last2blankcells. Preserve4x4squarecanvasdimensions/magenta#FF00FF and every pose/face/clothing. No added lines/text/FX/shadows. The repair is a slightly shorter steel leaf in cell1 ONLY; no otherartchanges.",
+  "endObserved": "2026-11-07T23:57:26.520Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-ee7d396d-5bc6-49b0-ac49-70b9ddf8654b.png",
+  "output": "raw/attack_3.headroom-edited.png",
+  "selected": "raw/attack_3.headroom.png",
+  "operation": "Public sprite:repair original attack_3.png + edited cell1 only; other15 cells byte-identical by per-cell RGBA hashes. Raw edit retained.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/attack_3.headroom-edited.png",
+    "sha256": "651603506f74b998547d75900fefb001ef0b4cdf97d8215459bfec3210db3a8d",
+    "bytes": 1730964,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-51f852cd-fa93-4cb6-80d2-b2b9acf7c516.png",
+      "path": "E/raw/attack_3.png",
+      "sha256": "66be806b185ec3b631d673eb821ca0c2787c3282e6b6c9dfe0413d0172e23abf",
+      "bytes": 1723429,
+      "dimensions": [1254, 1254]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

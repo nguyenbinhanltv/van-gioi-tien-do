@@ -1,0 +1,159 @@
+{
+  "scope": "D41 full-source compatibility delivery; D45 PNGs are reserved for the later extraction pass.",
+  "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out C:/Users/PC/AppData/Local/Temp/vgtd32-Thuong-E-D45",
+  "inputProject": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+  "projectSha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb",
+  "masterImageSha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+  "layerInputsSha256": "87bd991cbc0cdba8461d02bb62dd80e6bb54137fe77860c6f75edf58c4287372",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "templates": [
+    {
+      "file": "source-0.full.png",
+      "sha256": "c1fdada37581e273ae264f21bcc191ccc9a7e34ed24f7dc56bb001a884fb5331",
+      "clips": [
+        {
+          "name": "idle",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-1.full.png",
+      "sha256": "b0ca318e32b88141e8f08c214c28090cd549bc958e03b5c5bdf6278bd0189e12",
+      "clips": [
+        {
+          "name": "meditate",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-2.full.png",
+      "sha256": "80be9377c89e369b2a6879a1c314ee4d8e681b861ab732aa1f2d504150486263",
+      "clips": [
+        {
+          "name": "walk",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-3.full.png",
+      "sha256": "f35e04c55549e71307de73c4b1a0aa9f5416ecb90585ada562be5d5d9eda12e5",
+      "clips": [
+        {
+          "name": "run",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-4.full.png",
+      "sha256": "0b2812195954084744a185f084013deb76575a9e3cc4d5e08304d915cf5579cc",
+      "clips": [
+        {
+          "name": "sword_fly",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        }
+      ]
+    },
+    {
+      "file": "source-5.full.png",
+      "sha256": "09eeebf572d028b2f84fd9263050b13e4a769d7b10e03c43a524976f74e6ae1b",
+      "clips": [
+        {
+          "name": "attack",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        }
+      ]
+    },
+    {
+      "file": "source-6.full.png",
+      "sha256": "0a9dc3db439ab98f08303e27c8ea0daca26f159718c662b7f2d4205baf003f3b",
+      "clips": [
+        {
+          "name": "attack_2",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        }
+      ]
+    },
+    {
+      "file": "source-7.full.png",
+      "sha256": "38c008f44370784ced84cf031ef055fc08512c69636b98e3955c6ebe1c85bc46",
+      "clips": [
+        {
+          "name": "attack_3",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        }
+      ]
+    },
+    {
+      "file": "source-8.full.png",
+      "sha256": "f0e4fea6c83cc35fa19b694984d98434edf4ebffa03d000ff85c5d5289a67101",
+      "clips": [
+        {
+          "name": "cast",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-9.full.png",
+      "sha256": "3ce23c5c88f357177a9ceaffbc3fe1980fd46ea2a2d3764e2a1588e7867aea6c",
+      "clips": [
+        {
+          "name": "channel",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        }
+      ]
+    },
+    {
+      "file": "source-10.full.png",
+      "sha256": "392760b926fe530781167bffe53f0ebf85680934d1fa60f23d2110819b0d7285",
+      "clips": [
+        {
+          "name": "die",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        }
+      ]
+    },
+    {
+      "file": "source-11.full.png",
+      "sha256": "a04385e9e625d2fcd50e7b130307135cc21b7d966164812df6b74f17f1ac936f",
+      "clips": [
+        {
+          "name": "tribulation",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    },
+    {
+      "file": "source-12.full.png",
+      "sha256": "044d8f0fa96a035dbbce865f3cf314a2edff76e3c847b15bb20c3e2a091f0663",
+      "clips": [
+        {
+          "name": "emote",
+          "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        }
+      ]
+    },
+    {
+      "file": "source-13.full.png",
+      "sha256": "9a99c89dd8e11354ac8326e95ef9129215db7c539324223fdf30602efc260038",
+      "clips": [
+        {
+          "name": "hit",
+          "cells": [0, 1, 2, 3, 4, 5]
+        },
+        {
+          "name": "dash",
+          "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        }
+      ]
+    }
+  ]
+}

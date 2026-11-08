@@ -1,0 +1,46 @@
+{
+  "name": "E-dash-cell4-exact-head-stencil",
+  "start": "2026-11-08T02:21:05.275Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.cell4-edited.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/dash-cell4.exact-head.template.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Head-only integration in ONE cell, sourcecell10(row3col3) of1254square4x4sheet. Image1 fullsheet isBASE: preserve allbody/torso/legs/hands/weapon/pennon/sash/rootregistration andallother15cells EXACTLY. Image2 is an INPUTONLY headstencil guide: cell10 alreadycontains the CORRECT canonical masterhead size and placement at exactnativeDPI. Follow that replacement head's outer silhouette, face/skull proportions and SIZE, DO NOTenlarge it orreinterpret its boundingbox. Image1 currentcell10 head istoo big; replace withimage2 fixedstencil-sizedhead (~66.7nativepx maincap crown tojaw,52.55aligned). Image3 canonmasterconfirms adultmale Eprofileface/slatealmondsmall eye/straightbrow/angularjaw/sweptblackcap/lowpony. Integrate head/neck/ponytail junction naturally with image1body, cleancontinuous collarseam, no floatingneck, no doubledoutlines. Remove any magenta rectangular stencil patch and tiny isolatedupright fragment at rightofguidehead (that is cropped old spear, NOTheadornament). Do notchange PRIMARYcap/headsize to hide seam: preserveexactstencilheadsize thenreconnectneck. Keep airborne extendedrearleg pose andmasterlike torso fromimage1unchanged. Same1254x1254canvas4x4flat#FF00FFbackground, allweaponinsidecells, no labels/grids/FX/shadows. ONLYcell10headanditsneck/ponytail seam getintegrated; no globalzoom or bodyfit. Exactstencilsizeiscritical; do notcopytheoversizedheadfromimage1.",
+  "endObserved": "2026-11-08T02:21:56.257Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-ebf58d5d-da2f-4a83-b131-c8aa93799a58.png",
+  "output": "raw/hit-dash.head-stencil-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "AI integration of input-only exact master crop guide; only cell10 eligible",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.head-stencil-edited.png",
+    "sha256": "7d8223486cdae1621cac4c6c7d42ca288e03418c292470074b9163e3d0a264eb",
+    "bytes": 1838854,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.cell4-edited.png",
+      "path": "E/raw/hit-dash.cell4-edited.png",
+      "sha256": "1a2d1eccf6cb90446a7362327b4424457242cc54d088be7b98320bd22862a48d",
+      "bytes": 1847362,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/dash-cell4.exact-head.template.png",
+      "path": "E/templates/dash-cell4.exact-head.template.png",
+      "sha256": "25a111b1c69cbea7b7d21095c3cd0893f004c222e4d742d446c3dac4be8ce98a",
+      "bytes": 2211547,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}
