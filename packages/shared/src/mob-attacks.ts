@@ -11,7 +11,7 @@
  * implemented as listed below. Not simulated yet (TODO, docs/OPEN-ITEMS.md): slow / root / poison-pool status effects, summons
  * (Hôi Lang Vương "Tru"), the boss skill sets and phases (bosses use the basic attack only).
  */
-import { MOB_TIERS, type MobDef, type MobTier } from './mobs.js';
+import { MOB_AI, MOB_TIERS, type MobDef, type MobTier } from './mobs.js';
 import type { SkillShape } from './formulas/skills.js';
 
 export interface MobAttack {
@@ -33,17 +33,22 @@ export interface MobAttack {
 
 /** Basic attack wind-up (ms). PLACEHOLDER: docs/10 gives the interval (1.8 s normal / 1.6 s elite / 1.5 s boss), not the wind-up. */
 export const MOB_BASIC_TELEGRAPH_MS = 400;
-/** Basic attack reach (tiles); a chasing mob stops at `MOB_AI[tier].engageRange` (1.2-2.5), so this is a bit longer. PLACEHOLDER. */
+/** Minimum basic attack reach (tiles). PLACEHOLDER. */
 export const MOB_BASIC_RANGE = 1.6;
+/** The basic reach is at least this much longer than the tier's `engageRange` (where a chasing mob stops), or a mob would settle just out of its own reach. */
+export const MOB_BASIC_REACH_MARGIN = 0.4;
+/** Basic attack reach and cone radius of a tier: `max(MOB_BASIC_RANGE, engageRange + margin)` = 1.6 normal, 1.8 elite, 2.9 boss. */
+export const mobBasicRange = (tier: MobTier): number =>
+  Math.max(MOB_BASIC_RANGE, MOB_AI[tier].engageRange + MOB_BASIC_REACH_MARGIN);
 /** Ticks of grace before the same mob may start any attack again after one lands (ms). PLACEHOLDER. */
 export const MOB_ATTACK_GAP_MS = 300;
 
 const basic = (tier: MobTier): MobAttack => ({
   id: 'basic',
   kind: 'basic',
-  shape: { type: 'cone', radius: MOB_BASIC_RANGE, angle_deg: 120 },
+  shape: { type: 'cone', radius: mobBasicRange(tier), angle_deg: 120 },
   anchor: 'caster',
-  rangeTiles: MOB_BASIC_RANGE,
+  rangeTiles: mobBasicRange(tier),
   telegraphMs: MOB_BASIC_TELEGRAPH_MS,
   cooldownMs: MOB_TIERS[tier].attackIntervalMs,
   coeff: 1,

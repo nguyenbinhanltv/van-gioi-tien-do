@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   COMBAT_RULES,
+  MOB_AI,
   MOB_ID_BASE,
   MOB_TIERS,
   NETWORK,
@@ -110,6 +111,25 @@ describe('mob attack table', () => {
     expect(t('mob_xich_diem')).toEqual([1000]);
     expect(t('mob_doc_tho')).toEqual([]); // only the basic attack
     expect(t('boss_ho_vuong')).toEqual([]); // TODO placeholder
+  });
+});
+
+describe('basic attack reach vs the AI stop distance', () => {
+  it('every tier can reach a target at the distance its mob stops at (bosses included)', () => {
+    for (const tier of ['normal', 'elite', 'boss'] as const) {
+      const d = MOB_DEFS.find((x) => x.tier === tier)!;
+      const basic = mobAttacksOf(d)[0]!;
+      expect(basic.rangeTiles, tier).toBeGreaterThan(MOB_AI[tier].engageRange);
+      expect(basic.shape.radius, tier).toBe(basic.rangeTiles);
+    }
+  });
+
+  it('a boss standing at its engage distance starts and lands its basic attack', () => {
+    const r = rig({ key: 'boss_ho_vuong', mob: { i: 20.5 + MOB_AI.boss.engageRange, j: 20.5 }, level: 57 });
+    const hp0 = r.hp();
+    r.tick(ms(600));
+    expect(r.hp()).toBeLessThan(hp0);
+    expect(r.events[0]).toMatchObject({ type: 'damage', sourceId: MOB, targetId: PLAYER });
   });
 });
 
