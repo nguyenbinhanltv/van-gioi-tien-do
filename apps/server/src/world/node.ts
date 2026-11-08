@@ -54,7 +54,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import type { InventoryService } from './inventory/index.js';
+import { DropSink, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -276,6 +276,8 @@ export class WorldNode {
   readonly mobs: MobManager | null;
   /** inventory + drop sink (D77); null when the node runs without one */
   readonly inventory: InventoryService | null;
+  /** combat `onDrops` -> `inventory.grantDrops` (needs both `combat` and `inventory`); null otherwise */
+  readonly dropSink: DropSink | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -312,12 +314,30 @@ export class WorldNode {
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
+    const mobPort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    // kills fill the killer's bag: combat's `onDrops` feeds the inventory (the caller's own `onDrops` still runs)
+    this.dropSink =
+      opts.combat && this.inventory
+        ? new DropSink({
+            inventory: this.inventory,
+            ownerOf: (entityId) => this.clients.get(entityId)?.accountId,
+            tick: () => this.world.tick,
+            mobs: mobPort,
+          })
+        : null;
+    const sink = this.dropSink;
     this.combat = opts.combat
       ? new CombatSystem(this.ctx, {
           seed,
           respawnPoint: () => this.spawnPoint(),
           ...opts.combat,
-          mobs: opts.combat.mobs ?? this.mobs ?? undefined,
+          mobs: mobPort,
+          onDrops: sink
+            ? (e) => {
+                sink.handle(e);
+                opts.combat?.onDrops?.(e);
+              }
+            : opts.combat.onDrops,
         })
       : null;
   }

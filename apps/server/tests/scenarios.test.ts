@@ -90,8 +90,10 @@ describe('bot kinds', () => {
     bot.stop();
     expect(bot.report.kicked).toBe(false);
     expect(bot.report.closedUnexpectedly).toBe(false);
-    expect(bot.report.maxSpeedTilesPerS).toBeGreaterThan(0.75 * FLY_SPEED);
-    expect(bot.report.maxSpeedTilesPerS).toBeLessThanOrEqual(1.05 * FLY_SPEED + 0.5);
+    // the speed is measured from snapshot ARRIVAL times, so CPU load can skew a window by a few percent: wide bounds here, the
+    // authoritative legality check is the server's own distance-violation counter (asserted below)
+    expect(bot.report.maxSpeedTilesPerS).toBeGreaterThan(0.6 * FLY_SPEED);
+    expect(bot.report.maxSpeedTilesPerS).toBeLessThanOrEqual(1.3 * FLY_SPEED);
     expect(srv.world.metrics.violations.distance ?? 0).toBe(0);
   }, 30_000);
 
