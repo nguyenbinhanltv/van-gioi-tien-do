@@ -25,5 +25,8 @@
   },
   "dependencies": {
     "@vgtd/shared": "*"
+  },
+  "devDependencies": {
+    "@vgtd/sim": "*"
   }
 }
