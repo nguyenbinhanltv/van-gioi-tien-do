@@ -122,6 +122,23 @@ describe('bandwidth budgets (docs/08 §8)', () => {
     expect(encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: { qi: 100, qj: 200 } }).length).toBe(15);
     expect(encode({ type: 'ping', clientTimeMs: 1 }).length).toBe(6);
     expect(encode({ type: 'pong', clientTimeMs: 1, serverTimeMs: 2 }).length).toBe(10);
+    // D87 mob attack telegraphs: a start is 20 B, an end 5 B (cheap enough to send to every client whose AOI holds the anchor)
+    expect(
+      encode({
+        type: 'telegraph_start',
+        id: 1,
+        mobEntityId: 2,
+        shape: 1,
+        qi: 100,
+        qj: 200,
+        facing: 3,
+        size: 58,
+        extra: 120,
+        durationMs: 400,
+      }).length,
+    ).toBe(20);
+    expect(encode({ type: 'telegraph_end', id: 1, cancelled: false }).length).toBe(5);
+    expect([encode({ type: 'telegraph_end', id: 1, cancelled: false })[1]]).toEqual([16]); // stable wire id (docs/24: 15 start, 16 end)
     const enter = encode({
       type: 'aoi_enter',
       entities: [{ index: 1, entityId: 9, kind: 1, defId: 3, qi: 5, qj: 6, anim: 0, dir: 0, hpPct: 100, maxHp: 1200 }],

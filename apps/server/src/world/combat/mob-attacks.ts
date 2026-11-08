@@ -9,7 +9,8 @@
  *
  * Because the shape is fixed when the telegraph starts and tested again when it ends, moving out of it dodges the hit. A mob that dies
  * or despawns during its telegraph cancels the attack. Damage reaches the client through the own-vitals block of the snapshot (no wire
- * change); the telegraph itself has no wire representation yet (OPEN-ITEMS).
+ * change); the telegraph itself goes out as `telegraph_start` / `telegraph_end` (protocol v5, D87): `step` reports them as
+ * `telegraphs` and `WorldNode` sends them to the clients whose AOI holds the anchor.
  *
  * Determinism (skill `vgtd-sim-determinism`): no clocks, no ambient randomness. The only random input is the damage jitter, drawn from
  * a PRNG forked from the node seed ('mobatk'), one float per victim, victims in ascending id order, attacks resolved in
@@ -48,7 +49,25 @@ export interface MobAttackPort {
   attackView(id: number): MobAttackView | undefined;
 }
 
+/** A telegraph that started or ended this tick (D87); the node turns it into wire messages. Not part of the simulation state. */
+export type MobTelegraphEvent =
+  | {
+      kind: 'start';
+      /** per-system counter (u16, wraps) */
+      id: number;
+      mobId: number;
+      attack: MobAttack;
+      facing: number;
+      /** circle: the locked anchor; cone / line: the mob's position when the telegraph started */
+      i: number;
+      j: number;
+      durationMs: number;
+    }
+  | { kind: 'end'; id: number; cancelled: boolean };
+
 interface Windup {
+  /** telegraph id on the wire */
+  id: number;
   mobId: number;
   attack: MobAttack;
   resolveAtMs: number;
@@ -74,6 +93,7 @@ interface MobCooldowns {
 export class MobAttackSystem {
   private rng: RngState;
   private windups: Windup[] = [];
+  private nextTelegraphId = 0;
   private readonly cooldowns = new Map<number, MobCooldowns>();
   private readonly attacksByKey = new Map<string, readonly MobAttack[]>();
 
@@ -95,8 +115,9 @@ export class MobAttackSystem {
     return a;
   }
 
-  step(world: SimWorld): { world: SimWorld; events: CombatEvent[] } {
+  step(world: SimWorld): { world: SimWorld; events: CombatEvent[]; telegraphs: MobTelegraphEvent[] } {
     const events: CombatEvent[] = [];
+    const telegraphs: MobTelegraphEvent[] = [];
     const now = world.timeMs;
     const byId = new Map<number, EntityState>();
     for (const e of world.entities) byId.set(e.id, e);
@@ -119,11 +140,26 @@ export class MobAttackSystem {
       const state = cd ?? { readyAt: new Map<string, number>(), gapUntilMs: 0 };
       state.readyAt.set(attack.id, now + attack.cooldownMs);
       this.cooldowns.set(e.id, state);
+      const id = this.nextTelegraphId;
+      this.nextTelegraphId = (id + 1) & 0xffff;
+      const facing = encodeDirection(t.i - e.i, t.j - e.j);
+      const circle = attack.anchor === 'target';
+      telegraphs.push({
+        kind: 'start',
+        id,
+        mobId: e.id,
+        attack,
+        facing,
+        i: circle ? t.i : e.i,
+        j: circle ? t.j : e.j,
+        durationMs: attack.telegraphMs,
+      });
       this.windups.push({
+        id,
         mobId: e.id,
         attack,
         resolveAtMs: now + attack.telegraphMs,
-        facing: encodeDirection(t.i - e.i, t.j - e.j),
+        facing,
         ai: attack.anchor === 'target' ? t.i : e.i,
         aj: attack.anchor === 'target' ? t.j : e.j,
         ci: e.i,
@@ -141,7 +177,10 @@ export class MobAttackSystem {
       const keep: Windup[] = [];
       for (const x of this.windups) {
         const mob = byId.get(x.mobId);
-        if (!mob || mob.hp <= 0) continue; // the mob died / despawned: the attack is cancelled
+        if (!mob || mob.hp <= 0) {
+          telegraphs.push({ kind: 'end', id: x.id, cancelled: true }); // the mob died / despawned: the attack is cancelled
+          continue;
+        }
         if (x.resolveAtMs <= now) due.push(x);
         else keep.push(x);
       }
@@ -149,6 +188,7 @@ export class MobAttackSystem {
       due.sort((a, b) => a.resolveAtMs - b.resolveAtMs || a.mobId - b.mobId);
       for (const x of due) {
         w = this.resolve(w, x, events);
+        telegraphs.push({ kind: 'end', id: x.id, cancelled: false });
         const cd = this.cooldowns.get(x.mobId);
         if (cd) cd.gapUntilMs = now + MOB_ATTACK_GAP_MS;
       }
@@ -157,7 +197,7 @@ export class MobAttackSystem {
     if (this.cooldowns.size > 0) {
       for (const id of [...this.cooldowns.keys()]) if (!byId.has(id)) this.cooldowns.delete(id);
     }
-    return { world: w, events };
+    return { world: w, events, telegraphs };
   }
 
   /** The first skill that is ready and in reach, else the basic attack when in reach (null = nothing to do yet). */

@@ -63,12 +63,12 @@ describe('inventory (cold family) codec', () => {
     }
     expect([ColdMsgId.InvState, ColdMsgId.InvCmd, ColdMsgId.InvResult]).toEqual([66, 67, 68]);
     expect(ColdMsgId.MeditateResult).toBe(65);
-    expect(PROTOCOL_VERSION).toBe(4);
+    expect(PROTOCOL_VERSION).toBe(5);
   });
 
   it('golden bytes: inv_cmd move and inv_result', () => {
     expect(Array.from(encode(samples[2]!))).toEqual([
-      4,
+      5,
       0x80,
       0,
       67,

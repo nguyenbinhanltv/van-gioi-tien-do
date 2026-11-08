@@ -19,6 +19,8 @@ import {
   type SkillResultMsg,
   type SnapshotEntity,
   type SnapshotMsg,
+  type TelegraphEndMsg,
+  type TelegraphStartMsg,
 } from './types.js';
 
 type Rec = Record<string, unknown>;
@@ -209,6 +211,26 @@ export function validateMessage(x: unknown): Message {
         clientTimeMs: int(o.clientTimeMs, 0, U32, 'clientTimeMs'),
         serverTimeMs: int(o.serverTimeMs, 0, U32, 'serverTimeMs'),
       };
+      return m;
+    }
+    case 'telegraph_start': {
+      const m: TelegraphStartMsg = {
+        type: 'telegraph_start',
+        id: int(o.id, 0, U16, 'id'),
+        mobEntityId: int(o.mobEntityId, 0, U32, 'mobEntityId'),
+        shape: int(o.shape, 0, 2, 'shape'),
+        qi: int(o.qi, 0, LIMITS.POS_MAX_Q, 'qi'),
+        qj: int(o.qj, 0, LIMITS.POS_MAX_Q, 'qj'),
+        facing: int(o.facing, 0, 254, 'facing'),
+        size: int(o.size, 0, U16, 'size'),
+        extra: int(o.extra, 0, U16, 'extra'),
+        durationMs: int(o.durationMs, 0, U16, 'durationMs'),
+      };
+      return m;
+    }
+    case 'telegraph_end': {
+      if (typeof o.cancelled !== 'boolean') throw new ProtocolError('malformed', 'cancelled must be a boolean');
+      const m: TelegraphEndMsg = { type: 'telegraph_end', id: int(o.id, 0, U16, 'id'), cancelled: o.cancelled };
       return m;
     }
     default: {

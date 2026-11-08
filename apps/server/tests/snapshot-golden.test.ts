@@ -11,6 +11,9 @@
  *
  * Re-captured for D82 (class selection): a player's `aoi_enter` record now carries its class wire id in `defId` (was 0). Frame counts and
  * byte totals are unchanged (same field, same width): only the checksums moved.
+ *
+ * Re-captured for D87 (protocol v5): every frame starts with the version byte, which went 4 -> 5. Frame counts and byte totals are
+ * unchanged: only the checksums moved. (The integration world runs with `mobAttacks: false`, so no telegraph frames are in it.)
  */
 import { describe, expect, it } from 'vitest';
 import { runTickBench } from '../src/loadtest/tick-bench-core.js';
@@ -24,17 +27,17 @@ const stream = (r: ReturnType<typeof runTickBench>): { checksum: string | null; 
 describe('snapshot stream golden (byte-identical to the pre-optimisation implementation)', () => {
   it('pure world, 60 players: every message of every client is unchanged', () => {
     const r = runTickBench({ players: 60, ticks: 150, warm: 30, area: 30, mobs: 0, combat: false, hash: true });
-    expect(stream(r)).toEqual({ checksum: '445b7273', frames: 10333, bytes: 1307332 });
+    expect(stream(r)).toEqual({ checksum: '19ca11d3', frames: 10333, bytes: 1307332 });
   });
 
   it('pure world, 150 players packed in 20x20 tiles (over the 120-entity cap: skipped scans, near-band cap, band changes)', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 0, combat: false, hash: true });
-    expect(stream(r)).toEqual({ checksum: '3ebf2a93', frames: 20983, bytes: 5676093 });
+    expect(stream(r)).toEqual({ checksum: 'a4e17b5c', frames: 20983, bytes: 5676093 });
   });
 
   it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 30, mobAttacks: false, hash: true });
-    expect(stream(r)).toEqual({ checksum: 'b049e8d7', frames: 23508, bytes: 5814930 });
+    expect(stream(r)).toEqual({ checksum: '9d75c7a1', frames: 23508, bytes: 5814930 });
   });
 
   it('the benchmark itself is deterministic: two runs of the same config give the same checksum', () => {
