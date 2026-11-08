@@ -9,7 +9,12 @@ port.on('message', (m: { type: 'measure' | 'stop' }) => {
   if (!fleet) return;
   if (m.type === 'measure') fleet.startMeasuring();
   if (m.type === 'stop') {
-    port.postMessage({ type: 'reports', reports: fleet.stop() });
+    port.postMessage({
+      type: 'reports',
+      reports: fleet.stop(),
+      predictors: fleet.predictorReports(),
+      proxy: fleet.proxy?.stats ?? null,
+    });
     fleet = null;
   }
 });
