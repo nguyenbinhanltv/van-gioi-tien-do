@@ -2,7 +2,7 @@
  * `npm run rig:assemble -w @vgtd/rig -- --parts <dir> [--dir E] [--out <dir>] [--allow-errors]`
  *
  * Assemble a continuous-limb direction (D39) from painted parts and export it for the viewer:
- *   <parts>/<dir>/<piece>.png   full-canvas 256x256 RGBA parts (see docs/art/rig-continuous-parts.md)
+ *   <parts>/<dir>/<piece>.png   full-canvas 256x256 RGBA parts (see docs/art/rig-legacy-player.md)
  *   <parts>/<dir>/landmarks.json
  * Writes <out>/<stem>_<dir>_{ske,tex}.json + <stem>_<dir>_tex.png (default out: a temp dir; pass `--out apps/client-cocos/assets/resources/dragonbones/kiem-tu-continuous` to view it with `npm run capture`, and do not commit that folder before the pilot is accepted) and
  * prints the assembly report (used / missing / skipped parts, bone, slot, vertex and chain counts, QA errors per clip).

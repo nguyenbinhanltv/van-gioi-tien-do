@@ -10,9 +10,9 @@ constant from `@vgtd/shared` (see CLAUDE.md hard rules).
 
 ## Order of authority
 
-1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3/4 and every
+1. `docs/DECISIONS.md` entries dated after the docs were written (D14 onward) override `docs/00` section 3 and every
    doc below, even where the doc text is left verbatim.
-2. `docs/00-ho-so-tong-hop.md` section 3 (standard values) and section 4 (superseded decisions); D1-D13 mirror section 4.
+2. `docs/00-ho-so-tong-hop.md` section 3 (standard values); the superseded decisions D1-D13 (formerly section 4) are in `docs/DECISIONS.md`.
 3. `@vgtd/shared` source and tests (`packages/shared/src`, `packages/shared/test`).
 4. Detail docs below. On conflict with 1-3 they lose.
 
@@ -22,7 +22,7 @@ If a value is not in any of these, it is unspecified: do not invent it. Record t
 
 | Topic                                                                                    | Doc                                |
 | ---------------------------------------------------------------------------------------- | ---------------------------------- |
-| Overview, merged standard values, superseded decisions, open items                       | `docs/00-ho-so-tong-hop.md`        |
+| Overview and merged standard values (section 3)                                          | `docs/00-ho-so-tong-hop.md`        |
 | Core loop, realms, factions, economy (reconstructed GDD)                                 | `docs/01-gdd.md`                   |
 | Engine, 2:1 projection, layers L0-L7, Y-sort, bundles, initial-load budget, asset tables | `docs/02-asset-matrix-2d.md`       |
 | Spine vs pre-render, paperdoll, canvas sizes, pivot, colliders, bosses                   | `docs/03-nhan-vat-quai-vat.md`     |
@@ -32,6 +32,7 @@ If a value is not in any of these, it is unspecified: do not invent it. Record t
 | Stats, breakthrough, Lôi Kiếp, Ngũ hành, linh căn, drop, economy, JSON Schema            | `docs/07-cong-thuc-data-schema.md` |
 | AOI, handover, sync, anti-cheat, microservices, protocol                                 | `docs/08-server-architecture.md`   |
 | Open questions, unverified work, spec ambiguities                                        | `docs/OPEN-ITEMS.md`               |
+| Open design questions awaiting the owner (decision gate, by ID)                          | `docs/31-bang-quyet-dinh.md`       |
 
 ## Procedure
 

@@ -162,14 +162,4 @@ Nguy cơ cần theo dõi ([17-telemetry-kpi.md](17-telemetry-kpi.md) §5): ngư�
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                         | Mặc định đề xuất                                                               |
-| --- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Q1  | Có chấp nhận danh sách "không bao giờ bán" (§3) làm cam kết sản phẩm không?     | Có; mọi thay đổi ghi DECISIONS                                                 |
-| Q2  | Tiên Ngọc có tuyệt đối không giao dịch và không đổi ra Linh thạch?              | Có (khóa tài khoản, một chiều)                                                 |
-| Q3  | Có bán cấp Battle Pass bằng Tiên Ngọc không?                                    | Không trong MVP; xem lại sau khi có dữ liệu giữ chân                           |
-| Q4  | Có hộp ngẫu nhiên (gacha) cho thẩm mỹ không?                                    | Không trong MVP (rủi ro pháp lý, [19] §5); dùng cửa hàng xoay vòng thay thế    |
-| Q5  | Giá nạp, tỷ lệ 1 Tiên Ngọc ≈ 100 ₫, bonus lần đầu +100%                         | Dùng làm điểm xuất phát; chốt sau khi có phí cửa hàng ứng dụng và pháp lý      |
-| Q6  | Trần ô túi mua thêm ≤ 30% và ô nhân vật thứ hai bán bằng Tiên Ngọc              | Có                                                                             |
-| Q7  | Cửa sổ bảo trì cố định Thứ Tư 05:00–06:00 UTC+7                                 | Có                                                                             |
-| Q8  | Giai đoạn mở cửa hàng: ngay MVP (closed beta) hay sau?                          | Sau closed beta; MVP chỉ có Tiên Ngọc nội bộ để thử luồng, không thu tiền thật |
-| Q9  | Trần faucet sự kiện ≤ 10% faucet cơ sở và hiệu faucet − sink ≤ 2 điểm phần trăm | Giữ; hiệu chỉnh sau mô phỏng (OPEN-ITEMS #7)                                   |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (15 Q1–Q9). Nội dung gốc của mục này nằm trong lịch sử git.
