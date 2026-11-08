@@ -11,7 +11,8 @@ export interface SkullBreadth {
   readonly left: HeadPoint;
   readonly right: HeadPoint;
 }
-export type HeadEvidenceKind = 'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder' | 'rear-base-ornament';
+export type HeadEvidenceKind =
+  'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder' | 'rear-base-ornament' | 'rear-crown-shoulder-single';
 export interface FrontHeadLandmarks {
   readonly kind?: 'crown-chin';
   readonly crown: HeadPoint;
@@ -32,6 +33,16 @@ export interface RearShoulderLandmarks {
   readonly shoulderTop: { readonly left: HeadPoint; readonly right: HeadPoint };
   readonly breadth: SkullBreadth;
 }
+export interface RearSingleShoulderLandmarks {
+  readonly kind: 'rear-crown-shoulder-single';
+  readonly crown: HeadPoint;
+  /** The one visible shoulder top; never add a projected point for the occluded side. */
+  readonly shoulderTop: HeadPoint;
+  readonly breadth: SkullBreadth;
+  readonly occludedSide: 'left' | 'right';
+  /** Concrete approved-master occluder: fan, hair or ribbon; a generic hidden/unknown reason is invalid. */
+  readonly occluder: string;
+}
 export interface RearOrnamentLandmarks {
   readonly kind: 'rear-base-ornament';
   /** Lowest visible point where a fixed rigid head ornament meets hair; never a projected crown. */
@@ -41,7 +52,8 @@ export interface RearOrnamentLandmarks {
   readonly skullBase: HeadPoint;
   readonly breadth: SkullBreadth;
 }
-export type HeadLandmarks = FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearOrnamentLandmarks;
+export type HeadLandmarks =
+  FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearOrnamentLandmarks | RearSingleShoulderLandmarks;
 export type HeadEvidence = HeadLandmarks & { readonly note: string };
 export interface HeadMeasurement {
   readonly kind?: HeadEvidenceKind;
@@ -65,6 +77,7 @@ export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
 }
 export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
   if (head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament') return head.skullBase;
+  if (head.kind === 'rear-crown-shoulder-single') return head.shoulderTop;
   if (head.kind === 'rear-crown-shoulder')
     return {
       x: (head.shoulderTop.left.x + head.shoulderTop.right.x) / 2,
@@ -83,10 +96,27 @@ export function headLandmarkBreadth(head: HeadLandmarks, width: number, height: 
 export function headLandmarkSize(head: HeadLandmarks | undefined, width: number, height: number): number | null {
   if (
     !head ||
-    !['crown-chin', 'rear-skull-base', 'rear-crown-shoulder', 'rear-base-ornament'].includes(headEvidenceKind(head))
+    ![
+      'crown-chin',
+      'rear-skull-base',
+      'rear-crown-shoulder',
+      'rear-crown-shoulder-single',
+      'rear-base-ornament',
+    ].includes(headEvidenceKind(head))
   )
     return null;
   if (head.kind !== undefined && head.kind !== 'crown-chin' && 'chin' in head) return null;
+  if (head.kind === 'rear-crown-shoulder-single') {
+    if (
+      'skullBase' in head ||
+      'ornamentAnchor' in head ||
+      !['left', 'right'].includes(head.occludedSide) ||
+      typeof head.occluder !== 'string' ||
+      !/\b(?:fan|hair|ribbon)\b/i.test(head.occluder) ||
+      !validPoint(head.shoulderTop, width, height)
+    )
+      return null;
+  }
   if (
     head.kind === 'rear-base-ornament' &&
     ('crown' in head ||
@@ -112,12 +142,21 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
   if (
     (head.kind === 'rear-skull-base' ||
       head.kind === 'rear-crown-shoulder' ||
+      head.kind === 'rear-crown-shoulder-single' ||
       head.kind === 'rear-base-ornament' ||
       head.breadth !== undefined) &&
     headLandmarkBreadth(head, width, height) === null
   )
     return null;
-  const size = Math.hypot(start.x - end.x, start.y - end.y);
+  if (head.kind === 'rear-crown-shoulder-single') {
+    const midlineX = (head.breadth.left.x + head.breadth.right.x) / 2;
+    if (head.occludedSide === 'left' ? head.shoulderTop.x <= midlineX : head.shoulderTop.x >= midlineX) return null;
+    const breadth = headLandmarkBreadth(head, width, height)!,
+      offset = Math.abs(head.shoulderTop.x - midlineX);
+    if (offset < breadth * 0.25 || offset > breadth * 1.25) return null;
+  }
+  const size =
+    head.kind === 'rear-crown-shoulder-single' ? end.y - head.crown.y : Math.hypot(start.x - end.x, start.y - end.y);
   return size > 0 ? size : null;
 }
 
@@ -156,7 +195,15 @@ export function checkHeadEvidence(
   if (evidence.kind === 'rear-base-ornament' && clip.direction !== 'N')
     return failure('head_evidence_direction', 'rear ornament evidence is allowed only for N locked masters');
   if (
-    (evidence.kind === 'rear-skull-base' || evidence.kind === 'rear-crown-shoulder') &&
+    evidence.kind === 'rear-crown-shoulder-single' &&
+    options.masterHead?.kind === 'rear-crown-shoulder-single' &&
+    evidence.occludedSide !== options.masterHead.occludedSide
+  )
+    return failure('head_evidence_occluded_side', 'master/frame must declare the same occluded shoulder side');
+  if (
+    (evidence.kind === 'rear-skull-base' ||
+      evidence.kind === 'rear-crown-shoulder' ||
+      evidence.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(clip.direction ?? 'E')
   )
     return failure('head_evidence_direction', 'rear skull evidence is allowed only for NE/N locked masters');

@@ -69,12 +69,16 @@ function headLandmarkHtml(head: HeadLandmarks): string {
       ? 'skull base'
       : head.kind === 'rear-crown-shoulder'
         ? 'shoulder midpoint'
-        : 'chin';
+        : head.kind === 'rear-crown-shoulder-single'
+          ? 'visible shoulder (vertical distance)'
+          : 'chin';
   const anchor = head.kind === 'rear-base-ornament' ? `; anchor definition: ${head.anchorDefinition}` : '';
   const shoulders =
     head.kind === 'rear-crown-shoulder'
       ? `; shoulderTop left (${head.shoulderTop.left.x}, ${head.shoulderTop.left.y}), right (${head.shoulderTop.right.x}, ${head.shoulderTop.right.y})`
-      : '';
+      : head.kind === 'rear-crown-shoulder-single'
+        ? `; visible ${head.occludedSide === 'left' ? 'right' : 'left'} shoulderTop (${head.shoulderTop.x}, ${head.shoulderTop.y}); occludedSide ${head.occludedSide}; occluder ${head.occluder}`
+        : '';
   const breadth = head.breadth
     ? `; breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y})`
     : '';
