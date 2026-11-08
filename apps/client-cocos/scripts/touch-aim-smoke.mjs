@@ -199,7 +199,7 @@ try {
   check(lc && lc.seq !== n0, 'releasing the drag sends the cast');
   check(
     lc && lc.aim && Number.isFinite(lc.aim.i) && Number.isFinite(lc.aim.j),
-    `the cast carries the aim point (${lc?.aim ? lc.aim.i.toFixed(1) + ', ' + lc.aim.j.toFixed(1) : 'none'})`,
+    `the cast carries the aim point (${JSON.stringify(lc)})`,
   );
   await sleep(2500);
 
@@ -226,6 +226,20 @@ try {
   await t.end();
   await sleep(600);
   check((await castNo()) === n0, 'releasing over Cancel casts nothing');
+
+  // 4b) a tap AFTER fingers moved around (joystick drag, aim drags above) still sends no aim: touch must never reuse a stale pointer aim
+  const joy = await page.touchscreen.touchStart(canvas.x + 200, canvas.y + 500);
+  for (let k = 1; k <= 4; k++) await joy.move(canvas.x + 200 + 15 * k, canvas.y + 500 - 10 * k);
+  await joy.end();
+  await sleep(2500);
+  n0 = await castNo();
+  await page.touchscreen.tap(b0.x, b0.y);
+  await sleep(700);
+  lc = await lastCast();
+  check(
+    lc && lc.seq !== n0 && lc.aim === null,
+    'a tap after joystick / aim drags sends aim: null (no stale pointer aim)',
+  );
 
   // 5) pinch: two fingers in free space zoom the camera; a finger held on the wheel + one free finger do not
   const z0 = await zoom();

@@ -301,8 +301,9 @@ export class CombatUi {
     // pointerdown on a hotbar slot casts it and must not also start click-to-move (client-core listens on the same canvas)
     this.pointerDown = (e) => this.onPointer(e);
     game.canvas?.addEventListener('pointerdown', this.pointerDown, { capture: true });
-    // aim = where the pointer is (ground / direction skills); touch has no hover, so the aim stays unset there
+    // aim = where the mouse pointer is (ground / direction skills); touch pointers are ignored here (no hover), touch aims through the wheel
     this.pointerMove = (e) => {
+      if (e.pointerType === 'touch') return; // fingers (joystick, wheel drags, pinch) are not an aim; touch aims through the wheel
       this.lastPointer = { x: e.clientX, y: e.clientY };
     };
     game.canvas?.addEventListener('pointermove', this.pointerMove);
@@ -407,7 +408,8 @@ export class CombatUi {
    * hotbar are empty. `aim` (tile coordinates) comes from dragging the button; without it the server picks the nearest / selected target.
    */
   castFromWheel(slot: number, aim?: { i: number; j: number }): void {
-    for (const ev of this.backend.cast(slot, this.clock, aim)) this.onEvent(ev);
+    // `?? null`: a wheel cast NEVER falls back to the pointer aim (touch fingers move the pointer too): a tap sends no aim at all
+    for (const ev of this.backend.cast(slot, this.clock, aim ?? null)) this.onEvent(ev);
   }
 
   /** What the wheel button of hotbar `slot` shows: label, colour, readiness and cooldown overlays. null = no such slot. */
