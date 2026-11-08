@@ -12,6 +12,7 @@ import {
   headLandmarkEnd,
   type HeadMeasurement,
   type HeadLandmarks,
+  type HeadEvidence,
 } from './head-evidence.js';
 
 export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
@@ -63,7 +64,11 @@ export interface BatchReport {
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-function headLandmarkHtml(head: HeadLandmarks): string {
+function headLandmarkHtml(head: HeadLandmarks | HeadEvidence): string {
+  if (head.kind === 'rear-breadth-only')
+    return esc(
+      `crown (${head.crown.x}, ${head.crown.y}); breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y}); shoulder occluder ${head.occluder}; no vertical span`,
+    );
   const start = headLandmarkStart(head);
   const end = headLandmarkEnd(head);
   const label =
@@ -142,7 +147,7 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               const evidence =
                 crops +
                 (c.headEvidence?.length
-                  ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                  ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · ${e.kind === 'rear-breadth-only' ? 'breadth-only (no vertical span)' : `head ${e.sizePx!.toFixed(2)} / master ${e.masterSizePx!.toFixed(2)} px`} · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
                   : '');
               const origins = c.originEvidence?.length
                 ? `<details><summary>Authored-origin INFO evidence (${c.originEvidence.length})</summary>${c.originEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} ; ${esc(e.kind ?? 'anatomical-pelvis')} ; pelvisX ${e.pelvisX} ; groundY ${e.groundY ?? 'default'} ; source (${e.source.x}, ${e.source.y}) ; scale ${e.scale} ; dx ${e.dx}, dy ${e.dy}<br>${esc(e.reason)}<br>${esc(e.evidence)}</p>`).join('')}</details>`
