@@ -15,6 +15,4 @@ export const PROGRESSION_CONFIG = {
   AUTOSAVE_MS: 30_000,
   /** answers kept per entity so a re-sent requestId gets the same result without a second roll (docs/24 §5.1) */
   RESULT_CACHE: 16,
-  /** docs/07 §5: chance that a new character's root element becomes a mutation (Phong/Lôi/Băng) */
-  MUTATION_CHANCE: 0.02,
 } as const;

@@ -58,6 +58,13 @@ export interface ProgressionOptions {
    * realm / sub-stage (so combat can re-derive stats from `statsAt(realm, subRealm)`).
    */
   onStageChange?: (entityId: number, realm: number, subRealm: number) => void;
+  /** a record could not be stored even after reloading (version conflict twice): the caller should drop the session */
+  onPersistFailure?: (entityId: number) => void;
+  /**
+   * Major breakthroughs (realm thresholds) need Tâm Ma and Lôi Kiếp (docs/01 §5), which are not built yet, so they are
+   * refused with `ProgressionReason.TribulationRequired` unless this is true (tests / dev only).
+   */
+  allowMajorBreakthrough?: boolean;
 }
 
 interface Session {
@@ -89,6 +96,7 @@ export interface ProgressionMetrics {
   successes: number;
   saves: number;
   saveConflicts: number;
+  saveFailures: number;
 }
 
 const NEVER = -1e12;
@@ -103,6 +111,7 @@ export class ProgressionService {
     successes: 0,
     saves: 0,
     saveConflicts: 0,
+    saveFailures: 0,
   };
   private readonly seed: number;
   private rng: RngState;
@@ -113,6 +122,10 @@ export class ProgressionService {
   private tickOf: () => number;
   private isAlive: (entityId: number) => boolean;
   private onStageChange: ((entityId: number, realm: number, subRealm: number) => void) | undefined;
+  private onPersistFailure: ((entityId: number) => void) | undefined;
+  private readonly allowMajor: boolean;
+  /** in-flight writes per character: a new session of the same character loads only after the previous one is stored */
+  private readonly pendingWrites = new Map<string, Promise<void>>();
 
   constructor(opts: ProgressionOptions = {}) {
     this.seed = opts.seed ?? 1;
@@ -123,6 +136,8 @@ export class ProgressionService {
     this.tickOf = opts.tickOf ?? (() => 0);
     this.isAlive = opts.isAlive ?? (() => true);
     this.onStageChange = opts.onStageChange;
+    this.onPersistFailure = opts.onPersistFailure;
+    this.allowMajor = opts.allowMajorBreakthrough ?? false;
   }
 
   /** Let the world node provide liveness and the tick counter (kept optional so the service is testable alone). */
@@ -130,7 +145,9 @@ export class ProgressionService {
     isAlive?: (entityId: number) => boolean;
     tickOf?: () => number;
     onStageChange?: (entityId: number, realm: number, subRealm: number) => void;
+    onPersistFailure?: (entityId: number) => void;
   }): void {
+    if (port.onPersistFailure) this.onPersistFailure = port.onPersistFailure;
     if (port.onStageChange) this.onStageChange = port.onStageChange;
     if (port.isAlive) this.isAlive = port.isAlive;
     if (port.tickOf) this.tickOf = port.tickOf;
@@ -165,22 +182,26 @@ export class ProgressionService {
       answers: new Map(),
     });
     this.metrics.joins++;
-    void this.store.load(characterId).then(async (loaded) => {
-      const s = this.sessions.get(entityId);
-      if (!s || s.characterId !== characterId) return; // left (or replaced) while loading
-      if (loaded) {
-        s.rec = loaded;
-        s.version = loaded.version;
-      } else {
-        // creation roll: seeded by the character id, so it does not depend on login order
-        const [root] = rollSpiritRoot(rngFork(rngSeed(this.seed), `root:${characterId}`));
-        s.rec = newRecord(characterId, root);
-        s.dirty = true;
-        await this.save(s);
-      }
-      this.queueState(s);
-      this.onStageChange?.(entityId, s.rec.realm, s.rec.subRealm);
-    });
+    // load only after any in-flight write of the same character (re-login right after a leave) has finished
+    const pending = this.pendingWrites.get(characterId) ?? Promise.resolve();
+    void pending
+      .then(() => this.store.load(characterId))
+      .then(async (loaded) => {
+        const s = this.sessions.get(entityId);
+        if (!s || s.characterId !== characterId) return; // left (or replaced) while loading
+        if (loaded) {
+          s.rec = loaded;
+          s.version = loaded.version;
+        } else {
+          // creation roll: seeded by the character id, so it does not depend on login order
+          const [root] = rollSpiritRoot(rngFork(rngSeed(this.seed), `root:${characterId}`));
+          s.rec = newRecord(characterId, root);
+          s.dirty = true;
+          await this.save(s);
+        }
+        this.queueState(s);
+        this.onStageChange?.(entityId, s.rec.realm, s.rec.subRealm);
+      });
   }
 
   /** Remove a player: meditation ends and the record is written. Returns when the write finished. */
@@ -307,6 +328,7 @@ export class ProgressionService {
     const r = s.rec!;
     const plan = planBreakthrough(r);
     if (!plan) return rejected(ProgressionReason.AtMaxStage);
+    if (plan.kind === 'major' && !this.allowMajor) return rejected(ProgressionReason.TribulationRequired);
     if (nowMs - s.lastAttemptMs < PROGRESSION_CONFIG.BREAKTHROUGH_COOLDOWN_MS)
       return rejected(ProgressionReason.Cooldown);
     if (r.exp < tuViRequired(r)) return rejected(ProgressionReason.NotEnoughTuVi);
@@ -417,7 +439,10 @@ export class ProgressionService {
 
   /**
    * Write the record with optimistic concurrency. One write at a time per player: a change made while a write is in
-   * flight is written right after it, so the stored version always follows the in-memory state.
+   * flight is written right after it, so the stored version always follows the in-memory state. A version conflict
+   * means something else wrote this character: reload the stored version once and write again (the online session is
+   * the authoritative writer of its character); a second conflict is reported through `onPersistFailure` instead of
+   * continuing silently without persistence.
    */
   private save(s: Session): Promise<void> {
     if (s.saving) {
@@ -425,8 +450,10 @@ export class ProgressionService {
       return s.savePromise!;
     }
     s.saving = true;
-    s.savePromise = (async () => {
+    let run!: Promise<void>;
+    run = (async () => {
       try {
+        let conflicts = 0;
         do {
           s.resave = false;
           const rec = s.rec;
@@ -435,6 +462,14 @@ export class ProgressionService {
           const ok = await this.store.save(next, s.version);
           if (!ok) {
             this.metrics.saveConflicts++;
+            const latest = await this.store.load(s.characterId);
+            if (conflicts++ < 1 && latest) {
+              s.version = latest.version;
+              s.resave = true;
+              continue;
+            }
+            this.metrics.saveFailures++;
+            this.onPersistFailure?.(s.entityId);
             break;
           }
           this.metrics.saves++;
@@ -444,8 +479,14 @@ export class ProgressionService {
         } while (s.resave);
       } finally {
         s.saving = false;
+        // deferred: when the body finished without awaiting, `run` is not assigned yet
+        void Promise.resolve().then(() => {
+          if (this.pendingWrites.get(s.characterId) === run) this.pendingWrites.delete(s.characterId);
+        });
       }
     })();
-    return s.savePromise;
+    s.savePromise = run;
+    this.pendingWrites.set(s.characterId, run);
+    return run;
   }
 }

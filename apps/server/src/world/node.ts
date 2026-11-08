@@ -233,6 +233,10 @@ export class WorldNode {
     this.progression?.attach({
       isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
       tickOf: () => this.world.tick,
+      onPersistFailure: (id) => {
+        const c = this.clients.get(id);
+        if (c) this.kick(c, ErrorCode.Internal, 'progression storage error');
+      },
     });
     const mo = opts.mobs;
     if (mo) {

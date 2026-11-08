@@ -49,6 +49,8 @@ export enum ProgressionReason {
   NotEnoughTuVi = 6,
   AtMaxStage = 7,
   Cooldown = 8,
+  /** a major threshold needs Tâm Ma and Lôi Kiếp (docs/01 §5), which do not exist yet: major attempts are refused */
+  TribulationRequired = 9,
 }
 export enum BreakthroughOutcome {
   Success = 1,

@@ -379,7 +379,10 @@ describe('breakthrough attempts', () => {
     expect(lose.svc.recordOf(1)).toMatchObject({ realm: 1, subRealm: 1, exp: 1000 });
   });
   it('a major failure raises the pity counter and the next chance (0.70 -> 0.78)', async () => {
-    const x = await rig({ realm: 1, subRealm: 9, exp: requiredCultivation(9) }, { seed: FAIL_SEED });
+    const x = await rig(
+      { realm: 1, subRealm: 9, exp: requiredCultivation(9) },
+      { seed: FAIL_SEED, allowMajorBreakthrough: true },
+    );
     const first = result(x.cmd(bt(1)), 'breakthrough_result')[0]!;
     expect([first.kind, first.chance, first.nFail, first.outcome]).toEqual([2, 7000, 1, BreakthroughOutcome.Failure]);
     expect(x.svc.stateOf(1)).toMatchObject({ nFail: 1, stage: 9 });
@@ -389,6 +392,28 @@ describe('breakthrough attempts', () => {
     expect(x.log.entries.map((e) => e.nFailBefore)).toEqual([0, 1]);
     expect(x.log.entries[0]!.chance).toBeCloseTo(0.7, 12);
     expect(x.log.entries[1]!.chance).toBeCloseTo(0.78, 12);
+  });
+  it('major thresholds are refused until Tâm Ma and Lôi Kiếp exist (TribulationRequired), without rolling', async () => {
+    const x = await rig({ realm: 1, subRealm: 9, exp: requiredCultivation(9) }, { seed: WIN_SEED });
+    const rng = x.svc.rngState();
+    const r = result(x.cmd(bt(1)), 'breakthrough_result')[0]!;
+    expect(r).toMatchObject({
+      outcome: BreakthroughOutcome.Rejected,
+      reason: ProgressionReason.TribulationRequired,
+      chance: 0,
+    });
+    expect(ProgressionReason.TribulationRequired).toBe(9);
+    expect(x.log.entries).toHaveLength(0);
+    expect(x.svc.rngState()).toEqual(rng);
+    expect(x.svc.recordOf(1)).toMatchObject({ realm: 1, subRealm: 9, exp: requiredCultivation(9), nFail: 0 });
+    // minor breakthroughs and meditation up to the threshold are unaffected; the explicit option re-enables majors
+    const open = await rig(
+      { realm: 1, subRealm: 9, exp: requiredCultivation(9) },
+      { seed: WIN_SEED, allowMajorBreakthrough: true },
+    );
+    expect(result(open.cmd(bt(1)), 'breakthrough_result')[0]!.outcome).not.toBe(BreakthroughOutcome.Rejected);
+    const minor = await rig({ realm: 1, subRealm: 8, exp: requiredCultivation(8) }, { seed: WIN_SEED });
+    expect(result(minor.cmd(bt(1)), 'breakthrough_result')[0]!.outcome).toBe(BreakthroughOutcome.Success);
   });
   it('a re-sent requestId returns the stored result without rolling again', async () => {
     const x = await rig({ exp: 1000 }, { seed: WIN_SEED });
@@ -493,7 +518,61 @@ describe('determinism and persistence', () => {
     await x.store.save({ ...stored, version: stored.version + 5 }, stored.version);
     x.cmd(stop(2));
     await flush();
+    await flush();
+    // the conflict is not silent and not permanent: the stored version is reloaded and the write is retried
     expect(x.svc.metrics.saveConflicts).toBeGreaterThan(0);
+    expect(x.svc.metrics.saveFailures).toBe(0);
+    expect(x.store.peek('acc1')!.exp).toBeCloseTo(x.svc.recordOf(1)!.exp, 9);
+  });
+  it('a store that keeps refusing the write reports the failure so the session can be dropped', async () => {
+    class Refusing extends InMemoryProgressionStore {
+      refuse = false;
+      override async save(rec: ProgressRecord, expected: number): Promise<boolean> {
+        return this.refuse ? false : super.save(rec, expected);
+      }
+    }
+    const store = new Refusing();
+    const failed: number[] = [];
+    const x = await rig({ exp: 10 }, { store, onPersistFailure: (id) => failed.push(id) });
+    store.refuse = true;
+    x.cmd(meditate(1));
+    x.cmd(stop(2));
+    await flush();
+    await flush();
+    expect(failed).toEqual([1]);
+    expect(x.svc.metrics.saveFailures).toBe(1);
+  });
+  it('re-login right after leave: join waits for the previous session write (store whose save is slower than load)', async () => {
+    const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+    class SlowSave extends InMemoryProgressionStore {
+      override async save(rec: ProgressRecord, expected: number): Promise<boolean> {
+        await sleep(40);
+        return super.save(rec, expected);
+      }
+    }
+    const store = new SlowSave();
+    await store.save({ ...record({ exp: 100 }), version: 1 }, 0);
+    const svc = new ProgressionService({ store, seed: 1 });
+    svc.join(1, 'acc1', 0);
+    await sleep(10);
+    expect(svc.recordOf(1)!.exp).toBe(100);
+    svc.handle(1, meditate(1), 10_000);
+    for (let k = 0; k < 100; k++) svc.tick(10_050 + k * TICK, TICK);
+    const gained = svc.recordOf(1)!.exp;
+    expect(gained).toBeGreaterThan(100);
+    const leaving = svc.leave(1); // async save in flight...
+    svc.join(2, 'acc1', 20_000); // ...and the same account logs in again at once
+    await leaving;
+    await sleep(100);
+    // the new session loaded the finished write, not the stale 100 / version 1
+    expect(svc.recordOf(2)!.exp).toBeCloseTo(gained, 9);
+    expect(svc.metrics.saveConflicts).toBe(0);
+    svc.handle(2, meditate(2), 30_000);
+    for (let k = 0; k < 20; k++) svc.tick(30_050 + k * TICK, TICK);
+    await svc.leave(2);
+    expect(store.peek('acc1')!.exp).toBeGreaterThan(gained);
+    expect(svc.metrics.saveConflicts).toBe(0);
+    expect(svc.metrics.saveFailures).toBe(0);
   });
   it('autosave writes dirty records at most every AUTOSAVE_MS', async () => {
     const x = await rig();

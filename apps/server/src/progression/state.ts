@@ -5,6 +5,7 @@
 import {
   ELEMENTS,
   MUTATION_BASE,
+  NGU_HANH,
   ROOT_TYPES,
   TOTAL_STAGES,
   absorbPerMinute,
@@ -26,7 +27,6 @@ import {
   type RngState,
   type RootTypeId,
 } from '@vgtd/shared';
-import { PROGRESSION_CONFIG } from './config.js';
 
 export interface SpiritRoot {
   readonly type: RootTypeId;
@@ -147,7 +147,7 @@ export function rollSpiritRoot(rng: RngState): [SpiritRoot, RngState] {
   [pick, rng] = rngInt(rng, elements.length);
   // Only Moc (Phong), Kim (Loi) and Thuy (Bang) have a mutated form: a mutation roll on another element changes nothing.
   const mutated = (Object.keys(MUTATION_BASE) as Mutation[]).find((x) => MUTATION_BASE[x] === elements[pick]);
-  const mutation = m < PROGRESSION_CONFIG.MUTATION_CHANCE && mutated ? mutated : null;
+  const mutation = m < NGU_HANH.MUTATION_CHANCE && mutated ? mutated : null;
   return [{ type: type.id, elements, mutation }, rng];
 }
 

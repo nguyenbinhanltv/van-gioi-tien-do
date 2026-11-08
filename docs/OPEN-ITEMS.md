@@ -368,6 +368,7 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 - **Đả tọa ở mọi nơi**: mặc định ρ = 1,0 và đất ngũ hành đều (Match = 1) cho tới khi có dữ liệu map/Linh Mạch (`MeditationEnv`); thành chính 0,6 và Linh Mạch của 07 §5 chưa nối.
 - **Linh căn nhân vật mới** roll từ PRNG theo `characterId` (tỷ lệ loại và 2% biến dị của 07 §5; mỗi hệ có trọng số bằng nhau, biến dị chỉ ở Mộc/Kim/Thủy vì chỉ ba hệ này có dạng biến dị). Cách người chơi chọn hay đổi linh căn chưa có.
 - **Cột dữ liệu**: `n_fail` (bộ đếm pity) chưa có trong docs/23 §4.2; hiện lưu cùng bản ghi (`ProgressRecord.nFail`) và cần thêm cột/`jsonb` khi viết migration.
+- **Đột phá đại cảnh bị khóa** (D76): docs/01 §5 định nghĩa ngưỡng lớn là Tâm Ma → roll → Lôi Kiếp (thất bại có ý nghĩa, P1); các cơ chế đó chưa có nên server từ chối mọi lần đột phá đại cảnh bằng `ProgressionReason.TribulationRequired` (9), đồng thời cooldown 3 s và việc giữ nguyên tu vi khi thất bại là mốc kỹ thuật tạm. Bật lại bằng `allowMajorBreakthrough` khi Tâm Ma/Lôi Kiếp xong; cần quyết định hậu quả thất bại.
 - **Giai đoạn cuối**: tầng 41 (Độ Kiếp viên mãn) không thể đột phá tiếp (Phi Thăng chưa thiết kế).
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).

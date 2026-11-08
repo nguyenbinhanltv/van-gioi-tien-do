@@ -6,6 +6,7 @@ import {
   ProgressionService,
   WorldNode,
   newRecord,
+  type ProgressRecord,
   type ClientTransport,
   type WorldNodeOptions,
 } from '../src/index.js';
@@ -120,6 +121,27 @@ describe('progression over the real protocol (WorldNode)', () => {
     expect(saved.version).toBeGreaterThan(1);
     if (r.outcome === BreakthroughOutcome.Success) expect([saved.realm, saved.subRealm, saved.exp]).toEqual([1, 2, 0]);
     else expect([saved.realm, saved.subRealm, saved.exp]).toEqual([1, 1, 1000]);
+  });
+  it('a storage conflict that cannot be resolved drops the session with ErrorCode.Internal', async () => {
+    class Refusing extends InMemoryProgressionStore {
+      refuse = false;
+      override async save(rec: ProgressRecord, expected: number): Promise<boolean> {
+        return this.refuse ? false : super.save(rec, expected);
+      }
+    }
+    const store = new Refusing();
+    await store.save(
+      { ...newRecord('acc-1', { type: 'tap_tam', elements: ['kim', 'moc', 'thuy'], mutation: null }), version: 1 },
+      0,
+    );
+    const progression = new ProgressionService({ store, seed: 7 });
+    const { world, c } = await setup({ progression });
+    store.refuse = true;
+    world.receive(c.id, encode({ type: 'meditate_start', requestId: hex(1) }));
+    world.receive(c.id, encode({ type: 'meditate_stop', requestId: hex(2) }));
+    await flush();
+    await flush();
+    expect(c.closed).toMatchObject({ code: ErrorCode.Internal });
   });
   it('without a progression service the new messages are rejected like any unexpected message', () => {
     const world = new WorldNode({ mapTiles: 160, spawn: { i0: 60, j0: 60, side: 40 } });
