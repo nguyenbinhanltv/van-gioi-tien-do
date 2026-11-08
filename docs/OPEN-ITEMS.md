@@ -407,6 +407,15 @@ Còn mở / lưu ý:
 - **Không dự đoán phía client**: thanh tu vi chỉ nhảy theo `char_state` (~1 Hz khi đang ngồi); nếu muốn thanh mượt cần nội suy tốc độ `Absorb` (chưa có trên dây).
 - **Tiểu cảnh thất bại** hiện chỉ có toast (không hiệu ứng); không có hiển thị tỉ lệ trước khi bấm (server mới trả `chance` sau khi roll).
 
+## 19. Chọn lớp trên dây (D82, worker35): còn mở
+
+- **Đổi lớp / respec**: lớp chỉ chọn một lần lúc tạo nhân vật; chưa có thiết kế đổi lớp (giá, hạn chế, mất tiến trình?). Hiện muốn lớp khác phải tạo tài khoản khác.
+- **Nhiều nhân vật / tài khoản**: docs/10 G10 nói 3 nhân vật mỗi tài khoản; MVP vẫn 1 nhân vật = 1 tài khoản (`characterId` = `accountId`), nên "chọn lớp" gắn với tài khoản. Khi có `char_select` (docs/24 id 14), picker chuyển thành bước tạo nhân vật.
+- **Chưa có tên / ngoại hình** nhân vật; picker chỉ chọn lớp. Chuỗi tiếng Việt của picker (`ClassPicker.ts`) là bản đầu, chưa qua biên tập viên, cùng ghi chú i18n ở mục 18.
+- **Người chơi khác thấy lớp qua `defId`**: id 0 (server cũ / chưa biết) vẫn rơi về cách đoán theo `entityId % 6` của client; xóa nhánh này khi mọi server đã gửi lớp.
+- **Mở khóa kỹ năng theo cấp vẫn chưa ép** (mục 11): người mới tạo thấy cả 8 kỹ năng của lớp trên hotbar.
+- **Bản ghi trước D82** không có `classId`: lần đăng nhập đầu sau nâng cấp sẽ nhận lớp theo `hello` (hoặc `kiem`); cần quyết định có cho người chơi cũ chọn lại một lần không.
+
 ## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
 
 1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).

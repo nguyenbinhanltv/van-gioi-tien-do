@@ -15,3 +15,4 @@ export * from '../../../packages/shared/src/formulas/skills.js'; // class skill 
 export * from '../../../packages/shared/src/items.js'; // item / currency definitions for the bag panel (D79)
 export * from '../../../packages/shared/src/mob-layout.js'; // tier bands / default mob area (D83)
 export * from '../../../packages/shared/src/first-session.js'; // first-session objective numbers (D84)
+export * from '../../../packages/shared/src/classes.js'; // class wire ids (D82)
