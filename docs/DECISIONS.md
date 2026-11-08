@@ -274,8 +274,6 @@ Mặc định cho bộ khung server đầu tiên; mọi mục là **mặc địn
 
 **Trạng thái D71:** công cụ sinh bundle/tier/nhóm clip (`tools/procgen`), hằng số `CHIBI_RUNTIME` và cổng ngân sách CI đã merge ở #66. Phần client-cocos (preset nén ASTC/WebP trong `settings/v2/packages/builder.json`, sinh bundle trong `prepare:assets`, nạp lười có hàng đợi, `?restier=`) được triển khai ở PR client-cocos (#197, `ChibiAssets.ts`, `scripts/chibi-bundles.mjs`); số đo ở `docs/06-toi-uu-render.md`. Mục còn mở: `docs/OPEN-ITEMS.md` (D71).
 
-**Trạng thái D71:** phần công cụ sinh bundle/tier/nhóm clip (`tools/procgen`), hằng số `CHIBI_RUNTIME` và cổng ngân sách CI đã có. Preset nén ASTC/WebP của Cocos builder, sinh bundle trong `prepare`, nạp lười và `?restier=` thuộc phần client-cocos, **chưa có trong nhánh này**; theo dõi ở `docs/OPEN-ITEMS.md` (mục D71) cho đến khi PR client-cocos được merge.
-
 ## D73 — băng thông snapshot: vùng theo khoảng cách ô + bỏ bản ghi không đổi (orchestrator duyệt 2026-11-08)
 
 Đo P2-2/P2-3 (100 bot cùng thấy 96-99 người): người xấu nhất 8,04-8,67 KB/s so với ngân sách 8 KB/s. **Giữ nguyên ngân sách 8 KB/s**, giảm lượng gửi.
