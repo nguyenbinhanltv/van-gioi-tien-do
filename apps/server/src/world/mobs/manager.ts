@@ -220,6 +220,12 @@ export class MobManager {
   kindOf(id: number): number {
     return isMobId(id) ? MOB_ENTITY_KIND : 0;
   }
+  /** What the mob attack system reads (D86): AI state, chase target, level, def. No allocation; undefined for dead / unknown mobs. */
+  attackView(id: number): { state: MobBrain['state']; target: number; level: number; def: MobDef } | undefined {
+    const s = this.slots[id - MOB_ID_BASE];
+    if (!s || s.id !== id || !s.alive) return undefined;
+    return { state: s.brain.state, target: s.brain.target, level: s.level, def: s.def };
+  }
 
   // ------------------------------------------------------------------ spawning
   /** Chebyshev distance of a point from the centre of the mob area, in tiles. */
