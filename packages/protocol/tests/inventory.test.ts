@@ -39,7 +39,10 @@ const samples: ColdMessage[] = [
   { type: 'inv_state', wallet: [0, 0, 0], slots: [], pending: [] },
   { type: 'inv_cmd', requestId: REQ, op: InvOp.Move, from: 3, to: 17 },
   { type: 'inv_cmd', requestId: REQ, op: InvOp.ClaimPending, from: 0, to: 0 },
+  { type: 'inv_cmd', requestId: REQ, op: InvOp.Use, from: 9, to: 0 },
   { type: 'inv_result', requestId: REQ, op: InvOp.Move, reason: InvReason.Ok, count: 0 },
+  { type: 'inv_result', requestId: REQ, op: InvOp.Use, reason: InvReason.OnCooldown, count: 0 },
+  { type: 'inv_result', requestId: REQ, op: InvOp.Use, reason: InvReason.PillActive, count: 0 },
   { type: 'inv_result', requestId: REQ, op: InvOp.ClaimPending, reason: InvReason.NothingMoved, count: 0 },
 ];
 
@@ -85,7 +88,7 @@ describe('inventory (cold family) codec', () => {
       3,
       17,
     ]);
-    expect(Array.from(encode(samples[4]!)).slice(-3)).toEqual([1, 0, 0]); // op, reason, count
+    expect(Array.from(encode(samples[5]!)).slice(-3)).toEqual([1, 0, 0]); // op, reason, count
   });
 
   it('inv_state layout: u8 slot count, 3 x float64 wallet, tagged slots, u8 pending count', () => {
@@ -128,7 +131,10 @@ describe('inventory (cold family) codec', () => {
     bad({ ...state, slots: [{ kind: 'instance', defId: 1, quality: 0, durability: 1, bound: 1 }] });
     bad({ ...state, slots: [{ kind: 'gem', defId: 1 }] });
     bad({ type: 'inv_cmd', requestId: 'XYZ', op: 1, from: 0, to: 1 });
-    bad({ type: 'inv_cmd', requestId: REQ, op: 3, from: 0, to: 1 });
+    bad({ type: 'inv_cmd', requestId: REQ, op: 3, from: 0, to: 1 }); // a use carries only its source slot
+    bad({ type: 'inv_cmd', requestId: REQ, op: 4, from: 0, to: 0 }); // unknown op
+    bad({ type: 'inv_cmd', requestId: REQ, op: InvOp.Use, from: 64, to: 0 });
+    bad({ type: 'inv_result', requestId: REQ, op: 4, reason: 0, count: 0 });
     bad({ type: 'inv_cmd', requestId: REQ, op: 1, from: 64, to: 1 });
     bad({ type: 'inv_cmd', requestId: REQ, op: InvOp.ClaimPending, from: 1, to: 0 }); // a claim carries no slots
     bad({ type: 'inv_result', requestId: REQ, op: 0, reason: 0, count: 0 });

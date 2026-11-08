@@ -64,7 +64,7 @@ import {
   type CombatResult,
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
+import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -691,7 +691,19 @@ export class WorldNode {
         if (!this.invSync) {
           c.stats.badMessages++;
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
-        } else this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs));
+        } else {
+          // using an item (D90) acts on the sender's character: pills heal through the combat core / feed the next breakthrough
+          const use = itemUseFor(
+            {
+              combat: this.combat,
+              progression: this.progression,
+              getWorld: () => this.world,
+              setWorld: (w) => (this.world = w),
+            },
+            c.id,
+          );
+          this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs, use));
+        }
         break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });

@@ -5,7 +5,7 @@
  * The server is authoritative: the model never edits the bag locally. A move shows up when the next `inv_state` arrives.
  * In-game stone currencies only: no price / shop / real-money notions.
  */
-import { CURRENCIES, itemDefById, type Currency, type DropItem } from '@vgtd/shared';
+import { CURRENCIES, isUsableItem, itemDefById, type Currency, type DropItem } from '@vgtd/shared';
 import { InvOp, InvReason, type InvCmdMsg, type InvPending, type InvResultMsg, type InvSlot, type InvStateMsg } from '@vgtd/protocol';
 
 export type WalletView = Readonly<Record<Currency, number>>;
@@ -120,6 +120,29 @@ export class BagModel {
     return cmd;
   }
 
+  /** Is the item in `slot` something the player can use (a stack of a usable kind)? The server re-validates. */
+  canUse(slot: number): boolean {
+    const it = this.itemAt(slot);
+    return !!it && it.kind === 'stack' && isUsableItem(it.key);
+  }
+
+  /** Builds (and remembers) a use command for the stack in `slot`, or null when it is not usable. The caller sends it. */
+  useCmd(slot: number, newId: () => string): InvCmdMsg | null {
+    if (!this.canUse(slot)) return null;
+    const cmd: InvCmdMsg = { type: 'inv_cmd', requestId: newId(), op: InvOp.Use, from: slot, to: 0 };
+    this.waiting.set(cmd.requestId, cmd);
+    return cmd;
+  }
+
+  /** The first slot (lowest index) holding a stack of item `key`, or null: the target of a quick-use key. */
+  slotOfKey(key: string): number | null {
+    for (let i = 0; i < this._slots.length; i++) {
+      const it = this.itemAt(i);
+      if (it && it.kind === 'stack' && it.key === key) return i;
+    }
+    return null;
+  }
+
   /** Builds (and remembers) a claim-pending command, or null when nothing is pending. */
   claimCmd(newId: () => string): InvCmdMsg | null {
     if (this._pending.length === 0) return null;
@@ -154,6 +177,16 @@ export function invReasonText(reason: number): string {
       return 'bag not ready';
     case InvReason.NothingMoved:
       return 'nothing fits';
+    case InvReason.NotUsable:
+      return 'cannot be used';
+    case InvReason.OnCooldown:
+      return 'still cooling down';
+    case InvReason.Dead:
+      return 'you are dead';
+    case InvReason.NothingToHeal:
+      return 'HP is full';
+    case InvReason.PillActive:
+      return 'a pill is already waiting';
     default:
       return `refused (${reason})`;
   }

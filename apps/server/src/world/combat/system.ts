@@ -18,6 +18,7 @@ import {
   rngFloat,
   rngFork,
   rngSeed,
+  ITEM_USE,
   NETWORK,
   REGEN,
   skillDefinitions,
@@ -57,6 +58,8 @@ interface PlayerCombat {
   shieldUntilMs: number;
   /** sim time of the last damage dealt or taken (regeneration is slower in combat, D88) */
   lastCombatMs: number;
+  /** sim time at which the shared pill cooldown ends (D90) */
+  pillReadyAtMs: number;
   /** fractional HP / MP not yet applied (vitals are integers; the remainder carries over) */
   hpFrac: number;
   mpFrac: number;
@@ -118,6 +121,7 @@ export class CombatSystem {
       shield: 0,
       shieldUntilMs: 0,
       lastCombatMs: -REGEN.outOfCombatDelayMs, // a new player starts out of combat
+      pillReadyAtMs: 0,
       hpFrac: 0,
       mpFrac: 0,
     });
@@ -300,6 +304,42 @@ export class CombatSystem {
       w = patch(w, new Map([[id, { vi: 0, vj: 0, pending: [] }]]));
     }
     return { world: w, events };
+  }
+
+  // ------------------------------------------------------------------ item use (D90)
+  /**
+   * Drink a heal pill: `ITEM_USE.healPill.healPct` of max HP, shared cooldown `cooldownMs`. Refused (nothing changes, the caller keeps
+   * the item) when the player is unknown, dead, at full HP or still cooling down. Healing is not combat (regeneration is unaffected).
+   */
+  usePill(
+    world: SimWorld,
+    id: number,
+  ): {
+    world: SimWorld;
+    result: 'ok' | 'unknown' | 'dead' | 'full' | 'cooldown';
+    healed: number;
+    events: CombatEvent[];
+  } {
+    const p = this.players.get(id);
+    const e = world.entities.find((x) => x.id === id);
+    const none = (result: 'unknown' | 'dead' | 'full' | 'cooldown') => ({ world, result, healed: 0, events: [] });
+    if (!p || !e) return none('unknown');
+    if (!p.alive || e.hp <= 0) return none('dead');
+    if (world.timeMs < p.pillReadyAtMs) return none('cooldown');
+    if (e.hp >= p.hpMax) return none('full');
+    const healed = Math.min(p.hpMax - e.hp, Math.max(1, Math.round(p.hpMax * ITEM_USE.healPill.healPct)));
+    p.pillReadyAtMs = world.timeMs + ITEM_USE.healPill.cooldownMs;
+    return {
+      world: patch(world, new Map([[id, { hp: e.hp + healed }]])),
+      result: 'ok',
+      healed,
+      events: [{ type: 'heal', targetId: id, amount: healed }],
+    };
+  }
+
+  /** Milliseconds until the shared pill cooldown ends (0 = ready), for tests and diagnostics. */
+  pillCooldownMs(id: number, nowMs: number): number {
+    return Math.max(0, (this.players.get(id)?.pillReadyAtMs ?? 0) - nowMs);
   }
 
   // ------------------------------------------------------------------ regeneration (D88)
@@ -515,7 +555,17 @@ export class CombatSystem {
     return JSON.stringify({
       players: [...this.players.entries()]
         .sort((a, b) => a[0] - b[0])
-        .map(([id, p]) => [id, p.alive, p.respawnAtMs, p.shield, p.shieldUntilMs, p.lastCombatMs, p.hpFrac, p.mpFrac]),
+        .map(([id, p]) => [
+          id,
+          p.alive,
+          p.respawnAtMs,
+          p.shield,
+          p.shieldUntilMs,
+          p.lastCombatMs,
+          p.hpFrac,
+          p.mpFrac,
+          p.pillReadyAtMs,
+        ]),
       pending: this.pending.map((p) => [p.resolveAtMs, p.casterId, p.seq, p.wireId, p.targetId]),
       drop: this.dropRng,
     });

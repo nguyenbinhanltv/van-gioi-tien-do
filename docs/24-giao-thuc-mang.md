@@ -160,6 +160,8 @@ Ghi chú: mọi thông điệp C→S là **ý định**; không có thông đi�
 
 > **[Cập nhật D79]** Các id 66-68 (túi đồ, `packages/protocol/src/inventory.ts`) cùng phong bì họ Lạnh; id 69 để dành. `inv_state`: `slotCount u8`, ví 3 × `f64` (Linh thạch hạ/trung/thượng), từng ô (`0` trống · `1` xếp chồng `defId u16, quality u8, qty u16` · `2` instance `defId u16, quality u8, durability u16 (×100), bound u8`), `pendingCount u8` + mục `defId u16, quality u8, qty u16`; gửi khi vào game và sau mỗi thay đổi, tối đa một lần mỗi tick. `inv_cmd`: `op` 1 = chuyển / hoán đổi / gộp ô, 2 = nhận hàng chờ (from = to = 0); phát lại cùng `requestId` trả đúng kết quả cũ. `inv_result.reason` (`InvReason`): 0 ok, 1 ô sai, 2 ô trống, 3 quá nhanh, 4 chưa sẵn sàng, 5 không chuyển được; `count` = số mục hàng chờ đã chuyển. `PROTOCOL_VERSION` lên **4** (một lần tăng chung với việc nối lại, D79). Không có trường giá, cửa hàng hay tiền thật.
 
+> **[Cập nhật D90]** `inv_cmd` thêm `op` 3 = **dùng** vật phẩm ở ô `from` (`to` = 0, khác 0 là sai khuôn dạng; không thêm id thông điệp). `InvReason` thêm: 6 không dùng được, 7 đang hồi chiêu, 8 đã chết, 9 HP đầy, 10 đã có đan đột phá chờ. `PROTOCOL_VERSION` **không đổi** (chỉ thêm giá trị enum).
+
 > **[Cập nhật D82]** `hello` (JSON) có thêm `classId` tùy chọn (chuỗi `PathId` hoặc id dây 1..6; sai giá trị: `BadMessage`), dùng chỉ khi nhân vật chưa tồn tại; `hello_ack` có `classId` (id dây của lớp server giữ). `EnterEntity.defId` của người chơi (kind 0) mang id lớp 1..6 (0 = không rõ), của quái vẫn là id định nghĩa quái: không đổi bố cục `aoi_enter`, không tăng `PROTOCOL_VERSION`. Hiện thực: `apps/server/src/gateway.ts`, `packages/shared/src/classes.ts`.
 
 ### 5.1 Quy tắc ứng dụng

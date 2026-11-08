@@ -489,3 +489,10 @@ Còn mở / lưu ý:
 - 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
 - Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
+
+## D90 — dùng vật phẩm: còn mở (worker39, 2026-11-09)
+
+1. **Số liệu tạm, cần game designer duyệt**: đan hồi máu không phụ thuộc phẩm; áp công thức đan của đột phá đại cảnh cho đột phá tiểu cảnh (trần 95 % của công thức nên đan chỉ thêm tối đa +5 % so với 90 %); một đan đột phá chờ mỗi lúc; hồi chiêu 8 s chung cho mọi đan hồi máu.
+2. **Đan đột phá chỉ sống trong phiên**: không nằm trong hồ sơ nhân vật (cần đổi lược đồ `ProgressRecord` và cờ trong `char_state`); client chưa có chỉ báo "đang có đan chờ" (chỉ thấy tỉ lệ trong `breakthrough_result`); rớt mạng làm mất đan đã dùng.
+3. **Chưa làm**: đan hồi MP, đan chủ / đan phụ theo ngưỡng (`pillBonus` với `main` / `support` và tối đa 3 viên), đan hồi máu thường bị khóa trong Lôi Kiếp (docs/01 §5), dùng vật phẩm instance (trang bị / bản vẽ), tách / vứt, ô nhanh nhiều phím (chỉ phím H cho đan hồi máu), hồi chiêu hiển thị trên client (chỉ biết khi bị từ chối `OnCooldown`).
+4. **Giao thức**: `Use` và các lý do 6-10 chỉ thêm giá trị vào enum, `PROTOCOL_VERSION` không đổi; khi có bản server và client khác nhau cùng chạy cần bật lại kiểm tra phiên bản (docs/24).

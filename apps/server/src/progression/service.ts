@@ -22,6 +22,7 @@ import {
 import {
   DEFAULT_CLASS,
   ROOT_TYPES,
+  breakthroughPillChance,
   parseClass,
   rngFloat,
   rngFork,
@@ -98,6 +99,8 @@ interface Session {
   tokens: number;
   tokenMs: number;
   answers: Map<string, ColdServerMessage>;
+  /** quality of the breakthrough pill waiting for the next attempt (D90); session-only, not persisted */
+  pill: number | null;
 }
 
 export interface ProgressionMetrics {
@@ -195,6 +198,7 @@ export class ProgressionService {
       tokens: PROGRESSION_CONFIG.CMD_BUCKET,
       tokenMs: nowMs,
       answers: new Map(),
+      pill: null,
     });
     this.metrics.joins++;
     // load only after any in-flight write of the same character (re-login right after a leave) has finished
@@ -279,6 +283,21 @@ export class ProgressionService {
   }
   recordOf(entityId: number): ProgressRecord | null {
     return this.sessions.get(entityId)?.rec ?? null;
+  }
+  /**
+   * A breakthrough pill (D90) of `quality` is drunk: its bonus applies to the NEXT breakthrough attempt of this character. One at a
+   * time; session-only (not persisted). 'ok' = accepted (the caller consumes the item), otherwise nothing changed.
+   */
+  addBreakthroughPill(entityId: number, quality: number): 'ok' | 'not_ready' | 'active' {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return 'not_ready';
+    if (s.pill !== null) return 'active';
+    s.pill = quality;
+    return 'ok';
+  }
+  /** Quality of the waiting breakthrough pill, or null (tests / diagnostics). */
+  pendingPill(entityId: number): number | null {
+    return this.sessions.get(entityId)?.pill ?? null;
   }
   isMeditating(entityId: number): boolean {
     return this.sessions.get(entityId)?.meditating ?? false;
@@ -396,14 +415,16 @@ export class ProgressionService {
     s.lastAttemptMs = nowMs;
     let draw: number;
     [draw, this.rng] = rngFloat(this.rng);
-    const success = draw < plan.chance;
+    const chance = s.pill === null ? plan.chance : breakthroughPillChance(plan.chance, s.pill);
+    s.pill = null; // the pill is spent by the attempt, whatever the outcome
+    const success = draw < chance;
     this.rollLog.append({
       stream: 'breakthrough',
       tick: this.tickOf(),
       characterId: s.characterId,
       kind: plan.kind,
       fromStage: plan.fromStage,
-      chance: plan.chance,
+      chance,
       draw,
       success,
       nFailBefore: r.nFail,
@@ -423,7 +444,7 @@ export class ProgressionService {
       reason: ProgressionReason.Ok,
       fromStage: plan.fromStage,
       toStage: success ? plan.toStage : plan.fromStage,
-      chance: Math.round(plan.chance * 10_000),
+      chance: Math.round(chance * 10_000),
       nFail: next.nFail,
     };
   }
