@@ -529,3 +529,31 @@ mới kiểm, không lọc trước theo kind hay nhãn đầu. Xóa riêng lý 
 D41 giữ nguyên, không gọi là pass. Không sửa project, raw, export hoặc backlog. Báo cáo JSON/Markdown giữ từng
 clip/ô/reason/kết quả cùng hash đầu vào và mã gate; ô không đo được báo riêng và làm lệnh lỗi. Kết quả fail không được
 biến thành pass hay tự nhận vào backlog. Xem lệnh và ràng buộc output tại `tools/sprite/README.md`.
+
+## Bổ sung D56: vai bị che trong ô nghiêng động phía sau
+
+Chỉ ô NE/N của `dash`, `run`, `attack`, `attack_2`, `attack_3` khai `posture`, vai thật sự bị che nhưng
+crown tóc ôm sọ và cả hai đầu bề ngang sọ nhìn thấy mới dùng bằng chứng ô `rear-breadth-only`:
+
+```json
+{
+  "kind": "rear-breadth-only",
+  "crown": { "x": 149, "y": 59 },
+  "breadth": { "left": { "x": 135, "y": 76 }, "right": { "x": 188, "y": 76 } },
+  "occluder": "head+earring in deep dash lean",
+  "note": "Reviewed visible skull-cap hair crown and breadth; shoulder corner occluded"
+}
+```
+
+Master cùng hướng giữ nguyên ảnh và kind đầy đủ đang khóa; D56 là ngoại lệ **chỉ cho bằng chứng ô**, không phải
+master mới. Bề ngang Euclid trong ±3% bề ngang master; crown bắt buộc nhìn thấy nhưng **không có phép đo khoảng dọc**.
+Không thêm shoulder/chin/skullBase/ornamentAnchor; không lấy tua khuyên hay khuỷu làm vai. Gate kiểm alpha ≥128 tại
+crown/hai đầu bề ngang ô và hai đầu bề ngang master (lấy pixel làm tròn tọa độ); người xem xác nhận đó là tóc ôm sọ,
+đúng cực trị, loại pin/tassel/khuyên/tóc rời, và vai thật sự bị che. Khai `occluder` cụ thể và note đã xem.
+
+INFO/review ghi crown, hai đầu, vật che, bề ngang master/ô và tỷ lệ; không xuất `sizePx`, `masterSizePx` hay tỷ lệ
+khoảng dọc giả. Idle/walk/emote/cast, lý do khác `posture`, thiếu vật che hay điểm không nhìn thấy đều bị lỗi kể cả bbox
+trong band. D54 vẫn kiểm similarity độc lập, D55 khi merge vẫn áp dụng; không sửa phân loại để miễn ô fail. Giữ nguyên
+foot/canvas/scale và mọi kind cũ. Pháp tu NE master đã xác nhận crown(140,16), breadth(114,36)–(166,36)=52px,
+acromion(156,79); neo acromion là góc ngoài vai đổi độ dốc lớn nhất của contour áo dưới cổ, không phải điểm nối cổ.
+Chỉ dash local4/5/7 được áp dụng D56 cho bộ này sau khi tooling merge; giữ tư thế động đã duyệt.

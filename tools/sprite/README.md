@@ -460,3 +460,32 @@ on the master and aligned256px in motion cells, using clip-local indices. Never 
 edit the approved master, or substitute a convenience point. If a frame also hides the remaining shoulder, report it
 instead of supplying invented evidence. INFO/review retains the visible point, occluded side/reason, and master values;
 foot/canvas gates and fixed scale remain unchanged.
+
+### D56: hidden shoulder in a dynamic rear lean
+
+Frame-only `rear-breadth-only` is restricted to NE/N `dash`, `run`, `attack`, `attack_2`, or
+`attack_3` cells declared `posture`. Use it only when the shoulder corner is genuinely hidden but the
+frame's own skull-cap crown and both skull-breadth endpoints are visible. Record the concrete shoulder
+`occluder` and a reviewed `note`; exclude hairpins, tassels, earrings and loose strands from all three points.
+The gate samples alpha >=128 at the rounded crown/endpoints and master breadth endpoints. Hair identity,
+true extrema and shoulder occlusion require source review; alpha alone cannot prove anatomical identity.
+
+Keep the same-direction master and its existing full `masterHead` kind unchanged. The frame may use:
+
+```json
+{
+  "kind": "rear-breadth-only",
+  "crown": { "x": 149, "y": 59 },
+  "breadth": { "left": { "x": 135, "y": 76 }, "right": { "x": 188, "y": 76 } },
+  "occluder": "head+earring in deep dash lean",
+  "note": "Reviewed visible skull-cap hair crown and breadth; shoulder corner occluded"
+}
+```
+
+Compare only Euclidean skull breadth with the locked master's breadth, within the unchanged 3% band.
+There is **no vertical span**: omit shoulder/chin/skull-base/ornament anchors, and never project a hidden point.
+INFO and review preserve crown, endpoints, occluder, master breadth and ratio; `sizePx`, `masterSizePx`,
+and the span `ratio` are absent. Idle/walk/emote/cast, missing occluders, invisible points, or non-posture
+reasons fail even when the bbox is in band. D54 similarity still runs; D55 crops apply when merged.
+Do not redraw the dynamic pose or reclassify a similarity failure to bypass QA. Phap tu NE dash4/5/7
+may adopt this only after D56 merges. Other head kinds and foot/canvas/scale gates are unchanged.
