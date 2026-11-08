@@ -1,0 +1,46 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "bd2aa6cf-8f75-9f5e-7b40-584aa811facc",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "bd2aa6cf-8f75-9f5e-7b40-584aa811facc@6c48a",
+      "displayName": "phaptuchibi_SE_rest1_tex",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "bd2aa6cf-8f75-9f5e-7b40-584aa811facc",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "texture",
+    "fixAlphaTransparencyArtifacts": false,
+    "hasAlpha": true,
+    "redirect": "bd2aa6cf-8f75-9f5e-7b40-584aa811facc@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true,
+      "presetId": "vgtd-chibi-1x"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "d339adbe-c34e-e4f6-d31e-0e100a3b72ad",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "d339adbe-c34e-e4f6-d31e-0e100a3b72ad@6c48a",
+      "displayName": "thetuchibi_SE_rest1_tex",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "d339adbe-c34e-e4f6-d31e-0e100a3b72ad",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "texture",
+    "fixAlphaTransparencyArtifacts": false,
+    "hasAlpha": true,
+    "redirect": "d339adbe-c34e-e4f6-d31e-0e100a3b72ad@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true,
+      "presetId": "vgtd-chibi-full"
+    }
+  }
+}
