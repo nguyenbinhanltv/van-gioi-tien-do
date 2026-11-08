@@ -1,5 +1,7 @@
 import { Color, Node, Sprite, UITransform } from 'cc';
+import { character } from './vendor/vgtd.mjs';
 import { newNode, pointSortable, tileToWorld } from './IsoAdapter';
+import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import type { TilePos } from './Actors';
@@ -8,16 +10,35 @@ import type { TilePos } from './Actors';
 export interface NpcBody {
   body: Node;
   shadow: Node;
+  /** Set when the body is a chibi armature: the crowd drives its facing and idle/walk clip. */
+  chibi?: ChibiBody;
 }
 
 /**
- * Builds the visual of NPC number `n`. The default is the placeholder sprite (tinted per NPC). The P1 exit criterion
- * ("20 NPC") should be measured with the real character art: pass a factory that returns the chibi `ChibiBody`
- * nodes (PR #193) here; nothing else in the crowd depends on what the body looks like.
+ * Builds the visual of NPC number `n`. `chibiNpcBody` (default) uses the real semi-chibi armatures, cycling through the
+ * six classes, so the P1 exit criterion ("20 NPC") is measured with real art; `placeholderBody` is the cheap sprite
+ * (`?npcart=placeholder`). Nothing else in the crowd depends on what the body looks like.
  */
 export type NpcBodyFactory = (n: number, art: ArtFrames, shadowLayer: Node) => NpcBody;
 
-function placeholderBody(n: number, art: ArtFrames, shadowLayer: Node): NpcBody {
+function npcShadow(n: number, art: ArtFrames, shadowLayer: Node): Node {
+  const shadow = newNode(`Npc${n}Shadow`, shadowLayer);
+  const sui = shadow.addComponent(UITransform);
+  sui.setContentSize(48, 24);
+  const ssp = shadow.addComponent(Sprite);
+  ssp.sizeMode = Sprite.SizeMode.CUSTOM;
+  ssp.spriteFrame = art.shadow;
+  return shadow;
+}
+
+/** Chibi armature body, class = n modulo the six classes (mixed crowd). */
+export function chibiNpcBody(n: number, art: ArtFrames, shadowLayer: Node): NpcBody {
+  const chibi = new ChibiBody(newNode(`NpcHolder${n}`));
+  chibi.setClass(CHIBI_CLASSES[n % CHIBI_CLASSES.length]!.id);
+  return { body: chibi.root, shadow: npcShadow(n, art, shadowLayer), chibi };
+}
+
+export function placeholderBody(n: number, art: ArtFrames, shadowLayer: Node): NpcBody {
   const body = newNode(`Npc${n}`);
   const ui = body.addComponent(UITransform);
   ui.setContentSize(48, 72);
@@ -26,17 +47,12 @@ function placeholderBody(n: number, art: ArtFrames, shadowLayer: Node): NpcBody 
   sp.sizeMode = Sprite.SizeMode.CUSTOM;
   sp.spriteFrame = art.player;
   sp.color = new Color(120 + ((n * 47) % 135), 120 + ((n * 91) % 135), 120 + ((n * 133) % 135), 255);
-  const shadow = newNode(`Npc${n}Shadow`, shadowLayer);
-  const sui = shadow.addComponent(UITransform);
-  sui.setContentSize(48, 24);
-  const ssp = shadow.addComponent(Sprite);
-  ssp.sizeMode = Sprite.SizeMode.CUSTOM;
-  ssp.spriteFrame = art.shadow;
-  return { body, shadow };
+  return { body, shadow: npcShadow(n, art, shadowLayer) };
 }
 
 interface Npc extends NpcBody {
   id: number;
+  facing: string;
   pos: TilePos;
   target: TilePos | null;
   wait: number;
@@ -62,13 +78,13 @@ export class NpcCrowd {
     private readonly around: TilePos,
     private readonly rand: () => number,
     private readonly radius = 24,
-    makeBody: NpcBodyFactory = placeholderBody,
+    makeBody: NpcBodyFactory = chibiNpcBody,
   ) {
     for (let n = 0; n < count; n++) {
-      const { body, shadow } = makeBody(n, art, shadowLayer);
+      const { body, shadow, chibi } = makeBody(n, art, shadowLayer);
       const id = 1000 + n; // id 0 = player, props use a small counter
       const pos = this.pickTile() ?? { ...around };
-      const npc: Npc = { id, body, shadow, pos, target: null, wait: this.rand() * 2 };
+      const npc: Npc = { id, body, shadow, chibi, facing: 'S', pos, target: null, wait: this.rand() * 2 };
       this.npcs.push(npc);
       ysort.add(body, () => pointSortable(id, 0, npc.pos.i, npc.pos.j));
       this.place(npc);
@@ -87,6 +103,7 @@ export class NpcCrowd {
   update(dt: number): void {
     for (const n of this.npcs) {
       if (!n.target) {
+        n.chibi?.state('idle');
         n.wait -= dt;
         if (n.wait <= 0) n.target = this.pickTile();
         continue;
@@ -98,8 +115,14 @@ export class NpcCrowd {
       if (dist <= step) {
         n.pos = { ...n.target };
         n.target = null;
+        n.chibi?.state('idle');
         n.wait = 0.5 + this.rand() * 3;
       } else {
+        if (n.chibi) {
+          n.facing = character.directionFromTileVector(di / dist, dj / dist, n.facing as never);
+          n.chibi.face(n.facing as never);
+          n.chibi.state('walk');
+        }
         const ni = n.pos.i + (di / dist) * step;
         const nj = n.pos.j + (dj / dist) * step;
         let moved = false;

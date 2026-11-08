@@ -1,6 +1,6 @@
 // P1 exit-criteria measurement on Web (docs/10-mvp-scope.md section 12): draw calls, RAM, FPS with 20 NPC, initial package size.
 //
-//   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--tier low|medium|high] [--seconds 20] [--warmup 6]
+//   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--npcart chibi|placeholder] [--tier low|medium|high] [--seconds 20] [--warmup 6]
 //                                      [--out <dir>] [--gate-fps]
 //
 // 1. (unless --skip-build) builds web-mobile (scripts/build-web.mjs, needs the Cocos editor, see README)
@@ -34,6 +34,7 @@ const LIMITS = { drawCalls: 80, ramMB: 500, minFps: 30, packageMB: 25 };
 
 const npcs = Number(opt('npcs', 20));
 const tier = opt('tier', 'medium');
+const npcart = opt('npcart', 'chibi'); // chibi = real armatures (6 classes), placeholder = tinted sprite
 const seconds = Number(opt('seconds', 20));
 const warmup = Number(opt('warmup', 6));
 const out = resolve(opt('out', join(tmpdir(), 'vgtd-perf')));
@@ -133,7 +134,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}`;
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}`;
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -172,7 +173,16 @@ const heap = col('jsHeapMB').length ? col('jsHeapMB') : col('cdpHeapMB');
 const ram = samples.map((s) => (s.jsHeapMB ?? s.cdpHeapMB) + s.textureMB);
 const result = {
   when: new Date().toISOString(),
-  setup: { npcs, tier, seconds, warmup, viewport: '1280x720', renderer: 'SwiftShader (software WebGL)', ...meta },
+  setup: {
+    npcs,
+    npcart,
+    tier,
+    seconds,
+    warmup,
+    viewport: '1280x720',
+    renderer: 'SwiftShader (software WebGL)',
+    ...meta,
+  },
   measured: {
     fpsMedian: median(col('fps')),
     fpsMin: Math.min(...col('fps')),

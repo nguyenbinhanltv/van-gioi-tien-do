@@ -16,7 +16,7 @@ import { shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
-import { NpcCrowd } from './Npcs';
+import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
@@ -140,7 +140,17 @@ export class Bootstrap extends Component {
     const npcParam = params.get('npcs');
     const npcCount = npcParam === null ? 20 : Math.max(0, Math.min(200, Math.floor(Number(npcParam)) || 0));
     if (npcCount > 0) {
-      this.npcs = new NpcCrowd(npcCount, this.ysort, l2, art, walkable, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, rng(7));
+      this.npcs = new NpcCrowd(
+        npcCount,
+        this.ysort,
+        l2,
+        art,
+        walkable,
+        { i: spawn.i + 0.5, j: spawn.j + 0.5 },
+        rng(7),
+        24,
+        params.get('npcart') === 'placeholder' ? placeholderBody : chibiNpcBody,
+      );
     }
     await this.world.warmup(this.cameraRect());
 
