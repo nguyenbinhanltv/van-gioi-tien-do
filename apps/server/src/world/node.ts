@@ -12,7 +12,8 @@ import {
   NETWORK,
   aoiCentre,
   classWireId,
-  inAoi,
+  inAoiAt,
+  uwDistSq,
   rngFloat,
   rngFork,
   rngSeed,
@@ -194,6 +195,8 @@ export interface WorldNodeOptions {
   playerIdQuarantineMs?: number;
   /** how long (sim ms) a dropped player's entity is held for a resume; 0 disables resume (default `WORLD_CONFIG.RESUME_HOLD_MS`) */
   resumeHoldMs?: number;
+  /** clock (ms) for the per-client packet-rate window; default real time. Tests and benchmarks that tick faster than real time drive it themselves. */
+  packetClock?: () => number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
   /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
@@ -270,6 +273,7 @@ export class WorldNode {
   private readonly idQuarantineMs: number;
   /** sim ms a dropped player's entity is held (0 = no resume) */
   readonly resumeHoldMs: number;
+  private readonly packetClock: () => number;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
   private readonly maxVisible: number;
@@ -277,6 +281,8 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
+  private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
@@ -316,6 +322,7 @@ export class WorldNode {
     });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
+    this.packetClock = opts.packetClock ?? clock;
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
     this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
@@ -410,7 +417,7 @@ export class WorldNode {
       snapSeq: 0,
       lastAckMs: this.world.timeMs,
       lastResyncMs: -Infinity,
-      pktWindowStartMs: clock(),
+      pktWindowStartMs: this.packetClock(),
       pktCount: 0,
       joinedTick: this.world.tick,
       dead: false,
@@ -564,7 +571,7 @@ export class WorldNode {
     if (from !== undefined && c.transport !== from) return; // stale connection: the id now belongs to another player
     c.stats.bytesIn += data.length;
     c.stats.packetsIn++;
-    const now = clock();
+    const now = this.packetClock();
     if (now - c.pktWindowStartMs >= 1000) {
       c.pktWindowStartMs = now;
       c.pktCount = 0;
@@ -806,80 +813,89 @@ export class WorldNode {
       const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
       const { u: u0, w: w0 } = toUW(centre.i, centre.j);
 
+      // Update-rate bands by tile distance to this player (D73): near 20 Hz, mid 10 Hz, far 5 Hz; in a crowd only the closest
+      // NEAR_MAX_ENTITIES keep the full rate, the rest of the near band drops to mid. Squared distances (no Math.hypot); farther
+      // entities get their band from the thresholds alone and only the near-band subset is ever sorted. The band is assigned in the
+      // same pass that decides who leaves, and for each new entry as it is added, so the visible set is walked once, not three times.
+      const near2 = AOI.NEAR_BAND_TILES * AOI.NEAR_BAND_TILES;
+      const mid2 = AOI.MID_BAND_TILES * AOI.MID_BAND_TILES;
+      const nearBand: { v: Visible; d2: number; id: number }[] = [];
+      const bandOf = (e: EntityState, v: Visible, eid: number): void => {
+        const dx = e.i - me.i;
+        const dy = e.j - me.j;
+        const d2 = dx * dx + dy * dy;
+        if (d2 > mid2) v.band = 2;
+        else if (d2 > near2) v.band = 1;
+        else nearBand.push({ v, d2, id: eid });
+      };
+
       // leaves: gone from the world, or outside the (hysteresis) exit area
       const leaves: number[] = [];
       for (const [eid, v] of c.visible) {
         const e = this.byId.get(eid);
-        if (!e || !e.connected || !inAoi({ i: e.i, j: e.j }, centre, true)) {
+        if (!e || !e.connected || !inAoiAt(e.i, e.j, u0, w0, true)) {
           leaves.push(v.index);
           c.visible.delete(eid);
           c.slots[v.index] = 0;
           c.last[v.index] = undefined;
-        }
+        } else bandOf(e, v, eid);
       }
 
-      // enters: nearest first, up to the per-client cap
-      const cu0 = Math.floor((u0 - AOI.HALF_U) / AOI.HASH_CELL);
-      const cu1 = Math.floor((u0 + AOI.HALF_U) / AOI.HASH_CELL);
-      const cw0 = Math.floor((w0 - AOI.HALF_W) / AOI.HASH_CELL);
-      const cw1 = Math.floor((w0 + AOI.HALF_W) / AOI.HASH_CELL);
-      const cand: { e: EntityState; d: number }[] = [];
-      for (let cu = cu0; cu <= cu1; cu++) {
-        for (let cw = cw0; cw <= cw1; cw++) {
-          const l = cells.get(cellKey(cu, cw));
-          if (!l) continue;
-          for (const e of l) {
-            if (e.id === c.id || c.visible.has(e.id)) continue;
-            if (!inAoi({ i: e.i, j: e.j }, centre, false)) continue;
-            const eu = toUW(e.i, e.j);
-            cand.push({ e, d: (eu.u - u0) ** 2 + (eu.w - w0) ** 2 + e.id * 1e-9 });
+      // enters: nearest first, up to the per-client cap. With no room left nothing can enter, so the (costly) candidate scan and
+      // sort are skipped: in a crowd every client sits at the cap and this is most of the AOI cost.
+      const enters: EnterEntity[] = [];
+      if (c.visible.size < this.maxVisible) {
+        const cu0 = Math.floor((u0 - AOI.HALF_U) / AOI.HASH_CELL);
+        const cu1 = Math.floor((u0 + AOI.HALF_U) / AOI.HASH_CELL);
+        const cw0 = Math.floor((w0 - AOI.HALF_W) / AOI.HASH_CELL);
+        const cw1 = Math.floor((w0 + AOI.HALF_W) / AOI.HASH_CELL);
+        const cand: { e: EntityState; d: number }[] = [];
+        for (let cu = cu0; cu <= cu1; cu++) {
+          for (let cw = cw0; cw <= cw1; cw++) {
+            const l = cells.get(cellKey(cu, cw));
+            if (!l) continue;
+            for (const e of l) {
+              if (e.id === c.id || c.visible.has(e.id)) continue;
+              if (!inAoiAt(e.i, e.j, u0, w0, false)) continue;
+              cand.push({ e, d: uwDistSq(e.i, e.j, u0, w0) + e.id * 1e-9 });
+            }
           }
         }
-      }
-      cand.sort((a, b) => a.d - b.d);
-      const enters: EnterEntity[] = [];
-      for (const { e } of cand) {
-        if (c.visible.size >= this.maxVisible) break;
-        const index = c.slots.indexOf(0);
-        if (index < 0) break;
-        c.slots[index] = e.id;
-        c.visible.set(e.id, { index, band: 0 });
-        const qi = quantizePos(e.i);
-        const qj = quantizePos(e.j);
-        const hpPct = this.hpPct(e);
-        const se = snapshotEntityOf(index, e, this.animOf(e), null);
-        c.last[index] = { qi, qj, hp: hpPct, anim: se.anim, dir: se.dir };
-        enters.push({
-          index,
-          entityId: e.id,
-          kind: this.mobs?.kindOf(e.id) ?? 0,
-          // monsters: their definition id; players: the class wire id (D81, 0 when unknown)
-          defId: this.mobs?.defIdOf(e.id) || this.classWireIdOf(e.id),
-          qi,
-          qj,
-          anim: se.anim,
-          dir: se.dir,
-          hpPct,
-          maxHp: this.maxHpOf(e),
-        });
+        cand.sort((a, b) => a.d - b.d);
+        for (const { e } of cand) {
+          if (c.visible.size >= this.maxVisible) break;
+          const index = c.slots.indexOf(0);
+          if (index < 0) break;
+          c.slots[index] = e.id;
+          const entry: Visible = { index, band: 0 };
+          c.visible.set(e.id, entry);
+          bandOf(e, entry, e.id);
+          const qi = quantizePos(e.i);
+          const qj = quantizePos(e.j);
+          const hpPct = this.hpPct(e);
+          const se = snapshotEntityOf(index, e, this.animOf(e), null);
+          c.last[index] = { qi, qj, hp: hpPct, anim: se.anim, dir: se.dir };
+          enters.push({
+            index,
+            entityId: e.id,
+            kind: this.mobs?.kindOf(e.id) ?? 0,
+            // monsters: their definition id; players: the class wire id (D82, 0 when unknown)
+            defId: this.mobs?.defIdOf(e.id) || this.classWireIdOf(e.id),
+            qi,
+            qj,
+            anim: se.anim,
+            dir: se.dir,
+            hpPct,
+            maxHp: this.maxHpOf(e),
+          });
+        }
       }
 
-      // update-rate bands by tile distance to this player (D73): near 20 Hz, mid 10 Hz, far 5 Hz
-      // in a crowd only the closest NEAR_MAX_ENTITIES keep the full rate; the rest of the near band drops to mid
-      const ranked: { v: { band: number }; d: number; id: number }[] = [];
-      for (const [eid, v] of c.visible) {
-        const e = this.byId.get(eid)!;
-        ranked.push({ v, d: Math.hypot(e.i - me.i, e.j - me.j), id: eid });
-      }
-      ranked.sort((x, y) => x.d - y.d || x.id - y.id);
-      let nearUsed = 0;
-      for (const { v, d } of ranked) {
-        if (d > AOI.MID_BAND_TILES) v.band = 2;
-        else if (d > AOI.NEAR_BAND_TILES || nearUsed >= AOI.NEAR_MAX_ENTITIES) v.band = 1;
-        else {
-          v.band = 0;
-          nearUsed++;
-        }
+      if (nearBand.length <= AOI.NEAR_MAX_ENTITIES) {
+        for (const x of nearBand) x.v.band = 0;
+      } else {
+        nearBand.sort((x, y) => x.d2 - y.d2 || x.id - y.id);
+        for (let k = 0; k < nearBand.length; k++) nearBand[k]!.v.band = k < AOI.NEAR_MAX_ENTITIES ? 0 : 1;
       }
 
       if (leaves.length > 0) {
@@ -951,7 +967,24 @@ export class WorldNode {
   }
 
   // ------------------------------------------------------------------ snapshots (20 / 10 / 5 Hz by band)
+  /**
+   * What a snapshot says about one entity this tick (quantised position, animation, direction, HP percent). It depends only on the
+   * entity and the tick, so it is computed once per entity per tick and shared by every client that sees it, instead of once per
+   * (client, visible entity) pair (about 70x fewer computations with 200 players in one crowd).
+   */
+  private currentOf(id: number): { qi: number; qj: number; anim: number; dir: number; hp: number } | undefined {
+    let cur = this.snapCache.get(id);
+    if (cur) return cur;
+    const e = this.byId.get(id);
+    if (!e) return undefined;
+    const se = snapshotEntityOf(0, e, this.animOf(e), null);
+    cur = { qi: se.qi, qj: se.qj, anim: se.anim, dir: se.dir, hp: this.hpPct(e) };
+    this.snapCache.set(id, cur);
+    return cur;
+  }
+
   private sendSnapshots(): void {
+    this.snapCache.clear();
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
       if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
@@ -970,27 +1003,35 @@ export class WorldNode {
       const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
       if (resync) c.lastResyncMs = this.world.timeMs;
       const entities: SnapshotEntity[] = [];
-      const touched: { index: number; qi: number; qj: number; hp: number; anim: number; dir: number }[] = [];
+      const touchedIdx: number[] = [];
+      const touchedLast: Last[] = [];
       for (const [eid, v] of c.visible) {
         if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
-        const e = this.byId.get(eid);
-        if (!e) continue;
+        const cur = this.currentOf(eid);
+        if (!cur) continue;
         const last = c.last[v.index];
-        const hp = this.hpPct(e);
-        const se = snapshotEntityOf(v.index, e, this.animOf(e), !resync && last && last.hp === hp ? null : hp);
+        const hp = cur.hp;
         // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
         if (
           !resync &&
           last &&
-          se.hpPct === null &&
-          last.qi === se.qi &&
-          last.qj === se.qj &&
-          last.anim === se.anim &&
-          last.dir === se.dir
+          last.hp === hp &&
+          last.qi === cur.qi &&
+          last.qj === cur.qj &&
+          last.anim === cur.anim &&
+          last.dir === cur.dir
         )
           continue;
-        entities.push(se);
-        touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp, anim: se.anim, dir: se.dir });
+        entities.push({
+          index: v.index,
+          qi: cur.qi,
+          qj: cur.qj,
+          anim: cur.anim,
+          dir: cur.dir,
+          hpPct: !resync && last && last.hp === hp ? null : hp,
+        });
+        touchedIdx.push(v.index);
+        touchedLast.push({ qi: cur.qi, qj: cur.qj, hp, anim: cur.anim, dir: cur.dir });
       }
       // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
       const vitals = this.vitalsOf(me);
@@ -1007,7 +1048,7 @@ export class WorldNode {
         },
         { baseline: (index) => c.last[index] },
       );
-      for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp, anim: t.anim, dir: t.dir };
+      for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
       if (sendVitals) c.lastVitals = vitals;
       c.snapSeq = seq;
       c.stats.snapshots++;
