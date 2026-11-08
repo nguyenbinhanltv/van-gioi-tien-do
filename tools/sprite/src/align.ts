@@ -5,6 +5,7 @@
  * Resampling is bilinear on premultiplied colour.
  */
 import { createImage, type Image } from '@vgtd/rig';
+import type { RegistrationEvidence } from './inherited-registration.js';
 import { measureFigure } from './master.js';
 import { toPremultiplied, type Straight } from './raster.js';
 import { CELL_PX, type Guides, type MasterMetrics } from './types.js';
@@ -49,7 +50,7 @@ export interface AlignOptions {
     readonly dx: number;
     readonly dy: number;
   };
-  /** Variant-only: T1 source anchor converted into this frame's raw pixel units. */
+  /** Verified reference: source anchor converted into this frame's raw pixel units. */
   readonly referenceOrigin?: { readonly x: number; readonly y: number };
   /** The character calibration (same object for every frame of every clip). */
   readonly calibration: Calibration;
@@ -70,6 +71,7 @@ export interface AlignOptions {
 
 /** Per-frame measurements recorded in the pipeline contract (canvas px unless noted). */
 export interface FrameRecord {
+  readonly inheritedRegistration?: RegistrationEvidence;
   readonly pre: { readonly height: number; readonly pelvisX: number; readonly soleY: number };
   readonly post: { readonly height: number; readonly pelvisX: number; readonly soleY: number };
   readonly dx: number;

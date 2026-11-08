@@ -502,3 +502,24 @@ and the span `ratio` are absent. Idle/walk/emote/cast, missing occluders, invisi
 reasons fail even when the bbox is in band. D54 similarity still runs; D55 crops apply when merged.
 Do not redraw the dynamic pose or reclassify a similarity failure to bypass QA. Phap tu NE dash4/5/7
 may adopt this only after D56 merges. Other head kinds and foot/canvas/scale gates are unchanged.
+
+### D57 verified inherited registration
+
+For a skull-only correction, a clip may declare:
+
+```json
+{
+  "inheritedRegistration": {
+    "kind": "inherited-registration",
+    "source": "reference/run-before.png",
+    "sourceSha256": "<64 lowercase hex>",
+    "mask": "masks/run-edit.png",
+    "maskSha256": "<64 lowercase hex>",
+    "cells": [0, 1]
+  }
+}
+```
+
+Paths are relative to project.json. Source, edited sheet and mask must have identical native dimensions. The explicit mask is opaque binary grayscale (alpha 255): white permits edits; black locks all four original PNG RGBA bytes, including invisible RGB. The tool verifies SHA256 and byte identity outside the mask across the **entire sheet**, before DPI/key/despill/palette operations; mismatches throw before export and cannot be waived. Each inherited cell must retain locked pixels (an unchanged all-black cell is valid). Cells are clip-local; grouped sheetSelection maps them to source cells.
+
+The tool prepares the reference with the same settings, rejects changed preparation/crop, derives its default centroid/vertical registration itself, and uses that origin and fixed scale for the edited cell. Automatic calibration uses pre-edit measurements for inherited cells. Variants/authoredOrigins cannot be combined with this mechanism. This computed origin is registration, not anatomical pelvis evidence. Contract records and batch review include source/mask/edited SHA256, global source cell, locked pixel count, computed logical cropped origin, vertical policy and scale. Head, D54/D55 similarity, contacts, canvas and all other gates still inspect the edited aligned pixels. Preserve the reviewed mask, source and full edit provenance.

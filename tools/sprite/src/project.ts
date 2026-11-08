@@ -36,8 +36,10 @@ import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPol
 
 import { authoredOriginPoint, validateAuthoredOrigins, type AuthoredOrigin } from './authored-origin.js';
 import { validateResample, type ResampleMethod } from './resample.js';
+import { verifyInheritedRegistration, type InheritedRegistration } from './inherited-registration.js';
 
 export interface ProjectClip {
+  readonly inheritedRegistration?: InheritedRegistration;
   readonly timingProfile?: TimingProfile;
   readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
   readonly heightPolicy?: HeightPolicy;
@@ -112,6 +114,7 @@ export interface Project {
 }
 
 export interface ClipContract {
+  readonly inheritedRegistration?: InheritedRegistration;
   readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
   readonly heightPolicy?: HeightPolicy;
   readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
@@ -233,6 +236,11 @@ export function runProject(
     : project.slice;
   const sliced = project.clips.map((c) => {
     const buf = readFileSync(resolve(baseDir, c.sheet));
+    const inherited = c.inheritedRegistration
+      ? verifyInheritedRegistration(c.inheritedRegistration, buf, c, baseDir)
+      : undefined;
+    if (inherited && (project.variant || c.variant || c.authoredOrigins))
+      throw new Error('inherited-registration cannot be combined with variants or authored origins');
     const raw = decodePng(buf);
     const grid = sheetLayout(c);
     const deferred = !!project.preparation && resample !== 'bilinear';
@@ -245,6 +253,29 @@ export function runProject(
     const frames = selectSheetCells(sliceSheet(sheet, grid, sliceOptions), c.sheetSelection).map((f) =>
       lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f,
     );
+    const referencePrepared =
+      inherited && project.preparation
+        ? normalizeSheetDpi(
+            decodePng(inherited.source),
+            grid.cols,
+            grid.frames,
+            deferred ? { resample, defer: true } : {},
+          )
+        : undefined;
+    if (referencePrepared && JSON.stringify(referencePrepared.record) !== JSON.stringify(prepared!.record))
+      throw new Error('inherited-registration: preparation/crop changed');
+    const referenceFrames = inherited
+      ? selectSheetCells(
+          sliceSheet(
+            referencePrepared ? decodePng(encodePng(referencePrepared.image)) : decodePng(inherited.source),
+            grid,
+            sliceOptions,
+          ),
+          c.sheetSelection,
+        ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f))
+      : undefined;
+    // Only inherited cells substitute the pre-edit source in automatic calibration.
+    const calibrationFrames = frames.map((f, i) => (inherited?.verified.has(i) ? referenceFrames![i]! : f));
     const rows = grid.rows;
     const logicalWidth = deferred ? prepared!.record.normalized[0] : sheet.width;
     const logicalHeight = deferred ? prepared!.record.normalized[1] : sheet.height;
@@ -267,6 +298,9 @@ export function runProject(
     const groundY = (guides.ground / CELL_PX) * r0.height - inset;
     return {
       clip: c,
+      inherited,
+      referenceFrames,
+      calibrationFrames,
       frames,
       sheetSha1: sha1(preparedBuf),
       groundY,
@@ -291,7 +325,7 @@ export function runProject(
   } else if (sliced.some((s) => !own(s.clip))) {
     character = calibrate(
       m.height,
-      refs.flatMap((s) => s.frames.map((f) => rawHeight(f) * (s.transforms?.[0]?.scaleY ?? 1))),
+      refs.flatMap((s) => s.calibrationFrames.map((f) => rawHeight(f) * (s.transforms?.[0]?.scaleY ?? 1))),
     );
   }
   const sheetCalibration = (s: (typeof sliced)[number]): Calibration => {
@@ -302,7 +336,7 @@ export function runProject(
     if (c.referenceHeight !== undefined) return calibrate(m.height, [c.referenceHeight]);
     const idx = c.referenceFrames ?? [];
     const hs = idx
-      .map((i) => s.frames[i])
+      .map((i) => s.calibrationFrames[i])
       .filter((f): f is NonNullable<typeof f> => !!f)
       .map((f) => rawHeight(f) * (s.transforms?.[0]?.scaleY ?? 1));
     if (!hs.length)
@@ -354,20 +388,57 @@ export function runProject(
                   : s.groundY,
               )
             : undefined;
-        return alignFrame(f.image, {
+        const inheritedCell = s.inherited?.verified.get(i);
+        const reference = inheritedCell
+          ? alignFrame(s.referenceFrames![i]!.image, {
+              ...(resample !== 'bilinear' ? { resample } : {}),
+              ...(transform ? { sourceTransform: transform } : {}),
+              calibration,
+              guides,
+              vertical: s.clip.vertical ?? 'sole',
+              groundY: s.groundY,
+            })
+          : undefined;
+        if (inheritedCell && !reference) throw new Error('inherited-registration: empty source cell');
+        const inheritedOrigin = reference
+          ? {
+              x: reference.source.pelvisX,
+              y: (s.clip.vertical ?? 'sole') === 'sole' ? reference.source.bottom : s.groundY,
+            }
+          : undefined;
+        const result = alignFrame(f.image, {
           ...(resample !== 'bilinear' ? { resample } : {}),
           ...(transform ? { sourceTransform: transform } : {}),
           calibration,
           guides,
           vertical: s.clip.vertical ?? 'sole',
           groundY: s.groundY,
-          ...(origins
-            ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
-            : origin
-              ? { referenceOrigin: origin }
-              : {}),
+          ...(inheritedOrigin
+            ? { referenceOrigin: inheritedOrigin }
+            : origins
+              ? { referenceOrigin: { x: origins[i]!.x / calibration.scale, y: origins[i]!.y / calibration.scale } }
+              : origin
+                ? { referenceOrigin: origin }
+                : {}),
           ...(s.clip.exceptions?.[i] ? { exception: s.clip.exceptions[i]! } : {}),
         });
+        if (!result || !inheritedCell || !inheritedOrigin) return result;
+        return {
+          ...result,
+          record: {
+            ...result.record,
+            inheritedRegistration: {
+              kind: 'inherited-registration',
+              sourceSha256: s.inherited!.sourceSha256,
+              maskSha256: s.inherited!.maskSha256,
+              editedSha256: s.inherited!.editedSha256,
+              ...inheritedCell,
+              origin: inheritedOrigin,
+              scale: calibration.scale,
+              vertical: s.clip.vertical ?? 'sole',
+            },
+          },
+        };
       }),
     };
   });
@@ -478,6 +549,7 @@ export function runProject(
       ...(pack.pages.length > 1 ? { textures: pack.pages.map((_, i) => textureStem(i)) } : {}),
     },
     clips: aligned.map((s) => ({
+      ...(s.clip.inheritedRegistration ? { inheritedRegistration: s.clip.inheritedRegistration } : {}),
       ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
       ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
       ...(s.clip.authoredOrigins ? { authoredOrigins: s.clip.authoredOrigins } : {}),

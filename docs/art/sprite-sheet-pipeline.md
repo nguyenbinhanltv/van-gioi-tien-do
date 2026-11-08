@@ -556,3 +556,9 @@ trong band. D54 vẫn kiểm similarity độc lập, D55 khi merge vẫn áp d�
 foot/canvas/scale và mọi kind cũ. Pháp tu NE master đã xác nhận crown(140,16), breadth(114,36)–(166,36)=52px,
 acromion(156,79); neo acromion là góc ngoài vai đổi độ dốc lớn nhất của contour áo dưới cổ, không phải điểm nối cổ.
 Chỉ dash local4/5/7 được áp dụng D56 cho bộ này sau khi tooling merge; giữ tư thế động đã duyệt.
+
+### [Cập nhật D57] Registration kế thừa có kiểm chứng
+
+Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourceSha256, mask, maskSha256, cells}`; đường dẫn tương đối project, SHA256 gồm 64 hex thường, cells là chỉ số clip-local (sheet nhóm ánh xạ qua sheetSelection). Mask PNG cùng kích thước native, RGB nhị phân 0/255, alpha 255: trắng cho phép edit, đen khóa. Tool so mọi byte RGBA ngoài mask trên toàn sheet trước DPI/key/despill/palette, kể cả RGB trong pixel alpha 0; sai hash, mất mask hoặc khác byte là lỗi cứng không waiver. Mỗi ô kế thừa phải còn pixel khóa.
+
+Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.

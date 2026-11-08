@@ -1,3 +1,4 @@
+import type { RegistrationEvidence } from './inherited-registration.js';
 import type { OriginMeasurement } from './authored-origin.js';
 /**
  * Batch report + owner review page. A batch report describes one character: every direction, every clip, the QA verdicts
@@ -19,6 +20,7 @@ export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 export type ClipStatus = 'ok' | 'warn' | 'fail';
 
 export interface ClipReport {
+  readonly inheritedRegistration?: readonly { readonly cell: number; readonly evidence: RegistrationEvidence }[];
   readonly originEvidence?: readonly { readonly cell: number; readonly measurement: OriginMeasurement }[];
   readonly name: string;
   readonly frames: number;
@@ -142,10 +144,19 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               const evidence = c.headEvidence?.length
                 ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · ${e.kind === 'rear-breadth-only' ? 'breadth-only (no vertical span)' : `head ${e.sizePx!.toFixed(2)} / master ${e.masterSizePx!.toFixed(2)} px`} · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
                 : '';
+              const inherited = c.inheritedRegistration?.length
+                ? '<details><summary>Verified inherited-registration (' +
+                  c.inheritedRegistration.length +
+                  ')</summary>' +
+                  c.inheritedRegistration
+                    .map(({ cell, evidence: e }) => '<p>' + esc(JSON.stringify({ cell, ...e })) + '</p>')
+                    .join('') +
+                  '</details>'
+                : '';
               const origins = c.originEvidence?.length
                 ? `<details><summary>Authored-origin INFO evidence (${c.originEvidence.length})</summary>${c.originEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} ; ${esc(e.kind ?? 'anatomical-pelvis')} ; pelvisX ${e.pelvisX} ; groundY ${e.groundY ?? 'default'} ; source (${e.source.x}, ${e.source.y}) ; scale ${e.scale} ; dx ${e.dx}, dy ${e.dy}<br>${esc(e.reason)}<br>${esc(e.evidence)}</p>`).join('')}</details>`
                 : '';
-              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div>${unmeasuredNote}<div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div>${evidence}${origins}</div>`;
+              return `<div class="card">${media}<div><span class="name">${esc(c.name)}</span>${chip(c.status)}</div>${unmeasuredNote}<div class="meta">${c.frames} frames, ${c.durationSec.toFixed(2)} s, ${esc(c.kind)}<br>hard ${k.hard} · soft ${k.soft} · regress ${k.regression} · accepted ${k.accepted} · info ${k.info}</div>${evidence}${origins}${inherited}</div>`;
             })
             .join('');
           return `<h3>${esc(r.character)} / ${esc(d.dir)} ${chip(d.ok ? 'ok' : 'fail')} <span class="sum">atlas ${d.atlas.pages}p ${d.atlas.width}x${d.atlas.height}, ${d.atlas.regions} regions · backlog ${d.backlogEntries} (${d.resolvedEntries} metric entries resolved) · manual ${manual.length} · <a href="${esc(d.folder)}/${esc(d.stem)}_${esc(d.dir)}.sprite.json">contract</a></span></h3>${observations}<div class="grid">${cards}</div>`;
