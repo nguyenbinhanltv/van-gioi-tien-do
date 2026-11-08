@@ -20,7 +20,13 @@ import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type Pal
 import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
 import { runQa, type Finding, type QaClip } from './qa.js';
 import { resizeImage } from './repair.js';
-import { normalizeSheetDpi, preparationScale, type ProjectPreparation, type SheetPreparation } from './preparation.js';
+import {
+  nativeCellTransform,
+  normalizeSheetDpi,
+  preparationScale,
+  type ProjectPreparation,
+  type SheetPreparation,
+} from './preparation.js';
 import { toPremultiplied } from './raster.js';
 import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
@@ -29,6 +35,7 @@ import { auditProjectVariant, type VariantProject, type VariantReference, type V
 import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPolicy } from './head-evidence.js';
 
 import { authoredOriginPoint, validateAuthoredOrigins, type AuthoredOrigin } from './authored-origin.js';
+import { validateResample, type ResampleMethod } from './resample.js';
 
 export interface ProjectClip {
   readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
@@ -79,6 +86,8 @@ export interface ProjectClip {
 }
 
 export interface Project {
+  /** Omitted/bilinear preserves the legacy two-pass path byte-for-byte. */
+  readonly resample?: ResampleMethod;
   /** Direction-specific skull landmarks on the resized256px master; excludes secondary hair. */
   readonly masterHead?: HeadLandmarks;
   readonly variant?: VariantProject;
@@ -117,6 +126,7 @@ export interface ClipContract {
 }
 
 export interface Contract {
+  readonly resample?: ResampleMethod;
   readonly variant?: VariantAudit;
   readonly format: 'vgtd-sprite-contract';
   readonly version: 1;
@@ -184,6 +194,8 @@ export function runProject(
   baseDir: string,
   options: { readonly includeAlignedFrames?: boolean } = {},
 ): ProjectResult {
+  const resample = project.resample ?? 'bilinear';
+  validateResample(resample);
   for (const clip of project.clips)
     if (clip.heightPolicy !== undefined && clip.heightPolicy !== 'head-size-v1')
       throw new Error(`unknown height policy '${clip.heightPolicy}'`);
@@ -218,7 +230,10 @@ export function runProject(
     const buf = readFileSync(resolve(baseDir, c.sheet));
     const raw = decodePng(buf);
     const grid = sheetLayout(c);
-    const prepared = project.preparation ? normalizeSheetDpi(raw, grid.cols, grid.frames) : undefined;
+    const deferred = !!project.preparation && resample !== 'bilinear';
+    const prepared = project.preparation
+      ? normalizeSheetDpi(raw, grid.cols, grid.frames, deferred ? { resample, defer: true } : {})
+      : undefined;
     // The original assembler writes then reads a PNG: retain its PMA quantization exactly.
     const preparedBuf = prepared ? encodePng(prepared.image) : buf;
     const sheet = prepared ? decodePng(preparedBuf) : raw;
@@ -226,8 +241,24 @@ export function runProject(
       lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f,
     );
     const rows = grid.rows;
-    const r0 = cellRect(sheet.width, sheet.height, c.cols, rows, 0);
+    const logicalWidth = deferred ? prepared!.record.normalized[0] : sheet.width;
+    const logicalHeight = deferred ? prepared!.record.normalized[1] : sheet.height;
+    const r0 = cellRect(logicalWidth, logicalHeight, c.cols, rows, 0);
     const inset = Math.round(Math.min(r0.width, r0.height) * (project.slice?.inset ?? 0.01));
+    const transforms = deferred
+      ? (c.sheetSelection?.cells ?? Array.from({ length: c.frames }, (_, i) => i)).map((i) =>
+          nativeCellTransform(
+            sheet.width,
+            sheet.height,
+            logicalWidth,
+            logicalHeight,
+            c.cols,
+            rows,
+            i,
+            project.slice?.inset,
+          ),
+        )
+      : undefined;
     const groundY = (guides.ground / CELL_PX) * r0.height - inset;
     return {
       clip: c,
@@ -235,6 +266,7 @@ export function runProject(
       sheetSha1: sha1(preparedBuf),
       groundY,
       sourceCell: { width: r0.width, height: r0.height, inset },
+      transforms,
       preparation: prepared ? { ...prepared.record, rawSha1: sha1(buf) } : undefined,
     };
   });
@@ -254,7 +286,7 @@ export function runProject(
   } else if (sliced.some((s) => !own(s.clip))) {
     character = calibrate(
       m.height,
-      refs.flatMap((s) => s.frames.map(rawHeight)),
+      refs.flatMap((s) => s.frames.map((f) => rawHeight(f) * (s.transforms?.[0]?.scaleY ?? 1))),
     );
   }
   const sheetCalibration = (s: (typeof sliced)[number]): Calibration => {
@@ -267,7 +299,7 @@ export function runProject(
     const hs = idx
       .map((i) => s.frames[i])
       .filter((f): f is NonNullable<typeof f> => !!f)
-      .map(rawHeight);
+      .map((f) => rawHeight(f) * (s.transforms?.[0]?.scaleY ?? 1));
     if (!hs.length)
       throw new RangeError(`clip '${s.clip.name}': calibration needs scale, referenceHeight or referenceFrames`);
     return calibrate(m.height, hs);
@@ -304,6 +336,7 @@ export function runProject(
       aligned: s.frames.map((f, i): AlignedFrame | null => {
         const authored = s.clip.authoredOrigins?.[i];
         const metrics = authored ? measureFigure(toPremultiplied(f.image)) : null;
+        const transform = s.transforms?.[i];
         const origin =
           authored && metrics
             ? authoredOriginPoint(
@@ -311,10 +344,14 @@ export function runProject(
                 s.sourceCell.width,
                 s.sourceCell.height,
                 s.sourceCell.inset,
-                (s.clip.vertical ?? 'sole') === 'sole' ? metrics.bottom : s.groundY,
+                (s.clip.vertical ?? 'sole') === 'sole'
+                  ? metrics.bottom * (transform?.scaleY ?? 1) + (transform?.dy ?? 0)
+                  : s.groundY,
               )
             : undefined;
         return alignFrame(f.image, {
+          ...(resample !== 'bilinear' ? { resample } : {}),
+          ...(transform ? { sourceTransform: transform } : {}),
           calibration,
           guides,
           vertical: s.clip.vertical ?? 'sole',
@@ -415,6 +452,7 @@ export function runProject(
 
   const page = built.atlas;
   const contract: Contract = {
+    ...(resample !== 'bilinear' ? { resample } : {}),
     format: 'vgtd-sprite-contract',
     version: 1,
     ...(variant ? { variant } : {}),

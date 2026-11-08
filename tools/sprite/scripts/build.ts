@@ -9,7 +9,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { runProject, writeOutputs, type Project } from '../src/index.js';
+import { runProject, writeOutputs, validateResample, type Project } from '../src/index.js';
 
 const args = process.argv.slice(2);
 const opt = (n: string, d = '') => {
@@ -19,7 +19,11 @@ const opt = (n: string, d = '') => {
 const cwd = process.env.INIT_CWD ?? process.cwd();
 const projectPath = resolve(cwd, opt('project'));
 if (!opt('project') || !opt('out')) throw new Error('usage: --project <project.json> --out <dir>');
-const project = JSON.parse(readFileSync(projectPath, 'utf8')) as Project;
+const input = JSON.parse(readFileSync(projectPath, 'utf8')) as Project;
+const method = opt('resample');
+if (args.includes('--resample') && !method) throw new Error('--resample needs bilinear, lanczos3 or area');
+if (method) validateResample(method);
+const project: Project = method ? { ...input, resample: method as Project['resample'] } : input;
 const res = runProject(project, dirname(projectPath));
 const c = res.contract;
 if (c.calibration)
