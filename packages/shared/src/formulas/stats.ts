@@ -4,7 +4,14 @@
  *   Stat      = B · λ^x            (HP, MP, ATK, DEF)
  *   ThânPháp  = B_TP · (1 + 0.15 · x)   (linear)
  */
-import { DEFAULT_SUBSTAGES, LUYEN_KHI_SUBSTAGES, REALM_COUNT, TOTAL_STAGES } from '../constants.js';
+import {
+  DEFAULT_SUBSTAGES,
+  LUYEN_KHI_SUBSTAGES,
+  REALM_COUNT,
+  REALM_NAMES,
+  SUB_STAGE_NAMES,
+  TOTAL_STAGES,
+} from '../constants.js';
 
 export const ALPHA = 0.6;
 
@@ -101,6 +108,13 @@ export function stageToRealm(stage: number): StageRef {
 export function realmToStage(r: number, k: number): number {
   progressX(r, k); // validates
   return r === 1 ? k : LUYEN_KHI_SUBSTAGES + (r - 2) * DEFAULT_SUBSTAGES + k;
+}
+
+/** Display label of a flat stage 1..41, e.g. `Luyện Khí tầng 3`, `Kim Đan sơ kỳ`, `Độ Kiếp Viên Mãn` (matches the docs/07 §1 table labels). */
+export function stageLabel(stage: number): string {
+  const { realm, subStage } = stageToRealm(stage);
+  const name = REALM_NAMES[realm - 1]!;
+  return realm === 1 ? `${name} tầng ${subStage}` : `${name} ${SUB_STAGE_NAMES[subStage - 1]}`;
 }
 
 /** Per-hit damage ratio helper: hits needed to kill an equal-stat opponent (uses damage formula with c_skill=1, no extras). */

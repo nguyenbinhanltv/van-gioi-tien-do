@@ -241,5 +241,19 @@ export const TOTAL_STAGES = 41;
 /** Luyện Khí has 9 sub-stages; every other realm has 4 (Sơ, Trung, Hậu, Viên Mãn). */
 export const LUYEN_KHI_SUBSTAGES = 9;
 export const DEFAULT_SUBSTAGES = 4;
+/** Realm names (docs/07 §1 table), index 0 = realm 1. */
+export const REALM_NAMES: readonly string[] = [
+  'Luyện Khí',
+  'Trúc Cơ',
+  'Kim Đan',
+  'Nguyên Anh',
+  'Hóa Thần',
+  'Luyện Hư',
+  'Hợp Thể',
+  'Đại Thừa',
+  'Độ Kiếp',
+];
+/** Sub-stage names of every realm except Luyện Khí (which counts "tầng 1..9"). */
+export const SUB_STAGE_NAMES: readonly string[] = ['sơ kỳ', 'trung kỳ', 'hậu kỳ', 'Viên Mãn'];
 /** D46/D58: each premium semi-chibi drawing occupies one tick of this export clock. */
 export const SPRITE_SMOOTH_FPS = 24;

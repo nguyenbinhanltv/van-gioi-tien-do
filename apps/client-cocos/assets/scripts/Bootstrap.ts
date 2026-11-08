@@ -28,6 +28,7 @@ import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
+import { ProgressionHud } from './ProgressionHud';
 
 const { ccclass } = _decorator;
 
@@ -76,6 +77,8 @@ export class Bootstrap extends Component {
   private chibi!: ChibiBody;
   /** only with `?online=1`; offline play stays the default */
   private online: OnlineSession | null = null;
+  /** tu vi panel (D76), only online: the server owns the progression state */
+  private progressionHud: ProgressionHud | null = null;
   private keyHandlers: { down: (e: KeyboardEvent) => void; up: (e: KeyboardEvent) => void } | null = null;
   /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
   private scriptedWalk: shared.Direction[] | null = null;
@@ -247,6 +250,8 @@ export class Bootstrap extends Component {
       hudRoot,
       this.combat ? (tile) => this.combat!.pick(tile) : undefined,
     );
+    if (this.online)
+      this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
     this.rig.follow(this.playerScreen());
     this.online?.connect();
     this.maybeAutotest();
@@ -393,6 +398,10 @@ export class Bootstrap extends Component {
       this.player.update(dt, frame); // offline (default), or the connection failed / dropped
     }
     this.combat?.update(dt, frame.target);
+    if (this.progressionHud) {
+      this.progressionHud.update();
+      this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
+    }
     this.rig.follow(this.playerScreen(), dt);
     this.ysort.sort();
     this.npcs?.update(dt);
@@ -408,6 +417,7 @@ export class Bootstrap extends Component {
       this.lastCanvasW = w;
       this.hud.layout(w, this.canvasUi.contentSize.height);
       this.combat?.layout(w, this.canvasUi.contentSize.height);
+      this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
@@ -424,6 +434,7 @@ export class Bootstrap extends Component {
     this.input?.destroy();
     this.online?.destroy();
     this.combat?.destroy();
+    this.progressionHud?.destroy();
     this.bagPanel?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
