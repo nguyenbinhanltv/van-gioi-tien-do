@@ -2,6 +2,7 @@ import { Emitter, TilePos, Vec2, encodeDir } from '../core/IsoMath.js';
 import { IsoPathfinder, WalkGrid } from './IsoPathfinder.js';
 import { PointerController } from './PointerController.js';
 import { TouchController, TouchLayout } from './TouchController.js';
+import type { ZoomController } from '../camera/ZoomController.js';
 import {
   CameraLike, FLAG_DODGE, FLAG_FLY_TOGGLE, FLAG_QINGGONG, InputFrame, InputMode, PlayerLocator, emptyFrame,
 } from './types.js';
@@ -16,6 +17,8 @@ export interface InputManagerOptions {
   pickEntity?: (world: TilePos) => number | null;
   /** Ép chế độ (Cài đặt của người chơi); null = tự động. */
   forcedMode?: InputMode | null;
+  /** Camera zoom: mouse wheel, and a two-finger pinch by touches the joystick / skill wheel did not claim. */
+  zoom?: ZoomController;
 }
 
 /** Gói input gửi server: khớp bảng "Gói input" trong tài liệu kiến trúc server. */
@@ -36,6 +39,9 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
   private forced: InputMode | null;
   private readonly disposers: Array<() => void> = [];
   private readonly claimedTouches = new Set<number>();
+  /** Touches nobody claimed (not joystick / wheel / UI): candidates for a pinch. clientX/Y in CSS px. */
+  private readonly freeTouches = new Map<number, Vec2>();
+  private readonly pinchIds = new Set<number>();
 
   constructor(private readonly el: HTMLElement, private readonly opts: InputManagerOptions) {
     super();
@@ -51,6 +57,7 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
     this.listen(el, 'pointermove', (e) => this.onMove(e as PointerEvent));
     this.listen(el, 'pointerup', (e) => this.onUp(e as PointerEvent));
     this.listen(el, 'pointercancel', (e) => this.onUp(e as PointerEvent));
+    this.listen(el, 'wheel', (e) => this.onWheel(e as WheelEvent));
     this.listen(el, 'contextmenu', (e) => e.preventDefault());
     this.listen(window, 'keydown', (e) => this.onKey(e as KeyboardEvent, true));
     this.listen(window, 'keyup', (e) => this.onKey(e as KeyboardEvent, false));
@@ -87,11 +94,43 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
     this.pointer.reset();
     this.touch.reset();
     this.claimedTouches.clear();
+    this.endPinch();
     this.emit('modeChange', next);
   }
 
   private modeFromPointer(e: PointerEvent): InputMode {
     return e.pointerType === 'touch' ? 'touch' : 'pointer';   // 'mouse' và 'pen' dùng bố cục PC
+  }
+
+  private onWheel(e: WheelEvent): void {
+    if (!this.opts.zoom) return;
+    if (this.opts.uiHitTest?.(e.clientX, e.clientY)) return;
+    this.opts.zoom.wheel(e.deltaY, e.deltaMode);
+    e.preventDefault();
+  }
+
+  /** Track an unclaimed touch; the second one starts a pinch. Returns true when the touch joined a pinch. */
+  private trackFreeTouch(e: PointerEvent): boolean {
+    const zoom = this.opts.zoom;
+    if (!zoom || e.pointerType !== 'touch') return false;
+    this.freeTouches.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (this.freeTouches.size === 2) {
+      for (const id of this.freeTouches.keys()) this.pinchIds.add(id);
+      this.pointer.reset();   // a first finger that already started a click-to-move must not fire it
+      zoom.pinchStart(this.freeDistance());
+    }
+    return this.pinchIds.has(e.pointerId);
+  }
+
+  private freeDistance(): number {
+    const [a, b] = Array.from(this.freeTouches.values());
+    return a && b ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
+  }
+
+  private endPinch(): void {
+    this.freeTouches.clear();
+    this.pinchIds.clear();
+    this.opts.zoom?.pinchEnd();
   }
 
   private onDown(e: PointerEvent): void {
@@ -102,16 +141,29 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
         this.claimedTouches.add(e.pointerId);
         this.el.setPointerCapture(e.pointerId);
         e.preventDefault();
+      } else if (this.trackFreeTouch(e)) {
+        this.el.setPointerCapture(e.pointerId);
+        e.preventDefault();
       }
       return;
     }
     if (this.opts.uiHitTest?.(e.clientX, e.clientY)) return;
+    if (this.trackFreeTouch(e)) {   // 2nd finger in pointer mode: pinch, not a click
+      this.el.setPointerCapture(e.pointerId);
+      e.preventDefault();
+      return;
+    }
     this.el.setPointerCapture(e.pointerId);
     this.pointer.pointerDown(e);
     e.preventDefault();
   }
 
   private onMove(e: PointerEvent): void {
+    const free = this.freeTouches.get(e.pointerId);
+    if (free) {
+      free.x = e.clientX; free.y = e.clientY;
+      if (this.pinchIds.has(e.pointerId)) this.opts.zoom!.pinchUpdate(this.freeDistance());
+    }
     if (this._mode === 'touch') {
       if (this.claimedTouches.has(e.pointerId)) this.touch.pointerMove(e);
       return;
@@ -120,6 +172,14 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
   }
 
   private onUp(e: PointerEvent): void {
+    if (this.freeTouches.delete(e.pointerId)) {
+      const wasPinch = this.pinchIds.delete(e.pointerId);
+      if (this.pinchIds.size < 2) this.opts.zoom?.pinchEnd();
+      if (wasPinch) {
+        if (this.pinchIds.size === 0) this.freeTouches.clear();   // lone leftover finger must not re-pinch
+        return;
+      }
+    }
     if (this._mode === 'touch') {
       if (this.claimedTouches.delete(e.pointerId)) this.touch.pointerUp(e);
       return;
