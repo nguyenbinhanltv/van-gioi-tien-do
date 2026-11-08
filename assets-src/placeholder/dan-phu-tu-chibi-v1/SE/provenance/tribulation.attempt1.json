@@ -1,0 +1,27 @@
+{
+  "clip": "tribulation",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:10:28 UTC",
+  "utcEnd": "2026-11-08 00:11:12 UTC",
+  "prompt": "EDITTARGET SE tribulation4x4 16headstencils: complete16fullbodydrawings ofprotectivekneel/recovery, NOTFX. Reference2exactadultjade-whiskhealerface/maincapbunpin/headsize/bodylimblength/ivoryjadetrimgoldinkhemdress. Headstencilpositionsandscale anchorpose; nevergrowhead orcompressanatomy. ConstantSE3quarter.0ready,1..3kneesstartbendingandleftforearmraises,4..6sinkinto one-knee defensivekneel withleftpalminfrontofchest/face,7..9bracepeak/recoil subtlebodysway,10..13recoverrising,14..15returnready. RIGHT handretainsphysicalplainbrownwhisk ONEbronze collarwhitehorsehair diagonalnearshoulder, no weaponswap.16smooth24fpsinbetweens, clearweighttransfer, knees/feetnatural, sleeves/sash/hair/fibresovershootlagsettle. Headfaceidentical evenwhenloweredbykneel, no facialredesign. Wholebun/whisk/palm/cloth/bootsinsideown256logicalcellwithmargin, never crop/crossborder. Ground232, kneepose lowerheight allowed, no bodyscalechange. Useall16cells4x4. RemoveALLgrid/borderlines/rulers/crosshairs/text; pureflatmagenta#ff00ff. NOlightning/energyshield/talisman/rings/glow/platform/shadow; FXwillbelayeredlater. Originaldesign.",
+  "references": ["../templates/tribulation.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/tribulation.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/tribulation.head-guide.png",
+      "sha256": "1edd11dec4eddcb59e6542fbafee1820abed23d5fd55d5767226d1a617b7e730"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

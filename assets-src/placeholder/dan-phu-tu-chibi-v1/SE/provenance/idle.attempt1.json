@@ -1,0 +1,27 @@
+{
+  "clip": "idle",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 23:56:18 UTC",
+  "utcEnd": "2026-11-07 23:56:50 UTC",
+  "prompt": "EDIT TARGET: 4x4 SE idle master-guide sheet, 16 cells reading order. Preserve exact premium semi-chibi adult female jade-whisk healer identity, face, attached main hair cap, bun/jade pin, ivory/jade dress, narrow antique gold, ink hem, brown shaft ONE bronze collar white horsehair whisk naturally held in RIGHT hand; LEFT palm open. Canonical body size is already drawn in each256logical cell: DO NOT enlarge figure or head. Replace repeated poses with a smooth16-drawing idle breathing cycle at24fps, gentle chest breath, slight wrist/whisk-fibre sway, sleeve/ribbon/hair lag and settle. Eyes/face stable, no facial redesign. Frame0 and15 near-match, no hard reset. Same SE threequarter angle in ALL16, never front/profile. Soles remain on current ground232, both boots fixed, maincap/face scale unchanged; bun must fit with margin and never rise above its current top. Every character wholly inside own cell; do not touch cell borders. Preserve4x4 mapping and overall size. Remove ALL grid/rulers/dashed ghost lines/text from OUTPUT; background flat pure magenta#ff00ff, no ground shadows, no FX/talismans/platform. Original design only. Output sprite sheet, not a poster. Reference2 is the locked256px SE master, identity/scale reference only.",
+  "references": ["../templates/idle.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/idle.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/idle.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

@@ -1,0 +1,244 @@
+{
+  "method": "Public runProject, with all upright height exceptions omitted in this diagnostic only; threshold unchanged. Height findings remain separate.",
+  "projectSha256": "18beb007f95ef2fd998c09ffa8a2ac5190dc389f0022ca63b623e6d6ec100f88",
+  "resample": "lanczos3",
+  "similarityFailures": [
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 0,
+      "message": "face similarity 0.65 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 1,
+      "message": "face similarity 0.64 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 2,
+      "message": "face similarity 0.65 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 2,
+      "message": "torso similarity 0.68 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 3,
+      "message": "face similarity 0.61 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 3,
+      "message": "torso similarity 0.69 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 4,
+      "message": "face similarity 0.57 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 4,
+      "message": "torso similarity 0.69 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 5,
+      "message": "face similarity 0.58 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 5,
+      "message": "torso similarity 0.68 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 6,
+      "message": "face similarity 0.55 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 7,
+      "message": "face similarity 0.53 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 7,
+      "message": "torso similarity 0.67 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 8,
+      "message": "face similarity 0.53 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 8,
+      "message": "torso similarity 0.68 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 9,
+      "message": "face similarity 0.55 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 9,
+      "message": "torso similarity 0.69 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 10,
+      "message": "face similarity 0.56 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 10,
+      "message": "torso similarity 0.69 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 11,
+      "message": "face similarity 0.57 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 11,
+      "message": "torso similarity 0.70 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 12,
+      "message": "face similarity 0.55 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 13,
+      "message": "face similarity 0.60 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 13,
+      "message": "torso similarity 0.67 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 14,
+      "message": "face similarity 0.59 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 14,
+      "message": "torso similarity 0.68 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 15,
+      "message": "face similarity 0.59 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 15,
+      "message": "torso similarity 0.69 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 3,
+      "message": "face similarity 0.66 < 0.7"
+    },
+    {
+      "gate": "similarity",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 5,
+      "message": "face similarity 0.64 < 0.7"
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 16,
+      "failedCells": []
+    },
+    {
+      "name": "walk",
+      "frames": 16,
+      "failedCells": []
+    },
+    {
+      "name": "run",
+      "frames": 16,
+      "failedCells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    {
+      "name": "dash",
+      "frames": 10,
+      "failedCells": [3, 5]
+    },
+    {
+      "name": "emote",
+      "frames": 12,
+      "failedCells": []
+    }
+  ]
+}

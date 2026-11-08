@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "SE",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:34:24 UTC",
+  "utcEnd": "2026-11-08 00:34:59 UTC",
+  "prompt": "HEAD-ONLY identity/scale lock EDIT. TARGETimage1=SErun2sheet1254square4x4. GUIDEimage2=canonicalmasterheadstencils1254square4x4 atmatching necks. SAMECANVAS/DPI now: guideheadphysicalpixelsarecorrectrawsize, NOsizeinterpretationneeded. For EACH16cells, COPY/REPAINTthecanonicalHEADfromGUIDE2 withEXACTsameattachedmaincap-tochinvolume/facefeatures, atitsmatchingneckattachmentontargetbody. Preservecanonicaladultfaceeyes/nose/lips/jaw/haircap/bun/jadepin proportions. Targetheads currentlyslightlytooSHORTcap-tochin(~60rawpx); canonicalguide is~65rawpx. Matchguide actual65rawpx, about5rawpxmoreverticalheadextent, preservefaceidentity andnaturalneck. DoNOTdecreasehead further. DoNOTgroweyesorinventface. Sourcebody BELOWneck andright-handheldplainwhiskONEbronzecollarwhitehorsehair areEXACTLYUNCHANGED: dynamicrunforwardlean, arms, dress, sleeves, sash, hips, boots, root, knee-upstride/airbornetucks. Neverwholebodyrescale orflattenpose. Headguideispixel-sizeanchor, NOTa blank-sheetrequest: finalall16FULLbodyposesaretarget1withcorrectedheads, nofloatingheads. Same1254x1254/4x4mapping/pureflatmagenta#ff00ff, no grid/text/FX/shadows, allsource marginsretained. KeepheadtiltlookSEconsistentwithcanonical3quarter. Closelytransferguideheadsizeandfeatures, avoidapproximatepercentagecorrection.",
+  "references": ["../raw/run.attempt2.png", "../templates/run.canonical-head-guide.raw-dpi.png"],
+  "raw": "../raw/run.attempt3.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../raw/run.attempt2.png",
+      "sha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084"
+    },
+    {
+      "reference": "../templates/run.canonical-head-guide.raw-dpi.png",
+      "sha256": "1fcd1e253032cf97d9fd0549a7ff8252209371390a8ce439defd4df424d2baf2"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}
