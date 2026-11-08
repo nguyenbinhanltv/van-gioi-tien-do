@@ -23,6 +23,7 @@ Cast bị sim từ chối trả lời ngay (`reason` = `CastReason`, không hits
 - Chỉ số người chơi: `roundedStatsAt(realm, substage)` (07 §1, số nguyên: HP không bao giờ vượt HP tối đa), mặc định Luyện Khí 1 cho tới khi tiến trình (#205, D76) cấp cảnh giới: `onStageChange` (nạp hồ sơ xong, sau mỗi lần đột phá) gọi `CombatSystem.setRealm`, tính lại hồ sơ, HP / MP tối đa (giữ tỉ lệ HP / MP), và `vitals` gửi lại cho client. HP / MP khởi tạo thực thể lấy từ đây khi bật combat.
 - Hình dạng: `single`, `circle`, `ring` quanh neo (người cast / mục tiêu / điểm đất), `cone` và `line` theo hướng nhìn của người cast; tối đa `global.max_targets_per_cast` mục tiêu, gần neo nhất trước.
 - Hồi sinh người chơi: 10 s ở điểm hồi sinh (docs/01 §12.2), đầy HP / MP, xóa cooldown. Khiên (`shield`) hấp thụ sát thương trước khi trừ HP.
+- Hồi HP / MP _[Cập nhật D88]_: `CombatSystem.regenerate` mỗi 5 tick; MP 1 % / 4 % / 8 % tối đa mỗi giây (trong chiến đấu / ngoài / đả tọa, docs/11 §2.4), HP 2 %/s ngoài chiến đấu và 0 trong chiến đấu (mặc định tạm); chiến đấu = có gây / nhận sát thương trong 5 s (`REGEN` trong `@vgtd/shared`).
 - Rớt đồ: `resolveDrops` với nguồn `field` / `elite` / `boss` của mob, luồng PRNG `drop` riêng (fork từ seed). Chưa có kho đồ nên kết quả đi qua `onDrops` và sự kiện `drops`.
 
 ## Xác định (determinism)
