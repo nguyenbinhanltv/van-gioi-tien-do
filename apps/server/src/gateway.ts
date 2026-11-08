@@ -1,0 +1,199 @@
+/**
+ * Gateway: HTTP auth endpoints (docs/25: credentials never travel over the WebSocket URL) plus the WebSocket entry.
+ *
+ *  POST /auth/register  {username,password}  -> 201 {accountId}
+ *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
+ *  GET  /health         -> 200 {ok, players, tick}
+ *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"..."}
+ *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
+ *                       afterwards: binary @vgtd/protocol frames only.
+ *
+ * `hello` is JSON here because docs/24 only proposes its Protobuf layout; D70 records this skeleton choice.
+ */
+import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
+import { WebSocketServer, type WebSocket } from 'ws';
+import { NETWORK } from '@vgtd/shared';
+import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
+import { AuthError, type AuthService } from './auth/accounts.js';
+import { TokenError } from './auth/jwt.js';
+import { GATEWAY_CONFIG } from './config.js';
+import type { WorldNode } from './world/node.js';
+
+export interface GatewayHandle {
+  http: Server;
+  wss: WebSocketServer;
+  port(): number;
+  close(): Promise<void>;
+}
+
+function json(res: ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}): void {
+  const data = JSON.stringify(body);
+  res.writeHead(status, { 'content-type': 'application/json', 'content-length': Buffer.byteLength(data), ...headers });
+  res.end(data);
+}
+
+async function readJson(req: IncomingMessage, limit = 4096): Promise<unknown> {
+  const chunks: Buffer[] = [];
+  let n = 0;
+  for await (const ch of req) {
+    const b = ch as Buffer;
+    n += b.length;
+    if (n > limit) throw new AuthError(400, 'too_large', 'request body too large');
+    chunks.push(b);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+  } catch {
+    throw new AuthError(400, 'bad_json', 'invalid JSON');
+  }
+}
+
+function remoteIp(req: IncomingMessage): string {
+  return req.socket.remoteAddress ?? 'unknown';
+}
+
+export interface GatewayOptions {
+  helloTimeoutMs?: number;
+}
+
+export function createGateway(auth: AuthService, world: WorldNode, opts: GatewayOptions = {}): GatewayHandle {
+  const online = new Map<string, { ws: WebSocket; entityId: number }>();
+
+  const http = createServer((req, res) => {
+    void (async () => {
+      try {
+        if (req.method === 'GET' && req.url === '/health') {
+          return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
+        }
+        if (req.method === 'POST' && (req.url === '/auth/register' || req.url === '/auth/login')) {
+          const body = (await readJson(req)) as { username?: unknown; password?: unknown } | null;
+          if (!body || typeof body !== 'object') throw new AuthError(400, 'bad_json', 'invalid JSON');
+          if (req.url === '/auth/register') {
+            const r = await auth.register(body.username, body.password, remoteIp(req));
+            return json(res, 201, r);
+          }
+          const r = await auth.login(body.username, body.password, remoteIp(req));
+          return json(res, 200, r);
+        }
+        json(res, 404, { error: 'not_found' });
+      } catch (e) {
+        if (e instanceof AuthError) {
+          const headers: Record<string, string> = {};
+          if (e.retryAfterS !== undefined) headers['retry-after'] = String(e.retryAfterS);
+          return json(res, e.status, { error: e.code, message: e.message }, headers);
+        }
+        json(res, 500, { error: 'internal' });
+      }
+    })();
+  });
+
+  const wss = new WebSocketServer({
+    server: http,
+    path: '/ws',
+    maxPayload: GATEWAY_CONFIG.MAX_FRAME_BYTES,
+    perMessageDeflate: false, // docs/08 §8: no compression for snapshots
+  });
+
+  wss.on('connection', (ws) => {
+    let entityId = 0;
+    let accountId = '';
+    const closeWith = (code: ErrorCode, text: string): void => {
+      if (ws.readyState === ws.OPEN) {
+        ws.send(encode({ type: 'error', code, text }), { binary: true });
+        ws.close(1008, text.slice(0, 100));
+      }
+    };
+    const helloTimer = setTimeout(() => {
+      if (!entityId) ws.close(1008, 'hello timeout');
+    }, opts.helloTimeoutMs ?? GATEWAY_CONFIG.HELLO_TIMEOUT_MS);
+
+    ws.on('message', (data, isBinary) => {
+      if (!entityId) {
+        // handshake: exactly one text frame
+        if (isBinary) return closeWith(ErrorCode.Unauthorized, 'hello required');
+        let hello: { type?: unknown; protocolMin?: unknown; protocolMax?: unknown; token?: unknown };
+        try {
+          hello = JSON.parse(data.toString()) as typeof hello;
+        } catch {
+          return closeWith(ErrorCode.BadMessage, 'bad hello');
+        }
+        if (hello.type !== 'hello' || typeof hello.token !== 'string')
+          return closeWith(ErrorCode.BadMessage, 'bad hello');
+        if (
+          typeof hello.protocolMin !== 'number' ||
+          typeof hello.protocolMax !== 'number' ||
+          hello.protocolMin > PROTOCOL_VERSION ||
+          hello.protocolMax < PROTOCOL_VERSION
+        )
+          return closeWith(ErrorCode.BadVersion, 'unsupported protocol');
+        try {
+          accountId = auth.authenticate(hello.token).accountId;
+        } catch (e) {
+          const expired = e instanceof TokenError && e.code === 'expired';
+          return closeWith(expired ? ErrorCode.SessionExpired : ErrorCode.Unauthorized, 'unauthorized');
+        }
+        if (world.clients.size >= GATEWAY_CONFIG.MAX_PLAYERS) return closeWith(ErrorCode.ServerFull, 'server full');
+        const prev = online.get(accountId);
+        if (prev) {
+          // one live connection per account: the newer login replaces the older
+          world.removePlayer(prev.entityId);
+          if (prev.ws.readyState === prev.ws.OPEN) {
+            prev.ws.send(encode({ type: 'error', code: ErrorCode.Kicked, text: 'logged in elsewhere' }), {
+              binary: true,
+            });
+            prev.ws.close(1008, 'replaced');
+          }
+        }
+        clearTimeout(helloTimer);
+        entityId = world.addPlayer(
+          {
+            send: (bytes) => {
+              if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
+            },
+            close: (code, text) => closeWith(code, text),
+            buffered: () => ws.bufferedAmount,
+          },
+          accountId,
+        );
+        online.set(accountId, { ws, entityId });
+        ws.send(
+          JSON.stringify({
+            type: 'hello_ack',
+            entityId,
+            serverTimeMs: world.world.timeMs,
+            tickHz: NETWORK.TICK_HZ,
+            protocol: PROTOCOL_VERSION,
+          }),
+        );
+        return;
+      }
+      if (!isBinary) return closeWith(ErrorCode.BadMessage, 'binary frames only');
+      const buf = data as Buffer;
+      world.receive(entityId, new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength));
+    });
+
+    ws.on('close', () => {
+      clearTimeout(helloTimer);
+      if (entityId) {
+        if (online.get(accountId)?.entityId === entityId) online.delete(accountId);
+        world.removePlayer(entityId);
+      }
+    });
+    ws.on('error', () => ws.terminate());
+  });
+
+  return {
+    http,
+    wss,
+    port: () => {
+      const a = http.address();
+      return typeof a === 'object' && a ? a.port : 0;
+    },
+    close: () =>
+      new Promise<void>((resolve) => {
+        for (const c of wss.clients) c.terminate();
+        wss.close(() => http.close(() => resolve()));
+        http.closeAllConnections?.();
+      }),
+  };
+}

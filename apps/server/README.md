@@ -1,5 +1,71 @@
-# apps/server
+# @vgtd/server
 
-Placeholder. Server MVP (TypeScript, Node 18+) sẽ được thêm ở đây dưới tên package `@vgtd/server`.
+Gateway + World Node skeleton (P2-2, docs/08, docs/24, docs/25, DECISIONS D70). One Node process; the authoritative
+simulation is `@vgtd/sim` stepped at a fixed 20 Hz, the wire format is `@vgtd/protocol`.
 
-Khi thêm `package.json`, cung cấp các script `build`, `test`, `typecheck` và `tsconfig.json` kế thừa `../../tsconfig.base.json`; CI sẽ tự nhận workspace.
+```
+HTTP  POST /auth/register {username,password}   -> 201 {accountId}
+HTTP  POST /auth/login    {username,password}   -> 200 {token, accountId, sessionId, expiresAtS}
+HTTP  GET  /health
+WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"<jwt>"}
+            reply (JSON text): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
+            then binary @vgtd/protocol frames: client -> input (20-30 Hz, 1-3 inputs), skill_cast, ping
+                                               server -> snapshot, aoi_enter, aoi_leave, skill_result, error, pong
+```
+
+## Layout
+
+| Path                   | What                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `src/auth/`            | scrypt hashing + policy, EdDSA JWT, `AuthService` (lockout, per-IP limits, bounded hash queue), in-memory `AccountStore` |
+| `src/gateway.ts`       | HTTP auth endpoints, WebSocket handshake (hello timeout, one live connection per account, frame cap)                     |
+| `src/world/node.ts`    | `WorldNode`: input intake (dedup by seq), `step()`, AOI at 10 Hz, per-band snapshots, kicks, tick/phase metrics          |
+| `src/loadtest/`        | headless `Bot` (speaks the real protocol), fleet runner, report (`summarize`/`formatReport`), CLI + worker thread        |
+| `scripts/loadtest.mjs` | bundles the TS entry with esbuild into `node_modules/.vgtd-loadtest/` and runs it                                        |
+| `src/config.ts`        | server-only tunables (auth limits, frame/rate limits, visible cap). Network/AOI/tick constants come from `@vgtd/shared`. |
+
+Server authority: clients send **intent only** (direction, magnitude, flags, declared dt). Positions, cooldowns, MP and
+range/LOS are decided by `@vgtd/sim`; over-budget inputs are held, `dt` outside 8-50 ms is penalised, and the suspicion
+score disconnects speedhackers (docs/08 §6). Clocks (`hrtime`, `setTimeout`) only schedule and measure ticks; the sim
+always advances by the fixed 50 ms.
+
+## Run
+
+```bash
+PORT=8080 node ...            # see src/main.ts (local-only hosting, D27)
+npm test -w @vgtd/server      # auth, world node, gateway integration, load-test smoke
+npm run loadtest -w @vgtd/server -- --bots 100
+```
+
+Load-test options: `--bots N` (default 100) `--duration S` (30) `--warmup S` (3) `--area TILES` (96, spawn/walk square;
+smaller = denser) `--input-hz HZ` (20) `--speedhackers N` `--speed-factor X` (3; try 1.3 for a subtle clock hack)
+`--teleporters N` (sends declared dt = 250 ms) `--seed N` `--json`. Exit code 1 if any P2 criterion fails.
+(`-w server` does not resolve: the package follows the `@vgtd/<name>` convention, so use `-w @vgtd/server` or `-w apps/server`.)
+
+The server runs in the main thread; all bots run in one worker thread (own event loop) over loopback. Bandwidth is
+counted at the WebSocket frame layer (payload + 2/4/10 B header), **not** TCP/IP/TLS.
+
+## Measured against the P2 exit criteria (docs/10 §12)
+
+Windows 11 dev box (shared with other agent sessions), Node 24, 100 honest bots, 20 Hz input, 30 s window after 3 s
+warm-up, bots + server on the same machine. Numbers vary run to run; `npm run loadtest` reproduces them.
+
+| Criterion                               | Target    | Default density (area 96)                | Dense (area 48, ~90 visible)             |
+| --------------------------------------- | --------- | ---------------------------------------- | ---------------------------------------- |
+| 100 CCU stable                          | no drops  | 100/100 connected, 0 kicks               | 100/100 connected, 0 kicks               |
+| Tick duration p99                       | <= 40 ms  | **7.4 ms** (p50 3.7, max 26)             | **8.9 ms** (p50 5.5, max 10)             |
+| Downstream per player (worst, WS frame) | <= 8 KB/s | **3.4 KB/s** (mean 2.8)                  | **7.0 KB/s** (mean 6.1)                  |
+| AOI measurable                          | reported  | 39.7 visible mean (max 74), ~2.2 enter/s | 90.3 visible mean (max 99), ~2.0 enter/s |
+| Speedhack / teleport blocked            | blocked   | see below                                |                                          |
+| Server CPU                              | -         | ~22% of one core, RSS ~190 MB            | ~25% of one core, RSS ~284 MB            |
+
+Upstream is 0.4 KB/s per player; snapshots go out at 20/s per player. Tick time is dominated by snapshot encode + socket
+writes (~2.8-4 ms mean for 100 clients); the sim step is ~0.35 ms and the AOI pass ~1.5-2 ms per AOI tick.
+
+Cheaters (100 honest + 3 speedhack at 1.3x clock + 3 teleport with dt = 250 ms): all 6 disconnected (speedhack after ~11 s,
+teleport after ~5 s), honest players unaffected, and the speedhackers' observed speed never exceeded honest walk speed
+(4.55 vs 4.55 tiles/s). A 3x-clock speedhack is kicked within ~0.4 s (queue overflow).
+
+Caveats, also recorded in `docs/OPEN-ITEMS.md`: one earlier run on a busier machine showed a single 122 ms tick (p99 was
+still 31 ms), so p99 depends on host load; loopback means no real network latency/jitter; the Windows timer makes the
+measured tick _interval_ jitter (p50 ~47 ms, p99 ~63 ms) while the simulation time stays exactly 50 ms/tick.

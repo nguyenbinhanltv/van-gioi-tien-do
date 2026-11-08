@@ -154,6 +154,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D69: mặc định mô phỏng/giao thức v1 (khinh công chỉ lưu cờ, bay dạng xung, input vượt ngân sách bị giữ và +1 điểm nghi ngờ, wire float32 + cờ delta, kết quả kỹ năng không kèm sát thương); cảm giác chơi xem lại sau playtest, cần game designer duyệt khi cân bằng.]
 
+[Cập nhật D70: khung `@vgtd/server` (Gateway + World Node): xác thực tên/mật khẩu qua HTTP (scrypt tạm thời thay argon2id, JWT EdDSA 10 phút), bắt tay WS bằng `hello` JSON 5 s, AOI 10 Hz tối đa 120 thực thể, snapshot delta theo băng 20/10/5 Hz, công cụ `loadtest`.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Những giá trị ở cột "Cũ" vẫn còn nằm trong tài liệu gốc tương ứng; khi gặp, dùng giá trị ở cột "Hiện hành".
