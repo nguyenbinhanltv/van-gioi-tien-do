@@ -57,7 +57,12 @@ const dataSkill = (id: string): SkillDef => skillDefinitions.skills.find((s) => 
 
 class FakeMobs implements MobPort {
   killed: number[] = [];
+  /** threat hook calls (D81): [mobId, attackerId, amount] */
+  damaged: Array<[number, number, number]> = [];
   constructor(readonly stats = new Map<number, MobCombatStats>()) {}
+  onDamage(id: number, attackerId: number, amount: number): void {
+    this.damaged.push([id, attackerId, amount]);
+  }
   combatStats(id: number): MobCombatStats | undefined {
     return this.killed.includes(id) ? undefined : this.stats.get(id);
   }
@@ -313,6 +318,21 @@ describe('cast pipeline: sim validation + combat resolution', () => {
     expect(entity(r, 1)!.mp).toBe(mp0);
     r.run(2000);
     expect(entity(r, MOB)!.hp).toBe(3000);
+  });
+
+  it('reports each non-lethal hit on a mob to the MobPort threat hook (attacker + damage), nothing for a lethal hit', () => {
+    const r = rig({ mobs: [{ i: 22.5, j: 20.5 }] });
+    r.tick([r.cast('kiem_khi_tram')]);
+    r.run(1500);
+    const dmg = r.events.filter((e) => e.type === 'damage');
+    expect(dmg).toHaveLength(1);
+    expect(r.mobs.damaged).toEqual([[MOB, 1, (dmg[0] as { amount: number }).amount]]);
+    expect(r.mobs.damaged[0]![2]).toBeGreaterThan(0);
+    const kill = rig({ mobs: [{ i: 22.5, j: 20.5, hp: 1 }] });
+    kill.tick([kill.cast('kiem_khi_tram')]);
+    kill.run(1500);
+    expect(kill.mobs.killed).toEqual([MOB]);
+    expect(kill.mobs.damaged).toEqual([]);
   });
 
   it('GCD, cooldown and MP rejections come from the sim and deal no damage', () => {

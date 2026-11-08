@@ -7,12 +7,17 @@
  * `ai` PRNG stream drawn in a fixed order (spawn: slots ascending; per tick: respawns ascending, then AI ascending),
  * no clocks, ties by id. Nothing here reads `Math.random`, `Date.now` or `performance.now`.
  *
- * No combat yet: mobs never take or deal damage. `kill()` is the hook the combat step will call; it despawns the mob
- * and schedules its respawn.
+ * Content (D81): each tier lives in a distance band around the centre of the mob area (nothing spawns in the safe
+ * zone around it); normal mobs spawn in packs around an anchor point. Threat (D81): `onDamage` (called by the combat step
+ * through `MobPort`) adds threat on the attacker; a mob chases the player with the most threat, with a hysteresis ratio.
+ * `kill()` is the hook the combat step calls; it despawns the mob and schedules its respawn.
  */
 import {
   COLLIDER_RADIUS_TILES,
   MOB_AI,
+  MOB_BANDS,
+  MOB_PACK_RADIUS,
+  MOB_THREAT,
   MOB_ENTITY_KIND,
   MOB_ID_BASE,
   MOB_RESPAWN_MS,
@@ -61,6 +66,8 @@ export interface MobManagerOptions {
   tables?: readonly ZoneSpawnTable[];
   /** multiplies every table count (rounded; 0 disables the group). Default 1 */
   density?: number;
+  /** centre of the mob area for the tier bands (tiles); default: the centre of the bounding box of `zones` */
+  center?: { i: number; j: number };
 }
 
 /** What a combat step needs about a LIVING mob (the sim entity only holds the current HP). */
@@ -88,6 +95,8 @@ export interface MobInfo {
   target: number;
   /** tick at which a dead mob respawns (0 when alive) */
   respawnAtTick: number;
+  /** threat on players, highest first (ties: lowest id) */
+  threat: { id: number; value: number }[];
 }
 
 interface Slot {
@@ -103,17 +112,26 @@ interface Slot {
   alive: boolean;
   brain: MobBrain;
   respawnAtTick: number;
+  /** attacker id -> threat (D81); empty for a mob nobody has hurt */
+  threat: Map<number, number>;
 }
 
 const SPAWN_ATTEMPTS = 20;
+const THREAT_ENTRIES = 16;
 const TICK_MS = NETWORK.TICK_MS;
 const respawnTicks = (ms: number): number => Math.max(1, Math.ceil(ms / TICK_MS));
+
+const byThreat = (a: { id: number; value: number }, b: { id: number; value: number }): number =>
+  b.value - a.value || a.id - b.id;
 
 export const isMobId = (id: number): boolean => id >= MOB_ID_BASE;
 
 export class MobManager {
   private readonly slots: Slot[] = [];
   private readonly grid: CollisionGrid;
+  private readonly centre: { i: number; j: number };
+  /** half-size of the mob area: the distance the tier bands are fractions of */
+  private readonly radius: number;
   private rng: RngState;
 
   constructor(opts: MobManagerOptions) {
@@ -121,6 +139,13 @@ export class MobManager {
     this.rng = rngFork(rngSeed(opts.seed), 'ai');
     const tables = opts.tables ?? ZONE_SPAWN_TABLES;
     const density = opts.density ?? 1;
+    const zones = opts.zones;
+    const i0 = Math.min(...zones.map((z) => z.i0));
+    const i1 = Math.max(...zones.map((z) => z.i1));
+    const j0 = Math.min(...zones.map((z) => z.j0));
+    const j1 = Math.max(...zones.map((z) => z.j1));
+    this.centre = opts.center ?? { i: (i0 + i1) / 2, j: (j0 + j1) / 2 };
+    this.radius = zones.length === 0 ? 1 : Math.max(1, Math.max(i1 - i0, j1 - j0) / 2);
     for (const rect of opts.zones) {
       const table = tables.find((t) => t.zone === rect.zone);
       if (!table) continue;
@@ -128,7 +153,14 @@ export class MobManager {
         const def = mobDefByKey(g.def);
         if (!def) throw new Error(`unknown mob def ${g.def}`);
         const n = Math.max(0, Math.round(g.count * density));
-        for (let k = 0; k < n; k++) this.slots.push(this.makeSlot(this.slots.length, def, rect));
+        const pack = Math.max(1, Math.trunc(g.pack ?? 1));
+        let anchor: [number, number] = [0, 0];
+        for (let k = 0; k < n; k++) {
+          // pack leader: a point in the tier band; the other members within MOB_PACK_RADIUS of it (draw order: see makeSlot)
+          if (k % pack === 0) anchor = this.drawPoint(rect, def);
+          const home = k % pack === 0 ? anchor : this.drawNear(anchor, rect);
+          this.slots.push(this.makeSlot(this.slots.length, def, rect, home));
+        }
       }
     }
   }
@@ -158,6 +190,7 @@ export class MobManager {
       state: s.brain.state,
       target: s.brain.target,
       respawnAtTick: s.alive ? 0 : s.respawnAtTick,
+      threat: [...s.threat.entries()].map(([id, value]) => ({ id, value })).sort(byThreat),
     };
   }
   /** Combat attributes of a living mob, undefined for dead mobs and non-mobs (the seam for the combat step, #206). */
@@ -188,16 +221,46 @@ export class MobManager {
   }
 
   // ------------------------------------------------------------------ spawning
-  private drawPoint(rect: MobZone): [number, number] {
+  /** Chebyshev distance of a point from the centre of the mob area, in tiles. */
+  private fromCentre(i: number, j: number): number {
+    return Math.max(Math.abs(i - this.centre.i), Math.abs(j - this.centre.j));
+  }
+
+  /**
+   * A walkable point inside `rect` and inside the tier's distance band (D81). Up to SPAWN_ATTEMPTS tries (2 floats each);
+   * when none lands in the band the last WALKABLE point is used, else the rect centre.
+   */
+  private drawPoint(rect: MobZone, def: MobDef): [number, number] {
+    const band = MOB_BANDS[def.tier];
+    const lo = band.minFrac * this.radius;
+    const hi = band.maxFrac * this.radius;
+    let walkable: [number, number] | null = null;
     for (let a = 0; a < SPAWN_ATTEMPTS; a++) {
       const [fa, r1] = rngFloat(this.rng);
       const [fb, r2] = rngFloat(r1);
       this.rng = r2;
       const i = rect.i0 + fa * (rect.i1 - rect.i0);
       const j = rect.j0 + fb * (rect.j1 - rect.j0);
+      if (circleBlocked(this.grid, i, j, COLLIDER_RADIUS_TILES, 0, false)) continue;
+      walkable = [i, j];
+      const d = this.fromCentre(i, j);
+      if (d >= lo && d <= hi) return [i, j];
+    }
+    return walkable ?? [(rect.i0 + rect.i1) / 2, (rect.j0 + rect.j1) / 2];
+  }
+
+  /** A walkable point within MOB_PACK_RADIUS of `anchor` and inside `rect` (up to 10 tries, 2 floats each); else the anchor. */
+  private drawNear(anchor: [number, number], rect: MobZone): [number, number] {
+    for (let a = 0; a < 10; a++) {
+      const [fa, r1] = rngFloat(this.rng);
+      const [fb, r2] = rngFloat(r1);
+      this.rng = r2;
+      const i = anchor[0] + (fa * 2 - 1) * MOB_PACK_RADIUS;
+      const j = anchor[1] + (fb * 2 - 1) * MOB_PACK_RADIUS;
+      if (i < rect.i0 || i >= rect.i1 || j < rect.j0 || j >= rect.j1) continue;
       if (!circleBlocked(this.grid, i, j, COLLIDER_RADIUS_TILES, 0, false)) return [i, j];
     }
-    return [(rect.i0 + rect.i1) / 2, (rect.j0 + rect.j1) / 2]; // fixed fallback: the rect centre
+    return anchor;
   }
 
   private drawLevel(def: MobDef): number {
@@ -218,9 +281,9 @@ export class MobManager {
     return { ...newBrain(), timerMs: ms };
   }
 
-  /** RNG order for a (re)spawn: point (2 floats per attempt), level (1 int), first idle pause (1 int). */
-  private makeSlot(slot: number, def: MobDef, rect: MobZone): Slot {
-    const [homeI, homeJ] = this.drawPoint(rect);
+  /** RNG order for a spawn: home point (drawn by the caller: pack anchor / pack member), then level (1 int), first idle pause (1 int). */
+  private makeSlot(slot: number, def: MobDef, rect: MobZone, home: [number, number]): Slot {
+    const [homeI, homeJ] = home;
     const level = this.drawLevel(def);
     const stats = mobStats(def, level);
     return {
@@ -236,6 +299,7 @@ export class MobManager {
       alive: true,
       brain: this.drawBrain(def),
       respawnAtTick: 0,
+      threat: new Map(),
     };
   }
 
@@ -254,12 +318,31 @@ export class MobManager {
     return { ...world, entities: [...world.entities, ...add].sort((a, b) => a.id - b.id) };
   }
 
-  // ------------------------------------------------------------------ combat hook
+  // ------------------------------------------------------------------ combat hooks
+  /**
+   * `attackerId` hurt mob `id` for `amount`: add that much threat on the attacker (D81). Ignored for dead / unknown mobs,
+   * attackers that are mobs, and non-positive amounts. At most THREAT_ENTRIES attackers are tracked per mob (the lowest
+   * threat is dropped).
+   */
+  onDamage(id: number, attackerId: number, amount: number): void {
+    const s = this.slots[id - MOB_ID_BASE];
+    if (!s || s.id !== id || !s.alive || isMobId(attackerId) || !(amount > 0)) return;
+    s.threat.set(attackerId, (s.threat.get(attackerId) ?? 0) + amount);
+    if (s.threat.size > THREAT_ENTRIES) {
+      let lowest = -1;
+      let lowV = Infinity;
+      for (const [k, v] of s.threat)
+        if (k !== attackerId && (v < lowV || (v === lowV && k > lowest))) ((lowest = k), (lowV = v));
+      s.threat.delete(lowest);
+    }
+  }
+
   /** The mob died (called by the combat step later): despawn it and schedule the respawn. */
   kill(world: SimWorld, id: number): SimWorld {
     const s = this.slots[id - MOB_ID_BASE];
     if (!s || s.id !== id || !s.alive) return world;
     s.alive = false;
+    s.threat.clear();
     s.brain = newBrain();
     s.respawnAtTick = world.tick + respawnTicks(MOB_RESPAWN_MS[s.def.tier]);
     return { ...world, entities: world.entities.filter((e) => e.id !== id) };
@@ -296,6 +379,7 @@ export class MobManager {
         s.brain = this.drawBrain(s.def);
         s.alive = true;
         s.respawnAtTick = 0;
+        s.threat.clear();
         spawned.push(this.entityOf(world, s));
         continue;
       }
@@ -303,6 +387,7 @@ export class MobManager {
       if (k === undefined) continue; // not in the world (e.g. removed externally)
       const e = (entities ?? world.entities)[k]!;
       const p = MOB_AI[s.def.tier];
+      if (s.threat.size > 0) s.brain = this.applyThreat(s, e, playerById);
       const d = decide(
         { i: e.i, j: e.j, homeI: s.homeI, homeJ: s.homeJ, slot: s.slot },
         s.brain,
@@ -314,6 +399,9 @@ export class MobManager {
         this.rng,
       );
       this.rng = d.rng;
+      // a chase that ended (lost / leash: chase -> return, or on to idle in the same tick) forgets all threat, so the mob
+      // does not turn around again at the leash edge
+      if (s.threat.size > 0 && s.brain.state === 'chase' && d.brain.state !== 'chase') s.threat.clear();
       s.brain = d.brain;
       if (d.dir === 255 && e.vi === 0 && e.vj === 0) continue;
       const m = stepMove(e, { dtMs: TICK_MS, dir: d.dir, mag: d.mag, flags: 0 }, this.grid);
@@ -324,6 +412,38 @@ export class MobManager {
     let out = entities ?? world.entities;
     if (spawned.length > 0) out = [...out, ...spawned].sort((a, b) => a.id - b.id);
     return { ...world, entities: out };
+  }
+
+  /**
+   * Threat bookkeeping for one mob with a non-empty table (D81), no RNG: drop attackers that are gone, decay the ones far
+   * away, then point the brain at the highest threat (a returning mob gives up and forgets everything).
+   */
+  private applyThreat(s: Slot, e: EntityState, playerById: (id: number) => PlayerRef | undefined): MobBrain {
+    const b = s.brain;
+    if (b.state === 'return') {
+      s.threat.clear();
+      return b;
+    }
+    const decay = 1 - MOB_THREAT.decayPerS * (TICK_MS / 1000);
+    for (const [id, v] of [...s.threat]) {
+      const pl = playerById(id);
+      if (!pl) {
+        s.threat.delete(id);
+        continue;
+      }
+      if (Math.hypot(pl.i - e.i, pl.j - e.j) > MOB_THREAT.forgetRadius) {
+        const nv = v * decay;
+        if (nv < MOB_THREAT.minThreat) s.threat.delete(id);
+        else s.threat.set(id, nv);
+      }
+    }
+    if (s.threat.size === 0) return b;
+    let top = 0;
+    let topV = -1;
+    for (const [id, v] of s.threat) if (v > topV || (v === topV && id < top)) ((top = id), (topV = v));
+    if (b.state === 'chase' && (b.target === top || topV <= (s.threat.get(b.target) ?? 0) * MOB_THREAT.switchRatio))
+      return b;
+    return { state: 'chase', timerMs: 0, target: top, wi: 0, wj: 0 };
   }
 
   // ------------------------------------------------------------------ tests / diagnostics
@@ -353,6 +473,10 @@ export class MobManager {
       num(s.brain.target);
       num(s.brain.wi);
       num(s.brain.wj);
+      for (const t of [...s.threat.entries()].sort((a, b) => a[0] - b[0])) {
+        num(t[0]);
+        num(t[1]);
+      }
     }
     return h1.toString(16).padStart(8, '0') + h2.toString(16).padStart(8, '0');
   }
