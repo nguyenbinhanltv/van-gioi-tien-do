@@ -28,9 +28,7 @@ qa-generated.ts runs native gates plus local projected-canvas guards; missing sh
 
 ## S motion checkpoint
 
-All15 S clips /202 source drawings are present. Rejected AI cap-band edits remain historical and are not active sources. The owner-authorized replacement is deterministic HEAD-ROI-only uniform scaling, at most5%, with Lanczos3 feather, locked chin/base, exact outside-mask RGBA and D57 registration. No whole-frame/body fit is introduced.
-
-Run and dash0/9 head checks pass. Dash2/4 still fail the unchanged head band after the maximum allowed original-source correction; they remain hard failures, not D60 bracket cases. D55 checks145 cells without head-reason skips:145 pass Lab,0 fail,57 separate D41 free-pose exemptions. All21 measured soft findings and the manual neutral-dash foot-depth warning remain open. S/README.md and S/head-roi-checkpoint-qa.json record the current state. S final export, real Cocos capture and direction PR remain pending.
+All15 S clips /202drawings pass native hard gates. Run and dash0/9 use bounded original-source headROI repairs; dash2/4 use one master-locked original-source AI head replacement with no additional scale. Failed cap-band/oversize candidates remain history. D57 preserves all registrations and native outside-mask RGBA;15heads changed,187alignedPNGs unchanged. D55:145Lab pass/0fail,57D41exempt separate. All21soft findings, manual foot-depth/landmark uncertainty and mobile residency remain open. Full-source export and real Cocos3.8.8 2× capture passed all202drawings with0region contacts; see S/README.md and S/final-source-qa.json.
 
 ## Provenance
 

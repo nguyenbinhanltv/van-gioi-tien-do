@@ -295,8 +295,8 @@
       "cells": [2, 4],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "OPEN genuine residual after single original-source factor0.95: actual cap/jaw2=(132.5,31.5)->(133.5,87.5),4=(134.5,31.5)->(135.5,89.5), versus locked master53.0094/band51.419..54.600. No stacked scales/lower stripe/threshold waiver/D60 bracket. Need orchestrator scope decision for further source repair beyond authorized5%."
+      "status": "resolved",
+      "note": "OPEN genuine residual after single original-source factor0.95: actual cap/jaw2=(132.5,31.5)->(133.5,87.5),4=(134.5,31.5)->(135.5,89.5), versus locked master53.0094/band51.419..54.600. No stacked scales/lower stripe/threshold waiver/D60 bracket. Need orchestrator scope decision for further source repair beyond authorized5%. RESOLVED: orchestrator authorized ORIGINAL-source master-locked AI HEAD REPLACEMENT, never >5% deterministic scaling. One AI candidate, no post-scale needed. Actual native2=(130.5,32.5)->(131,85.5)=53.00236px;4=(133.5,34.5)->(134.5,87.5)=53.00943px, band51.41915..54.59972. Native traces,source/maskSHA,D57 whole-sheet RGBA,4xseams and all202registration proof retained; manual~1px uncertainty disclosed. Previous failures remain historical evidence."
     },
     {
       "kind": "other",

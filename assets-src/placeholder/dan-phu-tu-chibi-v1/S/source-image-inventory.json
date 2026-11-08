@@ -1,7 +1,7 @@
 {
   "date": "2026-11-08",
   "tool": "image_gen.imagegen for original AI raw/edits (model undisclosed); public sprite/Node for guides/masks and explicitly owner-authorized deterministic head ROI(model not applicable)",
-  "note": "All failed/withdrawn attempts retained as history. Current uniform head ROI<=5% is an explicit owner exception; no whole-frame/body fitting.",
+  "note": "All failed/withdrawn attempts retained as history. Current sources use bounded one-pass original-source headROI repairs for run/dash0/9 and a single master-locked AI head replacement for dash2/4. No whole-frame/body fitting or chained scales.",
   "files": [
     {
       "file": "raw/attack.attempt1.png",
@@ -44,6 +44,11 @@
       "bytes": 1994377
     },
     {
+      "file": "raw/dash-headreplacement1.attempt1.png",
+      "sha256": "216e088c087a51520209ac63a141f2b26057f5eb86dc6ff7c53f4ebb087cdbda",
+      "bytes": 2024534
+    },
+    {
       "file": "raw/die.attempt1.png",
       "sha256": "ca4f449442367eaae4a883b4a21d49be98cd7d889bd5ba22bd7fecf56341133d",
       "bytes": 1879539
@@ -67,6 +72,11 @@
       "file": "raw/hit-dash.cap-selected3.png",
       "sha256": "77962516962229eeb0e8112ddf565dffbbedd516087d7026c559cafc48e54a56",
       "bytes": 2434013
+    },
+    {
+      "file": "raw/hit-dash.head-replacement1.png",
+      "sha256": "6063eede226a261b4edba410bbacfc4894d60c9756070f6a5a46d39d744e3a9d",
+      "bytes": 2429894
     },
     {
       "file": "raw/hit-dash.head-roi.v1.png",
@@ -147,6 +157,11 @@
       "file": "raw/walk.attempt1.png",
       "sha256": "d2feedc8f6b2b45738ac55c16bf4d71ae70a1ddccd44bf58485f11033bf47982",
       "bytes": 1976906
+    },
+    {
+      "file": "repair/dash.head-replacement1.mask.png",
+      "sha256": "b4ff1b4beb6b6a9a5e914daa33ee790d74724cf1be1e015bd95b2057b4652d80",
+      "bytes": 11228
     },
     {
       "file": "repair/dash.head-roi.v1.mask.png",

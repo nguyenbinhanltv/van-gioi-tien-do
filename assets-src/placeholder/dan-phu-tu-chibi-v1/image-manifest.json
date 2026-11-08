@@ -2261,6 +2261,27 @@
       "width": 1254,
       "height": 1254,
       "role": "Owner-authorized deterministic head ROI derivative/mask; all source history retained"
+    },
+    {
+      "file": "S/raw/dash-headreplacement1.attempt1.png",
+      "sha256": "216e088c087a51520209ac63a141f2b26057f5eb86dc6ff7c53f4ebb087cdbda",
+      "width": 1254,
+      "height": 1254,
+      "role": "Authoring source/guide/mask; status in S/provenance"
+    },
+    {
+      "file": "S/raw/hit-dash.head-replacement1.png",
+      "sha256": "6063eede226a261b4edba410bbacfc4894d60c9756070f6a5a46d39d744e3a9d",
+      "width": 1254,
+      "height": 1254,
+      "role": "Authoring source/guide/mask; status in S/provenance"
+    },
+    {
+      "file": "S/repair/dash.head-replacement1.mask.png",
+      "sha256": "b4ff1b4beb6b6a9a5e914daa33ee790d74724cf1be1e015bd95b2057b4652d80",
+      "width": 1254,
+      "height": 1254,
+      "role": "Authoring source/guide/mask; status in S/provenance"
     }
   ]
 }
