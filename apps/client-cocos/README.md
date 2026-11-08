@@ -63,3 +63,11 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 - `PlayerActor.body` hiện là armature chibi (`ChibiBody`); paperdoll/trang bị của `character` thay sau; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
 - `YSortLayer.add(node, depth)` là chỗ đăng ký mọi vật thể L3 (quái, NPC, người chơi khác).
 - `CameraRig.follow()` / `clientToWorld()` là giao diện camera cho client-core.
+
+## Tải chibi theo bundle (D71)
+
+`npm run prepare:assets` (chạy trong `build:web`) sinh `assets/chibi/` (git-ignored) từ bản xuất `assets/resources/dragonbones/<lớp>-chibi-v1` (không đổi): mỗi (lớp, hướng) là một Asset Bundle `chibi-<lớp>-<hướng>` với hai tier (`full`, `1x` Lanczos3) và hai nhóm clip (`loco` = idle/walk/run, `rest`), cùng `resources/world/chibi-index.json`. Preset nén texture (ASTC 4x4 cho `1x`, ASTC 6x6 cho `full`, WebP dự phòng) nằm ở `settings/v2/packages/builder.json`, gắn vào từng PNG qua `.meta` do `scripts/chibi-bundles.mjs` ghi. `ChibiAssets.ts` nạp bundle, giới hạn tải đồng thời và giữ việc nền (NPC, hướng khác) đến khi người chơi đã hiện hình. `?restier=1x|full` ép tier (mặc định: `full` cho người chơi cục bộ trên desktop, `1x` cho mọi thứ còn lại). Ổ C: đầy thì đặt `library/`, `temp/`, `build/`, `assets/chibi/` thành junction sang ổ khác (đều git-ignored).
+
+## Bản release không có art dev
+
+`npm run build:web -w client-cocos -- --release` build trên **bản stage** của dự án (`scripts/release-stage.mjs`): mọi thứ được sao chép nguyên văn (kể cả `.meta`, giữ nguyên uuid) trừ `assets/resources/dragonbones/**` (≈ 229 MB: art trình xem và bản xuất chibi nguồn). Stage mặc định ở `build/stage-release` (đổi bằng biến môi trường `VGTD_STAGE_DIR`, nên đặt sang ổ còn trống); đồng bộ tăng dần theo kích thước + mtime nên Library của stage được giữ giữa các lần build. Kết quả vẫn ghi vào `build/web-mobile`. Trình xem (`#viewer`) không chạy được trên bản release; thêm `--keep-dev-art` để build đủ. Bản không `--release` vẫn build cả dự án.

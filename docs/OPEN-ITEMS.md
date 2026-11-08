@@ -226,6 +226,19 @@ Bản play-test `ChibiBody` / `PlayerActor` (apps/client-cocos) dùng các giá 
 
 docs/08 §4 chỉ quy định công thức tốc độ di chuyển (4,5 × (1+(TP−100)/400)) và docs/31 I-08 vẫn ghi 4,5 là placeholder; không tài liệu nào định nghĩa chế độ đi bộ, tốc độ đi bộ hay ngưỡng chuyển clip. Cần game designer hoặc owner quyết định (có chế độ đi bộ không, hệ số tốc độ, ngưỡng clip) trước khi coi các giá trị này là cuối cùng; trong code chúng được đánh dấu PLAY-TEST ONLY.
 
+## 16. Công thức lõi P3 (`@vgtd/shared`): mặc định đã chọn khi docs chưa rõ
+
+Các hàm `drops.ts` (docs/07 §6) và `skill_table.ts` (docs/11 §4) dùng mặc định có ghi dưới đây; chưa có giá trị mới nào được bịa, cần game designer xác nhận:
+
+- **Quái thấp hơn 1 cảnh giới**: nhân ×0,2 cho **xác suất** của mọi vật phẩm (không nhân số lượng). Thấp hơn từ 2 cảnh giới: chỉ còn nguyên liệu nghề, giữ nguyên xác suất in trong bảng (docs chỉ nói "chỉ còn nguyên liệu").
+- **Linh khí cạn kiệt (>2 giờ liên tục)** ×0,5 và **tổ đội 1/√n** nhân vào **xác suất**, không phải số lượng; áp cho cả mục 100% (docs chỉ nói "×0,5" / "hệ số 1/√n").
+- **Số lượng Linh thạch ×1,5^(r−1)**: nhân sau khi roll khoảng số lượng, làm tròn half-up, tối thiểu 1 khi đã rơi (docs không nêu làm tròn). Vật phẩm khác không nhân theo cảnh giới.
+- **Boss lặp lại (rương tuần đã nhận)**: chỉ còn Linh thạch, số lượng ×0,3 (làm tròn như trên, tối thiểu 1), không đan, bản vẽ hay nguyên liệu (docs: "chỉ nhận Linh thạch × 0,3, không có bản vẽ").
+- **Pity bản vẽ Vàng–Đỏ**: từ lần 1 đến 29 xác suất lần n thay cho 0,2% in trong bảng khi truyền `goldRedAttempt` (không truyền thì dùng 0,2%); docs không nói đoạn dốc này có nhân hệ số quái thấp/cạn kiệt/tổ đội hay không: hiện vẫn nhân. Từ lần 30 trở đi trả về 1 ("chắc chắn rơi" là quy tắc rõ của docs/07 §6), bất chấp mọi hệ số; chỉ còn bị loại khi nguồn không rơi bản vẽ (boss lặp lại, quái thấp từ 2 cảnh giới).
+- **Phẩm bản vẽ**: roll trong khoảng phẩm của dòng đã trúng, theo phân bổ của nguồn được chuẩn hóa lại trên khoảng đó (Trắng–Lục, Lam–Tím, Vàng–Đỏ); đan dược dùng toàn bộ phân bổ.
+- **Thứ tự RNG** của `resolveDrops` (một lần rút cho trúng/trượt mỗi vật phẩm theo `DROP_ITEM_ORDER`, rồi số lượng, rồi phẩm) là quy ước kỹ thuật để xác định; server sẽ dùng PRNG có seed như mô phỏng D49.
+- **docs/11 §4.5**: dòng đầu bảng Thương tu (S1) in nhầm một câu mô tả "Chốt D49" thay cho hàng `xuyen_van_thich`; số liệu kỹ năng này lấy từ `skills.json`, test đối chiếu docs/11 bỏ riêng hàng này. Cần sửa lại hàng S1 trong docs/11.
+
 ## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
 
 [Cập nhật D55: mục D54 dưới đây là lịch sử trước D55. Audit pin mới xác nhận cả 33 ô hết lỗi cứng A+C; danh sách đang mở hiện tại là 11 ô Lab trong mục D55 bên dưới. Không cần repaint chỉ vì L1 cũ.]
@@ -302,6 +315,16 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 - Chưa có Cell Handover giữa nhiều World Node, lag compensation, kỹ năng có sát thương (`hits[]` rỗng), `CastInput` điểm đất/hướng.
 - Số đo tải mới chạy bot trên cùng máy với server (worker thread, loopback): chưa phản ánh độ trễ mạng thật, TLS, nhiều lõi bận khác; cần chạy lại trên máy chủ mục tiêu và với client Cocos thật.
 
-## D71 — phần client chưa triển khai trong PR cổng ngân sách
+## D71 — phần client (đã triển khai ở PR client-cocos)
 
-Quyết định D71 mô tả cả phần client; PR này chỉ có công cụ + cổng CI. Còn chờ PR client-cocos (stack lên PR này): (1) preset nén texture ASTC 4x4 / 6x6 + WebP trong `settings/v2/packages/builder.json`, gắn vào PNG qua `.meta`; (2) bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:assets`; (3) nạp lười có hàng đợi, bootstrap chỉ nhóm `loco` của người chơi; (4) chọn tier `?restier=1x|full`. Số đo trước/sau (RAM, gói tải đầu) chỉ có ý nghĩa sau khi (1)–(4) merge.
+Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:assets`, nạp lười có hàng đợi (bootstrap chỉ nhóm `loco` của người chơi) và `?restier=1x|full` có trong PR client-cocos. Số đo ở `docs/06-toi-uu-render.md`; các việc còn mở ở mục kế tiếp.
+
+## D71 — còn mở sau tối ưu runtime atlas chibi (worker39, 2026-11-08)
+
+1. **Điện thoại thật / WebP**: số đo D71 là headless SwiftShader (có ASTC). Cần chạy `perf:p1` trên 1 điện thoại thật (LAN, docs/33) và trên trình duyệt không có ASTC (đường WebP) trước khi đóng P1.
+2. **ETC2**: công cụ ETC2 của Cocos 3.8.8 (Mali etcpack) báo `Invalid Parameter - tmp.ppm` trên Windows nên preset chỉ có ASTC + WebP. Thiết bị WebGL không có ASTC dùng WebP (RAM GPU RGBA8 ≈ 4–9× ASTC). Cần kiểm tra lại trên máy build Linux/CI hoặc chấp nhận.
+3. **KTX2/Basis**: Cocos 3.8.8 không có đường build KTX2 gốc (docs/00 §3 vẫn ghi KTX2). Cần quyết định giữ ASTC/WebP của builder hay thêm bước hậu build.
+4. ~~**Bản release còn chứa art dev**~~ — đã xử lý: `build:web --release` build trên bản stage không có `assets/resources/dragonbones` (`scripts/release-stage.mjs`; bundle `resources` 229 MB → 0,2 MB, cả build 346 → 119 MB). Trình xem `#viewer` không có trong bản release; `--keep-dev-art` build đủ.
+5. **Nhóm `rest`**: `ChibiBody.ensureGroup('rest')` đã có nhưng chưa clip chiến đấu nào gọi; gọi trước khi phát clip ngoài idle/walk/run. Chất lượng 1x (Lanczos3, ASTC 4x4) chưa được art duyệt bằng mắt trên máy thật.
+6. **Ngân sách `CHIBI_RUNTIME`** (trần loco/bundle/GPU lớp) là mặc định kỹ thuật, cần game designer/đo thiết bị duyệt.
+7. **Atlas tile/bản đồ**: đo `perf:p1 --route` (bản đồ 8×8 chunk, release, ASTC/WebP): gói tải đầu 7,29 MB (gzip 2,51), trong đó `iso-tileset.png` 0,16 MB và JSON bản đồ 0,62 MB (≈ 11 %); engine `cc.js` 1,86 MB và các armature chibi của người chơi chiếm phần lớn. Nén atlas tile **chưa cần**; nếu bản đồ lớn hơn, ứng viên là tách JSON bản đồ theo chunk (nạp lười) chứ không phải nén tileset.

@@ -22,6 +22,7 @@ import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
+import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
@@ -139,7 +140,14 @@ export class Bootstrap extends Component {
       addProp(this.ysort, art, rand() < 0.7 ? 'tree' : 'rock', i, j);
     }
 
-    this.chibi = new ChibiBody(newNode('ChibiHolder'));
+    this.chibi = new ChibiBody(newNode('ChibiHolder'), { local: true });
+    // D71: the first download is the player's own class locomotion; once it is on screen the background queue opens (NPC
+    // classes, the player's other directions, rest clips).
+    this.chibi.onInstalled = () => {
+      if (chibiStreamer.backgroundOpen) return;
+      chibiStreamer.openBackground();
+      this.chibi.prefetchDirections();
+    };
     this.chibi.setClass(this.initialClass());
     this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, this.chibi);
     this.bindPlayTestKeys();
@@ -271,6 +279,8 @@ export class Bootstrap extends Component {
     this.keyHandlers = { down, up };
     (window as unknown as Record<string, unknown>).__vgtdChibi = {
       setClass: (id: string) => this.chibi.setClass(id),
+      body: this.chibi,
+      streamLog: () => chibiStreamer.log,
       state: () => ({
         cls: this.chibi.classInfo.id,
         available: this.chibi.availableDirections,
