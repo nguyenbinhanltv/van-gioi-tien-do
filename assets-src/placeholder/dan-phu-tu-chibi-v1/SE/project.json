@@ -1,0 +1,506 @@
+{
+  "character": "dan-phu-tu-chibi-v1",
+  "direction": "SE",
+  "stem": "danphuchibi",
+  "master": "../reference/SE.corrected-master.png",
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.attempt1.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.attempt1.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "1": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "2": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "3": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "4": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "5": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "6": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "7": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "8": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "9": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "10": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "11": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "12": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "13": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "14": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "15": "seated: compact crosslegged meditation, fixed anatomical scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.attempt1.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.attempt3.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/hit-dash.attempt1.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep"
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.selected.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: hovering relaxed knees and pointed boots",
+        "1": "airborne: hovering relaxed knees and pointed boots",
+        "2": "airborne: hovering relaxed knees and pointed boots",
+        "3": "airborne: hovering relaxed knees and pointed boots",
+        "4": "airborne: hovering relaxed knees and pointed boots",
+        "5": "airborne: hovering relaxed knees and pointed boots",
+        "6": "airborne: hovering relaxed knees and pointed boots",
+        "7": "airborne: hovering relaxed knees and pointed boots",
+        "8": "airborne: hovering relaxed knees and pointed boots",
+        "9": "airborne: hovering relaxed knees and pointed boots",
+        "10": "airborne: hovering relaxed knees and pointed boots",
+        "11": "airborne: hovering relaxed knees and pointed boots"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.attempt1.png",
+      "manifest": "templates/attack.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.attempt1.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        }
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.selected.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        }
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.attempt2.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.attempt1.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "raw/hit-dash.attempt1.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "exceptions": {
+        "1": "recoil: flinch with knee bend",
+        "2": "recoil: flinch with knee bend",
+        "3": "recoil: flinch with knee bend",
+        "4": "recoil: flinch with knee bend"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.selected.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "2": "die-collapse: backward fall and lying settle, held whisk retained",
+        "3": "die-collapse: backward fall and lying settle, held whisk retained",
+        "4": "die-collapse: backward fall and lying settle, held whisk retained",
+        "5": "die-collapse: backward fall and lying settle, held whisk retained",
+        "6": "die-collapse: backward fall and lying settle, held whisk retained",
+        "7": "die-collapse: backward fall and lying settle, held whisk retained",
+        "8": "die-collapse: backward fall and lying settle, held whisk retained",
+        "9": "die-collapse: backward fall and lying settle, held whisk retained",
+        "10": "die-collapse: backward fall and lying settle, held whisk retained",
+        "11": "die-collapse: backward fall and lying settle, held whisk retained"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.attempt1.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "2": "recoil: protective kneel and recovery, same body scale",
+        "3": "recoil: protective kneel and recovery, same body scale",
+        "4": "recoil: protective kneel and recovery, same body scale",
+        "5": "recoil: protective kneel and recovery, same body scale",
+        "6": "recoil: protective kneel and recovery, same body scale",
+        "7": "recoil: protective kneel and recovery, same body scale",
+        "8": "recoil: protective kneel and recovery, same body scale",
+        "9": "recoil: protective kneel and recovery, same body scale",
+        "10": "recoil: protective kneel and recovery, same body scale",
+        "11": "recoil: protective kneel and recovery, same body scale",
+        "12": "recoil: protective kneel and recovery, same body scale",
+        "13": "recoil: protective kneel and recovery, same body scale"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.attempt1.png",
+      "manifest": "templates/emote.template.json"
+    }
+  ],
+  "slice": {
+    "inset": 0
+  }
+}

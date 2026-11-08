@@ -1,0 +1,22 @@
+{
+  "clip": "attack_3",
+  "direction": "SE",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:16:09 UTC",
+  "utcEnd": "2026-11-08 00:17:14 UTC",
+  "prompt": "PRECISE BACKGROUND-ONLY EDIT ofthis14frame4x4 SEattack3sheet. REMOVE ALLthinBLACKGRIDLINES atcellborders andouterborder, replacingtheirpixelswithSAMEflatmagenta#ff00ff background. AllCHARACTERART/poses/face/bun/limbs/boots/whisk/costume remainEXACTLYunchanged inALL14cells. DoNOTredraw/rescale/shift thefigures, doNOTchangeanyposeorroottravel. Keepentirerearboots/whisktips includingdeepwidecells7,8,9 andoriginalheadsize/facepixels. Same1254x1254canvas4x4mapping, final2cellsempty. ThisisNOTnewanimation, ONLYeraseunwantedblackcellseparatorsandouterframe soallbackgroundiscontinuousuniformmagenta. Do notintroduceanygrid/ruler/text/shadow/FX. Preserveactualbodydrawingandframepositions.",
+  "references": ["../raw/attack_3.attempt1.png"],
+  "raw": "../raw/attack_3.attempt2.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "bbdbac6caf240ff065b824f0faba9a7bc013fd163bedd54e77b0acb17580790a",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/attack_3.attempt1.png",
+      "sha256": "4ee0a924b491f9a61605eac9e3e07795bf3c019e6e87c3140946e94ab5ed7fe1"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

@@ -1,0 +1,34 @@
+{
+  "clip": "run",
+  "direction": "SE",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:24:58 UTC",
+  "utcEnd": "2026-11-08 00:25:41 UTC",
+  "prompt": "PRECISE HEAD-ONLY REPAIR ofTARGETimage1 SErun16frame4x4 sheet. Currentheadsare~15percentoversized, bodymotionisGOOD. Image2 is UN-SCALED CANONICAL MASTER HEAD STENCIL percell atvisible neckattachment. Replace ONLYhead/maincap/bun/pin/face/jaw ofEACH16frames withsamefixedadultface/volumeasimage2/reference3. DoNOTinventnewface. Preserveeye/nose/lips/adultjaw/proportions/tintoutlinefromcanonicalmaster. Stencilimage2 is1024square=256logicalcell; TARGET1 is1254square=313.5rawcell: same4x4mapping, multiplyguidepositionsONLYbycommonDPI1.2246 tocompare, notarbitraryheadsizes. Canonicalattachedcap-tochin~52logicalpx, notcurrent~60; exactstencilshape/volumeguidesit, notpromptpercentage. KeepNECKANCHORandbodyconnection natural; a smallheadtilt mayfollowbody butskullvolumeunchanged. EverythingBELOWneckMUSTremainEXACTLY target1: forwardlean/torso/hips/arms/boots/ground/root/flighttucks/legswings/dress/sleeves/sash/right-handplainwhiskONEbronze collarwhitehorsehair/leftpalm. DO NOTflattenorredrawdynamicposes, neverwholebodyrescale. Onlyheadmaybepainted; reconnectneckandhairseamwithoutmovinghands/weapon. SameSE3quarterlookineveryframe, nofront/profile. Same1254x1254canvas4x4mapping/flatsolidmagenta#ff00ff, no lines/text/grid/FX/shadow. Preserveallsource-cellmargins andcompleteboots.",
+  "references": [
+    "../raw/run.attempt1.png",
+    "../templates/run.canonical-head-guide.png",
+    "../../reference/SE.corrected-master.png"
+  ],
+  "raw": "../raw/run.attempt2.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt1.png",
+      "sha256": "00ad9227bb6a43a09f5379ba16aecafbca1bb01fee2313c71ea2f8031221fe65"
+    },
+    {
+      "file": "../templates/run.canonical-head-guide.png",
+      "sha256": "ed0f5b807431935659ff997551638f1522e621661d4656928ad663447215195f"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

@@ -1,0 +1,26 @@
+{
+  "clip": "attack",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:03:22 UTC",
+  "utcEnd": "2026-11-08 00:03:47 UTC",
+  "prompt": "Complete EDITTARGET14 unscaled-head stencils in4x4 SE attack1guide into14FULLBODY drawings, readingorder0..13; bottomrowcol3/4 EMPTYmagenta. Exactsame adultjade-whiskfemale fromreference2: fixedheadsize/face/maincap/bunpin, originalivoryjade narrowgoldinkhem dress, plainbrownshaft ONEbronze collar whitehorsehair whisk naturallyheld RIGHT hand. Headstencilsarecanonicalsized inputanchors, preserve size/tilt, never enlargehead orshrinkbody. SE3quarter orientationconstant. One smooth RIGHT-HAND FORWARDWHISK SWEEP attack:0ready;1..3anticipation kneeflex/torso coils whiskclosechest;4..6strike extending rightarm andsmallSElunge, whiskfibresdrawcontinuousarc;7impact thrust,8impacthold samepose slightclothlag;9..13followthrough fibre/sleeve/sashlag andbalancedreturntoready. Both handsanatomical, leftpalmcounterbalance,no shield/sword/newweapon. Clearfeet onground232, kneesbend organically; no footteleport/cell-to-cell body scaling. Keep ENTIREbun/whiskarc/hair/sleeves/boots insideown256logicalcell with4pxmargin; largestreachstopsbeforeborder, doNOTclip/splitintoadjacentcell. Fixedmasterhead andlimblengths; dynamicpose notstandingclones.24fps14smoothuniqueinbetweens, anticipation/impacthold/followthrough. Removegrid/crosshairs/rulers/text, pureuniformmagenta#ff00ff, noFX/talisman/shadow/platform. Costume/weaponface unchanged.",
+  "references": ["../templates/attack.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/attack.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "39874699f70f33202c31c0e2543a755525ed6bc22c49a817026d69045e5d2515",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack.head-guide.png",
+      "sha256": "a998ea98e00965314b57c628ed019b6a626f06d6e285d9ecd5b4ff2d0b2ca2a8"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

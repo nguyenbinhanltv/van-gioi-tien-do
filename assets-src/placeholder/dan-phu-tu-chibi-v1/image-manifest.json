@@ -1,8 +1,8 @@
 {
   "format": "dan-phu-chibi-image-provenance-v1",
-  "tool": "image_gen.imagegen for AI raw outputs; public sprite tooling for guides/placement/native-cell selection",
+  "tool": "image_gen.imagegen for AI outputs; public sprite pipeline for guides/placement/selections",
   "model": "undisclosed by tool",
-  "note": "Exact prompt/tool/UTC/input hashes in reference/provenance.json and E/provenance. Rejected attempts are retained. Input guides are not final drawings.",
+  "note": "Exact prompts, UTC and raw provenance retained per direction; input guides are not final drawings. All raw attempts retained.",
   "images": [
     {
       "file": "E/generation-guides/pre-cap-fix/attack.template.png",
@@ -121,343 +121,343 @@
       "sha256": "b7aa1600f5e9aa0166a115accf304645aabb50768accf78f79d5da84a8bc3bb6",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/attack_2.attempt1.png",
       "sha256": "28ee8d504526c09b6269839051aa708f65c7df13dd972195f2379e1ea7cb8720",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/attack_3.attempt1.png",
       "sha256": "5e07be768cf751f2c61ca9bf055f1479389dbad848dde1ea700c58c2bc13cd15",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/attack_3.attempt2.png",
       "sha256": "61de701b62eb0e7b09a62f5a490ece4895a2987502c6e822d0182adda82eca52",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/attack_3.attempt3.png",
       "sha256": "d4981364e4f11554ba670893f390389f44f6b02de5a47e4d0f952e2fb8f76d3f",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/attack_3.boot-fixed.png",
       "sha256": "d7956d710b42442c2e002fef2938bb5a8f8c4da238ad68e60ef6b5de0f676ba3",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/attack_3.selected.png",
       "sha256": "3660ec8a551a4b28e7aefb8fd12ece99a522dc670984ae77fb96e6a2f192806a",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/cast.attempt1.png",
       "sha256": "97245b22116f5899bf8636d4886e7bad414a6d04ba99e76a89d1e3185464fdbf",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/channel.attempt1.png",
       "sha256": "6a81174028c033a77017b6926f7c6b891736dd1726825dac1580206991a6595a",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/channel.attempt2.png",
       "sha256": "8d629bc459c1fd2b9015a229ceb08288243851c83d6aca042e73679e02123374",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/die.attempt1.png",
       "sha256": "2e4a3a733595f5af9162ff97cc0861b2a14dca36ee59a69849579cd003f49ecb",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/die.attempt2.png",
       "sha256": "d63c02f3f65d2cdd61ec66572a2774eeb1b52541162088ad7fdd173363811a3a",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/die.selected.png",
       "sha256": "c6f376f8643a6d8d687344067042e7245898557ef12def306ea6de9271d882d3",
       "width": 1448,
       "height": 1086,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/emote.attempt1.png",
       "sha256": "2910e7a11097eb58dae55a79a25e32fd7db34c9c175f04047a1cec63a6740ab5",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt1.png",
       "sha256": "eff048a27e1e530ac832dfdfa0b3db17724df06b0a05ecb240bbbab9f096fc2f",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt2.png",
       "sha256": "59f14d137decbae6fd1dbee3aa4adb4c75eab7f870f08f00465459667b1b126f",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt3.png",
       "sha256": "6685e9eaf26952eb789e9d8f143ea4db16704ae65894a33bcdd6a77396da8101",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt4.png",
       "sha256": "80f50641edf00bd836d0bf2cc576991b2f6b3cb2bf94177fe741cff771a8ac98",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt5.png",
       "sha256": "c0c962010c4b473ccb3a938a5f3082523cb9ab3e100c2592b4a7e7d3f2488056",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.attempt6.png",
       "sha256": "1bd1a7c7dcc64d0ec704c68be373c0de97f91537803039a754a374e181a7ff36",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/hit-dash.corrected-cap.png",
       "sha256": "4976a24c72c0af5b5ecb1dde31d497bebc6612bf67f2bb66e97e0ba76429c22f",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/hit-dash.final-selection.png",
       "sha256": "b22883a6d4a1e2fc0a9cce44ff491a021e31035b713ee49d48b24aa91daf25c5",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/hit-dash.head-selected.png",
       "sha256": "430aa9455cc17356ea4fbda98ce48671db3eb1bbf46b1b8e9ac1a78bf93a224a",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/hit-dash.measured.png",
       "sha256": "de997bc3767771c163c2e2c6ce11011f84e0cc5f907767b597463e02d3e9c31c",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/hit-dash.selected.png",
       "sha256": "f5d7eb3b76b831d74b655529c0a7e39eed23c8c26528aee30b9201e560e5dc5c",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/idle.attempt1.png",
       "sha256": "60bb20c2b863c671007284e664115c7c9e6bd7f0bc57efb4dc101123d50bfda2",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/idle.attempt2.png",
       "sha256": "7fc9483aed6009abd32894bb17bcdef121710172cedd92867552d024f4dce447",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/idle.attempt3.png",
       "sha256": "fb2700f2c1a7ad238922bfcfcb1b49c76272bd638e1f6e285d5b2d0f41cdbfa3",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/meditate.attempt1.png",
       "sha256": "c8a240e7b2688155195219c1e1cfac7bfc302d565e6ef7c16009998b818b742e",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/meditate.attempt2.png",
       "sha256": "e562a9f8d5bb50b83a1349b1eb7e143aecdbc71ef5bb0fa5bcb4ce323a3d9624",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt1.png",
       "sha256": "e7f3c5053f0fa2f63d1cfba7bc989deffb7cd919e2ad1bf7243d370717d21967",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt2.png",
       "sha256": "7b71f8ac6aa3f9405f62b29f657657b119f40781747f30b6955387fc6612a697",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt3.png",
       "sha256": "0eb667e5965ee463ad2f7424ce61d1e5eb4afe65532b893b3ad26f553084ff30",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt4.png",
       "sha256": "8673264f6eba65bc513e71545e8e7f347c50c9130c87b36f63fdb70279133ecb",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt5.png",
       "sha256": "bf0663aab884b026c2aa9671e5510b0dc5d76c88c50d61ecb881c81a4924acc3",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt6.png",
       "sha256": "083ea8f1a4ef74ef81879e7f47c1034051522f0d98c8fc8b9d57d7ae1ccf4981",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt7.png",
       "sha256": "0622ed0fcc7e5ddd0030d10880da709d8f705216d31ed6f499649894645eb72f",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt8.png",
       "sha256": "bb624b9fd628497cf212aaafcd004de022f518ab3f8c619cd4a52162b5436a68",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.attempt9.png",
       "sha256": "fa417e6f3fefdadd3cd88a68c021c51a081192e73965abb27d680dcee2a4f26d",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/run.corrected-cap.png",
       "sha256": "176db3478085bc7085010be56022b825cb390c0623b0e21dd88bc4336a0c7812",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/run.dynamic-intermediate.png",
       "sha256": "99cf0d1243d51b4a339fdccae70578bb9d8f74d0a307c62136305beeea340652",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/run.dynamic-measured.png",
       "sha256": "251776d35bb7be3ef9d206ea307552959750f5f1400c322b1f331507e3a91e69",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/run.dynamic-selected.png",
       "sha256": "9a7469e6b7c6e73f08ee8c00667fb0d09bc3549dc12bce852c60faefcf7a47bf",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/run.final-selection.png",
       "sha256": "baa355319c3a207b095e1ff27a85743930cd432f569acb71bf23722b264c4c32",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/run.selected.png",
       "sha256": "86888ec4ae24f60f3dcc2ec155f05c674a83da35247e049b52a83001a230aad4",
       "width": 1254,
       "height": 1254,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "E/raw/sword_fly.attempt1.png",
       "sha256": "23ac7f3d9c1ea06d25b4ee9ae14802cc61e62740d8e1f74f478423de65e08da0",
       "width": 1448,
       "height": 1086,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/tribulation.attempt1.png",
       "sha256": "06c6663d406519768947882e052861bd4671fd867e83bffb42679752c9ad2966",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/walk.attempt1.png",
       "sha256": "3b79bfca888d3279fa4c295fdab7382195182df6e264bcb1b83080a576911666",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/raw/walk.attempt2.png",
       "sha256": "ece5c8b9c7640024202b3a4e67bac02e6cd4294d809ed9332faef22cdeef42b9",
       "width": 1254,
       "height": 1254,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "E/templates/attack.head-guide.png",
@@ -712,6 +712,454 @@
       "role": "input authoring guide"
     },
     {
+      "file": "SE/raw/attack.attempt1.png",
+      "sha256": "39874699f70f33202c31c0e2543a755525ed6bc22c49a817026d69045e5d2515",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/attack_2.attempt1.png",
+      "sha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/attack_3.attempt1.png",
+      "sha256": "4ee0a924b491f9a61605eac9e3e07795bf3c019e6e87c3140946e94ab5ed7fe1",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/attack_3.attempt2.png",
+      "sha256": "bbdbac6caf240ff065b824f0faba9a7bc013fd163bedd54e77b0acb17580790a",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/attack_3.attempt3.png",
+      "sha256": "d7c6aceeb4423f786589fe2f79e37682c88306190f804074d5e8ada97c132bf2",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/attack_3.selected.png",
+      "sha256": "7e8f8f4841f7a884c456b8f6a993890fc2d20d5261f9fb2508828371f60cd7a6",
+      "width": 1254,
+      "height": 1254,
+      "role": "native-cell composite; see selection proof"
+    },
+    {
+      "file": "SE/raw/cast.attempt1.png",
+      "sha256": "56a5d57c5cb7a449796e4463810591fb1409e0a66a6c594f753977ee956ecec3",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/cast.attempt2.png",
+      "sha256": "15df6b08cb2c66e861d7af41a2815a2725ac023c0af548a572c996b0be0a982d",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/channel.attempt1.png",
+      "sha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/die.attempt1.png",
+      "sha256": "f616e727f329bf58fb9a4158f7e7729f1f5d20ac3d6f3158154fb568e7eceece",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/die.attempt2.png",
+      "sha256": "a0c19d617432da277043dbaa14b5b3182991c46169ac64a35d0581b7d2046cc7",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/die.attempt3.png",
+      "sha256": "09547c83b1fb79f825e118a73dc3a48f875c634d3ad85cd64f258671b372b13e",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/die.selected.png",
+      "sha256": "4c1e9b44d1f6b94c2a3aea6cdceb71f956c7bffa9dd10166507f32d6c32aab4b",
+      "width": 1448,
+      "height": 1086,
+      "role": "native-cell composite; see selection proof"
+    },
+    {
+      "file": "SE/raw/emote.attempt1.png",
+      "sha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/hit-dash.attempt1.png",
+      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/idle.attempt1.png",
+      "sha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/meditate.attempt1.png",
+      "sha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/run.attempt1.png",
+      "sha256": "00ad9227bb6a43a09f5379ba16aecafbca1bb01fee2313c71ea2f8031221fe65",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/run.attempt2.png",
+      "sha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/run.attempt3.png",
+      "sha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/sword_fly.attempt1.png",
+      "sha256": "41d91a452413a176ac2305cf7ad0d93d00af923cd7213a42491d1f6251c1f3d8",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/sword_fly.attempt2.png",
+      "sha256": "836ed682622d7a6d50e5ae9c438f16771b75f304ae8ca863e1134c7fb629d998",
+      "width": 1448,
+      "height": 1086,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/sword_fly.selected.png",
+      "sha256": "43ff5039c0388af42606f446d83d6e78757a154cba4e5bf178cc0b7bbf61fec1",
+      "width": 1448,
+      "height": 1086,
+      "role": "native-cell composite; see selection proof"
+    },
+    {
+      "file": "SE/raw/tribulation.attempt1.png",
+      "sha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/walk.attempt1.png",
+      "sha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "width": 1254,
+      "height": 1254,
+      "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/templates/attack.head-guide.png",
+      "sha256": "a998ea98e00965314b57c628ed019b6a626f06d6e285d9ecd5b4ff2d0b2ca2a8",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/attack.template.png",
+      "sha256": "80c6c7b1a0b6e13e68ad2c4444228154c9793c88af73ca4e22e519723461040a",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/attack_2.head-guide.png",
+      "sha256": "cce1ac618454941d8e70943d4a9c29c03a64a23e04373ec34c2d65f7b27306bb",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/attack_2.template.png",
+      "sha256": "80c6c7b1a0b6e13e68ad2c4444228154c9793c88af73ca4e22e519723461040a",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/attack_3.head-guide.png",
+      "sha256": "ca627ddb7f4a7a5dd267195576b8f5d0a09b66651ff32ce083a9d90abd135839",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/attack_3.template.png",
+      "sha256": "80c6c7b1a0b6e13e68ad2c4444228154c9793c88af73ca4e22e519723461040a",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/cast.head-guide.png",
+      "sha256": "00858dd9773e90ebe003ad0620fa07967fc1eb8e760d0852393e933e78b5347a",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/cast.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/cast.template.png",
+      "sha256": "2a9a9ea94bfd3f1198c022ff9c0b69ef1062a4018da007987665e9ac4ee43d91",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/channel.head-guide.png",
+      "sha256": "e4a584e5b4e55b70bd10204f2ad43b829eafbce7635ec3c113b9dd00430a2ec0",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/channel.master-guide.png",
+      "sha256": "0a040190aef70f636d49b8a4f2f28a4c057031bb68d865b22b96a0264359b927",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/channel.template.png",
+      "sha256": "f4875ac66fe30d208271e3f46e6a1492725349713511d9232b5a41165fc0dff1",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/dash.head-guide.png",
+      "sha256": "d5a4eead8fbe37f5153b81bb8b8f29e626abd5dd6ac99d7fb36f485555f7f681",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/dash.template.png",
+      "sha256": "69c79d2f72dc1a5bf69f5ea7ac956250153d6c809cf0315934361b5d73be4ad6",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/die.head-guide.png",
+      "sha256": "1499fa6073e6c2ee20a4993f30e1e1c301075bc0cc3c098c6bdf8b388dd6212f",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/die.template.png",
+      "sha256": "f4875ac66fe30d208271e3f46e6a1492725349713511d9232b5a41165fc0dff1",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/emote.head-guide.png",
+      "sha256": "f72fc046a12442934f714e8091a756a497540b637836dac9e3bde6f868dcef11",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/emote.template.png",
+      "sha256": "f4875ac66fe30d208271e3f46e6a1492725349713511d9232b5a41165fc0dff1",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/hit-dash.head-guide.png",
+      "sha256": "02eabf625f35e33178f29a89f7dfc71e6519ea613fa2f2580e2203a1cf47e67c",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/hit-dash.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/hit-dash.template.png",
+      "sha256": "2a9a9ea94bfd3f1198c022ff9c0b69ef1062a4018da007987665e9ac4ee43d91",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/hit.head-guide.png",
+      "sha256": "99211774b8bad24f2f91ebb99473d396e756b8e24ffe20d8298aaa8ba05f3ae3",
+      "width": 1024,
+      "height": 512,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/hit.template.png",
+      "sha256": "ff066885d215ef50d821719dc65e75c64c5b24cc1cbf019649912ff65a3f78e6",
+      "width": 1024,
+      "height": 512,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/idle.head-guide.png",
+      "sha256": "00858dd9773e90ebe003ad0620fa07967fc1eb8e760d0852393e933e78b5347a",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/idle.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/idle.template.png",
+      "sha256": "2a9a9ea94bfd3f1198c022ff9c0b69ef1062a4018da007987665e9ac4ee43d91",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/meditate.head-guide.png",
+      "sha256": "2e4d1415207a5e0491dd84028a7966e158d186cfc18b567d046eade218303ef3",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/meditate.template.png",
+      "sha256": "e2be8a4f58d19a379f76913f06ec90bbcc2c239ac7a172832d317699e37a69b0",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.canonical-head-guide.png",
+      "sha256": "ed0f5b807431935659ff997551638f1522e621661d4656928ad663447215195f",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.canonical-head-guide.raw-dpi.png",
+      "sha256": "1fcd1e253032cf97d9fd0549a7ff8252209371390a8ce439defd4df424d2baf2",
+      "width": 1254,
+      "height": 1254,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.head-guide.png",
+      "sha256": "56077d52c2b9acdad443fd2a984349076afa1e3d128967d4dd2128222283edd3",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.master-guide.png",
+      "sha256": "c4802e40bd33bce37d2d2d02bd61e22232d08386f6303cf087f3c934bd58bc52",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.template.png",
+      "sha256": "9a0469c6b7726a6ded45ab05200c6eae142ba5264f231d06237595b80f1550e8",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/sword_fly.head-guide.png",
+      "sha256": "e4a584e5b4e55b70bd10204f2ad43b829eafbce7635ec3c113b9dd00430a2ec0",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/sword_fly.template.png",
+      "sha256": "f4875ac66fe30d208271e3f46e6a1492725349713511d9232b5a41165fc0dff1",
+      "width": 1024,
+      "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/tribulation.head-guide.png",
+      "sha256": "1edd11dec4eddcb59e6542fbafee1820abed23d5fd55d5767226d1a617b7e730",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/tribulation.template.png",
+      "sha256": "2a9a9ea94bfd3f1198c022ff9c0b69ef1062a4018da007987665e9ac4ee43d91",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/walk.master-guide.png",
+      "sha256": "13873100c10a48c2a79ba1c7bad4fae1cee60d3f7eafcb9c3a8f6f61ba99d477",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/walk.template.png",
+      "sha256": "37b8b33fc34e1dfe0e2ac24d50415d40cb662145c09b9d94cfd288d4419422f1",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
       "file": "reference/E.corrected-master.png",
       "sha256": "1a2e22da5b831a000e30978da194f90bfe5899793c9efc6a5f5e6e581d6dba21",
       "width": 256,
@@ -800,6 +1248,13 @@
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
       "width": 256,
       "height": 256,
+      "role": "reference/master; see reference/provenance.json"
+    },
+    {
+      "file": "reference/SE.corrected-master4x.png",
+      "sha256": "f658ecdfc8a38ae860a806ff4e1ad399b2241eecd60fab4a21ac371048b6afff",
+      "width": 1024,
+      "height": 1024,
       "role": "reference/master; see reference/provenance.json"
     },
     {
@@ -905,154 +1360,154 @@
       "sha256": "dc279bb9112aab120a5dbc1730514b86d1719c3885da16757153f9278ee8c5d4",
       "width": 1122,
       "height": 1402,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt2.png",
       "sha256": "a0e0b397ca7f4c1de9ec15bde40c020aa8549f56455c29b2e6cb35c38eb8e651",
       "width": 1122,
       "height": 1402,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt3.png",
       "sha256": "d0f168c6e861e4e0450b4a3b64f316b64744d57378e0b7da2f2b98715704031f",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt4.png",
       "sha256": "d67887cd9d08e1d3279a3a19e02125bc4178de212733779253f9373a95ddca5b",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt5.png",
       "sha256": "7fb3ab434eda711554cacdf2c56ed736081a554154317e0da3caa733443d494c",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt6.png",
       "sha256": "7a1ebc4a47455dc2cf1fe9f4f645aea45213fb110dfac696aea6af4c6e22f517",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt7.png",
       "sha256": "b0036e5a62f9a0fdbdcca41f2c3e494dabc4ac49ac5f072e2846e48818105f77",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/front.attempt8.png",
       "sha256": "3ad4db1a45738140dc1978b41f39881d422b17a654adb55623a23a07be5ef5d6",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/talisman.png",
       "sha256": "0eb7b80f3407dbb2b1a4e665238e20ac28b29098d1040a6ee13701b69553368c",
       "width": 887,
       "height": 1774,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "reference/raw/tier2.attempt2.png",
       "sha256": "03e0a8793213155edab0a19f0e3d8e41cabb00a6bb88a12a1bf68cfc52f09127",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/tier2.png",
       "sha256": "e4fad822c80e3129f9c290c5e994ff8670bc07ba432eb7234997ad4c73fc47d8",
       "width": 1122,
       "height": 1402,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "reference/raw/tier3.attempt2.png",
       "sha256": "6368348fe549124a346820b56f65713c5a523348c2b4c9d88fa6a8f8f89f4b97",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/tier3.png",
       "sha256": "c7ac2ee212f9eff2c09a56469ccc0f8a67b938446e35e2069cf764e60c2b93ef",
       "width": 1122,
       "height": 1402,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "reference/raw/tier4.attempt2.png",
       "sha256": "aacae954804f6d4dfe1e93f14e21c142dd683b0447a598605e4c690d1bcdfca7",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/tier4.png",
       "sha256": "0f46feb14c9159e30943f14dd9c2b30759d4657aff494f231189034bcfae3568",
       "width": 1122,
       "height": 1402,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "reference/raw/tier5.attempt2.png",
       "sha256": "1fd22f1971d8105b4e5a6cbfcd0e00e8a9dbbf75fb33269d782f7e5b2a8eba52",
       "width": 1086,
       "height": 1448,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/tier5.png",
       "sha256": "da1000a1bf19ee4e1ece4a6e7a38191908dc9fb22988a5995c5048586c51cdd5",
       "width": 1122,
       "height": 1402,
-      "role": "native-cell source composite; see selection proof"
+      "role": "native-cell composite; see selection proof"
     },
     {
       "file": "reference/raw/turnaround.attempt1.png",
       "sha256": "ab6c95b9d51cc1521a10c2047139a7a9ba80bced3db375d6adfa37b4a6595882",
       "width": 2172,
       "height": 724,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/turnaround.attempt2.png",
       "sha256": "f269dfada9e0f56ba1d5786d166209d4ae1eb69ad12a8523a1fe08ac246b16d0",
       "width": 2172,
       "height": 724,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/turnaround.attempt3.png",
       "sha256": "0572fc233dc886f9fbae9d0364d9903bb3190f6d7a3e3f623406d5be71f8f90c",
       "width": 2172,
       "height": 724,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/turnaround.attempt4.png",
       "sha256": "fb3a4de0e3a4318c531931705a54a301a59e1bad77555a1143ee126cfdfeb031",
       "width": 2172,
       "height": 724,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/raw/turnaround.attempt5.png",
       "sha256": "85f473d323c6f9ea0484b9ca4f65a8d0fcb0fd9f51089a84c0fcccc168050e99",
       "width": 2172,
       "height": 724,
-      "role": "raw imagegen attempt; selection status in project/provenance"
+      "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
       "file": "reference/turnaround.corrected.png",

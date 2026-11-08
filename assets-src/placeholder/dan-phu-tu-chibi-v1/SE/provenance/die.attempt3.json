@@ -1,0 +1,22 @@
+{
+  "clip": "die",
+  "direction": "SE",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:19:57 UTC",
+  "utcEnd": "2026-11-08 00:20:45 UTC",
+  "prompt": "VERY SMALL localizedkneebend ONLYcell0(top-left) ofthis1448x1086 SEdie12sheet. KeepfeetEXACTLYunchanged, face/headvolume/whisk/costumeidentical. Softenbothkneesjustenough tolowerupperbody/headby10RAWpx, not30px. ABSOLUTEtarget: uppermostbun tip aroundrawY17fromsheet top (currentlynearY7). DoNOT lowerbuntoY37 ormake a deepcrouch. Thisis a modestinitialkneebuckle, stillnearstanding andslightlyLESSbentthan cell1. Sameheadsize/limblengths, naturalneck/hip/kneejoints; bodytranslateddownviaarticulatedknees, NEVERrescale. Bothbootsremaincurrentground, rightwhisknaturalgrip/leftopenpalm unchanged. Allother11cells EXACTLYUNCHANGED. Same4cols3rows and1448x1086dimensions/puremagenta#ff00ff, nogrid/text/FX/shadow. Onlycell0willbeselected.",
+  "references": ["../raw/die.attempt1.png"],
+  "raw": "../raw/die.attempt3.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "09547c83b1fb79f825e118a73dc3a48f875c634d3ad85cd64f258671b372b13e",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/die.attempt1.png",
+      "sha256": "f616e727f329bf58fb9a4158f7e7729f1f5d20ac3d6f3158154fb568e7eceece"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

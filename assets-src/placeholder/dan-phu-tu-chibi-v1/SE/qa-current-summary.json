@@ -1,0 +1,2600 @@
+{
+  "status": "Diagnostic only: unresolved head-evidence/similarity hard findings; NOT runtime-ready or an accepted export.",
+  "utc": "2026-11-08T00:44:50.085Z",
+  "projectSha256": "07fab22266478325722e915cfb89923d514610381b2e9e24dc06c3648d3e3f30",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "counts": {
+    "fail-hard": 50,
+    "fail-soft": 20,
+    "accepted": 0,
+    "regression": 0,
+    "info": 98
+  },
+  "canvasClipping": [],
+  "projectedCanvasLoss": [],
+  "sourceBorderReview": "source-border-review.json",
+  "sources": [
+    {
+      "clip": "idle",
+      "frames": 16,
+      "sheet": "raw/idle.attempt1.png",
+      "sha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f"
+    },
+    {
+      "clip": "meditate",
+      "frames": 16,
+      "sheet": "raw/meditate.attempt1.png",
+      "sha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a"
+    },
+    {
+      "clip": "walk",
+      "frames": 16,
+      "sheet": "raw/walk.attempt1.png",
+      "sha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a"
+    },
+    {
+      "clip": "run",
+      "frames": 16,
+      "sheet": "raw/run.attempt3.png",
+      "sha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5"
+    },
+    {
+      "clip": "dash",
+      "frames": 10,
+      "sheet": "raw/hit-dash.attempt1.png",
+      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e"
+    },
+    {
+      "clip": "sword_fly",
+      "frames": 12,
+      "sheet": "raw/sword_fly.selected.png",
+      "sha256": "43ff5039c0388af42606f446d83d6e78757a154cba4e5bf178cc0b7bbf61fec1"
+    },
+    {
+      "clip": "attack",
+      "frames": 14,
+      "sheet": "raw/attack.attempt1.png",
+      "sha256": "39874699f70f33202c31c0e2543a755525ed6bc22c49a817026d69045e5d2515"
+    },
+    {
+      "clip": "attack_2",
+      "frames": 14,
+      "sheet": "raw/attack_2.attempt1.png",
+      "sha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee"
+    },
+    {
+      "clip": "attack_3",
+      "frames": 14,
+      "sheet": "raw/attack_3.selected.png",
+      "sha256": "7e8f8f4841f7a884c456b8f6a993890fc2d20d5261f9fb2508828371f60cd7a6"
+    },
+    {
+      "clip": "cast",
+      "frames": 16,
+      "sheet": "raw/cast.attempt2.png",
+      "sha256": "15df6b08cb2c66e861d7af41a2815a2725ac023c0af548a572c996b0be0a982d"
+    },
+    {
+      "clip": "channel",
+      "frames": 12,
+      "sheet": "raw/channel.attempt1.png",
+      "sha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4"
+    },
+    {
+      "clip": "hit",
+      "frames": 6,
+      "sheet": "raw/hit-dash.attempt1.png",
+      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e"
+    },
+    {
+      "clip": "die",
+      "frames": 12,
+      "sheet": "raw/die.selected.png",
+      "sha256": "4c1e9b44d1f6b94c2a3aea6cdceb71f956c7bffa9dd10166507f32d6c32aab4b"
+    },
+    {
+      "clip": "tribulation",
+      "frames": 16,
+      "sheet": "raw/tribulation.attempt1.png",
+      "sha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15"
+    },
+    {
+      "clip": "emote",
+      "frames": 12,
+      "sheet": "raw/emote.attempt1.png",
+      "sha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b"
+    }
+  ],
+  "judged": [
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 14,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 15,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 11,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 1,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.85,
+        "limit": 3,
+        "message": "R foot slides 5.8 px/frame between frames 0-1 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 3.54,
+        "limit": 3,
+        "message": "R foot slides 3.5 px/frame between frames 1-2 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.23,
+        "limit": 3,
+        "message": "R foot slides 6.2 px/frame between frames 2-3 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 5,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 8.98,
+        "limit": 3,
+        "message": "R foot slides 9.0 px/frame between frames 4-5 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 6,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 4.06,
+        "limit": 3,
+        "message": "R foot slides 4.1 px/frame between frames 5-6 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 17.86,
+        "limit": 3,
+        "message": "R foot slides 17.9 px/frame between frames 6-7 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 12,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 4.06,
+        "limit": 3,
+        "message": "L foot slides 4.1 px/frame between frames 11-12 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 13,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 5.85,
+        "limit": 3,
+        "message": "L foot slides 5.8 px/frame between frames 12-13 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 14,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.99,
+        "limit": 3,
+        "message": "L foot slides 4.0 px/frame between frames 13-14 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 15,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 15.17,
+        "limit": 3,
+        "message": "L foot slides 15.2 px/frame between frames 14-15 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 2,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 3,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 4,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 5,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 6,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 11,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 12,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 13,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 2,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 28.8,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 28.8 px from its template ghost (xy 138.0,210.0 vs 124.8,235.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 999,
+        "limit": 20,
+        "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 4,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 27,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 27.0 px from its template ghost (xy 80.5,221.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 5,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 999,
+        "limit": 20,
+        "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 21.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 21.1 px from its template ghost (xy 161.5,235.0 vs 142.7,244.5, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 11,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 79.5,228.0 vs 115.8,231.1, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 13.13,
+        "limit": 3,
+        "message": "L foot slides 13.1 px/frame between frames 9-10 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 12,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 33.2,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 33.2 px from its template ghost (xy 74.0,222.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 13,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 999,
+        "limit": 20,
+        "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 0,
+        "message": "face similarity 0.65 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "message": "face similarity 0.64 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 2,
+        "message": "face similarity 0.65 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 2,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 3,
+        "message": "face similarity 0.61 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 3,
+        "message": "torso similarity 0.69 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 4,
+        "message": "face similarity 0.59 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 4,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 5,
+        "message": "face similarity 0.60 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 5,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 6,
+        "message": "face similarity 0.55 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 7,
+        "message": "face similarity 0.54 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 7,
+        "message": "torso similarity 0.66 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "message": "face similarity 0.55 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "message": "torso similarity 0.67 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 9,
+        "message": "face similarity 0.56 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 9,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "message": "face similarity 0.56 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "message": "torso similarity 0.69 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 11,
+        "message": "face similarity 0.57 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 12,
+        "message": "face similarity 0.57 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 12,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 13,
+        "message": "face similarity 0.61 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 13,
+        "message": "torso similarity 0.67 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 14,
+        "message": "face similarity 0.59 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 14,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 15,
+        "message": "face similarity 0.62 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 15,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 1,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 2,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 3,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 4,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 5,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 6,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 7,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 8,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 3,
+        "message": "face similarity 0.66 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "dash",
+        "frame": 5,
+        "message": "face similarity 0.65 < 0.7"
+      },
+      "class": "hard",
+      "verdict": "fail-hard"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 4.1,
+        "limit": 0,
+        "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 6.1,
+        "limit": 0,
+        "message": "217 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 3.1,
+        "limit": 0,
+        "message": "220 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 0.1,
+        "limit": 0,
+        "message": "223 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 4.1,
+        "limit": 0,
+        "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 15.1,
+        "limit": 0,
+        "message": "208 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 20.1,
+        "limit": 0,
+        "message": "203 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 16.1,
+        "limit": 0,
+        "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 11.1,
+        "limit": 0,
+        "message": "212 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 3.1,
+        "limit": 0,
+        "message": "220 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 0.1,
+        "limit": 0,
+        "message": "223 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 11.1,
+        "limit": 0,
+        "message": "212 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 9.1,
+        "limit": 0,
+        "message": "214 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 13.1,
+        "limit": 0,
+        "message": "210 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 21.1,
+        "limit": 0,
+        "message": "202 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 25.1,
+        "limit": 0,
+        "message": "198 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 24.1,
+        "limit": 0,
+        "message": "199 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 22.1,
+        "limit": 0,
+        "message": "201 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 16.1,
+        "limit": 0,
+        "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "hit",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: recoil: flinch with knee bend)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "die",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "message": "height 222 px outside the upright band and no pose exception declared"
+      },
+      "class": "soft",
+      "verdict": "fail-soft"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 7.1,
+        "limit": 0,
+        "message": "216 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 34.1,
+        "limit": 0,
+        "message": "189 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 48.1,
+        "limit": 0,
+        "message": "175 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 85.1,
+        "limit": 0,
+        "message": "138 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 116.1,
+        "limit": 0,
+        "message": "107 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 142.1,
+        "limit": 0,
+        "message": "81 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 146.1,
+        "limit": 0,
+        "message": "77 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 148.1,
+        "limit": 0,
+        "message": "75 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 151.1,
+        "limit": 0,
+        "message": "72 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 152.1,
+        "limit": 0,
+        "message": "71 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 17.1,
+        "limit": 0,
+        "message": "206 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 25.1,
+        "limit": 0,
+        "message": "198 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 35.1,
+        "limit": 0,
+        "message": "188 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 43.1,
+        "limit": 0,
+        "message": "180 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 42.1,
+        "limit": 0,
+        "message": "181 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 43.1,
+        "limit": 0,
+        "message": "180 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 38.1,
+        "limit": 0,
+        "message": "185 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 27.1,
+        "limit": 0,
+        "message": "196 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 19.1,
+        "limit": 0,
+        "message": "204 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "message": "222 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 0,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 1,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 2,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 3,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 4,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 5,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 6,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 7,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 8,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 9,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 10,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 11,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 12,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 13,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": { "x": 117.60678680981596, "y": 237 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 0,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 1,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 249 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -17
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 249), scale 1, dx 0, dy -17"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 2,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 4,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 5,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 244 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -12
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 244), scale 1, dx 0, dy -12"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 242 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 7,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 242 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 8,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 242 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 9,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 242 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 10,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 242 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 11,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 243 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -11
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 243), scale 1, dx 0, dy -11"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 12,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 13,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": { "x": 117.60678680981596, "y": 248 },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    }
+  ],
+  "diagnosticAtlas": {
+    "pages": [
+      {
+        "file": "danphuchibi_SE_page1_tex.png",
+        "width": 2048,
+        "height": 2048,
+        "rgbaBytes": 16777216
+      },
+      {
+        "file": "danphuchibi_SE_tex.png",
+        "width": 2048,
+        "height": 2048,
+        "rgbaBytes": 16777216
+      }
+    ],
+    "rgbaMiB": 32,
+    "validatedMobileResidency": false
+  }
+}

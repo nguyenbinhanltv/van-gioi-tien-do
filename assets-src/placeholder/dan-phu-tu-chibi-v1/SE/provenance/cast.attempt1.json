@@ -1,0 +1,26 @@
+{
+  "clip": "cast",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:06:43 UTC",
+  "utcEnd": "2026-11-08 00:07:21 UTC",
+  "prompt": "EDITTARGET SE cast16headstencil4x4. Complete16FULLBODY spellcastingdrawings exactadultjade-whiskhealerfromreference2. Preserveunscaledheadstencil/headvolume/fixedsereneeyesnosemouthjaw/maincapbunpin/bodylength/outfit ivoryjade narrowgoldinkhem. ConstantSE3quarter. RIGHT HAND keepsplainbrownwhisk ONEbronze collarwhitehorsehair naturallyheld nearshoulder; LEFT hand performshealingseal:0ready,1..4drawleftpalm inwardtoribcage fingertipsmudra,5..7gatherrisingpalm,8..9release leftarm/palm outwardtowardSE atchestheight withslightkneeflex,10..15relax/recoverready. Whisk staysphysical/naturalgrip, noleft/rightswap, noextra limbs.16smooth24fpsinbetweens:anticipation,gather,releasehold,secondarysleeve/hair/whiskfibre/sashlag andsettle. No hugehead, no newface, bodyrootscaleunchanged; gentleclothmotion only, bootsstayground232. Wholebun/hand/sleeve/whisk/bootswithinowncell withmargin; noframecutting. Use4x4all16cells. RemoveALL grid/lines/rulers/text/markers fromOUTPUT; pureuniformmagenta#ff00ff, NO blackcellborders. No glowingmagic/talismans/circle/shadow/platform; FXwillbelayeredlater. Originalapproveddesign.",
+  "references": ["../templates/cast.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/cast.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "56a5d57c5cb7a449796e4463810591fb1409e0a66a6c594f753977ee956ecec3",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/cast.head-guide.png",
+      "sha256": "00858dd9773e90ebe003ad0620fa07967fc1eb8e760d0852393e933e78b5347a"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

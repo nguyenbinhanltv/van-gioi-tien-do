@@ -1,0 +1,22 @@
+{
+  "clip": "attack_3",
+  "direction": "SE",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:19:57 UTC",
+  "utcEnd": "2026-11-08 00:20:45 UTC",
+  "prompt": "LOCALIZEDedit ONLYcells0and13 ofthis1254square4x4 SEattack3sheet. ThesearetwoREADY endpoints: top-leftcell0 andbottomrowcol2cell13. Currentlytheirunbentstandingbody is9logicalpx tallerthan master. Correctvia SMALLkneeflex, NEVERbody/headrescale. KeepbothbootsatEXACTsamesourceground. Lower entireupperbody/head/bun/heldwhisk by14RAWpx throughkneebending, preserving exactheadvolume/face/jaw/maincap/bunpin/outfit/limblengths. AbsoluteBUN TIPtarget aroundlocalrawY25 inBOTHcells (currentlynearY11); head shiftsONLY14rawpxdown, NOTdeepcrouch. Kneesslightlysoft ready, samegentleposeasneighborcell1; no facialredraw. Allother12attackdrawings ANDemptycells14,15 COMPLETELYUNCHANGED, especiallyfullwiderearboots/whisktipsin7..9. Same1254x1254/4x4mapping,pureflatmagenta#ff00ff. Noggrid/lines/text/FX/shadows. Onlycomplete nativecells0,13willbeselected.",
+  "references": ["../raw/attack_3.attempt2.png"],
+  "raw": "../raw/attack_3.attempt3.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "d7c6aceeb4423f786589fe2f79e37682c88306190f804074d5e8ada97c132bf2",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/attack_3.attempt2.png",
+      "sha256": "bbdbac6caf240ff065b824f0faba9a7bc013fd163bedd54e77b0acb17580790a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

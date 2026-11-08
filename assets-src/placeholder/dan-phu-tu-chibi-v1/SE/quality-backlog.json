@@ -1,0 +1,108 @@
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "dan-phu-tu-chibi-v1",
+  "entries": [],
+  "manual": [
+    {
+      "kind": "other",
+      "clip": "cast",
+      "dir": "SE",
+      "cells": [],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "Initial head-only input produced a240px full-alpha body and16 canvas losses. Full-master input attempt2 retains locked scale/face and clears all cast canvas losses; no body rescaling."
+    },
+    {
+      "kind": "other",
+      "clip": "attack_2",
+      "dir": "SE",
+      "cells": [],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "Fixed source/T1 lattice X and one neutral source ground237 acrossALL14cells preserve SE sweep foot travel. Initial per-frame sole alignment clipped bun in7frames. Native canvas loss now0; no per-frame fitting."
+    },
+    {
+      "kind": "other",
+      "clip": "attack_3",
+      "dir": "SE",
+      "cells": [],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "AI background-only edit removes the raw1 black lattice. Native selected cells0/13 from attempt3 add modest knee flex; other12 remain raw2. One fixed lattice X acrossALL14cells preserves the wide lunge and complete rear boot, default sole Y retained; no body scaling. Native canvas loss0."
+    },
+    {
+      "kind": "other",
+      "clip": "die",
+      "dir": "SE",
+      "cells": [],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "Raw1 cell0 clipped after sole placement. Attempt2 overshot the requested knee bend and is retained unselected. Native cell0 from attempt3 clears canvas; other11cells exactlyraw1 with hash proof. No body scaling."
+    },
+    {
+      "kind": "other",
+      "clip": "run",
+      "dir": "SE",
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Raw1 attached heads visibly oversized. Raw2 canonical-head AI edit retains dynamic lean/flight/body but semantic cap/jaw measurements remain under review. Do not treat input stencil positions or prompt percentages as gate evidence."
+    },
+    {
+      "kind": "other",
+      "clip": "walk",
+      "dir": "SE",
+      "cells": [2, 3, 11],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Out-of-band full-alpha standing stride needs actual aligned-cell D47 head-size evidence; no waiver or numerical point selection."
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "SE",
+      "cells": [1, 2, 3, 4, 5, 6, 7, 8],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Dynamic knee/flight posture preserved. D47 actual aligned head measurements still required; do not flatten poses to fit bbox."
+    },
+    {
+      "kind": "other",
+      "clip": "idle",
+      "dir": "SE",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Manual master and motion semantic boundary uncertainty remains approximately1px. Include true cap highlights, exclude bun/pin/neck shadow; no automatic anatomy certification."
+    },
+    {
+      "kind": "other",
+      "clip": "sword_fly",
+      "dir": "SE",
+      "cells": [2],
+      "severity": "error",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "Unsliced border audit found three bun-AA pixels alpha52..58 on top border of raw1 cell2 (opaque core margin1). AI source-only complete-bun/downward hover repair, native cell2 from raw2 selected; other11 cells remain exactraw1. No body/head scaling, no clipping waiver."
+    },
+    {
+      "kind": "other",
+      "clip": "idle",
+      "dir": "SE",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Diagnostic atlas: 2 pages, 32MiB decoded RGBA before compression. Final source freeze, mobile multi-direction residency and compressed-format quality remain unvalidated."
+    }
+  ]
+}

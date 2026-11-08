@@ -1,0 +1,26 @@
+{
+  "clip": "meditate",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:02:05 UTC",
+  "utcEnd": "2026-11-08 00:02:44 UTC",
+  "prompt": "EDIT TARGET: SE meditate INPUT16cell4x4 with UN-SCALED canonical head stencils at correct seated headheight. Complete each stencil into FULLBODY compact seated crosslegged meditation, same adult female healer inreference2. HEAD STENCIL IS EXACT SIZE: preserve all facial pixels/features/headvolume andbunpin as closelyaspossible, NEVERenlargehead tofillcell; drawbodybelow withfoldedlegs aroundhips, anatomicaladult4.5head standingproportions unchanged, seated silhouette naturallyshorter. Headmaincap near80logicalY,chinnear130, foldedboots andhem near232 ground, shouldersaround143/hips190. ConstantSE3quarter, bodybalancedserene, RIGHT hand naturallyholdsplainbrownwhisk ONEbronze collar whitehorsehair close shoulder, left handsoftmudra onknee. No lotus, pedestal, platform, talismans orFX.16smoothdrawings breathcycle:0neutral inhale1..5 peak6..7 exhale8..13 settle14..15 to0; subtle chest/sleeve/sash/whisk-fibre lag andsettle, noheaddesignchange, gentleblink allowedclosedeyes8..9 samefixedface. Ivoryjade dress narrowantiquegoldinkhem exact. Keep4x4mapping,bun/whisk/bodywithinowncellmargin, neverclip. RemoveALLgrids/dashedcrosshairs/rulers/text fromoutput, uniformpuremagenta#ff00ff, no castshadow. Reference2identity/outfitonly, doNOTdrawstandingbody.",
+  "references": ["../templates/meditate.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/meditate.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/meditate.head-guide.png",
+      "sha256": "2e4d1415207a5e0491dd84028a7966e158d186cfc18b567d046eade218303ef3"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

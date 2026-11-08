@@ -1,0 +1,26 @@
+{
+  "clip": "channel",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:07:49 UTC",
+  "utcEnd": "2026-11-08 00:08:10 UTC",
+  "prompt": "EDITTARGET channel MASTER-GUIDE LANDSCAPE4COLUMNSx3ROWS,12cells/12frames, NOT4x4. Exactcanonicaladultjade-whiskhealer andsize alreadyineachcell. Preservefixedface/headvolume/maincapbunpin/limblengths/ivoryjadenarrowgoldinkhemcostume. Subtlecontinuous standingHEALING CHANNELloopSE3quarter:RIGHT handnaturallyholdsplainbrownwhisk ONEbronze collarwhitehorsehair nearshoulder, LEFT palmmaintainsgentleforwardmudra;12smooth24fpsphases withslightwristcircle/palminwardoutward1..5 thenreturn6..11, tinybreath, fingersconsistent, noextraarms. No attack. Bothboots remainplantedground232, no bodyscalechange/headgrow, bunneverhigherthanexistingmastertop. Hair/sleeves/sash/whiskfibres lagandsettle, frame11 blends0. Use originalphysicalweapon/outfit nofixedfacechange. Entirefigureinsidecell withmargin, rootstaysput; no crop/neighboroverlap. OUTPUTaspect4:3 exact4cols3rows twelvefigures; noextraemptyrow. RemoveALL grid/borderlines/dashes/rulers/text/markers, flatpuremagenta#ff00ff. NoFX/talismans/glowingcircles/shadows/platform. Reference2locked256masteridentityandsize only.",
+  "references": ["../templates/channel.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/channel.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/channel.master-guide.png",
+      "sha256": "0a040190aef70f636d49b8a4f2f28a4c057031bb68d865b22b96a0264359b927"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

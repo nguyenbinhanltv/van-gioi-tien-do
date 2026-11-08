@@ -1,0 +1,26 @@
+{
+  "clip": "attack_2",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:04:08 UTC",
+  "utcEnd": "2026-11-08 00:04:49 UTC",
+  "prompt": "EDITTARGET SE attack2 head-guide14cells in4x4; complete SAMEunscaledheads into FULLBODY14frame returning-whisk sweep. Use reference2 exactadultfemalejadehealerfixedface/bodylength/headvolume/ivoryjadetriminkhem/bunpin. Neverenlargehead orrescalebody. RIGHT handgripsplainbrownwhisk ONEbronze collarwhitehorsehair, leftpalm balances. ConstantSE3quarter camera. Readingorder0ready,1..3anticipation drawrightarm/whisk low acrosswaist andcoilhips,4..6reverse upward crossbodysweep withsmall knee-bent SEstep,7impactfinish atshoulderheight,8impacthold withhair/clothlag,9..13followthrough flowingwhitefibres/ribbons/sleeves thenreturnready. Distinct fromattack1forwardthrust: draw broad RETURNING S-arc of whisk attached tophysicalshaft, never detachweapon/hand. Fixedface looksSE, nofront/sidechanges. Bootsfirm onground232, dynamicknees, correct2hands2feet. Entirehairbun/sweep/sleeve/boots INSIDEowncell with>=4logicalpx margin; keepweaponarcwithinborder, noart inadjacentcells.14smooth unique24fpsdrawings, bottomrowlast2cellsEMPTYmagenta. Inputheadstencilsareanatomicalscaleintentionsnotnewcharacters. Removeallgrid/crosshairs/rulers/text; pureflatmagenta#ff00ff, noFX/talismans/energyglow/shadows/platform. Originalapproveddesignonly.",
+  "references": ["../templates/attack_2.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/attack_2.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack_2.head-guide.png",
+      "sha256": "cce1ac618454941d8e70943d4a9c29c03a64a23e04373ec34c2d65f7b27306bb"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

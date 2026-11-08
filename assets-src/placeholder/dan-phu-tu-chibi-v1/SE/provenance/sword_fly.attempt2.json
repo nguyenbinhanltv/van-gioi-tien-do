@@ -1,0 +1,22 @@
+{
+  "clip": "sword_fly",
+  "direction": "SE",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:40:56 UTC",
+  "utcEnd": "2026-11-08 00:41:20 UTC",
+  "prompt": "PRECISE LOCALIZED repair ONLYzero-basedCELL2 (TOPROWCOLUMN3) inthis1448x1086 SEhover12sheet4cols3rows. Itsbun touchesTOPborder. Move theENTIREcell2 character DOWN5RAWpx(~3.5logicalpx) withNOscalechange; reconstructfullroundedupperbun tip/naturaledge withclear>=4RAWpx magenta margin abovesoNOhairAA touchesborder. PreserveEXACThead/face/hairdesign/bodypose/pointedhoverboots/ivoryjadegoldinkhemdress/right-heldbrownwhiskONEbronze collarwhitehorsehair/leftpalm. Onlytranslatepose+restorecompletebun, doNOTshrinkhead/body, doNOTflattenhover orcutbun. Everyother11cellsCOMPLETELYUNCHANGED; no changeselsewhere. Same1448x1086 dimensions/4x3mapping/flatpuremagenta#ff00ff, no grids/lines/text/FX/shadows/platform. Onlynativecell2willbeselectedaftermanualborderreview.",
+  "references": ["../raw/sword_fly.attempt1.png"],
+  "raw": "../raw/sword_fly.attempt2.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "836ed682622d7a6d50e5ae9c438f16771b75f304ae8ca863e1134c7fb629d998",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/sword_fly.attempt1.png",
+      "sha256": "41d91a452413a176ac2305cf7ad0d93d00af923cd7213a42491d1f6251c1f3d8"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}

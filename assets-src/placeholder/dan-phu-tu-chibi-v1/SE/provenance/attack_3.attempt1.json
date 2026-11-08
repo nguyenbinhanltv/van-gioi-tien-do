@@ -1,0 +1,26 @@
+{
+  "clip": "attack_3",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:05:10 UTC",
+  "utcEnd": "2026-11-08 00:05:52 UTC",
+  "prompt": "EDITTARGET SE attack3 head-guide14stencils4x4. Draw14FULLBODY finishing LUNGE/WHISKTHRUST frames readingorder0..13, last2cellsEMPTY. Exactcanonicaladultfemalehead/face/bodydimensions fromreference2, unscaledheadstencilanchor, ivoryjade dress narrowantiquegoldinkhem,bun/jadepin. Right hand holds ONEplainbrownwhisk ONEbronze collarwhitehorsehair; leftpalm balances. ConstantSE3quarter. Phases0ready,1..3stronganticipation bothkneesbend/whiskdrawnwaist,4..6driveforwardSEstep andtorsolean,7deep extendedlunge rightarm whiskthrust,8impacthold,9..13followthrough recoilofwhiskfibres/sleeves/sash returnbalancedready. Dynamiclongstep with clearlybentfrontknee andextendedrearleg, no poseflattening. Preservefullbody/headsize eveninlunge. CRITICAL wholeREARBOOT, frontboot, bum/ribbons/hair andWHISKTIP mustfitfullyinsideown256logicalcell with>=6logicalpx margin; register deepestlunge a littleleftofcenter asneeded, hand/whisktipstopatx246latest, rearbootno fartherleftthanx8. Neverdrawacrosscellborder, nevercropboot, doNOTshrinkbody. Do not copy head asfloatingisolatedfinal; drawneck/joints correctly. Fixedfaceexpression/eyes/lips/adultanatomy.14smooth24fpsdrawingswithanticipationimpactholdfollowthrough. RemoveALLgrid/rulers/crosshairs/text; pureflatmagenta#ff00ff, noFX/shadow/platform/talisman. Originalapproveddesign.",
+  "references": ["../templates/attack_3.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/attack_3.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "4ee0a924b491f9a61605eac9e3e07795bf3c019e6e87c3140946e94ab5ed7fe1",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack_3.head-guide.png",
+      "sha256": "ca627ddb7f4a7a5dd267195576b8f5d0a09b66651ff32ce083a9d90abd135839"
+    },
+    {
+      "file": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+}
