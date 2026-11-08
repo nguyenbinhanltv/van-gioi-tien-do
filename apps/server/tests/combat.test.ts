@@ -557,6 +557,48 @@ describe('WorldNode with mobs: true and combat: {} (default MobPort wiring)', ()
   });
 });
 
+describe('player id recycling and combat registration', () => {
+  it('a stale removePlayer(id, oldTransport) after the id was recycled leaves the new owner combat state intact', () => {
+    const mobs = new FakeMobs();
+    const node = new WorldNode({
+      seed: 6,
+      mapTiles: 64,
+      spawn: { i0: 20, j0: 20, side: 1 },
+      playerIdQuarantineMs: 100,
+      combat: { mobs },
+    });
+    const ta = new Client();
+    const a = node.addPlayer(ta, 'a');
+    node.removePlayer(a, ta); // A leaves: its id is quarantined for 100 ms of sim time
+    expect(node.combat!.profileOf(a)).toBeUndefined(); // unregistered with the removal
+    for (let k = 0; k < 4; k++) node.tick(); // 200 ms > quarantine
+    const tb = new Client();
+    const b = node.addPlayer(tb, 'b');
+    expect(b).toBe(a); // the id was recycled to B
+    expect(node.combat!.profileOf(b)).toBeDefined();
+
+    // the old socket of A closes late: bound to A transport, so it must be ignored
+    node.removePlayer(a, ta);
+    expect(node.clients.has(b)).toBe(true);
+    expect(node.combat!.profileOf(b)).toBeDefined();
+
+    // B can still cast and hit: a mob 1.5 tiles ahead, facing +i
+    const me = node.world.entities.find((e) => e.id === b)!;
+    mobs.stats.set(MOB, mobStats());
+    node.world = spawnEntity(node.world, { id: MOB, i: me.i + 1.5, j: me.j, hp: 3000, mpMax: 0 });
+    node.world = { ...node.world, entities: node.world.entities.map((e) => (e.id === b ? { ...e, facing: 0 } : e)) };
+    const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
+    node.receive(b, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }), tb);
+    for (let k = 0; k < 14; k++) node.tick();
+    expect(node.world.entities.find((e) => e.id === MOB)!.hp).toBeLessThan(3000);
+    const res = tb.msgs.filter((m) => m.type === 'skill_result');
+    expect(res).toHaveLength(1);
+    // and an internal removal (no transport) still unregisters the owner
+    node.removePlayer(b);
+    expect(node.combat!.profileOf(b)).toBeUndefined();
+  });
+});
+
 describe('MobManager (#204) as the MobPort', () => {
   it('combat kills a real mob through combatStats / kill: it despawns, drops resolve and the respawn timer runs', () => {
     const grid = TileGrid.fromRows(Array.from({ length: 64 }, () => '.'.repeat(64)));
