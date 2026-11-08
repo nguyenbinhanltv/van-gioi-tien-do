@@ -7,6 +7,7 @@ import {
   alignFrame,
   cellRect,
   normalizeSheetDpi,
+  measureFigure,
   resampleAffine,
   runProject,
   sliceSheet,
@@ -14,9 +15,66 @@ import {
   toPremultiplied,
   type Project,
 } from '../src/index.js';
-import { drawFigure, makeMaster } from './helpers.js';
+import { drawFigure, makeMaster, makeSheet } from './helpers.js';
 
 describe('opt-in resampling', () => {
+  it.each(['lanczos3', 'area'] as const)('maps native pelvis/sole in the default deferred %s path', (method) => {
+    const dir = mkdtempSync(join(tmpdir(), 'vgtd-resample-sole-'));
+    const raw = toPremultiplied(
+      makeSheet(2, 1, 314, [
+        { height: 265, cx: 163, sole: 285 },
+        { height: 265, cx: 160, sole: 282, stride: 2 },
+      ]),
+    );
+    writeFileSync(join(dir, 'master.png'), encodePng(makeMaster()));
+    writeFileSync(join(dir, 'raw.png'), encodePng(raw));
+    writeFileSync(join(dir, 'scale.json'), JSON.stringify({ scale: 0.964 }));
+    const project: Project = {
+      character: 'test',
+      direction: 'E',
+      stem: 'test',
+      master: 'master.png',
+      resample: method,
+      palette: { lock: false },
+      preparation: { kind: 'square-cell-dpi-v1', calibration: 'scale.json' },
+      // Deliberately omit vertical and authoredOrigins: both anchors must come from native measurements.
+      clips: [{ name: 'idle', sheet: 'raw.png', cols: 2, frames: 2, durationSec: 1, loop: false }],
+    };
+    const result = runProject(project, dir, { includeAlignedFrames: true });
+    const { guides } = result.contract.master;
+    const dpi = 512 / 628,
+      scale = dpi * 0.964;
+    const frames = sliceSheet(raw, { cols: 2, rows: 1, frames: 2 });
+    for (const [i, frame] of frames.entries()) {
+      const native = toPremultiplied(frame.image),
+        metrics = measureFigure(native)!;
+      const direct = resampleAffine(
+        native,
+        256,
+        256,
+        {
+          scaleX: scale,
+          scaleY: scale,
+          dx: guides.centerX - metrics.pelvisX * scale,
+          dy: guides.ground - metrics.bottom * scale,
+        },
+        method,
+      );
+      expect(result.alignedClips![0]!.frames[i]).toEqual(direct);
+      const record = result.contract.clips[0]!.records[i]!;
+      const source = cellRect(628, 314, 2, 1, i),
+        logical = cellRect(512, 256, 2, 1, i);
+      const offsetX = (source.x + 3) * dpi - logical.x - 3;
+      const offsetY = (source.y + 3) * dpi - logical.y - 3;
+      expect(record.pre.pelvisX).toBeCloseTo((metrics.pelvisX * dpi + offsetX) * 0.964, 10);
+      expect(record.pre.soleY).toBeCloseTo((metrics.bottom * dpi + offsetY) * 0.964, 10);
+      expect(record.pre.pelvisX + record.dx).toBeCloseTo(guides.centerX, 10);
+      expect(record.pre.soleY + record.dy).toBeCloseTo(guides.ground, 10);
+      expect(Math.abs(record.post.pelvisX - guides.centerX)).toBeLessThan(0.5);
+      expect(Math.abs(record.post.soleY - guides.ground)).toBeLessThan(0.5);
+    }
+  });
+
   it('integrates area coverage, filters checkerboards, and never creates non-premultiplied halos', () => {
     const src = createImage(4, 4);
     for (let y = 0; y < 4; y++)
