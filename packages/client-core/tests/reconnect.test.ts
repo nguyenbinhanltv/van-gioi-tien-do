@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
-import { ErrorCode, encode, type SelfState } from '@vgtd/protocol';
+import { ErrorCode, encode, type Message, type SelfState } from '@vgtd/protocol';
 import { NetClient, type NetDeps, type NetEvents, type SocketLike } from '@vgtd/client-core';
 
 type Hello = { type: string; token?: string; resume?: { entityId: number; token: string } };
@@ -48,6 +48,10 @@ class Fake implements SocketLike {
   }
   error(code: ErrorCode, text: string): void {
     const b = encode({ type: 'error', code, text });
+    this.onmessage?.({ data: b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) });
+  }
+  frame(m: Message): void {
+    const b = encode(m);
     this.onmessage?.({ data: b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) });
   }
   snapshot(self: SelfState): void {
@@ -238,6 +242,29 @@ describe('NetClient reconnect / resume', () => {
       r.net.update(16);
     }
     expect(r.net.status).toBe('reconnecting');
+  });
+
+  it('frames that arrive in the same turn as hello_ack are kept (the server sends aoi_enter right behind the ack)', async () => {
+    const r = rig();
+    const enter: Message = {
+      type: 'aoi_enter',
+      entities: [
+        { index: 3, entityId: 99, kind: 0, defId: 0, qi: 320, qj: 320, anim: 0, dir: 0, hpPct: 100, maxHp: 100 },
+      ],
+    };
+    // ack and aoi_enter delivered back to back, as `ws` does when both frames sit in one TCP chunk: no promise continuation runs between them
+    Fake.answer = (h, s) => {
+      s.ack(7, h.resume ? 'tok-2' : 'tok-1', !!h.resume);
+      s.frame(enter);
+    };
+    await r.net.connect();
+    expect(r.net.remotes().map((x) => x.entityId)).toEqual([99]);
+    // the same on a resumed reconnect
+    Fake.all[0]!.drop();
+    await settle();
+    expect(r.net.status).toBe('online');
+    expect(r.net.reconnects).toBe(1);
+    expect(r.net.remotes().map((x) => x.entityId)).toEqual([99]);
   });
 
   it('gives up after maxMs and ends in "closed" with a reason', async () => {
