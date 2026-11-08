@@ -9,9 +9,11 @@
  * Documented defaults where docs/07 §6 is ambiguous are listed in docs/OPEN-ITEMS.md section 16.
  */
 import {
+  BLUEPRINT_PITY,
   BOSS_REPEAT_STONE_FACTOR,
   DROP_TABLE,
   QUALITY_DISTRIBUTION,
+  STONE_VALUE,
   blueprintPityChance,
   depletionFactor,
   lowRealmFactor,
@@ -90,7 +92,11 @@ export function effectiveDropChance(item: DropItem, ctx: DropContext): number {
   const entry = DROP_TABLE[ctx.source][item];
   if (!entry || !allowed(item, ctx)) return 0;
   let p = entry.p;
-  if (item === 'blueprint_gold_red' && ctx.goldRedAttempt !== undefined) p = blueprintPityChance(ctx.goldRedAttempt);
+  if (item === 'blueprint_gold_red' && ctx.goldRedAttempt !== undefined) {
+    // docs/07 §6: "chắc chắn rơi ở lần thứ 30" is explicit, so the guarantee bypasses every other factor.
+    if (ctx.goldRedAttempt >= BLUEPRINT_PITY.GUARANTEE_AT) return 1;
+    p = blueprintPityChance(ctx.goldRedAttempt);
+  }
   const gap = lowRealmFactor(ctx.realmGap ?? 0);
   if (gap !== null) p *= gap;
   p *= depletionFactor(ctx.continuousFarmHours ?? 0);
@@ -116,7 +122,11 @@ export function expectedDropQuantity(item: DropItem, ctx: DropContext): number {
 
 /** Expected Linh thạch (hạ phẩm) per kill under the context, before integer rounding. */
 export function expectedStones(ctx: DropContext): number {
-  const values: Readonly<Record<string, number>> = { stone_ha: 1, stone_trung: 100, stone_thuong: 10_000 };
+  const values: Readonly<Record<string, number>> = {
+    stone_ha: STONE_VALUE.ha,
+    stone_trung: STONE_VALUE.trung,
+    stone_thuong: STONE_VALUE.thuong,
+  };
   return STONE_ITEMS.reduce((n, item) => n + expectedDropQuantity(item, ctx) * values[item]!, 0);
 }
 

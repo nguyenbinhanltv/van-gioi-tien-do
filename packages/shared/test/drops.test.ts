@@ -64,6 +64,18 @@ describe('effective drop chance (docs/07 §6 modifiers)', () => {
       12,
     );
     expect(effectiveDropChance('blueprint_gold_red', { ...boss, goldRedAttempt: 30 })).toBe(1);
+    // the guarantee is explicit: no low-realm / depletion / party factor can lower it
+    const harsh = { ...boss, goldRedAttempt: 30, partySize: 4, continuousFarmHours: 3, realmGap: 1 };
+    expect(effectiveDropChance('blueprint_gold_red', harsh)).toBe(1);
+    expect(effectiveDropChance('blueprint_gold_red', { ...harsh, goldRedAttempt: 45 })).toBe(1);
+    // ramp before the guarantee is still scaled by the other factors (OPEN-ITEMS section 16)
+    expect(effectiveDropChance('blueprint_gold_red', { ...harsh, goldRedAttempt: 29 })).toBeCloseTo(
+      blueprintPityChance(29) * 0.2 * 0.5 * 0.5,
+      12,
+    );
+    // ... and a guaranteed attempt still cannot drop where blueprints are excluded (boss repeat / 2+ realms lower)
+    expect(effectiveDropChance('blueprint_gold_red', { ...harsh, bossRepeat: true })).toBe(0);
+    expect(effectiveDropChance('blueprint_gold_red', { ...harsh, realmGap: 2 })).toBe(0);
   });
 });
 

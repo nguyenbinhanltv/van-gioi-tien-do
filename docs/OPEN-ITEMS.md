@@ -216,6 +216,15 @@ Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `
 
 Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
 
+## 15. Play-test chibi: chế độ đi bộ và ngưỡng idle/walk/run (client tạm)
+
+Bản play-test `ChibiBody` / `PlayerActor` (apps/client-cocos) dùng các giá trị **placeholder chỉ để play-test**, chưa có trong docs:
+
+- **Chế độ đi bộ**: giữ Shift thì tốc độ di chuyển nhân với `PlayerActor.WALK_SPEED_FACTOR = 0,5` (4,5 → 2,25 ô/s).
+- **Ngưỡng clip theo tốc độ ô thực đã đi**: dưới 0,3 ô/s là `idle`, dưới 3,2 ô/s là `walk`, từ 3,2 ô/s là `run`.
+
+docs/08 §4 chỉ quy định công thức tốc độ di chuyển (4,5 × (1+(TP−100)/400)) và docs/31 I-08 vẫn ghi 4,5 là placeholder; không tài liệu nào định nghĩa chế độ đi bộ, tốc độ đi bộ hay ngưỡng chuyển clip. Cần game designer hoặc owner quyết định (có chế độ đi bộ không, hệ số tốc độ, ngưỡng clip) trước khi coi các giá trị này là cuối cùng; trong code chúng được đánh dấu PLAY-TEST ONLY.
+
 ## 16. Công thức lõi P3 (`@vgtd/shared`): mặc định đã chọn khi docs chưa rõ
 
 Các hàm `drops.ts` (docs/07 §6) và `skill_table.ts` (docs/11 §4) dùng mặc định có ghi dưới đây; chưa có giá trị mới nào được bịa, cần game designer xác nhận:
@@ -224,7 +233,7 @@ Các hàm `drops.ts` (docs/07 §6) và `skill_table.ts` (docs/11 §4) dùng mặ
 - **Linh khí cạn kiệt (>2 giờ liên tục)** ×0,5 và **tổ đội 1/√n** nhân vào **xác suất**, không phải số lượng; áp cho cả mục 100% (docs chỉ nói "×0,5" / "hệ số 1/√n").
 - **Số lượng Linh thạch ×1,5^(r−1)**: nhân sau khi roll khoảng số lượng, làm tròn half-up, tối thiểu 1 khi đã rơi (docs không nêu làm tròn). Vật phẩm khác không nhân theo cảnh giới.
 - **Boss lặp lại (rương tuần đã nhận)**: chỉ còn Linh thạch, số lượng ×0,3 (làm tròn như trên, tối thiểu 1), không đan, bản vẽ hay nguyên liệu (docs: "chỉ nhận Linh thạch × 0,3, không có bản vẽ").
-- **Pity bản vẽ Vàng–Đỏ**: xác suất lần n thay cho 0,2% in trong bảng khi truyền `goldRedAttempt`; không truyền thì dùng 0,2% (docs không nói pity có cộng dồn với hệ số quái thấp/tổ đội hay không: hiện vẫn nhân các hệ số đó).
+- **Pity bản vẽ Vàng–Đỏ**: từ lần 1 đến 29 xác suất lần n thay cho 0,2% in trong bảng khi truyền `goldRedAttempt` (không truyền thì dùng 0,2%); docs không nói đoạn dốc này có nhân hệ số quái thấp/cạn kiệt/tổ đội hay không: hiện vẫn nhân. Từ lần 30 trở đi trả về 1 ("chắc chắn rơi" là quy tắc rõ của docs/07 §6), bất chấp mọi hệ số; chỉ còn bị loại khi nguồn không rơi bản vẽ (boss lặp lại, quái thấp từ 2 cảnh giới).
 - **Phẩm bản vẽ**: roll trong khoảng phẩm của dòng đã trúng, theo phân bổ của nguồn được chuẩn hóa lại trên khoảng đó (Trắng–Lục, Lam–Tím, Vàng–Đỏ); đan dược dùng toàn bộ phân bổ.
 - **Thứ tự RNG** của `resolveDrops` (một lần rút cho trúng/trượt mỗi vật phẩm theo `DROP_ITEM_ORDER`, rồi số lượng, rồi phẩm) là quy ước kỹ thuật để xác định; server sẽ dùng PRNG có seed như mô phỏng D49.
 - **docs/11 §4.5**: dòng đầu bảng Thương tu (S1) in nhầm một câu mô tả "Chốt D49" thay cho hàng `xuyen_van_thich`; số liệu kỹ năng này lấy từ `skills.json`, test đối chiếu docs/11 bỏ riêng hàng này. Cần sửa lại hàng S1 trong docs/11.
