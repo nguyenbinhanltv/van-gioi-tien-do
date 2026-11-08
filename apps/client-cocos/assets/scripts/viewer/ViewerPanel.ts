@@ -37,8 +37,8 @@ export interface PanelHandlers {
   onRestart(): void;
   /** Scrub actor(s) to a normalised position 0..1 (panel already paused playback). */
   onSeek(norm: number): void;
-  /** Step actor(s) by `dtSeconds` (paused). */
-  onStep(dtSeconds: number): void;
+  /** Step actor(s) by one actual runtime tick in the given direction (paused). */
+  onStep(direction: -1 | 1): void;
 }
 
 export type PanelLayout = { mode: 'side' | 'bottom'; sizePx: number };
@@ -220,7 +220,7 @@ export class ViewerPanel {
         s.paused = true;
         this.sync();
         this.h.onChange();
-        this.h.onStep((d.act === 'step+' ? 1 : -1) / 30); // one key (30 fps)
+        this.h.onStep(d.act === 'step+' ? 1 : -1);
       } else if (d.act === 'world') {
         ev.preventDefault();
         location.hash = '';

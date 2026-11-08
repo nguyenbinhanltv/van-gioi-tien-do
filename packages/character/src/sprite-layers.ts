@@ -1,5 +1,5 @@
 /** D45 browser-safe layer manifests, composition and lazy loading. Coordinates are logical px, y down from the pivot. */
-import { DIRECTIONS, type Direction } from '@vgtd/shared';
+import { DIRECTIONS, SPRITE_SMOOTH_FPS, type Direction } from '@vgtd/shared';
 import { SPINE_EVENT_NAMES, SPINE_KEY_FPS, type SpineEventName } from './animations.js';
 import { assertVisualSetId, type VisualTint } from './equipment-visuals.js';
 
@@ -15,7 +15,7 @@ export interface SpriteLayerDisplay {
   readonly textureHeight: number;
 }
 export interface SpriteLayerFrame {
-  /** Integer ticks on SPINE_KEY_FPS. */
+  /** Integer ticks on the set's frameRate. */
   readonly at: number;
   readonly display: string | null;
   /** Required for every weapon frame, including hidden ones. */
@@ -58,7 +58,7 @@ export function validateSpriteLayerSet(set: SpriteLayerSet): void {
     !['body', 'weapon', 'fx'].includes(set.role) ||
     !DIRECTIONS.includes(set.direction) ||
     !set.motionId?.trim() ||
-    set.frameRate !== SPINE_KEY_FPS
+    ![SPINE_KEY_FPS, SPRITE_SMOOTH_FPS].includes(set.frameRate)
   )
     throw new Error('invalid sprite layer header/motion clock');
   assertVisualSetId(set.id);
@@ -237,13 +237,13 @@ export function composeSpriteLayers(input: {
   const skeleton = {
     version: '5.5',
     compatibleVersion: '5.5',
-    frameRate: SPINE_KEY_FPS,
+    frameRate: input.body.frameRate,
     name: input.name,
     armature: [
       {
         name: input.name,
         type: 'Armature',
-        frameRate: SPINE_KEY_FPS,
+        frameRate: input.body.frameRate,
         aabb: {
           x: -input.body.canvas.pivotX,
           y: -input.body.canvas.pivotY,

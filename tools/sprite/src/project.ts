@@ -11,7 +11,7 @@ import { type AnimationId } from '@vgtd/character';
 import { decodePng, encodePng, type Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { alignFrame, calibrate, type AlignedFrame, type Calibration, type FrameRecord } from './align.js';
-import { buildArmature, type ClipInput } from './export.js';
+import { buildArmature, type ClipInput, type TimingProfile } from './export.js';
 import { selectSheetCells, sheetLayout, type SheetSelection } from './grouped.js';
 import { facingGroundVector, groundPxPerFrame, groundSpeedPxS } from './gait.js';
 import { guidesFromMaster, measureFigure } from './master.js';
@@ -38,6 +38,7 @@ import { authoredOriginPoint, validateAuthoredOrigins, type AuthoredOrigin } fro
 import { validateResample, type ResampleMethod } from './resample.js';
 
 export interface ProjectClip {
+  readonly timingProfile?: TimingProfile;
   readonly authoredOrigins?: Readonly<Record<string, AuthoredOrigin>>;
   readonly heightPolicy?: HeightPolicy;
   /** Clip-local frame indices; coordinates in the aligned 256px output cell. */
@@ -86,6 +87,8 @@ export interface ProjectClip {
 }
 
 export interface Project {
+  /** Explicit smooth-v2 clock for every clip; legacy projects omit this. */
+  readonly timingProfile?: TimingProfile;
   /** Omitted/bilinear preserves the legacy two-pass path byte-for-byte. */
   readonly resample?: ResampleMethod;
   /** Direction-specific skull landmarks on the resized256px master; excludes secondary hair. */
@@ -377,6 +380,9 @@ export function runProject(
   const textureStem = (page: number) => (page === 0 ? `${name}_tex` : `${name}_page${page}_tex`);
   const pack = packFrames(inputs, (page) => `${textureStem(page)}.png`);
   const clipInputs: ClipInput[] = aligned.map((s) => ({
+    ...((s.clip.timingProfile ?? project.timingProfile)
+      ? { timingProfile: s.clip.timingProfile ?? project.timingProfile }
+      : {}),
     name: s.clip.name,
     frames: s.aligned.flatMap((a, i) => (a ? [`${s.clip.name}_${pad(i)}`] : [])),
     durationSec: s.clip.durationSec,
