@@ -171,6 +171,8 @@ const TYPE_IDS: Readonly<Record<Exclude<Message['type'], ColdMessage['type']>, M
 
 const SELF_FLAG_FLYING = 1;
 const SELF_FLAG_QINGGONG = 2;
+const SELF_FLAG_VITALS = 4;
+const CAST_FLAG_AIM = 1;
 const SNAP_FLAG_SELF = 1;
 const SNAP_FLAG_BASELINE = 2;
 const TEXT_ENC = new TextEncoder();
@@ -196,6 +198,11 @@ export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
       w.u16(m.seq);
       w.u16(m.skillId);
       w.u32(m.targetId);
+      w.u8(m.aim ? CAST_FLAG_AIM : 0);
+      if (m.aim) {
+        w.u16(m.aim.qi);
+        w.u16(m.aim.qj);
+      }
       break;
     case 'ping':
       w.u32(m.clientTimeMs);
@@ -240,11 +247,18 @@ function encodeSelf(w: ByteWriter, s: SelfState): void {
   w.f32(s.i);
   w.f32(s.j);
   w.u8(s.layer);
-  w.u8((s.flying ? SELF_FLAG_FLYING : 0) | (s.qinggong ? SELF_FLAG_QINGGONG : 0));
+  w.u8((s.flying ? SELF_FLAG_FLYING : 0) | (s.qinggong ? SELF_FLAG_QINGGONG : 0) | (s.vitals ? SELF_FLAG_VITALS : 0));
   w.u8(s.facing);
   w.u16(s.dashLeftMs);
   w.u16(s.dashCdMs);
   w.u16(s.invulnMs);
+  if (s.vitals) {
+    w.u32(s.vitals.hp);
+    w.u32(s.vitals.hpMax);
+    w.u32(s.vitals.mp);
+    w.u32(s.vitals.mpMax);
+    w.u32(s.vitals.shield);
+  }
 }
 
 function decodeSelf(r: ByteReader): SelfState {
@@ -253,7 +267,8 @@ function decodeSelf(r: ByteReader): SelfState {
   const j = r.f32();
   const layer = r.u8();
   const f = r.u8();
-  if ((f & ~(SELF_FLAG_FLYING | SELF_FLAG_QINGGONG)) !== 0) throw new ProtocolError('malformed', 'unknown self flags');
+  if ((f & ~(SELF_FLAG_FLYING | SELF_FLAG_QINGGONG | SELF_FLAG_VITALS)) !== 0)
+    throw new ProtocolError('malformed', 'unknown self flags');
   const facing = r.u8();
   if (facing > 254) throw new ProtocolError('range', 'facing 255 is not a valid direction code');
   return {
@@ -267,6 +282,10 @@ function decodeSelf(r: ByteReader): SelfState {
     dashLeftMs: r.u16(),
     dashCdMs: r.u16(),
     invulnMs: r.u16(),
+    vitals:
+      (f & SELF_FLAG_VITALS) !== 0
+        ? { hp: r.u32(), hpMax: r.u32(), mp: r.u32(), mpMax: r.u32(), shield: r.u32() }
+        : null,
   };
 }
 
@@ -398,7 +417,15 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
       break;
     }
     case 'skill_cast':
-      msg = { type, seq: r.u16(), skillId: r.u16(), targetId: r.u32() };
+      {
+        const seq = r.u16();
+        const skillId = r.u16();
+        const targetId = r.u32();
+        const cf = r.u8();
+        if ((cf & ~CAST_FLAG_AIM) !== 0) throw new ProtocolError('malformed', 'unknown cast flags');
+        const aim = (cf & CAST_FLAG_AIM) !== 0 ? { qi: r.u16(), qj: r.u16() } : null;
+        msg = { type, seq, skillId, targetId, aim };
+      }
       break;
     case 'ping':
       msg = { type, clientTimeMs: r.u32() };

@@ -6,6 +6,7 @@
 import {
   ErrorCode,
   PROTOCOL_VERSION,
+  LIMITS,
   decode,
   encode,
   type EnterEntity,
@@ -72,6 +73,13 @@ export interface NetOptions {
 }
 
 const WS_OPEN = 1;
+
+/** Aim point (tile coordinates) -> wire quantization, clamped to 0..POS_MAX_Q; null when absent or not finite. */
+function quantizeAim(aim: { i: number; j: number } | null): { qi: number; qj: number } | null {
+  if (!aim || !Number.isFinite(aim.i) || !Number.isFinite(aim.j)) return null;
+  const q = (v: number): number => Math.min(LIMITS.POS_MAX_Q, Math.max(0, Math.round(v * LIMITS.POS_SCALE)));
+  return { qi: q(aim.i), qj: q(aim.j) };
+}
 
 export class NetClient {
   status: NetStatus = 'idle';
@@ -255,6 +263,26 @@ export class NetClient {
       this.pings.set(id, now);
       ws.send(encode({ type: 'ping', clientTimeMs: id }));
     }
+  }
+
+  /**
+   * Send a skill cast (wire v3). `aim` is in tile coordinates, quantized here to 1/32 tile and clamped to what the wire can carry (a pointer
+   * past the map edge must not throw: the server re-validates reach anyway; a non-finite aim is dropped). Returns false when the socket is not open,
+   * so the caller can refuse the cast locally instead of waiting for a `skill_result` that will never come.
+   */
+  sendSkillCast(m: { seq: number; skillId: number; targetId: number; aim: { i: number; j: number } | null }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(
+      encode({
+        type: 'skill_cast',
+        seq: m.seq & 0xffff,
+        skillId: m.skillId,
+        targetId: m.targetId,
+        aim: quantizeAim(m.aim),
+      }),
+    );
+    return true;
   }
 
   /** Where to draw the local character (prediction + decaying correction), or null before the first snapshot. */

@@ -16,11 +16,19 @@ const registerPerIpPerDay = process.env.REGISTER_PER_IP_PER_DAY
 // local tabs start inside each other's AOI
 const spawnSide = process.env.SPAWN_SIDE ? Number(process.env.SPAWN_SIDE) : undefined;
 const centre = ((mapTiles ?? 256) - (spawnSide ?? 0)) / 2;
+// COMBAT=1 turns on server-authoritative combat (D75), MOBS=1 spawns the monsters of the default zones (D74); both are off here by default
+// (`npm run dev` turns them on). Combat with MOBS gives the player something to fight: the mob manager is the combat core's default MobPort.
+const flag = (v: string | undefined): boolean => v === '1' || v === 'true';
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',
   gateway: { corsOrigins },
-  world: { mapTiles, spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined },
+  world: {
+    mapTiles,
+    spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
+    mobs: flag(process.env.MOBS),
+    combat: flag(process.env.COMBAT) ? {} : undefined,
+  },
   auth: { registerPerIpPerDay },
 });
 console.log(`[vgtd/server] listening on ${srv.port} (HTTP auth + WS /ws), tick 20 Hz`);

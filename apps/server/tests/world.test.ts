@@ -371,15 +371,15 @@ describe('World Node: server authority and anti-cheat', () => {
     const any = free >= 0 ? free : skills.findIndex((s) => s.targeting === 'none');
     const n = node();
     const a = join(n);
-    n.receive(a.id, encode({ type: 'skill_cast', seq: 1, skillId: any, targetId: 0 }));
+    n.receive(a.id, encode({ type: 'skill_cast', seq: 1, skillId: any, targetId: 0, aim: null }));
     n.tick();
     expect(a.of('skill_result')[0]).toMatchObject({ seq: 1, skillId: any });
     expect(a.of('skill_result')[0]!.hits).toEqual([]);
-    n.receive(a.id, encode({ type: 'skill_cast', seq: 2, skillId: any, targetId: 0 }));
+    n.receive(a.id, encode({ type: 'skill_cast', seq: 2, skillId: any, targetId: 0, aim: null }));
     n.tick();
     expect(a.of('skill_result')).toHaveLength(2);
     expect(a.of('skill_result')[1]!.reason).not.toBe(0);
-    n.receive(a.id, encode({ type: 'skill_cast', seq: 3, skillId: 60, targetId: 0 }));
+    n.receive(a.id, encode({ type: 'skill_cast', seq: 3, skillId: 60, targetId: 0, aim: null }));
     n.tick();
     expect(a.of('skill_result')[2]!.reason).toBe(1); // unknown skill
   });

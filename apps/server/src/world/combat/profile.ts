@@ -1,8 +1,9 @@
 /**
- * Player combat profile: realm stats (07 §1 via `statsAt`), class element and passive bonuses (D49 data, docs/11).
- * Realm / sub-stage are inputs: progression (worker 35) will feed them; until then every player is Luyện Khí 1.
+ * Player combat profile: integer realm stats (07 §1 via `roundedStatsAt`), class element and passive bonuses (D49 data, docs/11).
+ * Realm / sub-stage are inputs: progression feeds them through `CombatSystem.setRealm` (`onStageChange`, wired in `WorldNode`); a player
+ * starts at Luyện Khí 1 until their profile has loaded.
  */
-import { COMBAT_RULES, PEN_MAX, classOf, effectActive, skillDefinitions, statsAt } from '@vgtd/shared';
+import { COMBAT_RULES, PEN_MAX, classOf, effectActive, roundedStatsAt, skillDefinitions } from '@vgtd/shared';
 import type { PathId, SkillDefinitions } from '@vgtd/shared';
 import type { CombatProfile } from './types.js';
 
@@ -35,7 +36,7 @@ export function makeProfile(
     realm,
     substage,
     element: classOf(path, defs).element as CombatProfile['element'],
-    stats: statsAt(realm, substage),
+    stats: roundedStatsAt(realm, substage), // integers: the server stores and sends whole HP / MP, and hp must never exceed hpMax
     critChance: Math.min(COMBAT_RULES.CRIT_CHANCE_CAP, COMBAT_RULES.BASE_CRIT_CHANCE + bonus.crit),
     pen: Math.min(PEN_MAX, bonus.pen),
   };
