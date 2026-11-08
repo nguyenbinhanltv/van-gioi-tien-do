@@ -29,7 +29,7 @@ const bot = (name: string): Bot => new Bot({ host: '127.0.0.1', port: srv.port, 
 beforeAll(async () => {
   srv = await startServer({
     port: 0,
-    auth: { scrypt: FAST, registerPerIpPerDay: 0 },
+    auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
     gateway: { helloTimeoutMs: 300 },
     world: { mapTiles: 128, spawn: { i0: 40, j0: 40, side: 30 } },
   });

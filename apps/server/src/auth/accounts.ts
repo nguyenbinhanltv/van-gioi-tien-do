@@ -68,6 +68,8 @@ export interface AuthOptions {
   /** 0 disables the limit (load tests); default 3 per IP per day */
   registerPerIpPerDay?: number;
   maxPendingHashes?: number;
+  /** failed (or still unverified) logins per IP per 15 min before 429; default 10. Raise for load tests behind one IP. */
+  ipFailLimit?: number;
 }
 
 export interface LoginResult {
@@ -84,6 +86,7 @@ export class AuthService {
   private readonly scryptParams: ScryptParams;
   private readonly registerLimit: number;
   private readonly maxPending: number;
+  private readonly ipFailLimit: number;
   private pending = 0;
   private readonly ipFails = new Map<string, number[]>();
   private readonly ipRegs = new Map<string, number[]>();
@@ -97,6 +100,7 @@ export class AuthService {
     this.scryptParams = opts.scrypt ?? DEFAULT_SCRYPT;
     this.registerLimit = opts.registerPerIpPerDay ?? AUTH_CONFIG.REGISTER_PER_IP_PER_DAY;
     this.maxPending = opts.maxPendingHashes ?? AUTH_CONFIG.MAX_PENDING_HASHES;
+    this.ipFailLimit = opts.ipFailLimit ?? AUTH_CONFIG.IP_FAIL_LIMIT;
     this.dummyHash = hashPassword('dummy-password-for-unknown-users', this.scryptParams);
   }
 
@@ -171,7 +175,7 @@ export class AuthService {
     const t = this.now();
     const W = AUTH_CONFIG.IP_FAIL_WINDOW_MS;
     const fails = this.recent(this.ipFails, ip, W);
-    if (fails.length >= AUTH_CONFIG.IP_FAIL_LIMIT)
+    if (fails.length >= this.ipFailLimit)
       throw new AuthError(429, 'ip_limited', 'too many failed attempts', Math.ceil((W - (t - fails[0]!)) / 1000));
     const username = typeof usernameRaw === 'string' ? usernameRaw.toLowerCase() : '';
     if (typeof password !== 'string' || password.length > 1024) throw new AuthError(400, 'bad_request', 'bad request');

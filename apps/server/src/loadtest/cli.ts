@@ -84,7 +84,8 @@ const skills = compileSkills();
 const spawn = { i0: MAP / 2 - area / 2, j0: MAP / 2 - area / 2, side: area };
 const srv = await startServer({
   port: 0,
-  auth: { registerPerIpPerDay: 0 }, // the per-IP registration limit would block a 100-bot run from one host
+  // the per-IP registration / login limits would block a many-bot run from one host
+  auth: { registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
   world: { seed, mapTiles: MAP, spawn, skills },
 });
 log(`server on :${srv.port}; connecting ${bots + speedhackers + teleporters} bots...`);
