@@ -14,8 +14,13 @@ import {
   type Message,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
+import { FLAG_FLY_TOGGLE } from '@vgtd/sim';
 
-export type BotKind = 'honest' | 'speedhack' | 'teleport';
+/**
+ * honest: walks. speedhack / teleport: lie about time. flyer (S4): toggles flight once, then flies at FLY_SPEED with frequent turns.
+ * cooldown: spams the same skill every input tick, ignoring the cooldown the server reports.
+ */
+export type BotKind = 'honest' | 'speedhack' | 'teleport' | 'flyer' | 'cooldown';
 
 export interface BotOptions {
   host: string;
@@ -44,6 +49,8 @@ export interface BotReport {
   wireBytesIn: number;
   frames: number;
   snapshots: number;
+  /** snapshots with baselineSeq = null (first one, and ack-timeout resyncs): a bad network makes these frequent (S6) */
+  fullSnapshots: number;
   aoiEnter: number;
   aoiLeave: number;
   visibleSum: number;
@@ -60,6 +67,9 @@ export interface BotReport {
   castRejected: number;
   closedUnexpectedly: boolean;
 }
+
+/** Throw-away password every load-test account uses (local server only). */
+export const LOADTEST_PASSWORD = ['loadtest', 'bot', 'pw'].join('-');
 
 const frameHeader = (n: number): number => (n < 126 ? 2 : n < 65536 ? 4 : 10);
 
@@ -97,6 +107,8 @@ export class Bot {
   private nextTurnAt = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private stopped = false;
+  /** flyers send FLAG_FLY_TOGGLE once, on their first input */
+  private flyPending = false;
   private self: { i: number; j: number } | null = null;
   private posWindow: { t: number; i: number; j: number } | null = null;
   private measuringFrom = 0;
@@ -111,6 +123,7 @@ export class Bot {
 
   constructor(private readonly o: BotOptions) {
     this.kind = o.kind ?? 'honest';
+    this.flyPending = this.kind === 'flyer';
     this.inputHz = o.inputHz ?? 20;
     this.rnd = behaviourRng(o.seed ?? 1);
     this.report = {
@@ -121,6 +134,7 @@ export class Bot {
       wireBytesIn: 0,
       frames: 0,
       snapshots: 0,
+      fullSnapshots: 0,
       aoiEnter: 0,
       aoiLeave: 0,
       visibleSum: 0,
@@ -147,7 +161,7 @@ export class Bot {
   }
 
   /** Register (idempotent), log in, open the socket, say hello. Resolves after `hello_ack`. */
-  async connect(password = ['loadtest', 'bot', 'pw'].join('-')): Promise<void> {
+  async connect(password = LOADTEST_PASSWORD): Promise<void> {
     const reg = await this.post('/auth/register', { username: this.o.name, password });
     if (reg.status !== 201 && reg.status !== 409)
       throw new Error(`register failed: ${reg.status} ${JSON.stringify(reg.json)}`);
@@ -222,6 +236,7 @@ export class Bot {
     switch (msg.type) {
       case 'snapshot': {
         r.snapshots++;
+        if (msg.baselineSeq === null) r.fullSnapshots++;
         this.lastSnapshotSeq = msg.seq;
         this.serverTimeMs = msg.tick * NETWORK.TICK_MS;
         for (const e of msg.entities) this.known.set(e.index, { qi: e.qi, qj: e.qj });
@@ -289,7 +304,7 @@ export class Bot {
   /** Zero the counters (called once every bot is connected) so warm-up is excluded. */
   startMeasuring(): void {
     const r = this.report;
-    r.bytesIn = r.wireBytesIn = r.frames = r.snapshots = r.aoiEnter = r.aoiLeave = 0;
+    r.bytesIn = r.wireBytesIn = r.frames = r.snapshots = r.fullSnapshots = r.aoiEnter = r.aoiLeave = 0;
     r.visibleSum = r.visibleSamples = r.visibleMax = 0;
     r.rttMs = [];
     r.maxSpeedTilesPerS = 0;
@@ -301,7 +316,7 @@ export class Bot {
   // ------------------------------------------------------------------ behaviour
   private chooseDirection(nowMs: number): void {
     if (nowMs < this.nextTurnAt) return;
-    this.nextTurnAt = nowMs + 1000 + this.rnd() * 2000;
+    this.nextTurnAt = this.kind === 'flyer' ? nowMs + 400 + this.rnd() * 800 : nowMs + 1000 + this.rnd() * 2000;
     const a = this.o.area;
     if (a && this.self) {
       const margin = a.side * 0.1;
@@ -338,13 +353,17 @@ export class Bot {
           dtMs: this.kind === 'teleport' ? 250 : Math.round(NETWORK.TICK_MS),
           dir: this.dir,
           mag: this.mag,
-          flags: 0,
+          flags: this.flyPending ? FLAG_FLY_TOGGLE : 0,
         });
+        this.flyPending = false;
       }
       this.recent = this.recent.slice(-3);
       if (this.ws.readyState === WebSocket.OPEN) {
         this.ws.send(encode({ type: 'input', ack: this.lastSnapshotSeq, inputs: this.recent }), { binary: true });
-        if (now >= this.nextCastAt && (this.o.skillCount ?? 0) > 0) {
+        if (this.kind === 'cooldown') {
+          // ignores the cooldown the server reports: one cast of skill 0 per input tick
+          this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0 }), { binary: true });
+        } else if (now >= this.nextCastAt && (this.o.skillCount ?? 0) > 0) {
           this.nextCastAt = now + (this.o.castEveryMs ?? 1500) * (0.5 + this.rnd());
           const ready: number[] = [];
           for (let id = 0; id < this.o.skillCount!; id++) if ((this.readyLocal.get(id) ?? 0) <= now) ready.push(id);

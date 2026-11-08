@@ -4,7 +4,9 @@
  * metrics + bot reports into the P2 exit-criteria report.
  */
 import { NETWORK } from '@vgtd/shared';
-import { Bot, type BotKind, type BotReport } from './bot.js';
+import { Bot, LOADTEST_PASSWORD, type BotKind, type BotReport } from './bot.js';
+import { startImpairProxy, type ImpairProxy, type Impairment } from './impair.js';
+import { PredictBot, type PredictBotReport } from './predict-bot.js';
 import { dist, type Dist } from './stats.js';
 
 export interface BotRunConfig {
@@ -19,27 +21,44 @@ export interface BotRunConfig {
   speedFactor: number;
   prefix: string;
   seed: number;
+  /** extra bot kinds (docs/28 S4 / cooldown guard); all default to 0 */
+  flyers?: number;
+  cooldowners?: number;
+  /** bots that run the real client netcode (prediction / reconciliation) and report their replay error */
+  predictors?: number;
+  /** route every bot through a TCP impairment proxy (docs/28 S6) */
+  impair?: Impairment;
+  /** server map size, needed by the predicting bots */
+  mapTiles?: number;
 }
 
 export interface BotFleet {
   bots: Bot[];
+  predictors: PredictBot[];
+  proxy: ImpairProxy | null;
   startMeasuring(): void;
   stop(): BotReport[];
+  predictorReports(): PredictBotReport[];
 }
 
 /** Connect every bot (register + login + hello), staggering HTTP work, then start their input loops. */
 export async function connectFleet(cfg: BotRunConfig, onProgress?: (n: number) => void): Promise<BotFleet> {
+  const proxy = cfg.impair ? await startImpairProxy(cfg.host, cfg.port, cfg.impair, cfg.seed) : null;
+  const port = proxy?.port ?? cfg.port;
   const kinds: BotKind[] = [
     ...Array<BotKind>(cfg.bots).fill('honest'),
     ...Array<BotKind>(cfg.speedhackers).fill('speedhack'),
     ...Array<BotKind>(cfg.teleporters).fill('teleport'),
+    ...Array<BotKind>(cfg.flyers ?? 0).fill('flyer'),
+    ...Array<BotKind>(cfg.cooldowners ?? 0).fill('cooldown'),
   ];
+  const letter: Record<BotKind, string> = { honest: 'b', speedhack: 's', teleport: 't', flyer: 'f', cooldown: 'c' };
   const bots = kinds.map(
     (kind, k) =>
       new Bot({
         host: cfg.host,
-        port: cfg.port,
-        name: `${cfg.prefix}${kind === 'honest' ? 'b' : kind === 'speedhack' ? 's' : 't'}${k}`,
+        port,
+        name: `${cfg.prefix}${letter[kind]}${k}`,
         kind,
         inputHz: cfg.inputHz,
         area: cfg.area,
@@ -58,13 +77,45 @@ export async function connectFleet(cfg: BotRunConfig, onProgress?: (n: number) =
       }),
     );
   }
+  const predictors = Array.from(
+    { length: cfg.predictors ?? 0 },
+    (_, k) =>
+      new PredictBot({
+        host: cfg.host,
+        port,
+        name: `${cfg.prefix}p${k}`,
+        password: LOADTEST_PASSWORD,
+        mapTiles: cfg.mapTiles ?? 256,
+        area: cfg.area,
+        seed: cfg.seed * 7000 + k,
+      }),
+  );
+  for (let k = 0; k < predictors.length; k += batch) {
+    await Promise.all(
+      predictors.slice(k, k + batch).map(async (p) => {
+        await p.connect();
+        onProgress?.(++done);
+      }),
+    );
+  }
   for (const b of bots) b.startInputs();
+  for (const p of predictors) p.start();
   return {
     bots,
-    startMeasuring: () => bots.forEach((b) => b.startMeasuring()),
+    predictors,
+    proxy,
+    startMeasuring: () => {
+      bots.forEach((b) => b.startMeasuring());
+      predictors.forEach((p) => p.startMeasuring());
+    },
     stop: () => {
       for (const b of bots) b.stop();
       return bots.map((b) => b.report);
+    },
+    predictorReports: () => {
+      const rs = predictors.map((p) => p.report());
+      for (const p of predictors) p.stop();
+      return rs;
     },
   };
 }

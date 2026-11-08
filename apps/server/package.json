@@ -11,7 +11,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "dev": "node scripts/dev.mjs",
-    "loadtest": "node scripts/loadtest.mjs"
+    "loadtest": "node scripts/loadtest.mjs",
+    "p2exit": "node scripts/p2-exit.mjs"
   },
   "dependencies": {
     "@vgtd/protocol": "*",
