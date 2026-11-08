@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 23:59:29 UTC",
+  "utcEnd": "2026-11-08 00:00:13 UTC",
+  "prompt": "EDIT TARGET image1 SE RUN16-cell4x4 master-guide. Repose each correctly-sized master into smooth fast RUN toward SE lower-right, fixed3quarter camera,24fps. Reference2 locked256px master: SAME adult face/eyes/nose/lips/jaw/attachedhaircap/bun/jadepin and SAME head/body dimensions. Do not enlarge, squash, or shrink head/body. Strong forward lean at hips10-18degrees, alternating running strides with visible boots, clear takeoff/airborne knee-tuck/contact/down/recovery;16uniqueinbetweens: rightcontact0,down1,toeoff3,flighttuck5,leftextend7,leftcontact8,down9,toeoff11,flighttuck13,rightextend15 wrappingto0. Follow leading-leg colored footprints/corner alternating phases. Natural brightivory/jade dress narrowgold inkhem: hem andsleeves stream backward, secondaryhair/sash/whiskfibres lag andsettle; no pasted staticstanding torso. Keep RIGHT hand brownshaft ONEbronze collar whitewhisk natural grip, leftpalm balancing; no changeoutfit/weapon. IMPORTANT lean whole head atsamevolume without foreshortening the fixedface; masterhead remainsunscaled, no hugeface. Root staysincell; flight allowed highfeet andkneedown butbun/whisk/boots remainfullyinsidesourcecell, never cutatborders. Atleast4logicalpx margin aroundextremities. Usefullcell fordynamicpose, not miniaturefigure. ConstantSE orientation, notfront/side. Maintain4x4mapping. RemoveALL grid/footghost/rulers/markers/text; pureuniformmagenta#ff00ff background,no shadows/platform/FX. Originaldesign.",
+  "references": ["../templates/run.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/run.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "00ad9227bb6a43a09f5379ba16aecafbca1bb01fee2313c71ea2f8031221fe65",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/run.master-guide.png",
+      "sha256": "c4802e40bd33bce37d2d2d02bd61e22232d08386f6303cf087f3c934bd58bc52"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

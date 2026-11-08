@@ -1,0 +1,27 @@
+{
+  "clip": "sword_fly",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:08:38 UTC",
+  "utcEnd": "2026-11-08 00:09:02 UTC",
+  "prompt": "EDITTARGET SE sword_fly INPUThead-guide4COLUMNS3ROWS12cells landscape4:3. Completeunscaledheadstencils into12fullbody gentleLEVITATIONloop, no sword/platform drawn. Samefixedadultface/headvolume/maincapbunpin/bodylengths/costume fromreference2; ivoryjade narrowgoldinkhem, right handnaturallyholdsplainbrownwhisk ONEbronze collarwhitehorsehair, leftopenpalm balances. ConstantSE3quarter. Wholebodyfloating: relaxedslightlybentknees andpointedboots hover~16logicalpx ABOVEground232; bendknees toshortenpose, DO NOT shrinkbody ormovebunofftop. Keepbun8px BELOWcelltop, sameheadsize, torsonearcanonicalplacement, freehem/sleeves/sash/horsehair liftgently.12smooth24fpsframes:1..3 rise2px,4..6settle,7..9dip2px,10..11return0. Secondarymotionlag/settle, notstandingstaticclones. Bootsnotplanted; naturalankles/legs,no extra limbs. Entirebun/whisk/bodywithinowncell,>=4pxmargin, noframesplit/crop. Exact4cols3rows12figures, NOT4x4. RemoveALLgrid/borderlines/rulers/text/crosshairs; uniformflatmagenta#ff00ff. NoFX/talisman/energycircle/lotus/flyingboard/shadow. Originaldesign; nofaceorcostumechange.",
+  "references": ["../templates/sword_fly.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/sword_fly.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "41d91a452413a176ac2305cf7ad0d93d00af923cd7213a42491d1f6251c1f3d8",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/sword_fly.head-guide.png",
+      "sha256": "e4a584e5b4e55b70bd10204f2ad43b829eafbce7635ec3c113b9dd00430a2ec0"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

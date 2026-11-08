@@ -1,0 +1,27 @@
+{
+  "clip": "emote",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:11:39 UTC",
+  "utcEnd": "2026-11-08 00:12:02 UTC",
+  "prompt": "EDITTARGET SE emote12headstencils4COLUMNS3ROWS landscape4:3. Complete12FULLBODY friendlyleft-hand greetingwave, exactcanonicaladultjadehealerreference2. Fixedface/headsize/eyesnosemouthjaw/maincapbunpin/ivoryjadenarrowgoldinkhemdress/limblengths unchanged. Headstencilisunscaledanchor, no gianthead. ConstantSE3quarter. RIGHT handalwaysnaturallyholdsplainbrownwhisk ONEbronze collarwhitehorsehair nearshoulder. LEFT handwaves:0readyopenpalmwaist,1..3raise toCHEEKheight,4..7two gentlewristwaves,8..11lowerandsettletoready. Gentlekindexpression sameface, no newface/eyedimensionchange.12smooth24fpsdrawings withleftsleeve/hair/sash/horsehairlag/settle, no staticclones. Bootsremainfixedground232, torso/headscaleunchanged; no jumpleaps. Leftpalm neverabovebun, allbun/hand/whisk/hem/boots insideowncellmargin, neverborderclipped. Exact4cols3rows12figures, not4x4. RemoveALLgrid/borderlines/rulers/text/crosshairs, pureflatmagenta#ff00ff. NoFX/talismans/shadow/platform/extraweapon. Originalapproveddesign.",
+  "references": ["../templates/emote.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/emote.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/emote.head-guide.png",
+      "sha256": "f72fc046a12442934f714e8091a756a497540b637836dac9e3bde6f868dcef11"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

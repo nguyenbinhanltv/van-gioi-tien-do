@@ -1,0 +1,3875 @@
+{
+  "status": "PASS native hard gates;21 measured soft findings explicitly OPEN in first-export backlog. Not a claim that art is flawless.",
+  "projectSha256": "3d4e5aacb411dcb6c8bb8ba5f20fa7582a6754f57d5cde8cae8a8949a62d2623",
+  "counts": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 21,
+    "regression": 0,
+    "info": 276
+  },
+  "labCheckedCells": 115,
+  "labPass": 115,
+  "labFail": 0,
+  "D41ExemptCells": 87,
+  "palette": [
+    {
+      "clip": "idle",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.0984664981892873,
+        "chroma": 1.1341414208622869,
+        "lightness": 1.765583439406726,
+        "axes": [1.765583439406726, 0.9681020878378431, 0.5908088608336337],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1903
+      },
+      "torso": {
+        "distance": 2.6664343052561,
+        "chroma": 1.828924878283304,
+        "lightness": 1.9403364898498872,
+        "axes": [1.9403364898498872, 1.1703737101708547, 1.4054150948899429],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4472
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.2716315823084074,
+        "chroma": 1.3021985144834027,
+        "lightness": 1.8613406659228766,
+        "axes": [1.8613406659228766, 1.0942622815938174, 0.7059114889303569],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1908
+      },
+      "torso": {
+        "distance": 2.451054904416514,
+        "chroma": 1.8284663879942709,
+        "lightness": 1.6322931147436208,
+        "axes": [1.6322931147436208, 1.3828808841858016, 1.1962147767764408],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4535
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 2,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.1505292807377385,
+        "chroma": 1.148891224309033,
+        "lightness": 1.8179178039768649,
+        "axes": [1.8179178039768649, 0.8344916463639293, 0.7896674853652819],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1906
+      },
+      "torso": {
+        "distance": 2.8041466997446687,
+        "chroma": 1.7932377421730523,
+        "lightness": 2.155814721569321,
+        "axes": [2.155814721569321, 1.1486035337765406, 1.3771025822900593],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4421
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 3,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.161543253955497,
+        "chroma": 1.040952784628968,
+        "lightness": 1.8943828913114995,
+        "axes": [1.8943828913114995, 0.8378745633221623, 0.6176964594074491],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1907
+      },
+      "torso": {
+        "distance": 2.828958972239478,
+        "chroma": 1.9026812386753411,
+        "lightness": 2.0935168904518333,
+        "axes": [2.0935168904518333, 1.101522538363172, 1.5514006553708442],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4352
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 4,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3243425846147328,
+        "chroma": 1.3165655321443563,
+        "lightness": 1.9155217697073932,
+        "axes": [1.9155217697073932, 1.0115481273352063, 0.8426833251674021],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1884
+      },
+      "torso": {
+        "distance": 3.240030336618936,
+        "chroma": 2.2258588501606944,
+        "lightness": 2.3544317703794957,
+        "axes": [2.3544317703794957, 1.23571084728023, 1.851341762817623],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4341
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.2437821529166615,
+        "chroma": 1.1716343317628872,
+        "lightness": 1.9135912161122246,
+        "axes": [1.9135912161122246, 0.7608182566165756, 0.891000891000891],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1887
+      },
+      "torso": {
+        "distance": 3.054313201079234,
+        "chroma": 2.013246612896926,
+        "lightness": 2.2968820618277146,
+        "axes": [2.2968820618277146, 1.252864434250304, 1.5759100969698785],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4329
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 6,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.234338151825246,
+        "chroma": 1.327013983892674,
+        "lightness": 1.7975819489678766,
+        "axes": [1.7975819489678766, 0.9938416239055893, 0.8793434710279068],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1876
+      },
+      "torso": {
+        "distance": 3.034133382346364,
+        "chroma": 1.9656798197796657,
+        "lightness": 2.311291463225607,
+        "axes": [2.311291463225607, 1.0820315527396729, 1.6410682108811903],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4301
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 7,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3511669111439404,
+        "chroma": 1.1581458690507405,
+        "lightness": 2.0461388002916236,
+        "axes": [2.0461388002916236, 0.8363734825528841, 0.8011125087537049],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1892
+      },
+      "torso": {
+        "distance": 2.761145526488065,
+        "chroma": 1.828187588670215,
+        "lightness": 2.0692159769045957,
+        "axes": [2.0692159769045957, 1.1275272707897388, 1.4390803010927704],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4488
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 8,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.4761172714336737,
+        "chroma": 1.2318823117174547,
+        "lightness": 2.1479345222724553,
+        "axes": [2.1479345222724553, 0.9738190194736258, 0.7544604345051938],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1915
+      },
+      "torso": {
+        "distance": 2.851416703562565,
+        "chroma": 1.984785967959497,
+        "lightness": 2.047242506091227,
+        "axes": [2.047242506091227, 1.4123826346622401, 1.394471452527253],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4479
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.588936878339615,
+        "chroma": 1.2668398217857948,
+        "lightness": 2.25781111388101,
+        "axes": [2.25781111388101, 0.979751012323054, 0.80310092013035],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1864
+      },
+      "torso": {
+        "distance": 2.8456708640267423,
+        "chroma": 2.1276767783154638,
+        "lightness": 1.8896651008546024,
+        "axes": [1.8896651008546024, 1.5546453123950934, 1.4526136532577525],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4533
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 10,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.6091145533873585,
+        "chroma": 1.2919860886532029,
+        "lightness": 2.2667709852175877,
+        "axes": [2.2667709852175877, 1.0668443130301655, 0.7287463653621856],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1854
+      },
+      "torso": {
+        "distance": 2.7271139702896168,
+        "chroma": 1.9536382182896797,
+        "lightness": 1.9027475710105954,
+        "axes": [1.9027475710105954, 1.4263593349667316, 1.3349911368677083],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4463
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 11,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3279310286514034,
+        "chroma": 1.163885148884768,
+        "lightness": 2.0160938059434295,
+        "axes": [2.0160938059434295, 0.8843363904266158, 0.7566886997714071],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1900
+      },
+      "torso": {
+        "distance": 2.7520998066848716,
+        "chroma": 1.9528242783118828,
+        "lightness": 1.9392087778242395,
+        "axes": [1.9392087778242395, 1.39871507889815, 1.3627614574925682],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4471
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 12,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.542888493216525,
+        "chroma": 1.3090782506186343,
+        "lightness": 2.1800449588690287,
+        "axes": [2.1800449588690287, 0.9773960536477759, 0.87085177875256],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1866
+      },
+      "torso": {
+        "distance": 2.904446157138756,
+        "chroma": 2.1318128304757757,
+        "lightness": 1.9726078007391497,
+        "axes": [1.9726078007391497, 1.6488025700934568, 1.3513238061376525],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4494
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.386335918476974,
+        "chroma": 1.2694706944991803,
+        "lightness": 2.0206541692286466,
+        "axes": [2.0206541692286466, 1.055618290333948, 0.7051424461090565],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1874
+      },
+      "torso": {
+        "distance": 2.821406266519642,
+        "chroma": 2.046304320089462,
+        "lightness": 1.942413949275362,
+        "axes": [1.942413949275362, 1.611836827122153, 1.2606916407867497],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4480
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 14,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3393026865502704,
+        "chroma": 1.1746974940866461,
+        "lightness": 2.022973765694421,
+        "axes": [2.022973765694421, 0.9424918424008503, 0.7011585623960509],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1884
+      },
+      "torso": {
+        "distance": 2.956440750972785,
+        "chroma": 2.0138418917508867,
+        "lightness": 2.1644820971867005,
+        "axes": [2.1644820971867005, 1.4220197973812834, 1.4259799650859346],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4454
+      }
+    },
+    {
+      "clip": "idle",
+      "index": 15,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3947385832189414,
+        "chroma": 1.0878309399725905,
+        "lightness": 2.1334002737404463,
+        "axes": [2.1334002737404463, 0.7858272965434888, 0.752231090801757],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1873
+      },
+      "torso": {
+        "distance": 2.5875383391241757,
+        "chroma": 1.8405223517424774,
+        "lightness": 1.8187446574969888,
+        "axes": [1.8187446574969888, 1.49365152795586, 1.0754197507479506],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4476
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.183781772931876,
+        "chroma": 2.5618006269541342,
+        "lightness": 1.8904084017456766,
+        "axes": [1.8904084017456766, 2.0603785697701738, 1.5223871391648083],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1909
+      },
+      "torso": {
+        "distance": 3.1417932905049217,
+        "chroma": 2.713598845511084,
+        "lightness": 1.5834286803966435,
+        "axes": [1.5834286803966435, 1.812360115821592, 2.0196458860251303],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4332
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.85148883112444,
+        "chroma": 2.183283361935864,
+        "lightness": 1.8341925513755255,
+        "axes": [1.8341925513755255, 1.811413681037037, 1.2188136505052032],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1923
+      },
+      "torso": {
+        "distance": 3.2290085701922377,
+        "chroma": 2.7668389491919094,
+        "lightness": 1.6646617000488515,
+        "axes": [1.6646617000488515, 1.955867835043151, 1.9570331582804121],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4272
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 2,
+      "method": "landmarks",
+      "head": {
+        "distance": 3.028853446541077,
+        "chroma": 2.4996555822031366,
+        "lightness": 1.7104605143014726,
+        "axes": [1.7104605143014726, 1.960283626593562, 1.5509887597750327],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2318
+      },
+      "torso": {
+        "distance": 3.44069220403441,
+        "chroma": 2.5284336085296446,
+        "lightness": 2.333535157258387,
+        "axes": [2.333535157258387, 1.7753614376349127, 1.8002967195718422],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3642
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 3,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.5470346194769826,
+        "chroma": 2.0151552463294036,
+        "lightness": 1.5577338302820987,
+        "axes": [1.5577338302820987, 1.56708845546642, 1.2669192711269293],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2303
+      },
+      "torso": {
+        "distance": 3.4415710748596955,
+        "chroma": 2.361831044467904,
+        "lightness": 2.5032310282310277,
+        "axes": [2.5032310282310277, 1.83851148851149, 1.4826062826062807],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3640
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 4,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.9463124283651903,
+        "chroma": 2.3406279182881127,
+        "lightness": 1.7894741891598887,
+        "axes": [1.7894741891598887, 1.9886384662258358, 1.2344456660852672],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1909
+      },
+      "torso": {
+        "distance": 3.381188554636123,
+        "chroma": 2.6892789582587167,
+        "lightness": 2.0494425404653884,
+        "axes": [2.0494425404653884, 1.8965423321670594, 1.9066589882911469],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4399
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.0379046128765506,
+        "chroma": 2.038456411765295,
+        "lightness": 2.252456413400619,
+        "axes": [2.252456413400619, 1.6937279203526905, 1.1342796279951395],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1864
+      },
+      "torso": {
+        "distance": 3.171857072939419,
+        "chroma": 2.4044012570088116,
+        "lightness": 2.0687029478516887,
+        "axes": [2.0687029478516887, 1.6911762193771809, 1.7091133372947096],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4189
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 6,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.1720314902160287,
+        "chroma": 2.545903637163138,
+        "lightness": 1.8921306628247494,
+        "axes": [1.8921306628247494, 2.1221091798396245, 1.4065126940631891],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1945
+      },
+      "torso": {
+        "distance": 3.2667852187487103,
+        "chroma": 2.8552120757578665,
+        "lightness": 1.5873404385580032,
+        "axes": [1.5873404385580032, 1.909356250573963, 2.1228741615902917],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4261
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 7,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.810798535755223,
+        "chroma": 1.8460520738452955,
+        "lightness": 2.119594336012245,
+        "axes": [2.119594336012245, 1.5637022891820345, 0.9811948889774047],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1876
+      },
+      "torso": {
+        "distance": 3.492745679008869,
+        "chroma": 2.4252510213380236,
+        "lightness": 2.513449792960663,
+        "axes": [2.513449792960663, 1.9329697204968945, 1.4647424948240166],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4025
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 8,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.725387390536732,
+        "chroma": 2.121231539463721,
+        "lightness": 1.711173043406478,
+        "axes": [1.711173043406478, 1.631579773485926, 1.3555702441287367],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2211
+      },
+      "torso": {
+        "distance": 3.52914233772262,
+        "chroma": 2.4550139292616726,
+        "lightness": 2.5353012142618168,
+        "axes": [2.5353012142618168, 1.9920597858569362, 1.4348488430634263],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3579
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.8686053397042266,
+        "chroma": 2.0794739026863303,
+        "lightness": 1.9760275511809255,
+        "axes": [1.9760275511809255, 1.639049673668429, 1.2797374258811585],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1956
+      },
+      "torso": {
+        "distance": 3.001779316514356,
+        "chroma": 2.5511315717898806,
+        "lightness": 1.581899734012965,
+        "axes": [1.581899734012965, 1.5596111519868117, 2.018882203394115],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4299
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 10,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.9146016248658246,
+        "chroma": 2.213074869603154,
+        "lightness": 1.8966291817858043,
+        "axes": [1.8966291817858043, 1.6270748040242482, 1.5001093162094794],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2187
+      },
+      "torso": {
+        "distance": 3.336203960605443,
+        "chroma": 2.525825929704005,
+        "lightness": 2.1795550554171235,
+        "axes": [2.1795550554171235, 1.8615186703462558, 1.7072038153417448],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3625
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 11,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.5761803932713754,
+        "chroma": 1.8934081196223231,
+        "lightness": 1.7469147406854515,
+        "axes": [1.7469147406854515, 1.4860593703152893, 1.1732952975913045],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2311
+      },
+      "torso": {
+        "distance": 3.4611153688019423,
+        "chroma": 2.6221028283384227,
+        "lightness": 2.25918046064865,
+        "axes": [2.25918046064865, 1.968871591220694, 1.7317528402357099],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3678
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 12,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.6896742950542323,
+        "chroma": 2.301453296174721,
+        "lightness": 1.3919987568248726,
+        "axes": [1.3919987568248726, 1.8920764552703373, 1.3102419478421248],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1943
+      },
+      "torso": {
+        "distance": 2.8559274235388945,
+        "chroma": 2.4870187543078224,
+        "lightness": 1.403944145699064,
+        "axes": [1.403944145699064, 1.7061246474915364, 1.809530594242804],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4358
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.273970451016485,
+        "chroma": 2.2737228093674995,
+        "lightness": 2.355645792620582,
+        "axes": [2.355645792620582, 1.921552820712484, 1.2155040810502988],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1887
+      },
+      "torso": {
+        "distance": 3.19353240483927,
+        "chroma": 2.6196409054019165,
+        "lightness": 1.8265078011066689,
+        "axes": [1.8265078011066689, 1.9366858946850602, 1.7640199031141628],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4154
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 14,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.836343574295111,
+        "chroma": 2.235723876450511,
+        "lightness": 1.7453892459031208,
+        "axes": [1.7453892459031208, 1.9105764054376606, 1.1611025151621233],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1946
+      },
+      "torso": {
+        "distance": 2.9128854283458754,
+        "chroma": 2.477196880003791,
+        "lightness": 1.5324480860274576,
+        "axes": [1.5324480860274576, 1.6155221274762712, 1.8779224259630802],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4399
+      }
+    },
+    {
+      "clip": "walk",
+      "index": 15,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.9094186601879226,
+        "chroma": 1.9622708298975715,
+        "lightness": 2.148071258218121,
+        "axes": [2.148071258218121, 1.6359297133662933, 1.0836239120618287],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1926
+      },
+      "torso": {
+        "distance": 2.7385293756656806,
+        "chroma": 2.346647048080666,
+        "lightness": 1.411662414714708,
+        "axes": [1.411662414714708, 1.5752448771366474, 1.7393550371676427],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4414
+      }
+    },
+    {
+      "clip": "run",
+      "index": 0,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.158315560469216,
+        "chroma": 3.626100807025558,
+        "lightness": 2.035431462302036,
+        "axes": [2.035431462302036, 3.4222625545587637, 1.1986350864113442],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2393
+      },
+      "torso": {
+        "distance": 6.103201331269621,
+        "chroma": 3.8639391795129354,
+        "lightness": 4.724303176875525,
+        "axes": [4.724303176875525, 3.2022381869648737, 2.162335907512756],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3732
+      }
+    },
+    {
+      "clip": "run",
+      "index": 1,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.2675036163928555,
+        "chroma": 3.8136879891991495,
+        "lightness": 1.9150381293760843,
+        "axes": [1.9150381293760843, 3.544458697342581, 1.4074901853279056],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2485
+      },
+      "torso": {
+        "distance": 6.693251055387267,
+        "chroma": 4.9147462952504934,
+        "lightness": 4.543663559702051,
+        "axes": [4.543663559702051, 4.31383229618996, 2.354905957151348],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3741
+      }
+    },
+    {
+      "clip": "run",
+      "index": 2,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.261265466845657,
+        "chroma": 3.8237320222160465,
+        "lightness": 1.8808128033408662,
+        "axes": [1.8808128033408662, 3.5208759279321815, 1.4914286029938257],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2482
+      },
+      "torso": {
+        "distance": 5.790858146821782,
+        "chroma": 2.9931175272582076,
+        "lightness": 4.957346623409737,
+        "axes": [4.957346623409737, 2.492426955696483, 1.6572749930225374],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3866
+      }
+    },
+    {
+      "clip": "run",
+      "index": 3,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.324230175153768,
+        "chroma": 3.9170204514034204,
+        "lightness": 1.8319163165924721,
+        "axes": [1.8319163165924721, 3.617146320563463, 1.503097372876042],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2460
+      },
+      "torso": {
+        "distance": 5.2838189965262305,
+        "chroma": 3.6424609390127447,
+        "lightness": 3.827691405510357,
+        "axes": [3.827691405510357, 3.191580530913508, 1.755373295606224],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3778
+      }
+    },
+    {
+      "clip": "run",
+      "index": 4,
+      "method": "landmarks",
+      "head": {
+        "distance": 5.051291633532047,
+        "chroma": 4.651415649222474,
+        "lightness": 1.9697410045889605,
+        "axes": [1.9697410045889605, 4.09034392403939, 2.2146679491304737],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2229
+      },
+      "torso": {
+        "distance": 6.051824375338844,
+        "chroma": 3.4968137454025556,
+        "lightness": 4.9393189712660925,
+        "axes": [4.9393189712660925, 2.8894034655532854, 1.9695314121092145],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3631
+      }
+    },
+    {
+      "clip": "run",
+      "index": 5,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.397767704648769,
+        "chroma": 3.991379449896101,
+        "lightness": 1.8464156820712923,
+        "axes": [1.8464156820712923, 3.742764514931518, 1.3866591862539037],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2456
+      },
+      "torso": {
+        "distance": 3.7986347810145857,
+        "chroma": 2.907561287410022,
+        "lightness": 2.444527267078097,
+        "axes": [2.444527267078097, 2.5247408851845057, 1.4420804772006246],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3787
+      }
+    },
+    {
+      "clip": "run",
+      "index": 6,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.226689946570392,
+        "chroma": 3.886393681436852,
+        "lightness": 1.6615811919153822,
+        "axes": [1.6615811919153822, 3.5078619567051423, 1.6730093663255616],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2590
+      },
+      "torso": {
+        "distance": 7.040854226744522,
+        "chroma": 4.093736322056902,
+        "lightness": 5.728433570160191,
+        "axes": [5.728433570160191, 3.5183470938866623, 2.092823643183355],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3614
+      }
+    },
+    {
+      "clip": "run",
+      "index": 7,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.1645126676865845,
+        "chroma": 3.7174476209034615,
+        "lightness": 1.8771651352934349,
+        "axes": [1.8771651352934349, 3.3167898195481786, 1.6787859026994385],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2452
+      },
+      "torso": {
+        "distance": 6.544210252396652,
+        "chroma": 4.545467061267754,
+        "lightness": 4.708016251299833,
+        "axes": [4.708016251299833, 3.9280412235636093, 2.287304735065929],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3685
+      }
+    },
+    {
+      "clip": "run",
+      "index": 8,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.282274938684766,
+        "chroma": 3.8089879155927844,
+        "lightness": 1.9569082015658648,
+        "axes": [1.9569082015658648, 3.3985243078005287, 1.7200062413900723],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2485
+      },
+      "torso": {
+        "distance": 5.795985903191606,
+        "chroma": 4.12321925697683,
+        "lightness": 4.073391160800943,
+        "axes": [4.073391160800943, 3.6197599958626427, 1.9744048757681485],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3741
+      }
+    },
+    {
+      "clip": "run",
+      "index": 9,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.225720908544271,
+        "chroma": 3.7985939263629356,
+        "lightness": 1.8513242232269418,
+        "axes": [1.8513242232269418, 3.464409915445596, 1.5579408702398236],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2483
+      },
+      "torso": {
+        "distance": 6.77446964594972,
+        "chroma": 4.233294606345606,
+        "lightness": 5.288918203165874,
+        "axes": [5.288918203165874, 3.7801994819305036, 1.9054855289209476],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3755
+      }
+    },
+    {
+      "clip": "run",
+      "index": 10,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.354142672135203,
+        "chroma": 3.949487583755034,
+        "lightness": 1.8330592557452983,
+        "axes": [1.8330592557452983, 3.511705930629168, 1.8073111605418435],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2509
+      },
+      "torso": {
+        "distance": 5.852264783702011,
+        "chroma": 4.117425364134361,
+        "lightness": 4.158823327498028,
+        "axes": [4.158823327498028, 3.7648769124672725, 1.6670013386880864],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3652
+      }
+    },
+    {
+      "clip": "run",
+      "index": 11,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.245443137456763,
+        "chroma": 3.9390968456494098,
+        "lightness": 1.5834467070203526,
+        "axes": [1.5834467070203526, 3.4607343008333213, 1.8814361691114663],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2566
+      },
+      "torso": {
+        "distance": 4.097950347086587,
+        "chroma": 2.593684674187514,
+        "lightness": 3.1726955192819695,
+        "axes": [3.1726955192819695, 2.324222933168789, 1.1511680789734666],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3823
+      }
+    },
+    {
+      "clip": "run",
+      "index": 12,
+      "method": "landmarks",
+      "head": {
+        "distance": 3.9927686255656916,
+        "chroma": 3.6166451268322315,
+        "lightness": 1.6917681058178218,
+        "axes": [1.6917681058178218, 3.3003924452072853, 1.479030655888512],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2311
+      },
+      "torso": {
+        "distance": 4.277904933120949,
+        "chroma": 2.297250111570689,
+        "lightness": 3.6087549849926095,
+        "axes": [3.6087549849926095, 1.9516479714499506, 1.2117872216882117],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3737
+      }
+    },
+    {
+      "clip": "run",
+      "index": 13,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.026026575316461,
+        "chroma": 3.5451534261834867,
+        "lightness": 1.9080820658383324,
+        "axes": [1.9080820658383324, 3.3108341813053404, 1.2674738021279628],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2304
+      },
+      "torso": {
+        "distance": 4.332271802664998,
+        "chroma": 3.002306146368856,
+        "lightness": 3.1232573982369773,
+        "axes": [3.1232573982369773, 2.7078361434473592, 1.2967133903698016],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3673
+      }
+    },
+    {
+      "clip": "run",
+      "index": 14,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.364120911240573,
+        "chroma": 3.9671208580160986,
+        "lightness": 1.8186542898035527,
+        "axes": [1.8186542898035527, 3.5886646003020304, 1.6910157564746264],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2411
+      },
+      "torso": {
+        "distance": 6.9709504025579605,
+        "chroma": 4.693120096439684,
+        "lightness": 5.154490593193177,
+        "axes": [5.154490593193177, 4.04353731703925, 2.3822640922695917],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3638
+      }
+    },
+    {
+      "clip": "run",
+      "index": 15,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.054866892575252,
+        "chroma": 3.665101012996593,
+        "lightness": 1.7346411966266175,
+        "axes": [1.7346411966266175, 3.3669492402633217, 1.4479703895311176],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2409
+      },
+      "torso": {
+        "distance": 6.764608425615572,
+        "chroma": 4.328431868081102,
+        "lightness": 5.198519473397126,
+        "axes": [5.198519473397126, 3.598087580958708, 2.406052409315053],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3678
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.810568309429203,
+        "chroma": 2.488220829866223,
+        "lightness": 1.3069243756956925,
+        "axes": [1.3069243756956925, 2.4116077729943033, 0.6126914781630417],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1801
+      },
+      "torso": {
+        "distance": 2.6135974093312178,
+        "chroma": 1.5735625759942704,
+        "lightness": 2.0868138962286813,
+        "axes": [2.0868138962286813, 0.9593329630074469, 1.2473088818159987],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4163
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 1,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.751303112175941,
+        "chroma": 4.304265469993904,
+        "lightness": 2.0120089531587406,
+        "axes": [2.0120089531587406, 3.9030493414190874, 1.814636898839511],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2284
+      },
+      "torso": {
+        "distance": 5.628008004524385,
+        "chroma": 3.340539879971062,
+        "lightness": 4.529378258581798,
+        "axes": [4.529378258581798, 1.867014467014466, 2.7701017435530715],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3955
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 2,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.204316275679651,
+        "chroma": 3.848540677849028,
+        "lightness": 1.6926340410396326,
+        "axes": [1.6926340410396326, 3.14105233276975, 2.2237480954146687],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2267
+      },
+      "torso": {
+        "distance": 6.155037287738663,
+        "chroma": 4.178155188779627,
+        "lightness": 4.519679549694558,
+        "axes": [4.519679549694558, 1.7673835622810112, 3.785939265929262],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3998
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 3,
+      "method": "landmarks",
+      "head": {
+        "distance": 3.5029595720900994,
+        "chroma": 2.4076794246555404,
+        "lightness": 2.544367416822503,
+        "axes": [2.544367416822503, 2.0997924366002345, 1.178045811972559],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2605
+      },
+      "torso": {
+        "distance": 5.7302006717623755,
+        "chroma": 1.9723594231728743,
+        "lightness": 5.380055580055577,
+        "axes": [5.380055580055577, 1.250640360640359, 1.5251558551558546],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3700
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 4,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.3675255801742567,
+        "chroma": 1.82535685796414,
+        "lightness": 1.5077299870542915,
+        "axes": [1.5077299870542915, 1.676076087046951, 0.7229775994773966],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2369
+      },
+      "torso": {
+        "distance": 2.664237925989969,
+        "chroma": 1.248791736963029,
+        "lightness": 2.3534406565656574,
+        "axes": [2.3534406565656574, 0.9065454221704214, 0.8588691401191404],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 4160
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 5,
+      "method": "landmarks",
+      "head": {
+        "distance": 2.9223656785991503,
+        "chroma": 2.6587475226866752,
+        "lightness": 1.2129644553991434,
+        "axes": [1.2129644553991434, 0.6136744846356413, 2.5869561295661185],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2185
+      },
+      "torso": {
+        "distance": 3.1357097364639523,
+        "chroma": 2.9968741099307046,
+        "lightness": 0.922724834705275,
+        "axes": [0.922724834705275, 2.7458808510153236, 1.2005801859102592],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3681
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 6,
+      "method": "landmarks",
+      "head": {
+        "distance": 4.2102544710482475,
+        "chroma": 2.8350111953014747,
+        "lightness": 3.1127085044213603,
+        "axes": [3.1127085044213603, 2.753854154446097, 0.673480343829476],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2498
+      },
+      "torso": {
+        "distance": 6.778952100581074,
+        "chroma": 3.393148440590831,
+        "lightness": 5.868622942572521,
+        "axes": [5.868622942572521, 1.9614019966961125, 2.7688189805836876],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 4165
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 7,
+      "method": "landmarks",
+      "head": {
+        "distance": 5.0970517363265575,
+        "chroma": 4.272079293731104,
+        "lightness": 2.780157353615714,
+        "axes": [2.780157353615714, 3.6407064172960646, 2.235155089694069],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2324
+      },
+      "torso": {
+        "distance": 4.665418608003537,
+        "chroma": 2.9905673622952156,
+        "lightness": 3.5808710727252238,
+        "axes": [3.5808710727252238, 1.3296721667551756, 2.6787058586903414],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3867
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 8,
+      "method": "landmarks",
+      "head": {
+        "distance": 3.6445304716888893,
+        "chroma": 2.591190692814152,
+        "lightness": 2.56287595340511,
+        "axes": [2.56287595340511, 2.531156939601413, 0.554539226416215],
+        "opaqueMaster": 2334,
+        "opaqueFrame": 2424
+      },
+      "torso": {
+        "distance": 3.9094591496787445,
+        "chroma": 1.9125647727035573,
+        "lightness": 3.4096872046010676,
+        "axes": [3.4096872046010676, 1.5612792700569562, 1.104676898770418],
+        "opaqueMaster": 3861,
+        "opaqueFrame": 3657
+      }
+    },
+    {
+      "clip": "dash",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.7386819232898088,
+        "chroma": 2.292412175442385,
+        "lightness": 1.4984075196146984,
+        "axes": [1.4984075196146984, 2.1969647690924785, 0.6545986445776709],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1839
+      },
+      "torso": {
+        "distance": 2.6176011818988316,
+        "chroma": 1.456324111066108,
+        "lightness": 2.1750760977505297,
+        "axes": [2.1750760977505297, 0.9732005040801348, 1.083402370004174],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4028
+      }
+    },
+    {
+      "clip": "attack",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9423917116410054,
+        "chroma": 0.7645205415839056,
+        "lightness": 1.7856074324856308,
+        "axes": [1.7856074324856308, 0.49289894683958146, 0.5844161930578067],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1954
+      },
+      "torso": {
+        "distance": 5.0077913939981205,
+        "chroma": 2.431189332684801,
+        "lightness": 4.378046719079328,
+        "axes": [4.378046719079328, 1.4987127072724888, 1.9142992954134248],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4662
+      }
+    },
+    {
+      "clip": "attack",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.51087012590375,
+        "chroma": 0.8490806304439672,
+        "lightness": 2.362949612700361,
+        "axes": [2.362949612700361, 0.5569067261846059, 0.6409312095111841],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 2006
+      },
+      "torso": {
+        "distance": 4.785896291990982,
+        "chroma": 3.722858134951084,
+        "lightness": 3.007512364849322,
+        "axes": [3.007512364849322, 2.973128999623566, 2.2405750700587648],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4158
+      }
+    },
+    {
+      "clip": "attack",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9272524800156932,
+        "chroma": 0.7874946569082468,
+        "lightness": 1.7590208319026819,
+        "axes": [1.7590208319026819, 0.6108272873277959, 0.49702903307030627],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1966
+      },
+      "torso": {
+        "distance": 4.855826201930044,
+        "chroma": 2.3861635391558575,
+        "lightness": 4.229098209755071,
+        "axes": [4.229098209755071, 1.3878909779205189, 1.9410139280807936],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4684
+      }
+    },
+    {
+      "clip": "attack_2",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3189152353949996,
+        "chroma": 1.6036662312402734,
+        "lightness": 1.674999250067493,
+        "axes": [1.674999250067493, 1.5214913991074137, 0.5067635579464514],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1884
+      },
+      "torso": {
+        "distance": 3.579162827322606,
+        "chroma": 2.975914919123146,
+        "lightness": 1.9885514674325713,
+        "axes": [1.9885514674325713, 1.6506605716219331, 2.476164227823444],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4390
+      }
+    },
+    {
+      "clip": "attack_2",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.5299048383374005,
+        "chroma": 1.931544088768913,
+        "lightness": 1.6338775731935546,
+        "axes": [1.6338775731935546, 1.8708641540058013, 0.48034350637256223],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1888
+      },
+      "torso": {
+        "distance": 4.438848406254278,
+        "chroma": 4.290566724544654,
+        "lightness": 1.137722442398104,
+        "axes": [1.137722442398104, 3.6538683364417004, 2.249046241791974],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4476
+      }
+    },
+    {
+      "clip": "attack_2",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.7632270892948614,
+        "chroma": 1.789526744426708,
+        "lightness": 2.1054733382293156,
+        "axes": [2.1054733382293156, 1.7250186968151404, 0.47614752404758554],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1864
+      },
+      "torso": {
+        "distance": 3.415514570117058,
+        "chroma": 2.799998337103194,
+        "lightness": 1.9559522210169806,
+        "axes": [1.9559522210169806, 1.3573106782469366, 2.4490198877300875],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4369
+      }
+    },
+    {
+      "clip": "attack_3",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.1190936103564346,
+        "chroma": 2.1556471427904467,
+        "lightness": 2.2543137195043914,
+        "axes": [2.2543137195043914, 1.847852290818869, 1.1100705002548594],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1697
+      },
+      "torso": {
+        "distance": 5.901168806766099,
+        "chroma": 3.407437223154805,
+        "lightness": 4.818004239953333,
+        "axes": [4.818004239953333, 2.9597555284787327, 1.688335168555256],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4447
+      }
+    },
+    {
+      "clip": "attack_3",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.8993404492981187,
+        "chroma": 2.172449153990324,
+        "lightness": 1.9200624245745086,
+        "axes": [1.9200624245745086, 2.124251907977817, 0.45507049797353066],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1868
+      },
+      "torso": {
+        "distance": 5.867741406792577,
+        "chroma": 3.39841720959224,
+        "lightness": 4.783424472753325,
+        "axes": [4.783424472753325, 2.6528183722891376, 2.1240984473648856],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4855
+      }
+    },
+    {
+      "clip": "attack_3",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.2166130983104657,
+        "chroma": 2.3126270333551493,
+        "lightness": 2.2357003441466423,
+        "axes": [2.2357003441466423, 1.9982124236555934, 1.1642125688006808],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1781
+      },
+      "torso": {
+        "distance": 5.812818354266675,
+        "chroma": 3.1391213581118134,
+        "lightness": 4.8923178881534035,
+        "axes": [4.8923178881534035, 2.648726377843389, 1.6847348385637415],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4565
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.946969393979111,
+        "chroma": 1.5247014609325225,
+        "lightness": 1.2107746595141553,
+        "axes": [1.2107746595141553, 1.1490335994537668, 1.0022157114594088],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1870
+      },
+      "torso": {
+        "distance": 2.450232521843595,
+        "chroma": 1.839289275863748,
+        "lightness": 1.6188435288169867,
+        "axes": [1.6188435288169867, 0.6905078783282792, 1.7047533282777214],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4300
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.996210515290654,
+        "chroma": 1.515072432724971,
+        "lightness": 1.29977380530376,
+        "axes": [1.29977380530376, 1.235583464154892, 0.8767998514542293],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1860
+      },
+      "torso": {
+        "distance": 3.013909735879771,
+        "chroma": 2.252616062296495,
+        "lightness": 2.0023418219461697,
+        "axes": [2.0023418219461697, 1.0882959109730852, 1.97228069358178],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4375
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 2,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.1130859685236314,
+        "chroma": 1.6091459594632647,
+        "lightness": 1.3695917608961086,
+        "axes": [1.3695917608961086, 1.3063550206407348, 0.9395676020934818],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1863
+      },
+      "torso": {
+        "distance": 3.5267402435462727,
+        "chroma": 2.3021000364426847,
+        "lightness": 2.671747025386088,
+        "axes": [2.671747025386088, 1.0591690521304475, 2.0439729687054324],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4268
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 3,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9033761168126855,
+        "chroma": 1.267457245549173,
+        "lightness": 1.4199974551941426,
+        "axes": [1.4199974551941426, 1.0017375462510034, 0.7765112734056833],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1863
+      },
+      "torso": {
+        "distance": 3.1628306591915956,
+        "chroma": 2.3965429083545433,
+        "lightness": 2.063996091841719,
+        "axes": [2.063996091841719, 1.2098981232698256, 2.0687108166422408],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4272
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 4,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.8828033957629737,
+        "chroma": 1.3958373914814728,
+        "lightness": 1.2635610802959951,
+        "axes": [1.2635610802959951, 1.0235255228687978, 0.9490824661187018],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1849
+      },
+      "torso": {
+        "distance": 3.0448593955913794,
+        "chroma": 2.3234338586214993,
+        "lightness": 1.9679491465818701,
+        "axes": [1.9679491465818701, 1.4644716101023314, 1.8037926151842052],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4389
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.930556307058153,
+        "chroma": 1.3363994211097785,
+        "lightness": 1.3932279935385532,
+        "axes": [1.3932279935385532, 1.0044021454735736, 0.881555297704366],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1840
+      },
+      "torso": {
+        "distance": 3.0641971969333346,
+        "chroma": 2.3395358515880553,
+        "lightness": 1.97885736242617,
+        "axes": [1.97885736242617, 1.2372442658704201, 1.9856119025218937],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4321
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 6,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.00265772655814,
+        "chroma": 1.4857964546438989,
+        "lightness": 1.3427758059745636,
+        "axes": [1.3427758059745636, 1.0563926239392072, 1.0448089436443468],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1840
+      },
+      "torso": {
+        "distance": 3.0874706600638966,
+        "chroma": 2.4776278057564305,
+        "lightness": 1.842236557258044,
+        "axes": [1.842236557258044, 1.0280574298047762, 2.254270938658577],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4472
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 7,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.8873703251420093,
+        "chroma": 1.1747609938567654,
+        "lightness": 1.4771944190049322,
+        "axes": [1.4771944190049322, 0.8295606083624515, 0.8318008113368575],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1829
+      },
+      "torso": {
+        "distance": 3.2541234475494116,
+        "chroma": 2.6962222682387207,
+        "lightness": 1.8220057332907922,
+        "axes": [1.8220057332907922, 1.11662530455086, 2.454131709787201],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4497
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 8,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9420873573078499,
+        "chroma": 1.4592335528384806,
+        "lightness": 1.2815384277053001,
+        "axes": [1.2815384277053001, 1.1119809992962706, 0.9449131277179306],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1856
+      },
+      "torso": {
+        "distance": 3.7201619206060537,
+        "chroma": 2.778788192207979,
+        "lightness": 2.473447169108901,
+        "axes": [2.473447169108901, 0.9750964207594571, 2.602085853190971],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4691
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9896803468423512,
+        "chroma": 1.3935963176724235,
+        "lightness": 1.420111680812661,
+        "axes": [1.420111680812661, 1.1278327845650888, 0.8185987458396798],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1879
+      },
+      "torso": {
+        "distance": 2.4818462917552644,
+        "chroma": 2.0152369188251376,
+        "lightness": 1.4485790199031336,
+        "axes": [1.4485790199031336, 0.6576707186416413, 1.9049013267981156],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4677
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 10,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.075801448541633,
+        "chroma": 1.5704834814446313,
+        "lightness": 1.3573994578889041,
+        "axes": [1.3573994578889041, 1.2361205889043152, 0.9687230022959603],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1868
+      },
+      "torso": {
+        "distance": 3.1248346097183357,
+        "chroma": 2.4283915604623014,
+        "lightness": 1.9665975102112305,
+        "axes": [1.9665975102112305, 0.9208237749651287, 2.2470356353167835],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4634
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 11,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.918052165963242,
+        "chroma": 1.2489010271983942,
+        "lightness": 1.4557370420577609,
+        "axes": [1.4557370420577609, 0.876231416801003, 0.8899282442692282],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1861
+      },
+      "torso": {
+        "distance": 3.2815717900284227,
+        "chroma": 2.3473928519100364,
+        "lightness": 2.2931332739097416,
+        "axes": [2.2931332739097416, 1.0661596059885774, 2.091305069987785],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4390
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 12,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9448022857719471,
+        "chroma": 1.475062183810803,
+        "lightness": 1.2674570938043999,
+        "axes": [1.2674570938043999, 1.004668271563054, 1.0800231989282456],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1837
+      },
+      "torso": {
+        "distance": 3.5915976753522654,
+        "chroma": 2.2250368664413362,
+        "lightness": 2.8193589350369552,
+        "axes": [2.8193589350369552, 1.1525334577635484, 1.9032749895269152],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4359
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 13,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9615810562312301,
+        "chroma": 1.2913343599957374,
+        "lightness": 1.4765689319702033,
+        "axes": [1.4765689319702033, 0.9280735738725853, 0.8978996997354259],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1821
+      },
+      "torso": {
+        "distance": 2.5187317121270953,
+        "chroma": 1.847736864451767,
+        "lightness": 1.711688615788702,
+        "axes": [1.711688615788702, 0.8322048368065272, 1.6497171363145469],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4348
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 14,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.0677907645706455,
+        "chroma": 1.487351667846182,
+        "lightness": 1.4365039722182582,
+        "axes": [1.4365039722182582, 1.1338780267351687, 0.962567194710052],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1848
+      },
+      "torso": {
+        "distance": 2.4742191792164028,
+        "chroma": 1.8727168159719936,
+        "lightness": 1.6170010123614664,
+        "axes": [1.6170010123614664, 0.9658094895566929, 1.6044563885336747],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4352
+      }
+    },
+    {
+      "clip": "cast",
+      "index": 15,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 1.9002406730181898,
+        "chroma": 1.1965483860669752,
+        "lightness": 1.4762068199250198,
+        "axes": [1.4762068199250198, 0.8339158297671015, 0.8580864927635965],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1825
+      },
+      "torso": {
+        "distance": 2.37249805931851,
+        "chroma": 1.930502391967494,
+        "lightness": 1.379096644937504,
+        "axes": [1.379096644937504, 0.7716709153160692, 1.7695659026573367],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4362
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.642265537824566,
+        "chroma": 1.4185564416769898,
+        "lightness": 3.354667773386985,
+        "axes": [3.354667773386985, 1.1633675574562279, 0.811713191023537],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1827
+      },
+      "torso": {
+        "distance": 4.794248027457048,
+        "chroma": 3.720404337821243,
+        "lightness": 3.02380649379167,
+        "axes": [3.02380649379167, 2.221310810675928, 2.984491031860101],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4356
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.79396539724504,
+        "chroma": 1.5384879769418491,
+        "lightness": 3.4680294376343017,
+        "axes": [3.4680294376343017, 1.2077780375652716, 0.9530044423661441],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1833
+      },
+      "torso": {
+        "distance": 5.372256014709193,
+        "chroma": 3.90713167737294,
+        "lightness": 3.687201749734889,
+        "axes": [3.687201749734889, 2.486908940033631, 3.013463434042611],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4387
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 2,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.6391310165995767,
+        "chroma": 1.3316030517871946,
+        "lightness": 3.3867547694582347,
+        "axes": [3.3867547694582347, 1.1083452379516372, 0.7380633584177573],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1822
+      },
+      "torso": {
+        "distance": 5.718145361601892,
+        "chroma": 4.034820348020914,
+        "lightness": 4.051840462753392,
+        "axes": [4.051840462753392, 2.286466363814568, 3.3244318022706074],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4399
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 3,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.564201020039882,
+        "chroma": 1.4730728571496778,
+        "lightness": 3.245548531262816,
+        "axes": [3.245548531262816, 1.1013761013761012, 0.9782199782199787],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1813
+      },
+      "torso": {
+        "distance": 5.6870721434031655,
+        "chroma": 4.2865795652117615,
+        "lightness": 3.737382131302769,
+        "axes": [3.737382131302769, 2.3261013407769817, 3.60055786251611],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4408
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 4,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.396543366856398,
+        "chroma": 1.3114511477268607,
+        "lightness": 3.133145820108297,
+        "axes": [3.133145820108297, 1.1883024756150562, 0.5548345152576838],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1877
+      },
+      "torso": {
+        "distance": 6.044588188460705,
+        "chroma": 4.439115155511315,
+        "lightness": 4.102597104784777,
+        "axes": [4.102597104784777, 2.460607780473976, 3.694746637397641],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4345
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.7455758659372287,
+        "chroma": 1.3160061915604169,
+        "lightness": 3.506774339940634,
+        "axes": [3.506774339940634, 1.1761901655510478, 0.5902956807281845],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1853
+      },
+      "torso": {
+        "distance": 5.498135663324141,
+        "chroma": 4.341117072136769,
+        "lightness": 3.374047767640445,
+        "axes": [3.374047767640445, 2.551513882284763, 3.5121324494536728],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4389
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 6,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.471247868102048,
+        "chroma": 1.1154415225107595,
+        "lightness": 3.28714952073402,
+        "axes": [3.28714952073402, 0.9998597435165165, 0.4944595872629091],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1858
+      },
+      "torso": {
+        "distance": 4.535257193965756,
+        "chroma": 3.8368410357736145,
+        "lightness": 2.4181002215834235,
+        "axes": [2.4181002215834235, 2.2562800684712743, 3.1033126472232224],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4356
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 7,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.438786332426,
+        "chroma": 1.2474075259494972,
+        "lightness": 3.20456329384901,
+        "axes": [3.20456329384901, 1.081656438799295, 0.6213251034679608],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1848
+      },
+      "torso": {
+        "distance": 4.715825547625296,
+        "chroma": 3.820164143827013,
+        "lightness": 2.765023781064793,
+        "axes": [2.765023781064793, 2.208022529757459, 3.11741729543304],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4365
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 8,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.9841319842004608,
+        "chroma": 1.352923893088791,
+        "lightness": 3.7473863701303296,
+        "axes": [3.7473863701303296, 1.1651007297994143, 0.6877087682379825],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1868
+      },
+      "torso": {
+        "distance": 4.4403271207681225,
+        "chroma": 3.4979655222408956,
+        "lightness": 2.735094540348268,
+        "axes": [2.735094540348268, 1.8826477263592611, 2.9481181002836925],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4327
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.8541368825766495,
+        "chroma": 1.1309603240811184,
+        "lightness": 3.6844673773819716,
+        "axes": [3.6844673773819716, 1.0191438588221429, 0.49032341334141943],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1865
+      },
+      "torso": {
+        "distance": 4.580627182894372,
+        "chroma": 3.628022525498948,
+        "lightness": 2.796354402278629,
+        "axes": [2.796354402278629, 2.1958386215129444, 2.888051279634747],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4325
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 10,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 4.157409029898141,
+        "chroma": 1.3280834230512526,
+        "lightness": 3.939574122071455,
+        "axes": [3.939574122071455, 1.1457341002241126, 0.6716390028632757],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1874
+      },
+      "torso": {
+        "distance": 4.329569189291296,
+        "chroma": 3.489254389182486,
+        "lightness": 2.563254410399258,
+        "axes": [2.563254410399258, 2.007062820435187, 2.8542240674579133],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4308
+      }
+    },
+    {
+      "clip": "channel",
+      "index": 11,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.463530695258937,
+        "chroma": 0.9976645053243478,
+        "lightness": 3.316731887237312,
+        "axes": [3.316731887237312, 0.8689518804912298, 0.4901602743744448],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1857
+      },
+      "torso": {
+        "distance": 4.374954334429902,
+        "chroma": 3.576551170135206,
+        "lightness": 2.519624407674977,
+        "axes": [2.519624407674977, 2.1274676163287505, 2.8749956198345723],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4291
+      }
+    },
+    {
+      "clip": "hit",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.8338979162804105,
+        "chroma": 2.452868126563768,
+        "lightness": 1.4193010088018694,
+        "axes": [1.4193010088018694, 2.3106451781150588, 0.8230922835053648],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1826
+      },
+      "torso": {
+        "distance": 2.773162281432415,
+        "chroma": 1.6294834225325807,
+        "lightness": 2.243927987893315,
+        "axes": [2.243927987893315, 0.8992698852492055, 1.358870817183287],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4027
+      }
+    },
+    {
+      "clip": "hit",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.921351894905882,
+        "chroma": 2.4058323856121975,
+        "lightness": 1.6571865996953115,
+        "axes": [1.6571865996953115, 2.3362679712853938, 0.5743530569314549],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1804
+      },
+      "torso": {
+        "distance": 2.644072254384652,
+        "chroma": 1.58073090574685,
+        "lightness": 2.119530110666862,
+        "axes": [2.119530110666862, 1.0767933430672718, 1.1572494513756597],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4154
+      }
+    },
+    {
+      "clip": "die",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.5994187458572418,
+        "chroma": 2.498042218516156,
+        "lightness": 2.591447545781971,
+        "axes": [2.591447545781971, 2.0008678689704644, 1.4955743700701456],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1877
+      },
+      "torso": {
+        "distance": 4.231183050770574,
+        "chroma": 3.4555574459942706,
+        "lightness": 2.4417274103719557,
+        "axes": [2.4417274103719557, 2.9659051840915778, 1.773212819022339],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4226
+      }
+    },
+    {
+      "clip": "die",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.281208895184894,
+        "chroma": 2.0387620332817895,
+        "lightness": 1.0234077364957666,
+        "axes": [1.0234077364957666, 1.1407549799325691, 1.6897422004880922],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 2147
+      },
+      "torso": {
+        "distance": 4.912117374205315,
+        "chroma": 3.4021907676068017,
+        "lightness": 3.5431617347759827,
+        "axes": [3.5431617347759827, 2.3996956912219916, 2.4117136249396545],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4593
+      }
+    },
+    {
+      "clip": "tribulation",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.601333612165966,
+        "chroma": 3.176732993515853,
+        "lightness": 1.696458450426703,
+        "axes": [1.696458450426703, 3.0896991750166354, 0.738506276204689],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1944
+      },
+      "torso": {
+        "distance": 3.7000515876235016,
+        "chroma": 3.12456497542047,
+        "lightness": 1.9817859282603831,
+        "axes": [1.9817859282603831, 2.8886968069992585, 1.1909395630579296],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4463
+      }
+    },
+    {
+      "clip": "tribulation",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.726077685685435,
+        "chroma": 3.3051313064688044,
+        "lightness": 1.7203958750132893,
+        "axes": [1.7203958750132893, 3.18867244076441, 0.8696326917208937],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1895
+      },
+      "torso": {
+        "distance": 5.037195631280587,
+        "chroma": 3.888441755795121,
+        "lightness": 3.202086903814634,
+        "axes": [3.202086903814634, 3.765244998775835, 0.9710352142968872],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4262
+      }
+    },
+    {
+      "clip": "tribulation",
+      "index": 14,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.3937570570475395,
+        "chroma": 2.8361040399081108,
+        "lightness": 1.863893998347779,
+        "axes": [1.863893998347779, 2.7324834299624223, 0.7596186083581041],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1887
+      },
+      "torso": {
+        "distance": 3.2966786989064283,
+        "chroma": 2.8840804599950896,
+        "lightness": 1.5969252781823868,
+        "axes": [1.5969252781823868, 2.651489576890076, 1.1346907611189816],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4358
+      }
+    },
+    {
+      "clip": "tribulation",
+      "index": 15,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 3.5047698319138685,
+        "chroma": 3.058031521820289,
+        "lightness": 1.712265979994654,
+        "axes": [1.712265979994654, 3.0004498755783446, 0.5906414585756826],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1946
+      },
+      "torso": {
+        "distance": 3.0842431175456233,
+        "chroma": 2.6783651931416257,
+        "lightness": 1.5293513331785376,
+        "axes": [1.5293513331785376, 2.3503260990499424, 1.2843704045006863],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4494
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 0,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.3154353238648,
+        "chroma": 1.799387808521958,
+        "lightness": 1.4572042593759593,
+        "axes": [1.4572042593759593, 1.210934382888914, 1.3309524431003905],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1684
+      },
+      "torso": {
+        "distance": 3.7599248189476606,
+        "chroma": 3.021747721727615,
+        "lightness": 2.237426054727299,
+        "axes": [2.237426054727299, 1.1905263629842173, 2.7773379831784255],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4182
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 1,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.5194112639733577,
+        "chroma": 1.8156449740200338,
+        "lightness": 1.7466729646249242,
+        "axes": [1.7466729646249242, 1.2662989770448685, 1.301173920895792],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1695
+      },
+      "torso": {
+        "distance": 5.087896563074085,
+        "chroma": 4.383508588310587,
+        "lightness": 2.5829331955643795,
+        "axes": [2.5829331955643795, 1.445597513743129, 4.138284109634373],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4292
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 2,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.5341844033052854,
+        "chroma": 1.85166720278757,
+        "lightness": 1.7301500397585814,
+        "axes": [1.7301500397585814, 1.298125108242037, 1.320432744682872],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1686
+      },
+      "torso": {
+        "distance": 5.485262833790186,
+        "chroma": 4.715215449280688,
+        "lightness": 2.802650820674001,
+        "axes": [2.802650820674001, 1.6806274009079794, 4.405536093649963],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4482
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 3,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.4449843399732667,
+        "chroma": 1.6954217035023194,
+        "lightness": 1.761673542404439,
+        "axes": [1.761673542404439, 1.0638652598785485, 1.3200929745780239],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1677
+      },
+      "torso": {
+        "distance": 5.1333164467461145,
+        "chroma": 4.675530791185189,
+        "lightness": 2.119044492952745,
+        "axes": [2.119044492952745, 1.0680169722357729, 4.551914753852177],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4367
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 4,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.4538766956973204,
+        "chroma": 1.7980386099697516,
+        "lightness": 1.6699005942703427,
+        "axes": [1.6699005942703427, 1.239156734955054, 1.3028558742844452],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1683
+      },
+      "torso": {
+        "distance": 5.221381880037599,
+        "chroma": 4.426717540018545,
+        "lightness": 2.7689349140196735,
+        "axes": [2.7689349140196735, 1.4923535236915224, 4.167578330329658],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4439
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 5,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.6290874870298246,
+        "chroma": 1.8719885451884337,
+        "lightness": 1.8460118908447172,
+        "axes": [1.8460118908447172, 0.9625442102645757, 1.6055683593677514],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1692
+      },
+      "torso": {
+        "distance": 5.217644368557931,
+        "chroma": 4.693566195445639,
+        "lightness": 2.279089538766356,
+        "axes": [2.279089538766356, 1.2636072285248767, 4.520272160285233],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4323
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 6,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.5770426588049102,
+        "chroma": 1.7104051821868727,
+        "lightness": 1.9276055037399569,
+        "axes": [1.9276055037399569, 1.0703629143965272, 1.3340948687167198],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1700
+      },
+      "torso": {
+        "distance": 5.499928586088572,
+        "chroma": 4.782559499476363,
+        "lightness": 2.715941657334087,
+        "axes": [2.715941657334087, 1.5799932710445554, 4.51403329955435],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4387
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 7,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.6240807175612906,
+        "chroma": 1.811948545031145,
+        "lightness": 1.898062718256827,
+        "axes": [1.898062718256827, 0.793422622555945, 1.628999101244973],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1678
+      },
+      "torso": {
+        "distance": 5.449710190950352,
+        "chroma": 4.919941015093915,
+        "lightness": 2.3438262677393107,
+        "axes": [2.3438262677393107, 1.5786893184991004, 4.659781070786501],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4329
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 8,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.1667517474637594,
+        "chroma": 1.4365897915330506,
+        "lightness": 1.6220428187937217,
+        "axes": [1.6220428187937217, 0.9860120110249034, 1.0447825339522092],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1662
+      },
+      "torso": {
+        "distance": 5.865952638996851,
+        "chroma": 4.9960498858238855,
+        "lightness": 3.07390401628178,
+        "axes": [3.07390401628178, 1.7072985396458056, 4.695279135276641],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4415
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 9,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.672909756857314,
+        "chroma": 1.7164162504470286,
+        "lightness": 2.0489904400714973,
+        "axes": [2.0489904400714973, 1.1341798091776687, 1.2883015583520594],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1669
+      },
+      "torso": {
+        "distance": 5.5588143916055905,
+        "chroma": 4.703074493220441,
+        "lightness": 2.963360887833394,
+        "axes": [2.963360887833394, 1.9783122488125706, 4.266754074818334],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4284
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 10,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.6979519869022437,
+        "chroma": 1.5382872645989516,
+        "lightness": 2.216442468281647,
+        "axes": [2.216442468281647, 0.9223499625552668, 1.2310963630039782],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1670
+      },
+      "torso": {
+        "distance": 4.248603193817012,
+        "chroma": 3.345619003044897,
+        "lightness": 2.618675731162029,
+        "axes": [2.618675731162029, 1.4613168637020029, 3.009604548341073],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4165
+      }
+    },
+    {
+      "clip": "emote",
+      "index": 11,
+      "method": "centroid-fallback",
+      "head": {
+        "distance": 2.5385486552884062,
+        "chroma": 1.658873812952715,
+        "lightness": 1.9215532644104079,
+        "axes": [1.9215532644104079, 1.0306900306900304, 1.2998232141089279],
+        "opaqueMaster": 1911,
+        "opaqueFrame": 1665
+      },
+      "torso": {
+        "distance": 4.187718209910794,
+        "chroma": 3.5225009511890435,
+        "lightness": 2.2647231297645964,
+        "axes": [2.2647231297645964, 1.2327545132780424, 3.2997468480355177],
+        "opaqueMaster": 4416,
+        "opaqueFrame": 4152
+      }
+    }
+  ],
+  "temporalFlags": [
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.35431404674834993,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.6988, torso 0.3543; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.41579679195400226,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.8461, torso 0.4158; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3901477267102243,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.8764, torso 0.3901; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.06897405003700992,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.9132, torso 0.0690; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3820618836730647,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.3821, torso 0.4652; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 12,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4099976816558609,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 11->12; head 0.9507, torso 0.4100; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.34748525785859424,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.9760, torso 0.3475; centroid-fallback"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3653983405354824,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.5581, torso 0.3654; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4291603968378718,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.8415, torso 0.4292; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3120533622305249,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.7319, torso 0.3121; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.16059258092887665,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.3284, torso 0.1606; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3896074600054976,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.8276, torso 0.3896; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.21359747863356848,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.6668, torso 0.2136; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 13,
+      "metric": "temporal_review_by_eye",
+      "value": 0.37533551882462446,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 12->13; head 0.7276, torso 0.3753; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.29260936177165986,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.7235, torso 0.2926; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.33022742617871575,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.5578, torso 0.3302; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.14994358328323043,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.1499, torso 0.2373; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.00046640077200691055,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.0005, torso 0.3108; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.0000223099443230707,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.0000, torso 0.2143; centroid-fallback; D41 pose pair"
+    }
+  ],
+  "temporalReview": "All15 native contact sheets and20 flagged pairs reviewed; lunge/recoil/collapse retained with brisk-transition polish notes. Candidate dash5 is head-only and rechecked separately; body/pose/root unchanged.",
+  "unchangedAlignedFrames": 201,
+  "frames": [
+    {
+      "clip": "idle",
+      "index": 0,
+      "sha256": "2bffe26d40ea21ebf11abce5cff572864935cc0065f0895cc7531e16be5bd626",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 1,
+      "sha256": "517d2c35186de364021ac9d31911230b1eaf6e68e78315dca11047c98227f1b7",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 2,
+      "sha256": "c4dc31a3b785cfbc8227197a5387ed148bd712e97c3c550dec2960963012e540",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 3,
+      "sha256": "55e4e01651727cd611be875ff7b22523db2e3d98b61fa1ba0e2b67e8d24b0f0b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 4,
+      "sha256": "44b6221d8d9429149e9d9dcfbebf1f770d0e024ad4cde0ea2dc35655393719ba",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 5,
+      "sha256": "048bf9771cd50cda0509226fdf06a63dd6ac66dc6b60612cba21f28fb3a49fd0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 6,
+      "sha256": "b3d38335fac28fbd6ce4ea030d44c5ebad014abe8acb12b27eb7191f14261689",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 7,
+      "sha256": "7708867045a8a3ba8df6c7d3b5a7f6a45f7f785daddf03916187c6c5da45afac",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 8,
+      "sha256": "cb944cc84c30143caecce137c2f9931afc669ec724c3081a88348ff56e793f3f",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 9,
+      "sha256": "a90c136aee76f4f6e1b2601124efa0b7e36d9697ae7c678bfd4022903cd76902",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 10,
+      "sha256": "fa16ec67675dc0131c204097823b95ca340b33c53a275863e6a0a30dc5eef40d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 11,
+      "sha256": "4371694e273bdad9d5b577f5ada1863ff549f6a0d9023750de4ede52b38733f2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 12,
+      "sha256": "eaa1a0f29fb6dc9e4fa02ac95c30ddd5410e2464bd805317caa83e82acb18c10",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 13,
+      "sha256": "40c923cd5c08ee09a5e4c1684d84828825c1a50b614cc46afc4b7590cc0716f5",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 14,
+      "sha256": "9cc01b182d933b06ce7d90cfaf4c973924faead1851d24ef2868a25cb31b030e",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "idle",
+      "index": 15,
+      "sha256": "843f32a406348d6ccf3aa3af9e67d0ee8817456bc689ecff3aab15fa643ad613",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 0,
+      "sha256": "f75070a7d3c41236e6903aae0f6ed2e6154a2dc1eb36c9d50b221fce1b43f916",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 1,
+      "sha256": "f85bf809c56aacfe20bfdbc485a99e585e2a102977c0a393d02fd1001613ed3e",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 2,
+      "sha256": "e9969f88aa7c759ef7fb0e65ff5dc5057ecd1f09971569eed3de3d17ab0514ba",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 3,
+      "sha256": "257f2743a086bb0cba0702fc0156273987370080178e781051348e34f6dd174f",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 4,
+      "sha256": "67d7caae822538f4ff2ff91a0c2acb71f9d33f3f73a70165e3f989272d3d3809",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 5,
+      "sha256": "74bd63d7e82d11148a37ed53cb974562231dd17d9d1883f92cf711a2695a54f0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 6,
+      "sha256": "9e5f4043b3a138049486d9fee0a5d9508af0b44d1b0bb732c580434f30e06d8a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 7,
+      "sha256": "92ea450184e18d119581aca14b916a3c3c0f6faf547a2259d178d82d8fee095a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 8,
+      "sha256": "3836ae90a56ac64eb540cf252a798bb55897fa47fab54f9e7f7cad06f257f8d0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 9,
+      "sha256": "0aa8ae04f208c5ff5486769ff461c9e49eb9ff95713e242b83f7b9409120bac1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 10,
+      "sha256": "2cbaacd1a585d6794b76c5a6a25655051f4248da81f45a925cec20ca61454c07",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 11,
+      "sha256": "64a411539208978474ca17b40fec3bbfc3d792f3bf55bba418ff398496db9659",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 12,
+      "sha256": "c70d06829bc9b4b09f8f5397d7eb95e13df6a69aa7c6c54f398c1b617dee247d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 13,
+      "sha256": "15a1ba8f3010eb7e3f941485fa2ba49f6b9add76092fcff5019e34dffe231201",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 14,
+      "sha256": "7f502605932aa841d52439c9a66f7463c3652ad4599f041134b2ba9bd47ca411",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "meditate",
+      "index": 15,
+      "sha256": "6bb494ef390eb5a5201b56b1e1b06b22b51b2a2da1631a24f35dc21ae9af187b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 0,
+      "sha256": "73fe7f9248c9553669ebe07727ef9d26689757c543ca34c6de06b9223c9bcc8d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 1,
+      "sha256": "2fce4ff1f68c9a034540a77819347796d5cee1ade6098a7b99e1a9d5c89c4341",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 2,
+      "sha256": "0b0c5d252ebf467db1911a17f86f4b4d181b85e8dd44077a1cde899e19365658",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 3,
+      "sha256": "d5c76ba7a6cf5f3f8b5b4c1356575879a89bcf8585ae510616e52a19221552b5",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 4,
+      "sha256": "c406379f4d683e4ccf261acea3791b041ea62528302b224f9d3341fa6863dad6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 5,
+      "sha256": "f2711fa594f8c0f7d9d6b2a8275e8354cd1dd7a943c90d2dfed76575e7153449",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 6,
+      "sha256": "e52906b5bf89bc4e4ff0988552d2cdc3f3fad11164650f8d51eee2c7d8a7d795",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 7,
+      "sha256": "8ca4d852d31d1b2f553ff4343d21c5afe0c9d116e2cc704b91a443f49c06e93a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 8,
+      "sha256": "6b086e43bcc7e87150758083b1e222cc60e4effa32a0865f5fad9e0be2fca21c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 9,
+      "sha256": "8fb21799b069bc54e899480cba89732bff417c2f7ce5bd5ae936bd0149758000",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 10,
+      "sha256": "9d8c8ac6abe2d03188a1b1bcf302af082dde0ae6e52035012ce79131ec1cdf2b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 11,
+      "sha256": "3389b9ae256de350cb59567c65b38982078870f537b68f1d8b1ee30cc3e93269",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 12,
+      "sha256": "4cfc311f2f851b3f5079e82fe7b8ccb8507b5a88c8ed9d7dee1d520b688c206d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 13,
+      "sha256": "6a1d2b3154b8e2fd6f7577e55c938a67bc7963e307253f5af36fbda1a81bdff1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 14,
+      "sha256": "1c75b889f30e7aab3885b2ff0056bcc5b78b21fe1a857d027141b049e624113b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "walk",
+      "index": 15,
+      "sha256": "1524f9e80820781e3b7864670ae961ed36b371d19eecc9ec053b150e167343e4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 0,
+      "sha256": "474214ce5dea724b321d0f27bfab8ee7dad476d5c81f7173951450e74d565801",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 1,
+      "sha256": "62b6c1d338d222c5386ae3fd5bf025fb548a2322c2f0a48ec4b70c1d81930fba",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 2,
+      "sha256": "0fe088cd4d1dd9875238b651e8d95aa4cc41bc64ea2729d72f0069964cf30343",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 3,
+      "sha256": "e2f77fbece7aced06e8092332907d548eebbd06bb3835c7ca24da3eacf06193b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 4,
+      "sha256": "afb1d890a277f49bd7f35d26cd3c58a188fbdaf9829ac4b1222d8db0c8b442ed",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 5,
+      "sha256": "603dea6a61d0b8a079ce87b93a19d7dcc94470a57606350151dc171484c320be",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 6,
+      "sha256": "1f7149eff5ee562b3460e64a527c5c7037b7d0ecaf9a1f79583b84f9a969fa47",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 7,
+      "sha256": "cd0202ea972ab79196522a4eb994d3b81357ff791613316aed408fa27e185cdb",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 8,
+      "sha256": "6ee214712d4fec5dd741ab35a723a3658591caa89c69582ee5ab3cf45303ed2d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 9,
+      "sha256": "854b8d1e433743799c705149138dbec15dc56c25b87e4a3749bd89ea94b43b00",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 10,
+      "sha256": "94778d367b0ae2a052234a3e36542d680dd60fd75b4ee950098586a487c0333c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 11,
+      "sha256": "d7e0d2fdfbec5a9fde903aeed8edb3952eb9d21c847a888b7c51484113b442bc",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 12,
+      "sha256": "d99c2fc6bc701bb5184ca0f92064f6e0190a8b025c052fe5f93df223c374cf8b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 13,
+      "sha256": "4d8869f1ee5fd29ec1732a1885b128f482bcb38e235e1ffa2359726746eaeb6c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 14,
+      "sha256": "4d127ea1fa7078abb4aa6101e1773a21bc0296c06202c97930ab2329f4126ba9",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "run",
+      "index": 15,
+      "sha256": "90239b227ddef211907c877ca77cbf645eefd352b71603f9d568738c418f9c86",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 0,
+      "sha256": "c854e33358d3f1ab6d2b27206a8546904ba39783ccafa2c1c9157e08e390b549",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 1,
+      "sha256": "f8c9d57ca367b89e3ebab4ab08abae3f1e447eb8b95da45c6f72f071ed5414e1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 2,
+      "sha256": "64863be3a9882cf1d3fb5431bd6e364ee925bf6c1f77e477f91ebc879c8724d7",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 3,
+      "sha256": "1dc123ed6b67dd19c1a00a46b7a6aee261417bd1dc03e6863b4690005398c025",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 4,
+      "sha256": "1071085c22d026147b57a7d96fa39ce5e2a5b80cd859db87e36fff234171eb3d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 5,
+      "sha256": "f463370465bdf9320df9a6672b21e6a16b63b0dc07701ada1828088587ec05ef",
+      "sameAsPreRepair": false
+    },
+    {
+      "clip": "dash",
+      "index": 6,
+      "sha256": "bab46d5d8222c803c2b89f2ea5465417bed2b458dea86b21da2ff7a3e3a6ff16",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 7,
+      "sha256": "3121d48034f2124b1e7b803754b5e1c0983b8d31708b0ba2529114d2c19f48a7",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 8,
+      "sha256": "c457b1c690707a153037d31a8e9f0d4380dfe3811e81296b69cf419a5217b791",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "dash",
+      "index": 9,
+      "sha256": "a12ef268c919397ff172970c972d9d8035f76da3a4b0fc879cecdeeda5c308ee",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 0,
+      "sha256": "7cfd247d32fb6e9b9fa7d84320d9991505e5c3c9c9ebf08cb096fa6f566a21d6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 1,
+      "sha256": "3d308b2c2ecc846d2ee99362bf4f780837132b4b3db2e7e8714d33e8bca3d25c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 2,
+      "sha256": "8ed9b6f033f80c3e3997956334f9600e47a933bdbc6d783b1bb015b894c6e21d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 3,
+      "sha256": "97ade20bda6bdc087200be12ed28bd4f4d658b8c3ee2de89d3aaabb9cebb1fa4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 4,
+      "sha256": "fecbc6932086dd0c0b43d569849ed8cbc17cc54f841f84c370239fe2181d85aa",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 5,
+      "sha256": "16abe9f47c2c537b4e28c8bdea2629fafc97deb26c7d53ac29ce2390a198e524",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 6,
+      "sha256": "40c8e3738fbc5d65ecaf8b882ca026b79eef503824cc6c08e55e35ee5693c19f",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 7,
+      "sha256": "416e63e2a0473f01a6e066023938089f1b7c282ae1b922f622ceee8016640baf",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 8,
+      "sha256": "4c6bb4151d9eff7d31950d04ae79e4ae9ffb2d985e7fd488273af743a3ece109",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 9,
+      "sha256": "06fd9c270c49a20341c295893a27dd91940e0f1b6f91116975e0de6be596361e",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 10,
+      "sha256": "3ffd88d243c95719d3ff70d063a71ae45b5ee7959ea332ca736943127bd9b267",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "sword_fly",
+      "index": 11,
+      "sha256": "9fff0e34363ca4dcaa35c0ddba6c7bc1e77d8f54bb7086097027eccd4058be8d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 0,
+      "sha256": "ed2896c709493bfb0a5140767a7eb5a6a3dfd171cbb0dc6e5613750a5d21defb",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 1,
+      "sha256": "50ce8038859234a62c8f51c70901ed551945b2648d150def93d1c6a8970c41e8",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 2,
+      "sha256": "317e8722dd4d017157994e9cf8c61af6d63a8315ffe143b9898f3c35f33b5d48",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 3,
+      "sha256": "1306b156a25470f7610337a615c6f0c1d99949c4d358c6bfe47cfa9b8b946e95",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 4,
+      "sha256": "b74cd317ee1c56534ccb16ffe4ec1077494935249a59e2c7e86c261456d1bc81",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 5,
+      "sha256": "91c13f899b885b989556beb0b35fc4c52369069d5a3759d34f0cf7cda951f4a2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 6,
+      "sha256": "9fbc84a764c6ec0d2a79589ac8254ad1ca3f85fd50c0c42f16dc55cd644baaf5",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 7,
+      "sha256": "4b16d2bf9ad5f8fd0ea91249d8f2c7a3d5120119d2bd3f41215ab8fb14372a26",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 8,
+      "sha256": "0da1c59c1257cef586eab41165364a7ba06ad8f2727363a393bd8c649e3645f0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 9,
+      "sha256": "8a7c83beb49276a9f3f93d31ecaf21e94718099edc5e015557da5cafef499f2d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 10,
+      "sha256": "0e4aada772ffa83918fe1e2eec186ad79493ae286175dc084c63f6875c2e32c0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 11,
+      "sha256": "4f5b0ed35ea15616678c89b31ae3341d95d2468d10982a755579db30343d999a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 12,
+      "sha256": "e49e6b59f79cd05099056cb290779a6271879aec9467e1934725d1df6b36fce4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack",
+      "index": 13,
+      "sha256": "d41c8ff64362a60dbd7c48faa922db89fd5463f6725908b2a0fd9d9732c53172",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 0,
+      "sha256": "df463a729691e1e1e5fa7b3763ac80fb7733c659c7f9d55cfb726a7d7b1b56b1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 1,
+      "sha256": "1f55e42671efe318c30de93d5d61ddb16cbbc33beb5de44811e4193516d790c1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 2,
+      "sha256": "57832e47906ab05e33c69328571e133150989769f37883f43bfcb1a114e093df",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 3,
+      "sha256": "3689b6f3158bad1a27270adfb81c02da0f0fea7846aac3abf74dabfe1ae1546d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 4,
+      "sha256": "b7d6de7f12bda290f2b455d3f36a661eb268d6fd5256a6d8cffc7139afc95e86",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 5,
+      "sha256": "27e6af136e2692d15ef2d5d02ac3a76ee8dc92085b12df99ef10faa4a1cc9b98",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 6,
+      "sha256": "a7afdc1767ce3a7fab8a8a53633df1bdfee61e7e31401af206f3404430382735",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 7,
+      "sha256": "9cba05c357d6c190a9c6e71b15e2db6fceb01927ff1ee89a3f54d0c853a64e80",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 8,
+      "sha256": "277e7c8576cf9343dee11b57c3af677c7f70c41708022349b4b064abc1d4b0fa",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 9,
+      "sha256": "c53c9b5043ebb707ccb64d71de60e9fb7a180a7ac86ec7fb0a76ea9ee6ab8237",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 10,
+      "sha256": "4262f29ed22fa8d78d2b8cb74329744aa5b2d0c92bd597657320e1213725d861",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 11,
+      "sha256": "811d05b68f0adae143db6b0762c5833737dccc76068c16d08cb7679785229e12",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 12,
+      "sha256": "d16449c540999ca94d8bf002fc8f7e42c976bc7dae8587f05b5da5f92b35f4bb",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_2",
+      "index": 13,
+      "sha256": "80c2a4ce8a35df31d3f9bf75fdfc58bd3ff9cb0bc382c01ceb85e7b4cf07c427",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 0,
+      "sha256": "9fb702241e262378946132d9a05c76571f741f4fa6f29796dcbe2d061ac19873",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 1,
+      "sha256": "3cdc835753ada1863c91fae2d5826853d772bca3120ac6d3e555964a3a5857e4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 2,
+      "sha256": "41720227861b28a752921f02481e14721e9b9b1a140e84da3bc659487ff8953c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 3,
+      "sha256": "c2208078f43aa932d6993d190f819082c4b24160628fc3a3a8a35d7b36d731a7",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 4,
+      "sha256": "ecde6b1abff21670149026af0696e3976c1982119b678abe4786b0d3518da838",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 5,
+      "sha256": "b73c24bed011555226fa2e5bf38fd7ef3cea1131728b11fc9c24e7c7c45804b4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 6,
+      "sha256": "fb4de6a9cc07b7b8ac543b5f6355879eef91f53bf455c344cdc6cae69f261196",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 7,
+      "sha256": "517a2e36040138bdf579d805e5326d65987ec5d29f18d8ae555dd4d07ccb4374",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 8,
+      "sha256": "e35540395f3dd61aaf41b412799d84d78c9334cb555c09a3c2550c5bbcb552d6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 9,
+      "sha256": "70ced5d2287feefd466bf0c154ee17296f22b93259a002e271540a1b4bd5ba3c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 10,
+      "sha256": "ad18841f5bf017a365409f5da561aa3336b105e8034dd3bbb740d0206196c587",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 11,
+      "sha256": "c4f9bdb8165be5ee568750ce82c79e2daf559dc3ec93142baef2971bab50d9e9",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 12,
+      "sha256": "7c60f2989df9828e8ee0ffbdaaadc0c3a345792b380f2f46069d2f86e01cf456",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "attack_3",
+      "index": 13,
+      "sha256": "316843ff759c0ce20d8dab09fbd60c61ad6e9e9e28889bee4ebff5071857a77d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 0,
+      "sha256": "021ffa04fd7c7686b710fb3c0b5e81c67271bbe46344c39631739ce7995fb8ae",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 1,
+      "sha256": "cecb8924a5142c8e1372a52c6e2918a153d492c09270d1c60a464cd3d9309562",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 2,
+      "sha256": "235e1a10f61e79c727dd32fd9b3669ed37e31370df61f74d1ab678919345662e",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 3,
+      "sha256": "fac2794f9c2c9a12ee06491fcec5706d9f91fd3f9475bb4d58455acc8cfeca18",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 4,
+      "sha256": "3c186eca0b378c3adb8b45450843e4c4bcb4584a6f99501eeba765b838321aed",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 5,
+      "sha256": "e63c6eb96a9f09db3cb695123f44703180ca385a0ae8daf99f4d45e50873ce8d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 6,
+      "sha256": "7487b650b3834a4eec378b4a157356babd3b65681c70af1f4bc40e41d94390a2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 7,
+      "sha256": "c08fd16517fd773f72d698a7961ae8ab78fbde292a79bfec76a80523faa58c53",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 8,
+      "sha256": "ef62d722a305b8cb99703fa0bafa02d70e441e9dff3a7c4a3a1781c3c3daae68",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 9,
+      "sha256": "8d55678e97637b2131ee560d3dadfd3f8ce6598d69ea54d7e9ea3ecbf9fda9fe",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 10,
+      "sha256": "5f3643edddc4047b83144ed3c4aafeb8a03c6bd98b91d98265bb6dbc11023d53",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 11,
+      "sha256": "84dd892b47aabaa2325b9e278251ba6c8072cba3269cdc93c1c576fa40eb7354",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 12,
+      "sha256": "382d4ad653e2941963633c8abf56fa74c5e77ad88be88c2443190ddea66499ab",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 13,
+      "sha256": "aed60784aa61ca855e8334342335691b9569e2fbbba4237519ed06df7798f7d8",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 14,
+      "sha256": "1982487819a765bc0c4efecad980f57a0d4df36d2e5ce8b3a3e49fe79e5fe5b7",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "cast",
+      "index": 15,
+      "sha256": "177d998b54eac4b843dc87098da80041742b1f20df6e08ccdb51aa12af351b0c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 0,
+      "sha256": "3b02e0e82a32ebcf7f91edd2f217c69126bc3f51e61a3ae1416d35ea8c6a2e25",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 1,
+      "sha256": "ac736bba2b02b9e713dd3c5176f3d2122f429d025c92d801f69fd6d2b702f257",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 2,
+      "sha256": "98e750574108fcc98044f95cb3157afad3700c3f19cb28e06b2b74851489abc2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 3,
+      "sha256": "986606cf66ffa445c3f092d16f79040a74d5d8382ca727a90c5077c25f434a6d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 4,
+      "sha256": "6f32ebf711b1e707b0ab74d1ea5c512651a03f598d74635c23885885400b9995",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 5,
+      "sha256": "e4dad4202021bf46823be58c602b060a596b3bbae60664dc8a09d709295bfbe2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 6,
+      "sha256": "b1605b2878a0f3ed51973066c4053ef3d145fce909f8e58e3edce9b22be7e5b0",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 7,
+      "sha256": "ddb78b4fb340e7b33bfcc1392a28f7221a681ad3417297ac97998c71d522319d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 8,
+      "sha256": "faec65b44e92ede693d65799035de5509f2e5fa6dd142916d864a1d7ee032fe6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 9,
+      "sha256": "12bee12dfa0a3065e88d72413817adf770c2e0b53d3a7aa678a1adfe008c9314",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 10,
+      "sha256": "bdd7813d99a4f6a0e4fa29e5e6d1088f5194f2cb40c622d82b7ef94098cc8254",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "channel",
+      "index": 11,
+      "sha256": "244a33cb16ba566550625936174dad71b9e421c7c0363c29293d802df907f900",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 0,
+      "sha256": "17904fcfb1d87756e7c314697deacd0c775f87efcd8c1cfc0624a676df61587d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 1,
+      "sha256": "0c400bd8c0d2dbabb85fceb9e00436ff6a24aab505b59fdcb21a144d7ab8d815",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 2,
+      "sha256": "c75b571176c84638d643d0a00512353fe6d9dc8c7cbe420c3583388d2bbbd82a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 3,
+      "sha256": "66be8405d3d2668c68cccc83c0bf22ae4b3f4d8f53378f46bb7d54881c600185",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 4,
+      "sha256": "f9e8a86751dbe4bb20a62b0dbbeda2948baa19e2749e3b4f64aafe6feb8b308f",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "hit",
+      "index": 5,
+      "sha256": "8e15ef737fbb10df2179065c29e521b7c268410e919dea4c014d570873271477",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 0,
+      "sha256": "82ed9183a79962c3d3ad7031aa2f3f120d00185bcc75cf1336454dba1f3a90f1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 1,
+      "sha256": "fbb252371f00d17361dbd42ef17277c393297a9b1f467365b618afc981377a06",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 2,
+      "sha256": "7c6625c31467612728e4f7580c4b9d4a1c8c7fa4ee2da137a5e7ce610770811a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 3,
+      "sha256": "45287ddc00059cba17e43be3487e54fdb4a1a0315d29a2756aa9cdbb1a40ae30",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 4,
+      "sha256": "395432544d94cf37a754e14649dfc2ff8c4309f248d079b1cd5e15fb6317148a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 5,
+      "sha256": "d975e8ce7e281ba18d8f2b3aa66b70fc5bbc05b020ce2dff30c840f3c4caa7e3",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 6,
+      "sha256": "eaca2e8ddfd045214fc4f49bfd7cd897fac777f69aeb8508f20e1d7a5c79c585",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 7,
+      "sha256": "46a0e90b3d803cd8629f33e699c6037a06eb563d49b77516244449d229213460",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 8,
+      "sha256": "4bf57c1917ccf1c9f37ea30cccd11bac5eabe656c41e49502492561a94ad8333",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 9,
+      "sha256": "9e8a4af339e552e1481e6a6be4e0b2f96b1e843628430541d25fe9e3bc55519f",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 10,
+      "sha256": "1f51e9332f7d8016c6b274bc37728d330af52538deb1a9cf8088393292531acf",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "die",
+      "index": 11,
+      "sha256": "e6f142c677b47b0ed8125b2ade4c64519416b9d4ba5ccf1bd99de42030c9fab6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 0,
+      "sha256": "ee48a05082f8a7b34af9456143570f53b653531508122a6580c7134843eee640",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 1,
+      "sha256": "a64805c0c4dfd5dcf9af70cebda7a36d3a03653d9ff202863ddf968c2216b230",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 2,
+      "sha256": "0e193795628c872fa9a1962eb6fd58bc224ab8edc18a5bfddaeaf713d16a1bad",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 3,
+      "sha256": "0d2a857d60958056e02b015e5bee7f42070d6c366ce0392d9d86f0585a5c66db",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 4,
+      "sha256": "cdc2e9085174ee809378c7a28787e4dc5ebe98ff7c9c22eb6a9ed087a40031c1",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 5,
+      "sha256": "4dabd8644b9a848e3263071d1ac080888aadc2489c4d2d9d1128194dee059029",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 6,
+      "sha256": "bf585bb1460d89c8d1425065253e45f0662b3700ea4bcca9eed720c77b9b5061",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 7,
+      "sha256": "e845da3b5b664692306abd1b25973f1e6d30d949ec11a43c231b2efe53e5627b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 8,
+      "sha256": "cbbe2e6b6521e80755753dfe7c6dedce8734a09c9b58c979c04dbcb0b374f847",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 9,
+      "sha256": "960e6f42d94e4807d2aa2f58710c38a4380520ead0517e28ee127503776c3108",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 10,
+      "sha256": "e4199f67289013cd8fd470d976bdbaa656f909eae85ca797cc7923130e0cab1a",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 11,
+      "sha256": "7187657f6aeee1feea67920b4db0037e8e2540f0c5cfc6af0bd0443404386931",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 12,
+      "sha256": "cdb92b887af57e4c95bd4d04346dc7b82b5740e01c8ef7d244e7e6c11b87cea8",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 13,
+      "sha256": "b4d549fb8faf43c56566eb036ad3d619f79033e22904e155e676baaecb6067f8",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 14,
+      "sha256": "9c636ff1b4cce83acce174abe757bbf72bf59e3f2185c3cb29341c4b95cf674d",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "tribulation",
+      "index": 15,
+      "sha256": "f6a3fec55dc49952c8947c57de580076f7fef127477fe020074e49bf6f938bac",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 0,
+      "sha256": "0f0b14da7481c8a4a711f25d8e1794eef56f93d90f1f9306f72a513bd20f85ac",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 1,
+      "sha256": "9f16aab63807158b4f6ff9a92e1497f0b7f1d8f1bbe63a3aadb1428bbc063a1c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 2,
+      "sha256": "36e556de98a2ab47da341eaff5ba10a79c4ddd656af3f6cde9c8a49e1bf1315c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 3,
+      "sha256": "01722ac3aaf2c59cfbb80487010b3ef2c7de8bffbeff4e4bc82438fe3b3cc4b8",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 4,
+      "sha256": "0a246bbda28ff5cad5b7e5e3f014edd3afe0c5c9b63983505c8564df7bda6508",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 5,
+      "sha256": "a7ead177bdfaac9011dd39ba45a6047b41361b71dc3526cb918306150a37add4",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 6,
+      "sha256": "b4b5eb73c73a0969e44d2c9278b42a1dfbe5ec475cc9a767af3685c1533c23d6",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 7,
+      "sha256": "f1d559c72f8d95692d3fb7cb1d270d63ee0a8142b39f65de047be9ad66ff096b",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 8,
+      "sha256": "406c64b44fe75030b8729b38581f846ad4e60e1ebd3274f6acc79ff2e460cf0c",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 9,
+      "sha256": "2e42d04ed2dd9bc199ce51adcbb0b9a0c3eb783c87453d2849fcfc356d45f7e2",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 10,
+      "sha256": "bc88dcf2aef837e45caaa3da2ad3e9a80b0ae14f3199a0379fcb3595f8ab75e5",
+      "sameAsPreRepair": true
+    },
+    {
+      "clip": "emote",
+      "index": 11,
+      "sha256": "3a6ad66a4a954a99a10c960a1a8b1857a8c79cccafbc441aa9675b95eabd8794",
+      "sameAsPreRepair": true
+    }
+  ],
+  "headRepair": "repair/dash5.head-boundaries.json",
+  "registration": {
+    "pre": {
+      "height": 161.68421052631578,
+      "pelvisX": 130.438648225997,
+      "soleY": 182.91547049441786
+    },
+    "post": {
+      "height": 162,
+      "pelvisX": 116.88097681099939,
+      "soleY": 183
+    },
+    "dx": -13.509981048982326,
+    "dy": 0,
+    "exception": "posture",
+    "inheritedRegistration": {
+      "kind": "inherited-registration",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "maskSha256": "074da18a2639cf71d1fca094e68090a843e23895bcaddef32493df9fe7ff726e",
+      "editedSha256": "035b1db1423762663f293f17dd66ce2a1258503ac9824541498a89319369957d",
+      "sourceCell": 11,
+      "outsidePixels": 92946,
+      "origin": {
+        "x": 131.11676785879828,
+        "y": 232
+      },
+      "scale": 1,
+      "vertical": "keep"
+    }
+  },
+  "clock": {
+    "frameRate": 24,
+    "drawings": 202,
+    "clips": 15
+  }
+}
