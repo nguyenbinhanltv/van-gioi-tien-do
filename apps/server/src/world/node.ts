@@ -34,6 +34,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -116,6 +117,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
+  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -185,6 +188,8 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  /** monster spawns / AI (D74); null when the node runs without mobs */
+  readonly mobs: MobManager | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -195,6 +200,12 @@ export class WorldNode {
     this.spawnRng = rngFork(rngSeed(seed), 'spawn');
     this.spawn = opts.spawn ?? { i0: n / 2 - 48, j0: n / 2 - 48, side: 96 };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    const mo = opts.mobs;
+    if (mo) {
+      const o = mo === true ? {} : mo;
+      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.world = this.mobs.populate(this.world);
+    } else this.mobs = null;
   }
 
   // ------------------------------------------------------------------ players
@@ -320,7 +331,7 @@ export class WorldNode {
     }
     const r = step(this.world, inputs, this.ctx, NETWORK.TICK_MS);
     const t1 = clock();
-    this.world = r.world;
+    this.world = this.mobs ? this.mobs.step(r.world) : r.world;
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -469,13 +480,14 @@ export class WorldNode {
         enters.push({
           index,
           entityId: e.id,
-          kind: 0,
+          kind: this.mobs?.kindOf(e.id) ?? 0,
+          defId: this.mobs?.defIdOf(e.id) ?? 0,
           qi,
           qj,
           anim: se.anim,
           dir: se.dir,
           hpPct,
-          maxHp: WORLD_CONFIG.PLAYER_MAX_HP,
+          maxHp: this.maxHpOf(e),
         });
       }
 
@@ -504,8 +516,12 @@ export class WorldNode {
     }
   }
 
+  private maxHpOf(e: EntityState): number {
+    return this.mobs?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+  }
+
   private hpPct(e: EntityState): number {
-    return Math.max(0, Math.min(127, Math.round((e.hp / WORLD_CONFIG.PLAYER_MAX_HP) * 100)));
+    return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
 
   /** 0 idle, 1 run, 2 fly */

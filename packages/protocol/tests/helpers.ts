@@ -96,6 +96,7 @@ export function randMessage(r: Rng, type?: Message['type']): Message {
           index: k,
           entityId: r.int(0, 2 ** 32 - 1),
           kind: r.int(0, 255),
+          defId: r.int(0, 65535),
           qi: r.int(0, 65535),
           qj: r.int(0, 65535),
           anim: r.int(0, 255),

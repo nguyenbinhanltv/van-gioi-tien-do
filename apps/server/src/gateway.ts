@@ -4,7 +4,7 @@
  *  POST /auth/register  {username,password}  -> 201 {accountId}
  *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
  *  GET  /health         -> 200 {ok, players, tick}
- *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"..."}
+ *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":2,"protocolMax":2,"token":"..."}
  *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
  *                       afterwards: binary @vgtd/protocol frames only.
  *

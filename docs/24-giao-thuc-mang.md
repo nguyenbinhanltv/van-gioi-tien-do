@@ -93,7 +93,7 @@ Ký hiệu: **C→S** / **S→C**; "Họ": N = nóng (thủ công), L = lạnh (
 | ------------ | ------------------------ | --------- | --- | ------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1            | `input`                  | C→S       | N   | D            | **Có (PR #10)** | `ack u16, count u8, count × {seq u16, dtMs u8, dir u8, mag:4·flags:4}` (1–3 input)                                                                                                                        |
 | 2            | `snapshot`               | S→C       | N   | D            | **Có**          | `flags, seq, [baselineSeq], tick, [self 19 B], count, bản ghi thực thể bit-packed` (37–44 bit/thực thể)                                                                                                   |
-| 3            | `aoi_enter`              | S→C       | N   | S            | **Có**          | `count × 18 B` (chỉ số, entityId, kind, vị trí, anim, hướng, hp%, maxHp)                                                                                                                                  |
+| 3            | `aoi_enter`              | S→C       | N   | S            | **Có**          | `count × 20 B` (chỉ số, entityId, kind, **defId u16**, vị trí, anim, hướng, hp%, maxHp) _[Cập nhật D74: giao thức v2, +2 B `defId`]_                                                                      |
 | 4            | `aoi_leave`              | S→C       | N   | S            | **Có**          | `count × index u16`                                                                                                                                                                                       |
 | 5            | `skill_cast`             | C→S       | N   | S            | **Có**          | `seq u16, skillId u16, targetId u32` (10 B)                                                                                                                                                               |
 | 6            | `skill_result`           | S→C       | N   | S            | **Có**          | `seq, reason (CastReason), skillId, readyAtMs, casterIndex, hits[]`                                                                                                                                       |
@@ -220,7 +220,7 @@ Ngân sách theo thông điệp (đề xuất, dùng để kiểm thử "không 
 | ---------------------------- | ------------------------------------ | ------------------------- | ------ |
 | `input` (1 / 3 input)        | 10 B / 20 B                          | 20–30 Hz                  | Lên    |
 | `snapshot`                   | 13 B + ~5 B × thực thể (≤ 120 / 200) | 20 Hz (vùng gần), 10/5 Hz | Xuống  |
-| `aoi_enter`                  | 2 B + 18 B × thực thể mới            | Theo sự kiện, ≤ 5/s       | Xuống  |
+| `aoi_enter`                  | 2 B + 20 B × thực thể mới            | Theo sự kiện, ≤ 5/s       | Xuống  |
 | `skill_result`               | 14 B + 7 B × số đòn trúng            | Theo sự kiện              | Xuống  |
 | `damage_batch`               | ≤ 3 B + 7 B × mục tiêu               | ≤ 10 Hz                   | Xuống  |
 | `chat_msg`                   | ≤ 320 B (nén tùy chọn)               | Theo kênh                 | Xuống  |
