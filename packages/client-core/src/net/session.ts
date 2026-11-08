@@ -9,7 +9,10 @@ import {
   LIMITS,
   decode,
   encode,
+  type BreakthroughResultMsg,
+  type CharStateMsg,
   type EnterEntity,
+  type MeditateResultMsg,
   type Message,
   type SelfState,
   type SkillResultMsg,
@@ -59,6 +62,16 @@ export interface NetEvents {
   onSnapshot?(tick: number, entities: readonly SnapshotEntity[], self: SelfState | null): void;
 }
 
+/**
+ * Progression wire hooks (D76). A separate object on purpose: `NetClient.events` is replaced wholesale by systems that attach
+ * later (combat), so progression listeners must not live there. Same safety rule: a throwing hook never breaks the session.
+ */
+export interface ProgressionEvents {
+  onCharState?(msg: CharStateMsg): void;
+  onMeditateResult?(msg: MeditateResultMsg): void;
+  onBreakthroughResult?(msg: BreakthroughResultMsg): void;
+}
+
 export interface NetOptions {
   /** e.g. `http://localhost:8080` */
   baseUrl: string;
@@ -93,6 +106,8 @@ export class NetClient {
   snapshots = 0;
   /** replaceable at any time (e.g. when combat is attached after the session started) */
   events: NetEvents;
+  /** progression listeners (tu vi state, meditation / breakthrough answers); survives `events` being replaced */
+  progressionEvents: ProgressionEvents = {};
   private ws: SocketLike | null = null;
   private lastSnapshotSeq = 0;
   private acc = 0;
@@ -210,6 +225,15 @@ export class NetClient {
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
         break;
+      case 'char_state':
+        this.emit(() => this.progressionEvents.onCharState?.(msg));
+        break;
+      case 'meditate_result':
+        this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
+        break;
+      case 'breakthrough_result':
+        this.emit(() => this.progressionEvents.onBreakthroughResult?.(msg));
+        break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
         if (t0 !== undefined) {
@@ -282,6 +306,22 @@ export class NetClient {
         aim: quantizeAim(m.aim),
       }),
     );
+    return true;
+  }
+
+  /** Ask the server to start or stop meditation (D76). Returns false when the socket is not open. `requestId`: 32 lowercase hex characters. */
+  sendMeditate(start: boolean, requestId: string): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: start ? 'meditate_start' : 'meditate_stop', requestId }));
+    return true;
+  }
+
+  /** Ask the server for a breakthrough attempt (D76); the server picks minor / major and rolls. False when the socket is not open. */
+  sendBreakthrough(requestId: string): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'breakthrough_start', requestId }));
     return true;
   }
 
