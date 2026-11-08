@@ -2,6 +2,7 @@
 import type { Image } from '@vgtd/rig';
 import { measureFigure } from './master.js';
 import type { BracketedOcclusionEvidence } from './bracketed-occlusion.js';
+import type { ClipRelativeProxyEvidence } from './clip-relative-proxy.js';
 import {
   headEvidenceKind,
   headLandmarkBreadth,
@@ -12,7 +13,11 @@ import {
   type HeadLandmarks,
   type RearBreadthOnlyLandmarks,
 } from './head-evidence.js';
-export type SimilarityFrameHead = HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence;
+export type SimilarityFrameHead =
+  HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence | ClipRelativeProxyEvidence;
+/** D60/D61: window-only crown-anchored comparison, no inferred anatomy. */
+export const isCrownOnlyHead = (head: SimilarityFrameHead | undefined): boolean =>
+  head?.kind === 'bracketed-occlusion' || head?.kind === 'clip-relative-proxy';
 
 export interface SimilarityBox {
   readonly left: number;
@@ -64,8 +69,8 @@ export function landmarkSimilarityRegions(
   masterHeight: number,
   rule?: 'rear-breadth-window' | 'rear-span-window' | 'rear-breadth-master-window',
 ): SimilarityRegions {
-  if (head.kind === 'bracketed-occlusion')
-    throw new Error('D60 crown-only window requires the certified master window');
+  if (head.kind === 'bracketed-occlusion' || head.kind === 'clip-relative-proxy')
+    throw new Error('D60/D61 crown-only window requires the certified master window');
   const length =
     head.kind === 'rear-breadth-only'
       ? headLandmarkBreadth(head, image.width, image.height)
@@ -220,12 +225,12 @@ export function similarityRegionsForPair(
   masterHead?: HeadLandmarks,
   frameHead?: SimilarityFrameHead,
 ): SimilarityCropMeasurement {
-  if (frameHead?.kind === 'bracketed-occlusion') {
+  if (frameHead?.kind === 'bracketed-occlusion' || frameHead?.kind === 'clip-relative-proxy') {
     if (!masterHead) throw new Error('D60 Lab comparison requires certified master evidence');
     const reference = certifiedMasterSimilarityRegions(master, masterHead, masterHeight);
     return {
       method: 'landmarks',
-      reason: 'D60 window-only crown anchors; certified master window dimensions',
+      reason: 'D60/D61 window-only crown anchors; certified master window dimensions',
       master: crownAnchoredSimilarityRegions(master, masterHead, reference, masterHeight),
       frame: crownAnchoredSimilarityRegions(frame, frameHead, reference, masterHeight),
     };

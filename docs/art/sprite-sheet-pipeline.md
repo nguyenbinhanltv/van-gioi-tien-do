@@ -579,7 +579,9 @@ hay export.11ô Lab vượt15 chặn rebuild, cần sửa hoặc quyết định
 
 Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourceSha256, mask, maskSha256, cells}`; đường dẫn tương đối project, SHA256 gồm 64 hex thường, cells là chỉ số clip-local (sheet nhóm ánh xạ qua sheetSelection). Mask PNG cùng kích thước native, RGB nhị phân 0/255, alpha 255: trắng cho phép edit, đen khóa. Tool so mọi byte RGBA ngoài mask trên toàn sheet trước DPI/key/despill/palette, kể cả RGB trong pixel alpha 0; sai hash, mất mask hoặc khác byte là lỗi cứng không waiver. Mỗi ô kế thừa phải còn pixel khóa.
 
-Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
+Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu; vẫn cấm trộn variant, còn `authoredOrigins` chỉ được dùng cùng `inheritedRegistration` theo quy tắc origin giống hệt (xem Bổ sung D57 bên dưới). Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
+
+[Cập nhật D57 bổ sung (thực thi "Bổ sung D57, orchestrator 2026-11-08" trong docs/DECISIONS.md, nới hạn chế "không trộn authored origin" của D57): `authoredOrigins` được phép cùng `inheritedRegistration` (vẫn cấm kết hợp với variant). Ô sửa kế thừa **cùng** origin đã khai như ô nguồn trước edit (ví dụ lattice-root X128,638589 và `groundY` nguồn đã khai): origin được tính từ ảnh nguồn và ảnh đã sửa, nếu khác nhau (ví dụ vertical `sole` mà đáy ô đổi) thì fail `authored origin ... differs from its pre-edit source cell`. Mọi kiểm chứng D57 giữ nguyên (SHA nguồn, SHA mask, RGBA ngoài mask giống từng byte); không fallback centroid, không đổi nhãn anatomy.]
 
 ## Bổ sung D56-master: nape và cả hai acromion bị che trên master
 
@@ -659,6 +661,58 @@ không fallback centroid, không ghi cửa sổ thành anatomy.
 
 INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
 size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.
+
+## Bổ sung D61: clip-relative-proxy cho ô động không có phép đo đầu so được master
+
+[Cập nhật D61: dùng sau tối đa một lần vẽ lại khóa master, khi cả cụm ô dash/run/attack/hit che mất endpoint nên D60 không có lân cận đo thật. Không thay D60 và không phải pass band master.]
+
+Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`. Ô khai kind `clip-relative-proxy` với crown nhìn thấy
+alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review; không thêm chin/nape/breadth suy diễn.
+
+**Định nghĩa proxy** (cấu hình theo project bằng `headProxy`, hàng khai báo từng ô bằng `headbandTopRows` của clip):
+bề rộng ngang của mũ tóc đặc trên hàng mép TRÊN headband. Mặt nạ = pixel alpha≥128 có khoảng cách RGB Euclid
+tới `hairRgb` ≤ `hairTolerance`, trong crop đầu cố định `crop` (`dx,dy,width,height`, offset từ crown, phải chứa
+crown). Chọn thành phần liên thông 8 hướng chứa crown TRƯỚC opening; opening 3×3 (erode rồi dilate, bán kính 1);
+rồi lấy thành phần sống sót lớn nhất (hòa: đầu tiên theo scan). Bề rộng = extent ngang của thành phần đó trên
+hàng headband-top. Hàng này phải nằm trong crop đầu và mũ tóc phải chạm hàng đó, nếu không ô fail.
+
+**Ô chứng nhận:** ô khác cùng clip có head evidence đo thật đạt band so với master (không phải bracketed/proxy) và
+có hàng headband khai báo. Cần ≥2 ô chứng nhận đo được proxy (ưu tiên kẹp hai phía). Ô đạt khi
+|proxy / trung bình proxy các ô chứng nhận − 1| ≤ 3%.
+
+**Điều kiện bắt buộc:** crown nhìn thấy; `headProxy` và hàng headband khai báo; `occluder` + endpoint bị che + note;
+master đo thật hợp lệ (master không dùng proxy); hai lân cận i−1/i+1 (loop wrap; ô ở mép nonloop bị loại) có ô và
+crown; Lab D55 đầu≤15/thân≤23 với cửa sổ neo crown như D60; cả hai pair temporal với lân cận
+min(head,torso)≥0,45; thiếu phép đo/NaN là lỗi cứng. Mọi cổng khác (bbox height band, canvas, contacts) giữ nguyên;
+lý do `clip-relative` không bao giờ miễn similarity (D54).
+
+```json
+{
+  "headProxy": {
+    "hairRgb": [58, 36, 30],
+    "hairTolerance": 24,
+    "crop": { "dx": -40, "dy": -4, "width": 80, "height": 60 }
+  },
+  "clips": [
+    {
+      "name": "dash",
+      "headbandTopRows": { "3": 71, "4": 72, "5": 71 },
+      "headEvidence": {
+        "4": {
+          "kind": "clip-relative-proxy",
+          "crown": { "x": 157, "y": 57 },
+          "occluder": "hunched shoulder and ribbon hide the nape",
+          "hiddenEndpoints": ["skullBase", "breadth.left", "breadth.right"],
+          "note": "Example schema only; crown, row and certified cells must be reviewed on the native source"
+        }
+      }
+    }
+  ]
+}
+```
+
+INFO ghi `head_clip_relative`, `measurement:unmeasured`, proxy px, trung bình ô chứng nhận, tỉ lệ, bracketing, hàng
+headband, Lab và hai pair SSIM; review hiện `clip-relative (not a master-band pass)`. Không có size/span/breadth giả.
 
 ## Bổ sung D62: ngoại lệ sửa HEAD-BAND bằng ROI đầu
 

@@ -3,6 +3,7 @@ import type { Finding, QaClip, QaOptions } from './qa.js';
 import type { Direction } from '@vgtd/shared';
 import type { Image } from '@vgtd/rig';
 import type { BracketedOcclusionEvidence, BracketedMeasurement } from './bracketed-occlusion.js';
+import type { ClipRelativeProxyEvidence, ClipRelativeMeasurement } from './clip-relative-proxy.js';
 
 export type HeightPolicy = 'head-size-v1';
 
@@ -14,6 +15,8 @@ export function isHeadEvidenceReason(reason: string): boolean {
     canonical === 'secondary-overhang' ||
     canonical === 'bracketed' ||
     canonical === 'bracketed-occlusion' ||
+    canonical === 'clip-relative' ||
+    canonical === 'clip-relative-proxy' ||
     canonical.startsWith('rear-')
   );
 }
@@ -34,6 +37,7 @@ export type HeadEvidenceKind =
   | 'rear-crown-shoulder-single'
   | 'rear-span-only'
   | 'bracketed-occlusion'
+  | 'clip-relative-proxy'
   | 'rear-breadth-only';
 /** D59: a real occluder hides a skull-breadth endpoint on master and frame. */
 export interface RearSpanOnlyLandmarks {
@@ -111,7 +115,10 @@ export interface RearBreadthOnlyLandmarks {
   readonly occluder?: string;
 }
 export type HeadEvidence = (
-  Exclude<HeadLandmarks, RearBreadthMasterLandmarks> | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence
+  | Exclude<HeadLandmarks, RearBreadthMasterLandmarks>
+  | RearBreadthOnlyLandmarks
+  | BracketedOcclusionEvidence
+  | ClipRelativeProxyEvidence
 ) & {
   readonly note: string;
 };
@@ -122,6 +129,7 @@ export interface HeadMeasurement {
   readonly breadthPx?: number;
   readonly breadthRatio?: number;
   readonly bracketed?: BracketedMeasurement;
+  readonly clipRelative?: ClipRelativeMeasurement;
   readonly reason: string;
   readonly master: HeadLandmarks;
   readonly frame: HeadEvidence;
@@ -134,7 +142,7 @@ export interface HeadMeasurement {
 }
 
 export const headEvidenceKind = (
-  head: HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence,
+  head: HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence | ClipRelativeProxyEvidence,
 ): HeadEvidenceKind => head.kind ?? 'crown-chin';
 export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
   return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
@@ -301,6 +309,11 @@ export function checkHeadEvidence(
     return failure(
       'head_bracket_unresolved',
       'bracketed evidence requires the full clip-level neighbour/budget/quality check',
+    );
+  if (evidence.kind === 'clip-relative-proxy')
+    return failure(
+      'head_proxy_unresolved',
+      'clip-relative proxy evidence requires the full clip-level certified-cell check',
     );
   if (evidence.kind === 'rear-breadth-only') {
     if (!['NE', 'N'].includes(clip.direction ?? 'E'))

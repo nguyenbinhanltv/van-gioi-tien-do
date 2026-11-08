@@ -1,0 +1,915 @@
+{
+  "decision": "D58",
+  "scope": "Timing only. Explicit smooth-v2 profile; no art or identity reclassification.",
+  "utc": "2026-11-08T07:05:42.523061+00:00",
+  "gitBase": "c7b692f7b7f1d1e32ccc32eff47eceeb4648f212",
+  "beforeProjectSha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb",
+  "projectSha256": "4a1f6fc410ab916a399b20cf0bd46ccb4badb74b7d6ee045bc17a2bced33eefe",
+  "verification": {
+    "changedFiles": ["apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_ske.json"],
+    "unchangedFiles": [
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/approved-T3.reference.png",
+        "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/approved-tiers.reference.png",
+        "sha256": "811e295194973ef30c1cda54ecc905ba49f1a2420339542b2d966ef09e23adf2"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master-native.png",
+        "sha256": "67b0b9bbba128a2b4d589b255b9cf0839e5f61d2517738b2721fd1f46d0ecfb8"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+        "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/N.master-native.png",
+        "sha256": "a3145ce740643b5febb5142bd406075dabb005a21cc96f4d73932a866d2b8f38"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/N.master.png",
+        "sha256": "5bb923b08f39d0d6eacff3073584214e7682310cc3557d0de17f71ce8de0a8ae"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/NE.master-native.png",
+        "sha256": "0d0511365624cb4eb3816d85d3dc472d58c336cf1d6776005ee5d9d27d7def71"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/NE.master.png",
+        "sha256": "b4e94ac3bef8d20e3a7ae04988a73cd20debcbb97a4b4849baa13edb4379b9b3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/S.master-native.png",
+        "sha256": "dd1f5a8aac2e503e60f875f8886aaf5649021456fe002bd855f967a865f97549"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/S.master.png",
+        "sha256": "8c7e933e7c5fa80e537b235d6bcfbb8bbfc3cf8eaf2838feb3539f2d538a7bbb"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/SE.master-native.png",
+        "sha256": "5ddd628ba864d417684ea1c2504ae2ed7376c719a34ef5ef96e52fac4afa798a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/SE.master.png",
+        "sha256": "f607c476e521cd9dabc2523aca4af632bd2fbc2c437b00f13ffce607e08673ac"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/T1-turnaround.attempt1.raw.png",
+        "sha256": "899c8d4a8aa4287bf884556d0291dc1aa95a11c3354b486a7041133090034b81"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/T1-turnaround.png",
+        "sha256": "32ed60e887bb41dfa05d58995293f063def31c7e8ff63d958ef7a5c7432d00eb"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/T1-turnaround.raw.png",
+        "sha256": "6e3f3c19cbf0d593a900c4d77067c2dc240704c7b74ee6ece06956acf08a5ce7"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/T1.master-source.raw.png",
+        "sha256": "972d1ec155a3c8c8672a6464427ec4aa6601fe1626e7c88ea739fb739234a67b"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack.png",
+        "sha256": "6fd041aa0c02eb34fc21d2f3468b745c3e29dcd309a8fbceeea559af78eb3b00"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_2.png",
+        "sha256": "406e67944871e962af2dbbab74faf0e131ab3c6c11adffdce964758bc2384bf4"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.headroom-edited.png",
+        "sha256": "651603506f74b998547d75900fefb001ef0b4cdf97d8215459bfec3210db3a8d"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.headroom.png",
+        "sha256": "42db9027983fbbf01390cfa237caf5380b18c45228cfb08c3c8e44fc10c4d49e"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.png",
+        "sha256": "66be806b185ec3b631d673eb821ca0c2787c3282e6b6c9dfe0413d0172e23abf"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/cast.png",
+        "sha256": "1a1466eb0704da8f12ef14e71bc7e6e0db434184ca543cd2d256d3629e3c83fa"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/channel.png",
+        "sha256": "ef06e59c0476c35bcea41f322001fc4d76fc19cc0b7c7c50fc886e317493ea21"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/die.png",
+        "sha256": "0b7e8502dd3e2bd97f6d14f6a440358643c971d814b9d4932aec72168ae87d17"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/emote.png",
+        "sha256": "49a28f9881be881a88b9841341667e278b21e98c861e3cc514d33927b6f76c28"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.cell4-edited.png",
+        "sha256": "1a2d1eccf6cb90446a7362327b4424457242cc54d088be7b98320bd22862a48d"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-edited.png",
+        "sha256": "2d0b18cfd5692b080a8ef94ed4785673a345daf6023f4a143f36ebdea6c41478"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-final-edited.png",
+        "sha256": "dc3ea1511c61f9c4d6177957cb50afb7ea96b56ee8ae9ae41bcdb4eded6206d3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.final.png",
+        "sha256": "3fe250f900b53aba118b308028cb877826fed7d3862b63fbf7f0107b05ec90b9"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-edited.png",
+        "sha256": "4174db4f5db89a671efdc8b8187956b688bc353afecf861dab47db73d6b573c9"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-midpoint.png",
+        "sha256": "00180b194ff65e0de978e8f41cbb296d1da12c318150914106333c6cd7713d54"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-reduced.png",
+        "sha256": "8ed67d13af1e50e45b60c656e75f4288023b85b6bb3452e3e099f13e4c7ab023"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-repaired.png",
+        "sha256": "042963a4d1c3abd313b0274275228071640aaaaa1193c005f9617192be5d54a8"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-selected.png",
+        "sha256": "38d8563d7770e0a8e969438f6a5bb35a1ac91fd9974de1be321d98e310b3bac8"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-stencil-edited.png",
+        "sha256": "7d8223486cdae1621cac4c6c7d42ca288e03418c292470074b9163e3d0a264eb"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.lanczos-selected.png",
+        "sha256": "0bdf4c787ade1956341d5071ae53cde06a6f492eacef73959ec1342dfdb6e614"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.locked.png",
+        "sha256": "97771c9ba7808a7725dbd66d81da33bdee321c8207b32a86111661b4b8a4d031"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.png",
+        "sha256": "ec564f9ada25510c06b3df3fa91ee75577c9e6215ea23e9f70bb98c50d7b528b"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.selected.png",
+        "sha256": "945a2ad174002df9f74ccad669b1ec1d235bbb4b251f9c733052d0404f7b7bd0"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.two-head-edited.png",
+        "sha256": "9cf9036033cd34da81f3dbd2c779c77014af63b91ef3fc23c27469b0c7a9d850"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/idle.png",
+        "sha256": "db820f677e121c7713b061425716110e147a122c5e44ca6f88ca00ebbce77345"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/meditate.png",
+        "sha256": "c3485ba73d2b1e24287dd631b81e8495c9a078087ee5214b03f5749fe2f77281"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.cell6-edited.png",
+        "sha256": "161a1515fd6f8f7b7fabe2fc6cc1321e9b5c189ad926e8a940936899fa01e5ee"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.cycle.png",
+        "sha256": "c2909ceb52ba729c9d04e1120291c8f41242bf489fc84c2f76924f341f42a7ea"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-corrected.png",
+        "sha256": "628fa44b250c4da65418f3db0db01eb36f0fffa82d57ba6f6487b3d8ceec5d7b"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-final.png",
+        "sha256": "974e7cb58697e44591ef60acf5c6d52dea7a2b4dde3342cff6193ec24e900bf0"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-locked.png",
+        "sha256": "edcd013af58f10dff665064128d4dc7b9abb0a25d885083fe5d280703c7dd220"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-midpoint.png",
+        "sha256": "6a4b2ca456122d3c9e42aa5adf247b4246988ac9fd46ca04d1d511b3ef1b338b"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+        "sha256": "627fd93a1101607bd2fd6dee1ebfe39bf0815351084ae1b37836229d5357f98d"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-selected.png",
+        "sha256": "bf63795309c75a7c0305d2dcf765878711254bda3bab7d4ad6ea278e1861a17d"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.lanczos-selected.png",
+        "sha256": "6ba7fdc6443572a083ccc1040f80f70173508ac24ac5a3c80ff0d45dcf5dee54"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.png",
+        "sha256": "853b73152c7c01fff9b4c851d3cbc23f25ccd49c9c91c198070b22b1a81111b1"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.skull-reduction.png",
+        "sha256": "fe0dffc3bd38361d46db8d95c160ffd8e4c9ee5e083e83fa9ed5a1cb67d82b39"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.stride-lattice.png",
+        "sha256": "e0c984857d4024ee41a11095952537d81c73a1632849bdef41c9a4c9cd393de6"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.three-head-edited.png",
+        "sha256": "8df92eda448ae8be8d3cf20fca00c6d5eb515cb7a050bca13f1caaf29429d426"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.two-head-edited.png",
+        "sha256": "37f27fe15a433f13e6c23efa0932155661faa9c8d68b29491cd63bf932458987"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/sword_fly.png",
+        "sha256": "eaf8cdcab7299ca30f962e689da77e51bfa6bae6fec8cc10bcc78775972169d8"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/tribulation.png",
+        "sha256": "8cfc0f9f5d0681b15038cdc3eb9c8908d4ae178d9b63e30ea63afe72cc9b4062"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.headroom-edited.png",
+        "sha256": "5d16d32304f20bca0b9485d472ef51642533af0999406b7b0bf6f75dc0068b7d"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.headroom.png",
+        "sha256": "0ed356f3851aafbaa1ca9f04e3b92138f0196d83d88a5b9e5529169c715e0fbe"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.png",
+        "sha256": "051a10b05125f19d2a9156801d62c61cdf06a806ff43613cbc9cc1406f1ad859"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack.head-stencil.template.png",
+        "sha256": "7095135652c417e9fcda39b76429b47cb9d16f6bcab6c8808cb753dfd8ecaacc"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_2.head-stencil.template.png",
+        "sha256": "7095135652c417e9fcda39b76429b47cb9d16f6bcab6c8808cb753dfd8ecaacc"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_2.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_3.head-stencil.template.png",
+        "sha256": "7095135652c417e9fcda39b76429b47cb9d16f6bcab6c8808cb753dfd8ecaacc"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_3.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/cast.head-stencil.template.png",
+        "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/cast.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/channel.head-stencil.template.png",
+        "sha256": "c1ccd180ca53508dd46399eea606be371c68a92a775fd1efb23c16a266b1869a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/channel.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/dash-cell4.exact-head.template.png",
+        "sha256": "25a111b1c69cbea7b7d21095c3cd0893f004c222e4d742d446c3dac4be8ce98a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/die.head-stencil.template.png",
+        "sha256": "c1ccd180ca53508dd46399eea606be371c68a92a775fd1efb23c16a266b1869a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/die.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/emote.head-stencil.template.png",
+        "sha256": "c1ccd180ca53508dd46399eea606be371c68a92a775fd1efb23c16a266b1869a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/emote.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/hit-dash.head-stencil.template.png",
+        "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/hit-dash.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/idle.head-stencil.template.png",
+        "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/idle.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/meditate.head-stencil.template.png",
+        "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/meditate.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.head-stencil.template.png",
+        "sha256": "c159524b235318c3ed67d730a822c1ea86eb9457c42d55b5fbecc9a19d7f98ef"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.template.png",
+        "sha256": "f5ff4cb46a3f02fa6605e0d66d1cf3ad7a334396ed37c71ba641189aefa27b0b"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/sword_fly.head-stencil.template.png",
+        "sha256": "c1ccd180ca53508dd46399eea606be371c68a92a775fd1efb23c16a266b1869a"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/sword_fly.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/tribulation.head-stencil.template.png",
+        "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/tribulation.template.png",
+        "sha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/walk.head-stencil.template.png",
+        "sha256": "5e2e3ad2b2807271916d33f7cedddc01f635c56ca8a96c1e3d80a1ec1cc301ff"
+      },
+      {
+        "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/walk.template.png",
+        "sha256": "adddd6dc13bbd0cdcfa63c016f510e727296b270399f53fbaf8eba4c8ab1a700"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E.sprite.json",
+        "sha256": "a5c664cac075064346246a62a52542ef50c835cc9d04bbcf6b7e3a1b3ad08e7d"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E.sprite.json.meta",
+        "sha256": "4f7830bfd2af1687131ce8a397fd92ba2ef368e056a60f1eee3eb9018c47c49c"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.json",
+        "sha256": "d638d47e35919dba547b140c8297248ccd550719df32e642f9334a91856e31b4"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.json.meta",
+        "sha256": "5016824edacfde09df05842376ab3c90610754e1f31922053f978d05eae160cd"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.png",
+        "sha256": "3ffe8febd5e699a78454e06b7fbe7f5d5988e0822f03ccafee53245b177d4674"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.png.meta",
+        "sha256": "5c95d52e985080836e1ed259b8c6b0e0e97f99bb242f6542396327d4e4e0bd5f"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_ske.json.meta",
+        "sha256": "33a79f46e8d73a03dbcb13040a0a1789d69fad0e774673ad723216dbf091c28b"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.json",
+        "sha256": "bfaa47bc40c5b58a859a22272b04a5dee28c45bfe0ccde781d4e685bcfb3c106"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.json.meta",
+        "sha256": "a59e6af4d1c519e95ae6c29f6b34fe380d400b6a8701493885012acd6db1ee6a"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.png",
+        "sha256": "66cea985554281949e88d49abfa6185b301a0fe7e5c060362c9bad540a708e97"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.png.meta",
+        "sha256": "c021204547b3740be7182ad6ce7f3066346d498cf97de936cb2eef2976adaf19"
+      }
+    ],
+    "clockHz": 24,
+    "oneTickDrawings": 202,
+    "qaUnchanged": true
+  },
+  "capture": {
+    "command": "npm run capture -w client-cocos -- --out C:/Users/PC/AppData/Local/Temp/vgtd32-cocos-E-24hz --animations all --frames 24 --mode single --direction E --src dragonbones/thuong-tu-chibi-v1 --stem thuongtuchibi --zoom 2 --sample midpoint --gif",
+    "creatorVersion": "3.8.8",
+    "zoom": 2,
+    "wrapperExit": 0,
+    "creatorExit": 36,
+    "environmentNote": "Fresh web-mobile build finished; Creator then exited36. Existing wrapper validated fresh index and all15 live runtime captures completed. Original capture documents the prior global window-state recovery issue; no global editor settings were changed.",
+    "animations": {
+      "idle": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "idle.sheet.png",
+        "gif": "idle.gif"
+      },
+      "meditate": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "meditate.sheet.png",
+        "gif": "meditate.gif"
+      },
+      "walk": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "walk.sheet.png",
+        "gif": "walk.gif"
+      },
+      "run": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "run.sheet.png",
+        "gif": "run.gif"
+      },
+      "dash": {
+        "duration": 0.4166666666666667,
+        "keyFrames": 10,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "dash.sheet.png",
+        "gif": "dash.gif"
+      },
+      "sword_fly": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "sword_fly.sheet.png",
+        "gif": "sword_fly.gif"
+      },
+      "attack": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack.sheet.png",
+        "gif": "attack.gif"
+      },
+      "cast": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "cast.sheet.png",
+        "gif": "cast.gif"
+      },
+      "channel": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "channel.sheet.png",
+        "gif": "channel.gif"
+      },
+      "hit": {
+        "duration": 0.25,
+        "keyFrames": 6,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "hit.sheet.png",
+        "gif": "hit.gif"
+      },
+      "die": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "die.sheet.png",
+        "gif": "die.gif"
+      },
+      "tribulation": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "tribulation.sheet.png",
+        "gif": "tribulation.gif"
+      },
+      "emote": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "emote.sheet.png",
+        "gif": "emote.gif"
+      },
+      "attack_2": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_2.sheet.png",
+        "gif": "attack_2.gif"
+      },
+      "attack_3": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_3.sheet.png",
+        "gif": "attack_3.gif"
+      }
+    },
+    "pixelMotion": [
+      {
+        "clip": "idle",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "meditate",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "walk",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "run",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "sword_fly",
+        "uniqueImages": 12,
+        "expected": 12,
+        "clockHz": 24
+      },
+      {
+        "clip": "attack",
+        "uniqueImages": 14,
+        "expected": 14,
+        "clockHz": 24
+      },
+      {
+        "clip": "attack_2",
+        "uniqueImages": 14,
+        "expected": 14,
+        "clockHz": 24
+      },
+      {
+        "clip": "attack_3",
+        "uniqueImages": 14,
+        "expected": 14,
+        "clockHz": 24
+      },
+      {
+        "clip": "cast",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "channel",
+        "uniqueImages": 12,
+        "expected": 12,
+        "clockHz": 24
+      },
+      {
+        "clip": "die",
+        "uniqueImages": 12,
+        "expected": 12,
+        "clockHz": 24
+      },
+      {
+        "clip": "tribulation",
+        "uniqueImages": 16,
+        "expected": 16,
+        "clockHz": 24
+      },
+      {
+        "clip": "emote",
+        "uniqueImages": 12,
+        "expected": 12,
+        "clockHz": 24
+      },
+      {
+        "clip": "hit",
+        "uniqueImages": 6,
+        "expected": 6,
+        "clockHz": 24
+      },
+      {
+        "clip": "dash",
+        "uniqueImages": 10,
+        "expected": 10,
+        "clockHz": 24
+      }
+    ],
+    "files": [
+      {
+        "file": "thuong-E-cocos-24hz/idle.gif",
+        "sha256": "2d2bee5bb2d97e5d28c748bdbf7425251408478eb65117e18cac7a83399dbfd9"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/idle.sheet.png",
+        "sha256": "a0db90bba1d0141683731a6cdf7b2f0099bd98b56f2c601ebf5ef700c518ffbe"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/idle.sample.png",
+        "sha256": "d9f91e7949fb9b9d1bd8999e217853613dcdb55b293ec2434542f4a29ef35777",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/meditate.gif",
+        "sha256": "8c5c5bedc60608a0c9968c2b80a671b514c2c45d25710bbae50358a624fbff1d"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/meditate.sheet.png",
+        "sha256": "3b99f85765884fceb4c59f010642c1222731f45dd60f2c0f08582d2f08100913"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/meditate.sample.png",
+        "sha256": "f4079af14501bc5c0e1c7de091df8ddf02086e96bc7abfcc7b405e269e78fc2b",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/walk.gif",
+        "sha256": "0c9cc17412c504124993580825f14dcb7ccd775cb456074642c479ff50d6b734"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/walk.sheet.png",
+        "sha256": "c6e8b209271149abbd1a13d5d268e8f28cd54396924f8a9d845530072f9bb90d"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/walk.sample.png",
+        "sha256": "7bc7e01c32d814b86086ace6ee36f47ebd173ec0a9577c296c765f95606b711e",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/run.gif",
+        "sha256": "f776a08bc825e851ba827f7f4259e29e489c66d260e48443b3e01f3f4d55e1ac"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/run.sheet.png",
+        "sha256": "7746900664697a6d66fa22458cc9f628c26d4b675481358403363b472089fb4f"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/run.sample.png",
+        "sha256": "1ab825ded2a39a1e9c17e98e87671838a4c6f7530ff253abcc4e20b0fa8b1e0c",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/sword_fly.gif",
+        "sha256": "8a3e44b258c6e0ad0bced81e2ab85a124c184a98af56d2255ef4e617c06321a6"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/sword_fly.sheet.png",
+        "sha256": "eb03d1cd6a16dcc0a8a799a39a78923d053d55b37ea6ac62df9d38b32d9f022b"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/sword_fly.sample.png",
+        "sha256": "8f944f8d814d4f817e441b01d6780cf94bf0bf03c8e3e489188bd5ca4a381f48",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack.gif",
+        "sha256": "912d00e0d3d2c9ac603493eceb17ffed7cc022b6b00e47d5519cd912a5d7af96"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack.sheet.png",
+        "sha256": "4ba0c56948b62575e702e82d372ed929b0b381f23501ba75e323da064feece63"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack.sample.png",
+        "sha256": "2da262a576c7945ef953bb29b45f0213afb516808e7effc605fc43bc8d9ae57b",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_2.gif",
+        "sha256": "b2cb56f7adbe87fe1a2b80d6b0842e5ddd04ab08d99b8c5fb1ff42e7263408eb"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_2.sheet.png",
+        "sha256": "4d1d1afa9546a06e757faec6901657a814a0333c05ffa720431032be7f617613"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_2.sample.png",
+        "sha256": "196845a0aaaadc202590a2d9742e34dc5494cb5a62ef51aba10eda5c49db7f55",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_3.gif",
+        "sha256": "ada1fb4b1e87ff30ecec9eb56c6b6b09ee9a7036bb30b9f8c94c357bcd44dc95"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_3.sheet.png",
+        "sha256": "8bafde321311d3ca8f7bffc38996e44db337c65ecca5811dcf9796a65b875db9"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/attack_3.sample.png",
+        "sha256": "b9a757cff1763c55be724b85d61e1c7f0f45afa0f31aaf083c1fb4a059e52777",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/cast.gif",
+        "sha256": "af68090c21046238981f5b8840af98295b4aa2fd07a610cea2c9c4156bdd60db"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/cast.sheet.png",
+        "sha256": "f4d160c2ef131558604067b1e022abfccc58b7dfb32b867800fdcb2031e494fc"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/cast.sample.png",
+        "sha256": "5362031a94de8398e48a3eb1f5b8256615a2309813d323efa842e1ad17eab584",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/channel.gif",
+        "sha256": "e033b0f66a456eed1ce604f73246cc6a632fee6b6129b10d094a72aded77d9d0"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/channel.sheet.png",
+        "sha256": "7044611998deab783e9a2de7c1056522265320a5c7ecf44b861591d67c2f61ba"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/channel.sample.png",
+        "sha256": "051682011fed94a4fcc1a568ca37edc7dc5c3d11465b0e91d4e2e5b2e6de1363",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/die.gif",
+        "sha256": "f551f173c843a1dac22465a039a255abcc2fafe78d941c716b659f04e41248c6"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/die.sheet.png",
+        "sha256": "bcfbd436282d5362f3142e58e991e4feea0aa0f9d3c75f656cd9eee5a6b26d8f"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/die.sample.png",
+        "sha256": "fce4c00a457fc973cb5425eaf9bb88c961b52c9b6d56def0f1c60cdf58c77f46",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/tribulation.gif",
+        "sha256": "e46e676476d7ef5a20d776eba608728f3e3488612693dba6d688b45ef5e719c2"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/tribulation.sheet.png",
+        "sha256": "480aa9af5f0846623445e7484ff2aadb85c5a7d3777259713f65ffaad326c5e2"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/tribulation.sample.png",
+        "sha256": "1b73d5f44080e9eb22e77a6f94a9f53e2c207e71cd0db1772ffe5d3bab1f2da8",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/emote.gif",
+        "sha256": "1417dd254b09ee9e0e81978a11d96eb742c9e24c9f8e82ab3aa85eca58d3eb4a"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/emote.sheet.png",
+        "sha256": "0f0ac64d6b13a731c5ba1d79021addc238e851c798e087fae5aa5ef895ce3748"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/emote.sample.png",
+        "sha256": "939f1a90e9b853c9f7b9ca4cc4a9755f69a0e1e1637fe5a31bd11ffdfc248be9",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/hit.gif",
+        "sha256": "fd34a0b5130f1b5018a284aa20bc3ff0f2a92f2c33637cf2af996b4f81a3b917"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/hit.sheet.png",
+        "sha256": "44164b2fc0cdc2f182f644a8ae10fdb726f6f7775d3ab0f8921c0e9aa5daad02"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/hit.sample.png",
+        "sha256": "574b7988dc9c286e4f96ae29c70bba0f602f64cd783352d20ca0b2a924b08ac4",
+        "note": "Exact first native PNG tile; no resampling."
+      },
+      {
+        "file": "thuong-E-cocos-24hz/dash.gif",
+        "sha256": "97134613d2f01956756a3092d957ebe7c961dfd7f104fe4e8ff0ae278ab89b58"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/dash.sheet.png",
+        "sha256": "2219d71b0c120085fd56dbc6857d46e73c6958857a7fa706ce12db5da5e899ab"
+      },
+      {
+        "file": "thuong-E-cocos-24hz/dash.sample.png",
+        "sha256": "e25383f4b0e0cefc6a36227448b523cca06a755f82979da61f752c5dd05f1f96",
+        "note": "Exact first native PNG tile; no resampling."
+      }
+    ]
+  },
+  "historicalEvidence": "Original30Hz capture/provenance remains retained; current owner page points at separate24Hz capture directory. Head/matte/art evidence retains its original reviewed source hashes."
+}

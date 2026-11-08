@@ -1,10 +1,10 @@
 {
   "scope": "D41 full-source compatibility delivery; D45 PNGs are reserved for the later extraction pass.",
-  "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out C:/Users/PC/AppData/Local/Temp/vgtd32-Thuong-E-D45",
+  "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out C:/Users/PC/AppData/Local/Temp/vgtd32-Thuong-E-D45-24hz",
   "inputProject": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
-  "projectSha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb",
+  "projectSha256": "4a1f6fc410ab916a399b20cf0bd46ccb4badb74b7d6ee045bc17a2bced33eefe",
   "masterImageSha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
-  "layerInputsSha256": "87bd991cbc0cdba8461d02bb62dd80e6bb54137fe77860c6f75edf58c4287372",
+  "layerInputsSha256": "c41472bf075945c2c70fd8be7064b2c4418033350828d5e5765255e996644f5f",
   "grid": {
     "cols": 4,
     "rows": 4,
