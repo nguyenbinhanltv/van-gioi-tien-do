@@ -581,6 +581,8 @@ Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourc
 
 Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
 
+[Làm rõ D57: `authoredOrigins` được phép cùng `inheritedRegistration` (chỉ vẫn cấm kết hợp với variant). Ô sửa kế thừa **cùng** origin đã khai như ô nguồn trước edit (ví dụ lattice-root X128,638589 và `groundY` nguồn đã khai): origin được tính từ ảnh nguồn và ảnh đã sửa, nếu khác nhau (ví dụ vertical `sole` mà đáy ô đổi) thì fail `authored origin ... differs from its pre-edit source cell`. Mọi kiểm chứng D57 giữ nguyên (SHA nguồn, SHA mask, RGBA ngoài mask giống từng byte); không fallback centroid, không đổi nhãn anatomy.]
+
 ## Bổ sung D56-master: nape và cả hai acromion bị che trên master
 
 Chỉ NE/N có cả nape và hai acromion thật sự bị che mới khai master `rear-breadth-only`:

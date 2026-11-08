@@ -229,14 +229,8 @@ describe('D57 inherited registration', () => {
     },
   );
 
-  it('rejects competing manual origins and still runs the edited-image QA gates', () => {
+  it('still runs the edited-image QA gates', () => {
     const f = fixture();
-    expect(() =>
-      runProject(
-        { ...f.project, clips: [{ ...f.clip, inheritedRegistration: f.inherited, authoredOrigins: {} }] },
-        f.dir,
-      ),
-    ).toThrow('cannot be combined');
     const result = runProject(
       {
         ...f.project,
@@ -247,5 +241,87 @@ describe('D57 inherited registration', () => {
       f.dir,
     );
     expect(result.contract.qa.findings.some((finding) => finding.severity === 'fail')).toBe(true);
+  });
+});
+
+describe('D57 inherited registration with authored origins', () => {
+  const lattice = {
+    kind: 'lattice-root' as const,
+    pelvisX: 128.638589,
+    groundY: 232,
+    reason: 'preserve authored root travel',
+    evidence: 'reviewed lattice root and source ground',
+  };
+  const origins = { 0: lattice, 1: lattice };
+  const clipOf = (f: ReturnType<typeof fixture>, extra: object = {}) => ({
+    ...f.clip,
+    vertical: 'keep' as const,
+    authoredOrigins: origins,
+    ...extra,
+  });
+
+  it('inherits the identical declared origin as the pre-edit source cell', () => {
+    const f = fixture();
+    const baseline = runProject({ ...f.project, clips: [clipOf(f, { sheet: 'before.png' })] }, f.dir);
+    const edited = runProject({ ...f.project, clips: [clipOf(f, { inheritedRegistration: f.inherited })] }, f.dir);
+    const a = baseline.contract.clips[0]!.records[0]!,
+      b = edited.contract.clips[0]!.records[0]!;
+    expect(b.dx).toBe(a.dx);
+    expect(b.dy).toBe(a.dy);
+    expect(b.inheritedRegistration).toMatchObject({
+      kind: 'inherited-registration',
+      sourceSha256: f.inherited.sourceSha256,
+      maskSha256: f.inherited.maskSha256,
+      sourceCell: 0,
+      origin: { x: 128.638589, y: 232 },
+    });
+    expect(edited.contract.clips[0]!.records[1]!.inheritedRegistration).toBeUndefined();
+  });
+
+  it('fails when the edited cell origin differs from its pre-edit source cell', () => {
+    const f = fixture();
+    // Whole cell 0 is editable except two bottom rows; the repair lifts the soles so the sole-derived origin moves.
+    const mask = createImage(512, 256);
+    for (let y = 0; y < 256; y++)
+      for (let x = 0; x < 512; x++)
+        mask.data.set(
+          [x < 256 && y < 254 ? 255 : 0, x < 256 && y < 254 ? 255 : 0, x < 256 && y < 254 ? 255 : 0, 255],
+          (y * 512 + x) * 4,
+        );
+    for (let y = 222; y < 240; y++)
+      for (let x = 0; x < 256; x++) f.after.data.set([255, 0, 255, 255], (y * 512 + x) * 4);
+    const maskBytes = encodePng(mask);
+    const edited = encodePng(toPremultiplied(f.after));
+    writeFileSync(join(f.dir, 'mask.png'), maskBytes);
+    writeFileSync(join(f.dir, 'after.png'), edited);
+    const inherited = { ...f.inherited, maskSha256: hash(maskBytes) };
+    const anatomical = {
+      kind: 'anatomical-pelvis' as const,
+      pelvisX: 128,
+      reason: 'reviewed pelvis',
+      evidence: 'pelvis crop',
+    };
+    const clip = { ...f.clip, inheritedRegistration: inherited, authoredOrigins: { 0: anatomical, 1: anatomical } };
+    expect(() => runProject({ ...f.project, clips: [clip] }, f.dir)).toThrow('differs from its pre-edit source cell');
+  });
+
+  it('keeps every D57 verification: outside-mask changes and a wrong source SHA still fail', () => {
+    const f = fixture();
+    const p = (200 * 512 + 100) * 4;
+    f.after.data[p] = f.before.data[p]! ^ 0xff;
+    writeFileSync(join(f.dir, 'after.png'), encodePng(toPremultiplied(f.after)));
+    expect(() =>
+      runProject({ ...f.project, clips: [clipOf(f, { inheritedRegistration: f.inherited })] }, f.dir),
+    ).toThrow('RGBA mismatch outside mask');
+    const g = fixture();
+    expect(() =>
+      runProject(
+        {
+          ...g.project,
+          clips: [clipOf(g, { inheritedRegistration: { ...g.inherited, sourceSha256: '0'.repeat(64) } })],
+        },
+        g.dir,
+      ),
+    ).toThrow('source SHA256 mismatch');
   });
 });
