@@ -1,0 +1,240 @@
+{
+  "character": "kiem-tu-chibi-v1",
+  "direction": "E",
+  "stem": "kiemtu_chibi_t1_full_diagnostic",
+  "master": "../reference/E.master.png",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "calibration.json"
+  },
+  "slice": {
+    "key": [255, 0, 255],
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.raw.png",
+      "manifest": "templates/idle.template.json",
+      "vertical": "sole",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.raw.png",
+      "manifest": "templates/meditate.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.attempt-02.raw.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.attempt-02.raw.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "sheets/hit-dash.raw.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.raw.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.raw.png",
+      "manifest": "templates/attack.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.raw.png",
+      "manifest": "templates/attack_2.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.raw.png",
+      "manifest": "templates/attack_3.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.raw.png",
+      "manifest": "templates/cast.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.raw.png",
+      "manifest": "templates/channel.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "sheets/hit-dash.raw.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.raw.png",
+      "manifest": "templates/die.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.raw.png",
+      "manifest": "templates/tribulation.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.raw.png",
+      "manifest": "templates/emote.template.json",
+      "vertical": "sole",
+      "heightPolicy": "head-size-v1"
+    }
+  ],
+  "diagnosticOnly": "202 source drawings; D47 policy/head evidence and actual contact annotations pending, no production acceptance.",
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "timingProfile": "smooth-v2"
+}

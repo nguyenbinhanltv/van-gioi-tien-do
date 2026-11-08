@@ -1,0 +1,39 @@
+{
+  "name": "thuong-tu-T1-turnaround",
+  "start": "2026-11-07T23:27:37.579Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0e4a02da-fda8-4ae9-8aee-6b3c1e9a99a5.png"
+  ],
+  "prompt": "Production canonical THUONG TU T1 five-direction turnaround from exact input male identity/costume. ONE WIDE LANDSCAPE image with exactly FIVE equally spaced full-body neutral figures left-to-right: E exact right PROFILE, SE front-right THREE QUARTER, S straight FRONT, NE back-right THREE QUARTER, N straight BACK. No letters/text/labels/rulers, no grid lines. Flat solid magenta #FF00FF background everywhere, no ground shadows, no FX. Same MALE slate almond eyes, straight brows, small straight nose, softly angular adult jaw, swept black fringe, LOW tied ponytail with simple tie, no elevated topknot. T1 navy plain sleeveless wrap, ivory crossed undercollar, red sash with simple knot and short tails, dark compact trousers, wristwraps, small dark boots with minimal beige/steel trim. NO armor/gems/embroidery/ornament. Same dark straight spear with plain steel leafhead and forked red pennon, held in one hand beside body in every view; keep spear tip/butt and full red banner in frame, no face overlap. Correct input head slightly to target22% main skull-crown-to-sole, about4.5-head body, eyes16% below main crown. Compact torso AND legs, shoulder anatomy28%H proposal. All FIVE SAME EXACT H/head size/stance scale, identical feet baseline. Main crowns y145, soles y900 on intended2048x1024 sheet: H755, skull+hair-to-chin166 (chin311), eyes266; ponytail not crown. Spear may rise to y75 but fits. Five panel centers roughly205,615,1024,1434,1843. Wide2:1 canvas with generous margin and separation; entire silhouettes never touch neighboring panels. Strongly preserve face/hairline, clothing cuts and spear shape; genuine spatial turn including profile nose and back collar; do NOT rotate head alone or repeat same angle. N/NE approved low ponytail may cover nape, retain hairstyle. Clean two-tone cel +one highlight, material-tinted line, NW light.",
+  "endObserved": "2026-11-07T23:28:08.035Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f6ba7364-aa02-4320-a4cf-8681c2f6184a.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "output": "T1-turnaround.attempt1.raw.png",
+  "operation": "Raw generated PNG copied unchanged; see anatomy-landmarks.json and prepare-masters.ts for derived keyed/calibrated outputs.",
+  "outputEvidence": {
+    "path": "reference/T1-turnaround.attempt1.raw.png",
+    "sha256": "899c8d4a8aa4287bf884556d0291dc1aa95a11c3354b486a7041133090034b81",
+    "bytes": 1808164,
+    "dimensions": [1774, 887]
+  },
+  "referenceEvidence": [
+    {
+      "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0e4a02da-fda8-4ae9-8aee-6b3c1e9a99a5.png",
+      "sha256": "972d1ec155a3c8c8672a6464427ec4aa6601fe1626e7c88ea739fb739234a67b",
+      "bytes": 1470417,
+      "dimensions": [1254, 1254],
+      "mtimeUtc": "2026-11-07T23:26:17.637705+00:00"
+    }
+  ],
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0e4a02da-fda8-4ae9-8aee-6b3c1e9a99a5.png",
+      "path": "reference/T1.master-source.raw.png",
+      "sha256": "972d1ec155a3c8c8672a6464427ec4aa6601fe1626e7c88ea739fb739234a67b",
+      "bytes": 1470417,
+      "dimensions": [1254, 1254]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

@@ -262,6 +262,8 @@ for (const [index, path] of paths.entries()) {
       try {
         entry.result = measureTemporalSimilarity(aligned.frames[pair.from]!, aligned.frames[pair.to]!, {
           masterHeight,
+          master,
+          ...(p.masterHead ? { masterHead: p.masterHead } : {}),
           ...(clip.headEvidence?.[pair.from] ? { firstHead: clip.headEvidence[pair.from] } : {}),
           ...(clip.headEvidence?.[pair.to] ? { secondHead: clip.headEvidence[pair.to] } : {}),
         });

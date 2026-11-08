@@ -32,7 +32,13 @@ import { cellRect, sliceSheet, type SliceOptions } from './slice.js';
 import { applyContacts, type Contacts } from './template.js';
 import { CELL_PX, type CellSpec, type Guides, type MasterMetrics, type TemplateManifest } from './types.js';
 import { auditProjectVariant, type VariantProject, type VariantReference, type VariantAudit } from './variant.js';
-import { headLandmarkSize, type HeadEvidence, type HeadLandmarks, type HeightPolicy } from './head-evidence.js';
+import {
+  headLandmarkSize,
+  validRearBreadthMaster,
+  type HeadEvidence,
+  type HeadLandmarks,
+  type HeightPolicy,
+} from './head-evidence.js';
 
 import { authoredOriginPoint, validateAuthoredOrigins, type AuthoredOrigin } from './authored-origin.js';
 import { validateResample, type ResampleMethod } from './resample.js';
@@ -219,12 +225,19 @@ export function runProject(
     throw new Error('rear ornament master is allowed only for N direction projects');
   if (
     (project.masterHead?.kind === 'rear-skull-base' ||
+      project.masterHead?.kind === 'rear-breadth-only' ||
+      project.masterHead?.kind === 'rear-span-only' ||
       project.masterHead?.kind === 'rear-crown-shoulder' ||
       project.masterHead?.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(project.direction)
   )
     throw new Error('rear skull master is allowed only for NE/N direction projects');
-  if (project.masterHead !== undefined && headLandmarkSize(project.masterHead, master.width, master.height) === null)
+  if (
+    project.masterHead !== undefined &&
+    (project.masterHead.kind === 'rear-breadth-only'
+      ? !validRearBreadthMaster(project.masterHead, master)
+      : headLandmarkSize(project.masterHead, master.width, master.height) === null)
+  )
     throw new Error('invalid master skull landmarks/breadth');
   const guides = guidesFromMaster(m);
   const palette: Color3[] = paletteFromMaster(master, project.palette);

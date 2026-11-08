@@ -1,0 +1,1583 @@
+{
+  "format": "vgtd-head-reason-similarity-audit",
+  "version": 1,
+  "utc": "2026-11-08T04:42:12.271Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/dao-tu-chibi-v1/SE --out D:/Temp/dao-SE-evidence-d55-audit-latest.json",
+  "gitHead": "7620a2907bb7565cb92dfa666a68bb64a9ea8c62",
+  "gateSourceSha256": "20daba7a2615f7c02c987f85040fb4ac845f8f948e73119cee3689bdd72bde4c",
+  "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 202,
+    "newlyCheckedCells": 70,
+    "retainedD41PoseCells": 132
+  },
+  "retainedD41PoseExemptions": [
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 0,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 1,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 2,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 3,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 4,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 5,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 6,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 7,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 8,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 9,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 10,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 11,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 12,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 13,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 14,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 15,
+      "kind": "free",
+      "reason": "seated: cross-legged breathing, unchanged skull and body part size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 0,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 1,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 2,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 3,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 4,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 5,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 6,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 7,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 8,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 9,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 10,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 11,
+      "kind": "free",
+      "reason": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 0,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 1,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 13,
+      "kind": "free",
+      "reason": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 0,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 1,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 13,
+      "kind": "free",
+      "reason": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 0,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 1,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 2,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 3,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 4,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 5,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 6,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 7,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 8,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 9,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 10,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 11,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 12,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 13,
+      "kind": "free",
+      "reason": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 0,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 1,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 2,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 3,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 4,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 5,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 6,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 7,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 8,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 9,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 10,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 11,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 12,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 13,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 14,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "cast",
+      "cell": 15,
+      "kind": "free",
+      "reason": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 0,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 1,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 2,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 3,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 4,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 5,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 6,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 7,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 8,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 9,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 10,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "channel",
+      "cell": 11,
+      "kind": "free",
+      "reason": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 0,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 1,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 2,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 3,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 4,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 5,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 6,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 7,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 8,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 9,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 10,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 11,
+      "kind": "free",
+      "reason": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 0,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 1,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 2,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 3,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 4,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 5,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 6,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 7,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 8,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 9,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 10,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 11,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 12,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 13,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 14,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 15,
+      "kind": "free",
+      "reason": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 0,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 1,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 2,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 3,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 4,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 5,
+      "kind": "free",
+      "reason": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+    }
+  ],
+  "scannedProjects": [
+    {
+      "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "sha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c"
+    }
+  ],
+  "totals": {
+    "projects": 1,
+    "cells": 70,
+    "pass": 70,
+    "fail": 0,
+    "unmeasured": 0
+  },
+  "projects": [
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "character": "dao-tu-chibi-v1",
+      "direction": "SE",
+      "inputs": [
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+          "sha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/quality-backlog.json",
+          "sha256": "01c1ee5f2638f37b9dcb54a2fdfcf8a27c92315823d4a365d178bddf21c5f4cf"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/attack.png",
+          "sha256": "1e5fb24e21bd7253b4530d7a9c4beb5df101230d16e45c035d0a95859630b8d9"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/attack_2.clearance-repaired.png",
+          "sha256": "3bd0b8b18d8174b9a9acce9422d1020cca5ec193bbc6e111b60aefb23ebc92b0"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/attack_3.png",
+          "sha256": "d658478e9cf9de40a47c80c8a3bbff92312ae06444e8ee163f67c4c08b8db8eb"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/cast.png",
+          "sha256": "1497b6372bd2feb03d42920c1ace79b30f3545e1b2651048d4998916aa15451e"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/channel.png",
+          "sha256": "c729be6d887cb5c6a5bceb128c0dfab3e1018ff48f3daca422f13c1340de06e6"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/die.png",
+          "sha256": "97e666e3f4eead1eaff886a0d5a7273dabac683763f0e6e2b3b351e4ca57c0a2"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/emote.png",
+          "sha256": "39e49a4d169ad561d3646c471733742ab289d4f40b41df1686a8fbefb50348f4"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/hit-dash.png",
+          "sha256": "eb76abbfbb766fabc0e86130e551a1492acdd9e4c3644bc73db5d682d931b2ab"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/idle.png",
+          "sha256": "b2bac1719a17049e67269f999db7d2740820caea120cc6eb69a88bf21ba4bdac"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/meditate.png",
+          "sha256": "afb8ff8e30676efb81f45955044eef43d86ea5c868efe465437cf4f99d02aac7"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/run.head-corrected.png",
+          "sha256": "6893ec462df0822b2e666de61052ae4367cd6d15428f3e69dd32eba7151635a5"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/sword_fly.png",
+          "sha256": "450f1890b4f2f983fd5bc0f8f0db96f2ac71425650e1dbda504c305004bbd889"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/tribulation.png",
+          "sha256": "b6e0c6b7e72154cc804f2a4f8f17dab349bd4de8abcd048670f297f7ee500b9e"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/raw/walk.png",
+          "sha256": "bc663d9c8ad6c4c06b5a712fea5641eaeed03df04d16cc2b5922735d102986c5"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/attack.template.json",
+          "sha256": "e52c275a1f9ccc17f7d06aa5a6d7d171bcc176caba3496d345fcec7eb5c8ef68"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/attack_2.template.json",
+          "sha256": "d87f2def694a302954ac71988d74699a4dc5fa6b94a9cb0ed5916fa5c76e71b1"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/attack_3.template.json",
+          "sha256": "f513e31400b4ca6965a8835194e7cd41e36a10326421abde4ca5086cf2efb353"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/cast.template.json",
+          "sha256": "3508563dc5b65be7c82bce7dec87ede232c6b57cbb68cb276ee56f6cf9917fe5"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/channel.template.json",
+          "sha256": "d22e7f7643980f2e6e7aef0a622bff0d48a1233784f408db9f68aecb2537ef27"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/die.template.json",
+          "sha256": "5adf0a0b70e7aed3119093b991d15d18797774f3a2ca59d67db6055bc8dff858"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/emote.template.json",
+          "sha256": "42a3a1f05e8c56a0cc7e1817c85ab2f38d04934cd6fd67814ebef00daa00a328"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/hit-dash.template.json",
+          "sha256": "63bd01460217858aba510273dd6efdcf337b5f14b4db8cde37b30dd332ec0041"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/idle.template.json",
+          "sha256": "daba6cf4e7243d977a8321b5118fa40b17ee93bb9fb70d24b05d55b660f6981f"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/meditate.template.json",
+          "sha256": "a23eceec3f898dc0d8fe5b70ed5d96ebbbd64060f5b12aeb23950bb552c08772"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/run.template.json",
+          "sha256": "c023d7f75812db4ae2c061d5ed85f47c7b5fc5e2663534278a9dd92f1003d0d1"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/sword_fly.template.json",
+          "sha256": "8ecaddc79ad046023425121f41c374da41efba72401f317cb8d80638f12759ed"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/tribulation.template.json",
+          "sha256": "a7c1ecdb414868e157fc07f21f5298df91e7571d8de4d6a5ad72fb8189b38ca6"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/SE/templates/walk.template.json",
+          "sha256": "33146317d06477c81674bf5fee8d7aa329c0eef4986174713e957675e9cd4548"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/motion-calibration.json",
+          "sha256": "714eb77be09a5c781d4d7d0193a21399493896880756f47edd90cc5e243a55ce"
+        },
+        {
+          "file": "assets-src/placeholder/dao-tu-chibi-v1/reference/SE.master.png",
+          "sha256": "8e35f096de0f8e5ee4f2d6c6de48d3a2f4feb4c4fa3fad482104028ae99084eb"
+        }
+      ],
+      "cells": [
+        {
+          "clip": "idle",
+          "cell": 0,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 1,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 2,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 3,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 4,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 5,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 6,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 7,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 8,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 9,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 10,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 11,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 12,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 13,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 14,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "idle",
+          "cell": 15,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 0,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 12,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 13,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 14,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 15,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 0,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 14,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 0,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 1,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 2,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 3,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 10,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 11,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 0,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

@@ -425,6 +425,16 @@
       "reviewer": "art-worker",
       "note": "Foot placement/phase remains imperfect across walk/run: all17 metric findings remain open. Rejected walk attempt2 worsened findings9 to13 and maximum slide20.3 to23.3px/frame. Selected attempt1 retains original foot findings; no threshold change or per-frame fitting.",
       "status": "open"
+    },
+    {
+      "kind": "other",
+      "clip": "dash",
+      "dir": "S",
+      "cells": [3],
+      "severity": "info",
+      "reviewer": "art-worker",
+      "status": "resolved",
+      "note": "D55 evidence-only follow-up: real main-cap crown130,44 excluding elevated bun/curl, pins/tassel/ribbon; contiguous qualifying run128..132 at row44, midpoint130, alpha255; visible chin130,92 alpha255. Head48.000/master48.010px, ratio0.999783. Anchored headLab6.063786/torso5.631270 vs old fallbackhead15.499404. No art, alignment, pose exception or threshold changes; five rendered files byte-identical. Full proof: dash3-d55-review.json."
     }
   ]
 }

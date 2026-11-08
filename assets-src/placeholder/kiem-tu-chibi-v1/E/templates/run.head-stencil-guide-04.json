@@ -1,0 +1,248 @@
+{
+  "status": "Authoring-only guide, NOT animation output or head evidence",
+  "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "guideSha256": "046657ec7e6bd95263458f9bf7bf78e665d333a49b02fa2bc6538f670c32c8e0",
+  "operation": "Copy actual aligned run body poses without fitting, overlay unscaled canonical E head polygon. Heuristic construction targets require visual inspection; source old head may remain outside stencil for AI cleanup. No guide pixel may be counted as generated animation.",
+  "records": [
+    {
+      "cell": 0,
+      "alignedSourceSha256": "216f4e2af0ac0e55a9f22eea1ef769c022c19823e025b151bc107eacfec6e4cb",
+      "constructionTarget": {
+        "x": 174,
+        "y": 88.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 36,
+        "dy": 21
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 1,
+      "alignedSourceSha256": "fca0f3b259db4534c4c598ebdfd1c8703f47f51dd75293199eef5d41102064a2",
+      "constructionTarget": {
+        "x": 169,
+        "y": 90.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 31,
+        "dy": 23
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 2,
+      "alignedSourceSha256": "8160228cffe7080b92a2c4779483b07df2431f98d1ad0fdd89999be01b2062e7",
+      "constructionTarget": {
+        "x": 167,
+        "y": 93.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 29,
+        "dy": 26
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 3,
+      "alignedSourceSha256": "309e9d5bc25e8988701549fa9c470fdb207b2406c1e88de4b760b29eb2533b9a",
+      "constructionTarget": {
+        "x": 168,
+        "y": 93.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 30,
+        "dy": 26
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 4,
+      "alignedSourceSha256": "eb3b899f3d4f3bb054b35ec987feb441adc1249596ee6220357d643d0e668b3f",
+      "constructionTarget": {
+        "x": 164,
+        "y": 94.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 26,
+        "dy": 27
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 5,
+      "alignedSourceSha256": "7ac9d7f20dfbf5c247801c10c63b2c03f7043434e3e73837d95f0e74bb2bae89",
+      "constructionTarget": {
+        "x": 167,
+        "y": 94.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 29,
+        "dy": 27
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 6,
+      "alignedSourceSha256": "339547a0ae60eeef19d84565e342a441793772a670657fc9e5efa35e372c25f4",
+      "constructionTarget": {
+        "x": 172,
+        "y": 86.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 34,
+        "dy": 19
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 7,
+      "alignedSourceSha256": "8734c3949c575dbaa702adaa0e98ee0c15c806296443de7b891f7cacfe28c8fc",
+      "constructionTarget": {
+        "x": 170,
+        "y": 83.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 32,
+        "dy": 16
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 8,
+      "alignedSourceSha256": "5667aa5c3d9882e1f78aa2638b1714928178b2d77417da1a52f505958cf668c0",
+      "constructionTarget": {
+        "x": 177,
+        "y": 87.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 39,
+        "dy": 20
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 9,
+      "alignedSourceSha256": "a6125415bf20212e1d6fc1e9fdc7cd3c71a4a98f6d245adeb6434b90f81742b3",
+      "constructionTarget": {
+        "x": 177,
+        "y": 88.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 39,
+        "dy": 21
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 10,
+      "alignedSourceSha256": "6faf4776bd71b9659522e7ae1e4b8e21d1f579132b8e87c7ada233e64bc92313",
+      "constructionTarget": {
+        "x": 177,
+        "y": 90.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 39,
+        "dy": 23
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 11,
+      "alignedSourceSha256": "1ba74d9ad40697e65e77198ca3a6eea3e16c1f54308f59771901e778e26f1346",
+      "constructionTarget": {
+        "x": 180,
+        "y": 92.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 42,
+        "dy": 25
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 12,
+      "alignedSourceSha256": "4367952420ef880645a4d8cd1adc293d2a7bc6c6093c077d53e32193e3238987",
+      "constructionTarget": {
+        "x": 176,
+        "y": 92.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 38,
+        "dy": 25
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 13,
+      "alignedSourceSha256": "4ad11ba06a848360c1e26c30ef7cc67704b8a55b1146ae1059c6499243f7e958",
+      "constructionTarget": {
+        "x": 175,
+        "y": 91.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 37,
+        "dy": 24
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 14,
+      "alignedSourceSha256": "3a04de790492f075ef67b111da1240eb3a864fc4bb712ee296c119ff3dbec8a6",
+      "constructionTarget": {
+        "x": 168,
+        "y": 89.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 30,
+        "dy": 22
+      },
+      "scale": 1,
+      "rotation": 0
+    },
+    {
+      "cell": 15,
+      "alignedSourceSha256": "4c5e338a2cc3dfc7c943d37a6f4beccdf6a3fb6da19b6d7821ab9e9c8261ee76",
+      "constructionTarget": {
+        "x": 167,
+        "y": 89.5,
+        "method": "Largest warm-skin component construction heuristic; NOT anatomical detection or passing evidence."
+      },
+      "masterHeadTranslation": {
+        "dx": 29,
+        "dy": 22
+      },
+      "scale": 1,
+      "rotation": 0
+    }
+  ]
+}

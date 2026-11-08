@@ -1,0 +1,20 @@
+{
+  "operation": "public repairCell",
+  "cell": 10,
+  "changed": [10],
+  "hit0to5ByteIdenticalToOriginal": true,
+  "files": [
+    {
+      "path": "raw/hit-dash.selected.png",
+      "sha256": "945a2ad174002df9f74ccad669b1ec1d235bbb4b251f9c733052d0404f7b7bd0"
+    },
+    {
+      "path": "raw/hit-dash.head-stencil-edited.png",
+      "sha256": "7d8223486cdae1621cac4c6c7d42ca288e03418c292470074b9163e3d0a264eb"
+    },
+    {
+      "path": "raw/hit-dash.locked.png",
+      "sha256": "97771c9ba7808a7725dbd66d81da33bdee321c8207b32a86111661b4b8a4d031"
+    }
+  ]
+}

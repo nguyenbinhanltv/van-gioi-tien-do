@@ -580,3 +580,82 @@ hay export.11ô Lab vượt15 chặn rebuild, cần sửa hoặc quyết định
 Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourceSha256, mask, maskSha256, cells}`; đường dẫn tương đối project, SHA256 gồm 64 hex thường, cells là chỉ số clip-local (sheet nhóm ánh xạ qua sheetSelection). Mask PNG cùng kích thước native, RGB nhị phân 0/255, alpha 255: trắng cho phép edit, đen khóa. Tool so mọi byte RGBA ngoài mask trên toàn sheet trước DPI/key/despill/palette, kể cả RGB trong pixel alpha 0; sai hash, mất mask hoặc khác byte là lỗi cứng không waiver. Mỗi ô kế thừa phải còn pixel khóa.
 
 Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
+
+## Bổ sung D56-master: nape và cả hai acromion bị che trên master
+
+Chỉ NE/N có cả nape và hai acromion thật sự bị che mới khai master `rear-breadth-only`:
+`crown`, `breadth.left/right` và ba chuỗi vật che cụ thể `occlusions.nape/leftShoulder/rightShoulder`.
+Thiếu/chuỗi rỗng/lý do chung chung hidden hoặc unknown là lỗi cứng khi load project. Ba điểm phải alpha≥128;
+hai đầu breadth cùng hàng, theo thứ tự trái→phải. Không sửa ảnh master đã duyệt hoặc chiếu endpoint.
+
+Breadth lấy hàng rộng nhất của **khối main-cap đặc**, endpoint trên cùng dải tóc liên tục; loại tóc rời, nét mảnh
+dưới 2 px, ribbon, pin và tassel. Dùng cùng định nghĩa trên master và ô. Gate kiểm tọa độ/alpha; overlay nguồn và
+review xác nhận điểm thuộc khối tóc thật và các vật che thật, không coi alpha là chứng minh ngữ nghĩa.
+
+Ô dùng `rear-breadth-only` với `note` đã xem; `occluder` của ô không bắt buộc riêng với master kind này,
+nhưng nếu khai phải cụ thể. Nền tham chiếu breadth xuất phát từ vật che trên master, kể cả khi ô lộ vai.
+So breadth ±3% master cùng hướng,
+crown nhìn thấy, không báo span dọc. Master kind này cho phép cả idle/walk và clip khác, không chỉ lean động;
+ô upright ngoài bbox band vẫn cần posture/secondary-overhang. Master D53 giữ nguyên phạm vi D56 cũ.
+Cửa sổ D55/temporal của cả master và ô: từ crown, rộng 1,08×breadth và cao đúng 1,0×breadth, không nới chiều dọc.
+Không tạo evidence từ cửa sổ, không miễn Lab D55, D41/D54, foot/canvas hoặc scale cố định.
+
+## Bổ sung D59: breadth sọ bị che thật
+
+Chỉ NE/N khi một đầu contour breadth tối đa không nhìn thấy trên master đã duyệt **và** ô mới dùng
+`rear-span-only`. Không dùng điểm nội thất/seam tóc thay contour và không sửa master để lộ điểm.
+Khai crown và `skullBase` (junction tóc–da ở nape theo D48), `occludedSide: "left" | "right"`,
+`occluder` cụ thể cùng định nghĩa trên master/ô; ô thêm note review. Không khai breadth giả.
+Khoảng cách Euclidean crown→nape phải trong ±3% master cùng hướng; có đủ hai đầu breadth nhìn thấy
+phải dùng D48. Crown chọn hàng cao nhất có dải liên tiếp ≥2 pixel **main-cap** alpha≥128 không chạm
+bun/gold tie/ribbon, x ở trung điểm dải. Phân loại main-cap là review ngữ nghĩa nguồn, không phải tự
+coi mọi pixel alpha là tóc sọ. Giữ overlay, hash và lịch sử chọn điểm trước khi tính tỷ lệ.
+
+Ảnh master giữ nguyên; các gate Lab/head/canvas/foot và D41/D54 không được miễn bởi D59.
+
+### D59: ô lộ đủ breadth so với master bị che
+
+Cho phép đúng chiều master `rear-span-only` → ô `rear-span-only` hoặc `rear-skull-base` (D48).
+Ô D48 vẫn so span crown→nape ±3% master; kiểm hai endpoint breadth trong ảnh, alpha≥128,
+ở khoảng dọc crown/nape và cách trung điểm ngang không quá một span. Đây là kiểm hợp lý vị trí,
+không thay review nguồn để xác nhận contour sọ thật. Breadth ô ghi INFO, không có tỷ lệ với master
+hay giá trị breadth master được suy diễn. Chiều ngược và các kind khác vẫn lỗi.
+
+Cửa sổ Lab D55 cho master D59 và mọi ô ghép là hình vuông: cạnh bằng khoảng cách Euclidean
+crown→nape, tâm tại trung điểm hai điểm, nới tổng 8% cả hai chiều. Kể cả ô D48 có breadth thật,
+vẫn dùng cửa sổ span giống master; breadth thật chỉ là evidence riêng. Torso giữ quy tắc D55.
+Temporal D59/D48 dùng cùng cửa sổ; không tạo hay ghi cửa sổ thành landmark.
+
+## Bổ sung D60: bracketed-occlusion không tạo bằng chứng đo giả
+
+Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`: khi ô không có phép đo đầu hợp lệ vì bị che,
+khai kind **chỉ cho ô**, crown nhìn thấy alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review.
+Không thêm nape/cằm/breadth suy diễn. Cả hai lân cận **trực tiếp** i−1/i+1 cùng clip phải có bằng chứng
+đầu được đo thật đạt band; loop wrap, đầu/cuối nonloop không có đủ hai lân cận nên bị loại.
+**Tối đa 2 ô bracketed mỗi clip.** Không có trần phần trăm hay trần chuỗi riêng: các ô bracketed không
+được kề nhau vì không thể chứng nhận cho nhau. Master/idle/walk/emote và clip khác bị loại.
+
+```json
+{
+  "kind": "bracketed-occlusion",
+  "crown": { "x": 157, "y": 57 },
+  "occluder": "raised shoulder, ribbon and forelock hide the other endpoints",
+  "hiddenEndpoints": ["skullBase", "breadth.left", "breadth.right"],
+  "note": "Example schema only; actual native source and neighbour measurements must be reviewed"
+}
+```
+
+Lab đầu≤15/thân≤23 vẫn bắt buộc, kể cả khi reason pose D41 bình thường được miễn similarity. Cả hai
+pair temporal với lân cận phải có min(head,torso)≥0,45; thiếu phép đo/NaN/review-by-eye là lỗi cứng
+**cho điều kiện D60**. Các ô khác giữ chính sách D55: temporal chỉ chẩn đoán.
+
+Cửa sổ **chỉ để so ảnh**: lấy nguyên chiều rộng/cao cửa sổ đầu D55 có padding của master được chứng nhận
+(ví dụ D59 span-square+8%, D56-master giữ chính sách padding riêng). Tâm ngang=crown.x;
+top=crown.y−Hwindow×0,08/(2×1,08), quy ước margin từng cạnh của cửa sổ D60, không phải kích thước đầu suy diễn.
+Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
+phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng 44%/cao 25% H master,
+tâm ngang theo crown. Master và các phía so phải có crown thật nhìn thấy; không thay bằng neo phụ kiện,
+không fallback centroid, không ghi cửa sổ thành anatomy.
+
+INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
+size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.

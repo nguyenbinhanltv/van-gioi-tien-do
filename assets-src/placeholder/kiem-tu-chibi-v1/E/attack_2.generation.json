@@ -1,0 +1,18 @@
+{
+  "clip": "attack_2",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 14,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x4rows,squarecanvas,target2048square(oruniformsquareDPI). ONLY14activeposes,rowmajor;LASTTWOcellsbottomrightstayPUREMAGENTAempty.\nNon-contact martial-arts sword form: RISING BACKHAND diagonalcut towardRIGHT. Frames1-3 anticipation,4-6 incrementalrisingsteelbladearc,7impactpose,8impactHOLD,9-14 followthrough/recover. Distinctfromhorizontalattack1. AnatomicalRIGHT handholdsoneblade,thefarlefthandbalances;keepadultprofileface/headsize,wholeweaponinsidecell. No target/injury/FX.\nOfficial per-frame tags: 1:anticipation,2:anticipation,3:anticipation,4:strike,5:strike,6:strike,7:impact,8:impact_hold,9:follow_through,10:follow_through,11:follow_through,12:follow_through,13:follow_through,14:follow_through",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:02:18.914Z",
+  "inputs": ["templates/attack.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-dae8147a-39c9-4397-85bb-5f7feb21e570.png",
+  "utcCompletedRecorded": "2026-11-07T21:03:38.343Z",
+  "rawSha256": "71af9c39751d333cc52ddfdf4cc7bae36c8bf74361965a9fd499277e22b55343",
+  "utcOutputFileModified": "2026-11-07T21:03:30.440007+00:00"
+}

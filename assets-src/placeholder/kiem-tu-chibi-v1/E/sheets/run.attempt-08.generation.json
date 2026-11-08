@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "startedUTC": "2026-11-08 02:39:36 UTC",
+  "prompt": "Precise local sprite-sheet repair, identity-preserve edit. EDIT TARGET is the attached 1024x1024 opaque pure-magenta 4x4 Kiếm tu running sprite sheet. Row-major cells 0-15. Repair ONLY cell14 (bottom row, third column): its unscaled same-character head stencil has already been placed at the intended head size and location. Preserve that exact head size, face, skull outline, eye, adult male identity, chin, hair cap, and position. Join the small cutout seams under the chin/neck and at the rear hair root naturally to the existing torso and ponytail. Fill the thin magenta horizontal gap at the neck/shoulder and tiny missing connection at the hair root. Do not enlarge or shrink the pasted head. Do not redraw the body, arms, sword, hand, sash, trousers, boot, or existing dynamic airborne running pose. Every other cell is locked: keep all fifteen other drawings exactly as in the input. No recentering, no changed registration, no altered sword direction, no extra objects, no guides or labels. Premium semi-chibi ivory plain robe, navy trousers, black ponytail, cyan ribbon, gray eyes; clean material-tinted outline and cel shading. Keep pure solid magenta RGB255,0,255 background, opaque output, same square 4x4 lattice with complete separate frames.",
+  "reference": "../templates/run.head-stencil-guide-08.png",
+  "rawDefaultPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-38038cb8-22c7-4124-96f1-865534b3f6cc.png",
+  "status": "Raw preserved; candidate requires native semantic landmark review, not accepted from stencil intention.",
+  "rawSha256": "06d6e0d6aa0bc15ab457b77fd803d5b5797d9321be4419c174fd80913c3fc961",
+  "referenceSha256": "747ce42dd5d1d29834621e56ef2a5f88489bbbb7d892bc64ec4b08c4251403d6"
+}

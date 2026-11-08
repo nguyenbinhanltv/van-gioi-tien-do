@@ -560,6 +560,39 @@ Lab hard findings with exact master/cell crops. HTML and supporting PNGs show th
 distributions. `--sensitivity-report` accepts the historical static-SSIM control report. The audit never exports assets,
 rewrites annotations, updates backlogs, or turns an exemption into a pass.
 
+### D56-master: nape and both acromions hidden on the approved master
+
+This narrow extension allows `masterHead.kind: "rear-breadth-only"` only on NE/N projects:
+
+```json
+{
+  "kind": "rear-breadth-only",
+  "crown": { "x": 130, "y": 15 },
+  "breadth": { "left": { "x": 108, "y": 30 }, "right": { "x": 149, "y": 30 } },
+  "occlusions": {
+    "nape": "long hair and ribbon cover the nape",
+    "leftShoulder": "fan and hair cover the left acromion",
+    "rightShoulder": "hair loop covers the right acromion"
+  }
+}
+```
+
+Coordinates above illustrate the schema, not certified Pháp tu measurements. All three concrete occluder strings
+are mandatory; empty/generic hidden/unknown values fail. Crown and both breadth endpoints must be alpha≥128 on
+the resized master. Both endpoints share a row and must be ordered left to right. Review the widest row of the
+**solid main hair cap**, taking endpoints of its contiguous mass; exclude detached strands or outline runs less
+than 2px thick, ribbons, pins and tassels. Apply exactly the same definition to master and aligned frames. The tool
+checks geometry/alpha, while source overlays and review establish hair-cap membership and real occlusion.
+
+Frames use `rear-breadth-only` with a reviewed `note`; their own `occluder` is optional for this master kind
+(when supplied it must be concrete). The master occlusion justifies the shared breadth-only reference even when
+a frame reveals a shoulder. With this
+master kind, ordinary clips including idle/walk may use it; breadth stays within ±3%, crown must be visible and
+no vertical span is reported. Out-of-band upright cells still require posture/secondary-overhang. A D53 master
+retains the original D56 dynamic-lean scope. D55 master/frame and temporal crops start exactly at the crown,
+with width 1.08×breadth and height 1.0×breadth (no vertical margin). No hidden nape/shoulder is projected, master art
+is unchanged, and head reasons never relax D55 identity or foot/canvas gates.
+
 ### D57 verified inherited registration
 
 For a skull-only correction, a clip may declare:
@@ -580,3 +613,50 @@ For a skull-only correction, a clip may declare:
 Paths are relative to project.json. Source, edited sheet and mask must have identical native dimensions. The explicit mask is opaque binary grayscale (alpha 255): white permits edits; black locks all four original PNG RGBA bytes, including invisible RGB. The tool verifies SHA256 and byte identity outside the mask across the **entire sheet**, before DPI/key/despill/palette operations; mismatches throw before export and cannot be waived. Each inherited cell must retain locked pixels (an unchanged all-black cell is valid). Cells are clip-local; grouped sheetSelection maps them to source cells.
 
 The tool prepares the reference with the same settings, rejects changed preparation/crop, derives its default centroid/vertical registration itself, and uses that origin and fixed scale for the edited cell. Automatic calibration uses pre-edit measurements for inherited cells. Variants/authoredOrigins cannot be combined with this mechanism. This computed origin is registration, not anatomical pelvis evidence. Contract records and batch review include source/mask/edited SHA256, global source cell, locked pixel count, computed logical cropped origin, vertical policy and scale. Head, D54/D55 similarity, contacts, canvas and all other gates still inspect the edited aligned pixels. Preserve the reviewed mask, source and full edit provenance.
+
+### D59: a skull-breadth endpoint is genuinely occluded
+
+NE/N `rear-span-only` measures the Euclidean crown-to-visible-nape span against the locked
+same-direction master (unchanged ±3%). Both master and frame must declare the same concrete
+`occluder` and `occludedSide` (`left` or `right`); the frame also needs a reviewed note. Supplying
+breadth endpoints is invalid for this kind: use D48 when both endpoints are visible. Never replace
+an occluded contour with an internal hair seam or edit the approved master to expose it.
+
+Select the highest row containing a contiguous run of at least two attached main-cap pixels
+(alpha >=128) that does not touch the bun/gold tie/ribbon; crown x is the run midpoint. This is a
+manual semantic source-review convention, not an alpha-only automatic detector. Keep the selection
+overlay and source hash before computing ratios. D59 never exempts Lab identity, canvas, or foot QA.
+For a D59 master, frames may use D59 or plain D48 when both breadth endpoints become visible.
+Compare the same crown-to-nape span ±3%; validate D48 endpoints as visible alpha>=128 inside
+the crown/nape vertical range and within one span horizontally of their midpoint. This geometry
+check does not certify semantic contour ownership; source review remains required. Report frame
+breadth as INFO without a master breadth or ratio. The reverse pairing and other kinds remain invalid.
+
+For Lab identity, D59 masters and every paired frame (including D48) use the same square window:
+side length is the Euclidean crown-to-nape span, centred on the endpoint midpoint, expanded 8%
+total in each dimension. This is a window definition, never inferred breadth evidence. Torso keeps
+the D55 rule. D59/D48 temporal pairs use this same window convention.
+
+### D60: bracketed occlusion is an unmeasured bridge
+
+Frame-only `bracketed-occlusion` is restricted to `dash`, `run`, `attack`, `attack_2`, `attack_3`, and `hit`.
+Declare a visible crown, a concrete `occluder`, `hiddenEndpoints`, and a reviewed note; do not supply
+invented chin/nape/breadth/shoulder points. Both immediate same-clip neighbours must have measured
+head evidence that actually passes the band (wrap for loops; nonloop edges cannot qualify).
+At most **two bracketed cells per clip**. There is no percentage or consecutive-run ceiling: adjacent
+brackets fail because neither can certify the other. Masters/idle/walk/emote cannot use D60.
+
+Lab identity must pass head<=15 and torso<=23 even when a D41 pose exemption normally applies.
+Both registered temporal pairs must have min(head,torso)>=0.45; unavailable quality or a review-by-eye
+pair fails D60. Temporal remains diagnostic for all ordinary cells.
+
+The comparison window uses the certified master's own D55 head-window dimensions, including its
+kind-specific padding policy. Centre it horizontally on each visible crown; place its top at
+`crown.y - Hwindow * 0.08 / (2 * 1.08)`, the D60 window-only edge-offset convention. Rebuild the master's Lab window AND both
+temporal sides identically, including fully measured neighbours. Torso retains D55's fixed 44% width
+and 25% depth of master H below the head window. This never creates anatomical points or size evidence.
+Missing real master/neighbour crowns fail; there is no centroid or ornament-anchor fallback.
+
+Use `checkHeights`/`runProject` for full clip-level validation; the low-level measured-head helper
+alone cannot certify a bracket. INFO `head_bracketed` has `measurement: "unmeasured"`, neighbour indices,
+cell budget, Lab distances and both temporal scores, with no fabricated head span or ratio.

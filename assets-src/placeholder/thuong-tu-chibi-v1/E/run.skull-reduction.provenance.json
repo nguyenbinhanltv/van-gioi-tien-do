@@ -1,0 +1,38 @@
+{
+  "name": "E-run-skull-reduction",
+  "start": "2026-11-07T23:54:32.655Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a522dd4e-0fcb-4508-801b-35fec0ec5d4e.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Measured skull proportion repair ONLY, exact THUONG TU E continuous RUN4x4 sheet input1. Input2 canonical E master head reference. Equal-scale pipeline comparison confirms run skulls TOO LARGE (not small): main-cap crown-to-chin Euclidean about59-60logicalpx vs locked master52.55. Uniformly REDUCE EACH ENTIRE HEAD (skull-attached mainhair, face, ear) by12%, keeping anatomical neck attachment and SAME adult male face features. Not face-only squashing; same slateeye/straightbrow/jaw/sweptfringe. Skull should become physically same size as input2 master after fixed normalization. Preserve every body/leg/knee/foot/hand, continuous RUN contact-flight-tuck cycle, spear/redpennon/sash and root travel exactly. Do not scale whole character or flatten poses. Low ponytail attachment follows smaller skull while trailing shape retained. All16 populated, unchanged4x4registration/squarecanvas, full silhouette margin, solid flat #FF00FF, no text/guides/shadows/FX. This is a precise uniform skull-size repair; keep all action and costume unchanged.",
+  "endObserved": "2026-11-07T23:55:08.128Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-61de62f1-594c-48da-8a96-e992542afc03.png",
+  "output": "raw/run.skull-reduction.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "status": "Not selected; superseded by the proper stride-lattice source, retained for provenance.",
+  "outputEvidence": {
+    "path": "E/raw/run.skull-reduction.png",
+    "sha256": "fe0dffc3bd38361d46db8d95c160ffd8e4c9ee5e083e83fa9ed5a1cb67d82b39",
+    "bytes": 1929515,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a522dd4e-0fcb-4508-801b-35fec0ec5d4e.png",
+      "path": "E/raw/run.cycle.png",
+      "sha256": "c2909ceb52ba729c9d04e1120291c8f41242bf489fc84c2f76924f341f42a7ea",
+      "bytes": 1975500,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

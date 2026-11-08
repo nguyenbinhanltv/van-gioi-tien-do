@@ -326,7 +326,7 @@
   "runtimeAssets": [
     {
       "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json",
-      "sha256": "142a9ed1e12d53b95dc7807e4155df8ec599548c492175be1500afd6b65cfc37"
+      "sha256": "dd99505694c51537fab929a4741d123577bc6c3febc4f7c55755aa15129219cc"
     },
     {
       "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json.meta",
@@ -350,7 +350,7 @@
     },
     {
       "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json",
-      "sha256": "a02491e1cc9686a749204cb3c92c20131f6509aaa0542106c76ed4ae4eca59bb"
+      "sha256": "b6758f124544fa3e5323e92c291c67b739926f161997f138f8f0fed49c0d9298"
     },
     {
       "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json.meta",

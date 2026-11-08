@@ -1388,24 +1388,24 @@
         "3": {
           "kind": "crown-chin",
           "crown": {
-            "x": 139,
-            "y": 29
+            "x": 126,
+            "y": 28
           },
           "chin": {
-            "x": 156,
-            "y": 74
+            "x": 139,
+            "y": 75
           },
           "breadth": {
             "left": {
-              "x": 133,
-              "y": 50
+              "x": 118,
+              "y": 51
             },
             "right": {
-              "x": 169,
-              "y": 50
+              "x": 154,
+              "y": 51
             }
           },
-          "note": "Manually reviewed run cell3 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+          "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
         },
         "4": {
           "kind": "crown-chin",
@@ -1476,24 +1476,24 @@
         "7": {
           "kind": "crown-chin",
           "crown": {
-            "x": 139,
-            "y": 32
+            "x": 128,
+            "y": 30
           },
           "chin": {
-            "x": 157,
+            "x": 142,
             "y": 77
           },
           "breadth": {
             "left": {
-              "x": 133,
+              "x": 120,
               "y": 53
             },
             "right": {
-              "x": 169,
+              "x": 156,
               "y": 53
             }
           },
-          "note": "Manually reviewed run cell7 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+          "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
         },
         "8": {
           "kind": "crown-chin",
@@ -1564,24 +1564,24 @@
         "11": {
           "kind": "crown-chin",
           "crown": {
-            "x": 139,
-            "y": 30
+            "x": 128,
+            "y": 28
           },
           "chin": {
-            "x": 157,
+            "x": 142,
             "y": 75
           },
           "breadth": {
             "left": {
-              "x": 133,
+              "x": 120,
               "y": 51
             },
             "right": {
-              "x": 169,
+              "x": 156,
               "y": 51
             }
           },
-          "note": "Manually reviewed run cell11 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+          "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
         },
         "12": {
           "kind": "crown-chin",
@@ -1652,24 +1652,24 @@
         "15": {
           "kind": "crown-chin",
           "crown": {
-            "x": 140,
-            "y": 32
+            "x": 128,
+            "y": 29
           },
           "chin": {
-            "x": 158,
-            "y": 77
+            "x": 141,
+            "y": 76
           },
           "breadth": {
             "left": {
-              "x": 134,
-              "y": 53
+              "x": 120,
+              "y": 52
             },
             "right": {
-              "x": 170,
-              "y": 53
+              "x": 156,
+              "y": 52
             }
           },
-          "note": "Manually reviewed run cell15 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+          "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
         }
       },
       "exceptions": {

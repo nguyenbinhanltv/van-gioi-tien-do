@@ -69,6 +69,10 @@ Oct 31, 2026 · An Nguyen
 
 ### Nhân vật, layer, atlas
 
+[Cập nhật D60: `bracketed-occlusion` chỉ cho dash/run/attack/hit không có bằng chứng đầu thật vì che khuất. Crown phải nhìn thấy, ghi vật che và endpoint bị che; hai lân cận trực tiếp phải có phép đo đầu đạt band. Tối đa 2 ô bracketed mỗi clip; không kề nhau vì lân cận phải đo thật, không còn trần phần trăm hay trần chuỗi riêng. Lab D55 phải đạt, cả hai pair temporal ≥0,45. Cửa sổ lấy đúng kích thước cửa sổ đầu D55 của master, đặt theo crown nhìn thấy với margin tổng 8%, cùng cách dựng trên master và cả hai phía temporal; torso giữ D55, không fallback centroid hay tạo anatomy. INFO ghi bracketed/chưa đo, không giả là pass đo đầu; không dùng idle/walk/emote/master hay bịa điểm.]
+
+[Cập nhật D59: NE/N chỉ dùng `rear-span-only` khi một đầu breadth sọ bị vật che thật trên cả master và ô. Đo crown→nape Euclidean trong ±3% master cùng hướng, bắt buộc `occluder` cụ thể và `occludedSide` cùng định nghĩa; không lấy seam nội thất, không chiếu endpoint. Ô có đủ hai đầu phải dùng D48: so span với master D59, breadth ô chỉ INFO không có tỷ lệ master; không cho phép chiều ghép ngược. Cửa sổ Lab/temporal của master D59 và mọi ô ghép là hình vuông cạnh một span, tâm trung điểm hai endpoint, nới tổng 8%; cửa sổ không tạo breadth evidence. Crown theo hàng cao nhất có dải ≥2 pixel main-cap alpha≥128 không chạm bun/gold/ribbon, x ở trung điểm dải. Không sửa ảnh master; Lab D55, head band, foot/canvas và D41/D54 giữ nguyên.]
+
 [Cập nhật D47: upright semi-chibi có exception/bbox ngoài band dùng bằng chứng kích thước đầu master ±3%, reason `posture`/`secondary-overhang`, không ép phẳng flight tuck/dash/lunge. Ô trong band không exception giữ cổng cũ; evidence đã khai báo luôn được kiểm. Chi tiết tọa độ và INFO review ở `art/sprite-sheet-pipeline.md`.]
 
 [Cập nhật D48, bổ sung D47: NE/N bị che cằm dùng `rear-skull-base`, crown→đáy sọ tại chỗ nối gáy/cổ và bề ngang sọ tối đa đều ±3% cùng master của hướng đó. Không bịa hay chiếu cằm. Kind, landmark và bề ngang giữ trong INFO; chi tiết schema ở pipeline.]
@@ -101,6 +105,8 @@ Oct 31, 2026 · An Nguyen
 | Phẩm chất             | 6 cấp: Trắng · Lục · Lam · Tím · Vàng · Đỏ, có dấu góc cho người mù màu                             | UI/UX                 |
 
 > [Cập nhật D35: hoạt cảnh xương nhân vật dùng DragonBones thay Spine 4.2 (runtime `dragon-bones` của Cocos 3.8.8, MIT); "Spine" trong tài liệu này đọc là "skeleton DragonBones"; số liệu không đổi. Xem [art/dragonbones.md](art/dragonbones.md).]
+
+[Cập nhật D56-master: chỉ master NE/N có nape và cả hai acromion thật sự bị che mới dùng `rear-breadth-only`, khai đủ vật che cụ thể tại `occlusions.nape/leftShoulder/rightShoulder`. Crown và breadth khối main-cap đặc nhìn thấy alpha≥128; chọn hàng rộng nhất có dải tóc liên tục, loại nét rời hoặc mảnh dưới 2 px, ribbon/pin/tassel. Ô dùng cùng quy tắc, crown nhìn thấy và breadth ±3% master, không tạo span dọc; không giới hạn lean khi master có kind này. Master D53 vẫn giữ giới hạn D56 cũ. Cửa sổ Lab D55 từ crown, rộng 1,08×breadth và cao đúng 1,0×breadth; không tạo evidence từ cửa sổ. Giữ D41/D54, foot/canvas và scale cố định.]
 
 ### Ngân sách hiệu năng
 

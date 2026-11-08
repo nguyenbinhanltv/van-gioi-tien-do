@@ -1,0 +1,960 @@
+{
+  "format": "vgtd-head-reason-similarity-audit",
+  "version": 1,
+  "utc": "2026-11-08T05:08:53.277Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/thuong-tu-chibi-v1/E --out C:/Users/PC/AppData/Local/Temp/vgtd32-d54/final.json",
+  "gitHead": "a33d420d4a2a29f93cd00159e59f7164d9fe42f5",
+  "gateSourceSha256": "fd657d90b310b8e5fcebaf10d01bac590d95d04534c49fe5f9cd842135089503",
+  "reasonSourceSha256": "63e639cf44b2004b18ca8c1e44d0daf22a15aec8a53d29d45459edeceb9907da",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 113,
+    "newlyCheckedCells": 24,
+    "retainedD41PoseCells": 89
+  },
+  "retainedD41PoseExemptions": [
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 0,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 1,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 2,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 3,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 4,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 5,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 6,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 7,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 8,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 9,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 10,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 11,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 12,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 13,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 14,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "meditate",
+      "cell": 15,
+      "kind": "free",
+      "reason": "seated: visible cross-legged meditation, unchanged anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 0,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 1,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 2,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 3,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 4,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 5,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 6,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 7,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 8,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 9,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 10,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "sword_fly",
+      "cell": 11,
+      "kind": "free",
+      "reason": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 1,
+      "kind": "free",
+      "reason": "angled-spear anticipation: visible rearward spear tilt and knee preparation reduce full-alpha height, anatomical scale unchanged"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 2,
+      "kind": "free",
+      "reason": "knee-bend anticipation: visible split stance and angled spear before thrust, anatomical scale unchanged"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 1,
+      "kind": "free",
+      "reason": "knee-lift pivot anticipation: visible raised front knee and angled spear, anatomical scale unchanged"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_2",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 1,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 2,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 3,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 4,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 5,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 6,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 7,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 8,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 9,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 10,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 11,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "attack_3",
+      "cell": 12,
+      "kind": "free",
+      "reason": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 2,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 3,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 4,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 5,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 6,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 7,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 8,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 9,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 10,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "die",
+      "cell": 11,
+      "kind": "free",
+      "reason": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 3,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 4,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 5,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 6,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 7,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 8,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 9,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 10,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 11,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 12,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "tribulation",
+      "cell": 13,
+      "kind": "free",
+      "reason": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "hit",
+      "cell": 1,
+      "kind": "free",
+      "reason": "recoil: visible backward lean and bent knees, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "hit",
+      "cell": 2,
+      "kind": "free",
+      "reason": "recoil: visible backward lean and bent knees, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "hit",
+      "cell": 3,
+      "kind": "free",
+      "reason": "recoil: visible backward lean and bent knees, unchanged source scale"
+    },
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "clip": "hit",
+      "cell": 4,
+      "kind": "free",
+      "reason": "recoil: visible backward lean and bent knees, unchanged source scale"
+    }
+  ],
+  "scannedProjects": [
+    {
+      "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "sha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb"
+    }
+  ],
+  "totals": {
+    "projects": 1,
+    "cells": 24,
+    "pass": 24,
+    "fail": 0,
+    "unmeasured": 0
+  },
+  "projects": [
+    {
+      "project": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+      "character": "thuong-tu-chibi-v1",
+      "direction": "E",
+      "inputs": [
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/project.json",
+          "sha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack.png",
+          "sha256": "6fd041aa0c02eb34fc21d2f3468b745c3e29dcd309a8fbceeea559af78eb3b00"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_2.png",
+          "sha256": "406e67944871e962af2dbbab74faf0e131ab3c6c11adffdce964758bc2384bf4"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.headroom.png",
+          "sha256": "42db9027983fbbf01390cfa237caf5380b18c45228cfb08c3c8e44fc10c4d49e"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/cast.png",
+          "sha256": "1a1466eb0704da8f12ef14e71bc7e6e0db434184ca543cd2d256d3629e3c83fa"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/channel.png",
+          "sha256": "ef06e59c0476c35bcea41f322001fc4d76fc19cc0b7c7c50fc886e317493ea21"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/die.png",
+          "sha256": "0b7e8502dd3e2bd97f6d14f6a440358643c971d814b9d4932aec72168ae87d17"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/emote.png",
+          "sha256": "49a28f9881be881a88b9841341667e278b21e98c861e3cc514d33927b6f76c28"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.locked.png",
+          "sha256": "97771c9ba7808a7725dbd66d81da33bdee321c8207b32a86111661b4b8a4d031"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/idle.png",
+          "sha256": "db820f677e121c7713b061425716110e147a122c5e44ca6f88ca00ebbce77345"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/meditate.png",
+          "sha256": "c3485ba73d2b1e24287dd631b81e8495c9a078087ee5214b03f5749fe2f77281"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.lanczos-selected.png",
+          "sha256": "6ba7fdc6443572a083ccc1040f80f70173508ac24ac5a3c80ff0d45dcf5dee54"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/sword_fly.png",
+          "sha256": "eaf8cdcab7299ca30f962e689da77e51bfa6bae6fec8cc10bcc78775972169d8"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/tribulation.png",
+          "sha256": "8cfc0f9f5d0681b15038cdc3eb9c8908d4ae178d9b63e30ea63afe72cc9b4062"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.headroom.png",
+          "sha256": "0ed356f3851aafbaa1ca9f04e3b92138f0196d83d88a5b9e5529169c715e0fbe"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack.template.json",
+          "sha256": "e52c275a1f9ccc17f7d06aa5a6d7d171bcc176caba3496d345fcec7eb5c8ef68"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_2.template.json",
+          "sha256": "d87f2def694a302954ac71988d74699a4dc5fa6b94a9cb0ed5916fa5c76e71b1"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/attack_3.template.json",
+          "sha256": "f513e31400b4ca6965a8835194e7cd41e36a10326421abde4ca5086cf2efb353"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/cast.template.json",
+          "sha256": "3508563dc5b65be7c82bce7dec87ede232c6b57cbb68cb276ee56f6cf9917fe5"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/channel.template.json",
+          "sha256": "d22e7f7643980f2e6e7aef0a622bff0d48a1233784f408db9f68aecb2537ef27"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/die.template.json",
+          "sha256": "5adf0a0b70e7aed3119093b991d15d18797774f3a2ca59d67db6055bc8dff858"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/emote.template.json",
+          "sha256": "42a3a1f05e8c56a0cc7e1817c85ab2f38d04934cd6fd67814ebef00daa00a328"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/hit-dash.template.json",
+          "sha256": "63bd01460217858aba510273dd6efdcf337b5f14b4db8cde37b30dd332ec0041"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/idle.template.json",
+          "sha256": "daba6cf4e7243d977a8321b5118fa40b17ee93bb9fb70d24b05d55b660f6981f"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/meditate.template.json",
+          "sha256": "0c80ce8cbb9a292ac899358db62ca7082f9ee6665383f75b2ca4047bae8b4b59"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.template.json",
+          "sha256": "39f2b00b75621da8cfda707c81ae6c8d218b1cd46d25c0fc9373e15585810bc7"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/sword_fly.template.json",
+          "sha256": "8ecaddc79ad046023425121f41c374da41efba72401f317cb8d80638f12759ed"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/tribulation.template.json",
+          "sha256": "a7c1ecdb414868e157fc07f21f5298df91e7571d8de4d6a5ad72fb8189b38ca6"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/walk.template.json",
+          "sha256": "c61477a696ee6cd4a3e6978eed1deb8eded68ea9a8e0dff179deebd085e5cc5e"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/motion-calibration.json",
+          "sha256": "165214337e7c22500777d376bb9b38f7aee81d4906a6191d2e6bfb3c66caac70"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/quality-backlog.json",
+          "sha256": "d38e904fc01138fac61d4c01188caf1ee0e71e7af3a1d6867fe1823c36a93867"
+        },
+        {
+          "file": "assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+          "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287"
+        }
+      ],
+      "cells": [
+        {
+          "clip": "run",
+          "cell": 0,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 14,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 0,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

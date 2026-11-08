@@ -8,7 +8,7 @@ Official D45 guides are reproduced from committed sources with:
 npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/S/project.json --out <fresh-temp-directory>
 ```
 
-Input project SHA256: `c9c0e3f79a5334687bd9b3f3bcf467ff87601f280db711200e293a59cd7ed7e1`. Master SHA256: `1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168`. Generated layer-inputs.json SHA256: `64d9489f012ec5d4eeffe1268a91e14cc45b08f65711c6c7105329e7999bb92c`. The manifest pins every source sheet and clip mapping. Derived PNGs remain temporary until extraction.
+Input project SHA256: `529046d6d3863bda3523ba8b155f8f5d0434abc7ae0887c98b2507b58d7b31cc`. Master SHA256: `1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168`. Generated layer-inputs.json SHA256: `b06385cd97c88cfa47bed0da7eb1290cf0bcca22972575674c119d2b904b47a1`. The manifest pins every source sheet and clip mapping. Derived PNGs remain temporary until extraction.
 
 | Guide              | SHA256                                                           |
 | ------------------ | ---------------------------------------------------------------- |
@@ -28,3 +28,7 @@ Input project SHA256: `c9c0e3f79a5334687bd9b3f3bcf467ff87601f280db711200e293a59c
 | source-13.full.png | 24e6d3de6f23b3cacd7201d2f21750df2d2d9e84984d585b8fa7583e59eeab06 |
 
 S/selection.json preserves the reviewed attempt choices. Head evidence and open foot findings are in the review/backlog records. engine-gate.json records real Cocos3.8.8 2× capture of all15 clips against matching runtime source bytes.
+
+D55 dash3 evidence-only follow-up: crown(130,44), chin(130,92), main cap excluding elevated bun/curl and accessories, same semantics as the locked S master. Head48.000/master48.010px; anchored headLab6.063786, torso5.631270. The old15.499404 result came from a centroid fallback crop above most of the face. All five rendered files and14 guide PNG hashes are unchanged; no repaint, origin change, pose exception or threshold change. `dash3-d55-review.json` records exact windows, RGBA and hashes. Seventeen open foot findings remain.
+
+The runtime QA contract `phaptuchibi_S.sprite.json` is regenerated from the updated project so batch/review consumers see dash3 headEvidence and current QA. `dash3-d55-review.json` lists its old/new SHA256 separately from the five byte-identical render inputs.

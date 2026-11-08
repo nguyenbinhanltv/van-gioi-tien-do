@@ -1,0 +1,37 @@
+{
+  "name": "E-dash-skull-lock",
+  "start": "2026-11-08T00:18:05.108Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0eda48e7-8001-4b12-8426-42a2ee883f3c.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Measured small HEAD REDUCTION repair on this exact THUONG TU4x4 HIT+DASH sheet. Input2 master skull is52.55logicalpx; actual aligned dynamic dash caps/chins are54.5–57.3px, TOO LARGE. ONLY sourcecells6-13 (row2col3 through row4col2): uniformly REDUCE ENTIRE HEAD incl skull-attached hair/face/ear by6%, neck-anchored, about4nativepixels on a65-70pxhead. Keep same maturemale rightPROFILE identity, slateeye/straightbrow/jaw/blackfringe, lowpony. Do NOT make a tinyhead or squash face alone. First6 HITcells0-5 and last2 standing recoverycells14-15 EXACTLY UNCHANGED. Preserve all8 dynamic DASH body/torso/arms/handgrips/legs/feet/flighttuck/spear/redpennon/sash/rootregistration; NO flattening or wholebody scalechange. Only skull size changes, pony attachment follows head but trailing shape stays. All16 populated, identical4x4square dimensions, solid #FF00FFbackground, no new lines/text/shadows/FX. A conservative6% reduction, not12% or larger, so head matches locked master physically.",
+  "endObserved": "2026-11-08T00:18:40.698Z",
+  "sourcePath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-8bab07eb-af62-4355-a98f-6fe4d0e86a4b.png",
+  "output": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-reduced.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.head-reduced.png",
+    "sha256": "8ed67d13af1e50e45b60c656e75f4288023b85b6bb3452e3e099f13e4c7ab023",
+    "bytes": 1827627,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0eda48e7-8001-4b12-8426-42a2ee883f3c.png",
+      "path": "E/raw/hit-dash.png",
+      "sha256": "ec564f9ada25510c06b3df3fa91ee75577c9e6215ea23e9f70bb98c50d7b528b",
+      "bytes": 1839508,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

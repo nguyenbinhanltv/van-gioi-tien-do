@@ -249,7 +249,6 @@ Không sửa art/evidence/export trong PR tooling này.
 
 | Project                                                       | Clip       | Ô local (0-based)      | Owner    |
 | ------------------------------------------------------------- | ---------- | ---------------------- | -------- |
-| `assets-src/placeholder/phap-tu-chibi-v1/S/project.json`      | `dash`     | 3                      | worker25 |
 | `assets-src/placeholder/phap-tu-fan-sprite-v1/N/project.json` | `attack`   | 2                      | worker25 |
 | `assets-src/placeholder/phap-tu-fan-sprite-v1/N/project.json` | `cast`     | 3                      | worker25 |
 | `assets-src/placeholder/the-tu-sprites-v1/S/project.json`     | `attack_2` | 0, 1, 2, 3, 4, 5, 6, 7 | worker24 |
@@ -258,6 +257,8 @@ Artifact `similarity-identity-temporal-audit-palette-findings.html` trong [sessi
 có từng crop master/ô, context 256px, tọa độ và SHA256. Không scale lại frame; crop chỉ phóng to đồng đều để xem.
 Bản [tóm tắt D55 trong repo](art/identity-temporal-calibration-d55.md) giữ từng ô và giá trị; audit JSON giữ mọi score/pair/hash.
 Tái lập bằng `sprite:audit-similarity-controls` và `sprite:audit-similarity-crops` theo README của `@vgtd/sprite`.
+
+[Cập nhật worker25, 2026-11-08: đóng riêng Pháp tu semi-chibi S dash3 bằng evidence thật, không repaint. Cửa sổ fallback cũ kết thúc y61, bỏ phần lớn mặt trong tư thế dash; crown chính của cap (loại bun/curl nâng cao) là (130,44), chin thật (130,92), alpha255. Dùng cùng semantic với master S và ô dash2 đã lưu; hàng cap44 có run liên tục x128–132, midpoint130. Head48,000/master48,010px (ratio0,999783) qua D47; D55 cửa sổ neo cho headLab6,063786 và torso5,631270, dưới trần15/23. QA0 hard/0 soft mới/0 regression; 17 foot findings vẫn mở. Năm tệp render byte-identical, không đổi pose exception hoặc ngưỡng. Bằng chứng và hash ở [S/dash3-d55-review.json](../assets-src/placeholder/phap-tu-chibi-v1/S/dash3-d55-review.json). Bảng/số liệu audit D55 ban đầu được giữ như lịch sử, hai finding legacy Pháp N chưa sửa.]
 
 **Đánh giá lại D54: 33 ô L1 cũ đều có 0 lỗi cứng A+C và 0 lỗi cứng khác trong audit pin D55.** Đan/Phù E run0–15,
 dash1–7; Thể E run5–6, dash3–6; Đao SE dash3–6 không còn là rebuild blockers theo metric mới. Đóng phần việc repaint

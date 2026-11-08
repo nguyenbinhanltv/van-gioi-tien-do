@@ -1,0 +1,37 @@
+{
+  "name": "E-meditate",
+  "start": "2026-11-07T23:38:01.024Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/meditate.head-stencil.template.png"
+  ],
+  "prompt": "PRODUCTION GAME SPRITE SHEET, THUONG TU T1 MALE, E EXACT RIGHT PROFILE in EVERY FRAME. First input256-square is the locked master: use same adult face/slate almond eye/straight brow/angular jaw, swept black main hair and LOW ponytail, navy plain sleeveless wrap with ivory undercollar, red sash tails, compact dark trousers, wrist wraps and small dark boots; no armor/gems/embroidery. Same dark straight spear, simple steel leaf tip and forked RED pennon. Second input is authoritative4x4 LATTICE plus EXACT MASTER HEAD STENCILS for scale/identity and ground/foot guides. Draw a square2048x2048 sheet with4columns x4rows, each cell512square, exactly16 row-major cells; preserve every cell registration; no overlap between cells. Logical cell256: standing main crown y16, soles y232, head skull+hair about50px tall matching stencil; enlarged2x in512cell so crown32/soles464/head100. Scale fixed; body main-crown-to-sole216logicalpx, NEVER fit individual frame heights. Stencil is size/face guide, head may translate/rotate with pose but must not shrink/grow. Art 2cel tones+one highlight, material-tinted clean outline, NW light. Solid perfectly flat magenta #FF00FF everywhere outside artwork. REMOVE ALL guide lines/foot ghosts/markers, no text/numbers/borders/ground shadows/halos. Entire spear/banner/low ponytail/hands/feet stay inside each cell with safe margin; do not clip at grid edges, do not shrink body to fit spear. First frame must closely match master scale/identity. No perspective zoom, no front face/three-quarter. Small hands/feet, adult compact4.5-head anatomy. MEDITATE LOOP16 successive unique subtle breathing drawings. Same MALE E right-facing profile seated cross-legged on plain ground, hands calm lap mudra, eyes softly closed. Skull/head is EXACT same physical size as standing master/stencil, seated BODY height naturally reduced; head translates down with seated torso rather than being scaled or fixed at standing height. Spear and RED pennon REST ON GROUND BESIDE him horizontally within each cell, fully visible, same spear shape/length/material, not disappearing or replacing with lotus/props. Small gentle torso breath, low ponytail and red pennon/sash delayed minimal sway. No lotus, aura, circles, platform, shadow or particles. Whole seated silhouette ground contact at logical232, no hopping. All16 populated, smooth cycle16->1, no duplicated static sheet.",
+  "endObserved": "2026-11-07T23:38:34.790Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-ebb18f25-b6b3-4522-b31e-504b3fd8639b.png",
+  "output": "raw/meditate.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/meditate.png",
+    "sha256": "c3485ba73d2b1e24287dd631b81e8495c9a078087ee5214b03f5749fe2f77281",
+    "bytes": 1741230,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/meditate.head-stencil.template.png",
+      "path": "E/templates/tribulation.head-stencil.template.png",
+      "sha256": "e7388bbfe36b08e9d48678cc4e17081de7b74d4fe66a9ebcd1dc055194117708",
+      "bytes": 50525,
+      "dimensions": [1024, 1024]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

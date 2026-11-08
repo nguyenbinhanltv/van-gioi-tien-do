@@ -1,0 +1,1233 @@
+{
+  "format": "vgtd-head-reason-similarity-audit",
+  "version": 1,
+  "utc": "2026-11-08T04:39:48.965Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/phap-tu-chibi-v1/NE --out D:/Temp/phap-NE-review-D55.json",
+  "gitHead": "d1f9f5d18579d1e3f65263676f0c5325d4e31abf",
+  "gateSourceSha256": "20daba7a2615f7c02c987f85040fb4ac845f8f948e73119cee3689bdd72bde4c",
+  "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 152,
+    "newlyCheckedCells": 20,
+    "retainedD41PoseCells": 132
+  },
+  "retainedD41PoseExemptions": [
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 0,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 1,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 2,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 3,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 4,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 5,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 6,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 7,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 8,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 9,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 10,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 11,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 12,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 13,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 14,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "meditate",
+      "cell": 15,
+      "kind": "free",
+      "reason": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 0,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 1,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 2,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 3,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 4,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 5,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 6,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 7,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 8,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 9,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 10,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "sword_fly",
+      "cell": 11,
+      "kind": "free",
+      "reason": "hovering with folded knees; airborne body pose"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 0,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 1,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 2,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 3,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 4,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 5,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 6,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 7,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 8,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 9,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 10,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 11,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 12,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack",
+      "cell": 13,
+      "kind": "free",
+      "reason": "diagonal fan cut with bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 0,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 1,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 2,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 3,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 4,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 5,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 6,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 7,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 8,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 9,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 10,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 11,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 12,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_2",
+      "cell": 13,
+      "kind": "free",
+      "reason": "rising fan sweep with squat anticipation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 0,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 1,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 2,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 3,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 4,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 5,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 6,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 7,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 8,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 9,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 10,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 11,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 12,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "attack_3",
+      "cell": 13,
+      "kind": "free",
+      "reason": "deep forward lunge and recovery"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 0,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 1,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 2,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 3,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 4,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 5,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 6,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 7,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 8,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 9,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 10,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 11,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 12,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 13,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 14,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "cast",
+      "cell": 15,
+      "kind": "free",
+      "reason": "casting anticipation and fan sweep; bent knees and torso rotation"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 0,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 1,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 2,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 3,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 4,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 5,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 6,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 7,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 8,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 9,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 10,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "channel",
+      "cell": 11,
+      "kind": "free",
+      "reason": "channel mudra and raised left fan sleeve"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 0,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 1,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 2,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 3,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 4,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "hit",
+      "cell": 5,
+      "kind": "free",
+      "reason": "brief backward recoil and knee flexion"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 0,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 1,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 2,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 3,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 4,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 5,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 6,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 7,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 8,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 9,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 10,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "die",
+      "cell": 11,
+      "kind": "free",
+      "reason": "progressive knee collapse and lying on side; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 0,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 1,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 2,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 3,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 4,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 5,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 6,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 7,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 8,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 9,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 10,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 11,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 12,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 13,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 14,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "clip": "tribulation",
+      "cell": 15,
+      "kind": "free",
+      "reason": "one-knee brace and recovery under wind; fixed anatomical size"
+    }
+  ],
+  "scannedProjects": [
+    {
+      "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "sha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123"
+    }
+  ],
+  "totals": {
+    "projects": 1,
+    "cells": 20,
+    "pass": 20,
+    "fail": 0,
+    "unmeasured": 0
+  },
+  "projects": [
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+      "character": "phap-tu-chibi-v1",
+      "direction": "NE",
+      "inputs": [
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/attack.png",
+          "sha256": "ccd72401ea490e50fc950a8a722ea689d71651c31bfef95cc55d081bded843ab"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/attack_2.png",
+          "sha256": "1e81d5d024ad9eabca1f58347249be8aef6563f2c8e531e77a54e195824616ba"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/attack_3.png",
+          "sha256": "72da94ed9b0014dd96511fcfa9868241c395bbabe885e9896cddc4501d566504"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/cast.png",
+          "sha256": "f5411cf35e4b10966ec0bcb64c999cf2a8f055c41c07e6f2e469c3c0bcd57858"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/channel.png",
+          "sha256": "40f3ac506db347475ec07cb99bd7f602e47fe615efb2e544b5c5e939af402e24"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/die.png",
+          "sha256": "47ddd6f5b05f732412b845d6990f65f93e99a51dc046eb59172ccb501acc3592"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/emote.png",
+          "sha256": "b82923137217db7bacdb0782770c09211e62c30409cb1720fd92ddb7f0bf5f6b"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/hit-dash.png",
+          "sha256": "88be6cb5f446edb8da81fe3cc04ad5e6542745a7a4e8151df595ae0fcb7d509e"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/idle.png",
+          "sha256": "a854aae7ddd018f4b3d7872f64865d05c151bf00afdf8eb0c2ed39e3849c3531"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/meditate.png",
+          "sha256": "d733de8e5b8a16d1d01d937433fdd1fa0940289ac0805c8aa421173870a82709"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/run.png",
+          "sha256": "06b41e1c64c1799814a4278db47151764ee80aba571320dde2a0167a5f0f085d"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/sword_fly.png",
+          "sha256": "59563ee8baa0e557bb5663e1fe9f360ef5107b950cf54614d5a2d9a557c276c4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/tribulation.png",
+          "sha256": "9f2962309f2c601f6c2c2aa52cf0020bb7ef9b9f7bc0fb090fb6818b8f4f283e"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/prepared/walk.png",
+          "sha256": "7933be33c3319cf45158246ec7adf98d051aec1bc70d4413cc8cc83b168e22f1"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
+          "sha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/quality-backlog.json",
+          "sha256": "348174c7a2ff1761c78bd88b02d786ba7c385d65809b298f6c7a47baa9edf601"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/attack.template.json",
+          "sha256": "2a57236ce09a23a861fd239d39427dc920d9140c3b0b5ff8f337d10e0f46020a"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/attack_2.template.json",
+          "sha256": "35440313ca4e779b64cf0df81db664c643eaf52693c2c54a0526b34d5abbfdf9"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/attack_3.template.json",
+          "sha256": "16c2b277e49c42735a5c85d8d536182c097a4c6dd1be45abf39337f621ae9890"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/cast.template.json",
+          "sha256": "b74f5e33ff4fbd5dcca274b176b8be84006cadd8317b51e5c26520193894b21d"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/channel.template.json",
+          "sha256": "9e95bb3c0dad3468085b4c69d21239182e3b28a20825353a32eebe74004253c1"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/die.template.json",
+          "sha256": "acf801cc5e775b432961df9c835182f71d9e16cfff90155a286cd92a15a56178"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/emote.template.json",
+          "sha256": "b407968446066f200323b562cb7c7dfd2e2179efcf3351d1f99ad7a3e7de8a8a"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/hit-dash.template.json",
+          "sha256": "4ec2f420cdc72c65338dd4f416169a42fdcdf262be0991ef76df0eaf164c062c"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/idle.template.json",
+          "sha256": "1a20ebc5e0ac40192e513ae5917d00eadae3ddb68467724b62d6f432764f48a4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/meditate.template.json",
+          "sha256": "4dbaa7fc662e6df74438e26ba7d5e8d1bf24401ab78ae70e61b412df7e2a9aef"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/run.template.json",
+          "sha256": "3bd620028b6b676325eaabcfe348ba4f845d57a3843d0f71511da5d4fc0c67cc"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/sword_fly.template.json",
+          "sha256": "25cff617167481f529085822c22e1c5c2913f8206b97ad81eaff540560fe7f6c"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/tribulation.template.json",
+          "sha256": "9340d2db9fcf683ffcb9c980d2693ba73c9b3d1a98922e29e137d67c3ed2d69c"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/templates/walk.template.json",
+          "sha256": "2c75bd4dbb62290eb125d66fb76df3f6fb4386bd6cd55e76e1a4bd204f7f4f66"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/character-calibration.json",
+          "sha256": "243ed6f29d0be69a26721f190929932f5bb80f49a3e6e43896cd583a0d7b44d4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/reference/NE.master.png",
+          "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+        }
+      ],
+      "cells": [
+        {
+          "clip": "run",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

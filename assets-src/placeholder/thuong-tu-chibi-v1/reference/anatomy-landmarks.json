@@ -1,0 +1,133 @@
+{
+  "kind": "manual-anatomy-landmarks-v1",
+  "source": "reference/T1-turnaround.raw.png",
+  "sourceDimensions": [1774, 887],
+  "targetHeight": 216,
+  "referenceHeight": 680,
+  "heightTolerance": 0.03,
+  "axis": 128,
+  "uncertaintySourcePx": 3,
+  "policy": "Manual art landmarks, not anatomy-detector certification; a single scale is applied to all five views. Shoulder span is an observed art measurement, not a gameplay constant.",
+  "views": [
+    {
+      "direction": "E",
+      "panel": [0, 320],
+      "pelvisX": 163,
+      "soleY": 795,
+      "crown": {
+        "x": 144,
+        "y": 118
+      },
+      "chin": {
+        "x": 193,
+        "y": 276
+      },
+      "eyeY": 229,
+      "note": "Reviewed native E profile: skull-attached cap excludes low ponytail; visible jaw/chin and eye; spear excluded from anatomical H."
+    },
+    {
+      "direction": "SE",
+      "panel": [320, 665],
+      "pelvisX": 223,
+      "soleY": 795,
+      "crown": {
+        "x": 203,
+        "y": 114
+      },
+      "chin": {
+        "x": 229,
+        "y": 271
+      },
+      "eyeY": 225,
+      "note": "Reviewed SE front-right face and ivory crossover; same male face/hairline, low ponytail and unarmored T1."
+    },
+    {
+      "direction": "S",
+      "panel": [665, 1030],
+      "pelvisX": 214,
+      "soleY": 795,
+      "crown": {
+        "x": 202,
+        "y": 116
+      },
+      "chin": {
+        "x": 214,
+        "y": 271
+      },
+      "eyeY": 225,
+      "shoulderJointX": [128, 301],
+      "note": "Reviewed straight-front construction; shoulder points manually estimated under sleeveless shoulder contour, uncertainty retained."
+    },
+    {
+      "direction": "NE",
+      "panel": [1030, 1395],
+      "pelvisX": 153,
+      "soleY": 795,
+      "crown": {
+        "x": 145,
+        "y": 119
+      },
+      "headKind": "rear-crown-shoulder",
+      "shoulderTop": {
+        "left": {
+          "x": 74,
+          "y": 306
+        },
+        "right": {
+          "x": 199,
+          "y": 302
+        }
+      },
+      "breadth": {
+        "left": {
+          "x": 87,
+          "y": 198
+        },
+        "right": {
+          "x": 220,
+          "y": 198
+        }
+      },
+      "note": "Reviewed NE: low ponytail covers nape; D50 visible upper shoulder endpoints and main skull breadth, no invented chin/skull base."
+    },
+    {
+      "direction": "N",
+      "panel": [1395, 1774],
+      "pelvisX": 161,
+      "soleY": 795,
+      "crown": {
+        "x": 164,
+        "y": 116
+      },
+      "headKind": "rear-crown-shoulder",
+      "shoulderTop": {
+        "left": {
+          "x": 85,
+          "y": 305
+        },
+        "right": {
+          "x": 238,
+          "y": 302
+        }
+      },
+      "breadth": {
+        "left": {
+          "x": 97,
+          "y": 199
+        },
+        "right": {
+          "x": 223,
+          "y": 199
+        }
+      },
+      "note": "Reviewed N: approved low ponytail covers nape; D50 shoulder midpoint and main skull breadth exclude dangling hair."
+    }
+  ],
+  "shoulderLock": {
+    "direction": "S",
+    "bandPercentH": [24, 28],
+    "measuredPercentH": 25.5,
+    "uncertaintyPercentH": 0.9,
+    "basis": "Owner-approved lean design; orchestrator lock 2026-11-08. T2-T5 armor may overhang. Art measurement, not gameplay constant."
+  }
+}

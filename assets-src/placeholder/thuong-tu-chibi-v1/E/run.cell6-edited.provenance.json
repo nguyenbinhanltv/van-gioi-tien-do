@@ -1,0 +1,46 @@
+{
+  "name": "E-run-cell6-midpoint",
+  "start": "2026-11-08T00:38:48.651Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-final.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Repair ONLY cell6(row2col3 zero-based) HEAD in image1, exact1254x1254 4x4 sprite sheet. Image1 cell6 skull is too SMALL (~48.5 alignedpx); image2 same cell6 is too LARGE (~55.7). Make ONLY this cell6 skull/mainhair/face/ear intermediate, ~52.5 alignedpx (66.7 nativepx cap-to-chin), around MIDWAY between those two. Keep neck anchor fixed, same mature male E face and clean collar seam. Keep all other15cells byte-identical to image1. Keep body/pose/weapon/legs/registration exact. Do not change othercells or body scaling. Image3 canonical face. Backgroundflatmagenta, no guides or text.",
+  "endObserved": "2026-11-08T00:39:09.968Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a1265634-c76d-4aed-af85-ad950fa3f0d7.png",
+  "output": "raw/run.cell6-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "candidate pending aligned manual landmarks",
+  "outputEvidence": {
+    "path": "E/raw/run.cell6-edited.png",
+    "sha256": "161a1515fd6f8f7b7fabe2fc6cc1321e9b5c189ad926e8a940936899fa01e5ee",
+    "bytes": 1901848,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-final.png",
+      "path": "E/raw/run.head-final.png",
+      "sha256": "974e7cb58697e44591ef60acf5c6d52dea7a2b4dde3342cff6193ec24e900bf0",
+      "bytes": 2286737,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+      "path": "E/raw/run.head-repaired.png",
+      "sha256": "627fd93a1101607bd2fd6dee1ebfe39bf0815351084ae1b37836229d5357f98d",
+      "bytes": 2287177,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

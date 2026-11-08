@@ -1,0 +1,16 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "attempt": 5,
+  "frames": 16,
+  "prompt": "Finish this EXACT 4x4 KIEM TU E run construction guide as a precise image edit. Each cell already contains the approved canonical MASTER HEAD pasted at its FINAL size and position, with the oversized old head ERASED. Preserve EVERY existing small stencil head pixel geometry and FACE SIZE; they are not placeholders to enlarge. The blank magenta cutout around the heads is deliberate: ONLY reconstruct missing neck, back-of-head hair roots and small joining seams so the unscaled head connects naturally to the existing body. Do not rebuild a larger head to fill the cutout. Head vertical crown-to-chin is52 of256logical cell units, Euclidean53.85; when resizing the WHOLE sheet these ratios remain fixed. The master face is grey-eyed adult male, same nose/jaw/eye and swept dark cap; all16 E-profile faces remain identical.\nThe body poses, lean, clothing panels, arms, knees, boots, sword, source roots and16-frame phase order are ALREADY DRAWN and LOCKED. Preserve those exact poses and physical dimensions. Do not redraw the gait, shrink or enlarge the body, change foot positions, rotate the camera or introduce a different character. Plain ivory split robe, navy trousers+sash, cyan ribbon, simple steel sword RIGHT hand. Connect the existing flowing hair/ribbon trails to the small head; highest loose ponytail curve must remain at least18/256 cellheight below TOP so later single source-plane translation does not clip it. Bend the loose ponytail LOOP if needed, never move the head/body to gain headroom. No rigid bun, armor, new trim, VFX, shadows, labels or grid. All limbs/blade/trails fully inside owncell.\nKeep original tinted outlines and two-tone cel shading+highlight. OPAQUE PURE FLAT MAGENTA #FF00FF background, same4columns4rows,16distinct frames sameorder, squarecanvas preferably2048x2048. This is seam completion around unscaled head stencils, NOT a new run sheet design. Existing small heads must NOT grow; retain their exact dimensions even if the figures seem less cute. Complete each neck anatomically without stretching it; the approved head/cloth proportional contract is fixed.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T01:48:38.873Z",
+  "inputs": ["templates/run.head-stencil-guide-05.png"],
+  "status": "Clear-cutout stencil seam edit retained. Native head dimensions, pose identity, pink tie contamination and contact QA pending; not selected.",
+  "rawToolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-48d4ecf4-9d7f-42a3-96a5-54970c41dd6e.png",
+  "rawSha256": "dc400130301369323741119f69bfee0147f4bd3c9b2683895303df7274755aa4",
+  "utcOutputFileModified": "2026-11-08T01:49:06.265270+00:00",
+  "guideSha256": "94c117ff08dd34fe5062c3028864976adc2d2513a5d32c697048f15701a603c9"
+}

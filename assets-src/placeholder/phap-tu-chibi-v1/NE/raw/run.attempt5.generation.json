@@ -1,0 +1,25 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 5,
+  "prompt": "Image1 is the EDIT TARGET. It contains FINAL LOCKED SKULL-CAP ART, copied from the canonical master at precise calibrated size, placed on a 16-cell 4x4 NE run sheet. Image2 is the canonical master for the lower head/face/neck details only. DO NOT redraw, enlarge, shrink, translate, stylize or reinterpret the skull-cap stencils in image1. Their exact outline, pixel footprint, position and size must remain UNCHANGED. Only inpaint the thin horizontal magenta cut underneath each cap to complete a natural neck/lower-head join and tiny visible right ear/cheek; complete any clipped ornament attachment without changing cap outline. Keep ALL other body/weapon/hand/leg/foot/torso/sleeve/secondary-hair pixels and positions from image1. Left-hand fan fixed. Preserve the dynamic16-frame run, anticipation/contact/flight/recovery and streaming hair/ribbons, no new poses or camera/scale changes. Each logical256 cell has the same unscaled master cap footprint: breadth about55 source pixels before the fixed .947826 runtime scale, yielding52px output. Most important is copying image1's cap, not approximating these words. Do not replace it with a rounder larger head. No extra face or frontal view. Exact original4x4 sheet on opaque pure magenta background, no cell labels, no new floor marks or FX. Preserve original premium cel-shaded plum/vermilion/gold palette, fixed adult female identity, compact coil wraps the skull (no elevated bun).",
+  "utcStart": "2026-11-08 02:10:38 UTC",
+  "utcEndObserved": "2026-11-08 02:11:45 UTC",
+  "references": ["NE/templates/run.edit-head-stencil.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt5.png",
+  "status": "not selected; retained raw provenance and selection.json rationale",
+  "rawSha256": "90523094e744b0a9b08e91d952aaa4a3d2d52f694532ac0f5ce20d01b589a42d",
+  "utcRawOutputFileModified": "2026-11-08T02:11:18.669Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/templates/run.edit-head-stencil.png",
+      "sha256": "a87e8930c2bb0dbfa2424ce648d14e9551396073ed0e09e56d0e0cfe0c04b904"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}
