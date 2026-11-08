@@ -16,6 +16,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "sprite:audit-similarity-crops": "node ../rig/scripts/run-ts.mjs scripts/audit-similarity-crops.ts",
     "sprite:audit-head-similarity": "node ../rig/scripts/run-ts.mjs scripts/audit-head-similarity.ts",
     "build": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",

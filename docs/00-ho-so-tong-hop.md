@@ -77,6 +77,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D54: lý do head-evidence `posture`/`secondary-overhang`/`rear-*` không miễn gate similarity. Ngoại lệ pose D41 có tên riêng đã xem (bow, seated, die-collapse, lunge, recoil, raised-sword) giữ miễn phép so crop trên mọi kind, kể cả upright emote. Có cả bằng chứng đầu và pose D41 thì chỉ pose D41 cấp miễn, không suy miễn từ bằng chứng đầu. Audit so chính xác mọi ô old-skip/new-check; các miễn pose giữ nguyên được ghi riêng, không gọi là pass. Các ngưỡng, scale và cổng foot/canvas giữ nguyên.]
 
+[Cập nhật D55: similarity neo theo landmark đã chú thích; front dùng crown/chin và breadth hoặc cửa sổ rộng 1,0 lần chiều dài đầu khi thiếu breadth; rear dùng cửa sổ rear-head theo endpoint hiện có, không bịa chin/crown. Margin tổng 8%, torso cao 25% và rộng 44% H master. Thiếu landmark dùng centroid-fallback có cờ, không gọi unmeasured; giữ ngưỡng 0,70 và D54/D41. Cửa sổ không phải evidence. Chi tiết và audit tại pipeline.]
+
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 
 | Hạng mục              | Giá trị chốt                                                                                        | Tài liệu gốc          |

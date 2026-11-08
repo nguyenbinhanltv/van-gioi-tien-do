@@ -1,4 +1,5 @@
 import type { OriginMeasurement } from './authored-origin.js';
+import type { SimilarityCropMeasurement } from './similarity-crops.js';
 /**
  * Batch report + owner review page. A batch report describes one character: every direction, every clip, the QA verdicts
  * and (when captured) the 2x GIF of the clip as rendered by the real Cocos runtime. `reviewHtml` turns one or more reports
@@ -18,6 +19,7 @@ export const BATCH_FORMAT = 'vgtd-sprite-batch' as const;
 export type ClipStatus = 'ok' | 'warn' | 'fail';
 
 export interface ClipReport {
+  readonly similarityCrops?: readonly { readonly cell: number; readonly measurement: SimilarityCropMeasurement }[];
   readonly originEvidence?: readonly { readonly cell: number; readonly measurement: OriginMeasurement }[];
   readonly name: string;
   readonly frames: number;
@@ -134,9 +136,14 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               const unmeasuredNote = c.unmeasuredFootSlide
                 ? '<div class="meta">Foot slide UNMEASURED (migration pending)</div>'
                 : '';
-              const evidence = c.headEvidence?.length
-                ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+              const crops = c.similarityCrops?.length
+                ? `<details><summary>Similarity crop windows (${c.similarityCrops.length})</summary>${c.similarityCrops.map(({ cell, measurement: e }) => `<p>cell ${cell}; ${esc(e.method)}; ${esc(e.frame.headKind)}; ${esc(e.reason ?? e.frame.widthSource ?? '')}<br>master ${esc(JSON.stringify(e.master))}<br>frame ${esc(JSON.stringify(e.frame))}</p>`).join('')}</details>`
                 : '';
+              const evidence =
+                crops +
+                (c.headEvidence?.length
+                  ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · head ${e.sizePx.toFixed(2)} / master ${e.masterSizePx.toFixed(2)} px · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx!.toFixed(2)} px` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                  : '');
               const origins = c.originEvidence?.length
                 ? `<details><summary>Authored-origin INFO evidence (${c.originEvidence.length})</summary>${c.originEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} ; ${esc(e.kind ?? 'anatomical-pelvis')} ; pelvisX ${e.pelvisX} ; groundY ${e.groundY ?? 'default'} ; source (${e.source.x}, ${e.source.y}) ; scale ${e.scale} ; dx ${e.dx}, dy ${e.dy}<br>${esc(e.reason)}<br>${esc(e.evidence)}</p>`).join('')}</details>`
                 : '';

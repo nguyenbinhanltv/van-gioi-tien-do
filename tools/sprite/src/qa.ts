@@ -11,7 +11,12 @@ import type { OriginMeasurement } from './authored-origin.js';
 import type { Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { facingGroundVector } from './gait.js';
-import { measureFigure } from './master.js';
+import {
+  legacySimilarityRegions,
+  similarityBlockMeans,
+  similarityRegionsForPair,
+  type SimilarityCropMeasurement,
+} from './similarity-crops.js';
 import type { AlignedFrame } from './align.js';
 import type { CellSpec, Guides } from './types.js';
 import {
@@ -26,6 +31,7 @@ import {
 export type Severity = 'fail' | 'warn' | 'info';
 
 export interface Finding {
+  readonly similarityCrop?: SimilarityCropMeasurement;
   readonly originEvidence?: OriginMeasurement;
   readonly headEvidence?: HeadMeasurement;
   readonly gate:
@@ -369,29 +375,6 @@ export function checkLoopSeam(clip: QaClip, o: QaOptions): Finding[] {
 
 // ------------------------------------------------------------------------------------------------------------ similarity
 
-const GRID = 8;
-
-/** GRIDxGRID block means of the premultiplied crop [x0,x1) x [y0,y1) of an image. */
-function blockMeans(img: Image, x0: number, y0: number, x1: number, y1: number): number[] {
-  const out: number[] = [];
-  const w = Math.max(1, x1 - x0);
-  const h = Math.max(1, y1 - y0);
-  for (let gy = 0; gy < GRID; gy++)
-    for (let gx = 0; gx < GRID; gx++) {
-      const sums = [0, 0, 0, 0];
-      let n = 0;
-      for (let y = Math.floor(y0 + (gy * h) / GRID); y < Math.floor(y0 + ((gy + 1) * h) / GRID); y++)
-        for (let x = Math.floor(x0 + (gx * w) / GRID); x < Math.floor(x0 + ((gx + 1) * w) / GRID); x++) {
-          if (x < 0 || y < 0 || x >= img.width || y >= img.height) continue;
-          const o = (y * img.width + x) * 4;
-          for (let k = 0; k < 4; k++) sums[k]! += img.data[o + k]!;
-          n++;
-        }
-      for (let k = 0; k < 4; k++) out.push(n ? sums[k]! / n : 0);
-    }
-  return out;
-}
-
 /** 1 - normalised L1 distance of two block-mean vectors (1 = identical). */
 export function blockSimilarity(a: readonly number[], b: readonly number[]): number {
   let d = 0;
@@ -399,20 +382,37 @@ export function blockSimilarity(a: readonly number[], b: readonly number[]): num
   return 1 - d / (a.length * 255);
 }
 
-/** Face (top 20 % of the figure) and torso (30..55 %) crops of a figure, around its pelvis axis. */
-function figureCrops(img: Image): { face: number[]; torso: number[] } | null {
-  const m = measureFigure(img);
-  if (!m) return null;
-  const half = m.height * 0.22;
-  const crop = (a: number, b: number) =>
-    blockMeans(
-      img,
-      Math.round(m.pelvisX - half),
-      Math.round(m.top + a * m.height),
-      Math.round(m.pelvisX + half),
-      Math.round(m.top + b * m.height),
-    );
-  return { face: crop(0, 0.2), torso: crop(0.3, 0.55) };
+/** Scores independently of pose exemptions, for the D55 old/new diagnostic audit. */
+export function measureSimilarity(
+  master: Image,
+  frame: Image,
+  options: {
+    masterHeight: number;
+    masterHead?: HeadLandmarks;
+    frameHead?: HeadLandmarks;
+    mode?: 'landmarks' | 'legacy';
+  },
+): { head: number; torso: number; crops: SimilarityCropMeasurement } {
+  const crops =
+    options.mode === 'legacy'
+      ? (() => {
+          const m = legacySimilarityRegions(master),
+            f = legacySimilarityRegions(frame);
+          if (!m || !f) throw new Error('empty master/frame for legacy similarity');
+          return { method: 'centroid-fallback' as const, reason: 'D54 legacy comparison', master: m, frame: f };
+        })()
+      : similarityRegionsForPair(master, frame, options.masterHeight, options.masterHead, options.frameHead);
+  const score = (region: 'head' | 'torso') => {
+    const a = similarityBlockMeans(master, crops.master[region]),
+      b = similarityBlockMeans(frame, crops.frame[region]);
+    if (
+      crops.method === 'landmarks' &&
+      (!a.some((v, i) => i % 4 === 3 && v > 0) || !b.some((v, i) => i % 4 === 3 && v > 0))
+    )
+      throw new Error(`empty annotated ${region} similarity window`);
+    return blockSimilarity(a, b);
+  };
+  return { head: score('head'), torso: score('torso'), crops };
 }
 
 /** D54 changes only head reasons; a documented D41 pose may exempt the crop on any clip kind. */
@@ -420,26 +420,56 @@ export function isSimilarityExemptReason(reason: string | undefined): boolean {
   return reason !== undefined && reason.length > 0 && !isHeadEvidenceReason(reason);
 }
 
+export const SPRITE_SIMILARITY_MIN = 0.7;
+
 export function checkSimilarity(clip: QaClip, o: QaOptions): Finding[] {
-  const ref = figureCrops(o.master);
-  if (!ref) return [];
-  const min = o.minSimilarity ?? 0.7;
+  const min = o.minSimilarity ?? SPRITE_SIMILARITY_MIN;
   const out: Finding[] = [];
   clip.frames.forEach((f, i) => {
     if (!f) return;
     const reason = clip.exceptions?.[i];
     if (isSimilarityExemptReason(reason)) return;
-    const c = figureCrops(f.image);
-    if (!c) return;
-    const face = blockSimilarity(ref.face, c.face);
-    const torso = blockSimilarity(ref.torso, c.torso);
-    if (face < min)
+    let measured: ReturnType<typeof measureSimilarity>;
+    try {
+      measured = measureSimilarity(o.master, f.image, {
+        masterHeight: o.masterHeight,
+        ...(o.masterHead ? { masterHead: o.masterHead } : {}),
+        ...(clip.headEvidence?.[i] ? { frameHead: clip.headEvidence[i] } : {}),
+      });
+    } catch (error) {
       out.push({
         gate: 'similarity',
         severity: 'fail',
         clip: clip.name,
         frame: i,
-        message: `face similarity ${face.toFixed(2)} < ${min}`,
+        metric: 'similarity_crop_invalid',
+        message: error instanceof Error ? error.message : String(error),
+      });
+      return;
+    }
+    const { head, torso, crops } = measured;
+    out.push({
+      gate: 'similarity',
+      severity: 'info',
+      clip: clip.name,
+      frame: i,
+      metric: crops.method === 'centroid-fallback' ? 'centroid_fallback' : 'similarity_crop_windows',
+      value: 1,
+      limit: 0,
+      similarityCrop: crops,
+      message:
+        crops.method === 'centroid-fallback'
+          ? `centroid-fallback: ${crops.reason}; legacy crop still measured`
+          : `landmark ${crops.frame.headKind} and torso windows; ${crops.frame.widthSource}`,
+    });
+    if (head < min)
+      out.push({
+        gate: 'similarity',
+        severity: 'fail',
+        clip: clip.name,
+        frame: i,
+        similarityCrop: crops,
+        message: `${crops.frame.headKind} similarity ${head.toFixed(2)} < ${min}`,
       });
     if (torso < min)
       out.push({
@@ -447,6 +477,7 @@ export function checkSimilarity(clip: QaClip, o: QaOptions): Finding[] {
         severity: 'fail',
         clip: clip.name,
         frame: i,
+        similarityCrop: crops,
         message: `torso similarity ${torso.toFixed(2)} < ${min}`,
       });
   });
