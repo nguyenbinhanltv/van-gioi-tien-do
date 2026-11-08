@@ -1,0 +1,25 @@
+{
+  "status": "Derived candidate; actualnativefoot/head/canvas/loopQAmandatory.",
+  "rawSha256": "55f62b4ecb875b5ecd9490eb43cc54a94f8003fc71365c78fbbfea338c42ef80",
+  "source": "sheets/walk.canonical-before-leg-edit.png",
+  "sourceSha256": "8f3e5e19601595a80a7b1fb1a6aabfd1e73e80d27ab38daad4231a0698cebe23",
+  "mask": "templates/walk.leg-mask-03.png",
+  "maskSha256": "cef0a4ffc0e27af994e238246a7065e6871614e1f56b7d771ace018ad6546e31",
+  "outputSha256": "133ef41d6f5396873371fd1b747caa6ed9b0543cee696a9fc2749927ba378dd3",
+  "dpi": {
+    "resample": "lanczos3",
+    "raw": [1254, 1254],
+    "normalized": [1024, 1024],
+    "cropTop": 0,
+    "cropBottom": 1254,
+    "dpiScaleX": 0.8165869218500797,
+    "dpiScaleY": 0.8165869218500797
+  },
+  "operation": "Whole-sheet singlepassLanczos3 DPI normalization, key/despill then select onlywhitebinarymask. Originalweapon pixels protectedinmask, allotherRGBA exactlypreserved afterPNGencoding. No body fit,rescale,rotation or perframeflooralignment.",
+  "selectedPixels": 128878,
+  "outsideRGBAChanges": 0,
+  "outsideHashes": [
+    "3e8418ddef883eae8b644bfd5bb450d776260763640fc144358b4bafb1491b48",
+    "3e8418ddef883eae8b644bfd5bb450d776260763640fc144358b4bafb1491b48"
+  ]
+}

@@ -1,0 +1,314 @@
+{
+  "revision": "Apply orchestrator minimum2 contiguous main-cap pixels rule to master and every measured frame; isolated knot-edge pixels excluded. Unchanged original dash source; no art edits yet. Previous audit retained.",
+  "previousAudit": {
+    "status": "First native dash review, no prior draft supplied to gate. Higher single cap-rim pixels excluded by minimum2run rule. Cell5 maincap begins below cyanband row59; gray secondary ponytail above is not cap. No output evidence inferred from guides."
+  },
+  "status": "Flat-summit rule audit; ambiguous rows are NOT accepted or supplied as evidence.",
+  "rule": "Orchestrator adjudication: topmost contiguous run of >=2 alpha>=128 main-cap pixels, semantically separate from knot/tie/ponytail; midpoint X; crown Y=row+0.5, applied to BOTH master and frames; ponytail/tie excluded semantically. Chin follows last-jaw support edge, no ratio-based point choice.",
+  "manualUncertaintyPx": 1,
+  "master": {
+    "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+    "semanticRegion": {
+      "left": 115,
+      "top": 14,
+      "right": 180,
+      "bottom": 35
+    },
+    "status": "one cap row-run",
+    "row": 16,
+    "runs": [
+      {
+        "left": 115,
+        "right": 126
+      }
+    ],
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "masterHead": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 120.5,
+        "y": 16.5
+      },
+      "chin": {
+        "x": 138.5,
+        "y": 67.5
+      }
+    },
+    "sizePx": 54.083269131959845
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "semanticRegion": {
+        "left": 155,
+        "top": 46,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 49,
+      "runs": [
+        {
+          "left": 155,
+          "right": 161
+        }
+      ],
+      "crown": {
+        "x": 158,
+        "y": 49.5
+      },
+      "chin": {
+        "x": 174,
+        "y": 102.5
+      },
+      "sizePx": 55.36244214266564,
+      "ratio": 1.0236519173348175,
+      "within3Percent": true,
+      "alignedCellSha256": "0d9a675e8c5524300909627827ab050a483a4e74fa358522032dacd53c55f04a"
+    },
+    {
+      "frame": 1,
+      "semanticRegion": {
+        "left": 182,
+        "top": 54,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 58,
+      "runs": [
+        {
+          "left": 182,
+          "right": 192
+        }
+      ],
+      "crown": {
+        "x": 187,
+        "y": 58.5
+      },
+      "chin": {
+        "x": 201.5,
+        "y": 110.5
+      },
+      "sizePx": 53.98379386445528,
+      "ratio": 0.9981607016531887,
+      "within3Percent": true,
+      "alignedCellSha256": "7f2dcd552fbf28ae087f05e311ce160fd141ca3794c2f9b5948cac27a276b909"
+    },
+    {
+      "frame": 2,
+      "semanticRegion": {
+        "left": 188,
+        "top": 46,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 48,
+      "runs": [
+        {
+          "left": 191,
+          "right": 192
+        }
+      ],
+      "crown": {
+        "x": 191.5,
+        "y": 48.5
+      },
+      "chin": {
+        "x": 209.5,
+        "y": 101.5
+      },
+      "sizePx": 55.97320787662612,
+      "ratio": 1.0349449797506682,
+      "within3Percent": false,
+      "alignedCellSha256": "afbbca448ffafc836c6602f2aa55ac5aa1c183cfcc00fe4d342d86ab4d79ef68"
+    },
+    {
+      "frame": 3,
+      "semanticRegion": {
+        "left": 194,
+        "top": 47,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 49,
+      "runs": [
+        {
+          "left": 194,
+          "right": 202
+        }
+      ],
+      "crown": {
+        "x": 198,
+        "y": 49.5
+      },
+      "chin": {
+        "x": 215,
+        "y": 102.5
+      },
+      "sizePx": 55.65968020030298,
+      "ratio": 1.0291478509647187,
+      "within3Percent": true,
+      "alignedCellSha256": "d264de38256a1982dd317aab0ae15a45ea6714dd2400d022996b761be9aec685"
+    },
+    {
+      "frame": 4,
+      "semanticRegion": {
+        "left": 196,
+        "top": 51,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 53,
+      "runs": [
+        {
+          "left": 196,
+          "right": 204
+        }
+      ],
+      "crown": {
+        "x": 200,
+        "y": 53.5
+      },
+      "chin": {
+        "x": 213,
+        "y": 105.5
+      },
+      "sizePx": 53.600373133029585,
+      "ratio": 0.9910712498212335,
+      "within3Percent": true,
+      "alignedCellSha256": "53e0966f1c306bb5ceb54a4bcec2867e35f6e808425d436be0b5c26f5c7215cb"
+    },
+    {
+      "frame": 5,
+      "semanticRegion": {
+        "left": 192,
+        "top": 59,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 59,
+      "runs": [
+        {
+          "left": 192,
+          "right": 194
+        }
+      ],
+      "crown": {
+        "x": 193,
+        "y": 59.5
+      },
+      "chin": {
+        "x": 205,
+        "y": 113.5
+      },
+      "sizePx": 55.31726674375733,
+      "ratio": 1.0228166239135177,
+      "within3Percent": true,
+      "alignedCellSha256": "c1f07ac71aefd9881688e39fda431ed0e087a7f1c4892ac4d86d3323e3d8423e"
+    },
+    {
+      "frame": 6,
+      "semanticRegion": {
+        "left": 181,
+        "top": 70,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 71,
+      "runs": [
+        {
+          "left": 181,
+          "right": 182
+        }
+      ],
+      "crown": {
+        "x": 181.5,
+        "y": 71.5
+      },
+      "chin": {
+        "x": 198,
+        "y": 124.5
+      },
+      "sizePx": 55.509008277936296,
+      "ratio": 1.0263619261346375,
+      "within3Percent": true,
+      "alignedCellSha256": "23f74fed2fd815bd660ac91289585ad74de0a2a9180c215dedbf2815c60c2ade"
+    },
+    {
+      "frame": 7,
+      "semanticRegion": {
+        "left": 152,
+        "top": 45,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 48,
+      "runs": [
+        {
+          "left": 152,
+          "right": 161
+        }
+      ],
+      "crown": {
+        "x": 156.5,
+        "y": 48.5
+      },
+      "chin": {
+        "x": 173,
+        "y": 99.5
+      },
+      "sizePx": 53.60270515561691,
+      "ratio": 0.9911143689341266,
+      "within3Percent": true,
+      "alignedCellSha256": "b3c1e971927c440332d3bbe34a56be6a47915be9255d618011583a2013582305"
+    },
+    {
+      "frame": 8,
+      "semanticRegion": {
+        "left": 132,
+        "top": 30,
+        "right": 220,
+        "bottom": 50,
+        "note": "Manual front-cap region excludes posterior ponytail and tie/knot; attached rim highlights included. Region selected visually before ratio evaluation."
+      },
+      "status": "one cap row-run",
+      "row": 31,
+      "runs": [
+        {
+          "left": 132,
+          "right": 145
+        }
+      ],
+      "crown": {
+        "x": 138.5,
+        "y": 31.5
+      },
+      "chin": {
+        "x": 156,
+        "y": 80.5
+      },
+      "sizePx": 52.03124061561477,
+      "ratio": 0.9620579793107874,
+      "within3Percent": false,
+      "alignedCellSha256": "5260266f7cdc2074c7bc3d47d858dbf4937e5dfb31cd9393f8d23e4777d95bb0"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Edit INPUT1 authoring template into a FULL FRAME-BY-FRAME game animation sheet of the SAME canonical KIEM TU T1 as INPUT2(E profile master) and fixed face from INPUT3(S master). EXACT4columns x4rows,16 chronological frames in row-major order. Output2048x2048 square,512px square cells; template logical256 units scale2x uniformly. Every figure SAME anatomical scale: crown MAIN hair cap tosole about216logicalpx (~432rawpx); elevated ponytail canextendabove crown but no bigger head. Canonical adult grey profileeye/straight brow/smallstraightnose/composedmouth,blackpony+cyanribbon,plainivoryshortsplitrobe/navycollar+navywaistsash/navypants/darksmallboots. Same oversized SIMPLE steelstraight sword/smallrectangularsilverguard/navygrip/cyanpommeltie in anatomical RIGHT nearhand,drawn and lowered forward-right. STRICT RIGHT-FACING EAST PROFILE every frame,noback/frontcamera turns,nocostumechanges. Material-tinted clean contour,2celtones+1highlight,NWlight,narrowrim,notblackink. Pure opaque uniform MAGENTA#FF00FF outside character,no shadow,no VFX,no particles,no glowhalo. Keep ALL limbs,hair,blade inside each own cell withpadding. The input grid/head/hip/ground lines/colored ellipses are invisible construction guides: follow their placement,then ERASE ALL visible guides/triangles/lines in output,leaving only character onmagenta,no text,numbers,labels,borders. Use small incremental poses and smootharcs,not16unrelatedposes or duplicatefrozenframes. Head/face stay consistent,secondaryhair/ribbon/sleeves lag1-3frames then settle. Preserve cellcanvasbaseline/scale; never rescale individual poses to fillcell.\nRUN16: smooth sprint in-place RIGHT-facing,two alternating steps at24fps. Followexactcyan near-R/amberfar-LSOLE CENTER ghosts in everytemplatecell;plantedflagsRframes1-6 andLframes9-14;flightframes7-8 and15-16 haveBOTH feetairborne asghostsindicate. No plantedfootteleport,no duplicatedlegs. Onecontinuousgait: firsthalfRcontact/absorb/passing/push/flight,secondhalfL equivalents. Modest forwardbody lean~8degrees,headfacialidentityheld,no anatomysquash,bodybob\u00e2\u2030\u00a44logicalpixels (airborne soles fromghosts muststayraised). Right handholdsswordsteadyforwardlowwithsmallcounterarc,leftarmcounter-swings,bladealwayssamegeometry. Ponytail+cyanribbonsstreambehind towardleft with3framesecondarylag; sleeves/robehemtrail2framesandsettleatthecycle seam. Widerstride thanwalk,swingkneesbend visibly,sameleglength,sameboots. Keepwhole silhouetteinsidecell. Frame16oneincrementbefore1 forcleanloop.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:43:20.432Z",
+  "inputs": ["templates/run.template.png", "../reference/E.master.raw.png", "../reference/S.master.raw.png"],
+  "stance": 0.33,
+  "status": "Full-pose source generated; pending actualcontact/flight/foot-slide/loop/face/scale QA and D45 layers",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-9e224f99-7700-4dbb-b632-74ded5916e2b.png",
+  "utcCompletedRecorded": "2026-11-07T20:44:10.292Z",
+  "rawSha256": "3d171e01c2df065a714aa0f619aef6ccb3bcd056d5447260c8f9d2a46ad2040e",
+  "actualRawDimensions": [1254, 1254],
+  "utcOutputFileModified": "2026-11-07T20:44:05.204013+00:00",
+  "diagnosticStatus": "Not accepted: see source-quality.json; intended contacts not actual acceptance"
+}

@@ -1,0 +1,269 @@
+{
+  "utc": "2026-11-08T03:49:01.775461+00:00",
+  "policy": "MergedD55 on136002f; Lab head<=15/torso<=23 hard; L1diagnostic; temporal<0.45 reviewbyeye.",
+  "status": "FinalD55Labclear;all15native/Cocoscontactsheetidentityreviewed. Noobviousmirror/class/costumesubstitution. Minorcontourvariation remains;notpixelperfectidentityproof.",
+  "contractSha256": "758e55cbfd74bf0f75e7e10b0cb19402228b3024d3bf5829ec2ef933bb5ec18e",
+  "projectSha256": "bb895aa68b4b84f5eab1bfaf279c89cf873efe94f96a309df12f5bb89142a2e8",
+  "paletteHard": 0,
+  "legacyDiagnosticCells": 126,
+  "d41ExemptCells": 76,
+  "temporalReviewPairs": 20,
+  "remainingHard": 0,
+  "remainingSoft": 0,
+  "limitations": [
+    "Onechecked0.2pxfreecliprecoverybboxwarning remainsbacklogged.",
+    "MinorAIcontourvariation andrunwrapleanasymmetry remainexplicitmanualpolishfindings.",
+    "D55Labpass isnotfacerecognition;actualnativeheadlandmarks andbyeyeidentityreviewarestillrequired."
+  ],
+  "clips": [
+    {
+      "clip": "idle",
+      "contactSheetSha256": "e4e78726f51ae53876e2dafd1948cbca36b20c4aaf1ece5816451abf55398e6f",
+      "review": "Small breathing/blink changes, no face or costume substitution seen."
+    },
+    {
+      "clip": "meditate",
+      "contactSheetSha256": "b2ee983241aee38d2b0170ff07f29400ca76ffb0714d6708bc14872de33eba6f",
+      "review": "Seated closed-eye face and folded-leg pose; no class substitution. D41seated exception is not head-size certification."
+    },
+    {
+      "clip": "walk",
+      "contactSheetSha256": "8f3e5e19601595a80a7b1fb1a6aabfd1e73e80d27ab38daad4231a0698cebe23",
+      "review": "Identity stable; planted-foot findings remain genuine and open."
+    },
+    {
+      "clip": "run",
+      "contactSheetSha256": "37d0f38a634ac36d6034ff7ddd0d2e60d9a5222cb19f3851c5c21b61a6008bc9",
+      "review": "Flagged7->8 switches gait side/landing;13->14 enters flight. Same E face, ivory/navy layers and cyan ribbon; run14 repaired head independently measured."
+    },
+    {
+      "clip": "dash",
+      "contactSheetSha256": "f278aa1844cbe24e655b7c62afcc8eb881d837ad836e7fdf489b08bf9714be8f",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "sword_fly",
+      "contactSheetSha256": "91d25538b5cfceb23f007ed83111e398f59927cd0f7e6ff89b8668e051cc6d21",
+      "review": "Standing on horizontal sword, sleeves/hair follow lift; face/costume retained. No runtime capture/smoothness acceptance inferred."
+    },
+    {
+      "clip": "attack",
+      "contactSheetSha256": "9e7cf1170c123cef14cf2db49b429523dd0fb5ad101251cd3af2abff213bc50a",
+      "review": "4->5 thrust and8->9 recovery; face/costume consistent, no head mirror."
+    },
+    {
+      "clip": "attack_2",
+      "contactSheetSha256": "bf3521640a652129222c91a3ad04a7acc2af2f0097f9ab4239a9372bb5379fa3",
+      "review": "2->3 readiness and5->6 raised-sword transition; same right-hand weapon and face."
+    },
+    {
+      "clip": "attack_3",
+      "contactSheetSha256": "79a0475a29999ee5dcca8ebc4b380fe5470ab4d519db931d2df4a08b67f31f5c",
+      "review": "2->3 lunge,6->7 extension and8->9 recovery; costume and facing retained."
+    },
+    {
+      "clip": "cast",
+      "contactSheetSha256": "93dfbf91fc2021a2e4a863f40ccd3a3b54e55cb852eaad46153766fcca5d0dc6",
+      "review": "Left-hand gesture progression; right-hand sword, same face/costume."
+    },
+    {
+      "clip": "channel",
+      "contactSheetSha256": "7c5f35ca99a01253e8080a3da1d708576f5264c1417609ff6ca88d30c5d4be14",
+      "review": "Held left-hand casting pose with hair/sleeve motion; identity retained."
+    },
+    {
+      "clip": "hit",
+      "contactSheetSha256": "75101b958b67fbed2badec74cb14e33c81ac0424dc6920cde26a64387b0aa9cc",
+      "review": "0->1 recoil and2->3 return; face direction and costume retained."
+    },
+    {
+      "clip": "die",
+      "contactSheetSha256": "e1daca6829f9194a7095c414acafb00d8e6bbc3034234cbe79954961d5f21e1e",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "tribulation",
+      "contactSheetSha256": "f17cc43e6d976fd78dba14ac655143d9721afe56a28a2c048de7ed62723b2aee",
+      "review": "0->1 defensive stance,1->2 lunge,8->9 kneel/hair motion; ivory/navy/cyan identity retained."
+    },
+    {
+      "clip": "emote",
+      "contactSheetSha256": "d5e4f58287adfaa49872cafcc75e2a5f33077eb77d2e8f60197b89c2ae16f203",
+      "review": "Same face and left-hand gesture, right-hand sword retained."
+    }
+  ],
+  "temporalPairs": [
+    {
+      "clip": "run",
+      "frame": 8,
+      "message": "review-by-eye: temporal 7->8; head 0.5751, torso 0.3204; centroid-fallback",
+      "review": "Flagged7->8 switches gait side/landing;13->14 enters flight. Same E face, ivory/navy layers and cyan ribbon; run14 repaired head independently measured."
+    },
+    {
+      "clip": "run",
+      "frame": 14,
+      "message": "review-by-eye: temporal 13->14; head 0.4251, torso 0.4647; centroid-fallback",
+      "review": "Flagged7->8 switches gait side/landing;13->14 enters flight. Same E face, ivory/navy layers and cyan ribbon; run14 repaired head independently measured."
+    },
+    {
+      "clip": "dash",
+      "frame": 1,
+      "message": "review-by-eye: temporal 0->1; head 0.3735, torso 0.3079; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 3,
+      "message": "review-by-eye: temporal 2->3; head 0.3408, torso 0.5706; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 4,
+      "message": "review-by-eye: temporal 3->4; head 0.1531, torso 0.0804; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 5,
+      "message": "review-by-eye: temporal 4->5; head 0.2736, torso 0.2339; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 6,
+      "message": "review-by-eye: temporal 5->6; head 0.3235, torso 0.4157; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 7,
+      "message": "review-by-eye: temporal 6->7; head 0.2599, torso 0.5147; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "dash",
+      "frame": 8,
+      "message": "review-by-eye: temporal 7->8; head 0.3428, torso 0.5565; centroid-fallback",
+      "review": "Flags0->1,2->3,3->4,4->5,5->6,6->7,7->8 follow deep forward lean, flight and return. No mirrored head seen. Nine native head annotations remain missing; this review does not certify scale."
+    },
+    {
+      "clip": "attack",
+      "frame": 5,
+      "message": "review-by-eye: temporal 4->5; head 0.3055, torso 0.4693; centroid-fallback; D41 pose pair",
+      "review": "4->5 thrust and8->9 recovery; face/costume consistent, no head mirror."
+    },
+    {
+      "clip": "attack",
+      "frame": 9,
+      "message": "review-by-eye: temporal 8->9; head 0.5977, torso 0.4362; centroid-fallback; D41 pose pair",
+      "review": "4->5 thrust and8->9 recovery; face/costume consistent, no head mirror."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 3,
+      "message": "review-by-eye: temporal 2->3; head 0.2447, torso 0.5279; centroid-fallback",
+      "review": "2->3 readiness and5->6 raised-sword transition; same right-hand weapon and face."
+    },
+    {
+      "clip": "attack_2",
+      "frame": 6,
+      "message": "review-by-eye: temporal 5->6; head 0.3990, torso 0.4022; centroid-fallback",
+      "review": "2->3 readiness and5->6 raised-sword transition; same right-hand weapon and face."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 3,
+      "message": "review-by-eye: temporal 2->3; head 0.4296, torso 0.4585; centroid-fallback; D41 pose pair",
+      "review": "2->3 lunge,6->7 extension and8->9 recovery; costume and facing retained."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 7,
+      "message": "review-by-eye: temporal 6->7; head 0.4193, torso 0.6353; centroid-fallback; D41 pose pair",
+      "review": "2->3 lunge,6->7 extension and8->9 recovery; costume and facing retained."
+    },
+    {
+      "clip": "attack_3",
+      "frame": 9,
+      "message": "review-by-eye: temporal 8->9; head 0.3174, torso 0.4810; centroid-fallback; D41 pose pair",
+      "review": "2->3 lunge,6->7 extension and8->9 recovery; costume and facing retained."
+    },
+    {
+      "clip": "hit",
+      "frame": 1,
+      "message": "review-by-eye: temporal 0->1; head 0.3550, torso 0.5696; centroid-fallback",
+      "review": "0->1 recoil and2->3 return; face direction and costume retained."
+    },
+    {
+      "clip": "hit",
+      "frame": 3,
+      "message": "review-by-eye: temporal 2->3; head 0.4428, torso 0.6716; centroid-fallback",
+      "review": "0->1 recoil and2->3 return; face direction and costume retained."
+    },
+    {
+      "clip": "die",
+      "frame": 1,
+      "message": "review-by-eye: temporal 0->1; head 0.2975, torso 0.7921; centroid-fallback",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "die",
+      "frame": 2,
+      "message": "review-by-eye: temporal 1->2; head 0.3500, torso 0.6257; centroid-fallback; D41 pose pair",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "die",
+      "frame": 7,
+      "message": "review-by-eye: temporal 6->7; head 0.3631, torso 0.5064; centroid-fallback; D41 pose pair",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "die",
+      "frame": 8,
+      "message": "review-by-eye: temporal 7->8; head 0.4374, torso 0.5625; centroid-fallback; D41 pose pair",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "die",
+      "frame": 9,
+      "message": "review-by-eye: temporal 8->9; head 0.4087, torso 0.6612; centroid-fallback; D41 pose pair",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "die",
+      "frame": 11,
+      "message": "review-by-eye: temporal 10->11; head 0.3483, torso 0.7645; centroid-fallback; D41 pose pair",
+      "review": "0->1,1->2 descent;6->7,7->8,8->9 and10->11 collapse/settle. Final closed eyes and downward cheek turn consistent with collapse; no class substitution."
+    },
+    {
+      "clip": "tribulation",
+      "frame": 1,
+      "message": "review-by-eye: temporal 0->1; head 0.7356, torso 0.2793; centroid-fallback",
+      "review": "0->1 defensive stance,1->2 lunge,8->9 kneel/hair motion; ivory/navy/cyan identity retained."
+    },
+    {
+      "clip": "tribulation",
+      "frame": 2,
+      "message": "review-by-eye: temporal 1->2; head 0.7365, torso 0.4478; centroid-fallback; D41 pose pair",
+      "review": "0->1 defensive stance,1->2 lunge,8->9 kneel/hair motion; ivory/navy/cyan identity retained."
+    },
+    {
+      "clip": "tribulation",
+      "frame": 9,
+      "message": "review-by-eye: temporal 8->9; head 0.4394, torso 0.8377; centroid-fallback; D41 pose pair",
+      "review": "0->1 defensive stance,1->2 lunge,8->9 kneel/hair motion; ivory/navy/cyan identity retained."
+    }
+  ],
+  "previousQAState": {
+    "projectSha256": "dbc2c1dd7eb75a6b4da9f1830709dc9bdaeb95cb3ea4f8bc748aa21588f3a463",
+    "contractSha256": "e8cfa0de707af3c443e4039473b07c9f31f65a651b8c51d4e370a90f0bab2b18",
+    "legacyDiagnosticCells": 148,
+    "d41ExemptCells": 54,
+    "temporalReviewPairs": 27,
+    "remainingHard": 9,
+    "remainingSoft": 31
+  },
+  "acceptedSoft": 1
+}

@@ -1,0 +1,97 @@
+{
+  "status": "MechanicalrebuildofselectedROI/maskderivativesusingcommittedcanonicalpreimages. Rawandguide stencilsarenotpassingoutputevidence. RuntimebuildstartsfromE/project.json, nottheserejectedintermediatestages.",
+  "recipes": [
+    {
+      "name": "run-head45",
+      "mode": "native",
+      "source": "sheets/run.attempt-04.raw.png",
+      "sourceSha256": "22faf3e7009921400abb6eec8ddd2d686b08d55e58b6ccfce0616b62d382950d",
+      "edit": "sheets/run.attempt-05.raw.png",
+      "editSha256": "dc400130301369323741119f69bfee0147f4bd3c9b2683895303df7274755aa4",
+      "proof": "run.head-repair-45.proof.json",
+      "output": "sheets/run.head-repaired-45.png",
+      "expectedSha256": "d2bf3293239ef9ab35250087be8a61c64bab6908211251605e7b68bee3b2b8bb"
+    },
+    {
+      "name": "run-leg456",
+      "mode": "cell",
+      "source": "sheets/run.canonical-before-leg-edit06.png",
+      "sourceSha256": "e7a7a6c10784b65d46f7e804e13f3ec8422f71037d3e5132e98ef1adc387e7a9",
+      "edit": "sheets/run.attempt-06.raw.png",
+      "editSha256": "52222571d9981e0832b2d39ece5c6d9d017a74dec37f4c5f1f243ccd3d0167c2",
+      "proof": "run.leg-repair-456.proof.json",
+      "output": "sheets/run.repaired-456.png",
+      "expectedSha256": "7e2615e428eaeeb654cf46c7a158af5b5f2928e27171f0776d79eed373beb434"
+    },
+    {
+      "name": "run-leg4567",
+      "mode": "cell",
+      "source": "sheets/run.canonical-before-leg-edit07.png",
+      "sourceSha256": "187552997f54590b5225059658b41e4ce88d2b4507bf8f1f325450361f1d10ea",
+      "edit": "sheets/run.attempt-07.raw.png",
+      "editSha256": "46d3c93faf1a5daef222e9d97d2b7d566ae38d9785cc86fad6e84ff6c8606e77",
+      "proof": "run.leg-repair-4567.proof.json",
+      "output": "sheets/run.repaired-4567.png",
+      "expectedSha256": "4059a39b20203060f88e9264d861ffe900faec1189ecd398b61dd85925226931"
+    },
+    {
+      "name": "run-head45679",
+      "mode": "cell",
+      "source": "sheets/run.canonical-before-head-edit09.png",
+      "sourceSha256": "280e266fccbcb73fa621d8243f6a183f7bcc290ac9e00f0584793821c14166ca",
+      "edit": "sheets/run.attempt-09.raw.png",
+      "editSha256": "1b34766e8d8596bd92119d93b760d4255b22d3cb1a73baaab826e0ad813f4436",
+      "proof": "run.head-repair-45679.proof.json",
+      "output": "sheets/run.repaired-45679.png",
+      "expectedSha256": "77019ce787dd8b47f5af571518f697001c52871ef4d222709dc448b747d84ccf"
+    },
+    {
+      "name": "dash-head02",
+      "mode": "cell",
+      "source": "sheets/hit-dash.canonical-before-head-edit02.png",
+      "sourceSha256": "71f37c9394b343735a92dac24c8200c946a755f3803b0c7c4c9a672b906d1d92",
+      "edit": "sheets/hit-dash.attempt-02.raw.png",
+      "editSha256": "ebe01ed3a0c5bc0ace098fa582b13bee2b0c97b236c99438e2ab507a3f1d0a17",
+      "proof": "hit-dash.head-repair-02.proof.json",
+      "output": "sheets/hit-dash.repaired-02.png",
+      "expectedSha256": "64d56dbf3cf613f86ed18fabc7bab331187660678fd9855a1c7384ba585b387d"
+    },
+    {
+      "name": "dash-head023",
+      "mode": "cell",
+      "source": "sheets/hit-dash.canonical-before-head-edit03.png",
+      "sourceSha256": "81c77662e56824992d67e9858afc91b78ace1b9ce24ed8c5533ad3ca50894197",
+      "edit": "sheets/hit-dash.attempt-03.raw.png",
+      "editSha256": "97ba33fd17a0f5279e6e286bfb5175808834b67078f610ace8fe2eb03569ed15",
+      "proof": "hit-dash.head-repair-023.proof.json",
+      "output": "sheets/hit-dash.repaired-023.png",
+      "expectedSha256": "a9fd1e0466216fa95656c2f751c8c65d498d708d9ab4a91e5feafa7f2c7435ea"
+    },
+    {
+      "name": "walk-leg03",
+      "mode": "mask",
+      "source": "sheets/walk.canonical-before-leg-edit.png",
+      "sourceSha256": "8f3e5e19601595a80a7b1fb1a6aabfd1e73e80d27ab38daad4231a0698cebe23",
+      "edit": "sheets/walk.attempt-03.raw.png",
+      "editSha256": "55f62b4ecb875b5ecd9490eb43cc54a94f8003fc71365c78fbbfea338c42ef80",
+      "proof": "walk.leg-repair-03.proof.json",
+      "output": "sheets/walk.repaired-03.png",
+      "expectedSha256": "133ef41d6f5396873371fd1b747caa6ed9b0543cee696a9fc2749927ba378dd3",
+      "mask": "templates/walk.leg-mask-03.png",
+      "maskSha256": "cef0a4ffc0e27af994e238246a7065e6871614e1f56b7d771ace018ad6546e31"
+    },
+    {
+      "name": "walk-leg034",
+      "mode": "mask",
+      "source": "sheets/walk.canonical-before-leg-edit04.png",
+      "sourceSha256": "a0e3e74a7a6011deda89c460a3cf23e335771f913a7a6081d07f78758a218d3e",
+      "edit": "sheets/walk.attempt-04.raw.png",
+      "editSha256": "e28e57ad9064c53bc434d2dc386b8c10e751e037a03fd4ec688d5b927edb2cf4",
+      "proof": "walk.leg-repair-034.proof.json",
+      "output": "sheets/walk.repaired-034.png",
+      "expectedSha256": "c8fc9927cdda541d4870957f543f9fbce7230d539a4c2572329f7e407bd430a0",
+      "mask": "templates/walk.leg-mask-04.png",
+      "maskSha256": "258e08de139f85c1662c28e840aeba72057b3545fc6a27b2b12cb273f9dfa8e4"
+    }
+  ]
+}

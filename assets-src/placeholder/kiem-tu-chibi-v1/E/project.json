@@ -1,0 +1,1212 @@
+{
+  "character": "kiem-tu-chibi-v1",
+  "direction": "E",
+  "stem": "kiemtuchibi",
+  "master": "../reference/E.master.png",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "calibration.json"
+  },
+  "slice": {
+    "key": [255, 0, 255],
+    "spill": {
+      "asymmetric": {
+        "maxImbalance": 80,
+        "edgeRadius": 2
+      }
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.attempt-02.raw.png",
+      "manifest": "templates/idle.template.json",
+      "vertical": "sole",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.attempt-02.raw.png",
+      "manifest": "templates/meditate.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "0": "seated",
+        "1": "seated",
+        "2": "seated",
+        "3": "seated",
+        "4": "seated",
+        "5": "seated",
+        "6": "seated",
+        "7": "seated",
+        "8": "seated",
+        "9": "seated",
+        "10": "seated",
+        "11": "seated",
+        "12": "seated",
+        "13": "seated",
+        "14": "seated",
+        "15": "seated"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.repaired-034.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.repaired-45679.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+        }
+      },
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "6": "posture",
+        "7": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 146.5,
+            "y": 27.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 78.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "2": {
+          "crown": {
+            "x": 150,
+            "y": 30.5
+          },
+          "chin": {
+            "x": 166.5,
+            "y": 80.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "3": {
+          "crown": {
+            "x": 151,
+            "y": 30.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 81.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "6": {
+          "crown": {
+            "x": 148.5,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 72.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "7": {
+          "crown": {
+            "x": 152.5,
+            "y": 20.5
+          },
+          "chin": {
+            "x": 168.5,
+            "y": 70.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "14": {
+          "crown": {
+            "x": 143.5,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 165.5,
+            "y": 76.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        },
+        "15": {
+          "crown": {
+            "x": 146,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 77.5
+          },
+          "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "sheets/hit-dash.repaired-023.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 158,
+            "y": 49.5
+          },
+          "chin": {
+            "x": 174,
+            "y": 102.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "1": {
+          "crown": {
+            "x": 187,
+            "y": 58.5
+          },
+          "chin": {
+            "x": 201.5,
+            "y": 110.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "2": {
+          "crown": {
+            "x": 191.5,
+            "y": 49.5
+          },
+          "chin": {
+            "x": 207.5,
+            "y": 101.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Gray/cyan-outline junction rows46..48 belongs to ribbon wrap, not attached cap. Distinct neutral main-cap rim row49 x187..196; actual jaw lastsupport101 x207..208."
+        },
+        "3": {
+          "crown": {
+            "x": 198,
+            "y": 49.5
+          },
+          "chin": {
+            "x": 215,
+            "y": 102.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "4": {
+          "crown": {
+            "x": 200,
+            "y": 53.5
+          },
+          "chin": {
+            "x": 213,
+            "y": 105.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "5": {
+          "crown": {
+            "x": 193,
+            "y": 59.5
+          },
+          "chin": {
+            "x": 205,
+            "y": 113.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "6": {
+          "crown": {
+            "x": 181.5,
+            "y": 71.5
+          },
+          "chin": {
+            "x": 198,
+            "y": 124.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "7": {
+          "crown": {
+            "x": 156.5,
+            "y": 48.5
+          },
+          "chin": {
+            "x": 173,
+            "y": 99.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Unedited cap/face contours retained; source2/8only head ROI repair."
+        },
+        "8": {
+          "crown": {
+            "x": 137,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 156.5,
+            "y": 80.5
+          },
+          "note": "Native aligned256 output visually reviewed against unchanged E master. Minimum2 contiguous maincap alpha128 pixels, exclude ribbon/knot/ponytail; flat run midpointX and row+0.5 consistently onmasterandallframes. Central lastjaw edge excludesneck/sideburn. Dynamicdash flight/lean/crouch retained, no body fit. Manual~1px uncertainty. Cyan/ribbon outline ends at135 in row28; neutral main-cap gray run136..138, isolated140highlight excluded. Actual jaw lastsupport80 x155..158; neck149 below isexcluded."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.raw.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "sword-ride",
+        "1": "sword-ride",
+        "2": "sword-ride",
+        "3": "sword-ride",
+        "4": "sword-ride",
+        "5": "sword-ride",
+        "6": "sword-ride",
+        "7": "sword-ride",
+        "8": "sword-ride",
+        "9": "sword-ride",
+        "10": "sword-ride",
+        "11": "sword-ride"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.repaired.png",
+      "manifest": "templates/attack.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "3": "crouch",
+        "4": "crouch",
+        "5": "lunge",
+        "6": "lunge",
+        "7": "lunge",
+        "8": "lunge",
+        "9": "lunge",
+        "10": "lunge"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        }
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.raw.png",
+      "manifest": "templates/attack_2.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "2": "crouch",
+        "3": "raised-sword",
+        "4": "raised-sword",
+        "5": "raised-sword",
+        "9": "raised-sword",
+        "10": "recoil",
+        "11": "recoil"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_2.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        }
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.repaired.png",
+      "manifest": "templates/attack_3.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "3": "lunge",
+        "4": "lunge",
+        "5": "lunge",
+        "6": "lunge",
+        "7": "lunge",
+        "8": "lunge",
+        "9": "lunge",
+        "10": "lunge"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/attack_3.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        }
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.raw.png",
+      "manifest": "templates/cast.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.raw.png",
+      "manifest": "templates/channel.template.json",
+      "vertical": "sole"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "sheets/hit-dash.repaired-023.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Source is canonical aligned256 D55 output, globalgroup6hit+10dash; originalfixedlattice root andground232retained. TwoactualheadROIselections only;outsidebytesunchanged;nogaitfit.",
+          "groundY": 232
+        }
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.raw.png",
+      "manifest": "templates/die.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "1": "die-collapse",
+        "2": "die-collapse",
+        "3": "die-collapse",
+        "4": "die-collapse",
+        "5": "die-collapse",
+        "6": "die-collapse",
+        "7": "die-collapse",
+        "8": "die-collapse",
+        "9": "die-collapse",
+        "10": "die-collapse",
+        "11": "die-collapse"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original templates/die.template.json guides.centerX=115.68584437086092. prepare-edit-guides.ts copies the pinned E master whole-cell without translation over this lattice. This is the authored registration line, distinct from anatomical pelvis X128. Full-pose dynamic source reviewed; per-cell head/foot/pose acceptance remains pending."
+        }
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.raw.png",
+      "manifest": "templates/tribulation.template.json",
+      "vertical": "sole",
+      "exceptions": {
+        "2": "lunge",
+        "3": "lunge",
+        "4": "lunge",
+        "5": "kneel",
+        "6": "kneel",
+        "7": "kneel",
+        "8": "kneel",
+        "9": "kneel",
+        "10": "kneel",
+        "11": "kneel",
+        "12": "kneel",
+        "13": "kneel",
+        "14": "kneel",
+        "15": "kneel"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.raw.png",
+      "manifest": "templates/emote.template.json",
+      "vertical": "sole",
+      "heightPolicy": "head-size-v1"
+    }
+  ],
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "timingProfile": "smooth-v2",
+  "backlog": "../quality-backlog.json",
+  "resample": "lanczos3"
+}

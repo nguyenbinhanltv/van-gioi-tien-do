@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "startedUTC": "2026-11-08 04:39:28 UTC",
+  "prompt": "Precise one-cell walking repair. EDIT TARGET attached4x4 opaque-magenta Ki\u1ebfm tu walking sheet,16frames row-major0..15. ONLY cell5 (secondrow secondcolumn) has missing lowerlegs. Fill its navy trousers, calves and ankles between the preserved ivory robe and the existing two boot stencils. The grounded near/right boot stencil has been placed6pixels farther forward to correct a measured slide; its position, bottomedge and scale are LOCKED. Keep the floating far/left boot and its visible sole in the shown place too; complete its upper shoe/ankle if needed, do not move either sole. Natural passing-step anatomy, no duplicate legs/boots or disconnected seams. All other15cells are locked and must remain unchanged. Entire head/face, torso, hands, hair/cyan ribbon and steel right-hand sword are locked. Preserve original sword pixels and camera, figure scale and registration. Adult male gray-eye fixed face, plain ivory splitrobe/navy trousers/sash, small dark boots; premium semi-chibi clean celshading/material-tinted lines. Opaque puremagenta RGB255,0,255 background, exact4x4 fullframe lattice, no labels or guides. Only finish the missing lowerlegs in cell5 around the existing fixed boot soles; do not redraw any intact part.",
+  "reference": "../templates/walk.leg-guide-04.png",
+  "rawDefaultPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-ef91d4a5-f0b3-41fe-9a07-b668121bb487.png",
+  "status": "Raw retained; actual output contact measurement required.",
+  "rawSha256": "e28e57ad9064c53bc434d2dc386b8c10e751e037a03fd4ec688d5b927edb2cf4",
+  "referenceSha256": "d8457123e1c14c1f8f477a59dfad4f5ba30ea3e546e66e2cc0a7bd3cae51c102"
+}

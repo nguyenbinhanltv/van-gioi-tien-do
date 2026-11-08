@@ -1,0 +1,12 @@
+{
+  "status": "Temporary diagnostic SKE export only, not production acceptance",
+  "timingProfile": "smooth-v2",
+  "frameRate": 24,
+  "animations": [
+    {
+      "name": "run",
+      "ticks": 16
+    }
+  ],
+  "source": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\run.repaired-45679.png"
+}

@@ -1,0 +1,17 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "attempt": 2,
+  "frames": 16,
+  "prompt": "Edit INPUT1 MASTER-POPULATED RUN GUIDE into16NEW progressive,SMOOTH DYNAMIC SPRINT poses. Identicalfiguresininput1areconstructionplaceholders,NOTfinalanimation. Preserve theirEXACTheadsize/facialstructure/grayeye/profilecamera andplainivory/navyT1costume,smallboots,simpledrawnsteelswordrightnearhand+cyanribbons. Repose LEGS/HIPS/ARMS forrun;upperbodylean8-12degreesnatural,HEADmaytiltbutMUSTNOTresize. FollowcyanRnearsole/amberLfarsolemarkers EXACTLY percell,includingheight. PlantedRframes1-6,plantedL9-14;flight7-8and15-16 BOTHsolesAIRBORNEatghostpositions. Keepdynamicflightkneetucks andcontactcompression,donotflattenmotion,butleglengthcorrect andfeetatspecifiedmarkers. Bodybobsnaturally,nearhandholdsswordsteadyforwardlow,leftarmcounter-swings. Hairtails/cyanribbon streambehindleft with3framelag,sleeveslag2,upperponyloopkeeporiginalheadroom. No gianthead,bodygrowth,extrafootcontacts,footteleport,frozenlegsor16unrelatedposes.4columns4rows16chronologicalframes,oneR+Lcycle,frame16oneincrementbefore1loop. Output2048square(oridenticalsquareguidecanvas),samecellratio,alllimbs/bladeinsideeachcell. REMOVE allgridlines/guideellipses/triangles afterpainting. OPAQUEFLATPUREMAGENTA#FF00FFbackground,notransparency,noVFX,noFXglow,noshadow,no text. Sourceanatomy216logicalpx@256cell;alwaysuniformDPI,neverfitposeheight. Input2footlayout,input3highrescanonicalEidentity. Exactlogical256cellsolecenters (multiplyuniformlyforoutputDPI): frame1:R(148.7,232)PLANT,L(99.4,220.6)FLIGHT/SWING; frame2:R(136.2,232)PLANT,L(105.6,217.8)FLIGHT/SWING; frame3:R(123.7,232)PLANT,L(111.7,216.3)FLIGHT/SWING; frame4:R(111.2,232)PLANT,L(117.9,216.1)FLIGHT/SWING; frame5:R(98.7,232)PLANT,L(124.1,217.3)FLIGHT/SWING; frame6:R(86.2,232)PLANT,L(130.2,219.7)FLIGHT/SWING; frame7:R(87.1,228.6)FLIGHT/SWING,L(136.4,223.1)FLIGHT/SWING; frame8:R(93.3,224.3)FLIGHT/SWING,L(142.5,227.4)FLIGHT/SWING; frame9:R(99.4,220.6)FLIGHT/SWING,L(148.7,232)PLANT; frame10:R(105.6,217.8)FLIGHT/SWING,L(136.2,232)PLANT; frame11:R(111.7,216.3)FLIGHT/SWING,L(123.7,232)PLANT; frame12:R(117.9,216.1)FLIGHT/SWING,L(111.2,232)PLANT; frame13:R(124.1,217.3)FLIGHT/SWING,L(98.7,232)PLANT; frame14:R(130.2,219.7)FLIGHT/SWING,L(86.2,232)PLANT; frame15:R(136.4,223.1)FLIGHT/SWING,L(87.1,228.6)FLIGHT/SWING; frame16:R(142.5,227.4)FLIGHT/SWING,L(93.3,224.3)FLIGHT/SWING",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:58:00.142Z",
+  "inputs": ["templates/run.master-edit-guide.png", "templates/run.template.png", "../reference/E.master.raw.png"],
+  "status": "Generated candidate repair; contacts/head/posture/loop QA pending",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-1f4c8750-1cef-492d-b39d-dbc8fad6ac79.png",
+  "utcCompletedRecorded": "2026-11-07T20:59:12.822Z",
+  "rawSha256": "291abf169d20cdb3949f81594d01429ca77fbd3365422780e8872efbb0bdb24e",
+  "utcOutputFileModified": "2026-11-07T20:59:11.510045+00:00"
+}

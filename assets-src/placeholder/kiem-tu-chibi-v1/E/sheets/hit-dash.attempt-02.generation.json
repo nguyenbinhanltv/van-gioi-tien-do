@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "startedUTC": "2026-11-08 04:25:02 UTC",
+  "prompt": "Precise local identity-preserving sprite-sheet edit. EDIT TARGET attached opaque-magenta 4x4 Ki\u1ebfm tu sheet, 16 cells row-major0..15. First6 are hit; last10 are dash. Repair ONLY globalcell8 (row3 col1 = dashlocal2) and globalcell14 (row4 col3 = dashlocal8). These two heads have already been replaced by calibrated UN-SCALED same-character head stencils. Preserve their EXACT face, skull outline, eye, nose, chin, head size and position. Complete ONLY the magenta cutout seams around rear hair root, ponytail attachment and neck/shoulder joins so the existing head connects naturally to the existing pose. Do NOT enlarge or shrink the pasted heads. Do NOT redraw torso, arms, hands, weapon, legs, boots or the dynamic deep-dash/flight poses. Keep all other14cells unchanged. Plain ivory split robe, navy collar/sash/trousers, black ponytail and cyan ribbon, adult male fixed gray-eye face, simple right-hand steel sword; clean material-colored outlines and cel shading. No extra costume, no new face, no head mirror, no guide lines or labels. Keep pure opaque magenta RGB255,0,255 background and same square4x4 lattice, full unclipped separate frames. Only finish two head/neck/hair seams; preserve all existing body travel and camera.",
+  "reference": "../templates/hit-dash.head-guide-02.png",
+  "rawDefaultPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-5bd074f7-ea3a-4fd0-9ec7-16f03cc632b7.png",
+  "status": "Raw retained; output heads require independent native remeasurement.",
+  "rawSha256": "ebe01ed3a0c5bc0ace098fa582b13bee2b0c97b236c99438e2ab507a3f1d0a17",
+  "referenceSha256": "4cca3b4aa84cf1b1cab8265b5c36104dcacc27f7914c6951def70ee87892bf67"
+}

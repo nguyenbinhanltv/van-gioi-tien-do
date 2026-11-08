@@ -1,0 +1,4 @@
+{
+  "scale": 1,
+  "reason": "All motion sources are drawn against already-calibrated canonical masters/templates; normalize whole-sheet DPI only, then one fixed scale for all clips. No independent frame fitting."
+}
