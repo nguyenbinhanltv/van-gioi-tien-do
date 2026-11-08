@@ -216,6 +216,19 @@ Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `
 
 Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
 
+## 16. Công thức lõi P3 (`@vgtd/shared`): mặc định đã chọn khi docs chưa rõ
+
+Các hàm `drops.ts` (docs/07 §6) và `skill_table.ts` (docs/11 §4) dùng mặc định có ghi dưới đây; chưa có giá trị mới nào được bịa, cần game designer xác nhận:
+
+- **Quái thấp hơn 1 cảnh giới**: nhân ×0,2 cho **xác suất** của mọi vật phẩm (không nhân số lượng). Thấp hơn từ 2 cảnh giới: chỉ còn nguyên liệu nghề, giữ nguyên xác suất in trong bảng (docs chỉ nói "chỉ còn nguyên liệu").
+- **Linh khí cạn kiệt (>2 giờ liên tục)** ×0,5 và **tổ đội 1/√n** nhân vào **xác suất**, không phải số lượng; áp cho cả mục 100% (docs chỉ nói "×0,5" / "hệ số 1/√n").
+- **Số lượng Linh thạch ×1,5^(r−1)**: nhân sau khi roll khoảng số lượng, làm tròn half-up, tối thiểu 1 khi đã rơi (docs không nêu làm tròn). Vật phẩm khác không nhân theo cảnh giới.
+- **Boss lặp lại (rương tuần đã nhận)**: chỉ còn Linh thạch, số lượng ×0,3 (làm tròn như trên, tối thiểu 1), không đan, bản vẽ hay nguyên liệu (docs: "chỉ nhận Linh thạch × 0,3, không có bản vẽ").
+- **Pity bản vẽ Vàng–Đỏ**: xác suất lần n thay cho 0,2% in trong bảng khi truyền `goldRedAttempt`; không truyền thì dùng 0,2% (docs không nói pity có cộng dồn với hệ số quái thấp/tổ đội hay không: hiện vẫn nhân các hệ số đó).
+- **Phẩm bản vẽ**: roll trong khoảng phẩm của dòng đã trúng, theo phân bổ của nguồn được chuẩn hóa lại trên khoảng đó (Trắng–Lục, Lam–Tím, Vàng–Đỏ); đan dược dùng toàn bộ phân bổ.
+- **Thứ tự RNG** của `resolveDrops` (một lần rút cho trúng/trượt mỗi vật phẩm theo `DROP_ITEM_ORDER`, rồi số lượng, rồi phẩm) là quy ước kỹ thuật để xác định; server sẽ dùng PRNG có seed như mô phỏng D49.
+- **docs/11 §4.5**: dòng đầu bảng Thương tu (S1) in nhầm một câu mô tả "Chốt D49" thay cho hàng `xuyen_van_thich`; số liệu kỹ năng này lấy từ `skills.json`, test đối chiếu docs/11 bỏ riêng hàng này. Cần sửa lại hàng S1 trong docs/11.
+
 ## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
 
 [Cập nhật D55: mục D54 dưới đây là lịch sử trước D55. Audit pin mới xác nhận cả 33 ô hết lỗi cứng A+C; danh sách đang mở hiện tại là 11 ô Lab trong mục D55 bên dưới. Không cần repaint chỉ vì L1 cũ.]
