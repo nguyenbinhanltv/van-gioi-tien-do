@@ -1,0 +1,19 @@
+{
+  "master": "../reference/SE.master.png",
+  "method": "Manual visible sole centres on normalized locked master; perpendicular stance width derived from public facingGroundVector(SE).",
+  "near": {
+    "x": 104,
+    "y": 232
+  },
+  "far": {
+    "x": 154,
+    "y": 222
+  },
+  "registrationRoot": {
+    "x": 128,
+    "y": 232
+  },
+  "footPlaneY": 227.0,
+  "runStance": 0.33,
+  "note": "Foot plane derived from visible sole midpoint; common lattice root/head/pelvis and scale retained. Run contact fraction0.33 follows documented authoring option, not a gameplay speed change."
+}

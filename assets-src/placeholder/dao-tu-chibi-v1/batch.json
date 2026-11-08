@@ -1,4 +1,4 @@
 {
   "character": "dao-tu-chibi-v1",
-  "projects": ["E/project.json"]
+  "projects": ["E/project.json", "SE/project.json"]
 }
