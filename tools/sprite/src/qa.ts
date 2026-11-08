@@ -16,6 +16,7 @@ import type { AlignedFrame } from './align.js';
 import type { CellSpec, Guides } from './types.js';
 import {
   checkHeadEvidence,
+  isHeadEvidenceReason,
   type HeadEvidence,
   type HeadLandmarks,
   type HeadMeasurement,
@@ -64,7 +65,7 @@ export interface QaClip {
   readonly expectedFrames: number;
   /** Aligned frames in order (null = missing or empty). */
   readonly frames: readonly (AlignedFrame | null)[];
-  /** Per-frame documented pose exceptions (frame index -> reason). */
+  /** Head reasons never exempt similarity; documented D41 pose reasons retain the legacy exemption on any kind. */
   readonly exceptions?: Readonly<Record<number, string>>;
   /** Template cells (leading leg, foot ghosts) of this clip, for the foot-slide gate. */
   readonly cells?: readonly CellSpec[];
@@ -123,7 +124,7 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
     }
     const exception = clip.exceptions?.[i];
     if (inBand) return;
-    if (exception)
+    if (exception && !isHeadEvidenceReason(exception))
       out.push({
         gate: 'height',
         severity: 'info',
@@ -414,13 +415,20 @@ function figureCrops(img: Image): { face: number[]; torso: number[] } | null {
   return { face: crop(0, 0.2), torso: crop(0.3, 0.55) };
 }
 
+/** D54 changes only head reasons; a documented D41 pose may exempt the crop on any clip kind. */
+export function isSimilarityExemptReason(reason: string | undefined): boolean {
+  return reason !== undefined && reason.length > 0 && !isHeadEvidenceReason(reason);
+}
+
 export function checkSimilarity(clip: QaClip, o: QaOptions): Finding[] {
   const ref = figureCrops(o.master);
   if (!ref) return [];
   const min = o.minSimilarity ?? 0.7;
   const out: Finding[] = [];
   clip.frames.forEach((f, i) => {
-    if (!f || clip.exceptions?.[i]) return;
+    if (!f) return;
+    const reason = clip.exceptions?.[i];
+    if (isSimilarityExemptReason(reason)) return;
     const c = figureCrops(f.image);
     if (!c) return;
     const face = blockSimilarity(ref.face, c.face);

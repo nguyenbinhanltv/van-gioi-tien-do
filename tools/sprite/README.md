@@ -233,6 +233,25 @@ Smooth-v2 upright defaults include `heightPolicy: 'head-size-v1'`; smooth dash i
 the flag and upright dash explicitly. Ordinary in-band cells without exceptions retain bbox QA; exception/out-of-band cells
 need `project.masterHead` and clip-local `headEvidence[index]` with skull `crown`, `chin` and a reviewed `note`.
 Use only `posture` or `secondary-overhang` in the matching `exceptions` entry. Generic reasons fail the new upright policy.
+
+D54: head reasons (`posture`, `secondary-overhang`, and reserved `rear-*`) never skip face/torso similarity. Reviewed D41
+pose reasons (bow, seated, collapse, lunge, recoil, raised-sword) keep their existing crop exemption on **any clip kind**,
+including upright emote. Head evidence alone never grants that exemption; a cell that also has a separate D41 pose
+reason is exempt only via that pose reason. Head reasons still affect only their own height/evidence check; foot/canvas
+gates and thresholds are unchanged. D54 changes only head reasons, not legacy non-head exception handling.
+
+Report-only audit of previously skipped merged cells (no source, export or backlog writes):
+
+```bash
+npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder --out /absolute/artifact/path/head-reason-similarity-audit.json
+```
+
+The command compares every old truthy exception against the new exemption predicate and audits every old-skipped/new-checked
+cell, regardless of kind. It removes only those entries in memory, reruns QA and lists fresh similarity results per
+clip-local cell; retained D41 pose exemptions are inventoried separately and are not called passes. JSON pins project/master/calibration/sheet/manifest/backlog hashes and gate source
+hashes; all inputs are rehashed after each run. A companion Markdown report is written beside the JSON. Output must be
+outside the source tree and may replace only an earlier audit report. Similarity failures are reported, never accepted;
+unmeasured cells make the command exit nonzero. Run against the intended merged checkout and retain its commit reference.
 Head crown-to-chin Euclidean size must remain within master±3%; any supplied evidence is validated, even on in-band cells.
 Keep dynamic run flight tucks, deep dash and lunges when the head scale is correct. There is no crouch band or per-frame fit.
 
@@ -441,3 +460,32 @@ on the master and aligned256px in motion cells, using clip-local indices. Never 
 edit the approved master, or substitute a convenience point. If a frame also hides the remaining shoulder, report it
 instead of supplying invented evidence. INFO/review retains the visible point, occluded side/reason, and master values;
 foot/canvas gates and fixed scale remain unchanged.
+
+### D56: hidden shoulder in a dynamic rear lean
+
+Frame-only `rear-breadth-only` is restricted to NE/N `dash`, `run`, `attack`, `attack_2`, or
+`attack_3` cells declared `posture`. Use it only when the shoulder corner is genuinely hidden but the
+frame's own skull-cap crown and both skull-breadth endpoints are visible. Record the concrete shoulder
+`occluder` and a reviewed `note`; exclude hairpins, tassels, earrings and loose strands from all three points.
+The gate samples alpha >=128 at the rounded crown/endpoints and master breadth endpoints. Hair identity,
+true extrema and shoulder occlusion require source review; alpha alone cannot prove anatomical identity.
+
+Keep the same-direction master and its existing full `masterHead` kind unchanged. The frame may use:
+
+```json
+{
+  "kind": "rear-breadth-only",
+  "crown": { "x": 149, "y": 59 },
+  "breadth": { "left": { "x": 135, "y": 76 }, "right": { "x": 188, "y": 76 } },
+  "occluder": "head+earring in deep dash lean",
+  "note": "Reviewed visible skull-cap hair crown and breadth; shoulder corner occluded"
+}
+```
+
+Compare only Euclidean skull breadth with the locked master's breadth, within the unchanged 3% band.
+There is **no vertical span**: omit shoulder/chin/skull-base/ornament anchors, and never project a hidden point.
+INFO and review preserve crown, endpoints, occluder, master breadth and ratio; `sizePx`, `masterSizePx`,
+and the span `ratio` are absent. Idle/walk/emote/cast, missing occluders, invisible points, or non-posture
+reasons fail even when the bbox is in band. D54 similarity still runs; D55 crops apply when merged.
+Do not redraw the dynamic pose or reclassify a similarity failure to bypass QA. Phap tu NE dash4/5/7
+may adopt this only after D56 merges. Other head kinds and foot/canvas/scale gates are unchanged.
