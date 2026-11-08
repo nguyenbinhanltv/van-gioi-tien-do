@@ -1,6 +1,6 @@
 # GDD – MMORPG Tu Tiên "Vạn Giới Tiên Đồ"
 
-> **Nguồn & phạm vi.** Bộ hồ sơ **không có file `.docx` GDD riêng**. GDD gốc (viết khi dự án còn định hướng 3D / UE5) chỉ được **tóm tắt** trong [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) (§1, §2, §5.1) và được lượng hóa trong [07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md). Bản này **dựng lại từ các nguồn đó** rồi **thiết kế bổ sung** những phần còn thiếu theo yêu cầu của chủ dự án.
+> **Nguồn & phạm vi.** Bộ hồ sơ **không có file `.docx` GDD riêng**. GDD gốc (viết khi dự án còn định hướng 3D / UE5) chỉ được **tóm tắt** trong [00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) (§1; các mục tóm tắt §2, §5.1 đã gỡ khỏi 00, xem lịch sử git) và được lượng hóa trong [07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md). Bản này **dựng lại từ các nguồn đó** rồi **thiết kế bổ sung** những phần còn thiếu theo yêu cầu của chủ dự án.
 >
 > **Chú thích đánh dấu (dùng xuyên suốt):**
 >

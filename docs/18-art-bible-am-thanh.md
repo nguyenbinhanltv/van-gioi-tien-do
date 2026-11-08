@@ -226,7 +226,7 @@ Chỉ được vào build phát hành nếu **thỏa tất cả**:
 2. **Không bắt chước họa sĩ còn sống / tác phẩm cụ thể**: cấm lệnh kiểu "theo phong cách của <họa sĩ>"; cấm đưa ảnh tham chiếu có bản quyền của người khác.
 3. **Không chứa người thật, thương hiệu, logo, chữ Hán tạo sinh có nghĩa sai** (chữ Hán trên phù lục chỉ là họa tiết nhưng phải rà soát để không ra nghĩa xúc phạm).
 4. **Có bước chỉnh tay của họa sĩ** (tối thiểu đồng bộ bảng màu §2, pivot, nguồn sáng NW, thang xám 48 px); asset AI chưa qua bước này là `placeholder`.
-5. **Lưu prompt, seed, mô hình, ngày** trong hồ sơ. Với pipeline có bước AI trong `orchestrator_pipeline.yaml` ([00] §6) áp dụng cùng quy tắc.
+5. **Lưu prompt, seed, mô hình, ngày** trong hồ sơ. Với pipeline có bước AI trong `orchestrator_pipeline.yaml` (bản tóm tắt cũ ở 00 §6 đã gỡ, xem lịch sử git; D29) áp dụng cùng quy tắc.
 6. **Quyền tác giả của sản phẩm AI**: khả năng đăng ký và bảo hộ tại Việt Nam và các thị trường khác **cần kiểm tra** (xem [19](19-ngon-ngu-phap-ly.md) §5); vì vậy asset cốt lõi định danh game (logo, nhân vật chính, biểu tượng tông môn) **không** nên chỉ do AI sinh ra, mà phải do họa sĩ vẽ / tinh chỉnh đáng kể.
 
 Asset sinh bằng mã (`tools/procgen`: tilemap, phi kiếm, icon, shader) không phải AI tạo sinh và không cần hồ sơ prompt; ghi `procgen` + seed (nguyên tắc "commit seeds, not images").
