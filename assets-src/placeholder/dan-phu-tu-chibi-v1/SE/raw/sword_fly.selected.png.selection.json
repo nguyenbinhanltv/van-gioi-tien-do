@@ -1,0 +1,86 @@
+{
+  "method": "Native whole-cell RGBA selection; dimensions must match; no resizing, fitting or repainting.",
+  "basePath": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/sword_fly.attempt1.png",
+  "editPath": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/sword_fly.attempt2.png",
+  "originalSha256": "41d91a452413a176ac2305cf7ad0d93d00af923cd7213a42491d1f6251c1f3d8",
+  "editSha256": "836ed682622d7a6d50e5ae9c438f16771b75f304ae8ca863e1134c7fb629d998",
+  "grid": {
+    "cols": 4,
+    "rows": 3
+  },
+  "selectedCells": [2],
+  "proof": [
+    {
+      "cell": 0,
+      "source": "base",
+      "expected": "8e63c3be5db2eab828d0969c25fb6774abc9bd18",
+      "selected": "8e63c3be5db2eab828d0969c25fb6774abc9bd18"
+    },
+    {
+      "cell": 1,
+      "source": "base",
+      "expected": "c7af224b2296d9b3b0b784bc2b7402aed4c55a5e",
+      "selected": "c7af224b2296d9b3b0b784bc2b7402aed4c55a5e"
+    },
+    {
+      "cell": 2,
+      "source": "edit",
+      "expected": "3aa3bb41455bfb0227b5c3387c0a8a0260158ccb",
+      "selected": "3aa3bb41455bfb0227b5c3387c0a8a0260158ccb"
+    },
+    {
+      "cell": 3,
+      "source": "base",
+      "expected": "36bb2799fd31535d1cb5019e3409fedb93b33c3d",
+      "selected": "36bb2799fd31535d1cb5019e3409fedb93b33c3d"
+    },
+    {
+      "cell": 4,
+      "source": "base",
+      "expected": "dab3b35bb04c894644c6f7da6be4d4e7a2f24cd2",
+      "selected": "dab3b35bb04c894644c6f7da6be4d4e7a2f24cd2"
+    },
+    {
+      "cell": 5,
+      "source": "base",
+      "expected": "8cd0244a9651bbaad04688bc70471c2b81149a45",
+      "selected": "8cd0244a9651bbaad04688bc70471c2b81149a45"
+    },
+    {
+      "cell": 6,
+      "source": "base",
+      "expected": "1e584a9f2c2911c4a2711e47c8b6ee4f3f3604b7",
+      "selected": "1e584a9f2c2911c4a2711e47c8b6ee4f3f3604b7"
+    },
+    {
+      "cell": 7,
+      "source": "base",
+      "expected": "75454a42c233a0cad8b47677a7b8823b5525f997",
+      "selected": "75454a42c233a0cad8b47677a7b8823b5525f997"
+    },
+    {
+      "cell": 8,
+      "source": "base",
+      "expected": "3f495abca988060f8b478739cbdec4967b200997",
+      "selected": "3f495abca988060f8b478739cbdec4967b200997"
+    },
+    {
+      "cell": 9,
+      "source": "base",
+      "expected": "95bc9d284aa157217b4318b787874f573a4408f7",
+      "selected": "95bc9d284aa157217b4318b787874f573a4408f7"
+    },
+    {
+      "cell": 10,
+      "source": "base",
+      "expected": "bfcb98c9c713be04e749702a11e0f2b1c654293e",
+      "selected": "bfcb98c9c713be04e749702a11e0f2b1c654293e"
+    },
+    {
+      "cell": 11,
+      "source": "base",
+      "expected": "e75962fadda0bfd590d7afd80189817baf0bfa4d",
+      "selected": "e75962fadda0bfd590d7afd80189817baf0bfa4d"
+    }
+  ]
+}

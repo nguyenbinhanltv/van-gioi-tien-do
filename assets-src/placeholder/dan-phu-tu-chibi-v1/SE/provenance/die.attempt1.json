@@ -1,0 +1,27 @@
+{
+  "clip": "die",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:09:36 UTC",
+  "utcEnd": "2026-11-08 00:10:04 UTC",
+  "prompt": "EDITTARGET SE die12head-stencils4COLUMNS3ROWS landscape4:3. Complete12FULLBODY deathcollapse inreadingorder, SAMEfixedadultfemalejadehealerreference2. Unscaledheadstencilsize/tilt andsamebodyscale throughout, head/body NEVERshrinktofit. Exactface/features/maincapbunpin/ivoryjadenarrowgoldinkhem/right-handplainbrownwhisk ONEbronze collarwhitehorsehair. Stencilsareplannedheadplacements, drawentirebodyattachednaturally.0standingkneesalreadysoft;1kneesbuckle;2staggerback;3hipsdrop;4..6fallbackwardonto lefthip/side;7groundcontact,8..11lyingstillwithcloth/fibre/hairsettling. Headendsleftandbootsrightwithinowncell; legsrelaxedslightlybent tofit naturally, NOT compressedanatomy. Right handretainsphysicalwhiskthroughfall, restingdiagonallyacrossbody/groundwhileheld, no detachedweapon. Eyesgentlyclose5..11, samefaceidentity. Clearcontinuousgravity/motion arcs24fps12drawings, no blood/gore/FX. Entirebun/whisk/hem/boots insideEACHcell>=6logicalpxmargin, especiallypronebody rearheadleftandbootsright. No arttouchingborders/crossingcells. Finalpose restsnearground232, noresurrectionloop. ConstantSEcamera withnaturalbodyrotation, nofront/backturnaround. Outputexact4cols3rows12figures; removeALLgrid/border/crosshair/ruler/text, flatpuremagenta#ff00ff,no shadow/platform.",
+  "references": ["../templates/die.head-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/die.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "f616e727f329bf58fb9a4158f7e7729f1f5d20ac3d6f3158154fb568e7eceece",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/die.head-guide.png",
+      "sha256": "1499fa6073e6c2ee20a4993f30e1e1c301075bc0cc3c098c6bdf8b388dd6212f"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

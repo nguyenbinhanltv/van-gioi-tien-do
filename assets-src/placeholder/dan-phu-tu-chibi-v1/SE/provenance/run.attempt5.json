@@ -1,0 +1,32 @@
+{
+  "clip": "run",
+  "direction": "SE",
+  "attempt": 5,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "prompt": "Edit image 1, the 1254x1254 SE running sprite sheet, all16 cells in the same4x4 mapping. Restore the EXACT approved female healer identity and upper-body design from image2 (locked SE master). Image3 is an unscaled canonical head-size/identity stencil at the intended neck positions, not a final output. Repaint heads and upper torso only: the same adult face, almond eyes/brows, small nose/lips/jaw, front swept cap with cream rim, elevated coil/bun and single jade pin; same SE three-quarter yaw as the master, gaze held steady rather than drifting into an E profile. Keep the main-cap-to-chin dimension of the master stencil, excluding the elevated bun; never enlarge eyes or skull. Keep the master green collar, crossed ivory/gold chest panels and jade sash design, translated naturally into each existing forward lean. Preserve the dynamic body construction and neck attachments. All16 running poses, timing, forward lean, root positions, anticipation/contact/down/flight/recovery cycle, knees/legs/boots, arm/hand positions, trailing sleeves/ribbons and right-hand-held jade whisk remain as image1. Do not turn running into upright walking, remove flight tucks, resize bodies or move the boots. Whisk has plain brown shaft, one bronze collar and ivory horsehair; left palm open. Preserve the exact lattice canvas and margin. Same original premium semi-chibi style, ivory/jade/antique gold, tinted outlines and two-tone cel shading. Clean any magenta contamination from hair/skin/whisk edges without deleting true costume accents. Pure flat #ff00ff background, no grid, labels, shadows or FX. Final output is the complete sixteen full-body running drawings, not isolated heads.",
+  "references": [
+    "../raw/run.selected.png",
+    "../../reference/SE.corrected-master4x.png",
+    "../templates/run.canonical-head-guide.raw-dpi.png"
+  ],
+  "raw": "../raw/run.attempt5.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "f90e05e9ecdc419a66d299e621fc8ca72c5d0a679de9b9b909866f85777014e0",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../raw/run.selected.png",
+      "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master4x.png",
+      "sha256": "f658ecdfc8a38ae860a806ff4e1ad399b2241eecd60fab4a21ac371048b6afff"
+    },
+    {
+      "reference": "../templates/run.canonical-head-guide.raw-dpi.png",
+      "sha256": "1fcd1e253032cf97d9fd0549a7ff8252209371390a8ce439defd4df424d2baf2"
+    }
+  ],
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}
