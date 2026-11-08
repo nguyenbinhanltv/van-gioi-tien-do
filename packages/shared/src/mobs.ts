@@ -274,16 +274,6 @@ export interface ZoneSpawnTable {
   groups: readonly SpawnGroup[];
 }
 
-/**
- * Where a tier lives, as a fraction of the half-size `R` of the mob area (the distance from the area's centre, the
- * player spawn square, measured as Chebyshev tiles): safe zone around the centre where nothing spawns, then normal
- * mobs near, elites farther, bosses farthest. Fractions, so any map size works. PLACEHOLDERS (D83, cần game designer duyệt).
- */
-export const MOB_BANDS: Readonly<Record<MobTier, { minFrac: number; maxFrac: number }>> = {
-  normal: { minFrac: 0.12, maxFrac: 0.55 },
-  elite: { minFrac: 0.4, maxFrac: 0.85 },
-  boss: { minFrac: 0.7, maxFrac: 1.0 },
-};
 /** Pack members spawn within this many tiles of the pack anchor (D83, PLACEHOLDER). */
 export const MOB_PACK_RADIUS = 3;
 /** Pack size of normal mobs (elites and bosses spawn alone; D83, PLACEHOLDER). */
