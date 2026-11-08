@@ -3,9 +3,10 @@
  *
  *  POST /auth/register  {username,password}  -> 201 {accountId}
  *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
+ *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
  *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"..."}
- *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
+ *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol","mapTiles"}
  *                       afterwards: binary @vgtd/protocol frames only.
  *
  * `hello` is JSON here because docs/24 only proposes its Protobuf layout; D70 records this skeleton choice.
@@ -54,14 +55,30 @@ function remoteIp(req: IncomingMessage): string {
 
 export interface GatewayOptions {
   helloTimeoutMs?: number;
+  /** browser origins allowed to call the HTTP endpoints (the web client is served from another port); default none */
+  corsOrigins?: readonly string[];
 }
 
 export function createGateway(auth: AuthService, world: WorldNode, opts: GatewayOptions = {}): GatewayHandle {
   const online = new Map<string, { ws: WebSocket; entityId: number }>();
 
+  const cors = new Set(opts.corsOrigins ?? []);
   const http = createServer((req, res) => {
     void (async () => {
       try {
+        const origin = req.headers.origin;
+        if (origin && cors.has(origin)) {
+          res.setHeader('access-control-allow-origin', origin);
+          res.setHeader('vary', 'origin');
+          res.setHeader('access-control-expose-headers', 'retry-after');
+          if (req.method === 'OPTIONS') {
+            res.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
+            res.setHeader('access-control-allow-headers', 'content-type');
+            res.setHeader('access-control-max-age', '600');
+            res.writeHead(204).end();
+            return;
+          }
+        }
         if (req.method === 'GET' && req.url === '/health') {
           return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
         }
@@ -163,6 +180,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
             serverTimeMs: world.world.timeMs,
             tickHz: NETWORK.TICK_HZ,
             protocol: PROTOCOL_VERSION,
+            mapTiles: world.ctx.grid.width,
           }),
         );
         return;

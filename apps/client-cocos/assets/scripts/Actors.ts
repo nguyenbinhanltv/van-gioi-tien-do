@@ -3,7 +3,7 @@ import { character, shared } from './vendor/vgtd.mjs';
 import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
-import type { ChibiBody } from './ChibiBody';
+import { ChibiBody } from './ChibiBody';
 
 let nextId = 1; // id 0 = player
 
@@ -108,6 +108,77 @@ export class PlayerActor {
       );
     }
     this.place();
+  }
+
+  /**
+   * Online mode: the position comes from client-side prediction (client-core NetClient), not from local integration.
+   * Facing and idle/walk/run are derived from how far the drawn position actually moved this frame.
+   */
+  followNet(p: TilePos, dt: number): void {
+    const di = p.i - this.pos.i;
+    const dj = p.j - this.pos.j;
+    const speed = dt > 0 ? Math.hypot(di, dj) / dt : 0;
+    this.pos = { i: p.i, j: p.j };
+    if (this.chibi) {
+      if (speed >= PlayerActor.WALK_SPEED) this.facing = character.directionFromTileVector(di, dj, this.facing);
+      this.chibi.face(this.facing);
+      this.chibi.state(
+        speed < PlayerActor.WALK_SPEED ? 'idle' : this.walkMode || speed < PlayerActor.RUN_SPEED ? 'walk' : 'run',
+      );
+    } else if (Math.abs(di - dj) > 1e-4) {
+      this.body.setScale(di - dj > 0 ? 1 : -1, 1, 1);
+    }
+    this.place();
+  }
+
+  private place(): void {
+    const p = tileToWorld(this.pos.i, this.pos.j);
+    this.body.setPosition(p);
+    this.shadow.setPosition(p);
+  }
+}
+
+/**
+ * Another player, driven by interpolated snapshots (client-core RemoteWorld). The wire carries no class yet, so the
+ * body class is derived from the entity id (docs/OPEN-ITEMS.md); the model is the same ChibiBody the local player uses.
+ */
+export class RemotePlayer {
+  pos: TilePos;
+  readonly body: Node;
+  private readonly shadow: Node;
+  private readonly chibi: ChibiBody;
+  private facing: shared.Direction = 'S';
+
+  constructor(
+    private readonly ysort: YSortLayer,
+    shadowLayer: Node,
+    art: ArtFrames,
+    readonly entityId: number,
+    classId: string,
+    start: TilePos,
+  ) {
+    this.pos = { ...start };
+    this.chibi = new ChibiBody(newNode('ChibiHolder'));
+    this.chibi.setClass(classId);
+    this.body = this.chibi.root;
+    this.shadow = spriteNode(`RemoteShadow${entityId}`, art.shadow, 48, 24, 0.5, 0.5);
+    shadowLayer.addChild(this.shadow);
+    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j));
+    this.place();
+  }
+
+  update(p: TilePos, dirIndex: number, speed: number): void {
+    this.pos = { i: p.i, j: p.j };
+    this.facing = shared.DIRECTIONS[dirIndex] ?? this.facing;
+    this.chibi.face(this.facing);
+    this.chibi.state(speed < PlayerActor.WALK_SPEED ? 'idle' : speed < PlayerActor.RUN_SPEED ? 'walk' : 'run');
+    this.place();
+  }
+
+  destroy(): void {
+    this.ysort.remove(this.body);
+    this.shadow.destroy();
+    this.body.destroy();
   }
 
   private place(): void {

@@ -26,6 +26,7 @@ import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
+import { OnlineSession, onlineRequested } from './OnlineSession';
 
 const { ccclass } = _decorator;
 
@@ -70,6 +71,8 @@ export class Bootstrap extends Component {
   private hud!: PerfHud;
   private marker!: Node;
   private chibi!: ChibiBody;
+  /** only with `?online=1`; offline play stays the default */
+  private online: OnlineSession | null = null;
   private keyHandlers: { down: (e: KeyboardEvent) => void; up: (e: KeyboardEvent) => void } | null = null;
   /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
   private scriptedWalk: shared.Direction[] | null = null;
@@ -225,6 +228,10 @@ export class Bootstrap extends Component {
       this.combat ? (tile) => this.combat!.pick(tile) : undefined,
     );
     this.rig.follow(this.playerScreen());
+    if (onlineRequested()) {
+      this.online = new OnlineSession(this.ysort, l2, art);
+      this.online.connect();
+    }
     this.maybeAutotest();
   }
 
@@ -335,7 +342,15 @@ export class Bootstrap extends Component {
       frame = { ...frame, move: { i: di / len, j: dj / len }, magnitude: 1 };
     }
     if (this.route) frame = { ...frame, ...this.route.step(this.player.pos) };
-    this.player.update(dt, frame);
+    if (this.online?.waiting) {
+      // connecting: stand still until the server tells us where we are
+      this.player.update(dt, { move: { i: 0, j: 0 }, magnitude: 0 });
+    } else if (this.online?.active) {
+      const p = this.online.step(dt, frame, this.player.walkMode);
+      if (p) this.player.followNet(p, dt);
+    } else {
+      this.player.update(dt, frame); // offline (default), or the connection failed / dropped
+    }
     this.combat?.update(dt, frame.target);
     this.rig.follow(this.playerScreen());
     this.ysort.sort();
@@ -354,14 +369,17 @@ export class Bootstrap extends Component {
       this.combat?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
-      this.hud.note = this.combatOn
-        ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
-        : `${this.chibi.note} | keys 1-6 class, Shift walk`;
+      this.hud.note = this.online
+        ? `${this.online.note()} | ${this.chibi.note}`
+        : this.combatOn
+          ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
+          : `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.hud.update(dt);
   }
 
   onDestroy(): void {
     this.input?.destroy();
+    this.online?.destroy();
     this.combat?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
