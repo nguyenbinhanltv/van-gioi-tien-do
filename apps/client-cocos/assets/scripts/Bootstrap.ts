@@ -158,7 +158,7 @@ export class Bootstrap extends Component {
     this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, this.chibi);
     this.bindPlayTestKeys();
     this.maybeScriptedWalk();
-    // D79: default zoom 1.5x, wheel / pinch 1.0-2.0x; `?zoom=<n>` overrides the start value (clamped)
+    // D81: default zoom 1.5x, wheel / pinch 1.0-2.0x; `?zoom=<n>` overrides the start value (clamped)
     this.rig = new CameraRig(
       worldRoot,
       this.canvasUi,

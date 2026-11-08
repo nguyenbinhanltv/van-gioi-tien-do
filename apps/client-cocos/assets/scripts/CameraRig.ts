@@ -8,7 +8,7 @@ import { cameraOffset, clientToCocosUi, cocosToScreen, type ScreenPoint } from '
  * The Canvas camera stays fixed; the world root is translated (and scaled by `zoom`) so the target
  * sits at the centre of the screen. Implements client-core's `CameraLike`, i.e. returns
  * shared "logical screen" coordinates (y DOWN) - the y-flip happens in IsoAdapter only.
- * Zoom (D79) belongs to a client-core `ZoomController` (wheel / pinch / `?zoom=`) that smooths it; the HUD canvas is
+ * Zoom (D81) belongs to a client-core `ZoomController` (wheel / pinch / `?zoom=`) that smooths it; the HUD canvas is
  * never scaled, only `worldRoot`.
  *
  * SEAM: client-world will own streaming windows; it only needs `follow()` each frame.
