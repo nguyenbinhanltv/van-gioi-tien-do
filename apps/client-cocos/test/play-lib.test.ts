@@ -33,6 +33,7 @@ type Opts = {
   help: boolean;
   clientPort: number;
   serverPort: number;
+  buildTimeoutMin: number;
 };
 const parse = (...argv: string[]) => parseArgs(argv as never) as unknown as { opts: Opts; errors: string[] };
 
@@ -50,6 +51,7 @@ describe('play: argument parsing', () => {
       help: false,
       clientPort: DEFAULTS.clientPort,
       serverPort: DEFAULTS.serverPort,
+      buildTimeoutMin: 10,
     });
     expect(DEFAULTS).toMatchObject({ clientPort: 7456, serverPort: 8080 });
   });
@@ -89,6 +91,15 @@ describe('play: argument parsing', () => {
     expect(parse('--server-port=70000').errors[0]).toMatch(/1-65535/);
     expect(parse('--port', '8080').errors).toEqual(['--port and --server-port must differ']);
     expect(parse('--offline', '--port', '8080').errors).toEqual([]); // no game server: no clash
+  });
+
+  it('--build-timeout takes minutes 1-120, default 10', () => {
+    expect(parse().opts.buildTimeoutMin).toBe(10);
+    expect(parse('--build-timeout', '3').opts.buildTimeoutMin).toBe(3);
+    expect(parse('--build-timeout=45').opts.buildTimeoutMin).toBe(45);
+    for (const bad of ['0', '121', 'x', '-5'])
+      expect(parse('--build-timeout', bad).errors[0], bad).toMatch(/minutes 1-120/);
+    expect(parse('--build-timeout').errors[0]).toMatch(/got nothing/);
   });
 
   it('the build variant is release unless --dev', () => {
@@ -281,7 +292,8 @@ describe('play: URLs and addresses', () => {
     expect(lines.length).toBeGreaterThanOrEqual(5);
     expect(lines.every((l) => l.enabled && l.vi.length > 0 && l.en.length > 0)).toBe(true);
     expect(lines.some((l) => /Tab/.test(l.en))).toBe(true);
-    expect(lines.some((l) => /bag|meditate/i.test(l.en))).toBe(false); // B / M are not in the client yet
+    expect(lines.some((l) => /bag/i.test(l.en))).toBe(true); // B toggles the bag panel (online)
+    expect(lines.some((l) => /meditate/i.test(l.en))).toBe(false); // the meditation key is not in the client yet
   });
 });
 

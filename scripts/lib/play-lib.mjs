@@ -4,7 +4,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { networkInterfaces } from 'node:os';
 import { join, relative, sep } from 'node:path';
 
-export const DEFAULTS = Object.freeze({ clientPort: 7456, serverPort: 8080, minNodeMajor: 18 });
+export const DEFAULTS = Object.freeze({ clientPort: 7456, serverPort: 8080, minNodeMajor: 18, buildTimeoutMin: 10 });
 
 export const USAGE = `npm run play -- [options]
 
@@ -16,6 +16,7 @@ export const USAGE = `npm run play -- [options]
   --no-lan             game server on 127.0.0.1 only (default: all interfaces, so phones on the same Wi-Fi can connect)
   --port <n>           client (static) port, default ${DEFAULTS.clientPort}
   --server-port <n>    game server port, default ${DEFAULTS.serverPort}
+  --build-timeout <m>  give up on a web client build after <m> minutes (default ${DEFAULTS.buildTimeoutMin}); a normal build takes 1-2 minutes
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
   --help               this text
 `;
@@ -43,6 +44,7 @@ export function parseArgs(argv) {
     help: false,
     clientPort: DEFAULTS.clientPort,
     serverPort: DEFAULTS.serverPort,
+    buildTimeoutMin: DEFAULTS.buildTimeoutMin,
   };
   /** @type {string[]} */
   const errors = [];
@@ -75,6 +77,14 @@ export function parseArgs(argv) {
       case '-h':
         opts.help = true;
         break;
+      case '--build-timeout': {
+        const raw = value();
+        const m = raw !== undefined && /^\d+$/.test(raw) ? Number(raw) : 0;
+        if (m < 1 || m > 120)
+          errors.push(`--build-timeout needs minutes 1-120 (got ${raw === undefined ? 'nothing' : `"${raw}"`})`);
+        else opts.buildTimeoutMin = m;
+        break;
+      }
       case '--port':
       case '--server-port': {
         const raw = value();
@@ -308,8 +318,8 @@ export const CONTROLS = Object.freeze([
     en: 'Phone: add ?input=touch for the joystick; tap a skill slot to cast',
     enabled: true,
   },
-  // enable when the client has them (inventory view, meditation key):
-  { vi: 'B: mở túi đồ', en: 'B: bag', enabled: false },
+  // enable when the client has it (the meditation key):
+  { vi: 'B: mở / đóng túi đồ (khi chơi online)', en: 'B: open / close the bag (online)', enabled: true },
   { vi: 'M: đả tọa (tu luyện)', en: 'M: meditate', enabled: false },
 ]);
 

@@ -305,12 +305,28 @@ if (decision.rebuild) {
     {},
     { keep: quietCocos, tee },
   );
-  const beat = setInterval(() => say('… đang build / still building …'), 15_000);
+  const startedAt = Date.now();
+  const beat = setInterval(() => {
+    const s = Math.round((Date.now() - startedAt) / 1000);
+    say(`… đang build (${s} s) / still building (${s} s) …`);
+  }, 15_000);
+  // a build that never ends (for example a second Cocos Creator instance holding the editor's data) must not hang this command forever
+  let timedOut = false;
+  const killer = setTimeout(() => {
+    timedOut = true;
+    killTree(build.child);
+  }, opts.buildTimeoutMin * 60_000);
   const code = await build.exited;
   clearInterval(beat);
+  clearTimeout(killer);
   tee.end();
   if (shuttingDown) await new Promise(() => {}); // a signal arrived: shutdown() exits
   children.splice(children.indexOf(build), 1);
+  if (timedOut)
+    fail(
+      `Build client quá ${opts.buildTimeoutMin} phút nên đã bị dừng. Hãy đóng các cửa sổ Cocos Creator khác (kể cả của dự án khác) rồi thử lại. Log đầy đủ: ${logFile}`,
+      `The web client build took longer than ${opts.buildTimeoutMin} minutes and was stopped. Close other Cocos Creator instances (any project) and try again. Full log: ${logFile}`,
+    );
   if (code !== 0 || !existsSync(join(buildDir, 'index.html')))
     fail(`Build client thất bại. Log đầy đủ: ${logFile}`, `The web client build failed. Full log: ${logFile}`);
   mkdirSync(buildDir, { recursive: true });
