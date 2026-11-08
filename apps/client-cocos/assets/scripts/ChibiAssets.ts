@@ -1,3 +1,4 @@
+import { JobQueue } from './ChibiQueue';
 import { AssetManager, JsonAsset, assetManager, dragonBones, resources, sys } from 'cc';
 
 /**
@@ -49,68 +50,8 @@ export function chibiTierFor(local: boolean): ChibiTier {
   return local && !sys.isMobile ? 'full' : '1x';
 }
 
-// ---- download queue --------------------------------------------------------------------------------------------
-interface Job {
-  readonly priority: number;
-  readonly seq: number;
-  readonly run: () => Promise<unknown>;
-  readonly done: (v: unknown) => void;
-  readonly fail: (e: unknown) => void;
-}
-class Streamer {
-  /** Number of bundle/asset jobs in flight at once. */
-  maxActive = 2;
-  private active = 0;
-  private seq = 0;
-  private background = false;
-  private readonly queue: Job[] = [];
-  readonly log: Array<{ at: number; what: string }> = [];
-
-  /** Priority 0 starts immediately (subject to `maxActive`); priority >= 1 waits for `openBackground()`. */
-  enqueue<T>(priority: number, what: string, run: () => Promise<T>): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-      this.queue.push({
-        priority,
-        seq: this.seq++,
-        run: async () => {
-          const v = await run();
-          this.log.push({ at: Math.round(performance.now()), what });
-          return v;
-        },
-        done: resolve as (v: unknown) => void,
-        fail: reject,
-      });
-      this.pump();
-    });
-  }
-  openBackground(): void {
-    if (this.background) return;
-    this.background = true;
-    this.log.push({ at: Math.round(performance.now()), what: 'background-open' });
-    this.pump();
-  }
-  get backgroundOpen(): boolean {
-    return this.background;
-  }
-  private pump(): void {
-    while (this.active < this.maxActive) {
-      const eligible = this.queue.filter((j) => j.priority === 0 || this.background);
-      if (eligible.length === 0) return;
-      eligible.sort((a, b) => a.priority - b.priority || a.seq - b.seq);
-      const job = eligible[0]!;
-      this.queue.splice(this.queue.indexOf(job), 1);
-      this.active++;
-      job
-        .run()
-        .then(job.done, job.fail)
-        .finally(() => {
-          this.active--;
-          this.pump();
-        });
-    }
-  }
-}
-export const chibiStreamer = new Streamer();
+// ---- download queue (ChibiQueue.ts: priorities, background gate, promotion of queued jobs) ----------------------
+export const chibiStreamer = new JobQueue();
 
 // ---- bundles, rigs, groups -------------------------------------------------------------------------------------
 const bundles = new Map<string, Promise<AssetManager.Bundle>>();
@@ -159,14 +100,17 @@ export function loadChibiRig(
 ): Promise<ChibiRig> {
   const key = `${classId}|${dir}|${tier}`;
   let hit = rigs.get(key);
-  if (!hit) {
+  if (hit) {
+    // already requested (maybe only queued at background priority): a more urgent caller promotes the queued job
+    chibiStreamer.promote(`rig ${key}`, priority);
+  } else {
     const entry = index.classes[classId];
     const di = entry?.directions[dir];
     if (!entry || !di) return Promise.reject(new Error(`no chibi bundle for ${classId}/${dir}`));
     const bundle = chibiBundleName(classId, dir);
     const base = `${tier}/${entry.stem}_${dir}`;
     const pages = di.pages[tier];
-    hit = chibiStreamer.enqueue(priority, `rig ${key}`, async () => {
+    hit = chibiStreamer.enqueue(`rig ${key}`, priority, `rig ${key}`, async () => {
       const b = await loadBundle(bundle);
       const [ske, tex] = await Promise.all([
         loadIn(b, `${base}_ske`, dragonBones.DragonBonesAsset),
@@ -185,9 +129,12 @@ export function loadChibiRig(
 /** Loads the pages of a clip group (`rest`: combat, emote, ...) and registers them; resolves when frames can render. */
 export function loadChibiGroup(rig: ChibiRig, group: ChibiGroup, priority: number): Promise<void> {
   if (rig.groups.has(group)) return Promise.resolve();
+  const key = `group ${rig.bundle}/${rig.tier}/${group}`;
   let p = rig.pending.get(group);
-  if (!p) {
-    p = chibiStreamer.enqueue(priority, `group ${rig.bundle}/${rig.tier}/${group}`, async () => {
+  if (p) {
+    chibiStreamer.promote(key, priority);
+  } else {
+    p = chibiStreamer.enqueue(key, priority, key, async () => {
       const b = await loadBundle(rig.bundle);
       await registerPages(rig, b, rig.pages[group]);
       rig.groups.add(group);
