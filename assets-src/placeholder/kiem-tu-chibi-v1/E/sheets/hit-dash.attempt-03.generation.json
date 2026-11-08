@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "startedUTC": "2026-11-08 04:27:32 UTC",
+  "prompt": "Precise localized sprite-sheet seam repair. EDIT TARGET is attached opaque-magenta square4x4 Ki\u1ebfm tu sheet. Only globalcell8 (row3,column1, dashlocal2) has a new head stencil. This stencil is copied at EXACT unscaled size from the approved canonical E master. Its skull, face, nose, eye, chin, outline dimensions and position are LOCKED: do not inflate or shrink them. Complete ONLY the magenta seam at neck/root and rear hair connection to the existing moving ponytail. Preserve all body/torso/arms/hands/weapon/legs/boots and the strong airborne forward dash pose exactly. The other15cells are locked, including bottomrowthirdcolumn repairedhead; keep them unchanged. Fixed adult male gray-eye face, plain ivory robe, navy collar/sash/trousers, black ponytail, cyan ribbon, simple right-hand steel sword, premium semi-chibi cel style. Do not substitute a new face, mirror the head, change camera, fit body scale or recenter. No labels or grids. Keep opaque puremagenta RGB255,0,255 and exact4x4 lattice. Only finish the head/neck/hair seams around the existing master-size stencil in cell8.",
+  "reference": "../templates/hit-dash.head-guide-03.png",
+  "rawDefaultPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-954d88aa-920b-4fd6-9473-623864f6e27f.png",
+  "status": "Raw retained; master stencil is not output evidence.",
+  "rawSha256": "97ba33fd17a0f5279e6e286bfb5175808834b67078f610ace8fe2eb03569ed15",
+  "referenceSha256": "2b49c2e353574a76ef97aa84a6d5557588850d9affcd949c3d3fd3048d4b81e8"
+}

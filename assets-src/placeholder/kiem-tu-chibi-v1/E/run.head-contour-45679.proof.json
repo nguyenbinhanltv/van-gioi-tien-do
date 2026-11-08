@@ -1,0 +1,85 @@
+{
+  "scope": "Post-pipeline head-region native comparison, not anatomical landmark proof",
+  "frames": [
+    {
+      "cell": 0,
+      "pixelsChanged": 5016,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 1,
+      "pixelsChanged": 4787,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 2,
+      "pixelsChanged": 4543,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 3,
+      "pixelsChanged": 4703,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 4,
+      "pixelsChanged": 5014,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 5,
+      "pixelsChanged": 5232,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 6,
+      "pixelsChanged": 5803,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 7,
+      "pixelsChanged": 5712,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 8,
+      "pixelsChanged": 5762,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 9,
+      "pixelsChanged": 5735,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 10,
+      "pixelsChanged": 5262,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 11,
+      "pixelsChanged": 5553,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 12,
+      "pixelsChanged": 5155,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 13,
+      "pixelsChanged": 5184,
+      "alpha128Crossings": 0
+    },
+    {
+      "cell": 14,
+      "pixelsChanged": 5276,
+      "alpha128Crossings": 178
+    },
+    {
+      "cell": 15,
+      "pixelsChanged": 4726,
+      "alpha128Crossings": 0
+    }
+  ]
+}

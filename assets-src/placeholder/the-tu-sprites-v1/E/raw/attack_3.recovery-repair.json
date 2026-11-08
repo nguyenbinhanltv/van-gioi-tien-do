@@ -1,0 +1,48 @@
+{
+  "method": "Cell-local return-to-guard repair: reuse cell0 verbatim as final cell9. No AI call, no frame scaling, no interpolation.",
+  "reason": "Generated final standing recovery was225px (master217 +/-3%); initial standing guard220px is the intended return pose.",
+  "donorCell0": 0,
+  "repairedCell0": 9,
+  "unchangedOtherCells": 9,
+  "before": [
+    "048407b3feb318d4e9256aebdd9a48a02c096532",
+    "bb334900da754656133643345a3e5ecd7fb215a6",
+    "16f9d6c612d6f479e37583720c8755e538ceeba8",
+    "2dc6b6692019b0bdbb6736bce4feb19139c83a2d",
+    "ee518c4edea41bb26faf405076fdcb7ec4b5fab1",
+    "747e27a52aab387a66849783fe57a0efc891c1ea",
+    "8b6239cc2ffab4bd1e6a64abc28b65e12432fd6a",
+    "aff4219138302cdca47296bb497d0c48db1d9596",
+    "3e62179542c5e8b66afda0417ef4b3606f3efd33",
+    "efca9be0902eb9e4d2d9e460c0991ea2ab0fe2be"
+  ],
+  "after": [
+    "048407b3feb318d4e9256aebdd9a48a02c096532",
+    "bb334900da754656133643345a3e5ecd7fb215a6",
+    "16f9d6c612d6f479e37583720c8755e538ceeba8",
+    "2dc6b6692019b0bdbb6736bce4feb19139c83a2d",
+    "ee518c4edea41bb26faf405076fdcb7ec4b5fab1",
+    "747e27a52aab387a66849783fe57a0efc891c1ea",
+    "8b6239cc2ffab4bd1e6a64abc28b65e12432fd6a",
+    "aff4219138302cdca47296bb497d0c48db1d9596",
+    "3e62179542c5e8b66afda0417ef4b3606f3efd33",
+    "244bf102aab4a93e29f27f39a80806124ed18fe3"
+  ],
+  "boundaryOnly": {
+    "source": {
+      "x": 0,
+      "y": 0,
+      "width": 397,
+      "height": 397
+    },
+    "target": {
+      "x": 1586,
+      "y": 397,
+      "width": 397,
+      "height": 396
+    },
+    "copiedWidth": 397,
+    "copiedHeight": 396,
+    "droppedPixelsVerifiedMagenta": true
+  }
+}

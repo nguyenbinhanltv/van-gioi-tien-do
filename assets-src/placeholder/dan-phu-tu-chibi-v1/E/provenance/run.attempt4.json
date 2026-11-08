@@ -1,0 +1,28 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 4,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:14:30 UTC",
+  "utcEnd": "2026-11-07 22:15:04 UTC",
+  "prompt": "Precise local MAIN HAIR CAP contour correction. Image1 TARGET16frame4x4RUN sheet; image2fixedface. Modify ONLY 0basedcells7,14,15 (row2col4,row4col3,row4col4). Those attachedmaincap crown-tochin sizes read55.46logicalpx, just too big vs53.5target. LOWER/FLATTEN justtopcontour of ATTACHEDMAINhaircap by3RAWimagepixels (about2.5logicalpx) inthese3heads. Keep everyfacefeature/eye/brow/nose/lips/chin/jaw and fringe edge/ear atsamepixelpositions; elevatedbun/pin/pinktie staysunchanged anddistinctbehind. Do not move summit sideways; smoothlyreshape upperroundedcapvolume into slightlyflatter contour. Correct maincap only, notfullhead/body scale. Preserve ALLother13frames EXACT. Preserve allbodyposes/torsolean/boots/root/flighttuck ofcells7and15, right-handplainbrownwhisk ONEbronze collarwhitehorsehair, sleeves/sash/horsehairtrails. No standing/flatteningdynamicposes. Same1254square4x4rowmajor; flatmagenta#ff00ffoutside; no text/grid/FX/shadow. Exactfixedadultfemaleidentity andsameivoryjadegoldT1. Tinybutvisibleuppercapflattening onlythreecells; actualfacepixels andjawunchanged.",
+  "references": ["../raw/run.attempt3.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt4.png",
+  "status": "localized maincap contour edit cells7,14,15 only; actual output measurements pending; no blanket pass",
+  "sha256": "8673264f6eba65bc513e71545e8e7f347c50c9130c87b36f63fdb70279133ecb",
+  "rawSha256": "8673264f6eba65bc513e71545e8e7f347c50c9130c87b36f63fdb70279133ecb",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt3.png",
+      "sha256": "0eb667e5965ee463ad2f7424ce61d1e5eb4afe65532b893b3ad26f553084ff30"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

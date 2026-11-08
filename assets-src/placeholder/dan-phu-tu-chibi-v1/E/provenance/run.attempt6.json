@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 6,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:25:34 UTC",
+  "utcEnd": "2026-11-07 22:26:15 UTC",
+  "prompt": "Edit TARGETimage1 into a DYNAMIC16-frame RUN LOOP EAST/right, 4x4rowmajor. Eachcell alreadycontains the canonical216pxanatomical master atcorrectsize. Preserve this ACTUALhead/face/limb scale: crown-tochin53.3logicalpx, identicalfaceall16, no enlargement. Image2fixedfemaleEidentity. Move existing masterfigure into distinct RUNarticulation, notwalking. Torsoleansforward20degrees, deepkneecompression/toeoff/longstride andflighttuck. Explicitframes1Rforwardcontact/Lback;2Rcompression;3Rmidstance/Lswing;4Rbackplant/Lkneeup;5Rpush/Lforwardreach;6Rtoeoff;7BOTHFEETAIRBORNE knees tucked stronglyunderships;8Lreaches/Rtucks;9Lcontact/Rback;10Lcompression;11Lmidstance/Rswing;12Lbackplant/Rkneeup;13Lpush/Rreach;14Ltoeoff;15BOTHFEETAIRBORNE tucked;16Rreach/Ltuck smoothlyinto1. Cyan/amberghostsmark alternatingbootpositions andcontact, cornersleadinglegonly. Moveactualboots, leave no duplicate standingfeet. Keepheadsizeconstant whileheightvarieswithposture, neverflattenflight/crouch toheightband. Ground232of256logicalcell. Samefixedadultfemaleolivebrownalmondface/straightbrow/serenelips/jaw/sweptbrowncap distinctfoldedbun/jadepin/twostrands. Right hand naturallygripsonecontinuousplainbrownwhiskshaft ONEbronzecollarwhitehorsehair, stablecarry nearbody;leftpalmopen. IvoryjadeT1robe narrowantiquegoldtrim inkhem; robelegopening revealsalternatinglegs. Hair/longsash/sleeves/horsehair flowBACKLEFT with2framelag/settle, smootharcs. Cel2tones+highlight+thinrim,tintedoutlines,NWlight. FINISHEDsheet16distinctwholebodyfigures generousmargins4x4square. Removeallguides/blackrules/dashes/ghostdots/triangles andkeepuniformflat#ff00ffbackground. NoFX/talismans/lotus/shadow/text/afterimages/blur. Keyconstraint actualstampedmasterheadscale preserved throughout whilebodyposesdynamic; do notredrawlargeheads.",
+  "references": ["../templates/run.master-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt6.png",
+  "status": "full-master calibrated input candidate with strong lean/flight tucks; actual head evidence/feet/canvas gates pending",
+  "rawSha256": "083ea8f1a4ef74ef81879e7f47c1034051522f0d98c8fc8b9d57d7ae1ccf4981",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/run.master-guide.png",
+      "sha256": "73f26c5dd02379ae98502f49dad761f5f13681fe181a9a0e81f38f66ecb3e0cf"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

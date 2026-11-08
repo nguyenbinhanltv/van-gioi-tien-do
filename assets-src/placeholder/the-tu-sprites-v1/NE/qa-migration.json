@@ -1,0 +1,114 @@
+{
+  "format": "vgtd-the-tu-directional-qa",
+  "version": 2,
+  "direction": "NE",
+  "method": "Master-only sole measurement; full transverse stance is the sole separation projected onto the perpendicular of the public facing vector. No frame fitting.",
+  "master": {
+    "path": "../../the-tu-continuous-v1/reference/NE.master4x.png",
+    "sha256": "2ae6c3dbcd3dc1cad3c9a7ada4dfb76fd6e900e63c1a2e89faab112797c8771c",
+    "bandRows": 20,
+    "soles": [
+      {
+        "x": 98.5,
+        "y": 234,
+        "offset": 4.953034269662818
+      },
+      {
+        "x": 140.5,
+        "y": 238,
+        "offset": 6.059426229508205
+      }
+    ],
+    "axis": {
+      "x": 0.8944271909999159,
+      "y": -0.4472135954999579
+    },
+    "stanceWidth": 22.36
+  },
+  "originalGenerationTemplates": [
+    {
+      "path": "raw/generation-guides/walk.template.json.txt",
+      "sha256": "54bdbf88cc9332dbde87aa85337610ff9098442cb75549bbf81172330598bb2e",
+      "activeManifest": "templates/walk.template.json",
+      "semanticSha256": "a2ecb29ceabc17d8446f525f41580e2263cca3f3d59171cdec84e68cc572dd3c"
+    },
+    {
+      "path": "templates/walk.template.png",
+      "sha256": "8c67356f812f40403c1aa403dea71a83b12c05ad0066a6eae0a7dd29a82df444"
+    },
+    {
+      "path": "raw/generation-guides/run.template.json.txt",
+      "sha256": "24b98d9597d7b895e1bae1738b69fb42df31d5aed69085cf901aec0d57507b28",
+      "activeManifest": "templates/run.template.json",
+      "semanticSha256": "6093062d268e3c23185fe842ded5c4af2e1b70d5afb2144a77e988b26f86b5bb"
+    },
+    {
+      "path": "templates/run.template.png",
+      "sha256": "b2d25879107ab629e4a8aa002652ee5a16c9b4f9aad1dc2beef6b85735c72a36"
+    }
+  ],
+  "selectedSheets": [
+    {
+      "path": "sheets/idle.png",
+      "sha256": "a8871d22519b426b06dc934cc108b32001b066995f7b8aeddf5446e9c5984f15"
+    },
+    {
+      "path": "sheets/meditate.png",
+      "sha256": "6524972e192cef77c16b56122a1d4a8eb5e7ee00f85d0b9cf43f3072e7581621"
+    },
+    {
+      "path": "sheets/walk.png",
+      "sha256": "1dfc8b3b7ed6a15314d226d037c05bdeccfb116668eef008e9769d51a90ddc87"
+    },
+    {
+      "path": "sheets/run.png",
+      "sha256": "41b51c34d8e5b213d116a24c41c01ad27b3166110aff83d504c09c821103e949"
+    },
+    {
+      "path": "sheets/dash.png",
+      "sha256": "e8899965a745412414f8fef78eaf09e202da29d39843cb99f779821de8bbf861"
+    },
+    {
+      "path": "sheets/sword_fly.png",
+      "sha256": "3b9d62b835c68f432a8b4ce125ca3eb078b03c1c9149f46b414bbc2cb5b79496"
+    },
+    {
+      "path": "sheets/attack.png",
+      "sha256": "3e364867c59002621748a8ccae4afb977f4b8e8c18e3a3577e0f22dc06f86411"
+    },
+    {
+      "path": "sheets/attack_2.png",
+      "sha256": "99ff761652524a5384160447d26676a82c3265771a13d67eeaa3415b49378797"
+    },
+    {
+      "path": "sheets/attack_3.png",
+      "sha256": "6ca5f03a23ca584832707da2e106ff189683cf59caec08d5d7c14aae1f575f33"
+    },
+    {
+      "path": "sheets/cast.png",
+      "sha256": "d759ffa5005d8d2a01b58660baf9ce735bb96393b1b04a83be6b5d159da26af2"
+    },
+    {
+      "path": "sheets/channel.png",
+      "sha256": "d5470275ed9ee1c651fea3638057d1f5b1515dfb16ddab4aa0aa95810a752110"
+    },
+    {
+      "path": "sheets/hit.png",
+      "sha256": "d9245165f9e7f534830c30b6e4a72a582ad591ab794de87959c61a29c7d3271d"
+    },
+    {
+      "path": "sheets/die.png",
+      "sha256": "886575fbde76af026a23e5eb19ba67ae7b51e0fbd737c2b29d211146633abba3"
+    },
+    {
+      "path": "sheets/tribulation.png",
+      "sha256": "7f30aa7f28423c5384a10484b944cf6900d2812d7ce1cb79f6dffbacfc7afd48"
+    },
+    {
+      "path": "sheets/emote.png",
+      "sha256": "94fb0a8dd8fa366dfe0b52bffb5d04f0af15a2a3b7b05d2d2db7c4a0a9b2e6aa"
+    }
+  ],
+  "alignment": "walk/run vertical:keep; preserve each source cell ground reference",
+  "dpi": "Existing fixed per-sheet referenceHeight values retain the frozen character-wide normalized reference. No square-cell normalization of non-square hit inputs."
+}

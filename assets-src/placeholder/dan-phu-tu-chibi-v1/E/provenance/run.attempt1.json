@@ -1,0 +1,28 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 20:57:47 UTC",
+  "utcEnd": "2026-11-07 20:58:12 UTC",
+  "prompt": "Use case: identity-preserve. Production RUN EAST smooth-v2,16DRAWINGS24fps, SQUARE2048x2048 EXACT4cols4rows,16wholefigures rowmajor. Image1 correctednativeE master identity; Image2 RUN lattice ghosts/leadinglegs, includingflightphases. EVERYfigure pureRIGHTfacingEprofile oneolivebrownalmond eye/noseRIGHT, samefixedadultfemalejadehealer/straightdelicatebrow/serenemouth. CorrectedFLATTERuppermainhaircap anddistinctfoldedbun/simplejadepin/twolongstrands, darkbrownblackhair. PlainT1ivorywraprobe/jadecollar/cuffs/sash/thinantiquegoldedge/tinysparseinkhem/jadeivoryshoes. Right hand naturallyholds SAME brownwoodwhiskcontinuousshaft, ONEcylindricalbronze collar/whitehorsehair, whisknevervanishes orswitcheshands. 2celtones+highlight+narrowrim/tintedlines/NWlight. LOCKED ANATOMICAL SCALE: logicalcell256, masterheadMAINcap-to-chin50logicalpx inEVERYframe within1px evenwithheadtilt, doNOT shrink/enlargehead. Normaluprightcrown16/sole232,butRUN isDYNAMIC: torsolean20degrees, fullstride/contact/down/push/flighttuck permitted, preserveheadsize/anatomy ratherthanforcingconstantbbox. Eachcell512rawpx ->multiplylogicalcoordinatesby2. 16continuousRUNposes:1nearRforwardcontact/Lback;2Rcompression;3Rmidstance/Lswing;4Rbackplant/Lkneeup;5Rpush/Lforwardreach;6Rtoeoff;7BOTHFEETAIRBORNE,kneestucked;8Lreachforward/Rtucks;9Lcontact/Rback;10Lcompression;11Lmidstance/Rswing;12Lbackplant/Rkneeup;13Lpush/Rforwardreach;14Ltoeoff;15BOTHFEETAIRBORNEkneestuck;16Rreachforward/Ltucks towardfirst. FollowcyanR/amberLghostpositions forcontactsandstride, plantedsole slidesBACK toleft asbodyaxisstaysstable. Distinctalternatingnear/farboots, no16samepose. Robesplit naturallyopens for runninglegs, hem/longsash flowBACKLEFT, sleeves/hair/whiskhorsehair lag2frames then settle. Keepheldshaftcarrycontrolled nearbody, notrandomweaponmorph; clothandhairarcwithforwardmomentum. Headfacialfeaturesfixed, headtilt≤10deg, nofrontview. Keepbun/whisk/bootsinsideowncell withmargin, noedgeclipping. FlatopaqueMAGENTA#FF00FFbackground. REMOVEallgrid/borders/guide/ghostdots/triangles/text/labels. No shadows/floor/FX/talismans/lotus/glow/particles/afterimages/blur. Dynamicandfluid, lastposeflowsintofirst, donotflattenflighttucktomeetabboxheight.",
+  "references": ["../../reference/E.identity-panel.corrected.png", "../templates/run.template.png"],
+  "raw": "../raw/run.attempt1.png",
+  "status": "dynamic candidate; actual head-size evidence and contacts/foot errors pending; preserve flight tucks",
+  "sha256": "e7f3c5053f0fa2f63d1cfba7bc989deffb7cd919e2ad1bf7243d370717d21967",
+  "rawSha256": "e7f3c5053f0fa2f63d1cfba7bc989deffb7cd919e2ad1bf7243d370717d21967",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    },
+    {
+      "file": "../templates/run.template.png",
+      "sha256": "79a7a44d71dcc77c9dbfd19d7c9b2acbe5105637dc02a8a028ba46389d586664"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

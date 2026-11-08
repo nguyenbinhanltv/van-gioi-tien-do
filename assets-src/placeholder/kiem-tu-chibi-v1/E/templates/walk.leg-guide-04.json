@@ -1,0 +1,96 @@
+{
+  "status": "Authoringonly, actualcontactsmandatory",
+  "hashes": {
+    "sheets/walk.canonical-before-leg-edit04.png": "a0e3e74a7a6011deda89c460a3cf23e335771f913a7a6081d07f78758a218d3e",
+    "templates/walk.leg-mask-04.png": "258e08de139f85c1662c28e840aeba72057b3545fc6a27b2b12cb273f9dfa8e4",
+    "templates/walk.leg-guide-04.png": "d8457123e1c14c1f8f477a59dfad4f5ba30ea3e546e66e2cc0a7bd3cae51c102"
+  },
+  "records": [
+    {
+      "cell": 0,
+      "sourceSha256": "1226930303445d6ddc9159337be4e36c00a04813738e017c7b75b450bbfd657f",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 1,
+      "sourceSha256": "2ac235d3867282260599904dbdab4b1651c0a9d6d8c8b361b8dafbf2178a5f25",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 2,
+      "sourceSha256": "02705096f68a2e36db424da1542917e9de124a227693e93a03deb8b679cad463",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 3,
+      "sourceSha256": "13862b584674390a353bb2a95bcf476414452db3eb76405babcb016481f05ff9",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 4,
+      "sourceSha256": "6673c4e4901aa34d5485b85409980284c385ac06a8b5eaeb023c9c25870feea2",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 5,
+      "sourceSha256": "a336ea4c2be2866f80d56988295279aed1356fb059dc19a28b7b4ca7a366c3e0",
+      "bootPixels": 437,
+      "sourceSole": 103.25657894736842,
+      "ghost": 109.01917770419425,
+      "dx": 6,
+      "dy": 0,
+      "scale": 1,
+      "operation": "AUTHORING ONLY: unscaledSAMEframe plantedboot+6px;floatingbootretained;AIreconstructs lowerlegs. No guide passingproof."
+    },
+    {
+      "cell": 6,
+      "sourceSha256": "f881b53a6c3f4e5cbca9dda57b2843d591cbf4d9766b832fad0579172133072b",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 7,
+      "sourceSha256": "3994188f2cbca6d5c064d02e9d26860a7df7d7fa7dc51b54ba57fae9c3646cf2",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 8,
+      "sourceSha256": "6096cc10a03b93119e4d581aa46d37a83d2f684459b2dfaeb43c95c2f009ce07",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 9,
+      "sourceSha256": "492110b29a296dc964385158eadf9e131405f5ae230ed8157abbdeeb5d14cef5",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 10,
+      "sourceSha256": "24e44d702e09228e990c727815bb1de5e352167b9cdf354cb84df0039b5e16b8",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 11,
+      "sourceSha256": "ff2e57324b5d4103ed2d4a9dc2d2665ba64c9c2e1ea898759d45943f61be18da",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 12,
+      "sourceSha256": "35945e15e83f41005d4239a511f97a8a6cdc7b9afeb1ed80651f06123e47176f",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 13,
+      "sourceSha256": "10ea3ae87651b4a0136da67f0da432733f1c6fa41e07bf6c62ecc1a37963556f",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 14,
+      "sourceSha256": "390e5ffb619b9c800f1bfb8acf49cf73c5896c261778824dc3ae7166a3cb168c",
+      "operation": "unchanged"
+    },
+    {
+      "cell": 15,
+      "sourceSha256": "dcdc798f24159c58a3381c927a80be9e7b14133ff8a35a83c1b1cfbebd135209",
+      "operation": "unchanged"
+    }
+  ]
+}

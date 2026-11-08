@@ -1,0 +1,110 @@
+{
+  "method": "Native whole-cell RGBA selection; dimensions must match; no resizing, fitting or repainting.",
+  "basePath": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/hit-dash.attempt1.png",
+  "editPath": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/hit-dash.attempt2.png",
+  "originalSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+  "editSha256": "c442a6309e1b7b4138f5578b1b24e70fbc917b5e7c152a109cfa18b6d21529ea",
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "selectedCells": [7, 8, 13],
+  "proof": [
+    {
+      "cell": 0,
+      "source": "base",
+      "expected": "c4f9bf5ec4335e8642bb2f05b405b84061645c91",
+      "selected": "c4f9bf5ec4335e8642bb2f05b405b84061645c91"
+    },
+    {
+      "cell": 1,
+      "source": "base",
+      "expected": "e10c26cabf750ba53259c32289e2d6688771dd37",
+      "selected": "e10c26cabf750ba53259c32289e2d6688771dd37"
+    },
+    {
+      "cell": 2,
+      "source": "base",
+      "expected": "19cdc9ea4c5f2d121502bf115aac4903bb456b77",
+      "selected": "19cdc9ea4c5f2d121502bf115aac4903bb456b77"
+    },
+    {
+      "cell": 3,
+      "source": "base",
+      "expected": "a7bdbbf311a8701b63fd0ae9612a55aa202fbf7a",
+      "selected": "a7bdbbf311a8701b63fd0ae9612a55aa202fbf7a"
+    },
+    {
+      "cell": 4,
+      "source": "base",
+      "expected": "0241c9c179c215212d59bdd830112e0d01a6edfd",
+      "selected": "0241c9c179c215212d59bdd830112e0d01a6edfd"
+    },
+    {
+      "cell": 5,
+      "source": "base",
+      "expected": "78bf252ffca98702ac63054ea2f6e030a30ecb50",
+      "selected": "78bf252ffca98702ac63054ea2f6e030a30ecb50"
+    },
+    {
+      "cell": 6,
+      "source": "base",
+      "expected": "c433a464777f9f213bfe274eca727be88488cc75",
+      "selected": "c433a464777f9f213bfe274eca727be88488cc75"
+    },
+    {
+      "cell": 7,
+      "source": "edit",
+      "expected": "faa876f7a8df21be63b743d5effd40ecaa1cf1e9",
+      "selected": "faa876f7a8df21be63b743d5effd40ecaa1cf1e9"
+    },
+    {
+      "cell": 8,
+      "source": "edit",
+      "expected": "85e9c4629c549856e85435a1b746703e3c1da0c0",
+      "selected": "85e9c4629c549856e85435a1b746703e3c1da0c0"
+    },
+    {
+      "cell": 9,
+      "source": "base",
+      "expected": "f84872ae819851d8bf91adb33012e8d0b9901926",
+      "selected": "f84872ae819851d8bf91adb33012e8d0b9901926"
+    },
+    {
+      "cell": 10,
+      "source": "base",
+      "expected": "4cade6dccf6ec19057a0cd879de182c192e6d385",
+      "selected": "4cade6dccf6ec19057a0cd879de182c192e6d385"
+    },
+    {
+      "cell": 11,
+      "source": "base",
+      "expected": "331eaa830b4163f3725d58fa6336d3b0b891979f",
+      "selected": "331eaa830b4163f3725d58fa6336d3b0b891979f"
+    },
+    {
+      "cell": 12,
+      "source": "base",
+      "expected": "ec1e2f44c30906f12e7bb9a2d96db3f2e0df1bdc",
+      "selected": "ec1e2f44c30906f12e7bb9a2d96db3f2e0df1bdc"
+    },
+    {
+      "cell": 13,
+      "source": "edit",
+      "expected": "061c664a3a70f13098d91b08eba04673ca15b0d8",
+      "selected": "061c664a3a70f13098d91b08eba04673ca15b0d8"
+    },
+    {
+      "cell": 14,
+      "source": "base",
+      "expected": "4c461d9a17f826d83e1211d24bcec0ac4d36fa3c",
+      "selected": "4c461d9a17f826d83e1211d24bcec0ac4d36fa3c"
+    },
+    {
+      "cell": 15,
+      "source": "base",
+      "expected": "433cda5744d0e5e70691259e40550d40bdc0b0a8",
+      "selected": "433cda5744d0e5e70691259e40550d40bdc0b0a8"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 8,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:38:53 UTC",
+  "utcEnd": "2026-11-07 22:39:15 UTC",
+  "prompt": "Precise HEAD-SIZE INTERPOLATION only. Image1 TARGET isRUNsheet with5slightlytooSMALLheads atcells0,1,2,8,9. Image2 SAMEbodyposesbeforeheadcorrection, those5heads slightlytooLARGE. Image3exactcanonicalidentity. Draw ONLYthose5heads at an INTERMEDIATE size betweenimages1and2, about2-3percentLARGERthanimage1, while preservingfixedneckanchor/bodyposes. TargetEuclideanmaincapcrown-tojaw53.3logicalpx per256logicalcell (=65.3rawpx per313.5cell). Currentimage1headsabout50-52logicalpx; image2heads55-57. Choose middlecanonical53.3, not eitherextreme. Keep SAME maturefemaleolivebrownalmond eye/straightdelicatebrow/nose/lips/jaw/faceproportions/haircap/bun/pin/expression/tilt; originalfixedidentity, no babyface. Right-handwhisk onebrownshaftONEbronzecollarwhitehorsehair and allhands/arms/torso/robe/boots/root/secondarymotion EXACT. Preserve strongforwardlean andflighttucks. ONLYzero-basedcells0,1,2,8,9 (r1c1,c2,c3 andr3c1,c2); other11cellsUNCHANGED. No wholefigure scaling, bodyparts/legsnotresized, no positionfitting. Same1254square4x4mapping/uniformflatmagenta. No guides/text/FX/shadows. Modestheadonlyenlargementfromimage1, intermediatebetweenprovidedtwoheadsizes. Keep allotherdrawingunchanged.",
+  "references": [
+    "../raw/run.attempt7.png",
+    "../raw/run.attempt6.png",
+    "../../reference/E.identity-panel.corrected.png"
+  ],
+  "raw": "../raw/run.attempt8.png",
+  "status": "intermediate head-size candidate cells0,1,2,8,9; actual new measurements pending",
+  "rawSha256": "bb624b9fd628497cf212aaafcd004de022f518ab3f8c619cd4a52162b5436a68",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt7.png",
+      "sha256": "0622ed0fcc7e5ddd0030d10880da709d8f705216d31ed6f499649894645eb72f"
+    },
+    {
+      "file": "../raw/run.attempt6.png",
+      "sha256": "083ea8f1a4ef74ef81879e7f47c1034051522f0d98c8fc8b9d57d7ae1ccf4981"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

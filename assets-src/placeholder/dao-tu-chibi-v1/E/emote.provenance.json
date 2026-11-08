@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:01:14.432Z",
+  "utcRecordedCompleted": "2026-11-08T00:03:42.411Z",
+  "prompt": "Use case: precise-object-edit. FIRST exact4x4head-stenciltemplate DAO TU T1 EMOTE saber salute12unique sequentialframes0-11 rowmajor; final4cellsEMPTYmagenta.24fps. Image2 exact E male master. Same adultlean greyeyes/sternface/black sweptfringe/low looseponytail, anatomicalH216-219px/skull50px breadth38px per256cell; SAME face/hair size, no childhead. Plain sleeveless muted darkteal tunic/stormgreyblue collar+sash/darkpants/boots/bracers minimalbrass. Same HEAVY BROAD single-edge mountain-ink DAO longdarkgrip/brassguard carriedon RIGHT shoulder ALLframes. Eprofile lookingRIGHT, fixedstandingfeetground232/latticerootx128.0-2 neutral shoulderready;3-5 leftfist rises towardchest in respectful martialsalute;6-7 brief nod and leftfist atchest, sternexpression slightlysoftens;8-10 leftarm lowers/nodrecovers;11 exactE shoulderready. Subtle torso breathing/hairlag, same uprightbodyheight and headscale, no turningfront/posingwithnewweapon. Headstencil is exactsize/identity, translate atmost1-2px naturally, don't shrinkwholeframe. Keep fullblade/hair insideeachcell8pxmargin. NoFX/wind/aura/shadows/text/grid/borders; removeALLguides and rectangleedges. Uniformopaque PURE MAGENTA RGB255,0,255 background.12distinctinbetweens, lastrowempty, premiumpainted semichibiNWlight.",
+  "references": ["templates/emote.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/emote.png",
+  "status": "candidate; full-table QA pending"
+}

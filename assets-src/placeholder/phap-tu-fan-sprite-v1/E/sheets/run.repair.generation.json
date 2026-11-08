@@ -1,0 +1,14 @@
+{
+  "id": "B.E.run-repair-1",
+  "prompt": "Edit target PHAP TU B RUN sheet EXACT1536x512 SIXcolumns TWOrows12 squarecells. Change ONLY zero-based CELL4 (TOP row FIFTH) and CELL10 (BOTTOM row FIFTH). All othercells unchanged. Those2 flight poses have feettoohigh: measured191/195px vs required202..214. DO NOT SCALE anyfigure/body/head/limb. Keep bun/head/torso/fan/right-handgrip/redrobe/clothcolors exactly. REDRAW the forwardleading leg as a natural downwardnear-contact phase: extend and rotate whole thigh/knee/shin/boot downward anatomically so lowest sole reaches localy232, with buntopneary24. Keep fulllengthleg notstretching. Otherleg stilltrailing/bent, genuinealternating gait. Bothboots fullyvisible notmerged. Staff/sword neverintroduced: preserve OPENcyanTEALfan inRIGHT hand atchest, nohandchanges. PUREmagenta background, no lines/text/effects. Onlythose2 cells used inlocalrepair; keep exactscaleandallothercells.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 17:09:52 UTC",
+  "utcEnd": "2026-11-06 17:18:38 UTC",
+  "selectedOutput": "E/sheets/run.repair1.generated.png",
+  "appliedTo": "E/sheets/run.png",
+  "references": ["E/sheets/run.generated.png (DPI-normalized before editing)"],
+  "attempt": 2,
+  "changedCells": [4, 10],
+  "proof": "E/sheets/run.repair.json"
+}

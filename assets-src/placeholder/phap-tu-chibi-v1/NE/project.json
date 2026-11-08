@@ -1,0 +1,874 @@
+{
+  "character": "phap-tu-chibi-v1",
+  "direction": "NE",
+  "stem": "phaptuchibi",
+  "master": "../reference/NE.master.png",
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../character-calibration.json"
+  },
+  "slice": {
+    "inset": 0.01,
+    "inner": 0,
+    "outer": 1,
+    "defringe": false
+  },
+  "masterHead": {
+    "kind": "rear-crown-shoulder-single",
+    "crown": {
+      "x": 140,
+      "y": 16
+    },
+    "shoulderTop": {
+      "x": 156,
+      "y": 79
+    },
+    "breadth": {
+      "left": {
+        "x": 114,
+        "y": 36
+      },
+      "right": {
+        "x": 166,
+        "y": 36
+      }
+    },
+    "occludedSide": "left",
+    "occluder": "approved left fan, long hair and ribbon conceal the left shoulder top"
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "prepared/idle.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "prepared/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "1": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "2": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "3": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "4": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "5": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "6": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "7": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "8": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "9": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "10": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "11": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "12": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "13": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "14": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "15": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "prepared/walk.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "prepared/run.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "1": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 138,
+            "y": 37
+          },
+          "shoulderTop": {
+            "x": 169,
+            "y": 101
+          },
+          "breadth": {
+            "left": {
+              "x": 123,
+              "y": 54
+            },
+            "right": {
+              "x": 176,
+              "y": 54
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "left-hand fan, long hair and ribbon obscure the left shoulder in NE running pose",
+          "note": "Reviewed aligned cell: main-cap crown and widest hair-only row above ear; acromion: max slope change of the right garment contour below the neck, alpha >=128. Fixed scale and D57 source-verified registration, no projected landmarks."
+        },
+        "3": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 139,
+            "y": 27
+          },
+          "shoulderTop": {
+            "x": 169,
+            "y": 91
+          },
+          "breadth": {
+            "left": {
+              "x": 124,
+              "y": 46
+            },
+            "right": {
+              "x": 177,
+              "y": 46
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed aligned Lanczos256px source. acromion: max slope change of the right garment contour below the neck. Proximal shoulder segment: 16 rows beginning at reviewed garment neck junction y85; 3px slope window, forearm/elbow excluded. Crown/main cap excludes pins; breadth spans contiguous skull-cap hair, excluding detached strands. Dynamic run posture retained; all landmarks alpha>=128."
+        },
+        "4": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 138,
+            "y": 26
+          },
+          "shoulderTop": {
+            "x": 170,
+            "y": 88
+          },
+          "breadth": {
+            "left": {
+              "x": 119,
+              "y": 44
+            },
+            "right": {
+              "x": 171,
+              "y": 44
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y85), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "5": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 139,
+            "y": 24
+          },
+          "shoulderTop": {
+            "x": 170,
+            "y": 86
+          },
+          "breadth": {
+            "left": {
+              "x": 120,
+              "y": 41
+            },
+            "right": {
+              "x": 171,
+              "y": 41
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y83), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "6": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 136,
+            "y": 29
+          },
+          "shoulderTop": {
+            "x": 173,
+            "y": 93
+          },
+          "breadth": {
+            "left": {
+              "x": 123,
+              "y": 45
+            },
+            "right": {
+              "x": 174,
+              "y": 45
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y86), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "7": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 140,
+            "y": 32
+          },
+          "shoulderTop": {
+            "x": 171,
+            "y": 95
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 48
+            },
+            "right": {
+              "x": 174,
+              "y": 48
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y91), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "9": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 141,
+            "y": 38
+          },
+          "shoulderTop": {
+            "x": 169,
+            "y": 102
+          },
+          "breadth": {
+            "left": {
+              "x": 124,
+              "y": 54
+            },
+            "right": {
+              "x": 175,
+              "y": 54
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y97), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "10": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 139,
+            "y": 33
+          },
+          "shoulderTop": {
+            "x": 166,
+            "y": 95
+          },
+          "breadth": {
+            "left": {
+              "x": 125,
+              "y": 50
+            },
+            "right": {
+              "x": 176,
+              "y": 50
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed aligned Lanczos256px source. acromion: max slope change of the right garment contour below the neck. Proximal shoulder segment: 16 rows beginning at reviewed garment neck junction y91; 3px slope window, forearm/elbow excluded. Crown/main cap excludes pins; breadth spans contiguous skull-cap hair, excluding detached strands. Dynamic run posture retained; all landmarks alpha>=128."
+        },
+        "11": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 140,
+            "y": 30
+          },
+          "shoulderTop": {
+            "x": 170,
+            "y": 92
+          },
+          "breadth": {
+            "left": {
+              "x": 125,
+              "y": 48
+            },
+            "right": {
+              "x": 176,
+              "y": 48
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y89), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "12": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 134,
+            "y": 31
+          },
+          "shoulderTop": {
+            "x": 173,
+            "y": 93
+          },
+          "breadth": {
+            "left": {
+              "x": 119,
+              "y": 44
+            },
+            "right": {
+              "x": 171,
+              "y": 44
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "left-hand fan, long hair and ribbon obscure the left shoulder in NE running pose",
+          "note": "Reviewed aligned cell: main-cap crown and widest hair-only row above ear; acromion: max slope change of the right garment contour below the neck, alpha >=128. Fixed scale and D57 source-verified registration, no projected landmarks."
+        },
+        "13": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 139,
+            "y": 24
+          },
+          "shoulderTop": {
+            "x": 171,
+            "y": 87
+          },
+          "breadth": {
+            "left": {
+              "x": 121,
+              "y": 44
+            },
+            "right": {
+              "x": 173,
+              "y": 44
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y83), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        },
+        "15": {
+          "kind": "rear-crown-shoulder-single",
+          "crown": {
+            "x": 137,
+            "y": 36
+          },
+          "shoulderTop": {
+            "x": 170,
+            "y": 99
+          },
+          "breadth": {
+            "left": {
+              "x": 124,
+              "y": 52
+            },
+            "right": {
+              "x": 176,
+              "y": 52
+            }
+          },
+          "occludedSide": "left",
+          "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+          "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y92), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+        }
+      },
+      "inheritedRegistration": {
+        "kind": "inherited-registration",
+        "source": "repair/run.pre-edit.png",
+        "sourceSha256": "c16801438f1741e4afeb7e9bb91fb032f4abdc7b1a2ace3db0b8f4c7db17f15d",
+        "mask": "repair/run.head-edit-mask.png",
+        "maskSha256": "b105351fd7fd2b1cc34621519be34a95fe0fac005d5cf5787044e3c522eb655c",
+        "cells": [1, 12]
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "prepared/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 140,
+            "y": 39
+          },
+          "breadth": {
+            "left": {
+              "x": 124,
+              "y": 54
+            },
+            "right": {
+              "x": 177,
+              "y": 54
+            }
+          },
+          "occluder": "head+earring over shoulder in dash lean",
+          "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+        },
+        "2": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 139,
+            "y": 24
+          },
+          "breadth": {
+            "left": {
+              "x": 125,
+              "y": 39
+            },
+            "right": {
+              "x": 178,
+              "y": 39
+            }
+          },
+          "occluder": "head+earring over shoulder in dash lean",
+          "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+        },
+        "3": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 147,
+            "y": 42
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 60
+            },
+            "right": {
+              "x": 185,
+              "y": 60
+            }
+          },
+          "occluder": "head+earring over shoulder in dash lean",
+          "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+        },
+        "4": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 149,
+            "y": 59
+          },
+          "breadth": {
+            "left": {
+              "x": 135,
+              "y": 76
+            },
+            "right": {
+              "x": 188,
+              "y": 76
+            }
+          },
+          "occluder": "head+earring in deep dash lean",
+          "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+        },
+        "5": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 148,
+            "y": 45
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 60
+            },
+            "right": {
+              "x": 184,
+              "y": 60
+            }
+          },
+          "occluder": "head+earring in deep dash lean",
+          "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+        },
+        "6": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 148,
+            "y": 27
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 44
+            },
+            "right": {
+              "x": 185,
+              "y": 44
+            }
+          },
+          "occluder": "head+earring over shoulder in dash lean",
+          "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+        },
+        "7": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 150,
+            "y": 54
+          },
+          "breadth": {
+            "left": {
+              "x": 135,
+              "y": 78
+            },
+            "right": {
+              "x": 188,
+              "y": 78
+            }
+          },
+          "occluder": "head+earring in deep dash lean",
+          "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+        },
+        "8": {
+          "kind": "rear-breadth-only",
+          "crown": {
+            "x": 140,
+            "y": 34
+          },
+          "breadth": {
+            "left": {
+              "x": 125,
+              "y": 49
+            },
+            "right": {
+              "x": 178,
+              "y": 49
+            }
+          },
+          "occluder": "head+earring over shoulder in dash lean",
+          "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "prepared/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "exceptions": {
+        "0": "hovering with folded knees; airborne body pose",
+        "1": "hovering with folded knees; airborne body pose",
+        "2": "hovering with folded knees; airborne body pose",
+        "3": "hovering with folded knees; airborne body pose",
+        "4": "hovering with folded knees; airborne body pose",
+        "5": "hovering with folded knees; airborne body pose",
+        "6": "hovering with folded knees; airborne body pose",
+        "7": "hovering with folded knees; airborne body pose",
+        "8": "hovering with folded knees; airborne body pose",
+        "9": "hovering with folded knees; airborne body pose",
+        "10": "hovering with folded knees; airborne body pose",
+        "11": "hovering with folded knees; airborne body pose"
+      },
+      "vertical": "keep"
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "prepared/attack.png",
+      "manifest": "templates/attack.template.json",
+      "exceptions": {
+        "0": "diagonal fan cut with bent knees and torso rotation",
+        "1": "diagonal fan cut with bent knees and torso rotation",
+        "2": "diagonal fan cut with bent knees and torso rotation",
+        "3": "diagonal fan cut with bent knees and torso rotation",
+        "4": "diagonal fan cut with bent knees and torso rotation",
+        "5": "diagonal fan cut with bent knees and torso rotation",
+        "6": "diagonal fan cut with bent knees and torso rotation",
+        "7": "diagonal fan cut with bent knees and torso rotation",
+        "8": "diagonal fan cut with bent knees and torso rotation",
+        "9": "diagonal fan cut with bent knees and torso rotation",
+        "10": "diagonal fan cut with bent knees and torso rotation",
+        "11": "diagonal fan cut with bent knees and torso rotation",
+        "12": "diagonal fan cut with bent knees and torso rotation",
+        "13": "diagonal fan cut with bent knees and torso rotation"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "prepared/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "0": "rising fan sweep with squat anticipation",
+        "1": "rising fan sweep with squat anticipation",
+        "2": "rising fan sweep with squat anticipation",
+        "3": "rising fan sweep with squat anticipation",
+        "4": "rising fan sweep with squat anticipation",
+        "5": "rising fan sweep with squat anticipation",
+        "6": "rising fan sweep with squat anticipation",
+        "7": "rising fan sweep with squat anticipation",
+        "8": "rising fan sweep with squat anticipation",
+        "9": "rising fan sweep with squat anticipation",
+        "10": "rising fan sweep with squat anticipation",
+        "11": "rising fan sweep with squat anticipation",
+        "12": "rising fan sweep with squat anticipation",
+        "13": "rising fan sweep with squat anticipation"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "prepared/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "0": "deep forward lunge and recovery",
+        "1": "deep forward lunge and recovery",
+        "2": "deep forward lunge and recovery",
+        "3": "deep forward lunge and recovery",
+        "4": "deep forward lunge and recovery",
+        "5": "deep forward lunge and recovery",
+        "6": "deep forward lunge and recovery",
+        "7": "deep forward lunge and recovery",
+        "8": "deep forward lunge and recovery",
+        "9": "deep forward lunge and recovery",
+        "10": "deep forward lunge and recovery",
+        "11": "deep forward lunge and recovery",
+        "12": "deep forward lunge and recovery",
+        "13": "deep forward lunge and recovery"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "prepared/cast.png",
+      "manifest": "templates/cast.template.json",
+      "exceptions": {
+        "0": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "1": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "2": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "3": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "4": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "5": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "6": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "7": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "8": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "9": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "10": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "11": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "12": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "13": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "14": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "15": "casting anticipation and fan sweep; bent knees and torso rotation"
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "prepared/channel.png",
+      "manifest": "templates/channel.template.json",
+      "exceptions": {
+        "0": "channel mudra and raised left fan sleeve",
+        "1": "channel mudra and raised left fan sleeve",
+        "2": "channel mudra and raised left fan sleeve",
+        "3": "channel mudra and raised left fan sleeve",
+        "4": "channel mudra and raised left fan sleeve",
+        "5": "channel mudra and raised left fan sleeve",
+        "6": "channel mudra and raised left fan sleeve",
+        "7": "channel mudra and raised left fan sleeve",
+        "8": "channel mudra and raised left fan sleeve",
+        "9": "channel mudra and raised left fan sleeve",
+        "10": "channel mudra and raised left fan sleeve",
+        "11": "channel mudra and raised left fan sleeve"
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "prepared/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "exceptions": {
+        "0": "brief backward recoil and knee flexion",
+        "1": "brief backward recoil and knee flexion",
+        "2": "brief backward recoil and knee flexion",
+        "3": "brief backward recoil and knee flexion",
+        "4": "brief backward recoil and knee flexion",
+        "5": "brief backward recoil and knee flexion"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "prepared/die.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "0": "progressive knee collapse and lying on side; fixed anatomical size",
+        "1": "progressive knee collapse and lying on side; fixed anatomical size",
+        "2": "progressive knee collapse and lying on side; fixed anatomical size",
+        "3": "progressive knee collapse and lying on side; fixed anatomical size",
+        "4": "progressive knee collapse and lying on side; fixed anatomical size",
+        "5": "progressive knee collapse and lying on side; fixed anatomical size",
+        "6": "progressive knee collapse and lying on side; fixed anatomical size",
+        "7": "progressive knee collapse and lying on side; fixed anatomical size",
+        "8": "progressive knee collapse and lying on side; fixed anatomical size",
+        "9": "progressive knee collapse and lying on side; fixed anatomical size",
+        "10": "progressive knee collapse and lying on side; fixed anatomical size",
+        "11": "progressive knee collapse and lying on side; fixed anatomical size"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "prepared/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "0": "one-knee brace and recovery under wind; fixed anatomical size",
+        "1": "one-knee brace and recovery under wind; fixed anatomical size",
+        "2": "one-knee brace and recovery under wind; fixed anatomical size",
+        "3": "one-knee brace and recovery under wind; fixed anatomical size",
+        "4": "one-knee brace and recovery under wind; fixed anatomical size",
+        "5": "one-knee brace and recovery under wind; fixed anatomical size",
+        "6": "one-knee brace and recovery under wind; fixed anatomical size",
+        "7": "one-knee brace and recovery under wind; fixed anatomical size",
+        "8": "one-knee brace and recovery under wind; fixed anatomical size",
+        "9": "one-knee brace and recovery under wind; fixed anatomical size",
+        "10": "one-knee brace and recovery under wind; fixed anatomical size",
+        "11": "one-knee brace and recovery under wind; fixed anatomical size",
+        "12": "one-knee brace and recovery under wind; fixed anatomical size",
+        "13": "one-knee brace and recovery under wind; fixed anatomical size",
+        "14": "one-knee brace and recovery under wind; fixed anatomical size",
+        "15": "one-knee brace and recovery under wind; fixed anatomical size"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "prepared/emote.png",
+      "manifest": "templates/emote.template.json",
+      "calibration": {
+        "scale": 1
+      }
+    }
+  ],
+  "resample": "lanczos3",
+  "timingProfile": "smooth-v2"
+}

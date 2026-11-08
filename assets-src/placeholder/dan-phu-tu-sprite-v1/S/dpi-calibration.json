@@ -1,0 +1,143 @@
+{
+  "scale": 0.9004329004329005,
+  "referenceHeight": 231,
+  "measuredUprightMedian": 234,
+  "masterHeight": 207,
+  "dpi": [
+    {
+      "clip": "idle",
+      "raw": [1448, 1086],
+      "normalized": [1024, 768],
+      "cropTop": 0,
+      "cropBottom": 1086,
+      "dpiScaleX": 0.7071823204419889,
+      "dpiScaleY": 0.7071823204419889
+    },
+    {
+      "clip": "meditate",
+      "raw": [1774, 887],
+      "normalized": [1024, 512],
+      "cropTop": 0,
+      "cropBottom": 887,
+      "dpiScaleX": 0.5772266065388951,
+      "dpiScaleY": 0.5772266065388951
+    },
+    {
+      "clip": "walk",
+      "raw": [1774, 887],
+      "normalized": [1024, 512],
+      "cropTop": 0,
+      "cropBottom": 887,
+      "dpiScaleX": 0.5772266065388951,
+      "dpiScaleY": 0.5772266065388951
+    },
+    {
+      "clip": "run",
+      "raw": [1983, 793],
+      "normalized": [1280, 512],
+      "cropTop": 0,
+      "cropBottom": 793,
+      "dpiScaleX": 0.6454866364094806,
+      "dpiScaleY": 0.6456494325346784
+    },
+    {
+      "clip": "dash",
+      "raw": [1774, 887],
+      "normalized": [1024, 512],
+      "cropTop": 0,
+      "cropBottom": 887,
+      "dpiScaleX": 0.5772266065388951,
+      "dpiScaleY": 0.5772266065388951
+    },
+    {
+      "clip": "sword_fly",
+      "raw": [1774, 887],
+      "normalized": [1024, 512],
+      "cropTop": 0,
+      "cropBottom": 887,
+      "dpiScaleX": 0.5772266065388951,
+      "dpiScaleY": 0.5772266065388951
+    },
+    {
+      "clip": "attack",
+      "raw": [1983, 793],
+      "normalized": [1280, 512],
+      "cropTop": 0,
+      "cropBottom": 793,
+      "dpiScaleX": 0.6454866364094806,
+      "dpiScaleY": 0.6456494325346784
+    },
+    {
+      "clip": "attack_2",
+      "raw": [1983, 793],
+      "normalized": [1280, 512],
+      "cropTop": 0,
+      "cropBottom": 793,
+      "dpiScaleX": 0.6454866364094806,
+      "dpiScaleY": 0.6456494325346784
+    },
+    {
+      "clip": "attack_3",
+      "raw": [1983, 793],
+      "normalized": [1280, 512],
+      "cropTop": 0,
+      "cropBottom": 793,
+      "dpiScaleX": 0.6454866364094806,
+      "dpiScaleY": 0.6456494325346784
+    },
+    {
+      "clip": "cast",
+      "raw": [1619, 971],
+      "normalized": [1280, 768],
+      "cropTop": 0,
+      "cropBottom": 971,
+      "dpiScaleX": 0.7906114885731933,
+      "dpiScaleY": 0.7909371781668383
+    },
+    {
+      "clip": "channel",
+      "raw": [1774, 887],
+      "normalized": [1024, 512],
+      "cropTop": 0,
+      "cropBottom": 887,
+      "dpiScaleX": 0.5772266065388951,
+      "dpiScaleY": 0.5772266065388951
+    },
+    {
+      "clip": "hit",
+      "raw": [1254, 1254],
+      "normalized": [512, 512],
+      "cropTop": 0,
+      "cropBottom": 1254,
+      "dpiScaleX": 0.4082934609250399,
+      "dpiScaleY": 0.4082934609250399
+    },
+    {
+      "clip": "die",
+      "raw": [1448, 1086],
+      "normalized": [1024, 768],
+      "cropTop": 0,
+      "cropBottom": 1086,
+      "dpiScaleX": 0.7071823204419889,
+      "dpiScaleY": 0.7071823204419889
+    },
+    {
+      "clip": "tribulation",
+      "raw": [1536, 1024],
+      "normalized": [1536, 1024],
+      "cropTop": 0,
+      "cropBottom": 1024,
+      "dpiScaleX": 1,
+      "dpiScaleY": 1
+    },
+    {
+      "clip": "emote",
+      "raw": [1448, 1086],
+      "normalized": [1024, 768],
+      "cropTop": 0,
+      "cropBottom": 1086,
+      "dpiScaleX": 0.7071823204419889,
+      "dpiScaleY": 0.7071823204419889
+    }
+  ]
+}

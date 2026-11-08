@@ -1,0 +1,84 @@
+{
+  "clip": "die",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 16,
+    "pelvis": 124,
+    "centerX": 128
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "die_0"
+    },
+    {
+      "leading": null,
+      "tag": "die_1"
+    },
+    {
+      "leading": null,
+      "tag": "die_2"
+    },
+    {
+      "leading": null,
+      "tag": "die_3"
+    },
+    {
+      "leading": null,
+      "tag": "die_4"
+    },
+    {
+      "leading": null,
+      "tag": "die_5"
+    },
+    {
+      "leading": null,
+      "tag": "die_6"
+    },
+    {
+      "leading": null,
+      "tag": "die_7"
+    },
+    {
+      "leading": null,
+      "tag": "die_8"
+    },
+    {
+      "leading": null,
+      "tag": "die_9"
+    },
+    {
+      "leading": null,
+      "tag": "die_10"
+    },
+    {
+      "leading": null,
+      "tag": "die_11"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

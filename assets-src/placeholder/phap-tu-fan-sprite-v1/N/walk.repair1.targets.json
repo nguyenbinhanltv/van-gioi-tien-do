@@ -1,0 +1,21 @@
+{
+  "selectedCells0based": [4],
+  "targets": [
+    {
+      "cell0based": 4,
+      "before": {
+        "left": 113,
+        "right": 238,
+        "top": 8,
+        "bottom": 325,
+        "height": 317,
+        "width": 125,
+        "pelvisX": 169.56657223796034
+      },
+      "targetTop": 8,
+      "targetSole": 347,
+      "extendRawPixels": 22
+    }
+  ],
+  "method": "Guide/mask only; no final character pixels painted. Target raw height240@256, lockedscale unchanged."
+}

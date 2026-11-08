@@ -1,0 +1,16 @@
+{
+  "id": "SE-walk-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:56:14 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:56:44 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production walk frame-by-frame sprite sheet for DAN/PHU TU A support healer. EXACT 4 columns x 2 rows of SQUARE CELLS, 8 poses readingorder. Reference1 is exact SE master identity/proportions/camera; reference2 template layout. FIXED SE view ALL cells: character faces LOWER RIGHT toward viewer, THREE-QUARTER FRONT with both shoulders and front coat visible; NEVER turn into pure sideprofile or straightfront. Same adult compactwoman with folded jadeheadpiece, tiedloopdarkhair, ivorysleeves, jadeshortsplitoverrobe and mutedbluepanels bronze trim, darksash/trousers/boots, medicinegourd and threegoldbelttalismans. SAME weaponhand asmaster: anatomicalRIGHT holds bronze-handled whitehorsehairwhisk, LEFT holds GOLDpapertalisman; never swap. Whiskhandle bronze/brown, NO violet/pink. Fine darkink softpaintedgameart NWlight. Sameface/head/limb/propdimensions everycell. Each256cell upright headtop24 sole232 height208, band202..214. Body208units is exact standing master scale; maintain anatomy in bent/seated/collapsed poses rather than fitting them to standingheight. Full walk cycle toward lower-right. Follow leading-leg ghosts, right leg leads1, left leads5, clear front/back reversal, backward planted-foot travel, no squat. Two separate boot silhouettes. Pure #FF00FF background outside figures. Remove every templateguide/tick/ghost. NO grid lines borders text shadows floor VFX glow motionblur or extra limbs. Every complete figure/prop inside owncell; equal character scale across sheet.",
+  "references": ["reference/SE.master.png", "SE/generation-templates/walk.template.png"],
+  "output": "SE/sheets/walk.png",
+  "toolOutputId": "exec-b821674a-32ed-4278-9af5-246f7a4bdf67.png",
+  "originalReferences": ["reference/SE.master.png", "SE/templates/walk.template.png"]
+}

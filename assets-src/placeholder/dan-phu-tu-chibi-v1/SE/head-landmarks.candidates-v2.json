@@ -1,0 +1,406 @@
+{
+  "status": "Revised manual semantic points after visible overlays/native support; not yet project evidence. Originalv1 retained. Includes first front-cap highlight and jaw outline, excludes neck-shadow/empty/pin candidates.",
+  "convention": "Manual first attached FRONT cap rim and last jaw outline; master baseline fixed in head-baseline-history.json. Bun wording clarification pending.",
+  "projectSha256": "be21fab8a5b97ad93d04838326b6219231cd4ffe10605f8844a31b588201afa7",
+  "clips": [
+    {
+      "name": "run",
+      "sheet": "raw/run.attempt3.png",
+      "sourceSha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
+      "cells": [
+        {
+          "index": 0,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 81.5
+          },
+          "alignedPngSha256": "9e784d82669a9d87141a25282cc07392c93f975e98b7539a263a407f17c7aff3",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 1,
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 159.5,
+            "y": 82.5
+          },
+          "alignedPngSha256": "1ce06117d6c2ee3582e92f7c1b3e899c2535f3ff98b4a60471ffc890383130e1",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 2,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 160.5,
+            "y": 81.5
+          },
+          "alignedPngSha256": "3e7a00fa776e7312c782be4da21033cf4ca6c1f93aa04114d191500e89d0275b",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 149,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "alignedPngSha256": "81f0431805274dc54036c57ab108e9a407b767c607d9c985a9b26ef555318f85",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 4,
+          "crown": {
+            "x": 150,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 73.5
+          },
+          "alignedPngSha256": "f1fd8a43e57d4fbecc04823485aa7d3b13a6d30e54084880dcac6b559b6ba5a8",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 5,
+          "crown": {
+            "x": 149,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 161.5,
+            "y": 73.5
+          },
+          "alignedPngSha256": "56a4b061c7ac7bf25a8dc6bf6d0bd5f714d7d9f65ed8ca0f172ab5056182b213",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 6,
+          "crown": {
+            "x": 155,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 72.5
+          },
+          "alignedPngSha256": "4f31ef134bf83df56f4de89c433d1eba7435a5bbab6af3be294a071385d418d6",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 7,
+          "crown": {
+            "x": 161,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 172.5,
+            "y": 72.5
+          },
+          "alignedPngSha256": "98ece72cfd30bac2db2575ce45aed30c3f007543c878d276b4fd0bd1d0f0cee8",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 8,
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 75.5
+          },
+          "alignedPngSha256": "173d51e0e00d41210384c723f0dffed635fafef098a56906ca47489f5b4996c4",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 9,
+          "crown": {
+            "x": 154,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164.5,
+            "y": 75.5
+          },
+          "alignedPngSha256": "c6cebff5f1d65c6e517d7709c121289a803ccdb8471015c1fdb054e8aacf5f55",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 10,
+          "crown": {
+            "x": 156,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 75.5
+          },
+          "alignedPngSha256": "31c9f9ba74acd855008e50f06f2bf92fcf0c7714942ebd165cd8290682d15fe2",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 11,
+          "crown": {
+            "x": 152,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 73.5
+          },
+          "alignedPngSha256": "36fdb466981d11df6e33461fe96871c94eafd7dd5e1e2de100ce95b22b5ab682",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 12,
+          "crown": {
+            "x": 155,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 75.5
+          },
+          "alignedPngSha256": "bf332fc72768f0e0c078aa0ccf9a94d7183aa9a830fa6a766d15b4ddc79da836",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 13,
+          "crown": {
+            "x": 151,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 163.5,
+            "y": 76.5
+          },
+          "alignedPngSha256": "0b70fe818bd6ff348e6935dad661dacf0b4d2fd4232cc4b5ccd30aa420579f09",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 14,
+          "crown": {
+            "x": 155,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 166.5,
+            "y": 75.5
+          },
+          "alignedPngSha256": "2600c4c906ae17228d1da74bef611f4bf25da0726425f605ae8cb2e1ebe5bcdb",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        },
+        {
+          "index": 15,
+          "crown": {
+            "x": 151,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 163,
+            "y": 75.5
+          },
+          "alignedPngSha256": "226cadb53930650b793e7baf35809a1addb0a3652914169ebcf9d63c50e3c601",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Visible central jaw support group replaces interior/neck/empty v1 lead; genuine first cap rim rows restored where v1 excluded a highlight. Both-column support is checked at halfX."
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "sheet": "raw/walk.attempt1.png",
+      "sourceSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "cells": [
+        {
+          "index": 2,
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 65.5
+          },
+          "alignedPngSha256": "32d2e1548402f6e6318e67d1932e1575ce7dcd6b4f2db437ba3544d681622f6e",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Homologous front-cap rim is row13, previous row12 atx121 hasalpha24/10 and atx120alpha120; v1 was at bun junction. Central jaw outline replaces v1 neck-shadow column."
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 65.5
+          },
+          "alignedPngSha256": "f58778769be34792f1f85c34be9f0c8a50b15960ee5b8b9813c1318f9bea236e",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Homologous front-cap rim is row13, previous row12 atx121 hasalpha24/10 and atx120alpha120; v1 was at bun junction. Central jaw outline replaces v1 neck-shadow column."
+        },
+        {
+          "index": 11,
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 65.5
+          },
+          "alignedPngSha256": "09125d05420f39fe032e7be39cd411e0df92d26bfba9059cc130318d275f5b3b",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Homologous front-cap rim is row13, previous row12 atx121 hasalpha24/10 and atx120alpha120; v1 was at bun junction. Central jaw outline replaces v1 neck-shadow column."
+        }
+      ]
+    },
+    {
+      "name": "dash",
+      "sheet": "raw/hit-dash.attempt1.png",
+      "sourceSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+      "cells": [
+        {
+          "index": 1,
+          "crown": {
+            "x": 125,
+            "y": 34.5
+          },
+          "chin": {
+            "x": 138,
+            "y": 88.5
+          },
+          "alignedPngSha256": "d630050e7ba87e25ebff3a6e0fc716b057b28c7f94294e4dd94bd79745906bf1",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 2,
+          "crown": {
+            "x": 135,
+            "y": 39.5
+          },
+          "chin": {
+            "x": 144,
+            "y": 95.5
+          },
+          "alignedPngSha256": "096d7f96481aa2c929e5090bced32a47ae6a33475d5dbf9f00440002a940dded",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 145,
+            "y": 42.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 96.5
+          },
+          "alignedPngSha256": "20e4471cd46dce3731d67bc158667737213adfd156df8276e002f0c9900616cc",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 4,
+          "crown": {
+            "x": 144,
+            "y": 31.5
+          },
+          "chin": {
+            "x": 150.5,
+            "y": 84.5
+          },
+          "alignedPngSha256": "2e5a7d9a729440f954d5370937dcb99e12ffe8bdd997f060660be461941eb8a0",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 5,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157,
+            "y": 82.5
+          },
+          "alignedPngSha256": "71390099ac0b3b9e633107fb67b2433b6cd624be5dd09bc133580bc81f2c7d41",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 6,
+          "crown": {
+            "x": 130,
+            "y": 37.5
+          },
+          "chin": {
+            "x": 140,
+            "y": 91.5
+          },
+          "alignedPngSha256": "aaccbe76955f05bd448242817b73aea119b824679dc226e5ae423e63b34323e3",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 7,
+          "crown": {
+            "x": 126,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 138.5,
+            "y": 89.5
+          },
+          "alignedPngSha256": "cba0865ebc011e7f7ce7ad9e2e3a4718baa99fcafa1c37a49c474ddee3490d33",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        },
+        {
+          "index": 8,
+          "crown": {
+            "x": 115,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 71.5
+          },
+          "alignedPngSha256": "1e4654debf3da3aa32f25b612a9cd5571a9ef1031085eec422347bbac8bede07",
+          "status": "manual boundary selection; verify trace and band before supply",
+          "reason": "Restore first actual front-cap light rim, excluding bun/pin; cell4 v1 pin/empty jaw rejected. Jaw is last outline before background or semantic neck-shadow (cells1/2/5), not the v1 interior skin row."
+        }
+      ]
+    }
+  ]
+}

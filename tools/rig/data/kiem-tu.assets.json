@@ -1,0 +1,192 @@
+{
+  "format": "vgtd-rig-assets",
+  "version": 1,
+  "id": "kiem-tu",
+  "rig": "tools/rig/data/kiem-tu.rig.json",
+  "idle": "tools/rig/data/kiem-tu.idle.json",
+  "coordinateSpace": "pivot-local-y-up",
+  "textureScale": 2,
+  "pivot": [64, 116],
+  "mirrors": { "SW": "SE", "W": "E", "NW": "NE" },
+  "animation": "idle",
+  "drawnInEight": false,
+  "swordInHand": true,
+  "equipped": [
+    "hair_back",
+    "body",
+    "outfit_lower",
+    "outfit_upper",
+    "head",
+    "hair_front",
+    "headwear",
+    "arm_L",
+    "arm_R",
+    "weapon_R"
+  ],
+  "attachmentVariants": {
+    "weapon_R": {
+      "default": "weapon_R",
+      "mirrored": "weapon_R_mirrored",
+      "note": "Idle alias, not separately authored asymmetric combat art"
+    }
+  },
+  "directions": {
+    "S": {
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/S/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/S/kiemtu_S.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": -19.5, "y": 48 }, "hand_L": { "x": 19.5, "y": 48 } }
+    },
+    "SE": {
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/SE/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/SE/kiemtu_SE.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": -18.5, "y": 48 }, "hand_L": { "x": 15, "y": 48 } }
+    },
+    "E": {
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/E/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/E/kiemtu_E.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 136, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 0, "y": 47 }, "hand_L": { "x": -6, "y": 49 } }
+    },
+    "NE": {
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/NE/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/NE/kiemtu_NE.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 128, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 18, "y": 48 }, "hand_L": { "x": -16, "y": 48 } }
+    },
+    "N": {
+      "atlas": "assets-src/placeholder/kiem-tu-rig-v1/atlas/N/atlas.json",
+      "texture": "assets-src/placeholder/kiem-tu-rig-v1/atlas/N/kiemtu_N.png",
+      "stats": { "bones": 38, "slots": 13, "meshVertices": 128, "chains": 6, "ik": 4 },
+      "packing": { "padding": 2, "extrude": 1 },
+      "socketsOverride": { "hand_R": { "x": 19.5, "y": 48 }, "hand_L": { "x": -19.5, "y": 48 } }
+    }
+  },
+  "drawOrders": {
+    "S": [
+      "wing",
+      "cape",
+      "sword_back",
+      "hair_back",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "headwear",
+      "arm_L",
+      "arm_R",
+      "weapon_R"
+    ],
+    "SE": [
+      "wing",
+      "cape",
+      "sword_back",
+      "arm_L",
+      "hair_back",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "headwear",
+      "arm_R",
+      "weapon_R"
+    ],
+    "E": [
+      "wing",
+      "cape",
+      "sword_back",
+      "arm_L",
+      "hair_back",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "headwear",
+      "arm_R",
+      "weapon_R"
+    ],
+    "NE": [
+      "arm_L",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "hair_back",
+      "headwear",
+      "arm_R",
+      "weapon_R",
+      "sword_back",
+      "cape",
+      "wing"
+    ],
+    "N": [
+      "weapon_R",
+      "arm_L",
+      "arm_R",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "hair_back",
+      "headwear",
+      "sword_back",
+      "cape",
+      "wing"
+    ],
+    "NW": [
+      "weapon_R",
+      "arm_R",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "hair_back",
+      "headwear",
+      "arm_L",
+      "sword_back",
+      "cape",
+      "wing"
+    ],
+    "W": [
+      "wing",
+      "cape",
+      "sword_back",
+      "weapon_R",
+      "arm_R",
+      "hair_back",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "headwear",
+      "arm_L"
+    ],
+    "SW": [
+      "wing",
+      "cape",
+      "sword_back",
+      "weapon_R",
+      "arm_R",
+      "hair_back",
+      "body",
+      "outfit_lower",
+      "outfit_upper",
+      "head",
+      "hair_front",
+      "headwear",
+      "arm_L"
+    ]
+  }
+}

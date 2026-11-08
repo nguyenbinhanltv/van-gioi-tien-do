@@ -1,0 +1,32 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:22:32 UTC"
+  },
+  "prompt": "PRECISE LOCAL HEAD-SIZE REPAIR of image1 original grouped HIT6+DASH10 source sheet, exact1254x1254square4x4 layout. FIRST6 globalcells0-5(hit) MUST remain unchanged. ONLY TEN DASH HEADS global6-15 are oversized: repaint their skull/maincap/bun/face to SAME smaller canonical head size/identity shown in image2 INPUT-ONLY masterhead guide. Image3 approved full S master. Target attached FRONTcap-to-chin about53logicalpixels (~65nativepixels here); elevated bun/pin excluded from that anatomical span. Existing dash heads55-60logicalpx drifted. Match the unscaled canonical guide, preserve EXACT eyes/brows/face/hair design and same original neck/jaw anchor percell. Do not resize or alter any BODY, neck below join, shoulder, sleeve, hands, whisk, robe, sash, legs, shoes, root travel, knees or flight pose. Keep full dynamic dash motion. Image2 has rough magenta rectangle cuts near whisk/head; those are GUIDE ONLY, restore whisk from image1 and render a seamless head/neck join, never copy rectangular cuts. Head-only correction about4-12% as guide requires, NOT whole-body scaling, no poseflattening. Same SOUTH/front camera, serene fixedface; no head tilts introduced. Keep all16figures and original source backgrounds/registration/layout exactly, pure #FF00FF, no guides/text/newFX. Body/weapon pixels are locked original; output only repaints head regions. Preserve hitcells0-5 exactly and all bodyposes across16cells.",
+  "inputs": [
+    "raw/hit-dash.attempt1.png",
+    "templates/dash.head-repair-guide.png",
+    "../reference/S.corrected-master.png"
+  ],
+  "rawOutput": "raw/dash-head1.attempt1.png",
+  "status": "unselected raw candidate; no pass inferred from prompt or stencil",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-2926465d-2ec9-4efb-a5be-d30aa1881528.png",
+  "sha256": "6f0160a1ce4b7dc7d92a4a4abc82adc2ddb7fa0bc3e1f899ddbfdee5e72c29aa",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "raw/hit-dash.attempt1.png",
+      "sha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc"
+    },
+    {
+      "file": "templates/dash.head-repair-guide.png",
+      "sha256": "cab8c148b40afd919b135175373dc2b90c6bc82c07187a35d9199224170c964e"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

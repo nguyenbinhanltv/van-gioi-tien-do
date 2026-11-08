@@ -1,0 +1,121 @@
+{
+  "status": "AUTHORING ONLY. Donor head is unscaled same-character dash1, measured53.983794px(-0.184%). No guide is output evidence.",
+  "guideSha256": "4cca3b4aa84cf1b1cab8265b5c36104dcacc27f7914c6951def70ee87892bf67",
+  "donorSha256": "7f2dcd552fbf28ae087f05e311ce160fd141ca3794c2f9b5948cac27a276b909",
+  "records": [
+    {
+      "cell": 0,
+      "clip": "hit",
+      "localFrame": 0,
+      "sourceSha256": "d89045a8b432fa596cbace2d1f705a28493fe01292b8224da9eace8a5c7018e5"
+    },
+    {
+      "cell": 1,
+      "clip": "hit",
+      "localFrame": 1,
+      "sourceSha256": "2fcc29dfce55db0befb4cc3ba6340bb8c413564b68e37e79f1f0a9de2a622b53"
+    },
+    {
+      "cell": 2,
+      "clip": "hit",
+      "localFrame": 2,
+      "sourceSha256": "1ae3dc6621291db275e15becf0ea741be194dcddd094c7009b29f9a717a3f0e6"
+    },
+    {
+      "cell": 3,
+      "clip": "hit",
+      "localFrame": 3,
+      "sourceSha256": "a7996c4987f5c2ebc531aa3bc26994c9c9181dc67c73a66abca8f87d46b8bda1"
+    },
+    {
+      "cell": 4,
+      "clip": "hit",
+      "localFrame": 4,
+      "sourceSha256": "a74ddf1e7b8a85ef676031369589ba79599ede17660ba91dd55df956320b4b4f"
+    },
+    {
+      "cell": 5,
+      "clip": "hit",
+      "localFrame": 5,
+      "sourceSha256": "ceb1f9f5aaaaa9d602edf7489ebb1b2cc49272bcef550d41f6987359cd3a5515"
+    },
+    {
+      "cell": 6,
+      "clip": "dash",
+      "localFrame": 0,
+      "sourceSha256": "0d9a675e8c5524300909627827ab050a483a4e74fa358522032dacd53c55f04a"
+    },
+    {
+      "cell": 7,
+      "clip": "dash",
+      "localFrame": 1,
+      "sourceSha256": "7f2dcd552fbf28ae087f05e311ce160fd141ca3794c2f9b5948cac27a276b909"
+    },
+    {
+      "cell": 8,
+      "clip": "dash",
+      "localFrame": 2,
+      "sourceSha256": "afbbca448ffafc836c6602f2aa55ac5aa1c183cfcc00fe4d342d86ab4d79ef68",
+      "dash": 2,
+      "dx": 8,
+      "dy": -9,
+      "cutout": {
+        "left": 173,
+        "top": 44,
+        "right": 225,
+        "bottom": 110
+      }
+    },
+    {
+      "cell": 9,
+      "clip": "dash",
+      "localFrame": 3,
+      "sourceSha256": "d264de38256a1982dd317aab0ae15a45ea6714dd2400d022996b761be9aec685"
+    },
+    {
+      "cell": 10,
+      "clip": "dash",
+      "localFrame": 4,
+      "sourceSha256": "53e0966f1c306bb5ceb54a4bcec2867e35f6e808425d436be0b5c26f5c7215cb"
+    },
+    {
+      "cell": 11,
+      "clip": "dash",
+      "localFrame": 5,
+      "sourceSha256": "c1f07ac71aefd9881688e39fda431ed0e087a7f1c4892ac4d86d3323e3d8423e"
+    },
+    {
+      "cell": 12,
+      "clip": "dash",
+      "localFrame": 6,
+      "sourceSha256": "23f74fed2fd815bd660ac91289585ad74de0a2a9180c215dedbf2815c60c2ade"
+    },
+    {
+      "cell": 13,
+      "clip": "dash",
+      "localFrame": 7,
+      "sourceSha256": "b3c1e971927c440332d3bbe34a56be6a47915be9255d618011583a2013582305"
+    },
+    {
+      "cell": 14,
+      "clip": "dash",
+      "localFrame": 8,
+      "sourceSha256": "5260266f7cdc2074c7bc3d47d858dbf4937e5dfb31cd9393f8d23e4777d95bb0",
+      "dash": 8,
+      "dx": -46,
+      "dy": -30,
+      "cutout": {
+        "left": 109,
+        "top": 24,
+        "right": 172,
+        "bottom": 90
+      }
+    },
+    {
+      "cell": 15,
+      "clip": "dash",
+      "localFrame": 9,
+      "sourceSha256": "6eeed40c13f813b50141dafff518dec02efdb9d4a7210b31d3c7e82a6f0343bc"
+    }
+  ]
+}

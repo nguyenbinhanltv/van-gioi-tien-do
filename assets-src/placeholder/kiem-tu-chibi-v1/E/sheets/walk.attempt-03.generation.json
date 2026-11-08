@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "startedUTC": "2026-11-08 04:34:20 UTC",
+  "prompt": "Precise local animation repair. EDIT TARGET is attached opaque-magenta square4x4 sheet of SAME Ki\u1ebfm tu character,16 walking frames row-major0..15. Only lower legs have been cut away; existing unscaled boot stencils show the required exact positions and scale. Complete navy calf-length trousers, knees, calves and ankles between the preserved ivory robe hips and the existing boot stencils. Keep both boot locations, bottom edges, sizes and existing pose sequence EXACT; do not move or enlarge boots. Natural continuous E-facing walk: frames0..7 near/right foot stays planted and travels steadily back while far/left foot swings forward; frames8..15 far/left foot stays planted and travels back while near/right swings forward. Preserve intended raised swing boot and grounded contact boot. Anatomically clean small knees/feet, loose navy trouser folds, subtle heel/toe roll consistent with the stencils. Upper body, face, black ponytail/cyan ribbon, hands and right-hand steel sword are LOCKED and must stay exactly as input, no repainted head or new costume, no changed body scale/camera/registration. Preserve every sword pixel and silhouette; sword crosses in front of legs in some cells. No duplicate or extra legs/boots, no continuous detached magenta seam. Premium semi-chibi cel shading and clean material-tinted outlines. Solid opaque puremagenta RGB255,0,255 background, exact4x4 fullframe lattice, no labels/grid. Only reconstruct missing lower legs and join ankles at the existing boot positions; do not redesign any intact part.",
+  "reference": "../templates/walk.leg-guide-03.png",
+  "rawDefaultPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-599a252c-5978-4816-9ed8-f4c05ce53b52.png",
+  "status": "Raw retained; boot guide is not contact evidence.",
+  "rawSha256": "55f62b4ecb875b5ecd9490eb43cc54a94f8003fc71365c78fbbfea338c42ef80",
+  "referenceSha256": "c3003ae121f3de6c8d4c58b6bfb1867161a2f4c5ae7ba007e91052612b355816"
+}

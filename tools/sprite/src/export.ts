@@ -1,0 +1,182 @@
+/**
+ * Exporter: aligned, packed frames -> ONE DragonBones armature per direction (D41): a single `root` bone at the pivot, a
+ * single `body` slot, one display (region) per frame, swapped by a stepped `displayFrame` timeline (legacy 30 Hz,
+ * smooth-v2 24 Hz). Events
+ * (footstep / hit / cancel_window ...) come from the animation table and ride the same clock as the display swaps, so the
+ * viewer, `DragonBonesActor` and the capture tool work unchanged.
+ */
+import { ANIMATIONS, type AnimationId, type SpineEventName } from '@vgtd/character';
+import { pivotOf } from '@vgtd/character';
+import {
+  CLIP_FPS,
+  RIG_FORMAT,
+  RIG_FORMAT_VERSION,
+  exportDragonBones,
+  exportTextureAtlas,
+  validateRig,
+  type AtlasData,
+  type Clip,
+  type ClipEvent,
+  type DragonBonesExport,
+  type RigDocument,
+} from '@vgtd/rig';
+import type { Direction } from '@vgtd/shared';
+import { TEXTURE_SCALE } from './gait.js';
+import type { PackResult } from './pack.js';
+import { CELL_PX } from './types.js';
+import { SMOOTH_CLIP_FPS } from './clips.js';
+
+export type TimingProfile = 'smooth-v2';
+
+/** One clock per armature/set; omitted profiles retain the legacy 30 Hz clock. */
+export function spriteFrameRate(clips: readonly { readonly timingProfile?: TimingProfile }[]): number {
+  const profiles = new Set(clips.map((c) => c.timingProfile ?? 'legacy'));
+  if (profiles.size > 1) throw new Error('mixed sprite timing profiles in one armature');
+  const profile = profiles.values().next().value;
+  if (profile !== undefined && profile !== 'legacy' && profile !== 'smooth-v2')
+    throw new Error(`unknown sprite timing profile '${String(profile)}'`);
+  return profile === 'smooth-v2' ? SMOOTH_CLIP_FPS : CLIP_FPS;
+}
+
+export interface ClipInput {
+  readonly timingProfile?: TimingProfile;
+  /** Animation name in the armature (`run`, `attack`, ...). */
+  readonly name: string;
+  /** Region names of the frames in playback order. */
+  readonly frames: readonly string[];
+  /** Duration in seconds (the animation table: frames / fps). */
+  readonly durationSec: number;
+  readonly loop: boolean;
+  /** Table animation id for the events; omit for clips without table events. */
+  readonly tableId?: AnimationId;
+  /** Frame (0-based, in TABLE frames) of the named phases of the table, e.g. { hit_frame: 4, combo_window: 6 }. */
+  readonly phases?: Readonly<Record<string, number>>;
+  /** Extra events in ticks of this clip's selected clock. */
+  readonly events?: readonly ClipEvent[];
+}
+
+/** Table animation events mapped proportionally onto `clipFrames` ticks of the selected export clock. */
+export function eventsFromTable(
+  id: AnimationId,
+  clipFrames: number,
+  phases: Readonly<Record<string, number>> = {},
+): ClipEvent[] {
+  const spec = ANIMATIONS.find((a) => a.id === id);
+  if (!spec) throw new RangeError(`unknown animation id '${id}'`);
+  const out: ClipEvent[] = [];
+  for (const e of spec.events) {
+    const tableFrame = 'frame' in e.at ? e.at.frame : phases[e.at.phase];
+    if (tableFrame === undefined)
+      throw new RangeError(
+        `animation '${id}' event '${e.name}' needs the phase '${'phase' in e.at ? e.at.phase : ''}'`,
+      );
+    const frame = Math.min(clipFrames - 1, Math.max(0, Math.round((tableFrame * clipFrames) / spec.frames)));
+    out.push({ frame, name: e.name as SpineEventName });
+  }
+  return out;
+}
+
+/** The slot `attachment` keys of a clip: frame i of N is shown from clip frame round(i * frames / N). */
+export function buildClip(input: ClipInput): Clip {
+  const n = input.frames.length;
+  if (!n) throw new RangeError(`clip '${input.name}' has no frames`);
+  const fps = spriteFrameRate([input]);
+  const frames = Math.max(1, Math.round(input.durationSec * fps));
+  if (input.timingProfile === 'smooth-v2' && (frames !== n || Math.abs(input.durationSec - n / fps) > 1e-9))
+    throw new RangeError(`smooth-v2 clip '${input.name}' requires exactly one tick per drawing`);
+  const keys: { frame: number; value: string; curve: 'stepped' }[] = [];
+  input.frames.forEach((name, i) => {
+    const frame = Math.round((i * frames) / n);
+    const last = keys[keys.length - 1];
+    if (last && last.frame >= frame) return; // legacy oversampling: the first drawing wins that tick
+    keys.push({ frame, value: name, curve: 'stepped' });
+  });
+  const events = [
+    ...(input.tableId ? eventsFromTable(input.tableId, frames, input.phases) : []),
+    ...(input.events ?? []),
+  ].sort((a, b) => a.frame - b.frame);
+  return {
+    name: input.name,
+    frames,
+    loop: input.loop,
+    bones: [],
+    slots: [{ slot: 'body', attachment: keys }],
+    ik: [],
+    events,
+    ...(input.phases ? { phases: input.phases } : {}),
+  };
+}
+
+export interface BuildArmatureInput {
+  readonly id: string;
+  readonly direction: Direction;
+  readonly clips: readonly ClipInput[];
+  readonly pack: PackResult;
+  /** Armature / data name, e.g. `kiemtu_E`. */
+  readonly name: string;
+}
+
+export interface BuiltArmature {
+  readonly rig: RigDocument;
+  readonly clips: readonly Clip[];
+  /** Primary page, retained for existing callers. See textures for every page's export. */
+  readonly atlas: AtlasData;
+  readonly export: DragonBonesExport;
+  readonly textures: readonly DragonBonesExport['tex'][];
+}
+
+/** Build one display-swap armature. Multiple atlas pages share its texture lookup group at runtime. */
+export function buildArmature(input: BuildArmatureInput): BuiltArmature {
+  if (!input.pack.pages.length) throw new RangeError('no atlas pages to export');
+  const atlas = input.pack.pages[0]!.data;
+  // Geometry needs every region's pixel size; page-local coordinates are emitted separately below.
+  const geometryAtlas =
+    input.pack.pages.length === 1
+      ? atlas
+      : {
+          ...atlas,
+          regions: input.pack.pages.flatMap((page) => page.data.regions),
+        };
+  const pivot = pivotOf(CELL_PX / TEXTURE_SCALE, CELL_PX / TEXTURE_SCALE);
+  const rootX = pivot.x * TEXTURE_SCALE;
+  const rootY = pivot.y * TEXTURE_SCALE;
+  const attachments: Record<string, RigDocument['skins'][number]['attachments'][string][string]> = {};
+  for (const [name, t] of input.pack.trims) {
+    attachments[name] = {
+      type: 'region',
+      path: name,
+      // offset of the trim centre from the root, rig space (1x px, y up)
+      x: (t.x + t.width / 2 - rootX) / TEXTURE_SCALE,
+      y: (rootY - (t.y + t.height / 2)) / TEXTURE_SCALE,
+      width: t.width / TEXTURE_SCALE,
+      height: t.height / TEXTURE_SCALE,
+    };
+  }
+  const first = input.clips[0]?.frames[0];
+  if (!first) throw new RangeError('no clip frames to export');
+  const rig: RigDocument = {
+    format: RIG_FORMAT,
+    version: RIG_FORMAT_VERSION,
+    id: input.id,
+    kind: 'player',
+    direction: input.direction,
+    canvas: { width: CELL_PX / TEXTURE_SCALE, height: CELL_PX / TEXTURE_SCALE },
+    bones: [{ name: 'root', parent: null, length: 0, x: 0, y: 0, rotation: 0 }],
+    roles: { root: 'root' },
+    slots: [{ name: 'body', bone: 'root', attachment: first }],
+    skins: [{ name: 'default', attachments: { body: attachments } }],
+  };
+  const frameRate = spriteFrameRate(input.clips);
+  const clips = input.clips.map(buildClip);
+  const errors = validateRig(rig).filter((i) => i.severity === 'error');
+  if (errors.length) throw new Error(`sprite rig invalid: ${errors.map((e) => `${e.path}: ${e.message}`).join('; ')}`);
+  const exported = exportDragonBones([{ rig, clips }], geometryAtlas, {
+    name: input.name,
+    armatureName: () => input.name,
+    frameRate,
+  });
+  const textures = input.pack.pages.map((page, i) =>
+    exportTextureAtlas(page.data, i === 0 ? input.name : `${input.name}_page${i}`),
+  );
+  return { rig, clips, atlas, export: { ske: exported.ske, tex: textures[0]! }, textures };
+}

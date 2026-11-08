@@ -1,0 +1,38 @@
+{
+  "baseSha256": "fb3a4de0e3a4318c531931705a54a301a59e1bad77555a1143ee126cfdfeb031",
+  "editSha256": "85f473d323c6f9ea0484b9ca4f65a8d0fcb0fd9f51089a84c0fcccc168050e99",
+  "boundary": 434,
+  "proof": [
+    {
+      "direction": "E",
+      "source": "raw/turnaround.attempt5.png",
+      "sourceHash": "172a7cc16a45760df4dd66ffcad06179224f47ded6798a0bbe90fe85b06b724b",
+      "selectedHash": "172a7cc16a45760df4dd66ffcad06179224f47ded6798a0bbe90fe85b06b724b"
+    },
+    {
+      "direction": "SE",
+      "source": "raw/turnaround.attempt4.png",
+      "sourceHash": "ad0fe936a55ba705443aa7a443ff1430374b7b566bec796be0ee9b795960bba8",
+      "selectedHash": "ad0fe936a55ba705443aa7a443ff1430374b7b566bec796be0ee9b795960bba8"
+    },
+    {
+      "direction": "S",
+      "source": "raw/turnaround.attempt4.png",
+      "sourceHash": "4aba70ae022291f34bbb782259b9e4eb2476a5030a483fc8875c9f2261680a9e",
+      "selectedHash": "4aba70ae022291f34bbb782259b9e4eb2476a5030a483fc8875c9f2261680a9e"
+    },
+    {
+      "direction": "NE",
+      "source": "raw/turnaround.attempt4.png",
+      "sourceHash": "582db85d232c649f2bc8c611b01ae44d05b701dd2e35eb19b0a3f4d879f9baf6",
+      "selectedHash": "582db85d232c649f2bc8c611b01ae44d05b701dd2e35eb19b0a3f4d879f9baf6"
+    },
+    {
+      "direction": "N",
+      "source": "raw/turnaround.attempt4.png",
+      "sourceHash": "c7b76af8437faf24a3e78cb890dd1485b6ee1aa123dc42c7f4cd0327027c6e71",
+      "selectedHash": "c7b76af8437faf24a3e78cb890dd1485b6ee1aa123dc42c7f4cd0327027c6e71"
+    }
+  ],
+  "method": "Native whole-panel selection only; no pixel repaint, no rescaling; all four unselected directions preserve original RGBA."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.die-repair-1",
+  "prompt": "Edit ONLY zero-based cell3 (TOP ROW FOURTH) of this four-column two-row 8-frame SE death sheet. All other seven cells exactly unchanged. In cell3 redraw the same Vermilion Fan Adept as a shallow-knee stagger approaching kneeling: torso/chest upright with same shoulder width, ivory collar, muted vermilion vest and navy sash proportions as cell2 and attached master, cyan fan still gripped in anatomical RIGHT hand at chest, left hand hanging free. Keep face same SE three-quarter front, head/bun same size, torso minimally bent, full legs bend slightly; death collapse continues in next row. Preserve character scale, do not enlarge or rescale cell, no new accessories. Clean magenta background and no outlines of grid in repaired cell. Exact same canvas aspect2:1 and equal square cells. Only cell3 will be extracted by the cell-local repair tool; other cells unchanged.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:45:31 UTC",
+  "utcEnd": "2026-11-06 21:45:54 UTC",
+  "selectedOutput": "SE/sheets/die.repair1.generated.png",
+  "references": ["SE/sheets/die.generated.png", "reference/SE.master-crop.png"],
+  "attempt": 2
+}

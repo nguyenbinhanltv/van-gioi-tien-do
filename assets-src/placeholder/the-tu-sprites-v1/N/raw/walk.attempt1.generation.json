@@ -1,0 +1,18 @@
+{
+  "clip": "walk",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:32:23 UTC",
+  "prompt": "Production frame-by-frame WALK NORTH sprite sheet for Van Gioi Tien Do, The tu A Son Mon Ho Ve. Image1 exactN master/style, image2 exactlayout/leading-legghostguide. EXACT 6 equalSQUARE columns 2 rows, 12 completefullbodyframes rowmajor, aspect6:2. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking. Twelve-frame WALK in place walking AWAY/UP, stay straightBACK camera. AnatomicalR=screenRIGHT boot, L=screenLEFT.1Rcontactforwardaway;2Rload;3Rmidstance/Lpassing;4Rpush/Lswing;5Lapproach;6Lprecontact;7Lcontact;8Lload;9Lmidstance/Rpassing;10Lpush/Rswing;11Rapproach;12Rprecontact. Alternate clearlywhichbootextendsawayandwhichheellifts, ratherthanallframesonepose. Followtemplate ghosts, minimalhiptranslation. Stableheight212; oneboot reachesgroundy232 inEVERYframe, shallowkneeflex only. Pure flatopaque#FF00FF background. Removeallgrid/borders/ghosts/dots/ticks/text/labels. No floor/shadows/blur/effects/scenery/afterimages. Onewholefigurepercell, no cropping or overlappingcells.",
+  "references": ["../../the-tu-continuous-v1/reference/N.master4x.png", "templates/walk.template.png"],
+  "selectedOutput": "sheets/walk.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:33:11 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-7471e43c-ffd3-40a1-8846-fc098777c74e.png",
+  "originalBackup": "raw/originals/walk.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting upright QA",
+  "finalGate": "export/engine-gate.json"
+}

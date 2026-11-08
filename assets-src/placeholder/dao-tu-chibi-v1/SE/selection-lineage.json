@@ -1,0 +1,22 @@
+{
+  "direction": "SE",
+  "scalePolicy": "One whole-sheet square-cell DPI normalization, then motion scale1. No individual frame fitting or rescale.",
+  "run": {
+    "original": "raw/run.png",
+    "selected": "raw/run.head-corrected.png",
+    "provenance": "run.head-corrected.provenance.json",
+    "decision": "Selected after enlarged head diagnostics, per-frame manual crown/chin/breadth evidence and passing official head gates. AI source head correction; body/feet remain authored drawings."
+  },
+  "attack_2": {
+    "original": "raw/attack_2.png",
+    "candidate": "raw/attack_2.clearance-candidate.png",
+    "selected": "raw/attack_2.clearance-repaired.png",
+    "cells": [3, 4],
+    "provenance": "attack_2.clearance-candidate.provenance.json",
+    "proof": "repair-proof.json",
+    "decision": "Original raised blade touched the native cell top. Only the two targeted AI-edit cells are selected; all other14cells are byte-identical. Equal-canvas assertion forbids repair resizing. Native margins and canvas-loss gates pass."
+  },
+  "otherSheets": "Unmodified raw AI outputs selected by project.json; exact prompts and references in sibling provenance files.",
+  "licence": "Original project references only. OpenAI Output under terms checked2026-11-08; model not disclosed by tool. Not stock or CC0.",
+  "termsUrl": "https://openai.com/policies/row-terms-of-use/"
+}

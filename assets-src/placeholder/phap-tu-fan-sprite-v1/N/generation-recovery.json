@@ -1,0 +1,119 @@
+{
+  "reason": "Usage-limit interruption before final five per-call metadata could be persisted. Original PNGs retained; no replacement generation.",
+  "batchInvocationUtc": "2026-11-06T22:59:18.256Z",
+  "promptDerivation": "N idle common prefix plus the logged cohort3 mapping of saved NE action text, followed by logged N full-back suffix. Exact final prompt and references are in provenance.json.",
+  "utcBasis": "For these five only: start from batch invocation timestamp in authoring session log; end from original generated PNG LastWriteTimeUtc. Per-call JS clock is not claimed to be recovered.",
+  "outputs": [
+    {
+      "id": "B.N.channel",
+      "file": "sheets/channel.generated.png",
+      "sha256": "b02956ebeeca2c2f0aa9823bb8cd38d91d40128417d2b41a6347f36f769e64ba",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T22:59:39.819Z",
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      }
+    },
+    {
+      "id": "B.N.die",
+      "file": "sheets/die.generated.png",
+      "sha256": "5bb8e9fc8933f05580413e56e4386517db890deeaa35ae30780a6b7b0d45811d",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:03.607Z",
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      }
+    },
+    {
+      "id": "B.N.emote",
+      "file": "sheets/emote.generated.png",
+      "sha256": "38f694a2cd6f05bcbb4a3f876743b6274c16f72fbe02db55bcf70cb7740b8183",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:01:06.867Z",
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      }
+    },
+    {
+      "id": "B.N.hit",
+      "file": "sheets/hit.generated.png",
+      "sha256": "890c470eb28dd55fdae56985009377ab15e5422d84f2e781ef0bb54d11bbff1c",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:26.874Z",
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      }
+    },
+    {
+      "id": "B.N.tribulation",
+      "file": "sheets/tribulation.generated.png",
+      "sha256": "88427063c3b6ccb03c7ecc5c316da2e36a1193b8802177e34c2429770bd5ac40",
+      "utcStart": "2026-11-06T22:59:18.256Z",
+      "utcEnd": "2026-11-06T23:00:47.790Z",
+      "recovery": {
+        "reason": "Usage-limit interruption lost in-memory per-call records before save. Existing output PNGs recovered, never regenerated.",
+        "utcBasis": "Start is logged batch invocation UTC; end is original generated PNG LastWriteTimeUtc, not a recovered per-call JS clock.",
+        "promptBasis": "Deterministic reconstruction from logged N cohort3 mapping, saved N idle common prefix and saved NE cohort3 action strings; exact mappings retained in authoring session log."
+      }
+    }
+  ],
+  "derivation": {
+    "nCommon": {
+      "file": "provenance.json",
+      "id": "B.N.idle",
+      "splitBefore": "EXACT4columns"
+    },
+    "neActions": {
+      "file": "../NE/provenance.json",
+      "sha256": "456cd85f81bb82434d984a522d02fbddf11997289d76b2df0207eb7d7fdb58ab",
+      "baseId": "B.NE.idle",
+      "splitBefore": "EXACT4columns"
+    },
+    "replacements": [
+      ["NEbackthreequarter", "FULLSTRAIGHTBACKnorth"],
+      ["FULL BACK", "FULL STRAIGHT BACK"],
+      ["up-right", "up-screen"],
+      ["RIGHTnear", "RIGHTviewerRIGHT"],
+      [
+        "EXACT4columns x1row=4squarecells, overall4:1 aspect.",
+        "EXACT2columns x2rows=4squarecells, overall1:1 SQUAREcanvas."
+      ]
+    ],
+    "suffix": " FULLSTRAIGHTBACKNORTHawayup-screen inEVERYframe; noNE/SE/frontview. RIGHT=viewerRIGHTfanhand,LEFTempty. Keepphysicalhead/torso/fanscaleNidle; foldedposesmustnotzoom.",
+    "verified": [
+      {
+        "id": "B.N.channel",
+        "promptSha256": "5f8bc2f47468e2365f6cca84fb86e61f1dc5eaa801786ecedaa39d536afb6ec0",
+        "matches": true
+      },
+      {
+        "id": "B.N.die",
+        "promptSha256": "6091cf1afc0abd94d47e4a19ed27986bccb505560cd8fa4a5b94a7700347f51f",
+        "matches": true
+      },
+      {
+        "id": "B.N.emote",
+        "promptSha256": "c6b311df50c9a13593d3a526aa9afec890df094bdc364f7e9ba5a142960cf9b5",
+        "matches": true
+      },
+      {
+        "id": "B.N.hit",
+        "promptSha256": "2bae1b8fef5eaadf19fc062e1cdcd427cf8e731d246baac40bf77509f064e8cf",
+        "matches": true
+      },
+      {
+        "id": "B.N.tribulation",
+        "promptSha256": "9bac95b30a0eb26ba6a27fb83761e2178286b7cfbf2707a389e674228f4a39e6",
+        "matches": true
+      }
+    ]
+  }
+}

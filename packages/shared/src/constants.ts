@@ -182,9 +182,22 @@ export const COLLIDER_RADIUS_TILES = 0.35;
 export const HURTBOX_RADIUS_TILES = 0.45;
 export const PICK_BOX_PX = { width: 48, height: 100 } as const;
 
+/**
+ * Hit volumes by square footprint (docs/03 §5 "Quy đổi kích thước theo footprint"). Radii are in tiles (logic
+ * space), pick box in px @1x (screen space, bottom edge at the pivot). 8 × 8 bosses have per-part volumes instead,
+ * so there is no row. Elite monsters (canvas 192) are 1 × 1 logically (docs/31 F-05 default).
+ */
+export const HIT_VOLUMES_BY_FOOTPRINT = {
+  '1x1': { colliderRadius: COLLIDER_RADIUS_TILES, hurtboxRadius: HURTBOX_RADIUS_TILES, pickBox: PICK_BOX_PX },
+  '2x2': { colliderRadius: 0.8, hurtboxRadius: 0.95, pickBox: { width: 120, height: 180 } },
+  '4x4': { colliderRadius: 1.7, hurtboxRadius: 1.9, pickBox: { width: 240, height: 340 } },
+} as const;
+
 // ---------------------------------------------------------------- gameplay structure
 export const REALM_COUNT = 9;
 export const TOTAL_STAGES = 41;
 /** Luyện Khí has 9 sub-stages; every other realm has 4 (Sơ, Trung, Hậu, Viên Mãn). */
 export const LUYEN_KHI_SUBSTAGES = 9;
 export const DEFAULT_SUBSTAGES = 4;
+/** D46/D58: each premium semi-chibi drawing occupies one tick of this export clock. */
+export const SPRITE_SMOOTH_FPS = 24;

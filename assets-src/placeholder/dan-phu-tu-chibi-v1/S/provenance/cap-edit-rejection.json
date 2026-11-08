@@ -1,0 +1,11 @@
+{
+  "utc": "2026-11-08T05:56:05.403Z",
+  "decision": "Orchestrator rejects cap-only extra coil bands as fixed-hairstyle identity drift; style23 independently cannot certify newstripe or oldjunction as visible crown.",
+  "activeSources": {
+    "run": "raw/run.attempt1.png",
+    "hit": "raw/hit-dash.attempt1.png",
+    "dash": "raw/hit-dash.attempt1.png"
+  },
+  "replacementAuthorization": "Deterministic HEAD-ROI-only uniform scale about locked chin/neck base, max absolute5%, Lanczos3 feathered ROI, outside-mask exact RGBA, D57,4x seam review. No body/frame scale.",
+  "pending": "Actual crown evidence must follow project topmost >=2 maincap run excluding elevatedbun; no inferred/stripe-based pass. D60 only after merge and eligible contract."
+}

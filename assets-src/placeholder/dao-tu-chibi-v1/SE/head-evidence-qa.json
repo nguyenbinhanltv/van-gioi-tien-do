@@ -1,0 +1,499 @@
+{
+  "scope": "Evidence-only contract refresh; no rendered art/timing writes.",
+  "projectSha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c",
+  "contractSha256": "cd0e5d94d9eda29609b46fc708bfbc1d53c2b0b4bf00bd5f62a707c3fed9435e",
+  "qa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 22,
+    "regression": 0,
+    "info": 491
+  },
+  "headBandFailures": [],
+  "paletteHardFailures": [],
+  "headBandBefore": [],
+  "clock": {
+    "timingProfile": "smooth-v2",
+    "frameRate": 24,
+    "unchanged": true
+  },
+  "temporalReview": [
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "run",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.32568024250515965,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.3257, torso 0.6116; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "run",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3934454521860174,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.4733, torso 0.3934; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "run",
+      "frame": 14,
+      "metric": "temporal_review_by_eye",
+      "value": 0.41766368154530403,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 13->14; head 0.8224, torso 0.4177; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.42479638654812346,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.8099, torso 0.4248; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2431125328590277,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.6938, torso 0.2431; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.32770687909365037,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.5629, torso 0.3277; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.0000, torso 0.5425; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.14829467169056954,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.1483, torso 0.6413; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.0000, torso 0.3274; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.11031144781459956,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.6557, torso 0.1103; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.37874597529699455,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.4715, torso 0.3787; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 13,
+      "metric": "temporal_review_by_eye",
+      "value": 0.24427319767487657,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 12->13; head 0.2443, torso 0.3057; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.0000, torso 0.0815; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.136816720864114,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.1368, torso 0.2036; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3873005238031502,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.3873, torso 0.5960; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2652761469335633,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.8272, torso 0.2653; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 12,
+      "metric": "temporal_review_by_eye",
+      "value": 0.12207015593192988,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 11->12; head 0.1221, torso 0.3503; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 13,
+      "metric": "temporal_review_by_eye",
+      "value": 0.23852324289597931,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 12->13; head 0.2385, torso 0.6285; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.20665533124633315,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.2067, torso 0.4975; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.15235973102520511,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.3449, torso 0.1524; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.1814271295188089,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.3646, torso 0.1814; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 12,
+      "metric": "temporal_review_by_eye",
+      "value": 0.28868379935321303,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 11->12; head 0.3709, torso 0.2887; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 13,
+      "metric": "temporal_review_by_eye",
+      "value": 0.16829706634289135,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 12->13; head 0.1683, torso 0.3762; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.28620224962595636,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.2862, torso 0.3413; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 2,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 1->2; head 0.1764, torso 0.0000; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.260624802861154,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.3130, torso 0.2606; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4153967496758657,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.6548, torso 0.4154; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.3867, torso 0.0000; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.11400632211302834,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.5640, torso 0.1140; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "channel",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.16082013842616116,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.1608, torso 0.5171; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.326723544390831,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.5843, torso 0.3267; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2581427427867148,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.2893, torso 0.2581; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.44814159062649606,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.4749, torso 0.4481; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.6328, torso 0.0000; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.07327373801732355,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.0733, torso 0.4794; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3104543107976939,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.3105, torso 0.3355; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3684281560918385,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.5328, torso 0.3684; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 14,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2854893308737834,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 13->14; head 0.2855, torso 0.3163; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "emote",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.40503454933782373,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.4050, torso 0.7040; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "emote",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.17488087450108944,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.1749, torso 0.7066; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "hit",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2758649012607206,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.2759, torso 0.5597; centroid-fallback; D41 pose pair"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3735633354213851,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.8435, torso 0.3736; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4474703048129491,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.6106, torso 0.4475; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.44959886719182085,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.8496, torso 0.4496; landmarks"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.40802011171869007,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.4080, torso 0.6106; landmarks"
+    }
+  ],
+  "renderInputs": [
+    {
+      "file": "daotuchibi_SE_ske.json",
+      "sha256": "76431c4cd6a959170b4d005aa205e015f7a30d7f4ec78ecbd1f0b954f2598514",
+      "unchanged": true
+    },
+    {
+      "file": "daotuchibi_SE_tex.json",
+      "sha256": "1e418b94587e6bec08e1f1fd60c4d10328817b447ba7f1675cc2db8a149eee6c",
+      "unchanged": true
+    },
+    {
+      "file": "daotuchibi_SE_tex.png",
+      "sha256": "a30116cf59f36bc26b44bbdb80f284f5f14c95eb7da5c9881ed55b8de3c8e358",
+      "unchanged": true
+    },
+    {
+      "file": "daotuchibi_SE_page1_tex.json",
+      "sha256": "80da4de41597bb1de34fad801340940cbd94e774639e7981ccdbf13cc87df2b3",
+      "unchanged": true
+    },
+    {
+      "file": "daotuchibi_SE_page1_tex.png",
+      "sha256": "f090d08d62a1be33f7011113349eff1feb26af3b1feddbe46258fe02e1f974f7",
+      "unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "character": "thuong-tu-chibi-v1",
+  "direction": "E",
+  "delivery": "D41 full-source compatibility motion; extraction follows all five directions",
+  "utcRecorded": "2026-11-08T04:51:23.064268+00:00",
+  "source": {
+    "command": "npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1",
+    "exitCode": 0,
+    "projectSha256": "4a1f6fc410ab916a399b20cf0bd46ccb4badb74b7d6ee045bc17a2bced33eefe",
+    "clips": 15,
+    "drawings": 202,
+    "qa": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 26,
+      "regression": 0,
+      "info": 440
+    },
+    "atlas": {
+      "pages": 2,
+      "width": 2048,
+      "height": 2048,
+      "regions": 202,
+      "textures": ["thuongtuchibi_E_tex", "thuongtuchibi_E_page1_tex"]
+    },
+    "exports": [
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E.sprite.json",
+        "sha256": "a5c664cac075064346246a62a52542ef50c835cc9d04bbcf6b7e3a1b3ad08e7d"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.json",
+        "sha256": "d638d47e35919dba547b140c8297248ccd550719df32e642f9334a91856e31b4"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_page1_tex.png",
+        "sha256": "3ffe8febd5e699a78454e06b7fbe7f5d5988e0822f03ccafee53245b177d4674"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_ske.json",
+        "sha256": "19fa7f6c6a10d7676c6efa76d91b981256755f64e46534e38f5afa4fafdf9e22"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.json",
+        "sha256": "bfaa47bc40c5b58a859a22272b04a5dee28c45bfe0ccde781d4e685bcfb3c106"
+      },
+      {
+        "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.png",
+        "sha256": "66cea985554281949e88d49abfa6185b301a0fe7e5c060362c9bad540a708e97"
+      }
+    ],
+    "verifiedGitHead": "c7b692f7b7f1d1e32ccc32eff47eceeb4648f212"
+  },
+  "heads": {
+    "reviewed": 24,
+    "masterSizePx": 52.54635126383058,
+    "rangePx": [50.99019513592785, 54.03008421240892],
+    "masterSha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+    "reviewSha256": "e112ec98563db927be80c3ce9987b0fbb53ba48b73ac4aa600efff554ad1b9bd"
+  },
+  "D54": {
+    "projects": 1,
+    "cells": 24,
+    "pass": 24,
+    "fail": 0,
+    "unmeasured": 0,
+    "auditSha256": "502d37df521615abde43b1c365fde62e3d1feb50e3a66db8cb9956dfe09be847"
+  },
+  "matte": {
+    "settings": {
+      "spill": {
+        "threshold": 12,
+        "strength": 1,
+        "keepDistance": 36,
+        "asymmetric": {
+          "maxImbalance": 80,
+          "edgeRadius": 2
+        }
+      },
+      "inner": 35,
+      "outer": 135
+    },
+    "comparisonSha256": "64816461e30271642c135aafac65ab6d3bbae9cb6e6964c8bbfaa9c37cd5a95e",
+    "visualReview": "All202 source poses; dark/light representative edges and worst RGB candidates; no objectionable halo observed at2x. Red sash/pennon geometry/interiors intact. Captured native Cocos PNGs reviewed separately from GIF palette previews."
+  },
+  "cocos": {
+    "wrapperExitCode": 0,
+    "creatorExitCode": 36,
+    "environmentNote": "web-mobile build task finished and fresh index.html was produced. Afterwards editor window recovery failed because global editor/window.json was truncated. Existing wrapper validates fresh output rather than unreliable editor exit; all15 live runtime captures then completed. No global editor profile was modified.",
+    "clips": 15,
+    "distinctSourceImages": 202,
+    "captureRecordSha256": "c2f7415104574617364e53a978803c47fdd09405422beb0477b3e0fb5648c776",
+    "runtimePayloadRecheck": "After merged D54 strict rebuild, both atlas PNGs, both texture JSONs and skeleton JSON match captured bytes. Only diagnostic .sprite.json changed (142 additional INFO records)."
+  },
+  "D45": {
+    "guideCount": 14,
+    "provenanceSha256": "0145b87d72a0ae4e7f7c5cb3488f57d74137dfcb45388524a8900f6823ad0db2"
+  },
+  "repositoryChecks": {
+    "npm ci": "pass",
+    "typecheck": "pass",
+    "test": "pass, including 36 sprite files / 300 sprite tests",
+    "build": "pass",
+    "lint": "pass",
+    "format:check": "Known main ASSET-LICENSES.md baseline only; own appended section formatted independently",
+    "repairProofs": "12 replayed, unrelated cells unchanged",
+    "utf8": "No U+FFFD or question mark inside words in new text",
+    "licensePrefix": "Existing main content preserved byte-for-byte after line-ending normalization"
+  },
+  "timing": {
+    "profile": "smooth-v2",
+    "clockHz": 24,
+    "oneTickDrawings": 202,
+    "provenanceSha256": "e3c5d75838d72ca5d3630be17319ea383919d4ec50ccc647557ba0feef8bc8e1",
+    "captureDirectory": "thuong-E-cocos-24hz",
+    "historicalCapture": "cocos-capture.json records the original30Hz capture; timing-24hz.provenance.json records the corrected runtime."
+  }
+}

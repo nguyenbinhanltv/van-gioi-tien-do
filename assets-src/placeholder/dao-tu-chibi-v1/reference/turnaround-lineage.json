@@ -1,0 +1,31 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcRecordedCompleted": "2026-11-07T23:34:51.136Z",
+  "records": [
+    {
+      "name": "T1-turnaround.attempt1",
+      "prompt": "Use case: identity-preserve. Production T1 DAO TU Storm Reaver TURNAROUND from exact attached canonical front master. Five equally spaced full-body views LEFT TO RIGHT E (strict profile looking screen right), SE (front three-quarter looking down-right), S (exact front looking viewer, copy reference face), NE (rear three-quarter looking up-right), N (back directly away). All same man, same scale, same crown and sole rows across five views. Preserve face/grey eyes/swept fringe/low loose black ponytail and T1 plain sleeveless dark muted teal tunic, storm grey-blue collar and sash, short split overskirt, loose dark trousers, dark boots/bracers minimal dull brass. Same heavy broad single-edge dao on RIGHT shoulder with sparse ink mountain blade, plain guard; rotate weapon naturally with character. Strict semi-chibi 4.5heads: crown-to-chin22% anatomical H, eyes16% below crown. No enlarged child head, no realistic small head. Keep anatomical shoulders lean. Use consistent game isometric elevated camera (slightly see boot tops) for all five; E silhouette profile, SE both eyes, NE rear cheek only, N no face. No body shrink to fit weapon. Entire bodies, ponytails and entire blades fit each equal-width panel with margin; do not overlap. Opaque uniform pure RGB255,0,255 MAGENTA background. NO lines/text/labels/borders/shadows/FX, no mantle, no gold embroidery, no new gear. Wide horizontal five-view character model sheet at large native resolution. Face lock is critical.",
+      "utcStarted": "2026-11-07T23:31:51.604Z",
+      "reference": "raw/T1-front.face-correction.png",
+      "status": "unselected; head drift",
+      "retainedOutput": "raw/T1-turnaround.attempt1.png"
+    },
+    {
+      "name": "T1-turnaround.head-correction",
+      "prompt": "Use case: precise-object-edit. Repair HEAD PROPORTIONS ONLY on this exact five-view DAO TU turnaround. Each figure has crown-to-sole height roughly660px but heads are too small at110-130px. Enlarge the ENTIRE head and skull-attached hair uniformly by approximately25% in EACH of five views E SE S NE N, around the base of neck. Target MAIN HAIR CROWN to chin about145-150px, 22% anatomical height, eyes105-110px below crown, 16%. Rear views have same skull size as front; match rear head breadth and crown-to-shoulder to front. Preserve same adult male face identity, stern grey eyes, swept fringe, low ponytail. Do not grow body or limbs, do not shrink whole characters, do not change tunic/sash/sword sizes, gear or pose. Adjust sword/head overlap naturally, keep face clear and entire weapon visible. Same equal five-panel layout, feet/crown consistent between views. Pure opaque RGB255,0,255 magenta background, no text, shadows or FX. All five heads need proportional enlargement, not just face.",
+      "utcStarted": "2026-11-07T23:33:13.249Z",
+      "reference": "raw/T1-turnaround.attempt1.png",
+      "status": "unselected; E eye line high",
+      "retainedOutput": "raw/T1-turnaround.head-correction.png"
+    },
+    {
+      "name": "T1-turnaround.E-face-correction",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the FIRST LEFTMOST E PROFILE HEAD on this exact five-view Dao tu sheet. The E eye is too high and chin too short: keep main attached hair crown near y55 on793-high sheet, place E visible grey eye near y164 (currently145), chin near y210 (currently194). So move E eye/brow/nose/mouth/chin LOWER about17-20pixels, elongating just the lower head inside same swept hair. Keep neck join natural; goal E main-crown-to-chin155px for bodyH695px, eye109px below crown =15.7%. Preserve stern adult face identity, profile nose, no child face. Do NOT change E hair crown, body, tunic, sword, arm, ponytail, feet or pose. Other FOUR figures SE S NE N remain visually exactly unchanged. Same full1983x793 sheet layout, opaque pure magenta background, no text/FX. Do not shift or resize whole panels.",
+      "utcStarted": "2026-11-07T23:34:09.390Z",
+      "reference": "raw/T1-turnaround.head-correction.png",
+      "status": "selected turnaround candidate; landmarks in master-landmarks.json",
+      "retainedOutput": "raw/T1-turnaround.E-face-correction.png"
+    }
+  ]
+}

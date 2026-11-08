@@ -1,0 +1,18 @@
+[
+  {
+    "path": "SE/generation-templates/walk.template.png",
+    "sha256": "69a89fa81559afaf25a2f29ccdb337e18b871fa38155fe60fe0b7db3b40f9cab"
+  },
+  {
+    "path": "SE/generation-templates/walk.template.json.source",
+    "sha256": "cd8b6f70f4256c2f4e1ae68de33fd620b1eb5623b629967a5e436fc757ebf3a9"
+  },
+  {
+    "path": "SE/generation-templates/run.template.png",
+    "sha256": "a400acd81e323d9ad6b02247c8e4118921018caaeee53097e1a7a152504077ea"
+  },
+  {
+    "path": "SE/generation-templates/run.template.json.source",
+    "sha256": "7d529a839012432a2fc5c70cb09a6f8a85a9e0c0a9116411abfe8bb4463b9a8d"
+  }
+]

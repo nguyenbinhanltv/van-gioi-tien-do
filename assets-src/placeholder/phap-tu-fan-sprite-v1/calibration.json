@@ -1,0 +1,9 @@
+{
+  "method": "locked after first E idle/run pilot; whole-sheet DPI normalized before one character scale",
+  "targetHeight": 208,
+  "referenceHeight": 237,
+  "referenceFrames": 20,
+  "scale": 0.8776371308016878,
+  "references": ["E/sheets/idle.png", "E/sheets/run.png"],
+  "noPerFrameScale": true
+}

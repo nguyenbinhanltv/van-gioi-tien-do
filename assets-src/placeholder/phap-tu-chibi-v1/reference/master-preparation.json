@@ -1,0 +1,102 @@
+{
+  "source": "T1-turnaround.raw.png",
+  "sourceSha256": "fe73228bdd26965b627cffe920f17dee3999e1a9030b3bdddb17e2824c76dd31",
+  "cropBottom": 657,
+  "panelEdges": [0, 435, 848, 1262, 1697, 2172],
+  "calibration": {
+    "scale": 0.3769633507853403,
+    "targetHeight": 216,
+    "referenceHeight": 573,
+    "referenceFrames": 1
+  },
+  "guides": {
+    "ground": 232,
+    "head": 16,
+    "pelvis": 124,
+    "centerX": 129
+  },
+  "records": [
+    {
+      "direction": "E",
+      "file": "reference/E.master.png",
+      "pre": {
+        "height": 217.8848167539267,
+        "pelvisX": 84.42698318123948,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.67948717948718,
+        "soleY": 232
+      },
+      "dx": 44.57301681876052,
+      "dy": -12.649214659685867
+    },
+    {
+      "direction": "SE",
+      "file": "reference/SE.master.png",
+      "pre": {
+        "height": 217.8848167539267,
+        "pelvisX": 67.9844356124782,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.7565695174391,
+        "soleY": 232
+      },
+      "dx": 61.015564387521806,
+      "dy": -12.649214659685867
+    },
+    {
+      "direction": "S",
+      "file": "reference/S.master.png",
+      "pre": {
+        "height": 217.50785340314135,
+        "pelvisX": 70.72229721553391,
+        "soleY": 244.27225130890054
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.70530757272928,
+        "soleY": 232
+      },
+      "dx": 58.277702784466086,
+      "dy": -12.272251308900536
+    },
+    {
+      "direction": "NE",
+      "file": "reference/NE.master.png",
+      "pre": {
+        "height": 217.13089005235602,
+        "pelvisX": 76.45148237375355,
+        "soleY": 243.89528795811518
+      },
+      "post": {
+        "height": 217,
+        "pelvisX": 128.64982803095444,
+        "soleY": 232
+      },
+      "dx": 52.54851762624645,
+      "dy": -11.895287958115176
+    },
+    {
+      "direction": "N",
+      "file": "reference/N.master.png",
+      "pre": {
+        "height": 217.13089005235602,
+        "pelvisX": 79.38511965891526,
+        "soleY": 243.89528795811518
+      },
+      "post": {
+        "height": 217,
+        "pelvisX": 128.63858939802336,
+        "soleY": 232
+      },
+      "dx": 49.61488034108474,
+      "dy": -11.895287958115176
+    }
+  ],
+  "anatomySource": "anatomy-landmarks.json",
+  "note": "Shared source scale across all directions from anatomical crown-to-sole height, excluding ornaments. No per-view or per-frame height normalization. Alpha bounds are separate diagnostics; anatomy landmarks retain manual uncertainty."
+}

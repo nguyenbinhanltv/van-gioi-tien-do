@@ -1,0 +1,275 @@
+{
+  "reviewedUtc": "2026-11-07T23:32:34.582Z",
+  "method": "Manual visible skull-cap/jaw landmarks in exact pipeline-aligned 256px cells; detector candidates joining the neck were rejected.",
+  "master": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 130,
+      "y": 16
+    },
+    "chin": {
+      "x": 131,
+      "y": 64
+    }
+  },
+  "clips": {
+    "run": {
+      "1": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130.5,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "2": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130.5,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "3": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130.5,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "4": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 131,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "5": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 131,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "6": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 131,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "7": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "10": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 131,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "11": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 131.5,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "12": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130.5,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "13": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "14": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 29
+        },
+        "chin": {
+          "x": 130,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      },
+      "15": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 129,
+          "y": 29
+        },
+        "chin": {
+          "x": 129,
+          "y": 77
+        },
+        "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+      }
+    },
+    "dash": {
+      "1": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 49
+        },
+        "chin": {
+          "x": 130.5,
+          "y": 97
+        },
+        "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+      },
+      "2": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 44
+        },
+        "chin": {
+          "x": 130,
+          "y": 92
+        },
+        "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+      },
+      "3": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 44
+        },
+        "chin": {
+          "x": 130,
+          "y": 92
+        },
+        "note": "Reviewed exact aligned256px S dash3: same main skull-cap semantics as locked S master and dash2, excluding elevated bun/curl, pins, tassel and ribbon. Top main-cap row44 has a contiguous qualifying run at x128..132, midpoint130, alpha>=128; visible chin outline ends row92 at x130, excluding neck. No projection, repaint, scale change or pose exemption; D55 uses the anchored window."
+      },
+      "4": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 130,
+          "y": 54
+        },
+        "chin": {
+          "x": 131,
+          "y": 103
+        },
+        "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+      },
+      "5": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 131,
+          "y": 59
+        },
+        "chin": {
+          "x": 131,
+          "y": 108
+        },
+        "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+      },
+      "6": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 132,
+          "y": 58
+        },
+        "chin": {
+          "x": 132,
+          "y": 106
+        },
+        "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+      }
+    },
+    "emote": {
+      "9": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 131,
+          "y": 25
+        },
+        "chin": {
+          "x": 132,
+          "y": 73
+        },
+        "note": "Reviewed selected emote source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Emote posture retained at fixed global scale. No frame fitting or rescaling."
+      }
+    }
+  },
+  "dash3D55Followup": {
+    "method": "Evidence-only: main-cap crown excluding elevated bun matches stored S master semantics; same rule as existing dash2. Main-cap qualifying run128..132 row44; chin outline row92.",
+    "artUnchanged": true,
+    "crown": {
+      "x": 130,
+      "y": 44
+    },
+    "chin": {
+      "x": 130,
+      "y": 92
+    }
+  }
+}

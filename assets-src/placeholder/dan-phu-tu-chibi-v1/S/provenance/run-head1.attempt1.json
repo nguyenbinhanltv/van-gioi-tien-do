@@ -1,0 +1,28 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:18:50 UTC"
+  },
+  "prompt": "PRECISE LOCAL HEAD REPAIR of image1 original16frame SOUTH RUN sheet, same1254square4x4 layout. Image2 is INPUT-ONLY canonical master-head size/face stencil at existing neck anchors on affected cells; it may have rough magenta patch boundaries, DO NOT copy patch cuts into body or whisk. Image3 approved S master identity. Change ONLY skull/face/maincap/bun and tiny jaw-neck joining area in zero-based cells0,1,2,3,6,7,8,9,10,13,14,15. Their old heads are oversized; repaint to match the unscaled canonical head in image2 (53logicalpixel cap-to-chin, about65nativepx at this whole-sheet DPI) while preserving EXACT approved face, eyes/brows, hair design and existing chin/neck anchor. Keep cells4,5,11,12 EXACTLY unchanged. All body/neck below joining line, shoulders, sleeves, hands, whisk, sash, robe, legs, shoes, root position, running phase and camera remain PIXEL IDENTICAL to image1. Restore any whisk/background rough cuts present only in image2 from original image1. No leg or body pose flattening, no body scaling, no new design, no head tilt/face changes. This is a subtle~4% smaller HEAD ONLY, never a wholefigure reduction. Smooth hair/skin outlines and clean continuous natural jaw-neck join. Preserve original pure #FF00FF background, all16full figures, exactcellregistration, source dimensions1254x1254, no grids/text/newobjects. The input stencil is a size/identity guide; output head must be a seamless AI repaint matching original rendering, not a pasted cropped square.",
+  "inputs": ["raw/run.attempt1.png", "templates/run.head-repair-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/run-head1.attempt1.png",
+  "status": "unselected raw head-repair candidate; masked selection and actual head remeasurement pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-dda87ba8-e83a-4848-9399-edc3118b9aef.png",
+  "sha256": "a6fc4c73f5b74763ad522045ec9f4704f43bdddc60f491c4d95f61c6bff0dbfe",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "raw/run.attempt1.png",
+      "sha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673"
+    },
+    {
+      "file": "templates/run.head-repair-guide.png",
+      "sha256": "c9d1be73d87f8303d8b83a67ec8a57be4ccd9dde25ea0b0decd524beceda0542"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

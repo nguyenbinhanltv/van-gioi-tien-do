@@ -1,0 +1,13 @@
+{
+  "id": "E.master-generated",
+  "prompt": "Refine the attached generated Thể tu master (second reference), using original concept sheet (first reference) for identity. ONE E-direction right-facing side-profile production rig master, slight overhead isometric view. IMPORTANT square composition: the ENTIRE character must fit in a SQUARE 1024x1024 canvas, figure from bun to boots occupies only 76% height, all sides at least 10% transparent margin. Make body COMPACT, STOCKY, 5.75 heads tall, earth tank: wide chest and shoulders, stout short legs, thick ivory sleeves and generous trousers. Short top bun with jade hairpin. Ivory cross collar inner robe #E9EEF0; mountain-blue #5E8798 short sleeveless split tabard with bronze #B58A4A cloud trim; dark blue #294451 sash knot and two tails; dark boots; paired chunky bronze stone block gauntlets meander emblem, pale ochre #E3C07F highlights #5B4222 shadows. Neutral straight A pose: arms nearly straight 20 degrees away, no bent elbow, hands relaxed, arms separated from torso enough to register individual pieces, far arm visible. Feet planted slightly apart, both boots fully visible. Clean dark game sprite contours, soft 2-3 tone cel shading, upper-left light, simplified fine detail for readability at 128px. Transparent alpha, no shadows, no ground, no text, no VFX. Do not crop, do not produce a tall portrait composition. Preserve all costume details.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-455f6f1d-af7e-494b-b8dc-0952299abdfc.png",
+  "selectedOutput": "reference/E.master-generated.png",
+  "utcStart": "2026-11-06 02:00:16 UTC",
+  "references": ["ao-artifact:van-gioi-tien-do-16/character-concepts/the-tu-a.png", "reference/E.master-attempt-1.png"],
+  "originalFileLastWriteUtc": "2026-11-06T02:00:56.489Z",
+  "timeNote": "Original generated file timestamp; does not replace an unrecorded generation start"
+}

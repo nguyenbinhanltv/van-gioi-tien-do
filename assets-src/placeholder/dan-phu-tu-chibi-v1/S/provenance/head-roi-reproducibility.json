@@ -1,0 +1,32 @@
+{
+  "utc": "2026-11-08T06:23:28.914Z",
+  "status": "PASS original-source reproduction of native image/mask hashes, not anatomy approval",
+  "generator": "repair-head-roi.ts",
+  "generatorSha256": "b4e4c3ba4942ef73432eb11ae96165a10d6dc23f41b499c954625a44cd7784c7",
+  "checks": [
+    {
+      "clip": "run",
+      "file": "raw/run.head-roi.v2.png",
+      "sha256": "ad73d1927722d79afc5a1361c7dcaf22d5a71309c359056e96b3a3082e7ff690",
+      "identical": true
+    },
+    {
+      "clip": "run",
+      "file": "repair/run.head-roi.v2.mask.png",
+      "sha256": "7fc195ec8842f6a993d97eb27c6721869ed15bcd1d8c96207c2424ade439f023",
+      "identical": true
+    },
+    {
+      "clip": "dash",
+      "file": "raw/hit-dash.head-roi.v2.png",
+      "sha256": "016d526f473c51d4e25c7420160ba4e746043baec333b061feebaba96eaf605a",
+      "identical": true
+    },
+    {
+      "clip": "dash",
+      "file": "repair/dash.head-roi.v2.mask.png",
+      "sha256": "28f453d5c362ed86919891a5712118293abf45566b23172a409f760fdf3b9905",
+      "identical": true
+    }
+  ]
+}

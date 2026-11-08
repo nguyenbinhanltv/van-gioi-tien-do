@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:59:20.065Z",
+  "utcRecordedCompleted": "2026-11-08T00:02:47.764Z",
+  "prompt": "Use case: precise-object-edit. Exact FIRST4x4template DAO TU T1 DIE collapse one-shot12 distinctframes0-11 rowmajor, final4cells EMPTY magenta.24fps. Image2 canonical E male. Same leanadult stern greyeyes/black sweptfringe/low looseponytail, anatomical216px and head50px/breadth38px per256cell; plain sleeveless darkmutedteal tunic/stormgreyblue collar+sash/darkpants+boots+bracers/minimalbrass. Same heavy BROAD mountain-ink single-edge dao alwayspresent, do not change into dagger. E-facingRIGHT, collapse realistically:0 shoulderready;1-2 staggering weakness/kneesbuckle, dao lowers inrightgrip;3-4 onone knee, leftpalm braces ground;5-7 sinks toside/hips, torso folds;8-10 settles on rightside/front with kneesbent and headlowered;11 finalmotionless fallenpose. Full body/head retain SAME size while rotating, no shrink; no disappearing limbs/weapon. Dao settles alongside body, no impalement, no blood/gore/FX. Fixed lattice registrationx128 ground232, keep sole/bodyground physicallycoherent; lateral fall must fitcell with8pxmargin naturally via bentknees, do not shrink. End all body/hair/weapon fullyinsidecell, no overlap/cropping. Noreturn-to-idle, finalsettledposehold. Head stencil is sizeguide only, can traveldown/rotate. Remove allguides/borders/headrectangles, opaque UNIFORM PURE RGB255,0,255 MAGENTA background; no shadows/text/labels. Premium painted semi-chibi lightNW, all12 unique inbetweens.",
+  "references": ["templates/die.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/die.png",
+  "status": "candidate; settled collapse reviewed, full QA pending"
+}

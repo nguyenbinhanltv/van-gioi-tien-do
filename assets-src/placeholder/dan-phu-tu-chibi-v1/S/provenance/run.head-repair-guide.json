@@ -1,0 +1,214 @@
+{
+  "kind": "INPUT-ONLY canonical head stencil; not final artwork or evidence",
+  "source": "raw/run.attempt1.png",
+  "master": "../reference/S.corrected-master.png",
+  "targetHead": "same unscaled53.009433px frontcap-to-chin as approved S master; source DPI uniformly1254/1024",
+  "cells": [0, 1, 2, 3, 6, 7, 8, 9, 10, 13, 14, 15],
+  "placements": [
+    {
+      "cell": 0,
+      "alignedNeckAnchor": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 157.0059334607409,
+        "y": 85.1103515625
+      },
+      "mask": {
+        "x0": 110,
+        "y0": 0,
+        "x1": 212,
+        "y1": 91
+      }
+    },
+    {
+      "cell": 1,
+      "alignedNeckAnchor": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 469.8382148449183,
+        "y": 85.1103515625
+      },
+      "mask": {
+        "x0": 423,
+        "y0": 0,
+        "x1": 526,
+        "y1": 91
+      }
+    },
+    {
+      "cell": 2,
+      "alignedNeckAnchor": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 782.1706804278745,
+        "y": 85.1103515625
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 0,
+        "x1": 839,
+        "y1": 91
+      }
+    },
+    {
+      "cell": 3,
+      "alignedNeckAnchor": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1096.1419411332918,
+        "y": 85.1103515625
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 0,
+        "x1": 1153,
+        "y1": 91
+      }
+    },
+    {
+      "cell": 6,
+      "alignedNeckAnchor": {
+        "x": 130.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 783.9818356866591,
+        "y": 398.6103515625
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 314,
+        "x1": 839,
+        "y1": 404
+      }
+    },
+    {
+      "cell": 7,
+      "alignedNeckAnchor": {
+        "x": 128.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1096.9770521907863,
+        "y": 398.6103515625
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 314,
+        "x1": 1153,
+        "y1": 404
+      }
+    },
+    {
+      "cell": 8,
+      "alignedNeckAnchor": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "sourceNeckAnchor": {
+        "x": 156.78202000553088,
+        "y": 713.3349609375
+      },
+      "mask": {
+        "x0": 110,
+        "y0": 627,
+        "x1": 212,
+        "y1": 719
+      }
+    },
+    {
+      "cell": 9,
+      "alignedNeckAnchor": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "sourceNeckAnchor": {
+        "x": 469.25473764147114,
+        "y": 713.3349609375
+      },
+      "mask": {
+        "x0": 423,
+        "y0": 627,
+        "x1": 526,
+        "y1": 719
+      }
+    },
+    {
+      "cell": 10,
+      "alignedNeckAnchor": {
+        "x": 126.5,
+        "y": 70.5
+      },
+      "sourceNeckAnchor": {
+        "x": 779.7636822022774,
+        "y": 713.3349609375
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 627,
+        "x1": 839,
+        "y1": 719
+      }
+    },
+    {
+      "cell": 13,
+      "alignedNeckAnchor": {
+        "x": 128.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 468.7518355283995,
+        "y": 1025.6103515625
+      },
+      "mask": {
+        "x0": 423,
+        "y0": 941,
+        "x1": 526,
+        "y1": 1031
+      }
+    },
+    {
+      "cell": 14,
+      "alignedNeckAnchor": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 783.4520492235451,
+        "y": 1025.6103515625
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 941,
+        "x1": 839,
+        "y1": 1031
+      }
+    },
+    {
+      "cell": 15,
+      "alignedNeckAnchor": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1096.9672750495195,
+        "y": 1025.6103515625
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 941,
+        "x1": 1153,
+        "y1": 1031
+      }
+    }
+  ],
+  "note": "Master head pasted ONLY into AI input guide. Actual output must be AI repainted, selected within reviewed mask with original source outside unchanged. No body/frame scaling. Old neck anchors held; D57 preserves pre-edit computed registration. Requested target is not proof of actual output size."
+}

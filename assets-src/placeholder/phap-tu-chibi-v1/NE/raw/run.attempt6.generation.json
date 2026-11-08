@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 6,
+  "prompt": "Surgical horizontal skull-cap width correction of IMAGE1 (edit target,16-frame4x4 NE run sheet). Image2 is locked canonical identity reference. The main skull-cap/compact coil in image1 remains about6% too broad. REDRAW JUST THE SKULL-CAP CORE in every cell about6% NARROWER, centered at its existing centreline. Do not change its crown Y, head height, neck length, ear/face attachment or shoulder position. Do not compress head height. Keep natural side-ear/cheek identity and coil/pins. Preserve the exact original body/arm/hand/fan LEFT-hand/leg/foot/sleeve/torso/sash poses, character scale, framing and cell positions; do not shrink entire figures. Streaming secondary hair/ribbons are outside this core correction and retain their motion. Target output main-cap maximum breadth52px after normalizing sheet to256px/cell and the fixed .947826 runtime scale: equivalent source logical256 cap breadth54.9px. The current cap measures55-56px after runtime, hence this small6% width reduction only. Keep the existing cap crown Y and head's vertical anatomy; do not introduce new large/small heads. All16 remain same fixed skull scale; preserve flight tucks and timing. Keep opaque pure magenta background,4x4 layout, no text/FX/new shadows. Premium original cel-shaded plum+vermilion+gold Phap tu T1 short tunic/trousers design, tinted outlines. Image2 guides identity, not a new pose or camera.",
+  "utcStart": "2026-11-08 02:13:52 UTC",
+  "utcEndObserved": "2026-11-08 02:14:59 UTC",
+  "references": ["NE/raw/run.attempt5.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt6.png",
+  "status": "selected partial head contributor; full body remains attempt1",
+  "headContributionCells": [5, 6, 7, 9, 13, 15],
+  "contributesTo": "prepared/run.png",
+  "rawSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+  "utcRawOutputFileModified": "2026-11-08T02:14:39.119Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/raw/run.attempt5.png",
+      "sha256": "90523094e744b0a9b08e91d952aaa4a3d2d52f694532ac0f5ce20d01b589a42d"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}

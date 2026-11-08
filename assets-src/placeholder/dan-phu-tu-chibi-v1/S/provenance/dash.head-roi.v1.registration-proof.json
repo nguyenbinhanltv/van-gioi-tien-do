@@ -1,0 +1,9 @@
+{
+  "utc": "2026-11-08T06:12:27.052Z",
+  "status": "PASS preservation only; anatomy/gates separate",
+  "all202RegistrationsExact": true,
+  "unchangedAlignedPngs": 187,
+  "changedHeadRoiFrames": 15,
+  "all6HitFramesIdentical": true,
+  "dashBodyBaseChangedBytes": 0
+}

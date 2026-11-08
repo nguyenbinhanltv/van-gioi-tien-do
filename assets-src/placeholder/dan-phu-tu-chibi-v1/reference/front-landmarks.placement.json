@@ -1,0 +1,257 @@
+{
+  "status": "construction candidate; approximate art landmarks from corrected T1, not an automatic detector",
+  "calibration": {
+    "scale": 0.18685121107266436,
+    "targetAnatomicalHeight": 216,
+    "referenceHeight": 1156,
+    "reference": "T1"
+  },
+  "records": [
+    {
+      "id": "T1",
+      "source": "raw/front.attempt8.png",
+      "output": "T1.corrected-front.png",
+      "rawDimensions": [1086, 1448],
+      "sourceDimensions": [1086, 1448],
+      "panel": {
+        "left": 0,
+        "right": 1086,
+        "height": 1448
+      },
+      "scale": 0.18685121107266436,
+      "sourceLandmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      },
+      "placedLandmarks": {
+        "crown": 16,
+        "sole": 232,
+        "eyes": 50.567474048442904,
+        "chin": 65.14186851211073,
+        "anatomicalHeight": 216,
+        "headFraction": 0.22750865051903113,
+        "eyeFraction": 0.16003460207612458,
+        "shoulderFraction": 0.2508650519031142
+      },
+      "sourceBounds": {
+        "left": 136,
+        "right": 837,
+        "top": 124,
+        "bottom": 1326,
+        "height": 1202,
+        "width": 701,
+        "pelvisX": 502.7577760899286
+      },
+      "placedBounds": {
+        "left": 51,
+        "right": 182,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 131,
+        "pelvisX": 118.71301217212412
+      }
+    },
+    {
+      "id": "T2",
+      "source": "raw/tier2.attempt2.png",
+      "output": "T2.corrected-front.png",
+      "rawDimensions": [1086, 1448],
+      "sourceDimensions": [1086, 1448],
+      "panel": {
+        "left": 0,
+        "right": 1086,
+        "height": 1448
+      },
+      "scale": 0.18685121107266436,
+      "sourceLandmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      },
+      "placedLandmarks": {
+        "crown": 16,
+        "sole": 232,
+        "eyes": 50.567474048442904,
+        "chin": 65.14186851211073,
+        "anatomicalHeight": 216,
+        "headFraction": 0.22750865051903113,
+        "eyeFraction": 0.16003460207612458,
+        "shoulderFraction": 0.2508650519031142
+      },
+      "sourceBounds": {
+        "left": 137,
+        "right": 837,
+        "top": 124,
+        "bottom": 1325,
+        "height": 1201,
+        "width": 700,
+        "pelvisX": 502.5996251503367
+      },
+      "placedBounds": {
+        "left": 51,
+        "right": 181,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 130,
+        "pelvisX": 118.65349596289298
+      }
+    },
+    {
+      "id": "T3",
+      "source": "raw/tier3.attempt2.png",
+      "output": "T3.corrected-front.png",
+      "rawDimensions": [1086, 1448],
+      "sourceDimensions": [1086, 1448],
+      "panel": {
+        "left": 0,
+        "right": 1086,
+        "height": 1448
+      },
+      "scale": 0.18685121107266436,
+      "sourceLandmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      },
+      "placedLandmarks": {
+        "crown": 16,
+        "sole": 232,
+        "eyes": 50.567474048442904,
+        "chin": 65.14186851211073,
+        "anatomicalHeight": 216,
+        "headFraction": 0.22750865051903113,
+        "eyeFraction": 0.16003460207612458,
+        "shoulderFraction": 0.2508650519031142
+      },
+      "sourceBounds": {
+        "left": 137,
+        "right": 837,
+        "top": 124,
+        "bottom": 1326,
+        "height": 1202,
+        "width": 700,
+        "pelvisX": 501.84722632953816
+      },
+      "placedBounds": {
+        "left": 51,
+        "right": 181,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 130,
+        "pelvisX": 118.50548876110821
+      }
+    },
+    {
+      "id": "T4",
+      "source": "raw/tier4.attempt2.png",
+      "output": "T4.corrected-front.png",
+      "rawDimensions": [1086, 1448],
+      "sourceDimensions": [1086, 1448],
+      "panel": {
+        "left": 0,
+        "right": 1086,
+        "height": 1448
+      },
+      "scale": 0.18685121107266436,
+      "sourceLandmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      },
+      "placedLandmarks": {
+        "crown": 16,
+        "sole": 232,
+        "eyes": 50.567474048442904,
+        "chin": 65.14186851211073,
+        "anatomicalHeight": 216,
+        "headFraction": 0.22750865051903113,
+        "eyeFraction": 0.16003460207612458,
+        "shoulderFraction": 0.2508650519031142
+      },
+      "sourceBounds": {
+        "left": 137,
+        "right": 837,
+        "top": 124,
+        "bottom": 1326,
+        "height": 1202,
+        "width": 700,
+        "pelvisX": 503.2818737421297
+      },
+      "placedBounds": {
+        "left": 51,
+        "right": 182,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 131,
+        "pelvisX": 118.80568556075576
+      }
+    },
+    {
+      "id": "T5",
+      "source": "raw/tier5.attempt2.png",
+      "output": "T5.corrected-front.png",
+      "rawDimensions": [1086, 1448],
+      "sourceDimensions": [1086, 1448],
+      "panel": {
+        "left": 0,
+        "right": 1086,
+        "height": 1448
+      },
+      "scale": 0.18685121107266436,
+      "sourceLandmarks": {
+        "crown": 170,
+        "eyes": 355,
+        "chin": 433,
+        "sole": 1326,
+        "pelvisX": 550,
+        "shoulders": [405, 695]
+      },
+      "placedLandmarks": {
+        "crown": 16,
+        "sole": 232,
+        "eyes": 50.567474048442904,
+        "chin": 65.14186851211073,
+        "anatomicalHeight": 216,
+        "headFraction": 0.22750865051903113,
+        "eyeFraction": 0.16003460207612458,
+        "shoulderFraction": 0.2508650519031142
+      },
+      "sourceBounds": {
+        "left": 137,
+        "right": 837,
+        "top": 124,
+        "bottom": 1325,
+        "height": 1201,
+        "width": 700,
+        "pelvisX": 501.3378489276484
+      },
+      "placedBounds": {
+        "left": 51,
+        "right": 181,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 130,
+        "pelvisX": 118.4426652892562
+      }
+    }
+  ],
+  "note": "Artist-selected anatomical landmarks; alpha bounds are separate. One scale across all inputs; translations only. No production animation QA claimed."
+}

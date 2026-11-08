@@ -1,0 +1,27 @@
+{
+  "clip": "die",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP die: EXACT12figures FOURcolumns THREErows4:3canvas. NonloopdeathcollapseNErear3quarter.0ready1stagger2kneesbuckle3-4dropkneeling5-7collapsegentlyontoside/backfacingcamera8-9settlelying10-11finalrestwithsmallhair/sleevelag. Skull/limb/anatomicalSCALEunchanged; usekneesbentandsafe diagonal curl ratherthanshrinking lyingbody. Headprogressivelylower followingstencils, no uprightstandinginlastframes. Leftfanremainsnaturallygrippedorrestingdirectlyinlefthand, nodisembodiedweapon. Preservebackviewhairbunpin/tassels, nofrontface reveal. Finalbody/hair/fan/feetallfitwithin256cell withmargin. No blood/injury/gore/FX/groundshadow/text/grid.",
+  "utcStart": "2026-11-08 00:11:51 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/die.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/die.attempt1.png",
+  "selected": "sheets/die.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:12:12 UTC",
+  "rawSha256": "b49cb5fce352ad81652d3c6c497da2b8a0997c06166d13297a1f4aa870e718f9",
+  "utcRawOutputFileModified": "2026-11-08T00:12:12.278Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/die.head-guide.png",
+      "sha256": "a4d3566108b1bfd9ecc8eb66752dcd68ccdac8b60892d3ff675e4326cbf796a4"
+    }
+  ],
+  "selectedSha256": "b49cb5fce352ad81652d3c6c497da2b8a0997c06166d13297a1f4aa870e718f9"
+}

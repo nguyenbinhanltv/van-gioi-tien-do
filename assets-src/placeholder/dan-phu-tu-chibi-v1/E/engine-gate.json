@@ -1,0 +1,316 @@
+{
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "direction": "E",
+  "source": "dragonbones/dan-phu-tu-chibi-v1/danphuchibi",
+  "zoom": 2,
+  "midpointSamplesPerClip": 24,
+  "captureExitCode": 0,
+  "utcCaptureIndexModified": "2026-11-07T23:41:46.088Z",
+  "captureIndexSha256": "d38554f95f8203c5b116b730321e1b0a05e4ba90e4ef842e49ef1e7a4352ca60",
+  "projectSha256": "aef17e6835fa8e045c407e1ce47d8159cbae879d5a46f8a6e076a6bd6dd50fb5",
+  "runtimeAssets": [
+    {
+      "file": "danphuchibi_E.sprite.json",
+      "sha256": "eb9ac6d1bdfa8bddae560106be2f58cc5a9d80e270bc7845b2bde835af9b7e9f",
+      "capturedSourceSha256": "eb9ac6d1bdfa8bddae560106be2f58cc5a9d80e270bc7845b2bde835af9b7e9f",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_E_page1_tex.json",
+      "sha256": "4c668362a763c739501354281f88ff896979ef0f2617309cfa013c75c6cd1dc2",
+      "capturedSourceSha256": "4c668362a763c739501354281f88ff896979ef0f2617309cfa013c75c6cd1dc2",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_E_page1_tex.png",
+      "sha256": "c382fe6a6770fe37c8bbcb72c351efb03d8fb14574f7166d4a2c4cac22c3bebb",
+      "capturedSourceSha256": "c382fe6a6770fe37c8bbcb72c351efb03d8fb14574f7166d4a2c4cac22c3bebb",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_E_ske.json",
+      "sha256": "fdfaf41cefdc40289da85ea1c9c4c69b2efd059e729de38d7f53bc96dea81afd",
+      "capturedSourceSha256": "fdfaf41cefdc40289da85ea1c9c4c69b2efd059e729de38d7f53bc96dea81afd",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_E_tex.json",
+      "sha256": "e5337cc1ffd06ab79f0e2e1c128e0db3cb2a08f1d61e957a8b8afdd9fede9d8a",
+      "capturedSourceSha256": "e5337cc1ffd06ab79f0e2e1c128e0db3cb2a08f1d61e957a8b8afdd9fede9d8a",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_E_tex.png",
+      "sha256": "442b6a202785ee5de80a8f559c2d7a6a2496e69c956725ddda79108199a9392b",
+      "capturedSourceSha256": "442b6a202785ee5de80a8f559c2d7a6a2496e69c956725ddda79108199a9392b",
+      "byteMatch": true
+    }
+  ],
+  "clips": [
+    {
+      "name": "idle",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif",
+      "filesExist": true,
+      "sheetSha256": "09af6011072a46661b042ca772b3660ef3f87651aa12d98f2b810e053fd25ac0",
+      "gifSha256": "b3b5bdee6b0115c68a8319d540b0569925d92cdec6edc9c07c91271c864451bc"
+    },
+    {
+      "name": "meditate",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif",
+      "filesExist": true,
+      "sheetSha256": "bac559fefb44ce4f8478d5a2c6ac623c14c950187c12e05737e328d9cef73dd2",
+      "gifSha256": "8ad7ef6357af814a9f3d00af2a19f8df806b80e46cc284e0eee4dae2f59d99e5"
+    },
+    {
+      "name": "walk",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif",
+      "filesExist": true,
+      "sheetSha256": "73eb4e317ec7961b01ae853e937ea8f23a1da21c7d4868ccfa784fd290efb6b6",
+      "gifSha256": "22f5ad8ace117c3fe020a6919cd271ddc98c19b221d36401de39c774626e3fa2"
+    },
+    {
+      "name": "run",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif",
+      "filesExist": true,
+      "sheetSha256": "fa0e25651840509e46f9fccd5ed6334cddd6427d82a471628d9e41acc7f5d813",
+      "gifSha256": "6e229251a7d22fbfe2d41e08edc4e8dca02e3c203095d4da8652e7e818bcb248"
+    },
+    {
+      "name": "dash",
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif",
+      "filesExist": true,
+      "sheetSha256": "f722f573ea5d547146aecc9e5e6295d4681793033d724b0efcd2b5d6b98668fa",
+      "gifSha256": "0619e8d208c600e3378a470b7baee92f6098a2af39fc0421087e5a725f305305"
+    },
+    {
+      "name": "sword_fly",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif",
+      "filesExist": true,
+      "sheetSha256": "6ef030363d89b486ff5d5706ad29fe94eb6e4e0c881ba25c94bc5fc3d22bc6b2",
+      "gifSha256": "8c7baf0a57ced8ae37ecfb14533f522a6a94deaf7edd29f85659eb3ca85a5259"
+    },
+    {
+      "name": "attack",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif",
+      "filesExist": true,
+      "sheetSha256": "87b4b306a6bed7873e28c8c74f4948decff7ca6e683b4a096527a9e2e70580a8",
+      "gifSha256": "fab18a4f1a27ce799ce1df5c5ad4e72edc962d2d764bb88be214e59d633865f9"
+    },
+    {
+      "name": "cast",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif",
+      "filesExist": true,
+      "sheetSha256": "f393538bd7c8b4297ea63954a08af2783892f8684f8a42646c044f640fdb8b43",
+      "gifSha256": "ca6bfe72a0890b1a097f0f7506200c7e2aa105c9f4ea5c01848f6240a7b14044"
+    },
+    {
+      "name": "channel",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif",
+      "filesExist": true,
+      "sheetSha256": "d3e6b5295b40dae41f90481d857667d6a9a2b45fd2ad6a3428755e2ee0405a3e",
+      "gifSha256": "7c3d8b25bab68240120fcc866f0eab44adeaa8251ca1e52c49a068bc59e87b2a"
+    },
+    {
+      "name": "hit",
+      "duration": 0.26666666666666666,
+      "keyFrames": 8,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif",
+      "filesExist": true,
+      "sheetSha256": "b7f3d29d83aeb3dacc83dba506dd4a9dab60bd8c9217a4d520bca1c065464aa1",
+      "gifSha256": "3d505e5494ca69aae293f89f0984b6165d398c6e74f1de6e4bfff1bdd75cf804"
+    },
+    {
+      "name": "die",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif",
+      "filesExist": true,
+      "sheetSha256": "b87f479b20b18b1792e42f989892c5fc3a3bb8a97ca67759fe051bb8239957d6",
+      "gifSha256": "d874525efaa5a49e2c3c6f49469f00f3f9318779e64af13b84b13cd2c97cf48e"
+    },
+    {
+      "name": "tribulation",
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif",
+      "filesExist": true,
+      "sheetSha256": "83e98cb283b6223dc0432ec7a1a6c93960873740b517de4f6901ecfe49f902c1",
+      "gifSha256": "fda27715f7db78bddd33fe7294a83376f31934e76c33e127cd4b580739107fdc"
+    },
+    {
+      "name": "emote",
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif",
+      "filesExist": true,
+      "sheetSha256": "a150ce40b0bae1960344f3967fe385397da9182ef32bb900489c3bfc2f956cba",
+      "gifSha256": "afa5ba45551f86bfb180c0eee425f9314d796982de794b43912a90d920b42ee9"
+    },
+    {
+      "name": "attack_2",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif",
+      "filesExist": true,
+      "sheetSha256": "8f4be2436977bb40448c816b86357c31cb6e497af65612690e667c2b9aa4ada9",
+      "gifSha256": "67779400a540ce34f038f12542c82101975ce3e6195066da8403f4fbc9e7a823"
+    },
+    {
+      "name": "attack_3",
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif",
+      "filesExist": true,
+      "sheetSha256": "7227216bd401823a760da593beb75c58448711db4b2516182de1d4cd7572b5de",
+      "gifSha256": "72952c74a6413211c9aa273f610aa8afa5b56dbad762ef95d97f6e098917661b"
+    }
+  ],
+  "visualReview": "Run, dash and attack3 sheets inspected: stride/flight/root travel and complete rear boot retained; no clipping observed. Remaining12 sheet/GIF outputs retained for owner review. Native image similarity/loop gates are the image checks; engine seam metric follows bones and does not independently certify sprite seam quality.",
+  "nativeQA": {
+    "hard": 0,
+    "unlistedSoft": 0,
+    "acceptedOpenSoft": 24,
+    "regression": 0,
+    "info": 120
+  },
+  "open": "Soft foot/pose warnings, manual landmark uncertainty and32MiB RGBA residency observation remain open in quality-backlog.json."
+}

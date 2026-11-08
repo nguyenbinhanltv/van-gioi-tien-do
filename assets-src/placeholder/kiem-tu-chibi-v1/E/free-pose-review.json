@@ -1,0 +1,457 @@
+{
+  "status": "Manual per-cell D41 free-pose review updated after measuredwalk/dashrepairs andD55; actualposedrawings only, no uprightkindchange or headreasonwaiver.",
+  "reviewMethod": "Actual full-source Lanczos3 aligned contact sheets inspected in chronological4x4 order. Source files unchanged; native cell hashes pin the inspection state. Only genuine named table pose classes selected.",
+  "convention": "Zero-based clip-local indices. D41 free poses relax similarity/height only for selected cells; no head, foot, canvas, face-lock or variant gate is waived.",
+  "unchangedChecks": "All idle/walk/run/dash/cast/channel/hit/emote cells remain ordinarychecked except measuredD47headpolicies onrun/dash; no D41waiver there. Tribulation0/1, die0, attack0..2/11..13, attack_3 0..2/11..13, attack_2 0/1/6/7/8/12/13 remainchecked. Attack_2frame12height0.2pxsoft remainsopen.",
+  "clips": {
+    "meditate": {
+      "source": "sheets/meditate.attempt-02.raw.png",
+      "sourceSha256": "68e13da5d415b37453cda98f6b597c6db027951f118efc76eeed71aea4b5a2e7",
+      "cells": {
+        "0": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "78232e588a48f420bbcf0fd4f692e27bdeb0221dccdff3330d1b0eb7ed9518b9"
+        },
+        "1": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "12480ec009a5a7169c541c249264f25700fe884ef932e2764ce792c7130ca04e"
+        },
+        "2": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "a821734fc787395139a0d00dd3e6ef521076f380304039f512876ba8e5e286b9"
+        },
+        "3": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "343ddee54462948f7503a63922532f582d075346a8ab9869ada9670c56929c82"
+        },
+        "4": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "481f79c6aff918423d35c532561539ff6d5279eb74362f1d19443cd835e8a9bf"
+        },
+        "5": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "1af8f96ae532097962c42b03f43a84eb7b57ece6ceaeb78e134d3850b994255f"
+        },
+        "6": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "9ee226d5b1e350da2b2757124ff73439aeb736406191230139bebab5b47f7205"
+        },
+        "7": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "9932d3930abe85ba16ad969b0f3aa902f71d557e42bed31e6d3f8f6a46095e69"
+        },
+        "8": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "7afa7950453102790ec19bf45cf2c3c58396c991d85ffeab36a17a0cd5c1ba12"
+        },
+        "9": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "682cc51b898c73a3771ba761b7e6bb575861b39d677d920f2398955446bab4b5"
+        },
+        "10": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "e1773d53eaa9a5c8e45389c336489a4cf72286757c26fd6de8899baea4b5d9fe"
+        },
+        "11": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "713d8807c1b4d79b5399fabada448c39d46301326183bf4d2bf26c31d5c10976"
+        },
+        "12": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "5210d155663fd08b0e8a9a2c576cbaddca8d0df1007f967a56f455a3029c1513"
+        },
+        "13": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "c6bf06d1d1d099d620ca9fa207517961025ad25e17e6964eee3c081121c0555a"
+        },
+        "14": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "91cd00db2ea57bc101d6908d078e5840efdf4ca993313c4f222ed42815de0f3b"
+        },
+        "15": {
+          "reason": "seated",
+          "description": "Cross-legged meditation throughout; sword rests across lap, legs folded, hips seated. No standing phase.",
+          "alignedCellSha256": "a7c0c14dc4ecdc9e99283db6233bdf58a60ff75929e549b9c465f469d2df84db"
+        }
+      }
+    },
+    "tribulation": {
+      "source": "sheets/tribulation.raw.png",
+      "sourceSha256": "9df01c02d00f8778479a0fe180cc657a0e3eb2d95d491d5c77f7f781a8e7321d",
+      "cells": {
+        "2": {
+          "reason": "lunge",
+          "description": "Wide forward stance with leading knee deeply bent and rear leg extended during the descent.",
+          "alignedCellSha256": "cbea12a024fbe2ecd9d3a0214a2e749b5ae76b1f53a63dc2dc40bddfab44c590"
+        },
+        "3": {
+          "reason": "lunge",
+          "description": "Wide forward stance with leading knee deeply bent and rear leg extended during the descent.",
+          "alignedCellSha256": "f842e3396f4174fc31516c68812b701ad70ce6ade699bdf4e8a3bc19eab578be"
+        },
+        "4": {
+          "reason": "lunge",
+          "description": "Wide forward stance with leading knee deeply bent and rear leg extended during the descent.",
+          "alignedCellSha256": "8df027a86a149f4645dcb1dd092c2a58dd59ff690641fc3d04359bf86e7c6090"
+        },
+        "5": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "094add8f8a2e4e53dbebae4ecf7afd1ab6b2c59fc56e734b87f699515b4312c3"
+        },
+        "6": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "2df337a8667989730a300e947f52f1a0880b75d20421b47afa175d68e0a03528"
+        },
+        "7": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "bf85c984b87545de1e4631a50733a787fc5297addc0768fc07a9351397dcae86"
+        },
+        "8": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "a5aec00b7efc8cfdc117759f004572819bdb8969a40118e9f5c1a6a14a000cba"
+        },
+        "9": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "e62ebd44f238e4e65c0e5d8776b2b50e8e9fb68f30352e46b01b3c997db5494f"
+        },
+        "10": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "4965d9b18abe4eab3824fd93bc87da9fd88851fb032d9a7eca067e982bfd088c"
+        },
+        "11": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "1d2d459c3064068ab170fbcf17e5d406171901b1f8e06d5c226cb4eca742a65c"
+        },
+        "12": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "113ad5d0aff6c15789ef184aebcfa7ced8e9dc9e418267886cf29d18e88fc9fc"
+        },
+        "13": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "e955383a31bb26902142455b691cb85b4da363ac673cf9d480fdc930e9e7b4f5"
+        },
+        "14": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "886126889173e40b4467b04576804591a6b0ac4b195447ac77fe8b67f9b3d9bb"
+        },
+        "15": {
+          "reason": "kneel",
+          "description": "One or both knees on the ground and hips lowered during kneeling resistance/recovery; not the opening standing frames.",
+          "alignedCellSha256": "43f984d6d4bd732c2c23680b284359e5cb48295048ec6381f1b76a3f81628bf5"
+        }
+      }
+    },
+    "die": {
+      "source": "sheets/die.raw.png",
+      "sourceSha256": "07b1120673f6ad2af1d7b1c86206b9c2d3a70d195062d9bcd14b2a5c0252dca9",
+      "cells": {
+        "2": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "6a06b18b26ee190ef4fad3f3ce39911cfca3e655fc6d150e2b62edf39aeb4446"
+        },
+        "3": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "b57a3761989264e00ed534657aea1e9f1185c6453d4400f0ba4f9f3686285f5c"
+        },
+        "4": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "288cd26242b0c229b7db2e469bfd77babae3df54507ee66e9c34ccd161355581"
+        },
+        "5": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "4afd313b0b4f1a51684c9aa235ef847d5da29d3869b7319930bb444c127da9b1"
+        },
+        "6": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "7b419cbc0c21527b278ee773969a6e3f5d21ac87be010151cbfd070ecf36db98"
+        },
+        "7": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "1f46391327b5e3f6d614575b875c81d3ce8f082dccb8d74353a03c933f752ff9"
+        },
+        "8": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "00a151444339fbb318616d5ef3664a71735037647247ab51fe9e8317f958a16c"
+        },
+        "9": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "d8efeb3c81222263eb7303e062e8fd4958ec9f09a273f265707d13c087a0a388"
+        },
+        "10": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "1821b907d586f7d23e2031509f8f1993b5a068afe70a5e8d402d8d3de0448f1d"
+        },
+        "11": {
+          "reason": "die-collapse",
+          "description": "Forward fall progresses from knee drop to bracing hand and side-lying prone collapse. Opening standing/stagger frames0/1 remain checked.",
+          "alignedCellSha256": "438197410e22c9781f9f04f0916a3ae6a9f8d6311cce4c244b14b18c19a4b651"
+        },
+        "1": {
+          "reason": "die-collapse",
+          "description": "Onset of collapse: neck/head bows forward and knees soften before the deeper kneel at2.",
+          "alignedCellSha256": "b501d8dc89f9405dd32f08dd0ff6e19a377acb39d4a79f393984dd95bdb4ccfb",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        }
+      }
+    },
+    "attack": {
+      "source": "sheets/attack.repaired.png",
+      "sourceSha256": "a2d5789f13e48805cebe6a765f03a8e4704d6ec94f8780a0b10e4f8ec19996b4",
+      "cells": {
+        "5": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "58a10f76169146b6461fcaa35f702ede9181f50256718b4af41784331db9d0bd"
+        },
+        "6": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "faa52bc97a6bffe6c9b038f8539781705c10614b34953013a065175de4a28258"
+        },
+        "7": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "41b541752eac855d63fd9c306e8f9fd2df31643c9b3575905e16429cf09507b7"
+        },
+        "8": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "b59a4d24916c38e872d3b1e292c872717baa7f3728a3efc3c5c765356ba61ee3"
+        },
+        "9": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "afce3d513bf06be01a659dd0df076314faba0484d4ec0de8c5a368c738e41cd2"
+        },
+        "10": {
+          "reason": "lunge",
+          "description": "Sword thrust and its low recovery retain a long split stance with bent leading knee and extended rear leg. Standing windup and upright recovery remain checked.",
+          "alignedCellSha256": "fa14caa8ef8ef29753ea71d26de00bb026aab79ba0894cd107c9ac8c9c78604a"
+        },
+        "3": {
+          "reason": "crouch",
+          "description": "Anticipatory bent-knee lowered guard before thrust.",
+          "alignedCellSha256": "395620e2354d2c798eb6692e988b5bcdecd67a540b4a6e176ebcd1d8d27794cc",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "4": {
+          "reason": "crouch",
+          "description": "Deeper bent-knee lowered guard immediately before lunge.",
+          "alignedCellSha256": "105187bb2f0763d4174b916703a6e1d6453befaaf895865dc0c68ae6cfa03d73",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        }
+      }
+    },
+    "attack_3": {
+      "source": "sheets/attack_3.repaired.png",
+      "sourceSha256": "82c57eaf161c669010d4ed2b768e888d28b8f326f47965218773ce27d4f76a6d",
+      "cells": {
+        "3": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "6d01bcbba15cac418c3a01f8cd21e97086573c1c9cc0a514c703d1f0ff9d1d6d"
+        },
+        "4": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "833ed356347e8c93abd24f12e65b4d5ef4af719865b9e85f32c0f806b59b383c"
+        },
+        "5": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "a7e19f0c9cbddb304e514e590c68947175544a4fa065eef2f0c7b462e13bdc6e"
+        },
+        "6": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "c288d49af4558a042d324eea6f0a869fddd99543391aa5536589f46712482268"
+        },
+        "7": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "d2e4fbc6c8d8e4603942387e3d00b529105d234812d5ce7133c5fb7fcd166990"
+        },
+        "8": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "2cde213f1d622d928c047628eef1f869d7eaf23a4b8f1e6abf3974fb788482ea"
+        },
+        "9": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "c7148e7217acd1346d53fad86e02ae1a83dfd72cf304b556afda89c40b9a5ce3"
+        },
+        "10": {
+          "reason": "lunge",
+          "description": "Long forward split stance through drive, thrust and early recoil; extended rear leg and bent front knee. Opening standing and late upright recovery remain checked.",
+          "alignedCellSha256": "d7c188d9676500425cb1ed01095fe47bb6cca114d416f92fc1c0bdad8ad243b2"
+        }
+      }
+    },
+    "sword_fly": {
+      "source": "sheets/sword_fly.raw.png",
+      "sourceSha256": "4f0b0646df13ca87cd90df3e296cfdf642dc209aa4baa07061c2d78f44f2e1c1",
+      "cells": {
+        "0": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "8ea42b5a788ee823cadbcc37521d3be4aacdf1b7e8ef6d0b95bd10d4cf36f359",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "1": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "b8541e907d262035348673e526e1facdc28f9b3e60a2105a4c686109a0bf2e96",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "2": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "ee5e4295a1c11dc76bdc9a5699c3b22072d0c92d09116f060c6c0b54d3917c12",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "3": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "a96c6d786f389446484630b2b3f0793846d3a2e106c377096cbd918980c5f72a",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "4": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "43820c934bda503f5289223232afa97696096566937676de39868838c6988540",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "5": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "8a4139c191ec58c7794f0ee60a9667156df82d8cc1668fb94da2ba51d2d90c95",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "6": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "bc798c039710e418441d0f26c40b8a97fdf240c42d1a854902f11259bc820c99",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "7": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "d12d9ebfe90948c95667bb28a22e47fefb8c4f3288d9d3f751ee7d858867a164",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "8": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "9406fea76d51dfa5b42c9f217651fe2f3e738f3a87b7ca21ae4c75eae75fb4a2",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "9": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "4ca8736246d48214e0eacce318849c2c6951df937e0f1f093623ea93ebf96dfa",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "10": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "e4b1e5fb266d0939297a0ddf7a98d04d0d48f5445883a4208bb7fbfca85de21f",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "11": {
+          "reason": "sword-ride",
+          "description": "Feet carried by the horizontal flying sword; lift/hover and visibly bent knees through the ride. Not an upright-ground clip.",
+          "alignedCellSha256": "e61e8e7b928ab7dcfc9078e8b39af4776ed83feacaccec4a4075499e9a31202f",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        }
+      }
+    },
+    "attack_2": {
+      "source": "sheets/attack_2.raw.png",
+      "sourceSha256": "71af9c39751d333cc52ddfdf4cc7bae36c8bf74361965a9fd499277e22b55343",
+      "cells": {
+        "2": {
+          "reason": "crouch",
+          "description": "Bent-knee step into the upward-sword action.",
+          "alignedCellSha256": "db82543e391b7ecf0b74af5cfed883f330be2f4341fc4ebc9ea28a89e7137baa",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "3": {
+          "reason": "raised-sword",
+          "description": "Sword raised diagonally from guard during bent-knee action.",
+          "alignedCellSha256": "b5f561db34511c62d9aeba00ff1bfdb500454581814ddcd96c2a2acdd09fc878",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "4": {
+          "reason": "raised-sword",
+          "description": "Upward sword sweep with visible knee bend.",
+          "alignedCellSha256": "653a18f18a17a56c67ba44e394827b1c8c30b5d62af5cc28f8ed5bd4a2a78262",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "5": {
+          "reason": "raised-sword",
+          "description": "Sword rises across the torso before high extension.",
+          "alignedCellSha256": "0f50830bc67ffd0ef1bd776922b748f9ad7f1c6dcd88d43e2614912b40f23bd4",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "9": {
+          "reason": "raised-sword",
+          "description": "Sword still raised during the return sweep.",
+          "alignedCellSha256": "9d6cd1579d430c45d33d795bb2e8218ec83445f8671b1c16ae7bbdb55e05e7a1",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "10": {
+          "reason": "recoil",
+          "description": "Action follow-through with arm retracting and knees still in the attack stance.",
+          "alignedCellSha256": "d544d379b9c42dda5234b5058caff610c0ce0ebd7d520506213dd6775a0907f3",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        },
+        "11": {
+          "reason": "recoil",
+          "description": "Recovery step/arm return before upright frame12; knees remain flexed.",
+          "alignedCellSha256": "2f387f0078e947f759e7b4776b71045fa6be27ec05da45d7fdc3758f54633719",
+          "review": "Native contact-sheet pose review afterD55: sourceunchanged andpreviouslyLabclear; noidentityfailurehidden. Uprightattack_2frame12 remainschecked."
+        }
+      }
+    }
+  },
+  "previousReviewSummary": {
+    "status": "Manual per-cell D41 free-pose review, authorized by orchestrator after fresh D54 baseline; no upright/head-reason reclassification.",
+    "unchangedChecks": "All run/dash/cast/attack_2 cells; meditate has no standing phase. Tribulation0/1, die0/1, attack0..4 and11..13, attack_3 0..2 and11..13 stay checked.",
+    "selectedCells": 54
+  }
+}

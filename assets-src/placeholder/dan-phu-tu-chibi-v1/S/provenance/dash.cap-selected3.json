@@ -1,0 +1,137 @@
+{
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "out": "raw/hit-dash.cap-selected3.png",
+  "outSha256": "77962516962229eeb0e8112ddf565dffbbedd516087d7026c559cafc48e54a56",
+  "mask": "templates/dash.cap-mask3.png",
+  "maskSha256": "0d946614cce23fc2d7903981ed2c1deab0fd82bd469639a4b54352288d76be0f",
+  "method": "Binary union of original/candidate upper-head connected foreground plus2nativepixel AA margin within declared cap band. Other source components (whisk) protected with2px margin; pin zone protected. Only AI output pixels selected, no body/frame geometric transformation. All remaining source RGBA copied exactly. Native mask/D57 verification required.",
+  "rows": [
+    {
+      "global": 6,
+      "local": 0,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 15,
+        "bottom": 35
+      },
+      "editablePixels": 1133,
+      "changedBytes": 3371
+    },
+    {
+      "global": 7,
+      "local": 1,
+      "candidate": "raw/dash-cap2.attempt1.png",
+      "capBand": {
+        "top": 30,
+        "bottom": 50
+      },
+      "editablePixels": 1284,
+      "changedBytes": 3784
+    },
+    {
+      "global": 8,
+      "local": 2,
+      "candidate": "raw/dash-cap2.attempt1.png",
+      "capBand": {
+        "top": 29,
+        "bottom": 49
+      },
+      "editablePixels": 1222,
+      "changedBytes": 3621
+    },
+    {
+      "global": 9,
+      "local": 3,
+      "candidate": "raw/dash-cap2.attempt1.png",
+      "capBand": {
+        "top": 29,
+        "bottom": 49
+      },
+      "editablePixels": 1245,
+      "changedBytes": 3689
+    },
+    {
+      "global": 10,
+      "local": 4,
+      "candidate": "raw/dash-cap2.attempt1.png",
+      "capBand": {
+        "top": 29,
+        "bottom": 49
+      },
+      "editablePixels": 1271,
+      "changedBytes": 3770
+    },
+    {
+      "global": 11,
+      "local": 5,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 22,
+        "bottom": 42
+      },
+      "editablePixels": 1217,
+      "changedBytes": 3609
+    },
+    {
+      "global": 12,
+      "local": 6,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 27,
+        "bottom": 47
+      },
+      "editablePixels": 1202,
+      "changedBytes": 3552
+    },
+    {
+      "global": 13,
+      "local": 7,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 27,
+        "bottom": 47
+      },
+      "editablePixels": 1196,
+      "changedBytes": 3542
+    },
+    {
+      "global": 14,
+      "local": 8,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 22,
+        "bottom": 42
+      },
+      "editablePixels": 1196,
+      "changedBytes": 3537
+    },
+    {
+      "global": 15,
+      "local": 9,
+      "candidate": "raw/dash-cap3.attempt1.png",
+      "capBand": {
+        "top": 15,
+        "bottom": 35
+      },
+      "editablePixels": 1131,
+      "changedBytes": 3346
+    }
+  ],
+  "status": "REJECTED by orchestrator: additional coil bands change locked hairstyle identity; shifted cream stripe cannot certify actual maincap crown. Raw/mask/preservation evidence retained as failed history; not active project source.",
+  "provenanceRecordedUtc": "2026-11-08T05:50:22.385Z",
+  "selectedFileMtimeUtc": "2026-11-08T05:40:39.157Z",
+  "maskFileMtimeUtc": "2026-11-08T05:40:39.211Z",
+  "selectionTool": "Node + public @vgtd/rig PNG codec; @vgtd/sprite connected components for dash mask",
+  "candidateHashes": [
+    {
+      "file": "raw/dash-cap3.attempt1.png",
+      "sha256": "4b31fe5ed494d4a6504026ef779db785e55e1b43418776ab9df5b202ce3582ac"
+    },
+    {
+      "file": "raw/dash-cap2.attempt1.png",
+      "sha256": "f5e90b9c12b806d1d58e55a6bba8b37ad5d8617ec8ab67357b170a37af2bbcfc"
+    }
+  ],
+  "rejection": "2026-11-08 orchestrator guidance + independent style23 review: do not reinterpret these bands as skull summit."
+}

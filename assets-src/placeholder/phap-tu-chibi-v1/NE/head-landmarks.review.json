@@ -1,0 +1,597 @@
+{
+  "status": "reviewed-motion-evidence-complete",
+  "direction": "NE",
+  "kind": "rear-crown-shoulder-single",
+  "anchorDefinition": "acromion: max slope change of the right garment contour below the neck",
+  "confirmedMaster": {
+    "crown": {
+      "x": 140,
+      "y": 16,
+      "alpha": 211
+    },
+    "breadth": {
+      "left": {
+        "x": 114,
+        "y": 36,
+        "alpha": 255
+      },
+      "right": {
+        "x": 166,
+        "y": 36,
+        "alpha": 255
+      },
+      "widthPx": 52
+    },
+    "note": "Orchestrator confirmed coil is the main cap in this NE view; no separately elevated bun. Pins and ribbon excluded.",
+    "shoulderTop": {
+      "x": 156,
+      "y": 79,
+      "alpha": 189
+    },
+    "verticalSpanPx": 63,
+    "horizontalOffsetBreadths": 0.3076923076923077,
+    "anchorDefinition": "acromion: max slope change of the right garment contour below the neck"
+  },
+  "acromionReview": {
+    "status": "confirmed-by-orchestrator",
+    "point": {
+      "x": 156,
+      "y": 79
+    },
+    "note": "Foreshortened shoulder corner; previous approximate160..165/86..94 estimate withdrawn by orchestrator. Main cap, breadth and acromion confirmed; master pixels unchanged.",
+    "slopeWindowPx": 3,
+    "proximalSegmentRows": 16,
+    "masterGarmentNeckJunctionY": 70,
+    "forearmAndElbowExcluded": true
+  },
+  "sourceUnchanged": true,
+  "reviewedMotion": [
+    {
+      "clip": "run",
+      "cell": 3,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 139,
+          "y": 27
+        },
+        "shoulderTop": {
+          "x": 169,
+          "y": 91
+        },
+        "breadth": {
+          "left": {
+            "x": 124,
+            "y": 46
+          },
+          "right": {
+            "x": 177,
+            "y": 46
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed aligned Lanczos256px source. acromion: max slope change of the right garment contour below the neck. Proximal shoulder segment: 16 rows beginning at reviewed garment neck junction y85; 3px slope window, forearm/elbow excluded. Crown/main cap excludes pins; breadth spans contiguous skull-cap hair, excluding detached strands. Dynamic run posture retained; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 4,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 138,
+          "y": 26
+        },
+        "shoulderTop": {
+          "x": 170,
+          "y": 88
+        },
+        "breadth": {
+          "left": {
+            "x": 119,
+            "y": 44
+          },
+          "right": {
+            "x": 171,
+            "y": 44
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y85), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 5,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 139,
+          "y": 24
+        },
+        "shoulderTop": {
+          "x": 170,
+          "y": 86
+        },
+        "breadth": {
+          "left": {
+            "x": 120,
+            "y": 41
+          },
+          "right": {
+            "x": 171,
+            "y": 41
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y83), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 6,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 136,
+          "y": 29
+        },
+        "shoulderTop": {
+          "x": 173,
+          "y": 93
+        },
+        "breadth": {
+          "left": {
+            "x": 123,
+            "y": 45
+          },
+          "right": {
+            "x": 174,
+            "y": 45
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y86), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 7,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 140,
+          "y": 32
+        },
+        "shoulderTop": {
+          "x": 171,
+          "y": 95
+        },
+        "breadth": {
+          "left": {
+            "x": 122,
+            "y": 48
+          },
+          "right": {
+            "x": 174,
+            "y": 48
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y91), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 9,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 141,
+          "y": 38
+        },
+        "shoulderTop": {
+          "x": 169,
+          "y": 102
+        },
+        "breadth": {
+          "left": {
+            "x": 124,
+            "y": 54
+          },
+          "right": {
+            "x": 175,
+            "y": 54
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y97), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 10,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 139,
+          "y": 33
+        },
+        "shoulderTop": {
+          "x": 166,
+          "y": 95
+        },
+        "breadth": {
+          "left": {
+            "x": 125,
+            "y": 50
+          },
+          "right": {
+            "x": 176,
+            "y": 50
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed aligned Lanczos256px source. acromion: max slope change of the right garment contour below the neck. Proximal shoulder segment: 16 rows beginning at reviewed garment neck junction y91; 3px slope window, forearm/elbow excluded. Crown/main cap excludes pins; breadth spans contiguous skull-cap hair, excluding detached strands. Dynamic run posture retained; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 11,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 140,
+          "y": 30
+        },
+        "shoulderTop": {
+          "x": 170,
+          "y": 92
+        },
+        "breadth": {
+          "left": {
+            "x": 125,
+            "y": 48
+          },
+          "right": {
+            "x": 176,
+            "y": 48
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y89), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 13,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 139,
+          "y": 24
+        },
+        "shoulderTop": {
+          "x": 171,
+          "y": 87
+        },
+        "breadth": {
+          "left": {
+            "x": 121,
+            "y": 44
+          },
+          "right": {
+            "x": 173,
+            "y": 44
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y83), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    },
+    {
+      "clip": "run",
+      "cell": 15,
+      "evidence": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 137,
+          "y": 36
+        },
+        "shoulderTop": {
+          "x": 170,
+          "y": 99
+        },
+        "breadth": {
+          "left": {
+            "x": 124,
+            "y": 52
+          },
+          "right": {
+            "x": 176,
+            "y": 52
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "fan, long hair and trailing ribbon conceal the left shoulder",
+        "note": "Reviewed exact aligned256 ruler overlay: main-cap crown and maximum hair breadth below pins/above ear. acromion: max slope change of the right garment contour below the neck; same3px slope window in proximal16row shoulder segment (neck y92), excluding clipped region boundaries and distal elbow/hand. Original body outside cap mask retained; landmarks on exact aligned256 output. Worker25 visually verified cap and garment contours; all landmarks alpha>=128."
+      }
+    }
+  ],
+  "unresolvedVisibleAnchors": [],
+  "approvedD56Cells": [
+    {
+      "clip": "dash",
+      "cell": 1,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 140,
+          "y": 39
+        },
+        "breadth": {
+          "left": {
+            "x": 124,
+            "y": 54
+          },
+          "right": {
+            "x": 177,
+            "y": 54
+          }
+        },
+        "occluder": "head+earring over shoulder in dash lean",
+        "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 2,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 139,
+          "y": 24
+        },
+        "breadth": {
+          "left": {
+            "x": 125,
+            "y": 39
+          },
+          "right": {
+            "x": 178,
+            "y": 39
+          }
+        },
+        "occluder": "head+earring over shoulder in dash lean",
+        "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 3,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 147,
+          "y": 42
+        },
+        "breadth": {
+          "left": {
+            "x": 132,
+            "y": 60
+          },
+          "right": {
+            "x": 185,
+            "y": 60
+          }
+        },
+        "occluder": "head+earring over shoulder in dash lean",
+        "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 149,
+          "y": 59
+        },
+        "breadth": {
+          "left": {
+            "x": 135,
+            "y": 76
+          },
+          "right": {
+            "x": 188,
+            "y": 76
+          }
+        },
+        "occluder": "head+earring in deep dash lean",
+        "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 148,
+          "y": 45
+        },
+        "breadth": {
+          "left": {
+            "x": 132,
+            "y": 60
+          },
+          "right": {
+            "x": 184,
+            "y": 60
+          }
+        },
+        "occluder": "head+earring in deep dash lean",
+        "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 6,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 148,
+          "y": 27
+        },
+        "breadth": {
+          "left": {
+            "x": 132,
+            "y": 44
+          },
+          "right": {
+            "x": 185,
+            "y": 44
+          }
+        },
+        "occluder": "head+earring over shoulder in dash lean",
+        "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 7,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 150,
+          "y": 54
+        },
+        "breadth": {
+          "left": {
+            "x": 135,
+            "y": 78
+          },
+          "right": {
+            "x": 188,
+            "y": 78
+          }
+        },
+        "occluder": "head+earring in deep dash lean",
+        "note": "D56 after PR175 merged; orchestrator reviewed NE-dash-acromion-visibility.png and confirmed no visible acromion. Crown and maximum contiguous skull-cap breadth are visible hair, alpha>=128; exclude pins/tassels/earring and loose strands. Dynamic lean retained, no projected shoulder or vertical span. Same-direction locked master breadth52px."
+      }
+    },
+    {
+      "clip": "dash",
+      "cell": 8,
+      "evidence": {
+        "kind": "rear-breadth-only",
+        "crown": {
+          "x": 140,
+          "y": 34
+        },
+        "breadth": {
+          "left": {
+            "x": 125,
+            "y": 49
+          },
+          "right": {
+            "x": 178,
+            "y": 49
+          }
+        },
+        "occluder": "head+earring over shoulder in dash lean",
+        "note": "D56 extension explicitly approved by orchestrator after review of NE-dash-remaining-visibility.png. Crown and both skull-cap endpoints visible hair alpha>=128, excluding pins/tassels/earring/loose strands. Orange garment candidates were not acromions; actual proximal shoulder hidden. No vertical span or projected shoulder. Identity still needs D55 calibrated recheck; current similarity passes are not identity proof."
+      }
+    }
+  ],
+  "remainingHardCells": {},
+  "sourceSelection": "selection.json; source-preparation.json records exact raw contributors, masks, hashes and unchanged outside-mask RGBA",
+  "similarityTrust": "D55 merged; final report follows official source build.",
+  "finalRunRepairs": {
+    "cells": [1, 12],
+    "landmarks": {
+      "1": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 138,
+          "y": 37
+        },
+        "shoulderTop": {
+          "x": 169,
+          "y": 101
+        },
+        "breadth": {
+          "left": {
+            "x": 123,
+            "y": 54
+          },
+          "right": {
+            "x": 176,
+            "y": 54
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "left-hand fan, long hair and ribbon obscure the left shoulder in NE running pose",
+        "note": "Reviewed aligned cell: main-cap crown and widest hair-only row above ear; acromion: max slope change of the right garment contour below the neck, alpha >=128. Fixed scale and D57 source-verified registration, no projected landmarks."
+      },
+      "12": {
+        "kind": "rear-crown-shoulder-single",
+        "crown": {
+          "x": 134,
+          "y": 31
+        },
+        "shoulderTop": {
+          "x": 173,
+          "y": 93
+        },
+        "breadth": {
+          "left": {
+            "x": 119,
+            "y": 44
+          },
+          "right": {
+            "x": 171,
+            "y": 44
+          }
+        },
+        "occludedSide": "left",
+        "occluder": "left-hand fan, long hair and ribbon obscure the left shoulder in NE running pose",
+        "note": "Reviewed aligned cell: main-cap crown and widest hair-only row above ear; acromion: max slope change of the right garment contour below the neck, alpha >=128. Fixed scale and D57 source-verified registration, no projected landmarks."
+      }
+    },
+    "inheritedRegistration": {
+      "kind": "inherited-registration",
+      "source": "repair/run.pre-edit.png",
+      "sourceSha256": "c16801438f1741e4afeb7e9bb91fb032f4abdc7b1a2ace3db0b8f4c7db17f15d",
+      "mask": "repair/run.head-edit-mask.png",
+      "maskSha256": "b105351fd7fd2b1cc34621519be34a95fe0fac005d5cf5787044e3c522eb655c",
+      "cells": [1, 12]
+    },
+    "landmarkAlpha": {
+      "1": {
+        "crown": 181,
+        "shoulder": 178,
+        "left": 154,
+        "right": 168
+      },
+      "12": {
+        "crown": 250,
+        "shoulder": 132,
+        "left": 186,
+        "right": 255
+      }
+    },
+    "visualReview": "Plain nearest-neighbour RGBA crops confirm main-cap endpoints below pin band and garment acromion; approved master unchanged.",
+    "note": "Only run1/12 changed relative to the frozen D57 source. Run0 is unchanged and uses its ordinary computed registration; no inheritance is declared for it."
+  }
+}

@@ -2,6 +2,10 @@
 
 Oct 31, 2026 · An Nguyen
 
+> **[Cập nhật D44: hướng Player mới là premium semi-chibi, khoảng 4,5 đầu, mặt cố định từng Đạo Lộ; áo và vũ khí có hình riêng T1–T5 theo nhóm cảnh giới. Sáu phẩm D6 dùng tint viền/glow runtime, không sinh sáu bộ hình; trang phục cosmetic và skin vũ khí bán riêng. D41 frame-by-frame và D14 5 hướng + lật vẫn áp dụng; chưa thay bộ semi-realistic đang chạy. Chuẩn chi tiết và giới hạn concept: [art/style-semichibi.md](art/style-semichibi.md).]**
+
+> **[Cập nhật D35: hoạt cảnh xương nhân vật dùng **DragonBones** (runtime `dragon-bones` của Cocos 3.8.8, MIT) thay Spine 4.2; mọi chỗ "Spine" bên dưới đọc là "skeleton DragonBones" khi nói về Player / Boss / Linh thú / NPC chủ chốt. Các con số (30 skeleton, 5 hướng + lật, giới hạn bone/slot/đỉnh, 30 fps key) không đổi. Chi tiết, nguồn và rủi ro: [art/dragonbones.md](art/dragonbones.md).]**
+
 ## 1. Phương án dựng: Spine 2D hay Pre-render 3D
 
 **Quyết định: dùng hybrid.** Player, Linh thú và Boss dựng bằng Spine 2D vì paperdoll 8 hướng bằng sprite pre-render bùng nổ dung lượng; quái thường và tinh anh dùng Pre-render 3D → Sprite Sheet 5 hướng vì rẻ CPU khi hàng chục con trên màn hình.
@@ -32,13 +36,13 @@ Mỗi lớp trang phục pre-render phải có ảnh riêng cho mọi hướng �
 
 ### Phân bổ theo loại
 
-| Loại                  | Phương án                              | Lý do chính                                  |
-| --------------------- | -------------------------------------- | -------------------------------------------- |
-| Player                | Spine · 8 hướng                        | Paperdoll 7 lớp, đổi trang bị thời gian thực |
-| Linh thú, thú cưỡi    | Spine · 5 hướng + lật                  | Tiến hóa bằng skin, Player gắn vào bone yên  |
-| NPC chủ chốt          | Spine (rig của Player) · 5 hướng + lật | Dùng lại thư viện trang phục                 |
-| Quái thường, tinh anh | Pre-render 3D · 5 hướng + lật          | Đông trên màn hình, không đổi trang bị       |
-| Boss đột biến         | Spine · 8 hướng                        | Gãy vỡ từng bộ phận bằng ẩn/đổi attachment   |
+| Loại                  | Phương án                                                 | Lý do chính                                                                 |
+| --------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Player                | Spine · 8 hướng _[Cập nhật D14: rig 5 hướng + lật gương]_ | Paperdoll 7 lớp _[sau đó dùng 15 lớp, xem §2]_, đổi trang bị thời gian thực |
+| Linh thú, thú cưỡi    | Spine · 5 hướng + lật                                     | Tiến hóa bằng skin, Player gắn vào bone yên                                 |
+| NPC chủ chốt          | Spine (rig của Player) · 5 hướng + lật                    | Dùng lại thư viện trang phục                                                |
+| Quái thường, tinh anh | Pre-render 3D · 5 hướng + lật                             | Đông trên màn hình, không đổi trang bị                                      |
+| Boss đột biến         | Spine · 8 hướng _[Cập nhật D14: rig 5 hướng + lật gương]_ | Gãy vỡ từng bộ phận bằng ẩn/đổi attachment                                  |
 
 ### Giới hạn rig Spine (quy chuẩn dự án)
 
@@ -227,7 +231,7 @@ Quái chia theo footprint 1 × 1, 2 × 2, 4 × 4 và 8 × 8 ô; footprint càng 
 | Footprint | Diamond trên màn hình @1x | Canvas @1x        | Hình thức · Hướng                                               | Sort                        | Ví dụ                       |
 | --------- | ------------------------- | ----------------- | --------------------------------------------------------------- | --------------------------- | --------------------------- |
 | 2 × 2     | 128 × 64                  | 256 × 256         | Spine hoặc pre-render · 5 hướng + lật                           | Đỉnh dưới footprint         | Hổ vương, Khôi lỗi tướng    |
-| 4 × 4     | 256 × 128                 | 512 × 512         | Spine · 8 hướng                                                 | Đỉnh dưới + sort line chữ V | Giao Long, Huyết Lang Vương |
+| 4 × 4     | 256 × 128                 | 512 × 512         | Spine · 8 hướng _[Cập nhật D14: rig 5 hướng + lật gương]_       | Đỉnh dưới + sort line chữ V | Giao Long, Huyết Lang Vương |
 | 8 × 8     | 512 × 256                 | Theo từng bộ phận | Spine nhiều skeleton ghép · 1–3 hướng (đứng yên hoặc xoay chậm) | Mỗi bộ phận sort riêng      | Thao Thiết, Cửu Đầu Xà      |
 
 Sort key của boss n × n lấy đỉnh dưới footprint, cách tâm footprint n × 16 px theo trục Y @1x:

@@ -1,0 +1,238 @@
+{
+  "status": "Reviewed source selection, NOT production or final similarity acceptance. D47 head, foot/canvas/loop clear;13D54 similarity findings awaitD55.",
+  "sourceSha256": "77019ce787dd8b47f5af571518f697001c52871ef4d222709dc448b747d84ccf",
+  "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "clip": {
+    "name": "run",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "run",
+    "kind": "upright",
+    "sheet": "sheets/run.repaired-45679.png",
+    "manifest": "templates/run.template.json",
+    "vertical": "keep",
+    "heightPolicy": "head-size-v1",
+    "authoredOrigins": {
+      "0": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "1": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "2": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "3": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "4": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "5": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "6": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "7": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "8": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "9": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "10": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "11": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "12": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "13": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "14": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      },
+      "15": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed original authoring lattice X115.68584437086092; canonical256 source ground232, common source-plane translation244->232 already applied to all cells before local repairs. No per-cell body fit/rescale. Source45 head selection, source6/7 contact repairs and source9 local14 head repair preserve outside-ROI bytes; native contacts/canvas/loop clear. See run-contact-repair-review.json and region proofs."
+      }
+    },
+    "exceptions": {
+      "1": "posture",
+      "2": "posture",
+      "3": "posture",
+      "6": "posture",
+      "7": "posture",
+      "14": "posture",
+      "15": "posture"
+    },
+    "headEvidence": {
+      "1": {
+        "crown": {
+          "x": 146.5,
+          "y": 27.5
+        },
+        "chin": {
+          "x": 168,
+          "y": 78.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "2": {
+        "crown": {
+          "x": 150,
+          "y": 30.5
+        },
+        "chin": {
+          "x": 166.5,
+          "y": 80.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "3": {
+        "crown": {
+          "x": 151,
+          "y": 30.5
+        },
+        "chin": {
+          "x": 168,
+          "y": 81.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "6": {
+        "crown": {
+          "x": 148.5,
+          "y": 22.5
+        },
+        "chin": {
+          "x": 169.5,
+          "y": 72.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "7": {
+        "crown": {
+          "x": 152.5,
+          "y": 20.5
+        },
+        "chin": {
+          "x": 168.5,
+          "y": 70.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "14": {
+        "crown": {
+          "x": 143.5,
+          "y": 26.5
+        },
+        "chin": {
+          "x": 165.5,
+          "y": 76.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      },
+      "15": {
+        "crown": {
+          "x": 146,
+          "y": 26.5
+        },
+        "chin": {
+          "x": 167,
+          "y": 77.5
+        },
+        "note": "Reviewed native aligned256 output: minimum2 contiguous main-cap alpha128 pixels, tie/knot/ponytail excluded. Crown midpoint X and row+0.5 convention applied identically to master and every measured frame; visible deepest central jaw edge. Forward lean/flight retained. Manual1px uncertainty. Other15head contours verified unchanged; local14 remeasured after actualAIrepair, no stencil proof."
+      }
+    }
+  },
+  "headReview": "run-head-flat-summit-review.json",
+  "contourProof": "run.head-contour-45679.proof.json",
+  "notes": [
+    "Actual14head54.626001px(+1.003512%) independently measured aftercentre-targetedstencil53.75872px(-0.600091%).",
+    "All7affected cells use same row+0.5,min2 contiguous cap-pixel rule; accepted7insideband perorchestrator despite1pxmanualuncertainty.",
+    "Ordinary inband cells remain unexempted; no D41freepose or similaritywaiver added to run."
+  ]
+}

@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Sinh asset Tu Tiên 2D Isometric 100% bằng code: tilemap, phi kiếm, icon, shader + pipeline đóng gói",
   "private": true,
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "gen:tilemap": "node src/tilemap/generate_tilemap.js --out out/tilemap",
     "gen:items": "node src/items/generate_items.js --out out/items",
+    "gen:kiemtu": "vite-node --script scripts/kiem_tu_rig.mjs",
+    "prep:parts": "node scripts/continuous_parts.mjs",
     "gen": "npm run gen:tilemap && npm run gen:items",
     "render": "node pipeline/render_layers.js out",
     "validate": "node pipeline/validate_assets.js --stage raw --root out --report out/reports/qa_raw.json --allow-warnings",
@@ -17,6 +21,14 @@
     "build": "node scripts/check_syntax.js",
     "typecheck": "node scripts/check_syntax.js",
     "test": "vitest run"
+  },
+  "dependencies": {
+    "@vgtd/shared": "*",
+    "@vgtd/character": "*"
+  },
+  "devDependencies": {
+    "@vgtd/rig": "*",
+    "vite-node": "2.1.9"
   },
   "optionalDependencies": {
     "@resvg/resvg-js": "^2.6.2"

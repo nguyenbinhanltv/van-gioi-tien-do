@@ -1,0 +1,26 @@
+{
+  "clip": "tribulation",
+  "direction": "S",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED S master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT S straight-on FRONT view facing screen DOWN in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.71. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Fan anatomicalLEFT is SCREEN RIGHT; eyes/beautymark fixed anatomicalright (screenLEFT). Image2 contains unscaled master-head stencils: keep exact skullsize/face and complete body under them. Stay straight front S in every cell, no SE threequarter or side turn. Use image2 canonical unscaled head stencils for SIZE/IDENTITY, not extra heads. Allow head translation for posture but NEVER change skull size or perspective. CLIP tribulation:16figures4x4 nonloop FRONT S.0ready,1-3widegroundedbrace kneesbend andLEFTfan SCREENRIGHT guardschest,4-6gustbuffets hair/ribbonsUPscreen andsleeves trail,7-9deep one-kneebrace withRIGHThand SCREENLEFTmudra,10-12pushrise determinedface,13-15settleuprightready. Keephead/frontalface/skull48pxscale fixed, neverzoom/shrinkdeepkneel. Fan alwaysoneplainvermilion naturallygrippedanatomicalLEFT. Exactshorttunic/trousers/pin/earrings. Dynamicfabriclagsbody2frames then settles. NO lightning/glow/FX drawn; separateFXlayerlater. Fullbodyincludingstreaminghairandsolesinsideeachcell, noquarterturn orseparatehead. Smoothanticipation, impacthold, followthrough.",
+  "utcStart": "2026-11-07 23:19:32 UTC",
+  "references": ["reference/S.master.png", "S/templates/tribulation.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/tribulation.attempt1.png",
+  "selected": "sheets/tribulation.png",
+  "utcEndObserved": "2026-11-07 23:20:11 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "7f91d56709143e7c5f92f3d880220e7f00fddd219d638c464525a21d8e6cfc32",
+  "utcRawOutputFileModified": "2026-11-07T23:20:11.279Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/S.master.png",
+      "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168"
+    },
+    {
+      "file": "S/templates/tribulation.head-guide.png",
+      "sha256": "0922f8ea6744168a837d7165928ef188bed85a25c09bcbaa6fa25bb37f3f27b6"
+    }
+  ],
+  "selectedSha256": "7f91d56709143e7c5f92f3d880220e7f00fddd219d638c464525a21d8e6cfc32"
+}

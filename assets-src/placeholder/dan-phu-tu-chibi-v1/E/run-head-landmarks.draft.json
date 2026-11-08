@@ -1,0 +1,201 @@
+{
+  "status": "frozen draft for semantic point review; NOT supplied to head gates",
+  "clip": "run",
+  "source": "raw/run.attempt6.png",
+  "master": "../reference/E.corrected-master.png",
+  "convention": "Semantic boundary edges per style23: midpoint before first attached-maincap row and after last jaw row; include true hair highlights, exclude identifiable bun/pin/tie; all points in aligned256 cells. Manual approx uncertainty1px remains explicit.",
+  "frames": [
+    {
+      "frame": 0,
+      "crown": {
+        "x": 151,
+        "y": 31.5
+      },
+      "chin": {
+        "x": 174,
+        "y": 81.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 1,
+      "crown": {
+        "x": 151,
+        "y": 39.5
+      },
+      "chin": {
+        "x": 174,
+        "y": 89.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 2,
+      "crown": {
+        "x": 147,
+        "y": 31.5
+      },
+      "chin": {
+        "x": 172,
+        "y": 81.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 3,
+      "crown": {
+        "x": 142,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 73.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 4,
+      "crown": {
+        "x": 143,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 165,
+        "y": 71.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 5,
+      "crown": {
+        "x": 143,
+        "y": 21.5
+      },
+      "chin": {
+        "x": 166.5,
+        "y": 69.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 6,
+      "crown": {
+        "x": 144,
+        "y": 21.5
+      },
+      "chin": {
+        "x": 169.5,
+        "y": 69.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 7,
+      "crown": {
+        "x": 154,
+        "y": 20.5
+      },
+      "chin": {
+        "x": 180.5,
+        "y": 67.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 8,
+      "crown": {
+        "x": 149,
+        "y": 31.5
+      },
+      "chin": {
+        "x": 173,
+        "y": 81.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 9,
+      "crown": {
+        "x": 150,
+        "y": 39.5
+      },
+      "chin": {
+        "x": 172,
+        "y": 89.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 10,
+      "crown": {
+        "x": 148,
+        "y": 27.5
+      },
+      "chin": {
+        "x": 171,
+        "y": 75.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 11,
+      "crown": {
+        "x": 141,
+        "y": 23.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 71.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 12,
+      "crown": {
+        "x": 146,
+        "y": 29.5
+      },
+      "chin": {
+        "x": 171.5,
+        "y": 76.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 13,
+      "crown": {
+        "x": 145,
+        "y": 25.5
+      },
+      "chin": {
+        "x": 169.5,
+        "y": 72.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 14,
+      "crown": {
+        "x": 148,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 173.5,
+        "y": 71.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    },
+    {
+      "frame": 15,
+      "crown": {
+        "x": 150,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 174.5,
+        "y": 71.5
+      },
+      "note": "Draft native-semantic boundary selection from aligned full-master run6; annotation frozen before threshold evaluation. Review actual point overlay."
+    }
+  ]
+}

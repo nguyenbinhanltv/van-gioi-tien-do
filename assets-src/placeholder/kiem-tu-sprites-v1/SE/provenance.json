@@ -1,0 +1,525 @@
+{
+  "format": "vgtd-sprite-provenance",
+  "version": 1,
+  "character": "kiem-tu",
+  "direction": "SE",
+  "pipelineCommit": "00d4d4a49144c8ea28af918ba305e23d8a620f49",
+  "pipelineTree": "433c9263519c4b06505d2b78be93c935731d5000",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "codexCliVersion": "0.166.0",
+  "terms": "https://openai.com/policies/row-terms-of-use/",
+  "master": "../reference/SE.master4x.source.json",
+  "calls": [
+    {
+      "clip": "idle",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:37:36.144Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Cells1..8: standing BREATH LOOP, nearRIGHT/viewerLEFT swordcarry LOW and unchanged, farLEFT/viewerRIGHT hand relaxed. Tiny1-2unit chest/shoulder/hair/sash breathing only, inhale1-4/exhale5-8,8to1 seamless. Feet fixed on232, body208units +/-3%, head24, no large sway or costume changes. Cell9 bottom-right is unused master-neutral STANDING CONTROL, same scale/headsize/swordcarry.",
+      "referenceAliases": ["SE.master4x.png", "idle.template.png"],
+      "resultFile": "generation-selected/idle.raw.png",
+      "resultSha256": "7dfa0cb085c0fbaed283e43b643d59a0f50be4b819bbd36065520b7fa930e694",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "idle.template.png",
+          "file": "templates/idle.template.png",
+          "sha256": "6ebe48dfc70e6212dfd0b8ea488dbfd39a259e3f41940089c0cf84463bbc7df3"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:37:36.144Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Cells1..8: SEATED LOTUS MEDITATION LOOP facing SE same camera. Cross legs naturally beneath long robe, torso erect, eyes gentlyclosed, two hands rest over knees; ONE sword across lap with grip held by VIEWER-LEFT/anatomicalRIGHT hand and blade to viewer-right, no duplicate sword. Follow low HEAD guide y96 and waist200, ground232: seated figure~136units high, SAME~28unit head size as standing control, do NOT enlarge sitter to fill cell. Big blank upper area is intentional. Subtle breath/hair/ribbon only,8to1 seamless. Cell9 bottom-right neutralMASTER STANDING CONTROL head24/sole232/height208, right swordcarrylow; same physicalhead/torso size as seated poses.",
+      "referenceAliases": ["SE.master4x.png", "meditate.template.png"],
+      "resultFile": "generation-selected/meditate.raw.png",
+      "resultSha256": "bcc025f4f02a7e667932801bac93d4c0a23d38f057ad1652e723c179add5ee5f",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "meditate.template.png",
+          "file": "templates/meditate.template.png",
+          "sha256": "56a027433bd4275620ed626a55ccfc91c38f66d91505cfbc6ff116f99502d46d"
+        }
+      ]
+    },
+    {
+      "clip": "walk",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:37:36.144Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT6columns×2rows, TWELVE square cells, complete WALK cycle. First half FARLEFT/viewerRIGHT contact,down,passing,toeoff,up,precontact; second half NEARRIGHT/viewerLEFT contact,down,passing,toeoff,up,precontact. Amber footprint=farLEFT/viewerRIGHT boot, cyan=nearRIGHT/viewerLEFT boot; they are anatomical sides, not image-right/left label. Put corresponding soles on dots, keep separate foot lanes, no crossed legs. Markers blue=L-leading/red=R-leading, absent at passing. Natural short walk, modest knee bend under LONG robe, master limb lengths and same208unit bodyheight +/-3%, head24. NearRIGHT swordhand VIEWERLEFT stays low beside hip all12; only freefarLEFThand counter-swings gently. No changes of sword hand/carry/length, no high knees or squat. Hair hangs close with gentle consistent motion;12to1 seamless. Both legs must visibly alternate, not repeated sameleadingleg.",
+      "referenceAliases": ["SE.master4x.png", "walk.template.png"],
+      "resultFile": "generation-selected/walk.raw.png",
+      "resultSha256": "d28cf303e4b0e6ee51833aac69bca469212566044757622274f4d74e48c50878",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "walk.template.png",
+          "file": "templates/walk.template.png",
+          "sha256": "0d63fdabfb7b7aa8172f05f842cbdce600c69400608a0e37a74170aa1276b8a9"
+        }
+      ]
+    },
+    {
+      "clip": "run",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:37:36.144Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT6columns×2rows, TWELVE square cells, complete controlled long-robed RUN cycle, already in motion from cell1. First half FARLEFT/viewerRIGHT contact,down,passing,toeoff,up,precontact; second NEARRIGHT/viewerLEFT contact,down,passing,toeoff,up,precontact. Amber=farLEFT/viewerRIGHT boot, cyan=nearRIGHT/viewerLEFT boot; match exact dots/lanes and planted vs faint lifted footprints, no crossedlegs. Source stance~1/3cycle, brief flight gap3units max. Brisk SHORT stride, shallow knees hidden under long robe, modest forward lean, NO exaggerated knees-to-chest/deep squat/stubby shins/balloon trousers. Same full anatomical leg lengths, body boundingheight202..214units EVERY cell, head~24, only tiny bounce; do not compress body to centre small figures. Same face/headsize/costume/boots. NearRIGHT swordhand VIEWERLEFT stays LOW outside hip/blade down-left in ALL12, no forward swordcarry or handswitch. FreefarLEFThand small counter-swing. Hair/robe flows gently UP-LEFT/backward continuously INCLUDINGcell1 and12, so loop12to1 matches. Clear opposite leg phases, not twelve versions of same frontleg.",
+      "referenceAliases": ["SE.master4x.png", "run.template.png"],
+      "resultFile": "generation-selected/run.raw.png",
+      "resultSha256": "e6d41831cf3ad24794ed841923126c09bf32ce7cea8f7257bf67387652fc3420",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "run.template.png",
+          "file": "templates/run.template.png",
+          "sha256": "eace75e4e76997144ade145cf19407db51cde6818fcc0d112b89f19eb01951cf"
+        }
+      ]
+    },
+    {
+      "clip": "dash",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:37:36.144Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT4columns×2rows,8 square cells. Runtimecells1..6:1neutralready;2slightknee load;3push forward/down-right;4fast shallow forwardlean with rearfoot lifted;5brake frontfootdown;6recoverready. Same physical head/limbs and SEcamera, long robe flows up-left, natural cloth, no stretched limbs/high leaps/deep squat. NearRIGHT VIEWERLEFT swordlow byhip ALL6, onecarry, freeleft balances. Cell7AND8 bottomrowlast2 unusedneutral STANDING CONTROLS, head24/sole232, body208, samephysicalheadsize/costume.",
+      "referenceAliases": ["SE.master4x.png", "dash.template.png"],
+      "resultFile": "generation-selected/dash.raw.png",
+      "resultSha256": "27fb89c7f57d52d6d61ba556debc1453e6117f00c6aa2b62690830eee539b234",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "dash.template.png",
+          "file": "templates/dash.template.png",
+          "sha256": "61c4b3b7e71c42706e691dadc2331d445f50ca558b2ee4e5004b9b92cf80a8b4"
+        }
+      ]
+    },
+    {
+      "clip": "sword_fly",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:45:25.478Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Cells1..8: seamless SWORD FLIGHT LOOP, same SEfront-threequarter camera. Both boots balance on ONE horizontal/SE-diagonal sword UNDER FEET, blade points down-right along travel; NO sword inhand and no second sword. AnatomicalRIGHT/viewerLEFT hand makes twofingerseal atchest, farLEFT/viewerRIGHT hand balances. SAME physicalhead/limb sizes as standingcontrol, slightsoft knees. Runtimeheadguide16, swordboardaroundy224, groundguide232:8units air gap; do not enlarge rider. Tinybob/hair/robe flowing up-left,8to1seamless, noVFX/cloud/trail/shadow. Cell9bottom-right unusedneutralSTANDINGcontrol head24sole232 holdingONEswordinviewerLEFT/masterRIGHT handlow.",
+      "referenceAliases": ["SE.master4x.png", "sword_fly.template.png"],
+      "resultFile": "generation-selected/sword_fly.raw.png",
+      "resultSha256": "2d892559b0f0ccfbd98ee4ef4986ba4cdba514baee8968af27bc16cd646f5f43",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "sword_fly.template.png",
+          "file": "templates/sword_fly.template.png",
+          "sha256": "fcc055f2855c767b9c881a888ad00532b6c6fc164f645b31be85f8fcbd70c86c"
+        }
+      ]
+    },
+    {
+      "clip": "attack",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:45:25.478Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Runtimecells1..8 FIRST SWORD COMBO CUT:1neutralguard;2smallwindup;3nearRIGHT/viewerLEFT swordarmdrawsback;4launch shallowlunge;5HIT CONTACT decisive diagonal forehandcut towarddown-right;6followthrough;7recover;8readyguard. SAME sword grippedby anatomicalRIGHT shoulder/hand on VIEWERLEFT throughout; arm maycrossfrontbutNEVERtransferblade tootherhand. FarLEFThand balances and neverholdsblade. Naturalclothandfullleglengths, no highknees/deepsquat/stubbyshins. Match head/waistguides with samephysicalheadsize, swordcompleteincell with8unitmargin, don'tshrinkbodytofitweapon. Cell9bottom-right unusedneutralMASTER STANDINGcontrol head24sole232,208body, swordlowinviewerLEFT.",
+      "referenceAliases": ["SE.master4x.png", "attack.template.png"],
+      "resultFile": "generation-selected/attack.raw.png",
+      "resultSha256": "283d694cbfc9976891da8a29b0e6dfe6f6d9572d9c3ced91eb31803f816b722c",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "attack.template.png",
+          "file": "templates/attack.template.png",
+          "sha256": "c7c2b5393b1a3da6d6ffc130ccbf829b83eb986c3cdffc3008adea578dd1ce6f"
+        }
+      ]
+    },
+    {
+      "clip": "attack_2",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:45:25.478Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Runtimecells1..8 SECOND COMBO REVERSE/RISING CUT:1lowguard;2sworddrawnlowback towardviewer-left;3hips/shoulderload;4HIT CONTACT rising diagonal cut up/right;5bladecontinuesup;6followthrough;7recover;8readyguard. Grip stays anatomicalRIGHT shoulder/hand =VIEWERLEFT arm fromMASTER, evenasforearmcrosseschest. Otherhandunarmedbalances. SameSEcamera/face/costume/physicalproportions, shallowplausibleknees, full loose sleeve/forearm volume. Keepwholebladeinsidecellwithoutrescalingbody. Cell9bottom-right unusedMASTERneutralSTANDINGcontrol head24sole232,208height, nearRIGHTswordcarrylow.",
+      "referenceAliases": ["SE.master4x.png", "attack_2.template.png"],
+      "resultFile": "generation-selected/attack_2.raw.png",
+      "resultSha256": "32b9cdd743b99a4ecbdbb36e33263b471112d65e8ebc3e7400d76c6d0c0cc594",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "attack_2.template.png",
+          "file": "templates/attack_2.template.png",
+          "sha256": "c7c2b5393b1a3da6d6ffc130ccbf829b83eb986c3cdffc3008adea578dd1ce6f"
+        }
+      ]
+    },
+    {
+      "clip": "attack_3",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:45:25.478Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Runtimecells1..8 THIRD COMBO FINISHER:1readyguard;2nearRIGHT/viewerLEFT swordarmrises;3stronganticipation bladetiltedoverheadwithin8unitmargins;4launchshallowlunge;5HIT CONTACT powerful downward-forwardcleave towarddown-right;6weightyfollowthrough;7recover;8lowguard. ONEsword SAME anatomicalRIGHT/masterviewerLEFT hand throughout; farhandunarmedbalances. Head/facecamera staysSEfrontthreequarter, no backviewflip. Baggy sleeves/trousers moveascloth withnaturalcompleteanatomy, no stretch/kneebulges/croppedweapons. Cell9bottom-right unusedMASTERneutralSTANDINGcontrol head24sole232,208height, sameheadsize.",
+      "referenceAliases": ["SE.master4x.png", "attack_3.template.png"],
+      "resultFile": "generation-selected/attack_3.raw.png",
+      "resultSha256": "5adc45cd89962045da0a9543b37ff5bf4ae6a0b1038e730c73a6b601c2c462df",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "attack_3.template.png",
+          "file": "templates/attack_3.template.png",
+          "sha256": "c7c2b5393b1a3da6d6ffc130ccbf829b83eb986c3cdffc3008adea578dd1ce6f"
+        }
+      ]
+    },
+    {
+      "clip": "cast",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:45:25.478Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks. EXACT3columns×3rows square sheet. Runtimecells1..8 CAST:1neutral;2farLEFT/viewerRIGHT handforms twofingerseal atchest;3windup handrises;4windup peak;5RELEASE CONTACT openpalm/sealprojects towarddown-right;6followthrough;7handlowers;8neutral. NearRIGHT/viewerLEFT handholdsONEsword LOW byhip bladeDOWN-LEFT exactlylikeMASTER ALL8, never swaps/hands/pointsforward. Samephysicalhead/body208height unlessnaturalarmgestureextendsbbox, feetsteadyground232, eyesfocused, subtlecloth/hair. No bakedglow/orb/trail/lightning; VFXexternal. Cell9bottom-right unusedMASTERneutralSTANDINGcontrol head24sole232, sameface/costume/physicalscale.",
+      "referenceAliases": ["SE.master4x.png", "cast.template.png"],
+      "resultFile": "generation-selected/cast.raw.png",
+      "resultSha256": "8156d27db3283e4c3ffd610a48f81e37a6ac9160374c1458a347908b7d62f01d",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "cast.template.png",
+          "file": "templates/cast.template.png",
+          "sha256": "6ebe48dfc70e6212dfd0b8ea488dbfd39a259e3f41940089c0cf84463bbc7df3"
+        }
+      ]
+    },
+    {
+      "clip": "channel",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:56:17.632Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  EXACT3columns x3rows. Cells1-8 stationary channel loop: upright standing physical208unit body, head24/sole232, feet firmly planted. NearRIGHT/viewerLEFT hand carries ONE sword LOW outside hip throughout. FarLEFT/viewerRIGHT hand holds two-finger cultivation seal around chest. Calm focused eyes, tiny breathing/hand/hair/ribbon movements, no magic/VFX. Cell8 returns to1. Cell9 unused neutral STANDING CONTROL master pose same head size/body scale.",
+      "referenceAliases": ["SE.master4x.png", "channel.template.png"],
+      "resultFile": "generation-selected/channel.raw.png",
+      "resultSha256": "47bfd0ec1bd40d8bd3a6b36400d2d36c3893e01dfc44ac4b3c313006fa4b12a6",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "channel.template.png",
+          "file": "templates/channel.template.png",
+          "sha256": "6ebe48dfc70e6212dfd0b8ea488dbfd39a259e3f41940089c0cf84463bbc7df3"
+        }
+      ]
+    },
+    {
+      "clip": "hit",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:56:17.632Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  EXACT3columns x2rows. Cells1-4 non-graphic HIT reaction:1 ready,2 torso recoils back slightly,3 shoulders tense and knees soften slightly (no crouch),4 recover ready. Keep full figure same headsize/limblength, nearRIGHT/viewerLEFT hand keeps sword low, far hand braces. Follow individual head guides24,28,30,24 and sole232. Cells5,6 unused identical standing master CONTROL physical208unit body/head24/sole232.",
+      "referenceAliases": ["SE.master4x.png", "hit.template.png"],
+      "resultFile": "generation-selected/hit.raw.png",
+      "resultSha256": "4a9935423556e5d6021b6f6eb44215493a9b1dd179c1441a00772d89a78bf8b1",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "hit.template.png",
+          "file": "templates/hit.template.png",
+          "sha256": "0f22c0a10d3afa1d1f345cf9471beab7bfbdb27306d9fa00107056a3fa91b396"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:56:17.632Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  EXACT3columns x3rows. Cells1-8 non-graphic defeat collapse:1 standing,2 stagger and knees buckle,3 lower to one knee,4 both knees/body tilts,5 sinks sideways,6 lies side-prone,7 settles,8 holds prone. SAME head size and limb lengths in every cell, NEVER enlarge collapsed poses to fill cell. Head guides24,36,58,86,112,138,145,145 respectively, feet/body floor232. Keep sword near anatomicalRIGHT/viewerLEFT hand then resting along floor, all body/sword inside cell. Cell9 unused upright standing CONTROL208unit body/head24/sole232.",
+      "referenceAliases": ["SE.master4x.png", "die.template.png"],
+      "resultFile": "generation-selected/die.raw.png",
+      "resultSha256": "dba1e3b4f0f33c5640bedadc9a1524d413e12c82a132144f9b15f5418f2dc563",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "die.template.png",
+          "file": "templates/die.template.png",
+          "sha256": "7ac55207e45579564e41c622693edcc5644993cb1346cda7c20f3485cbfa4187"
+        }
+      ]
+    },
+    {
+      "clip": "tribulation",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:56:17.632Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  EXACT5columns x3rows. Cells1-12 tribulation bracing sequence:1 standing ready,2 braces,3 kneels,4-5 low defensive kneel,6 rallies,7-8 hunches against imagined impact,9 rises,10 pushes up,11 regains stance,12 ready. No lightning/magic/shadows, only character reaction. SAME physical headsize and proportions, lower head/waist guides indicate genuine kneeling, NEVER enlarge kneeling characters. Sword retained nearRIGHT/viewerLEFT hand low outward. Cells13,14,15 UNUSED identical standing master CONTROL208unit body/head24/sole232.",
+      "referenceAliases": ["SE.master4x.png", "tribulation.template.png"],
+      "resultFile": "generation-selected/tribulation.raw.png",
+      "resultSha256": "bde4c22675085d08f07d4b8323b1554737343a299dcc9b61e5b0cd1f4e4dc9a9",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "tribulation.template.png",
+          "file": "templates/tribulation.template.png",
+          "sha256": "2ef4a9cdccfe90a5287789f4164cc9311b331601d184c0576fee89c8282b4d08"
+        }
+      ]
+    },
+    {
+      "clip": "emote",
+      "attempt": 1,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:56:17.632Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  EXACT3columns x3rows. Cells1-8 friendly restrained greeting loop: upright standing master208unit body/head24/sole232, same face/body scale all cells, tiny head motion max2units. NearRIGHT/viewerLEFT sword LOW and unchanged. FarLEFT/viewerRIGHT empty hand lifts open-palm greeting, small wave, lowers,8 returns to1. No speech/icons/VFX, feet fixed. Cell9 unused standing master CONTROL same208unitbody.",
+      "referenceAliases": ["SE.master4x.png", "emote.template.png"],
+      "resultFile": "generation-selected/emote.raw.png",
+      "resultSha256": "33d102964e323982980465fff175803b6405e5324c636959fc45622bf94725f3",
+      "references": [
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        },
+        {
+          "alias": "emote.template.png",
+          "file": "templates/emote.template.png",
+          "sha256": "63e706132ee7f5a2815f64f43640d18f3a8f47796a8191bc7e51163932e02736"
+        }
+      ]
+    },
+    {
+      "clip": "run",
+      "attempt": 2,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:55:01.934Z",
+      "prompt": "Production game sprite sheet for Vạn Giới Tiên Đồ, Kiếm tu concept A. Image1 MASTER is authoritative identity/costume/physical scale and camera: SOUTHEAST, FRONT THREE-QUARTER facing down-and-screen-RIGHT, slight overhead isometric orthographic. NEVER pure E profile, frontal S, or back view. SAME young adult male face, slim master proportions, long dark hair/bun/jadepin/blue ribbon, muted slate-blue LONG sleeveless outer robe/vest with narrow gold edges, ivory inner robe/sleeves/trousers, dark ANKLE boots (not knee boots), navy sash/knot/tails/jade pendant. Same fine dark brown-gray outlines, restrained painterly NW lighting and cloth-fold shading. No costume redesign/floral motifs/armour. IMPORTANT: master sword is held in the VIEWER-LEFT hand, the character's anatomical RIGHT/near arm. That SAME hand holds the ONE thin straight jian throughout; do not switch to viewer-right hand. For idle/run/walk/dash, keep sword LOW outside viewer-left hip with blade pointing down/out to viewer-left like MASTER, never swinging forward/crossing chest. Other hand is viewer-right/farLEFT. Empty scabbard on viewer-right hip, no sword hilt inside. Image2 TEMPLATE fixes equal square256-unit cells, reading order row by row, pelvis axis124.05, standing bun top24/sole232 (208unit body), same head size and limb proportions throughout. Some pose cells have a lower head/waist line: follow it without enlarging seated/collapsed body parts. Standing control cells always head24/sole232; same physical head size as action cells. No per-frame zoom/recentering/shrinking. Full figure/sword inside every cell with margin, never overlaps neighbours. Background perfectly uniform #ff00ff; no shadow/floor/cloud/VFX/glow/trail/motionblur, no numbers/text/grid/guide lines/ticks in FINISHED art. Keep natural shading inside cloth. Remove all template marks.  Repair ONLY the FIVE white-mask cells of this 6 column x2 row RUN sheet: cells2,5,10,11,12 reading order. Image1 guide has those cells blanked with exact head-top, waist, sole target guides; image2 original sheet provides the original running poses and seven good characters; image3 white mask identifies replacement cells, image4 master is identity. Fill the five blanks with the SAME swordsman matching the seven retained cells, the same FACE SIZE, blue long vest, ivory robe/trousers, dark ankle boots and low sword carried in VIEWER-LEFT/anatomicalRIGHT hand. Exact drawn body height in each repaired cell is 312 pixels on this 2048x683 sheet: bun top about25 and lowest boot sole337 within its row. Retain natural shallow-knee run movement, do not crouch/shrink in cells5,10,11; extend the running leg reach to the ground guide while keeping head size consistent. Cells2/12 only slightly lower the bun/relax reach to target height. Follow cyan nearRIGHT and amber farLEFT boot markers; preserve alternating legs, no carry switch. No guide lines, dots, mask, text, shadows or grid in finished sheet, perfectly magenta background. Seven unmasked cells unchanged. Same full sheet 6x2 layout.",
+      "referenceAliases": [
+        "run-height-repair1.guide.png",
+        "exec-1abf246b-160f-4b4e-87b5-7ecd53087936.png",
+        "run-height-repair1.mask.png",
+        "SE.master4x.png"
+      ],
+      "resultFile": "generation-selected/run.repair1.raw.png",
+      "resultSha256": "a91f78d5b8c6c3520f12d6e362dbf3acd22cfb261325aa15e3519566b2262fa9",
+      "references": [
+        {
+          "alias": "run-height-repair1.guide.png",
+          "file": "repair-inputs/run-height-repair1.guide.png",
+          "sha256": "7f04a96c7b2a91556cd6dde4615e3a034946eaefd4dd4a7aabb21958f9836c7b"
+        },
+        {
+          "alias": "exec-1abf246b-160f-4b4e-87b5-7ecd53087936.png",
+          "file": "generation-selected/run.raw.png",
+          "sha256": "e6d41831cf3ad24794ed841923126c09bf32ce7cea8f7257bf67387652fc3420"
+        },
+        {
+          "alias": "run-height-repair1.mask.png",
+          "file": "repair-inputs/run-height-repair1.mask.png",
+          "sha256": "6167e35abc435209a91744835cba9471b4bc623af4628129816cbbf801bf7642"
+        },
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        }
+      ]
+    },
+    {
+      "clip": "run",
+      "attempt": 3,
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "startedUtc": "2026-11-06T18:58:07.342Z",
+      "prompt": "CELL-LOCAL GAME SPRITE REPAIR, exact6 columns x2rows. Keep same SE threequarter swordsman, costume, face/head size and sword low in viewerLEFT hand. The prior image still has TOO SHORT airborne poses in cells5,10,11 and too tall cell12. REDRAW those FOUR cells only, using shallow running poses instead: cell5 extend its viewer-right boot DOWN by20 sourcepixels; cell10 extend lowest boot DOWN by12; cell11 extend lowest boot DOWN by28. Keep the bun at current height, head/torso/robe width unchanged; make the supporting trouser leg less tucked, with ankle boot near the bottom ground guide. Cell12 slightly soften leg reach/raise sole by6pixels, keeping bun fixed. Goal each repaired character bun-to-lowest-boot is312pixels in a341px high cell (roughly91.5% cell height). A low boot reach is more important than copying the old airborne knee tuck. Do not enlarge heads or scale figures; genuinely draw a lower-reaching boot/shallower running knee. Image2 guide shows target top/waist/floor positions, image3 master costume. Same white ivory loose trousers, dark ankle boots. Keep cell2 and all other seven characters exactly unchanged. Perfect magenta #ff00ff flatbackground, no lines/text/shadows/VFX. ONE sword low viewer-left carry throughout, same physical scale.",
+      "referenceAliases": [
+        "exec-f4fad064-f509-4df5-97c6-9501afacd658.png",
+        "run-height-repair1.guide.png",
+        "SE.master4x.png"
+      ],
+      "resultFile": "generation-selected/run.repair2.raw.png",
+      "resultSha256": "05ba6266895d71c5567c20428fe0e109e8879a7d18e3e6a81334f6d83907d6c0",
+      "references": [
+        {
+          "alias": "exec-f4fad064-f509-4df5-97c6-9501afacd658.png",
+          "file": "generation-selected/run.repair1.raw.png",
+          "sha256": "a91f78d5b8c6c3520f12d6e362dbf3acd22cfb261325aa15e3519566b2262fa9"
+        },
+        {
+          "alias": "run-height-repair1.guide.png",
+          "file": "repair-inputs/run-height-repair1.guide.png",
+          "sha256": "7f04a96c7b2a91556cd6dde4615e3a034946eaefd4dd4a7aabb21958f9836c7b"
+        },
+        {
+          "alias": "SE.master4x.png",
+          "file": "../reference/SE.master4x.png",
+          "sha256": "fa716b17506a103590b3b285bc1ee8f34da3a452bcd7c68d80a5cd63d70da4bc"
+        }
+      ]
+    }
+  ],
+  "committedSheets": [
+    {
+      "clip": "idle",
+      "file": "sheets/idle.png",
+      "sha256": "7dfa0cb085c0fbaed283e43b643d59a0f50be4b819bbd36065520b7fa930e694"
+    },
+    {
+      "clip": "meditate",
+      "file": "sheets/meditate.png",
+      "sha256": "bcc025f4f02a7e667932801bac93d4c0a23d38f057ad1652e723c179add5ee5f"
+    },
+    {
+      "clip": "walk",
+      "file": "sheets/walk.png",
+      "sha256": "d28cf303e4b0e6ee51833aac69bca469212566044757622274f4d74e48c50878"
+    },
+    {
+      "clip": "run",
+      "file": "sheets/run.png",
+      "sha256": "f4d3244ef1e8636f251db7ac14ccce7c133d10622be498574a5ee025112a8c07"
+    },
+    {
+      "clip": "dash",
+      "file": "sheets/dash.png",
+      "sha256": "27fb89c7f57d52d6d61ba556debc1453e6117f00c6aa2b62690830eee539b234"
+    },
+    {
+      "clip": "sword_fly",
+      "file": "sheets/sword_fly.png",
+      "sha256": "2d892559b0f0ccfbd98ee4ef4986ba4cdba514baee8968af27bc16cd646f5f43"
+    },
+    {
+      "clip": "attack",
+      "file": "sheets/attack.png",
+      "sha256": "283d694cbfc9976891da8a29b0e6dfe6f6d9572d9c3ced91eb31803f816b722c"
+    },
+    {
+      "clip": "attack_2",
+      "file": "sheets/attack_2.png",
+      "sha256": "32b9cdd743b99a4ecbdbb36e33263b471112d65e8ebc3e7400d76c6d0c0cc594"
+    },
+    {
+      "clip": "attack_3",
+      "file": "sheets/attack_3.png",
+      "sha256": "5adc45cd89962045da0a9543b37ff5bf4ae6a0b1038e730c73a6b601c2c462df"
+    },
+    {
+      "clip": "cast",
+      "file": "sheets/cast.png",
+      "sha256": "8156d27db3283e4c3ffd610a48f81e37a6ac9160374c1458a347908b7d62f01d"
+    },
+    {
+      "clip": "channel",
+      "file": "sheets/channel.png",
+      "sha256": "47bfd0ec1bd40d8bd3a6b36400d2d36c3893e01dfc44ac4b3c313006fa4b12a6"
+    },
+    {
+      "clip": "hit",
+      "file": "sheets/hit.png",
+      "sha256": "4a9935423556e5d6021b6f6eb44215493a9b1dd179c1441a00772d89a78bf8b1"
+    },
+    {
+      "clip": "die",
+      "file": "sheets/die.png",
+      "sha256": "dba1e3b4f0f33c5640bedadc9a1524d413e12c82a132144f9b15f5418f2dc563"
+    },
+    {
+      "clip": "tribulation",
+      "file": "sheets/tribulation.png",
+      "sha256": "bde4c22675085d08f07d4b8323b1554737343a299dcc9b61e5b0cd1f4e4dc9a9"
+    },
+    {
+      "clip": "emote",
+      "file": "sheets/emote.png",
+      "sha256": "33d102964e323982980465fff175803b6405e5324c636959fc45622bf94725f3"
+    }
+  ],
+  "postprocess": "Public @vgtd/sprite: chroma key, alpha defringe + palette-aware interior spill cleanup, master palette lock, one standing-control or locked median calibration per sheet, translation only per frame, one PMA atlas padding2/extrude1. Pose guide lines/masks were drawn deterministically on template images only; no final character pixels manually painted. Run repaired with two imagegen rerolls using whole-cell repairCell and SHA256 proofs. Anatomical pose exceptions match public documented E convention; unexcepted die scores remain diagnostic. No hard thresholds or gameplay speeds changed."
+}

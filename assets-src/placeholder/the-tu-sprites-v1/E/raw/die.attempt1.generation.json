@@ -1,0 +1,16 @@
+{
+  "clip": "die",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 16:46:22 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame DIE sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FOUR equal SQUARE columns by THREE rows, 12 full-body frames, row-major left-to-right top-to-bottom, sheet aspect4:3. In every cell face EAST / screen RIGHT in the same slightly overhead orthographic isometric side view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y15, planted boot soles y232, upright anatomical figure height217 units, seated/collapsed pose naturally shorter without changing limb or head size, pelvis axis x128. All12 identical anatomical scale and head size. Do not shrink figure to center; use85% cellheight and keep whole figure in owncell. TWELVE-frame DEATH collapse, no loop. Cell1 standing guard exact master;2 stunned chest clutch with gauntlet;3 knees buckle;4 torso bows forward;5 one knee drops;6 both knees ground;7 torso sinks sideways toward screen-left;8 one bronze-gauntleted arm supports ground;9 collapses on side;10 lies sideways motionless;11 same lying pose settles cloth;12 final held lying pose. Full-sized character folds and rotates naturally, NEVER shrinks to fit. Keep head/body/gauntlets/boots all present and within cell. Facing remains screen-right as it falls, no full back-turn. Bronze gauntlets stay worn. Same costume and face, eyes closed on final frames. No blood, gore, weapon, ground/floor/shadow, skull, extra figures or effects. Exact master costume, no added props. Pure flat opaque#FF00FF background, REMOVE ALL guides/borders/ghosts/ticks/text/labels; no floor, shadows, blur or effects. One complete character in each own cell.",
+  "references": ["../../the-tu-continuous-v1/reference/E.master4x.png", "templates/die.template.png"],
+  "selectedOutput": "sheets/die.png",
+  "status": "selected; main QA PASS, real Cocos2x capture all15 clips PASS",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-780e18bb-23ab-4ebb-8c8a-bc3c674328d6.png",
+  "utcEndObserved": "2026-11-06 16:48:26 UTC",
+  "originalBackup": "raw/originals/die.attempt1.png",
+  "finalGate": "export/engine-gate.json"
+}

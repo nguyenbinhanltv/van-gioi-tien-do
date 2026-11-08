@@ -1,0 +1,25 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 3,
+  "prompt": "EDIT TARGET image1: the exact 16-cell 4x4 NE running sprite sheet. Image2: locked canonical NE T1 master, identity and precise main-cap/head anatomy reference. Make a surgical head/upper-neck anatomy correction in all16 cells. Preserve each original body pose, shoulder/acromion position, natural LEFT-hand vermilion fan, arms, hands, sleeves, torso, sash, legs, feet, lattice/cell size, camera and dynamic flight tucks EXACTLY. Never flatten motion. Preserve streaming secondary hair/ribbons outside the skull core. The original heads are too broad and vertically long between crown and shoulder. Match image2's skull/main-cap breadth and crown-to-right-ACROMION span, preserving fixed rear-three-quarter adult female face/ear and compact coil/pins/tassels. Coil wraps the skull; its top is the main cap, no elevated bun. Correct head and neck attachment only, about10% narrower than image1 and about8% shorter crown-to-shoulder span; do not scale or move the body or shoulders. Reference after global DPI normalization+locked0.947826 calibration: cap breadth52px, vertical crown to acromion63px; at logical source256 before calibration about54.86 and66.47px. ACROMION means outer shoulder corner where diagonal neck/shoulder garment edge becomes near-vertical sleeve; NOT ear, necklace, trapezius or elbow. All heads consistent scale across16cells, do not make tiny skulls. Match source lighting/cel shading/tinted outlines, plum hair and tunic, gold trim, vermilion accent. No extra face visible, no front-facing heads. Keep exact magenta background, no new FX/ground shadows/labels; original project design only. Output the same 4x4 full sheet, every complete figure retained. Preserve non-head pixels as closely as possible.",
+  "utcStart": "2026-11-08 01:26:09 UTC",
+  "references": ["NE/raw/run.attempt1.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt3.png",
+  "status": "not selected; retained raw provenance and selection.json rationale",
+  "utcEndObserved": "2026-11-08T01:34:03.023Z",
+  "rawSha256": "546f4d7446c5cadc03117ccf27a6fd2bb4db83f90999ae90d0b168606bf44592",
+  "utcRawOutputFileModified": "2026-11-08T01:27:06.741Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/raw/run.attempt1.png",
+      "sha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}

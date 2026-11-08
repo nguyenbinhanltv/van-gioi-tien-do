@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:41:48.610Z",
+  "utcRecordedCompleted": "2026-11-07T23:42:50.459Z",
+  "prompt": "Use case: precise-object-edit. Fill this EXACT FIRST IMAGE 4x4 sprite lattice with SIXTEEN DISTINCT sequential frames of a smooth seamless IDLE BREATHING LOOP at24fps for DAO TU T1, male Storm Reaver. Image1 is edit target 1024x1024: each cell256x256 has exact canonical HEAD STENCIL at its intended size/position. Image2 is full E master identity/costume reference. Preserve exact E profile looking RIGHT in ALL16 cells; never face viewer. Respect head silhouette/grey eye/swept fringe size: main crown-to-chin about50px, body main-crown-to-sole216-219px. Anatomical crown aroundy16, solesy232, pelvis rootx128 in EACH256cell. Head stencil is size/identity reference, do not scale down. Fill body below existing head: lean adult male plain sleeveless dark muted teal wrap tunic, storm grey-blue collar/sash, short split overskirt, dark loose pants/boots/bracers minimal dull brass, low loose black ponytail. Same broad single-edge steel dao with sparse ink-mountain silhouette carried on RIGHT shoulder by bent right hand. Idle: feet fixed planted, slow chest expansion over frames0-7 then exhale8-15; shoulder rises1-2logicalpx, relaxed free fist; restrained ponytail/cloth secondary lag; dao subtly follows shoulder, no attacks. Distinct in-betweens, continuous cycle, frame15 naturally closes to0. Do not move whole body or feet. Entire sword/hair inside EACH cell, no cropped tips/overlap, no shrink-to-fit. All16 frames required, row-major order. Draw same premium clean painted semi-chibi xianxia style and northwest light. Remove ALL guide lines/borders/head-stencil crop rectangles in output, replace all unused space with UNIFORM OPAQUE PURE MAGENTA RGB255,0,255. No foot shadows, FX, labels, text or grid lines. Exact square4x4 output, not a contact sheet redesign. No per-frame scale changes, no large realistic small head.",
+  "references": ["templates/idle.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/idle.png",
+  "operation": "AI edit from unscaled canonical head stencil; whole-sheet square-cell DPI preparation only; no individual frame rescaling",
+  "status": "candidate; QA pending"
+}

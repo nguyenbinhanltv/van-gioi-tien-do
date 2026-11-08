@@ -1,0 +1,38 @@
+{
+  "name": "E-run-two-head-repair",
+  "start": "2026-11-08T00:35:44.587Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Precise local repair of ONLY TWO heads in this 4x4 Thương tu male E run sprite lattice, all cells zero-based. Cell6=row2 col3: current head is TOO LARGE; reduce whole skull/mainhair/face/ear about5%, keeping neck anchor fixed. Cell11=row3 col4: current head is TOO SMALL; enlarge whole skull/mainhair/face/ear about4%, neck anchored. Reference2 locked canonical profile identity. Target visible rounded main-cap crown to jaw Euclidean length about66.7 raw px in each313.5px cell, corresponding52.55 in aligned216px character. Cell12 row4col1 is good size reference within this sheet. Preserve EXACT all other14 cells and all bodies, poses, torso, limbs, hands, weapon, clothing, root registration, magenta background, 1254x1254 dimensions. Do not normalize body height. No face-only distortion. Keep adult male small almond eye, swept black main hair, low ponytail, navy/ivory/red plain T1 outfit. ONLY shrink cell6 head modestly and enlarge cell11 head modestly. No labels/grid/FX.",
+  "endObserved": "2026-11-08T00:36:18.383Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-17cc43ea-0caa-4231-b815-a0c6966c56ea.png",
+  "output": "raw/run.two-head-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "candidate not yet accepted",
+  "outputEvidence": {
+    "path": "E/raw/run.two-head-edited.png",
+    "sha256": "37f27fe15a433f13e6c23efa0932155661faa9c8d68b29491cd63bf932458987",
+    "bytes": 1913667,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+      "path": "E/raw/run.head-repaired.png",
+      "sha256": "627fd93a1101607bd2fd6dee1ebfe39bf0815351084ae1b37836229d5357f98d",
+      "bytes": 2287177,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

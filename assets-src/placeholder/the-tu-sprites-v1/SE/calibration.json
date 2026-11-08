@@ -1,0 +1,198 @@
+{
+  "method": "One character-wide normalized-cell scale from all32 upright raw samples, fixed per-sheet DPI conversion only; no frame-specific scaling",
+  "normalizedReferenceHeight": 0.9199549041713642,
+  "samples": [
+    {
+      "clip": "idle",
+      "cell": 0,
+      "rawHeight": 409,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 1,
+      "rawHeight": 410,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 2,
+      "rawHeight": 412,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 3,
+      "rawHeight": 413,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 4,
+      "rawHeight": 411,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 5,
+      "rawHeight": 409,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 6,
+      "rawHeight": 409,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "idle",
+      "cell": 7,
+      "rawHeight": 408,
+      "rawCellHeight": 443.5
+    },
+    {
+      "clip": "walk",
+      "cell": 0,
+      "rawHeight": 336,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 1,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 2,
+      "rawHeight": 325,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 3,
+      "rawHeight": 325,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 4,
+      "rawHeight": 327,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 5,
+      "rawHeight": 327,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 6,
+      "rawHeight": 335,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 7,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 8,
+      "rawHeight": 328,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 9,
+      "rawHeight": 333,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 10,
+      "rawHeight": 330,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "walk",
+      "cell": 11,
+      "rawHeight": 328,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 0,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 1,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 2,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 3,
+      "rawHeight": 324,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 4,
+      "rawHeight": 301,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 5,
+      "rawHeight": 328,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 6,
+      "rawHeight": 334,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 7,
+      "rawHeight": 336,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 8,
+      "rawHeight": 326,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 9,
+      "rawHeight": 307,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 10,
+      "rawHeight": 288,
+      "rawCellHeight": 362
+    },
+    {
+      "clip": "run",
+      "cell": 11,
+      "rawHeight": 331,
+      "rawCellHeight": 362
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:17:15.541Z",
+  "utcCompleted": "2026-11-07T23:18:13.645Z",
+  "prompt": "Use case: precise-object-edit. Image1 EDIT TARGET is16cell4x4 HIT6+DASH10 sheet. Previous edit made FIVE shallow dash skulls slightly TOO SMALL. Correct ONLY globalcells7,8,9,12,13 (=dashlocal1,2,3,6,7). Increase each skull maincap-to-centraljaw distance by about4logicalpixels (roughly5nativepixels), about8percent, keeping its center and exact pitch/yaw. Target attached skullcap-to-chin48logicalpx /58.8nativepx per313.5nativecell; compare image2 locked master. Existing head distance in those5cells is43–45logicalpx. It must become48, not return to the original oversized52. Both deep dash heads in global10,11 ALREADY correct: keep unchanged. Allhitcells0..5, dashglobal6,14,15 unchanged. Same matureface identity and hair, tinybun/amberribbons. Change only the five heads with minimum neckblend, no body scale/position/pose changes, no flattening forwardpitch. Preserve fullbody arms/gauntlets/boots/ivoryapron/sash, exact4x4 dimensions and registrations, opaque magenta andblackdividers. NoFX/text. Precisely a small HEAD enlargement in five specifiedcells.",
+  "references": ["raw/hit-dash.head-edit.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-2a9abe91-423c-45b9-adaa-70dade46010a.png",
+  "status": "Historical generation/edit input retained; project.json selects final fullsheets. Cell compositions use adjacent repair proofs.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": false,
+  "archivedRaw": {
+    "file": "raw/hit-dash.head-edit2.png",
+    "sha256": "de77f5de16d5c725d3ef6ed8895c59030511eb72858c6a9a1b1a9203abe7e5f2",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "raw/hit-dash.head-edit.png",
+      "sha256": "1f34c6a1ba4a081bdc8d2426fc9798f528e91e5a213535665fb79909609830b2"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:35.957103+00:00"
+}

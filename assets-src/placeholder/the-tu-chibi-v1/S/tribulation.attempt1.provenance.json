@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T22:54:49.821Z",
+  "utcRecordedCompleted": "2026-11-07T22:55:27.117Z",
+  "prompt": "Use case: identity-preserve. Production original Thể tu T1 premium semi-chibi. Pinned master image2 defines fixed adult tan squarejaw face, amber eyes, thick brows and tiny leftbrow nick, black swept maincap/smallcompactbun with amberribbons. Image1 is official lattice with UNSCALED master-head stencils at intended positions: preserve each headunit SAME SIZE, no babyface/headenlargement. S STRAIGHT FRONTAL view facing down toward viewer/bottomscreen, slightly elevated isometric camera allframes. Both eyes/symmetricfrontface visible, NOT SE/Eprofile. AnatomicalneutralH216logicalpx/256cell, ground232, entirebun-to-sole225max in uprightneutral. Same bodypartlengths, no fill-to-box or perframefitting. Charcoal sleevelesswrap/trousers, IVORY ink-wash apron UNDER broad amberhip sash, simplepaired WORNcharcoalgauntlets onebronze wristband/smoothknuckleplate, bronze/goldtrim; gauntlets naturally worn in hands, neverdetached. Two-tonecel+smallhighlight/rim,NWkeylight,tinted outlines. Hair/ribbons/sashtails/apron lag action by2frames andsettle. Wholefigures entirely insidecells afterpelviscentering, compactbun/ribbons no upwardarcs. OpaqueuniformRGB255,0,255magenta, no shadows/FX/props/labels/guide lines/ghosts/stencilduplicateheads. EXACT16consecutivedrawings in4x4SQUAREcanvas2048x2048, all16cellsfilledrowmajor. BRACED ONE-KNEE TRIBULATION loop. Kneel rightknee onground, leftbootplanted forward, torso leaning slightlyforward, bothgauntlets crossbrace at chest/cheek to endure unseenpressure. Sameadultface determined, headunit exactstencilsize, noheadenlargement to fillcell.0-5pressurepush shouldersdown/kneeflex,6-9resist/pushback,10-15recoveroriginalbrace; distinctsmoothsmall variations, looplastfirst. Ivoryapron drapes naturally overforwardthigh; ribbons/sash lagandsettle. NO lightning/aura/sparks/clouds/FX/shadow. Bracedkneelingheightnaturally~190logicalpx. Remove allguides/extrastencilheads/labels; opaqueuniformmagenta background. FrontcameraS and fixedmasterface/headsize are mandatory. Preserve ivoryapron beneathsash and naturalpairedgauntlets; originaldesignonly.",
+  "references": ["templates/tribulation.head-stencil.template.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-48dea468-29e6-49c3-b38a-c89b0b90386f.png",
+  "status": "Selected fullsheet: native hard gates and all15 Cocos2x clips passed;53 accepted soft findings retained.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": true,
+  "archivedRaw": {
+    "file": "raw/tribulation.attempt1.png",
+    "sha256": "35498dec3c09aa50be26eb96a5432583b57bfccbb161529cc1c70c09a2a11373",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "templates/tribulation.head-stencil.template.png",
+      "sha256": "d13c1753caa2e13b3ea8d651a75102f507ea53b8286910bec3c576417295ff13"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:36.573731+00:00"
+}

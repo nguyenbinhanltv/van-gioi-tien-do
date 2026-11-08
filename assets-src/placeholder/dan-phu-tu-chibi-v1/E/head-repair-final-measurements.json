@@ -1,0 +1,83 @@
+{
+  "convention": "Semantic boundary edges, pipeline alpha128 jaw support with both columns for fractional X; first attachedcap includes true hair highlights and excludes identifiable tie/pin/bun. Selection frozen from native shape, no ratio-dependent fitting.",
+  "updates": [
+    {
+      "clip": "run",
+      "frame": 7,
+      "previous": {
+        "crown": {
+          "x": 154,
+          "y": 19.5
+        },
+        "chin": {
+          "x": 180.5,
+          "y": 68.5
+        },
+        "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+      },
+      "selected": {
+        "crown": {
+          "x": 154,
+          "y": 21.5
+        },
+        "chin": {
+          "x": 180.5,
+          "y": 67.5
+        },
+        "note": "Retained run.attempt7 nativecell7. First attached hair22 after identifiable tie21; jaw67 alpha255/243 bothcolumns, row68 average77.5<128. Other motion geometry preserved."
+      }
+    },
+    {
+      "clip": "run",
+      "frame": 10,
+      "previous": {
+        "crown": {
+          "x": 148,
+          "y": 27.5
+        },
+        "chin": {
+          "x": 171,
+          "y": 77.5
+        },
+        "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+      },
+      "selected": {
+        "crown": {
+          "x": 149,
+          "y": 28.5
+        },
+        "chin": {
+          "x": 173,
+          "y": 76.5
+        },
+        "note": "AI run.attempt9 cell10. Include attached hair/rim highlight29 below pinktie28; last jaw76alpha255,77alpha23<128. Fresh semantic regions reviewed with style23."
+      }
+    },
+    {
+      "clip": "dash",
+      "frame": 2,
+      "previous": {
+        "crown": {
+          "x": 148,
+          "y": 44.5
+        },
+        "chin": {
+          "x": 171.5,
+          "y": 90.5
+        },
+        "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+      },
+      "selected": {
+        "crown": {
+          "x": 148,
+          "y": 45.5
+        },
+        "chin": {
+          "x": 172,
+          "y": 91.5
+        },
+        "note": "Retained canonical-stencil hit-dash.attempt3 nativeglobal8. Identifiable pinktie45, attachedhair46; anterior chin172 has jaw91alpha249 then92zero. Coarse171.5 source was not reused across raw candidates."
+      }
+    }
+  ]
+}

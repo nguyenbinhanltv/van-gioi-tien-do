@@ -1,0 +1,29 @@
+{
+  "clip": "walk",
+  "direction": "S",
+  "attempt": 2,
+  "prompt": "CORRECT ONLY THE WALK CYCLE PHASING in image1, preserving its EXACT16cell4x4 lattice, canonical adult face/skull size, plum shorttunic/trousers, pin/tassel/earrings, leftfan SCREENRIGHT, fixed Sfront camera and body scale. Current legs alternate tooearly/doublecycle. Rebuild legs and free-right-arm counter-swing as ONE complete two-step cycle. Image2 master locks face/proportions. Image3 head+FOOTguide gives authoritative soles: nearR isSCREENLEFT x114.7; farL SCREENRIGHT x142.7. R foot PLANTED frames0-7, tracks slowly BACK in Y from245.3,242,238.7,235.3,232,228.7,225.3,222; meanwhileL SWINGS smoothly forward y218.7to238.2. Lfoot PLANTED frames8-15 withsameYtrack245.3to222, whileR swings forward218.7to238.2. DoNOT reverse support at4 or12. No crossing leg lanes; knees flex naturally on passingframes4,12. Toeoff7/15 thencontact8/0, smooth seam. Copy guide positions includingground-depthY; OMITghosts/grid/markers. Hair/ribbons/sleeves lag1-2frames. Preserve naturalleftfan grip and entirebody, no perframe zoom/headsizechange. Pure#FF00FF noFX/shadows.",
+  "utcStart": "2026-11-07 23:03:51 UTC",
+  "references": ["S/raw/walk.attempt1.png", "reference/S.master.png", "S/templates/walk.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/walk.attempt2.png",
+  "utcEndObserved": "2026-11-07 23:04:35 UTC",
+  "status": "not selected; retained raw provenance and selection.json rationale",
+  "rawSha256": "7b2d054cadff2aa9abac109c8f1499bc5210c5d9ad6f04b5fa6e2756200dc1fc",
+  "utcRawOutputFileModified": "2026-11-07T23:04:35.504Z",
+  "referenceSnapshots": [
+    {
+      "file": "S/raw/walk.attempt1.png",
+      "sha256": "88594b5d7cad0ecda0708940293446cfc7941e823165fc5c2bb6d354196d975a"
+    },
+    {
+      "file": "reference/S.master.png",
+      "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168"
+    },
+    {
+      "file": "S/templates/walk.head-guide.png",
+      "sha256": "104bc57ab8fee3bc7552fda4879feead61c0d2b2ee3505431e2e9612ade097cf"
+    }
+  ]
+}

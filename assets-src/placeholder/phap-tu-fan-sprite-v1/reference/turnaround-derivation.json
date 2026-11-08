@@ -1,0 +1,182 @@
+{
+  "source": "turnaround-generated.png",
+  "method": "equal-column crop, fragment removal, one shared uniform scale across all turnaround views, per-view translation only; E production master retained",
+  "calibration": {
+    "scale": 0.24299065420560748,
+    "targetHeight": 208,
+    "referenceHeight": 856,
+    "referenceFrames": 5
+  },
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 127.54954954954955
+  },
+  "records": [
+    {
+      "dir": "SE",
+      "crop": {
+        "x": 355,
+        "y": 0,
+        "width": 355,
+        "height": 887
+      },
+      "source": {
+        "left": 26,
+        "right": 333,
+        "top": 18,
+        "bottom": 877,
+        "height": 859,
+        "width": 307,
+        "pelvisX": 192.14163474350434
+      },
+      "record": {
+        "pre": {
+          "height": 208.7289719626168,
+          "pelvisX": 46.688621526458995,
+          "soleY": 213.10280373831776
+        },
+        "post": {
+          "height": 209,
+          "pelvisX": 127.17745887294365,
+          "soleY": 232
+        },
+        "dx": 80.86092802309057,
+        "dy": 18.89719626168224
+      },
+      "post": {
+        "left": 87,
+        "right": 162,
+        "top": 23,
+        "bottom": 232,
+        "height": 209,
+        "width": 75,
+        "pelvisX": 127.17745887294365
+      }
+    },
+    {
+      "dir": "S",
+      "crop": {
+        "x": 710,
+        "y": 0,
+        "width": 354,
+        "height": 887
+      },
+      "source": {
+        "left": 25,
+        "right": 328,
+        "top": 16,
+        "bottom": 872,
+        "height": 856,
+        "width": 303,
+        "pelvisX": 183.9633722234687
+      },
+      "record": {
+        "pre": {
+          "height": 208,
+          "pelvisX": 44.701380166450335,
+          "soleY": 211.88785046728972
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.10926737633062,
+          "soleY": 232
+        },
+        "dx": 82.84816938309922,
+        "dy": 20.112149532710276
+      },
+      "post": {
+        "left": 89,
+        "right": 163,
+        "top": 24,
+        "bottom": 232,
+        "height": 208,
+        "width": 74,
+        "pelvisX": 127.10926737633062
+      }
+    },
+    {
+      "dir": "NE",
+      "crop": {
+        "x": 1064,
+        "y": 0,
+        "width": 355,
+        "height": 887
+      },
+      "source": {
+        "left": 34,
+        "right": 344,
+        "top": 17,
+        "bottom": 871,
+        "height": 854,
+        "width": 310,
+        "pelvisX": 174.28429790177543
+      },
+      "record": {
+        "pre": {
+          "height": 207.51401869158877,
+          "pelvisX": 42.34945556491739,
+          "soleY": 211.6448598130841
+        },
+        "post": {
+          "height": 207,
+          "pelvisX": 127.17281348788198,
+          "soleY": 232
+        },
+        "dx": 85.20009398463216,
+        "dy": 20.35514018691589
+      },
+      "post": {
+        "left": 94,
+        "right": 169,
+        "top": 25,
+        "bottom": 232,
+        "height": 207,
+        "width": 75,
+        "pelvisX": 127.17281348788198
+      }
+    },
+    {
+      "dir": "N",
+      "crop": {
+        "x": 1419,
+        "y": 0,
+        "width": 355,
+        "height": 887
+      },
+      "source": {
+        "left": 22,
+        "right": 321,
+        "top": 16,
+        "bottom": 872,
+        "height": 856,
+        "width": 299,
+        "pelvisX": 159.61183542970917
+      },
+      "record": {
+        "pre": {
+          "height": 208,
+          "pelvisX": 38.78418431002279,
+          "soleY": 211.88785046728972
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.28223220012829,
+          "soleY": 232
+        },
+        "dx": 88.76536523952677,
+        "dy": 20.112149532710276
+      },
+      "post": {
+        "left": 94,
+        "right": 167,
+        "top": 24,
+        "bottom": 232,
+        "height": 208,
+        "width": 73,
+        "pelvisX": 127.28223220012829
+      }
+    }
+  ]
+}

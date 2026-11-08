@@ -1,0 +1,14 @@
+{
+  "sheet": "sheets/hit-dash.png",
+  "neutralGlobalCells": [0, 5, 6, 15],
+  "sourceFloorsBeforeInset": [241, 241, 241, 242],
+  "anchor": {
+    "kind": "lattice-root",
+    "pelvisX": 128.70530757272928,
+    "groundY": 241,
+    "reason": "preserve authored root travel",
+    "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+  },
+  "scale": 0.9478260869565217,
+  "note": "A single fixed lattice X and neutral-source ground for the whole shared sheet. All canvas/head/foot thresholds unchanged."
+}

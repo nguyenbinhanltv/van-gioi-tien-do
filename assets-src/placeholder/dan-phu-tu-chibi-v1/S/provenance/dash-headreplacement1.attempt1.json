@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utc": {
+    "current_time": "2026-11-08 06:28:50 UTC"
+  },
+  "prompt": "Use case: identity-preserve. Precise sprite HEAD REPLACEMENT edit, not a new sheet. Image 1 is the ORIGINAL 4x4 full-source hit/dash animation sheet on solid magenta. Image 2 is the LOCKED S/front master identity/size reference at 256px. Edit ONLY the head/hair in image1 ROW3 COLUMN1 and ROW3 COLUMN3 (zero-index global cells8 and10, dash local2 and4). Preserve the original1254x1254 canvas, exact4x4 grid, every body, neck/collar, arms, jade whisk, hands, feet, ribbons, motion/root position and all other14 cells. Replace the two oversized heads with faithful locked-master heads: exact same female face, eyes, warm brown front swept main cap, one elevated bun/coil, jade pin, ear locks, original hairstyle construction. NO extra cap/coil bands, NO new horizontal stripes, NO new ornaments or hairstyle. Size target: master anatomical front maincap crown-to-chin span53px in a256px logical cell, approximately65rawpx at this sheet pitch313.5, excluding elevated bun/pin; crown belongs attached FRONT swept cap including its first cream rim highlight. Existing chin/neck anchors MUST STAY FIXED (row3col1 logicalsource chin133.5,87.5; row3col3 chin135.5,89.5). Rebuild a visibly smaller anatomically coherent head about that fixed chin/base, retain each dash frame's slight pose/tilt and expression, natural neck seam, no body changes. Hair/face cel shading2tones+highlight+tinted outlines, same ivory/jade/gold artstyle. Preserve solid pure magenta background outside original sprite and return a complete same-size4x4 sheet. Only these2 head/hair regions may change. Do not simply add a stripe and pretend that lowers crown. Do not enlarge eyes or change face identity. Model identity is undisclosed; output is a candidate subject to pixel/landmark review.",
+  "toolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-a24b2ef9-4759-44c8-b969-873d6f536bb3.png",
+  "output": "raw/dash-headreplacement1.attempt1.png",
+  "sha256": "216e088c087a51520209ac63a141f2b26057f5eb86dc6ff7c53f4ebb087cdbda",
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "master": "../reference/S.corrected-master.png",
+  "masterSha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83",
+  "status": "Candidate only; original-source AI head replacement for dash2/4; not a measured pass"
+}

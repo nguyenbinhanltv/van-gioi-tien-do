@@ -1,0 +1,12 @@
+{
+  "character": "thuong-tu-chibi-v1",
+  "scale": 0.9642857142857143,
+  "note": "Single character calibration from manually reviewed E idle anatomical crown-to-sole224px at normalized source scale1 -> canonical216px. Applies identically to every cell; no per-frame height fitting or canvas-loss waiver.",
+  "referenceMeasurement": {
+    "source": "E/raw/idle.png",
+    "method": "Manual review of aligned scale1 idle0: main skull-cap crown approximately y8, sole y232, excluding spear/ponytail; whole source DPI normalization retained.",
+    "anatomicalHeightBeforeCalibration": 224,
+    "targetHeight": 216,
+    "uncertaintyPx": 2
+  }
+}

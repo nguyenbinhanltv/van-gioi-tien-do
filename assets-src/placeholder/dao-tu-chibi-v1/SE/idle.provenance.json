@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:34:38.099Z",
+  "utcRecordedCompleted": "2026-11-08T00:36:51.512Z",
+  "prompt": "Use case: precise-object-edit. Fill FIRST exact4x4 stencil template with16 distinct sequential IDLE BREATHING LOOP frames for male DAO TU T1 Storm Reaver,24fps. Reference2 is locked SE master: preserve this exact FRONT THREE-QUARTER view facing DOWN-RIGHT (SE), both grey eyes visible as in reference; NEVER E profile or straight-front S. Same stern lean adult male/swept black fringe/low loose black ponytail; plain sleeveless dark muted teal wrap tunic, storm grey-blue collar+sash, short plain split overskirt, dark loosepants/boots/bracers minimal dullbrass. Same HEAVY BROAD SINGLE-EDGE mountain-ink dao, long darkgrip/plain brassguard, carried on RIGHT shoulder same orientation/hand as reference. Head stencil is unscaled size/identity guide: skull crown-to-chin~49px, skullbreadth~36px within each256cell, anatomicalH216-217px; do not enlarge/shrink heads or body. Fixed source registrationx128/ground232. Keep BOTH feet planted like master (near/leftscreen sole~104,232; far/rightscreen~154,222). Subtle chest inhale0-7/exhale8-15, shoulder/dao motion1-2px, restrained cloth/ponytail lag; no foot sliding or fullbody translation, seamless15->0. All16 distinct inbetweens row-major, same camera/lightNW and costume. Entire blade/hair/boots inside EACH cell with at least6logicalpx safety margin, no clipping/overlap or shrink-to-fit. Remove ALL guide lines/borders/stencilrectangles. UNIFORM OPAQUE PURE RGB255,0,255 MAGENTA background, no text/shadow/aura/particles/windtrails/FX. Premium clean painted semi-chibi xianxia, preserve exact master face.",
+  "references": ["templates/idle.head-stencil.template.png", "../reference/SE.master.png"],
+  "generatedOriginalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b856-ee35-77d1-9217-2a7e924e189f\\exec-3be7b064-1f01-4098-9eca-006943305e2d.png",
+  "rawOutput": "raw/idle.png",
+  "status": "candidate; source QA and reviewed head evidence pending"
+}

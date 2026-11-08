@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:44:45.922Z",
+  "utcRecordedCompleted": "2026-11-07T23:45:39.260Z",
+  "prompt": "Use case: precise-object-edit. Fill exact FIRST IMAGE 4x4 template with16 sequential unique WALK cycle frames for male DAO TU T1 E PROFILE facing screen RIGHT. Image1 edit target contains exact unscaled head stencil and foot ghosts; Image2 full E master. Preserve adult stern grey-eyed face, swept fringe and loose low black ponytail, head main crown-to-chin~50px and breadth38px per256cell; anatomical body216-219px, feet ground232, fixed lattice rootx128. Plain sleeveless dark muted teal tunic, storm grey-blue collar/sash, short plain split overskirt, dark loose trousers/boots/bracers minimal brass. Broad single-edge dao sparse mountain-ink steel blade held on RIGHT shoulder throughout, free arm swings slightly, sword follows shoulder naturally. Continuous walking in place, 24fps16frames, alternating legs: frames0-4 RIGHT foot forward-contact sweeps backward while LEFT lifts/passes; frames5-7 RIGHT trailing toe-off/left lands; frame8 LEFT forward-contact (opposite of0); frames8-15 mirror opposite leg cycle; end closes smoothly to0. ACTUALLY place right/near boot soles at CYAN ghosts and far/left boots at AMBER ghosts in each corresponding template cell. Planted sole moves backward with ground guide, swinging foot lifts above ghost, distinct knee bends/toe-off/pass/heelstrike. Do not paste identical legs or keep both feet together, no moonwalk. Main head scale stays exactly stencil size, limited1-2px torso bob; don't shift whole body or shrink to fit sword. Entire sword and hair inside each cell, no overlap/cropping. Fill all16 cells row-major, same style/northwest light. Remove guide lines/triangles/foot ghosts/stencil rectangles from output, uniform OPAQUE PURE RGB255,0,255 magenta background only. No labels, grid lines, shadows, FX or extra objects. Exact square4x4 lattice.",
+  "references": ["templates/walk.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/walk.png",
+  "operation": "AI edit from unscaled head stencil and official directional foot ghosts; whole-sheet DPI preparation only",
+  "status": "candidate; weak reversal noted, QA pending"
+}

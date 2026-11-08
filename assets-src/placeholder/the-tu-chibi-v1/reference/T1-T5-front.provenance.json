@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:16:35.638Z",
+  "utcRecordedCompleted": "2026-11-07T20:17:29.674Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Edit ONLY THE RIGHTMOST FIFTH character (T5) in this five-character Thể tu front master strip. Preserve the first four figures T1,T2,T3,T4 unchanged, and preserve the T5 exact face, hair, anatomy, posture, hand positions, soles and scale. Make T5 clearly distinguishable from T4 at small game scale through its outfit and gauntlets: wider regal layered charcoal hip panels with two large amber ink-wash tails in broad simple shapes, bronze-gold geometric outer gauntlet shells and just FOUR substantial detached bronze fragments floating closely around the two gauntlets, two per side, with clear negative space. No extra limbs. Keep core weapon knuckle geometry coherent and hands in same positions. One charcoal base, amber accent, restrained bronze gold trim. Two cel tones plus small highlight/rim, tinted outline, NW light. No background spirit, aura, floor shadow, labels or text. Transparent background. No generic decorative noise, no third signature color, no bright blue/green. Original design. Identical fixed adult tan square-jawed amber-eyed face in all tiers. Preserve full five-panel layout and original four left figures.",
+  "references": ["T1-T5-front.attempt1.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-58484c60-b36d-4467-8ee2-ca3719bda8bb.png",
+  "status": "canonical outfit references; generated edits do not prove pixel registration",
+  "derivedFiles": [
+    "T1.front-native.png",
+    "T2.front-native.png",
+    "T3.front-native.png",
+    "T4.front-native.png",
+    "T5.front-native.png"
+  ],
+  "derivation": "five equal panel crops at native resolution; no resampling or painting",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:17:29.674Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

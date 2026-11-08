@@ -1,0 +1,983 @@
+{
+  "timingProfile": "smooth-v2",
+  "character": "dan-phu-tu-chibi-v1",
+  "direction": "SE",
+  "stem": "danphuchibi",
+  "master": "../reference/SE.corrected-master.png",
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.attempt1.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.attempt1.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "1": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "2": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "3": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "4": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "5": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "6": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "7": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "8": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "9": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "10": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "11": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "12": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "13": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "14": "seated: compact crosslegged meditation, fixed anatomical scale",
+        "15": "seated: compact crosslegged meditation, fixed anatomical scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.attempt1.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "2": "posture",
+        "3": "posture",
+        "8": "posture",
+        "10": "posture",
+        "11": "posture"
+      },
+      "headEvidence": {
+        "2": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "3": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "8": {
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 64.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "10": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "11": {
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.selected.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 81.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "1": {
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 159.5,
+            "y": 82.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "2": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 160.5,
+            "y": 81.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "3": {
+          "crown": {
+            "x": 149,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "4": {
+          "crown": {
+            "x": 150,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "5": {
+          "crown": {
+            "x": 149,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 162,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Include surviving dark jaw-outline row75 atx162(alpha134), followed by row76alpha46; old74.5 excluded the last outline."
+        },
+        "6": {
+          "crown": {
+            "x": 155,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "7": {
+          "crown": {
+            "x": 161,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 172.5,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "8": {
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "9": {
+          "crown": {
+            "x": 154,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164.5,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "10": {
+          "crown": {
+            "x": 156,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "11": {
+          "crown": {
+            "x": 152,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 73.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "12": {
+          "crown": {
+            "x": 156,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Central last jaw support atx169,row75alpha239; following row76alpha117. Prior168,76.5 sampled left neck-shadow support, not the central jaw."
+        },
+        "13": {
+          "crown": {
+            "x": 151,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "14": {
+          "crown": {
+            "x": 155,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 76.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "15": {
+          "crown": {
+            "x": 151,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 165,
+            "y": 76.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/hit-dash.head1.selected.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 135,
+            "y": 86.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "2": {
+          "crown": {
+            "x": 132,
+            "y": 41.5
+          },
+          "chin": {
+            "x": 142,
+            "y": 92.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "3": {
+          "crown": {
+            "x": 145,
+            "y": 42.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 96.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "4": {
+          "crown": {
+            "x": 144,
+            "y": 31.5
+          },
+          "chin": {
+            "x": 150.5,
+            "y": 84.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "5": {
+          "crown": {
+            "x": 141.5,
+            "y": 29.5
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 79.5
+          },
+          "note": "New AI head-ROI source repair, aligned256 with merged D57 retaining original dx=-13.509981048982326,dy0,scale1. Manually selected semantic boundary EDGES: attached front-cap cream rim firstrow30 (brown bun seam29 excluded); summit between141/142, elevatedbun/pin excluded. Central jaw outline lastrow79 at157/158, skin78 interior, rows80/81+ neckshadow excluded. Both neighboring columns inspected; native traces in repair/dash5.head-boundaries.json. Style23 independently read pre-registration rim30/jaw79; final coordinates reselected on registered pixels. Manual boundary uncertainty~1px remains disclosed; not an automated anatomical detector. Body/root/whisk outside explicit native head mask byte-identical, no body scaling or pose fitting."
+        },
+        "6": {
+          "crown": {
+            "x": 130,
+            "y": 37.5
+          },
+          "chin": {
+            "x": 140,
+            "y": 91.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "7": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 136,
+            "y": 87.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "8": {
+          "crown": {
+            "x": 115,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 71.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        }
+      },
+      "inheritedRegistration": {
+        "kind": "inherited-registration",
+        "source": "raw/hit-dash.selected.png",
+        "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+        "mask": "repair/dash5.head-mask.png",
+        "maskSha256": "074da18a2639cf71d1fca094e68090a843e23895bcaddef32493df9fe7ff726e",
+        "cells": [5]
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.selected.png",
+      "manifest": "templates/sword_fly.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: hovering relaxed knees and pointed boots",
+        "1": "airborne: hovering relaxed knees and pointed boots",
+        "2": "airborne: hovering relaxed knees and pointed boots",
+        "3": "airborne: hovering relaxed knees and pointed boots",
+        "4": "airborne: hovering relaxed knees and pointed boots",
+        "5": "airborne: hovering relaxed knees and pointed boots",
+        "6": "airborne: hovering relaxed knees and pointed boots",
+        "7": "airborne: hovering relaxed knees and pointed boots",
+        "8": "airborne: hovering relaxed knees and pointed boots",
+        "9": "airborne: hovering relaxed knees and pointed boots",
+        "10": "airborne: hovering relaxed knees and pointed boots",
+        "11": "airborne: hovering relaxed knees and pointed boots"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.attempt1.png",
+      "manifest": "templates/attack.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change."
+        }
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.attempt1.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit."
+        }
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.selected.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "2": "lunge: authored attack knee bend, swing and follow-through",
+        "3": "lunge: authored attack knee bend, swing and follow-through",
+        "4": "lunge: authored attack knee bend, swing and follow-through",
+        "5": "lunge: authored attack knee bend, swing and follow-through",
+        "6": "lunge: authored attack knee bend, swing and follow-through",
+        "7": "lunge: authored attack knee bend, swing and follow-through",
+        "8": "lunge: authored attack knee bend, swing and follow-through",
+        "9": "lunge: authored attack knee bend, swing and follow-through",
+        "10": "lunge: authored attack knee bend, swing and follow-through",
+        "11": "lunge: authored attack knee bend, swing and follow-through",
+        "12": "lunge: authored attack knee bend, swing and follow-through"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change."
+        }
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.attempt2.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.attempt1.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "raw/hit-dash.head1.selected.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "exceptions": {
+        "1": "recoil: flinch with knee bend",
+        "2": "recoil: flinch with knee bend",
+        "3": "recoil: flinch with knee bend",
+        "4": "recoil: flinch with knee bend"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.selected.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "2": "die-collapse: backward fall and lying settle, held whisk retained",
+        "3": "die-collapse: backward fall and lying settle, held whisk retained",
+        "4": "die-collapse: backward fall and lying settle, held whisk retained",
+        "5": "die-collapse: backward fall and lying settle, held whisk retained",
+        "6": "die-collapse: backward fall and lying settle, held whisk retained",
+        "7": "die-collapse: backward fall and lying settle, held whisk retained",
+        "8": "die-collapse: backward fall and lying settle, held whisk retained",
+        "9": "die-collapse: backward fall and lying settle, held whisk retained",
+        "10": "die-collapse: backward fall and lying settle, held whisk retained",
+        "11": "die-collapse: backward fall and lying settle, held whisk retained"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.attempt1.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "2": "recoil: protective kneel and recovery, same body scale",
+        "3": "recoil: protective kneel and recovery, same body scale",
+        "4": "recoil: protective kneel and recovery, same body scale",
+        "5": "recoil: protective kneel and recovery, same body scale",
+        "6": "recoil: protective kneel and recovery, same body scale",
+        "7": "recoil: protective kneel and recovery, same body scale",
+        "8": "recoil: protective kneel and recovery, same body scale",
+        "9": "recoil: protective kneel and recovery, same body scale",
+        "10": "recoil: protective kneel and recovery, same body scale",
+        "11": "recoil: protective kneel and recovery, same body scale",
+        "12": "recoil: protective kneel and recovery, same body scale",
+        "13": "recoil: protective kneel and recovery, same body scale"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.attempt1.png",
+      "manifest": "templates/emote.template.json"
+    }
+  ],
+  "slice": {
+    "inset": 0,
+    "spill": {
+      "threshold": 16,
+      "strength": 1,
+      "keepDistance": 36,
+      "palette": [[254, 220, 230]],
+      "asymmetric": {
+        "maxImbalance": 100,
+        "edgeRadius": 3
+      }
+    }
+  },
+  "masterHead": {
+    "crown": {
+      "x": 121,
+      "y": 11.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 64.5
+    }
+  },
+  "resample": "lanczos3"
+}

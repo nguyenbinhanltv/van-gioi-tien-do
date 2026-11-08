@@ -1,0 +1,28 @@
+{
+  "clip": "emote",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:22:50 UTC",
+  "utcEnd": "2026-11-07 21:23:11 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete all TWELVE master-head stamps in image 1 into a friendly EMOTE. Image 2 is the exact T1 jade healer, fixed face, robe and whisk. Preserve head size, guided position and E profile; every nose points RIGHT. Layout: 4 columns × 3 rows, 12 square cells, 4:3 sheet.\n\nFrames 1–2 calm guard; 3–4 raise the LEFT hand beside the cheek; 5–8 make two small friendly wrist waves; 9–10 lower the hand; 11–12 settle to guard. A slight serene smile is allowed, but preserve facial structure and the adult identity. The hand stays below the bun's highest point. Feet planted, anatomy and head scale stable. Sleeves, side hair, sash and white whisk tips lag the gesture and settle.\n\nThe RIGHT hand always naturally grips the same upright plain brown shaft with ONE cylindrical bronze collar and white horsehair. Never wave with the weapon hand, swap hands, lose the whisk or add a prop.\n\nSame olive-brown almond eye, delicate straight brow, serene lips, flatter main cap, distinct folded bun, simple jade pin and side strands. Plain warm ivory T1 wrap robe, jade collar/cuffs/sash, narrow antique-gold edging, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nRetain the actual master heads' approximately 53.5 logical-pixel crown-to-chin size; do not enlarge or shrink figures to fill cells. Keep every body, hand, bun and whisk inside its cell. Remove all grid, guide marks, borders and crop edges. Solid opaque #FF00FF only. No text, floor, shadows, talismans, lotus, aura, glow, particles, blur, afterimages or extra characters.",
+  "references": ["../templates/emote.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/emote.attempt1.png",
+  "status": "candidate; full expected cells visually present; actual QA and posture evidence pending",
+  "sha256": "2910e7a11097eb58dae55a79a25e32fd7db34c9c175f04047a1cec63a6740ab5",
+  "rawSha256": "2910e7a11097eb58dae55a79a25e32fd7db34c9c175f04047a1cec63a6740ab5",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/emote.head-guide.png",
+      "sha256": "5c387401b1b1a2f08857d7004a1f7e8173fe9454fa39aa42f55aca9228e5da7b"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

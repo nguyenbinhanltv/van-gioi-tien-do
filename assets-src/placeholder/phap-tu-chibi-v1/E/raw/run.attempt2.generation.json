@@ -1,0 +1,19 @@
+{
+  "name": "run",
+  "prompt": "Edit THIS EXACT RUN sheet, retain square1:1canvas4columns4rows16squarecells, all16poses rowmajor. Preserve every HEAD FACE HAIR TORSO ARM FAN CLOTHING PIXEL SHAPE as closely as possible; correct ONLY LEG ARTICULATION and resulting clothfolds. Current flight poses fold bothknees too high and shrink silhouetteheight. Samefullanatomicalbonescale: in EVERYframe extend ONE wholeleg down toward near-ground contact and bendtheotherlegbehind only modestly. No deep tucked/crouchedflight. Lowest boot should be at logicaly238..246 forcontact/downposes and y228..236 forflight (256logicalcell equivalent); mainhaircapcrown staysaroundlogicaly18..22. Anatomicalcrown-to-lowestsole must remain at least92% of standingheight (minimumabout210logicalrawpixelsbeforefixedcharacter scale), never short compressedbody. Specificdeepflightcells4,5,9,10,14,15 (1based) MUST have one clearlyextendeddownwardleg; keep head/torso/fan positionsandscale unchanged. Cell1 overlyextendedtallstride: naturalankle/heelangle, no toe belowcellground. Keep16 incrementalRUNposes with clearnear/farR/Llegreversal betweenhalfcycles, no staticmarch, no camera change. LEFT handholdsopenplainvermilionfanunchanged, strictEadultface. Hair/ribbons/sleevestrail smoothly. Fullfiguresinsideeachcell, no individualfigure zoom/fit/rescale. Pureopaque#FF00FF no grid/text/FX/shadows. Same short plumtunic/trousers and compact horizontalpin. Correct anatomy by redrawing joints, not stretching legs or scaling wholefigure.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:53:47 UTC"
+  },
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:54:51 UTC"
+  },
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "references": ["E/raw/run.attempt1.png"],
+  "raw": "raw/run.attempt2.png",
+  "status": "unused: generation began under earlier upright bbox policy, superseded mid-call by head-size/posture evidence refinement; original dynamic run remains selected",
+  "rawSha256": "c67b387f6060361305b67d7d0065f475bca8259ccfcc159e6916602c6c0f2cf8",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:54:31.698Z",
+  "referenceSnapshots": ["E/raw/run.attempt1.png"]
+}

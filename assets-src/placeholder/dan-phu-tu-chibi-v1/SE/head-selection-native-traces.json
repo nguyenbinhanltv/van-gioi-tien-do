@@ -1,0 +1,7153 @@
+{
+  "status": "Manual semantic annotations and native sample evidence; not automated anatomical certification. Supersedes earlier drafts without deleting history. Nine selected correction outputs match frozen aligned PNG hashes exactly.",
+  "projectSha256": "6dba1fc2910f18021b68f27047737de7f882d16a933cc7e860d6602d439d9e99",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "cells": [
+    {
+      "clip": "walk",
+      "index": 2,
+      "sheet": "raw/walk.attempt1.png",
+      "sourceSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "alignedPngSha256": "32d2e1548402f6e6318e67d1932e1575ce7dcd6b4f2db437ba3544d681622f6e",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 121,
+        "y": 12.5
+      },
+      "chin": {
+        "x": 129,
+        "y": 65.5
+      },
+      "size": 53.600373133029585,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.002620778496216,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 121,
+            "y": 12.5
+          },
+          "rows": [
+            {
+              "y": 10,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 11,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [30, 21, 16, 66]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 12,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [111, 102, 90, 135]
+                },
+                {
+                  "x": 121,
+                  "rgba": [23, 21, 19, 24]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 13,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [230, 205, 181, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [217, 188, 162, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [109, 92, 81, 130]
+                }
+              ]
+            },
+            {
+              "y": 14,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [211, 191, 158, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [213, 180, 158, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [199, 161, 135, 255]
+                }
+              ]
+            },
+            {
+              "y": 15,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [171, 128, 93, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [174, 131, 96, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [182, 142, 107, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 129,
+            "y": 65.5
+          },
+          "rows": [
+            {
+              "y": 63,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [253, 247, 223, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [253, 247, 223, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [253, 241, 218, 255]
+                }
+              ]
+            },
+            {
+              "y": 64,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [254, 239, 229, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [240, 217, 211, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [242, 215, 202, 255]
+                }
+              ]
+            },
+            {
+              "y": 65,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [207, 153, 172, 225]
+                },
+                {
+                  "x": 129,
+                  "rgba": [123, 108, 109, 130]
+                },
+                {
+                  "x": 130,
+                  "rgba": [37, 33, 33, 39]
+                }
+              ]
+            },
+            {
+              "y": 66,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [67, 43, 52, 124]
+                },
+                {
+                  "x": 129,
+                  "rgba": [14, 9, 11, 24]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 67,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [52, 43, 43, 165]
+                },
+                {
+                  "x": 129,
+                  "rgba": [14, 11, 11, 41]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 68,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [89, 72, 70, 238]
+                },
+                {
+                  "x": 129,
+                  "rgba": [30, 24, 24, 81]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "walk",
+      "index": 3,
+      "sheet": "raw/walk.attempt1.png",
+      "sourceSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "alignedPngSha256": "f58778769be34792f1f85c34be9f0c8a50b15960ee5b8b9813c1318f9bea236e",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 121,
+        "y": 12.5
+      },
+      "chin": {
+        "x": 129,
+        "y": 65.5
+      },
+      "size": 53.600373133029585,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.002620778496216,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 121,
+            "y": 12.5
+          },
+          "rows": [
+            {
+              "y": 10,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 11,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [7, 5, 4, 14]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 12,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [100, 96, 91, 110]
+                },
+                {
+                  "x": 121,
+                  "rgba": [9, 9, 9, 10]
+                },
+                {
+                  "x": 122,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 13,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [228, 208, 183, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [209, 188, 156, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [120, 107, 90, 149]
+                }
+              ]
+            },
+            {
+              "y": 14,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [210, 191, 156, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [207, 182, 153, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [191, 155, 124, 255]
+                }
+              ]
+            },
+            {
+              "y": 15,
+              "pixels": [
+                {
+                  "x": 120,
+                  "rgba": [175, 132, 98, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [175, 133, 97, 255]
+                },
+                {
+                  "x": 122,
+                  "rgba": [178, 139, 103, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 129,
+            "y": 65.5
+          },
+          "rows": [
+            {
+              "y": 63,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [253, 246, 221, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [253, 247, 223, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [252, 240, 216, 255]
+                }
+              ]
+            },
+            {
+              "y": 64,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [252, 243, 223, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [251, 226, 222, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [206, 176, 172, 255]
+                }
+              ]
+            },
+            {
+              "y": 65,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [212, 176, 169, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [151, 134, 127, 167]
+                },
+                {
+                  "x": 130,
+                  "rgba": [48, 41, 41, 52]
+                }
+              ]
+            },
+            {
+              "y": 66,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [65, 41, 42, 133]
+                },
+                {
+                  "x": 129,
+                  "rgba": [7, 4, 4, 13]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 67,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [64, 42, 40, 172]
+                },
+                {
+                  "x": 129,
+                  "rgba": [7, 4, 4, 17]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 68,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [105, 76, 73, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [17, 12, 11, 41]
+                },
+                {
+                  "x": 130,
+                  "rgba": [1, 0, 0, 2]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "walk",
+      "index": 11,
+      "sheet": "raw/walk.attempt1.png",
+      "sourceSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "alignedPngSha256": "09125d05420f39fe032e7be39cd411e0df92d26bfba9059cc130318d275f5b3b",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 120,
+        "y": 12.5
+      },
+      "chin": {
+        "x": 127,
+        "y": 65.5
+      },
+      "size": 53.46026561849464,
+      "masterSize": 53.46026561849464,
+      "ratio": 1,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 120,
+            "y": 12.5
+          },
+          "rows": [
+            {
+              "y": 10,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 120,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 11,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [50, 40, 31, 74]
+                },
+                {
+                  "x": 120,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 12,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [217, 199, 177, 243]
+                },
+                {
+                  "x": 120,
+                  "rgba": [116, 112, 101, 120]
+                },
+                {
+                  "x": 121,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 13,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [242, 233, 208, 255]
+                },
+                {
+                  "x": 120,
+                  "rgba": [202, 175, 146, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [195, 151, 137, 248]
+                }
+              ]
+            },
+            {
+              "y": 14,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [189, 151, 117, 255]
+                },
+                {
+                  "x": 120,
+                  "rgba": [189, 150, 117, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [196, 151, 129, 255]
+                }
+              ]
+            },
+            {
+              "y": 15,
+              "pixels": [
+                {
+                  "x": 119,
+                  "rgba": [172, 127, 96, 255]
+                },
+                {
+                  "x": 120,
+                  "rgba": [176, 131, 98, 255]
+                },
+                {
+                  "x": 121,
+                  "rgba": [178, 133, 101, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 127,
+            "y": 65.5
+          },
+          "rows": [
+            {
+              "y": 63,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [252, 240, 209, 255]
+                },
+                {
+                  "x": 127,
+                  "rgba": [252, 243, 213, 255]
+                },
+                {
+                  "x": 128,
+                  "rgba": [253, 247, 221, 255]
+                }
+              ]
+            },
+            {
+              "y": 64,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [245, 223, 196, 255]
+                },
+                {
+                  "x": 127,
+                  "rgba": [248, 225, 209, 255]
+                },
+                {
+                  "x": 128,
+                  "rgba": [252, 236, 212, 255]
+                }
+              ]
+            },
+            {
+              "y": 65,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [192, 107, 143, 250]
+                },
+                {
+                  "x": 127,
+                  "rgba": [144, 115, 114, 192]
+                },
+                {
+                  "x": 128,
+                  "rgba": [69, 62, 60, 71]
+                }
+              ]
+            },
+            {
+              "y": 66,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [64, 44, 40, 237]
+                },
+                {
+                  "x": 127,
+                  "rgba": [30, 19, 22, 67]
+                },
+                {
+                  "x": 128,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 67,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [73, 57, 56, 242]
+                },
+                {
+                  "x": 127,
+                  "rgba": [37, 28, 28, 112]
+                },
+                {
+                  "x": 128,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 68,
+              "pixels": [
+                {
+                  "x": 126,
+                  "rgba": [103, 83, 79, 252]
+                },
+                {
+                  "x": 127,
+                  "rgba": [77, 64, 58, 199]
+                },
+                {
+                  "x": 128,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 0,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "9e784d82669a9d87141a25282cc07392c93f975e98b7539a263a407f17c7aff3",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 147,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 157.5,
+        "y": 81.5
+      },
+      "size": 54.03008421240892,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0106587310654356,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 147,
+            "y": 28.5
+          },
+          "rows": [
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [135, 92, 56, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [113, 75, 42, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [169, 134, 92, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [142, 102, 67, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [120, 87, 53, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [119, 85, 52, 255]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [140, 97, 66, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [124, 82, 56, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [103, 61, 40, 255]
+                }
+              ]
+            },
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [211, 172, 137, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [204, 165, 129, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [200, 162, 126, 255]
+                }
+              ]
+            },
+            {
+              "y": 30,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [205, 165, 127, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [204, 163, 125, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [205, 166, 127, 255]
+                }
+              ]
+            },
+            {
+              "y": 31,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [191, 143, 102, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [191, 141, 102, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [185, 138, 102, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 157.5,
+            "y": 81.5
+          },
+          "rows": [
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [252, 239, 207, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [251, 237, 204, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [253, 237, 206, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [251, 237, 204, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [253, 237, 206, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [250, 230, 198, 255]
+                }
+              ]
+            },
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [254, 244, 215, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [253, 247, 221, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [252, 245, 222, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [253, 247, 221, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [252, 245, 222, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [252, 244, 223, 255]
+                }
+              ]
+            },
+            {
+              "y": 81,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [178, 130, 128, 252]
+                },
+                {
+                  "x": 157,
+                  "rgba": [198, 159, 156, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [212, 177, 176, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [198, 159, 156, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [212, 177, 176, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [230, 163, 189, 255]
+                }
+              ]
+            },
+            {
+              "y": 82,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [78, 55, 57, 104]
+                },
+                {
+                  "x": 157,
+                  "rgba": [57, 45, 45, 74]
+                },
+                {
+                  "x": 158,
+                  "rgba": [53, 41, 44, 64]
+                },
+                {
+                  "x": 157,
+                  "rgba": [57, 45, 45, 74]
+                },
+                {
+                  "x": 158,
+                  "rgba": [53, 41, 44, 64]
+                },
+                {
+                  "x": 159,
+                  "rgba": [83, 59, 65, 100]
+                }
+              ]
+            },
+            {
+              "y": 83,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [48, 25, 26, 56]
+                },
+                {
+                  "x": 157,
+                  "rgba": [4, 2, 2, 5]
+                },
+                {
+                  "x": 158,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 157,
+                  "rgba": [4, 2, 2, 5]
+                },
+                {
+                  "x": 158,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 159,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [106, 60, 52, 121]
+                },
+                {
+                  "x": 157,
+                  "rgba": [11, 7, 5, 13]
+                },
+                {
+                  "x": 158,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 157,
+                  "rgba": [11, 7, 5, 13]
+                },
+                {
+                  "x": 158,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 159,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 1,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "1ce06117d6c2ee3582e92f7c1b3e899c2535f3ff98b4a60471ffc890383130e1",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 149,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 159.5,
+        "y": 82.5
+      },
+      "size": 55.01136246267674,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0290140130475802,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 149,
+            "y": 28.5
+          },
+          "rows": [
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [153, 114, 78, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [140, 95, 59, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [149, 114, 75, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [109, 71, 43, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [105, 69, 42, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [100, 65, 38, 255]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [133, 89, 62, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [116, 75, 52, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [102, 65, 44, 255]
+                }
+              ]
+            },
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [225, 183, 148, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [211, 172, 137, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [203, 166, 128, 255]
+                }
+              ]
+            },
+            {
+              "y": 30,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [183, 138, 100, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [182, 136, 101, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [190, 142, 103, 255]
+                }
+              ]
+            },
+            {
+              "y": 31,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [185, 139, 99, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [181, 134, 96, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [179, 130, 94, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 159.5,
+            "y": 82.5
+          },
+          "rows": [
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [252, 238, 205, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [250, 230, 196, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [250, 229, 195, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [250, 230, 196, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [250, 229, 195, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [251, 229, 197, 255]
+                }
+              ]
+            },
+            {
+              "y": 81,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [228, 170, 162, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [244, 215, 186, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [250, 235, 202, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [244, 215, 186, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [250, 235, 202, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [252, 236, 205, 255]
+                }
+              ]
+            },
+            {
+              "y": 82,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [179, 132, 124, 203]
+                },
+                {
+                  "x": 159,
+                  "rgba": [194, 165, 149, 213]
+                },
+                {
+                  "x": 160,
+                  "rgba": [193, 157, 155, 250]
+                },
+                {
+                  "x": 159,
+                  "rgba": [194, 165, 149, 213]
+                },
+                {
+                  "x": 160,
+                  "rgba": [193, 157, 155, 250]
+                },
+                {
+                  "x": 161,
+                  "rgba": [226, 168, 188, 255]
+                }
+              ]
+            },
+            {
+              "y": 83,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [7, 3, 4, 11]
+                },
+                {
+                  "x": 159,
+                  "rgba": [12, 10, 10, 16]
+                },
+                {
+                  "x": 160,
+                  "rgba": [56, 43, 45, 67]
+                },
+                {
+                  "x": 159,
+                  "rgba": [12, 10, 10, 16]
+                },
+                {
+                  "x": 160,
+                  "rgba": [56, 43, 45, 67]
+                },
+                {
+                  "x": 161,
+                  "rgba": [89, 69, 73, 114]
+                }
+              ]
+            },
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [9, 4, 5, 14]
+                },
+                {
+                  "x": 159,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 160,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 159,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 160,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 85,
+              "pixels": [
+                {
+                  "x": 158,
+                  "rgba": [47, 29, 18, 75]
+                },
+                {
+                  "x": 159,
+                  "rgba": [4, 3, 1, 6]
+                },
+                {
+                  "x": 160,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 159,
+                  "rgba": [4, 3, 1, 6]
+                },
+                {
+                  "x": 160,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 2,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "3e7a00fa776e7312c782be4da21033cf4ca6c1f93aa04114d191500e89d0275b",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 147,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 160.5,
+        "y": 81.5
+      },
+      "size": 54.69232121605373,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0230461929679013,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 147,
+            "y": 28.5
+          },
+          "rows": [
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [147, 101, 70, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [146, 99, 70, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [144, 101, 70, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [101, 55, 31, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [90, 47, 24, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [83, 46, 23, 255]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [156, 121, 93, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [159, 130, 102, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [171, 135, 106, 255]
+                }
+              ]
+            },
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [213, 189, 154, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [224, 194, 160, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [227, 196, 162, 255]
+                }
+              ]
+            },
+            {
+              "y": 30,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [172, 129, 90, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [173, 129, 92, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [177, 132, 96, 255]
+                }
+              ]
+            },
+            {
+              "y": 31,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [190, 143, 100, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [193, 145, 101, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [192, 143, 101, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 160.5,
+            "y": 81.5
+          },
+          "rows": [
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [252, 241, 205, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [251, 231, 194, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [250, 228, 190, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [251, 231, 194, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [250, 228, 190, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [250, 228, 189, 255]
+                }
+              ]
+            },
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [246, 182, 183, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [251, 213, 193, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [251, 226, 200, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [251, 213, 193, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [251, 226, 200, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [250, 214, 193, 255]
+                }
+              ]
+            },
+            {
+              "y": 81,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [147, 108, 108, 153]
+                },
+                {
+                  "x": 160,
+                  "rgba": [139, 116, 108, 144]
+                },
+                {
+                  "x": 161,
+                  "rgba": [146, 127, 114, 148]
+                },
+                {
+                  "x": 160,
+                  "rgba": [139, 116, 108, 144]
+                },
+                {
+                  "x": 161,
+                  "rgba": [146, 127, 114, 148]
+                },
+                {
+                  "x": 162,
+                  "rgba": [96, 76, 70, 133]
+                }
+              ]
+            },
+            {
+              "y": 82,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [70, 39, 43, 71]
+                },
+                {
+                  "x": 160,
+                  "rgba": [1, 13, 0, 26]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 11, 0, 11]
+                },
+                {
+                  "x": 160,
+                  "rgba": [1, 13, 0, 26]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 11, 0, 11]
+                },
+                {
+                  "x": 162,
+                  "rgba": [0, 0, 0, 3]
+                }
+              ]
+            },
+            {
+              "y": 83,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [116, 74, 69, 120]
+                },
+                {
+                  "x": 160,
+                  "rgba": [13, 9, 10, 14]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 160,
+                  "rgba": [13, 9, 10, 14]
+                },
+                {
+                  "x": 161,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 162,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 159,
+                  "rgba": [241, 157, 170, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [109, 83, 73, 115]
+                },
+                {
+                  "x": 161,
+                  "rgba": [1, 1, 1, 1]
+                },
+                {
+                  "x": 160,
+                  "rgba": [109, 83, 73, 115]
+                },
+                {
+                  "x": 161,
+                  "rgba": [1, 1, 1, 1]
+                },
+                {
+                  "x": 162,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 3,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "81f0431805274dc54036c57ab108e9a407b767c607d9c985a9b26ef555318f85",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 149,
+        "y": 25.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 77.5
+      },
+      "size": 54.12023651093923,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0123450732017365,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 149,
+            "y": 25.5
+          },
+          "rows": [
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [152, 114, 78, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [157, 117, 83, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [157, 116, 80, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [135, 88, 58, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [134, 87, 59, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [129, 85, 58, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [73, 40, 23, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [77, 42, 26, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [81, 43, 28, 255]
+                }
+              ]
+            },
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [171, 136, 104, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [201, 172, 136, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [210, 185, 151, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [194, 152, 116, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [198, 156, 118, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [202, 163, 120, 255]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [165, 118, 78, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [173, 124, 81, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [176, 128, 90, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 164,
+            "y": 77.5
+          },
+          "rows": [
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [249, 229, 197, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [248, 227, 198, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [249, 231, 206, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [251, 236, 218, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [251, 239, 222, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [241, 227, 218, 255]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [219, 205, 191, 222]
+                },
+                {
+                  "x": 164,
+                  "rgba": [237, 224, 212, 242]
+                },
+                {
+                  "x": 165,
+                  "rgba": [191, 171, 164, 228]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [37, 19, 26, 39]
+                },
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [27, 15, 16, 67]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [41, 26, 27, 45]
+                },
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [30, 16, 17, 76]
+                }
+              ]
+            },
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [193, 155, 141, 210]
+                },
+                {
+                  "x": 164,
+                  "rgba": [87, 75, 72, 94]
+                },
+                {
+                  "x": 165,
+                  "rgba": [55, 28, 34, 112]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 4,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "962073aa79fd03146ffff4753f383b333c85e7cdd4ac3d3aa76d5b1031a4367a",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 150,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 72.5
+      },
+      "size": 51.92301994298868,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.9712450797293805,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 150,
+            "y": 22.5
+          },
+          "rows": [
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [163, 117, 73, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [159, 116, 78, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [165, 120, 79, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [113, 70, 41, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [111, 68, 42, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [112, 68, 44, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [119, 77, 53, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [137, 94, 69, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [150, 109, 84, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [226, 184, 153, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [234, 195, 165, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [236, 201, 173, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [194, 150, 114, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [192, 148, 114, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [194, 149, 116, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [151, 107, 67, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [162, 117, 74, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [175, 129, 87, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 164,
+            "y": 72.5
+          },
+          "rows": [
+            {
+              "y": 70,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [250, 230, 189, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [251, 231, 191, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [251, 231, 194, 255]
+                }
+              ]
+            },
+            {
+              "y": 71,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [249, 226, 192, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [250, 228, 193, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [250, 226, 195, 255]
+                }
+              ]
+            },
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [219, 156, 169, 233]
+                },
+                {
+                  "x": 164,
+                  "rgba": [241, 147, 187, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [224, 131, 171, 255]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [58, 35, 45, 61]
+                },
+                {
+                  "x": 164,
+                  "rgba": [63, 38, 48, 68]
+                },
+                {
+                  "x": 165,
+                  "rgba": [90, 51, 63, 153]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [24, 13, 11, 104]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [30, 16, 14, 125]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 5,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "f3a31de1deb3fb7afb2a5bffd8920ee17a87a5a1a8a7f8db3ef6334ced9c8691",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 149,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 162,
+        "y": 74.5
+      },
+      "size": 53.600373133029585,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.002620778496216,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 149,
+            "y": 22.5
+          },
+          "rows": [
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [157, 116, 85, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [152, 114, 81, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [145, 102, 69, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [129, 83, 60, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [132, 83, 62, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [125, 78, 64, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [104, 63, 49, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [105, 62, 51, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [105, 62, 53, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [212, 181, 158, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [215, 181, 161, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [217, 181, 165, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [179, 135, 101, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [186, 142, 111, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [194, 149, 120, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 148,
+                  "rgba": [156, 111, 73, 255]
+                },
+                {
+                  "x": 149,
+                  "rgba": [171, 120, 78, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [180, 128, 92, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 162,
+            "y": 74.5
+          },
+          "rows": [
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [252, 228, 200, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [251, 227, 200, 255]
+                },
+                {
+                  "x": 163,
+                  "rgba": [250, 227, 202, 255]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [246, 156, 171, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [249, 175, 187, 255]
+                },
+                {
+                  "x": 163,
+                  "rgba": [247, 168, 184, 255]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [212, 97, 140, 242]
+                },
+                {
+                  "x": 162,
+                  "rgba": [216, 141, 157, 225]
+                },
+                {
+                  "x": 163,
+                  "rgba": [159, 102, 110, 222]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [178, 73, 116, 205]
+                },
+                {
+                  "x": 162,
+                  "rgba": [70, 27, 35, 158]
+                },
+                {
+                  "x": 163,
+                  "rgba": [28, 15, 15, 118]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [147, 93, 103, 158]
+                },
+                {
+                  "x": 162,
+                  "rgba": [54, 37, 38, 89]
+                },
+                {
+                  "x": 163,
+                  "rgba": [30, 22, 20, 133]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 161,
+                  "rgba": [200, 146, 138, 254]
+                },
+                {
+                  "x": 162,
+                  "rgba": [128, 93, 96, 178]
+                },
+                {
+                  "x": 163,
+                  "rgba": [68, 47, 43, 237]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 6,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "4f31ef134bf83df56f4de89c433d1eba7435a5bbab6af3be294a071385d418d6",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 155,
+        "y": 19.5
+      },
+      "chin": {
+        "x": 169,
+        "y": 72.5
+      },
+      "size": 54.81788029466298,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0253948359676437,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 155,
+            "y": 19.5
+          },
+          "rows": [
+            {
+              "y": 17,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [148, 106, 68, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [149, 105, 70, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [151, 110, 77, 255]
+                }
+              ]
+            },
+            {
+              "y": 18,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [108, 69, 42, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [104, 64, 39, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [105, 61, 42, 255]
+                }
+              ]
+            },
+            {
+              "y": 19,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [72, 41, 26, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [94, 58, 40, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [112, 77, 59, 255]
+                }
+              ]
+            },
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [199, 165, 128, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [226, 189, 155, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [237, 205, 174, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [195, 147, 105, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [193, 145, 105, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [193, 147, 112, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [161, 112, 73, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [171, 119, 76, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [175, 126, 86, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 169,
+            "y": 72.5
+          },
+          "rows": [
+            {
+              "y": 70,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [252, 238, 202, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [252, 238, 203, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [252, 239, 205, 255]
+                }
+              ]
+            },
+            {
+              "y": 71,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [251, 235, 200, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [252, 240, 203, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [251, 238, 203, 255]
+                }
+              ]
+            },
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [231, 143, 176, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [247, 197, 207, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [251, 220, 217, 255]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [112, 67, 84, 127]
+                },
+                {
+                  "x": 169,
+                  "rgba": [75, 57, 62, 80]
+                },
+                {
+                  "x": 170,
+                  "rgba": [85, 72, 73, 87]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [15, 11, 9, 24]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 1, 0, 1]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [19, 10, 10, 23]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 7,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "98ece72cfd30bac2db2575ce45aed30c3f007543c878d276b4fd0bd1d0f0cee8",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 161,
+        "y": 19.5
+      },
+      "chin": {
+        "x": 172.5,
+        "y": 72.5
+      },
+      "size": 54.23329235810786,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0144598372393008,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 161,
+            "y": 19.5
+          },
+          "rows": [
+            {
+              "y": 17,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [170, 124, 89, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [172, 126, 85, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [175, 127, 76, 255]
+                }
+              ]
+            },
+            {
+              "y": 18,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [138, 89, 59, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [143, 99, 66, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [144, 101, 65, 255]
+                }
+              ]
+            },
+            {
+              "y": 19,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [89, 44, 28, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [100, 54, 34, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [104, 61, 39, 255]
+                }
+              ]
+            },
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [199, 174, 145, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [204, 182, 152, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [206, 186, 156, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [228, 190, 149, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [231, 196, 162, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [233, 200, 168, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 160,
+                  "rgba": [175, 122, 76, 255]
+                },
+                {
+                  "x": 161,
+                  "rgba": [177, 128, 90, 255]
+                },
+                {
+                  "x": 162,
+                  "rgba": [182, 133, 96, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 172.5,
+            "y": 72.5
+          },
+          "rows": [
+            {
+              "y": 70,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [252, 239, 204, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [251, 233, 193, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [250, 232, 190, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [251, 233, 193, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [250, 232, 190, 255]
+                },
+                {
+                  "x": 174,
+                  "rgba": [251, 233, 189, 255]
+                }
+              ]
+            },
+            {
+              "y": 71,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [252, 238, 206, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [252, 240, 204, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [251, 238, 198, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [252, 240, 204, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [251, 238, 198, 255]
+                },
+                {
+                  "x": 174,
+                  "rgba": [250, 231, 188, 255]
+                }
+              ]
+            },
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [223, 131, 172, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [244, 181, 198, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [250, 214, 208, 255]
+                },
+                {
+                  "x": 172,
+                  "rgba": [244, 181, 198, 255]
+                },
+                {
+                  "x": 173,
+                  "rgba": [250, 214, 208, 255]
+                },
+                {
+                  "x": 174,
+                  "rgba": [251, 224, 203, 255]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [113, 68, 86, 130]
+                },
+                {
+                  "x": 172,
+                  "rgba": [103, 74, 84, 110]
+                },
+                {
+                  "x": 173,
+                  "rgba": [101, 84, 84, 104]
+                },
+                {
+                  "x": 172,
+                  "rgba": [103, 74, 84, 110]
+                },
+                {
+                  "x": 173,
+                  "rgba": [101, 84, 84, 104]
+                },
+                {
+                  "x": 174,
+                  "rgba": [147, 129, 119, 151]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [3, 23, 0, 32]
+                },
+                {
+                  "x": 172,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 173,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 172,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 173,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 174,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 171,
+                  "rgba": [23, 13, 13, 23]
+                },
+                {
+                  "x": 172,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 173,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 172,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 173,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 174,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 8,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "173d51e0e00d41210384c723f0dffed635fafef098a56906ca47489f5b4996c4",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 155,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 168,
+        "y": 75.5
+      },
+      "size": 54.571054598569006,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0207778425195495,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 155,
+            "y": 22.5
+          },
+          "rows": [
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [143, 103, 68, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [145, 105, 70, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [145, 105, 70, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [77, 42, 25, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [74, 41, 25, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [75, 42, 27, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [116, 80, 57, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [133, 95, 72, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [141, 101, 77, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [221, 190, 154, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [233, 199, 165, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [235, 202, 172, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [185, 141, 100, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [191, 145, 103, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [192, 147, 108, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [165, 119, 74, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [176, 129, 83, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [180, 133, 92, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 168,
+            "y": 75.5
+          },
+          "rows": [
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [252, 239, 205, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [252, 235, 199, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [251, 231, 194, 255]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [249, 232, 205, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [252, 240, 210, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [253, 238, 210, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [208, 181, 168, 221]
+                },
+                {
+                  "x": 168,
+                  "rgba": [222, 210, 185, 225]
+                },
+                {
+                  "x": 169,
+                  "rgba": [210, 194, 172, 213]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [15, 5, 10, 20]
+                },
+                {
+                  "x": 168,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [3, 2, 2, 3]
+                },
+                {
+                  "x": 168,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [66, 48, 42, 70]
+                },
+                {
+                  "x": 168,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 9,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "c6cebff5f1d65c6e517d7709c121289a803ccdb8471015c1fdb054e8aacf5f55",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 154,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 164.5,
+        "y": 75.5
+      },
+      "size": 54.03008421240892,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0106587310654356,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 154,
+            "y": 22.5
+          },
+          "rows": [
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [150, 112, 73, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [148, 109, 70, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [144, 104, 63, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [105, 62, 41, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [105, 62, 41, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [106, 66, 43, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [98, 54, 42, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [103, 60, 45, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [103, 63, 45, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [231, 196, 168, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [233, 204, 180, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [234, 207, 183, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [192, 147, 112, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [194, 150, 116, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [198, 152, 119, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 153,
+                  "rgba": [179, 131, 91, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [190, 141, 98, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [193, 143, 99, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 164.5,
+            "y": 75.5
+          },
+          "rows": [
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [253, 237, 206, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [251, 230, 198, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [251, 227, 195, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [251, 230, 198, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [251, 227, 195, 255]
+                },
+                {
+                  "x": 166,
+                  "rgba": [251, 227, 196, 255]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [234, 196, 177, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [250, 233, 202, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [253, 239, 205, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [250, 233, 202, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [253, 239, 205, 255]
+                },
+                {
+                  "x": 166,
+                  "rgba": [251, 231, 197, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [187, 49, 119, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [211, 106, 154, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [234, 167, 186, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [211, 106, 154, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [234, 167, 186, 255]
+                },
+                {
+                  "x": 166,
+                  "rgba": [245, 197, 194, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [93, 32, 60, 125]
+                },
+                {
+                  "x": 164,
+                  "rgba": [87, 44, 63, 106]
+                },
+                {
+                  "x": 165,
+                  "rgba": [85, 58, 66, 94]
+                },
+                {
+                  "x": 164,
+                  "rgba": [87, 44, 63, 106]
+                },
+                {
+                  "x": 165,
+                  "rgba": [85, 58, 66, 94]
+                },
+                {
+                  "x": 166,
+                  "rgba": [95, 73, 74, 99]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [31, 14, 20, 46]
+                },
+                {
+                  "x": 164,
+                  "rgba": [2, 1, 2, 3]
+                },
+                {
+                  "x": 165,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 164,
+                  "rgba": [2, 1, 2, 3]
+                },
+                {
+                  "x": 165,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 166,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [67, 30, 40, 93]
+                },
+                {
+                  "x": 164,
+                  "rgba": [7, 4, 4, 10]
+                },
+                {
+                  "x": 165,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 164,
+                  "rgba": [7, 4, 4, 10]
+                },
+                {
+                  "x": 165,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 166,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 10,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "31c9f9ba74acd855008e50f06f2bf92fcf0c7714942ebd165cd8290682d15fe2",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 156,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 169.5,
+        "y": 75.5
+      },
+      "size": 54.69232121605373,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0230461929679013,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 156,
+            "y": 22.5
+          },
+          "rows": [
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [147, 102, 68, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [147, 104, 70, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [145, 104, 68, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [101, 54, 36, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [91, 46, 32, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [82, 42, 30, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [94, 54, 41, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [112, 70, 55, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [121, 79, 65, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [217, 178, 146, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [228, 189, 158, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [232, 200, 175, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [186, 141, 100, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [191, 144, 103, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [193, 146, 110, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [172, 122, 76, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [174, 125, 83, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [180, 131, 91, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 169.5,
+            "y": 75.5
+          },
+          "rows": [
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [252, 237, 205, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [251, 233, 200, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [250, 229, 197, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [251, 233, 200, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [250, 229, 197, 255]
+                },
+                {
+                  "x": 171,
+                  "rgba": [250, 229, 198, 255]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [252, 242, 213, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [252, 243, 212, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [252, 238, 208, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [252, 243, 212, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [252, 238, 208, 255]
+                },
+                {
+                  "x": 171,
+                  "rgba": [251, 236, 209, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [226, 143, 176, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [244, 188, 207, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [249, 197, 213, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [244, 188, 207, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [249, 197, 213, 255]
+                },
+                {
+                  "x": 171,
+                  "rgba": [232, 172, 187, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [86, 51, 64, 100]
+                },
+                {
+                  "x": 169,
+                  "rgba": [56, 41, 47, 60]
+                },
+                {
+                  "x": 170,
+                  "rgba": [49, 38, 41, 52]
+                },
+                {
+                  "x": 169,
+                  "rgba": [56, 41, 47, 60]
+                },
+                {
+                  "x": 170,
+                  "rgba": [49, 38, 41, 52]
+                },
+                {
+                  "x": 171,
+                  "rgba": [80, 55, 59, 121]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [3, 1, 2, 3]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 171,
+                  "rgba": [10, 4, 6, 32]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [16, 9, 10, 20]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 171,
+                  "rgba": [10, 5, 5, 39]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 11,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "36fdb466981d11df6e33461fe96871c94eafd7dd5e1e2de100ce95b22b5ab682",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 152,
+        "y": 21.5
+      },
+      "chin": {
+        "x": 167,
+        "y": 73.5
+      },
+      "size": 54.12023651093923,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0123450732017365,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 152,
+            "y": 21.5
+          },
+          "rows": [
+            {
+              "y": 19,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [137, 90, 55, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [137, 91, 56, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [138, 91, 57, 255]
+                }
+              ]
+            },
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [70, 40, 23, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [69, 38, 20, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [74, 37, 19, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [86, 54, 36, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [132, 98, 68, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [174, 134, 101, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [207, 172, 125, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [226, 183, 138, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [228, 185, 140, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [178, 133, 93, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [174, 130, 90, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [175, 131, 92, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 151,
+                  "rgba": [157, 116, 77, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [163, 120, 84, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [171, 126, 87, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 167,
+            "y": 73.5
+          },
+          "rows": [
+            {
+              "y": 71,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [252, 242, 209, 255]
+                },
+                {
+                  "x": 167,
+                  "rgba": [252, 240, 206, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [251, 238, 207, 255]
+                }
+              ]
+            },
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [244, 197, 201, 255]
+                },
+                {
+                  "x": 167,
+                  "rgba": [251, 227, 222, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [251, 235, 227, 255]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [156, 107, 122, 178]
+                },
+                {
+                  "x": 167,
+                  "rgba": [167, 147, 145, 171]
+                },
+                {
+                  "x": 168,
+                  "rgba": [184, 165, 162, 196]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [97, 40, 53, 128]
+                },
+                {
+                  "x": 167,
+                  "rgba": [96, 17, 14, 114]
+                },
+                {
+                  "x": 168,
+                  "rgba": [89, 15, 17, 131]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [142, 76, 85, 188]
+                },
+                {
+                  "x": 167,
+                  "rgba": [63, 44, 46, 81]
+                },
+                {
+                  "x": 168,
+                  "rgba": [56, 45, 46, 87]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 166,
+                  "rgba": [217, 114, 132, 246]
+                },
+                {
+                  "x": 167,
+                  "rgba": [179, 130, 134, 215]
+                },
+                {
+                  "x": 168,
+                  "rgba": [174, 145, 146, 249]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 12,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "4b928e2e4d18b85aaeb111f13f0342d702bf570f30852d506f3a55b5f2daa884",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 156,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 168,
+        "y": 76.5
+      },
+      "size": 53.36665625650534,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.9982489918277376,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 156,
+            "y": 24.5
+          },
+          "rows": [
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [158, 111, 84, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [152, 105, 75, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [140, 93, 58, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [97, 49, 37, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [86, 45, 34, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [73, 42, 28, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [144, 110, 87, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [137, 102, 79, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [124, 96, 72, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [240, 211, 177, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [240, 212, 178, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [241, 212, 178, 255]
+                }
+              ]
+            },
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [182, 137, 96, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [189, 143, 99, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [191, 145, 102, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 155,
+                  "rgba": [173, 124, 75, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [176, 129, 85, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [180, 132, 92, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 168,
+            "y": 76.5
+          },
+          "rows": [
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [247, 225, 206, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [252, 236, 213, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [253, 236, 213, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [203, 101, 143, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [218, 130, 170, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [188, 128, 133, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [185, 94, 128, 230]
+                },
+                {
+                  "x": 168,
+                  "rgba": [148, 88, 110, 187]
+                },
+                {
+                  "x": 169,
+                  "rgba": [92, 52, 65, 131]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [185, 116, 129, 190]
+                },
+                {
+                  "x": 168,
+                  "rgba": [72, 40, 43, 133]
+                },
+                {
+                  "x": 169,
+                  "rgba": [10, 4, 4, 28]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [228, 162, 174, 236]
+                },
+                {
+                  "x": 168,
+                  "rgba": [171, 122, 136, 188]
+                },
+                {
+                  "x": 169,
+                  "rgba": [78, 46, 56, 114]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 167,
+                  "rgba": [245, 195, 193, 255]
+                },
+                {
+                  "x": 168,
+                  "rgba": [238, 185, 196, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [208, 120, 157, 255]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 13,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "6461f71d164d964dd620cfe3b93ad81447afd6a4847a56be63e4d34655ef90ad",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 151,
+        "y": 26.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 77.5
+      },
+      "size": 52.63078946776307,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.9844842493553828,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 151,
+            "y": 26.5
+          },
+          "rows": [
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [138, 86, 63, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [143, 95, 70, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [146, 101, 72, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [86, 43, 40, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [89, 44, 42, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [98, 56, 43, 255]
+                }
+              ]
+            },
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [159, 127, 98, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [176, 139, 110, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [185, 152, 123, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [209, 168, 122, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [223, 179, 135, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [229, 188, 145, 255]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [172, 117, 75, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [178, 126, 87, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [183, 132, 93, 255]
+                }
+              ]
+            },
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [181, 130, 91, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [183, 130, 91, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [195, 142, 96, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 164,
+            "y": 77.5
+          },
+          "rows": [
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [251, 230, 191, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [251, 229, 191, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [250, 228, 192, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [250, 227, 194, 255]
+                },
+                {
+                  "x": 164,
+                  "rgba": [250, 227, 196, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [249, 220, 189, 255]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [227, 204, 176, 235]
+                },
+                {
+                  "x": 164,
+                  "rgba": [218, 179, 164, 234]
+                },
+                {
+                  "x": 165,
+                  "rgba": [191, 93, 127, 253]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [36, 17, 9, 88]
+                },
+                {
+                  "x": 164,
+                  "rgba": [34, 15, 22, 50]
+                },
+                {
+                  "x": 165,
+                  "rgba": [79, 39, 52, 200]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [43, 17, 17, 113]
+                },
+                {
+                  "x": 164,
+                  "rgba": [3, 1, 1, 9]
+                },
+                {
+                  "x": 165,
+                  "rgba": [40, 26, 22, 185]
+                }
+              ]
+            },
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 163,
+                  "rgba": [169, 116, 119, 193]
+                },
+                {
+                  "x": 164,
+                  "rgba": [79, 46, 53, 118]
+                },
+                {
+                  "x": 165,
+                  "rgba": [85, 37, 47, 242]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 14,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "60e609ae47bc1612efc862275e49cba798ccf797069df60a09398cc799dc5891",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 155,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 169,
+        "y": 76.5
+      },
+      "size": 53.85164807134504,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0073209971615817,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 155,
+            "y": 24.5
+          },
+          "rows": [
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [175, 116, 81, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [174, 113, 84, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [169, 108, 85, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [143, 86, 58, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [138, 80, 57, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [122, 71, 52, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [86, 41, 25, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [89, 45, 30, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [80, 44, 30, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [192, 161, 135, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [204, 179, 149, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [208, 184, 153, 255]
+                }
+              ]
+            },
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [195, 158, 120, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [192, 152, 118, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [192, 151, 118, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [172, 120, 75, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [174, 121, 76, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [176, 123, 77, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 169,
+            "y": 76.5
+          },
+          "rows": [
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [250, 229, 190, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [251, 228, 190, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [250, 227, 191, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [249, 227, 192, 255]
+                },
+                {
+                  "x": 169,
+                  "rgba": [250, 228, 193, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [245, 220, 188, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [199, 165, 151, 239]
+                },
+                {
+                  "x": 169,
+                  "rgba": [213, 155, 167, 255]
+                },
+                {
+                  "x": 170,
+                  "rgba": [211, 150, 162, 255]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [24, 18, 19, 30]
+                },
+                {
+                  "x": 169,
+                  "rgba": [41, 30, 32, 51]
+                },
+                {
+                  "x": 170,
+                  "rgba": [94, 67, 65, 160]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [45, 26, 22, 122]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 168,
+                  "rgba": [5, 4, 3, 6]
+                },
+                {
+                  "x": 169,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 170,
+                  "rgba": [50, 26, 25, 122]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "run",
+      "index": 15,
+      "sheet": "raw/run.selected.png",
+      "sourceSha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "alignedPngSha256": "122181758828a7a50e7c80b33468ac69cdbe90bdb05783c3382d2471a6c1601e",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 151,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 165,
+        "y": 76.5
+      },
+      "size": 53.85164807134504,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0073209971615817,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 151,
+            "y": 24.5
+          },
+          "rows": [
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [143, 99, 68, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [140, 92, 65, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [134, 83, 60, 255]
+                }
+              ]
+            },
+            {
+              "y": 23,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [86, 42, 29, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [73, 32, 25, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [63, 26, 22, 255]
+                }
+              ]
+            },
+            {
+              "y": 24,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [148, 112, 85, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [139, 103, 78, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [134, 101, 78, 255]
+                }
+              ]
+            },
+            {
+              "y": 25,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [240, 203, 161, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [241, 204, 163, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [241, 207, 170, 255]
+                }
+              ]
+            },
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [185, 139, 99, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [191, 143, 102, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [192, 144, 103, 255]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 150,
+                  "rgba": [185, 139, 96, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [190, 143, 98, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [191, 144, 99, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 165,
+            "y": 76.5
+          },
+          "rows": [
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [251, 231, 194, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [249, 230, 195, 255]
+                },
+                {
+                  "x": 166,
+                  "rgba": [246, 227, 188, 255]
+                }
+              ]
+            },
+            {
+              "y": 75,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [251, 234, 209, 255]
+                },
+                {
+                  "x": 165,
+                  "rgba": [246, 225, 197, 255]
+                },
+                {
+                  "x": 166,
+                  "rgba": [212, 183, 146, 255]
+                }
+              ]
+            },
+            {
+              "y": 76,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [205, 184, 165, 214]
+                },
+                {
+                  "x": 165,
+                  "rgba": [193, 139, 144, 233]
+                },
+                {
+                  "x": 166,
+                  "rgba": [151, 83, 92, 255]
+                }
+              ]
+            },
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [4, 7, 3, 13]
+                },
+                {
+                  "x": 165,
+                  "rgba": [48, 23, 28, 92]
+                },
+                {
+                  "x": 166,
+                  "rgba": [105, 49, 57, 225]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [14, 5, 7, 34]
+                },
+                {
+                  "x": 166,
+                  "rgba": [66, 23, 35, 153]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 164,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 165,
+                  "rgba": [18, 6, 10, 43]
+                },
+                {
+                  "x": 166,
+                  "rgba": [69, 25, 37, 166]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 1,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "56ec677daa76e691c3587e3506de0dc04038328e1c52c3345529c0746996938b",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 123,
+        "y": 35.5
+      },
+      "chin": {
+        "x": 135,
+        "y": 86.5
+      },
+      "size": 52.39274758971894,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.9800315614517562,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 123,
+            "y": 35.5
+          },
+          "rows": [
+            {
+              "y": 33,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [150, 109, 63, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [157, 114, 65, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [206, 183, 152, 255]
+                }
+              ]
+            },
+            {
+              "y": 34,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [111, 70, 42, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [111, 66, 40, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [136, 86, 56, 255]
+                }
+              ]
+            },
+            {
+              "y": 35,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [89, 49, 28, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [100, 55, 34, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [101, 59, 36, 255]
+                }
+              ]
+            },
+            {
+              "y": 36,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [158, 121, 97, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [172, 125, 109, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [173, 130, 111, 255]
+                }
+              ]
+            },
+            {
+              "y": 37,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [246, 222, 199, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [246, 222, 202, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [248, 233, 212, 255]
+                }
+              ]
+            },
+            {
+              "y": 38,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [171, 126, 93, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [177, 131, 99, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [181, 136, 104, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 135,
+            "y": 86.5
+          },
+          "rows": [
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [252, 242, 207, 255]
+                },
+                {
+                  "x": 135,
+                  "rgba": [252, 242, 207, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [252, 241, 207, 255]
+                }
+              ]
+            },
+            {
+              "y": 85,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [253, 241, 211, 255]
+                },
+                {
+                  "x": 135,
+                  "rgba": [252, 245, 220, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [251, 239, 214, 255]
+                }
+              ]
+            },
+            {
+              "y": 86,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [249, 159, 187, 255]
+                },
+                {
+                  "x": 135,
+                  "rgba": [230, 198, 192, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [219, 198, 195, 255]
+                }
+              ]
+            },
+            {
+              "y": 87,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [78, 52, 57, 131]
+                },
+                {
+                  "x": 135,
+                  "rgba": [57, 45, 48, 63]
+                },
+                {
+                  "x": 136,
+                  "rgba": [28, 25, 25, 32]
+                }
+              ]
+            },
+            {
+              "y": 88,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [21, 16, 19, 167]
+                },
+                {
+                  "x": 135,
+                  "rgba": [2, 2, 2, 17]
+                },
+                {
+                  "x": 136,
+                  "rgba": [0, 5, 0, 10]
+                }
+              ]
+            },
+            {
+              "y": 89,
+              "pixels": [
+                {
+                  "x": 134,
+                  "rgba": [34, 33, 35, 255]
+                },
+                {
+                  "x": 135,
+                  "rgba": [20, 19, 19, 98]
+                },
+                {
+                  "x": 136,
+                  "rgba": [14, 9, 0, 41]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 2,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "a2d4a01d4416be7eaf584634c920629203c43aeefaa898498c32c48161fa7b08",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 132,
+        "y": 41.5
+      },
+      "chin": {
+        "x": 142,
+        "y": 92.5
+      },
+      "size": 51.97114584074514,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.972145297810972,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 132,
+            "y": 41.5
+          },
+          "rows": [
+            {
+              "y": 39,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [135, 91, 56, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [152, 121, 84, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [182, 169, 130, 255]
+                }
+              ]
+            },
+            {
+              "y": 40,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [104, 65, 40, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [103, 66, 39, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [105, 69, 41, 255]
+                }
+              ]
+            },
+            {
+              "y": 41,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [90, 48, 30, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [97, 54, 34, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [90, 52, 30, 255]
+                }
+              ]
+            },
+            {
+              "y": 42,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [188, 155, 126, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [194, 173, 147, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [192, 174, 147, 255]
+                }
+              ]
+            },
+            {
+              "y": 43,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [199, 171, 132, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [212, 193, 161, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [232, 210, 182, 255]
+                }
+              ]
+            },
+            {
+              "y": 44,
+              "pixels": [
+                {
+                  "x": 131,
+                  "rgba": [151, 107, 71, 255]
+                },
+                {
+                  "x": 132,
+                  "rgba": [160, 118, 79, 255]
+                },
+                {
+                  "x": 133,
+                  "rgba": [173, 129, 91, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 142,
+            "y": 92.5
+          },
+          "rows": [
+            {
+              "y": 90,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [252, 239, 203, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [251, 237, 199, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [251, 234, 194, 255]
+                }
+              ]
+            },
+            {
+              "y": 91,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [246, 211, 190, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [251, 228, 200, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [253, 236, 205, 255]
+                }
+              ]
+            },
+            {
+              "y": 92,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [203, 148, 150, 217]
+                },
+                {
+                  "x": 142,
+                  "rgba": [244, 195, 193, 250]
+                },
+                {
+                  "x": 143,
+                  "rgba": [250, 175, 203, 255]
+                }
+              ]
+            },
+            {
+              "y": 93,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [64, 26, 40, 99]
+                },
+                {
+                  "x": 142,
+                  "rgba": [92, 64, 75, 94]
+                },
+                {
+                  "x": 143,
+                  "rgba": [105, 75, 84, 114]
+                }
+              ]
+            },
+            {
+              "y": 94,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [67, 25, 31, 134]
+                },
+                {
+                  "x": 142,
+                  "rgba": [35, 20, 1, 62]
+                },
+                {
+                  "x": 143,
+                  "rgba": [23, 9, 12, 63]
+                }
+              ]
+            },
+            {
+              "y": 95,
+              "pixels": [
+                {
+                  "x": 141,
+                  "rgba": [147, 58, 84, 229]
+                },
+                {
+                  "x": 142,
+                  "rgba": [135, 58, 87, 182]
+                },
+                {
+                  "x": 143,
+                  "rgba": [61, 26, 35, 145]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 3,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "20e4471cd46dce3731d67bc158667737213adfd156df8276e002f0c9900616cc",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 145,
+        "y": 42.5
+      },
+      "chin": {
+        "x": 155,
+        "y": 96.5
+      },
+      "size": 54.91812087098393,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0272698841957295,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 145,
+            "y": 42.5
+          },
+          "rows": [
+            {
+              "y": 40,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [121, 89, 53, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [166, 138, 100, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [159, 136, 103, 255]
+                }
+              ]
+            },
+            {
+              "y": 41,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [82, 54, 33, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [93, 64, 38, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [112, 82, 50, 255]
+                }
+              ]
+            },
+            {
+              "y": 42,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [92, 64, 42, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [93, 66, 43, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [101, 74, 49, 255]
+                }
+              ]
+            },
+            {
+              "y": 43,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [221, 203, 183, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [220, 205, 191, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [222, 209, 195, 255]
+                }
+              ]
+            },
+            {
+              "y": 44,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [181, 148, 121, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [198, 171, 147, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [205, 179, 157, 255]
+                }
+              ]
+            },
+            {
+              "y": 45,
+              "pixels": [
+                {
+                  "x": 144,
+                  "rgba": [153, 115, 83, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [166, 123, 90, 255]
+                },
+                {
+                  "x": 146,
+                  "rgba": [170, 124, 93, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 155,
+            "y": 96.5
+          },
+          "rows": [
+            {
+              "y": 94,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [252, 238, 200, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [253, 238, 200, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [253, 238, 200, 255]
+                }
+              ]
+            },
+            {
+              "y": 95,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [229, 167, 168, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [239, 193, 183, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [243, 208, 183, 255]
+                }
+              ]
+            },
+            {
+              "y": 96,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [115, 75, 70, 182]
+                },
+                {
+                  "x": 155,
+                  "rgba": [149, 119, 110, 167]
+                },
+                {
+                  "x": 156,
+                  "rgba": [161, 128, 113, 207]
+                }
+              ]
+            },
+            {
+              "y": 97,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [40, 14, 18, 92]
+                },
+                {
+                  "x": 155,
+                  "rgba": [5, 2, 3, 10]
+                },
+                {
+                  "x": 156,
+                  "rgba": [19, 11, 12, 60]
+                }
+              ]
+            },
+            {
+              "y": 98,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [139, 61, 85, 222]
+                },
+                {
+                  "x": 155,
+                  "rgba": [51, 27, 33, 101]
+                },
+                {
+                  "x": 156,
+                  "rgba": [47, 25, 28, 220]
+                }
+              ]
+            },
+            {
+              "y": 99,
+              "pixels": [
+                {
+                  "x": 154,
+                  "rgba": [215, 129, 163, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [111, 64, 71, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [34, 12, 11, 255]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 4,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "2e5a7d9a729440f954d5370937dcb99e12ffe8bdd997f060660be461941eb8a0",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 144,
+        "y": 31.5
+      },
+      "chin": {
+        "x": 150.5,
+        "y": 84.5
+      },
+      "size": 53.397097299385095,
+      "masterSize": 53.46026561849464,
+      "ratio": 0.9988184061867494,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 144,
+            "y": 31.5
+          },
+          "rows": [
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 144,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 145,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 30,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [149, 123, 97, 209]
+                },
+                {
+                  "x": 144,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 145,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 31,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [206, 191, 164, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [66, 63, 60, 75]
+                },
+                {
+                  "x": 145,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 32,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [228, 213, 199, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [190, 168, 134, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [185, 158, 127, 255]
+                }
+              ]
+            },
+            {
+              "y": 33,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [156, 132, 93, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [173, 145, 106, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [197, 177, 151, 255]
+                }
+              ]
+            },
+            {
+              "y": 34,
+              "pixels": [
+                {
+                  "x": 143,
+                  "rgba": [147, 114, 77, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [151, 117, 79, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [157, 119, 85, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 150.5,
+            "y": 84.5
+          },
+          "rows": [
+            {
+              "y": 82,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [252, 241, 209, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [251, 241, 208, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [252, 239, 206, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [251, 241, 208, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [252, 239, 206, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [251, 237, 202, 255]
+                }
+              ]
+            },
+            {
+              "y": 83,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [244, 200, 189, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [252, 232, 208, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [253, 239, 208, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [252, 232, 208, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [253, 239, 208, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [253, 241, 206, 255]
+                }
+              ]
+            },
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [88, 70, 67, 92]
+                },
+                {
+                  "x": 150,
+                  "rgba": [152, 136, 121, 155]
+                },
+                {
+                  "x": 151,
+                  "rgba": [140, 129, 113, 189]
+                },
+                {
+                  "x": 150,
+                  "rgba": [152, 136, 121, 155]
+                },
+                {
+                  "x": 151,
+                  "rgba": [140, 129, 113, 189]
+                },
+                {
+                  "x": 152,
+                  "rgba": [165, 130, 128, 255]
+                }
+              ]
+            },
+            {
+              "y": 85,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 150,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 151,
+                  "rgba": [16, 13, 13, 60]
+                },
+                {
+                  "x": 150,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 151,
+                  "rgba": [16, 13, 13, 60]
+                },
+                {
+                  "x": 152,
+                  "rgba": [13, 13, 14, 255]
+                }
+              ]
+            },
+            {
+              "y": 86,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [60, 41, 42, 91]
+                },
+                {
+                  "x": 150,
+                  "rgba": [22, 13, 16, 52]
+                },
+                {
+                  "x": 151,
+                  "rgba": [41, 26, 23, 207]
+                },
+                {
+                  "x": 150,
+                  "rgba": [22, 13, 16, 52]
+                },
+                {
+                  "x": 151,
+                  "rgba": [41, 26, 23, 207]
+                },
+                {
+                  "x": 152,
+                  "rgba": [32, 23, 23, 255]
+                }
+              ]
+            },
+            {
+              "y": 87,
+              "pixels": [
+                {
+                  "x": 149,
+                  "rgba": [220, 134, 172, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [75, 47, 43, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [31, 12, 12, 255]
+                },
+                {
+                  "x": 150,
+                  "rgba": [75, 47, 43, 255]
+                },
+                {
+                  "x": 151,
+                  "rgba": [31, 12, 12, 255]
+                },
+                {
+                  "x": 152,
+                  "rgba": [89, 50, 48, 255]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 5,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "71390099ac0b3b9e633107fb67b2433b6cd624be5dd09bc133580bc81f2c7d41",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 147,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 157,
+        "y": 82.5
+      },
+      "size": 54.91812087098393,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0272698841957295,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 147,
+            "y": 28.5
+          },
+          "rows": [
+            {
+              "y": 26,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [182, 159, 133, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [102, 76, 60, 188]
+                },
+                {
+                  "x": 148,
+                  "rgba": [17, 9, 8, 42]
+                }
+              ]
+            },
+            {
+              "y": 27,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [107, 69, 52, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [105, 65, 50, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [70, 48, 37, 166]
+                }
+              ]
+            },
+            {
+              "y": 28,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [126, 96, 82, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [135, 109, 86, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [185, 163, 135, 253]
+                }
+              ]
+            },
+            {
+              "y": 29,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [231, 210, 187, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [228, 211, 181, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [215, 201, 165, 255]
+                }
+              ]
+            },
+            {
+              "y": 30,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [186, 149, 119, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [191, 161, 120, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [194, 171, 121, 255]
+                }
+              ]
+            },
+            {
+              "y": 31,
+              "pixels": [
+                {
+                  "x": 146,
+                  "rgba": [176, 134, 99, 255]
+                },
+                {
+                  "x": 147,
+                  "rgba": [177, 137, 99, 255]
+                },
+                {
+                  "x": 148,
+                  "rgba": [172, 132, 94, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 157,
+            "y": 82.5
+          },
+          "rows": [
+            {
+              "y": 80,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [250, 230, 192, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [249, 230, 194, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [248, 228, 196, 255]
+                }
+              ]
+            },
+            {
+              "y": 81,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [221, 151, 134, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [232, 182, 148, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [235, 198, 159, 255]
+                }
+              ]
+            },
+            {
+              "y": 82,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [164, 58, 91, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [141, 66, 74, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [128, 77, 66, 255]
+                }
+              ]
+            },
+            {
+              "y": 83,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [79, 42, 38, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [83, 39, 44, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [90, 41, 57, 255]
+                }
+              ]
+            },
+            {
+              "y": 84,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [45, 17, 16, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [91, 44, 49, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [113, 49, 72, 255]
+                }
+              ]
+            },
+            {
+              "y": 85,
+              "pixels": [
+                {
+                  "x": 156,
+                  "rgba": [92, 43, 46, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [141, 71, 78, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [129, 69, 73, 255]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 6,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "aaccbe76955f05bd448242817b73aea119b824679dc226e5ae423e63b34323e3",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 130,
+        "y": 37.5
+      },
+      "chin": {
+        "x": 140,
+        "y": 91.5
+      },
+      "size": 54.91812087098393,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0272698841957295,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 130,
+            "y": 37.5
+          },
+          "rows": [
+            {
+              "y": 35,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [135, 95, 66, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [102, 70, 44, 247]
+                },
+                {
+                  "x": 131,
+                  "rgba": [66, 45, 28, 164]
+                }
+              ]
+            },
+            {
+              "y": 36,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [83, 55, 31, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [107, 75, 49, 255]
+                },
+                {
+                  "x": 131,
+                  "rgba": [112, 83, 62, 238]
+                }
+              ]
+            },
+            {
+              "y": 37,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [135, 113, 93, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [132, 105, 84, 255]
+                },
+                {
+                  "x": 131,
+                  "rgba": [144, 113, 93, 255]
+                }
+              ]
+            },
+            {
+              "y": 38,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [247, 239, 221, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [248, 245, 226, 255]
+                },
+                {
+                  "x": 131,
+                  "rgba": [243, 238, 211, 255]
+                }
+              ]
+            },
+            {
+              "y": 39,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [173, 133, 98, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [184, 153, 116, 255]
+                },
+                {
+                  "x": 131,
+                  "rgba": [193, 172, 132, 255]
+                }
+              ]
+            },
+            {
+              "y": 40,
+              "pixels": [
+                {
+                  "x": 129,
+                  "rgba": [162, 120, 85, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [165, 124, 84, 255]
+                },
+                {
+                  "x": 131,
+                  "rgba": [154, 117, 75, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 140,
+            "y": 91.5
+          },
+          "rows": [
+            {
+              "y": 89,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [253, 241, 209, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [252, 240, 208, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [252, 238, 207, 255]
+                }
+              ]
+            },
+            {
+              "y": 90,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [249, 207, 197, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [252, 219, 208, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [250, 215, 207, 255]
+                }
+              ]
+            },
+            {
+              "y": 91,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [187, 136, 140, 198]
+                },
+                {
+                  "x": 140,
+                  "rgba": [168, 139, 136, 181]
+                },
+                {
+                  "x": 141,
+                  "rgba": [155, 91, 111, 202]
+                }
+              ]
+            },
+            {
+              "y": 92,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [78, 30, 37, 104]
+                },
+                {
+                  "x": 140,
+                  "rgba": [45, 43, 6, 70]
+                },
+                {
+                  "x": 141,
+                  "rgba": [48, 19, 24, 144]
+                }
+              ]
+            },
+            {
+              "y": 93,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [98, 45, 60, 195]
+                },
+                {
+                  "x": 140,
+                  "rgba": [28, 16, 16, 94]
+                },
+                {
+                  "x": 141,
+                  "rgba": [39, 20, 19, 158]
+                }
+              ]
+            },
+            {
+              "y": 94,
+              "pixels": [
+                {
+                  "x": 139,
+                  "rgba": [110, 71, 66, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [62, 39, 33, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [55, 32, 28, 255]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 7,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "4bf5994e3bdf466ffd2d6ed0e91dcc961499c208e9d6bf2722de33a202c1175e",
+      "selectedCandidateHashVerified": true,
+      "crown": {
+        "x": 123,
+        "y": 35.5
+      },
+      "chin": {
+        "x": 136,
+        "y": 87.5
+      },
+      "size": 53.600373133029585,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.002620778496216,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 123,
+            "y": 35.5
+          },
+          "rows": [
+            {
+              "y": 33,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [153, 114, 75, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [155, 116, 73, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [166, 118, 75, 255]
+                }
+              ]
+            },
+            {
+              "y": 34,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [113, 71, 46, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [117, 72, 47, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [118, 65, 44, 255]
+                }
+              ]
+            },
+            {
+              "y": 35,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [88, 45, 28, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [89, 44, 28, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [95, 47, 31, 255]
+                }
+              ]
+            },
+            {
+              "y": 36,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [118, 81, 57, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [133, 94, 69, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [135, 91, 70, 255]
+                }
+              ]
+            },
+            {
+              "y": 37,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [232, 198, 167, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [245, 220, 191, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [248, 225, 198, 255]
+                }
+              ]
+            },
+            {
+              "y": 38,
+              "pixels": [
+                {
+                  "x": 122,
+                  "rgba": [167, 122, 86, 255]
+                },
+                {
+                  "x": 123,
+                  "rgba": [175, 133, 96, 255]
+                },
+                {
+                  "x": 124,
+                  "rgba": [186, 144, 111, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 136,
+            "y": 87.5
+          },
+          "rows": [
+            {
+              "y": 85,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [252, 240, 208, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [252, 240, 207, 255]
+                },
+                {
+                  "x": 137,
+                  "rgba": [252, 241, 208, 255]
+                }
+              ]
+            },
+            {
+              "y": 86,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [253, 241, 211, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [252, 240, 210, 255]
+                },
+                {
+                  "x": 137,
+                  "rgba": [253, 236, 207, 255]
+                }
+              ]
+            },
+            {
+              "y": 87,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [247, 172, 199, 255]
+                },
+                {
+                  "x": 136,
+                  "rgba": [244, 209, 213, 255]
+                },
+                {
+                  "x": 137,
+                  "rgba": [242, 220, 214, 255]
+                }
+              ]
+            },
+            {
+              "y": 88,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [60, 40, 46, 76]
+                },
+                {
+                  "x": 136,
+                  "rgba": [61, 51, 53, 64]
+                },
+                {
+                  "x": 137,
+                  "rgba": [74, 66, 66, 79]
+                }
+              ]
+            },
+            {
+              "y": 89,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [11, 7, 7, 40]
+                },
+                {
+                  "x": 136,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 137,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 90,
+              "pixels": [
+                {
+                  "x": 135,
+                  "rgba": [75, 41, 48, 143]
+                },
+                {
+                  "x": 136,
+                  "rgba": [21, 10, 13, 31]
+                },
+                {
+                  "x": 137,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    },
+    {
+      "clip": "dash",
+      "index": 8,
+      "sheet": "raw/hit-dash.selected.png",
+      "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "alignedPngSha256": "1e4654debf3da3aa32f25b612a9cd5571a9ef1031085eec422347bbac8bede07",
+      "selectedCandidateHashVerified": false,
+      "crown": {
+        "x": 115,
+        "y": 19.5
+      },
+      "chin": {
+        "x": 129,
+        "y": 71.5
+      },
+      "size": 53.85164807134504,
+      "masterSize": 53.46026561849464,
+      "ratio": 1.0073209971615817,
+      "nominalBandPass": true,
+      "manualUncertaintyPx": 1,
+      "neighborhoods": [
+        {
+          "name": "crown",
+          "point": {
+            "x": 115,
+            "y": 19.5
+          },
+          "rows": [
+            {
+              "y": 17,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [145, 104, 75, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [136, 95, 73, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [173, 147, 130, 255]
+                }
+              ]
+            },
+            {
+              "y": 18,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [133, 86, 63, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [112, 71, 53, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [116, 83, 63, 255]
+                }
+              ]
+            },
+            {
+              "y": 19,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [96, 52, 34, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [96, 57, 37, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [100, 65, 42, 255]
+                }
+              ]
+            },
+            {
+              "y": 20,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [181, 157, 142, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [186, 169, 154, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [189, 173, 154, 255]
+                }
+              ]
+            },
+            {
+              "y": 21,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [213, 191, 170, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [225, 202, 182, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [233, 211, 191, 255]
+                }
+              ]
+            },
+            {
+              "y": 22,
+              "pixels": [
+                {
+                  "x": 114,
+                  "rgba": [159, 117, 87, 255]
+                },
+                {
+                  "x": 115,
+                  "rgba": [170, 124, 93, 255]
+                },
+                {
+                  "x": 116,
+                  "rgba": [173, 126, 95, 255]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "chin",
+          "point": {
+            "x": 129,
+            "y": 71.5
+          },
+          "rows": [
+            {
+              "y": 69,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [252, 235, 188, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [251, 235, 186, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [251, 234, 189, 255]
+                }
+              ]
+            },
+            {
+              "y": 70,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [252, 241, 200, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [251, 239, 198, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [239, 208, 184, 255]
+                }
+              ]
+            },
+            {
+              "y": 71,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [234, 171, 196, 255]
+                },
+                {
+                  "x": 129,
+                  "rgba": [246, 215, 188, 255]
+                },
+                {
+                  "x": 130,
+                  "rgba": [165, 139, 122, 183]
+                }
+              ]
+            },
+            {
+              "y": 72,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [23, 17, 20, 25]
+                },
+                {
+                  "x": 129,
+                  "rgba": [14, 10, 12, 15]
+                },
+                {
+                  "x": 130,
+                  "rgba": [1, 0, 0, 1]
+                }
+              ]
+            },
+            {
+              "y": 73,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 129,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            },
+            {
+              "y": 74,
+              "pixels": [
+                {
+                  "x": 128,
+                  "rgba": [2, 2, 2, 6]
+                },
+                {
+                  "x": 129,
+                  "rgba": [0, 0, 0, 0]
+                },
+                {
+                  "x": 130,
+                  "rgba": [0, 0, 0, 0]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+    }
+  ]
+}
