@@ -653,8 +653,8 @@ pair fails D60. Temporal remains diagnostic for all ordinary cells.
 The comparison window uses the certified master's own D55 head-window dimensions, including its
 kind-specific padding policy. Centre it horizontally on each visible crown; place its top at
 `crown.y - Hwindow * 0.08 / (2 * 1.08)`, the D60 window-only edge-offset convention. Rebuild the master's Lab window AND both
-temporal sides identically, including fully measured neighbours. Torso retains D55's fixed44% width
-and25% depth of master H below the head window. This never creates anatomical points or size evidence.
+temporal sides identically, including fully measured neighbours. Torso retains D55's fixed 44% width
+and 25% depth of master H below the head window. This never creates anatomical points or size evidence.
 Missing real master/neighbour crowns fail; there is no centroid or ornament-anchor fallback.
 
 Use `checkHeights`/`runProject` for full clip-level validation; the low-level measured-head helper

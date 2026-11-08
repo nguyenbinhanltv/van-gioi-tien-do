@@ -137,6 +137,27 @@ describe('D60 metadata and direct measured brackets', () => {
 });
 
 describe('D60 real image quality and window-only comparison', () => {
+  it.each([
+    { kind: 'free' as const, severity: 'warn' },
+    { kind: 'upright' as const, severity: 'fail' },
+  ])('preserves the bbox band for a no-policy $kind dash', ({ kind, severity }) => {
+    const clip = fixture();
+    const findings = checkHeights(
+      {
+        ...clip,
+        name: 'dash',
+        kind,
+        heightPolicy: undefined,
+        frames: clip.frames.map((frame, i) =>
+          i === 4 && frame ? { ...frame, metrics: { ...frame.metrics, height: 160 } } : frame,
+        ),
+      },
+      options,
+    );
+    expect(findings).toContainEqual(expect.objectContaining({ frame: 4, metric: 'head_bracketed', severity: 'info' }));
+    expect(findings).toContainEqual(expect.objectContaining({ frame: 4, metric: 'height_excess_px', severity }));
+  });
+
   it('reports an unmeasured bracket with real Lab and both registered temporal pairs', () => {
     const findings = checkHeights(fixture(), options);
     const finding = findings.find((f) => f.frame === 4)!;

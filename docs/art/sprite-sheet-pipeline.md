@@ -632,7 +632,7 @@ Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`: khi ô không có 
 khai kind **chỉ cho ô**, crown nhìn thấy alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review.
 Không thêm nape/cằm/breadth suy diễn. Cả hai lân cận **trực tiếp** i−1/i+1 cùng clip phải có bằng chứng
 đầu được đo thật đạt band; loop wrap, đầu/cuối nonloop không có đủ hai lân cận nên bị loại.
-**Tối đa2 ô bracketed mỗi clip.** Không có trần phần trăm hay trần chuỗi riêng: các ô bracketed không
+**Tối đa 2 ô bracketed mỗi clip.** Không có trần phần trăm hay trần chuỗi riêng: các ô bracketed không
 được kề nhau vì không thể chứng nhận cho nhau. Master/idle/walk/emote và clip khác bị loại.
 
 ```json
@@ -653,7 +653,7 @@ Cửa sổ **chỉ để so ảnh**: lấy nguyên chiều rộng/cao cửa sổ
 (ví dụ D59 span-square+8%, D56-master giữ chính sách padding riêng). Tâm ngang=crown.x;
 top=crown.y−Hwindow×0,08/(2×1,08), quy ước margin từng cạnh của cửa sổ D60, không phải kích thước đầu suy diễn.
 Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
-phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng44%/cao25% H master,
+phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng 44%/cao 25% H master,
 tâm ngang theo crown. Master và các phía so phải có crown thật nhìn thấy; không thay bằng neo phụ kiện,
 không fallback centroid, không ghi cửa sổ thành anatomy.
 

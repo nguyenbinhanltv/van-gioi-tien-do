@@ -122,13 +122,12 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
       });
   clip.frames.forEach((f, i) => {
     if (!f) return;
-    if (clip.headEvidence?.[i]?.kind === 'bracketed-occlusion') {
-      out.push(...checkBracketedOcclusion(clip, o, i, tol));
-      return;
-    }
     const h = f.metrics.height;
     const inBand = h >= lo && h <= hi;
-    const head = checkHeadEvidence(clip, o, i, inBand, tol);
+    const head =
+      clip.headEvidence?.[i]?.kind === 'bracketed-occlusion'
+        ? checkBracketedOcclusion(clip, o, i, tol)
+        : checkHeadEvidence(clip, o, i, inBand, tol);
     if (head !== null) {
       out.push(...head);
       if (
