@@ -4,7 +4,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { networkInterfaces } from 'node:os';
 import { join, relative, sep } from 'node:path';
 
-export const DEFAULTS = Object.freeze({ clientPort: 7456, serverPort: 8080, minNodeMajor: 18, buildTimeoutMin: 10 });
+export const DEFAULTS = Object.freeze({ clientPort: 8456, serverPort: 8080, minNodeMajor: 18, buildTimeoutMin: 10 });
 
 export const USAGE = `npm run play -- [options]
 
@@ -14,8 +14,10 @@ export const USAGE = `npm run play -- [options]
                        default is the RELEASE variant: minified, no dev art, loads much faster on phones over Wi-Fi
   --open               open the default browser on the online URL (offline URL with --offline)
   --no-lan             game server on 127.0.0.1 only (default: all interfaces, so phones on the same Wi-Fi can connect)
-  --port <n>           client (static) port, default ${DEFAULTS.clientPort}
+  --port <n>           client (static) port, default ${DEFAULTS.clientPort} (not 7456: that is Cocos Creator's own preview server)
   --server-port <n>    game server port, default ${DEFAULTS.serverPort}
+                       a busy DEFAULT port is replaced by the next free one and the URLs show the real port; a busy port you
+                       asked for explicitly is an error
   --build-timeout <m>  give up on a web client build after <m> minutes (default ${DEFAULTS.buildTimeoutMin}); a normal build takes 1-2 minutes
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
   --help               this text
@@ -45,6 +47,9 @@ export function parseArgs(argv) {
     clientPort: DEFAULTS.clientPort,
     serverPort: DEFAULTS.serverPort,
     buildTimeoutMin: DEFAULTS.buildTimeoutMin,
+    // true when the port was given on the command line: an explicit port is never moved, a busy one is an error
+    clientPortExplicit: false,
+    serverPortExplicit: false,
   };
   /** @type {string[]} */
   const errors = [];
@@ -91,8 +96,13 @@ export function parseArgs(argv) {
         const p = raw === undefined ? null : toPort(raw);
         if (p === null)
           errors.push(`${name} needs a port number 1-65535 (got ${raw === undefined ? 'nothing' : `"${raw}"`})`);
-        else if (name === '--port') opts.clientPort = p;
-        else opts.serverPort = p;
+        else if (name === '--port') {
+          opts.clientPort = p;
+          opts.clientPortExplicit = true;
+        } else {
+          opts.serverPort = p;
+          opts.serverPortExplicit = true;
+        }
         break;
       }
       default:
@@ -198,6 +208,23 @@ export function newestSource(root, dirs = SOURCE_DIRS) {
   };
   for (const d of dirs) visit(join(root, d));
   return best;
+}
+
+// ------------------------------------------------------------------------------------------------ ports
+/**
+ * Choose the port to use. An explicit port is kept or rejected; a default port that is busy moves to the next free one (at most
+ * `maxTries` further), never onto a port in `taken` (the other server of this run).
+ * @param {{ start: number, explicit: boolean, isFree: (port: number) => Promise<boolean> | boolean,
+ *           taken?: readonly number[], maxTries?: number }} i
+ * @returns {Promise<{ ok: true, port: number, moved: boolean } | { ok: false, port: number }>}
+ */
+export async function pickPort({ start, explicit, isFree, taken = [], maxTries = 20 }) {
+  if (!taken.includes(start) && (await isFree(start))) return { ok: true, port: start, moved: false };
+  if (explicit) return { ok: false, port: start };
+  for (let p = start + 1; p <= Math.min(65535, start + maxTries); p++) {
+    if (!taken.includes(p) && (await isFree(p))) return { ok: true, port: p, moved: true };
+  }
+  return { ok: false, port: start };
 }
 
 // ------------------------------------------------------------------------------------------------ build output

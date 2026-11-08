@@ -9,7 +9,7 @@ Logic không phụ thuộc engine nằm ngoài dự án này: hằng số, toán
 ```bash
 npm ci                                   # ở gốc repo
 npm run build:web -w client-cocos        # build headless -> apps/client-cocos/build/web-mobile
-npm run serve -w client-cocos            # http://localhost:7456
+npm run serve -w client-cocos            # http://localhost:8456
 ```
 
 - Editor: biến môi trường `COCOS_CREATOR_PATH` (đường dẫn tới file thực thi CocosCreator). Mặc định `C:/ProgramData/cocos/editors/Creator/3.8.8/CocosCreator.exe`.
@@ -19,7 +19,7 @@ npm run serve -w client-cocos            # http://localhost:7456
 
 **HUD chiến đấu (P3 groundwork, vòng chiến đấu giả lập offline):** mở `/?combat=1` (thêm `&class=kiem-tu|phap-tu|the-tu|dan-phu-tu|dao-tu|thuong-tu`). Thanh kỹ năng 8 ô của lớp (D49, phím 1-8 hoặc chạm / click ô) với vòng cooldown + GCD, thanh HP / MP / khiên, chọn mục tiêu (click kẻ địch, Tab / Shift+Tab, Esc bỏ chọn), số sát thương bay. Logic nằm trong `packages/client-combat` (có test); mọi con số của vòng giả lập là placeholder, không phải luật chiến đấu (xem OPEN-ITEMS). Online (`?online=1&combat=1`): HUD dùng kết quả của server (`ServerCombat`, D75 / D78): cast gửi qua `skill_cast` (điểm ngắm = con trỏ, ghim vào tầm kỹ năng), HP / MP / khiên từ `self.vitals`, quái và HP từ AOI + snapshot; chưa có chọn lớp trên dây nên HUD online luôn là bộ `kiem`. Smoke test headless: `npm run combat:smoke -w client-cocos` (offline mock) và `npm run combat:online -w client-cocos` (build thật + server dev thật với quái và combat: vitals, quái từ AOI, cast khứ hồi). Server dev (`npm run dev -w @vgtd/server`) bật `MOBS=1` và `COMBAT=1` mặc định.
 
-**Đo hiệu năng P1 trên điện thoại thật qua LAN:** `npm run serve -w client-cocos` in các URL `LAN: http://<IP>:7456/?npcs=20`; mở URL đó trên điện thoại cùng Wi-Fi, số liệu (FPS, draw call, RAM, gói tải) hiện trên HUD. Chi tiết từng bước và cờ URL: [docs/33-p1-perf.md](../../docs/33-p1-perf.md).
+**Đo hiệu năng P1 trên điện thoại thật qua LAN:** `npm run serve -w client-cocos` in các URL `LAN: http://<IP>:8456/?npcs=20`; mở URL đó trên điện thoại cùng Wi-Fi, số liệu (FPS, draw call, RAM, gói tải) hiện trên HUD. Chi tiết từng bước và cờ URL: [docs/33-p1-perf.md](../../docs/33-p1-perf.md).
 
 Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.
 
@@ -33,7 +33,7 @@ Từ gốc repo: `npm run play` (online, cần game server) hoặc `npm run play
 
 ```bash
 npm run build:web -w client-cocos
-npm run serve -w client-cocos     # mở http://localhost:7456/?class=phap-tu
+npm run serve -w client-cocos     # mở http://localhost:8456/?class=phap-tu
 ```
 
 - **Lớp**: tham số URL `?class=the-tu|phap-tu|dan-phu-tu|dao-tu|kiem-tu|thuong-tu` (mặc định `the-tu`), hoặc phím số **1-6** (theo thứ tự trên) để đổi ngay trong game.
@@ -58,8 +58,8 @@ npm run build:web -w client-cocos && npm run serve -w client-cocos
 
 Mở **hai** tab/cửa sổ trình duyệt (PowerShell: đặt biến bằng `$env:REGISTER_PER_IP_PER_DAY=0` trước lệnh dev):
 
-- `http://localhost:7456/?online=1&name=alice&class=phap-tu`
-- `http://localhost:7456/?online=1&name=bob&class=kiem-tu`
+- `http://localhost:8456/?online=1&name=alice&class=phap-tu`
+- `http://localhost:8456/?online=1&name=bob&class=kiem-tu`
 
 Di chuyển bằng click / WASD / joystick; mỗi tab thấy tab kia chạy (nội suy trễ ~150 ms). HUD ghi `online <tên> | rtt | pending | err | others`: `err` là sai lệch dự đoán so với server (tiệm cận 0 khi trung thực), `others` là số người chơi khác đang thấy.
 
@@ -67,7 +67,7 @@ Di chuyển bằng click / WASD / joystick; mỗi tab thấy tab kia chạy (n�
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `online=1`            | Bật online (không có = offline, mặc định).                                                                                                                                                                                                                                                          |
 | `name=<a-z0-9_ 3-20>` | Tài khoản cố định; mật khẩu sinh ngẫu nhiên và lưu `localStorage` theo tên. Bỏ trống: khách `guest_xxxxxx` theo từng tab (`sessionStorage`).                                                                                                                                                        |
-| `server=host:port`    | Mặc định `<host của trang>:8080`; chỉ nhận host của trang hoặc `localhost`/`127.0.0.1` (host khác bị bỏ qua để link lạ không lấy được mật khẩu); mật khẩu lưu theo cặp `server`+tên. Server chỉ cho phép CORS từ `localhost:7456` / `127.0.0.1:7456` (đổi bằng biến môi trường `CORS_ORIGINS=a,b`). |
+| `server=host:port`    | Mặc định `<host của trang>:8080`; chỉ nhận host của trang hoặc `localhost`/`127.0.0.1` (host khác bị bỏ qua để link lạ không lấy được mật khẩu); mật khẩu lưu theo cặp `server`+tên. Server chỉ cho phép CORS từ `localhost:8456` / `127.0.0.1:8456` (đổi bằng biến môi trường `CORS_ORIGINS=a,b`). |
 | `class=<id>`          | Lớp ChibiBody của **mình**. Người khác chưa có lớp trên dây nên lớp của họ suy ra từ `entityId` (docs/OPEN-ITEMS.md, mục P2-3).                                                                                                                                                                     |
 
 Cùng một tên đăng nhập ở hai tab thì tab sau đá tab trước (một kết nối cho mỗi tài khoản). Tài khoản nằm trong bộ nhớ server: khởi động lại server thì đăng ký lại tự động (mật khẩu đã lưu vẫn dùng được). Biến môi trường server: `PORT`, `HOST`, `MAP_TILES` (mặc định 256 ở `npm run dev`, khớp bản đồ client), `SPAWN_SIDE` (cạnh vùng xuất hiện quanh tâm, mặc định 24 ở `npm run dev` để hai tab thấy nhau; server thường dùng 96), `REGISTER_PER_IP_PER_DAY`, `CORS_ORIGINS`.

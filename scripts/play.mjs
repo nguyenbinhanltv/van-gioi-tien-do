@@ -27,6 +27,7 @@ import {
   needsRebuild,
   newestSource,
   parseArgs,
+  pickPort,
   reasonVi,
   variantOf,
 } from './lib/play-lib.mjs';
@@ -273,16 +274,45 @@ if (!decision.rebuild && !editorOk)
     'Note: Cocos Creator not found, using the existing build.',
   );
 
-usedPorts.push(opts.clientPort);
-if (!opts.offline) usedPorts.push(opts.serverPort);
-for (const p of usedPorts) {
-  if (!(await isPortFree(p)))
+// Ports: a busy DEFAULT port moves to the next free one (the URLs below show the real port); a busy port given with --port /
+// --server-port is an error. 8456 is the client default because 7456 is Cocos Creator's own preview server.
+const chosen = [];
+const clientPick = await pickPort({ start: opts.clientPort, explicit: opts.clientPortExplicit, isFree: isPortFree });
+if (!clientPick.ok)
+  fail(
+    `Cổng ${clientPick.port} đang bị chiếm. Tắt tiến trình đang dùng cổng đó hoặc chọn cổng khác bằng --port.`,
+    `Port ${clientPick.port} is already in use. Stop whatever uses it or choose another with --port.`,
+    2,
+  );
+opts.clientPort = clientPick.port;
+chosen.push(clientPick.port);
+if (clientPick.moved)
+  say(
+    `Cổng client mặc định bận, dùng cổng ${clientPick.port}.`,
+    `The default client port was busy, using ${clientPick.port}.`,
+  );
+if (!opts.offline) {
+  const serverPick = await pickPort({
+    start: opts.serverPort,
+    explicit: opts.serverPortExplicit,
+    isFree: isPortFree,
+    taken: chosen,
+  });
+  if (!serverPick.ok)
     fail(
-      `Cổng ${p} đang bị chiếm. Tắt tiến trình đang dùng cổng đó hoặc đổi bằng ${p === opts.serverPort && !opts.offline ? '--server-port' : '--port'}.`,
-      `Port ${p} is already in use. Stop whatever uses it or choose another with ${p === opts.serverPort && !opts.offline ? '--server-port' : '--port'}.`,
+      `Cổng ${serverPick.port} đang bị chiếm. Tắt tiến trình đang dùng cổng đó hoặc chọn cổng khác bằng --server-port.`,
+      `Port ${serverPick.port} is already in use. Stop whatever uses it or choose another with --server-port.`,
       2,
     );
+  opts.serverPort = serverPick.port;
+  chosen.push(serverPick.port);
+  if (serverPick.moved)
+    say(
+      `Cổng game server mặc định bận, dùng cổng ${serverPick.port} (URL đã kèm &server=).`,
+      `The default game server port was busy, using ${serverPick.port} (the URLs carry &server=).`,
+    );
 }
+usedPorts.push(...chosen);
 say(
   `Kiểm tra xong: Node ${process.versions.node}, ${inst === 'ok' ? 'thư viện đã cài' : 'thư viện cần cập nhật'}, cổng ${usedPorts.join(' + ')} trống.`,
   `Preflight OK: Node ${process.versions.node}, dependencies ${inst === 'ok' ? 'installed' : 'maybe stale'}, port(s) ${usedPorts.join(' + ')} free.`,

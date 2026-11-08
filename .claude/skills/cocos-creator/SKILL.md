@@ -39,7 +39,7 @@ Cocos does not resolve npm workspaces for scripts under `assets/`, and ajv (in `
 ```bash
 npm run build:web -w client-cocos          # prepare:assets + CocosCreator --build -> apps/client-cocos/build/web-mobile
 npm run build:web -w client-cocos -- --release
-npm run serve -w client-cocos              # static server on http://localhost:7456
+npm run serve -w client-cocos              # static server on http://localhost:8456
 npm run typecheck -w client-cocos          # strict tsc against engine typings; skipped if temp/ is missing
 ```
 
@@ -51,7 +51,7 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 
 ## Verifying in a browser (AO)
 
-`ao preview http://localhost:7456/` (brings the Browser panel forward; screenshots are black if the panel is not painted or the page is still loading - the first frames take 10-15 s with software GL; retake after ~15 s). `ao browser console` keeps only a limited number of messages, so show debug results on the HUD (`PerfHud.note`) instead of relying on late logs. The tool redacts URL query values: use the hash (`#autotest=250,120`) or flags without values. Force a fresh load with `ao browser open about:blank` then the URL.
+`ao preview http://localhost:8456/` (brings the Browser panel forward; screenshots are black if the panel is not painted or the page is still loading - the first frames take 10-15 s with software GL; retake after ~15 s). `ao browser console` keeps only a limited number of messages, so show debug results on the HUD (`PerfHud.note`) instead of relying on late logs. The tool redacts URL query values: use the hash (`#autotest=250,120`) or flags without values. Force a fresh load with `ao browser open about:blank` then the URL.
 
 ## Engine settings
 
@@ -63,7 +63,7 @@ npm run typecheck -w client-cocos          # strict tsc against engine typings; 
 
 ## Animation viewer (DragonBones)
 
-Scene `assets/scenes/Viewer.scene` (component `ViewerScene`), opened with `http://localhost:7456/#viewer` (Bootstrap redirects on the hash). Full guide, URL params, adapter contract, how to add a character, runtime limits: `docs/32-animation-viewer.md`. Code in `assets/scripts/viewer/`: `CharacterActor` (adapter interface), `DragonBonesActor` (the only implementation), `ViewerModel` (settings + `@vgtd/character` view state), `ViewerPanel` (DOM control panel), `ViewerScene` (modes single / compare / review, onion skin, HUD, `window.__vgtdViewer` hook). Rig from `tools/dragonbones-testrig` via `prepare:assets` into `assets/resources/dragonbones/viewer/` (git-ignored); your own rig goes in another `assets/resources/dragonbones/<name>/` folder, opened with `#viewer&src=dragonbones/<name>&stem=<stem>`. Headless visual QA: `npm run capture -w client-cocos` (contact sheets / GIF / seam metrics).
+Scene `assets/scenes/Viewer.scene` (component `ViewerScene`), opened with `http://localhost:8456/#viewer` (Bootstrap redirects on the hash). Full guide, URL params, adapter contract, how to add a character, runtime limits: `docs/32-animation-viewer.md`. Code in `assets/scripts/viewer/`: `CharacterActor` (adapter interface), `DragonBonesActor` (the only implementation), `ViewerModel` (settings + `@vgtd/character` view state), `ViewerPanel` (DOM control panel), `ViewerScene` (modes single / compare / review, onion skin, HUD, `window.__vgtdViewer` hook). Rig from `tools/dragonbones-testrig` via `prepare:assets` into `assets/resources/dragonbones/viewer/` (git-ignored); your own rig goes in another `assets/resources/dragonbones/<name>/` folder, opened with `#viewer&src=dragonbones/<name>&stem=<stem>`. Headless visual QA: `npm run capture -w client-cocos` (contact sheets / GIF / seam metrics).
 
 Gotchas learned the hard way:
 
