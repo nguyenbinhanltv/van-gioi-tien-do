@@ -300,3 +300,7 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 - `hello` / `hello_ack` Protobuf và `resume` sau rớt mạng ≤ 10 s (docs/24 §4); hiện là JSON và mất nhân vật khi rớt kết nối.
 - Chưa có Cell Handover giữa nhiều World Node, lag compensation, kỹ năng có sát thương (`hits[]` rỗng), `CastInput` điểm đất/hướng.
 - Số đo tải mới chạy bot trên cùng máy với server (worker thread, loopback): chưa phản ánh độ trễ mạng thật, TLS, nhiều lõi bận khác; cần chạy lại trên máy chủ mục tiêu và với client Cocos thật.
+
+## D71 — phần client chưa triển khai trong PR cổng ngân sách
+
+Quyết định D71 mô tả cả phần client; PR này chỉ có công cụ + cổng CI. Còn chờ PR client-cocos (stack lên PR này): (1) preset nén texture ASTC 4x4 / 6x6 + WebP trong `settings/v2/packages/builder.json`, gắn vào PNG qua `.meta`; (2) bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:assets`; (3) nạp lười có hàng đợi, bootstrap chỉ nhóm `loco` của người chơi; (4) chọn tier `?restier=1x|full`. Số đo trước/sau (RAM, gói tải đầu) chỉ có ý nghĩa sau khi (1)–(4) merge.
