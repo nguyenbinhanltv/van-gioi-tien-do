@@ -1,5 +1,5 @@
 // Prepares generated, git-ignored inputs for the Cocos project:
-//   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world
+//   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world + @vgtd/client-combat
 //   2. assets/resources/world/*                 <- tilemap from @vgtd/procgen (npm run gen:tilemap)
 //   3. assets/resources/dragonbones/viewer/*    <- DragonBones 5.5 test rig from @vgtd/dragonbones-testrig
 //   4. assets/chibi/* + resources/world/chibi-index.json <- chibi runtime bundles (D71, scripts/chibi-bundles.mjs)
@@ -24,7 +24,12 @@ const bundled = await build({
   outfile: join(vendorDir, 'vgtd.mjs'),
   bundle: true,
   // @vgtd/character (and others) import the full @vgtd/shared index, which drags in ajv; resolve it to the engine-safe subset.
-  alias: { '@vgtd/shared': join(root, 'vendor-src/shared-subset.ts') },
+  alias: {
+    '@vgtd/shared': join(root, 'vendor-src/shared-subset.ts'),
+    // the full @vgtd/sim index imports skill data (ajv); the client only predicts movement
+    '@vgtd/sim': join(root, 'vendor-src/sim-subset.ts'),
+    '@vgtd/protocol': join(root, '../../packages/protocol/src/index.ts'),
+  },
   format: 'esm',
   target: 'es2020',
   platform: 'neutral',
@@ -54,7 +59,9 @@ writeFileSync(
     "export * as shared from '../../../vendor-src/shared-subset';",
     "export * as core from '../../../../../packages/client-core/src/index';",
     "export * as character from '../../../vendor-src/character-subset';",
+    "export * as sim from '../../../vendor-src/sim-subset';",
     "export * as world from '../../../../../packages/client-world/src/index';",
+    "export * as combat from '../../../../../packages/client-combat/src/index';",
     '',
   ].join('\n'),
 );
