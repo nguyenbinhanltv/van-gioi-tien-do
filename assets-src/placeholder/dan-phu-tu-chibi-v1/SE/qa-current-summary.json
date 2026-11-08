@@ -1,5 +1,5 @@
 {
-  "status": "NOT ready for export. Official D54 similarity failures retained pending D55. Dash5 frozen contour is adjudicated correct and genuinely marginally oversized; local head-only repair deferred until after D55. No coordinate/source-pixel/scale/threshold change.",
+  "status": "NOT ready for export. Current similarity numbers are untrusted either way and retained as historical diagnostics only; D55 re-audit required. Dash5 genuine marginal head oversize remains OPEN for post-D55 head-only repair. Diagnostic Cocos capture is isolated in TEMP; no production export claimed.",
   "readyForExport": false,
   "resample": "lanczos3",
   "projectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859",
@@ -26,7 +26,7 @@
   "d55Status": "Assigned to worker24; read-only project-v3 includes all29 actual crown/chin annotations including the adjudicated dash5 head-size failure. No inferred front breadth. Window contract received for tooling only; wait D55 merge and sensitivity controls before any fix claim. Post-D55 repair retains body/root/legs and remeasures identical contour rules.",
   "previousBilinearCheckpoint": "qa-bilinear-checkpoint.json",
   "productionExport": "pending",
-  "cocosCapture": "pending",
+  "cocosCapture": "Isolated diagnostic complete:15clips,24samples,deviceScale2,exit0,202distinctactor renders. NOT release/identity/scale approval; final production capture remains pendingD55/head repair.",
   "historicalNativeCountsBeforeOfficialD54": {
     "fail-hard": 1,
     "fail-soft": 2,
@@ -62,5 +62,12 @@
     "frames": 202,
     "allAlignedPngHashesMatchPriorCleanup": true
   },
-  "priorProxyAudit": "unskipped-similarity-audit.json (historical)"
+  "priorProxyAudit": "unskipped-similarity-audit.json (historical)",
+  "identityMetricTrust": {
+    "status": "UNTRUSTED pending calibrated D55",
+    "reason": "Current similarity scores are UNTRUSTED in both directions: neither a pass nor a failure establishes identity. Worker24 demonstrated a different-class head scoring0.85 at the same placement. Preserve historical numbers only; no similarity-driven repaint until the stronger calibrated D55 metric merges and all sets are re-audited.",
+    "plannedTooling": "Structure+colour+silhouette with translation-only registration; calibration/sensitivity controls and merge pending, not adopted yet.",
+    "visualReview": "Compare by eye against unchanged approved SE master. Current numerical passes are not identity certificates."
+  },
+  "diagnosticEngineCapture": "diagnostic-engine-capture.json"
 }

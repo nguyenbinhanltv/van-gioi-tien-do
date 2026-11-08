@@ -2,6 +2,8 @@
 
 Status: corrected construction and tier front studies; all15 E clips generated (202frames), native production QA passed; final real Cocos3.8.8 capture passed. The old semi-realistic set remains separate.
 
+Historical similarity results, including merged E results, do not establish identity. D55 calibration and re-audit are pending; current renderer captures remain evidence of rendering only. No old set is re-exported by this notice.
+
 ## Construction
 
 The approved T3 supplies the fixed adult face, olive-brown almond eyes, delicate brow, serene lips, folded bun and two side strands. T1 uses ivory/jade with narrow antique-gold trim, sparse ink-wash hem, plain brown whisk with ONE bronze collar and white horsehair. Meditation has no lotus; talismans are separate FX.
