@@ -417,3 +417,5 @@ Hàng "Nhân vật" ở bảng trên nay là **nhóm `loco` của một hướng
 | Tổng đã tải sau khi NPC nạp xong (MB) |     – |               135,8 | 12,32 (gzip 4,59) |
 
 Toàn bộ 14 hướng đã merge: PNG nguồn 124,2 MB → ASTC 80,6 MB (cả hai tier) hoặc WebP 33,0 MB (cả hai tier). Chưa đo trên điện thoại thật; WebP (desktop không có ASTC) chưa chạy `perf:p1`.
+
+Đo `npm run perf:p1 -w client-cocos -- --route` (bản đồ 8×8 chunk, 20 NPC chibi, bản release không có art dev): draw call 69 (≤ 80), RAM 172,8 MB (≤ 500), FPS trung vị 33,1 (≥ 30, GL mềm), gói tải đầu đến khi chơi được **7,29 MB** (gzip 2,51; ≤ 25), tổng cả lượt chạy 13,46 MB. Trước D71 (số của worker 37 trong #198): 31 MB, 302 MB RAM (0 NPC) và 700 MB RAM (20 NPC).
