@@ -994,6 +994,50 @@ describe('WorldNode with combat', () => {
     expect(pcts[pcts.length - 1]).toBeLessThanOrEqual(100);
   });
 
+  // OPEN-ITEMS 10: a connection that drops in the middle of a cast time
+  const midCastRig = (resumeHoldMs: number) => {
+    const mobs = new FakeMobs();
+    const node = new WorldNode({
+      seed: 3,
+      mapTiles: 64,
+      spawn: { i0: 20, j0: 20, side: 1 },
+      combat: { mobs },
+      resumeHoldMs,
+    });
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc');
+    const me = node.world.entities.find((e) => e.id === id)!;
+    mobs.stats.set(MOB, mobStats());
+    node.world = spawnEntity(node.world, { id: MOB, i: me.i + 2, j: me.j, hp: 3000, mpMax: 0 });
+    for (let k = 0; k < 12; k++) node.tick();
+    const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!; // 400 ms cast time = 8 ticks
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0, aim: null }));
+    node.tick(); // accepted, now in its cast time
+    return { node, c, id, mobHp: () => node.world.entities.find((e) => e.id === MOB)!.hp };
+  };
+  const resultsOf = (c: Client) =>
+    c.msgs.filter((m): m is Extract<Message, { type: 'skill_result' }> => m.type === 'skill_result');
+
+  it('a player who leaves during a cast time cancels it: no damage, no result, the node keeps ticking', () => {
+    const r = midCastRig(0);
+    r.node.removePlayer(r.id, r.c);
+    for (let k = 0; k < 30; k++) r.node.tick();
+    expect(r.mobHp()).toBe(3000);
+    expect(resultsOf(r.c)).toHaveLength(0);
+    expect(r.node.combat!.maxHpOf(r.id)).toBeUndefined();
+  });
+
+  it('a player whose connection drops during a cast time (entity held for a resume) still lands the cast; nothing is sent to the dead socket', () => {
+    const r = midCastRig(2000);
+    expect(r.node.suspendPlayer(r.id, r.c)).toBe(true);
+    const sent = r.c.msgs.length;
+    for (let k = 0; k < 20; k++) r.node.tick();
+    expect(r.mobHp()).toBeLessThan(3000); // the server-authoritative cast resolved while the player was away
+    expect(r.c.msgs.length).toBe(sent); // the held player has nobody to send to
+    expect(resultsOf(r.c)).toHaveLength(0);
+    expect(r.node.combat!.maxHpOf(r.id)).toBeDefined(); // registration kept until the hold ends
+  });
+
   it('a node built without opts.combat behaves as before: ok result with empty hits', () => {
     const node = new WorldNode({ seed: 3, mapTiles: 64 });
     const c = new Client();

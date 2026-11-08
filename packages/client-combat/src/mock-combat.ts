@@ -93,6 +93,8 @@ interface Hit {
 const dist = (a: TilePoint, b: TilePoint): number => Math.hypot(a.i - b.i, a.j - b.j);
 
 export class MockCombat implements CombatBackend {
+  /** The offline mock respawns after its own placeholder delay (OPEN-ITEMS 9). */
+  readonly respawnDelayMs = MOCK.RESPAWN_MS;
   readonly hotbar: Hotbar;
   readonly target = new TargetSelector();
   readonly player: MockPlayer;
