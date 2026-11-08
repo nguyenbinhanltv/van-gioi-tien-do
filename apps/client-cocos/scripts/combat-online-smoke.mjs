@@ -165,8 +165,26 @@ try {
   check(cast >= 0 && s.slots[cast].cdMs > 0, 'the cast reached the server and the cooldown is running');
   check(s.mp < mp0, `MP was spent by the server (${mp0} -> ${s.mp})`);
   mkdirSync(out, { recursive: true });
+  check(s.enemyBars.length >= 1 || s.target === null, 'the targeted monster has an overhead HP bar');
+  check(!s.deathOverlay, 'no death overlay while alive');
   await page.screenshot({ path: join(out, 'combat-online.png') });
   console.log(`screenshot: ${join(out, 'combat-online.png')}`);
+
+  // death flow (the server does not hurt players yet, so feed own vitals as a snapshot would): damage number + own bar, then the
+  // overlay with the respawn countdown, then the respawn clears it (the server-side respawn is covered by apps/server tests)
+  await page.evaluate(`window.__vgtdCombat.fakeVitals(${Math.round(s.hpMax * 0.6)}, ${s.hpMax})`);
+  await sleep(300);
+  s = await st();
+  check(s.selfBar && s.floaters > 0, 'damage taken shows a floating number and the own HP bar');
+  await page.evaluate(`window.__vgtdCombat.fakeVitals(0, ${s.hpMax})`);
+  await sleep(600);
+  s = await st();
+  check(s.deathOverlay && /Respawn in/.test(s.deathText), `death overlay with countdown ("${s.deathText}")`);
+  await page.screenshot({ path: join(out, 'combat-online-dead.png') });
+  await page.evaluate(`window.__vgtdCombat.fakeVitals(${s.hpMax}, ${s.hpMax})`);
+  await sleep(300);
+  s = await st();
+  check(!s.deathOverlay, 'respawn clears the overlay');
 } finally {
   await browser.close();
   server.kill();
