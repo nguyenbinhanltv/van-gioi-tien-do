@@ -10,7 +10,7 @@ import {
   type SnapshotMsg,
 } from '@vgtd/protocol';
 import { TileGrid, compileSkills, type EntityState } from '@vgtd/sim';
-import { WorldNode, type ClientTransport, type WorldNodeOptions } from '../src/index.js';
+import { WORLD_CONFIG, WorldNode, pushCapped, type ClientTransport, type WorldNodeOptions } from '../src/index.js';
 
 /** A fake client connection that decodes every frame exactly like a real client (per-index baseline). */
 class FakeClient implements ClientTransport {
@@ -328,5 +328,27 @@ describe('World Node: server authority and anti-cheat', () => {
     expect(pos(5)).toEqual(pos(5));
     expect(pos(5)).not.toEqual(pos(6));
     expect(toUW(1, 1).u).toBe(0);
+  });
+});
+
+describe('World Node: bounded metrics', () => {
+  it('pushCapped never exceeds the cap and keeps the newest samples in order', () => {
+    const a: number[] = [];
+    for (let k = 0; k < 1000; k++) {
+      pushCapped(a, k, 100);
+      expect(a.length).toBeLessThanOrEqual(100);
+    }
+    expect(a.at(-1)).toBe(999);
+    expect(a).toEqual([...a].sort((x, y) => x - y));
+  });
+
+  it('tickMs and tickIntervalMs stay at or below TICK_SAMPLES after more ticks than that', () => {
+    const n = node();
+    join(n);
+    ticks(n, WORLD_CONFIG.TICK_SAMPLES + 500);
+    expect(n.tickMs.length).toBeLessThanOrEqual(WORLD_CONFIG.TICK_SAMPLES);
+    expect(n.tickIntervalMs.length).toBeLessThanOrEqual(WORLD_CONFIG.TICK_SAMPLES);
+    expect(n.tickMs.length).toBeGreaterThan(WORLD_CONFIG.TICK_SAMPLES / 2);
+    expect(n.tickIntervalMs.length).toBeGreaterThan(WORLD_CONFIG.TICK_SAMPLES / 2);
   });
 });

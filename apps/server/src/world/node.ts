@@ -121,6 +121,12 @@ export interface WorldNodeOptions {
 const BAND_PERIOD = [1, 2, 4] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
 
+/** Append and keep at most `cap` samples (oldest dropped in chunks, so removal is amortised O(1)). */
+export function pushCapped(arr: number[], v: number, cap: number): void {
+  arr.push(v);
+  if (arr.length > cap) arr.splice(0, arr.length - cap + Math.max(1, Math.floor(cap / 10)));
+}
+
 function frameHeader(len: number): number {
   return len < 126 ? 2 : len < 65536 ? 4 : 10;
 }
@@ -304,7 +310,7 @@ export class WorldNode {
   /** One 20 Hz tick. Returns its wall-clock duration in ms. */
   tick(): number {
     const t0 = clock();
-    if (this.lastTickStart > 0) this.tickIntervalMs.push(t0 - this.lastTickStart);
+    if (this.lastTickStart > 0) pushCapped(this.tickIntervalMs, t0 - this.lastTickStart, WORLD_CONFIG.TICK_SAMPLES);
     this.lastTickStart = t0;
 
     const inputs: SimInput[] = [];
@@ -341,8 +347,7 @@ export class WorldNode {
     ph.maxSnapMs = Math.max(ph.maxSnapMs, t4 - t3);
 
     const dt = clock() - t0;
-    this.tickMs.push(dt);
-    if (this.tickMs.length > WORLD_CONFIG.TICK_SAMPLES) this.tickMs.shift();
+    pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
     return dt;
   }
 
