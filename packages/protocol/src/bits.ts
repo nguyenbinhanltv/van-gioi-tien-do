@@ -1,34 +1,62 @@
 import { ProtocolError } from './errors.js';
 
-/** MSB-first bit writer used for snapshot entity records (docs/08 §8 "Bản ghi một thực thể"). */
+/**
+ * MSB-first bit writer used for snapshot entity records (docs/08 §8 "Bản ghi một thực thể").
+ * Chunked: up to 7 pending bits are kept in `acc` and whole bytes are flushed into a growable `Uint8Array` (this runs once per entity
+ * record per client per tick, so it is on the server's hot path). The output is bit-for-bit what a bit-at-a-time writer produces
+ * (see tests/bits.test.ts, which checks it against exactly that).
+ */
 export class BitWriter {
-  private bytes: number[] = [];
-  private cur = 0;
+  private buf: Uint8Array;
+  private len = 0;
+  private acc = 0;
   private nbits = 0;
 
-  /** Write the low `bits` (1..24) bits of `value`; throws if the value does not fit. */
+  /** `capacityBytes`: expected output size (a hint; the buffer grows as needed). */
+  constructor(capacityBytes = 64) {
+    this.buf = new Uint8Array(Math.max(8, capacityBytes));
+  }
+
+  /** Start over, keeping the allocated buffer (a scratch writer reused across messages). */
+  reset(): void {
+    this.len = 0;
+    this.acc = 0;
+    this.nbits = 0;
+  }
+
+  private grow(): void {
+    const nb = new Uint8Array(this.buf.length * 2);
+    nb.set(this.buf);
+    this.buf = nb;
+  }
+
+  /** Write the low `bits` (0..24) bits of `value`; throws if the value does not fit. */
   write(value: number, bits: number): void {
-    if (!Number.isInteger(value) || value < 0 || value >= 2 ** bits) {
+    // for widths 0..24: `(value | 0) !== value` rejects fractions, NaN and anything beyond int32, then the range check (no Math.pow here:
+    // this runs a few hundred thousand times per tick on the server)
+    if ((value | 0) !== value || value < 0 || value >= 1 << bits) {
       throw new ProtocolError('range', `value ${value} does not fit in ${bits} bits`);
     }
-    for (let b = bits - 1; b >= 0; b--) {
-      this.cur = (this.cur << 1) | ((value >>> b) & 1);
-      if (++this.nbits === 8) {
-        this.bytes.push(this.cur);
-        this.cur = 0;
-        this.nbits = 0;
-      }
+    // at most 7 pending bits + 24 new ones = 31 bits: fits a non-negative int32
+    this.acc = (this.acc << bits) | value;
+    this.nbits += bits;
+    while (this.nbits >= 8) {
+      this.nbits -= 8;
+      if (this.len === this.buf.length) this.grow();
+      this.buf[this.len++] = (this.acc >>> this.nbits) & 0xff;
+      this.acc &= (1 << this.nbits) - 1;
     }
   }
 
   /** Pad the last byte with zero bits and return the bytes. */
   finish(): Uint8Array {
     if (this.nbits > 0) {
-      this.bytes.push(this.cur << (8 - this.nbits));
-      this.cur = 0;
+      if (this.len === this.buf.length) this.grow();
+      this.buf[this.len++] = (this.acc << (8 - this.nbits)) & 0xff;
+      this.acc = 0;
       this.nbits = 0;
     }
-    return Uint8Array.from(this.bytes);
+    return this.buf.slice(0, this.len);
   }
 }
 

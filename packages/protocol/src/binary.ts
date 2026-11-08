@@ -48,6 +48,14 @@ class ByteWriter {
   private buf = new Uint8Array(64);
   private view = new DataView(this.buf.buffer);
   len = 0;
+  /** Start over, keeping the allocated buffer (the module-level scratch writer is reused by every `encode`). */
+  reset(): void {
+    this.len = 0;
+  }
+  /** make room for `n` more bytes up front (one allocation instead of repeated doubling) */
+  reserve(n: number): void {
+    this.ensure(n);
+  }
   private ensure(n: number): void {
     if (this.len + n <= this.buf.length) return;
     let cap = this.buf.length * 2;
@@ -179,9 +187,17 @@ const TEXT_ENC = new TextEncoder();
 const TEXT_DEC = new TextDecoder('utf-8', { fatal: true });
 
 // ---------------------------------------------------------------- encode
+/**
+ * Reused by every `encode` (a snapshot per client per tick would otherwise allocate a buffer + DataView each time). Safe because
+ * encoding is synchronous and never re-entrant, and every result is a COPY (`result()` slices), so callers never see the scratch.
+ */
+const SCRATCH = new ByteWriter();
+const SCRATCH_BITS = new BitWriter(1024);
+
 export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
   const m = validateMessage(msg);
-  const w = new ByteWriter();
+  const w = SCRATCH;
+  w.reset();
   w.u8(PROTOCOL_VERSION);
   if (isCold(m)) {
     w.u8(COLD_ENVELOPE);
@@ -297,7 +313,10 @@ function encodeSnapshot(w: ByteWriter, m: SnapshotMsg, opts: CodecOptions): void
   w.u32(m.tick);
   if (m.self) encodeSelf(w, m.self);
   w.u16(m.entities.length);
-  const bits = new BitWriter();
+  // an entity record is 37-44 bits (5-6 bytes): size both buffers once
+  w.reserve(48 + m.entities.length * 6);
+  const bits = SCRATCH_BITS;
+  bits.reset();
   for (const e of m.entities) {
     bits.write(e.index, 10);
     const base = hasBase ? opts.baseline?.(e.index) : undefined;
