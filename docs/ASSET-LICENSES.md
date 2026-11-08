@@ -5667,3 +5667,4 @@ Kiểm tra [OpenAI Terms of Use, Content](https://openai.com/policies/row-terms-
 | `assets-src/placeholder/thuong-tu-chibi-v1/reference/T1-turnaround.raw.png`                             | image_gen.imagegen / retained source and public repair derivatives | OpenAI Output theo điều khoản trên |
 | `assets-src/placeholder/thuong-tu-chibi-v1/reference/T1.master-source.provenance.json`                  | Provenance / calibration / QA / public pipeline metadata           | Quyền dự án                        |
 | `assets-src/placeholder/thuong-tu-chibi-v1/reference/T1.master-source.raw.png`                          | image_gen.imagegen / retained source and public repair derivatives | OpenAI Output theo điều khoản trên |
+| `assets-src/placeholder/thuong-tu-chibi-v1/E/timing-24hz.provenance.json`                               | D58 / Cocos Creator 3.8.8 / public sprite pipeline                 | Quyền dự án                        |
