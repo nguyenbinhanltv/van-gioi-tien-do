@@ -630,6 +630,27 @@ describe('MobManager (#204) as the MobPort', () => {
     expect(world.entities.some((e) => e.id === mob.id)).toBe(false);
     expect(manager.info(mob.id)!.respawnAtTick).toBeGreaterThan(world.tick);
     expect(drops).toHaveLength(1);
+
+describe('setRealm (progression hook)', () => {
+  it('re-derives max HP / MP and ATK from the new realm, keeping the HP and MP ratios and the class', () => {
+    const r = rig({ mobs: [{ i: 22.5, j: 20.5 }] });
+    const before = makeProfile('kiem', 1, 1);
+    r.world = {
+      ...r.world,
+      entities: r.world.entities.map((e) => (e.id === 1 ? { ...e, hp: before.stats.hp / 2, mp: e.mpMax / 4 } : e)),
+    };
+    r.world = r.combat.setRealm(r.world, 1, 2, 1);
+    const after = makeProfile('kiem', 2, 1);
+    expect(after.stats.hp).toBeGreaterThan(before.stats.hp);
+    expect(r.combat.maxHpOf(1)).toBe(after.stats.hp);
+    const e = entity(r, 1)!;
+    expect(e.mpMax).toBe(after.stats.mp);
+    expect(e.hp).toBeCloseTo(after.stats.hp / 2, -1);
+    expect(e.mp).toBeCloseTo(after.stats.mp / 4, -1);
+    expect(r.combat.profileOf(1)!.path).toBe('kiem');
+    expect(r.combat.profileOf(1)!.stats.atk).toBe(after.stats.atk);
+    // unknown id: no-op
+    expect(r.combat.setRealm(r.world, 999, 3, 1)).toBe(r.world);
   });
 });
 

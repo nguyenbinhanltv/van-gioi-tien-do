@@ -107,6 +107,27 @@ export class CombatSystem {
     return { hpMax: profile.stats.hp, mpMax: profile.stats.mp };
   }
 
+  /**
+   * The player reached a new realm / sub-stage (progression, #205 `onStageChange`): re-derive the combat profile and the max HP / MP,
+   * keeping the current HP and MP ratios. Class (path) is kept. Returns the new world.
+   */
+  setRealm(world: SimWorld, id: number, realm: number, substage: number): SimWorld {
+    const p = this.players.get(id);
+    const e = world.entities.find((x) => x.id === id);
+    if (!p || !e) return world;
+    const hpRatio = p.hpMax > 0 ? e.hp / p.hpMax : 1;
+    const mpRatio = e.mpMax > 0 ? e.mp / e.mpMax : 1;
+    p.profile = makeProfile(p.profile.path, realm, substage, this.defs);
+    p.hpMax = p.profile.stats.hp;
+    const mpMax = p.profile.stats.mp;
+    return patch(
+      world,
+      new Map([
+        [id, { hp: p.alive ? Math.max(1, Math.round(p.hpMax * hpRatio)) : 0, mpMax, mp: Math.round(mpMax * mpRatio) }],
+      ]),
+    );
+  }
+
   removePlayer(id: number): void {
     this.players.delete(id);
     this.pending = this.pending.filter((p) => p.casterId !== id);
