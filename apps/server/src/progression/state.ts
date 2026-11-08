@@ -24,6 +24,7 @@ import {
   type Element,
   type ElementWeights,
   type Mutation,
+  type PathId,
   type RngState,
   type RootTypeId,
 } from '@vgtd/shared';
@@ -49,6 +50,11 @@ export interface ProgressRecord {
   readonly nFail: number;
   /** optimistic-concurrency version, incremented by every successful save */
   readonly version: number;
+  /**
+   * Class (Đạo Lộ, `characters.class_id`, D82): decided ONCE at creation by the first login that names one, never changed by a later
+   * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
+   */
+  readonly classId?: PathId;
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;
@@ -151,8 +157,18 @@ export function rollSpiritRoot(rng: RngState): [SpiritRoot, RngState] {
   return [{ type: type.id, elements, mutation }, rng];
 }
 
-export function newRecord(characterId: string, spiritRoot: SpiritRoot): ProgressRecord {
-  return { characterId, realm: 1, subRealm: 1, spiritRoot, karma: 0, exp: 0, nFail: 0, version: 0 };
+export function newRecord(characterId: string, spiritRoot: SpiritRoot, classId?: PathId): ProgressRecord {
+  return {
+    characterId,
+    realm: 1,
+    subRealm: 1,
+    spiritRoot,
+    karma: 0,
+    exp: 0,
+    nFail: 0,
+    version: 0,
+    ...(classId ? { classId } : {}),
+  };
 }
 
 /** Base elements as the wire bitmask of char_state (bit 0..4 = kim, moc, thuy, hoa, tho). */

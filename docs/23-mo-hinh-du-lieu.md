@@ -222,7 +222,7 @@ Sinh UUIDv7 dùng `Clock` đã tiêm (rìa), tách khỏi mã mô phỏng; **kh�
 
 ### 4.2 Nhân vật
 
-- `characters`: `id`, `account_id`, `shard_id` (mặc định 1, [20 Q6](20-kien-truc-tong-the.md)), `name` (duy nhất không phân biệt hoa thường), `class_id`, `realm` (1–9), `sub_realm` (nấc), `spirit_root` (Linh Căn – dạng văn bản/JSON gọn theo [07 §5](07-cong-thuc-data-schema.md)), `karma` (Nghiệp Lực, −1000…1000), `dao_tam`, `created_at`, `deleted_at`.
+- `characters`: `id`, `account_id`, `shard_id` (mặc định 1, [20 Q6](20-kien-truc-tong-the.md)), `name` (duy nhất không phân biệt hoa thường), `class_id`, `realm` (1–9), `sub_realm` (nấc), `spirit_root` (Linh Căn – dạng văn bản/JSON gọn theo [07 §5](07-cong-thuc-data-schema.md)), `karma` (Nghiệp Lực, −1000…1000), `dao_tam`, `created_at`, `deleted_at`. _[Cập nhật D82: `class_id` được ghi một lần lúc tạo nhân vật (lớp trong `hello`, mặc định `kiem`) và không đổi qua `hello` sau đó; trong MVP bản ghi tiến trình `ProgressRecord.classId` là hiện thực của cột này.]_
 - `character_state` (1–1, ghi thường xuyên, tách khỏi `characters` để giảm bloat): `pos_i`, `pos_j` (float), `map_id`, `hp`, `mp`, `buffs jsonb`, `cooldown_ready_at` (jsonb theo giờ server), `exp`, `saved_at`. Ghi theo lô ([22 §3.8](22-server-modules.md)).
 - Giới hạn: tối đa N nhân vật/tài khoản (mặc định 4, chờ chốt).
 

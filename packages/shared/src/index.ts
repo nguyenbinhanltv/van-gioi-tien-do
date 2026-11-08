@@ -9,6 +9,7 @@ export * from './formulas/cultivation.js';
 export * from './formulas/economy.js';
 export * from './formulas/drops.js';
 export * from './formulas/skills.js';
+export * from './classes.js';
 export * from './formulas/skill_table.js';
 export * from './formulas/skill_sim.js';
 export * from './formulas/skill_sim_report.js';
