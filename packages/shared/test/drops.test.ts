@@ -109,6 +109,7 @@ describe('rolls are deterministic and bounded', () => {
         const [lo, hi] = range[r.item] ?? [0, 99];
         expect(r.qty).toBeGreaterThanOrEqual(lo);
         expect(r.qty).toBeLessThanOrEqual(hi);
+      }
     const high = resolveDrops({ ...boss, monsterRealm: 3 }, () => 0).find((r) => r.item === 'stone_ha')!;
     expect(high.qty).toBe(Math.round(40 * 2.25));
     const repeat = resolveDrops({ ...boss, bossRepeat: true }, () => 0);
