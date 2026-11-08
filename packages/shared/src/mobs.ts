@@ -10,6 +10,7 @@
  */
 import { realmProgression, type ElementId } from './data.js';
 import { statsAt, subStageCount, type Stats } from './formulas/stats.js';
+import type { DropSource } from './formulas/economy.js';
 
 export type MobTier = 'normal' | 'elite' | 'boss';
 export type MobZoneId = 'bia_rung' | 'dam_lay_doc' | 'co_thu_trung_tam' | 'doc_hoa_dam';
@@ -281,18 +282,32 @@ export const ZONE_SPAWN_TABLES: readonly ZoneSpawnTable[] = (
   })),
 }));
 
+/** Realm (1-based, `order` of the realm table) and sub-stage that contain a mob `level`. */
+export function mobRealmAt(level: number): { realm: number; subStage: number } {
+  const realms = realmProgression.realms;
+  const lv = Math.max(1, Math.trunc(level));
+  const r = realms.find((x) => lv >= x.level_range[0] && lv <= x.level_range[1]) ?? realms[realms.length - 1]!;
+  const K = subStageCount(r.order);
+  const [lo, hi] = r.level_range;
+  const k = Math.min(K, Math.max(1, 1 + Math.floor(((lv - lo) / (hi - lo + 1)) * K)));
+  return { realm: r.order, subStage: k };
+}
+/** Realm of a mob level (suppression and stone quantity use it). */
+export function mobRealm(level: number): number {
+  return mobRealmAt(level).realm;
+}
+/** Drop table row of a tier: normal -> field, elite -> elite, boss -> boss (docs/07 §6). */
+export function mobDropSource(tier: MobTier): DropSource {
+  return tier === 'normal' ? 'field' : tier;
+}
+
 /**
  * Stats of a mob at `level`: the 07 §1 curve at the (realm, sub-stage) that contains `level` (realm `level_range`
  * from the realm table, sub-stage proportional inside the range), times the tier multipliers (docs/10 §4.1). Integers.
  */
 export function mobStats(def: MobDef, level: number): { hp: number; atk: number; def: number } {
-  const realms = realmProgression.realms;
-  const lv = Math.max(1, Math.trunc(level));
-  const realm = realms.find((r) => lv >= r.level_range[0] && lv <= r.level_range[1]) ?? realms[realms.length - 1]!;
-  const K = subStageCount(realm.order);
-  const [lo, hi] = realm.level_range;
-  const k = Math.min(K, Math.max(1, 1 + Math.floor(((lv - lo) / (hi - lo + 1)) * K)));
-  const s: Stats = statsAt(realm.order, k);
+  const { realm, subStage } = mobRealmAt(level);
+  const s: Stats = statsAt(realm, subStage);
   const t = MOB_TIERS[def.tier];
   return {
     hp: Math.max(1, Math.round(s.hp * t.hpMult)),

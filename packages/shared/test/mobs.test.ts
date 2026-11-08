@@ -6,6 +6,9 @@ import {
   MOB_TIERS,
   ZONE_SPAWN_TABLES,
   mobDefByKey,
+  mobDropSource,
+  mobRealm,
+  mobRealmAt,
   mobStats,
   realmProgression,
   statsAt,
@@ -68,5 +71,24 @@ describe('mobStats (07 §1 curve x docs/10 §4.1 multipliers)', () => {
     const a = mobStats(tho, 9);
     expect(mobStats(tho, 9)).toEqual(a);
     for (const v of Object.values(a)) expect(Number.isInteger(v)).toBe(true);
+  });
+});
+
+describe('mob realm and drop source', () => {
+  it('mobRealm follows the realm level ranges and mobRealmAt matches the stat lookup', () => {
+    expect(mobRealm(1)).toBe(1);
+    expect(mobRealm(30)).toBe(1);
+    expect(mobRealm(31)).toBe(2);
+    expect(mobRealm(50)).toBe(2);
+    expect(mobRealm(51)).toBe(3);
+    expect(mobRealm(70)).toBe(3);
+    const tho = mobDefByKey('mob_doc_tho')!;
+    const { realm, subStage } = mobRealmAt(9);
+    expect(mobStats(tho, 9).hp).toBe(Math.round(statsAt(realm, subStage).hp * 0.35));
+  });
+  it('tier -> drop table row', () => {
+    expect(mobDropSource('normal')).toBe('field');
+    expect(mobDropSource('elite')).toBe('elite');
+    expect(mobDropSource('boss')).toBe('boss');
   });
 });

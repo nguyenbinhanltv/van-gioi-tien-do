@@ -2,7 +2,16 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join as pjoin } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { MOB_AI, MOB_ID_BASE, MOB_RESPAWN_MS, NETWORK, ZONE_SPAWN_TABLES, mobDefByKey, mobStats } from '@vgtd/shared';
+import {
+  MOB_AI,
+  MOB_ID_BASE,
+  MOB_RESPAWN_MS,
+  NETWORK,
+  ZONE_SPAWN_TABLES,
+  mobDefByKey,
+  mobRealm,
+  mobStats,
+} from '@vgtd/shared';
 import { ErrorCode, decode, encode, type BaselinePos, type Message } from '@vgtd/protocol';
 import {
   TileGrid,
@@ -199,6 +208,40 @@ describe('aggro, chase, leash and return', () => {
       w = advance(m, w);
       expect(m.info(id)!.state).toBe('return');
     }
+  });
+});
+
+describe('combatStats (seam for the combat step)', () => {
+  it('reports defense, realm, main element, drop source and max HP of a living mob, undefined otherwise', () => {
+    const { m, w } = make(SEED, 1);
+    for (const e of mobs(w)) {
+      const info = m.info(e.id)!;
+      const cs = m.combatStats(e.id)!;
+      const st = mobStats(info.def, info.level);
+      expect(cs).toEqual({
+        defense: st.def,
+        realm: mobRealm(info.level),
+        element: info.def.elements[0],
+        dropSource: info.def.tier === 'normal' ? 'field' : info.def.tier,
+        hpMax: info.maxHp,
+      });
+      expect(cs.realm).toBeGreaterThanOrEqual(1);
+    }
+    expect(m.combatStats(12345)).toBeUndefined(); // a player id
+    expect(m.combatStats(MOB_ID_BASE + 99999)).toBeUndefined();
+    const id = mobs(w)[0]!.id;
+    m.kill(w, id);
+    expect(m.combatStats(id)).toBeUndefined();
+  });
+  it('a respawned mob reports the stats of its new level', () => {
+    const { m, w: w0 } = make(SEED, 0.3);
+    let w = m.kill(w0, mobs(w0)[0]!.id);
+    const id = MOB_ID_BASE;
+    for (let t = 0; t < 40_000 && !m.combatStats(id); t++) w = advance(m, w);
+    const cs = m.combatStats(id)!;
+    const info = m.info(id)!;
+    expect(cs.defense).toBe(mobStats(info.def, info.level).def);
+    expect(cs.hpMax).toBe(info.maxHp);
   });
 });
 

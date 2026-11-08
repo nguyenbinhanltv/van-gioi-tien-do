@@ -19,11 +19,15 @@ import {
   NETWORK,
   ZONE_SPAWN_TABLES,
   mobDefByKey,
+  mobDropSource,
+  mobRealm,
   mobStats,
   rngFloat,
   rngFork,
   rngInt,
   rngSeed,
+  type DropSource,
+  type ElementId,
   type MobDef,
   type MobZoneId,
   type RngState,
@@ -59,6 +63,18 @@ export interface MobManagerOptions {
   density?: number;
 }
 
+/** What a combat step needs about a LIVING mob (the sim entity only holds the current HP). */
+export interface MobCombatStats {
+  /** DEF: 07 §1 curve at the mob's level x tier multiplier */
+  defense: number;
+  /** realm >= 1 */
+  realm: number;
+  /** main element (docs/10 "Hệ chính") */
+  element: ElementId | null;
+  dropSource: DropSource;
+  hpMax: number;
+}
+
 export interface MobInfo {
   id: number;
   slot: number;
@@ -81,6 +97,7 @@ interface Slot {
   rect: MobZone;
   level: number;
   maxHp: number;
+  defense: number;
   homeI: number;
   homeJ: number;
   alive: boolean;
@@ -143,6 +160,18 @@ export class MobManager {
       respawnAtTick: s.alive ? 0 : s.respawnAtTick,
     };
   }
+  /** Combat attributes of a living mob, undefined for dead mobs and non-mobs (the seam for the combat step, #206). */
+  combatStats(id: number): MobCombatStats | undefined {
+    const s = this.slots[id - MOB_ID_BASE];
+    if (!s || s.id !== id || !s.alive) return undefined;
+    return {
+      defense: s.defense,
+      realm: mobRealm(s.level),
+      element: s.def.elements[0] ?? null,
+      dropSource: mobDropSource(s.def.tier),
+      hpMax: s.maxHp,
+    };
+  }
   /** max HP of a mob entity (no allocation: used per entity per snapshot) */
   maxHpOf(id: number): number | undefined {
     const s = this.slots[id - MOB_ID_BASE];
@@ -193,13 +222,15 @@ export class MobManager {
   private makeSlot(slot: number, def: MobDef, rect: MobZone): Slot {
     const [homeI, homeJ] = this.drawPoint(rect);
     const level = this.drawLevel(def);
+    const stats = mobStats(def, level);
     return {
       slot,
       id: MOB_ID_BASE + slot,
       def,
       rect,
       level,
-      maxHp: mobStats(def, level).hp,
+      maxHp: stats.hp,
+      defense: stats.def,
       homeI,
       homeJ,
       alive: true,
@@ -259,7 +290,9 @@ export class MobManager {
         if (tick < s.respawnAtTick) continue;
         // respawn: same home, new level, fresh brain (draw order: level, pause)
         s.level = this.drawLevel(s.def);
-        s.maxHp = mobStats(s.def, s.level).hp;
+        const st = mobStats(s.def, s.level);
+        s.maxHp = st.hp;
+        s.defense = st.def;
         s.brain = this.drawBrain(s.def);
         s.alive = true;
         s.respawnAtTick = 0;
