@@ -2,7 +2,7 @@
 
 Audit chỉ báo cáo, không sửa art, export, backlog hoặc `validation.json`. So mọi exception mà quy tắc cũ miễn với predicate mới: chỉ tập old-skip/new-check được đo lại. Ngoại lệ pose D41 đã xem giữ miễn trên mọi kind; `posture`, `secondary-overhang`, `rear-*` không cấp miễn similarity. Không suy miễn từ head evidence.
 
-Mốc mã audit: `45375d9e852e8f6bafdff269dac56428e18d3e45`; UTC `2026-11-08T01:29:34.381Z`. Commit tài liệu sau mốc này không đổi mã gate hay art đầu vào.
+Mốc mã audit: `6f5a02de3c2c58b73b2f2d29656ef4cf4a163dd5`; UTC `2026-11-08T01:34:29.548Z`. Commit tài liệu sau mốc này không đổi mã gate hay art đầu vào.
 
 | Tập chọn                              |         Số ô |
 | ------------------------------------- | -----------: |
