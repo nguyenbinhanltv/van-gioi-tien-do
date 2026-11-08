@@ -5,9 +5,9 @@
   "utcRecorded": "2026-11-08T01:20:17.745Z",
   "nodeVersion": "v24.12.0",
   "source": {
-    "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/build.ts --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1",
+    "command": "node tools/rig/scripts/run-ts.mjs assets-src/placeholder/dao-tu-chibi-v1/refresh-SE-head-evidence.mjs",
     "exitCode": 0,
-    "projectSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+    "projectSha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c",
     "clips": 15,
     "drawings": 202,
     "qa": {
@@ -15,7 +15,7 @@
       "fail-soft": 0,
       "accepted": 22,
       "regression": 0,
-      "info": 376
+      "info": 491
     },
     "manualVisualFindings": 7,
     "atlas": {
@@ -28,7 +28,7 @@
     "exports": [
       {
         "file": "daotuchibi_SE.sprite.json",
-        "sha256": "e3cf20eb4275f4744623e1c4498dee76461f8ea278b2238a40dc3e1cec19676e"
+        "sha256": "cd0e5d94d9eda29609b46fc708bfbc1d53c2b0b4bf00bd5f62a707c3fed9435e"
       },
       {
         "file": "daotuchibi_SE_page1_tex.json",
@@ -40,7 +40,7 @@
       },
       {
         "file": "daotuchibi_SE_ske.json",
-        "sha256": "7493ff1775d8718dcbb9d479fcd9d057573230e11782ea0139bf4dae7c22da26"
+        "sha256": "76431c4cd6a959170b4d005aa205e015f7a30d7f4ec78ecbd1f0b954f2598514"
       },
       {
         "file": "daotuchibi_SE_tex.json",
@@ -409,16 +409,8 @@
       }
     ],
     "note": "Full-resolution contact PNGs are the real2x evidence; official GIFs are overview copies. Bone-only seam metrics do not establish sprite continuity.",
-    "renderInputsUnchangedAfterCapture": true
-  },
-  "checks": {
-    "npmCi": "pass",
-    "typecheck": "pass",
-    "test": "pass",
-    "build": "pass",
-    "lint": "pass",
-    "scopedFormat": "pass",
-    "globalFormat": "known baseline exception: docs/ASSET-LICENSES.md; only own appended table formatted"
+    "renderInputsUnchangedAfterCapture": true,
+    "captureScope": "Historical pre-D58 capture. This evidence-only correction leaves the current 24 Hz render inputs byte-identical. D58 clock capture proof: docs/art/smooth-clock-cocos-capture.json."
   },
   "followUp": "22 measured foot-contact findings and7manual art findings remain open. Dedicated D45 extraction follows all5directions.",
   "d45GuideProvenance": "layer-guides.provenance.json",
@@ -448,5 +440,121 @@
     "sourceQaUnchanged": true,
     "renderInputsUnchanged": true,
     "resampling": "not enabled; scale1 fixed after whole-sheet DPI normalization"
+  },
+  "historicalSourceBeforeEvidenceCorrection": {
+    "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/build.ts --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1",
+    "exitCode": 0,
+    "projectSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+    "clips": 15,
+    "drawings": 202,
+    "qa": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 22,
+      "regression": 0,
+      "info": 376
+    },
+    "manualVisualFindings": 7,
+    "atlas": {
+      "pages": 2,
+      "width": 2048,
+      "height": 2048,
+      "regions": 202,
+      "textures": ["daotuchibi_SE_tex", "daotuchibi_SE_page1_tex"]
+    },
+    "exports": [
+      {
+        "file": "daotuchibi_SE.sprite.json",
+        "sha256": "e3cf20eb4275f4744623e1c4498dee76461f8ea278b2238a40dc3e1cec19676e"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.json",
+        "sha256": "80da4de41597bb1de34fad801340940cbd94e774639e7981ccdbf13cc87df2b3"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.png",
+        "sha256": "f090d08d62a1be33f7011113349eff1feb26af3b1feddbe46258fe02e1f974f7"
+      },
+      {
+        "file": "daotuchibi_SE_ske.json",
+        "sha256": "7493ff1775d8718dcbb9d479fcd9d057573230e11782ea0139bf4dae7c22da26"
+      },
+      {
+        "file": "daotuchibi_SE_tex.json",
+        "sha256": "1e418b94587e6bec08e1f1fd60c4d10328817b447ba7f1675cc2db8a149eee6c"
+      },
+      {
+        "file": "daotuchibi_SE_tex.png",
+        "sha256": "a30116cf59f36bc26b44bbdb80f284f5f14c95eb7da5c9881ed55b8de3c8e358"
+      }
+    ],
+    "nativeBoundsSha256": "80a79a909b01cf3ae527e334e4159b7b4003e1e852674342f21a70409da8441d",
+    "metadata": [
+      {
+        "file": "daotuchibi_SE.sprite.json.meta",
+        "sha256": "3a089aa86418bf35980a39847e3261d3b37d8aeea1aa48fa7bbf0923a0c128d7"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.json.meta",
+        "sha256": "6608e9b94bfb42fbbeed1e2ecf32d550c7d054512551bf676503c891d2c460ea"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.png.meta",
+        "sha256": "b39275eff89bec5baba7dd7a015faa08b7466015b68a2448638e9c16db7b0f3b"
+      },
+      {
+        "file": "daotuchibi_SE_ske.json.meta",
+        "sha256": "bf8fe921d6c0436af9bfccc8ef9073dda5640468c49340131faf2d550adc8dce"
+      },
+      {
+        "file": "daotuchibi_SE_tex.json.meta",
+        "sha256": "a70a9a1f84ce01997c3739d6163687494bdae2d2457989c80c43f372f21e969a"
+      },
+      {
+        "file": "daotuchibi_SE_tex.png.meta",
+        "sha256": "963fef7437202a52cf4e361d90e14a67886b8530bb9cbc4272a9b7a341bf45a7"
+      }
+    ]
+  },
+  "evidenceCorrection": {
+    "proof": "head-evidence-correction.json",
+    "qa": "head-evidence-qa.json",
+    "visualReview": "identity-contact-review.json",
+    "headBandFailuresBefore": 0,
+    "headBandFailuresAfter": 0,
+    "paletteHardFailures": 0,
+    "clock": {
+      "timingProfile": "smooth-v2",
+      "frameRate": 24,
+      "unchanged": true
+    },
+    "renderInputsByteIdentical": true,
+    "pending": "Emote 7/8 existing annotations remain untrusted and unchanged; semantic review tracked in docs/OPEN-ITEMS.md. No dash repaint is justified by historical L1 or temporal flags.",
+    "baselineMain": "7620a2907bb7565cb92dfa666a68bb64a9ea8c62",
+    "audit": {
+      "checked": 70,
+      "pass": 70,
+      "fail": 0,
+      "retainedD41Exempt": 132,
+      "report": "head-reason-audit.json"
+    }
+  },
+  "checksBeforeEvidenceCorrection": {
+    "npmCi": "pass",
+    "typecheck": "pass",
+    "test": "pass",
+    "build": "pass",
+    "lint": "pass",
+    "scopedFormat": "pass",
+    "globalFormat": "known baseline exception: docs/ASSET-LICENSES.md; only own appended table formatted"
+  },
+  "checks": {
+    "npmCi": "pass",
+    "typecheck": "pass",
+    "test": "pass: 279 tests",
+    "build": "pass",
+    "lint": "pass after declaring Node structuredClone global",
+    "scopedFormat": "pass",
+    "globalFormat": "known baseline exception: docs/ASSET-LICENSES.md only; no licence edits in this PR"
   }
 }

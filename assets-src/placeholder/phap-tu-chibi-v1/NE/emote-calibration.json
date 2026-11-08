@@ -1,0 +1,9 @@
+{
+  "clip": "emote",
+  "scale": 1,
+  "sourceHeights": [218, 218, 218, 218, 218, 218, 218, 214, 216, 218, 218, 218],
+  "reference": "reference/NE.master.png",
+  "masterAlphaHeight": 217,
+  "anatomicalMasterHeight": 216,
+  "note": "The entire AI emote sheet follows the nominal216px template occupancy rather than the230px first-sheet occupancy used for character-wide calibration. One fixed scale1 for all12frames restores the same master body/head scale; no individual-frame fitting or posture flattening."
+}

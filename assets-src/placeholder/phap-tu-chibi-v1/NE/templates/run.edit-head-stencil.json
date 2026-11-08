@@ -1,0 +1,373 @@
+{
+  "purpose": "AI EDIT GUIDE ONLY; target placements are authoring intentions, not measured QA evidence",
+  "source": "run.edit-input.png",
+  "master": "../../reference/NE.master.png",
+  "fixedGlobalScale": 0.9478260869565217,
+  "masterCrop": {
+    "x": 109,
+    "y": 15,
+    "width": 62,
+    "height": 38
+  },
+  "masterCrown": {
+    "x": 140,
+    "y": 16
+  },
+  "inset": 3,
+  "cells": [
+    {
+      "cell": 0,
+      "registration": {
+        "pre": {
+          "height": 214.2086956521739,
+          "pelvisX": 115.65086055895554,
+          "soleY": 228.42608695652174
+        },
+        "post": {
+          "height": 214,
+          "pelvisX": 128.20778280542987,
+          "soleY": 243
+        },
+        "dx": 12.998967471998895,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 151,
+        "y": 33
+      },
+      "previousAlignedCrownY": 30
+    },
+    {
+      "cell": 1,
+      "registration": {
+        "pre": {
+          "height": 205.6782608695652,
+          "pelvisX": 113.40360210929346,
+          "soleY": 224.63478260869564
+        },
+        "post": {
+          "height": 206,
+          "pelvisX": 128.81344086021505,
+          "soleY": 240
+        },
+        "dx": 15.24622592166098,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 150,
+        "y": 38
+      },
+      "previousAlignedCrownY": 34
+    },
+    {
+      "cell": 2,
+      "registration": {
+        "pre": {
+          "height": 212.31304347826085,
+          "pelvisX": 115.8770093644525,
+          "soleY": 226.5304347826087
+        },
+        "post": {
+          "height": 212,
+          "pelvisX": 128.62553870710295,
+          "soleY": 241
+        },
+        "dx": 12.772818666501934,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 150,
+        "y": 32
+      },
+      "previousAlignedCrownY": 30
+    },
+    {
+      "cell": 3,
+      "registration": {
+        "pre": {
+          "height": 205.6782608695652,
+          "pelvisX": 116.80207086919052,
+          "soleY": 218
+        },
+        "post": {
+          "height": 206,
+          "pelvisX": 128.748016194332,
+          "soleY": 233
+        },
+        "dx": 11.847757161763923,
+        "dy": 14.947826086956525,
+        "exception": "posture"
+      },
+      "targetAlignedCrown": {
+        "x": 150.5,
+        "y": 28
+      },
+      "previousAlignedCrownY": 27
+    },
+    {
+      "cell": 4,
+      "registration": {
+        "pre": {
+          "height": 182.9304347826087,
+          "pelvisX": 118.26087772759428,
+          "soleY": 193.35652173913041
+        },
+        "post": {
+          "height": 182,
+          "pelvisX": 128.42161312849163,
+          "soleY": 208
+        },
+        "dx": 10.388950303360161,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 147,
+        "y": 27
+      },
+      "previousAlignedCrownY": 26
+    },
+    {
+      "cell": 5,
+      "registration": {
+        "pre": {
+          "height": 174.4,
+          "pelvisX": 117.76274354021648,
+          "soleY": 183.87826086956522
+        },
+        "post": {
+          "height": 175,
+          "pelvisX": 128.59219658600637,
+          "soleY": 199
+        },
+        "dx": 10.887084490737962,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 148,
+        "y": 27
+      },
+      "previousAlignedCrownY": 24
+    },
+    {
+      "cell": 6,
+      "registration": {
+        "pre": {
+          "height": 198.09565217391304,
+          "pelvisX": 116.87727998761584,
+          "soleY": 210.41739130434783
+        },
+        "post": {
+          "height": 198,
+          "pelvisX": 128.59175627240143,
+          "soleY": 225
+        },
+        "dx": 11.772548043338602,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 150,
+        "y": 29
+      },
+      "previousAlignedCrownY": 27
+    },
+    {
+      "cell": 7,
+      "registration": {
+        "pre": {
+          "height": 204.73043478260868,
+          "pelvisX": 116.74436258681813,
+          "soleY": 221.79130434782607
+        },
+        "post": {
+          "height": 205,
+          "pelvisX": 128.87502085766727,
+          "soleY": 237
+        },
+        "dx": 11.905465444136311,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 151,
+        "y": 33
+      },
+      "previousAlignedCrownY": 32
+    },
+    {
+      "cell": 8,
+      "registration": {
+        "pre": {
+          "height": 211.36521739130433,
+          "pelvisX": 116.70938199988512,
+          "soleY": 227.47826086956522
+        },
+        "post": {
+          "height": 211,
+          "pelvisX": 128.2927276057886,
+          "soleY": 242
+        },
+        "dx": 11.940446031069314,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 152,
+        "y": 35
+      },
+      "previousAlignedCrownY": 32
+    },
+    {
+      "cell": 9,
+      "registration": {
+        "pre": {
+          "height": 199.9913043478261,
+          "pelvisX": 113.90725343267995,
+          "soleY": 222.7391304347826
+        },
+        "post": {
+          "height": 200,
+          "pelvisX": 128.67456817346564,
+          "soleY": 238
+        },
+        "dx": 14.742574598274487,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 153,
+        "y": 41
+      },
+      "previousAlignedCrownY": 38
+    },
+    {
+      "cell": 10,
+      "registration": {
+        "pre": {
+          "height": 210.41739130434783,
+          "pelvisX": 115.33309019147421,
+          "soleY": 228.42608695652174
+        },
+        "post": {
+          "height": 210,
+          "pelvisX": 128.69949012109623,
+          "soleY": 243
+        },
+        "dx": 13.316737839480226,
+        "dy": 14.947826086956525,
+        "exception": "posture"
+      },
+      "targetAlignedCrown": {
+        "x": 150.5,
+        "y": 32
+      },
+      "previousAlignedCrownY": 33
+    },
+    {
+      "cell": 11,
+      "registration": {
+        "pre": {
+          "height": 201.88695652173914,
+          "pelvisX": 116.50533715962995,
+          "soleY": 217.05217391304348
+        },
+        "post": {
+          "height": 202,
+          "pelvisX": 128.68414001004857,
+          "soleY": 232
+        },
+        "dx": 12.144490871324493,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 150.5,
+        "y": 33
+      },
+      "previousAlignedCrownY": 30
+    },
+    {
+      "cell": 12,
+      "registration": {
+        "pre": {
+          "height": 180.08695652173913,
+          "pelvisX": 117.26759866005553,
+          "soleY": 193.35652173913041
+        },
+        "post": {
+          "height": 180,
+          "pelvisX": 128.628880866426,
+          "soleY": 208
+        },
+        "dx": 11.382229370898912,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 148.5,
+        "y": 30
+      },
+      "previousAlignedCrownY": 28
+    },
+    {
+      "cell": 13,
+      "registration": {
+        "pre": {
+          "height": 181.03478260869565,
+          "pelvisX": 116.5549946218297,
+          "soleY": 190.51304347826087
+        },
+        "post": {
+          "height": 182,
+          "pelvisX": 128.54163636363637,
+          "soleY": 206
+        },
+        "dx": 12.094833409124732,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 149,
+        "y": 27
+      },
+      "previousAlignedCrownY": 24
+    },
+    {
+      "cell": 14,
+      "registration": {
+        "pre": {
+          "height": 211.36521739130433,
+          "pelvisX": 116.23094445101134,
+          "soleY": 225.58260869565217
+        },
+        "post": {
+          "height": 211,
+          "pelvisX": 128.6263639563534,
+          "soleY": 240
+        },
+        "dx": 12.418883579943099,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 151,
+        "y": 31
+      },
+      "previousAlignedCrownY": 28
+    },
+    {
+      "cell": 15,
+      "registration": {
+        "pre": {
+          "height": 207.57391304347826,
+          "pelvisX": 115.74655053354353,
+          "soleY": 225.58260869565217
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 128.61233993015134,
+          "soleY": 241
+        },
+        "dx": 12.903277497410912,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 152.5,
+        "y": 37
+      },
+      "previousAlignedCrownY": 33
+    }
+  ]
+}

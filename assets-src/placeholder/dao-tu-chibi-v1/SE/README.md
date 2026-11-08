@@ -38,3 +38,11 @@ npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholde
 `validation.json` records the real Cocos Creator 3.8.8 build/capture command, output hashes and repository checks. Capture uses all 15 clips, 24 midpoint samples and device scale 2x. Full-resolution contact PNGs are the capture evidence; the official GIF overviews are downsampled. Source loop QA remains authoritative because bone-only engine seam diagnostics do not establish display-swap continuity.
 
 All inputs are original project assets; OpenAI Output terms were checked on 2026-11-08. Full provenance and the class hash index retain lineage. Licence rows are in worker33's separate append-only SE table. Known baseline exception: `docs/ASSET-LICENSES.md` already fails global Prettier on main; only this worker's appended section is formatted, with prior sections untouched.
+
+## Native head evidence correction after D55/D58
+
+Run frames 3, 7, 11 and 15 now mark the visible main-skull crown, jaw and attached skull breadth. Their previous chin/right-breadth points missed the head. The proposal was frozen before evaluating the new metric; no art pixels, alignment, resampling or timing changed. `head-evidence-correction.json` preserves the exact before/after records and frozen proposal hash.
+
+`refresh-SE-head-evidence.mjs` verifies all five render inputs are byte-identical before refreshing only the sprite contract. `head-evidence-qa.json` records zero hard, unlisted-soft or regression failures, 22 existing accepted foot findings, and zero head-band failures both before and after correction. The current runtime remains 24 Hz under D58. D55 closes the historical dash 3-6 L1 blockers without repainting.
+
+All 15 source contact sheets were reviewed by eye; `identity-contact-review.json` records observations and hashes, including 45 temporal INFO pairs. Emote 7/8 retain recognizable identity but their existing annotations remain untrusted and unchanged, pending semantic review in OPEN-ITEMS. The older Cocos capture is historical pre-D58; this annotation-only change leaves the current rendered inputs untouched. No layered extraction is delivered.
