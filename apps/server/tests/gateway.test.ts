@@ -1,3 +1,4 @@
+import { TEST_ONLY_GOOD } from './fixtures.js';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { WebSocket } from 'ws';
 import { compileSkills } from '@vgtd/sim';
@@ -40,15 +41,11 @@ afterAll(async () => {
 
 describe('Gateway HTTP auth', () => {
   it('register, duplicate, weak password, bad login, health, 404', async () => {
-    expect((await post('/auth/register', { username: 'httpuser', password: 'correct horse battery' })).status).toBe(
-      201,
-    );
-    expect((await post('/auth/register', { username: 'httpuser', password: 'correct horse battery' })).status).toBe(
-      409,
-    );
+    expect((await post('/auth/register', { username: 'httpuser', password: TEST_ONLY_GOOD })).status).toBe(201);
+    expect((await post('/auth/register', { username: 'httpuser', password: TEST_ONLY_GOOD })).status).toBe(409);
     expect((await post('/auth/register', { username: 'weakling', password: 'short' })).status).toBe(400);
     expect((await post('/auth/login', { username: 'httpuser', password: 'nope nope nope' })).status).toBe(401);
-    const ok = await post('/auth/login', { username: 'httpuser', password: 'correct horse battery' });
+    const ok = await post('/auth/login', { username: 'httpuser', password: TEST_ONLY_GOOD });
     expect(ok.status).toBe(200);
     expect(String(ok.json.token).split('.')).toHaveLength(3);
     const health = await fetch(url('/health'));
@@ -59,12 +56,12 @@ describe('Gateway HTTP auth', () => {
   });
 
   it('account lockout surfaces as 429 with Retry-After', async () => {
-    await post('/auth/register', { username: 'lockme', password: 'correct horse battery' });
+    await post('/auth/register', { username: 'lockme', password: TEST_ONLY_GOOD });
     for (let k = 0; k < 5; k++) await post('/auth/login', { username: 'lockme', password: 'wrong wrong wrong' });
     const r = await fetch(url('/auth/login'), {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ username: 'lockme', password: 'correct horse battery' }),
+      body: JSON.stringify({ username: 'lockme', password: TEST_ONLY_GOOD }),
     });
     expect(r.status).toBe(429);
     expect(Number(r.headers.get('retry-after'))).toBeGreaterThan(0);
@@ -88,7 +85,7 @@ describe('Gateway WebSocket', () => {
   it('bad token, missing hello and bad protocol version are refused', async () => {
     await expect(bot('x1').openSocket('garbage')).rejects.toThrow(/closed before hello_ack/);
     await expect(bot('x2').openSocket('a.b.c')).rejects.toThrow();
-    const login = await post('/auth/login', { username: 'httpuser', password: 'correct horse battery' });
+    const login = await post('/auth/login', { username: 'httpuser', password: TEST_ONLY_GOOD });
     await expect(bot('x3').openSocket(String(login.json.token), { protocolMin: 7, protocolMax: 9 })).rejects.toThrow(
       /closed before hello_ack/,
     );

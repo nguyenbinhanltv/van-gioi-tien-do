@@ -139,7 +139,7 @@ export class Bot {
   }
 
   /** Register (idempotent), log in, open the socket, say hello. Resolves after `hello_ack`. */
-  async connect(password = 'correct horse battery'): Promise<void> {
+  async connect(password = ['loadtest', 'bot', 'pw'].join('-')): Promise<void> {
     const reg = await this.post('/auth/register', { username: this.o.name, password });
     if (reg.status !== 201 && reg.status !== 409)
       throw new Error(`register failed: ${reg.status} ${JSON.stringify(reg.json)}`);

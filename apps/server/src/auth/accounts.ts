@@ -3,7 +3,7 @@
  * constant-time answer for unknown names, bounded hash queue). Storage is in memory behind `AccountStore`
  * (PostgreSQL arrives with the persistence work; docs/23).
  */
-import { randomUUID } from 'node:crypto';
+import { randomBytes, randomUUID } from 'node:crypto';
 import { AUTH_CONFIG } from '../config.js';
 import { TokenService } from './jwt.js';
 import {
@@ -101,7 +101,7 @@ export class AuthService {
     this.registerLimit = opts.registerPerIpPerDay ?? AUTH_CONFIG.REGISTER_PER_IP_PER_DAY;
     this.maxPending = opts.maxPendingHashes ?? AUTH_CONFIG.MAX_PENDING_HASHES;
     this.ipFailLimit = opts.ipFailLimit ?? AUTH_CONFIG.IP_FAIL_LIMIT;
-    this.dummyHash = hashPassword('dummy-password-for-unknown-users', this.scryptParams);
+    this.dummyHash = hashPassword(randomBytes(24).toString('base64'), this.scryptParams); // random per process, never a real credential;
   }
 
   /** Runs one hash job through the bounded queue (docs/25 §2.3). */

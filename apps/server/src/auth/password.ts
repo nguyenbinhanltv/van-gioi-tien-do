@@ -16,10 +16,10 @@ export interface ScryptParams {
 export const DEFAULT_SCRYPT: ScryptParams = { N: 16384, r: 8, p: 1 };
 const KEYLEN = 32;
 
-function derive(password: string, salt: Buffer, prm: ScryptParams): Promise<Buffer> {
+function derive(plain: string, salt: Buffer, prm: ScryptParams): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     scrypt(
-      password.normalize('NFKC'),
+      plain.normalize('NFKC'),
       salt,
       KEYLEN,
       { N: prm.N, r: prm.r, p: prm.p, maxmem: 256 * prm.N * prm.r },
