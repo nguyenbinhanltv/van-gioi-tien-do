@@ -145,7 +145,7 @@ describe('threat table (D81)', () => {
     w = run(m, w, 30);
     expect(['idle', 'wander']).toContain(m.info(id)!.state);
     m.onDamage(id, 1, 50);
-    w = run(m, w, 2);
+    run(m, w, 2);
     expect(m.info(id)!.state).toBe('chase');
     expect(m.info(id)!.target).toBe(1);
     expect(m.info(id)!.threat).toEqual([{ id: 1, value: 50 }]);
@@ -197,7 +197,7 @@ describe('threat table (D81)', () => {
     // death clears the table
     m.onDamage(id, 2, 5);
     expect(m.info(id)!.threat).toHaveLength(1);
-    w = m.kill(w, id);
+    m.kill(w, id);
     expect(m.info(id)!.threat).toHaveLength(0);
     m.onDamage(id, 2, 5); // a dead mob takes no threat
     expect(m.info(id)!.threat).toHaveLength(0);

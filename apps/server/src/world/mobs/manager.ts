@@ -331,8 +331,12 @@ export class MobManager {
     if (s.threat.size > THREAT_ENTRIES) {
       let lowest = -1;
       let lowV = Infinity;
-      for (const [k, v] of s.threat)
-        if (k !== attackerId && (v < lowV || (v === lowV && k > lowest))) ((lowest = k), (lowV = v));
+      for (const [k, v] of s.threat) {
+        if (k !== attackerId && (v < lowV || (v === lowV && k > lowest))) {
+          lowest = k;
+          lowV = v;
+        }
+      }
       s.threat.delete(lowest);
     }
   }
@@ -440,7 +444,12 @@ export class MobManager {
     if (s.threat.size === 0) return b;
     let top = 0;
     let topV = -1;
-    for (const [id, v] of s.threat) if (v > topV || (v === topV && id < top)) ((top = id), (topV = v));
+    for (const [id, v] of s.threat) {
+      if (v > topV || (v === topV && id < top)) {
+        top = id;
+        topV = v;
+      }
+    }
     if (b.state === 'chase' && (b.target === top || topV <= (s.threat.get(b.target) ?? 0) * MOB_THREAT.switchRatio))
       return b;
     return { state: 'chase', timerMs: 0, target: top, wi: 0, wj: 0 };
