@@ -9,10 +9,10 @@ import {
   type SpriteLayerSet,
   type SpriteLayerRole,
 } from '@vgtd/character';
-import { CLIP_FPS, createImage, decodePng, encodePng, exportTextureAtlas, type Image } from '@vgtd/rig';
+import { createImage, decodePng, encodePng, exportTextureAtlas, type Image } from '@vgtd/rig';
 import type { Project } from './project.js';
 import { prepareLayerSources } from './layer-guides.js';
-import { buildClip, type ClipInput } from './export.js';
+import { buildClip, spriteFrameRate, type ClipInput } from './export.js';
 import {
   extractWeaponLayer,
   qualityGlowLayer,
@@ -112,7 +112,7 @@ export function buildSpriteLayerSet(input: {
     role: input.role,
     direction: input.direction,
     motionId: input.motionId,
-    frameRate: CLIP_FPS,
+    frameRate: spriteFrameRate(input.clips.map((c) => c.clock)),
     canvas: { width: CELL_PX / TEXTURE_SCALE, height: CELL_PX / TEXTURE_SCALE, pivotX: pivot.x, pivotY: pivot.y },
     textures: pack.pages.map((_, i) => texture(i)),
     displays: [...pack.trims].map(([name, r]) => ({
@@ -236,6 +236,9 @@ export function runLayerExtraction(spec: LayerExtractionProject, baseDir: string
       return result.metrics;
     });
     const clock: ClipInput = {
+      ...((clip.timingProfile ?? source.project.timingProfile)
+        ? { timingProfile: clip.timingProfile ?? source.project.timingProfile }
+        : {}),
       name: clip.name,
       frames: indices.map((_, i) => `${clip.name}_${pad(i)}`),
       durationSec: clip.durationSec,

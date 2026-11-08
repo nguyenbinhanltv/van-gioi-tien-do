@@ -73,6 +73,41 @@ function setup() {
 }
 
 describe('runProject (synthetic end to end)', () => {
+  it('inherits a project-level smooth clock through slicing, alignment and export', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'vgtd-smooth-project-'));
+    writeFileSync(join(dir, 'master.png'), encodePng(makeMaster()));
+    writeFileSync(
+      join(dir, 'sheet.png'),
+      encodePng(
+        toPremultiplied(
+          makeSheet(
+            4,
+            4,
+            256,
+            Array.from({ length: 16 }, () => ({ height: 208, cx: 128, sole: 232 })),
+          ),
+        ),
+      ),
+    );
+    const project: Project = {
+      character: 'smooth',
+      stem: 'smooth',
+      direction: 'E',
+      master: 'master.png',
+      timingProfile: 'smooth-v2',
+      scale: 1,
+      palette: { lock: false },
+      clips: [{ name: 'idle', sheet: 'sheet.png', cols: 4, frames: 16, durationSec: 16 / 24, loop: true }],
+    };
+    const result = runProject(project, dir);
+    const ske = JSON.parse(result.files.get('smooth_E_ske.json') as string);
+    expect(ske.frameRate).toBe(24);
+    expect(ske.armature[0].frameRate).toBe(24);
+    expect(ske.armature[0].animation[0].duration).toBe(16);
+    expect(ske.armature[0].animation[0].slot[0].displayFrame.map((f: { duration: number }) => f.duration)).toEqual(
+      Array.from({ length: 16 }, () => 1),
+    );
+  });
   it('explicitly reports legacy directional foot slide as unmeasured without numeric metrics', () => {
     const { dir, project } = setup();
     const p: Project = {

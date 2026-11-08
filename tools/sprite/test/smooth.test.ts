@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CLIP_FPS } from '@vgtd/rig';
+import { createImage } from '@vgtd/rig';
 import {
   SMOOTH_SPRITE_CLIPS,
   SPRITE_CLIPS,
@@ -7,6 +7,9 @@ import {
   smoothProjectClipDefaults,
   smoothPoseTags,
   smoothSpriteClip,
+  buildArmature,
+  packFrames,
+  spriteFrameRate,
 } from '../src/index.js';
 
 describe('D46 smooth clip profile', () => {
@@ -30,7 +33,10 @@ describe('D46 smooth clip profile', () => {
       const clip = buildClip({ ...defaults, frames: names });
       expect(clip.slots[0]!.attachment!.map((k) => k.value)).toEqual(names);
       expect(clip.slots[0]!.attachment!.every((k) => k.frame < clip.frames)).toBe(true);
-      expect(Math.abs(clip.frames / CLIP_FPS - c.durationSec)).toBeLessThanOrEqual(0.5 / CLIP_FPS);
+      expect(clip.frames).toBe(names.length);
+      expect(clip.frames / 24).toBe(c.durationSec);
+      expect(clip.loop).toBe(c.loop);
+      expect(clip.slots[0]!.attachment!.map((k) => k.frame)).toEqual(names.map((_, i) => i));
       expect(c.events).toEqual(SPRITE_CLIPS.find((l) => l.name === c.name)!.events);
       expect(clip.events.map((e) => e.name)).toEqual(c.events.map((e) => e.name));
       c.events.forEach((event, i) => {
@@ -38,6 +44,39 @@ describe('D46 smooth clip profile', () => {
         expect(clip.events[i]!.frame).toBe(Math.round((anchor * clip.frames) / c.tableFrames));
       });
     }
+  });
+
+  it('writes a 24 Hz armature with uniform one-tick drawings, table events and loop flags', () => {
+    const image = createImage(1, 1);
+    image.data.fill(255);
+    const clips = SMOOTH_SPRITE_CLIPS.map((c) => ({
+      ...smoothProjectClipDefaults(c.name),
+      frames: Array.from({ length: c.sheet.frames }, (_, i) => `${c.name}_${i}`),
+    }));
+    const pack = packFrames(
+      clips.flatMap((c) => c.frames.map((name) => ({ name, image }))),
+      () => 'test.png',
+    );
+    const built = buildArmature({ id: 'test', direction: 'E', name: 'test_E', pack, clips });
+    const ske = built.export.ske as {
+      frameRate: number;
+      armature: {
+        frameRate: number;
+        animation: { duration: number; playTimes: number; slot: { displayFrame: { duration: number }[] }[] }[];
+      }[];
+    };
+    expect(ske.frameRate).toBe(24);
+    expect(ske.armature[0]!.frameRate).toBe(24);
+    ske.armature[0]!.animation.forEach((a, i) => {
+      const c = clips[i]!;
+      expect(a.duration).toBe(c.frames.length);
+      expect(a.playTimes).toBe(c.loop ? 0 : 1);
+      expect(a.slot[0]!.displayFrame.map((f) => f.duration)).toEqual(c.frames.map(() => 1));
+    });
+    expect(() => spriteFrameRate([clips[0]!, {}])).toThrow('mixed');
+    expect(spriteFrameRate([{}])).toBe(30);
+    expect(() => buildClip({ ...clips[0]!, durationSec: 1 })).toThrow('one tick');
+    expect(() => buildClip({ ...clips[0]!, frames: ['missing-drawings'] })).toThrow('one tick');
   });
 
   it('marks anticipation, distinct impact/hold drawings and follow-through for every swing', () => {

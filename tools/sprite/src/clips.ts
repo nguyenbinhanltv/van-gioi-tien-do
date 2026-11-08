@@ -6,6 +6,7 @@
  *   import { SPRITE_CLIPS, spriteClip, SPRITE_CLIP_NAMES } from '@vgtd/sprite';
  */
 import { ANIMATIONS, type AnimationId, type AnimationEventSpec } from '@vgtd/character';
+import { SPRITE_SMOOTH_FPS as SMOOTH_CLIP_FPS } from '@vgtd/shared';
 import type { HeightPolicy } from './head-evidence.js';
 
 /** `upright`: every frame holds the master height (+-3 %); `free`: bending / airborne / seated poses declare exceptions. */
@@ -130,7 +131,7 @@ function defaultsFor(c: SpriteClipSpec) {
 }
 
 /** D46: opt-in semi-chibi production profile. Event anchors remain in legacy TABLE frames. */
-export const SMOOTH_CLIP_FPS = 24;
+export { SPRITE_SMOOTH_FPS as SMOOTH_CLIP_FPS } from '@vgtd/shared';
 const SMOOTH_FRAMES: Readonly<Record<string, number>> = {
   idle: 16,
   meditate: 16,
@@ -149,7 +150,7 @@ const SMOOTH_FRAMES: Readonly<Record<string, number>> = {
   emote: 12,
 };
 
-/** New drawings at nominal 24 fps; export duration is quantized to the rig's 30 Hz clock. */
+/** Each drawing occupies exactly one tick of the opt-in 24 Hz export clock. */
 export const SMOOTH_SPRITE_CLIPS: readonly SpriteClipSpec[] = SPRITE_CLIPS.map((legacy) => {
   const frames = SMOOTH_FRAMES[legacy.name]!;
   const kind = legacy.name === 'dash' ? 'upright' : legacy.kind;
@@ -173,7 +174,7 @@ export function smoothSpriteClip(name: string): SpriteClipSpec {
 
 /** Spread into ProjectClip, then add source sheet/manifest and explicit pose exceptions. */
 export function smoothProjectClipDefaults(name: string) {
-  return defaultsFor(smoothSpriteClip(name));
+  return { ...defaultsFor(smoothSpriteClip(name)), timingProfile: 'smooth-v2' as const };
 }
 
 /** Artist pose labels only; phases/events still use the legacy table coordinate system. */

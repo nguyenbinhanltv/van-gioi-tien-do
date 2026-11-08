@@ -1,6 +1,7 @@
 /**
  * Exporter: aligned, packed frames -> ONE DragonBones armature per direction (D41): a single `root` bone at the pivot, a
- * single `body` slot, one display (region) per frame, swapped by a stepped `displayFrame` timeline at 30 fps. Events
+ * single `body` slot, one display (region) per frame, swapped by a stepped `displayFrame` timeline (legacy 30 Hz,
+ * smooth-v2 24 Hz). Events
  * (footstep / hit / cancel_window ...) come from the animation table and ride the same clock as the display swaps, so the
  * viewer, `DragonBonesActor` and the capture tool work unchanged.
  */
@@ -23,8 +24,22 @@ import type { Direction } from '@vgtd/shared';
 import { TEXTURE_SCALE } from './gait.js';
 import type { PackResult } from './pack.js';
 import { CELL_PX } from './types.js';
+import { SMOOTH_CLIP_FPS } from './clips.js';
+
+export type TimingProfile = 'smooth-v2';
+
+/** One clock per armature/set; omitted profiles retain the legacy 30 Hz clock. */
+export function spriteFrameRate(clips: readonly { readonly timingProfile?: TimingProfile }[]): number {
+  const profiles = new Set(clips.map((c) => c.timingProfile ?? 'legacy'));
+  if (profiles.size > 1) throw new Error('mixed sprite timing profiles in one armature');
+  const profile = profiles.values().next().value;
+  if (profile !== undefined && profile !== 'legacy' && profile !== 'smooth-v2')
+    throw new Error(`unknown sprite timing profile '${String(profile)}'`);
+  return profile === 'smooth-v2' ? SMOOTH_CLIP_FPS : CLIP_FPS;
+}
 
 export interface ClipInput {
+  readonly timingProfile?: TimingProfile;
   /** Animation name in the armature (`run`, `attack`, ...). */
   readonly name: string;
   /** Region names of the frames in playback order. */
@@ -36,11 +51,11 @@ export interface ClipInput {
   readonly tableId?: AnimationId;
   /** Frame (0-based, in TABLE frames) of the named phases of the table, e.g. { hit_frame: 4, combo_window: 6 }. */
   readonly phases?: Readonly<Record<string, number>>;
-  /** Extra events at CLIP 30 fps frames. */
+  /** Extra events in ticks of this clip's selected clock. */
   readonly events?: readonly ClipEvent[];
 }
 
-/** Events of a table animation mapped onto a clip of `clipFrames` 30 fps frames (table frame -> proportional clip frame). */
+/** Table animation events mapped proportionally onto `clipFrames` ticks of the selected export clock. */
 export function eventsFromTable(
   id: AnimationId,
   clipFrames: number,
@@ -65,12 +80,15 @@ export function eventsFromTable(
 export function buildClip(input: ClipInput): Clip {
   const n = input.frames.length;
   if (!n) throw new RangeError(`clip '${input.name}' has no frames`);
-  const frames = Math.max(1, Math.round(input.durationSec * CLIP_FPS));
+  const fps = spriteFrameRate([input]);
+  const frames = Math.max(1, Math.round(input.durationSec * fps));
+  if (input.timingProfile === 'smooth-v2' && (frames !== n || Math.abs(input.durationSec - n / fps) > 1e-9))
+    throw new RangeError(`smooth-v2 clip '${input.name}' requires exactly one tick per drawing`);
   const keys: { frame: number; value: string; curve: 'stepped' }[] = [];
   input.frames.forEach((name, i) => {
     const frame = Math.round((i * frames) / n);
     const last = keys[keys.length - 1];
-    if (last && last.frame >= frame) return; // more sheet frames than 30 fps ticks: the first one wins that tick
+    if (last && last.frame >= frame) return; // legacy oversampling: the first drawing wins that tick
     keys.push({ frame, value: name, curve: 'stepped' });
   });
   const events = [
@@ -148,12 +166,14 @@ export function buildArmature(input: BuildArmatureInput): BuiltArmature {
     slots: [{ name: 'body', bone: 'root', attachment: first }],
     skins: [{ name: 'default', attachments: { body: attachments } }],
   };
+  const frameRate = spriteFrameRate(input.clips);
   const clips = input.clips.map(buildClip);
   const errors = validateRig(rig).filter((i) => i.severity === 'error');
   if (errors.length) throw new Error(`sprite rig invalid: ${errors.map((e) => `${e.path}: ${e.message}`).join('; ')}`);
   const exported = exportDragonBones([{ rig, clips }], geometryAtlas, {
     name: input.name,
     armatureName: () => input.name,
+    frameRate,
   });
   const textures = input.pack.pages.map((page, i) =>
     exportTextureAtlas(page.data, i === 0 ? input.name : `${input.name}_page${i}`),

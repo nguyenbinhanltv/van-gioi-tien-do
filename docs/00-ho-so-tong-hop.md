@@ -45,6 +45,8 @@ Oct 31, 2026 · An Nguyen
 
 ## 3. Thông số chuẩn hợp nhất
 
+[Cập nhật D58: export semi-chibi opt-in `timingProfile: "smooth-v2"` chạy clock 24 Hz, mỗi bản vẽ 1 tick; idle 16/24 giây, attack 14/24 giây. Animation kế thừa clock armature DragonBones. Legacy giữ clock cũ; atlas/PNG không đổi khi sửa timing runtime.]
+
 > **[Cập nhật D44: Player mới dùng premium semi-chibi khoảng 4,5 đầu, mặt cố định theo Đạo Lộ; trang phục/vũ khí đổi hình qua T1–T5 theo 9 cảnh giới, còn 6 phẩm D6 chỉ tint viền/glow lúc chạy. Trang phục cosmetic và skin vũ khí bán riêng; chưa chốt giá/chỉ số. Giữ pipeline từng khung D41 và hướng D14. Chi tiết: [chuẩn phong cách](art/style-semichibi.md), [D44](DECISIONS.md). Concept là tham chiếu, chưa thay asset đang chạy.]**
 
 Đây là bộ giá trị đang có hiệu lực. Mọi thay đổi về sau nên sửa ở đây trước, rồi mới cập nhật tài liệu gốc.
@@ -78,6 +80,8 @@ Oct 31, 2026 · An Nguyen
 [Cập nhật D56, bổ sung hẹp D53: ô NE/N nghiêng động `dash`/`run`/`attack`/`attack_2`/`attack_3` khai `posture`, crown và hai đầu bề ngang tóc ôm sọ nhìn thấy alpha ≥128 nhưng vai thật sự bị che, được dùng bằng chứng ô `rear-breadth-only` với `occluder` cụ thể và note đã xem. Chỉ so bề ngang ±3% master khóa cùng hướng, không đo khoảng dọc/chiếu vai; master giữ kind và ảnh cũ. Không dùng idle; D54 similarity (và D55 khi merge), foot/canvas/scale không được miễn. Pháp tu NE dash local4/5/7 chờ tooling merge mới áp dụng.]
 
 [Cập nhật D54: lý do head-evidence `posture`/`secondary-overhang`/`rear-*` không miễn gate similarity. Ngoại lệ pose D41 có tên riêng đã xem (bow, seated, die-collapse, lunge, recoil, raised-sword) giữ miễn phép so crop trên mọi kind, kể cả upright emote. Có cả bằng chứng đầu và pose D41 thì chỉ pose D41 cấp miễn, không suy miễn từ bằng chứng đầu. Audit so chính xác mọi ô old-skip/new-check; các miễn pose giữ nguyên được ghi riêng, không gọi là pass. Các ngưỡng, scale và cổng foot/canvas giữ nguyên.]
+
+[Cập nhật D55: gate cứng similarity là khoảng cách palette Lab(D65) của pixel opaque: đầu ≤15, thân ≤23. L1 8×8 chỉ chẩn đoán. Temporal SSIM native giữa drawing liên tiếp/seam loop chỉ tịnh tiến ±3px; pair <0,45 ghi INFO review-by-eye, không fail; mirror còn phải qua review contact sheet bằng mắt. Head-size ±3% giữ vai trò scale. Cửa sổ dùng landmark thật, front rộng breadth hoặc một chiều dài đầu, rear endpoint thật; D56 crown+breadth cả master/ô. Margin tổng 8%, torso 25%×44% H master, thiếu điểm ghi centroid-fallback, không tạo evidence. Giữ D41/D54; 11 ô Lab vượt trần là rebuild-blocking, 33 ô L1 cũ được đánh giá lại theo A+C.]
 
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 

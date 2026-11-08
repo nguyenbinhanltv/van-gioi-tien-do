@@ -92,7 +92,7 @@ for (const path of paths(sourceRoot).sort()) {
   const result = runProject(auditProject, base);
   const cells = affected.map((cell) => {
     const findings = result.contract.qa.findings.filter(
-      (f) => f.gate === 'similarity' && f.clip === cell.clip && f.frame === cell.cell,
+      (f) => f.gate === 'similarity' && f.severity === 'fail' && f.clip === cell.clip && f.frame === cell.cell,
     );
     const record = result.contract.clips.find((c) => c.name === cell.clip)?.records[cell.cell];
     return {

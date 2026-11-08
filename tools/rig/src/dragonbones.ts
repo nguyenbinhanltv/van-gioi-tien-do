@@ -30,6 +30,8 @@ export interface ExportEntry {
 }
 
 export interface ExportOptions {
+  /** Clock used by the supplied clip ticks; defaults to the legacy CLIP_FPS. */
+  readonly frameRate?: number;
   /** DragonBones data name (shared by ske and tex so the factory links them). */
   readonly name: string;
   /** Armature name per entry. Default: the rig's direction (`S`, `SE`, ...). */
@@ -277,7 +279,7 @@ function exportArmature(entry: ExportEntry, opts: ExportOptions, atlas: AtlasDat
   const pivot = pivotOf(width, height); // (W/2, H − PIVOT_BOTTOM_OFFSET_PX) from @vgtd/character / @vgtd/shared
   return {
     type: 'Armature',
-    frameRate: CLIP_FPS,
+    frameRate: opts.frameRate ?? CLIP_FPS,
     name,
     aabb: { x: -pivot.x, y: -pivot.y, width, height },
     bone,
@@ -313,6 +315,8 @@ export function exportDragonBones(
   atlas: AtlasData,
   opts: ExportOptions,
 ): DragonBonesExport {
+  if (!Number.isInteger(opts.frameRate ?? CLIP_FPS) || (opts.frameRate ?? CLIP_FPS) <= 0)
+    throw new RangeError('DragonBones frameRate must be a positive integer');
   if (!entries.length) throw new RangeError('nothing to export');
   const have = new Set(atlas.regions.map((r) => r.name));
   for (const { rig } of entries) {
@@ -332,7 +336,7 @@ export function exportDragonBones(
       name: opts.name,
       version: DRAGONBONES_DATA_VERSION,
       compatibleVersion: DRAGONBONES_DATA_VERSION,
-      frameRate: CLIP_FPS,
+      frameRate: opts.frameRate ?? CLIP_FPS,
       armature,
     },
     tex: exportTextureAtlas(atlas, opts.name),
