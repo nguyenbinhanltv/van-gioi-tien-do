@@ -630,6 +630,8 @@ describe('MobManager (#204) as the MobPort', () => {
     expect(world.entities.some((e) => e.id === mob.id)).toBe(false);
     expect(manager.info(mob.id)!.respawnAtTick).toBeGreaterThan(world.tick);
     expect(drops).toHaveLength(1);
+  });
+});
 
 describe('setRealm (progression hook)', () => {
   it('re-derives max HP / MP and ATK from the new realm, keeping the HP and MP ratios and the class', () => {
