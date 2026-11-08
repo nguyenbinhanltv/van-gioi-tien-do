@@ -390,6 +390,86 @@ describe('cast pipeline: sim validation + combat resolution', () => {
   });
 });
 
+// ---------------------------------------------------------------------------------------------------- client-influenced targets (security)
+describe('reach is re-validated at resolve time', () => {
+  const moveMob = (r: Rig, id: number, i: number, j: number): void => {
+    r.world = { ...r.world, entities: r.world.entities.map((e) => (e.id === id ? { ...e, i, j } : e)) };
+  };
+
+  it('a ground skill cannot be anchored on a far target through targetId (the sim does not range-check ground skills)', () => {
+    // ngu_kiem_tran: ground, range 8, circle r4, 3 s channel
+    const r = rig({
+      mobs: [
+        { id: MOB, i: 22.5, j: 20.5 }, // 2 tiles from the caster: inside the circle when anchored on the caster
+        { id: MOB + 1, i: 55.5, j: 20.5 }, // the far "anchor" a malicious client names
+        { id: MOB + 2, i: 57.5, j: 20.5 }, // next to the far anchor
+      ],
+    });
+    r.tick([r.cast('ngu_kiem_tran', MOB + 1)]);
+    r.run(3100); // channel_ms 3000: the hits land when the channel ends
+    const hit = r.results.flatMap((x) => x.hits.map((h) => h.targetId));
+    expect(hit).toEqual([MOB]); // anchored on the caster, not on the far mob
+    expect(entity(r, MOB + 1)!.hp).toBe(3000);
+    expect(entity(r, MOB + 2)!.hp).toBe(3000);
+  });
+
+  it('a ground skill anchored on a target within range still works (area around the target)', () => {
+    const r = rig({
+      mobs: [
+        { id: MOB, i: 26.5, j: 20.5 }, // 6 tiles away: inside range 8, the named anchor
+        { id: MOB + 1, i: 29.5, j: 20.5 }, // 3 tiles from the anchor, 9 from the caster
+      ],
+    });
+    r.tick([r.cast('ngu_kiem_tran', MOB)]);
+    r.run(3100);
+    expect(r.results.flatMap((x) => x.hits.map((h) => h.targetId)).sort()).toEqual([MOB, MOB + 1]);
+  });
+
+  it('a target that moved out of range during the cast time is not hit', () => {
+    const r = rig({ path: 'phap', mobs: [{ i: 27.5, j: 20.5 }] }); // linh_khi_dan: range 8, cast 500 ms
+    r.tick([r.cast('linh_khi_dan', MOB)]);
+    expect(rejected(r)).toEqual([]); // accepted by the sim
+    moveMob(r, MOB, 40.5, 20.5);
+    r.run(500);
+    expect(r.results).toHaveLength(1);
+    expect(r.results[0]!.hits).toEqual([]);
+    expect(entity(r, MOB)!.hp).toBe(3000);
+  });
+
+  it('a wall that appears between caster and target by resolve time also blocks the hit', () => {
+    const rows = Array.from({ length: 64 }, (_, j) =>
+      j === 20 ? '.'.repeat(24) + '#' + '.'.repeat(39) : '.'.repeat(64),
+    );
+    const r = rig({ path: 'phap', mobs: [{ i: 27.5, j: 18.5 }] }); // open map: accepted
+    r.tick([r.cast('linh_khi_dan', MOB)]);
+    expect(rejected(r)).toEqual([]);
+    // swap in a grid with a wall on the line (the caster is on row 20, the mob moves behind the wall)
+    Object.assign(r.ctx, { grid: TileGrid.fromRows(rows) });
+    moveMob(r, MOB, 27.5, 20.5);
+    r.run(500);
+    expect(r.results[0]!.hits).toEqual([]);
+  });
+
+  it('two casts with the same seq in one tick: the first wins, the second (far target) is dropped before the sim and never redirects it', () => {
+    const r = rig({
+      path: 'phap',
+      mobs: [
+        { id: MOB, i: 27.5, j: 20.5 }, // valid target
+        { id: MOB + 1, i: 40.5, j: 20.5 }, // out of range: only reachable through the redirect
+      ],
+    });
+    const first = r.cast('linh_khi_dan', MOB);
+    const second = { ...first, targetId: MOB + 1 } as SimInput;
+    const pre = r.combat.preStep([first, second], r.world);
+    expect(pre.inputs).toHaveLength(1);
+    r.tick([first, second]);
+    r.run(500);
+    expect(r.results).toHaveLength(1);
+    expect(r.results[0]!.hits.map((h) => h.targetId)).toEqual([MOB]);
+    expect(entity(r, MOB + 1)!.hp).toBe(3000);
+  });
+});
+
 // ---------------------------------------------------------------------------------------------------- players: HP / death / respawn
 describe('player HP, death and respawn', () => {
   it('lethal damage kills, blocks casts and moves, and respawns after 10 s at the respawn point with full HP / MP and cleared cooldowns', () => {

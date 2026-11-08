@@ -29,6 +29,7 @@ import {
 import {
   CastReason,
   emptyCooldowns,
+  lineOfSight,
   type EntityState,
   type SimContext,
   type SimEvent,
@@ -148,6 +149,7 @@ export class CombatSystem {
   preStep(inputs: readonly SimInput[], world: SimWorld): { inputs: SimInput[]; results: CombatResult[] } {
     const keep: SimInput[] = [];
     const results: CombatResult[] = [];
+    const seen = new Set<number>();
     for (const inp of inputs) {
       const p = this.players.get(inp.entityId);
       if (!p) {
@@ -158,6 +160,10 @@ export class CombatSystem {
         if (p.alive) keep.push(inp);
         continue;
       }
+      // a client seq is unique: a second cast with the same (entity, seq) in one tick is malformed, the first one wins
+      const key = castKey(inp.entityId, inp.seq);
+      if (seen.has(key)) continue;
+      seen.add(key);
       const reject = (reason: CastReason): void => {
         results.push({
           entityId: inp.entityId,
@@ -171,7 +177,7 @@ export class CombatSystem {
       if (!p.alive) reject(CastReason.Controlled);
       else if (!this.owns(p.profile.path, inp.skillId)) reject(CastReason.UnknownSkill);
       else {
-        this.inflight.set(castKey(inp.entityId, inp.seq), inp.targetId);
+        this.inflight.set(key, inp.targetId);
         keep.push(inp);
       }
     }
@@ -214,6 +220,7 @@ export class CombatSystem {
     this.pending = this.pending.filter((p) => p.resolveAtMs > now);
     for (const p of due) w = this.resolve(w, p, results, events);
     w = this.respawnDue(w, events);
+    this.inflight.clear(); // every entry belongs to this tick's inputs: anything left (no sim event) is stale
     return { world: w, results, events };
   }
 
@@ -294,6 +301,7 @@ export class CombatSystem {
       targetId: c.targetId,
       enemies: this.enemiesNear(world),
       rand,
+      losClear: (a, b) => lineOfSight(this.ctx.grid, a.i, a.j, b.i, b.j, caster.layer, caster.flying),
       defs: this.defs,
     });
     for (const u of new Set(out.unsupported))

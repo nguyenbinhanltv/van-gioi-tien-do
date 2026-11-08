@@ -11,7 +11,9 @@ Lõi chiến đấu server-authoritative (P3): `apps/server/src/world/combat/` q
 | `combat.postStep(world, events)`  | `CombatSystem`       | Cast time, chọn mục tiêu theo hình dạng, sát thương, HP, chết / hồi sinh, mob chết (`MobPort.kill`), rớt đồ (`resolveDrops`)       |
 | `skill_result` gửi cho người cast | `WorldNode`          | `hits[]` = chỉ số trong danh sách nhìn thấy của client, sát thương, cờ (bit0 chí mạng, bit1 hạ gục)                                |
 
-Cast bị sim từ chối trả lời ngay (`reason` = `CastReason`, không hits). Cast được chấp nhận trả lời **khi nó được giải quyết**, tức sau `cast_ms + channel_ms` của kỹ năng (kỹ năng tức thời: cùng tick), nên client chỉ cần một `skill_result` cho mỗi `seq`. Người cast chết trong lúc cast: cast bị hủy, trả `Controlled`.
+Cast bị sim từ chối trả lời ngay (`reason` = `CastReason`, không hits). Cast được chấp nhận trả lời **khi nó được giải quyết**, tức sau `cast_ms + channel_ms` của kỹ năng (kỹ năng tức thời: cùng tick), nên client chỉ cần một `skill_result` cho mỗi `seq`. Người cast chết trong lúc cast: cast bị hủy, trả `Controlled`. Kỹ năng channel (`channel_ms`): mọi hit (`hits`) rơi cùng lúc khi kết thúc channel, chưa tách theo `channel_ticks`.
+
+**Tầm với của mục tiêu do client chọn được kiểm lại khi giải quyết** (không chỉ khi chấp nhận): sim chỉ kiểm tầm / LOS cho kỹ năng `enemy` / `ally_or_self` lúc chấp nhận và không kiểm cho `direction` / `ground`, còn mục tiêu có thể chạy đi trong lúc cast. Mục tiêu (hoặc neo mặt đất) xa hơn `targeting.range_tiles` hoặc bị che LOS (khi kỹ năng cần) bị bỏ qua: kỹ năng đơn mục tiêu không trúng ai, kỹ năng vùng neo vào người cast. Hai cast cùng `(entity, seq)` trong một tick: chỉ cast đầu được xử lý.
 
 ## Công thức và dữ liệu
 

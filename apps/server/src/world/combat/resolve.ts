@@ -9,6 +9,11 @@
  * Damage = `damageBreakdown` of `@vgtd/shared` (07 §4): Raw = stat x coeff, DEF_eff with Ngũ hành and Pen, Raw^2 / (Raw + DEF_eff) x M_elem x Crit x
  * Suppress x U(0.95, 1.05); rounded to an integer >= 1.
  *
+ * Reach is re-validated HERE, at resolve time, for every point the client influences (the cast's `targetId`): the sim only checks
+ * range / LOS of `enemy` / `ally_or_self` skills at ACCEPT time and not at all for `direction` / `ground` skills, and a target can move away
+ * during the cast time. A target (or ground anchor) beyond `targeting.range_tiles`, or without line of sight when the skill needs it, is
+ * ignored: a single-target skill then hits nobody and an area skill is anchored on the caster.
+ *
  * Supported effects: `damage`, `heal`, `shield`. Everything else (dot, status, dash, buff ...) is reported in `unsupported` and has no
  * effect yet (needs the status / buff system).
  */
@@ -39,6 +44,8 @@ export interface ResolveInput {
   /** Living hostile entities that can be damaged (mobs). Any order: sorted here. */
   enemies: readonly ResolveTarget[];
   rand: () => number;
+  /** Is there a clear line between two points for this caster? Omitted = no LOS check (pure tests). */
+  losClear?: (from: Point, to: Point) => boolean;
   defs?: SkillDefinitions;
 }
 
@@ -84,10 +91,21 @@ export function skillElement(skill: SkillDef, profile: CombatProfile): AnyElemen
   return skill.element as AnyElement;
 }
 
+/** The cast's target, only if it is a known enemy within the skill's range and (when required) in line of sight of the caster. */
+function reachableTarget(i: ResolveInput): ResolveTarget | undefined {
+  const { skill, enemies, targetId, caster } = i;
+  const t = targetId !== 0 ? enemies.find((e) => e.id === targetId) : undefined;
+  if (!t) return undefined;
+  const range = skill.targeting.range_tiles ?? 0;
+  if (range > 0 && hypot(t.i - caster.i, t.j - caster.j) > range) return undefined;
+  if (skill.targeting.requires_los !== false && i.losClear && !i.losClear(caster, t)) return undefined;
+  return t;
+}
+
 function victimsOf(i: ResolveInput): ResolveTarget[] {
-  const { skill, enemies, targetId, caster, facing } = i;
+  const { skill, enemies, caster, facing } = i;
   const maxTargets = (i.defs ?? skillDefinitions).global.max_targets_per_cast ?? enemies.length;
-  const target = targetId !== 0 ? enemies.find((e) => e.id === targetId) : undefined;
+  const target = reachableTarget(i);
   const shape = skill.shape;
   if (shape.type === 'single') return target ? [target] : [];
   // circle / ring anchored on the caster, the target or the ground point; the wire has no aim point yet, so a ground skill
