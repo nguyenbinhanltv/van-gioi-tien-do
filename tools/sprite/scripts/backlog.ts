@@ -65,6 +65,7 @@ for (const j of report.judged.filter(
     x.verdict !== 'info' ||
     x.finding.measurement === 'unmeasured' ||
     x.finding.headEvidence ||
+    x.finding.similarityCrop?.method === 'centroid-fallback' ||
     x.finding.originEvidence,
 ))
   console.log(
