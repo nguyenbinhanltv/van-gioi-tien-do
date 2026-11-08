@@ -6,6 +6,7 @@ import {
   Predictor,
   RemoteWorld,
   SNAP_ERROR_TILES,
+  resolveServer,
   selfToMoveState,
   type MoveIntent,
 } from '@vgtd/client-core';
@@ -180,5 +181,29 @@ describe('RemoteWorld interpolation', () => {
     w.onEnter(enter(0, 0, 0), 0);
     for (let k = 1; k <= 100; k++) w.onSnapshot(snap(0, k % 50, 0), k * 50);
     expect(w.entities.get(0)!.samples.length).toBeLessThanOrEqual(8);
+  });
+});
+
+describe('resolveServer (credentials only go to the page host or loopback)', () => {
+  it('defaults to the page host on :8080 and accepts host:port or a full URL on allowed hosts', () => {
+    expect(resolveServer(null, 'localhost')).toEqual({ origin: 'http://localhost:8080', ignored: false });
+    expect(resolveServer('', 'game.lan')).toEqual({ origin: 'http://game.lan:8080', ignored: false });
+    expect(resolveServer('localhost:9000', 'game.lan')).toEqual({ origin: 'http://localhost:9000', ignored: false });
+    expect(resolveServer('http://127.0.0.1:8081', 'x')).toEqual({ origin: 'http://127.0.0.1:8081', ignored: false });
+    expect(resolveServer('game.lan:8090', 'game.lan')).toEqual({ origin: 'http://game.lan:8090', ignored: false });
+  });
+
+  it('ignores third-party hosts, credentials in the URL and paths', () => {
+    for (const bad of [
+      'evil.example',
+      'http://evil.example:8080',
+      'localhost.evil.example:8080',
+      'http://user:pw@localhost:8080',
+      'http://localhost:8080/steal',
+      '//evil.example',
+      'http://[::1]:8080',
+    ]) {
+      expect(resolveServer(bad, 'localhost'), bad).toEqual({ origin: 'http://localhost:8080', ignored: true });
+    }
   });
 });

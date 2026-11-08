@@ -16,11 +16,13 @@
     "validate": "node pipeline/validate_assets.js --stage raw --root out --report out/reports/qa_raw.json --allow-warnings",
     "pack": "node scripts/pack_all.js out build/atlas",
     "compress": "node pipeline/compress_textures.js pc build/atlas build/dist/pc",
+    "compress:web": "node pipeline/compress_textures.js web build/atlas build/dist/web",
     "smoke": "node scripts/smoke.js",
     "preview": "node tools/build_preview.js",
     "build": "node scripts/check_syntax.js",
-    "typecheck": "node scripts/check_syntax.js",
-    "test": "vitest run"
+    "typecheck": "node scripts/check_syntax.js && tsc -p tsconfig.json",
+    "test": "vitest run",
+    "budget": "tsx pipeline/budget_gate.mts --atlas build/atlas --dist build/dist/web"
   },
   "dependencies": {
     "@vgtd/shared": "*",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@vgtd/rig": "*",
+    "tsx": "^4.23.15",
     "vite-node": "2.1.9"
   },
   "optionalDependencies": {

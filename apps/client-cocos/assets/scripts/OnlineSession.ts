@@ -38,13 +38,16 @@ export function onlineRequested(): boolean {
 
 export function onlineCredentials(): { baseUrl: string; username: string; password: string } {
   const q = new URLSearchParams(location.search);
-  const server = q.get('server') || `${location.hostname || 'localhost'}:8080`;
-  const baseUrl = /^https?:\/\//.test(server) ? server : `http://${server}`;
+  const srv = core.resolveServer(q.get('server'), location.hostname);
+  if (srv.ignored)
+    console.warn(`[vgtd] ignoring ?server=${q.get('server')}: only this page's host or localhost is allowed`);
+  const baseUrl = srv.origin;
   const asked = (q.get('name') ?? '').toLowerCase();
   const named = /^[a-z0-9_]{3,20}$/.test(asked) ? asked : '';
   const username = named || stored(sessionStorage, 'vgtd.guest', () => `guest_${randomHex(3)}`);
-  // named accounts keep their password in localStorage (so a reload / server restart can log in again); guests per tab
-  const password = stored(named ? localStorage : sessionStorage, `vgtd.pw.${username}`, () => randomHex(16));
+  // named accounts keep their password in localStorage (so a reload / server restart can log in again); guests per tab.
+  // Keyed by server origin too: a password is only ever sent to the origin it was generated for.
+  const password = stored(named ? localStorage : sessionStorage, `vgtd.pw.${baseUrl}|${username}`, () => randomHex(16));
   return { baseUrl, username, password };
 }
 

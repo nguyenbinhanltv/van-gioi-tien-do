@@ -1,0 +1,253 @@
+// P1 exit-criteria measurement on Web (docs/10-mvp-scope.md section 12): draw calls, RAM, FPS with 20 NPC, initial package size.
+//
+//   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--npcart chibi|placeholder] [--tier low|medium|high] [--seconds 20] [--warmup 6]
+//                                      [--out <dir>] [--gate-fps]
+//
+// 1. (unless --skip-build) builds web-mobile (scripts/build-web.mjs, needs the Cocos editor, see README)
+// 2. serves it and records every file the page requests until the world is playable = the initial package (raw and gzip)
+// 3. serves the build on loopback, opens `/?npcs=N&tier=T` in headless Chrome/Edge (puppeteer-core, set CHROME_PATH to
+//    override) and samples `window.__vgtdPerf` (published by PerfHud) twice a second after a warm-up
+// 4. prints a table against the exit criteria and writes <out>/p1-perf.json (default <tmpdir>/vgtd-perf)
+//
+// Headless runs on SwiftShader (software WebGL), so FPS is a lower bound of the CPU/JS cost, NOT a GPU number:
+// FPS is reported but only fails the run with --gate-fps. Draw calls, RAM and package size are renderer-independent
+// and always gate (exit code 1). The same numbers on a real phone: docs/33-p1-perf.md.
+import { spawnSync } from 'node:child_process';
+import { createServer } from 'node:http';
+import { createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, extname, join, normalize, relative, resolve, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { gzipSync } from 'node:zlib';
+import puppeteer from 'puppeteer-core';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const args = process.argv.slice(2);
+const opt = (name, def) => {
+  const i = args.indexOf(`--${name}`);
+  return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : def;
+};
+const flag = (name) => args.includes(`--${name}`);
+
+// Budgets come from @vgtd/shared via PerfHud (`window.__vgtdPerf.budgets`), read below. Only the FPS floor is local: it has no
+// shared constant (docs/10 section 12: >= 30 FPS with 20 NPC).
+const MIN_FPS = 30;
+
+const npcs = Number(opt('npcs', 20));
+const tier = opt('tier', 'medium');
+const npcart = opt('npcart', 'chibi'); // chibi = real armatures (6 classes), placeholder = tinted sprite
+const seconds = Number(opt('seconds', 20));
+const warmup = Number(opt('warmup', 6));
+const out = resolve(opt('out', join(tmpdir(), 'vgtd-perf')));
+if (!Number.isInteger(npcs) || npcs < 0) throw new Error('--npcs must be a non-negative integer');
+if (!['low', 'medium', 'high'].includes(tier)) throw new Error('--tier must be low, medium or high');
+
+function findBrowser() {
+  const candidates = [
+    process.env.CHROME_PATH,
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  ].filter(Boolean);
+  const found = candidates.find((p) => existsSync(p));
+  if (!found) throw new Error('No Chrome/Edge found. Set CHROME_PATH to a Chromium-based browser executable.');
+  return found;
+}
+
+if (!flag('skip-build')) {
+  const b = spawnSync(process.execPath, [join(root, 'scripts/build-web.mjs'), '--release'], { stdio: 'inherit' });
+  if (b.status !== 0) process.exit(b.status ?? 1);
+}
+const webDir = join(root, 'build/web-mobile');
+if (!existsSync(join(webDir, 'index.html'))) throw new Error('build/web-mobile missing: run without --skip-build');
+
+// ---- whole build output (info only) ----------------------------------------------------------------------------------
+// The initial package is what the game FETCHES to reach the playable scene (measured below from the served-file log).
+// The build folder also holds lazily loaded `resources` such as the dev-only animation-viewer art, which never ships in the
+// first download, so its total is informational.
+function* walk(dir) {
+  for (const name of readdirSync(dir)) {
+    const f = join(dir, name);
+    if (statSync(f).isDirectory()) yield* walk(f);
+    else yield f;
+  }
+}
+const MB = 1048576;
+let buildRaw = 0;
+const byDir = {};
+for (const f of walk(webDir)) {
+  const n = statSync(f).size;
+  buildRaw += n;
+  const top = relative(webDir, f).replaceAll(sep, '/').split('/').slice(0, 2).join('/');
+  byDir[top] = (byDir[top] ?? 0) + n;
+}
+
+// ---- serve + measure -----------------------------------------------------------------------------------------------
+const types = {
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.css': 'text/css',
+  '.wasm': 'application/wasm',
+};
+const served = new Set(); // files the page actually requested (= the startup download)
+const server = createServer((req, res) => {
+  const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+  let f = join(webDir, p || 'index.html');
+  if (!f.startsWith(webDir) || !existsSync(f)) return void res.writeHead(404).end();
+  if (statSync(f).isDirectory()) f = join(f, 'index.html');
+  served.add(f);
+  res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
+  createReadStream(f).pipe(res);
+});
+await new Promise((r) => server.listen(0, '127.0.0.1', r)); // loopback only
+const port = server.address().port;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const median = (a) => {
+  const s = [...a].sort((x, y) => x - y);
+  return s.length ? s[Math.floor(s.length / 2)] : NaN;
+};
+const browser = await puppeteer.launch({
+  executablePath: findBrowser(),
+  headless: 'new',
+  defaultViewport: { width: 1280, height: 720, deviceScaleFactor: 1 },
+  protocolTimeout: 600000,
+  args: [
+    '--no-sandbox',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--ignore-gpu-blocklist',
+    '--enable-webgl',
+    '--enable-precise-memory-info', // exact performance.memory.usedJSHeapSize (default is bucketed)
+  ],
+});
+let failures = 0;
+const samples = [];
+let meta = {};
+try {
+  const page = await browser.newPage();
+  page.on('pageerror', (e) => {
+    console.error('[page error]', e.message);
+    failures++;
+  });
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}`;
+  console.log('opening', url);
+  await page.goto(url);
+  await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
+    timeout: 180000,
+    polling: 250,
+  });
+  console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
+  await sleep(warmup * 1000);
+  const t0 = Date.now();
+  while (Date.now() - t0 < seconds * 1000) {
+    const s = await page.evaluate('JSON.parse(JSON.stringify(window.__vgtdPerf))');
+    const m = await page.metrics(); // CDP Performance.getMetrics (JSHeapUsedSize in bytes)
+    samples.push({ ...s, cdpHeapMB: m.JSHeapUsedSize / MB });
+    await sleep(500);
+  }
+  meta = await page.evaluate(() => ({ ua: navigator.userAgent, dpr: devicePixelRatio }));
+  await sleep(200);
+} finally {
+  await browser.close();
+  server.close();
+}
+
+if (samples.length === 0) throw new Error('no perf samples collected');
+let rawBytes = 0;
+let gzipBytes = 0;
+const fetched = [];
+served.forEach((f) => {
+  const buf = readFileSync(f);
+  rawBytes += buf.length;
+  gzipBytes += gzipSync(buf, { level: 6 }).length;
+  fetched.push({ file: relative(webDir, f).replaceAll(sep, '/'), bytes: buf.length });
+});
+fetched.sort((a, b) => b.bytes - a.bytes);
+const col = (k) => samples.map((s) => s[k]).filter((v) => typeof v === 'number');
+const heap = col('jsHeapMB').length ? col('jsHeapMB') : col('cdpHeapMB');
+const ram = samples.map((s) => (s.jsHeapMB ?? s.cdpHeapMB) + s.textureMB);
+const result = {
+  when: new Date().toISOString(),
+  setup: {
+    npcs,
+    npcart,
+    tier,
+    seconds,
+    warmup,
+    viewport: '1280x720',
+    renderer: 'SwiftShader (software WebGL)',
+    ...meta,
+  },
+  measured: {
+    fpsMedian: median(col('fps')),
+    fpsMin: Math.min(...col('fps')),
+    frameMsMedian: median(col('frameMs')),
+    updateMsMedian: median(col('updateMs')),
+    renderMsMedian: median(col('renderMs')),
+    drawCallsMax: Math.max(...col('drawCalls')),
+    drawCallsMedian: median(col('drawCalls')),
+    jsHeapMBMax: Math.max(...heap),
+    textureMBMax: Math.max(...col('textureMB')),
+    ramMBMax: Math.max(...ram),
+    nodesMax: Math.max(...col('nodes')),
+    chunksMax: Math.max(...col('chunks')),
+    npcs: Math.max(...col('npcs')),
+    loadedMB: Math.max(...col('loadedMB')),
+    packageMBRaw: rawBytes / MB,
+    packageMBGzip: gzipBytes / MB,
+    buildOutputMB: buildRaw / MB,
+  },
+  fetchedFiles: fetched.length,
+  largestFetched: fetched.slice(0, 8).map((b) => ({ ...b, MB: +(b.bytes / MB).toFixed(2) })),
+  buildOutputByDirMB: Object.fromEntries(
+    Object.entries(byDir)
+      .sort((x, y) => y[1] - x[1])
+      .slice(0, 8)
+      .map(([k, v]) => [k, +(v / MB).toFixed(2)]),
+  ),
+  samples: samples.length,
+};
+const m = result.measured;
+const b = samples[0].budgets;
+if (!b) throw new Error('page did not publish budgets (window.__vgtdPerf.budgets)');
+const LIMITS = { drawCalls: b.drawCalls, ramMB: b.ramMB, packageMB: b.initialDownloadMB, minFps: MIN_FPS };
+const rows = [
+  ['Draw calls (max)', m.drawCallsMax, `<= ${LIMITS.drawCalls}`, m.drawCallsMax <= LIMITS.drawCalls, true],
+  ['RAM: JS heap + textures MB (max)', m.ramMBMax.toFixed(1), `<= ${LIMITS.ramMB}`, m.ramMBMax <= LIMITS.ramMB, true],
+  [
+    `FPS median with ${m.npcs} NPC (software GL)`,
+    m.fpsMedian.toFixed(1),
+    `>= ${LIMITS.minFps}`,
+    m.fpsMedian >= LIMITS.minFps,
+    flag('gate-fps'),
+  ],
+  [
+    'Initial package MB fetched (raw / gzip)',
+    `${m.packageMBRaw.toFixed(2)} / ${m.packageMBGzip.toFixed(2)}`,
+    `<= ${LIMITS.packageMB}`,
+    m.packageMBRaw <= LIMITS.packageMB,
+    true,
+  ],
+];
+console.log('\nP1 exit criteria (docs/10 section 12), Web headless');
+for (const [name, value, limit, ok, gates] of rows) {
+  console.log(
+    `  ${ok ? 'PASS' : gates ? 'FAIL' : 'WARN'}  ${name.padEnd(40)} ${String(value).padStart(14)}   ${limit}`,
+  );
+}
+console.log(
+  `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
+    `heap ${m.jsHeapMBMax.toFixed(1)} MB, tex ${m.textureMBMax.toFixed(1)} MB, nodes ${m.nodesMax}, chunks ${m.chunksMax}, loaded ${m.loadedMB.toFixed(2)} MB, fetched ${fetched.length} files, whole build dir ${m.buildOutputMB.toFixed(0)} MB (lazy resources incl.)`,
+);
+mkdirSync(out, { recursive: true });
+writeFileSync(join(out, 'p1-perf.json'), JSON.stringify(result, null, 2), 'utf8');
+console.log(`wrote ${join(out, 'p1-perf.json')}`);
+if (failures > 0) console.error(`${failures} page error(s)`);
+const gateFail = rows.some(([, , , ok, gates]) => gates && !ok);
+process.exit(failures > 0 || gateFail ? 1 : 0);
