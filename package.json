@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "docs:links": "node scripts/check-doc-links.mjs"
+    "docs:links": "node scripts/check-doc-links.mjs",
+    "play": "node scripts/play.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

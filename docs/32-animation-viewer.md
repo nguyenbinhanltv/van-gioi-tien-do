@@ -9,8 +9,8 @@ Viewer là một scene Cocos riêng trong `apps/client-cocos` (`Viewer.scene`). 
 ```bash
 npm ci                                      # gốc repo
 npm run build:web -w client-cocos           # sinh rig thử + build web (cần Cocos Creator 3.8.8, biến COCOS_CREATOR_PATH)
-npm run serve -w client-cocos               # http://localhost:7456
-# mở:  http://localhost:7456/#viewer
+npm run serve -w client-cocos               # http://localhost:8456
+# mở:  http://localhost:8456/#viewer
 ```
 
 Tham số trong phần hash của URL (tùy chọn, nối bằng `&`):

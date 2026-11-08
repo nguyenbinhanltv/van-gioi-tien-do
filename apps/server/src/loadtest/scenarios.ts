@@ -593,6 +593,7 @@ async function war(): Promise<Outcome> {
       summary: [
         tickLine(tick),
         `tick breakdown ms: sim step mean ${f(run.sample.phases.stepMs / Math.max(1, tick.n))}  AOI mean ${f(run.sample.phases.aoiMs / Math.max(1, run.sample.phases.aoiTicks))} per AOI tick  snapshot encode+send mean ${f(run.sample.phases.snapMs / Math.max(1, tick.n))}`,
+        `slowest single sample per phase ms: sim step ${f(run.sample.phases.maxStepMs)}  AOI ${f(run.sample.phases.maxAoiMs)}  snapshot encode+send ${f(run.sample.phases.maxSnapMs)}`,
         `down KB/s/player (wire) mean ${f(p.downWire.mean)} p95 ${f(p.downWire.p95)} max ${f(p.downMax)}; up mean ${f(p.up.mean)} max ${f(p.up.max)}`,
         `AOI visible mean ${f(p.visible.mean, 1)} (max ${p.visibleMax}); enter ${f(p.enterPerSec)}/s leave ${f(p.leavePerSec)}/s`,
         `casts: ok ${p.castOk}, rejected ${p.castRejected}, hits seen ${hits}; server: ok ${m.castOk} rejected ${m.castRejected} dropped ${m.castDropped}; violations ${JSON.stringify(m.violations)}`,
