@@ -211,6 +211,37 @@ describe('ServerCombat', () => {
     expect(c.player.casting).toBeNull();
   });
 
+  it('a cast near the map edge still starts: the aim is pulled onto the edge, never negative', () => {
+    const { c, sent } = make();
+    c.setPlayerPos({ i: 1, j: 1 });
+    const grounded = c.hotbar.slots.findIndex((s) => s.skill.id === 'ngu_kiem_tran'); // ground, range 8
+    c.setAim({ i: -6, j: 1 }); // pointer past the i = 0 edge, 7 tiles away: within range, but outside the map
+    expect(c.cast(grounded, 1000)[0]).toMatchObject({ type: 'cast_start' });
+    expect(sent[0]!.aim).toEqual({ i: 0, j: 1 });
+    c.hotbar.reset();
+    c.setAim({ i: -60, j: -60 }); // far past the corner: pulled back to range, then onto the edge
+    expect(c.cast(grounded, 5000)[0]).toMatchObject({ type: 'cast_start' });
+    expect(sent[1]!.aim!.i).toBeGreaterThanOrEqual(0);
+    expect(sent[1]!.aim!.j).toBeGreaterThanOrEqual(0);
+  });
+
+  it('a transport that throws refuses the cast and takes the prediction back (no stuck cooldown or cast bar)', () => {
+    const c = new ServerCombat({
+      path: 'kiem',
+      send: () => {
+        throw new Error('range');
+      },
+    });
+    c.setSelfVitals({ hp: 1200, hpMax: 1200, mp: 400, mpMax: 400 });
+    const slot = c.hotbar.slots.findIndex((s) => s.skill.id === 'kiem_khi_tram');
+    expect(c.cast(slot, 1000)).toEqual([{ type: 'blocked', slot, reason: 'busy', atMs: 1000 }]);
+    expect(c.hotbar.cooldownRemainingMs(slot, 1000)).toBe(0);
+    expect(c.hotbar.gcdFraction(1000)).toBe(0);
+    expect(c.player.casting).toBeNull();
+    // and the next press works once the transport does
+    expect(c.cast(slot, 1100)[0]).toMatchObject({ type: 'blocked' });
+  });
+
   it('syncEnemy updates a known enemy from the remote view and ignores unknown ids', () => {
     const { c } = make();
     c.syncEnemy(1_000_001, { i: 30, j: 31 }, 50);

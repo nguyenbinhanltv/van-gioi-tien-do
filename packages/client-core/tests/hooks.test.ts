@@ -207,6 +207,16 @@ describe('NetClient.sendSkillCast (wire v3)', () => {
     expect(frames[1]).toEqual({ type: 'skill_cast', seq: 4, skillId: 1, targetId: 0, aim: null }); // seq wraps to u16
   });
 
+  it('an aim outside the map or not finite never throws: it is clamped to the wire range, or dropped', async () => {
+    const { net, sock } = await client({});
+    const before = sock.sent.length;
+    expect(net.sendSkillCast({ seq: 1, skillId: 1, targetId: 0, aim: { i: -5, j: 5000 } })).toBe(true);
+    expect(net.sendSkillCast({ seq: 2, skillId: 1, targetId: 0, aim: { i: Number.NaN, j: 1 } })).toBe(true);
+    const frames = sock.sent.slice(before).map((d) => decode(d as Uint8Array));
+    expect(frames[0]).toEqual({ type: 'skill_cast', seq: 1, skillId: 1, targetId: 0, aim: { qi: 0, qj: 65535 } });
+    expect(frames[1]).toEqual({ type: 'skill_cast', seq: 2, skillId: 1, targetId: 0, aim: null });
+  });
+
   it('returns false (and sends nothing) when the socket is not open', async () => {
     const { net, sock } = await client({});
     sock.readyState = 3;

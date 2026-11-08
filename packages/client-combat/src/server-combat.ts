@@ -135,11 +135,12 @@ export class ServerCombat implements CombatBackend {
     const di = a.i - this.player.pos.i;
     const dj = a.j - this.player.pos.j;
     const d = Math.sqrt(di * di + dj * dj);
+    // tile coordinates are never negative: an aim past the i = 0 / j = 0 edge is pulled onto it
     if (range > 0 && d > range) {
       const k = range / d;
-      return { i: this.player.pos.i + di * k, j: this.player.pos.j + dj * k };
+      return { i: Math.max(0, this.player.pos.i + di * k), j: Math.max(0, this.player.pos.j + dj * k) };
     }
-    return { i: a.i, j: a.j };
+    return { i: Math.max(0, a.i), j: Math.max(0, a.j) };
   }
 
   // ------------------------------------------------------------------ fed by the online client
@@ -233,12 +234,17 @@ export class ServerCombat implements CombatBackend {
     this.inflight.set(seq, { slot, sentAt: nowMs, undo });
     const castMs = skill.timing.cast_ms + (skill.timing.channel_ms ?? 0);
     if (castMs > 0) this.player.casting = { slot, startedAt: nowMs, endsAt: nowMs + castMs };
-    const sent = this.opts.send({
-      seq,
-      skillId: this.wire.get(skill.id)!,
-      targetId,
-      aim: this.aimFor(skill.targeting.range_tiles ?? 0),
-    });
+    let sent: boolean | void;
+    try {
+      sent = this.opts.send({
+        seq,
+        skillId: this.wire.get(skill.id)!,
+        targetId,
+        aim: this.aimFor(skill.targeting.range_tiles ?? 0),
+      });
+    } catch {
+      sent = false; // a transport that throws must not leave a predicted cooldown / cast bar for a cast that never left
+    }
     if (sent === false) {
       // not connected: take the prediction back and say so (nothing reached the server)
       this.inflight.delete(seq);
