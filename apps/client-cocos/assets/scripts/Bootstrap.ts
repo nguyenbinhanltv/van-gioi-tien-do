@@ -161,7 +161,10 @@ export class Bootstrap extends Component {
     if (params.get('route') !== null) {
       const grid = { width: map.width, height: map.height, isWalkable: walkable };
       this.route = new RouteWalker(grid, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, Math.min(map.width, map.height) * 0.3);
-      console.log(`[vgtd] route planned: ${this.route.length} path points`);
+      if (this.route.empty) {
+        console.warn('[vgtd] route: no reachable waypoint from the spawn (isolated?), route disabled');
+        this.route = null;
+      } else console.log(`[vgtd] route planned: ${this.route.length} path points`);
     }
     await this.world.warmup(this.cameraRect());
 

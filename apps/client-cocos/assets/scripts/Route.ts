@@ -35,14 +35,19 @@ export class RouteWalker {
       if (t) waypoints.push(t);
     }
     waypoints.push({ i: Math.floor(start.i), j: Math.floor(start.j) });
-    let from: TilePos = { i: Math.floor(start.i), j: Math.floor(start.j) };
+    const home: TilePos = { i: Math.floor(start.i), j: Math.floor(start.j) };
+    let from: TilePos = home;
+    let reachedRing = false;
     for (const w of waypoints) {
       const path = finder.findPath(from, w, { maxExpanded: grid.width * grid.height, smooth: true });
       if (path) {
         for (const p of path) this.points.push(p);
+        if (w.i !== home.i || w.j !== home.j) reachedRing = true;
         from = w;
       }
     }
+    // an isolated spawn (no ring waypoint reachable) only yields the trivial start -> start leg: that is no route at all
+    if (!reachedRing) this.points.length = 0;
   }
 
   /** True when no leg could be planned (isolated spawn). */
@@ -61,7 +66,9 @@ export class RouteWalker {
     let p = this.points[this.idx]!;
     let di = p.i - pos.i;
     let dj = p.j - pos.j;
-    while (Math.hypot(di, dj) < 0.35) {
+    // at most one lap of advances per call: if every point is within reach of `pos` the player stands still, never spins
+    for (let n = 0; Math.hypot(di, dj) < 0.35; n++) {
+      if (n >= this.points.length) return { move: { i: 0, j: 0 }, magnitude: 0 };
       this.idx = (this.idx + 1) % this.points.length;
       if (this.idx === 0) this.legs++;
       this.tilesWalked++;
