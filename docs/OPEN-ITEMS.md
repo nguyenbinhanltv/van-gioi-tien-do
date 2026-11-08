@@ -461,3 +461,5 @@ Còn mở / lưu ý:
 3. **Bước đột phá phụ thuộc tu vi đầy**, mà tốc độ đả tọa là mặc định tạm (D76); trong smoke test headless bước này chỉ kiểm tới trạng thái "đang chờ tu vi", chưa kiểm một lần đột phá thật.
 4. **Chưa có chọn lớp / phím tắt ẩn-hiện widget / chạm trên màn hình nhỏ**: widget cố định 330×142 đơn vị thiết kế ở góc trên trái (co theo bề ngang); trên điện thoại dọc nó có thể chồng lên túi đồ (túi vẽ phía trên).
 5. **Mốc "khu săn" lấy theo bố cục mặc định `defaultMobZones`**: khi có vùng Sơn Môn thật (OPEN-ITEMS D83 #2) cần đổi bước 1 sang vùng đó.
+6. **Phát hiện khi chạy client thật: server chưa hồi MP**: `CombatSystem` không có hồi MP (chỉ mô phỏng offline `skill_sim` có `MP_REGEN_COMBAT_PCT_PER_S`), nên cả phiên chỉ có đúng 400 MP (khoảng 5 con quái ~500 HP với bộ kỹ năng đầu của Kiếm tu). Quái ~1.500 HP gần như không hạ nổi; bước "hạ 3 quái" của vòng phiên đầu vẫn đạt được nhưng không dư dả. Cần luật hồi MP phía server (việc của worker combat) trước khi cân bằng onboarding.
+7. **bag:smoke** cần `class=` trên URL (hộp chọn lớp D82 chặn tài khoản mới) và có thể chạy chậm khi hết MP (ngân sách 400 s); nó không chạy trong CI.

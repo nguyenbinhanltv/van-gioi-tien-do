@@ -151,7 +151,7 @@ try {
   const page = await browser.newPage();
   watch(page);
   await page.goto(
-    `http://127.0.0.1:${webPort}/?online=1&combat=1&npcs=0&server=127.0.0.1:${gwPort}&name=bag${Date.now() % 100000}`,
+    `http://127.0.0.1:${webPort}/?online=1&combat=1&class=kiem-tu&npcs=0&server=127.0.0.1:${gwPort}&name=bag${Date.now() % 100000}`,
   );
   await page.waitForFunction(
     'window.__vgtdOnline && window.__vgtdOnline().active && window.__vgtdCombat && window.__vgtdBag',
@@ -176,20 +176,35 @@ try {
   let looted = false;
   let tFirst = null;
   let pass = 0;
+  const skip = new Set();
+  let lastTgt = 0;
+  let lastHp = 0;
+  let stuckPasses = 0;
   const wantKills = 3; // the first-session objective (FIRST_SESSION.killTarget)
   while ((!looted || kills < wantKills) && kills < maxKills && Date.now() - t0 < budgetMs) {
     const s = await cs();
     const self = await me();
-    const alive = s.enemies.filter((e) => e.alive && e.i !== undefined);
+    const alive = s.enemies.filter((e) => e.alive && e.i !== undefined && !skip.has(e.id));
     if (!self || alive.length === 0) {
       await sleep(500);
       continue;
     }
     const dist = (e) => Math.hypot(e.i - self.i, e.j - self.j);
-    // prefer weak monsters that are close (a ~1500 HP monster takes minutes with a starter kit and its MP pool)
-    const cost = (e) => dist(e) + e.hpMax / 60;
+    // prefer the weakest monsters (the server has no MP regeneration yet, so the 400 MP pool is all a session gets: a ~1500 HP monster would eat it)
+    const cost = (e) => dist(e) + e.hpMax / 5;
     alive.sort((a, c) => cost(a) - cost(c));
     const tgt = alive[0];
+    // a target that is not losing HP (out of MP, unreachable, ...) is dropped for the rest of the run
+    if (tgt.id === lastTgt && tgt.hp >= lastHp) {
+      if (++stuckPasses >= 20) {
+        skip.add(tgt.id);
+        stuckPasses = 0;
+        console.log(`  .. giving up on target ${tgt.id} (hp ${tgt.hp}/${tgt.hpMax}, mp ${s.mp})`);
+        continue;
+      }
+    } else stuckPasses = 0;
+    lastTgt = tgt.id;
+    lastHp = tgt.hp;
     if (dist(tgt) > 4.5) {
       // screen direction of the target: x = di - dj, y = (di + dj) / 2 (W is up on screen)
       const di = tgt.i - self.i;
@@ -204,14 +219,17 @@ try {
       for (const k of keys) await page.keyboard.up(k);
       continue;
     }
-    await page.keyboard.press('Tab');
-    await sleep(150);
+    // Tab cycles targets nearest-first: press until the intended monster is selected (a stale selection would waste the casts)
+    for (let k = 0; k < 6 && (await cs()).target !== tgt.id; k++) {
+      await page.keyboard.press('Tab');
+      await sleep(150);
+    }
     // one castable, off-cooldown skill per pass (spamming the bar would trip the server's cast-rate / cooldown anti-cheat)
     const ready = (await cs()).slots.findIndex((sl) => sl.castable && sl.cdMs === 0 && sl.id !== undefined);
-    if (ready >= 0 && s.mp >= 60) await page.keyboard.press(String(ready + 1));
+    if (ready >= 0 && s.mp >= 30) await page.keyboard.press(String(ready + 1));
     if (++pass % 5 === 0)
       console.log(
-        `  .. pass ${pass}: dist ${dist(tgt).toFixed(1)}, target ${tgt.id} hp ${tgt.hp}/${tgt.hpMax}, ready slot ${ready}`,
+        `  .. pass ${pass}: dist ${dist(tgt).toFixed(1)}, target ${tgt.id} hp ${tgt.hp}/${tgt.hpMax}, ready slot ${ready}, selected target ${s.target}, mp ${s.mp}, cd ${s.slots.map((x) => Math.round(x.cdMs)).join('/')}`,
       );
     await sleep(700);
     const s2 = await cs();
