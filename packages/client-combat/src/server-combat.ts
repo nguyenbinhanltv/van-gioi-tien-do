@@ -14,6 +14,7 @@
 import { HIT_FLAG_CRIT, HIT_FLAG_KILL, skillDefinitions } from '@vgtd/shared';
 import type { PathId, SkillDefinitions } from '@vgtd/shared';
 import type { CombatBackend, EnemyView, PlayerView } from './backend.js';
+import { VitalsWatcher } from './fx.js';
 import { Hotbar } from './hotbar.js';
 import type { HotbarUndo } from './hotbar.js';
 import type { CastBlock } from './hotbar.js';
@@ -92,6 +93,9 @@ export class ServerCombat implements CombatBackend {
   private readonly inflight = new Map<number, Inflight>();
   private readonly out: CombatEvent[] = [];
   private seq = 0;
+  /** Own-vitals changes -> floating damage / heal numbers, death and respawn events (D75 server decides; this presents). */
+  readonly vitals = new VitalsWatcher();
+  private clientNowMs = 0;
   private aim: TilePoint | null = null;
   /** Update an enemy that is already known (position / HP percent from the interpolated remote view); unknown ids are ignored. */
   syncEnemy(id: number, pos: TilePoint, hpPct: number): void {
@@ -150,9 +154,15 @@ export class ServerCombat implements CombatBackend {
   }
 
   /** Own HP / MP / shield from the snapshot's `self.vitals` (wire v3, sent when changed). */
-  setSelfVitals(v: { hp: number; hpMax: number; mp: number; mpMax: number; shield?: number; alive?: boolean }): void {
+  setSelfVitals(
+    v: { hp: number; hpMax: number; mp: number; mpMax: number; shield?: number; alive?: boolean },
+    nowMs: number = this.clientNowMs,
+  ): void {
+    const alive = v.alive ?? this.player.alive;
+    for (const ev of this.vitals.feed({ hp: v.hp, hpMax: v.hpMax, alive }, nowMs)) this.out.push(ev);
     Object.assign(this.player, v);
-    if (v.alive !== undefined) this.player.alive = v.alive;
+    this.player.alive = alive;
+    if (!alive) this.player.casting = null; // a dead caster's cast is cancelled by the server
   }
 
   /** An enemy came into view or its state changed (`aoi_enter` / snapshot `hpPct`). */
@@ -256,6 +266,7 @@ export class ServerCombat implements CombatBackend {
   }
 
   update(nowMs: number): CombatEvent[] {
+    this.clientNowMs = nowMs;
     // a result that never arrives must not freeze the cast bar
     if (this.player.casting && nowMs > this.player.casting.endsAt + 1500) this.player.casting = null;
     for (const [seq, f] of this.inflight) if (nowMs - f.sentAt > 5000) this.inflight.delete(seq);
