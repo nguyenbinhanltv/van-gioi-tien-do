@@ -483,3 +483,9 @@ Còn mở / lưu ý:
 2. **Chưa làm**: +0,5 % MP mỗi đòn thường trúng, đan hồi MP / HP, hồi cho đồng đội (Tương sinh hồi 10 % Chân Nguyên, docs/01 §8), dùng `mp_regen_pct_per_s` trong dữ liệu kỹ năng (hiện chỉ mô phỏng offline `skill_sim` đọc tham số đó).
 3. **"Trong chiến đấu" chỉ tính sát thương gây / nhận**: một cú cast không trúng, buff hoặc hồi máu không khóa hồi; tiến trình (progression) có `COMBAT_LOCK_MS` = 10 s riêng cho đả tọa (D76) khác 5 s này: nên thống nhất một định nghĩa khi game designer duyệt.
 4. **Băng thông**: regen làm sinh lực đổi ở 4 Hz khi đang hồi (golden 150 người + 30 quái: +0,9 % byte, 5.814.930 → 5.868.270); loadtest 100 bot trên máy dùng chung quá nhiễu để thấy khác biệt tick.
+
+## Mob hiển thị tạm thời (standee, 2026-11-09): còn mở
+
+- 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
+- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
+- Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
