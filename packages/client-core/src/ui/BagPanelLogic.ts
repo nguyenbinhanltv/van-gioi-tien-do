@@ -40,6 +40,42 @@ export function claimButtonRect(slots: number): BagRect {
   const size = bagPanelSize(slots);
   return { x: BAG_GRID.pad, y: size.h - BAG_GRID.footerH, w: 150, h: 30 };
 }
+/** HUD bands the bag must never cover (design units): the progression HUD + its toast at the top, the hotbar at the bottom. */
+export const BAG_RESERVED = { top: 160, bottom: 90, side: 8 } as const;
+/** The panel may grow above 1 on small screens so slots stay tappable, but never past this (PLACEHOLDER, D79). */
+export const BAG_MAX_SCALE = 1.6;
+/** Wanted slot size on screen in CSS px (touch guideline); reached when the free area allows it. */
+export const BAG_TAP_PX = 44;
+
+export interface BagPlacement {
+  /** uniform scale of the panel root */
+  scale: number;
+  /** centre of the panel in canvas space (origin at the canvas centre, y UP, design units) */
+  cx: number;
+  cy: number;
+  /** slot size on screen in CSS px at this scale */
+  tapPx: number;
+}
+/**
+ * Where to put the panel and how big: right-middle, in the area left between the reserved HUD bands. `pxPerUnit` is CSS px per
+ * design unit (the canvas is FIXED_HEIGHT, so a phone shows few CSS px per unit). The scale is the one that makes a slot
+ * `BAG_TAP_PX` wide when possible, limited by the free area and by `BAG_MAX_SCALE`.
+ */
+export function bagPanelPlacement(canvasW: number, canvasH: number, slots: number, pxPerUnit = 1): BagPlacement {
+  const size = bagPanelSize(slots);
+  const r = BAG_RESERVED;
+  const freeW = Math.max(1, canvasW - r.side * 2);
+  const freeH = Math.max(1, canvasH - r.top - r.bottom);
+  const fit = Math.min(freeW / size.w, freeH / size.h);
+  const want = BAG_TAP_PX / (BAG_GRID.cell * Math.max(pxPerUnit, 0.01));
+  const scale = Math.max(0.1, Math.min(fit, BAG_MAX_SCALE, Math.max(1, want)));
+  return {
+    scale,
+    cx: canvasW / 2 - r.side - (size.w * scale) / 2,
+    cy: canvasH / 2 - r.top - (size.h * scale) / 2,
+    tapPx: BAG_GRID.cell * scale * pxPerUnit,
+  };
+}
 const inside = (r: BagRect, x: number, y: number): boolean => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h;
 /** Slot under a panel-local point, or null (gaps and the header / footer are not slots). */
 export function slotAtPoint(x: number, y: number, slots: number): number | null {
