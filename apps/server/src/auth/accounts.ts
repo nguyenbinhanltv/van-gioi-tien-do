@@ -225,12 +225,21 @@ export class AuthService {
   }
 
   /** Gateway check: signature, expiry, token_version and revoked sessions (docs/25 §3.2). */
-  authenticate(token: string): { accountId: string; sessionId: string } {
+  authenticate(token: string): { accountId: string; sessionId: string; version: number } {
     const claims = this.tokens.verify(token);
     const account = this.store.byId(claims.sub);
     if (!account || account.tokenVersion !== claims.ver || this.revoked.has(claims.sid))
       throw new AuthError(401, 'session_revoked', 'session revoked');
-    return { accountId: claims.sub, sessionId: claims.sid };
+    return { accountId: claims.sub, sessionId: claims.sid, version: claims.ver };
+  }
+
+  /**
+   * Is a session that was authenticated earlier still valid (account exists, token_version unchanged, session not revoked)?
+   * Resuming a held session presents no access token, so the gateway re-checks the stamp taken at login with this (docs/25 section 3.2).
+   */
+  isSessionCurrent(accountId: string, sessionId: string, version: number): boolean {
+    const account = this.store.byId(accountId);
+    return !!account && account.tokenVersion === version && !this.revoked.has(sessionId);
   }
 
   revokeSession(sessionId: string): void {

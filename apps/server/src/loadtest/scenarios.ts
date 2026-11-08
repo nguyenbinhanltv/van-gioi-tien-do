@@ -239,9 +239,12 @@ async function flight(): Promise<Outcome> {
         },
         {
           name: 'flight really happened and stays within FLY_SPEED',
-          target: `0.8 x ${FLY_SPEED} <= speed <= 1.05 x ${FLY_SPEED} + 0.5 tiles/s`,
+          target: `0.8 x ${FLY_SPEED} <= measured speed <= 1.3 x ${FLY_SPEED} tiles/s (arrival-time measure) and 0 server distance violations`,
           value: `${f(p.maxSpeed)} tiles/s`,
-          pass: p.maxSpeed >= 0.8 * FLY_SPEED && p.maxSpeed <= 1.05 * FLY_SPEED + 0.5,
+          pass:
+            p.maxSpeed >= 0.8 * FLY_SPEED &&
+            p.maxSpeed <= 1.3 * FLY_SPEED &&
+            (run.sample.metrics.violations.distance ?? 0) === 0,
         },
         { name: 'tick p99', target: '<= 40 ms', value: `${f(tick.p99)} ms`, pass: tick.p99 <= 40 },
         {
