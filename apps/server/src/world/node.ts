@@ -5,7 +5,18 @@
  * Clocks (`hrtime`, `setTimeout`) are used ONLY to schedule ticks and measure them; the simulation itself always
  * advances by the fixed `NETWORK.TICK_MS` (skill vgtd-sim-determinism).
  */
-import { AOI, NETWORK, aoiCentre, inAoi, rngFloat, rngFork, rngSeed, toUW, type RngState } from '@vgtd/shared';
+import {
+  AOI,
+  MOB_ID_BASE,
+  NETWORK,
+  aoiCentre,
+  inAoi,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  toUW,
+  type RngState,
+} from '@vgtd/shared';
 import {
   ErrorCode,
   ProtocolError,
@@ -35,6 +46,15 @@ import {
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import { CombatSystem, type CombatOptions, type CombatResult } from './combat/index.js';
+import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+
+/** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
+export class WorldFullError extends Error {
+  constructor(message = 'no free player entity id') {
+    super(message);
+    this.name = 'WorldFullError';
+  }
+}
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -123,6 +143,8 @@ export interface WorldNodeOptions {
   maxVisible?: number;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
+  /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
+  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -194,6 +216,8 @@ export class WorldNode {
   private byId = new Map<number, EntityState>();
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
+  /** monster spawns / AI (D74); null when the node runs without mobs */
+  readonly mobs: MobManager | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -209,10 +233,18 @@ export class WorldNode {
     this.combat = opts.combat
       ? new CombatSystem(this.ctx, { seed, respawnPoint: () => this.spawnPoint(), ...opts.combat })
       : null;
+    const mo = opts.mobs;
+    if (mo) {
+      const o = mo === true ? {} : mo;
+      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.world = this.mobs.populate(this.world);
+    } else this.mobs = null;
   }
 
   // ------------------------------------------------------------------ players
   addPlayer(transport: ClientTransport, accountId: string): number {
+    // mob entity ids start at MOB_ID_BASE: a player id there would collide with mob slot 0 (two entities, one id)
+    if (this.mobs && this.nextId >= MOB_ID_BASE) throw new WorldFullError();
     const id = this.nextId++;
     const at = this.spawnPoint();
     const stats = this.combat?.addPlayer(id);
@@ -355,6 +387,8 @@ export class WorldNode {
       this.world = post.world;
       for (const res of post.results) this.sendCombatResult(res);
     }
+    // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
+    if (this.mobs) this.world = this.mobs.step(this.world);
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -504,13 +538,14 @@ export class WorldNode {
         enters.push({
           index,
           entityId: e.id,
-          kind: 0,
+          kind: this.mobs?.kindOf(e.id) ?? 0,
+          defId: this.mobs?.defIdOf(e.id) ?? 0,
           qi,
           qj,
           anim: se.anim,
           dir: se.dir,
           hpPct,
-          maxHp: this.hpMaxOf(e),
+          maxHp: this.maxHpOf(e),
         });
       }
 
@@ -547,9 +582,14 @@ export class WorldNode {
     }
   }
 
-  /** Max HP of an entity: a player's combat profile, a mob's `MobPort` value, else the skeleton constant. */
-  private hpMaxOf(e: EntityState): number {
-    return this.combat?.maxHpOf(e.id) ?? this.combat?.mobHpMax(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+  /** Max HP of an entity: a player's combat profile, a mob's (manager, else the `MobPort`), else the skeleton constant. */
+  private maxHpOf(e: EntityState): number {
+    return (
+      this.combat?.maxHpOf(e.id) ??
+      this.mobs?.maxHpOf(e.id) ??
+      this.combat?.mobHpMax(e.id) ??
+      WORLD_CONFIG.PLAYER_MAX_HP
+    );
   }
 
   /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */
@@ -573,7 +613,7 @@ export class WorldNode {
   }
 
   private hpPct(e: EntityState): number {
-    return Math.max(0, Math.min(127, Math.round((e.hp / this.hpMaxOf(e)) * 100)));
+    return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
 
   /** 0 idle, 1 run, 2 fly */

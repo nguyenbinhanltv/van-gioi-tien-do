@@ -7,29 +7,19 @@
  *  - This module decides what an accepted cast DOES: skill ownership, cast time, target selection by shape, damage (Ngũ hành,
  *    crit, pen, suppress via `@vgtd/shared`), heal / shield, HP, death and respawn, mob kills and drops.
  */
-import type { AnyElement, DropRoll, DropSource, PathId, SkillDefinitions, Stats } from '@vgtd/shared';
+import type { AnyElement, DropRoll, PathId, SkillDefinitions, Stats } from '@vgtd/shared';
 import type { SimWorld } from '@vgtd/sim';
 
 /** `SkillHit.flags` bits on the wire (`skill_result.hits[]`): bit0 crit (protocol v1), bit1 the hit killed its target. Defined in `@vgtd/shared`. */
 export { HIT_FLAG_CRIT, HIT_FLAG_KILL } from '@vgtd/shared';
 
-/** What the combat step needs to know about a mob entity (it is an ordinary sim entity, ids >= MOB_ID_BASE). */
-export interface MobCombatStats {
-  /** DEF of the mob (docs/07 §1 curve x tier multiplier). */
-  defense: number;
-  /** Realm r >= 1 (suppress + stone quantity). */
-  realm: number;
-  /** Main element, or null when it has none. */
-  element: AnyElement | null;
-  /** Drop table row: normal -> 'field', elite -> 'elite', boss -> 'boss'. */
-  dropSource: DropSource;
-  /** Max HP (the sim entity only holds the current HP). */
-  hpMax: number;
-}
+/** What the combat step needs to know about a living mob: defined by the mob module (`MobManager.combatStats`), re-exported here. */
+export type { MobCombatStats } from '../mobs/index.js';
+import type { MobCombatStats } from '../mobs/index.js';
 
 /**
- * The seam to worker 39's `MobManager` (#204). Mobs are sim entities; the combat step damages `entity.hp` itself and calls
- * `kill()` when it reaches 0. Adapter once #204 lands: `combatStats(id)` from `manager.info(id)` + `mobStats`, `kill` = `manager.kill`.
+ * The seam to the mob module: `MobManager` (#204) satisfies it as is (`combatStats(id)`, `kill(world, id)`). Mobs are sim entities;
+ * the combat step damages `entity.hp` itself and calls `kill()` when it reaches 0.
  */
 export interface MobPort {
   /** Combat stats of a LIVING mob, or undefined when `id` is not a mob. */

@@ -7,7 +7,7 @@ simulation is `@vgtd/sim` stepped at a fixed 20 Hz, the wire format is `@vgtd/pr
 HTTP  POST /auth/register {username,password}   -> 201 {accountId}
 HTTP  POST /auth/login    {username,password}   -> 200 {token, accountId, sessionId, expiresAtS}
 HTTP  GET  /health
-WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"<jwt>"}
+WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":2,"protocolMax":2,"token":"<jwt>"}
             reply (JSON text): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
             then binary @vgtd/protocol frames: client -> input (20-30 Hz, 1-3 inputs), skill_cast, ping
                                                server -> snapshot, aoi_enter, aoi_leave, skill_result, error, pong

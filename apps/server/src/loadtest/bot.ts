@@ -4,7 +4,15 @@
  * per-index baseline the server uses. Intent only: a bot can lie about time (speedhack) but never about position.
  */
 import { WebSocket } from 'ws';
-import { ErrorCode, decode, encode, type BaselinePos, type InputPacket, type Message } from '@vgtd/protocol';
+import {
+  ErrorCode,
+  PROTOCOL_VERSION,
+  decode,
+  encode,
+  type BaselinePos,
+  type InputPacket,
+  type Message,
+} from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
 
 export type BotKind = 'honest' | 'speedhack' | 'teleport';
@@ -156,7 +164,17 @@ export class Bot {
       this.ws = ws;
       ws.binaryType = 'nodebuffer';
       let acked = false;
-      ws.on('open', () => ws.send(JSON.stringify({ type: 'hello', protocolMin: 1, protocolMax: 1, token, ...hello })));
+      ws.on('open', () =>
+        ws.send(
+          JSON.stringify({
+            type: 'hello',
+            protocolMin: PROTOCOL_VERSION,
+            protocolMax: PROTOCOL_VERSION,
+            token,
+            ...hello,
+          }),
+        ),
+      );
       ws.on('message', (data, isBinary) => {
         if (!isBinary) {
           const m = JSON.parse(data.toString()) as { type?: string; entityId?: number };

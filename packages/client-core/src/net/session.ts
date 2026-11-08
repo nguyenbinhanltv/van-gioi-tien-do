@@ -3,7 +3,7 @@
  * (or a test) injects `fetch`, a WebSocket constructor and a clock. The game loop calls `update(dtMs, intent)` every
  * frame and reads `selfPosition()` / `remotes(now)` to draw.
  */
-import { ErrorCode, decode, encode, type Message, type SelfState } from '@vgtd/protocol';
+import { ErrorCode, PROTOCOL_VERSION, decode, encode, type Message, type SelfState } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
 import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
@@ -104,7 +104,7 @@ export class NetClient {
       this.ws = ws;
       ws.binaryType = 'arraybuffer';
       let acked = false;
-      ws.onopen = () => ws.send(JSON.stringify({ type: 'hello', protocolMin: 1, protocolMax: 1, token }));
+      ws.onopen = () => ws.send(JSON.stringify({ type: 'hello', protocolMin: PROTOCOL_VERSION, protocolMax: PROTOCOL_VERSION, token }));
       ws.onmessage = (ev) => {
         if (typeof ev.data === 'string') {
           const m = JSON.parse(ev.data) as { type?: string; entityId?: number; mapTiles?: number };

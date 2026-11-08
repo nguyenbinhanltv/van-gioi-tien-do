@@ -32,8 +32,11 @@ import {
   CombatSystem,
   HIT_FLAG_CRIT,
   HIT_FLAG_KILL,
+  MobManager,
   WorldNode,
+  defaultMobZones,
   inShape,
+  isMobId,
   makeProfile,
   resolveCast,
   skillElement,
@@ -506,6 +509,40 @@ describe('player HP, death and respawn', () => {
     r.run(500);
     expect(entity(r, MOB)!.hp).toBe(3000);
     expect(r.results).toEqual([]); // the pending cast was dropped with the caster
+  });
+});
+
+describe('MobManager (#204) as the MobPort', () => {
+  it('combat kills a real mob through combatStats / kill: it despawns, drops resolve and the respawn timer runs', () => {
+    const grid = TileGrid.fromRows(Array.from({ length: 64 }, () => '.'.repeat(64)));
+    const ctx: SimContext = { grid, skills: compileSkills() };
+    const manager = new MobManager({ seed: 5, grid, zones: defaultMobZones(64), density: 0.2 });
+    let world = manager.populate(createWorld(5));
+    const mob = world.entities.find((e) => isMobId(e.id))!;
+    expect(mob).toBeDefined();
+    const drops: DropRoll[][] = [];
+    const combat = new CombatSystem(ctx, { seed: 5, mobs: manager, onDrops: (d) => drops.push([...d.rolls]) });
+    const st = combat.addPlayer(1, 'kiem');
+    world = spawnEntity(world, { id: 1, i: mob.i - 1.5, j: mob.j, hp: st.hpMax, mpMax: st.mpMax, facing: 0 });
+    // one-shot the mob: the cone in front of the caster (facing +i) covers it
+    world = { ...world, entities: world.entities.map((e) => (e.id === mob.id ? { ...e, hp: 1 } : e)) };
+    const kiem = ctx.skills.find((s) => s.key === 'kiem_khi_tram')!;
+    let results: CombatResult[] = [];
+    for (let t = 0; t < 12; t++) {
+      const inputs: SimInput[] =
+        t === 0 ? [{ kind: 'cast', entityId: 1, seq: 1, skillId: kiem.id, targetId: 0, rttMs: 0 }] : [];
+      const pre = combat.preStep(inputs, world);
+      const s = step(world, pre.inputs, ctx, NETWORK.TICK_MS);
+      const post = combat.postStep(s.world, s.events);
+      world = post.world;
+      results = results.concat(post.results);
+    }
+    expect(results[0]!.hits.map((h) => h.targetId)).toContain(mob.id);
+    expect(results[0]!.hits.find((h) => h.targetId === mob.id)!.flags & HIT_FLAG_KILL).toBe(HIT_FLAG_KILL);
+    expect(manager.info(mob.id)!.alive).toBe(false);
+    expect(world.entities.some((e) => e.id === mob.id)).toBe(false);
+    expect(manager.info(mob.id)!.respawnAtTick).toBeGreaterThan(world.tick);
+    expect(drops).toHaveLength(1);
   });
 });
 
