@@ -75,6 +75,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D53, bổ sung hẹp D50: nếu một đầu vai thật sự bị quạt/tóc/ribbon che trên master NE/N, dùng `rear-crown-shoulder-single`: khoảng cách dọc crown→đỉnh vai còn nhìn thấy và bề ngang sọ đều ±3% master khóa cùng hướng. Master/ô cùng `occludedSide`, có `occluder` cụ thể; không chiếu vai bị che, không sửa master, không dùng vì tiện. Pháp tu NE che vai trái, đo vai phải; ô che cả vai phải phải báo. Ưu tiên D50 nếu nhìn thấy cả hai đầu; gate/scale khác giữ nguyên.]
 
+[Cập nhật D54: lý do head-evidence `posture`/`secondary-overhang`/`rear-*` không miễn gate similarity. Chỉ ngoại lệ pose D41 có lý do riêng đã xem trên clip `free` được bỏ phép so crop không phù hợp; upright luôn kiểm similarity. Audit chỉ báo cáo các ô đã merge từng bị bỏ kiểm do lý do đầu, không sửa art. Các ngưỡng, scale và cổng foot/canvas giữ nguyên.]
+
 [Cập nhật D46: Player semi-chibi dùng profile opt-in `smooth-v2`, 24 fps danh nghĩa, lưới tối đa 4×4 và ô logic 256 px @2x; số ô/thời lượng/sự kiện tại `art/sprite-sheet-pipeline.md`. Bảng D41 cũ giữ nguyên. Đây là thời gian trình diễn, không đổi simulation.]
 
 | Hạng mục              | Giá trị chốt                                                                                        | Tài liệu gốc          |

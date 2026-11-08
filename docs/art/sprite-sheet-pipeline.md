@@ -501,3 +501,16 @@ Master dùng ô256px sau resize; motion dùng ô output256px aligned, chỉ số
 crown/chin/shoulderTop giả cho kind này. Thiếu neo/định nghĩa/bề ngang, kind/hướng sai, định nghĩa neo đổi, hoặc một trong hai
 kích thước lệch band đều là lỗi cứng. Contract/backlog/review INFO giữ cả hai điểm, định nghĩa neo, bề ngang và tham chiếu
 master/ô. Quy tắc evidence cho exception/bbox ngoài band, reason posture/secondary-overhang và các cổng foot/canvas không đổi.
+
+## D54 — phạm vi head-evidence và ngoại lệ pose D41 (worker24, 2026-11-08)
+
+Lý do `posture`, `secondary-overhang` và nhóm dành riêng `rear-*` chỉ mô tả bằng chứng đầu; không được bỏ kiểm tra
+similarity mặt/thân, kể cả khi clip là `free`. Upright luôn chạy similarity. Chỉ lý do pose D41 riêng đã xem trên clip
+`free` được bỏ phép so crop không phù hợp, ví dụ die-collapse nằm sấp có crop top-20% rơi vào ribbon/búi tóc. Không dùng
+lý do đo đầu thay cho ngoại lệ pose, không thêm ngoại lệ chỉ để che lỗi nhận dạng. Các kind D47/D48/D50/D52/D53, ngưỡng,
+scale, foot và canvas giữ nguyên; các dòng quyết định cũ là lịch sử không sửa.
+
+Audit chỉ báo cáo `sprite:audit-head-similarity` quét các project đã merge, liệt kê ô từng bị bỏ similarity do lý do đầu,
+xóa riêng lý do ấy trong bộ nhớ rồi so lại. Không sửa project, raw, export hoặc backlog. Báo cáo JSON/Markdown giữ từng
+clip/ô/reason/kết quả cùng hash đầu vào và mã gate; ô không đo được báo riêng và làm lệnh lỗi. Kết quả fail không được
+biến thành pass hay tự nhận vào backlog. Xem lệnh và ràng buộc output tại `tools/sprite/README.md`.

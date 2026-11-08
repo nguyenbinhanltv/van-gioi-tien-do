@@ -192,6 +192,23 @@ Smooth-v2 upright defaults include `heightPolicy: 'head-size-v1'`; smooth dash i
 the flag and upright dash explicitly. Ordinary in-band cells without exceptions retain bbox QA; exception/out-of-band cells
 need `project.masterHead` and clip-local `headEvidence[index]` with skull `crown`, `chin` and a reviewed `note`.
 Use only `posture` or `secondary-overhang` in the matching `exceptions` entry. Generic reasons fail the new upright policy.
+
+D54: head reasons (`posture`, `secondary-overhang`, and reserved `rear-*`) never skip face/torso similarity, even on a
+`free` clip. Only a reviewed D41 pose reason on a `free` clip may exempt an unsuitable similarity crop. An upright clip
+always runs similarity. Head landmarks/reasons still affect only their own height/evidence check; foot/canvas gates and
+thresholds are unchanged. Do not use a head reason as a free-pose exemption.
+
+Report-only audit of previously skipped merged cells (no source, export or backlog writes):
+
+```bash
+npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder --out /absolute/artifact/path/head-reason-similarity-audit.json
+```
+
+The command finds head reasons in project exceptions, removes only those entries in memory, reruns QA and lists fresh
+similarity results per clip-local cell. JSON pins project/master/calibration/sheet/manifest/backlog hashes and gate source
+hashes; all inputs are rehashed after each run. A companion Markdown report is written beside the JSON. Output must be
+outside the source tree and may replace only an earlier audit report. Similarity failures are reported, never accepted;
+unmeasured cells make the command exit nonzero. Run against the intended merged checkout and retain its commit reference.
 Head crown-to-chin Euclidean size must remain within master±3%; any supplied evidence is validated, even on in-band cells.
 Keep dynamic run flight tucks, deep dash and lunges when the head scale is correct. There is no crouch band or per-frame fit.
 

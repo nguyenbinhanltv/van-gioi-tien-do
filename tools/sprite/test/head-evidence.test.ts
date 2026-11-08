@@ -9,6 +9,7 @@ import {
   alignFrame,
   applyBacklog,
   checkHeights,
+  checkSimilarity,
   emptyBacklog,
   guidesFromMaster,
   measureFigure,
@@ -61,6 +62,37 @@ const clip = (patch: Partial<QaClip> = {}): QaClip => ({
 const options = { masterHeight: 208, master, guides, masterHead };
 
 describe('D47 head-size evidence', () => {
+  it.each(['posture', 'secondary-overhang', 'rear-skull-base', ' rear-base-ornament '])(
+    'does not let head reason %s skip bad similarity on upright or free clips (D54)',
+    (reason) => {
+      const wrong = createImage(256, 256);
+      for (let i = 0; i < wrong.data.length; i += 4) wrong.data.set([0, 255, 0, 255], i);
+      for (const kind of ['upright', 'free'] as const) {
+        const c = clip({ kind, frames: [aligned(wrong)], exceptions: { 0: reason } });
+        expect(checkSimilarity(c, options).some((f) => f.severity === 'fail')).toBe(true);
+      }
+    },
+  );
+  it('keeps similarity independent even when posture head-size evidence passes (D54)', () => {
+    const wrong = createImage(256, 256);
+    for (let i = 0; i < wrong.data.length; i += 4) wrong.data.set([0, 255, 0, 255], i);
+    const c = clip({ frames: [aligned(wrong)] });
+    expect(checkHeights(c, options)[0]!.severity).toBe('info');
+    expect(runQa([c], options).findings.some((f) => f.gate === 'similarity' && f.severity === 'fail')).toBe(true);
+  });
+  it('allows only a free D41 pose exception to exempt the similarity crop (D54)', () => {
+    const wrong = createImage(256, 256);
+    for (let i = 0; i < wrong.data.length; i += 4) wrong.data.set([0, 255, 0, 255], i);
+    const c = clip({ frames: [aligned(wrong)], exceptions: { 0: 'die-collapse: prone, top-20% crop not head' } });
+    expect(checkSimilarity(c, options).some((f) => f.severity === 'fail')).toBe(true);
+    expect(checkSimilarity({ ...c, kind: 'free' }, options)).toEqual([]);
+    expect(checkSimilarity({ ...c, kind: 'free', exceptions: { 0: '  ' } }, options).length).toBeGreaterThan(0);
+  });
+  it('does not reuse head reasons as legacy free-pose height exceptions (D54)', () => {
+    const c = clip({ kind: 'free', heightPolicy: undefined, headEvidence: {} });
+    expect(checkHeights(c, options)[0]!.severity).toBe('warn');
+    expect(checkHeights({ ...c, exceptions: { 0: 'die-collapse: prone' } }, options)[0]!.severity).toBe('info');
+  });
   it('accepts dynamic posture as INFO without fitting the body to the bbox band', () => {
     const c = clip(),
       before = c.frames[0]!.metrics.height;

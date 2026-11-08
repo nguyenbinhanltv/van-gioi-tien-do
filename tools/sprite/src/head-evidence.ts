@@ -3,6 +3,13 @@ import type { Finding, QaClip, QaOptions } from './qa.js';
 import type { Direction } from '@vgtd/shared';
 
 export type HeightPolicy = 'head-size-v1';
+
+/** D54: these reasons describe head measurements, never D41 similarity exemptions. */
+export function isHeadEvidenceReason(reason: string): boolean {
+  const canonical = reason.trim().toLowerCase();
+  return canonical === 'posture' || canonical === 'secondary-overhang' || canonical.startsWith('rear-');
+}
+
 export interface HeadPoint {
   readonly x: number;
   readonly y: number;
