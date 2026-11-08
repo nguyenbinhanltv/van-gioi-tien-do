@@ -67,6 +67,10 @@ export interface BatchReport {
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function headLandmarkHtml(head: HeadLandmarks | HeadEvidence): string {
+  if (head.kind === 'bracketed-occlusion')
+    return esc(
+      `bracketed (unmeasured); visible crown (${head.crown.x}, ${head.crown.y}); hidden ${head.hiddenEndpoints.join(', ')}; occluder ${head.occluder}`,
+    );
   if (head.kind === 'rear-breadth-only')
     return esc(
       `crown (${head.crown.x}, ${head.crown.y}); breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y}); shoulder occluder ${head.occluder}; no vertical span`,

@@ -1,6 +1,7 @@
 /** D55 windows are measurement regions, never inferred anatomical evidence or frame edits. */
 import type { Image } from '@vgtd/rig';
 import { measureFigure } from './master.js';
+import type { BracketedOcclusionEvidence } from './bracketed-occlusion.js';
 import {
   headEvidenceKind,
   headLandmarkBreadth,
@@ -10,7 +11,7 @@ import {
   type HeadLandmarks,
   type RearBreadthOnlyLandmarks,
 } from './head-evidence.js';
-export type SimilarityFrameHead = HeadLandmarks | RearBreadthOnlyLandmarks;
+export type SimilarityFrameHead = HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence;
 
 export interface SimilarityBox {
   readonly left: number;
@@ -61,6 +62,7 @@ export function landmarkSimilarityRegions(
   masterHeight: number,
   rule?: 'rear-breadth-window' | 'rear-span-window',
 ): SimilarityRegions {
+  if (head.kind === 'bracketed-occlusion') throw new Error('D60 crown-only comparison window not resolved');
   const length =
     head.kind === 'rear-breadth-only'
       ? headLandmarkBreadth(head, image.width, image.height)
