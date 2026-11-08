@@ -126,6 +126,8 @@ export const NETWORK = {
   INTERP_DELAY_MS_PC: 100,
   INTERP_DELAY_MS_MOBILE: 150,
   INTERP_DELAY_MS_MOBILE_MAX: 250,
+  /** Per-entity interpolation delay = clamp(base, factor x observed snapshot spacing, max) so 10 / 5 Hz bands stay smooth (D73). */
+  INTERP_SPACING_FACTOR: 1.25,
   /** Max lag-compensation rewind (ms). */
   LAG_COMP_MAX_MS: 200,
   /** Max entities sent per client. */

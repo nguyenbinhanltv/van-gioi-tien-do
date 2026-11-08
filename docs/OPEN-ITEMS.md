@@ -333,7 +333,7 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 
 - **Bản đồ**: server dùng lưới mở, client vẽ tilemap procgen 256x256; nước/cây/đá chỉ chặn ở client offline (không chặn online). Cần nạp lưới va chạm procgen (cờ đi được, tầng) vào `WorldNode`/client chung nguồn trước khi coi online là chơi được.
 - **Lớp nhân vật trên dây**: `aoi_enter` chưa có lớp, nên lớp người khác suy ra từ `entityId` (D72); cần giao thức v2 (kèm tên hiển thị, trang bị cho paperdoll).
-- **Nội suy**: trễ cố định 150 ms, tuyến tính, không ngoại suy (docs/08 §5 yêu cầu trễ thích ứng 100-250 ms theo jitter, Hermite, ngoại suy 250 ms); đồng hồ server (8 gói ping/pong, trung vị) chưa có nên dùng giờ nhận gói.
+- **Nội suy**: tuyến tính, không ngoại suy, không Hermite (docs/08 §5); trễ đã thích ứng theo từng thực thể (D73: max(150 ms, 1,25 × khoảng cách snapshot), tối đa 250 ms) nhưng chưa tính jitter mạng riêng; đồng hồ server (8 gói ping/pong, trung vị) chưa có nên dùng giờ nhận gói.
 - **Chưa làm phía client**: `skill_cast`/`skill_result`, bay/né/khinh công (cờ có trong input nhưng chưa gán phím), resume sau rớt mạng, hiển thị tên/HP người khác, quái/NPC (chỉ vẽ `kind` 0).
 - **Chưa chạy được trên CI**: build Cocos và chơi 2 tab không có trong CI; phần tự động là test đơn vị `packages/client-core/tests/net.test.ts` và test đầu-cuối `apps/server/tests/netclient.test.ts` (2 NetClient + server thật). Chưa kiểm bằng trình duyệt thật trên di động.
 - **Tiêu chí P2 còn lại (đo 2026-11-08, bot trên cùng máy, loopback, 100 bot, 30 s)**:
@@ -344,6 +344,6 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 
 ## D73 — băng thông snapshot: còn mở
 
-- **Client chưa chịu được tần số thấp**: `RemoteWorld` (PR client online #199) nội suy với trễ cố định 150 ms; thực thể vùng 5 Hz (khoảng cách 200 ms) sẽ đứng khựng ~50 ms mỗi chu kỳ. Cần trễ thích ứng theo từng thực thể (max(150 ms, 1,25 × khoảng cách snapshot gần nhất)); làm sau khi #199 merge.
+- ~~Client chưa chịu được tần số thấp~~ **Đã xử lý**: `RemoteWorld` dùng trễ nội suy theo từng thực thể = max(150 ms, 1,25 × khoảng cách snapshot quan sát được), tối đa 250 ms (`NETWORK.INTERP_SPACING_FACTOR`), và chèn mẫu "đứng yên" sau khoảng lặng dài (bản ghi không đổi bị bỏ, D73) để thực thể không giật khi bắt đầu đi. Có test độ mượt ở 5 Hz (`packages/client-core/tests/interp.test.ts`). Chưa kiểm bằng mắt trên client thật với bot 5 Hz.
 - Chưa có "luôn 20 Hz cho đồng đội / mục tiêu / kẻ tấn công" (chưa có nhóm và chọn mục tiêu); trần 40 thực thể ở 20 Hz đang áp cho mọi người.
 - Số đo mới chạy bot trên cùng máy, loopback (xem PR); bot không nội suy nên chưa đo cảm giác mượt của vùng 10/5 Hz.
