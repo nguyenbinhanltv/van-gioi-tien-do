@@ -147,11 +147,19 @@
       "existingSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
       "rebuiltSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
       "byteIdentical": true
+    },
+    {
+      "file": "phaptuchibi_S.sprite.json",
+      "kind": "qa-contract",
+      "existingSha256": "142a9ed1e12d53b95dc7807e4155df8ec599548c492175be1500afd6b65cfc37",
+      "rebuiltSha256": "dd99505694c51537fab929a4741d123577bc6c3febc4f7c55755aa15129219cc",
+      "byteIdentical": false
     }
   ],
   "artUnchanged": true,
   "thresholdsUnchanged": true,
   "poseExceptionsUnchanged": true,
-  "note": "Actual visible main-cap/jaw evidence replaces missing-cell centroid fallback. Crown semantics match stored S master and existing dash2, no projected crown or repaint. Existing source capture/render assets remain unchanged; runtime contract is historical and no runtime files are rewritten in this evidence-only follow-up.",
-  "anchoredTorsoLab": 5.631270301817457
+  "note": "Actual visible main-cap/jaw evidence replaces missing-cell centroid fallback. Crown semantics match stored S master and existing dash2, no projected crown or repaint. The QA .sprite.json contract is regenerated from the updated project and records dash3 headEvidence and current QA. Its old/new hashes are included; the five ske/tex/png render inputs remain byte-identical.",
+  "anchoredTorsoLab": 5.631270301817457,
+  "runtimeContractSynchronized": true
 }

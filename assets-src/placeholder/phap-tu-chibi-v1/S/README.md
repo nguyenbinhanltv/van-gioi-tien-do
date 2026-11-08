@@ -30,3 +30,5 @@ Input project SHA256: `529046d6d3863bda3523ba8b155f8f5d0434abc7ae0887c98b2507b58
 S/selection.json preserves the reviewed attempt choices. Head evidence and open foot findings are in the review/backlog records. engine-gate.json records real Cocos3.8.8 2× capture of all15 clips against matching runtime source bytes.
 
 D55 dash3 evidence-only follow-up: crown(130,44), chin(130,92), main cap excluding elevated bun/curl and accessories, same semantics as the locked S master. Head48.000/master48.010px; anchored headLab6.063786, torso5.631270. The old15.499404 result came from a centroid fallback crop above most of the face. All five rendered files and14 guide PNG hashes are unchanged; no repaint, origin change, pose exception or threshold change. `dash3-d55-review.json` records exact windows, RGBA and hashes. Seventeen open foot findings remain.
+
+The runtime QA contract `phaptuchibi_S.sprite.json` is regenerated from the updated project so batch/review consumers see dash3 headEvidence and current QA. `dash3-d55-review.json` lists its old/new SHA256 separately from the five byte-identical render inputs.
