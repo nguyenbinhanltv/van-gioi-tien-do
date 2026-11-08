@@ -20,3 +20,11 @@ Snapshot entity record (MSB-first bits): `index 10 · absolute 1 · (absolute ? 
 = 37–44 bits. Positions are quantised to 1/32 tile; deltas are against the snapshot named by `baselineSeq` (the client's last ACK,
 carried in every `input` packet); out-of-range deltas fall back to absolute. Pass `{ baseline }` to `encode`/`decode`.
 The `self` block carries the owner's `lastSeq` plus the movement state needed to re-run pending inputs (positions as float32).
+
+## Progression messages (cold family, D76)
+
+`char_state` (60), `breakthrough_start` (61), `breakthrough_result` (62), `meditate_start` (63), `meditate_stop` (64) and
+`meditate_result` (65) use the docs/24 cold envelope `[version][0x80][msgId u16][body]` (`src/progression.ts`). Bodies are fixed
+big-endian layouts until the Protobuf pipeline exists (request ids are 16 bytes, shown as 32 lowercase hex characters;
+`char_state` carries `tuVi`/`tuViReq` as float64). Decoding is strict and canonical like the hot family; adding a msgId is
+additive, so they do not bump `PROTOCOL_VERSION` (2 since D74 for an unrelated field). `ProgressionReason`, `BreakthroughOutcome`, `BreakthroughKind` and `CHAR_FLAG` are the wire enums.

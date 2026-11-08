@@ -1,3 +1,5 @@
+import type { ColdClientMessage, ColdServerMessage } from './progression.js';
+
 /**
  * Message definitions (docs/08 §4, §5, §8). Every binary packet starts with [version u8][type u8].
  * Fields use `null` (never `undefined`) for "absent" so the JSON debug codec round-trips exactly.
@@ -196,6 +198,7 @@ export interface PongMsg {
   serverTimeMs: number;
 }
 
-export type ClientMessage = InputMsg | SkillCastMsg | PingMsg;
-export type ServerMessage = SnapshotMsg | AoiEnterMsg | AoiLeaveMsg | SkillResultMsg | ErrorMsg | PongMsg;
+export type ClientMessage = InputMsg | SkillCastMsg | PingMsg | ColdClientMessage;
+export type ServerMessage =
+  SnapshotMsg | AoiEnterMsg | AoiLeaveMsg | SkillResultMsg | ErrorMsg | PongMsg | ColdServerMessage;
 export type Message = ClientMessage | ServerMessage;

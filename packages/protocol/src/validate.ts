@@ -1,5 +1,6 @@
 import { MAG_MAX } from '@vgtd/sim';
 import { ProtocolError } from './errors.js';
+import { validateColdMessage } from './progression.js';
 import {
   LIMITS,
   type AoiEnterMsg,
@@ -191,7 +192,10 @@ export function validateMessage(x: unknown): Message {
       };
       return m;
     }
-    default:
+    default: {
+      const cold = validateColdMessage(o);
+      if (cold) return cold;
       throw new ProtocolError('type', `unknown message type ${String(o.type)}`);
+    }
   }
 }
