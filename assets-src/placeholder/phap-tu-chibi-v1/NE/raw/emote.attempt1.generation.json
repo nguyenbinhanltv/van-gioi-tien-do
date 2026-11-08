@@ -1,0 +1,27 @@
+{
+  "clip": "emote",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP emote: EXACT12figures FOURcolumns THREErows4:3canvas. Uprightpolitegreetingloop NErear3quarter.0ready1-3raisesFREE RIGHT hand calmlytochest/shoulder4-6smallgentlewave7-8briefrespectfulkneesoftening/nod9-11returnsreadyconnect0. Leftfan staysnaturallygrippedonscreenleft, nohandtransfer. MainheadNEorientationunchanged, onlytiny2degree nod, skullsize/breadthfixed, shoulderanatomyunchanged.1-2framehair/sleevelag andtasselsettle, bothfeetplanted. NoSE/frontface turn, no speechbubble/text/FX/shadow/grid. Complete12fullbodieswithin cells.",
+  "utcStart": "2026-11-08 00:12:23 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/emote.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/emote.attempt1.png",
+  "selected": "sheets/emote.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:12:48 UTC",
+  "rawSha256": "5e748f881b08436f6f50646b01c03d1e428ce620605eac26631bc0bfbf5fa9e5",
+  "utcRawOutputFileModified": "2026-11-08T00:12:48.248Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/emote.head-guide.png",
+      "sha256": "517239f8b3aed7bb579c5f624925a8ed879819410ed7783d330057c9d469a383"
+    }
+  ],
+  "selectedSha256": "5e748f881b08436f6f50646b01c03d1e428ce620605eac26631bc0bfbf5fa9e5"
+}

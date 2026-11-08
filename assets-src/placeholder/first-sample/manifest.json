@@ -1,0 +1,616 @@
+{
+  "placeholder": true,
+  "release": false,
+  "pivot": [64, 116],
+  "mirrors": {
+    "SW": "SE",
+    "W": "E",
+    "NW": "NE"
+  },
+  "animation": "idle",
+  "framesPerDirection": 8,
+  "fps": 8,
+  "note": "AI reference with procedural breathing; not a Spine rig.",
+  "files": [
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_00.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_00.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_01.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_01.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_02.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_02.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_03.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_03.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_04.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_04.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_05.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_05.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_06.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_06.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_S_07.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_S_07.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_00.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_00.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_01.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_01.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_02.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_02.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_03.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_03.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_04.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_04.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_05.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_05.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_06.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_06.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_SE_07.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_SE_07.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_00.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_00.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_01.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_01.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_02.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_02.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_03.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_03.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_04.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_04.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_05.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_05.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_06.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_06.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_E_07.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_E_07.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_00.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_00.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_01.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_01.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_02.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_02.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_03.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_03.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_04.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_04.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_05.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_05.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_06.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_06.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_NE_07.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_NE_07.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_00.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_00.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_01.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_01.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_02.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_02.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_03.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_03.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_04.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_04.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_05.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_05.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_06.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_06.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/character/spr_kiemtu_idle_N_07.png",
+      "kind": "character",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/character/spr_kiemtu_idle_N_07.png",
+      "kind": "character",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/tiles/tset_sample_grass.png",
+      "kind": "tile",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/tiles/tset_sample_grass.png",
+      "kind": "tile",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/tiles/tset_sample_rock.png",
+      "kind": "tile",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/tiles/tset_sample_rock.png",
+      "kind": "tile",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/tiles/tset_sample_water.png",
+      "kind": "tile",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/tiles/tset_sample_water.png",
+      "kind": "tile",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/tiles/tset_sample_grass_rock_NW.png",
+      "kind": "tile",
+      "width": 128,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/tiles/tset_sample_grass_rock_NW.png",
+      "kind": "tile",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/icons/icon_pill_trucco_256.png",
+      "kind": "icon",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/48/icon_pill_trucco_48.png",
+      "kind": "icon",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/64/icon_pill_trucco_64.png",
+      "kind": "icon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/128/icon_pill_trucco_128.png",
+      "kind": "icon",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/icons/icon_talisman_sample_256.png",
+      "kind": "icon",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/48/icon_talisman_sample_48.png",
+      "kind": "icon",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/64/icon_talisman_sample_64.png",
+      "kind": "icon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/128/icon_talisman_sample_128.png",
+      "kind": "icon",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "assets-src/placeholder/first-sample/icons/icon_equip_sword_256.png",
+      "kind": "icon",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/48/icon_equip_sword_48.png",
+      "kind": "icon",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/64/icon_equip_sword_64.png",
+      "kind": "icon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "apps/client-cocos/assets/bundles/core/_placeholder/first-sample/icons/128/icon_equip_sword_128.png",
+      "kind": "icon",
+      "width": 128,
+      "height": 128
+    }
+  ]
+}

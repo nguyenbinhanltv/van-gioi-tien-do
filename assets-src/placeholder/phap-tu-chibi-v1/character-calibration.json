@@ -1,0 +1,13 @@
+{
+  "character": "phap-tu-chibi-v1",
+  "scale": 0.9478260869565217,
+  "anatomicalHeight2x": 216,
+  "note": "Whole-sheet declared DPI normalization to logical cells; no per-frame rescale. Character calibration locked to template master scale.",
+  "reference": {
+    "clip": "idle",
+    "attempt": 1,
+    "rawNormalizedMedianHeight": 230,
+    "masterAlphaHeight": 218,
+    "note": "One global character scale from first upright sheet; never per-frame. Anatomical master remains216px."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "clip": "attack_2",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:14:05 UTC",
+  "utcEnd": "2026-11-07 21:14:45 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the FOURTEEN bodies beneath the master-head stamps in image 1. Image 2 is the exact T1 outfit, face and whisk reference. This is attack_2, a rising reverse whisk sweep, facing screen RIGHT in pure E profile throughout. Preserve the stamps' head size, path, face structure and angle. Do not enlarge heads or figures.\n\nUse the 4×4 lattice, 14 frames row-major; cells 15–16 remain flat magenta. Frames 1–3 anticipate: lower the right-hand whisk across the waist and coil the hips. Frames 4–6 step forward into an upward diagonal reverse sweep. Frame 7 is impact at chest/shoulder height, frame 8 holds it while cloth catches up. Frames 9–14 finish the arc and recover to the original guard. Distinguish this from the first downward sweep. Use clear weight transfer and a long, readable step. Keep the soft whisk curl below the highest bun line and inside the cell.\n\nThe right hand always grips the same plain brown shaft, ONE cylindrical bronze collar and white horsehair. Never swap hands, lose the whisk, shorten the shaft or turn it into a sword. Hair, sash, sleeves and white strands lag the body then settle.\n\nSame fixed adult jade healer: olive-brown almond eye, straight delicate brow, serene lips, flatter main cap, separate folded bun, simple jade pin and side strands. Plain ivory T1 wrap robe, jade collar/cuffs/sash, narrow antique-gold trim, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight and narrow rim, material-tinted outlines, NW light.\n\nHead crown-to-chin size stays approximately 53.5 logical pixels as the guide; torso and knees may bend naturally. Remove all grid, guide marks and crop edges. Opaque #FF00FF background only. No text, shadows, floor, aura, talismans, lotus, trails, blur, afterimages, particles or extra figures.",
+  "references": ["../templates/attack_2.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/attack_2.attempt1.png",
+  "status": "candidate; 14 frames and two empty cells visually present; dynamic pose and weapon held; actual QA pending",
+  "sha256": "28ee8d504526c09b6269839051aa708f65c7df13dd972195f2379e1ea7cb8720",
+  "rawSha256": "28ee8d504526c09b6269839051aa708f65c7df13dd972195f2379e1ea7cb8720",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack_2.head-guide.png",
+      "sha256": "c173e9863e7d238ef6820b8f45ad07de6911eb134fa6ed60788a2a112204aa47"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

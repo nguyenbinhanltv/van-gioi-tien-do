@@ -1,0 +1,16 @@
+{
+  "id": "B.E.master-generated",
+  "prompt": "Use case: stylized-concept. Production MASTER sprite original Van Gioi Tien Do MMORPG PHAP TU concept B VERMILION FAN ADEPT. Input reference is A/B/C comparison; use ONLY MIDDLE character B, NEVER left or right staff characters. Same family style clean dark contours restrained soft2-3tone cel shading NW light and compact5.75head adult male proportions. Slender young man, high black-brown bun with jadepin and short tied tail, ivory crosscollar robe and narrow sleeves, muted VERMILION red knee-length split outer robe with restrained bronze cloud trim, navy two-tail sash, ivory trousers into dark calf boots. ONE folding FAN in RIGHT NEAR hand, OPEN across chest in relaxed spellcaster stance; fan leaf CYAN/TEAL with visible dark ribs and simple bronze cloud motif, fan wide enough to read clearly at128px but doesn't hide face or exceed silhouettewidth150 at256. Empty left hand relaxed beside body. No staff, sword, gauntlets or heavy armor. E direction exact RIGHT-facing profile, nosepoints right, both boots fullyvisible and slightlyseparated. Slight overhead orthographic isometricgamecamera, same identity as middleB. ONE fullbody only on TRUE TRANSPARENT background, SQUARE canvas, figureheight81%canvas, topmargin9%, soles91%, ample sides; no shadow, floor, VFX, text, watermark, swatches or other poses. Both hands and physical fan grip visible, no duplicated fan. Costume consistent practical and easy to animate.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 16:51:37 UTC",
+  "utcEnd": "2026-11-06 16:53:26 UTC",
+  "selectedOutput": "reference/E.master-generated.png",
+  "references": [
+    {
+      "source": "ao-artifact:van-gioi-tien-do-20/phap-tu-concepts-abc.png",
+      "role": "middle column B, Vermilion Fan Adept; internal AI style reference"
+    }
+  ],
+  "ownerChoice": "B, final owner choice relayed by orchestrator 2026-11-06"
+}

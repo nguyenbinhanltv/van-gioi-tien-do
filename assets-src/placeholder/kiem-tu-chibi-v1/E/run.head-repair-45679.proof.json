@@ -1,0 +1,191 @@
+{
+  "status": "Derived candidate, native head landmarks required; no stencil counted as proof.",
+  "headBodySource": "run.leg-repair-4567.proof.json + canonical232 ground; only cell14 head region selected",
+  "headRaw": "sheets/run.attempt-09.raw.png",
+  "headRawSha256": "1b34766e8d8596bd92119d93b760d4255b22d3cb1a73baaab826e0ad813f4436",
+  "outputSha256": "77019ce787dd8b47f5af571518f697001c52871ef4d222709dc448b747d84ccf",
+  "operation": "Key/despill AI edit at native DPI with protected master palette, single-pass Lanczos3 whole-cell DPI normalization, copy declared cell14 head region ONLY. Existing canonical head/torso/root/flight pixels outside regions remain byte-identical. No fit/rotation or manual painted pixels; all source pixels outside head ROI unchanged.",
+  "records": [
+    {
+      "cell": 0,
+      "originalAlignedSha256": "7943462b78b936c754bd4051315912ca380fb397dddc2b4147b0a0648ae4c376",
+      "region": null,
+      "outsideBeforeSha256": "55df9d0c422ec4738cc6d0b71df97cf3e2790fa4de279e4789a835a641657705",
+      "outsideAfterSha256": "55df9d0c422ec4738cc6d0b71df97cf3e2790fa4de279e4789a835a641657705",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 1,
+      "originalAlignedSha256": "d9cbed5a0dbca2d13ca91d52e222487af6f04a6a7ea47a34cecfbe490b1c7edb",
+      "region": null,
+      "outsideBeforeSha256": "6c2c947f7fa71d940f3791dcaebaff58c715bda4b24c3a5427b2051661975de7",
+      "outsideAfterSha256": "6c2c947f7fa71d940f3791dcaebaff58c715bda4b24c3a5427b2051661975de7",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 2,
+      "originalAlignedSha256": "3f2efb1fe99194f5854690ded16232a2566e4ec01db5a5926524073dbcb8cbde",
+      "region": null,
+      "outsideBeforeSha256": "4cf0a4952b56f90a675d9cef05a29fbfc7fe5161fdde0bd41015b8d41243887f",
+      "outsideAfterSha256": "4cf0a4952b56f90a675d9cef05a29fbfc7fe5161fdde0bd41015b8d41243887f",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 3,
+      "originalAlignedSha256": "16543905df63e74b7530d70176c233dd7bc523a4e88c6bd388b200f778d11aa9",
+      "region": null,
+      "outsideBeforeSha256": "6b37ceba45a2b19b36e5e998addba0decd45bb01dae152a883ad8a5945edade2",
+      "outsideAfterSha256": "6b37ceba45a2b19b36e5e998addba0decd45bb01dae152a883ad8a5945edade2",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 4,
+      "originalAlignedSha256": "ab19fe01d7bcdfde0ef4aaff3cbfcd37a7d480a20ed0cb5b4616045f7f3fdcc0",
+      "region": null,
+      "outsideBeforeSha256": "ec3259bf1e213e925b9420b5aafd096ec65169b2d5d52a9bd110206906c38552",
+      "outsideAfterSha256": "ec3259bf1e213e925b9420b5aafd096ec65169b2d5d52a9bd110206906c38552",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 5,
+      "originalAlignedSha256": "611b74eae6f6d4df3c7b42483d810f8f22f8cb095956e60244559c577b618f50",
+      "region": null,
+      "outsideBeforeSha256": "54904e99d860f3512b6b65c5c427cec11a2ccf83c4796c50a0cadf2326e256dc",
+      "outsideAfterSha256": "54904e99d860f3512b6b65c5c427cec11a2ccf83c4796c50a0cadf2326e256dc",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 6,
+      "originalAlignedSha256": "34eb3d450ca615436eeae9c72378e540083977ea181682c6b35eb813dccf03d6",
+      "region": null,
+      "outsideBeforeSha256": "096282a6d73f5c5c8c81b72d32796f42521ce5171c3e666115fbde50b3e817c1",
+      "outsideAfterSha256": "096282a6d73f5c5c8c81b72d32796f42521ce5171c3e666115fbde50b3e817c1",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": true
+    },
+    {
+      "cell": 7,
+      "originalAlignedSha256": "c09f3551ae2ff87f0eec507cc4ac6d6ced1242166177d2d84fa612d57c66ad47",
+      "region": null,
+      "outsideBeforeSha256": "ae6208f135aae72a0f3aaf5c9e7eb0ab7144d5ff64bc7b887598ca6c43d64cba",
+      "outsideAfterSha256": "ae6208f135aae72a0f3aaf5c9e7eb0ab7144d5ff64bc7b887598ca6c43d64cba",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": true
+    },
+    {
+      "cell": 8,
+      "originalAlignedSha256": "bc3a866db41c96270ed175381f3974943681f8e4e4d3f9dd77e5101ff307668a",
+      "region": null,
+      "outsideBeforeSha256": "5aa542d81821b6c399257cfd44c30a4b7d22f5d300fb4e602e122cd9bfcd8ab2",
+      "outsideAfterSha256": "5aa542d81821b6c399257cfd44c30a4b7d22f5d300fb4e602e122cd9bfcd8ab2",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 9,
+      "originalAlignedSha256": "5d7914ce6e21c290829b1b405584f9b08e88f619ece7a745a26f5d349dca1b06",
+      "region": null,
+      "outsideBeforeSha256": "b464b0a5b3e9dc2f68bc33d4f48ed48aeef817defe7f2f121448a9ac3ba40d0b",
+      "outsideAfterSha256": "b464b0a5b3e9dc2f68bc33d4f48ed48aeef817defe7f2f121448a9ac3ba40d0b",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 10,
+      "originalAlignedSha256": "396bed6f05cbe6aa8cff2380345d8330bbf02cd3143f42e201b3adcc1470dc78",
+      "region": null,
+      "outsideBeforeSha256": "8ba6a4663b47a233fe2616dd99f85c6ce140759d06adc7f28ccb2f0ba3c5bf0c",
+      "outsideAfterSha256": "8ba6a4663b47a233fe2616dd99f85c6ce140759d06adc7f28ccb2f0ba3c5bf0c",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 11,
+      "originalAlignedSha256": "3c13267b43159d247cc45a948ed9748d546be4c6db1ae17b9603eb97fd16873a",
+      "region": null,
+      "outsideBeforeSha256": "2bbac40a23702c84b39c27d21a5a7cd5c23622f982b3027355399bb9e0bb81b6",
+      "outsideAfterSha256": "2bbac40a23702c84b39c27d21a5a7cd5c23622f982b3027355399bb9e0bb81b6",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 12,
+      "originalAlignedSha256": "d3be13b1f421128b12b55bff67927d33ae558ef83a2a3a23d864004ee3303b7a",
+      "region": null,
+      "outsideBeforeSha256": "db8635c7bbd65ecafb2b700611f1404c6b6c2b381f029e1d5773ff5c796b6838",
+      "outsideAfterSha256": "db8635c7bbd65ecafb2b700611f1404c6b6c2b381f029e1d5773ff5c796b6838",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 13,
+      "originalAlignedSha256": "ba927d5ee9ae9c19fb014272e20ecd2a04f2c6db2b54c068aac401ee42cdd750",
+      "region": null,
+      "outsideBeforeSha256": "c88eff2c2d5f8302439678b2ee6bbd22adfdc20d6c7ce05da32e46aeb6f65760",
+      "outsideAfterSha256": "c88eff2c2d5f8302439678b2ee6bbd22adfdc20d6c7ce05da32e46aeb6f65760",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 14,
+      "originalAlignedSha256": "3b77290fcf4e7ca4db133c60afb166cb1d72a091d5a66ba4d5e9261d3fe7cba1",
+      "region": {
+        "left": 125,
+        "top": 20,
+        "right": 190,
+        "bottom": 87
+      },
+      "outsideBeforeSha256": "e839a0ef1c2701474ebc6f6802b78dee6b4b7120303b339505da37281e795c3f",
+      "outsideAfterSha256": "e839a0ef1c2701474ebc6f6802b78dee6b4b7120303b339505da37281e795c3f",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 2983,
+      "cellUnchanged": false,
+      "flightUnchanged": false
+    },
+    {
+      "cell": 15,
+      "originalAlignedSha256": "dd1f5eebc9cba8cc8a71f4047b63360a2bd06e110d21cf653cb1ec1f5e1d2296",
+      "region": null,
+      "outsideBeforeSha256": "fb9f0c1790541629b52fe29f0248c88e17460ce608ee176f8a6d01d0ea6dac20",
+      "outsideAfterSha256": "fb9f0c1790541629b52fe29f0248c88e17460ce608ee176f8a6d01d0ea6dac20",
+      "outsideByteIdentical": true,
+      "changedPixelsInside": 0,
+      "cellUnchanged": true,
+      "flightUnchanged": true
+    }
+  ]
+}

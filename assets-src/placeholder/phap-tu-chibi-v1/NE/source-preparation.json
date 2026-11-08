@@ -1,0 +1,5477 @@
+{
+  "method": "public square-cell DPI/key/despill/defringe; original body restored outside recorded AI head masks; green chroma mapped to approved palette without changing alpha",
+  "alphaRepresentation": {
+    "slicedFrames": "straight",
+    "maskAndMatteProcessing": "straight",
+    "pngEncoding": "toPremultiplied exactly once before encodePng"
+  },
+  "noIndividualFrameRescale": true,
+  "masterSha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
+  "records": [
+    {
+      "source": "raw/idle.attempt1.png",
+      "sourceSha256": "78ee0b6229e9fba30701a233fe22708c2055b40364b9bc3761dd7ae6e3058d9e",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/idle.png",
+      "outputSha256": "a854aae7ddd018f4b3d7872f64865d05c151bf00afdf8eb0c2ed39e3849c3531",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 111,
+            "pelvisX": 128.05900120821588
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 111,
+            "pelvisX": 128.05900120821588
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "13b2ad2f4a72d7c63f480a2742c7d89cf66446c31109f62ec63470a10016d34d"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 111,
+            "pelvisX": 128.08318372232196
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 111,
+            "pelvisX": 128.08318372232196
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "d0a490a850a8644b75c5518c9653da5bf1159ab0c252f25379f2f4390369a12f"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 180,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 114,
+            "pelvisX": 129.46738718240425
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 180,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 114,
+            "pelvisX": 129.46738718240425
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "76a4e6f07a4d524709eab598185bd4f031052c1885693391fdc025a1ebb6e130"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 181,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 115,
+            "pelvisX": 129.76171654432525
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 181,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 115,
+            "pelvisX": 129.76171654432525
+          },
+          "greenSpillPixelsRecoloured": 2,
+          "matteAlphaSha256": "9d9d132b70fa2eac9b99d34eab82b29debbbda4a637d9db3a9bc2b8ad299d347"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.18393831107767
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.18393831107767
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "869cfb68e79b120ba197df18be920447c35c5e9f55d621cc493f660046ee9dc7"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.0533233195644
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.0533233195644
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "e745c80cd2152e7a05c24a097b09baaff6ce6a70510b4fe35274a742ca7b76a4"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 180,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 114,
+            "pelvisX": 129.91081487044687
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 180,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 114,
+            "pelvisX": 129.91081487044687
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "5f89944f77f0290ada207b67e9a8dacc7ec6924780bbd25aa6b02fd820e0729e"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.16905120481928
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 181,
+            "top": 11,
+            "bottom": 238,
+            "height": 227,
+            "width": 115,
+            "pelvisX": 130.16905120481928
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "6443f697fc44cd9d9532cf63b340674597a43c073f6e2d4af98ab1737e387115"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 180,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 114,
+            "pelvisX": 129.5669276303227
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 180,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 114,
+            "pelvisX": 129.5669276303227
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "b3522c345e5538ae8a4e91b6fbb5c696f20976cbe8c31c2611e2631f441de2e6"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 178,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 112,
+            "pelvisX": 128.36622807017545
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 178,
+            "top": 12,
+            "bottom": 238,
+            "height": 226,
+            "width": 112,
+            "pelvisX": 128.36622807017545
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "0e83c0010535fbdba377dd01c4a4db844ddc698c39a6127a5693945972a5d189"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.92746944500101
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.92746944500101
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "c7bc43ef82bff3b2056371194b07dd98a85b4016c6227df243a34747b122bfda"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.97334669338677
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.97334669338677
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "adaf32cb45ec27db370156ced1fe67d63be098f83164711c21c2b5b1a14e7111"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.74211689094196
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.74211689094196
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "abcd704f8c94b44a9bdb5228c92c4bcb289fa34e6c0d384aa6c04bd91f03cd76"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.41031793641272
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.41031793641272
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "f355535d7564a2d2e60bad27ee5c7ffd6e908e674e9472e937657ee71c50a532"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.57558723147962
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.57558723147962
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "ba3930c046a77c3881e3e15197da9d4786906ade9f623c0613abaaa2891a6b78"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.67007416315894
+          },
+          "afterRepair": {
+            "left": 66,
+            "right": 177,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 111,
+            "pelvisX": 127.67007416315894
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "5ae7c9029240dd285cbaaeb762702b5a7263815cc56cd0b0bfb5094d044f7f9a"
+        }
+      ]
+    },
+    {
+      "source": "raw/meditate.attempt1.png",
+      "sourceSha256": "80bc86fdd3a9a7ee93c0fc292cddf285885c7b8838eef8e17e42ed9fec3d9d7f",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/meditate.png",
+      "outputSha256": "d733de8e5b8a16d1d01d937433fdd1fa0940289ac0805c8aa421173870a82709",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 105,
+            "bottom": 244,
+            "height": 139,
+            "width": 140,
+            "pelvisX": 116.5160128102482
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 105,
+            "bottom": 244,
+            "height": 139,
+            "width": 140,
+            "pelvisX": 116.5160128102482
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "65c2461de9645fff6106c94085d86e5347cd900bdee9f8d549aae5c8429d978d"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 116.91546391752577
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 116.91546391752577
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "e540f8c244c9f4842a91ac2182c2b5c7aef83ebf9c8d86d7cf3138c5592dda37"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 116.0531045751634
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 116.0531045751634
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "047114dc9f43959f50ac013eae8e1a54ca0e9467c9cb4ffd3a7735c5124e377d"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 196,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 115.7641317608784
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 196,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 115.7641317608784
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "ee54769d93a5926e941464bdb9586c0982017a2eabb7b440cd5ea4d3e92fc85d"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 115.85113268608414
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 115.85113268608414
+          },
+          "greenSpillPixelsRecoloured": 16,
+          "matteAlphaSha256": "682f9f6ba9e6fd457a426022f81940dc8f9d24ea97e55cb690cb838103c91fb4"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 115.79610863396839
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 115.79610863396839
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "e20e97afc4728857c061d220bd83b03280e91d51026bfef46782bf3b3583edbc"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 115.64355231143553
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 197,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 144,
+            "pelvisX": 115.64355231143553
+          },
+          "greenSpillPixelsRecoloured": 19,
+          "matteAlphaSha256": "ec419934a39e088115b0dcc87a8411bcf433fb30e279c28a38deb8e9f8ae8cf8"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 194,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 115.66423061307349
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 194,
+            "top": 105,
+            "bottom": 243,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 115.66423061307349
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "c4d205ca78f57e2e5c290cdba72a40ccf3877bf8f9ae7a6290304ee65a65f5ce"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 116.42009884678748
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 116.42009884678748
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "40e345aafeaae8b203942dc501840b849e7cd351a0427f9cc071af97e257e85b"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 116.52216748768473
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 116.52216748768473
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "8b93a9e628fff94707c49479cbcdca9c77f45e1c1698525ee3211754a710a30f"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 116.33692052980132
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 116.33692052980132
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "03c1203fa566a12025a74f5189a034e46c99884fc47bc114ba2abd14f3282a81"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 116.2328823288233
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 106,
+            "bottom": 244,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 116.2328823288233
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "c68e943f64adec9e55dcc54a65b2e61276114b038c6f270a9091ee6d906bc50c"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 115.96911824461601
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 141,
+            "pelvisX": 115.96911824461601
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "9019a5b547a1c3cd37ac7b04adbde16fd4c952ffc64ae00706568f0f62c613aa"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 115.97768762677485
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 115.97768762677485
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "e72e1be87d3d91d5151c0d956f19d62eea24022d22c117aaa28db6f16f2bbad1"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 115.9853539462978
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 245,
+            "height": 138,
+            "width": 140,
+            "pelvisX": 115.9853539462978
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "3062fb8b8395a480aa245cd47aed45db105036f42215522509b8d5c541841507"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 244,
+            "height": 137,
+            "width": 140,
+            "pelvisX": 116.471493965876
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 107,
+            "bottom": 244,
+            "height": 137,
+            "width": 140,
+            "pelvisX": 116.471493965876
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "c7ac05be22e272eac3d58ab5d92595ce90ded9f7a1bcb1bd9addccc5f059028b"
+        }
+      ]
+    },
+    {
+      "source": "raw/walk.attempt1.png",
+      "sourceSha256": "c0b4d78c36fd852ee5a357bd2c3dba2671262b1256a136cbd661dabbcc26f2bc",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/walk.png",
+      "outputSha256": "7933be33c3319cf45158246ec7adf98d051aec1bc70d4413cc8cc83b168e22f1",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 120,
+            "pelvisX": 127.62549129702414
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 120,
+            "pelvisX": 127.62549129702414
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "2b6a913697e5487ce6a22e6e05762edddcc735b1952ef1bdc299907f03fc630f"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 233,
+            "height": 224,
+            "width": 120,
+            "pelvisX": 126.62618776130749
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 233,
+            "height": 224,
+            "width": 120,
+            "pelvisX": 126.62618776130749
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "e30882da3622cba9d255fa01bc0fc785140a93204c9ed9392e3ae19db7a8c55a"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 231,
+            "height": 222,
+            "width": 119,
+            "pelvisX": 125.59157335357753
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 231,
+            "height": 222,
+            "width": 119,
+            "pelvisX": 125.59157335357753
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "c9eb634198c436a713b7766deb17ef6f0113c17441f8a1cf0168f87d2937c4bc"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 120,
+            "pelvisX": 125.9339483394834
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 120,
+            "pelvisX": 125.9339483394834
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "2ef66c88a4756eb79d44e9e6dece1500e5ef7b558db410f0221273a4bf2b1bd3"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 127.56185198426886
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 127.56185198426886
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "9fbf9b10080acb58c671996950fcf70b7be61ba8a5ef06887cbcecc02988f457"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 127.4627849002849
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 127.4627849002849
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "d3891662c65c08f6e629758a33dd44232bb879e7d59072e983627d0737730db9"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 127.45324794144557
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 232,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 127.45324794144557
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "f9c3ecd5220040074992a2d457c4492a9891bb324ecac2fa6cd6041b7f2654c7"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 125,
+            "pelvisX": 128.80310880829015
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 125,
+            "pelvisX": 128.80310880829015
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "9aecb517507e7222041da8aecb0028b073e0fb7096fbe09051110fc7b644cc46"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 125,
+            "pelvisX": 129.51939383005592
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 185,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 125,
+            "pelvisX": 129.51939383005592
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "00033ce0038f90caa4d97c25fa667fab567bb7939e358169e108626ce1072b05"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 233,
+            "height": 224,
+            "width": 123,
+            "pelvisX": 127.8388244103332
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 183,
+            "top": 9,
+            "bottom": 233,
+            "height": 224,
+            "width": 123,
+            "pelvisX": 127.8388244103332
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "d46f1c91b76e9ad0fd7a41148c7bf7ec39e261bbdf642f8aa79bad800aecab12"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 235,
+            "height": 226,
+            "width": 119,
+            "pelvisX": 126.42926465098917
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 235,
+            "height": 226,
+            "width": 119,
+            "pelvisX": 126.42926465098917
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "0dbe42b6dcee37b274bb5d6b224dcbc7605eb2b43a52c211de37386afbdfa04a"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 234,
+            "height": 225,
+            "width": 119,
+            "pelvisX": 126.2202369757382
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 234,
+            "height": 225,
+            "width": 119,
+            "pelvisX": 126.2202369757382
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "5ad4eadb0da91c37d0cdd45c864aa7c67f931a70a3e712e28bdf64f149b021df"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 119,
+            "pelvisX": 127.35104610257359
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 119,
+            "pelvisX": 127.35104610257359
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "af3b9c48a66a0a8095c7f42386d210c421abfe1448e5d1fab7ebdbab75a7322f"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 120,
+            "pelvisX": 127.50532696546657
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 180,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 120,
+            "pelvisX": 127.50532696546657
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "1b1f44a230aed9f424e914c7b306a520f092bfdb8b7ef7fe4c198b0e02e26bfa"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 181,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 121,
+            "pelvisX": 126.91614333210195
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 181,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 121,
+            "pelvisX": 126.91614333210195
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "71664053e06dc8c188da0aa5c0d5e82559758d646085eaa37eb807fda94c50f1"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 119,
+            "pelvisX": 126.98199887492969
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 9,
+            "bottom": 239,
+            "height": 230,
+            "width": 119,
+            "pelvisX": 126.98199887492969
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "a49f958a592629b07e2709907f57b0d35944ac9e135d97d96a0f83f3bc5c1094"
+        }
+      ]
+    },
+    {
+      "source": "raw/run.attempt1.png",
+      "sourceSha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7",
+      "headEditSources": [
+        {
+          "file": "raw/run.attempt2.png",
+          "sha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac"
+        },
+        {
+          "file": "raw/run.attempt9.png",
+          "sha256": "da62b23cf7175ad9b7aa0180cea45391e0d4124296abcd8d2b54cb35b26dcc1b"
+        },
+        {
+          "file": "raw/run.attempt7.png",
+          "sha256": "24efd06dbc9c36ade0b7b3c02a840261f6ba57bc81f4fe2a3c071c97e34f476e"
+        },
+        {
+          "file": "raw/run.attempt6.png",
+          "sha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc"
+        }
+      ],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/run.png",
+      "outputSha256": "06b41e1c64c1799814a4278db47151764ee80aba571320dde2a0167a5f0f085d",
+      "cells": [
+        {
+          "cell": 0,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 23,
+            "bottom": 90
+          },
+          "repairedPixels": 5064,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 186,
+            "top": 15,
+            "bottom": 241,
+            "height": 226,
+            "width": 130,
+            "pelvisX": 122.01696297504485
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 186,
+            "top": 15,
+            "bottom": 241,
+            "height": 226,
+            "width": 130,
+            "pelvisX": 122.01696297504485
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "f2e55a33d605e306a503ba5adba0fdf0b6c2216dc5936caf784eb75debfe6392"
+        },
+        {
+          "cell": 1,
+          "aiHeadEdit": "raw/run.attempt9.png",
+          "aiHeadEditSha256": "da62b23cf7175ad9b7aa0180cea45391e0d4124296abcd8d2b54cb35b26dcc1b",
+          "maskPolicy": "whole-cap-v2",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 19,
+            "bottom": 80
+          },
+          "repairedPixels": 4858,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 187,
+            "top": 20,
+            "bottom": 237,
+            "height": 217,
+            "width": 134,
+            "pelvisX": 119.64600222540136
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 187,
+            "top": 22,
+            "bottom": 237,
+            "height": 215,
+            "width": 134,
+            "pelvisX": 119.92836351875809
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "ba21c709d94c1abbcf9f7ab8968caa7dd0f50b8becf6a038558ec7229e39ff6a"
+        },
+        {
+          "cell": 2,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 23,
+            "bottom": 89
+          },
+          "repairedPixels": 4955,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 52,
+            "right": 197,
+            "top": 15,
+            "bottom": 239,
+            "height": 224,
+            "width": 145,
+            "pelvisX": 122.25556033864255
+          },
+          "afterRepair": {
+            "left": 52,
+            "right": 197,
+            "top": 15,
+            "bottom": 239,
+            "height": 224,
+            "width": 145,
+            "pelvisX": 122.25556033864255
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "8ac926c920785006023ab1b58e3a06b354315cd2912ffd31c8f8bbdf67de2182"
+        },
+        {
+          "cell": 3,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 21,
+            "bottom": 84
+          },
+          "repairedPixels": 4699,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 46,
+            "right": 192,
+            "top": 13,
+            "bottom": 230,
+            "height": 217,
+            "width": 146,
+            "pelvisX": 123.23154266015513
+          },
+          "afterRepair": {
+            "left": 46,
+            "right": 192,
+            "top": 13,
+            "bottom": 230,
+            "height": 217,
+            "width": 146,
+            "pelvisX": 123.23154266015513
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "97b865401a3f1027252979dfd150a04e458a08b9dddd9db0a8cd85b3e4a25fa7"
+        },
+        {
+          "cell": 4,
+          "aiHeadEdit": "raw/run.attempt7.png",
+          "aiHeadEditSha256": "24efd06dbc9c36ade0b7b3c02a840261f6ba57bc81f4fe2a3c071c97e34f476e",
+          "maskPolicy": "cap-width-v3",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 19,
+            "bottom": 71
+          },
+          "repairedPixels": 3850,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 43,
+            "right": 197,
+            "top": 11,
+            "bottom": 204,
+            "height": 193,
+            "width": 154,
+            "pelvisX": 124.7706508135169
+          },
+          "afterRepair": {
+            "left": 43,
+            "right": 197,
+            "top": 11,
+            "bottom": 204,
+            "height": 193,
+            "width": 154,
+            "pelvisX": 124.7706508135169
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "0eb68160653dd417e79494b590b42ddb88cd0a0d9673930628902f3c4c68a9ad"
+        },
+        {
+          "cell": 5,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "cap-width-v3",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 18,
+            "bottom": 70
+          },
+          "repairedPixels": 3847,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 40,
+            "right": 194,
+            "top": 10,
+            "bottom": 194,
+            "height": 184,
+            "width": 154,
+            "pelvisX": 124.24509639564124
+          },
+          "afterRepair": {
+            "left": 40,
+            "right": 194,
+            "top": 10,
+            "bottom": 194,
+            "height": 184,
+            "width": 154,
+            "pelvisX": 124.24509639564124
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "b790696501a9acbb6156abd821c450d23f50221cb4bd4a77e45fcb7b256787d1"
+        },
+        {
+          "cell": 6,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "whole-cap-v2",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 12,
+            "bottom": 73
+          },
+          "repairedPixels": 4801,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 39,
+            "right": 192,
+            "top": 13,
+            "bottom": 222,
+            "height": 209,
+            "width": 153,
+            "pelvisX": 123.31089173005341
+          },
+          "afterRepair": {
+            "left": 39,
+            "right": 192,
+            "top": 14,
+            "bottom": 222,
+            "height": 208,
+            "width": 153,
+            "pelvisX": 123.31089173005341
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "c44a52f60107edd1fea7d39551de90016a46e1afadd86f93c34ead27fad0432f"
+        },
+        {
+          "cell": 7,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "cap-width-v3",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 26,
+            "bottom": 78
+          },
+          "repairedPixels": 3786,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 40,
+            "right": 196,
+            "top": 18,
+            "bottom": 234,
+            "height": 216,
+            "width": 156,
+            "pelvisX": 123.17065777508336
+          },
+          "afterRepair": {
+            "left": 40,
+            "right": 196,
+            "top": 18,
+            "bottom": 234,
+            "height": 216,
+            "width": 156,
+            "pelvisX": 123.17065777508336
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "bb2f16f4d2381d45fe90699e1bd6a2c093251e0e415211999b8c032acc8c8beb"
+        },
+        {
+          "cell": 8,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 25,
+            "bottom": 91
+          },
+          "repairedPixels": 4934,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 57,
+            "right": 187,
+            "top": 17,
+            "bottom": 240,
+            "height": 223,
+            "width": 130,
+            "pelvisX": 123.13375165125495
+          },
+          "afterRepair": {
+            "left": 57,
+            "right": 187,
+            "top": 17,
+            "bottom": 240,
+            "height": 223,
+            "width": 130,
+            "pelvisX": 123.13375165125495
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "20d248ccd16956243a7bfaad4b7a54f21afec1d4c1c348c28c1a0da76122c703"
+        },
+        {
+          "cell": 9,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "cap-width-v3",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 32,
+            "bottom": 84
+          },
+          "repairedPixels": 3715,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 52,
+            "right": 187,
+            "top": 24,
+            "bottom": 235,
+            "height": 211,
+            "width": 135,
+            "pelvisX": 120.17737747484583
+          },
+          "afterRepair": {
+            "left": 52,
+            "right": 187,
+            "top": 24,
+            "bottom": 235,
+            "height": 211,
+            "width": 135,
+            "pelvisX": 120.17737747484583
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "be33ea3d922dd51153a44c30adb5e12d8fbe6acc433b7450517f347a59201e5d"
+        },
+        {
+          "cell": 10,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 27,
+            "bottom": 92
+          },
+          "repairedPixels": 4912,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 45,
+            "right": 197,
+            "top": 19,
+            "bottom": 241,
+            "height": 222,
+            "width": 152,
+            "pelvisX": 121.68170066072967
+          },
+          "afterRepair": {
+            "left": 45,
+            "right": 197,
+            "top": 19,
+            "bottom": 241,
+            "height": 222,
+            "width": 152,
+            "pelvisX": 121.68170066072967
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "c1ec8c536b3c7096fb1314ca269a54964ac1d673724c691ee0da0988d4493371"
+        },
+        {
+          "cell": 11,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 24,
+            "bottom": 86
+          },
+          "repairedPixels": 4622,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 42,
+            "right": 192,
+            "top": 16,
+            "bottom": 229,
+            "height": 213,
+            "width": 150,
+            "pelvisX": 122.91847498493068
+          },
+          "afterRepair": {
+            "left": 42,
+            "right": 192,
+            "top": 16,
+            "bottom": 229,
+            "height": 213,
+            "width": 150,
+            "pelvisX": 122.91847498493068
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "6d9a1d4dabd359d090c753055d3f44d6ad94ce409448648a9d494693b5d9f09f"
+        },
+        {
+          "cell": 12,
+          "aiHeadEdit": "raw/run.attempt7.png",
+          "aiHeadEditSha256": "24efd06dbc9c36ade0b7b3c02a840261f6ba57bc81f4fe2a3c071c97e34f476e",
+          "maskPolicy": "whole-cap-v2",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 13,
+            "bottom": 74
+          },
+          "repairedPixels": 4777,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 40,
+            "right": 195,
+            "top": 14,
+            "bottom": 204,
+            "height": 190,
+            "width": 155,
+            "pelvisX": 123.72269583400355
+          },
+          "afterRepair": {
+            "left": 40,
+            "right": 195,
+            "top": 16,
+            "bottom": 204,
+            "height": 188,
+            "width": 155,
+            "pelvisX": 123.83389721282423
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "2373eccb263669a51014e3c05aef836a687a9e7439a4180f535b21dbb46ce7e1"
+        },
+        {
+          "cell": 13,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "cap-width-v3",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 18,
+            "bottom": 70
+          },
+          "repairedPixels": 3850,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 40,
+            "right": 193,
+            "top": 10,
+            "bottom": 201,
+            "height": 191,
+            "width": 153,
+            "pelvisX": 122.97086588541667
+          },
+          "afterRepair": {
+            "left": 40,
+            "right": 193,
+            "top": 10,
+            "bottom": 201,
+            "height": 191,
+            "width": 153,
+            "pelvisX": 122.97086588541667
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "c1d93cc0099a1858b22b53396463162ff631be05923c7c318aa007ee642aa584"
+        },
+        {
+          "cell": 14,
+          "aiHeadEdit": "raw/run.attempt2.png",
+          "aiHeadEditSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+          "maskPolicy": "legacy-core-v1",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 23,
+            "bottom": 89
+          },
+          "repairedPixels": 5034,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 39,
+            "right": 192,
+            "top": 15,
+            "bottom": 238,
+            "height": 223,
+            "width": 153,
+            "pelvisX": 122.62897809051655
+          },
+          "afterRepair": {
+            "left": 39,
+            "right": 192,
+            "top": 15,
+            "bottom": 238,
+            "height": 223,
+            "width": 153,
+            "pelvisX": 122.62897809051655
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "79b30959b6d6e47a5898db81009c20a60aa2fa4360cac620a2c47eab3662f20b"
+        },
+        {
+          "cell": 15,
+          "aiHeadEdit": "raw/run.attempt6.png",
+          "aiHeadEditSha256": "73d8f45decab57a63704961f836abff14b518d1edf79cdd49256c9ec2f2ad6cc",
+          "maskPolicy": "whole-cap-v2",
+          "mask": {
+            "left": 97,
+            "right": 190,
+            "top": 18,
+            "bottom": 79
+          },
+          "repairedPixels": 4792,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 46,
+            "right": 193,
+            "top": 19,
+            "bottom": 238,
+            "height": 219,
+            "width": 147,
+            "pelvisX": 122.11792028768355
+          },
+          "afterRepair": {
+            "left": 46,
+            "right": 193,
+            "top": 21,
+            "bottom": 238,
+            "height": 217,
+            "width": 147,
+            "pelvisX": 122.14131413141314
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "f1cc0b4a381f70f0038b08552048e537ab042d8db54bf4c58ff711089b741c59"
+        }
+      ]
+    },
+    {
+      "source": "raw/hit-dash.attempt1.png",
+      "sourceSha256": "123421a42dccead60e26339583581f78c5e4312b5955df2e46c3e9be7a944a8f",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/hit-dash.png",
+      "outputSha256": "88be6cb5f446edb8da81fe3cc04ad5e6542745a7a4e8151df595ae0fcb7d509e",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 125,
+            "pelvisX": 126.49475041444097
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 125,
+            "pelvisX": 126.49475041444097
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "c6a1651d4cea73c3559d842a30893d5507510dd4e65c9ea27137208e71fbe1b7"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 203,
+            "top": 12,
+            "bottom": 234,
+            "height": 222,
+            "width": 154,
+            "pelvisX": 129.09969558599695
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 203,
+            "top": 12,
+            "bottom": 234,
+            "height": 222,
+            "width": 154,
+            "pelvisX": 129.09969558599695
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "7b3c2f895b856dab4b25ad574fde12511cc39003852ae212117a1dc49bce5694"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 48,
+            "right": 199,
+            "top": 26,
+            "bottom": 233,
+            "height": 207,
+            "width": 151,
+            "pelvisX": 120.40391088315435
+          },
+          "afterRepair": {
+            "left": 48,
+            "right": 199,
+            "top": 26,
+            "bottom": 233,
+            "height": 207,
+            "width": 151,
+            "pelvisX": 120.40391088315435
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "80b92eceb05e53df212c9a9ec96d7cc3fd20c9514675f22e9d0780fa8a8e7301"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 35,
+            "right": 196,
+            "top": 41,
+            "bottom": 232,
+            "height": 191,
+            "width": 161,
+            "pelvisX": 112.55222319093286
+          },
+          "afterRepair": {
+            "left": 35,
+            "right": 196,
+            "top": 41,
+            "bottom": 232,
+            "height": 191,
+            "width": 161,
+            "pelvisX": 112.55222319093286
+          },
+          "greenSpillPixelsRecoloured": 21,
+          "matteAlphaSha256": "568d7b1aed32dd353a8c6e449489468a8272414571fa2fb79365ca953f1f413a"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 45,
+            "right": 195,
+            "top": 23,
+            "bottom": 230,
+            "height": 207,
+            "width": 150,
+            "pelvisX": 117.37254259501965
+          },
+          "afterRepair": {
+            "left": 45,
+            "right": 195,
+            "top": 23,
+            "bottom": 230,
+            "height": 207,
+            "width": 150,
+            "pelvisX": 117.37254259501965
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "386e1b6e145b125ba268dc0cde324b8467b246a1e2673b3851971664e2a1c7c9"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 126,
+            "pelvisX": 125.64596970263699
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 126,
+            "pelvisX": 125.64596970263699
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "4f7208dea6793c0c83569bf97d2e67cd6aff364c72ab9cdd757c2cd1ec1bdc48"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 125,
+            "pelvisX": 126.13030416823132
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 125,
+            "pelvisX": 126.13030416823132
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "96c3ed91ed1279161a2e49d7673b382634101ea09e5d42616285a8e46e3fa723"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 59,
+            "right": 189,
+            "top": 23,
+            "bottom": 229,
+            "height": 206,
+            "width": 130,
+            "pelvisX": 122.39825311280431
+          },
+          "afterRepair": {
+            "left": 59,
+            "right": 189,
+            "top": 23,
+            "bottom": 229,
+            "height": 206,
+            "width": 130,
+            "pelvisX": 122.39825311280431
+          },
+          "greenSpillPixelsRecoloured": 16,
+          "matteAlphaSha256": "09454119c150d4a28b903a15655fa8f52d64742ff09a49d6928ac383300a77d6"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 59,
+            "right": 192,
+            "top": 18,
+            "bottom": 238,
+            "height": 220,
+            "width": 133,
+            "pelvisX": 124.74582560296847
+          },
+          "afterRepair": {
+            "left": 59,
+            "right": 192,
+            "top": 18,
+            "bottom": 238,
+            "height": 220,
+            "width": 133,
+            "pelvisX": 124.74582560296847
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "9776ab33e54441a89e7175c9ec4be43bf06535c8893d003b2497f14af58d08ac"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 207,
+            "top": 13,
+            "bottom": 215,
+            "height": 202,
+            "width": 154,
+            "pelvisX": 130.2325581395349
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 207,
+            "top": 13,
+            "bottom": 215,
+            "height": 202,
+            "width": 154,
+            "pelvisX": 130.2325581395349
+          },
+          "greenSpillPixelsRecoloured": 18,
+          "matteAlphaSha256": "cc5e1c293ee2d5d5efe916b2fc2199124cf0fb8e9460bc8fa14e0e4ae57f6603"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 215,
+            "top": 7,
+            "bottom": 189,
+            "height": 182,
+            "width": 166,
+            "pelvisX": 133.84296675191817
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 215,
+            "top": 7,
+            "bottom": 189,
+            "height": 182,
+            "width": 166,
+            "pelvisX": 133.84296675191817
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "4a8fd6f71b51fc15f48f18faea1c04a53ef086da0f329a44ac4648dd8896bdad"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 50,
+            "right": 216,
+            "top": 7,
+            "bottom": 205,
+            "height": 198,
+            "width": 166,
+            "pelvisX": 137.0501950144141
+          },
+          "afterRepair": {
+            "left": 50,
+            "right": 216,
+            "top": 7,
+            "bottom": 205,
+            "height": 198,
+            "width": 166,
+            "pelvisX": 137.0501950144141
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "17e663613a9691e717efb5fd504656076b885ce3be21643c8929534f8a08b8eb"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 47,
+            "right": 210,
+            "top": 15,
+            "bottom": 231,
+            "height": 216,
+            "width": 163,
+            "pelvisX": 133.02531441470492
+          },
+          "afterRepair": {
+            "left": 47,
+            "right": 210,
+            "top": 15,
+            "bottom": 231,
+            "height": 216,
+            "width": 163,
+            "pelvisX": 133.02531441470492
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "88d8e9c1ddc922f74592cae8de7c1301f1b25d374be9131a39319cae73bf69df"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 51,
+            "right": 203,
+            "top": 31,
+            "bottom": 221,
+            "height": 190,
+            "width": 152,
+            "pelvisX": 125.47556189796646
+          },
+          "afterRepair": {
+            "left": 51,
+            "right": 203,
+            "top": 31,
+            "bottom": 221,
+            "height": 190,
+            "width": 152,
+            "pelvisX": 125.47556189796646
+          },
+          "greenSpillPixelsRecoloured": 18,
+          "matteAlphaSha256": "e3016b83975b90ff8dc3be7cece947ace783892edaade5d9e62de6d1ed474148"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 59,
+            "right": 190,
+            "top": 19,
+            "bottom": 229,
+            "height": 210,
+            "width": 131,
+            "pelvisX": 122.63112191733241
+          },
+          "afterRepair": {
+            "left": 59,
+            "right": 190,
+            "top": 19,
+            "bottom": 229,
+            "height": 210,
+            "width": 131,
+            "pelvisX": 122.63112191733241
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "0ea8e78d59941e413b23b406c84d59f055587133a75533de075d688456b588bf"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 125,
+            "pelvisX": 126.6380827560382
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 180,
+            "top": 10,
+            "bottom": 234,
+            "height": 224,
+            "width": 125,
+            "pelvisX": 126.6380827560382
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "cdd204c9cd117466cbb1ea334ef9231bee59464e67decaed23722e79407a0692"
+        }
+      ]
+    },
+    {
+      "source": "raw/sword_fly.attempt1.png",
+      "sourceSha256": "02a55450096346bf81f29d3ceb2362489494697de8ca4661b265a242de69697d",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1448, 1086],
+        "normalized": [1024, 768],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889
+      },
+      "output": "prepared/sword_fly.png",
+      "outputSha256": "59563ee8baa0e557bb5663e1fe9f360ef5107b950cf54614d5a2d9a557c276c4",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 69,
+            "right": 175,
+            "top": 14,
+            "bottom": 213,
+            "height": 199,
+            "width": 106,
+            "pelvisX": 126.73083159601575
+          },
+          "afterRepair": {
+            "left": 69,
+            "right": 175,
+            "top": 14,
+            "bottom": 213,
+            "height": 199,
+            "width": 106,
+            "pelvisX": 126.73083159601575
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "b118facfef98459eb748889a5e78e8f661cad9f38846a3089a00dc3968390827"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 69,
+            "right": 176,
+            "top": 14,
+            "bottom": 210,
+            "height": 196,
+            "width": 107,
+            "pelvisX": 125.22956326987682
+          },
+          "afterRepair": {
+            "left": 69,
+            "right": 176,
+            "top": 14,
+            "bottom": 210,
+            "height": 196,
+            "width": 107,
+            "pelvisX": 125.22956326987682
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "b6f4c78f8489a2ea7867834824cabfe69cc6c8b4a55175c18e0d9a4964e660b5"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 67,
+            "right": 175,
+            "top": 14,
+            "bottom": 206,
+            "height": 192,
+            "width": 108,
+            "pelvisX": 122.78548282566429
+          },
+          "afterRepair": {
+            "left": 67,
+            "right": 175,
+            "top": 14,
+            "bottom": 206,
+            "height": 192,
+            "width": 108,
+            "pelvisX": 122.78548282566429
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "ac8da27119aac8ebcc27c3305a1a8c27f15a58a1d21b932e1e911870266fffa8"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 175,
+            "top": 13,
+            "bottom": 200,
+            "height": 187,
+            "width": 112,
+            "pelvisX": 121.14041540458676
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 175,
+            "top": 13,
+            "bottom": 200,
+            "height": 187,
+            "width": 112,
+            "pelvisX": 121.14041540458676
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "5485355cd26c1403593e781a3091db8512b35424d82a70eebfde66882532658e"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 57,
+            "right": 177,
+            "top": 12,
+            "bottom": 197,
+            "height": 185,
+            "width": 120,
+            "pelvisX": 121.34153585065762
+          },
+          "afterRepair": {
+            "left": 57,
+            "right": 177,
+            "top": 12,
+            "bottom": 197,
+            "height": 185,
+            "width": 120,
+            "pelvisX": 121.34153585065762
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "2e2ec0b1ec2850ed62f3afa25a21093133a58cefc6b6d95c3fa710fd33d244e2"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 50,
+            "right": 179,
+            "top": 11,
+            "bottom": 193,
+            "height": 182,
+            "width": 129,
+            "pelvisX": 121.51584769198043
+          },
+          "afterRepair": {
+            "left": 50,
+            "right": 179,
+            "top": 11,
+            "bottom": 193,
+            "height": 182,
+            "width": 129,
+            "pelvisX": 121.51584769198043
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "abc0f37aa27bb0cba96e42680c29e45ffa860f5e945fbd0d086d88ed56c1c09c"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 44,
+            "right": 180,
+            "top": 10,
+            "bottom": 188,
+            "height": 178,
+            "width": 136,
+            "pelvisX": 120.18200663349917
+          },
+          "afterRepair": {
+            "left": 44,
+            "right": 180,
+            "top": 10,
+            "bottom": 188,
+            "height": 178,
+            "width": 136,
+            "pelvisX": 120.18200663349917
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "35eb2079cf1002812bd81c57c6c71aeddd434898ae348534e43f10d8abf684f9"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 44,
+            "right": 180,
+            "top": 10,
+            "bottom": 185,
+            "height": 175,
+            "width": 136,
+            "pelvisX": 118.24327628361858
+          },
+          "afterRepair": {
+            "left": 44,
+            "right": 180,
+            "top": 10,
+            "bottom": 185,
+            "height": 175,
+            "width": 136,
+            "pelvisX": 118.24327628361858
+          },
+          "greenSpillPixelsRecoloured": 16,
+          "matteAlphaSha256": "c022beac62b2dfd6ddddc6b0c51d7f2b1ffd3ffc1629330bbdedfa904715de99"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 48,
+            "right": 181,
+            "top": 10,
+            "bottom": 195,
+            "height": 185,
+            "width": 133,
+            "pelvisX": 120.81378211511651
+          },
+          "afterRepair": {
+            "left": 48,
+            "right": 181,
+            "top": 10,
+            "bottom": 195,
+            "height": 185,
+            "width": 133,
+            "pelvisX": 120.81378211511651
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "042088e9029f69175eacb80e5e3e730cfd9da1873904f9db670675bbcc8c26e5"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 51,
+            "right": 179,
+            "top": 12,
+            "bottom": 199,
+            "height": 187,
+            "width": 128,
+            "pelvisX": 121.06460905349795
+          },
+          "afterRepair": {
+            "left": 51,
+            "right": 179,
+            "top": 12,
+            "bottom": 199,
+            "height": 187,
+            "width": 128,
+            "pelvisX": 121.06460905349795
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "fb2b03219671261d26a2d00b8cb9f691caf94300490f99aea4bc970a0efa2e00"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 179,
+            "top": 13,
+            "bottom": 207,
+            "height": 194,
+            "width": 119,
+            "pelvisX": 122.995904995905
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 179,
+            "top": 13,
+            "bottom": 207,
+            "height": 194,
+            "width": 119,
+            "pelvisX": 122.995904995905
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "33ee536cf2df89b9d4ed22a0d3861ede4b2c52d03e9b21597afe78bdfe476ec2"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 68,
+            "right": 175,
+            "top": 13,
+            "bottom": 213,
+            "height": 200,
+            "width": 107,
+            "pelvisX": 124.65276236964722
+          },
+          "afterRepair": {
+            "left": 68,
+            "right": 175,
+            "top": 13,
+            "bottom": 213,
+            "height": 200,
+            "width": 107,
+            "pelvisX": 124.65276236964722
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "eefd307b6e37f3278547e743f12b68064d9f251b82c45deeba8b6fb7d24433d9"
+        }
+      ]
+    },
+    {
+      "source": "raw/attack.attempt1.png",
+      "sourceSha256": "48e01456d304329df528d5d7b824ef9192f072159289d4aec2a5edeb7ae91468",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/attack.png",
+      "outputSha256": "ccd72401ea490e50fc950a8a722ea689d71651c31bfef95cc55d081bded843ab",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 60,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 120,
+            "pelvisX": 125.81157775255392
+          },
+          "afterRepair": {
+            "left": 60,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 120,
+            "pelvisX": 125.81157775255392
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "6a0c24846c7924e01cc4d5d8b9d0b8f1ebe4b91b7cdaa1ed04b5f148774f12e1"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 187,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 132,
+            "pelvisX": 126.4411869860565
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 187,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 132,
+            "pelvisX": 126.4411869860565
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "f77ce0ead28958efcc2526fe3a52c1e9fbe9a783f3c6f2318b0dc348f941d477"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 40,
+            "right": 193,
+            "top": 12,
+            "bottom": 236,
+            "height": 224,
+            "width": 153,
+            "pelvisX": 119.38337035861632
+          },
+          "afterRepair": {
+            "left": 40,
+            "right": 193,
+            "top": 12,
+            "bottom": 236,
+            "height": 224,
+            "width": 153,
+            "pelvisX": 119.38337035861632
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "f67fabce81711fd64eb11a205d242e37593ec848eb8c529a093ebb4603a25817"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 22,
+            "right": 195,
+            "top": 12,
+            "bottom": 236,
+            "height": 224,
+            "width": 173,
+            "pelvisX": 114.4798859201441
+          },
+          "afterRepair": {
+            "left": 22,
+            "right": 195,
+            "top": 12,
+            "bottom": 236,
+            "height": 224,
+            "width": 173,
+            "pelvisX": 114.4798859201441
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "0a18229404bcd27a4dc663096b67548388c092427d38c70892224f6f5f9d1199"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 198,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 144,
+            "pelvisX": 126.21836228287842
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 198,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 144,
+            "pelvisX": 126.21836228287842
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "af5ab6d52beb8e759e7aab7826b675c91595e80b0522cfcbaa211a675b87481f"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 222,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 167,
+            "pelvisX": 121.77161634832615
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 222,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 167,
+            "pelvisX": 121.77161634832615
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "baef1fac04e2ac5516f9e2d27214d00da11de4ef3c1193920632e07f6d9cc05a"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 226,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 170,
+            "pelvisX": 121.62593230063109
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 226,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 170,
+            "pelvisX": 121.62593230063109
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "af15d025b21e82617fd9d5e2c2429dc550dc6861a9efcb2f6d0699889b325739"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 62,
+            "right": 218,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 156,
+            "pelvisX": 121.68140929535232
+          },
+          "afterRepair": {
+            "left": 62,
+            "right": 218,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 156,
+            "pelvisX": 121.68140929535232
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "bb5062f25b6a7654e7f3880f3bd93ba1750dfa83e4bc1a95cf8f8f950c5db011"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 64,
+            "right": 205,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 141,
+            "pelvisX": 121.56195965417868
+          },
+          "afterRepair": {
+            "left": 64,
+            "right": 205,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 141,
+            "pelvisX": 121.56195965417868
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "aa37d78b08716549ee1b27c348f242cb86ccf03d0e8535abe6ccc441eda7ce49"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 69,
+            "right": 179,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 110,
+            "pelvisX": 119.55179204411185
+          },
+          "afterRepair": {
+            "left": 69,
+            "right": 179,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 110,
+            "pelvisX": 119.55179204411185
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "0f6fec9826bd5cd95bbe623b0be80d97c8ac616d34fbefe65cba49064bc7d039"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 124.51626696411972
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 124.51626696411972
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "9bb37dba9c4e3c6fb016f593157933570cf801dd58db013dfe002e849a749ff7"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 124.79816856662306
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 124.79816856662306
+          },
+          "greenSpillPixelsRecoloured": 2,
+          "matteAlphaSha256": "8d5be6922a89bbefab09cdad9573312bfd421c42cf2f67d3b72d89df10f0d5e5"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 125.31894124272574
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 180,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 124,
+            "pelvisX": 125.31894124272574
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "2b1bb42a6cfdc4e251a03f5fb67065f069dc271b4186df6d403d2d630d0d0939"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 181,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 125.36843093093093
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 181,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 125.36843093093093
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "473e5ecf29de036d6e0057b5e8326de781e76ab848be545e6c4d1f7de1dde7ae"
+        }
+      ]
+    },
+    {
+      "source": "raw/attack_2.attempt1.png",
+      "sourceSha256": "7defbc91b91ed566de422f15b4eb86a65842229b3bdb724c0f51b70697cdbddb",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/attack_2.png",
+      "outputSha256": "1e81d5d024ad9eabca1f58347249be8aef6563f2c8e531e77a54e195824616ba",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 180,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 125,
+            "pelvisX": 123.28959191314115
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 180,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 125,
+            "pelvisX": 123.28959191314115
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "c20c8f13337bd4b3e329a1cc5751d2517edaa6eafbedb58a054be96c935dd5d5"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 190,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 137,
+            "pelvisX": 122.86507936507937
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 190,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 137,
+            "pelvisX": 122.86507936507937
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "78a5d73e91e5f2f59eeb7fe50eec8883e71f68dae77d7f7d5c85d078057b0f88"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 51,
+            "right": 197,
+            "top": 13,
+            "bottom": 227,
+            "height": 214,
+            "width": 146,
+            "pelvisX": 120.213503351316
+          },
+          "afterRepair": {
+            "left": 51,
+            "right": 197,
+            "top": 13,
+            "bottom": 227,
+            "height": 214,
+            "width": 146,
+            "pelvisX": 120.213503351316
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "21a231199124bcf882f02ce899dc83fb2fddfff7a79bbbef49466d17acbcfb0d"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 44,
+            "right": 198,
+            "top": 15,
+            "bottom": 227,
+            "height": 212,
+            "width": 154,
+            "pelvisX": 120.2553767993226
+          },
+          "afterRepair": {
+            "left": 44,
+            "right": 198,
+            "top": 15,
+            "bottom": 227,
+            "height": 212,
+            "width": 154,
+            "pelvisX": 120.2553767993226
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "130476df400a12a41b285a553cbc7f95f7b2a99730eba90303c5277fde955ba9"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 38,
+            "right": 204,
+            "top": 14,
+            "bottom": 227,
+            "height": 213,
+            "width": 166,
+            "pelvisX": 119.16502916794596
+          },
+          "afterRepair": {
+            "left": 38,
+            "right": 204,
+            "top": 14,
+            "bottom": 227,
+            "height": 213,
+            "width": 166,
+            "pelvisX": 119.16502916794596
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "5c566241c2f0e8bd816663a846df236ab88336d857c7719d289721486167719a"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 39,
+            "right": 207,
+            "top": 14,
+            "bottom": 227,
+            "height": 213,
+            "width": 168,
+            "pelvisX": 122.36564726840855
+          },
+          "afterRepair": {
+            "left": 39,
+            "right": 207,
+            "top": 14,
+            "bottom": 227,
+            "height": 213,
+            "width": 168,
+            "pelvisX": 122.36564726840855
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "8eda1eb577020ccc7318c405252b2ba37ae8342a63dcdab233e5fe7855e66bea"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 209,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 176,
+            "pelvisX": 135.25518253531462
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 209,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 176,
+            "pelvisX": 135.25518253531462
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "97b39506d1aea855c82e9bd3681c1e6bde048bd1e2045e5a5babbda10e2e12bd"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 210,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 177,
+            "pelvisX": 141.6186524402292
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 210,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 177,
+            "pelvisX": 141.6186524402292
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "050000962f4ee47e4afafe2f217798274a311403263c919818631595818b7bfd"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 210,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 177,
+            "pelvisX": 144.34965461194636
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 210,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 177,
+            "pelvisX": 144.34965461194636
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "2a808d312927f3b072d8127ba6050f01bf57e8517f2c237eb7e0712b593c337f"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 210,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 177,
+            "pelvisX": 143.26506506506507
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 210,
+            "top": 11,
+            "bottom": 227,
+            "height": 216,
+            "width": 177,
+            "pelvisX": 143.26506506506507
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "e0840c19c6ab42c5365925ac5c08c16344686724b33dc24619133e89d12afdf0"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 208,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 175,
+            "pelvisX": 138.77311411992264
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 208,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 175,
+            "pelvisX": 138.77311411992264
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "96dbb45af302b70bfa837b9ce89607fbd2c51148ee12107edf6a18ef5eba3971"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 33,
+            "right": 205,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 172,
+            "pelvisX": 134.7210759027266
+          },
+          "afterRepair": {
+            "left": 33,
+            "right": 205,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 172,
+            "pelvisX": 134.7210759027266
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "831567daff6b87d433b42572dc571c23686d814a493ce0ce87216628c577d7f1"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 34,
+            "right": 200,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 166,
+            "pelvisX": 126.08589162892132
+          },
+          "afterRepair": {
+            "left": 34,
+            "right": 200,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 166,
+            "pelvisX": 126.08589162892132
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "8b8f8d253e1805a77d84af81e611f7a2c171adc2c22364f10c19f77f54cea8b8"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 179,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 124,
+            "pelvisX": 124.17097453570744
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 179,
+            "top": 12,
+            "bottom": 227,
+            "height": 215,
+            "width": 124,
+            "pelvisX": 124.17097453570744
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "62143490659ea6509265e00a58192deb99e0935f369eba4edf6524a200d1e976"
+        }
+      ]
+    },
+    {
+      "source": "raw/attack_3.attempt1.png",
+      "sourceSha256": "6bc7208dbd966cf977bf123ef1067d680f63c1965653f7e740f72fca4aacace1",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/attack_3.png",
+      "outputSha256": "72da94ed9b0014dd96511fcfa9868241c395bbabe885e9896cddc4501d566504",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 65,
+            "right": 174,
+            "top": 13,
+            "bottom": 226,
+            "height": 213,
+            "width": 109,
+            "pelvisX": 124.87140992167102
+          },
+          "afterRepair": {
+            "left": 65,
+            "right": 174,
+            "top": 13,
+            "bottom": 226,
+            "height": 213,
+            "width": 109,
+            "pelvisX": 124.87140992167102
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "07af35566e384671c0f265ad96cb28be80bdd24d6a33b34fe22cc2b0e32530c7"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 186,
+            "top": 18,
+            "bottom": 227,
+            "height": 209,
+            "width": 128,
+            "pelvisX": 122.29225908372828
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 186,
+            "top": 18,
+            "bottom": 227,
+            "height": 209,
+            "width": 128,
+            "pelvisX": 122.29225908372828
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "21cb11b6d6cd2266ade55de011ebbaa6e49f3e6ca71eef3879d8f58649875f26"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 188,
+            "top": 28,
+            "bottom": 229,
+            "height": 201,
+            "width": 132,
+            "pelvisX": 119.07633441744787
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 188,
+            "top": 28,
+            "bottom": 229,
+            "height": 201,
+            "width": 132,
+            "pelvisX": 119.07633441744787
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "ccd84036a85266c89d978d4741014d737576e5791d1df1bb76a3a2d9c73ed700"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 52,
+            "right": 187,
+            "top": 38,
+            "bottom": 229,
+            "height": 191,
+            "width": 135,
+            "pelvisX": 116.41478479058097
+          },
+          "afterRepair": {
+            "left": 52,
+            "right": 187,
+            "top": 38,
+            "bottom": 229,
+            "height": 191,
+            "width": 135,
+            "pelvisX": 116.41478479058097
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "a006d8680836d1fa39710064c2913885d66e2622e38e11adcfd1ddfd9b20ef04"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 193,
+            "top": 35,
+            "bottom": 227,
+            "height": 192,
+            "width": 144,
+            "pelvisX": 118.24949215143121
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 193,
+            "top": 35,
+            "bottom": 227,
+            "height": 192,
+            "width": 144,
+            "pelvisX": 118.24949215143121
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "4e6a3ec724df4281f58c62453bedafaa7bdf63fc442d06d7ef93b921cfb4e62a"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 45,
+            "right": 225,
+            "top": 28,
+            "bottom": 231,
+            "height": 203,
+            "width": 180,
+            "pelvisX": 113.89990697674419
+          },
+          "afterRepair": {
+            "left": 45,
+            "right": 225,
+            "top": 28,
+            "bottom": 231,
+            "height": 203,
+            "width": 180,
+            "pelvisX": 113.89990697674419
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "b9432a041e36db371ea44e766ae762ab9831c4734ddc7366efccaa352e82d998"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 45,
+            "right": 224,
+            "top": 28,
+            "bottom": 230,
+            "height": 202,
+            "width": 179,
+            "pelvisX": 118.7613817537644
+          },
+          "afterRepair": {
+            "left": 45,
+            "right": 224,
+            "top": 28,
+            "bottom": 230,
+            "height": 202,
+            "width": 179,
+            "pelvisX": 118.7613817537644
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "291332f9150030488f3ca3bd328f44ed81484ba5c579beb125962e80aaeda664"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 219,
+            "top": 28,
+            "bottom": 230,
+            "height": 202,
+            "width": 170,
+            "pelvisX": 117.89315937940762
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 219,
+            "top": 28,
+            "bottom": 230,
+            "height": 202,
+            "width": 170,
+            "pelvisX": 117.89315937940762
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "af2aa01c1dce33812aab1b80a2c9f4d5423672db32151ef64c6cadebfa933755"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 51,
+            "right": 209,
+            "top": 26,
+            "bottom": 230,
+            "height": 204,
+            "width": 158,
+            "pelvisX": 117.50418760469012
+          },
+          "afterRepair": {
+            "left": 51,
+            "right": 209,
+            "top": 26,
+            "bottom": 230,
+            "height": 204,
+            "width": 158,
+            "pelvisX": 117.50418760469012
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "214d8a1880300a2499acf6fa76210895dd05fc9ab63f8f0aedd7b287153b47d2"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 197,
+            "top": 23,
+            "bottom": 227,
+            "height": 204,
+            "width": 143,
+            "pelvisX": 117.49548842683406
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 197,
+            "top": 23,
+            "bottom": 227,
+            "height": 204,
+            "width": 143,
+            "pelvisX": 117.49548842683406
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "7b6be81be209d41389e53d49b43cf24f8d44187cada5683f5548e262baf25132"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 187,
+            "top": 21,
+            "bottom": 229,
+            "height": 208,
+            "width": 131,
+            "pelvisX": 117.18736511673534
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 187,
+            "top": 21,
+            "bottom": 229,
+            "height": 208,
+            "width": 131,
+            "pelvisX": 117.18736511673534
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "a3b1cd93c594b7b7dbcf10264feb7e69545ad31511d2785bc86489a626f188cc"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 174,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 116,
+            "pelvisX": 117.79935600724492
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 174,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 116,
+            "pelvisX": 117.79935600724492
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "6850fb85e9e8ce49edd7e56e6592aa3f8f7fa2a28161b32d00c9fc6322c6fbc2"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 170,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 112,
+            "pelvisX": 118.59104227710338
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 170,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 112,
+            "pelvisX": 118.59104227710338
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "0211d4841dd4f5efb90ccb868b0800fa6aa7fe33108862d9d4a34436f10c5b8a"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 170,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 112,
+            "pelvisX": 118.50094319849089
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 170,
+            "top": 18,
+            "bottom": 228,
+            "height": 210,
+            "width": 112,
+            "pelvisX": 118.50094319849089
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "dba46c30aa25eac849e47bf9c4f65f25cefc24a89633a3d917063c5322733272"
+        }
+      ]
+    },
+    {
+      "source": "raw/cast.attempt1.png",
+      "sourceSha256": "ee5d7ff8e7f91514f98c9eec97b72f8425746bfa8bc1c4f7a030eba0822cc211",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/cast.png",
+      "outputSha256": "f5411cf35e4b10966ec0bcb64c999cf2a8f055c41c07e6f2e469c3c0bcd57858",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 178,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 123,
+            "pelvisX": 123.49569044562627
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 178,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 123,
+            "pelvisX": 123.49569044562627
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "e781cc57bc2bff2e6d423be26a542e7fd654687015228d89bf1f81a41d12658b"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 180,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 124,
+            "pelvisX": 124.069674367837
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 180,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 124,
+            "pelvisX": 124.069674367837
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "e3e5843856266097865daf968473ab4d244d5484e449a0b88b04c3ea06072db4"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 187,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 132,
+            "pelvisX": 124.81584053624978
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 187,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 132,
+            "pelvisX": 124.81584053624978
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "62ac07eb200b28d6837eb07dc3d6652aff32db0303612eba2c5db44a1ea7ad7d"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 191,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 136,
+            "pelvisX": 124.16594938887933
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 191,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 136,
+            "pelvisX": 124.16594938887933
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "bea90bfafc1da132cd17d80f376614c2a77ff79bf182a183c3b639a75cf8eb78"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 195,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 140,
+            "pelvisX": 125.28588661037395
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 195,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 140,
+            "pelvisX": 125.28588661037395
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "7bea7dd03346cd6b96aab86fc25c4d0eba4c4cc485235082b73485b648f4032d"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 194,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 140,
+            "pelvisX": 127.2358630952381
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 194,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 140,
+            "pelvisX": 127.2358630952381
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "0d8b58eb7e504cfba3afe3d0942a061c054e8c2608e7befb46a3f5377cb1712b"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 197,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 144,
+            "pelvisX": 127.5862662586075
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 197,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 144,
+            "pelvisX": 127.5862662586075
+          },
+          "greenSpillPixelsRecoloured": 14,
+          "matteAlphaSha256": "d37dd35d113071db6b3965fd330883c07c939963064dce928309b89bd43ec9f7"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 199,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 146,
+            "pelvisX": 126.49887318172506
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 199,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 146,
+            "pelvisX": 126.49887318172506
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "045c38ba6552b97fd55e53af0471106876517d1b6b147c3571cbf88caa68c60e"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 200,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 147,
+            "pelvisX": 126.5840197693575
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 200,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 147,
+            "pelvisX": 126.5840197693575
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "e6d90c35519a09c589759ff649f8742cccaa5cfa50a957bf2d5265d8c7577cea"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 201,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 148,
+            "pelvisX": 127.65766306522609
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 201,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 148,
+            "pelvisX": 127.65766306522609
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "70dd8c2ddaefea72186b6e65634459c0b7451dae7981194f9d870c0d21378aa0"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 201,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 148,
+            "pelvisX": 128.50554917719097
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 201,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 148,
+            "pelvisX": 128.50554917719097
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "ffc4537799d08966553034b35d56fa894e96b82a1a8ed4ede1ca78a96cb0498d"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 198,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 145,
+            "pelvisX": 129.46042263610315
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 198,
+            "top": 10,
+            "bottom": 235,
+            "height": 225,
+            "width": 145,
+            "pelvisX": 129.46042263610315
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "8d43284dcf14d600c2bb29a7912fa28500252cf03dd9e755bdaffce249d948ef"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 53,
+            "right": 194,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 141,
+            "pelvisX": 129.71169425854174
+          },
+          "afterRepair": {
+            "left": 53,
+            "right": 194,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 141,
+            "pelvisX": 129.71169425854174
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "0535633583726c5e86bc8ea1782dbc46fdd6d3b4e3d900e6ff2808b0bbade13d"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 188,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 133,
+            "pelvisX": 126.39657631954351
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 188,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 133,
+            "pelvisX": 126.39657631954351
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "373039bb7862958187fbd6db460733fc6e71639aff3d96fa8efcf6454ee5aaa8"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 182,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 127,
+            "pelvisX": 123.85969062784349
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 182,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 127,
+            "pelvisX": 123.85969062784349
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "23f71d241675ecb73388506c1569c1b8d8e400fc54e919caf5383d8041cbdf71"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 178,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 122,
+            "pelvisX": 123.68508493559828
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 178,
+            "top": 11,
+            "bottom": 235,
+            "height": 224,
+            "width": 122,
+            "pelvisX": 123.68508493559828
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "f67c3f759d4a8982a2e58d2e22a152abc0f9ecb8654e79eff09ed1c58559cd92"
+        }
+      ]
+    },
+    {
+      "source": "raw/channel.attempt1.png",
+      "sourceSha256": "2b0922e0dbbd69ae43225616a1e92dce9290b8259c903b92766e4285dda8afe0",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1448, 1086],
+        "normalized": [1024, 768],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889
+      },
+      "output": "prepared/channel.png",
+      "outputSha256": "40f3ac506db347475ec07cb99bd7f602e47fe615efb2e544b5c5e939af402e24",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 179,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 118,
+            "pelvisX": 127.61919936267675
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 179,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 118,
+            "pelvisX": 127.61919936267675
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "1768d4a2cb23f6da612ef2c576cd070321149f6d5e393949e11649981143433e"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 184,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 128.80969860896445
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 184,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 123,
+            "pelvisX": 128.80969860896445
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "ef3f7c75750ea7e50f75d8425619878c4b3c32b52b156c4f6ef6a4e16d1fa004"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 186,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 129.80488259411106
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 186,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 125,
+            "pelvisX": 129.80488259411106
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "d8cb22fbc2e7727ea2b83d763b9218d59dafb59bba731f06925533f791deca9a"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 189,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 128,
+            "pelvisX": 130.65045372050815
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 189,
+            "top": 12,
+            "bottom": 235,
+            "height": 223,
+            "width": 128,
+            "pelvisX": 130.65045372050815
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "9314630cc82ba423d4a6b1e57eefab4d08f3e6d42f69d0d02e8c5dd547f5d5a6"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 190,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 129,
+            "pelvisX": 131.1168668220111
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 190,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 129,
+            "pelvisX": 131.1168668220111
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "c82c20a9b49d42e44911e7912fccea23a21e80843e74e78fe05ebf7ad077c8a5"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 189,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 128,
+            "pelvisX": 130.93527623815484
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 189,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 128,
+            "pelvisX": 130.93527623815484
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "4b686c2a83935ced912a703ed09d6436225ac7504f30bc9e21e19b4bba880acb"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 190,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 129,
+            "pelvisX": 131.1248656395557
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 190,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 129,
+            "pelvisX": 131.1248656395557
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "ad7efe211c77db7b79302e838c584ef361f189b10187198e1b4cdad01ef1c501"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 189,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 128,
+            "pelvisX": 131.17339795368875
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 189,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 128,
+            "pelvisX": 131.17339795368875
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "ce7f39470bfa2b7a96a682d5f842a1f079f3a12480cfc9acdd827c7aa104ec94"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 186,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 125,
+            "pelvisX": 130.12914647782333
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 186,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 125,
+            "pelvisX": 130.12914647782333
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "6a73efd2c80056d5442011f6c311a698ed05432cf784349bcde530b3eb6b2de2"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 183,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 122,
+            "pelvisX": 128.82883056734852
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 183,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 122,
+            "pelvisX": 128.82883056734852
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "59ad5f906604dabaa9b1e78fbe2cbe47cbc2d456b8f8c151f2f38bb411a228ff"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 179,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 118,
+            "pelvisX": 127.57602050877539
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 179,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 118,
+            "pelvisX": 127.57602050877539
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "7426cad373ef9ee46fe420675c451dd981fdd0d615c604623abb4c22cbed67b3"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 61,
+            "right": 178,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 117,
+            "pelvisX": 127.53357171235598
+          },
+          "afterRepair": {
+            "left": 61,
+            "right": 178,
+            "top": 13,
+            "bottom": 235,
+            "height": 222,
+            "width": 117,
+            "pelvisX": 127.53357171235598
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "7f5fab5ea8dab1eb498f8730ee0c2fbb5db665c8ba4c89fe8af9d356370891a9"
+        }
+      ]
+    },
+    {
+      "source": "raw/die.attempt1.png",
+      "sourceSha256": "b49cb5fce352ad81652d3c6c497da2b8a0997c06166d13297a1f4aa870e718f9",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1448, 1086],
+        "normalized": [1024, 768],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889
+      },
+      "output": "prepared/die.png",
+      "outputSha256": "47ddd6f5b05f732412b845d6990f65f93e99a51dc046eb59172ccb501acc3592",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 59,
+            "right": 171,
+            "top": 13,
+            "bottom": 236,
+            "height": 223,
+            "width": 112,
+            "pelvisX": 122.26845915201655
+          },
+          "afterRepair": {
+            "left": 59,
+            "right": 171,
+            "top": 13,
+            "bottom": 236,
+            "height": 223,
+            "width": 112,
+            "pelvisX": 122.26845915201655
+          },
+          "greenSpillPixelsRecoloured": 18,
+          "matteAlphaSha256": "d6c20ebe8e29764cb4c7acd2f3decfd7f0d4fabb600a05dc611b5c6039ddbfd3"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 55,
+            "right": 171,
+            "top": 23,
+            "bottom": 237,
+            "height": 214,
+            "width": 116,
+            "pelvisX": 116.40154038301415
+          },
+          "afterRepair": {
+            "left": 55,
+            "right": 171,
+            "top": 23,
+            "bottom": 237,
+            "height": 214,
+            "width": 116,
+            "pelvisX": 116.40154038301415
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "a60fba8e3b8fdf05927da8559f7e28313b60dbe5d65f2f9ac028bce490753bea"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 54,
+            "right": 176,
+            "top": 35,
+            "bottom": 239,
+            "height": 204,
+            "width": 122,
+            "pelvisX": 113.95035167563094
+          },
+          "afterRepair": {
+            "left": 54,
+            "right": 176,
+            "top": 35,
+            "bottom": 239,
+            "height": 204,
+            "width": 122,
+            "pelvisX": 113.95035167563094
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "a2788abd6ffefdcbe7d06e597984fb1af61fdc17831535fc3a4782156f70770a"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 52,
+            "right": 183,
+            "top": 55,
+            "bottom": 239,
+            "height": 184,
+            "width": 131,
+            "pelvisX": 113.70735968552086
+          },
+          "afterRepair": {
+            "left": 52,
+            "right": 183,
+            "top": 55,
+            "bottom": 239,
+            "height": 184,
+            "width": 131,
+            "pelvisX": 113.70735968552086
+          },
+          "greenSpillPixelsRecoloured": 18,
+          "matteAlphaSha256": "4a7bd893434b2faa261480e95dd9be691c140efef4ed9866c51d167586465397"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 51,
+            "right": 180,
+            "top": 67,
+            "bottom": 232,
+            "height": 165,
+            "width": 129,
+            "pelvisX": 108.34638403990024
+          },
+          "afterRepair": {
+            "left": 51,
+            "right": 180,
+            "top": 67,
+            "bottom": 232,
+            "height": 165,
+            "width": 129,
+            "pelvisX": 108.34638403990024
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "7da5b5c55ed8096863899fcd9b3f77d568a6ce5d6156984151734a8a5d6de53a"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 182,
+            "top": 83,
+            "bottom": 232,
+            "height": 149,
+            "width": 126,
+            "pelvisX": 114.54158273381294
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 182,
+            "top": 83,
+            "bottom": 232,
+            "height": 149,
+            "width": 126,
+            "pelvisX": 114.54158273381294
+          },
+          "greenSpillPixelsRecoloured": 11,
+          "matteAlphaSha256": "17966a999ede26cae972471f2b1b2d3cb0f2208d32bf36756bde5a0043193389"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 48,
+            "right": 191,
+            "top": 94,
+            "bottom": 232,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 125.74884437596302
+          },
+          "afterRepair": {
+            "left": 48,
+            "right": 191,
+            "top": 94,
+            "bottom": 232,
+            "height": 138,
+            "width": 143,
+            "pelvisX": 125.74884437596302
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "7cf3f7410f8e856c55995f33f0500c35a76cba01b8456b5cbadfc6c04a533f09"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 39,
+            "right": 202,
+            "top": 107,
+            "bottom": 230,
+            "height": 123,
+            "width": 163,
+            "pelvisX": 134.4798071127185
+          },
+          "afterRepair": {
+            "left": 39,
+            "right": 202,
+            "top": 107,
+            "bottom": 230,
+            "height": 123,
+            "width": 163,
+            "pelvisX": 134.4798071127185
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "68a044c02bf985f9cbb35c45c33ef7915bb730dcffe68b965d84d053974b27fd"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 31,
+            "right": 209,
+            "top": 117,
+            "bottom": 227,
+            "height": 110,
+            "width": 178,
+            "pelvisX": 138.73905377607994
+          },
+          "afterRepair": {
+            "left": 31,
+            "right": 209,
+            "top": 117,
+            "bottom": 227,
+            "height": 110,
+            "width": 178,
+            "pelvisX": 138.73905377607994
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "dcb3a2ec319326f337c6cc48e3ea50009c2c0e2953e0cfcc1a78d101c6420c47"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 28,
+            "right": 221,
+            "top": 127,
+            "bottom": 226,
+            "height": 99,
+            "width": 193,
+            "pelvisX": 141.46272935779817
+          },
+          "afterRepair": {
+            "left": 28,
+            "right": 221,
+            "top": 127,
+            "bottom": 226,
+            "height": 99,
+            "width": 193,
+            "pelvisX": 141.46272935779817
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "94ad36dcd206f990a5b230d263cec89ac9a30feb74bc6523e0b05b43d5cdb671"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 27,
+            "right": 228,
+            "top": 131,
+            "bottom": 226,
+            "height": 95,
+            "width": 201,
+            "pelvisX": 143.11641876430207
+          },
+          "afterRepair": {
+            "left": 27,
+            "right": 228,
+            "top": 131,
+            "bottom": 226,
+            "height": 95,
+            "width": 201,
+            "pelvisX": 143.11641876430207
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "4fa43aef8707a36da2fbeab17b92b747c2ef9f44c31dbaeb20f8e2cb76bc49be"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 26,
+            "right": 228,
+            "top": 135,
+            "bottom": 226,
+            "height": 91,
+            "width": 202,
+            "pelvisX": 141.5789757412399
+          },
+          "afterRepair": {
+            "left": 26,
+            "right": 228,
+            "top": 135,
+            "bottom": 226,
+            "height": 91,
+            "width": 202,
+            "pelvisX": 141.5789757412399
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "10b573d76be54811a9bd5fb78f0853ca6310c39e824adfd937dda9502c561705"
+        }
+      ]
+    },
+    {
+      "source": "raw/tribulation.attempt1.png",
+      "sourceSha256": "2a69f46c96f0b9b03fd013c81e0f12b215f2ed34102189a5110f5ffa5bb1c7be",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1254, 1254],
+        "normalized": [1024, 1024],
+        "cropTop": 0,
+        "cropBottom": 1254,
+        "dpiScaleX": 0.8165869218500797,
+        "dpiScaleY": 0.8165869218500797
+      },
+      "output": "prepared/tribulation.png",
+      "outputSha256": "9f2962309f2c601f6c2c2aa52cf0020bb7ef9b9f7bc0fb090fb6818b8f4f283e",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 178,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 122,
+            "pelvisX": 123.30992034757422
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 178,
+            "top": 12,
+            "bottom": 239,
+            "height": 227,
+            "width": 122,
+            "pelvisX": 123.30992034757422
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "d173287c311f16410d4d8623af7163016a0089942291552ce7ff35f0708c235f"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 59,
+            "right": 179,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 120,
+            "pelvisX": 123.41702127659575
+          },
+          "afterRepair": {
+            "left": 59,
+            "right": 179,
+            "top": 13,
+            "bottom": 238,
+            "height": 225,
+            "width": 120,
+            "pelvisX": 123.41702127659575
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "7bacdfce9f94f1488ffb4f95b7235c2e9cf4af8ba6544582fd7032814e2abd6c"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 56,
+            "right": 193,
+            "top": 23,
+            "bottom": 238,
+            "height": 215,
+            "width": 137,
+            "pelvisX": 122.83150183150182
+          },
+          "afterRepair": {
+            "left": 56,
+            "right": 193,
+            "top": 23,
+            "bottom": 238,
+            "height": 215,
+            "width": 137,
+            "pelvisX": 122.83150183150182
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "21a89fb78f9ef934db4e2285bdd2419edae2d7a8bb51c3648027354d3d3da2f2"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 196,
+            "top": 25,
+            "bottom": 235,
+            "height": 210,
+            "width": 147,
+            "pelvisX": 119.69437875204657
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 196,
+            "top": 25,
+            "bottom": 235,
+            "height": 210,
+            "width": 147,
+            "pelvisX": 119.69437875204657
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "fe22c3d10d232ba1f7d92fde804611ab394ff6832a33833e964598b308993915"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 49,
+            "right": 196,
+            "top": 30,
+            "bottom": 233,
+            "height": 203,
+            "width": 147,
+            "pelvisX": 116.77345270533282
+          },
+          "afterRepair": {
+            "left": 49,
+            "right": 196,
+            "top": 30,
+            "bottom": 233,
+            "height": 203,
+            "width": 147,
+            "pelvisX": 116.77345270533282
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "71ddab145336e11fac479d0bbf298fb131ceaccdd63364b1226518ae03f43872"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 41,
+            "right": 201,
+            "top": 44,
+            "bottom": 233,
+            "height": 189,
+            "width": 160,
+            "pelvisX": 112.34793089594214
+          },
+          "afterRepair": {
+            "left": 41,
+            "right": 201,
+            "top": 44,
+            "bottom": 233,
+            "height": 189,
+            "width": 160,
+            "pelvisX": 112.34793089594214
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "8c731c432ddc32da3d0299fe6e849c57ce8d0551c625bd6ac10c66cc32013f0a"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 42,
+            "right": 204,
+            "top": 49,
+            "bottom": 233,
+            "height": 184,
+            "width": 162,
+            "pelvisX": 107.51580459770115
+          },
+          "afterRepair": {
+            "left": 42,
+            "right": 204,
+            "top": 49,
+            "bottom": 233,
+            "height": 184,
+            "width": 162,
+            "pelvisX": 107.51580459770115
+          },
+          "greenSpillPixelsRecoloured": 3,
+          "matteAlphaSha256": "65f47bf8729cfa8abb2d9df36d6534aaf4db8624c3a5078a5888769d7ec18dad"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 42,
+            "right": 203,
+            "top": 50,
+            "bottom": 232,
+            "height": 182,
+            "width": 161,
+            "pelvisX": 106.73858494446729
+          },
+          "afterRepair": {
+            "left": 42,
+            "right": 203,
+            "top": 50,
+            "bottom": 232,
+            "height": 182,
+            "width": 161,
+            "pelvisX": 106.73858494446729
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "2eb4c8ed16da25fcd7be2c914230d87f35eede1761e6767c9cf33bee096ccf75"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 43,
+            "right": 204,
+            "top": 51,
+            "bottom": 232,
+            "height": 181,
+            "width": 161,
+            "pelvisX": 108.5767461313258
+          },
+          "afterRepair": {
+            "left": 43,
+            "right": 204,
+            "top": 51,
+            "bottom": 232,
+            "height": 181,
+            "width": 161,
+            "pelvisX": 108.5767461313258
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "a655bd6f46dcbd8bf9c399a7f5d3d2508bc3fde0e7972458863b009d4053a252"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 44,
+            "right": 200,
+            "top": 48,
+            "bottom": 232,
+            "height": 184,
+            "width": 156,
+            "pelvisX": 113.28918019956956
+          },
+          "afterRepair": {
+            "left": 44,
+            "right": 200,
+            "top": 48,
+            "bottom": 232,
+            "height": 184,
+            "width": 156,
+            "pelvisX": 113.28918019956956
+          },
+          "greenSpillPixelsRecoloured": 10,
+          "matteAlphaSha256": "a6b0f7c93fee3585ee4e75401242f86092b8b655e3a525c8d8ed699e0a83ec1b"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 45,
+            "right": 192,
+            "top": 37,
+            "bottom": 235,
+            "height": 198,
+            "width": 147,
+            "pelvisX": 114.56330067822155
+          },
+          "afterRepair": {
+            "left": 45,
+            "right": 192,
+            "top": 37,
+            "bottom": 235,
+            "height": 198,
+            "width": 147,
+            "pelvisX": 114.56330067822155
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "c70daccbd2e52d74be7bfc1577e9198aa8719647ddd36a1cafc8daa990439c52"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 182,
+            "top": 24,
+            "bottom": 236,
+            "height": 212,
+            "width": 124,
+            "pelvisX": 120.84082535003685
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 182,
+            "top": 24,
+            "bottom": 236,
+            "height": 212,
+            "width": 124,
+            "pelvisX": 120.84082535003685
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "dfe0feda19b3cfd8233cc5fda5a1632b719669a1b1ea5fd411d443b53f690c68"
+        },
+        {
+          "cell": 12,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 57,
+            "right": 178,
+            "top": 23,
+            "bottom": 237,
+            "height": 214,
+            "width": 121,
+            "pelvisX": 121.83464862833522
+          },
+          "afterRepair": {
+            "left": 57,
+            "right": 178,
+            "top": 23,
+            "bottom": 237,
+            "height": 214,
+            "width": 121,
+            "pelvisX": 121.83464862833522
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "8c06ce6e9f5161aa54cf624dc4089f149908c14d333d6bbd17ff8d45aa237799"
+        },
+        {
+          "cell": 13,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 177,
+            "top": 16,
+            "bottom": 237,
+            "height": 221,
+            "width": 119,
+            "pelvisX": 123.55151290142936
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 177,
+            "top": 16,
+            "bottom": 237,
+            "height": 221,
+            "width": 119,
+            "pelvisX": 123.55151290142936
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "72113350faf632146647b656c1c2bf3694b4ddd8b766c23b7f20d9bd8e22408f"
+        },
+        {
+          "cell": 14,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 57,
+            "right": 176,
+            "top": 14,
+            "bottom": 237,
+            "height": 223,
+            "width": 119,
+            "pelvisX": 123.22361059306229
+          },
+          "afterRepair": {
+            "left": 57,
+            "right": 176,
+            "top": 14,
+            "bottom": 237,
+            "height": 223,
+            "width": 119,
+            "pelvisX": 123.22361059306229
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "157b0bbef137211d098b9716779e6ec1532b164cf79a3652050fb1000c12c1f3"
+        },
+        {
+          "cell": 15,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 58,
+            "right": 176,
+            "top": 13,
+            "bottom": 237,
+            "height": 224,
+            "width": 118,
+            "pelvisX": 123.76222980659841
+          },
+          "afterRepair": {
+            "left": 58,
+            "right": 176,
+            "top": 13,
+            "bottom": 237,
+            "height": 224,
+            "width": 118,
+            "pelvisX": 123.76222980659841
+          },
+          "greenSpillPixelsRecoloured": 5,
+          "matteAlphaSha256": "03063f32f37ae5c5263e2cd56f82142163ca62be2f74f15985e6827a52c0e3f1"
+        }
+      ]
+    },
+    {
+      "source": "raw/emote.attempt1.png",
+      "sourceSha256": "5e748f881b08436f6f50646b01c03d1e428ce620605eac26631bc0bfbf5fa9e5",
+      "headEditSources": [],
+      "wholeSheetDpi": {
+        "raw": [1448, 1086],
+        "normalized": [1024, 768],
+        "cropTop": 0,
+        "cropBottom": 1086,
+        "dpiScaleX": 0.7071823204419889,
+        "dpiScaleY": 0.7071823204419889
+      },
+      "output": "prepared/emote.png",
+      "outputSha256": "b82923137217db7bacdb0782770c09211e62c30409cb1720fd92ddb7f0bf5f6b",
+      "cells": [
+        {
+          "cell": 0,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 125.12340333405498
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 125.12340333405498
+          },
+          "greenSpillPixelsRecoloured": 17,
+          "matteAlphaSha256": "a0cc2166be127f4076bcab4de789388299b5a75a06028de580f92c9b79c5cf28"
+        },
+        {
+          "cell": 1,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 183,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 120,
+            "pelvisX": 127.85528719301806
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 183,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 120,
+            "pelvisX": 127.85528719301806
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "6880eb17c29ffbb3cdab10b8f25a18ebe671bf32fae97a8a6eaa5570e6c1090f"
+        },
+        {
+          "cell": 2,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 127.14570899362009
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 127.14570899362009
+          },
+          "greenSpillPixelsRecoloured": 13,
+          "matteAlphaSha256": "ebb7a256644a55a6e4134b18680f3938bbd255112e388e2aa740f67601ba40c7"
+        },
+        {
+          "cell": 3,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 172,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 109,
+            "pelvisX": 126.5367492650147
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 172,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 109,
+            "pelvisX": 126.5367492650147
+          },
+          "greenSpillPixelsRecoloured": 7,
+          "matteAlphaSha256": "f0d9a1bbb784f107b1d47c563fd93c6e316abe70183308cf93efbbfb072ccefd"
+        },
+        {
+          "cell": 4,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 177,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 114,
+            "pelvisX": 127.29838709677419
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 177,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 114,
+            "pelvisX": 127.29838709677419
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "65555fd0fe84b1dc04691f9c2d14dfe5f84936239ac6da207794da5d093cee10"
+        },
+        {
+          "cell": 5,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 126.12721145745577
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 171,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 108,
+            "pelvisX": 126.12721145745577
+          },
+          "greenSpillPixelsRecoloured": 6,
+          "matteAlphaSha256": "be5bfbca0a2ed4fb2bd718f0d78963be863136e03ed7fca156fb6edf9fc90502"
+        },
+        {
+          "cell": 6,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 177,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 114,
+            "pelvisX": 127.21034126163391
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 177,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 114,
+            "pelvisX": 127.21034126163391
+          },
+          "greenSpillPixelsRecoloured": 12,
+          "matteAlphaSha256": "56e95235c640f5a445373e08cf06a8ef4320c1b21fd05a0aa0e2ebc62d501b07"
+        },
+        {
+          "cell": 7,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 167,
+            "top": 16,
+            "bottom": 230,
+            "height": 214,
+            "width": 104,
+            "pelvisX": 124.8806167400881
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 167,
+            "top": 16,
+            "bottom": 230,
+            "height": 214,
+            "width": 104,
+            "pelvisX": 124.8806167400881
+          },
+          "greenSpillPixelsRecoloured": 4,
+          "matteAlphaSha256": "e68a4f4405658af2eb95664172b09611e33af32f8f22bb32ace5608ba1f8aa89"
+        },
+        {
+          "cell": 8,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 171,
+            "top": 14,
+            "bottom": 230,
+            "height": 216,
+            "width": 108,
+            "pelvisX": 126.15709387055294
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 171,
+            "top": 14,
+            "bottom": 230,
+            "height": 216,
+            "width": 108,
+            "pelvisX": 126.15709387055294
+          },
+          "greenSpillPixelsRecoloured": 16,
+          "matteAlphaSha256": "855229ec7957bbc6a0b7a5f7c4b9cb88822f186c8b1a57bed8ce7cfc601bab99"
+        },
+        {
+          "cell": 9,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 178,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 115,
+            "pelvisX": 127.48835784313725
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 178,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 115,
+            "pelvisX": 127.48835784313725
+          },
+          "greenSpillPixelsRecoloured": 9,
+          "matteAlphaSha256": "93d61d211d34add22ec7497337ee94bb87d45e7e1ab985072f75c57b3ce0e266"
+        },
+        {
+          "cell": 10,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 174,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 111,
+            "pelvisX": 125.9498619077969
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 174,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 111,
+            "pelvisX": 125.9498619077969
+          },
+          "greenSpillPixelsRecoloured": 15,
+          "matteAlphaSha256": "8f59da980724f19c7f228ffd0bea803311c7870f598a560a4e2156d3f3c5b437"
+        },
+        {
+          "cell": 11,
+          "outsideMaskAlphaChanges": 0,
+          "outsideMaskRgbaChanges": 0,
+          "before": {
+            "left": 63,
+            "right": 170,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 107,
+            "pelvisX": 124.75652173913043
+          },
+          "afterRepair": {
+            "left": 63,
+            "right": 170,
+            "top": 12,
+            "bottom": 230,
+            "height": 218,
+            "width": 107,
+            "pelvisX": 124.75652173913043
+          },
+          "greenSpillPixelsRecoloured": 8,
+          "matteAlphaSha256": "b2c997737c7652a5333b948d862c5da597dc057526e06b2784ceee757115d31a"
+        }
+      ]
+    }
+  ]
+}

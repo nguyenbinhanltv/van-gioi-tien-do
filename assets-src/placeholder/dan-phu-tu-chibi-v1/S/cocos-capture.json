@@ -1,0 +1,920 @@
+{
+  "startUtc": "2026-11-08T06:38:27.396Z",
+  "endUtc": "2026-11-08T06:45:36.652Z",
+  "exitCode": 0,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "D:/Temp/vgtd26-S-cocos-final-v1/scripts/capture.mjs",
+    "--skip-build",
+    "--out",
+    "D:/Temp/vgtd26-S-cocos-final-v1/capture",
+    "--animations",
+    "all",
+    "--frames",
+    "24",
+    "--mode",
+    "single",
+    "--direction",
+    "S",
+    "--src",
+    "dragonbones/dan-phu-tu-chibi-v1",
+    "--stem",
+    "danphuchibi",
+    "--zoom",
+    "2",
+    "--sample",
+    "midpoint",
+    "--gif"
+  ],
+  "out": "D:/Temp/vgtd26-S-cocos-final-v1/capture",
+  "temporaryPatches": "Fullviewport single framing; perclip actual runtime tick midpoint count; GIF reuses same snapshots. No production capture script changes. Puppeteer dependency resolution anchored workspace.",
+  "gifTiming": "Preview GIF uses centisecond-rounded holds; runtime/SKE uses exact24Hz.",
+  "status": "PASS real Cocos Creator3.8.8 2x: all15clips/202actual drawing midpoints,202distinct actor-region renders,0region-edge contacts.21native soft findings remain OPEN; mobile/compression unvalidated.",
+  "engineVersion": "3.8.8",
+  "engineBundleSha256": "8a0e33971355d8d2aa5c662d1984e4d35876b8cdacb7d196ea6fe9f1871ff150",
+  "engineBuild": {
+    "start": "2026-11-08T06:35:40.307Z",
+    "end": "2026-11-08T06:37:47.444Z",
+    "editor": "C:/ProgramData/cocos/editors/Creator/3.8.8/CocosCreator.exe",
+    "exitCode": 36,
+    "freshIndexExists": true,
+    "status": "Real Cocos build produced"
+  },
+  "captureScriptSha256": "435d6166b1e6f25192f7657d7d409d750a32fb020f0c3c0bcc2f761d6d5812a7",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "deviceScaleFactor": 2,
+    "singleModeFixedZoom": 2.6
+  },
+  "samplePolicy": "One actual24Hz runtime tick midpoint per drawing; fixed camera/actor scale, no frame/body fit. GIF preview holds rounded to centiseconds.",
+  "clock": [
+    {
+      "clip": "idle",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "meditate",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "walk",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "run",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "dash",
+      "drawings": 10,
+      "ticks": 10,
+      "durationSec": 0.4166666666666667,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "sword_fly",
+      "drawings": 12,
+      "ticks": 12,
+      "durationSec": 0.5,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "attack",
+      "drawings": 14,
+      "ticks": 14,
+      "durationSec": 0.5833333333333334,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "attack_2",
+      "drawings": 14,
+      "ticks": 14,
+      "durationSec": 0.5833333333333334,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "attack_3",
+      "drawings": 14,
+      "ticks": 14,
+      "durationSec": 0.5833333333333334,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "cast",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "channel",
+      "drawings": 12,
+      "ticks": 12,
+      "durationSec": 0.5,
+      "uniformDrawingTicks": 1,
+      "playTimes": 0
+    },
+    {
+      "clip": "hit",
+      "drawings": 6,
+      "ticks": 6,
+      "durationSec": 0.25,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "die",
+      "drawings": 12,
+      "ticks": 12,
+      "durationSec": 0.5,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "tribulation",
+      "drawings": 16,
+      "ticks": 16,
+      "durationSec": 0.6666666666666666,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    },
+    {
+      "clip": "emote",
+      "drawings": 12,
+      "ticks": 12,
+      "durationSec": 0.5,
+      "uniformDrawingTicks": 1,
+      "playTimes": 1
+    }
+  ],
+  "index": {
+    "url": "http://127.0.0.1:58705/#viewer&mode=single&dir=S&paused=1&src=dragonbones/dan-phu-tu-chibi-v1&stem=danphuchibi",
+    "mode": "single",
+    "direction": "S",
+    "frames": 24,
+    "animations": {
+      "idle": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "idle.sheet.png",
+        "gif": "idle.gif"
+      },
+      "meditate": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "meditate.sheet.png",
+        "gif": "meditate.gif"
+      },
+      "walk": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "walk.sheet.png",
+        "gif": "walk.gif"
+      },
+      "run": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "run.sheet.png",
+        "gif": "run.gif"
+      },
+      "dash": {
+        "samples": 10,
+        "duration": 0.4166666666666667,
+        "keyFrames": 10,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "dash.sheet.png",
+        "gif": "dash.gif"
+      },
+      "sword_fly": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "sword_fly.sheet.png",
+        "gif": "sword_fly.gif"
+      },
+      "attack": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack.sheet.png",
+        "gif": "attack.gif"
+      },
+      "cast": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "cast.sheet.png",
+        "gif": "cast.gif"
+      },
+      "channel": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "channel.sheet.png",
+        "gif": "channel.gif"
+      },
+      "hit": {
+        "samples": 6,
+        "duration": 0.25,
+        "keyFrames": 6,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "hit.sheet.png",
+        "gif": "hit.gif"
+      },
+      "die": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "die.sheet.png",
+        "gif": "die.gif"
+      },
+      "tribulation": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "tribulation.sheet.png",
+        "gif": "tribulation.gif"
+      },
+      "emote": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "emote.sheet.png",
+        "gif": "emote.gif"
+      },
+      "attack_2": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_2.sheet.png",
+        "gif": "attack_2.gif"
+      },
+      "attack_3": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_3.sheet.png",
+        "gif": "attack_3.gif"
+      }
+    },
+    "source": "dragonbones/dan-phu-tu-chibi-v1/danphuchibi"
+  },
+  "pixelCoverage": {
+    "status": "Capture coverage check: actual perclip tick midpoints. This checks distinct renders and region contacts, not identity. Fixed actor region excludes Cocos profiler. No sprite/camera rescale.",
+    "region": {
+      "x": 600,
+      "y": 140,
+      "width": 1640,
+      "height": 1260
+    },
+    "reader": "Capture PNG filter0 reader previously crosschecked against public decoder on all24 historical run samples; fixed-size native RGBA rows.",
+    "reports": [
+      {
+        "clip": "idle",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "0c38f3b70b40212e8d4ffd5ed4a57848605a926205a53060fd5bae17db4c34c7",
+          "d90923edc5754206db4649a1c79cd9a9d49d159c5cd871684f93f1d395cc65ad",
+          "8d85f22b5f8d71705a00669f0696f7bde95b4b2420701b204714467923f6f5dc",
+          "3739c0311c88fa1e30f8af27b16be1a529b53f6db816772fb813049dc0ea2cec",
+          "9c08bef12ab2a1fe38a6dedc79ddeeda6ca9f307830b5825eb0b47a25f549f0a",
+          "e9b6682fc6d397fd09447e737f5812d44db6dcceb0de9e6e1bdaf06c9bdc67fb",
+          "5ec2cdb111e54077fca227d15d6a0a3db4110c33de88ad74036c6d64e7adb229",
+          "244a707868c6c40e159171ba47361dd9ad583a50893ad348fbb1bcbebdfcd2c4",
+          "33736e152884e31edd3e0f6beb45f827476b7982514101873ec7275d5a95faba",
+          "0ac447856d7659929a320ff9a7fc1ff910da0233648b831a912cf812326a1b29",
+          "168aedc84b4e5edc57477f6ca0ad333cc6fc2f0eb32375f2d57b32e0f1af985b",
+          "d7e8d439d1a7d4ec7ecd0381f4757cb4d4befe5473010842c7368a3c2f3950b8",
+          "1c3b7c277db3e7760492d4a00ba654187f8829d7a89efb8cf03c501588fa453b",
+          "765394fdd2cedc7a198f568a287db0f2acd67a9ecc47470ef68bbb4c0e204c09",
+          "7c7b5e327faf2ea1536c8f4d446e06ff741d21037958e1847817ec12c6d1b387",
+          "15a1cbcd2068fc2f6e43d2987017433119ba57569843000f002f58ada4dea0bb"
+        ],
+        "sheetSha256": "abf27b00a9654f57399f7dede61ead2cddddf7bb6453b7f32723075971c60b9f"
+      },
+      {
+        "clip": "meditate",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "fefd6e46d1837d21f0c89617c37e799c754c27a4f7abb9aa2a6a5cb9cec821c0",
+          "ec27aff5a79e5317eeb2ce2328d5038b8a3c703a058477bf8c96ce3bef02b803",
+          "3ef9123b60ca0bd1d9857dab9ab1d74df5807bb5e28a326209511178fbdaaf21",
+          "540a6033c19254d29313fc5f47955e98a3539b6de4453426303e38c73a10bf47",
+          "0e1f5734317b3783f093736202affe02481af63f171937ff20bc290c59de8239",
+          "d63b1a30ca7e9a815bd5dcfb3e63d88b36b6aabbc405f654edde85c5e1c1ea58",
+          "887c40a11abd62fea9fe033bf66755b5638e65149c24c872541888488fcfbddb",
+          "19549c76058bd0e806a629024d70ef72e57187f2533ab34ff92d2d6a60c770e1",
+          "4e0a7eabe1c84ca9f82d03134e5163ec83ff9758432b85d792bddb3172a45e60",
+          "1092e0d35ef2d3e28eac9813b941ab8caf69be43077839415b595b2965d9c7e0",
+          "8f59964022e7ff03cf58a31abb1e896fe546cbd67aedc78b09cfa55a5474e4a8",
+          "ff052f5c56a7da5da043dfeb576b75547f0f935941833161f70597d3c061483b",
+          "fc5d56dac057453fc2e4dbc196a3bd6a4cfbdcf430095e6e517df672804ec1c1",
+          "863208f4b1ba9f8fef07a4af63b3f9754f869292c3f824b191c7226e64fc754f",
+          "9e3062026f5cfe7cce1924de783653e37f06934e255fc1642b0b70ae0d4be5a0",
+          "a87c0821cc889713de704c55d87e34489a5c9f2b38d5cb2886224aa25913deb0"
+        ],
+        "sheetSha256": "142909bd042d73060506f8648804da988bcd4a5657007169d43620bf817631c2"
+      },
+      {
+        "clip": "walk",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "6022d27cc811d0c123444c01259f216326eb3c8c1da1f255700d8165c954e2fa",
+          "5b55ba5a96421d100e34f24e39765cf64b6d64e36b55148ca17a206f76068d85",
+          "a9ef1c881d42e35f0565960c80935ce69f41421f8afa6b6ab8ae61f724889ec8",
+          "de9de26375452750bcc85517012a86a04bd3a06083755ef85ff4ca7f1dc1c2d3",
+          "d32cb2b984f6dc1449fa875bdf6189574a342346f11a79dcd939f915902a001c",
+          "2ef187deda4bb62efdbde5a3feac8ec8024ef91117675a2ee716204ff96c944b",
+          "8877f68c422ac4b884ae0e263b2d4a8dc43b9db4683b254391026bfec7edeec4",
+          "5c987868531cc5cb985e4f43406403f317322ea5c7c00e59e7002595e39b6534",
+          "e5ae1061aa3e15bdb70b31e9b19b26c7b553230b19d2569ee6a192b473d8d74f",
+          "1c85ac4a51e50601ddf344bbb68cb7487a5b4fd37e2ef48464b963ed7f077cf8",
+          "93b77e04104c43a2ab466fb25ab352416763facb8c30693e3790d4d30a860364",
+          "35c20833a1569991b2c35ff72d5d4c62cb4125da885b55f3f2f03e80b6e78b73",
+          "91e740c01d79fb875fe71c8d2828af5037ed43d47387fcdc8a264b99d468a483",
+          "69e8b3e03edae2abe85978b7c511e975ec8ffb336b8fe3d9dbce222b9fab10e5",
+          "37b1a7283b0c8a0ebb71647f3b617ab5edecce10f6ae8fb5c7361747f2e579ec",
+          "a71a5f4f457e8c0ffda24e866a1423d819c222e0ca44ec0fc38f2f41205f3986"
+        ],
+        "sheetSha256": "b51fc97e8ac3d6b30421455b2ffd0f81053d6828de87653d37e464a7d2d50f3a"
+      },
+      {
+        "clip": "run",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "3f7fd0b57421a12262d300bb4819182988061a9f31ba3ce3a490e31f771153ae",
+          "2a6ec39a2d7acdf050c6df5c7d7ffd5b372f6c51244ebd8e239faa331e356848",
+          "8e3fb0a15af0e48cfd01a1d4d7b2f4859c0663a74577c20f4a3bc25f16028eb3",
+          "7e160cc4c05fbbe7f7ef69207496c822d89ab5d616ad930dfa7515753f9d19b3",
+          "e71e7679ddc4b42bf750803ad07f13140fe78abbc883919b11e8d4df9c4d454e",
+          "5109059468195580a127a184a25e4839192faf765151bc20cc4d0367852119da",
+          "09077df95019351e597e6c9e9963b3e461fa7af73b794e6218477c4c904b73b8",
+          "39b988ee47c69fdfe9af500d65e6dea29a533ac5d814bcf60932917f08f40df0",
+          "27bb681b038a76cc6e425ebd7a2ef71668fc4b71f708726bfc1b06f08d7d1508",
+          "17229b5c035e000e9be1a906ac6b889bad31e45aa4cb6f4a61cdd507ca9dd079",
+          "0e0947d8208b7dc4363b49f7d14f939062cba73c88d5c3ea211d078eb2eef7cd",
+          "6b579cd1d5f335fe1c6a8353bac54bc321ca3779fd197afbe0b7cbf58d6ebaa0",
+          "f0676d4c4085364e4db5cb994c573641844bc63ba2dc73b6b4092ebfe8c7c661",
+          "c75fddc53d82fbd754570a63bdd7c6a7c99908a2c3a3cfb9da9d98b801a9240b",
+          "7f4834f5b96722b5dd639f4eb7aee72989a651701655031813f61a560fd5babe",
+          "313765444f9e258f0d79afafa0213eda88c5db8ee5cc5ef4c10206303c55015e"
+        ],
+        "sheetSha256": "3f583d541457ba671187d9f8f6dbb804bd66eab75bf1b4d38280e8d586506d71"
+      },
+      {
+        "clip": "dash",
+        "samples": 10,
+        "distinctActorRegionHashes": 10,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "79b7de07cfb0f26c2a927f888f14f0d4bf550524b69a027d3dd3fda35bddb072",
+          "3c3459c895ba92776cabe64d0e87549b988858aba163268b22e665771c55caa0",
+          "976c86957b17679fa6c04fae3e94f6d484ac1c04536a75b647543b23388889f4",
+          "89005a03d0b84581c00fe3f9d99438613d6186775d79655caa8726d75865036c",
+          "6f5cc00a6b2641883848cbfadce0d3221132974390e8576215f77621a46d5d49",
+          "f78ecac27ec8ee82fa5fc00ffeb22a93322d12443ffff5b40a3bc77fa2db1828",
+          "0db0c2ed498fd7c81ccf7a02722e9722ae930f55dc112de7ff1452f452709bc8",
+          "7ea986e12aeb6841af19681b4d7c65d44f29d4c1123575028e0792627258bd65",
+          "4d66fb06f42eef4998668cb0d121d17f68d6a0606fbda1827d6cbab03462666b",
+          "ee1568d75f3bc81711d6ab8ff4d5246d8dbee5b3024ee43672cf0cf8aec672ae"
+        ],
+        "sheetSha256": "565929c8ec77ef7e222fd5057bddef3973b15f522fb012f345e612a95e305f0c"
+      },
+      {
+        "clip": "sword_fly",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "04f4deea2eeb92b68c86873d3ee1ecd90cbdfc5de690b9d8ad3e7ade8724929c",
+          "dd64b753ec1ecac5aa36b6ec8912a1cd4dddcce4e4f74c88e99b539226d7560f",
+          "2ecc1b336e840274ab0dee25bead3ca5f6d1eba722bd63dc8410404a552196dc",
+          "4c2b4bb62f0155a48ba8e1bbdc883b8a285898cbf5a4d189429c94bcb016f204",
+          "d59c0ffefed565a534b5281af1a89c7c59c9c6fb59014ff0c47b642c6c0ae61c",
+          "9c8d404845c32f1c40dcef53f24f5070317cccd76f392a3386cd3af7e418999c",
+          "191986a1419ac67d8a6908b424e792bd0889e59bae3ee40269d7360b65979fb1",
+          "596baa39c25a54b1d26c04bd3e2467ea48030c9a9bcd09d58d25f20d569fd876",
+          "f99a99b48ff9d20740ee157c7796029674721d6d887aec61ad0763992c5895a4",
+          "52d92c21ba612c9969fa89e8e211fe17200a27cfbc14504dacf0d1ef7fc10841",
+          "54204212ef9d32c2be6497805d14e03008307e0d3d223155ba4dc8ca5e254598",
+          "9daf286f230ea5a96e2fcbccfef47678244af2eafb4450567cfde16d61c4b57d"
+        ],
+        "sheetSha256": "461c004eea4e033b2d57f437adaa551d0f31a757549b3b4864dfffc5b501581f"
+      },
+      {
+        "clip": "attack",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "f0eb318db7e78fcf3cb6d827e4ca04702c4e1228f0a48942ae49f1d600cc67d9",
+          "a56dbf136797336da953d45c3c26af6e5deb4de7cd78b830b9a01f2099f19504",
+          "32d9945339a3731c067ad7cfb2bb492ecd5f830afe1a2df553914e9201068309",
+          "cffa0697c13c2c95287f0485e83d5f0e7cfc167f2ffcc7952ad16e52bb04a2f9",
+          "1f330a33c4d837c09aa785498bfaf48afa7ae71d7eeff258958544e7a1c7d47f",
+          "070b767dc720a24c0df8d9ae1d334e670eee0dacb8846eb331196c0358ee1b2a",
+          "1531ab762a2c4f3cb9d2c41cf4f01d29ea8b78348ea71e6c52e5a97e7c093f1f",
+          "3ffa372c9ffa567fdbd658db26b41fdcf80199362c002a57bf8e9c798867c1b1",
+          "1b1f1195ea02224456ab5e9d7d55afa1de35aed3dec2f929cde71a371156d634",
+          "ede4372c94ead6ad492aa95433237ebcf63da771f53ac911f18543f1259c8f19",
+          "a0b12a1db4cffdd64d834cc55eed1cd1f178a33878b96114d89ea51c431f0e19",
+          "00165d6b91512751ffe884fbdf7fc634c296fc45a9b9d4d24f1a335b4557995a",
+          "42397dcf0ff80591b6f53a18c3a227cd517dedd8799daaa1086580463445f41b",
+          "8b56d67534099a2bd5e36667b66ad8d0cc4a66ce9d878d62599941937b2618a9"
+        ],
+        "sheetSha256": "479de4d4d452c079a40e8a46cdefbaeac5da1a8d5f5d3182dd230889120f664b"
+      },
+      {
+        "clip": "cast",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "cb37003d73f9dba625bbd3271d32ae0d6a46944bbf28898fbb35de9678b13667",
+          "946d379ae02c13a8a221d3c0bd8939a6b5784724538dd39456c668457b248315",
+          "c6bd4e851a21d3cfccebea12b5216c187e7bf930b2498bc68db8c911539094fa",
+          "ee014d8930c8412b57731aae20a8e72f8286b90cc3c842441cdc423596d08321",
+          "6ac0773cdc5e8dd1461f4ecf52df065ddb1e8de675905be112af67eaa04b69fb",
+          "2b47335565cfc8088ba75e5d0da2f45ba8add4e895e35bd9c2c9040b55e33ba5",
+          "2bcfdb4e4c2f62bd3be45cde146f74444f78bbfb157b3158aae432b54dd7c2ee",
+          "5c518a99b88fcc2e211224adc9f641d3a64377d85a34e8466ca94f9b73a8cb38",
+          "718babe8c5961d905cd1b224544d8b9f9e39b78b25e473fc46e481f6e1cf72d8",
+          "2c5a4e5ee80f9694cc4154b995b75ef35bb92a12a6f35705d9101cdd07db0ef3",
+          "66b607fdf1cbefdbcfcc8762cc77345fee91b0622ec8496387d5dfba190b5369",
+          "3652eb65fc9e138d0ad69f8ee1affa6320f47a7c2f229dc0993bfe31c7f90088",
+          "36204b771f7b931201ee85c0a460ae8cf763970eebe9526bfaa003808e4c45d2",
+          "c658d2178afb93bc54d259f7e7ccf8f378327b19a57ce866926e049c124e318e",
+          "e1d5ad6d8a6c68344c31d5962c98b9984f0ef3d3586fd75f26055f70b248b8f9",
+          "01e22aef45a6cbb6d884747612aa21bd37cec38f397a9be9b0ac4ddb5b6a42b0"
+        ],
+        "sheetSha256": "2971e082537d0230cd555b38855327c138546c3289ee20a645132bc3f83f3bf3"
+      },
+      {
+        "clip": "channel",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "1f017e645e0d3c995d6f0affef62bd22e256727c8402834d70cdd2a37743e1d2",
+          "f3f9ffd739d4c5fd9a582eb6fe7fe4e190f8c92787b225954b59f3d8f441977d",
+          "ec68c0956ac3576f08cec77d844265e4f9a4d6bfc175fd4a2611d860b16a664b",
+          "e5a5fdb84d78954096357cf4d451b9cedbd27f460e4a5f6bef073f5882c2d9bb",
+          "886d469ee87e243f89efd29353c3fcf0e71de7cf1072232f89a6dc67c4b094a3",
+          "7bd19d28ec9b53a25534f0a036581df9060edbbb8c7719ed029bac12251c9790",
+          "1f78fe83f2e672a5d4c6533364e1237bfbb0f3abbb0969c319247ed58b40b857",
+          "fb611db22fe2021953638b176124f6c0482f073216664c9d92e4c1f23973ed15",
+          "faf1baba27d86ea0591b2b7ab20095c459ba3c396a898202897db97f80c0921a",
+          "69cf5c1cc67a42b0185d07af61a2fcca9a257fe05fc153e613d5bfd1ea26ac3f",
+          "90077f0f9ea3df0f170263928425c2bb3bbaca8c67b328b2c39399fbd10be50d",
+          "2fa7e1cc0c6ffcc01b87e7a4fd3c7a0b4641118448a00ee13818e871d7808348"
+        ],
+        "sheetSha256": "94d042fc93deb47dbc7ae8b3e53a080428d5a89cb8451acff9253a34977e3d1e"
+      },
+      {
+        "clip": "hit",
+        "samples": 6,
+        "distinctActorRegionHashes": 6,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "ac27c6c9fc4942253123f9a9a0f9b768f08000ab07d461d5e0908c3e10ba58ff",
+          "874919266e9f83f393d76b998a5a0c2e53b90747ac823384611c84928846d3a9",
+          "556620eca78bf2636123a7cf37d852dac6f1f59fa2c798268b8d20eff7624035",
+          "21800cfb84c8cba86818b0ecb394f280a311bab592e2ce170cafae21052d3b79",
+          "24d3dca0bfbdb8dd16c33f50e3be9433e44fd2960d91febd34bf8dbb2da0172a",
+          "1be0853ba88d28b8f6ca1a7eabae06259389f3d4e87a6090aedc6bd5d199ba87"
+        ],
+        "sheetSha256": "fe3c9228a3c70bf2fd459d44d94c1a76b10d989ec8a226b455f529d62297ec5f"
+      },
+      {
+        "clip": "die",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "5f0e6246f4cff56a5050ff7c87a1443765546c055110b30efcb73e4b60279d93",
+          "a38302d5656fac8f8a8d1f368d22b5d4388f07824592fcb41f37efdb738fccdb",
+          "3397c8d28a494cbe49ea100d16b5dd4d85a7f95fadc5d7186d483734b99f09b1",
+          "7a6eab4394197e184ff374bcea835b7020778928bce4fc06e7cd80593d20ce88",
+          "4c937bdb4cf979aab7ac50d0799548f0869138a2cf843881c39d4cd303c93274",
+          "5243d97294787cd9601d5106f92b8d6600cdfa0ffb57634551cebf7c08d54f77",
+          "3e6c4f6a49266c21ae994736217a3a7529504c50aa57b5e8c322ef5b9fc551de",
+          "a44ad29460495387523bd062cefd133f40277986b40e97c6cf2e196f058bb6b9",
+          "4a10756b5532dc5efe8aed89f61743bf92d98d090f5ec72080ede59af03b528a",
+          "d3a6e96217f4c41d044eeaea22eafadff228fc1423826791ed5982cbc4ba27a5",
+          "ca8696ab5131a2f2efa8adfe65c13bd921c7dc2fe2790fc5a6eb5b59675a740f",
+          "048d9d3e24116285a2bef8d4c230e51bf555c3dea1ab9ddccedbe4acda880fe5"
+        ],
+        "sheetSha256": "1230d490860f7272af210713853f6ef99063a7cdac314b3ad67b78a486dd4278"
+      },
+      {
+        "clip": "tribulation",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "f24250b2d5ea7e2d39dd3daba0ae37deec258d5343c3cd403d7bef249ab2fc1c",
+          "529842edb31c5add3639ea12b64d8ecc36853a04e5003f642374a574e69c1239",
+          "17b8e0dc76c87674df9bde73c47b5aa33cc9aba01ea0a7bc6a6a9977bbcf9952",
+          "6c184a55828512919d300b3813cda1d201ed930e7368167c4a4379567fa3f674",
+          "2d182faccb6ccc87ce2ddee640cbca26242ddfcf93afef561100ac7f0c521287",
+          "6d3088fabed5b9e5bcc4eda9365a1c30b1f4b8ecf09557c070cbfc1994d3a222",
+          "30438e928351f4d01d1517d226fad6326aa30f1e4d3e4a01af142f539f94872a",
+          "060b462d0279b0255a984e22a90cd6f09cce3417bab431c0b9ed9b1fbf87fad3",
+          "c4de9af3880747a5991b8ac97afb2c79a8c91ccd69414835986d629a2433e0b1",
+          "58fb3ada721e164dc01fc47e4522259b77978460335662cc18e1db53b6aa9159",
+          "c67db676bd5c2c48ba09c94a888e37c45677db0a3149da3403f79d54d59ae986",
+          "24f26c74d8ce7a14a311e98438319662af5b4f8af543db9ceea98d3f7b7704db",
+          "96aed30f1d4cf1b2d3b6cab3920db373245009647c8c388ae727af5fa993d81a",
+          "f4c801e8379652e02b63f5aef6bd56ebc032639e279b1a778f36774c8fe75235",
+          "96d43afab9bd097acaef777e9868c4ff804dba0590018a96ea194b8c3a8752eb",
+          "3b3445cc7f654e5b5fc9863b8dc804c117ad408b88e1c27ae7c860ad476ba464"
+        ],
+        "sheetSha256": "0a92e4782446a17f3e5cbaf9c76f782c073209e61e781ef848e1ca90f05b45a9"
+      },
+      {
+        "clip": "emote",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "96f48da820a5e6e5141f5704227d51de28a52fb3ee043116691ba7dbaf87456d",
+          "bcbbd685b62a1c1a67e43a41fdf52fe2094fea91e93eb9c1df9c60dc0cc62c2b",
+          "d922aaaaaa23698bb036200c0131fc9c598282f945dfe50fed0ea66d30bf77af",
+          "e08a2459203658aaae5c000094de3f2fb9f3209c55f8a864dcb3dec590915145",
+          "29d98b8f56af54202e67f6f43da81e5d1b2491d79de334556e1e649b49a46712",
+          "8cf33b18baf99fa41aa4c3ac0cad3884fb5c1668e1d0d8d3c3297f63653a8196",
+          "d2d26130e6e5f5960a7e53008b615c095206069a62f9d5a64f5e960305cc374a",
+          "9e74648a5bccb0d9d0b12afe20aec4011abb49bb7d22068f925de2ea0e62615e",
+          "4b9b9d35c8f5292818961aeb72fd5d63316b54263141f41d8c677164e7e1ae37",
+          "d2eba2523bc7b2612a57023dd5f6e3a642f96c1e8a0eaa8aeb9041e3766a2aa5",
+          "96e7b9a15676c18cac1506f36bb4c34e6f93e450798e3d741b2d9b9f7017259b",
+          "a545bbadd874f9e5e8ae4331f981a02c02b7da986d37febdb373eaf8f5133db5"
+        ],
+        "sheetSha256": "8d332aa318b4cead1055fc9c16dae618afc9ad060de1ad35cbae334cfb1fb77d"
+      },
+      {
+        "clip": "attack_2",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "fbaba2503adb09b2d1c99e018252fda54d3e95ebccadb5f5208b03ccf2de279c",
+          "63958c0346268bcd90e15c8b253a1d2f03fb14fa925d7392335402895722207d",
+          "d3577e64a3f5be0cdc841368bb30bb7a1f582c21ea1741cf879f0f1d84dfc205",
+          "88b0b7c5f14e3c0279f6557c81e7f6290b713136230c0be8aff4051617eb6391",
+          "de361522bfca16b529a78ce6888de388ca7e4a2412534fb951d2891a815e8f13",
+          "d479c393d1bf8b9e1284a3e363ade19673adbeef77542f26ce68f6141141fcba",
+          "78895a4daf2019f3c54963f9537d0ac57f0ef74f392a4cced489e692ce794613",
+          "1415319dd2c92eed38f721256a7392b2360a5501a77df6ef1792653e7f2ae9a0",
+          "dae6caf373c3ef6a6cf4fa16b3d04f3a081e78fa0f6f4d7b2445bbaf341ff551",
+          "eb27140f4cb232ae31689a3599d23fc98393ec0a21f2257978f6b5103509f437",
+          "a5e7778335440687c90cbf428b8f51bc98f1f451de301370fbe5ac7b7f2a1cc6",
+          "d0b33d4317c57e49752e238e8229d8a494ccfaa2d1664536231925560d365263",
+          "aa775be5bd02e08f56536011be0c9c6ceec9143ca0e8f57cf134829bdd306446",
+          "eb73c9ed6b0c674b2f9290425ec91b72d49788b02ed70247b6cb1232d508e2e6"
+        ],
+        "sheetSha256": "805a8d2bcffa01bce243b4cd65b5e51dc19b0f27d79555fae43ce17274d00b50"
+      },
+      {
+        "clip": "attack_3",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "bb15a2eb1b09800db1fec607b5acbb63be1298dfeb5cd6ee8488e474545b8c0a",
+          "0e0ebb78364d396478838304525e7e09265ac2ecc3bdd7d2fbb2475580fb99eb",
+          "519c7eb9e800b6acc9517b2475fa969612e5be3d26794b3ec97fef3aad7d4d62",
+          "c46a8e3a4f552f5a0cef439b12c99c2609a13903aa920d6e2aa987444759efc1",
+          "1b0aaf732cf74fc7df2e5368bd209c536e3050caab9d72ff4453428eed4ac67d",
+          "b1c227e9320d56a641656e9780845089d36af91ea544472a5012edd7057f7e93",
+          "f190cea2d75bf5da925a19539fe06001ba9c7639f97b04565bdd585f8d943596",
+          "156ab8c9afa16e99e9b16e05d511fcd5811f6d298c46fd5cc1e75be7eee01dbf",
+          "27738f303c60024e537cb2ea3fa9485505861cb8a3b30755d926247c79ae851a",
+          "286054e9354caea2748302e37625089499551c8615dbb854153ba64865ea48e9",
+          "1b3c919c7995f1b474af56169304b06c8fa5154a2db5adf4885f2819ef7a8c98",
+          "5018793d4027ad798ca3023612b786e5de78178e634119819066bd7568a43a39",
+          "8597fcd295adbeda8c0e33b3fcd39e3d7acb700ef16a489df9c99a8116151c2a",
+          "aa2d9cd0a7540f2da15957ec029c123e3d3fd4ddd4a7d90272d4d349c99d4677"
+        ],
+        "sheetSha256": "204cff439cc2641c68635a9351ea7876b577741bccd389ff687121d7d4243726"
+      }
+    ]
+  },
+  "exportProof": {
+    "status": "PASS",
+    "files": 6,
+    "currentProjectSha256": "c3ce70fdcbfec7631a655a2c860c2f00e83efb236f24c8e87d269c0841b0ac41",
+    "stagingProjectSha256": "54e3814e3988b6cc626afcbfe132021590b5be62a54dc4302f896bbcbe073875",
+    "serializationOnlyDifference": true,
+    "proof": "Reconstructed JSON.stringify(currentProject,null,2)+newline exactly matches staging SHA256. Fresh public runProject from formatted project yields all6 runtime file bytes identical to repository and built capture staging.",
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 21,
+      "regression": 0,
+      "info": 243
+    }
+  },
+  "sourceProjectSha256": "c3ce70fdcbfec7631a655a2c860c2f00e83efb236f24c8e87d269c0841b0ac41",
+  "inputFiles": [
+    {
+      "file": "danphuchibi_S_ske.json",
+      "sha256": "c844dae8f8a15be30571a1a9423109d94b2ee18064ad4018bd1d08d4b5d9dd64"
+    },
+    {
+      "file": "danphuchibi_S_tex.json",
+      "sha256": "4f200e37e8ba6beedcaeab8eafa0504f0eaea9959b21ff31bf382a0cbc1e1323"
+    },
+    {
+      "file": "danphuchibi_S_tex.png",
+      "sha256": "4cbe361454ee788470c2fc2543c456e37e9cf7061123d7cd884b5b2dcb8eaf64"
+    },
+    {
+      "file": "danphuchibi_S_page1_tex.json",
+      "sha256": "3b82e4badf20a00629cde8db0ffe232bf284959f3bf237978c4b07f056f2590a"
+    },
+    {
+      "file": "danphuchibi_S_page1_tex.png",
+      "sha256": "c96ecd4bf2f0034700b3e416257edd00e33a3b7e5a864634a8e826174a1c6458"
+    },
+    {
+      "file": "danphuchibi_S.sprite.json",
+      "sha256": "6367cd681f4fda24158e24f03126fd3e22ad9c73987a43b998aed625da9cc5a5"
+    }
+  ],
+  "captureFiles": [
+    {
+      "clip": "idle",
+      "sheet": "idle.sheet.png",
+      "sheetSha256": "abf27b00a9654f57399f7dede61ead2cddddf7bb6453b7f32723075971c60b9f",
+      "gif": "idle.gif",
+      "gifSha256": "0b7707e0d0a0774b4d697e2794016699f75b707046dbf42a712f237228c8eb68",
+      "reviewSheet": "idle.review.png",
+      "reviewSheetSha256": "3bec9d8affd3d3c0ee5f6045f8d8cd1d60502e7517928017b3eac7d078e046a4"
+    },
+    {
+      "clip": "meditate",
+      "sheet": "meditate.sheet.png",
+      "sheetSha256": "142909bd042d73060506f8648804da988bcd4a5657007169d43620bf817631c2",
+      "gif": "meditate.gif",
+      "gifSha256": "571bc5002d7cd49684cbb97b39825939ca7e9427003d719e0e72c84d912b1b41",
+      "reviewSheet": "meditate.review.png",
+      "reviewSheetSha256": "b672b14bcc967a113da34af4b892799f70bf530bc3e4998d584f1a19d42d473a"
+    },
+    {
+      "clip": "walk",
+      "sheet": "walk.sheet.png",
+      "sheetSha256": "b51fc97e8ac3d6b30421455b2ffd0f81053d6828de87653d37e464a7d2d50f3a",
+      "gif": "walk.gif",
+      "gifSha256": "43e3fc9dca08f71e38f9bcce73db4c1f19fa185760ab2c5c067c7e1750dca321",
+      "reviewSheet": "walk.review.png",
+      "reviewSheetSha256": "ac7a98e47f298d0876392ebdf1672b7590b5fae35c653cd846dd336dd7458de1"
+    },
+    {
+      "clip": "run",
+      "sheet": "run.sheet.png",
+      "sheetSha256": "3f583d541457ba671187d9f8f6dbb804bd66eab75bf1b4d38280e8d586506d71",
+      "gif": "run.gif",
+      "gifSha256": "503fc0c203043c7d5e63c03cbd6489695aad3944013dfb3ee4f740b3145c9ddc",
+      "reviewSheet": "run.review.png",
+      "reviewSheetSha256": "e67d275918a4635320eef238d630c02a5fa3f86057862fc6a640a84a741c9cb1"
+    },
+    {
+      "clip": "dash",
+      "sheet": "dash.sheet.png",
+      "sheetSha256": "565929c8ec77ef7e222fd5057bddef3973b15f522fb012f345e612a95e305f0c",
+      "gif": "dash.gif",
+      "gifSha256": "066807b7c2e081b39f02e5891970e938fa9ba84da03efe3fa8e916c15f17b081",
+      "reviewSheet": "dash.review.png",
+      "reviewSheetSha256": "ab5456bc8fa564b878c3e78f63b927c2f9153ffdbf4eb7daa3e55624adfc6b49"
+    },
+    {
+      "clip": "sword_fly",
+      "sheet": "sword_fly.sheet.png",
+      "sheetSha256": "461c004eea4e033b2d57f437adaa551d0f31a757549b3b4864dfffc5b501581f",
+      "gif": "sword_fly.gif",
+      "gifSha256": "97c3cbba43a7394e6bc688b87b328ad505a4530fe9dc589eaaf752bfa64bf858",
+      "reviewSheet": "sword_fly.review.png",
+      "reviewSheetSha256": "a7d8bd592d1e0e470c239c144053cdc2b26363619148819d4a3c45c294d4f89c"
+    },
+    {
+      "clip": "attack",
+      "sheet": "attack.sheet.png",
+      "sheetSha256": "479de4d4d452c079a40e8a46cdefbaeac5da1a8d5f5d3182dd230889120f664b",
+      "gif": "attack.gif",
+      "gifSha256": "340821f83972a2dd306b1e94a185694e4d03524da86fbe7191941acf181321ac",
+      "reviewSheet": "attack.review.png",
+      "reviewSheetSha256": "0ea87612c3fa2710f529eb1d17c86eec5b5c8900c13ca330cbe6c8dedf59e9e2"
+    },
+    {
+      "clip": "cast",
+      "sheet": "cast.sheet.png",
+      "sheetSha256": "2971e082537d0230cd555b38855327c138546c3289ee20a645132bc3f83f3bf3",
+      "gif": "cast.gif",
+      "gifSha256": "ad83b52bd934aefb90bb60b18adbeadea65793bb0713529ddc4435765d03e3ff",
+      "reviewSheet": "cast.review.png",
+      "reviewSheetSha256": "264ab03ad10e2456a568dba8399ec16fda7866793c72760b01332e6f7a248cd7"
+    },
+    {
+      "clip": "channel",
+      "sheet": "channel.sheet.png",
+      "sheetSha256": "94d042fc93deb47dbc7ae8b3e53a080428d5a89cb8451acff9253a34977e3d1e",
+      "gif": "channel.gif",
+      "gifSha256": "2759557f1e0afba9602441235daa44aff28530b3b81c27c0292e635cdc52d6b3",
+      "reviewSheet": "channel.review.png",
+      "reviewSheetSha256": "b2cbd6a17925edfb732cb21b69f3c4c11f8500e617d6d8b1e1839731495c9718"
+    },
+    {
+      "clip": "hit",
+      "sheet": "hit.sheet.png",
+      "sheetSha256": "fe3c9228a3c70bf2fd459d44d94c1a76b10d989ec8a226b455f529d62297ec5f",
+      "gif": "hit.gif",
+      "gifSha256": "25ff1fcd0260591a736ab7d721719369e25d8449eb12782bb1e599d119bb5d4e",
+      "reviewSheet": "hit.review.png",
+      "reviewSheetSha256": "c815f01d0ad1a087b9260c7276cdb78fde89652db9b000e8a2dd032b08fd8bd6"
+    },
+    {
+      "clip": "die",
+      "sheet": "die.sheet.png",
+      "sheetSha256": "1230d490860f7272af210713853f6ef99063a7cdac314b3ad67b78a486dd4278",
+      "gif": "die.gif",
+      "gifSha256": "ca54c71c7a1435485511a791afe95906c1283df223e0a2da82780fd956a49dab",
+      "reviewSheet": "die.review.png",
+      "reviewSheetSha256": "d3a71bc2e90652de070fe36a35dbec180e6d759cb2c4b2c6c251061a8ee2629b"
+    },
+    {
+      "clip": "tribulation",
+      "sheet": "tribulation.sheet.png",
+      "sheetSha256": "0a92e4782446a17f3e5cbaf9c76f782c073209e61e781ef848e1ca90f05b45a9",
+      "gif": "tribulation.gif",
+      "gifSha256": "9b05ecb8fb76888af4f10a02cf364cd718746db105867a6b35c32c3f057c5282",
+      "reviewSheet": "tribulation.review.png",
+      "reviewSheetSha256": "af944e0c3787c9be9a86af8eda84bd0b6c53cd21e800a18d07df15cea2c816ed"
+    },
+    {
+      "clip": "emote",
+      "sheet": "emote.sheet.png",
+      "sheetSha256": "8d332aa318b4cead1055fc9c16dae618afc9ad060de1ad35cbae334cfb1fb77d",
+      "gif": "emote.gif",
+      "gifSha256": "c22cb574f8ba091b6fcd3a3bf0a36abc61a8ffedc3ed9d47bf191eba391fc5b5",
+      "reviewSheet": "emote.review.png",
+      "reviewSheetSha256": "82289832cd25c3615d204bfdd96696a0d375995b05f623250a6eb381570937c1"
+    },
+    {
+      "clip": "attack_2",
+      "sheet": "attack_2.sheet.png",
+      "sheetSha256": "805a8d2bcffa01bce243b4cd65b5e51dc19b0f27d79555fae43ce17274d00b50",
+      "gif": "attack_2.gif",
+      "gifSha256": "02c9bfaabec57b7d869a15264ddb7a8832400d3ebbbd49fb867dacdab0370091",
+      "reviewSheet": "attack_2.review.png",
+      "reviewSheetSha256": "d0fd7f5b85d2e76ccab3e1ed0fd40c921ca6607221e6339ba466a6d849c9e04d"
+    },
+    {
+      "clip": "attack_3",
+      "sheet": "attack_3.sheet.png",
+      "sheetSha256": "204cff439cc2641c68635a9351ea7876b577741bccd389ff687121d7d4243726",
+      "gif": "attack_3.gif",
+      "gifSha256": "5f4d29d5facef5992a3d96261c66f860214346339d7964098875653eb7dde77b",
+      "reviewSheet": "attack_3.review.png",
+      "reviewSheetSha256": "64c830379e45e3c889d8b521bdda23ac5abf998127a4c0d4a0b5c323fd2b3f94"
+    }
+  ]
+}

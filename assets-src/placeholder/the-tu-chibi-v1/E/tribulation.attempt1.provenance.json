@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:37:37.363Z",
+  "utcRecordedCompleted": "2026-11-07T20:39:52.460Z",
+  "prompt": "SQUARE2048x2048 EXACT4x4squarecells. Production original Th\u00e1\u00bb\u0192 tu T1 premium semi-chibi E/right-facing sprite animation. Image1 exact master identity/outfit/scale; image2 exact clip lattice. Fixed tan adult square-jawed amber-eyed thick-brow face, swept black hair/flattened topknot and amber ribbons, plain charcoal sleeveless wrap/trousers, warm IVORY ink-wash APRON under amber hip sash, simple paired WORN charcoal gauntlets one bronze wrist band and smooth knuckle plate. Same anatomy/face/outfit every frame. Natural hands IN gauntlets, no detached weapons. One charcoal base amber accent bronze trim, tinted outlines, TWO cel tones+small highlight/rim, NW light. Strict E profile except natural torso twist, do not change to SE. Logical cell256, ground232, standing silhouette226 with anatomical H216; template raw output2048wide with4columns =>512pxsquarecells (double coordinates). Preserve scale, camera and grid, never fit each pose to cell. Opaque uniform RGB255,0,255 MAGENTA; no labels/text/shadows/aura/extra objects. Remove interior guide marks, border only at exact cell edges. No cropping. Original design only.  TRIBULATION exactly16consecutiveframes rowmajor, seamless enduring/bracing loop. Allframes kneeling on one knee facingE, both worn gauntlets guarding head/chest.0-3steadybrace;4-7small recoil/strain against imagined pressure;8-11recover brace;12-15settle tostartingpose. Keep exact anatomical size/head identity; bentknees shorten silhouette naturally, never enlarge to fillcell. Hair/amber ribbons and ivory apron delayed flutter then settle. Hands stay inside gauntlets, noextraarms. Maintain center/pelvis stationary. No lightning, aura, symbols, particles, clouds, rocks, blood or groundshadow painted into body; allFX separate. Lastfirst seamless.",
+  "references": ["../reference/E.master.png", "templates/tribulation.template.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-4e27d7aa-3cb1-4808-9c68-6e014e65a210.png",
+  "clipProfile": "smooth-v2",
+  "frames": 16,
+  "nominalFps": 24,
+  "pipelineCommit": "25d8f74",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:39:52.460Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  }
+}

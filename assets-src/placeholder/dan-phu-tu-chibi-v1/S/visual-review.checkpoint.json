@@ -1,0 +1,310 @@
+{
+  "utc": "2026-11-08T05:50:22.376Z",
+  "status": "Full-body contact-sheet checkpoint; not final Cocos capture or cap ownership certification",
+  "qaSnapshot": "D:/Temp/vgtd26-S-cap-final2-qa",
+  "clips": [
+    {
+      "clip": "idle",
+      "note": "Small breathing/cloth cycle; no hand/weapon reversal observed."
+    },
+    {
+      "clip": "walk",
+      "note": "Alternating front stride; visible foot drift retained in measured backlog, not repaired by head work."
+    },
+    {
+      "clip": "run",
+      "note": "High-knee/flight poses and fixed right-hand whisk retained; terminal stance/reset polish remains open; anatomical cap ownership pending."
+    },
+    {
+      "clip": "dash",
+      "note": "Dynamic acceleration/tuck/recovery retained; brisk0->1 and3->4 transitions reviewed. Cap ownership/evidence pending; no numerical waiver."
+    },
+    {
+      "clip": "meditate",
+      "note": "Seated cross-leg breathing, no lotus/extra platform; fixed face and natural right grip."
+    },
+    {
+      "clip": "sword_fly",
+      "note": "Gentle hover with feet above template ground; same whisk, no new mount/weapon/FX."
+    },
+    {
+      "clip": "cast",
+      "note": "Seal-to-open-palm release; right grip remains stable, sleeve/horsehair lag visible."
+    },
+    {
+      "clip": "channel",
+      "note": "Subtle palm/cloth loop, fixed face/hand assignments."
+    },
+    {
+      "clip": "emote",
+      "note": "Left-palm greeting rise/wave/settle; right whisk retained."
+    },
+    {
+      "clip": "hit",
+      "note": "Recoil/load/recovery; neutral height findings stay open, no body shrink."
+    },
+    {
+      "clip": "attack",
+      "note": "Cross-body whisk sweep, impact extension/hold and recovery; rapid9->10/10->11 motion retained as polish note."
+    },
+    {
+      "clip": "attack_2",
+      "note": "Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal."
+    },
+    {
+      "clip": "attack_3",
+      "note": "Frontal lunge/impact hold/follow-through, root/leg pose retained; brisk recovery remains polish."
+    },
+    {
+      "clip": "die",
+      "note": "Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips."
+    },
+    {
+      "clip": "tribulation",
+      "note": "Brace/kneel/recover sequence without baked FX; cloth and horsehair follow visible movement."
+    }
+  ],
+  "temporal": [
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3642403443033359,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.7830, torso 0.3642; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Dynamic acceleration/tuck/recovery retained; brisk0->1 and3->4 transitions reviewed. Cap ownership/evidence pending; no numerical waiver.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.44731348753334316,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.8340, torso 0.4473; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Dynamic acceleration/tuck/recovery retained; brisk0->1 and3->4 transitions reviewed. Cap ownership/evidence pending; no numerical waiver.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2592652901191528,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.9552, torso 0.2593; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Cross-body whisk sweep, impact extension/hold and recovery; rapid9->10/10->11 motion retained as polish note.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.18710834209487243,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.3741, torso 0.1871; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Cross-body whisk sweep, impact extension/hold and recovery; rapid9->10/10->11 motion retained as polish note.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 1,
+      "metric": "temporal_review_by_eye",
+      "value": 0.37703838047000393,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 0->1; head 0.9351, torso 0.3770; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 2,
+      "metric": "temporal_review_by_eye",
+      "value": 0.18350327335658548,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 1->2; head 0.8900, torso 0.1835; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.10362138590142139,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.7340, torso 0.1036; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.10119973664382591,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.9287, torso 0.1012; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2390133009609806,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.7472, torso 0.2390; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 11,
+      "metric": "temporal_review_by_eye",
+      "value": 0.1883566237234629,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 10->11; head 0.9495, torso 0.1884; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Reverse sweep; rapid arc and recovery transitions visible, right grip continuous; no mirror reversal.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 5,
+      "metric": "temporal_review_by_eye",
+      "value": 0.4451200507134277,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 4->5; head 0.6770, torso 0.4451; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Frontal lunge/impact hold/follow-through, root/leg pose retained; brisk recovery remains polish.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 6,
+      "metric": "temporal_review_by_eye",
+      "value": 0.20699325511932296,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 5->6; head 0.7984, torso 0.2070; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Frontal lunge/impact hold/follow-through, root/leg pose retained; brisk recovery remains polish.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.22939253094980025,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.6800, torso 0.2294; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Frontal lunge/impact hold/follow-through, root/leg pose retained; brisk recovery remains polish.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "hit",
+      "frame": 2,
+      "metric": "temporal_review_by_eye",
+      "value": 0.398134701347248,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 1->2; head 0.7353, torso 0.3981; centroid-fallback",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Recoil/load/recovery; neutral height findings stay open, no body shrink.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 3,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3739255385747072,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 2->3; head 0.8159, torso 0.3739; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 4,
+      "metric": "temporal_review_by_eye",
+      "value": 0.030274796363285242,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 3->4; head 0.7711, torso 0.0303; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 7,
+      "metric": "temporal_review_by_eye",
+      "value": 0.2064979965604256,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 6->7; head 0.2462, torso 0.2065; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 8,
+      "metric": "temporal_review_by_eye",
+      "value": 0.3786355209219617,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 7->8; head 0.3786, torso 0.5591; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 9,
+      "metric": "temporal_review_by_eye",
+      "value": 0.004621435220559523,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 8->9; head 0.0046, torso 0.5142; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    },
+    {
+      "gate": "similarity",
+      "severity": "info",
+      "clip": "die",
+      "frame": 10,
+      "metric": "temporal_review_by_eye",
+      "value": 0.0012265383518284263,
+      "limit": 0.45,
+      "message": "review-by-eye: temporal 9->10; head 0.0012, torso 0.2891; centroid-fallback; D41 pose pair",
+      "review": "Reviewed native adjacent full-body contact-sheet drawings against locked S identity; Kneel to side collapse with natural head rotation/closed eyes; late palette-window exceptions are actual D41 die-collapse, not head-reason skips.",
+      "status": "reviewed-by-eye; timing/arc polish remains open, not a hard-gate waiver"
+    }
+  ],
+  "previewTiming": "Public encodeGif; centisecond approximation40ms, all previews loop; runtime is exact24Hz with original tableloopflags"
+}

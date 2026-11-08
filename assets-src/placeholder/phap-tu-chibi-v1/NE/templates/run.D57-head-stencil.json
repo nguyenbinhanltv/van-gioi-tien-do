@@ -1,0 +1,41 @@
+{
+  "purpose": "AI EDIT GUIDE ONLY; target placements are authoring intentions, not measured QA evidence",
+  "source": "run.D57-edit-input.png",
+  "master": "../../reference/NE.master.png",
+  "fixedGlobalScale": 0.9478260869565217,
+  "masterCrop": {
+    "x": 109,
+    "y": 15,
+    "width": 62,
+    "height": 38
+  },
+  "masterCrown": {
+    "x": 140,
+    "y": 16
+  },
+  "inset": 3,
+  "cells": [
+    {
+      "cell": 1,
+      "registration": {
+        "pre": {
+          "height": 205.6782608695652,
+          "pelvisX": 113.40360210929346,
+          "soleY": 224.63478260869564
+        },
+        "post": {
+          "height": 206,
+          "pelvisX": 128.81344086021505,
+          "soleY": 240
+        },
+        "dx": 15.24622592166098,
+        "dy": 14.947826086956525
+      },
+      "targetAlignedCrown": {
+        "x": 140,
+        "y": 38
+      },
+      "previousAlignedCrownY": 40
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "master": "../../reference/SE.corrected-master.png",
+  "scale": 1,
+  "frames": 16,
+  "note": "Full unscaled canonical master copied into INPUT cells only. Output poses are AI image edits; no generated frame is scaled, cloned or repainted by code."
+}

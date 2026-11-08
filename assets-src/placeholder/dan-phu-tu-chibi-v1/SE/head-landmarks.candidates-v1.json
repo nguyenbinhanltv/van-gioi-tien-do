@@ -1,0 +1,379 @@
+{
+  "status": "Frozen candidate overlay coordinates BEFORE ratio judgments; not supplied to project headEvidence. Some points may be interior or neck-shadow candidates and must be corrected with native pixel reasons, never to achieve a ratio.",
+  "convention": "Manual first attached FRONT cap rim and last jaw outline; master baseline fixed in head-baseline-history.json. Bun wording clarification pending.",
+  "projectSha256": "034ef86b1ff06f23b0305e1b0a8a2ed847e502cb5ff294f810d54206144a24bf",
+  "clips": [
+    {
+      "name": "run",
+      "sheet": "raw/run.attempt3.png",
+      "sourceSha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
+      "cells": [
+        {
+          "index": 0,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 80.5
+          },
+          "alignedPngSha256": "ee99092faa0538048edb23a8f14e5beb462facec7e96c3f569be35d57784abb6",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 1,
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 160,
+            "y": 81.5
+          },
+          "alignedPngSha256": "45792ff54933ac918f3e68907f0485679d300d78a6727e1cee7e197f31454c6c",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 2,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 156,
+            "y": 79.5
+          },
+          "alignedPngSha256": "31cce10935c7395823cceb321bae36ea38583e0d69f465ef0b073229e93ae9ed",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 149,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 161,
+            "y": 77.5
+          },
+          "alignedPngSha256": "d27f5ce85f990502edc4c896615e5dc97233aa8847e3f71db57261fef12ddfe0",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 4,
+          "crown": {
+            "x": 150,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 162,
+            "y": 71.5
+          },
+          "alignedPngSha256": "5b451dc9a5b45c1cb0a54d582198d84a756c37ed4ecebf005b7f5f4176df4dcd",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 5,
+          "crown": {
+            "x": 149,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 161,
+            "y": 73.5
+          },
+          "alignedPngSha256": "3f146448979536d1d5767fe95dbabd2111c504090e27cb711a41a9904ab145ad",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 6,
+          "crown": {
+            "x": 155,
+            "y": 18.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 71.5
+          },
+          "alignedPngSha256": "03a565c75b14de61502cef558bf41d3c394262dd75fc5781702a8a4e91454e5d",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 7,
+          "crown": {
+            "x": 161,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 171,
+            "y": 71.5
+          },
+          "alignedPngSha256": "297167e749ab676426d105fc79de5fa5d11e984fe07fdeb070689f528c60c5e7",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 8,
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 74.5
+          },
+          "alignedPngSha256": "6dd30d8172a9d90d5e0d89b592a864f1b8a3221613277a838bef52b1929f72bd",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 9,
+          "crown": {
+            "x": 154,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 75.5
+          },
+          "alignedPngSha256": "80981c739556b95ea04396fafb9f097b22b30f79d7f7123cf4ac8b75ce8cbbc8",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 10,
+          "crown": {
+            "x": 156,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 75.5
+          },
+          "alignedPngSha256": "18fd307864ad8f7286b2bdccb9a8aa0a9f53b5bd38c4799fb0a6337726db2be4",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 11,
+          "crown": {
+            "x": 152,
+            "y": 20.5
+          },
+          "chin": {
+            "x": 163,
+            "y": 73.5
+          },
+          "alignedPngSha256": "9a7bc44f51d40f561f2c9303126cfe2b14a01e8f13337d58250c0d2c19fb7ced",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 12,
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 166,
+            "y": 75.5
+          },
+          "alignedPngSha256": "dffead5abb2e6bc406683798ba1b1189f34bff9ec0cec31970dabfeb01b08914",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 13,
+          "crown": {
+            "x": 151,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 161,
+            "y": 76.5
+          },
+          "alignedPngSha256": "35d8a201d5663997e12c425c0f6cc8700731750a475bf65b7f17a8bb756b525f",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 14,
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 166,
+            "y": 77.5
+          },
+          "alignedPngSha256": "af1b82896be6cda30a2ba82cd1e6a999829a30d2f0ed26c20ffd51749a8f59a1",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 15,
+          "crown": {
+            "x": 151,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 162,
+            "y": 76.5
+          },
+          "alignedPngSha256": "2d6bb70347f364139fc33ed66aace950d6465c2734171eb1374622b83cb380c8",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "sheet": "raw/walk.attempt1.png",
+      "sourceSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+      "cells": [
+        {
+          "index": 2,
+          "crown": {
+            "x": 114,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 125,
+            "y": 64.5
+          },
+          "alignedPngSha256": "b5eb5fcc054009078088ce94a21f97ba637db8c4222fb3e11a276861291ca635",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 114,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 126,
+            "y": 64.5
+          },
+          "alignedPngSha256": "4011074b1cb7baf98d55fde63c8de0dfd846039e6302837fa428b3ba4c981291",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 11,
+          "crown": {
+            "x": 113,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 124,
+            "y": 65.5
+          },
+          "alignedPngSha256": "cbab47fa844a148aaac72754ca66601a0a16f3359e386824bed02ec1f577c959",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        }
+      ]
+    },
+    {
+      "name": "dash",
+      "sheet": "raw/hit-dash.attempt1.png",
+      "sourceSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+      "cells": [
+        {
+          "index": 1,
+          "crown": {
+            "x": 125,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 135,
+            "y": 87.5
+          },
+          "alignedPngSha256": "eeb5350d06ea6f9f3c22c0e23f81978708d6a08612e16b053bea03cf89480a86",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 2,
+          "crown": {
+            "x": 135,
+            "y": 43.5
+          },
+          "chin": {
+            "x": 143,
+            "y": 94.5
+          },
+          "alignedPngSha256": "671461a101efe6b96d00e83ae7acbe0c999b419c2e5128646eb781739d8fe818",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 3,
+          "crown": {
+            "x": 145,
+            "y": 43.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 95.5
+          },
+          "alignedPngSha256": "e2adb36e3ec4f43b8016eeb3a8a61ab54088c86339d6f7e27a0c559881d70959",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 4,
+          "crown": {
+            "x": 154,
+            "y": 33.5
+          },
+          "chin": {
+            "x": 166,
+            "y": 84.5
+          },
+          "alignedPngSha256": "187e1b1671146f01c8a9ae2543fb7d56dfb21de675ae12b286ebb04acd8e5658",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 5,
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157,
+            "y": 81.5
+          },
+          "alignedPngSha256": "b47ba2d195ff07a6ad35ef34d05d4505bec3adf60a4dcd8e1fa21bda809ad06e",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 6,
+          "crown": {
+            "x": 130,
+            "y": 39.5
+          },
+          "chin": {
+            "x": 140,
+            "y": 91.5
+          },
+          "alignedPngSha256": "aedca6f537969a6797f87d839e56ed7a05797fe9c41e8b29004d66950cb108e6",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 7,
+          "crown": {
+            "x": 126,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 137,
+            "y": 88.5
+          },
+          "alignedPngSha256": "f214a0ac74f3e1a4438d249ec0b83a789e9c9cd8443e685f4c1f39914944e5f9",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        },
+        {
+          "index": 8,
+          "crown": {
+            "x": 115,
+            "y": 20.5
+          },
+          "chin": {
+            "x": 126,
+            "y": 73.5
+          },
+          "alignedPngSha256": "ecf1411d0eb5d6915c0ecdec87517c0d867d543171757a9cccb172893b0ff39a",
+          "status": "unjudged native semantic candidate; row/neighbor support review required"
+        }
+      ]
+    }
+  ]
+}

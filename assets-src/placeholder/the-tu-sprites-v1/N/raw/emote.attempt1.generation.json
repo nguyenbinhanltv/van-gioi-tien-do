@@ -1,0 +1,18 @@
+{
+  "clip": "emote",
+  "dir": "N",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:45:25 UTC",
+  "prompt": "EDIT target image1 NORTH straightBACK sprite sheet. Image1acceptedidle EDIT TARGET; image2masterreference. EXACT 4 equalSQUARE columns 2 rows,8completefullbodyframes rowmajor,aspect4:2. EVERY cell faces NORTH / directly AWAY from viewer toward screenUP. EXACT straight BACK view, slight overhead orthographic isometric camera matching image1; symmetricalback, NO side-profile/NEturn, NO visible eyes/nose/mouth/face. Same compact STOCKY adult male earth tank, broad back/stout full-length legs, short darkbrown hair/topbun/jadehairpin. Ivory sleeves/trousers#E9EEF0, mountain-blue short split tabard#5E8798 with bronze#B58A4A CLOUD EMBLEM acrossupperback and bronze cloud hemtrim. Dark-blue#294451 waist sash BAND ONLY, no frontknot seen; twotails largely hiddenbehindbackpanel. Dark boots. Bothhands wear large bronze stone-block EARTH GAUNTLETS with square meander emblem, ochre#E3C07F highlights/brown#5B4222 shadows. No sword/shield/platform/weapons/extraarmor/longhair. Exact fine ink outlines and restrained2-3tone painterly celshading, NWlight. Same adult headsize/torso/limbs inallframes, natural redrawn clothfolds, no rubber limbs. FRAMING: eachcell256units, bun topy20, boot solesy232, height212, pelvisaxisx127.54. Allframes exactsameanatomicalscale; no zoom/shrinking.  EDIT image1 acceptedIDLEsheet, image2 masteridentity only. KeepEXACT image1 canvas/grid andeachfigureheight/headbunposition/torso/legs/boots. ChangeONLYarms/gauntlets:1unchangedidle;2handsrise;3rightfistmeetsleftpalmatthechestAWAYfromcamera;4hold;5tinypolitechinnodWITHOUTmovingbun;6returnchin;7handslower;8unchangedidle. HandsmostlyhiddenbehindtorsofromstraightBACK, upperarm/elbowmotionvisible. DO NOT turncamera/head toshowface. NO zoom/rescale/elongationofbody. Pureflatopaque#FF00FF background, removeALL borders/gridlines/template marks/ticks/text. No shadows/scenery/floor/glow/particles/rocks/afterimages/weapons. Allfigures sameanatomicalscale, entirelyinowncells.",
+  "references": ["sheets/idle.png", "../../the-tu-continuous-v1/reference/N.master4x.png"],
+  "selectedOutput": "sheets/emote.png",
+  "status": "source; final sheet uses documented cell4 salute reuse and edge trim; directional QA and Cocos capture PASS",
+  "utcEndObserved": "2026-11-06 19:46:55 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-cf498b5d-2d60-4810-a7bd-e5946e0ffa9d.png",
+  "originalBackup": "raw/originals/emote.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}

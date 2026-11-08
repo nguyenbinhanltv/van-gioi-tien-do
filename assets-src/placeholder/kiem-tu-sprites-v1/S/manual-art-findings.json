@@ -1,0 +1,80 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "kiem-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "clip": "run",
+      "dir": "S",
+      "cell": -1,
+      "kind": "contact_phase",
+      "metric": "axis_probe_limitation_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "info",
+      "status": "open",
+      "note": "S travel is screen depth (axis x0,y1). Current checkFootSlide assumes horizontal dx. Its accepted metrics are diagnostic, not actual S ground-slide measurements."
+    },
+    {
+      "clip": "walk",
+      "dir": "S",
+      "cell": -1,
+      "kind": "contact_phase",
+      "metric": "axis_probe_limitation_count",
+      "value": 1,
+      "limit": 0,
+      "severity": "info",
+      "status": "open",
+      "note": "Depth-separated soles need direction-aware contact tracking; no speed or threshold change."
+    },
+    {
+      "clip": "attack_3",
+      "dir": "S",
+      "cell": 2,
+      "kind": "other",
+      "metric": "tight_blade_margin_px",
+      "value": 4,
+      "limit": 12,
+      "severity": "warn",
+      "status": "open",
+      "note": "Cleanup brings complete overhead blade inside cell, but top margin remains about4 raw pixels. Upright torso score0.68 vs0.70 is retained in the pose diagnostic; this raised-sword frame has a declared anatomical exception."
+    },
+    {
+      "clip": "attack_3",
+      "dir": "S",
+      "cell": 3,
+      "kind": "other",
+      "metric": "tight_blade_margin_px",
+      "value": 2,
+      "limit": 12,
+      "severity": "warn",
+      "status": "open",
+      "note": "Overhead blade tip is visible but near top cell edge; improve margin in later art pass."
+    },
+    {
+      "clip": "die",
+      "dir": "S",
+      "cell": 5,
+      "kind": "other",
+      "metric": "unexcepted_torso_similarity",
+      "value": 0.65,
+      "limit": 0.7,
+      "severity": "info",
+      "status": "open",
+      "note": "Side-prone frame uses documented collapse exception; upright bbox crop does not follow anatomical torso. Diagnostic retained."
+    },
+    {
+      "clip": "attack",
+      "dir": "S",
+      "cell": 5,
+      "kind": "other",
+      "metric": "unexcepted_torso_similarity",
+      "value": 0.67,
+      "limit": 0.7,
+      "severity": "info",
+      "status": "open",
+      "note": "Follow-through lunge uses declared anatomical exception; raw diagnostic retained."
+    }
+  ]
+}

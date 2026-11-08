@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:36:09.011Z",
+  "utcRecordedCompleted": "2026-11-07T21:39:34.241Z",
+  "prompt": "Use case: identity-preserve / precise-object-edit. Correct top-edge clipping and oversizedheads in this14frameATTACK2 hook sheet. Preserve EXACT14bodyposes, punch/hook timing, anticipation/impacthold/followthrough, torso/arms/gauntlets/legs/feet/ivoryapron/sash positions and BODYscale. Do NOT flatten motion or shrink wholefigures. Match entire skull/face/mainhaircap units to PINNED MASTER image2: about50.7logicalpx crown-to-chinEuclidean in256cell(~62nativepx in313.5cell), same exact adulttan squarejaw/ambereyes/thickbrow identity and internalfaceproportions. Currentheads too big: reduce onlyheadunits roughly10-15% as needed, connectneck naturally. ALSO make elevatedbun/topknot a smallcompact tiedtuft atmost6logicalpx above maincap crown (~7nativepx), preservegoldtie/amberribbons but no tallbun or upwardhair/ribbonarches. Ribbons flow sideways/back/down with delayedmotion. Keep mainfaceangles/headcenters coherent. This removes realclipping without bodyscaling: beforealignment wholefigure mustfitbelow230logicalpx height with clearheadroom, by correctingheads/secondaryhair ONLY. Exact4x4squaregrid,14used+last2blankmagenta, identicalcanvas/poses/cellpositions. No labels/effects/shadow. Samecharcoal/ivory/amber/bronze2-tonecel originaldesign.",
+  "references": ["raw/attack_2.attempt1.png", "../reference/E.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-286bf01b-1ad6-41a0-88a2-5a697064340e.png",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T21:39:34.241Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  }
+}

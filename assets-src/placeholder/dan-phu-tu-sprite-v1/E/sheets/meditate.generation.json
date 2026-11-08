@@ -1,0 +1,15 @@
+{
+  "id": "E-meditate-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:38:18 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:38:48 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production meditate sprite sheet for DAN/PHU TU support healer A, 8 complete poses. Reference1 exact E master, reference2 exact template. EXACT 4 COLUMNS x 2 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Seated cross-legged meditation, upright spine and hands resting over knees, whisk laid diagonally across lap held in right hand, talisman left hand; subtle breathing loop with smooth seam. Head size and limb dimensions identical to standing master, seated height legitimately shorter. All frames seated, not shrinking the anatomy. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/meditate.template.png"],
+  "output": "E/sheets/meditate.png",
+  "toolOutputId": "exec-782a8c98-75dc-458f-80fc-0f9584ec971a.png"
+}

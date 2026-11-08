@@ -1,0 +1,257 @@
+{
+  "character": "dan-phu-tu",
+  "direction": "SE",
+  "stem": "danphutu",
+  "master": "../reference/SE.master.png",
+  "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../character-calibration.json"
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "1": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "2": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "3": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "4": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "5": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "6": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained",
+        "7": "seated-meditation: crossed legs reduce pose height; original anatomical scale retained"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "run",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheet": "sheets/dash.png",
+      "manifest": "templates/dash.template.json",
+      "exceptions": {
+        "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json"
+    },
+    {
+      "name": "attack",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_1.png",
+      "manifest": "templates/attack_1.template.json",
+      "exceptions": {
+        "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "8": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "1": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "2": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "3": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "4": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "5": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "6": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling",
+        "7": "lunge: forward torso inclination and bent knees reduce pose height; no rescaling"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 5,
+      "frames": 14,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 2,
+      "frames": 4,
+      "durationSec": 0.2,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.png",
+      "manifest": "templates/hit.template.json"
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.8,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "2": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "3": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "4": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "5": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "6": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "7": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "8": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "9": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "10": "die-collapse: knees buckle then body falls sideways; no anatomical resizing",
+        "11": "die-collapse: knees buckle then body falls sideways; no anatomical resizing"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 6,
+      "frames": 24,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "manifest": "templates/tribulation.template.json"
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "manifest": "templates/emote.template.json",
+      "exceptions": {
+        "6": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+        "7": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+        "8": "bow: neck and torso incline in a respectful greeting; no anatomical resizing",
+        "9": "bow: neck and torso incline in a respectful greeting; no anatomical resizing"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "clip": "attack",
+  "direction": "E",
+  "repairCells": [7, 8],
+  "prompt": "Precise LOCAL PADDING REPAIR of attached KIEMTU attack14-frame4x4sheet. ONLYchange frame8(row2,col4) and frame9(row3,col1),theextendedswordimpact/holdposes. Their swordtipis too close to/crossingthecellrightedge. Keep EXACT1254x1254canvas,all14posesandlast2emptycells,samebody/head/face/costume/scale/stance. InONLYthese2cells,bendrightelbowslightlytocarrygrip~12-16nativepxbacktowardbody,andtiltblade~10degreesdownifneededsoEVERYsteelbladetiphasatleast12nativepxMAGENTAspacebeforerightcellborder. Preservephysicalblade/hiltidentity,right-handgrip,premiumsimpleT1steelsword. DoNOTshortenswordunrealistically,shrinkwholecharacter,movefoot/head/bodyroot,flattenlunge,orchangeface. Keepdynamiclowimpactstanceandhair/sleevelag. Noothercellshouldchange,noaddedFX/shadow/labels/grid. OPAQUEPUREMAGENTA#FF00FFbackground. Frame9isimpactholdwithsamerepairedreachasframe8. Other12activecellsand2emptycellsmustremainidentical.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:31:03.946Z",
+  "input": "sheets/attack.raw.png",
+  "status": "AI edit retained raw; selected-cell composite and padding/head checks pending",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-0f5adf1e-e570-4111-8f10-b3b197fbd1b7.png",
+  "utcCompletedRecorded": "2026-11-07T21:34:22.487Z",
+  "rawFile": "sheets/attack.repair-attempt-02.raw.png",
+  "rawSha256": "9fd7faa6a748228385188daba52e47f9ba4e99ffcac94a63c5e6f39618c73057",
+  "originalOutputByteIdentical": true,
+  "rawHashVerifiedUTC": "2026-11-08T05:05:28.293796+00:00"
+}

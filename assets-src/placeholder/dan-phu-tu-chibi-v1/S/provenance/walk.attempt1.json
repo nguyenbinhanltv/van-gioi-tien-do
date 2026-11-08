@@ -1,0 +1,28 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 04:43:36 UTC"
+  },
+  "prompt": "ONE4x4 production sprite sheet, EXACTLY16unique sequential WALK drawings row-major, all16cells used. EDIT image1 master lattice; image2 is AUTHORITATIVE leading-foot contact ghost lattice (not extra feet); image3 approved identity master. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Smooth complete16-drawing walk cycle at24fps toward camera/SOUTH, not a side walk. First half RIGHT leg leads (viewer LEFT), second half LEFT leg leads (viewer RIGHT). Follow colored foot ghosts for contact/down/passing/up phases; planted foot moves back/up relative the advancing body, then lifts, swings toward camera and lands. Alternate distinctly, no duplicated/reordered poses or sliding rigid standstill. Keep both shoes legible below moving hem where physically visible, no hidden/missing planted foot. Gentle hip shift and2-4px bob; head remains upright with constant scale/identity, body scale fixed. Hair, sleeve ends, sash and horsehair lag naturally1-2frames and settle. Whisk stays in the same hand and design; relaxed left-palm motion small. Last drawing connects to first. Respect the guide ground/foot positions rather than simply repeating the neutral fullbody; do not paint guides themselves. Equal four columns/four rows, one whole uncut character per cell. Return only the sheet.",
+  "inputs": ["templates/walk.master-guide.png", "templates/walk.template.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/walk.attempt1.png",
+  "status": "raw candidate; retained panel lines require slicer/background review, not a quality pass",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-1e9ee72c-b463-485e-b517-a9b22570acd4.png",
+  "sha256": "d2feedc8f6b2b45738ac55c16bf4d71ae70a1ddccd44bf58485f11033bf47982",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/walk.master-guide.png",
+      "sha256": "d42ef8e85050f86b0825f815efe2b992af6ec10c9665ef9650b2a2eb205787f2"
+    },
+    {
+      "file": "templates/walk.template.png",
+      "sha256": "bd4437065ea9f24cb8fe75208405dbdd4555a309467313c701827b87a67ba73a"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

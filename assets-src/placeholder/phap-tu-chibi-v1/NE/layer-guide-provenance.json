@@ -1,0 +1,65 @@
+{
+  "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/NE/project.json --out <fresh-temp-directory>",
+  "projectSha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123",
+  "masterImageSha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
+  "layerInputsSha256": "1d29c7ac0cc538a3e3018f9219dce2fa3bb77ce166962d0f39b3b6ff1c5f3852",
+  "guides": [
+    {
+      "file": "source-0.full.png",
+      "sha256": "56ad9b4a3e247d154cea2764a59a6543c79c0b5a720f9f7525d88b7c32567112"
+    },
+    {
+      "file": "source-1.full.png",
+      "sha256": "b9e6585412f34d06eeddc00d5f56caf7fa096bd175e8df863cb8f4f4248edde3"
+    },
+    {
+      "file": "source-2.full.png",
+      "sha256": "ae7bedf5d8193443680d4b6a1179015b84c30e3758f9b2c6aeaa2c0e0238119a"
+    },
+    {
+      "file": "source-3.full.png",
+      "sha256": "9c562c72a3bfe3076741cd595085a21ae660b0b77557da23cc296f0bd2c7f883"
+    },
+    {
+      "file": "source-4.full.png",
+      "sha256": "ff009db397e810cb9cd8abfc510a9403bfa35fd0f6cd72bdff09110d7364b300"
+    },
+    {
+      "file": "source-5.full.png",
+      "sha256": "9f274be761b74ae3a181020315818e3f2e3515aa1f8efe187256cfa48e0a11cc"
+    },
+    {
+      "file": "source-6.full.png",
+      "sha256": "61bf7467fc56fe107e0e41d3e56895c63744f190a566d05d19f9c33abd11af31"
+    },
+    {
+      "file": "source-7.full.png",
+      "sha256": "34db4c46782e1562f4939ffa080d611c82907e19197cb88bc88d440f90f257a0"
+    },
+    {
+      "file": "source-8.full.png",
+      "sha256": "a108216f8923022eeae2577757860fb40a93f11c237d4e19d92d691caac52a0b"
+    },
+    {
+      "file": "source-9.full.png",
+      "sha256": "55efb686dd34975989c5d86ceedb46798b25cfd9afa144e7b908bb4454b6c7a4"
+    },
+    {
+      "file": "source-10.full.png",
+      "sha256": "9dc5cf603e9c8f313622eed8c03334eb9590c27149cf7c14370d0ebb5cff27eb"
+    },
+    {
+      "file": "source-11.full.png",
+      "sha256": "68b367044cf8154c0176762d829c46f214676d79c1c962faa0aad42087a2d06c"
+    },
+    {
+      "file": "source-12.full.png",
+      "sha256": "cc3532b250257ddec45c2a3785256b45a78464fd59a90caa2a7c7ab6700fbd81"
+    },
+    {
+      "file": "source-13.full.png",
+      "sha256": "f9949b7a9658d1eb2b04b59375b627f4c6af4457d232c4627dc90d39e52f7f84"
+    }
+  ],
+  "delivery": "Full-source compatibility only; derived guide PNGs remain temporary until the dedicated extraction pass."
+}

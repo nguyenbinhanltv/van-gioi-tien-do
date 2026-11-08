@@ -1,0 +1,87 @@
+{
+  "source": "T1-T5-front.raw.png",
+  "scale": 0.3769633507853403,
+  "records": [
+    {
+      "tier": 1,
+      "file": "reference/T1.front.master.png",
+      "pre": {
+        "height": 217.50785340314135,
+        "pelvisX": 80.4697604417434,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 217,
+        "pelvisX": 128.79799107142858,
+        "soleY": 232
+      },
+      "dx": 48.530239558256596,
+      "dy": -12.649214659685867
+    },
+    {
+      "tier": 2,
+      "file": "reference/T2.front.master.png",
+      "pre": {
+        "height": 217.50785340314135,
+        "pelvisX": 57.96177791125967,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.71853342275878,
+        "soleY": 232
+      },
+      "dx": 71.03822208874033,
+      "dy": -12.649214659685867
+    },
+    {
+      "tier": 3,
+      "file": "reference/T3.front.master.png",
+      "pre": {
+        "height": 217.50785340314135,
+        "pelvisX": 47.31899630729227,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.76814988290397,
+        "soleY": 232
+      },
+      "dx": 81.68100369270773,
+      "dy": -12.649214659685867
+    },
+    {
+      "tier": 4,
+      "file": "reference/T4.front.master.png",
+      "pre": {
+        "height": 217.50785340314135,
+        "pelvisX": 49.9252237554778,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 218,
+        "pelvisX": 128.67460842709022,
+        "soleY": 232
+      },
+      "dx": 79.0747762445222,
+      "dy": -12.649214659685867
+    },
+    {
+      "tier": 5,
+      "file": "reference/T5.front.master.png",
+      "pre": {
+        "height": 228.0628272251309,
+        "pelvisX": 60.28925034938342,
+        "soleY": 244.64921465968587
+      },
+      "post": {
+        "height": 228,
+        "pelvisX": 128.8118045476536,
+        "soleY": 232
+      },
+      "dx": 68.71074965061658,
+      "dy": -12.649214659685867
+    }
+  ],
+  "note": "Same source scale as canonical T1 turnaround, no per-tier fit. T4/T5 conceptual FX remain reference-only and need separate runtime layers."
+}

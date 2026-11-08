@@ -1,0 +1,64 @@
+{
+  "kind": "generation-guide-only",
+  "master": "../reference/SE.master.png",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "offsets": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": -2,
+      "y": 10
+    },
+    {
+      "x": 0,
+      "y": 28
+    },
+    {
+      "x": 4,
+      "y": 45
+    },
+    {
+      "x": 12,
+      "y": 75
+    },
+    {
+      "x": 24,
+      "y": 110
+    },
+    {
+      "x": 36,
+      "y": 130
+    },
+    {
+      "x": 45,
+      "y": 145
+    },
+    {
+      "x": 50,
+      "y": 150
+    },
+    {
+      "x": 52,
+      "y": 152
+    },
+    {
+      "x": 52,
+      "y": 154
+    },
+    {
+      "x": 52,
+      "y": 154
+    }
+  ],
+  "note": "Fixed head unit, translated guide only; output measured separately",
+  "masterSha256": "b0d176b957e8f518f703a41c8c41f6f4ea62706fb5c3ea6805935d773ed0060b",
+  "utcRecorded": "2026-11-07T22:17:59.955020+00:00"
+}

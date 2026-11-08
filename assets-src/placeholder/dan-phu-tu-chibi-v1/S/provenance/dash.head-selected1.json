@@ -1,0 +1,135 @@
+{
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "candidate": "raw/dash-head1.attempt1.png",
+  "candidateSha256": "6f0160a1ce4b7dc7d92a4a4abc82adc2ddb7fa0bc3e1f899ddbfdee5e72c29aa",
+  "out": "raw/hit-dash.head-selected1.png",
+  "outSha256": "6cd6a286c24dd2ce18e66b2021fcaa7d828cdcc1981c3adadab95919d58bd586",
+  "mask": "templates/dash.head-mask1.png",
+  "maskSha256": "a362cff612bce367dd1598737b233e327ea3f6e4d2f7fea59f47c55fafffde77",
+  "method": "Exact pixel selection from AI output only inside explicit binary head/neck-junction polygons. All other source RGBA including hidden RGB retained. Not a rescale or geometric output transform. D57 computes pre-edit alignment. Whisk excluded below left head edge; body below jaw joining area locked.",
+  "regions": [
+    {
+      "cell": 6,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 72.5],
+        [108, 72.5],
+        [106, 55.5],
+        [96, 51.5]
+      ],
+      "changedBytes": 19792
+    },
+    {
+      "cell": 7,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 91.5],
+        [108, 91.5],
+        [106, 74.5],
+        [96, 70.5]
+      ],
+      "changedBytes": 24418
+    },
+    {
+      "cell": 8,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 88.5],
+        [108, 88.5],
+        [106, 71.5],
+        [96, 67.5]
+      ],
+      "changedBytes": 24081
+    },
+    {
+      "cell": 9,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 88.5],
+        [108, 88.5],
+        [106, 71.5],
+        [96, 67.5]
+      ],
+      "changedBytes": 24475
+    },
+    {
+      "cell": 10,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 91.5],
+        [108, 91.5],
+        [106, 74.5],
+        [96, 70.5]
+      ],
+      "changedBytes": 25466
+    },
+    {
+      "cell": 11,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 83.5],
+        [108, 83.5],
+        [106, 66.5],
+        [96, 62.5]
+      ],
+      "changedBytes": 23256
+    },
+    {
+      "cell": 12,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 87.5],
+        [108, 87.5],
+        [106, 70.5],
+        [96, 66.5]
+      ],
+      "changedBytes": 23285
+    },
+    {
+      "cell": 13,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 87.5],
+        [108, 87.5],
+        [106, 70.5],
+        [96, 66.5]
+      ],
+      "changedBytes": 23858
+    },
+    {
+      "cell": 14,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 80.5],
+        [108, 80.5],
+        [106, 63.5],
+        [96, 59.5]
+      ],
+      "changedBytes": 21420
+    },
+    {
+      "cell": 15,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 72.5],
+        [108, 72.5],
+        [106, 55.5],
+        [96, 51.5]
+      ],
+      "changedBytes": 19820
+    }
+  ],
+  "changedBytes": 229871,
+  "status": "REJECTED: native review shows undersized maincap-to-jaw after AI whole-head shrink and loose-hair mask fragment in dash4. No head evidence/pass adopted; original dynamic full-source retained. D57/outside-mask proof is valid preservation only, not anatomy/visual certification."
+}

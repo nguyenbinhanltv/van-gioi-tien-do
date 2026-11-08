@@ -1,0 +1,28 @@
+{
+  "clip": "channel",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:17:40 UTC",
+  "utcEnd": "2026-11-07 21:18:11 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the TWELVE master-head stamps in image 1 into a seamless CHANNEL animation. Image 2 is the exact T1 jade healer and whisk reference. Keep the 4-column × 3-row layout, square cells, 12 full-body frames row-major, 4:3 sheet aspect. Preserve the head stamps' size, guided positions, face structure and E profile; every nose points RIGHT.\n\nHold a sustained casting stance: left palm extended forward at chest height, right hand naturally gripping the same upright brown whisk beside the shoulder. One continuous shaft, ONE cylindrical bronze collar, soft white horsehair, always visible. Feet planted, knees soft. Do not make a new cast launch each cycle.\n\nDraw 12 smooth sequential phases of one breath pulse: neutral, begin inhale, small chest expansion, peak, hold, relax, neutral, exhale, lowest chest, relax, recover, near-first. Sleeves, side hair, sash ends and whisk strands lag the chest slightly and settle. Keep the head scale and foot placement stable. Subtle motion is intentional; do not enlarge or squash the anatomy.\n\nFixed adult female face, olive-brown almond eye, straight delicate brow, serene lips, flatter main cap, distinct folded bun, jade pin and side strands. Plain warm ivory robe, jade collar/cuffs/sash, narrow antique-gold edge, sparse ink hem, jade/ivory shoes. Two cel tones plus small highlight and narrow rim, tinted outlines, NW light.\n\nHead crown-to-chin remains approximately 53.5 logical pixels as the actual stamps. Entire figure, bun, whisk and boots inside each cell. Remove all guides, borders, marks and crop edges. Opaque #FF00FF background. No floor, shadows, text, talismans, lotus, aura, glow, particles, blur, afterimages or extra figures. Last frame flows into the first.",
+  "references": ["../templates/channel.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/channel.attempt1.png",
+  "status": "candidate; full expected frames visually present; no FX baked into body; actual QA pending",
+  "sha256": "6a81174028c033a77017b6926f7c6b891736dd1726825dac1580206991a6595a",
+  "rawSha256": "6a81174028c033a77017b6926f7c6b891736dd1726825dac1580206991a6595a",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/channel.head-guide.png",
+      "sha256": "67f50c4022fcc80ce40010580bc3c05dc48826bc864b4292d220d09c229dd619"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

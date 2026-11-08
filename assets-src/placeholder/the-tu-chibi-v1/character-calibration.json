@@ -1,0 +1,208 @@
+{
+  "character": "the-tu-chibi-v1",
+  "kind": "master-anatomical-landmarks-v1",
+  "scale": 0.3375,
+  "targetHeight": 216,
+  "referenceHeight": 640,
+  "referenceFrames": 1,
+  "cell": 256,
+  "ground": 232,
+  "landmarks": {
+    "direction": "S",
+    "source": "reference/S.master-native.png",
+    "method": "manual art landmarks; main hair cap excludes elevated bun/strands",
+    "crownY": 64,
+    "soleY": 704,
+    "chinY": 210,
+    "eyeY": 165,
+    "shoulderJointX": [114, 319]
+  },
+  "ratios": {
+    "head": 0.228125,
+    "eye": 0.1578125,
+    "shoulders": 0.3203125
+  },
+  "normalization": "One uniform216/640 reference scale across all five views, translation only per view. E motion uses declared whole-sheet square-cell DPI preparation followed by locked scale1; full15clip202frame QA passes. Whole-alpha master metrics remain separate from manual anatomical construction landmarks.",
+  "directions": [
+    {
+      "direction": "E",
+      "unclippedTop": 6.212499999999977,
+      "source": {
+        "left": 55,
+        "right": 323,
+        "top": 34,
+        "bottom": 703,
+        "height": 669,
+        "width": 268,
+        "pelvisX": 230.71806759701423
+      },
+      "metrics": {
+        "left": 69,
+        "right": 159,
+        "top": 6,
+        "bottom": 232,
+        "height": 226,
+        "width": 90,
+        "pelvisX": 127.69085805934242
+      },
+      "record": {
+        "pre": {
+          "height": 225.78750000000002,
+          "pelvisX": 77.86734781399231,
+          "soleY": 237.26250000000002
+        },
+        "post": {
+          "height": 226,
+          "pelvisX": 127.69085805934242,
+          "soleY": 232
+        },
+        "dx": 50.13265218600769,
+        "dy": -5.262500000000017
+      }
+    },
+    {
+      "direction": "SE",
+      "unclippedTop": 6.887499999999989,
+      "source": {
+        "left": 12,
+        "right": 347,
+        "top": 34,
+        "bottom": 701,
+        "height": 667,
+        "width": 335,
+        "pelvisX": 180.53933928800376
+      },
+      "metrics": {
+        "left": 71,
+        "right": 184,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 113,
+        "pelvisX": 127.7143386439422
+      },
+      "record": {
+        "pre": {
+          "height": 225.1125,
+          "pelvisX": 60.93202700970127,
+          "soleY": 236.5875
+        },
+        "post": {
+          "height": 225,
+          "pelvisX": 127.7143386439422,
+          "soleY": 232
+        },
+        "dx": 67.06797299029873,
+        "dy": -4.587500000000006
+      }
+    },
+    {
+      "direction": "S",
+      "unclippedTop": 6.887499999999989,
+      "source": {
+        "left": 36,
+        "right": 380,
+        "top": 34,
+        "bottom": 701,
+        "height": 667,
+        "width": 344,
+        "pelvisX": 205.36403482437706
+      },
+      "metrics": {
+        "left": 71,
+        "right": 187,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 116,
+        "pelvisX": 127.78143401454797
+      },
+      "record": {
+        "pre": {
+          "height": 225.1125,
+          "pelvisX": 69.31036175322726,
+          "soleY": 236.5875
+        },
+        "post": {
+          "height": 225,
+          "pelvisX": 127.78143401454797,
+          "soleY": 232
+        },
+        "dx": 58.689638246772745,
+        "dy": -4.587500000000006
+      }
+    },
+    {
+      "direction": "NE",
+      "unclippedTop": 6.887499999999989,
+      "source": {
+        "left": 58,
+        "right": 370,
+        "top": 35,
+        "bottom": 702,
+        "height": 667,
+        "width": 312,
+        "pelvisX": 219.74181877217802
+      },
+      "metrics": {
+        "left": 73,
+        "right": 179,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 106,
+        "pelvisX": 127.69897446209532
+      },
+      "record": {
+        "pre": {
+          "height": 225.1125,
+          "pelvisX": 74.16286383561008,
+          "soleY": 236.925
+        },
+        "post": {
+          "height": 225,
+          "pelvisX": 127.69897446209532,
+          "soleY": 232
+        },
+        "dx": 53.83713616438992,
+        "dy": -4.925000000000011
+      }
+    },
+    {
+      "direction": "N",
+      "unclippedTop": 6.887499999999989,
+      "source": {
+        "left": 44,
+        "right": 375,
+        "top": 32,
+        "bottom": 699,
+        "height": 667,
+        "width": 331,
+        "pelvisX": 209.38327439151237
+      },
+      "metrics": {
+        "left": 72,
+        "right": 184,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 112,
+        "pelvisX": 127.64980194454448
+      },
+      "record": {
+        "pre": {
+          "height": 225.1125,
+          "pelvisX": 70.66685510713543,
+          "soleY": 235.91250000000002
+        },
+        "post": {
+          "height": 225,
+          "pelvisX": 127.64980194454448,
+          "soleY": 232
+        },
+        "dx": 57.33314489286457,
+        "dy": -3.9125000000000227
+      }
+    }
+  ]
+}

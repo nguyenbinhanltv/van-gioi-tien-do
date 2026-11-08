@@ -1,0 +1,25 @@
+{
+  "clip": "attack",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Image2 has unscaled master HEAD STENCILS; maintain exact skull size and face, may translate/tilt for action but NEVER enlarge heads. CLIP attack (first basic attack):14used frames4x4, lasttwo cells EMPTYmagenta.0ready,1-3anticipation leftfan draws back beside cheek right handbalances,4-6strong diagonal fan cut down-right with leftshoulder rotation and short forward step,7-8impact hold,9-11followthrough fan low rightside of image,12-13recover ready. Keep SE frontthreequarter down-right facing. Stable planted rearfoot, dynamic bent front knee. Longsleeve drapes lag then settle, redribbons/hair trail sweep. One fan secure in left hand entire sequence, no ghostfans/FX. Locked headsize and anatomy, fullbodyinsidecell. Action with anticipation and impact hold; no simple idle repeats. Use16celllattice with exactly14figures.",
+  "utcStart": "2026-11-07 22:07:32 UTC",
+  "references": ["reference/SE.master.png", "SE/templates/attack.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": "2026-11-07 22:08:23 UTC",
+  "raw": "raw/attack.attempt1.png",
+  "selected": "sheets/attack.png",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "433b2d7dbe483b7f475456801114436e63bc894954467cc6996f70817b5c6f30",
+  "utcRawOutputFileModified": "2026-11-07T22:08:13.516Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/attack.head-guide.png",
+      "sha256": "ce92b45e0ca6e4fff38ca1d4d12d8c8579d6a2839c92c64d1f7b45c700f3ea68"
+    }
+  ],
+  "selectedSha256": "433b2d7dbe483b7f475456801114436e63bc894954467cc6996f70817b5c6f30"
+}

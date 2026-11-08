@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.channel",
+  "prompt": "undefined4 columns x2 rows,8 equal square cells,aspect2:1, row-major. Compact combat staging, full sprite at most150px wide in256cell. Body upright203..215px all frames, stable head height, shallow knee flex only. Open fan and arms stay close enough to body; fan never extends above bun or hides face. 8-frame sustained casting LOOP. Planted upright stance, right-hand open fan projects southeast at upper chest; left palm extended in support. Mild wrist/shoulder tremor and cloth/ribbon follow-through, smooth8->1.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:24:00 UTC",
+  "utcEnd": "2026-11-06 21:24:40 UTC",
+  "selectedOutput": "SE/sheets/channel.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/channel.template.png"],
+  "attempt": 1
+}

@@ -1,0 +1,50 @@
+{
+  "source": "../reference/NE.master.png",
+  "method": "Opaque bottom two-row centroids in identified boot ROIs, projected perpendicular to public facingGroundVector",
+  "boxes": {
+    "L": {
+      "x0": 97,
+      "x1": 124,
+      "y0": 211,
+      "y1": 233
+    },
+    "R": {
+      "x0": 128,
+      "x1": 164,
+      "y0": 208,
+      "y1": 233
+    }
+  },
+  "L": {
+    "x": 107.28571428571429,
+    "y": 228.42857142857142,
+    "n": 21
+  },
+  "R": {
+    "x": 137.76666666666668,
+    "y": 230.33333333333334,
+    "n": 30
+  },
+  "axis": {
+    "x": 0.8944271909999159,
+    "y": -0.4472135954999579
+  },
+  "stanceWidth": 15.33516714854858,
+  "runStance": 0.3333333333333333,
+  "walkStance": 0.5,
+  "master": {
+    "left": 94,
+    "right": 169,
+    "top": 25,
+    "bottom": 232,
+    "height": 207,
+    "width": 75,
+    "pelvisX": 127.17281348788198
+  },
+  "guides": {
+    "ground": 232,
+    "head": 25,
+    "pelvis": 128.5,
+    "centerX": 127.17281348788198
+  }
+}

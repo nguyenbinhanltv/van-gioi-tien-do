@@ -1,0 +1,295 @@
+{
+  "character": "the-tu",
+  "direction": "E",
+  "stem": "thetu",
+  "master": "../../the-tu-continuous-v1/reference/E.master4x.png",
+  "palette": {
+    "lock": true
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "manifest": "templates/idle.template.json",
+      "calibration": {
+        "referenceHeight": 331.4148802017654
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 1,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "calibration": {
+        "referenceHeight": 406.0290037831021
+      },
+      "exceptions": {
+        "0": "seated: legs folded cross-legged, original anatomical scale retained",
+        "1": "seated: legs folded cross-legged, original anatomical scale retained",
+        "2": "seated: legs folded cross-legged, original anatomical scale retained",
+        "3": "seated: legs folded cross-legged, original anatomical scale retained",
+        "4": "seated: legs folded cross-legged, original anatomical scale retained",
+        "5": "seated: legs folded cross-legged, original anatomical scale retained",
+        "6": "seated: legs folded cross-legged, original anatomical scale retained",
+        "7": "seated: legs folded cross-legged, original anatomical scale retained"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "manifest": "templates/walk.template.json",
+      "calibration": {
+        "referenceHeight": 406.0290037831021
+      }
+    },
+    {
+      "name": "run",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "manifest": "templates/run.template.json",
+      "calibration": {
+        "referenceHeight": 363
+      },
+      "contacts": {
+        "R": [0, 1, 2],
+        "L": [5, 6, 7]
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 3,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "free",
+      "sheet": "sheets/dash.png",
+      "manifest": "templates/dash.template.json",
+      "calibration": {
+        "referenceHeight": 468.7414880201765
+      },
+      "exceptions": {
+        "1": "dash-lunge: knees fold and torso leans/flies forward, anatomical scale unchanged",
+        "2": "dash-lunge: knees fold and torso leans/flies forward, anatomical scale unchanged",
+        "3": "dash-lunge: knees fold and torso leans/flies forward, anatomical scale unchanged",
+        "4": "dash-lunge: knees fold and torso leans/flies forward, anatomical scale unchanged"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "calibration": {
+        "referenceHeight": 406.0290037831021
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.png",
+      "manifest": "templates/attack.template.json",
+      "calibration": {
+        "referenceHeight": 363
+      },
+      "exceptions": {
+        "3": "punch-lunge: shallow torso rotation/weight transfer, anatomical scale unchanged",
+        "4": "punch-lunge: shallow torso rotation/weight transfer, anatomical scale unchanged",
+        "5": "punch-lunge: shallow torso rotation/weight transfer, anatomical scale unchanged",
+        "6": "punch-lunge: shallow torso rotation/weight transfer, anatomical scale unchanged"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "calibration": {
+        "referenceHeight": 363
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 5,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "calibration": {
+        "referenceHeight": 363
+      },
+      "exceptions": {
+        "3": "raised-gauntlets: both fists above bun; bounding face crop includes armor",
+        "4": "ground-slam-crouch: full-sized legs fold and torso drops, no frame scaling",
+        "5": "ground-slam-crouch: full-sized legs fold and torso drops, no frame scaling",
+        "6": "ground-slam-crouch: full-sized legs fold and torso drops, no frame scaling",
+        "7": "ground-slam-crouch: full-sized legs fold and torso drops, no frame scaling"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 7,
+      "frames": 14,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "manifest": "templates/cast.template.json",
+      "calibration": {
+        "referenceHeight": 331.4148802017654
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 8,
+      "durationSec": 0.4,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "manifest": "templates/channel.template.json",
+      "calibration": {
+        "referenceHeight": 406.0290037831021
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 4,
+      "durationSec": 0.2,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit.png",
+      "manifest": "templates/hit.template.json",
+      "calibration": {
+        "referenceHeight": 662.8297604035308
+      },
+      "exceptions": {
+        "1": "recoil: torso tilts back while feet brace",
+        "2": "recoil-recovery: shallow knee bend and lowered shoulders"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.8,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "manifest": "templates/die.template.json",
+      "calibration": {
+        "referenceHeight": 331.4148802017654
+      },
+      "exceptions": {
+        "2": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "3": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "4": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "5": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "6": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "7": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "8": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "9": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "10": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies",
+        "11": "die-collapse: full-size character bends, kneels and lies on side; upright face crop no longer applies"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 6,
+      "frames": 24,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "calibration": {
+        "referenceHeight": 234.37074401008826
+      },
+      "exceptions": {
+        "11": "brace-bend: knees and neck flex under crossed-gauntlet guard, original anatomy retained",
+        "12": "brace-bend: knees and neck flex under crossed-gauntlet guard, original anatomy retained",
+        "13": "brace-bend: knees and neck flex under crossed-gauntlet guard, original anatomy retained",
+        "14": "brace-bend: knees and neck flex under crossed-gauntlet guard, original anatomy retained"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 1,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "manifest": "templates/emote.template.json",
+      "calibration": {
+        "referenceHeight": 331.4148802017654
+      }
+    }
+  ],
+  "slice": {
+    "spill": {}
+  },
+  "backlog": "quality-backlog.json"
+}

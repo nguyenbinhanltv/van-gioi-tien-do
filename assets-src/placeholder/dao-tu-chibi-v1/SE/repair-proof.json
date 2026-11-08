@@ -1,0 +1,49 @@
+{
+  "original": "raw/attack_2.png",
+  "candidate": "raw/attack_2.clearance-candidate.png",
+  "selected": "raw/attack_2.clearance-repaired.png",
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "changed": [3, 4],
+  "before": [
+    "f622434e1802975daf3d800b6cf000f05aa71e50",
+    "eb512f765fdc0fd4d56a4d9bb14fbd54a4f0e65b",
+    "883966abd11f2fc60d179af13fa7fdf98b5137ff",
+    "04a86396b1f10aa52e307031300276ce3d3b5881",
+    "20441f694fcf5521044c9aaaccd3b76f64e4a617",
+    "87fa274d37889972d0c636a348c46eda690ce7c6",
+    "9cdf79aa5294836f7143fa53b07e5201ea839f2d",
+    "279fb030b48537507684811f2adaebd44e65d78f",
+    "b31d35e0ebc2c126246bcdb3595c5e142ba236f7",
+    "63803e535214c81257c73054b1d6f717a3b484bf",
+    "2b31ac4b03cb1b787c477aacaa7612c6b0d06326",
+    "24a18ae6c3b278114284ab905a5abcd7f279d545",
+    "3436b300f36cfc6bf6bd181b1e8dcc3153339264",
+    "4b582a24ee1f46129c892cad1910b3bd8ff4a998",
+    "05c813503e8974d6ec9581a58dae9d9cdabb489e",
+    "14f22064269cf20930d727d839c934e9c0a12df6"
+  ],
+  "after": [
+    "f622434e1802975daf3d800b6cf000f05aa71e50",
+    "eb512f765fdc0fd4d56a4d9bb14fbd54a4f0e65b",
+    "883966abd11f2fc60d179af13fa7fdf98b5137ff",
+    "d431930c81000be27fc3ed8078442aad99731c56",
+    "bbb510baba55b81e2d71cf943352e416cd32ddb2",
+    "87fa274d37889972d0c636a348c46eda690ce7c6",
+    "9cdf79aa5294836f7143fa53b07e5201ea839f2d",
+    "279fb030b48537507684811f2adaebd44e65d78f",
+    "b31d35e0ebc2c126246bcdb3595c5e142ba236f7",
+    "63803e535214c81257c73054b1d6f717a3b484bf",
+    "2b31ac4b03cb1b787c477aacaa7612c6b0d06326",
+    "24a18ae6c3b278114284ab905a5abcd7f279d545",
+    "3436b300f36cfc6bf6bd181b1e8dcc3153339264",
+    "4b582a24ee1f46129c892cad1910b3bd8ff4a998",
+    "05c813503e8974d6ec9581a58dae9d9cdabb489e",
+    "14f22064269cf20930d727d839c934e9c0a12df6"
+  ],
+  "unchangedCells": 14,
+  "resized": false,
+  "selectedSha256": "3bd0b8b18d8174b9a9acce9422d1020cca5ec193bbc6e111b60aefb23ebc92b0"
+}

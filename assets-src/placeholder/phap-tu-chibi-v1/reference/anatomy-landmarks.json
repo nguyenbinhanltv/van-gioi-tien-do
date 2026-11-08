@@ -1,0 +1,20 @@
+{
+  "status": "visually-approved-and-locked-by-orchestrator",
+  "source": "T1-turnaround.raw.png",
+  "sourcePixels": [2172, 724],
+  "method": "Manual visual landmarks on the front S view, approximate ±4 source pixels; exclude elevated bun, pin, ponytail and loose strands. No AI ruler used.",
+  "frontS": {
+    "mainHairCrownY": 74,
+    "soleY": 647,
+    "chinY": 211,
+    "eyeLineY": 168,
+    "shoulderLeftX": 965,
+    "shoulderRightX": 1113
+  },
+  "anatomicalHeight": 573,
+  "headFraction": 0.2391,
+  "eyeLineFraction": 0.164,
+  "shoulderFraction": 0.2583,
+  "targetAnatomicalHeight2x": 216,
+  "note": "Approximate front-view review measurements, not an automated anatomy detector. Nominal head/eye/shoulder readings fall in the shared guide bands. The 4 px landmark uncertainty is retained. Orchestrator visually approved and locked this corrected master before E motion generation. Whole-alpha bounds are recorded separately by master-preparation.json."
+}

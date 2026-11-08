@@ -1,0 +1,183 @@
+{
+  "tool": "@vgtd/sprite resampleAffine; deterministic owner-authorized HEAD ROI only",
+  "algorithm": "head-foreground-union-v2; excludes opaque-matte rectangle edges",
+  "model": "not applicable; original AI provenance retained",
+  "utc": "2026-11-08T06:10:58.003Z",
+  "authorization": "Orchestrator2026-11-08: uniform head ROI <=5%, chin/neck anchored, Lanczos3 feather, exact outside RGBA, D57,4x seam review. No frame/body scale.",
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "edited": "raw/hit-dash.head-roi.v1.png",
+  "editedSha256": "989a79db0e26f8d11e00612ed4822b19f6996502915e4f43c1a98c77e1a707ec",
+  "mask": "repair/dash.head-roi.v1.mask.png",
+  "maskSha256": "3a1c25ce0077ee74e0a500b2be74da84221a1e75dc812519008a6c9d0409deeb",
+  "inheritedRegistration": {
+    "kind": "inherited-registration",
+    "source": "raw/hit-dash.attempt1.png",
+    "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+    "mask": "repair/dash.head-roi.v1.mask.png",
+    "maskSha256": "3a1c25ce0077ee74e0a500b2be74da84221a1e75dc812519008a6c9d0409deeb",
+    "cells": [0, 2, 4, 9]
+  },
+  "rotation": 0,
+  "shear": 0,
+  "bodyCalibrationScale": 1,
+  "featherFunction": "smoothstep(clamp(min logical distance to ROI edge /3,0,1)); base band fully locked",
+  "geometry": "Exact whole-grid DPI/inset/registration conversion; +0.5 converts integer-centred annotation coordinates to resampler pixel edges",
+  "originalInputOnly": true,
+  "outsideMaskRgbaMismatches": 0,
+  "rows": [
+    {
+      "cell": 0,
+      "chin": {
+        "x": 131.5,
+        "y": 70.5
+      },
+      "estimatedSourceSpanPx": 55,
+      "factor": 0.9638078749598961,
+      "whiskGuardStartY": 41,
+      "whiskGuardEndY": 48,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets.",
+      "global": 6,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 67.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=67.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above41, ramps to106 at48; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 741,
+        "y": 314,
+        "width": 92,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 46.42319869452513,
+        "y": 86.447265625
+      },
+      "permittedPixels": 4464,
+      "changedPixels": 4363,
+      "registration": {
+        "dx": 2.0005139846939812,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 2,
+      "chin": {
+        "x": 133.5,
+        "y": 86.5
+      },
+      "estimatedSourceSpanPx": 57,
+      "factor": 0.95,
+      "whiskGuardStartY": 57,
+      "whiskGuardEndY": 64,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets.",
+      "global": 8,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 83.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=83.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above57, ramps to106 at64; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 114,
+        "y": 627,
+        "width": 92,
+        "height": 103
+      },
+      "sourceAnchorInPatch": {
+        "x": 48.86482368902668,
+        "y": 106.541015625
+      },
+      "permittedPixels": 5219,
+      "changedPixels": 5151,
+      "registration": {
+        "dx": 2.006714946121761,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 4,
+      "chin": {
+        "x": 135.5,
+        "y": 89.5
+      },
+      "estimatedSourceSpanPx": 60,
+      "factor": 0.95,
+      "whiskGuardStartY": 60,
+      "whiskGuardEndY": 67,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets.",
+      "global": 10,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 86.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=86.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above60, ramps to106 at67; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 737,
+        "y": 627,
+        "width": 92,
+        "height": 107
+      },
+      "sourceAnchorInPatch": {
+        "x": 51.69405642259869,
+        "y": 110.21484375
+      },
+      "permittedPixels": 5919,
+      "changedPixels": 5805,
+      "registration": {
+        "dx": 4.962748184417066,
+        "dy": 1
+      }
+    },
+    {
+      "cell": 9,
+      "chin": {
+        "x": 131.5,
+        "y": 70.5
+      },
+      "estimatedSourceSpanPx": 55,
+      "factor": 0.9638078749598961,
+      "whiskGuardStartY": 41,
+      "whiskGuardEndY": 48,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets.",
+      "global": 15,
+      "logicalRoi": {
+        "left": 94,
+        "top": 0,
+        "right": 168,
+        "bottom": 67.5
+      },
+      "featherLogicalPx": 3,
+      "lockedBase": "All original pixels at aligned-reference y>=67.5; chin/neck anchor untouched",
+      "whiskGuard": "Left ROI edge94 above41, ramps to106 at48; source left of edge remains exact",
+      "sourcePatch": {
+        "x": 1055,
+        "y": 941,
+        "width": 91,
+        "height": 83
+      },
+      "sourceAnchorInPatch": {
+        "x": 45.932164539312225,
+        "y": 86.447265625
+      },
+      "permittedPixels": 4434,
+      "changedPixels": 4349,
+      "registration": {
+        "dx": 1.9931925930974899,
+        "dy": 1
+      }
+    }
+  ],
+  "status": "SUPERSEDED anchor refinement. Four4xseams clean and D57 preservation passes; actual jawoutline2 is87.5 rather than draft86.5,0/9 centraljaw x130.5 not131.5. Next version starts ORIGINAL with same<=5% factors. Residual2/4 head failures remain, no stacking or inferred pass."
+}

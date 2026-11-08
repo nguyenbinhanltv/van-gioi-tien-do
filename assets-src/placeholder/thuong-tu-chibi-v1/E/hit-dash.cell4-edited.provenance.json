@@ -1,0 +1,38 @@
+{
+  "name": "E-dash-local4-master-lock",
+  "start": "2026-11-08T02:01:43.102Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-final-edited.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Redraw ONLY sourcecell10(row3col3, zero-based), the middle airborne DASH pose, in image1 exact1254x1254 4x4sheet. All other15cells unchanged. Keep same Thương tu adultmaleT1 E rightprofile/masteridentity image2, navy sleevelesswrap/ivoryVcollar/red sash, swept black cap/lowpony, straightspear/redpennon and connectedtwohands. Currentcell10 hasbothlegs tightlyfolded and torso compressed. Make this an EXTENDED AIRBORNE DASH phase: unfold ONE rear leg downward/back, knee nearlystraight, its bootsole at cell-localnative y275 (noty230); otherleg stillbentbehind. Boot remains airborne abovecommonfloor, wholeleganatomy SAMEcanonical216pxstandingscale; do notfitposeheight. Show full masterlike navy chest-to-waist plane andcleanivoryVcollar; moderateforward chest/spine10-15degrees, nothorizontal, cleanneck/shoulder/arms. Fixedhip/rootregistrationx, no zoom. Spear stillpointsright withcontinuousshaft andgrips, wholeweaponinsidecell7pxmargin. Head: currentcell10 skull isSLIGHTLYbig (~69nativepx cap-to-jaw); reducewholehead~3% to66.7nativepx. MATCH ENTIREHEAD SIZE/shape of adjacentcell9(row3col2), which iscorrect(~68nativepx), ratherthanoversizedcurrentcell10. Neckanchored; whole skull/face/ear/mainhair scalescoherently, no stretchingface ormovingjustcrown. Keep adultface locked tomasterimage2; no giantchibibabyhead. Maincapcrown excludesflyawayandpony. Keepflat#FF00FFbackdrop; no text/grids/FX/shadows. Onlycell10: unfolded-downward airborne leg, clear canonical torso, slightlysmallerheadmatchingneighbor9. Other15cells identical.",
+  "endObserved": "2026-11-08T02:02:31.525Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-cc010331-682c-4903-a85e-398d1d4db0b1.png",
+  "output": "raw/hit-dash.cell4-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "sourcecell10 only eligible; measured acceptance separately recorded",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.cell4-edited.png",
+    "sha256": "1a2d1eccf6cb90446a7362327b4424457242cc54d088be7b98320bd22862a48d",
+    "bytes": 1847362,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-final-edited.png",
+      "path": "E/raw/hit-dash.D54-final-edited.png",
+      "sha256": "dc3ea1511c61f9c4d6177957cb50afb7ea96b56ee8ae9ae41bcdb4eded6206d3",
+      "bytes": 1845294,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

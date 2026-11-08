@@ -1,0 +1,46 @@
+{
+  "badCells1based": [2, 5, 10, 11, 12],
+  "fixedCalibration": {
+    "scale": 0.6666666666666666,
+    "targetHeight": 208,
+    "referenceHeight": 312,
+    "referenceFrames": 12
+  },
+  "targets": [
+    {
+      "cell1based": 2,
+      "bodyHeightRaw": 312,
+      "topRawInCell": 25,
+      "bottomRawInCell": 337,
+      "targetCanonicalAfterFixedScale": 208
+    },
+    {
+      "cell1based": 5,
+      "bodyHeightRaw": 312,
+      "topRawInCell": 25,
+      "bottomRawInCell": 337,
+      "targetCanonicalAfterFixedScale": 208
+    },
+    {
+      "cell1based": 10,
+      "bodyHeightRaw": 312,
+      "topRawInCell": 25,
+      "bottomRawInCell": 337,
+      "targetCanonicalAfterFixedScale": 208
+    },
+    {
+      "cell1based": 11,
+      "bodyHeightRaw": 312,
+      "topRawInCell": 25,
+      "bottomRawInCell": 337,
+      "targetCanonicalAfterFixedScale": 208
+    },
+    {
+      "cell1based": 12,
+      "bodyHeightRaw": 312,
+      "topRawInCell": 25,
+      "bottomRawInCell": 337,
+      "targetCanonicalAfterFixedScale": 208
+    }
+  ]
+}

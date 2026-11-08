@@ -1,0 +1,16 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "attempt": 6,
+  "frames": 16,
+  "prompt": "Precise LOWER-LEG CONTACT REPAIR of this exact4x4 KIEM TU E run construction guide. Magenta cutouts intentionally remove wrong stance shins/feet. Floating boot stencils are the SAME-frame original boots moved UN-SCALED to FINAL planted contact positions. Connect each retained upper leg/knee to its own boot stencil with believable navy-trouser calf/ankle anatomy. Preserve EVERY boot stencil POSITION and SIZE exactly; do not move boots back to the old location or lower them toward the cellbottom. Boot sole plane is232/256 ofcellheight, leaving9.375%cellheight empty BELOW soles. No invented groundshadow. Draw exactly TWOlegs and TWOfeet per character, no duplicateboot/extraankle. Recover the other swinging leg where a cutout overlaps it, with natural gait and no fusedfeet.\nR/near-foot planted cells1..6; L/far-foot planted cells9..14. Cells7,8,15,16 are already COMPLETE DYNAMIC FLIGHT poses and must stay unchanged, bothfeet airborne; do not flatten knee tucks or the body. Existing leaning torso, hips, all heads/faces, hair/ribbon motion, hands and right-hand steel sword are LOCKED, not redrawn. Reconstruct ONLY the missing lower-leg/clothing/boot joins, same plain ivory split robe/navy trousers, small dark boots, cyan sash ribbon. No body scalechange, no per-framefitting, no changedrootpositions or reordering. One fullR+Lcycle across16cells. Preserve existing upperbody/face while legs connect smoothly through the phase sequence. Plant stencils are authoritative, never infer positions from emptycutouts.\nKeep materialtintedoutline and clean2-tonecelshading+highlight. OPAQUE PERFECTLY FLAT MAGENTA#FF00FF background. Same4columns4rows square sheet, exact16frames sameorder, preferably2048square output; no grid, markers, text, VFX, glow, shadow, new ornaments. Finish seam/calf anatomy around retained stencils, not a new animation design. Keep knees physically possible; bend calves to reach the preserved stencils rather than stretching wholelimbs or movingbody. All limbs/weapons inside cell.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T02:03:14.484Z",
+  "inputs": ["templates/run.foot-stencil-guide-06.png"],
+  "status": "AI lower-leg repair retained; only selected leg regions form derived candidate. Actual contact/anatomy/canvas/head checks pending; not selected.",
+  "rawToolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-05337ae7-5f18-4a1c-a1f9-2e59134f3b3f.png",
+  "rawSha256": "52222571d9981e0832b2d39ece5c6d9d017a74dec37f4c5f1f243ccd3d0167c2",
+  "utcOutputFileModified": "2026-11-08T02:04:05.422635+00:00",
+  "guideSha256": "6a0e428116eb87d84408289498a930f90a6c90828928a025d5018867dab50528"
+}

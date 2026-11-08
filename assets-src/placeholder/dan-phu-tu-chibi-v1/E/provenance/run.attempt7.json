@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 7,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:35:54 UTC",
+  "utcEnd": "2026-11-07 22:36:35 UTC",
+  "prompt": "Precise localized head anatomy edit ONLY. TARGETimage1 full16-frame4x4dynamicRUN. Image2canonicalfixedfemaleidentity. Preserve EVERYBODYPOSE, hips/torso/neck anchors, limbs/boots/root, arms/hands/heldwhisk, robe/sash/horsehairtrail EXACT. Keep dynamicforwardlean andBOTHFEETAIRBORNEtucks. Correct enlargedheads ONLY inzero-basedcells0,1,2,8,9 (row1col1/2/3,row3col1/2). Redraw entireattachedhead/maincap/face/jaw slightlysmaller aroundfixedneckanchor with SAMEfixedadultfemaleidentity, facialproportions/eye/brow/nose/lips/jaw/expression/tilt preserved. Currentnativecrown-tojawmeasurements55.04,55.95,55.90,55.46,57.06logicalpx; target53.3logicalpx per256cell, equivalent65.3rawpx in313.5rawcell. Cell0 reduceheadabout3%;cell1about5%;cell2about5%;cell8about4%;cell9about7%. Bun/pin followheadnaturally, noindependentextraornaments. ThisisAIheaddrawingcorrection, NEVERresizewholefigure orshortenlegs. Preserve ALLother11framescompletelyunchanged, especiallyflighttuckframes6and14. Sameplainbrownwhisk onebronzecollar whitehorsehairright-handgrip, ivoryjadegoldT1, inkhem,tintedcel2tones+highlight+rim NWlight. Same1254x1254square4x4mapping anduniformflatmagenta#ff00ff; no grids/text/FX/shadows/afterimages. Smallerheads retain exactmaturecanonicalfaceidentity, no babyface ornewdesign. Subtlesizeshouldmatchothercorrectheads inthissame sheet; allbodyanimationunchanged.",
+  "references": ["../raw/run.attempt6.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt7.png",
+  "status": "head-only repair candidate cells0,1,2,8,9 identified by native semantic trace; actual new measurements pending",
+  "rawSha256": "0622ed0fcc7e5ddd0030d10880da709d8f705216d31ed6f499649894645eb72f",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt6.png",
+      "sha256": "083ea8f1a4ef74ef81879e7f47c1034051522f0d98c8fc8b9d57d7ae1ccf4981"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

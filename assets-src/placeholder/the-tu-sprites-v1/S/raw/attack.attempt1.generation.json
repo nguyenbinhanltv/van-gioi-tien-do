@@ -1,0 +1,18 @@
+{
+  "clip": "attack",
+  "dir": "S",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 18:27:39 UTC",
+  "prompt": "Use-case: stylized-concept. Production frame-by-frame ATTACK SOUTH-DIRECTION sprite sheet for Van Gioi Tien Do, THE TU A Son Mon Ho Ve earth tank. Image1 is the EXACT character identity and style master; image2 is exact layout template. EXACTLY FOUR equal SQUARE columns by TWO rows, 8 full-body frames, row-major left-to-right top-to-bottom, sheet aspect2:1. In every cell face SOUTH / directly toward VIEWER and screen DOWN, straight FRONT in the same slightly overhead orthographic isometric FRONT view. Preserve compact STOCKY adult male proportions, broad chest, stout full-length legs, same face, short dark brown hair/topbun/jade hairpin, ivory cross-collar inner robe and loose sleeves/trousers #E9EEF0, mountain-blue short split sleeveless tabard #5E8798 with bronze cloud trim #B58A4A, dark-blue #294451 sash band/knot/TWO tails, dark boots, paired large BRONZE stone-block EARTH GAUNTLETS worn on BOTH hands with square meander emblem, ochre highlights #E3C07F and brown bronze shadows #5B4222. NO sword, shield, weapons, long hair or extra armor. Match master fine ink contours, clean soft 2-3 tone painterly cel shading, NW upper-left light. Anatomy and cloth redrawn naturally per pose, no rubber-like bent baggy sleeves or trousers. FRAMING HARD: each cell256 units; bun top y22, planted boot soles y232, standing figure height210 units (allowed204..216), pelvis axis x127.55. All8 identical anatomical scale and head size. Do not shrink figure to center; use82% cellheight and keep whole figure in owncell. EIGHT-frame RIGHT straight punch TOWARD VIEWER/screenDOWN, frontalS. AnatomicalR is SCREEN-LEFT.1 lowguard;2 rightfistchambersat ribs/leftguards;3 windup;4 rightbronze fistpunches towardviewer belowface;5 hithold;6 retract;7 unwind;8 guard. Armforeshortens orthographically, gauntlet keeps masterSIZE, not a giantfist. Face staysfrontal/twoeyes, shoulders turnonlyslightly. Shallow groundedlunge, full-sizedlegs/sleeves natural. ExactS master outfit/face/camera. Bending/raisedarms changesbbox naturally, never anatomicalscale. Same pairedbronze gauntlets/meander, centralfrontknot/twotails. Pure flatopaque#FF00FF; removeallguides/borders/ticks/text, no shadows/floor/blur/effects. All8wholefigures inowncells.",
+  "references": ["../../the-tu-continuous-v1/reference/S.master4x.png", "templates/attack.template.png"],
+  "selectedOutput": "sheets/attack.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 18:29:22 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-0c1329c1-8bb8-4d27-8542-e6b1c82df3a0.png",
+  "originalBackup": "raw/originals/attack.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}

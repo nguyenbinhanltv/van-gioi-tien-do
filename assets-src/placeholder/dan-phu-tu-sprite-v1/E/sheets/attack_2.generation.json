@@ -1,0 +1,15 @@
+{
+  "id": "E-attack_2-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:40:32 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:41:03 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production attack_2 sprite sheet for DAN/PHU TU support healer A, 10 complete poses. Reference1 exact E master, reference2 exact template. EXACT 5 COLUMNS x 2 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Second combo beat: upward diagonal whisk sweep towardRIGHT.1-3 draw whisk low/back,4-5 accelerate, cell6 exact hit/contact whisk extended up/right but never above headpiece,7 followthrough,8 recovery,9 combo window,10 guard. No effects. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/attack_2.template.png"],
+  "output": "E/sheets/attack_2.png",
+  "toolOutputId": "exec-bddb0dbd-09e5-45c6-b27a-da2a546deae4.png"
+}

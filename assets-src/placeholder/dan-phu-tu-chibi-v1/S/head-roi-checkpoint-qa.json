@@ -1,0 +1,259 @@
+{
+  "utc": "2026-11-08T06:20:27.713Z",
+  "sourceProjectSha256": "5a458f19eff3cef00899eddd3070054b0f18eb88658475acc0445fc00dae8bd6",
+  "projectValueSha256": "27f7fa33cdf6a7078410bc5bf8c9a5a646de93b2e4a002d9b383339ba41d60e6",
+  "qaSnapshot": "D:/Temp/vgtd26-S-headroi-evidence-qa2",
+  "counts": {
+    "fail-hard": 2,
+    "fail-soft": 0,
+    "accepted": 21,
+    "regression": 0,
+    "info": 241
+  },
+  "hard": [
+    {
+      "gate": "height",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 2,
+      "metric": "head_size_px",
+      "value": 56.00892785976178,
+      "limit": 54.59971611647811,
+      "message": "skull crown-chin 56.01 px outside 51.42..54.60 (master 53.01); Actual native dash2: first attached ORIGINAL-design maincap run>=2 at row32; elevatedbun/pin excluded, preceding darkseam excluded, realpartialrim included. Central jawoutline row87 then neck. Manual~1px uncertainty, not automatic anatomy certification. Original-source deterministic uniform ROI<=5%, locked chin/base/D57; no cumulative fit. Actual2/4 residual head errors remain OPEN, no D60 bracket waiver.0/9 authored neutral foot-depth/root alignment also remains manual OPEN, never waived by head proof."
+    },
+    {
+      "gate": "height",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 4,
+      "metric": "head_size_px",
+      "value": 58.008620049092706,
+      "limit": 54.59971611647811,
+      "message": "skull crown-chin 58.01 px outside 51.42..54.60 (master 53.01); Actual native dash4: first attached ORIGINAL-design maincap run>=2 at row32; elevatedbun/pin excluded, preceding darkseam excluded, realpartialrim included. Central jawoutline row89 then neck. Manual~1px uncertainty, not automatic anatomy certification. Original-source deterministic uniform ROI<=5%, locked chin/base/D57; no cumulative fit. Actual2/4 residual head errors remain OPEN, no D60 bracket waiver.0/9 authored neutral foot-depth/root alignment also remains manual OPEN, never waived by head proof."
+    }
+  ],
+  "soft": [
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 1,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 6.33,
+      "limit": 3,
+      "message": "R foot slides 6.3 px/frame between frames 0-1 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 4,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 8.33,
+      "limit": 3,
+      "message": "R foot slides 8.3 px/frame between frames 3-4 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 5,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 9.33,
+      "limit": 3,
+      "message": "R foot slides 9.3 px/frame between frames 4-5 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 7,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 4.33,
+      "limit": 3,
+      "message": "R foot slides 4.3 px/frame between frames 6-7 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 9,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 3.33,
+      "limit": 3,
+      "message": "L foot slides 3.3 px/frame between frames 8-9 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 11,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 3.67,
+      "limit": 3,
+      "message": "L foot slides 3.7 px/frame between frames 10-11 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 12,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 9.33,
+      "limit": 3,
+      "message": "L foot slides 9.3 px/frame between frames 11-12 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 13,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 5.33,
+      "limit": 3,
+      "message": "L foot slides 5.3 px/frame between frames 12-13 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 15,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.67,
+      "limit": 3,
+      "message": "L foot slides 4.7 px/frame between frames 14-15 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 5,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 20.4,
+      "limit": 20,
+      "message": "R planted foot: nearest sole is 20.4 px from its template ghost (xy 123.0,198.0 vs 120.8,218.3, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 3,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 17.25,
+      "limit": 3,
+      "message": "R foot slides 17.3 px/frame between frames 2-3 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 4,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 7.75,
+      "limit": 3,
+      "message": "R foot slides 7.8 px/frame between frames 3-4 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 12,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 26.9,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 26.9 px from its template ghost (xy 135.5,202.0 vs 120.8,224.5, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 9,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 5.75,
+      "limit": 3,
+      "message": "L foot slides 5.8 px/frame between frames 8-9 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 10,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 3.25,
+      "limit": 3,
+      "message": "L foot slides 3.3 px/frame between frames 9-10 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 11,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 15.75,
+      "limit": 3,
+      "message": "L foot slides 15.8 px/frame between frames 10-11 (limit 3)"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "hit",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "height 241 px outside the upright band and no pose exception declared"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "hit",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "height 217 px outside the upright band and no pose exception declared"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "hit",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 3.1,
+      "limit": 0,
+      "message": "height 239 px outside the upright band and no pose exception declared"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "hit",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 4.1,
+      "limit": 0,
+      "message": "height 240 px outside the upright band and no pose exception declared"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "die",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "message": "height 237 px outside the upright band and no pose exception declared"
+    }
+  ],
+  "status": "NOT READY:2actual dash head-size failures after maximum5% original-source repair.21soft remainOPEN. No D60 waiver/stacking/body fit/Cocos pass.",
+  "masterHeadPx": 53.009433122794285,
+  "d55": {
+    "checkedCells": 145,
+    "labFailFindings": 0,
+    "labPassCells": 145,
+    "D41ExemptCells": 57,
+    "runChecked": 16,
+    "dashChecked": 10,
+    "temporalFlags": 20,
+    "note": "Head reasons never exempt Lab; free D41 poses counted separately. Lab pass is not anatomical head-size approval."
+  }
+}

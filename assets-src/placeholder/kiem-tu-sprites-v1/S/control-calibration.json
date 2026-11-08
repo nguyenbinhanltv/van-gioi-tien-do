@@ -1,0 +1,361 @@
+[
+  {
+    "clip": "idle",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 78,
+      "right": 296,
+      "top": 20,
+      "bottom": 398,
+      "height": 378,
+      "width": 218,
+      "pelvisX": 209.07339579784212
+    },
+    "calibration": {
+      "scale": 0.5502645502645502,
+      "targetHeight": 208,
+      "referenceHeight": 378,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "meditate",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 65,
+      "right": 307,
+      "top": 10,
+      "bottom": 410,
+      "height": 400,
+      "width": 242,
+      "pelvisX": 209.86475997133985
+    },
+    "calibration": {
+      "scale": 0.52,
+      "targetHeight": 208,
+      "referenceHeight": 400,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "walk",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6303030303030303,
+      "targetHeight": 208,
+      "referenceHeight": 330,
+      "referenceFrames": 12
+    },
+    "note": "One median source-height calibration for the entire sheet."
+  },
+  {
+    "clip": "run",
+    "grid": {
+      "cols": 6,
+      "rows": 2,
+      "total": 12,
+      "control1based": null
+    },
+    "control": null,
+    "calibration": {
+      "scale": 0.6520376175548589,
+      "targetHeight": 208,
+      "referenceHeight": 319,
+      "referenceFrames": 12
+    },
+    "note": "One median source-height calibration for the entire sheet."
+  },
+  {
+    "clip": "dash",
+    "grid": {
+      "cols": 4,
+      "rows": 2,
+      "total": 8,
+      "control1based": 7
+    },
+    "control": {
+      "left": 93,
+      "right": 305,
+      "top": 22,
+      "bottom": 408,
+      "height": 386,
+      "width": 212,
+      "pelvisX": 221.48722351971423
+    },
+    "calibration": {
+      "scale": 0.538860103626943,
+      "targetHeight": 208,
+      "referenceHeight": 386,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "sword_fly",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 72,
+      "right": 291,
+      "top": 24,
+      "bottom": 385,
+      "height": 361,
+      "width": 219,
+      "pelvisX": 208.72242152466367
+    },
+    "calibration": {
+      "scale": 0.5761772853185596,
+      "targetHeight": 208,
+      "referenceHeight": 361,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "attack",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 68,
+      "right": 305,
+      "top": 13,
+      "bottom": 405,
+      "height": 392,
+      "width": 237,
+      "pelvisX": 210.31993208828524
+    },
+    "calibration": {
+      "scale": 0.5306122448979592,
+      "targetHeight": 208,
+      "referenceHeight": 392,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "attack_2",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 75,
+      "right": 296,
+      "top": 16,
+      "bottom": 394,
+      "height": 378,
+      "width": 221,
+      "pelvisX": 211.29373225595108
+    },
+    "calibration": {
+      "scale": 0.5502645502645502,
+      "targetHeight": 208,
+      "referenceHeight": 378,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "attack_3",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 79,
+      "right": 292,
+      "top": 16,
+      "bottom": 383,
+      "height": 367,
+      "width": 213,
+      "pelvisX": 208.69770244821092
+    },
+    "calibration": {
+      "scale": 0.5667574931880109,
+      "targetHeight": 208,
+      "referenceHeight": 367,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "cast",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 80,
+      "right": 290,
+      "top": 15,
+      "bottom": 402,
+      "height": 387,
+      "width": 210,
+      "pelvisX": 207.6397552604089
+    },
+    "calibration": {
+      "scale": 0.537467700258398,
+      "targetHeight": 208,
+      "referenceHeight": 387,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "channel",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 79,
+      "right": 291,
+      "top": 14,
+      "bottom": 404,
+      "height": 390,
+      "width": 212,
+      "pelvisX": 209.35262440354464
+    },
+    "calibration": {
+      "scale": 0.5333333333333333,
+      "targetHeight": 208,
+      "referenceHeight": 390,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "hit",
+    "grid": {
+      "cols": 3,
+      "rows": 2,
+      "total": 6,
+      "control1based": 5
+    },
+    "control": {
+      "left": 104,
+      "right": 359,
+      "top": 17,
+      "bottom": 460,
+      "height": 443,
+      "width": 255,
+      "pelvisX": 256.29994791666667
+    },
+    "calibration": {
+      "scale": 0.46952595936794583,
+      "targetHeight": 208,
+      "referenceHeight": 443,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "die",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 71,
+      "right": 287,
+      "top": 29,
+      "bottom": 397,
+      "height": 368,
+      "width": 216,
+      "pelvisX": 208.12991160959666
+    },
+    "calibration": {
+      "scale": 0.5652173913043478,
+      "targetHeight": 208,
+      "referenceHeight": 368,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "tribulation",
+    "grid": {
+      "cols": 5,
+      "rows": 3,
+      "total": 15,
+      "control1based": 13
+    },
+    "control": {
+      "left": 66,
+      "right": 236,
+      "top": 6,
+      "bottom": 300,
+      "height": 294,
+      "width": 170,
+      "pelvisX": 167.52685164466322
+    },
+    "calibration": {
+      "scale": 0.7074829931972789,
+      "targetHeight": 208,
+      "referenceHeight": 294,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  },
+  {
+    "clip": "emote",
+    "grid": {
+      "cols": 3,
+      "rows": 3,
+      "total": 9,
+      "control1based": 9
+    },
+    "control": {
+      "left": 79,
+      "right": 288,
+      "top": 13,
+      "bottom": 392,
+      "height": 379,
+      "width": 209,
+      "pelvisX": 208.29827486227893
+    },
+    "calibration": {
+      "scale": 0.5488126649076517,
+      "targetHeight": 208,
+      "referenceHeight": 379,
+      "referenceFrames": 1
+    },
+    "note": "One unused standing control fixes whole-sheet DPI. Clean combat sources calibrated only after copied guides were removed."
+  }
+]

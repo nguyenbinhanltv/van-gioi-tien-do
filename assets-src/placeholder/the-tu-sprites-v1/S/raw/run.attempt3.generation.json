@@ -1,0 +1,23 @@
+{
+  "clip": "run",
+  "dir": "S",
+  "attempt": 3,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 18:07:03 UTC",
+  "prompt": "Precise CELL-LOCAL POSE REPAIR. Input1 exact front/S Thể tu master; input2 target12-frame RUN sheet6columns2rows; input3 template. Change ONLY TOP-LEFT cell1 (=0-based0). Keep all other11 cells EXACTLY unchanged. In cell1 keep both boots' x/y positions and sizes, head/face/torso/gauntlet sizes, armcounter-swing and frontal camera. Give this runner a CLEAR SHALLOW KNEE BEND to lower pelvis, shoulders, face and bun together by about6units on256cell (roughly8rawpixels). Boot sole stays fixed, knee/hip joints flex naturally. This reduces bun-to-lowestsole boundingheight from217 to about210-212 in finalunits, matching othernormalcells. DO NOT shrink/scale/resize any bodypart or wholefigure; alter pose by folding knees/hipslightly and naturally repaint trouser/sleevefolds. Head stays same dimensions and exactidentity but moves downward with torso. No oversized head or elasticcloth; full-sized thighs/calves under ivory trousers. Preserve right SCREEN-LEFT foot leading towardviewer/SCREEN-DOWN, both worn bronze blockgauntlets/meanderemblems, blue/ivory/bronze costume/sash2tails, darkboots, shortdarkbun/jadepin, NW light and fineink/celshading. Entire12cell layout exactly6x2, same3:1aspect andbackground#FF00FF. No alteredothercells, no guides/text/borders/shadows/floor/effects/props. Only one cell repaired anatomically, never per-frame scaling.",
+  "references": [
+    "../../the-tu-continuous-v1/reference/S.master4x.png",
+    "raw/run.attempt2.selected.png",
+    "templates/run.template.png"
+  ],
+  "rawOutput": "raw/run.attempt3.edited.png",
+  "repairCells": [0],
+  "status": "rejected: cell0 over-bent to193px, fails203.7..216.3 height band",
+  "utcEndObserved": "2026-11-06 18:07:21 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-b9380b34-b5e7-467f-ac46-aa883157175c.png",
+  "rejectedSelection": "raw/run.attempt3.rejected.png",
+  "originalBackup": "raw/originals/run.attempt3.png",
+  "sourceSelectionStatus": "rejected: cell0 over-bent to193px, fails203.7..216.3 height band"
+}

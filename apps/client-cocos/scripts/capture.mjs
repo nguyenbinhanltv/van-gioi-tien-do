@@ -1,0 +1,404 @@
+// Headless visual QA capture for the animation viewer (agents review animations without a GUI).
+//
+//   npm run capture -w client-cocos -- [--out <dir>] [--animations idle,walk|all] [--frames 8] [--mode review|single]
+//                                      [--direction S] [--src dragonbones/viewer] [--stem rig] [--skip-build] [--gif]
+//                                      [--zoom 1|2] [--sample start|midpoint]
+//
+// --zoom 2 captures at deviceScaleFactor 2 (sheets and GIF frames have twice the pixels; the GIF stays half of the sheet).
+// --sample midpoint seeks frame i of N at (i + 0.5) / N of the clip (the middle of each source frame of a frame-by-frame
+// sprite sheet) instead of i / N; default start keeps the old behaviour.
+// 1. (unless --skip-build) builds web-mobile with scripts/build-web.mjs
+// 2. serves build/web-mobile on a free port, opens the viewer in headless Chrome/Edge (puppeteer-core, no browser download;
+//    set CHROME_PATH to override the browser) with software WebGL
+// 3. per animation: pauses the viewer, steps through N evenly spaced frames and writes into <out>/ (not committed):
+//      <animation>.sheet.png   contact sheet (frames in reading order; review mode = all 8 directions per tile)
+//      <animation>.gif         short looping GIF of the full animation (with --gif; ~30 key frames/s, tiles at 50%)
+//      index.json              per animation: duration, frames, loop-seam metric (ratio > 2.5 = pop), file names
+// Default --out: <tmpdir>/vgtd-capture. Exit code 1 on a page error, a viewer error, or a popping loop seam (only animations that loop per the table are judged).
+import { spawnSync } from 'node:child_process';
+import { createServer } from 'node:http';
+import { createReadStream, existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, extname, join, normalize, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import puppeteer from 'puppeteer-core';
+import { contactSheet, decodePng, downscale, encodeGif, encodePng } from './capture-lib.mjs';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const args = process.argv.slice(2);
+const opt = (name, def) => {
+  const i = args.indexOf(`--${name}`);
+  return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : def;
+};
+const flag = (name) => args.includes(`--${name}`);
+
+const out = resolve(opt('out', join(tmpdir(), 'vgtd-capture')));
+const frames = Number(opt('frames', 8));
+const mode = opt('mode', 'review');
+const direction = opt('direction', 'S');
+const src = opt('src', ''); // default: the viewer's own default character (Kiem tu when present, else the test rig)
+const stem = opt('stem', '');
+const equipment = opt('equipment', '');
+const equipmentHash = ['tier', 'quality', 'costume', 'weapon-skin', 'hide-costume']
+  .filter((k) => opt(k, '') !== '')
+  .map((k) => `&${k}=${encodeURIComponent(opt(k, ''))}`)
+  .join('');
+const wantGif = flag('gif');
+const zoom = Number(opt('zoom', 1));
+if (![1, 2].includes(zoom)) throw new Error('--zoom must be 1 or 2');
+const sample = opt('sample', 'start');
+if (!['start', 'midpoint'].includes(sample)) throw new Error('--sample must be start or midpoint');
+const at = (i, n) => (i + (sample === 'midpoint' ? 0.5 : 0)) / n;
+/** Region of the 1280x720 viewport holding the actors (panel + HUD hidden during capture). */
+const CLIP =
+  mode === 'review' ? { x: 190, y: 120, width: 900, height: 470 } : { x: 340, y: 120, width: 600, height: 470 };
+
+function findBrowser() {
+  const candidates = [
+    process.env.CHROME_PATH,
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  ].filter(Boolean);
+  const found = candidates.find((p) => existsSync(p));
+  if (!found) throw new Error('No Chrome/Edge found. Set CHROME_PATH to a Chromium-based browser executable.');
+  return found;
+}
+
+if (!flag('skip-build')) {
+  const b = spawnSync(process.execPath, [join(root, 'scripts/build-web.mjs')], { stdio: 'inherit' });
+  if (b.status !== 0) process.exit(b.status ?? 1);
+}
+const webDir = join(root, 'build/web-mobile');
+if (!existsSync(join(webDir, 'index.html'))) throw new Error('build/web-mobile missing: run without --skip-build');
+
+const types = {
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.css': 'text/css',
+  '.wasm': 'application/wasm',
+};
+const server = createServer((req, res) => {
+  const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+  let f = join(webDir, p || 'index.html');
+  if (!f.startsWith(webDir) || !existsSync(f)) return void res.writeHead(404).end();
+  if (statSync(f).isDirectory()) f = join(f, 'index.html');
+  res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
+  createReadStream(f).pipe(res);
+});
+await new Promise((r) => server.listen(0, '127.0.0.1', r)); // loopback only
+const port = server.address().port;
+
+mkdirSync(out, { recursive: true });
+const browser = await puppeteer.launch({
+  executablePath: findBrowser(),
+  headless: 'new',
+  defaultViewport: { width: 1280, height: 720, deviceScaleFactor: zoom },
+  protocolTimeout: 600000,
+  args: [
+    '--no-sandbox',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--ignore-gpu-blocklist',
+    '--enable-webgl',
+  ],
+});
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+let failures = 0;
+try {
+  const page = await browser.newPage();
+  page.on('pageerror', (e) => {
+    console.error('[page error]', e.message);
+    failures++;
+  });
+  const url = `http://127.0.0.1:${port}/#viewer&mode=${mode}&dir=${direction}&paused=1${src ? `&src=${src}` : ''}${stem ? `&stem=${stem}` : ''}${equipment ? `&equipment=${encodeURIComponent(equipment)}${equipmentHash}` : ''}`;
+  console.log('opening', url);
+  await page.goto(url);
+  const waitReady = async (timeout = 180000) => {
+    // fail fast when the viewer reports an error (rig missing, exception) instead of waiting for the timeout
+    await page.waitForFunction('window.__vgtdViewer && (window.__vgtdViewer.error() || window.__vgtdViewer.ready())', {
+      timeout,
+      polling: 250,
+    });
+    const err = await page.evaluate('window.__vgtdViewer.error()');
+    if (err) throw new Error(`viewer error: ${err}`);
+  };
+  await waitReady();
+  console.log('viewer ready');
+  if (flag('layer-smoke')) {
+    if (!equipment) throw new Error('--layer-smoke requires the procedural --equipment resource');
+    const snapshot = () =>
+      page.evaluate(() => ({
+        state: window.__vgtdViewer.equipment(),
+        info: window.__vgtdViewer.info(),
+        events: window.__vgtdViewer.events(),
+      }));
+    const assert = (ok, message) => {
+      if (!ok) throw new Error(`layer smoke: ${message}`);
+    };
+    const patch = async (appearance) => {
+      await page.evaluate((p) => window.__vgtdViewer.setEquipment(p), appearance);
+      await waitReady();
+      await sleep(150);
+      return snapshot();
+    };
+    await page.evaluate(() =>
+      window.__vgtdViewer.set({ mode: 'single', animation: 'attack', paused: true, repeatOneShots: false }),
+    );
+    await waitReady();
+    await page.evaluate(() => window.__vgtdViewer.chrome(false));
+    const initial = await snapshot();
+    assert(initial.state?.cacheEntries === 3, 'initial loading must request only body/weapon/fx');
+    await page.evaluate(() => window.__vgtdViewer.seekNorm(0.2));
+    await sleep(200);
+    const back = await snapshot();
+    assert(
+      back.state.slots.findIndex((s) => s.name === 'weapon') < back.state.slots.findIndex((s) => s.name === 'body'),
+      'back weapon order',
+    );
+    await page.screenshot({ path: join(out, 'layers-back.png'), clip: CLIP });
+    await page.evaluate(() => window.__vgtdViewer.seekNorm(0.7));
+    await sleep(200);
+    const front = await snapshot();
+    assert(
+      front.state.slots.findIndex((s) => s.name === 'weapon') > front.state.slots.findIndex((s) => s.name === 'body'),
+      'front weapon order',
+    );
+    await page.screenshot({ path: join(out, 'layers-front.png'), clip: CLIP });
+    const costume = await patch({ costume: 'test_costume' });
+    assert(
+      costume.state.installed.bodySet === 'body_b' && costume.state.installed.weaponSet === 'weapon_a',
+      'costume changes body independently',
+    );
+    assert(Math.abs(costume.info.time - front.info.time) < 0.001, 'same-motion costume swap preserves current time');
+    assert(JSON.stringify(costume.events) === JSON.stringify(front.events), 'swap must not replay events');
+    const hidden = await patch({ hideCostume: true });
+    assert(hidden.state.installed.bodySet === 'body_a', 'hide costume restores tier body');
+    const skin = await patch({ weaponSkin: 'test_skin' });
+    assert(
+      skin.state.installed.bodySet === 'body_a' &&
+        skin.state.installed.weaponSet === 'weapon_b' &&
+        skin.state.installed.fxSet === 'fx_b',
+      'weapon skin selects matching halo independently',
+    );
+    const quality = await patch({ quality: 'red' });
+    assert(
+      quality.state.installed.quality === 'red' && quality.state.installed.aura === 'aura_T1',
+      'quality tint retains tier aura',
+    );
+    // Rapid superseding selections must install only the latest request.
+    await page.evaluate(() => {
+      window.__vgtdViewer.setEquipment({ tier: 'T2', weaponSkin: null });
+      window.__vgtdViewer.setEquipment({ tier: 'T1', weaponSkin: 'test_skin' });
+    });
+    await waitReady();
+    await sleep(200);
+    const latest = await snapshot();
+    assert(
+      latest.state.installed.bodySet === 'body_a' && latest.state.installed.weaponSet === 'weapon_b',
+      'latest selection wins',
+    );
+    assert(latest.state.cacheEntries === 6, 'unselected tiers must not be eagerly loaded');
+    await page.screenshot({ path: join(out, 'layers-quality.png'), clip: CLIP });
+    // Live playback must still dispatch the original gameplay events.
+    await page.evaluate(() => {
+      window.__vgtdViewer.seekNorm(0);
+    });
+    await sleep(200);
+    await page.evaluate(() => {
+      window.__vgtdViewer.events(true);
+      window.__vgtdViewer.set({ paused: false, timeScale: 1 });
+    });
+    await page.waitForFunction(() => window.__vgtdViewer.info().time >= 0.85, { timeout: 30000 });
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: true }));
+    await sleep(150);
+    const live = await snapshot();
+    assert(
+      live.events.some((e) => e.includes('hit')) && live.events.some((e) => e.includes('cancel_window')),
+      'live hit/cancel events preserved',
+    );
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: false }));
+    await page.waitForFunction(() => window.__vgtdViewer.info().time >= 0.9999, { timeout: 30000 });
+    await page.evaluate(() => window.__vgtdViewer.set({ paused: true }));
+    await sleep(150);
+    const completed = await snapshot();
+    const completedSwap = await patch({ quality: 'white' });
+    assert(
+      Math.abs(completedSwap.info.time - completed.info.time) < 0.001,
+      'completed one-shot remains at end after swap',
+    );
+    assert(
+      JSON.stringify(completedSwap.events) === JSON.stringify(completed.events),
+      'completed swap must not replay events',
+    );
+    writeFileSync(
+      join(out, 'layer-smoke.json'),
+      JSON.stringify(
+        { initial, back, front, costume, hidden, skin, quality, latest, live, completed, completedSwap },
+        null,
+        2,
+      ),
+    );
+    console.log('layer smoke passed: z-order, lazy loading, independent swaps, clock, events and latest selection');
+  }
+
+  const all = await page.evaluate('window.__vgtdViewer.animations');
+  const names = opt('animations', 'all') === 'all' ? all : opt('animations', 'all').split(',');
+  if (flag('blink')) {
+    // Blink verification (D39): play each body clip live and sample the eyes slot; the independent blink layer must show
+    // eyes_closed (display 2) every 3-5 s on walk / idle (short loops), and must stay off for meditate / die / hit.
+    //   npm run capture -w client-cocos -- --blink --animations idle,walk,meditate --seconds 14 --src ... --stem ...
+    const seconds = Number(opt('seconds', 14));
+    const report = {};
+    for (const anim of opt('animations', 'idle,walk,meditate').split(',')) {
+      await page.evaluate(
+        `window.__vgtdViewer.set({ animation: ${JSON.stringify(anim)}, mode: 'single', direction: ${JSON.stringify(direction)}, paused: false })`,
+      );
+      await waitReady();
+      // sample in the page on every rendered frame (requestAnimationFrame): polling from node every 100 ms can miss the
+      // 2-frame closed phase of a blink entirely. Software GL renders slowly, so also record the blink LAYER CLOCK
+      // (AnimationState.currentTime): the cadence is judged on that clock, the eyes display only confirms the swaps.
+      const samples = await page.evaluate(
+        (sec) =>
+          new Promise((resolve) => {
+            const out = [];
+            const t0 = performance.now();
+            const tick = () => {
+              const b = window.__vgtdViewer.blink();
+              const t = (performance.now() - t0) / 1000;
+              out.push({ t, ...(b ?? { playing: false, eyes: null, time: 0 }) });
+              if (t < sec) requestAnimationFrame(tick);
+              else resolve(out);
+            };
+            tick();
+          }),
+        seconds,
+      );
+      const closed = samples.filter((x) => x.eyes === 'display 2');
+      const starts = closed
+        .filter((x, i) => i === 0 || x.t - closed[i - 1].t > 0.5)
+        .map((x) => Math.round(x.t * 10) / 10);
+      // unwrap the layer clock over the 10 s loop and compare it with wall time
+      let unwrapped = 0;
+      let prev = samples[0]?.time ?? 0;
+      for (const x of samples) {
+        unwrapped += x.time >= prev ? x.time - prev : x.time + 10 - prev;
+        prev = x.time;
+      }
+      const wall = samples.length ? samples[samples.length - 1].t - samples[0].t : 0;
+      const frameMs = samples.length > 1 ? Math.round((wall / (samples.length - 1)) * 1000) : 0;
+      const info = await page.evaluate('window.__vgtdViewer.info()');
+      report[anim] = {
+        bodyDurationSec: Math.round(info.duration * 100) / 100,
+        layerPlaying: samples.some((x) => x.playing),
+        eyesSeen: [...new Set(samples.map((x) => x.eyes))],
+        blinkStartsSec: starts,
+        renderedFrames: samples.length,
+        meanFrameMs: frameMs,
+        layerClockSec: Math.round(unwrapped * 100) / 100,
+        wallSec: Math.round(wall * 100) / 100,
+      };
+      console.log(anim, JSON.stringify(report[anim]));
+    }
+    writeFileSync(join(out, 'blink.json'), JSON.stringify(report, null, 2));
+    await browser.close();
+    server.close();
+    process.exit(failures ? 1 : 0);
+  }
+  if (flag('perf')) {
+    // Cache-mode CPU cost: N copies of one animation, median of 5 one-second samples per mode (software GL: compare
+    // update/render CPU ms between modes, do not read absolute numbers as device performance).
+    const n = Number(opt('n', 30));
+    const anim = opt('animations', 'run').split(',')[0];
+    const results = {};
+    const batch = flag('batch');
+    for (const cache of ['realtime', 'shared', 'private']) {
+      await page.evaluate(
+        `window.__vgtdViewer.set({ mode: 'crowd', crowd: ${n}, cache: ${JSON.stringify(cache)}, batch: ${batch}, animation: ${JSON.stringify(anim)}, paused: false })`,
+      );
+      await sleep(500);
+      await waitReady();
+      await sleep(4000);
+      const samples = [];
+      for (let i = 0; i < 5; i++) {
+        await sleep(1000);
+        samples.push(await page.evaluate('({ ...window.__vgtdPerf })'));
+      }
+      const med = (k) => samples.map((x) => x[k]).sort((a, b) => a - b)[Math.floor(samples.length / 2)];
+      results[cache] = Object.fromEntries(
+        ['fps', 'updateMs', 'renderMs', 'drawCalls', 'triangles', 'textureMB', 'jsHeapMB'].map((k) => [
+          k,
+          Number(Number(med(k)).toFixed(2)),
+        ]),
+      );
+      console.log(`${cache}: ${JSON.stringify(results[cache])}`);
+      writeFileSync(join(out, `crowd-${cache}.png`), Buffer.from(await page.screenshot({ type: 'png' })));
+    }
+    const info = await page.evaluate('window.__vgtdViewer.info()');
+    writeFileSync(
+      join(out, 'perf.json'),
+      JSON.stringify({ source: info.source, animation: anim, copies: n, batch, results }, null, 2),
+    );
+    console.log(`perf done -> ${out}`);
+    await browser.close();
+    server.close();
+    process.exit(failures ? 1 : 0);
+  }
+  await page.evaluate('window.__vgtdViewer.chrome(false)');
+  const index = { url, mode, direction, frames, animations: {} };
+
+  for (const anim of names) {
+    await page.evaluate(
+      `window.__vgtdViewer.set({ animation: ${JSON.stringify(anim)}, mode: ${JSON.stringify(mode)}, direction: ${JSON.stringify(direction)}, paused: true })`,
+    );
+    await sleep(200);
+    console.log(`  ${anim}: waiting for ready`);
+    await waitReady(60000);
+    await sleep(300);
+    const info = await page.evaluate('window.__vgtdViewer.info()');
+    const seam = await page.evaluate('window.__vgtdViewer.seam()');
+    console.log(`  ${anim}: info`, JSON.stringify(info), 'seam', JSON.stringify(seam));
+    const shots = [];
+    for (let i = 0; i < frames; i++) {
+      console.log(`    frame ${i}: seek`);
+      await page.evaluate(`window.__vgtdViewer.seekNorm(${at(i, frames)})`);
+      await sleep(250); // two or more rendered frames in software GL
+      console.log(`    frame ${i}: screenshot`);
+      shots.push(Buffer.from(await page.screenshot({ type: 'png', clip: CLIP })));
+    }
+    // contact sheet: full-size tiles, 3 per row, composed in Node (no page work needed)
+    const tiles = shots.map((png) => downscale(decodePng(png), 1));
+    writeFileSync(join(out, `${anim}.sheet.png`), encodePng(contactSheet(tiles, 3)));
+    index.source = info.source;
+    const entry = { duration: info.duration, keyFrames: info.frames, seam, sheet: `${anim}.sheet.png` };
+    if (wantGif) {
+      const n = Math.min(Math.max(info.frames, 4), 36);
+      const clip = [];
+      for (let i = 0; i < n; i++) {
+        await page.evaluate(`window.__vgtdViewer.seekNorm(${at(i, n)})`);
+        await sleep(200);
+        clip.push(downscale(decodePng(Buffer.from(await page.screenshot({ type: 'png', clip: CLIP }))), 2));
+      }
+      writeFileSync(join(out, `${anim}.gif`), encodeGif(clip, Math.max(2, Math.round((100 * info.duration) / n))));
+      entry.gif = `${anim}.gif`;
+    }
+    // only animations that loop per the table must wrap seamlessly; one-shots (die, dash, hit, ...) just report the ratio
+    if (seam && seam.specLoop && seam.ratio > 2.5) {
+      entry.warning = `loop seam pops (x${seam.ratio.toFixed(2)})`;
+      failures++;
+    }
+    index.animations[anim] = entry;
+    console.log(`captured ${anim}: ${info.duration.toFixed(2)} s, seam ${seam ? 'x' + seam.ratio.toFixed(2) : 'n/a'}`);
+  }
+  writeFileSync(join(out, 'index.json'), JSON.stringify(index, null, 2));
+  console.log(`done -> ${out}`);
+} finally {
+  await browser.close();
+  server.close();
+}
+process.exit(failures ? 1 : 0);

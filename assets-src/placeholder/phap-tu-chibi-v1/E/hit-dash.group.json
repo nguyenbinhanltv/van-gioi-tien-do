@@ -1,0 +1,7 @@
+{
+  "cols": 4,
+  "clips": [
+    { "name": "hit", "frames": 6 },
+    { "name": "dash", "frames": 10 }
+  ]
+}

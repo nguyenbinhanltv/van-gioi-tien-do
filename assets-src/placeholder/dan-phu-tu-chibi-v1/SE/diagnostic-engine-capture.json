@@ -1,0 +1,461 @@
+{
+  "status": "DIAGNOSTIC RENDERING ONLY; not an identity/scale/release pass. Current similarity numbers are untrusted either way. Calibrated D55 re-audit and adjudicated dash5 head-only repair remain pending.",
+  "readyForRelease": false,
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "versionEvidence": "C = cclegacy;\n      cclegacy.internal = {};\n      var engineVersion = exports(\"VERSION\", '3.8.8');\n      _global.CocosEngine = legacyCC.ENGINE_VERSION = engineVersion;\n      _globa",
+  "engineBundleSha256": "8a0e33971355d8d2aa5c662d1984e4d35876b8cdacb7d196ea6fe9f1871ff150",
+  "sourceProjectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859",
+  "sourceMasterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "mode": "single",
+  "deviceScaleFactor": 2,
+  "viewerDisplayZoom": 2.6,
+  "viewport": [1280, 720],
+  "captureRect": {
+    "x": 0,
+    "y": 0,
+    "width": 1280,
+    "height": 720
+  },
+  "samplesPerClip": 24,
+  "captureSample": "midpoint",
+  "captureExitCode": 0,
+  "captureStart": "2026-11-08T02:20:29.902Z",
+  "captureEnd": "2026-11-08T02:28:52.319Z",
+  "buildEditorExitCode": 36,
+  "freshBuildIndex": true,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "D:/Temp/vgtd26-SE-cocos-diagnostic-v1/scripts/capture.mjs",
+    "--skip-build",
+    "--out",
+    "D:/Temp/vgtd26-SE-cocos-diagnostic-v1/capture-full-v2",
+    "--animations",
+    "all",
+    "--frames",
+    "24",
+    "--mode",
+    "single",
+    "--direction",
+    "SE",
+    "--src",
+    "dragonbones/dan-phu-tu-chibi-v1",
+    "--stem",
+    "danphuchibi",
+    "--zoom",
+    "2",
+    "--sample",
+    "midpoint",
+    "--gif"
+  ],
+  "source": "dragonbones/dan-phu-tu-chibi-v1/danphuchibi",
+  "direction": "SE",
+  "stagedRuntimeFiles": [
+    {
+      "file": "danphuchibi_SE_ske.json",
+      "sha256": "d947c940ce6865c36463cf2b60d09f4adf09fe105bfbcf6418fb11ee21247270",
+      "postCaptureSha256": "d947c940ce6865c36463cf2b60d09f4adf09fe105bfbcf6418fb11ee21247270",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_SE_tex.json",
+      "sha256": "4d4f5199785b3a5a15f0b9a33921f7ce7b45c7a58865afdaf6d8cced1ccf5790",
+      "postCaptureSha256": "4d4f5199785b3a5a15f0b9a33921f7ce7b45c7a58865afdaf6d8cced1ccf5790",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_SE_tex.png",
+      "sha256": "4a1aea39a3915c49d4d0596d6f4312741d6a3cf218b4d7a8b061e91b17977382",
+      "postCaptureSha256": "4a1aea39a3915c49d4d0596d6f4312741d6a3cf218b4d7a8b061e91b17977382",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_SE_page1_tex.json",
+      "sha256": "ab2e72948984e1f06317d717320a15f6440d37b7995dd9ee3dd93ecf6745ada0",
+      "postCaptureSha256": "ab2e72948984e1f06317d717320a15f6440d37b7995dd9ee3dd93ecf6745ada0",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_SE_page1_tex.png",
+      "sha256": "d31495be162eba70572a9d301120fe065ca706bdfb536461b11f721dc53ecf21",
+      "postCaptureSha256": "d31495be162eba70572a9d301120fe065ca706bdfb536461b11f721dc53ecf21",
+      "byteMatch": true
+    },
+    {
+      "file": "danphuchibi_SE.sprite.json",
+      "sha256": "0eb7e54d824368c16fdcf40b40832ce3a3fa27609f95f989bd8b66faf2d7a1c5",
+      "postCaptureSha256": "0eb7e54d824368c16fdcf40b40832ce3a3fa27609f95f989bd8b66faf2d7a1c5",
+      "byteMatch": true
+    }
+  ],
+  "stagedQaCountsHistoricalProxy": {
+    "fail-hard": 31,
+    "fail-soft": 2,
+    "accepted": 14,
+    "regression": 5,
+    "info": 141
+  },
+  "identityMetricTrust": "UNTRUSTED: neither current passes nor failures prove identity; different-class same-position head scored0.85. No similarity-driven repaint until calibrated D55 merges.",
+  "coverage": {
+    "clips": 15,
+    "drawings": 202,
+    "distinctActorRegionRenders": 202,
+    "actorRegion": {
+      "x": 600,
+      "y": 140,
+      "width": 1640,
+      "height": 1260
+    },
+    "edgeContacts": 0,
+    "reader": "Capture PNG filter0 fast path, checked against public decoder on all24run samples."
+  },
+  "loopCaveat": "Viewer pose-seam0 reflects a single-root display-swap rig, not pixel-loop or identity proof. Direct visual loop/cadence review and native gates remain required.",
+  "timingCaveat": "Documented30Hz rig clock quantizes nominal24fps drawings to alternating1/2-tick holds;14drawings use18ticks and6drawings use8ticks. No timing constant changed; issue reported separately.",
+  "firstAttemptCorrection": {
+    "status": "Initial narrow attempt interrupted after visual suspicion of crop. Pixel verification of the suspected run sample12 shows clear bottom rows920/935/938: no clipping in that sample; earlier clipping claim corrected. Full-viewport v2 remains the selected diagnostic capture for generous framing. No sprite/camera/scale change.",
+    "viewport": [1280, 720],
+    "deviceScaleFactor": 2,
+    "viewerZoom": 2.6,
+    "temporaryChanges": ["Resolve puppeteer from existing workspace", "Capture full viewport in single mode"],
+    "correctedInitialCheck": {
+      "sample": "run12",
+      "tile": [1200, 940],
+      "row900Foreground": 52,
+      "row920Foreground": 0,
+      "row935Foreground": 0,
+      "row938Foreground": 0
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "sheetSha256": "eb048153ad1bc36dd3bb8d504a878f8b9dfe8059c8a0f1095885477ef09de3ea",
+      "gif": "idle.gif",
+      "gifSha256": "e68c88e28a7164d9a8f69d56a90d8e6e756351b5a2b44707b19569cc378d2382",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "meditate",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "sheetSha256": "761593d7b375e95c35c1f747efc9cd4cf9e0bab87775bfbd4b496a15b94f0fd3",
+      "gif": "meditate.gif",
+      "gifSha256": "dac56b011abfbe6eeceffb5dbf4f7666fd0bbc6846b1d0641db2632c25641be3",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "walk",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "sheetSha256": "7d3afe924d62b7f2cae3f0c45459c489e5c2dc5f49df770501635810694194dc",
+      "gif": "walk.gif",
+      "gifSha256": "7d68f59b4b21052140195c8dc97e31d9aeec54cb4523966f281d73781a7fc153",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "run",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "sheetSha256": "65e5b6ec174941cab30ec16887c5d7338fc9ec210d02f65ad29f057e1ee76bde",
+      "gif": "run.gif",
+      "gifSha256": "02b91d084d60b157e725a21ad8a8585ebafc4a8e8e257fe1e459209b41ee86a1",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "dash",
+      "sourceDrawings": 10,
+      "nominalDurationSec": 0.4166666666666667,
+      "runtimeDurationSec": 0.43333333333333335,
+      "runtimeTicks": 13,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 10,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "sheetSha256": "ace4ec32d2079a43fb1c41550f4b85e28ddfd4812ddd5edfda9d3d3e722602af",
+      "gif": "dash.gif",
+      "gifSha256": "1aa8e38def5dad8876b4b7e064407e178711de99ea4fc42a64fbf9d7411d595d",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "sword_fly",
+      "sourceDrawings": 12,
+      "nominalDurationSec": 0.5,
+      "runtimeDurationSec": 0.5,
+      "runtimeTicks": 15,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 12,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "sheetSha256": "1b6f5e6e8cbc93364bbe686d3a4d04552ad4231aa3f2f8f88a7034f62a9eeef2",
+      "gif": "sword_fly.gif",
+      "gifSha256": "ea33873dae1b0e062a22c61b358a3e91e8e860a9299b0a034273670c7639f82d",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "attack",
+      "sourceDrawings": 14,
+      "nominalDurationSec": 0.5833333333333334,
+      "runtimeDurationSec": 0.6,
+      "runtimeTicks": 18,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 14,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "sheetSha256": "c6984d5c2fff8ac1ea28be57ef4c0640029be192354a8ec4d81d83d99a29003e",
+      "gif": "attack.gif",
+      "gifSha256": "351448cf0c7493dcda4c9790cabeaa58e48db281bd3251deb7d10944a4b45e2d",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "cast",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "sheetSha256": "31674894b9bbd3d985f0370bd14d16228caebc45070468173568cb349c95b21f",
+      "gif": "cast.gif",
+      "gifSha256": "b655a17f1f378ff176d06f88cbf22fe4935af896b3cf7c8278d779515629fdc4",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "channel",
+      "sourceDrawings": 12,
+      "nominalDurationSec": 0.5,
+      "runtimeDurationSec": 0.5,
+      "runtimeTicks": 15,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 12,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "sheetSha256": "7500a8dc5b22bfde94c6943ede84ce11b36e96218fe14f7848c94f66a5a3fae8",
+      "gif": "channel.gif",
+      "gifSha256": "57ccc59e34d992a8c299bd98d9733d1beb138dbc805e17866a2a1d845fab7b42",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "hit",
+      "sourceDrawings": 6,
+      "nominalDurationSec": 0.25,
+      "runtimeDurationSec": 0.26666666666666666,
+      "runtimeTicks": 8,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 6,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "sheetSha256": "bbed9b35c7bae3252951b2f60436adb493ca7ca7490ba3363cd96b6d508fc241",
+      "gif": "hit.gif",
+      "gifSha256": "b00f4432fab3229ed626845aa83c4a1589bc0b1f4d4aef973876f783fb165775",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "die",
+      "sourceDrawings": 12,
+      "nominalDurationSec": 0.5,
+      "runtimeDurationSec": 0.5,
+      "runtimeTicks": 15,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 12,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "sheetSha256": "3f96ff169b26b0396bb9e5a2798e6393e324f0a4c373897bb2308eb4a139802f",
+      "gif": "die.gif",
+      "gifSha256": "7fa39c6a6afbafbde2c35a4828724e44e388ac9700fec2a85668bf7f5b3b28c4",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "tribulation",
+      "sourceDrawings": 16,
+      "nominalDurationSec": 0.6666666666666666,
+      "runtimeDurationSec": 0.6666666666666666,
+      "runtimeTicks": 20,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 16,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "sheetSha256": "352ffa28033a00016476f5a9599ca0efea9bb1c3c765d18b45c6d957156a609a",
+      "gif": "tribulation.gif",
+      "gifSha256": "034961719b626dc9a67600c8cfcb47e75a916bd8353abd1c3165d02bb1a68af1",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "emote",
+      "sourceDrawings": 12,
+      "nominalDurationSec": 0.5,
+      "runtimeDurationSec": 0.5,
+      "runtimeTicks": 15,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 12,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "sheetSha256": "f3a58c59d726ccad47d5953d2068bffec06dde2a843123e3196064738b5e750b",
+      "gif": "emote.gif",
+      "gifSha256": "e59c738ab1c6a30445eb319cc159ef49e265a7f0f21257a3e02a00809dd4ff93",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "attack_2",
+      "sourceDrawings": 14,
+      "nominalDurationSec": 0.5833333333333334,
+      "runtimeDurationSec": 0.6,
+      "runtimeTicks": 18,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 14,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "sheetSha256": "09d31fa64d2f55ac37678cfd6224bd2fe913d9718dc948a5218260aad949e69d",
+      "gif": "attack_2.gif",
+      "gifSha256": "7b80624aa18270ccaee8d044e753206c26749b28fe14d64538f16ed2ddc6303c",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    },
+    {
+      "name": "attack_3",
+      "sourceDrawings": 14,
+      "nominalDurationSec": 0.5833333333333334,
+      "runtimeDurationSec": 0.6,
+      "runtimeTicks": 18,
+      "captureSamples": 24,
+      "distinctActorRegionRenders": 14,
+      "actorRegionEdgeContacts": 0,
+      "poseSeamReported": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "sheetSha256": "9bb09bb0809c3a0384c3db213ac125fdd4c03723c3dd2926f41d2c1cb473e793",
+      "gif": "attack_3.gif",
+      "gifSha256": "1f53aa12128d0fbf9dbb7f1a85259ef8ff480417e7c5c0b5418aab070bddf9dc",
+      "license": "Project-owned AI sprite derivative plus procedural viewer floor/debug overlay; original image_gen.imagegen model-undisclosed/UTC/raw/per-file rights retained in source provenance and ASSET-LICENSES.md."
+    }
+  ]
+}

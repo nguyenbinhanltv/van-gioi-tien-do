@@ -1,0 +1,208 @@
+{
+  "operation": "Public buildTemplate/buildGroupedTemplate/locomotionCells; exact master head crop/blit with @vgtd/rig.blit",
+  "anatomicalGuides": {
+    "ground": 232,
+    "head": 16,
+    "pelvis": 124,
+    "centerX": 128
+  },
+  "sourceCalibration": "../character-calibration.json",
+  "records": [
+    {
+      "clip": "idle",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "61c7c0b38564485b1b178717ff9e49582e8e41821bfed24d2b129aba6c879791",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "meditate",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "61c7c0b38564485b1b178717ff9e49582e8e41821bfed24d2b129aba6c879791",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "walk",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "adddd6dc13bbd0cdcfa63c016f510e727296b270399f53fbaf8eba4c8ab1a700",
+      "headStencilSha256": "a36bbe50659eb10152844665eaffdbc1d324a405077b6a47a7d105255674a80c",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "run",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "f5ff4cb46a3f02fa6605e0d66d1cf3ad7a334396ed37c71ba641189aefa27b0b",
+      "headStencilSha256": "8b9ad9c2a9089414f9fe0075a5ca0efbeb0ca6b242752d5d430c88ffec08ce41",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "sword_fly",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "a17f1237ac28ff863c872ba3309b70c2f066959973001509ddb3ef344896a147",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 12,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "attack",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "858a57cfdb980bae1308ba16ea87376c247c5c1a48d5445b4e91d3667d8c0ad7",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 14,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "attack_2",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "858a57cfdb980bae1308ba16ea87376c247c5c1a48d5445b4e91d3667d8c0ad7",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 14,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "attack_3",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "858a57cfdb980bae1308ba16ea87376c247c5c1a48d5445b4e91d3667d8c0ad7",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 14,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "cast",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "61c7c0b38564485b1b178717ff9e49582e8e41821bfed24d2b129aba6c879791",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "channel",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "a17f1237ac28ff863c872ba3309b70c2f066959973001509ddb3ef344896a147",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 12,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "die",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "a17f1237ac28ff863c872ba3309b70c2f066959973001509ddb3ef344896a147",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 12,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "tribulation",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "61c7c0b38564485b1b178717ff9e49582e8e41821bfed24d2b129aba6c879791",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "emote",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "a17f1237ac28ff863c872ba3309b70c2f066959973001509ddb3ef344896a147",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 12,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    },
+    {
+      "clip": "hit-dash",
+      "masterSha256": "564382d0cee0ddf63d35d4620c4969107c59e17bcace5bc89c43e4e788146182",
+      "templateSha256": "0836e03a0abc56c32f66894a1934e7b23ffc3193e5a1a546daaf1cacbf6876e3",
+      "headStencilSha256": "61c7c0b38564485b1b178717ff9e49582e8e41821bfed24d2b129aba6c879791",
+      "headRect": {
+        "x": 106,
+        "y": 8,
+        "width": 48,
+        "height": 58
+      },
+      "used": 16,
+      "note": "Exact unscaled master head crop/blit, a size/identity guide only. Dynamic poses may translate/rotate the head; actual output landmarks remain mandatory."
+    }
+  ]
+}

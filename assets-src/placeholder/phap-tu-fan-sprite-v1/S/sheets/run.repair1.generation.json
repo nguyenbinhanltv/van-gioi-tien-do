@@ -1,0 +1,12 @@
+{
+  "id": "B.S.run-repair-1",
+  "prompt": "Cell-local anatomical correction of the attached S front-facing run SIXcolumns TWOrows12frame sheet. Change ONLY zero-based cells 2,7,8. All other cells EXACTLY unchanged. Extend the lowest leg/boot naturally down by: cell2 sixteen SOURCE IMAGE pixels; cell7 eight SOURCE IMAGE pixels; cell8 twenty-six SOURCE IMAGE pixels. Goal final measuredheight206..210 under existing lockedscale; other leg stays bent behind. Do not tuck bothknees. Never scale whole figure, head,torso or separate frame. Redraw full leg joints anatomically, preserve same boot size and full leg length; no stretching. Preserve S frontcamera, vermilion/ivory/navyrobe, cyanopenfan in anatomicalRIGHT hand (viewerleft), face/head/torso/fan unchanged. Preserve opposite-leg gait phase, soles fullyvisible inside owncell. Same exact canvas and grid, puremagenta, no text/grid/VFX. Only targetcells extracted withhashverification.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 22:08:02 UTC",
+  "utcEnd": "2026-11-06 22:08:48 UTC",
+  "selectedOutput": "S/sheets/run.repair1.generated.png",
+  "references": ["S/sheets/run.generated.png"],
+  "attempt": 2,
+  "targetCells": [2, 7, 8]
+}

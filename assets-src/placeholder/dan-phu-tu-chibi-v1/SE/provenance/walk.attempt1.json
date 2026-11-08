@@ -1,0 +1,27 @@
+{
+  "clip": "walk",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 23:57:34 UTC",
+  "utcEnd": "2026-11-07 23:58:15 UTC",
+  "prompt": "EDIT TARGET image1: SE walk INPUT master-guide,4x4,16 poses reading order. Animate exact same canonical adult female healer from reference2, immutable serene fixed face/head/haircap/bun/jadepin, ivory/jade dress narrowgold inkhem, right-hand brownwhisk ONEbronze collar whitehorsehair. MASTER ALREADY CORRECT SIZE in eachcell; keep all body lengths/headsize exactly, do not enlarge/redesign. Draw smooth16-phase WALK cycle toward SE lower-right,3quarter view constant,24fps: right heel contact0, right down2, left leg passing4, right toeoff6; left heel contact8,left down10,right leg passing12,left toeoff14,15 leads back0. Leading-leg cyan/gold foot ghosts and corner color encode alternation: follow their locations/contact phases; soles atground232 whenplanted, no sliding or duplicatedlegs, liftedfoot only4-8logicalpx. Gentle2pxbodybob; head stays SAMEvolume, modest counterturn pelvis/shoulders, hair/longsleeves/sash/whiskfibres lag andsettle. Visible boots under moving hem, natural right hand grip/left open palm. Root fixed insidecell; preserve leg geometry in SE plane, not sideprofile; do not walktowardcamera orchangeface. Wholefigureincludingbun/whisk/boots staysinsideeachcell withmargin, never cut byborders. Frame15 smoothly rejoins0. RemoveALL grid/ghosts/cornertriangles/rulers/text; pureflatmagenta#ff00ff background, noFX/platform/shadow. Same4x4mapping. Originaldesign.",
+  "references": ["../templates/walk.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/walk.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/walk.master-guide.png",
+      "sha256": "13873100c10a48c2a79ba1c7bad4fae1cee60d3f7eafcb9c3a8f6f61ba99d477"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

@@ -1,0 +1,47 @@
+{
+  "direction": "E",
+  "master": "E.master.png",
+  "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "status": "Manual style selection before motion head-evidence annotation; not automated anatomical detection or production acceptance.",
+  "selected": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "convention": "Orchestrator flat-summit adjudication: crown X is midpoint of topmost alpha>=128 contiguous main-cap row-run, cap hair only; crown Y is row+0.5. Apply to master and all frames. Exclude ponytail, knot and ribbon; include attached cap rim. Chin remains confirmed native central jaw boundary. Manual semantic selection, not automated anatomy. Refinement: require >=2 contiguous main-cap pixels separated from knot/tie/ponytail; single adjacent highlights are excluded as knot edge. Row+0.5 convention retained consistently per orchestrator permission.",
+  "crownTrace": "Cap-only top row16 has alpha>=128 run x115..126, midpoint120.5. Row15 cap support below128; separate ribbon/tie to left excluded. Crown120.5,16.5 follows the same explicit rule as run cells. Master PNG unchanged.",
+  "chinTrace": "At x138/139, row67 alpha238/238 with skin RGB249,224,190 and249,229,198; row68 alpha9/5 and rows69+ empty. Select edge67.5. Prior transformed chin138.305,68.351 was below the actual native jaw edge.",
+  "uncertaintyPx": 1,
+  "history": "Original raw anatomical landmarks and calibration remain unchanged. prepare-head-policy.ts retains their exact transformed positions alongside this native-boundary reference. No source pixels, body scale, registration or threshold changed. Recompute any future motion evidence against this reference; do not silently reuse earlier measurements.",
+  "rearViews": "No NE/N skullBase or breadth points selected here. D48 requires independent same-direction native review; no projected chin.",
+  "previousNativeReview": {
+    "direction": "E",
+    "master": "E.master.png",
+    "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+    "status": "Manual style selection before motion head-evidence annotation; not automated anatomical detection or production acceptance.",
+    "selected": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 124.5,
+        "y": 15.5
+      },
+      "chin": {
+        "x": 138.5,
+        "y": 67.5
+      }
+    },
+    "convention": "Native aligned PNG semantic boundary edges: midpoint before first attached-maincap support row and after last jaw support row. Alpha128 supports contour selection; semantics distinguish hair, face, ribbon, ponytail and neck. Include attached hair highlight/rim; exclude secondary ponytail and cyan ribbon.",
+    "crownTrace": "At x124/125, row15 alpha1/0, row16 alpha142/142, row17 alpha255/255. The pale attached maincap rim at this location belongs to hair; the separate cyan ribbon is farther left. Select edge15.5, retaining approximate anatomical summit X rather than searching for a passing distance.",
+    "chinTrace": "At x138/139, row67 alpha238/238 with skin RGB249,224,190 and249,229,198; row68 alpha9/5 and rows69+ empty. Select edge67.5. Prior transformed chin138.305,68.351 was below the actual native jaw edge.",
+    "uncertaintyPx": 1,
+    "history": "Original raw anatomical landmarks and calibration remain unchanged. prepare-head-policy.ts retains their exact transformed positions alongside this native-boundary reference. No source pixels, body scale, registration or threshold changed. Recompute any future motion evidence against this reference; do not silently reuse earlier measurements.",
+    "rearViews": "No NE/N skullBase or breadth points selected here. D48 requires independent same-direction native review; no projected chin."
+  },
+  "minimumCapRunPixels": 2
+}

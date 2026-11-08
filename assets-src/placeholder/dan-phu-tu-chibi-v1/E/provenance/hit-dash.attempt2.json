@@ -1,0 +1,28 @@
+{
+  "clip": "hit+dash",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:01:20 UTC",
+  "utcEnd": "2026-11-07 22:01:54 UTC",
+  "prompt": "Precise anatomy correction ONLY on existing sprite sheet. Image1 TARGET is4x4 shared sheet: first6cells HIT, then10DASH. Image2 fixedidentity. Keep EVERY body pose, arms/hands, whisk, feet, clothing, hairtrails, root positions and magenta background EXACT. Do not flatten dynamic dash or move boots. ONLY correct undersized skull/head on DASH localframes1..8 (0based), globalcells7..14. Head = attached MAINcap/skull + face/jaw; NOT elevatedbun/loosestrands. Desired Euclidean maincapcrown-tochin53.5logicalpx in256cell (=65.5rawpx in313.5cell). Preserve originalfixed adult femaleface features/proportions/eyes and tilt. Enlarge/redraw head about neck anchor by these modest cell-specific amounts: global7 row2col4 +6%; global8 row3col1 +7%; global9 row3col2 +12%; global10 row3col3 +13%; global11 row3col4 +13%; global12 row4col1 +15%; global13 row4col2 +10%; global14 row4col3 +6%. Hairbun/jadepin follow natural head adjustment without growthindependently; whiskhorsehair is separate, never enlargeit. Keep exactexpressions, sweptbrownmaincap, delicatebrows olivebrownalmond eyes nose lips jaw andidentity. NO wholefigure rescaling. Preserve first6 HIT and DASH first/last completelyunchanged. Same1254square16cells4x4, no text/guides/FX/shadow. SameivoryjadegoldT1, tintedoutline2tonecel+highlight+rim,NWlight. This is ONLY actual headscale drift correction, all dynamics unchanged.",
+  "references": ["../raw/hit-dash.attempt1.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/hit-dash.attempt2.png",
+  "status": "head-only correction candidate; select only global7..14; actual head measurements pending; prompt percentages not proof",
+  "sha256": "59f14d137decbae6fd1dbee3aa4adb4c75eab7f870f08f00465459667b1b126f",
+  "rawSha256": "59f14d137decbae6fd1dbee3aa4adb4c75eab7f870f08f00465459667b1b126f",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/hit-dash.attempt1.png",
+      "sha256": "eff048a27e1e530ac832dfdfa0b3db17724df06b0a05ecb240bbbab9f096fc2f"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

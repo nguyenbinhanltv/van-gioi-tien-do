@@ -1,0 +1,19 @@
+{
+  "operation": "public repairCell",
+  "cells": [9, 10],
+  "changed": [9, 10],
+  "files": [
+    {
+      "path": "raw/hit-dash.lanczos-selected.png",
+      "sha256": "0bdf4c787ade1956341d5071ae53cde06a6f492eacef73959ec1342dfdb6e614"
+    },
+    {
+      "path": "raw/hit-dash.D54-final-edited.png",
+      "sha256": "dc3ea1511c61f9c4d6177957cb50afb7ea96b56ee8ae9ae41bcdb4eded6206d3"
+    },
+    {
+      "path": "raw/hit-dash.final.png",
+      "sha256": "3fe250f900b53aba118b308028cb877826fed7d3862b63fbf7f0107b05ec90b9"
+    }
+  ]
+}

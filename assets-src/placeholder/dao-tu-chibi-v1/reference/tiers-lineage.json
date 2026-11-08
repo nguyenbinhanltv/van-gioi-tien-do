@@ -1,0 +1,25 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcRecordedCompleted": "2026-11-07T23:38:02.359Z",
+  "records": [
+    {
+      "name": "T1-T5.front.attempt1",
+      "prompt": "Use case: identity-preserve. Create production FRONT MASTERS T1 T2 T3 T4 T5 for male DAO TU Storm Reaver. Image1 is exact canonical five-direction T1; use its CENTER FRONT S male face and proportions as identity lock. Image2 older tiers is COSTUME progression reference only; do not copy its face/proportions/color. Image3 approved accent A LEFT is palette reference only. Five separate full-body FRONT S figures left-to-right T1 T2 T3 T4 T5, identical face stern grey eyes, swept black hair, low loose ponytail, same lean adult build/anatomical height, main head22% and eyes16% anatomicalH, 4.5heads. Same shoulder-carried broad mountain-ink single-edge dao and planted frontal stance. T1 exact plain T1 from image1: sleeveless muted dark teal tunic, storm grey-blue collar/sash, plain overskirt/trousers/bracers/boots, sparse mountain blade and plain dull brass guard. T2 slightly structured wrap coat, narrow aged-gold edges and small storm-blue tassel, modest blade mountain. T3 fitted dark teal sleeveless coat with storm GREY-BLUE dominant long asymmetrical skirt panels, tiny limited wind-white half mantle on left shoulder, aged-gold knot clasp and belt; grey-blue ink-wash mountains on one panel, broad dao. T4 stronger long split coat and additional storm GREY-BLUE mantle structure, restrained limited wind-white trailing cloth, weathered gold accents and refined mountain blade. T5 ornate but readable storm-grey-blue/dark teal coat, longest flowing grey-blue panels and limited wind-white streamers, old-gold fittings, refined broad ink-mountain blade; NO detached rocks/particles/glow/aura. Do not turn white/jade green like healer. Every face and visible hand SAME identity and same anatomical size. All front view exactly, not three-quarter. Entire blades and ponytails contained in each separate non-overlapping area with clear magenta gaps. Opaque flat RGB255,0,255 magenta background, no text/labels/borders/shadows. Wide five-figure model sheet, high detail clean painted premium semi-chibi xianxia, northwest light. Clothing and sword shapes evolve, not body or face.",
+      "utcStarted": "2026-11-07T23:36:39.921Z",
+      "references": [
+        "raw/T1-turnaround.E-face-correction.png",
+        "concept/dao-tu-tiers.png",
+        "concept/dao-tu-accent-variants.png"
+      ],
+      "status": "unselected; T3-T5 skirt panels too pale"
+    },
+    {
+      "name": "T1-T5.front.storm-grey-blue",
+      "prompt": "Use case: precise-object-edit. Palette correction ONLY on this exact Dao tu T1-T5 front master sheet. In T3 T4 T5 (third fourth fifth figures), change the LARGE PALE/WHITE long ink-wash mountain SKIRT PANELS to medium-dark STORM GREY-BLUE (#596c82 main, #8091a5 highlights), retain darker mountain silhouettes visible on them. Their base must read storm grey-blue, not white/ivory. Keep small left shoulder mantle and narrow streamers as limited wind-white. Keep dark muted teal body, old-gold trim, steel mountain blades, every face/hair/body/pose/scale and all T1/T2 unchanged. Color correction must not repaint face or change garment/weapon shapes. Pure opaque RGB255,0,255 magenta background, no text, no aura. This class must stay distinct from jade/ivory healer.",
+      "utcStarted": "2026-11-07T23:37:20.293Z",
+      "references": ["raw/T1-T5.front.attempt1.png"],
+      "status": "selected T2-T5 edit references; canonical T1 remains turnaround S.master.png"
+    }
+  ]
+}

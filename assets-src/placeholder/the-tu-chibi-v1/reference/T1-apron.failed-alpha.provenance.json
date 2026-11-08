@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:18:16.857Z",
+  "utcRecordedCompleted": "2026-11-07T20:19:57.558Z",
+  "prompt": "Use case: identity-preserve / precise-object-edit. Target exact five-panel Thể tu T1 turnaround attached. Two mandatory corrections only. FIRST restore the approved T1 ivory ink-wash APRON PANEL underneath the orange hip sash: a plain warm ivory broad front overlapping cloth panel, split into two simple tapered ends reaching just above knee level, tiny sparse charcoal ink-wash brush at tips, no gold embroidery. Orange hip sash and its two narrow amber tails remain OVER the ivory panel. Show apron naturally in E and SE and S, a small side glimpse in NE, back naturally occluded. It is clothing, not a skirt wrapping both legs; keep trousers clearly visible. SECOND remove ALL stray red/orange/yellow edge halo flecks and detached pixels around hair ribbons, shoulders, legs and soles. Crisp clean transparent silhouette, no colored haze, no confetti, no ground shadow. Preserve actual amber hair ribbons and sash while removing unnatural fringe outside their contours. Preserve exact five-view layout E SE S NE N, all body poses/scales/positions, exact tan square-jawed adult face amber eyes thick brows/anatomical left eyebrow nick, swept black hair/topknot, simple charcoal gauntlets and bronze wrist bands, plain charcoal clothing, two-tone cel shading plus small highlight/rim, NW light, tinted outlines. Do not redesign gauntlets, do not add armor/gems/extra ornaments. Original premium 4.5-head semi-chibi design. Transparent background, no labels, no text, no crop.",
+  "references": ["T1-turnaround.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-1e53f984-bbce-44d5-bea9-001ffed94466.png",
+  "status": "rejected: restored apron but transparent background has severe colored artifacts"
+}

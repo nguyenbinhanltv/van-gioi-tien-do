@@ -1,0 +1,38 @@
+{
+  "format": "vgtd-reference-source",
+  "version": 1,
+  "sourcePath": "assets-src/placeholder/kiem-tu-rig-v1/turnaround/S.png",
+  "sourceCommit": "40c5ea7ed972c28ffc160a6f50d59c03d8e5f0d0",
+  "originalSha256": "161f04524ff12359f360e4d676b7c873f5c70c0644ed0d5125b8f623a54d64b7",
+  "originalDimensions": [256, 256],
+  "archivePath": "reference/S.master4x.png",
+  "archiveSha256": "b46f9db22019584f9a4cca522b48519b7ce566306a224817841300744156e3b3",
+  "archiveDimensions": [512, 512],
+  "operation": "Public @vgtd/rig decodePng -> @vgtd/sprite.resizeImage512x512 bilinear on premultiplied colours -> encodePng default unpremultiply to straight RGBA; no crop/palette/geometry changes.",
+  "pipelineCommit": "00d4d4a49144c8ea28af918ba305e23d8a620f49",
+  "masterMetrics": {
+    "left": 55,
+    "right": 176,
+    "top": 24,
+    "bottom": 232,
+    "height": 208,
+    "width": 121,
+    "pelvisX": 127.05986696230599
+  },
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 127.05986696230599
+  },
+  "bootSoles": [
+    {
+      "x": 102.99029126213593,
+      "n": 103
+    },
+    {
+      "x": 152.5566037735849,
+      "n": 106
+    }
+  ]
+}

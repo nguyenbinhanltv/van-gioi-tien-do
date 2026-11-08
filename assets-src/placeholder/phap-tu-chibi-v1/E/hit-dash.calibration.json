@@ -1,0 +1,7 @@
+{
+  "source": "sheets/hit-dash.png",
+  "referenceCells": [0, 1, 4, 5, 15],
+  "referenceHeights": [176, 173, 170, 173, 170],
+  "scale": 1.260115606936416,
+  "note": "One shared full-sheet scale measured from upright cells after layout reflow; used identically for hit and dash, never a per-frame fit. Whole-sheet DPI preparation is declared separately."
+}

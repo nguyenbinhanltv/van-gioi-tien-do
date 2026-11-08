@@ -1,0 +1,511 @@
+{
+  "timingProfile": "smooth-v2",
+  "character": "phap-tu-chibi-v1",
+  "direction": "E",
+  "stem": "phaptuchibi",
+  "master": "../reference/E.master.png",
+  "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../character-calibration.json"
+  },
+  "slice": {
+    "spill": {}
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "sheet": "sheets/idle.png",
+      "manifest": "templates/idle.template.json",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "1": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "2": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "3": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "4": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "5": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "6": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "7": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "8": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "9": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "10": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "11": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "12": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "13": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "14": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged",
+        "15": "seated cross-legged meditation; knees/hips folded, anatomy scale unchanged"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "sheet": "sheets/walk.png",
+      "manifest": "templates/walk.qa.template.json",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "sheet": "sheets/run.png",
+      "manifest": "templates/run.qa.template.json",
+      "exceptions": {
+        "0": "posture",
+        "3": "posture",
+        "4": "posture",
+        "8": "posture",
+        "9": "posture",
+        "13": "posture",
+        "14": "posture"
+      },
+      "vertical": "keep",
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 137,
+            "y": 20
+          },
+          "chin": {
+            "x": 151,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "3": {
+          "crown": {
+            "x": 138,
+            "y": 20
+          },
+          "chin": {
+            "x": 151.5,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "4": {
+          "crown": {
+            "x": 137,
+            "y": 20
+          },
+          "chin": {
+            "x": 150,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "8": {
+          "crown": {
+            "x": 140,
+            "y": 20
+          },
+          "chin": {
+            "x": 153.5,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "9": {
+          "crown": {
+            "x": 136,
+            "y": 20
+          },
+          "chin": {
+            "x": 150,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 9; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "13": {
+          "crown": {
+            "x": 141,
+            "y": 20
+          },
+          "chin": {
+            "x": 154.5,
+            "y": 65
+          },
+          "note": "Reviewed aligned E run cell 13; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "14": {
+          "crown": {
+            "x": 142,
+            "y": 21
+          },
+          "chin": {
+            "x": 156,
+            "y": 66
+          },
+          "note": "Reviewed aligned E run cell 14; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "sheets/hit-dash.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "calibration": {
+        "scale": 1.260115606936416
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 144,
+            "y": 42
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 87
+          },
+          "note": "Reviewed aligned E dash cell 0; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "1": {
+          "crown": {
+            "x": 148,
+            "y": 52
+          },
+          "chin": {
+            "x": 164,
+            "y": 96
+          },
+          "note": "Reviewed aligned E dash cell 1; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "2": {
+          "crown": {
+            "x": 146,
+            "y": 62
+          },
+          "chin": {
+            "x": 163,
+            "y": 105
+          },
+          "note": "Reviewed aligned E dash cell 2; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "3": {
+          "crown": {
+            "x": 151,
+            "y": 59
+          },
+          "chin": {
+            "x": 168,
+            "y": 102
+          },
+          "note": "Reviewed aligned E dash cell 3; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "4": {
+          "crown": {
+            "x": 150,
+            "y": 81
+          },
+          "chin": {
+            "x": 170,
+            "y": 122
+          },
+          "note": "Reviewed aligned E dash cell 4; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "5": {
+          "crown": {
+            "x": 153,
+            "y": 89
+          },
+          "chin": {
+            "x": 173.5,
+            "y": 130
+          },
+          "note": "Reviewed aligned E dash cell 5; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "6": {
+          "crown": {
+            "x": 151,
+            "y": 48
+          },
+          "chin": {
+            "x": 167.5,
+            "y": 92
+          },
+          "note": "Reviewed aligned E dash cell 6; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "7": {
+          "crown": {
+            "x": 147,
+            "y": 40
+          },
+          "chin": {
+            "x": 162.5,
+            "y": 84
+          },
+          "note": "Reviewed aligned E dash cell 7; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        },
+        "8": {
+          "crown": {
+            "x": 142,
+            "y": 32
+          },
+          "chin": {
+            "x": 156,
+            "y": 77
+          },
+          "note": "Reviewed aligned E dash cell 8; jaw tip checked on enlarged output, skull crown projected beneath main cap excluding secondary hair/bun/pin; posture changes silhouette, no frame rescale. Fixed global character framing x=+1px, no scale change."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "exceptions": {
+        "0": "airborne levitation; relaxed bent knees and pointed feet",
+        "1": "airborne levitation; relaxed bent knees and pointed feet",
+        "2": "airborne levitation; relaxed bent knees and pointed feet",
+        "3": "airborne levitation; relaxed bent knees and pointed feet",
+        "4": "airborne levitation; relaxed bent knees and pointed feet",
+        "5": "airborne levitation; relaxed bent knees and pointed feet",
+        "6": "airborne levitation; relaxed bent knees and pointed feet",
+        "7": "airborne levitation; relaxed bent knees and pointed feet",
+        "8": "airborne levitation; relaxed bent knees and pointed feet",
+        "9": "airborne levitation; relaxed bent knees and pointed feet",
+        "10": "airborne levitation; relaxed bent knees and pointed feet",
+        "11": "airborne levitation; relaxed bent knees and pointed feet"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.png",
+      "manifest": "templates/attack.template.json",
+      "exceptions": {
+        "2": "fan-strike anticipation / bent-knee lunge",
+        "3": "fan-strike anticipation / bent-knee lunge",
+        "4": "fan-strike anticipation / bent-knee lunge",
+        "5": "fan-strike anticipation / bent-knee lunge"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "2": "upward fan-strike bent-knee anticipation",
+        "3": "upward fan-strike bent-knee anticipation",
+        "4": "upward fan-strike bent-knee anticipation"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "3": "finishing fan sweep / bent-knee lunge",
+        "4": "finishing fan sweep / bent-knee lunge",
+        "5": "finishing fan sweep / bent-knee lunge",
+        "6": "finishing fan sweep / bent-knee lunge",
+        "7": "finishing fan sweep / bent-knee lunge",
+        "8": "finishing fan sweep / bent-knee lunge",
+        "9": "finishing fan sweep / bent-knee lunge",
+        "10": "finishing fan sweep / bent-knee lunge"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "manifest": "templates/cast.template.json"
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "manifest": "templates/channel.template.json"
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "sheets/hit-dash.png",
+      "manifest": "templates/hit-dash/group.template.json",
+      "calibration": {
+        "scale": 1.260115606936416
+      },
+      "exceptions": {
+        "2": "recoil crouch with bent knees"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "2": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "3": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "4": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "5": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "6": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "7": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "8": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "9": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "10": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged",
+        "11": "die-collapse: knees fold and torso lowers/rolls to side; anatomy scale unchanged"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "2": "tribulation brace / kneeling and rising with folded knees",
+        "3": "tribulation brace / kneeling and rising with folded knees",
+        "4": "tribulation brace / kneeling and rising with folded knees",
+        "5": "tribulation brace / kneeling and rising with folded knees",
+        "6": "tribulation brace / kneeling and rising with folded knees",
+        "7": "tribulation brace / kneeling and rising with folded knees",
+        "8": "tribulation brace / kneeling and rising with folded knees",
+        "9": "tribulation brace / kneeling and rising with folded knees",
+        "10": "tribulation brace / kneeling and rising with folded knees",
+        "11": "tribulation brace / kneeling and rising with folded knees",
+        "12": "tribulation brace / kneeling and rising with folded knees"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "sheet": "sheets/emote.png",
+      "manifest": "templates/emote.template.json",
+      "heightPolicy": "head-size-v1"
+    }
+  ],
+  "masterHead": {
+    "crown": {
+      "x": 131,
+      "y": 19
+    },
+    "chin": {
+      "x": 143,
+      "y": 64
+    }
+  }
+}

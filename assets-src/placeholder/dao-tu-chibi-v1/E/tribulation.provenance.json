@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:00:23.991Z",
+  "utcRecordedCompleted": "2026-11-08T00:03:40.391Z",
+  "prompt": "Use case: precise-object-edit. FIRST exact4x4template DAO TU T1 TRIBULATION16 unique sequentialframes allcells rowmajor,24fps. Same E-profile RIGHT leanadult male from image2: greyeyes/sternface/black sweptfringe/low looseponytail, anatomicalstanding216px/skull50px breadth38px per256cell, plain sleeveless darkmutedteal tunic/stormgreyblue collar+sash/darkpants/boots/bracers minimalbrass. Same heavy BROAD mountain-ink single-edge dao longdarkgrip/brassguard, visibleeveryframe, no dagger. Motion withstand unseen heavenlytrial:0-3 shoulderready gazerises, kneesbend;4-6 rightknee lowers toground while dao held securely lowdiagonal inrighthand, leftforearm raises protectively;7-10 peak one-knee brace/headtiltup, clenched jaw/leftpalm outward;11-13 resolvestrial, pushes up fromkneel;14-15 returnsE shoulderready. Maintain original skull/body size in kneel, no shrinking; cloth/ponytail followbody subtly. Fixedlatticex128 ground232, preserve authoredverticaltravel throughkneel. Entire blade/hair/body insideeachcell with8pxmargin, no clipping/overlap, no newgear. Headstencil=size/identity only; can translate/rotate. NO lightning/wind/aura/sparks/halos/particles/dust/shadows/text/grid/borders, FXareseparate. Replaceguides with UNIFORM OPAQUE PURE RGB255,0,255 MAGENTA. All16distinct inbetweens, same premium painted semi-chibiNWlight.",
+  "references": ["templates/tribulation.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/tribulation.png",
+  "status": "candidate; full-table QA pending"
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:37:06.516Z",
+  "utcRecordedCompleted": "2026-11-07T20:39:48.743Z",
+  "prompt": "LANDSCAPE2048x1536, EXACT4columns3rows SQUARE512cells. Production original Th\u00e1\u00bb\u0192 tu T1 premium semi-chibi E/right-facing sprite animation. Image1 exact master identity/outfit/scale; image2 exact clip lattice. Fixed tan adult square-jawed amber-eyed thick-brow face, swept black hair/flattened topknot and amber ribbons, plain charcoal sleeveless wrap/trousers, warm IVORY ink-wash APRON under amber hip sash, simple paired WORN charcoal gauntlets one bronze wrist band and smooth knuckle plate. Same anatomy/face/outfit every frame. Natural hands IN gauntlets, no detached weapons. One charcoal base amber accent bronze trim, tinted outlines, TWO cel tones+small highlight/rim, NW light. Strict E profile except natural torso twist, do not change to SE. Logical cell256, ground232, standing silhouette226 with anatomical H216; template raw output2048wide with4columns =>512pxsquarecells (double coordinates). Preserve scale, camera and grid, never fit each pose to cell. Opaque uniform RGB255,0,255 MAGENTA; no labels/text/shadows/aura/extra objects. Remove interior guide marks, border only at exact cell edges. No cropping. Original design only.  DIE exactly12consecutiveframes rowmajor, nonloop defeat collapse, no blood/gore.0standingE guard;1-2recoil chest and bendknees;3-4kneel losingbalance;5-6support with near gauntlet and tip backward;7-9lie curled side facingE;10-11fullysettled onside, ribbons/ivory apron settle naturally. Keep EXACT master anatomy/headsize through collapse, do NOT enlarge horizontal pose to fill cell. Fit fulllyingbody inside256logicalcell with natural foldedknees, never crop hands/feet/hair. Bothgauntlets retained onhands, hairtie unchanged, apron visible, facialidentity same eyesclosing. No gravestone/skull/blood/ghostFX, no droppednewobjects. Ground logical232, body rests there. Clear progressive12drawings, final hold only10-11, not looping.",
+  "references": ["../reference/E.master.png", "templates/die.template.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-0792b385-de85-46d4-a007-aa995a56b626.png",
+  "clipProfile": "smooth-v2",
+  "frames": 12,
+  "nominalFps": 24,
+  "pipelineCommit": "25d8f74",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:39:48.744Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  }
+}

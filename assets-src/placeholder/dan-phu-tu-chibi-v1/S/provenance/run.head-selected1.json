@@ -1,0 +1,159 @@
+{
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "candidate": "raw/run-head1.attempt1.png",
+  "candidateSha256": "a6fc4c73f5b74763ad522045ec9f4704f43bdddc60f491c4d95f61c6bff0dbfe",
+  "out": "raw/run.head-selected1.png",
+  "outSha256": "b989347ea39268b13655a36409a90412babc043a5a23595b39b3d833cf3d0251",
+  "mask": "templates/run.head-mask1.png",
+  "maskSha256": "98f976bd441c26f0c1580f4b1b38114d46b19cd23ce9890875476750fb5b9a92",
+  "method": "Exact pixel selection from AI output only inside explicit binary head/neck-junction polygons. All other source RGBA including hidden RGB retained. Not a rescale or geometric output transform. D57 computes pre-edit alignment. Whisk excluded below left head edge; body below jaw joining area locked.",
+  "regions": [
+    {
+      "cell": 0,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18983
+    },
+    {
+      "cell": 1,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19343
+    },
+    {
+      "cell": 2,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18693
+    },
+    {
+      "cell": 3,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19398
+    },
+    {
+      "cell": 6,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18996
+    },
+    {
+      "cell": 7,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19034
+    },
+    {
+      "cell": 8,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 72.5],
+        [108, 72.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18978
+    },
+    {
+      "cell": 9,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 72.5],
+        [108, 72.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19455
+    },
+    {
+      "cell": 10,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 72.5],
+        [108, 72.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19232
+    },
+    {
+      "cell": 13,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 19423
+    },
+    {
+      "cell": 14,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18952
+    },
+    {
+      "cell": 15,
+      "normalizedSourcePolygon": [
+        [96, 0],
+        [166, 0],
+        [166, 71.5],
+        [108, 71.5],
+        [106, 56],
+        [96, 52]
+      ],
+      "changedBytes": 18970
+    }
+  ],
+  "changedBytes": 229457,
+  "status": "REJECTED: actual native maincap/jaw span visibly undersized; e.g. repaired0 frontcap~19.5 to jaw~68.5 gives~49px versus master53.0094. Prompt4% did not calibrate actual result. No pass/evidence adopted. Source/body registration proof retained; selected raw candidate remains history."
+}

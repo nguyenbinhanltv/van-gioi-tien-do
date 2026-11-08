@@ -1,0 +1,83 @@
+{
+  "master": "../../reference/SE.corrected-master.png",
+  "scale": 1,
+  "poses": [
+    {
+      "dx": -4,
+      "dy": 2,
+      "angle": -3
+    },
+    {
+      "dx": -4,
+      "dy": 2,
+      "angle": -3
+    },
+    {
+      "dx": -4,
+      "dy": 2,
+      "angle": -3
+    },
+    {
+      "dx": -4,
+      "dy": 2,
+      "angle": -3
+    },
+    {
+      "dx": 8,
+      "dy": 4.666666666666666,
+      "angle": 3.333333333333333
+    },
+    {
+      "dx": 16,
+      "dy": 9.333333333333332,
+      "angle": 6.666666666666666
+    },
+    {
+      "dx": 24,
+      "dy": 14,
+      "angle": 10
+    },
+    {
+      "dx": 24,
+      "dy": 14,
+      "angle": 10
+    },
+    {
+      "dx": 24,
+      "dy": 14,
+      "angle": 10
+    },
+    {
+      "dx": 19.200000000000003,
+      "dy": 11.200000000000001,
+      "angle": 8
+    },
+    {
+      "dx": 14.399999999999999,
+      "dy": 8.4,
+      "angle": 6
+    },
+    {
+      "dx": 9.600000000000001,
+      "dy": 5.6000000000000005,
+      "angle": 4
+    },
+    {
+      "dx": 4.799999999999999,
+      "dy": 2.7999999999999994,
+      "angle": 1.9999999999999996
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    }
+  ],
+  "stencil": {
+    "left": 88,
+    "right": 148,
+    "top": 3,
+    "bottom": 71
+  },
+  "note": "Authoring intentions only, not measured output annotations. Unscaled master-head stencil transformed in input guide only; generated artwork is never scaled or repainted by code. Review actual output landmarks independently."
+}

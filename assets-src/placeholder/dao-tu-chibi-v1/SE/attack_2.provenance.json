@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:58:53.683Z",
+  "utcRecordedCompleted": "2026-11-08T00:59:26.001Z",
+  "prompt": "Use case: precise-object-edit. FIRST exact4x4 stencil template, DAO TU T1 male Storm Reaver in elevated SE FRONT THREE-QUARTER facing DOWN-RIGHT, both grey eyes visible as locked reference2, never Eprofile/straightfront. Same lean adult stern face/swept black fringe/low loose ponytail. Plain sleeveless darkmutedteal wraptunic/stormgreyblue collar+sash/short plainoverskirt/darkpants+boots+bracers minimal dullbrass. Same HEAVY BROAD single-edge mountain-ink steel DAO, LONG darkgrip/plain brassguard, preserve blade identity/size, no shortcleaver/dagger. Unscaled headstencil guides exact skull~49px high/breadth36px per256cell; standinganatomical216-217px. Head/body part sizes stay constant; head maytranslate/rotate with pose, no global fit/shrink/recenter. Latticex128 registrationground232, all body/hair/weapon fullyinsideeachcell with6pxmargin, no clipping/overlap. RemoveALL guides/borders/markers/stencilrects. Opaque UNIFORM PURE RGB255,0,255 MAGENTA background, no text/shadows/aura/particles/trails/FX/props. Clean premium painted semichibi xianxia,NWlight. \n14 distinct sequential sweeping dao attack frames, row-major; last two cells blank magenta. Anticipation frames0-5 lifting heavy long broad dao, broad sweeping cut6-8, impacthold9, followthrough10-13 returning shoulder guard. SE orientation remains identifiable, actual whole-body weight shift and feet planted, no duplicate posed panels.",
+  "references": ["templates/attack_2.head-stencil.template.png", "../reference/SE.master.png"],
+  "generatedOriginalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b856-ee35-77d1-9217-2a7e924e189f\\exec-69916717-d22d-4593-97f2-dd8c8f12fb0b.png",
+  "rawOutput": "raw/attack_2.png"
+}

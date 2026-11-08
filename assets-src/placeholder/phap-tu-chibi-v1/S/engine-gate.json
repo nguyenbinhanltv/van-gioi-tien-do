@@ -1,0 +1,285 @@
+{
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "direction": "S",
+  "source": "dragonbones/phap-tu-chibi-v1/phaptuchibi",
+  "zoom": 2,
+  "midpointSamplesPerClip": 24,
+  "captureExitCode": 0,
+  "utcCaptureIndexModified": "2026-11-07T23:49:01.554Z",
+  "captureIndexSha256": "c8d9fcdaf3900a95e22bc9f3ce96055d1b92e1fa77676646b43a978bd0ffb790",
+  "runtimeAssets": [
+    {
+      "file": "phaptuchibi_S_page1_tex.json",
+      "sha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d",
+      "capturedSourceSha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_S_page1_tex.png",
+      "sha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
+      "capturedSourceSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_S_ske.json",
+      "sha256": "a02491e1cc9686a749204cb3c92c20131f6509aaa0542106c76ed4ae4eca59bb",
+      "capturedSourceSha256": "a02491e1cc9686a749204cb3c92c20131f6509aaa0542106c76ed4ae4eca59bb",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_S_tex.json",
+      "sha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda",
+      "capturedSourceSha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_S_tex.png",
+      "sha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26",
+      "capturedSourceSha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26",
+      "byteMatch": true
+    }
+  ],
+  "clips": [
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif",
+      "name": "idle",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif",
+      "name": "meditate",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif",
+      "name": "walk",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif",
+      "name": "run",
+      "filesExist": true
+    },
+    {
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif",
+      "name": "dash",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif",
+      "name": "sword_fly",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif",
+      "name": "attack",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif",
+      "name": "cast",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif",
+      "name": "channel",
+      "filesExist": true
+    },
+    {
+      "duration": 0.26666666666666666,
+      "keyFrames": 8,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif",
+      "name": "hit",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif",
+      "name": "die",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif",
+      "name": "tribulation",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif",
+      "name": "emote",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif",
+      "name": "attack_2",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif",
+      "name": "attack_3",
+      "filesExist": true
+    }
+  ],
+  "headEvidenceCells": 19,
+  "spriteQa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 17,
+    "regression": 0,
+    "info": 106
+  },
+  "nativeCanvasLossGate": {
+    "status": "passed",
+    "frames": 202,
+    "failHard": 0
+  },
+  "status": "passed",
+  "note": "Real full-frame capture on merged D50/runtime code; all five rendered inputs match source bytes. Seventeen locomotion foot findings remain open. One character-wide scale and fixed shared hit/dash lattice root; no per-frame fitting."
+}

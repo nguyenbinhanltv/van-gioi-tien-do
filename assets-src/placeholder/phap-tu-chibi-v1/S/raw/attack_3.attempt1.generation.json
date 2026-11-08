@@ -1,0 +1,26 @@
+{
+  "clip": "attack_3",
+  "direction": "S",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED S master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT S straight-on FRONT view facing screen DOWN in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.71. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. Fan anatomicalLEFT is SCREEN RIGHT; eyes/beautymark fixed anatomicalright (screenLEFT). Image2 contains unscaled master-head stencils: keep exact skullsize/face and complete body under them. Stay straight front S in every cell, no SE threequarter or side turn. Use image2 canonical unscaled head stencils for SIZE/IDENTITY, not extra heads. Allow head translation for posture but NEVER change skull size or perspective. CLIP attack_3:14figures4x4 lasttwoEMPTYmagenta. Finishing FORWARD FAN THRUST towardcamera/downscreen.0ready,1-3anticipation bentknees andleftfan drawsto shoulder SCREENRIGHT,4-6step Rfoot SCREENLEFT forward/down andthrust LEFTfan forwardatsternumheight,7-8impacthold deep lunge,9-11recoverweight andfan,12-13ready. OrthographicfrontS ALWAYS, no turntoSE/E, exactfixedface/skullsize evenlunge; head maytranslate only notperspectivezoom. Rightfreearm balances screenLEFT, longLEFTsleeve hangsunderfanarm. One naturalleftgrip fan, no handextra/doublefans/FX. Hair,sash,ribbons lag2frames andsettle. Clear anticipation+impacthold+followthrough. Fullbodyinsidecell, shorttunic/trousers, noframefitting.",
+  "utcStart": "2026-11-07 23:09:14 UTC",
+  "references": ["reference/S.master.png", "S/templates/attack_3.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/attack_3.attempt1.png",
+  "selected": "sheets/attack_3.png",
+  "utcEndObserved": "2026-11-07 23:09:54 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "d29e2abce3a9a2de45ddd1ec245598bcc471dfd9e243201470b41f7715c796f7",
+  "utcRawOutputFileModified": "2026-11-07T23:09:54.316Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/S.master.png",
+      "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168"
+    },
+    {
+      "file": "S/templates/attack_3.head-guide.png",
+      "sha256": "8091e1d5912023c10e9383f140bb020867d5a2cf621fc04a966eab145c8d6adb"
+    }
+  ],
+  "selectedSha256": "d29e2abce3a9a2de45ddd1ec245598bcc471dfd9e243201470b41f7715c796f7"
+}

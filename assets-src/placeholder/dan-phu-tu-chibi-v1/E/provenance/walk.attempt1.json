@@ -1,0 +1,32 @@
+{
+  "clip": "walk",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 20:49:24 UTC",
+  "utcEnd": "2026-11-07 20:50:04 UTC",
+  "prompt": "Use case: identity-preserve. PRODUCTION WALK EAST sprite sheet smooth-v2,16FRAMES24fps. Image1 exact native E identity; Image2 exact4x4 WALK lattice with cyan/amberfootghosts and red/blue leadinglegmarkers; Image3 accepted IDLE sheet for exactsame scale/paint/whisk. SQUARE2048x2048 EXACT4cols4rows,16wholefigures rowmajor, eachcell512rawpx (256logical), noextrafigures. Everyframe pure RIGHT-facingEprofile oneeye noseRIGHT, no body/camera turn. Samefixed adultfemale jadehealer: softlyrounded face, olivebrown almond eye, straightdelicatebrow, serenesmallmouth, tallroundedmainhaircap separatefoldedbun/simplejadepin/twolongside strands, darkbrownblackhair. PlainT1 ivorywraprobe jadecollar/cuffs/sash narrowantiquegoldedge tinyinkhem jadeivoryshoes. Right hand alwaysgrips SAMEplainbrownwoodwhisk ONE cylindricalbronzecollar whitehorsehair, carryupright nearshoulder asmaster, leftpalmcalmopen. No weaponmorph or handswapping. LOCKEDscale fromacceptedidle: logicalbuntop5,crown16,eyes51,chin68,bootsground232,pelvisaxis118, maincap-to-sole216,wholebbox227. Followimage2 footghosts and head/ground/pelvis marks, butREMOVEallguides inoutput. WALK INPLACE toRIGHT, sixteencontinuousdrawings:1Rheelcontactforward/Lbacktoe;2Rload/Ltoeoff;3Rmidstance/Lpassing;4Rbackplanted/Lswingsforward;5Rpush/Lapproach;6Ldescend;7Lprecontact/Rback;8transition;9Lheelcontactforward/Rbacktoe;10Lload/Rtoeoff;11Lmidstance/Rpassing;12Lbackplanted/Rswingforward;13Lpush/Rapproach;14Rdescend;15Rprecontact/Lback;16transitiontowardfirst. R=near/cyan foot, L=far/amberfoot. Alternate NEARandFAR boot clearly, plantedfoot slides BACK acrossstance exactlyasghosts whilebodyaxisstable; doNOT move bothboots together or draw16sameposes. Robe split opens naturally withstepping toexpose eachplantedsole, sameoutfitdesign notshortened. Shallowkneeflex, everyframeuprightheight227within3%, no squash/zoom. Sidehair/sashtails/sleeves lagstep2frames then settle, whiskhairgentlesway withfixedshaftgrip. Same2celtones+highlight+narrowrim tintedlines NWlight, matchacceptedidlepaint. FlatopaqueMAGENTA#FF00FF background, no grid/borders/ghostdots/triangles/text/labels/shadows/floor/aura/talismans/lotus/glow/particles/blur/afterimages. Entirefigureincludingwhisk/boots insideeachcell, nooverlap/cropping. Smoothloop lastpose flowsintofirst.",
+  "references": ["../../reference/E.identity-panel.png", "../templates/walk.template.png", "../raw/idle.attempt1.png"],
+  "raw": "../raw/walk.attempt1.png",
+  "status": "candidate; partial QA pending; actual foot contacts require art inspection",
+  "sha256": "3b79bfca888d3279fa4c295fdab7382195182df6e264bcb1b83080a576911666",
+  "rawSha256": "3b79bfca888d3279fa4c295fdab7382195182df6e264bcb1b83080a576911666",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../../reference/E.identity-panel.png",
+      "sha256": "115e20255ca15e897d27cfe51e9d6047dfe9a4dc17e42a47168acf39b0f5e3cb"
+    },
+    {
+      "file": "../templates/walk.template.png",
+      "sha256": "91d8a5c72cf015757b8f5eea0858e65e34f13e673c0d19549c4fb8a81252c1a1"
+    },
+    {
+      "file": "../raw/idle.attempt1.png",
+      "sha256": "60bb20c2b863c671007284e664115c7c9e6bd7f0bc57efb4dc101123d50bfda2"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

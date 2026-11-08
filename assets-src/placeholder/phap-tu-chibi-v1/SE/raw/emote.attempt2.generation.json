@@ -1,0 +1,26 @@
+{
+  "clip": "emote",
+  "attempt": 2,
+  "prompt": "Surgical edit of exact twelveframe4columns3rows emote sheet image1. Preserve grid, order, bodyposes, faceidentity, skullsizes, feet, hair, costume and backgrounds. ONLY change fan placement in frames5,6,7,8,9 (zero-based rowmajor): lower fan and holding LEFT hand enough to expose entire mouth/chin/jaw clearly, fan now atcollarbone/chest beneathchin. Keep bow/incline intact. Redraw leftforearm naturally withoutchangingelbow/bodypositions. Image2 canonical face locks precise adult face. Especially row3column1 (frame8) must show visible realchin under bowedhead. No headscalechanges or bodyzoom. Allothercells remain same ready/saluteposes. Puremagenta,12fullfigures, same4x3lattice, noFX.",
+  "utcStart": "2026-11-07 22:22:46 UTC",
+  "references": ["SE/raw/emote.attempt1.png", "reference/SE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/emote.attempt2.png",
+  "selected": "sheets/emote.png",
+  "utcEndObserved": "2026-11-07 22:23:15 UTC",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawSha256": "90f3ec9b9ad048d0441a753864fcde8a43c43fe995f229901e457adda48ac53d",
+  "utcRawOutputFileModified": "2026-11-07T22:23:14.848Z",
+  "referenceSnapshots": [
+    {
+      "file": "SE/raw/emote.attempt1.png",
+      "sha256": "484950859bda02c93abbb94788e7f508f8984548a3252441a84fae5c0a44a140"
+    },
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    }
+  ],
+  "selectedSha256": "90f3ec9b9ad048d0441a753864fcde8a43c43fe995f229901e457adda48ac53d"
+}

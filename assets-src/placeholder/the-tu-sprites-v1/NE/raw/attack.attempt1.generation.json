@@ -1,0 +1,18 @@
+{
+  "clip": "attack",
+  "dir": "NE",
+  "attempt": 1,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:20:55 UTC",
+  "prompt": "Production ATTACK NE rear3Q sprite sheet. Image1 exact identity/camera master, image2 layoutguide. EXACT FOUR equal SQUARE columns TWO rows,8 full-body frames rowmajor, aspect2:1. In EVERY cell use EXACT image1 rear THREE-QUARTER view facing diagonally AWAY from viewer toward screen UPPER-RIGHT / NORTHEAST. Back panel dominates, one tiny right cheek edge only, NO frontal face, NO turning toward camera. Stocky adult male earth tank, short darkbrown topbun and jade hairpin, ivory cross-collar robe/loose sleeves/trousers, mountain-blue short split tabard with bronze cloud emblem across UPPER BACK and bronze cloud hem trim, dark-blue waist sash BAND ONLY (front knot hidden), TWO sash tips partly hidden behind back tabard, dark boots, paired large bronze stone-block gauntlets with square meander emblems worn on hands. No sword/shield/platform/extra weapons. Exact master palette ivory#E9EEF0, blue#5E8798, sash#294451, bronze#B58A4A/shadow#5B4222/highlight#E3C07F. Fine ink outlines, clean 2-3 tone painterly cel shading, NW light. Same adult head size and stocky torso throughout. REDRAW natural limb anatomy per pose, no bent rubber cloth. FRAMING eachcell256units: bun top y18, boot sole ground y232, height214units, pelvis axis x126.89. Every frame IDENTICAL anatomical scale; no cell-specific zoom or shrinking.  Eight-frame RIGHT PUNCH into upper-right awaydirection.1 guard;2 loadrightgauntlet;3 windback;4 extendrightpunch;5 fullimpactextension;6 retract;7 recover;8 exactguard. Rightneararm extends AWAY to upperright, torso rotates slightly but camera remainsrear3Q, no enlarged hand. Bootsplanted. Pure flat opaque#FF00FF, no scenery/shadows/floor/guides/text/ticks/particles/rocks/glow/afterimages. No weapon. All8completefigures sameanatomicalscale insideowncells.",
+  "references": ["../../the-tu-continuous-v1/reference/NE.master4x.png", "templates/attack.template.png"],
+  "selectedOutput": "sheets/attack.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:22:48 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-9bd842c0-213d-452b-b336-c5b8ddb0b2ea.png",
+  "originalBackup": "raw/originals/attack.attempt1.png",
+  "sourceSelectionStatus": "selected; awaiting QA",
+  "finalGate": "export/engine-gate.json"
+}
