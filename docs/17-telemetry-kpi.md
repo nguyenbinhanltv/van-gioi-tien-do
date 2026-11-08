@@ -265,13 +265,4 @@ Server là nơi ra quyết định (08 §6). Telemetry chỉ **ghi lại** và *
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                       | Mặc định đề xuất                                                   |
-| --- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Q1  | Lưu trữ MVP: PostgreSQL phân vùng hay ngay lập tức dùng kho cột (ClickHouse)? | PostgreSQL ở MVP (đơn giản khi chạy cục bộ), nâng cấp khi vượt tải |
-| Q2  | Công cụ dashboard: Grafana hay Metabase (hoặc cả hai)?                        | Metabase cho sản phẩm / kinh tế, Grafana cho vận hành / hiệu năng  |
-| Q3  | Ngưỡng KPI giữ chân và tỷ lệ FTUE (D1 ≥ 30%, D7 ≥ 12%, D30 ≥ 5%, FTUE ≥ 50%)  | Dùng làm giả thuyết ban đầu, đối chiếu mốc ngành sau closed beta   |
-| Q4  | Có tách "tùy chọn phân tích" (opt-out) khỏi dữ liệu thiết yếu ngay MVP không? | Có (§7); thiết yếu luôn bật                                        |
-| Q5  | Thời hạn lưu: log thô 90 ngày, IP 30 ngày, sổ cái theo luật                   | Dùng làm mốc; chốt sau tư vấn pháp lý                              |
-| Q6  | Dùng `player_pid` HMAC với khóa xoay vòng hàng năm hay cố định?               | Cố định trong MVP; có kế hoạch xoay khi cần ẩn danh sâu hơn        |
-| Q7  | SLA hàng đợi kiểm tra thủ công 72 giờ và quy trình khiếu nại                  | Có                                                                 |
-| Q8  | Có thu nhận thêm bản ghi `ui.open` để tối ưu giao diện không?                 | Không trong MVP (giảm khối lượng và PII)                           |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (17 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

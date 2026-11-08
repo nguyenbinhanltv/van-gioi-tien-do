@@ -6,7 +6,7 @@ import { applyLandmarks, evalPose, landmarkToRig, loadCharacterData, type Landma
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const view = { scale: 2, pivot: [64, 116] as const };
 
-/** The E landmarks of docs/art/rig-continuous-parts.md §2 (target values handed to art). */
+/** The E landmarks of docs/art/rig-legacy-player.md §2 (target values handed to art). */
 const E: Landmarks = {
   neck: [118, 78],
   head: [124, 55],

@@ -250,12 +250,4 @@ Build CI trong "CI ngắn" chỉ chạy kiểm thử tầng 1–2 trong Node; **
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                        | Mặc định đề xuất                                                                                 |
-| --- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Q1  | Tạo package `@vgtd/client-app` cho tầng 2 (ADR-015)?                                           | **Có**                                                                                           |
-| Q2  | Store tự viết thay vì thư viện (ADR-016)?                                                      | **Có**                                                                                           |
-| Q3  | MVP chỉ phát hành Web; PC bằng bọc Electron sau MVP; Android/iOS native ngoài MVP?             | **Có**                                                                                           |
-| Q4  | Dữ liệu chunk đóng thành một tệp/vùng có chỉ mục thay vì bundle Cocos mỗi chunk?               | **Có, chờ kết quả spike S4**                                                                     |
-| Q5  | Có chạy build Cocos trong CI không?                                                            | **Không** trong MVP (CI ngắn); build cục bộ                                                      |
-| Q6  | Ngưỡng FPS sàn trên máy tầm thấp (tài liệu hiện chỉ đặt ngân sách draw call/RAM, chưa đặt FPS) | 60 mục tiêu / 30 sàn; ma trận thiết bị ở [28 §7](28-chien-luoc-kiem-thu.md); cần chủ dự án duyệt |
-| Q7  | Xác nhận Spine 4.2 chạy được trên Cocos 3.8.8 và giấy phép runtime Spine đã rõ                 | Spike S1–S2; chủ dự án kiểm tra điều khoản Spine                                                 |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (21 Q1–Q7). Nội dung gốc của mục này nằm trong lịch sử git.

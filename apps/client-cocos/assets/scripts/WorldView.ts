@@ -46,6 +46,8 @@ export class WorldView {
   readonly width: number;
   readonly height: number;
   private readonly walkable: Uint8Array;
+  private readonly dirtLayer: Int16Array | undefined;
+  private readonly grassLayer: Int16Array | undefined;
   private readonly frames = new Map<number, SpriteFrame>();
   private readonly waterFrames: SpriteFrame[] = [];
   private waterIds: number[] = [];
@@ -91,6 +93,8 @@ export class WorldView {
     this.layerNames = data.layers.map((l) => l.name);
     const dirt = data.layers.find((l) => l.name === 'dirt')?.data;
     const grass = data.layers.find((l) => l.name === 'grass')?.data;
+    this.dirtLayer = dirt;
+    this.grassLayer = grass;
     this.walkable = new Uint8Array(this.width * this.height);
     for (let k = 0; k < this.walkable.length; k++) {
       if ((dirt && dirt[k] >= 0) || (grass && grass[k] >= 0)) this.walkable[k] = 1; // water-only cells are blocked
@@ -141,6 +145,15 @@ export class WorldView {
   setTier(tier: cw.StreamTier): void {
     this.tierName = tier;
     this.streamer.setTier(tier);
+  }
+
+  /** Ground kind of a tile (`water` = neither dirt nor grass), null outside the map: biome input for prop placement. */
+  terrainAt(i: number, j: number): 'water' | 'dirt' | 'grass' | null {
+    if (i < 0 || j < 0 || i >= this.width || j >= this.height) return null;
+    const k = j * this.width + i;
+    if (this.grassLayer && this.grassLayer[k]! >= 0) return 'grass';
+    if (this.dirtLayer && this.dirtLayer[k]! >= 0) return 'dirt';
+    return 'water';
   }
 
   isTerrainWalkable(i: number, j: number): boolean {
