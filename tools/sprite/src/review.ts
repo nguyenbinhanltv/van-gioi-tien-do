@@ -69,7 +69,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 function headLandmarkHtml(head: HeadLandmarks | HeadEvidence): string {
   if (head.kind === 'rear-breadth-only')
     return esc(
-      `crown (${head.crown.x}, ${head.crown.y}); breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y}); shoulder occluder ${head.occluder}; no vertical span`,
+      `crown (${head.crown.x}, ${head.crown.y}); breadth left (${head.breadth.left.x}, ${head.breadth.left.y}), right (${head.breadth.right.x}, ${head.breadth.right.y}); ${'occlusions' in head ? `master occluders: nape ${head.occlusions.nape}; left shoulder ${head.occlusions.leftShoulder}; right shoulder ${head.occlusions.rightShoulder}` : head.occluder ? `shoulder occluder ${head.occluder}` : 'occluded D56-master breadth reference'}; no vertical span`,
     );
   const start = headLandmarkStart(head);
   const end = headLandmarkEnd(head);
