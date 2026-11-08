@@ -18,7 +18,7 @@ import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
 import { AuthError, type AuthService } from './auth/accounts.js';
 import { TokenError } from './auth/jwt.js';
 import { GATEWAY_CONFIG } from './config.js';
-import type { WorldNode } from './world/node.js';
+import { WorldFullError, type WorldNode } from './world/node.js';
 
 export interface GatewayHandle {
   http: Server;
@@ -162,16 +162,21 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           }
         }
         clearTimeout(helloTimer);
-        entityId = world.addPlayer(
-          {
-            send: (bytes) => {
-              if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
+        try {
+          entityId = world.addPlayer(
+            {
+              send: (bytes) => {
+                if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
+              },
+              close: (code, text) => closeWith(code, text),
+              buffered: () => ws.bufferedAmount,
             },
-            close: (code, text) => closeWith(code, text),
-            buffered: () => ws.bufferedAmount,
-          },
-          accountId,
-        );
+            accountId,
+          );
+        } catch (e) {
+          if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');
+          throw e;
+        }
         online.set(accountId, { ws, entityId });
         ws.send(
           JSON.stringify({

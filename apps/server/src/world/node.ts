@@ -5,7 +5,18 @@
  * Clocks (`hrtime`, `setTimeout`) are used ONLY to schedule ticks and measure them; the simulation itself always
  * advances by the fixed `NETWORK.TICK_MS` (skill vgtd-sim-determinism).
  */
-import { AOI, NETWORK, aoiCentre, inAoi, rngFloat, rngFork, rngSeed, toUW, type RngState } from '@vgtd/shared';
+import {
+  AOI,
+  MOB_ID_BASE,
+  NETWORK,
+  aoiCentre,
+  inAoi,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  toUW,
+  type RngState,
+} from '@vgtd/shared';
 import {
   ErrorCode,
   ProtocolError,
@@ -35,6 +46,14 @@ import {
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+
+/** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
+export class WorldFullError extends Error {
+  constructor(message = 'no free player entity id') {
+    super(message);
+    this.name = 'WorldFullError';
+  }
+}
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -216,6 +235,8 @@ export class WorldNode {
 
   // ------------------------------------------------------------------ players
   addPlayer(transport: ClientTransport, accountId: string): number {
+    // mob entity ids start at MOB_ID_BASE: a player id there would collide with mob slot 0 (two entities, one id)
+    if (this.mobs && this.nextId >= MOB_ID_BASE) throw new WorldFullError();
     const id = this.nextId++;
     const [a, r1] = rngFloat(this.spawnRng);
     const [b, r2] = rngFloat(r1);

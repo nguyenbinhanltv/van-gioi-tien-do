@@ -23,7 +23,15 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { COLLIDER_RADIUS_TILES } from '@vgtd/shared';
-import { MobManager, WorldNode, defaultMobZones, isMobId, type ClientTransport, type MobZone } from '../src/index.js';
+import {
+  MobManager,
+  WorldFullError,
+  WorldNode,
+  defaultMobZones,
+  isMobId,
+  type ClientTransport,
+  type MobZone,
+} from '../src/index.js';
 
 const N = 96;
 const open = (): TileGrid => TileGrid.fromRows(Array.from({ length: N }, () => '.'.repeat(N)));
@@ -314,6 +322,38 @@ class Fake implements ClientTransport {
     });
   }
 }
+
+describe('player ids stay below MOB_ID_BASE', () => {
+  const zone: MobZone = { zone: 'bia_rung', i0: 70, j0: 70, i1: 90, j1: 90 };
+  const setNextId = (n: WorldNode, v: number): void => {
+    (n as unknown as { nextId: number }).nextId = v;
+  };
+  it('with mobs, the join that would take id MOB_ID_BASE is refused and nothing is added', () => {
+    const n = new WorldNode({
+      seed: SEED,
+      mapTiles: 160,
+      spawn: { i0: 78, j0: 78, side: 4 },
+      mobs: { zones: [zone], density: 0.2 },
+    });
+    setNextId(n, MOB_ID_BASE - 1);
+    const last = new Fake();
+    expect(n.addPlayer(last, 'last')).toBe(MOB_ID_BASE - 1); // the last legal id
+    const before = n.world.entities.length;
+    expect(() => n.addPlayer(new Fake(), 'late')).toThrow(WorldFullError);
+    expect(n.clients.size).toBe(1);
+    expect(n.world.entities).toHaveLength(before);
+    // no entity id appears twice, and the player is not mistaken for a mob
+    const ids = n.world.entities.map((e) => e.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(n.mobs!.kindOf(MOB_ID_BASE - 1)).toBe(0);
+    for (let t = 0; t < 20; t++) n.tick(); // still runs
+  });
+  it('a player leaving does not free an id above the limit; a node without mobs is unaffected', () => {
+    const plain = new WorldNode({ seed: SEED, mapTiles: 160, spawn: { i0: 78, j0: 78, side: 4 } });
+    setNextId(plain, MOB_ID_BASE + 5);
+    expect(plain.addPlayer(new Fake(), 'a')).toBe(MOB_ID_BASE + 5); // no mobs: no collision possible, allocation unchanged
+  });
+});
 
 describe('AOI replicates mobs', () => {
   const zone: MobZone = { zone: 'bia_rung', i0: 70, j0: 70, i1: 90, j1: 90 };
