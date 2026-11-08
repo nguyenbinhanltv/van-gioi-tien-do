@@ -650,8 +650,9 @@ pair temporal với lân cận phải có min(head,torso)≥0,45; thiếu phép 
 **cho điều kiện D60**. Các ô khác giữ chính sách D55: temporal chỉ chẩn đoán.
 
 Cửa sổ **chỉ để so ảnh**: lấy nguyên chiều rộng/cao cửa sổ đầu D55 có padding của master được chứng nhận
-(ví dụ D59 span-square+8%). Tâm ngang=crown.x; top=crown.y−4% chiều cao chưa padding, tức nửa margin tổng8%
-theo D55. Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
+(ví dụ D59 span-square+8%, D56-master giữ chính sách padding riêng). Tâm ngang=crown.x;
+top=crown.y−Hwindow×0,08/(2×1,08), quy ước margin từng cạnh của cửa sổ D60, không phải kích thước đầu suy diễn.
+Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
 phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng44%/cao25% H master,
 tâm ngang theo crown. Master và các phía so phải có crown thật nhìn thấy; không thay bằng neo phụ kiện,
 không fallback centroid, không ghi cửa sổ thành anatomy.

@@ -173,7 +173,7 @@ export function crownAnchoredSimilarityRegions(
     masterHeight <= 0
   )
     throw new Error('D60 requires a certified nonempty master head window');
-  // D55 expands 8% total: the existing per-edge margin is 4% of the unpadded height.
+  // D60 window-only offset: Hwindow*0.08/(2*1.08); never infer a frame head height.
   const top = p.y - ((height / (1 + MARGIN)) * MARGIN) / 2;
   const head = { left: p.x - width / 2, top, right: p.x + width / 2, bottom: top + height };
   return {
