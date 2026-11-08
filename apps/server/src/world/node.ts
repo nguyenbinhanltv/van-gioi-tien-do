@@ -297,8 +297,15 @@ export class WorldNode {
     return id;
   }
 
-  removePlayer(id: number): void {
-    if (!this.clients.delete(id)) return;
+  /**
+   * Remove a player. `from` (the connection's transport) makes the call connection-bound: a stale socket that still holds an
+   * id which has since been recycled to someone else is ignored instead of removing the new owner. Internal callers (kick)
+   * omit it.
+   */
+  removePlayer(id: number, from?: ClientTransport): void {
+    const c = this.clients.get(id);
+    if (!c || (from !== undefined && c.transport !== from)) return;
+    this.clients.delete(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
   }
@@ -309,9 +316,10 @@ export class WorldNode {
 
   // ------------------------------------------------------------------ inbound
   /** Handle one binary frame from a client (already length-limited by the gateway). */
-  receive(id: number, data: Uint8Array): void {
+  receive(id: number, data: Uint8Array, from?: ClientTransport): void {
     const c = this.clients.get(id);
     if (!c || c.dead) return;
+    if (from !== undefined && c.transport !== from) return; // stale connection: the id now belongs to another player
     c.stats.bytesIn += data.length;
     c.stats.packetsIn++;
     const now = clock();

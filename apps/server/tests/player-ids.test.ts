@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { WebSocket } from 'ws';
 import { MOB_ID_BASE, NETWORK, rngInt, rngSeed } from '@vgtd/shared';
-import { ErrorCode } from '@vgtd/protocol';
+import { ErrorCode, encode } from '@vgtd/protocol';
 import { WorldFullError, WorldNode, startServer, type ClientTransport, type RunningServer } from '../src/index.js';
 import { Bot } from '../src/loadtest/bot.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
@@ -119,6 +119,38 @@ describe('player id recycling (D74 follow-up)', () => {
     setNextId(n, MOB_ID_BASE + 5);
     expect(n.addPlayer(new Quiet(), 'a')).toBe(MOB_ID_BASE + 5);
     expect(n.canAcceptPlayer()).toBe(true);
+  });
+});
+
+describe('stale connections cannot act on a recycled id', () => {
+  const input = (seq: number): Uint8Array =>
+    encode({ type: 'input', ack: 0, inputs: [{ seq, dtMs: 50, dir: 0, mag: 15, flags: 0 }] });
+  it('removePlayer(id, staleTransport) and receive(id, data, staleTransport) are ignored once the id belongs to someone else', () => {
+    const n = node();
+    const old = new Quiet();
+    const id = n.addPlayer(old, 'a');
+    n.removePlayer(id, old); // the replaced session is released
+    run(n, QUARANTINE_MS);
+    const fresh = new Quiet();
+    expect(n.addPlayer(fresh, 'b')).toBe(id); // same numeric id, different owner
+    // the old socket's late close handler and late packets
+    n.removePlayer(id, old);
+    expect(n.clients.has(id)).toBe(true);
+    expect(n.world.entities.some((e) => e.id === id)).toBe(true);
+    n.receive(id, input(1), old);
+    expect(n.clients.get(id)!.inbox).toHaveLength(0);
+    expect(n.clients.get(id)!.stats.packetsIn).toBe(0);
+    // the rightful owner still works
+    n.receive(id, input(1), fresh);
+    expect(n.clients.get(id)!.inbox).toHaveLength(1);
+    n.removePlayer(id, fresh);
+    expect(n.clients.has(id)).toBe(false);
+  });
+  it('an unbound call (internal kick path) still removes the player', () => {
+    const n = node();
+    const id = n.addPlayer(new Quiet(), 'a');
+    n.removePlayer(id);
+    expect(n.clients.has(id)).toBe(false);
   });
 });
 
