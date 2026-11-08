@@ -399,7 +399,7 @@ Còn mở / lưu ý:
 ## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
 
 1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).
-2. **Chưa nối chiến đấu**: PR chiến đấu (`onDrops`) cần adapter `killerId (sim id) → accountId` và `killKey` ổn định (ví dụ `mobId@tick`); chưa có.
+2. ~~**Chưa nối chiến đấu**~~ — đã nối bằng `DropSink` (killerId → tài khoản, khóa `mobId@tick`, nguồn faucet từ `MobPort.combatStats` đọc trước `kill`). Còn mở: killer ngắt kết nối cùng tick trước khi `onDrops` chạy thì drop không được cấp cho ai (`DropSink.stats.noOwner`); cần chốt luật (cấp theo tài khoản gần nhất / bỏ) khi có tổ đội và loot cá nhân (07 §6).
 3. **Chưa có giao thức**: client chưa thấy túi đồ / ví (không có thông điệp `inv_*`, `inv_cmd`); thêm sau khi các thay đổi giao thức của 35 và 37 đã merge, tránh va id.
 4. **Chưa có**: trang bị / mặc, độ bền hao theo 07 §7 (mới có API `loseDurability`), sửa chữa (sink `REPAIR`), kho / thư / chợ / ký quỹ, Tiên Ngọc và mọi tiền tệ khác Linh thạch, nhân vật (chủ hiện là tài khoản), `affixes`.
 5. **Lưu trữ thật**: ví thuộc sổ cái và hiện chỉ ở bộ nhớ (mất khi khởi động lại); khóa idempotency chỉ giữ trong tiến trình (docs/26 §4.1: 7 ngày); cần PostgreSQL (docs/23 §4.3-4.4, `item_events` MINT/BURN/MOVE, đối chiếu §3.3), giao dịch đồng thời giữa vật phẩm và sổ cái cho cùng một kill.
