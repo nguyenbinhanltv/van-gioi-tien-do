@@ -193,7 +193,9 @@ export class WorldNode {
     this.ctx = { grid, skills: opts.skills ?? compileSkills() };
     this.world = createWorld(seed);
     this.spawnRng = rngFork(rngSeed(seed), 'spawn');
-    this.spawn = opts.spawn ?? { i0: n / 2 - 48, j0: n / 2 - 48, side: 96 };
+    // default spawn: a 96-tile square at the map centre, shrunk to half the map on small maps (same result for 256)
+    const side = Math.min(96, n / 2);
+    this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
   }
 

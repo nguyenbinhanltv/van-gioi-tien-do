@@ -22,6 +22,7 @@ import { CameraRig } from './CameraRig';
 import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
+import { OnlineSession, onlineRequested } from './OnlineSession';
 
 const { ccclass } = _decorator;
 
@@ -61,6 +62,8 @@ export class Bootstrap extends Component {
   private hud!: PerfHud;
   private marker!: Node;
   private chibi!: ChibiBody;
+  /** only with `?online=1`; offline play stays the default */
+  private online: OnlineSession | null = null;
   private keyHandlers: { down: (e: KeyboardEvent) => void; up: (e: KeyboardEvent) => void } | null = null;
   /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
   private scriptedWalk: shared.Direction[] | null = null;
@@ -149,6 +152,10 @@ export class Bootstrap extends Component {
       hudRoot,
     );
     this.rig.follow(this.playerScreen());
+    if (onlineRequested()) {
+      this.online = new OnlineSession(this.ysort, l2, art);
+      this.online.connect();
+    }
     this.maybeAutotest();
   }
 
@@ -248,7 +255,15 @@ export class Bootstrap extends Component {
       const len = Math.hypot(di, dj) || 1;
       frame = { ...frame, move: { i: di / len, j: dj / len }, magnitude: 1 };
     }
-    this.player.update(dt, frame);
+    if (this.online?.waiting) {
+      // connecting: stand still until the server tells us where we are
+      this.player.update(dt, { move: { i: 0, j: 0 }, magnitude: 0 });
+    } else if (this.online?.active) {
+      const p = this.online.step(dt, frame, this.player.walkMode);
+      if (p) this.player.followNet(p, dt);
+    } else {
+      this.player.update(dt, frame); // offline (default), or the connection failed / dropped
+    }
     this.rig.follow(this.playerScreen());
     this.ysort.sort();
     this.world.update(dt);
@@ -263,12 +278,16 @@ export class Bootstrap extends Component {
       this.lastCanvasW = w;
       this.hud.layout(w, this.canvasUi.contentSize.height);
     }
-    if (!/autotest/.test(location.hash)) this.hud.note = `${this.chibi.note} | keys 1-6 class, Shift walk`;
+    if (!/autotest/.test(location.hash))
+      this.hud.note = this.online
+        ? `${this.online.note()} | ${this.chibi.note}`
+        : `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.hud.update(dt);
   }
 
   onDestroy(): void {
     this.input?.destroy();
+    this.online?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

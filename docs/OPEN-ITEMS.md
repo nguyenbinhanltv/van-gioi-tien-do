@@ -300,3 +300,16 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 - `hello` / `hello_ack` Protobuf và `resume` sau rớt mạng ≤ 10 s (docs/24 §4); hiện là JSON và mất nhân vật khi rớt kết nối.
 - Chưa có Cell Handover giữa nhiều World Node, lag compensation, kỹ năng có sát thương (`hits[]` rỗng), `CastInput` điểm đất/hướng.
 - Số đo tải mới chạy bot trên cùng máy với server (worker thread, loopback): chưa phản ánh độ trễ mạng thật, TLS, nhiều lõi bận khác; cần chạy lại trên máy chủ mục tiêu và với client Cocos thật.
+
+## P2-3 — còn mở sau D72 (client online)
+
+- **Bản đồ**: server dùng lưới mở, client vẽ tilemap procgen 32x32; nước/cây/đá chỉ chặn ở client offline (không chặn online). Cần nạp lưới va chạm procgen (cờ đi được, tầng) vào `WorldNode`/client chung nguồn trước khi coi online là chơi được.
+- **Lớp nhân vật trên dây**: `aoi_enter` chưa có lớp, nên lớp người khác suy ra từ `entityId` (D72); cần giao thức v2 (kèm tên hiển thị, trang bị cho paperdoll).
+- **Nội suy**: trễ cố định 150 ms, tuyến tính, không ngoại suy (docs/08 §5 yêu cầu trễ thích ứng 100-250 ms theo jitter, Hermite, ngoại suy 250 ms); đồng hồ server (8 gói ping/pong, trung vị) chưa có nên dùng giờ nhận gói.
+- **Chưa làm phía client**: `skill_cast`/`skill_result`, bay/né/khinh công (cờ có trong input nhưng chưa gán phím), resume sau rớt mạng, hiển thị tên/HP người khác, quái/NPC (chỉ vẽ `kind` 0).
+- **Chưa chạy được trên CI**: build Cocos và chơi 2 tab không có trong CI; phần tự động là test đơn vị `packages/client-core/tests/net.test.ts` và test đầu-cuối `apps/server/tests/netclient.test.ts` (2 NetClient + server thật). Chưa kiểm bằng trình duyệt thật trên di động.
+- **Tiêu chí P2 còn lại (đo 2026-11-08, bot trên cùng máy, loopback, 100 bot, 30 s)**:
+  - Chặn gian lận: 3 bot speedhack bị ngắt sau 0,3 s, 3 bot teleport bị ngắt sau 3,8 s (tốc độ quan sát tối đa được kẹp ở tốc độ trung thực 4,55 ô/s): **đạt**.
+  - AOI 100 vs 100 (cả 100 bot trong một vùng 30-40 ô, mỗi người thấy 96-99 người khác): 100/100 giữ kết nối, nhưng **băng thông xuống của người xấu nhất vượt ngân sách 8 KB/s**: 8,04 KB/s (vùng 40 ô, trung bình 7,08, thấy 96,6) và 8,67 KB/s (vùng 30 ô, trung bình 8,08, thấy 98,6). Tick p99 25,2 ms và 38,5 ms (sát 40 ms; lần sau đo khi máy còn Chrome/Cocos chạy nền nên có nhiễu CPU). Mật độ vừa (~40 người thấy nhau) vẫn đạt: 3,3-3,7 KB/s.
+  - Hướng giảm (chưa làm, cần quyết định): hạ tần số dải "gần" khi số người thấy > ~60, bỏ `anim`/`dir` khi không đổi, hoặc hạ `MAX_VISIBLE` từ 120. Cho tới khi đó tiêu chí "100 vs 100 ≤ 8 KB/s" **chưa đạt** ở mật độ 100%.
+  - Chưa đo với client Cocos thật trên mạng thật.

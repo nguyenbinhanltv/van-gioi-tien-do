@@ -12,8 +12,9 @@
     "test": "vitest run",
     "demo": "tsc -p tsconfig.build.json && npx --yes http-server -c-1 -p 8080 ."
   },
-  "devDependencies": {
+  "dependencies": {
     "@vgtd/protocol": "*",
+    "@vgtd/shared": "*",
     "@vgtd/sim": "*"
   }
 }
