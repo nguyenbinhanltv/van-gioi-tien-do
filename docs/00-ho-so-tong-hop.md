@@ -69,6 +69,8 @@ Oct 31, 2026 · An Nguyen
 
 ### Nhân vật, layer, atlas
 
+[Cập nhật D59: NE/N chỉ dùng `rear-span-only` khi một đầu breadth sọ bị vật che thật trên cả master và ô. Đo crown→nape Euclidean trong ±3% master cùng hướng, bắt buộc `occluder` cụ thể và `occludedSide` cùng định nghĩa; không lấy seam nội thất, không chiếu endpoint. Ô có đủ hai đầu phải dùng D48: so span với master D59, breadth ô chỉ INFO không có tỷ lệ master; không cho phép chiều ghép ngược. Cửa sổ Lab/temporal của master D59 và mọi ô ghép là hình vuông cạnh một span, tâm trung điểm hai endpoint, nới tổng 8%; cửa sổ không tạo breadth evidence. Crown theo hàng cao nhất có dải ≥2 pixel main-cap alpha≥128 không chạm bun/gold/ribbon, x ở trung điểm dải. Không sửa ảnh master; Lab D55, head band, foot/canvas và D41/D54 giữ nguyên.]
+
 [Cập nhật D47: upright semi-chibi có exception/bbox ngoài band dùng bằng chứng kích thước đầu master ±3%, reason `posture`/`secondary-overhang`, không ép phẳng flight tuck/dash/lunge. Ô trong band không exception giữ cổng cũ; evidence đã khai báo luôn được kiểm. Chi tiết tọa độ và INFO review ở `art/sprite-sheet-pipeline.md`.]
 
 [Cập nhật D48, bổ sung D47: NE/N bị che cằm dùng `rear-skull-base`, crown→đáy sọ tại chỗ nối gáy/cổ và bề ngang sọ tối đa đều ±3% cùng master của hướng đó. Không bịa hay chiếu cằm. Kind, landmark và bề ngang giữ trong INFO; chi tiết schema ở pipeline.]

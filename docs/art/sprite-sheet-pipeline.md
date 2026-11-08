@@ -580,3 +580,29 @@ hay export.11ô Lab vượt15 chặn rebuild, cần sửa hoặc quyết định
 Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourceSha256, mask, maskSha256, cells}`; đường dẫn tương đối project, SHA256 gồm 64 hex thường, cells là chỉ số clip-local (sheet nhóm ánh xạ qua sheetSelection). Mask PNG cùng kích thước native, RGB nhị phân 0/255, alpha 255: trắng cho phép edit, đen khóa. Tool so mọi byte RGBA ngoài mask trên toàn sheet trước DPI/key/despill/palette, kể cả RGB trong pixel alpha 0; sai hash, mất mask hoặc khác byte là lỗi cứng không waiver. Mỗi ô kế thừa phải còn pixel khóa.
 
 Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
+
+## Bổ sung D59: breadth sọ bị che thật
+
+Chỉ NE/N khi một đầu contour breadth tối đa không nhìn thấy trên master đã duyệt **và** ô mới dùng
+`rear-span-only`. Không dùng điểm nội thất/seam tóc thay contour và không sửa master để lộ điểm.
+Khai crown và `skullBase` (junction tóc–da ở nape theo D48), `occludedSide: "left" | "right"`,
+`occluder` cụ thể cùng định nghĩa trên master/ô; ô thêm note review. Không khai breadth giả.
+Khoảng cách Euclidean crown→nape phải trong ±3% master cùng hướng; có đủ hai đầu breadth nhìn thấy
+phải dùng D48. Crown chọn hàng cao nhất có dải liên tiếp ≥2 pixel **main-cap** alpha≥128 không chạm
+bun/gold tie/ribbon, x ở trung điểm dải. Phân loại main-cap là review ngữ nghĩa nguồn, không phải tự
+coi mọi pixel alpha là tóc sọ. Giữ overlay, hash và lịch sử chọn điểm trước khi tính tỷ lệ.
+
+Ảnh master giữ nguyên; các gate Lab/head/canvas/foot và D41/D54 không được miễn bởi D59.
+
+### D59: ô lộ đủ breadth so với master bị che
+
+Cho phép đúng chiều master `rear-span-only` → ô `rear-span-only` hoặc `rear-skull-base` (D48).
+Ô D48 vẫn so span crown→nape ±3% master; kiểm hai endpoint breadth trong ảnh, alpha≥128,
+ở khoảng dọc crown/nape và cách trung điểm ngang không quá một span. Đây là kiểm hợp lý vị trí,
+không thay review nguồn để xác nhận contour sọ thật. Breadth ô ghi INFO, không có tỷ lệ với master
+hay giá trị breadth master được suy diễn. Chiều ngược và các kind khác vẫn lỗi.
+
+Cửa sổ Lab D55 cho master D59 và mọi ô ghép là hình vuông: cạnh bằng khoảng cách Euclidean
+crown→nape, tâm tại trung điểm hai điểm, nới tổng 8% cả hai chiều. Kể cả ô D48 có breadth thật,
+vẫn dùng cửa sổ span giống master; breadth thật chỉ là evidence riêng. Torso giữ quy tắc D55.
+Temporal D59/D48 dùng cùng cửa sổ; không tạo hay ghi cửa sổ thành landmark.

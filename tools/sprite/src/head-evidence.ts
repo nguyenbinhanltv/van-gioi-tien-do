@@ -25,7 +25,17 @@ export type HeadEvidenceKind =
   | 'rear-crown-shoulder'
   | 'rear-base-ornament'
   | 'rear-crown-shoulder-single'
+  | 'rear-span-only'
   | 'rear-breadth-only';
+/** D59: a real occluder hides a skull-breadth endpoint on master and frame. */
+export interface RearSpanOnlyLandmarks {
+  readonly kind: 'rear-span-only';
+  readonly breadth?: never;
+  readonly crown: HeadPoint;
+  readonly skullBase: HeadPoint;
+  readonly occludedSide: 'left' | 'right';
+  readonly occluder: string;
+}
 export interface FrontHeadLandmarks {
   readonly kind?: 'crown-chin';
   readonly crown: HeadPoint;
@@ -66,7 +76,12 @@ export interface RearOrnamentLandmarks {
   readonly breadth: SkullBreadth;
 }
 export type HeadLandmarks =
-  FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearOrnamentLandmarks | RearSingleShoulderLandmarks;
+  | FrontHeadLandmarks
+  | RearHeadLandmarks
+  | RearShoulderLandmarks
+  | RearOrnamentLandmarks
+  | RearSingleShoulderLandmarks
+  | RearSpanOnlyLandmarks;
 /** D56 is frame-only: the locked master retains its original, fuller landmark definition. */
 export interface RearBreadthOnlyLandmarks {
   readonly kind: 'rear-breadth-only';
@@ -99,7 +114,8 @@ export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
   return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
 }
 export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
-  if (head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament') return head.skullBase;
+  if (head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament' || head.kind === 'rear-span-only')
+    return head.skullBase;
   if (head.kind === 'rear-crown-shoulder-single') return head.shoulderTop;
   if (head.kind === 'rear-crown-shoulder')
     return {
@@ -115,7 +131,7 @@ export function headLandmarkBreadth(
   width: number,
   height: number,
 ): number | null {
-  const b = head.breadth;
+  const b = 'breadth' in head ? head.breadth : undefined;
   if (!b || !validPoint(b.left, width, height) || !validPoint(b.right, width, height)) return null;
   const size = Math.hypot(b.left.x - b.right.x, b.left.y - b.right.y);
   return size > 0 ? size : null;
@@ -129,10 +145,22 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
       'rear-crown-shoulder',
       'rear-crown-shoulder-single',
       'rear-base-ornament',
+      'rear-span-only',
     ].includes(headEvidenceKind(head))
   )
     return null;
   if (head.kind !== undefined && head.kind !== 'crown-chin' && 'chin' in head) return null;
+  if (
+    head.kind === 'rear-span-only' &&
+    ('breadth' in head ||
+      'shoulderTop' in head ||
+      'ornamentAnchor' in head ||
+      !['left', 'right'].includes(head.occludedSide) ||
+      typeof head.occluder !== 'string' ||
+      !head.occluder.trim() ||
+      /^(hidden|unknown|occluded|none|n\/a)$/i.test(head.occluder.trim()))
+  )
+    return null;
   if (head.kind === 'rear-crown-shoulder-single') {
     if (
       'skullBase' in head ||
@@ -171,7 +199,7 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
       head.kind === 'rear-crown-shoulder' ||
       head.kind === 'rear-crown-shoulder-single' ||
       head.kind === 'rear-base-ornament' ||
-      head.breadth !== undefined) &&
+      ('breadth' in head && head.breadth !== undefined)) &&
     headLandmarkBreadth(head, width, height) === null
   )
     return null;
@@ -293,7 +321,8 @@ export function checkHeadEvidence(
       },
     ];
   }
-  if (options.masterHead && headEvidenceKind(evidence) !== headEvidenceKind(options.masterHead))
+  const mixedSpan = options.masterHead?.kind === 'rear-span-only' && evidence.kind === 'rear-skull-base';
+  if (options.masterHead && headEvidenceKind(evidence) !== headEvidenceKind(options.masterHead) && !mixedSpan)
     return failure('head_evidence_kind', 'master/frame must use the same skull measurement kind');
   if (evidence.kind === 'rear-base-ornament' && clip.direction !== 'N')
     return failure('head_evidence_direction', 'rear ornament evidence is allowed only for N locked masters');
@@ -305,6 +334,7 @@ export function checkHeadEvidence(
     return failure('head_evidence_occluded_side', 'master/frame must declare the same occluded shoulder side');
   if (
     (evidence.kind === 'rear-skull-base' ||
+      evidence.kind === 'rear-span-only' ||
       evidence.kind === 'rear-crown-shoulder' ||
       evidence.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(clip.direction ?? 'E')
@@ -316,6 +346,16 @@ export function checkHeadEvidence(
     return failure(
       'head_evidence_invalid',
       'head evidence needs matching valid master/frame skull landmarks, required rear breadth and a reviewed note',
+    );
+  if (
+    evidence.kind === 'rear-span-only' &&
+    options.masterHead?.kind === 'rear-span-only' &&
+    (evidence.occludedSide !== options.masterHead.occludedSide ||
+      evidence.occluder.trim() !== options.masterHead.occluder.trim())
+  )
+    return failure(
+      'head_evidence_occluder',
+      'master/frame must retain the same hidden breadth side and concrete occluder',
     );
   if (
     evidence.kind === 'rear-base-ornament' &&
@@ -334,8 +374,34 @@ export function checkHeadEvidence(
     );
   const masterBreadth = headLandmarkBreadth(options.masterHead!, options.master.width, options.master.height);
   const breadth = image ? headLandmarkBreadth(evidence, image.width, image.height) : null;
+  if (mixedSpan && image && evidence.kind === 'rear-skull-base') {
+    const top = Math.min(evidence.crown.y, evidence.skullBase.y),
+      bottom = Math.max(evidence.crown.y, evidence.skullBase.y);
+    const centerX = (evidence.crown.x + evidence.skullBase.x) / 2;
+    const visibleInHead = (p: HeadPoint) => {
+      const x = Math.round(p.x),
+        y = Math.round(p.y);
+      return (
+        x >= 0 &&
+        y >= 0 &&
+        x < image.width &&
+        y < image.height &&
+        p.y >= top &&
+        p.y <= bottom &&
+        Math.abs(p.x - centerX) <= size &&
+        image.data[(y * image.width + x) * 4 + 3]! >= 128
+      );
+    };
+    if (!visibleInHead(evidence.breadth.left) || !visibleInHead(evidence.breadth.right))
+      return failure(
+        'head_breadth_invalid',
+        'D48 frame paired with D59 master needs visible breadth endpoints within the reviewed head region',
+      );
+  }
   if (
-    (options.masterHead!.breadth !== undefined || evidence.breadth !== undefined) &&
+    !mixedSpan &&
+    (('breadth' in options.masterHead! && options.masterHead!.breadth !== undefined) ||
+      ('breadth' in evidence && evidence.breadth !== undefined)) &&
     (masterBreadth === null || breadth === null)
   )
     return failure(
@@ -368,13 +434,15 @@ export function checkHeadEvidence(
       metric: 'head_size_px',
       value: size,
       limit: high,
-      message: `${reason ?? 'in-band'}: ${headEvidenceKind(evidence)} skull ${size.toFixed(2)} px / master ${masterSize.toFixed(2)} px${breadth !== null ? `; breadth ${breadth.toFixed(2)} / master ${masterBreadth!.toFixed(2)} px` : ''}; bbox ${bboxHeight} px / master ${options.masterHeight} px; ${evidence.note}`,
+      message: `${reason ?? 'in-band'}: ${headEvidenceKind(evidence)} skull ${size.toFixed(2)} px / master ${masterSize.toFixed(2)} px${breadth !== null ? (masterBreadth !== null ? `; breadth ${breadth.toFixed(2)} / master ${masterBreadth.toFixed(2)} px` : `; visible frame breadth ${breadth.toFixed(2)} px (master occluded; no ratio)`) : ''}; bbox ${bboxHeight} px / master ${options.masterHeight} px; ${evidence.note}`,
       headEvidence: {
         kind: headEvidenceKind(evidence),
         direction: clip.direction ?? 'E',
         ...(masterBreadth !== null && breadth !== null
           ? { masterBreadthPx: masterBreadth, breadthPx: breadth, breadthRatio: breadth / masterBreadth }
-          : {}),
+          : mixedSpan && breadth !== null
+            ? { breadthPx: breadth }
+            : {}),
         reason: reason ?? 'in-band',
         master: options.masterHead!,
         frame: evidence,
