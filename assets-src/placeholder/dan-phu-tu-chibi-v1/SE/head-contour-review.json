@@ -1,0 +1,24 @@
+{
+  "status": "OPEN provisional contour candidate; nominal finding remains rejected pending orchestrator adjudication, not a certified art-scale defect or a pass.",
+  "receivedRecordedUtc": "2026-11-08T01:59:57.630Z",
+  "reviewer": "style23",
+  "frozen": {
+    "crown": {
+      "x": 147,
+      "y": 28.5
+    },
+    "chin": {
+      "x": 159,
+      "y": 82.5
+    },
+    "sizePx": 55.31726674375733,
+    "upperLimitPx": 55.06407358704948,
+    "nominalOverPx": 0.2531931567078516
+  },
+  "manualUncertaintyPx": 1,
+  "review": "159,82.5 is defensible jaw-to-neck junction;157 reads back/left neck shadow and must not be reused. Crown147,28.5 remains plausible first attached front-cap highlight, separate from elevated bun. Skin row81, jaw-outline82, neck83 across neighbors; allopaque, so alpha alone cannot locate the internal semantic junction. Keep frozen pair and nominal overband finding open; no coordinate change/waiver. Manual uncertainty does not certify actual drift.",
+  "orchestratorHandoff": "Exact frozen overlay and native evidence sent for internal contour ownership adjudication.",
+  "sourcePngSha256": "f8385b6a67ea733a109844460069fad98d134f61e5a2534fe48c3d8cff1188fe",
+  "overlay": "AO artifact SE-aligned-preview/dash5-frozen-contour.svg",
+  "overlaySha256": "c8e30a7e4cb278e82d207975c3eed302a10200c959d1fb6863a10322c829263a"
+}

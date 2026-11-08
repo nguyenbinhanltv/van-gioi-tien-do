@@ -1,0 +1,981 @@
+{
+  "format": "vgtd-head-reason-similarity-audit",
+  "version": 1,
+  "utc": "2026-11-08T01:58:11.446Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/dan-phu-tu-chibi-v1/SE --out D:/Temp/vgtd26-SE-D55/official-d54-audit.json",
+  "gitHead": "2f533df7539104750c06cd6c4e81550dca045d48",
+  "gateSourceSha256": "9650fbd20f8e625c61750d4263843bd6be93d85f8433d108912f10848e358981",
+  "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 116,
+    "newlyCheckedCells": 29,
+    "retainedD41PoseCells": 87
+  },
+  "retainedD41PoseExemptions": [
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 0,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 1,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 2,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 3,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 4,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 5,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 6,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 7,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 8,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 9,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 10,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 11,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 12,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 13,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 14,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "meditate",
+      "cell": 15,
+      "kind": "free",
+      "reason": "seated: compact crosslegged meditation, fixed anatomical scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 0,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 1,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 2,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 3,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 4,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 5,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 6,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 7,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 8,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 9,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 10,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "sword_fly",
+      "cell": 11,
+      "kind": "free",
+      "reason": "airborne: hovering relaxed knees and pointed boots"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_2",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 2,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 3,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 4,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 5,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 6,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 7,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 8,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 9,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 10,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 11,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "attack_3",
+      "cell": 12,
+      "kind": "free",
+      "reason": "lunge: authored attack knee bend, swing and follow-through"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 1,
+      "kind": "free",
+      "reason": "recoil: flinch with knee bend"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 2,
+      "kind": "free",
+      "reason": "recoil: flinch with knee bend"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 3,
+      "kind": "free",
+      "reason": "recoil: flinch with knee bend"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "hit",
+      "cell": 4,
+      "kind": "free",
+      "reason": "recoil: flinch with knee bend"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 2,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 3,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 4,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 5,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 6,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 7,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 8,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 9,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 10,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "die",
+      "cell": 11,
+      "kind": "free",
+      "reason": "die-collapse: backward fall and lying settle, held whisk retained"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 2,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 3,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 4,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 5,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 6,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 7,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 8,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 9,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 10,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 11,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 12,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    },
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "clip": "tribulation",
+      "cell": 13,
+      "kind": "free",
+      "reason": "recoil: protective kneel and recovery, same body scale"
+    }
+  ],
+  "scannedProjects": [
+    {
+      "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "sha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
+    }
+  ],
+  "totals": {
+    "projects": 1,
+    "cells": 29,
+    "pass": 11,
+    "fail": 18,
+    "unmeasured": 0
+  },
+  "projects": [
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+      "character": "dan-phu-tu-chibi-v1",
+      "direction": "SE",
+      "inputs": [
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/project.json",
+          "sha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/quality-backlog.json",
+          "sha256": "b66e25e430cee12b9e0a005d503ca404820b038c13c340a9cbe76f2d7da86af7"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/attack.attempt1.png",
+          "sha256": "39874699f70f33202c31c0e2543a755525ed6bc22c49a817026d69045e5d2515"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/attack_2.attempt1.png",
+          "sha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/attack_3.selected.png",
+          "sha256": "7e8f8f4841f7a884c456b8f6a993890fc2d20d5261f9fb2508828371f60cd7a6"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/cast.attempt2.png",
+          "sha256": "15df6b08cb2c66e861d7af41a2815a2725ac023c0af548a572c996b0be0a982d"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/channel.attempt1.png",
+          "sha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/die.selected.png",
+          "sha256": "4c1e9b44d1f6b94c2a3aea6cdceb71f956c7bffa9dd10166507f32d6c32aab4b"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/emote.attempt1.png",
+          "sha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/hit-dash.selected.png",
+          "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/idle.attempt1.png",
+          "sha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/meditate.attempt1.png",
+          "sha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/run.selected.png",
+          "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/sword_fly.selected.png",
+          "sha256": "43ff5039c0388af42606f446d83d6e78757a154cba4e5bf178cc0b7bbf61fec1"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/tribulation.attempt1.png",
+          "sha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/raw/walk.attempt1.png",
+          "sha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/attack.template.json",
+          "sha256": "48b5d5947e81fefc3a8e00297ff79652ba8839c0c43847799e917c9a336422ae"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/attack_2.template.json",
+          "sha256": "12c512be390113077617719140651bf64d0d6824cad07265f9b965c3eef39022"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/attack_3.template.json",
+          "sha256": "ac294bb3f07d4a454941427a5197c331af540fd3bf636657e25b5e2a4e5f6922"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/cast.template.json",
+          "sha256": "d6e47e2b84e50aaaa72950fd5396c1978a039896913a873361d0a160170ccb12"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/channel.template.json",
+          "sha256": "f8dadcfa85f151217e8b4f1c2ad7d9a75abc9f437ecd994dfba8652f760c337c"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/die.template.json",
+          "sha256": "e5a484275e99adde042ea89ee687d9293323061756de13ae00a23598ad5edc02"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/emote.template.json",
+          "sha256": "abb019834d082714e88c273a1fe6065207a58e0efd1f3ce201c471568bca2826"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/hit-dash.template.json",
+          "sha256": "82c343b9bc12eeea5b3991da65f5b666acb3f3d7f4189ff74852d39fe500404e"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/idle.template.json",
+          "sha256": "3dbcd4e6d3d0750fd7b059e929deb7899e6921862960d6c9b4abf34e7fc87487"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/meditate.template.json",
+          "sha256": "81b192d77b06bf74c7882c0356d3e6e3658fea9efeb69bea2a1cd7dd8b42cd0d"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/run.template.json",
+          "sha256": "f28430a93038485c17d9422948c2e1ac46f90c42c3c1531a444d3daeb6aaa9f5"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/sword_fly.template.json",
+          "sha256": "970ea3ee83c506b7c3a7f18e7e01dd8406773d07e3511be110db95457dc8b931"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/tribulation.template.json",
+          "sha256": "258f317730c91e549650c152ce998e5243584b64ded89f88684110469ee834f9"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/SE/templates/walk.template.json",
+          "sha256": "4acb804ec3d7a417d3f195858c8dea01a6b83c86b70683d19998ff841857f9b5"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/motion-calibration.json",
+          "sha256": "f2d809749dcb2999ba39af42de37aa9e45a243e32c758669da161495f843d82d"
+        },
+        {
+          "file": "assets-src/placeholder/dan-phu-tu-chibi-v1/reference/SE.corrected-master.png",
+          "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+        }
+      ],
+      "cells": [
+        {
+          "clip": "walk",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "walk",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 0,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.65 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 1,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.64 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 2,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.65 < 0.7", "torso similarity 0.68 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.61 < 0.7", "torso similarity 0.69 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.57 < 0.7", "torso similarity 0.69 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.58 < 0.7", "torso similarity 0.68 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.55 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.53 < 0.7", "torso similarity 0.67 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 8,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.53 < 0.7", "torso similarity 0.68 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 9,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.55 < 0.7", "torso similarity 0.69 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.56 < 0.7", "torso similarity 0.69 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.57 < 0.7", "torso similarity 0.70 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.55 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.60 < 0.7", "torso similarity 0.67 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 14,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.59 < 0.7", "torso similarity 0.68 < 0.7"]
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.59 < 0.7", "torso similarity 0.69 < 0.7"]
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 3,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.66 < 0.7"]
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "reason": "posture",
+          "status": "fail",
+          "findings": ["face similarity 0.64 < 0.7"]
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 8,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

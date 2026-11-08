@@ -1,16 +1,9 @@
 {
-  "status": "NOT ready for export. D55 anatomical similarity pending; prior silhouette-window audit failures retained, no more run repaints. Native head gate intentionally rejects unresolved dash5. All sources remain at fixed scale1.",
+  "status": "NOT ready for export. Official D54 enforces unskipped head reasons:18/29 formerly skipped cells fail similarity. D55 pending; no further run repaints. Dash5 frozen internal-jaw candidate remains provisionally overband and rejected pending orchestrator contour adjudication. Sources and fixed scale1 unchanged.",
   "readyForExport": false,
   "resample": "lanczos3",
   "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
-  "nativeCountsBeforeD55": {
-    "fail-hard": 1,
-    "fail-soft": 2,
-    "accepted": 14,
-    "regression": 5,
-    "info": 141
-  },
   "nativeHeadFindings": [
     {
       "gate": "height",
@@ -33,5 +26,36 @@
   "d55Status": "Assigned to worker24; read-only TEMP project-v2 and actual source landmarks delivered. Rerun unskipped numbers after merge; only real remaining identity failures will be repaired.",
   "previousBilinearCheckpoint": "qa-bilinear-checkpoint.json",
   "productionExport": "pending",
-  "cocosCapture": "pending"
+  "cocosCapture": "pending",
+  "historicalNativeCountsBeforeOfficialD54": {
+    "fail-hard": 1,
+    "fail-soft": 2,
+    "accepted": 14,
+    "regression": 5,
+    "info": 141
+  },
+  "nativeCounts": {
+    "fail-hard": 31,
+    "fail-soft": 2,
+    "accepted": 14,
+    "regression": 5,
+    "info": 141
+  },
+  "officialD54Similarity": {
+    "report": "official-d54-audit.json",
+    "totals": {
+      "projects": 1,
+      "cells": 29,
+      "pass": 11,
+      "fail": 18,
+      "unmeasured": 0
+    },
+    "selection": {
+      "oldSkippedCells": 116,
+      "newlyCheckedCells": 29,
+      "retainedD41PoseCells": 87
+    },
+    "similarityFindings": 30
+  },
+  "headContourAdjudication": "head-contour-review.json"
 }
