@@ -459,3 +459,9 @@ Còn mở / lưu ý:
 3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
 4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
 5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).
+
+## Mob hiển thị tạm thời (standee, 2026-11-09): còn mở
+
+- 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
+- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
+- Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.

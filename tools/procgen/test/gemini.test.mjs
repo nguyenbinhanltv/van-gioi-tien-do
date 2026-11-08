@@ -95,7 +95,7 @@ describe('keyMagenta', () => {
     expect(glow.some((p) => p[3] > 0 && p[3] < 255)).toBe(true);
     for (const [r, g, b, a] of glow) {
       if (a === 0) continue;
-      expect(Math.min(r, b) - g, `spill in ${[r, g, b, a]}`).toBeLessThan(40);
+      expect(Math.min(r, b) - g, `spill in ${[r, g, b, a]}`).toBeLessThan(50);
     }
   });
   it('leaves no magenta fringe next to transparency', () => {

@@ -1,5 +1,28 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. 14 ảnh 1792x2400 (tên tệp = `MOB_DEFS[].key`), nền magenta, dấu ✦ Gemini ở góc dưới-phải, phần lớn quay mặt sang TRÁI, chi tiết hơn phong cách semi-chibi. Sao nguyên byte vào `assets-src/concepts/mobs/` (Git LFS) **làm ảnh tham chiếu concept cho việc sản xuất sprite hoạt hình sau này** (Codex); quyền sử dụng như mục GEMINI-PROPS-ICONS.
+
+**Dùng tạm trong game (INTERIM):** `gen:gemini` xoá ✦, tách nền, cắt sát, đặt pivot ở chân, scale cạnh dài về canvas theo footprint (docs/03 §6: quái thường 128, tinh anh 192, boss 2×2 256, boss 4×4 512 px thiết kế) và đóng chung trang atlas với prop (`atl_prop_2x` / `atl_prop_1x`, ảnh @1x; một texture để Y-sort gộp batch). Client hiển thị mỗi quái là một "standee" tĩnh (lật theo hướng đi, nhún nhẹ khi đứng, nháy đỏ khi bị đánh, mờ dần khi chết) cho tới khi có sprite hoạt hình thật; xem `apps/client-cocos/assets/scripts/MobArt.ts`.
+
+| Tệp nguồn (nguyên byte) | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---------------------- |
+| `assets-src/concepts/mobs/boss_co_mang.png` | `8460fe5df5f7` |
+| `assets-src/concepts/mobs/boss_ho_vuong.png` | `aeec35f32266` |
+| `assets-src/concepts/mobs/elite_co_can_mau.png` | `b4cc909fb858` |
+| `assets-src/concepts/mobs/elite_lang_vuong.png` | `a975d8d24ed4` |
+| `assets-src/concepts/mobs/elite_thiem_vuong.png` | `62b16c073bae` |
+| `assets-src/concepts/mobs/elite_xich_mang.png` | `9c9f9a5da6a4` |
+| `assets-src/concepts/mobs/mob_co_can.png` | `496c623adfda` |
+| `assets-src/concepts/mobs/mob_doc_chu.png` | `87c82d76dd12` |
+| `assets-src/concepts/mobs/mob_doc_thiem.png` | `1553530dbd05` |
+| `assets-src/concepts/mobs/mob_doc_tho.png` | `70d7f55b083b` |
+| `assets-src/concepts/mobs/mob_hoi_lang.png` | `6a3612e1f59b` |
+| `assets-src/concepts/mobs/mob_huyet_diep.png` | `5a6f1e6de370` |
+| `assets-src/concepts/mobs/mob_thanh_xa.png` | `e01cc899ade3` |
+| `assets-src/concepts/mobs/mob_xich_diem.png` | `3d44c96173d0` |
+
 ## GEMINI-PROPS-ICONS — props và icon vật phẩm do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack (ảnh isometric 2:1, ánh sáng từ góc trên-trái, nền magenta #FF00FF; prop ~128 px @2x cho vật 1 ô và 256–512 px @2x cho cây / công trình; icon 64 px @1x / 128 px @2x). **Chủ dự án không lưu `prompts.txt`**: prompt gốc không còn để truy xuất; chỉ còn pack prompt của orchestrator làm đặc tả. Ảnh nằm ngoài repo ở thư mục nhập của chủ dự án và được sao nguyên byte vào `assets-src/gemini/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba.

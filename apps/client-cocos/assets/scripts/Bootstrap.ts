@@ -19,8 +19,9 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
-import { CombatUi, createMockBackend } from './Combat';
+import { CombatUi, createMockBackend, pathOfClass } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -74,6 +75,8 @@ export class Bootstrap extends Component {
   private bagPanel: BagPanel | null = null;
   /** owner-provided Gemini props + item icons (null = placeholders) */
   private propArt: PropArt | null = null;
+  /** INTERIM mob standees (concept art) */
+  private mobArt: MobArt | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -148,6 +151,7 @@ export class Bootstrap extends Component {
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
+    this.mobArt = this.propArt ? new MobArt(this.propArt) : null;
     if (this.propArt) {
       // courtyard + biome scatter around the spawn (L3 objects are not chunk-streamed yet; every one is sorted each frame)
       const placed = placeProps({
@@ -258,8 +262,11 @@ export class Bootstrap extends Component {
     if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
     if (this.combatOn && !this.online) {
       // offline: the local mock combat runs for the class the player picked with ?class= (or the default body class)
+      const at = { i: spawn.i + 0.5, j: spawn.j + 0.5 };
       this.makeCombatUi(
-        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
+        params.get('mobdemo') !== null
+          ? createMobDemoBackend(this.chibi.classInfo.id, pathOfClass, at, walkable, rng(11)) // all 14 mobs, for art review
+          : createMockBackend(this.chibi.classInfo.id, at, walkable, rng(11)),
       );
     }
     // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D82)
@@ -290,6 +297,7 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToUi(x, y),
       (x, y) => this.rig.clientToWorld(x, y),
     );
+    this.combat.mobArt = this.mobArt;
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
