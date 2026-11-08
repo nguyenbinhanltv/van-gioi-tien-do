@@ -95,4 +95,6 @@ export interface CombatOptions {
   respawnDelayMs?: number;
   /** Mobs in `chase` attack their target (D86, default on when the node has mobs). Set false for a node whose mobs should only walk. */
   mobAttacks?: boolean;
+  /** Is this player meditating (progression)? Meditation raises out-of-combat MP regeneration (D88). Default: never. */
+  isMeditating?: (id: number) => boolean;
 }

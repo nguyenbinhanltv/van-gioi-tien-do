@@ -19,8 +19,9 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
-import { CombatUi, createMockBackend } from './Combat';
+import { CombatUi, createMockBackend, pathOfClass } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -30,6 +31,7 @@ import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiB
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
+import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
@@ -70,11 +72,16 @@ export class Bootstrap extends Component {
   private route: RouteWalker | null = null;
   /** `?combat=1`: combat HUD skeleton + offline mock combat loop (P3 client groundwork). */
   private combat: CombatUi | null = null;
+  /** Touch input: the skill wheel (drawn from client-core's TouchController) + drag-to-aim; built once the combat HUD exists. */
+  private wheel: SkillWheel | null = null;
+  private wheelTouch: boolean | null = null;
   private combatOn = false;
   /** the bag (key B): the server's inventory when online, a local sample with `#bagdemo` */
   private bagPanel: BagPanel | null = null;
   /** owner-provided Gemini props + item icons (null = placeholders) */
   private propArt: PropArt | null = null;
+  /** INTERIM mob standees (concept art) */
+  private mobArt: MobArt | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -151,6 +158,7 @@ export class Bootstrap extends Component {
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
+    this.mobArt = this.propArt ? new MobArt(this.propArt) : null;
     if (this.propArt) {
       // courtyard + biome scatter around the spawn (L3 objects are not chunk-streamed yet; every one is sorted each frame)
       const placed = placeProps({
@@ -264,8 +272,11 @@ export class Bootstrap extends Component {
       this.firstSession = new FirstSessionHud(hudRoot, art, this.online.net, map.width, this.online.username);
     if (this.combatOn && !this.online) {
       // offline: the local mock combat runs for the class the player picked with ?class= (or the default body class)
+      const at = { i: spawn.i + 0.5, j: spawn.j + 0.5 };
       this.makeCombatUi(
-        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
+        params.get('mobdemo') !== null
+          ? createMobDemoBackend(this.chibi.classInfo.id, pathOfClass, at, walkable, rng(11)) // all 14 mobs, for art review
+          : createMockBackend(this.chibi.classInfo.id, at, walkable, rng(11)),
       );
     }
     // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D82)
@@ -297,6 +308,7 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToUi(x, y),
       (x, y) => this.rig.clientToWorld(x, y),
     );
+    this.combat.mobArt = this.mobArt;
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -451,6 +463,34 @@ export class Bootstrap extends Component {
     return shared.tileToScreen(p.i, p.j);
   }
 
+  /**
+   * Touch input mode: the wheel replaces the bottom hotbar, and the casts the TouchController produced (tap = auto-target, drag = aim point)
+   * go to the combat HUD. Pointer mode (desktop) never reads `frame.casts`: keys 1-8 and the hotbar are handled by CombatUi itself.
+   */
+  private updateSkillWheel(frame: ReturnType<InputBridge['poll']>): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const touch = this.input.input.mode === 'touch';
+    if (touch !== this.wheelTouch) {
+      this.wheelTouch = touch;
+      combat.setTouchMode(touch);
+    }
+    if (!this.wheel)
+      this.wheel = new SkillWheel(
+        this.uiRoot!,
+        this.worldRootNode!,
+        this.artFrames!,
+        combat,
+        () => this.input.input.touch,
+        () => this.input.input.mode === 'touch',
+        () => this.player.pos,
+        (x, y) => this.rig.clientToUi(x, y),
+      );
+    (globalThis as unknown as Record<string, unknown>).__vgtdZoom = () => this.rig.zoom; // automation: pinch check
+    if (touch) for (const c of frame.casts) combat.castFromWheel(c.slot, c.aimTile);
+    this.wheel.update();
+  }
+
   update(dt: number): void {
     if (!this.ready) return;
     dt = Math.min(dt, 0.05);
@@ -475,6 +515,7 @@ export class Bootstrap extends Component {
     }
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
+    this.updateSkillWheel(frame);
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);

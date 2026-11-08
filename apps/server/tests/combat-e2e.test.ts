@@ -156,7 +156,9 @@ describe('server combat end to end (WorldNode <-> ServerCombat over the wire)', 
     const ev = t.sc.cast(slot, t.now());
     expect(ev[0]).toMatchObject({ type: 'cast_start', slot, castMs: 400 });
     expect(wireSkillIds().get('kiem_khi_tram')).toBeDefined();
-    t.tick(20); // 400 ms cast + a snapshot or two
+    t.tick(3); // the sim spends the MP when it accepts the cast; regeneration (D87) only runs every 5th tick
+    const mpAfterCast = t.sc.player.mp;
+    t.tick(17); // 400 ms cast + a snapshot or two
     expect(t.pipe.results).toBe(1);
     const dmg = t.events.filter((e) => e.type === 'damage');
     expect(dmg).toHaveLength(1);
@@ -165,7 +167,7 @@ describe('server combat end to end (WorldNode <-> ServerCombat over the wire)', 
     expect(serverHp).toBeLessThan(5000);
     // the HUD model follows the server: hpPct from snapshots, MP spent, cooldown synced
     expect(t.sc.enemy(MOB)!.hp).toBe(Math.round((Math.round((serverHp / 5000) * 100) / 100) * 5000));
-    expect(t.sc.player.mp).toBeLessThan(makeProfile('kiem').stats.mp);
+    expect(mpAfterCast).toBeLessThan(makeProfile('kiem').stats.mp);
     expect(t.sc.hotbar.cooldownRemainingMs(slot, t.now())).toBeGreaterThan(1000);
     expect(t.events.some((e) => e.type === 'cast_done')).toBe(true);
   });
