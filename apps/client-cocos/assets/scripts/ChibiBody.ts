@@ -165,6 +165,17 @@ export class ChibiBody {
   setSeated(on: boolean): void {
     if (on === this.seated) return;
     this.seated = on;
+    // `meditate` is in the lazy `rest` clip group: until its atlas pages are registered its frames render blank, so keep the
+    // current clip and switch once the group is in (ensureGroup also rebuilds the armature).
+    if (on && this.rig && !this.rig.groups.has('rest')) {
+      void this.ensureGroup('rest').then(() => {
+        if (this.seated) {
+          this.playing = '';
+          this.playClip();
+        }
+      });
+      return;
+    }
     this.playing = '';
     this.playClip();
   }
@@ -222,7 +233,8 @@ export class ChibiBody {
   private playClip(phase = 0): void {
     const armature = this.display.armature();
     if (!armature) return;
-    const order: string[] = this.seated
+    const seated = this.seated && !!this.rig?.groups.has('rest');
+    const order: string[] = seated
       ? ['meditate', 'idle']
       : this.moveState === 'run'
         ? ['run', 'walk', 'idle']

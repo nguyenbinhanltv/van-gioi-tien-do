@@ -1,6 +1,6 @@
 // Headless smoke test of the PROGRESSION HUD over the wire (`?online=1`): the real Cocos web build against the real dev server (D76).
 //
-//   npm run progression:online -w client-cocos -- [--skip-build] [--out <dir>] [--speed 400]
+//   npm run progression:online -w client-cocos -- [--skip-build] [--out <dir>] [--speed 200]
 //
 // Starts apps/server (scripts/dev.mjs on free ports, PROGRESSION_SPEED = dev-only tu vi multiplier so a stage fills in seconds), serves
 // build/web-mobile, opens the page in headless Chrome / Edge (CHROME_PATH overrides) and drives it with REAL key presses:
@@ -25,7 +25,7 @@ const opt = (name, def) => {
   return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : def;
 };
 const out = resolve(opt('out', join(tmpdir(), 'vgtd-progression')));
-const speed = opt('speed', '400');
+const speed = opt('speed', '200');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function findBrowser() {
@@ -172,10 +172,18 @@ try {
       true,
       `meditating: bar at ${(mid.fraction * 100).toFixed(0)}% (${Math.floor(mid.tuVi)}/${Math.floor(mid.tuViReq)})`,
     );
-    const shown = await page.evaluate('window.__vgtdChibi.state().shown');
+    // the seated clip lives in the lazy `rest` clip group: it must load, or the frames render blank (only the shadow)
+    let seated = null;
+    for (let k = 0; k < 80 && !seated; k++) {
+      const [st, shown] = [await state(), await page.evaluate('window.__vgtdChibi.state().shown')];
+      if (!st.meditating) break; // the stage filled before the pose appeared
+      if (shown.clip === 'meditate') seated = shown;
+      else await sleep(100);
+    }
+    check(!!seated, `the chibi plays the seated clip while meditating (rig ${seated ? seated.drawn : '?'})`);
     check(
-      shown.clip === 'meditate',
-      `the chibi plays the seated clip while meditating (playing ${shown.clip}, rig ${shown.drawn})`,
+      await page.evaluate('window.__vgtdChibi.body.rig.groups.has("rest")'),
+      'rest clip group loaded while meditating (the seated frames render)',
     );
     await page.screenshot({ path: join(out, 'meditating.png') });
     await page.screenshot({

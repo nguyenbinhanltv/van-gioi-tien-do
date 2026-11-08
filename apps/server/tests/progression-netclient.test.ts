@@ -1,15 +1,10 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import WebSocket from 'ws';
+import { WebSocket } from 'ws';
 import { TileGrid } from '@vgtd/sim';
-import {
-  NetClient,
-  ProgressionView,
-  requestIdFrom,
-  type NetDeps,
-  type ProgressionCommand,
-  type SocketLike,
-} from '@vgtd/client-core';
-import { startServer, type RunningServer } from '@vgtd/server';
+// engine-free parts only (the package index also pulls DOM input code, which the server's tsconfig has no lib for)
+import { NetClient, type NetDeps, type SocketLike } from '@vgtd/client-core/src/net/index.js';
+import { ProgressionView, requestIdFrom, type ProgressionCommand } from '@vgtd/client-core/src/ui/ProgressionView.js';
+import { startServer, type RunningServer } from '../src/index.js';
 
 /**
  * End to end over a real WebSocket: the client-core NetClient + ProgressionView (the model behind the HUD) against the real
@@ -36,7 +31,7 @@ async function startServerWith(speed: number): Promise<RunningServer> {
   server = await startServer({
     port: 0,
     autoTick: true,
-    auth: { registerPerIpPerDay: 0 },
+    auth: { scrypt: { N: 1024, r: 8, p: 1 }, registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
     world: { mapTiles: 64, spawn: { i0: 20, j0: 20, side: 16 } },
     progression: { seed: 42, devTuViSpeed: speed },
   });
