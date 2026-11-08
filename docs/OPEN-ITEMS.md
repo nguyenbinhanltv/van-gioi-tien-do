@@ -477,6 +477,13 @@ Còn mở / lưu ý:
 - Kích thước tín dụng không hiện ra metric / log: nên thêm `lagCreditMs` lớn nhất vào số đo World Node (và cảnh báo vận hành khi một khách có > 1 s tín dụng: máy chủ đang quá tải).
 - Khách nối lại (resume) giữ tín dụng cũ của phiên (mốc lúc vào không đổi) và luật trượt ngân sách lúc resume (D80) chạy trên **đồng hồ của guard** (giờ sim + tín dụng), nên không để lại ngân sách chưa kiếm; phiên đăng nhập mới bắt đầu từ 0. Khách vào giữa lúc máy chủ đang đơ cũng không nhận tín dụng cho khoảng đơ trước khi nó vào (mốc = drift thật lúc vào).
 
+## D88 — hồi HP / MP phía server: còn mở (worker39, 2026-11-09)
+
+1. **Chỉ MP có số trong docs** (docs/11 §2.4: 1 % / 4 % / 8 % MP tối đa mỗi giây). **Hồi HP (2 %/s ngoài chiến đấu, 0 trong chiến đấu) và ngưỡng "ngoài chiến đấu" 5 s là mặc định tạm, cần game designer duyệt**; docs/ cũng chưa nói đả tọa có hồi HP hay không, hay hồi trong vùng an toàn có khác không.
+2. **Chưa làm**: +0,5 % MP mỗi đòn thường trúng, đan hồi MP / HP, hồi cho đồng đội (Tương sinh hồi 10 % Chân Nguyên, docs/01 §8), dùng `mp_regen_pct_per_s` trong dữ liệu kỹ năng (hiện chỉ mô phỏng offline `skill_sim` đọc tham số đó).
+3. **"Trong chiến đấu" chỉ tính sát thương gây / nhận**: một cú cast không trúng, buff hoặc hồi máu không khóa hồi; tiến trình (progression) có `COMBAT_LOCK_MS` = 10 s riêng cho đả tọa (D76) khác 5 s này: nên thống nhất một định nghĩa khi game designer duyệt.
+4. **Băng thông**: regen làm sinh lực đổi ở 4 Hz khi đang hồi (golden 150 người + 30 quái: +0,9 % byte, 5.814.930 → 5.868.270); loadtest 100 bot trên máy dùng chung quá nhiễu để thấy khác biệt tick.
+
 ## Mob hiển thị tạm thời (standee, 2026-11-09): còn mở
 
 - 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
