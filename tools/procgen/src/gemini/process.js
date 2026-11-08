@@ -311,7 +311,56 @@ function processIcon(src, size2 = 128) {
   return { x2, x1, sparkle };
 }
 
+/**
+ * Skill-icon grid (4 columns x 2 rows of self-contained rounded tiles on the magenta background): sparkle removal + key,
+ * then the 8 tiles are the 8 largest connected opaque components, ordered row-major. Each tile is trimmed to its box and
+ * scaled to size2 (@2x, 128) / size2/2 (@1x, 64). The rounded corners of a tile become transparent.
+ * @returns {{ x2: Image[], x1: Image[], sparkle: object }}
+ */
+function sliceSkillGrid(src, size2 = 128) {
+  const { image, sparkle } = cleanSprite(src);
+  const { width: W, height: H, data: d } = image;
+  const label = new Int32Array(W * H);
+  const comps = [];
+  for (let p0 = 0; p0 < W * H; p0++) {
+    if (label[p0] || d[p0 * 4 + 3] < 128) continue;
+    const id = comps.length + 1;
+    const stack = [p0];
+    label[p0] = id;
+    let x0 = W, y0 = H, x1 = -1, y1 = -1, area = 0;
+    while (stack.length) {
+      const p = stack.pop();
+      const x = p % W, y = (p / W) | 0;
+      area++;
+      if (x < x0) x0 = x;
+      if (x > x1) x1 = x;
+      if (y < y0) y0 = y;
+      if (y > y1) y1 = y;
+      for (const q of [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1]) {
+        if (q >= 0 && !label[q] && d[q * 4 + 3] >= 128) { label[q] = id; stack.push(q); }
+      }
+    }
+    comps.push({ x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, area });
+  }
+  const tiles = comps.sort((a, b) => b.area - a.area).slice(0, 8);
+  if (tiles.length < 8 || tiles[7].area < 0.2 * tiles[0].area) throw new Error(`skill grid: found ${tiles.length} tiles, need 8`);
+  // rows: split by the vertical centre; then left to right
+  const cy = (t) => t.y + t.h / 2;
+  const mid = (Math.min(...tiles.map(cy)) + Math.max(...tiles.map(cy))) / 2;
+  const top = tiles.filter((t) => cy(t) < mid).sort((a, b) => a.x - b.x);
+  const bottom = tiles.filter((t) => cy(t) >= mid).sort((a, b) => a.x - b.x);
+  if (top.length !== 4 || bottom.length !== 4) throw new Error(`skill grid: rows have ${top.length} + ${bottom.length} tiles, need 4 + 4`);
+  const x2 = [], x1 = [];
+  for (const t of [...top, ...bottom]) {
+    const tile = crop(image, t.x, t.y, t.w, t.h);
+    x2.push(bleedColor(resizeArea(tile, size2, size2)));
+    x1.push(bleedColor(resizeArea(tile, size2 / 2, size2 / 2)));
+  }
+  return { x2, x1, sparkle };
+}
+
 module.exports = {
+  sliceSkillGrid,
   isStrictBg, isFamily, removeSparkle, backgroundColor, keyMagenta, bleedColor, alphaBBox, crop, footPivot, edgeFade,
   cleanSprite, processProp, processIcon,
 };

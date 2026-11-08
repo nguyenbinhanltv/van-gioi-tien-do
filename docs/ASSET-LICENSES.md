@@ -36,6 +36,17 @@
 | `assets-src/gemini/items/stone_low.png` | icon | `e3df7cccb9b5` |
 | `assets-src/gemini/items/stone_mid.png` | icon | `bfefe9ecc6ea` |
 
+**Icon kỹ năng (cùng nguồn, cùng ngày):** 6 lưới 4x2 (mỗi ô là một icon vuông có nền riêng, trên nền magenta, kèm dấu ✦ Gemini ở góc dưới-phải). Thứ tự ô trong lưới (theo hàng) = thứ tự 8 kỹ năng của lớp trong `packages/shared/src/data/skills.json`. `gen:gemini` xoá dấu ✦, tách 8 ô bằng thành phần liên thông, xuất 128 px @2x / 64 px @1x vào atlas `atl_skill_{2x,1x}` theo id kỹ năng; ảnh đối chiếu id ↔ icon của cả 48 icon nằm trong artifacts của PR.
+
+| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---- | ---------------------- |
+| `assets-src/gemini/skills/dan_phu.png` | skill grid 4x2 | `aa880714f42b` |
+| `assets-src/gemini/skills/dao.png` | skill grid 4x2 | `dc70514699b6` |
+| `assets-src/gemini/skills/kiem.png` | skill grid 4x2 | `b24bd1361dc4` |
+| `assets-src/gemini/skills/phap.png` | skill grid 4x2 | `3a89b1935617` |
+| `assets-src/gemini/skills/the.png` | skill grid 4x2 | `f6e60f73f61d` |
+| `assets-src/gemini/skills/thuong.png` | skill grid 4x2 | `f1630b5dc324` |
+
 Dẫn xuất: `tools/procgen/src/gemini/manifest.json` (kích thước đích, ô bị chặn, biome, trọng số của từng prop), `tools/procgen/out/gemini/*` và các atlas `atl_prop_*`, `atl_gicon_*` ở trên, `apps/client-cocos/assets/resources/world/{gemini.json,atl_prop_*,atl_gicon_*}`.
 
 

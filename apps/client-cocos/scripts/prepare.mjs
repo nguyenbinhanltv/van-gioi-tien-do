@@ -107,7 +107,15 @@ prepareChibiBundles({ root, repo });
   });
   if (g.status !== 0) throw new Error('gen:gemini failed');
   const gdir = join(procgen, 'out/gemini');
-  for (const f of ['gemini.json', 'atl_prop_2x_0.png', 'atl_prop_1x_0.png', 'atl_gicon_2x_0.png', 'atl_gicon_1x_0.png'])
+  for (const f of [
+    'gemini.json',
+    'atl_prop_2x_0.png',
+    'atl_prop_1x_0.png',
+    'atl_gicon_2x_0.png',
+    'atl_gicon_1x_0.png',
+    'atl_skill_2x_0.png',
+    'atl_skill_1x_0.png',
+  ])
     rmSync(join(worldDir, f), { force: true }); // never leave stale art behind
   if (existsSync(join(gdir, 'gemini.json'))) {
     copyFileSync(join(gdir, 'gemini.json'), join(worldDir, 'gemini.json'));

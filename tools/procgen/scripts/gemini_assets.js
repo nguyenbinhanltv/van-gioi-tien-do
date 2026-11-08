@@ -18,6 +18,8 @@ const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 const { decodePNG } = require('../src/lib/png');
 const G = require('../src/gemini/process');
+const { GRID_PATHS, classGrids } = require('../src/gemini/skills');
+const skillsJson = require('../../../packages/shared/src/data/skills.json');
 const manifest = require('../src/gemini/manifest.json');
 
 const args = process.argv.slice(2);
@@ -31,6 +33,7 @@ const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
 const files = [
   ...Object.keys(manifest.props).map((n) => ['props', n]),
   ...manifest.icons.map((n) => ['items', n]),
+  ...GRID_PATHS.map((n) => ['skills', n]),
 ];
 const srcPath = (dir, name) => path.join(SRC, dir, `${name}.png`);
 
@@ -50,7 +53,7 @@ function loadSources() {
 function stampOf(bufs) {
   const h = crypto.createHash('sha1');
   for (const k of [...bufs.keys()].sort()) { h.update(k); h.update(bufs.get(k)); }
-  for (const f of ['../src/gemini/process.js', '../src/gemini/manifest.json', __filename, '../pipeline/pack_atlas.js', '../src/lib/png.js']) {
+  for (const f of ['../src/gemini/process.js', '../src/gemini/manifest.json', '../src/gemini/skills.js', '../../../packages/shared/src/data/skills.json', __filename, '../pipeline/pack_atlas.js', '../src/lib/png.js']) {
     h.update(fs.readFileSync(path.resolve(__dirname, f)));
   }
   return h.digest('hex');
@@ -81,10 +84,10 @@ function main() {
     return 0;
   }
   fs.rmSync(OUT, { recursive: true, force: true });
-  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
+  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
 
   const problems = [];
-  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, atlases: {} };
+  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, skills: {}, atlases: {} };
   const verify = (key, srcBuf, sparkle) => {
     if (sparkle.components < 1) problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
     else {
@@ -116,6 +119,19 @@ function main() {
     sidecar.icons[name] = {};
     console.log(`  items/${name}: ${r.x2.width}px @2x, sparkle ${r.sparkle.pixels}px`);
   }
+  // skill icons: one grid per class path, 8 tiles row-major = skills.json order; keyed by skill id
+  const grids = classGrids(skillsJson);
+  for (const cls of GRID_PATHS) {
+    const buf = bufs.get(`skills/${cls}`);
+    const r = G.sliceSkillGrid(decodePNG(buf), manifest.iconSize2x);
+    verify(`skills/${cls}`, buf, r.sparkle);
+    grids[cls].forEach((id, k) => {
+      r.x2[k].save(path.join(OUT, 'skills_2x', `${id}.png`));
+      r.x1[k].save(path.join(OUT, 'skills_1x', `${id}.png`));
+      sidecar.skills[id] = { path: cls, index: k };
+    });
+    console.log(`  skills/${cls}: 8 icons, sparkle ${r.sparkle.pixels}px`);
+  }
   if (problems.length) {
     console.error(`✖ verification failed:\n  ${problems.join('\n  ')}`);
     return 4;
@@ -124,6 +140,7 @@ function main() {
   for (const [dir, atlasName, kind] of [
     ['props_2x', 'atl_prop_2x', 'props'], ['props_1x', 'atl_prop_1x', 'props'],
     ['icons_2x', 'atl_gicon_2x', 'icons'], ['icons_1x', 'atl_gicon_1x', 'icons'],
+    ['skills_2x', 'atl_skill_2x', 'skills'], ['skills_1x', 'atl_skill_1x', 'skills'],
   ]) {
     const a = pack(dir, atlasName);
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';

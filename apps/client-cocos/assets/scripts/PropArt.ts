@@ -28,10 +28,23 @@ interface PropEntry {
 interface Sidecar {
   props: Record<string, PropEntry>;
   icons: Record<string, { f2: AtlasFrame; f1: AtlasFrame }>;
+  /** skill icons by skill id (packages/shared skills.json) */
+  skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
 }
 
 function loadAsset<T extends JsonAsset | ImageAsset>(path: string, type: new () => T): Promise<T | null> {
   return new Promise((resolve) => resources.load(path, type, (err, asset) => resolve(err || !asset ? null : asset)));
+}
+
+let current: PropArt | null = null;
+
+/**
+ * Skill icon for the hotbar / skill UI: `getSkillIcon('kiem_khi_tram')` -> SpriteFrame (square tile, 64 design px) or null
+ * (art not generated, or an id without an icon): the caller keeps its text / colour fallback. Available once `PropArt.load`
+ * has resolved (Bootstrap does that before the HUD is built).
+ */
+export function getSkillIcon(id: string): SpriteFrame | null {
+  return current?.skill(id) ?? null;
 }
 
 /**
@@ -44,6 +57,7 @@ function loadAsset<T extends JsonAsset | ImageAsset>(path: string, type: new () 
 export class PropArt {
   private readonly frames = new Map<string, SpriteFrame>();
   private readonly iconFrames = new Map<string, SpriteFrame>();
+  private readonly skillFrames = new Map<string, SpriteFrame>();
 
   private constructor(
     private readonly meta: Sidecar,
@@ -78,10 +92,16 @@ export class PropArt {
       for (const [key, ic] of Object.entries(meta.icons)) {
         art.iconFrames.set(key, makeFrame(await texture(pageOf(ic.f2)), ic.f2.x, ic.f2.y, ic.f2.w, ic.f2.h));
       }
+      // skill icons (hotbar): the @2x page (1024 px, 4 MB) is drawn at <= 64 design px; `tier low` takes the @1x page
+      for (const [id, sk] of Object.entries(meta.skills ?? {})) {
+        const f = low ? sk.f1 : sk.f2;
+        art.skillFrames.set(id, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
+      }
     } catch (e) {
       console.warn('[vgtd] gemini art unavailable, using placeholders:', e);
       return null;
     }
+    current = art;
     return art;
   }
 
@@ -91,6 +111,11 @@ export class PropArt {
     for (const [n, p] of Object.entries(this.meta.props))
       out[n] = { block: p.block, biomes: p.biomes, weight: p.weight, spacing: p.spacing };
     return out;
+  }
+
+  /** Skill icon by skill id (e.g. `kiem_khi_tram`), or null when missing. Square; draw it at 64 design px. */
+  skill(id: string): SpriteFrame | null {
+    return this.skillFrames.get(id) ?? null;
   }
 
   /** Item icon (key = item key such as `heal_pill`, `stone_low`), or null when missing. */
