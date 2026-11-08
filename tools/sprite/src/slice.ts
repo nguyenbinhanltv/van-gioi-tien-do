@@ -71,6 +71,56 @@ export interface SpillOptions {
   /** Legitimate colours (the master palette): a pixel within `keepDistance` of one is never touched (pink / purple cloth). */
   readonly palette?: readonly Color3[];
   readonly keepDistance?: number;
+  /** Opt-in warm-magenta extension. Only additional asymmetric candidates near the alpha edge are cleaned. */
+  readonly asymmetric?: {
+    /** Maximum absolute red/blue difference, 0..255. The legacy balanced-magenta test is unchanged. */
+    readonly maxImbalance: number;
+    /** Maximum 8-neighbour distance to alpha <128 or the outside canvas, in input raster pixels (integer >=1). */
+    readonly edgeRadius: number;
+  };
+}
+
+/** Distance to transparent/low-alpha support; capped breadth-first traversal visits each pixel at most once. */
+function spillEdgeDistances(src: Straight, radius: number): Int32Array {
+  const { width, height } = src;
+  const distances = new Int32Array(width * height).fill(-1);
+  const queue = new Int32Array(width * height);
+  let tail = 0;
+  for (let y = 0; y < height; y++)
+    for (let x = 0; x < width; x++) {
+      const p = y * width + x;
+      if (src.data[p * 4 + 3]! < 128) {
+        distances[p] = 0;
+        queue[tail++] = p;
+      }
+    }
+  // Outside the canvas is transparent, one step from its boundary pixels.
+  for (let y = 0; y < height; y++)
+    for (let x = 0; x < width; x++) {
+      const p = y * width + x;
+      if ((x === 0 || y === 0 || x === width - 1 || y === height - 1) && distances[p] === -1) {
+        distances[p] = 1;
+        queue[tail++] = p;
+      }
+    }
+  for (let head = 0; head < tail; head++) {
+    const p = queue[head]!,
+      distance = distances[p]!;
+    if (distance >= radius) continue;
+    const x = p % width,
+      y = Math.floor(p / width);
+    for (let dy = -1; dy <= 1; dy++)
+      for (let dx = -1; dx <= 1; dx++) {
+        const nx = x + dx,
+          ny = y + dy;
+        if ((!dx && !dy) || nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+        const next = ny * width + nx;
+        if (distances[next] !== -1) continue;
+        distances[next] = distance + 1;
+        queue[tail++] = next;
+      }
+  }
+  return distances;
 }
 
 /**
@@ -82,6 +132,17 @@ export function despillInterior(src: Straight, opts: SpillOptions = {}): { image
   const threshold = opts.threshold ?? 24;
   const strength = opts.strength ?? 1;
   const keep = opts.keepDistance ?? 36;
+  const asymmetric = opts.asymmetric;
+  if (
+    asymmetric &&
+    (!Number.isFinite(asymmetric.maxImbalance) ||
+      asymmetric.maxImbalance < 0 ||
+      asymmetric.maxImbalance > 255 ||
+      !Number.isSafeInteger(asymmetric.edgeRadius) ||
+      asymmetric.edgeRadius < 1)
+  )
+    throw new RangeError('spill.asymmetric requires maxImbalance in 0..255 and integer edgeRadius >=1');
+  const edgeDistances = asymmetric ? spillEdgeDistances(src, asymmetric.edgeRadius) : undefined;
   const data = new Uint8ClampedArray(src.data);
   let fixed = 0;
   for (let i = 0; i < data.length; i += 4) {
@@ -90,7 +151,19 @@ export function despillInterior(src: Straight, opts: SpillOptions = {}): { image
     const g = data[i + 1]!;
     const b = data[i + 2]!;
     const m = Math.min(r, b) - g;
-    if (m <= threshold || Math.abs(r - b) > 0.6 * m + 20) continue;
+    if (m <= threshold) continue;
+    const imbalance = Math.abs(r - b);
+    if (imbalance > 0.6 * m + 20) {
+      const distance = edgeDistances?.[i / 4];
+      if (
+        !asymmetric ||
+        imbalance > asymmetric.maxImbalance ||
+        distance === undefined ||
+        distance < 0 ||
+        distance > asymmetric.edgeRadius
+      )
+        continue;
+    }
     if (opts.palette?.some((p) => colorDistance([r, g, b], p) < keep)) continue;
     data[i] = Math.round(r - strength * m);
     data[i + 2] = Math.round(b - strength * m);

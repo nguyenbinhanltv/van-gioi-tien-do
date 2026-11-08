@@ -313,6 +313,87 @@ describe('draws helper sanity', () => {
 });
 
 describe('interior spill cleanup', () => {
+  it('keeps the legacy bytes when the asymmetric option is omitted', () => {
+    const data = new Uint8ClampedArray([
+      170,
+      50,
+      160,
+      255, // balanced magenta: existing cleanup
+      249,
+      159,
+      187,
+      255, // warm fringe: existing imbalance rejection
+      190,
+      30,
+      40,
+      255, // red tassel
+      255,
+      0,
+      255,
+      0, // transparent bytes remain untouched
+    ]);
+    const out = despillInterior({ width: 4, height: 1, data });
+    expect(Array.from(out.image.data)).toEqual([60, 50, 50, 255, 249, 159, 187, 255, 190, 30, 40, 255, 255, 0, 255, 0]);
+    expect(out.fixed).toBe(1);
+    expect(Array.from(data)).toEqual([170, 50, 160, 255, 249, 159, 187, 255, 190, 30, 40, 255, 255, 0, 255, 0]);
+  });
+
+  it('removes warm fringe near the alpha edge, preserving interior pink, red and all alpha', () => {
+    const w = 9,
+      data = new Uint8ClampedArray(w * w * 4);
+    const put = (x: number, y: number, rgb: readonly number[]) => data.set([...rgb, 255], (y * w + x) * 4);
+    for (let y = 1; y < 8; y++) for (let x = 1; x < 8; x++) put(x, y, [60, 40, 30]);
+    put(1, 4, [249, 159, 187]); // one pixel from transparent support
+    put(2, 4, [249, 159, 187]); // outside radius1
+    put(4, 4, [249, 159, 187]); // legitimate interior pink
+    put(1, 5, [190, 30, 40]); // red tassel at edge
+    const src = { width: w, height: w, data };
+    const out = despillInterior(src, { asymmetric: { maxImbalance: 80, edgeRadius: 1 } });
+    const px = (x: number, y: number) => Array.from(out.image.data.slice((y * w + x) * 4, (y * w + x) * 4 + 4));
+    expect(out.fixed).toBe(1);
+    expect(px(1, 4)).toEqual([221, 159, 159, 255]);
+    expect(px(2, 4)).toEqual([249, 159, 187, 255]);
+    expect(px(4, 4)).toEqual([249, 159, 187, 255]);
+    expect(px(1, 5)).toEqual([190, 30, 40, 255]);
+    expect(out.image.data.filter((_, i) => i % 4 === 3)).toEqual(data.filter((_, i) => i % 4 === 3));
+    expect(Array.from(data.slice((4 * w + 1) * 4, (4 * w + 1) * 4 + 4))).toEqual([249, 159, 187, 255]);
+    expect(despillInterior(src, { asymmetric: { maxImbalance: 60, edgeRadius: 1 } }).fixed).toBe(0);
+    const protectedOut = despillInterior(src, {
+      palette: [[249, 159, 187]],
+      asymmetric: { maxImbalance: 80, edgeRadius: 2 },
+    });
+    expect(protectedOut.fixed).toBe(0); // explicit art palette still wins, including near the edge
+  });
+
+  it('uses diagonal alpha proximity and treats the outside canvas as transparent', () => {
+    const data = new Uint8ClampedArray(5 * 5 * 4);
+    for (let i = 0; i < data.length; i += 4) data.set([60, 40, 30, 255], i);
+    data.set([0, 0, 0, 0], (1 * 5 + 1) * 4);
+    data.set([249, 159, 187, 255], (2 * 5 + 2) * 4);
+    data.set([249, 159, 187, 255], (4 * 5 + 4) * 4);
+    expect(
+      despillInterior(
+        { width: 5, height: 5, data },
+        {
+          asymmetric: { maxImbalance: 80, edgeRadius: 1 },
+        },
+      ).fixed,
+    ).toBe(2);
+  });
+
+  it('rejects unsafe or unbounded asymmetric options', () => {
+    const src = { width: 1, height: 1, data: new Uint8ClampedArray([249, 159, 187, 255]) };
+    for (const asymmetric of [
+      { maxImbalance: Infinity, edgeRadius: 1 },
+      { maxImbalance: -1, edgeRadius: 1 },
+      { maxImbalance: 256, edgeRadius: 1 },
+      { maxImbalance: 80, edgeRadius: 0 },
+      { maxImbalance: 80, edgeRadius: 1.5 },
+      { maxImbalance: 80, edgeRadius: Infinity },
+    ])
+      expect(() => despillInterior(src, { asymmetric })).toThrow(RangeError);
+  });
+
   it('neutralises magenta-tinted opaque pixels inside hair but keeps palette colours (purple cloth)', () => {
     const w = 8;
     const data = new Uint8ClampedArray(w * w * 4);
