@@ -450,8 +450,7 @@ export class ProgressionService {
       return s.savePromise!;
     }
     s.saving = true;
-    let run!: Promise<void>;
-    run = (async () => {
+    const run: Promise<void> = (async () => {
       try {
         let conflicts = 0;
         do {
