@@ -7,7 +7,7 @@
 import { describe, expect, it } from 'vitest';
 import { encode } from '@vgtd/protocol';
 import { ErrorCode } from '@vgtd/protocol';
-import { WALK_SPEED } from '@vgtd/sim';
+import { ANTICHEAT, WALK_SPEED, budgetMs } from '@vgtd/sim';
 import { WorldNode, type ClientTransport } from '../src/index.js';
 
 class Client implements ClientTransport {
@@ -146,6 +146,37 @@ describe('credit bookkeeping', () => {
     expect(gotB).toBeGreaterThan(4000);
     expect(gotB).toBeLessThan(6000);
     expect(r.node.lagCreditOf(a.id)).toBeGreaterThan(gotB); // a was there for the whole overload
+  });
+
+  it('a client that joins at the END of a stall earns no credit for the stall that predates it', () => {
+    const r = rig();
+    const a = join(r);
+    play(r, a, 20, 1.0); // healthy
+    r.wall.ms += 5000; // the node is stalled for 5 s: no tick runs
+    const b = join(r); // joins when the stall is over: it was not there for it
+    r.wall.ms += 50;
+    r.node.tick();
+    expect(r.node.lagCreditOf(b.id)).toBe(0);
+    expect(r.node.lagCreditOf(a.id)).toBeGreaterThan(4000); // a was there the whole time
+  });
+
+  it('a resumed client with lag credit comes back with no unearned budget (the slide uses the guards clock)', () => {
+    const r = rig();
+    const c = join(r);
+    play(r, c, 400, 1.6); // 20 s of sim time at 60% overload: a substantial credit
+    expect(r.node.lagCreditOf(c.id)).toBeGreaterThan(5000);
+    const token = r.node.resumeTokenOf(c.id)!;
+    expect(r.node.suspendPlayer(c.id, c)).toBe(true);
+    for (let t = 0; t < 40; t++) {
+      r.wall.ms += 50; // 2 s held, server on time
+      r.node.tick();
+    }
+    const fresh = new Client();
+    fresh.id = c.id;
+    expect(r.node.resumePlayer(c.id, token, fresh)).not.toBeNull();
+    const e = ent(r.node, c.id)!;
+    const guardsNow = r.node.world.timeMs + r.node.lagCreditOf(c.id);
+    expect(budgetMs(e.ac, guardsNow) - e.ac.claimedMs).toBeLessThanOrEqual(ANTICHEAT.SLIDE_LAG_MS + 1e-6);
   });
 
   it('never decreases (the guards clock must not run backwards), even if the node later speeds up', () => {

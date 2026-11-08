@@ -431,7 +431,7 @@ export class WorldNode {
       pktWindowStartMs: this.packetClock(),
       pktCount: 0,
       joinedTick: this.world.tick,
-      driftAtJoinMs: this.tickDriftMs, // same phase as the per-tick measurement (drift as of the last tick start)
+      driftAtJoinMs: this.driftNow(), // the drift at the real join time: a client never earns credit for overload that predates it
       lagCreditMs: 0,
       dead: false,
       stats: emptyStats(),
@@ -478,7 +478,7 @@ export class WorldNode {
 
   /** How far the tick loop is behind real time (ms; negative when ticks are driven faster than real time, as tests and benchmarks do). */
   private driftNow(): number {
-    if (Number.isNaN(this.wall0)) this.wall0 = this.wallClock() - this.world.timeMs;
+    if (Number.isNaN(this.wall0)) return 0; // ticking has not started: time before the first tick is not overload
     return this.wallClock() - this.wall0 - this.world.timeMs;
   }
 
@@ -569,7 +569,8 @@ export class WorldNode {
               pending: [],
               vi: 0,
               vj: 0,
-              ac: slideBudget(e.ac, now),
+              // on the clock `step()` judges the guards by (sim time + this client's lag credit), not on bare sim time
+              ac: slideBudget(e.ac, now + this.lagCreditOf(id)),
             }
           : e,
       ),
@@ -695,6 +696,7 @@ export class WorldNode {
       simInputs = pre.inputs;
       for (const res of pre.results) this.sendCombatResult(res);
     }
+    if (Number.isNaN(this.wall0)) this.wall0 = this.wallClock() - this.world.timeMs; // the wall clock starts counting at the first tick
     this.tickDriftMs = this.driftNow();
     const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS, { lagMs: (id) => this.lagCreditOf(id) });
     const t1 = clock();
