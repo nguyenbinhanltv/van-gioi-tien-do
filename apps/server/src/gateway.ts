@@ -116,12 +116,32 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
     /** this connection's handle in the world: every call below is bound to it, never to the bare entity id (ids are recycled) */
     let transport: ClientTransport | undefined;
     let accountId = '';
+    let authed: { accountId: string; sessionId: string; version: number } | undefined;
     const closeWith = (code: ErrorCode, text: string): void => {
       if (ws.readyState === ws.OPEN) {
         ws.send(encode({ type: 'error', code, text }), { binary: true });
         ws.close(1008, text.slice(0, 100));
       }
     };
+    const makeTransport = (): ClientTransport => ({
+      send: (bytes) => {
+        if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
+      },
+      close: (code, text) => closeWith(code, text),
+      buffered: () => ws.bufferedAmount,
+    });
+    const helloAck = (resumed: boolean, resumeToken: string | undefined): Record<string, unknown> => ({
+      type: 'hello_ack',
+      entityId,
+      serverTimeMs: world.world.timeMs,
+      tickHz: NETWORK.TICK_HZ,
+      protocol: PROTOCOL_VERSION,
+      mapTiles: world.ctx.grid.width,
+      resumed,
+      // single-use secret for the NEXT connection of this session, valid while the entity is held after a drop
+      resumeToken: resumeToken ?? null,
+      resumeHoldMs: world.resumeHoldMs,
+    });
     const helloTimer = setTimeout(() => {
       if (!entityId) ws.close(1008, 'hello timeout');
     }, opts.helloTimeoutMs ?? GATEWAY_CONFIG.HELLO_TIMEOUT_MS);
@@ -130,13 +150,20 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
       if (!entityId) {
         // handshake: exactly one text frame
         if (isBinary) return closeWith(ErrorCode.Unauthorized, 'hello required');
-        let hello: { type?: unknown; protocolMin?: unknown; protocolMax?: unknown; token?: unknown };
+        let hello: {
+          type?: unknown;
+          protocolMin?: unknown;
+          protocolMax?: unknown;
+          token?: unknown;
+          resume?: { entityId?: unknown; token?: unknown } | null;
+        };
         try {
           hello = JSON.parse(data.toString()) as typeof hello;
         } catch {
           return closeWith(ErrorCode.BadMessage, 'bad hello');
         }
-        if (hello.type !== 'hello' || typeof hello.token !== 'string')
+        const resume = hello.resume && typeof hello.resume === 'object' ? hello.resume : null;
+        if (hello.type !== 'hello' || (typeof hello.token !== 'string' && !resume))
           return closeWith(ErrorCode.BadMessage, 'bad hello');
         if (
           typeof hello.protocolMin !== 'number' ||
@@ -145,8 +172,32 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           hello.protocolMax < PROTOCOL_VERSION
         )
           return closeWith(ErrorCode.BadVersion, 'unsupported protocol');
+        if (resume) {
+          // resume of a held session (docs/24 section 4): the single-use resume token IS the credential (the access token may
+          // have expired during a long session); a bad / expired token closes the socket and the client logs in again
+          const rid = resume.entityId;
+          const tr = makeTransport();
+          const ok =
+            typeof rid === 'number'
+              ? world.resumePlayer(rid, resume.token, tr, (acc, stamp) => {
+                  const st = stamp as { sessionId: string; version: number } | undefined;
+                  return !!st && auth.isSessionCurrent(acc, st.sessionId, st.version);
+                })
+              : null;
+          if (!ok || typeof rid !== 'number') return closeWith(ErrorCode.Unauthorized, 'resume rejected');
+          transport = tr;
+          entityId = rid;
+          accountId = world.accountOf(rid) ?? '';
+          clearTimeout(helloTimer);
+          const prevLive = online.get(accountId);
+          if (prevLive && prevLive.transport !== tr) setTimeout(() => prevLive.ws.terminate(), 1000).unref();
+          online.set(accountId, { ws, entityId, transport });
+          ws.send(JSON.stringify(helloAck(true, ok.token)));
+          return;
+        }
         try {
-          accountId = auth.authenticate(hello.token).accountId;
+          authed = auth.authenticate(hello.token as string);
+          accountId = authed.accountId;
         } catch (e) {
           const expired = e instanceof TokenError && e.code === 'expired';
           return closeWith(expired ? ErrorCode.SessionExpired : ErrorCode.Unauthorized, 'unauthorized');
@@ -154,6 +205,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
         if (world.clients.size >= GATEWAY_CONFIG.MAX_PLAYERS) return closeWith(ErrorCode.ServerFull, 'server full');
         // refuse BEFORE replacing the older connection: a refused join must not also log the user out of the live session
         if (!world.canAcceptPlayer()) return closeWith(ErrorCode.ServerFull, 'server full');
+        world.releaseSuspended(accountId); // a fresh login replaces a character still being held after a drop
         const prev = online.get(accountId);
         if (prev) {
           // one live connection per account: the newer login replaces the older
@@ -169,29 +221,15 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
         }
         clearTimeout(helloTimer);
         try {
-          transport = {
-            send: (bytes) => {
-              if (ws.readyState === ws.OPEN) ws.send(bytes, { binary: true });
-            },
-            close: (code, text) => closeWith(code, text),
-            buffered: () => ws.bufferedAmount,
-          };
+          transport = makeTransport();
           entityId = world.addPlayer(transport, accountId);
+          world.stampSession(entityId, { sessionId: authed!.sessionId, version: authed!.version });
         } catch (e) {
           if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');
           throw e;
         }
         online.set(accountId, { ws, entityId, transport });
-        ws.send(
-          JSON.stringify({
-            type: 'hello_ack',
-            entityId,
-            serverTimeMs: world.world.timeMs,
-            tickHz: NETWORK.TICK_HZ,
-            protocol: PROTOCOL_VERSION,
-            mapTiles: world.ctx.grid.width,
-          }),
-        );
+        ws.send(JSON.stringify(helloAck(false, world.resumeTokenOf(entityId))));
         return;
       }
       if (!isBinary) return closeWith(ErrorCode.BadMessage, 'binary frames only');
@@ -199,11 +237,13 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
       world.receive(entityId, new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength), transport);
     });
 
-    ws.on('close', () => {
+    ws.on('close', (code) => {
       clearTimeout(helloTimer);
       if (entityId) {
         if (online.get(accountId)?.transport === transport) online.delete(accountId);
-        world.removePlayer(entityId, transport);
+        // a deliberate close (1000, sent by `NetClient.close()`) leaves at once; any other end is a drop: hold the entity for a resume
+        if (code === 1000 || !world.suspendPlayer(entityId, transport as ClientTransport))
+          world.removePlayer(entityId, transport);
       }
     });
     ws.on('error', () => ws.terminate());

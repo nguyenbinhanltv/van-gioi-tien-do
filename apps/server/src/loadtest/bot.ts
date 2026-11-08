@@ -407,6 +407,6 @@ export class Bot {
     this.stopped = true;
     if (this.timer) clearTimeout(this.timer);
     if (this.sampleTimer) clearInterval(this.sampleTimer);
-    if (this.ws && this.ws.readyState <= WebSocket.OPEN) this.ws.close();
+    if (this.ws && this.ws.readyState <= WebSocket.OPEN) this.ws.close(1000, 'bye'); // a deliberate leave: the server removes the player at once (a drop would be held for a resume)
   }
 }
