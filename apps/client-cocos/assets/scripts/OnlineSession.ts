@@ -128,8 +128,13 @@ export class OnlineSession {
     };
   }
 
+  /** The last `skill_cast` handed to the transport (automation: scripts/touch-aim-smoke.mjs checks the aim that went out). */
+  private lastCast: { seq: number; skillId: number; targetId: number; aim: { i: number; j: number } | null } | null =
+    null;
+
   /** Transport hook for `cb.ServerCombat`: false when the socket is not open. */
   sendCast(m: { seq: number; skillId: number; targetId: number; aim: { i: number; j: number } | null }): boolean {
+    this.lastCast = m;
     return this.net.sendSkillCast(m);
   }
 
@@ -137,6 +142,7 @@ export class OnlineSession {
   private exposeDebug(): void {
     (window as unknown as Record<string, unknown>).__vgtdOnline = () => ({
       status: this.net.status,
+      lastCast: this.lastCast,
       active: this.active,
       username: this.username,
       entityId: this.net.entityId,
