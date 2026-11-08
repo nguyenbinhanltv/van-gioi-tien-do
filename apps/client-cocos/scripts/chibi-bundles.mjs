@@ -32,7 +32,9 @@ function stampOf(srcDir, repo) {
   const h = createHash('sha1');
   for (const f of walk(srcDir)) {
     if (!/-chibi-v1[\\/]/.test(f) || f.endsWith('.meta') || f.endsWith('.sprite.json')) continue;
-    h.update(`${relative(srcDir, f)}:${statSync(f).size}\n`);
+    // contents, not size/mtime: a same-length re-export must still invalidate the derivatives
+    h.update(`${relative(srcDir, f)}\n`);
+    h.update(readFileSync(f));
   }
   for (const f of [
     'tools/procgen/src/runtime/chibi.mts',
