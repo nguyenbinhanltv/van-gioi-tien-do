@@ -118,43 +118,61 @@ export class AuthService {
     return list;
   }
 
+  /** Reserve one slot synchronously (before any await) so parallel requests are counted; returns the stamp. */
+  private reserve(map: Map<string, number[]>, key: string, windowMs: number): number {
+    const stamp = this.now();
+    this.recent(map, key, windowMs).push(stamp);
+    return stamp;
+  }
+
+  private release(map: Map<string, number[]>, key: string, windowMs: number, stamp: number): void {
+    const list = this.recent(map, key, windowMs);
+    const k = list.indexOf(stamp);
+    if (k >= 0) list.splice(k, 1);
+  }
+
   async register(usernameRaw: unknown, password: unknown, ip: string): Promise<{ accountId: string }> {
     const uErr = validateUsername(usernameRaw);
     if (uErr) throw new AuthError(400, 'bad_username', uErr);
     const username = (usernameRaw as string).toLowerCase();
     const pErr = validatePassword(password, username);
     if (pErr) throw new AuthError(400, 'bad_password', pErr);
+    const DAY = 24 * 3600_000;
+    let stamp: number | null = null;
     if (this.registerLimit > 0) {
-      const regs = this.recent(this.ipRegs, ip, 24 * 3600_000);
-      if (regs.length >= this.registerLimit)
+      if (this.recent(this.ipRegs, ip, DAY).length >= this.registerLimit)
         throw new AuthError(429, 'register_limited', 'too many registrations from this address', 3600);
+      // counted before hashing: parallel requests from one IP cannot all pass the check
+      stamp = this.reserve(this.ipRegs, ip, DAY);
     }
-    if (this.store.byUsername(username)) throw new AuthError(409, 'username_taken', 'username already taken');
-    const passwordHash = await this.job(() => hashPassword(password as string, this.scryptParams));
-    const account: Account = {
-      id: randomUUID(),
-      username,
-      passwordHash,
-      tokenVersion: 0,
-      failures: 0,
-      lockedUntilMs: 0,
-      lockLevel: 0,
-    };
-    if (!this.store.create(account)) throw new AuthError(409, 'username_taken', 'username already taken');
-    this.recent(this.ipRegs, ip, 24 * 3600_000).push(this.now());
-    return { accountId: account.id };
+    let created = false;
+    try {
+      if (this.store.byUsername(username)) throw new AuthError(409, 'username_taken', 'username already taken');
+      const passwordHash = await this.job(() => hashPassword(password as string, this.scryptParams));
+      const account: Account = {
+        id: randomUUID(),
+        username,
+        passwordHash,
+        tokenVersion: 0,
+        failures: 0,
+        lockedUntilMs: 0,
+        lockLevel: 0,
+      };
+      if (!this.store.create(account)) throw new AuthError(409, 'username_taken', 'username already taken');
+      created = true;
+      return { accountId: account.id };
+    } finally {
+      // failed attempts (taken name, busy server) do not consume the daily quota
+      if (!created && stamp !== null) this.release(this.ipRegs, ip, DAY, stamp);
+    }
   }
 
   async login(usernameRaw: unknown, password: unknown, ip: string): Promise<LoginResult> {
     const t = this.now();
-    const fails = this.recent(this.ipFails, ip, AUTH_CONFIG.IP_FAIL_WINDOW_MS);
+    const W = AUTH_CONFIG.IP_FAIL_WINDOW_MS;
+    const fails = this.recent(this.ipFails, ip, W);
     if (fails.length >= AUTH_CONFIG.IP_FAIL_LIMIT)
-      throw new AuthError(
-        429,
-        'ip_limited',
-        'too many failed attempts',
-        Math.ceil((AUTH_CONFIG.IP_FAIL_WINDOW_MS - (t - fails[0]!)) / 1000),
-      );
+      throw new AuthError(429, 'ip_limited', 'too many failed attempts', Math.ceil((W - (t - fails[0]!)) / 1000));
     const username = typeof usernameRaw === 'string' ? usernameRaw.toLowerCase() : '';
     if (typeof password !== 'string' || password.length > 1024) throw new AuthError(400, 'bad_request', 'bad request');
     const account = this.store.byUsername(username);
@@ -165,23 +183,33 @@ export class AuthService {
         'account temporarily locked',
         Math.ceil((account.lockedUntilMs - t) / 1000),
       );
-    // unknown name: hash against a dummy so both failure paths cost the same
-    const stored = account ? account.passwordHash : await this.dummyHash;
-    const ok = await this.job(() => verifyPassword(password, stored));
+    // attempts still being verified count as failures until they succeed, so parallel guesses cannot beat the limits
+    if (account && account.failures >= AUTH_CONFIG.LOCK_AFTER_FAILURES)
+      throw new AuthError(429, 'account_locked', 'account temporarily locked', 60);
+    const stamp = this.reserve(this.ipFails, ip, W);
+    if (account) account.failures++;
+    let ok = false;
+    try {
+      // unknown name: hash against a dummy so both failure paths cost the same
+      const stored = account ? account.passwordHash : await this.dummyHash;
+      ok = await this.job(() => verifyPassword(password, stored));
+    } catch (e) {
+      // a busy server (503) is not a failed guess by the caller
+      this.release(this.ipFails, ip, W, stamp);
+      if (account) account.failures = Math.max(0, account.failures - 1);
+      throw e;
+    }
     if (!account || !ok) {
-      fails.push(this.now());
-      if (account) {
-        account.failures++;
-        if (account.failures >= AUTH_CONFIG.LOCK_AFTER_FAILURES) {
-          const steps = AUTH_CONFIG.LOCK_STEPS_MIN;
-          const minutes = steps[Math.min(account.lockLevel, steps.length - 1)]!;
-          account.lockedUntilMs = this.now() + minutes * 60_000;
-          account.lockLevel++;
-          account.failures = 0;
-        }
+      if (account && account.failures >= AUTH_CONFIG.LOCK_AFTER_FAILURES) {
+        const steps = AUTH_CONFIG.LOCK_STEPS_MIN;
+        const minutes = steps[Math.min(account.lockLevel, steps.length - 1)]!;
+        account.lockedUntilMs = this.now() + minutes * 60_000;
+        account.lockLevel++;
+        account.failures = 0;
       }
       throw new AuthError(401, 'bad_credentials', 'invalid username or password');
     }
+    this.release(this.ipFails, ip, W, stamp);
     account.failures = 0;
     account.lockLevel = 0;
     if (needsRehash(account.passwordHash, this.scryptParams)) {

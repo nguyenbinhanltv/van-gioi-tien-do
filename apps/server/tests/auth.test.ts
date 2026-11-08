@@ -131,6 +131,52 @@ describe('AuthService', () => {
     expect(await code(svc.register('user3', 'correct horse battery', '5.5.5.5'))).toBe('ok');
   });
 
+  it('parallel logins cannot beat the per-IP failure limit (attempts are counted before the hash runs)', async () => {
+    const { svc } = mk();
+    await svc.register('frank', 'correct horse battery', '7.7.7.7');
+    const results = await Promise.all(
+      Array.from({ length: 30 }, () => code(svc.login('frank', 'wrong password!!', '8.8.8.8'))),
+    );
+    // only a handful may reach the hash; the rest are refused up front (account lock or IP limit)
+    expect(results.filter((r) => r === 'bad_credentials').length).toBeLessThanOrEqual(AUTH_CONFIG.LOCK_AFTER_FAILURES);
+    expect(results.filter((r) => r === 'account_locked' || r === 'ip_limited').length).toBeGreaterThanOrEqual(25);
+  });
+
+  it('parallel guesses on one account from many IPs hit the lock after 5 attempts', async () => {
+    const { svc } = mk();
+    await svc.register('grace', 'correct horse battery', '7.7.7.8');
+    const results = await Promise.all(
+      Array.from({ length: 20 }, (_, k) => code(svc.login('grace', 'wrong password!!', `10.0.0.${k}`))),
+    );
+    expect(results.filter((r) => r === 'bad_credentials')).toHaveLength(AUTH_CONFIG.LOCK_AFTER_FAILURES);
+    expect(await code(svc.login('grace', 'correct horse battery', '10.0.1.1'))).toBe('account_locked');
+  });
+
+  it('a successful login does not leave an IP failure entry behind', async () => {
+    const { svc } = mk();
+    await svc.register('heidi', 'correct horse battery', '7.7.7.9');
+    for (let k = 0; k < 25; k++) expect(await code(svc.login('heidi', 'correct horse battery', '11.0.0.1'))).toBe('ok');
+  });
+
+  it('parallel registrations from one IP are capped at the daily limit (slot reserved before hashing)', async () => {
+    const { svc } = mk();
+    const results = await Promise.all(
+      Array.from({ length: 10 }, (_, k) => code(svc.register(`par${k}`, 'correct horse battery', '12.0.0.1'))),
+    );
+    expect(results.filter((r) => r === 'ok')).toHaveLength(3);
+    expect(results.filter((r) => r === 'register_limited')).toHaveLength(7);
+  });
+
+  it('a rejected registration (taken name) does not consume the daily quota', async () => {
+    const { svc } = mk();
+    await svc.register('quota1', 'correct horse battery', '13.0.0.1');
+    for (let k = 0; k < 5; k++)
+      expect(await code(svc.register('quota1', 'correct horse battery', '13.0.0.1'))).toBe('username_taken');
+    expect(await code(svc.register('quota2', 'correct horse battery', '13.0.0.1'))).toBe('ok');
+    expect(await code(svc.register('quota3', 'correct horse battery', '13.0.0.1'))).toBe('ok');
+    expect(await code(svc.register('quota4', 'correct horse battery', '13.0.0.1'))).toBe('register_limited');
+  });
+
   it('the hash queue is bounded: overflow answers 503', async () => {
     const { svc } = mk({ maxPendingHashes: 2, registerPerIpPerDay: 0 });
     const results = await Promise.all(
