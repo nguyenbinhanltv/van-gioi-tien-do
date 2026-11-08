@@ -1,6 +1,6 @@
 # Bảng quyết định (docs/31)
 
-> **Trạng thái:** đề xuất, chờ chủ dự án điền cột "Quyết định". Nguồn: rà soát chéo docs 00–29 và báo cáo thiết kế (ngoài repo) 2026-11-05. Quy tắc dùng bảng này: [30-quy-tac-van-hanh.md](30-quy-tac-van-hanh.md) §4–§5. **Nguồn duy nhất của câu hỏi mở** của docs 01 và 10–29: mục "Câu hỏi cần chốt" trong các tài liệu đó chỉ còn là con trỏ về đây (riêng 24 sẽ gỡ sau khi PR đang mở sửa docs/24 được merge). Cột "Ngày" ghi ngày chốt. Quyết định đã điền phải được ghi vào [DECISIONS.md](DECISIONS.md) từ D32 trước khi cài đặt.
+> **Trạng thái:** đề xuất, chờ chủ dự án điền cột "Quyết định". Nguồn: rà soát chéo docs 00–29 và báo cáo thiết kế (ngoài repo) 2026-11-05. Quy tắc dùng bảng này: [30-quy-tac-van-hanh.md](30-quy-tac-van-hanh.md) §4–§5. **Nguồn duy nhất của câu hỏi mở** của docs 01 và 10–29: mục "Câu hỏi cần chốt" trong các tài liệu đó chỉ còn là con trỏ về đây. Cột "Ngày" ghi ngày chốt. Quyết định đã điền phải được ghi vào [DECISIONS.md](DECISIONS.md) từ D32 trước khi cài đặt.
 
 **Cách dùng.** Mỗi dòng là một quyết định đã **loại trùng** từ mọi mục "Câu hỏi cần chốt" của docs 01 (G*), 10 (M*), 11 (S*), 12–19 (Q*), 20–29 (Q*), các đề xuất ADR 005–025 (docs/29), các điểm mơ hồ trong mô tả PR #7, #9, #10, #66, #67 và các mâu thuẫn X1–X12 (OPEN-ITEMS §8). Cột "Câu hỏi" ghi **mọi ID nguồn đã gộp**. **Cột "Quyết định" để trống** cho chủ dự án. "Đề xuất mặc định" là giá trị tài liệu sẽ dùng nếu không có phản hồi (không phải quyết định). Quyết định đã chốt sẽ vào `DECISIONS.md` từ **D32**.
 
