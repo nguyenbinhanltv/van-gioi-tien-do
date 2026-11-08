@@ -351,3 +351,14 @@ export const CONTROLS = Object.freeze([
 ]);
 
 export const controlLines = () => CONTROLS.filter((c) => c.enabled);
+
+/**
+ * Command + args that open `target` in the default browser. No shell is involved: on Windows `cmd /c start` would treat an
+ * unquoted `&` in the URL as a command separator and cut the query string (`?online=1&combat=1`), so use the URL handler
+ * through rundll32, which receives the URL as one argument.
+ */
+export function openCommand(platform, target) {
+  if (platform === 'win32') return ['rundll32', ['url.dll,FileProtocolHandler', target]];
+  if (platform === 'darwin') return ['open', [target]];
+  return ['xdg-open', [target]];
+}

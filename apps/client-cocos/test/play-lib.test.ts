@@ -17,6 +17,7 @@ const {
   lanAddresses,
   makeBuildLineFilter,
   needsRebuild,
+  openCommand,
   newestSource,
   parseArgs,
   pickPort,
@@ -393,5 +394,18 @@ describe('play: port picking', () => {
     const none = () => false;
     expect(await pick({ start: 8456, explicit: false, isFree: none, maxTries: 3 })).toEqual({ ok: false, port: 8456 });
     expect(await pick({ start: 65535, explicit: false, isFree: busy(65535) })).toEqual({ ok: false, port: 65535 });
+  });
+});
+
+describe('openCommand', () => {
+  const url = 'http://localhost:8456/?online=1&combat=1&server=localhost:8081';
+  it('never goes through cmd.exe on Windows, so `&` in the URL survives', () => {
+    const [cmd, args] = openCommand('win32', url);
+    expect(cmd).not.toMatch(/cmd/i);
+    expect(args).toEqual(['url.dll,FileProtocolHandler', url]);
+  });
+  it('passes the URL as a single untouched argument on macOS and Linux', () => {
+    expect(openCommand('darwin', url)).toEqual(['open', [url]]);
+    expect(openCommand('linux', url)).toEqual(['xdg-open', [url]]);
   });
 });

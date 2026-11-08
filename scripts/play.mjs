@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import {
   USAGE,
   buildUrls,
+  openCommand,
   checkNode,
   cocosEditorPath,
   controlLines,
@@ -448,13 +449,13 @@ say('Nhấn Ctrl+C để dừng tất cả.', 'Press Ctrl+C to stop everything.'
 
 if (opts.open) {
   const target = opts.offline ? urls.offline : urls.local;
-  const [cmd, args] = IS_WIN
-    ? ['cmd', ['/c', 'start', '', target]]
-    : process.platform === 'darwin'
-      ? ['open', [target]]
-      : ['xdg-open', [target]];
+  const [cmd, args] = openCommand(process.platform, target);
   try {
-    spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true }).unref();
+    const opener = spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true });
+    opener.on('error', () =>
+      say(`Không mở được trình duyệt, hãy mở ${target}`, `Could not open the browser, open ${target} yourself.`),
+    );
+    opener.unref();
   } catch {
     say(`Không mở được trình duyệt, hãy mở ${target}`, `Could not open the browser, open ${target} yourself.`);
   }
