@@ -12,7 +12,7 @@ duplication are permanent damage, so every source and sink must be explicit, bou
 ## Ground rules
 
 - You cannot invoke skills by name: where a skill file is named below, Read that file and follow it.
-- Read `CLAUDE.md`. Values come from `docs/DECISIONS.md` (D14+), `docs/00` s3-4, `docs/07` and `@vgtd/shared` (drop
+- Read `CLAUDE.md`. Values come from `docs/DECISIONS.md` (D14+), `docs/00` s3, `docs/07` and `@vgtd/shared` (drop
   rates, quality ladder, realm requirements) via `.claude/skills/vgtd-spec-lookup/SKILL.md`. Do not invent coefficients; closing them needs the
   economy simulation listed in `docs/OPEN-ITEMS.md`. Number changes go through `.claude/skills/vgtd-formula-change/SKILL.md`.
 - Docs are Vietnamese; your replies are English. Write only the doc path the caller names under `docs/`. Read large docs

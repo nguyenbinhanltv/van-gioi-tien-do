@@ -154,12 +154,4 @@ Cảnh báo (Alertmanager hoặc Grafana alerting) ở MVP gửi vào **thông b
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                                      | Mặc định đề xuất                                                                                   |
-| --- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Q1  | Bảng ánh xạ tên sổ cái (`ledger`/`SRC_*`/`SINK_*` ở docs/17 và `SRC_IAP` ở docs/15 so với `ledger_entries`/`SYSTEM_*` ở đây) | Giữ tên của 26 làm chuẩn; **đã sửa** docs/13, 15, 17 theo tên của 26 (xem rà soát chéo 2026-11-05) |
-| Q2  | Không dùng Sentry cục bộ trong MVP; dùng telemetry + Loki?                                                                   | **Có**                                                                                             |
-| Q3  | SLO khởi điểm (tick ≤ 50 ms 99,9%, v.v.)?                                                                                    | **Có** làm khởi điểm; chốt sau loadbot                                                             |
-| Q4  | Phân tích hành vi: opt-out (docs/17 Q4); thiết yếu luôn bật; xác nhận pháp lý (docs/19)                                      | **Opt-out**, đúng docs/17; cần xác nhận pháp lý                                                    |
-| Q5  | Thời hạn lưu log ứng dụng (7 ngày cục bộ; môi trường thật?)                                                                  | 7 ngày dev; 30 ngày khi có môi trường thật                                                         |
-| Q6  | Stack quan sát: Prometheus + Grafana + Loki + Tempo + OTel Collector (profile `obs`)?                                        | **Có**; chỉ chạy khi cần                                                                           |
-| Q7  | Hệ cờ tính năng tự viết thay vì dịch vụ ngoài?                                                                               | **Có** cho MVP                                                                                     |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (27 Q1–Q7). Nội dung gốc của mục này nằm trong lịch sử git.

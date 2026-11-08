@@ -9,7 +9,7 @@ description: Review the technical design docs (docs/20-29 and docs/06, docs/08) 
 
 Read-only. Severity and report skeleton: `.claude/skills/vgtd-design-review/SKILL.md`. Checklist for each technical doc:
 `.claude/skills/vgtd-design-review/checklists/technical-design.md`. Numbers: `vgtd-spec-lookup` (`docs/DECISIONS.md` D14+
-→ `docs/00` s3-4 → `@vgtd/shared` → other docs). Determinism and protocol rules: `vgtd-sim-determinism`.
+→ `docs/00` s3 → `@vgtd/shared` → other docs). Determinism and protocol rules: `vgtd-sim-determinism`.
 
 **Argument (optional):** `full` (default) · `coverage` (traceability only) · `consistency` (conflicts between technical
 docs only) · `engine` (Cocos/Spine/Web feasibility only) · `single <path>` (one design doc's technical coverage).
@@ -18,7 +18,7 @@ docs only) · `engine` (Cocos/Spine/Web feasibility only) · `single <path>` (on
 
 1. Glob `docs/*.md`; list present vs planned (design 10-19, technical 20-29). If there are no technical docs, the review
    covers `docs/06` and `docs/08` only and says so; if there are no design docs, verdict NOT ASSESSED.
-2. Outline each doc with Grep `^#{1,3} ` and read by range (Vietnamese, often over 40 KB). Read `docs/00` s3-4,
+2. Outline each doc with Grep `^#{1,3} ` and read by range (Vietnamese, often over 40 KB). Read `docs/00` s3,
    `docs/DECISIONS.md`, `docs/OPEN-ITEMS.md` first. Read `docs/29-adr.md` (ADR index: locked vs proposed technical decisions) so proposals are not
    mistaken for locked values. Skim `packages/shared/src/index.ts` exports so you know which numbers
    already have an executable owner.
