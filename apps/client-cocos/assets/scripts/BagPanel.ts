@@ -68,6 +68,7 @@ export class BagPanel {
   private readonly selection = new core.BagSelection();
   private visible: boolean;
   private scale = 1;
+  private ui = { w: 1280, h: 720 };
   private lastStates = -1;
   private lastSelected: number | null = null;
   private lastWaiting = -1;
@@ -140,6 +141,20 @@ export class BagPanel {
         const r = core.slotRect(i);
         return this.click(r.x + r.w / 2, r.y + r.h / 2);
       },
+      // CSS-pixel centre of a slot / the claim button / the panel, so a harness can tap them with real touch input
+      slotPoint: (i: number) => {
+        const r = core.slotRect(i);
+        return this.toClient(r.x + r.w / 2, r.y + r.h / 2);
+      },
+      claimPoint: () => {
+        const r = core.claimButtonRect(SLOTS_DRAWN);
+        return this.toClient(r.x + r.w / 2, r.y + r.h / 2);
+      },
+      panelBox: () => {
+        const a = this.toClient(0, 0);
+        const b = this.toClient(this.size.w, this.size.h);
+        return a && b ? { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y } : null;
+      },
       clickClaim: () => {
         const r = core.claimButtonRect(SLOTS_DRAWN);
         return this.click(r.x + 4, r.y + 4);
@@ -154,19 +169,17 @@ export class BagPanel {
   }
 
   /**
-   * Re-anchor to the canvas size (design units): RIGHT-MIDDLE so nothing overlaps the other HUD (PerfHud top-left, target frame
-   * top-centre, progression HUD top-right with a toast below it, hotbar bottom-centre), shrunk to fit the space between them.
+   * Re-anchor to the canvas size (design units): RIGHT-MIDDLE between the reserved HUD bands (progression HUD + toast on top, hotbar
+   * at the bottom). Size and position come from client-core `bagPanelPlacement` (unit tested over a phone / tablet / desktop matrix);
+   * on small screens it grows (up to a cap) so slots stay tappable.
    */
   layout(canvasW: number, canvasH: number): void {
-    const topClear = 140; // the progression HUD (92) + its toast + margin
-    const bottomClear = 90; // the hotbar
-    this.scale = Math.min(1, (canvasW - 20) / this.size.w, (canvasH - topClear - bottomClear) / this.size.h);
-    this.root.setScale(this.scale, this.scale, 1);
-    this.root.setPosition(
-      canvasW / 2 - 8 - (this.size.w * this.scale) / 2,
-      canvasH / 2 - topClear - (this.size.h * this.scale) / 2,
-      0,
-    );
+    this.ui = { w: canvasW, h: canvasH };
+    const cssH = game.canvas?.clientHeight ?? canvasH;
+    const p = core.bagPanelPlacement(canvasW, canvasH, SLOTS_DRAWN, cssH / canvasH);
+    this.scale = p.scale;
+    this.root.setScale(p.scale, p.scale, 1);
+    this.root.setPosition(p.cx, p.cy, 0);
   }
 
   private bag(): Bag | null {
@@ -262,6 +275,20 @@ export class BagPanel {
     e.stopImmediatePropagation();
     e.preventDefault();
     if (e.button === 0) this.click(lx, ly);
+  }
+
+  /** Panel-local point (design units, y down) to CSS px on the page, or null without a canvas. */
+  private toClient(lx: number, ly: number): { x: number; y: number } | null {
+    const c = game.canvas;
+    if (!c) return null;
+    const rc = c.getBoundingClientRect();
+    const rp = this.root.position;
+    const ux = rp.x + (lx - this.size.w / 2) * this.scale;
+    const uy = rp.y + (this.size.h / 2 - ly) * this.scale;
+    return {
+      x: rc.left + ((ux + this.ui.w / 2) / this.ui.w) * rc.width,
+      y: rc.top + ((this.ui.h / 2 - uy) / this.ui.h) * rc.height,
+    };
   }
 
   private debugState(): unknown {

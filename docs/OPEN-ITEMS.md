@@ -419,9 +419,10 @@ Còn mở / lưu ý:
 2. **Chưa có**: dùng / tách chồng / vứt / sắp xếp / ô nhanh (giao diện `InventoryInteraction` có sẵn trong client-core cho kéo-thả chưa nối), trang bị và độ bền hiển thị khi mặc, kho, thư, chợ.
 3. **Nhịp lệnh (10/s, burst 10), số ô túi 40 (D77), số mục hàng chờ tối đa** là mặc định tạm cần game designer duyệt.
 4. **Gửi toàn bộ túi mỗi thay đổi** (≤ ~0,6 KB với 40 ô, tối đa 20/s mỗi người khi nhặt liên tục): đủ cho beta, cần delta nếu túi lớn hơn hoặc nhặt dày đặc; chưa đo băng thông với 100 người nhặt cùng lúc.
-5. **Bảng túi chưa kiểm trên điện thoại thật / màn hình nhỏ**; chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
-6. **Hàng chờ có trần số lượng**: mỗi mục hàng chờ tối đa 65.535 (giới hạn u16 của dây); phần vượt của một roll bị tính mất (`lostItems`), không bao giờ làm `inv_state` lỗi mã hóa; mỗi chủ gửi lỗi chỉ tính vào `metrics.inventorySendErrors` và không dừng tick. Cần luật cho hàng chờ đầy lâu (hết hạn / thư hệ thống).
-7. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.
+5. **Bảng túi chưa kiểm trên điện thoại THẬT**; [Cập nhật worker39, 2026-11-09] giết quái → túi (client thật, server dev thật) và chạm trên giả lập di động 360x640 / 390x844 / 844x390 đã kiểm bằng `npm run bag:smoke -w client-cocos` (không chạy trong CI); ô chạm trên điện thoại chỉ ~37-45 px CSS (lưới 8 cột rộng 400 đơn vị thiết kế trên màn FIXED_HEIGHT) — màn dọc hẹp cần ít cột hơn (chưa làm). Chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
+6. **Phát hiện khi chạy client thật**: máy chủ đang bị CPU bão hòa (Chrome SwiftShader ở 1280x720) không kịp tick nên hàng đợi input đầy → vi phạm `queue` → bị kick `anti-cheat` sau vài phút; bật `LOG_VIOLATIONS=1` ở máy chủ dev để xem bộ đếm. Chưa kết luận đây có phải lỗi thật hay chỉ do máy kiểm thử quá tải (harness dùng 960x540 để tránh).
+7. **Hàng chờ có trần số lượng**: mỗi mục hàng chờ tối đa 65.535 (giới hạn u16 của dây); phần vượt của một roll bị tính mất (`lostItems`), không bao giờ làm `inv_state` lỗi mã hóa; mỗi chủ gửi lỗi chỉ tính vào `metrics.inventorySendErrors` và không dừng tick. Cần luật cho hàng chờ đầy lâu (hết hạn / thư hệ thống).
+8. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.
 
 ## D80 — resume: còn mở
 
