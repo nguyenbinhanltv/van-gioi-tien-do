@@ -196,7 +196,7 @@ Mọi lớp dùng lại bộ Kiếm tu (chạy, đi, dash, hit, chết, đả t�
 
 > **[Thay thế một phần bởi D41, 2026-11-06]** Với **thân nhân vật Player**, quyết định D41 (sprite sheet AI từng khung, xem [sprite-sheet-pipeline.md](sprite-sheet-pipeline.md)) thay cách làm bằng rig xương trong tài liệu này; tài liệu giữ lại làm tham chiếu cho boss/NPC và mã `@vgtd/rig` (không phát triển thêm cho thân Player).
 
-Quyết định **D39** của chủ dự án (2026-11-06, xem `docs/DECISIONS.md`): bỏ cách "cắt mảnh chữ nhật từ một ảnh", chuyển sang **vẽ từng bộ phận đầy đủ** và dựng **một mesh liền cho cả tay / cả chân**. Bản này là đặc tả mảnh cho worker art; công cụ nằm ở `tools/rig/src/limb.ts` (`buildLimbMesh`, `buildSkirtMesh`). Nền tảng số liệu: `docs/art/rig-approach-memo.md` (phương án B + C).
+Quyết định **D39** của chủ dự án (2026-11-06, xem `docs/DECISIONS.md`): bỏ cách "cắt mảnh chữ nhật từ một ảnh", chuyển sang **vẽ từng bộ phận đầy đủ** và dựng **một mesh liền cho cả tay / cả chân**. Bản này là đặc tả mảnh cho worker art; công cụ nằm ở `tools/rig/src/limb.ts` (`buildLimbMesh`, `buildSkirtMesh`). Nền tảng số liệu: §E bên dưới (phương án B + C).
 
 ### 1. Định dạng file
 
@@ -266,7 +266,7 @@ Dựng xương từ `landmarks.json`, ghép mảnh → rig hướng E, xuất b�
 
 ### 6b. Dáng đi cho váy dài (`GAIT_PROFILES`)
 
-Với váy dài, bước rộng + gập gối sâu trông như tư thế cưỡi ngựa. `rig:assemble --gait robe` (mặc định) dựng run/walk/dash với **hai cặp bước trong cùng một clip** (`cycles: 2`): clip giữ **thời lượng của bảng animation** (run 0,5 s) và **tốc độ mặt đất thật** (`motion.speed` = tốc độ di chuyển, `timeScale` luôn 1), nhưng mỗi bước chỉ dài một nửa; gối nông, nâng chân thấp, nghiêng người. Nhịp bước gấp đôi được **ghi sẵn trong clip**, không phụ thuộc runtime. `--gait free` giữ dáng gốc. Chủ dự án cần xác nhận nhịp bước nhanh hơn: `docs/OPEN-ITEMS.md` §10. Hướng chính để sửa dáng đi là bước key pose tham chiếu (`docs/art/rig-keypose.md`).
+Với váy dài, bước rộng + gập gối sâu trông như tư thế cưỡi ngựa. `rig:assemble --gait robe` (mặc định) dựng run/walk/dash với **hai cặp bước trong cùng một clip** (`cycles: 2`): clip giữ **thời lượng của bảng animation** (run 0,5 s) và **tốc độ mặt đất thật** (`motion.speed` = tốc độ di chuyển, `timeScale` luôn 1), nhưng mỗi bước chỉ dài một nửa; gối nông, nâng chân thấp, nghiêng người. Nhịp bước gấp đôi được **ghi sẵn trong clip**, không phụ thuộc runtime. `--gait free` giữ dáng gốc. Chủ dự án cần xác nhận nhịp bước nhanh hơn: `docs/OPEN-ITEMS.md` §10. Hướng chính để sửa dáng đi là bước key pose tham chiếu (§D bên dưới).
 
 ### 7. Lớp chi tiết hoạt cảnh (`tools/rig/src/detail.ts`)
 
