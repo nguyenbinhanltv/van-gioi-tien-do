@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:25:29 UTC"
+  },
+  "prompt": "LOCAL MAIN-HAIR-CAP CONSTRUCTION FIX ONLY on this original16frame SOUTH RUN sheet, exact1254x1254,4x4. Zero-based cells0,1,2,3,6,7,8,9,10,13,14,15 ONLY: slightly FLATTEN/LOWER the upper ATTACHED FRONT MAIN HAIR CAP by FOUR NATIVE PIXELS (roughly3logicalpx), so its rounded cream-highlight top seam sits visibly lower against the elevated bun behind it. This reduces excessive skull/cap height while preserving the FACE and JAW exactly. Repaint actual small upper cap volume/contour with natural hair layering, do not just recolor a line. The elevated coil/bun, jadepin, face, eyes, brows, forehead fringe, nose, mouth, chin, jaw/neck, and hair sides below the upper-cap region MUST stay pixel-identical. Do NOT shrink the whole head, do NOT shrink face, do NOT move chin/neck, do NOT alter bun or pin, do NOT change expression. Only bounded upper MAIN CAP region near firstcreamrim between bun and forehead changes, with samebrown/cream hair materials. Cells4,5,11,12 unchanged. ALL body, shoulders, hands, whisk, sleeve, sash, robe, legs, boots, running flight/tuck/stance, source registration, camera and timing stay EXACTLY original. No body/frame rescale or newpose. This is a small cap-only silhouette correction, not replacement by a different or smaller face. Keep pure #FF00FF matte and all16fullfigures; no grid/text/FX. Source has frontcap rim around logicaly15-16 and jaw69-70 in affectedcells; lower justcap about3logicalpx, jaw untouched.",
+  "inputs": ["raw/run.attempt1.png"],
+  "rawOutput": "raw/run-cap2.attempt1.png",
+  "status": "unselected upper-maincap-only candidate; originalface/jaw/body retained under strict mask; actual measure pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-641db602-1f8e-4f35-a81c-17d714e5d59c.png",
+  "sha256": "13975f247ed2b2f3bea2bbcd7423763f2209198990de8bfd5ed2a708888aec67",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "raw/run.attempt1.png",
+      "sha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673"
+    }
+  ]
+}

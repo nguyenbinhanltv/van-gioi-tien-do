@@ -1,0 +1,19 @@
+# Đan/Phù premium semi-chibi T1 — S
+
+Status: all15 clips /202 drawings are present, but S is **not ready for publication**. Two genuine dash head-size failures remain after the authorized maximum5% original-source head-ROI correction: local2 =56.00893 px and local4 =58.00862 px, above the54.59972 px upper band. Run and dash0/9 head checks pass. All21 measured soft foot/height findings remain OPEN, plus the manual neutral-dash foot-depth warning. No final runtime export, real Cocos capture or S PR is claimed.
+
+The locked master is ../reference/S.corrected-master.png; master-head-reference.json preserves its hash and manually selected front-cap/jaw points. Master head53.00943 px; band51.41915..54.59972 px. One shared body calibration retains nominal216 px anatomy, with whole-grid DPI normalization, Lanczos3, edge-limited asymmetric despill and exact24Hz smooth-v2 timing. No whole-frame/body fitting or rescaling.
+
+All AI cap-only edits that introduced extra coil bands were REJECTED by the orchestrator as hairstyle identity drift. Their raw files and withdrawn annotations remain historical evidence. They are not active project sources and cannot be rescued by selecting a lower bright stripe. Whole-head AI overshoots and the first deterministic rectangular-matte artifact are also retained as rejected attempts.
+
+Current source repairs use the explicitly owner-authorized deterministic HEAD-ROI-only uniform scale(no rotation/shear), at most5%, about a locked visible chin/neck base, with Lanczos3 and a3px smoothstep feather. Every attempt starts from the ORIGINAL source; scales are never stacked. repair-head-roi.ts and repair/_plan_.json reproduce the candidates. D57 verifies native source/mask SHA and whole-sheet outside-mask RGBA byte equality, including hidden RGB. Binary masks, factors, anchors, UTC, generator details and all raw provenance are retained.
+
+The run v2 candidate passed actual native first-maincap-run>=2 measurements and4× seam/hairstyle review. Elevated bun/pin are excluded, partial genuine cap highlights and jaw outlines included, neck excluded. run.head-roi.v2.landmarks.json retains draft/refinement history. Approximately1px manual uncertainty is disclosed; this is not an automatic anatomy detector. The corrected dash v2 anchors are independently remeasured; failures2/4 remain hard and cannot be waived by D60 brackets. D60 is not adopted.
+
+Preservation proof: all202 computed registrations remain exact,187 aligned PNGs are byte-identical to the pre-edit full-source baseline, and only11 run heads plus4 dash heads differ. All6 hit frames and locked lower-body/base pixels are unchanged. Four-times nearest comparisons show no obvious seam, matte rectangle, added band, hand swap or weapon detachment. This proves preservation, not final acceptance of the two oversized heads.
+
+D55: 145 checked cells pass Lab,0 fail;57 D41 free-pose exemptions are separate. All16 run and10 dash cells are checked without head-reason skips. L1 is diagnostic. Current temporal flags:20; prior full-body contact review plus current changed-head4× review preserve rapid sweep/recovery/collapse polish notes. Pipeline previews are not Cocos captures; GIF centisecond holds approximate timing.
+
+The uniform0.5% inset preserves all native foreground; rejected1% crop history remains in source-border-review.json. All21 measured soft findings stay open in quality-backlog.json/quality-backlog.md. Dash0/9 neutral shoes remain around soleY247 versus template232, an explicit manual foot-depth/root-entry concern, not waived by head evidence. Mobile residency/compression are unvalidated.
+
+Next: orchestrator source-repair scope decision for dash2/4 beyond the current5% limit, unchanged final hard gates, official D45 guide hashes, runtime export and real Cocos Creator3.8.8 2× capture. Derived D45 guide PNGs are not committed; extracted body/weapon/FX sets follow the dedicated class pass after all5 directions merge.

@@ -1,0 +1,77 @@
+{
+  "utc": "2026-11-08T05:15:55.470Z",
+  "masterReference": {
+    "crown": {
+      "x": 127.5,
+      "y": 11.5
+    },
+    "chin": {
+      "x": 128.5,
+      "y": 64.5
+    }
+  },
+  "masterSha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83",
+  "convention": "Manual semantic boundary edges, include frontcap highlight/jaw outline, exclude elevated bun/pin and neck. Freeze selections before ratio evaluation; ~1px manual uncertainty, no automatic anatomy certification.",
+  "rows": [
+    {
+      "clip": "walk",
+      "frame": 5,
+      "crown": {
+        "x": 125.5,
+        "y": 12.5
+      },
+      "chin": {
+        "x": 126.5,
+        "y": 65.5
+      },
+      "status": "selected",
+      "note": "First attached frontcap cream rim row13, brown bun seam row12 excluded; jaw outline row65 follows skin64 and precedes neck66. Both neighboring columns inspected; dynamic vertical stance and cloth overhang, no scale change.",
+      "alignedSha256": "dcada8ff133c19477bfd8b931c2100853695b5c980420b4d84bb0c21683ee210"
+    },
+    {
+      "clip": "walk",
+      "frame": 15,
+      "crown": {
+        "x": 127.5,
+        "y": 12.5
+      },
+      "chin": {
+        "x": 127.5,
+        "y": 65.5
+      },
+      "status": "selected",
+      "note": "Attached frontcap rim row13 after brown bun seam12; central jaw outline65 below skin64, neck66 excluded. Both columns inspected. Vertical stance/sleeve secondary motion retained.",
+      "alignedSha256": "30c3694b47b502b323511d64d4203367e8e20328a947052b58afefcf5f90ec3b"
+    },
+    {
+      "clip": "run",
+      "frame": 0,
+      "crown": {
+        "x": 125.5,
+        "y": 14.5
+      },
+      "chin": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "status": "OPEN head-only repair target",
+      "note": "Frontcap partial cream highlight row15 included, bright solid row16 is interior; jaw outline69 after skin68 and before neck70. No coordinate move to pass.",
+      "alignedSha256": "ba79911868a46823c8d5afa4d13b0c163eef63ca10154340ddada724c43ae4a2"
+    },
+    {
+      "clip": "run",
+      "frame": 7,
+      "crown": {
+        "x": 128.5,
+        "y": 14.5
+      },
+      "chin": {
+        "x": 128.5,
+        "y": 69.5
+      },
+      "status": "OPEN head-only repair target",
+      "note": "Attached rim starts row15, not solid highlight row16; skin68, dark jaw69, neck70. Elevated bun excluded. No pass inferred from pose.",
+      "alignedSha256": "772fb605299e61aeb0a567db3a3bb45b60542fa6295e4e73f16ccf8491e787ee"
+    }
+  ]
+}

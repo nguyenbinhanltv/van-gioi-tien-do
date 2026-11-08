@@ -1,0 +1,61 @@
+{
+  "clip": "dash",
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc",
+  "output": "raw/hit-dash.head-roi.v2.png",
+  "mask": "repair/dash.head-roi.v2.mask.png",
+  "provenance": "provenance/dash.head-roi.v2.json",
+  "algorithm": "head-foreground-union-v2; original source only; same approved uniform ROI method",
+  "status": "Original-source v2 anchor refinement, factors unchanged/max5. Native residual head failures remain OPEN, no D60 waiver/stacking.",
+  "targetHeadPx": 53.009433122794285,
+  "rows": [
+    {
+      "cell": 0,
+      "chin": {
+        "x": 130.5,
+        "y": 70.5
+      },
+      "estimatedSourceSpanPx": 55,
+      "factor": 0.9638078749598961,
+      "whiskGuardStartY": 41,
+      "whiskGuardEndY": 48,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets. Visible central jaw-outline two-column support130/131; adjacent132 is neck-side blend. Anchor moved to actual central jaw, no ratio-driven selection."
+    },
+    {
+      "cell": 2,
+      "chin": {
+        "x": 133.5,
+        "y": 87.5
+      },
+      "estimatedSourceSpanPx": 57,
+      "factor": 0.95,
+      "whiskGuardStartY": 58,
+      "whiskGuardEndY": 65,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets. Native support refinement: row86 shadedjaw, row87 actualdarkoutline,88neck. Source anchor corrected to87.5; same0.95factor FROM ORIGINAL, not cumulative."
+    },
+    {
+      "cell": 4,
+      "chin": {
+        "x": 135.5,
+        "y": 89.5
+      },
+      "estimatedSourceSpanPx": 60,
+      "factor": 0.95,
+      "whiskGuardStartY": 60,
+      "whiskGuardEndY": 67,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets."
+    },
+    {
+      "cell": 9,
+      "chin": {
+        "x": 130.5,
+        "y": 70.5
+      },
+      "estimatedSourceSpanPx": 55,
+      "factor": 0.9638078749598961,
+      "whiskGuardStartY": 41,
+      "whiskGuardEndY": 48,
+      "note": "Visible original central jaw/neck base frozen from native contour review; crown estimate only guides candidate size, not certification. Max5% one step from ORIGINAL, toward bandcentre; residuals stay OPEN. D60 cannot infer hidden actual crown or cover4brackets. Visible central jaw-outline two-column support130/131; adjacent132 is neck-side blend. Anchor moved to actual central jaw, no ratio-driven selection."
+    }
+  ]
+}

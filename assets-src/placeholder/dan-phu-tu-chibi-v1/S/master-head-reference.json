@@ -1,0 +1,42 @@
+{
+  "master": "../reference/S.corrected-master.png",
+  "masterSha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83",
+  "head": {
+    "crown": {
+      "x": 127.5,
+      "y": 11.5
+    },
+    "chin": {
+      "x": 128.5,
+      "y": 64.5
+    }
+  },
+  "manualUncertaintyPx": 1,
+  "method": "Manual semantic boundary EDGES before motion generation. Front attached cap first cream rim row12 at127/128, preceding row11 is brown elevated-bun seam; bun and jadepin excluded. Central chin outline row64 at128/129 follows skin support63; row65 is neck. Include genuine highlights/outlines. Coarse12.5 crown lead rejected after native trace. No master pixels edited, no automatic anatomy certification.",
+  "nativeSupport": {
+    "cap": {
+      "row11": {
+        "127": [67, 40, 26, 255],
+        "128": [74, 46, 29, 255]
+      },
+      "row12": {
+        "127": [239, 232, 206, 255],
+        "128": [243, 234, 211, 255]
+      }
+    },
+    "jaw": {
+      "row63": {
+        "128": [254, 249, 213, 255],
+        "129": [254, 250, 209, 255]
+      },
+      "row64": {
+        "128": [212, 142, 96, 255],
+        "129": [222, 153, 103, 255]
+      },
+      "row65": {
+        "128": [233, 167, 116, 255],
+        "129": [234, 169, 117, 255]
+      }
+    }
+  }
+}

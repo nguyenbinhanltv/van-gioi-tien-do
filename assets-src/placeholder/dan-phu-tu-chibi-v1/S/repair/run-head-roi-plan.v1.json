@@ -1,0 +1,122 @@
+{
+  "clip": "run",
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "output": "raw/run.head-roi.v1.png",
+  "mask": "repair/run.head-roi.v1.mask.png",
+  "provenance": "provenance/run.head-roi.v1.json",
+  "status": "Repair candidate plan, original source only. Approximate source cap spans choose a bounded <=5% step toward master; they are NOT certified crown evidence. Actual output needs project-rule maincap measurement and seam review.",
+  "targetHeadPx": 53.009433122794285,
+  "rows": [
+    {
+      "cell": 0,
+      "chin": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 1,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 2,
+      "chin": {
+        "x": 127.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 3,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 6,
+      "chin": {
+        "x": 130.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 7,
+      "chin": {
+        "x": 128.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 8,
+      "chin": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "factor": 0.95,
+      "estimatedSourceSpanPx": 56,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 9,
+      "chin": {
+        "x": 127.5,
+        "y": 70.5
+      },
+      "factor": 0.95,
+      "estimatedSourceSpanPx": 56,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 10,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 14,
+      "chin": {
+        "x": 126.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    },
+    {
+      "cell": 15,
+      "chin": {
+        "x": 125.5,
+        "y": 69.5
+      },
+      "factor": 0.9638078749598961,
+      "estimatedSourceSpanPx": 55,
+      "note": "Visible original central jaw/neck anchor frozen from native traces. Bun/maincap junction source span estimate is not a gate annotation. One bounded scale from ORIGINAL; never cumulative. Body/root/whisk unchanged; actual crown and all gates rechecked afterward."
+    }
+  ]
+}

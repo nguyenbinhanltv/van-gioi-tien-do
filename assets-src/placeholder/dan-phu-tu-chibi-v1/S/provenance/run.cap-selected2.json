@@ -1,0 +1,136 @@
+{
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "candidate": "raw/run-cap2.attempt1.png",
+  "candidateSha256": "13975f247ed2b2f3bea2bbcd7423763f2209198990de8bfd5ed2a708888aec67",
+  "out": "raw/run.cap-selected2.png",
+  "outSha256": "a115454a00b6e734475b25287b40d7f367ad7c35d26b9859ed195007f0cfe919",
+  "mask": "templates/run.cap-mask2.png",
+  "maskSha256": "9f89dc8b794520cfba37829c196182ce35586cb8f2654b3b5e5c51ba08c45d8c",
+  "method": "Exact pixel selection from AI output only inside explicit binary UPPER MAIN CAP polygons, logical source106..149 by13..32; all face/jaw/neck pixels retained. All other source RGBA including hidden RGB retained. Not a rescale or geometric output transform. D57 computes pre-edit alignment. Whisk excluded below left head edge; body below jaw joining area locked.",
+  "regions": [
+    {
+      "cell": 0,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3483
+    },
+    {
+      "cell": 1,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3545
+    },
+    {
+      "cell": 2,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3474
+    },
+    {
+      "cell": 3,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3565
+    },
+    {
+      "cell": 6,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3584
+    },
+    {
+      "cell": 7,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3698
+    },
+    {
+      "cell": 8,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3436
+    },
+    {
+      "cell": 9,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3522
+    },
+    {
+      "cell": 10,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3472
+    },
+    {
+      "cell": 13,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3697
+    },
+    {
+      "cell": 14,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3611
+    },
+    {
+      "cell": 15,
+      "normalizedSourcePolygon": [
+        [106, 13],
+        [149, 13],
+        [149, 32],
+        [106, 32]
+      ],
+      "changedBytes": 3680
+    }
+  ],
+  "changedBytes": 42767,
+  "status": "REJECTED by orchestrator: additional coil bands change locked hairstyle identity; shifted cream stripe cannot certify actual maincap crown. Raw/mask/preservation evidence retained as failed history; not active project source.",
+  "rejection": "2026-11-08 orchestrator guidance + independent style23 review: do not reinterpret these bands as skull summit."
+}

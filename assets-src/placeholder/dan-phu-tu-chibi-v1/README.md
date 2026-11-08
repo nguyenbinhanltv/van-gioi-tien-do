@@ -24,7 +24,13 @@ motion-calibration.json fixes logical scale1 across normalized sheets. Whole-she
 
 E/policy-notes.json records D41 free-pose declarations and D47 upright head-size evidence. Upright idle/walk/run/dash use D47; emote conservatively follows the current public upright default. Free meditation/fall/attacks/hit/hover/tribulation/cast release retain D41 declarations. None waives clipping, anatomy drift or true foot errors.
 
-qa-generated.ts runs native gates plus local projected-canvas guards; missing sheets cannot imply a full pass. All202 E frames pass the native hard gates with zero canvas loss. Run/dash head repairs and D47 evidence, attack3 fixed-root origins and rear-boot repair are resolved. The E full-source compatibility export and real Cocos Creator3.8.8 capture passed: all15 clips at2x,24 midpoint samples each; E/engine-gate.json records source/runtime/capture hashes. The24 soft foot/height findings, manual landmark uncertainty and mobile texture residency remain open in quality-backlog.json. SE/S/NE/N motion remain pending.
+qa-generated.ts runs native gates plus local projected-canvas guards; missing sheets cannot imply a full pass. All202 E frames pass the native hard gates with zero canvas loss. Run/dash head repairs and D47 evidence, attack3 fixed-root origins and rear-boot repair are resolved. The E full-source compatibility export and real Cocos Creator3.8.8 capture passed: all15 clips at2x,24 midpoint samples each; E/engine-gate.json records source/runtime/capture hashes. The24 soft foot/height findings, manual landmark uncertainty and mobile texture residency remain open in quality-backlog.json. SE merged in PR #180; S is in progress, followed by NE/N.
+
+## S motion checkpoint
+
+All15 S clips /202 source drawings are present. Rejected AI cap-band edits remain historical and are not active sources. The owner-authorized replacement is deterministic HEAD-ROI-only uniform scaling, at most5%, with Lanczos3 feather, locked chin/base, exact outside-mask RGBA and D57 registration. No whole-frame/body fit is introduced.
+
+Run and dash0/9 head checks pass. Dash2/4 still fail the unchanged head band after the maximum allowed original-source correction; they remain hard failures, not D60 bracket cases. D55 checks145 cells without head-reason skips:145 pass Lab,0 fail,57 separate D41 free-pose exemptions. All21 measured soft findings and the manual neutral-dash foot-depth warning remain open. S/README.md and S/head-roi-checkpoint-qa.json record the current state. S final export, real Cocos capture and direction PR remain pending.
 
 ## Provenance
 

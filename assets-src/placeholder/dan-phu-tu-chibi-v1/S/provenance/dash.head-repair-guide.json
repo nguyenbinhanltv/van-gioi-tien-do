@@ -1,0 +1,180 @@
+{
+  "kind": "INPUT-ONLY canonical head stencil; not final artwork or evidence",
+  "source": "raw/hit-dash.attempt1.png",
+  "master": "../reference/S.corrected-master.png",
+  "targetHead": "same unscaled53.009433px frontcap-to-chin as approved S master; source DPI uniformly1254/1024",
+  "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+  "placements": [
+    {
+      "cell": 6,
+      "alignedNeckAnchor": {
+        "x": 131.5,
+        "y": 70.5
+      },
+      "sourceNeckAnchor": {
+        "x": 786.8108940070251,
+        "y": 399.8349609375
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 314,
+        "x1": 839,
+        "y1": 405
+      }
+    },
+    {
+      "cell": 7,
+      "alignedNeckAnchor": {
+        "x": 130.5,
+        "y": 89.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1099.025763626669,
+        "y": 423.1025390625
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 314,
+        "x1": 1153,
+        "y1": 429
+      }
+    },
+    {
+      "cell": 8,
+      "alignedNeckAnchor": {
+        "x": 133.5,
+        "y": 86.5
+      },
+      "sourceNeckAnchor": {
+        "x": 162.25251900152668,
+        "y": 732.9287109375
+      },
+      "mask": {
+        "x0": 110,
+        "y0": 627,
+        "x1": 212,
+        "y1": 738
+      }
+    },
+    {
+      "cell": 9,
+      "alignedNeckAnchor": {
+        "x": 137.5,
+        "y": 86.5
+      },
+      "sourceNeckAnchor": {
+        "x": 477.3398884198982,
+        "y": 732.9287109375
+      },
+      "mask": {
+        "x0": 423,
+        "y0": 627,
+        "x1": 526,
+        "y1": 738
+      }
+    },
+    {
+      "cell": 10,
+      "alignedNeckAnchor": {
+        "x": 135.5,
+        "y": 89.5
+      },
+      "sourceNeckAnchor": {
+        "x": 788.0817517350987,
+        "y": 736.6025390625
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 627,
+        "x1": 839,
+        "y1": 742
+      }
+    },
+    {
+      "cell": 11,
+      "alignedNeckAnchor": {
+        "x": 134.5,
+        "y": 81.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1106.6892726743283,
+        "y": 726.8056640625
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 627,
+        "x1": 1153,
+        "y1": 732
+      }
+    },
+    {
+      "cell": 12,
+      "alignedNeckAnchor": {
+        "x": 131.5,
+        "y": 85.5
+      },
+      "sourceNeckAnchor": {
+        "x": 161.9400545325415,
+        "y": 1045.2041015625
+      },
+      "mask": {
+        "x0": 110,
+        "y0": 941,
+        "x1": 212,
+        "y1": 1051
+      }
+    },
+    {
+      "cell": 13,
+      "alignedNeckAnchor": {
+        "x": 131.5,
+        "y": 85.5
+      },
+      "sourceNeckAnchor": {
+        "x": 475.2021716770598,
+        "y": 1045.2041015625
+      },
+      "mask": {
+        "x0": 423,
+        "y0": 941,
+        "x1": 526,
+        "y1": 1051
+      }
+    },
+    {
+      "cell": 14,
+      "alignedNeckAnchor": {
+        "x": 129.5,
+        "y": 78.5
+      },
+      "sourceNeckAnchor": {
+        "x": 785.0291656533724,
+        "y": 1036.6318359375
+      },
+      "mask": {
+        "x0": 737,
+        "y0": 941,
+        "x1": 839,
+        "y1": 1042
+      }
+    },
+    {
+      "cell": 15,
+      "alignedNeckAnchor": {
+        "x": 131.5,
+        "y": 70.5
+      },
+      "sourceNeckAnchor": {
+        "x": 1100.3198598518122,
+        "y": 1026.8349609375
+      },
+      "mask": {
+        "x0": 1050,
+        "y0": 941,
+        "x1": 1153,
+        "y1": 1032
+      }
+    }
+  ],
+  "note": "Master head pasted ONLY into AI input guide. Actual output must be AI repainted, selected within reviewed mask with original source outside unchanged. No body/frame scaling. Old neck anchors held; D57 preserves pre-edit computed registration. Requested target is not proof of actual output size."
+}
