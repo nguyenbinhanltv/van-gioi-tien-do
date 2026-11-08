@@ -27,6 +27,16 @@ export const STREAM_LOAD_RADIUS = 1; // 3 × 3
 export const STREAM_PREFETCH_RADIUS = 2; // 5 × 5
 export const STREAM_KEEP_RADIUS = 3; // 7 × 7
 
+/**
+ * Camera zoom (D81): world scale under the fixed UI canvas. Default 1.5x, players zoom 1.0x-2.0x
+ * (mouse wheel / two-finger pinch). `CAMERA_ZOOM_STEP` = zoom change per wheel notch.
+ * The HUD / UI canvas is never scaled.
+ */
+export const CAMERA_ZOOM_DEFAULT = 1.5;
+export const CAMERA_ZOOM_MIN = 1.0;
+export const CAMERA_ZOOM_MAX = 2.0;
+export const CAMERA_ZOOM_STEP = 0.1;
+
 // ---------------------------------------------------------------- draw layers
 export enum Layer {
   L0_GROUND = 0,

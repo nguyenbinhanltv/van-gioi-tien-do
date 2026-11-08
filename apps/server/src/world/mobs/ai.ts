@@ -97,6 +97,8 @@ export function decide(
   tick: number,
   dtMs: number,
   rng: RngState,
+  /** the chase target holds threat (D83): it is exempt from `loseRadius`; the leash and a gone target still end the chase */
+  provoked = false,
 ): Decision {
   const dHome = hypot(body.i - body.homeI, body.j - body.homeJ);
   const walk = MAG_MAX;
@@ -105,7 +107,7 @@ export function decide(
 
   if (b.state === 'chase') {
     const t = playerById(b.target);
-    if (!t || dHome > p.leashRadius || hypot(t.i - body.i, t.j - body.j) > p.loseRadius) {
+    if (!t || dHome > p.leashRadius || (!provoked && hypot(t.i - body.i, t.j - body.j) > p.loseRadius)) {
       b = { ...b, state: 'return', target: 0 }; // fall through to the return branch below
     } else {
       const d = hypot(t.i - body.i, t.j - body.j);

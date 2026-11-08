@@ -167,7 +167,12 @@ export class Bootstrap extends Component {
     this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, this.chibi);
     this.bindPlayTestKeys();
     this.maybeScriptedWalk();
-    this.rig = new CameraRig(worldRoot, this.canvasUi);
+    // D81: default zoom 1.5x, wheel / pinch 1.0-2.0x; `?zoom=<n>` overrides the start value (clamped)
+    this.rig = new CameraRig(
+      worldRoot,
+      this.canvasUi,
+      new core.ZoomController(core.parseZoomParam(params.get('zoom'))),
+    );
     // P1 perf harness: `?npcs=N` wandering NPCs around the spawn (default 20 = the exit-criterion crowd, 0 = none)
     const npcParam = params.get('npcs');
     const npcCount = npcParam === null ? 20 : Math.max(0, Math.min(200, Math.floor(Number(npcParam)) || 0));
@@ -215,6 +220,7 @@ export class Bootstrap extends Component {
       l3Objects: this.ysort.count,
       chunks: this.world.chunkCount,
       npcs: this.npcs?.count ?? 0,
+      zoom: Math.round(this.rig.zoom * 100) / 100,
       chunksLoaded: this.world.loadedChunkCount,
       stream: this.world.streamStats,
     });
@@ -394,8 +400,12 @@ export class Bootstrap extends Component {
   /** Camera view in shared screen px (y down, 1x world px) for chunk streaming; centred on the player. */
   private cameraRect(): shared.Rect {
     const c = this.playerScreen();
-    const w = this.canvasUi.contentSize.width / this.rig.zoom;
-    const h = this.canvasUi.contentSize.height / this.rig.zoom;
+    // streamZoom = min(current, target): while zooming out the rect already covers the area about to be visible
+    const { w, h } = core.visibleWorldSize(
+      this.canvasUi.contentSize.width,
+      this.canvasUi.contentSize.height,
+      this.rig.streamZoom,
+    );
     return { x: c.x - w / 2, y: c.y - h / 2, width: w, height: h };
   }
 
@@ -432,7 +442,7 @@ export class Bootstrap extends Component {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
-    this.rig.follow(this.playerScreen());
+    this.rig.follow(this.playerScreen(), dt);
     this.ysort.sort();
     this.npcs?.update(dt);
     this.world.update(dt, this.cameraRect());
