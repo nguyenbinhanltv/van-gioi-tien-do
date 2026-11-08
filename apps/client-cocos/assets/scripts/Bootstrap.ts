@@ -16,6 +16,7 @@ import { shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
+import { RouteWalker } from './Route';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -57,6 +58,7 @@ export class Bootstrap extends Component {
   private world!: WorldView;
   private ysort!: YSortLayer;
   private npcs: NpcCrowd | null = null;
+  private route: RouteWalker | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -120,9 +122,12 @@ export class Bootstrap extends Component {
 
     const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
     const rand = rng(map.seed ?? 1);
+    // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
+    const PROP_RADIUS = 40;
     for (let n = 0; n < 140; n++) {
-      const i = Math.floor(rand() * map.width);
-      const j = Math.floor(rand() * map.height);
+      const i = Math.floor(spawn.i + (rand() * 2 - 1) * PROP_RADIUS);
+      const j = Math.floor(spawn.j + (rand() * 2 - 1) * PROP_RADIUS);
+      if (i < 0 || j < 0 || i >= map.width || j >= map.height) continue;
       const k = j * map.width + i;
       if (!this.world.isTerrainWalkable(i, j) || blocked[k] || (Math.abs(i - spawn.i) < 2 && Math.abs(j - spawn.j) < 2))
         continue;
@@ -152,6 +157,12 @@ export class Bootstrap extends Component {
         params.get('npcart') === 'placeholder' ? placeholderBody : chibiNpcBody,
       );
     }
+    // P1 streaming measurement: `?route=1` walks a scripted loop over the whole map (A* legs planned up front)
+    if (params.get('route') !== null) {
+      const grid = { width: map.width, height: map.height, isWalkable: walkable };
+      this.route = new RouteWalker(grid, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, Math.min(map.width, map.height) * 0.3);
+      console.log(`[vgtd] route planned: ${this.route.length} path points`);
+    }
     await this.world.warmup(this.cameraRect());
 
     // destination marker lives on L1 (decal), reused sprite
@@ -170,7 +181,10 @@ export class Bootstrap extends Component {
       l3Objects: this.ysort.count,
       chunks: this.world.chunkCount,
       npcs: this.npcs?.count ?? 0,
+      chunksLoaded: this.world.loadedChunkCount,
+      stream: this.world.streamStats,
     });
+    this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
     this.input = new InputBridge(
       this.rig,
@@ -287,6 +301,7 @@ export class Bootstrap extends Component {
       const len = Math.hypot(di, dj) || 1;
       frame = { ...frame, move: { i: di / len, j: dj / len }, magnitude: 1 };
     }
+    if (this.route) frame = { ...frame, ...this.route.step(this.player.pos) };
     this.player.update(dt, frame);
     this.rig.follow(this.playerScreen());
     this.ysort.sort();

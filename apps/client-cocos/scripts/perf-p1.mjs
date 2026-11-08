@@ -1,7 +1,11 @@
 // P1 exit-criteria measurement on Web (docs/10-mvp-scope.md section 12): draw calls, RAM, FPS with 20 NPC, initial package size.
 //
 //   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--npcart chibi|placeholder] [--tier low|medium|high] [--seconds 20] [--warmup 6]
-//                                      [--out <dir>] [--gate-fps]
+//                                      [--route] [--out <dir>] [--gate-fps]
+//
+// --route walks a scripted loop over the whole multi-chunk map (`?route=1`, default 90 s) and adds streaming numbers:
+// chunk node-tree build cost, chunks built / unloaded, frames with unresolved visible chunks, worst frame, hitches > 50 / 100 ms,
+// and draw calls / RAM / chunk count over the walk.
 //
 // 1. (unless --skip-build) builds web-mobile (scripts/build-web.mjs, needs the Cocos editor, see README)
 // 2. serves it and records every file the page requests until the world is playable = the initial package (raw and gzip)
@@ -36,7 +40,8 @@ const MIN_FPS = 30;
 const npcs = Number(opt('npcs', 20));
 const tier = opt('tier', 'medium');
 const npcart = opt('npcart', 'chibi'); // chibi = real armatures (6 classes), placeholder = tinted sprite
-const seconds = Number(opt('seconds', 20));
+const route = flag('route');
+const seconds = Number(opt('seconds', route ? 90 : 20));
 const warmup = Number(opt('warmup', 6));
 const out = resolve(opt('out', join(tmpdir(), 'vgtd-perf')));
 if (!Number.isInteger(npcs) || npcs < 0) throw new Error('--npcs must be a non-negative integer');
@@ -123,19 +128,21 @@ const browser = await puppeteer.launch({
     '--enable-unsafe-swiftshader',
     '--ignore-gpu-blocklist',
     '--enable-webgl',
+    '--js-flags=--expose-gc', // lets the route run measure the RETAINED heap (after a forced GC) at start and end
     '--enable-precise-memory-info', // exact performance.memory.usedJSHeapSize (default is bucketed)
   ],
 });
 let failures = 0;
 const samples = [];
 let meta = {};
+let retained = null; // { startMB, endMB } heap after a forced GC (route runs)
 try {
   const page = await browser.newPage();
   page.on('pageerror', (e) => {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}`;
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}`;
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -144,6 +151,12 @@ try {
   });
   console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
   await sleep(warmup * 1000);
+  const heapAfterGc = async () => {
+    await page.evaluate('window.gc && window.gc()');
+    return (await page.metrics()).JSHeapUsedSize / MB;
+  };
+  const retainedStart = route ? await heapAfterGc() : 0;
+  await page.evaluate('window.__vgtdPerfReset && window.__vgtdPerfReset()'); // peaks / counters count from here
   const t0 = Date.now();
   while (Date.now() - t0 < seconds * 1000) {
     const s = await page.evaluate('JSON.parse(JSON.stringify(window.__vgtdPerf))');
@@ -151,6 +164,7 @@ try {
     samples.push({ ...s, cdpHeapMB: m.JSHeapUsedSize / MB });
     await sleep(500);
   }
+  if (route) retained = { startMB: retainedStart, endMB: await heapAfterGc() };
   meta = await page.evaluate(() => ({ ua: navigator.userAgent, dpr: devicePixelRatio }));
   await sleep(200);
 } finally {
@@ -172,11 +186,37 @@ fetched.sort((a, b) => b.bytes - a.bytes);
 const col = (k) => samples.map((s) => s[k]).filter((v) => typeof v === 'number');
 const heap = col('jsHeapMB').length ? col('jsHeapMB') : col('cdpHeapMB');
 const ram = samples.map((s) => (s.jsHeapMB ?? s.cdpHeapMB) + s.textureMB);
+function streaming() {
+  const last = samples[samples.length - 1];
+  const q = Math.max(1, Math.floor(samples.length / 4));
+  const avg = (a) => a.reduce((x, y) => x + y, 0) / a.length;
+  return {
+    chunksBuilt: last.chunksBuilt,
+    chunksUnloaded: last.chunksUnloaded,
+    chunkBuildMsAvg: last.chunkBuildMsAvg,
+    chunkBuildMsMax: last.chunkBuildMsMax,
+    chunkStepMsMax: last.chunkStepMsMax,
+    notReadyUpdates: last.notReadyUpdates,
+    frameMsMax: last.frameMsMax,
+    hitches50: last.hitches50,
+    hitches100: last.hitches100,
+    chunksRenderedMin: Math.min(...col('chunks')),
+    chunksRenderedMax: Math.max(...col('chunks')),
+    chunksDataMax: Math.max(...col('chunksLoaded')),
+    nodesMin: Math.min(...col('nodes')),
+    nodesMax: Math.max(...col('nodes')),
+    // heap trend: average of the first vs the last quarter of the walk (a leak shows as steady growth after eviction)
+    heapRetainedAfterGcMB: retained,
+    heapMBFirstQuarter: avg(heap.slice(0, q)),
+    heapMBLastQuarter: avg(heap.slice(-q)),
+  };
+}
 const result = {
   when: new Date().toISOString(),
   setup: {
     npcs,
     npcart,
+    route,
     tier,
     seconds,
     warmup,
@@ -203,6 +243,7 @@ const result = {
     packageMBGzip: gzipBytes / MB,
     buildOutputMB: buildRaw / MB,
   },
+  streaming: route ? streaming() : undefined,
   fetchedFiles: fetched.length,
   largestFetched: fetched.slice(0, 8).map((b) => ({ ...b, MB: +(b.bytes / MB).toFixed(2) })),
   buildOutputByDirMB: Object.fromEntries(
@@ -245,6 +286,17 @@ console.log(
   `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
     `heap ${m.jsHeapMBMax.toFixed(1)} MB, tex ${m.textureMBMax.toFixed(1)} MB, nodes ${m.nodesMax}, chunks ${m.chunksMax}, loaded ${m.loadedMB.toFixed(2)} MB, fetched ${fetched.length} files, whole build dir ${m.buildOutputMB.toFixed(0)} MB (lazy resources incl.)`,
 );
+if (result.streaming) {
+  const t = result.streaming;
+  console.log(
+    `  stream tree builds ${t.chunksBuilt}, tree drops ${t.chunksUnloaded}, rendered ${t.chunksRenderedMin}..${t.chunksRenderedMax}, data held max ${t.chunksDataMax}; ` +
+      `chunk build (whole tree, spread over frames) avg ${t.chunkBuildMsAvg.toFixed(1)} / max ${t.chunkBuildMsMax.toFixed(1)} ms, worst per-frame slice ${t.chunkStepMsMax.toFixed(1)} ms; view without ground ${t.notReadyUpdates} syncs`,
+  );
+  console.log(
+    `  stream worst frame ${t.frameMsMax.toFixed(0)} ms, frames >50 ms: ${t.hitches50}, >100 ms: ${t.hitches100}; ` +
+      `nodes ${t.nodesMin}..${t.nodesMax}; heap first/last quarter ${t.heapMBFirstQuarter.toFixed(1)} / ${t.heapMBLastQuarter.toFixed(1)} MB, retained after GC ${t.heapRetainedAfterGcMB.startMB.toFixed(1)} -> ${t.heapRetainedAfterGcMB.endMB.toFixed(1)} MB`,
+  );
+}
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'p1-perf.json'), JSON.stringify(result, null, 2), 'utf8');
 console.log(`wrote ${join(out, 'p1-perf.json')}`);
