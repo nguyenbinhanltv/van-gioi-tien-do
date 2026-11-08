@@ -2,7 +2,7 @@
   "gate": "D55 B report-only",
   "reviewer": "art-worker",
   "review": "Full selected source contact sheets reviewed for face/head, fan hand, mirror swaps and costume continuity. Dynamic poses retained; flagged continuity polish remains open in quality-backlog.",
-  "projectSha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e",
+  "projectSha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123",
   "findings": [
     {
       "gate": "similarity",
@@ -404,5 +404,7 @@
       "limit": 0.45,
       "message": "review-by-eye: temporal 10->11; head 0.3675, torso 0.3638; centroid-fallback; D41 pose pair"
     }
-  ]
+  ],
+  "visualReviewProjectSha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e",
+  "metadataOnlyFollowup": "No drawings/registration changed; removed noop inheritance from run0."
 }

@@ -414,7 +414,7 @@
         "sourceSha256": "c16801438f1741e4afeb7e9bb91fb032f4abdc7b1a2ace3db0b8f4c7db17f15d",
         "mask": "repair/run.head-edit-mask.png",
         "maskSha256": "b105351fd7fd2b1cc34621519be34a95fe0fac005d5cf5787044e3c522eb655c",
-        "cells": [0, 1, 12]
+        "cells": [1, 12]
       }
     },
     {

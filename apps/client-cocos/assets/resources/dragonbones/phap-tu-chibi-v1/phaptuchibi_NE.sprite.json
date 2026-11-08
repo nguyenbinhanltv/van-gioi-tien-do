@@ -912,7 +912,6 @@
         "mask": "repair/run.head-edit-mask.png",
         "maskSha256": "b105351fd7fd2b1cc34621519be34a95fe0fac005d5cf5787044e3c522eb655c",
         "cells": [
-          0,
           1,
           12
         ]
@@ -1248,21 +1247,7 @@
             "soleY": 243
           },
           "dx": 12.998967471998895,
-          "dy": 14.947826086956525,
-          "inheritedRegistration": {
-            "kind": "inherited-registration",
-            "sourceSha256": "c16801438f1741e4afeb7e9bb91fb032f4abdc7b1a2ace3db0b8f4c7db17f15d",
-            "maskSha256": "b105351fd7fd2b1cc34621519be34a95fe0fac005d5cf5787044e3c522eb655c",
-            "editedSha256": "06b41e1c64c1799814a4278db47151764ee80aba571320dde2a0167a5f0f085d",
-            "sourceCell": 0,
-            "outsidePixels": 65536,
-            "origin": {
-              "x": 122.01696297504485,
-              "y": 229
-            },
-            "scale": 0.9478260869565217,
-            "vertical": "keep"
-          }
+          "dy": 14.947826086956525
         },
         {
           "pre": {

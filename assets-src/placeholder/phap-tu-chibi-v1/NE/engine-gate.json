@@ -283,5 +283,11 @@
     "failHard": 0
   },
   "status": "passed",
-  "note": "Full-source compatibility D41. All five rendered inputs remain byte-identical to exported source throughout capture. D57 verified source/mask; D53/D56 evidence; no per-frame fitting. Nineteen foot findings and manual temporal/channel polish remain open."
+  "note": "Full-source compatibility D41. All five rendered inputs remain byte-identical to exported source throughout capture. D57 verified source/mask; D53/D56 evidence; no per-frame fitting. Nineteen foot findings and manual temporal/channel polish remain open.",
+  "sourceReviewFollowup": {
+    "projectSha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123",
+    "change": "Removed unchanged run0 from inherited-registration; only run1/12 are edited and declared.",
+    "renderAssetsUnchanged": true,
+    "existingCaptureStillApplicable": true
+  }
 }

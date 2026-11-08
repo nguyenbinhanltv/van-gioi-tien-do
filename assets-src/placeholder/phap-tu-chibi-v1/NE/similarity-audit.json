@@ -1,9 +1,9 @@
 {
   "format": "vgtd-head-reason-similarity-audit",
   "version": 1,
-  "utc": "2026-11-08T04:16:59.202Z",
-  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/phap-tu-chibi-v1/NE --out D:/Temp/phap-NE-D55-final.json",
-  "gitHead": "496ef9d3e8265a413b10e4b8355c793e40ecd0bc",
+  "utc": "2026-11-08T04:39:48.965Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/phap-tu-chibi-v1/NE --out D:/Temp/phap-NE-review-D55.json",
+  "gitHead": "d1f9f5d18579d1e3f65263676f0c5325d4e31abf",
   "gateSourceSha256": "20daba7a2615f7c02c987f85040fb4ac845f8f948e73119cee3689bdd72bde4c",
   "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
   "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
@@ -941,7 +941,7 @@
   "scannedProjects": [
     {
       "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
-      "sha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e"
+      "sha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123"
     }
   ],
   "totals": {
@@ -1015,7 +1015,7 @@
         },
         {
           "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/project.json",
-          "sha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e"
+          "sha256": "08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123"
         },
         {
           "file": "assets-src/placeholder/phap-tu-chibi-v1/NE/quality-backlog.json",

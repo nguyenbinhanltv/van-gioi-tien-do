@@ -4,7 +4,7 @@
 
 Locked NE master remains unchanged (SHA256 `64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4`). D53 uses crown(140,16), skull breadth52 and visible right acromion(156,79), vertical63px; left shoulder is hidden by fan/hair/ribbon. Dynamic dash1-8 use approved D56 breadth-only evidence. All required landmarks are measured on aligned256px cells; no projected anatomy or per-frame fitting.
 
-D57 pins run0/1/12 registration to `repair/run.pre-edit.png`, verifies native RGBA outside `repair/run.head-edit-mask.png`, and records source/mask hashes in project.json and the runtime contract. Run1 uses masked AIattempt9 (breadth53/span64), run12 attempt7 (breadth52/span62); unselected attempts remain for provenance.
+D57 pins run1/12 registration to `repair/run.pre-edit.png`, verifies native RGBA outside `repair/run.head-edit-mask.png`, and records source/mask hashes in project.json and the runtime contract. Run1 uses masked AIattempt9 (breadth53/span64), run12 attempt7 (breadth52/span62); unselected attempts remain for provenance.
 
 Official source QA:0 hard,0 new soft,0 regressions,19 accepted open foot findings,220 INFO. Channel right-hand pose and foot polish remain explicitly open in quality-backlog. D54 rerun with D55:20 newly checked PASS,0 FAIL,0 unmeasured;132 D41 exemptions are separate, not passes. `similarity-audit.json` pins inputs. Real Cocos Creator3.8.8 2x capture passed all15 clips with24 midpoint samples each; engine-gate.json pins the five rendered files and exact24Hz clock.
 
@@ -14,7 +14,7 @@ Official D45 guides are reproducible with:
 npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/NE/project.json --out <fresh-temp-directory>
 ```
 
-Input project SHA256: `27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e`. Layer-inputs.json SHA256: `be3f59633ea6cf434cffdd54d28f9b1d9d2832f001e6323254de714680443123`. The manifest pins all source sheets and clip mappings. No derived guide PNGs are committed.
+Input project SHA256: `08dae46466fe85b7a79239ef9c1e8d0c11a04e3e7463af64c0680a7c99658123`. Layer-inputs.json SHA256: `1d29c7ac0cc538a3e3018f9219dce2fa3bb77ce166962d0f39b3b6ff1c5f3852`. The manifest pins all source sheets and clip mappings. No derived guide PNGs are committed.
 
 | Guide              | SHA256                                                           |
 | ------------------ | ---------------------------------------------------------------- |
@@ -32,3 +32,5 @@ Input project SHA256: `27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200
 | source-11.full.png | 68b367044cf8154c0176762d829c46f214676d79c1c962faa0aad42087a2d06c |
 | source-12.full.png | cc3532b250257ddec45c2a3785256b45a78464fd59a90caa2a7c7ab6700fbd81 |
 | source-13.full.png | f9949b7a9658d1eb2b04b59375b627f4c6af4457d232c4627dc90d39e52f7f84 |
+
+Review follow-up: run0 is byte-identical to the frozen pre-edit source and uses ordinary registration; only edited run1/12 declare D57 inheritance. The contract was rebuilt; all five render inputs and14 guide PNG hashes remain identical, so the recorded Cocos capture still applies. engine-gate.json preserves the original capture project hash and records this metadata-only follow-up separately.
