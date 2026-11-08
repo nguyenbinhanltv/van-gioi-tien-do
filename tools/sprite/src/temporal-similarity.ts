@@ -1,5 +1,6 @@
 /** D55 diagnostic continuity; no per-pair threshold or pose exemption is invented here. */
 import type { Image } from '@vgtd/rig';
+import type { HeadLandmarks } from './head-evidence.js';
 import { registeredNativeSsim } from './native-similarity.js';
 /** D55 diagnostic review threshold, never a hard failure. */
 export const TEMPORAL_REVIEW_MIN = 0.45;
@@ -15,11 +16,23 @@ export function measureTemporalSimilarity(
   second: Image,
   options: {
     masterHeight: number;
+    masterHead?: HeadLandmarks;
     firstHead?: SimilarityFrameHead;
     secondHead?: SimilarityFrameHead;
   },
 ) {
   const breadth = options.firstHead?.kind === 'rear-breadth-only' || options.secondHead?.kind === 'rear-breadth-only';
+  const span =
+    options.masterHead?.kind === 'rear-span-only' ||
+    options.firstHead?.kind === 'rear-span-only' ||
+    options.secondHead?.kind === 'rear-span-only';
+  if (
+    span &&
+    [options.firstHead, options.secondHead].some(
+      (h) => h && h.kind !== 'rear-span-only' && h.kind !== 'rear-skull-base',
+    )
+  )
+    throw new Error('D59 temporal pair requires D59 or D48 on each annotated side');
   if (
     breadth &&
     [options.firstHead, options.secondHead].some(
@@ -32,7 +45,7 @@ export function measureTemporalSimilarity(
         first,
         options.firstHead,
         options.masterHeight,
-        breadth ? 'rear-breadth-window' : undefined,
+        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
       )
     : undefined;
   const b = options.secondHead
@@ -40,10 +53,10 @@ export function measureTemporalSimilarity(
         second,
         options.secondHead,
         options.masterHeight,
-        breadth ? 'rear-breadth-window' : undefined,
+        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
       )
     : undefined;
-  if (a && b && (a.headKind !== b.headKind || (!breadth && a.evidenceKind !== b.evidenceKind)))
+  if (a && b && (a.headKind !== b.headKind || (!breadth && !span && a.evidenceKind !== b.evidenceKind)))
     throw new Error('temporal comparison requires the same head convention');
   const m = a && b ? a : legacySimilarityRegions(first);
   const f = a && b ? b : legacySimilarityRegions(second);

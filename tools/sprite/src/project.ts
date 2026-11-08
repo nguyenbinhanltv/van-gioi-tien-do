@@ -219,6 +219,7 @@ export function runProject(
     throw new Error('rear ornament master is allowed only for N direction projects');
   if (
     (project.masterHead?.kind === 'rear-skull-base' ||
+      project.masterHead?.kind === 'rear-span-only' ||
       project.masterHead?.kind === 'rear-crown-shoulder' ||
       project.masterHead?.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(project.direction)

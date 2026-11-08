@@ -580,3 +580,26 @@ For a skull-only correction, a clip may declare:
 Paths are relative to project.json. Source, edited sheet and mask must have identical native dimensions. The explicit mask is opaque binary grayscale (alpha 255): white permits edits; black locks all four original PNG RGBA bytes, including invisible RGB. The tool verifies SHA256 and byte identity outside the mask across the **entire sheet**, before DPI/key/despill/palette operations; mismatches throw before export and cannot be waived. Each inherited cell must retain locked pixels (an unchanged all-black cell is valid). Cells are clip-local; grouped sheetSelection maps them to source cells.
 
 The tool prepares the reference with the same settings, rejects changed preparation/crop, derives its default centroid/vertical registration itself, and uses that origin and fixed scale for the edited cell. Automatic calibration uses pre-edit measurements for inherited cells. Variants/authoredOrigins cannot be combined with this mechanism. This computed origin is registration, not anatomical pelvis evidence. Contract records and batch review include source/mask/edited SHA256, global source cell, locked pixel count, computed logical cropped origin, vertical policy and scale. Head, D54/D55 similarity, contacts, canvas and all other gates still inspect the edited aligned pixels. Preserve the reviewed mask, source and full edit provenance.
+
+### D59: a skull-breadth endpoint is genuinely occluded
+
+NE/N `rear-span-only` measures the Euclidean crown-to-visible-nape span against the locked
+same-direction master (unchanged ±3%). Both master and frame must declare the same concrete
+`occluder` and `occludedSide` (`left` or `right`); the frame also needs a reviewed note. Supplying
+breadth endpoints is invalid for this kind: use D48 when both endpoints are visible. Never replace
+an occluded contour with an internal hair seam or edit the approved master to expose it.
+
+Select the highest row containing a contiguous run of at least two attached main-cap pixels
+(alpha >=128) that does not touch the bun/gold tie/ribbon; crown x is the run midpoint. This is a
+manual semantic source-review convention, not an alpha-only automatic detector. Keep the selection
+overlay and source hash before computing ratios. D59 never exempts Lab identity, canvas, or foot QA.
+For a D59 master, frames may use D59 or plain D48 when both breadth endpoints become visible.
+Compare the same crown-to-nape span ±3%; validate D48 endpoints as visible alpha>=128 inside
+the crown/nape vertical range and within one span horizontally of their midpoint. This geometry
+check does not certify semantic contour ownership; source review remains required. Report frame
+breadth as INFO without a master breadth or ratio. The reverse pairing and other kinds remain invalid.
+
+For Lab identity, D59 masters and every paired frame (including D48) use the same square window:
+side length is the Euclidean crown-to-nape span, centred on the endpoint midpoint, expanded 8%
+total in each dimension. This is a window definition, never inferred breadth evidence. Torso keeps
+the D55 rule. D59/D48 temporal pairs use this same window convention.
