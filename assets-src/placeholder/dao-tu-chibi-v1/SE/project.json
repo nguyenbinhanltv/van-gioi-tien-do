@@ -1,0 +1,3526 @@
+{
+  "character": "dao-tu-chibi-v1",
+  "direction": "SE",
+  "stem": "daotuchibi",
+  "master": "../reference/SE.master.png",
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 123.59825327510917,
+      "y": 15.056768558951962
+    },
+    "chin": {
+      "x": 132.0873362445415,
+      "y": 62.8471615720524
+    },
+    "breadth": {
+      "left": {
+        "x": 109.76419213973799,
+        "y": 38.32314410480349
+      },
+      "right": {
+        "x": 145.6069868995633,
+        "y": 38.32314410480349
+      }
+    }
+  },
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "palette": {
+    "lock": true
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.png",
+      "manifest": "templates/idle.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell0 (idle local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell1 (idle local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell2 (idle local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell3 (idle local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell4 (idle local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell5 (idle local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell6 (idle local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell7 (idle local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell8 (idle local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell9 (idle local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell10 (idle local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell11 (idle local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell12 (idle local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell13 (idle local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell14 (idle local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png source cell15 (idle local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "4": "secondary-overhang",
+        "5": "secondary-overhang",
+        "6": "secondary-overhang",
+        "7": "secondary-overhang",
+        "8": "secondary-overhang",
+        "9": "secondary-overhang",
+        "10": "secondary-overhang",
+        "11": "secondary-overhang",
+        "12": "secondary-overhang",
+        "13": "secondary-overhang",
+        "14": "secondary-overhang",
+        "15": "secondary-overhang"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell0: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell1: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 23
+          },
+          "chin": {
+            "x": 140,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 48
+            },
+            "right": {
+              "x": 152,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell2: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 22
+          },
+          "chin": {
+            "x": 140,
+            "y": 70
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 47
+            },
+            "right": {
+              "x": 152,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell3: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 22
+          },
+          "chin": {
+            "x": 140,
+            "y": 70
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 47
+            },
+            "right": {
+              "x": 152,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell4: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 21
+          },
+          "chin": {
+            "x": 141,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 117,
+              "y": 46
+            },
+            "right": {
+              "x": 153,
+              "y": 46
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell5: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 21
+          },
+          "chin": {
+            "x": 141,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 117,
+              "y": 46
+            },
+            "right": {
+              "x": 153,
+              "y": 46
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell6: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 21
+          },
+          "chin": {
+            "x": 141,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 117,
+              "y": 46
+            },
+            "right": {
+              "x": 153,
+              "y": 46
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell7: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 22
+          },
+          "chin": {
+            "x": 141,
+            "y": 70
+          },
+          "breadth": {
+            "left": {
+              "x": 117,
+              "y": 47
+            },
+            "right": {
+              "x": 153,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell8: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 22
+          },
+          "chin": {
+            "x": 140,
+            "y": 70
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 47
+            },
+            "right": {
+              "x": 152,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell9: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 23
+          },
+          "chin": {
+            "x": 140,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 48
+            },
+            "right": {
+              "x": 152,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell10: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell11: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell12: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell13: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell14: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 48
+            },
+            "right": {
+              "x": 151,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE idle cell15: main attached skull cap and visible chin/breadth exclude swept loose hair and shoulder blade; fixed stance and breathing offset retained, no frame fitting."
+        }
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "seated: cross-legged breathing, unchanged skull and body part size",
+        "1": "seated: cross-legged breathing, unchanged skull and body part size",
+        "2": "seated: cross-legged breathing, unchanged skull and body part size",
+        "3": "seated: cross-legged breathing, unchanged skull and body part size",
+        "4": "seated: cross-legged breathing, unchanged skull and body part size",
+        "5": "seated: cross-legged breathing, unchanged skull and body part size",
+        "6": "seated: cross-legged breathing, unchanged skull and body part size",
+        "7": "seated: cross-legged breathing, unchanged skull and body part size",
+        "8": "seated: cross-legged breathing, unchanged skull and body part size",
+        "9": "seated: cross-legged breathing, unchanged skull and body part size",
+        "10": "seated: cross-legged breathing, unchanged skull and body part size",
+        "11": "seated: cross-legged breathing, unchanged skull and body part size",
+        "12": "seated: cross-legged breathing, unchanged skull and body part size",
+        "13": "seated: cross-legged breathing, unchanged skull and body part size",
+        "14": "seated: cross-legged breathing, unchanged skull and body part size",
+        "15": "seated: cross-legged breathing, unchanged skull and body part size"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell0 (meditate local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell1 (meditate local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell2 (meditate local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell3 (meditate local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell4 (meditate local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell5 (meditate local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell6 (meditate local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell7 (meditate local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell8 (meditate local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell9 (meditate local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell10 (meditate local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell11 (meditate local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell12 (meditate local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell13 (meditate local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell14 (meditate local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/meditate.png source cell15 (meditate local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.png",
+      "manifest": "templates/walk.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell0 (walk local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell1 (walk local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell2 (walk local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell3 (walk local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell4 (walk local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell5 (walk local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell6 (walk local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell7 (walk local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell8 (walk local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell9 (walk local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell10 (walk local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell11 (walk local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell12 (walk local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell13 (walk local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell14 (walk local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png source cell15 (walk local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell0 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell1 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell2 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell3 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell4 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 128,
+            "y": 24
+          },
+          "chin": {
+            "x": 137,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 48
+            },
+            "right": {
+              "x": 150,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell5 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 128,
+            "y": 24
+          },
+          "chin": {
+            "x": 137,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 48
+            },
+            "right": {
+              "x": 150,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell6 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 128,
+            "y": 24
+          },
+          "chin": {
+            "x": 137,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 48
+            },
+            "right": {
+              "x": 150,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell7 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell8 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell9 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 24
+          },
+          "chin": {
+            "x": 136,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 48
+            },
+            "right": {
+              "x": 149,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell10 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell11 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell12 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell13 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell14 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 24
+          },
+          "chin": {
+            "x": 135,
+            "y": 72
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 48
+            },
+            "right": {
+              "x": 148,
+              "y": 48
+            }
+          },
+          "note": "Manually reviewed aligned SE walk cell15 in full coordinate grid and enlarged head crop; attached cap/chin/breadth exclude swept loose strands. Diagonal stride and small torso shift preserve skull scale; no frame fitting."
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.head-corrected.png",
+      "manifest": "templates/run.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell0 (run local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell1 (run local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell2 (run local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell3 (run local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell4 (run local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell5 (run local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell6 (run local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell7 (run local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell8 (run local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell9 (run local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell10 (run local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell11 (run local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell12 (run local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell13 (run local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell14 (run local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.head-corrected.png source cell15 (run local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 134,
+            "y": 29
+          },
+          "chin": {
+            "x": 152,
+            "y": 74
+          },
+          "breadth": {
+            "left": {
+              "x": 128,
+              "y": 50
+            },
+            "right": {
+              "x": 164,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed run cell0 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 29
+          },
+          "chin": {
+            "x": 154,
+            "y": 74
+          },
+          "breadth": {
+            "left": {
+              "x": 130,
+              "y": 50
+            },
+            "right": {
+              "x": 166,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed run cell1 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 138,
+            "y": 30
+          },
+          "chin": {
+            "x": 155,
+            "y": 75
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 51
+            },
+            "right": {
+              "x": 168,
+              "y": 51
+            }
+          },
+          "note": "Manually reviewed run cell2 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 29
+          },
+          "chin": {
+            "x": 156,
+            "y": 74
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 50
+            },
+            "right": {
+              "x": 169,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed run cell3 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 137,
+            "y": 33
+          },
+          "chin": {
+            "x": 155,
+            "y": 78
+          },
+          "breadth": {
+            "left": {
+              "x": 131,
+              "y": 54
+            },
+            "right": {
+              "x": 167,
+              "y": 54
+            }
+          },
+          "note": "Manually reviewed run cell4 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 32
+          },
+          "chin": {
+            "x": 157,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 53
+            },
+            "right": {
+              "x": 169,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell5 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 138,
+            "y": 32
+          },
+          "chin": {
+            "x": 156,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 53
+            },
+            "right": {
+              "x": 168,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell6 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 32
+          },
+          "chin": {
+            "x": 157,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 53
+            },
+            "right": {
+              "x": 169,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell7 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 137,
+            "y": 29
+          },
+          "chin": {
+            "x": 155,
+            "y": 74
+          },
+          "breadth": {
+            "left": {
+              "x": 131,
+              "y": 50
+            },
+            "right": {
+              "x": 167,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed run cell8 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 138,
+            "y": 29
+          },
+          "chin": {
+            "x": 156,
+            "y": 74
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 50
+            },
+            "right": {
+              "x": 168,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed run cell9 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 138,
+            "y": 30
+          },
+          "chin": {
+            "x": 156,
+            "y": 75
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 51
+            },
+            "right": {
+              "x": 168,
+              "y": 51
+            }
+          },
+          "note": "Manually reviewed run cell10 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 30
+          },
+          "chin": {
+            "x": 157,
+            "y": 75
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 51
+            },
+            "right": {
+              "x": 169,
+              "y": 51
+            }
+          },
+          "note": "Manually reviewed run cell11 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 138,
+            "y": 32
+          },
+          "chin": {
+            "x": 156,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 132,
+              "y": 53
+            },
+            "right": {
+              "x": 168,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell12 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 32
+          },
+          "chin": {
+            "x": 157,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 53
+            },
+            "right": {
+              "x": 169,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell13 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 32
+          },
+          "chin": {
+            "x": 157,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 133,
+              "y": 53
+            },
+            "right": {
+              "x": 169,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell14 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 140,
+            "y": 32
+          },
+          "chin": {
+            "x": 158,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 134,
+              "y": 53
+            },
+            "right": {
+              "x": 170,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed run cell15 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell0 (sword_fly local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell1 (sword_fly local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell2 (sword_fly local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell3 (sword_fly local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell4 (sword_fly local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell5 (sword_fly local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell6 (sword_fly local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell7 (sword_fly local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell8 (sword_fly local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell9 (sword_fly local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell10 (sword_fly local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png source cell11 (sword_fly local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "1": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "2": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "3": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "4": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "5": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "6": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "7": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "8": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "9": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "10": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable",
+        "11": "airborne: rides own broad dao with knee flex; fixed standing ROI is not comparable"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.png",
+      "manifest": "templates/attack.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "1": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "2": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "3": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "4": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "5": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "6": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "7": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "8": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "9": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "10": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "11": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "12": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size",
+        "13": "lunge: heavy horizontal dao cut, hip turn and recovery at original anatomy size"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell0 (attack local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell1 (attack local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell2 (attack local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell3 (attack local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell4 (attack local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell5 (attack local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell6 (attack local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell7 (attack local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell8 (attack local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell9 (attack local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell10 (attack local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell11 (attack local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell12 (attack local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png source cell13 (attack local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "manifest": "templates/attack_2.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell0 (attack_2 local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell1 (attack_2 local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell2 (attack_2 local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell3 (attack_2 local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell4 (attack_2 local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell5 (attack_2 local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell6 (attack_2 local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell7 (attack_2 local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell8 (attack_2 local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell9 (attack_2 local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell10 (attack_2 local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell11 (attack_2 local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell12 (attack_2 local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.clearance-repaired.png source cell13 (attack_2 local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "1": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "2": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "3": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "4": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "5": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "6": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "7": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "8": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "9": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "10": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "11": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "12": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained",
+        "13": "lunge: heavy sweeping dao windup, raised arm and torso pivot move face/torso outside standing ROIs; anatomical unit retained"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell0 (attack_3 local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell1 (attack_3 local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell2 (attack_3 local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell3 (attack_3 local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell4 (attack_3 local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell5 (attack_3 local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell6 (attack_3 local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell7 (attack_3 local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell8 (attack_3 local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell9 (attack_3 local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell10 (attack_3 local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell11 (attack_3 local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell12 (attack_3 local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png source cell13 (attack_3 local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "1": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "2": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "3": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "4": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "5": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "6": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "7": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "8": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "9": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "10": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "11": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "12": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained",
+        "13": "kneeling: overhead ground strike and recovery change torso angle and ground contact; anatomical unit retained"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.png",
+      "manifest": "templates/cast.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell0 (cast local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell1 (cast local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell2 (cast local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell3 (cast local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell4 (cast local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell5 (cast local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell6 (cast local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell7 (cast local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell8 (cast local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell9 (cast local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell10 (cast local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell11 (cast local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell12 (cast local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell13 (cast local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell14 (cast local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png source cell15 (cast local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "1": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "2": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "3": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "4": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "5": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "6": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "7": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "8": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "9": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "10": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "11": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "12": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "13": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "14": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained",
+        "15": "posture: chest lift and rage roar move face from neutral standing ROI; anatomical unit retained"
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.png",
+      "manifest": "templates/channel.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell0 (channel local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell1 (channel local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell2 (channel local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell3 (channel local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell4 (channel local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell5 (channel local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell6 (channel local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell7 (channel local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell8 (channel local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell9 (channel local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell10 (channel local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png source cell11 (channel local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "1": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "2": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "3": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "4": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "5": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "6": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "7": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "8": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "9": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "10": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable",
+        "11": "spin: full torso/head turn during broad dao channel; fixed standing front ROI is not comparable"
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.png",
+      "manifest": "templates/die.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell0 (die local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell1 (die local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell2 (die local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell3 (die local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell4 (die local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell5 (die local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell6 (die local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell7 (die local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell8 (die local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell9 (die local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell10 (die local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png source cell11 (die local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "1": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "2": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "3": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "4": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "5": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "6": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "7": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "8": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "9": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "10": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable",
+        "11": "collapse: stagger, kneel and side fall; fixed standing ROI and height are not comparable"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell0 (tribulation local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell1 (tribulation local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell2 (tribulation local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell3 (tribulation local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell4 (tribulation local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell5 (tribulation local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell6 (tribulation local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell7 (tribulation local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell8 (tribulation local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell9 (tribulation local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell10 (tribulation local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell11 (tribulation local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell12 (tribulation local frame12): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell13 (tribulation local frame13): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell14 (tribulation local frame14): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png source cell15 (tribulation local frame15): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "1": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "2": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "3": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "4": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "5": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "6": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "7": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "8": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "9": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "10": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "11": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "12": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "13": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "14": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional",
+        "15": "kneeling: brace and one-knee survival recovery; reduced pose height is intentional"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.png",
+      "manifest": "templates/emote.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell0 (emote local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell1 (emote local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell2 (emote local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell3 (emote local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell4 (emote local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell5 (emote local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell6 (emote local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell7 (emote local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell8 (emote local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell9 (emote local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell10 (emote local frame10): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png source cell11 (emote local frame11): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 22
+          },
+          "chin": {
+            "x": 139,
+            "y": 68
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed emote cell0 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 22
+          },
+          "chin": {
+            "x": 139,
+            "y": 68
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed emote cell1 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 22
+          },
+          "chin": {
+            "x": 139,
+            "y": 68
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed emote cell2 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 22
+          },
+          "chin": {
+            "x": 139,
+            "y": 68
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed emote cell3 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 25
+          },
+          "chin": {
+            "x": 139,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 47
+            },
+            "right": {
+              "x": 147,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed emote cell4 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 30
+          },
+          "chin": {
+            "x": 141,
+            "y": 76
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 52
+            },
+            "right": {
+              "x": 149,
+              "y": 52
+            }
+          },
+          "note": "Manually reviewed emote cell5 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 37
+          },
+          "chin": {
+            "x": 147,
+            "y": 83
+          },
+          "breadth": {
+            "left": {
+              "x": 119,
+              "y": 59
+            },
+            "right": {
+              "x": 155,
+              "y": 59
+            }
+          },
+          "note": "Manually reviewed emote cell6 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 134,
+            "y": 40
+          },
+          "chin": {
+            "x": 149,
+            "y": 86
+          },
+          "breadth": {
+            "left": {
+              "x": 121,
+              "y": 62
+            },
+            "right": {
+              "x": 157,
+              "y": 62
+            }
+          },
+          "note": "Manually reviewed emote cell7 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 36
+          },
+          "chin": {
+            "x": 146,
+            "y": 82
+          },
+          "breadth": {
+            "left": {
+              "x": 118,
+              "y": 58
+            },
+            "right": {
+              "x": 154,
+              "y": 58
+            }
+          },
+          "note": "Manually reviewed emote cell8 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 25
+          },
+          "chin": {
+            "x": 140,
+            "y": 71
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 47
+            },
+            "right": {
+              "x": 148,
+              "y": 47
+            }
+          },
+          "note": "Manually reviewed emote cell9 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 45
+            },
+            "right": {
+              "x": 147,
+              "y": 45
+            }
+          },
+          "note": "Manually reviewed emote cell10 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 124,
+            "y": 23
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 111,
+              "y": 45
+            },
+            "right": {
+              "x": 147,
+              "y": 45
+            }
+          },
+          "note": "Manually reviewed emote cell11 coordinate grid: main cap crown and chin follow the respectful bow; skull breadth excludes loose fringe/ponytail. Shoulder blade extends above anatomical crown; no frame rescale."
+        }
+      },
+      "exceptions": {
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "secondary-overhang",
+        "11": "secondary-overhang"
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "raw/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell0 (hit local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell1 (hit local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell2 (hit local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell3 (hit local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell4 (hit local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell5 (hit local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "exceptions": {
+        "0": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable",
+        "1": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable",
+        "2": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable",
+        "3": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable",
+        "4": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable",
+        "5": "recoil: backward flinch and torso/head rotation; fixed standing ROI is not comparable"
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "raw/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell6 (dash local frame0): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell7 (dash local frame1): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell8 (dash local frame2): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell9 (dash local frame3): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell10 (dash local frame4): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell11 (dash local frame5): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell12 (dash local frame6): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell13 (dash local frame7): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell14 (dash local frame8): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png source cell15 (dash local frame9): fixed SE template lattice x128/ground232 preserves authored pose travel. No per-frame fit; locomotion guide foot plane is227 while registration remains232."
+        }
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 128,
+            "y": 32
+          },
+          "chin": {
+            "x": 140,
+            "y": 79
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 53
+            },
+            "right": {
+              "x": 151,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed dash cell0 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 139,
+            "y": 45
+          },
+          "chin": {
+            "x": 151,
+            "y": 92
+          },
+          "breadth": {
+            "left": {
+              "x": 126,
+              "y": 66
+            },
+            "right": {
+              "x": 162,
+              "y": 66
+            }
+          },
+          "note": "Manually reviewed dash cell1 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 153,
+            "y": 48
+          },
+          "chin": {
+            "x": 165,
+            "y": 95
+          },
+          "breadth": {
+            "left": {
+              "x": 140,
+              "y": 69
+            },
+            "right": {
+              "x": 176,
+              "y": 69
+            }
+          },
+          "note": "Manually reviewed dash cell2 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 155,
+            "y": 52
+          },
+          "chin": {
+            "x": 167,
+            "y": 99
+          },
+          "breadth": {
+            "left": {
+              "x": 142,
+              "y": 73
+            },
+            "right": {
+              "x": 178,
+              "y": 73
+            }
+          },
+          "note": "Manually reviewed dash cell3 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 155,
+            "y": 59
+          },
+          "chin": {
+            "x": 167,
+            "y": 106
+          },
+          "breadth": {
+            "left": {
+              "x": 142,
+              "y": 80
+            },
+            "right": {
+              "x": 178,
+              "y": 80
+            }
+          },
+          "note": "Manually reviewed dash cell4 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 157,
+            "y": 60
+          },
+          "chin": {
+            "x": 169,
+            "y": 107
+          },
+          "breadth": {
+            "left": {
+              "x": 144,
+              "y": 81
+            },
+            "right": {
+              "x": 180,
+              "y": 81
+            }
+          },
+          "note": "Manually reviewed dash cell5 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 153,
+            "y": 52
+          },
+          "chin": {
+            "x": 165,
+            "y": 99
+          },
+          "breadth": {
+            "left": {
+              "x": 140,
+              "y": 73
+            },
+            "right": {
+              "x": 176,
+              "y": 73
+            }
+          },
+          "note": "Manually reviewed dash cell6 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 141,
+            "y": 34
+          },
+          "chin": {
+            "x": 153,
+            "y": 81
+          },
+          "breadth": {
+            "left": {
+              "x": 128,
+              "y": 55
+            },
+            "right": {
+              "x": 164,
+              "y": 55
+            }
+          },
+          "note": "Manually reviewed dash cell7 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 129,
+            "y": 32
+          },
+          "chin": {
+            "x": 141,
+            "y": 79
+          },
+          "breadth": {
+            "left": {
+              "x": 116,
+              "y": 53
+            },
+            "right": {
+              "x": 152,
+              "y": 53
+            }
+          },
+          "note": "Manually reviewed dash cell8 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 29
+          },
+          "chin": {
+            "x": 138,
+            "y": 76
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 50
+            },
+            "right": {
+              "x": 149,
+              "y": 50
+            }
+          },
+          "note": "Manually reviewed dash cell9 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture"
+      }
+    }
+  ]
+}

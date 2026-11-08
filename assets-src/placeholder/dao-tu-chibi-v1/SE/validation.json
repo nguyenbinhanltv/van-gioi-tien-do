@@ -1,0 +1,452 @@
+{
+  "character": "dao-tu-chibi-v1",
+  "direction": "SE",
+  "delivery": "D41 full-source compatibility motion; not extracted layered runtime",
+  "utcRecorded": "2026-11-08T01:20:17.745Z",
+  "nodeVersion": "v24.12.0",
+  "source": {
+    "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/build.ts --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1",
+    "exitCode": 0,
+    "projectSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+    "clips": 15,
+    "drawings": 202,
+    "qa": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 22,
+      "regression": 0,
+      "info": 376
+    },
+    "manualVisualFindings": 7,
+    "atlas": {
+      "pages": 2,
+      "width": 2048,
+      "height": 2048,
+      "regions": 202,
+      "textures": ["daotuchibi_SE_tex", "daotuchibi_SE_page1_tex"]
+    },
+    "exports": [
+      {
+        "file": "daotuchibi_SE.sprite.json",
+        "sha256": "e3cf20eb4275f4744623e1c4498dee76461f8ea278b2238a40dc3e1cec19676e"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.json",
+        "sha256": "80da4de41597bb1de34fad801340940cbd94e774639e7981ccdbf13cc87df2b3"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.png",
+        "sha256": "f090d08d62a1be33f7011113349eff1feb26af3b1feddbe46258fe02e1f974f7"
+      },
+      {
+        "file": "daotuchibi_SE_ske.json",
+        "sha256": "7493ff1775d8718dcbb9d479fcd9d057573230e11782ea0139bf4dae7c22da26"
+      },
+      {
+        "file": "daotuchibi_SE_tex.json",
+        "sha256": "1e418b94587e6bec08e1f1fd60c4d10328817b447ba7f1675cc2db8a149eee6c"
+      },
+      {
+        "file": "daotuchibi_SE_tex.png",
+        "sha256": "a30116cf59f36bc26b44bbdb80f284f5f14c95eb7da5c9881ed55b8de3c8e358"
+      }
+    ],
+    "nativeBoundsSha256": "80a79a909b01cf3ae527e334e4159b7b4003e1e852674342f21a70409da8441d",
+    "metadata": [
+      {
+        "file": "daotuchibi_SE.sprite.json.meta",
+        "sha256": "3a089aa86418bf35980a39847e3261d3b37d8aeea1aa48fa7bbf0923a0c128d7"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.json.meta",
+        "sha256": "6608e9b94bfb42fbbeed1e2ecf32d550c7d054512551bf676503c891d2c460ea"
+      },
+      {
+        "file": "daotuchibi_SE_page1_tex.png.meta",
+        "sha256": "b39275eff89bec5baba7dd7a015faa08b7466015b68a2448638e9c16db7b0f3b"
+      },
+      {
+        "file": "daotuchibi_SE_ske.json.meta",
+        "sha256": "bf8fe921d6c0436af9bfccc8ef9073dda5640468c49340131faf2d550adc8dce"
+      },
+      {
+        "file": "daotuchibi_SE_tex.json.meta",
+        "sha256": "a70a9a1f84ce01997c3739d6163687494bdae2d2457989c80c43f372f21e969a"
+      },
+      {
+        "file": "daotuchibi_SE_tex.png.meta",
+        "sha256": "963fef7437202a52cf4e361d90e14a67886b8530bb9cbc4272a9b7a341bf45a7"
+      }
+    ]
+  },
+  "cocos": {
+    "version": "3.8.8",
+    "buildCommand": "npm run build:web -w client-cocos",
+    "buildWrapperExitCode": 0,
+    "captureCommand": "npm run capture -w client-cocos -- --skip-build --src dragonbones/dao-tu-chibi-v1 --stem daotuchibi --direction SE --mode single --animations all --frames 24 --zoom 2 --sample midpoint --gif --out \"$env:TEMP/dao-SE-cocos-capture\"",
+    "captureExitCode": 0,
+    "zoom": 2,
+    "sample": "midpoint",
+    "samplesPerClip": 24,
+    "captureIndexSha256": "d4046dccbda0c12adbe0c1f6ce562c9568b1aa60c3435b82e698be9a735aea62",
+    "animations": {
+      "idle": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "idle.sheet.png",
+        "gif": "idle.gif"
+      },
+      "meditate": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "meditate.sheet.png",
+        "gif": "meditate.gif"
+      },
+      "walk": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "walk.sheet.png",
+        "gif": "walk.gif"
+      },
+      "run": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "run.sheet.png",
+        "gif": "run.gif"
+      },
+      "dash": {
+        "duration": 0.43333333333333335,
+        "keyFrames": 13,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "dash.sheet.png",
+        "gif": "dash.gif"
+      },
+      "sword_fly": {
+        "duration": 0.5,
+        "keyFrames": 15,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "sword_fly.sheet.png",
+        "gif": "sword_fly.gif"
+      },
+      "attack": {
+        "duration": 0.6,
+        "keyFrames": 18,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack.sheet.png",
+        "gif": "attack.gif"
+      },
+      "cast": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "cast.sheet.png",
+        "gif": "cast.gif"
+      },
+      "channel": {
+        "duration": 0.5,
+        "keyFrames": 15,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "channel.sheet.png",
+        "gif": "channel.gif"
+      },
+      "hit": {
+        "duration": 0.26666666666666666,
+        "keyFrames": 8,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "hit.sheet.png",
+        "gif": "hit.gif"
+      },
+      "die": {
+        "duration": 0.5,
+        "keyFrames": 15,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "die.sheet.png",
+        "gif": "die.gif"
+      },
+      "tribulation": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 20,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "tribulation.sheet.png",
+        "gif": "tribulation.gif"
+      },
+      "emote": {
+        "duration": 0.5,
+        "keyFrames": 15,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "emote.sheet.png",
+        "gif": "emote.gif"
+      },
+      "attack_2": {
+        "duration": 0.6,
+        "keyFrames": 18,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_2.sheet.png",
+        "gif": "attack_2.gif"
+      },
+      "attack_3": {
+        "duration": 0.6,
+        "keyFrames": 18,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_3.sheet.png",
+        "gif": "attack_3.gif"
+      }
+    },
+    "outputs": [
+      {
+        "file": "idle.gif",
+        "sha256": "feb4036f88f6212bb66611c54574960a35a9ff9b75a783be94cfa100565fab44"
+      },
+      {
+        "file": "idle.sheet.png",
+        "sha256": "d985377c2228ca48afeeb558e244c7b36b033b66ab099cd1aa1f351f25fa3833"
+      },
+      {
+        "file": "meditate.gif",
+        "sha256": "bd6d4d2473df2f7019929c2907fc92112e810a62cde767dfb52bfdd2fbc434b3"
+      },
+      {
+        "file": "meditate.sheet.png",
+        "sha256": "4b121cc4b5e7b3d13ecd2fcae58ccba436b6a31b78e71bf6653c064896fb9a4b"
+      },
+      {
+        "file": "walk.gif",
+        "sha256": "9d1b8e1941ce3442f368fb68bee70263ecf95d43b9afb174ce2c1e29c64da9a3"
+      },
+      {
+        "file": "walk.sheet.png",
+        "sha256": "52f557bfcb4471a162a8bb02fda12ec2d4c6accd955430e2cc48b766cd37dde3"
+      },
+      {
+        "file": "run.gif",
+        "sha256": "1b11a49e06068a477b4d7c3850bbd4bb4c038112e179632cd724d360ddbd5500"
+      },
+      {
+        "file": "run.sheet.png",
+        "sha256": "0419f8e1ec551b04a9f1af0298601c106497afb2a926235b7c40cd10016a41f9"
+      },
+      {
+        "file": "dash.gif",
+        "sha256": "d9072b0e5ba3234612d7a413b8986299f3de5218c66ced5bf60ac8d7e97602e7"
+      },
+      {
+        "file": "dash.sheet.png",
+        "sha256": "0c59294ef064cae989ad7b2f078c2b6249c4f2c13011f32014ad816cf088eea6"
+      },
+      {
+        "file": "sword_fly.gif",
+        "sha256": "cf57e2b119e8c055ee0c1d716286b030459564223791cdd9d92d5baa2b2bd9c5"
+      },
+      {
+        "file": "sword_fly.sheet.png",
+        "sha256": "3fd65b432ba9c8516b460126c0d6f89f1a31267c6f792389b5ff3b695cd0c19e"
+      },
+      {
+        "file": "attack.gif",
+        "sha256": "e0b5d6e699acca7cb1e9962482356871c322ba3f67dc71a6ddf05eb2c3c3f73e"
+      },
+      {
+        "file": "attack.sheet.png",
+        "sha256": "503656283d0d20569e8e8c48b7686347b69a1951ae142877d3bc1aac82b0709a"
+      },
+      {
+        "file": "cast.gif",
+        "sha256": "20335327b3a1f3565ced5a16cd69ef2df6e32ae49251fa60ad90ecedc1f4f8fe"
+      },
+      {
+        "file": "cast.sheet.png",
+        "sha256": "e57ddf6487693aa4688dd67c46b0c1406bcf2aaa47e6f0ec92dce48e410e04e6"
+      },
+      {
+        "file": "channel.gif",
+        "sha256": "91cfb0b20a2c943d5359e0abd6843dd709c060add4683892570c5459a1c77999"
+      },
+      {
+        "file": "channel.sheet.png",
+        "sha256": "e89a4cde8ecfdeacc72f3e6472914528cf3f58e84d87a5a444acb9b1b967e6fa"
+      },
+      {
+        "file": "hit.gif",
+        "sha256": "1c16a5509a37149983b0ffc66a9715b08d569980be94f6d10ca91bd05b5310ff"
+      },
+      {
+        "file": "hit.sheet.png",
+        "sha256": "c5ac4d29725c68594fe9cd932e75f40b88efbf1261396d7c084fa3be5d35e08b"
+      },
+      {
+        "file": "die.gif",
+        "sha256": "373deb57b71ba632380c58ca6cd345f2d78a584ffe4527929667bc83fe072d51"
+      },
+      {
+        "file": "die.sheet.png",
+        "sha256": "10a7594376b0775047acea0f1eec572921c67e0a2f95bc4eff6767d47b8a4bfb"
+      },
+      {
+        "file": "tribulation.gif",
+        "sha256": "32703f7f5a86a01a6f173ebac99cb12f4e385e10db72fca3955593c9026976db"
+      },
+      {
+        "file": "tribulation.sheet.png",
+        "sha256": "026fba34a5c2732c05cfe230f6b3b61391dcf7f8655aaeef9bb62e3e58ec600d"
+      },
+      {
+        "file": "emote.gif",
+        "sha256": "5e284e474b03f67b337274d439fc4fac4e5604eac6fd12b54469f1582b197a15"
+      },
+      {
+        "file": "emote.sheet.png",
+        "sha256": "47cc8e8c8c0d4db7dcf5cb1f24db81bf32bdc89bd1a7440e5c2b3306d70f7bcd"
+      },
+      {
+        "file": "attack_2.gif",
+        "sha256": "ebb3ee29723742f1450dc5c663bc1a7276cc142f8798d935ec98c8a7817dc0a9"
+      },
+      {
+        "file": "attack_2.sheet.png",
+        "sha256": "ca46a706d04e8069a367c5578ca36cea7302b4b87f8ad6a8c245dec15d494d5f"
+      },
+      {
+        "file": "attack_3.gif",
+        "sha256": "84978affaf4c33bd4444b35a2f7d0f7e2a9637bf1017beb3d6be70a4239eac08"
+      },
+      {
+        "file": "attack_3.sheet.png",
+        "sha256": "29edec66e4693955527a193aa51ab2a527f4a3836abfa3287e0dd4747c8c99ea"
+      }
+    ],
+    "note": "Full-resolution contact PNGs are the real2x evidence; official GIFs are overview copies. Bone-only seam metrics do not establish sprite continuity.",
+    "renderInputsUnchangedAfterCapture": true
+  },
+  "checks": {
+    "npmCi": "pass",
+    "typecheck": "pass",
+    "test": "pass",
+    "build": "pass",
+    "lint": "pass",
+    "scopedFormat": "pass",
+    "globalFormat": "known baseline exception: docs/ASSET-LICENSES.md; only own appended table formatted"
+  },
+  "followUp": "22 measured foot-contact findings and7manual art findings remain open. Dedicated D45 extraction follows all5directions.",
+  "d45GuideProvenance": "layer-guides.provenance.json",
+  "repairProof": "repair-proof.json",
+  "reviewArtifact": "master-review.html with motion-review-SE.html",
+  "postMergeVerification": {
+    "main": "c591d6795a9345501cfd2935dd8029f1278544c7",
+    "mergeCommit": "e72e6fb",
+    "checks": [
+      {
+        "command": "npm.cmd run typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd test",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd run build",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd run lint",
+        "exitCode": 0
+      }
+    ],
+    "sourceQaUnchanged": true,
+    "renderInputsUnchanged": true,
+    "resampling": "not enabled; scale1 fixed after whole-sheet DPI normalization"
+  }
+}
