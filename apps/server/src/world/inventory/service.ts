@@ -76,9 +76,8 @@ export class InventoryService {
   }
 
   // ------------------------------------------------------------------ lifecycle (World Node join / leave)
-  private load(owner: string): OwnerState {
-    const have = this.owners.get(owner);
-    if (have) return have;
+  /** Build an owner's state from the store WITHOUT keeping it in memory. */
+  private fromStore(owner: string): OwnerState {
     const snap = this.store.load(owner);
     const st: OwnerState = { bag: undefined as unknown as Bag, pending: [], seq: 1, online: 0 };
     const newId = (): string => `${owner}#${st.seq++}`;
@@ -87,8 +86,36 @@ export class InventoryService {
       st.pending = snap.pending.map((p) => ({ ...p }));
       st.seq = snap.nextSeq;
     } else st.bag = new Bag(this.bagSlots, newId);
+    return st;
+  }
+  /** Keep an owner in memory (online players only: saved and dropped again by `onLeave`). */
+  private load(owner: string): OwnerState {
+    const have = this.owners.get(owner);
+    if (have) return have;
+    const st = this.fromStore(owner);
     this.owners.set(owner, st);
     return st;
+  }
+  /**
+   * Run a mutation. An online owner's state is the live cached one (saved when the last connection leaves); an OFFLINE
+   * owner (for example a drop that resolves after the killer disconnected) is loaded for this one operation, written back
+   * to the store immediately and not kept in memory, so offline changes are never lost and nothing leaks.
+   */
+  private mutate<T>(owner: string, fn: (st: OwnerState) => T): T {
+    const cached = this.owners.get(owner);
+    const st = cached ?? this.fromStore(owner);
+    const result = fn(st);
+    if (!cached) this.save(owner, st);
+    return result;
+  }
+  private save(owner: string, st: OwnerState): void {
+    const snap: InventorySnapshot = {
+      v: 1,
+      bag: st.bag.snapshot(),
+      pending: st.pending.map((p) => ({ ...p })),
+      nextSeq: st.seq,
+    };
+    this.store.save(owner, snap);
   }
 
   /** A connection of `owner` joined (counted; loads the saved inventory on the first one). */
@@ -105,22 +132,23 @@ export class InventoryService {
   }
   flush(owner: string): void {
     const st = this.owners.get(owner);
-    if (!st) return;
-    const snap: InventorySnapshot = {
-      v: 1,
-      bag: st.bag.snapshot(),
-      pending: st.pending.map((p) => ({ ...p })),
-      nextSeq: st.seq,
-    };
-    this.store.save(owner, snap);
+    if (st) this.save(owner, st);
   }
 
   // ------------------------------------------------------------------ queries
+  /** Number of owners currently held in memory (online players). */
+  get loadedOwners(): number {
+    return this.owners.size;
+  }
+  /**
+   * The owner's bag. For an online owner this is the LIVE bag (changes are saved on leave). For an offline owner it is a
+   * detached read-only copy loaded from the store: changes to it are NOT persisted (use `onJoin` first to mutate).
+   */
   bagOf(owner: string): Bag {
-    return this.load(owner).bag;
+    return (this.owners.get(owner) ?? this.fromStore(owner)).bag;
   }
   pendingOf(owner: string): readonly PendingLoot[] {
-    return this.load(owner).pending;
+    return (this.owners.get(owner) ?? this.fromStore(owner)).pending;
   }
   wallet(owner: string, currency: Currency): bigint {
     return this.ledger.balance({ kind: 'PLAYER_WALLET', ownerId: owner, currency });
@@ -135,8 +163,16 @@ export class InventoryService {
     const gk = `${owner}|${killKey}`;
     const seen = this.grants.get(gk);
     if (seen) return { ...seen, replayed: true };
-    const st = this.load(owner);
+    return this.mutate(owner, (st) => this.applyGrant(owner, st, rolls, source, gk));
+  }
 
+  private applyGrant(
+    owner: string,
+    st: OwnerState,
+    rolls: readonly DropRoll[],
+    source: DropSource,
+    gk: string,
+  ): GrantResult {
     // 1) stones -> one balanced ledger transaction
     const byCurrency = new Map<Currency, bigint>();
     for (const r of rolls) {
@@ -195,14 +231,15 @@ export class InventoryService {
 
   /** Move pending loot into the bag as far as it fits (whole entries, oldest first). Returns how many entries moved. */
   claimPending(owner: string): number {
-    const st = this.load(owner);
-    let moved = 0;
-    const left: PendingLoot[] = [];
-    for (const p of st.pending) {
-      if (st.bag.add({ ...p }).ok) moved++;
-      else left.push(p);
-    }
-    st.pending = left;
-    return moved;
+    return this.mutate(owner, (st) => {
+      let moved = 0;
+      const left: PendingLoot[] = [];
+      for (const p of st.pending) {
+        if (st.bag.add({ ...p }).ok) moved++;
+        else left.push(p);
+      }
+      st.pending = left;
+      return moved;
+    });
   }
 }

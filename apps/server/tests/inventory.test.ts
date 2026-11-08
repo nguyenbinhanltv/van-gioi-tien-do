@@ -290,6 +290,7 @@ describe('drop sink', () => {
   });
   it('a full bag parks the roll in the pending queue, claimPending moves it after space is freed, a full queue reports loss', () => {
     const s = new InventoryService({ bagSlots: 1, pendingMax: 1 });
+    s.onJoin('a'); // online: bagOf is the live bag we mutate below
     s.grantDrops('a', rolls({ item: 'blueprint_white_green', qty: 1, quality: 0 }), 'field', 'k1'); // fills the only slot
     const res = s.grantDrops(
       'a',
@@ -363,6 +364,98 @@ describe('drop sink', () => {
       expect(src, f).not.toMatch(/Math\.random|Date\.now|new Date|performance\.now|setTimeout|hrtime/);
       expect(src, f).not.toMatch(/TIEN_NGOC|SYSTEM_FAUCET_IAP|receipt|price|entitlement/i);
     }
+  });
+});
+
+describe('offline owners (a drop that resolves after the killer left)', () => {
+  const stackQty = (snap: ReturnType<InMemoryInventoryStore['load']>, defId: number): number =>
+    (snap?.bag.slots ?? []).reduce((n, s) => n + (s && s.kind === 'stack' && s.defId === defId ? s.qty : 0), 0);
+
+  it('a grant to an owner with no onJoin is persisted at once and the owner is not kept in memory', () => {
+    const store = new InMemoryInventoryStore();
+    const s = new InventoryService({ store });
+    expect(store.has('ghost')).toBe(false);
+    const res = s.grantDrops(
+      'ghost',
+      [
+        { item: 'heal_pill', qty: 4, quality: 1 },
+        { item: 'blueprint_gold_red', qty: 1, quality: 5 },
+        { item: 'stone_ha', qty: 2 },
+      ],
+      'field',
+      'k1',
+    );
+    expect(res.items.map((i) => i.where)).toEqual(['bag', 'bag']);
+    expect(s.loadedOwners).toBe(0); // nothing leaked
+    const saved = store.load('ghost')!;
+    expect(stackQty(saved, HEAL.id)).toBe(4);
+    expect(saved.bag.instances).toHaveLength(1);
+    expect(s.wallet('ghost', 'LT_HA')).toBe(2n); // the ledger is its own store
+    // a second offline grant builds on the stored state (read-modify-write) and instance ids stay unique
+    s.grantDrops(
+      'ghost',
+      [
+        { item: 'heal_pill', qty: 3, quality: 1 },
+        { item: 'blueprint_gold_red', qty: 1, quality: 5 },
+      ],
+      'field',
+      'k2',
+    );
+    const again = store.load('ghost')!;
+    expect(stackQty(again, HEAL.id)).toBe(7);
+    expect(new Set(again.bag.instances.map((i) => i.id)).size).toBe(2);
+    expect(s.loadedOwners).toBe(0);
+    // joining later sees everything
+    s.onJoin('ghost');
+    expect(s.bagOf('ghost').count(HEAL.id)).toBe(7);
+    expect(s.bagOf('ghost').count(BP.id)).toBe(2);
+    expect(s.loadedOwners).toBe(1);
+    s.onLeave('ghost');
+    expect(s.loadedOwners).toBe(0);
+  });
+
+  it('a drop after the killer disconnected (join, leave, then grant) is not lost', () => {
+    const store = new InMemoryInventoryStore();
+    const s = new InventoryService({ store });
+    s.onJoin('p');
+    s.onLeave('p');
+    s.grantDrops('p', [{ item: 'craft_material', qty: 9 }], 'elite', 'mob@100');
+    expect(stackQty(store.load('p'), MAT.id)).toBe(9);
+    expect(s.loadedOwners).toBe(0);
+    // a restart (new service over the same store) still has them
+    const s2 = new InventoryService({ store });
+    s2.onJoin('p');
+    expect(s2.bagOf('p').count(MAT.id)).toBe(9);
+  });
+
+  it('claimPending for an offline owner persists too; an online owner is saved on leave, not on every grant', () => {
+    const store = new InMemoryInventoryStore();
+    const s = new InventoryService({ store, bagSlots: 1, pendingMax: 2 });
+    s.grantDrops(
+      'o',
+      [
+        { item: 'blueprint_white_green', qty: 1, quality: 0 },
+        { item: 'heal_pill', qty: 2, quality: 0 },
+      ],
+      'field',
+      'k',
+    ); // bag full -> pending
+    expect(store.load('o')!.pending).toEqual([{ defId: HEAL.id, quality: 0, qty: 2 }]);
+    expect(s.claimPending('o')).toBe(0);
+    s.onJoin('o');
+    s.bagOf('o').removeInstance(0);
+    s.onLeave('o');
+    expect(s.claimPending('o')).toBe(1); // offline claim
+    expect(store.load('o')!.pending).toEqual([]);
+    expect(stackQty(store.load('o'), HEAL.id)).toBe(2);
+    expect(s.loadedOwners).toBe(0);
+
+    s.onJoin('live');
+    s.grantDrops('live', [{ item: 'craft_material', qty: 1 }], 'field', 'kk');
+    expect(store.has('live')).toBe(false); // online: still only in memory until the last connection leaves
+    expect(s.loadedOwners).toBe(1);
+    s.onLeave('live');
+    expect(store.has('live')).toBe(true);
   });
 });
 
