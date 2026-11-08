@@ -4,15 +4,15 @@ Nguồn gốc: mục "chưa kiểm tra được" và "việc còn mở" của h�
 
 ## Mục lục theo mảng
 
-| Mảng                                  | Mục                                      |
-| ------------------------------------- | ---------------------------------------- |
-| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8               |
-| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)           |
-| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55    |
-| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83                   |
-| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85 |
-| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79        |
-| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79                            |
+| Mảng                                  | Mục                                                 |
+| ------------------------------------- | --------------------------------------------------- |
+| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8                          |
+| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                      |
+| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini |
+| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83                              |
+| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85            |
+| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79                   |
+| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79                                       |
 
 ## 1. Việc cần làm
 
@@ -457,6 +457,12 @@ Còn mở / lưu ý:
 - Thông điệp trong tay người chơi khi rớt (input chưa ack, cast đang bay) bị bỏ: client dựng lại từ trạng thái server sau khi nối. Client Cocos mới đứng yên khi `reconnecting`; chưa có giao diện báo "mất kết nối".
 - `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
+
+## Asset Gemini (props và icon vật phẩm, 2026-11-09): còn mở
+
+- Điều khoản sử dụng thương mại của output Google Gemini chưa được kiểm tra riêng (ghi trong `docs/ASSET-LICENSES.md`, mục GEMINI-PROPS-ICONS); chủ dự án không lưu prompt gốc nên không tái tạo được từng ảnh. Cần chốt trước khi phát hành công khai.
+- Map lát cắt chỉ có nước / đất / cỏ: chưa có biome đầm lầy hay dung nham. `tree_dead_swamp` đặt gần mép nước, `rock_lava_cooled` chỉ xuất hiện khi bản đồ có địa hình `lava` (chưa có), nên hiện chưa thấy đá dung nham trong game.
+- `tree_pine_01/02` và `rock_mossy_small` / `rock_large_spirit` gần như trùng nhau: nên xin thêm biến thể (xem báo cáo PR).
 
 ## D83 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09; #224)
 

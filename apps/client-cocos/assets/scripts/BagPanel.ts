@@ -1,4 +1,4 @@
-import { Color, Label, Node, Sprite, UITransform, game } from 'cc';
+import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
@@ -14,7 +14,16 @@ export interface BagPanelHooks {
   /** claim pending loot; false when it could not be sent */
   claim(): boolean;
   clientToUi(clientX: number, clientY: number): { x: number; y: number };
+  /** item / stone icon by item key (`heal_pill`, `stone_low`, ...), or null when there is no art (the coloured tile stays) */
+  icon?(key: string): SpriteFrame | null;
 }
+
+/** Wallet currencies in display order -> the stone icon of each (hạ / trung / thượng phẩm). */
+const WALLET_ICONS = [
+  { cur: 'LT_HA', key: 'stone_low' },
+  { cur: 'LT_TRUNG', key: 'stone_mid' },
+  { cur: 'LT_THUONG', key: 'stone_high' },
+] as const;
 
 const SLOTS_DRAWN = 40;
 const rgb = (c: readonly [number, number, number], a = 255): Color => new Color(c[0], c[1], c[2], a);
@@ -45,6 +54,8 @@ interface SlotUi {
   outline: Sprite;
   bg: Sprite;
   item: Sprite;
+  /** item art (Gemini icon) drawn over the coloured tile; inactive when the key has no icon */
+  icon: Sprite;
   quality: Sprite;
   code: Label;
   qty: Label;
@@ -53,14 +64,16 @@ interface SlotUi {
 /**
  * The bag and the stone wallet, drawn from the server's `inv_state` (D79). Key B toggles it; click an item, then another slot to
  * move / swap / merge (the server decides: the new state arrives as `inv_state`); a Claim button appears while loot is pending.
- * Layout, hit testing and click logic live in client-core (`BagPanelLogic`, unit tested); this class only draws them. Placeholder
- * look: coloured tiles with a short code, a quality bar, quantity. No item art, prices or shop.
+ * Layout, hit testing and click logic live in client-core (`BagPanelLogic`, unit tested); this class only draws them. Look: the
+ * owner-provided item icon (coloured tile with a short code when an icon is missing), a quality bar, quantity. No prices or shop.
  */
 export class BagPanel {
   private readonly root: Node;
   private readonly slots: SlotUi[] = [];
   private readonly title: Label;
   private readonly wallet: Label;
+  /** icon + count per stone currency; used instead of the `wallet` text when the stone icons exist */
+  private readonly walletIcons: Array<{ icon: Sprite; count: Label }> = [];
   private readonly hint: Label;
   private readonly toast: Label;
   private readonly claimBtn: Node;
@@ -96,6 +109,17 @@ export class BagPanel {
     this.title.node.setPosition(0, this.size.h / 2 - 16, 0);
     this.wallet = label(this.root, 'wallet', 13, new Color(200, 210, 230, 255));
     this.wallet.node.setPosition(0, this.size.h / 2 - 38, 0);
+    WALLET_ICONS.forEach((w, k) => {
+      const frame = hooks.icon?.(w.key) ?? null;
+      if (!frame) return;
+      const cx = (k - 1) * 120;
+      const icon = quad(this.root, `walletIcon${k}`, art, 22, 22, new Color(255, 255, 255, 255));
+      icon.spriteFrame = frame;
+      icon.node.setPosition(cx - 24, this.size.h / 2 - 38, 0);
+      const count = label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255));
+      count.node.setPosition(cx + 18, this.size.h / 2 - 38, 0);
+      this.walletIcons.push({ icon, count });
+    });
     for (let i = 0; i < SLOTS_DRAWN; i++) {
       const r = core.slotRect(i);
       const holder = newNode(`slot${i}`, this.root);
@@ -105,13 +129,15 @@ export class BagPanel {
       const bg = quad(holder, 'bg', art, r.w, r.h, new Color(44, 48, 62, 255));
       const item = quad(holder, 'item', art, r.w - 8, r.h - 8, new Color(255, 255, 255, 255));
       item.node.active = false;
+      const icon = quad(holder, 'icon', art, r.w - 8, r.h - 8, new Color(255, 255, 255, 255));
+      icon.node.active = false;
       const quality = quad(holder, 'quality', art, r.w - 8, 4, new Color(255, 255, 255, 255));
       quality.node.setPosition(0, (r.h - 8) / 2 - 2, 0);
       quality.node.active = false;
       const code = label(holder, 'code', 14, new Color(255, 255, 255, 255));
       const qty = label(holder, 'qty', 11, new Color(255, 255, 255, 255));
       qty.node.setPosition(10, -14, 0);
-      this.slots.push({ outline, bg, item, quality, code, qty });
+      this.slots.push({ outline, bg, item, icon, quality, code, qty });
     }
     const cb = core.claimButtonRect(SLOTS_DRAWN);
     this.claimBtn = newNode('claim', this.root);
@@ -209,7 +235,10 @@ export class BagPanel {
     this.lastSelected = this.selection.selected;
     this.lastWaiting = bag.waitingCount;
     this.selection.validate(bag);
-    this.wallet.string = core.walletText(bag);
+    if (this.walletIcons.length === WALLET_ICONS.length) {
+      this.wallet.string = '';
+      WALLET_ICONS.forEach((w, k) => (this.walletIcons[k]!.count.string = String(bag.wallet[w.cur])));
+    } else this.wallet.string = core.walletText(bag);
     for (let i = 0; i < this.slots.length; i++) {
       const s = this.slots[i]!;
       if (i >= bag.slotCount) {
@@ -221,17 +250,22 @@ export class BagPanel {
       const it = bag.itemAt(i);
       if (!it) {
         s.item.node.active = false;
+        s.icon.node.active = false;
         s.quality.node.active = false;
         s.code.string = '';
         s.qty.string = '';
         continue;
       }
       const st = core.itemStyle(it);
-      s.item.node.active = true;
+      const frame = (it.key && this.hooks.icon?.(it.key)) || null;
+      s.icon.node.active = !!frame;
+      if (frame) s.icon.spriteFrame = frame;
+      // no icon for this key (older art / a newer server's item): keep the coloured tile with its short code
+      s.item.node.active = !frame;
       s.item.color = rgb(st.color);
       s.quality.node.active = true;
       s.quality.color = rgb(st.quality);
-      s.code.string = st.code;
+      s.code.string = frame ? '' : st.code;
       s.qty.string =
         it.kind === 'stack' && it.qty > 1
           ? String(it.qty)
@@ -249,6 +283,7 @@ export class BagPanel {
     s.outline.node.active = false;
     s.bg.node.active = false;
     s.item.node.active = false;
+    s.icon.node.active = false;
     s.quality.node.active = false;
     s.code.string = '';
     s.qty.string = '';

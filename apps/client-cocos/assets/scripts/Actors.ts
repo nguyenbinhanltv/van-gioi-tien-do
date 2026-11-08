@@ -8,6 +8,11 @@ import { OverheadBar, worldUiLayer } from './OverheadBar';
 
 let nextId = 1; // id 0 = player
 
+/** Next unique id for a draw-order key (tie-breaker of the L3 Y-sort); 0 = the player. */
+export function allocSortId(): number {
+  return nextId++;
+}
+
 export type TilePos = { i: number; j: number };
 
 function spriteNode(name: string, frame: SpriteFrame, w: number, h: number, ax: number, ay: number): Node {
