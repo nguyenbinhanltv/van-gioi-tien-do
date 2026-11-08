@@ -8,9 +8,10 @@
 import { Worker } from 'node:worker_threads';
 import { ZONE_SPAWN_TABLES } from '@vgtd/shared';
 import { compileSkills } from '@vgtd/sim';
-import { startServer, type RunningServer } from '../server.js';
+import { startServer } from '../server.js';
 import type { BotReport } from './bot.js';
-import { formatReport, summarize, type ServerClientStats, type ServerSample } from './runner.js';
+import { formatReport, summarize } from './runner.js';
+import { copyStats, resetWindow, windowSample } from './window.js';
 
 function arg(name: string, def: number): number {
   const i = process.argv.indexOf(`--${name}`);
@@ -35,52 +36,6 @@ const log = (s: string): void => {
   if (!asJson) console.log(s);
 };
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
-
-/** Copy the cumulative per-client counters so the window can be computed as a difference. */
-function copyStats(srv: RunningServer): Map<number, ServerClientStats> {
-  const m = new Map<number, ServerClientStats>();
-  for (const c of srv.world.clients.values()) m.set(c.id, { entityId: c.id, ...c.stats });
-  return m;
-}
-
-function windowSample(
-  srv: RunningServer,
-  base: Map<number, ServerClientStats>,
-  durationS: number,
-  cpu: NodeJS.CpuUsage,
-): ServerSample {
-  const clients: ServerClientStats[] = [];
-  for (const c of srv.world.clients.values()) {
-    const b = base.get(c.id);
-    const s = c.stats;
-    clients.push({
-      entityId: c.id,
-      bytesOut: s.bytesOut - (b?.bytesOut ?? 0),
-      wireBytesOut: s.wireBytesOut - (b?.wireBytesOut ?? 0),
-      framesOut: s.framesOut - (b?.framesOut ?? 0),
-      bytesIn: s.bytesIn - (b?.bytesIn ?? 0),
-      packetsIn: s.packetsIn - (b?.packetsIn ?? 0),
-      snapshots: s.snapshots - (b?.snapshots ?? 0),
-      snapshotsSkipped: s.snapshotsSkipped - (b?.snapshotsSkipped ?? 0),
-      aoiEnter: s.aoiEnter - (b?.aoiEnter ?? 0),
-      aoiLeave: s.aoiLeave - (b?.aoiLeave ?? 0),
-      visibleSum: s.visibleSum - (b?.visibleSum ?? 0),
-      visibleSamples: s.visibleSamples - (b?.visibleSamples ?? 0),
-      visibleMax: s.visibleMax,
-    });
-  }
-  return {
-    tickMs: [...srv.world.tickMs],
-    tickIntervalMs: [...srv.world.tickIntervalMs],
-    clients,
-    durationS,
-    phases: { ...srv.world.phases },
-    metrics: { ...srv.world.metrics, violations: { ...srv.world.metrics.violations } },
-    cpuUserMs: cpu.user / 1000,
-    cpuSystemMs: cpu.system / 1000,
-    rssMb: process.memoryUsage().rss / 1048576,
-  };
-}
 
 const MAP = 256;
 /** One zone over the bots' area, table counts scaled so that about `--mobs` monsters live there. */
@@ -141,17 +96,7 @@ try {
   await sleep(warmup * 1000);
 
   // measurement window: reset tick samples, snapshot per-client counters, start the CPU clock
-  srv.world.tickMs.length = 0;
-  srv.world.tickIntervalMs.length = 0;
-  Object.assign(srv.world.phases, {
-    stepMs: 0,
-    aoiMs: 0,
-    snapMs: 0,
-    aoiTicks: 0,
-    maxStepMs: 0,
-    maxAoiMs: 0,
-    maxSnapMs: 0,
-  });
+  resetWindow(srv);
   const base = copyStats(srv);
   const violations0 = { ...srv.world.metrics.violations };
   const cpu0 = process.cpuUsage();
