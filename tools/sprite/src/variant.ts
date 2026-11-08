@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { decodePng, encodePng } from '@vgtd/rig';
 import type { Project, ProjectClip } from './project.js';
 import type { Finding } from './qa.js';
-import { normalizeSheetDpi, preparationScale } from './preparation.js';
+import { nativeCellTransform, normalizeSheetDpi, preparationScale } from './preparation.js';
 import { toStraight, toPremultiplied, type Straight } from './raster.js';
 import { cellRect, crop, keyOut, sliceSheet } from './slice.js';
 import { CELL_PX } from './types.js';
@@ -214,12 +214,33 @@ function sourceCells(project: Project, clip: ProjectClip, baseDir: string, guide
   if (scale === undefined || !Number.isFinite(scale) || scale <= 0)
     throw new Error('variant QA needs a locked explicit scale');
   const renderSheet = project.preparation ? decodePng(encodePng(normalized)) : raw;
+  // Appearance annotations stay normalized; origins must match the actual native render path.
+  const deferred =
+    project.preparation && project.resample && project.resample !== 'bilinear'
+      ? normalizeSheetDpi(raw, grid.cols, grid.frames, { resample: project.resample, defer: true }).image
+      : undefined;
+  const alignmentSheet = deferred ? decodePng(encodePng(deferred)) : renderSheet;
   const first = cellRect(renderSheet.width, renderSheet.height, grid.cols, grid.rows, 0);
   const inset = Math.round(Math.min(first.width, first.height) * (project.slice?.inset ?? 0.01));
   const alignmentOrigins = guides
-    ? selectSheetCells(sliceSheet(renderSheet, grid, project.slice), clip.sheetSelection).map((f, i) => {
-        const m = measureFigure(toPremultiplied(f.image));
-        if (!m) throw new Error('variant master alignment frame is empty');
+    ? selectSheetCells(sliceSheet(alignmentSheet, grid, project.slice), clip.sheetSelection).map((f, i) => {
+        const native = measureFigure(toPremultiplied(f.image));
+        if (!native) throw new Error('variant master alignment frame is empty');
+        const t = deferred
+          ? nativeCellTransform(
+              alignmentSheet.width,
+              alignmentSheet.height,
+              renderSheet.width,
+              renderSheet.height,
+              grid.cols,
+              grid.rows,
+              indices[i]!,
+              project.slice?.inset,
+            )
+          : undefined;
+        const m = t
+          ? { ...native, pelvisX: native.pelvisX * t.scaleX + t.dx, bottom: native.bottom * t.scaleY + t.dy }
+          : native;
         const e = clip.authoredOrigins?.[i];
         const defaultY =
           (clip.vertical ?? 'sole') === 'sole' ? m.bottom : (guides.ground / CELL_PX) * first.height - inset;
@@ -288,6 +309,8 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
     throw new Error('variant source must be the same character/direction T1 master project');
   if (canonical(project.slice ?? {}) !== canonical(master.slice ?? {}))
     throw new Error('variant changed master slicing controls');
+  if ((project.resample ?? 'bilinear') !== (master.resample ?? 'bilinear'))
+    throw new Error('variant changed master resampling method');
   if (canonical(project.masterHead ?? null) !== canonical(master.masterHead ?? null))
     throw new Error('variant changed master head reference');
   if (

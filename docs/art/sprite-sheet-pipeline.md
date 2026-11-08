@@ -177,6 +177,17 @@ không cần đổi character API hay chia timeline sự kiện. Cần kiểm ch
 
 ### Chuẩn bị DPI có thể tái lập từ project
 
+Tùy chọn mới: `project.resample` hoặc `sprite:build --resample bilinear|lanczos3|area`.
+Mặc định và `bilinear` giữ nguyên đường xuất cũ và byte cũ. `lanczos3` lọc sinc ba thùy có chống alias;
+`area` tích phân diện tích pixel, đều dùng alpha premultiplied. Khi có `square-cell-dpi-v1`, hai chế độ mới
+giữ ô nguồn ở DPI gốc, ghép phép đổi DPI với scale/căn đã khóa rồi chỉ lấy mẫu hình học **một lần**;
+không tạo ảnh trung gian ô 256 px đã làm tròn màu. Key/despill/palette chạy ở DPI gốc trước lần lấy mẫu cuối.
+Gốc tác giả, calibration và bằng chứng canvas vẫn theo tọa độ logical; sai số làm tròn biên/inset của ô được
+đổi bằng affine tường minh, không fit chiều cao từng khung. Contract ghi `resample`, `preparation.singlePass`;
+`sheetSha1` của chế độ này pin PNG chuẩn bị còn DPI gốc, `rawSha1` vẫn pin nguồn nguyên bản.
+Đổi chế độ phải đo lại đầu, xem matte, chạy toàn bộ QA và capture Cocos; không tự coi nét hoặc spill đã sửa.
+T1 và biến thể cosmetic phải dùng cùng chế độ. Chưa chuyển bất kỳ bộ art đã merge nào sang tùy chọn mới.
+
 Project có sheet sinh ở nhiều DPI khai báo `preparation: { kind: "square-cell-dpi-v1", calibration: "../character-calibration.json" }`. File calibration cung cấp `scale` dương hữu hạn, khóa cho nhân vật. `sprite:build`/`sprite:batch` tự chạy bước chuẩn bị trước khi cắt ô; không cần script ngoài hoặc đường dẫn tạm. Không được khai báo `scale` khác calibration.
 
 Phiên bản này giữ thuật toán assembler Đan/Phù tu: chỉ bỏ viền hàng đen/trong suốt ngoài cùng để phục hồi ô vuông, dung sai ô 1 px và làm tròn crop 3 px; chuyển DPI toàn sheet về ô `CELL_PX`, rồi áp dụng scale nhân vật cố định. Không fit từng khung, không thu nhỏ vì atlas. Lỗi lưới không vuông hoặc thiếu calibration báo `non-reproducible project` trước QA art. Assembler đã chuẩn bị sheet phải bỏ trường `preparation` để không chạy hai lần.

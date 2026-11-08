@@ -2,6 +2,31 @@
 
 Frame-by-frame AI sprite-sheet pipeline for Player bodies (D41, `docs/art/sprite-sheet-pipeline.md`).
 
+### Optional single-pass resampling
+
+`sprite:build --resample bilinear|lanczos3|area` overrides `project.resample`. Omitted or explicit
+`bilinear` keeps the existing two-pass DPI/placement path and bytes. Nothing opts in automatically.
+`lanczos3` uses an antialiased three-lobe sinc kernel; `area` integrates pixel coverage. Both operate on
+premultiplied colour, clamp ringing to valid premultiplied pixels, and sample transparent outside the image.
+
+With `square-cell-dpi-v1` preparation, the new modes crop the safe external letterbox and retain native cells.
+The native-to-logical DPI transform is composed with the locked character scale and placement in **one geometric
+resampling pass**. There is no resized/quantized 256-cell intermediate. A separable filter uses floating-point
+convolution rows internally. Authored origins, calibration, template coordinates and canvas-loss records remain
+in logical units; native cell-boundary/inset rounding is mapped explicitly. No frame is fitted to its own height.
+Keying, despill and palette processing therefore happen at native DPI in this path, before the final resampling.
+
+Public APIs: `normalizeSheetDpi(raw, cols, frames, { resample, defer: true })` returns native cropped pixels and
+the intended DPI record; omit `defer` to resample immediately. `alignFrame` accepts `resample` and optional
+`sourceTransform` (native cropped pixels to logical cropped pixels). `placeScaled` accepts the method as its last
+argument. Deferred preparation/source transforms require a new mode. Contracts record non-default `resample`
+and `preparation.singlePass`; `sheetSha1` hashes the retained native preparation PNG in this path, while `rawSha1`
+still pins the original source. Standalone normalization without deferral records its chosen method.
+
+Opting in changes pixels, edge measurements and hashes: rerun every QA gate, review head landmarks and matte
+edges, and capture Cocos again. Filtering cannot restore missing source detail or certify an art defect as fixed.
+Use the same setting for a T1 project and its cosmetic variants. Existing art/export files are not changed by this option.
+
 ```
 npm run sprite:template -w @vgtd/sprite -- --clip run --frames 12 --cols 6 --gait run --master <master.png> --out <dir>
 npm run sprite:build    -w @vgtd/sprite -- --project <project.json> --out <dir> [--allow-errors]
