@@ -65,6 +65,8 @@ export interface ProgressionOptions {
    * refused with `ProgressionReason.TribulationRequired` unless this is true (tests / dev only).
    */
   allowMajorBreakthrough?: boolean;
+  /** DEV / TEST ONLY: multiplies the tu vi gained per tick (default 1) so a headless run can fill a stage in seconds. Never a gameplay value. */
+  devTuViSpeed?: number;
 }
 
 interface Session {
@@ -124,6 +126,7 @@ export class ProgressionService {
   private onStageChange: ((entityId: number, realm: number, subRealm: number) => void) | undefined;
   private onPersistFailure: ((entityId: number) => void) | undefined;
   private readonly allowMajor: boolean;
+  private readonly devSpeed: number;
   /** in-flight writes per character: a new session of the same character loads only after the previous one is stored */
   private readonly pendingWrites = new Map<string, Promise<void>>();
 
@@ -138,6 +141,7 @@ export class ProgressionService {
     this.onStageChange = opts.onStageChange;
     this.onPersistFailure = opts.onPersistFailure;
     this.allowMajor = opts.allowMajorBreakthrough ?? false;
+    this.devSpeed = opts.devTuViSpeed !== undefined && opts.devTuViSpeed > 0 ? opts.devTuViSpeed : 1;
   }
 
   /** Let the world node provide liveness and the tick counter (kept optional so the service is testable alone). */
@@ -380,7 +384,7 @@ export class ProgressionService {
         this.stopMeditation(s, nowMs);
         continue;
       }
-      const { exp, full } = advanceTuVi(s.rec, dtMs, this.envOf(id));
+      const { exp, full } = advanceTuVi(s.rec, dtMs * this.devSpeed, this.envOf(id));
       s.rec = { ...s.rec, exp };
       s.dirty = true;
       if (full)
