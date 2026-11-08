@@ -73,6 +73,22 @@ interface Inflight {
   undo: HotbarUndo | null;
 }
 
+/**
+ * The aim point the server will use: `aim` pulled back along the player -> aim direction to the skill's `range` (the server ignores an aim
+ * beyond it), never past the i = 0 / j = 0 map edge. Non-finite aims give null. The touch aim indicator draws this same point.
+ */
+export function clampAimToRange(origin: TilePoint, aim: TilePoint | null, range: number): TilePoint | null {
+  if (!aim || !Number.isFinite(aim.i) || !Number.isFinite(aim.j)) return null;
+  const di = aim.i - origin.i;
+  const dj = aim.j - origin.j;
+  const d = Math.sqrt(di * di + dj * dj);
+  if (range > 0 && d > range) {
+    const k = range / d;
+    return { i: Math.max(0, origin.i + di * k), j: Math.max(0, origin.j + dj * k) };
+  }
+  return { i: Math.max(0, aim.i), j: Math.max(0, aim.j) };
+}
+
 export class ServerCombat implements CombatBackend {
   /** The server respawns a dead player after `COMBAT_RULES.RESPAWN_PVE_MS` (the overlay only displays it). */
   readonly respawnDelayMs: number = COMBAT_RULES.RESPAWN_PVE_MS;
@@ -134,19 +150,9 @@ export class ServerCombat implements CombatBackend {
     this.aim = p;
   }
 
-  /** The aim point for a skill: the pointer, pulled back to the skill's range (the server ignores an aim beyond it). */
-  private aimFor(range: number): TilePoint | null {
-    const a = this.aim;
-    if (!a || !Number.isFinite(a.i) || !Number.isFinite(a.j)) return null;
-    const di = a.i - this.player.pos.i;
-    const dj = a.j - this.player.pos.j;
-    const d = Math.sqrt(di * di + dj * dj);
-    // tile coordinates are never negative: an aim past the i = 0 / j = 0 edge is pulled onto it
-    if (range > 0 && d > range) {
-      const k = range / d;
-      return { i: Math.max(0, this.player.pos.i + di * k), j: Math.max(0, this.player.pos.j + dj * k) };
-    }
-    return { i: Math.max(0, a.i), j: Math.max(0, a.j) };
+  /** The aim point for a skill: `override` (touch drag) or else the pointer, pulled back to the skill's range (the server ignores an aim beyond it). */
+  private aimFor(range: number, override?: TilePoint | null): TilePoint | null {
+    return clampAimToRange(this.player.pos, override !== undefined ? override : this.aim, range);
   }
 
   // ------------------------------------------------------------------ fed by the online client
@@ -230,7 +236,7 @@ export class ServerCombat implements CombatBackend {
   }
 
   // ------------------------------------------------------------------ CombatBackend
-  cast(slot: number, nowMs: number): CombatEvent[] {
+  cast(slot: number, nowMs: number, aim?: TilePoint | null): CombatEvent[] {
     const s = this.hotbar.slot(slot);
     let reason: CastBlock | null = null;
     if (!s) reason = 'empty';
@@ -252,7 +258,7 @@ export class ServerCombat implements CombatBackend {
         seq,
         skillId: this.wire.get(skill.id)!,
         targetId,
-        aim: this.aimFor(skill.targeting.range_tiles ?? 0),
+        aim: this.aimFor(skill.targeting.range_tiles ?? 0, aim),
       });
     } catch {
       sent = false; // a transport that throws must not leave a predicted cooldown / cast bar for a cast that never left

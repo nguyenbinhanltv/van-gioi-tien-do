@@ -167,6 +167,8 @@ export class CombatUi {
   private readonly deathRoot: Node;
   private readonly deathCount: Label;
   private diedAtMs: number | null = null;
+  /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
+  private touchMode = false;
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -314,6 +316,8 @@ export class CombatUi {
         })),
         gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
+        touchMode: this.touchMode,
+        hotbarShown: this.slots.every((s) => s.root.active),
         deathOverlay: this.deathRoot.active,
         deathText: this.deathCount.string,
         selfBar: this.selfBar.visible,
@@ -372,6 +376,53 @@ export class CombatUi {
     for (const ev of this.backend.cast(i, this.clock)) this.onEvent(ev);
   }
 
+  /** Now (HUD clock, ms): the same clock the hotbar cooldowns use. */
+  get nowMs(): number {
+    return this.clock;
+  }
+
+  /** Touch input: show the skill wheel instead of the bottom hotbar. */
+  setTouchMode(on: boolean): void {
+    this.touchMode = on;
+    for (const s of this.slots) s.root.active = !on;
+  }
+
+  /**
+   * A cast from the touch skill wheel. Wheel slot 0 = the basic attack = hotbar slot 0, slot k = hotbar slot k; wheel slots past the
+   * hotbar are empty. `aim` (tile coordinates) comes from dragging the button; without it the server picks the nearest / selected target.
+   */
+  castFromWheel(slot: number, aim?: { i: number; j: number }): void {
+    for (const ev of this.backend.cast(slot, this.clock, aim)) this.onEvent(ev);
+  }
+
+  /** What the wheel button of hotbar `slot` shows: label, colour, readiness and cooldown overlays. null = no such slot. */
+  slotView(slot: number): {
+    label: string;
+    color: Color;
+    castable: boolean;
+    cd: number;
+    gcd: number;
+    cdText: string;
+    rangeTiles: number;
+    shape: { type: string; radius?: number };
+  } | null {
+    const bar = this.backend.hotbar;
+    const s = bar.slots[slot];
+    if (!s) return null;
+    const base = ELEMENT_COLOR[s.skill.element] ?? ELEMENT_COLOR.none!;
+    const left = bar.cooldownRemainingMs(slot, this.clock) / 1000;
+    return {
+      label: initials(s.skill.id),
+      color: base,
+      castable: s.castable,
+      cd: bar.cooldownFraction(slot, this.clock),
+      gcd: s.castable && bar.usesGcd(slot) ? bar.gcdFraction(this.clock) : 0,
+      cdText: left > 0 ? (left >= 10 ? String(Math.ceil(left)) : left.toFixed(1)) : '',
+      rangeTiles: s.skill.targeting.range_tiles ?? 0,
+      shape: s.skill.shape,
+    };
+  }
+
   private onKey(e: KeyboardEvent): void {
     if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
     const m = /^(?:Digit|Numpad)([1-8])$/.exec(e.code);
@@ -387,6 +438,7 @@ export class CombatUi {
   }
 
   private onPointer(e: PointerEvent): void {
+    if (this.touchMode) return; // the skill wheel (SkillWheel.ts) owns touch casting
     if (e.button !== 0) return;
     const ui = this.clientToUi(e.clientX, e.clientY);
     const lx = ui.x / this.scale;
