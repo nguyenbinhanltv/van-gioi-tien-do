@@ -188,6 +188,11 @@ export class BagPanel {
     };
   }
 
+  /** Is the panel open (the first-session tracker asks)? */
+  get isOpen(): boolean {
+    return this.visible;
+  }
+
   toggle(): void {
     this.visible = !this.visible;
     this.root.active = this.visible;
