@@ -1,23 +1,367 @@
 {
   "_doc": "Owner-provided Gemini exports (assets-src/gemini). target = content size in px @2x (w or h); @1x is half. block = tile offsets from the anchor tile (the tile containing the prop's foot point) that the prop blocks; [] = walk-through decoration. biomes: sect (grass / dirt near the Son Mon), swamp (shoreline), lava, courtyard (fixed buildings). weight = relative scatter frequency. spacing = free tiles kept around the prop when scattered (default 1; tall trees 2). clear = rects (fractions of the keyed content box) erased as source-art artifacts.",
   "props": {
-    "bush_round_01": { "target": { "w": 150 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 5 },
-    "fence_wood_segment": { "target": { "w": 190 }, "pivotX": 0.5, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 },
-    "incense_burner": { "target": { "h": 170 }, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 },
-    "lantern_stone": { "target": { "h": 200 }, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 },
-    "pavilion_small": { "target": { "w": 420 }, "pivotX": 0.5, "block": [[0, 0], [1, 0], [0, 1], [1, 1]], "biomes": ["courtyard"], "weight": 0 },
-    "rock_large_spirit": { "target": { "w": 260 }, "block": [[0, 0], [1, 0], [0, 1], [1, 1]], "biomes": ["sect"], "weight": 1 },
-    "rock_lava_cooled": { "target": { "w": 220 }, "block": [[0, 0], [1, 0], [0, 1], [1, 1]], "biomes": ["lava"], "weight": 3 },
-    "rock_mossy_small": { "target": { "w": 150 }, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
-    "sect_gate_paifang": { "target": { "w": 560 }, "pivotX": 0.5, "block": [[-2, 2], [2, -2]], "biomes": ["courtyard"], "weight": 0 },
-    "spirit_herb_patch": { "target": { "w": 170 }, "block": [], "biomes": ["sect"], "weight": 2 },
-    "tree_bamboo_cluster": { "target": { "h": 400 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 3 },
-    "tree_dead_swamp": { "target": { "h": 380 }, "spacing": 2, "block": [[0, 0]], "biomes": ["swamp"], "weight": 4 },
-    "tree_peach_blossom": { "target": { "h": 440 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 2, "clear": [{ "x": 0.55, "y": 0, "w": 0.2, "h": 0.105 }] },
-    "tree_pine_01": { "target": { "h": 460 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
-    "tree_pine_02": { "target": { "h": 460 }, "spacing": 2, "block": [[0, 0]], "biomes": ["sect"], "weight": 4 },
-    "well_stone": { "target": { "h": 220 }, "block": [[0, 0]], "biomes": ["courtyard"], "weight": 0 }
+    "bush_round_01": {
+      "target": {
+        "w": 150
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 5
+    },
+    "fence_wood_segment": {
+      "target": {
+        "w": 190
+      },
+      "pivotX": 0.5,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    },
+    "incense_burner": {
+      "target": {
+        "h": 170
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    },
+    "lantern_stone": {
+      "target": {
+        "h": 200
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    },
+    "pavilion_small": {
+      "target": {
+        "w": 420
+      },
+      "pivotX": 0.5,
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    },
+    "rock_large_spirit": {
+      "target": {
+        "w": 260
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 1
+    },
+    "rock_lava_cooled": {
+      "target": {
+        "w": 220
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "lava"
+      ],
+      "weight": 3
+    },
+    "rock_mossy_small": {
+      "target": {
+        "w": 150
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 4
+    },
+    "sect_gate_paifang": {
+      "target": {
+        "w": 560
+      },
+      "pivotX": 0.5,
+      "block": [
+        [
+          -2,
+          2
+        ],
+        [
+          2,
+          -2
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    },
+    "spirit_herb_patch": {
+      "target": {
+        "w": 170
+      },
+      "block": [],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 2
+    },
+    "tree_bamboo_cluster": {
+      "target": {
+        "h": 400
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 3
+    },
+    "tree_dead_swamp": {
+      "target": {
+        "h": 380
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "swamp"
+      ],
+      "weight": 4
+    },
+    "tree_peach_blossom": {
+      "target": {
+        "h": 440
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 2,
+      "clear": [
+        {
+          "x": 0.55,
+          "y": 0,
+          "w": 0.2,
+          "h": 0.105
+        }
+      ]
+    },
+    "tree_pine_01": {
+      "target": {
+        "h": 460
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 4
+    },
+    "tree_pine_02": {
+      "target": {
+        "h": 460
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "sect"
+      ],
+      "weight": 4
+    },
+    "well_stone": {
+      "target": {
+        "h": 220
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "courtyard"
+      ],
+      "weight": 0
+    }
   },
-  "icons": ["heal_pill", "breakthrough_pill", "blueprint_white_green", "blueprint_blue_purple", "blueprint_gold_red", "craft_material", "stone_low", "stone_mid", "stone_high"],
-  "iconSize2x": 128
+  "icons": [
+    "heal_pill",
+    "breakthrough_pill",
+    "blueprint_white_green",
+    "blueprint_blue_purple",
+    "blueprint_gold_red",
+    "craft_material",
+    "stone_low",
+    "stone_mid",
+    "stone_high"
+  ],
+  "iconSize2x": 128,
+  "_mobs": "INTERIM standees: static concept art (assets-src/concepts/mobs, faces LEFT) keyed + trimmed, longest side = box design px @1x (docs/03 section 6 canvas by footprint: normal 128, elite 192, boss 2x2 256, boss 4x4 512). id = MOB_DEFS wire id (test-checked). Replaced by animated sprites later.",
+  "mobs": {
+    "mob_doc_tho": {
+      "id": 1,
+      "box": 128
+    },
+    "mob_hoi_lang": {
+      "id": 2,
+      "box": 128
+    },
+    "mob_thanh_xa": {
+      "id": 3,
+      "box": 128
+    },
+    "elite_lang_vuong": {
+      "id": 4,
+      "box": 192
+    },
+    "mob_doc_chu": {
+      "id": 5,
+      "box": 128
+    },
+    "mob_doc_thiem": {
+      "id": 6,
+      "box": 128
+    },
+    "elite_thiem_vuong": {
+      "id": 7,
+      "box": 192
+    },
+    "mob_co_can": {
+      "id": 8,
+      "box": 128
+    },
+    "mob_huyet_diep": {
+      "id": 9,
+      "box": 128
+    },
+    "elite_co_can_mau": {
+      "id": 10,
+      "box": 192
+    },
+    "boss_ho_vuong": {
+      "id": 11,
+      "box": 256
+    },
+    "mob_xich_diem": {
+      "id": 12,
+      "box": 128
+    },
+    "elite_xich_mang": {
+      "id": 13,
+      "box": 192
+    },
+    "boss_co_mang": {
+      "id": 14,
+      "box": 512
+    }
+  }
 }

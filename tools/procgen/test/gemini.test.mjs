@@ -18,10 +18,12 @@ const H = 480;
 function fixture({ sparkle = true } = {}) {
   const img = new Image(W, H);
   for (let y = 0; y < H; y++)
-    for (let x = 0; x < W; x++) img.setPixel(x, y, 245 + ((x * 10) / W) | 0, 35 + ((y * 25) / H) | 0, 244 + ((x * 11) / W) | 0, 255);
+    for (let x = 0; x < W; x++)
+      img.setPixel(x, y, (245 + (x * 10) / W) | 0, (35 + (y * 25) / H) | 0, (244 + (x * 11) / W) | 0, 255);
   const disc = (cx, cy, r, col) => {
     for (let y = cy - r; y <= cy + r; y++)
-      for (let x = cx - r; x <= cx + r; x++) if ((x - cx) ** 2 + (y - cy) ** 2 <= r * r) img.setPixel(x, y, ...col, 255);
+      for (let x = cx - r; x <= cx + r; x++)
+        if ((x - cx) ** 2 + (y - cy) ** 2 <= r * r) img.setPixel(x, y, ...col, 255);
   };
   // golden glow around the body: R stays saturated, G rises towards the centre (what a glow over magenta looks like)
   for (let y = 0; y < H; y++)
@@ -39,7 +41,8 @@ function fixture({ sparkle = true } = {}) {
   for (let y = 215; y < 245; y++) for (let x = 190; x < 215; x++) img.setPixel(x, y, 250, 38, 247, 255);
   if (sparkle) {
     // light-pink 4-point star inside the corner box (15% of the short side = 60 px here)
-    const cx = W - 30, cy = H - 30;
+    const cx = W - 30,
+      cy = H - 30;
     for (let y = cy - 20; y <= cy + 20; y++)
       for (let x = cx - 20; x <= cx + 20; x++) {
         const k = (Math.abs(x - cx) * Math.abs(y - cy)) / 20;
@@ -156,12 +159,17 @@ describe('skill-icon grids', () => {
     const img = new Image(480, 360);
     for (let y = 0; y < 360; y++) for (let x = 0; x < 480; x++) img.setPixel(x, y, 250, 40, 248, 255);
     for (let k = 0; k < 8; k++) {
-      const x0 = 20 + (k % 4) * 110, y0 = 20 + Math.floor(k / 4) * 130;
-      for (let y = y0; y < y0 + 100; y++) for (let x = x0; x < x0 + 100; x++) img.setPixel(x, y, 40 + 25 * k, 90, 200 - 20 * k, 255);
+      const x0 = 20 + (k % 4) * 110,
+        y0 = 20 + Math.floor(k / 4) * 130;
+      for (let y = y0; y < y0 + 100; y++)
+        for (let x = x0; x < x0 + 100; x++) img.setPixel(x, y, 40 + 25 * k, 90, 200 - 20 * k, 255);
     }
-    const cx = 450, cy = 330;
+    const cx = 450,
+      cy = 330;
     for (let y = cy - 20; y <= cy + 20; y++)
-      for (let x = cx - 20; x <= cx + 20; x++) if (Math.abs(x - cx) + Math.abs(y - cy) < 20 - (Math.abs(x - cx) * Math.abs(y - cy)) / 25) img.setPixel(x, y, 255, 160, 255, 255);
+      for (let x = cx - 20; x <= cx + 20; x++)
+        if (Math.abs(x - cx) + Math.abs(y - cy) < 20 - (Math.abs(x - cx) * Math.abs(y - cy)) / 25)
+          img.setPixel(x, y, 255, 160, 255, 255);
     return img;
   }
   it('slices 8 tiles row-major (left to right, top to bottom) and removes the mark', () => {
@@ -180,15 +188,33 @@ describe('skill-icon grids', () => {
     expect(() => G.sliceSkillGrid(img, 128)).toThrow(/8/);
   });
   it('maps every skill id of skills.json to its class grid, 8 per class, in file order', () => {
-    const skills = JSON.parse(fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../packages/shared/src/data/skills.json'), 'utf8'));
+    const skills = JSON.parse(
+      fs.readFileSync(
+        path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../packages/shared/src/data/skills.json'),
+        'utf8',
+      ),
+    );
     const g = classGrids(skills);
     expect(Object.keys(g).sort()).toEqual([...GRID_PATHS].sort());
     expect(Object.values(g).flat()).toHaveLength(48);
-    expect(g.kiem).toEqual(['kiem_khi_tram', 'lien_hoan_kiem', 'phi_kiem_thuat', 'kim_quang_quet', 'thiem_kiem_bo', 'kiem_tam', 'ngu_kiem_tran', 'van_kiem_quy_tong']);
+    expect(g.kiem).toEqual([
+      'kiem_khi_tram',
+      'lien_hoan_kiem',
+      'phi_kiem_thuat',
+      'kim_quang_quet',
+      'thiem_kiem_bo',
+      'kiem_tam',
+      'ngu_kiem_tran',
+      'van_kiem_quy_tong',
+    ]);
     expect(() => classGrids({ skills: skills.skills.slice(1) })).toThrow(/kiem/);
   });
   const src = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../assets-src/gemini/skills');
-  const real = GRID_PATHS.every((p) => fs.existsSync(path.join(src, `${p}.png`)) && fs.readFileSync(path.join(src, `${p}.png`)).readUInt32BE(0) === 0x89504e47);
+  const real = GRID_PATHS.every(
+    (p) =>
+      fs.existsSync(path.join(src, `${p}.png`)) &&
+      fs.readFileSync(path.join(src, `${p}.png`)).readUInt32BE(0) === 0x89504e47,
+  );
   it.skipIf(!real)('the owner-provided grids all slice into 8 square icons with keyed rounded corners', () => {
     for (const p of GRID_PATHS) {
       const r = G.sliceSkillGrid(decodePNG(fs.readFileSync(path.join(src, `${p}.png`))), 128);
@@ -199,5 +225,40 @@ describe('skill-icon grids', () => {
         expect(px(im, 64, 64)[3]).toBe(255);
       }
     }
+  });
+});
+
+describe('keyMagenta never eats neutral / pale bodies that touch the background', () => {
+  /** Body of one flat colour directly against the magenta background (no dark outline), like a pale stone or mist. */
+  function bodyOn(col) {
+    const img = new Image(200, 200);
+    for (let y = 0; y < 200; y++) for (let x = 0; x < 200; x++) img.setPixel(x, y, 250, 40, 248, 255);
+    for (let y = 50; y < 150; y++) for (let x = 50; x < 150; x++) img.setPixel(x, y, ...col, 255);
+    return img;
+  }
+  for (const col of [
+    [180, 180, 180],
+    [210, 210, 210],
+    [255, 255, 255],
+    [230, 225, 215],
+    [200, 190, 200],
+    [160, 160, 170],
+  ]) {
+    it(`keeps a ${col} body fully opaque and unchanged, edges included`, () => {
+      const { image } = G.keyMagenta(bodyOn(col));
+      for (const [x, y] of [
+        [50, 50],
+        [100, 50],
+        [149, 100],
+        [100, 149],
+        [100, 100],
+        [51, 51],
+      ])
+        expect(px(image, x, y), `pixel ${x},${y}`).toEqual([...col, 255]);
+    });
+  }
+  it('still keys real magenta haze next to the body (the body does not stop the key)', () => {
+    const { image } = G.keyMagenta(bodyOn([180, 180, 180]));
+    expect(px(image, 10, 10)[3]).toBe(0);
   });
 });

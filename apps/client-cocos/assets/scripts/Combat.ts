@@ -4,6 +4,7 @@ import { cellCenterToWorld, newNode, pointSortable, tileToWorld } from './IsoAda
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import type { TilePos } from './Actors';
+import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
@@ -161,6 +162,9 @@ export class CombatUi {
   private readonly targetText: Label;
   private readonly ring: Node;
   private readonly enemyNodes = new Map<number, Node>();
+  /** INTERIM mob standees (MobArt.ts); set by Bootstrap. Enemies it does not know keep the placeholder sprite. */
+  mobArt: MobArt | null = null;
+  private readonly standees = new Map<number, MobStandee>();
   private readonly enemyBars = new Map<number, OverheadBar>();
   private readonly selfBar: OverheadBar;
   private readonly worldUi: Node;
@@ -507,7 +511,7 @@ export class CombatUi {
       this.targetText.string = `${Math.ceil(t.hp)} / ${t.hpMax}`;
       this.ring.setPosition(cellCenterToWorld(Math.floor(t.pos.i), Math.floor(t.pos.j)));
     }
-    this.syncEnemyNodes();
+    this.syncEnemyNodes(dt);
     this.updateOverheads(dt, tid);
     this.updateDeathOverlay();
 
@@ -529,12 +533,23 @@ export class CombatUi {
    * One placeholder sprite per enemy the backend knows (mock dummies, or mobs the server shows); created on first sight, moved to the
    * backend position every frame, hidden while dead and removed when the backend forgets the enemy.
    */
-  private syncEnemyNodes(): void {
+  private syncEnemyNodes(dt: number): void {
     const seen = new Set<number>();
     for (const e of this.backend.enemies) {
       seen.add(e.id);
       let n = this.enemyNodes.get(e.id);
-      if (!n) {
+      const standee = !n ? this.mobArt?.create(e.id, e.name) : null;
+      if (!n && standee) {
+        n = standee.node;
+        this.standees.set(e.id, standee);
+        const id = e.id;
+        const key = 3000 + (id % 100000);
+        this.ysort.add(n, () => {
+          const cur = this.backend.enemy(id);
+          return pointSortable(key, 0, cur?.pos.i ?? 0, cur?.pos.j ?? 0);
+        });
+        this.enemyNodes.set(id, n);
+      } else if (!n) {
         n = newNode(`Enemy${e.id}`);
         n.addComponent(UITransform).setContentSize(48, 72);
         n.getComponent(UITransform)!.setAnchorPoint(0.5, 0.06);
@@ -552,12 +567,17 @@ export class CombatUi {
         this.enemyNodes.set(id, n);
       }
       n.setPosition(tileToWorld(e.pos.i, e.pos.j));
-      n.active = e.alive;
+      const st = this.standees.get(e.id);
+      if (st) {
+        st.update(dt, e);
+        n.active = st.visible;
+      } else n.active = e.alive;
     }
     this.enemyNodes.forEach((n, id) => {
       if (seen.has(id)) return;
       this.ysort.remove(n); // unregisters only: destroy the node here
       n.destroy();
+      this.standees.delete(id);
       this.enemyNodes.delete(id);
     });
   }
@@ -577,7 +597,9 @@ export class CombatUi {
     for (const e of this.backend.enemies) {
       let b = this.enemyBars.get(e.id);
       if (!b) {
-        b = new OverheadBar(this.worldUi, this.art.pixel, 84);
+        // above the head: 84 px for the placeholder, standee height + a margin for the INTERIM mob art (up to 512 px for a boss)
+        const st = this.standees.get(e.id);
+        b = new OverheadBar(this.worldUi, this.art.pixel, st ? st.heightPx + 14 : 84);
         this.enemyBars.set(e.id, b);
       }
       b.place(e.pos.i, e.pos.j);
