@@ -71,6 +71,8 @@ interface Last {
   qi: number;
   qj: number;
   hp: number;
+  anim: number;
+  dir: number;
 }
 
 interface Client {
@@ -464,8 +466,8 @@ export class WorldNode {
         const qi = quantizePos(e.i);
         const qj = quantizePos(e.j);
         const hpPct = this.hpPct(e);
-        c.last[index] = { qi, qj, hp: hpPct };
         const se = snapshotEntityOf(index, e, this.animOf(e), null);
+        c.last[index] = { qi, qj, hp: hpPct, anim: se.anim, dir: se.dir };
         enters.push({
           index,
           entityId: e.id,
@@ -479,14 +481,22 @@ export class WorldNode {
         });
       }
 
-      // bands for the update rate (docs/08 §2): near = on screen, far = beyond 80% of the radius
+      // update-rate bands by tile distance to this player (D73): near 20 Hz, mid 10 Hz, far 5 Hz
+      // in a crowd only the closest NEAR_MAX_ENTITIES keep the full rate; the rest of the near band drops to mid
+      const ranked: { v: { band: number }; d: number; id: number }[] = [];
       for (const [eid, v] of c.visible) {
         const e = this.byId.get(eid)!;
-        const eu = toUW(e.i, e.j);
-        const fu = Math.abs(eu.u - u0) / AOI.HALF_U;
-        const fw = Math.abs(eu.w - w0) / AOI.HALF_W;
-        const f = Math.max(fu, fw);
-        v.band = f > AOI.FAR_BAND_FRACTION ? 2 : f > 0.5 ? 1 : 0;
+        ranked.push({ v, d: Math.hypot(e.i - me.i, e.j - me.j), id: eid });
+      }
+      ranked.sort((x, y) => x.d - y.d || x.id - y.id);
+      let nearUsed = 0;
+      for (const { v, d } of ranked) {
+        if (d > AOI.MID_BAND_TILES) v.band = 2;
+        else if (d > AOI.NEAR_BAND_TILES || nearUsed >= AOI.NEAR_MAX_ENTITIES) v.band = 1;
+        else {
+          v.band = 0;
+          nearUsed++;
+        }
       }
 
       if (leaves.length > 0) {
@@ -529,7 +539,7 @@ export class WorldNode {
       }
       const full = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS || c.snapSeq === 0;
       const entities: SnapshotEntity[] = [];
-      const touched: { index: number; qi: number; qj: number; hp: number }[] = [];
+      const touched: { index: number; qi: number; qj: number; hp: number; anim: number; dir: number }[] = [];
       for (const [eid, v] of c.visible) {
         if ((this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
         const e = this.byId.get(eid);
@@ -537,8 +547,18 @@ export class WorldNode {
         const last = c.last[v.index];
         const hp = this.hpPct(e);
         const se = snapshotEntityOf(v.index, e, this.animOf(e), last && last.hp === hp ? null : hp);
+        // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
+        if (
+          last &&
+          se.hpPct === null &&
+          last.qi === se.qi &&
+          last.qj === se.qj &&
+          last.anim === se.anim &&
+          last.dir === se.dir
+        )
+          continue;
         entities.push(se);
-        touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp });
+        touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp, anim: se.anim, dir: se.dir });
       }
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
@@ -552,7 +572,7 @@ export class WorldNode {
         },
         { baseline: (index) => c.last[index] },
       );
-      for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp };
+      for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp, anim: t.anim, dir: t.dir };
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);

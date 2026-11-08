@@ -162,7 +162,7 @@ Ghi chú: mọi thông điệp C→S là **ý định**; không có thông đi�
 
 - Client ghi số `seq` snapshot nhận gần nhất vào `ack` của mọi gói `input`; server mã hóa delta dựa trên snapshot đó; quá 1 s không có ACK → gửi **trạng thái đầy đủ** (`flags` đánh dấu).
 - `self` block (19 B) mang `lastSeq` và trạng thái chuyển động để client chạy lại input chờ (đối soát). Vị trí `float32`; sai lệch ≤ 1e-5 ô ở bản đồ 256 ô (PR #10).
-- Tần số theo vùng: 20 / 10 / 5 Hz, luôn 20 Hz cho đồng đội, mục tiêu đang chọn, kẻ tấn công mình (`NETWORK.UPDATE_HZ_*`).
+- Tần số theo vùng: 20 / 10 / 5 Hz [Cập nhật D73: vùng theo khoảng cách ô 10 / 25, trần 40 thực thể ở 20 Hz, bỏ bản ghi không đổi; định dạng dây không đổi], luôn 20 Hz cho đồng đội, mục tiêu đang chọn, kẻ tấn công mình (`NETWORK.UPDATE_HZ_*`).
 - Bản ghi thực thể: `chỉ số 10 · tuyệt đối 1 · (Δi s8+Δj s8 | qi 16+qj 16) · anim 6 · hướng 3 · hasHp 1 · [hp% 7]` = 37–44 bit (PR #10 thêm 1 bit "tuyệt đối" so với 36–43 bit của 08; sai khác này được ghi ở [OPEN-ITEMS, mục "Design C (20–29)"](OPEN-ITEMS.md)).
 - **Hướng 3 bit = 8 hướng** để chứa cả hướng đã lật gương và animation bất đối xứng (D14); client suy ra phần lật từ hướng.
 

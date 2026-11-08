@@ -304,3 +304,9 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 ## D71 — phần client chưa triển khai trong PR cổng ngân sách
 
 Quyết định D71 mô tả cả phần client; PR này chỉ có công cụ + cổng CI. Còn chờ PR client-cocos (stack lên PR này): (1) preset nén texture ASTC 4x4 / 6x6 + WebP trong `settings/v2/packages/builder.json`, gắn vào PNG qua `.meta`; (2) bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:assets`; (3) nạp lười có hàng đợi, bootstrap chỉ nhóm `loco` của người chơi; (4) chọn tier `?restier=1x|full`. Số đo trước/sau (RAM, gói tải đầu) chỉ có ý nghĩa sau khi (1)–(4) merge.
+
+## D73 — băng thông snapshot: còn mở
+
+- **Client chưa chịu được tần số thấp**: `RemoteWorld` (PR client online #199) nội suy với trễ cố định 150 ms; thực thể vùng 5 Hz (khoảng cách 200 ms) sẽ đứng khựng ~50 ms mỗi chu kỳ. Cần trễ thích ứng theo từng thực thể (max(150 ms, 1,25 × khoảng cách snapshot gần nhất)); làm sau khi #199 merge.
+- Chưa có "luôn 20 Hz cho đồng đội / mục tiêu / kẻ tấn công" (chưa có nhóm và chọn mục tiêu); trần 40 thực thể ở 20 Hz đang áp cho mọi người.
+- Số đo mới chạy bot trên cùng máy, loopback (xem PR); bot không nội suy nên chưa đo cảm giác mượt của vùng 10/5 Hz.
