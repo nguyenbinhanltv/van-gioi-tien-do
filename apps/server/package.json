@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/ws": "^8.5.12",
     "esbuild": "^0.21.5",
+    "@vgtd/client-combat": "*",
     "@vgtd/client-core": "*"
   }
 }

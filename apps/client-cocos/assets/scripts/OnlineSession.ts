@@ -1,5 +1,5 @@
 import { Node } from 'cc';
-import { core, sim } from './vendor/vgtd.mjs';
+import { combat as cb, core, shared, sim } from './vendor/vgtd.mjs';
 import { RemotePlayer, type TilePos } from './Actors';
 import { CHIBI_CLASSES } from './ChibiBody';
 import type { ArtFrames } from './PlaceholderArt';
@@ -8,6 +8,7 @@ import type { YSortLayer } from './YSortLayer';
 type InputFrame = ReturnType<InstanceType<typeof core.InputManager>['poll']>;
 
 const KIND_PLAYER = 0;
+const KIND_MONSTER = 1;
 
 function randomHex(bytes: number): string {
   const a = new Uint8Array(bytes);
@@ -65,6 +66,10 @@ export class OnlineSession {
   readonly username: string;
   private readonly actors = new Map<number, RemotePlayer>();
   private failed = '';
+  /** server-authoritative combat backend (`?online=1&combat=1`); null = no combat HUD */
+  private serverCombat: InstanceType<typeof cb.ServerCombat> | null = null;
+  /** name / max HP of monsters in view (from `aoi_enter`; later snapshots only carry hpPct) */
+  private readonly mobMeta = new Map<number, { name: string; hpMax: number }>();
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -83,6 +88,42 @@ export class OnlineSession {
       // the server announces its map size; its collision grid is open (D70), so the prediction grid is open too
       makeGrid: (n) => sim.TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n))),
     });
+  }
+
+  /**
+   * Attach the combat backend: casts go out through `net.sendSkillCast`, and the NetClient hooks feed it `skill_result` (hits, cooldowns,
+   * refusals), monsters entering / leaving view (`aoi_enter` carries max HP, snapshots only hpPct), the snapshot tick (server time) and the
+   * own vitals (HP / MP / shield, wire v3). Create the backend with `send: (m) => online.sendCast(m)`.
+   */
+  attachCombat(sc: InstanceType<typeof cb.ServerCombat>): void {
+    this.serverCombat = sc;
+    this.net.events = {
+      onSkillResult: (msg) => sc.applySkillResult(msg, performance.now(), (i) => this.net.entityOfIndex(i)),
+      onAoiEnter: (entities) => {
+        for (const e of entities) {
+          if (e.kind === KIND_MONSTER) this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, hpMax: e.maxHp });
+        }
+      },
+      onAoiLeave: (indices) => {
+        for (const i of indices) {
+          const id = this.net.entityOfIndex(i); // the hook runs before removal: the index still resolves
+          if (id === undefined) continue;
+          this.mobMeta.delete(id);
+          sc.removeEnemy(id);
+        }
+      },
+      onSnapshot: (tick, _entities, self) => {
+        sc.setServerTime(tick * shared.NETWORK.TICK_MS);
+        const v = self?.vitals;
+        if (v)
+          sc.setSelfVitals({ hp: v.hp, hpMax: v.hpMax, mp: v.mp, mpMax: v.mpMax, shield: v.shield, alive: v.hp > 0 });
+      },
+    };
+  }
+
+  /** Transport hook for `cb.ServerCombat`: false when the socket is not open. */
+  sendCast(m: { seq: number; skillId: number; targetId: number; aim: { i: number; j: number } | null }): boolean {
+    return this.net.sendSkillCast(m);
   }
 
   /** Debug hook for headless captures / the console: `window.__vgtdOnline()`. */
@@ -124,7 +165,22 @@ export class OnlineSession {
     const f = walkMode ? { ...frame, magnitude: frame.magnitude * 0.5 } : frame;
     this.net.update(dt * 1000, core.InputManager.toPacket(f));
     this.syncRemotes();
+    this.syncMobs();
     return this.net.selfPosition();
+  }
+
+  /** Monsters in view -> the combat backend (interpolated position, hp percent from snapshots); the HUD draws them. */
+  private syncMobs(): void {
+    const sc = this.serverCombat;
+    if (!sc) return;
+    for (const v of this.net.remotes()) {
+      if (v.kind !== KIND_MONSTER) continue;
+      const meta = this.mobMeta.get(v.entityId);
+      if (!meta) continue;
+      if (sc.enemy(v.entityId)) sc.syncEnemy(v.entityId, { i: v.i, j: v.j }, v.hpPct);
+      else
+        sc.upsertEnemy({ id: v.entityId, name: meta.name, pos: { i: v.i, j: v.j }, hpPct: v.hpPct, hpMax: meta.hpMax });
+    }
   }
 
   private syncRemotes(): void {

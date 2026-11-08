@@ -118,7 +118,8 @@ describe('bandwidth budgets (docs/08 §8)', () => {
   });
 
   it('other messages stay small: spawn 20 B/entity, skill cast 10 B, skill result < 40 B for 3 hits, ping 6 B', () => {
-    expect(encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3 }).length).toBe(10);
+    expect(encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: null }).length).toBe(11);
+    expect(encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: { qi: 100, qj: 200 } }).length).toBe(15);
     expect(encode({ type: 'ping', clientTimeMs: 1 }).length).toBe(6);
     expect(encode({ type: 'pong', clientTimeMs: 1, serverTimeMs: 2 }).length).toBe(10);
     const enter = encode({

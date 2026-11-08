@@ -30,6 +30,8 @@ export interface CombatBackend {
   enemy(id: number): EnemyView | undefined;
   /** Tell the backend where the local player is (target range, Tab cycling). */
   setPlayerPos(p: TilePoint): void;
+  /** Where the player is aiming (pointer position in tile coordinates), or null. Used by backends that send an aim point (ground / direction skills). */
+  setAim?(p: TilePoint | null): void;
   /** Request a cast of a hotbar slot. Returns the immediate events (`cast_start`, or `blocked` with a reason). */
   cast(slot: number, nowMs: number): CombatEvent[];
   /** Advance to `nowMs`; returns the events since the last call. */

@@ -166,6 +166,8 @@ export class CombatUi {
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
+  private readonly pointerMove: (e: PointerEvent) => void;
+  private lastPointer: { x: number; y: number } | null = null;
 
   constructor(
     hudParent: Node,
@@ -176,6 +178,8 @@ export class CombatUi {
     backend: cb.CombatBackend,
     private readonly playerPos: () => TilePos,
     private readonly clientToUi: (x: number, y: number) => { x: number; y: number },
+    /** client px -> shared logical screen coordinates (y down), for the aim point */
+    private readonly clientToScreen: (x: number, y: number) => { x: number; y: number },
   ) {
     this.backend = backend;
     this.ysort = ysort;
@@ -261,6 +265,11 @@ export class CombatUi {
     // pointerdown on a hotbar slot casts it and must not also start click-to-move (client-core listens on the same canvas)
     this.pointerDown = (e) => this.onPointer(e);
     game.canvas?.addEventListener('pointerdown', this.pointerDown, { capture: true });
+    // aim = where the pointer is (ground / direction skills); touch has no hover, so the aim stays unset there
+    this.pointerMove = (e) => {
+      this.lastPointer = { x: e.clientX, y: e.clientY };
+    };
+    game.canvas?.addEventListener('pointermove', this.pointerMove);
     this.layout(1280, 720);
     // automation hook (scripts/combat-smoke.mjs): read the mock state without touching the DOM / canvas pixels
     (globalThis as unknown as Record<string, unknown>).__vgtdCombat = {
@@ -311,6 +320,13 @@ export class CombatUi {
     const now = this.clock;
     if (frameTarget !== null) this.backend.target.select(frameTarget);
     this.backend.setPlayerPos(this.playerPos());
+    if (this.backend.setAim) {
+      const lp = this.lastPointer;
+      if (lp) {
+        const s = this.clientToScreen(lp.x, lp.y);
+        this.backend.setAim(shared.screenToTile(s.x, s.y));
+      }
+    }
     for (const ev of this.backend.update(now)) this.onEvent(ev);
     this.refresh(now, dt);
   }
@@ -534,5 +550,6 @@ export class CombatUi {
   destroy(): void {
     window.removeEventListener('keydown', this.keyDown);
     game.canvas?.removeEventListener('pointerdown', this.pointerDown, { capture: true });
+    game.canvas?.removeEventListener('pointermove', this.pointerMove);
   }
 }

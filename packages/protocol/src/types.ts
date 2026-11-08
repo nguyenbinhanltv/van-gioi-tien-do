@@ -7,7 +7,8 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
 
 /** Bump on any wire-incompatible change; decoders reject other versions with ProtocolError('version'). */
 /** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
-export const PROTOCOL_VERSION = 2;
+/** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
+export const PROTOCOL_VERSION = 3;
 
 export enum MsgType {
   Input = 1,
@@ -81,6 +82,8 @@ export interface SkillCastMsg {
   skillId: number;
   /** 0 = no target (self / ground skill) */
   targetId: number;
+  /** Aim point for `ground` / `direction` skills, absolute position in 1/32 tile (like `SnapshotEntity.qi/qj`); null = none (the server uses the target, else the caster's facing). */
+  aim: { qi: number; qj: number } | null;
 }
 
 export interface PingMsg {
@@ -90,6 +93,16 @@ export interface PingMsg {
 
 // ---------------------------------------------------------------- server → client
 /** Authoritative movement state of the receiving player, enough to re-run pending inputs (reconciliation). */
+/** Own vitals, sent only when they changed since the last snapshot the client acknowledged (and on a full snapshot). Integers, u32 each. */
+export interface SelfVitals {
+  hp: number;
+  hpMax: number;
+  mp: number;
+  mpMax: number;
+  /** current shield absorb (0 = none) */
+  shield: number;
+}
+
 export interface SelfState {
   /** last input seq the server processed for this player */
   lastSeq: number;
@@ -104,6 +117,8 @@ export interface SelfState {
   dashLeftMs: number;
   dashCdMs: number;
   invulnMs: number;
+  /** present only when changed (see `SelfVitals`) */
+  vitals: SelfVitals | null;
 }
 
 /** One entity in a snapshot. `qi`/`qj` are absolute positions in 1/32 tile; the codec picks delta or absolute. */

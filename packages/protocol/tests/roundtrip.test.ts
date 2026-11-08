@@ -16,6 +16,7 @@ import {
   snapshotEntityOf,
   type BaselineLookup,
   type Message,
+  type SelfState,
   type SnapshotMsg,
 } from '../src/index.js';
 import { lcg, randEntity, randMessage, randSelf, type HotType } from './helpers.js';
@@ -94,7 +95,7 @@ describe('binary round trip', () => {
     ).toThrow(ProtocolError);
     expect(() => encode({ type: 'error', code: 1, text: 'a'.repeat(300) })).toThrow(ProtocolError);
     expect(() => encode({ type: 'aoi_leave', indices: [1024] })).toThrow(ProtocolError);
-    expect(() => encode({ type: 'skill_cast', seq: -1, skillId: 0, targetId: 0 })).toThrow(ProtocolError);
+    expect(() => encode({ type: 'skill_cast', seq: -1, skillId: 0, targetId: 0, aim: null })).toThrow(ProtocolError);
     expect(() =>
       encode({
         type: 'snapshot',
@@ -219,9 +220,9 @@ describe('JSON debug codec', () => {
     expect(() => decodeJson('{')).toThrowError(ProtocolError);
     expect(() => decodeJson('[]')).toThrowError(ProtocolError);
     expect(() => decodeJson(JSON.stringify({ v: 99, type: 'ping', clientTimeMs: 1 }))).toThrowError(/version/);
-    expect(() => decodeJson(JSON.stringify({ v: 2, type: 'ping', clientTimeMs: -1 }))).toThrowError(ProtocolError);
-    expect(() => decodeJson(JSON.stringify({ v: 2, type: 'nope' }))).toThrowError(/unknown message type/);
-    expect(decodeJson(JSON.stringify({ v: 2, type: 'ping', clientTimeMs: 4, evil: '__proto__' }))).toEqual({
+    expect(() => decodeJson(JSON.stringify({ v: 3, type: 'ping', clientTimeMs: -1 }))).toThrowError(ProtocolError);
+    expect(() => decodeJson(JSON.stringify({ v: 3, type: 'nope' }))).toThrowError(/unknown message type/);
+    expect(decodeJson(JSON.stringify({ v: 3, type: 'ping', clientTimeMs: 4, evil: '__proto__' }))).toEqual({
       type: 'ping',
       clientTimeMs: 4,
     });
@@ -269,5 +270,59 @@ describe('sim adapters', () => {
     const s = snapshotEntityOf(9, w.entities[0]!, 2, null);
     expect(DIRECTIONS[s.dir]).toBe('E');
     expect([s.index, s.qi, s.qj]).toEqual([9, 168, 216]);
+  });
+});
+
+describe('v3: skill_cast aim point and self vitals (D78)', () => {
+  const self = (vitals: SelfState['vitals']): SelfState => ({
+    lastSeq: 1,
+    i: 10.5,
+    j: 20.25,
+    layer: 0,
+    flying: false,
+    qinggong: false,
+    facing: 32,
+    dashLeftMs: 0,
+    dashCdMs: 0,
+    invulnMs: 0,
+    vitals,
+  });
+  const snap = (s: SelfState): Message => ({
+    type: 'snapshot',
+    seq: 1,
+    baselineSeq: null,
+    tick: 5,
+    self: s,
+    entities: [],
+  });
+
+  it('skill_cast round-trips with and without an aim point (binary and JSON)', () => {
+    for (const aim of [null, { qi: 0, qj: 0 }, { qi: 65535, qj: 12345 }]) {
+      const m: Message = { type: 'skill_cast', seq: 9, skillId: 3, targetId: 77, aim };
+      expect(decode(encode(m))).toEqual(m);
+      expect(decodeJson(encodeJson(m))).toEqual(m);
+    }
+  });
+
+  it('self vitals round-trip, cost 20 bytes only when present, and the JSON codec validates them', () => {
+    const v = { hp: 1200, hpMax: 1200, mp: 394, mpMax: 400, shield: 0 };
+    const without = encode(snap(self(null)));
+    const withV = encode(snap(self(v)));
+    expect(withV.length - without.length).toBe(20);
+    expect(decode(withV)).toEqual(snap(self(v)));
+    expect(decode(without)).toEqual(snap(self(null)));
+    expect(decodeJson(encodeJson(snap(self(v))))).toEqual(snap(self(v)));
+    expect(() => encode(snap(self({ ...v, hp: -1 })))).toThrow(ProtocolError);
+    expect(() => encode(snap(self({ ...v, shield: 2 ** 32 })))).toThrow(ProtocolError);
+  });
+
+  it('rejects unknown cast flags and out-of-range aim', () => {
+    const buf = encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: null });
+    const bad = Uint8Array.from(buf);
+    bad[bad.length - 1] = 0x80; // unknown flag bit
+    expect(() => decode(bad)).toThrow(ProtocolError);
+    expect(() => encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: { qi: 70000, qj: 0 } })).toThrow(
+      ProtocolError,
+    );
   });
 });

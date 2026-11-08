@@ -72,7 +72,7 @@ describe('progression over the real protocol (WorldNode)', () => {
   });
   it('a skill cast counts as combat: meditation is refused', async () => {
     const { world, c } = await setup();
-    world.receive(c.id, encode({ type: 'skill_cast', seq: 1, skillId: 1, targetId: 0 }));
+    world.receive(c.id, encode({ type: 'skill_cast', seq: 1, skillId: 1, targetId: 0, aim: null }));
     world.receive(c.id, encode({ type: 'meditate_start', requestId: hex(1) }));
     expect(c.of('meditate_result').at(-1)).toMatchObject({ meditating: false, reason: ProgressionReason.InCombat });
   });
