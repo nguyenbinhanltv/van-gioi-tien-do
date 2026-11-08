@@ -75,8 +75,9 @@ export interface DropRoll {
 
 /** Items that can drop at all under the context's realm gap / repeat-kill rules (before probabilities). */
 function allowed(item: DropItem, ctx: DropContext): boolean {
-  if (ctx.bossRepeat && ctx.source === 'boss') return STONE_ITEMS.includes(item);
-  if (lowRealmFactor(ctx.realmGap ?? 0) === null) return item === 'craft_material';
+  // Both restrictions apply together: 2+ realms lower leaves only materials, a boss repeat leaves only stones.
+  if (lowRealmFactor(ctx.realmGap ?? 0) === null && item !== 'craft_material') return false;
+  if (ctx.bossRepeat && ctx.source === 'boss' && !STONE_ITEMS.includes(item)) return false;
   return true;
 }
 

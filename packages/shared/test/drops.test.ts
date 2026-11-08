@@ -50,6 +50,13 @@ describe('effective drop chance (docs/07 §6 modifiers)', () => {
     expect(effectiveDropChance('breakthrough_pill', repeat)).toBe(0);
     expect(dropQuantityFactor('stone_thuong', repeat)).toBe(BOSS_REPEAT_STONE_FACTOR);
   });
+  it('boss repeat kill 2+ realms lower: both restrictions apply, nothing drops', () => {
+    const both = { ...boss, bossRepeat: true, realmGap: 2 };
+    for (const item of DROP_ITEM_ORDER) expect(effectiveDropChance(item, both), item).toBe(0);
+    expect(resolveDrops(both, () => 0)).toEqual([]);
+    // one realm lower still leaves the stones, at x0.2
+    expect(effectiveDropChance('stone_ha', { ...boss, bossRepeat: true, realmGap: 1 })).toBeCloseTo(0.2, 12);
+  });
   it('Gold/Red blueprint pity replaces the printed rate: 0.002 x (1 + 0.15n), guaranteed at n = 30', () => {
     expect(effectiveDropChance('blueprint_gold_red', { ...boss, goldRedAttempt: 1 })).toBeCloseTo(0.0023, 12);
     expect(effectiveDropChance('blueprint_gold_red', { ...boss, goldRedAttempt: 10 })).toBeCloseTo(
