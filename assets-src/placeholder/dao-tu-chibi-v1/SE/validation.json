@@ -2,7 +2,7 @@
   "character": "dao-tu-chibi-v1",
   "direction": "SE",
   "delivery": "D41 full-source compatibility motion; not extracted layered runtime",
-  "utcRecorded": "2026-11-08T01:18:14.220Z",
+  "utcRecorded": "2026-11-08T01:20:17.745Z",
   "nodeVersion": "v24.12.0",
   "source": {
     "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/build.ts --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1",
@@ -423,5 +423,30 @@
   "followUp": "22 measured foot-contact findings and7manual art findings remain open. Dedicated D45 extraction follows all5directions.",
   "d45GuideProvenance": "layer-guides.provenance.json",
   "repairProof": "repair-proof.json",
-  "reviewArtifact": "master-review.html with motion-review-SE.html"
+  "reviewArtifact": "master-review.html with motion-review-SE.html",
+  "postMergeVerification": {
+    "main": "c591d6795a9345501cfd2935dd8029f1278544c7",
+    "mergeCommit": "e72e6fb",
+    "checks": [
+      {
+        "command": "npm.cmd run typecheck",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd test",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd run build",
+        "exitCode": 0
+      },
+      {
+        "command": "npm.cmd run lint",
+        "exitCode": 0
+      }
+    ],
+    "sourceQaUnchanged": true,
+    "renderInputsUnchanged": true,
+    "resampling": "not enabled; scale1 fixed after whole-sheet DPI normalization"
+  }
 }
