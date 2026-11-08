@@ -1,7 +1,7 @@
 /* global process, console */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { blit, createImage, encodePng, line, drawNumber } from '@vgtd/rig';
+import { blit, createImage, encodePng, line, drawNumber, cross } from '@vgtd/rig';
 import {
   runProject,
   CELL_PX,
@@ -50,7 +50,7 @@ for (const clip of result.alignedClips) {
     }
   });
   writeFileSync(join(out, clip.name + '.heads-diagnostic.png'), encodePng(heads));
-  if (clip.name === 'dash') {
+  if (['idle', 'walk', 'run', 'dash', 'emote'].includes(clip.name)) {
     for (let i = 0; i < clip.frames.length; i++) {
       const ox = (i % 4) * CELL_PX,
         oy = Math.floor(i / 4) * CELL_PX;
@@ -61,6 +61,14 @@ for (const clip of result.alignedClips) {
         drawNumber(sheet, String(p), ox + 1, oy + p, 1, [10, 70, 100, 255]);
       }
       drawNumber(sheet, String(i), ox + 4, oy + 4, 2, [160, 30, 30, 255]);
+      const evidence = project.clips.find((c) => c.name === clip.name).headEvidence?.[i];
+      if (evidence) {
+        for (const point of [evidence.crown, evidence.chin, evidence.skullBase])
+          if (point) cross(sheet, ox + point.x, oy + point.y, 3, [230, 30, 30, 255]);
+        if (evidence.breadth)
+          for (const point of [evidence.breadth.left, evidence.breadth.right])
+            cross(sheet, ox + point.x, oy + point.y, 2, [0, 130, 60, 255]);
+      }
     }
     writeFileSync(join(out, clip.name + '.landmarks-diagnostic.png'), encodePng(sheet));
   }
