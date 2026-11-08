@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:54:53.709Z",
+  "utcRecordedCompleted": "2026-11-07T23:57:23.503Z",
+  "prompt": "Use case: precise-object-edit. Fill exact FIRST4x4 stencil template with16 sequential unique CAST frames, DAO TU T1 male E profile facingRIGHT,24fps. This class cast is CUONG HUYET RAGE ROAR, NOT a mage spell. Image2 locked E master. Preserve same adult greyeyes/sternface/swept blackfringe/low looseponytail, lean male anatomy216px and skull50px/breadth38px at256cell. Same plain sleeveless darkmutedteal tunic/stormgreyblue collar+sash/darkpants+boots+bracers/minimalbrass. Heavy BROAD single-edge sparse mountain-ink dao stays in RIGHT hand, held low beside body or braced across shoulder, visible everyframe same fullsize.0-3 inhale/bracing with kneessoft, leftfist draws toward ribs;4-6 chest expands, leftfist clenches forward/up;7-9 powerful controlled roar, mouthopen/profile chinlift, grounded wide stance;10-12 exhale/settle;13-15 recover to shoulder-ready. Distinct inbetweens and cloth/hair lag, preserve identity even with mouthopen. No detached weapon or raised wand, no caster mudra/fan/talisman. Fixed lattice rootx128 ground232, no global fit/shrink or arbitrary recenter. Whole dao/hair/limbs insidecell with8pxmargin, no clipping. Head stencil is sizeguide; face may tilt/translate with roar but SAME skull scale. NO redglow/aura/wind/trails/particles/shadows/text/grid/borders. Remove guides to UNIFORM OPAQUE PURE MAGENTA RGB255,0,255. All16frames rowmajor, same premium painted semi-chibi lightNW.",
+  "references": ["templates/cast.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/cast.png",
+  "status": "candidate; pose/origin and QA review in E/project.json"
+}

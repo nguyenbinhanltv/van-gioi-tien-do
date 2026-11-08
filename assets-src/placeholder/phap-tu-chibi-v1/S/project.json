@@ -1,0 +1,755 @@
+{
+  "character": "phap-tu-chibi-v1",
+  "direction": "S",
+  "stem": "phaptuchibi",
+  "master": "../reference/S.master.png",
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../character-calibration.json"
+  },
+  "slice": {
+    "spill": {}
+  },
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 130,
+      "y": 16
+    },
+    "chin": {
+      "x": 131,
+      "y": 64
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "sheets/idle.png",
+      "manifest": "templates/idle.template.json"
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "sheets/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "exceptions": {
+        "0": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "1": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "2": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "3": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "4": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "5": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "6": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "7": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "8": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "9": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "10": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "11": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "12": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "13": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "14": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale",
+        "15": "seated cross-legged meditation; folded hips and knees at fixed anatomical scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "sheets/walk.png",
+      "manifest": "templates/walk.template.json",
+      "vertical": "keep"
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "sheets/run.png",
+      "manifest": "templates/run.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130.5,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130.5,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130.5,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 131,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 131,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 131,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 131,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 131.5,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130.5,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 29
+          },
+          "chin": {
+            "x": 130,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 129,
+            "y": 29
+          },
+          "chin": {
+            "x": 129,
+            "y": 77
+          },
+          "note": "Reviewed selected run source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Flight/contact posture retained at fixed global scale. No frame fitting or rescaling."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "sheets/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        }
+      },
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "4": "secondary-overhang",
+        "5": "secondary-overhang",
+        "6": "secondary-overhang"
+      },
+      "headEvidence": {
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 49
+          },
+          "chin": {
+            "x": 130.5,
+            "y": 97
+          },
+          "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 44
+          },
+          "chin": {
+            "x": 130,
+            "y": 92
+          },
+          "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 130,
+            "y": 54
+          },
+          "chin": {
+            "x": 131,
+            "y": 103
+          },
+          "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 59
+          },
+          "chin": {
+            "x": 131,
+            "y": 108
+          },
+          "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 58
+          },
+          "chin": {
+            "x": 132,
+            "y": 106
+          },
+          "note": "Reviewed selected dash source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Forward-depth dash and secondary hair retained with one shared lattice root. No frame fitting or rescaling."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "sheets/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "exceptions": {
+        "0": "hovering with folded knees; airborne body pose",
+        "1": "hovering with folded knees; airborne body pose",
+        "2": "hovering with folded knees; airborne body pose",
+        "3": "hovering with folded knees; airborne body pose",
+        "4": "hovering with folded knees; airborne body pose",
+        "5": "hovering with folded knees; airborne body pose",
+        "6": "hovering with folded knees; airborne body pose",
+        "7": "hovering with folded knees; airborne body pose",
+        "8": "hovering with folded knees; airborne body pose",
+        "9": "hovering with folded knees; airborne body pose",
+        "10": "hovering with folded knees; airborne body pose",
+        "11": "hovering with folded knees; airborne body pose"
+      },
+      "vertical": "keep"
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack.png",
+      "manifest": "templates/attack.template.json",
+      "exceptions": {
+        "0": "diagonal fan cut with bent knees and torso rotation",
+        "1": "diagonal fan cut with bent knees and torso rotation",
+        "2": "diagonal fan cut with bent knees and torso rotation",
+        "3": "diagonal fan cut with bent knees and torso rotation",
+        "4": "diagonal fan cut with bent knees and torso rotation",
+        "5": "diagonal fan cut with bent knees and torso rotation",
+        "6": "diagonal fan cut with bent knees and torso rotation",
+        "7": "diagonal fan cut with bent knees and torso rotation",
+        "8": "diagonal fan cut with bent knees and torso rotation",
+        "9": "diagonal fan cut with bent knees and torso rotation",
+        "10": "diagonal fan cut with bent knees and torso rotation",
+        "11": "diagonal fan cut with bent knees and torso rotation",
+        "12": "diagonal fan cut with bent knees and torso rotation",
+        "13": "diagonal fan cut with bent knees and torso rotation"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "exceptions": {
+        "0": "rising fan sweep with squat anticipation",
+        "1": "rising fan sweep with squat anticipation",
+        "2": "rising fan sweep with squat anticipation",
+        "3": "rising fan sweep with squat anticipation",
+        "4": "rising fan sweep with squat anticipation",
+        "5": "rising fan sweep with squat anticipation",
+        "6": "rising fan sweep with squat anticipation",
+        "7": "rising fan sweep with squat anticipation",
+        "8": "rising fan sweep with squat anticipation",
+        "9": "rising fan sweep with squat anticipation",
+        "10": "rising fan sweep with squat anticipation",
+        "11": "rising fan sweep with squat anticipation",
+        "12": "rising fan sweep with squat anticipation",
+        "13": "rising fan sweep with squat anticipation"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "sheets/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "exceptions": {
+        "0": "deep forward lunge and recovery",
+        "1": "deep forward lunge and recovery",
+        "2": "deep forward lunge and recovery",
+        "3": "deep forward lunge and recovery",
+        "4": "deep forward lunge and recovery",
+        "5": "deep forward lunge and recovery",
+        "6": "deep forward lunge and recovery",
+        "7": "deep forward lunge and recovery",
+        "8": "deep forward lunge and recovery",
+        "9": "deep forward lunge and recovery",
+        "10": "deep forward lunge and recovery",
+        "11": "deep forward lunge and recovery",
+        "12": "deep forward lunge and recovery",
+        "13": "deep forward lunge and recovery"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "sheets/cast.png",
+      "manifest": "templates/cast.template.json",
+      "exceptions": {
+        "0": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "1": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "2": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "3": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "4": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "5": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "6": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "7": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "8": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "9": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "10": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "11": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "12": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "13": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "14": "casting anticipation and fan sweep; bent knees and torso rotation",
+        "15": "casting anticipation and fan sweep; bent knees and torso rotation"
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "sheets/channel.png",
+      "manifest": "templates/channel.template.json",
+      "exceptions": {
+        "0": "channel mudra and raised left fan sleeve",
+        "1": "channel mudra and raised left fan sleeve",
+        "2": "channel mudra and raised left fan sleeve",
+        "3": "channel mudra and raised left fan sleeve",
+        "4": "channel mudra and raised left fan sleeve",
+        "5": "channel mudra and raised left fan sleeve",
+        "6": "channel mudra and raised left fan sleeve",
+        "7": "channel mudra and raised left fan sleeve",
+        "8": "channel mudra and raised left fan sleeve",
+        "9": "channel mudra and raised left fan sleeve",
+        "10": "channel mudra and raised left fan sleeve",
+        "11": "channel mudra and raised left fan sleeve"
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheet": "sheets/hit-dash.png",
+      "manifest": "templates/hit-dash.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "exceptions": {
+        "0": "brief backward recoil and knee flexion",
+        "1": "brief backward recoil and knee flexion",
+        "2": "brief backward recoil and knee flexion",
+        "3": "brief backward recoil and knee flexion",
+        "4": "brief backward recoil and knee flexion",
+        "5": "brief backward recoil and knee flexion"
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128.70530757272928,
+          "groundY": 241,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed S/templates/hit-dash.head-guide.png and raw/hit-dash.attempt2.png: fixed normalized source lattice X=128.70530757272928; neutral T1 ready cells0,5,6,15 have floors241,241,241,242; one median ground=241. Both hit and dash retain source pelvis/forward-depth and hair travel; same root on every local cell, no fitting or rescaling."
+        }
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "sheets/die.png",
+      "manifest": "templates/die.template.json",
+      "exceptions": {
+        "0": "progressive knee collapse and lying on side; fixed anatomical size",
+        "1": "progressive knee collapse and lying on side; fixed anatomical size",
+        "2": "progressive knee collapse and lying on side; fixed anatomical size",
+        "3": "progressive knee collapse and lying on side; fixed anatomical size",
+        "4": "progressive knee collapse and lying on side; fixed anatomical size",
+        "5": "progressive knee collapse and lying on side; fixed anatomical size",
+        "6": "progressive knee collapse and lying on side; fixed anatomical size",
+        "7": "progressive knee collapse and lying on side; fixed anatomical size",
+        "8": "progressive knee collapse and lying on side; fixed anatomical size",
+        "9": "progressive knee collapse and lying on side; fixed anatomical size",
+        "10": "progressive knee collapse and lying on side; fixed anatomical size",
+        "11": "progressive knee collapse and lying on side; fixed anatomical size"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "sheets/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "exceptions": {
+        "0": "one-knee brace and recovery under wind; fixed anatomical size",
+        "1": "one-knee brace and recovery under wind; fixed anatomical size",
+        "2": "one-knee brace and recovery under wind; fixed anatomical size",
+        "3": "one-knee brace and recovery under wind; fixed anatomical size",
+        "4": "one-knee brace and recovery under wind; fixed anatomical size",
+        "5": "one-knee brace and recovery under wind; fixed anatomical size",
+        "6": "one-knee brace and recovery under wind; fixed anatomical size",
+        "7": "one-knee brace and recovery under wind; fixed anatomical size",
+        "8": "one-knee brace and recovery under wind; fixed anatomical size",
+        "9": "one-knee brace and recovery under wind; fixed anatomical size",
+        "10": "one-knee brace and recovery under wind; fixed anatomical size",
+        "11": "one-knee brace and recovery under wind; fixed anatomical size",
+        "12": "one-knee brace and recovery under wind; fixed anatomical size",
+        "13": "one-knee brace and recovery under wind; fixed anatomical size",
+        "14": "one-knee brace and recovery under wind; fixed anatomical size",
+        "15": "one-knee brace and recovery under wind; fixed anatomical size"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "sheets/emote.png",
+      "manifest": "templates/emote.template.json",
+      "exceptions": {
+        "9": "posture"
+      },
+      "headEvidence": {
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 131,
+            "y": 25
+          },
+          "chin": {
+            "x": 132,
+            "y": 73
+          },
+          "note": "Reviewed selected emote source in exact pipeline-aligned 256px cell overlay, against reference/S.master.png. Crown is main skull cap excluding bun/streaming hair; chin is visible jaw tip, excluding connected neck pixels. Emote posture retained at fixed global scale. No frame fitting or rescaling."
+        }
+      }
+    }
+  ]
+}

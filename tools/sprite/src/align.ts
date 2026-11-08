@@ -8,6 +8,7 @@ import { createImage, type Image } from '@vgtd/rig';
 import { measureFigure } from './master.js';
 import { toPremultiplied, type Straight } from './raster.js';
 import { CELL_PX, type Guides, type MasterMetrics } from './types.js';
+import { resampleAffine, validateResample, type ResampleMethod } from './resample.js';
 
 /** Median of a list (lower median for even counts); NaN for empty. */
 export function median(v: readonly number[]): number {
@@ -40,6 +41,14 @@ export function calibrate(targetHeight: number, referenceHeights: readonly numbe
 }
 
 export interface AlignOptions {
+  readonly resample?: ResampleMethod;
+  /** Native cropped pixels -> logical cropped pixels; composes DPI and calibration in one pass. */
+  readonly sourceTransform?: {
+    readonly scaleX: number;
+    readonly scaleY: number;
+    readonly dx: number;
+    readonly dy: number;
+  };
   /** Variant-only: T1 source anchor converted into this frame's raw pixel units. */
   readonly referenceOrigin?: { readonly x: number; readonly y: number };
   /** The character calibration (same object for every frame of every clip). */
@@ -103,7 +112,11 @@ export function placeScaled(
   qx: number,
   qy: number,
   size: number,
+  resample: ResampleMethod = 'bilinear',
 ): Image {
+  validateResample(resample);
+  if (resample !== 'bilinear')
+    return resampleAffine(src, size, size, { scaleX: s, scaleY: s, dx: qx - px * s, dy: qy - py * s }, resample);
   const out = createImage(size, size);
   const v = [0, 0, 0, 0];
   for (let y = 0; y < size; y++)
@@ -124,12 +137,40 @@ export function alignFrame(frame: Straight, opts: AlignOptions): AlignedFrame | 
   const alpha = opts.alpha ?? 128;
   const scale = opts.calibration.scale;
   const src = toPremultiplied(frame);
-  const m = measureFigure(src, alpha);
-  if (!m) return null;
+  const native = measureFigure(src, alpha);
+  if (!native) return null;
+  const t = opts.sourceTransform;
+  const m = t
+    ? {
+        ...native,
+        left: native.left * t.scaleX + t.dx,
+        right: native.right * t.scaleX + t.dx,
+        top: native.top * t.scaleY + t.dy,
+        bottom: native.bottom * t.scaleY + t.dy,
+        width: native.width * t.scaleX,
+        height: native.height * t.scaleY,
+        pelvisX: native.pelvisX * t.scaleX + t.dx,
+      }
+    : native;
   const vertical = opts.vertical ?? 'sole';
   const refX = opts.referenceOrigin?.x ?? m.pelvisX;
   const refY = opts.referenceOrigin?.y ?? (vertical === 'sole' ? m.bottom : (opts.groundY ?? m.bottom));
-  const image = placeScaled(src, scale, refX, refY, opts.guides.centerX, opts.guides.ground, cell);
+  if (t && (!opts.resample || opts.resample === 'bilinear'))
+    throw new Error('sourceTransform requires lanczos3 or area');
+  const image = t
+    ? resampleAffine(
+        src,
+        cell,
+        cell,
+        {
+          scaleX: scale * t.scaleX,
+          scaleY: scale * t.scaleY,
+          dx: opts.guides.centerX - (refX - t.dx) * scale,
+          dy: opts.guides.ground - (refY - t.dy) * scale,
+        },
+        opts.resample as Exclude<ResampleMethod, 'bilinear'>,
+      )
+    : placeScaled(src, scale, refX, refY, opts.guides.centerX, opts.guides.ground, cell, opts.resample);
   const metrics = measureFigure(image, alpha)!;
   const record: FrameRecord = {
     pre: { height: m.height * scale, pelvisX: m.pelvisX * scale, soleY: m.bottom * scale },

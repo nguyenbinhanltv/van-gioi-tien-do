@@ -1,0 +1,84 @@
+{
+  "clip": "attack_3",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 16,
+    "pelvis": 124,
+    "centerX": 128
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "anticipation"
+    },
+    {
+      "leading": null,
+      "tag": "anticipation"
+    },
+    {
+      "leading": null,
+      "tag": "anticipation"
+    },
+    {
+      "leading": null,
+      "tag": "anticipation"
+    },
+    {
+      "leading": null,
+      "tag": "strike"
+    },
+    {
+      "leading": null,
+      "tag": "strike"
+    },
+    {
+      "leading": null,
+      "tag": "strike"
+    },
+    {
+      "leading": null,
+      "tag": "impact"
+    },
+    {
+      "leading": null,
+      "tag": "impact_hold"
+    },
+    {
+      "leading": null,
+      "tag": "follow_through"
+    },
+    {
+      "leading": null,
+      "tag": "follow_through"
+    },
+    {
+      "leading": null,
+      "tag": "follow_through"
+    },
+    {
+      "leading": null,
+      "tag": "follow_through"
+    },
+    {
+      "leading": null,
+      "tag": "follow_through"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    },
+    {
+      "leading": null,
+      "tag": "unused"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

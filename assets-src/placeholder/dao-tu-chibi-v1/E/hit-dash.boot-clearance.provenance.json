@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:05:43.354Z",
+  "utcRecordedCompleted": "2026-11-08T00:07:21.802Z",
+  "prompt": "Use case: precise-object-edit. ONLY source cell11 (zero-based THIRD ROW FOURTH COLUMN) of this exact4x4 Dao tu HIT/DASH sheet: move the TRAILING REAR BOOT / HEEL (the far LEFT foot of the deepest dash lunge) RIGHT by18nativepixels so its leftmosttoe/heel has20px magenta margin from LEFT cellboundary. Flex that rear ankle/lowerleg slightly to reconnect naturally. Do NOT move pelvis/torso/frontleg/head/face/dao/hands/ponytail, and do NOT resize any part or wholeframe. This is a foot placement edit, not global translation. All other15cells unchanged. Keep entire rearboot visible with proper anatomy, no crop/erase/smear. Same1254x1254canvas4x4grid, pureopaqueRGB255,0,255magenta, noFX/text. Targetcell11 is thirdrowfourth atx941..1253,y627..940. Its backfoot starts too close to leftedge; pull ONLY that boot inward18px.",
+  "references": ["raw/hit-dash.png"],
+  "rawOutput": "raw/hit-dash.boot-clearance-edit.png",
+  "selectedOutput": "raw/hit-dash.boot-repaired.png",
+  "operation": "Official sprite:repair sourcecell11 only;15 other cells byte-identical; previous hair-only attempt retained unselected",
+  "status": "selected clearance candidate; gates pending"
+}

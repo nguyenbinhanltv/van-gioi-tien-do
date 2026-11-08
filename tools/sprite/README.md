@@ -2,6 +2,31 @@
 
 Frame-by-frame AI sprite-sheet pipeline for Player bodies (D41, `docs/art/sprite-sheet-pipeline.md`).
 
+### Optional single-pass resampling
+
+`sprite:build --resample bilinear|lanczos3|area` overrides `project.resample`. Omitted or explicit
+`bilinear` keeps the existing two-pass DPI/placement path and bytes. Nothing opts in automatically.
+`lanczos3` uses an antialiased three-lobe sinc kernel; `area` integrates pixel coverage. Both operate on
+premultiplied colour, clamp ringing to valid premultiplied pixels, and sample transparent outside the image.
+
+With `square-cell-dpi-v1` preparation, the new modes crop the safe external letterbox and retain native cells.
+The native-to-logical DPI transform is composed with the locked character scale and placement in **one geometric
+resampling pass**. There is no resized/quantized 256-cell intermediate. A separable filter uses floating-point
+convolution rows internally. Authored origins, calibration, template coordinates and canvas-loss records remain
+in logical units; native cell-boundary/inset rounding is mapped explicitly. No frame is fitted to its own height.
+Keying, despill and palette processing therefore happen at native DPI in this path, before the final resampling.
+
+Public APIs: `normalizeSheetDpi(raw, cols, frames, { resample, defer: true })` returns native cropped pixels and
+the intended DPI record; omit `defer` to resample immediately. `alignFrame` accepts `resample` and optional
+`sourceTransform` (native cropped pixels to logical cropped pixels). `placeScaled` accepts the method as its last
+argument. Deferred preparation/source transforms require a new mode. Contracts record non-default `resample`
+and `preparation.singlePass`; `sheetSha1` hashes the retained native preparation PNG in this path, while `rawSha1`
+still pins the original source. Standalone normalization without deferral records its chosen method.
+
+Opting in changes pixels, edge measurements and hashes: rerun every QA gate, review head landmarks and matte
+edges, and capture Cocos again. Filtering cannot restore missing source detail or certify an art defect as fixed.
+Use the same setting for a T1 project and its cosmetic variants. Existing art/export files are not changed by this option.
+
 ```
 npm run sprite:template -w @vgtd/sprite -- --clip run --frames 12 --cols 6 --gait run --master <master.png> --out <dir>
 npm run sprite:build    -w @vgtd/sprite -- --project <project.json> --out <dir> [--allow-errors]
@@ -355,3 +380,48 @@ Public APIs: `runLayerExtraction`, `writeLayerExtraction`, `buildSpriteLayerSet`
 images; callers must retain authoring QA. Stage passed set directories beneath the Cocos equipment resource root, then use
 the mapping/preview contract in `apps/client-cocos/LAYERED-SPRITES.md`. These pixel/contact gates do not certify unseen
 geometry or inpaint anatomy; mattes and thresholds need real-art review, as recorded in OPEN-ITEMS.
+
+## Rigid ornament hides the N crown (D52 supplements D47/D48/D50)
+
+Keep the approved master. Do not call a side/under-ring edge the crown or project a hidden crown. Only N with genuine
+rigid-ornament crown occlusion may use `rear-base-ornament`; soft hair volume is not an anchor.
+
+```json
+{
+  "kind": "rear-base-ornament",
+  "ornamentAnchor": { "x": 128, "y": 28 },
+  "anchorDefinition": "Lowest visible point where the rigid bun ring meets hair; the ring hides the crown",
+  "skullBase": { "x": 128, "y": 61 },
+  "breadth": { "left": { "x": 110, "y": 43 }, "right": { "x": 146, "y": 43 } }
+}
+```
+
+Illustrative coordinates only. The direction's `masterHead` defines one fixed rigid anchor. Per-cell `headEvidence` uses
+this shape, the same nonempty `anchorDefinition`, and a reviewed `note`. Both base-to-anchor Euclidean distance and maximum
+skull breadth must be within the locked N master's ±3%. The base is the visible nape/occipital junction, not the collar.
+Master points are on its resized256px cell; motion points are on aligned256px output cells with clip-local indices.
+
+Crown/chin/shoulderTop fields, missing or changed definitions, missing breadth, invalid coordinates, wrong direction/kind,
+and either size drift fail. Review INFO shows the anchor definition and master/frame landmarks and measurements. A human
+must verify that the crown is occluded by a rigid ornament and that the chosen point is its lowest visible hair contact;
+this is not automatic semantic certification. Existing head kinds, fixed scale, exception rules and foot/canvas gates stay unchanged.
+
+### D53: one shoulder endpoint occluded on the locked rear master
+
+NE/N may use `kind: 'rear-crown-shoulder-single'` only when one shoulder endpoint is genuinely hidden on the approved
+master. Prefer D50 when both endpoints are visible. Record `crown`, one visible `shoulderTop: {x,y}`, mandatory skull
+`breadth: {left,right}`, `occludedSide: 'left' | 'right'`, and a concrete `occluder` string containing `fan`, `hair` or
+`ribbon`. Frame evidence uses the same kind/occluded side and adds a reviewed `note`; generic `hidden`/`unknown` reasons fail.
+
+The size is the positive **vertical** difference `shoulderTop.y - crown.y`, not the diagonal length. Skull breadth remains
+Euclidean. On both master and frame, the visible shoulder must lie strictly opposite `occludedSide` relative to the skull
+midline `(breadth.left.x + breadth.right.x) / 2`: right of it for an occluded left shoulder, left of it for an occluded right
+shoulder. A point on the midline or declared occluded side fails. Its absolute horizontal offset must also be within
+**0.25–1.25 skull breadths**, inclusive, on both master and frame; the real NE master is about0.43 breadths from the
+midline. This placement check does not identify shoulder anatomy;
+source review must still reject hands, fan tips and other convenience points. Both measurements must match the
+same-direction master within the unchanged head tolerance. Coordinates are resized256px
+on the master and aligned256px in motion cells, using clip-local indices. Never project a hidden shoulder/chin/skull base,
+edit the approved master, or substitute a convenience point. If a frame also hides the remaining shoulder, report it
+instead of supplying invented evidence. INFO/review retains the visible point, occluded side/reason, and master values;
+foot/canvas gates and fixed scale remain unchanged.

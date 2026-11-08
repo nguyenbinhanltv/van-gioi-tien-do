@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:48:15.935Z",
+  "utcRecordedCompleted": "2026-11-08T00:48:54.806Z",
+  "prompt": "Use case: precise-object-edit. FIRST exact4x4 stencil template, DAO TU T1 male Storm Reaver in elevated SE FRONT THREE-QUARTER facing DOWN-RIGHT, both grey eyes visible as locked reference2, never Eprofile/straightfront. Same lean adult stern face/swept black fringe/low loose ponytail. Plain sleeveless darkmutedteal wraptunic/stormgreyblue collar+sash/short plainoverskirt/darkpants+boots+bracers minimal dullbrass. Same HEAVY BROAD single-edge mountain-ink steel DAO, LONG darkgrip/plain brassguard, preserve blade identity/size, no shortcleaver/dagger. Unscaled headstencil guides exact skull~49px high/breadth36px per256cell; standinganatomical216-217px. Head/body part sizes stay constant; head maytranslate/rotate with pose, no global fit/shrink/recenter. Latticex128 registrationground232, all body/hair/weapon fullyinsideeachcell with6pxmargin, no clipping/overlap. RemoveALL guides/borders/markers/stencilrects. Opaque UNIFORM PURE RGB255,0,255 MAGENTA background, no text/shadows/aura/particles/trails/FX/props. Clean premium painted semichibi xianxia,NWlight. SIXTEEN distinct MEDITATE breathing-loop frames0-15 allcells rowmajor. FIRST template deliberately places exact unscaled skull at SEATED HEIGHT: maincrown near87px, chin135px. KEEP this exact head size/position; DO NOT put head back atstandingtop or enlarge whole seatedfigure tofillcell. Sit crosslegged onground232, upright torso ofsame length asmaster, hips~196; natural seatedheight~145px, not216. Same broad dao rests acrossknees/lap, fullsizevisible withlonghandle; handsrestlightlyabove/lap, no secondweapon. Eyesgentlyclosed, faceidentitypreserved. Inhale0-7/exhale8-15 subtle1-2px chestmotion and cloth/hairsettle, feetcrossedfixed, smooth15->0loop. No lotus/cushion/platform/cloud/halo/groundshadow. All16 different quiet inbetweens.",
+  "references": ["templates/meditate.head-stencil.template.png", "../reference/SE.master.png"],
+  "generatedOriginalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b856-ee35-77d1-9217-2a7e924e189f\\exec-fcff153f-935d-49eb-acb6-06c7c06ebe5f.png",
+  "rawOutput": "raw/meditate.png",
+  "status": "candidate; source QA pending"
+}

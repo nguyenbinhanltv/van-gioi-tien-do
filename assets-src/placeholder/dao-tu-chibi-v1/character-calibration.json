@@ -1,0 +1,319 @@
+{
+  "character": "dao-tu-chibi-v1",
+  "method": "Manual visible art landmarks on native equal-width panels, y down. Main skull-attached hair cap excludes loose curl/ponytail; no weapon in anatomical H. Rear nape occluded by ponytail: D50 crown/shoulder/breadth.",
+  "scale": 0.314410480349345,
+  "targetHeight": 216,
+  "cell": 256,
+  "ground": 232,
+  "removedFragments": 0,
+  "views": [
+    {
+      "direction": "E",
+      "panel": [0, 0, 330, 793],
+      "landmarkPanelX": 0,
+      "coordinateOffsetX": 0,
+      "scale": 0.314410480349345,
+      "dx": 62.60262008733625,
+      "dy": -3.1790393013100413,
+      "anatomicalHeight": 219.14410480349346,
+      "headRatio": 0.22525107604017217,
+      "eyeRatio": 0.15494978479196556,
+      "sourceBounds": {
+        "left": 23,
+        "right": 296,
+        "top": 32,
+        "bottom": 748,
+        "height": 716,
+        "width": 273,
+        "pelvisX": 199.18343217761557
+      },
+      "projected": {
+        "left": 69.83406113537119,
+        "right": 155.66812227074234,
+        "top": 6.882096069868998,
+        "bottom": 232
+      },
+      "noCanvasLoss": true,
+      "heightPass": true,
+      "outputBounds": {
+        "left": 70,
+        "right": 156,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 86,
+        "pelvisX": 124.8351606805293
+      },
+      "masterHead": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 122.3406113537118,
+          "y": 12.855895196506552
+        },
+        "chin": {
+          "x": 139.94759825327512,
+          "y": 62.21834061135371
+        },
+        "breadth": {
+          "left": {
+            "x": 110.70742358078604,
+            "y": 34.235807860262014
+          },
+          "right": {
+            "x": 148.75109170305677,
+            "y": 34.235807860262014
+          }
+        }
+      }
+    },
+    {
+      "direction": "SE",
+      "panel": [330, 0, 420, 793],
+      "landmarkPanelX": 397,
+      "coordinateOffsetX": 67,
+      "scale": 0.314410480349345,
+      "dx": 50.96943231441048,
+      "dy": -3.4934497816593932,
+      "anatomicalHeight": 216.94323144104806,
+      "headRatio": 0.22028985507246376,
+      "eyeRatio": 0.15507246376811595,
+      "sourceBounds": {
+        "left": 51,
+        "right": 409,
+        "top": 23,
+        "bottom": 749,
+        "height": 726,
+        "width": 358,
+        "pelvisX": 243.5069874453218
+      },
+      "projected": {
+        "left": 67.00436681222708,
+        "right": 179.56331877729258,
+        "top": 3.7379912663755412,
+        "bottom": 232
+      },
+      "noCanvasLoss": true,
+      "heightPass": true,
+      "outputBounds": {
+        "left": 67,
+        "right": 180,
+        "top": 4,
+        "bottom": 232,
+        "height": 228,
+        "width": 113,
+        "pelvisX": 127.07102593010147
+      },
+      "masterHead": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 123.59825327510917,
+          "y": 15.056768558951962
+        },
+        "chin": {
+          "x": 132.0873362445415,
+          "y": 62.8471615720524
+        },
+        "breadth": {
+          "left": {
+            "x": 109.76419213973799,
+            "y": 38.32314410480349
+          },
+          "right": {
+            "x": 145.6069868995633,
+            "y": 38.32314410480349
+          }
+        }
+      }
+    },
+    {
+      "direction": "S",
+      "panel": [750, 0, 450, 793],
+      "landmarkPanelX": 793,
+      "coordinateOffsetX": 43,
+      "scale": 0.314410480349345,
+      "dx": 57.88646288209607,
+      "dy": -0.9781659388646347,
+      "anatomicalHeight": 216,
+      "headRatio": 0.2197962154294032,
+      "eyeRatio": 0.15283842794759825,
+      "sourceBounds": {
+        "left": 19,
+        "right": 439,
+        "top": 21,
+        "bottom": 741,
+        "height": 720,
+        "width": 420,
+        "pelvisX": 223.26738946775555
+      },
+      "projected": {
+        "left": 63.86026200873363,
+        "right": 195.91266375545854,
+        "top": 5.62445414847161,
+        "bottom": 232
+      },
+      "noCanvasLoss": true,
+      "heightPass": true,
+      "outputBounds": {
+        "left": 64,
+        "right": 196,
+        "top": 6,
+        "bottom": 232,
+        "height": 226,
+        "width": 132,
+        "pelvisX": 127.73550928531232
+      },
+      "masterHead": {
+        "kind": "crown-chin",
+        "crown": {
+          "x": 124.85589519650655,
+          "y": 15.999999999999996
+        },
+        "chin": {
+          "x": 128.6288209606987,
+          "y": 63.47598253275109
+        },
+        "breadth": {
+          "left": {
+            "x": 109.44978165938865,
+            "y": 39.58078602620087
+          },
+          "right": {
+            "x": 144.34934497816596,
+            "y": 39.58078602620087
+          }
+        }
+      }
+    },
+    {
+      "direction": "NE",
+      "panel": [1200, 0, 360, 793],
+      "landmarkPanelX": 1190,
+      "coordinateOffsetX": -10,
+      "scale": 0.314410480349345,
+      "dx": 73.29257641921397,
+      "dy": -1.2925764192139866,
+      "anatomicalHeight": 214.11353711790395,
+      "headRatio": null,
+      "eyeRatio": null,
+      "sourceBounds": {
+        "left": 11,
+        "right": 341,
+        "top": 36,
+        "bottom": 744,
+        "height": 708,
+        "width": 330,
+        "pelvisX": 169.52389956602605
+      },
+      "projected": {
+        "left": 76.75109170305677,
+        "right": 180.5065502183406,
+        "top": 10.026200873362432,
+        "bottom": 232.62882096069868
+      },
+      "noCanvasLoss": true,
+      "heightPass": true,
+      "outputBounds": {
+        "left": 77,
+        "right": 181,
+        "top": 10,
+        "bottom": 232,
+        "height": 222,
+        "width": 104,
+        "pelvisX": 126.32209158415841
+      },
+      "masterHead": {
+        "kind": "rear-crown-shoulder",
+        "crown": {
+          "x": 129.88646288209605,
+          "y": 17.88646288209606
+        },
+        "shoulderTop": {
+          "left": {
+            "x": 105.36244541484716,
+            "y": 67.24890829694323
+          },
+          "right": {
+            "x": 144.66375545851528,
+            "y": 65.6768558951965
+          }
+        },
+        "breadth": {
+          "left": {
+            "x": 109.44978165938865,
+            "y": 38.00873362445414
+          },
+          "right": {
+            "x": 151.89519650655023,
+            "y": 38.00873362445414
+          }
+        }
+      }
+    },
+    {
+      "direction": "N",
+      "panel": [1560, 0, 423, 793],
+      "landmarkPanelX": 1586,
+      "coordinateOffsetX": 26,
+      "scale": 0.314410480349345,
+      "dx": 57.88646288209607,
+      "dy": -1.2925764192139866,
+      "anatomicalHeight": 213.48471615720524,
+      "headRatio": null,
+      "eyeRatio": null,
+      "sourceBounds": {
+        "left": 19,
+        "right": 397,
+        "top": 27,
+        "bottom": 742,
+        "height": 715,
+        "width": 378,
+        "pelvisX": 208.32271965525496
+      },
+      "projected": {
+        "left": 63.86026200873363,
+        "right": 182.70742358078604,
+        "top": 7.196506550218329,
+        "bottom": 232
+      },
+      "noCanvasLoss": true,
+      "heightPass": true,
+      "outputBounds": {
+        "left": 64,
+        "right": 183,
+        "top": 7,
+        "bottom": 232,
+        "height": 225,
+        "width": 119,
+        "pelvisX": 123.17619047619047
+      },
+      "masterHead": {
+        "kind": "rear-crown-shoulder",
+        "crown": {
+          "x": 127.68558951965066,
+          "y": 18.515283842794748
+        },
+        "shoulderTop": {
+          "left": {
+            "x": 102.8471615720524,
+            "y": 65.99126637554585
+          },
+          "right": {
+            "x": 144.0349344978166,
+            "y": 65.99126637554585
+          }
+        },
+        "breadth": {
+          "left": {
+            "x": 110.39301310043669,
+            "y": 37.37991266375545
+          },
+          "right": {
+            "x": 151.26637554585153,
+            "y": 37.37991266375545
+          }
+        }
+      }
+    }
+  ],
+  "status": "manual construction and projected native-alpha bounds pass; motion QA not run"
+}

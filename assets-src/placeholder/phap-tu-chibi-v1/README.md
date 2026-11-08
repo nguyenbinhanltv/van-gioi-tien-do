@@ -53,3 +53,11 @@ Walk/run use `vertical: keep` to preserve SE depth travel. Hit/dash share one ex
 The separate `SE/quality-backlog.json` keeps SE findings and 18 reviewed head-evidence INFO cells without changing E baselines. `SE/provenance.json` and `SE/raw/*.generation.json` retain exact prompts, tool/model-undisclosed, UTC and source/input/runtime hashes. `audit-SE.ts` audits those records and the direction's per-file license section.
 
 Reproduce the SE export with `npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/SE/project.json --out apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1`. The same engine capture command above uses `--direction SE`. All 15 SE clips passed real Cocos Creator 3.8.8 capture at 2× after merging the layered-runtime update; `SE/engine-gate.json` records the matching source hashes.
+
+## S motion
+
+S contains15 smooth-v2 clips /202frames. Unscaled S master-head stencils guide each template; output-cell measurements, rather than stencil placement, provide D47 evidence. The character-wide calibration remains unchanged. Hit/dash use one reviewed fixed lattice root on every cell of their shared sheet, preserving authored depth and secondary hair travel without clipping or per-frame fitting; see S/group-registration.review.json.
+
+S/selection.json selects walk attempt1 and hit-dash attempt2. The rejected walk phase edit increased the measured foot findings from9 to13; both attempts remain archived. Hit/dash attempt2 corrects only frontal head cores while retaining dynamic bodies and streaming secondary hair. The19 reviewed head-evidence cells appear as INFO in the backlog; all17 locomotion foot findings remain open. No thresholds were changed.
+
+S/provenance.json registers every source PNG and runtime asset, with exact generation/edit prompts and UTC in S/raw/*.generation.json. audit-S.ts honors the explicit selection manifest and checks selected/raw hashes. Reproduce with npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/phap-tu-chibi-v1/S/project.json --out apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1. The engine capture command above uses --direction S; S/engine-gate.json records the completed engine result and matching rendered-input hashes.

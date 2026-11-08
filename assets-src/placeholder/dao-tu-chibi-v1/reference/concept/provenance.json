@@ -1,0 +1,555 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "sourceCommit": "2abb96801e60bfec275b84b4ddf79ba8268b489d",
+  "scope": "Owner review concepts only, artifacts only, no PR; canonical masters and motions await owner approval.",
+  "license": {
+    "url": "https://openai.com/policies/row-terms-of-use/",
+    "checkedDate": "2026-11-08",
+    "basis": "OpenAI Output; owner retains Input and owns Output to extent permitted by law; non-unique output possible. Project images only; no commercial references. No runtime import."
+  },
+  "jobs": [
+    {
+      "name": "thuong-tu-t3",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. Create landscape THUONG TU / T3 four-pose sheet: large front three-quarter standing left, back upper middle, seated meditation upper right, spear thrust combat lower right. Same MALE face/costume in all four: option C from final input image costume reference ONLY, its tall anatomy MUST be replaced. Black low tied ponytail, swept fringe, straight brows, slate eyes, adult softly angular jaw. Navy sleeveless layered mantle over ivory crossed inner collar and compact trousers, red sash, champagne gold edged shoulder plates, modest inset blue jewel. Spear vanguard with long straight dark shaft, narrow leaf spearhead and unmistakable long forked RED BANNER attached below head, gold lightning emblem. Proposed Loi visual theme only. Banner and spear present in all poses including meditation rested beside him; no lotus. Shorten limbs aggressively to match Kiem/The references. Standing head should be about same large proportion as Kiem reference. Back weapon held beside body, face clear in front. Combat dynamic compact lunge and restrained lightning trail. Labels FRONT 3/4, BACK, MEDITATION, COMBAT. Shoulder anatomy approximately swordsman band 26-30%H as an art proposal, armor excluded.",
+      "start": "2026-11-07T23:08:17.990Z",
+      "endObserved": null,
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-40a6a567-32ab-45c1-a5a4-aa5f9e73bb66.png",
+      "output": "provenance-inputs/thuong-tu-t3.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\thuong-tu-t3.png",
+        "sha256": "b4ac2a858eb12e54a16825658ebccd56b2c61ca955d2f897c763188e26c82766",
+        "bytes": 2133249,
+        "mtimeUtc": "2026-11-07T23:26:02.658531+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\kiem-tu-t3.raw.png",
+          "sha256": "d1572de04b66ee0ae767154b980c5ca32296a8b02cb4c401fec3d87637fc8fae",
+          "bytes": 2108616,
+          "mtimeUtc": "2026-11-07T23:06:35.465116+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\the-tu-t3.raw.png",
+          "sha256": "69b9cbeeed4346cba73d1448f6034d99c6af0b1aa61bbff54031968644faa078",
+          "bytes": 1984964,
+          "mtimeUtc": "2026-11-07T23:06:35.582824+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\phap-tu-t3.raw.png",
+          "sha256": "b764283c3062f529183b664655a09caa36d845aef2dd99850aa0f90872a45c99",
+          "bytes": 2056341,
+          "mtimeUtc": "2026-11-07T23:06:35.496595+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\dan-phu-tu-t3.raw.png",
+          "sha256": "397d03ce313a04a4aefee1e64db5aa182fa70969a3cbc8db603e91b116c2cf0b",
+          "bytes": 2072966,
+          "mtimeUtc": "2026-11-07T23:06:35.371914+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-30\\thuong-tu-options.png",
+          "sha256": "c584f1c8c66e7dcd3ab3acff3316715a30b3cc3d8613e3de2af4b77e1cdfd9dc",
+          "bytes": 2031044,
+          "mtimeUtc": "2026-11-07T21:53:16.028098+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-t3-corrected",
+      "start": null,
+      "endObserved": null,
+      "prompt": "Edit this exact four-pose THUONG TU T3 sheet. Preserve the male identity, all costume colors/designs, spear with red forked banner in EVERY pose, the four pose compositions and labels, white background and beautiful cel line art. Correct ANATOMY ONLY across the four poses to shared premium semi-chibi target 4.5 heads. In the big standing figure, current skull-attached crown approximately y110, chin y330, soles y960, giving about 26% head: too big. Reconstruct proportionally whole head and neck so crown stays about y110 and chin is about y297, soles y960: head 187px, 22% of H850. Reduce entire head INCLUDING skull-attached hair and face uniformly about 15%, do NOT squish face alone or use ponytail as crown. Raise neck/shoulder connection accordingly, leave feet and stance stable. Correspondingly head to chin in back, seated and combat poses matches the corrected standing skull scale at their respective illustration sizes. Keep compact torso/short legs and small hands/feet; no tall fashion figure. No new rulers, no annotations, no added props. This is a precise proportion repair, no redesign.",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-18f502ee-3dda-4f74-adfb-6166365ddf8f.png",
+      "output": "provenance-inputs/thuong-tu-t3-corrected.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\thuong-tu-t3-corrected.png",
+        "sha256": "ce6d389bf7e765705419bf7d6b36643345f49ed2ffd53a3961d98b8068720fef",
+        "bytes": 1863839,
+        "mtimeUtc": "2026-11-07T23:26:02.683455+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-40a6a567-32ab-45c1-a5a4-aa5f9e73bb66.png",
+          "sha256": "b4ac2a858eb12e54a16825658ebccd56b2c61ca955d2f897c763188e26c82766",
+          "bytes": 2133249,
+          "mtimeUtc": "2026-11-07T23:09:50.771269+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-t3",
+      "start": "2026-11-07T23:08:45.007Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. Create landscape DAO TU / T3 four-pose sheet: large front three-quarter standing left, back upper middle, seated meditation upper right, powerful dao combat lower right. MALE Storm Reaver, option A from FINAL input as face/costume/weapon identity ONLY, NOT its tall proportions. Lean compact adult male, black swept fringe and low loose ponytail, narrow grey eyes, assertive brows, soft angular jaw, bare forearm. Dark desaturated teal underrobe with dominant storm GREY-BLUE split tunic panels and sash, limited ivory shoulder mantle, warm old gold metal. Avoid jade green and ivory-dominant healer palette. Huge broad curved single-edged DAO resting across shoulder, silver steel ink-wash mountain panorama within blade, gold spine/guard, short grey-blue tassel; never sword/spear. The same mountain blade must remain visible in back and seated meditation laid beside him; no lotus. Compact torso and SHORT legs, head 22% crown-to-sole just like first Kiem/The refs. Do NOT shrink head to accommodate weapon. Lean shoulder art proposal 26-30% H excluding mantle and armor. Combat a two-hand diagonal heavy slash with wind-white ink crescent, proposed Phong theme only. Keep face and gear consistent across poses. English labels FRONT 3/4, BACK, MEDITATION, COMBAT; small subtitle STORM GREY-BLUE / ACCENT A. Two-tone clean cel render.",
+      "endObserved": "2026-11-07T23:10:12.829Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-7e02ce9c-841a-49c2-b38d-d99e0fa21351.png",
+      "output": "provenance-inputs/dao-tu-t3.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\dao-tu-t3.png",
+        "sha256": "d70b6b31bf3bf28d1b6461094aa1feaac7cbceb00b3f2794c4452a5307d0703e",
+        "bytes": 2169862,
+        "mtimeUtc": "2026-11-07T23:26:02.699427+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\kiem-tu-t3.raw.png",
+          "sha256": "d1572de04b66ee0ae767154b980c5ca32296a8b02cb4c401fec3d87637fc8fae",
+          "bytes": 2108616,
+          "mtimeUtc": "2026-11-07T23:06:35.465116+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\the-tu-t3.raw.png",
+          "sha256": "69b9cbeeed4346cba73d1448f6034d99c6af0b1aa61bbff54031968644faa078",
+          "bytes": 1984964,
+          "mtimeUtc": "2026-11-07T23:06:35.582824+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\phap-tu-t3.raw.png",
+          "sha256": "b764283c3062f529183b664655a09caa36d845aef2dd99850aa0f90872a45c99",
+          "bytes": 2056341,
+          "mtimeUtc": "2026-11-07T23:06:35.496595+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\dan-phu-tu-t3.raw.png",
+          "sha256": "397d03ce313a04a4aefee1e64db5aa182fa70969a3cbc8db603e91b116c2cf0b",
+          "bytes": 2072966,
+          "mtimeUtc": "2026-11-07T23:06:35.371914+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-30\\dao-tu-options.png",
+          "sha256": "5c95374ebb5516d2e0382cf09746566177233d39c4d0450d882193b44ca584a9",
+          "bytes": 1969695,
+          "mtimeUtc": "2026-11-07T21:54:08.847277+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-t3-corrected",
+      "start": "2026-11-07T23:11:30.901Z",
+      "prompt": "Edit exact DAO TU T3 four-pose sheet. Preserve all layout, MALE adult face identity, black low ponytail, storm grey-blue accent A, dark muted teal, limited ivory mantle, old gold trim, heavy single-edged mountain-painted dao on shoulder, mountain blade also back/seated/combat. Anatomy correction ONLY. Big standing front figure has current skull-attached crown at approximately y240, chin y431, soles y952: head 27% of H712, too large. Reconstruct whole head and skull-attached hair UNIFORMLY smaller about 18% so crown stays around y240, chin near y397, soles y952: head157 =22%H. Raise neck/shoulder attachment to meet corrected head; adjust upper body cohesively, do NOT squish face alone, do NOT grow legs into a 6-head figure. Main crown excludes the sword/ponytail/floating hair. Maintain compact torso and short compact legs, small feet/hands. Match corresponding skull proportions in the smaller back, meditation, combat drawings, preserving their poses and relative sheet scales. Keep all linework polish and 2-tone cel shading. No rulers or numerical labels. All blade and feet fully visible.",
+      "endObserved": "2026-11-07T23:12:57.347Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-2bb04c6a-99a3-4800-afdc-e311f84b455b.png",
+      "output": "provenance-inputs/dao-tu-t3-corrected.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\dao-tu-t3-corrected.png",
+        "sha256": "3057cc9aea08df1fe91b5e7f87f06bceb97c0952f8d587e4860cd000ce1b2dfb",
+        "bytes": 2183065,
+        "mtimeUtc": "2026-11-07T23:26:02.724925+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-7e02ce9c-841a-49c2-b38d-d99e0fa21351.png",
+          "sha256": "d70b6b31bf3bf28d1b6461094aa1feaac7cbceb00b3f2794c4452a5307d0703e",
+          "bytes": 2169862,
+          "mtimeUtc": "2026-11-07T23:10:12.770312+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-tiers",
+      "start": "2026-11-07T23:14:55.077Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. THUONG TU T1-T5 outfit + spear strip, five equal standing front three-quarter columns with identical SAME MALE face, skull size and main crown-to-sole H. Use exact corrected front figure of input as fixed adult face/proportion identity. Dark swept low tied hair, slate eyes, navy/ivory/red/gold. CRITICAL head22%H, eyes16% below main crown, 4.5-head build. Five full-body figures at same scale and ground line, NEVER taller/more mature by tier. T1 plain navy sleeveless cross-collar cloth, ivory undercollar, plain red sash, simple trousers/small boots, NO shoulder armor NO jewel NO pattern; plain steel spear with small RED pennon. T2 small gold edging, small red banner/tassel. T3 exact input layered navy mantle, ivory split panels, gold shoulder plates, inset blue jewel, forked RED spear banner slight glow. T4 clearly longer elaborate split cloth tails, articulated thunder spearhead, sparse lightning. T5 floating thunder fragments behind shoulders and transformed spearhead, do not cover face or hide body. Keep red banner and spear in all columns. Growing COSTUME complexity, body unchanged. Large elegant labels T1 T2 T3 T4 T5. Entire spear/feet fully framed, white background, no numerical rulers.",
+      "endObserved": "2026-11-07T23:15:37.732Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f81244b1-5881-46df-ad2f-0189945ef937.png",
+      "output": "provenance-inputs/thuong-tu-tiers.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\thuong-tu-tiers.png",
+        "sha256": "abecf6b0b95f3b4ea2d15c1f9924e296522a1c996dd2e9a571fba3d6881d354f",
+        "bytes": 2113345,
+        "mtimeUtc": "2026-11-07T23:26:02.738050+00:00",
+        "dimensions": [1774, 887]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+          "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c",
+          "bytes": 2046215,
+          "mtimeUtc": "2026-11-07T23:14:13.121589+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-tiers-corrected",
+      "start": "2026-11-07T23:17:33.896Z",
+      "prompt": "Edit this exact five-tier THUONG TU strip. Keep every costume, spear, red banner, color, face identity, labels, white background, all full bodies at same baseline. Anatomy repair ONLY across all five columns uniformly: standing main skull crown around y295 and soles840 gives H545. Current chin around430 gives head135=25%. Target chin415 giving head120=22%H; eyes target382=16%H from crown. Reduce entire skull-attached hair+face uniformly about11%, keeping main crown height295 and soles840; rejoin neck cohesively, keep short torso/compact legs, do not squish face alone. Keep adult male face identity, lower eye-line within corrected skull as specified. Same skull size and same body height across all five. No outfit or weapon changes, no new rulers/text. T1 remains completely plain cloth without shoulder armor; T3-T5 remain ornate.",
+      "endObserved": "2026-11-07T23:18:01.764Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-cc957672-6214-4bb6-a16d-12e383aac711.png",
+      "output": "provenance-inputs/thuong-tu-tiers-corrected.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\thuong-tu-tiers-corrected.png",
+        "sha256": "be8106f0477247219ae7ed718071ed4da0f74854505d79c227bca3798f20f94b",
+        "bytes": 2138933,
+        "mtimeUtc": "2026-11-07T23:26:02.752189+00:00",
+        "dimensions": [1774, 887]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f81244b1-5881-46df-ad2f-0189945ef937.png",
+          "sha256": "abecf6b0b95f3b4ea2d15c1f9924e296522a1c996dd2e9a571fba3d6881d354f",
+          "bytes": 2113345,
+          "mtimeUtc": "2026-11-07T23:15:37.637125+00:00",
+          "dimensions": [1774, 887]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-accent-variants",
+      "start": "2026-11-07T23:15:44.529Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. DAO TU — TWO ACCENT STUDIES AT T3. Exactly TWO equal-size full-body front three-quarter MALE Storm Reaver figures, duplicate same face/proportions/pose and mountain dao across shoulder from FIRST input. Second input Dan/Phu is palette-separation reference ONLY, do not copy woman or jade. Large heading DAO TU / ACCENT REVIEW. Left A — STORM GREY-BLUE: dark desaturated teal underrobe, dominant slate grey-blue panels/sash/tassel, limited wind-white ivory mantle, old gold trim. Right B — DEEP BRONZE + WIND WHITE: same dark almost charcoal teal underrobe, deep oxidized BRONZE panels/sash/tassel and crisp wind-WHITE limited mantle, restrained gold trim. No jade/emerald in either. Keep identity/face/skin/black low ponytail/weapon/silhouette identical, only accent materials/color change. Compact4.5-head male, skull-attached crown-to-chin22%H and eyes16% below crown, all bodies same scale. No extra characters. Broad single-edge heavy dao with same silver ink-wash mountain blade and gold spine over shoulder. Clean white background, fully framed feet and blade, clear A and B labels.",
+      "endObserved": "2026-11-07T23:16:42.929Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-d7bb33ea-9e51-47cd-9da2-5239f0093eaf.png",
+      "output": "provenance-inputs/dao-tu-accent-variants.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\dao-tu-accent-variants.png",
+        "sha256": "83bb6c539b643b151bcd9732bc44f1204ba8eeac33f85dc1d7b4de452af04b76",
+        "bytes": 1822235,
+        "mtimeUtc": "2026-11-07T23:26:02.770178+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-b4722542-890c-4a3a-8d55-56c7a4330239.png",
+          "sha256": "486ff70eace359b2866ecb7555c5e156eb7270b5b33e2029bb840e41f388754e",
+          "bytes": 2182052,
+          "mtimeUtc": "2026-11-07T23:14:20.984832+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\dan-phu-tu-t3.raw.png",
+          "sha256": "397d03ce313a04a4aefee1e64db5aa182fa70969a3cbc8db603e91b116c2cf0b",
+          "bytes": 2072966,
+          "mtimeUtc": "2026-11-07T23:06:35.371914+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "six-class-lineup",
+      "start": "2026-11-07T23:16:38.823Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. SIX-CLASS T3 lineup, exactly SIX standing front three-quarter figures evenly spaced at SAME anatomical crown-to-sole H and baseline. Input1 first FOUR characters only identify KIEM male ivory/cyan/gold SWORD with silk, THE male charcoal/amber/bronze PAIRED GAUNTLETS, PHAP female plum/red/gold OPEN FAN long sleeves, DAN-PHU female ivory/jade/gold WHITE WHISK + rectangle TALISMANS; IGNORE input1 fifth old realistic man. Inputs2/3 identify THUONG MALE navy/ivory/red/gold SPEAR and RED BANNER, DAO MALE lean dark teal/STORM GREY-BLUE/limited wind-white/gold broad mountain-painted DAO on shoulder. Order exactly KIEM / THE / PHAP / DAN-PHU / THUONG / DAO, labels below. Reconstruct all SIX at compact4.5-head anatomy, main hair+head22%H, eyes16% below crown; short torso AND short legs, adult faces, small hands/feet. Main crowns y330, soles870, H540; chin449; eyes416 on1536x1024 canvas. Ignore topknots, weapon, flyaway hairs for H. Shoulders anatomy Kiem28%H, The32%, Phap26%, Dan26%, Thuong proposed28%, Dao proposed28%, armor excluded. Entire six bodies same scale, no hero taller. Weapons can tilt upright to avoid hiding adjacent faces. No extra character, NO AI ruler or numerical proportions. Title SIX PATHS / T3, white background and generous margins, all feet/weapons fully visible. No background/large FX.",
+      "endObserved": "2026-11-07T23:17:43.887Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-29bce0c8-83a0-4cee-a48b-49477b938cdb.png",
+      "output": "provenance-inputs/six-class-lineup.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\six-class-lineup.png",
+        "sha256": "ac09d08b303a342e54aaeb1bd63f1f6d2abd7445d7ece4897215f9a8bb570773",
+        "bytes": 2225988,
+        "mtimeUtc": "2026-11-07T23:26:02.787210+00:00",
+        "dimensions": [2172, 724]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\assets-src\\placeholder\\chibi-concept-v1\\readability-lineup.raw.png",
+          "sha256": "736fa1c3ff4b313d536f5599894044e4cc075b20f9e811a20bf4d00bdb443973",
+          "bytes": 2161558,
+          "mtimeUtc": "2026-11-07T23:06:35.558732+00:00",
+          "dimensions": [2172, 724]
+        },
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+          "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c",
+          "bytes": 2046215,
+          "mtimeUtc": "2026-11-07T23:14:13.121589+00:00",
+          "dimensions": [1536, 1024]
+        },
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-b4722542-890c-4a3a-8d55-56c7a4330239.png",
+          "sha256": "486ff70eace359b2866ecb7555c5e156eb7270b5b33e2029bb840e41f388754e",
+          "bytes": 2182052,
+          "mtimeUtc": "2026-11-07T23:14:20.984832+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "six-class-lineup-corrected",
+      "start": "2026-11-07T23:18:27.558Z",
+      "prompt": "Precise anatomy repair of this EXACT six-class lineup at2048x683. Preserve six people/order/sex/identity/costumes/weapons/colors/labels/white background. Current main heads are too BIG, about27% body height. Reconstruct WHOLE skull-attached hair + face uniformly smaller across ALL SIX, about18% reduction in head dimensions, NOT face alone. Exact shared layout: soles remain at y616, main skull-attached crown at y200, standing H416, chin y292 gives head92=22.1%H, eyes y266.5 gives16%H. ALL SIX share these main-crown/chin/eyes/sole levels (topknots/ponytails/accessories/weapons extend above200 and are EXCLUDED). Retain hair silhouette and original mature male/female facial traits. Adjust neck and shoulder connection coherently up to smaller heads, compact torso/legs remain, do not elongate legs. Shoulder anatomy target widths at thisH: Kiem116px, The133px, Phap108px, Dan108px, Thuong116px, Dao116px, excluding armor or sleeves. Keep all six the same body scale and ground. Weapons and hands all remain readable, no redesign. Do NOT add any rulers or numerical claims, human overlay later. All weapons and feet inside frame. Same elegant polished two-tone cel art.",
+      "endObserved": "2026-11-07T23:19:02.344Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-cbb6e26f-f06b-4983-a4a9-261b1fb2f70b.png",
+      "output": "provenance-inputs/six-class-lineup-corrected.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\six-class-lineup-corrected.png",
+        "sha256": "b362df5706285c93782c87bf564392ce3691443244af944707716a502b05297c",
+        "bytes": 2352017,
+        "mtimeUtc": "2026-11-07T23:26:02.810656+00:00",
+        "dimensions": [2172, 724]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-29bce0c8-83a0-4cee-a48b-49477b938cdb.png",
+          "sha256": "ac09d08b303a342e54aaeb1bd63f1f6d2abd7445d7ece4897215f9a8bb570773",
+          "bytes": 2225988,
+          "mtimeUtc": "2026-11-07T23:17:42.516887+00:00",
+          "dimensions": [2172, 724]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-t3-final",
+      "start": "2026-11-07T23:13:32.349Z",
+      "prompt": "Precise small face construction repair on this exact THUONG TU four-pose sheet. Keep EVERYTHING: body proportions, skull size, all pose/costume/weapon/banner/labels/colors and layout. Standing big figure main skull crown y126, chin305, sole962: H836, head179=21.4%, correct. But eyes currently y242 are too high. Move both eyes/brows and nose/mouth lower within same head, target eye centers y259 =15.9%H, retain chin305 and crown126. Keep same adult male slate eyes, straight brows and angular jaw identity. Do not change skull outline/head size/body height or stretch face. Slightly larger forehead and shorter lower face, still mature male. Apply equivalent subtle eye-line placement to seated and combat faces. Back stays unchanged. No other redesign, no annotations/rulers. Preserve entire sheet resolution and all margins.",
+      "endObserved": "2026-11-07T23:14:13.200Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+      "output": "thuong-tu-t3.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\thuong-tu-t3.png",
+        "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c",
+        "bytes": 2046215,
+        "mtimeUtc": "2026-11-07T23:26:02.827664+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-18f502ee-3dda-4f74-adfb-6166365ddf8f.png",
+          "sha256": "ce6d389bf7e765705419bf7d6b36643345f49ed2ffd53a3961d98b8068720fef",
+          "bytes": 1863839,
+          "mtimeUtc": "2026-11-07T23:12:27.060337+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-t3-final",
+      "start": "2026-11-07T23:13:39.760Z",
+      "prompt": "Precise small facial placement correction only on this DAO TU four-pose sheet. Preserve ALL design, male identity, storm grey-blue/teal/ivory/gold, mountain dao, pose compositions, labels and margins. Big standing front crown y250, chin407, soles952: H702, head157=22.4%, correct. Eyes currently about y348 too high. Lower eye centers to y362 =16%H below crown, with brows/nose/mouth coherently lowered but crown and chin and skull size UNCHANGED. Slightly more forehead/shorter lower face, same adult male narrow grey eyes/strong brows/jaw, not baby face. Match subtle eye-line placement on seated and combat faces. Do not change any body, leg length, head size, sword, hands, cloth or layout. Back stays unchanged. No new text/rulers/props.",
+      "endObserved": "2026-11-07T23:14:21.038Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-b4722542-890c-4a3a-8d55-56c7a4330239.png",
+      "output": "dao-tu-t3.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\dao-tu-t3.png",
+        "sha256": "486ff70eace359b2866ecb7555c5e156eb7270b5b33e2029bb840e41f388754e",
+        "bytes": 2182052,
+        "mtimeUtc": "2026-11-07T23:26:02.846739+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-2bb04c6a-99a3-4800-afdc-e311f84b455b.png",
+          "sha256": "3057cc9aea08df1fe91b5e7f87f06bceb97c0952f8d587e4860cd000ce1b2dfb",
+          "bytes": 2183065,
+          "mtimeUtc": "2026-11-07T23:12:57.247448+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-weapons",
+      "start": "2026-11-07T23:11:48.530Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. WEAPON-ONLY sheet THUONG TU, no people. Reference's straight dark-shaft spear, narrow leaf head, champagne gold socket, forked RED BANNER with lightning emblem. Two rows: upper five full vertical spears equal length labeled T1 T2 T3 T4 T5. T1 plain steel leaf, simple pole, plain RED pennon, no gem or FX; T2 small trim/tassel; T3 gold socket, blue inset jewel, red forked banner, modest light; T4 articulated thunderhead longer banner sparse lightning trail; T5 transformed segmented lightning leaf and floating fragments, retain straight spear and RED banner. Bottom six complete same T3 spears equal scale labeled WHITE GREEN BLUE PURPLE GOLD RED plus small corner markers. Same T3 geometry/banner/jewel/materials in all six; ONLY edge glow changes #E8E4DA #5FBF6A #4A90D9 #A05FD6 #E8B540 #E0483A respectively. Material gold distinct from quality glow gold. No whole weapon recolor, no shape changes by quality. Generous margins, clean elegant labels.",
+      "endObserved": "2026-11-07T23:12:33.664Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-5cdbef72-1300-466b-91ae-29796ba1852b.png",
+      "output": "thuong-tu-weapons.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\thuong-tu-weapons.png",
+        "sha256": "e9ce4ba9ade173bf8f29f070a74dbca27ea9a1e42bae7e23a10192a5b188ddc4",
+        "bytes": 1617714,
+        "mtimeUtc": "2026-11-07T23:26:02.868623+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-40a6a567-32ab-45c1-a5a4-aa5f9e73bb66.png",
+          "sha256": "b4ac2a858eb12e54a16825658ebccd56b2c61ca955d2f897c763188e26c82766",
+          "bytes": 2133249,
+          "mtimeUtc": "2026-11-07T23:09:50.771269+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-weapons",
+      "start": "2026-11-07T23:11:57.624Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. WEAPON-ONLY sheet DAO TU — Storm Reaver, no people. Reference heavy broad single-edged curved dao, mountain ink-wash painting inside silver blade, old gold spine/guard, dark grip and storm GREY-BLUE short tassel, no jade. Two rows: top five complete dao equal lengths labeled T1 T2 T3 T4 T5. T1 plain steel broad single edge with minimal mountain brush mark, simple guard, no gems/FX; T2 small old gold trim and short grey-blue tassel; T3 ornate gold guard, broad mountain-painted silver blade, subtle wind-white light; T4 articulated storm edge and sparse wind streak; T5 transformed broad storm blade with floating fragments, keep mountain artwork and recognizable dao silhouette. Bottom six complete identical T3 dao same pose/scale labeled WHITE GREEN BLUE PURPLE GOLD RED, small corner UI markers. Same T3 geometry, mountain art and grey-blue tassel throughout; ONLY narrow edge quality glow changes #E8E4DA #5FBF6A #4A90D9 #A05FD6 #E8B540 #E0483A. Do not recolor entire blade or tassel, do not change materials or shape by quality. Material old gold different from quality gold glow. Warm-white background, generous margins, elegant readable typography.",
+      "endObserved": "2026-11-07T23:12:44.251Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-ab2de84c-ea9e-40c3-a540-6e91125970d9.png",
+      "output": "dao-tu-weapons.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\dao-tu-weapons.png",
+        "sha256": "5730da38b0e3e768d86e7e5b56a5e88e325cb707e5ae3b608a70959f03b485f8",
+        "bytes": 1899725,
+        "mtimeUtc": "2026-11-07T23:26:02.888970+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-7e02ce9c-841a-49c2-b38d-d99e0fa21351.png",
+          "sha256": "d70b6b31bf3bf28d1b6461094aa1feaac7cbceb00b3f2794c4452a5307d0703e",
+          "bytes": 2169862,
+          "mtimeUtc": "2026-11-07T23:10:12.770312+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "thuong-tu-tiers-final",
+      "start": "2026-11-07T23:19:46.608Z",
+      "prompt": "Tiny facial-placement correction ONLY to this exact THUONG TU five-tier strip at1774x887. Preserve all five skull sizes and hair outline, main crowns aroundy307, chins aroundy424, soles840, H533, head117=22%. Eyes currentlyy386 =15% approx but target shared16%=y392. Move both eyes/brows/nose/mouth coherently down about6px within each same skull, chin/crown stay fixed. Keep same mature male slate eyes/straight brows/jaw identity, no baby face. No change at all to body, costumes, weapons/red banners, labels, background or composition. All five faces identical. No rulers or text additions.",
+      "endObserved": "2026-11-07T23:20:23.450Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-5cebc306-c7f2-4310-892d-43c6105c53fa.png",
+      "output": "thuong-tu-tiers.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\thuong-tu-tiers.png",
+        "sha256": "811e295194973ef30c1cda54ecc905ba49f1a2420339542b2d966ef09e23adf2",
+        "bytes": 2201506,
+        "mtimeUtc": "2026-11-07T23:26:02.902420+00:00",
+        "dimensions": [1774, 887]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-cc957672-6214-4bb6-a16d-12e383aac711.png",
+          "sha256": "be8106f0477247219ae7ed718071ed4da0f74854505d79c227bca3798f20f94b",
+          "bytes": 2138933,
+          "mtimeUtc": "2026-11-07T23:18:01.501308+00:00",
+          "dimensions": [1774, 887]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-tiers",
+      "start": "2026-11-07T23:15:35.788Z",
+      "prompt": "Use case: stylized-concept. Original premium semi-chibi xianxia MMORPG review concept, NOT production sprite. Crucial anatomy: about 4.5 heads tall; main skull-attached hair crown to chin exactly target 22% standing crown-to-sole H, acceptable 20-24%; eyes 15-17% below crown. Exclude topknots/ponytails/weapons/FX from H. Large stylized adult head, compact torso AND short compact legs, small hands and feet; NEVER fashion illustration 5.5-6 heads. Follow first four project references for rendering and head/body proportions, not their costume. Clean material-tinted outlines, two cel shadow tones plus one highlight, narrow rim light, NW light, sparse geometric meridians, restrained ink-wash hems. Warm white background, entire weapon/feet visible with generous margins. No fake measurement ruler. No commercial reference. DAO TU T1-T5 outfit + dao strip, 5 equal front three-quarter standing columns at IDENTICAL skull/main-crown-to-sole H/face/build and baseline. SAME MALE Storm Reaver from corrected input, lean compact, black low tied hair and swept fringe, grey eyes, head22%H, eyes16%H, about4.5 heads. Palette dominant storm grey-blue accents over dark muted teal base, wind-white small mantle, old gold; NO jade green, NOT ivory dominant. T1 plain cloth cross-collar tunic and small belt, plain trousers, no armor/ornament/jewel, simple broad steel dao on shoulder, tiny ink mountain mark. T2 thin edging, small shoulder cloth, short grey-blue sword tassel. T3 match input layered split tunic/limited ivory half mantle/gold shoulder plate/rope belt and heavy broad single-edged mountain-painted dao over shoulder. T4 clearly longer elaborate cloth tails and storm edge wind streak sparse particles. T5 floating wind fragments, transformed broad mountain storm blade and sparse mantle aura, body/face unobscured. Preserve huge dao/shoulder silhouette all tiers; same male face, hands and feet small, no growth by tier. Entire blades/feet visible, white background, generous margins, elegant T1 T2 T3 T4 T5 labels, no rulers.",
+      "endObserved": "2026-11-07T23:16:19.035Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-6deac8aa-103e-4cdd-a687-460c1ff53c79.png",
+      "output": "dao-tu-tiers.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\dao-tu-tiers.png",
+        "sha256": "7e5fd0d15230fe74f4de7b39ffd1f1b46f7328db2aef9050df06e41cac348e21",
+        "bytes": 2253798,
+        "mtimeUtc": "2026-11-07T23:26:02.916725+00:00",
+        "dimensions": [2172, 724]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-b4722542-890c-4a3a-8d55-56c7a4330239.png",
+          "sha256": "486ff70eace359b2866ecb7555c5e156eb7270b5b33e2029bb840e41f388754e",
+          "bytes": 2182052,
+          "mtimeUtc": "2026-11-07T23:14:20.984832+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "dao-tu-accent-variants-corrected",
+      "start": "2026-11-07T23:18:35.071Z",
+      "prompt": "Correct only anatomy on this exact DAO TU two accent study sheet. Keep exact male identity, two poses/gear identical, both palette A storm grey-blue and B deep bronze+wind white, all cloth/dao/mountains/labels/layout. Whole skull+main hair currently from y205 to chin375 on H690 (soles895), about24.6%; shrink uniformly about10% and keep crown205, target chin357=22%H, eye line315=16%H. Reconnect neck/shoulders coherently, keep compact torso AND legs, do not squish face alone. Both columns identical size. Preserve mature male face and all details. No other edits, no rulers or new text.",
+      "endObserved": "2026-11-07T23:19:05.189Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-c2f5c2e7-d082-43f3-b96b-f6dbef8685df.png",
+      "output": "dao-tu-accent-variants.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\dao-tu-accent-variants.png",
+        "sha256": "e2918a3b49ca1979f20aa02153608dcf25f039250ba59948d3a2ad55fd7999b0",
+        "bytes": 1950484,
+        "mtimeUtc": "2026-11-07T23:26:02.935261+00:00",
+        "dimensions": [1536, 1024]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-d7bb33ea-9e51-47cd-9da2-5239f0093eaf.png",
+          "sha256": "83bb6c539b643b151bcd9732bc44f1204ba8eeac33f85dc1d7b4de452af04b76",
+          "bytes": 1822235,
+          "mtimeUtc": "2026-11-07T23:16:42.835386+00:00",
+          "dimensions": [1536, 1024]
+        }
+      ]
+    },
+    {
+      "name": "six-class-lineup-final",
+      "start": "2026-11-07T23:19:38.808Z",
+      "prompt": "FINAL precise facial-placement repair, preserve exact six-class sheet2048x683 and ALL six costumes/weapons/colors/labels/poses, adult identities. Heads already near correct size; do NOT enlarge them. Align MAIN SKULL crowns all at y220 (exclude topknots/ponytails). Keep soles y616 H396. Heads crown-to-chin target87px, chins y307, eye centers y283=16%H. Kiem currently crown220/chin310/eyes276: keep skull, move eyes+brows down7px. The currently crown220/chin301/eyes267: move eyes+brows down16px, subtly lower chin6px to307, keep mature male. Phap crown219/chin307/eyes277: eyes down6px. Dan crown225/chin311/eyes282: shift entire head up5px then move eyes down6px so final eyes283. Thuong current crown205/chin294/eyes269: translate whole head down14px without scaling, final crown219/chin308/eyes283; adjust short neck. Dao crown220/chin311/eyes281: move eyes down2px, chin up4px if needed. Match forehead/lower-face proportion but preserve adult faces and features; do NOT squish faces. Keep same short bodies/small feet/hands and NW cel render. No rulers/numerical text. No other edits.",
+      "endObserved": "2026-11-07T23:20:32.989Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-3d62fa81-b45a-431a-919c-483bfeb539d6.png",
+      "output": "provenance-inputs/six-class-lineup-final.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\provenance-inputs\\six-class-lineup-final.png",
+        "sha256": "be78d0ac741cef699a0232d4a3109e2eadf8921468b39edb0969b66f0a711063",
+        "bytes": 2328963,
+        "mtimeUtc": "2026-11-07T23:26:02.951967+00:00",
+        "dimensions": [2172, 724]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-cbb6e26f-f06b-4983-a4a9-261b1fb2f70b.png",
+          "sha256": "b362df5706285c93782c87bf564392ce3691443244af944707716a502b05297c",
+          "bytes": 2352017,
+          "mtimeUtc": "2026-11-07T23:19:02.253450+00:00",
+          "dimensions": [2172, 724]
+        }
+      ]
+    },
+    {
+      "name": "six-class-lineup-dan-eye-repair",
+      "start": "2026-11-07T23:22:29.216Z",
+      "prompt": "One tiny localized correction to this exact2048x683 six-class lineup. ONLY fourth character DAN-PHU woman (ivory/jade white whisk, center-right) face: current main skull crown approxy226, eyes282, chin313, soles617. Her eye line is14.3%H, too high. Move both eyes+brows down7px to y289, nose/mouth coherently by a few pixels, preserving chin313, head/hair crown226 and skull outline/size. Same mature gentle woman face/olive eyes; do not change identity, not baby. This makes eye line16.1%H. Everything else in the ENTIRE image must stay EXACTLY unchanged: other five figures/faces, all weapons/costumes/poses/colors/background/text and sheet dimensions. No new labels/rulers, no extra edits.",
+      "endObserved": "2026-11-07T23:23:25.713Z",
+      "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-151f13f7-0a1b-4e0d-8763-9425a34c898e.png",
+      "output": "six-class-lineup.raw.png",
+      "outputEvidence": {
+        "path": "C:\\Users\\PC\\.ao\\data\\artifacts\\van-gioi-tien-do-32\\six-class-lineup.raw.png",
+        "sha256": "0f1557710145e12574ed7652f28e2c086f2f53466dd731dd2b1d2010dd5b79b2",
+        "bytes": 2355360,
+        "mtimeUtc": "2026-11-07T23:26:02.969261+00:00",
+        "dimensions": [2172, 724]
+      },
+      "references": [
+        {
+          "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-3d62fa81-b45a-431a-919c-483bfeb539d6.png",
+          "sha256": "be78d0ac741cef699a0232d4a3109e2eadf8921468b39edb0969b66f0a711063",
+          "bytes": 2328963,
+          "mtimeUtc": "2026-11-07T23:20:32.921244+00:00",
+          "dimensions": [2172, 724]
+        }
+      ]
+    }
+  ],
+  "timing": "Call start/endObserved are UTC observations where retained; null means not retained. Exact tool completion/model not exposed. Original output mtime UTC recorded independently.",
+  "guide": "docs/art/style-semichibi.md and semichibi-proportions.svg from origin/main",
+  "qualityCaveat": "Generated quality examples are redraws, not pixel-identical runtime tints.",
+  "productionStatus": "Concept approval received. Production gates NOT RUN in this concept package; Thuong production begins next; Dao handoff pending.",
+  "specSources": [
+    {
+      "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\docs\\art\\style-semichibi.md",
+      "sha256": "52a36f5dff34acc21cb13f4b1b042b9ce803d06a92379368a790bcb230afce43",
+      "bytes": 11694,
+      "mtimeUtc": "2026-11-07T23:07:05.821642+00:00",
+      "dimensions": null
+    },
+    {
+      "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\docs\\art\\semichibi-proportions.svg",
+      "sha256": "f72f419e2747e7757e422cf30ae31801e954a1acbe7fdb71147d029d288bc379",
+      "bytes": 8090,
+      "mtimeUtc": "2026-11-07T23:07:05.820591+00:00",
+      "dimensions": null
+    },
+    {
+      "path": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-32\\docs\\DECISIONS.md",
+      "sha256": "57d741952d3eea2f78a6fbba6873ff10eb05c9957bb2de529531a44f673e2fab",
+      "bytes": 74594,
+      "mtimeUtc": "2026-11-07T23:07:05.813208+00:00",
+      "dimensions": null
+    }
+  ],
+  "approval": {
+    "source": "Owner through orchestrator van-gioi-tien-do-1, current session message",
+    "classes": "Thuong C male; Dao A male",
+    "daoAccent": "A storm grey-blue selected by worker and accepted by orchestrator",
+    "production": "Thuong canonical T1 + five directions then E; Dao production assigned separately when slot available; D51 reserved for this worker"
+  }
+}

@@ -6,6 +6,8 @@ import type { Project } from './project.js';
 import { resizeImage } from './repair.js';
 import { CELL_PX } from './types.js';
 import { sheetLayout } from './grouped.js';
+import { cellRect } from './slice.js';
+import { resampleAffine, validateResample, type ResampleMethod } from './resample.js';
 
 export interface ProjectPreparation {
   readonly kind: 'square-cell-dpi-v1';
@@ -21,7 +23,13 @@ export function auditProjectPreparation(project: Project, baseDir: string): void
     for (const clip of project.clips) {
       const raw = decodePng(readFileSync(resolve(baseDir, clip.sheet)));
       const grid = sheetLayout(clip);
-      if (project.preparation) normalizeSheetDpi(raw, grid.cols, grid.frames);
+      if (project.preparation)
+        normalizeSheetDpi(
+          raw,
+          grid.cols,
+          grid.frames,
+          project.resample && project.resample !== 'bilinear' ? { resample: project.resample, defer: true } : {},
+        );
       else if (!clip.calibration) pitches.push(raw.width / clip.cols);
     }
     if (pitches.length > 1 && Math.max(...pitches) - Math.min(...pitches) > 1)
@@ -45,6 +53,8 @@ export function preparationScale(preparation: ProjectPreparation, baseDir: strin
 }
 
 export interface SheetPreparation {
+  readonly resample?: ResampleMethod;
+  readonly singlePass?: boolean;
   readonly raw: readonly [number, number];
   readonly normalized: readonly [number, number];
   readonly cropTop: number;
@@ -53,12 +63,41 @@ export interface SheetPreparation {
   readonly dpiScaleY: number;
 }
 
+/** Native sliced cell -> logical sliced cell, including fractional lattice boundary rounding. */
+export function nativeCellTransform(
+  nativeWidth: number,
+  nativeHeight: number,
+  logicalWidth: number,
+  logicalHeight: number,
+  cols: number,
+  rows: number,
+  index: number,
+  insetFraction = 0.01,
+) {
+  const native = cellRect(nativeWidth, nativeHeight, cols, rows, index);
+  const logical = cellRect(logicalWidth, logicalHeight, cols, rows, index);
+  const nativeInset = Math.round(Math.min(native.width, native.height) * insetFraction);
+  const inset = Math.round(Math.min(logical.width, logical.height) * insetFraction);
+  const scaleX = logicalWidth / nativeWidth,
+    scaleY = logicalHeight / nativeHeight;
+  return {
+    scaleX,
+    scaleY,
+    dx: (native.x + nativeInset) * scaleX - logical.x - inset,
+    dy: (native.y + nativeInset) * scaleY - logical.y - inset,
+  };
+}
+
 /** Matches the original Dan/Phu assembler, including its 1px grid and 3px crop rounding tolerances. */
 export function normalizeSheetDpi(
   raw: Image,
   cols: number,
   frames: number,
+  options: { readonly resample?: ResampleMethod; readonly defer?: boolean } = {},
 ): { image: Image; record: SheetPreparation } {
+  const method = options.resample ?? 'bilinear';
+  validateResample(method);
+  if (options.defer && method === 'bilinear') throw new Error('deferred preparation requires lanczos3 or area');
   if (!Number.isInteger(cols) || cols <= 0 || !Number.isInteger(frames) || frames <= 0)
     throw new Error('non-reproducible project: cols and frames must be positive integers');
   const rows = Math.ceil(frames / cols);
@@ -92,16 +131,29 @@ export function normalizeSheetDpi(
     grid = createImage(raw.width, cropBottom - cropTop);
     grid.data.set(raw.data.subarray(cropTop * raw.width * 4, cropBottom * raw.width * 4));
   }
-  const image = resizeImage(grid, cols * CELL_PX, rows * CELL_PX);
+  const width = cols * CELL_PX,
+    height = rows * CELL_PX;
+  const image = options.defer
+    ? grid
+    : method === 'bilinear'
+      ? resizeImage(grid, width, height)
+      : resampleAffine(
+          grid,
+          width,
+          height,
+          { scaleX: width / grid.width, scaleY: height / grid.height, dx: 0, dy: 0 },
+          method,
+        );
   return {
     image,
     record: {
+      ...(method !== 'bilinear' ? { resample: method, ...(options.defer ? { singlePass: true } : {}) } : {}),
       raw: [raw.width, raw.height],
-      normalized: [image.width, image.height],
+      normalized: [width, height],
       cropTop,
       cropBottom,
-      dpiScaleX: image.width / grid.width,
-      dpiScaleY: image.height / grid.height,
+      dpiScaleX: width / grid.width,
+      dpiScaleY: height / grid.height,
     },
   };
 }

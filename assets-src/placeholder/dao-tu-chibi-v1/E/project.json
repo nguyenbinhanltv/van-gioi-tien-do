@@ -1,0 +1,3411 @@
+{
+  "character": "dao-tu-chibi-v1",
+  "direction": "E",
+  "stem": "daotuchibi",
+  "master": "../reference/E.master.png",
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 122.3406113537118,
+      "y": 12.855895196506552
+    },
+    "chin": {
+      "x": 139.94759825327512,
+      "y": 62.21834061135371
+    },
+    "breadth": {
+      "left": {
+        "x": 110.70742358078604,
+        "y": 34.235807860262014
+      },
+      "right": {
+        "x": 148.75109170305677,
+        "y": 34.235807860262014
+      }
+    }
+  },
+  "backlog": "quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "palette": {
+    "lock": true
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.png",
+      "manifest": "templates/idle.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell0: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell1: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell2: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell3: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell4: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell5: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell6: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell7: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell8: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell9: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell10: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell11: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell12: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell13: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell14: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/idle.png cell15: fixed source lattice registration x128 / ground232 from T1 stencil template; preserve breathing offset, no per-cell ground fitting."
+        }
+      },
+      "exceptions": {
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "4": "secondary-overhang",
+        "5": "secondary-overhang",
+        "6": "secondary-overhang",
+        "7": "secondary-overhang",
+        "8": "secondary-overhang",
+        "9": "secondary-overhang",
+        "10": "secondary-overhang",
+        "11": "secondary-overhang",
+        "12": "secondary-overhang",
+        "13": "secondary-overhang",
+        "14": "secondary-overhang",
+        "15": "secondary-overhang"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 18
+          },
+          "chin": {
+            "x": 145,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell0 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 18
+          },
+          "chin": {
+            "x": 145,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell1 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 145.5,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112.5,
+              "y": 36
+            },
+            "right": {
+              "x": 150.5,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell2 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 36
+            },
+            "right": {
+              "x": 151,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell3 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 36
+            },
+            "right": {
+              "x": 151,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell4 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126.5,
+            "y": 17
+          },
+          "chin": {
+            "x": 146.5,
+            "y": 64
+          },
+          "breadth": {
+            "left": {
+              "x": 113.5,
+              "y": 36
+            },
+            "right": {
+              "x": 151.5,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell5 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 17
+          },
+          "chin": {
+            "x": 147,
+            "y": 64
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 36
+            },
+            "right": {
+              "x": 152,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell6 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 17
+          },
+          "chin": {
+            "x": 147,
+            "y": 64
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 36
+            },
+            "right": {
+              "x": 152,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell7 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 127,
+            "y": 18
+          },
+          "chin": {
+            "x": 147,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 114,
+              "y": 36
+            },
+            "right": {
+              "x": 152,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell8 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 146.5,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 113.5,
+              "y": 36
+            },
+            "right": {
+              "x": 151.5,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell9 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 113,
+              "y": 36
+            },
+            "right": {
+              "x": 151,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell10 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 145.5,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112.5,
+              "y": 36
+            },
+            "right": {
+              "x": 150.5,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell11 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 145.5,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112.5,
+              "y": 36
+            },
+            "right": {
+              "x": 150.5,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell12 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 18
+          },
+          "chin": {
+            "x": 145,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell13 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 18
+          },
+          "chin": {
+            "x": 145,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell14 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 125,
+            "y": 18
+          },
+          "chin": {
+            "x": 145,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned idle cell15 and enlarged crop x95,y0,80x80. Main skull-attached cap excludes the lifted thin curl; visible chin and skull breadth retained. Loose upper hair increases full-alpha bbox, not anatomical head size. Source lattice registration retained; no frame fitting."
+        }
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "exceptions": {
+        "0": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "1": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "2": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "3": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "4": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "5": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "6": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "7": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "8": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "9": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "10": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "11": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "12": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "13": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "14": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained",
+        "15": "seated: cross-legged pose, full-size dao across knees; anatomical scale retained"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.png",
+      "manifest": "templates/walk.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell0: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell1: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell2: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell3: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell4: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell5: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell6: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell7: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell8: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell9: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell10: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell11: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell12: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell13: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell14: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/walk.png cell15: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        }
+      },
+      "exceptions": {
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "4": "secondary-overhang",
+        "5": "secondary-overhang",
+        "6": "secondary-overhang",
+        "7": "secondary-overhang",
+        "8": "secondary-overhang",
+        "9": "secondary-overhang",
+        "10": "secondary-overhang",
+        "11": "secondary-overhang",
+        "12": "secondary-overhang",
+        "13": "secondary-overhang",
+        "14": "secondary-overhang",
+        "15": "secondary-overhang"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell0 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell1 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell2 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell3 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell4 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell5 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell6 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell7 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell8 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell9 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell10 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell11 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell12 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell13 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell14 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 126,
+            "y": 18
+          },
+          "chin": {
+            "x": 146,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 112,
+              "y": 36
+            },
+            "right": {
+              "x": 150,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned walk cell15 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Upper hair overhang retained; same skull scale, no frame fitting."
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.png",
+      "manifest": "templates/run.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell0: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell1: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell2: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell3: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell4: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell5: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell6: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell7: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell8: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell9: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell10: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell11: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell12: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell13: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell14: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/run.png cell15: source lattice x128/ground232 retained from directional T1 template, preserve actual stride/bob rather than fit sole per frame."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell0 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell1 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell2 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell3 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell4 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell5 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell6 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell7 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell8 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell9 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell10 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell11 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "12": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell12 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "13": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell13 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "14": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell14 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        },
+        "15": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 136,
+            "y": 17
+          },
+          "chin": {
+            "x": 156,
+            "y": 65
+          },
+          "breadth": {
+            "left": {
+              "x": 122,
+              "y": 36
+            },
+            "right": {
+              "x": 160,
+              "y": 36
+            }
+          },
+          "note": "Manually reviewed aligned run cell15 and enlarged80x80 crop x95,y0: visible main cap, chin and skull breadth exclude lifted curl/ponytail. Forward-running head translation/lean retained on fixed lattice; no rescale."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: both boots riding same dao blade, same body size",
+        "1": "airborne: both boots riding same dao blade, same body size",
+        "2": "airborne: both boots riding same dao blade, same body size",
+        "3": "airborne: both boots riding same dao blade, same body size",
+        "4": "airborne: both boots riding same dao blade, same body size",
+        "5": "airborne: both boots riding same dao blade, same body size",
+        "6": "airborne: both boots riding same dao blade, same body size",
+        "7": "airborne: both boots riding same dao blade, same body size",
+        "8": "airborne: both boots riding same dao blade, same body size",
+        "9": "airborne: both boots riding same dao blade, same body size",
+        "10": "airborne: both boots riding same dao blade, same body size",
+        "11": "airborne: both boots riding same dao blade, same body size"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell0: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell1: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell2: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell3: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell4: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell5: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell6: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell7: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell8: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell9: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell10: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/sword_fly.png cell11: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        }
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.png",
+      "manifest": "templates/attack.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "1": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "2": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "3": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "4": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "5": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "6": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "7": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "8": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "9": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "10": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "11": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "12": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "13": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell0: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell1: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell2: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell3: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell4: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell5: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell6: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell7: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell8: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell9: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell10: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell11: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell12: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack.png cell13: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        }
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.repaired.png",
+      "manifest": "templates/attack_2.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "1": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "2": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "3": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "4": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "5": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "6": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "7": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "8": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "9": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "10": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "11": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "12": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained",
+        "13": "lunge: heavy dao windup, torso pivot and follow-through; anatomical size retained"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell0: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell1: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell2: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell3: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell4: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell5: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell6: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell7: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell8: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell9: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell10: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell11: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell12: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_2.png cell13: fixed template lattice x128/ground232; pelvis intentionally travels into the heavy cut. Preserve source travel, no per-frame fitting."
+        }
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.png",
+      "manifest": "templates/attack_3.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "1": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "2": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "3": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "4": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "5": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "6": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "7": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "8": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "9": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "10": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "11": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "12": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale",
+        "13": "raised-sword: overhead ground strike transitions into deep lunge and recovery, same anatomical scale"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell0: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell1: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell2: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell3: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell4: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell5: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell6: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell7: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell8: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell9: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell10: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell11: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell12: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/attack_3.png cell13: template registration x128/ground232 retained; overhead strike and deep lunge have authored body travel, no recenter/scale."
+        }
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.png",
+      "manifest": "templates/cast.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "raised-arms: rage roar bracing",
+        "1": "raised-arms: rage roar bracing",
+        "2": "raised-arms: rage roar bracing",
+        "3": "raised-arms: rage roar bracing",
+        "4": "raised-arms: rage roar bracing",
+        "5": "raised-arms: rage roar bracing",
+        "6": "raised-arms: rage roar bracing",
+        "7": "raised-arms: rage roar bracing",
+        "8": "raised-arms: rage roar bracing",
+        "9": "raised-arms: rage roar bracing",
+        "10": "raised-arms: rage roar bracing",
+        "11": "raised-arms: rage roar bracing",
+        "12": "raised-arms: rage roar bracing",
+        "13": "raised-arms: rage roar bracing",
+        "14": "raised-arms: rage roar bracing",
+        "15": "raised-arms: rage roar bracing"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell0: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell1: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell2: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell3: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell4: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell5: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell6: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell7: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell8: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell9: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell10: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell11: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell12: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell13: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell14: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/cast.png cell15: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        }
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.png",
+      "manifest": "templates/channel.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "1": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "2": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "3": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "4": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "5": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "6": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "7": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "8": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "9": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "10": "lunge: grounded spinning dao with torso pivot, same anatomy",
+        "11": "lunge: grounded spinning dao with torso pivot, same anatomy"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell0: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell1: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell2: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell3: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell4: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell5: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell6: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell7: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell8: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell9: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell10: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/channel.png cell11: fixed source template x128/ground232, preserve bracing/pivot travel; no scale or per-cell alignment fitting."
+        }
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.png",
+      "manifest": "templates/die.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "die-collapse: knees buckle into settled side collapse, same body size",
+        "1": "die-collapse: knees buckle into settled side collapse, same body size",
+        "2": "die-collapse: knees buckle into settled side collapse, same body size",
+        "3": "die-collapse: knees buckle into settled side collapse, same body size",
+        "4": "die-collapse: knees buckle into settled side collapse, same body size",
+        "5": "die-collapse: knees buckle into settled side collapse, same body size",
+        "6": "die-collapse: knees buckle into settled side collapse, same body size",
+        "7": "die-collapse: knees buckle into settled side collapse, same body size",
+        "8": "die-collapse: knees buckle into settled side collapse, same body size",
+        "9": "die-collapse: knees buckle into settled side collapse, same body size",
+        "10": "die-collapse: knees buckle into settled side collapse, same body size",
+        "11": "die-collapse: knees buckle into settled side collapse, same body size"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell0: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell1: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell2: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell3: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell4: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell5: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell6: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell7: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell8: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell9: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell10: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/die.png cell11: fixed source lattice x128/ground232 preserves authored bob/collapse; no sole-fit or individual rescale."
+        }
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "1": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "2": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "3": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "4": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "5": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "6": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "7": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "8": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "9": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "10": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "11": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "12": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "13": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "14": "kneel: one-knee brace with raised protective arm; original anatomical scale",
+        "15": "kneel: one-knee brace with raised protective arm; original anatomical scale"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell0: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell1: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell2: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell3: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell4: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell5: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell6: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell7: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell8: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell9: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell10: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell11: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell12: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell13: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell14: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/tribulation.png cell15: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        }
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.png",
+      "manifest": "templates/emote.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell0: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell1: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell2: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell3: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell4: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell5: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell6: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell7: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell8: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell9: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell10: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/emote.png cell11: fixed source template registration x128/ground232 retains kneel/nod travel, no frame fitting."
+        }
+      },
+      "exceptions": {
+        "0": "secondary-overhang",
+        "1": "secondary-overhang",
+        "2": "secondary-overhang",
+        "3": "secondary-overhang",
+        "4": "secondary-overhang",
+        "5": "secondary-overhang",
+        "6": "secondary-overhang",
+        "7": "secondary-overhang",
+        "8": "secondary-overhang",
+        "9": "secondary-overhang",
+        "10": "secondary-overhang",
+        "11": "secondary-overhang"
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell0 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell1 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell2 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell3 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell4 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell5 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 132,
+            "y": 21
+          },
+          "chin": {
+            "x": 147,
+            "y": 70
+          },
+          "breadth": {
+            "left": {
+              "x": 118,
+              "y": 45
+            },
+            "right": {
+              "x": 156,
+              "y": 45
+            }
+          },
+          "note": "Manually reviewed aligned emote cell6 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 133,
+            "y": 22
+          },
+          "chin": {
+            "x": 147,
+            "y": 73
+          },
+          "breadth": {
+            "left": {
+              "x": 119,
+              "y": 46
+            },
+            "right": {
+              "x": 157,
+              "y": 46
+            }
+          },
+          "note": "Manually reviewed aligned emote cell7 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell8 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell9 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "10": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell10 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        },
+        "11": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 123,
+            "y": 20
+          },
+          "chin": {
+            "x": 139,
+            "y": 69
+          },
+          "breadth": {
+            "left": {
+              "x": 109,
+              "y": 44
+            },
+            "right": {
+              "x": 147,
+              "y": 44
+            }
+          },
+          "note": "Manually reviewed aligned emote cell11 in enlarged x95,y0,80x80 diagnostic: visible cap/chin and skull breadth exclude loose curl. Nod translation/rotation is measured, not copied from standing master; no rescale."
+        }
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "raw/hit-dash.boot-repaired.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "recoil: struck torso leans back, same anatomical size",
+        "1": "recoil: struck torso leans back, same anatomical size",
+        "2": "recoil: struck torso leans back, same anatomical size",
+        "3": "recoil: struck torso leans back, same anatomical size",
+        "4": "recoil: struck torso leans back, same anatomical size",
+        "5": "recoil: struck torso leans back, same anatomical size"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell0, sourcecell0: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell1, sourcecell1: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell2, sourcecell2: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell3, sourcecell3: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell4, sourcecell4: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png hit localcell5, sourcecell5: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        }
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "raw/hit-dash.boot-repaired.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell0, sourcecell6: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell1, sourcecell7: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell2, sourcecell8: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell3, sourcecell9: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell4, sourcecell10: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell5, sourcecell11: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell6, sourcecell12: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell7, sourcecell13: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell8, sourcecell14: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "groundY": 232,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed raw/hit-dash.png dash localcell9, sourcecell15: fixed lattice x128/ground232 preserves recoil/charging travel, no per-frame fit."
+        }
+      },
+      "headEvidence": {
+        "0": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 133,
+            "y": 58
+          },
+          "chin": {
+            "x": 147,
+            "y": 107
+          },
+          "breadth": {
+            "left": {
+              "x": 119,
+              "y": 82
+            },
+            "right": {
+              "x": 157,
+              "y": 82
+            }
+          },
+          "note": "Manually reviewed dash localcell0, sourcecell6, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "1": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 144,
+            "y": 62
+          },
+          "chin": {
+            "x": 158,
+            "y": 111
+          },
+          "breadth": {
+            "left": {
+              "x": 130,
+              "y": 86
+            },
+            "right": {
+              "x": 168,
+              "y": 86
+            }
+          },
+          "note": "Manually reviewed dash localcell1, sourcecell7, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "2": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 154,
+            "y": 61
+          },
+          "chin": {
+            "x": 171,
+            "y": 110
+          },
+          "breadth": {
+            "left": {
+              "x": 140,
+              "y": 85
+            },
+            "right": {
+              "x": 178,
+              "y": 85
+            }
+          },
+          "note": "Manually reviewed dash localcell2, sourcecell8, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "3": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 164,
+            "y": 62
+          },
+          "chin": {
+            "x": 181,
+            "y": 112
+          },
+          "breadth": {
+            "left": {
+              "x": 150,
+              "y": 86
+            },
+            "right": {
+              "x": 188,
+              "y": 86
+            }
+          },
+          "note": "Manually reviewed dash localcell3, sourcecell9, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "4": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 170,
+            "y": 66
+          },
+          "chin": {
+            "x": 187,
+            "y": 116
+          },
+          "breadth": {
+            "left": {
+              "x": 156,
+              "y": 90
+            },
+            "right": {
+              "x": 194,
+              "y": 90
+            }
+          },
+          "note": "Manually reviewed dash localcell4, sourcecell10, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "5": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 181,
+            "y": 77
+          },
+          "chin": {
+            "x": 202,
+            "y": 126
+          },
+          "breadth": {
+            "left": {
+              "x": 167,
+              "y": 101
+            },
+            "right": {
+              "x": 205,
+              "y": 101
+            }
+          },
+          "note": "Manually reviewed dash localcell5, sourcecell11, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "6": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 160,
+            "y": 69
+          },
+          "chin": {
+            "x": 181,
+            "y": 118
+          },
+          "breadth": {
+            "left": {
+              "x": 146,
+              "y": 93
+            },
+            "right": {
+              "x": 184,
+              "y": 93
+            }
+          },
+          "note": "Manually reviewed dash localcell6, sourcecell12, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "7": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 141,
+            "y": 57
+          },
+          "chin": {
+            "x": 157,
+            "y": 107
+          },
+          "breadth": {
+            "left": {
+              "x": 127,
+              "y": 81
+            },
+            "right": {
+              "x": 165,
+              "y": 81
+            }
+          },
+          "note": "Manually reviewed dash localcell7, sourcecell13, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "8": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 129,
+            "y": 27
+          },
+          "chin": {
+            "x": 147,
+            "y": 77
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 51
+            },
+            "right": {
+              "x": 153,
+              "y": 51
+            }
+          },
+          "note": "Manually reviewed dash localcell8, sourcecell14, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        },
+        "9": {
+          "kind": "crown-chin",
+          "crown": {
+            "x": 129,
+            "y": 17
+          },
+          "chin": {
+            "x": 145,
+            "y": 67
+          },
+          "breadth": {
+            "left": {
+              "x": 115,
+              "y": 41
+            },
+            "right": {
+              "x": 153,
+              "y": 41
+            }
+          },
+          "note": "Manually reviewed dash localcell9, sourcecell15, against aligned coordinate-grid diagnostic. Visible attached cap/chin and skull breadth exclude swept loose strands; forward head rotation/translation retained with charging posture, no rescale."
+        }
+      }
+    }
+  ]
+}

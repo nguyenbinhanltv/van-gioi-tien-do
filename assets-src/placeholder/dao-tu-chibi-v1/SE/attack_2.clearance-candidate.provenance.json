@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T01:02:27.560Z",
+  "utcRecordedCompleted": "2026-11-08T01:03:02.760Z",
+  "prompt": "Precise local sprite correction of FIRST IMAGE ONLY. Preserve exact1254square4x4 sheet/14poses and two unusedblankcells. In rowmajor cells3 and4 (topright and secondrowleft), raised DAO blade hits uppercell boundary. Redraw only raised saber arm and weapon trajectory to keep full SAME broad long mountain-ink saber at least8logicalpixels BELOW cell top; lower/bend arm naturally. Do NOT shrink saber/head/body, recenterframes or globallyscale. Keep allother12occupiedcells EXACTLY unchanged pixel-for-pixel. Preserve stern SEface/greyeyes, darkteal costume, body/feetpositions, magenta background. NoFX/text/marks. Reference2 is canonical identity, not a newcomposition.",
+  "references": ["raw/attack_2.png", "../reference/SE.master.png"],
+  "generatedOriginalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b856-ee35-77d1-9217-2a7e924e189f\\exec-ed5a6ade-6a37-4873-bda6-3c80d7b93aa5.png",
+  "rawOutput": "raw/attack_2.clearance-candidate.png",
+  "status": "candidate; only cells3 and4 may be selected after native-margin inspection"
+}

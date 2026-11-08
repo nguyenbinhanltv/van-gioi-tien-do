@@ -1,0 +1,96 @@
+{
+  "scale": 0.3500810372771475,
+  "referenceCrownY": 52,
+  "referenceSoleY": 669,
+  "tiers": [
+    {
+      "tier": 2,
+      "source": "raw/T1-T5.front.storm-grey-blue.png",
+      "panel": [408, 0, 385, 724],
+      "scale": 0.3500810372771475,
+      "sourceBounds": {
+        "left": 0,
+        "right": 385,
+        "top": 14,
+        "bottom": 710,
+        "height": 696,
+        "width": 385,
+        "pelvisX": 228.72688955971978
+      },
+      "projected": {
+        "left": 58.68395461912479,
+        "right": 193.46515397082658,
+        "top": 2.696920583468369,
+        "bottom": 246.35332252836304
+      },
+      "status": "front edit reference; no motion/variant gate run"
+    },
+    {
+      "tier": 3,
+      "source": "raw/T1-T5.front.storm-grey-blue.png",
+      "panel": [793, 0, 385, 724],
+      "scale": 0.3500810372771475,
+      "sourceBounds": {
+        "left": 0,
+        "right": 385,
+        "top": 14,
+        "bottom": 710,
+        "height": 696,
+        "width": 385,
+        "pelvisX": 255.7411223598335
+      },
+      "projected": {
+        "left": 59.03403565640194,
+        "right": 193.81523500810374,
+        "top": 2.696920583468369,
+        "bottom": 246.35332252836304
+      },
+      "status": "front edit reference; no motion/variant gate run"
+    },
+    {
+      "tier": 4,
+      "source": "raw/T1-T5.front.storm-grey-blue.png",
+      "panel": [1178, 0, 420, 724],
+      "scale": 0.3500810372771475,
+      "sourceBounds": {
+        "left": 0,
+        "right": 420,
+        "top": 12,
+        "bottom": 710,
+        "height": 698,
+        "width": 420,
+        "pelvisX": 285.48472134646164
+      },
+      "projected": {
+        "left": 57.98379254457049,
+        "right": 205.01782820097245,
+        "top": 1.9967585089140982,
+        "bottom": 246.35332252836304
+      },
+      "status": "front edit reference; no motion/variant gate run"
+    },
+    {
+      "tier": 5,
+      "source": "raw/T1-T5.front.storm-grey-blue.png",
+      "panel": [1598, 0, 574, 724],
+      "scale": 0.3500810372771475,
+      "sourceBounds": {
+        "left": 0,
+        "right": 562,
+        "top": 11,
+        "bottom": 710,
+        "height": 699,
+        "width": 562,
+        "pelvisX": 320.97585907736413
+      },
+      "projected": {
+        "left": 55.18314424635332,
+        "right": 251.92868719611022,
+        "top": 1.6466774716369343,
+        "bottom": 246.35332252836304
+      },
+      "status": "front edit reference; no motion/variant gate run"
+    }
+  ],
+  "note": "One common tier-sheet scale. Canonical T1 from turnaround, not tier redraw."
+}

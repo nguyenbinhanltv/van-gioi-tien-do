@@ -1,0 +1,74 @@
+{
+  "method": "Manual visible art landmarks on native equal-width panels, y down. Main skull-attached hair cap excludes loose curl/ponytail; no weapon in anatomical H. Rear nape occluded by ponytail: D50 crown/shoulder/breadth.",
+  "source": "raw/T1-turnaround.E-face-correction.png",
+  "targetHeight": 216,
+  "ground": 232,
+  "views": [
+    {
+      "direction": "E",
+      "crown": [190, 51],
+      "chin": [246, 208],
+      "eyesY": 159,
+      "soleY": 748,
+      "axisX": 208,
+      "breadth": [
+        [153, 119],
+        [274, 119]
+      ]
+    },
+    {
+      "direction": "SE",
+      "crown": [164, 59],
+      "chin": [191, 211],
+      "eyesY": 166,
+      "soleY": 749,
+      "axisX": 178,
+      "breadth": [
+        [120, 133],
+        [234, 133]
+      ]
+    },
+    {
+      "direction": "S",
+      "crown": [170, 54],
+      "chin": [182, 205],
+      "eyesY": 159,
+      "soleY": 741,
+      "axisX": 180,
+      "breadth": [
+        [121, 129],
+        [232, 129]
+      ]
+    },
+    {
+      "direction": "NE",
+      "kind": "rear-crown-shoulder",
+      "crown": [190, 61],
+      "shoulderTop": [
+        [112, 218],
+        [237, 213]
+      ],
+      "breadth": [
+        [125, 125],
+        [260, 125]
+      ],
+      "soleY": 742,
+      "axisX": 184
+    },
+    {
+      "direction": "N",
+      "kind": "rear-crown-shoulder",
+      "crown": [196, 63],
+      "shoulderTop": [
+        [117, 214],
+        [248, 214]
+      ],
+      "breadth": [
+        [141, 123],
+        [271, 123]
+      ],
+      "soleY": 742,
+      "axisX": 197
+    }
+  ]
+}
