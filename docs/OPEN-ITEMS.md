@@ -404,3 +404,12 @@ Còn mở / lưu ý:
 4. **Chưa có**: trang bị / mặc, độ bền hao theo 07 §7 (mới có API `loseDurability`), sửa chữa (sink `REPAIR`), kho / thư / chợ / ký quỹ, Tiên Ngọc và mọi tiền tệ khác Linh thạch, nhân vật (chủ hiện là tài khoản), `affixes`.
 5. **Lưu trữ thật**: ví thuộc sổ cái và hiện chỉ ở bộ nhớ (mất khi khởi động lại); khóa idempotency chỉ giữ trong tiến trình (docs/26 §4.1: 7 ngày); cần PostgreSQL (docs/23 §4.3-4.4, `item_events` MINT/BURN/MOVE, đối chiếu §3.3), giao dịch đồng thời giữa vật phẩm và sổ cái cho cùng một kill.
 6. **Drop vào túi đầy**: roll không vừa thì cả roll vào hàng chờ (tất cả hoặc không gì); chưa có UI nhắc hay thời hạn hết hạn cho hàng chờ.
+
+## D79 — túi đồ hiển thị: còn mở (worker39, 2026-11-09)
+
+1. **Chưa có art vật phẩm, tên hiển thị, mô tả, tooltip**: bảng túi dùng ô màu + mã ngắn (HP, BT, B1-B3, MA) và ASCII; cần icon (docs/05), tên Việt hóa, chi tiết khi chạm.
+2. **Chưa có**: dùng / tách chồng / vứt / sắp xếp / ô nhanh (giao diện `InventoryInteraction` có sẵn trong client-core cho kéo-thả chưa nối), trang bị và độ bền hiển thị khi mặc, kho, thư, chợ.
+3. **Nhịp lệnh (10/s, burst 10), số ô túi 40 (D77), số mục hàng chờ tối đa** là mặc định tạm cần game designer duyệt.
+4. **Gửi toàn bộ túi mỗi thay đổi** (≤ ~0,6 KB với 40 ô, tối đa 20/s mỗi người khi nhặt liên tục): đủ cho beta, cần delta nếu túi lớn hơn hoặc nhặt dày đặc; chưa đo băng thông với 100 người nhặt cùng lúc.
+5. **Bảng túi chưa kiểm trên điện thoại thật / màn hình nhỏ**; chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
+6. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.

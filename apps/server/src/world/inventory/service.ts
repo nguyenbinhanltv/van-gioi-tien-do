@@ -64,6 +64,7 @@ export class InventoryService {
   /** loot lost because bag AND pending queue were full (quantity of items, cumulative) */
   lostItems = 0;
   private readonly owners = new Map<string, OwnerState>();
+  private readonly listeners: ((owner: string) => void)[] = [];
   private readonly grants = new Map<string, GrantResult>();
   private readonly bagSlots: number;
   private readonly pendingMax: number;
@@ -118,6 +119,18 @@ export class InventoryService {
     this.store.save(owner, snap);
   }
 
+  /** Called with the owner's id after every applied change to that owner's inventory or pending loot (wallet included). */
+  subscribe(listener: (owner: string) => void): void {
+    this.listeners.push(listener);
+  }
+  private notify(owner: string): void {
+    for (const l of this.listeners) l(owner);
+  }
+  /** Does `owner` have a live connection (loaded in memory)? */
+  isOnline(owner: string): boolean {
+    return (this.owners.get(owner)?.online ?? 0) > 0;
+  }
+
   /** A connection of `owner` joined (counted; loads the saved inventory on the first one). */
   onJoin(owner: string): void {
     this.load(owner).online++;
@@ -163,7 +176,9 @@ export class InventoryService {
     const gk = `${owner}|${killKey}`;
     const seen = this.grants.get(gk);
     if (seen) return { ...seen, replayed: true };
-    return this.mutate(owner, (st) => this.applyGrant(owner, st, rolls, source, gk));
+    const result = this.mutate(owner, (st) => this.applyGrant(owner, st, rolls, source, gk));
+    this.notify(owner);
+    return result;
   }
 
   private applyGrant(
@@ -231,6 +246,11 @@ export class InventoryService {
 
   /** Move pending loot into the bag as far as it fits (whole entries, oldest first). Returns how many entries moved. */
   claimPending(owner: string): number {
+    const moved = this.claim(owner);
+    if (moved > 0) this.notify(owner);
+    return moved;
+  }
+  private claim(owner: string): number {
     return this.mutate(owner, (st) => {
       let moved = 0;
       const left: PendingLoot[] = [];

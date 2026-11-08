@@ -10,6 +10,8 @@ import {
   decode,
   encode,
   type EnterEntity,
+  type InvResultMsg,
+  type InvStateMsg,
   type Message,
   type SelfState,
   type SkillResultMsg,
@@ -19,6 +21,7 @@ import { NETWORK } from '@vgtd/shared';
 import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
 import { RemoteWorld, type RemoteView } from './remote.js';
+import { BagModel, makeRequestId } from './bag.js';
 
 /** The slice of the WebSocket API we use (browser WebSocket and `ws` both satisfy it). */
 export interface SocketLike {
@@ -41,6 +44,8 @@ export interface NetDeps {
   }>;
   WebSocket: new (url: string) => SocketLike;
   now: () => number;
+  /** random source for request ids (default `Math.random`; request ids are not simulation state) */
+  random?: () => number;
 }
 
 export type NetStatus = 'idle' | 'connecting' | 'online' | 'closed';
@@ -57,6 +62,10 @@ export interface NetEvents {
   onAoiLeave?(indices: readonly number[]): void;
   /** `tick` is the simulation tick (x NETWORK.TICK_MS = server time); `entities` are the records in this snapshot only (unchanged ones are omitted, D73). */
   onSnapshot?(tick: number, entities: readonly SnapshotEntity[], self: SelfState | null): void;
+  /** The bag changed: `net.bag` already holds the new state (D79). */
+  onInventory?(msg: InvStateMsg): void;
+  /** The server answered an inventory command (`net.bag.lastResult` is set). */
+  onInvResult?(msg: InvResultMsg): void;
 }
 
 export interface NetOptions {
@@ -101,6 +110,7 @@ export class NetClient {
 
   constructor(private readonly o: NetOptions) {
     this.remote = new RemoteWorld(o.interpDelayMs);
+    this.bag = new BagModel();
     this.events = o.events ?? {};
   }
 
@@ -115,6 +125,28 @@ export class NetClient {
     } catch (e) {
       this.lastError = `hook: ${(e as Error).message}`;
     }
+  }
+
+  /** The visible bag (D79): updated from `inv_state` / `inv_result`, read by the bag panel. */
+  readonly bag: BagModel;
+
+  /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
+  sendBagMove(from: number, to: number): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.moveCmd(from, to, () => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
+  }
+  /** Ask the server to move pending loot into the bag. False when nothing is pending or the socket is not open. */
+  sendBagClaim(): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.claimCmd(() => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
   }
 
   private async post(path: string, body: unknown): Promise<{ status: number; json: Record<string, unknown> }> {
@@ -141,6 +173,7 @@ export class NetClient {
       this.status = 'online';
     } catch (e) {
       this.status = 'closed';
+      this.bag.reset();
       this.lastError = (e as Error).message;
       throw e;
     }
@@ -176,6 +209,7 @@ export class NetClient {
         if (!acked) reject(new Error(`closed before hello_ack: ${ev.code} ${ev.reason}`));
         if (this.status !== 'closed') {
           this.status = 'closed';
+          this.bag.reset();
           if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
         }
       };
@@ -209,6 +243,14 @@ export class NetClient {
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
+        break;
+      case 'inv_state':
+        this.bag.applyState(msg);
+        this.emit(() => this.events.onInventory?.(msg));
+        break;
+      case 'inv_result':
+        this.bag.applyResult(msg);
+        this.emit(() => this.events.onInvResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -297,6 +339,7 @@ export class NetClient {
 
   close(): void {
     this.status = 'closed';
+    this.bag.reset();
     this.ws?.close();
   }
 }

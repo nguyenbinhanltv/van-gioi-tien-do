@@ -50,7 +50,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import { DropSink, type InventoryService } from './inventory/index.js';
+import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -242,6 +242,8 @@ export class WorldNode {
   readonly inventory: InventoryService | null;
   /** combat `onDrops` -> `inventory.grantDrops` (needs both `combat` and `inventory`); null otherwise */
   readonly dropSink: DropSink | null;
+  /** the visible bag (D79): `inv_state` out, `inv_cmd` in; null without an inventory */
+  readonly invSync: InventorySync | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -270,6 +272,8 @@ export class WorldNode {
     });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     this.inventory = opts.inventory ?? null;
+    this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
+    this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -342,6 +346,7 @@ export class WorldNode {
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.inventory?.onJoin(accountId);
+    this.invSync?.markDirty(accountId); // the joining client gets its first inv_state this tick
     this.clients.set(id, {
       id,
       accountId,
@@ -383,6 +388,7 @@ export class WorldNode {
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
     this.inventory?.onLeave(c.accountId);
+    if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -463,6 +469,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
         break;
+      case 'inv_cmd':
+        if (!this.invSync) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs));
+        break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
         break;
@@ -516,6 +528,7 @@ export class WorldNode {
       this.phases.aoiTicks++;
     }
     const t3 = clock();
+    this.flushInventory();
     this.sendSnapshots();
     const t4 = clock();
     const ph = this.phases;
@@ -529,6 +542,20 @@ export class WorldNode {
     const dt = clock() - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
     return dt;
+  }
+
+  /** One `inv_state` per changed inventory per tick (D79), to the owner's live connection(s); offline owners just drop out. */
+  private flushInventory(): void {
+    const sync = this.invSync;
+    if (!sync) return;
+    for (const owner of sync.drain()) {
+      let msg: ReturnType<InventorySync['stateOf']> | null = null;
+      for (const c of this.clients.values()) {
+        if (c.accountId !== owner || c.dead) continue;
+        msg ??= sync.stateOf(owner);
+        this.send(c, msg);
+      }
+    }
   }
 
   /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
