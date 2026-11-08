@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:00:49 UTC"
+  },
+  "prompt": "ONE RECTANGULAR 4columns x3rows production HOVER/sword_fly sheet EXACTLY12 sequential FULL BODY drawings, rowmajor, aspect4:3. Image1 provides UN SCALED head identity/size placement only; draw missing bodies. Image2 approved full S master design. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. A calm magical floating idle WITHOUT visible magic: head remains at near-neutral height so bun fits top margin, knees bend slightly to lift both shoes 8-14logical pixels above ground, robe hangs with believable folds and bare space beneath soles. Small smooth breathing/hover undulation primarily in knees, sleeves and robe, not whole-figure upward translation; 12 distinct phases at24fps, last connects smoothly to first. Head upright and fixed face/size, shoulders relaxed, free LEFT palm open at viewerRIGHT; same whisk naturally gripped RIGHT hand viewerLEFT. No sword, no mount, no new prop, no platform, no magic ring, glow, cloud, shadow, particles or talismans. Final pure #FF00FF with all guides, black panel lines, labels, stencils and ghosts removed. Fully rendered original master-matching figure in each of12cells, no head-only outputs. Clear own-cell margin for bun/bristles/shoes.",
+  "inputs": ["templates/sword_fly.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/sword_fly.attempt1.png",
+  "status": "raw candidate; head/pose/loop/palette/canvas gates pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-5cef55c8-c67f-4ba7-85ca-ada39697695e.png",
+  "sha256": "cd9cbf819e14c814e4c6083104c1b054bb80247506f35d81d189e5bfbcf2037f",
+  "dimensions": [1448, 1086],
+  "inputHashes": [
+    {
+      "file": "templates/sword_fly.head-guide.png",
+      "sha256": "f38b16e838b477dc413a3999418b34feaeeadab46cf4aa699de837550dc21135"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

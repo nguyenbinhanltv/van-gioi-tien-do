@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 04:50:57 UTC"
+  },
+  "prompt": "ONE4x4 production RUN sprite sheet, EXACTLY16 sequential unique FULL-BODY drawings row-major, one complete two-step loop at24fps. Image1 contains UNscaled approved head-size/identity pins plus authoritative leading-leg ground ghosts; they are INPUT guidance, not final busts or extra objects. Image2 is the approved whole-body S master. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Build a genuinely dynamic run toward camera/SOUTH under every head pin: hips lean toward camera, alternating knees lift, rear heel kicks, contact/down/passing/flight/up phases, two clear airborne tucks, then opposite leg. Preserve dynamic leg extension and flight; DO NOT turn to a side view, flatten the run into a walk, or shrink the body. The head remains upright-ish at the provided head pin and its EXACT constant skull size; lean from hips, not neck. Shoulder/collar/sash design and face fixed. Follow ghost sole-contact positions (dot is sole bottom point, not shoe centre), keep every shoe inside cell including forward extension, no missing planted foot. White horsehair, sash and sleeve ends lag1-2drawings and settle with the run; same brown whisk/one collar stays naturally gripped viewerLEFT, free palm/arm counterbalances viewerRIGHT. All16poses genuinely distinct, no duplicate standstills, last connects to first. Final background must be a CONTINUOUS pure magenta field between figures: NO black panel/grid lines, guide dots, triangles, text, shadows, extra FX or talismans. Clear at least5logicalpx margins wherever possible; do not crop or expand the sheet. Return16whole running figures in equal cells, not heads/busts.",
+  "inputs": ["templates/run.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/run.attempt1.png",
+  "status": "raw dynamic run candidate; actual head/contact/canvas QA and full-direction review pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-be5231c7-8821-45a8-9d4d-069873644e0b.png",
+  "sha256": "f0481acc8df5cb83b085f8a6c7895d9555ebbb3021b218251a9e02960c7e8673",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/run.head-guide.png",
+      "sha256": "6c7a6335cd2e1bff38d805a26a343cbe875e11809fe9e1f23b1ad1a162b33d33"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

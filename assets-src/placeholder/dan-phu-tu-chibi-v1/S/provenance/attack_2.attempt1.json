@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:05:07 UTC"
+  },
+  "prompt": "ONE square4columns x4rows ATTACK2 production sprite sheet, EXACTLY14 sequential FULL-BODY drawings rowmajor, LAST TWO cells14/15EMPTY puremagenta. Image1 unscaled head input guide only;image2 approvedfullS master. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Distinct second combo: a low diagonal whisk sweep rising from viewerRIGHT at waist to viewerLEFT at chest, NEVER overhead. RIGHT hand(viewerLEFT) owns whisk throughout, natural wrist/grip; freeLEFTpalm balances. Frames0-2 anticipation knee load and bring whisk diagonally low across front;3-5 strike acceleration with opposite-direction sweep rising across waist/chest;6 impact extension on viewerLEFT;7 impact hold with bristles catching up;8-11 follow-through back toward neutral;12-13 settle. SOUTH/front camera and face stay fixed, torso can rotate slightly at hips but no profile view. Same head53pxfrontcap-to-chin and samefigure216pxanatomical scale, posture lowering allowed. Sleeves/robe/sash/horsehair trail1-2drawings and settle, fourteen smooth24fps poses, no exaggerated weapon/head growth. All parts inside owncell and full shoes visible, no cross-cell pixels. No FX, glyph, magictrail, shadow, talisman or newprops. Final continuous PURE #FF00FF, remove ALL black panel borders/dashed guides/labels/stencil edges.14figures,2empty finalcells.",
+  "inputs": ["templates/attack_2.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/attack_2.attempt1.png",
+  "status": "raw candidate; actual phase/contact/identity/gate review pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-914bc382-0bfc-4f27-88ac-b38ce7e22cb5.png",
+  "sha256": "14f4e8e252cc503853769355b16639146a909c03025dd741193d96728d92db84",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/attack_2.head-guide.png",
+      "sha256": "1e81e64dbc2810fedcf7dc1d8f1037c623587ef727d9035bad1c18c2e8c19b6f"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

@@ -142,6 +142,10 @@ Oct 31, 2026 · An Nguyen
 | Trễ nội suy         | 100 ms PC, 150–250 ms Mobile/Web (thích ứng)                                   | Server       |
 | Bù trễ kỹ năng      | Tua tối đa 200 ms                                                              | Server       |
 
+### Ngoại lệ sửa vùng đầu của sprite
+
+[Cập nhật D62: ngoại lệ hẹp của D47 chỉ để sửa head-band, áp dụng mọi lớp/hướng: một lượt scale ROI đầu đồng đều không quá 5%, không xoay/shear, Lanczos3 + feather, pivot chin/nape base đã khóa hoặc đường tiếp giáp đầu–trang phục nhìn thấy khi cả hai bị che; khóa dải base. Nguồn ORIGINAL hoặc đúng một AI head edit khóa master; không nối chồng. AI head replacement tối đa một lần thử/ô, cùng mặt nạ và bằng chứng, giữ thiết kế đã khóa. RGBA ngoài mask giống từng byte, D57 inherited-registration, xem seam 4×, ghi hệ số + SHA mask/provenance và đo lại landmark thật. Tỉ lệ thân/toàn ô D41 và mọi gate giữ nguyên; chi tiết tại D62 và pipeline.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Những giá trị ở cột "Cũ" vẫn còn nằm trong tài liệu gốc tương ứng; khi gặp, dùng giá trị ở cột "Hiện hành".

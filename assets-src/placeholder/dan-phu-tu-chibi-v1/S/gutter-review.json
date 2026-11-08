@@ -1,0 +1,594 @@
+{
+  "method": "Reviewed magenta/purple/black guide gutters. Public keyOut removes key-colour pixels first; remaining G>35 or B<R-20 flags body-colour pixels. Largest connected character must also remain strictly inside inset. These classify authoring-background removal, not a QA gate waiver.",
+  "rows": [
+    {
+      "name": "idle",
+      "frame": 0,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 9,
+        "x1": 222,
+        "y1": 285
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 1,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 9,
+        "x1": 221,
+        "y1": 285
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 2,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 8,
+        "x1": 223,
+        "y1": 285
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 3,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 7,
+        "x1": 223,
+        "y1": 285
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 4,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 6,
+        "x1": 224,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 5,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 5,
+        "x1": 223,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 6,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 4,
+        "x1": 225,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 7,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 4,
+        "x1": 225,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 8,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 5,
+        "x1": 225,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 9,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 5,
+        "x1": 223,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 10,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 7,
+        "x1": 223,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 11,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 7,
+        "x1": 221,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 12,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 6,
+        "x1": 222,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 13,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 6,
+        "x1": 221,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 14,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 7,
+        "x1": 221,
+        "y1": 284
+      }
+    },
+    {
+      "name": "idle",
+      "frame": 15,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 7,
+        "x1": 220,
+        "y1": 284
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 0,
+      "inset": 3,
+      "suspect": 10,
+      "examples": [
+        {
+          "x": 152,
+          "y": 0,
+          "rgba": [179, 1, 134, 255]
+        },
+        {
+          "x": 153,
+          "y": 0,
+          "rgba": [193, 2, 139, 255]
+        },
+        {
+          "x": 154,
+          "y": 0,
+          "rgba": [202, 2, 143, 255]
+        },
+        {
+          "x": 155,
+          "y": 0,
+          "rgba": [214, 2, 154, 255]
+        },
+        {
+          "x": 156,
+          "y": 0,
+          "rgba": [225, 2, 160, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 4,
+        "x1": 225,
+        "y1": 289
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 1,
+      "inset": 3,
+      "suspect": 10,
+      "examples": [
+        {
+          "x": 151,
+          "y": 0,
+          "rgba": [156, 1, 130, 255]
+        },
+        {
+          "x": 152,
+          "y": 0,
+          "rgba": [178, 1, 129, 255]
+        },
+        {
+          "x": 153,
+          "y": 0,
+          "rgba": [189, 2, 137, 255]
+        },
+        {
+          "x": 154,
+          "y": 0,
+          "rgba": [202, 2, 156, 255]
+        },
+        {
+          "x": 155,
+          "y": 0,
+          "rgba": [208, 2, 163, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 4,
+        "x1": 226,
+        "y1": 290
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 2,
+      "inset": 3,
+      "suspect": 9,
+      "examples": [
+        {
+          "x": 152,
+          "y": 0,
+          "rgba": [179, 3, 140, 255]
+        },
+        {
+          "x": 153,
+          "y": 0,
+          "rgba": [197, 4, 152, 255]
+        },
+        {
+          "x": 154,
+          "y": 0,
+          "rgba": [206, 5, 148, 255]
+        },
+        {
+          "x": 155,
+          "y": 0,
+          "rgba": [211, 5, 150, 255]
+        },
+        {
+          "x": 156,
+          "y": 0,
+          "rgba": [213, 4, 151, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 4,
+        "x1": 226,
+        "y1": 285
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 3,
+      "inset": 3,
+      "suspect": 11,
+      "examples": [
+        {
+          "x": 151,
+          "y": 0,
+          "rgba": [165, 1, 123, 255]
+        },
+        {
+          "x": 152,
+          "y": 0,
+          "rgba": [182, 2, 115, 255]
+        },
+        {
+          "x": 153,
+          "y": 0,
+          "rgba": [190, 2, 120, 255]
+        },
+        {
+          "x": 154,
+          "y": 0,
+          "rgba": [198, 3, 135, 255]
+        },
+        {
+          "x": 155,
+          "y": 0,
+          "rgba": [202, 3, 143, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 4,
+        "x1": 226,
+        "y1": 286
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 4,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 1,
+          "y": 311,
+          "rgba": [201, 46, 203, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 3,
+        "x1": 226,
+        "y1": 285
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 5,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 311,
+          "y": 311,
+          "rgba": [199, 37, 195, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 3,
+        "x1": 226,
+        "y1": 292
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 6,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 3,
+        "x1": 226,
+        "y1": 288
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 7,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 311,
+          "y": 311,
+          "rgba": [188, 42, 185, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 3,
+        "x1": 224,
+        "y1": 289
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 8,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 1,
+          "y": 1,
+          "rgba": [199, 37, 208, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 66,
+        "y0": 4,
+        "x1": 225,
+        "y1": 291
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 9,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 65,
+        "y0": 4,
+        "x1": 226,
+        "y1": 291
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 10,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 4,
+        "x1": 226,
+        "y1": 286
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 11,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 311,
+          "y": 1,
+          "rgba": [200, 50, 202, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 4,
+        "x1": 226,
+        "y1": 286
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 12,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 3,
+        "x1": 226,
+        "y1": 288
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 13,
+      "inset": 3,
+      "suspect": 1,
+      "examples": [
+        {
+          "x": 311,
+          "y": 311,
+          "rgba": [202, 40, 201, 255]
+        }
+      ],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 63,
+        "y0": 3,
+        "x1": 226,
+        "y1": 287
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 14,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 3,
+        "x1": 226,
+        "y1": 289
+      }
+    },
+    {
+      "name": "walk",
+      "frame": 15,
+      "inset": 3,
+      "suspect": 0,
+      "examples": [],
+      "bodyTouches": false,
+      "bodyBounds": {
+        "x0": 64,
+        "y0": 3,
+        "x1": 225,
+        "y1": 292
+      }
+    }
+  ],
+  "manualReview": "All flagged gutter examples are magenta/purple/black guide antialiasing on panel edges, not character materials. Largest connected characters including hair/bun/boots remain inside retained region in all32cells. No RGB erasure or output rescaling: standard declared public slice inset0.01 only, all raw outputs retained. Future source cells must be checked separately; this is not a blanket clipping waiver."
+}
