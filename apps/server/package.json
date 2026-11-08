@@ -1,0 +1,25 @@
+{
+  "name": "@vgtd/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gateway + World Node skeleton (auth, 20 Hz authoritative simulation, AOI, snapshots) and bot load-test tool",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "loadtest": "node scripts/loadtest.mjs"
+  },
+  "dependencies": {
+    "@vgtd/protocol": "*",
+    "@vgtd/shared": "*",
+    "@vgtd/sim": "*",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.12",
+    "esbuild": "^0.21.5"
+  }
+}
