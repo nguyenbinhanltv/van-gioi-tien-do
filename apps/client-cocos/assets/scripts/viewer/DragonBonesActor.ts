@@ -399,7 +399,7 @@ export class DragonBonesActor implements CharacterActor {
     if (!armature || !st || !v) return null;
     const duration = st.totalTime || v.animation.durationSec;
     const t = this.loopNow ? st.currentTime % duration : Math.min(st.currentTime, duration);
-    const frames = v.animation.frames;
+    const frames = st.animationData.frameCount;
     return { time: t, duration, frame: Math.min(frames - 1, Math.floor((t / duration) * frames)), frames };
   }
 

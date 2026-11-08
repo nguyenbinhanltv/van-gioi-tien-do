@@ -1,0 +1,2793 @@
+{
+  "format": "vgtd-smooth-clock-migration",
+  "baseSha": "50de2e0edc33b40480bf788f19eca5485152c578",
+  "applied": true,
+  "directions": [
+    {
+      "project": "assets-src/placeholder/dan-phu-tu-chibi-v1/E/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_ske.json",
+      "beforeSha256": "fdfaf41cefdc40289da85ea1c9c4c69b2efd059e729de38d7f53bc96dea81afd",
+      "afterSha256": "2da7bf5319dfbbc9818d7f84f413839c7ba125be251ea2ad34969e970b769d0b",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/E/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_ske.json",
+      "beforeSha256": "7c09e35a5a06dbafd9d315229999d85e70867803a187a7ccce46d8b00c587a87",
+      "afterSha256": "507ab65805afa6d82c2dff542acfc3117061764c47e797b33084927aa232b3bc",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_ske.json",
+      "beforeSha256": "7493ff1775d8718dcbb9d479fcd9d057573230e11782ea0139bf4dae7c22da26",
+      "afterSha256": "76431c4cd6a959170b4d005aa205e015f7a30d7f4ec78ecbd1f0b954f2598514",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/E/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json",
+      "beforeSha256": "27df785109cc3b0537fb8b78b31e98deebe986c0a929c38dcca9ddec9d1882d5",
+      "afterSha256": "7321f4ff27ad8e43f4fdb6bc7913ac89cd1ce401b34ef0067117f60dcd4ee449",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/S/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json",
+      "beforeSha256": "a02491e1cc9686a749204cb3c92c20131f6509aaa0542106c76ed4ae4eca59bb",
+      "afterSha256": "b6758f124544fa3e5323e92c291c67b739926f161997f138f8f0fed49c0d9298",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/SE/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_ske.json",
+      "beforeSha256": "67fc5940c2daeb108e03df6ab1602bd7a599c1c5a6597efeb7b1e76854b924d6",
+      "afterSha256": "025e5556ae39bc25465fdf37cc2657a5b9165a6dde3592105624780fb97cccde",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/the-tu-chibi-v1/E/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_ske.json",
+      "beforeSha256": "4529b0261e541e35d232dabb89d996deac5ef92a5abe1060f5d97d8a47f300fd",
+      "afterSha256": "23e8396098bd6666e3ca5fc899027abc7f97c2d5c4ef7c0e76a44fd19456ea41",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/the-tu-chibi-v1/S/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_ske.json",
+      "beforeSha256": "ff8d6240e4f53099d1d885b7d82e92d9f6fe0cc0700e4fe4c7a5b275e3ea7bb8",
+      "afterSha256": "380f9e7560fa8c19f5295e093b200853e80608bfb08a763220fc3186a036b90a",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    },
+    {
+      "project": "assets-src/placeholder/the-tu-chibi-v1/SE/project.json",
+      "skeleton": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_ske.json",
+      "beforeSha256": "e5c13aadbe63a1dc1b68e07179799fc85b7f97c70ff30ca880506136b9c5d107",
+      "afterSha256": "8db981cd3bda159826df86095dbd0287fca5368ac5a5274bc2e0bf646aae9c4c",
+      "nonTimingIdentical": true,
+      "clips": [
+        {
+          "name": "idle",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "meditate",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "walk",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "run",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "dash",
+          "drawings": 10,
+          "ticksBefore": 13,
+          "ticksAfter": 10,
+          "secondsAfter": 0.4166666666666667,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "sword_fly",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "attack",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_2",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "attack_3",
+          "drawings": 14,
+          "ticksBefore": 18,
+          "ticksAfter": 14,
+          "secondsAfter": 0.5833333333333334,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "cast",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "channel",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 0
+        },
+        {
+          "name": "hit",
+          "drawings": 6,
+          "ticksBefore": 8,
+          "ticksAfter": 6,
+          "secondsAfter": 0.25,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "die",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "tribulation",
+          "drawings": 16,
+          "ticksBefore": 20,
+          "ticksAfter": 16,
+          "secondsAfter": 0.6666666666666666,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        },
+        {
+          "name": "emote",
+          "drawings": 12,
+          "ticksBefore": 15,
+          "ticksAfter": 12,
+          "secondsAfter": 0.5,
+          "uniformHoldTicks": 1,
+          "playTimes": 1
+        }
+      ]
+    }
+  ],
+  "protectedHashes": [
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1.meta",
+      "beforeSha256": "abddecf567021ad4c7454cdf746ac16e2de9dd86dd12568c67ab300d3d7f32d1",
+      "afterSha256": "abddecf567021ad4c7454cdf746ac16e2de9dd86dd12568c67ab300d3d7f32d1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E.sprite.json",
+      "beforeSha256": "eb9ac6d1bdfa8bddae560106be2f58cc5a9d80e270bc7845b2bde835af9b7e9f",
+      "afterSha256": "eb9ac6d1bdfa8bddae560106be2f58cc5a9d80e270bc7845b2bde835af9b7e9f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E.sprite.json.meta",
+      "beforeSha256": "5e5d150eef62ac1f6dc97c54891d5db866bea7bb00b1a31f1fbf02e94b6c75c6",
+      "afterSha256": "5e5d150eef62ac1f6dc97c54891d5db866bea7bb00b1a31f1fbf02e94b6c75c6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_page1_tex.json",
+      "beforeSha256": "4c668362a763c739501354281f88ff896979ef0f2617309cfa013c75c6cd1dc2",
+      "afterSha256": "4c668362a763c739501354281f88ff896979ef0f2617309cfa013c75c6cd1dc2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_page1_tex.json.meta",
+      "beforeSha256": "7766a50cfa056c1dc44bf98221342bdd815bcd2b921deec01e3ecca66ccfe172",
+      "afterSha256": "7766a50cfa056c1dc44bf98221342bdd815bcd2b921deec01e3ecca66ccfe172"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_page1_tex.png",
+      "beforeSha256": "c382fe6a6770fe37c8bbcb72c351efb03d8fb14574f7166d4a2c4cac22c3bebb",
+      "afterSha256": "c382fe6a6770fe37c8bbcb72c351efb03d8fb14574f7166d4a2c4cac22c3bebb"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_page1_tex.png.meta",
+      "beforeSha256": "702e9f4d89332c8f42d1e8a68e651cf0120b038a1d14b7d2db0bdbb80edaeefc",
+      "afterSha256": "702e9f4d89332c8f42d1e8a68e651cf0120b038a1d14b7d2db0bdbb80edaeefc"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_ske.json.meta",
+      "beforeSha256": "83417989b3ca748496738ef49f4431d42a824db0e262c1df4105164a2ba972ad",
+      "afterSha256": "83417989b3ca748496738ef49f4431d42a824db0e262c1df4105164a2ba972ad"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_tex.json",
+      "beforeSha256": "e5337cc1ffd06ab79f0e2e1c128e0db3cb2a08f1d61e957a8b8afdd9fede9d8a",
+      "afterSha256": "e5337cc1ffd06ab79f0e2e1c128e0db3cb2a08f1d61e957a8b8afdd9fede9d8a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_tex.json.meta",
+      "beforeSha256": "aadaa7ae44bd80733728a099098c3da2cb122a133ce6151bc97db2d649787396",
+      "afterSha256": "aadaa7ae44bd80733728a099098c3da2cb122a133ce6151bc97db2d649787396"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_tex.png",
+      "beforeSha256": "442b6a202785ee5de80a8f559c2d7a6a2496e69c956725ddda79108199a9392b",
+      "afterSha256": "442b6a202785ee5de80a8f559c2d7a6a2496e69c956725ddda79108199a9392b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dan-phu-tu-chibi-v1/danphuchibi_E_tex.png.meta",
+      "beforeSha256": "0e49cf012e66590ad2d1adfe3522902a8a33865ba5e693742c1fbc06fd610bef",
+      "afterSha256": "0e49cf012e66590ad2d1adfe3522902a8a33865ba5e693742c1fbc06fd610bef"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1.meta",
+      "beforeSha256": "5dbea6805c9ff25e1cf0f0e599f2dba2a8d943b59856af055895afd7b2644b2a",
+      "afterSha256": "5dbea6805c9ff25e1cf0f0e599f2dba2a8d943b59856af055895afd7b2644b2a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E.sprite.json",
+      "beforeSha256": "79d1cb433cd3e42db3d21ca4498b48c23cb4859fbacc20b72399dd6376f2f1e7",
+      "afterSha256": "79d1cb433cd3e42db3d21ca4498b48c23cb4859fbacc20b72399dd6376f2f1e7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E.sprite.json.meta",
+      "beforeSha256": "671551348b46d3d1e48cad5d33f7498fe778b00893e592becfa07e83464a3a8f",
+      "afterSha256": "671551348b46d3d1e48cad5d33f7498fe778b00893e592becfa07e83464a3a8f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_ske.json.meta",
+      "beforeSha256": "bf0f51b24566675f3650dda5eb53d83cfa46ecf0cdd50ae9370da283676c082b",
+      "afterSha256": "bf0f51b24566675f3650dda5eb53d83cfa46ecf0cdd50ae9370da283676c082b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_tex.json",
+      "beforeSha256": "3c88c02fba393e3d44e77c780c141ac416b765bc8c32583639d0b3dea6a85518",
+      "afterSha256": "3c88c02fba393e3d44e77c780c141ac416b765bc8c32583639d0b3dea6a85518"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_tex.json.meta",
+      "beforeSha256": "902b3d5217b44873a8526db32b26c177f97c4944f478739c5de4c7117bfd452a",
+      "afterSha256": "902b3d5217b44873a8526db32b26c177f97c4944f478739c5de4c7117bfd452a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_tex.png",
+      "beforeSha256": "9c8b6c91febcfc0683dfdc968917534b7f60e44d40ebf3c4907348c471b7305d",
+      "afterSha256": "9c8b6c91febcfc0683dfdc968917534b7f60e44d40ebf3c4907348c471b7305d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_tex.png.meta",
+      "beforeSha256": "629ac55333f63bfabf2cb237de0a542dfe7ea5963ff282211944ca7f2b0bfe54",
+      "afterSha256": "629ac55333f63bfabf2cb237de0a542dfe7ea5963ff282211944ca7f2b0bfe54"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N.sprite.json",
+      "beforeSha256": "4fd429e9f4a33d57c57b7b1235b8de44554b2eeca86fb96bac6397e759fc2d32",
+      "afterSha256": "4fd429e9f4a33d57c57b7b1235b8de44554b2eeca86fb96bac6397e759fc2d32"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N.sprite.json.meta",
+      "beforeSha256": "3e5b26724a1345c26979b4a7162d03c7d9ad90861802b6a64f02196756b7a2e3",
+      "afterSha256": "3e5b26724a1345c26979b4a7162d03c7d9ad90861802b6a64f02196756b7a2e3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE.sprite.json",
+      "beforeSha256": "66a43773cd429224700f73d16e3c81c116f14b2ebc3b71b40925f78392f8735c",
+      "afterSha256": "66a43773cd429224700f73d16e3c81c116f14b2ebc3b71b40925f78392f8735c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE.sprite.json.meta",
+      "beforeSha256": "2371aa594770d06cc85c308d7e9b91c40d5a89cf4b4cc09ef855103017e444e9",
+      "afterSha256": "2371aa594770d06cc85c308d7e9b91c40d5a89cf4b4cc09ef855103017e444e9"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_ske.json.meta",
+      "beforeSha256": "dc9eabdea7675924b672d6d7f126cbc985c1af82b5c4645c61db866d05e1fe02",
+      "afterSha256": "dc9eabdea7675924b672d6d7f126cbc985c1af82b5c4645c61db866d05e1fe02"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_tex.json",
+      "beforeSha256": "19e4ee1b339e9e83b3de62210492fe34d95e79a0b3575b77842012451ca01c88",
+      "afterSha256": "19e4ee1b339e9e83b3de62210492fe34d95e79a0b3575b77842012451ca01c88"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_tex.json.meta",
+      "beforeSha256": "40175319787255adcfb8a0b722bc13a1bba2280c6c28e86f5ec86faaed78dd6b",
+      "afterSha256": "40175319787255adcfb8a0b722bc13a1bba2280c6c28e86f5ec86faaed78dd6b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_tex.png",
+      "beforeSha256": "3b7c70757bccde52b3d553afcf67a66e465993da01b06e57e38fcdc5369afde2",
+      "afterSha256": "3b7c70757bccde52b3d553afcf67a66e465993da01b06e57e38fcdc5369afde2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_tex.png.meta",
+      "beforeSha256": "8e6246ef8f82becf14376e1fc7b8f32aa62d3decdbcd101ac224855cbd1cfb80",
+      "afterSha256": "8e6246ef8f82becf14376e1fc7b8f32aa62d3decdbcd101ac224855cbd1cfb80"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_page1_tex.json",
+      "beforeSha256": "b60d0c5bdd60277daea24082c3cb84663377303c0e5383ee8d596de3aeba8391",
+      "afterSha256": "b60d0c5bdd60277daea24082c3cb84663377303c0e5383ee8d596de3aeba8391"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_page1_tex.json.meta",
+      "beforeSha256": "6c013512f89e6d78ad0995ba7aeda0e0099a625a232b2281dd7d099b218a939d",
+      "afterSha256": "6c013512f89e6d78ad0995ba7aeda0e0099a625a232b2281dd7d099b218a939d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_page1_tex.png",
+      "beforeSha256": "7d17eef244e41bf6a7ae997ab4d193b392e4956edbe84c3b3ff3624e2c400d88",
+      "afterSha256": "7d17eef244e41bf6a7ae997ab4d193b392e4956edbe84c3b3ff3624e2c400d88"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_page1_tex.png.meta",
+      "beforeSha256": "6f6fe75e0ce72127fdbb577a9eb2d0b8ee006a3d5ef5569f48dde2345d9aa957",
+      "afterSha256": "6f6fe75e0ce72127fdbb577a9eb2d0b8ee006a3d5ef5569f48dde2345d9aa957"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_ske.json.meta",
+      "beforeSha256": "69ad43df510f7409c6151293203a5f0b41aca6d222d2fecc9bfdf28d8a8903ea",
+      "afterSha256": "69ad43df510f7409c6151293203a5f0b41aca6d222d2fecc9bfdf28d8a8903ea"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_tex.json",
+      "beforeSha256": "eef18f9aa0bb2aa58724fbe2abbf5feb2a634dd786b7140edfb496f047f9c861",
+      "afterSha256": "eef18f9aa0bb2aa58724fbe2abbf5feb2a634dd786b7140edfb496f047f9c861"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_tex.json.meta",
+      "beforeSha256": "43c206bb5e0cf767b8536481cfe8930ef7eb7f225461551f0950bc1a71f2b55c",
+      "afterSha256": "43c206bb5e0cf767b8536481cfe8930ef7eb7f225461551f0950bc1a71f2b55c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_tex.png",
+      "beforeSha256": "f14430105c993412b8bd02ab5207a48ae002de147ce08c0b4e4fb8d6905527ce",
+      "afterSha256": "f14430105c993412b8bd02ab5207a48ae002de147ce08c0b4e4fb8d6905527ce"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_tex.png.meta",
+      "beforeSha256": "0963c3ea28574074afd3901a7c3c60a40257588dde296db77c19c34ca4bf4a55",
+      "afterSha256": "0963c3ea28574074afd3901a7c3c60a40257588dde296db77c19c34ca4bf4a55"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S.sprite.json",
+      "beforeSha256": "e475433ef1284e789702bce51512ff656699f2883a607734a54e12a1e9770591",
+      "afterSha256": "e475433ef1284e789702bce51512ff656699f2883a607734a54e12a1e9770591"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S.sprite.json.meta",
+      "beforeSha256": "557cb7cd10096eb43ff1f388e99e173455d04b5da0590b2b1d421c3910e3dca1",
+      "afterSha256": "557cb7cd10096eb43ff1f388e99e173455d04b5da0590b2b1d421c3910e3dca1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE.sprite.json",
+      "beforeSha256": "d8d3ffd896f1f2ee1eaf2d2f4114769aad857b18c4c91ad362b6acbc202bd26e",
+      "afterSha256": "d8d3ffd896f1f2ee1eaf2d2f4114769aad857b18c4c91ad362b6acbc202bd26e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE.sprite.json.meta",
+      "beforeSha256": "da57b16d813ca1e01d9bd45c2f27551b15e2b69ea737b12e010d64e53aaa1e3c",
+      "afterSha256": "da57b16d813ca1e01d9bd45c2f27551b15e2b69ea737b12e010d64e53aaa1e3c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_ske.json.meta",
+      "beforeSha256": "1708463b693030abee4ef43db905470b6ce52f1d5e675b69ec74e66e8be7312d",
+      "afterSha256": "1708463b693030abee4ef43db905470b6ce52f1d5e675b69ec74e66e8be7312d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_tex.json",
+      "beforeSha256": "ec3c5386951e507890459933e3579151d64feb804cad624b9c376dcba67f3968",
+      "afterSha256": "ec3c5386951e507890459933e3579151d64feb804cad624b9c376dcba67f3968"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_tex.json.meta",
+      "beforeSha256": "59714b690895a91fa8b499b7b454e099fa51a30e7745ae0a70fac08773e1a281",
+      "afterSha256": "59714b690895a91fa8b499b7b454e099fa51a30e7745ae0a70fac08773e1a281"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_tex.png",
+      "beforeSha256": "5500789dc06b693158d6c9bf2362c65ab1dbbfebdb171715f4ef052e806cfa8b",
+      "afterSha256": "5500789dc06b693158d6c9bf2362c65ab1dbbfebdb171715f4ef052e806cfa8b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_tex.png.meta",
+      "beforeSha256": "0ed1f70b4403f7bacb07bd2ddcaf66010960e7116ce238b2d57cab4e85ce55e3",
+      "afterSha256": "0ed1f70b4403f7bacb07bd2ddcaf66010960e7116ce238b2d57cab4e85ce55e3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_ske.json.meta",
+      "beforeSha256": "4747cc2fbfe161abcc5fe9c3a93c015174a75ca593c4cfe600dbdcf04953d22b",
+      "afterSha256": "4747cc2fbfe161abcc5fe9c3a93c015174a75ca593c4cfe600dbdcf04953d22b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_tex.json",
+      "beforeSha256": "c057f39d04347a58692b041dc98b37ba52589fa9b6291a69a76c6f887a0e0287",
+      "afterSha256": "c057f39d04347a58692b041dc98b37ba52589fa9b6291a69a76c6f887a0e0287"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_tex.json.meta",
+      "beforeSha256": "3d92293330066a461604ea90db4b6a2b343e463e72eeff4c486e7863a8692b96",
+      "afterSha256": "3d92293330066a461604ea90db4b6a2b343e463e72eeff4c486e7863a8692b96"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_tex.png",
+      "beforeSha256": "b0d1db8d66383204318d27349226fe905438e8434e30ef3ca9ae473e300e13bc",
+      "afterSha256": "b0d1db8d66383204318d27349226fe905438e8434e30ef3ca9ae473e300e13bc"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_tex.png.meta",
+      "beforeSha256": "7ed318a9e75c8b4c1c3a6affcea751579a9cbc046c9673599b9cd8688e41038e",
+      "afterSha256": "7ed318a9e75c8b4c1c3a6affcea751579a9cbc046c9673599b9cd8688e41038e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1.meta",
+      "beforeSha256": "29fadeace1ad00d69f42ab34f0819e49db7c64d0eaaec5e309ed346a358d18d3",
+      "afterSha256": "29fadeace1ad00d69f42ab34f0819e49db7c64d0eaaec5e309ed346a358d18d3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E.sprite.json",
+      "beforeSha256": "2347be34c24b4f76bca42ffdbe81178f75cf3375d8d88fe2d2d3b7be0bff0dd5",
+      "afterSha256": "2347be34c24b4f76bca42ffdbe81178f75cf3375d8d88fe2d2d3b7be0bff0dd5"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E.sprite.json.meta",
+      "beforeSha256": "fa7a2c207a6ff7ef39f4b06898cf15c00eab605a78fe52028282e0d2abda37ff",
+      "afterSha256": "fa7a2c207a6ff7ef39f4b06898cf15c00eab605a78fe52028282e0d2abda37ff"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_page1_tex.json",
+      "beforeSha256": "c12bf00069a4ae753b0b49162fc6d6fb4b25e0efbb730b8ed4a5bb0ded1f373a",
+      "afterSha256": "c12bf00069a4ae753b0b49162fc6d6fb4b25e0efbb730b8ed4a5bb0ded1f373a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_page1_tex.json.meta",
+      "beforeSha256": "9231351f9def7a972e67fd757e939788e99e8a36ef120f18b2fb7ee3cf3d795c",
+      "afterSha256": "9231351f9def7a972e67fd757e939788e99e8a36ef120f18b2fb7ee3cf3d795c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_page1_tex.png",
+      "beforeSha256": "9556541cc05ee3b82d2507574493c719fb7f217969721943adc049e18f5b43c4",
+      "afterSha256": "9556541cc05ee3b82d2507574493c719fb7f217969721943adc049e18f5b43c4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_page1_tex.png.meta",
+      "beforeSha256": "e6118112772b1e1834dd0fbcf57915fe314ccf8749b3756ce3c302ba837c5c4a",
+      "afterSha256": "e6118112772b1e1834dd0fbcf57915fe314ccf8749b3756ce3c302ba837c5c4a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_ske.json.meta",
+      "beforeSha256": "13989b65c35d56a3eea6e7e0860ee093835ccfe4d3d29c63e6e2fdc640a9fdcd",
+      "afterSha256": "13989b65c35d56a3eea6e7e0860ee093835ccfe4d3d29c63e6e2fdc640a9fdcd"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_tex.json",
+      "beforeSha256": "c1c970801e2377fd1479b5416ddb8e04e4be9a0cf147134d9c34d788a529fe46",
+      "afterSha256": "c1c970801e2377fd1479b5416ddb8e04e4be9a0cf147134d9c34d788a529fe46"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_tex.json.meta",
+      "beforeSha256": "4a50f4f15c872ad0bd71a3e67b9a198fa8fd5f5012db019bd71b327a06a105b4",
+      "afterSha256": "4a50f4f15c872ad0bd71a3e67b9a198fa8fd5f5012db019bd71b327a06a105b4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_tex.png",
+      "beforeSha256": "4e6a8090d1d766862e20517ddc5c32282af30503084c39b8846104082bda3b0e",
+      "afterSha256": "4e6a8090d1d766862e20517ddc5c32282af30503084c39b8846104082bda3b0e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_E_tex.png.meta",
+      "beforeSha256": "d761df23f43e9775e27b63e409ec3cc5ecc36b073f1f7b0d41a0d9e4387b7468",
+      "afterSha256": "d761df23f43e9775e27b63e409ec3cc5ecc36b073f1f7b0d41a0d9e4387b7468"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE.sprite.json",
+      "beforeSha256": "e3cf20eb4275f4744623e1c4498dee76461f8ea278b2238a40dc3e1cec19676e",
+      "afterSha256": "e3cf20eb4275f4744623e1c4498dee76461f8ea278b2238a40dc3e1cec19676e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE.sprite.json.meta",
+      "beforeSha256": "3a089aa86418bf35980a39847e3261d3b37d8aeea1aa48fa7bbf0923a0c128d7",
+      "afterSha256": "3a089aa86418bf35980a39847e3261d3b37d8aeea1aa48fa7bbf0923a0c128d7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_page1_tex.json",
+      "beforeSha256": "80da4de41597bb1de34fad801340940cbd94e774639e7981ccdbf13cc87df2b3",
+      "afterSha256": "80da4de41597bb1de34fad801340940cbd94e774639e7981ccdbf13cc87df2b3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_page1_tex.json.meta",
+      "beforeSha256": "6608e9b94bfb42fbbeed1e2ecf32d550c7d054512551bf676503c891d2c460ea",
+      "afterSha256": "6608e9b94bfb42fbbeed1e2ecf32d550c7d054512551bf676503c891d2c460ea"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_page1_tex.png",
+      "beforeSha256": "f090d08d62a1be33f7011113349eff1feb26af3b1feddbe46258fe02e1f974f7",
+      "afterSha256": "f090d08d62a1be33f7011113349eff1feb26af3b1feddbe46258fe02e1f974f7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_page1_tex.png.meta",
+      "beforeSha256": "b39275eff89bec5baba7dd7a015faa08b7466015b68a2448638e9c16db7b0f3b",
+      "afterSha256": "b39275eff89bec5baba7dd7a015faa08b7466015b68a2448638e9c16db7b0f3b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_ske.json.meta",
+      "beforeSha256": "bf8fe921d6c0436af9bfccc8ef9073dda5640468c49340131faf2d550adc8dce",
+      "afterSha256": "bf8fe921d6c0436af9bfccc8ef9073dda5640468c49340131faf2d550adc8dce"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_tex.json",
+      "beforeSha256": "1e418b94587e6bec08e1f1fd60c4d10328817b447ba7f1675cc2db8a149eee6c",
+      "afterSha256": "1e418b94587e6bec08e1f1fd60c4d10328817b447ba7f1675cc2db8a149eee6c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_tex.json.meta",
+      "beforeSha256": "a70a9a1f84ce01997c3739d6163687494bdae2d2457989c80c43f372f21e969a",
+      "afterSha256": "a70a9a1f84ce01997c3739d6163687494bdae2d2457989c80c43f372f21e969a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_tex.png",
+      "beforeSha256": "a30116cf59f36bc26b44bbdb80f284f5f14c95eb7da5c9881ed55b8de3c8e358",
+      "afterSha256": "a30116cf59f36bc26b44bbdb80f284f5f14c95eb7da5c9881ed55b8de3c8e358"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/dao-tu-chibi-v1/daotuchibi_SE_tex.png.meta",
+      "beforeSha256": "963fef7437202a52cf4e361d90e14a67886b8530bb9cbc4272a9b7a341bf45a7",
+      "afterSha256": "963fef7437202a52cf4e361d90e14a67886b8530bb9cbc4272a9b7a341bf45a7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites.meta",
+      "beforeSha256": "af9ebbbb935c99e8fa065e728cd0d407d893f8440af9fd13014a35379056b906",
+      "afterSha256": "af9ebbbb935c99e8fa065e728cd0d407d893f8440af9fd13014a35379056b906"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E.sprite.json",
+      "beforeSha256": "28681e919342e18a7d5c5bd1d95dc70b3d8cb9090605f9c0810272cd53311909",
+      "afterSha256": "28681e919342e18a7d5c5bd1d95dc70b3d8cb9090605f9c0810272cd53311909"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E.sprite.json.meta",
+      "beforeSha256": "a3cfba7a63cb0bcbd45be93c4ebccbeb5750394b96af7768da066a75dcb54e15",
+      "afterSha256": "a3cfba7a63cb0bcbd45be93c4ebccbeb5750394b96af7768da066a75dcb54e15"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_ske.json.meta",
+      "beforeSha256": "5b37772432bf94e3c997544275e67cb136ee2d9c10bb6db11801c06660ebfe62",
+      "afterSha256": "5b37772432bf94e3c997544275e67cb136ee2d9c10bb6db11801c06660ebfe62"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.json",
+      "beforeSha256": "11cbf619e357a29f8e2382c0fd22b893f2c0894c8dcbb7e9b6537860b3456e1c",
+      "afterSha256": "11cbf619e357a29f8e2382c0fd22b893f2c0894c8dcbb7e9b6537860b3456e1c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.json.meta",
+      "beforeSha256": "91cd77d4a166a3b51cd44baec70f390543608d371d4f42376ed6ed0b1c727158",
+      "afterSha256": "91cd77d4a166a3b51cd44baec70f390543608d371d4f42376ed6ed0b1c727158"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.png",
+      "beforeSha256": "f1f1241d5d9fe6fab0945a2c02dc54a9039c31eeb913b0cdc2c305c8f5563942",
+      "afterSha256": "f1f1241d5d9fe6fab0945a2c02dc54a9039c31eeb913b0cdc2c305c8f5563942"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_tex.png.meta",
+      "beforeSha256": "09b586ac9ea4b2946f98c4811b5d73ce11551070a22b3f671f81cdad2cf68d57",
+      "afterSha256": "09b586ac9ea4b2946f98c4811b5d73ce11551070a22b3f671f81cdad2cf68d57"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N.sprite.json",
+      "beforeSha256": "ce724a2e21cd64fba597ec4aade93135d7e69812551e7e0d5ff18bc94e5d9505",
+      "afterSha256": "ce724a2e21cd64fba597ec4aade93135d7e69812551e7e0d5ff18bc94e5d9505"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N.sprite.json.meta",
+      "beforeSha256": "54f4bf9d22824b6180b54f32f0f7fcc8bf925a6ffadc266c40719ea60552df1c",
+      "afterSha256": "54f4bf9d22824b6180b54f32f0f7fcc8bf925a6ffadc266c40719ea60552df1c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE.sprite.json",
+      "beforeSha256": "80055a1770cce61c1d440c7f02e4d4ab59d0f048370f804fd31facb32f445048",
+      "afterSha256": "80055a1770cce61c1d440c7f02e4d4ab59d0f048370f804fd31facb32f445048"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE.sprite.json.meta",
+      "beforeSha256": "ddd0c54c5ff8f0af39f02a045abd21eca8ec1ec6d81c821ea2612c1312906f5d",
+      "afterSha256": "ddd0c54c5ff8f0af39f02a045abd21eca8ec1ec6d81c821ea2612c1312906f5d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_ske.json.meta",
+      "beforeSha256": "389d295423148133b71ebd4cd4da601d7fc21043817192eb7be735b4adc0c6bb",
+      "afterSha256": "389d295423148133b71ebd4cd4da601d7fc21043817192eb7be735b4adc0c6bb"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.json",
+      "beforeSha256": "03f50d84de03963c26116205879cea7ad14a8818bd254348813c45da11db40f0",
+      "afterSha256": "03f50d84de03963c26116205879cea7ad14a8818bd254348813c45da11db40f0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.json.meta",
+      "beforeSha256": "38424c88eb81c2f9223c2d4617145e18bf28591159cbd6ae86908164bad1a9d4",
+      "afterSha256": "38424c88eb81c2f9223c2d4617145e18bf28591159cbd6ae86908164bad1a9d4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.png",
+      "beforeSha256": "8ea63b62730787a11e3ae94723c9d169618aa7c4d5f07a27f4e6c1e834e00315",
+      "afterSha256": "8ea63b62730787a11e3ae94723c9d169618aa7c4d5f07a27f4e6c1e834e00315"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_tex.png.meta",
+      "beforeSha256": "47537aa306fdce8a4ef6ba5881400e2d2eabd4529d16c72000019b0a803645ae",
+      "afterSha256": "47537aa306fdce8a4ef6ba5881400e2d2eabd4529d16c72000019b0a803645ae"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_ske.json.meta",
+      "beforeSha256": "23086721d96296c1ab67d38f7de935565a67a40a5b0354ccf73a9ba3fb454245",
+      "afterSha256": "23086721d96296c1ab67d38f7de935565a67a40a5b0354ccf73a9ba3fb454245"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_tex.json",
+      "beforeSha256": "399ee40b4d50c0e61f846582dca891f3a9cf41735eae90d14041c3d412087468",
+      "afterSha256": "399ee40b4d50c0e61f846582dca891f3a9cf41735eae90d14041c3d412087468"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_tex.json.meta",
+      "beforeSha256": "f7f743c4cf81de78f6de48f5eaa58e8cea6c4043dc26ad2ae33c2834352e0752",
+      "afterSha256": "f7f743c4cf81de78f6de48f5eaa58e8cea6c4043dc26ad2ae33c2834352e0752"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_tex.png",
+      "beforeSha256": "eb2ff9e55723249e5a21426b8056d2de45cc296d94c37aa67c206fbe47bcbc2a",
+      "afterSha256": "eb2ff9e55723249e5a21426b8056d2de45cc296d94c37aa67c206fbe47bcbc2a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_tex.png.meta",
+      "beforeSha256": "b4e8b21a7219838038084f4ea0fef228c404f13ec293a4f3e0b5ae067311bc85",
+      "afterSha256": "b4e8b21a7219838038084f4ea0fef228c404f13ec293a4f3e0b5ae067311bc85"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S.sprite.json",
+      "beforeSha256": "f616867685d7e30c918bdba0cbb584815001d00b31e6f8f24a36a89bbb747300",
+      "afterSha256": "f616867685d7e30c918bdba0cbb584815001d00b31e6f8f24a36a89bbb747300"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S.sprite.json.meta",
+      "beforeSha256": "8c8340f6c4d7f9b42c176b9c3b5a8212aba1705fcbd9f1239f349bb6b51a8842",
+      "afterSha256": "8c8340f6c4d7f9b42c176b9c3b5a8212aba1705fcbd9f1239f349bb6b51a8842"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE.sprite.json",
+      "beforeSha256": "88d820f57fa7ae0f82a691076bde06a3231a483c5a1a518c885fc6eaf33b686d",
+      "afterSha256": "88d820f57fa7ae0f82a691076bde06a3231a483c5a1a518c885fc6eaf33b686d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE.sprite.json.meta",
+      "beforeSha256": "6401629c27e742882db2534bfdb39ac0e8cad370397fb903455692148625961e",
+      "afterSha256": "6401629c27e742882db2534bfdb39ac0e8cad370397fb903455692148625961e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_ske.json.meta",
+      "beforeSha256": "1db3c084156e3d29e35b815d6bfecaab1027f5c4f92ab1266f70bce60c807a9b",
+      "afterSha256": "1db3c084156e3d29e35b815d6bfecaab1027f5c4f92ab1266f70bce60c807a9b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_tex.json",
+      "beforeSha256": "851febd77e0331887287fca155211152fc36c03d6a851fe41bf54e876ece4449",
+      "afterSha256": "851febd77e0331887287fca155211152fc36c03d6a851fe41bf54e876ece4449"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_tex.json.meta",
+      "beforeSha256": "98b50c49a64e9bad54d3c7198a89ca38f10d11a3fe25d392e308ac55a91681d4",
+      "afterSha256": "98b50c49a64e9bad54d3c7198a89ca38f10d11a3fe25d392e308ac55a91681d4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_tex.png",
+      "beforeSha256": "1bef0cd166a8d291b4e76bf387b4bf53e3be2362bfeb61e71e5a95be4f3d729c",
+      "afterSha256": "1bef0cd166a8d291b4e76bf387b4bf53e3be2362bfeb61e71e5a95be4f3d729c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_tex.png.meta",
+      "beforeSha256": "5e481e955b389fc11b8adb5d5ef024098118f756700562e26db46669380dfe20",
+      "afterSha256": "5e481e955b389fc11b8adb5d5ef024098118f756700562e26db46669380dfe20"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_ske.json.meta",
+      "beforeSha256": "4054848919d8b6a53b6a8ca124c5fef1a45aba64f20dd93cc086875ee0e8e5ae",
+      "afterSha256": "4054848919d8b6a53b6a8ca124c5fef1a45aba64f20dd93cc086875ee0e8e5ae"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_tex.json",
+      "beforeSha256": "584f8678c1778bfbc62d85a13e65c9d0857a99b336eebb1f52bc248591b07f68",
+      "afterSha256": "584f8678c1778bfbc62d85a13e65c9d0857a99b336eebb1f52bc248591b07f68"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_tex.json.meta",
+      "beforeSha256": "9ff12d66f4c075df3ca55402334d2af5abe5b8324ea072d5d5bf874016bd9c19",
+      "afterSha256": "9ff12d66f4c075df3ca55402334d2af5abe5b8324ea072d5d5bf874016bd9c19"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_tex.png",
+      "beforeSha256": "54009ff2d757e23749f0e3b7f57c5ec885965e87967a9e1690a6b64064b93cc0",
+      "afterSha256": "54009ff2d757e23749f0e3b7f57c5ec885965e87967a9e1690a6b64064b93cc0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_tex.png.meta",
+      "beforeSha256": "cf660b4b8376909c90f42959d3ae09fa74ffce6976f1c78a72650e9e57509b66",
+      "afterSha256": "cf660b4b8376909c90f42959d3ae09fa74ffce6976f1c78a72650e9e57509b66"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu.meta",
+      "beforeSha256": "560c486f7c71989baab3dc355d0b84573c1cda080bb859438cdb9308d5ddd8be",
+      "afterSha256": "560c486f7c71989baab3dc355d0b84573c1cda080bb859438cdb9308d5ddd8be"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_ske.json.meta",
+      "beforeSha256": "898070ae5f80d4153f996fd275b7d7b1dfbf52f094692688c6c40e478b844dc0",
+      "afterSha256": "898070ae5f80d4153f996fd275b7d7b1dfbf52f094692688c6c40e478b844dc0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_tex.json",
+      "beforeSha256": "14cb9a8a1398cc5292f09d554f69318f616364a0a0a2d78e582645a2b200dbbd",
+      "afterSha256": "14cb9a8a1398cc5292f09d554f69318f616364a0a0a2d78e582645a2b200dbbd"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_tex.json.meta",
+      "beforeSha256": "874ed42b32c40faf287f30bdab0c345131295467e5a6dbeaf6a1aeaadba2bde6",
+      "afterSha256": "874ed42b32c40faf287f30bdab0c345131295467e5a6dbeaf6a1aeaadba2bde6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_tex.png",
+      "beforeSha256": "5ce6f59686194154e316a68ee86172cc6877d18fb4c76343e79481e8e58ec3a7",
+      "afterSha256": "5ce6f59686194154e316a68ee86172cc6877d18fb4c76343e79481e8e58ec3a7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_tex.png.meta",
+      "beforeSha256": "ebb0e57bb43d67e0ebde199f6b1fc05d83cf7161b07fb399e1ccf932c01f477c",
+      "afterSha256": "ebb0e57bb43d67e0ebde199f6b1fc05d83cf7161b07fb399e1ccf932c01f477c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_ske.json.meta",
+      "beforeSha256": "0777477cd05f29266aa3f9c5f6b4d2534731e1339d96e8030e8e5a8b22f9d1d2",
+      "afterSha256": "0777477cd05f29266aa3f9c5f6b4d2534731e1339d96e8030e8e5a8b22f9d1d2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_tex.json",
+      "beforeSha256": "7d0c550e03a68290c209b720b98b3cbd19dbe718c755805d55807e17d2e39810",
+      "afterSha256": "7d0c550e03a68290c209b720b98b3cbd19dbe718c755805d55807e17d2e39810"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_tex.json.meta",
+      "beforeSha256": "03780aa680d3a4458a87b7eea71e5c68cb2921b23ebcd6c4b7ee4a8b1c5ca890",
+      "afterSha256": "03780aa680d3a4458a87b7eea71e5c68cb2921b23ebcd6c4b7ee4a8b1c5ca890"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_tex.png",
+      "beforeSha256": "cfc7b81d078257a33a3aa2bed832b1ad562eb952400496f2d3d5359ae4a640d3",
+      "afterSha256": "cfc7b81d078257a33a3aa2bed832b1ad562eb952400496f2d3d5359ae4a640d3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_tex.png.meta",
+      "beforeSha256": "645df25244e5884addd29abcf52501ef63dc4417a894563ef18e34480e0ddd40",
+      "afterSha256": "645df25244e5884addd29abcf52501ef63dc4417a894563ef18e34480e0ddd40"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_ske.json.meta",
+      "beforeSha256": "010bf236aae8b270e8b0ad449db0c8c7396dfc8e88a21213c95e2992f6cd89b7",
+      "afterSha256": "010bf236aae8b270e8b0ad449db0c8c7396dfc8e88a21213c95e2992f6cd89b7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_tex.json",
+      "beforeSha256": "e90da8214fb857b08fce5e2505bb6c5caacec163dfd1329e909d9dcee8c83d3d",
+      "afterSha256": "e90da8214fb857b08fce5e2505bb6c5caacec163dfd1329e909d9dcee8c83d3d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_tex.json.meta",
+      "beforeSha256": "6c512d6dd1b429d444da65e030989b38f573665f4d313196b6c2d11008cd99f9",
+      "afterSha256": "6c512d6dd1b429d444da65e030989b38f573665f4d313196b6c2d11008cd99f9"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_tex.png",
+      "beforeSha256": "85d9463deac46408b4559297783ece51d3cc0675f7bb7c15746efffbe2bd697e",
+      "afterSha256": "85d9463deac46408b4559297783ece51d3cc0675f7bb7c15746efffbe2bd697e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_tex.png.meta",
+      "beforeSha256": "885a4618d81db67f2bb833aa02226b3fc7390a77bafdd993ce72b5a13475bd09",
+      "afterSha256": "885a4618d81db67f2bb833aa02226b3fc7390a77bafdd993ce72b5a13475bd09"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_ske.json.meta",
+      "beforeSha256": "2a114ccd23a9a33889e58009b63362d45266e6f39d53d8dcfecc4deca73a064e",
+      "afterSha256": "2a114ccd23a9a33889e58009b63362d45266e6f39d53d8dcfecc4deca73a064e"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_tex.json",
+      "beforeSha256": "f8fd1fe9c515616e6448aec4b8aec5fe35d642310bdc1b4c519f72f56215616c",
+      "afterSha256": "f8fd1fe9c515616e6448aec4b8aec5fe35d642310bdc1b4c519f72f56215616c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_tex.json.meta",
+      "beforeSha256": "5fc666a3e268fbc236cd7d8f7d43cbf27d79deeb5fb3eaeffab9d572c78f8551",
+      "afterSha256": "5fc666a3e268fbc236cd7d8f7d43cbf27d79deeb5fb3eaeffab9d572c78f8551"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_tex.png",
+      "beforeSha256": "8e4245f6031f2fc410f161ddc1268715eb0330076f450f56f5d7741641112fde",
+      "afterSha256": "8e4245f6031f2fc410f161ddc1268715eb0330076f450f56f5d7741641112fde"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_tex.png.meta",
+      "beforeSha256": "18987562160bee7a4ee2931efcfac5b7d8c7f8e7486c8ff25cedaa828689d6e6",
+      "afterSha256": "18987562160bee7a4ee2931efcfac5b7d8c7f8e7486c8ff25cedaa828689d6e6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_ske.json.meta",
+      "beforeSha256": "e4873be702f59b07adee2d608fda35583f5154279307ee38e28dc01e7406dd04",
+      "afterSha256": "e4873be702f59b07adee2d608fda35583f5154279307ee38e28dc01e7406dd04"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_tex.json",
+      "beforeSha256": "c9c32d861e32b1b0aa1c2356a37d6a02b8532f4fa7ceab895760813fd2c0b573",
+      "afterSha256": "c9c32d861e32b1b0aa1c2356a37d6a02b8532f4fa7ceab895760813fd2c0b573"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_tex.json.meta",
+      "beforeSha256": "53f0389d17c86968eccdefae4a72f6dd59541dd3eeb18afa46d7200eee0bdace",
+      "afterSha256": "53f0389d17c86968eccdefae4a72f6dd59541dd3eeb18afa46d7200eee0bdace"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_tex.png",
+      "beforeSha256": "4e3e77339374de6da18115ca32f9413b7cda785b04729ee06d3559045170940a",
+      "afterSha256": "4e3e77339374de6da18115ca32f9413b7cda785b04729ee06d3559045170940a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_tex.png.meta",
+      "beforeSha256": "83843c9c3289a59d95fb756d176eae07cceb3277c961aa6d332561b69ae6bb3d",
+      "afterSha256": "83843c9c3289a59d95fb756d176eae07cceb3277c961aa6d332561b69ae6bb3d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1.meta",
+      "beforeSha256": "fb340ba61a51bbbfc735653d96846bec5f71bef22931e7500b3c7f533427304b",
+      "afterSha256": "fb340ba61a51bbbfc735653d96846bec5f71bef22931e7500b3c7f533427304b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json",
+      "beforeSha256": "d8a066307e513783994e27811a4a1ec5c685b8a1d98472725dea955ab5ecdfa3",
+      "afterSha256": "d8a066307e513783994e27811a4a1ec5c685b8a1d98472725dea955ab5ecdfa3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E.sprite.json.meta",
+      "beforeSha256": "93168401066cf4caca79f4f9058d54af5497712ca8bb4360a2e12a36aa882ad1",
+      "afterSha256": "93168401066cf4caca79f4f9058d54af5497712ca8bb4360a2e12a36aa882ad1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json",
+      "beforeSha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95",
+      "afterSha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.json.meta",
+      "beforeSha256": "55b3b3f7d9ab213e666f1cf9ad8509b16b1f686dc4a932232abccc3562c444a7",
+      "afterSha256": "55b3b3f7d9ab213e666f1cf9ad8509b16b1f686dc4a932232abccc3562c444a7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png",
+      "beforeSha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa",
+      "afterSha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_page1_tex.png.meta",
+      "beforeSha256": "65c5a8a663affad199ae33d3f482e555143bbf2672bf20f95f6ab46c65de98d0",
+      "afterSha256": "65c5a8a663affad199ae33d3f482e555143bbf2672bf20f95f6ab46c65de98d0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_ske.json.meta",
+      "beforeSha256": "8a431821215016a79d8900013f4b3e4e955ab42eb2fd0fe1ee79d8274b4734ee",
+      "afterSha256": "8a431821215016a79d8900013f4b3e4e955ab42eb2fd0fe1ee79d8274b4734ee"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json",
+      "beforeSha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34",
+      "afterSha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.json.meta",
+      "beforeSha256": "d68e7c42dad4d11907705eec729a07c1fdaafcab5cb6931c5e49a07bb7c48fa7",
+      "afterSha256": "d68e7c42dad4d11907705eec729a07c1fdaafcab5cb6931c5e49a07bb7c48fa7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png",
+      "beforeSha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2",
+      "afterSha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_E_tex.png.meta",
+      "beforeSha256": "186879f032d8bc605fd07a6701bb5bc49490e6643c3852e9dcdf4aaae4984923",
+      "afterSha256": "186879f032d8bc605fd07a6701bb5bc49490e6643c3852e9dcdf4aaae4984923"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json",
+      "beforeSha256": "142a9ed1e12d53b95dc7807e4155df8ec599548c492175be1500afd6b65cfc37",
+      "afterSha256": "142a9ed1e12d53b95dc7807e4155df8ec599548c492175be1500afd6b65cfc37"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json.meta",
+      "beforeSha256": "5691a578ed4a057626c9a2d77c31115ada68513aa6ca3dae84d5421045db5df2",
+      "afterSha256": "5691a578ed4a057626c9a2d77c31115ada68513aa6ca3dae84d5421045db5df2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE.sprite.json",
+      "beforeSha256": "bd44f13db01cd24992b62c0ff1ecced872d2257baea48f39ded6a7454e73c2d8",
+      "afterSha256": "bd44f13db01cd24992b62c0ff1ecced872d2257baea48f39ded6a7454e73c2d8"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE.sprite.json.meta",
+      "beforeSha256": "3bfe41618ad0c284b01cd1912170d976bd794501fb1af872433b48344abe4a65",
+      "afterSha256": "3bfe41618ad0c284b01cd1912170d976bd794501fb1af872433b48344abe4a65"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.json",
+      "beforeSha256": "6865601cf25dbb73828aa6fd165e9b43b4589db8eea5a04cd40c50950ba54fab",
+      "afterSha256": "6865601cf25dbb73828aa6fd165e9b43b4589db8eea5a04cd40c50950ba54fab"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.json.meta",
+      "beforeSha256": "f9c4e04549e0efdd9187217f6018c35b1bf1b74233eeca33bc02b45bbd30226c",
+      "afterSha256": "f9c4e04549e0efdd9187217f6018c35b1bf1b74233eeca33bc02b45bbd30226c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.png",
+      "beforeSha256": "5988b6586a952bc83eb6e2325aee186e9c1644bf2b8c0ba6dbd2371639cd7926",
+      "afterSha256": "5988b6586a952bc83eb6e2325aee186e9c1644bf2b8c0ba6dbd2371639cd7926"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_page1_tex.png.meta",
+      "beforeSha256": "b29f0278ecf570cc7407fb36c3ba67f07a94436a8967bf2accb21702ce4ac3e7",
+      "afterSha256": "b29f0278ecf570cc7407fb36c3ba67f07a94436a8967bf2accb21702ce4ac3e7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_ske.json.meta",
+      "beforeSha256": "12268cf4928f8ecd5d87a505c92d391caa4ca7dcb1eec89dd5241f2887a7e0df",
+      "afterSha256": "12268cf4928f8ecd5d87a505c92d391caa4ca7dcb1eec89dd5241f2887a7e0df"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.json",
+      "beforeSha256": "367ee8f0999d93bb92b71b0cccae0885c20023b9890b76862433490b6a48754c",
+      "afterSha256": "367ee8f0999d93bb92b71b0cccae0885c20023b9890b76862433490b6a48754c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.json.meta",
+      "beforeSha256": "1a42065974144e1c72c3d5e63f8a223d4e22bef75da36bfc7f3d26d870d73609",
+      "afterSha256": "1a42065974144e1c72c3d5e63f8a223d4e22bef75da36bfc7f3d26d870d73609"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.png",
+      "beforeSha256": "f851e57219e7245dab60c334e8a2295cd30036100405d20818bfd97eecd2655c",
+      "afterSha256": "f851e57219e7245dab60c334e8a2295cd30036100405d20818bfd97eecd2655c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_SE_tex.png.meta",
+      "beforeSha256": "ffe8435dbc63d02c9ef09e02cc3c0164d5b922c16d4804a8336241a2a14faddb",
+      "afterSha256": "ffe8435dbc63d02c9ef09e02cc3c0164d5b922c16d4804a8336241a2a14faddb"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.json",
+      "beforeSha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d",
+      "afterSha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.json.meta",
+      "beforeSha256": "a076e473a05266878480ff883098362d5d81119d142bdfe1ab191395b209c37c",
+      "afterSha256": "a076e473a05266878480ff883098362d5d81119d142bdfe1ab191395b209c37c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.png",
+      "beforeSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5",
+      "afterSha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.png.meta",
+      "beforeSha256": "b4c146e9d8d3f913279ccd352d18daac5817a9056c6d5f80690ff8e324a0020a",
+      "afterSha256": "b4c146e9d8d3f913279ccd352d18daac5817a9056c6d5f80690ff8e324a0020a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json.meta",
+      "beforeSha256": "b92be1cbf109fc618af4ee3dc57cfa839bf699401b5c1b75c1bca8ce35d07c26",
+      "afterSha256": "b92be1cbf109fc618af4ee3dc57cfa839bf699401b5c1b75c1bca8ce35d07c26"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.json",
+      "beforeSha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda",
+      "afterSha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.json.meta",
+      "beforeSha256": "e600d3af7c9a1d4e95bf3648a7fabf0a83f1c5de8128c175fa40203b4dd4308a",
+      "afterSha256": "e600d3af7c9a1d4e95bf3648a7fabf0a83f1c5de8128c175fa40203b4dd4308a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.png",
+      "beforeSha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26",
+      "afterSha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.png.meta",
+      "beforeSha256": "e2836c1589b9dda123a12eb64d3f18a0471dc29615fdf61d11242ecf497b6f78",
+      "afterSha256": "e2836c1589b9dda123a12eb64d3f18a0471dc29615fdf61d11242ecf497b6f78"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1.meta",
+      "beforeSha256": "d1069db6a1746183da7939525fbd1c5ffd09a6f6e220ba45ab2284f7701cd54a",
+      "afterSha256": "d1069db6a1746183da7939525fbd1c5ffd09a6f6e220ba45ab2284f7701cd54a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E.sprite.json",
+      "beforeSha256": "c8c5b2e2bf61490acc5d1a55c85144a20177641867d8adeddc685f38ff07a323",
+      "afterSha256": "c8c5b2e2bf61490acc5d1a55c85144a20177641867d8adeddc685f38ff07a323"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E.sprite.json.meta",
+      "beforeSha256": "3eada4888a8750fa63a36b3fd4dd6ca29837bf406b4f4c76bb0d81ca67ca4f47",
+      "afterSha256": "3eada4888a8750fa63a36b3fd4dd6ca29837bf406b4f4c76bb0d81ca67ca4f47"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_ske.json.meta",
+      "beforeSha256": "b8573bb6ac506dfd0155c0703afddcc7da1e1cfae3bf521cea429f121c03c9de",
+      "afterSha256": "b8573bb6ac506dfd0155c0703afddcc7da1e1cfae3bf521cea429f121c03c9de"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_tex.json",
+      "beforeSha256": "24985f1a32d3a7b5dc035fce1b29bd5f5ef2996502f86153a23f907053eb6230",
+      "afterSha256": "24985f1a32d3a7b5dc035fce1b29bd5f5ef2996502f86153a23f907053eb6230"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_tex.json.meta",
+      "beforeSha256": "c023a2710821e571a6ec6bd63434a5836554b61d21d4e7807c43944473002867",
+      "afterSha256": "c023a2710821e571a6ec6bd63434a5836554b61d21d4e7807c43944473002867"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_tex.png",
+      "beforeSha256": "5a92ec8257b0b03bd193e1b1d7722bb603195a324b769f2ae1905497fbe7a162",
+      "afterSha256": "5a92ec8257b0b03bd193e1b1d7722bb603195a324b769f2ae1905497fbe7a162"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_tex.png.meta",
+      "beforeSha256": "2cd1842a289239bb2b2b82f258601e4b1a338fd751a5d0b87fa9415fddac5f6a",
+      "afterSha256": "2cd1842a289239bb2b2b82f258601e4b1a338fd751a5d0b87fa9415fddac5f6a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N.sprite.json",
+      "beforeSha256": "4469a7c34899595e97f815dc0f83b4ce670bff97001db36afd57b29a31d64f74",
+      "afterSha256": "4469a7c34899595e97f815dc0f83b4ce670bff97001db36afd57b29a31d64f74"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N.sprite.json.meta",
+      "beforeSha256": "ce1e5178a6e5a4a082d9b095ca258a9b399937fc37192129e01774540d6389a1",
+      "afterSha256": "ce1e5178a6e5a4a082d9b095ca258a9b399937fc37192129e01774540d6389a1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE.sprite.json",
+      "beforeSha256": "1fdb0b3d49572369652caf1445f9dd958415b93b6d511524fb37d07307b760de",
+      "afterSha256": "1fdb0b3d49572369652caf1445f9dd958415b93b6d511524fb37d07307b760de"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE.sprite.json.meta",
+      "beforeSha256": "44b4bb9352db8ebaf9fdebbfad38ef1c2e722284b37834b57333dd9cb9f23477",
+      "afterSha256": "44b4bb9352db8ebaf9fdebbfad38ef1c2e722284b37834b57333dd9cb9f23477"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_ske.json.meta",
+      "beforeSha256": "213a280594f78df5d9005b3510918fe5baabc64a75034e94ae6ecf752eb6dbab",
+      "afterSha256": "213a280594f78df5d9005b3510918fe5baabc64a75034e94ae6ecf752eb6dbab"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_tex.json",
+      "beforeSha256": "864dd644b1f12318b6f1e4cb96ce3d232f65d8b1b7b18f4d65654e71df988185",
+      "afterSha256": "864dd644b1f12318b6f1e4cb96ce3d232f65d8b1b7b18f4d65654e71df988185"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_tex.json.meta",
+      "beforeSha256": "4da586d3dba6fe8d2e4d611fdf9a903aac5b592998d6c382e2d033a3a2f01177",
+      "afterSha256": "4da586d3dba6fe8d2e4d611fdf9a903aac5b592998d6c382e2d033a3a2f01177"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_tex.png",
+      "beforeSha256": "54de93625ccd3836ee97df3298a7a3f42b2d200dc13efd6af99bb622627d7f5f",
+      "afterSha256": "54de93625ccd3836ee97df3298a7a3f42b2d200dc13efd6af99bb622627d7f5f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_tex.png.meta",
+      "beforeSha256": "1d00c38349efebc577b03fc3321a14c4ca5fed058da25e517b4d0c5392954fbc",
+      "afterSha256": "1d00c38349efebc577b03fc3321a14c4ca5fed058da25e517b4d0c5392954fbc"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_ske.json.meta",
+      "beforeSha256": "1e751a65f01adabf783c33164029960731f808652bc35aa04173d54cff2d4b52",
+      "afterSha256": "1e751a65f01adabf783c33164029960731f808652bc35aa04173d54cff2d4b52"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_tex.json",
+      "beforeSha256": "01be2527889e90cb5eb16ab7960daae2aae61af23ea3b7721365ae234ca724f4",
+      "afterSha256": "01be2527889e90cb5eb16ab7960daae2aae61af23ea3b7721365ae234ca724f4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_tex.json.meta",
+      "beforeSha256": "26336b2d2bfe08c71572b6c24f1a42568e8bfe4bc67dd773fe824b3b8875dbcd",
+      "afterSha256": "26336b2d2bfe08c71572b6c24f1a42568e8bfe4bc67dd773fe824b3b8875dbcd"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_tex.png",
+      "beforeSha256": "6a355d29dee014f911e387987cdfd37128a75f89411ff4b4d5ca375acd882ded",
+      "afterSha256": "6a355d29dee014f911e387987cdfd37128a75f89411ff4b4d5ca375acd882ded"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_tex.png.meta",
+      "beforeSha256": "47a544f64c5e7fb95f8826219396b912b1f69c17ce81bec6848cb759a0f0ef4b",
+      "afterSha256": "47a544f64c5e7fb95f8826219396b912b1f69c17ce81bec6848cb759a0f0ef4b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S.sprite.json",
+      "beforeSha256": "65393dc42da9ea9f846369fb7817c920435a388571608b425eb0c00f67e6e812",
+      "afterSha256": "65393dc42da9ea9f846369fb7817c920435a388571608b425eb0c00f67e6e812"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S.sprite.json.meta",
+      "beforeSha256": "91094945a445d786b715ba8848e7d5436eae7893c113a6d5461d5320c080d907",
+      "afterSha256": "91094945a445d786b715ba8848e7d5436eae7893c113a6d5461d5320c080d907"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE.sprite.json",
+      "beforeSha256": "c7201e38f314bbba9c749ddf50a76137441ba964f009df15dd323fcd64fb51b0",
+      "afterSha256": "c7201e38f314bbba9c749ddf50a76137441ba964f009df15dd323fcd64fb51b0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE.sprite.json.meta",
+      "beforeSha256": "3da7d5b0ed53052c0522481bb430d43f7c0189d7c558b8236078fa41880a8805",
+      "afterSha256": "3da7d5b0ed53052c0522481bb430d43f7c0189d7c558b8236078fa41880a8805"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_ske.json.meta",
+      "beforeSha256": "9291d17a7cc76a5f47700e42af2cb5fecfe0c9fc81924f5053a78a906c37b00a",
+      "afterSha256": "9291d17a7cc76a5f47700e42af2cb5fecfe0c9fc81924f5053a78a906c37b00a"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_tex.json",
+      "beforeSha256": "5b8c09f63854189124f18488c2fa7abb26bb7124ad1c016d202c765e2c012f91",
+      "afterSha256": "5b8c09f63854189124f18488c2fa7abb26bb7124ad1c016d202c765e2c012f91"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_tex.json.meta",
+      "beforeSha256": "9cc78516639a52ddb9ccf41f7ac5945ba5fb15e74be69936d3138c80464d9c21",
+      "afterSha256": "9cc78516639a52ddb9ccf41f7ac5945ba5fb15e74be69936d3138c80464d9c21"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_tex.png",
+      "beforeSha256": "7061b56b97bc5b86eb350b163517b7d1653ca9847d6d86865355c81442c00193",
+      "afterSha256": "7061b56b97bc5b86eb350b163517b7d1653ca9847d6d86865355c81442c00193"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_tex.png.meta",
+      "beforeSha256": "f9130197503f8d5d4ba732c832ed3cc27a1d95ad0c4036130089266816842275",
+      "afterSha256": "f9130197503f8d5d4ba732c832ed3cc27a1d95ad0c4036130089266816842275"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_ske.json.meta",
+      "beforeSha256": "55f9c3850d06a0bbe140bfac520bd53a62efaca3669948e69844ff5d3fbcfaab",
+      "afterSha256": "55f9c3850d06a0bbe140bfac520bd53a62efaca3669948e69844ff5d3fbcfaab"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_tex.json",
+      "beforeSha256": "ad95cc7037ed7539844befe07de33a5ad8a855e6297fc4a03cadd76f437d901f",
+      "afterSha256": "ad95cc7037ed7539844befe07de33a5ad8a855e6297fc4a03cadd76f437d901f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_tex.json.meta",
+      "beforeSha256": "b4977af2d86dfe96278a6664ca4a241ce6a8beffebc230435a8fa7ead33cb5e2",
+      "afterSha256": "b4977af2d86dfe96278a6664ca4a241ce6a8beffebc230435a8fa7ead33cb5e2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_tex.png",
+      "beforeSha256": "86e6cc2beef74bc32d91ea7f8ce8913418db1550956a4897d2ec969f7d62c523",
+      "afterSha256": "86e6cc2beef74bc32d91ea7f8ce8913418db1550956a4897d2ec969f7d62c523"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_tex.png.meta",
+      "beforeSha256": "14426e8ec78d67d1ee869f65cbef6bd4a4a54a00a5e5bac43285affd0db1f8bc",
+      "afterSha256": "14426e8ec78d67d1ee869f65cbef6bd4a4a54a00a5e5bac43285affd0db1f8bc"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1.meta",
+      "beforeSha256": "9bd78d2d2f54330dd7eddc2b2748f59298e311df3082e04b41908e7436dd44c5",
+      "afterSha256": "9bd78d2d2f54330dd7eddc2b2748f59298e311df3082e04b41908e7436dd44c5"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E.sprite.json",
+      "beforeSha256": "69c9bcc047d8a639e5f0b1918f28900fd56c9ca832b906a6cca81d839c60bed7",
+      "afterSha256": "69c9bcc047d8a639e5f0b1918f28900fd56c9ca832b906a6cca81d839c60bed7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E.sprite.json.meta",
+      "beforeSha256": "be6b4fb928cc6eee91e5b0175c06cc1514dd2929f6b6bc32a0d52e32c544ab53",
+      "afterSha256": "be6b4fb928cc6eee91e5b0175c06cc1514dd2929f6b6bc32a0d52e32c544ab53"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.json",
+      "beforeSha256": "0df7f279ded3104b5c0a41b5006f011078b82a8893337218ecc0d68f7c80fdc0",
+      "afterSha256": "0df7f279ded3104b5c0a41b5006f011078b82a8893337218ecc0d68f7c80fdc0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.json.meta",
+      "beforeSha256": "b4b70b40808de7b789354db5a44c9c37afd736327db65a7f11f5d8203f3ea890",
+      "afterSha256": "b4b70b40808de7b789354db5a44c9c37afd736327db65a7f11f5d8203f3ea890"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.png",
+      "beforeSha256": "c4506510c1bc791c8a7c8c9130d6e65723f1059caaf8b8ed2a149b373089fbe1",
+      "afterSha256": "c4506510c1bc791c8a7c8c9130d6e65723f1059caaf8b8ed2a149b373089fbe1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_page1_tex.png.meta",
+      "beforeSha256": "b29f71dcff613bcd0b3d81c88c63712aab2fe25a756c14b4bf6728ca95ec95bb",
+      "afterSha256": "b29f71dcff613bcd0b3d81c88c63712aab2fe25a756c14b4bf6728ca95ec95bb"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_ske.json.meta",
+      "beforeSha256": "481f38a37605e024552175b2cfbcc775acd01ac7358595142c4ab56d3b0722af",
+      "afterSha256": "481f38a37605e024552175b2cfbcc775acd01ac7358595142c4ab56d3b0722af"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.json",
+      "beforeSha256": "e16d43fe895e4b2505f007e614236e8214134d63c7133b0445eef41bfd571d41",
+      "afterSha256": "e16d43fe895e4b2505f007e614236e8214134d63c7133b0445eef41bfd571d41"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.json.meta",
+      "beforeSha256": "4f0db2e5f435c6c56a112b2430ca4a3e2b4f4b0862bbefb9dc660f406a8a5d3c",
+      "afterSha256": "4f0db2e5f435c6c56a112b2430ca4a3e2b4f4b0862bbefb9dc660f406a8a5d3c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.png",
+      "beforeSha256": "73392521feafc4b0ff2e1d9b6fa2166325505762945cc1ac00709f46772018f0",
+      "afterSha256": "73392521feafc4b0ff2e1d9b6fa2166325505762945cc1ac00709f46772018f0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_E_tex.png.meta",
+      "beforeSha256": "f29d1ff94c651684538093961d8a1f9280e65e0f27507cd8f6fbd1fba67f9726",
+      "afterSha256": "f29d1ff94c651684538093961d8a1f9280e65e0f27507cd8f6fbd1fba67f9726"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S.sprite.json",
+      "beforeSha256": "9b3c146bb8b43eb791f9f252876cb612df285f4b490ba0594f9c2f222343c6ce",
+      "afterSha256": "9b3c146bb8b43eb791f9f252876cb612df285f4b490ba0594f9c2f222343c6ce"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S.sprite.json.meta",
+      "beforeSha256": "f61708284c5015f116eec7ca922ac1c69816efa0787cd944030bac52c221fdb1",
+      "afterSha256": "f61708284c5015f116eec7ca922ac1c69816efa0787cd944030bac52c221fdb1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE.sprite.json",
+      "beforeSha256": "4d02bd223a6295ec0c04959d199e330bbe84a2cb50db8e16ca4cc265f249c5bd",
+      "afterSha256": "4d02bd223a6295ec0c04959d199e330bbe84a2cb50db8e16ca4cc265f249c5bd"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE.sprite.json.meta",
+      "beforeSha256": "93dd0595807072b237f15b43b8bd226bc4a9d8f4dd6ddbdbc422beff79c0cb57",
+      "afterSha256": "93dd0595807072b237f15b43b8bd226bc4a9d8f4dd6ddbdbc422beff79c0cb57"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.json",
+      "beforeSha256": "09056e50426875979957ff94ec12475a0cbb6ca766c8eaaf20beb3d794f1d0f6",
+      "afterSha256": "09056e50426875979957ff94ec12475a0cbb6ca766c8eaaf20beb3d794f1d0f6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.json.meta",
+      "beforeSha256": "71ff45745fbf77834684631a1df8adbc48f4023973bdb864d9cc4dc57b6d1a83",
+      "afterSha256": "71ff45745fbf77834684631a1df8adbc48f4023973bdb864d9cc4dc57b6d1a83"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.png",
+      "beforeSha256": "832856552db025ecaa8c9533c47df6471e1dfec58aac3d0e401f04dec73e7ec2",
+      "afterSha256": "832856552db025ecaa8c9533c47df6471e1dfec58aac3d0e401f04dec73e7ec2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_page1_tex.png.meta",
+      "beforeSha256": "1c799b6f4646ed770c62cdb5475e842921022148e8e167a3b44175ec1887fdc7",
+      "afterSha256": "1c799b6f4646ed770c62cdb5475e842921022148e8e167a3b44175ec1887fdc7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_ske.json.meta",
+      "beforeSha256": "751e4b0119a2a422eaadbd791e7bd78e5b5b6bb5bce37379dbdd4f139916d46d",
+      "afterSha256": "751e4b0119a2a422eaadbd791e7bd78e5b5b6bb5bce37379dbdd4f139916d46d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.json",
+      "beforeSha256": "45291041b415442f5872b1df0d9d89ebad9b55fa5c8deceead3994973b77a8f6",
+      "afterSha256": "45291041b415442f5872b1df0d9d89ebad9b55fa5c8deceead3994973b77a8f6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.json.meta",
+      "beforeSha256": "12224048fb3849bb79cdce83cb2f5eb99db0559a3ddd718774b702707c6caa7f",
+      "afterSha256": "12224048fb3849bb79cdce83cb2f5eb99db0559a3ddd718774b702707c6caa7f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.png",
+      "beforeSha256": "a4d60f721b227cedc680b56ed8a1b972358ae0d8a3bb508d0661a00e753628ee",
+      "afterSha256": "a4d60f721b227cedc680b56ed8a1b972358ae0d8a3bb508d0661a00e753628ee"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_SE_tex.png.meta",
+      "beforeSha256": "931f1bf7f4927051f949abc03b5f0578c37ae70e9cb7b59672d5291d468d17d7",
+      "afterSha256": "931f1bf7f4927051f949abc03b5f0578c37ae70e9cb7b59672d5291d468d17d7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_page1_tex.json",
+      "beforeSha256": "5b2c72d5a50cf79b41b3ef76b0bb2322b4172df7d93deff98e0273169559db32",
+      "afterSha256": "5b2c72d5a50cf79b41b3ef76b0bb2322b4172df7d93deff98e0273169559db32"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_page1_tex.json.meta",
+      "beforeSha256": "a0754043002fc337e17b25f8e4c069289fa3ce0d402722a845e9ffe5f0a4ef66",
+      "afterSha256": "a0754043002fc337e17b25f8e4c069289fa3ce0d402722a845e9ffe5f0a4ef66"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_page1_tex.png",
+      "beforeSha256": "a73ab18475214b59a916b28598eb3abba19843d7f8db3b3f26214f6475313024",
+      "afterSha256": "a73ab18475214b59a916b28598eb3abba19843d7f8db3b3f26214f6475313024"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_page1_tex.png.meta",
+      "beforeSha256": "387a6eb82a7168f624f1b31126bc14401932b2e8338cd627b5a3ee6d4f5f9b88",
+      "afterSha256": "387a6eb82a7168f624f1b31126bc14401932b2e8338cd627b5a3ee6d4f5f9b88"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_ske.json.meta",
+      "beforeSha256": "f3a27fcf8041645e7bc9130f586f4597c13788c3d0f6d0476d704dc249cd0012",
+      "afterSha256": "f3a27fcf8041645e7bc9130f586f4597c13788c3d0f6d0476d704dc249cd0012"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_tex.json",
+      "beforeSha256": "c628a99b71b89579e4fbd52120bc2811ba40607a2e512a8dffc6e236ca613554",
+      "afterSha256": "c628a99b71b89579e4fbd52120bc2811ba40607a2e512a8dffc6e236ca613554"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_tex.json.meta",
+      "beforeSha256": "79e1fad098e8057cf26df0570138d3c7989ae384951f0fc112788346783eff15",
+      "afterSha256": "79e1fad098e8057cf26df0570138d3c7989ae384951f0fc112788346783eff15"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_tex.png",
+      "beforeSha256": "bcd136104a015076099652a7c13ee67e1592edbf8faa1b73e501f436227615f4",
+      "afterSha256": "bcd136104a015076099652a7c13ee67e1592edbf8faa1b73e501f436227615f4"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-chibi-v1/thetuchibi_S_tex.png.meta",
+      "beforeSha256": "8187b7d8710fabfa3888c8700da1d526ccb6b508816930bed026198bc0ad0ef3",
+      "afterSha256": "8187b7d8710fabfa3888c8700da1d526ccb6b508816930bed026198bc0ad0ef3"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites.meta",
+      "beforeSha256": "018d00f8475572825d7911f2f5f95f37581b8840543a38f42f74a775c7394e71",
+      "afterSha256": "018d00f8475572825d7911f2f5f95f37581b8840543a38f42f74a775c7394e71"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E.sprite.json",
+      "beforeSha256": "f022d27b4e385ce0f10f969d88082550a485632770034485eab9fb89ca512d3b",
+      "afterSha256": "f022d27b4e385ce0f10f969d88082550a485632770034485eab9fb89ca512d3b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E.sprite.json.meta",
+      "beforeSha256": "4d92a6106658c50ceab2063c20f696c37c3f8e2d6b2a9b03659db48209b40678",
+      "afterSha256": "4d92a6106658c50ceab2063c20f696c37c3f8e2d6b2a9b03659db48209b40678"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_ske.json.meta",
+      "beforeSha256": "eccaa17341dddf625719f925cd5063f0e57e99cc3239d8eaaf6113c75a1d4906",
+      "afterSha256": "eccaa17341dddf625719f925cd5063f0e57e99cc3239d8eaaf6113c75a1d4906"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_tex.json",
+      "beforeSha256": "1d8b02e22c6e701537bc8a16d79fb501c4d240ea672b5e03406e1e9ea5ccd34f",
+      "afterSha256": "1d8b02e22c6e701537bc8a16d79fb501c4d240ea672b5e03406e1e9ea5ccd34f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_tex.json.meta",
+      "beforeSha256": "03422ed8a5549bd186584d4c4205faec9264dccb352c52d2b8020c8fa5b5ffe9",
+      "afterSha256": "03422ed8a5549bd186584d4c4205faec9264dccb352c52d2b8020c8fa5b5ffe9"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_tex.png",
+      "beforeSha256": "65f49da8b17942b04e684cb9e1915856caf192fd7fbbb69a65bb74ea3f7c16bb",
+      "afterSha256": "65f49da8b17942b04e684cb9e1915856caf192fd7fbbb69a65bb74ea3f7c16bb"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_tex.png.meta",
+      "beforeSha256": "25ed510dbdc2545540d786048616fcb3b6113925b658e9f11c1c867ae8d77b1d",
+      "afterSha256": "25ed510dbdc2545540d786048616fcb3b6113925b658e9f11c1c867ae8d77b1d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N.sprite.json",
+      "beforeSha256": "feed963d17a75a34a1bc244c6035faec474a7385ab8b2e0ac4f63f31e9f799ac",
+      "afterSha256": "feed963d17a75a34a1bc244c6035faec474a7385ab8b2e0ac4f63f31e9f799ac"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N.sprite.json.meta",
+      "beforeSha256": "4b7e51cfe76dcfbf13bfb72ca10605729a88bf8c1a908f5b7189e1ec0b5c9055",
+      "afterSha256": "4b7e51cfe76dcfbf13bfb72ca10605729a88bf8c1a908f5b7189e1ec0b5c9055"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE.sprite.json",
+      "beforeSha256": "ca4c745b996ee94c9ea8b470b7bfb01be5376a57099544bff6306b98a5ad82c7",
+      "afterSha256": "ca4c745b996ee94c9ea8b470b7bfb01be5376a57099544bff6306b98a5ad82c7"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE.sprite.json.meta",
+      "beforeSha256": "4ae6023804322d9e0e6b658751c5f68856968f1a28bf87ccbdd2d4dadcccd54f",
+      "afterSha256": "4ae6023804322d9e0e6b658751c5f68856968f1a28bf87ccbdd2d4dadcccd54f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_ske.json.meta",
+      "beforeSha256": "3a7364a46a05e73db6d5c039f808ba2d8e3104c9a22cceb9c05853c2ad6d2607",
+      "afterSha256": "3a7364a46a05e73db6d5c039f808ba2d8e3104c9a22cceb9c05853c2ad6d2607"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_tex.json",
+      "beforeSha256": "5c99bc01d6230e6819cb062409098c5fddc3e61b79e4e1570aba90cf9eb1a2c6",
+      "afterSha256": "5c99bc01d6230e6819cb062409098c5fddc3e61b79e4e1570aba90cf9eb1a2c6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_tex.json.meta",
+      "beforeSha256": "ef5c6e2ab215379ee2fd3bc317ce8cd2a19ccbf306f0d14c3ecbcdb503044b24",
+      "afterSha256": "ef5c6e2ab215379ee2fd3bc317ce8cd2a19ccbf306f0d14c3ecbcdb503044b24"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_tex.png",
+      "beforeSha256": "9e60b74a3706953a017b274853d19eb3a2f27e71065eec41516f8adde6be5927",
+      "afterSha256": "9e60b74a3706953a017b274853d19eb3a2f27e71065eec41516f8adde6be5927"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_tex.png.meta",
+      "beforeSha256": "4a0c30103b1fb2be40db7ae3a126b48227382c3f85059e36bcf43ff2f2342a0b",
+      "afterSha256": "4a0c30103b1fb2be40db7ae3a126b48227382c3f85059e36bcf43ff2f2342a0b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_ske.json.meta",
+      "beforeSha256": "b45995c7ea1bfc313bf1210d7f744bb1e2b6b0d51fc3a4cf00825d179e69ebf5",
+      "afterSha256": "b45995c7ea1bfc313bf1210d7f744bb1e2b6b0d51fc3a4cf00825d179e69ebf5"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.json",
+      "beforeSha256": "3be44419157c467f9667958ad4f4e3709feb23881766c4f0d6f7e258cc6fb34d",
+      "afterSha256": "3be44419157c467f9667958ad4f4e3709feb23881766c4f0d6f7e258cc6fb34d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.json.meta",
+      "beforeSha256": "ea75ada67d8a9702f0119b9de4c476daf5fe80c83fa76dc0f22ce279dbd6d418",
+      "afterSha256": "ea75ada67d8a9702f0119b9de4c476daf5fe80c83fa76dc0f22ce279dbd6d418"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.png",
+      "beforeSha256": "b68c3f0ed4be2eb200944a9ec5d1ce7e82e68d4dc1845bdc4bca5c638e2dbf75",
+      "afterSha256": "b68c3f0ed4be2eb200944a9ec5d1ce7e82e68d4dc1845bdc4bca5c638e2dbf75"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_tex.png.meta",
+      "beforeSha256": "5b19ed43486bf7826c517698436603a8e295c5efbe181842bd450a9444810d80",
+      "afterSha256": "5b19ed43486bf7826c517698436603a8e295c5efbe181842bd450a9444810d80"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S.sprite.json",
+      "beforeSha256": "643e04f9fd291b6d4850f1a15863f58f5d7c11e617eeb6ec4bc9f855b33636c5",
+      "afterSha256": "643e04f9fd291b6d4850f1a15863f58f5d7c11e617eeb6ec4bc9f855b33636c5"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S.sprite.json.meta",
+      "beforeSha256": "6ae1a3fd05e048633105eded90fb2e5b05bf6045513d877eb7e180ce1fc5975b",
+      "afterSha256": "6ae1a3fd05e048633105eded90fb2e5b05bf6045513d877eb7e180ce1fc5975b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE.sprite.json",
+      "beforeSha256": "ab2e46c0f17ccee44053844500a0091d709f4068b7fbd48381e36cbfb6f6353b",
+      "afterSha256": "ab2e46c0f17ccee44053844500a0091d709f4068b7fbd48381e36cbfb6f6353b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE.sprite.json.meta",
+      "beforeSha256": "d8682a50ee4db56ef4304e7c5b109cb748f0f903c8f7ef93c343a031e029e05b",
+      "afterSha256": "d8682a50ee4db56ef4304e7c5b109cb748f0f903c8f7ef93c343a031e029e05b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_ske.json.meta",
+      "beforeSha256": "9ee3d23de140b5520f545065137aea624ebcb8107dfd96a81ce3e45f35c13f56",
+      "afterSha256": "9ee3d23de140b5520f545065137aea624ebcb8107dfd96a81ce3e45f35c13f56"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_tex.json",
+      "beforeSha256": "71276fd5280fc8cbd32df034400d3755707eb309dd6553744abacd0189cfb8b6",
+      "afterSha256": "71276fd5280fc8cbd32df034400d3755707eb309dd6553744abacd0189cfb8b6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_tex.json.meta",
+      "beforeSha256": "eb3616a85a20160f4f7b06c84c31469b958ad1b2169c6f44ee4671297f9e8c15",
+      "afterSha256": "eb3616a85a20160f4f7b06c84c31469b958ad1b2169c6f44ee4671297f9e8c15"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_tex.png",
+      "beforeSha256": "4b40ca4232626c5c074d5dbde4ffcf94325406d15b2d5b744d9fa4179c4bd035",
+      "afterSha256": "4b40ca4232626c5c074d5dbde4ffcf94325406d15b2d5b744d9fa4179c4bd035"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_tex.png.meta",
+      "beforeSha256": "82c3e5ee759746edad716a2c6b840f762a64ec5eabdb7d7e9b29c52ae6bd27ab",
+      "afterSha256": "82c3e5ee759746edad716a2c6b840f762a64ec5eabdb7d7e9b29c52ae6bd27ab"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_ske.json.meta",
+      "beforeSha256": "630416ce2f5ba7b55391ab128701ad01374abfa2e7c22027a68654706ecc4364",
+      "afterSha256": "630416ce2f5ba7b55391ab128701ad01374abfa2e7c22027a68654706ecc4364"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_tex.json",
+      "beforeSha256": "bbb802488ad46cbbaeca0db5edd7f23766dea3a196be515701a69905bb82cfd0",
+      "afterSha256": "bbb802488ad46cbbaeca0db5edd7f23766dea3a196be515701a69905bb82cfd0"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_tex.json.meta",
+      "beforeSha256": "e5aaea44079cfc137d3b5c068a579bb0b4d8f335cbb012a19759a5e34b76f63b",
+      "afterSha256": "e5aaea44079cfc137d3b5c068a579bb0b4d8f335cbb012a19759a5e34b76f63b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_tex.png",
+      "beforeSha256": "218c47f0e5529149542eb0bd65fb1c7157b29b780de0c643cac82343bb6279d8",
+      "afterSha256": "218c47f0e5529149542eb0bd65fb1c7157b29b780de0c643cac82343bb6279d8"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_tex.png.meta",
+      "beforeSha256": "1cbbca72d9c2fdbb23cdb495fc0945952adcbdba75d79f1a412e21fa1b6ef7fa",
+      "afterSha256": "1cbbca72d9c2fdbb23cdb495fc0945952adcbdba75d79f1a412e21fa1b6ef7fa"
+    }
+  ],
+  "legacySkeletons": [
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_E_ske.json",
+      "sha256": "441742a188211a3cb376a53d4adeac6f2bef12a5a5d78a5a0bf2e1caf804b5c2"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_NE_ske.json",
+      "sha256": "7524e18b244122860350668d2d9df1bd57fa3abd1759eecfdbb9d1a64de801d9"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_N_ske.json",
+      "sha256": "07f15b9c86c5e04e2d40a2b698f0ea50584de9e07cd7fb9def6531f1a0d8b790"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_SE_ske.json",
+      "sha256": "38b2d038bbcddbc386e7050b28bed68afaff8cd82b3c8a66644496377cb9ad3c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/danphutu-sprite-v1/danphutu_S_ske.json",
+      "sha256": "1ec3cfa1449f2ee48b5a8f3055a0a53b7062a6dba5ed19810a97351dbab5f9ab"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_E_ske.json",
+      "sha256": "2de9f54e5757d59ebbfd60b9d31212d18bca16150004195f7ba6fc4e5d673d24"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_NE_ske.json",
+      "sha256": "991aac2ab4d95c30e9a2a78dd33eb0b5944359e507c22c298aa57bf07410c474"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_N_ske.json",
+      "sha256": "9b7ae6825c0e9304915f18d8fb57d1c42ce377cf02c4b8238e9b619f3a3bce27"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_SE_ske.json",
+      "sha256": "9a129bc407cca2425e07c2779b13c5833795e0f887034b5204a663a0cdb1704b"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu-sprites/kiemtu_S_ske.json",
+      "sha256": "2b968fd63866f359ebbc6f5a2bc139da213585c5bde61b80725a5ac16600a29c"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_E_ske.json",
+      "sha256": "0ba301b10ec9acb726d8745bcd8d46abc9909f7ea33a4facecce8355de5b4c4d"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_NE_ske.json",
+      "sha256": "c0ece39b5c3b3090ad171de05359fb2db36063abab84dd8ed8c037ded205c749"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_N_ske.json",
+      "sha256": "1a63f65b8fbc1b55aaf6c7523b3f5b51e1722e289e8ed5393db418541f04c0cf"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_SE_ske.json",
+      "sha256": "918938289a78c94eef70a1c195beead0c1b0d02f1a83aaf041792d8223ba2e36"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/kiem-tu/kiemtu_S_ske.json",
+      "sha256": "4f3e8d71c14f7dbe1d6114136f60a3777efccd9f838b193f4863d2ace910b571"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_E_ske.json",
+      "sha256": "bd1f917b43bc31e0b35a4966f5404ed10c006497448032211258f0170a1b6f90"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_NE_ske.json",
+      "sha256": "96861dd148f73cb113288116e8f659dd2c8cedbb5ee32f772ebcf03835cb36f1"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_N_ske.json",
+      "sha256": "04b278cb6cfa1b87a983b8f49c10f1784c06dd00d07a329b8688dc445e4e87b6"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_SE_ske.json",
+      "sha256": "c66d787509e729a3a8f99d1088bc632a806cd0c3bf7871bb79dba9cea76a8163"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/phap-tu-fan-sprite-v1/phaptu_S_ske.json",
+      "sha256": "25173e1a688883c690536ad1a5cb338b480c6b5afc2f6d08daa102522991d4f9"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_E_ske.json",
+      "sha256": "196c36d06267ca27e4e4d4a6671e4e4b6b7c5afbf41cbd0ee2000e4254eb756f"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_NE_ske.json",
+      "sha256": "5f42214d9b4262f552646bb2e9be5c2232a975b8d46defc5a5c79c865a35bb48"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_N_ske.json",
+      "sha256": "41712bd6c7204c85b200d39b5cadfa9711afa72cf47bb20194b0d3afba70c017"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_SE_ske.json",
+      "sha256": "e5ec75812e7ba9d6137331d2946374d7a56b69f3654f4747b55ebadcde3c3691"
+    },
+    {
+      "path": "apps/client-cocos/assets/resources/dragonbones/the-tu-sprites/thetu_S_ske.json",
+      "sha256": "332e3178243cb8f7c8683fe5bbc36067c8a1d25c5bc8bd118a6cef264b3dfc05"
+    }
+  ],
+  "note": "Timing-only D58 migration, not art/similarity approval. Legacy clock remains unchanged. No PNG/atlas regeneration."
+}

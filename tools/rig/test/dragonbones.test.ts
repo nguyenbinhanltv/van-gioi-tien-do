@@ -49,6 +49,18 @@ describe('DragonBones exporter (structure)', () => {
     expect(arm.name).toBe('E');
   });
 
+  it('keeps the legacy clock byte-identical and validates explicit clocks', () => {
+    expect(exportDragonBones([{ rig, clips }], atlasFor(rig), { name: 'kiemtu', frameRate: 30 })).toEqual(out);
+    const smooth = exportDragonBones([{ rig, clips }], atlasFor(rig), { name: 'kiemtu', frameRate: 24 });
+    expect(smooth.ske.frameRate).toBe(24);
+    expect((smooth.ske.armature as { frameRate: number }[])[0]!.frameRate).toBe(24);
+    expect(smooth.tex).toEqual(out.tex);
+    for (const frameRate of [0, -1, 24.5, NaN])
+      expect(() => exportDragonBones([{ rig, clips }], atlasFor(rig), { name: 'kiemtu', frameRate })).toThrow(
+        'positive integer',
+      );
+  });
+
   it('frame durations of every timeline add up to the animation duration', () => {
     for (const a of arm.animation as Record<string, unknown>[]) {
       const dur = a.duration as number;
