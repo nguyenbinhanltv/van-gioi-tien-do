@@ -292,3 +292,12 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 - `CastInput` chưa mang điểm đất / hướng nên kỹ năng `ground` / `direction` chưa có kiểm tra tầm và LOS tới điểm; cần mở rộng giao thức (v2) khi làm chiến đấu server.
 - `skill_patches` của nhánh (cooldown_mult, …) chưa áp trong `compileSkills()`; cần hồ sơ nhân vật ở World Node.
 - PRNG theo luồng đặt tên: mới dùng `combat`; thứ tự rút của `ai`, `drop`, `breakthrough`, `tribulation`, `craft` phải được ghi khi từng hệ thống được cài đặt (ADR-010 điểm 3).
+
+## D71 — còn mở sau tối ưu runtime atlas chibi (worker39, 2026-11-08)
+
+1. **Điện thoại thật / WebP**: số đo D71 là headless SwiftShader (có ASTC). Cần chạy `perf:p1` trên 1 điện thoại thật (LAN, docs/33) và trên trình duyệt không có ASTC (đường WebP) trước khi đóng P1.
+2. **ETC2**: công cụ ETC2 của Cocos 3.8.8 (Mali etcpack) báo `Invalid Parameter - tmp.ppm` trên Windows nên preset chỉ có ASTC + WebP. Thiết bị WebGL không có ASTC dùng WebP (RAM GPU RGBA8 ≈ 4–9× ASTC). Cần kiểm tra lại trên máy build Linux/CI hoặc chấp nhận.
+3. **KTX2/Basis**: Cocos 3.8.8 không có đường build KTX2 gốc (docs/00 §3 vẫn ghi KTX2). Cần quyết định giữ ASTC/WebP của builder hay thêm bước hậu build.
+4. **Bản release còn chứa art dev**: `assets/resources/dragonbones/*` (≈ 229 MB, trình xem + nguồn chibi) vẫn nằm trong build; chỉ không bị tải. Cần dự án stage riêng hoặc tách nguồn khỏi `resources` cho bản phát hành.
+5. **Nhóm `rest`**: `ChibiBody.ensureGroup('rest')` đã có nhưng chưa clip chiến đấu nào gọi; gọi trước khi phát clip ngoài idle/walk/run. Chất lượng 1x (Lanczos3, ASTC 4x4) chưa được art duyệt bằng mắt trên máy thật.
+6. **Ngân sách `CHIBI_RUNTIME`** (trần loco/bundle/GPU lớp) là mặc định kỹ thuật, cần game designer/đo thiết bị duyệt.

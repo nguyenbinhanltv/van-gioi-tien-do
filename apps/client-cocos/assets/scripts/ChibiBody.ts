@@ -237,6 +237,7 @@ export class ChibiBody {
   /** Queues the other authored directions of this class (background priority) so facing changes do not hitch. */
   prefetchDirections(): void {
     if (!this.index) return;
-    for (const d of this.avail) void loadChibiRig(this.index, this.cls.id, d, this.tier, Math.max(1, this.priority)).catch(() => undefined);
+    for (const d of this.avail)
+      void loadChibiRig(this.index, this.cls.id, d, this.tier, Math.max(1, this.priority)).catch(() => undefined);
   }
 }

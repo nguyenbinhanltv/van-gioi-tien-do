@@ -28,7 +28,9 @@ export function loadChibiIndex(): Promise<ChibiIndex> {
   if (!indexPromise) {
     indexPromise = new Promise<ChibiIndex>((resolve, reject) =>
       resources.load('world/chibi-index', JsonAsset, (err, asset) =>
-        err || !asset ? reject(err ?? new Error('chibi-index missing: run prepare:assets')) : resolve(asset.json as unknown as ChibiIndex),
+        err || !asset
+          ? reject(err ?? new Error('chibi-index missing: run prepare:assets'))
+          : resolve(asset.json as unknown as ChibiIndex),
       ),
     );
     indexPromise.catch(() => (indexPromise = null));
@@ -116,7 +118,9 @@ function loadBundle(name: string): Promise<AssetManager.Bundle> {
   let b = bundles.get(name);
   if (!b) {
     b = new Promise((resolve, reject) =>
-      assetManager.loadBundle(name, (err, bundle) => (err || !bundle ? reject(err ?? new Error(`bundle ${name}`)) : resolve(bundle))),
+      assetManager.loadBundle(name, (err, bundle) =>
+        err || !bundle ? reject(err ?? new Error(`bundle ${name}`)) : resolve(bundle),
+      ),
     );
     bundles.set(name, b);
     b.catch(() => bundles.delete(name));
@@ -164,7 +168,10 @@ export function loadChibiRig(
     const pages = di.pages[tier];
     hit = chibiStreamer.enqueue(priority, `rig ${key}`, async () => {
       const b = await loadBundle(bundle);
-      const [ske, tex] = await Promise.all([loadIn(b, `${base}_ske`, dragonBones.DragonBonesAsset), loadIn(b, `${base}_tex`, dragonBones.DragonBonesAtlasAsset)]);
+      const [ske, tex] = await Promise.all([
+        loadIn(b, `${base}_ske`, dragonBones.DragonBonesAsset),
+        loadIn(b, `${base}_tex`, dragonBones.DragonBonesAtlasAsset),
+      ]);
       const rig: ChibiRig = { ske, tex, tier, groups: new Set(['loco']), bundle, pages, pending: new Map() };
       await registerPages(rig, b, pages.loco.slice(1));
       return rig;
