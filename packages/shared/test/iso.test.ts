@@ -27,6 +27,7 @@ import {
   staticSortBias,
   footprintSortY,
   inAoi,
+  inAoiAt,
   localInChunk,
   parseChunkKey,
   pivotSortY,
@@ -36,6 +37,7 @@ import {
   tileCenterToScreen,
   tileToScreen,
   toUW,
+  uwDistSq,
   fromUW,
   type Sortable,
 } from '../src/index.js';
@@ -176,6 +178,25 @@ describe('AOI', () => {
     expect(inAoi(at(41, 246), c, true)).toBe(true);
     expect(inAoi(at(47, 200), c, true)).toBe(false);
     expect(inAoi(at(0, 253), c, true)).toBe(false);
+  });
+  it('inAoiAt / uwDistSq (allocation-free, used by the server hot loop) agree with inAoi / toUW everywhere', () => {
+    let seed = 12345;
+    const rnd = (): number => {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+    for (let k = 0; k < 5000; k++) {
+      const c = { i: rnd() * 256, j: rnd() * 256 };
+      // include points exactly on the box edges and on the exit edges
+      const e =
+        k % 5 === 0
+          ? fromUW(toUW(c.i, c.j).u + (rnd() < 0.5 ? 40 : -46), toUW(c.i, c.j).w + (rnd() < 0.5 ? 45 : -52))
+          : { i: rnd() * 256, j: rnd() * 256 };
+      const { u: cu, w: cw } = toUW(c.i, c.j);
+      for (const exiting of [false, true]) expect(inAoiAt(e.i, e.j, cu, cw, exiting)).toBe(inAoi(e, c, exiting));
+      const eu = toUW(e.i, e.j);
+      expect(uwDistSq(e.i, e.j, cu, cw)).toBe((eu.u - cu) ** 2 + (eu.w - cw) ** 2);
+    }
   });
   it('flight shifts the AOI centre by v × 0.5 s', () => {
     expect(aoiCentre({ i: 10, j: 10 }, { i: 18, j: 0 }, true)).toEqual({ i: 19, j: 10 });
