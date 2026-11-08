@@ -195,6 +195,11 @@ export function stepMove(s: MoveState, cmd: MoveCommand, grid: CollisionGrid): M
 /** Distance guard: true when the move exceeds speed × dt × 1.05 (server pushes excluded by the caller). */
 export function distanceViolation(prev: MoveState, next: MoveState, dtMs: number): boolean {
   const d = hypot(next.i - prev.i, next.j - prev.j);
-  const allowed = maxSpeed({ ...prev, dashLeftMs: Math.max(prev.dashLeftMs, next.dashLeftMs > 0 ? 1 : 0) });
+  // The flying toggle and the move happen in the same input, so a take-off moves at FLY_SPEED: allow the faster of both states.
+  const allowed = maxSpeed({
+    ...prev,
+    flying: prev.flying || next.flying,
+    dashLeftMs: Math.max(prev.dashLeftMs, next.dashLeftMs > 0 ? 1 : 0),
+  });
   return d > allowed * (dtMs / 1000) * ANTICHEAT.DISTANCE_TOLERANCE + 1e-9;
 }

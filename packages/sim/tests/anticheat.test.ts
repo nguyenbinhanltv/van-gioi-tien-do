@@ -140,6 +140,25 @@ describe('speedhack: distance check, ratio windows, suspicion score', () => {
     expect(distanceViolation(a, { ...a, i: 5 }, 50)).toBe(true);
   });
 
+  it('take-off while moving at full magnitude is not a distance violation (toggle and move share one input)', () => {
+    const a = m();
+    const FLY_TOGGLE = 2;
+    const up = stepMove(a, { dtMs: 50, dir: 0, mag: 15, flags: FLY_TOGGLE }, openGrid());
+    expect(up.flying).toBe(true);
+    expect(distanceViolation(a, up, 50)).toBe(false);
+    // landing (flying -> walking) was already covered by prev.flying
+    const down = stepMove(up, { dtMs: 50, dir: 0, mag: 15, flags: FLY_TOGGLE }, openGrid());
+    expect(distanceViolation(up, down, 50)).toBe(false);
+    // the allowance did not become unlimited: a walking teleport is still flagged
+    expect(distanceViolation(a, { ...a, i: 5 }, 50)).toBe(true);
+  });
+
+  it('step(): a take-off input raises no distance violation', () => {
+    const r = run(worldWith(1, spawn), ctx, 1, () => [mv(1, 1, SE, { flags: 2 })]);
+    expect(ent(r.world, 1).flying).toBe(true);
+    expect(r.events.filter((e) => e.type === 'violation')).toEqual([]);
+  });
+
   it('ratio > 1.03 in two consecutive 60 s windows flags; > 1.10 disconnects; a clean window resets', () => {
     const events: SimEvent[] = [];
     const ac0 = { ...newAntiCheat(0), windowClaimedMs: 60_000 * 1.05 };
