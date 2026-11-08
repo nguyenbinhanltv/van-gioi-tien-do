@@ -9,6 +9,7 @@
   "scripts": {
     "gen:tilemap": "node src/tilemap/generate_tilemap.js --out out/tilemap",
     "gen:items": "node src/items/generate_items.js --out out/items",
+    "gen:gemini": "node scripts/gemini_assets.js",
     "gen:kiemtu": "vite-node --script scripts/kiem_tu_rig.mjs",
     "prep:parts": "node scripts/continuous_parts.mjs",
     "gen": "npm run gen:tilemap && npm run gen:items",

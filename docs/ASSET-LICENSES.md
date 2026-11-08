@@ -1,5 +1,55 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-PROPS-ICONS — props và icon vật phẩm do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack (ảnh isometric 2:1, ánh sáng từ góc trên-trái, nền magenta #FF00FF; prop ~128 px @2x cho vật 1 ô và 256–512 px @2x cho cây / công trình; icon 64 px @1x / 128 px @2x). **Chủ dự án không lưu `prompts.txt`**: prompt gốc không còn để truy xuất; chỉ còn pack prompt của orchestrator làm đặc tả. Ảnh nằm ngoài repo ở thư mục nhập của chủ dự án và được sao nguyên byte vào `assets-src/gemini/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba.
+
+**Quyền sử dụng:** output do chủ dự án tạo cho dự án này; điều khoản Google Gemini áp dụng cho tài khoản của chủ dự án. Chưa có kiểm tra pháp lý riêng cho việc phát hành thương mại; ghi vào `docs/OPEN-ITEMS.md` nếu cần chốt trước khi ra mắt.
+
+**Xử lý (tái lập được):** `npm run gen:gemini -w @vgtd/procgen` (`tools/procgen/scripts/gemini_assets.js`, mã trong `tools/procgen/src/gemini/`): xoá dấu ✦ của Gemini ở góc dưới-phải (kiểm tra mỗi ảnh có đúng một dấu và không còn dấu sau khi xoá), tách nền magenta chỉ trên vùng nối với nền (không key toàn cục nên hoa đào hồng được giữ) kèm unmix màu và despill để quầng sáng / viền không còn viền hồng, cắt sát nội dung, đặt pivot ở điểm chạm đất, xuất @2x và @1x, đóng atlas có padding và extrude (`atl_prop_{2x,1x}`, `atl_gicon_{2x,1x}`). Một vật cản nhỏ do chính ảnh nguồn sinh ra ở đỉnh `tree_peach_blossom` (cành mờ lơ lửng) bị xoá bằng `clear` trong `manifest.json`. Đầu ra nằm ở `tools/procgen/out/gemini/` và `apps/client-cocos/assets/resources/world/` (sinh lại, không commit).
+
+| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---- | ---------------------- |
+| `assets-src/gemini/props/bush_round_01.png` | prop | `3250fe88a6ca` |
+| `assets-src/gemini/props/fence_wood_segment.png` | prop | `6face4530cc5` |
+| `assets-src/gemini/props/incense_burner.png` | prop | `8aa841ad50d7` |
+| `assets-src/gemini/props/lantern_stone.png` | prop | `fc8666b64927` |
+| `assets-src/gemini/props/pavilion_small.png` | prop | `ef14b8e08db7` |
+| `assets-src/gemini/props/rock_large_spirit.png` | prop | `f47cfc91535c` |
+| `assets-src/gemini/props/rock_lava_cooled.png` | prop | `02860a3fea0f` |
+| `assets-src/gemini/props/rock_mossy_small.png` | prop | `e6da2b5cac16` |
+| `assets-src/gemini/props/sect_gate_paifang.png` | prop | `7978aced4369` |
+| `assets-src/gemini/props/spirit_herb_patch.png` | prop | `f321dfbe95c8` |
+| `assets-src/gemini/props/tree_bamboo_cluster.png` | prop | `3b86c61d7584` |
+| `assets-src/gemini/props/tree_dead_swamp.png` | prop | `dbcfea4057e9` |
+| `assets-src/gemini/props/tree_peach_blossom.png` | prop | `0c1648450d9c` |
+| `assets-src/gemini/props/tree_pine_01.png` | prop | `3f481c990a3f` |
+| `assets-src/gemini/props/tree_pine_02.png` | prop | `464728de68c2` |
+| `assets-src/gemini/props/well_stone.png` | prop | `fa31b2390338` |
+| `assets-src/gemini/items/blueprint_blue_purple.png` | icon | `b81cb714006d` |
+| `assets-src/gemini/items/blueprint_gold_red.png` | icon | `5768ef6dc0de` |
+| `assets-src/gemini/items/blueprint_white_green.png` | icon | `554b3de2f2b4` |
+| `assets-src/gemini/items/breakthrough_pill.png` | icon | `c371c36a350d` |
+| `assets-src/gemini/items/craft_material.png` | icon | `88846c35eddd` |
+| `assets-src/gemini/items/heal_pill.png` | icon | `71d9d7061d52` |
+| `assets-src/gemini/items/stone_high.png` | icon | `019d2b8316a9` |
+| `assets-src/gemini/items/stone_low.png` | icon | `e3df7cccb9b5` |
+| `assets-src/gemini/items/stone_mid.png` | icon | `bfefe9ecc6ea` |
+
+**Icon kỹ năng (cùng nguồn, cùng ngày):** 6 lưới 4x2 (mỗi ô là một icon vuông có nền riêng, trên nền magenta, kèm dấu ✦ Gemini ở góc dưới-phải). Thứ tự ô trong lưới (theo hàng) = thứ tự 8 kỹ năng của lớp trong `packages/shared/src/data/skills.json`. `gen:gemini` xoá dấu ✦, tách 8 ô bằng thành phần liên thông, xuất 128 px @2x / 64 px @1x vào atlas `atl_skill_{2x,1x}` theo id kỹ năng; ảnh đối chiếu id ↔ icon của cả 48 icon nằm trong artifacts của PR.
+
+| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---- | ---------------------- |
+| `assets-src/gemini/skills/dan_phu.png` | skill grid 4x2 | `aa880714f42b` |
+| `assets-src/gemini/skills/dao.png` | skill grid 4x2 | `dc70514699b6` |
+| `assets-src/gemini/skills/kiem.png` | skill grid 4x2 | `b24bd1361dc4` |
+| `assets-src/gemini/skills/phap.png` | skill grid 4x2 | `3a89b1935617` |
+| `assets-src/gemini/skills/the.png` | skill grid 4x2 | `f6e60f73f61d` |
+| `assets-src/gemini/skills/thuong.png` | skill grid 4x2 | `f1630b5dc324` |
+
+Dẫn xuất: `tools/procgen/src/gemini/manifest.json` (kích thước đích, ô bị chặn, biome, trọng số của từng prop), `tools/procgen/out/gemini/*` và các atlas `atl_prop_*`, `atl_gicon_*` ở trên, `apps/client-cocos/assets/resources/world/{gemini.json,atl_prop_*,atl_gicon_*}`.
+
+
 ## KTC1 — Kiếm tu semi-chibi T1: master và motion E smooth-v2 (2026-11-08)
 
 Hướng mỹ thuật D44; orchestrator duyệt visual lock 5 master Kiếm tu T1 ngày 2026-11-08. Nguồn mới là `image_gen.imagegen`, model không công bố; tác giả nguồn: OpenAI image generation theo prompt phiên Codex / chủ dự án. Input là concept dự án D44 và master được chọn, không dùng mẫu thương mại. Điều khoản đã kiểm ngày 2026-11-08: [OpenAI Terms of Use / Content](https://openai.com/policies/row-terms-of-use/) (hiệu lực 2026-01-01); quyền output giữa OpenAI và người dùng thuộc người dùng trong phạm vi luật cho phép, vẫn phải bảo đảm quyền input/bên thứ ba. Không gán CC0 hoặc trình bày là tranh vẽ tay.

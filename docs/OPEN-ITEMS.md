@@ -446,6 +446,12 @@ Còn mở / lưu ý:
 - `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
 
+## Asset Gemini (props và icon vật phẩm, 2026-11-09): còn mở
+
+- Điều khoản sử dụng thương mại của output Google Gemini chưa được kiểm tra riêng (ghi trong `docs/ASSET-LICENSES.md`, mục GEMINI-PROPS-ICONS); chủ dự án không lưu prompt gốc nên không tái tạo được từng ảnh. Cần chốt trước khi phát hành công khai.
+- Map lát cắt chỉ có nước / đất / cỏ: chưa có biome đầm lầy hay dung nham. `tree_dead_swamp` đặt gần mép nước, `rock_lava_cooled` chỉ xuất hiện khi bản đồ có địa hình `lava` (chưa có), nên hiện chưa thấy đá dung nham trong game.
+- `tree_pine_01/02` và `rock_mossy_small` / `rock_large_spirit` gần như trùng nhau: nên xin thêm biến thể (xem báo cáo PR).
+
 ## D83 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09)
 
 1. **Mọi số là tạm, cần game designer duyệt**: băng khoảng cách theo cấp, kích thước bầy 3, số lượng 12/2/1, bán kính bầy 3 ô, `MOB_THREAT` (tỉ lệ đổi mục tiêu 1,1, quên sau 24 ô, giảm 20%/s). docs/10 chưa nói quái đứng ở đâu so với điểm vào.
@@ -453,6 +459,16 @@ Còn mở / lưu ý:
 3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
 4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
 5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).
+
+## D84 — vòng lặp phiên đầu: còn mở (worker39, 2026-11-09)
+
+1. **Mọi số là tạm, cần game designer duyệt**: 3 lần hạ quái, lề 2 ô của bước khu săn, thứ tự năm bước, 10 s hiển thị sau khi xong. Chưa có kịch bản onboarding thật (lời thoại, NPC dẫn đường, phần thưởng).
+2. **Tiến độ do client đếm, không phải server xác nhận**: kill đếm từ `skill_result` của chính mình, tiến độ lưu `localStorage` (mất khi đổi trình duyệt / xóa dữ liệu, đổi tên đăng nhập thì làm lại). Cần số kill / mốc phía server (hồ sơ nhân vật) nếu sau này gắn phần thưởng hoặc chống gian lận.
+3. **Bước đột phá phụ thuộc tu vi đầy**, mà tốc độ đả tọa là mặc định tạm (D76); trong smoke test headless bước này chỉ kiểm tới trạng thái "đang chờ tu vi", chưa kiểm một lần đột phá thật.
+4. **Chưa có chọn lớp / phím tắt ẩn-hiện widget / chạm trên màn hình nhỏ**: widget cố định 330×142 đơn vị thiết kế ở góc trên trái (co theo bề ngang); trên điện thoại dọc nó có thể chồng lên túi đồ (túi vẽ phía trên).
+5. **Mốc "khu săn" lấy theo bố cục mặc định `defaultMobZones`**: khi có vùng Sơn Môn thật (OPEN-ITEMS D83 #2) cần đổi bước 1 sang vùng đó.
+6. **Phát hiện khi chạy client thật: server chưa hồi MP**: `CombatSystem` không có hồi MP (chỉ mô phỏng offline `skill_sim` có `MP_REGEN_COMBAT_PCT_PER_S`), nên cả phiên chỉ có đúng 400 MP (khoảng 5 con quái ~500 HP với bộ kỹ năng đầu của Kiếm tu). Quái ~1.500 HP gần như không hạ nổi; bước "hạ 3 quái" của vòng phiên đầu vẫn đạt được nhưng không dư dả. Cần luật hồi MP phía server (việc của worker combat) trước khi cân bằng onboarding.
+7. **bag:smoke** cần `class=` trên URL (hộp chọn lớp D82 chặn tài khoản mới) và có thể chạy chậm khi hết MP (ngân sách 400 s); nó không chạy trong CI.
 
 ## D85 — tín dụng trễ: còn mở
 
