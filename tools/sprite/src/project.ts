@@ -212,7 +212,9 @@ export function runProject(
   if (project.masterHead?.kind === 'rear-base-ornament' && project.direction !== 'N')
     throw new Error('rear ornament master is allowed only for N direction projects');
   if (
-    (project.masterHead?.kind === 'rear-skull-base' || project.masterHead?.kind === 'rear-crown-shoulder') &&
+    (project.masterHead?.kind === 'rear-skull-base' ||
+      project.masterHead?.kind === 'rear-crown-shoulder' ||
+      project.masterHead?.kind === 'rear-crown-shoulder-single') &&
     !['NE', 'N'].includes(project.direction)
   )
     throw new Error('rear skull master is allowed only for NE/N direction projects');
