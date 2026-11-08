@@ -18,6 +18,8 @@ import {
   rngFloat,
   rngFork,
   rngSeed,
+  NETWORK,
+  REGEN,
   skillDefinitions,
   skillsOf,
   type DropContext,
@@ -53,6 +55,11 @@ interface PlayerCombat {
   respawnAtMs: number;
   shield: number;
   shieldUntilMs: number;
+  /** sim time of the last damage dealt or taken (regeneration is slower in combat, D88) */
+  lastCombatMs: number;
+  /** fractional HP / MP not yet applied (vitals are integers; the remainder carries over) */
+  hpFrac: number;
+  mpFrac: number;
 }
 
 interface Pending {
@@ -110,6 +117,9 @@ export class CombatSystem {
       respawnAtMs: 0,
       shield: 0,
       shieldUntilMs: 0,
+      lastCombatMs: -REGEN.outOfCombatDelayMs, // a new player starts out of combat
+      hpFrac: 0,
+      mpFrac: 0,
     });
     return { hpMax: profile.stats.hp, mpMax: profile.stats.mp };
   }
@@ -255,6 +265,7 @@ export class CombatSystem {
     this.pending = this.pending.filter((p) => p.resolveAtMs > now);
     for (const p of due) w = this.resolve(w, p, results, events);
     w = this.respawnDue(w, events);
+    w = this.regenerate(w);
     this.inflight.clear(); // every entry belongs to this tick's inputs: anything left (no sim event) is stale
     return { world: w, results, events };
   }
@@ -270,6 +281,7 @@ export class CombatSystem {
     const p = this.players.get(id);
     const e = world.entities.find((x) => x.id === id);
     if (!p || !e || !p.alive || e.hp <= 0 || amount <= 0) return { world, events };
+    p.lastCombatMs = world.timeMs;
     let dmg = Math.round(amount);
     if (world.timeMs < p.shieldUntilMs && p.shield > 0) {
       const absorbed = Math.min(p.shield, dmg);
@@ -288,6 +300,48 @@ export class CombatSystem {
       w = patch(w, new Map([[id, { vi: 0, vj: 0, pending: [] }]]));
     }
     return { world: w, events };
+  }
+
+  // ------------------------------------------------------------------ regeneration (D88)
+  /**
+   * HP / MP regeneration, every `REGEN.periodTicks` ticks (the percentages are per second of the player's max). In combat (damage
+   * dealt or taken within `REGEN.outOfCombatDelayMs`) only the trickle of MP applies; out of combat HP and MP regenerate, MP faster
+   * while meditating. Dead players do not regenerate. Integer vitals: the fractional part is carried in the player's accumulators, so
+   * the result depends only on the sim time and the damage history (no clocks, no randomness; entities are visited in id order).
+   */
+  private regenerate(world: SimWorld): SimWorld {
+    if (world.tick % REGEN.periodTicks !== 0) return world;
+    const dtS = (REGEN.periodTicks * NETWORK.TICK_MS) / 1000;
+    let patches: Map<number, Partial<EntityState>> | null = null;
+    for (const e of world.entities) {
+      const p = this.players.get(e.id);
+      if (!p || !p.alive || e.hp <= 0) continue;
+      const inCombat = world.timeMs - p.lastCombatMs < REGEN.outOfCombatDelayMs;
+      const hpPct = inCombat ? REGEN.hpCombatPctPerS : REGEN.hpIdlePctPerS;
+      const mpPct = inCombat
+        ? REGEN.mpCombatPctPerS
+        : this.opts.isMeditating?.(e.id)
+          ? REGEN.mpMeditationPctPerS
+          : REGEN.mpIdlePctPerS;
+      let hp = e.hp;
+      let mp = e.mp;
+      if (hp < p.hpMax && hpPct > 0) {
+        p.hpFrac += p.hpMax * hpPct * dtS;
+        const whole = Math.floor(p.hpFrac);
+        p.hpFrac -= whole;
+        hp = Math.min(p.hpMax, hp + whole);
+      }
+      if (hp >= p.hpMax) p.hpFrac = 0;
+      if (mp < e.mpMax && mpPct > 0) {
+        p.mpFrac += e.mpMax * mpPct * dtS;
+        const whole = Math.floor(p.mpFrac);
+        p.mpFrac -= whole;
+        mp = Math.min(e.mpMax, mp + whole);
+      }
+      if (mp >= e.mpMax) p.mpFrac = 0;
+      if (hp !== e.hp || mp !== e.mp) (patches ??= new Map()).set(e.id, { hp, mp });
+    }
+    return patches ? patch(world, patches) : world;
   }
 
   // ------------------------------------------------------------------ internals
@@ -360,6 +414,7 @@ export class CombatSystem {
         killed: dead,
       });
       pushHit(base.hits, h.targetId, h.damage, h.crit, dead);
+      pc.lastCombatMs = world.timeMs; // dealing damage is combat
       if (!dead) this.opts.mobs?.onDamage?.(h.targetId, c.casterId, h.damage);
       if (dead) killed.push(h.targetId);
     }
@@ -460,7 +515,7 @@ export class CombatSystem {
     return JSON.stringify({
       players: [...this.players.entries()]
         .sort((a, b) => a[0] - b[0])
-        .map(([id, p]) => [id, p.alive, p.respawnAtMs, p.shield, p.shieldUntilMs]),
+        .map(([id, p]) => [id, p.alive, p.respawnAtMs, p.shield, p.shieldUntilMs, p.lastCombatMs, p.hpFrac, p.mpFrac]),
       pending: this.pending.map((p) => [p.resolveAtMs, p.casterId, p.seq, p.wireId, p.targetId]),
       drop: this.dropRng,
     });
