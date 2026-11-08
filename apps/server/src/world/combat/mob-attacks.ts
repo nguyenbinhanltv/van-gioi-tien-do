@@ -1,0 +1,214 @@
+/**
+ * Server-authoritative mob attacks (D86). Runs once per tick after the mob AI step (`WorldNode.tick`), on the combat core:
+ *
+ *   for each living mob in `chase` whose AI target (D83 threat target, else the aggro target) is a living player:
+ *     idle -> pick an attack (the first SKILL that is off cooldown and in reach, else the basic attack when in reach, with line of sight),
+ *             LOCK the facing (cone / line) or the target's position (ground circle) and start the telegraph
+ *     telegraph over -> every living player inside the shape takes `damageBreakdown(mob ATK x coeff vs the player's DEF)` through
+ *             `CombatSystem.damagePlayer` (shield first, death, the combat core's respawn)
+ *
+ * Because the shape is fixed when the telegraph starts and tested again when it ends, moving out of it dodges the hit. A mob that dies
+ * or despawns during its telegraph cancels the attack. Damage reaches the client through the own-vitals block of the snapshot (no wire
+ * change); the telegraph itself has no wire representation yet (OPEN-ITEMS).
+ *
+ * Determinism (skill `vgtd-sim-determinism`): no clocks, no ambient randomness. The only random input is the damage jitter, drawn from
+ * a PRNG forked from the node seed ('mobatk'), one float per victim, victims in ascending id order, attacks resolved in
+ * (resolve time, mob id) order. `digest()` exposes the state for the replay tests.
+ */
+import {
+  MOB_ATTACK_GAP_MS,
+  MOB_ID_BASE,
+  damageBreakdown,
+  mobAttacksOf,
+  mobRealm,
+  mobStats,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  type MobAttack,
+  type MobDef,
+  type RngState,
+} from '@vgtd/shared';
+import { encodeDirection, hypot, lineOfSight, type EntityState, type SimContext, type SimWorld } from '@vgtd/sim';
+import { inShape } from './geometry.js';
+import type { CombatSystem } from './system.js';
+import type { CombatEvent } from './types.js';
+
+/** What the attack system needs to know about a mob (read-only; `MobManager.attackView` satisfies it without allocating). */
+export interface MobAttackView {
+  /** AI state: only `chase` attacks */
+  state: string;
+  /** chase target entity id (0 = none) */
+  target: number;
+  level: number;
+  def: MobDef;
+}
+export interface MobAttackPort {
+  /** undefined for dead / unknown mobs */
+  attackView(id: number): MobAttackView | undefined;
+}
+
+interface Windup {
+  mobId: number;
+  attack: MobAttack;
+  resolveAtMs: number;
+  facing: number;
+  /** anchor of a `target` attack, or the mob's own position when the telegraph started */
+  ai: number;
+  aj: number;
+  /** mob position when the telegraph started (cone / line origin) */
+  ci: number;
+  cj: number;
+  atk: number;
+  attackerRealm: number;
+  element: MobDef['elements'][number] | null;
+}
+
+interface MobCooldowns {
+  /** per attack id: time (sim ms) the attack may start again */
+  readyAt: Map<string, number>;
+  /** no new attack before this time */
+  gapUntilMs: number;
+}
+
+export class MobAttackSystem {
+  private rng: RngState;
+  private windups: Windup[] = [];
+  private readonly cooldowns = new Map<number, MobCooldowns>();
+  private readonly attacksByKey = new Map<string, readonly MobAttack[]>();
+
+  constructor(
+    private readonly ctx: SimContext,
+    private readonly combat: CombatSystem,
+    private readonly mobs: MobAttackPort,
+    seed: number,
+  ) {
+    this.rng = rngFork(rngSeed(seed), 'mobatk');
+  }
+
+  private attacksOf(def: MobDef): readonly MobAttack[] {
+    let a = this.attacksByKey.get(def.key);
+    if (!a) {
+      a = mobAttacksOf(def);
+      this.attacksByKey.set(def.key, a);
+    }
+    return a;
+  }
+
+  step(world: SimWorld): { world: SimWorld; events: CombatEvent[] } {
+    const events: CombatEvent[] = [];
+    const now = world.timeMs;
+    const byId = new Map<number, EntityState>();
+    for (const e of world.entities) byId.set(e.id, e);
+
+    // 1) start attacks
+    for (const e of world.entities) {
+      if (e.id < MOB_ID_BASE || e.hp <= 0) continue;
+      const v = this.mobs.attackView(e.id);
+      if (!v || v.state !== 'chase' || v.target === 0) continue;
+      if (this.windups.some((w) => w.mobId === e.id)) continue; // one attack at a time
+      const t = byId.get(v.target);
+      if (!t || t.id >= MOB_ID_BASE || t.hp <= 0 || !this.combat.isAlive(t.id)) continue;
+      const cd = this.cooldowns.get(e.id);
+      if (cd && now < cd.gapUntilMs) continue;
+      const d = hypot(t.i - e.i, t.j - e.j);
+      const attack = this.pick(v.def, cd, d, now);
+      if (!attack) continue;
+      if (!lineOfSight(this.ctx.grid, e.i, e.j, t.i, t.j, e.layer, e.flying)) continue;
+      const stats = mobStats(v.def, v.level);
+      const state = cd ?? { readyAt: new Map<string, number>(), gapUntilMs: 0 };
+      state.readyAt.set(attack.id, now + attack.cooldownMs);
+      this.cooldowns.set(e.id, state);
+      this.windups.push({
+        mobId: e.id,
+        attack,
+        resolveAtMs: now + attack.telegraphMs,
+        facing: encodeDirection(t.i - e.i, t.j - e.j),
+        ai: attack.anchor === 'target' ? t.i : e.i,
+        aj: attack.anchor === 'target' ? t.j : e.j,
+        ci: e.i,
+        cj: e.j,
+        atk: stats.atk,
+        attackerRealm: mobRealm(v.level),
+        element: v.def.elements[0] ?? null,
+      });
+    }
+
+    // 2) resolve the telegraphs that are over; drop the ones whose mob is gone
+    let w = world;
+    if (this.windups.length > 0) {
+      const due: Windup[] = [];
+      const keep: Windup[] = [];
+      for (const x of this.windups) {
+        const mob = byId.get(x.mobId);
+        if (!mob || mob.hp <= 0) continue; // the mob died / despawned: the attack is cancelled
+        if (x.resolveAtMs <= now) due.push(x);
+        else keep.push(x);
+      }
+      this.windups = keep;
+      due.sort((a, b) => a.resolveAtMs - b.resolveAtMs || a.mobId - b.mobId);
+      for (const x of due) {
+        w = this.resolve(w, x, events);
+        const cd = this.cooldowns.get(x.mobId);
+        if (cd) cd.gapUntilMs = now + MOB_ATTACK_GAP_MS;
+      }
+    }
+    // forget the cooldowns of mobs that are gone (a respawned mob starts fresh)
+    if (this.cooldowns.size > 0) {
+      for (const id of [...this.cooldowns.keys()]) if (!byId.has(id)) this.cooldowns.delete(id);
+    }
+    return { world: w, events };
+  }
+
+  /** The first skill that is ready and in reach, else the basic attack when in reach (null = nothing to do yet). */
+  private pick(def: MobDef, cd: MobCooldowns | undefined, dist: number, now: number): MobAttack | null {
+    const list = this.attacksOf(def);
+    const ready = (a: MobAttack): boolean => now >= (cd?.readyAt.get(a.id) ?? 0);
+    for (let k = 1; k < list.length; k++) {
+      const a = list[k]!;
+      if (dist <= a.rangeTiles && ready(a)) return a;
+    }
+    const b = list[0]!;
+    return dist <= b.rangeTiles && ready(b) ? b : null;
+  }
+
+  private resolve(world: SimWorld, x: Windup, events: CombatEvent[]): SimWorld {
+    let w = world;
+    const origin = { i: x.ci, j: x.cj };
+    const anchor = { i: x.ai, j: x.aj };
+    for (const e of world.entities) {
+      if (e.id >= MOB_ID_BASE || e.hp <= 0 || !this.combat.isAlive(e.id)) continue; // ascending id: entities are sorted
+      if (!inShape(x.attack.shape, origin, x.facing, anchor, { i: e.i, j: e.j })) continue;
+      const prof = this.combat.profileOf(e.id);
+      if (!prof) continue;
+      const [jitter, next] = rngFloat(this.rng);
+      this.rng = next;
+      const b = damageBreakdown({
+        atk: x.atk,
+        cSkill: x.attack.coeff,
+        def: prof.stats.def,
+        attackerElement: x.element ?? undefined,
+        defenderElement: prof.element,
+        crit: false,
+        attackerRealm: x.attackerRealm,
+        defenderRealm: prof.realm,
+        rand: jitter,
+      });
+      const hit = this.combat.damagePlayer(w, e.id, Math.max(1, Math.round(b.damage)), x.mobId);
+      w = hit.world;
+      for (const ev of hit.events) events.push(ev);
+    }
+    return w;
+  }
+
+  /** Serializable digest of the state (replay / determinism tests). */
+  digest(): string {
+    return JSON.stringify({
+      windups: this.windups.map((x) => [x.mobId, x.attack.id, x.resolveAtMs, x.facing, x.ai, x.aj]),
+      cooldowns: [...this.cooldowns.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([id, c]) => [id, [...c.readyAt.entries()].sort(), c.gapUntilMs]),
+      rng: this.rng,
+    });
+  }
+}
