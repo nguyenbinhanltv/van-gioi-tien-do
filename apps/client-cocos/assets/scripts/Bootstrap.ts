@@ -234,7 +234,7 @@ export class Bootstrap extends Component {
         createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
       );
     }
-    // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D81)
+    // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D82)
     this.bagPanel = this.makeBagPanel(hudRoot, art);
     this.input = new InputBridge(
       this.rig,
@@ -266,7 +266,7 @@ export class Bootstrap extends Component {
   }
 
   /**
-   * Online start (D81): decide which class to ASK for (`?class=` > what this browser used for the account > the picker), then log in.
+   * Online start (D82): decide which class to ASK for (`?class=` > what this browser used for the account > the picker), then log in.
    * The class is a character property the server keeps: whatever it answers in `hello_ack` is what we apply.
    */
   private async startOnline(): Promise<void> {

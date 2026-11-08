@@ -133,7 +133,7 @@ function sameToken(a: string, b: unknown): boolean {
 interface Client {
   id: number;
   accountId: string;
-  /** class of the character (D81); sent as `EnterEntity.defId` of this player and echoed in `hello_ack` */
+  /** class of the character (D82); sent as `EnterEntity.defId` of this player and echoed in `hello_ack` */
   classPath: PathId;
   transport: ClientTransport;
   /** single-use secret that lets this player's NEXT connection resume the session; rotated on every (re)connect */
@@ -386,7 +386,7 @@ export class WorldNode {
     return this.nextId++;
   }
 
-  /** `classPath`: the character's class (D81), resolved by the gateway from the stored character (`ProgressionService.resolveClass`). */
+  /** `classPath`: the character's class (D82), resolved by the gateway from the stored character (`ProgressionService.resolveClass`). */
   addPlayer(transport: ClientTransport, accountId: string, classPath: PathId = DEFAULT_CLASS): number {
     const id = this.allocateId();
     const at = this.spawnPoint();

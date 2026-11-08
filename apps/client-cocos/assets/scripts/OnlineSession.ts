@@ -201,7 +201,7 @@ export class OnlineSession {
       seen.add(v.entityId);
       let a = this.actors.get(v.entityId);
       if (!a) {
-        // D81: a player's class rides in EnterEntity.defId (wire id 1..6); 0 = an old server that never said: keep the id-based guess
+        // D82: a player's class rides in EnterEntity.defId (wire id 1..6); 0 = an old server that never said: keep the id-based guess
         const path = shared.pathOfClassWireId(v.defId);
         const cls = (path && chibiIdOfPath(path)) || classForEntity(v.entityId);
         a = new RemotePlayer(this.ysort, this.shadowLayer, this.art, v.entityId, cls, v);

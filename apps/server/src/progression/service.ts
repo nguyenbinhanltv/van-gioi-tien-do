@@ -229,7 +229,7 @@ export class ProgressionService {
   }
 
   /**
-   * Class of a character, decided once (D81): the stored class wins; a character with none yet gets `requested` (a class path id or
+   * Class of a character, decided once (D82): the stored class wins; a character with none yet gets `requested` (a class path id or
    * wire id; anything else counts as absent) or `DEFAULT_CLASS`, and it is stored before this resolves, so the choice sticks. Calls
    * for one character run one at a time and wait for an in-flight write of the previous session. The gateway awaits this BEFORE it
    * adds the player, which is why the world node can build the combat profile synchronously.
@@ -246,7 +246,7 @@ export class ProgressionService {
           if (stored?.classId) return stored.classId;
           const classId = ask ?? DEFAULT_CLASS;
           const next: ProgressRecord = stored
-            ? { ...stored, classId, version: stored.version + 1 } // a record from before D81 gets its class now
+            ? { ...stored, classId, version: stored.version + 1 } // a record from before D82 gets its class now
             : {
                 ...newRecord(
                   characterId,

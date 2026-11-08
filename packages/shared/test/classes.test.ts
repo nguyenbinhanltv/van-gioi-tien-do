@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_CLASS, PATHS, classWireId, parseClass, pathOfClassWireId } from '../src/index.js';
 
-describe('class wire ids (D81)', () => {
+describe('class wire ids (D82)', () => {
   it('are the 1-based position in PATHS and round-trip', () => {
     expect(PATHS.map(classWireId)).toEqual([1, 2, 3, 4, 5, 6]);
     for (const p of PATHS) expect(pathOfClassWireId(classWireId(p))).toBe(p);

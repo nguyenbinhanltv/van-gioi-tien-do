@@ -51,8 +51,8 @@ export interface ProgressRecord {
   /** optimistic-concurrency version, incremented by every successful save */
   readonly version: number;
   /**
-   * Class (Đạo Lộ, `characters.class_id`, D81): decided ONCE at creation by the first login that names one, never changed by a later
-   * hello. Absent on records written before D81: they are given a class by the next login (`resolveClass`).
+   * Class (Đạo Lộ, `characters.class_id`, D82): decided ONCE at creation by the first login that names one, never changed by a later
+   * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
 }

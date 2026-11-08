@@ -1,5 +1,5 @@
 /**
- * Class picker (D81): a small DOM overlay shown before the first online login of an account. The class is a character property the
+ * Class picker (D82): a small DOM overlay shown before the first online login of an account. The class is a character property the
  * SERVER keeps (the first login that names one creates the character; later logins ignore what the client asks for), so this
  * only decides what we ask for. The choice is remembered per server + account so the picker does not appear again.
  */

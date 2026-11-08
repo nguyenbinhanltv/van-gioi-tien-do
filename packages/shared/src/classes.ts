@@ -1,5 +1,5 @@
 /**
- * Class ids on the wire (D81). The six classes ("Đạo Lộ", docs/11) are the `PathId`s of the skill data; their wire id is the 1-based
+ * Class ids on the wire (D82). The six classes ("Đạo Lộ", docs/11) are the `PathId`s of the skill data; their wire id is the 1-based
  * position in `PATHS` (so a new class appended there gets the next id and old ids never change). 0 means "unknown / not a player class"
  * (monsters and NPCs, and the value old servers sent for players).
  */

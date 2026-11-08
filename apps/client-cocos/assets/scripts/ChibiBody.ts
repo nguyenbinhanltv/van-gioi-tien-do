@@ -32,7 +32,7 @@ export const CHIBI_CLASSES: readonly ChibiClass[] = [
 ];
 /** The five authored directions; W/SW/NW are always the mirror of E/SE/NE (D14). */
 const AUTHORED: readonly Direction[] = ['E', 'SE', 'S', 'NE', 'N'];
-/** Chibi class id of each playable class path (D81): the server decides the class, the client only maps it to art. */
+/** Chibi class id of each playable class path (D82): the server decides the class, the client only maps it to art. */
 const CHIBI_OF_PATH: Readonly<Record<string, string>> = {
   kiem: 'kiem-tu',
   phap: 'phap-tu',

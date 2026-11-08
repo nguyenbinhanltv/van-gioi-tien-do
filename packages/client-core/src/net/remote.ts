@@ -34,7 +34,7 @@ export interface RemoteEntity {
   entityId: number;
   /** 0 player, 1 monster, 2 npc ... (EnterEntity.kind) */
   kind: number;
-  /** EnterEntity.defId: monster / NPC definition id, or for a player (kind 0) its class wire id 1..6 (D81; 0 = unknown) */
+  /** EnterEntity.defId: monster / NPC definition id, or for a player (kind 0) its class wire id 1..6 (D82; 0 = unknown) */
   defId: number;
   anim: number;
   /** 0-7, @vgtd/shared DIRECTIONS order */

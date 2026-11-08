@@ -6,7 +6,7 @@
  *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
  *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":4,"protocolMax":4,"token":"...","classId"?}
- *                       `classId` (D81, optional): class path id or wire id; used only when the character does not exist yet (the stored
+ *                       `classId` (D82, optional): class path id or wire id; used only when the character does not exist yet (the stored
  *                       class wins afterwards); an invalid value is refused with BadMessage
  *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol","mapTiles","classId",...}
  *                       afterwards: binary @vgtd/protocol frames only.
@@ -145,7 +145,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
       // single-use secret for the NEXT connection of this session, valid while the entity is held after a drop
       resumeToken: resumeToken ?? null,
       resumeHoldMs: world.resumeHoldMs,
-      // class of the character as the server holds it (D81): the client builds its hotbar and body from THIS, not from what it asked for
+      // class of the character as the server holds it (D82): the client builds its hotbar and body from THIS, not from what it asked for
       classId: world.classWireIdOf(entityId),
     });
     const helloTimer = setTimeout(() => {
@@ -162,7 +162,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           protocolMin?: unknown;
           protocolMax?: unknown;
           token?: unknown;
-          /** D81: class path id or wire id the player asks for; only used when the character does not exist yet */
+          /** D82: class path id or wire id the player asks for; only used when the character does not exist yet */
           classId?: unknown;
           resume?: { entityId?: unknown; token?: unknown } | null;
         };
@@ -215,7 +215,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           return closeWith(ErrorCode.BadMessage, 'bad class');
         joining = true;
         void (async () => {
-          // the class is a stored character property (D81): resolve it BEFORE the synchronous refuse / replace / add sequence below, so
+          // the class is a stored character property (D82): resolve it BEFORE the synchronous refuse / replace / add sequence below, so
           // that sequence keeps its existing atomicity (no await between replacing the old session and adding the new one)
           let classPath: PathId = parseClass(hello.classId) ?? DEFAULT_CLASS;
           if (world.progression) {

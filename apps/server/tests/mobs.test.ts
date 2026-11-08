@@ -402,7 +402,7 @@ describe('AOI replicates mobs', () => {
     const again = c.msgs.slice(before).flatMap((m) => (m.type === 'aoi_enter' ? m.entities : []));
     expect(again.some((e) => e.entityId === victim.entityId)).toBe(true);
   });
-  it('a node without mobs behaves as before (no monsters; a player carries its class wire id as defId, D81)', () => {
+  it('a node without mobs behaves as before (no monsters; a player carries its class wire id as defId, D82)', () => {
     const n = new WorldNode({ seed: SEED, mapTiles: 160, spawn: { i0: 78, j0: 78, side: 4 } });
     const c = new Fake();
     n.addPlayer(c, 'a');

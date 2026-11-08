@@ -1,4 +1,4 @@
-// Headless smoke test of CLASS SELECTION on the wire (D81): two browser pages pick different classes through the real picker and see each
+// Headless smoke test of CLASS SELECTION on the wire (D82): two browser pages pick different classes through the real picker and see each
 // other with the right chibi; the real Cocos web build against the real dev server.
 //
 //   npm run class:online -w client-cocos -- [--skip-build] [--out <dir>]

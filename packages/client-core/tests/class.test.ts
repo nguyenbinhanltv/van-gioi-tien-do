@@ -3,7 +3,7 @@ import { TileGrid } from '@vgtd/sim';
 import { encode, type Message } from '@vgtd/protocol';
 import { NetClient, type NetDeps, type SocketLike } from '@vgtd/client-core';
 
-/** Class selection on the client side of the wire (D81): hello classId, hello_ack classId, EnterEntity.defId of players. */
+/** Class selection on the client side of the wire (D82): hello classId, hello_ack classId, EnterEntity.defId of players. */
 class FakeSocket implements SocketLike {
   static last: FakeSocket;
   static ackClass: number | undefined = undefined;

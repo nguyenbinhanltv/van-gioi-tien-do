@@ -14,7 +14,7 @@ import {
 } from '../src/index.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
 
-/** Class selection on the wire (D81): hello `classId`, the stored class wins, defId carries it to other players, combat uses it. */
+/** Class selection on the wire (D82): hello `classId`, the stored class wins, defId carries it to other players, combat uses it. */
 const FAST = { N: 1024, r: 8, p: 1 };
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 let srv: RunningServer | undefined;
@@ -194,7 +194,7 @@ describe('ProgressionService.resolveClass', () => {
     expect(all[0]).toBe(PATHS[0]);
     expect(store.writes).toBe(1);
   });
-  it('a record written before D81 (no class) gets its class from the next login, once', async () => {
+  it('a record written before D82 (no class) gets its class from the next login, once', async () => {
     const store = new InMemoryProgressionStore();
     const legacy: ProgressRecord = {
       ...newRecord('old', { type: 'tap_tam', elements: ['kim', 'moc', 'thuy'], mutation: null }),
