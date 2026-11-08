@@ -53,7 +53,13 @@ import {
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
-import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
+import {
+  CombatSystem,
+  MobAttackSystem,
+  type AimedInput,
+  type CombatOptions,
+  type CombatResult,
+} from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
 
@@ -281,6 +287,8 @@ export class WorldNode {
   readonly progression: ProgressionService | undefined;
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
+  /** Mobs in chase hurt their target (D86); null without mobs + combat or with `combat.mobAttacks: false`. */
+  readonly mobAttacks: MobAttackSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
   /** inventory + drop sink (D77); null when the node runs without one */
@@ -354,6 +362,10 @@ export class WorldNode {
             : opts.combat.onDrops,
         })
       : null;
+    this.mobAttacks =
+      this.combat && this.mobs && opts.combat?.mobAttacks !== false
+        ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
+        : null;
   }
 
   // ------------------------------------------------------------------ players
@@ -665,6 +677,8 @@ export class WorldNode {
     }
     // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
     if (this.mobs) this.world = this.mobs.step(this.world);
+    // mob attacks resolve after the AI moved the mobs: telegraphs start / land on the new positions
+    if (this.mobAttacks) this.world = this.mobAttacks.step(this.world).world;
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);

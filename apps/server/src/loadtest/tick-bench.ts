@@ -2,7 +2,7 @@
  * In-process World Node tick benchmark (CLI): the cost of one tick (sim step + AOI + snapshot encode) at 100-300 players, without the
  * noise of sockets and a shared dev machine.
  *
- *   npm run bench:tick -w @vgtd/server -- [--players 200] [--ticks 600] [--area 40] [--mobs 150] [--runs 3] [--no-combat] [--hash] [--json]
+ *   npm run bench:tick -w @vgtd/server -- [--players 200] [--ticks 600] [--area 40] [--mobs 150] [--runs 3] [--no-combat] [--no-mob-attacks] [--hash] [--json]
  *
  * Reports, per run: mean CPU ms per tick (process CPU time, not inflated when the process is descheduled), wall ms per tick (mean /
  * p50 / p99 / min), the phase split, and the bytes the world sent (bandwidth must not change when the code is optimised). Contention on
@@ -26,6 +26,7 @@ const opts = {
   mobs: num('mobs', 150),
   hash: process.argv.includes('--hash'),
   combat: !process.argv.includes('--no-combat'),
+  mobAttacks: !process.argv.includes('--no-mob-attacks'),
 };
 const runs = num('runs', 3);
 const asJson = process.argv.includes('--json');

@@ -93,4 +93,6 @@ export interface CombatOptions {
   respawnPoint?: (id: number) => { i: number; j: number };
   /** Respawn delay override in ms (default `COMBAT_RULES.RESPAWN_PVE_MS`). */
   respawnDelayMs?: number;
+  /** Mobs in `chase` attack their target (D86, default on when the node has mobs). Set false for a node whose mobs should only walk. */
+  mobAttacks?: boolean;
 }
