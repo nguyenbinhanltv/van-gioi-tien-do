@@ -401,6 +401,7 @@ export class MobManager {
         tick,
         TICK_MS,
         this.rng,
+        s.threat.has(s.brain.target),
       );
       this.rng = d.rng;
       // a chase that ended (lost / leash: chase -> return, or on to idle in the same tick) forgets all threat, so the mob

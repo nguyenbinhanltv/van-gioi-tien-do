@@ -69,6 +69,9 @@ export class TouchController {
   /** Khóa 8 hướng isometric (tùy chọn trong Cài đặt). */
   eightWay = false;
 
+  /** Camera zoom hiện tại: kéo nhắm cùng số px màn hình đi ít ô hơn khi phóng to (tilesPerPixel là ở zoom 1). */
+  aimZoom = 1;
+
   constructor(private readonly player: PlayerLocator, private readonly elementOrigin: () => Vec2) {}
 
   setLayout(l: TouchLayout): void { this.layout = l; }
@@ -194,7 +197,7 @@ export class TouchController {
     // Kéo để nhắm: hướng kéo trên màn hình -> hướng trong không gian ô, độ dài kéo -> tầm
     const dx = p.current.x - p.origin.x, dy = p.current.y - p.origin.y;
     const dir = screenDirToTileDir(dx, dy);
-    const range = Math.hypot(dx, dy) * this.layout!.tilesPerPixel;
+    const range = Math.hypot(dx, dy) * this.layout!.tilesPerPixel / (this.aimZoom > 0 ? this.aimZoom : 1);
     const pos = this.player.position();
     this.pendingCasts.push({ slot, aimTile: { i: pos.i + dir.i * range, j: pos.j + dir.j * range } });
   }

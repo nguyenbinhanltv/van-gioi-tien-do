@@ -4,6 +4,7 @@ export * from './input/IsoPathfinder.js';
 export * from './input/PointerController.js';
 export * from './input/TouchController.js';
 export * from './input/InputManager.js';
+export * from './camera/ZoomController.js';
 export * from './ui/AnchorLayout.js';
 export * from './ui/InventoryInteraction.js';
 export * from './ui/ProgressionView.js';

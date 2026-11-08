@@ -151,6 +151,48 @@ describe('threat table (D83)', () => {
     expect(m.info(id)!.threat).toEqual([{ id: 1, value: 50 }]);
   });
 
+  it('an attacker beyond loseRadius (between loseRadius and skill range) still pulls the mob and is not dropped while it holds threat', () => {
+    const { m, id, w: w0 } = single();
+    const home = m.info(id)!.home;
+    const far = ai.loseRadius + 3; // 12 tiles: outside aggro (6) and lose (9) radius, inside the leash (15) and forget (24) radius
+    expect(far).toBeGreaterThan(ai.loseRadius);
+    expect(far).toBeLessThan(MOB_THREAT.forgetRadius);
+    let w = put(w0, 1, home.i + far, home.j);
+    m.onDamage(id, 1, 80);
+    const d0 = Math.hypot(w.entities.find((e) => e.id === id)!.i - (home.i + far), 0);
+    for (let t = 0; t < 40; t++) {
+      w = advance(m, w);
+      if (t % 5 === 4) m.onDamage(id, 1, 10); // the attacker keeps hitting from range
+      expect(m.info(id)!.state).toBe('chase'); // never sent home by loseRadius
+      expect(m.info(id)!.target).toBe(1);
+    }
+    const mob = w.entities.find((e) => e.id === id)!;
+    expect(Math.abs(mob.i - (home.i + far))).toBeLessThan(d0 - 3); // it closed in on the attacker
+    expect(m.info(id)!.threat[0]!.id).toBe(1);
+  });
+
+  it('without threat the same distance still ends a proximity chase (loseRadius unchanged); the leash still ends a threat chase', () => {
+    const { m, id, w: w0 } = single();
+    const home = m.info(id)!.home;
+    // proximity chase: a player at 5 tiles pulls the mob, then stands beyond loseRadius: the mob gives up
+    let w = put(w0, 1, home.i + ai.aggroRadius - 1, home.j);
+    w = run(m, w, 12);
+    expect(m.info(id)!.state).toBe('chase');
+    expect(m.info(id)!.threat).toHaveLength(0);
+    w = move(w, 1, home.i + ai.loseRadius + 14, home.j); // well beyond loseRadius from the mob
+    run(m, w, 3);
+    expect(m.info(id)!.state).not.toBe('chase');
+    // threat chase: the attacker runs far past the leash radius: the chase ends and the table is cleared
+    const s2 = single();
+    let w2 = put(s2.w, 2, home.i + 3, home.j);
+    s2.m.onDamage(s2.id, 2, 50);
+    w2 = run(s2.m, w2, 3);
+    w2 = move(w2, 2, home.i + ai.leashRadius + 20, home.j);
+    run(s2.m, w2, 160); // it runs after the attacker to the leash radius, then gives up
+    expect(s2.m.info(s2.id)!.state).not.toBe('chase');
+    expect(s2.m.info(s2.id)!.threat).toHaveLength(0);
+  });
+
   it('chases the highest threat, switches only past the hysteresis ratio, ties go to the lowest id', () => {
     const { m, id, w: w0 } = single();
     const home = m.info(id)!.home;
@@ -189,7 +231,7 @@ describe('threat table (D83)', () => {
     m.onDamage(id, 2, 40);
     w = run(m, w, 2);
     w = move(w, 2, home.i + ai.leashRadius + 30, home.j);
-    w = run(m, w, 6);
+    w = run(m, w, 160); // the mob runs after the attacker until it reaches the leash radius, then gives up
     expect(['return', 'idle']).toContain(m.info(id)!.state); // gave up (it is already near home, so it may be idle again)
     expect(m.info(id)!.threat).toHaveLength(0);
     w = run(m, w, 60);
