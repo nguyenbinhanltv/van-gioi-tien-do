@@ -246,7 +246,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           clearTimeout(helloTimer);
           try {
             transport = makeTransport();
-            entityId = world.addPlayer(transport, accountId, classPath);
+            entityId = world.addPlayer(transport, accountId, classPath, auth.usernameOf(accountId));
             world.stampSession(entityId, { sessionId: authed!.sessionId, version: authed!.version });
           } catch (e) {
             if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');

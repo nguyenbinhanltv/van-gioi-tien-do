@@ -9,3 +9,4 @@ export * from './world/inventory/index.js';
 export * from './gateway.js';
 export * from './server.js';
 export * from './progression/index.js';
+export * from './chat/index.js';

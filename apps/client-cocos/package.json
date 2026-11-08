@@ -23,7 +23,8 @@
     "combat:online": "node scripts/combat-online-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",
     "progression:online": "node scripts/progression-online-smoke.mjs",
-    "class:online": "node scripts/class-online-smoke.mjs"
+    "class:online": "node scripts/class-online-smoke.mjs",
+    "chat:online": "node scripts/chat-online-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",

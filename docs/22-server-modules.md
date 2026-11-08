@@ -159,6 +159,8 @@ Chi tiết ở [26](26-kinh-te-ledger.md). Phần module:
 | Ngân sách   | ≤ 0,2 ms/tin; fan-out theo kênh, không đi qua tick                                                                                                                                                 |
 | Lỗi         | DB ghi lỗi → giữ trong hàng đợi (tối đa 10.000 tin), bỏ cũ nhất và đếm metric; thông điệp quá 256 ký tự bị từ chối; nén `permessage-deflate` chỉ bật cho chat ([08 §8](08-server-architecture.md)) |
 
+> **[Cập nhật D87]** Đã hiện thực trong MVP ở `apps/server/src/chat` (`ChatService`): kênh Thế giới / Vùng / Thì thầm, làm sạch, lọc từ **placeholder**, token bucket theo tài khoản, mute, vòng đệm lịch sử 200 dòng. Chưa có: kênh Tông môn / Đội / Hệ thống, lưu bền tin riêng 30 ngày, Aho–Corasick và danh sách từ thật (OPEN-ITEMS 20).
+
 ## 8. Platform (dùng chung)
 
 `Clock` (đồng hồ rìa), `Logger` (JSON có `traceId`, `accountId` đã băm), `Metrics`, `Flags` (cờ tính năng – [27 §7](27-van-hanh-quan-sat.md)), `EventBus`, `IdGen` (UUIDv7 – [23 §3](23-mo-hinh-du-lieu.md)), `Config` (kiểm tra bằng schema khi khởi động; lỗi → không khởi động).

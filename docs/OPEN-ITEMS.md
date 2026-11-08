@@ -453,3 +453,16 @@ Còn mở / lưu ý:
 3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
 4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
 5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).
+
+## 20. Chat (D87, worker35): còn mở
+
+- **Danh sách từ cấm thật**: hiện chỉ có 2 từ GIẢ (`placeholder`) để chứng minh cơ chế; cần chủ dự án / kiểm duyệt viên cung cấp danh sách tiếng Việt (có biến thể không dấu, leetspeak, ký tự tách) và chính sách che hay chặn. Che bằng `*` theo ký tự gốc là mặc định tạm.
+- **Lưu bền tin riêng (30 ngày)** và nhật ký kiểm toán (docs/22 §7, docs/25): chưa có bảng `chat_messages`; thì thầm hiện chỉ ở RAM. Cần chính sách riêng tư (docs/23 §7) trước khi lưu.
+- **Báo cáo / chặn người chơi, vi phạm lặp lại**: chưa có `report`, danh sách chặn phía người nhận, tự mute khi spam lặp; `mute()` mới là API nội bộ, chưa có lệnh GM hay tự động.
+- **Hạn mức là đề xuất** (docs/24 §7): Thế giới 1/5 s bùng nổ 2, Vùng và thì thầm 1/2 s bùng nổ 3 (Vùng không có trong bảng nên lấy mức thì thầm). Chưa chặn tin lặp lại giống hệt, chưa có hạn mức theo IP.
+- **Kênh Đội / Tông môn / Hệ thống**: `Party = 4` để dành; Đội cần tính năng tổ đội (docs/10 §7.1), Tông môn cần tông môn NPC. Tin hệ thống (`senderId` 0) chưa dùng.
+- **Vùng = hộp AOI của người gửi**: chưa có khái niệm "vùng bản đồ" (Sơn Môn / Rừng Độc là hai `MapInstance` theo docs/22 §3); khi có nhiều bản đồ, Vùng nên là cả bản đồ.
+- **Link vật phẩm / Shift+click** (docs/05 §tương tác) và **emoji / biểu tượng**: chưa có.
+- **i18n**: chuỗi tiếng Việt của hộp chat và lệnh nằm trong code (`ChatLog.ts`), cùng ghi chú mục 18; tên kênh hiển thị là bản đầu chưa qua biên tập.
+- **Hộp chat là DOM overlay**: không phụ thuộc engine nhưng không nằm trong cây Cocos (không bị camera / zoom chi phối); trên Web/H5 thật cần kiểm với bàn phím ảo che màn hình (viewport resize) và IME.
+- **Hàng đợi gửi / ngân sách**: fan-out Thế giới gửi từng người (mã hóa mỗi lần); ngân sách docs/22 §7 (≤ 0,2 ms/tin) chưa đo ở 200 người.

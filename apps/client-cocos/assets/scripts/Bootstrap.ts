@@ -29,6 +29,7 @@ import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
 import { ProgressionHud } from './ProgressionHud';
+import { ChatBox } from './ChatBox';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -80,6 +81,8 @@ export class Bootstrap extends Component {
   private online: OnlineSession | null = null;
   /** tu vi panel (D76), only online: the server owns the progression state */
   private progressionHud: ProgressionHud | null = null;
+  /** chat (D87), only online: the server owns the channels, rate limits and moderation */
+  private chatBox: ChatBox | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -244,8 +247,10 @@ export class Bootstrap extends Component {
       hudRoot,
       this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
-    if (this.online)
+    if (this.online) {
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+      this.chatBox = new ChatBox(this.online.net, this.online.username);
+    }
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
     this.maybeAutotest();
@@ -438,6 +443,7 @@ export class Bootstrap extends Component {
     }
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
+    this.chatBox?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -475,6 +481,7 @@ export class Bootstrap extends Component {
     this.online?.destroy();
     this.combat?.destroy();
     this.progressionHud?.destroy();
+    this.chatBox?.destroy();
     this.bagPanel?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);

@@ -1,0 +1,215 @@
+/**
+ * Chat box (D87, docs/05 "Khung chat"): fixed at the bottom-left, 360 x 200, a log of the last lines and one text input. A DOM overlay on
+ * purpose (a real text input, IME, paste, mobile keyboard); everything it shows is `ChatLog.entries` from client-core, drawn with
+ * `textContent` ONLY (names and lines come from other players: never markup). The server decides everything that matters (sender, rate
+ * limit, mute, filter, whisper target); this only parses what the player types (`/z`, `/w name text`, `/r`, `/help`) and shows the answers.
+ *
+ * Keys: Enter or `/` focuses the input (the `/` starts a command), Enter sends, Esc leaves the box. While the input has focus none of its
+ * key events reach the game (a typed "m" must not toggle meditation, "b" the bag, digits the hotbar, WASD walks). On small / touch screens
+ * the box folds into a 2-line strip above the bottom edge (docs/05) and unfolds when tapped.
+ */
+import { core } from './vendor/vgtd.mjs';
+
+const WIDTH = 360;
+const HEIGHT = 200;
+const STRIP_HEIGHT = 44;
+/** movement keys that must be released when the box takes the keyboard (their keyup would otherwise never reach the game) */
+const MOVEMENT_CODES = [
+  'KeyW',
+  'KeyA',
+  'KeyS',
+  'KeyD',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ShiftLeft',
+  'ShiftRight',
+];
+
+const TONE_COLOR: Record<string, string> = {
+  world: '#f0f0f5',
+  zone: '#9fe7a3',
+  whisper: '#f2a6ff',
+  system: '#f0dc96',
+  error: '#ff8f85',
+};
+
+export class ChatBox {
+  readonly log: InstanceType<typeof core.ChatLog>;
+  private readonly root: HTMLDivElement;
+  private readonly list: HTMLDivElement;
+  private readonly input: HTMLInputElement;
+  private readonly keyDown: (e: KeyboardEvent) => void;
+  private readonly onResize: () => void;
+  private drawn = -1;
+  private compact = false;
+
+  constructor(
+    private readonly net: InstanceType<typeof core.NetClient>,
+    username: string,
+    parent: HTMLElement = document.body,
+  ) {
+    this.log = new core.ChatLog({ myName: () => username });
+    // a separate hook object: combat replaces `net.events` wholesale when it attaches
+    net.chatEvents = {
+      onChatMsg: (m) => this.log.applyMsg(m),
+      onChatHistory: (m) => this.log.applyHistory(m),
+      onChatResult: (m) => this.log.applyResult(m),
+    };
+
+    const root = document.createElement('div');
+    root.id = 'vgtd-chat';
+    Object.assign(root.style, {
+      position: 'fixed',
+      left: '8px',
+      bottom: '8px',
+      width: `${WIDTH}px`,
+      maxWidth: 'calc(100vw - 16px)',
+      height: `${HEIGHT}px`,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      font: '13px/1.35 sans-serif',
+      textAlign: 'left', // the page CSS centres text
+      color: TONE_COLOR.world,
+      zIndex: '500',
+      pointerEvents: 'none', // clicks on the log fall through to the game (click-to-move); only the input takes them
+    } as Partial<CSSStyleDeclaration>);
+    const list = document.createElement('div');
+    list.id = 'vgtd-chat-log';
+    Object.assign(list.style, {
+      flex: '1 1 auto',
+      minHeight: '0',
+      overflow: 'hidden',
+      padding: '4px 6px',
+      background: 'rgba(8,10,18,0.45)',
+      borderRadius: '6px 6px 0 0',
+      textShadow: '0 1px 2px #000',
+      wordBreak: 'break-word',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+    } as Partial<CSSStyleDeclaration>);
+    const input = document.createElement('input');
+    input.id = 'vgtd-chat-input';
+    input.type = 'text';
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+    input.maxLength = 256;
+    input.placeholder = 'Enter để chat · /help';
+    Object.assign(input.style, {
+      flex: '0 0 auto',
+      pointerEvents: 'auto',
+      boxSizing: 'border-box',
+      width: '100%',
+      padding: '5px 8px',
+      font: '13px sans-serif',
+      color: '#f0f0f5',
+      background: 'rgba(8,10,18,0.75)',
+      border: '1px solid #556',
+      borderRadius: '0 0 6px 6px',
+      outline: 'none',
+    } as Partial<CSSStyleDeclaration>);
+    root.append(list, input);
+    parent.appendChild(root);
+    this.root = root;
+    this.list = list;
+    this.input = input;
+
+    // nothing typed in the box may reach the game's window-level hotkeys
+    const stop = (e: Event): void => e.stopPropagation();
+    input.addEventListener('keydown', (e) => {
+      stop(e);
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        this.submit();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        input.value = ''; // Esc cancels what was typed
+        input.blur();
+      }
+    });
+    input.addEventListener('keyup', stop);
+    input.addEventListener('keypress', stop);
+    input.addEventListener('focus', () => this.onFocus());
+    input.addEventListener('blur', () => this.layout());
+    // tapping the folded strip opens it (the strip itself lets clicks through; this is for the strip's own area on touch screens)
+    list.addEventListener('pointerdown', () => {
+      if (this.compact) input.focus();
+    });
+
+    // Enter or "/" (outside any text field) takes the keyboard; the box is the only thing that listens for them
+    this.keyDown = (e) => {
+      if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'Enter' || e.key === '/') {
+        e.preventDefault();
+        this.focus(e.key === '/' ? '/' : '');
+      }
+    };
+    window.addEventListener('keydown', this.keyDown);
+    this.onResize = () => this.layout();
+    window.addEventListener('resize', this.onResize);
+    this.layout();
+    this.log.system('Chat: Enter để gõ, /help để xem lệnh.');
+
+    // automation hook (scripts/chat-online-smoke.mjs): read / drive the box without touching the DOM
+    (globalThis as unknown as Record<string, unknown>).__vgtdChat = {
+      lines: () => this.log.entries.map((e) => ({ tone: e.tone, text: e.text })),
+      say: (raw: string) => this.log.submit(raw, (m) => this.net.sendChat(m)),
+      focused: () => document.activeElement === this.input,
+      compact: () => this.compact,
+    };
+  }
+
+  /** Per frame: redraw only when the log changed. */
+  update(): void {
+    if (this.drawn === this.log.version) return;
+    this.drawn = this.log.version;
+    const shown = this.compact && document.activeElement !== this.input ? 2 : 14;
+    const frag = document.createDocumentFragment();
+    for (const e of this.log.entries.slice(-shown)) {
+      const row = document.createElement('div');
+      row.textContent = e.text; // text only, never markup
+      row.style.color = TONE_COLOR[e.tone] ?? TONE_COLOR.world!;
+      frag.appendChild(row);
+    }
+    this.list.replaceChildren(frag);
+  }
+
+  focus(prefill = ''): void {
+    this.input.focus();
+    if (prefill) this.input.value = prefill;
+  }
+
+  private submit(): void {
+    const raw = this.input.value;
+    this.input.value = '';
+    this.log.submit(raw, (m) => this.net.sendChat(m));
+    this.input.blur(); // back to playing; Enter again to continue the conversation
+  }
+
+  private onFocus(): void {
+    // keys held while the box took the keyboard would never see their keyup: release the movement keys explicitly
+    for (const code of MOVEMENT_CODES) window.dispatchEvent(new KeyboardEvent('keyup', { code, key: code }));
+    this.layout();
+  }
+
+  /** Small or touch screens: a 2-line strip until the player taps / focuses it (docs/05). */
+  private layout(): void {
+    const touch = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
+    this.compact = touch || window.innerWidth < 700;
+    const open = !this.compact || document.activeElement === this.input;
+    this.root.style.height = `${open ? HEIGHT : STRIP_HEIGHT}px`;
+    this.list.style.pointerEvents = this.compact ? 'auto' : 'none';
+    this.drawn = -1; // the number of visible lines may have changed
+  }
+
+  destroy(): void {
+    window.removeEventListener('keydown', this.keyDown);
+    window.removeEventListener('resize', this.onResize);
+    this.root.remove();
+  }
+}

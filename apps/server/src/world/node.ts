@@ -31,6 +31,7 @@ import {
   type SelfVitals,
   selfStateOf,
   snapshotEntityOf,
+  type ChatLine,
   type EnterEntity,
   type Message,
   type SnapshotEntity,
@@ -56,6 +57,7 @@ import {
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
+import type { ChatService } from '../chat/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
@@ -189,6 +191,8 @@ export interface WorldNodeOptions {
   maxVisible?: number;
   /** tu vi / breakthrough module (D76); absent = progression messages are rejected as unexpected */
   progression?: ProgressionService;
+  /** chat module (D87): World / Zone / Whisper channels; absent = chat messages are rejected as unexpected */
+  chat?: ChatService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -284,6 +288,12 @@ export class WorldNode {
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
+  readonly chat: ChatService | undefined;
+  /**
+   * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
+   * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
+   */
+  private readonly chatHistoryDue = new Map<number, ChatLine[]>();
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
@@ -307,6 +317,14 @@ export class WorldNode {
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
     this.progression = opts.progression;
+    this.chat = opts.chat;
+    this.chat?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+    });
     this.progression?.attach({
       isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
       tickOf: () => this.world.tick,
@@ -387,7 +405,13 @@ export class WorldNode {
   }
 
   /** `classPath`: the character's class (D82), resolved by the gateway from the stored character (`ProgressionService.resolveClass`). */
-  addPlayer(transport: ClientTransport, accountId: string, classPath: PathId = DEFAULT_CLASS): number {
+  addPlayer(
+    transport: ClientTransport,
+    accountId: string,
+    classPath: PathId = DEFAULT_CLASS,
+    /** chat / whisper name (the unique username); defaults to a short form of the account id */
+    displayName: string = accountId.slice(0, 12),
+  ): number {
     const id = this.allocateId();
     const at = this.spawnPoint();
     const stats = this.combat?.addPlayer(id, classPath);
@@ -424,6 +448,11 @@ export class WorldNode {
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
+    if (this.chat) {
+      this.chat.join({ entityId: id, accountId, name: displayName });
+      const lines = this.chat.history();
+      if (lines.length) this.chatHistoryDue.set(id, lines);
+    }
     return id;
   }
 
@@ -456,6 +485,8 @@ export class WorldNode {
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
+    this.chat?.leave(id);
+    this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
@@ -633,6 +664,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
         break;
+      case 'chat_send':
+        if (!this.chat) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.chat.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -685,6 +722,7 @@ export class WorldNode {
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
+    if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -730,6 +768,15 @@ export class WorldNode {
         this.metrics.inventorySendErrors++;
       }
     }
+  }
+
+  /** The World channel's recent lines go to each newly joined player once (not before the gateway's `hello_ack` is out: next tick). */
+  private sendChatHistory(): void {
+    for (const [id, lines] of this.chatHistoryDue) {
+      const c = this.clients.get(id);
+      if (c && !c.dead) this.send(c, { type: 'chat_history', lines });
+    }
+    this.chatHistoryDue.clear();
   }
 
   /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
