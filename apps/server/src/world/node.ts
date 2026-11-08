@@ -378,6 +378,7 @@ export class WorldNode {
       ? new CombatSystem(this.ctx, {
           seed,
           respawnPoint: () => this.spawnPoint(),
+          isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
           onDrops: sink
