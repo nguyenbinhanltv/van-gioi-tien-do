@@ -21,7 +21,8 @@
     "test": "vitest run test",
     "combat:smoke": "node scripts/combat-smoke.mjs",
     "combat:online": "node scripts/combat-online-smoke.mjs",
-    "bag:smoke": "node scripts/bag-smoke.mjs"
+    "bag:smoke": "node scripts/bag-smoke.mjs",
+    "progression:online": "node scripts/progression-online-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",

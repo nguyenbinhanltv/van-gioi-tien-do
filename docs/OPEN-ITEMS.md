@@ -396,6 +396,14 @@ Còn mở / lưu ý:
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).
 
+## 18. HUD tu luyện (D76, worker35): chữ giao diện và bố cục còn mở
+
+- **Chuỗi tiếng Việt** (tên cảnh giới `REALM_NAMES` / `SUB_STAGE_NAMES` trong `@vgtd/shared`, các câu từ chối và toast trong `client-core/ui/ProgressionView.ts`) là bản đầu, chưa qua biên tập viên; chưa có hệ khóa i18n (docs/21), nên chuỗi nằm trong code. Cần chốt thuật ngữ (vd. "đả tọa" / "đột phá tiểu cảnh").
+- **Phím tắt**: `M` đả tọa và `N` đột phá là mặc định kỹ thuật; docs/21 chưa có bảng phím và `B` thuộc túi đồ. Cần bảng phím thống nhất (kể cả cảm ứng: hiện chỉ có nút trên bảng).
+- **Bố cục**: bảng cố định phải-trên 300 × 92; chưa có thiết kế HUD chung (docs/21 §HUD), nên vị trí các bảng (túi đồ phải-giữa) là thỏa thuận tạm giữa các worker.
+- **Không dự đoán phía client**: thanh tu vi chỉ nhảy theo `char_state` (~1 Hz khi đang ngồi); nếu muốn thanh mượt cần nội suy tốc độ `Absorb` (chưa có trên dây).
+- **Tiểu cảnh thất bại** hiện chỉ có toast (không hiệu ứng); không có hiển thị tỉ lệ trước khi bấm (server mới trả `chance` sau khi roll).
+
 ## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
 
 1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).
