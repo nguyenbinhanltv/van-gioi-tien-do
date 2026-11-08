@@ -19,8 +19,9 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
-import { CombatUi, createMockBackend } from './Combat';
+import { CombatUi, createMockBackend, pathOfClass } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -31,6 +32,7 @@ import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
 import { ProgressionHud } from './ProgressionHud';
+import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -74,6 +76,8 @@ export class Bootstrap extends Component {
   private bagPanel: BagPanel | null = null;
   /** owner-provided Gemini props + item icons (null = placeholders) */
   private propArt: PropArt | null = null;
+  /** INTERIM mob standees (concept art) */
+  private mobArt: MobArt | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -84,6 +88,8 @@ export class Bootstrap extends Component {
   private online: OnlineSession | null = null;
   /** tu vi panel (D76), only online: the server owns the progression state */
   private progressionHud: ProgressionHud | null = null;
+  /** first-session objective checklist (D84), online only; its own file, fed from here */
+  private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -148,6 +154,7 @@ export class Bootstrap extends Component {
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
+    this.mobArt = this.propArt ? new MobArt(this.propArt) : null;
     if (this.propArt) {
       // courtyard + biome scatter around the spawn (L3 objects are not chunk-streamed yet; every one is sorted each frame)
       const placed = placeProps({
@@ -256,10 +263,16 @@ export class Bootstrap extends Component {
     this.hud.note = `tier ${this.world.tier}`;
     // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
     if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
+    // created before the bag and (later) the combat HUD so both draw above it; fed with the player's own kills in applyServerClass
+    if (this.online && firstSessionRequested())
+      this.firstSession = new FirstSessionHud(hudRoot, art, this.online.net, map.width, this.online.username);
     if (this.combatOn && !this.online) {
       // offline: the local mock combat runs for the class the player picked with ?class= (or the default body class)
+      const at = { i: spawn.i + 0.5, j: spawn.j + 0.5 };
       this.makeCombatUi(
-        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
+        params.get('mobdemo') !== null
+          ? createMobDemoBackend(this.chibi.classInfo.id, pathOfClass, at, walkable, rng(11)) // all 14 mobs, for art review
+          : createMockBackend(this.chibi.classInfo.id, at, walkable, rng(11)),
       );
     }
     // online + combat: the HUD is built once the server has told us this character's class (`applyServerClass`, D82)
@@ -274,6 +287,7 @@ export class Bootstrap extends Component {
     );
     if (this.online)
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+    this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
     this.maybeAutotest();
@@ -290,6 +304,7 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToUi(x, y),
       (x, y) => this.rig.clientToWorld(x, y),
     );
+    this.combat.mobArt = this.mobArt;
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -320,7 +335,8 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      this.makeCombatUi(sc);
+      // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
+      this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
   }
 
@@ -488,6 +504,7 @@ export class Bootstrap extends Component {
       this.combat?.layout(w, this.canvasUi.contentSize.height);
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
+      this.firstSession?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -496,6 +513,13 @@ export class Bootstrap extends Component {
           ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
           : `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.bagPanel?.update(dt);
+    const ps = this.progressionHud?.view.state;
+    this.firstSession?.update(dt, {
+      pos: this.player.pos,
+      bagOpen: this.bagPanel?.isOpen ?? false,
+      meditating: ps?.meditating ?? false,
+      tuViFraction: ps?.fraction ?? 0,
+    });
     this.hud.update(dt);
   }
 
@@ -505,6 +529,7 @@ export class Bootstrap extends Component {
     this.combat?.destroy();
     this.progressionHud?.destroy();
     this.bagPanel?.destroy();
+    this.firstSession?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);
