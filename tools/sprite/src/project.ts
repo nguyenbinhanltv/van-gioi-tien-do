@@ -197,6 +197,8 @@ export function runProject(
   if (master.width !== CELL_PX || master.height !== CELL_PX) master = resizeImage(master, CELL_PX, CELL_PX);
   const m = measureFigure(master);
   if (!m) throw new Error('the master image is empty');
+  if (project.masterHead?.kind === 'rear-base-ornament' && project.direction !== 'N')
+    throw new Error('rear ornament master is allowed only for N direction projects');
   if (
     (project.masterHead?.kind === 'rear-skull-base' ||
       project.masterHead?.kind === 'rear-crown-shoulder' ||

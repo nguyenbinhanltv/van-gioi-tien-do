@@ -11,7 +11,8 @@ export interface SkullBreadth {
   readonly left: HeadPoint;
   readonly right: HeadPoint;
 }
-export type HeadEvidenceKind = 'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder' | 'rear-crown-shoulder-single';
+export type HeadEvidenceKind =
+  'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder' | 'rear-base-ornament' | 'rear-crown-shoulder-single';
 export interface FrontHeadLandmarks {
   readonly kind?: 'crown-chin';
   readonly crown: HeadPoint;
@@ -42,8 +43,17 @@ export interface RearSingleShoulderLandmarks {
   /** Concrete approved-master occluder: fan, hair or ribbon; a generic hidden/unknown reason is invalid. */
   readonly occluder: string;
 }
+export interface RearOrnamentLandmarks {
+  readonly kind: 'rear-base-ornament';
+  /** Lowest visible point where a fixed rigid head ornament meets hair; never a projected crown. */
+  readonly ornamentAnchor: HeadPoint;
+  /** One reviewed anchor definition, copied unchanged from this direction's locked master. */
+  readonly anchorDefinition: string;
+  readonly skullBase: HeadPoint;
+  readonly breadth: SkullBreadth;
+}
 export type HeadLandmarks =
-  FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearSingleShoulderLandmarks;
+  FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearOrnamentLandmarks | RearSingleShoulderLandmarks;
 export type HeadEvidence = HeadLandmarks & { readonly note: string };
 export interface HeadMeasurement {
   readonly kind?: HeadEvidenceKind;
@@ -62,8 +72,11 @@ export interface HeadMeasurement {
 }
 
 export const headEvidenceKind = (head: HeadLandmarks): HeadEvidenceKind => head.kind ?? 'crown-chin';
+export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
+  return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
+}
 export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
-  if (head.kind === 'rear-skull-base') return head.skullBase;
+  if (head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament') return head.skullBase;
   if (head.kind === 'rear-crown-shoulder-single') return head.shoulderTop;
   if (head.kind === 'rear-crown-shoulder')
     return {
@@ -83,9 +96,13 @@ export function headLandmarkBreadth(head: HeadLandmarks, width: number, height: 
 export function headLandmarkSize(head: HeadLandmarks | undefined, width: number, height: number): number | null {
   if (
     !head ||
-    !['crown-chin', 'rear-skull-base', 'rear-crown-shoulder', 'rear-crown-shoulder-single'].includes(
-      headEvidenceKind(head),
-    )
+    ![
+      'crown-chin',
+      'rear-skull-base',
+      'rear-crown-shoulder',
+      'rear-crown-shoulder-single',
+      'rear-base-ornament',
+    ].includes(headEvidenceKind(head))
   )
     return null;
   if (head.kind !== undefined && head.kind !== 'crown-chin' && 'chin' in head) return null;
@@ -100,6 +117,14 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
     )
       return null;
   }
+  if (
+    head.kind === 'rear-base-ornament' &&
+    ('crown' in head ||
+      'shoulderTop' in head ||
+      typeof head.anchorDefinition !== 'string' ||
+      !head.anchorDefinition.trim())
+  )
+    return null;
   if (head.kind === 'rear-crown-shoulder') {
     const line = head.shoulderTop;
     if (
@@ -111,12 +136,14 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
     )
       return null;
   }
-  const end = headLandmarkEnd(head);
-  if (!validPoint(head.crown, width, height) || !validPoint(end, width, height)) return null;
+  const start = headLandmarkStart(head),
+    end = headLandmarkEnd(head);
+  if (!validPoint(start, width, height) || !validPoint(end, width, height)) return null;
   if (
     (head.kind === 'rear-skull-base' ||
       head.kind === 'rear-crown-shoulder' ||
       head.kind === 'rear-crown-shoulder-single' ||
+      head.kind === 'rear-base-ornament' ||
       head.breadth !== undefined) &&
     headLandmarkBreadth(head, width, height) === null
   )
@@ -129,9 +156,7 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
     if (offset < breadth * 0.25 || offset > breadth * 1.25) return null;
   }
   const size =
-    head.kind === 'rear-crown-shoulder-single'
-      ? end.y - head.crown.y
-      : Math.hypot(head.crown.x - end.x, head.crown.y - end.y);
+    head.kind === 'rear-crown-shoulder-single' ? end.y - head.crown.y : Math.hypot(start.x - end.x, start.y - end.y);
   return size > 0 ? size : null;
 }
 
@@ -161,12 +186,14 @@ export function checkHeadEvidence(
     return governed && (!inBand || reason !== undefined)
       ? failure(
           'head_evidence_missing',
-          'upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note',
+          'upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note',
         )
       : [];
   const image = clip.frames[frame]?.image;
   if (options.masterHead && headEvidenceKind(evidence) !== headEvidenceKind(options.masterHead))
     return failure('head_evidence_kind', 'master/frame must use the same skull measurement kind');
+  if (evidence.kind === 'rear-base-ornament' && clip.direction !== 'N')
+    return failure('head_evidence_direction', 'rear ornament evidence is allowed only for N locked masters');
   if (
     evidence.kind === 'rear-crown-shoulder-single' &&
     options.masterHead?.kind === 'rear-crown-shoulder-single' &&
@@ -187,6 +214,12 @@ export function checkHeadEvidence(
       'head_evidence_invalid',
       'head evidence needs matching valid master/frame skull landmarks, required rear breadth and a reviewed note',
     );
+  if (
+    evidence.kind === 'rear-base-ornament' &&
+    options.masterHead?.kind === 'rear-base-ornament' &&
+    evidence.anchorDefinition.trim() !== options.masterHead.anchorDefinition.trim()
+  )
+    return failure('head_anchor_definition', 'frame must retain the locked master rigid-ornament anchor definition');
   const low = masterSize * (1 - tolerance),
     high = masterSize * (1 + tolerance);
   if (size < low || size > high)
