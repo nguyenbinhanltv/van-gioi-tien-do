@@ -179,6 +179,66 @@ describe('D53 one visible rear shoulder', () => {
     ).toBe('head_evidence_kind');
   });
 
+  it('bounds horizontal offset by skull breadth on master and frame, while accepting the real NE master landmarks', () => {
+    const { clip, options } = fixture();
+    expect(checkHeights(clip, options)[0]).toMatchObject({
+      severity: 'info',
+      headEvidence: { master: { shoulderTop: { x: 161, y: 78 } }, masterBreadthPx: 54, masterSizePx: 62 },
+    });
+    for (const occludedSide of ['left', 'right'] as const) {
+      const sign = occludedSide === 'left' ? 1 : -1;
+      const locked: RearSingleShoulderLandmarks = {
+        ...masterHead,
+        occludedSide,
+        shoulderTop: { x: 138 + sign * 23, y: 78 },
+        occluder: `approved fan and hair hide the ${occludedSide} shoulder`,
+      };
+      const frame: HeadEvidence = {
+        ...head,
+        occludedSide,
+        shoulderTop: { x: 128 + sign * 21, y: 154 },
+        occluder: locked.occluder,
+        note: 'Visible shoulder attachment reviewed, opposite the occluded side',
+      };
+      const current = { ...clip, headEvidence: { 0: frame } },
+        opts = { ...options, masterHead: locked };
+      for (const offset of [13.5, 67.5]) {
+        expect(
+          checkHeights(
+            { ...current, headEvidence: { 0: { ...frame, shoulderTop: { x: 128 + sign * offset, y: 154 } } } },
+            opts,
+          )[0]!.severity,
+        ).toBe('info');
+        expect(
+          checkHeights(current, {
+            ...opts,
+            masterHead: { ...locked, shoulderTop: { x: 138 + sign * offset, y: 78 } },
+          })[0]!.severity,
+        ).toBe('info');
+      }
+      for (const offset of [13.49, 67.51, 82]) {
+        expect(
+          checkHeights(
+            { ...current, headEvidence: { 0: { ...frame, shoulderTop: { x: 128 + sign * offset, y: 154 } } } },
+            opts,
+          )[0],
+        ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+        expect(
+          checkHeights(current, {
+            ...opts,
+            masterHead: { ...locked, shoulderTop: { x: 138 + sign * offset, y: 78 } },
+          })[0],
+        ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+      }
+    }
+    expect(
+      checkHeights({ ...clip, headEvidence: { 0: { ...head, shoulderTop: { x: 220, y: 154 } } } }, options)[0],
+    ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+    expect(
+      checkHeights(clip, { ...options, masterHead: { ...masterHead, shoulderTop: { x: 220, y: 78 } } })[0],
+    ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+  });
+
   it('retains occlusion evidence and master values in reports without editing the approved master', () => {
     const { source, clip } = fixture(),
       dir = mkdtempSync(join(tmpdir(), 'vgtd-single-shoulder-'));

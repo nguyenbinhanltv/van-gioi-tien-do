@@ -366,7 +366,9 @@ master. Prefer D50 when both endpoints are visible. Record `crown`, one visible 
 The size is the positive **vertical** difference `shoulderTop.y - crown.y`, not the diagonal length. Skull breadth remains
 Euclidean. On both master and frame, the visible shoulder must lie strictly opposite `occludedSide` relative to the skull
 midline `(breadth.left.x + breadth.right.x) / 2`: right of it for an occluded left shoulder, left of it for an occluded right
-shoulder. A point on the midline or declared occluded side fails. This side check does not identify shoulder anatomy;
+shoulder. A point on the midline or declared occluded side fails. Its absolute horizontal offset must also be within
+**0.25–1.25 skull breadths**, inclusive, on both master and frame; the real NE master is about0.43 breadths from the
+midline. This placement check does not identify shoulder anatomy;
 source review must still reject hands, fan tips and other convenience points. Both measurements must match the
 same-direction master within the unchanged head tolerance. Coordinates are resized256px
 on the master and aligned256px in motion cells, using clip-local indices. Never project a hidden shoulder/chin/skull base,

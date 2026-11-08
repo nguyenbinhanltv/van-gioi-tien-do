@@ -124,6 +124,9 @@ export function headLandmarkSize(head: HeadLandmarks | undefined, width: number,
   if (head.kind === 'rear-crown-shoulder-single') {
     const midlineX = (head.breadth.left.x + head.breadth.right.x) / 2;
     if (head.occludedSide === 'left' ? head.shoulderTop.x <= midlineX : head.shoulderTop.x >= midlineX) return null;
+    const breadth = headLandmarkBreadth(head, width, height)!,
+      offset = Math.abs(head.shoulderTop.x - midlineX);
+    if (offset < breadth * 0.25 || offset > breadth * 1.25) return null;
   }
   const size =
     head.kind === 'rear-crown-shoulder-single'

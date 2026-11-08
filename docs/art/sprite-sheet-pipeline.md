@@ -434,7 +434,9 @@ Occluder bắt buộc là chuỗi chỉ rõ vật che có `fan`, `hair` hoặc `
 bị lỗi. Định nghĩa phía bị che không được đổi giữa master/ô. Nếu vai còn lại cũng bị che trong ô, báo ô đó, không bịa điểm.
 Trên cả master và ô, `shoulderTop.x` phải nằm đúng phía còn nhìn thấy so với trung tuyến sọ
 `(breadth.left.x + breadth.right.x) / 2`: lớn hơn nếu `occludedSide:left`, nhỏ hơn nếu `occludedSide:right`.
-Điểm nằm trên trung tuyến hoặc phía bị che bị lỗi. Kiểm tra phía không tự nhận dạng giải phẫu vai; người xem nguồn vẫn
+Điểm nằm trên trung tuyến hoặc phía bị che bị lỗi. Trên master và ô, độ lệch ngang tuyệt đối còn phải nằm trong
+**0,25–1,25 lần breadth**, gồm hai biên; master NE thật có tỷ lệ khoảng 0,43. Điểm quá sát trung tuyến hoặc quá xa bị
+`head_evidence_invalid`. Kiểm tra vị trí không tự nhận dạng giải phẫu vai; người xem nguồn vẫn
 phải loại điểm ở bàn tay, đầu quạt hoặc điểm tiện đo khác.
 INFO/review hiện trục dọc, vai còn nhìn thấy, phía/lý do bị che, breadth và giá trị master/ô; foot/canvas và scale giữ nguyên.
 
