@@ -22,7 +22,9 @@ import {
   ProtocolError,
   decode,
   encode,
+  dequantizePos,
   quantizePos,
+  type SelfVitals,
   selfStateOf,
   snapshotEntityOf,
   type EnterEntity,
@@ -30,8 +32,11 @@ import {
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import {
+  ANTICHEAT,
+  type AntiCheatState,
   CastReason,
   TileGrid,
+  budgetMs,
   compileSkills,
   createWorld,
   removeEntity,
@@ -44,9 +49,12 @@ import {
   type SimInput,
   type SimWorld,
 } from '@vgtd/sim';
+import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
-import { CombatSystem, type CombatOptions, type CombatResult } from './combat/index.js';
+import type { Outbound, ProgressionService } from '../progression/service.js';
+import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -96,11 +104,41 @@ interface Last {
   dir: number;
 }
 
+/** Stands in for the transport of a player whose connection dropped and whose entity is being held: everything is discarded. */
+const DETACHED: ClientTransport = { send: () => undefined, close: () => undefined, buffered: () => 0 };
+
+/**
+ * The sim's own sliding rule (docs/08 section 6), applied at the moment of a resume: when the time budget leads the claimed time by
+ * more than `SLIDE_LAG_MS`, pull it back to `claimed + SLIDE_LAG_MS`. The time spent disconnected therefore cannot be banked as a
+ * burst of fast movement, while claimed time, ratio windows, hot windows and the suspicion score carry over untouched.
+ */
+function slideBudget(ac: AntiCheatState, nowMs: number): AntiCheatState {
+  const lag = budgetMs(ac, nowMs) - ac.claimedMs;
+  if (lag <= ANTICHEAT.SLIDE_LAG_MS) return ac;
+  return { ...ac, t0Ms: ac.t0Ms + (lag - ANTICHEAT.SLIDE_LAG_MS) / ANTICHEAT.BUDGET_RATE, lastSlideMs: nowMs };
+}
+
+function newResumeToken(): string {
+  return randomBytes(16).toString('hex');
+}
+function sameToken(a: string, b: unknown): boolean {
+  if (typeof b !== 'string' || b.length !== a.length) return false;
+  return timingSafeEqual(Buffer.from(a), Buffer.from(b));
+}
+
 interface Client {
   id: number;
   accountId: string;
   transport: ClientTransport;
-  inbox: SimInput[];
+  /** single-use secret that lets this player's NEXT connection resume the session; rotated on every (re)connect */
+  resumeToken: string;
+  /** what the gateway authenticated this session with (opaque here): re-validated on a resume, which presents no access token */
+  authStamp: unknown;
+  /** sim time the connection dropped while the entity is held for a resume; null = connected */
+  suspendedAtMs: number | null;
+  inbox: AimedInput[];
+  /** own vitals last sent to this client: they are re-sent only when they change (or on a full / resync snapshot) */
+  lastVitals: SelfVitals | null;
   lastRecvSeq: number | null;
   visible: Map<number, Visible>;
   /** slot -> entity id (0 = free) */
@@ -130,6 +168,8 @@ export interface WorldMetrics {
   kicksBadMessages: number;
   kicksRate: number;
   kicksBackpressure: number;
+  /** `inv_state` sends that threw (state or encode); the world tick carried on */
+  inventorySendErrors: number;
 }
 
 export interface WorldNodeOptions {
@@ -141,12 +181,18 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** tu vi / breakthrough module (D76); absent = progression messages are rejected as unexpected */
+  progression?: ProgressionService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
   playerIdQuarantineMs?: number;
+  /** how long (sim ms) a dropped player's entity is held for a resume; 0 disables resume (default `WORLD_CONFIG.RESUME_HOLD_MS`) */
+  resumeHoldMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
+  /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
+  inventory?: InventoryService;
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -185,6 +231,10 @@ function cellKey(cu: number, cw: number): number {
   return (cu + 1024) * 4096 + (cw + 1024);
 }
 
+function sameVitals(a: SelfVitals | null, b: SelfVitals): boolean {
+  return !!a && a.hp === b.hp && a.hpMax === b.hpMax && a.mp === b.mp && a.mpMax === b.mpMax && a.shield === b.shield;
+}
+
 export class WorldNode {
   world: SimWorld;
   readonly ctx: SimContext;
@@ -201,6 +251,7 @@ export class WorldNode {
     kicksBadMessages: 0,
     kicksRate: 0,
     kicksBackpressure: 0,
+    inventorySendErrors: 0,
   };
   /** duration (ms) of each tick: sim step + AOI + encode + socket writes */
   readonly tickMs: number[] = [];
@@ -212,6 +263,8 @@ export class WorldNode {
   /** released player ids, oldest first, with the sim time from which each may be reused */
   private readonly freeIds: { id: number; reusableAtMs: number }[] = [];
   private readonly idQuarantineMs: number;
+  /** sim ms a dropped player's entity is held (0 = no resume) */
+  readonly resumeHoldMs: number;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
   private readonly maxVisible: number;
@@ -219,10 +272,17 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  readonly progression: ProgressionService | undefined;
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
+  /** inventory + drop sink (D77); null when the node runs without one */
+  readonly inventory: InventoryService | null;
+  /** combat `onDrops` -> `inventory.grantDrops` (needs both `combat` and `inventory`); null otherwise */
+  readonly dropSink: DropSink | null;
+  /** the visible bag (D79): `inv_state` out, `inv_cmd` in; null without an inventory */
+  readonly invSync: InventorySync | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -235,7 +295,25 @@ export class WorldNode {
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    this.progression = opts.progression;
+    this.progression?.attach({
+      isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+      tickOf: () => this.world.tick,
+      // a character's realm / sub-stage (profile loaded, breakthrough done) re-derives its combat stats; `combat` exists by then
+      // (the callback only runs after construction), and an id that already left is a no-op in `setRealm`
+      onStageChange: (id, realm, subRealm) => {
+        if (this.combat) this.world = this.combat.setRealm(this.world, id, realm, subRealm);
+      },
+      onPersistFailure: (id) => {
+        const c = this.clients.get(id);
+        if (c) this.kick(c, ErrorCode.Internal, 'progression storage error');
+      },
+    });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
+    this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
+    this.inventory = opts.inventory ?? null;
+    this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
+    this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -243,12 +321,30 @@ export class WorldNode {
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
+    const mobPort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    // kills fill the killer's bag: combat's `onDrops` feeds the inventory (the caller's own `onDrops` still runs)
+    this.dropSink =
+      opts.combat && this.inventory
+        ? new DropSink({
+            inventory: this.inventory,
+            ownerOf: (entityId) => this.clients.get(entityId)?.accountId,
+            tick: () => this.world.tick,
+            mobs: mobPort,
+          })
+        : null;
+    const sink = this.dropSink;
     this.combat = opts.combat
       ? new CombatSystem(this.ctx, {
           seed,
           respawnPoint: () => this.spawnPoint(),
           ...opts.combat,
-          mobs: opts.combat.mobs ?? this.mobs ?? undefined,
+          mobs: mobPort,
+          onDrops: sink
+            ? (e) => {
+                sink.handle(e);
+                opts.combat?.onDrops?.(e);
+              }
+            : opts.combat.onDrops,
         })
       : null;
   }
@@ -289,11 +385,17 @@ export class WorldNode {
       hp: stats?.hpMax ?? WORLD_CONFIG.PLAYER_MAX_HP,
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
+    this.inventory?.onJoin(accountId);
+    this.invSync?.markDirty(accountId); // the joining client gets its first inv_state this tick
     this.clients.set(id, {
       id,
       accountId,
       transport,
+      resumeToken: newResumeToken(),
+      authStamp: undefined,
+      suspendedAtMs: null,
       inbox: [],
+      lastVitals: null,
       lastRecvSeq: null,
       visible: new Map(),
       slots: new Array<number>(this.maxVisible).fill(0),
@@ -307,6 +409,7 @@ export class WorldNode {
       dead: false,
       stats: emptyStats(),
     });
+    this.progression?.join(id, accountId, this.world.timeMs);
     return id;
   }
 
@@ -327,9 +430,110 @@ export class WorldNode {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    this.inventory?.onLeave(c.accountId);
+    if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
+    void this.progression?.leave(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
+  }
+
+  /** The account that owns a player entity (the gateway needs it after a resume, which presents no access token). */
+  accountOf(id: number): string | undefined {
+    return this.clients.get(id)?.accountId;
+  }
+
+  /** Record what this session was authenticated with (the gateway calls it right after `addPlayer`); see `resumePlayer`. */
+  stampSession(id: number, stamp: unknown): void {
+    const c = this.clients.get(id);
+    if (c) c.authStamp = stamp;
+  }
+
+  /** The secret the gateway hands the client in `hello_ack` so its next connection can resume this session. */
+  resumeTokenOf(id: number): string | undefined {
+    return this.clients.get(id)?.resumeToken;
+  }
+
+  /**
+   * The connection of `id` dropped: keep the entity (same id, standing still, still a target for mobs) for `resumeHoldMs` of sim
+   * time instead of removing it. Combat / progression registrations stay untouched until the hold ends (`removePlayer` then
+   * releases everything and quarantines the id). Returns false when nothing was held (resume disabled, stale `from`): the caller
+   * then removes the player as before.
+   */
+  suspendPlayer(id: number, from: ClientTransport): boolean {
+    const c = this.clients.get(id);
+    if (this.resumeHoldMs <= 0 || !c || c.dead || c.suspendedAtMs !== null || c.transport !== from) return false;
+    c.transport = DETACHED;
+    c.suspendedAtMs = this.world.timeMs;
+    c.inbox.length = 0;
+    this.world = {
+      ...this.world,
+      entities: this.world.entities.map((e) => (e.id === id ? { ...e, pending: [], vi: 0, vj: 0 } : e)),
+    };
+    return true;
+  }
+
+  /**
+   * Re-attach a new connection to a held (or, for a half-open zombie socket, still attached) player when `token` matches.
+   * Same entity, same combat / progression registration (NOT re-added: that would reset profile, shield and alive state).
+   * The client is treated as brand new for the wire (empty AOI -> full snapshot + `aoi_enter`s, vitals re-sent, input numbering
+   * restarts). The anti-cheat accounting is NOT reset (claimed time, ratio windows, hot windows and the suspicion score carry over,
+   * so dropping and resuming never launders a cheater's record); only the sim's sliding rule is applied once (`slideBudget`), so
+   * that idle time cannot be banked as a burst of fast movement either.
+   *
+   * `valid(accountId, authStamp)` re-checks the session the token belongs to (account still exists, token_version unchanged,
+   * session not revoked): a resume must not outlive a revocation. A token that matches but whose session is no longer valid
+   * releases the held entity for good. Returns the rotated token, or null when rejected.
+   */
+  resumePlayer(
+    id: number,
+    token: unknown,
+    transport: ClientTransport,
+    valid?: (accountId: string, authStamp: unknown) => boolean,
+  ): { token: string } | null {
+    const c = this.clients.get(id);
+    if (!c || c.dead || !sameToken(c.resumeToken, token)) return null;
+    if (valid && !valid(c.accountId, c.authStamp)) {
+      if (c.suspendedAtMs === null) c.transport.close(ErrorCode.Unauthorized, 'session revoked');
+      this.removePlayer(id);
+      return null;
+    }
+    if (c.suspendedAtMs === null) c.transport.close(ErrorCode.Kicked, 'resumed elsewhere'); // the old socket is dead weight
+    const now = this.world.timeMs;
+    c.transport = transport;
+    c.suspendedAtMs = null;
+    c.resumeToken = newResumeToken();
+    c.inbox.length = 0;
+    c.lastRecvSeq = null;
+    c.lastVitals = null;
+    c.visible = new Map();
+    c.slots.fill(0);
+    c.last.fill(undefined);
+    c.snapSeq = 0;
+    c.lastAckMs = now;
+    c.lastResyncMs = -Infinity;
+    this.world = {
+      ...this.world,
+      entities: this.world.entities.map((e) =>
+        e.id === id
+          ? {
+              ...e,
+              lastSeq: 0,
+              pending: [],
+              vi: 0,
+              vj: 0,
+              ac: slideBudget(e.ac, now),
+            }
+          : e,
+      ),
+    };
+    return { token: c.resumeToken };
+  }
+
+  /** A fresh login of an account must not leave its old character standing in the world: release any entity held for it. */
+  releaseSuspended(accountId: string): void {
+    for (const c of [...this.clients.values()])
+      if (c.suspendedAtMs !== null && c.accountId === accountId) this.removePlayer(c.id);
   }
 
   statsOf(id: number): ClientStats | undefined {
@@ -370,6 +574,7 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
+          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -386,6 +591,7 @@ export class WorldNode {
         break;
       }
       case 'skill_cast':
+        this.progression?.onCombat(id, this.world.timeMs);
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -393,7 +599,22 @@ export class WorldNode {
           skillId: msg.skillId,
           targetId: msg.targetId,
           rttMs: 0,
+          aim: msg.aim ? { i: dequantizePos(msg.aim.qi), j: dequantizePos(msg.aim.qj) } : null,
         });
+        break;
+      case 'meditate_start':
+      case 'meditate_stop':
+      case 'breakthrough_start':
+        if (!this.progression) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
+        break;
+      case 'inv_cmd':
+        if (!this.invSync) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs));
         break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
@@ -411,7 +632,12 @@ export class WorldNode {
     if (this.lastTickStart > 0) pushCapped(this.tickIntervalMs, t0 - this.lastTickStart, WORLD_CONFIG.TICK_SAMPLES);
     this.lastTickStart = t0;
 
-    const inputs: SimInput[] = [];
+    // a dropped player whose hold ran out is released for good (combat / progression leave, id quarantined)
+    for (const c of [...this.clients.values()]) {
+      if (c.suspendedAtMs !== null && this.world.timeMs - c.suspendedAtMs >= this.resumeHoldMs) this.removePlayer(c.id);
+    }
+
+    const inputs: AimedInput[] = [];
     for (const c of this.clients.values()) {
       for (const i of c.inbox) inputs.push(i);
       c.inbox.length = 0;
@@ -435,6 +661,7 @@ export class WorldNode {
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
+    if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -447,6 +674,7 @@ export class WorldNode {
       this.phases.aoiTicks++;
     }
     const t3 = clock();
+    this.flushInventory();
     this.sendSnapshots();
     const t4 = clock();
     const ph = this.phases;
@@ -460,6 +688,33 @@ export class WorldNode {
     const dt = clock() - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
     return dt;
+  }
+
+  /** One `inv_state` per changed inventory per tick (D79), to the owner's live connection(s); offline owners just drop out. */
+  private flushInventory(): void {
+    const sync = this.invSync;
+    if (!sync) return;
+    for (const owner of sync.drain()) {
+      // one owner's failure (state or encode) must never stop the world tick: count it and carry on with the others
+      try {
+        let msg: ReturnType<InventorySync['stateOf']> | null = null;
+        for (const c of this.clients.values()) {
+          if (c.accountId !== owner || c.dead) continue;
+          msg ??= sync.stateOf(owner);
+          this.send(c, msg);
+        }
+      } catch {
+        this.metrics.inventorySendErrors++;
+      }
+    }
+  }
+
+  /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
+  private deliver(out: Outbound[]): void {
+    for (const o of out) {
+      const c = this.clients.get(o.entityId);
+      if (c && !c.dead) this.send(c, o.msg);
+    }
   }
 
   private handleEvents(events: SimEvent[]): void {
@@ -531,7 +786,7 @@ export class WorldNode {
     }
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
-      if (!me || c.dead) continue;
+      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
       const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
       const { u: u0, w: w0 } = toUW(centre.i, centre.j);
 
@@ -655,6 +910,19 @@ export class WorldNode {
     });
   }
 
+  /** Own vitals for the wire (null when the node runs without combat: stats are the skeleton constants then). */
+  private vitalsOf(e: EntityState): SelfVitals | null {
+    const hpMax = this.combat?.maxHpOf(e.id);
+    if (!this.combat || hpMax === undefined) return null;
+    return {
+      hp: Math.max(0, Math.round(e.hp)),
+      hpMax: Math.round(hpMax),
+      mp: Math.max(0, Math.round(e.mp)),
+      mpMax: Math.round(e.mpMax),
+      shield: Math.max(0, Math.round(this.combat.shieldOf(e.id, this.world.timeMs))),
+    };
+  }
+
   private hpPct(e: EntityState): number {
     return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
@@ -669,7 +937,7 @@ export class WorldNode {
   private sendSnapshots(): void {
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
-      if (!me || c.dead) continue;
+      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
       if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_SKIP_BYTES) {
         c.stats.snapshotsSkipped++;
         if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_KICK_BYTES) {
@@ -707,6 +975,9 @@ export class WorldNode {
         entities.push(se);
         touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp, anim: se.anim, dir: se.dir });
       }
+      // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
+      const vitals = this.vitalsOf(me);
+      const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
         {
@@ -714,12 +985,13 @@ export class WorldNode {
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
-          self: selfStateOf(me),
+          self: selfStateOf(me, sendVitals ? vitals : null),
           entities,
         },
         { baseline: (index) => c.last[index] },
       );
       for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp, anim: t.anim, dir: t.dir };
+      if (sendVitals) c.lastVitals = vitals;
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);

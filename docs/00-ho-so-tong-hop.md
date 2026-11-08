@@ -138,6 +138,10 @@ Bản đồ tài liệu và quan hệ giữa chúng nằm ở [README.md](README
 
 [Cập nhật D70: khung `@vgtd/server` (Gateway + World Node): xác thực tên/mật khẩu qua HTTP (scrypt tạm thời thay argon2id, JWT EdDSA 10 phút), bắt tay WS bằng `hello` JSON 5 s, AOI 10 Hz tối đa 120 thực thể, snapshot delta theo băng 20/10/5 Hz, công cụ `loadtest`.]
 
+[Cập nhật D75: lõi combat server (`apps/server/src/world/combat/`): chí mạng gốc 5 % (trần 60 %), hồi sinh PvE 10 s, hit flag bit1 = hạ gục; xem `docs/DECISIONS.md` và `docs/34-combat-server.md`.]
+
+[Cập nhật D78: giao thức v3 (`skill_cast` có điểm ngắm tùy chọn, `self.vitals` HP / MP / khiên của chính người chơi); xem `docs/DECISIONS.md` và `docs/24-giao-thuc-mang.md`.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Bảng "Cũ → Hiện hành" của D1–D13 (thể loại, engine, nền tảng, hình thức asset, gói 25 MB, 6 phẩm, icon, Ngũ hành, tương sinh, công thức đột phá, Lôi Kiếp, VFX Lôi Kiếp, Vạn Kiếm) nằm ở [DECISIONS.md](DECISIONS.md), D1–D13, (bản đầy đủ hơn của bảng từng ở đây); mọi quyết định về sau (D14 trở đi) cũng chỉ nằm ở đó. Giá trị cũ vẫn có thể còn trong tài liệu gốc 01–08; khi gặp, dùng cột "Hiện hành" của DECISIONS.

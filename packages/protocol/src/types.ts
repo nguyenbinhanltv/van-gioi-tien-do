@@ -1,3 +1,5 @@
+import type { ColdClientMessage, ColdServerMessage } from './progression.js';
+
 /**
  * Message definitions (docs/08 §4, §5, §8). Every binary packet starts with [version u8][type u8].
  * Fields use `null` (never `undefined`) for "absent" so the JSON debug codec round-trips exactly.
@@ -5,7 +7,9 @@
 
 /** Bump on any wire-incompatible change; decoders reject other versions with ProtocolError('version'). */
 /** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
-export const PROTOCOL_VERSION = 2;
+/** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
+/** v4 (D79): inventory messages inv_state / inv_cmd / inv_result (cold ids 66-68); one bump shared with the reconnect work. */
+export const PROTOCOL_VERSION = 4;
 
 export enum MsgType {
   Input = 1,
@@ -79,6 +83,8 @@ export interface SkillCastMsg {
   skillId: number;
   /** 0 = no target (self / ground skill) */
   targetId: number;
+  /** Aim point for `ground` / `direction` skills, absolute position in 1/32 tile (like `SnapshotEntity.qi/qj`); null = none (the server uses the target, else the caster's facing). */
+  aim: { qi: number; qj: number } | null;
 }
 
 export interface PingMsg {
@@ -88,6 +94,16 @@ export interface PingMsg {
 
 // ---------------------------------------------------------------- server → client
 /** Authoritative movement state of the receiving player, enough to re-run pending inputs (reconciliation). */
+/** Own vitals, sent only when they changed since the last snapshot the client acknowledged (and on a full snapshot). Integers, u32 each. */
+export interface SelfVitals {
+  hp: number;
+  hpMax: number;
+  mp: number;
+  mpMax: number;
+  /** current shield absorb (0 = none) */
+  shield: number;
+}
+
 export interface SelfState {
   /** last input seq the server processed for this player */
   lastSeq: number;
@@ -102,6 +118,8 @@ export interface SelfState {
   dashLeftMs: number;
   dashCdMs: number;
   invulnMs: number;
+  /** present only when changed (see `SelfVitals`) */
+  vitals: SelfVitals | null;
 }
 
 /** One entity in a snapshot. `qi`/`qj` are absolute positions in 1/32 tile; the codec picks delta or absolute. */
@@ -196,6 +214,7 @@ export interface PongMsg {
   serverTimeMs: number;
 }
 
-export type ClientMessage = InputMsg | SkillCastMsg | PingMsg;
-export type ServerMessage = SnapshotMsg | AoiEnterMsg | AoiLeaveMsg | SkillResultMsg | ErrorMsg | PongMsg;
+export type ClientMessage = InputMsg | SkillCastMsg | PingMsg | ColdClientMessage;
+export type ServerMessage =
+  SnapshotMsg | AoiEnterMsg | AoiLeaveMsg | SkillResultMsg | ErrorMsg | PongMsg | ColdServerMessage;
 export type Message = ClientMessage | ServerMessage;
