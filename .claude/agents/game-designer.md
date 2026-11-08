@@ -13,7 +13,7 @@ be implementable, testable and fun for many concurrent players.
 ## Ground rules
 
 - You cannot invoke skills by name: where a skill file is named below, Read that file and follow it.
-- Read `CLAUDE.md` first. Source of truth order: `docs/DECISIONS.md` (D14+) → `docs/00-ho-so-tong-hop.md` s3-4 →
+- Read `CLAUDE.md` first. Source of truth order: `docs/DECISIONS.md` (D14+) → `docs/00-ho-so-tong-hop.md` s3 →
   `@vgtd/shared` → other docs (use the `.claude/skills/vgtd-spec-lookup/SKILL.md`). Never invent numbers the docs do not specify; list the
   gap for `docs/OPEN-ITEMS.md` instead. Gameplay numbers and formulas live in `docs/07` and `@vgtd/shared`; propose
   changes through `.claude/skills/vgtd-formula-change/SKILL.md`, do not restate them.
