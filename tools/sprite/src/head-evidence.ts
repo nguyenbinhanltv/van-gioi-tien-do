@@ -2,13 +2,20 @@
 import type { Finding, QaClip, QaOptions } from './qa.js';
 import type { Direction } from '@vgtd/shared';
 import type { Image } from '@vgtd/rig';
+import type { BracketedOcclusionEvidence, BracketedMeasurement } from './bracketed-occlusion.js';
 
 export type HeightPolicy = 'head-size-v1';
 
 /** D54: these reasons describe head measurements, never D41 similarity exemptions. */
 export function isHeadEvidenceReason(reason: string): boolean {
   const canonical = reason.trim().toLowerCase();
-  return canonical === 'posture' || canonical === 'secondary-overhang' || canonical.startsWith('rear-');
+  return (
+    canonical === 'posture' ||
+    canonical === 'secondary-overhang' ||
+    canonical === 'bracketed' ||
+    canonical === 'bracketed-occlusion' ||
+    canonical.startsWith('rear-')
+  );
 }
 
 export interface HeadPoint {
@@ -26,6 +33,7 @@ export type HeadEvidenceKind =
   | 'rear-base-ornament'
   | 'rear-crown-shoulder-single'
   | 'rear-span-only'
+  | 'bracketed-occlusion'
   | 'rear-breadth-only';
 /** D59: a real occluder hides a skull-breadth endpoint on master and frame. */
 export interface RearSpanOnlyLandmarks {
@@ -102,7 +110,9 @@ export interface RearBreadthOnlyLandmarks {
   /** Mandatory for D53-based dynamic leans; optional with an occluded D56-master reference. */
   readonly occluder?: string;
 }
-export type HeadEvidence = (Exclude<HeadLandmarks, RearBreadthMasterLandmarks> | RearBreadthOnlyLandmarks) & {
+export type HeadEvidence = (
+  Exclude<HeadLandmarks, RearBreadthMasterLandmarks> | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence
+) & {
   readonly note: string;
 };
 export interface HeadMeasurement {
@@ -111,10 +121,11 @@ export interface HeadMeasurement {
   readonly masterBreadthPx?: number;
   readonly breadthPx?: number;
   readonly breadthRatio?: number;
+  readonly bracketed?: BracketedMeasurement;
   readonly reason: string;
   readonly master: HeadLandmarks;
   readonly frame: HeadEvidence;
-  /** Absent for D56: no vertical/span measurement was made. */
+  /** Absent for D56/D60: no vertical/span measurement was made. */
   readonly masterSizePx?: number;
   readonly sizePx?: number;
   readonly ratio?: number;
@@ -122,8 +133,9 @@ export interface HeadMeasurement {
   readonly bboxHeightPx: number;
 }
 
-export const headEvidenceKind = (head: HeadLandmarks | RearBreadthOnlyLandmarks): HeadEvidenceKind =>
-  head.kind ?? 'crown-chin';
+export const headEvidenceKind = (
+  head: HeadLandmarks | RearBreadthOnlyLandmarks | BracketedOcclusionEvidence,
+): HeadEvidenceKind => head.kind ?? 'crown-chin';
 export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
   return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
 }
@@ -285,6 +297,11 @@ export function checkHeadEvidence(
         )
       : [];
   const image = clip.frames[frame]?.image;
+  if (evidence.kind === 'bracketed-occlusion')
+    return failure(
+      'head_bracket_unresolved',
+      'bracketed evidence requires the full clip-level neighbour/budget/quality check',
+    );
   if (evidence.kind === 'rear-breadth-only') {
     if (!['NE', 'N'].includes(clip.direction ?? 'E'))
       return failure('head_evidence_direction', 'breadth-only evidence requires a same-direction NE/N master');

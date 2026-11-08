@@ -32,3 +32,4 @@ export * from './layer-export.js';
 export * from './resample.js';
 
 export * from './inherited-registration.js';
+export * from './bracketed-occlusion.js';
