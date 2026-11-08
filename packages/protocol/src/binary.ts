@@ -175,6 +175,8 @@ const TYPE_IDS: Readonly<Record<Exclude<Message['type'], ColdMessage['type']>, M
   error: MsgType.Error,
   ping: MsgType.Ping,
   pong: MsgType.Pong,
+  telegraph_start: MsgType.TelegraphStart,
+  telegraph_end: MsgType.TelegraphEnd,
 };
 
 const SELF_FLAG_FLYING = 1;
@@ -242,6 +244,21 @@ export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
       break;
     case 'error':
       encodeError(w, m);
+      break;
+    case 'telegraph_start':
+      w.u16(m.id);
+      w.u32(m.mobEntityId);
+      w.u8(m.shape);
+      w.u16(m.qi);
+      w.u16(m.qj);
+      w.u8(m.facing);
+      w.u16(m.size);
+      w.u16(m.extra);
+      w.u16(m.durationMs);
+      break;
+    case 'telegraph_end':
+      w.u16(m.id);
+      w.u8(m.cancelled ? 1 : 0);
       break;
   }
   return w.result();
@@ -507,6 +524,27 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
         throw new ProtocolError('malformed', 'error text is not valid UTF-8');
       }
       msg = { type, code, text };
+      break;
+    }
+    case 'telegraph_start':
+      msg = {
+        type,
+        id: r.u16(),
+        mobEntityId: r.u32(),
+        shape: r.u8(),
+        qi: r.u16(),
+        qj: r.u16(),
+        facing: r.u8(),
+        size: r.u16(),
+        extra: r.u16(),
+        durationMs: r.u16(),
+      };
+      break;
+    case 'telegraph_end': {
+      const id = r.u16();
+      const c = r.u8();
+      if (c > 1) throw new ProtocolError('malformed', 'cancelled flag must be 0 or 1');
+      msg = { type, id, cancelled: c === 1 };
       break;
     }
     default:

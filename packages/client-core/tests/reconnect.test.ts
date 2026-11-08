@@ -244,6 +244,47 @@ describe('NetClient reconnect / resume', () => {
     expect(r.net.status).toBe('reconnecting');
   });
 
+  it('mob attack telegraphs (D89): decal grows with time, ends on telegraph_end, expires on its own, and is cleared by a reconnect', async () => {
+    const r = rig({ reconnect: { staleMs: 60_000 } });
+    Fake.answer = (h, s) => s.ack(7, h.resume ? 'tok-2' : 'tok-1', !!h.resume);
+    await r.net.connect();
+    const sock = Fake.all[0]!;
+    const start = (id: number, durationMs = 800): Message => ({
+      type: 'telegraph_start',
+      id,
+      mobEntityId: 1_000_001,
+      shape: 1,
+      qi: 640,
+      qj: 320,
+      facing: 64,
+      size: 58,
+      extra: 120,
+      durationMs,
+    });
+    expect(r.net.telegraphs()).toEqual([]);
+    sock.frame(start(5));
+    r.clock.t += 400;
+    const [t] = r.net.telegraphs();
+    expect(t).toMatchObject({ id: 5, shape: 'cone', i: 20, j: 10, facing: 64, angleDeg: 120, width: 0 });
+    expect(t!.size).toBeCloseTo(58 / 32, 6);
+    expect(t!.progress).toBeCloseTo(0.5, 6);
+    sock.frame({ type: 'telegraph_end', id: 5, cancelled: false });
+    expect(r.net.telegraphs()).toEqual([]);
+    // a lost end frame: the decal dies by itself shortly after its time is up
+    sock.frame(start(6, 300));
+    r.clock.t += 300;
+    expect(r.net.telegraphs()).toHaveLength(1);
+    expect(r.net.telegraphs()[0]!.progress).toBe(1);
+    r.clock.t += 300;
+    expect(r.net.telegraphs()).toEqual([]);
+    // a decal of the lost connection never survives the reconnect
+    sock.frame(start(7));
+    expect(r.net.telegraphs()).toHaveLength(1);
+    sock.drop();
+    await settle();
+    expect(r.net.telegraphs()).toEqual([]);
+  });
+
   it('frames that arrive in the same turn as hello_ack are kept (the server sends aoi_enter right behind the ack)', async () => {
     const r = rig();
     const enter: Message = {
