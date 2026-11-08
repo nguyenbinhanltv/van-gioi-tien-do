@@ -254,8 +254,7 @@ export class NetClient {
     this.status = 'connecting';
     this.userClosed = false;
     try {
-      const ack = await this.login();
-      this.adopt(ack, false);
+      await this.login((ack) => this.adopt(ack, false));
     } catch (e) {
       this.status = 'closed';
       this.bag.reset();
@@ -265,7 +264,7 @@ export class NetClient {
   }
 
   /** register-or-login over HTTP, then a fresh `hello` with the access token */
-  private async login(): Promise<HelloAck> {
+  private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
     const reg = await this.post('/auth/register', cred);
     if (reg.status !== 201 && reg.status !== 409)
@@ -274,10 +273,13 @@ export class NetClient {
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
     // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
-    return this.openSocket({
-      token: String(login.json.token),
-      ...(this.classRequest !== undefined ? { classId: this.classRequest } : {}),
-    });
+    return this.openSocket(
+      {
+        token: String(login.json.token),
+        ...(this.classRequest !== undefined ? { classId: this.classRequest } : {}),
+      },
+      onAck,
+    );
   }
 
   /** Take over a (re)connected session: reset everything that belonged to the old connection and go online. */
@@ -305,7 +307,12 @@ export class NetClient {
   }
 
   /** Open a socket and say `hello` (`{ token }` for a login, `{ resume: { entityId, token } }` for a resume); resolves on `hello_ack`. */
-  private openSocket(hello: Record<string, unknown>): Promise<HelloAck> {
+  /**
+   * `onAck` runs SYNCHRONOUSLY inside the socket's message handler, before the next frame is delivered: the server sends `aoi_enter` and the
+   * first snapshot right behind `hello_ack`, and `ws` can deliver them in the same turn, before any promise continuation runs. Adopting
+   * the session only after `await` would wipe those frames (`adopt` resets the remote world) and the server never re-announces them.
+   */
+  private openSocket(hello: Record<string, unknown>, onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     return new Promise((resolve, reject) => {
       const url = `${this.o.baseUrl.replace(/^http/, 'ws')}/ws`;
       const ws = new this.o.deps.WebSocket(url);
@@ -324,14 +331,16 @@ export class NetClient {
             const mapTiles = m.mapTiles ?? 0;
             if (mapTiles <= 0) return reject(new Error('server did not announce mapTiles'));
             acked = true;
-            resolve({
+            const ack: HelloAck = {
               classId: typeof m.classId === 'number' ? m.classId : 0,
               entityId: m.entityId ?? 0,
               mapTiles,
               resumed: m.resumed === true,
               resumeToken: typeof m.resumeToken === 'string' ? m.resumeToken : null,
               resumeHoldMs: m.resumeHoldMs ?? 0,
-            });
+            };
+            onAck(ack);
+            resolve(ack);
           }
           return;
         }
@@ -384,10 +393,9 @@ export class NetClient {
         const canResume = this.resumeToken !== null && this.o.deps.now() - t0 < this.resumeHoldMs;
         this.resumeRejected = false;
         try {
-          const ack = canResume
-            ? await this.openSocket({ resume: { entityId: this.entityId, token: this.resumeToken } })
-            : await this.login();
-          this.adopt(ack, true);
+          const onAck = (ack: HelloAck): void => this.adopt(ack, true);
+          if (canResume) await this.openSocket({ resume: { entityId: this.entityId, token: this.resumeToken } }, onAck);
+          else await this.login(onAck);
           return;
         } catch (e) {
           this.lastError = `reconnect: ${(e as Error).message}`;
