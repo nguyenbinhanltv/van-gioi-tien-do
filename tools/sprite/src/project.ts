@@ -257,8 +257,8 @@ export function runProject(
     const inherited = c.inheritedRegistration
       ? verifyInheritedRegistration(c.inheritedRegistration, buf, c, baseDir)
       : undefined;
-    if (inherited && (project.variant || c.variant || c.authoredOrigins))
-      throw new Error('inherited-registration cannot be combined with variants or authored origins');
+    if (inherited && (project.variant || c.variant))
+      throw new Error('inherited-registration cannot be combined with variants');
     const raw = decodePng(buf);
     const grid = sheetLayout(c);
     const deferred = !!project.preparation && resample !== 'bilinear';
@@ -392,10 +392,10 @@ export function runProject(
       calibration,
       aligned: s.frames.map((f, i): AlignedFrame | null => {
         const authored = s.clip.authoredOrigins?.[i];
-        const metrics = authored ? measureFigure(toPremultiplied(f.image)) : null;
         const transform = s.transforms?.[i];
-        const origin =
-          authored && metrics
+        const originOf = (image: typeof f.image) => {
+          const metrics = authored ? measureFigure(toPremultiplied(image)) : null;
+          return authored && metrics
             ? authoredOriginPoint(
                 authored,
                 s.sourceCell.width,
@@ -406,9 +406,25 @@ export function runProject(
                   : s.groundY,
               )
             : undefined;
+        };
+        const origin = originOf(f.image);
         const inheritedCell = s.inherited?.verified.get(i);
+        // D57 + authored origin: a repaired cell must inherit the SAME declared origin as its pre-edit source cell.
+        const sourceAuthored = inheritedCell && authored ? originOf(s.referenceFrames![i]!.image) : undefined;
+        if (
+          inheritedCell &&
+          authored &&
+          (!origin || !sourceAuthored || origin.x !== sourceAuthored.x || origin.y !== sourceAuthored.y)
+        )
+          throw new Error(
+            `inherited-registration: authored origin of cell ${i} differs from its pre-edit source cell` +
+              (origin && sourceAuthored
+                ? ` (edited ${origin.x},${origin.y}; source ${sourceAuthored.x},${sourceAuthored.y})`
+                : ''),
+          );
         const reference = inheritedCell
           ? alignFrame(s.referenceFrames![i]!.image, {
+              ...(sourceAuthored ? { referenceOrigin: sourceAuthored } : {}),
               ...(resample !== 'bilinear' ? { resample } : {}),
               ...(transform ? { sourceTransform: transform } : {}),
               calibration,
@@ -418,12 +434,14 @@ export function runProject(
             })
           : undefined;
         if (inheritedCell && !reference) throw new Error('inherited-registration: empty source cell');
-        const inheritedOrigin = reference
-          ? {
-              x: reference.source.pelvisX,
-              y: (s.clip.vertical ?? 'sole') === 'sole' ? reference.source.bottom : s.groundY,
-            }
-          : undefined;
+        const inheritedOrigin = sourceAuthored
+          ? sourceAuthored
+          : reference
+            ? {
+                x: reference.source.pelvisX,
+                y: (s.clip.vertical ?? 'sole') === 'sole' ? reference.source.bottom : s.groundY,
+              }
+            : undefined;
         const result = alignFrame(f.image, {
           ...(resample !== 'bilinear' ? { resample } : {}),
           ...(transform ? { sourceTransform: transform } : {}),
