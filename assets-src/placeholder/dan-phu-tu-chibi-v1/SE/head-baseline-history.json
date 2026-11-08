@@ -1,6 +1,6 @@
 {
-  "status": "Accepted manually by style23 and orchestrator as SE-specific reference; not automated certification. Bun-inclusion wording clarification requested before motion acceptance.",
-  "convention": "Semantic boundary edges: first attached FRONT cap highlight row12, preceding row11 alpha2 atx121. Last central jaw outline row64, following row65empty atx128. Include genuine highlight; exclude identifiable jadepin and neck/collar. Style23 excludes elevated coil/bun; pending orchestrator wording reconciliation.",
+  "status": "Accepted manual SE-specific reference by style23 and orchestrator; not automated certification.",
+  "convention": "Semantic boundary edges: first attached FRONT cap highlight row12 atx121, preceding row11 alpha2; last central jaw outline row64 atx128, following row65 empty. Include genuine highlights; EXCLUDE elevated coil/bun rows2..11, jade pin and neck/collar. Orchestrator explicitly corrected the earlier bun-inclusive wording.",
   "master": "../reference/SE.corrected-master.png",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
   "original": {

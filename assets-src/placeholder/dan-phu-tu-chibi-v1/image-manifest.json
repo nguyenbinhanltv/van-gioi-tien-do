@@ -873,6 +873,13 @@
       "role": "AI raw output or proven native-cell selection"
     },
     {
+      "file": "SE/raw/run.attempt5.png",
+      "sha256": "f90e05e9ecdc419a66d299e621fc8ca72c5d0a679de9b9b909866f85777014e0",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
+    },
+    {
       "file": "SE/raw/run.selected-base.png",
       "sha256": "6fa3cbfb3be4ff496fc3cc018ac9e98ec9c0ef1a82b08318709038020d71f9c0",
       "width": 1254,
