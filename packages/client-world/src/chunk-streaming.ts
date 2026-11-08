@@ -395,7 +395,8 @@ export class ChunkStreamer {
     e.abort = ac;
     e.status = 'loading';
     const stale = (): boolean => ac.signal.aborted || this.entries.get(chunkKey(e.coord.ci, e.coord.cj)) !== e;
-    this.loader.load(e.coord, ac.signal).then(
+    // a loader that throws synchronously must become a normal `failed` + retry, not a stuck `loading` slot
+    new Promise<ChunkData | null>((resolve) => resolve(this.loader.load(e.coord, ac.signal))).then(
       (data) => {
         if (stale()) return;
         e.abort = undefined;

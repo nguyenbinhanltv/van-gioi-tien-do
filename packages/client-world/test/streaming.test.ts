@@ -127,6 +127,31 @@ describe('wanted sets per tier', () => {
 });
 
 describe('ChunkStreamer', () => {
+  it('turns a synchronously throwing loader into failed + retry instead of a stuck loading slot', async () => {
+    let throwing = true;
+    const errors: string[] = [];
+    const loader: ChunkLoader = {
+      load: (c) => {
+        if (throwing) throw new Error('boom');
+        return Promise.resolve(emptyChunk(c));
+      },
+    };
+    const s = new ChunkStreamer(loader, {
+      tier: 'low',
+      retryMs: 1000,
+      onError: (c) => errors.push(chunkKey(c.ci, c.cj)),
+    });
+    const input = { camera: cam(16, 16), inCombat: true }; // low tier in combat: a single parallel slot
+    s.update(input, 0);
+    await flush();
+    expect(errors.length).toBeGreaterThan(0);
+    expect(s.status({ ci: 0, cj: 0 })).toBe('failed');
+    throwing = false;
+    s.update(input, 1500); // past retryMs
+    await flush();
+    expect(s.status({ ci: 0, cj: 0 })).toBe('loaded');
+  });
+
   it('requests visible chunks before ring before prefetch, max 4 parallel (2 in combat)', async () => {
     const loader = new ManualLoader();
     const s = new ChunkStreamer(loader, { tier: 'medium' });

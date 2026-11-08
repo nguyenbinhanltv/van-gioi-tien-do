@@ -20,6 +20,7 @@ import { NpcCrowd } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
+import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 
@@ -61,6 +62,11 @@ export class Bootstrap extends Component {
   private input!: InputBridge;
   private hud!: PerfHud;
   private marker!: Node;
+  private chibi!: ChibiBody;
+  private keyHandlers: { down: (e: KeyboardEvent) => void; up: (e: KeyboardEvent) => void } | null = null;
+  /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
+  private scriptedWalk: shared.Direction[] | null = null;
+  private scriptedT = 0;
   private canvasUi!: UITransform;
   private lastCanvasW = 0;
   private ready = false;
@@ -124,7 +130,11 @@ export class Bootstrap extends Component {
       addProp(this.ysort, art, rand() < 0.7 ? 'tree' : 'rock', i, j);
     }
 
-    this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable);
+    this.chibi = new ChibiBody(newNode('ChibiHolder'));
+    this.chibi.setClass(this.initialClass());
+    this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, this.chibi);
+    this.bindPlayTestKeys();
+    this.maybeScriptedWalk();
     this.rig = new CameraRig(worldRoot, this.canvasUi);
     // P1 perf harness: `?npcs=N` wandering NPCs around the spawn (default 20 = the exit-criterion crowd, 0 = none)
     const npcParam = params.get('npcs');
@@ -192,6 +202,47 @@ export class Bootstrap extends Component {
     this.scheduleOnce(() => say(`+8s ${at()}`), 9);
   }
 
+  /** `?class=the-tu|phap-tu|dan-phu-tu|dao-tu|kiem-tu|thuong-tu` (also `#class=...`); default the-tu. */
+  private initialClass(): string {
+    const q =
+      new URLSearchParams(location.search).get('class') ?? new URLSearchParams(location.hash.slice(1)).get('class');
+    return q && CHIBI_CLASSES.some((c) => c.id === q) ? q : CHIBI_CLASSES[0]!.id;
+  }
+
+  /** Keys 1-6 switch class; holding Shift walks instead of runs. Also exposes a small debug hook for captures. */
+  private bindPlayTestKeys(): void {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') this.player.walkMode = true;
+      const n = /^[1-6]$/.test(e.key) ? Number(e.key) : 0;
+      if (n && !e.ctrlKey && !e.metaKey && !e.altKey) this.chibi.setClass(CHIBI_CLASSES[n - 1]!.id);
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') this.player.walkMode = false;
+    };
+    window.addEventListener('keydown', down);
+    window.addEventListener('keyup', up);
+    this.keyHandlers = { down, up };
+    (window as unknown as Record<string, unknown>).__vgtdChibi = {
+      setClass: (id: string) => this.chibi.setClass(id),
+      state: () => ({
+        cls: this.chibi.classInfo.id,
+        available: this.chibi.availableDirections,
+        shown: this.chibi.shown,
+        note: this.chibi.note,
+        pos: { ...this.player.pos },
+      }),
+    };
+  }
+
+  private maybeScriptedWalk(): void {
+    const q = new URLSearchParams(location.hash.slice(1)).get('chibiwalk');
+    if (q === null) return;
+    const dirs = (q || 'E,S,SE,N')
+      .split(',')
+      .filter((d): d is shared.Direction => (shared.DIRECTIONS as readonly string[]).includes(d));
+    if (dirs.length) this.scriptedWalk = dirs;
+  }
+
   private findSpawn(ci: number, cj: number): TilePos {
     for (let r = 0; r < 32; r++)
       for (let dj = -r; dj <= r; dj++)
@@ -217,7 +268,15 @@ export class Bootstrap extends Component {
   update(dt: number): void {
     if (!this.ready) return;
     dt = Math.min(dt, 0.05);
-    const frame = this.input.poll();
+    let frame = this.input.poll();
+    if (this.scriptedWalk) {
+      const dirs = this.scriptedWalk;
+      const d = dirs[Math.floor(this.scriptedT / 1.5) % dirs.length]!;
+      this.scriptedT += dt;
+      const [di, dj] = shared.DIRECTION_TILE_VECTORS[d];
+      const len = Math.hypot(di, dj) || 1;
+      frame = { ...frame, move: { i: di / len, j: dj / len }, magnitude: 1 };
+    }
     this.player.update(dt, frame);
     this.rig.follow(this.playerScreen());
     this.ysort.sort();
@@ -234,10 +293,15 @@ export class Bootstrap extends Component {
       this.lastCanvasW = w;
       this.hud.layout(w, this.canvasUi.contentSize.height);
     }
+    if (!/autotest/.test(location.hash)) this.hud.note = `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.hud.update(dt);
   }
 
   onDestroy(): void {
     this.input?.destroy();
+    if (this.keyHandlers) {
+      window.removeEventListener('keydown', this.keyHandlers.down);
+      window.removeEventListener('keyup', this.keyHandlers.up);
+    }
   }
 }

@@ -48,11 +48,13 @@ export interface ProcgenWorld {
 
 /** Optional `objects[]` entry in map.json (forward-compatible; procgen does not emit it yet). */
 export interface RawObject {
+  /** Non-negative integer, at most MAX_OBJECT_ID (ids are multiplied by SLICE_ID_STRIDE). */
   id: number;
   /** Layer number 0..7 (default 3 = L3 Y-sort). */
   layer?: number;
-  i: number;
-  j: number;
+  /** N-corner tile of the footprint (D67: i0/j0/w/h), integers. */
+  i0: number;
+  j0: number;
   w?: number;
   h?: number;
   group?: number;
@@ -123,6 +125,21 @@ export function parseTileset(raw: unknown): TilesetInfo {
   };
 }
 
+/** Largest object id: `id * SLICE_ID_STRIDE (64)` must stay a safe integer. */
+export const MAX_OBJECT_ID = Math.floor(Number.MAX_SAFE_INTEGER / 64);
+
+function int(o: Record<string, unknown>, key: string, where: string): number {
+  const v = o[key];
+  if (typeof v !== 'number' || !Number.isInteger(v)) fail(`${where}.${key} must be an integer`);
+  return v;
+}
+
+function objectId(o: Record<string, unknown>, where: string): number {
+  const v = int(o, 'id', where);
+  if (v < 0 || v > MAX_OBJECT_ID) fail(`${where}.id must be in 0..${MAX_OBJECT_ID}`);
+  return v;
+}
+
 function parseObject(o: unknown, n: number, width: number, height: number): WorldObject {
   if (!isObj(o)) fail(`objects[${n}] must be an object`);
   const where = `objects[${n}]`;
@@ -130,8 +147,8 @@ function parseObject(o: unknown, n: number, width: number, height: number): Worl
   if (!Number.isInteger(layer) || layer < 0 || layer > Layer.L7_SCREEN_UI) fail(`${where}.layer out of range`);
   const w = o.w === undefined ? 1 : posInt(o, 'w', where);
   const h = o.h === undefined ? 1 : posInt(o, 'h', where);
-  const i0 = num(o, 'i', where);
-  const j0 = num(o, 'j', where);
+  const i0 = int(o, 'i0', where);
+  const j0 = int(o, 'j0', where);
   if (i0 < 0 || j0 < 0 || i0 + w > width || j0 + h > height)
     fail(`${where} footprint outside the ${width}×${height} map`);
   const group = o.group === undefined ? 0 : num(o, 'group', where);
@@ -139,7 +156,7 @@ function parseObject(o: unknown, n: number, width: number, height: number): Worl
   const spriteWidth = o.spriteWidth === undefined ? w * TILE_WIDTH : num(o, 'spriteWidth', where);
   const spriteHeight = o.spriteHeight === undefined ? TILE_HEIGHT * 2 : num(o, 'spriteHeight', where);
   const out: WorldObject = {
-    id: num(o, 'id', where),
+    id: objectId(o, where),
     layer: layer as Layer,
     i0,
     j0,
@@ -184,11 +201,15 @@ export function parseProcgenMap(tilesetJson: unknown, mapJson: unknown): Procgen
       });
       return;
     }
-    const data = Int16Array.from(l.data as number[]);
-    for (let k = 0; k < data.length; k++) {
-      const id = data[k]!;
+    // validate the RAW entries: Int16Array.from would silently coerce null / NaN / 1.7 / 65536 to valid-looking ids
+    const raw = l.data as unknown[];
+    for (let k = 0; k < raw.length; k++) {
+      const id = raw[k];
+      if (typeof id !== 'number' || !Number.isInteger(id))
+        fail(`layers[${n}] (${l.name}) entry ${k} must be an integer`);
       if (id !== -1 && !tileset.byId.has(id)) fail(`layers[${n}] (${l.name}) refers to unknown tile id ${id}`);
     }
+    const data = Int16Array.from(raw as number[]);
     layers.push({ name: l.name, data });
   });
 

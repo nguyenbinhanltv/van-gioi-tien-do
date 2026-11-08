@@ -142,6 +142,8 @@ Nguồn: mô tả PR #7 mục "Spec ambiguities and choices" và [OPEN-ITEMS §6
 
 ### A.5 ADR-010 – PRNG có seed trong `@vgtd/shared` (OPEN-ITEMS §6)
 
+> [Cập nhật D68: đã chấp nhận và cài đặt trong `@vgtd/shared` (`src/rng.ts`); băm vàng mới của PR #10 là `88bbea62d7312c1b`.]
+
 - **Bối cảnh:** `@vgtd/shared` chưa có PRNG; công thức hiện nhận số ngẫu nhiên truyền vào. PR #10 đặt `mulberry32` (trạng thái 32 bit) trong `@vgtd/sim` với băm vàng `8f33310212e6cd43`. Skill `vgtd-sim-determinism` yêu cầu PRNG **sống trong `@vgtd/shared`**, không bản sao riêng; thứ tự rút là **một phần hợp đồng**.
 - **Phân tích:** client chỉ dự đoán **di chuyển** (`stepMove`, không dùng ngẫu nhiên), nên PRNG chung chủ yếu phục vụ server `step()`, công cụ replay, loadbot, mô phỏng kinh tế (`tools/econ-sim`) và test. Điểm yếu của mulberry32: trạng thái 32 bit nên người quan sát chuỗi kết quả (số sát thương hiển thị, kết quả đột phá) có thể suy ra trạng thái và **dự đoán** roll tiếp theo – nguy cơ cho roll kinh tế (drop, đột phá, chế tạo).
 - **Quyết định đề xuất:**

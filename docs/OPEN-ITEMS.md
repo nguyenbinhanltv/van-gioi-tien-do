@@ -216,6 +216,15 @@ Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `
 
 Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
 
+## 15. Play-test chibi: chế độ đi bộ và ngưỡng idle/walk/run (client tạm)
+
+Bản play-test `ChibiBody` / `PlayerActor` (apps/client-cocos) dùng các giá trị **placeholder chỉ để play-test**, chưa có trong docs:
+
+- **Chế độ đi bộ**: giữ Shift thì tốc độ di chuyển nhân với `PlayerActor.WALK_SPEED_FACTOR = 0,5` (4,5 → 2,25 ô/s).
+- **Ngưỡng clip theo tốc độ ô thực đã đi**: dưới 0,3 ô/s là `idle`, dưới 3,2 ô/s là `walk`, từ 3,2 ô/s là `run`.
+
+docs/08 §4 chỉ quy định công thức tốc độ di chuyển (4,5 × (1+(TP−100)/400)) và docs/31 I-08 vẫn ghi 4,5 là placeholder; không tài liệu nào định nghĩa chế độ đi bộ, tốc độ đi bộ hay ngưỡng chuyển clip. Cần game designer hoặc owner quyết định (có chế độ đi bộ không, hệ số tốc độ, ngưỡng clip) trước khi coi các giá trị này là cuối cùng; trong code chúng được đánh dấu PLAY-TEST ONLY.
+
 ## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
 
 [Cập nhật D55: mục D54 dưới đây là lịch sử trước D55. Audit pin mới xác nhận cả 33 ô hết lỗi cứng A+C; danh sách đang mở hiện tại là 11 ô Lab trong mục D55 bên dưới. Không cần repaint chỉ vì L1 cũ.]
@@ -277,3 +286,9 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 để hợp ngưỡng. Pair temporal thấp được flag review-by-eye; owner33 cần cross-check cùng contour master rồi đánh giá lại.
 Đây là việc review annotation riêng, không cộng vào11ô Lab hard ở trên. Cohort33ô D54 được lưu portable tại
 `docs/art/head-reason-similarity-cohort-d54.json` để mọi worker tái lập A+C.
+
+## P2-1 — còn mở sau D68/D69
+
+- `CastInput` chưa mang điểm đất / hướng nên kỹ năng `ground` / `direction` chưa có kiểm tra tầm và LOS tới điểm; cần mở rộng giao thức (v2) khi làm chiến đấu server.
+- `skill_patches` của nhánh (cooldown_mult, …) chưa áp trong `compileSkills()`; cần hồ sơ nhân vật ở World Node.
+- PRNG theo luồng đặt tên: mới dùng `combat`; thứ tự rút của `ai`, `drop`, `breakthrough`, `tribulation`, `craft` phải được ghi khi từng hệ thống được cài đặt (ADR-010 điểm 3).

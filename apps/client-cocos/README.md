@@ -19,19 +19,35 @@ npm run serve -w client-cocos            # http://localhost:7456
 
 Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.
 
+## Chơi thử nhân vật chibi (play-test)
+
+`PlayerActor.body` là armature DragonBones semi-chibi (`assets/scripts/ChibiBody.ts`, tài nguyên `assets/resources/dragonbones/<lớp>-chibi-v1/`), phát đúng 24 Hz như file SKE đã xuất.
+
+```bash
+npm run build:web -w client-cocos
+npm run serve -w client-cocos     # mở http://localhost:7456/?class=phap-tu
+```
+
+- **Lớp**: tham số URL `?class=the-tu|phap-tu|dan-phu-tu|dao-tu|kiem-tu|thuong-tu` (mặc định `the-tu`), hoặc phím số **1-6** (theo thứ tự trên) để đổi ngay trong game.
+- **Di chuyển**: click-to-move, WASD hoặc joystick cảm ứng như trước. Clip theo tốc độ thực: `idle` dưới 0,3 ô/s, `walk` dưới 3,2 ô/s, `run` từ 3,2 ô/s. WASD/click đi tối đa nên ra `run`; giữ **Shift** để đi bộ (tốc độ ×0,5). Ngưỡng và hệ số đi bộ là **placeholder chỉ để play-test**, chờ thiết kế (docs/OPEN-ITEMS.md mục 15).
+- **Hướng**: 8 hướng từ vector di chuyển (`directionFromTileVector`); 5 hướng vẽ E/SE/S/NE/N, W/SW/NW là bản lật của E/SE/NE (D14). Hướng nào chưa merge thì dùng hướng gần nhất (bước 45°, ưu tiên bản không lật) và HUD ghi `facing X -> nearest Y`. Các hướng đang có của lớp hiện tại hiện trên HUD (`chibi <lớp> [E/SE/S]`); khi merge thêm rig, game tự nhận (dò `resources`, không cần sửa code).
+- Y-sort L3, camera follow và `pos` (tọa độ ô liên tục) giữ nguyên.
+
+Chụp headless (cần Chrome/Edge, `CHROME_PATH` nếu không ở vị trí mặc định): `npm run capture:play -w client-cocos -- --class the-tu --dirs E,SE,S,NE [--skip-build] [--out <thư mục>]` mở scene với đầu vào kịch bản `#chibiwalk=E,SE,S,NE` (1,5 s mỗi hướng), chụp mỗi 0,75 s, in hướng/clip/vị trí từng ảnh, ghi `contact.png`, và thoát mã 1 nếu có lỗi trang hoặc nhân vật không di chuyển.
+
 Tham số debug: `?input=touch|pointer` ép chế độ nhập; `#autotest` (hoặc `#autotest=dx,dy`) mô phỏng một cú click vào (tâm màn hình + dx,dy px) và in tọa độ nhân vật lên HUD.
 
 ## Cấu trúc
 
-| Đường dẫn                       | Nội dung                                                                                                                                                                                                                                                                                |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `assets/scenes/Bootstrap.scene` | Scene duy nhất: Canvas + Camera + component `Bootstrap`. Mọi thứ khác dựng bằng code lúc chạy.                                                                                                                                                                                          |
-| `assets/scripts/`               | `Bootstrap` (lắp ráp), `IsoAdapter` (**nơi duy nhất lật trục y**), `WorldView` (L0 streaming theo chunk), `Npcs` (đám NPC cho perf), `YSortLayer` (L3), `Actors` (nhân vật, vật thể), `CameraRig`, `InputBridge` (InputManager + AnchorLayout + joystick), `PerfHud`, `PlaceholderArt`. |
-| `assets/scripts/vendor/`        | **Sinh ra, không commit**: `vgtd.mjs` bundle của `@vgtd/shared` + `@vgtd/client-core` + `@vgtd/client-world`.                                                                                                                                                                           |
-| `assets/resources/world/`       | **Sinh ra, không commit**: bản sao tilemap procgen.                                                                                                                                                                                                                                     |
-| `vendor-src/`                   | Điểm vào esbuild (`entry.ts`, `shared-subset.ts`).                                                                                                                                                                                                                                      |
-| `settings/`                     | Cài đặt dự án (engine modules, trong đó **DragonBones**).                                                                                                                                                                                                                               |
-| `build-config.json`             | Tùy chọn build headless.                                                                                                                                                                                                                                                                |
+| Đường dẫn                       | Nội dung                                                                                                                                                                                                                                                                                                              |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `assets/scenes/Bootstrap.scene` | Scene duy nhất: Canvas + Camera + component `Bootstrap`. Mọi thứ khác dựng bằng code lúc chạy.                                                                                                                                                                                                                        |
+| `assets/scripts/`               | `Bootstrap` (lắp ráp), `IsoAdapter` (**nơi duy nhất lật trục y**), `WorldView` (L0 streaming theo chunk), `Npcs` (đám NPC cho perf), `YSortLayer` (L3), `Actors` (nhân vật, vật thể), `ChibiBody` (armature chibi: chọn hướng/lật, idle/walk/run, đổi lớp), `CameraRig`, `InputBridge` (InputManager + AnchorLayout + joystick), `PerfHud`, `PlaceholderArt`. |
+| `assets/scripts/vendor/`        | **Sinh ra, không commit**: `vgtd.mjs` bundle của `@vgtd/shared` + `@vgtd/client-core` + `@vgtd/client-world`.                                                                                                                                                                                                                                |
+| `assets/resources/world/`       | **Sinh ra, không commit**: bản sao tilemap procgen.                                                                                                                                                                                                                                                                   |
+| `vendor-src/`                   | Điểm vào esbuild (`entry.ts`, `shared-subset.ts`).                                                                                                                                                                                                                                                                    |
+| `settings/`                     | Cài đặt dự án (engine modules, trong đó **DragonBones**).                                                                                                                                                                                                                                                             |
+| `build-config.json`             | Tùy chọn build headless.                                                                                                                                                                                                                                                                                              |
 
 Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/DECISIONS.md` (DragonBones) và I-07 trong `docs/31-bang-quyet-dinh.md` (cách nạp `@vgtd/*` bằng esbuild, chờ xác nhận).
 
@@ -39,7 +55,7 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 
 ## Điểm nối cho các task sau
 
-- `WorldView` đã dùng chunk streaming của `client-world` (`ChunkStreamer`, tier `?tier=low|medium|high`); hợp đồng `isTerrainWalkable(i, j)` giữ nguyên. Đo hiệu năng P1: `npm run perf:p1 -w client-cocos` ([docs/33-p1-perf.md](../../docs/33-p1-perf.md)); `?npcs=N` sinh NPC đi lang thang (`Npcs.ts`, thay thân bằng `ChibiBody` qua `NpcBodyFactory`).
-- `PlayerActor.body` thay bằng paperdoll/armature DragonBones của `character`; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
+- `WorldView` đã dùng chunk streaming của `client-world` (`ChunkStreamer`, tier `?tier=low|medium|high`); hợp đồng `isTerrainWalkable(i, j)` giữ nguyên. Đo hiệu năng P1: `npm run perf:p1 -w client-cocos` ([docs/33-p1-perf.md](../../docs/33-p1-perf.md)); `?npcs=N` sinh NPC đi lang thang (`Npcs.ts`, thân `ChibiBody` nhiều lớp).
+- `PlayerActor.body` hiện là armature chibi (`ChibiBody`); paperdoll/trang bị của `character` thay sau; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
 - `YSortLayer.add(node, depth)` là chỗ đăng ký mọi vật thể L3 (quái, NPC, người chơi khác).
 - `CameraRig.follow()` / `clientToWorld()` là giao diện camera cho client-core.

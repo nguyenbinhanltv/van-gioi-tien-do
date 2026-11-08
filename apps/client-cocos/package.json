@@ -16,6 +16,7 @@
     "typecheck": "node scripts/check-yflip.mjs && node scripts/typecheck.mjs",
     "fixture:layers": "node ../../tools/rig/scripts/run-ts.mjs scripts/layer-smoke.ts",
     "capture": "node scripts/capture.mjs",
+    "capture:play": "node scripts/capture-play.mjs",
     "perf:p1": "node scripts/perf-p1.mjs"
   },
   "devDependencies": {
