@@ -442,3 +442,11 @@ Còn mở / lưu ý:
 - Điều khoản sử dụng thương mại của output Google Gemini chưa được kiểm tra riêng (ghi trong `docs/ASSET-LICENSES.md`, mục GEMINI-PROPS-ICONS); chủ dự án không lưu prompt gốc nên không tái tạo được từng ảnh. Cần chốt trước khi phát hành công khai.
 - Map lát cắt chỉ có nước / đất / cỏ: chưa có biome đầm lầy hay dung nham. `tree_dead_swamp` đặt gần mép nước, `rock_lava_cooled` chỉ xuất hiện khi bản đồ có địa hình `lava` (chưa có), nên hiện chưa thấy đá dung nham trong game.
 - `tree_pine_01/02` và `rock_mossy_small` / `rock_large_spirit` gần như trùng nhau: nên xin thêm biến thể (xem báo cáo PR).
+
+## D83 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09)
+
+1. **Mọi số là tạm, cần game designer duyệt**: băng khoảng cách theo cấp, kích thước bầy 3, số lượng 12/2/1, bán kính bầy 3 ô, `MOB_THREAT` (tỉ lệ đổi mục tiêu 1,1, quên sau 24 ô, giảm 20%/s). docs/10 chưa nói quái đứng ở đâu so với điểm vào.
+2. **Chưa có tên vùng thật của Sơn Môn**: `defaultMobZones` vẫn là bốn góc phần tư của bản đồ thử; cần tọa độ vùng từ level designer (docs/10 §4) thay cho tỉ lệ R.
+3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
+4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
+5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).

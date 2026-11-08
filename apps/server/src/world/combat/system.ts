@@ -360,6 +360,7 @@ export class CombatSystem {
         killed: dead,
       });
       pushHit(base.hits, h.targetId, h.damage, h.crit, dead);
+      if (!dead) this.opts.mobs?.onDamage?.(h.targetId, c.casterId, h.damage);
       if (dead) killed.push(h.targetId);
     }
     // heal / shield: the caster, or the targeted ally for `ally_or_self` skills

@@ -31,7 +31,7 @@ describe('snapshot stream golden (byte-identical to the pre-optimisation impleme
 
   it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 30, hash: true });
-    expect(stream(r)).toEqual({ checksum: 'ed072088', frames: 23732, bytes: 5900983 });
+    expect(stream(r)).toEqual({ checksum: '23699127', frames: 23508, bytes: 5814930 });
   });
 
   it('the benchmark itself is deterministic: two runs of the same config give the same checksum', () => {
