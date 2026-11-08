@@ -88,6 +88,8 @@ interface Client {
   last: (Last | undefined)[];
   snapSeq: number;
   lastAckMs: number;
+  /** server time of the last full resync (first snapshot or ack timeout); rate-limits the resync to one per ACK_TIMEOUT_MS */
+  lastResyncMs: number;
   pktWindowStartMs: number;
   pktCount: number;
   joinedTick: number;
@@ -223,6 +225,7 @@ export class WorldNode {
       last: new Array<Last | undefined>(this.maxVisible).fill(undefined),
       snapSeq: 0,
       lastAckMs: this.world.timeMs,
+      lastResyncMs: -Infinity,
       pktWindowStartMs: clock(),
       pktCount: 0,
       joinedTick: this.world.tick,
@@ -537,18 +540,24 @@ export class WorldNode {
         }
         continue;
       }
-      const full = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS || c.snapSeq === 0;
+      const timedOut = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS;
+      const full = timedOut || c.snapSeq === 0;
+      // D73: a resync (first snapshot, or no ack for ACK_TIMEOUT_MS) carries EVERY visible entity with absolute coordinates and HP,
+      // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
+      const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
+      if (resync) c.lastResyncMs = this.world.timeMs;
       const entities: SnapshotEntity[] = [];
       const touched: { index: number; qi: number; qj: number; hp: number; anim: number; dir: number }[] = [];
       for (const [eid, v] of c.visible) {
-        if ((this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
+        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
         const e = this.byId.get(eid);
         if (!e) continue;
         const last = c.last[v.index];
         const hp = this.hpPct(e);
-        const se = snapshotEntityOf(v.index, e, this.animOf(e), last && last.hp === hp ? null : hp);
+        const se = snapshotEntityOf(v.index, e, this.animOf(e), !resync && last && last.hp === hp ? null : hp);
         // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
         if (
+          !resync &&
           last &&
           se.hpPct === null &&
           last.qi === se.qi &&

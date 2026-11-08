@@ -17,6 +17,8 @@ npm run serve -w client-cocos            # http://localhost:7456
 - `--release` (`npm run build:web -w client-cocos -- --release`) build không debug.
 - Không chạy được trên CI (CI không có Cocos). `npm run typecheck -w client-cocos` chỉ chạy khi đã có `temp/` (sau lần build đầu), còn lại bỏ qua.
 
+**HUD chiến đấu (P3 groundwork, vòng chiến đấu giả lập offline):** mở `/?combat=1` (thêm `&class=kiem-tu|phap-tu|the-tu|dan-phu-tu|dao-tu|thuong-tu`). Thanh kỹ năng 8 ô của lớp (D49, phím 1-8 hoặc chạm / click ô) với vòng cooldown + GCD, thanh HP / MP / khiên, chọn mục tiêu (click kẻ địch, Tab / Shift+Tab, Esc bỏ chọn), số sát thương bay. Logic nằm trong `packages/client-combat` (có test); mọi con số của vòng giả lập là placeholder, không phải luật chiến đấu (xem OPEN-ITEMS). Smoke test headless: `npm run combat:smoke -w client-cocos`.
+
 **Đo hiệu năng P1 trên điện thoại thật qua LAN:** `npm run serve -w client-cocos` in các URL `LAN: http://<IP>:7456/?npcs=20`; mở URL đó trên điện thoại cùng Wi-Fi, số liệu (FPS, draw call, RAM, gói tải) hiện trên HUD. Chi tiết từng bước và cờ URL: [docs/33-p1-perf.md](../../docs/33-p1-perf.md).
 
 Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.
@@ -65,3 +67,7 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 ## Tải chibi theo bundle (D71)
 
 `npm run prepare:assets` (chạy trong `build:web`) sinh `assets/chibi/` (git-ignored) từ bản xuất `assets/resources/dragonbones/<lớp>-chibi-v1` (không đổi): mỗi (lớp, hướng) là một Asset Bundle `chibi-<lớp>-<hướng>` với hai tier (`full`, `1x` Lanczos3) và hai nhóm clip (`loco` = idle/walk/run, `rest`), cùng `resources/world/chibi-index.json`. Preset nén texture (ASTC 4x4 cho `1x`, ASTC 6x6 cho `full`, WebP dự phòng) nằm ở `settings/v2/packages/builder.json`, gắn vào từng PNG qua `.meta` do `scripts/chibi-bundles.mjs` ghi. `ChibiAssets.ts` nạp bundle, giới hạn tải đồng thời và giữ việc nền (NPC, hướng khác) đến khi người chơi đã hiện hình. `?restier=1x|full` ép tier (mặc định: `full` cho người chơi cục bộ trên desktop, `1x` cho mọi thứ còn lại). Ổ C: đầy thì đặt `library/`, `temp/`, `build/`, `assets/chibi/` thành junction sang ổ khác (đều git-ignored).
+
+## Bản release không có art dev
+
+`npm run build:web -w client-cocos -- --release` build trên **bản stage** của dự án (`scripts/release-stage.mjs`): mọi thứ được sao chép nguyên văn (kể cả `.meta`, giữ nguyên uuid) trừ `assets/resources/dragonbones/**` (≈ 229 MB: art trình xem và bản xuất chibi nguồn). Stage mặc định ở `build/stage-release` (đổi bằng biến môi trường `VGTD_STAGE_DIR`, nên đặt sang ổ còn trống); đồng bộ tăng dần theo kích thước + mtime nên Library của stage được giữ giữa các lần build. Kết quả vẫn ghi vào `build/web-mobile`. Trình xem (`#viewer`) không chạy được trên bản release; thêm `--keep-dev-art` để build đủ. Bản không `--release` vẫn build cả dự án.

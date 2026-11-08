@@ -195,8 +195,9 @@ export class ChibiBody {
     const prev = this.display.armature()?.animation.lastAnimationState;
     const phase = prev && prev.totalTime > 0 ? prev.currentTime / prev.totalTime : 0;
     const d = this.display;
-    d.dragonAsset = rig.ske;
+    // atlas first: setting the skeleton builds the armature, which needs its atlas (else "No armature data" warnings)
     d.dragonAtlasAsset = rig.tex;
+    d.dragonAsset = rig.ske;
     const want = `${this.cls.stem}_${dir}`;
     const names = d.getArmatureNames();
     d.armatureName = names.length === 0 || names.includes(want) ? want : names[0]!;

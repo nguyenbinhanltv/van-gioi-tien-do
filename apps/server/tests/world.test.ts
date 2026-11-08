@@ -157,6 +157,7 @@ describe('World Node: AOI (docs/08 §2)', () => {
     for (let t = 0; t < 40; t++) {
       // creep 2/32 tile per tick so the quantised position changes every tick (unchanged records are skipped)
       for (const [id, i] of home) place(n, id, i + (t + 1) * (2 / 32), 80);
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // an honest client acks every tick (no resync)
       n.tick();
     }
     const snaps = a.of('snapshot').slice(before);
@@ -183,6 +184,7 @@ describe('World Node: AOI (docs/08 §2)', () => {
     const before = a.of('snapshot').length;
     for (let t = 0; t < 40; t++) {
       put((t + 1) * (2 / 32)); // 2/32 tile per tick: the quantised position changes every tick
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // acks every tick (no resync)
       n.tick();
     }
     const snaps = a.of('snapshot').slice(before);
@@ -202,7 +204,10 @@ describe('World Node: AOI (docs/08 §2)', () => {
     ticks(n, 2);
     const idx = [...a.entityIdsByIndex].find(([, e]) => e === idle.id)![0];
     const before = a.of('snapshot').length;
-    ticks(n, 20);
+    for (let t = 0; t < 20; t++) {
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // acks every tick
+      n.tick();
+    }
     const quiet = a.of('snapshot').slice(before);
     expect(quiet.length).toBe(20); // snapshots still flow every tick (self + ack)
     expect(quiet.some((s) => s.entities.some((e) => e.index === idx))).toBe(false);
@@ -249,6 +254,39 @@ describe('World Node: snapshots, deltas and reconciliation data', () => {
     expect(snaps().at(-1)!.baselineSeq).not.toBeNull();
     ticks(n, 25); // 1.25 s without any input packet (= no ack)
     expect(snaps().some((s, k) => k > 3 && s.baselineSeq === null)).toBe(true);
+  });
+
+  it('the ack-timeout resync snapshot carries every visible entity (also idle and far ones) with absolute coordinates and HP (D73)', () => {
+    const n = node();
+    const a = join(n);
+    const idleNear = join(n);
+    const idleFar = join(n);
+    place(n, a.id, 80, 80);
+    place(n, idleNear.id, 85, 80);
+    place(n, idleFar.id, 119, 80); // 39 tiles: 5 Hz band
+    ticks(n, 2);
+    n.receive(a.id, a.inputBytes(255, 50, 1, 0));
+    ticks(n, 10); // acked and nothing changes: records are skipped from now on
+    const quiet = a.of('snapshot').slice(-8);
+    expect(quiet.every((s) => s.entities.length === 0)).toBe(true);
+    const before = a.of('snapshot').length;
+    ticks(n, 25); // 1.25 s without an input packet: no ack
+    const after = a.of('snapshot').slice(before);
+    const resync = after.filter((s) => s.baselineSeq === null && s.entities.length > 0);
+    expect(resync.length).toBeGreaterThanOrEqual(1);
+    const first = resync[0]!;
+    const idx = (id: number): number => [...a.entityIdsByIndex].find(([, e]) => e === id)![0];
+    for (const [p, i] of [
+      [idleNear, 85],
+      [idleFar, 119],
+    ] as const) {
+      const rec = first.entities.find((e) => e.index === idx(p.id));
+      expect(rec, `record for ${p.id}`).toBeDefined();
+      expect(rec!.qi).toBe(Math.round(i * 32));
+      expect(rec!.hpPct).not.toBeNull(); // HP is resent too
+    }
+    // rate-limited: not every tick of the timeout window repeats the full state
+    expect(resync.length).toBeLessThanOrEqual(2);
   });
 
   it('a duplicate input packet is applied once (the 3-input redundancy window does not double-move)', () => {

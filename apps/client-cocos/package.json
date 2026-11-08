@@ -18,7 +18,8 @@
     "capture": "node scripts/capture.mjs",
     "capture:play": "node scripts/capture-play.mjs",
     "perf:p1": "node scripts/perf-p1.mjs",
-    "test": "vitest run test"
+    "test": "vitest run test",
+    "combat:smoke": "node scripts/combat-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",
