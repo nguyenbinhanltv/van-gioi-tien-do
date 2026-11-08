@@ -7,6 +7,13 @@
  * layout without changing msgId meaning. Same strict-decode rules as the hot codec (validated, canonical, no trailing bytes).
  */
 import { ProtocolError } from './errors.js';
+import {
+  decodeInventoryBody,
+  encodeInventoryBody,
+  validateInventoryMessage,
+  type InvClientMessage,
+  type InvServerMessage,
+} from './inventory.js';
 
 /** Envelope type byte of every cold-family packet. */
 export const COLD_ENVELOPE = 0x80;
@@ -18,6 +25,10 @@ export enum ColdMsgId {
   MeditateStart = 63,
   MeditateStop = 64,
   MeditateResult = 65,
+  /** inventory (D79, inventory.ts) */
+  InvState = 66,
+  InvCmd = 67,
+  InvResult = 68,
 }
 
 export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
@@ -27,6 +38,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.MeditateStart]: 'meditate_start',
   [ColdMsgId.MeditateStop]: 'meditate_stop',
   [ColdMsgId.MeditateResult]: 'meditate_result',
+  [ColdMsgId.InvState]: 'inv_state',
+  [ColdMsgId.InvCmd]: 'inv_cmd',
+  [ColdMsgId.InvResult]: 'inv_result',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -35,6 +49,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   meditate_start: ColdMsgId.MeditateStart,
   meditate_stop: ColdMsgId.MeditateStop,
   meditate_result: ColdMsgId.MeditateResult,
+  inv_state: ColdMsgId.InvState,
+  inv_cmd: ColdMsgId.InvCmd,
+  inv_result: ColdMsgId.InvResult,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -128,8 +145,8 @@ export interface MeditateResultMsg {
   meditating: boolean;
   reason: number;
 }
-export type ColdClientMessage = BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg;
-export type ColdServerMessage = CharStateMsg | BreakthroughResultMsg | MeditateResultMsg;
+export type ColdClientMessage = BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage;
+export type ColdServerMessage = CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -193,7 +210,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         reason: int(o.reason, 0, 255, 'reason'),
       };
     default:
-      return null;
+      return validateInventoryMessage(o);
   }
 }
 
@@ -247,6 +264,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
       w.u8(m.meditating ? 1 : 0);
       w.u8(m.reason);
       break;
+    case 'inv_state':
+    case 'inv_cmd':
+    case 'inv_result':
+      encodeInventoryBody(w, m);
+      break;
   }
 }
 
@@ -288,5 +310,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
       if (m > 1) throw new ProtocolError('malformed', 'meditating flag must be 0 or 1');
       return { type, requestId, meditating: m === 1, reason: r.u8() };
     }
+    case 'inv_state':
+    case 'inv_cmd':
+    case 'inv_result':
+      return decodeInventoryBody(r, type);
   }
 }

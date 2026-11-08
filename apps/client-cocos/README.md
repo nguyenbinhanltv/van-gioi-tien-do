@@ -110,3 +110,7 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 ## Bản release không có art dev
 
 `npm run build:web -w client-cocos -- --release` build trên **bản stage** của dự án (`scripts/release-stage.mjs`): mọi thứ được sao chép nguyên văn (kể cả `.meta`, giữ nguyên uuid) trừ `assets/resources/dragonbones/**` (≈ 229 MB: art trình xem và bản xuất chibi nguồn). Stage mặc định ở `build/stage-release` (đổi bằng biến môi trường `VGTD_STAGE_DIR`, nên đặt sang ổ còn trống); đồng bộ tăng dần theo kích thước + mtime nên Library của stage được giữ giữa các lần build. Kết quả vẫn ghi vào `build/web-mobile`. Trình xem (`#viewer`) không chạy được trên bản release; thêm `--keep-dev-art` để build đủ. Bản không `--release` vẫn build cả dự án.
+
+## Bảng túi đồ (D79)
+
+Phím **B** bật/tắt bảng túi (`assets/scripts/BagPanel.ts`): lưới 8×5, ví Linh thạch hạ/trung/thượng, nhấn một vật rồi nhấn ô khác để chuyển / hoán đổi / gộp, nút "Claim loot" khi có hàng chờ. Online (`?online=1`) bảng hiện túi thật của server (`net.bag`, thông điệp `inv_state`/`inv_cmd`/`inv_result`); máy chủ dev (`npm run dev -w @vgtd/server`) bật sẵn `INVENTORY=1` nên giết quái online làm túi đầy. `#bagdemo` (không cần server) hiện túi mẫu cục bộ để kiểm tra giao diện / chụp headless. Hình tạm: ô màu + mã ngắn + thanh phẩm chất; chưa có art vật phẩm. Logic bố cục / chọn ô nằm ở `packages/client-core/src/ui/BagPanelLogic.ts` (có test).
