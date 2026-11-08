@@ -4,6 +4,7 @@ import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAda
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import { ChibiBody } from './ChibiBody';
+import { OverheadBar, worldUiLayer } from './OverheadBar';
 
 let nextId = 1; // id 0 = player
 
@@ -148,6 +149,7 @@ export class RemotePlayer {
   private readonly shadow: Node;
   private readonly chibi: ChibiBody;
   private facing: shared.Direction = 'S';
+  private readonly bar: OverheadBar | null;
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -165,18 +167,25 @@ export class RemotePlayer {
     this.shadow = spriteNode(`RemoteShadow${entityId}`, art.shadow, 48, 24, 0.5, 0.5);
     shadowLayer.addChild(this.shadow);
     ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j));
+    this.bar = shadowLayer.parent ? new OverheadBar(worldUiLayer(shadowLayer.parent), art.pixel, 96) : null;
     this.place();
   }
 
-  update(p: TilePos, dirIndex: number, speed: number): void {
+  /** `hpPct` (0-100, from the snapshot) drives the overhead bar; omit it to leave the bar hidden. */
+  update(p: TilePos, dirIndex: number, speed: number, hpPct?: number, dtMs = 16): void {
     this.pos = { i: p.i, j: p.j };
     this.facing = shared.DIRECTIONS[dirIndex] ?? this.facing;
     this.chibi.face(this.facing);
     this.chibi.state(speed < PlayerActor.WALK_SPEED ? 'idle' : speed < PlayerActor.RUN_SPEED ? 'walk' : 'run');
     this.place();
+    if (this.bar && hpPct !== undefined) {
+      this.bar.place(this.pos.i, this.pos.j);
+      this.bar.update(dtMs, { hp: hpPct, hpMax: 100, kind: 'ally' });
+    }
   }
 
   destroy(): void {
+    this.bar?.destroy();
     this.ysort.remove(this.body);
     this.shadow.destroy();
     this.body.destroy();
