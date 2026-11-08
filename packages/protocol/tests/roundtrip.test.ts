@@ -18,9 +18,9 @@ import {
   type Message,
   type SnapshotMsg,
 } from '../src/index.js';
-import { lcg, randEntity, randMessage, randSelf } from './helpers.js';
+import { lcg, randEntity, randMessage, randSelf, type HotType } from './helpers.js';
 
-const TYPES: Message['type'][] = [
+const TYPES: HotType[] = [
   'input',
   'snapshot',
   'aoi_enter',

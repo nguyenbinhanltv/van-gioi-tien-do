@@ -34,6 +34,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import type { Outbound, ProgressionService } from '../progression/service.js';
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -116,6 +117,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** tu vi / breakthrough module (D74); absent = progression messages are rejected as unexpected */
+  progression?: ProgressionService;
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -185,6 +188,7 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  readonly progression: ProgressionService | undefined;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -195,6 +199,11 @@ export class WorldNode {
     this.spawnRng = rngFork(rngSeed(seed), 'spawn');
     this.spawn = opts.spawn ?? { i0: n / 2 - 48, j0: n / 2 - 48, side: 96 };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    this.progression = opts.progression;
+    this.progression?.attach({
+      isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+      tickOf: () => this.world.tick,
+    });
   }
 
   // ------------------------------------------------------------------ players
@@ -227,11 +236,13 @@ export class WorldNode {
       dead: false,
       stats: emptyStats(),
     });
+    this.progression?.join(id, accountId, this.world.timeMs);
     return id;
   }
 
   removePlayer(id: number): void {
     if (!this.clients.delete(id)) return;
+    void this.progression?.leave(id);
     this.world = removeEntity(this.world, id);
   }
 
@@ -272,6 +283,7 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
+          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -288,6 +300,7 @@ export class WorldNode {
         break;
       }
       case 'skill_cast':
+        this.progression?.onCombat(id, this.world.timeMs);
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -296,6 +309,14 @@ export class WorldNode {
           targetId: msg.targetId,
           rttMs: 0,
         });
+        break;
+      case 'meditate_start':
+      case 'meditate_stop':
+      case 'breakthrough_start':
+        if (!this.progression) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
         break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
@@ -324,6 +345,7 @@ export class WorldNode {
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
+    if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -349,6 +371,14 @@ export class WorldNode {
     const dt = clock() - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
     return dt;
+  }
+
+  /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
+  private deliver(out: Outbound[]): void {
+    for (const o of out) {
+      const c = this.clients.get(o.entityId);
+      if (c && !c.dead) this.send(c, o.msg);
+    }
   }
 
   private handleEvents(events: SimEvent[]): void {

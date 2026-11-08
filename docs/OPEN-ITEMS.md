@@ -327,3 +327,17 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 5. **Nhóm `rest`**: `ChibiBody.ensureGroup('rest')` đã có nhưng chưa clip chiến đấu nào gọi; gọi trước khi phát clip ngoài idle/walk/run. Chất lượng 1x (Lanczos3, ASTC 4x4) chưa được art duyệt bằng mắt trên máy thật.
 6. **Ngân sách `CHIBI_RUNTIME`** (trần loco/bundle/GPU lớp) là mặc định kỹ thuật, cần game designer/đo thiết bị duyệt.
 7. **Atlas tile/bản đồ**: đo `perf:p1 --route` (bản đồ 8×8 chunk, release, ASTC/WebP): gói tải đầu 7,29 MB (gzip 2,51), trong đó `iso-tileset.png` 0,16 MB và JSON bản đồ 0,62 MB (≈ 11 %); engine `cc.js` 1,86 MB và các armature chibi của người chơi chiếm phần lớn. Nén atlas tile **chưa cần**; nếu bản đồ lớn hơn, ứng viên là tách JSON bản đồ theo chunk (nạp lười) chứ không phải nén tileset.
+
+## 17. Tiến trình tu luyện server (D74): mặc định đã chọn khi docs chưa rõ
+
+`apps/server/src/progression` dùng các mặc định sau, chưa có giá trị gameplay mới nào được bịa; cần game designer xác nhận:
+
+- **Hậu quả thất bại đột phá** ("linh áp phản phệ", docs/01): chỉ cộng `n_fail` (đại cảnh) và giữ nguyên tu vi đã tích; docs chưa nêu mất tu vi, thời gian hồi phục hay phạt khác. Tiểu cảnh thất bại không cộng pity (07 §2 chỉ nói pity cho ngưỡng lớn).
+- **Giới hạn chống lạm dụng** (mốc kỹ thuật, không phải số game design): đả tọa bị chặn nếu có input di chuyển trong 400 ms, hoặc cast/trúng đòn trong 10 s; bucket 6 lệnh hồi 1 lệnh/0,5 s; đột phá cách nhau 3 s. Cần quyết định có "chiến đấu" bao gồm cả bị đánh khi chưa có quái, và thời gian khóa thật.
+- **Tu vi đầy**: tự dừng đả tọa ở `Req(s)` (không tích thừa); đột phá không tiêu hao tu vi khi thất bại.
+- **Đả tọa ở mọi nơi**: mặc định ρ = 1,0 và đất ngũ hành đều (Match = 1) cho tới khi có dữ liệu map/Linh Mạch (`MeditationEnv`); thành chính 0,6 và Linh Mạch của 07 §5 chưa nối.
+- **Linh căn nhân vật mới** roll từ PRNG theo `characterId` (tỷ lệ loại và 2% biến dị của 07 §5; mỗi hệ có trọng số bằng nhau, biến dị chỉ ở Mộc/Kim/Thủy vì chỉ ba hệ này có dạng biến dị). Cách người chơi chọn hay đổi linh căn chưa có.
+- **Cột dữ liệu**: `n_fail` (bộ đếm pity) chưa có trong docs/23 §4.2; hiện lưu cùng bản ghi (`ProgressRecord.nFail`) và cần thêm cột/`jsonb` khi viết migration.
+- **Giai đoạn cuối**: tầng 41 (Độ Kiếp viên mãn) không thể đột phá tiếp (Phi Thăng chưa thiết kế).
+- **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
+- **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).

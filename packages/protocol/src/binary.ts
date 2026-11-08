@@ -21,6 +21,14 @@ import {
   type SnapshotEntity,
   type SnapshotMsg,
 } from './types.js';
+import {
+  COLD_ENVELOPE,
+  COLD_MSG_IDS,
+  COLD_MSG_NAMES,
+  decodeColdBody,
+  encodeColdBody,
+  type ColdMessage,
+} from './progression.js';
 import { validateMessage } from './validate.js';
 
 /** Position of an entity (1/32 tile) in the snapshot the deltas are relative to. */
@@ -68,6 +76,11 @@ class ByteWriter {
     this.view.setFloat32(this.len, v);
     this.len += 4;
   }
+  f64(v: number): void {
+    this.ensure(8);
+    this.view.setFloat64(this.len, v);
+    this.len += 8;
+  }
   bytes(b: Uint8Array): void {
     this.ensure(b.length);
     this.buf.set(b, this.len);
@@ -111,6 +124,13 @@ class ByteReader {
     if (!Number.isFinite(v)) throw new ProtocolError('malformed', 'non-finite float');
     return v;
   }
+  f64(): number {
+    this.need(8);
+    const v = this.view.getFloat64(this.pos);
+    this.pos += 8;
+    if (!Number.isFinite(v)) throw new ProtocolError('malformed', 'non-finite float');
+    return v;
+  }
   sub(n: number): Uint8Array {
     this.need(n);
     const s = this.buf.subarray(this.pos, this.pos + n);
@@ -137,7 +157,7 @@ export function dequantizePos(q: number): number {
   return q / LIMITS.POS_SCALE;
 }
 
-const TYPE_IDS: Readonly<Record<Message['type'], MsgType>> = {
+const TYPE_IDS: Readonly<Record<Exclude<Message['type'], ColdMessage['type']>, MsgType>> = {
   input: MsgType.Input,
   snapshot: MsgType.Snapshot,
   aoi_enter: MsgType.AoiEnter,
@@ -161,6 +181,12 @@ export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
   const m = validateMessage(msg);
   const w = new ByteWriter();
   w.u8(PROTOCOL_VERSION);
+  if (isCold(m)) {
+    w.u8(COLD_ENVELOPE);
+    w.u16(COLD_MSG_IDS[m.type]);
+    encodeColdBody(w, m);
+    return w.result();
+  }
   w.u8(TYPE_IDS[m.type]);
   switch (m.type) {
     case 'input':
@@ -323,11 +349,21 @@ function encodeError(w: ByteWriter, m: ErrorMsg): void {
 
 // ---------------------------------------------------------------- decode
 /** Read the 2-byte header without decoding the body (gateways route on this). */
+function isCold(m: Message): m is ColdMessage {
+  return m.type in COLD_MSG_IDS;
+}
+
 export function peekHeader(buf: Uint8Array): { version: number; type: Message['type'] } {
   if (buf.length < 2) throw new ProtocolError('truncated', 'packet shorter than the 2-byte header');
   const version = buf[0]!;
   if (version !== PROTOCOL_VERSION)
     throw new ProtocolError('version', `unsupported protocol version ${version} (expected ${PROTOCOL_VERSION})`);
+  if (buf[1] === COLD_ENVELOPE) {
+    if (buf.length < 4) throw new ProtocolError('truncated', 'cold envelope shorter than its 4-byte header');
+    const cold = COLD_MSG_NAMES[(buf[2]! << 8) | buf[3]!];
+    if (!cold) throw new ProtocolError('type', `unknown cold message id ${(buf[2]! << 8) | buf[3]!}`);
+    return { version, type: cold };
+  }
   const type = MSG_TYPE_NAMES[buf[1]!];
   if (!type) throw new ProtocolError('type', `unknown message type id ${buf[1]}`);
   return { version, type };
@@ -337,6 +373,12 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
   const { type } = peekHeader(buf);
   const r = new ByteReader(buf);
   r.pos = 2;
+  if (buf[1] === COLD_ENVELOPE) {
+    r.pos = 4;
+    const body = decodeColdBody(r, type as ColdMessage['type']);
+    r.end();
+    return validateMessage(body);
+  }
   let msg: Message;
   switch (type) {
     case 'input': {
@@ -419,6 +461,8 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
       msg = { type, code, text };
       break;
     }
+    default:
+      throw new ProtocolError('type', `message ${type} is not a hot-family message`);
   }
   r.end();
   return validateMessage(msg); // range-checks everything (e.g. index ≤ 1023, dir ≤ 7)
