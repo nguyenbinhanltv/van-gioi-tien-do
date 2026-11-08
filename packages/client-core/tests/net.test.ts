@@ -23,6 +23,7 @@ const self = (o: Partial<SelfState> = {}): SelfState => ({
   dashLeftMs: 0,
   dashCdMs: 0,
   invulnMs: 0,
+  vitals: null,
   ...o,
 });
 const EAST: MoveIntent = { dir: 0, mag: 15, flags: 0 };

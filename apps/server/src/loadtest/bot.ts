@@ -370,7 +370,9 @@ export class Bot {
         this.ws.send(encode({ type: 'input', ack: this.lastSnapshotSeq, inputs: this.recent }), { binary: true });
         if (this.kind === 'cooldown') {
           // ignores the cooldown the server reports: one cast of skill 0 per input tick
-          this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0 }), { binary: true });
+          this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0, aim: null }), {
+            binary: true,
+          });
         } else if (now >= this.nextCastAt && ((this.o.skillIds?.length ?? 0) > 0 || (this.o.skillCount ?? 0) > 0)) {
           this.nextCastAt =
             now +
@@ -380,7 +382,9 @@ export class Bot {
             if ((this.readyLocal.get(id) ?? 0) <= now) ready.push(id);
           if (this.kind !== 'honest' || ready.length > 0) {
             const skillId = ready.length > 0 ? ready[Math.floor(this.rnd() * ready.length)]! : 0;
-            this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId, targetId: 0 }), { binary: true });
+            this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId, targetId: 0, aim: null }), {
+              binary: true,
+            });
           }
         }
         if (now >= this.nextPingAt) {
@@ -403,6 +407,6 @@ export class Bot {
     this.stopped = true;
     if (this.timer) clearTimeout(this.timer);
     if (this.sampleTimer) clearInterval(this.sampleTimer);
-    if (this.ws && this.ws.readyState <= WebSocket.OPEN) this.ws.close();
+    if (this.ws && this.ws.readyState <= WebSocket.OPEN) this.ws.close(1000, 'bye'); // a deliberate leave: the server removes the player at once (a drop would be held for a resume)
   }
 }

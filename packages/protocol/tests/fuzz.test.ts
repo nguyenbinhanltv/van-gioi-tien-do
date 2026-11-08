@@ -112,9 +112,9 @@ describe('fuzz: JSON debug codec', () => {
       {},
       { type: 'input' },
       { type: 'snapshot', entities: 3 },
-      { v: 2 },
-      { v: 2, type: 'aoi_leave', indices: 'x' },
-      { v: 2, type: 'ping', clientTimeMs: '5' },
+      { v: 4 },
+      { v: 4, type: 'aoi_leave', indices: 'x' },
+      { v: 4, type: 'ping', clientTimeMs: '5' },
     ];
     for (let k = 0; k < 5000; k++) {
       const v = r.bool(0.5)
@@ -132,7 +132,7 @@ describe('fuzz: JSON debug codec', () => {
     }
   });
   it('prototype pollution payloads are inert', () => {
-    const m = decodeJson('{"v":2,"type":"ping","clientTimeMs":1,"__proto__":{"polluted":1},"constructor":{"x":1}}');
+    const m = decodeJson('{"v":4,"type":"ping","clientTimeMs":1,"__proto__":{"polluted":1},"constructor":{"x":1}}');
     expect(m).toEqual({ type: 'ping', clientTimeMs: 1 });
     expect(({} as Record<string, unknown>).polluted).toBeUndefined();
   });

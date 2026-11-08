@@ -12,11 +12,12 @@ import {
   resources,
   view,
 } from 'cc';
-import { core, shared, world as cw } from './vendor/vgtd.mjs';
+import { combat as cb, core, shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
+import { BagPanel } from './BagPanel';
 import { CombatUi, createMockBackend } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
@@ -65,6 +66,8 @@ export class Bootstrap extends Component {
   /** `?combat=1`: combat HUD skeleton + offline mock combat loop (P3 client groundwork). */
   private combat: CombatUi | null = null;
   private combatOn = false;
+  /** the bag (key B): the server's inventory when online, a local sample with `#bagdemo` */
+  private bagPanel: BagPanel | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -211,18 +214,31 @@ export class Bootstrap extends Component {
     });
     this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
+    // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
+    if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
     if (this.combatOn) {
+      let backend: cb.CombatBackend;
+      if (this.online) {
+        // the server decides the class (no class selection on the wire yet: every player is 'kiem'), the HUD must show that kit
+        const online = this.online;
+        const sc = new cb.ServerCombat({ path: 'kiem', send: (m) => online.sendCast(m) });
+        online.attachCombat(sc);
+        backend = sc;
+      } else {
+        backend = createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11));
+      }
       this.combat = new CombatUi(
         hudRoot,
         worldRoot,
         this.ysort,
         art,
-        // offline mock backend; online mode will pass a `ServerCombat` fed by the net client instead (see docs/33-combat)
-        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
+        backend,
         () => this.player.pos,
         (x, y) => this.rig.clientToUi(x, y),
+        (x, y) => this.rig.clientToWorld(x, y),
       );
     }
+    this.bagPanel = this.makeBagPanel(hudRoot, art);
     this.input = new InputBridge(
       this.rig,
       { width: map.width, height: map.height, isWalkable: walkable },
@@ -232,11 +248,28 @@ export class Bootstrap extends Component {
       this.combat ? (tile) => this.combat!.pick(tile) : undefined,
     );
     this.rig.follow(this.playerScreen());
-    if (onlineRequested()) {
-      this.online = new OnlineSession(this.ysort, l2, art);
-      this.online.connect();
-    }
+    this.online?.connect();
     this.maybeAutotest();
+  }
+
+  /**
+   * The bag panel (D79). Online it shows the server's inventory (`net.bag`) and sends moves / claims through the net client; with `#bagdemo`
+   * (no server needed) it shows a local sample and applies swaps locally, only to check the panel in a headless capture.
+   */
+  private makeBagPanel(hudRoot: Node, art: ArtFrames): BagPanel {
+    const demo = /(^|[#&,])bagdemo(?![w])/.test(location.hash) ? makeDemoBag() : null;
+    const online = this.online;
+    return new BagPanel(
+      hudRoot,
+      art,
+      {
+        bag: () => (demo ? demo.bag : (online?.net.bag ?? null)),
+        move: (from, to) => (demo ? demo.move(from, to) : (online?.net.sendBagMove(from, to) ?? false)),
+        claim: () => (demo ? demo.claim() : (online?.net.sendBagClaim() ?? false)),
+        clientToUi: (x, y) => this.rig.clientToUi(x, y),
+      },
+      !!demo,
+    );
   }
 
   /**
@@ -375,6 +408,7 @@ export class Bootstrap extends Component {
       this.lastCanvasW = w;
       this.hud.layout(w, this.canvasUi.contentSize.height);
       this.combat?.layout(w, this.canvasUi.contentSize.height);
+      this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -382,6 +416,7 @@ export class Bootstrap extends Component {
         : this.combatOn
           ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
           : `${this.chibi.note} | keys 1-6 class, Shift walk`;
+    this.bagPanel?.update(dt);
     this.hud.update(dt);
   }
 
@@ -389,9 +424,49 @@ export class Bootstrap extends Component {
     this.input?.destroy();
     this.online?.destroy();
     this.combat?.destroy();
+    this.bagPanel?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);
     }
   }
+}
+
+/** Local stand-in for the server in `#bagdemo`: a sample bag where a move swaps the two slots and claim empties the pending queue. */
+function makeDemoBag(): {
+  bag: InstanceType<typeof core.BagModel>;
+  move: (a: number, b: number) => boolean;
+  claim: () => boolean;
+} {
+  const bag = new core.BagModel();
+  const slots: Array<unknown> = Array.from({ length: 40 }, () => null);
+  slots[0] = { kind: 'stack', defId: 1, quality: 2, qty: 12 };
+  slots[1] = { kind: 'stack', defId: 6, quality: 0, qty: 240 };
+  slots[2] = { kind: 'instance', defId: 5, quality: 5, durability: 8200, bound: false };
+  slots[3] = { kind: 'instance', defId: 4, quality: 3, durability: 10000, bound: false };
+  slots[9] = { kind: 'stack', defId: 2, quality: 4, qty: 2 };
+  let pending: Array<{ defId: number; quality: number; qty: number }> = [{ defId: 6, quality: 0, qty: 30 }];
+  const push = (): void =>
+    bag.applyState({ type: 'inv_state', wallet: [1234, 12, 1], slots, pending } as unknown as Parameters<
+      typeof bag.applyState
+    >[0]);
+  push();
+  return {
+    bag,
+    move: (a, b) => {
+      const tmp = slots[a];
+      slots[a] = slots[b] ?? null;
+      slots[b] = tmp ?? null;
+      push();
+      return true;
+    },
+    claim: () => {
+      if (pending.length === 0) return false;
+      const free = slots.findIndex((s) => s === null);
+      slots[free] = { kind: 'stack', defId: 6, quality: 0, qty: 30 };
+      pending = [];
+      push();
+      return true;
+    },
+  };
 }

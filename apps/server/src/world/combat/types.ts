@@ -8,10 +8,13 @@
  *    crit, pen, suppress via `@vgtd/shared`), heal / shield, HP, death and respawn, mob kills and drops.
  */
 import type { AnyElement, DropRoll, PathId, SkillDefinitions, Stats } from '@vgtd/shared';
-import type { SimWorld } from '@vgtd/sim';
+import type { SimInput, SimWorld } from '@vgtd/sim';
 
 /** `SkillHit.flags` bits on the wire (`skill_result.hits[]`): bit0 crit (protocol v1), bit1 the hit killed its target. Defined in `@vgtd/shared`. */
 export { HIT_FLAG_CRIT, HIT_FLAG_KILL } from '@vgtd/shared';
+
+/** A cast the node hands to `CombatSystem.preStep`: the sim's `CastInput` plus the aim point of the wire message (tile coordinates). */
+export type AimedInput = SimInput & { aim?: { i: number; j: number } | null };
 
 /** What the combat step needs to know about a living mob: defined by the mob module (`MobManager.combatStats`), re-exported here. */
 export type { MobCombatStats } from '../mobs/index.js';

@@ -158,6 +158,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D75: lõi combat server (`apps/server/src/world/combat/`): chí mạng gốc 5 % (trần 60 %), hồi sinh PvE 10 s, hit flag bit1 = hạ gục; xem `docs/DECISIONS.md` và `docs/34-combat-server.md`.]
 
+[Cập nhật D78: giao thức v3 (`skill_cast` có điểm ngắm tùy chọn, `self.vitals` HP / MP / khiên của chính người chơi); xem `docs/DECISIONS.md` và `docs/24-giao-thuc-mang.md`.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Những giá trị ở cột "Cũ" vẫn còn nằm trong tài liệu gốc tương ứng; khi gặp, dùng giá trị ở cột "Hiện hành".

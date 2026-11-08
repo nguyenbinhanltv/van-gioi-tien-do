@@ -20,7 +20,7 @@ Cast bị sim từ chối trả lời ngay (`reason` = `CastReason`, không hits
 - Sát thương: `damageBreakdown` của `@vgtd/shared` (docs/07 §4): `Raw = stat × c_skill`, `DEF_eff` có Ngũ hành và Pen, `Raw² / (Raw + DEF_eff) × M_elem × Crit × Suppress × U(0,95; 1,05)`, làm tròn, ≥ 1. Test vàng lặp lại ví dụ docs/07 (ATK 563, DEF 350): trung tính **347**, Hỏa khắc Kim **460**, Hỏa bị Thủy khắc **295**.
 - Hệ của kỹ năng: `root_main` = hệ chính của lớp, `none` = không tính Ngũ hành. Hệ của mob từ `MobPort` (có thể null).
 - Chí mạng: 5 % gốc (docs/31 B-10) + `crit_chance` của bị động lớp (Kiếm Tâm +5 %), trần 60 %; nhân `CRIT_DEFAULT` (1,5). Pen bị động cộng vào `pen` của kỹ năng, trần `PEN_MAX`.
-- Chỉ số người chơi: `statsAt(realm, substage)` (07 §1), mặc định Luyện Khí 1 cho tới khi tiến trình (#205) cấp cảnh giới. HP / MP khởi tạo thực thể lấy từ đây khi bật combat.
+- Chỉ số người chơi: `roundedStatsAt(realm, substage)` (07 §1, số nguyên: HP không bao giờ vượt HP tối đa), mặc định Luyện Khí 1 cho tới khi tiến trình (#205, D76) cấp cảnh giới: `onStageChange` (nạp hồ sơ xong, sau mỗi lần đột phá) gọi `CombatSystem.setRealm`, tính lại hồ sơ, HP / MP tối đa (giữ tỉ lệ HP / MP), và `vitals` gửi lại cho client. HP / MP khởi tạo thực thể lấy từ đây khi bật combat.
 - Hình dạng: `single`, `circle`, `ring` quanh neo (người cast / mục tiêu / điểm đất), `cone` và `line` theo hướng nhìn của người cast; tối đa `global.max_targets_per_cast` mục tiêu, gần neo nhất trước.
 - Hồi sinh người chơi: 10 s ở điểm hồi sinh (docs/01 §12.2), đầy HP / MP, xóa cooldown. Khiên (`shield`) hấp thụ sát thương trước khi trừ HP.
 - Rớt đồ: `resolveDrops` với nguồn `field` / `elite` / `boss` của mob, luồng PRNG `drop` riêng (fork từ seed). Chưa có kho đồ nên kết quả đi qua `onDrops` và sự kiện `drops`.
@@ -33,11 +33,11 @@ Không đồng hồ, không `Math.random`; toán hình học chỉ + − × ÷ v
 
 - **Mob (#204)**: `MobPort { combatStats(id), kill(world, id) }`; `MobManager` thỏa mãn nguyên trạng và là `MobPort` mặc định của `WorldNode` khi có cả `mobs` và `combat` (`combat.mobs` ghi đè). Mob là thực thể sim bình thường nên cast / tầm / LOS của sim áp dụng như với người chơi; `combatStats` cho DEF, cảnh giới, hệ, `dropSource`, HP tối đa, `kill` hủy mob và đặt giờ hồi sinh.
 - **Bật trong node**: `new WorldNode({ mobs: true, combat: { onDrops } })` (mob của `MobManager` tự thành mục tiêu); thiếu `combat` thì node hành xử như cũ (cast hợp lệ → `skill_result` không hits).
-- **Client online**: `ServerCombat` (client-combat) cài `CombatBackend` giống `MockCombat`; HUD (`Combat.ts`) nhận backend. Nối vào chế độ `?online=1` chờ client mạng (#199) merge: `ServerCombat.applySkillResult` nhận `skill_result`, `upsertEnemy` / `removeEnemy` nhận AOI + `hpPct`, `setServerTime` nhận tick snapshot.
+- **Client online** (`?online=1&combat=1`): `ServerCombat` (client-combat) cài `CombatBackend` giống `MockCombat`; HUD (`Combat.ts`) nhận backend. `OnlineSession.attachCombat` nối hook `NetClient` (#209): `onSkillResult` → `applySkillResult`, `onAoiEnter` / `onAoiLeave` → tên và HP tối đa quái, mỗi frame quái trong tầm nhìn → `upsertEnemy` / `syncEnemy` (vị trí nội suy + `hpPct`), `onSnapshot` → `setServerTime(tick × 50)` và `self.vitals` → `setSelfVitals`. Cast đi qua `NetClient.sendSkillCast`. Server quyết định lớp (chưa có chọn lớp trên dây: mọi người chơi là `kiem`), nên HUD online luôn hiện bộ kỹ năng `kiem`.
 
 ## Giới hạn đã biết (OPEN-ITEMS)
 
 - Effect khác `damage` / `heal` / `shield` (dot, status, dash, buff, summon ...) chưa mô phỏng; module báo `unsupported_effect`.
-- Giao thức chưa có điểm ngắm (`skill_cast` chỉ có `targetId`): kỹ năng `ground` dùng mục tiêu nếu có, không thì người cast; `direction` dùng hướng nhìn.
-- Giao thức chưa gửi HP / MP của chính người chơi (`SelfState` không có): HUD online chưa có nguồn thật.
+- **Điểm ngắm và vitals (D78, giao thức v3)**: `skill_cast` mang điểm ngắm tùy chọn (1/32 ô): kỹ năng `ground` neo vào điểm ngắm (rồi mục tiêu, rồi người cast), cone / line quay theo điểm ngắm; điểm ngắm bị kiểm tầm và LOS lúc giải quyết như mục tiêu. Khối `self` của snapshot mang `vitals` (HP, HP tối đa, MP, MP tối đa, khiên) khi đổi. Client lấy điểm ngắm từ vị trí con trỏ (cảm ứng chưa có điểm ngắm: server dùng mục tiêu hoặc hướng nhìn) và ghim vào tầm kỹ năng.
+- `CombatSystem.setRealm(world, id, realm, substage)`: móc cho tiến trình (#205 `onStageChange`): tính lại hồ sơ, HP / MP tối đa, giữ tỉ lệ HP / MP.
 - Mob chưa tấn công người chơi (`damagePlayer` sẵn sàng cho bước đó và cho PvP); chưa có cấp mở khóa kỹ năng, kho đồ, độ bền.
