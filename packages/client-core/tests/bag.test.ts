@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
 import { InvOp, InvReason, decode, encode, type InvResultMsg, type InvStateMsg, type Message } from '@vgtd/protocol';
-import { BagModel, NetClient, invReasonText, makeRequestId, type NetDeps, type SocketLike } from '@vgtd/client-core';
+import { BagModel, NetClient, invReasonText, makeRequestId, type InventoryEvents, type NetDeps, type SocketLike } from '@vgtd/client-core';
 
 const STATE: InvStateMsg = {
   type: 'inv_state',
@@ -123,15 +123,15 @@ const deps: NetDeps = {
     return () => (s = (s * 9301 + 0.49297) % 1);
   })(),
 };
-async function client(events = {}): Promise<{ net: NetClient; sock: FakeSocket }> {
+async function client(inv: InventoryEvents = {}): Promise<{ net: NetClient; sock: FakeSocket }> {
   const net = new NetClient({
     baseUrl: 'http://x',
     username: 'u',
     password: 'p',
     deps,
     makeGrid: (m) => TileGrid.fromRows(Array.from({ length: m }, () => '.'.repeat(m))),
-    events,
   });
+  net.inventoryEvents = inv;
   await net.connect();
   return { net, sock: FakeSocket.last };
 }
@@ -159,6 +159,15 @@ describe('NetClient bag wiring', () => {
     // claim
     expect(net.sendBagClaim()).toBe(true);
     expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ type: 'inv_cmd', op: InvOp.ClaimPending });
+  });
+
+  it('replacing net.events (as attachCombat does) does not drop the inventory hooks', async () => {
+    const seen: string[] = [];
+    const { net, sock } = await client({ onInventory: () => seen.push('state') });
+    net.events = { onSkillResult: () => undefined }; // the scene swaps the whole events object
+    sock.push(STATE);
+    expect(seen).toEqual(['state']);
+    expect(net.bag.ready).toBe(true);
   });
 
   it('a throwing hook never breaks the session, and a closed socket refuses commands and clears the bag', async () => {

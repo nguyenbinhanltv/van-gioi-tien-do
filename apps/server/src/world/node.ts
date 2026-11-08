@@ -136,6 +136,8 @@ export interface WorldMetrics {
   kicksBadMessages: number;
   kicksRate: number;
   kicksBackpressure: number;
+  /** `inv_state` sends that threw (state or encode); the world tick carried on */
+  inventorySendErrors: number;
 }
 
 export interface WorldNodeOptions {
@@ -215,6 +217,7 @@ export class WorldNode {
     kicksBadMessages: 0,
     kicksRate: 0,
     kicksBackpressure: 0,
+    inventorySendErrors: 0,
   };
   /** duration (ms) of each tick: sim step + AOI + encode + socket writes */
   readonly tickMs: number[] = [];
@@ -549,11 +552,16 @@ export class WorldNode {
     const sync = this.invSync;
     if (!sync) return;
     for (const owner of sync.drain()) {
-      let msg: ReturnType<InventorySync['stateOf']> | null = null;
-      for (const c of this.clients.values()) {
-        if (c.accountId !== owner || c.dead) continue;
-        msg ??= sync.stateOf(owner);
-        this.send(c, msg);
+      // one owner's failure (state or encode) must never stop the world tick: count it and carry on with the others
+      try {
+        let msg: ReturnType<InventorySync['stateOf']> | null = null;
+        for (const c of this.clients.values()) {
+          if (c.accountId !== owner || c.dead) continue;
+          msg ??= sync.stateOf(owner);
+          this.send(c, msg);
+        }
+      } catch {
+        this.metrics.inventorySendErrors++;
       }
     }
   }

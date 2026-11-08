@@ -22,6 +22,8 @@ export const INVENTORY_CONFIG = {
   PENDING_MAX: 50,
   /** how many recent grant keys per service are remembered for replay detection */
   GRANT_KEYS_KEPT: 10_000,
+  /** quantity one pending entry can hold: the wire carries it as a u16 (`INV_LIMITS.MAX_QTY`), the rest of a roll is lost and counted */
+  PENDING_QTY_MAX: 65_535,
 } as const;
 
 const FAUCET: Record<DropSource, AccountKind> = {
@@ -231,16 +233,21 @@ export class InventoryService {
   }
 
   private park(st: OwnerState, g: ItemGrant): Placement {
+    const cap = INVENTORY_CONFIG.PENDING_QTY_MAX;
     const same = st.pending.find((p) => p.defId === g.defId && p.quality === g.quality);
     if (same) {
-      same.qty += g.qty;
-      return 'pending';
+      const take = Math.min(g.qty, cap - same.qty);
+      same.qty += take;
+      this.lostItems += g.qty - take; // an entry never exceeds what the wire can carry
+      return take > 0 ? 'pending' : 'lost';
     }
     if (st.pending.length >= this.pendingMax) {
       this.lostItems += g.qty;
       return 'lost';
     }
-    st.pending.push({ defId: g.defId, quality: g.quality, qty: g.qty });
+    const take = Math.min(g.qty, cap);
+    this.lostItems += g.qty - take;
+    st.pending.push({ defId: g.defId, quality: g.quality, qty: take });
     return 'pending';
   }
 

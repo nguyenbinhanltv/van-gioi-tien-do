@@ -153,11 +153,20 @@ export class BagPanel {
     this.lastStates = -1;
   }
 
-  /** Re-anchor to the canvas size (design units): centred, shrunk to fit. */
+  /**
+   * Re-anchor to the canvas size (design units): RIGHT-MIDDLE so nothing overlaps the other HUD (PerfHud top-left, target frame
+   * top-centre, progression HUD top-right with a toast below it, hotbar bottom-centre), shrunk to fit the space between them.
+   */
   layout(canvasW: number, canvasH: number): void {
-    this.scale = Math.min(1, (canvasW - 20) / this.size.w, (canvasH - 40) / this.size.h);
+    const topClear = 140; // the progression HUD (92) + its toast + margin
+    const bottomClear = 90; // the hotbar
+    this.scale = Math.min(1, (canvasW - 20) / this.size.w, (canvasH - topClear - bottomClear) / this.size.h);
     this.root.setScale(this.scale, this.scale, 1);
-    this.root.setPosition(0, 0, 0);
+    this.root.setPosition(
+      canvasW / 2 - 8 - (this.size.w * this.scale) / 2,
+      canvasH / 2 - topClear - (this.size.h * this.scale) / 2,
+      0,
+    );
   }
 
   private bag(): Bag | null {

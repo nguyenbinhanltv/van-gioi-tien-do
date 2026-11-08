@@ -268,6 +268,39 @@ describe('the visible bag over the wire (inv_state / inv_cmd / inv_result)', () 
     expectSynced(c, r.inventory, 'acc');
   });
 
+  it('a pending entry at the quantity cap still encodes: inv_state never fails because of loot volume', () => {
+    const r = rig({ bagSlots: 1, pendingMax: 2 });
+    const c = r.join('acc');
+    r.inventory.grantDrops('acc', [{ item: 'blueprint_white_green', qty: 1, quality: 0 }], 'field', 'fill');
+    for (let k = 0; k < 4; k++)
+      r.inventory.grantDrops('acc', [{ item: 'craft_material', qty: 40_000 }], 'field', `k${k}`);
+    expect(() => encode(r.node.invSync!.stateOf('acc'))).not.toThrow();
+    r.tick();
+    expect(c.bag.pendingTotal).toBe(65_535);
+    expect(r.node.metrics.inventorySendErrors).toBe(0);
+  });
+
+  it('one owner whose inv_state cannot be built or sent never stops the tick or starves the others', () => {
+    const r = rig();
+    const bad = r.join('bad');
+    const good = r.join('good');
+    r.tick();
+    const real = r.node.invSync!.stateOf.bind(r.node.invSync!);
+    r.node.invSync!.stateOf = (owner: string) => {
+      if (owner === 'bad') throw new Error('boom');
+      return real(owner);
+    };
+    r.inventory.grantDrops('bad', [{ item: 'stone_ha', qty: 1 }], 'field', 'k1');
+    r.inventory.grantDrops('good', [{ item: 'stone_ha', qty: 2 }], 'field', 'k2');
+    const before = good.states.length;
+    expect(() => r.tick()).not.toThrow();
+    expect(r.node.metrics.inventorySendErrors).toBe(1);
+    expect(good.states.length).toBe(before + 1);
+    expect(good.bag.wallet.LT_HA).toBe(2);
+    expect(bad.closed).toBeNull(); // not kicked: the world just carries on
+    expect(() => r.tick(3)).not.toThrow();
+  });
+
   it('a node without an inventory answers inv_cmd with an error and counts it', () => {
     const node = new WorldNode({ seed: 1, mapTiles: 64 });
     const c = new Client();

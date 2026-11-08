@@ -412,4 +412,5 @@ Còn mở / lưu ý:
 3. **Nhịp lệnh (10/s, burst 10), số ô túi 40 (D77), số mục hàng chờ tối đa** là mặc định tạm cần game designer duyệt.
 4. **Gửi toàn bộ túi mỗi thay đổi** (≤ ~0,6 KB với 40 ô, tối đa 20/s mỗi người khi nhặt liên tục): đủ cho beta, cần delta nếu túi lớn hơn hoặc nhặt dày đặc; chưa đo băng thông với 100 người nhặt cùng lúc.
 5. **Bảng túi chưa kiểm trên điện thoại thật / màn hình nhỏ**; chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
-6. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.
+6. **Hàng chờ có trần số lượng**: mỗi mục hàng chờ tối đa 65.535 (giới hạn u16 của dây); phần vượt của một roll bị tính mất (`lostItems`), không bao giờ làm `inv_state` lỗi mã hóa; mỗi chủ gửi lỗi chỉ tính vào `metrics.inventorySendErrors` và không dừng tick. Cần luật cho hàng chờ đầy lâu (hết hạn / thư hệ thống).
+7. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.

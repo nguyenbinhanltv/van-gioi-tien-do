@@ -67,14 +67,15 @@ export class InventorySync {
     }) as unknown as [number, number, number];
     const slots: InvSlot[] = bag.slots.map((s) => {
       if (!s) return null;
-      if (s.kind === 'stack') return { kind: 'stack', defId: s.defId, quality: s.quality, qty: s.qty };
+      if (s.kind === 'stack')
+        return { kind: 'stack', defId: s.defId, quality: s.quality, qty: Math.min(s.qty, INV_LIMITS.MAX_QTY) };
       const i = bag.instances.get(s.id)!;
       return { kind: 'instance', defId: i.defId, quality: i.quality, durability: i.durability, bound: i.bound };
     });
     const pending = this.inventory
       .pendingOf(owner)
       .slice(0, INV_LIMITS.MAX_PENDING)
-      .map((p) => ({ defId: p.defId, quality: p.quality, qty: p.qty }));
+      .map((p) => ({ defId: p.defId, quality: p.quality, qty: Math.min(p.qty, INV_LIMITS.MAX_QTY) })); // defence in depth: an encode error must never come from state
     return { type: 'inv_state', wallet, slots, pending };
   }
 

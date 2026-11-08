@@ -62,7 +62,14 @@ export interface NetEvents {
   onAoiLeave?(indices: readonly number[]): void;
   /** `tick` is the simulation tick (x NETWORK.TICK_MS = server time); `entities` are the records in this snapshot only (unchanged ones are omitted, D73). */
   onSnapshot?(tick: number, entities: readonly SnapshotEntity[], self: SelfState | null): void;
-  /** The bag changed: `net.bag` already holds the new state (D79). */
+}
+
+/**
+ * Inventory callbacks (D79), a SEPARATE object from `NetEvents` on purpose: the scene replaces `events` wholesale (combat attaches its own),
+ * which would silently drop hooks living there. Set `net.inventoryEvents`; `net.bag` is always up to date whether or not anyone listens.
+ */
+export interface InventoryEvents {
+  /** The bag changed: `net.bag` already holds the new state. */
   onInventory?(msg: InvStateMsg): void;
   /** The server answered an inventory command (`net.bag.lastResult` is set). */
   onInvResult?(msg: InvResultMsg): void;
@@ -129,6 +136,8 @@ export class NetClient {
 
   /** The visible bag (D79): updated from `inv_state` / `inv_result`, read by the bag panel. */
   readonly bag: BagModel;
+  /** Callbacks for the bag (own object, see `InventoryEvents`). */
+  inventoryEvents: InventoryEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -246,11 +255,11 @@ export class NetClient {
         break;
       case 'inv_state':
         this.bag.applyState(msg);
-        this.emit(() => this.events.onInventory?.(msg));
+        this.emit(() => this.inventoryEvents.onInventory?.(msg));
         break;
       case 'inv_result':
         this.bag.applyResult(msg);
-        this.emit(() => this.events.onInvResult?.(msg));
+        this.emit(() => this.inventoryEvents.onInvResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
