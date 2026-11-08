@@ -17,6 +17,8 @@ npm run serve -w client-cocos            # http://localhost:7456
 - `--release` (`npm run build:web -w client-cocos -- --release`) build không debug.
 - Không chạy được trên CI (CI không có Cocos). `npm run typecheck -w client-cocos` chỉ chạy khi đã có `temp/` (sau lần build đầu), còn lại bỏ qua.
 
+**HUD chiến đấu (P3 groundwork, vòng chiến đấu giả lập offline):** mở `/?combat=1` (thêm `&class=kiem-tu|phap-tu|the-tu|dan-phu-tu|dao-tu|thuong-tu`). Thanh kỹ năng 8 ô của lớp (D49, phím 1-8 hoặc chạm / click ô) với vòng cooldown + GCD, thanh HP / MP / khiên, chọn mục tiêu (click kẻ địch, Tab / Shift+Tab, Esc bỏ chọn), số sát thương bay. Logic nằm trong `packages/client-combat` (có test); mọi con số của vòng giả lập là placeholder, không phải luật chiến đấu (xem OPEN-ITEMS). Smoke test headless: `npm run combat:smoke -w client-cocos`.
+
 **Đo hiệu năng P1 trên điện thoại thật qua LAN:** `npm run serve -w client-cocos` in các URL `LAN: http://<IP>:7456/?npcs=20`; mở URL đó trên điện thoại cùng Wi-Fi, số liệu (FPS, draw call, RAM, gói tải) hiện trên HUD. Chi tiết từng bước và cờ URL: [docs/33-p1-perf.md](../../docs/33-p1-perf.md).
 
 Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.

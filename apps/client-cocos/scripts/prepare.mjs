@@ -1,5 +1,5 @@
 // Prepares generated, git-ignored inputs for the Cocos project:
-//   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world
+//   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world + @vgtd/client-combat
 //   2. assets/resources/world/*                 <- tilemap from @vgtd/procgen (npm run gen:tilemap)
 //   3. assets/resources/dragonbones/viewer/*    <- DragonBones 5.5 test rig from @vgtd/dragonbones-testrig
 // Run: npm run prepare:assets -w client-cocos   (also invoked by build:web)
@@ -53,6 +53,7 @@ writeFileSync(
     "export * as core from '../../../../../packages/client-core/src/index';",
     "export * as character from '../../../vendor-src/character-subset';",
     "export * as world from '../../../../../packages/client-world/src/index';",
+    "export * as combat from '../../../../../packages/client-combat/src/index';",
     '',
   ].join('\n'),
 );

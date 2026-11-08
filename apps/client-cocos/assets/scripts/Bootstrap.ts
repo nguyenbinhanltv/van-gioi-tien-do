@@ -17,6 +17,7 @@ import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
+import { CombatUi } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
@@ -59,6 +60,9 @@ export class Bootstrap extends Component {
   private ysort!: YSortLayer;
   private npcs: NpcCrowd | null = null;
   private route: RouteWalker | null = null;
+  /** `?combat=1`: combat HUD skeleton + offline mock combat loop (P3 client groundwork). */
+  private combat: CombatUi | null = null;
+  private combatOn = false;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -177,6 +181,7 @@ export class Bootstrap extends Component {
     this.marker.active = false;
 
     const hudRoot = newNode('Hud', this.node);
+    this.combatOn = ['1', 'true'].includes(params.get('combat') ?? '');
     this.hud = new PerfHud(hudRoot, art);
     this.hud.trackTexture(tilesetImage.width, tilesetImage.height);
     this.hud.trackTexture(art.texture.width, art.texture.height);
@@ -189,12 +194,27 @@ export class Bootstrap extends Component {
     });
     this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
+    if (this.combatOn) {
+      this.combat = new CombatUi(
+        hudRoot,
+        worldRoot,
+        this.ysort,
+        art,
+        this.chibi.classInfo.id,
+        { i: spawn.i + 0.5, j: spawn.j + 0.5 },
+        walkable,
+        rng(11),
+        () => this.player.pos,
+        (x, y) => this.rig.clientToUi(x, y),
+      );
+    }
     this.input = new InputBridge(
       this.rig,
       { width: map.width, height: map.height, isWalkable: walkable },
       this.player,
       art,
       hudRoot,
+      this.combat ? (tile) => this.combat!.pick(tile) : undefined,
     );
     this.rig.follow(this.playerScreen());
     this.maybeAutotest();
@@ -240,7 +260,7 @@ export class Bootstrap extends Component {
   private bindPlayTestKeys(): void {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'Shift') this.player.walkMode = true;
-      const n = /^[1-6]$/.test(e.key) ? Number(e.key) : 0;
+      const n = !this.combatOn && /^[1-6]$/.test(e.key) ? Number(e.key) : 0; // digits are hotbar keys in combat mode
       if (n && !e.ctrlKey && !e.metaKey && !e.altKey) this.chibi.setClass(CHIBI_CLASSES[n - 1]!.id);
     };
     const up = (e: KeyboardEvent) => {
@@ -306,6 +326,7 @@ export class Bootstrap extends Component {
     }
     if (this.route) frame = { ...frame, ...this.route.step(this.player.pos) };
     this.player.update(dt, frame);
+    this.combat?.update(dt, frame.target);
     this.rig.follow(this.playerScreen());
     this.ysort.sort();
     this.npcs?.update(dt);
@@ -320,13 +341,18 @@ export class Bootstrap extends Component {
     if (w !== this.lastCanvasW) {
       this.lastCanvasW = w;
       this.hud.layout(w, this.canvasUi.contentSize.height);
+      this.combat?.layout(w, this.canvasUi.contentSize.height);
     }
-    if (!/autotest/.test(location.hash)) this.hud.note = `${this.chibi.note} | keys 1-6 class, Shift walk`;
+    if (!/autotest/.test(location.hash))
+      this.hud.note = this.combatOn
+        ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
+        : `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.hud.update(dt);
   }
 
   onDestroy(): void {
     this.input?.destroy();
+    this.combat?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

@@ -11,3 +11,4 @@ export * from '../../../packages/shared/src/formulas/tribulation.js';
 export * from '../../../packages/shared/src/formulas/combat.js';
 export * from '../../../packages/shared/src/formulas/cultivation.js';
 export * from '../../../packages/shared/src/formulas/economy.js';
+export * from '../../../packages/shared/src/formulas/skills.js'; // class skill kits (D49) for the combat HUD
