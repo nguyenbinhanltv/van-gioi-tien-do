@@ -1,0 +1,25 @@
+{
+  "prompt": "Surgical image EDIT of image1: exact transparent 4x4 NE-running sprite sheet, 1024x1024, 256px cells. ONLY change the skull/main hair cap in row1 column2 (zero-based cell1). It is slightly too narrow and short. Increase only that compact plum hair-cap/coil silhouette width by TWO native pixels total (about4%), centered on the existing skull centreline. Raise its visible main cap crown by TWO native pixels (crown near global x392,y29 should become near392,27). Keep the lower hair/neck boundary fixed: no shoulder, neck, body or foot movement. Match locked original female Phap tu face/ear identity and approved plum/vermilion/gold cel-shaded style in image2. All other15 frames remain unchanged. Preserve exact same four-by-four lattice, no margins or repacking. Preserve dynamic pose, left-hand red fan, tassels, gold earrings, red hairpins, ribbons, streaming long hair, short T1 tunic and trousers. Do not move or redraw the fan, shoulder/acromion, earring, sleeve, arm, torso, leg or foot. No rescaling whole frames. No new FX/text/grid. Keep transparent background and anti-aliased tinted outline. This is a tiny head-scale correction, not a new character, pose, outfit or camera.",
+  "utcStart": "2026-11-08 04:07:00 UTC",
+  "utcEndObserved": "2026-11-08 04:07:56 UTC",
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 8,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "references": ["NE/templates/run.D57-edit-input.png", "reference/NE.master.png"],
+  "raw": "raw/run.attempt8.png",
+  "status": "not selected; retained raw provenance and selection.json rationale",
+  "rawSha256": "49db9f4193e34b049cbed2f3ee70041dfad47a744ee96e8fc3f3ed213b6dc836",
+  "utcRawOutputFileModified": "2026-11-08T04:07:37.775Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/templates/run.D57-edit-input.png",
+      "sha256": "9d754ca6c7d024db7a9e30140edda1f321f8c53ab46c34a5549fba912d96b09b"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}

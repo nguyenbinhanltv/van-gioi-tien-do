@@ -1,0 +1,19 @@
+{
+  "projectSha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e",
+  "runtimeContractSha256": "421183eda8ea6c13d4689bfd3178399f4beadf4f2d9fa17100362943e259049f",
+  "ok": true,
+  "counts": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 19,
+    "regression": 0,
+    "info": 220
+  },
+  "masterSha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4",
+  "timingProfile": "smooth-v2",
+  "frameRate": 24,
+  "clips": 15,
+  "drawings": 202,
+  "sourceHeadRepairs": "D57 source+mask checks recorded in runtime contract; D53/D56 head evidence remains active",
+  "renderFilesUnchangedAfterBacklogNotes": true
+}

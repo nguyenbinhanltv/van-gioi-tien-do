@@ -1,0 +1,27 @@
+{
+  "clip": "walk",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP walk: 16figures4x4 equal squarecells, seamless walking cycle NE toward upper-right, rear threequarter NEVER rotatebody/head towardcamera. Frame0 rightfoot heelcontact ahead along NE axis, leftfoot behind;1loading,2midstance,3rightlatepush,4leftpassing,5leftswing,6lateleftswing,7precontact;8leftheelcontact/rightbehind,9loading,10leftmidstance,11leftpush,12rightpassing,13rightswing,14laterightswing,15precontact connecting0. Obey image2 separate orange/cyan sole ghosts and leading-leg corners; ghosts represent FOOT CENTERS notknees. True opposite legs alternate, no duplicate leg phases. Feet move along NE ground-depth diagonal, preserve ytravel not flat shoeheights. Modest torso bob1-3px, same exact skull/maincap width/crownsize. Fan naturally stableleft screenleft, rightarm counterswing subtle. Longhair/sash/sleeves lag2frames and settle. Full body inclfeet within eachcell. NO visibleguides/grid/text/shadow/FX.",
+  "utcStart": "2026-11-08 00:02:44 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/walk.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/walk.attempt1.png",
+  "selected": "sheets/walk.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:03:23 UTC",
+  "rawSha256": "c0b4d78c36fd852ee5a357bd2c3dba2671262b1256a136cbd661dabbcc26f2bc",
+  "utcRawOutputFileModified": "2026-11-08T00:03:23.727Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/walk.head-guide.png",
+      "sha256": "38784e625d86374e9ab181aaf0f2827cb713af512eae5d49919f65910bab866d"
+    }
+  ],
+  "selectedSha256": "c0b4d78c36fd852ee5a357bd2c3dba2671262b1256a136cbd661dabbcc26f2bc"
+}

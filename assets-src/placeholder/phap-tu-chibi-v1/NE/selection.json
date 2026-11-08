@@ -1,0 +1,49 @@
+{
+  "defaultAttempt": 1,
+  "attempts": {},
+  "notes": "Attempt1 bodies retained; reviewed masked AI cap contributors selected per cell. D57 reuses computed pre-edit registration for run0/1/12, verified exact RGBA outside explicit head mask. No individual frame rescale.",
+  "headEdits": {
+    "run": {
+      "defaultAttempt": 2,
+      "defaultMaskPolicy": "legacy-core-v1",
+      "cells": {
+        "1": {
+          "attempt": 9,
+          "maskPolicy": "whole-cap-v2"
+        },
+        "4": {
+          "attempt": 7,
+          "maskPolicy": "cap-width-v3"
+        },
+        "5": {
+          "attempt": 6,
+          "maskPolicy": "cap-width-v3"
+        },
+        "6": {
+          "attempt": 6,
+          "maskPolicy": "whole-cap-v2"
+        },
+        "7": {
+          "attempt": 6,
+          "maskPolicy": "cap-width-v3"
+        },
+        "9": {
+          "attempt": 6,
+          "maskPolicy": "cap-width-v3"
+        },
+        "12": {
+          "attempt": 7,
+          "maskPolicy": "whole-cap-v2"
+        },
+        "13": {
+          "attempt": 6,
+          "maskPolicy": "cap-width-v3"
+        },
+        "15": {
+          "attempt": 6,
+          "maskPolicy": "whole-cap-v2"
+        }
+      }
+    }
+  }
+}

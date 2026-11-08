@@ -1,0 +1,27 @@
+{
+  "clip": "hit-dash",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP hit-dash: EXACT16figures4x4 with TWO SEQUENTIAL clips inone sheet: globalcells0-5=HIT6frames; global6-15=DASH10frames. FixedNErear3quarterorientation everycell. HIT0neutral1sharpbackwardflinch2-3kneescompress/shoulderrecoil4recover5ready; keepnaturalLEFTfan grip, nohandtransfer. DASHlocal0(global6)ready1lowanticipation2launch3-6dynamicNEforwardflight/lungewithkneestuck,7landcompress8recover9ready. Stronghair/ribbon/sleeveoverhangtowardlowerleft withlag, don'tflattenflight; preserve EXACTskullsize/maincapandmasterbreadth, sameclothparts. Onlyposture/roottravelchanges, no zoom/changinganatomy. Modestroottranslation staysinsidecellwithfullfan/feet/pin/loosehairmargins. NoFX/shadow/afterimages/ghosts/grid/text. All16figuresfullydrawn.",
+  "utcStart": "2026-11-08 00:11:06 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/hit-dash.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/hit-dash.attempt1.png",
+  "selected": "sheets/hit-dash.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:11:35 UTC",
+  "rawSha256": "123421a42dccead60e26339583581f78c5e4312b5955df2e46c3e9be7a944a8f",
+  "utcRawOutputFileModified": "2026-11-08T00:11:35.457Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/hit-dash.head-guide.png",
+      "sha256": "f48904325638a7f3adca88d9e11e7f156e3030b145b3bfddea9abffd00518985"
+    }
+  ],
+  "selectedSha256": "123421a42dccead60e26339583581f78c5e4312b5955df2e46c3e9be7a944a8f"
+}

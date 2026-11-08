@@ -1,0 +1,287 @@
+{
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "direction": "NE",
+  "source": "dragonbones/phap-tu-chibi-v1/phaptuchibi",
+  "zoom": 2,
+  "midpointSamplesPerClip": 24,
+  "captureExitCode": 0,
+  "utcCaptureIndexModified": "2026-11-08T04:19:25.876Z",
+  "captureIndexSha256": "e808b0f9f9ee42dcd321de98458e5d8ad469b011f9a482e88a3d0c822d4b95a3",
+  "frameRate": 24,
+  "projectSha256": "27465405e6d5b05c02cfde1c3395c2f701b952a851d3bb9b5af56b200fd81f2e",
+  "runtimeAssets": [
+    {
+      "file": "phaptuchibi_NE_page1_tex.json",
+      "sha256": "5b667560ac39d86eb5c24b06f9f1e2c214d5da7a4076a47738c0d18d7ff3ad16",
+      "capturedSourceSha256": "5b667560ac39d86eb5c24b06f9f1e2c214d5da7a4076a47738c0d18d7ff3ad16",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_NE_page1_tex.png",
+      "sha256": "f900a8da13f50464482baac8166fade9e0cdb291ccad245a42a29b6b1d90623f",
+      "capturedSourceSha256": "f900a8da13f50464482baac8166fade9e0cdb291ccad245a42a29b6b1d90623f",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_NE_ske.json",
+      "sha256": "3fee8cebe356a8d93373eb3ebc0f1d692e56e216d45972fa1a095d8d8e5978ee",
+      "capturedSourceSha256": "3fee8cebe356a8d93373eb3ebc0f1d692e56e216d45972fa1a095d8d8e5978ee",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_NE_tex.json",
+      "sha256": "57aeeb890fda26d598b272a77ab66af3c5919e4c47915cc27fdd151e2cf05a65",
+      "capturedSourceSha256": "57aeeb890fda26d598b272a77ab66af3c5919e4c47915cc27fdd151e2cf05a65",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_NE_tex.png",
+      "sha256": "84965ef65d934db52a56a2eb8088135beea0e04f93158c42dd203bbb67785246",
+      "capturedSourceSha256": "84965ef65d934db52a56a2eb8088135beea0e04f93158c42dd203bbb67785246",
+      "byteMatch": true
+    }
+  ],
+  "clips": [
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif",
+      "name": "idle",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif",
+      "name": "meditate",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif",
+      "name": "walk",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif",
+      "name": "run",
+      "filesExist": true
+    },
+    {
+      "duration": 0.4166666666666667,
+      "keyFrames": 10,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif",
+      "name": "dash",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 12,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif",
+      "name": "sword_fly",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5833333333333334,
+      "keyFrames": 14,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif",
+      "name": "attack",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif",
+      "name": "cast",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 12,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif",
+      "name": "channel",
+      "filesExist": true
+    },
+    {
+      "duration": 0.25,
+      "keyFrames": 6,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif",
+      "name": "hit",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 12,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif",
+      "name": "die",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 16,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif",
+      "name": "tribulation",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 12,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif",
+      "name": "emote",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5833333333333334,
+      "keyFrames": 14,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif",
+      "name": "attack_2",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5833333333333334,
+      "keyFrames": 14,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif",
+      "name": "attack_3",
+      "filesExist": true
+    }
+  ],
+  "headEvidenceCells": 20,
+  "spriteQa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 19,
+    "regression": 0,
+    "info": 220
+  },
+  "nativeCanvasLossGate": {
+    "status": "passed",
+    "frames": 202,
+    "failHard": 0
+  },
+  "status": "passed",
+  "note": "Full-source compatibility D41. All five rendered inputs remain byte-identical to exported source throughout capture. D57 verified source/mask; D53/D56 evidence; no per-frame fitting. Nineteen foot findings and manual temporal/channel polish remain open."
+}
