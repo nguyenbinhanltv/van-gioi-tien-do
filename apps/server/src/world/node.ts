@@ -5,7 +5,18 @@
  * Clocks (`hrtime`, `setTimeout`) are used ONLY to schedule ticks and measure them; the simulation itself always
  * advances by the fixed `NETWORK.TICK_MS` (skill vgtd-sim-determinism).
  */
-import { AOI, NETWORK, aoiCentre, inAoi, rngFloat, rngFork, rngSeed, toUW, type RngState } from '@vgtd/shared';
+import {
+  AOI,
+  MOB_ID_BASE,
+  NETWORK,
+  aoiCentre,
+  inAoi,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  toUW,
+  type RngState,
+} from '@vgtd/shared';
 import {
   ErrorCode,
   ProtocolError,
@@ -34,6 +45,15 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+
+/** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
+export class WorldFullError extends Error {
+  constructor(message = 'no free player entity id') {
+    super(message);
+    this.name = 'WorldFullError';
+  }
+}
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -120,6 +140,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
+  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -189,6 +211,8 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  /** monster spawns / AI (D74); null when the node runs without mobs */
+  readonly mobs: MobManager | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -201,10 +225,18 @@ export class WorldNode {
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    const mo = opts.mobs;
+    if (mo) {
+      const o = mo === true ? {} : mo;
+      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.world = this.mobs.populate(this.world);
+    } else this.mobs = null;
   }
 
   // ------------------------------------------------------------------ players
   addPlayer(transport: ClientTransport, accountId: string): number {
+    // mob entity ids start at MOB_ID_BASE: a player id there would collide with mob slot 0 (two entities, one id)
+    if (this.mobs && this.nextId >= MOB_ID_BASE) throw new WorldFullError();
     const id = this.nextId++;
     const [a, r1] = rngFloat(this.spawnRng);
     const [b, r2] = rngFloat(r1);
@@ -327,7 +359,7 @@ export class WorldNode {
     }
     const r = step(this.world, inputs, this.ctx, NETWORK.TICK_MS);
     const t1 = clock();
-    this.world = r.world;
+    this.world = this.mobs ? this.mobs.step(r.world) : r.world;
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -476,13 +508,14 @@ export class WorldNode {
         enters.push({
           index,
           entityId: e.id,
-          kind: 0,
+          kind: this.mobs?.kindOf(e.id) ?? 0,
+          defId: this.mobs?.defIdOf(e.id) ?? 0,
           qi,
           qj,
           anim: se.anim,
           dir: se.dir,
           hpPct,
-          maxHp: WORLD_CONFIG.PLAYER_MAX_HP,
+          maxHp: this.maxHpOf(e),
         });
       }
 
@@ -519,8 +552,12 @@ export class WorldNode {
     }
   }
 
+  private maxHpOf(e: EntityState): number {
+    return this.mobs?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+  }
+
   private hpPct(e: EntityState): number {
-    return Math.max(0, Math.min(127, Math.round((e.hp / WORLD_CONFIG.PLAYER_MAX_HP) * 100)));
+    return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
 
   /** 0 idle, 1 run, 2 fly */

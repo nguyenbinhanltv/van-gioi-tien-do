@@ -126,6 +126,8 @@ export interface LoadReport {
     durationS: number;
     areaTiles: number;
     inputHz: number;
+    /** monsters alive in the world during the run (D74); 0 / absent = none */
+    mobs?: number;
   };
   concurrent: number;
   tickMs: Dist;
@@ -273,7 +275,7 @@ export function formatReport(r: LoadReport): string {
   const f = (n: number, d = 2): string => n.toFixed(d);
   const lines: string[] = [];
   lines.push(
-    `Load test: ${r.config.bots} honest bots + ${r.config.speedhackers} speedhack + ${r.config.teleporters} teleport, ${r.config.durationS}s measured, area ${r.config.areaTiles}x${r.config.areaTiles} tiles, ${r.config.inputHz} Hz input`,
+    `Load test: ${r.config.bots} honest bots + ${r.config.speedhackers} speedhack + ${r.config.teleporters} teleport, ${r.config.durationS}s measured, area ${r.config.areaTiles}x${r.config.areaTiles} tiles, ${r.config.inputHz} Hz input${r.config.mobs ? `, ${r.config.mobs} mobs` : ''}`,
   );
   lines.push('');
   lines.push(

@@ -2,9 +2,11 @@
  * `npm run loadtest -w server -- --bots 100` (bundled by scripts/loadtest.mjs).
  * Starts a World Node + Gateway in this thread, runs the bots in a worker thread, measures a window and prints the
  * P2 exit-criteria report. Options: --bots N --duration S --warmup S --area TILES --input-hz HZ
- * --speedhackers N --speed-factor X --teleporters N --seed N --json
+ * --speedhackers N --speed-factor X --teleporters N --mobs N --seed N --json
+ * (--mobs N keeps about N monsters alive in the bots' spawn area, D74)
  */
 import { Worker } from 'node:worker_threads';
+import { ZONE_SPAWN_TABLES } from '@vgtd/shared';
 import { compileSkills } from '@vgtd/sim';
 import { startServer, type RunningServer } from '../server.js';
 import type { BotReport } from './bot.js';
@@ -26,6 +28,7 @@ const warmup = arg('warmup', 3);
 const area = arg('area', 96);
 const inputHz = arg('input-hz', 20);
 const seed = arg('seed', 1);
+const mobCount = arg('mobs', 0);
 const speedFactor = arg('speed-factor', 3);
 const asJson = process.argv.includes('--json');
 const log = (s: string): void => {
@@ -80,15 +83,25 @@ function windowSample(
 }
 
 const MAP = 256;
+/** One zone over the bots' area, table counts scaled so that about `--mobs` monsters live there. */
+function mobConfig(): {
+  zones: { zone: 'bia_rung'; i0: number; j0: number; i1: number; j1: number }[];
+  density: number;
+} {
+  const per = ZONE_SPAWN_TABLES.find((t) => t.zone === 'bia_rung')!.groups.reduce((n, g) => n + g.count, 0);
+  const lo = MAP / 2 - area / 2;
+  return { zones: [{ zone: 'bia_rung', i0: lo, j0: lo, i1: lo + area, j1: lo + area }], density: mobCount / per };
+}
 const skills = compileSkills();
 const spawn = { i0: MAP / 2 - area / 2, j0: MAP / 2 - area / 2, side: area };
 const srv = await startServer({
   port: 0,
   // the per-IP registration / login limits would block a many-bot run from one host
   auth: { registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
-  world: { seed, mapTiles: MAP, spawn, skills },
+  world: { seed, mapTiles: MAP, spawn, skills, mobs: mobCount > 0 ? mobConfig() : undefined },
 });
-log(`server on :${srv.port}; connecting ${bots + speedhackers + teleporters} bots...`);
+const mobsAlive = srv.world.mobs?.alive ?? 0;
+log(`server on :${srv.port}; ${mobsAlive} mobs; connecting ${bots + speedhackers + teleporters} bots...`);
 
 const worker = new Worker(new URL('./bot-worker.mjs', import.meta.url), {
   workerData: {
@@ -151,7 +164,15 @@ try {
   const { reports } = await next<{ reports: BotReport[] }>('reports');
 
   const report = summarize(
-    { bots, speedhackers, teleporters, durationS: Math.round(sample.durationS), areaTiles: area, inputHz },
+    {
+      bots,
+      speedhackers,
+      teleporters,
+      durationS: Math.round(sample.durationS),
+      areaTiles: area,
+      inputHz,
+      mobs: mobsAlive,
+    },
     sample,
     reports,
   );
