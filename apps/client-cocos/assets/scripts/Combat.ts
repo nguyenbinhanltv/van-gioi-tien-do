@@ -5,6 +5,7 @@ import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import type { TilePos } from './Actors';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
+import { getSkillIcon } from './PropArt';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -231,6 +232,20 @@ export class CombatUi {
       quad(root, 'Frame', art.pixel, SLOT - 4, SLOT - 4, new Color(0, 0, 0, 70));
       const name = text(root, 'Name', 16, new Color(255, 255, 255, s.castable ? 255 : 150));
       name.string = initials(s.skill.id);
+      // the Gemini skill icon (#228 atlas) when there is one; the coloured tile + initials stay as the fallback
+      const iconFrame = getSkillIcon(s.skill.id);
+      if (iconFrame) {
+        const icon = quad(
+          root,
+          'Icon',
+          iconFrame,
+          SLOT - 8,
+          SLOT - 8,
+          new Color(255, 255, 255, s.castable ? 255 : 150),
+        );
+        icon.node.setSiblingIndex(name.node.getSiblingIndex());
+        name.node.active = false;
+      }
       const key = text(root, 'Key', 11, new Color(255, 255, 255, 230));
       key.string = String(i + 1);
       key.node.setPosition(-SLOT / 2 + 8, SLOT / 2 - 8, 0);
@@ -398,6 +413,8 @@ export class CombatUi {
   /** What the wheel button of hotbar `slot` shows: label, colour, readiness and cooldown overlays. null = no such slot. */
   slotView(slot: number): {
     label: string;
+    /** the skill icon (SpriteFrame) when the atlas has one, else null (the wheel shows `label`) */
+    icon: SpriteFrame | null;
     color: Color;
     castable: boolean;
     cd: number;
@@ -413,6 +430,7 @@ export class CombatUi {
     const left = bar.cooldownRemainingMs(slot, this.clock) / 1000;
     return {
       label: initials(s.skill.id),
+      icon: getSkillIcon(s.skill.id),
       color: base,
       castable: s.castable,
       cd: bar.cooldownFraction(slot, this.clock),

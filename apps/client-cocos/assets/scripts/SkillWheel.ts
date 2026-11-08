@@ -11,6 +11,7 @@ interface Btn {
   bg: Sprite;
   cd: Sprite;
   gcd: Sprite;
+  icon: Sprite;
   label: Label;
   cdText: Label;
 }
@@ -104,13 +105,15 @@ export class SkillWheel {
       return sp;
     };
     const bg = mk('Bg', new Color(120, 120, 120, 200));
+    const icon = mk('Icon', new Color(255, 255, 255, 255));
+    icon.node.active = false;
     const cd = mk('Cd', new Color(0, 0, 0, 175));
     const gcd = mk('Gcd', new Color(255, 255, 255, 75));
     this.radial(cd);
     this.radial(gcd);
     const label = this.text(root, 'Label', 18, new Color(255, 255, 255, 255));
     const cdText = this.text(root, 'CdText', 20, new Color(255, 255, 255, 255));
-    b = { root, bg, cd, gcd, label, cdText };
+    b = { root, bg, icon, cd, gcd, label, cdText };
     this.buttons.set(id, b);
     return b;
   }
@@ -133,6 +136,7 @@ export class SkillWheel {
       const size = b.radius * 2 * k;
       btn.root.setPosition(p.x, p.y, 0);
       for (const sp of [btn.bg, btn.cd, btn.gcd]) sp.node.getComponent(UITransform)!.setContentSize(size, size);
+      btn.icon.node.getComponent(UITransform)!.setContentSize(size * 0.78, size * 0.78);
       btn.root.setScale(b.pressed ? 1.1 : 1, b.pressed ? 1.1 : 1, 1);
       const view = b.slot === null ? null : this.combat.slotView(b.slot);
       if (b.slot !== null && b.pressed && view) aimed = { slot: b.slot };
@@ -140,7 +144,11 @@ export class SkillWheel {
         btn.bg.color = view.castable
           ? view.color
           : new Color(view.color.r * 0.45, view.color.g * 0.45, view.color.b * 0.45, 255);
-        btn.label.string = view.label;
+        btn.label.string = view.icon ? '' : view.label;
+        // the Gemini skill icon sits on the element-coloured disc; a passive / unavailable skill is dimmed
+        if (view.icon && btn.icon.spriteFrame !== view.icon) btn.icon.spriteFrame = view.icon;
+        btn.icon.node.active = !!view.icon;
+        btn.icon.color = view.castable ? new Color(255, 255, 255, 255) : new Color(255, 255, 255, 150);
         btn.label.fontSize = b.id === 'attack' ? 24 : 18;
         btn.cd.fillRange = view.cd;
         btn.cd.node.active = view.cd > 0;
@@ -151,6 +159,7 @@ export class SkillWheel {
         // dodge / fly (not wired to the server yet) and wheel slots past the 8 hotbar skills: dim, no label for empty ones
         btn.bg.color = DIM;
         btn.label.string = b.id === 'dodge' ? 'NE' : b.id === 'fly' ? 'BAY' : '';
+        btn.icon.node.active = false;
         btn.cd.node.active = false;
         btn.gcd.node.active = false;
         btn.cdText.string = '';

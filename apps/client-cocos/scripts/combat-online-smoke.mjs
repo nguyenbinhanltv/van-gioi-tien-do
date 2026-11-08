@@ -141,7 +141,15 @@ try {
   });
   const st = () => page.evaluate('JSON.parse(JSON.stringify(window.__vgtdCombat.state()))');
   check(true, 'online session active, combat HUD attached');
-  await sleep(2500); // snapshots + AOI
+  // own vitals (snapshot self.vitals) + AOI: wait for them instead of a fixed sleep (a busy machine needs longer)
+  await page.waitForFunction(
+    'window.__vgtdCombat.state().hpMax > 1 && window.__vgtdCombat.state().enemies.length > 0',
+    {
+      timeout: 60000,
+      polling: 250,
+    },
+  );
+  await sleep(500);
   let s = await st();
   console.log(`path ${s.path}, hp ${s.hp}/${s.hpMax}, mp ${s.mp}/${s.mpMax}, enemies in view: ${s.enemies.length}`);
   check(s.hpMax > 1 && s.hp === s.hpMax, 'own HP arrived from the server (snapshot self.vitals)');
