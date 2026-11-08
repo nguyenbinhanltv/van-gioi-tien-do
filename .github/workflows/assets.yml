@@ -7,12 +7,14 @@ on:
     branches: [main]
     paths:
       - 'tools/procgen/**'
+      - 'assets-src/gemini/**'
       - 'apps/client-cocos/assets/resources/dragonbones/**'
       - 'packages/shared/src/constants.ts'
       - '.github/workflows/assets.yml'
   pull_request:
     paths:
       - 'tools/procgen/**'
+      - 'assets-src/gemini/**'
       - 'apps/client-cocos/assets/resources/dragonbones/**'
       - 'packages/shared/src/constants.ts'
       - '.github/workflows/assets.yml'
@@ -30,6 +32,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true # assets-src/gemini source PNGs
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -37,6 +41,8 @@ jobs:
       - run: npm ci
       - run: npm run gen:tilemap -w @vgtd/procgen
       - run: npm run gen:items -w @vgtd/procgen
+      # Owner-provided Gemini props / icons: key + sparkle removal + trim + atlases (fails if the corner mark is not found / still there).
+      - run: npm run gen:gemini -w @vgtd/procgen
       # SVG -> PNG (resvg). glslangValidator / Xvfb are absent, so shader compile + snapshots are skipped with a notice.
       - run: npm run render -w @vgtd/procgen
       - run: npm run validate -w @vgtd/procgen

@@ -446,6 +446,12 @@ Còn mở / lưu ý:
 - `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
 
+## Asset Gemini (props và icon vật phẩm, 2026-11-09): còn mở
+
+- Điều khoản sử dụng thương mại của output Google Gemini chưa được kiểm tra riêng (ghi trong `docs/ASSET-LICENSES.md`, mục GEMINI-PROPS-ICONS); chủ dự án không lưu prompt gốc nên không tái tạo được từng ảnh. Cần chốt trước khi phát hành công khai.
+- Map lát cắt chỉ có nước / đất / cỏ: chưa có biome đầm lầy hay dung nham. `tree_dead_swamp` đặt gần mép nước, `rock_lava_cooled` chỉ xuất hiện khi bản đồ có địa hình `lava` (chưa có), nên hiện chưa thấy đá dung nham trong game.
+- `tree_pine_01/02` và `rock_mossy_small` / `rock_large_spirit` gần như trùng nhau: nên xin thêm biến thể (xem báo cáo PR).
+
 ## D83 — quái: vùng, bầy, đe dọa: còn mở (worker39, 2026-11-09)
 
 1. **Mọi số là tạm, cần game designer duyệt**: băng khoảng cách theo cấp, kích thước bầy 3, số lượng 12/2/1, bán kính bầy 3 ô, `MOB_THREAT` (tỉ lệ đổi mục tiêu 1,1, quên sau 24 ô, giảm 20%/s). docs/10 chưa nói quái đứng ở đâu so với điểm vào.
