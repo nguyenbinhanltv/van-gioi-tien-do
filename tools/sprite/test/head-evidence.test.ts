@@ -80,13 +80,16 @@ describe('D47 head-size evidence', () => {
     expect(checkHeights(c, options)[0]!.severity).toBe('info');
     expect(runQa([c], options).findings.some((f) => f.gate === 'similarity' && f.severity === 'fail')).toBe(true);
   });
-  it('allows only a free D41 pose exception to exempt the similarity crop (D54)', () => {
+  it('preserves D41 pose exemptions on upright and free clips even with head evidence (D54)', () => {
     const wrong = createImage(256, 256);
     for (let i = 0; i < wrong.data.length; i += 4) wrong.data.set([0, 255, 0, 255], i);
     const c = clip({ frames: [aligned(wrong)], exceptions: { 0: 'die-collapse: prone, top-20% crop not head' } });
-    expect(checkSimilarity(c, options).some((f) => f.severity === 'fail')).toBe(true);
+    expect(checkSimilarity(c, options)).toEqual([]);
     expect(checkSimilarity({ ...c, kind: 'free' }, options)).toEqual([]);
-    expect(checkSimilarity({ ...c, kind: 'free', exceptions: { 0: '  ' } }, options).length).toBeGreaterThan(0);
+    expect(checkSimilarity({ ...c, exceptions: { 0: 'bow: neck and torso incline' } }, options)).toEqual([]);
+    expect(checkSimilarity({ ...c, exceptions: { 0: 'posture' } }, options).length).toBeGreaterThan(0);
+    // D54 changes head reasons only; it does not add validation for legacy non-head strings.
+    expect(checkSimilarity({ ...c, kind: 'free', exceptions: { 0: '  ' } }, options)).toEqual([]);
   });
   it('does not reuse head reasons as legacy free-pose height exceptions (D54)', () => {
     const c = clip({ kind: 'free', heightPolicy: undefined, headEvidence: {} });

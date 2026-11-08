@@ -46,6 +46,16 @@ describe('D54 report-only head similarity audit', () => {
           sheet: 'wrong.png',
           exceptions: { 0: 'rear-skull-base' },
         },
+        {
+          name: 'emote',
+          frames: 1,
+          cols: 1,
+          durationSec: 1,
+          loop: false,
+          kind: 'upright',
+          sheet: 'wrong.png',
+          exceptions: { 0: 'bow: neck and torso incline' },
+        },
       ],
     };
     const projectPath = join(inputs, 'project.json');
@@ -71,6 +81,10 @@ describe('D54 report-only head similarity audit', () => {
     run(output);
     const report = JSON.parse(readFileSync(output, 'utf8'));
     expect(report.totals).toEqual({ projects: 1, cells: 2, pass: 1, fail: 1, unmeasured: 0 });
+    expect(report.selection).toEqual({ oldSkippedCells: 3, newlyCheckedCells: 2, retainedD41PoseCells: 1 });
+    expect(report.retainedD41PoseExemptions).toEqual([
+      expect.objectContaining({ clip: 'emote', cell: 0, kind: 'upright', reason: 'bow: neck and torso incline' }),
+    ]);
     expect(report.projects[0].cells).toEqual([
       { clip: 'idle', cell: 0, reason: 'posture', status: 'pass', findings: [] },
       expect.objectContaining({ clip: 'bad', cell: 0, reason: 'rear-skull-base', status: 'fail' }),

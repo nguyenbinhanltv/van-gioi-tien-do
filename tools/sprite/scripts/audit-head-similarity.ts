@@ -1,9 +1,9 @@
-/** Report-only D54 audit: rerun formerly skipped head-reason cells without any head exception. */
+/** Report-only D54 audit: compare old/new exemption rules and rerun every newly checked cell. */
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
-import { isHeadEvidenceReason, runProject, type Project } from '../src/index.js';
+import { isSimilarityExemptReason, runProject, type Project } from '../src/index.js';
 
 const args = process.argv.slice(2);
 const opt = (name: string, fallback = '') => {
@@ -39,11 +39,31 @@ const projects: {
   inputs: { file: string; sha256: string }[];
   cells: { clip: string; cell: number; reason: string; status: string; findings: string[] }[];
 }[] = [];
+const retainedD41PoseExemptions: { project: string; clip: string; cell: number; kind: string; reason: string }[] = [];
+const scannedProjects: { file: string; sha256: string }[] = [];
+let oldSkippedCells = 0;
+// The old gate skipped every truthy exception, regardless of kind. Audit its exact set difference with D54.
+const newlyChecked = (reason: string) => Boolean(reason) && !isSimilarityExemptReason(reason);
 for (const path of paths(sourceRoot).sort()) {
   const project = JSON.parse(readFileSync(path, 'utf8')) as Project;
+  const projectFile = relative(cwd, path).replace(/\\/g, '/');
+  scannedProjects.push({ file: projectFile, sha256: hash(path) });
+  for (const clip of project.clips) {
+    for (const [cell, reason] of Object.entries(clip.exceptions ?? {})) {
+      if (reason) oldSkippedCells++;
+      if (reason && isSimilarityExemptReason(reason))
+        retainedD41PoseExemptions.push({
+          project: projectFile,
+          clip: clip.name,
+          cell: Number(cell),
+          kind: clip.kind ?? 'upright',
+          reason,
+        });
+    }
+  }
   const affected = project.clips.flatMap((clip) =>
     Object.entries(clip.exceptions ?? {}).flatMap(([cell, reason]) =>
-      isHeadEvidenceReason(reason) ? [{ clip: clip.name, cell: Number(cell), reason }] : [],
+      newlyChecked(reason) ? [{ clip: clip.name, cell: Number(cell), reason }] : [],
     ),
   );
   if (!affected.length) continue;
@@ -65,7 +85,7 @@ for (const path of paths(sourceRoot).sort()) {
     clips: project.clips.map((clip) => ({
       ...clip,
       exceptions: Object.fromEntries(
-        Object.entries(clip.exceptions ?? {}).filter(([, reason]) => !isHeadEvidenceReason(reason)),
+        Object.entries(clip.exceptions ?? {}).filter(([, reason]) => !newlyChecked(reason)),
       ),
     })),
   };
@@ -95,6 +115,8 @@ for (const path of paths(sourceRoot).sort()) {
   );
 }
 const cells = projects.flatMap((p) => p.cells);
+for (const input of scannedProjects)
+  if (hash(resolve(cwd, input.file)) !== input.sha256) throw new Error(`audit selection changed ${input.file}`);
 const audit = {
   format: 'vgtd-head-reason-similarity-audit',
   version: 1,
@@ -110,7 +132,14 @@ const audit = {
   gateSourceSha256: hash(resolve(cwd, 'tools/sprite/src/qa.ts')),
   reasonSourceSha256: hash(resolve(cwd, 'tools/sprite/src/head-evidence.ts')),
   method:
-    'Read committed-direction projects; identify old exceptions with posture/secondary-overhang/rear-*; remove only those reasons in memory and run the unchanged-source pipeline. No source, export or backlog writes; all input hashes rechecked. Existing D41 free-pose exceptions remain separate. No findings are accepted by this report.',
+    'Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.',
+  selection: {
+    oldSkippedCells,
+    newlyCheckedCells: cells.length,
+    retainedD41PoseCells: retainedD41PoseExemptions.length,
+  },
+  retainedD41PoseExemptions,
+  scannedProjects,
   totals: {
     projects: projects.length,
     cells: cells.length,
@@ -128,11 +157,13 @@ const md = [
   '',
   audit.method,
   '',
+  `Old skipped cells: ${oldSkippedCells}; newly checked: ${cells.length}; retained D41 pose exemptions: ${retainedD41PoseExemptions.length} (unmeasured/exempt, not passes).`,
+  '',
   `Projects: ${audit.totals.projects}; cells: ${audit.totals.cells}; pass: ${audit.totals.pass}; fail: ${audit.totals.fail}; unmeasured: ${audit.totals.unmeasured}.`,
   '',
   `Full input hashes and reproduction command: [JSON report](${output.split(/[\\/]/).pop()}).`,
   '',
-  '| Project / direction | Clip | Local cell | Former head reason | Fresh similarity result |',
+  '| Project / direction | Clip | Local cell | Former exception | Fresh similarity result |',
   '| --- | --- | --- | --- | --- |',
   ...projects.flatMap((p) =>
     p.cells.map(
