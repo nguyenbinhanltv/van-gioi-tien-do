@@ -150,6 +150,8 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           return closeWith(expired ? ErrorCode.SessionExpired : ErrorCode.Unauthorized, 'unauthorized');
         }
         if (world.clients.size >= GATEWAY_CONFIG.MAX_PLAYERS) return closeWith(ErrorCode.ServerFull, 'server full');
+        // refuse BEFORE replacing the older connection: a refused join must not also log the user out of the live session
+        if (!world.canAcceptPlayer()) return closeWith(ErrorCode.ServerFull, 'server full');
         const prev = online.get(accountId);
         if (prev) {
           // one live connection per account: the newer login replaces the older
