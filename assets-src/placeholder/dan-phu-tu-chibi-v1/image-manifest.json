@@ -1592,6 +1592,38 @@
       "width": 2172,
       "height": 724,
       "role": "reference/master; see reference/provenance.json"
+    },
+    {
+      "file": "SE/raw/dash-head.input.png",
+      "sha256": "76b7e6fdfa0e4dc732983931ccabb00453b416bae19858576f31a1835a828530",
+      "width": 313,
+      "height": 314,
+      "role": "exact source-cell crop",
+      "provenance": "SE/provenance/dash-head.attempt1.json"
+    },
+    {
+      "file": "SE/raw/dash-head.attempt1.png",
+      "sha256": "b1c9dc2a8906e551e6e92675c12a00cfa1c75cfe926225f52d68702882bf7a85",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw head-only correction output",
+      "provenance": "SE/provenance/dash-head.attempt1.json"
+    },
+    {
+      "file": "SE/raw/hit-dash.head1.selected.png",
+      "sha256": "035b1db1423762663f293f17dd66ce2a1258503ac9824541498a89319369957d",
+      "width": 1254,
+      "height": 1254,
+      "role": "native head-mask selection; outside RGBA exact",
+      "provenance": "SE/provenance/dash-head.attempt1.json"
+    },
+    {
+      "file": "SE/repair/dash5.head-mask.png",
+      "sha256": "074da18a2639cf71d1fca094e68090a843e23895bcaddef32493df9fe7ff726e",
+      "width": 1254,
+      "height": 1254,
+      "role": "project-authored native binary head edit mask",
+      "provenance": "SE/provenance/dash-head.attempt1.json"
     }
   ]
 }

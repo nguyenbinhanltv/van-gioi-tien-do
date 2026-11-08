@@ -346,7 +346,7 @@
       "tableId": "dash",
       "kind": "upright",
       "heightPolicy": "head-size-v1",
-      "sheet": "raw/hit-dash.selected.png",
+      "sheet": "raw/hit-dash.head1.selected.png",
       "manifest": "templates/hit-dash.template.json",
       "sheetSelection": {
         "rows": 4,
@@ -410,14 +410,14 @@
         },
         "5": {
           "crown": {
-            "x": 147,
-            "y": 28.5
+            "x": 141.5,
+            "y": 29.5
           },
           "chin": {
-            "x": 159,
-            "y": 82.5
+            "x": 157.5,
+            "y": 79.5
           },
-          "note": "Adjudicated Lanczos3 aligned256 semantic edges: front-cap147,28.5 excluding elevated bun/pin; chin159,82.5 is last jaw outline row82. Skin81 is interior; row83 neck and157 back-neck shadow excluded. Genuine marginal oversize remains rejected; post-D55 head-only source repair pending, body/root/legs unchanged. Native neighborhoods/history in head-landmarks.lanczos3.json; owner decision in head-contour-review.json. No waiver/coordinate shift."
+          "note": "New AI head-ROI source repair, aligned256 with merged D57 retaining original dx=-13.509981048982326,dy0,scale1. Manually selected semantic boundary EDGES: attached front-cap cream rim firstrow30 (brown bun seam29 excluded); summit between141/142, elevatedbun/pin excluded. Central jaw outline lastrow79 at157/158, skin78 interior, rows80/81+ neckshadow excluded. Both neighboring columns inspected; native traces in repair/dash5.head-boundaries.json. Style23 independently read pre-registration rim30/jaw79; final coordinates reselected on registered pixels. Manual boundary uncertainty~1px remains disclosed; not an automated anatomical detector. Body/root/whisk outside explicit native head mask byte-identical, no body scaling or pose fitting."
         },
         "6": {
           "crown": {
@@ -452,6 +452,14 @@
           },
           "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
         }
+      },
+      "inheritedRegistration": {
+        "kind": "inherited-registration",
+        "source": "raw/hit-dash.selected.png",
+        "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+        "mask": "repair/dash5.head-mask.png",
+        "maskSha256": "074da18a2639cf71d1fca094e68090a843e23895bcaddef32493df9fe7ff726e",
+        "cells": [5]
       }
     },
     {
@@ -874,7 +882,7 @@
       "loop": false,
       "tableId": "hit",
       "kind": "free",
-      "sheet": "raw/hit-dash.selected.png",
+      "sheet": "raw/hit-dash.head1.selected.png",
       "manifest": "templates/hit-dash.template.json",
       "sheetSelection": {
         "rows": 4,

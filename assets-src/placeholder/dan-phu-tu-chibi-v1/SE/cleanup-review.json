@@ -4376,5 +4376,9 @@
     }
   ],
   "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
-  "status": "All202 selected source frames compared with/without the edge extension at fixed scale1/Lanczos3: zero alpha differences. Native QA still rejects dash5 head evidence; D55 similarity pending. This is not a production export or Cocos capture."
+  "status": "All202 selected source frames compared with/without the edge extension at fixed scale1/Lanczos3: zero alpha differences. Native QA still rejects dash5 head evidence; D55 similarity pending. This is not a production export or Cocos capture.",
+  "postStudySourceRepair": {
+    "note": "Historical cleanup-only comparison preserved. Subsequent dash5 AI head-ROI repair changes one output head;201 aligned PNGs remain byte-identical to that source baseline. Native outside-mask RGBA unchanged; exact D57 registration retained. Not a cleanup alpha-preservation claim for edited head.",
+    "evidence": "repair/dash5.head-selection.json"
+  }
 }

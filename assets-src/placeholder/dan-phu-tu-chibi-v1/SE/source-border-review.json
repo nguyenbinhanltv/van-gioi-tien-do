@@ -419,8 +419,8 @@
       ]
     },
     {
-      "sheet": "raw/hit-dash.selected.png",
-      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "sheet": "raw/hit-dash.head1.selected.png",
+      "sha256": "035b1db1423762663f293f17dd66ce2a1258503ac9824541498a89319369957d",
       "resample": "lanczos3",
       "pixelUnits": "native input raster",
       "cells": [
@@ -492,8 +492,8 @@
         },
         {
           "index": 11,
-          "margin32": 23,
-          "margin128": 23,
+          "margin32": 26,
+          "margin128": 26,
           "edgeSamples": []
         },
         {

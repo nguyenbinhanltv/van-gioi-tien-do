@@ -1,5 +1,5 @@
 {
-  "status": "candidate; not accepted until landmark/pose/QA review",
+  "status": "Selected native head ROI, verified by D57; numerical head gate and final source/capture checks pass. Manual anatomical uncertainty remains.",
   "source": "raw/hit-dash.selected.png",
   "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
   "candidate": "raw/hit-dash.head1.selected.png",

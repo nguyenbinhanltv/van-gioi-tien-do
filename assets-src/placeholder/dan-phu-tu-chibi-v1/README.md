@@ -2,7 +2,7 @@
 
 Status: corrected construction and tier front studies; all15 E clips generated (202frames), native production QA passed; final real Cocos3.8.8 capture passed. The old semi-realistic set remains separate.
 
-Historical similarity results, including merged E results, do not establish identity. D55 calibration and re-audit are pending; current renderer captures remain evidence of rendering only. No old set is re-exported by this notice.
+D55 is merged: Đan/Phù E historical run/dash L1 findings are cleared under A+C; those repairs are cancelled. SE now has0 native hard failures after a masked head-only correction with D57 and exact24Hz D58 export. Final SE real Cocos 3.8.8 2× capture passed; publication status is tracked in SE/README.md. Historical similarity/capture records are not current D55 verdicts.
 
 ## Construction
 

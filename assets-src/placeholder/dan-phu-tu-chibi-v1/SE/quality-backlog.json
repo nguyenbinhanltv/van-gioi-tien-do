@@ -4,136 +4,6 @@
   "character": "dan-phu-tu-chibi-v1",
   "entries": [
     {
-      "clip": "die",
-      "dir": "SE",
-      "cell": 0,
-      "gate": "height",
-      "metric": "height_excess_px",
-      "value": 1.1,
-      "limit": 0,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 2,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_R",
-      "value": 28.8,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 3,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_R",
-      "value": 999,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 4,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_R",
-      "value": 27.7,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 5,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_R",
-      "value": 34.8,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 8,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_L",
-      "value": 21.1,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 10,
-      "gate": "footSlide",
-      "metric": "slide_ground_px_per_frame_L",
-      "value": 13.13,
-      "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 11,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_L",
-      "value": 36.5,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 12,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_L",
-      "value": 33.2,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
-      "clip": "run",
-      "dir": "SE",
-      "cell": 13,
-      "gate": "footSlide",
-      "metric": "ghost_distance_2d_px_L",
-      "value": 999,
-      "limit": 20,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
-      "status": "open",
-      "owner": "26",
-      "added": "2026-11-08"
-    },
-    {
       "clip": "walk",
       "dir": "SE",
       "cell": 1,
@@ -141,10 +11,10 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 5.85,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 5.85. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -154,23 +24,23 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 3.54,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 3.54. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
       "dir": "SE",
-      "cell": 3,
+      "cell": 4,
       "gate": "footSlide",
       "metric": "slide_ground_px_per_frame_R",
-      "value": 6.23,
+      "value": 7.57,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: fail-soft; historical value not listed. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -180,10 +50,10 @@
       "metric": "slide_ground_px_per_frame_R",
       "value": 8.98,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 8.98. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -191,12 +61,12 @@
       "cell": 6,
       "gate": "footSlide",
       "metric": "slide_ground_px_per_frame_R",
-      "value": 4.06,
+      "value": 3.16,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 4.06. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -204,12 +74,25 @@
       "cell": 7,
       "gate": "footSlide",
       "metric": "slide_ground_px_per_frame_R",
-      "value": 17.86,
+      "value": 16.96,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 17.86. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 9,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 9.36,
+      "limit": 3,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: fail-soft; historical value not listed. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -219,10 +102,10 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 4.06,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 4.06. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -232,10 +115,10 @@
       "metric": "slide_ground_px_per_frame_L",
       "value": 5.85,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 5.85. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -243,12 +126,12 @@
       "cell": 14,
       "gate": "footSlide",
       "metric": "slide_ground_px_per_frame_L",
-      "value": 3.99,
+      "value": 4.44,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: regression; historical value 3.99. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     },
     {
       "clip": "walk",
@@ -256,12 +139,142 @@
       "cell": 15,
       "gate": "footSlide",
       "metric": "slide_ground_px_per_frame_L",
-      "value": 15.17,
+      "value": 14.28,
       "limit": 3,
-      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
       "status": "open",
       "owner": "26",
-      "added": "2026-11-08"
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 15.17. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 2,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 28.8,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 28.8. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 3,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 999. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 4,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 27.7,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 27.7. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: regression; historical value 34.8. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 8,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 22,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: regression; historical value 21.1. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 11,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 38.4,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: regression; historical value 36.5. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 10,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 8.21,
+      "limit": 3,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 13.13. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 12,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 999,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: regression; historical value 33.2. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 13,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 36.7,
+      "limit": 20,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 999. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
+    },
+    {
+      "clip": "die",
+      "dir": "SE",
+      "cell": 0,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08",
+      "note": "First-publication Lanczos3 measured SOFT finding, explicitly OPEN for polish, not fixed. Historical bilinear verdict: accepted; historical value 1.1. Gate limit unchanged. Dynamic pose/body scale retained; source foot/contact issue remains visible in review/backlog."
     }
   ],
   "manual": [
@@ -382,8 +395,8 @@
       "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Unskipped Lanczos3 similarity audit fails all16 run cells and dash3/5. Prior native hard0 used legacy posture skips and is not D54 compliance. Full-master identity repair run5 retained unselected because all16 still fail. Exact public crop windows show sampling displacement under forward lean; orchestrator decision requested, no threshold waiver/free-pose relabeling. Orchestrator confirmed silhouette-centroid crop mismatch and assigned D55 to24; STOP further similarity redraws until D55 recheck. Current selected run sources retained."
+      "status": "resolved",
+      "note": "Historical D54/L1 concern resolved by merged D55 A+C re-audit:115 non-exempt SE cells pass Lab,0 fail,87 D41 exemptions separate. No run/similarity repaint was selected for L1. Original pre-D55 note retained in quality-backlog.bilinear-history.json and historical audits. New dash5 head-size source repair is independently documented in repair/. All15 contact sheets and20 temporal flags reviewed by eye; L1 diagnostic only."
     },
     {
       "kind": "other",
@@ -413,7 +426,7 @@
       "severity": "warn",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "Lanczos3 current soft measurements: 11 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+      "note": "Lanczos3 current soft measurements: 11 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain OPEN, not fixed. Current measured first-export Lanczos3 values are explicitly recorded in this backlog; the five historical bilinear regressions and two previously unlisted findings remain disclosed in soft-findings.lanczos3.json and quality-backlog.bilinear-history.json. Gate limits unchanged; no head reason waives foot findings."
     },
     {
       "kind": "other",
@@ -423,7 +436,7 @@
       "severity": "warn",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "Lanczos3 current soft measurements: 9 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+      "note": "Lanczos3 current soft measurements: 9 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain OPEN, not fixed. Current measured first-export Lanczos3 values are explicitly recorded in this backlog; the five historical bilinear regressions and two previously unlisted findings remain disclosed in soft-findings.lanczos3.json and quality-backlog.bilinear-history.json. Gate limits unchanged; no head reason waives foot findings."
     },
     {
       "kind": "other",
@@ -433,7 +446,7 @@
       "severity": "warn",
       "reviewer": "art-worker",
       "status": "open",
-      "note": "Lanczos3 current soft measurements: 1 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain open; prior baselines are historical and new/regressed measurements have not been accepted. Review after D55/source freeze; no head reason waives foot findings."
+      "note": "Lanczos3 current soft measurements: 1 findings in soft-findings.lanczos3.json. Real foot/contact/height findings remain OPEN, not fixed. Current measured first-export Lanczos3 values are explicitly recorded in this backlog; the five historical bilinear regressions and two previously unlisted findings remain disclosed in soft-findings.lanczos3.json and quality-backlog.bilinear-history.json. Gate limits unchanged; no head reason waives foot findings."
     },
     {
       "kind": "other",
@@ -442,8 +455,8 @@
       "cells": [5],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules."
+      "status": "resolved",
+      "note": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules. RESOLVED by new AI head-ROI source pixels, exact-mask D57 registration, fresh semantic row30/79 boundaries. Evidence repair/dash5.head-boundaries.json; old points/failure retained as history. Not a waiver."
     }
   ]
 }

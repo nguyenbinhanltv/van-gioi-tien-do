@@ -1,5 +1,5 @@
 {
-  "status": "Actual Lanczos3 source annotations:28 reviewed heads plus1 adjudicated marginal oversize. No point shift, waiver or per-frame body scaling; repair pending after D55.",
+  "status": "29 manual semantic landmark annotations; dash5 source repair now nominally in unchanged3% band. Manual uncertainty remains; not automated anatomy certification.",
   "master": "../reference/SE.corrected-master.png",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
   "masterHead": {
@@ -8597,95 +8597,57 @@
       "clip": "dash",
       "index": 5,
       "crown": {
-        "x": 147,
-        "y": 28.5
+        "x": 141.5,
+        "y": 29.5
       },
       "chin": {
-        "x": 159,
-        "y": 82.5
+        "x": 157.5,
+        "y": 79.5
       },
-      "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
-      "alignedPngSha256": "f8385b6a67ea733a109844460069fad98d134f61e5a2534fe48c3d8cff1188fe",
+      "note": "New AI head-ROI source repair, aligned256 with merged D57 retaining original dx=-13.509981048982326,dy0,scale1. Manually selected semantic boundary EDGES: attached front-cap cream rim firstrow30 (brown bun seam29 excluded); summit between141/142, elevatedbun/pin excluded. Central jaw outline lastrow79 at157/158, skin78 interior, rows80/81+ neckshadow excluded. Both neighboring columns inspected; native traces in repair/dash5.head-boundaries.json. Style23 independently read pre-registration rim30/jaw79; final coordinates reselected on registered pixels. Manual boundary uncertainty~1px remains disclosed; not an automated anatomical detector. Body/root/whisk outside explicit native head mask byte-identical, no body scaling or pose fitting.",
+      "alignedPngSha256": "f463370465bdf9320df9a6672b21e6a16b63b0dc07701ada1828088587ec05ef",
       "neighborhoods": [
         {
-          "name": "crown",
-          "point": {
-            "x": 147,
-            "y": 28.5
-          },
+          "name": "cap",
           "rows": [
-            {
-              "y": 26,
-              "pixels": [
-                {
-                  "x": 145,
-                  "rgba": [179, 153, 128, 251]
-                },
-                {
-                  "x": 146,
-                  "rgba": [226, 201, 177, 255]
-                },
-                {
-                  "x": 147,
-                  "rgba": [148, 107, 89, 186]
-                },
-                {
-                  "x": 148,
-                  "rgba": [0, 0, 0, 0]
-                },
-                {
-                  "x": 149,
-                  "rgba": [0, 0, 0, 0]
-                }
-              ]
-            },
-            {
-              "y": 27,
-              "pixels": [
-                {
-                  "x": 145,
-                  "rgba": [79, 44, 25, 255]
-                },
-                {
-                  "x": 146,
-                  "rgba": [103, 62, 44, 250]
-                },
-                {
-                  "x": 147,
-                  "rgba": [83, 28, 24, 255]
-                },
-                {
-                  "x": 148,
-                  "rgba": [98, 62, 48, 177]
-                },
-                {
-                  "x": 149,
-                  "rgba": [0, 0, 0, 0]
-                }
-              ]
-            },
             {
               "y": 28,
               "pixels": [
                 {
+                  "x": 137,
+                  "rgba": [158, 119, 77, 255]
+                },
+                {
+                  "x": 138,
+                  "rgba": [167, 128, 87, 255]
+                },
+                {
+                  "x": 139,
+                  "rgba": [159, 122, 80, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [139, 106, 65, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [117, 87, 49, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [89, 68, 38, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [70, 50, 25, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [148, 108, 67, 251]
+                },
+                {
                   "x": 145,
-                  "rgba": [131, 100, 97, 255]
-                },
-                {
-                  "x": 146,
-                  "rgba": [116, 87, 77, 255]
-                },
-                {
-                  "x": 147,
-                  "rgba": [112, 85, 66, 248]
-                },
-                {
-                  "x": 148,
-                  "rgba": [197, 168, 134, 255]
-                },
-                {
-                  "x": 149,
-                  "rgba": [220, 202, 171, 130]
+                  "rgba": [157, 117, 73, 255]
                 }
               ]
             },
@@ -8693,24 +8655,40 @@
               "y": 29,
               "pixels": [
                 {
+                  "x": 137,
+                  "rgba": [102, 71, 41, 255]
+                },
+                {
+                  "x": 138,
+                  "rgba": [82, 56, 29, 255]
+                },
+                {
+                  "x": 139,
+                  "rgba": [69, 45, 19, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [74, 45, 21, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [74, 47, 23, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [54, 34, 16, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [51, 30, 13, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [101, 66, 34, 255]
+                },
+                {
                   "x": 145,
-                  "rgba": [248, 232, 216, 255]
-                },
-                {
-                  "x": 146,
-                  "rgba": [253, 237, 213, 255]
-                },
-                {
-                  "x": 147,
-                  "rgba": [243, 235, 196, 254]
-                },
-                {
-                  "x": 148,
-                  "rgba": [233, 221, 189, 255]
-                },
-                {
-                  "x": 149,
-                  "rgba": [226, 215, 189, 236]
+                  "rgba": [79, 48, 18, 251]
                 }
               ]
             },
@@ -8718,24 +8696,40 @@
               "y": 30,
               "pixels": [
                 {
+                  "x": 137,
+                  "rgba": [89, 64, 42, 255]
+                },
+                {
+                  "x": 138,
+                  "rgba": [130, 106, 78, 255]
+                },
+                {
+                  "x": 139,
+                  "rgba": [183, 168, 147, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [201, 183, 166, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [203, 184, 166, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [201, 184, 170, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [202, 186, 173, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [197, 179, 165, 255]
+                },
+                {
                   "x": 145,
-                  "rgba": [180, 135, 111, 255]
-                },
-                {
-                  "x": 146,
-                  "rgba": [186, 148, 117, 255]
-                },
-                {
-                  "x": 147,
-                  "rgba": [199, 171, 129, 255]
-                },
-                {
-                  "x": 148,
-                  "rgba": [201, 181, 134, 254]
-                },
-                {
-                  "x": 149,
-                  "rgba": [188, 167, 126, 255]
+                  "rgba": [178, 162, 142, 254]
                 }
               ]
             },
@@ -8743,58 +8737,291 @@
               "y": 31,
               "pixels": [
                 {
+                  "x": 137,
+                  "rgba": [213, 180, 142, 255]
+                },
+                {
+                  "x": 138,
+                  "rgba": [185, 146, 102, 255]
+                },
+                {
+                  "x": 139,
+                  "rgba": [174, 142, 106, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [161, 136, 102, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [161, 134, 100, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [188, 153, 116, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [201, 175, 133, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [216, 192, 156, 255]
+                },
+                {
                   "x": 145,
-                  "rgba": [169, 125, 93, 255]
+                  "rgba": [228, 198, 161, 255]
+                }
+              ]
+            },
+            {
+              "y": 32,
+              "pixels": [
+                {
+                  "x": 137,
+                  "rgba": [160, 120, 77, 255]
                 },
                 {
-                  "x": 146,
-                  "rgba": [172, 131, 95, 255]
+                  "x": 138,
+                  "rgba": [147, 110, 69, 255]
                 },
                 {
-                  "x": 147,
-                  "rgba": [171, 132, 95, 255]
+                  "x": 139,
+                  "rgba": [131, 95, 56, 255]
                 },
                 {
-                  "x": 148,
-                  "rgba": [168, 127, 89, 255]
+                  "x": 140,
+                  "rgba": [120, 88, 51, 255]
                 },
                 {
-                  "x": 149,
-                  "rgba": [161, 124, 83, 254]
+                  "x": 141,
+                  "rgba": [123, 90, 51, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [138, 101, 60, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [149, 114, 72, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [159, 120, 78, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [169, 129, 88, 255]
+                }
+              ]
+            },
+            {
+              "y": 33,
+              "pixels": [
+                {
+                  "x": 137,
+                  "rgba": [129, 100, 62, 255]
+                },
+                {
+                  "x": 138,
+                  "rgba": [130, 100, 61, 255]
+                },
+                {
+                  "x": 139,
+                  "rgba": [132, 103, 64, 255]
+                },
+                {
+                  "x": 140,
+                  "rgba": [135, 103, 64, 255]
+                },
+                {
+                  "x": 141,
+                  "rgba": [148, 111, 71, 255]
+                },
+                {
+                  "x": 142,
+                  "rgba": [160, 126, 84, 255]
+                },
+                {
+                  "x": 143,
+                  "rgba": [173, 135, 96, 255]
+                },
+                {
+                  "x": 144,
+                  "rgba": [171, 135, 98, 255]
+                },
+                {
+                  "x": 145,
+                  "rgba": [174, 135, 96, 255]
                 }
               ]
             }
           ]
         },
         {
-          "name": "chin",
-          "point": {
-            "x": 159,
-            "y": 82.5
-          },
+          "name": "jaw",
           "rows": [
+            {
+              "y": 77,
+              "pixels": [
+                {
+                  "x": 152,
+                  "rgba": [255, 237, 187, 252]
+                },
+                {
+                  "x": 153,
+                  "rgba": [255, 245, 205, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [254, 242, 204, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [250, 238, 199, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [251, 238, 202, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [251, 237, 198, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [251, 240, 202, 254]
+                },
+                {
+                  "x": 159,
+                  "rgba": [249, 239, 192, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [250, 236, 192, 255]
+                }
+              ]
+            },
+            {
+              "y": 78,
+              "pixels": [
+                {
+                  "x": 152,
+                  "rgba": [214, 137, 95, 255]
+                },
+                {
+                  "x": 153,
+                  "rgba": [219, 170, 119, 255]
+                },
+                {
+                  "x": 154,
+                  "rgba": [241, 203, 155, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [255, 235, 187, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [255, 245, 206, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [255, 251, 213, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [255, 243, 203, 254]
+                },
+                {
+                  "x": 159,
+                  "rgba": [228, 215, 161, 255]
+                },
+                {
+                  "x": 160,
+                  "rgba": [231, 219, 164, 171]
+                }
+              ]
+            },
+            {
+              "y": 79,
+              "pixels": [
+                {
+                  "x": 152,
+                  "rgba": [164, 81, 56, 101]
+                },
+                {
+                  "x": 153,
+                  "rgba": [196, 127, 81, 235]
+                },
+                {
+                  "x": 154,
+                  "rgba": [197, 144, 98, 248]
+                },
+                {
+                  "x": 155,
+                  "rgba": [166, 114, 72, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [175, 136, 90, 255]
+                },
+                {
+                  "x": 157,
+                  "rgba": [192, 151, 110, 255]
+                },
+                {
+                  "x": 158,
+                  "rgba": [136, 110, 69, 255]
+                },
+                {
+                  "x": 159,
+                  "rgba": [150, 134, 90, 252]
+                },
+                {
+                  "x": 160,
+                  "rgba": [229, 220, 158, 29]
+                }
+              ]
+            },
             {
               "y": 80,
               "pixels": [
                 {
+                  "x": 152,
+                  "rgba": [136, 84, 61, 180]
+                },
+                {
+                  "x": 153,
+                  "rgba": [193, 146, 73, 49]
+                },
+                {
+                  "x": 154,
+                  "rgba": [103, 71, 39, 194]
+                },
+                {
+                  "x": 155,
+                  "rgba": [84, 56, 24, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [71, 48, 23, 252]
+                },
+                {
                   "x": 157,
-                  "rgba": [253, 239, 200, 255]
+                  "rgba": [66, 47, 20, 251]
                 },
                 {
                   "x": 158,
-                  "rgba": [250, 231, 198, 255]
+                  "rgba": [94, 71, 32, 255]
                 },
                 {
                   "x": 159,
-                  "rgba": [253, 240, 212, 255]
+                  "rgba": [98, 78, 33, 101]
                 },
                 {
                   "x": 160,
-                  "rgba": [255, 250, 208, 255]
-                },
-                {
-                  "x": 161,
-                  "rgba": [178, 141, 106, 252]
+                  "rgba": [0, 0, 0, 0]
                 }
               ]
             },
@@ -8802,24 +9029,40 @@
               "y": 81,
               "pixels": [
                 {
+                  "x": 152,
+                  "rgba": [162, 115, 74, 148]
+                },
+                {
+                  "x": 153,
+                  "rgba": [109, 82, 40, 161]
+                },
+                {
+                  "x": 154,
+                  "rgba": [85, 62, 25, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [93, 68, 35, 250]
+                },
+                {
+                  "x": 156,
+                  "rgba": [88, 62, 38, 254]
+                },
+                {
                   "x": 157,
-                  "rgba": [239, 192, 154, 255]
+                  "rgba": [87, 65, 35, 255]
                 },
                 {
                   "x": 158,
-                  "rgba": [239, 205, 166, 255]
+                  "rgba": [91, 75, 32, 236]
                 },
                 {
                   "x": 159,
-                  "rgba": [242, 220, 178, 255]
+                  "rgba": [73, 55, 27, 28]
                 },
                 {
                   "x": 160,
-                  "rgba": [183, 162, 115, 247]
-                },
-                {
-                  "x": 161,
-                  "rgba": [133, 104, 67, 255]
+                  "rgba": [0, 0, 0, 0]
                 }
               ]
             },
@@ -8827,24 +9070,40 @@
               "y": 82,
               "pixels": [
                 {
+                  "x": 152,
+                  "rgba": [173, 138, 72, 146]
+                },
+                {
+                  "x": 153,
+                  "rgba": [94, 73, 38, 87]
+                },
+                {
+                  "x": 154,
+                  "rgba": [110, 86, 40, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [130, 95, 55, 250]
+                },
+                {
+                  "x": 156,
+                  "rgba": [100, 72, 40, 248]
+                },
+                {
                   "x": 157,
-                  "rgba": [127, 58, 64, 255]
+                  "rgba": [141, 105, 63, 255]
                 },
                 {
                   "x": 158,
-                  "rgba": [112, 68, 51, 255]
+                  "rgba": [117, 91, 51, 109]
                 },
                 {
                   "x": 159,
-                  "rgba": [106, 74, 47, 252]
+                  "rgba": [0, 0, 0, 0]
                 },
                 {
                   "x": 160,
-                  "rgba": [70, 55, 26, 255]
-                },
-                {
-                  "x": 161,
-                  "rgba": [98, 80, 48, 222]
+                  "rgba": [128, 64, 64, 4]
                 }
               ]
             },
@@ -8852,24 +9111,40 @@
               "y": 83,
               "pixels": [
                 {
+                  "x": 152,
+                  "rgba": [142, 105, 58, 190]
+                },
+                {
+                  "x": 153,
+                  "rgba": [103, 77, 47, 169]
+                },
+                {
+                  "x": 154,
+                  "rgba": [151, 120, 72, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [156, 115, 72, 251]
+                },
+                {
+                  "x": 156,
+                  "rgba": [144, 109, 67, 252]
+                },
+                {
                   "x": 157,
-                  "rgba": [69, 36, 35, 255]
+                  "rgba": [175, 144, 90, 255]
                 },
                 {
                   "x": 158,
-                  "rgba": [69, 37, 42, 254]
+                  "rgba": [159, 128, 78, 72]
                 },
                 {
                   "x": 159,
-                  "rgba": [68, 45, 41, 255]
+                  "rgba": [0, 0, 0, 0]
                 },
                 {
                   "x": 160,
-                  "rgba": [54, 38, 21, 255]
-                },
-                {
-                  "x": 161,
-                  "rgba": [42, 26, 8, 98]
+                  "rgba": [170, 170, 128, 6]
                 }
               ]
             },
@@ -8877,48 +9152,39 @@
               "y": 84,
               "pixels": [
                 {
+                  "x": 152,
+                  "rgba": [94, 56, 40, 254]
+                },
+                {
+                  "x": 153,
+                  "rgba": [84, 52, 36, 254]
+                },
+                {
+                  "x": 154,
+                  "rgba": [148, 117, 75, 255]
+                },
+                {
+                  "x": 155,
+                  "rgba": [114, 86, 50, 255]
+                },
+                {
+                  "x": 156,
+                  "rgba": [153, 118, 80, 251]
+                },
+                {
                   "x": 157,
-                  "rgba": [129, 58, 77, 255]
+                  "rgba": [170, 128, 92, 255]
                 },
                 {
                   "x": 158,
-                  "rgba": [81, 51, 43, 254]
+                  "rgba": [141, 90, 76, 148]
                 },
                 {
                   "x": 159,
-                  "rgba": [69, 41, 36, 255]
-                },
-                {
-                  "x": 160,
-                  "rgba": [73, 48, 39, 207]
-                },
-                {
-                  "x": 161,
                   "rgba": [0, 0, 0, 0]
-                }
-              ]
-            },
-            {
-              "y": 85,
-              "pixels": [
-                {
-                  "x": 157,
-                  "rgba": [157, 84, 86, 255]
-                },
-                {
-                  "x": 158,
-                  "rgba": [102, 58, 51, 255]
-                },
-                {
-                  "x": 159,
-                  "rgba": [87, 54, 52, 255]
                 },
                 {
                   "x": 160,
-                  "rgba": [106, 73, 73, 94]
-                },
-                {
-                  "x": 161,
                   "rgba": [0, 0, 0, 0]
                 }
               ]
@@ -8934,7 +9200,8 @@
         "recordedUtc": "2026-11-08T02:03:38.937Z",
         "statement": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules."
       },
-      "failureClassification": "Genuine marginal oversize by orchestrator adjudication; prior uncertainty does not waive this failure."
+      "failureClassification": "Genuine marginal oversize by orchestrator adjudication; prior uncertainty does not waive this failure.",
+      "sourceRepair": "repair/dash5.head-boundaries.json"
     },
     {
       "clip": "dash",
@@ -10949,5 +11216,354 @@
       ]
     }
   ],
-  "projectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859"
+  "projectSha256": "3d4e5aacb411dcb6c8bb8ba5f20fa7582a6754f57d5cde8cae8a8949a62d2623",
+  "repairHistory": [
+    {
+      "reason": "AI source-head repair after D55/D57, original adjudicated point/image retained, not moved on unchanged pixels.",
+      "previous": {
+        "clip": "dash",
+        "index": 5,
+        "crown": {
+          "x": 147,
+          "y": 28.5
+        },
+        "chin": {
+          "x": 159,
+          "y": 82.5
+        },
+        "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "alignedPngSha256": "f8385b6a67ea733a109844460069fad98d134f61e5a2534fe48c3d8cff1188fe",
+        "neighborhoods": [
+          {
+            "name": "crown",
+            "point": {
+              "x": 147,
+              "y": 28.5
+            },
+            "rows": [
+              {
+                "y": 26,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [179, 153, 128, 251]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [226, 201, 177, 255]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [148, 107, 89, 186]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [0, 0, 0, 0]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [0, 0, 0, 0]
+                  }
+                ]
+              },
+              {
+                "y": 27,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [79, 44, 25, 255]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [103, 62, 44, 250]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [83, 28, 24, 255]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [98, 62, 48, 177]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [0, 0, 0, 0]
+                  }
+                ]
+              },
+              {
+                "y": 28,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [131, 100, 97, 255]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [116, 87, 77, 255]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [112, 85, 66, 248]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [197, 168, 134, 255]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [220, 202, 171, 130]
+                  }
+                ]
+              },
+              {
+                "y": 29,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [248, 232, 216, 255]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [253, 237, 213, 255]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [243, 235, 196, 254]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [233, 221, 189, 255]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [226, 215, 189, 236]
+                  }
+                ]
+              },
+              {
+                "y": 30,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [180, 135, 111, 255]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [186, 148, 117, 255]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [199, 171, 129, 255]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [201, 181, 134, 254]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [188, 167, 126, 255]
+                  }
+                ]
+              },
+              {
+                "y": 31,
+                "pixels": [
+                  {
+                    "x": 145,
+                    "rgba": [169, 125, 93, 255]
+                  },
+                  {
+                    "x": 146,
+                    "rgba": [172, 131, 95, 255]
+                  },
+                  {
+                    "x": 147,
+                    "rgba": [171, 132, 95, 255]
+                  },
+                  {
+                    "x": 148,
+                    "rgba": [168, 127, 89, 255]
+                  },
+                  {
+                    "x": 149,
+                    "rgba": [161, 124, 83, 254]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "chin",
+            "point": {
+              "x": 159,
+              "y": 82.5
+            },
+            "rows": [
+              {
+                "y": 80,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [253, 239, 200, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [250, 231, 198, 255]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [253, 240, 212, 255]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [255, 250, 208, 255]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [178, 141, 106, 252]
+                  }
+                ]
+              },
+              {
+                "y": 81,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [239, 192, 154, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [239, 205, 166, 255]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [242, 220, 178, 255]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [183, 162, 115, 247]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [133, 104, 67, 255]
+                  }
+                ]
+              },
+              {
+                "y": 82,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [127, 58, 64, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [112, 68, 51, 255]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [106, 74, 47, 252]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [70, 55, 26, 255]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [98, 80, 48, 222]
+                  }
+                ]
+              },
+              {
+                "y": 83,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [69, 36, 35, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [69, 37, 42, 254]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [68, 45, 41, 255]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [54, 38, 21, 255]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [42, 26, 8, 98]
+                  }
+                ]
+              },
+              {
+                "y": 84,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [129, 58, 77, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [81, 51, 43, 254]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [69, 41, 36, 255]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [73, 48, 39, 207]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [0, 0, 0, 0]
+                  }
+                ]
+              },
+              {
+                "y": 85,
+                "pixels": [
+                  {
+                    "x": 157,
+                    "rgba": [157, 84, 86, 255]
+                  },
+                  {
+                    "x": 158,
+                    "rgba": [102, 58, 51, 255]
+                  },
+                  {
+                    "x": 159,
+                    "rgba": [87, 54, 52, 255]
+                  },
+                  {
+                    "x": 160,
+                    "rgba": [106, 73, 73, 94]
+                  },
+                  {
+                    "x": 161,
+                    "rgba": [0, 0, 0, 0]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "status": "ADJUDICATED correct contour; genuine marginal oversize remains OPEN for post-D55 head-only repair.",
+        "refinement": "Keep147,28.5->159,82.5 exactly. Row82 is jaw outline,81 interior skin,83 neck.157 is neck shadow. Prior provisional uncertainty cannot waive the actual overband finding.",
+        "sourceSha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+        "adjudication": {
+          "reviewer": "orchestrator1",
+          "recordedUtc": "2026-11-08T02:03:38.937Z",
+          "statement": "Orchestrator adjudication: row82 dark outline is JAW/chin, consistent with master chin outline128,64.5. Row81 skin is interior; row83 is neck, never chin.157 is back/left neck shadow and excluded. Frozen147,28.5->159,82.5 is correct and genuinely marginally oversized; no uncertainty waiver or coordinate shift. Fold a local head-ROI-only correction (~1%) or master-locked repaint into the post-D55 repair; body/root/legs unchanged, then remeasure with identical contour rules."
+        },
+        "failureClassification": "Genuine marginal oversize by orchestrator adjudication; prior uncertainty does not waive this failure."
+      }
+    }
+  ],
+  "historicalProjectSha256": "96bdae044bf0cb1c711099a592327c37ffd389d0ced129099493f3e2b7037859"
 }

@@ -18,7 +18,7 @@
     "width": 313,
     "height": 314
   },
-  "status": "candidate; not selected or passing until actual pixel/landmark and full QA review",
+  "status": "Selected head ROI only after merged D57 registration and actual semantic remeasurement; native hard gates and final Cocos capture pass. Original raw AI output retained.",
   "files": [
     {
       "file": "raw/dash-head.input.png",
@@ -42,5 +42,6 @@
     }
   ],
   "normalization": "Generated1254x1254 cell -> source313x314 canvas with one Lanczos3 DPI-normalization pass. Only reviewed head-mask pixels copied; no body/frame scaling or fitting.",
-  "selectionProof": "../repair/dash5.head-selection.json"
+  "selectionProof": "../repair/dash5.head-selection.json",
+  "acceptanceEvidence": "../repair/dash5.head-boundaries.json"
 }

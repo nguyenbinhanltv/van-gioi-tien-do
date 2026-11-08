@@ -1,6 +1,6 @@
 {
-  "status": "Current Lanczos3 soft measurements remain open. Historical bilinear baselines retained unchanged; new/regressed values are NOT accepted or hidden. Final source freeze follows D55 and head review.",
-  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
+  "status": "21 current measured SOFT findings remain OPEN. Historical bilinear verdicts below are preserved; first-publication Lanczos3 values explicitly accepted as open polish in quality-backlog.json, with unchanged gate limits. Nothing is marked fixed.",
+  "projectSha256": "3d4e5aacb411dcb6c8bb8ba5f20fa7582a6754f57d5cde8cae8a8949a62d2623",
   "findings": [
     {
       "verdictAgainstHistoricalBilinearBacklog": "accepted",
@@ -233,5 +233,6 @@
       "limit": 0,
       "message": "height 222 px outside the upright band and no pose exception declared"
     }
-  ]
+  ],
+  "historicalProjectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6"
 }
