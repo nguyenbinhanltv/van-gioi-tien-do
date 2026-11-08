@@ -143,6 +143,8 @@ export interface WorldNodeOptions {
   maxVisible?: number;
   /** tu vi / breakthrough module (D76); absent = progression messages are rejected as unexpected */
   progression?: ProgressionService;
+  /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
+  playerIdQuarantineMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
@@ -207,6 +209,9 @@ export class WorldNode {
   /** cumulative ms per tick phase (sim step / AOI / snapshot encode+send) and the slowest single sample of each */
   readonly phases = { stepMs: 0, aoiMs: 0, snapMs: 0, aoiTicks: 0, maxStepMs: 0, maxAoiMs: 0, maxSnapMs: 0 };
   private nextId = 1;
+  /** released player ids, oldest first, with the sim time from which each may be reused */
+  private readonly freeIds: { id: number; reusableAtMs: number }[] = [];
+  private readonly idQuarantineMs: number;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
   private readonly maxVisible: number;
@@ -238,6 +243,7 @@ export class WorldNode {
         if (c) this.kick(c, ErrorCode.Internal, 'progression storage error');
       },
     });
+    this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -247,10 +253,32 @@ export class WorldNode {
   }
 
   // ------------------------------------------------------------------ players
+  /**
+   * Player ids: a released id is reused once it has been quarantined for `idQuarantineMs` of sim time (so a stale client
+   * index / entity id is never confused with a new player); otherwise a fresh id is taken. With mobs on, ids stay below
+   * `MOB_ID_BASE` (mob entity ids start there: a player id there would collide with mob slot 0), so the number of
+   * usable ids is tied to concurrent players, not to the total number of joins.
+   */
+  private idLimit(): number {
+    return this.mobs ? MOB_ID_BASE : 0xffffffff;
+  }
+  /** Is there an id for one more player right now? (the gateway checks this BEFORE it replaces an older connection) */
+  canAcceptPlayer(): boolean {
+    const head = this.freeIds[0];
+    return (head !== undefined && head.reusableAtMs <= this.world.timeMs) || this.nextId < this.idLimit();
+  }
+  private allocateId(): number {
+    const head = this.freeIds[0];
+    if (head !== undefined && head.reusableAtMs <= this.world.timeMs) {
+      this.freeIds.shift();
+      return head.id;
+    }
+    if (this.nextId >= this.idLimit()) throw new WorldFullError();
+    return this.nextId++;
+  }
+
   addPlayer(transport: ClientTransport, accountId: string): number {
-    // mob entity ids start at MOB_ID_BASE: a player id there would collide with mob slot 0 (two entities, one id)
-    if (this.mobs && this.nextId >= MOB_ID_BASE) throw new WorldFullError();
-    const id = this.nextId++;
+    const id = this.allocateId();
     const [a, r1] = rngFloat(this.spawnRng);
     const [b, r2] = rngFloat(r1);
     this.spawnRng = r2;
@@ -283,10 +311,18 @@ export class WorldNode {
     return id;
   }
 
-  removePlayer(id: number): void {
-    if (!this.clients.delete(id)) return;
+  /**
+   * Remove a player. `from` (the connection's transport) makes the call connection-bound: a stale socket that still holds an
+   * id which has since been recycled to someone else is ignored instead of removing the new owner. Internal callers (kick)
+   * omit it.
+   */
+  removePlayer(id: number, from?: ClientTransport): void {
+    const c = this.clients.get(id);
+    if (!c || (from !== undefined && c.transport !== from)) return;
+    this.clients.delete(id);
     void this.progression?.leave(id);
     this.world = removeEntity(this.world, id);
+    this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
   }
 
   statsOf(id: number): ClientStats | undefined {
@@ -295,9 +331,10 @@ export class WorldNode {
 
   // ------------------------------------------------------------------ inbound
   /** Handle one binary frame from a client (already length-limited by the gateway). */
-  receive(id: number, data: Uint8Array): void {
+  receive(id: number, data: Uint8Array, from?: ClientTransport): void {
     const c = this.clients.get(id);
     if (!c || c.dead) return;
+    if (from !== undefined && c.transport !== from) return; // stale connection: the id now belongs to another player
     c.stats.bytesIn += data.length;
     c.stats.packetsIn++;
     const now = clock();

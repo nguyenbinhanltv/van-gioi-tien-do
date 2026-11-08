@@ -36,6 +36,8 @@ export const WORLD_CONFIG = {
   PLAYER_MAX_MP: 100,
   /** no ack for this long -> next snapshot is full (docs/08 §8) */
   ACK_TIMEOUT_MS: 1000,
+  /** a released player entity id is not reused before this much sim time has passed (stale client indices, D74) */
+  PLAYER_ID_QUARANTINE_MS: 30_000,
   /** open test map side in tiles */
   DEFAULT_MAP_TILES: 256,
   /** tick duration samples kept for p50/p99 */
