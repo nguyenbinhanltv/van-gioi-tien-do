@@ -116,7 +116,13 @@ export function placeProps(input: PlacementInput): PlacementResult {
     return true;
   };
   const blocked: Array<[number, number]> = [];
+  /** Tiles that must stay free of other props: within `spacing` of a placed prop's anchor or blocked tiles. */
+  const halo = new Set<number>();
   const take = (name: string, i: number, j: number) => {
+    const gap = defs[name]?.spacing ?? 1;
+    for (const [ti, tj] of [[i, j] as [number, number], ...tilesOf(name, i, j)]) {
+      for (let dj = -gap; dj <= gap; dj++) for (let di = -gap; di <= gap; di++) halo.add(key(ti + di, tj + dj));
+    }
     for (const [ti, tj] of tilesOf(name, i, j)) {
       occupied.add(key(ti, tj));
       blocked.push([ti, tj]);
@@ -188,15 +194,15 @@ export function placeProps(input: PlacementInput): PlacementResult {
     const list = byBiome(biome);
     const name = pick(list.length ? list : byBiome('sect'));
     if (!name || !fits(name, i, j)) continue;
-    // one free tile around trees / buildings keeps paths between props open
-    let tight = false;
-    for (const [dj, di] of [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0],
-    ] as const)
-      if (occupied.has(key(i + di, j + dj))) tight = true;
+    // `spacing` free tiles around the anchor AND every blocked tile (so 2x2 rocks keep a gap too), both ways: this prop's own
+    // radius against what is placed, and the halo of what is placed against this prop. Keeps paths open, crowns apart.
+    const gap = defs[name]!.spacing ?? 1;
+    const tight = [[i, j] as [number, number], ...tilesOf(name, i, j)].some(([ti, tj]) => {
+      if (halo.has(key(ti, tj))) return true;
+      for (let dj = -gap; dj <= gap; dj++)
+        for (let di = -gap; di <= gap; di++) if (occupied.has(key(ti + di, tj + dj))) return true;
+      return false;
+    });
     if (tight) continue;
     if (tilesOf(name, i, j).some(([ti, tj]) => reserve.has(key(ti, tj)))) continue;
     take(name, i, j);

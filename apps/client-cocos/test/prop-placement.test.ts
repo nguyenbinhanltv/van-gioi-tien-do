@@ -176,4 +176,33 @@ describe('placeProps', () => {
       for (const [di, dj] of defs[p.name]!.block) expected.add(`${p.i + di},${p.j + dj}`);
     expect(new Set(r.blocked.map(([i, j]) => `${i},${j}`))).toEqual(expected);
   });
+
+  it('honours `spacing`: no two props of spacing 2 closer than 3 tiles (2 free tiles between), every pair keeps at least 1 free tile', () => {
+    const footprint = (p: { name: string; i: number; j: number }): Array<[number, number]> => [
+      [p.i, p.j],
+      ...defs[p.name]!.block.map(([di, dj]) => [p.i + di, p.j + dj] as [number, number]),
+    ];
+    const dist = (a: Array<[number, number]>, b: Array<[number, number]>) =>
+      Math.min(...a.flatMap(([ai, aj]) => b.map(([bi, bj]) => Math.max(Math.abs(ai - bi), Math.abs(aj - bj)))));
+    for (const seed of [1, 2, 3]) {
+      const r = placeProps(input({ seed, terrain: () => 'grass', count: 200 }));
+      const all = [...r.courtyard, ...r.props];
+      const tall = r.props.filter((p) => (defs[p.name]!.spacing ?? 1) === 2);
+      expect(tall.length, `seed ${seed}: tall trees placed`).toBeGreaterThan(5);
+      for (let a = 0; a < tall.length; a++)
+        for (let b = a + 1; b < tall.length; b++)
+          expect(
+            dist(footprint(tall[a]!), footprint(tall[b]!)),
+            `${tall[a]!.name}@${tall[a]!.i},${tall[a]!.j} vs ${tall[b]!.name}@${tall[b]!.i},${tall[b]!.j}`,
+          ).toBeGreaterThanOrEqual(3);
+      // scattered props (incl. 2x2 rocks) never touch another prop's footprint: at least one free tile between
+      for (let a = 0; a < r.props.length; a++)
+        for (let b = a + 1; b < r.props.length; b++)
+          expect(
+            dist(footprint(r.props[a]!), footprint(r.props[b]!)),
+            `seed ${seed}: ${r.props[a]!.name} vs ${r.props[b]!.name}`,
+          ).toBeGreaterThanOrEqual(2);
+      expect(all.length).toBeGreaterThan(r.props.length);
+    }
+  });
 });
