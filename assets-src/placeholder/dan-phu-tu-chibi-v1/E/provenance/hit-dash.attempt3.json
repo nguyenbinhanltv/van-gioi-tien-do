@@ -1,0 +1,36 @@
+{
+  "clip": "hit+dash",
+  "dir": "E",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:09:17 UTC",
+  "utcEnd": "2026-11-07 22:09:56 UTC",
+  "prompt": "Production sprite sheet with canonical head stencils. Image1 TARGET4x4 lattice contains correctly scaled canonical femaleheads at intended neckpositions; image2 is full16cell BODY POSE source: first6HIT, then10DASH. Image3 fixedface. Complete image1 by drawing matching image2bodyposes around existingheads. Critical: preserve actualimage1 headsize andadultface, Euclidean maincapcrown-tochin53.5logicalpx per256cell. No enlarge/shrinkhead. Keep image1heads lookingright/upright slightly counter-rotated toleaningtorso, natural neckattachment. Headstencil is fixedidentity andscale, notanotherFX. Preserve allBODYlimblengths/poses, boots/rootpositions/rightwhiskgrip/leftpalm/robe/sash/horsehairmotion fromimage2. InDASH keep deepcompression, longforwardlunge, BOTHFEETAIRBORNEtuck, recovery; doNOTflattenorstandallframes. Right handoneplainbrownwhisk continuousshaft ONEbronze collar whitehorsehair. FixedivoryjadeT1 thinantiquegoldtrim sparseinkhem, sameoriginaladultfemaleolivebrownalmondface/straightbrow/nose/lips/jaw,sweptbrownattachedcap separatefoldedbun/jadepin. Dynamicbodycounterbalancesheadlookingforward, noheadbobscalevariation. First6HITrecoil then10DASH exactlysame4x4rowmajormapping; finished1254square ifpossible, 16fullfiguresnomissingcells. RemoveALLgrid/ghosts/dashes/triangles, flatmagenta#ff00ffoutside. NoFX/text/shadows/platform/afterimages. Tintedoutlines two-tonecel+highlight+narrowrim NWlight. Preserve dynamics andkeepallartinsideeachcell; canonicalheadsize is given by actualstencil pixels, not verbalpercentages.",
+  "references": [
+    "../templates/hit-dash.head-guide.png",
+    "../raw/hit-dash.attempt1.png",
+    "../../reference/E.identity-panel.corrected.png"
+  ],
+  "raw": "../raw/hit-dash.attempt3.png",
+  "status": "unscaled canonical-head stencil input candidate; actual aligned output measurements pending; preserve hit and dash endpoints from original",
+  "sha256": "6685e9eaf26952eb789e9d8f143ea4db16704ae65894a33bcdd6a77396da8101",
+  "rawSha256": "6685e9eaf26952eb789e9d8f143ea4db16704ae65894a33bcdd6a77396da8101",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/hit-dash.head-guide.png",
+      "sha256": "7918ecf4318ce4c944f01485f0442541982265301072020a262bafeceed3c1a8"
+    },
+    {
+      "file": "../raw/hit-dash.attempt1.png",
+      "sha256": "eff048a27e1e530ac832dfdfa0b3db17724df06b0a05ecb240bbbab9f096fc2f"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

@@ -1,0 +1,685 @@
+{
+  "utc": "2026-11-07T23:32:58.049Z",
+  "pipelineCommit": "e39da2e",
+  "coordinateSpace": "Exact aligned256 output cells. Semantic boundary edges; retained manual landmark uncertainty is an open soft finding. Not an automated anatomy certification.",
+  "master": {
+    "crown": {
+      "x": 119,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 137.5,
+      "y": 66.5
+    },
+    "sha256": "1a2e22da5b831a000e30978da194f90bfe5899793c9efc6a5f5e6e581d6dba21"
+  },
+  "projectSha256": "aef17e6835fa8e045c407e1ce47d8159cbae879d5a46f8a6e076a6bd6dd50fb5",
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 16,
+      "sheet": "raw/idle.attempt3.png",
+      "sourceSha256": "fb2700f2c1a7ad238922bfcfcb1b49c76272bd638e1f6e285d5b2d0f41cdbfa3",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "meditate",
+      "frames": 16,
+      "sheet": "raw/meditate.attempt2.png",
+      "sourceSha256": "e562a9f8d5bb50b83a1349b1eb7e143aecdbc71ef5bb0fa5bcb4ce323a3d9624",
+      "exceptions": {
+        "0": "seated: compact meditation pose, same anatomy",
+        "1": "seated: compact meditation pose, same anatomy",
+        "2": "seated: compact meditation pose, same anatomy",
+        "3": "seated: compact meditation pose, same anatomy",
+        "4": "seated: compact meditation pose, same anatomy",
+        "5": "seated: compact meditation pose, same anatomy",
+        "6": "seated: compact meditation pose, same anatomy",
+        "7": "seated: compact meditation pose, same anatomy",
+        "8": "seated: compact meditation pose, same anatomy",
+        "9": "seated: compact meditation pose, same anatomy",
+        "10": "seated: compact meditation pose, same anatomy",
+        "11": "seated: compact meditation pose, same anatomy",
+        "12": "seated: compact meditation pose, same anatomy",
+        "13": "seated: compact meditation pose, same anatomy",
+        "14": "seated: compact meditation pose, same anatomy",
+        "15": "seated: compact meditation pose, same anatomy"
+      }
+    },
+    {
+      "name": "walk",
+      "frames": 16,
+      "sheet": "raw/walk.attempt2.png",
+      "sourceSha256": "ece5c8b9c7640024202b3a4e67bac02e6cd4294d809ed9332faef22cdeef42b9",
+      "heightPolicy": "head-size-v1"
+    },
+    {
+      "name": "run",
+      "frames": 16,
+      "sheet": "raw/run.final-selection.png",
+      "sourceSha256": "baa355319c3a207b095e1ff27a85743930cd432f569acb71bf23722b264c4c32",
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 151,
+            "y": 33.5
+          },
+          "chin": {
+            "x": 173,
+            "y": 81.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "1": {
+          "crown": {
+            "x": 151,
+            "y": 40.5
+          },
+          "chin": {
+            "x": 174,
+            "y": 89.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "2": {
+          "crown": {
+            "x": 147,
+            "y": 34.5
+          },
+          "chin": {
+            "x": 170,
+            "y": 81.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "3": {
+          "crown": {
+            "x": 142,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 73.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "4": {
+          "crown": {
+            "x": 143,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 165,
+            "y": 71.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "5": {
+          "crown": {
+            "x": 143,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 166.5,
+            "y": 69.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "6": {
+          "crown": {
+            "x": 144,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 69.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "7": {
+          "crown": {
+            "x": 154,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 180.5,
+            "y": 67.5
+          },
+          "note": "Retained run.attempt7 nativecell7. First attached hair22 after identifiable tie21; jaw67 alpha255/243 bothcolumns, row68 average77.5<128. Other motion geometry preserved. Master119,16.5 to137.5,66.5 per style23; manualapprox1px uncertainty disclosed; no automated anatomy certification or body fitting."
+        },
+        "8": {
+          "crown": {
+            "x": 149,
+            "y": 33.5
+          },
+          "chin": {
+            "x": 172,
+            "y": 80.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "9": {
+          "crown": {
+            "x": 150,
+            "y": 40.5
+          },
+          "chin": {
+            "x": 174,
+            "y": 88.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "10": {
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 173,
+            "y": 76.5
+          },
+          "note": "AI run.attempt9 cell10. Include attached hair/rim highlight29 below pinktie28; last jaw76alpha255,77alpha23<128. Fresh semantic regions reviewed with style23. Master119,16.5 to137.5,66.5 per style23; manualapprox1px uncertainty disclosed; no automated anatomy certification or body fitting."
+        },
+        "11": {
+          "crown": {
+            "x": 141,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 71.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "12": {
+          "crown": {
+            "x": 146,
+            "y": 29.5
+          },
+          "chin": {
+            "x": 171.5,
+            "y": 76.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "13": {
+          "crown": {
+            "x": 145,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 72.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "14": {
+          "crown": {
+            "x": 148,
+            "y": 23.5
+          },
+          "chin": {
+            "x": 173.5,
+            "y": 71.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        },
+        "15": {
+          "crown": {
+            "x": 150,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 174.5,
+            "y": 71.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Forward torso lean/stride/flight tuck preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      }
+    },
+    {
+      "name": "dash",
+      "frames": 10,
+      "sheet": "raw/hit-dash.final-selection.png",
+      "sourceSha256": "b22883a6d4a1e2fc0a9cce44ff491a021e31035b713ee49d48b24aa91daf25c5",
+      "heightPolicy": "head-size-v1",
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 131.70316252270482,
+            "y": 38.5
+          },
+          "chin": {
+            "x": 156.20316252270482,
+            "y": 84.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "2": {
+          "crown": {
+            "x": 150.61082153406875,
+            "y": 37.5
+          },
+          "chin": {
+            "x": 174.61082153406875,
+            "y": 83.5
+          },
+          "note": "Retained canonical-stencil hit-dash.attempt3 nativeglobal8. Identifiable pinktie45, attachedhair46; anterior chin172 has jaw91alpha249 then92zero. Coarse171.5 source was not reused across raw candidates. Master119,16.5 to137.5,66.5 per style23; manualapprox1px uncertainty disclosed; no automated anatomy certification or body fitting. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "3": {
+          "crown": {
+            "x": 161.35130970745888,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 184.85130970745888,
+            "y": 84.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "4": {
+          "crown": {
+            "x": 172.25920767601133,
+            "y": 57.5
+          },
+          "chin": {
+            "x": 201.25920767601133,
+            "y": 102.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "5": {
+          "crown": {
+            "x": 166.59397716717035,
+            "y": 23.5
+          },
+          "chin": {
+            "x": 184.09397716717035,
+            "y": 73.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "6": {
+          "crown": {
+            "x": 162.2634002532523,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 183.2634002532523,
+            "y": 85.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "7": {
+          "crown": {
+            "x": 142.77566854021697,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 165.77566854021697,
+            "y": 84.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        },
+        "8": {
+          "crown": {
+            "x": 119.89242712560807,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 145.39242712560807,
+            "y": 69.5
+          },
+          "note": "Manual native semantic-boundary annotation; alpha128 jaw support with both X neighbors; first attached maincap excludes bun/pin/tie but includes true hair highlight. Deep crouch/forward dash preserves dynamic source body pose. Master baseline refined119,16.5 to137.5,66.5 per style23; approx1px manual uncertainty disclosed. See head-landmarks.support-refined.json, original draft/history and native trace. No body fitting or head threshold waiver. Coordinates rigidly mapped from reviewed same-cell landmarks by the recorded full-frame registration delta; vector/size unchanged; see dash-registration-history.json."
+        }
+      },
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 124.09888525886512,
+          "groundY": 240,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed source/T1 registration: neutral endpoint cells0and9 of raw/hit-dash.final-selection.png share source ground 240 and source-centroid registration mean 124.09888525886512. This is a fixed source registration root, NOT an anatomical pelvis. Locked T1 master guides centerX117.63257993384785,ground232; one constant translation across all10cells preserves flight."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "frames": 12,
+      "sheet": "raw/sword_fly.attempt1.png",
+      "sourceSha256": "23ac7f3d9c1ea06d25b4ee9ae14802cc61e62740d8e1f74f478423de65e08da0",
+      "exceptions": {
+        "0": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "1": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "2": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "3": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "4": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "5": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "6": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "7": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "8": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "9": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "10": "airborne: hovering knees and pointed toes; D41 free-pose hint",
+        "11": "airborne: hovering knees and pointed toes; D41 free-pose hint"
+      }
+    },
+    {
+      "name": "attack",
+      "frames": 14,
+      "sheet": "raw/attack.attempt1.png",
+      "sourceSha256": "b7aa1600f5e9aa0166a115accf304645aabb50768accf78f79d5da84a8bc3bb6",
+      "exceptions": {
+        "2": "lunge: windup, strike and recovery knee/torso articulation",
+        "3": "lunge: windup, strike and recovery knee/torso articulation",
+        "4": "lunge: windup, strike and recovery knee/torso articulation",
+        "5": "lunge: windup, strike and recovery knee/torso articulation",
+        "6": "lunge: windup, strike and recovery knee/torso articulation",
+        "7": "lunge: windup, strike and recovery knee/torso articulation",
+        "8": "lunge: windup, strike and recovery knee/torso articulation",
+        "9": "lunge: windup, strike and recovery knee/torso articulation",
+        "10": "lunge: windup, strike and recovery knee/torso articulation",
+        "11": "lunge: windup, strike and recovery knee/torso articulation",
+        "12": "lunge: windup, strike and recovery knee/torso articulation"
+      }
+    },
+    {
+      "name": "attack_2",
+      "frames": 14,
+      "sheet": "raw/attack_2.attempt1.png",
+      "sourceSha256": "28ee8d504526c09b6269839051aa708f65c7df13dd972195f2379e1ea7cb8720",
+      "exceptions": {
+        "2": "lunge: windup, strike and recovery knee/torso articulation",
+        "3": "lunge: windup, strike and recovery knee/torso articulation",
+        "4": "lunge: windup, strike and recovery knee/torso articulation",
+        "5": "lunge: windup, strike and recovery knee/torso articulation",
+        "6": "lunge: windup, strike and recovery knee/torso articulation",
+        "7": "lunge: windup, strike and recovery knee/torso articulation",
+        "8": "lunge: windup, strike and recovery knee/torso articulation",
+        "9": "lunge: windup, strike and recovery knee/torso articulation",
+        "10": "lunge: windup, strike and recovery knee/torso articulation",
+        "11": "lunge: windup, strike and recovery knee/torso articulation",
+        "12": "lunge: windup, strike and recovery knee/torso articulation"
+      }
+    },
+    {
+      "name": "attack_3",
+      "frames": 14,
+      "sheet": "raw/attack_3.boot-fixed.png",
+      "sourceSha256": "d7956d710b42442c2e002fef2938bb5a8f8c4da238ad68e60ef6b5de0f676ba3",
+      "exceptions": {
+        "2": "lunge: windup, strike and recovery knee/torso articulation",
+        "3": "lunge: windup, strike and recovery knee/torso articulation",
+        "4": "lunge: windup, strike and recovery knee/torso articulation",
+        "5": "lunge: windup, strike and recovery knee/torso articulation",
+        "6": "lunge: windup, strike and recovery knee/torso articulation",
+        "7": "lunge: windup, strike and recovery knee/torso articulation",
+        "8": "lunge: windup, strike and recovery knee/torso articulation",
+        "9": "lunge: windup, strike and recovery knee/torso articulation",
+        "10": "lunge: windup, strike and recovery knee/torso articulation",
+        "11": "lunge: windup, strike and recovery knee/torso articulation",
+        "12": "lunge: windup, strike and recovery knee/torso articulation"
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 117.63257993384785,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed T1 source registration: templates/attack_3.template.json guides.centerX117.6325799338 normalized256 SOURCE before inset0; rounded authored X117.6326 on ALL14cells. Source lunge pelvis intentionally travels relative to this root; not an anatomical-pelvis annotation."
+        }
+      }
+    },
+    {
+      "name": "cast",
+      "frames": 16,
+      "sheet": "raw/cast.attempt1.png",
+      "sourceSha256": "97245b22116f5899bf8636d4886e7bad414a6d04ba99e76a89d1e3185464fdbf",
+      "exceptions": {
+        "8": "raised-sword: left palm and wide sleeve raised at talisman release; right hand retains whisk",
+        "9": "raised-sword: talisman release follow-through, left sleeve extended; right hand retains whisk"
+      }
+    },
+    {
+      "name": "channel",
+      "frames": 12,
+      "sheet": "raw/channel.attempt2.png",
+      "sourceSha256": "8d629bc459c1fd2b9015a229ceb08288243851c83d6aca042e73679e02123374"
+    },
+    {
+      "name": "hit",
+      "frames": 6,
+      "sheet": "raw/hit-dash.final-selection.png",
+      "sourceSha256": "b22883a6d4a1e2fc0a9cce44ff491a021e31035b713ee49d48b24aa91daf25c5",
+      "exceptions": {
+        "1": "recoil: backward reaction and recovery",
+        "2": "recoil: backward reaction and recovery",
+        "3": "recoil: backward reaction and recovery",
+        "4": "recoil: backward reaction and recovery"
+      }
+    },
+    {
+      "name": "die",
+      "frames": 12,
+      "sheet": "raw/die.selected.png",
+      "sourceSha256": "c6f376f8643a6d8d687344067042e7245898557ef12def306ea6de9271d882d3",
+      "exceptions": {
+        "2": "die-collapse: backward fall and resting pose",
+        "3": "die-collapse: backward fall and resting pose",
+        "4": "die-collapse: backward fall and resting pose",
+        "5": "die-collapse: backward fall and resting pose",
+        "6": "die-collapse: backward fall and resting pose",
+        "7": "die-collapse: backward fall and resting pose",
+        "8": "die-collapse: backward fall and resting pose",
+        "9": "die-collapse: backward fall and resting pose",
+        "10": "die-collapse: backward fall and resting pose",
+        "11": "die-collapse: backward fall and resting pose"
+      }
+    },
+    {
+      "name": "tribulation",
+      "frames": 16,
+      "sheet": "raw/tribulation.attempt1.png",
+      "sourceSha256": "06c6663d406519768947882e052861bd4671fd867e83bffb42679752c9ad2966",
+      "exceptions": {
+        "2": "recoil: protective low kneeling brace and recovery",
+        "3": "recoil: protective low kneeling brace and recovery",
+        "4": "recoil: protective low kneeling brace and recovery",
+        "5": "recoil: protective low kneeling brace and recovery",
+        "6": "recoil: protective low kneeling brace and recovery",
+        "7": "recoil: protective low kneeling brace and recovery",
+        "8": "recoil: protective low kneeling brace and recovery",
+        "9": "recoil: protective low kneeling brace and recovery",
+        "10": "recoil: protective low kneeling brace and recovery",
+        "11": "recoil: protective low kneeling brace and recovery",
+        "12": "recoil: protective low kneeling brace and recovery",
+        "13": "recoil: protective low kneeling brace and recovery"
+      }
+    },
+    {
+      "name": "emote",
+      "frames": 12,
+      "sheet": "raw/emote.attempt1.png",
+      "sourceSha256": "2910e7a11097eb58dae55a79a25e32fd7db34c9c175f04047a1cec63a6740ab5",
+      "heightPolicy": "head-size-v1"
+    }
+  ],
+  "nativeQA": {
+    "hard": 0,
+    "unlistedSoft": 0,
+    "acceptedOpenSoft": 24,
+    "regression": 0,
+    "info": 120
+  },
+  "canvasClipping": [],
+  "projectedCanvasLoss": [],
+  "review": "Canonical source-3 run, source-4 hit/dash and source-8 attack3 visually inspected; dynamic travel and complete rear boot retained. Native full-source border inspection is separate from post-slice canvas gate."
+}

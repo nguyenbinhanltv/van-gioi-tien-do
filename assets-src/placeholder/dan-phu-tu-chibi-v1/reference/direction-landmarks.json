@@ -1,0 +1,93 @@
+{
+  "status": "E contour corrected by AI: actual selected native crown72 (+/-2px), not the rejected66 estimate. Other directions preserved fromturn4; S native crown61 confirmed bystyle23. Back crownoccluded andprojected from commonconstructionrow; manual uncertainties remainexplicit, not automaticpass.",
+  "targetHeight": 216,
+  "ground": 232,
+  "reference": "E",
+  "inputs": [
+    {
+      "id": "E",
+      "source": "turnaround.corrected.png",
+      "output": "E.corrected-master.png",
+      "panel": {
+        "column": 0,
+        "columns": 5
+      },
+      "landmarks": {
+        "crown": 72,
+        "eyes": 168,
+        "chin": 216,
+        "sole": 692,
+        "pelvisX": 268,
+        "shoulders": null
+      }
+    },
+    {
+      "id": "SE",
+      "source": "turnaround.corrected.png",
+      "output": "SE.corrected-master.png",
+      "panel": {
+        "column": 1,
+        "columns": 5
+      },
+      "landmarks": {
+        "crown": 66,
+        "eyes": 170,
+        "chin": 214,
+        "sole": 695,
+        "pelvisX": 235,
+        "shoulders": null
+      }
+    },
+    {
+      "id": "S",
+      "source": "turnaround.corrected.png",
+      "output": "S.corrected-master.png",
+      "panel": {
+        "column": 2,
+        "columns": 5
+      },
+      "landmarks": {
+        "crown": 61,
+        "eyes": 166,
+        "chin": 210,
+        "sole": 692,
+        "pelvisX": 215,
+        "shoulders": [140, 294]
+      }
+    },
+    {
+      "id": "NE",
+      "source": "turnaround.corrected.png",
+      "output": "NE.corrected-master.png",
+      "panel": {
+        "column": 3,
+        "columns": 5
+      },
+      "landmarks": {
+        "crown": 66,
+        "eyes": null,
+        "chin": null,
+        "sole": 695,
+        "pelvisX": 203,
+        "shoulders": null
+      }
+    },
+    {
+      "id": "N",
+      "source": "turnaround.corrected.png",
+      "output": "N.corrected-master.png",
+      "panel": {
+        "column": 4,
+        "columns": 5
+      },
+      "landmarks": {
+        "crown": 66,
+        "eyes": null,
+        "chin": null,
+        "sole": 692,
+        "pelvisX": 197,
+        "shoulders": null
+      }
+    }
+  ]
+}

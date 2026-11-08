@@ -1,0 +1,28 @@
+{
+  "clip": "attack",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:12:44 UTC",
+  "utcEnd": "2026-11-07 21:13:24 UTC",
+  "prompt": "Use case: precise-object-edit.\nAsset: original Đan/Phù tu A, T1 attack, E direction, smooth-v2.\nImage 1 is the 4×4 edit target with FOURTEEN correctly sized master-head stamps along the action path. Image 2 supplies the outfit and held whisk design. Complete the bodies around those heads, preserving their size, position, face structure and profile. Every figure faces screen RIGHT; never turn toward camera.\n\nDraw exactly 14 sequential full-body frames, row-major. Leave cells 15–16 flat magenta. Frames 1–4 anticipate by drawing the right-hand whisk back and bending the knees; 5–7 step into a forward, descending whisk sweep; frame 8 is impact with a clear forward lunge; frame 9 holds the impact while cloth follows; 10–14 follow through and recover to guard. Keep a strong readable lunge, not a flat standing swing. Hair, sash, sleeves and soft whisk strands lag then settle.\n\nThe right hand always naturally grips the same plain brown shaft, ONE cylindrical bronze collar and white horsehair. Do not change hands, shorten the shaft, turn the whisk into a blade or add weapon trails. Keep the entire curling whisk inside its cell.\n\nSame fixed adult female face, olive-brown almond eye, delicate straight brow, serene lips, flatter main hair cap, separate folded bun, jade pin and two side strands. Plain warm ivory robe, jade collar/cuffs/sash, narrow antique-gold edging, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nRetain the head stamps' approximately 53.5 logical-pixel crown-to-chin size; no enlarging figures to fill cells and no changing anatomical scale. Body posture may bend and lunge. Remove all grid lines, borders, guide marks and crop edges. Flat opaque #FF00FF background. No shadows, floor, text, talismans, lotus, glow, particles, afterimages or extra figures.",
+  "references": ["../templates/attack.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/attack.attempt1.png",
+  "status": "candidate; authoring head stamps preserve intended scale; actual output QA and measurements pending",
+  "sha256": "b7aa1600f5e9aa0166a115accf304645aabb50768accf78f79d5da84a8bc3bb6",
+  "rawSha256": "b7aa1600f5e9aa0166a115accf304645aabb50768accf78f79d5da84a8bc3bb6",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack.head-guide.png",
+      "sha256": "d48be599607a3919aa414d775ad24e69bbacc62960b4048a94934ebb2f4f46a0"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 9,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:51:29 UTC",
+  "utcEnd": "2026-11-07 22:52:03 UTC",
+  "prompt": "Precise localized head-scale repair ONLY. TARGETimage1 dynamicRUN16frame4x4 sheet. Image2canonicalfixedadultfemaleidentity. Modify ONLY zero-basedcell7(row2col4, airborne reach) andcell10(row3col3, knee-upstride). Native semantic-boundary measurements showtheseheads slightlyoversized versusmaster53.31logicalpx. Redraw ONLYattachedhead/maincap/face/jaw about2percentSMALLER aroundfixedneckanchor, target53.3logicalpx Euclideancrown-tochin per256cell (=65.3rawpx). Currentcell7~55.7 andcell10~55.0logicalpx. Preserve exactfacialproportions/olivebrownalmond eye/straightbrow/nose/lips/jaw/expression/tilt andsamebrownmaincap/bun/jadepin; fixedadultfaceidentity, no newface. Everything BELOWNECK unchanged: dynamicforwardlean, hips/limbs/boots/root/cloth/sash/right-handplainwhisk ONEbronze collar whitehorsehair/leftpalm. DoNOTflattenflighttuck orstandingpose andNEVERwholefigure rescale. Other14framesCOMPLETELYUNCHANGED. Same1254square4x4mapping, flatmagenta#ff00ff; no text/grid/FX/shadows. Subtleactualheadonlycorrection twocells, allbodymotion preserved.",
+  "references": ["../raw/run.attempt6.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt9.png",
+  "status": "head-only repair cells7,10 for measured D47 failures; actual output landmarks pending",
+  "rawSha256": "fa417e6f3fefdadd3cd88a68c021c51a081192e73965abb27d680dcee2a4f26d",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt6.png",
+      "sha256": "083ea8f1a4ef74ef81879e7f47c1034051522f0d98c8fc8b9d57d7ae1ccf4981"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

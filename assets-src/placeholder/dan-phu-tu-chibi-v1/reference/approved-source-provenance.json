@@ -1,0 +1,50 @@
+[
+  {
+    "file": "dan-phu-tu-t3.raw.png",
+    "prompt": "Original premium semi-chibi adult cultivation MMORPG concept, ink-wash x cyber-xianxia. Compact 4.5 heads tall, head/hair about22% body height, short legs/torso, small hands/feet, recognizable adult face NOT infant, no huge baby eyes. Material-tinted clean outlines never pure black, TWO cel tones plus ONE highlight, narrow rim light, NW key light. Limited base+signature accent+gold/metal trim. Flowing sleeves/sash/hair; ink-wash accent gradients at cloth tips, sparse geometric meridian motifs. Oversized premium weapon. Entirely original design, no commercial character imitation. White background. Owner review only, not production sprite.\nCLASS DAN / PHU TU. Adult woman healer, soft rounded adult face, olive-brown almond eyes, straight delicate brows, small rounded nose, serene lips, black hair in folded jade crown bun with two long side strands; same face every view. Warm IVORY base, JADE GREEN signature accent, restrained antique gold trim. Oversized white silk WHISK with curved jade handle shaped as an abstract sprout, gold collar, hanging jade gem; three floating rectangular gold paper talismans with ORIGINAL abstract glyphs, medicine gourd at waist. Layered gentle robes, small folded jade shoulder piece at T3, jade ink-wash sleeve tips and flowing sash. Silhouette: WHISK + FLOATING TALISMANS. No fan/sword.\nT3 CHARACTER SHEET: one large full-body FRONT THREE-QUARTER hero at left holding whisk, plus full BACK view, SEATED MEDITATION, and dynamic healing talisman-cast action pose on right. Four depictions SAME person, SAME face, SAME outfit and whisk, uncut. T3 layered clothes, small jade shoulder piece, gem whisk, faint jade glow. Match compact proportion/style of attached Kiếm tu only; do not copy his costume or face. Head/hair height22%, adult face. Three floating talismans arranged apart from whisk. Minimal labels DAN / PHU TU / T3, BACK, MEDITATION, ACTION. White background.",
+    "tool": "image_gen.imagegen",
+    "model": "undisclosed",
+    "utcRecorded": "2026-11-07T20:01:01.948Z",
+    "references": ["kiem-tu-t3.raw.png"],
+    "status": "Meditation adds lotus and omits whisk; other views vary whisk collar",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2072966,
+    "sha256": "397d03ce313a04a4aefee1e64db5aa182fa70969a3cbc8db603e91b116c2cf0b",
+    "utcOutputFileModified": "2026-11-07T20:00:25.5841455Z",
+    "utcNote": "UTC output file modification time retained by byte-for-byte copy; per-call start time not separately recorded.",
+    "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-d3d28c03-0aa2-484c-8f6c-cca2b47ca6f5.png"
+  },
+  {
+    "file": "dan-phu-tu-tiers.raw.png",
+    "prompt": "Original premium semi-chibi adult cultivation MMORPG concept, ink-wash x cyber-xianxia. Compact 4.5 heads tall, head/hair about22% body height, short legs/torso, small hands/feet, recognizable adult face NOT infant, no huge baby eyes. Material-tinted clean outlines never pure black, TWO cel tones plus ONE highlight, narrow rim light, NW key light. Limited base+signature accent+gold/metal trim. Flowing sleeves/sash/hair; ink-wash accent gradients at cloth tips, sparse geometric meridian motifs. Oversized premium weapon. Entirely original design, no commercial character imitation. White background. Owner review only, not production sprite.\nAdult woman healer, soft rounded adult face, olive-brown almond eyes, straight delicate brows, small rounded nose, serene lips, black hair in folded jade crown bun with two long side strands; same face every view. Warm IVORY base, JADE GREEN signature accent, restrained antique gold trim. Oversized white silk WHISK with curved jade handle shaped as an abstract sprout, gold collar, hanging jade gem; three floating rectangular gold paper talismans with ORIGINAL abstract glyphs, medicine gourd at waist. Layered gentle robes, small folded jade shoulder piece at T3, jade ink-wash sleeve tips and flowing sash. Silhouette: WHISK + FLOATING TALISMANS. No fan/sword.\nWIDE WHITE progression strip: FIVE equal-scale full-body FRONT THREE-QUARTER standing figures, same baseline, same pose, identical face/hair/anatomy. Labels T1, T2, T3, T4, T5. T1 Luyen Khi: plain cloth, simple weapon, no armor/gem/glow. T2 Truc Co-Kim Dan: trims, small ornaments, tasseled weapon. T3 Nguyen Anh-Hoa Than: reference layered robes, shoulder piece, GEM weapon, faint glow. T4 Luyen Hu-Hop The: ornate long flowing tails, elemental weapon trail, sparse aura particles; materially different outfit silhouette from T3. T5 Dai Thua-Do Kiep: legendary floating elemental pieces or small phap-tuong, transformed weapon; no face obscured. Outfit AND weapon geometry evolve at each step, not only recolor. Keep class silhouette even T1. Quality grade is independent, do not grade colours here. Compact 4.5-head bodies, no increase in body height by tier. No crop.\nUse attached DAN/PHU TU sheet as fixed identity and T3 reference. Whisk + floating talismans every tier. T1 simple wood-handle white horsehair whisk, plain ivory/jade cloth, one floating plain paper talisman; T2 jade collar, tassel, two paper talismans; T3 sprout-curve jade gem handle matching reference, three gold-paper talismans; T4 long jade-gradient robe tails, flowing jade energy whisk trail and four sparse talismans; T5 floating jade handle segments and luminous transformed white silk whisk, small abstract lotus phap-tuong, sparse floating jade fragments. Whisk must stay a whisk not a staff, fan or sword. No lotus held in hands, hands hold whisk.",
+    "tool": "image_gen.imagegen",
+    "model": "undisclosed",
+    "utcRecorded": "2026-11-07T20:02:07.467Z",
+    "references": ["dan-phu-tu-t3.raw.png"],
+    "status": "Concept; T1 cloth ornament could be simplified",
+    "width": 2172,
+    "height": 724,
+    "bytes": 2220635,
+    "sha256": "1636c67aed0932449b8d0129d85131ae2f735dc263b04b3b93f6d5a3a5adb468",
+    "utcOutputFileModified": "2026-11-07T20:01:47.5903307Z",
+    "utcNote": "UTC output file modification time retained by byte-for-byte copy; per-call start time not separately recorded.",
+    "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-bc6aef88-2bfb-41e4-97ae-744330b63dec.png"
+  },
+  {
+    "file": "dan-phu-tu-weapons.raw.png",
+    "prompt": "Original DAN / PHU TU WHISK evolution and quality study. WHITE premium weapon concept sheet. TOP row FIVE isolated weapons T1 T2 T3 T4 T5, same orientation/comparable scale. T1 plain simple material; T2 trim/ornament/TASSEL; T3 GEM with faint class glow; T4 elemental form and ink trail; T5 legendary transformed FLOATING segments. BOTTOM row EXACT SAME T3 WEAPON repeated SIX times, identical geometry/material/gem/class accent; ONLY narrow perimeter glow/trim tint changes. Labels White #E8E4DA, Green #5FBF6A, Blue #4A90D9, Purple #A05FD6, Gold #E8B540, Red #E0483A. Do NOT repaint entire weapon or change model across quality grades. Two-tone cel+one highlight, material-tinted outline, ink accents. No characters. Layout 5 upper + 6 lower, no crop, enough spacing. Quality independent of tier. T1 simple wood handle white horsehair whisk; T2 jade collar, gold trim and tassel; T3 curved sprout-shape JADE handle, gold collar, dangling jade lozenge gem and long WHITE SILK flowing tuft, exactly reference; T4 elemental jade trail and flowing white silk; T5 handle separated floating jade segments and transformed luminous white silk with small floating jade leaves. This is a hand-held Daoist whisk, never broom/fan/sword. Six quality samples: identical T3 handle curve/tuft/gem and jade green paint in every sample, white silk unchanged; only narrow outer rim glow changes quality hue. Isolated weapons, optional talisman only tiny supporting motif above T5, not beside quality row.",
+    "tool": "image_gen.imagegen",
+    "model": "undisclosed",
+    "utcRecorded": "2026-11-07T20:04:38.191Z",
+    "references": ["dan-phu-tu-t3.raw.png", "dan-phu-tu-tiers.raw.png"],
+    "status": "Minor tuft/collar drift",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2054836,
+    "sha256": "f48a20a1872bb772421608d707f9354c8fd7fe34e4e2f4e34f60a15d350f0078",
+    "utcOutputFileModified": "2026-11-07T20:03:36.8375171Z",
+    "utcNote": "UTC output file modification time retained by byte-for-byte copy; per-call start time not separately recorded.",
+    "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-be28f22c-8be0-413c-a80f-c098cc8f10f7.png"
+  }
+]

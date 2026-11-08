@@ -1,0 +1,28 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:01:30 UTC",
+  "utcEnd": "2026-11-07 21:02:08 UTC",
+  "prompt": "Use case: precise-object-edit. Image1 TARGET is16-frameRUNsheet, Image2correctedEidentityreference. Preserve EVERY dynamicRUNpose,torso/limbs/boots/contactlocations/flighttucks/cloth/hairflow/whisk/handgrip/cellplacement andflatmagenta. Correct ONLY a real ANATOMICAL HEAD SCALE error: EVERYhead(includingskull/face/mainhaircap/bun) inimage1 is about8percent too big relative tocanonicalmaster. REDRAW EACHHEAD about8%SMALLER aroundits NECKANCHOR, preserving SAME recognizableadultface/eye/brow/nose/mouth/jaw/hairdesign/tilt/expression. This ishead-onlyanatomicalcorrection, NOT resizinganywholefigureorframe. Wholebodyposes/motionmustremainEXACTLYunchanged, donotflattenflighttucks orshortenstride. Target Euclidean MAINcapcrown-to-chin53.5logicaltexturepx inALLcells(±1px), sameheadsizeevenwhenkneesfold. Withsheetcells256logical, currentheadabout58pxneeds53.5. Atcurrent1254squareinput4x4(rawcell313.5), firstheadcrown~165,32 andchin194,97 has71rawpx; target65.5rawpx. Reducearoundnecksoheadtopmovesdownslightlybutchin/neckjoinnatural; no gianthead. Keepindividualheadangleofeachpose. Fixedfaceidentity issoftlyroundedadultfemaleolivebrownalmond eye/straightdelicatebrow/serenelips, maincap+foldedbun/simplejadepin/twolongstrands. Preserve face proportions whilecorrectingoverallheadsize. Donotchangeclothingpalette/whiskcollarorhands. Existinghair/sashtailsremainflowingdynamically. Same2celtones+highlight+narrowrim/tintedoutlines/NWlight. SAME4x4squarelattice, no newfigures/grid/text/shadows/FX. HeadcorrectionONLY acrossall16; allmotionretained.",
+  "references": ["../raw/run.attempt1.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/run.attempt2.png",
+  "status": "head-only correction candidate; preserve all body poses; actual measurements and QA pending; no automatic pass claim",
+  "sha256": "7b71f8ac6aa3f9405f62b29f657657b119f40781747f30b6955387fc6612a697",
+  "rawSha256": "7b71f8ac6aa3f9405f62b29f657657b119f40781747f30b6955387fc6612a697",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/run.attempt1.png",
+      "sha256": "e7f3c5053f0fa2f63d1cfba7bc989deffb7cd919e2ad1bf7243d370717d21967"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

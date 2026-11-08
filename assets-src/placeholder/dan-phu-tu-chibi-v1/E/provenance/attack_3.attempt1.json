@@ -1,0 +1,28 @@
+{
+  "clip": "attack_3",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:15:04 UTC",
+  "utcEnd": "2026-11-07 21:15:35 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the 14 correctly sized head stamps in image 1 into a dynamic attack_3 finishing lunge. Image 2 is the exact T1 healer, fixed face, robe and held whisk. Keep every head's size, profile, identity and guided path. All figures face RIGHT in E profile. Four columns, four rows; 14 frames row-major, last two cells empty magenta.\n\nFrames 1–4: strong anticipation, sink into the hips and draw the right-hand whisk beside the waist. Frames 5–7: drive off the back leg into a long forward lunge, right arm sweeping the whisk forward across the chest. Frame 8: deepest committed impact, front knee bent and rear leg extended. Frame 9: hold impact while cloth and white strands continue. Frames 10–14: follow through, transfer weight back, and recover to guard. Make this a visibly stronger finisher than the preceding sweeps. Preserve the deep lunge; do not flatten posture to keep a standing bounding box.\n\nThe right hand always grips one continuous plain brown shaft with ONE cylindrical bronze collar and soft white horsehair. Left palm opens forward for balance. The hair may bend and curl, but never becomes a sword, glow trail or second weapon. Keep the full whisk inside each cell.\n\nFixed adult female face, olive-brown almond eye, straight delicate brow, serene lips; flatter main hair cap, separate folded bun, jade pin, side strands. Same plain ivory T1 robe, jade collar/cuffs/sash, thin antique-gold edging, sparse ink hem, jade/ivory shoes. Hair, sash and sleeves lag the strike then settle. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nPreserve the head stamps' approximately 53.5 logical-pixel crown-to-chin scale; no head or whole-figure enlargement. Remove all grid, marks and crop edges. Solid #FF00FF. No floor, shadows, labels, aura, lotus, talismans, particles, blur, afterimages or extra figures.",
+  "references": ["../templates/attack_3.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/attack_3.attempt1.png",
+  "status": "candidate; 14 frames and two empty cells visually present; dynamic pose and weapon held; actual QA pending",
+  "sha256": "5e07be768cf751f2c61ca9bf055f1479389dbad848dde1ea700c58c2bc13cd15",
+  "rawSha256": "5e07be768cf751f2c61ca9bf055f1479389dbad848dde1ea700c58c2bc13cd15",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/attack_3.head-guide.png",
+      "sha256": "2ac71b008c1b177d8f1d7debdbca7b10208568af4f421799837b9d3519e826e9"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

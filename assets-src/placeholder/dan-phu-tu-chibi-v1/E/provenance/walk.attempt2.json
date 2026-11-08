@@ -1,0 +1,28 @@
+{
+  "clip": "walk",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:50:52 UTC",
+  "utcEnd": "2026-11-07 21:51:29 UTC",
+  "prompt": "Use case: production sprite animation edit. Image1 TARGET is a4x4 authoring lattice with16 calibrated master figures and gait markers. Image2 fixed E-facing identity. Edit into a smooth16-frame WALK LOOP facing RIGHT/E, rowmajor. Preserve EXACT adult female face, head size, body proportions and costume construction from stamped master; do NOT enlarge character. Logical256 cells, maincap crown16, soles contact232, head maincap-to-chin53.5, body anatomical height216. Cyan and amber tiny sole ghosts indicate the two alternating boot positions; move EACH existing boot to its ghost, use articulated knees/hips with heelstrike-roll-toeoff and small swing lift. Orange/cyan corner marks indicate leading leg only. No extra feet and no stationary stamped feet left behind. Frame1 split stride contact,2-4weighttransfer,5passing,6-8opposite contact;9-16swap legs and return into1. Hands stay natural: right hand grips one plain brown whisk shaft with ONE bronze cylindrical collar and white horsehair; left palmopen balanced small sway. Whisk and sleeves/side strands/jade sash lag one or two frames, settle smoothly. Slight pelvic bob1-2logicalpx; do NOT lengthen legs or raise bun beyondcelltop. Ivory/jade robes thin antiquegoldtrim sparseinkwashhem, tinted outlines2celtones+highlight+rim NWlight. Keep4x4grid composition and each figure at SAME reference scale, generous margins. REMOVE ALL black guides,dashedlines,ghosts,cornermarks; outside sprites uniformflat#ff00ff. No text/shadows/FX/talismans. Draw16 distinct sequentialwalkingframes, same54pxcanonicalhead, no changes to identity or gear.",
+  "references": ["../templates/walk.master-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/walk.attempt2.png",
+  "status": "full-body calibrated guide candidate; actual foot/contact/scale gates pending",
+  "sha256": "ece5c8b9c7640024202b3a4e67bac02e6cd4294d809ed9332faef22cdeef42b9",
+  "rawSha256": "ece5c8b9c7640024202b3a4e67bac02e6cd4294d809ed9332faef22cdeef42b9",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/walk.master-guide.png",
+      "sha256": "420c970b96dae0397f646a8ef79b41213ab1a5c4f0d120435370a9276d559451"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

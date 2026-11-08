@@ -1,0 +1,1952 @@
+{
+  "status": "manual semantic boundary measurement with both-column jaw-support refinement; native head-size gate still decides acceptance",
+  "convention": "Semantic boundary edges using pipeline alpha128 support for jaw; first attached cap includes genuine hair highlights, excludes identifiable bun/pin/tie. Integer samples are centres. Semantic labels require image inspection; RGB alone is not a detector. Half-x alpha support interpolates BOTH adjacent columns; original rough drafts retained separately.",
+  "master": {
+    "crown": {
+      "x": 119,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 137.5,
+      "y": 66.5
+    }
+  },
+  "clips": [
+    {
+      "name": "run",
+      "sheet": "raw/run.dynamic-intermediate.png",
+      "frames": [
+        {
+          "frame": 0,
+          "crown": {
+            "x": 151,
+            "y": 33.5
+          },
+          "chin": {
+            "x": 173,
+            "y": 81.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 173,
+            "x1": 173,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 78,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 79,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 80,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 81,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 82,
+                "leftAlpha": 67,
+                "rightAlpha": 67,
+                "interpolatedAlpha": 67
+              },
+              {
+                "y": 83,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 84,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 85,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 86,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 1,
+          "crown": {
+            "x": 151,
+            "y": 40.5
+          },
+          "chin": {
+            "x": 174,
+            "y": 89.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 174,
+            "x1": 174,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 86,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 87,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 88,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 89,
+                "leftAlpha": 183,
+                "rightAlpha": 183,
+                "interpolatedAlpha": 183
+              },
+              {
+                "y": 90,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 91,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 92,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 93,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 94,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 2,
+          "crown": {
+            "x": 147,
+            "y": 34.5
+          },
+          "chin": {
+            "x": 170,
+            "y": 81.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 170,
+            "x1": 170,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 78,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 79,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 80,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 81,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 82,
+                "leftAlpha": 51,
+                "rightAlpha": 51,
+                "interpolatedAlpha": 51
+              },
+              {
+                "y": 83,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 84,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 85,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 86,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 3,
+          "crown": {
+            "x": 142,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 73.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 164,
+            "x1": 164,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 72,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 73,
+                "leftAlpha": 252,
+                "rightAlpha": 252,
+                "interpolatedAlpha": 252
+              },
+              {
+                "y": 74,
+                "leftAlpha": 100,
+                "rightAlpha": 100,
+                "interpolatedAlpha": 100
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 77,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 78,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 4,
+          "crown": {
+            "x": 143,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 165,
+            "y": 71.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 165,
+            "x1": 165,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 72,
+                "leftAlpha": 126,
+                "rightAlpha": 126,
+                "interpolatedAlpha": 126
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 5,
+          "crown": {
+            "x": 143,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 166.5,
+            "y": 69.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 166,
+            "x1": 167,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 66,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 67,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 25,
+                "rightAlpha": 73,
+                "interpolatedAlpha": 49
+              },
+              {
+                "y": 71,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 72,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 6,
+          "crown": {
+            "x": 144,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 69.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 169,
+            "x1": 170,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 66,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 67,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 105,
+                "rightAlpha": 118,
+                "interpolatedAlpha": 111.5
+              },
+              {
+                "y": 71,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 72,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 7,
+          "crown": {
+            "x": 154,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 180.5,
+            "y": 68.5
+          },
+          "refinements": [
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 180.5,
+                "y": 67.5
+              },
+              "selected": {
+                "x": 180.5,
+                "y": 68.5
+              },
+              "reason": "Both neighboring column alpha supports interpolated at frozen semantic jaw X; last supported jaw row uses the unchanged pipeline alpha128 cutoff. This adjustment is independent of the head ratio."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 180,
+            "x1": 181,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 64,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 65,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 66,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 67,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 101,
+                "interpolatedAlpha": 178
+              },
+              {
+                "y": 69,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 70,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 71,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 72,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 8,
+          "crown": {
+            "x": 149,
+            "y": 33.5
+          },
+          "chin": {
+            "x": 172,
+            "y": 80.5
+          },
+          "refinements": [
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 172,
+                "y": 81.5
+              },
+              "selected": {
+                "x": 172,
+                "y": 80.5
+              },
+              "reason": "Selected x172 has jaw support through80; row81alpha102<128,82empty. Same frozen opacity support convention."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 172,
+            "x1": 172,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 77,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 78,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 79,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 80,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 81,
+                "leftAlpha": 102,
+                "rightAlpha": 102,
+                "interpolatedAlpha": 102
+              },
+              {
+                "y": 82,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 83,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 84,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 85,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 9,
+          "crown": {
+            "x": 150,
+            "y": 40.5
+          },
+          "chin": {
+            "x": 174,
+            "y": 88.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 174,
+            "x1": 174,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 85,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 86,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 87,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 88,
+                "leftAlpha": 251,
+                "rightAlpha": 251,
+                "interpolatedAlpha": 251
+              },
+              {
+                "y": 89,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 90,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 91,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 92,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 93,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 10,
+          "crown": {
+            "x": 148,
+            "y": 27.5
+          },
+          "chin": {
+            "x": 171,
+            "y": 77.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 171,
+            "x1": 171,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 74,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 75,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 76,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 77,
+                "leftAlpha": 163,
+                "rightAlpha": 163,
+                "interpolatedAlpha": 163
+              },
+              {
+                "y": 78,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 79,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 80,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 81,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 82,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 11,
+          "crown": {
+            "x": 141,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 71.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 164,
+            "x1": 164,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 72,
+                "leftAlpha": 23,
+                "rightAlpha": 23,
+                "interpolatedAlpha": 23
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 12,
+          "crown": {
+            "x": 146,
+            "y": 29.5
+          },
+          "chin": {
+            "x": 171.5,
+            "y": 76.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 171,
+            "x1": 172,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 73,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 74,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 75,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 76,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 77,
+                "leftAlpha": 0,
+                "rightAlpha": 6,
+                "interpolatedAlpha": 3
+              },
+              {
+                "y": 78,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 79,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 80,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 81,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 13,
+          "crown": {
+            "x": 145,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 72.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 169,
+            "x1": 170,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 72,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 73,
+                "leftAlpha": 7,
+                "rightAlpha": 49,
+                "interpolatedAlpha": 28
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 77,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 14,
+          "crown": {
+            "x": 148,
+            "y": 23.5
+          },
+          "chin": {
+            "x": 173.5,
+            "y": 71.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 173,
+            "x1": 174,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 254,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 254.5
+              },
+              {
+                "y": 72,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 15,
+          "crown": {
+            "x": 150,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 174.5,
+            "y": 71.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 174,
+            "x1": 175,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 68,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 69,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 70,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 71,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 72,
+                "leftAlpha": 3,
+                "rightAlpha": 31,
+                "interpolatedAlpha": 17
+              },
+              {
+                "y": 73,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 74,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 75,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 76,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "dash",
+      "sheet": "raw/hit-dash.head-selected.png",
+      "frames": [
+        {
+          "frame": 1,
+          "crown": {
+            "x": 139,
+            "y": 40.5
+          },
+          "chin": {
+            "x": 163.5,
+            "y": 86.5
+          },
+          "refinements": [
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 162,
+                "y": 87.5
+              },
+              "selected": {
+                "x": 163.5,
+                "y": 86.5
+              },
+              "reason": "Refine coarse x162 onto anterior lower-jaw contour corner: row87 x163alpha138 and164alpha114 bracket the tip; half-x interpolation125.999<128, lastsupported86."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 163,
+            "x1": 164,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 83,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 84,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 85,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 86,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 87,
+                "leftAlpha": 138,
+                "rightAlpha": 114,
+                "interpolatedAlpha": 126
+              },
+              {
+                "y": 88,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 89,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 90,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 91,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 2,
+          "crown": {
+            "x": 148,
+            "y": 44.5
+          },
+          "chin": {
+            "x": 171.5,
+            "y": 90.5
+          },
+          "refinements": [
+            {
+              "landmark": "crown",
+              "previous": {
+                "x": 148,
+                "y": 43.5
+              },
+              "selected": {
+                "x": 148,
+                "y": 44.5
+              },
+              "reason": "Pink/tie row44 transitions to attached warm-brown cap boundary row45; classified with full2D cap shape, not color alone."
+            },
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 172,
+                "y": 91.5
+              },
+              "selected": {
+                "x": 171.5,
+                "y": 90.5
+              },
+              "reason": "Anterior lowerjaw corner: row90 x171alpha255 and172alpha79 average167; row91both<128."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 171,
+            "x1": 172,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 87,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 88,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 89,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 90,
+                "leftAlpha": 255,
+                "rightAlpha": 79,
+                "interpolatedAlpha": 167
+              },
+              {
+                "y": 91,
+                "leftAlpha": 4,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 2
+              },
+              {
+                "y": 92,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 93,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 94,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 95,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 3,
+          "crown": {
+            "x": 160,
+            "y": 47.5
+          },
+          "chin": {
+            "x": 183.5,
+            "y": 96.5
+          },
+          "refinements": [
+            {
+              "landmark": "crown",
+              "previous": {
+                "x": 160,
+                "y": 49.5
+              },
+              "selected": {
+                "x": 160,
+                "y": 47.5
+              },
+              "reason": "Attached cap summit firsthair row48; row49 is interior hair. Include the true hair highlight."
+            },
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 185,
+                "y": 98.5
+              },
+              "selected": {
+                "x": 183.5,
+                "y": 96.5
+              },
+              "reason": "Coarse185,98 was transparent. Native lower-jaw corner row96 x183alpha230/184alpha41 supports interpolated135.5; row97below128."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 183,
+            "x1": 184,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 93,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 94,
+                "leftAlpha": 255,
+                "rightAlpha": 180,
+                "interpolatedAlpha": 217.5
+              },
+              {
+                "y": 95,
+                "leftAlpha": 255,
+                "rightAlpha": 52,
+                "interpolatedAlpha": 153.5
+              },
+              {
+                "y": 96,
+                "leftAlpha": 230,
+                "rightAlpha": 41,
+                "interpolatedAlpha": 135.5
+              },
+              {
+                "y": 97,
+                "leftAlpha": 13,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 6.5
+              },
+              {
+                "y": 98,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 99,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 100,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 101,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 4,
+          "crown": {
+            "x": 164,
+            "y": 70.5
+          },
+          "chin": {
+            "x": 193,
+            "y": 115.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 193,
+            "x1": 193,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 112,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 113,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 114,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 115,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 116,
+                "leftAlpha": 46,
+                "rightAlpha": 46,
+                "interpolatedAlpha": 46
+              },
+              {
+                "y": 117,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 118,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 119,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 120,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 5,
+          "crown": {
+            "x": 163,
+            "y": 57.5
+          },
+          "chin": {
+            "x": 180.5,
+            "y": 107.5
+          },
+          "refinements": [
+            {
+              "landmark": "crown",
+              "previous": {
+                "x": 163,
+                "y": 58.5
+              },
+              "selected": {
+                "x": 163,
+                "y": 57.5
+              },
+              "reason": "Attached brown cap edge begins58 beneath identifiable pinktie57; full2D shape checked."
+            },
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 178,
+                "y": 109.5
+              },
+              "selected": {
+                "x": 180.5,
+                "y": 107.5
+              },
+              "reason": "Coarse178,109 was transparent. Actual anterior-jaw tip at107 x180alpha253/x181255;108bothbelow128."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 180,
+            "x1": 181,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 104,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 105,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 106,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 107,
+                "leftAlpha": 253,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 254
+              },
+              {
+                "y": 108,
+                "leftAlpha": 3,
+                "rightAlpha": 54,
+                "interpolatedAlpha": 28.5
+              },
+              {
+                "y": 109,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 110,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 111,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 112,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 6,
+          "crown": {
+            "x": 164,
+            "y": 55.5
+          },
+          "chin": {
+            "x": 185,
+            "y": 105.5
+          },
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 185,
+            "x1": 185,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 102,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 103,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 104,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 105,
+                "leftAlpha": 151,
+                "rightAlpha": 151,
+                "interpolatedAlpha": 151
+              },
+              {
+                "y": 106,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 107,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 108,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 109,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 110,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 7,
+          "crown": {
+            "x": 158,
+            "y": 45.5
+          },
+          "chin": {
+            "x": 181,
+            "y": 94.5
+          },
+          "refinements": [
+            {
+              "landmark": "crown",
+              "previous": {
+                "x": 158,
+                "y": 46.5
+              },
+              "selected": {
+                "x": 158,
+                "y": 45.5
+              },
+              "reason": "Firstattached cap46 under tie/rim at45; whole head context checked."
+            },
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 181,
+                "y": 95.5
+              },
+              "selected": {
+                "x": 181,
+                "y": 94.5
+              },
+              "reason": "Jaw94alpha255;95alpha38<128; old95.5 was after antialias tail."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 181,
+            "x1": 181,
+            "weight": 0,
+            "trace": [
+              {
+                "y": 91,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 92,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 93,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 94,
+                "leftAlpha": 255,
+                "rightAlpha": 255,
+                "interpolatedAlpha": 255
+              },
+              {
+                "y": 95,
+                "leftAlpha": 38,
+                "rightAlpha": 38,
+                "interpolatedAlpha": 38
+              },
+              {
+                "y": 96,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 97,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 98,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 99,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        },
+        {
+          "frame": 8,
+          "crown": {
+            "x": 135,
+            "y": 31.5
+          },
+          "chin": {
+            "x": 160.5,
+            "y": 76.5
+          },
+          "refinements": [
+            {
+              "landmark": "crown",
+              "previous": {
+                "x": 135,
+                "y": 32.5
+              },
+              "selected": {
+                "x": 135,
+                "y": 31.5
+              },
+              "reason": "First attached cap32 under identifiable tie31; true brown hair highlight included."
+            },
+            {
+              "landmark": "chin",
+              "previous": {
+                "x": 160,
+                "y": 78.5
+              },
+              "selected": {
+                "x": 160.5,
+                "y": 76.5
+              },
+              "reason": "Actual lowerjaw corner76 at160alpha255/161164;77average48<128; old78.5 transparent."
+            }
+          ],
+          "jawSupport": {
+            "cutoff": 128,
+            "x0": 160,
+            "x1": 161,
+            "weight": 0.5,
+            "trace": [
+              {
+                "y": 73,
+                "leftAlpha": 255,
+                "rightAlpha": 209,
+                "interpolatedAlpha": 232
+              },
+              {
+                "y": 74,
+                "leftAlpha": 255,
+                "rightAlpha": 171,
+                "interpolatedAlpha": 213
+              },
+              {
+                "y": 75,
+                "leftAlpha": 255,
+                "rightAlpha": 164,
+                "interpolatedAlpha": 209.5
+              },
+              {
+                "y": 76,
+                "leftAlpha": 255,
+                "rightAlpha": 164,
+                "interpolatedAlpha": 209.5
+              },
+              {
+                "y": 77,
+                "leftAlpha": 96,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 48
+              },
+              {
+                "y": 78,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 79,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 80,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              },
+              {
+                "y": 81,
+                "leftAlpha": 0,
+                "rightAlpha": 0,
+                "interpolatedAlpha": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

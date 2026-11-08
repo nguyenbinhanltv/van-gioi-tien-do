@@ -1,0 +1,260 @@
+{
+  "method": "ONE fixed source registration from the two neutral endpoint poses; fixed X and source ground applied on ALL10frames. Preserve authored flight/body travel, no frame fit or scale change.",
+  "source": "raw/hit-dash.final-selection.png",
+  "sourceSha256": "b22883a6d4a1e2fc0a9cce44ff491a021e31035b713ee49d48b24aa91daf25c5",
+  "neutralEndpoints": [
+    {
+      "height": 231,
+      "pelvisX": 124.11940634135372,
+      "soleY": 240
+    },
+    {
+      "height": 232,
+      "pelvisX": 124.07836417637651,
+      "soleY": 240
+    }
+  ],
+  "sourceOrigin": {
+    "x": 124.09888525886512,
+    "y": 240
+  },
+  "outputTranslation": {
+    "dx": -6.466305325017274,
+    "dy": -8
+  },
+  "scale": 1,
+  "headPointMappings": [
+    {
+      "frame": 1,
+      "before": {
+        "crown": {
+          "x": 139,
+          "y": 40.5
+        },
+        "chin": {
+          "x": 163.5,
+          "y": 86.5
+        }
+      },
+      "oldTranslation": {
+        "dx": 0.8305321522778826,
+        "dy": -6
+      },
+      "after": {
+        "crown": {
+          "x": 131.70316252270482,
+          "y": 38.5
+        },
+        "chin": {
+          "x": 156.20316252270482,
+          "y": 84.5
+        }
+      },
+      "sizeBefore": 52.11765535785355,
+      "sizeAfter": 52.11765535785355
+    },
+    {
+      "frame": 2,
+      "before": {
+        "crown": {
+          "x": 148,
+          "y": 45.5
+        },
+        "chin": {
+          "x": 172,
+          "y": 91.5
+        }
+      },
+      "oldTranslation": {
+        "dx": -9.077126859086036,
+        "dy": 0
+      },
+      "after": {
+        "crown": {
+          "x": 150.61082153406875,
+          "y": 37.5
+        },
+        "chin": {
+          "x": 174.61082153406875,
+          "y": 83.5
+        }
+      },
+      "sizeBefore": 51.88448708429139,
+      "sizeAfter": 51.88448708429139
+    },
+    {
+      "frame": 3,
+      "before": {
+        "crown": {
+          "x": 160,
+          "y": 47.5
+        },
+        "chin": {
+          "x": 183.5,
+          "y": 96.5
+        }
+      },
+      "oldTranslation": {
+        "dx": -7.817615032476155,
+        "dy": 4
+      },
+      "after": {
+        "crown": {
+          "x": 161.35130970745888,
+          "y": 35.5
+        },
+        "chin": {
+          "x": 184.85130970745888,
+          "y": 84.5
+        }
+      },
+      "sizeBefore": 54.34381289530575,
+      "sizeAfter": 54.34381289530575
+    },
+    {
+      "frame": 4,
+      "before": {
+        "crown": {
+          "x": 164,
+          "y": 70.5
+        },
+        "chin": {
+          "x": 193,
+          "y": 115.5
+        }
+      },
+      "oldTranslation": {
+        "dx": -14.72551300102863,
+        "dy": 5
+      },
+      "after": {
+        "crown": {
+          "x": 172.25920767601133,
+          "y": 57.5
+        },
+        "chin": {
+          "x": 201.25920767601133,
+          "y": 102.5
+        }
+      },
+      "sizeBefore": 53.53503525729669,
+      "sizeAfter": 53.53503525729669
+    },
+    {
+      "frame": 5,
+      "before": {
+        "crown": {
+          "x": 163,
+          "y": 57.5
+        },
+        "chin": {
+          "x": 180.5,
+          "y": 107.5
+        }
+      },
+      "oldTranslation": {
+        "dx": -10.060282492187653,
+        "dy": 26
+      },
+      "after": {
+        "crown": {
+          "x": 166.59397716717035,
+          "y": 23.5
+        },
+        "chin": {
+          "x": 184.09397716717035,
+          "y": 73.5
+        }
+      },
+      "sizeBefore": 52.974050251042726,
+      "sizeAfter": 52.974050251042726
+    },
+    {
+      "frame": 6,
+      "before": {
+        "crown": {
+          "x": 164,
+          "y": 55.5
+        },
+        "chin": {
+          "x": 185,
+          "y": 105.5
+        }
+      },
+      "oldTranslation": {
+        "dx": -4.729705578269616,
+        "dy": 12
+      },
+      "after": {
+        "crown": {
+          "x": 162.2634002532523,
+          "y": 35.5
+        },
+        "chin": {
+          "x": 183.2634002532523,
+          "y": 85.5
+        }
+      },
+      "sizeBefore": 54.230987451824994,
+      "sizeAfter": 54.230987451824994
+    },
+    {
+      "frame": 7,
+      "before": {
+        "crown": {
+          "x": 158,
+          "y": 45.5
+        },
+        "chin": {
+          "x": 181,
+          "y": 94.5
+        }
+      },
+      "oldTranslation": {
+        "dx": 8.758026134765743,
+        "dy": 2
+      },
+      "after": {
+        "crown": {
+          "x": 142.77566854021697,
+          "y": 35.5
+        },
+        "chin": {
+          "x": 165.77566854021697,
+          "y": 84.5
+        }
+      },
+      "sizeBefore": 54.12947441089744,
+      "sizeAfter": 54.12947441089744
+    },
+    {
+      "frame": 8,
+      "before": {
+        "crown": {
+          "x": 135,
+          "y": 31.5
+        },
+        "chin": {
+          "x": 160.5,
+          "y": 76.5
+        }
+      },
+      "oldTranslation": {
+        "dx": 8.641267549374646,
+        "dy": -1
+      },
+      "after": {
+        "crown": {
+          "x": 119.89242712560807,
+          "y": 24.5
+        },
+        "chin": {
+          "x": 145.39242712560807,
+          "y": 69.5
+        }
+      },
+      "sizeBefore": 51.72281894870001,
+      "sizeAfter": 51.72281894870001
+    }
+  ]
+}
