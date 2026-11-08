@@ -613,6 +613,35 @@ describe('WorldNode with combat', () => {
     expect(last).toMatchObject({ seq: 2, reason: CastReason.Cooldown, hits: [] });
   });
 
+  it('mob hpPct and maxHp come from the MobPort (not the player constant) and follow the damage in snapshots', () => {
+    const mobs = new FakeMobs();
+    const node = new WorldNode({ seed: 3, mapTiles: 64, spawn: { i0: 20, j0: 20, side: 1 }, combat: { mobs } });
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc');
+    const me = node.world.entities.find((e) => e.id === id)!;
+    const HP_MAX = 9000; // differs from WORLD_CONFIG.PLAYER_MAX_HP (1000) and from any player profile HP
+    mobs.stats.set(MOB, mobStats({ hpMax: HP_MAX }));
+    node.world = spawnEntity(node.world, { id: MOB, i: me.i + 2, j: me.j, hp: HP_MAX, mpMax: 0 });
+    for (let k = 0; k < 12; k++) node.tick();
+    const enter = c.msgs.flatMap((m) => (m.type === 'aoi_enter' ? m.entities : [])).find((e) => e.entityId === MOB)!;
+    expect(enter.maxHp).toBe(HP_MAX);
+    expect(enter.hpPct).toBe(100);
+    const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }));
+    for (let k = 0; k < 40; k++) node.tick();
+    const hp = node.world.entities.find((e) => e.id === MOB)!.hp;
+    expect(hp).toBeLessThan(HP_MAX);
+    const pcts = c.msgs.flatMap((m) =>
+      m.type === 'snapshot'
+        ? m.entities.filter((e) => e.index === enter.index && e.hpPct !== null).map((e) => e.hpPct)
+        : [],
+    );
+    expect(pcts.length).toBeGreaterThan(0);
+    expect(pcts[pcts.length - 1]).toBe(Math.round((hp / HP_MAX) * 100));
+    // with the player constant (1000) the same HP would clamp to 127; the real percentage stays <= 100
+    expect(pcts[pcts.length - 1]).toBeLessThanOrEqual(100);
+  });
+
   it('a node built without opts.combat behaves as before: ok result with empty hits', () => {
     const node = new WorldNode({ seed: 3, mapTiles: 64 });
     const c = new Client();

@@ -547,9 +547,9 @@ export class WorldNode {
     }
   }
 
-  /** Max HP of an entity: the combat profile's when combat is on, else the skeleton constant. */
+  /** Max HP of an entity: a player's combat profile, a mob's `MobPort` value, else the skeleton constant. */
   private hpMaxOf(e: EntityState): number {
-    return this.combat?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+    return this.combat?.maxHpOf(e.id) ?? this.combat?.mobHpMax(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
   }
 
   /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */

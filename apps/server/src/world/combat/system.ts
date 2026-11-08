@@ -121,6 +121,11 @@ export class CombatSystem {
     return this.players.get(id)?.hpMax;
   }
 
+  /** Max HP of a living mob through the `MobPort` (undefined for anything else): the node uses it for `hpPct` / `maxHp` of mobs. */
+  mobHpMax(id: number): number | undefined {
+    return this.opts.mobs?.combatStats(id)?.hpMax;
+  }
+
   profileOf(id: number): CombatProfile | undefined {
     return this.players.get(id)?.profile;
   }
