@@ -31,8 +31,8 @@ Không đồng hồ, không `Math.random`; toán hình học chỉ + − × ÷ v
 
 ## Điểm nối
 
-- **Mob (#204, chưa merge)**: `MobPort { combatStats(id), kill(world, id) }`. Mob là thực thể sim bình thường nên cast / tầm / LOS của sim áp dụng như với người chơi. Bộ chuyển khi #204 vào: `combatStats` từ `MobManager.info(id)` + `mobStats(def, level)` (DEF, cảnh giới, hệ, `tier → dropSource`, HP tối đa), `kill = MobManager.kill`.
-- **Bật trong node**: `new WorldNode({ combat: { mobs, onDrops } })`; thiếu `combat` thì node hành xử như cũ (cast hợp lệ → `skill_result` không hits).
+- **Mob (#204)**: `MobPort { combatStats(id), kill(world, id) }`; `MobManager` thỏa mãn nguyên trạng và là `MobPort` mặc định của `WorldNode` khi có cả `mobs` và `combat` (`combat.mobs` ghi đè). Mob là thực thể sim bình thường nên cast / tầm / LOS của sim áp dụng như với người chơi; `combatStats` cho DEF, cảnh giới, hệ, `dropSource`, HP tối đa, `kill` hủy mob và đặt giờ hồi sinh.
+- **Bật trong node**: `new WorldNode({ mobs: true, combat: { onDrops } })` (mob của `MobManager` tự thành mục tiêu); thiếu `combat` thì node hành xử như cũ (cast hợp lệ → `skill_result` không hits).
 - **Client online**: `ServerCombat` (client-combat) cài `CombatBackend` giống `MockCombat`; HUD (`Combat.ts`) nhận backend. Nối vào chế độ `?online=1` chờ client mạng (#199) merge: `ServerCombat.applySkillResult` nhận `skill_result`, `upsertEnemy` / `removeEnemy` nhận AOI + `hpPct`, `setServerTime` nhận tick snapshot.
 
 ## Giới hạn đã biết (OPEN-ITEMS)

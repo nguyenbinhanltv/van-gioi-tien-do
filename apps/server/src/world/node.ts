@@ -230,15 +230,21 @@ export class WorldNode {
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
-    this.combat = opts.combat
-      ? new CombatSystem(this.ctx, { seed, respawnPoint: () => this.spawnPoint(), ...opts.combat })
-      : null;
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
       this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
+    // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
+    this.combat = opts.combat
+      ? new CombatSystem(this.ctx, {
+          seed,
+          respawnPoint: () => this.spawnPoint(),
+          ...opts.combat,
+          mobs: opts.combat.mobs ?? this.mobs ?? undefined,
+        })
+      : null;
   }
 
   // ------------------------------------------------------------------ players

@@ -512,6 +512,51 @@ describe('player HP, death and respawn', () => {
   });
 });
 
+describe('WorldNode with mobs: true and combat: {} (default MobPort wiring)', () => {
+  it('a player cast damages a spawned mob, the kill despawns it and starts its respawn timer, and drops fire', () => {
+    const drops: DropRoll[][] = [];
+    const node = new WorldNode({
+      seed: 4,
+      mapTiles: 64,
+      spawn: { i0: 20, j0: 20, side: 1 },
+      mobs: true,
+      combat: { onDrops: (d) => drops.push([...d.rolls]) },
+    });
+    expect(node.mobs).not.toBeNull();
+    expect(node.combat).not.toBeNull();
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc');
+    const mob = node.world.entities.find((e) => isMobId(e.id))!;
+    expect(mob).toBeDefined();
+    const mobHpMax = node.mobs!.combatStats(mob.id)!.hpMax;
+    // stand 1.5 tiles west of the mob, facing +i (the cone of kiem_khi_tram covers it), mob at 1 HP
+    node.world = {
+      ...node.world,
+      entities: node.world.entities.map((e) =>
+        e.id === id ? { ...e, i: mob.i - 1.5, j: mob.j, facing: 0 } : e.id === mob.id ? { ...e, hp: 1 } : e,
+      ),
+    };
+    const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }));
+    for (let k = 0; k < 14; k++) node.tick();
+    expect(mobHpMax).toBeGreaterThan(1);
+    expect(node.world.entities.some((e) => e.id === mob.id)).toBe(false); // killed: despawned by MobManager.kill
+    const info = node.mobs!.info(mob.id)!;
+    expect(info.alive).toBe(false);
+    expect(info.respawnAtTick).toBeGreaterThan(node.world.tick);
+    expect(drops).toHaveLength(1);
+    const res = c.msgs.filter((m): m is Extract<Message, { type: 'skill_result' }> => m.type === 'skill_result');
+    expect(res).toHaveLength(1);
+    expect(res[0]).toMatchObject({ seq: 1, reason: CastReason.Ok });
+  });
+
+  it('opts.combat.mobs still overrides the default port', () => {
+    const port = new FakeMobs();
+    const node = new WorldNode({ seed: 4, mapTiles: 64, mobs: true, combat: { mobs: port } });
+    expect(node.combat!.mobHpMax(1_000_000)).toBeUndefined(); // the fake knows no mob: the manager is not consulted
+  });
+});
+
 describe('MobManager (#204) as the MobPort', () => {
   it('combat kills a real mob through combatStats / kill: it despawns, drops resolve and the respawn timer runs', () => {
     const grid = TileGrid.fromRows(Array.from({ length: 64 }, () => '.'.repeat(64)));
