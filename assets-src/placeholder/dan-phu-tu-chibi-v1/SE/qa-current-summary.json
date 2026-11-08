@@ -1,14 +1,14 @@
 {
-  "status": "Diagnostic only: unresolved head-evidence/similarity hard findings; NOT runtime-ready or an accepted export.",
-  "utc": "2026-11-08T00:44:50.085Z",
-  "projectSha256": "07fab22266478325722e915cfb89923d514610381b2e9e24dc06c3648d3e3f30",
+  "status": "Native hard gates passed with reviewed manual D47 evidence;20 soft findings recorded. Residual spill and crown/bun wording clarification remain open; no production export or Cocos capture claimed.",
+  "utc": "2026-11-08T01:17:52.089Z",
+  "projectSha256": "ba0d5c9fa35402925e56d45ebf210a8ff0a0aae046bd280e6eb07833d4699407",
   "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
   "counts": {
-    "fail-hard": 50,
-    "fail-soft": 20,
-    "accepted": 0,
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 20,
     "regression": 0,
-    "info": 98
+    "info": 125
   },
   "canvasClipping": [],
   "projectedCanvasLoss": [],
@@ -35,14 +35,14 @@
     {
       "clip": "run",
       "frames": 16,
-      "sheet": "raw/run.attempt3.png",
-      "sha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5"
+      "sheet": "raw/run.selected.png",
+      "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f"
     },
     {
       "clip": "dash",
       "frames": 10,
-      "sheet": "raw/hit-dash.attempt1.png",
-      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e"
+      "sheet": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
     },
     {
       "clip": "sword_fly",
@@ -83,8 +83,8 @@
     {
       "clip": "hit",
       "frames": 6,
-      "sheet": "raw/hit-dash.attempt1.png",
-      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e"
+      "sheet": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
     },
     {
       "clip": "die",
@@ -333,44 +333,137 @@
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "walk",
         "frame": 2,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 237 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 121,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 237
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "walk",
         "frame": 3,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 237 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 121,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 237
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "walk",
         "frame": 11,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.46026561849464,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.46 px / master 53.46 px; bbox 238 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 120,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 127,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.46026561849464,
+          "ratio": 1,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 238
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
@@ -384,7 +477,20 @@
         "message": "R foot slides 5.8 px/frame between frames 0-1 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 1,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.85,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -398,7 +504,20 @@
         "message": "R foot slides 3.5 px/frame between frames 1-2 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 3.54,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -412,7 +531,20 @@
         "message": "R foot slides 6.2 px/frame between frames 2-3 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.23,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -426,7 +558,20 @@
         "message": "R foot slides 9.0 px/frame between frames 4-5 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 5,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 8.98,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -440,7 +585,20 @@
         "message": "R foot slides 4.1 px/frame between frames 5-6 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 6,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 4.06,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -454,7 +612,20 @@
         "message": "R foot slides 17.9 px/frame between frames 6-7 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 7,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 17.86,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -468,7 +639,20 @@
         "message": "L foot slides 4.1 px/frame between frames 11-12 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 12,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 4.06,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -482,7 +666,20 @@
         "message": "L foot slides 5.8 px/frame between frames 12-13 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 13,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 5.85,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -496,7 +693,20 @@
         "message": "L foot slides 4.0 px/frame between frames 13-14 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 14,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.99,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -510,133 +720,740 @@
         "message": "L foot slides 15.2 px/frame between frames 14-15 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 15,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 15.17,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
+        "clip": "run",
+        "frame": 0,
+        "metric": "head_size_px",
+        "value": 54.03008421240892,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 224 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 157.5,
+              "y": 81.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.03008421240892,
+          "ratio": 1.0106587310654356,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 224
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
         "clip": "run",
         "frame": 1,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 55.01136246267674,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 55.01 px / master 53.46 px; bbox 221 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 159.5,
+              "y": 82.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 55.01136246267674,
+          "ratio": 1.0290140130475802,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 221
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 2,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.69232121605373,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 214 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 160.5,
+              "y": 81.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.69232121605373,
+          "ratio": 1.0230461929679013,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 214
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 3,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.12023651093923,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 218 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 25.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 77.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.12023651093923,
+          "ratio": 1.0123450732017365,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 218
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 4,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 51.92301994298868,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 51.92 px / master 53.46 px; bbox 209 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 150,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 51.92301994298868,
+          "ratio": 0.9712450797293805,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 209
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 5,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 176 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 162,
+              "y": 74.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 176
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 6,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.81788029466298,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.82 px / master 53.46 px; bbox 220 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 169,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.81788029466298,
+          "ratio": 1.0253948359676437,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 220
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
+        "clip": "run",
+        "frame": 7,
+        "metric": "head_size_px",
+        "value": 54.23329235810786,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.23 px / master 53.46 px; bbox 233 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 161,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 172.5,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.23329235810786,
+          "ratio": 1.0144598372393008,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 233
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 8,
+        "metric": "head_size_px",
+        "value": 54.571054598569006,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.57 px / master 53.46 px; bbox 227 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 168,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.571054598569006,
+          "ratio": 1.0207778425195495,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 227
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 9,
+        "metric": "head_size_px",
+        "value": 54.03008421240892,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 225 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 154,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 164.5,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.03008421240892,
+          "ratio": 1.0106587310654356,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 225
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 10,
+        "metric": "head_size_px",
+        "value": 54.69232121605373,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 224 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 156,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 169.5,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.69232121605373,
+          "ratio": 1.0230461929679013,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 224
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
         "clip": "run",
         "frame": 11,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.12023651093923,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 219 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 152,
+              "y": 21.5
+            },
+            "chin": {
+              "x": 167,
+              "y": 73.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.12023651093923,
+          "ratio": 1.0123450732017365,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 219
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 12,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.36665625650534,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.37 px / master 53.46 px; bbox 209 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 156,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 168,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.36665625650534,
+          "ratio": 0.9982489918277376,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 209
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "run",
         "frame": 13,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 52.63078946776307,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 52.63 px / master 53.46 px; bbox 177 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 151,
+              "y": 26.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 77.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 52.63078946776307,
+          "ratio": 0.9844842493553828,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 177
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 14,
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 169,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 231
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 15,
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 151,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 165,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 231
+        }
+      },
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
@@ -650,7 +1467,20 @@
         "message": "R planted foot: nearest sole is 28.8 px from its template ghost (xy 138.0,210.0 vs 124.8,235.6, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 28.8,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -664,7 +1494,20 @@
         "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 999,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -673,12 +1516,25 @@
         "clip": "run",
         "frame": 4,
         "metric": "ghost_distance_2d_px_R",
-        "value": 27,
+        "value": 27.7,
         "limit": 20,
-        "message": "R planted foot: nearest sole is 27.0 px from its template ghost (xy 80.5,221.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 27.7 px from its template ghost (xy 80.0,220.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 4,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 27.7,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -687,12 +1543,25 @@
         "clip": "run",
         "frame": 5,
         "metric": "ghost_distance_2d_px_R",
-        "value": 999,
+        "value": 34.8,
         "limit": 20,
-        "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+        "message": "R planted foot: nearest sole is 34.8 px from its template ghost (xy 91.5,188.0 vs 97.9,222.2, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 5,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 34.8,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -706,7 +1575,20 @@
         "message": "L planted foot: nearest sole is 21.1 px from its template ghost (xy 161.5,235.0 vs 142.7,244.5, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 8,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 21.1,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -720,7 +1602,20 @@
         "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 79.5,228.0 vs 115.8,231.1, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 11,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -734,7 +1629,20 @@
         "message": "L foot slides 13.1 px/frame between frames 9-10 (limit 3)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 10,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 13.13,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -748,7 +1656,20 @@
         "message": "L planted foot: nearest sole is 33.2 px from its template ghost (xy 74.0,222.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 12,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 33.2,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -762,449 +1683,380 @@
         "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
       },
       "class": "soft",
-      "verdict": "fail-soft"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
+      "verdict": "accepted",
+      "entry": {
         "clip": "run",
-        "frame": 0,
-        "message": "face similarity 0.65 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 1,
-        "message": "face similarity 0.64 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 2,
-        "message": "face similarity 0.65 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 2,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 3,
-        "message": "face similarity 0.61 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 3,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 4,
-        "message": "face similarity 0.59 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 4,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 5,
-        "message": "face similarity 0.60 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 5,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 6,
-        "message": "face similarity 0.55 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 7,
-        "message": "face similarity 0.54 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 7,
-        "message": "torso similarity 0.66 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 8,
-        "message": "face similarity 0.55 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 8,
-        "message": "torso similarity 0.67 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 9,
-        "message": "face similarity 0.56 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 9,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 10,
-        "message": "face similarity 0.56 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 10,
-        "message": "torso similarity 0.69 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 11,
-        "message": "face similarity 0.57 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 12,
-        "message": "face similarity 0.57 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 12,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 13,
-        "message": "face similarity 0.61 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 13,
-        "message": "torso similarity 0.67 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 14,
-        "message": "face similarity 0.59 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 14,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 15,
-        "message": "face similarity 0.62 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "run",
-        "frame": 15,
-        "message": "torso similarity 0.68 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
+        "dir": "SE",
+        "cell": 13,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 999,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 1,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 52.39274758971894,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 52.39 px / master 53.46 px; bbox 203 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 123,
+              "y": 35.5
+            },
+            "chin": {
+              "x": 135,
+              "y": 86.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 52.39274758971894,
+          "ratio": 0.9800315614517562,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 203
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 2,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 51.97114584074514,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 51.97 px / master 53.46 px; bbox 201 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 132,
+              "y": 41.5
+            },
+            "chin": {
+              "x": 142,
+              "y": 92.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 51.97114584074514,
+          "ratio": 0.972145297810972,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 201
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 3,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 198 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 145,
+              "y": 42.5
+            },
+            "chin": {
+              "x": 155,
+              "y": 96.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 198
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 4,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.397097299385095,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.40 px / master 53.46 px; bbox 185 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 144,
+              "y": 31.5
+            },
+            "chin": {
+              "x": 150.5,
+              "y": 84.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.397097299385095,
+          "ratio": 0.9988184061867494,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 185
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 5,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 164 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 157,
+              "y": 82.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 164
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 6,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 202 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 130,
+              "y": 37.5
+            },
+            "chin": {
+              "x": 140,
+              "y": 91.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 202
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 7,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 206 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 123,
+              "y": 35.5
+            },
+            "chin": {
+              "x": 136,
+              "y": 87.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 206
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
         "gate": "height",
-        "severity": "fail",
+        "severity": "info",
         "clip": "dash",
         "frame": 8,
-        "metric": "head_evidence_missing",
-        "value": 1,
-        "limit": 0,
-        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 221 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 115,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 71.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 221
+        }
       },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "dash",
-        "frame": 3,
-        "message": "face similarity 0.66 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
-    },
-    {
-      "finding": {
-        "gate": "similarity",
-        "severity": "fail",
-        "clip": "dash",
-        "frame": 5,
-        "message": "face similarity 0.65 < 0.7"
-      },
-      "class": "hard",
-      "verdict": "fail-hard"
+      "class": "info",
+      "verdict": "info"
     },
     {
       "finding": {
@@ -1666,7 +2518,20 @@
         "message": "height 222 px outside the upright band and no pose exception declared"
       },
       "class": "soft",
-      "verdict": "fail-soft"
+      "verdict": "accepted",
+      "entry": {
+        "clip": "die",
+        "dir": "SE",
+        "cell": 0,
+        "gate": "height",
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
     },
     {
       "finding": {
@@ -1988,7 +2853,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2010,7 +2878,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2032,7 +2903,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2054,7 +2928,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2076,7 +2953,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2098,7 +2978,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2120,7 +3003,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2142,7 +3028,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2164,7 +3053,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2186,7 +3078,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2208,7 +3103,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2230,7 +3128,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2252,7 +3153,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2274,7 +3178,10 @@
           "groundY": 237,
           "reason": "preserve authored root travel",
           "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
-          "source": { "x": 117.60678680981596, "y": 237 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
           "scale": 1,
           "dx": 0,
           "dy": -5
@@ -2295,7 +3202,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16
@@ -2316,7 +3226,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 249 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 249
+          },
           "scale": 1,
           "dx": 0,
           "dy": -17
@@ -2337,7 +3250,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16
@@ -2358,7 +3274,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16
@@ -2379,7 +3298,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16
@@ -2400,7 +3322,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 244 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 244
+          },
           "scale": 1,
           "dx": 0,
           "dy": -12
@@ -2421,7 +3346,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 242 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
           "scale": 1,
           "dx": 0,
           "dy": -10
@@ -2442,7 +3370,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 242 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
           "scale": 1,
           "dx": 0,
           "dy": -10
@@ -2463,7 +3394,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 242 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
           "scale": 1,
           "dx": 0,
           "dy": -10
@@ -2484,7 +3418,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 242 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
           "scale": 1,
           "dx": 0,
           "dy": -10
@@ -2505,7 +3442,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 242 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
           "scale": 1,
           "dx": 0,
           "dy": -10
@@ -2526,7 +3466,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 243 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 243
+          },
           "scale": 1,
           "dx": 0,
           "dy": -11
@@ -2547,7 +3490,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16
@@ -2568,7 +3514,10 @@
           "pelvisX": 117.60678680981596,
           "reason": "preserve authored root travel",
           "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
-          "source": { "x": 117.60678680981596, "y": 248 },
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
           "scale": 1,
           "dx": 0,
           "dy": -16

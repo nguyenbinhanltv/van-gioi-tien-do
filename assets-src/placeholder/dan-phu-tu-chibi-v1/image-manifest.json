@@ -817,6 +817,20 @@
       "role": "raw imagegen attempt; selection in project/provenance"
     },
     {
+      "file": "SE/raw/hit-dash.attempt2.png",
+      "sha256": "c442a6309e1b7b4138f5578b1b24e70fbc917b5e7c152a109cfa18b6d21529ea",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
+    },
+    {
+      "file": "SE/raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
+    },
+    {
       "file": "SE/raw/idle.attempt1.png",
       "sha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f",
       "width": 1254,
@@ -850,6 +864,27 @@
       "width": 1254,
       "height": 1254,
       "role": "raw imagegen attempt; selection in project/provenance"
+    },
+    {
+      "file": "SE/raw/run.attempt4.png",
+      "sha256": "9a61ef0ee3a7f1496f3343199325db658f85b86c8a465407018159e0db47e049",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
+    },
+    {
+      "file": "SE/raw/run.selected-base.png",
+      "sha256": "6fa3cbfb3be4ff496fc3cc018ac9e98ec9c0ef1a82b08318709038020d71f9c0",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
+    },
+    {
+      "file": "SE/raw/run.selected.png",
+      "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
+      "width": 1254,
+      "height": 1254,
+      "role": "AI raw output or proven native-cell selection"
     },
     {
       "file": "SE/raw/sword_fly.attempt1.png",
@@ -968,6 +1003,20 @@
       "sha256": "f4875ac66fe30d208271e3f46e6a1492725349713511d9232b5a41165fc0dff1",
       "width": 1024,
       "height": 768,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/dash.cells1-2-7-head-guide.png",
+      "sha256": "bc9e354f9ff338161aeb0f84473daa2b5fcafb1c0cbf99269d68c4ed8f9642b0",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/dash.cells1-2-7-head-guide.raw-dpi.png",
+      "sha256": "f9c02ae8e0a47572678f5f04deae87faf8b99bbb4df496ef08430f6713b7ce71",
+      "width": 1254,
+      "height": 1254,
       "role": "input authoring guide"
     },
     {
@@ -1092,6 +1141,20 @@
     {
       "file": "SE/templates/run.canonical-head-guide.raw-dpi.png",
       "sha256": "1fcd1e253032cf97d9fd0549a7ff8252209371390a8ce439defd4df424d2baf2",
+      "width": 1254,
+      "height": 1254,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.cell4-head-guide.png",
+      "sha256": "40f72a66487a2cece4cfa0e4184c25bbdbd174f80611de8e3042d15da5d153a1",
+      "width": 1024,
+      "height": 1024,
+      "role": "input authoring guide"
+    },
+    {
+      "file": "SE/templates/run.cell4-head-guide.raw-dpi.png",
+      "sha256": "aa0e2a56e75ba3da3fbd6002f68dfdbc94a44c5cf87b0dff0525bef81f96828f",
       "width": 1254,
       "height": 1254,
       "role": "input authoring guide"

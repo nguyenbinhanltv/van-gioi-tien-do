@@ -18,17 +18,18 @@
   "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
   "currentReferenceFileHashes": [
     {
-      "file": "../raw/run.attempt1.png",
+      "reference": "../raw/run.attempt1.png",
       "sha256": "00ad9227bb6a43a09f5379ba16aecafbca1bb01fee2313c71ea2f8031221fe65"
     },
     {
-      "file": "../templates/run.canonical-head-guide.png",
+      "reference": "../templates/run.canonical-head-guide.png",
       "sha256": "ed0f5b807431935659ff997551638f1522e621661d4656928ad663447215195f"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

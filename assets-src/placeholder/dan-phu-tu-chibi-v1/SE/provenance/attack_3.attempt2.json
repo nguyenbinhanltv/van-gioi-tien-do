@@ -14,9 +14,10 @@
   "rawSha256": "bbdbac6caf240ff065b824f0faba9a7bc013fd163bedd54e77b0acb17580790a",
   "currentReferenceFileHashes": [
     {
-      "file": "../raw/attack_3.attempt1.png",
+      "reference": "../raw/attack_3.attempt1.png",
       "sha256": "4ee0a924b491f9a61605eac9e3e07795bf3c019e6e87c3140946e94ab5ed7fe1"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

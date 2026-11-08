@@ -14,13 +14,14 @@
   "rawSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/hit-dash.master-guide.png",
+      "reference": "../templates/hit-dash.master-guide.png",
       "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

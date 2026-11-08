@@ -14,9 +14,10 @@
   "rawSha256": "a0c19d617432da277043dbaa14b5b3182991c46169ac64a35d0581b7d2046cc7",
   "currentReferenceFileHashes": [
     {
-      "file": "../raw/die.attempt1.png",
+      "reference": "../raw/die.attempt1.png",
       "sha256": "f616e727f329bf58fb9a4158f7e7729f1f5d20ac3d6f3158154fb568e7eceece"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

@@ -2,7 +2,268 @@
   "format": "vgtd-quality-backlog",
   "version": 1,
   "character": "dan-phu-tu-chibi-v1",
-  "entries": [],
+  "entries": [
+    {
+      "clip": "die",
+      "dir": "SE",
+      "cell": 0,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 2,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 28.8,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 3,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 4,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 27.7,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_R",
+      "value": 34.8,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 8,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 21.1,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 10,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 13.13,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 11,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 36.5,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 12,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 33.2,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "run",
+      "dir": "SE",
+      "cell": 13,
+      "gate": "footSlide",
+      "metric": "ghost_distance_2d_px_L",
+      "value": 999,
+      "limit": 20,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 1,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 5.85,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 2,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 3.54,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 3,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 6.23,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 5,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 8.98,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 6,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 4.06,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 7,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 17.86,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 12,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.06,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 13,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 5.85,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 14,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 3.99,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    },
+    {
+      "clip": "walk",
+      "dir": "SE",
+      "cell": 15,
+      "gate": "footSlide",
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 15.17,
+      "limit": 3,
+      "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+      "status": "open",
+      "owner": "26",
+      "added": "2026-11-08"
+    }
+  ],
   "manual": [
     {
       "kind": "other",
@@ -51,8 +312,8 @@
       "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Raw1 attached heads visibly oversized. Raw2 canonical-head AI edit retains dynamic lean/flight/body but semantic cap/jaw measurements remain under review. Do not treat input stencil positions or prompt percentages as gate evidence."
+      "status": "resolved",
+      "note": "Native manual semantic cap/jaw edges frozen before ratios; actual aligned PNG/native traces in head-selection-native-traces.json. All27 supplied measurements nominally within SE-specific master53.4603px +/-3%. Run selected whole cells from attempts2/3/4 and dash selected global7/8/13 from attempt2 retain exact hash proofs, original sources and rejected drafts. Dynamic body/root/flight preserved; no output rescaling. Approximately1px annotation uncertainty remains a separate open warning; not automated anatomical certification."
     },
     {
       "kind": "other",
@@ -61,8 +322,8 @@
       "cells": [2, 3, 11],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Out-of-band full-alpha standing stride needs actual aligned-cell D47 head-size evidence; no waiver or numerical point selection."
+      "status": "resolved",
+      "note": "Native manual semantic cap/jaw edges frozen before ratios; actual aligned PNG/native traces in head-selection-native-traces.json. All27 supplied measurements nominally within SE-specific master53.4603px +/-3%. Run selected whole cells from attempts2/3/4 and dash selected global7/8/13 from attempt2 retain exact hash proofs, original sources and rejected drafts. Dynamic body/root/flight preserved; no output rescaling. Approximately1px annotation uncertainty remains a separate open warning; not automated anatomical certification."
     },
     {
       "kind": "other",
@@ -71,8 +332,8 @@
       "cells": [1, 2, 3, 4, 5, 6, 7, 8],
       "severity": "error",
       "reviewer": "art-worker",
-      "status": "open",
-      "note": "Dynamic knee/flight posture preserved. D47 actual aligned head measurements still required; do not flatten poses to fit bbox."
+      "status": "resolved",
+      "note": "Native manual semantic cap/jaw edges frozen before ratios; actual aligned PNG/native traces in head-selection-native-traces.json. All27 supplied measurements nominally within SE-specific master53.4603px +/-3%. Run selected whole cells from attempts2/3/4 and dash selected global7/8/13 from attempt2 retain exact hash proofs, original sources and rejected drafts. Dynamic body/root/flight preserved; no output rescaling. Approximately1px annotation uncertainty remains a separate open warning; not automated anatomical certification."
     },
     {
       "kind": "other",
@@ -103,6 +364,16 @@
       "reviewer": "art-worker",
       "status": "open",
       "note": "Diagnostic atlas: 2 pages, 32MiB decoded RGBA before compression. Final source freeze, mobile multi-direction residency and compressed-format quality remain unvalidated."
+    },
+    {
+      "kind": "other",
+      "clip": "idle",
+      "dir": "SE",
+      "cells": [],
+      "severity": "warn",
+      "reviewer": "art-worker",
+      "status": "open",
+      "note": "Residual warm-magenta chroma spill is visible around some hair/jaw edges and whisk fibres. Existing public spill settings improve saturated magenta but skip asymmetric red/blue contamination. Wider key220 comparison is TEMP only; current sources/outputs remain unchanged. Awaiting coordinated tooling option or AI cleanup before final source/export claim."
     }
   ]
 }

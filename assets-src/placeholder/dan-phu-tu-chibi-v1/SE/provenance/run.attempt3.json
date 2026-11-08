@@ -14,13 +14,14 @@
   "rawSha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
   "currentReferenceFileHashes": [
     {
-      "file": "../raw/run.attempt2.png",
+      "reference": "../raw/run.attempt2.png",
       "sha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084"
     },
     {
-      "file": "../templates/run.canonical-head-guide.raw-dpi.png",
+      "reference": "../templates/run.canonical-head-guide.raw-dpi.png",
       "sha256": "1fcd1e253032cf97d9fd0549a7ff8252209371390a8ce439defd4df424d2baf2"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

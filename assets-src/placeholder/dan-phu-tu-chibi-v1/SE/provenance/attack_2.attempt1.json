@@ -14,13 +14,14 @@
   "rawSha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/attack_2.head-guide.png",
+      "reference": "../templates/attack_2.head-guide.png",
       "sha256": "cce1ac618454941d8e70943d4a9c29c03a64a23e04373ec34c2d65f7b27306bb"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

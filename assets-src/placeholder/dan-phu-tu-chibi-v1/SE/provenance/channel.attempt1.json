@@ -14,13 +14,14 @@
   "rawSha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/channel.master-guide.png",
+      "reference": "../templates/channel.master-guide.png",
       "sha256": "0a040190aef70f636d49b8a4f2f28a4c057031bb68d865b22b96a0264359b927"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

@@ -309,8 +309,8 @@
       ]
     },
     {
-      "sheet": "raw/run.attempt3.png",
-      "sha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5",
+      "sheet": "raw/run.selected.png",
+      "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f",
       "cells": [
         {
           "index": 0,
@@ -338,14 +338,14 @@
         },
         {
           "index": 4,
-          "margin32": 7,
-          "margin128": 7,
+          "margin32": 11,
+          "margin128": 11,
           "edgeSamples": []
         },
         {
           "index": 5,
-          "margin32": 7,
-          "margin128": 7,
+          "margin32": 12,
+          "margin128": 12,
           "edgeSamples": []
         },
         {
@@ -386,33 +386,33 @@
         },
         {
           "index": 12,
-          "margin32": 9,
-          "margin128": 9,
+          "margin32": 13,
+          "margin128": 13,
           "edgeSamples": []
         },
         {
           "index": 13,
-          "margin32": 9,
-          "margin128": 10,
+          "margin32": 14,
+          "margin128": 14,
           "edgeSamples": []
         },
         {
           "index": 14,
-          "margin32": 9,
-          "margin128": 10,
+          "margin32": 12,
+          "margin128": 12,
           "edgeSamples": []
         },
         {
           "index": 15,
-          "margin32": 9,
-          "margin128": 9,
+          "margin32": 12,
+          "margin128": 12,
           "edgeSamples": []
         }
       ]
     },
     {
-      "sheet": "raw/hit-dash.attempt1.png",
-      "sha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+      "sheet": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e",
       "cells": [
         {
           "index": 0,
@@ -458,14 +458,14 @@
         },
         {
           "index": 7,
-          "margin32": 25,
-          "margin128": 25,
+          "margin32": 26,
+          "margin128": 26,
           "edgeSamples": []
         },
         {
           "index": 8,
-          "margin32": 23,
-          "margin128": 23,
+          "margin32": 24,
+          "margin128": 24,
           "edgeSamples": []
         },
         {
@@ -494,7 +494,7 @@
         },
         {
           "index": 13,
-          "margin32": 23,
+          "margin32": 24,
           "margin128": 24,
           "edgeSamples": []
         },

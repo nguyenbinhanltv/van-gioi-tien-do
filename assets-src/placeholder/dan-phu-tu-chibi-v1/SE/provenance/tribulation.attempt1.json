@@ -14,13 +14,14 @@
   "rawSha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/tribulation.head-guide.png",
+      "reference": "../templates/tribulation.head-guide.png",
       "sha256": "1edd11dec4eddcb59e6542fbafee1820abed23d5fd55d5767226d1a617b7e730"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

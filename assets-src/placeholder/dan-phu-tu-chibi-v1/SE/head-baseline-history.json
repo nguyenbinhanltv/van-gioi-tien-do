@@ -1,0 +1,33 @@
+{
+  "status": "Accepted manually by style23 and orchestrator as SE-specific reference; not automated certification. Bun-inclusion wording clarification requested before motion acceptance.",
+  "convention": "Semantic boundary edges: first attached FRONT cap highlight row12, preceding row11 alpha2 atx121. Last central jaw outline row64, following row65empty atx128. Include genuine highlight; exclude identifiable jadepin and neck/collar. Style23 excludes elevated coil/bun; pending orchestrator wording reconciliation.",
+  "master": "../reference/SE.corrected-master.png",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "original": {
+    "crown": {
+      "x": 119,
+      "y": 13.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 64.5
+    },
+    "status": "Rejected brown-only interior draft excluded pale cap highlight; retained as history."
+  },
+  "selected": {
+    "crown": {
+      "x": 121,
+      "y": 11.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 64.5
+    }
+  },
+  "size": 53.46026561849464,
+  "band": [51.8564576499398, 55.06407358704948],
+  "manualUncertaintyPx": 1,
+  "review": "Style23 native semantic adjudication supplied before motion ratios; no master pixel edit or borrowed E measure.",
+  "overlay": "master-head-overlay.svg",
+  "overlaySha256": "55886a429a6a1d2468fb2b459515f426c986161c22976585bfdc53e182157603"
+}

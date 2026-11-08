@@ -14,13 +14,14 @@
   "rawSha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/idle.master-guide.png",
+      "reference": "../templates/idle.master-guide.png",
       "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

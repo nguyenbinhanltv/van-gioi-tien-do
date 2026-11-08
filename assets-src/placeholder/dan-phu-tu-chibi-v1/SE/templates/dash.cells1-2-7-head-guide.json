@@ -1,0 +1,50 @@
+{
+  "note": "Manual visible-neck authoring intentions, not QA evidence. Unscaled master head copied to INPUT; whole-guide DPI match only. Final repair remains an AI edit; body/root/pose must be preserved.",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "source": "raw/hit-dash.attempt1.png",
+  "sourceSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+  "placements": [
+    {
+      "localIndex": 1,
+      "sourceCell": 7,
+      "alignedNeckIntent": {
+        "index": 1,
+        "x": 134,
+        "y": 93
+      },
+      "sourceTranslation": {
+        "dx": 7,
+        "dy": 25
+      },
+      "scale": 1
+    },
+    {
+      "localIndex": 2,
+      "sourceCell": 8,
+      "alignedNeckIntent": {
+        "index": 2,
+        "x": 140,
+        "y": 100
+      },
+      "sourceTranslation": {
+        "dx": 22,
+        "dy": 32
+      },
+      "scale": 1
+    },
+    {
+      "localIndex": 7,
+      "sourceCell": 13,
+      "alignedNeckIntent": {
+        "index": 7,
+        "x": 135,
+        "y": 94
+      },
+      "sourceTranslation": {
+        "dx": 6,
+        "dy": 26
+      },
+      "scale": 1
+    }
+  ]
+}

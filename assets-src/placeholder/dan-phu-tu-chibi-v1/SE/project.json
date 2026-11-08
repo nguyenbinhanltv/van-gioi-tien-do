@@ -61,7 +61,47 @@
       "heightPolicy": "head-size-v1",
       "sheet": "raw/walk.attempt1.png",
       "manifest": "templates/walk.template.json",
-      "vertical": "keep"
+      "vertical": "keep",
+      "exceptions": {
+        "2": "posture",
+        "3": "posture",
+        "11": "posture"
+      },
+      "headEvidence": {
+        "2": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 65.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "3": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 65.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "11": {
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 65.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        }
+      }
     },
     {
       "name": "run",
@@ -72,9 +112,205 @@
       "tableId": "run",
       "kind": "upright",
       "heightPolicy": "head-size-v1",
-      "sheet": "raw/run.attempt3.png",
+      "sheet": "raw/run.selected.png",
       "manifest": "templates/run.template.json",
-      "vertical": "keep"
+      "vertical": "keep",
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 81.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "1": {
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 159.5,
+            "y": 82.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "2": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 160.5,
+            "y": 81.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "3": {
+          "crown": {
+            "x": 149,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "4": {
+          "crown": {
+            "x": 150,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 72.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "5": {
+          "crown": {
+            "x": 149,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 162,
+            "y": 74.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "6": {
+          "crown": {
+            "x": 155,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 72.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "7": {
+          "crown": {
+            "x": 161,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 172.5,
+            "y": 72.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "8": {
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 75.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "9": {
+          "crown": {
+            "x": 154,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164.5,
+            "y": 75.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "10": {
+          "crown": {
+            "x": 156,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 75.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "11": {
+          "crown": {
+            "x": 152,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 73.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "12": {
+          "crown": {
+            "x": 156,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 76.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "13": {
+          "crown": {
+            "x": 151,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "14": {
+          "crown": {
+            "x": 155,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 76.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "15": {
+          "crown": {
+            "x": 151,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 165,
+            "y": 76.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        }
+      }
     },
     {
       "name": "dash",
@@ -85,13 +321,113 @@
       "tableId": "dash",
       "kind": "upright",
       "heightPolicy": "head-size-v1",
-      "sheet": "raw/hit-dash.attempt1.png",
+      "sheet": "raw/hit-dash.selected.png",
       "manifest": "templates/hit-dash.template.json",
       "sheetSelection": {
         "rows": 4,
         "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
       },
-      "vertical": "keep"
+      "vertical": "keep",
+      "exceptions": {
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture"
+      },
+      "headEvidence": {
+        "1": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 135,
+            "y": 86.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "2": {
+          "crown": {
+            "x": 132,
+            "y": 41.5
+          },
+          "chin": {
+            "x": 142,
+            "y": 92.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "3": {
+          "crown": {
+            "x": 145,
+            "y": 42.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 96.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "4": {
+          "crown": {
+            "x": 144,
+            "y": 31.5
+          },
+          "chin": {
+            "x": 150.5,
+            "y": 84.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "5": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157,
+            "y": 82.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "6": {
+          "crown": {
+            "x": 130,
+            "y": 37.5
+          },
+          "chin": {
+            "x": 140,
+            "y": 91.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "7": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 136,
+            "y": 87.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        },
+        "8": {
+          "crown": {
+            "x": 115,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 71.5
+          },
+          "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+        }
+      }
     },
     {
       "name": "sword_fly",
@@ -426,7 +762,7 @@
       "loop": false,
       "tableId": "hit",
       "kind": "free",
-      "sheet": "raw/hit-dash.attempt1.png",
+      "sheet": "raw/hit-dash.selected.png",
       "manifest": "templates/hit-dash.template.json",
       "sheetSelection": {
         "rows": 4,
@@ -501,6 +837,22 @@
     }
   ],
   "slice": {
-    "inset": 0
+    "inset": 0,
+    "spill": {
+      "threshold": 8,
+      "strength": 1,
+      "keepDistance": 0,
+      "palette": []
+    }
+  },
+  "masterHead": {
+    "crown": {
+      "x": 121,
+      "y": 11.5
+    },
+    "chin": {
+      "x": 128,
+      "y": 64.5
+    }
   }
 }

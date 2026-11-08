@@ -14,13 +14,14 @@
   "rawSha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/walk.master-guide.png",
+      "reference": "../templates/walk.master-guide.png",
       "sha256": "13873100c10a48c2a79ba1c7bad4fae1cee60d3f7eafcb9c3a8f6f61ba99d477"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

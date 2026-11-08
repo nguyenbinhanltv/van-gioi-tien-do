@@ -14,13 +14,14 @@
   "rawSha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/meditate.head-guide.png",
+      "reference": "../templates/meditate.head-guide.png",
       "sha256": "2e4d1415207a5e0491dd84028a7966e158d186cfc18b567d046eade218303ef3"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

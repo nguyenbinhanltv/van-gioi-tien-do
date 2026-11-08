@@ -14,13 +14,14 @@
   "rawSha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/emote.head-guide.png",
+      "reference": "../templates/emote.head-guide.png",
       "sha256": "f72fc046a12442934f714e8091a756a497540b637836dac9e3bde6f868dcef11"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }

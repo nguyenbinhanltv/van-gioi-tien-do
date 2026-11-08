@@ -14,13 +14,14 @@
   "rawSha256": "41d91a452413a176ac2305cf7ad0d93d00af923cd7213a42491d1f6251c1f3d8",
   "currentReferenceFileHashes": [
     {
-      "file": "../templates/sword_fly.head-guide.png",
+      "reference": "../templates/sword_fly.head-guide.png",
       "sha256": "e4a584e5b4e55b70bd10204f2ad43b829eafbce7635ec3c113b9dd00430a2ec0"
     },
     {
-      "file": "../../reference/SE.corrected-master.png",
+      "reference": "../../reference/SE.corrected-master.png",
       "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
     }
   ],
-  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately."
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
 }
