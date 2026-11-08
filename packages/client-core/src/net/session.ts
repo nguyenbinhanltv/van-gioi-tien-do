@@ -47,11 +47,15 @@ export interface NetDeps {
   }>;
   WebSocket: new (url: string) => SocketLike;
   now: () => number;
+  /** timers for the reconnect loop; default: the global setTimeout / clearTimeout */
+  setTimeout?: (fn: () => void, ms: number) => unknown;
+  clearTimeout?: (handle: unknown) => void;
   /** random source for request ids (default `Math.random`; request ids are not simulation state) */
   random?: () => number;
 }
 
-export type NetStatus = 'idle' | 'connecting' | 'online' | 'closed';
+/** `reconnecting`: the connection dropped and the client is trying to resume the session (or log in again). */
+export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'closed';
 
 /**
  * Callbacks for systems that follow the wire (server-driven combat, HUD, ...). They run synchronously inside the socket
@@ -65,6 +69,23 @@ export interface NetEvents {
   onAoiLeave?(indices: readonly number[]): void;
   /** `tick` is the simulation tick (x NETWORK.TICK_MS = server time); `entities` are the records in this snapshot only (unchanged ones are omitted, D73). */
   onSnapshot?(tick: number, entities: readonly SnapshotEntity[], self: SelfState | null): void;
+  /** The connection dropped (before any reconnect attempt). */
+  onConnectionLost?(): void;
+  /**
+   * The session is back after a drop. `resumed`: same character and entity id (the server held it); otherwise a fresh login (new
+   * entity, maybe a new id). Runs after the client reset its own state (prediction, interpolation buffers, AOI slots): a layer that
+   * keeps per-entity state (combat, HUD) should reset too, the server re-sends `aoi_enter` for everything in view.
+   */
+  onReconnect?(info: { resumed: boolean }): void;
+}
+
+export interface ReconnectOptions {
+  /** give up after this long without a session (default 60 s) */
+  maxMs?: number;
+  /** pause before attempt n (the last value repeats); default 250, 500, 1000, 2000 ms */
+  backoffMs?: readonly number[];
+  /** treat the connection as dead after this long without any server frame while online (default 3 s; snapshots come every 50 ms) */
+  staleMs?: number;
 }
 
 /**
@@ -99,9 +120,22 @@ export interface NetOptions {
   agi?: number;
   interpDelayMs?: number;
   events?: NetEvents;
+  /** auto-reconnect after a drop (default on); `false` keeps the old behaviour: the session just ends */
+  reconnect?: ReconnectOptions | false;
 }
 
 const WS_OPEN = 1;
+
+interface HelloAck {
+  entityId: number;
+  mapTiles: number;
+  resumed: boolean;
+  resumeToken: string | null;
+  resumeHoldMs: number;
+}
+
+/** Server errors after which retrying is pointless (kicked / wrong protocol / full): the session ends for good. */
+const FATAL_CODES = new Set<number>([ErrorCode.Kicked, ErrorCode.BadVersion, ErrorCode.ServerFull]);
 
 /** Aim point (tile coordinates) -> wire quantization, clamped to 0..POS_MAX_Q; null when absent or not finite. */
 function quantizeAim(aim: { i: number; j: number } | null): { qi: number; qj: number } | null {
@@ -129,11 +163,33 @@ export class NetClient {
   private acc = 0;
   private pingAt = 0;
   private readonly pings = new Map<number, number>();
+  /** single-use secret for the next connection of this session (valid while the server holds the entity after a drop) */
+  private resumeToken: string | null = null;
+  private resumeHoldMs = 0;
+  private userClosed = false;
+  private fatal = false;
+  /** the server answered a resume `hello` with an Unauthorized error frame: the token is unknown / the hold is over */
+  private resumeRejected = false;
+  private lastRxMs = 0;
+  private reconnecting = false;
+  /** number of times the session came back after a drop (resumed or re-logged-in) */
+  reconnects = 0;
 
   constructor(private readonly o: NetOptions) {
     this.remote = new RemoteWorld(o.interpDelayMs);
     this.bag = new BagModel();
     this.events = o.events ?? {};
+  }
+
+  private get rc(): Required<ReconnectOptions> | null {
+    if (this.o.reconnect === false) return null;
+    const r = this.o.reconnect ?? {};
+    return { maxMs: r.maxMs ?? 60_000, backoffMs: r.backoffMs ?? [250, 500, 1000, 2000], staleMs: r.staleMs ?? 3000 };
+  }
+
+  private sleep(ms: number): Promise<void> {
+    const set = this.o.deps.setTimeout ?? ((fn: () => void, t: number) => setTimeout(fn, t));
+    return new Promise((resolve) => set(resolve, ms));
   }
 
   /** Entity id behind a local (per-client) index, or undefined when that slot is empty. */
@@ -185,16 +241,10 @@ export class NetClient {
   /** Register (a taken name is fine: we then just log in), log in, open the socket, resolve after `hello_ack`. */
   async connect(): Promise<void> {
     this.status = 'connecting';
+    this.userClosed = false;
     try {
-      const cred = { username: this.o.username, password: this.o.password };
-      const reg = await this.post('/auth/register', cred);
-      if (reg.status !== 201 && reg.status !== 409)
-        throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
-      const login = await this.post('/auth/login', cred);
-      if (login.status !== 200)
-        throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
-      await this.openSocket(String(login.json.token));
-      this.status = 'online';
+      const ack = await this.login();
+      this.adopt(ack, false);
     } catch (e) {
       this.status = 'closed';
       this.bag.reset();
@@ -203,27 +253,72 @@ export class NetClient {
     }
   }
 
-  private openSocket(token: string): Promise<void> {
+  /** register-or-login over HTTP, then a fresh `hello` with the access token */
+  private async login(): Promise<HelloAck> {
+    const cred = { username: this.o.username, password: this.o.password };
+    const reg = await this.post('/auth/register', cred);
+    if (reg.status !== 201 && reg.status !== 409)
+      throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
+    const login = await this.post('/auth/login', cred);
+    if (login.status !== 200)
+      throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
+    return this.openSocket({ token: String(login.json.token) });
+  }
+
+  /** Take over a (re)connected session: reset everything that belonged to the old connection and go online. */
+  private adopt(ack: HelloAck, isReconnect: boolean): void {
+    this.entityId = ack.entityId;
+    this.mapTiles = ack.mapTiles;
+    this.resumeToken = ack.resumeToken;
+    this.resumeHoldMs = ack.resumeHoldMs;
+    // a new connection starts from the server's state: no stale prediction, interpolation buffers, baselines or acks
+    this.predictor = new Predictor(this.o.makeGrid(ack.mapTiles), this.o.agi);
+    this.remote.clear();
+    this.bag.reset();
+    this.lastSnapshotSeq = 0;
+    this.acc = 0;
+    this.pings.clear();
+    this.lastRxMs = this.o.deps.now();
+    this.fatal = false;
+    this.status = 'online';
+    if (isReconnect) {
+      this.reconnects++;
+      this.lastError = '';
+      this.emit(() => this.events.onReconnect?.({ resumed: ack.resumed }));
+    }
+  }
+
+  /** Open a socket and say `hello` (`{ token }` for a login, `{ resume: { entityId, token } }` for a resume); resolves on `hello_ack`. */
+  private openSocket(hello: Record<string, unknown>): Promise<HelloAck> {
     return new Promise((resolve, reject) => {
       const url = `${this.o.baseUrl.replace(/^http/, 'ws')}/ws`;
       const ws = new this.o.deps.WebSocket(url);
       this.ws = ws;
       ws.binaryType = 'arraybuffer';
       let acked = false;
-      ws.onopen = () => ws.send(JSON.stringify({ type: 'hello', protocolMin: PROTOCOL_VERSION, protocolMax: PROTOCOL_VERSION, token }));
+      ws.onopen = () =>
+        ws.send(
+          JSON.stringify({ type: 'hello', protocolMin: PROTOCOL_VERSION, protocolMax: PROTOCOL_VERSION, ...hello }),
+        );
       ws.onmessage = (ev) => {
+        if (ws !== this.ws) return; // a socket we already replaced
         if (typeof ev.data === 'string') {
-          const m = JSON.parse(ev.data) as { type?: string; entityId?: number; mapTiles?: number };
+          const m = JSON.parse(ev.data) as Partial<HelloAck> & { type?: string };
           if (m.type === 'hello_ack') {
-            this.entityId = m.entityId ?? 0;
-            this.mapTiles = m.mapTiles ?? 0;
-            if (this.mapTiles <= 0) return reject(new Error('server did not announce mapTiles'));
-            this.predictor = new Predictor(this.o.makeGrid(this.mapTiles), this.o.agi);
+            const mapTiles = m.mapTiles ?? 0;
+            if (mapTiles <= 0) return reject(new Error('server did not announce mapTiles'));
             acked = true;
-            resolve();
+            resolve({
+              entityId: m.entityId ?? 0,
+              mapTiles,
+              resumed: m.resumed === true,
+              resumeToken: typeof m.resumeToken === 'string' ? m.resumeToken : null,
+              resumeHoldMs: m.resumeHoldMs ?? 0,
+            });
           }
           return;
         }
+        this.lastRxMs = this.o.deps.now();
         this.onBinary(new Uint8Array(ev.data as ArrayBuffer));
       };
       ws.onerror = () => {
@@ -231,13 +326,65 @@ export class NetClient {
       };
       ws.onclose = (ev) => {
         if (!acked) reject(new Error(`closed before hello_ack: ${ev.code} ${ev.reason}`));
-        if (this.status !== 'closed') {
-          this.status = 'closed';
-          this.bag.reset();
-          if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
-        }
+        if (ws !== this.ws) return; // closed because we replaced it
+        this.onSocketClosed(ev);
       };
     });
+  }
+
+  private onSocketClosed(ev: { code: number; reason: string }): void {
+    if (this.status === 'online') {
+      // an unexpected drop of a live session: try to come back unless we were kicked / closed on purpose
+      if (!this.userClosed && !this.fatal && this.rc) {
+        this.lastError = `connection lost (${ev.code} ${ev.reason})`;
+        this.bag.reset(); // belonged to the lost connection; the server re-sends state to the next one
+        this.emit(() => this.events.onConnectionLost?.());
+        void this.reconnectLoop();
+        return;
+      }
+      this.status = 'closed';
+      this.bag.reset();
+      if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
+    }
+  }
+
+  /**
+   * Come back after a drop: first RESUME the held session (same entity) while the server still holds it, otherwise log in
+   * again with the stored credentials. Backs off between attempts and gives up after `maxMs`.
+   */
+  private async reconnectLoop(): Promise<void> {
+    const rc = this.rc;
+    if (!rc || this.reconnecting) return;
+    this.reconnecting = true;
+    this.status = 'reconnecting';
+    const t0 = this.o.deps.now();
+    let attempt = 0;
+    try {
+      while (!this.userClosed && this.o.deps.now() - t0 < rc.maxMs) {
+        await this.sleep(rc.backoffMs[Math.min(attempt, rc.backoffMs.length - 1)]!);
+        attempt++;
+        if (this.userClosed) break;
+        const canResume = this.resumeToken !== null && this.o.deps.now() - t0 < this.resumeHoldMs;
+        this.resumeRejected = false;
+        try {
+          const ack = canResume
+            ? await this.openSocket({ resume: { entityId: this.entityId, token: this.resumeToken } })
+            : await this.login();
+          this.adopt(ack, true);
+          return;
+        } catch (e) {
+          this.lastError = `reconnect: ${(e as Error).message}`;
+          // only an explicit rejection by the server burns the token; a network failure keeps it for the next attempt
+          if (canResume && this.resumeRejected) this.resumeToken = null;
+          if (this.fatal) break;
+        }
+      }
+      if (!this.userClosed) this.lastError = `${this.lastError || 'connection lost'} (gave up reconnecting)`;
+      this.status = 'closed';
+      this.bag.reset();
+    } finally {
+      this.reconnecting = false;
+    }
   }
 
   private onBinary(bytes: Uint8Array): void {
@@ -295,6 +442,8 @@ export class NetClient {
       }
       case 'error':
         this.lastError = `server: ${msg.text} (${ErrorCode[msg.code] ?? msg.code})`;
+        if (FATAL_CODES.has(msg.code)) this.fatal = true; // kicked / wrong protocol: do not reconnect
+        else if (msg.code === ErrorCode.Unauthorized && this.status === 'reconnecting') this.resumeRejected = true;
         break;
       default:
         break;
@@ -330,8 +479,18 @@ export class NetClient {
     }
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return;
-    if (sent) ws.send(encode({ type: 'input', ack: this.lastSnapshotSeq, inputs: p.recent() }));
     const now = this.o.deps.now();
+    // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
+    const rc = this.rc;
+    if (rc && this.lastRxMs > 0 && now - this.lastRxMs > rc.staleMs) {
+      this.lastError = `no server frames for ${Math.round(now - this.lastRxMs)} ms`;
+      this.emit(() => this.events.onConnectionLost?.());
+      this.ws = null;
+      ws.close();
+      void this.reconnectLoop();
+      return;
+    }
+    if (sent) ws.send(encode({ type: 'input', ack: this.lastSnapshotSeq, inputs: p.recent() }));
     if (now >= this.pingAt) {
       this.pingAt = now + 2000;
       const id = Math.floor(now) >>> 0;
@@ -387,8 +546,9 @@ export class NetClient {
   }
 
   close(): void {
+    this.userClosed = true;
     this.status = 'closed';
     this.bag.reset();
-    this.ws?.close();
+    this.ws?.close(1000, 'bye'); // a normal close: the server removes the character at once instead of holding it for a resume
   }
 }

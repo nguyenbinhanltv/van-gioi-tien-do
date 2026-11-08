@@ -313,7 +313,7 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 
 - Argon2id thay scrypt (docs/25 §2.3): cần thử thư viện native trên Windows/Linux/CI rồi đo thời gian băm thật; hiện **chưa đo** trên máy chủ thật.
 - Refresh token / xoay vòng họ token / thu hồi cả họ, cookie `__Host-`, CSRF, kho `AccountStore` PostgreSQL, `audit_log` cho đăng nhập (docs/25 §3).
-- `hello` / `hello_ack` Protobuf và `resume` sau rớt mạng ≤ 10 s (docs/24 §4); hiện là JSON và mất nhân vật khi rớt kết nối.
+- `hello` / `hello_ack` Protobuf (docs/24 §4): vẫn là JSON. ~~`resume` sau rớt mạng ≤ 10 s~~ **đã xử lý ở D80** (qua `hello` JSON, không phải thông điệp Protobuf `resume`).
 - Chưa có Cell Handover giữa nhiều World Node, lag compensation, kỹ năng có sát thương (`hits[]` rỗng), `CastInput` điểm đất/hướng.
 - Số đo tải mới chạy bot trên cùng máy với server (worker thread, loopback): chưa phản ánh độ trễ mạng thật, TLS, nhiều lõi bận khác; cần chạy lại trên máy chủ mục tiêu và với client Cocos thật.
 
@@ -336,7 +336,7 @@ Preset nén ASTC/WebP, bundle `chibi-<lớp>-<hướng>` sinh trong `prepare:ass
 - **Bản đồ**: server dùng lưới mở, client vẽ tilemap procgen 256x256; nước/cây/đá chỉ chặn ở client offline (không chặn online). Cần nạp lưới va chạm procgen (cờ đi được, tầng) vào `WorldNode`/client chung nguồn trước khi coi online là chơi được.
 - **Lớp nhân vật trên dây**: `aoi_enter` chưa có lớp, nên lớp người khác suy ra từ `entityId` (D72); cần giao thức v2 (kèm tên hiển thị, trang bị cho paperdoll).
 - **Nội suy**: tuyến tính, không ngoại suy, không Hermite (docs/08 §5); trễ đã thích ứng theo từng thực thể (D73: max(150 ms, 1,25 × khoảng cách snapshot), tối đa 250 ms) nhưng chưa tính jitter mạng riêng; đồng hồ server (8 gói ping/pong, trung vị) chưa có nên dùng giờ nhận gói.
-- **Chưa làm phía client**: `skill_cast`/`skill_result`, bay/né/khinh công (cờ có trong input nhưng chưa gán phím), resume sau rớt mạng, hiển thị tên/HP người khác, quái/NPC (chỉ vẽ `kind` 0).
+- **Chưa làm phía client**: `skill_cast`/`skill_result`, bay/né/khinh công (cờ có trong input nhưng chưa gán phím), hiển thị tên/HP người khác, quái/NPC (chỉ vẽ `kind` 0).
 - **Chưa chạy được trên CI**: build Cocos và chơi 2 tab không có trong CI; phần tự động là test đơn vị `packages/client-core/tests/net.test.ts` và test đầu-cuối `apps/server/tests/netclient.test.ts` (2 NetClient + server thật). Chưa kiểm bằng trình duyệt thật trên di động.
 - **Tiêu chí P2 còn lại (đo 2026-11-08, bot trên cùng máy, loopback, 100 bot, 30 s)**:
   - Chặn gian lận: 3 bot speedhack bị ngắt sau 0,3 s, 3 bot teleport bị ngắt sau 3,8 s (tốc độ quan sát tối đa được kẹp ở tốc độ trung thực 4,55 ô/s): **đạt**.
@@ -422,3 +422,13 @@ Còn mở / lưu ý:
 5. **Bảng túi chưa kiểm trên điện thoại thật / màn hình nhỏ**; chạm dùng sự kiện pointer cùng đường với click-to-move (đã chặn lan truyền khi bấm trong bảng).
 6. **Hàng chờ có trần số lượng**: mỗi mục hàng chờ tối đa 65.535 (giới hạn u16 của dây); phần vượt của một roll bị tính mất (`lostItems`), không bao giờ làm `inv_state` lỗi mã hóa; mỗi chủ gửi lỗi chỉ tính vào `metrics.inventorySendErrors` và không dừng tick. Cần luật cho hàng chờ đầy lâu (hết hạn / thư hệ thống).
 7. **Phiên bản giao thức v4** dùng chung với việc nối lại của worker 38: nếu 38 merge trước, bản này chỉ dựa vào mức tăng đó.
+
+## D80 — resume: còn mở
+
+- **Refresh token** (docs/25 §3: xoay vòng họ token, thu hồi, cookie `__Host-`, kho bền) chưa có; token resume dùng một lần chỉ phủ các lần rớt ≤ 10 s. Quá hạn thì client đăng nhập lại bằng mật khẩu đã lưu, nên một client không lưu mật khẩu (đăng nhập tay) sẽ rơi về màn hình đăng nhập.
+- Thông điệp Protobuf `resume{sessionId, lastSnapshotSeq}` của docs/24 §5 (id 12) không dùng: resume nằm trong `hello` JSON. Cũng chưa gửi lại phần snapshot "thiếu" theo `lastSnapshotSeq`: nối lại luôn nhận trạng thái đầy đủ mới.
+- Giữ nhân vật chỉ trong **một** World Node (chưa có nhiều node / chuyển giao ô); nhân vật đang giữ vẫn bị quái đánh và có thể chết (hồi sinh theo luật combat); chưa có "đang ngắt kết nối" hiển thị cho người khác.
+- Chỉ phát hiện nửa mở **phía client** (3 s không có khung): server chưa ngắt khách im lặng bằng ping WebSocket, nên một socket chết giữ thực thể "đang nối" cho tới khi OS báo đóng hoặc client resume và chiếm phiên.
+- Thông điệp trong tay người chơi khi rớt (input chưa ack, cast đang bay) bị bỏ: client dựng lại từ trạng thái server sau khi nối. Client Cocos mới đứng yên khi `reconnecting`; chưa có giao diện báo "mất kết nối".
+- `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
+- Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
