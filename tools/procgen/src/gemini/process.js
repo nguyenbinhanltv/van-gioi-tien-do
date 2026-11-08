@@ -182,6 +182,9 @@ function keyMagenta(img, bgOverride) {
   // (a bright warm glow over the background) may have any B
   const famR = 0.62 * bg[0],
     famB = 0.6 * bg[2];
+  // ...and it must actually LOOK magenta: red and blue clearly above green, with the margin scaled to this background. Neutral
+  // greys, pale stone, mist or white touching the background never qualify (their min(R, B) - G is about 0).
+  const famMagenta = 0.15 * (Math.min(bg[0], bg[2]) - bg[1]);
   const N = W * H;
   // 0 = solid, 1 = strict bg, 2 = glow region (family pixels connected to bg), 3 = band (3 px around the region)
   const cls = new Uint8Array(N);
@@ -208,7 +211,12 @@ function keyMagenta(img, bgOverride) {
     nbrs(p, (q) => {
       if (cls[q]) return;
       const i = q * 4;
-      if (d[i] >= famR && d[i + 2] >= famB && (Math.abs(d[i] - d[i + 2]) <= 45 || d[i] >= 235)) {
+      if (
+        d[i] >= famR &&
+        d[i + 2] >= famB &&
+        Math.min(d[i], d[i + 2]) - d[i + 1] >= famMagenta &&
+        (Math.abs(d[i] - d[i + 2]) <= 45 || d[i] >= 235)
+      ) {
         cls[q] = 2;
         queue[qt++] = q;
       }
@@ -240,7 +248,9 @@ function keyMagenta(img, bgOverride) {
       g = d[i + 1],
       b = d[i + 2],
       a = 1;
-    if (c === 2 || c === 3) {
+    // band pixels (solid, near the background) are only touched when they carry magenta: a grey / pale edge is not a blend
+    const magenta = Math.min(r, b) - g >= famMagenta;
+    if (c === 2 || (c === 3 && magenta)) {
       // minimum alpha that explains the pixel as foreground over the background colour (all channels in 0..255)
       a = Math.min(1, Math.max(0, (g - bg[1]) / (255 - bg[1]), 1 - r / bg[0], 1 - b / bg[2]));
       if (c === 3 && a > 0.85)
