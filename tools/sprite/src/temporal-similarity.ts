@@ -22,6 +22,7 @@ export function measureTemporalSimilarity(
   },
 ) {
   const breadth = options.firstHead?.kind === 'rear-breadth-only' || options.secondHead?.kind === 'rear-breadth-only';
+  const breadthMaster = options.masterHead?.kind === 'rear-breadth-only';
   const span =
     options.masterHead?.kind === 'rear-span-only' ||
     options.firstHead?.kind === 'rear-span-only' ||
@@ -45,7 +46,13 @@ export function measureTemporalSimilarity(
         first,
         options.firstHead,
         options.masterHeight,
-        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
+        span
+          ? 'rear-span-window'
+          : breadthMaster
+            ? 'rear-breadth-master-window'
+            : breadth
+              ? 'rear-breadth-window'
+              : undefined,
       )
     : undefined;
   const b = options.secondHead
@@ -53,7 +60,13 @@ export function measureTemporalSimilarity(
         second,
         options.secondHead,
         options.masterHeight,
-        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
+        span
+          ? 'rear-span-window'
+          : breadthMaster
+            ? 'rear-breadth-master-window'
+            : breadth
+              ? 'rear-breadth-window'
+              : undefined,
       )
     : undefined;
   if (a && b && (a.headKind !== b.headKind || (!breadth && !span && a.evidenceKind !== b.evidenceKind)))

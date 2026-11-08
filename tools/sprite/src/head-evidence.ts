@@ -81,16 +81,30 @@ export type HeadLandmarks =
   | RearShoulderLandmarks
   | RearOrnamentLandmarks
   | RearSingleShoulderLandmarks
-  | RearSpanOnlyLandmarks;
-/** D56 is frame-only: the locked master retains its original, fuller landmark definition. */
+  | RearSpanOnlyLandmarks
+  | RearBreadthMasterLandmarks;
+/** D56-master: no visible nape or acromion on the approved NE/N master. */
+export interface RearBreadthMasterLandmarks {
+  readonly kind: 'rear-breadth-only';
+  readonly crown: HeadPoint;
+  readonly breadth: SkullBreadth;
+  readonly occlusions: {
+    readonly nape: string;
+    readonly leftShoulder: string;
+    readonly rightShoulder: string;
+  };
+}
+/** D56 frame evidence; a D53 master still requires a declared dynamic lean. */
 export interface RearBreadthOnlyLandmarks {
   readonly kind: 'rear-breadth-only';
   readonly crown: HeadPoint;
   readonly breadth: SkullBreadth;
-  /** Concrete object hiding the shoulder corner in this dynamic lean. */
-  readonly occluder: string;
+  /** Mandatory for D53-based dynamic leans; optional with an occluded D56-master reference. */
+  readonly occluder?: string;
 }
-export type HeadEvidence = (HeadLandmarks | RearBreadthOnlyLandmarks) & { readonly note: string };
+export type HeadEvidence = (Exclude<HeadLandmarks, RearBreadthMasterLandmarks> | RearBreadthOnlyLandmarks) & {
+  readonly note: string;
+};
 export interface HeadMeasurement {
   readonly kind?: HeadEvidenceKind;
   readonly direction?: Direction;
@@ -114,6 +128,7 @@ export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
   return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
 }
 export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
+  if (head.kind === 'rear-breadth-only') throw new Error('breadth-only evidence has no vertical endpoint');
   if (head.kind === 'rear-skull-base' || head.kind === 'rear-base-ornament' || head.kind === 'rear-span-only')
     return head.skullBase;
   if (head.kind === 'rear-crown-shoulder-single') return head.shoulderTop;
@@ -126,6 +141,31 @@ export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
 }
 const validPoint = (p: HeadPoint | undefined, width: number, height: number) =>
   p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.y >= 0 && p.x <= width && p.y <= height;
+const concreteOccluder = (value: unknown): value is string =>
+  typeof value === 'string' && !!value.trim() && !/^(hidden|unknown|occluded|none|n\/a)$/i.test(value.trim());
+const opaque = (raster: Image, point: HeadPoint) =>
+  validPoint(point, raster.width, raster.height) &&
+  Math.round(point.x) < raster.width &&
+  Math.round(point.y) < raster.height &&
+  raster.data[(Math.round(point.y) * raster.width + Math.round(point.x)) * 4 + 3]! >= 128;
+
+/** Pixel visibility is verified here; solid-cap colour/contour semantics require source review. */
+export function validRearBreadthMaster(head: RearBreadthMasterLandmarks, image: Image): boolean {
+  const occlusions = head.occlusions;
+  return !!(
+    occlusions &&
+    concreteOccluder(occlusions.nape) &&
+    concreteOccluder(occlusions.leftShoulder) &&
+    concreteOccluder(occlusions.rightShoulder) &&
+    !('skullBase' in head || 'chin' in head || 'shoulderTop' in head || 'ornamentAnchor' in head) &&
+    headLandmarkBreadth(head, image.width, image.height) !== null &&
+    head.breadth.left.x < head.breadth.right.x &&
+    head.breadth.left.y === head.breadth.right.y &&
+    opaque(image, head.crown) &&
+    opaque(image, head.breadth.left) &&
+    opaque(image, head.breadth.right)
+  );
+}
 export function headLandmarkBreadth(
   head: HeadLandmarks | RearBreadthOnlyLandmarks,
   width: number,
@@ -248,32 +288,35 @@ export function checkHeadEvidence(
   if (evidence.kind === 'rear-breadth-only') {
     if (!['NE', 'N'].includes(clip.direction ?? 'E'))
       return failure('head_evidence_direction', 'breadth-only evidence requires a same-direction NE/N master');
-    if (!['dash', 'run', 'attack', 'attack_2', 'attack_3'].includes(clip.name) || reason !== 'posture')
+    const master = options.masterHead;
+    const breadthMaster = master?.kind === 'rear-breadth-only';
+    if (
+      !breadthMaster &&
+      (!['dash', 'run', 'attack', 'attack_2', 'attack_3'].includes(clip.name) || reason !== 'posture')
+    )
       return failure(
         'head_evidence_scope',
         'breadth-only evidence requires a dynamic dash/run/attack lean declared posture',
       );
-    const master = options.masterHead;
     const breadth = image ? headLandmarkBreadth(evidence, image.width, image.height) : null;
     const masterBreadth = master ? headLandmarkBreadth(master, options.master.width, options.master.height) : null;
-    const opaque = (raster: Image, point: HeadPoint) =>
-      validPoint(point, raster.width, raster.height) &&
-      Math.round(point.x) < raster.width &&
-      Math.round(point.y) < raster.height &&
-      raster.data[(Math.round(point.y) * raster.width + Math.round(point.x)) * 4 + 3]! >= 128;
     if (
       !image ||
       !master ||
       masterBreadth === null ||
       breadth === null ||
-      headLandmarkSize(master, options.master.width, options.master.height) === null ||
+      (breadthMaster &&
+        (evidence.breadth.left.x >= evidence.breadth.right.x ||
+          evidence.breadth.left.y !== evidence.breadth.right.y)) ||
+      (breadthMaster
+        ? !validRearBreadthMaster(master, options.master)
+        : master.kind !== 'rear-crown-shoulder-single' ||
+          headLandmarkSize(master, options.master.width, options.master.height) === null) ||
       'shoulderTop' in evidence ||
       'chin' in evidence ||
       'skullBase' in evidence ||
       'ornamentAnchor' in evidence ||
-      typeof evidence.occluder !== 'string' ||
-      !evidence.occluder.trim() ||
-      /^(hidden|unknown|occluded|none|n\/a)$/i.test(evidence.occluder.trim()) ||
+      ((!breadthMaster || evidence.occluder !== undefined) && !concreteOccluder(evidence.occluder)) ||
       typeof evidence.note !== 'string' ||
       !evidence.note.trim() ||
       !opaque(image, evidence.crown) ||
@@ -285,6 +328,11 @@ export function checkHeadEvidence(
       return failure(
         'head_evidence_invalid',
         'breadth-only evidence needs visible alpha>=128 crown/skull endpoints, locked master breadth, concrete shoulder occluder and reviewed hair-only note; no hidden anchor',
+      );
+    if (governed && !inBand && !reason)
+      return failure(
+        'head_exception_missing',
+        'out-of-band bbox needs an explicit posture or secondary-overhang reason',
       );
     const low = masterBreadth * (1 - tolerance),
       high = masterBreadth * (1 + tolerance);
@@ -305,11 +353,11 @@ export function checkHeadEvidence(
         metric: 'skull_breadth_px',
         value: breadth,
         limit: high,
-        message: `posture: rear-breadth-only skull breadth ${breadth.toFixed(2)} / master ${masterBreadth.toFixed(2)} px; crown visible; shoulder hidden by ${evidence.occluder}; no vertical span; ${evidence.note}`,
+        message: `${reason ?? 'in-band'}: rear-breadth-only skull breadth ${breadth.toFixed(2)} / master ${masterBreadth.toFixed(2)} px; crown visible; ${evidence.occluder ? `shoulder hidden by ${evidence.occluder}` : 'occluded D56-master breadth reference'}; no vertical span; ${evidence.note}`,
         headEvidence: {
           kind: 'rear-breadth-only',
           direction: clip.direction,
-          reason,
+          reason: reason ?? 'in-band',
           master,
           frame: evidence,
           masterBreadthPx: masterBreadth,

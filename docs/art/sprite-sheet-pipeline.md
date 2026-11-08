@@ -581,6 +581,25 @@ Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourc
 
 Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.
 
+## Bổ sung D56-master: nape và cả hai acromion bị che trên master
+
+Chỉ NE/N có cả nape và hai acromion thật sự bị che mới khai master `rear-breadth-only`:
+`crown`, `breadth.left/right` và ba chuỗi vật che cụ thể `occlusions.nape/leftShoulder/rightShoulder`.
+Thiếu/chuỗi rỗng/lý do chung chung hidden hoặc unknown là lỗi cứng khi load project. Ba điểm phải alpha≥128;
+hai đầu breadth cùng hàng, theo thứ tự trái→phải. Không sửa ảnh master đã duyệt hoặc chiếu endpoint.
+
+Breadth lấy hàng rộng nhất của **khối main-cap đặc**, endpoint trên cùng dải tóc liên tục; loại tóc rời, nét mảnh
+dưới 2 px, ribbon, pin và tassel. Dùng cùng định nghĩa trên master và ô. Gate kiểm tọa độ/alpha; overlay nguồn và
+review xác nhận điểm thuộc khối tóc thật và các vật che thật, không coi alpha là chứng minh ngữ nghĩa.
+
+Ô dùng `rear-breadth-only` với `note` đã xem; `occluder` của ô không bắt buộc riêng với master kind này,
+nhưng nếu khai phải cụ thể. Nền tham chiếu breadth xuất phát từ vật che trên master, kể cả khi ô lộ vai.
+So breadth ±3% master cùng hướng,
+crown nhìn thấy, không báo span dọc. Master kind này cho phép cả idle/walk và clip khác, không chỉ lean động;
+ô upright ngoài bbox band vẫn cần posture/secondary-overhang. Master D53 giữ nguyên phạm vi D56 cũ.
+Cửa sổ D55/temporal của cả master và ô: từ crown, rộng 1,08×breadth và cao đúng 1,0×breadth, không nới chiều dọc.
+Không tạo evidence từ cửa sổ, không miễn Lab D55, D41/D54, foot/canvas hoặc scale cố định.
+
 ## Bổ sung D59: breadth sọ bị che thật
 
 Chỉ NE/N khi một đầu contour breadth tối đa không nhìn thấy trên master đã duyệt **và** ô mới dùng

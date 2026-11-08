@@ -12,6 +12,7 @@ import {
   toStraight,
   labPaletteDistance,
   type HeadLandmarks,
+  type FrontHeadLandmarks,
   type QaClip,
 } from '../src/index.js';
 
@@ -26,7 +27,7 @@ function figure(x: number, lean = false) {
   else rect(image, x - 12, 127, x + 12, 232, [60, 60, 70, 255]);
   return image;
 }
-const head = (x: number): HeadLandmarks => ({ crown: { x, y: 30 }, chin: { x, y: 70 } });
+const head = (x: number): FrontHeadLandmarks => ({ crown: { x, y: 30 }, chin: { x, y: 70 } });
 
 describe('D55 annotated similarity windows', () => {
   it('fails unmeasured empty samples under the active Lab gate', () => {

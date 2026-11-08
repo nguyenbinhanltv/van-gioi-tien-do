@@ -16,6 +16,9 @@ import {
   type QaClip,
   type RearSingleShoulderLandmarks,
   type Project,
+  type RearBreadthMasterLandmarks,
+  similarityRegionsForPair,
+  measureTemporalSimilarity,
 } from '../src/index.js';
 
 function fixture() {
@@ -60,6 +63,172 @@ function fixture() {
   };
   return { source, clip, evidence, frame, options: { master, masterHeight: 213, guides, masterHead } };
 }
+
+function breadthMasterFixture() {
+  const f = fixture();
+  const masterHead: RearBreadthMasterLandmarks = {
+    kind: 'rear-breadth-only',
+    crown: f.options.masterHead.crown,
+    breadth: f.options.masterHead.breadth,
+    occlusions: {
+      nape: 'long hair and ribbon hide nape',
+      leftShoulder: 'fan and hair hide left acromion <reviewed>',
+      rightShoulder: 'hair loop hides right acromion',
+    },
+  };
+  return { ...f, options: { ...f.options, masterHead } };
+}
+
+describe('D56-master occluded nape and both shoulders', () => {
+  it('accepts ordinary rear clips against a visible breadth master, without inventing a span', () => {
+    const { clip, options, evidence } = breadthMasterFixture();
+    for (const name of ['idle', 'walk', 'emote', 'dash', 'run', 'attack']) {
+      const finding = checkHeights({ ...clip, name }, options)[0]!;
+      expect(finding).toMatchObject({
+        severity: 'info',
+        headEvidence: {
+          master: { kind: 'rear-breadth-only' },
+          breadthRatio: 1,
+        },
+      });
+      expect(finding.headEvidence).not.toHaveProperty('sizePx');
+    }
+    const inBand = { ...options, masterHeight: clip.frames[0]!.metrics.height };
+    expect(checkHeights({ ...clip, name: 'idle', exceptions: undefined }, inBand)[0]!.severity).toBe('info');
+    expect(
+      checkHeights({ ...clip, headEvidence: { 0: { ...evidence, occluder: undefined } } }, options)[0]!.severity,
+    ).toBe('info');
+    expect(checkHeights({ ...clip, exceptions: undefined }, options)[0]!.metric).toBe('head_exception_missing');
+  });
+
+  it('keeps the breadth band and fails alpha<128 on master crown or endpoints', () => {
+    const { clip, options, frame, evidence } = breadthMasterFixture();
+    const right = { x: evidence.breadth!.left.x + 54, y: evidence.breadth!.right.y };
+    fillRect(frame.image, right.x, right.y, 1, 1, [80, 35, 65, 255]);
+    expect(
+      checkHeights(
+        { ...clip, headEvidence: { 0: { ...evidence, breadth: { left: evidence.breadth!.left, right } } } },
+        options,
+      )[0],
+    ).toMatchObject({ severity: 'fail', metric: 'skull_breadth_px' });
+    for (const p of [options.masterHead.crown, options.masterHead.breadth.left, options.masterHead.breadth.right]) {
+      const index = (p.y * 256 + p.x) * 4 + 3;
+      options.master.data[index] = 127;
+      expect(checkHeights(clip, options)[0]).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+      options.master.data[index] = 255;
+    }
+  });
+
+  it('uses the same crown-plus-breadth D55 window on master and frame', () => {
+    const { clip, options, frame, evidence } = breadthMasterFixture();
+    const crops = similarityRegionsForPair(
+      options.master,
+      frame.image,
+      options.masterHeight,
+      options.masterHead,
+      evidence,
+    );
+    for (const side of [crops.master, crops.frame]) {
+      expect(side.cropRule).toBe('rear-breadth-window');
+      expect(side.head.right - side.head.left).toBeCloseTo(52 * 1.08);
+      expect(side.head.bottom - side.head.top).toBeCloseTo(52);
+    }
+    expect(crops.master.head.top).toBeCloseTo(options.masterHead.crown.y);
+    const temporal = measureTemporalSimilarity(frame.image, frame.image, {
+      masterHeight: options.masterHeight,
+      masterHead: options.masterHead,
+      firstHead: evidence,
+      secondHead: evidence,
+    });
+    expect(temporal.crops.master.head).toEqual(crops.frame.head);
+    expect(temporal.crops.frame.head).toEqual(crops.frame.head);
+    fillRect(frame.image, 0, 0, 256, 256, [20, 230, 10, 255]);
+    expect(checkSimilarity(clip, options).some((f) => f.severity === 'fail')).toBe(true);
+  });
+
+  it('validates all three master occluders at project load, for NE/N only', () => {
+    const { source, clip, options } = breadthMasterFixture();
+    const dir = mkdtempSync(join(tmpdir(), 'vgtd-breadth-master-'));
+    writeFileSync(join(dir, 'master.png'), encodePng(options.master));
+    writeFileSync(join(dir, 'dash.png'), encodePng(source));
+    const project: Project = {
+      character: 'test',
+      direction: 'N',
+      stem: 'test',
+      master: 'master.png',
+      masterHead: options.masterHead,
+      scale: 1,
+      slice: { inset: 0 },
+      palette: { lock: false },
+      clips: [
+        {
+          name: 'dash',
+          sheet: 'dash.png',
+          cols: 1,
+          frames: 1,
+          durationSec: 1,
+          loop: false,
+          kind: 'upright',
+          heightPolicy: 'head-size-v1',
+          exceptions: clip.exceptions,
+          headEvidence: clip.headEvidence,
+        },
+      ],
+    };
+    for (const direction of ['N', 'NE'] as const) {
+      const result = runProject({ ...project, direction }, dir);
+      expect(result.contract.master.head).toEqual(options.masterHead);
+      expect(result.contract.qa.findings.filter((f) => f.gate === 'height' && f.severity === 'fail')).toEqual([]);
+      const html = reviewHtml([
+        {
+          format: 'vgtd-sprite-batch',
+          version: 1,
+          character: 'test',
+          ok: true,
+          dirs: [
+            {
+              dir: direction,
+              stem: 'test',
+              ok: true,
+              atlas: { pages: 1, width: 256, height: 256, regions: 1 },
+              backlogEntries: 0,
+              resolvedEntries: 0,
+              folder: '.',
+              clips: [
+                {
+                  name: 'dash',
+                  frames: 1,
+                  durationSec: 1,
+                  kind: 'upright',
+                  status: 'ok',
+                  counts: { hard: 0, soft: 0, regression: 0, accepted: 0, info: 1 },
+                  headEvidence: [{ cell: 0, measurement: checkHeights(clip, options)[0]!.headEvidence! }],
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+      expect(html).toContain('master occluders: nape long hair');
+      expect(html).toContain('&lt;reviewed&gt;');
+      expect(html).not.toContain('undefined');
+    }
+    expect(() => runProject({ ...project, direction: 'S' }, dir)).toThrow(/NE\/N/);
+    for (const key of ['nape', 'leftShoulder', 'rightShoulder'] as const) {
+      for (const value of [undefined, '', 'hidden', 'unknown']) {
+        const masterHead = {
+          ...options.masterHead,
+          occlusions: { ...options.masterHead.occlusions, [key]: value },
+        } as RearBreadthMasterLandmarks;
+        expect(() => runProject({ ...project, masterHead }, dir)).toThrow(/invalid master/);
+      }
+    }
+    const { occlusions: _occlusions, ...missing } = options.masterHead;
+    expect(() => runProject({ ...project, masterHead: missing as RearBreadthMasterLandmarks }, dir)).toThrow(
+      /invalid master/,
+    );
+  });
+});
 
 describe('D56 visible rear breadth with an occluded shoulder', () => {
   it('compares breadth with the unchanged full master, with no fabricated span', () => {
