@@ -30,6 +30,16 @@ interface Sidecar {
   icons: Record<string, { f2: AtlasFrame; f1: AtlasFrame }>;
   /** skill icons by skill id (packages/shared skills.json) */
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
+  /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
+  mobs?: Record<string, MobSprite>;
+}
+export interface MobSprite {
+  id: number;
+  w: number;
+  h: number;
+  pivot: { x: number; y: number };
+  f2: AtlasFrame;
+  f1: AtlasFrame;
 }
 
 function loadAsset<T extends JsonAsset | ImageAsset>(path: string, type: new () => T): Promise<T | null> {
@@ -58,6 +68,7 @@ export class PropArt {
   private readonly frames = new Map<string, SpriteFrame>();
   private readonly iconFrames = new Map<string, SpriteFrame>();
   private readonly skillFrames = new Map<string, SpriteFrame>();
+  private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
 
   private constructor(
     private readonly meta: Sidecar,
@@ -92,6 +103,11 @@ export class PropArt {
       for (const [key, ic] of Object.entries(meta.icons)) {
         art.iconFrames.set(key, makeFrame(await texture(pageOf(ic.f2)), ic.f2.x, ic.f2.y, ic.f2.w, ic.f2.h));
       }
+      // mob standees: same page (same Texture2D) as the props
+      for (const m of Object.values(meta.mobs ?? {})) {
+        const f = low ? m.f1 : m.f2;
+        art.mobById.set(m.id, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
+      }
       // skill icons (hotbar): the @2x page (1024 px, 4 MB) is drawn at <= 64 design px; `tier low` takes the @1x page
       for (const [id, sk] of Object.entries(meta.skills ?? {})) {
         const f = low ? sk.f1 : sk.f2;
@@ -111,6 +127,11 @@ export class PropArt {
     for (const [n, p] of Object.entries(this.meta.props))
       out[n] = { block: p.block, biomes: p.biomes, weight: p.weight, spacing: p.spacing };
     return out;
+  }
+
+  /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
+  mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
+    return this.mobById.get(id);
   }
 
   /** Skill icon by skill id (e.g. `kiem_khi_tram`), or null when missing. Square; draw it at 64 design px. */

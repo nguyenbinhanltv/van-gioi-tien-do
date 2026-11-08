@@ -4,7 +4,8 @@
  * Owner-provided Gemini exports (assets-src/gemini/{props,items}) -> game sprites + atlases.
  *   node scripts/gemini_assets.js [--src <dir>] [--out <dir>] [--force] [--allow-missing]
  *
- * Output (default out/gemini, git-ignored, regenerated; skipped when the stamp of sources + tool is unchanged):
+ * Output (default out/gemini, git-ignored, regenerated; skipped when the stamp of sources + tool is unchanged;
+ * the INTERIM mob standees are packed into the same atlas pages as the props):
  *   props_2x/ props_1x/ icons_2x/ icons_1x/   processed single PNGs (magenta keyed, sparkle removed, trimmed)
  *   atlas/atl_prop_2x_0.png ... + .json       packed with pipeline/pack_atlas.js (padding + extrude), fed to the budget gate
  *   gemini.json                               sidecar: per prop pivot / blocked tiles / biomes / frames; per icon frames
@@ -27,6 +28,7 @@ const opt = (n, d) => { const i = args.indexOf('--' + n); return i >= 0 ? args[i
 const flag = (n) => args.includes('--' + n);
 const root = path.resolve(__dirname, '..');
 const SRC = path.resolve(opt('src', path.join(root, '../../assets-src/gemini')));
+const CONCEPTS = path.resolve(opt('concepts', path.join(root, '../../assets-src/concepts')));
 const OUT = path.resolve(opt('out', path.join(root, 'out/gemini')));
 
 const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
@@ -34,8 +36,9 @@ const files = [
   ...Object.keys(manifest.props).map((n) => ['props', n]),
   ...manifest.icons.map((n) => ['items', n]),
   ...GRID_PATHS.map((n) => ['skills', n]),
+  ...Object.keys(manifest.mobs).map((n) => ['mobs', n]),
 ];
-const srcPath = (dir, name) => path.join(SRC, dir, `${name}.png`);
+const srcPath = (dir, name) => (dir === 'mobs' ? path.join(CONCEPTS, 'mobs', `${name}.png`) : path.join(SRC, dir, `${name}.png`));
 
 function loadSources() {
   const missing = [];
@@ -84,10 +87,10 @@ function main() {
     return 0;
   }
   fs.rmSync(OUT, { recursive: true, force: true });
-  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
+  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x', 'mobs_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
 
   const problems = [];
-  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, skills: {}, atlases: {} };
+  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, skills: {}, mobs: {}, atlases: {} };
   const verify = (key, srcBuf, sparkle) => {
     if (sparkle.components < 1) problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
     else {
@@ -132,11 +135,24 @@ function main() {
     });
     console.log(`  skills/${cls}: 8 icons, sparkle ${r.sparkle.pixels}px`);
   }
+  // INTERIM mob standees (concept art, faces left): one @1x tier
+  for (const [key, def] of Object.entries(manifest.mobs)) {
+    const buf = bufs.get(`mobs/${key}`);
+    const r = G.processMob(decodePNG(buf), def.box);
+    verify(`mobs/${key}`, buf, r.sparkle);
+    r.x1.save(path.join(OUT, 'mobs_1x', `${key}.png`));
+    sidecar.mobs[key] = { id: def.id, w: r.x1.width, h: r.x1.height, pivot: r.pivot };
+    console.log(`  mobs/${key}: ${r.x1.width}x${r.x1.height} px (id ${def.id}), sparkle ${r.sparkle.pixels}px`);
+  }
   if (problems.length) {
     console.error(`✖ verification failed:\n  ${problems.join('\n  ')}`);
     return 4;
   }
 
+  // INTERIM mob standees share the PROP atlas pages (one texture for props + mobs: the Y-sort interleaves them, separate
+  // pages would break the batch at every switch). Mobs are @1x pixels in both pages (drawn 1:1).
+  for (const key of Object.keys(manifest.mobs))
+    for (const d of ['props_2x', 'props_1x']) fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
   for (const [dir, atlasName, kind] of [
     ['props_2x', 'atl_prop_2x', 'props'], ['props_1x', 'atl_prop_1x', 'props'],
     ['icons_2x', 'atl_gicon_2x', 'icons'], ['icons_1x', 'atl_gicon_1x', 'icons'],
@@ -146,7 +162,7 @@ function main() {
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
     sidecar.atlases[atlasName] = a.pages.map((p) => ({ file: p.file, width: p.width, height: p.height }));
     for (const [n, f] of Object.entries(a.frames)) {
-      const target = sidecar[kind][n];
+      const target = sidecar[kind][n] || sidecar.mobs[n];
       target[scale] = { file: a.pages[f.page].file, x: f.x, y: f.y, w: f.w, h: f.h };
     }
   }

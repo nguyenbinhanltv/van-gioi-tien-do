@@ -476,3 +476,9 @@ Còn mở / lưu ý:
 - Chưa có số đo trên máy đích: kiểm bằng test mô phỏng (đồng hồ thật giả). Cần chạy lại bag-smoke trên máy đang bị CPU bão hòa để xác nhận không còn bị kick.
 - Kích thước tín dụng không hiện ra metric / log: nên thêm `lagCreditMs` lớn nhất vào số đo World Node (và cảnh báo vận hành khi một khách có > 1 s tín dụng: máy chủ đang quá tải).
 - Khách nối lại (resume) giữ tín dụng cũ của phiên (mốc lúc vào không đổi) và luật trượt ngân sách lúc resume (D80) chạy trên **đồng hồ của guard** (giờ sim + tín dụng), nên không để lại ngân sách chưa kiếm; phiên đăng nhập mới bắt đầu từ 0. Khách vào giữa lúc máy chủ đang đơ cũng không nhận tín dụng cho khoảng đơ trước khi nó vào (mốc = drift thật lúc vào).
+
+## Mob hiển thị tạm thời (standee, 2026-11-09): còn mở
+
+- 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
+- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
+- Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
