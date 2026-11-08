@@ -38,6 +38,9 @@ describe('opt-in resampling', () => {
         for (let k = 0; k < 3; k++) expect(edge.data[p + k]).toBeLessThanOrEqual(edge.data[p + 3]!);
     }
     expect(() => resampleAffine(src, 1, 1, { scaleX: 0, scaleY: 1, dx: 0, dy: 0 }, 'area')).toThrow();
+    expect(() => resampleAffine(src, 1, 1, { scaleX: 1, scaleY: 1, dx: 0, dy: 0 }, 'bilinear' as 'area')).toThrow(
+      /requires/,
+    );
   });
 
   it('defers DPI pixels and combines fractional grouped-cell DPI with alignment exactly once', () => {

@@ -48,7 +48,7 @@ export function resampleAffine(
   transform: { readonly scaleX: number; readonly scaleY: number; readonly dx: number; readonly dy: number },
   method: Exclude<ResampleMethod, 'bilinear'>,
 ): Image {
-  validateResample(method);
+  if (!['lanczos3', 'area'].includes(method)) throw new Error('resampleAffine requires lanczos3 or area');
   const { scaleX, scaleY, dx, dy } = transform;
   if (
     ![scaleX, scaleY].every((v) => Number.isFinite(v) && v > 0) ||
