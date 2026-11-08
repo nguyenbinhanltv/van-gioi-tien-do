@@ -30,7 +30,7 @@ For each changed value or rule, search by value, by name and by Vietnamese/Engli
 - `Grep` the old value (and unit variants: `64 × 32`, `64x32`, `20 Hz`, `25 MB`) across `docs/`, `packages/`, `apps/`,
   `tools/`, `.claude/skills`, `CLAUDE.md`/`AGENTS.md`. Stale copies of the OLD value are the main finding.
 - `Grep` the concept name and the constant name from `@vgtd/shared` to find consumers that use it by name.
-- Docs map and who may depend on what: `docs/00` section 2, `docs/README.md`; technical docs 20-29 depend on design docs
+- Docs map and who may depend on what: `docs/README.md`; technical docs 20-29 depend on design docs
   10-19 and on `docs/07`/`docs/08`.
 - Open PRs touching the same area: `gh pr list --state open --json number,title,headRefName,files`; note conflicts.
 - Tests and worked examples: `packages/shared/test` and the examples in `docs/07`.

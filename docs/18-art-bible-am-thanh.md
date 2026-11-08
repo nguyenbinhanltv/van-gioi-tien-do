@@ -82,15 +82,15 @@ Phe ([14](14-pvp-chien-tranh.md) §3): **Chính** ấm–vàng–trắng; **Tà*
 
 Dùng nguyên số đã khóa ở 03: canvas **128 × 128 @1x (256 × 256 @2x)** cho Player, NPC, quái cỡ người (footprint 1 × 1); chiều cao hình **96–110 px**; pivot **(64, 116)** từ góc trên trái (tức (W/2, H − 12)); hurtbox r 0,45 ô; **pick box 48 × 100 px**, đáy tại pivot.
 
-| Thông số (Đề xuất – chờ duyệt) | Giá trị                                                                                                                                                        |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tỷ lệ cơ thể                   | **~5,5–6 đầu** (cách điệu, hơi gọn): đầu ≈ 17–19 px trong chiều cao hình 100 px                                                                                |
-| Rộng vai                       | ≈ 28–34 px; thân không vượt **pick box 48 px** (tay vung, vũ khí, tay áo rộng được phép tràn ra ngoài pick box)                                                |
-| Chiều cao mũ cao / búi tóc     | Cộng vào `head_top` như dữ liệu trang bị khai báo (03 §4: mũ cao +8, thú cưỡi, ngự kiếm) để UI trên đầu không đè mũ                                            |
-| Điểm nhận dạng đọc ở 48 px     | Đầu: 1 chi tiết (mũ / trâm / tóc) ≥ 3 px; ở thân: 1 mảng màu phân biệt phe hoặc hệ                                                                             |
-| Nét viền                       | 1 px @1x, tối hơn dải tối nhất của chất liệu                                                                                                                   |
-| Hướng vẽ (D14)                 | **Rig Spine 5 hướng (S, SE, E, NE, N) + lật gương** cho SW / W / NW; animation bất đối xứng (vũ khí tay phải) được vẽ đủ 8 hướng, đánh dấu theo từng animation |
-| Chiều cao so với quái          | Quái tinh anh: canvas 192, hình ~140 px; Boss 2 × 2 → 256, 4 × 4 → 512 (03 §3)                                                                                 |
+| Thông số (Đề xuất – chờ duyệt) | Giá trị                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tỷ lệ cơ thể                   | **[Cập nhật D44: Player ~4,5 đầu, đầu + tóc chính ≈ 22% chiều cao, xem [art/style-semichibi.md](art/style-semichibi.md); giá trị cũ ~5,5–6 đầu / đầu ≈ 17–19 px chỉ còn cho NPC, quái cỡ người và Boss.]**                                                                                                                                |
+| Rộng vai                       | **[Cập nhật D44: vai Player theo dải % chiều cao từng Đạo Lộ ở [art/style-semichibi.md](art/style-semichibi.md); ≈ 28–34 px chỉ còn cho NPC / quái cỡ người.]** Thân không vượt **pick box 48 px** (tay vung, vũ khí, tay áo rộng được phép tràn ra ngoài pick box)                                                                       |
+| Chiều cao mũ cao / búi tóc     | Cộng vào `head_top` như dữ liệu trang bị khai báo (03 §4: mũ cao +8, thú cưỡi, ngự kiếm) để UI trên đầu không đè mũ                                                                                                                                                                                                                       |
+| Điểm nhận dạng đọc ở 48 px     | Đầu: 1 chi tiết (mũ / trâm / tóc) ≥ 3 px; ở thân: 1 mảng màu phân biệt phe hoặc hệ                                                                                                                                                                                                                                                        |
+| Nét viền                       | 1 px @1x, tối hơn dải tối nhất của chất liệu                                                                                                                                                                                                                                                                                              |
+| Hướng vẽ (D14)                 | **[Cập nhật D41: thân Player là sprite sheet AI từng khung theo [art/sprite-sheet-pipeline.md](art/sprite-sheet-pipeline.md).]** Rig xương 5 hướng (S, SE, E, NE, N) + lật gương cho SW / W / NW (DragonBones, D35) vẫn áp dụng cho Boss / NPC; animation bất đối xứng (vũ khí tay phải) được vẽ đủ 8 hướng, đánh dấu theo từng animation |
+| Chiều cao so với quái          | Quái tinh anh: canvas 192, hình ~140 px; Boss 2 × 2 → 256, 4 × 4 → 512 (03 §3)                                                                                                                                                                                                                                                            |
 
 Socket vũ khí và phi kiếm theo bảng socket 03 §4 (`hand_R`, `hand_L`, `back`, `chest`, …); phần đồ **không** vẽ trực tiếp lên thân cơ sở mà là paperdoll 15 lớp ([03] §3), nên mọi thiết kế trang phục phải tách lớp được.
 
@@ -226,7 +226,7 @@ Chỉ được vào build phát hành nếu **thỏa tất cả**:
 2. **Không bắt chước họa sĩ còn sống / tác phẩm cụ thể**: cấm lệnh kiểu "theo phong cách của <họa sĩ>"; cấm đưa ảnh tham chiếu có bản quyền của người khác.
 3. **Không chứa người thật, thương hiệu, logo, chữ Hán tạo sinh có nghĩa sai** (chữ Hán trên phù lục chỉ là họa tiết nhưng phải rà soát để không ra nghĩa xúc phạm).
 4. **Có bước chỉnh tay của họa sĩ** (tối thiểu đồng bộ bảng màu §2, pivot, nguồn sáng NW, thang xám 48 px); asset AI chưa qua bước này là `placeholder`.
-5. **Lưu prompt, seed, mô hình, ngày** trong hồ sơ. Với pipeline có bước AI trong `orchestrator_pipeline.yaml` ([00] §6) áp dụng cùng quy tắc.
+5. **Lưu prompt, seed, mô hình, ngày** trong hồ sơ. Với pipeline có bước AI trong `orchestrator_pipeline.yaml` (bản tóm tắt cũ ở 00 §6 đã gỡ, xem lịch sử git; D29) áp dụng cùng quy tắc.
 6. **Quyền tác giả của sản phẩm AI**: khả năng đăng ký và bảo hộ tại Việt Nam và các thị trường khác **cần kiểm tra** (xem [19](19-ngon-ngu-phap-ly.md) §5); vì vậy asset cốt lõi định danh game (logo, nhân vật chính, biểu tượng tông môn) **không** nên chỉ do AI sinh ra, mà phải do họa sĩ vẽ / tinh chỉnh đáng kể.
 
 Asset sinh bằng mã (`tools/procgen`: tilemap, phi kiếm, icon, shader) không phải AI tạo sinh và không cần hồ sơ prompt; ghi `procgen` + seed (nguyên tắc "commit seeds, not images").
@@ -253,13 +253,4 @@ Kenney, OpenGameArt, itch.io, game-icons.net: dùng kết quả từ công cụ 
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                               | Mặc định đề xuất                                                                          |
-| --- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Q1  | Bảng màu Ngũ hành (§2.3) và bảng màu vùng (§2.4)                                                      | Dùng làm điểm xuất phát; họa sĩ chủ chốt tinh chỉnh bằng thử thực tế trên tilemap mẫu     |
-| Q2  | Tỷ lệ nhân vật ~5,5–6 đầu và đầu ≈ 17–19 px trong chiều cao 100 px                                    | Giữ; xác nhận bằng một nhân vật mẫu trước khi vẽ hàng loạt                                |
-| Q3  | Cho phép asset AI vào bản phát hành (điều kiện §9.2) hay chỉ làm placeholder?                         | Chỉ placeholder ở MVP; đưa vào phát hành sau khi có chỉnh tay và hồ sơ giấy phép          |
-| Q4  | Ai tạo và sở hữu `docs/ASSET-LICENSES.md`, và có thêm cổng CI cho placeholder không?                  | Người nhập asset bên thứ ba đầu tiên tạo; thêm cổng vào `validate_assets.js` qua PR riêng |
-| Q5  | VO: MVP không có VO, và không dùng giọng AI ở bản phát hành                                           | Có                                                                                        |
-| Q6  | Tên nhạc cụ và thành phần nhạc theo vùng (§8.2) có giữ danh sách này, hay yêu cầu nhà soạn nhạc chốt? | Giữ làm brief; nhà soạn nhạc tinh chỉnh                                                   |
-| Q7  | Có bắt buộc **thử mù màu** (cờ chiến, hệ, phẩm) trước mỗi bản phát hành không?                        | Có                                                                                        |
-| Q8  | Hệ biến dị (Phong / Lôi / Băng) có bảng màu riêng như §2.3 hay dùng màu hệ gốc?                       | Có màu riêng nhưng chung ngôn ngữ chuyển động hệ gốc                                      |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (18 Q1–Q8). Nội dung gốc của mục này nằm trong lịch sử git.

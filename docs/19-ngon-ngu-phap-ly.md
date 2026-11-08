@@ -76,7 +76,7 @@ Ngân sách gói đầu Web chỉ **25 MB** và mọi thứ ngoài Core là tả
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | **Văn bản thân (hội thoại, mô tả, chat)** | Một phông sans + một phông serif có hỗ trợ tiếng Việt, giấy phép OFL, **cắt tập con** (Latin + Vietnamese) rồi đóng gói woff2 / TTF; tải thân văn bản trong Core UI (4 MB, 06 §6) | Nhẹ; đồng nhất ở Web, Mobile, PC                       |
 | **Tiêu đề, tên cửa sổ**                   | Phông trang trí nhẹ cho tiếng Việt (OFL), cắt tập con; hoặc bitmap font sinh trước cho các chuỗi cố định                                                                          | Chữ ít, cố định; bitmap tránh lệch hiển thị            |
-| **Hán tự họa tiết**                       | **Không dùng phông**: vẽ trước thành sprite / SVG → atlas (≈ 20–40 chữ). Chữ triện trên phù lục đã có pipeline sinh SVG trong `tools/procgen` (00 §6)                             | Tránh tải phông CJK; kiểm soát được hình dạng và nghĩa |
+| **Hán tự họa tiết**                       | **Không dùng phông**: vẽ trước thành sprite / SVG → atlas (≈ 20–40 chữ). Chữ triện trên phù lục đã có pipeline sinh SVG trong `tools/procgen`                                     | Tránh tải phông CJK; kiểm soát được hình dạng và nghĩa |
 | **Chữ Hán trong nội dung động**           | Không cho phép (tên nhân vật, chat dùng chữ Latinh + tiếng Việt ở MVP)                                                                                                            | Tránh thiếu glyph, tránh lọc từ phức tạp               |
 | **Fallback**                              | Thiếu glyph → phông hệ thống → ô vuông; log `client.error` với mã glyph (không log nội dung chat, [17] §7)                                                                        | Phát hiện sớm                                          |
 
@@ -195,14 +195,4 @@ Ngân sách gói đầu Web chỉ **25 MB** và mọi thứ ngoài Core là tả
 
 ## Câu hỏi cần chốt
 
-| #   | Câu hỏi                                                                                                               | Mặc định đề xuất                                                                                |
-| --- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Q1  | Ai là luật sư / công ty luật phụ trách xác minh §4 và khi nào (trước closed beta)?                                    | Thuê tư vấn chuyên game / TMĐT / dữ liệu cá nhân tại Việt Nam trước khi có người chơi ngoài đội |
-| Q2  | Thư viện i18n cho client Cocos Creator (ví dụ bộ có hỗ trợ ICU MessageFormat) và định dạng tệp                        | Dùng tệp JSON `vi-VN` + thư viện ICU nhẹ; chốt sau thử nghiệm kích thước gói                    |
-| Q3  | Hạng mục phông: chọn Be Vietnam Pro / Noto Serif hay phông khác; có thuê phông trả phí không?                         | Phông OFL, cắt tập con; Hán tự bằng sprite                                                      |
-| Q4  | Hosting cục bộ → khi nào chuyển đám mây, và có yêu cầu lưu trữ trong nước (L16) không?                                | Giữ hạ tầng trong nước hoặc nhà cung cấp có vùng tại Việt Nam cho đến khi luật sư xác nhận      |
-| Q5  | Đăng ký MVP username + mật khẩu có đủ khi luật có thể yêu cầu xác thực (L8)? Có thêm số điện thoại / định danh không? | Chờ ý kiến luật sư; thiết kế tầng Auth mở rộng được bước xác thực                               |
-| Q6  | Cơ chế giờ chơi cho người dưới 18 (L9): cần khai báo tuổi lúc đăng ký?                                                | Có, khai báo ngày sinh khi đăng ký + áp dụng giới hạn bảo thủ cho tài khoản chưa xác minh       |
-| Q7  | Có phát hành ngoài Việt Nam ở MVP không?                                                                              | Không; chỉ Việt Nam. Ngôn ngữ `en` sau MVP                                                      |
-| Q8  | Có cho phép hộp ngẫu nhiên sau này không?                                                                             | Không trong MVP; quyết định lại sau tư vấn pháp lý                                              |
-| Q9  | Tên thương hiệu "Vạn Giới Tiên Đồ" là tên tạm — ai tra cứu nhãn hiệu (L27)?                                           | Người phụ trách dự án giao cho luật sư SHTT trước khi đăng ký tên miền và cửa hàng ứng dụng     |
+Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (19 Q1–Q9). Nội dung gốc của mục này nằm trong lịch sử git.

@@ -10,7 +10,7 @@
  *    hand / mouth swaps are applied by the caller exactly as for the hand-authored clips);
  *  - `silhouetteIoU` compares the rendered rig pose with the reference image (the acceptance number of the step).
  *
- * Landmarks are in the key-pose image space of docs/art/rig-continuous-parts.md: px @2x, x right, y DOWN, origin top-left
+ * Landmarks are in the key-pose image space of docs/art/rig-legacy-player.md: px @2x, x right, y DOWN, origin top-left
  * of the 256 canvas. Names follow the Kiếm tu landmark contract plus root, chest, pelvis, hand_L/R, sword_tip, hem_*.
  */
 import { CLIP_FPS, type BoneTrack, type Clip, type ClipEvent, type Key } from './clip.js';
