@@ -1,0 +1,131 @@
+{
+  "utc": "2026-11-08T02:45:06.855633+00:00",
+  "status": "Run source45679 selected in fullE diagnostic;7affected measuredheadcells acceptedINFO,0head/contact/canvas/loop/soft;13D54similarityfindings awaitD55. Not final production acceptance.",
+  "source": "sheets/run.repaired-45679.png",
+  "sourceSha256": "77019ce787dd8b47f5af571518f697001c52871ef4d222709dc448b747d84ccf",
+  "temporaryProject": "D:/Temp/vgtd23-run45679.project.json",
+  "contractSha256": "bf79b6cded15e429ed61f1dd27903e07cbe683b2892ae15b64a328c8dcd8325a",
+  "qaCountsByGate": {
+    "info:height": 7,
+    "fail:similarity": 13,
+    "info:authoredOrigin": 16
+  },
+  "headEvidenceAccepted": [1, 2, 3, 6, 7, 14, 15],
+  "unresolvedHead": [],
+  "footFindings": [],
+  "canvasFindings": [],
+  "loopFindings": [],
+  "previousReview": {
+    "status": "Unselected run candidate; source head annotations and D55 similarity remain open. Not a production/Cocos or layered delivery.",
+    "utc": "2026-11-08T02:18:39.827422+00:00",
+    "source": "sheets/run.repaired-4567.png",
+    "sourceSha256": "4059a39b20203060f88e9264d861ffe900faec1189ecd398b61dd85925226931",
+    "temporaryProject": "D:/Temp/vgtd23-run4567.project.json",
+    "contractSha256": "c09196245a5439c6de8bb273327a55522d8d147b4836c245e24518dc0e8362c0",
+    "qaCounts": {
+      "fail-hard": 20,
+      "fail-soft": 0,
+      "accepted": 0,
+      "regression": 0,
+      "info": 16
+    },
+    "footFindings": [],
+    "canvasFindings": [],
+    "loopFindings": [],
+    "history": [
+      "Source4 keeps lower ponytail loops and dynamic bodies; source5 repairs head geometry from unscaled canonical-head guides.",
+      "Exact native head-region selection creates candidate45 with outside-region hashes. One common244->232 source-plane translation applied to every run cell.",
+      "Source6 repairs12 stance-leg regions around unscaled boot stencils;4flight drawings preserved outside regions. Native foot findings reduce10->2.",
+      "Source7 repairs only calf regions8/11 after signed measured boot offsets; other14cells preserved outside selected regions. Native foot findings reduce2->0."
+    ],
+    "proofs": ["run.head-repair-45.proof.json", "run.leg-repair-456.proof.json", "run.leg-repair-4567.proof.json"],
+    "limitations": [
+      "No stencil/heuristic target is anatomical or contact pass evidence.",
+      "Manual head landmark draft is not supplied to gates. One cap-summit semantic decision requested from orchestrator with a master/frame overlay.",
+      "Head RGB can change through repeated standard palette processing; source-region preservation is not a promise of post-pipeline colour-byte identity.",
+      "No body rescale, per-frame fitting, foot-speed change, event/timing change or head-reason similarity waiver.",
+      "The selected full E project remains the post-D41 38hard/42soft baseline until a source/evidence selection is justified."
+    ]
+  },
+  "notes": [
+    "D54 merged main50de2e0; head reasons no longer exempt similarity. Similarity numbers still untrusted for identity pendingD55.",
+    "Native cap row-run midpoint rule applied consistently to unchanged master and frames; earlier coordinates retained in head-boundary-review.json and run-head-flat-summit-review.json history.",
+    "Source4567 unchanged outside14headROI. Raw08 oversize candidate retained;09 semantic cap point unresolved, no passing inference from guide.",
+    "Six annotations remain TEMP-only pending final canonical source lock and native alpha128 preservation comparison. Full E selected baseline not silently replaced.",
+    "Post-pipeline native alpha128 comparison now verified0crossings on every unchanged head (all15 except locally repaired14). RGB changes from repeated palette processing remain disclosed."
+  ],
+  "contourPreservationProof": "run.head-contour-45679.proof.json",
+  "previousAdjudicationCheckpoint": {
+    "utc": "2026-11-08T02:45:06.855633+00:00",
+    "status": "Unselected run candidate: six reviewed head evidence cells accepted;14 semantic cap/knot adjudication pending. D54 similarity independent, D55 metric pending.",
+    "source": "sheets/run.repaired-45679.png",
+    "sourceSha256": "77019ce787dd8b47f5af571518f697001c52871ef4d222709dc448b747d84ccf",
+    "temporaryProject": "D:/Temp/vgtd23-run45679.project.json",
+    "contractSha256": "bf79b6cded15e429ed61f1dd27903e07cbe683b2892ae15b64a328c8dcd8325a",
+    "qaCountsByGate": {
+      "info:height": 6,
+      "fail:height": 1,
+      "fail:similarity": 13,
+      "info:authoredOrigin": 16
+    },
+    "headEvidenceAccepted": [1, 2, 3, 6, 7, 15],
+    "unresolvedHead": [14],
+    "footFindings": [],
+    "canvasFindings": [],
+    "loopFindings": [],
+    "previousReview": {
+      "status": "Unselected run candidate; source head annotations and D55 similarity remain open. Not a production/Cocos or layered delivery.",
+      "utc": "2026-11-08T02:18:39.827422+00:00",
+      "source": "sheets/run.repaired-4567.png",
+      "sourceSha256": "4059a39b20203060f88e9264d861ffe900faec1189ecd398b61dd85925226931",
+      "temporaryProject": "D:/Temp/vgtd23-run4567.project.json",
+      "contractSha256": "c09196245a5439c6de8bb273327a55522d8d147b4836c245e24518dc0e8362c0",
+      "qaCounts": {
+        "fail-hard": 20,
+        "fail-soft": 0,
+        "accepted": 0,
+        "regression": 0,
+        "info": 16
+      },
+      "footFindings": [],
+      "canvasFindings": [],
+      "loopFindings": [],
+      "history": [
+        "Source4 keeps lower ponytail loops and dynamic bodies; source5 repairs head geometry from unscaled canonical-head guides.",
+        "Exact native head-region selection creates candidate45 with outside-region hashes. One common244->232 source-plane translation applied to every run cell.",
+        "Source6 repairs12 stance-leg regions around unscaled boot stencils;4flight drawings preserved outside regions. Native foot findings reduce10->2.",
+        "Source7 repairs only calf regions8/11 after signed measured boot offsets; other14cells preserved outside selected regions. Native foot findings reduce2->0."
+      ],
+      "proofs": ["run.head-repair-45.proof.json", "run.leg-repair-456.proof.json", "run.leg-repair-4567.proof.json"],
+      "limitations": [
+        "No stencil/heuristic target is anatomical or contact pass evidence.",
+        "Manual head landmark draft is not supplied to gates. One cap-summit semantic decision requested from orchestrator with a master/frame overlay.",
+        "Head RGB can change through repeated standard palette processing; source-region preservation is not a promise of post-pipeline colour-byte identity.",
+        "No body rescale, per-frame fitting, foot-speed change, event/timing change or head-reason similarity waiver.",
+        "The selected full E project remains the post-D41 38hard/42soft baseline until a source/evidence selection is justified."
+      ]
+    },
+    "notes": [
+      "D54 merged main50de2e0; head reasons no longer exempt similarity. Similarity numbers still untrusted for identity pendingD55.",
+      "Native cap row-run midpoint rule applied consistently to unchanged master and frames; earlier coordinates retained in head-boundary-review.json and run-head-flat-summit-review.json history.",
+      "Source4567 unchanged outside14headROI. Raw08 oversize candidate retained;09 semantic cap point unresolved, no passing inference from guide.",
+      "Six annotations remain TEMP-only pending final canonical source lock and native alpha128 preservation comparison. Full E selected baseline not silently replaced.",
+      "Post-pipeline native alpha128 comparison now verified0crossings on every unchanged head (all15 except locally repaired14). RGB changes from repeated palette processing remain disclosed."
+    ],
+    "contourPreservationProof": "run.head-contour-45679.proof.json"
+  },
+  "head14": {
+    "crown": {
+      "x": 143.5,
+      "y": 26.5
+    },
+    "chin": {
+      "x": 165.5,
+      "y": 76.5
+    },
+    "sizePx": 54.62600113499065,
+    "ratioPercent": 1.003512,
+    "rule": "Minimum2 contiguous cap pixels; single143,row25 excluded as knot-edge. Row26 x143..144 midpoint; row+0.5 same convention asmasterandallmeasuredcells.",
+    "repairTarget": "Unscaled donor3 measured53.758720px (-0.600091%), targetnearcentre; actualAIoutput independentlymeasured+1.003512%."
+  }
+}

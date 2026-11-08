@@ -1,0 +1,32 @@
+{
+  "format": "vgtd-quality-backlog",
+  "version": 1,
+  "character": "kiem-tu-chibi-v1",
+  "entries": [
+    {
+      "clip": "attack_2",
+      "dir": "E",
+      "cell": 12,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "value": 0.2,
+      "limit": 0,
+      "note": "Reviewed upright recovery frame remainschecked (noD41poseexemption). Visible mildkneeflex/recovery and lowersecondaryhair give whole-alpha height220px versus master227px uprightloweredge220.19px, roundedexcess0.2px. Face/costumeconsistent in nativecontactreview; D55Labclear. Acceptthissubpixel freeclipbboxwarning only, no body rescale/thresholdchange. Worsemetricregresses andfails. Cocosmotionreviewpending.",
+      "status": "open",
+      "owner": "art-worker23",
+      "added": "2026-11-08"
+    }
+  ],
+  "manual": [
+    {
+      "kind": "weak_reversal",
+      "clip": "run",
+      "dir": "E",
+      "cells": [15, 0],
+      "note": "Minor lean asymmetry remains visible across the cyclic wrap in native/Cocos contact review. Preserve dynamic flight; revisit in the dedicated polish pass. No automatic gate acceptance or scale/contact waiver is implied.",
+      "severity": "minor art polish",
+      "reviewer": "art-worker",
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "clip": "meditate",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x4rows,squarecanvas,target2048square(oruniformsquareDPI). All16cellsactive.\n16frame LOOP seatedcross-leggedmeditation EprofileRIGHT. EveryframeSEATED,notstand-to-sitanimation. Keeporiginalheadsizeevenwholeshapesmaller,doNOTenlargeface. Crossedlegs/solesatground,bodylowernaturally,closedoneprofileeye,calmfixedface. Swordrestsforwardacrossknees/lowrightlapwithRIGHT handonhilt,leftpalmgentlemudra. Oneverysubtlebreathcycle,cloth/hairlag2frames,cleanloop. No lotus,newobjects,halo,FX.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:03:41.358Z",
+  "inputs": ["templates/cast.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-3cd62b00-ffdf-4875-996d-09d659ef1e15.png",
+  "utcCompletedRecorded": "2026-11-07T21:04:25.558Z",
+  "rawSha256": "80474b24d4fb3a3757c18f9a5afba4f8aafdf3c1dba78caf11a1141ffd1ecddd",
+  "utcOutputFileModified": "2026-11-07T21:04:23.900773+00:00"
+}

@@ -1,0 +1,27 @@
+{
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "sizePx": 54.083269131959845,
+  "transformedHead": {
+    "crown": {
+      "x": 124.49618320610686,
+      "y": 17.030534351145036
+    },
+    "chin": {
+      "x": 138.3053435114504,
+      "y": 68.35114503816794
+    }
+  },
+  "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "method": "Manual native semantic-boundary refinement pinned to unchanged E master; original transformed landmarks retained. See head-boundary-review.json for alpha/RGB trace and uncertainty. Secondary ponytail excluded; attached hair rim highlight included.",
+  "frameEvidenceStatus": "Not supplied by this helper. Review each affected aligned output cell; missing evidence must remain a QA failure."
+}

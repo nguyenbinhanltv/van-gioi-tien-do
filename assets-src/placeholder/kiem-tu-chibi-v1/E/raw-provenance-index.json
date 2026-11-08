@@ -1,0 +1,165 @@
+{
+  "status": "Allretainedraws matchedtogenerationrecordsbyactualSHA256;4previouslymissingrawhashesverifiedagainstoriginaltooloutputs.",
+  "outputs": [
+    {
+      "file": "E/sheets/attack.raw.png",
+      "sha256": "89243c4e30b543a51d73e724b09ff6120fdf08b1d12a1c25835dea8d3731ba4b",
+      "generationRecords": ["E/attack.generation.json"]
+    },
+    {
+      "file": "E/sheets/attack.repair-attempt-02.raw.png",
+      "sha256": "9fd7faa6a748228385188daba52e47f9ba4e99ffcac94a63c5e6f39618c73057",
+      "generationRecords": ["E/attack.repair-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/attack_2.raw.png",
+      "sha256": "71af9c39751d333cc52ddfdf4cc7bae36c8bf74361965a9fd499277e22b55343",
+      "generationRecords": ["E/attack_2.generation.json"]
+    },
+    {
+      "file": "E/sheets/attack_3.raw.png",
+      "sha256": "2a90565a0d96bbb93364b5cdbbc73e02589f723de1ad2134d5b61d74f4604985",
+      "generationRecords": ["E/attack_3.generation.json"]
+    },
+    {
+      "file": "E/sheets/attack_3.repair-attempt-02.raw.png",
+      "sha256": "723620d8d56b20f8802fd0b90a31285bcf7205a6388320cf5c4c518a31bfdc77",
+      "generationRecords": ["E/attack_3.repair-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/cast.raw.png",
+      "sha256": "5d6d1126ce0ae1d7e8b321788e0ff684b03519ad0901104604912e6bcfff4093",
+      "generationRecords": ["E/cast.generation.json"]
+    },
+    {
+      "file": "E/sheets/channel.raw.png",
+      "sha256": "6c0f02f3a795afa4a1bafa73d51818507943f57c9998c90a65df7599ab11d85e",
+      "generationRecords": ["E/channel.generation.json"]
+    },
+    {
+      "file": "E/sheets/die.raw.png",
+      "sha256": "07b1120673f6ad2af1d7b1c86206b9c2d3a70d195062d9bcd14b2a5c0252dca9",
+      "generationRecords": ["E/die.generation.json"]
+    },
+    {
+      "file": "E/sheets/emote.raw.png",
+      "sha256": "cf5ae39bc7ef6cdb6f9aa4fa87fe75116bcc57a6a8d13e3940b1e41427e42bc2",
+      "generationRecords": ["E/emote.generation.json"]
+    },
+    {
+      "file": "E/sheets/hit-dash.attempt-02.raw.png",
+      "sha256": "ebe01ed3a0c5bc0ace098fa582b13bee2b0c97b236c99438e2ab507a3f1d0a17",
+      "generationRecords": ["E/sheets/hit-dash.attempt-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/hit-dash.attempt-03.raw.png",
+      "sha256": "97ba33fd17a0f5279e6e286bfb5175808834b67078f610ace8fe2eb03569ed15",
+      "generationRecords": ["E/sheets/hit-dash.attempt-03.generation.json"]
+    },
+    {
+      "file": "E/sheets/hit-dash.raw.png",
+      "sha256": "166760952781279d8f59d57d7563cd84333698d637655f06736de0c922c2aeee",
+      "generationRecords": ["E/hit-dash.generation.json"]
+    },
+    {
+      "file": "E/sheets/idle.attempt-02.raw.png",
+      "sha256": "4698437fa25379b744dee0c26476b4654779be7beb0b5a54c5ffe19af2ba508d",
+      "generationRecords": ["E/idle.attempt-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/idle.body-only.raw.png",
+      "sha256": "7cdd8dcf824c8c7ea7b2f37446e77abfc7b2b7e187b93f82b58b7060fe0f9409",
+      "generationRecords": ["E/idle-body.generation.json"]
+    },
+    {
+      "file": "E/sheets/idle.raw.png",
+      "sha256": "9b00935bf27637d776b23c2339b2f6246714793e746dd3ab494f12923a30f94b",
+      "generationRecords": ["E/idle.generation.json"]
+    },
+    {
+      "file": "E/sheets/meditate.attempt-02.raw.png",
+      "sha256": "68e13da5d415b37453cda98f6b597c6db027951f118efc76eeed71aea4b5a2e7",
+      "generationRecords": ["E/meditate.attempt-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/meditate.raw.png",
+      "sha256": "80474b24d4fb3a3757c18f9a5afba4f8aafdf3c1dba78caf11a1141ffd1ecddd",
+      "generationRecords": ["E/meditate.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-02.raw.png",
+      "sha256": "291abf169d20cdb3949f81594d01429ca77fbd3365422780e8872efbb0bdb24e",
+      "generationRecords": ["E/run.attempt-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-03.raw.png",
+      "sha256": "e897d949c2f8759e58e19a7fa7a4682f3ae6c0f8299b4c115251cddec4b6ba5f",
+      "generationRecords": ["E/run.attempt-03.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-04.raw.png",
+      "sha256": "22faf3e7009921400abb6eec8ddd2d686b08d55e58b6ccfce0616b62d382950d",
+      "generationRecords": ["E/run.attempt-04.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-05.raw.png",
+      "sha256": "dc400130301369323741119f69bfee0147f4bd3c9b2683895303df7274755aa4",
+      "generationRecords": ["E/run.attempt-05.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-06.raw.png",
+      "sha256": "52222571d9981e0832b2d39ece5c6d9d017a74dec37f4c5f1f243ccd3d0167c2",
+      "generationRecords": ["E/run.attempt-06.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-07.raw.png",
+      "sha256": "46d3c93faf1a5daef222e9d97d2b7d566ae38d9785cc86fad6e84ff6c8606e77",
+      "generationRecords": ["E/run.attempt-07.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-08.raw.png",
+      "sha256": "06d6e0d6aa0bc15ab457b77fd803d5b5797d9321be4419c174fd80913c3fc961",
+      "generationRecords": ["E/sheets/run.attempt-08.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.attempt-09.raw.png",
+      "sha256": "1b34766e8d8596bd92119d93b760d4255b22d3cb1a73baaab826e0ad813f4436",
+      "generationRecords": ["E/sheets/run.attempt-09.generation.json"]
+    },
+    {
+      "file": "E/sheets/run.raw.png",
+      "sha256": "3d171e01c2df065a714aa0f619aef6ccb3bcd056d5447260c8f9d2a46ad2040e",
+      "generationRecords": ["E/run.generation.json"]
+    },
+    {
+      "file": "E/sheets/sword_fly.raw.png",
+      "sha256": "4f0b0646df13ca87cd90df3e296cfdf642dc209aa4baa07061c2d78f44f2e1c1",
+      "generationRecords": ["E/sword_fly.generation.json"]
+    },
+    {
+      "file": "E/sheets/tribulation.raw.png",
+      "sha256": "9df01c02d00f8778479a0fe180cc657a0e3eb2d95d491d5c77f7f781a8e7321d",
+      "generationRecords": ["E/tribulation.generation.json"]
+    },
+    {
+      "file": "E/sheets/walk.attempt-02.raw.png",
+      "sha256": "847292912b65f5fc6cd99555dc34b3e9895b1a6691a22cedd203ce7b814bb61b",
+      "generationRecords": ["E/walk.attempt-02.generation.json"]
+    },
+    {
+      "file": "E/sheets/walk.attempt-03.raw.png",
+      "sha256": "55f62b4ecb875b5ecd9490eb43cc54a94f8003fc71365c78fbbfea338c42ef80",
+      "generationRecords": ["E/sheets/walk.attempt-03.generation.json"]
+    },
+    {
+      "file": "E/sheets/walk.attempt-04.raw.png",
+      "sha256": "e28e57ad9064c53bc434d2dc386b8c10e751e037a03fd4ec688d5b927edb2cf4",
+      "generationRecords": ["E/sheets/walk.attempt-04.generation.json"]
+    },
+    {
+      "file": "E/sheets/walk.raw.png",
+      "sha256": "a3ecc1cc03a72d62fd21140f156f414385a9a5cc4a51639a4e7ad8cfab3da194",
+      "generationRecords": ["E/walk.generation.json"]
+    }
+  ]
+}

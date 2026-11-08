@@ -1,0 +1,1570 @@
+{
+  "status": "diagnostic only; no production/layer acceptance",
+  "intendedContactsOnly": true,
+  "counts": {
+    "fail-hard": 34,
+    "fail-soft": 19,
+    "accepted": 0,
+    "regression": 0,
+    "info": 0
+  },
+  "masterSha1": "d19f7285523a4cbb06fd753c394954e1fd49d24d",
+  "clips": {
+    "idle": {
+      "findings": [],
+      "legacyDiagnosticNoFindings": true,
+      "actualContactsReviewed": false,
+      "layerGatePassed": false
+    },
+    "walk": {
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 234 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 11,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 12,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 13,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 14,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 234 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 15,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 234 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 2,
+          "metric": "slide_px_per_frame_R",
+          "value": 14.05,
+          "limit": 3,
+          "message": "R foot slides 14.1 px/frame between frames 1-2 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 4,
+          "metric": "slide_px_per_frame_R",
+          "value": 4.93,
+          "limit": 3,
+          "message": "R foot slides 4.9 px/frame between frames 3-4 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 5,
+          "metric": "slide_px_per_frame_R",
+          "value": 8.03,
+          "limit": 3,
+          "message": "R foot slides 8.0 px/frame between frames 4-5 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 7,
+          "metric": "slide_px_per_frame_R",
+          "value": 6.31,
+          "limit": 3,
+          "message": "R foot slides 6.3 px/frame between frames 6-7 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 10,
+          "metric": "ghost_offset_px_L",
+          "value": 22.4,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -22.4 px from its template ghost (x 106.6 vs 129.0, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "walk",
+          "frame": 9,
+          "metric": "slide_px_per_frame_L",
+          "value": 9.27,
+          "limit": 3,
+          "message": "L foot slides 9.3 px/frame between frames 8-9 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 12,
+          "metric": "ghost_offset_px_L",
+          "value": 20.1,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is 20.1 px from its template ghost (x 135.8 vs 115.7, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "walk",
+          "frame": 13,
+          "metric": "ghost_offset_px_L",
+          "value": 21.7,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -21.7 px from its template ghost (x 87.3 vs 109.0, limit 20); not measured (the foot is not on the template)"
+        }
+      ],
+      "legacyDiagnosticNoFindings": false,
+      "actualContactsReviewed": false,
+      "layerGatePassed": false
+    },
+    "run": {
+      "findings": [
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 234 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 234 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 3.2,
+          "limit": 0,
+          "message": "height 217 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 12.2,
+          "limit": 0,
+          "message": "height 208 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 0.2,
+          "limit": 0,
+          "message": "height 220 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 8,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 9,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 10,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 11,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 12,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 235 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 13,
+          "metric": "height_excess_px",
+          "value": 2.2,
+          "limit": 0,
+          "message": "height 236 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 14,
+          "metric": "height_excess_px",
+          "value": 3.2,
+          "limit": 0,
+          "message": "height 217 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "height",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 15,
+          "metric": "height_excess_px",
+          "value": 1.2,
+          "limit": 0,
+          "message": "height 219 px outside 220.2..233.8 (master 227 px +-3 %)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 0,
+          "metric": "ghost_offset_px_R",
+          "value": 20.9,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -20.9 px from its template ghost (x 127.8 vs 148.7, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 1,
+          "metric": "ghost_offset_px_R",
+          "value": 36.2,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -36.2 px from its template ghost (x 99.9 vs 136.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 2,
+          "metric": "ghost_offset_px_R",
+          "value": 38.2,
+          "limit": 20,
+          "message": "R planted foot: nearest sole is -38.2 px from its template ghost (x 85.5 vs 123.7, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 3,
+          "metric": "ghost_offset_px_R",
+          "value": 999,
+          "limit": 20,
+          "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 4,
+          "metric": "ghost_offset_px_R",
+          "value": 999,
+          "limit": 20,
+          "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 5,
+          "metric": "ghost_offset_px_R",
+          "value": 999,
+          "limit": 20,
+          "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 10,
+          "metric": "ghost_offset_px_L",
+          "value": 28.9,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -28.9 px from its template ghost (x 94.7 vs 123.7, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 9,
+          "metric": "slide_px_per_frame_L",
+          "value": 18,
+          "limit": 3,
+          "message": "L foot slides 18.0 px/frame between frames 8-9 (limit 3)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 11,
+          "metric": "ghost_offset_px_L",
+          "value": 999,
+          "limit": 20,
+          "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 12,
+          "metric": "ghost_offset_px_L",
+          "value": 40.4,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -40.4 px from its template ghost (x 58.3 vs 98.7, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "footSlide",
+          "severity": "warn",
+          "clip": "run",
+          "frame": 13,
+          "metric": "ghost_offset_px_L",
+          "value": 33.7,
+          "limit": 20,
+          "message": "L planted foot: nearest sole is -33.7 px from its template ghost (x 52.5 vs 86.2, limit 20); not measured (the foot is not on the template)"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 6,
+          "message": "torso similarity 0.70 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 7,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 8,
+          "message": "torso similarity 0.70 < 0.7"
+        }
+      ],
+      "legacyDiagnosticNoFindings": false,
+      "actualContactsReviewed": false,
+      "layerGatePassed": false
+    }
+  },
+  "interpretation": [
+    "Idle has no initial legacy diagnostic findings; pose/face variant and layer gates remain pending.",
+    "Whole-alpha height is separate from anatomy; raised ponytail and bent/airborne poses need explicit landmark/pose review, not per-frame rescale.",
+    "Walk/run have real intended foot-position mismatches and slide findings; source repairs and actual contact annotations are required."
+  ],
+  "canvasGateChecks": [
+    {
+      "candidate": "canvas",
+      "sourceContractSha256": "9b77279270937f7a7a2edc96bf0a2ac427f4af400d66dcf4a0d736d629008280",
+      "counts": {
+        "fail-hard": 106,
+        "fail-soft": 88,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      },
+      "canvasLoss": [
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 3,
+          "metric": "canvas_loss_px",
+          "value": 2,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 2.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 4,
+          "metric": "canvas_loss_px",
+          "value": 2,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 2.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 5,
+          "metric": "canvas_loss_px",
+          "value": 3,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 3.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 6,
+          "metric": "canvas_loss_px",
+          "value": 2,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 2.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 2,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 2.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "idle",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 1,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.00, top 1.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 4,
+          "metric": "canvas_loss_px",
+          "value": 2.855530410224887,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 2.86, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 3.857875486551549,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 3.86, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 4.1934807038934565,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 4.19, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 6,
+          "metric": "canvas_loss_px",
+          "value": 3.521711184694638,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 3.52, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 6.467624145681242,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 6.47, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 6.230840144024498,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 6.23, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 5.044836577876637,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 5.04, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 11.96828385246532,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 11.97, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 9,
+          "metric": "canvas_loss_px",
+          "value": 9.447151836471576,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 9.45, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 10,
+          "metric": "canvas_loss_px",
+          "value": 8.141786192555585,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 8.14, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 11,
+          "metric": "canvas_loss_px",
+          "value": 8.197102147807087,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 8.20, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        }
+      ],
+      "acceptance": "FAIL; no waiver; raw fullpose sources preserved; body scale unchanged"
+    },
+    {
+      "candidate": "repairs-canvas",
+      "sourceContractSha256": "563311f93e765ea6f3e8317f4cff88a797c716b9875daf03e6b81d7343eaff64",
+      "counts": {
+        "fail-hard": 100,
+        "fail-soft": 93,
+        "accepted": 0,
+        "regression": 0,
+        "info": 0
+      },
+      "canvasLoss": [
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 4,
+          "metric": "canvas_loss_px",
+          "value": 2.855530410224887,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 2.86, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 0.38933325921013306,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.39, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 0.981814132229033,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.98, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 6,
+          "metric": "canvas_loss_px",
+          "value": 3.521711184694638,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 3.52, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 0.964890923256732,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 0.96, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 1.8591567626688885,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 1.86, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 7,
+          "metric": "canvas_loss_px",
+          "value": 5.044836577876637,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 5.04, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 8,
+          "metric": "canvas_loss_px",
+          "value": 11.96828385246532,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 11.97, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 9,
+          "metric": "canvas_loss_px",
+          "value": 9.447151836471576,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 9.45, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 10,
+          "metric": "canvas_loss_px",
+          "value": 8.141786192555585,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 8.14, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        },
+        {
+          "gate": "canvasLoss",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 11,
+          "metric": "canvas_loss_px",
+          "value": 8.197102147807087,
+          "limit": 0,
+          "message": "opaque source bounds leave the output canvas (left 8.20, top 0.00, right 0.00, bottom 0.00 px); no pose/head exception can waive clipping"
+        }
+      ],
+      "acceptance": "FAIL; no waiver; raw fullpose sources preserved; body scale unchanged"
+    }
+  ],
+  "authoredLatticeCheck": {
+    "project": "project.lattice-diagnostic.json",
+    "contractSha256": "df270ddbadb688960a00ef7149335b6d8c43286ab8950d1b60b5d558504401e1",
+    "registration": "Original per-clip template guides.centerX, fixed across every clip cell; distinct from anatomical pelvis X128",
+    "canvasLossCount": 0,
+    "counts": {
+      "fail-hard": 89,
+      "fail-soft": 93,
+      "accepted": 0,
+      "regression": 0,
+      "info": 64
+    },
+    "status": "Diagnostic only. Zero canvas loss does not establish head/foot/pose or engine acceptance. No art rescale or per-frame fitting."
+  },
+  "runAttempt3": {
+    "source": "sheets/run.attempt-03.raw.png",
+    "sourceSha256": "e897d949c2f8759e58e19a7fa7a4682f3ae6c0f8299b4c115251cddec4b6ba5f",
+    "contractSha256": "e11e9557f73fcaee578e1e49488c363f8e5fbb31980e3e620f0fb9a5c1e0996b",
+    "counts": {
+      "fail-hard": 23,
+      "fail-soft": 10,
+      "accepted": 0,
+      "regression": 0,
+      "info": 16
+    },
+    "canvasLossCount": 0,
+    "findings": [
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 0,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 2,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 5,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 6,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 7,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 9,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 11,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 12,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 13,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 14,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "height",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 15,
+        "metric": "head_evidence_missing",
+        "value": 1,
+        "limit": 0,
+        "message": "upright height exception/out-of-band cell needs crown/chin head evidence and a reviewed note"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 2,
+        "metric": "ghost_offset_px_R",
+        "value": 33.7,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -33.7 px from its template ghost (x 90.0 vs 123.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 1,
+        "metric": "slide_px_per_frame_R",
+        "value": 20.38,
+        "limit": 3,
+        "message": "R foot slides 20.4 px/frame between frames 0-1 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_offset_px_R",
+        "value": 35.8,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -35.8 px from its template ghost (x 75.3 vs 111.2, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 4,
+        "metric": "ghost_offset_px_R",
+        "value": 39.9,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is -39.9 px from its template ghost (x 58.8 vs 98.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 5,
+        "metric": "ghost_offset_px_R",
+        "value": 999,
+        "limit": 20,
+        "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_offset_px_L",
+        "value": 999,
+        "limit": 20,
+        "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 9,
+        "metric": "ghost_offset_px_L",
+        "value": 999,
+        "limit": 20,
+        "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 12,
+        "metric": "ghost_offset_px_L",
+        "value": 22.6,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -22.6 px from its template ghost (x 76.1 vs 98.7, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 11,
+        "metric": "slide_px_per_frame_L",
+        "value": 8.76,
+        "limit": 3,
+        "message": "L foot slides 8.8 px/frame between frames 10-11 (limit 3)"
+      },
+      {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 13,
+        "metric": "ghost_offset_px_L",
+        "value": 23.9,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is -23.9 px from its template ghost (x 62.3 vs 86.2, limit 20); not measured (the foot is not on the template)"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 3,
+        "message": "torso similarity 0.70 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 4,
+        "message": "torso similarity 0.68 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 5,
+        "message": "torso similarity 0.64 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 6,
+        "message": "torso similarity 0.63 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 7,
+        "message": "torso similarity 0.61 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 8,
+        "message": "torso similarity 0.59 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 9,
+        "message": "torso similarity 0.62 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "message": "torso similarity 0.65 < 0.7"
+      },
+      {
+        "gate": "similarity",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 14,
+        "message": "torso similarity 0.70 < 0.7"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 0,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 1,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 2,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 3,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 4,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 5,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 6,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 7,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 8,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 9,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 10,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 11,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 12,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 13,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 14,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      },
+      {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "run",
+        "frame": 15,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 115.68584437086092,
+          "reason": "preserve authored root travel",
+          "evidence": "Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.",
+          "source": {
+            "x": 112.68584437086092,
+            "y": 229
+          },
+          "scale": 1,
+          "dx": 3,
+          "dy": 3
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Original run.master-edit-guide.png repeats pinned master without translation on run.template.json registration X115.68584437086092. Diagnostic preserves drawn source root travel; measured contacts/head evidence not yet accepted.; source (112.68584437086092, 229), scale 1, dx 3, dy 3"
+      }
+    ],
+    "status": "Not selected. Dynamic source retained, but planted contacts and measured foot slide remain wrong even with original fixed lattice registration. Missing head evidence remains a failure; no body rescale or threshold waiver."
+  },
+  "currentLanczosD54": {
+    "projectSha256": "3d22a5792d7857e753d27be91d31d3bf25de5a953d1e6545545345e131ca7a55",
+    "contractSha256": "a575da7859fd28da34c84cc6560dd1b8185c2917d1918d18fc4f959442f1de7c",
+    "status": "FAILED diagnostic candidate; no review-ready production claim",
+    "d54": {
+      "measuredCells": 202,
+      "passCells": 130,
+      "failCells": 72,
+      "similarityFindings": 75,
+      "headReasonsSkipped": 0,
+      "freePoseExceptions": 0,
+      "unmeasuredCells": 0
+    },
+    "qaCounts": {
+      "fail-hard": 88,
+      "fail-soft": 95,
+      "accepted": 0,
+      "regression": 0,
+      "info": 64
+    },
+    "hardByClip": {
+      "meditate": 16,
+      "run": 14,
+      "dash": 16,
+      "attack": 6,
+      "attack_2": 2,
+      "attack_3": 9,
+      "cast": 2,
+      "die": 11,
+      "tribulation": 12
+    },
+    "hardByGate": {
+      "similarity": 75,
+      "height": 13
+    },
+    "atlas": {
+      "pages": 3,
+      "width": 2048,
+      "height": 2048,
+      "regions": 202,
+      "textures": [
+        "kiemtu_chibi_t1_lattice_diagnostic_E_tex",
+        "kiemtu_chibi_t1_lattice_diagnostic_E_page1_tex",
+        "kiemtu_chibi_t1_lattice_diagnostic_E_page2_tex"
+      ]
+    }
+  }
+}

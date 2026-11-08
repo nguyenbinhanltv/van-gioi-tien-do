@@ -1,0 +1,38 @@
+{
+  "name": "E-dash-D54-final-head-torso",
+  "start": "2026-11-08T01:48:15.628Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-edited.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Final precise repair ONLYsourcecells9(row3col2) and10(row3col3) onthis1254square4x4THUONG TU T1 maleE sprite sheet image1. KEEP the improved moderateforward airborne dash poses, bentlegsbehind and spearhandgrips. Two required corrections: (A) BOTH these heads are stilltooSMALL: current primarysolid haircap-to-jaw Euclidean about63.9nativepx (=50.33aligned), MUSTbe66.7nativepx (=52.55aligned), so enlarge WHOLE skull/mainhair/face/ear by4.4%, about3nativepixelsheight, NECKanchored. NOT just liftcrown or stretchface. Image2 lockedT1 masterface/skullproportions. Keepadult male slatealmond eye, straightbrow, cleanjaw, blacksweptcap/lowpony, exactneck/collarseam. (B) ONLYcell10(row3col3): make torso/face read closer tomaster by liftingchest modestly and leaning spine about10-15degreesforwardfromvertical instead ofcurrent20-25. Preserve clearlyvisible plainnavy sleevelesswrap and continuous ivory Vcollar/chestbinding down towardredwaistsash, shoulderandtorso silhouette frommaster. Don'tcompress/foldnavychest behindupperarm. Keepaerial dash bentlegs, hip/rootxregistration, continuousstraightspearpointforwardrightandconnectedhands. Cell9 torsoalreadycorrect: keepbodyunchangedexceptheadsize. PreserveALLother14cells unchanged; no fullsheetzoom, no bodyheightfit, no changesoutside9/10. Each313.5cell keepsfullweaponwith7pxclearance. Sameflat#FF00FFbackdrop,1254x1254,4x4,no labels/grids/shadows/FX. Keynumericheadtarget66.7nativepx inbothselectedcells, not63.9: add3nativepixels toentireheadsizewithcleanneckanchor.",
+  "endObserved": "2026-11-08T01:48:48.508Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-daf5b713-f534-4e5e-9d63-165f432ab297.png",
+  "output": "raw/hit-dash.D54-final-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "cells9/10 eligible; actual head/similarity acceptance in validation, not inferred from prompt",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.D54-final-edited.png",
+    "sha256": "dc3ea1511c61f9c4d6177957cb50afb7ea96b56ee8ae9ae41bcdb4eded6206d3",
+    "bytes": 1845294,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.D54-edited.png",
+      "path": "E/raw/hit-dash.D54-edited.png",
+      "sha256": "2d0b18cfd5692b080a8ef94ed4785673a345daf6023f4a143f36ebdea6c41478",
+      "bytes": 1838708,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

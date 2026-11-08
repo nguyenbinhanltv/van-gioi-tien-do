@@ -1,0 +1,20 @@
+{
+  "clip": "idle",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Edit INPUT1 authoring template into a FULL FRAME-BY-FRAME game animation sheet of the SAME canonical KIEM TU T1 as INPUT2(E profile master) and fixed face from INPUT3(S master). EXACT4columns x4rows,16 chronological frames in row-major order. Output2048x2048 square,512px square cells; template logical256 units scale2x uniformly. Every figure SAME anatomical scale: crown MAIN hair cap tosole about216logicalpx (~432rawpx); elevated ponytail canextendabove crown but no bigger head. Canonical adult grey profileeye/straight brow/smallstraightnose/composedmouth,blackpony+cyanribbon,plainivoryshortsplitrobe/navycollar+navywaistsash/navypants/darksmallboots. Same oversized SIMPLE steelstraight sword/smallrectangularsilverguard/navygrip/cyanpommeltie in anatomical RIGHT nearhand,drawn and lowered forward-right. STRICT RIGHT-FACING EAST PROFILE every frame,noback/frontcamera turns,nocostumechanges. Material-tinted clean contour,2celtones+1highlight,NWlight,narrowrim,notblackink. Pure opaque uniform MAGENTA#FF00FF outside character,no shadow,no VFX,no particles,no glowhalo. Keep ALL limbs,hair,blade inside each own cell withpadding. The input grid/head/hip/ground lines/colored ellipses are invisible construction guides: follow their placement,then ERASE ALL visible guides/triangles/lines in output,leaving only character onmagenta,no text,numbers,labels,borders. Use small incremental poses and smootharcs,not16unrelatedposes or duplicatefrozenframes. Head/face stay consistent,secondaryhair/ribbon/sleeves lag1-3frames then settle. Preserve cellcanvasbaseline/scale; never rescale individual poses to fillcell.\nIDLE16: one shallow breathing cycle at24fps over16frames. Feet planted exactly sameplace onground inallframes,swordhandsteady. Torso rise/fall only1-2logicalpixels,no squash/stretch ofhead,no growing/shrinking. Frames1-4 smallinhale,5-8 breathcrest,9-12 exhale,13-16 gentlyreturn. Brief natural single-eye blink aroundframes7-9,neutralface otherwise. Ponytail tips/cyanribbons/slightrobehem flow follow breath with2framelag. Frame16 isone incremental step beforeframe1 so LOOP closes cleanly without doubled endpoint. No stepping,no swaying acrosscell,no attack.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:42:52.705Z",
+  "inputs": ["templates/idle.template.png", "../reference/E.master.raw.png", "../reference/S.master.raw.png"],
+  "status": "Full-pose source generated; pending visual/frame/loop/face/scale QA and D45 layer derivation",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-29551050-3f2b-4b2f-9bae-dd4469fc17f8.png",
+  "utcCompletedRecorded": "2026-11-07T20:43:24.519Z",
+  "rawSha256": "9b00935bf27637d776b23c2339b2f6246714793e746dd3ab494f12923a30f94b",
+  "actualRawDimensions": [1254, 1254],
+  "utcOutputFileModified": "2026-11-07T20:43:23.163058+00:00",
+  "diagnosticStatus": "No initial legacy findings; layers/variant gates pending"
+}

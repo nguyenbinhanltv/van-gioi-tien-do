@@ -106,6 +106,8 @@ Oct 31, 2026 · An Nguyen
 
 > [Cập nhật D35: hoạt cảnh xương nhân vật dùng DragonBones thay Spine 4.2 (runtime `dragon-bones` của Cocos 3.8.8, MIT); "Spine" trong tài liệu này đọc là "skeleton DragonBones"; số liệu không đổi. Xem [art/dragonbones.md](art/dragonbones.md).]
 
+[Cập nhật D56-master: chỉ master NE/N có nape và cả hai acromion thật sự bị che mới dùng `rear-breadth-only`, khai đủ vật che cụ thể tại `occlusions.nape/leftShoulder/rightShoulder`. Crown và breadth khối main-cap đặc nhìn thấy alpha≥128; chọn hàng rộng nhất có dải tóc liên tục, loại nét rời hoặc mảnh dưới 2 px, ribbon/pin/tassel. Ô dùng cùng quy tắc, crown nhìn thấy và breadth ±3% master, không tạo span dọc; không giới hạn lean khi master có kind này. Master D53 vẫn giữ giới hạn D56 cũ. Cửa sổ Lab D55 từ crown, rộng 1,08×breadth và cao đúng 1,0×breadth; không tạo evidence từ cửa sổ. Giữ D41/D54, foot/canvas và scale cố định.]
+
 ### Ngân sách hiệu năng
 
 | Hạng mục              | Web / Mobile                                                 | PC                             | Tài liệu gốc |

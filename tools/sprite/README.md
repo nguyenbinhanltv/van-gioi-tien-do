@@ -560,6 +560,39 @@ Lab hard findings with exact master/cell crops. HTML and supporting PNGs show th
 distributions. `--sensitivity-report` accepts the historical static-SSIM control report. The audit never exports assets,
 rewrites annotations, updates backlogs, or turns an exemption into a pass.
 
+### D56-master: nape and both acromions hidden on the approved master
+
+This narrow extension allows `masterHead.kind: "rear-breadth-only"` only on NE/N projects:
+
+```json
+{
+  "kind": "rear-breadth-only",
+  "crown": { "x": 130, "y": 15 },
+  "breadth": { "left": { "x": 108, "y": 30 }, "right": { "x": 149, "y": 30 } },
+  "occlusions": {
+    "nape": "long hair and ribbon cover the nape",
+    "leftShoulder": "fan and hair cover the left acromion",
+    "rightShoulder": "hair loop covers the right acromion"
+  }
+}
+```
+
+Coordinates above illustrate the schema, not certified Pháp tu measurements. All three concrete occluder strings
+are mandatory; empty/generic hidden/unknown values fail. Crown and both breadth endpoints must be alpha≥128 on
+the resized master. Both endpoints share a row and must be ordered left to right. Review the widest row of the
+**solid main hair cap**, taking endpoints of its contiguous mass; exclude detached strands or outline runs less
+than 2px thick, ribbons, pins and tassels. Apply exactly the same definition to master and aligned frames. The tool
+checks geometry/alpha, while source overlays and review establish hair-cap membership and real occlusion.
+
+Frames use `rear-breadth-only` with a reviewed `note`; their own `occluder` is optional for this master kind
+(when supplied it must be concrete). The master occlusion justifies the shared breadth-only reference even when
+a frame reveals a shoulder. With this
+master kind, ordinary clips including idle/walk may use it; breadth stays within ±3%, crown must be visible and
+no vertical span is reported. Out-of-band upright cells still require posture/secondary-overhang. A D53 master
+retains the original D56 dynamic-lean scope. D55 master/frame and temporal crops start exactly at the crown,
+with width 1.08×breadth and height 1.0×breadth (no vertical margin). No hidden nape/shoulder is projected, master art
+is unchanged, and head reasons never relax D55 identity or foot/canvas gates.
+
 ### D57 verified inherited registration
 
 For a skull-only correction, a clip may declare:

@@ -1,0 +1,37 @@
+{
+  "name": "E-run-three-head-repair",
+  "start": "2026-11-08T00:29:18.423Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-584876d2-3135-475b-814e-3868116ae950.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "THREE tiny skull repairs ONLY on exact THUONG TU E RUN4x4 sheet. Keep other13cells EXACTLY unchanged. Target sourcecells6 (row2col3),11(row3col4),12(row4col1). Their ACTUAL maincap/chin lengths afterpipeline are50.01,50.70,50.22logicalpx, slightly BELOW locked master52.55. Enlarge ENTIRE skull/mainhair/face/ear in just these3cells uniformly a tiny amount, neckanchored: cell6 about3native imagepixels larger crown-to-chin, cell11 about2nativepixels, cell12 about3nativepixels on1254squaresource (target about66.7nativepx head length). This means roughly4-5% of HEAD size, NOT 4-5% of body or cell. Preserve adult male EPROFILE face/hairline/identity, no face-only squash. Keep every body/arm/hand/foot/knee/spear/banner/sash/pose/rootregistration and stride timing unchanged, no wholefigure scaling or flattening. Lowpony attachment follows skull, trailing shape retained. Same16populated4x4squaremagenta#FF00FF, no text/guide/shadow/FX. A subtle2-3rawpixel head enlargement ONLY in cells6/11/12; don't enlarge accepted13heads.",
+  "endObserved": "2026-11-08T00:29:49.334Z",
+  "sourcePath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-612b935a-39e5-4158-8541-947568d4ef84.png",
+  "output": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.three-head-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "outputEvidence": {
+    "path": "E/raw/run.three-head-edited.png",
+    "sha256": "8df92eda448ae8be8d3cf20fca00c6d5eb515cb7a050bca13f1caaf29429d426",
+    "bytes": 1922485,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-584876d2-3135-475b-814e-3868116ae950.png",
+      "path": "E/raw/run.head-midpoint.png",
+      "sha256": "6a4b2ca456122d3c9e42aa5adf247b4246988ac9fd46ca04d1d511b3ef1b338b",
+      "bytes": 1913287,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

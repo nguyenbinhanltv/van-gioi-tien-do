@@ -153,6 +153,41 @@ describe('D60 real image quality and window-only comparison', () => {
     expect(finding.headEvidence!.ratio).toBeUndefined();
     expect(finding.headEvidence!.bracketed!.temporal.map((p) => Math.min(p.head, p.torso))).toEqual([1, 1]);
   });
+  it('preserves a certified D56 breadth-only master without inventing a master span', () => {
+    const rear = {
+      kind: 'rear-breadth-only' as const,
+      crown: masterHead.crown,
+      breadth: { left: { x: 110, y: 40 }, right: { x: 146, y: 40 } },
+      occlusions: {
+        nape: 'back hair over nape',
+        leftShoulder: 'fan over left shoulder',
+        rightShoulder: 'hair over right shoulder',
+      },
+    };
+    const clip = fixture();
+    const measured: HeadEvidence = {
+      kind: 'rear-breadth-only',
+      crown: rear.crown,
+      breadth: rear.breadth,
+      note: 'Certified solid skull breadth',
+    };
+    const headEvidence = Object.fromEntries(
+      clip.frames.map((_, i) => [
+        i,
+        i === 4 ? { ...bracket, hiddenEndpoints: ['skullBase', 'breadth.left', 'breadth.right'] } : measured,
+      ]),
+    ) as Record<number, HeadEvidence>;
+    const result = checkHeights({ ...clip, direction: 'NE', headEvidence }, { ...options, masterHead: rear }).find(
+      (f) => f.frame === 4,
+    )!;
+    expect(result).toMatchObject({ severity: 'info', measurement: 'unmeasured', metric: 'head_bracketed' });
+    expect(result.headEvidence!.masterSizePx).toBeUndefined();
+    const crops = similarityRegionsForPair(master, master, 208, rear, headEvidence[4]);
+    expect(crops.master.head.right - crops.master.head.left).toBeCloseTo(36 * 1.08);
+    expect(crops.master.head.bottom - crops.master.head.top).toBeCloseTo(36);
+    const invalid = { ...rear, occlusions: { ...rear.occlusions, nape: '' } };
+    expect(() => similarityRegionsForPair(master, master, 208, invalid, headEvidence[4])).toThrow(/invalid D56-master/);
+  });
   it('rebuilds the master and both measured-neighbour windows from visible crowns, using fixed master dimensions', () => {
     const tilted = { crown: { x: 128, y: 24 }, chin: { x: 138, y: 60 } };
     const crops = similarityRegionsForPair(master, master, 208, tilted, bracket);

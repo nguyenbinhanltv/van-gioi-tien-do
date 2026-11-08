@@ -1,6 +1,6 @@
 /** D60 is an explicit unmeasured bridge, never a projected anatomical landmark. */
 import type { HeadPoint } from './head-evidence.js';
-import { checkHeadEvidence, headLandmarkSize } from './head-evidence.js';
+import { checkHeadEvidence, headLandmarkSize, validRearBreadthMaster } from './head-evidence.js';
 import type { Finding, QaClip, QaOptions } from './qa.js';
 import { similarityRegionsForPair } from './similarity-crops.js';
 import { labPaletteDistance, HEAD_PALETTE_LAB_MAX, TORSO_PALETTE_LAB_MAX } from './palette-similarity.js';
@@ -101,7 +101,12 @@ export function bracketedPreconditions(
   if (!clip.loop && (frame === 0 || frame === total - 1))
     return failure('head_bracket_neighbours', 'a nonloop edge has no pair of temporal neighbours');
   const neighbours = [(frame + total - 1) % total, (frame + 1) % total] as const;
-  if (!options.masterHead || headLandmarkSize(options.masterHead, options.master.width, options.master.height) === null)
+  if (
+    !options.masterHead ||
+    (options.masterHead.kind === 'rear-breadth-only'
+      ? !validRearBreadthMaster(options.masterHead, options.master)
+      : headLandmarkSize(options.masterHead, options.master.width, options.master.height) === null)
+  )
     return failure('head_bracket_master', 'a valid measured locked master is required; masters cannot be bracketed');
   for (const neighbour of neighbours) {
     const f = clip.frames[neighbour],

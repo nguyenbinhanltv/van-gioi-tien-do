@@ -1,0 +1,19 @@
+{
+  "clip": "meditate",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "attempt": 2,
+  "frames": 16,
+  "prompt": "Complete this16-cell SEATED MEDITATION authoringguide intoa smoothfinishedKIEMTU T1 loop. CRITICAL: UN-SCALED CANONICALMASTERHEADSTENCILS alreadyplacedineachcellaretheABSOLUTEheadSIZE/face/cameraauthority. KEEPtheexactstencilskullsize,crown/chinspacing,eye/brow/nose/mouth/jawfeaturesandprofileorientation. CloseoneprofileeyeformeditionbutDO NOTGROWtheheadwhenbodyisseated. Complete/inpaintonlythevisibleguidejoinaroundneckandupperponytailsohairflowsnaturallyintoseatedbodybelow,keepingcanonblackpony/cyanribbon. Plainivory/navyT1robe,crossednavylegs,darksmallboots,simplesteelswordRIGHT handrestingacrossknees,otherpalmgentlemudra. DoNOTaddarmor/crown/gem/lotus/FX/halo.16chronologicalcells4x4,sameSQUAREcanvasratio. Oneveryshallowbreathcycle,headpositionfollowsguide±1logicalpx,sleevesandhairtipslag2frames,closedeyeandcalmfaceconsistent,cleanlooplastframeincrementbeforefirst. Keepseatedposturegrounded,notfloating,bodyandswordinsideowncellpadding. Materialtintedcleanline,2celtones+1highlight,NWlight. OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,notransparency,text,bordersorshadows. GuideseamsareINPUTconstruction,notarttokeep. OutputmusthaveNOcutrectangles/seams,andheadmustnotscaleuporlookbaby-like.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:22:55.636Z",
+  "inputs": ["templates/meditate.head-stencil-guide.png"],
+  "status": "Generated stencil/master-edit repair; raw preserved, acceptance pending head/scale/loop/clip QA",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-e80bdb6b-7106-4df6-bd47-90b89cdd6ba2.png",
+  "utcCompletedRecorded": "2026-11-07T21:24:16.438Z",
+  "rawFile": "sheets/meditate.attempt-02.raw.png",
+  "rawSha256": "68e13da5d415b37453cda98f6b597c6db027951f118efc76eeed71aea4b5a2e7",
+  "originalOutputByteIdentical": true,
+  "rawHashVerifiedUTC": "2026-11-08T05:05:28.342252+00:00"
+}

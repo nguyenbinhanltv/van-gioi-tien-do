@@ -1,0 +1,46 @@
+{
+  "name": "E-dash-midpoint",
+  "start": "2026-11-08T00:38:48.651Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-reduced.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "HEAD SIZE correction ONLY for8 DASH cells6..13 zero-based in this4x4 grouped sprite sheet. Image1 original heads somewhatlarge; image2 reduction too small. Set entire skull+mainhair+face+ear size MIDWAY between image1 and image2, closer to locked image3. Exact roundedmaincap crown-to-jaw length target66.7nativepx (52.55alignedpx); maincap excludes strayspikes andpony. About3%wholehead reduction fromimage1, NOT6%reductionimage2. Preserve neckanchors and clean collarseams, no doubledoutlines/gaps. Use image1 as fullsheetbase. First6cells(hit) and final2cells(standingrecovery) EXACTLY unchanged. Keep all8dash body/legs/hands/weapon/roottravel exact, no scalezoom or uprightposes. Sameplainnavy/ivory/red maleT1, rightEprofile.1254square,flatmagenta,no labels/guides/FX.",
+  "endObserved": "2026-11-08T00:39:46.534Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-85caed71-6733-4202-8319-c41cc326d67d.png",
+  "output": "raw/hit-dash.head-midpoint.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "candidate pending aligned manual landmarks",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.head-midpoint.png",
+    "sha256": "00180b194ff65e0de978e8f41cbb296d1da12c318150914106333c6cd7713d54",
+    "bytes": 1835626,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.png",
+      "path": "E/raw/hit-dash.png",
+      "sha256": "ec564f9ada25510c06b3df3fa91ee75577c9e6215ea23e9f70bb98c50d7b528b",
+      "bytes": 1839508,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-reduced.png",
+      "path": "E/raw/hit-dash.head-reduced.png",
+      "sha256": "8ed67d13af1e50e45b60c656e75f4288023b85b6bb3452e3e099f13e4c7ab023",
+      "bytes": 1827627,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

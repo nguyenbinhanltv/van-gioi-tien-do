@@ -1,0 +1,149 @@
+{
+  "status": "Reviewed walk fullsource selection;0hard/0soft includingcontacts. FinalCocosandsmoothnesscapturepending.",
+  "sourceSha256": "c8fc9927cdda541d4870957f543f9fbce7230d539a4c2572329f7e407bd430a0",
+  "masterSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "masterHead": {
+    "kind": "crown-chin",
+    "crown": {
+      "x": 120.5,
+      "y": 16.5
+    },
+    "chin": {
+      "x": 138.5,
+      "y": 67.5
+    }
+  },
+  "clip": {
+    "name": "walk",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "walk",
+    "kind": "upright",
+    "sheet": "sheets/walk.repaired-034.png",
+    "manifest": "templates/walk.template.json",
+    "vertical": "keep",
+    "heightPolicy": "head-size-v1",
+    "authoredOrigins": {
+      "0": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "1": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "2": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "3": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "4": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "5": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "6": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "7": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "8": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "9": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "10": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "11": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "12": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "13": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "14": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      },
+      "15": {
+        "kind": "lattice-root",
+        "pelvisX": 115.68584437086092,
+        "groundY": 232,
+        "reason": "preserve authored root travel",
+        "evidence": "Source is pre-edit canonical aligned256 D55 walkframes, withoriginalcomputedregistration bakedonce, thenfixedlatticeX115.68584437086092/ground232retained. Legmaskeditonly;outsideRGBAexactincludingweapon/head/torso, seewalk.leg-repair-03.proof.json. No body fit or foot-speed change."
+      }
+    }
+  },
+  "proofs": ["walk.leg-repair-03.proof.json", "walk.leg-repair-034.proof.json"],
+  "notes": [
+    "Actualfootfindings8->2->0. Frame5plantedsoleprevious103.25658 vsghost109.01918; sameboot+6authoringstencil, actualpostAIgateclear.",
+    "Face/torso/swordsourceRGBAoutsideeachdeclaredlegmask verifiedafterPNGencoding; no headregeneration orbodyfit.",
+    "Originalperframecomputedalignmentbakedintocanonical256sourceonce; fixedsameauthoringlatticeground232forallcells, no perframesolefitting, footspeedortimingchange."
+  ]
+}

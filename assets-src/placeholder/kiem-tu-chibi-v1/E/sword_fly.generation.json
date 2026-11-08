@@ -1,0 +1,18 @@
+{
+  "clip": "sword_fly",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 12,
+  "cols": 4,
+  "rows": 3,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x3rows,12activecells,4:3aspect,target2048x1536(oruniformlyscaled4:3),NEVERsquareor3:2.\n12frame LOOP riding SAME simpleSTEELSWORD horizontallytipRIGHT belowfeet. ThisactivityEXCEPTION:bladeunderfeetnotinhand;right handrelaxednearwaist,leftarmbalances. Slightlybentkneeskeepbodyandheadfullyinsidecellwhilehovering;noanatomicalshrink. Bothfeetplacednaturallyonblade,headsizefixed. Gentlehover/pitchonecycle,hair/cyanpommeltasselstreamLEFTwithlag. No clouds/newboards/extraweapon/VFX. EprofilealwaysRIGHT.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:04:26.619Z",
+  "inputs": ["templates/channel.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-59cb77af-7e44-4180-b881-d87c919d546e.png",
+  "utcCompletedRecorded": "2026-11-07T21:06:04.771Z",
+  "rawSha256": "4f0b0646df13ca87cd90df3e296cfdf642dc209aa4baa07061c2d78f44f2e1c1",
+  "utcOutputFileModified": "2026-11-07T21:04:53.959632+00:00"
+}

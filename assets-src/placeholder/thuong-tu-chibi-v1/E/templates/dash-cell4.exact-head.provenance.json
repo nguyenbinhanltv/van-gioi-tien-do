@@ -1,0 +1,34 @@
+{
+  "purpose": "Input-only imagegen reference; never output pixel repair. Fixed master crop/DPI stencil, no per-pose anatomy fitting.",
+  "input": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.cell4-edited.png",
+  "master": "assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+  "masterSha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+  "crop": {
+    "x": 94,
+    "y": 14,
+    "width": 53,
+    "height": 57
+  },
+  "inputOnlyExcludedWeaponCorner": {
+    "x": 49,
+    "y": 0,
+    "width": 4,
+    "height": 20
+  },
+  "sourceScale": 1.2699652777777777,
+  "cell": 10,
+  "alignedChin": {
+    "x": 173,
+    "y": 82
+  },
+  "nativeChin": {
+    "x": 208.58447912607178,
+    "y": 104.63606770833339
+  },
+  "placement": {
+    "x": 153.30363762280382,
+    "y": 37.14861877042486
+  },
+  "output": "assets-src/placeholder/thuong-tu-chibi-v1/E/templates/dash-cell4.exact-head.template.png",
+  "sha256": "25a111b1c69cbea7b7d21095c3cd0893f004c222e4d742d446c3dac4be8ce98a"
+}

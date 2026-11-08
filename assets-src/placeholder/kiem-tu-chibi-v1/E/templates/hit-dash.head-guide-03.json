@@ -1,0 +1,112 @@
+{
+  "status": "AUTHORING ONLY. Donor is PINNED canonicalE master head, unscaled54.083269px(centre). No guide is output evidence.",
+  "guideSha256": "2b49c2e353574a76ef97aa84a6d5557588850d9affcd949c3d3fd3048d4b81e8",
+  "donorSha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa",
+  "records": [
+    {
+      "cell": 0,
+      "clip": "hit",
+      "localFrame": 0,
+      "sourceSha256": "d89045a8b432fa596cbace2d1f705a28493fe01292b8224da9eace8a5c7018e5"
+    },
+    {
+      "cell": 1,
+      "clip": "hit",
+      "localFrame": 1,
+      "sourceSha256": "2fcc29dfce55db0befb4cc3ba6340bb8c413564b68e37e79f1f0a9de2a622b53"
+    },
+    {
+      "cell": 2,
+      "clip": "hit",
+      "localFrame": 2,
+      "sourceSha256": "1ae3dc6621291db275e15becf0ea741be194dcddd094c7009b29f9a717a3f0e6"
+    },
+    {
+      "cell": 3,
+      "clip": "hit",
+      "localFrame": 3,
+      "sourceSha256": "a7996c4987f5c2ebc531aa3bc26994c9c9181dc67c73a66abca8f87d46b8bda1"
+    },
+    {
+      "cell": 4,
+      "clip": "hit",
+      "localFrame": 4,
+      "sourceSha256": "a74ddf1e7b8a85ef676031369589ba79599ede17660ba91dd55df956320b4b4f"
+    },
+    {
+      "cell": 5,
+      "clip": "hit",
+      "localFrame": 5,
+      "sourceSha256": "ceb1f9f5aaaaa9d602edf7489ebb1b2cc49272bcef550d41f6987359cd3a5515"
+    },
+    {
+      "cell": 6,
+      "clip": "dash",
+      "localFrame": 0,
+      "sourceSha256": "7d1ed3fd52f6ed6a5f1e49859a5df9fa27e0a30a0447b0856724392885e59f60"
+    },
+    {
+      "cell": 7,
+      "clip": "dash",
+      "localFrame": 1,
+      "sourceSha256": "3b2e680917b60526301b781cdd96a18d08a573d7779d9f7d1de3995939fc64b1"
+    },
+    {
+      "cell": 8,
+      "clip": "dash",
+      "localFrame": 2,
+      "sourceSha256": "a5d20c5de432bf19f1703f0dc01c9cb4a53f52be937eb6493db9fbec56c11840",
+      "dash": 2,
+      "dx": 71,
+      "dy": 34,
+      "cutout": {
+        "left": 173,
+        "top": 44,
+        "right": 225,
+        "bottom": 110
+      }
+    },
+    {
+      "cell": 9,
+      "clip": "dash",
+      "localFrame": 3,
+      "sourceSha256": "355b810fbb83935ae96356c947f84bb3f4bbe20f9146ff685be310322cc120c7"
+    },
+    {
+      "cell": 10,
+      "clip": "dash",
+      "localFrame": 4,
+      "sourceSha256": "664594a3eecb8c146fc7da6d0a8679cf15cd76c2a99e69f08d334830e8211a41"
+    },
+    {
+      "cell": 11,
+      "clip": "dash",
+      "localFrame": 5,
+      "sourceSha256": "0ee6fbbfb0aaa29a2c42896a7187350ee21845620ae882aaf4c832e2e6b8f713"
+    },
+    {
+      "cell": 12,
+      "clip": "dash",
+      "localFrame": 6,
+      "sourceSha256": "db6627729e786a299253c1cdb07e508bef8ab202c8e14a41d8393382b9aa1a59"
+    },
+    {
+      "cell": 13,
+      "clip": "dash",
+      "localFrame": 7,
+      "sourceSha256": "af793ce772aafb64b98ccef352f68e401573b960861f73eae846b4188f81b5bb"
+    },
+    {
+      "cell": 14,
+      "clip": "dash",
+      "localFrame": 8,
+      "sourceSha256": "5a8adf6996f92267c67e3a8b9825da03cb2df7280f6429152576a5dbb522c01d"
+    },
+    {
+      "cell": 15,
+      "clip": "dash",
+      "localFrame": 9,
+      "sourceSha256": "f8505dec3f7478b77ba658fe251882a539c65d7b82b6ef654e7d13d8e48d2785"
+    }
+  ]
+}

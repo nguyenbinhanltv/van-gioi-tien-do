@@ -8,6 +8,7 @@ import {
   landmarkSimilarityRegions,
   legacySimilarityRegions,
   crownAnchoredSimilarityRegions,
+  certifiedMasterSimilarityRegions,
   type SimilarityCropMeasurement,
   type SimilarityFrameHead,
 } from './similarity-crops.js';
@@ -26,7 +27,7 @@ export function measureTemporalSimilarity(
   if (options.firstHead?.kind === 'bracketed-occlusion' || options.secondHead?.kind === 'bracketed-occlusion') {
     if (!options.master || !options.masterHead || !options.firstHead || !options.secondHead)
       throw new Error('D60 temporal comparison requires the certified master and both visible crowns');
-    const reference = landmarkSimilarityRegions(options.master, options.masterHead, options.masterHeight);
+    const reference = certifiedMasterSimilarityRegions(options.master, options.masterHead, options.masterHeight);
     const m = crownAnchoredSimilarityRegions(first, options.firstHead, reference, options.masterHeight);
     const f = crownAnchoredSimilarityRegions(second, options.secondHead, reference, options.masterHeight);
     const head = registeredNativeSsim(first, second, m.head, f.head),
@@ -42,6 +43,7 @@ export function measureTemporalSimilarity(
     return { head: head.score, torso: torso.score, components: { head, torso }, crops };
   }
   const breadth = options.firstHead?.kind === 'rear-breadth-only' || options.secondHead?.kind === 'rear-breadth-only';
+  const breadthMaster = options.masterHead?.kind === 'rear-breadth-only';
   const span =
     options.masterHead?.kind === 'rear-span-only' ||
     options.firstHead?.kind === 'rear-span-only' ||
@@ -65,7 +67,13 @@ export function measureTemporalSimilarity(
         first,
         options.firstHead,
         options.masterHeight,
-        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
+        span
+          ? 'rear-span-window'
+          : breadthMaster
+            ? 'rear-breadth-master-window'
+            : breadth
+              ? 'rear-breadth-window'
+              : undefined,
       )
     : undefined;
   const b = options.secondHead
@@ -73,7 +81,13 @@ export function measureTemporalSimilarity(
         second,
         options.secondHead,
         options.masterHeight,
-        span ? 'rear-span-window' : breadth ? 'rear-breadth-window' : undefined,
+        span
+          ? 'rear-span-window'
+          : breadthMaster
+            ? 'rear-breadth-master-window'
+            : breadth
+              ? 'rear-breadth-window'
+              : undefined,
       )
     : undefined;
   if (a && b && (a.headKind !== b.headKind || (!breadth && !span && a.evidenceKind !== b.evidenceKind)))

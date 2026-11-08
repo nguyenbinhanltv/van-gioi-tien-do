@@ -1,0 +1,445 @@
+{
+  "policy": "D47 head-size-v1; D54 similarity evaluated separately with all head reasons ignored",
+  "status": "24 manually reviewed heads in unchanged3% band; source hard0 and D54pass24/fail0/unmeasured0.",
+  "coordinateSpace": "Aligned256px cells @2x, after locked Lanczos3 source transform",
+  "measurement": "Manual visual review of opaque main cap/jaw contours, assisted by alpha-edge readouts in manually bounded regions. Not semantic anatomy detector certification, no per-frame fitting or tolerance adjustment.",
+  "masterFile": "../reference/E.master.png",
+  "masterSha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+  "master": {
+    "crown": {
+      "x": 121.96470588235293,
+      "y": 16.95294117647061
+    },
+    "chin": {
+      "x": 137.52941176470588,
+      "y": 67.14117647058826
+    }
+  },
+  "masterSizePx": 52.54635126383058,
+  "rangePx": [50.99019513592785, 54.03008421240892],
+  "jawTipClarification": {
+    "clip": "dash",
+    "cell": 4,
+    "pixel": [169, 81],
+    "rgba": [31, 28, 41, 162],
+    "outerBoundary": [169, 82],
+    "reason": "One contiguous opaque jaw-tip pixel missed by the >=2px-wide ROI helper; independently inspected with alpha/skin outline and enlarged grid. No neck or weapon edge used."
+  },
+  "rows": [
+    {
+      "clip": "run",
+      "cell": 0,
+      "reason": "posture",
+      "crown": {
+        "x": 134,
+        "y": 19
+      },
+      "chin": {
+        "x": 146.5,
+        "y": 70
+      },
+      "sizePx": 52.50952294584288,
+      "ratio": 0.9992991270163977,
+      "frameSha256": "57574429485d655364a872ca022bf0f6395353a774be83b3250b5b1d182f1d7d",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 1,
+      "reason": "posture",
+      "crown": {
+        "x": 134.5,
+        "y": 20
+      },
+      "chin": {
+        "x": 146.5,
+        "y": 70
+      },
+      "sizePx": 51.419840528729765,
+      "ratio": 0.9785615802428468,
+      "frameSha256": "c4010439ed771726586688fd793edc1079c9e31e1a528c54b969f4137df8f071",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 2,
+      "reason": "posture",
+      "crown": {
+        "x": 134,
+        "y": 18
+      },
+      "chin": {
+        "x": 146.5,
+        "y": 68
+      },
+      "sizePx": 51.53882032022076,
+      "ratio": 0.9808258628929134,
+      "frameSha256": "6f73d3a533cdb78842b6a4a57f0c3cc3077889d9d1b4b4cee0a19a8c3f8a8e74",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 3,
+      "reason": "posture",
+      "crown": {
+        "x": 134.5,
+        "y": 16
+      },
+      "chin": {
+        "x": 147,
+        "y": 66
+      },
+      "sizePx": 51.53882032022076,
+      "ratio": 0.9808258628929134,
+      "frameSha256": "93af6d07e274549562b6251b163f850313e0fe97e48a844a8bdfb012bc33306e",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 4,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 14
+      },
+      "chin": {
+        "x": 147,
+        "y": 65
+      },
+      "sizePx": 52.392747589718944,
+      "ratio": 0.997076796572603,
+      "frameSha256": "3ff0510873ec775793ca17139eb22ac7e666ca4336a27a3de9c42714cb4d0d23",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 5,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 14
+      },
+      "chin": {
+        "x": 147,
+        "y": 64
+      },
+      "sizePx": 51.419840528729765,
+      "ratio": 0.9785615802428468,
+      "frameSha256": "ef3d58912256ec8374b326b0abd61b1ba12f0015c97079f45b8fdfa80edabf47",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 6,
+      "reason": "posture",
+      "crown": {
+        "x": 137.5,
+        "y": 13
+      },
+      "chin": {
+        "x": 147,
+        "y": 65
+      },
+      "sizePx": 52.86066590575643,
+      "ratio": 1.0059816644613,
+      "frameSha256": "58807ee6c769a7d448c0864ac2adc3cc68d175fc1bff3bc034fd86d523dface2",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 7,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 18
+      },
+      "chin": {
+        "x": 147,
+        "y": 68
+      },
+      "sizePx": 51.19570294468082,
+      "ratio": 0.974296058876319,
+      "frameSha256": "dcff4b6a0676303c13beb41ccb87505d8ed6b12cf6b45ece67c32e8c3618fe85",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 8,
+      "reason": "posture",
+      "crown": {
+        "x": 136.5,
+        "y": 20
+      },
+      "chin": {
+        "x": 147,
+        "y": 70
+      },
+      "sizePx": 51.090605790105876,
+      "ratio": 0.9722959741502215,
+      "frameSha256": "34a5e3f9068d285a0f35ea9ae9754d06b89393a902926e5230453837a950bc7d",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 9,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 21
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 73
+      },
+      "sizePx": 53.48130514488217,
+      "ratio": 1.0177929363041265,
+      "frameSha256": "061b943e0f2ab3338a43c94e82fcb32ab5d2cf30b861d6d236dd04c168aa4612",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 10,
+      "reason": "posture",
+      "crown": {
+        "x": 135.5,
+        "y": 18
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 68
+      },
+      "sizePx": 51.419840528729765,
+      "ratio": 0.9785615802428468,
+      "frameSha256": "d7eb0dcd667fa7db036bfec2d3b625eedc07dbf03e3c8af4d9b1dd13d2296518",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 11,
+      "reason": "posture",
+      "crown": {
+        "x": 134.5,
+        "y": 18
+      },
+      "chin": {
+        "x": 147,
+        "y": 68
+      },
+      "sizePx": 51.53882032022076,
+      "ratio": 0.9808258628929134,
+      "frameSha256": "41bb6b68bdb753620779a1ac8e916348ddeebd89eadc9e32de8c077d3de2de06",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 12,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 15
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 67
+      },
+      "sizePx": 53.48130514488217,
+      "ratio": 1.0177929363041265,
+      "frameSha256": "612cca3fa5822d1726f9bcb1f1b0c9830bd3612e982cbb157c8fcdb33c2deece",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 13,
+      "reason": "posture",
+      "crown": {
+        "x": 135,
+        "y": 16
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 66
+      },
+      "sizePx": 51.53882032022076,
+      "ratio": 0.9808258628929134,
+      "frameSha256": "444d991c802aae29757f57ec9ed17e14b7918c260f2e06788a255216fa6b320c",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 14,
+      "reason": "posture",
+      "crown": {
+        "x": 137.5,
+        "y": 19
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 69
+      },
+      "sizePx": 50.99019513592785,
+      "ratio": 0.9703850773560012,
+      "frameSha256": "43442646da7a5bd268030d216950d577d390c5656a25fd32b92b60f5aedec453",
+      "reviewed": true
+    },
+    {
+      "clip": "run",
+      "cell": 15,
+      "reason": "posture",
+      "crown": {
+        "x": 136,
+        "y": 21
+      },
+      "chin": {
+        "x": 147.5,
+        "y": 72
+      },
+      "sizePx": 52.28049349422785,
+      "ratio": 0.9949405094129584,
+      "frameSha256": "d0ef54ad8653cab4bb8a7b62d2b3a44b92143d41613fe5fcc885514fe77370ba",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 0,
+      "reason": "posture",
+      "crown": {
+        "x": 152.5,
+        "y": 50
+      },
+      "chin": {
+        "x": 162.5,
+        "y": 103
+      },
+      "sizePx": 53.9351462406472,
+      "ratio": 1.0264299031885888,
+      "frameSha256": "11a599b7ec82723c39f217c1bd21dcc58f126f22aea49daa9bd11fe527c5c1e4",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 1,
+      "reason": "posture",
+      "crown": {
+        "x": 161.0,
+        "y": 50
+      },
+      "chin": {
+        "x": 170.5,
+        "y": 101
+      },
+      "sizePx": 51.87725898695882,
+      "ratio": 0.9872666272580506,
+      "frameSha256": "e0e782dcc07cdd8b2e04c1e95d5883974f662f1d1d7147c936edcde6c219ed15",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 2,
+      "reason": "posture",
+      "crown": {
+        "x": 167.5,
+        "y": 48
+      },
+      "chin": {
+        "x": 177.5,
+        "y": 100
+      },
+      "sizePx": 52.952809179494906,
+      "ratio": 1.0077352262505066,
+      "frameSha256": "a89d1a82a458980f4935df6ff01b8c113c41535505156c4eabbbfd1be7dd596f",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 3,
+      "reason": "posture",
+      "crown": {
+        "x": 156.5,
+        "y": 30
+      },
+      "chin": {
+        "x": 169.0,
+        "y": 82
+      },
+      "sizePx": 53.48130514488217,
+      "ratio": 1.0177929363041265,
+      "frameSha256": "0f38255c8ca7b35c565da578dd823474ec1cfef447aa46ae622e721dad6830e1",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "reason": "posture",
+      "crown": {
+        "x": 155.5,
+        "y": 32
+      },
+      "chin": {
+        "x": 169,
+        "y": 82
+      },
+      "sizePx": 51.79044313384468,
+      "ratio": 0.985614450636343,
+      "frameSha256": "7081c3739ae061770f5030cc918c977bdc6fb253f04bbddb4cb994952ab70d4e",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "reason": "posture",
+      "crown": {
+        "x": 165.5,
+        "y": 36
+      },
+      "chin": {
+        "x": 176.0,
+        "y": 89
+      },
+      "sizePx": 54.03008421240892,
+      "ratio": 1.028236650364716,
+      "frameSha256": "15057ca38fa3f0d2a6c479d7f8d0dd67c359e191d97769b9a1d26fd2d05aed27",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 6,
+      "reason": "posture",
+      "crown": {
+        "x": 161.5,
+        "y": 42
+      },
+      "chin": {
+        "x": 174.0,
+        "y": 92
+      },
+      "sizePx": 51.53882032022076,
+      "ratio": 0.9808258628929134,
+      "frameSha256": "9c0d7db5103a9c3d45464fe0f75264b11f65e403f278c287f89f4d27f052fc1e",
+      "reviewed": true
+    },
+    {
+      "clip": "dash",
+      "cell": 7,
+      "reason": "posture",
+      "crown": {
+        "x": 134.5,
+        "y": 34
+      },
+      "chin": {
+        "x": 148.0,
+        "y": 86
+      },
+      "sizePx": 53.723830838837245,
+      "ratio": 1.0224083984270316,
+      "frameSha256": "a27c86b238febe97ef6c1964f4d424b7f6d529dede16460e6ef01872f9b978b4",
+      "reviewed": true
+    }
+  ],
+  "matteKeyReview": {
+    "inner": 35,
+    "outer": 135,
+    "method": "Reviewed main-cap/jaw anatomy anchors are retained after colour/alpha edge cleanup; no geometric source scale/origin changed. Alpha-128 population candidates are not semantic crown detection.",
+    "clarification": "For run6, row12 contains raised/feathered swept-hair pixels; main-cap crown remains the previously reviewed (137.5,13) on contiguous cap highlight/mass. Dash5 crown remains(165.5,36), excluding the thin upper strand. Newly retained feathered coverage is not redefined as skull growth.",
+    "reference": "Final 4x nearest marked proof PNGs show the points; frame hashes refreshed after the final render."
+  }
+}
