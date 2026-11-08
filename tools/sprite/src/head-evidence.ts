@@ -1,6 +1,7 @@
 /** Reviewed skull landmarks; no automatic detector or per-frame rescaling. */
 import type { Finding, QaClip, QaOptions } from './qa.js';
 import type { Direction } from '@vgtd/shared';
+import type { Image } from '@vgtd/rig';
 
 export type HeightPolicy = 'head-size-v1';
 
@@ -19,7 +20,12 @@ export interface SkullBreadth {
   readonly right: HeadPoint;
 }
 export type HeadEvidenceKind =
-  'crown-chin' | 'rear-skull-base' | 'rear-crown-shoulder' | 'rear-base-ornament' | 'rear-crown-shoulder-single';
+  | 'crown-chin'
+  | 'rear-skull-base'
+  | 'rear-crown-shoulder'
+  | 'rear-base-ornament'
+  | 'rear-crown-shoulder-single'
+  | 'rear-breadth-only';
 export interface FrontHeadLandmarks {
   readonly kind?: 'crown-chin';
   readonly crown: HeadPoint;
@@ -61,7 +67,15 @@ export interface RearOrnamentLandmarks {
 }
 export type HeadLandmarks =
   FrontHeadLandmarks | RearHeadLandmarks | RearShoulderLandmarks | RearOrnamentLandmarks | RearSingleShoulderLandmarks;
-export type HeadEvidence = HeadLandmarks & { readonly note: string };
+/** D56 is frame-only: the locked master retains its original, fuller landmark definition. */
+export interface RearBreadthOnlyLandmarks {
+  readonly kind: 'rear-breadth-only';
+  readonly crown: HeadPoint;
+  readonly breadth: SkullBreadth;
+  /** Concrete object hiding the shoulder corner in this dynamic lean. */
+  readonly occluder: string;
+}
+export type HeadEvidence = (HeadLandmarks | RearBreadthOnlyLandmarks) & { readonly note: string };
 export interface HeadMeasurement {
   readonly kind?: HeadEvidenceKind;
   readonly direction?: Direction;
@@ -71,14 +85,16 @@ export interface HeadMeasurement {
   readonly reason: string;
   readonly master: HeadLandmarks;
   readonly frame: HeadEvidence;
-  readonly masterSizePx: number;
-  readonly sizePx: number;
-  readonly ratio: number;
+  /** Absent for D56: no vertical/span measurement was made. */
+  readonly masterSizePx?: number;
+  readonly sizePx?: number;
+  readonly ratio?: number;
   readonly masterBboxHeightPx: number;
   readonly bboxHeightPx: number;
 }
 
-export const headEvidenceKind = (head: HeadLandmarks): HeadEvidenceKind => head.kind ?? 'crown-chin';
+export const headEvidenceKind = (head: HeadLandmarks | RearBreadthOnlyLandmarks): HeadEvidenceKind =>
+  head.kind ?? 'crown-chin';
 export function headLandmarkStart(head: HeadLandmarks): HeadPoint {
   return head.kind === 'rear-base-ornament' ? head.ornamentAnchor : head.crown;
 }
@@ -94,7 +110,11 @@ export function headLandmarkEnd(head: HeadLandmarks): HeadPoint {
 }
 const validPoint = (p: HeadPoint | undefined, width: number, height: number) =>
   p && Number.isFinite(p.x) && Number.isFinite(p.y) && p.x >= 0 && p.y >= 0 && p.x <= width && p.y <= height;
-export function headLandmarkBreadth(head: HeadLandmarks, width: number, height: number): number | null {
+export function headLandmarkBreadth(
+  head: HeadLandmarks | RearBreadthOnlyLandmarks,
+  width: number,
+  height: number,
+): number | null {
   const b = head.breadth;
   if (!b || !validPoint(b.left, width, height) || !validPoint(b.right, width, height)) return null;
   const size = Math.hypot(b.left.x - b.right.x, b.left.y - b.right.y);
@@ -197,6 +217,82 @@ export function checkHeadEvidence(
         )
       : [];
   const image = clip.frames[frame]?.image;
+  if (evidence.kind === 'rear-breadth-only') {
+    if (!['NE', 'N'].includes(clip.direction ?? 'E'))
+      return failure('head_evidence_direction', 'breadth-only evidence requires a same-direction NE/N master');
+    if (!['dash', 'run', 'attack', 'attack_2', 'attack_3'].includes(clip.name) || reason !== 'posture')
+      return failure(
+        'head_evidence_scope',
+        'breadth-only evidence requires a dynamic dash/run/attack lean declared posture',
+      );
+    const master = options.masterHead;
+    const breadth = image ? headLandmarkBreadth(evidence, image.width, image.height) : null;
+    const masterBreadth = master ? headLandmarkBreadth(master, options.master.width, options.master.height) : null;
+    const opaque = (raster: Image, point: HeadPoint) =>
+      validPoint(point, raster.width, raster.height) &&
+      Math.round(point.x) < raster.width &&
+      Math.round(point.y) < raster.height &&
+      raster.data[(Math.round(point.y) * raster.width + Math.round(point.x)) * 4 + 3]! >= 128;
+    if (
+      !image ||
+      !master ||
+      masterBreadth === null ||
+      breadth === null ||
+      headLandmarkSize(master, options.master.width, options.master.height) === null ||
+      'shoulderTop' in evidence ||
+      'chin' in evidence ||
+      'skullBase' in evidence ||
+      'ornamentAnchor' in evidence ||
+      typeof evidence.occluder !== 'string' ||
+      !evidence.occluder.trim() ||
+      /^(hidden|unknown|occluded|none|n\/a)$/i.test(evidence.occluder.trim()) ||
+      typeof evidence.note !== 'string' ||
+      !evidence.note.trim() ||
+      !opaque(image, evidence.crown) ||
+      !opaque(image, evidence.breadth.left) ||
+      !opaque(image, evidence.breadth.right) ||
+      !opaque(options.master, master.breadth!.left) ||
+      !opaque(options.master, master.breadth!.right)
+    )
+      return failure(
+        'head_evidence_invalid',
+        'breadth-only evidence needs visible alpha>=128 crown/skull endpoints, locked master breadth, concrete shoulder occluder and reviewed hair-only note; no hidden anchor',
+      );
+    const low = masterBreadth * (1 - tolerance),
+      high = masterBreadth * (1 + tolerance);
+    if (breadth < low || breadth > high)
+      return failure(
+        'skull_breadth_px',
+        `skull breadth ${breadth.toFixed(2)} px differs from master ${masterBreadth.toFixed(2)} px; ${evidence.note}`,
+        breadth,
+        breadth < low ? low : high,
+      );
+    const bboxHeight = clip.frames[frame]!.metrics.height;
+    return [
+      {
+        gate: 'height',
+        severity: 'info',
+        clip: clip.name,
+        frame,
+        metric: 'skull_breadth_px',
+        value: breadth,
+        limit: high,
+        message: `posture: rear-breadth-only skull breadth ${breadth.toFixed(2)} / master ${masterBreadth.toFixed(2)} px; crown visible; shoulder hidden by ${evidence.occluder}; no vertical span; ${evidence.note}`,
+        headEvidence: {
+          kind: 'rear-breadth-only',
+          direction: clip.direction,
+          reason,
+          master,
+          frame: evidence,
+          masterBreadthPx: masterBreadth,
+          breadthPx: breadth,
+          breadthRatio: breadth / masterBreadth,
+          masterBboxHeightPx: options.masterHeight,
+          bboxHeightPx: bboxHeight,
+        },
+      },
+    ];
+  }
   if (options.masterHead && headEvidenceKind(evidence) !== headEvidenceKind(options.masterHead))
     return failure('head_evidence_kind', 'master/frame must use the same skull measurement kind');
   if (evidence.kind === 'rear-base-ornament' && clip.direction !== 'N')
