@@ -31,9 +31,19 @@ export function openGrid(n = 64): TileGrid {
 }
 
 export const SKILLS: SkillDef[] = [
-  { id: 1, cooldownMs: 3000, gcdMs: 500, mpCost: 10, range: 0 },
-  { id: 2, cooldownMs: 1000, gcdMs: 0, mpCost: 0, range: 8 },
-  { id: 3, cooldownMs: 0, gcdMs: 0, mpCost: 0, range: 0 },
+  { id: 0, key: 't.unused', cooldownMs: 0, gcdMs: 0, mpCostPct: 0, range: 0, requiresLos: false, targeting: 'none' },
+  {
+    id: 1,
+    key: 't.self',
+    cooldownMs: 3000,
+    gcdMs: 500,
+    mpCostPct: 0.1,
+    range: 0,
+    requiresLos: false,
+    targeting: 'none',
+  },
+  { id: 2, key: 't.bolt', cooldownMs: 1000, gcdMs: 0, mpCostPct: 0, range: 8, requiresLos: true, targeting: 'enemy' },
+  { id: 3, key: 't.free', cooldownMs: 0, gcdMs: 0, mpCostPct: 0, range: 0, requiresLos: false, targeting: 'none' },
 ];
 
 export function ctxOf(grid: TileGrid = openGrid()): SimContext {

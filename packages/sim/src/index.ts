@@ -1,6 +1,6 @@
 export * from './constants.js';
 export * from './math.js';
-export * from './rng.js';
+export * from './skills.js';
 export * from './grid.js';
 export * from './types.js';
 export * from './movement.js';

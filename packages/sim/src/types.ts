@@ -1,4 +1,6 @@
 import { MAX_SKILLS } from './constants.js';
+import type { RngState } from '@vgtd/shared';
+import type { SkillDef } from './skills.js';
 
 /** One movement input (docs/08 §4 "Gói input"): intent only, never a position. */
 export interface MoveInput {
@@ -28,16 +30,6 @@ export interface CastInput {
   rttMs: number;
 }
 export type SimInput = MoveInput | CastInput;
-
-export interface SkillDef {
-  id: number;
-  cooldownMs: number;
-  /** shared global cooldown applied after the cast */
-  gcdMs: number;
-  mpCost: number;
-  /** max distance to the target in tiles (0 = no target needed) */
-  range: number;
-}
 
 export interface AntiCheatState {
   /** server time the budget clock started (can be pulled forward by the sliding rule) */
@@ -76,6 +68,7 @@ export interface EntityState extends MoveState {
   id: number;
   hp: number;
   mp: number;
+  mpMax: number;
   stunMs: number;
   /** last processed input seq (uint16) — echoed to the owner for reconciliation */
   lastSeq: number;
@@ -91,8 +84,8 @@ export interface EntityState extends MoveState {
 export interface SimWorld {
   tick: number;
   timeMs: number;
-  /** mulberry32 state */
-  rng: number;
+  /** `combat` stream of the shared xoshiro128** PRNG (ADR-010); only advanced by successful casts */
+  rng: RngState;
   /** always sorted by id ascending */
   entities: readonly EntityState[];
 }

@@ -13,5 +13,6 @@ Pure, deterministic simulation shared by client prediction and the server World 
 - `stateHash(world)` — canonical 64-bit hash over all gameplay fields (determinism tests, desync detection).
 
 Determinism rules: no `Math.random` / `Date.now`; only `+ − × ÷` and `sqrt` (a Taylor-series table replaces `sin`/`cos`); entities are
-iterated in ascending id; `Map`s are lookup-only; randomness comes from the seeded RNG stored in the world (`rng`).
+iterated in ascending id; `Map`s are lookup-only; randomness comes only from the seeded xoshiro128** RNG (`@vgtd/shared` `rng.ts`, ADR-010 / D63) stored in the world (`rng`, the `combat` stream).
+Skills come from the D49 data via `compileSkills()` (`src/skills.ts`).
 Everything shared with the rest of the game (tick rate, collider radius, stats) is imported from `@vgtd/shared`.

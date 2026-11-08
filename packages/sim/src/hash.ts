@@ -17,7 +17,7 @@ export function stateHash(world: SimWorld): string {
 
   num(world.tick);
   num(world.timeMs);
-  num(world.rng);
+  for (const w of world.rng) num(w);
   num(world.entities.length);
   for (const e of world.entities) hashEntity(e, num, bool);
   return h1.toString(16).padStart(8, '0') + h2.toString(16).padStart(8, '0');
@@ -39,6 +39,7 @@ function hashEntity(e: EntityState, num: (x: number) => void, bool: (b: boolean)
   num(e.invulnMs);
   num(e.hp);
   num(e.mp);
+  num(e.mpMax);
   num(e.stunMs);
   num(e.lastSeq);
   num(e.gcdReadyAt);

@@ -6,7 +6,7 @@
  *  - advances time by `dtMs` (default one 20 Hz tick) and the RNG only when a cast succeeds.
  * Pure: returns a new world, never mutates its arguments.
  */
-import { NETWORK } from '@vgtd/shared';
+import { NETWORK, rngFloat, rngFork, rngSeed } from '@vgtd/shared';
 import { addViolation, newAntiCheat, overBudget, takeCastToken, tickAntiCheat } from './anticheat.js';
 import {
   ANTICHEAT,
@@ -16,10 +16,10 @@ import {
   MAX_SKILLS,
   TICK_INPUT_ALLOWANCE,
 } from './constants.js';
+import { mpCostOf } from './skills.js';
 import { lineOfSight } from './grid.js';
 import { hypot, seqNewer } from './math.js';
 import { clampDt, distanceViolation, stepMove } from './movement.js';
-import { rngNext, seedState } from './rng.js';
 import {
   CastReason,
   emptyCooldowns,
@@ -34,7 +34,7 @@ import {
 } from './types.js';
 
 export function createWorld(seed: number): SimWorld {
-  return { tick: 0, timeMs: 0, rng: seedState(seed), entities: [] };
+  return { tick: 0, timeMs: 0, rng: rngFork(rngSeed(seed), 'combat'), entities: [] };
 }
 
 export interface SpawnOptions {
@@ -45,6 +45,7 @@ export interface SpawnOptions {
   agi?: number;
   hp?: number;
   mp?: number;
+  mpMax?: number;
   flying?: boolean;
   facing?: number;
 }
@@ -67,7 +68,8 @@ export function spawnEntity(world: SimWorld, o: SpawnOptions): SimWorld {
     dashCdMs: 0,
     invulnMs: 0,
     hp: o.hp ?? 1000,
-    mp: o.mp ?? 100,
+    mp: o.mp ?? o.mpMax ?? 100,
+    mpMax: o.mpMax ?? 100,
     stunMs: 0,
     lastSeq: 0,
     pending: [],
@@ -197,9 +199,9 @@ export function step(
       const def = ctx.skills.find((s) => s.id === c.skillId)!;
       const cooldowns = e.cooldowns.slice();
       cooldowns[def.id] = nowMs + def.cooldownMs;
-      const [roll, nextRng] = rngNext(rng);
+      const [roll, nextRng] = rngFloat(rng);
       rng = nextRng;
-      e = { ...e, mp: e.mp - def.mpCost, cooldowns, gcdReadyAt: nowMs + def.gcdMs };
+      e = { ...e, mp: e.mp - mpCostOf(def, e.mpMax), cooldowns, gcdReadyAt: nowMs + def.gcdMs };
       events.push({
         type: 'cast_ok',
         entityId: e.id,
@@ -254,13 +256,17 @@ export function validateCast(
   const tol = Math.min(Math.max(0, c.rttMs) / 2, ANTICHEAT.CAST_LATENCY_COMP_MAX_MS);
   if (nowMs < readyAt - tol) return { reason: CastReason.Cooldown, readyAtMs: readyAt };
   if (nowMs < e.gcdReadyAt - tol) return { reason: CastReason.Gcd, readyAtMs: e.gcdReadyAt };
-  if (e.mp < def.mpCost) return { reason: CastReason.NoMp, readyAtMs: readyAt };
-  if (def.range > 0) {
+  if (e.mp < mpCostOf(def, e.mpMax)) return { reason: CastReason.NoMp, readyAtMs: readyAt };
+  if (def.targeting !== 'none') {
     const target = byId.get(c.targetId);
-    if (!target || target.id === e.id) return { reason: CastReason.BadTarget, readyAtMs: readyAt };
-    if (hypot(target.i - e.i, target.j - e.j) > def.range) return { reason: CastReason.OutOfRange, readyAtMs: readyAt };
-    if (!lineOfSight(ctx.grid, e.i, e.j, target.i, target.j, e.layer, e.flying))
-      return { reason: CastReason.NoLineOfSight, readyAtMs: readyAt };
+    const selfOk = def.targeting === 'ally_or_self' && (c.targetId === 0 || c.targetId === e.id);
+    if (!selfOk) {
+      if (!target || target.id === e.id) return { reason: CastReason.BadTarget, readyAtMs: readyAt };
+      if (def.range > 0 && hypot(target.i - e.i, target.j - e.j) > def.range)
+        return { reason: CastReason.OutOfRange, readyAtMs: readyAt };
+      if (def.requiresLos && !lineOfSight(ctx.grid, e.i, e.j, target.i, target.j, e.layer, e.flying))
+        return { reason: CastReason.NoLineOfSight, readyAtMs: readyAt };
+    }
   }
   return { reason: CastReason.Ok, readyAtMs: readyAt };
 }

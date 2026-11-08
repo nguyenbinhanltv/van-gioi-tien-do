@@ -277,3 +277,9 @@ không repaint từ score. Chưa có full replacement landmarks được freeze;
 để hợp ngưỡng. Pair temporal thấp được flag review-by-eye; owner33 cần cross-check cùng contour master rồi đánh giá lại.
 Đây là việc review annotation riêng, không cộng vào11ô Lab hard ở trên. Cohort33ô D54 được lưu portable tại
 `docs/art/head-reason-similarity-cohort-d54.json` để mọi worker tái lập A+C.
+
+## P2-1 — còn mở sau D63/D64
+
+- `CastInput` chưa mang điểm đất / hướng nên kỹ năng `ground` / `direction` chưa có kiểm tra tầm và LOS tới điểm; cần mở rộng giao thức (v2) khi làm chiến đấu server.
+- `skill_patches` của nhánh (cooldown_mult, …) chưa áp trong `compileSkills()`; cần hồ sơ nhân vật ở World Node.
+- PRNG theo luồng đặt tên: mới dùng `combat`; thứ tự rút của `ai`, `drop`, `breakthrough`, `tribulation`, `craft` phải được ghi khi từng hệ thống được cài đặt (ADR-010 điểm 3).
