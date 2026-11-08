@@ -370,7 +370,9 @@ export class Bot {
         this.ws.send(encode({ type: 'input', ack: this.lastSnapshotSeq, inputs: this.recent }), { binary: true });
         if (this.kind === 'cooldown') {
           // ignores the cooldown the server reports: one cast of skill 0 per input tick
-          this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0 }), { binary: true });
+          this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0, aim: null }), {
+            binary: true,
+          });
         } else if (now >= this.nextCastAt && ((this.o.skillIds?.length ?? 0) > 0 || (this.o.skillCount ?? 0) > 0)) {
           this.nextCastAt =
             now +
