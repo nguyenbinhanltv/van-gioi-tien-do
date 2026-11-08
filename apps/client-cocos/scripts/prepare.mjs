@@ -2,6 +2,7 @@
 //   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world
 //   2. assets/resources/world/*                 <- tilemap from @vgtd/procgen (npm run gen:tilemap)
 //   3. assets/resources/dragonbones/viewer/*    <- DragonBones 5.5 test rig from @vgtd/dragonbones-testrig
+//   4. assets/chibi/* + resources/world/chibi-index.json <- chibi runtime bundles (D71, scripts/chibi-bundles.mjs)
 // Run: npm run prepare:assets -w client-cocos   (also invoked by build:web)
 import { build } from 'esbuild';
 import ts from 'typescript';
@@ -9,6 +10,7 @@ import { spawnSync } from 'node:child_process';
 import { copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { prepareChibiBundles } from './chibi-bundles.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(root, '../..');
@@ -88,4 +90,6 @@ const gen = spawnSync(process.execPath, [join(repo, 'tools/dragonbones-testrig/s
   stdio: 'inherit',
 });
 if (gen.status !== 0) throw new Error('dragonbones-testrig generation failed');
-console.log('prepared vendor bundle + tilemap + DragonBones test rig');
+// 4. chibi runtime bundles (D71): per-direction Asset Bundles with tiers and clip groups, compress presets in the metas
+prepareChibiBundles({ root, repo });
+console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles');

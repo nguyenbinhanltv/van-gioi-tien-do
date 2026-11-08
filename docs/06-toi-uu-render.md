@@ -401,3 +401,19 @@ Ngân sách 220 MB vì vậy tương đương khoảng 55 atlas ở 4 MB. Nếu 
 - Ảnh thường giải mã bằng createImageBitmap ngoài luồng chính; KTX2 chuyển mã trong Web Worker.
 - Mỗi phút âm thanh stereo 44,1 kHz giải mã ra float32 tốn khoảng 21 MB, nên chỉ SFX ngắn mới được giải mã sẵn.
 - Khi chạm 90% ngân sách texture: đẩy atlas chunk cũ nhất ra (LRU), sau đó hạ @2x về @1x, cuối cùng giảm mật độ VFX.
+
+### [Cập nhật D71] Atlas chibi: nén, bundle theo hướng, tier độ phân giải
+
+Hàng "Nhân vật" ở bảng trên nay là **nhóm `loco` của một hướng** lớp người chơi (≈ 0,9 MB ASTC 6x6 ở tier `full`, ≈ 0,5 MB ASTC 4x4 ở tier `1x`; WebP 0,38 / 0,19 MB). Mọi hướng khác, nhóm `rest` và lớp của NPC nạp nền sau khi chơi được. Quyết định, ngân sách và cách chọn tier: [DECISIONS D71](DECISIONS.md); công cụ: `tools/procgen` (`pipeline/chibi_runtime.mts`, cổng `npm run budget`); client: `apps/client-cocos/assets/scripts/ChibiAssets.ts`.
+
+Đo `npm run perf:p1` (headless Chrome, SwiftShader có ASTC, bản đồ 1 chunk, 20 NPC chibi 6 lớp), trước/sau:
+
+| Chỉ tiêu P1 (docs/10 §12)             |  Trần |   Trước (PNG, #195) |         Sau (D71) |
+| ------------------------------------- | ----: | ------------------: | ----------------: |
+| Draw call                             |  ≤ 80 |                  45 |                43 |
+| RAM (heap + texture, MB)              | ≤ 500 |               536,9 |              90,6 |
+| FPS trung vị (GL mềm)                 |  ≥ 30 |                41,5 |              44,8 |
+| Gói tải đầu đến khi chơi được (MB)    |  ≤ 25 | 135,8 (tính cả NPC) |  9,09 (gzip 3,29) |
+| Tổng đã tải sau khi NPC nạp xong (MB) |     – |               135,8 | 12,32 (gzip 4,59) |
+
+Toàn bộ 14 hướng đã merge: PNG nguồn 124,2 MB → ASTC 80,6 MB (cả hai tier) hoặc WebP 33,0 MB (cả hai tier). Chưa đo trên điện thoại thật; WebP (desktop không có ASTC) chưa chạy `perf:p1`.

@@ -1,6 +1,16 @@
-import { JsonAsset, Node, UITransform, dragonBones, resources } from 'cc';
+import { Node, UITransform, dragonBones } from 'cc';
 import { character, shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
+import {
+  chibiTierFor,
+  loadChibiGroup,
+  loadChibiIndex,
+  loadChibiRig,
+  type ChibiGroup,
+  type ChibiIndex,
+  type ChibiRig,
+  type ChibiTier,
+} from './ChibiAssets';
 
 type Direction = shared.Direction;
 
@@ -8,7 +18,7 @@ type Direction = shared.Direction;
 export interface ChibiClass {
   readonly id: string;
   readonly label: string;
-  /** `assets/resources/` sub-folder and file stem (`<stem>_<DIR>_ske|tex`, armature `<stem>_<DIR>`). */
+  /** Source export folder (viewer / tools) and file stem (`<stem>_<DIR>_ske|tex`, armature `<stem>_<DIR>`). Runtime bundles are `chibi-<id>-<dir>` (D71). */
   readonly folder: string;
   readonly stem: string;
 }
@@ -26,10 +36,6 @@ export type MoveState = 'idle' | 'walk' | 'run';
 /** Chibi masters are ~208 px tall in a 256 px cell; tiles are 64 px wide, so scale to ~1.3 tiles of height. */
 export const CHIBI_SCALE = 0.42;
 
-interface Rig {
-  ske: dragonBones.DragonBonesAsset;
-  tex: dragonBones.DragonBonesAtlasAsset;
-}
 export interface ChibiPick {
   /** Authored direction whose armature plays. */
   readonly drawn: Direction;
@@ -71,7 +77,11 @@ export class ChibiBody {
   readonly root: Node;
   private readonly dbNode: Node;
   private readonly display: dragonBones.ArmatureDisplay;
-  private readonly rigs = new Map<string, Promise<Rig>>();
+  private index: ChibiIndex | null = null;
+  private rig: ChibiRig | null = null;
+  /** Download priority: 0 = local player (loads immediately), >= 1 = background (NPCs, prefetch). */
+  readonly priority: number;
+  readonly tier: ChibiTier;
   private cls: ChibiClass = CHIBI_CLASSES[0]!;
   private avail: Direction[] = [];
   private want: Direction = 'S';
@@ -85,7 +95,9 @@ export class ChibiBody {
   /** Called after a rig is installed (class or direction change); used by the capture hook. */
   onInstalled: ((cls: string, drawn: Direction) => void) | null = null;
 
-  constructor(parent: Node) {
+  constructor(parent: Node, opts: { local?: boolean; tier?: ChibiTier; priority?: number } = {}) {
+    this.tier = opts.tier ?? chibiTierFor(opts.local ?? false);
+    this.priority = opts.priority ?? (opts.local ? 0 : 1);
     this.root = newNode('ChibiBody', parent);
     this.dbNode = newNode('Armature', this.root);
     this.dbNode.addComponent(UITransform);
@@ -109,24 +121,36 @@ export class ChibiBody {
   /** HUD line: class, available rigs and any nearest-direction fallback; empty text never hides an error. */
   get note(): string {
     if (this.error) return `chibi ${this.cls.id}: ${this.error}`;
-    const have = this.avail.length ? this.avail.join('/') : 'none merged';
+    const have = this.avail.length ? this.avail.join('/') : this.index ? 'none merged' : 'loading';
     const p = this.lastPick;
     const fb = p?.approximate ? ` | facing ${this.want} -> nearest ${p.scaleX < 0 ? 'mirrored ' : ''}${p.drawn}` : '';
-    return `chibi ${this.cls.id} [${have}]${fb}`;
+    return `chibi ${this.cls.id} ${this.tier} [${have}]${fb}`;
   }
 
-  /** Switch class: detects which authored directions are merged (resources), then reloads. */
+  /** Switch class: reads which authored directions have runtime bundles (chibi-index), then loads the one in view. */
   setClass(id: string): boolean {
     const next = CHIBI_CLASSES.find((c) => c.id === id);
     if (!next) return false;
     this.cls = next;
-    this.avail = AUTHORED.filter((d) => !!resources.getInfoWithPath(`${next.folder}/${next.stem}_${d}_ske`));
-    this.error = this.avail.length ? '' : 'no direction merged yet';
+    this.avail = [];
+    this.error = '';
+    this.rig = null;
     this.loadedKey = '';
     this.loadingKey = '';
     this.playing = '';
-    this.epoch++;
-    this.refresh();
+    const epoch = ++this.epoch;
+    void loadChibiIndex()
+      .then((idx) => {
+        if (epoch !== this.epoch) return;
+        this.index = idx;
+        const dirs = idx.classes[next.id]?.directions ?? {};
+        this.avail = AUTHORED.filter((d) => !!dirs[d]);
+        this.error = this.avail.length ? '' : 'no direction merged yet';
+        this.refresh();
+      })
+      .catch((e: unknown) => {
+        if (epoch === this.epoch) this.error = `index: ${e instanceof Error ? e.message : String(e)}`;
+      });
     return true;
   }
 
@@ -150,9 +174,10 @@ export class ChibiBody {
     // Mirror only once the matching rig is on screen, so a pending load never shows a flipped wrong-direction rig.
     if (key === this.loadedKey) this.root.setScale(CHIBI_SCALE * pick.scaleX, CHIBI_SCALE, 1);
     if (key === this.loadedKey || key === this.loadingKey) return;
+    if (!this.index) return;
     this.loadingKey = key;
     const epoch = this.epoch;
-    void this.loadRig(pick.drawn)
+    void loadChibiRig(this.index, this.cls.id, pick.drawn, this.tier, this.priority)
       .then((rig) => {
         if (epoch !== this.epoch || this.loadingKey !== key) return;
         this.loadingKey = '';
@@ -165,7 +190,8 @@ export class ChibiBody {
       });
   }
 
-  private install(dir: Direction, rig: Rig, key: string): void {
+  private install(dir: Direction, rig: ChibiRig, key: string): void {
+    this.rig = rig;
     const prev = this.display.armature()?.animation.lastAnimationState;
     const phase = prev && prev.totalTime > 0 ? prev.currentTime / prev.totalTime : 0;
     const d = this.display;
@@ -196,48 +222,22 @@ export class ChibiBody {
     if (state && phase > 0) state.currentTime = phase * state.totalTime;
   }
 
-  private loadAsset<T>(path: string, type: new () => T): Promise<T> {
-    return new Promise((resolve, reject) =>
-      resources.load(path, type as never, (err: Error | null, asset: unknown) =>
-        err || !asset ? reject(err ?? new Error(`cannot load ${path}`)) : resolve(asset as T),
-      ),
-    );
+  /**
+   * Loads a clip group on demand (`rest`: combat, emote, ...), then rebuilds the armature so its frames render. Until then
+   * only `loco` clips (idle/walk/run) can play. Resolves false when no rig is shown yet.
+   */
+  async ensureGroup(group: ChibiGroup): Promise<boolean> {
+    const rig = this.rig;
+    if (!rig) return false;
+    if (!rig.groups.has(group)) await loadChibiGroup(rig, group, this.priority);
+    if (this.rig === rig && this.loadedKey) this.install(this.shown.drawn!, rig, this.loadedKey);
+    return true;
   }
 
-  /** Same loading contract as the viewer: `<stem>_<DIR>_ske|tex` plus optional extra atlas pages from `.sprite.json`. */
-  private loadRig(dir: Direction): Promise<Rig> {
-    const base = `${this.cls.folder}/${this.cls.stem}_${dir}`;
-    let hit = this.rigs.get(base);
-    if (!hit) {
-      hit = (async () => {
-        const [ske, tex] = await Promise.all([
-          this.loadAsset(`${base}_ske`, dragonBones.DragonBonesAsset),
-          this.loadAsset(`${base}_tex`, dragonBones.DragonBonesAtlasAsset),
-        ]);
-        if (resources.getInfoWithPath(`${base}.sprite`, JsonAsset)) {
-          const contract = await this.loadAsset(`${base}.sprite`, JsonAsset);
-          const pages: unknown = contract.json?.atlas?.textures;
-          if (Array.isArray(pages) && pages.length > 1) {
-            const factory = dragonBones.CCFactory.getInstance();
-            tex.init(factory);
-            const extras = await Promise.all(
-              (pages as string[])
-                .slice(1)
-                .map((page) => this.loadAsset(`${this.cls.folder}/${page}`, dragonBones.DragonBonesAtlasAsset)),
-            );
-            for (const extra of extras) {
-              const data = JSON.parse(extra.atlasJson) as { name: string; imagePath: string };
-              const registered = factory.getTextureAtlasData(tex.uuid) ?? [];
-              if (!registered.some((p) => p.name === data.name && p.imagePath === data.imagePath))
-                factory.parseTextureAtlasData(data, extra.texture, tex.uuid);
-            }
-          }
-        }
-        return { ske, tex };
-      })();
-      this.rigs.set(base, hit);
-      hit.catch(() => this.rigs.delete(base));
-    }
-    return hit;
+  /** Queues the other authored directions of this class (background priority) so facing changes do not hitch. */
+  prefetchDirections(): void {
+    if (!this.index) return;
+    for (const d of this.avail)
+      void loadChibiRig(this.index, this.cls.id, d, this.tier, Math.max(1, this.priority)).catch(() => undefined);
   }
 }
