@@ -4,6 +4,7 @@
  */
 const part = (...p: string[]): string => p.join('-');
 
+export const TEST_ONLY_USER = part('fixture', 'user').replace('-', '_'); // valid username shape
 export const TEST_ONLY_GOOD = part('fixture', 'alpha', 'beta', 'gamma'); // valid (>= 10 chars)
 export const TEST_ONLY_GOOD_NEAR = TEST_ONLY_GOOD.slice(0, -1) + 'x'; // differs by one char
 export const TEST_ONLY_WRONG = part('fixture', 'wrong', 'guess', 'delta');

@@ -98,7 +98,7 @@ export class OnlineSession {
       rttMs: this.net.rttMs,
       snapshots: this.net.snapshots,
       lastError: this.net.lastError,
-      others: [...this.actors.values()].map((a) => ({ entityId: a.entityId, ...a.pos })),
+      others: Array.from(this.actors.values()).map((a) => ({ entityId: a.entityId, i: a.pos.i, j: a.pos.j })),
     });
   }
 
@@ -139,12 +139,15 @@ export class OnlineSession {
       }
       a.update(v, v.dir, v.speed);
     }
-    for (const [id, a] of this.actors) {
+    // Cocos transpiles scripts loosely: for-of / spread over a Map silently breaks, so use forEach
+    const gone: number[] = [];
+    this.actors.forEach((a, id) => {
       if (!seen.has(id)) {
         a.destroy();
-        this.actors.delete(id);
+        gone.push(id);
       }
-    }
+    });
+    for (const id of gone) this.actors.delete(id);
   }
 
   /** One-line HUD status. */
@@ -159,7 +162,7 @@ export class OnlineSession {
 
   destroy(): void {
     this.net.close();
-    for (const a of this.actors.values()) a.destroy();
+    this.actors.forEach((a) => a.destroy());
     this.actors.clear();
   }
 }

@@ -44,7 +44,7 @@ Tham số debug: `?input=touch|pointer` ép chế độ nhập; `#autotest` (ho�
 Mặc định client chạy **offline** (như trên). Thêm `?online=1` để nối vào Gateway cục bộ (D27: chỉ chạy local): đăng nhập/đăng ký, dự đoán + đối soát bằng `stepMove` của `@vgtd/sim`, người chơi khác được nội suy từ snapshot và vẽ bằng `ChibiBody`.
 
 ```bash
-# terminal 1: server (HTTP :8080 + WS /ws, bản đồ 32x32 khớp client, bỏ giới hạn 3 tài khoản/IP/ngày để thử nhiều tab)
+# terminal 1: server (HTTP :8080 + WS /ws, bản đồ 256x256 khớp client, bỏ giới hạn 3 tài khoản/IP/ngày để thử nhiều tab)
 REGISTER_PER_IP_PER_DAY=0 npm run dev -w @vgtd/server
 # terminal 2: client web
 npm run build:web -w client-cocos && npm run serve -w client-cocos
@@ -64,7 +64,7 @@ Di chuyển bằng click / WASD / joystick; mỗi tab thấy tab kia chạy (n�
 | `server=host:port`    | Mặc định `<host của trang>:8080`; chỉ nhận host của trang hoặc `localhost`/`127.0.0.1` (host khác bị bỏ qua để link lạ không lấy được mật khẩu); mật khẩu lưu theo cặp `server`+tên. Server chỉ cho phép CORS từ `localhost:7456` / `127.0.0.1:7456` (đổi bằng biến môi trường `CORS_ORIGINS=a,b`). |
 | `class=<id>`          | Lớp ChibiBody của **mình**. Người khác chưa có lớp trên dây nên lớp của họ suy ra từ `entityId` (docs/OPEN-ITEMS.md, mục P2-3).                                                                                                                                                                     |
 
-Cùng một tên đăng nhập ở hai tab thì tab sau đá tab trước (một kết nối cho mỗi tài khoản). Tài khoản nằm trong bộ nhớ server: khởi động lại server thì đăng ký lại tự động (mật khẩu đã lưu vẫn dùng được). Biến môi trường server: `PORT`, `HOST`, `MAP_TILES` (mặc định 32 ở `npm run dev`), `REGISTER_PER_IP_PER_DAY`, `CORS_ORIGINS`.
+Cùng một tên đăng nhập ở hai tab thì tab sau đá tab trước (một kết nối cho mỗi tài khoản). Tài khoản nằm trong bộ nhớ server: khởi động lại server thì đăng ký lại tự động (mật khẩu đã lưu vẫn dùng được). Biến môi trường server: `PORT`, `HOST`, `MAP_TILES` (mặc định 256 ở `npm run dev`, khớp bản đồ client), `SPAWN_SIDE` (cạnh vùng xuất hiện quanh tâm, mặc định 24 ở `npm run dev` để hai tab thấy nhau; server thường dùng 96), `REGISTER_PER_IP_PER_DAY`, `CORS_ORIGINS`.
 
 Logic mạng không phụ thuộc engine nằm ở `packages/client-core/src/net` (`Predictor`, `RemoteWorld`, `NetClient`, có test đơn vị; test đầu-cuối với server thật ở `apps/server/tests/netclient.test.ts`). `OnlineSession.ts` chỉ dán vào scene.
 
@@ -90,3 +90,11 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 - `PlayerActor.body` hiện là armature chibi (`ChibiBody`); paperdoll/trang bị của `character` thay sau; giữ `pos` (tọa độ ô liên tục) và `update(dt, frame)`.
 - `YSortLayer.add(node, depth)` là chỗ đăng ký mọi vật thể L3 (quái, NPC, người chơi khác).
 - `CameraRig.follow()` / `clientToWorld()` là giao diện camera cho client-core.
+
+## Tải chibi theo bundle (D71)
+
+`npm run prepare:assets` (chạy trong `build:web`) sinh `assets/chibi/` (git-ignored) từ bản xuất `assets/resources/dragonbones/<lớp>-chibi-v1` (không đổi): mỗi (lớp, hướng) là một Asset Bundle `chibi-<lớp>-<hướng>` với hai tier (`full`, `1x` Lanczos3) và hai nhóm clip (`loco` = idle/walk/run, `rest`), cùng `resources/world/chibi-index.json`. Preset nén texture (ASTC 4x4 cho `1x`, ASTC 6x6 cho `full`, WebP dự phòng) nằm ở `settings/v2/packages/builder.json`, gắn vào từng PNG qua `.meta` do `scripts/chibi-bundles.mjs` ghi. `ChibiAssets.ts` nạp bundle, giới hạn tải đồng thời và giữ việc nền (NPC, hướng khác) đến khi người chơi đã hiện hình. `?restier=1x|full` ép tier (mặc định: `full` cho người chơi cục bộ trên desktop, `1x` cho mọi thứ còn lại). Ổ C: đầy thì đặt `library/`, `temp/`, `build/`, `assets/chibi/` thành junction sang ổ khác (đều git-ignored).
+
+## Bản release không có art dev
+
+`npm run build:web -w client-cocos -- --release` build trên **bản stage** của dự án (`scripts/release-stage.mjs`): mọi thứ được sao chép nguyên văn (kể cả `.meta`, giữ nguyên uuid) trừ `assets/resources/dragonbones/**` (≈ 229 MB: art trình xem và bản xuất chibi nguồn). Stage mặc định ở `build/stage-release` (đổi bằng biến môi trường `VGTD_STAGE_DIR`, nên đặt sang ổ còn trống); đồng bộ tăng dần theo kích thước + mtime nên Library của stage được giữ giữa các lần build. Kết quả vẫn ghi vào `build/web-mobile`. Trình xem (`#viewer`) không chạy được trên bản release; thêm `--keep-dev-art` để build đủ. Bản không `--release` vẫn build cả dự án.

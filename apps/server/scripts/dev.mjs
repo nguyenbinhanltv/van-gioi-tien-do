@@ -1,6 +1,6 @@
 // Local dev server: bundles src/main.ts with esbuild (workspace packages export .ts sources) and runs it.
 //   npm run dev -w @vgtd/server            -> http://localhost:8080 (HTTP auth + WS /ws)
-// Env: PORT, HOST, MAP_TILES (default 32 here = the Cocos client's procgen map), REGISTER_PER_IP_PER_DAY, CORS_ORIGINS.
+// Env: PORT, HOST, MAP_TILES (default 256 = the Cocos client's Son Mon map), SPAWN_SIDE (default 24 here so local tabs see each other), REGISTER_PER_IP_PER_DAY, CORS_ORIGINS.
 import { build } from 'esbuild';
 import { spawn } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
@@ -21,7 +21,8 @@ await build({
   external: ['ws'],
   logLevel: 'warning',
 });
-process.env.MAP_TILES ??= '32';
+process.env.MAP_TILES ??= '256';
+process.env.SPAWN_SIDE ??= '24';
 const child = spawn(process.execPath, [join(outdir, 'main.mjs')], { stdio: 'inherit', env: process.env });
 child.on('exit', (code) => process.exit(code ?? 0));
 process.on('SIGINT', () => child.kill('SIGINT'));

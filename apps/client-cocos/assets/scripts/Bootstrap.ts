@@ -16,10 +16,12 @@ import { shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
+import { RouteWalker } from './Route';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
+import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
@@ -58,6 +60,7 @@ export class Bootstrap extends Component {
   private world!: WorldView;
   private ysort!: YSortLayer;
   private npcs: NpcCrowd | null = null;
+  private route: RouteWalker | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -123,9 +126,12 @@ export class Bootstrap extends Component {
 
     const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
     const rand = rng(map.seed ?? 1);
+    // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
+    const PROP_RADIUS = 40;
     for (let n = 0; n < 140; n++) {
-      const i = Math.floor(rand() * map.width);
-      const j = Math.floor(rand() * map.height);
+      const i = Math.floor(spawn.i + (rand() * 2 - 1) * PROP_RADIUS);
+      const j = Math.floor(spawn.j + (rand() * 2 - 1) * PROP_RADIUS);
+      if (i < 0 || j < 0 || i >= map.width || j >= map.height) continue;
       const k = j * map.width + i;
       if (!this.world.isTerrainWalkable(i, j) || blocked[k] || (Math.abs(i - spawn.i) < 2 && Math.abs(j - spawn.j) < 2))
         continue;
@@ -133,7 +139,14 @@ export class Bootstrap extends Component {
       addProp(this.ysort, art, rand() < 0.7 ? 'tree' : 'rock', i, j);
     }
 
-    this.chibi = new ChibiBody(newNode('ChibiHolder'));
+    this.chibi = new ChibiBody(newNode('ChibiHolder'), { local: true });
+    // D71: the first download is the player's own class locomotion; once it is on screen the background queue opens (NPC
+    // classes, the player's other directions, rest clips).
+    this.chibi.onInstalled = () => {
+      if (chibiStreamer.backgroundOpen) return;
+      chibiStreamer.openBackground();
+      this.chibi.prefetchDirections();
+    };
     this.chibi.setClass(this.initialClass());
     this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, this.chibi);
     this.bindPlayTestKeys();
@@ -155,6 +168,15 @@ export class Bootstrap extends Component {
         params.get('npcart') === 'placeholder' ? placeholderBody : chibiNpcBody,
       );
     }
+    // P1 streaming measurement: `?route=1` walks a scripted loop over the whole map (A* legs planned up front)
+    if (params.get('route') !== null) {
+      const grid = { width: map.width, height: map.height, isWalkable: walkable };
+      this.route = new RouteWalker(grid, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, Math.min(map.width, map.height) * 0.3);
+      if (this.route.empty) {
+        console.warn('[vgtd] route: no reachable waypoint from the spawn (isolated?), route disabled');
+        this.route = null;
+      } else console.log(`[vgtd] route planned: ${this.route.length} path points`);
+    }
     await this.world.warmup(this.cameraRect());
 
     // destination marker lives on L1 (decal), reused sprite
@@ -173,7 +195,10 @@ export class Bootstrap extends Component {
       l3Objects: this.ysort.count,
       chunks: this.world.chunkCount,
       npcs: this.npcs?.count ?? 0,
+      chunksLoaded: this.world.loadedChunkCount,
+      stream: this.world.streamStats,
     });
+    this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
     this.input = new InputBridge(
       this.rig,
@@ -241,6 +266,8 @@ export class Bootstrap extends Component {
     this.keyHandlers = { down, up };
     (window as unknown as Record<string, unknown>).__vgtdChibi = {
       setClass: (id: string) => this.chibi.setClass(id),
+      body: this.chibi,
+      streamLog: () => chibiStreamer.log,
       state: () => ({
         cls: this.chibi.classInfo.id,
         available: this.chibi.availableDirections,
@@ -294,6 +321,7 @@ export class Bootstrap extends Component {
       const len = Math.hypot(di, dj) || 1;
       frame = { ...frame, move: { i: di / len, j: dj / len }, magnitude: 1 };
     }
+    if (this.route) frame = { ...frame, ...this.route.step(this.player.pos) };
     if (this.online?.waiting) {
       // connecting: stand still until the server tells us where we are
       this.player.update(dt, { move: { i: 0, j: 0 }, magnitude: 0 });

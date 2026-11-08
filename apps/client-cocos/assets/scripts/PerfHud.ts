@@ -25,6 +25,19 @@ export interface PerfStats {
   /** Sum of transfer sizes of everything fetched so far (Resource Timing), MB: the runtime view of the initial package. */
   loadedMB: number;
   /** The @vgtd/shared BUDGETS the HUD judges against; scripts/perf-p1.mjs gates on these (single source of truth). */
+  /** Streaming (multi-chunk map): chunk node-tree builds / unloads, build cost, frames the view had unresolved chunks. */
+  chunksLoaded: number;
+  chunksBuilt: number;
+  chunksUnloaded: number;
+  chunkBuildMsAvg: number;
+  chunkBuildMsMax: number;
+  /** Worst single-frame slice of node-tree building (what the player feels as a hitch). */
+  chunkStepMsMax: number;
+  notReadyUpdates: number;
+  /** Real frame time (wall clock, not the clamped dt): worst frame so far and frames over 50 ms / 100 ms. */
+  frameMsMax: number;
+  hitches50: number;
+  hitches100: number;
   budgets: { drawCalls: number; ramMB: number; initialDownloadMB: number };
 }
 
@@ -60,13 +73,39 @@ export class PerfHud {
     chunks: 0,
     npcs: 0,
     loadedMB: 0,
+    chunksLoaded: 0,
+    chunksBuilt: 0,
+    chunksUnloaded: 0,
+    chunkBuildMsAvg: 0,
+    chunkBuildMsMax: 0,
+    chunkStepMsMax: 0,
+    notReadyUpdates: 0,
+    frameMsMax: 0,
+    hitches50: 0,
+    hitches100: 0,
     budgets: {
       drawCalls: shared.BUDGETS.DRAW_CALLS_WEB_MOBILE,
       ramMB: shared.BUDGETS.RAM_MB_WEB,
       initialDownloadMB: shared.BUDGETS.INITIAL_DOWNLOAD_MB_WEB,
     },
   };
-  extra: () => { l3Objects: number; chunks?: number; npcs?: number } = () => ({ l3Objects: 0 });
+  extra: () => {
+    l3Objects: number;
+    chunks?: number;
+    npcs?: number;
+    chunksLoaded?: number;
+    stream?: {
+      built: number;
+      unloaded: number;
+      buildMsTotal: number;
+      buildMsMax: number;
+      stepMsMax: number;
+      notReadyUpdates: number;
+    };
+  } = () => ({ l3Objects: 0 });
+  private lastFrameAt = 0;
+  /** Called by `window.__vgtdPerfReset()` so a measured window can start from zero peaks / counters. */
+  onReset: (() => void) | null = null;
 
   constructor(hudRoot: Node, art: ArtFrames) {
     director.on(Director.EVENT_BEFORE_UPDATE, () => (this.t0 = performance.now()));
@@ -79,6 +118,12 @@ export class PerfHud {
       this.rndAcc += performance.now() - this.t0;
       this.rndN++;
     });
+    (globalThis as unknown as { __vgtdPerfReset?: () => void }).__vgtdPerfReset = () => {
+      this.stats.frameMsMax = 0;
+      this.stats.hitches50 = 0;
+      this.stats.hitches100 = 0;
+      this.onReset?.();
+    };
     this.bg = newNode('HudBg', hudRoot);
     const bgUi = this.bg.addComponent(UITransform);
     bgUi.setAnchorPoint(0, 1);
@@ -122,6 +167,15 @@ export class PerfHud {
   }
 
   update(dt: number): void {
+    const nowMs = performance.now();
+    if (this.lastFrameAt > 0) {
+      const fm = nowMs - this.lastFrameAt;
+      const s0 = this.stats;
+      if (fm > s0.frameMsMax) s0.frameMsMax = fm;
+      if (fm > 50) s0.hitches50++;
+      if (fm > 100) s0.hitches100++;
+    }
+    this.lastFrameAt = nowMs;
     this.acc += dt;
     this.frames++;
     if (this.acc < 0.5) return;
@@ -145,7 +199,16 @@ export class PerfHud {
     s.l3Objects = ex.l3Objects;
     s.chunks = ex.chunks ?? 0;
     s.npcs = ex.npcs ?? 0;
+    s.chunksLoaded = ex.chunksLoaded ?? 0;
     s.loadedMB = this.loadedBytes() / 1048576;
+    if (ex.stream) {
+      s.chunksBuilt = ex.stream.built;
+      s.chunksUnloaded = ex.stream.unloaded;
+      s.chunkBuildMsAvg = ex.stream.built ? ex.stream.buildMsTotal / ex.stream.built : 0;
+      s.chunkBuildMsMax = ex.stream.buildMsMax;
+      s.chunkStepMsMax = ex.stream.stepMsMax;
+      s.notReadyUpdates = ex.stream.notReadyUpdates;
+    }
     s.nodes = this.countNodes();
     (globalThis as unknown as { __vgtdPerf?: PerfStats }).__vgtdPerf = s;
 
@@ -169,7 +232,7 @@ export class PerfHud {
       `CPU update ${s.updateMs.toFixed(2)} ms  render ${s.renderMs.toFixed(2)} ms
 ` +
       `JS heap ${heap} (heap + tex / ${B.RAM_MB_WEB} MB ${heapOk})\n` +
-      `Nodes ${s.nodes}   L3 ${s.l3Objects}   Chunks ${s.chunks}   NPC ${s.npcs}   Loaded ${s.loadedMB.toFixed(1)} MB\n` +
+      `Nodes ${s.nodes}   L3 ${s.l3Objects}   Chunks ${s.chunks}/${s.chunksLoaded}   NPC ${s.npcs}   Loaded ${s.loadedMB.toFixed(1)} MB\n` +
       this.hint +
       (this.note
         ? `

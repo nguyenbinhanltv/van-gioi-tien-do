@@ -2,6 +2,7 @@
 //   1. assets/scripts/vendor/vgtd.mjs (+ .d.mts)  <- esbuild bundle of @vgtd/shared + @vgtd/client-core + @vgtd/client-world
 //   2. assets/resources/world/*                 <- tilemap from @vgtd/procgen (npm run gen:tilemap)
 //   3. assets/resources/dragonbones/viewer/*    <- DragonBones 5.5 test rig from @vgtd/dragonbones-testrig
+//   4. assets/chibi/* + resources/world/chibi-index.json <- chibi runtime bundles (D71, scripts/chibi-bundles.mjs)
 // Run: npm run prepare:assets -w client-cocos   (also invoked by build:web)
 import { build } from 'esbuild';
 import ts from 'typescript';
@@ -9,6 +10,7 @@ import { spawnSync } from 'node:child_process';
 import { copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { prepareChibiBundles } from './chibi-bundles.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(root, '../..');
@@ -68,7 +70,15 @@ const procgen = join(repo, 'tools/procgen');
 const out = join(procgen, 'out/tilemap');
 // always regenerate (0.6 s) so the copied tilemap can never be stale vs tools/procgen
 {
-  const r = spawnSync('npm', ['run', 'gen:tilemap'], { cwd: procgen, stdio: 'inherit', shell: true });
+  // Slice map = Son Mon (docs/04 section 5, docs/10 section 12): 256 x 256 tiles = 8 x 8 chunks, so the ChunkStreamer really
+  // streams (keep window 7x7). `VGTD_MAP_TILES` overrides (e.g. 32 = the old single-chunk map). A tiny preview scale keeps
+  // the generator from writing a multi-MB map_preview.png nobody opens here.
+  const tiles = String(Number(process.env.VGTD_MAP_TILES) || 256);
+  const r = spawnSync(
+    'npm',
+    ['run', 'gen:tilemap', '--', '--width', tiles, '--height', tiles, '--previewScale', '0.05'],
+    { cwd: procgen, stdio: 'inherit', shell: true },
+  );
   if (r.status !== 0) throw new Error('gen:tilemap failed');
 }
 const worldDir = join(root, 'assets/resources/world');
@@ -86,4 +96,6 @@ const gen = spawnSync(process.execPath, [join(repo, 'tools/dragonbones-testrig/s
   stdio: 'inherit',
 });
 if (gen.status !== 0) throw new Error('dragonbones-testrig generation failed');
-console.log('prepared vendor bundle + tilemap + DragonBones test rig');
+// 4. chibi runtime bundles (D71): per-direction Asset Bundles with tiers and clip groups, compress presets in the metas
+prepareChibiBundles({ root, repo });
+console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles');
