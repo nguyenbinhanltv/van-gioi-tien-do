@@ -34,6 +34,8 @@ const srv = await startServer({
     inventory: flag(process.env.INVENTORY) ? new InventoryService() : undefined,
   },
   auth: { registerPerIpPerDay },
+  // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
+  progression: process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : undefined,
 });
 if (srv.world.dropSink)
   srv.world.dropSink.onGranted = (owner, e, r) =>

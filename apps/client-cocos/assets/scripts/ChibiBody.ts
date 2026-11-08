@@ -86,6 +86,7 @@ export class ChibiBody {
   private avail: Direction[] = [];
   private want: Direction = 'S';
   private moveState: MoveState = 'idle';
+  private seated = false;
   private loadedKey = '';
   private loadingKey = '';
   private playing = '';
@@ -160,6 +161,25 @@ export class ChibiBody {
     this.refresh();
   }
 
+  /** Server says the character is meditating: play the seated `meditate` clip (when the rig has it) until cleared. */
+  setSeated(on: boolean): void {
+    if (on === this.seated) return;
+    this.seated = on;
+    // `meditate` is in the lazy `rest` clip group: until its atlas pages are registered its frames render blank, so keep the
+    // current clip and switch once the group is in (ensureGroup also rebuilds the armature).
+    if (on && this.rig && !this.rig.groups.has('rest')) {
+      void this.ensureGroup('rest').then(() => {
+        if (this.seated) {
+          this.playing = '';
+          this.playClip();
+        }
+      });
+      return;
+    }
+    this.playing = '';
+    this.playClip();
+  }
+
   state(s: MoveState): void {
     if (s === this.moveState) return;
     this.moveState = s;
@@ -213,7 +233,12 @@ export class ChibiBody {
   private playClip(phase = 0): void {
     const armature = this.display.armature();
     if (!armature) return;
-    const order: MoveState[] = this.moveState === 'run' ? ['run', 'walk', 'idle'] : [this.moveState, 'idle'];
+    const seated = this.seated && !!this.rig?.groups.has('rest');
+    const order: string[] = seated
+      ? ['meditate', 'idle']
+      : this.moveState === 'run'
+        ? ['run', 'walk', 'idle']
+        : [this.moveState, 'idle'];
     const clip = order.find((c) => armature.animation.hasAnimation(c)) ?? 'idle';
     if (clip === this.playing) return;
     this.playing = clip;

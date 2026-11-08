@@ -6,6 +6,7 @@ import {
   realmToStage,
   roundedStatsAt,
   statsAt,
+  stageLabel,
   stageToRealm,
   subStageCount,
 } from '../src/index.js';
@@ -93,5 +94,22 @@ describe('Công thức §1 — stats', () => {
     const d1 = statsAt(3, 1).agi - statsAt(2, 1).agi;
     const d2 = statsAt(7, 1).agi - statsAt(6, 1).agi;
     expect(d1).toBeCloseTo(d2, 10);
+  });
+});
+
+describe('stageLabel (display names)', () => {
+  it('matches the docs/07 §1 table labels', () => {
+    expect(stageLabel(1)).toBe('Luyện Khí tầng 1');
+    expect(stageLabel(9)).toBe('Luyện Khí tầng 9');
+    expect(stageLabel(10)).toBe('Trúc Cơ sơ kỳ');
+    expect(stageLabel(realmToStage(3, 1))).toBe('Kim Đan sơ kỳ');
+    expect(stageLabel(realmToStage(4, 1))).toBe('Nguyên Anh sơ kỳ');
+    expect(stageLabel(realmToStage(9, 1))).toBe('Độ Kiếp sơ kỳ');
+    expect(stageLabel(41)).toBe('Độ Kiếp Viên Mãn');
+    expect(() => stageLabel(0)).toThrow(RangeError);
+  });
+  it('every stage 1..41 has a distinct label', () => {
+    const labels = Array.from({ length: 41 }, (_, k) => stageLabel(k + 1));
+    expect(new Set(labels).size).toBe(41);
   });
 });
