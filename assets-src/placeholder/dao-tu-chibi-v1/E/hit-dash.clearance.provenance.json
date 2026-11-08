@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:02:03.584Z",
+  "utcRecordedCompleted": "2026-11-08T00:04:49.307Z",
+  "prompt": "Use case: precise-object-edit. MINIMAL ONE-CELL CANVAS CLEARANCE FIX on exact Dao tu HIT/DASH4x4sheet. Change ONLY source cell11 (zero-based: THIRD ROW FOURTH COLUMN), the deepest rightward dash lunge. Its extreme LEFT loose hair / trailing silhouette touches the cell edge. Keep head/face/skullsize, torso/pelvis/frontleg/weapon/grip and roottravel EXACTLY unchanged. Recurve ONLY the furthest LEFT loose ponytail/strand tips and, if necessary, draw trailing boot toes a few pixels inward naturally so EVERY opaque pixel in that cell has at least12nativepixels clearance from LEFT cell boundary. Keep entire body/weapon originalscale, no global shift or shrinking, no change to lungedpose. Other15cells untouched. Same1254square4x4layout and opaqueRGB255,0,255magenta background, no text/FX/shadows. This fixes only minor edge overhang in cell11, not anatomy or head.",
+  "references": ["raw/hit-dash.png"],
+  "rawOutput": "raw/hit-dash.clearance-edit.png",
+  "selectedOutput": "raw/hit-dash.repaired.png",
+  "operation": "Official sprite:repair sourcecell11 only; all other15 cells verified byte-identical",
+  "status": "repair candidate; full gates pending"
+}

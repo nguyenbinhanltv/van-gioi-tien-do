@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:55:53.913Z",
+  "utcRecordedCompleted": "2026-11-07T23:57:24.658Z",
+  "prompt": "Use case: precise-object-edit. FIRST IMAGE exact4x4lattice, DAO TU T1 CHANNEL spinning-dao loop,12 unique sequential drawings cells0-11 rowmajor; LAST ROW4cells EMPTY magenta.24fps. Image2 canonical E male/gear. Same leanadult stern greyeyes/black sweptfringe/low looseponytail, plain sleeveless darkmutedteal tunic/stormgreyblue collar+sash/darkpants/boots/bracers minimalbrass; anatomical standing216px, head50px/breadth38px in256cell. Same HEAVY BROAD SINGLE-EDGE DAO with LONG DARK HANDLE, large steel mountain-ink panorama blade; do NOT turn into short cleaver/dagger. Twohanded horizontal spinning blade around hips, grounded pivot, loop360deg.0 ready E facingRIGHT;1-3 wind into spin/rotate torso forward;4-6 back/threequarter while huge dao sweeps around waist;7-9 spin through front/side;10-11 reconnect to E starting pose. Distinct continuously spaced rotational inbetweens, real planted pivot feet/knees and hair/cloth lag. No jumps or added effects; root stays aroundlatticex128 ground232, same skullsize in front/rear views. Entire fullsize blade/hair insidecell with8pxmargin; rotate/foreshorten naturally, do not shrink character/weapon, no duplicatedblade/trails. Preserve face when visible, exact T1 costume allframes. Remove all guide lines/borders/stencilrects; uniform opaque PURE RGB255,0,255 magenta background. No text/shadows/particles/wind/FX. All12drawings, final4cells empty. Seam11->0 smooth.",
+  "references": ["templates/channel.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/channel.png",
+  "status": "candidate; pose/origin and QA review in E/project.json"
+}

@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:51:40.584Z",
+  "utcRecordedCompleted": "2026-11-07T23:53:23.337Z",
+  "prompt": "Use case: precise-object-edit. Exact4x4 template, DAO TU T1 attack_3 GROUND STRIKE finisher,14 sequential distinct frames0-13 row-major;14-15 EMPTY magenta.24fps. Image1 head stencil sizeguide, image2 canonical E male. Same lean adult stern greyeyes/swept black fringe/low loose ponytail, plain sleeveless dark teal tunic/grey-blue collar+sash/darkpants/boots/bracers minimalbrass. Skull50px tall/breadth38px per256cell, standingH216; dynamic pose must preserve size. E-facing RIGHT. Same HEAVY BROAD mountain-ink single-edge dao with long darkgrip and brassguard.0-3 both hands lift dao from shoulder diagonally above/back, knees flex;4-5 commit bodyweight forward, blade edge turns DOWN;6-7 powerful downward chop;8 blade hits ground IN FRONT RIGHT with deep bent-knee lunge;9 hold low impact;10-12 torso rises, blade lifts from ground;13 returns shoulder-ready. True overhead-to-ground finisher, visibly distinct from waist slash/sweep. Preserve fixed lattice rootx128 ground232, allow intentional pelvis/head travel; no re-centering or shrinking. Keep blade tip/full head/hair INSIDE eachcell with8px margins through ALL raised poses, bend elbows/blade diagonal to fit naturally. No sparks/dust/cracks/blood/trails/FX/extra objects. Remove ALL guides and borders. Uniform opaque PURE MAGENTA RGB255,0,255 background. Same premium semi-chibi painting/lightNW. Fourteen drawings, final2blank, no text/shadows.",
+  "references": ["templates/attack_3.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/attack_3.png",
+  "status": "candidate; raised-blade/lunge origins and QA pending"
+}

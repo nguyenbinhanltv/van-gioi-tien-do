@@ -1,0 +1,250 @@
+[
+  {
+    "name": "idle",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "idle",
+    "kind": "upright",
+    "heightPolicy": "head-size-v1",
+    "sheet": "raw/idle.png",
+    "manifest": "templates/idle.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "meditate",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "meditate",
+    "kind": "free",
+    "sheet": "raw/meditate.png",
+    "manifest": "templates/meditate.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "walk",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "walk",
+    "kind": "upright",
+    "heightPolicy": "head-size-v1",
+    "sheet": "raw/walk.png",
+    "manifest": "templates/walk.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "run",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": true,
+    "tableId": "run",
+    "kind": "upright",
+    "heightPolicy": "head-size-v1",
+    "sheet": "raw/run.png",
+    "manifest": "templates/run.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "sword_fly",
+    "cols": 4,
+    "frames": 12,
+    "durationSec": 0.5,
+    "loop": true,
+    "tableId": "sword_fly",
+    "kind": "free",
+    "sheet": "raw/sword_fly.png",
+    "manifest": "templates/sword_fly.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  },
+  {
+    "name": "attack",
+    "cols": 4,
+    "frames": 14,
+    "durationSec": 0.5833333333333334,
+    "loop": false,
+    "tableId": "attack",
+    "kind": "free",
+    "phases": {
+      "windup_end": 3,
+      "hit_frame": 5,
+      "combo_window": 7
+    },
+    "sheet": "raw/attack.png",
+    "manifest": "templates/attack.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    }
+  },
+  {
+    "name": "attack_2",
+    "cols": 4,
+    "frames": 14,
+    "durationSec": 0.5833333333333334,
+    "loop": false,
+    "tableId": "attack",
+    "kind": "free",
+    "phases": {
+      "windup_end": 2,
+      "hit_frame": 4,
+      "combo_window": 7
+    },
+    "sheet": "raw/attack_2.png",
+    "manifest": "templates/attack_2.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    }
+  },
+  {
+    "name": "attack_3",
+    "cols": 4,
+    "frames": 14,
+    "durationSec": 0.5833333333333334,
+    "loop": false,
+    "tableId": "attack",
+    "kind": "free",
+    "phases": {
+      "windup_end": 3,
+      "hit_frame": 5,
+      "combo_window": 7
+    },
+    "sheet": "raw/attack_3.png",
+    "manifest": "templates/attack_3.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    }
+  },
+  {
+    "name": "cast",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": false,
+    "tableId": "cast",
+    "kind": "free",
+    "phases": {
+      "windup_end": 6
+    },
+    "sheet": "raw/cast.png",
+    "manifest": "templates/cast.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "channel",
+    "cols": 4,
+    "frames": 12,
+    "durationSec": 0.5,
+    "loop": true,
+    "tableId": "channel",
+    "kind": "free",
+    "sheet": "raw/channel.png",
+    "manifest": "templates/channel.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  },
+  {
+    "name": "die",
+    "cols": 4,
+    "frames": 12,
+    "durationSec": 0.5,
+    "loop": false,
+    "tableId": "die",
+    "kind": "free",
+    "sheet": "raw/die.png",
+    "manifest": "templates/die.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  },
+  {
+    "name": "tribulation",
+    "cols": 4,
+    "frames": 16,
+    "durationSec": 0.6666666666666666,
+    "loop": false,
+    "tableId": "tribulation",
+    "kind": "free",
+    "sheet": "raw/tribulation.png",
+    "manifest": "templates/tribulation.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    }
+  },
+  {
+    "name": "emote",
+    "cols": 4,
+    "frames": 12,
+    "durationSec": 0.5,
+    "loop": false,
+    "tableId": "emote",
+    "kind": "upright",
+    "heightPolicy": "head-size-v1",
+    "sheet": "raw/emote.png",
+    "manifest": "templates/emote.template.json",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  },
+  {
+    "name": "hit",
+    "cols": 4,
+    "frames": 6,
+    "durationSec": 0.25,
+    "loop": false,
+    "tableId": "hit",
+    "kind": "free",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [0, 1, 2, 3, 4, 5]
+    },
+    "sheet": "raw/hit-dash.png",
+    "manifest": "templates/hit-dash.template.json"
+  },
+  {
+    "name": "dash",
+    "cols": 4,
+    "frames": 10,
+    "durationSec": 0.4166666666666667,
+    "loop": false,
+    "tableId": "dash",
+    "kind": "upright",
+    "heightPolicy": "head-size-v1",
+    "sheetSelection": {
+      "rows": 4,
+      "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    "sheet": "raw/hit-dash.png",
+    "manifest": "templates/hit-dash.template.json"
+  }
+]
