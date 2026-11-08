@@ -350,7 +350,9 @@ export class Bot {
           for (let id = 0; id < this.o.skillCount!; id++) if ((this.readyLocal.get(id) ?? 0) <= now) ready.push(id);
           if (this.kind !== 'honest' || ready.length > 0) {
             const skillId = ready.length > 0 ? ready[Math.floor(this.rnd() * ready.length)]! : 0;
-            this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId, targetId: 0 }), { binary: true });
+            this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId, targetId: 0, aim: null }), {
+              binary: true,
+            });
           }
         }
         if (now >= this.nextPingAt) {

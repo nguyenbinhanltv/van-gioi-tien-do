@@ -12,7 +12,7 @@ import {
   resources,
   view,
 } from 'cc';
-import { shared, world as cw } from './vendor/vgtd.mjs';
+import { combat as cb, shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
 import { WorldView } from './WorldView';
@@ -205,16 +205,28 @@ export class Bootstrap extends Component {
     });
     this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
+    // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
+    if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
     if (this.combatOn) {
+      let backend: cb.CombatBackend;
+      if (this.online) {
+        // the server decides the class (no class selection on the wire yet: every player is 'kiem'), the HUD must show that kit
+        const online = this.online;
+        const sc = new cb.ServerCombat({ path: 'kiem', send: (m) => online.sendCast(m) });
+        online.attachCombat(sc);
+        backend = sc;
+      } else {
+        backend = createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11));
+      }
       this.combat = new CombatUi(
         hudRoot,
         worldRoot,
         this.ysort,
         art,
-        // offline mock backend; online mode will pass a `ServerCombat` fed by the net client instead (see docs/33-combat)
-        createMockBackend(this.chibi.classInfo.id, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable, rng(11)),
+        backend,
         () => this.player.pos,
         (x, y) => this.rig.clientToUi(x, y),
+        (x, y) => this.rig.clientToWorld(x, y),
       );
     }
     this.input = new InputBridge(
@@ -226,10 +238,7 @@ export class Bootstrap extends Component {
       this.combat ? (tile) => this.combat!.pick(tile) : undefined,
     );
     this.rig.follow(this.playerScreen());
-    if (onlineRequested()) {
-      this.online = new OnlineSession(this.ysort, l2, art);
-      this.online.connect();
-    }
+    this.online?.connect();
     this.maybeAutotest();
   }
 

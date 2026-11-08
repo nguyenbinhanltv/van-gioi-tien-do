@@ -12,6 +12,7 @@ import {
   type PingMsg,
   type PongMsg,
   type SelfState,
+  type SelfVitals,
   type SkillCastMsg,
   type SkillHit,
   type SkillResultMsg,
@@ -60,6 +61,22 @@ function inputPacket(x: unknown): InputPacket {
   };
 }
 
+function aim(x: unknown): { qi: number; qj: number } {
+  const o = rec(x, 'aim');
+  return { qi: int(o.qi, 0, U16, 'aim.qi'), qj: int(o.qj, 0, U16, 'aim.qj') };
+}
+
+function vitals(x: unknown): SelfVitals {
+  const o = rec(x, 'self.vitals');
+  return {
+    hp: int(o.hp, 0, U32, 'vitals.hp'),
+    hpMax: int(o.hpMax, 0, U32, 'vitals.hpMax'),
+    mp: int(o.mp, 0, U32, 'vitals.mp'),
+    mpMax: int(o.mpMax, 0, U32, 'vitals.mpMax'),
+    shield: int(o.shield, 0, U32, 'vitals.shield'),
+  };
+}
+
 export function validateSelf(x: unknown): SelfState {
   const o = rec(x, 'self');
   return {
@@ -73,6 +90,7 @@ export function validateSelf(x: unknown): SelfState {
     dashLeftMs: int(o.dashLeftMs, 0, U16, 'self.dashLeftMs'),
     dashCdMs: int(o.dashCdMs, 0, U16, 'self.dashCdMs'),
     invulnMs: int(o.invulnMs, 0, U16, 'self.invulnMs'),
+    vitals: o.vitals === null ? null : vitals(o.vitals),
   };
 }
 
@@ -132,6 +150,7 @@ export function validateMessage(x: unknown): Message {
         seq: int(o.seq, 0, U16, 'seq'),
         skillId: int(o.skillId, 0, U16, 'skillId'),
         targetId: int(o.targetId, 0, U32, 'targetId'),
+        aim: o.aim === null ? null : aim(o.aim),
       };
       return m;
     }

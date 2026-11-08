@@ -85,7 +85,7 @@ interface Rig {
   seq: number;
   tick(inputs?: SimInput[]): void;
   run(ms: number, inputs?: SimInput[]): void;
-  cast(skillKey: string, targetId?: number, id?: number): SimInput;
+  cast(skillKey: string, targetId?: number, id?: number, aim?: { i: number; j: number } | null): SimInput;
 }
 
 function rig(
@@ -147,9 +147,9 @@ function rig(
       const n = Math.round(ms / NETWORK.TICK_MS);
       for (let k = 0; k < n; k++) r.tick(k === 0 ? inputs : []);
     },
-    cast(skillKey, targetId = 0, id = 1) {
+    cast(skillKey, targetId = 0, id = 1, aim = null) {
       const skillId = ctx.skills.find((s) => s.key === skillKey)!.id;
-      return { kind: 'cast', entityId: id, seq: ++r.seq, skillId, targetId, rttMs: 0 };
+      return { kind: 'cast', entityId: id, seq: ++r.seq, skillId, targetId, rttMs: 0, aim } as SimInput;
     },
   };
   return r;
@@ -537,7 +537,7 @@ describe('WorldNode with mobs: true and combat: {} (default MobPort wiring)', ()
       ),
     };
     const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
-    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }));
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0, aim: null }));
     for (let k = 0; k < 14; k++) node.tick();
     expect(mobHpMax).toBeGreaterThan(1);
     expect(node.world.entities.some((e) => e.id === mob.id)).toBe(false); // killed: despawned by MobManager.kill
@@ -554,6 +554,131 @@ describe('WorldNode with mobs: true and combat: {} (default MobPort wiring)', ()
     const port = new FakeMobs();
     const node = new WorldNode({ seed: 4, mapTiles: 64, mobs: true, combat: { mobs: port } });
     expect(node.combat!.mobHpMax(1_000_000)).toBeUndefined(); // the fake knows no mob: the manager is not consulted
+  });
+});
+
+describe('aim point (wire v3)', () => {
+  it('a ground skill is anchored on the aim point within range and line of sight (area around the aim, not the caster)', () => {
+    // ngu_kiem_tran: ground, range 8, circle r4, 3 s channel. Aim 6 tiles east; a mob there is hit, one beside the caster is not.
+    const r = rig({
+      mobs: [
+        { id: MOB, i: 26.5, j: 20.5 }, // at the aim
+        { id: MOB + 1, i: 20.5, j: 23.5 }, // 3 tiles from the caster, 6 from the aim: outside
+      ],
+    });
+    r.tick([r.cast('ngu_kiem_tran', 0, 1, { i: 26.5, j: 20.5 })]);
+    r.run(3100);
+    expect(r.results.flatMap((x) => x.hits.map((h) => h.targetId))).toEqual([MOB]);
+  });
+
+  it('the aim wins over the target; an aim beyond range or behind a wall is ignored (anchored on the target, else the caster)', () => {
+    const near = { i: 26.5, j: 20.5 };
+    const far = { i: 60.5, j: 20.5 };
+    const r = rig({
+      mobs: [
+        { id: MOB, i: 22.5, j: 20.5 },
+        { id: MOB + 1, i: 60.5, j: 20.5 },
+      ],
+    });
+    r.tick([r.cast('ngu_kiem_tran', 0, 1, far)]); // 40 tiles away: ignored, anchored on the caster
+    r.run(3100);
+    expect(r.results.flatMap((x) => x.hits.map((h) => h.targetId))).toEqual([MOB]);
+    expect(entity(r, MOB + 1)!.hp).toBe(3000);
+    // wall between caster and aim
+    const rows = Array.from({ length: 64 }, (_, j) =>
+      j === 20 ? '.'.repeat(24) + '#' + '.'.repeat(39) : '.'.repeat(64),
+    );
+    const w = rig({ rows, mobs: [{ id: MOB, i: 27.5, j: 20.5 }] });
+    w.tick([w.cast('ngu_kiem_tran', 0, 1, near)]);
+    w.run(3100);
+    expect(w.results.flatMap((x) => x.hits.map((h) => h.targetId))).toEqual([]);
+  });
+
+  it('a cone / line is cast toward the aim point instead of the facing', () => {
+    // facing +i, mob at +j; kiem_khi_tram is a 90 degree cone, radius 2.5
+    const r = rig({ mobs: [{ i: 20.5, j: 22.5 }] });
+    r.tick([r.cast('kiem_khi_tram')]);
+    r.run(400);
+    expect(r.results[0]!.hits).toEqual([]); // facing +i: the mob at +j is outside the cone
+    const r2 = rig({ mobs: [{ i: 20.5, j: 22.5 }] });
+    r2.tick([r2.cast('kiem_khi_tram', 0, 1, { i: 20.5, j: 23.5 })]); // aim toward +j
+    r2.run(400);
+    expect(r2.results[0]!.hits.map((h) => h.targetId)).toEqual([MOB]);
+    // a non-finite aim cannot poison the result
+    const r3 = rig({ mobs: [{ i: 22.5, j: 20.5 }] });
+    r3.tick([r3.cast('kiem_khi_tram', 0, 1, { i: Number.NaN, j: Number.NaN })]);
+    r3.run(400);
+    expect(r3.results[0]!.hits.map((h) => h.targetId)).toEqual([MOB]); // fell back to the facing
+  });
+
+  it('over the wire: skill_cast with an aim reaches combat (quantized to 1/32 tile)', () => {
+    const mobs = new FakeMobs();
+    const node = new WorldNode({ seed: 8, mapTiles: 64, spawn: { i0: 20, j0: 20, side: 1 }, combat: { mobs } });
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc');
+    const me = node.world.entities.find((e) => e.id === id)!;
+    mobs.stats.set(MOB, mobStats());
+    node.world = spawnEntity(node.world, { id: MOB, i: me.i, j: me.j + 2, hp: 3000, mpMax: 0 }); // east/+j side, facing is +i
+    const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
+    node.receive(
+      id,
+      encode({
+        type: 'skill_cast',
+        seq: 1,
+        skillId: kiem.id,
+        targetId: 0,
+        aim: { qi: Math.round(me.i * 32), qj: Math.round((me.j + 2) * 32) },
+      }),
+    );
+    for (let k = 0; k < 14; k++) node.tick();
+    expect(node.world.entities.find((e) => e.id === MOB)!.hp).toBeLessThan(3000);
+  });
+});
+
+describe('own vitals in the snapshot (wire v3)', () => {
+  const selfs = (c: Client) => c.msgs.flatMap((m) => (m.type === 'snapshot' && m.self ? [m.self] : []));
+
+  it('the first snapshot carries them; later ones only when HP / MP / shield changed', () => {
+    const node = new WorldNode({ seed: 9, mapTiles: 64, spawn: { i0: 20, j0: 20, side: 1 }, combat: {} });
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc');
+    for (let k = 0; k < 30; k++) node.tick();
+    node.receive(id, encode({ type: 'ping', clientTimeMs: 1 })); // keeps the client "alive" for acks
+    const first = selfs(c)[0]!;
+    const p = makeProfile('kiem');
+    expect(first.vitals).toEqual({ hp: p.stats.hp, hpMax: p.stats.hp, mp: p.stats.mp, mpMax: p.stats.mp, shield: 0 });
+    // acknowledge so later snapshots are deltas, then nothing changes -> no vitals
+    const before = c.msgs.length;
+    node.receive(
+      id,
+      encode({
+        type: 'input',
+        ack: c.msgs.filter((m) => m.type === 'snapshot').length,
+        inputs: [{ seq: 1, dtMs: 50, dir: 255, mag: 0, flags: 0 }],
+      }),
+    );
+    for (let k = 0; k < 10; k++) node.tick();
+    const quiet = c.msgs.slice(before).flatMap((m) => (m.type === 'snapshot' && m.self ? [m.self] : []));
+    expect(quiet.length).toBeGreaterThan(0);
+    expect(quiet.every((s) => s.vitals === null)).toBe(true);
+    // damage the player: the next snapshot carries the new HP once
+    const hit = node.combat!.damagePlayer(node.world, id, 100, MOB);
+    node.world = hit.world;
+    const mark = c.msgs.length;
+    for (let k = 0; k < 6; k++) node.tick();
+    const after = c.msgs.slice(mark).flatMap((m) => (m.type === 'snapshot' && m.self ? [m.self] : []));
+    const withV = after.filter((s) => s.vitals !== null);
+    expect(withV).toHaveLength(1);
+    expect(withV[0]!.vitals).toMatchObject({ hp: p.stats.hp - 100, hpMax: p.stats.hp });
+  });
+
+  it('a node without combat never sends vitals', () => {
+    const node = new WorldNode({ seed: 9, mapTiles: 64 });
+    const c = new Client();
+    node.addPlayer(c, 'acc');
+    for (let k = 0; k < 10; k++) node.tick();
+    expect(selfs(c).length).toBeGreaterThan(0);
+    expect(selfs(c).every((s) => s.vitals === null)).toBe(true);
   });
 });
 
@@ -588,7 +713,7 @@ describe('player id recycling and combat registration', () => {
     node.world = spawnEntity(node.world, { id: MOB, i: me.i + 1.5, j: me.j, hp: 3000, mpMax: 0 });
     node.world = { ...node.world, entities: node.world.entities.map((e) => (e.id === b ? { ...e, facing: 0 } : e)) };
     const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
-    node.receive(b, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }), tb);
+    node.receive(b, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0, aim: null }), tb);
     for (let k = 0; k < 14; k++) node.tick();
     expect(node.world.entities.find((e) => e.id === MOB)!.hp).toBeLessThan(3000);
     const res = tb.msgs.filter((m) => m.type === 'skill_result');
@@ -743,7 +868,7 @@ describe('WorldNode with combat', () => {
     const mobEnter = enter.find((e) => e.entityId === MOB);
     expect(mobEnter).toBeDefined();
     const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
-    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }));
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0, aim: null }));
     for (let k = 0; k < 14; k++) node.tick();
     const results = c.msgs.filter((m): m is Extract<Message, { type: 'skill_result' }> => m.type === 'skill_result');
     expect(results).toHaveLength(1);
@@ -754,7 +879,7 @@ describe('WorldNode with combat', () => {
     // the player's own max HP comes from the combat profile (07 §1 stats), not the skeleton constant
     expect(node.combat!.maxHpOf(id)).toBe(makeProfile('kiem').stats.hp);
     // a rejected (cooldown) cast is answered immediately by the sim path, without hits
-    node.receive(id, encode({ type: 'skill_cast', seq: 2, skillId: kiem.id, targetId: 0 }));
+    node.receive(id, encode({ type: 'skill_cast', seq: 2, skillId: kiem.id, targetId: 0, aim: null }));
     node.tick();
     const last = c.msgs.filter((m) => m.type === 'skill_result').pop() as Extract<Message, { type: 'skill_result' }>;
     expect(last).toMatchObject({ seq: 2, reason: CastReason.Cooldown, hits: [] });
@@ -774,7 +899,7 @@ describe('WorldNode with combat', () => {
     expect(enter.maxHp).toBe(HP_MAX);
     expect(enter.hpPct).toBe(100);
     const kiem = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
-    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0 }));
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: kiem.id, targetId: 0, aim: null }));
     for (let k = 0; k < 40; k++) node.tick();
     const hp = node.world.entities.find((e) => e.id === MOB)!.hp;
     expect(hp).toBeLessThan(HP_MAX);
@@ -794,7 +919,7 @@ describe('WorldNode with combat', () => {
     const c = new Client();
     const id = node.addPlayer(c, 'acc');
     const skill = compileSkills().find((s) => s.key === 'kiem_khi_tram')!;
-    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: skill.id, targetId: 0 }));
+    node.receive(id, encode({ type: 'skill_cast', seq: 1, skillId: skill.id, targetId: 0, aim: null }));
     node.tick();
     const res = c.msgs.find((m) => m.type === 'skill_result') as Extract<Message, { type: 'skill_result' }>;
     expect(res).toMatchObject({ seq: 1, reason: CastReason.Ok, hits: [] });

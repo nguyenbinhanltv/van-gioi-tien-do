@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
-import { encode, type Message, type SelfState } from '@vgtd/protocol';
+import { decode, encode, type Message, type SelfState } from '@vgtd/protocol';
 import { NetClient, type NetDeps, type NetEvents, type SocketLike } from '@vgtd/client-core';
 
 class FakeSocket implements SocketLike {
@@ -27,7 +27,7 @@ class FakeSocket implements SocketLike {
             entityId: 1,
             serverTimeMs: 0,
             tickHz: 20,
-            protocol: 2,
+            protocol: 3,
             mapTiles: 64,
           }),
         }),
@@ -64,6 +64,7 @@ const SELF: SelfState = {
   dashLeftMs: 0,
   dashCdMs: 0,
   invulnMs: 0,
+  vitals: null,
 };
 
 async function client(events: NetEvents): Promise<{ net: NetClient; sock: FakeSocket }> {
@@ -192,5 +193,25 @@ describe('NetClient event hooks', () => {
     net.events = { onAoiEnter: (e) => got.push(...e.map((x) => x.entityId)) };
     sock.push(enterMsg(4, 11));
     expect(got).toEqual([11]);
+  });
+});
+
+describe('NetClient.sendSkillCast (wire v3)', () => {
+  it('sends a skill_cast with the aim quantized to 1/32 tile, or none', async () => {
+    const { net, sock } = await client({});
+    const before = sock.sent.length;
+    expect(net.sendSkillCast({ seq: 3, skillId: 7, targetId: 1_000_002, aim: { i: 20.5, j: 31.25 } })).toBe(true);
+    expect(net.sendSkillCast({ seq: 0x10004, skillId: 1, targetId: 0, aim: null })).toBe(true);
+    const frames = sock.sent.slice(before).map((d) => decode(d as Uint8Array));
+    expect(frames[0]).toEqual({ type: 'skill_cast', seq: 3, skillId: 7, targetId: 1_000_002, aim: { qi: 656, qj: 1000 } });
+    expect(frames[1]).toEqual({ type: 'skill_cast', seq: 4, skillId: 1, targetId: 0, aim: null }); // seq wraps to u16
+  });
+
+  it('returns false (and sends nothing) when the socket is not open', async () => {
+    const { net, sock } = await client({});
+    sock.readyState = 3;
+    const n = sock.sent.length;
+    expect(net.sendSkillCast({ seq: 1, skillId: 1, targetId: 0, aim: null })).toBe(false);
+    expect(sock.sent.length).toBe(n);
   });
 });

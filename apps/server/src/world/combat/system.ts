@@ -38,7 +38,13 @@ import {
 } from '@vgtd/sim';
 import { DEFAULT_PATH, makeProfile } from './profile.js';
 import { resolveCast, type ResolveTarget } from './resolve.js';
-import { type CombatEvent, type CombatOptions, type CombatProfile, type CombatResult } from './types.js';
+import {
+  type AimedInput,
+  type CombatEvent,
+  type CombatOptions,
+  type CombatProfile,
+  type CombatResult,
+} from './types.js';
 
 interface PlayerCombat {
   profile: CombatProfile;
@@ -56,6 +62,7 @@ interface Pending {
   wireId: number;
   skill: SkillDef;
   targetId: number;
+  aim: { i: number; j: number } | null;
   roll: number;
   readyAtMs: number;
 }
@@ -74,7 +81,7 @@ export class CombatSystem {
   private readonly players = new Map<number, PlayerCombat>();
   private readonly dataByWire = new Map<number, SkillDef>();
   private readonly ownedByPath = new Map<PathId, Set<number>>();
-  private readonly inflight = new Map<number, number>();
+  private readonly inflight = new Map<number, { targetId: number; aim: { i: number; j: number } | null }>();
   private pending: Pending[] = [];
   private dropRng: RngState;
   private readonly respawnDelayMs: number;
@@ -172,7 +179,7 @@ export class CombatSystem {
    * Filter the tick's inputs: a dead player neither moves nor casts (the cast is answered `Controlled`), and a player can only cast the
    * 8 skills of their class (`UnknownSkill` otherwise). Returns the inputs to feed `step()` and immediate rejections.
    */
-  preStep(inputs: readonly SimInput[], world: SimWorld): { inputs: SimInput[]; results: CombatResult[] } {
+  preStep(inputs: readonly AimedInput[], world: SimWorld): { inputs: SimInput[]; results: CombatResult[] } {
     const keep: SimInput[] = [];
     const results: CombatResult[] = [];
     const seen = new Set<number>();
@@ -203,7 +210,7 @@ export class CombatSystem {
       if (!p.alive) reject(CastReason.Controlled);
       else if (!this.owns(p.profile.path, inp.skillId)) reject(CastReason.UnknownSkill);
       else {
-        this.inflight.set(key, inp.targetId);
+        this.inflight.set(key, { targetId: inp.targetId, aim: inp.aim ?? null });
         keep.push(inp);
       }
     }
@@ -219,7 +226,8 @@ export class CombatSystem {
       if (ev.type === 'cast_ok') {
         const skill = this.dataByWire.get(ev.skillId);
         const key = castKey(ev.entityId, ev.seq);
-        const targetId = this.inflight.get(key) ?? 0;
+        const cast = this.inflight.get(key);
+        const targetId = cast?.targetId ?? 0;
         this.inflight.delete(key);
         if (!skill || !this.players.has(ev.entityId)) continue;
         const castMs = skill.timing.cast_ms + (skill.timing.channel_ms ?? 0);
@@ -230,6 +238,7 @@ export class CombatSystem {
           wireId: ev.skillId,
           skill,
           targetId,
+          aim: cast?.aim ?? null,
           roll: ev.roll,
           readyAtMs: ev.readyAtMs,
         });
@@ -325,6 +334,7 @@ export class CombatSystem {
       profile: pc.profile,
       skill: c.skill,
       targetId: c.targetId,
+      aim: c.aim,
       enemies: this.enemiesNear(world),
       rand,
       losClear: (a, b) => lineOfSight(this.ctx.grid, a.i, a.j, b.i, b.j, caster.layer, caster.flying),

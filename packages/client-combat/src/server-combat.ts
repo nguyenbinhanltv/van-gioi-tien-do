@@ -46,6 +46,8 @@ export interface SkillCastWire {
   seq: number;
   skillId: number;
   targetId: number;
+  /** Aim point in tile coordinates (the transport quantizes it), or null. Clamped to the skill's range along the aim direction. */
+  aim: TilePoint | null;
 }
 
 export interface SkillResultWire {
@@ -58,7 +60,8 @@ export interface SkillResultWire {
 
 export interface ServerCombatOptions {
   path: PathId;
-  send: (m: SkillCastWire) => void;
+  /** Transport hook. Return false when the message could not be sent (socket closed): the cast is then refused locally. */
+  send: (m: SkillCastWire) => boolean | void;
   defs?: SkillDefinitions;
 }
 
@@ -89,6 +92,16 @@ export class ServerCombat implements CombatBackend {
   private readonly inflight = new Map<number, Inflight>();
   private readonly out: CombatEvent[] = [];
   private seq = 0;
+  private aim: TilePoint | null = null;
+  /** Update an enemy that is already known (position / HP percent from the interpolated remote view); unknown ids are ignored. */
+  syncEnemy(id: number, pos: TilePoint, hpPct: number): void {
+    const e = this.byId.get(id);
+    if (!e) return;
+    e.pos = pos;
+    e.hp = Math.round((Math.max(0, Math.min(100, hpPct)) / 100) * e.hpMax);
+    e.alive = e.hp > 0;
+  }
+
   /** Server time (ms) of the newest snapshot, so `readyAtMs` can be turned into a remaining cooldown. */
   private serverNowMs = 0;
 
@@ -111,14 +124,32 @@ export class ServerCombat implements CombatBackend {
     this.player.pos.j = p.j;
   }
 
+  setAim(p: TilePoint | null): void {
+    this.aim = p;
+  }
+
+  /** The aim point for a skill: the pointer, pulled back to the skill's range (the server ignores an aim beyond it). */
+  private aimFor(range: number): TilePoint | null {
+    const a = this.aim;
+    if (!a || !Number.isFinite(a.i) || !Number.isFinite(a.j)) return null;
+    const di = a.i - this.player.pos.i;
+    const dj = a.j - this.player.pos.j;
+    const d = Math.sqrt(di * di + dj * dj);
+    if (range > 0 && d > range) {
+      const k = range / d;
+      return { i: this.player.pos.i + di * k, j: this.player.pos.j + dj * k };
+    }
+    return { i: a.i, j: a.j };
+  }
+
   // ------------------------------------------------------------------ fed by the online client
   /** Newest snapshot's server time (`tick * TICK_MS`). */
   setServerTime(ms: number): void {
     this.serverNowMs = ms;
   }
 
-  /** The protocol has no self HP / MP yet: the online client passes whatever it knows. */
-  setSelfVitals(v: { hp: number; hpMax: number; mp: number; mpMax: number; alive?: boolean }): void {
+  /** Own HP / MP / shield from the snapshot's `self.vitals` (wire v3, sent when changed). */
+  setSelfVitals(v: { hp: number; hpMax: number; mp: number; mpMax: number; shield?: number; alive?: boolean }): void {
     Object.assign(this.player, v);
     if (v.alive !== undefined) this.player.alive = v.alive;
   }
@@ -202,7 +233,19 @@ export class ServerCombat implements CombatBackend {
     this.inflight.set(seq, { slot, sentAt: nowMs, undo });
     const castMs = skill.timing.cast_ms + (skill.timing.channel_ms ?? 0);
     if (castMs > 0) this.player.casting = { slot, startedAt: nowMs, endsAt: nowMs + castMs };
-    this.opts.send({ seq, skillId: this.wire.get(skill.id)!, targetId });
+    const sent = this.opts.send({
+      seq,
+      skillId: this.wire.get(skill.id)!,
+      targetId,
+      aim: this.aimFor(skill.targeting.range_tiles ?? 0),
+    });
+    if (sent === false) {
+      // not connected: take the prediction back and say so (nothing reached the server)
+      this.inflight.delete(seq);
+      if (undo) this.hotbar.undo(undo);
+      this.player.casting = null;
+      return [{ type: 'blocked', slot, reason: 'busy', atMs: nowMs }];
+    }
     return [{ type: 'cast_start', slot, castMs, atMs: nowMs }];
   }
 

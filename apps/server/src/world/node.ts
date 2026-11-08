@@ -22,7 +22,9 @@ import {
   ProtocolError,
   decode,
   encode,
+  dequantizePos,
   quantizePos,
+  type SelfVitals,
   selfStateOf,
   snapshotEntityOf,
   type EnterEntity,
@@ -45,7 +47,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
-import { CombatSystem, type CombatOptions, type CombatResult } from './combat/index.js';
+import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
@@ -100,7 +102,9 @@ interface Client {
   id: number;
   accountId: string;
   transport: ClientTransport;
-  inbox: SimInput[];
+  inbox: AimedInput[];
+  /** own vitals last sent to this client: they are re-sent only when they change (or on a full / resync snapshot) */
+  lastVitals: SelfVitals | null;
   lastRecvSeq: number | null;
   visible: Map<number, Visible>;
   /** slot -> entity id (0 = free) */
@@ -183,6 +187,10 @@ function emptyStats(): ClientStats {
 /** Spatial hash key for an AOI cell (u = i − j, w = i + j in 16-tile cells). */
 function cellKey(cu: number, cw: number): number {
   return (cu + 1024) * 4096 + (cw + 1024);
+}
+
+function sameVitals(a: SelfVitals | null, b: SelfVitals): boolean {
+  return !!a && a.hp === b.hp && a.hpMax === b.hpMax && a.mp === b.mp && a.mpMax === b.mpMax && a.shield === b.shield;
 }
 
 export class WorldNode {
@@ -294,6 +302,7 @@ export class WorldNode {
       accountId,
       transport,
       inbox: [],
+      lastVitals: null,
       lastRecvSeq: null,
       visible: new Map(),
       slots: new Array<number>(this.maxVisible).fill(0),
@@ -393,6 +402,7 @@ export class WorldNode {
           skillId: msg.skillId,
           targetId: msg.targetId,
           rttMs: 0,
+          aim: msg.aim ? { i: dequantizePos(msg.aim.qi), j: dequantizePos(msg.aim.qj) } : null,
         });
         break;
       case 'ping':
@@ -411,7 +421,7 @@ export class WorldNode {
     if (this.lastTickStart > 0) pushCapped(this.tickIntervalMs, t0 - this.lastTickStart, WORLD_CONFIG.TICK_SAMPLES);
     this.lastTickStart = t0;
 
-    const inputs: SimInput[] = [];
+    const inputs: AimedInput[] = [];
     for (const c of this.clients.values()) {
       for (const i of c.inbox) inputs.push(i);
       c.inbox.length = 0;
@@ -655,6 +665,19 @@ export class WorldNode {
     });
   }
 
+  /** Own vitals for the wire (null when the node runs without combat: stats are the skeleton constants then). */
+  private vitalsOf(e: EntityState): SelfVitals | null {
+    const hpMax = this.combat?.maxHpOf(e.id);
+    if (!this.combat || hpMax === undefined) return null;
+    return {
+      hp: Math.max(0, Math.round(e.hp)),
+      hpMax: Math.round(hpMax),
+      mp: Math.max(0, Math.round(e.mp)),
+      mpMax: Math.round(e.mpMax),
+      shield: Math.max(0, Math.round(this.combat.shieldOf(e.id, this.world.timeMs))),
+    };
+  }
+
   private hpPct(e: EntityState): number {
     return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
@@ -707,6 +730,9 @@ export class WorldNode {
         entities.push(se);
         touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp, anim: se.anim, dir: se.dir });
       }
+      // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
+      const vitals = this.vitalsOf(me);
+      const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
         {
@@ -714,12 +740,13 @@ export class WorldNode {
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
-          self: selfStateOf(me),
+          self: selfStateOf(me, sendVitals ? vitals : null),
           entities,
         },
         { baseline: (index) => c.last[index] },
       );
       for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp, anim: t.anim, dir: t.dir };
+      if (sendVitals) c.lastVitals = vitals;
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);

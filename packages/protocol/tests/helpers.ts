@@ -40,6 +40,15 @@ export function randSelf(r: Rng): SelfState {
     dashLeftMs: r.int(0, 250),
     dashCdMs: r.int(0, 1500),
     invulnMs: r.int(0, 150),
+    vitals: r.bool()
+      ? {
+          hp: r.int(0, 2 ** 32 - 1),
+          hpMax: r.int(0, 2 ** 32 - 1),
+          mp: r.int(0, 2 ** 32 - 1),
+          mpMax: r.int(0, 2 ** 32 - 1),
+          shield: r.int(0, 2 ** 32 - 1),
+        }
+      : null,
   };
 }
 
@@ -117,6 +126,7 @@ export function randMessage(r: Rng, type?: Message['type']): Message {
         seq: r.int(0, 65535),
         skillId: r.int(0, 65535),
         targetId: r.int(0, 2 ** 32 - 1),
+        aim: r.bool() ? { qi: r.int(0, 65535), qj: r.int(0, 65535) } : null,
       };
       return m;
     }
