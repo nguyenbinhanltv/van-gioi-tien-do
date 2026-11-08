@@ -14,29 +14,19 @@ import {
   MAX_HEIGHT_LEVELS,
   TILE_HALF_HEIGHT,
   TILE_HALF_WIDTH,
+  STATIC_SORT_BIAS,
   Y_SORTED_LAYER,
   cliffFaceGroup,
   compareDrawOrder,
   footprintSortY,
   pivotSortY,
+  staticSortBias,
   tileToScreen,
 } from '@vgtd/shared';
 import type { Rect, Sortable } from '@vgtd/shared';
 import type { WorldObject } from './types.js';
 
-/**
- * Static objects are nudged slightly *behind* on sortY ties; the bigger the footprint the more, so that
- *  - an entity (bias 0) standing in the cell directly in front (+j) of a prop is drawn after it
- *    (shared's x tie-break alone would flip it), and
- *  - on an exact tie a larger footprint is drawn before a smaller neighbour (a 1×1 directly in front of a 2×2).
- * The nudge stays far below the 16 px spacing of integer footprint vertices.
- */
-export const STATIC_SORT_BIAS = 0.01;
-const AREA_BIAS = 0.001;
-
-export function staticSortBias(footprintArea: number): number {
-  return STATIC_SORT_BIAS + AREA_BIAS * Math.min(footprintArea, 100);
-}
+export { STATIC_SORT_BIAS, staticSortBias }; // D65: defined in @vgtd/shared (iso.ts)
 
 /** Ids of slices are `sourceId * SLICE_ID_STRIDE + k`; entities use `entityId * SLICE_ID_STRIDE`. */
 export const SLICE_ID_STRIDE = 64;

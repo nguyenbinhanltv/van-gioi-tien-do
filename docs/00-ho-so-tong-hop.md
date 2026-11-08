@@ -148,6 +148,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D62: ngoại lệ hẹp của D47 chỉ để sửa head-band, áp dụng mọi lớp/hướng: một lượt scale ROI đầu đồng đều không quá 5%, không xoay/shear, Lanczos3 + feather, pivot chin/nape base đã khóa hoặc đường tiếp giáp đầu–trang phục nhìn thấy khi cả hai bị che; khóa dải base. Nguồn ORIGINAL hoặc đúng một AI head edit khóa master; không nối chồng. AI head replacement tối đa một lần thử/ô, cùng mặt nạ và bằng chứng, giữ thiết kế đã khóa. RGBA ngoài mask giống từng byte, D57 inherited-registration, xem seam 4×, ghi hệ số + SHA mask/provenance và đo lại landmark thật. Tỉ lệ thân/toàn ô D41 và mọi gate giữ nguyên; chi tiết tại D62 và pipeline.]
 
+[Cập nhật D63–D67: stream tier low/high, camera thấy 4–6 chunk, `staticSortBias` trong `@vgtd/shared`, pivot vách `(i+j+1)·16` + keep-out 1 ô, schema tùy chọn `elevation`/`objects[]`; xem `docs/DECISIONS.md`.]
+
 ## 4. Các quyết định đã bị thay thế
 
 Những giá trị ở cột "Cũ" vẫn còn nằm trong tài liệu gốc tương ứng; khi gặp, dùng giá trị ở cột "Hiện hành".

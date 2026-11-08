@@ -24,6 +24,7 @@ import {
   chunksAround,
   cliffFaceGroup,
   compareDrawOrder,
+  staticSortBias,
   footprintSortY,
   inAoi,
   localInChunk,
@@ -213,5 +214,14 @@ describe('Y-sort', () => {
   it('numeric sortKey is group-major', () => {
     expect(sortKey(1, 0)).toBeGreaterThan(sortKey(0, 100_000));
     expect(sortKey(0, 20)).toBeLessThan(sortKey(0, 21));
+  });
+});
+
+describe('staticSortBias (D65)', () => {
+  it('grows with footprint area, is capped, and stays far below the 16 px vertex spacing', () => {
+    expect(staticSortBias(1)).toBeCloseTo(0.011, 6);
+    expect(staticSortBias(4)).toBeGreaterThan(staticSortBias(1));
+    expect(staticSortBias(10_000)).toBe(staticSortBias(100));
+    expect(staticSortBias(100)).toBeLessThan(0.2);
   });
 });
