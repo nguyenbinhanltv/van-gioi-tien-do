@@ -574,3 +574,9 @@ là lỗi cứng không đo được. Giữ phạm vi pose D41 và head-reason D
 Audit pin hash nguồn/mã, ghi mọi ô/pair, control matrix, score L1 lịch sử và A+C hiện tại; không sửa source/evidence
 hay export.11ô Lab vượt15 chặn rebuild, cần sửa hoặc quyết định giải thích; OPEN-ITEMS liệt kê từng ô và owner.
 33ô fail L1 cũ được đánh giá lại theo A+C, không tự ép redraw. Lệnh và công thức tại README, tóm tắt audit D55 trong docs/art.
+
+### [Cập nhật D57] Registration kế thừa có kiểm chứng
+
+Clip khai `inheritedRegistration: {kind: "inherited-registration", source, sourceSha256, mask, maskSha256, cells}`; đường dẫn tương đối project, SHA256 gồm 64 hex thường, cells là chỉ số clip-local (sheet nhóm ánh xạ qua sheetSelection). Mask PNG cùng kích thước native, RGB nhị phân 0/255, alpha 255: trắng cho phép edit, đen khóa. Tool so mọi byte RGBA ngoài mask trên toàn sheet trước DPI/key/despill/palette, kể cả RGB trong pixel alpha 0; sai hash, mất mask hoặc khác byte là lỗi cứng không waiver. Mỗi ô kế thừa phải còn pixel khóa.
+
+Tool chuẩn bị nguồn trước edit với cùng cấu hình, chặn đổi crop/preparation, tự tính centroid/vertical và calibration tham chiếu từ nguồn trước edit cho ô khai rõ, rồi dùng origin/scale đó cho ảnh sửa. Không khai centroid là giải phẫu và không trộn variant/authoredOrigins. Contract và review lưu kind, source/mask/edited SHA256, source cell, số pixel khóa, origin logical cropped, vertical và scale. Head, similarity D54/D55, foot, canvas và gate khác vẫn xét ảnh sửa; không được miễn. Giữ mask đã xem, ảnh nguồn và provenance AI edit.

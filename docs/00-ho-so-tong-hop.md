@@ -47,6 +47,8 @@ Oct 31, 2026 · An Nguyen
 
 [Cập nhật D58: export semi-chibi opt-in `timingProfile: "smooth-v2"` chạy clock 24 Hz, mỗi bản vẽ 1 tick; idle 16/24 giây, attack 14/24 giây. Animation kế thừa clock armature DragonBones. Legacy giữ clock cũ; atlas/PNG không đổi khi sửa timing runtime.]
 
+[Cập nhật D57: `inherited-registration` chỉ tái dùng registration do tool tự tính từ nguồn trước edit khi SHA256 nguồn/mask khớp và toàn bộ RGBA ngoài mask nhị phân giống hệt trên toàn sheet. Mất mask/hash hoặc khác byte là lỗi cứng; giữ calibration/origin từ nguồn, ghi provenance trong contract/review. Không miễn head/similarity/foot/canvas, không coi centroid là giải phẫu.]
+
 > **[Cập nhật D44: Player mới dùng premium semi-chibi khoảng 4,5 đầu, mặt cố định theo Đạo Lộ; trang phục/vũ khí đổi hình qua T1–T5 theo 9 cảnh giới, còn 6 phẩm D6 chỉ tint viền/glow lúc chạy. Trang phục cosmetic và skin vũ khí bán riêng; chưa chốt giá/chỉ số. Giữ pipeline từng khung D41 và hướng D14. Chi tiết: [chuẩn phong cách](art/style-semichibi.md), [D44](DECISIONS.md). Concept là tham chiếu, chưa thay asset đang chạy.]**
 
 Đây là bộ giá trị đang có hiệu lực. Mọi thay đổi về sau nên sửa ở đây trước, rồi mới cập nhật tài liệu gốc.

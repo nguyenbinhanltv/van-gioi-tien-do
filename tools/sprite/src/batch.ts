@@ -96,6 +96,15 @@ function clipReport(project: Project, result: ProjectResult, name: string): Clip
     counts,
     ...(unmeasuredFootSlide ? { unmeasuredFootSlide } : {}),
     ...(originEvidence.length ? { originEvidence } : {}),
+    ...(result.contract.clips.find((c) => c.name === name)?.records.some((r) => r?.inheritedRegistration)
+      ? {
+          inheritedRegistration: result.contract.clips
+            .find((c) => c.name === name)!
+            .records.flatMap((r, cell) =>
+              r?.inheritedRegistration ? [{ cell, evidence: r.inheritedRegistration }] : [],
+            ),
+        }
+      : {}),
     ...(headEvidence.length ? { headEvidence } : {}),
     ...(similarityCrops.length ? { similarityCrops } : {}),
   };
