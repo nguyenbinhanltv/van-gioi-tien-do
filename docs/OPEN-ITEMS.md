@@ -216,6 +216,10 @@ Số liệu D49 đều là **Đề xuất – chờ duyệt**; mô phỏng ở `
 
 Tham chiếu: [D49](DECISIONS.md), [docs/11 §2.0, §4, §4.8](11-he-phai-ky-nang.md).
 
+## 15. Play-test chibi: ngưỡng animation idle/walk/run (client tạm)
+
+Bản play-test `ChibiBody` (apps/client-cocos) chọn clip theo tốc độ ô thực đã di chuyển: dưới 0,3 ô/s là `idle`, dưới 3,2 ô/s là `walk`, từ 3,2 ô/s là `run`; giữ Shift chỉ ép clip `walk` khi đang di chuyển. Đây là giá trị **trình bày tạm thời** của client, **không** đổi tốc độ di chuyển (vẫn 4,5 ô/s theo docs/08 §4 và I-08). docs không quy định chế độ đi bộ, tốc độ đi bộ hay ngưỡng chuyển clip; cần game designer hoặc owner quyết định (có chế độ đi bộ không, tốc độ, ngưỡng) trước khi coi là cuối cùng.
+
 ## D54 — rebuild các hướng sprite đã merge (worker24, 2026-11-08)
 
 [Cập nhật D55: mục D54 dưới đây là lịch sử trước D55. Audit pin mới xác nhận cả 33 ô hết lỗi cứng A+C; danh sách đang mở hiện tại là 11 ô Lab trong mục D55 bên dưới. Không cần repaint chỉ vì L1 cũ.]
