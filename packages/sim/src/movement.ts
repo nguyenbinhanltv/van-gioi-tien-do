@@ -136,7 +136,13 @@ export function stepMove(s: MoveState, cmd: MoveCommand, grid: CollisionGrid): M
   const facing = moving ? cmd.dir : s.facing;
 
   let flying = s.flying;
-  if ((cmd.flags & FLAG_FLY_TOGGLE) !== 0) flying = !flying;
+  if ((cmd.flags & FLAG_FLY_TOGGLE) !== 0) {
+    // D69: the toggle is rejected (keep the current mode) when the collider would overlap a blocked tile in the new
+    // mode: no landing in a wall / on another level, no take-off on a TILE_NOFLY tile.
+    const want = !s.flying;
+    const groundLayer = want ? s.layer : layerAt(grid, s.i, s.j, s.layer);
+    if (!circleBlocked(grid, s.i, s.j, COLLIDER_RADIUS_TILES, groundLayer, want)) flying = want;
+  }
   const qinggong = (cmd.flags & FLAG_QINGGONG) !== 0;
 
   let dashLeftMs = s.dashLeftMs;

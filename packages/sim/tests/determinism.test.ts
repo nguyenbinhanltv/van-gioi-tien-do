@@ -161,4 +161,4 @@ describe('determinism', () => {
   });
 });
 
-const GOLDEN_2000 = 'decc81aa544fbb23';
+const GOLDEN_2000 = '88bbea62d7312c1b';

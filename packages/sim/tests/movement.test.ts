@@ -126,6 +126,38 @@ describe('movement speed (docs/08 §4)', () => {
     for (let t = 0; t < 10; t++) s = stepMove(s, { dtMs: 50, dir: SE, mag: 15, flags: 0 }, g);
     expect(s.i).toBeLessThanOrEqual(2 - COLLIDER_RADIUS_TILES + 1e-9);
   });
+  it('fly toggle: landing over a wall is rejected, landing on open ground works', () => {
+    const g = TileGrid.fromRows(['.....', '..#..', '.....']);
+    const over = base({ i: 2.5, j: 1.5, flying: true });
+    const rejected = stepMove(over, { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE }, g);
+    expect(rejected.flying).toBe(true);
+    const clear = base({ i: 0.5, j: 1.5, flying: true });
+    const landed = stepMove(clear, { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE }, g);
+    expect(landed.flying).toBe(false);
+    // a collider overlapping the wall edge is rejected too
+    const edge = stepMove(
+      base({ i: 2.5 - 0.5, j: 1.5, flying: true }),
+      { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE },
+      g,
+    );
+    expect(edge.flying).toBe(true);
+  });
+  it('fly toggle: take-off on or beside a no-fly tile is rejected', () => {
+    const g = TileGrid.fromRows(['..n..', '..n..', '..n..']);
+    const on = stepMove(base({ i: 2.5, j: 1.5 }), { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE }, g);
+    expect(on.flying).toBe(false);
+    const off = stepMove(base({ i: 0.5, j: 1.5 }), { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE }, g);
+    expect(off.flying).toBe(true);
+  });
+  it('fly toggle: landing where the collider straddles another level is rejected', () => {
+    const g = TileGrid.fromRows(['.2.', '.2.', '.2.']);
+    const toggle = { dtMs: 50, dir: 255, mag: 0, flags: FLAG_FLY_TOGGLE };
+    const straddle = stepMove(base({ i: 1.05, j: 1.5, flying: true }), toggle, g);
+    expect(straddle.flying).toBe(true);
+    const inside = stepMove(base({ i: 1.5, j: 1.5, flying: true }), toggle, g);
+    expect(inside.flying).toBe(false);
+    expect(inside.layer).toBe(2);
+  });
   it('single input is pure: the previous state object is not mutated', () => {
     const s0 = base();
     const copy = { ...s0 };

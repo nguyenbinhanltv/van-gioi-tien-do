@@ -141,7 +141,7 @@ describe('speedhack: distance check, ratio windows, suspicion score', () => {
   });
 
   it('take-off while moving at full magnitude is not a distance violation (toggle and move share one input)', () => {
-    const a = m();
+    const a = m({ i: 10.5, j: 10.5 });
     const FLY_TOGGLE = 2;
     const up = stepMove(a, { dtMs: 50, dir: 0, mag: 15, flags: FLY_TOGGLE }, openGrid());
     expect(up.flying).toBe(true);
