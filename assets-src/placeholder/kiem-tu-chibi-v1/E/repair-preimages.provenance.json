@@ -1,0 +1,440 @@
+{
+  "status": "CommittedcanonicalpreimagesmakeROIproofsindependentlyverifiablewithouttemporaryframefiles. Originalraws,guides,projectcalibrationandproofsretained.",
+  "records": [
+    {
+      "file": "sheets/run.canonical-before-leg-edit06.png",
+      "sha256": "e7a7a6c10784b65d46f7e804e13f3ec8422f71037d3e5132e98ef1adc387e7a9",
+      "operation": "Packexactretainedpre-edit aligned256cellswithoutrescale/redraw, thenencodecanonicalfullsheet. InputsarederivedAIpublicpipelineoutputs, notrawimagegen.",
+      "inputs": [
+        {
+          "cell": 0,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-0.png",
+          "sourceSha256": "f356190c110550cbbd89e0ae9cfb5ab6d56549d8f8aeb4c0c3482d6c1e358d86"
+        },
+        {
+          "cell": 1,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-1.png",
+          "sourceSha256": "c1a0e32d92f940d0a9fd9628cbeba1207558c09ec21b4a8717657ae6b1dd6c64"
+        },
+        {
+          "cell": 2,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-2.png",
+          "sourceSha256": "2ccb33c3356ef550c82621536a008f870656c7523eeedcdacd0e51fbfb4126ed"
+        },
+        {
+          "cell": 3,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-3.png",
+          "sourceSha256": "49c7f0da9461b022e2999f12443993982640e33f068c4399d6a2364a54508266"
+        },
+        {
+          "cell": 4,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-4.png",
+          "sourceSha256": "17cee51ab9dbde427706db303e30cd724bed02b69f3b1aa13674d1023c08cfa2"
+        },
+        {
+          "cell": 5,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-5.png",
+          "sourceSha256": "fe3f63864fc3c0c4304d354c92ba9eba7ac7edd648b82ef626b9ef80e7431175"
+        },
+        {
+          "cell": 6,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-6.png",
+          "sourceSha256": "8cc47a359f2cc032a662dcf62d7a489b1b21875bd630c17210a792f59a47e9ce"
+        },
+        {
+          "cell": 7,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-7.png",
+          "sourceSha256": "46d39549ca87dd453284c496a99d2a50ab33035d87d7c4dcac5df3b62438c505"
+        },
+        {
+          "cell": 8,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-8.png",
+          "sourceSha256": "aff225872c344f555eceeed9bef5424bd83d8c12736289a81a46c43048357d7a"
+        },
+        {
+          "cell": 9,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-9.png",
+          "sourceSha256": "0b496f9ad6b1b4d60ae489ae09de38aac844762f56bf118077fc24c4297e09de"
+        },
+        {
+          "cell": 10,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-10.png",
+          "sourceSha256": "f13396fefcab31752188f495bad4e08e59adaf5a3ace5d8347d72386659345ac"
+        },
+        {
+          "cell": 11,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-11.png",
+          "sourceSha256": "e4daf1648bf6b6b81bacb8342206fe9597d95037a2ea92abfce9a58fabad5ab6"
+        },
+        {
+          "cell": 12,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-12.png",
+          "sourceSha256": "8d16ed7e69dff8c70a4c2759049632bac7f524590ad5bd79e2d343fd38a13f2a"
+        },
+        {
+          "cell": 13,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-13.png",
+          "sourceSha256": "7d9f1dde1bcacf92f3400dc2b65042759542adbe2e7cb1e2693ee307af7a9803"
+        },
+        {
+          "cell": 14,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-14.png",
+          "sourceSha256": "64132a15827645508b1f7322028c321317429a3a97eab5e63e109b1897dda0ce"
+        },
+        {
+          "cell": 15,
+          "sourcePath": "D:/Temp/vgtd23-run45-aligned/run-15.png",
+          "sourceSha256": "3b9a8a1281fe385d92fad09790056006ba09202a7282687155c357b96cf89435"
+        }
+      ]
+    },
+    {
+      "file": "sheets/run.canonical-before-leg-edit07.png",
+      "sha256": "187552997f54590b5225059658b41e4ce88d2b4507bf8f1f325450361f1d10ea",
+      "operation": "Packexactretainedpre-edit aligned256cellswithoutrescale/redraw, thenencodecanonicalfullsheet. InputsarederivedAIpublicpipelineoutputs, notrawimagegen.",
+      "inputs": [
+        {
+          "cell": 0,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-0.png",
+          "sourceSha256": "01c5a2646ffd6ac81bbafbd25fa82f093561f11e1236afae5b290be69279c5aa"
+        },
+        {
+          "cell": 1,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-1.png",
+          "sourceSha256": "cf7a1311d101dd1348c28ac190763970f268cd171b36991927e7271c643cf2c3"
+        },
+        {
+          "cell": 2,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-2.png",
+          "sourceSha256": "4a1e39bbe0e4afcdba4bfa34de14e442cb5103400e5da691a61790b1c9b2f19b"
+        },
+        {
+          "cell": 3,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-3.png",
+          "sourceSha256": "82d24e77813b4274122f04a317b137f513a505b600a03e4d369950e2c5437309"
+        },
+        {
+          "cell": 4,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-4.png",
+          "sourceSha256": "e2c799b894c67603581e009e1a0bf6be39ef034e6e050ca9745a8ebeaf4db7ca"
+        },
+        {
+          "cell": 5,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-5.png",
+          "sourceSha256": "44bf54539237c23af0ad3b8904caf678a80a80267709654c067807130dfcc387"
+        },
+        {
+          "cell": 6,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-6.png",
+          "sourceSha256": "9c4987d05b30f103b0c42b1c9190c210695f49aff59fb76fa0e44125f032dab9"
+        },
+        {
+          "cell": 7,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-7.png",
+          "sourceSha256": "b8aa1f2444c6334ce95f6b7503bfd80d3e64753c51f7a9ab17ebbe98269b2706"
+        },
+        {
+          "cell": 8,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-8.png",
+          "sourceSha256": "2ca8424630fe350bbdbc96c8dae14c48990f5a3a2d9d44802b530bedd39b2ed2"
+        },
+        {
+          "cell": 9,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-9.png",
+          "sourceSha256": "27c40df2be428715ae029a087e516ed457a07450856887d0518c430233b4e1bf"
+        },
+        {
+          "cell": 10,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-10.png",
+          "sourceSha256": "11bddd3b31ccc9896309a45e84c6f81c64b2900756ad35d73315ef34aa274a59"
+        },
+        {
+          "cell": 11,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-11.png",
+          "sourceSha256": "38c590c737a7c46b2663f238aba9e0da4e57893e907a0a30822e706b668cc2e1"
+        },
+        {
+          "cell": 12,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-12.png",
+          "sourceSha256": "782c91d40d48ff351a0e13cfb468df94e65920372ec9d65cc0ff49b44efc1ff1"
+        },
+        {
+          "cell": 13,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-13.png",
+          "sourceSha256": "2dd19012c2fd64ad3c2bdcb346733088dd648abe5c9d0c3bbb2facd570ca6ae1"
+        },
+        {
+          "cell": 14,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-14.png",
+          "sourceSha256": "85959b1bacce8d6d85fd899d64e7e8c19726bf7dfb4df727d89d2bc8185798d8"
+        },
+        {
+          "cell": 15,
+          "sourcePath": "D:/Temp/vgtd23-run456-aligned/run-15.png",
+          "sourceSha256": "fea0db1d9d1468e9f9ddd1740f8f612d294176beda701307458cd1d16df0641c"
+        }
+      ]
+    },
+    {
+      "file": "sheets/run.canonical-before-head-edit09.png",
+      "sha256": "280e266fccbcb73fa621d8243f6a183f7bcc290ac9e00f0584793821c14166ca",
+      "operation": "Packexactretainedpre-edit aligned256cellswithoutrescale/redraw, thenencodecanonicalfullsheet. InputsarederivedAIpublicpipelineoutputs, notrawimagegen.",
+      "inputs": [
+        {
+          "cell": 0,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-0.png",
+          "sourceSha256": "7943462b78b936c754bd4051315912ca380fb397dddc2b4147b0a0648ae4c376"
+        },
+        {
+          "cell": 1,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-1.png",
+          "sourceSha256": "d9cbed5a0dbca2d13ca91d52e222487af6f04a6a7ea47a34cecfbe490b1c7edb"
+        },
+        {
+          "cell": 2,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-2.png",
+          "sourceSha256": "3f2efb1fe99194f5854690ded16232a2566e4ec01db5a5926524073dbcb8cbde"
+        },
+        {
+          "cell": 3,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-3.png",
+          "sourceSha256": "16543905df63e74b7530d70176c233dd7bc523a4e88c6bd388b200f778d11aa9"
+        },
+        {
+          "cell": 4,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-4.png",
+          "sourceSha256": "ab19fe01d7bcdfde0ef4aaff3cbfcd37a7d480a20ed0cb5b4616045f7f3fdcc0"
+        },
+        {
+          "cell": 5,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-5.png",
+          "sourceSha256": "611b74eae6f6d4df3c7b42483d810f8f22f8cb095956e60244559c577b618f50"
+        },
+        {
+          "cell": 6,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-6.png",
+          "sourceSha256": "34eb3d450ca615436eeae9c72378e540083977ea181682c6b35eb813dccf03d6"
+        },
+        {
+          "cell": 7,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-7.png",
+          "sourceSha256": "c09f3551ae2ff87f0eec507cc4ac6d6ced1242166177d2d84fa612d57c66ad47"
+        },
+        {
+          "cell": 8,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-8.png",
+          "sourceSha256": "bc3a866db41c96270ed175381f3974943681f8e4e4d3f9dd77e5101ff307668a"
+        },
+        {
+          "cell": 9,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-9.png",
+          "sourceSha256": "5d7914ce6e21c290829b1b405584f9b08e88f619ece7a745a26f5d349dca1b06"
+        },
+        {
+          "cell": 10,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-10.png",
+          "sourceSha256": "396bed6f05cbe6aa8cff2380345d8330bbf02cd3143f42e201b3adcc1470dc78"
+        },
+        {
+          "cell": 11,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-11.png",
+          "sourceSha256": "3c13267b43159d247cc45a948ed9748d546be4c6db1ae17b9603eb97fd16873a"
+        },
+        {
+          "cell": 12,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-12.png",
+          "sourceSha256": "d3be13b1f421128b12b55bff67927d33ae558ef83a2a3a23d864004ee3303b7a"
+        },
+        {
+          "cell": 13,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-13.png",
+          "sourceSha256": "ba927d5ee9ae9c19fb014272e20ecd2a04f2c6db2b54c068aac401ee42cdd750"
+        },
+        {
+          "cell": 14,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-14.png",
+          "sourceSha256": "3b77290fcf4e7ca4db133c60afb166cb1d72a091d5a66ba4d5e9261d3fe7cba1"
+        },
+        {
+          "cell": 15,
+          "sourcePath": "D:/Temp/vgtd23-run4567-aligned/run-15.png",
+          "sourceSha256": "dd1f5eebc9cba8cc8a71f4047b63360a2bd06e110d21cf653cb1ec1f5e1d2296"
+        }
+      ]
+    },
+    {
+      "file": "sheets/hit-dash.canonical-before-head-edit02.png",
+      "sha256": "71f37c9394b343735a92dac24c8200c946a755f3803b0c7c4c9a672b906d1d92",
+      "operation": "Packexactretainedpre-edit aligned256cellswithoutrescale/redraw, thenencodecanonicalfullsheet. InputsarederivedAIpublicpipelineoutputs, notrawimagegen.",
+      "inputs": [
+        {
+          "cell": 0,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-0.png",
+          "sourceSha256": "d89045a8b432fa596cbace2d1f705a28493fe01292b8224da9eace8a5c7018e5"
+        },
+        {
+          "cell": 1,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-1.png",
+          "sourceSha256": "2fcc29dfce55db0befb4cc3ba6340bb8c413564b68e37e79f1f0a9de2a622b53"
+        },
+        {
+          "cell": 2,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-2.png",
+          "sourceSha256": "1ae3dc6621291db275e15becf0ea741be194dcddd094c7009b29f9a717a3f0e6"
+        },
+        {
+          "cell": 3,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-3.png",
+          "sourceSha256": "a7996c4987f5c2ebc531aa3bc26994c9c9181dc67c73a66abca8f87d46b8bda1"
+        },
+        {
+          "cell": 4,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-4.png",
+          "sourceSha256": "a74ddf1e7b8a85ef676031369589ba79599ede17660ba91dd55df956320b4b4f"
+        },
+        {
+          "cell": 5,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-5.png",
+          "sourceSha256": "ceb1f9f5aaaaa9d602edf7489ebb1b2cc49272bcef550d41f6987359cd3a5515"
+        },
+        {
+          "cell": 6,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-0.png",
+          "sourceSha256": "0d9a675e8c5524300909627827ab050a483a4e74fa358522032dacd53c55f04a"
+        },
+        {
+          "cell": 7,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-1.png",
+          "sourceSha256": "7f2dcd552fbf28ae087f05e311ce160fd141ca3794c2f9b5948cac27a276b909"
+        },
+        {
+          "cell": 8,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-2.png",
+          "sourceSha256": "afbbca448ffafc836c6602f2aa55ac5aa1c183cfcc00fe4d342d86ab4d79ef68"
+        },
+        {
+          "cell": 9,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-3.png",
+          "sourceSha256": "d264de38256a1982dd317aab0ae15a45ea6714dd2400d022996b761be9aec685"
+        },
+        {
+          "cell": 10,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-4.png",
+          "sourceSha256": "53e0966f1c306bb5ceb54a4bcec2867e35f6e808425d436be0b5c26f5c7215cb"
+        },
+        {
+          "cell": 11,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-5.png",
+          "sourceSha256": "c1f07ac71aefd9881688e39fda431ed0e087a7f1c4892ac4d86d3323e3d8423e"
+        },
+        {
+          "cell": 12,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-6.png",
+          "sourceSha256": "23f74fed2fd815bd660ac91289585ad74de0a2a9180c215dedbf2815c60c2ade"
+        },
+        {
+          "cell": 13,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-7.png",
+          "sourceSha256": "b3c1e971927c440332d3bbe34a56be6a47915be9255d618011583a2013582305"
+        },
+        {
+          "cell": 14,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-8.png",
+          "sourceSha256": "5260266f7cdc2074c7bc3d47d858dbf4937e5dfb31cd9393f8d23e4777d95bb0"
+        },
+        {
+          "cell": 15,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/dash-9.png",
+          "sourceSha256": "6eeed40c13f813b50141dafff518dec02efdb9d4a7210b31d3c7e82a6f0343bc"
+        }
+      ]
+    },
+    {
+      "file": "sheets/hit-dash.canonical-before-head-edit03.png",
+      "sha256": "81c77662e56824992d67e9858afc91b78ace1b9ce24ed8c5533ad3ca50894197",
+      "operation": "Packexactretainedpre-edit aligned256cellswithoutrescale/redraw, thenencodecanonicalfullsheet. InputsarederivedAIpublicpipelineoutputs, notrawimagegen.",
+      "inputs": [
+        {
+          "cell": 0,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-0.png",
+          "sourceSha256": "d89045a8b432fa596cbace2d1f705a28493fe01292b8224da9eace8a5c7018e5"
+        },
+        {
+          "cell": 1,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-1.png",
+          "sourceSha256": "2fcc29dfce55db0befb4cc3ba6340bb8c413564b68e37e79f1f0a9de2a622b53"
+        },
+        {
+          "cell": 2,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-2.png",
+          "sourceSha256": "1ae3dc6621291db275e15becf0ea741be194dcddd094c7009b29f9a717a3f0e6"
+        },
+        {
+          "cell": 3,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-3.png",
+          "sourceSha256": "a7996c4987f5c2ebc531aa3bc26994c9c9181dc67c73a66abca8f87d46b8bda1"
+        },
+        {
+          "cell": 4,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-4.png",
+          "sourceSha256": "a74ddf1e7b8a85ef676031369589ba79599ede17660ba91dd55df956320b4b4f"
+        },
+        {
+          "cell": 5,
+          "sourcePath": "D:/Temp/vgtd23-E-d55/hit-5.png",
+          "sourceSha256": "ceb1f9f5aaaaa9d602edf7489ebb1b2cc49272bcef550d41f6987359cd3a5515"
+        },
+        {
+          "cell": 6,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-0.png",
+          "sourceSha256": "7d1ed3fd52f6ed6a5f1e49859a5df9fa27e0a30a0447b0856724392885e59f60"
+        },
+        {
+          "cell": 7,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-1.png",
+          "sourceSha256": "3b2e680917b60526301b781cdd96a18d08a573d7779d9f7d1de3995939fc64b1"
+        },
+        {
+          "cell": 8,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-2.png",
+          "sourceSha256": "a5d20c5de432bf19f1703f0dc01c9cb4a53f52be937eb6493db9fbec56c11840"
+        },
+        {
+          "cell": 9,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-3.png",
+          "sourceSha256": "355b810fbb83935ae96356c947f84bb3f4bbe20f9146ff685be310322cc120c7"
+        },
+        {
+          "cell": 10,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-4.png",
+          "sourceSha256": "664594a3eecb8c146fc7da6d0a8679cf15cd76c2a99e69f08d334830e8211a41"
+        },
+        {
+          "cell": 11,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-5.png",
+          "sourceSha256": "0ee6fbbfb0aaa29a2c42896a7187350ee21845620ae882aaf4c832e2e6b8f713"
+        },
+        {
+          "cell": 12,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-6.png",
+          "sourceSha256": "db6627729e786a299253c1cdb07e508bef8ab202c8e14a41d8393382b9aa1a59"
+        },
+        {
+          "cell": 13,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-7.png",
+          "sourceSha256": "af793ce772aafb64b98ccef352f68e401573b960861f73eae846b4188f81b5bb"
+        },
+        {
+          "cell": 14,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-8.png",
+          "sourceSha256": "5a8adf6996f92267c67e3a8b9825da03cb2df7280f6429152576a5dbb522c01d"
+        },
+        {
+          "cell": 15,
+          "sourcePath": "D:/Temp/vgtd23-dash02-aligned/dash-9.png",
+          "sourceSha256": "f8505dec3f7478b77ba658fe251882a539c65d7b82b6ef654e7d13d8e48d2785"
+        }
+      ]
+    }
+  ]
+}

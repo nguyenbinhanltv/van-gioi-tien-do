@@ -1,5 +1,25 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## KTC1 — Kiếm tu semi-chibi T1: master và motion E smooth-v2 (2026-11-08)
+
+Hướng mỹ thuật D44; orchestrator duyệt visual lock 5 master Kiếm tu T1 ngày 2026-11-08. Nguồn mới là `image_gen.imagegen`, model không công bố; tác giả nguồn: OpenAI image generation theo prompt phiên Codex / chủ dự án. Input là concept dự án D44 và master được chọn, không dùng mẫu thương mại. Điều khoản đã kiểm ngày 2026-11-08: [OpenAI Terms of Use / Content](https://openai.com/policies/row-terms-of-use/) (hiệu lực 2026-01-01); quyền output giữa OpenAI và người dùng thuộc người dùng trong phạm vi luật cho phép, vẫn phải bảo đảm quyền input/bên thứ ba. Không gán CC0 hoặc trình bày là tranh vẽ tay.
+
+Các đường dẫn rút gọn dưới đây nằm trong `assets-src/placeholder/kiem-tu-chibi-v1/`, trừ hàng runtime ghi đường dẫn đầy đủ.
+
+| Tệp / nhóm                                                                                     | Nguồn và xử lý                                                                                                     | Nơi dùng / provenance                                                                                                         |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `reference/S.attempt-01.raw.png`                                                               | Output AI đầu, nguyên byte, giữ để truy xuất; không chọn                                                           | `reference/master-source.json`: prompt, tool, model không công bố, UTC và hash                                                |
+| `reference/{S,E,SE,NE,N}.master.raw.png`                                                       | 5 output AI nguyên byte; S sửa cap/vai qua edit, 4 hướng edit từ S khóa mặt/costume                                | `reference/master-source.json`, `master-lock.json`; visual lock không thay thế animation QA                                   |
+| `reference/*.master-native.png`, `*.master.png`, `turnaround.preview.png`                      | Dẫn xuất qua public key/defringe/despill, chuẩn DPI toàn ảnh, một scale nhân vật và tịnh tiến; không fit từng pose | `prepare-masters.ts`, `master-calibration.json`; anatomical H tách khỏi alpha bbox                                            |
+| `E/templates/*.png`                                                                            | Guide tooling D46/grouped và guide stencil/mask cơ học từ chính ảnh dự án                                          | `prepare-templates.ts`, JSON kèm guide; stencil không phải bằng chứng đầu ra đạt QA                                           |
+| `E/sheets/*.raw.png`                                                                           | Raw full-pose AI, gồm lần đầu và mọi lần sửa/reject được giữ nguyên                                                | `E/*.generation.json`, `E/sheets/*.generation.json`; prompt/tool/model/UTC và SHA-256 được giữ theo từng lệnh                 |
+| Các PNG dẫn xuất khác trong `E/sheets/`                                                        | Chuẩn DPI, key/despill, hoặc chọn vùng từ AI edit theo mask/ROI đã khai báo; giữ cả trạng thái trước sửa           | Các `*.proof.json`, `*-selection.review.json` và README; không vẽ tay hoặc fit thân từng frame                                |
+| `apps/client-cocos/assets/resources/dragonbones/kiem-tu-chibi-v1/*` và `kiem-tu-chibi-v1.meta` | Export tương thích D41 từ `E/project.json`: 15 clip / 202 drawing, 24 Hz, 2 atlas 2048×2048, metadata importer     | `E/export-validation.json`, `E/cocos-capture.json`, quality backlog; full-source một lớp, chưa phải bộ body/weapon/FX độc lập |
+
+Kiểm tra sprite build và capture Cocos Creator 3.8.8 đã chạy cho E. Một cảnh báo soft height 0,2 px ở recovery `attack_2#12` được ghi rõ trong backlog; không đổi ngưỡng. Sửa đầu run/dash và chân walk có bằng chứng native riêng; prompt/guide không được dùng làm chứng nhận scale hoặc contact. Các hướng SE/S/NE/N mới ở mốc master, chưa có motion export tại checkpoint này.
+
+D45 extraction là lượt tiếp theo theo lịch orchestrator. Không commit PNG guide D45 dẫn xuất; `E/d45-guide-hashes.json` ghi lệnh tái tạo, hash `layer-inputs.json` và 14 guide. Không coi full-source này là runtime skin độc lập, lớp FX hay shader phẩm chất đã được triển khai.
+
 ## CHIBI-CONCEPT-D44 — tham chiếu semi-chibi được duyệt (2026-11-08)
 
 Sheet `docs/art/semichibi-proportions.svg` là sơ đồ vector nguyên gốc viết trong repo để biểu diễn mốc dựng của bốn lớp, không dùng ảnh/tài nguyên bên ngoài; không phải concept AI hoặc khuôn mặt nhân vật. Không có yêu cầu ghi công bên thứ ba cho sơ đồ tự dựng này.

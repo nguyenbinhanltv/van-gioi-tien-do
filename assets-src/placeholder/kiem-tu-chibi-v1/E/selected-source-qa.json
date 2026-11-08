@@ -1,0 +1,164 @@
+{
+  "status": "FinalfullEsource passedofficialQA and15clipCocoscapture.",
+  "previousCheckpoint": {
+    "utc": "2026-11-08T03:49:01.775461+00:00",
+    "status": "Current fullE diagnostic afterD55; no palette hard,9missingdashhead hard,31soft. NOT production acceptance.",
+    "previousD54Checkpoint": {
+      "utc": "2026-11-08T02:47:46.252631+00:00",
+      "status": "Current E diagnostic after reviewedrun45679 selection, NOT final acceptance; D55 metric pending.",
+      "temporaryOutput": "D:/Temp/vgtd23-E-run-selected-d54",
+      "contractSha256": "174d3646814dec6fc730c0aaefabe884d845ff7ce5e8bc6e4f1b480de05c8e07",
+      "countsByGate": {
+        "info:height": 60,
+        "warn:footSlide": 2,
+        "fail:footSlide": 6,
+        "fail:similarity": 28,
+        "fail:height": 9,
+        "warn:height": 23,
+        "info:authoredOrigin": 80
+      },
+      "hardByClip": {
+        "walk": {
+          "footSlide": 6
+        },
+        "run": {
+          "similarity": 13
+        },
+        "dash": {
+          "height": 9,
+          "similarity": 7
+        },
+        "attack": {
+          "similarity": 2
+        },
+        "attack_2": {
+          "similarity": 2
+        },
+        "attack_3": {
+          "similarity": 1
+        },
+        "cast": {
+          "similarity": 2
+        },
+        "tribulation": {
+          "similarity": 1
+        }
+      },
+      "headMissing": [
+        {
+          "clip": "dash",
+          "frame": 0
+        },
+        {
+          "clip": "dash",
+          "frame": 1
+        },
+        {
+          "clip": "dash",
+          "frame": 2
+        },
+        {
+          "clip": "dash",
+          "frame": 3
+        },
+        {
+          "clip": "dash",
+          "frame": 4
+        },
+        {
+          "clip": "dash",
+          "frame": 5
+        },
+        {
+          "clip": "dash",
+          "frame": 6
+        },
+        {
+          "clip": "dash",
+          "frame": 7
+        },
+        {
+          "clip": "dash",
+          "frame": 8
+        }
+      ],
+      "notes": [
+        "Run now7measuredheadINFO,0head/foot/canvas/loop/soft; repaired14+1.003512%.",
+        "D54 similarity checks run without head-reason exemption; no identity pass inferred from currentmetric, awaitD55.",
+        "Selected master crown120.5,16.5 and chin138.5,67.5=54.083269; row+0.5 used consistently. Raw anatomical/master PNG/calibration unchanged."
+      ],
+      "backlogCounts": {
+        "fail-hard": 37,
+        "fail-soft": 31,
+        "info": 140
+      },
+      "classificationNote": "Hard:9missingdashhead+28similarity. Soft:8walkfootSlide+23heightwarn. FootSlide findings are soft per publicbacklogclassifyFinding, even severityfail. Noacceptedsoft entries supplied."
+    },
+    "temporaryOutput": "D:/Temp/vgtd23-E-d55",
+    "contractSha256": "e8cfa0de707af3c443e4039473b07c9f31f65a651b8c51d4e370a90f0bab2b18",
+    "countsByGate": {
+      "info:similarity": 175,
+      "info:height": 60,
+      "warn:footSlide": 2,
+      "fail:footSlide": 6,
+      "fail:height": 9,
+      "warn:height": 23,
+      "info:authoredOrigin": 80
+    },
+    "backlogCounts": {
+      "fail-hard": 9,
+      "fail-soft": 31,
+      "info": 315
+    },
+    "headMissing": [
+      {
+        "clip": "dash",
+        "frame": 0
+      },
+      {
+        "clip": "dash",
+        "frame": 1
+      },
+      {
+        "clip": "dash",
+        "frame": 2
+      },
+      {
+        "clip": "dash",
+        "frame": 3
+      },
+      {
+        "clip": "dash",
+        "frame": 4
+      },
+      {
+        "clip": "dash",
+        "frame": 5
+      },
+      {
+        "clip": "dash",
+        "frame": 6
+      },
+      {
+        "clip": "dash",
+        "frame": 7
+      },
+      {
+        "clip": "dash",
+        "frame": 8
+      }
+    ],
+    "identityReview": "d55-identity-review.json"
+  },
+  "runtimeContractSha256": "758e55cbfd74bf0f75e7e10b0cb19402228b3024d3bf5829ec2ef933bb5ec18e",
+  "qa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 1,
+    "regression": 0,
+    "info": 339
+  },
+  "identityReview": "d55-identity-review.json",
+  "capture": "cocos-capture.json",
+  "backlog": "../quality-backlog.json"
+}
