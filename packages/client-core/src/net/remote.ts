@@ -34,6 +34,8 @@ export interface RemoteEntity {
   entityId: number;
   /** 0 player, 1 monster, 2 npc ... (EnterEntity.kind) */
   kind: number;
+  /** EnterEntity.defId: monster / NPC definition id, or for a player (kind 0) its class wire id 1..6 (D82; 0 = unknown) */
+  defId: number;
   anim: number;
   /** 0-7, @vgtd/shared DIRECTIONS order */
   dir: number;
@@ -46,6 +48,8 @@ export interface RemoteView {
   index: number;
   entityId: number;
   kind: number;
+  /** see `RemoteEntity.defId` */
+  defId: number;
   i: number;
   j: number;
   anim: number;
@@ -81,6 +85,7 @@ export class RemoteWorld {
         index: e.index,
         entityId: e.entityId,
         kind: e.kind,
+        defId: e.defId,
         anim: e.anim,
         dir: e.dir,
         hpPct: e.hpPct,
@@ -153,6 +158,7 @@ export class RemoteWorld {
         index: e.index,
         entityId: e.entityId,
         kind: e.kind,
+        defId: e.defId,
         i,
         j,
         anim: e.anim,

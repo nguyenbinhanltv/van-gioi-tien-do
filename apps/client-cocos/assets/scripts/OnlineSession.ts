@@ -1,7 +1,7 @@
 import { Node } from 'cc';
 import { combat as cb, core, shared, sim } from './vendor/vgtd.mjs';
 import { RemotePlayer, type TilePos } from './Actors';
-import { CHIBI_CLASSES } from './ChibiBody';
+import { CHIBI_CLASSES, chibiIdOfPath } from './ChibiBody';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 
@@ -64,6 +64,8 @@ export function classForEntity(entityId: number): string {
 export class OnlineSession {
   readonly net: InstanceType<typeof core.NetClient>;
   readonly username: string;
+  /** `<server origin>|<username>`: key of per-account browser storage (the remembered class) */
+  readonly accountKey: string;
   private readonly actors = new Map<number, RemotePlayer>();
   private failed = '';
   /** server-authoritative combat backend (`?online=1&combat=1`); null = no combat HUD */
@@ -78,6 +80,7 @@ export class OnlineSession {
   ) {
     const cred = onlineCredentials();
     this.username = cred.username;
+    this.accountKey = `${cred.baseUrl}|${cred.username}`;
     this.net = new core.NetClient({
       ...cred,
       deps: {
@@ -133,6 +136,7 @@ export class OnlineSession {
       active: this.active,
       username: this.username,
       entityId: this.net.entityId,
+      classId: this.net.classId,
       self: this.net.selfPosition(),
       predictionError: this.net.predictor?.lastError ?? null,
       pending: this.net.predictor?.pendingCount ?? null,
@@ -140,7 +144,12 @@ export class OnlineSession {
       snapshots: this.net.snapshots,
       reconnects: this.net.reconnects,
       lastError: this.net.lastError,
-      others: Array.from(this.actors.values()).map((a) => ({ entityId: a.entityId, i: a.pos.i, j: a.pos.j })),
+      others: Array.from(this.actors.values()).map((a) => ({
+        entityId: a.entityId,
+        i: a.pos.i,
+        j: a.pos.j,
+        cls: a.classId,
+      })),
     });
   }
 
@@ -192,7 +201,10 @@ export class OnlineSession {
       seen.add(v.entityId);
       let a = this.actors.get(v.entityId);
       if (!a) {
-        a = new RemotePlayer(this.ysort, this.shadowLayer, this.art, v.entityId, classForEntity(v.entityId), v);
+        // D82: a player's class rides in EnterEntity.defId (wire id 1..6); 0 = an old server that never said: keep the id-based guess
+        const path = shared.pathOfClassWireId(v.defId);
+        const cls = (path && chibiIdOfPath(path)) || classForEntity(v.entityId);
+        a = new RemotePlayer(this.ysort, this.shadowLayer, this.art, v.entityId, cls, v);
         this.actors.set(v.entityId, a);
       }
       a.update(v, v.dir, v.speed, v.hpPct, dtMs);

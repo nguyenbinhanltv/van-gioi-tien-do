@@ -156,7 +156,8 @@ export class RemotePlayer {
     shadowLayer: Node,
     art: ArtFrames,
     readonly entityId: number,
-    classId: string,
+    /** chibi class id (art) this remote player is drawn with */
+    readonly classId: string,
     start: TilePos,
   ) {
     this.pos = { ...start };

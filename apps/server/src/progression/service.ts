@@ -19,7 +19,16 @@ import {
   type ColdServerMessage,
   type MeditateResultMsg,
 } from '@vgtd/protocol';
-import { ROOT_TYPES, rngFloat, rngFork, rngSeed, type RngState } from '@vgtd/shared';
+import {
+  DEFAULT_CLASS,
+  ROOT_TYPES,
+  parseClass,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  type PathId,
+  type RngState,
+} from '@vgtd/shared';
 import { PROGRESSION_CONFIG } from './config.js';
 import {
   DEFAULT_ENV,
@@ -129,6 +138,8 @@ export class ProgressionService {
   private readonly devSpeed: number;
   /** in-flight writes per character: a new session of the same character loads only after the previous one is stored */
   private readonly pendingWrites = new Map<string, Promise<void>>();
+  /** per-character chain of `resolveClass` calls (two logins of one account must not both create the character) */
+  private readonly classLocks = new Map<string, Promise<unknown>>();
 
   constructor(opts: ProgressionOptions = {}) {
     this.seed = opts.seed ?? 1;
@@ -199,7 +210,7 @@ export class ProgressionService {
         } else {
           // creation roll: seeded by the character id, so it does not depend on login order
           const [root] = rollSpiritRoot(rngFork(rngSeed(this.seed), `root:${characterId}`));
-          s.rec = newRecord(characterId, root);
+          s.rec = newRecord(characterId, root, DEFAULT_CLASS);
           s.dirty = true;
           await this.save(s);
         }
@@ -215,6 +226,50 @@ export class ProgressionService {
     this.sessions.delete(entityId);
     this.meditators.delete(entityId);
     if (s.rec && s.dirty) await this.save(s);
+  }
+
+  /**
+   * Class of a character, decided once (D82): the stored class wins; a character with none yet gets `requested` (a class path id or
+   * wire id; anything else counts as absent) or `DEFAULT_CLASS`, and it is stored before this resolves, so the choice sticks. Calls
+   * for one character run one at a time and wait for an in-flight write of the previous session. The gateway awaits this BEFORE it
+   * adds the player, which is why the world node can build the combat profile synchronously.
+   */
+  resolveClass(characterId: string, requested?: unknown): Promise<PathId> {
+    const ask = parseClass(requested);
+    const prev = this.classLocks.get(characterId) ?? Promise.resolve();
+    const run = prev
+      .catch(() => undefined)
+      .then(async (): Promise<PathId> => {
+        await (this.pendingWrites.get(characterId) ?? Promise.resolve());
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const stored = await this.store.load(characterId);
+          if (stored?.classId) return stored.classId;
+          const classId = ask ?? DEFAULT_CLASS;
+          const next: ProgressRecord = stored
+            ? { ...stored, classId, version: stored.version + 1 } // a record from before D82 gets its class now
+            : {
+                ...newRecord(
+                  characterId,
+                  rollSpiritRoot(rngFork(rngSeed(this.seed), `root:${characterId}`))[0],
+                  classId,
+                ),
+                version: 1,
+              };
+          if (await this.store.save(next, stored?.version ?? 0)) return classId;
+          this.metrics.saveConflicts++; // somebody else wrote meanwhile: look again (their class wins)
+        }
+        throw new Error(`cannot store the class of ${characterId}`);
+      });
+    this.classLocks.set(characterId, run);
+    const done = (): void => {
+      if (this.classLocks.get(characterId) === run) this.classLocks.delete(characterId);
+    };
+    run.then(done, done);
+    return run;
+  }
+  /** Class of a joined player (the stored one once its profile is loaded, else the default). */
+  classOf(entityId: number): PathId {
+    return this.sessions.get(entityId)?.rec?.classId ?? DEFAULT_CLASS;
   }
 
   /** char_state of a player (null until the profile is loaded). */

@@ -94,11 +94,26 @@ function sortBySeq<T extends { seq: number }>(xs: T[]): T[] {
     .map((p) => p.x);
 }
 
+/**
+ * Extra inputs of `step` that are NOT simulation state but facts about the host, passed explicitly so `step` stays a pure function
+ * (same world + inputs + options => same result; a replay records them with the inputs).
+ */
+export interface StepOptions {
+  /**
+   * Server-overload credit of one entity: ms of REAL time that passed without sim time passing since its client joined (the server
+   * loop ran behind real time). Honest clients are paced by the wall clock, the guards by sim time: without this credit every client
+   * of an overloaded server looks like it oversends and gets kicked (queue overflow, budget, claimed/real ratio). Contract: >= 0,
+   * non-decreasing per entity, capped by `ANTICHEAT.MAX_LAG_CREDIT_MS` here. Default (omitted): no credit, the previous behaviour.
+   */
+  lagMs?: (entityId: number) => number;
+}
+
 export function step(
   world: SimWorld,
   inputs: readonly SimInput[],
   ctx: SimContext,
   dtMs: number = NETWORK.TICK_MS,
+  opts: StepOptions = {},
 ): StepResult {
   const events: SimEvent[] = [];
   const nowMs = world.timeMs + dtMs;
@@ -128,10 +143,15 @@ export function step(
     }
     let e = e0;
     let disconnect = false;
+    // The guards' clock = sim time + the server-overload credit (= wall time since this client joined; see StepOptions.lagMs).
+    const rawLag = opts.lagMs?.(e0.id) ?? 0;
+    const lag = Number.isFinite(rawLag) ? Math.min(ANTICHEAT.MAX_LAG_CREDIT_MS, Math.max(0, rawLag)) : 0; // NaN / Infinity: no credit
+    const acNow = nowMs + lag;
 
     // ---------------------------------------------------------------- movement
     const queue = sortBySeq([...e.pending, ...(moves.get(e.id) ?? [])]);
-    const allowance = dtMs * TICK_INPUT_ALLOWANCE;
+    // when behind real time, also drain the backlog (bounded: the budget below still limits claimed time to wall time)
+    const allowance = dtMs * TICK_INPUT_ALLOWANCE + Math.min(lag, ANTICHEAT.LAG_DRAIN_TICKS * dtMs);
     let tickClaimed = 0;
     let consumed = 0;
     for (const inp of queue) {
@@ -145,7 +165,7 @@ export function step(
       if (tickClaimed + d > allowance) break; // keep the rest queued for the next tick
       consumed++;
       tickClaimed += d;
-      if (overBudget(e.ac, d, nowMs)) {
+      if (overBudget(e.ac, d, acNow)) {
         // held, not applied: the character cannot move faster than real time
         const v = addViolation(e.ac, e.id, 'budget', events);
         e = { ...e, ac: v.ac, lastSeq: inp.seq };
@@ -162,24 +182,26 @@ export function step(
       e = { ...e, ...pickMove(next), ac, lastSeq: inp.seq };
     }
     let pending = queue.slice(consumed);
-    if (pending.length > MAX_PENDING_INPUTS) {
+    // the backlog an overloaded server legitimately accumulates grows with its lag: one more input per INPUT_DT_MAX_MS of credit
+    const maxPending = MAX_PENDING_INPUTS + Math.min(ANTICHEAT.LAG_QUEUE_EXTRA_MAX, Math.ceil(lag / INPUT_DT_MAX_MS));
+    if (pending.length > maxPending) {
       const v = addViolation(e.ac, e.id, 'queue', events);
       e = { ...e, ac: v.ac };
       disconnect ||= v.disconnect;
-      pending = pending.slice(pending.length - MAX_PENDING_INPUTS);
+      pending = pending.slice(pending.length - maxPending);
     }
     // timers that run on server time rather than input time
     e = { ...e, pending, stunMs: Math.max(0, e.stunMs - dtMs) };
 
     // ---------------------------------------------------------------- skills
     for (const c of sortBySeq(casts.get(e.id) ?? [])) {
-      const tok = takeCastToken(e.ac, nowMs);
+      const tok = takeCastToken(e.ac, acNow);
       e = { ...e, ac: tok.ac };
       if (!tok.ok) {
         events.push({ type: 'cast_dropped', entityId: e.id, seq: c.seq });
         continue;
       }
-      const r = validateCast(e, c, ctx, byId, nowMs);
+      const r = validateCast(e, c, ctx, byId, acNow);
       if (r.reason !== CastReason.Ok) {
         events.push({
           type: 'cast_rejected',
@@ -187,7 +209,8 @@ export function step(
           seq: c.seq,
           skillId: c.skillId,
           reason: r.reason,
-          readyAtMs: r.readyAtMs,
+          // reported in sim time (the clients' clock): the credit is subtracted again
+          readyAtMs: Math.max(0, r.readyAtMs - lag),
         });
         if (r.reason === CastReason.Cooldown || r.reason === CastReason.Gcd) {
           const v = addViolation(e.ac, e.id, 'cooldown', events);
@@ -198,22 +221,22 @@ export function step(
       }
       const def = ctx.skills.find((s) => s.id === c.skillId)!;
       const cooldowns = e.cooldowns.slice();
-      cooldowns[def.id] = nowMs + def.cooldownMs;
+      cooldowns[def.id] = acNow + def.cooldownMs; // cooldowns run on the guards' clock (wall time since join), reported in sim time below
       const [roll, nextRng] = rngFloat(rng);
       rng = nextRng;
-      e = { ...e, mp: e.mp - mpCostOf(def, e.mpMax), cooldowns, gcdReadyAt: nowMs + def.gcdMs };
+      e = { ...e, mp: e.mp - mpCostOf(def, e.mpMax), cooldowns, gcdReadyAt: acNow + def.gcdMs };
       events.push({
         type: 'cast_ok',
         entityId: e.id,
         seq: c.seq,
         skillId: def.id,
-        readyAtMs: cooldowns[def.id]!,
+        readyAtMs: cooldowns[def.id]! - lag,
         roll,
       });
     }
 
     // ---------------------------------------------------------------- anti-cheat housekeeping
-    const t = tickAntiCheat(e.ac, e.id, nowMs, dtMs, events);
+    const t = tickAntiCheat(e.ac, e.id, acNow, dtMs, events);
     e = { ...e, ac: t.ac };
     disconnect ||= t.disconnect;
     if (disconnect) e = { ...e, connected: false, pending: [] };

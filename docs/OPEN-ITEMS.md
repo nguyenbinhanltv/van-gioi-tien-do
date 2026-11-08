@@ -407,6 +407,15 @@ Còn mở / lưu ý:
 - **Không dự đoán phía client**: thanh tu vi chỉ nhảy theo `char_state` (~1 Hz khi đang ngồi); nếu muốn thanh mượt cần nội suy tốc độ `Absorb` (chưa có trên dây).
 - **Tiểu cảnh thất bại** hiện chỉ có toast (không hiệu ứng); không có hiển thị tỉ lệ trước khi bấm (server mới trả `chance` sau khi roll).
 
+## 19. Chọn lớp trên dây (D82, worker35): còn mở
+
+- **Đổi lớp / respec**: lớp chỉ chọn một lần lúc tạo nhân vật; chưa có thiết kế đổi lớp (giá, hạn chế, mất tiến trình?). Hiện muốn lớp khác phải tạo tài khoản khác.
+- **Nhiều nhân vật / tài khoản**: docs/10 G10 nói 3 nhân vật mỗi tài khoản; MVP vẫn 1 nhân vật = 1 tài khoản (`characterId` = `accountId`), nên "chọn lớp" gắn với tài khoản. Khi có `char_select` (docs/24 id 14), picker chuyển thành bước tạo nhân vật.
+- **Chưa có tên / ngoại hình** nhân vật; picker chỉ chọn lớp. Chuỗi tiếng Việt của picker (`ClassPicker.ts`) là bản đầu, chưa qua biên tập viên, cùng ghi chú i18n ở mục 18.
+- **Người chơi khác thấy lớp qua `defId`**: id 0 (server cũ / chưa biết) vẫn rơi về cách đoán theo `entityId % 6` của client; xóa nhánh này khi mọi server đã gửi lớp.
+- **Mở khóa kỹ năng theo cấp vẫn chưa ép** (mục 11): người mới tạo thấy cả 8 kỹ năng của lớp trên hotbar.
+- **Bản ghi trước D82** không có `classId`: lần đăng nhập đầu sau nâng cấp sẽ nhận lớp theo `hello` (hoặc `kiem`); cần quyết định có cho người chơi cũ chọn lại một lần không.
+
 ## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
 
 1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).
@@ -444,3 +453,10 @@ Còn mở / lưu ý:
 3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
 4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
 5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).
+
+## D85 — tín dụng trễ: còn mở
+
+- Xử lý mục 6 của "D79 — túi đồ hiển thị: còn mở" (khách thật bị kick vì máy chủ chậm). Chỉ phủ các guard trong `step()`; **hẹn giờ trong sim vẫn theo giờ sim** (AI quái, hồi sinh, hồi chiêu phía combat do worker 37, thời gian cast): máy chủ quá tải thì thế giới chạy chậm hơn giờ thật nhưng không ai bị phạt. Không "bắt kịp" giờ sim.
+- Chưa có số đo trên máy đích: kiểm bằng test mô phỏng (đồng hồ thật giả). Cần chạy lại bag-smoke trên máy đang bị CPU bão hòa để xác nhận không còn bị kick.
+- Kích thước tín dụng không hiện ra metric / log: nên thêm `lagCreditMs` lớn nhất vào số đo World Node (và cảnh báo vận hành khi một khách có > 1 s tín dụng: máy chủ đang quá tải).
+- Khách nối lại (resume) giữ tín dụng cũ của phiên (mốc lúc vào không đổi) và luật trượt ngân sách lúc resume (D80) chạy trên **đồng hồ của guard** (giờ sim + tín dụng), nên không để lại ngân sách chưa kiếm; phiên đăng nhập mới bắt đầu từ 0. Khách vào giữa lúc máy chủ đang đơ cũng không nhận tín dụng cho khoảng đơ trước khi nó vào (mốc = drift thật lúc vào).
