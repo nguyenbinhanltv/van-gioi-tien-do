@@ -525,6 +525,7 @@ export function checkTemporalContinuity(clip: QaClip, o: QaOptions): Finding[] {
     try {
       const result = measureTemporalSimilarity(a.image, b.image, {
         masterHeight: o.masterHeight,
+        ...(o.masterHead ? { masterHead: o.masterHead } : {}),
         ...(clip.headEvidence?.[pair.from] ? { firstHead: clip.headEvidence[pair.from] } : {}),
         ...(clip.headEvidence?.[pair.to] ? { secondHead: clip.headEvidence[pair.to] } : {}),
       });
