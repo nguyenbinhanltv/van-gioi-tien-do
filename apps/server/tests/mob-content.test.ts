@@ -12,6 +12,7 @@ import {
 } from '@vgtd/shared';
 import { TileGrid, circleBlocked, createWorld, spawnEntity, type EntityState, type SimWorld } from '@vgtd/sim';
 import { MobManager, defaultMobZones, isMobId, type MobZone } from '../src/index.js';
+import { fieldBandStart, mobAreaHalfSize } from '@vgtd/shared';
 
 const SEED = 20261109;
 const N = 256;
@@ -277,5 +278,16 @@ describe('threat table (D83)', () => {
   it('only mob ids carry threat state: players are never mobs', () => {
     expect(isMobId(1)).toBe(false);
     expect(isMobId(MOB_ID_BASE)).toBe(true);
+  });
+});
+
+describe('the client first-session numbers match the server layout (D84)', () => {
+  it('mobAreaHalfSize / fieldBandStart agree with the real defaultMobZones bounding box', () => {
+    for (const n of [64, 128, 256, 512]) {
+      const z = defaultMobZones(n);
+      const half = (Math.max(...z.map((r) => r.i1)) - Math.min(...z.map((r) => r.i0))) / 2;
+      expect(mobAreaHalfSize(n)).toBe(half);
+      expect(fieldBandStart(n)).toBeCloseTo(MOB_BANDS.normal.minFrac * half, 9);
+    }
   });
 });

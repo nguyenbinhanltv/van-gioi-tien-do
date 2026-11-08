@@ -25,6 +25,7 @@ import {
   ZONE_SPAWN_TABLES,
   mobDefByKey,
   mobDropSource,
+  mobZoneMargin,
   mobRealm,
   mobStats,
   rngFloat,
@@ -516,7 +517,7 @@ function withMove(e: EntityState, m: MoveState): EntityState {
  */
 export function defaultMobZones(n: number): MobZone[] {
   const h = n / 2;
-  const m = Math.max(8, Math.floor(n / 32));
+  const m = mobZoneMargin(n);
   return [
     { zone: 'bia_rung', i0: m, j0: m, i1: h - m, j1: h - m },
     { zone: 'dam_lay_doc', i0: h + m, j0: m, i1: n - m, j1: h - m },

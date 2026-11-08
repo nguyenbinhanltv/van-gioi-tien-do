@@ -176,7 +176,8 @@ try {
   let looted = false;
   let tFirst = null;
   let pass = 0;
-  while (!looted && kills < maxKills && Date.now() - t0 < budgetMs) {
+  const wantKills = 3; // the first-session objective (FIRST_SESSION.killTarget)
+  while ((!looted || kills < wantKills) && kills < maxKills && Date.now() - t0 < budgetMs) {
     const s = await cs();
     const self = await me();
     const alive = s.enemies.filter((e) => e.alive && e.i !== undefined);
@@ -251,7 +252,34 @@ try {
     check(r === 'claim', 'Claim button click is handled');
     console.log(`claim: pending ${bEnd.pending} -> ${bc.pending}, lastResult ${JSON.stringify(bc.lastResult)}`);
   }
+  // first-session tracker (D84): field -> kills -> bag are driven by what just happened; then meditate (M) is tried for real
+  const fs = () => page.evaluate('JSON.parse(JSON.stringify(window.__vgtdFirstSession.state()))');
+  await sleep(800);
+  let f = await fs();
+  console.log(`first-session: ${f.steps.map((x) => `${x.id}:${x.state}`).join(' ')} kills ${f.kills}`);
+  check(f.steps[0].state === 'done', 'first-session: the field objective was reached by walking to the monsters');
+  check(f.kills >= 1, `first-session: own kills were counted from skill_result (${f.kills})`);
+  if (kills >= wantKills) check(f.steps[1].state === 'done', 'first-session: 3 kills complete the kill objective');
+  if (f.steps[1].state === 'done')
+    check(f.steps[2].state === 'done', 'first-session: bag open + loot + nothing to claim completes the bag objective');
+  if (f.steps[2].state === 'done') {
+    // meditation needs a still, out-of-combat character: retry for a while (the server refuses while in combat)
+    const tM = Date.now();
+    while (Date.now() - tM < 45_000 && f.steps[3].state !== 'done') {
+      await page.keyboard.press('KeyM');
+      await sleep(2500);
+      f = await fs();
+    }
+    check(f.steps[3].state === 'done', 'first-session: meditating (M) completes the meditate objective');
+    await page.screenshot({ path: join(out, 'first-session.png') });
+    console.log(
+      `first-session after meditating: ${f.steps.map((x) => `${x.id}:${x.state}`).join(' ')}; breakthrough hint: ${f.steps[4].hint}`,
+    );
+    check(f.steps[4].state === 'current', 'first-session: the breakthrough objective is current (waiting for tu vi)');
+  }
   await page.close();
+
+  // ------------------------------------------------------------------ phase 2
 
   // ------------------------------------------------------------------ phase 2: small screens, real touch events (offline #bagdemo)
   const VIEWPORTS = [

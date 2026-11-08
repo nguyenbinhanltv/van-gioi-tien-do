@@ -444,3 +444,11 @@ Còn mở / lưu ý:
 3. **Đe dọa chỉ từ sát thương**: chưa có đe dọa từ hồi máu / khiên / taunt, chưa chia sẻ đe dọa trong bầy (đánh một con không kéo cả bầy ngoài `aggroRadius`), chưa có quái đánh trả người chơi (combat chưa cho quái gây sát thương), chưa có luật nhóm / chia công.
 4. **Thủ lĩnh**: một ô tạm cho mỗi loại; chưa có cơ chế phòng thủ lĩnh (docs/10), thời gian hồi sinh 30 phút là mặc định D74.
 5. **Chi phí AI dưới tải đo trên máy CPU chung**: chỉ đo 100 bot + ~300 quái trong một vùng nhỏ; chưa đo toàn bản đồ (4 vùng, ~500+ quái) và chưa có AOI theo ô cho quái xa người (việc của worker tối ưu AOI).
+
+## D84 — vòng lặp phiên đầu: còn mở (worker39, 2026-11-09)
+
+1. **Mọi số là tạm, cần game designer duyệt**: 3 lần hạ quái, lề 2 ô của bước khu săn, thứ tự năm bước, 10 s hiển thị sau khi xong. Chưa có kịch bản onboarding thật (lời thoại, NPC dẫn đường, phần thưởng).
+2. **Tiến độ do client đếm, không phải server xác nhận**: kill đếm từ `skill_result` của chính mình, tiến độ lưu `localStorage` (mất khi đổi trình duyệt / xóa dữ liệu, đổi tên đăng nhập thì làm lại). Cần số kill / mốc phía server (hồ sơ nhân vật) nếu sau này gắn phần thưởng hoặc chống gian lận.
+3. **Bước đột phá phụ thuộc tu vi đầy**, mà tốc độ đả tọa là mặc định tạm (D76); trong smoke test headless bước này chỉ kiểm tới trạng thái "đang chờ tu vi", chưa kiểm một lần đột phá thật.
+4. **Chưa có chọn lớp / phím tắt ẩn-hiện widget / chạm trên màn hình nhỏ**: widget cố định 330×142 đơn vị thiết kế ở góc trên trái (co theo bề ngang); trên điện thoại dọc nó có thể chồng lên túi đồ (túi vẽ phía trên).
+5. **Mốc "khu săn" lấy theo bố cục mặc định `defaultMobZones`**: khi có vùng Sơn Môn thật (OPEN-ITEMS D83 #2) cần đổi bước 1 sang vùng đó.
