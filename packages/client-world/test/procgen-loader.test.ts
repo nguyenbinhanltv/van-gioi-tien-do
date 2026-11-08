@@ -13,6 +13,7 @@ import {
   parseProcgenMap,
   parseTileset,
   sliceChunk,
+  MAX_OBJECT_ID,
 } from '../src/index.js';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
@@ -113,13 +114,13 @@ describe('format validation & chunk slicing', () => {
     const H = 40;
     const m = smallMap(W, H, {
       objects: [
-        { id: 1, i: 5, j: 5, w: 1, h: 1, spriteWidth: 64, spriteHeight: 128 },
-        { id: 2, i: 40, j: 35, w: 2, h: 2, group: 1, spriteWidth: 128, spriteHeight: 128 },
-        { id: 3, i: 31, j: 31, w: 4, h: 4, spriteWidth: 256, spriteHeight: 192 }, // straddles 4 chunks: belongs to (0,0)
+        { id: 1, i0: 5, j0: 5, w: 1, h: 1, spriteWidth: 64, spriteHeight: 128 },
+        { id: 2, i0: 40, j0: 35, w: 2, h: 2, group: 1, spriteWidth: 128, spriteHeight: 128 },
+        { id: 3, i0: 31, j0: 31, w: 4, h: 4, spriteWidth: 256, spriteHeight: 192 }, // straddles 4 chunks: belongs to (0,0)
         {
           id: 4,
-          i: 20,
-          j: 20,
+          i0: 20,
+          j0: 20,
           layer: 4,
           zone: [
             { i: 19, j: 19 },
@@ -159,18 +160,42 @@ describe('format validation & chunk slicing', () => {
     expect(count).toBe(w.layers[0]!.data.filter((v) => v !== -1).length);
   });
 
+  it('rejects tile ids that Int16Array.from would silently coerce', () => {
+    const bad = (v: unknown): Record<string, unknown> => {
+      const m = smallMap(2, 2);
+      (m.layers as Array<{ data: unknown[] }>)[0]!.data[1] = v;
+      return m;
+    };
+    for (const v of [null, 'x', Number.NaN, 1.7, 65536, undefined]) {
+      expect(() => parseProcgenMap(tilesetRaw, bad(v))).toThrow(/integer|unknown tile id/);
+    }
+  });
+
+  it('requires integer i0/j0 and a bounded non-negative integer id', () => {
+    const base = smallMap(8, 8);
+    const objs = (o: Record<string, unknown>): Record<string, unknown> => ({ ...base, objects: [o] });
+    expect(() => parseProcgenMap(tilesetRaw, objs({ id: 1, i0: 1.5, j0: 1 }))).toThrow(/i0 must be an integer/);
+    expect(() => parseProcgenMap(tilesetRaw, objs({ id: 1, i0: 1, j0: 2.5 }))).toThrow(/j0 must be an integer/);
+    expect(() => parseProcgenMap(tilesetRaw, objs({ id: 1.5, i0: 1, j0: 1 }))).toThrow(/id must be an integer/);
+    expect(() => parseProcgenMap(tilesetRaw, objs({ id: -1, i0: 1, j0: 1 }))).toThrow(/id must be in/);
+    expect(() => parseProcgenMap(tilesetRaw, objs({ id: MAX_OBJECT_ID + 1, i0: 1, j0: 1 }))).toThrow(/id must be in/);
+    expect(parseProcgenMap(tilesetRaw, objs({ id: MAX_OBJECT_ID, i0: 1, j0: 1 })).objects).toHaveLength(1);
+  });
+
   it('rejects objects outside the map / bad groups / duplicate ids', () => {
     const base = smallMap(8, 8);
-    expect(() => parseProcgenMap(tilesetRaw, { ...base, objects: [{ id: 1, i: 7, j: 7, w: 2, h: 2 }] })).toThrow(
+    expect(() => parseProcgenMap(tilesetRaw, { ...base, objects: [{ id: 1, i0: 7, j0: 7, w: 2, h: 2 }] })).toThrow(
       /outside/,
     );
-    expect(() => parseProcgenMap(tilesetRaw, { ...base, objects: [{ id: 1, i: 1, j: 1, group: 9 }] })).toThrow(/group/);
+    expect(() => parseProcgenMap(tilesetRaw, { ...base, objects: [{ id: 1, i0: 1, j0: 1, group: 9 }] })).toThrow(
+      /group/,
+    );
     expect(() =>
       parseProcgenMap(tilesetRaw, {
         ...base,
         objects: [
-          { id: 1, i: 1, j: 1 },
-          { id: 1, i: 3, j: 3 },
+          { id: 1, i0: 1, j0: 1 },
+          { id: 1, i0: 3, j0: 3 },
         ],
       }),
     ).toThrow(/duplicate/);
