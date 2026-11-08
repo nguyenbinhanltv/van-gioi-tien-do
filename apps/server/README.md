@@ -7,7 +7,7 @@ simulation is `@vgtd/sim` stepped at a fixed 20 Hz, the wire format is `@vgtd/pr
 HTTP  POST /auth/register {username,password}   -> 201 {accountId}
 HTTP  POST /auth/login    {username,password}   -> 200 {token, accountId, sessionId, expiresAtS}
 HTTP  GET  /health
-WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":1,"protocolMax":1,"token":"<jwt>"}
+WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":2,"protocolMax":2,"token":"<jwt>"}
             reply (JSON text): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol"}
             then binary @vgtd/protocol frames: client -> input (20-30 Hz, 1-3 inputs), skill_cast, ping
                                                server -> snapshot, aoi_enter, aoi_leave, skill_result, error, pong
@@ -24,7 +24,7 @@ WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":1,"pr
 | `scripts/loadtest.mjs` | bundles the TS entry with esbuild into `node_modules/.vgtd-loadtest/` and runs it                                        |
 | `src/config.ts`        | server-only tunables (auth limits, frame/rate limits, visible cap). Network/AOI/tick constants come from `@vgtd/shared`. |
 
-`src/progression/` (D74) holds the tu vi module: `ProgressionService` (meditation, minor/major breakthrough, seeded rolls, anti-abuse,
+`src/progression/` (D76) holds the tu vi module: `ProgressionService` (meditation, minor/major breakthrough, seeded rolls, anti-abuse,
 idempotent `requestId`), pure rules in `state.ts` (all numbers from `@vgtd/shared`, docs/07 §2 §5), and the `ProgressionStore` / `RollLog`
 persistence ports with in-memory implementations (docs/23). `WorldNode` takes it as `WorldNodeOptions.progression` (`startServer` enables
 it by default) and only forwards inputs, casts, the six progression messages and the 20 Hz tick to it.

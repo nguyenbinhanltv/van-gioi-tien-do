@@ -20,6 +20,7 @@ import {
   TEST_ONLY_GOOD_NEAR,
   TEST_ONLY_OTHER,
   TEST_ONLY_SHORT,
+  TEST_ONLY_USER,
   TEST_ONLY_WRONG,
 } from './fixtures.js';
 
@@ -31,11 +32,11 @@ describe('password policy and hashing (docs/25 §2.2-2.3)', () => {
     for (const bad of ['ab', 'a'.repeat(21), 'has space', 'dấu', '', 42]) expect(validateUsername(bad)).not.toBeNull();
   });
   it('password: 10-128 chars (NFKC), not equal to the username, no composition rules', () => {
-    expect(validatePassword('a'.repeat(10), 'bob')).toBeNull();
-    expect(validatePassword(TEST_ONLY_SHORT, 'bob')).toMatch(/at least 10/);
-    expect(validatePassword('x'.repeat(129), 'bob')).toMatch(/at most 128/);
+    expect(validatePassword('a'.repeat(10), TEST_ONLY_USER)).toBeNull();
+    expect(validatePassword(TEST_ONLY_SHORT, TEST_ONLY_USER)).toMatch(/at least 10/);
+    expect(validatePassword('x'.repeat(129), TEST_ONLY_USER)).toMatch(/at most 128/);
     expect(validatePassword(TEST_ONLY_GOOD.toUpperCase(), TEST_ONLY_GOOD)).toMatch(/differ/);
-    expect(validatePassword(undefined, 'bob')).not.toBeNull();
+    expect(validatePassword(undefined, TEST_ONLY_USER)).not.toBeNull();
   });
   it('hash verifies, is salted, rejects wrong passwords, and flags weaker params for rehash', async () => {
     const a = await hashPassword(TEST_ONLY_GOOD, FAST);
@@ -91,7 +92,7 @@ describe('AuthService', () => {
     const { svc } = mk();
     await svc.register('Alice', TEST_ONLY_GOOD, '1.1.1.1');
     expect(await code(svc.register('alice', TEST_ONLY_OTHER, '1.1.1.2'))).toBe('username_taken');
-    expect(await code(svc.register('bob', TEST_ONLY_SHORT, '1.1.1.3'))).toBe('bad_password');
+    expect(await code(svc.register(TEST_ONLY_USER, TEST_ONLY_SHORT, '1.1.1.3'))).toBe('bad_password');
     expect(await code(svc.register('b', TEST_ONLY_GOOD, '1.1.1.3'))).toBe('bad_username');
     const r = await svc.login('ALICE', TEST_ONLY_GOOD, '1.1.1.1');
     expect(svc.authenticate(r.token)).toEqual({ accountId: r.accountId, sessionId: r.sessionId });

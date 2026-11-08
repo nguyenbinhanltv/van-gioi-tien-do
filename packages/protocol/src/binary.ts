@@ -316,6 +316,7 @@ function encodeEnter(w: ByteWriter, m: AoiEnterMsg): void {
     w.u16(e.index);
     w.u32(e.entityId);
     w.u8(e.kind);
+    w.u16(e.defId);
     w.u16(e.qi);
     w.u16(e.qj);
     w.u8(e.anim);
@@ -417,6 +418,7 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
           index: r.u16(),
           entityId: r.u32(),
           kind: r.u8(),
+          defId: r.u16(),
           qi: r.u16(),
           qj: r.u16(),
           anim: r.u8(),

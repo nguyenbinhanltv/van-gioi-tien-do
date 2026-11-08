@@ -423,6 +423,23 @@ describe('breakthrough attempts', () => {
   });
 });
 
+describe('stage-change hook (combat re-derives stats from realm / sub-stage)', () => {
+  it('fires once when the profile loads and after each successful breakthrough, not after a failure', async () => {
+    const calls: number[][] = [];
+    const win = await rig({ exp: 1000 }, { seed: WIN_SEED, onStageChange: (id, r, k) => calls.push([id, r, k]) });
+    expect(calls).toEqual([[1, 1, 1]]);
+    win.cmd(bt(1));
+    expect(calls).toEqual([
+      [1, 1, 1],
+      [1, 1, 2],
+    ]);
+    const calls2: number[][] = [];
+    const lose = await rig({ exp: 1000 }, { seed: FAIL_SEED, onStageChange: (id, r, k) => calls2.push([id, r, k]) });
+    lose.cmd(bt(1));
+    expect(calls2).toEqual([[1, 1, 1]]);
+  });
+});
+
 describe('determinism and persistence', () => {
   async function script(seed: number): Promise<{ out: string; store: unknown; draws: number[] }> {
     const x = await rig({ exp: 1000 }, { seed });

@@ -53,6 +53,11 @@ export interface ProgressionOptions {
   tickOf?: () => number;
   /** liveness of an entity; defaults to always alive until the world node attaches its own */
   isAlive?: (entityId: number) => boolean;
+  /**
+   * Fired once when a profile finishes loading and after every successful breakthrough, with the character's new
+   * realm / sub-stage (so combat can re-derive stats from `statsAt(realm, subRealm)`).
+   */
+  onStageChange?: (entityId: number, realm: number, subRealm: number) => void;
 }
 
 interface Session {
@@ -107,6 +112,7 @@ export class ProgressionService {
   private envOf: (entityId: number) => MeditationEnv;
   private tickOf: () => number;
   private isAlive: (entityId: number) => boolean;
+  private onStageChange: ((entityId: number, realm: number, subRealm: number) => void) | undefined;
 
   constructor(opts: ProgressionOptions = {}) {
     this.seed = opts.seed ?? 1;
@@ -116,10 +122,16 @@ export class ProgressionService {
     this.envOf = opts.env ?? (() => DEFAULT_ENV);
     this.tickOf = opts.tickOf ?? (() => 0);
     this.isAlive = opts.isAlive ?? (() => true);
+    this.onStageChange = opts.onStageChange;
   }
 
   /** Let the world node provide liveness and the tick counter (kept optional so the service is testable alone). */
-  attach(port: { isAlive?: (entityId: number) => boolean; tickOf?: () => number }): void {
+  attach(port: {
+    isAlive?: (entityId: number) => boolean;
+    tickOf?: () => number;
+    onStageChange?: (entityId: number, realm: number, subRealm: number) => void;
+  }): void {
+    if (port.onStageChange) this.onStageChange = port.onStageChange;
     if (port.isAlive) this.isAlive = port.isAlive;
     if (port.tickOf) this.tickOf = port.tickOf;
   }
@@ -167,6 +179,7 @@ export class ProgressionService {
         await this.save(s);
       }
       this.queueState(s);
+      this.onStageChange?.(entityId, s.rec.realm, s.rec.subRealm);
     });
   }
 
@@ -319,6 +332,7 @@ export class ProgressionService {
     const next = applyBreakthrough(r, plan, success);
     s.rec = next;
     s.dirty = true;
+    if (success) this.onStageChange?.(s.entityId, next.realm, next.subRealm);
     void this.save(s);
     this.queueState(s);
     return {

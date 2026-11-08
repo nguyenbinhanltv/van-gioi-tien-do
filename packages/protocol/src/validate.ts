@@ -95,6 +95,7 @@ function enterEntity(x: unknown): EnterEntity {
     index: int(o.index, 0, LIMITS.MAX_LOCAL_INDEX, 'enter.index'),
     entityId: int(o.entityId, 0, U32, 'enter.entityId'),
     kind: int(o.kind, 0, 255, 'enter.kind'),
+    defId: int(o.defId, 0, 65535, 'enter.defId'),
     qi: int(o.qi, 0, LIMITS.POS_MAX_Q, 'enter.qi'),
     qj: int(o.qj, 0, LIMITS.POS_MAX_Q, 'enter.qj'),
     anim: int(o.anim, 0, 255, 'enter.anim'),

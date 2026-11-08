@@ -5,7 +5,18 @@
  * Clocks (`hrtime`, `setTimeout`) are used ONLY to schedule ticks and measure them; the simulation itself always
  * advances by the fixed `NETWORK.TICK_MS` (skill vgtd-sim-determinism).
  */
-import { AOI, NETWORK, aoiCentre, inAoi, rngFloat, rngFork, rngSeed, toUW, type RngState } from '@vgtd/shared';
+import {
+  AOI,
+  MOB_ID_BASE,
+  NETWORK,
+  aoiCentre,
+  inAoi,
+  rngFloat,
+  rngFork,
+  rngSeed,
+  toUW,
+  type RngState,
+} from '@vgtd/shared';
 import {
   ErrorCode,
   ProtocolError,
@@ -35,6 +46,15 @@ import {
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
+import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+
+/** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
+export class WorldFullError extends Error {
+  constructor(message = 'no free player entity id') {
+    super(message);
+    this.name = 'WorldFullError';
+  }
+}
 
 export interface ClientTransport {
   send(data: Uint8Array): void;
@@ -72,6 +92,8 @@ interface Last {
   qi: number;
   qj: number;
   hp: number;
+  anim: number;
+  dir: number;
 }
 
 interface Client {
@@ -87,6 +109,8 @@ interface Client {
   last: (Last | undefined)[];
   snapSeq: number;
   lastAckMs: number;
+  /** server time of the last full resync (first snapshot or ack timeout); rate-limits the resync to one per ACK_TIMEOUT_MS */
+  lastResyncMs: number;
   pktWindowStartMs: number;
   pktCount: number;
   joinedTick: number;
@@ -117,8 +141,10 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
-  /** tu vi / breakthrough module (D74); absent = progression messages are rejected as unexpected */
+  /** tu vi / breakthrough module (D76); absent = progression messages are rejected as unexpected */
   progression?: ProgressionService;
+  /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
+  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -189,6 +215,8 @@ export class WorldNode {
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
   readonly progression: ProgressionService | undefined;
+  /** monster spawns / AI (D74); null when the node runs without mobs */
+  readonly mobs: MobManager | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -197,17 +225,27 @@ export class WorldNode {
     this.ctx = { grid, skills: opts.skills ?? compileSkills() };
     this.world = createWorld(seed);
     this.spawnRng = rngFork(rngSeed(seed), 'spawn');
-    this.spawn = opts.spawn ?? { i0: n / 2 - 48, j0: n / 2 - 48, side: 96 };
+    // default spawn: a 96-tile square at the map centre, shrunk to half the map on small maps (same result for 256)
+    const side = Math.min(96, n / 2);
+    this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
     this.progression = opts.progression;
     this.progression?.attach({
       isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
       tickOf: () => this.world.tick,
     });
+    const mo = opts.mobs;
+    if (mo) {
+      const o = mo === true ? {} : mo;
+      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.world = this.mobs.populate(this.world);
+    } else this.mobs = null;
   }
 
   // ------------------------------------------------------------------ players
   addPlayer(transport: ClientTransport, accountId: string): number {
+    // mob entity ids start at MOB_ID_BASE: a player id there would collide with mob slot 0 (two entities, one id)
+    if (this.mobs && this.nextId >= MOB_ID_BASE) throw new WorldFullError();
     const id = this.nextId++;
     const [a, r1] = rngFloat(this.spawnRng);
     const [b, r2] = rngFloat(r1);
@@ -230,6 +268,7 @@ export class WorldNode {
       last: new Array<Last | undefined>(this.maxVisible).fill(undefined),
       snapSeq: 0,
       lastAckMs: this.world.timeMs,
+      lastResyncMs: -Infinity,
       pktWindowStartMs: clock(),
       pktCount: 0,
       joinedTick: this.world.tick,
@@ -341,7 +380,7 @@ export class WorldNode {
     }
     const r = step(this.world, inputs, this.ctx, NETWORK.TICK_MS);
     const t1 = clock();
-    this.world = r.world;
+    this.world = this.mobs ? this.mobs.step(r.world) : r.world;
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -494,29 +533,38 @@ export class WorldNode {
         const qi = quantizePos(e.i);
         const qj = quantizePos(e.j);
         const hpPct = this.hpPct(e);
-        c.last[index] = { qi, qj, hp: hpPct };
         const se = snapshotEntityOf(index, e, this.animOf(e), null);
+        c.last[index] = { qi, qj, hp: hpPct, anim: se.anim, dir: se.dir };
         enters.push({
           index,
           entityId: e.id,
-          kind: 0,
+          kind: this.mobs?.kindOf(e.id) ?? 0,
+          defId: this.mobs?.defIdOf(e.id) ?? 0,
           qi,
           qj,
           anim: se.anim,
           dir: se.dir,
           hpPct,
-          maxHp: WORLD_CONFIG.PLAYER_MAX_HP,
+          maxHp: this.maxHpOf(e),
         });
       }
 
-      // bands for the update rate (docs/08 §2): near = on screen, far = beyond 80% of the radius
+      // update-rate bands by tile distance to this player (D73): near 20 Hz, mid 10 Hz, far 5 Hz
+      // in a crowd only the closest NEAR_MAX_ENTITIES keep the full rate; the rest of the near band drops to mid
+      const ranked: { v: { band: number }; d: number; id: number }[] = [];
       for (const [eid, v] of c.visible) {
         const e = this.byId.get(eid)!;
-        const eu = toUW(e.i, e.j);
-        const fu = Math.abs(eu.u - u0) / AOI.HALF_U;
-        const fw = Math.abs(eu.w - w0) / AOI.HALF_W;
-        const f = Math.max(fu, fw);
-        v.band = f > AOI.FAR_BAND_FRACTION ? 2 : f > 0.5 ? 1 : 0;
+        ranked.push({ v, d: Math.hypot(e.i - me.i, e.j - me.j), id: eid });
+      }
+      ranked.sort((x, y) => x.d - y.d || x.id - y.id);
+      let nearUsed = 0;
+      for (const { v, d } of ranked) {
+        if (d > AOI.MID_BAND_TILES) v.band = 2;
+        else if (d > AOI.NEAR_BAND_TILES || nearUsed >= AOI.NEAR_MAX_ENTITIES) v.band = 1;
+        else {
+          v.band = 0;
+          nearUsed++;
+        }
       }
 
       if (leaves.length > 0) {
@@ -534,8 +582,12 @@ export class WorldNode {
     }
   }
 
+  private maxHpOf(e: EntityState): number {
+    return this.mobs?.maxHpOf(e.id) ?? WORLD_CONFIG.PLAYER_MAX_HP;
+  }
+
   private hpPct(e: EntityState): number {
-    return Math.max(0, Math.min(127, Math.round((e.hp / WORLD_CONFIG.PLAYER_MAX_HP) * 100)));
+    return Math.max(0, Math.min(127, Math.round((e.hp / this.maxHpOf(e)) * 100)));
   }
 
   /** 0 idle, 1 run, 2 fly */
@@ -557,18 +609,34 @@ export class WorldNode {
         }
         continue;
       }
-      const full = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS || c.snapSeq === 0;
+      const timedOut = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS;
+      const full = timedOut || c.snapSeq === 0;
+      // D73: a resync (first snapshot, or no ack for ACK_TIMEOUT_MS) carries EVERY visible entity with absolute coordinates and HP,
+      // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
+      const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
+      if (resync) c.lastResyncMs = this.world.timeMs;
       const entities: SnapshotEntity[] = [];
-      const touched: { index: number; qi: number; qj: number; hp: number }[] = [];
+      const touched: { index: number; qi: number; qj: number; hp: number; anim: number; dir: number }[] = [];
       for (const [eid, v] of c.visible) {
-        if ((this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
+        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
         const e = this.byId.get(eid);
         if (!e) continue;
         const last = c.last[v.index];
         const hp = this.hpPct(e);
-        const se = snapshotEntityOf(v.index, e, this.animOf(e), last && last.hp === hp ? null : hp);
+        const se = snapshotEntityOf(v.index, e, this.animOf(e), !resync && last && last.hp === hp ? null : hp);
+        // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
+        if (
+          !resync &&
+          last &&
+          se.hpPct === null &&
+          last.qi === se.qi &&
+          last.qj === se.qj &&
+          last.anim === se.anim &&
+          last.dir === se.dir
+        )
+          continue;
         entities.push(se);
-        touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp });
+        touched.push({ index: v.index, qi: se.qi, qj: se.qj, hp, anim: se.anim, dir: se.dir });
       }
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
@@ -582,7 +650,7 @@ export class WorldNode {
         },
         { baseline: (index) => c.last[index] },
       );
-      for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp };
+      for (const t of touched) c.last[t.index] = { qi: t.qi, qj: t.qj, hp: t.hp, anim: t.anim, dir: t.dir };
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);

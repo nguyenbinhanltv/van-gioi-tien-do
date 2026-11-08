@@ -26,6 +26,11 @@ export class YSortLayer {
     this.entries.push({ node, key });
   }
 
+  remove(node: Node): void {
+    const k = this.entries.findIndex((e) => e.node === node);
+    if (k >= 0) this.entries.splice(k, 1);
+  }
+
   get count(): number {
     return this.entries.length;
   }

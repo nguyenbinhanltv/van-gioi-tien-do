@@ -6,7 +6,8 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
  */
 
 /** Bump on any wire-incompatible change; decoders reject other versions with ProtocolError('version'). */
-export const PROTOCOL_VERSION = 1;
+/** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
+export const PROTOCOL_VERSION = 2;
 
 export enum MsgType {
   Input = 1,
@@ -137,6 +138,8 @@ export interface EnterEntity {
   entityId: number;
   /** 0 player · 1 monster · 2 npc · 3 pet · 4 drop … (game-defined) */
   kind: number;
+  /** definition id (u16): `MOB_DEFS[].id` for monsters (kind 1), 0 for players */
+  defId: number;
   qi: number;
   qj: number;
   anim: number;

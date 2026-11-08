@@ -137,22 +137,84 @@ describe('World Node: AOI (docs/08 §2)', () => {
     expect(new Set(seen)).toEqual(new Set(others.slice(0, 3).map((o) => o.id)));
   });
 
-  it('snapshots honour distance bands: near 20 Hz, far 5 Hz', () => {
+  it('snapshots honour tile-distance bands (D73): <=10 tiles 20 Hz, <=25 tiles 10 Hz, beyond 5 Hz', () => {
     const n = node();
     const a = join(n);
     const near = join(n);
+    const mid = join(n);
     const far = join(n);
     place(n, a.id, 80, 80);
-    place(n, near.id, at(5, 5).i, at(5, 5).j);
-    place(n, far.id, at(38, 40).i, at(38, 40).j);
+    // distances 6, 18 and 39 tiles along +i (all inside the AOI box)
+    const home = new Map([
+      [near.id, 86],
+      [mid.id, 98],
+      [far.id, 119],
+    ]);
+    for (const [id, i] of home) place(n, id, i, 80);
     ticks(n, 2);
     const idxOf = (id: number): number => [...a.entityIdsByIndex].find(([, e]) => e === id)![0];
     const before = a.of('snapshot').length;
-    ticks(n, 40);
+    for (let t = 0; t < 40; t++) {
+      // creep 2/32 tile per tick so the quantised position changes every tick (unchanged records are skipped)
+      for (const [id, i] of home) place(n, id, i + (t + 1) * (2 / 32), 80);
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // an honest client acks every tick (no resync)
+      n.tick();
+    }
     const snaps = a.of('snapshot').slice(before);
     const count = (idx: number): number => snaps.filter((s) => s.entities.some((e) => e.index === idx)).length;
     expect(count(idxOf(near.id))).toBe(40);
+    expect(count(idxOf(mid.id))).toBe(20);
     expect(count(idxOf(far.id))).toBe(10);
+  });
+
+  it('in a crowd only the closest NEAR_MAX_ENTITIES keep 20 Hz, the rest of the near band drops to 10 Hz (D73)', () => {
+    const n = node();
+    const a = join(n);
+    const crowd = Array.from({ length: 60 }, () => join(n));
+    place(n, a.id, 80, 80);
+    // polar layout around the receiver, every one within 6 tiles; creeping outward keeps the distance order stable
+    const polar = new Map<number, { ang: number; r: number }>();
+    crowd.forEach((c, k) => polar.set(c.id, { ang: (k / crowd.length) * Math.PI * 2, r: 2 + k * 0.07 }));
+    const put = (creep: number): void => {
+      for (const [id, p] of polar)
+        place(n, id, 80 + Math.cos(p.ang) * (p.r + creep), 80 + Math.sin(p.ang) * (p.r + creep));
+    };
+    put(0);
+    ticks(n, 2);
+    const before = a.of('snapshot').length;
+    for (let t = 0; t < 40; t++) {
+      put((t + 1) * (2 / 32)); // 2/32 tile per tick: the quantised position changes every tick
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // acks every tick (no resync)
+      n.tick();
+    }
+    const snaps = a.of('snapshot').slice(before);
+    const perIndex = new Map<number, number>();
+    for (const s of snaps) for (const e of s.entities) perIndex.set(e.index, (perIndex.get(e.index) ?? 0) + 1);
+    const counts = [...perIndex.values()];
+    expect(counts.filter((c) => c === 40)).toHaveLength(AOI.NEAR_MAX_ENTITIES);
+    expect(counts.filter((c) => c === 20)).toHaveLength(60 - AOI.NEAR_MAX_ENTITIES);
+  });
+
+  it('records that did not change are not sent (D73), and a change is sent at the next turn of its band', () => {
+    const n = node();
+    const a = join(n);
+    const idle = join(n);
+    place(n, a.id, 80, 80);
+    place(n, idle.id, 85, 80);
+    ticks(n, 2);
+    const idx = [...a.entityIdsByIndex].find(([, e]) => e === idle.id)![0];
+    const before = a.of('snapshot').length;
+    for (let t = 0; t < 20; t++) {
+      n.receive(a.id, a.inputBytes(255, 50, 1, 0)); // acks every tick
+      n.tick();
+    }
+    const quiet = a.of('snapshot').slice(before);
+    expect(quiet.length).toBe(20); // snapshots still flow every tick (self + ack)
+    expect(quiet.some((s) => s.entities.some((e) => e.index === idx))).toBe(false);
+    place(n, idle.id, 85.5, 80);
+    ticks(n, 1);
+    const moved = a.of('snapshot').slice(-1)[0]!;
+    expect(moved.entities.find((e) => e.index === idx)?.qi).toBe(Math.round(85.5 * 32));
   });
 });
 
@@ -192,6 +254,39 @@ describe('World Node: snapshots, deltas and reconciliation data', () => {
     expect(snaps().at(-1)!.baselineSeq).not.toBeNull();
     ticks(n, 25); // 1.25 s without any input packet (= no ack)
     expect(snaps().some((s, k) => k > 3 && s.baselineSeq === null)).toBe(true);
+  });
+
+  it('the ack-timeout resync snapshot carries every visible entity (also idle and far ones) with absolute coordinates and HP (D73)', () => {
+    const n = node();
+    const a = join(n);
+    const idleNear = join(n);
+    const idleFar = join(n);
+    place(n, a.id, 80, 80);
+    place(n, idleNear.id, 85, 80);
+    place(n, idleFar.id, 119, 80); // 39 tiles: 5 Hz band
+    ticks(n, 2);
+    n.receive(a.id, a.inputBytes(255, 50, 1, 0));
+    ticks(n, 10); // acked and nothing changes: records are skipped from now on
+    const quiet = a.of('snapshot').slice(-8);
+    expect(quiet.every((s) => s.entities.length === 0)).toBe(true);
+    const before = a.of('snapshot').length;
+    ticks(n, 25); // 1.25 s without an input packet: no ack
+    const after = a.of('snapshot').slice(before);
+    const resync = after.filter((s) => s.baselineSeq === null && s.entities.length > 0);
+    expect(resync.length).toBeGreaterThanOrEqual(1);
+    const first = resync[0]!;
+    const idx = (id: number): number => [...a.entityIdsByIndex].find(([, e]) => e === id)![0];
+    for (const [p, i] of [
+      [idleNear, 85],
+      [idleFar, 119],
+    ] as const) {
+      const rec = first.entities.find((e) => e.index === idx(p.id));
+      expect(rec, `record for ${p.id}`).toBeDefined();
+      expect(rec!.qi).toBe(Math.round(i * 32));
+      expect(rec!.hpPct).not.toBeNull(); // HP is resent too
+    }
+    // rate-limited: not every tick of the timeout window repeats the full state
+    expect(resync.length).toBeLessThanOrEqual(2);
   });
 
   it('a duplicate input packet is applied once (the 3-input redundancy window does not double-move)', () => {

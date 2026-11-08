@@ -3,7 +3,7 @@
  *
  * docs/24 puts the cold family in a Protobuf envelope `[ver][0x80][msgId u16][bytes]`. The Protobuf pipeline does not exist
  * yet, so the envelope is kept and the body is a fixed big-endian layout (listed per message below). Adding a msgId is
- * additive (docs/24 §3: cold family evolves by new ids), so PROTOCOL_VERSION stays 1; a later Protobuf body replaces the
+ * additive (docs/24 §3: cold family evolves by new ids), so they do not bump PROTOCOL_VERSION; a later Protobuf body replaces the
  * layout without changing msgId meaning. Same strict-decode rules as the hot codec (validated, canonical, no trailing bytes).
  */
 import { ProtocolError } from './errors.js';

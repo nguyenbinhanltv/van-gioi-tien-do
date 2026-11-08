@@ -75,9 +75,10 @@ describe('progression (cold family) codec', () => {
   });
 
   it('golden bytes: meditate_start and breakthrough_result', () => {
-    expect(Buffer.from(encode(samples[3]!)).toString('hex')).toBe('0180003f' + REQ);
+    const v = PROTOCOL_VERSION.toString(16).padStart(2, '0');
+    expect(Buffer.from(encode(samples[3]!)).toString('hex')).toBe(v + '80003f' + REQ);
     expect(Buffer.from(encode(samples[2]!)).toString('hex')).toBe(
-      '0180003e' + REQ + '02' + '02' + '00' + '09' + '09' + '1b58' + '01',
+      v + '80003e' + REQ + '02' + '02' + '00' + '09' + '09' + '1b58' + '01',
     );
   });
 
