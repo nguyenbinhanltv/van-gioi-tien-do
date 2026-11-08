@@ -23,6 +23,10 @@ npm run serve -w client-cocos            # http://localhost:7456
 
 Trình xem animation DragonBones: `#viewer` (xem [docs/32-animation-viewer.md](../../docs/32-animation-viewer.md)); chụp QA tự động: `npm run capture -w client-cocos`.
 
+## Chơi thử một lệnh (`npm run play`)
+
+Từ gốc repo: `npm run play` (online, cần game server) hoặc `npm run play -- --offline` (chỉ client). Script build client khi cần, khởi động game server và server tĩnh, đợi `/health`, in URL **Local** / **LAN** (cho điện thoại cùng Wi-Fi; Windows hỏi tường lửa lần đầu: _Allow access_ cho Node.js) và bảng phím; **Ctrl+C** dừng tất cả. Mặc định build bản **release** (nhỏ, không có art dev, nhanh trên điện thoại); `--dev` build bản debug (`npm run build:web` mặc định cũng là debug). Chi tiết và mọi tùy chọn: README gốc, mục "Chơi thử (một lệnh)".
+
 ## Chơi thử nhân vật chibi (play-test)
 
 `PlayerActor.body` là armature DragonBones semi-chibi (`assets/scripts/ChibiBody.ts`, tài nguyên `assets/resources/dragonbones/<lớp>-chibi-v1/`), phát đúng 24 Hz như file SKE đã xuất.

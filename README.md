@@ -22,6 +22,34 @@ docs/                   Tài liệu thiết kế
 
 Mỗi package có `package.json` riêng (tên `@vgtd/<name>`), `tsconfig.json` kế thừa `../../tsconfig.base.json`, và script `build` / `test` / `typecheck`.
 
+## Chơi thử (một lệnh)
+
+```bash
+npm ci                 # một lần (script chỉ cảnh báo nếu thiếu / cũ, không tự chạy)
+npm run play           # online: game server (quái, combat, túi đồ) + client, in URL Local và LAN
+npm run play -- --offline   # chỉ client, không cần game server (quái giả lập: ?combat=1)
+```
+
+`npm run play` kiểm tra Node ≥ 18, thư viện đã cài và Cocos Creator 3.8.8 (`COCOS_CREATOR_PATH` hoặc đường dẫn mặc định trên Windows), **chỉ build client khi cần** (chưa có bản build, mã nguồn mới hơn bản build, hoặc đổi loại build; `--rebuild` ép build), khởi động game server (`apps/server`, `MOBS`/`COMBAT`/`INVENTORY` bật) và server tĩnh của client (cổng 7456), đợi `/health` rồi in:
+
+- `Local:` `http://localhost:7456/?online=1&combat=1` cho máy đang chạy;
+- `LAN:` một dòng cho mỗi card mạng, để **điện thoại cùng Wi-Fi** mở (lần đầu Windows hỏi tường lửa: chọn _Allow access_ cho Node.js, mạng Private);
+- URL offline và bảng phím điều khiển (click/WASD, Shift đi bộ, phím 1-8 kỹ năng, Tab chọn mục tiêu, …).
+
+Nhấn **Ctrl+C** để dừng: cả hai tiến trình (và game server con của nó) bị dừng, cổng được giải phóng.
+
+| Tùy chọn                   | Ý nghĩa                                                                                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--offline`                | chỉ client, không game server                                                                                                                                   |
+| `--rebuild`                | ép build client                                                                                                                                                 |
+| `--dev`                    | build bản debug (có art dev của trình xem animation, nặng hơn ~230 MB). Mặc định là bản **release**: nhỏ, không có art dev, tải nhanh hơn nhiều trên điện thoại |
+| `--open`                   | mở trình duyệt mặc định                                                                                                                                         |
+| `--no-lan`                 | game server chỉ nghe 127.0.0.1 (mặc định nghe mọi card mạng để điện thoại vào được; chỉ dùng trong mạng tin cậy, tài khoản chơi thử là tài khoản tạm)           |
+| `--port` / `--server-port` | cổng client (7456) / game server (8080); cổng khác 8080 thêm `&server=host:cổng` vào URL                                                                        |
+| `--smoke`                  | khởi động, đợi khỏe mạnh, in URL rồi dừng (kiểm tra môi trường)                                                                                                 |
+
+Log build đầy đủ của Cocos nằm ở `apps/client-cocos/build/play-build.log` (console chỉ hiện lỗi, cảnh báo và kết quả).
+
 ## Lệnh
 
 ```bash
