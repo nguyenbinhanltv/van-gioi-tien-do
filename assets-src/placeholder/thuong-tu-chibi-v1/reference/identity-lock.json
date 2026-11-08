@@ -1,0 +1,46 @@
+{
+  "kind": "manual-identity-lock-v1",
+  "character": "thuong-tu-chibi-v1",
+  "basis": "D51 approved male option C, D44 proportions; reviewed five native and normalized views. Not semantic face-detector certification.",
+  "features": {
+    "sex": "male",
+    "face": "mature softly angular jaw, small straight nose, straight brows, slate almond eyes",
+    "hair": "black swept fringe and low tied ponytail; no elevated topknot",
+    "costume": "T1 plain navy sleeveless wrap, ivory undercollar, plain red sash/tails, dark trousers and wraps, small boots",
+    "weapon": "straight dark shaft, plain steel leaf, forked red pennon, no T3 jewel or ornament"
+  },
+  "references": {
+    "E.master.png": {
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256],
+      "mtimeUtc": "2026-11-07T23:31:58.007560+00:00"
+    },
+    "N.master.png": {
+      "sha256": "5bb923b08f39d0d6eacff3073584214e7682310cc3557d0de17f71ce8de0a8ae",
+      "bytes": 34583,
+      "dimensions": [256, 256],
+      "mtimeUtc": "2026-11-07T23:31:58.170311+00:00"
+    },
+    "NE.master.png": {
+      "sha256": "b4e94ac3bef8d20e3a7ae04988a73cd20debcbb97a4b4849baa13edb4379b9b3",
+      "bytes": 34306,
+      "dimensions": [256, 256],
+      "mtimeUtc": "2026-11-07T23:31:58.126595+00:00"
+    },
+    "S.master.png": {
+      "sha256": "8c7e933e7c5fa80e537b235d6bcfbb8bbfc3cf8eaf2838feb3539f2d538a7bbb",
+      "bytes": 37892,
+      "dimensions": [256, 256],
+      "mtimeUtc": "2026-11-07T23:31:58.087229+00:00"
+    },
+    "SE.master.png": {
+      "sha256": "f607c476e521cd9dabc2523aca4af632bd2fbc2c437b00f13ffce607e08673ac",
+      "bytes": 37030,
+      "dimensions": [256, 256],
+      "mtimeUtc": "2026-11-07T23:31:58.046773+00:00"
+    }
+  },
+  "rearFace": "NE/N face occluded: not measured or inferred; hairstyle and visible shoulder/back cuts reviewed. D50 landmarks recorded per direction.",
+  "status": "Selected canonical source for E motion; actual motion identity/head/canvas gates remain required."
+}

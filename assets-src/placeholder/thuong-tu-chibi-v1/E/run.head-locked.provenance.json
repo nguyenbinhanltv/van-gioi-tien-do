@@ -1,0 +1,38 @@
+{
+  "name": "E-run-stride-head-lock",
+  "start": "2026-11-08T00:12:43.255Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-94ae80f3-1a92-45a7-a62d-bc4b1ed786e8.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "TINY uniform skull-size correction ONLY on this exact16-frame THUONG TU E RUN4x4 sheet, input1. Preserve the good single right/left stride cycle and EVERY body/torso/limb/knee/foot/hand/spear/pennon/sash/rootregistration, background and frame order. At aligned2x scale current visible main-cap-to-chin distances are about54.3–56.5px; locked master input2 is52.55px. Reduce EACH ENTIRE HEAD (skull-attached hair+face+ear) uniformly by only5%, anchored at neck. On1254-square source this is a very small change, about3rawpixels off a65-70px head, NOT a dramatic small head. Keep same maturemale slateeye/straightbrow/angularjaw/hairline and E exactPROFILE; do not squish face alone. Lowponytail attachment follows head, trailing shape/motion retained. Do NOT alter character body scale or flatten dynamic flight/tuck. No turning/zoom, no weapon size/angle changes, no foot changes. All16 filled, same4x4square dimensions, flat #FF00FF, no text/guides/shadows/FX. Aim for master physical skull size with conservative5% correction, not12% or larger.",
+  "endObserved": "2026-11-08T00:13:07.501Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-86c12ef2-afa7-47e6-bf6f-24bce384aee7.png",
+  "output": "raw/run.head-locked.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "status": "Candidate pending actual aligned landmark review",
+  "outputEvidence": {
+    "path": "E/raw/run.head-locked.png",
+    "sha256": "edcd013af58f10dff665064128d4dc7b9abb0a25d885083fe5d280703c7dd220",
+    "bytes": 1900832,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-94ae80f3-1a92-45a7-a62d-bc4b1ed786e8.png",
+      "path": "E/raw/run.stride-lattice.png",
+      "sha256": "e0c984857d4024ee41a11095952537d81c73a1632849bdef41c9a4c9cd393de6",
+      "bytes": 1929918,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

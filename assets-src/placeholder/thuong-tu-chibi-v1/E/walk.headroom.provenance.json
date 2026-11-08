@@ -1,0 +1,31 @@
+{
+  "name": "E-walk-headroom-repair",
+  "start": "2026-11-07T23:42:22.347Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-e904cb40-612f-44d2-8c11-c3ff8a35cd25.png"
+  ],
+  "prompt": "Localized weapon headroom fix on this EXACT THUONG TU E WALK4x4 sprite sheet. Preserve every male face/body/head size/pose/foot placement/hair/clothing and frame order, magenta background. ONLY row3 column1 (zero-based cell8, first frame in third row): its vertical spear tip is too close to cell top and loses less than1logical pixel during alignment. Shorten ONLY the steel leaf tip at the top by about8 native image pixels (about6logical), by redrawing a slightly shorter simple leaf blade attached to the same socket. Shaft, hand grip, red banner, body/feet remain UNCHANGED. Do NOT shrink whole weapon, do NOT move character or hand, do NOT alter other15cells. No rulers/new text/grid/shadows, same exact square dimensions and4x4 registration.",
+  "endObserved": "2026-11-07T23:42:50.413Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-94a782e9-2a39-4ad7-ad43-022c79e787cf.png",
+  "output": "raw/walk.headroom-edited.png",
+  "selected": "raw/walk.headroom.png",
+  "operation": "Public sprite:repair original walk.png + edited cell8 only; other15 cells byte-identical by public per-cell RGBA hashes. Raw edit retained.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/walk.headroom-edited.png",
+    "sha256": "5d16d32304f20bca0b9485d472ef51642533af0999406b7b0bf6f75dc0068b7d",
+    "bytes": 1708611,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-e904cb40-612f-44d2-8c11-c3ff8a35cd25.png",
+      "path": "E/raw/walk.png",
+      "sha256": "051a10b05125f19d2a9156801d62c61cdf06a806ff43613cbc9cc1406f1ad859",
+      "bytes": 1702196,
+      "dimensions": [1254, 1254]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

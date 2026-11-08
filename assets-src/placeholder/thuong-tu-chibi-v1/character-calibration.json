@@ -1,0 +1,286 @@
+{
+  "character": "thuong-tu-chibi-v1",
+  "source": "reference/T1-turnaround.raw.png",
+  "sourceSha256": "6e3f3c19cbf0d593a900c4d77067c2dc240704c7b74ee6ece06956acf08a5ce7",
+  "operation": "keyOut -> defringe -> removeFragments -> whitespace-separated native panel crops -> one placeScaled calibration",
+  "removedFragments": 0,
+  "scale": 0.3176470588235294,
+  "targetHeight": 216,
+  "referenceHeight": 680,
+  "shoulderLock": {
+    "direction": "S",
+    "bandPercentH": [24, 28],
+    "measuredPercentH": 25.5,
+    "uncertaintyPercentH": 0.9,
+    "basis": "Owner-approved lean design; orchestrator lock 2026-11-08. T2-T5 armor may overhang. Art measurement, not gameplay constant."
+  },
+  "cell": 256,
+  "measurementMethod": "Manual main-hair crown/sole landmarks, not alpha bounds or an anatomy detector. Weapon excluded from H.",
+  "resampling": "One fixed reference scale for all five views; no per-view height fitting or painted anatomy.",
+  "directions": [
+    {
+      "direction": "E",
+      "sourceMetrics": {
+        "left": 52,
+        "right": 294,
+        "top": 83,
+        "bottom": 797,
+        "height": 714,
+        "width": 242,
+        "pelvisX": 177.16539038446356
+      },
+      "alphaMetrics": {
+        "left": 93,
+        "right": 170,
+        "top": 6,
+        "bottom": 233,
+        "height": 227,
+        "width": 77,
+        "pelvisX": 132.18433359314108
+      },
+      "anatomicalHeight": 215.0470588235294,
+      "masterHead": {
+        "crown": {
+          "x": 121.96470588235293,
+          "y": 16.95294117647061
+        },
+        "chin": {
+          "x": 137.52941176470588,
+          "y": 67.14117647058826
+        }
+      },
+      "registration": {
+        "pelvisX": 163,
+        "soleY": 795,
+        "scale": 0.3176470588235294,
+        "dx": 76.2235294117647,
+        "dy": -20.529411764705856
+      },
+      "unclippedBounds": {
+        "left": 92.74117647058823,
+        "right": 169.61176470588234,
+        "top": 5.835294117647084,
+        "bottom": 232.63529411764708
+      },
+      "note": "Reviewed native E profile: skull-attached cap excludes low ponytail; visible jaw/chin and eye; spear excluded from anatomical H."
+    },
+    {
+      "direction": "SE",
+      "sourceMetrics": {
+        "left": 24,
+        "right": 324,
+        "top": 101,
+        "bottom": 797,
+        "height": 696,
+        "width": 300,
+        "pelvisX": 203.97823629169022
+      },
+      "alphaMetrics": {
+        "left": 65,
+        "right": 160,
+        "top": 12,
+        "bottom": 233,
+        "height": 221,
+        "width": 95,
+        "pelvisX": 121.77544827586208
+      },
+      "anatomicalHeight": 216.31764705882352,
+      "masterHead": {
+        "crown": {
+          "x": 121.64705882352942,
+          "y": 15.682352941176497
+        },
+        "chin": {
+          "x": 129.90588235294118,
+          "y": 65.55294117647061
+        }
+      },
+      "registration": {
+        "pelvisX": 223,
+        "soleY": 795,
+        "scale": 0.3176470588235294,
+        "dx": 57.16470588235295,
+        "dy": -20.529411764705856
+      },
+      "unclippedBounds": {
+        "left": 64.78823529411765,
+        "right": 160.08235294117645,
+        "top": 11.552941176470611,
+        "bottom": 232.63529411764708
+      },
+      "note": "Reviewed SE front-right face and ivory crossover; same male face/hairline, low ponytail and unarmored T1."
+    },
+    {
+      "direction": "S",
+      "sourceMetrics": {
+        "left": 17,
+        "right": 329,
+        "top": 97,
+        "bottom": 795,
+        "height": 698,
+        "width": 312,
+        "pelvisX": 203.49899188336866
+      },
+      "alphaMetrics": {
+        "left": 65,
+        "right": 164,
+        "top": 11,
+        "bottom": 232,
+        "height": 221,
+        "width": 99,
+        "pelvisX": 124.33970810266734
+      },
+      "anatomicalHeight": 215.68235294117645,
+      "masterHead": {
+        "crown": {
+          "x": 124.18823529411765,
+          "y": 16.317647058823553
+        },
+        "chin": {
+          "x": 128,
+          "y": 65.55294117647061
+        }
+      },
+      "registration": {
+        "pelvisX": 214,
+        "soleY": 795,
+        "scale": 0.3176470588235294,
+        "dx": 60.02352941176471,
+        "dy": -20.529411764705856
+      },
+      "unclippedBounds": {
+        "left": 65.42352941176472,
+        "right": 164.52941176470588,
+        "top": 10.282352941176494,
+        "bottom": 232
+      },
+      "note": "Reviewed straight-front construction; shoulder points manually estimated under sleeveless shoulder contour, uncertainty retained."
+    },
+    {
+      "direction": "NE",
+      "sourceMetrics": {
+        "left": 45,
+        "right": 332,
+        "top": 101,
+        "bottom": 795,
+        "height": 694,
+        "width": 287,
+        "pelvisX": 158.34380307966475
+      },
+      "alphaMetrics": {
+        "left": 94,
+        "right": 185,
+        "top": 12,
+        "bottom": 232,
+        "height": 220,
+        "width": 91,
+        "pelvisX": 129.2391484655792
+      },
+      "anatomicalHeight": 214.72941176470587,
+      "masterHead": {
+        "kind": "rear-crown-shoulder",
+        "crown": {
+          "x": 125.45882352941177,
+          "y": 17.27058823529414
+        },
+        "shoulderTop": {
+          "left": {
+            "x": 102.90588235294118,
+            "y": 76.67058823529413
+          },
+          "right": {
+            "x": 142.61176470588236,
+            "y": 75.40000000000002
+          }
+        },
+        "breadth": {
+          "left": {
+            "x": 107.03529411764706,
+            "y": 42.364705882352965
+          },
+          "right": {
+            "x": 149.28235294117647,
+            "y": 42.364705882352965
+          }
+        }
+      },
+      "registration": {
+        "pelvisX": 153,
+        "soleY": 795,
+        "scale": 0.3176470588235294,
+        "dx": 79.4,
+        "dy": -20.529411764705856
+      },
+      "unclippedBounds": {
+        "left": 93.69411764705883,
+        "right": 184.85882352941178,
+        "top": 11.552941176470611,
+        "bottom": 232
+      },
+      "note": "Reviewed NE: low ponytail covers nape; D50 visible upper shoulder endpoints and main skull breadth, no invented chin/skull base."
+    },
+    {
+      "direction": "N",
+      "sourceMetrics": {
+        "left": 34,
+        "right": 350,
+        "top": 101,
+        "bottom": 796,
+        "height": 695,
+        "width": 316,
+        "pelvisX": 160.10131086142323
+      },
+      "alphaMetrics": {
+        "left": 88,
+        "right": 188,
+        "top": 12,
+        "bottom": 232,
+        "height": 220,
+        "width": 100,
+        "pelvisX": 127.2928703949112
+      },
+      "anatomicalHeight": 215.68235294117645,
+      "masterHead": {
+        "kind": "rear-crown-shoulder",
+        "crown": {
+          "x": 128.95294117647057,
+          "y": 16.317647058823553
+        },
+        "shoulderTop": {
+          "left": {
+            "x": 103.85882352941177,
+            "y": 76.35294117647061
+          },
+          "right": {
+            "x": 152.45882352941175,
+            "y": 75.40000000000002
+          }
+        },
+        "breadth": {
+          "left": {
+            "x": 107.67058823529412,
+            "y": 42.6823529411765
+          },
+          "right": {
+            "x": 147.69411764705882,
+            "y": 42.6823529411765
+          }
+        }
+      },
+      "registration": {
+        "pelvisX": 161,
+        "soleY": 795,
+        "scale": 0.3176470588235294,
+        "dx": 76.85882352941177,
+        "dy": -20.529411764705856
+      },
+      "unclippedBounds": {
+        "left": 87.65882352941176,
+        "right": 188.03529411764706,
+        "top": 11.552941176470611,
+        "bottom": 232.31764705882355
+      },
+      "note": "Reviewed N: approved low ponytail covers nape; D50 shoulder midpoint and main skull breadth exclude dangling hair."
+    }
+  ]
+}

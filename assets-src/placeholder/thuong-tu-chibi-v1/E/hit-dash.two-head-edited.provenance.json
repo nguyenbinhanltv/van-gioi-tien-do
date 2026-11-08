@@ -1,0 +1,46 @@
+{
+  "name": "E-dash-local2-5-head-midpoint",
+  "start": "2026-11-08T01:34:45.701Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-selected.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Precisely edit ONLY TWO HEADS in image1, a1254x1254 grouped4x4THUONG TU T1 male rightE sprite sheet: sourcecell8=row3col1(dashlocal2), sourcecell11=row3col4(dashlocal5). Image1 heads here are tooSMALL: main-cap/jaw50.8/50.7alignedpx. Image2 ORIGINAL heads in exactlythose2cells are tooLARGE:54.9/55.0alignedpx. Target52.55alignedpx: halfwaybetween image1 andimage2 (~66.7nativepixels primaryroundedcap crown tojaw, versusimage1~64.4). Use IMAGE1 asbase. Enlarge WHOLE skull+primaryhair+face+ear in ONLYthose2cells about3.5%, approximately2-3nativepx added to66.7height, neckanchored. Do not merelymovehairtop or stretchface. Sameadultmale canonical faceasimage3, slatealmondsmall eye/straightbrow/jaw/sweptblackhair/lowponytail. Preserve exactly allbody/torso/neckcollar/arms/hands/legs/weapon/pennon/sash/rootregistration and ALL other14cells. This is NOT fullbodyrescaling; no poseheightfitting. Keepclean neck/collarseam, no doubles/blackgap. Do not use full5-6%overshoot nor leaveheadunchanged. Aim exactlyMIDWAY between smallimage1 and largeimage2 on justthesetwoheads. Same1254square4x4flat#FF00FFbackground, no text/grids/FX/shadows.",
+  "endObserved": "2026-11-08T01:35:07.289Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-d1ac6c80-5719-44da-8254-6352b060e8fd.png",
+  "output": "raw/hit-dash.two-head-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "cells8/11 eligible only; pending actual aligned head landmarks",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.two-head-edited.png",
+    "sha256": "9cf9036033cd34da81f3dbd2c779c77014af63b91ef3fc23c27469b0c7a9d850",
+    "bytes": 1835707,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-selected.png",
+      "path": "E/raw/hit-dash.head-selected.png",
+      "sha256": "38d8563d7770e0a8e969438f6a5bb35a1ac91fd9974de1be321d98e310b3bac8",
+      "bytes": 2181026,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.png",
+      "path": "E/raw/hit-dash.png",
+      "sha256": "ec564f9ada25510c06b3df3fa91ee75577c9e6215ea23e9f70bb98c50d7b528b",
+      "bytes": 1839508,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

@@ -1,0 +1,369 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "Undisclosed by tool; never inferred",
+  "license": "OpenAI Output terms checked 2026-11-08, project-only references; see ASSET-LICENSES.md THUONG-TU-CHIBI-D51",
+  "note": "Exact prompts and observed UTC are in adjacent provenance. Output/source pixels are unchanged except documented public repair/key/scale operations. Retained references are content-addressed or linked to an existing matching class PNG. Upstream concept package is an owner-approved artifact with its own full provenance.",
+  "calls": [
+    {
+      "provenance": "E/attack.provenance.json",
+      "output": {
+        "path": "E/raw/attack.png",
+        "sha256": "6fd041aa0c02eb34fc21d2f3468b745c3e29dcd309a8fbceeea559af78eb3b00",
+        "bytes": 1787694,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/attack_2.provenance.json",
+      "output": {
+        "path": "E/raw/attack_2.png",
+        "sha256": "406e67944871e962af2dbbab74faf0e131ab3c6c11adffdce964758bc2384bf4",
+        "bytes": 1742075,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/attack_3.headroom.provenance.json",
+      "output": {
+        "path": "E/raw/attack_3.headroom-edited.png",
+        "sha256": "651603506f74b998547d75900fefb001ef0b4cdf97d8215459bfec3210db3a8d",
+        "bytes": 1730964,
+        "dimensions": [1254, 1254]
+      },
+      "references": 1
+    },
+    {
+      "provenance": "E/attack_3.provenance.json",
+      "output": {
+        "path": "E/raw/attack_3.png",
+        "sha256": "66be806b185ec3b631d673eb821ca0c2787c3282e6b6c9dfe0413d0172e23abf",
+        "bytes": 1723429,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/cast.provenance.json",
+      "output": {
+        "path": "E/raw/cast.png",
+        "sha256": "1a1466eb0704da8f12ef14e71bc7e6e0db434184ca543cd2d256d3629e3c83fa",
+        "bytes": 1716471,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/channel.provenance.json",
+      "output": {
+        "path": "E/raw/channel.png",
+        "sha256": "ef06e59c0476c35bcea41f322001fc4d76fc19cc0b7c7c50fc886e317493ea21",
+        "bytes": 1534213,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/die.provenance.json",
+      "output": {
+        "path": "E/raw/die.png",
+        "sha256": "0b7e8502dd3e2bd97f6d14f6a440358643c971d814b9d4932aec72168ae87d17",
+        "bytes": 1618625,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/emote.provenance.json",
+      "output": {
+        "path": "E/raw/emote.png",
+        "sha256": "49a28f9881be881a88b9841341667e278b21e98c861e3cc514d33927b6f76c28",
+        "bytes": 1536194,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.cell4-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.cell4-edited.png",
+        "sha256": "1a2d1eccf6cb90446a7362327b4424457242cc54d088be7b98320bd22862a48d",
+        "bytes": 1847362,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.D54-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.D54-edited.png",
+        "sha256": "2d0b18cfd5692b080a8ef94ed4785673a345daf6023f4a143f36ebdea6c41478",
+        "bytes": 1838708,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.D54-final-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.D54-final-edited.png",
+        "sha256": "dc3ea1511c61f9c4d6177957cb50afb7ea96b56ee8ae9ae41bcdb4eded6206d3",
+        "bytes": 1845294,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.head-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.head-edited.png",
+        "sha256": "4174db4f5db89a671efdc8b8187956b688bc353afecf861dab47db73d6b573c9",
+        "bytes": 1878376,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/hit-dash.head-midpoint.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.head-midpoint.png",
+        "sha256": "00180b194ff65e0de978e8f41cbb296d1da12c318150914106333c6cd7713d54",
+        "bytes": 1835626,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/hit-dash.head-reduced.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.head-reduced.png",
+        "sha256": "8ed67d13af1e50e45b60c656e75f4288023b85b6bb3452e3e099f13e4c7ab023",
+        "bytes": 1827627,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.head-stencil-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.head-stencil-edited.png",
+        "sha256": "7d8223486cdae1621cac4c6c7d42ca288e03418c292470074b9163e3d0a264eb",
+        "bytes": 1838854,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/hit-dash.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.png",
+        "sha256": "ec564f9ada25510c06b3df3fa91ee75577c9e6215ea23e9f70bb98c50d7b528b",
+        "bytes": 1839508,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/hit-dash.two-head-edited.provenance.json",
+      "output": {
+        "path": "E/raw/hit-dash.two-head-edited.png",
+        "sha256": "9cf9036033cd34da81f3dbd2c779c77014af63b91ef3fc23c27469b0c7a9d850",
+        "bytes": 1835707,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/idle.provenance.json",
+      "output": {
+        "path": "E/raw/idle.png",
+        "sha256": "db820f677e121c7713b061425716110e147a122c5e44ca6f88ca00ebbce77345",
+        "bytes": 1655371,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/meditate.provenance.json",
+      "output": {
+        "path": "E/raw/meditate.png",
+        "sha256": "c3485ba73d2b1e24287dd631b81e8495c9a078087ee5214b03f5749fe2f77281",
+        "bytes": 1741230,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run-cycle.provenance.json",
+      "output": {
+        "path": "E/raw/run.cycle.png",
+        "sha256": "c2909ceb52ba729c9d04e1120291c8f41242bf489fc84c2f76924f341f42a7ea",
+        "bytes": 1975500,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/run.cell6-edited.provenance.json",
+      "output": {
+        "path": "E/raw/run.cell6-edited.png",
+        "sha256": "161a1515fd6f8f7b7fabe2fc6cc1321e9b5c189ad926e8a940936899fa01e5ee",
+        "bytes": 1901848,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/run.head-corrected.provenance.json",
+      "output": {
+        "path": "E/raw/run.head-corrected.png",
+        "sha256": "628fa44b250c4da65418f3db0db01eb36f0fffa82d57ba6f6487b3d8ceec5d7b",
+        "bytes": 2012610,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.head-locked.provenance.json",
+      "output": {
+        "path": "E/raw/run.head-locked.png",
+        "sha256": "edcd013af58f10dff665064128d4dc7b9abb0a25d885083fe5d280703c7dd220",
+        "bytes": 1900832,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.head-midpoint.provenance.json",
+      "output": {
+        "path": "E/raw/run.head-midpoint.png",
+        "sha256": "6a4b2ca456122d3c9e42aa5adf247b4246988ac9fd46ca04d1d511b3ef1b338b",
+        "bytes": 1913287,
+        "dimensions": [1254, 1254]
+      },
+      "references": 3
+    },
+    {
+      "provenance": "E/run.provenance.json",
+      "output": {
+        "path": "E/raw/run.png",
+        "sha256": "853b73152c7c01fff9b4c851d3cbc23f25ccd49c9c91c198070b22b1a81111b1",
+        "bytes": 1915457,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.skull-reduction.provenance.json",
+      "output": {
+        "path": "E/raw/run.skull-reduction.png",
+        "sha256": "fe0dffc3bd38361d46db8d95c160ffd8e4c9ee5e083e83fa9ed5a1cb67d82b39",
+        "bytes": 1929515,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.stride-lattice.provenance.json",
+      "output": {
+        "path": "E/raw/run.stride-lattice.png",
+        "sha256": "e0c984857d4024ee41a11095952537d81c73a1632849bdef41c9a4c9cd393de6",
+        "bytes": 1929918,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.three-head-edited.provenance.json",
+      "output": {
+        "path": "E/raw/run.three-head-edited.png",
+        "sha256": "8df92eda448ae8be8d3cf20fca00c6d5eb515cb7a050bca13f1caaf29429d426",
+        "bytes": 1922485,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/run.two-head-edited.provenance.json",
+      "output": {
+        "path": "E/raw/run.two-head-edited.png",
+        "sha256": "37f27fe15a433f13e6c23efa0932155661faa9c8d68b29491cd63bf932458987",
+        "bytes": 1913667,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/sword_fly.provenance.json",
+      "output": {
+        "path": "E/raw/sword_fly.png",
+        "sha256": "eaf8cdcab7299ca30f962e689da77e51bfa6bae6fec8cc10bcc78775972169d8",
+        "bytes": 1637748,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/tribulation.provenance.json",
+      "output": {
+        "path": "E/raw/tribulation.png",
+        "sha256": "8cfc0f9f5d0681b15038cdc3eb9c8908d4ae178d9b63e30ea63afe72cc9b4062",
+        "bytes": 1762352,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "E/walk.headroom.provenance.json",
+      "output": {
+        "path": "E/raw/walk.headroom-edited.png",
+        "sha256": "5d16d32304f20bca0b9485d472ef51642533af0999406b7b0bf6f75dc0068b7d",
+        "bytes": 1708611,
+        "dimensions": [1254, 1254]
+      },
+      "references": 1
+    },
+    {
+      "provenance": "E/walk.provenance.json",
+      "output": {
+        "path": "E/raw/walk.png",
+        "sha256": "051a10b05125f19d2a9156801d62c61cdf06a806ff43613cbc9cc1406f1ad859",
+        "bytes": 1702196,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    },
+    {
+      "provenance": "reference/T1-turnaround.attempt1.provenance.json",
+      "output": {
+        "path": "reference/T1-turnaround.attempt1.raw.png",
+        "sha256": "899c8d4a8aa4287bf884556d0291dc1aa95a11c3354b486a7041133090034b81",
+        "bytes": 1808164,
+        "dimensions": [1774, 887]
+      },
+      "references": 1
+    },
+    {
+      "provenance": "reference/T1-turnaround.provenance.json",
+      "output": {
+        "path": "reference/T1-turnaround.raw.png",
+        "sha256": "6e3f3c19cbf0d593a900c4d77067c2dc240704c7b74ee6ece06956acf08a5ce7",
+        "bytes": 1829929,
+        "dimensions": [1774, 887]
+      },
+      "references": 1
+    },
+    {
+      "provenance": "reference/T1.master-source.provenance.json",
+      "output": {
+        "path": "reference/T1.master-source.raw.png",
+        "sha256": "972d1ec155a3c8c8672a6464427ec4aa6601fe1626e7c88ea739fb739234a67b",
+        "bytes": 1470417,
+        "dimensions": [1254, 1254]
+      },
+      "references": 2
+    }
+  ],
+  "missing": []
+}

@@ -1,0 +1,21 @@
+{
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/thuong-tu-chibi-v1/E --out C:/Users/PC/AppData/Local/Temp/vgtd32-d54/final.json",
+  "gitHead": "a33d420d4a2a29f93cd00159e59f7164d9fe42f5",
+  "gateSourceSha256": "fd657d90b310b8e5fcebaf10d01bac590d95d04534c49fe5f9cd842135089503",
+  "reasonSourceSha256": "63e639cf44b2004b18ca8c1e44d0daf22a15aec8a53d29d45459edeceb9907da",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 113,
+    "newlyCheckedCells": 24,
+    "retainedD41PoseCells": 89
+  },
+  "totals": {
+    "projects": 1,
+    "cells": 24,
+    "pass": 24,
+    "fail": 0,
+    "unmeasured": 0
+  },
+  "reportSha256": "502d37df521615abde43b1c365fde62e3d1feb50e3a66db8cb9956dfe09be847",
+  "runner": "Merged official D54 audit, PR172"
+}
