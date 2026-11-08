@@ -606,3 +606,36 @@ Cửa sổ Lab D55 cho master D59 và mọi ô ghép là hình vuông: cạnh b�
 crown→nape, tâm tại trung điểm hai điểm, nới tổng 8% cả hai chiều. Kể cả ô D48 có breadth thật,
 vẫn dùng cửa sổ span giống master; breadth thật chỉ là evidence riêng. Torso giữ quy tắc D55.
 Temporal D59/D48 dùng cùng cửa sổ; không tạo hay ghi cửa sổ thành landmark.
+
+## Bổ sung D60: bracketed-occlusion không tạo bằng chứng đo giả
+
+Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`: khi ô không có phép đo đầu hợp lệ vì bị che,
+khai kind **chỉ cho ô**, crown nhìn thấy alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review.
+Không thêm nape/cằm/breadth suy diễn. Cả hai lân cận **trực tiếp** i−1/i+1 cùng clip phải có bằng chứng
+đầu được đo thật đạt band; loop wrap, đầu/cuối nonloop không có đủ hai lân cận nên bị loại.
+**Tối đa2 ô bracketed mỗi clip.** Không có trần phần trăm hay trần chuỗi riêng: các ô bracketed không
+được kề nhau vì không thể chứng nhận cho nhau. Master/idle/walk/emote và clip khác bị loại.
+
+```json
+{
+  "kind": "bracketed-occlusion",
+  "crown": { "x": 157, "y": 57 },
+  "occluder": "raised shoulder, ribbon and forelock hide the other endpoints",
+  "hiddenEndpoints": ["skullBase", "breadth.left", "breadth.right"],
+  "note": "Example schema only; actual native source and neighbour measurements must be reviewed"
+}
+```
+
+Lab đầu≤15/thân≤23 vẫn bắt buộc, kể cả khi reason pose D41 bình thường được miễn similarity. Cả hai
+pair temporal với lân cận phải có min(head,torso)≥0,45; thiếu phép đo/NaN/review-by-eye là lỗi cứng
+**cho điều kiện D60**. Các ô khác giữ chính sách D55: temporal chỉ chẩn đoán.
+
+Cửa sổ **chỉ để so ảnh**: lấy nguyên chiều rộng/cao cửa sổ đầu D55 có padding của master được chứng nhận
+(ví dụ D59 span-square+8%). Tâm ngang=crown.x; top=crown.y−4% chiều cao chưa padding, tức nửa margin tổng8%
+theo D55. Không tính lại kích thước từ ô bracketed. Dùng cùng cách dựng cho master khi so Lab và **cả hai
+phía** của pair temporal, kể cả lân cận có đủ landmark. Torso đặt dưới cửa sổ này, rộng44%/cao25% H master,
+tâm ngang theo crown. Master và các phía so phải có crown thật nhìn thấy; không thay bằng neo phụ kiện,
+không fallback centroid, không ghi cửa sổ thành anatomy.
+
+INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
+size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.

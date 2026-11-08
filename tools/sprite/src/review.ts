@@ -66,6 +66,17 @@ export interface BatchReport {
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+function headSizeSummary(e: HeadMeasurement): string {
+  if (e.kind === 'bracketed-occlusion') {
+    const b = e.bracketed;
+    return b
+      ? `bracketed (unmeasured); neighbours ${b.neighbours.join(', ')}; budget ${b.bracketedCount}/${b.totalFrames} (max2); Lab ${b.lab.head.toFixed(4)}/${b.lab.torso.toFixed(4)}; temporal ${b.temporal.map((p) => `${p.from}->${p.to} ${p.head.toFixed(4)}/${p.torso.toFixed(4)}`).join('; ')}`
+      : 'bracketed (unmeasured; quality record unavailable)';
+  }
+  return e.kind === 'rear-breadth-only'
+    ? 'breadth-only (no vertical span)'
+    : `head ${e.sizePx!.toFixed(2)} / master ${e.masterSizePx!.toFixed(2)} px`;
+}
 function headLandmarkHtml(head: HeadLandmarks | HeadEvidence): string {
   if (head.kind === 'bracketed-occlusion')
     return esc(
@@ -158,7 +169,7 @@ export function reviewHtml(reports: readonly BatchReport[], title = 'Sprite revi
               const evidence =
                 crops +
                 (c.headEvidence?.length
-                  ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · ${e.kind === 'rear-breadth-only' ? 'breadth-only (no vertical span)' : `head ${e.sizePx!.toFixed(2)} / master ${e.masterSizePx!.toFixed(2)} px`} · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx === undefined ? 'occluded (no ratio)' : e.masterBreadthPx.toFixed(2) + ' px'}` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
+                  ? `<details><summary>Head-size INFO evidence (${c.headEvidence.length})</summary>${c.headEvidence.map(({ cell, measurement: e }) => `<p>cell ${cell} · ${esc(e.kind ?? headEvidenceKind(e.frame))} | ${esc(e.reason)} · ${esc(headSizeSummary(e))} · bbox ${e.bboxHeightPx} / ${e.masterBboxHeightPx} px<br>${headLandmarkHtml(e.frame)}<br>master ${headLandmarkHtml(e.master)}${e.breadthPx !== undefined ? `<br>skull breadth ${e.breadthPx.toFixed(2)} / master ${e.masterBreadthPx === undefined ? 'occluded (no ratio)' : e.masterBreadthPx.toFixed(2) + ' px'}` : ''}<br>${esc(e.frame.note)}</p>`).join('')}</details>`
                   : '');
               const inherited = c.inheritedRegistration?.length
                 ? '<details><summary>Verified inherited-registration (' +

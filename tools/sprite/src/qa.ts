@@ -8,6 +8,7 @@
  *   present     every expected frame exists and is not empty
  */
 import type { OriginMeasurement } from './authored-origin.js';
+import { checkBracketedOcclusion } from './bracketed-occlusion.js';
 import type { Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { registeredNativeSsim, type RegisteredSsim } from './native-similarity.js';
@@ -121,6 +122,10 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
       });
   clip.frames.forEach((f, i) => {
     if (!f) return;
+    if (clip.headEvidence?.[i]?.kind === 'bracketed-occlusion') {
+      out.push(...checkBracketedOcclusion(clip, o, i, tol));
+      return;
+    }
     const h = f.metrics.height;
     const inBand = h >= lo && h <= hi;
     const head = checkHeadEvidence(clip, o, i, inBand, tol);
@@ -525,6 +530,7 @@ export function checkTemporalContinuity(clip: QaClip, o: QaOptions): Finding[] {
     try {
       const result = measureTemporalSimilarity(a.image, b.image, {
         masterHeight: o.masterHeight,
+        master: o.master,
         ...(o.masterHead ? { masterHead: o.masterHead } : {}),
         ...(clip.headEvidence?.[pair.from] ? { firstHead: clip.headEvidence[pair.from] } : {}),
         ...(clip.headEvidence?.[pair.to] ? { secondHead: clip.headEvidence[pair.to] } : {}),

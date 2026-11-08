@@ -603,3 +603,27 @@ For Lab identity, D59 masters and every paired frame (including D48) use the sam
 side length is the Euclidean crown-to-nape span, centred on the endpoint midpoint, expanded 8%
 total in each dimension. This is a window definition, never inferred breadth evidence. Torso keeps
 the D55 rule. D59/D48 temporal pairs use this same window convention.
+
+### D60: bracketed occlusion is an unmeasured bridge
+
+Frame-only `bracketed-occlusion` is restricted to `dash`, `run`, `attack`, `attack_2`, `attack_3`, and `hit`.
+Declare a visible crown, a concrete `occluder`, `hiddenEndpoints`, and a reviewed note; do not supply
+invented chin/nape/breadth/shoulder points. Both immediate same-clip neighbours must have measured
+head evidence that actually passes the band (wrap for loops; nonloop edges cannot qualify).
+At most **two bracketed cells per clip**. There is no percentage or consecutive-run ceiling: adjacent
+brackets fail because neither can certify the other. Masters/idle/walk/emote cannot use D60.
+
+Lab identity must pass head<=15 and torso<=23 even when a D41 pose exemption normally applies.
+Both registered temporal pairs must have min(head,torso)>=0.45; unavailable quality or a review-by-eye
+pair fails D60. Temporal remains diagnostic for all ordinary cells.
+
+The comparison window uses the certified master's own padded D55 head-window dimensions. Centre
+it horizontally on each visible crown; place its top at crown.y minus the existing per-edge D55
+margin (4% of unpadded height, half the total8% expansion). Rebuild the master's Lab window AND both
+temporal sides identically, including fully measured neighbours. Torso retains D55's fixed44% width
+and25% depth of master H below the head window. This never creates anatomical points or size evidence.
+Missing real master/neighbour crowns fail; there is no centroid or ornament-anchor fallback.
+
+Use `checkHeights`/`runProject` for full clip-level validation; the low-level measured-head helper
+alone cannot certify a bracket. INFO `head_bracketed` has `measurement: "unmeasured"`, neighbour indices,
+cell budget, Lab distances and both temporal scores, with no fabricated head span or ratio.

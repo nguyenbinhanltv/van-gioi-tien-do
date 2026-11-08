@@ -2,6 +2,9 @@
 import type { HeadPoint } from './head-evidence.js';
 import { checkHeadEvidence, headLandmarkSize } from './head-evidence.js';
 import type { Finding, QaClip, QaOptions } from './qa.js';
+import { similarityRegionsForPair } from './similarity-crops.js';
+import { labPaletteDistance, HEAD_PALETTE_LAB_MAX, TORSO_PALETTE_LAB_MAX } from './palette-similarity.js';
+import { measureTemporalSimilarity, TEMPORAL_REVIEW_MIN } from './temporal-similarity.js';
 
 export type HiddenHeadEndpoint =
   | 'chin'
@@ -30,8 +33,7 @@ export interface BracketedMeasurement {
     readonly torso: number;
   }[];
 }
-export const BRACKETED_MAX_FRACTION = 0.15;
-export const BRACKETED_MAX_CONSECUTIVE = 2;
+export const BRACKETED_MAX_CELLS = 2;
 const endpoints: readonly string[] = [
   'chin',
   'skullBase',
@@ -94,19 +96,8 @@ export function bracketedPreconditions(
   if (!Number.isSafeInteger(clip.expectedFrames) || total !== clip.expectedFrames || total < 1)
     return failure('head_bracket_frames', 'bracketing requires the complete declared clip frame count');
   const count = clip.frames.filter((_, i) => isBracketed(clip, i)).length;
-  if (count / total > BRACKETED_MAX_FRACTION)
-    return failure(
-      'head_bracket_budget',
-      `bracketed ${count}/${total} exceeds ${BRACKETED_MAX_FRACTION * 100}% of the clip`,
-    );
-  let longest = 0;
-  for (let start = 0; start < total; start++) {
-    let run = 0;
-    while (run < total && (clip.loop || start + run < total) && isBracketed(clip, (start + run) % total)) run++;
-    longest = Math.max(longest, run);
-  }
-  if (longest > BRACKETED_MAX_CONSECUTIVE)
-    return failure('head_bracket_consecutive', 'more than two consecutive bracketed cells, including the loop seam');
+  if (count > BRACKETED_MAX_CELLS)
+    return failure('head_bracket_budget', `bracketed ${count}/${total} exceeds the two-cell clip cap`);
   if (!clip.loop && (frame === 0 || frame === total - 1))
     return failure('head_bracket_neighbours', 'a nonloop edge has no pair of temporal neighbours');
   const neighbours = [(frame + total - 1) % total, (frame + 1) % total] as const;
@@ -130,4 +121,82 @@ export function bracketedPreconditions(
       return failure('head_bracket_neighbours', 'both immediate neighbours must actually pass the measured head band');
   }
   return { neighbours, count };
+}
+
+/** Full D60 eligibility: D41 exemptions cannot skip these mandatory image checks. */
+export function checkBracketedOcclusion(clip: QaClip, options: QaOptions, frame: number, tolerance: number): Finding[] {
+  const preconditions = bracketedPreconditions(clip, options, frame, tolerance);
+  if (Array.isArray(preconditions)) return preconditions;
+  const evidence = clip.headEvidence![frame]!;
+  const image = clip.frames[frame]!.image;
+  const failure = (metric: string, message: string): Finding[] => [
+    { gate: 'height', severity: 'fail', clip: clip.name, frame, metric, message },
+  ];
+  try {
+    const crops = similarityRegionsForPair(options.master, image, options.masterHeight, options.masterHead, evidence);
+    const head = labPaletteDistance(options.master, image, crops.master.head, crops.frame.head).distance;
+    const torso = labPaletteDistance(options.master, image, crops.master.torso, crops.frame.torso).distance;
+    if (!Number.isFinite(head) || !Number.isFinite(torso)) throw new Error('nonfinite Lab quality');
+    if (head > HEAD_PALETTE_LAB_MAX || torso > TORSO_PALETTE_LAB_MAX)
+      return failure(
+        'head_bracket_palette',
+        `bracketed Lab identity fails: head ${head.toFixed(4)}/${HEAD_PALETTE_LAB_MAX}, torso ${torso.toFixed(4)}/${TORSO_PALETTE_LAB_MAX}`,
+      );
+    const temporal = preconditions.neighbours.map((neighbour, side) => {
+      const from = side === 0 ? neighbour : frame,
+        to = side === 0 ? frame : neighbour;
+      const result = measureTemporalSimilarity(clip.frames[from]!.image, clip.frames[to]!.image, {
+        master: options.master,
+        masterHead: options.masterHead,
+        masterHeight: options.masterHeight,
+        firstHead: clip.headEvidence![from],
+        secondHead: clip.headEvidence![to],
+      });
+      return { from, to, head: result.head, torso: result.torso };
+    });
+    if (
+      temporal.some(
+        (pair) =>
+          !Number.isFinite(pair.head) ||
+          !Number.isFinite(pair.torso) ||
+          Math.min(pair.head, pair.torso) < TEMPORAL_REVIEW_MIN,
+      )
+    )
+      return failure(
+        'head_bracket_temporal',
+        `bracketed requires both crown-anchored temporal pairs >=${TEMPORAL_REVIEW_MIN}: ${temporal.map((p) => `${p.from}->${p.to} ${p.head.toFixed(4)}/${p.torso.toFixed(4)}`).join('; ')}`,
+      );
+    return [
+      {
+        gate: 'height',
+        severity: 'info',
+        clip: clip.name,
+        frame,
+        metric: 'head_bracketed',
+        measurement: 'unmeasured',
+        message: `bracketed (unmeasured): certified neighbours ${preconditions.neighbours.join(',')}; ${preconditions.count}/${clip.frames.length} bracketed cells; Lab ${head.toFixed(4)}/${torso.toFixed(4)}; no inferred span/breadth`,
+        headEvidence: {
+          kind: 'bracketed-occlusion',
+          direction: clip.direction,
+          reason: 'bracketed',
+          master: options.masterHead!,
+          frame: evidence,
+          masterBboxHeightPx: options.masterHeight,
+          bboxHeightPx: clip.frames[frame]!.metrics.height,
+          bracketed: {
+            neighbours: preconditions.neighbours,
+            bracketedCount: preconditions.count,
+            totalFrames: clip.frames.length,
+            lab: { head, torso },
+            temporal,
+          },
+        },
+      },
+    ];
+  } catch (error) {
+    return failure(
+      'head_bracket_quality_unmeasured',
+      `bracketed quality is unavailable: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
 }

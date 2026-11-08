@@ -23,8 +23,9 @@ export interface SimilarityRegions {
   readonly method: 'landmarks' | 'centroid-fallback';
   readonly headKind: 'face' | 'rear-head' | 'legacy-face';
   readonly evidenceKind?: string;
-  readonly widthSource?: 'annotated-breadth' | 'head-length-window';
-  readonly cropRule?: 'annotated-endpoints' | 'rear-breadth-window' | 'rear-span-window';
+  readonly widthSource?: 'annotated-breadth' | 'head-length-window' | 'master-head-window';
+  readonly cropRule?:
+    'annotated-endpoints' | 'rear-breadth-window' | 'rear-span-window' | 'crown-anchored-master-window';
   readonly head: SimilarityBox;
   readonly torso: SimilarityBox;
 }
@@ -62,7 +63,8 @@ export function landmarkSimilarityRegions(
   masterHeight: number,
   rule?: 'rear-breadth-window' | 'rear-span-window',
 ): SimilarityRegions {
-  if (head.kind === 'bracketed-occlusion') throw new Error('D60 crown-only comparison window not resolved');
+  if (head.kind === 'bracketed-occlusion')
+    throw new Error('D60 crown-only window requires the certified master window');
   const length =
     head.kind === 'rear-breadth-only'
       ? headLandmarkBreadth(head, image.width, image.height)
@@ -123,6 +125,55 @@ export function landmarkSimilarityRegions(
   };
 }
 
+/** Window-only D60 rule; no inferred chin, nape, breadth or measured size is created. */
+export function crownAnchoredSimilarityRegions(
+  image: Image,
+  evidence: SimilarityFrameHead,
+  reference: SimilarityRegions,
+  masterHeight: number,
+): SimilarityRegions {
+  if (!('crown' in evidence)) throw new Error('D60 comparison needs a visible crown, not an ornament substitute');
+  const p = evidence.crown;
+  if (
+    !p ||
+    !Number.isFinite(p.x) ||
+    !Number.isFinite(p.y) ||
+    p.x < 0 ||
+    p.y < 0 ||
+    Math.round(p.x) >= image.width ||
+    Math.round(p.y) >= image.height ||
+    image.data[(Math.round(p.y) * image.width + Math.round(p.x)) * 4 + 3]! < 128
+  )
+    throw new Error('D60 comparison crown is not visible inside the image');
+  const width = reference.head.right - reference.head.left,
+    height = reference.head.bottom - reference.head.top;
+  if (
+    reference.method !== 'landmarks' ||
+    width <= 0 ||
+    height <= 0 ||
+    !Number.isFinite(masterHeight) ||
+    masterHeight <= 0
+  )
+    throw new Error('D60 requires a certified nonempty master head window');
+  // D55 expands 8% total: the existing per-edge margin is 4% of the unpadded height.
+  const top = p.y - ((height / (1 + MARGIN)) * MARGIN) / 2;
+  const head = { left: p.x - width / 2, top, right: p.x + width / 2, bottom: top + height };
+  return {
+    method: 'landmarks',
+    headKind: reference.headKind,
+    evidenceKind: headEvidenceKind(evidence),
+    widthSource: 'master-head-window',
+    cropRule: 'crown-anchored-master-window',
+    head,
+    torso: {
+      left: p.x - (masterHeight * TORSO_WIDTH) / 2,
+      right: p.x + (masterHeight * TORSO_WIDTH) / 2,
+      top: head.bottom,
+      bottom: head.bottom + masterHeight * TORSO_DEPTH,
+    },
+  };
+}
+
 /** Same 8x8 premultiplied means as D41; only the D55 window coordinates change. */
 export function similarityBlockMeans(img: Image, box: SimilarityBox): number[] {
   const out: number[] = [];
@@ -151,6 +202,16 @@ export function similarityRegionsForPair(
   masterHead?: HeadLandmarks,
   frameHead?: SimilarityFrameHead,
 ): SimilarityCropMeasurement {
+  if (frameHead?.kind === 'bracketed-occlusion') {
+    if (!masterHead) throw new Error('D60 Lab comparison requires certified master evidence');
+    const reference = landmarkSimilarityRegions(master, masterHead, masterHeight);
+    return {
+      method: 'landmarks',
+      reason: 'D60 window-only crown anchors; certified master window dimensions',
+      master: crownAnchoredSimilarityRegions(master, masterHead, reference, masterHeight),
+      frame: crownAnchoredSimilarityRegions(frame, frameHead, reference, masterHeight),
+    };
+  }
   // Validate supplied points even if the other side is absent; never turn invalid evidence into a fallback.
   const breadthOnlyPair = frameHead?.kind === 'rear-breadth-only';
   const spanPair = masterHead?.kind === 'rear-span-only';

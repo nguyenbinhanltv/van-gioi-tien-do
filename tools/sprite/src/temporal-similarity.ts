@@ -2,11 +2,12 @@
 import type { Image } from '@vgtd/rig';
 import type { HeadLandmarks } from './head-evidence.js';
 import { registeredNativeSsim } from './native-similarity.js';
-/** D55 diagnostic review threshold, never a hard failure. */
+/** D55 diagnostic floor; D60 alone requires both neighbour pairs to meet it. */
 export const TEMPORAL_REVIEW_MIN = 0.45;
 import {
   landmarkSimilarityRegions,
   legacySimilarityRegions,
+  crownAnchoredSimilarityRegions,
   type SimilarityCropMeasurement,
   type SimilarityFrameHead,
 } from './similarity-crops.js';
@@ -16,11 +17,30 @@ export function measureTemporalSimilarity(
   second: Image,
   options: {
     masterHeight: number;
+    master?: Image;
     masterHead?: HeadLandmarks;
     firstHead?: SimilarityFrameHead;
     secondHead?: SimilarityFrameHead;
   },
 ) {
+  if (options.firstHead?.kind === 'bracketed-occlusion' || options.secondHead?.kind === 'bracketed-occlusion') {
+    if (!options.master || !options.masterHead || !options.firstHead || !options.secondHead)
+      throw new Error('D60 temporal comparison requires the certified master and both visible crowns');
+    const reference = landmarkSimilarityRegions(options.master, options.masterHead, options.masterHeight);
+    const m = crownAnchoredSimilarityRegions(first, options.firstHead, reference, options.masterHeight);
+    const f = crownAnchoredSimilarityRegions(second, options.secondHead, reference, options.masterHeight);
+    const head = registeredNativeSsim(first, second, m.head, f.head),
+      torso = registeredNativeSsim(first, second, m.torso, f.torso);
+    const crops: SimilarityCropMeasurement = {
+      method: 'landmarks',
+      scorer: 'native-ssim',
+      reason: 'D60 identical window-only crown construction on both temporal sides',
+      master: m,
+      frame: f,
+      registration: { head: { dx: head.dx, dy: head.dy }, torso: { dx: torso.dx, dy: torso.dy } },
+    };
+    return { head: head.score, torso: torso.score, components: { head, torso }, crops };
+  }
   const breadth = options.firstHead?.kind === 'rear-breadth-only' || options.secondHead?.kind === 'rear-breadth-only';
   const span =
     options.masterHead?.kind === 'rear-span-only' ||
