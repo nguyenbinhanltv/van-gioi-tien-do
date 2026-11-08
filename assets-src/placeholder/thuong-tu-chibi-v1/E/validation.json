@@ -6,7 +6,7 @@
   "source": {
     "command": "npm run sprite:build -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1",
     "exitCode": 0,
-    "projectSha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb",
+    "projectSha256": "4a1f6fc410ab916a399b20cf0bd46ccb4badb74b7d6ee045bc17a2bced33eefe",
     "clips": 15,
     "drawings": 202,
     "qa": {
@@ -38,7 +38,7 @@
       },
       {
         "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_ske.json",
-        "sha256": "08c2efaa26a21648769f5faa1c268ab251807a23c43bde2156c573471a6894f8"
+        "sha256": "19fa7f6c6a10d7676c6efa76d91b981256755f64e46534e38f5afa4fafdf9e22"
       },
       {
         "file": "apps/client-cocos/assets/resources/dragonbones/thuong-tu-chibi-v1/thuongtuchibi_E_tex.json",
@@ -49,7 +49,7 @@
         "sha256": "66cea985554281949e88d49abfa6185b301a0fe7e5c060362c9bad540a708e97"
       }
     ],
-    "verifiedGitHead": "a33d420d4a2a29f93cd00159e59f7164d9fe42f5"
+    "verifiedGitHead": "c7b692f7b7f1d1e32ccc32eff47eceeb4648f212"
   },
   "heads": {
     "reviewed": 24,
@@ -94,7 +94,7 @@
   },
   "D45": {
     "guideCount": 14,
-    "provenanceSha256": "db6ca4165df9727352eabc985acdcaccb2d0aae162b9d8ded658db53ca643c25"
+    "provenanceSha256": "0145b87d72a0ae4e7f7c5cb3488f57d74137dfcb45388524a8900f6823ad0db2"
   },
   "repositoryChecks": {
     "npm ci": "pass",
@@ -106,5 +106,13 @@
     "repairProofs": "12 replayed, unrelated cells unchanged",
     "utf8": "No U+FFFD or question mark inside words in new text",
     "licensePrefix": "Existing main content preserved byte-for-byte after line-ending normalization"
+  },
+  "timing": {
+    "profile": "smooth-v2",
+    "clockHz": 24,
+    "oneTickDrawings": 202,
+    "provenanceSha256": "e3c5d75838d72ca5d3630be17319ea383919d4ec50ccc647557ba0feef8bc8e1",
+    "captureDirectory": "thuong-E-cocos-24hz",
+    "historicalCapture": "cocos-capture.json records the original30Hz capture; timing-24hz.provenance.json records the corrected runtime."
   }
 }

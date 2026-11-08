@@ -45,9 +45,13 @@ Preparation regenerates masters/stencils, not AI drawings or reviewed project an
 Exact D45 guide command executed for this delivery:
 
 ```powershell
-npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out C:/Users/PC/AppData/Local/Temp/vgtd32-Thuong-E-D45
+npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/thuong-tu-chibi-v1/E/project.json --out C:/Users/PC/AppData/Local/Temp/vgtd32-Thuong-E-D45-24hz
 ```
 
 Use an empty output directory. `layer-guides.provenance.json` pins the input project/master, `layer-inputs.json` hash and all **14 guide PNG hashes** with clip/cell mappings. The PNGs remain outside the PR until the extraction pass.
 
 Known formatting baseline: `docs/ASSET-LICENSES.md` already fails root Prettier on main. Only this class's appended section is formatted; existing sections are preserved.
+
+## D58 timing correction
+
+The project explicitly selects `timingProfile: "smooth-v2"`. The runtime armature runs at **24 Hz**, with exactly one tick for each of 202 authored drawings. The initial E delivery omitted the opt-in and retained the legacy 30 Hz clock. This follow-up preserves all source PNGs, atlas PNGs, texture JSON, display order and QA findings byte-identically; only skeleton timing changes. `timing-24hz.provenance.json` records the verification and new real Cocos 2x captures. Original capture evidence remains historical; the owner page uses the separate corrected capture directory.
