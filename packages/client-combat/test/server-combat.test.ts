@@ -86,6 +86,74 @@ describe('ServerCombat', () => {
     expect((c.update(5050) as CombatEvent[])[0]).toMatchObject({ type: 'blocked', reason: 'range' });
   });
 
+  it('a refusal undoes only the prediction of that cast: the real cooldown of another slot and a running GCD survive', () => {
+    const { c } = make();
+    const idx = (id: string) => c.hotbar.slots.findIndex((s) => s.skill.id === id);
+    const a = idx('kiem_khi_tram'); // gcd, 3 s cooldown
+    const b = idx('lien_hoan_kiem'); // gcd, 7 s cooldown
+    const free = idx('thiem_kiem_bo'); // gcd:false
+    const wire = (id: string) => wireSkillIds().get(id)!;
+    c.target.select(1_000_001);
+    c.setServerTime(1000);
+    c.cast(a, 1000);
+    c.applySkillResult(
+      { seq: 1, reason: 0, skillId: wire('kiem_khi_tram'), readyAtMs: 4000, hits: [] },
+      1450,
+      () => undefined,
+    );
+    expect(c.hotbar.cooldownRemainingMs(a, 2000)).toBe(2450);
+    // slot B is pressed after the GCD and refused for range: A must stay on cooldown, B must not keep a predicted cooldown
+    c.cast(b, 2000);
+    expect(c.hotbar.cooldownRemainingMs(b, 2000)).toBe(7000);
+    c.applySkillResult(
+      { seq: 2, reason: 6, skillId: wire('lien_hoan_kiem'), readyAtMs: 0, hits: [] },
+      2050,
+      () => undefined,
+    );
+    expect(c.hotbar.cooldownRemainingMs(b, 2050)).toBe(0);
+    expect(c.hotbar.cooldownRemainingMs(a, 2050)).toBe(2400);
+    expect((c.update(2050) as CombatEvent[]).some((e) => e.type === 'blocked' && e.reason === 'range')).toBe(true);
+    // a gcd:false skill pressed while A's GCD runs is refused: the GCD of A (not committed by it) is untouched
+    const c2 = make().c;
+    c2.setServerTime(0);
+    c2.cast(a, 10_000);
+    const gcdBefore = c2.hotbar.gcdFraction(10_100);
+    c2.cast(free, 10_100);
+    c2.applySkillResult(
+      { seq: 2, reason: 6, skillId: wire('thiem_kiem_bo'), readyAtMs: 0, hits: [] },
+      10_150,
+      () => undefined,
+    );
+    expect(c2.hotbar.gcdFraction(10_100)).toBe(gcdBefore);
+    expect(c2.hotbar.gcdFraction(10_100)).toBeGreaterThan(0);
+    // refused while its own GCD was the only thing running: the prediction's GCD goes away
+    const c3 = make().c;
+    c3.cast(a, 20_000);
+    c3.applySkillResult(
+      { seq: 1, reason: 6, skillId: wire('kiem_khi_tram'), readyAtMs: 0, hits: [] },
+      20_050,
+      () => undefined,
+    );
+    expect(c3.hotbar.gcdFraction(20_100)).toBe(0);
+    expect(c3.hotbar.cooldownRemainingMs(a, 20_100)).toBe(0);
+  });
+
+  it('a Gcd refusal syncs the GCD (readyAtMs is the GCD ready time) and clears the slot prediction instead of using it as a cooldown', () => {
+    const { c } = make();
+    const a = c.hotbar.slots.findIndex((s) => s.skill.id === 'kiem_khi_tram');
+    c.setServerTime(50_000);
+    c.cast(a, 1000);
+    c.applySkillResult(
+      { seq: 1, reason: 3, skillId: wireSkillIds().get('kiem_khi_tram')!, readyAtMs: 50_600, hits: [] },
+      1100,
+      () => undefined,
+    );
+    expect(c.hotbar.cooldownRemainingMs(a, 1100)).toBe(0);
+    expect(c.hotbar.gcdFraction(1100)).toBeGreaterThan(0);
+    expect(c.hotbar.blockedBy(a, 1100)).toBe('gcd');
+    expect(c.hotbar.blockedBy(a, 1100 + 600)).toBeNull();
+  });
+
   it('blocks locally when dead, on a passive, or without MP; tracks enemy HP from hpPct and drops dead targets', () => {
     const { c, sent } = make();
     const passive = c.hotbar.slots.findIndex((s) => !s.castable);

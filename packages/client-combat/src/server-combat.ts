@@ -15,6 +15,7 @@ import { HIT_FLAG_CRIT, HIT_FLAG_KILL, skillDefinitions } from '@vgtd/shared';
 import type { PathId, SkillDefinitions } from '@vgtd/shared';
 import type { CombatBackend, EnemyView, PlayerView } from './backend.js';
 import { Hotbar } from './hotbar.js';
+import type { HotbarUndo } from './hotbar.js';
 import type { CastBlock } from './hotbar.js';
 import type { CombatEvent } from './mock-combat.js';
 import { PLAYER_ID } from './mock-combat.js';
@@ -64,6 +65,8 @@ export interface ServerCombatOptions {
 interface Inflight {
   slot: number;
   sentAt: number;
+  /** What the local prediction changed, to take back exactly that on a refusal. */
+  undo: HotbarUndo | null;
 }
 
 export class ServerCombat implements CombatBackend {
@@ -144,9 +147,11 @@ export class ServerCombat implements CombatBackend {
     const slot = sent?.slot ?? this.hotbar.slots.findIndex((s) => this.wire.get(s.skill.id) === res.skillId);
     if (this.player.casting && this.player.casting.slot === slot) this.player.casting = null;
     if (res.reason !== 0) {
-      // the server refused: undo the local prediction and show why
-      if (slot >= 0 && (res.reason === 2 || res.reason === 3)) this.syncCooldown(slot, res.readyAtMs, nowMs);
-      else if (slot >= 0 && sent) this.hotbar.reset(); // any other refusal: drop the predicted cooldown / GCD
+      // the server refused: take back ONLY this cast's prediction (other slots' cooldowns are real), then let the server's
+      // numbers win for the two reasons that carry one (`readyAtMs` is the skill cooldown for Cooldown, the GCD for Gcd)
+      if (sent?.undo) this.hotbar.undo(sent.undo);
+      if (slot >= 0 && res.reason === 2) this.syncCooldown(slot, res.readyAtMs, nowMs);
+      else if (res.reason === 3) this.hotbar.setGcdRemaining(nowMs, res.readyAtMs - this.serverNowMs);
       this.out.push({ type: 'blocked', slot, reason: REASON_TO_BLOCK[res.reason] ?? 'busy', atMs: nowMs });
       return;
     }
@@ -193,8 +198,8 @@ export class ServerCombat implements CombatBackend {
     const skill = s!.skill;
     const targetId = this.target.current ?? 0;
     const seq = ++this.seq & 0xffff;
-    this.inflight.set(seq, { slot, sentAt: nowMs });
-    this.hotbar.commit(slot, nowMs); // predicted; the result corrects it
+    const undo = this.hotbar.commit(slot, nowMs); // predicted; the result corrects it
+    this.inflight.set(seq, { slot, sentAt: nowMs, undo });
     const castMs = skill.timing.cast_ms + (skill.timing.channel_ms ?? 0);
     if (castMs > 0) this.player.casting = { slot, startedAt: nowMs, endsAt: nowMs + castMs };
     this.opts.send({ seq, skillId: this.wire.get(skill.id)!, targetId });
