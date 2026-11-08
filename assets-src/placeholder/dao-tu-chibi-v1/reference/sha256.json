@@ -65,7 +65,7 @@
   },
   {
     "path": "E/project.json",
-    "sha256": "bd7db22c51367bde27f8d32b6b6b77d6ca8ba1e7911c789eb1fde5be1c93c41b"
+    "sha256": "d514b4c35ae7bfb80f64e408d6e70f5c0c09b8a9ca91dd34d3661a51d2ce8ad0"
   },
   {
     "path": "E/quality-backlog.json",
@@ -353,7 +353,7 @@
   },
   {
     "path": "SE/README.md",
-    "sha256": "fe7ea318d0616f02d065fa08547b7d492dd5523ac25818d28cf381c6eb9b9633"
+    "sha256": "3a9b039a5e124aad5500e83eb05fe5557af9e326274aea0aaeac5c694e84383b"
   },
   {
     "path": "SE/attack.provenance.json",
@@ -392,8 +392,24 @@
     "sha256": "ad06ccb83a4212e80fefc1c0462d022388656bc7cafe211612b2e4faf2b6f4da"
   },
   {
+    "path": "SE/head-evidence-correction.json",
+    "sha256": "2d12e460f75455e6c6d306a625de081e16da5d9bcd5a6f84fc2c394e771b8f81"
+  },
+  {
+    "path": "SE/head-evidence-qa.json",
+    "sha256": "367c7f57b1696c5b1b538ab3a65035883ae99c65a3c461957f1c0ee1cd615daf"
+  },
+  {
+    "path": "SE/head-reason-audit.json",
+    "sha256": "c3283bdd76ba14b8de0bcd19bb5c4a9ade3720453b47f59c3b7f6fc8cd7cd12a"
+  },
+  {
     "path": "SE/hit-dash.provenance.json",
     "sha256": "283e823dc58e9afebb63fbcd8fb4eb031020a30131a598201a29914118d210c3"
+  },
+  {
+    "path": "SE/identity-contact-review.json",
+    "sha256": "59d348c1c9ada6aee99ac8070970e7014d702364bb39b98990866dcc3bbd8d24"
   },
   {
     "path": "SE/idle.provenance.json",
@@ -401,7 +417,7 @@
   },
   {
     "path": "SE/layer-guides.provenance.json",
-    "sha256": "531091c2f3c8569caab9de49bf18feb03e4e684759e5744b3e1508a9fe21e9a4"
+    "sha256": "ed6c17641073aa4910fab593fbfafc042581c092b6157fa9bd5e899e8f77b767"
   },
   {
     "path": "SE/meditate.provenance.json",
@@ -413,7 +429,7 @@
   },
   {
     "path": "SE/project.json",
-    "sha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e"
+    "sha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c"
   },
   {
     "path": "SE/quality-backlog.json",
@@ -693,7 +709,7 @@
   },
   {
     "path": "SE/validation.json",
-    "sha256": "c24290dbe233cd359a83ca73ef13d100dcea7a97f1a9c7889b648576d26f098e"
+    "sha256": "714f9c82a9cd3d1cb507e1d36e0ebfecc4c80d5aa30799b9267c408b4e064a01"
   },
   {
     "path": "SE/walk.provenance.json",
@@ -890,6 +906,10 @@
   {
     "path": "reference/turnaround-lineage.json",
     "sha256": "93b2a6633032633376f672802accacdc88a81956e52c2323deb08a93991680f1"
+  },
+  {
+    "path": "refresh-SE-head-evidence.mjs",
+    "sha256": "98cef057081c7da3c532eed9ac1f3e654110a0d1ab1d8907edeabd26768f908c"
   },
   {
     "path": "verify-repairs.mjs",
